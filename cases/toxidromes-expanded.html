@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -16,8 +24,8 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family:var(--rdx-font); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
-        body.adult { background: linear-gradient(135deg, #065f46 0%, #0d9488 100%); }
-        body.peds { background:linear-gradient(135deg,#0f766e,#14b8a6); }
+        body.adult { background: linear-gradient(135deg, #065f46 0%, #2874a6 100%); }
+        body.peds { background:linear-gradient(135deg,#1f5f8b,#3a90c0); }
         .container { max-width: 900px; margin: 0 auto; }
         .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: #f1f5f9; border-radius: 12px; padding: 4px; }
         .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius:12px; font-weight: 600; cursor: pointer; background: transparent; color:var(--rdx-text); }
@@ -26,32 +34,32 @@
         .adult .header { background: rgba(6, 95, 70, 0.9); }
         .peds .header { background: rgba(124, 58, 237, 0.9); }
         .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; margin-left: 10px; }
-        .adult .badge { background: #10b981; }
+        .adult .badge { background: #2874a6; }
         .peds .badge { background: #a78bfa; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
         .progress-fill { height: 100%; border-radius: 3px; }
-        .adult .progress-fill { background: linear-gradient(90deg, #10b981, #6ee7b7); }
+        .adult .progress-fill { background: linear-gradient(90deg, #2874a6, #7cb8d9); }
         .peds .progress-fill { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
         .scene { border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
-        .adult .scene { background: linear-gradient(135deg, #065f46, #047857); }
+        .adult .scene { background: linear-gradient(135deg, #065f46, #1a4971); }
         .peds .scene { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
         .scene-header { padding: 16px 20px; }
-        .adult .scene-header { background: rgba(16, 185, 129, 0.15); }
+        .adult .scene-header { background: rgba(40, 116, 166, 0.15); }
         .peds .scene-header { background: rgba(167, 139, 250, 0.15); }
         .scene-phase { font-size: 0.75rem; text-transform: uppercase; }
         .scene-title { font-size: 1.4rem; font-weight: 700; }
         .scene-body { padding: 24px; }
-        .highlight { color: #0f766e; font-weight: 600; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
         .critical { color: #dc2626; font-weight: 600; }
-        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(16,185,129,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(22,163,74,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
         .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
         .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .boards-tip-title { font-weight: 700; color: #0f766e; margin-bottom: 10px; }
+        .boards-tip-title { font-weight: 700; color: #1f5f8b; margin-bottom: 10px; }
         .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
         .btn { padding: 16px 28px; border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
-        .adult .btn { background: linear-gradient(135deg, #10b981, #047857); }
+        .adult .btn { background: linear-gradient(135deg, #2874a6, #1a4971); }
         .peds .btn { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
         .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
@@ -61,7 +69,7 @@
         .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
         .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
         .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: var(--rdx-teal-light,#ccfbf1); }
+        .pearl .tip-header { color: var(--rdx-teal-light,#d4e8f7); }
         .pitfall .tip-header { color: #f87171; }
         @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
     /* Mobile Responsive - iPhone 16/17 optimized */
@@ -119,18 +127,18 @@
     window.render_overview = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">Pattern Recognition</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What comorbidities would change your management approach?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#f0fdfa; border:1px solid #14b8a6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #14b8a6;">
-                    <p style="margin:0; color:#115e59; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
                 </div><div class="narrative"><p>A <span class="highlight">24-year-old man</span> is brought in <span class="critical">unresponsive</span>. Found at a party.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 42, BP 88/52, RR 6, Pupils: 1mm bilateral<br><strong>Exam:</strong> Obtunded, cool/clammy</p></div><div class="alert-box"><div class="alert-title">🚨 Recognize the Toxidrome!</div><p>Toxidromes are patterns that point to drug classes. This guides treatment before labs return!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Vital Sign Clues</div><div class="pathway"><strong>Pupils:</strong><br>• Dilated: Sympathomimetic, anticholinergic<br>• Constricted: Opioid, cholinergic<br><br><strong>Heart rate:</strong><br>• Tachy: Sympathomimetic, anticholinergic<br>• Brady: Opioid, cholinergic, sedative<br><br><strong>Temp:</strong><br>• High: Sympathomimetic, anticholinergic, serotonin<br>• Low: Opioid, sedative</div></div><button class="btn" onclick="nextStage()">Sympathomimetic →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">Pediatric Poisoning</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -141,7 +149,7 @@
 
     window.render_sympathomimetic = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 10</div><div class="scene-title">Sympathomimetic Toxidrome</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What's the most likely diagnosis given this presentation?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -154,7 +162,7 @@
 
     window.render_anticholinergic = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">Anticholinergic Toxidrome</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What key history element is most helpful here?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -164,7 +172,7 @@
 
     window.render_cholinergic = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 10</div><div class="scene-title">Cholinergic Toxidrome</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Which physical exam finding is most specific?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -177,7 +185,7 @@
 
     window.render_opioid = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 10</div><div class="scene-title">Opioid Toxidrome</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Consider the most common causes first, then rarer ones</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -187,7 +195,7 @@
 
     window.render_sedative = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 10</div><div class="scene-title">Sedative-Hypnotic Toxidrome</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -200,7 +208,7 @@
 
     window.render_serotonin = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 10</div><div class="scene-title">Serotonin Syndrome</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -210,20 +218,20 @@
 
     window.render_antidotes = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 10</div><div class="scene-title">Key Antidotes</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What's the most likely diagnosis given this presentation?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What if the patient doesn't respond to initial treatment?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#f0fdfa; border:1px solid #14b8a6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #14b8a6;">
-                    <p style="margin:0; color:#115e59; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 Toxin-Antidote Pairs - BOARDS FAVORITE!</div><table class="comparison-table"><tr><th>Toxin</th><th>Antidote</th></tr><tr><td>Acetaminophen</td><td>N-acetylcysteine (NAC)</td></tr><tr><td>Opioids</td><td>Naloxone</td></tr><tr><td>Benzodiazepines</td><td>Flumazenil (rarely used)</td></tr><tr><td>Organophosphates</td><td>Atropine + Pralidoxime</td></tr><tr><td>Beta-blockers</td><td>Glucagon, high-dose insulin</td></tr><tr><td>Calcium channel blockers</td><td>Calcium, high-dose insulin</td></tr><tr><td>Digoxin</td><td>Digibind (Fab fragments)</td></tr><tr><td>Methanol/ethylene glycol</td><td>Fomepizole (or ethanol)</td></tr><tr><td>Iron</td><td>Deferoxamine</td></tr><tr><td>Isoniazid</td><td>Pyridoxine (B6)</td></tr><tr><td>Warfarin</td><td>Vitamin K, FFP, PCC</td></tr><tr><td>TCAs</td><td>Sodium bicarbonate</td></tr><tr><td>Cyanide</td><td>Hydroxocobalamin</td></tr></table></div><button class="btn" onclick="nextStage()">Decontamination →</button></div></div>`;
     };
 
     window.render_decontam = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 10</div><div class="scene-title">GI Decontamination</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What key history element is most helpful here?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -232,8 +240,8 @@
     };
 
     window.render_debrief = function() {
-        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">☠️</div><div style="font-size:1.8rem;font-weight:700;color:var(--rdx-teal-light,#ccfbf1);">${state.mode === 'adult' ? 'Toxidrome' : 'Pediatric Toxicology'} Mastery!</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">☠️</div><div style="font-size:1.8rem;font-weight:700;color:var(--rdx-teal-light,#d4e8f7);">${state.mode === 'adult' ? 'Toxidrome' : 'Pediatric Toxicology'} Mastery!</div></div><div class="scene-body">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Which physical exam finding is most specific?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -273,7 +281,7 @@
     margin: 2px;
 }
 .rdx-diff-btn.active {
-    background: #14b8a6;
+    background: #3a90c0;
     color: white;
 }
 .rdx-diff-btn:not(.active) {
@@ -284,8 +292,8 @@
     background: #e2e8f0;
 }
 .rdx-refs-panel {
-    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-    border: 1px solid #5eead4;
+    background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+    border: 1px solid #7cb8d9;
     border-radius: 12px;
     padding: 16px 20px;
     margin: 20px auto;
@@ -293,7 +301,7 @@
 }
 .rdx-refs-title {
     font-weight: 700;
-    color: #115e59;
+    color: #1a4971;
     margin-bottom: 8px;
 }
 .rdx-refs-links {
@@ -301,7 +309,7 @@
     line-height: 1.8;
 }
 .rdx-refs-links a {
-    color: #0d9488;
+    color: #2874a6;
     text-decoration: none;
 }
 .rdx-refs-links a:hover {
@@ -336,7 +344,7 @@
     margin-bottom: 8px;
 }
 .rdx-path-optimal {
-    background: #dcfce7;
+    background: #d4e8f7;
     border-left: 4px solid #22c55e;
 }
 .rdx-path-suboptimal {
@@ -348,8 +356,8 @@
     border-left: 4px solid #ef4444;
 }
 .rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
+    background: #f0f7fc;
+    border: 1px solid #7cb8d9;
     padding: 10px 14px;
     border-radius: 8px;
     margin: 8px 0;
@@ -403,20 +411,20 @@
 
 <!-- CROSS-PLATFORM LEARNING LINKS -->
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#0f766e); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#1f5f8b); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
         <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
             <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 ReasonDx</h5>
-            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ Toxidromes</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Toxidromes</a>
         </div>
-        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #14b8a6;">
-            <h5 style="color: #14b8a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="../adventure-hub.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #3a90c0;">
+            <h5 style="color: #3a90c0; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="../adventure-hub.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
         </div>
-        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ SBAR Communication</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #2874a6;">
+            <h5 style="color: #2874a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
@@ -478,7 +486,7 @@
         
         let grade, gradeColor, gradeEmoji;
         if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#0d9488'; gradeEmoji = '⭐'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2874a6'; gradeEmoji = '⭐'; }
         else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
         else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
         
@@ -521,7 +529,7 @@
             '</div></div>' +
             '<div style="display:flex;gap:12px;">' +
             '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#14b8a6,#14b8a6);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3a90c0,#3a90c0);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
             '</div>';
         
         document.getElementById('rdxDebriefOverlay').style.display = 'flex';
@@ -557,7 +565,7 @@
 <script src="../dx-cross-links.js"></script>
 <script src="../data/rdx-persist.js"></script>
 <script src="../js/rdx-nav.js"></script>
-<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1007/s13181-021-00835-6" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">ACMT Position Statement: Poison Center Consultation</a> — <em style="color:var(--rdx-text-muted,#64748b)">J Med Toxicol</em></li><li style="padding:6px 0;font-size:0.85rem"><a href="https://litfl.com/toxicology-conundrum/" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Toxicology Conundrum</a> — <em style="color:var(--rdx-text-muted,#64748b)">LITFL</em></li></ul></div>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1007/s13181-021-00835-6" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">ACMT Position Statement: Poison Center Consultation</a> — <em style="color:var(--rdx-text-muted,#64748b)">J Med Toxicol</em></li><li style="padding:6px 0;font-size:0.85rem"><a href="https://litfl.com/toxicology-conundrum/" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">Toxicology Conundrum</a> — <em style="color:var(--rdx-text-muted,#64748b)">LITFL</em></li></ul></div>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
 </script>

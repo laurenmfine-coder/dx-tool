@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -17,20 +25,20 @@
 <link href="../css/rdx-a11y.css" rel="stylesheet">
 <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:var(--rdx-font); background:linear-gradient(135deg,#0f766e,#14b8a6); min-height: 100vh; padding: 20px; color: #1e293b; }
+        body { font-family:var(--rdx-font); background:linear-gradient(135deg,#1f5f8b,#3a90c0); min-height: 100vh; padding: 20px; color: #1e293b; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .header h1 { font-size: 1.5rem; color: #334155; }
         .score-display { display: flex; gap: 20px; font-size: 0.9rem; }
         .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
         .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #99f6e4, #0f766e); border-radius: 3px; transition: width 0.3s; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a3cfe6, #1f5f8b); border-radius: 3px; transition: width 0.3s; }
         .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
         .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
         .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; letter-spacing: 1px; }
         .scene-title { font-size: 1.5rem; font-weight: 700; color: #e9d5ff; margin-top: 4px; }
         .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a78bfa; line-height: 1.7; }
-        .highlight { color: #0f766e; font-weight: 600; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
         .critical { color: #dc2626; font-weight: 600; }
         .question-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.2)); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .question-prompt { font-size: 1.1rem; font-weight: 600; color: #e9d5ff; margin-bottom: 16px; }
@@ -54,7 +62,7 @@
         .btn.show { display: inline-block; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(167,139,250,0.4); }
         .alert-box { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin: 16px 0; }
-        .alert-title { color: #0f766e; font-weight: 700; margin-bottom: 8px; }
+        .alert-title { color: #1f5f8b; font-weight: 700; margin-bottom: 8px; }
         .completion { text-align: center; padding: 40px; }
         .ref-section { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
         .ref-section a { color: #c4b5fd; }
@@ -63,7 +71,7 @@
 .rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
 .rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
 .rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
-.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #1f5f8b; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
 .rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 </style>
@@ -154,7 +162,7 @@
             renderStage();
             window.scrollTo(0,0);
         }else{
-            document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:12px;border:1px solid rgba(59,130,246,0.3);"><p style="color:var(--rdx-teal-light,#ccfbf1);margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../mechanism/cleft-lip-palate-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 ReasonDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=cleft+lip+palate" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK563128/" target="_blank" style="color:var(--rdx-teal-light,#ccfbf1);font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Cleft Lip & Palate clinical reasoning!</p><div style="margin-top:30px;text-align:left;background:var(--rdx-bg-hover);padding:20px;border-radius:12px;"><h4 style="color:var(--rdx-teal-dark,#0f766e);margin-bottom:12px;">Key Takeaways:</h4><ul style="line-height:2;margin-left:20px;"><li>Cleft palate prevents negative pressure for feeding</li><li>Lip fuses week 6, palate fuses weeks 8-12</li><li>30% CLP, 50% CP are syndromic</li><li>22q11.2 deletion: cleft + cardiac = suspect</li><li>Lip repair ~3 months, palate 9-12 months</li><li>70-80% achieve normal speech</li><li>Multidisciplinary team essential</li></ul></div></div>';
+            document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:var(--rdx-teal-dark,#1f5f8b);margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:12px;border:1px solid rgba(59,130,246,0.3);"><p style="color:var(--rdx-teal-light,#d4e8f7);margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../mechanism/cleft-lip-palate-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 ReasonDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=cleft+lip+palate" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK563128/" target="_blank" style="color:var(--rdx-teal-light,#d4e8f7);font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Cleft Lip & Palate clinical reasoning!</p><div style="margin-top:30px;text-align:left;background:var(--rdx-bg-hover);padding:20px;border-radius:12px;"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);margin-bottom:12px;">Key Takeaways:</h4><ul style="line-height:2;margin-left:20px;"><li>Cleft palate prevents negative pressure for feeding</li><li>Lip fuses week 6, palate fuses weeks 8-12</li><li>30% CLP, 50% CP are syndromic</li><li>22q11.2 deletion: cleft + cardiac = suspect</li><li>Lip repair ~3 months, palate 9-12 months</li><li>70-80% achieve normal speech</li><li>Multidisciplinary team essential</li></ul></div></div>';
         }
     }
     

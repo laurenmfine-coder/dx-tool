@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -15,59 +23,59 @@
 <title>The Sleepy Child | ReasonDx Pediatrics</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #115e59 0%, #0f766e 100%); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(30, 58, 95, 0.95); border-radius: 16px; margin-bottom: 20px; border: 1px solid rgba(96, 165, 250, 0.3); }
         .case-title { font-size: 1.2rem; font-weight: 700; }
         .badge { background: #f59e0b; color: #000; padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; margin-left: 10px; }
         .stat { text-align: center; }
-        .stat-value { font-size: 1.3rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .stat-value { font-size: 1.3rem; font-weight: 700; color: var(--rdx-teal-light,#d4e8f7); }
         .stat-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #14b8a6, #2dd4bf); border-radius: 3px; transition: width 0.5s; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #3a90c0, #5ba3cc); border-radius: 3px; transition: width 0.5s; }
         .vitals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
         .vital { background: rgba(30, 58, 95, 0.8); border-radius: 12px; padding: 10px; text-align: center; border: 1px solid #e2e8f0; }
         .vital-label { font-size: 0.65rem; color: #64748b; text-transform: uppercase; }
         .vital-value { font-size: 1.2rem; font-weight: 700; }
-        .vital-value.normal { color: var(--rdx-teal-light,#ccfbf1); }
-        .vital-value.warning { color: #0f766e; }
+        .vital-value.normal { color: var(--rdx-teal-light,#d4e8f7); }
+        .vital-value.warning { color: #1f5f8b; }
         .vital-value.danger { color: #f87171; animation: pulse 1s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-        .scene { background: linear-gradient(135deg, #115e59, #0f766e); border-radius: 16px; overflow: hidden; border: 1px solid rgba(96, 165, 250, 0.2); margin-bottom: 20px; }
+        .scene { background: linear-gradient(135deg, #1a4971, #1f5f8b); border-radius: 16px; overflow: hidden; border: 1px solid rgba(96, 165, 250, 0.2); margin-bottom: 20px; }
         .scene-header { padding: 16px 20px; background: rgba(59, 130, 246, 0.15); border-bottom: 1px solid #e2e8f0; }
-        .scene-phase { font-size: 0.75rem; color: var(--rdx-teal-light,#ccfbf1); text-transform: uppercase; letter-spacing: 1px; }
+        .scene-phase { font-size: 0.75rem; color: var(--rdx-teal-light,#d4e8f7); text-transform: uppercase; letter-spacing: 1px; }
         .scene-title { font-size: 1.3rem; font-weight: 700; }
         .scene-body { padding: 20px; }
         .narrative { font-size: 1rem; line-height: 1.8; margin-bottom: 16px; }
-        .highlight { color: #0f766e; font-weight: 600; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
         .critical { color: #dc2626; font-weight: 600; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .mechanism-title { font-weight: 600; color: var(--rdx-purple,#a78bfa); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         .mechanism-content { font-size: 0.95rem; line-height: 1.7; }
         .pathway { background:var(--rdx-bg-hover); border-radius: 8px; padding: 12px; margin: 10px 0; font-family: monospace; font-size: 0.9rem; }
-        .pathway-arrow { color: var(--rdx-teal-light,#ccfbf1); }
-        .boards-tip { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2)); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 12px; padding: 16px; margin: 16px 0; }
-        .boards-tip-title { font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .dialogue { background:var(--rdx-bg-hover); border-left: 4px solid #14b8a6; padding: 16px; border-radius: 0 12px 12px 0; margin: 16px 0; }
-        .dialogue-speaker { font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 4px; }
+        .pathway-arrow { color: var(--rdx-teal-light,#d4e8f7); }
+        .boards-tip { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(40, 116, 166, 0.2)); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .boards-tip-title { font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .dialogue { background:var(--rdx-bg-hover); border-left: 4px solid #3a90c0; padding: 16px; border-radius: 0 12px 12px 0; margin: 16px 0; }
+        .dialogue-speaker { font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 4px; }
         .dialogue-text { font-style: italic; }
         .lab-results { background: #f1f5f9; border-radius: 12px; padding: 16px; margin: 16px 0; }
-        .lab-header { font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px; display: flex; justify-content: space-between; }
+        .lab-header { font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px; display: flex; justify-content: space-between; }
         .lab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
         .lab-item { display: flex; justify-content: space-between; padding: 8px 12px; background:var(--rdx-bg-card); border-radius:8px; }
         .lab-name { color: #94a3b8; }
         .lab-value { font-weight: 600; }
         .lab-value.high { color: #f87171; }
-        .lab-value.low { color: var(--rdx-teal-light,#ccfbf1); }
-        .lab-value.normal { color: var(--rdx-teal-light,#ccfbf1); }
+        .lab-value.low { color: var(--rdx-teal-light,#d4e8f7); }
+        .lab-value.normal { color: var(--rdx-teal-light,#d4e8f7); }
         .lab-value.critical { color: #f87171; font-weight: 700; animation: pulse 1s infinite; }
         .calculation-box { background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
-        .calc-title { font-weight: 600; color: #0f766e; margin-bottom: 10px; }
+        .calc-title { font-weight: 600; color: #1f5f8b; margin-bottom: 10px; }
         .calc-formula { background: #f1f5f9; padding: 12px; border-radius: 8px; font-family: monospace; margin: 8px 0; }
         .order-menu { background: #f1f5f9; border-radius: 12px; padding: 16px; margin: 16px 0; }
         .order-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .order-menu-title { font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); }
-        .order-count { background: #14b8a6; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; }
+        .order-menu-title { font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); }
+        .order-count { background: #3a90c0; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; }
         .order-section { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 1px; padding: 12px 0 8px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px; }
         .order-section:first-child { border-top: none; margin-top: 0; padding-top: 0; }
         .order-items { max-height: 300px; overflow-y: auto; }
@@ -79,26 +87,26 @@
         .choices { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
         .choice { display: flex; align-items: flex-start; gap: 16px; padding: 16px; background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
         .choice:hover { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.5); transform: translateX(4px); }
-        .choice-letter { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.2); border-radius: 8px; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); flex-shrink: 0; }
+        .choice-letter { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.2); border-radius: 8px; font-weight: 700; color: var(--rdx-teal-light,#d4e8f7); flex-shrink: 0; }
         .choice-content { flex: 1; }
         .choice-title { font-weight: 600; margin-bottom: 4px; }
         .choice-desc { font-size: 0.9rem; color: #94a3b8; }
         .btn { padding: 14px 24px; border-radius: 12px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; transition: all 0.2s; }
-        .btn-primary { background: linear-gradient(135deg, #14b8a6, #2dd4bf); color: white; width: 100%; }
+        .btn-primary { background: linear-gradient(135deg, #3a90c0, #5ba3cc); color: white; width: 100%; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4); }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .alert-title { font-weight: 600; color: #f87171; margin-bottom: 8px; }
         .warning-box { background: rgba(251, 191, 36, 0.2); border: 1px solid rgba(251, 191, 36, 0.5); border-radius: 12px; padding: 16px; margin: 16px 0; }
-        .warning-title { font-weight: 600; color: #0f766e; margin-bottom: 8px; }
+        .warning-title { font-weight: 600; color: #1f5f8b; margin-bottom: 8px; }
         .input-group { background:var(--rdx-bg-hover); border-radius: 12px; padding: 16px; margin: 16px 0; }
-        .input-title { font-weight: 600; color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px; }
+        .input-title { font-weight: 600; color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px; }
         .input-row { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
         .input-field { flex: 1; min-width: 140px; }
         .input-label { font-size: 0.8rem; color: #94a3b8; margin-bottom: 4px; }
         .input-select { width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.1); border: 1px solid #e2e8f0; border-radius: 8px; color:var(--rdx-text); font-size: 0.95rem; }
-        .input-select:focus { outline: none; border-color: #14b8a6; }
-        .input-select option { background: linear-gradient(135deg, #115e59 0%, #0f766e 100%); }
+        .input-select:focus { outline: none; border-color: #3a90c0; }
+        .input-select option { background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%); }
         .neuro-check { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .neuro-title { font-weight: 600; color: var(--rdx-purple,#a78bfa); margin-bottom: 12px; }
         .neuro-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -121,12 +129,12 @@
         .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
         .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
         .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: var(--rdx-teal-light,#ccfbf1); }
+        .pearl .tip-header { color: var(--rdx-teal-light,#d4e8f7); }
         .pitfall .tip-header { color: #f87171; }
         .outcome-banner { text-align: center; padding: 30px; margin-bottom: 24px; }
         .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
         .outcome-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
-        .outcome-title.success { color: var(--rdx-teal-light,#ccfbf1); }
+        .outcome-title.success { color: var(--rdx-teal-light,#d4e8f7); }
         @media (max-width: 600px) { .tips, .lab-grid, .neuro-grid { grid-template-columns: 1fr; } .vitals { grid-template-columns: repeat(2, 1fr); } }
     /* Mobile Responsive - iPhone 16/17 optimized */
         @media (max-width: 480px) {
@@ -221,14 +229,14 @@
                     <div class="scene-title">Pediatric Emergency Department</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> DKA triad: Hyperglycemia (usually >250), Ketosis, Acidosis (pH <7.3)</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of bicarbonate therapy in severe DKA (pH <6.9)?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#f0fdfa; border:1px solid #14b8a6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #14b8a6;">
-                    <p style="margin:0; color:#115e59; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Continue insulin drip until anion gap closes, not just until glucose normalizes</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Continue insulin drip until anion gap closes, not just until glucose normalizes</p>
                 </div>
                     <div class="narrative">
                         <p>A <span class="highlight">12-year-old female</span> (40 kg) is brought by her parents for <span class="highlight">progressive lethargy</span> over the past 2 days. She was previously healthy with no known medical conditions.</p>
@@ -260,7 +268,7 @@
                     <div class="scene-title">History of Present Illness</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Fluid first! Start with 1-2L NS in first hour, then reassess</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -306,14 +314,14 @@
                     <div class="scene-title">Physical Examination</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Potassium before insulin: If K <3.3, hold insulin until K repleted</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When should you suspect cerebral edema (especially in pediatrics)?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#f0fdfa; border:1px solid #14b8a6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #14b8a6;">
-                    <p style="margin:0; color:#115e59; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Transition to subQ insulin with 2-hour overlap before stopping IV</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Transition to subQ insulin with 2-hour overlap before stopping IV</p>
                 </div>
                     <div class="narrative">
                         <p><strong>General:</strong> Lethargic but arousable, ill-appearing, <span class="critical">Kussmaul respirations</span> (deep, rapid)</p>
@@ -351,7 +359,7 @@
                     <div class="scene-title">Laboratory Workup</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Anion gap = Na - (Cl + HCO3); normal 8-12, DKA typically >20</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -413,7 +421,7 @@
                     <div class="scene-title">Laboratory Results</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Look for precipitant: Infection, Infarction, Insulin non-compliance</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -464,7 +472,7 @@
                     <div class="scene-title">Acid-Base Analysis (STEP 1 Integration)</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Check glucose hourly; goal is drop of 50-70 mg/dL per hour</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -516,7 +524,7 @@
                     <div class="scene-title">DKA Severity Classification</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> DKA triad: Hyperglycemia (usually >250), Ketosis, Acidosis (pH <7.3)</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -531,8 +539,8 @@
                         <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
                             <tr style="border-bottom: 1px solid #e2e8f0;">
                                 <th style="text-align: left; padding: 8px; color: #94a3b8;">Parameter</th>
-                                <th style="padding: 8px; color: var(--rdx-teal-light,#ccfbf1);">Mild</th>
-                                <th style="padding: 8px; color: #0f766e;">Moderate</th>
+                                <th style="padding: 8px; color: var(--rdx-teal-light,#d4e8f7);">Mild</th>
+                                <th style="padding: 8px; color: #1f5f8b;">Moderate</th>
                                 <th style="padding: 8px; color: #f87171;">Severe</th>
                             </tr>
                             <tr style="border-bottom: 1px solid #e2e8f0;">
@@ -589,7 +597,7 @@
                     <div class="scene-title">Fluid Resuscitation</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Fluid first! Start with 1-2L NS in first hour, then reassess</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -683,7 +691,7 @@
                     <div class="scene-title">Insulin Therapy</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Potassium before insulin: If K <3.3, hold insulin until K repleted</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -767,7 +775,7 @@
                     <div class="scene-title">Potassium Management</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Anion gap = Na - (Cl + HCO3); normal 8-12, DKA typically >20</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -831,7 +839,7 @@
                     <div class="scene-title">Monitoring Protocol</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Look for precipitant: Infection, Infarction, Insulin non-compliance</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -875,7 +883,7 @@
                     <div class="scene-title">Complication: Cerebral Edema</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Check glucose hourly; goal is drop of 50-70 mg/dL per hour</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -936,14 +944,14 @@
                     <div class="scene-title">DKA Resolution</div>
                 </div>
                 <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> DKA triad: Hyperglycemia (usually >250), Ketosis, Acidosis (pH <7.3)</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of bicarbonate therapy in severe DKA (pH <6.9)?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#f0fdfa; border:1px solid #14b8a6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #14b8a6;">
-                    <p style="margin:0; color:#115e59; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Continue insulin drip until anion gap closes, not just until glucose normalizes</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Continue insulin drip until anion gap closes, not just until glucose normalizes</p>
                 </div>
                     <div class="narrative"><p>After prompt treatment of cerebral edema and continued DKA management, the patient improves over the next 24 hours:</p></div>
                     <div class="lab-results">
@@ -1004,7 +1012,7 @@
                 <div style="font-size: 0.9rem; line-height: 1.8;">
                     <p>• ISPAD Clinical Practice Consensus Guidelines 2022: DKA Management</p>
                     <p>• ADA Standards of Medical Care in Diabetes 2024</p>
-                    <p>• StatPearls: Diabetic Ketoacidosis - <a href="https://www.ncbi.nlm.nih.gov/books/NBK560723/" style="color: var(--rdx-teal-light,#ccfbf1);">NBK560723</a></p>
+                    <p>• StatPearls: Diabetic Ketoacidosis - <a href="https://www.ncbi.nlm.nih.gov/books/NBK560723/" style="color: var(--rdx-teal-light,#d4e8f7);">NBK560723</a></p>
                     <p>• Glaser N, et al. NEJM 2001 - Cerebral Edema in Pediatric DKA</p>
                 </div>
             </div>`;
@@ -1044,7 +1052,7 @@
     margin: 2px;
 }
 .rdx-diff-btn.active {
-    background: #14b8a6;
+    background: #3a90c0;
     color: white;
 }
 .rdx-diff-btn:not(.active) {
@@ -1055,8 +1063,8 @@
     background: #e2e8f0;
 }
 .rdx-refs-panel {
-    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
-    border: 1px solid #5eead4;
+    background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+    border: 1px solid #7cb8d9;
     border-radius: 12px;
     padding: 16px 20px;
     margin: 20px auto;
@@ -1064,7 +1072,7 @@
 }
 .rdx-refs-title {
     font-weight: 700;
-    color: #115e59;
+    color: #1a4971;
     margin-bottom: 8px;
 }
 .rdx-refs-links {
@@ -1072,7 +1080,7 @@
     line-height: 1.8;
 }
 .rdx-refs-links a {
-    color: #0d9488;
+    color: #2874a6;
     text-decoration: none;
 }
 .rdx-refs-links a:hover {
@@ -1107,7 +1115,7 @@
     margin-bottom: 8px;
 }
 .rdx-path-optimal {
-    background: #dcfce7;
+    background: #d4e8f7;
     border-left: 4px solid #22c55e;
 }
 .rdx-path-suboptimal {
@@ -1119,8 +1127,8 @@
     border-left: 4px solid #ef4444;
 }
 .rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
+    background: #f0f7fc;
+    border: 1px solid #7cb8d9;
     padding: 10px 14px;
     border-radius: 8px;
     margin: 8px 0;
@@ -1174,22 +1182,22 @@
 
 <!-- CROSS-PLATFORM LEARNING LINKS -->
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#0f766e); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#1f5f8b); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
         <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
             <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 ReasonDx</h5>
-            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ DKA</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ DKA</a>
         </div>
-        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #14b8a6;">
-            <h5 style="color: #14b8a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="dka-expanded-adventure.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Dka</a>
-            <a href="hypoglycemia-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Hypoglycemia</a>
-            <a href="hhs-dka-comparison-expanded.html" style="display: block; color: #0d9488; font-size: 14px; margin: 4px 0;">→ Hhs Dka Comparison</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #3a90c0;">
+            <h5 style="color: #3a90c0; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="dka-expanded-adventure.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Dka</a>
+            <a href="hypoglycemia-expanded.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Hypoglycemia</a>
+            <a href="hhs-dka-comparison-expanded.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Hhs Dka Comparison</a>
         </div>
-        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../index.html" style="display: block; color: #0d9488; font-size: 14px;">→ SBAR Communication</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #2874a6;">
+            <h5 style="color: #2874a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
@@ -1251,7 +1259,7 @@
         
         let grade, gradeColor, gradeEmoji;
         if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#0d9488'; gradeEmoji = '⭐'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2874a6'; gradeEmoji = '⭐'; }
         else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
         else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
         
@@ -1294,7 +1302,7 @@
             '</div></div>' +
             '<div style="display:flex;gap:12px;">' +
             '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#14b8a6,#14b8a6);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3a90c0,#3a90c0);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
             '</div>';
         
         document.getElementById('rdxDebriefOverlay').style.display = 'flex';

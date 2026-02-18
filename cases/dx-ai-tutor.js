@@ -7,6 +7,6 @@ window.DxAiTutor = {
   askQuestion(topic) { return null; },
   renderWidget(containerId) {
     const el = document.getElementById(containerId);
-    if (el) el.innerHTML = '<div style="padding:12px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:8px;color:#0d9488;font-size:14px;">AI Tutor available in future update</div>';
+    if (el) el.innerHTML = '<div style="padding:12px;background:#f0f7fc;border:1px solid #a3cfe6;border-radius:8px;color:#2874a6;font-size:14px;">AI Tutor available in future update</div>';
   }
 };

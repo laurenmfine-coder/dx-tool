@@ -30,16 +30,16 @@
   // --- Link helper ---
   function navLink(href, icon, label, active, extra) {
     return '<a href="' + href + '" style="text-decoration:none;font-size:14px;font-weight:' +
-      (active ? '600' : '500') + ';color:' + (active ? '#0f766e' : 'var(--rdx-text-muted,#475569)') +
+      (active ? '600' : '500') + ';color:' + (active ? '#1f5f8b' : 'var(--rdx-text-muted,#475569)') +
       ';padding:6px 12px;border-radius:8px;white-space:nowrap;transition:all .15s;' +
-      (active ? 'background:var(--rdx-teal-50,#f0fdfa);' : '') +
+      (active ? 'background:var(--rdx-teal-50,#f0f7fc);' : '') +
       (extra || '') +
       '"><span class="rdx-nav-icon">' + icon + '</span> <span class="rdx-nav-label">' + label + '</span></a>';
   }
 
   // --- Build nav ---
   var html =
-    '<a href="' + toRoot + 'index.html" style="font-family:Georgia,serif;font-size:20px;color:#2f3640;text-decoration:none;font-weight:700;letter-spacing:-0.3px;flex-shrink:0;">Reason<span style="border-bottom:3px solid #2874a6;padding-bottom:1px;">Dx</span></a>' +
+    '<a href="' + toRoot + 'index.html" style="text-decoration:none;flex-shrink:0;display:flex;align-items:center;"><img src="' + toRoot + 'images/reasondx-logo.png" alt="ReasonDx" style="height:28px;width:auto;"></a>' +
     '<button id="rdx-hamburger" aria-label="Menu" style="display:none;background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:var(--rdx-text-muted,#475569);-webkit-tap-highlight-color:transparent;">☰</button>' +
     '<div id="rdx-nav-menu" style="display:flex;gap:6px;align-items:center;margin-left:auto;">' +
       navLink(toRoot + 'index.html', '🏠', 'Home', section === 'home') +
@@ -47,7 +47,7 @@
       navLink(toRoot + 'cases/clinical-reasoning-trainer.html', '🧩', 'Practice', section === 'practice') +
       navLink(toRoot + 'modules/raddx-hub.html', '🔬', 'RadDx', section === 'raddx') +
       navLink(toRoot + 'modules/premed-hub.html', '🩺', 'Premed', section === 'premed',
-        'background:linear-gradient(135deg,#f0fdfa,#ccfbf1);color:#0f766e;font-weight:600;') +
+        'background:linear-gradient(135deg,#f0f7fc,#d4e8f7);color:#1f5f8b;font-weight:600;') +
       navLink(toRoot + 'tools/index.html', '🔧', 'Tools', section === 'tools') +
       '<button id="rdx-info-btn" aria-label="About ReasonDx" title="About ReasonDx" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:15px;line-height:1;flex-shrink:0;">ℹ️</button>' +
       '<button id="rdx-theme-toggle" aria-label="Toggle theme" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;">' +
@@ -69,23 +69,23 @@
   var style = document.createElement('style');
   style.textContent =
     '[data-theme="dark"] #rdx-unified-nav{background:var(--rdx-bg-nav,#1e293b);border-color:var(--rdx-border,#334155);box-shadow:0 1px 3px rgba(0,0,0,0.3);}' +
-    '[data-theme="dark"] #rdx-unified-nav a[style*="Georgia"]{color:#e2e8f0!important;}' +
+    '[data-theme="dark"] #rdx-unified-nav a[style*="Georgia"]{color:#5ba3cc!important;}' +
     '[data-theme="dark"] #rdx-logout-btn{color:var(--rdx-text-muted,#94a3b8)!important;border-color:var(--rdx-border,#334155)!important;}' +
     '#rdx-about-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:10000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}' +
     '#rdx-about-overlay.open{display:flex;}' +
     '#rdx-about-modal{background:var(--rdx-bg-card,#fff);border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.3);padding:0;animation:rdxModalIn .2s ease;}' +
     '[data-theme="dark"] #rdx-about-modal{background:var(--rdx-bg-card,#1e293b);color:var(--rdx-text,#e2e8f0);}' +
     '@keyframes rdxModalIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}' +
-    '.rdx-about-hdr{background:linear-gradient(135deg,#2f3640,#2874a6);padding:28px 28px 24px;border-radius:20px 20px 0 0;color:white;}' +
+    '.rdx-about-hdr{background:linear-gradient(135deg,#1f5f8b,#3a90c0);padding:28px 28px 24px;border-radius:20px 20px 0 0;color:white;}' +
     '.rdx-about-hdr h2{margin:0 0 6px;font-size:22px;font-weight:700;font-family:Georgia,serif;}.rdx-about-hdr p{margin:0;opacity:0.9;font-size:14px;}' +
     '.rdx-about-body{padding:24px 28px 28px;font-size:14px;line-height:1.7;color:var(--rdx-text-secondary,#475569);}' +
     '[data-theme="dark"] .rdx-about-body{color:var(--rdx-text-secondary,#94a3b8);}' +
     '.rdx-about-body h3{font-size:15px;font-weight:700;color:var(--rdx-text,#1e293b);margin:20px 0 8px;}.rdx-about-body h3:first-child{margin-top:0;}' +
     '[data-theme="dark"] .rdx-about-body h3{color:var(--rdx-text,#e2e8f0);}' +
     '.rdx-about-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0;}' +
-    '.rdx-about-stat{background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:12px;text-align:center;}' +
-    '[data-theme="dark"] .rdx-about-stat{background:rgba(20,184,166,0.08);border-color:var(--rdx-border,#334155);}' +
-    '.rdx-about-stat .num{font-size:22px;font-weight:700;color:#2874a6;}.rdx-about-stat .lbl{font-size:12px;color:var(--rdx-text-muted,#64748b);}' +
+    '.rdx-about-stat{background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:12px;text-align:center;}' +
+    '[data-theme="dark"] .rdx-about-stat{background:rgba(40,116,166,0.08);border-color:var(--rdx-border,#334155);}' +
+    '.rdx-about-stat .num{font-size:22px;font-weight:700;color:#1f5f8b;}.rdx-about-stat .lbl{font-size:12px;color:var(--rdx-text-muted,#64748b);}' +
     '.rdx-about-tracks{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}' +
     '.rdx-about-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--rdx-border,#e2e8f0);background:var(--rdx-bg-card,#fff);color:var(--rdx-text-secondary,#475569);}' +
     '[data-theme="dark"] .rdx-about-pill{background:rgba(255,255,255,0.05);border-color:var(--rdx-border,#334155);color:var(--rdx-text-secondary,#94a3b8);}' +
@@ -151,9 +151,10 @@
     if (logoutBtn) {
       logoutBtn.addEventListener('click', function() {
         localStorage.removeItem('reasondx-user');
+        localStorage.removeItem('reasondx_student_code');
         localStorage.removeItem('rdx-progress');
         sessionStorage.clear();
-        window.location.href = toRoot + 'index.html';
+        window.location.href = toRoot + 'auth/register.html';
       });
     }
     // --- About ReasonDx modal ---
@@ -163,7 +164,7 @@
       '<div id="rdx-about-modal">' +
         '<div class="rdx-about-hdr" style="position:relative;">' +
           '<button class="rdx-about-close" id="rdx-about-close-btn">&times;</button>' +
-          '<h2 style="font-family:Georgia,serif;">Reason<span style="border-bottom:3px solid rgba(255,255,255,0.6);padding-bottom:2px;">Dx</span></h2>' +
+          '<h2>ReasonDx</h2>' +
           '<p>Clinical Reasoning Training Platform</p>' +
         '</div>' +
         '<div class="rdx-about-body">' +
@@ -176,10 +177,10 @@
             '<div class="rdx-about-stat"><div class="num">615</div><div class="lbl">Questions</div></div>' +
           '</div>' +
           '<h3>The Platform</h3>' +
-          '<p><strong style="font-family:Georgia,serif;color:#2f3640;">Reason<span style="border-bottom:2px solid #2874a6;padding-bottom:0px;">Dx</span></strong> — Interactive clinical cases with step-by-step reasoning<br>' +
-          '<strong style="font-family:Georgia,serif;color:#2f3640;">Mechanism<span style="border-bottom:2px solid #2874a6;padding-bottom:0px;">Dx</span></strong> — Pathophysiology modules that explain the "why"<br>' +
-          '<strong style="font-family:Georgia,serif;color:#2f3640;">Rad<span style="border-bottom:2px solid #2874a6;padding-bottom:0px;">Dx</span></strong> — Imaging reasoning with real-world scenarios<br>' +
-          '<strong style="font-family:Georgia,serif;color:#2f3640;">Coach<span style="border-bottom:2px solid #2874a6;padding-bottom:0px;">Dx</span></strong> — AI attending using Socratic questioning<br>' +
+          '<p><strong>ReasonDx</strong> — Interactive clinical cases with step-by-step reasoning<br>' +
+          '<strong>MechanismDx</strong> — Pathophysiology modules that explain the "why"<br>' +
+          '<strong>RadDx</strong> — Imaging reasoning with real-world scenarios<br>' +
+          '<strong>CoachDx</strong> — AI attending using Socratic questioning<br>' +
           '<strong>Deep Dives</strong> — Multi-layered explorations of key topics</p>' +
           '<h3>Learning Tracks</h3>' +
           '<div class="rdx-about-tracks">' +
@@ -190,7 +191,7 @@
           '</div>' +
           '<h3>How It Works</h3>' +
           '<p>Each case follows a clinical reasoning workflow: read the presentation → build a differential → gather history & exam findings → order workup → refine your diagnosis → review teaching points. Every step includes immediate feedback and evidence-based explanations.</p>' +
-          '<p style="margin-top:16px;padding-top:16px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:13px;color:var(--rdx-text-muted,#64748b);">Contact: <a href="mailto:lfine@nova.edu" style="color:#0f766e;">lfine@nova.edu</a></p>' +
+          '<p style="margin-top:16px;padding-top:16px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:13px;color:var(--rdx-text-muted,#64748b);">Contact: <a href="mailto:lfine@nova.edu" style="color:#1f5f8b;">lfine@nova.edu</a></p>' +
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
@@ -212,7 +213,7 @@
       '<div id="rdx-about-modal" style="position:relative;">' +
         '<button class="rdx-about-close" id="rdx-about-x">✕</button>' +
         '<div class="rdx-about-hdr">' +
-          '<h2 style="font-family:Georgia,serif;">Reason<span style="border-bottom:3px solid rgba(255,255,255,0.6);padding-bottom:2px;">Dx</span></h2>' +
+          '<h2>ReasonDx</h2>' +
           '<p>Clinical Reasoning Education Platform</p>' +
         '</div>' +
         '<div class="rdx-about-body">' +
@@ -234,8 +235,8 @@
           '<h3>Platform Components</h3>' +
           '<p><strong>Learn</strong> \u2014 Pathophysiology modules that build understanding from the ground up<br>' +
           '<strong>Practice</strong> \u2014 Interactive clinical cases with Socratic reasoning and expert feedback<br>' +
-          '<strong style="font-family:Georgia,serif;color:#2f3640;">Rad<span style="border-bottom:2px solid #2874a6;padding-bottom:0px;">Dx</span></strong> \u2014 Imaging-first scenarios linked to Radiopaedia\u2019s open-access library<br>' +
-          '<strong style="font-family:Georgia,serif;color:#2f3640;">Coach<span style="border-bottom:2px solid #2874a6;padding-bottom:0px;">Dx</span></strong> \u2014 AI clinical coach using attending-level Socratic questioning<br>' +
+          '<strong>RadDx</strong> \u2014 Imaging-first scenarios linked to Radiopaedia\u2019s open-access library<br>' +
+          '<strong>CoachDx</strong> \u2014 AI clinical coach using attending-level Socratic questioning<br>' +
           '<strong>Tools</strong> \u2014 Calculators, ECG practice, DDx builder, and clinical references</p>' +
           '<h3>How It Works</h3>' +
           '<p>Every case follows a 5-stage clinical reasoning workflow: (1) Read the presentation and form initial hypotheses, (2) Build your differential diagnosis, (3) Gather targeted history and physical exam findings, (4) Order and interpret diagnostic workup, (5) Make your diagnosis and learn from detailed explanations.</p>' +

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -17,7 +25,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family:var(--rdx-font);
-            background: linear-gradient(135deg, #115e59 0%, #0f766e 100%);
+            background: linear-gradient(135deg, #1a4971 0%, #1f5f8b 100%);
             min-height: 100vh;
             padding: 20px;
             color: #1e293b; }
@@ -52,14 +60,14 @@
             border-radius: 12px;
             padding: 16px 20px;
             margin: 16px 0;
-            border-left: 4px solid #14b8a6;
+            border-left: 4px solid #3a90c0;
             line-height: 1.7;
         }
         .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
         .narrative li { margin-bottom: 4px; }
-        .highlight { color: var(--rdx-teal-light,#ccfbf1); font-weight: 600; }
+        .highlight { color: var(--rdx-teal-light,#d4e8f7); font-weight: 600; }
         .critical { color: #dc2626; font-weight: 600; }
-        .lab-value { color: #0f766e; font-weight: 600; }
+        .lab-value { color: #1f5f8b; font-weight: 600; }
         
         /* Patient info card */
         .patient-card {
@@ -69,13 +77,13 @@
             padding: 16px 20px;
             margin: 16px 0;
         }
-        .patient-card h4 { color: var(--rdx-teal-light,#ccfbf1); margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .patient-card h4 { color: var(--rdx-teal-light,#d4e8f7); margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
         .vital-item { background:var(--rdx-bg-hover); padding: 8px 12px; border-radius: 8px; text-align: center; }
         .vital-label { font-size: 0.75rem; color: #94a3b8; }
         .vital-value { font-size: 1.1rem; font-weight: 700; }
         .vital-value.abnormal { color: #f87171; }
-        .vital-value.normal { color: var(--rdx-teal-light,#ccfbf1); }
+        .vital-value.normal { color: var(--rdx-teal-light,#d4e8f7); }
         
         /* Question styling */
         .question-box {
@@ -160,7 +168,7 @@
             gap: 8px;
             font-size: 1.05rem;
         }
-        .feedback.correct-feedback .feedback-title { color: var(--rdx-teal-light,#ccfbf1); }
+        .feedback.correct-feedback .feedback-title { color: var(--rdx-teal-light,#d4e8f7); }
         .feedback.incorrect-feedback .feedback-title { color: #f87171; }
         .feedback-explanation {
             color:var(--rdx-text-secondary);
@@ -196,7 +204,7 @@
         .teaching-point th { color: var(--rdx-purple,#a78bfa); font-size: 0.85rem; text-transform: uppercase; }
         
         .btn {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #3a90c0, #2874a6);
             color: white;
             border: none;
             padding: 14px 28px;
@@ -221,7 +229,7 @@
         }
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #14b8a6, #8b5cf6);
+            background: linear-gradient(90deg, #3a90c0, #8b5cf6);
             border-radius: 3px;
             transition: width 0.5s ease;
         }
@@ -237,7 +245,7 @@
             vertical-align: top;
         }
         .score-label { font-size: 0.8rem; color: #94a3b8; }
-        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#ccfbf1); }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal-light,#d4e8f7); }
         
         /* Difficulty toggle */
         .difficulty-panel {
@@ -262,7 +270,7 @@
             transition: all 0.2s;
         }
         .diff-btn:hover { background: #e2e8f0; }
-        .diff-btn.active { background: #14b8a6; color: white; }
+        .diff-btn.active { background: #3a90c0; color: white; }
         
         /* Hints */
         .hint-beginner, .hint-advanced {
@@ -276,7 +284,7 @@
         .hint-beginner {
             background: rgba(34,197,94,0.15);
             border: 1px solid rgba(34,197,94,0.3);
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
         }
         .hint-advanced {
             background: rgba(251,191,36,0.15);
@@ -308,7 +316,7 @@
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             padding: 12px 16px;
-            color: var(--rdx-teal-light,#ccfbf1);
+            color: var(--rdx-teal-light,#d4e8f7);
             text-decoration: none;
             font-size: 0.9rem;
             transition: all 0.2s;
@@ -335,8 +343,8 @@
 .decision-path { margin: 24px 0; }
 .decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
 .path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
-.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
-.path-suboptimal { background: #fef3c7; border: 2px solid #0f766e; }
+.path-optimal { background: #d4e8f7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #1f5f8b; }
 .path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
 .path-stage { font-weight: 700; color: #1f2937; }
 .path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
@@ -346,16 +354,16 @@
 .debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
 .debrief-summary ul { margin-left: 20px; }
 .debrief-summary li { margin-bottom: 8px; }
-.debrief-btn { display: block; width: 100%; padding: 16px; background: #0f766e; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #1f5f8b; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
 .debrief-btn:hover { opacity: 0.9; }
 
 /* References Panel Styles */
-.references-panel { background: #f0fdfa; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
-.references-header { padding: 14px 20px; font-weight: 600; color: #115e59; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.references-panel { background: #f0f7fc; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1a4971; display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
 .references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
-.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #0d9488; font-size: 0.85rem; border: 1px solid #99f6e4; transition: all 0.2s; }
-.references-content a:hover { background: #0d9488; color: white; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2874a6; font-size: 0.85rem; border: 1px solid #a3cfe6; transition: all 0.2s; }
+.references-content a:hover { background: #2874a6; color: white; }
 
 /* Platform Panel Styles */
 .platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
@@ -868,13 +876,13 @@ function showCompletion() {
     const percentage = Math.round((score / maxScore) * 100);
     let grade, color, emoji;
     if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
-    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#14b8a6'; emoji = '⭐'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#3a90c0'; emoji = '⭐'; }
     else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
     else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
     
     const pathHTML = decisionPath.map(d => {
         const icon = d.correct ? '✓' : '✗';
-        const cls = d.correct ? 'color: var(--rdx-teal-light,#ccfbf1)' : 'color: #f87171';
+        const cls = d.correct ? 'color: var(--rdx-teal-light,#d4e8f7)' : 'color: #f87171';
         return `<div style="padding: 8px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
             <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
             <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
@@ -924,7 +932,7 @@ function showDebrief() {
     let grade, gradeEmoji, gradeColor;
     
     if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
-    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#14b8a6'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3a90c0'; }
     else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
     else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
     
@@ -962,7 +970,7 @@ function showDebrief() {
             <h4>🎯 Performance Legend</h4>
             <ul>
                 <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
-                <li><span style="color: #0f766e;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color: #1f5f8b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
                 <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
             </ul>
         </div>
@@ -1017,8 +1025,8 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').ca
 <script src="../js/rdx-help-widget.js"></script>
 
 <div style="max-width:800px;margin:24px auto;padding:16px 20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-<a href="../adventure-hub.html" style="padding:10px 20px;background:#0f766e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">🎮 Adventure Hub</a>
-<a href="../tools/learning-dashboard.html" style="padding:10px 20px;background:#f1f5f9;color:#0f766e;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0">📊 Dashboard</a>
+<a href="../adventure-hub.html" style="padding:10px 20px;background:#1f5f8b;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">🎮 Adventure Hub</a>
+<a href="../tools/learning-dashboard.html" style="padding:10px 20px;background:#f1f5f9;color:#1f5f8b;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0">📊 Dashboard</a>
 <a href="../index.html" style="padding:10px 20px;background:#f1f5f9;color:#334155;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0">🏠 Home</a>
 </div>
 </body>

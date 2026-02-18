@@ -41,13 +41,13 @@ async function sendVerificationEmail(toEmail, code) {
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 24px;">
                 <span style="font-size: 48px;">🩺</span>
-                <h1 style="color: #059669; margin: 16px 0 8px;">ReasonDx</h1>
+                <h1 style="color: #1f5f8b; margin: 16px 0 8px;">ReasonDx</h1>
                 <p style="color: #64748b; margin: 0;">Clinical Reasoning Education</p>
             </div>
             
-            <div style="background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
+            <div style="background: #f0f7fc; border: 2px solid #a7f3d0; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
                 <p style="margin: 0 0 8px; color: #166534; font-size: 14px;">Your verification code is:</p>
-                <div style="font-size: 36px; font-weight: bold; color: #059669; letter-spacing: 8px; font-family: monospace;">
+                <div style="font-size: 36px; font-weight: bold; color: #1f5f8b; letter-spacing: 8px; font-family: monospace;">
                     ${code}
                 </div>
             </div>
@@ -74,7 +74,7 @@ async function sendPasswordResetEmail(toEmail, code) {
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 24px;">
                 <span style="font-size: 48px;">🔑</span>
-                <h1 style="color: #059669; margin: 16px 0 8px;">Password Reset</h1>
+                <h1 style="color: #1f5f8b; margin: 16px 0 8px;">Password Reset</h1>
             </div>
             
             <div style="background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
@@ -106,16 +106,16 @@ async function sendWelcomeEmail(toEmail, studyId, isFaculty = false) {
         <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 24px;">
                 <span style="font-size: 48px;">${isFaculty ? '👨‍🏫' : '🎉'}</span>
-                <h1 style="color: #059669; margin: 16px 0 8px;">Welcome to ReasonDx!</h1>
+                <h1 style="color: #1f5f8b; margin: 16px 0 8px;">Welcome to ReasonDx!</h1>
             </div>
             
             <p style="color: #475569; font-size: 14px; line-height: 1.6;">
                 Your account has been created successfully. Here's your Study ID for reference:
             </p>
             
-            <div style="background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 12px; padding: 20px; text-align: center; margin: 24px 0;">
+            <div style="background: #f0f7fc; border: 2px solid #a7f3d0; border-radius: 12px; padding: 20px; text-align: center; margin: 24px 0;">
                 <p style="margin: 0 0 4px; color: #166534; font-size: 12px;">Your Study ID</p>
-                <div style="font-size: 24px; font-weight: bold; color: #059669; font-family: monospace;">
+                <div style="font-size: 24px; font-weight: bold; color: #1f5f8b; font-family: monospace;">
                     ${studyId}
                 </div>
             </div>
@@ -126,7 +126,7 @@ async function sendWelcomeEmail(toEmail, studyId, isFaculty = false) {
             </p>
             
             <div style="text-align: center; margin-top: 24px;">
-                <a href="https://reasondx.com" style="display: inline-block; background: #059669; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                <a href="https://reasondx.com" style="display: inline-block; background: #1f5f8b; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">
                     Start Learning →
                 </a>
             </div>

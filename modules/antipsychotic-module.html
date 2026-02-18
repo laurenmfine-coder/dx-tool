@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
@@ -56,13 +64,13 @@
         .quiz-question p { font-weight: 500; margin-bottom: 12px; }
         .quiz-options { display: grid; gap: 8px; }
         .quiz-option { padding: 12px 16px; border: 1px solid var(--border); border-radius:12px; cursor: pointer; transition: all 0.2s; font-size: 14px; }
-        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(16,185,129,0.05)); }
-        .quiz-option.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
+        .quiz-option:hover { border-color: var(--primary); background: var(--primary-bg, rgba(22,163,74,0.05)); }
+        .quiz-option.correct { background: #d4e8f7; border-color: #22c55e; color: #166534; }
         .quiz-option.incorrect { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
         .quiz-option.disabled { pointer-events: none; opacity: 0.7; }
         .quiz-feedback { margin-top: 8px; padding: 12px; border-radius: 8px; font-size: 13px; display: none; }
         .quiz-feedback.show { display: block; }
-        .quiz-feedback.correct { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.correct { background: #f0f7fc; color: #166534; border: 1px solid #86efac; }
         .quiz-feedback.incorrect { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
         @media (max-width: 640px) { .section { padding: 20px; } .hero h1 { font-size: 24px; } }
     </style>
@@ -72,7 +80,7 @@
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/antipsychotic.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Antipsychotic Pharmacology</a> → Module</div>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#1f5f8b);text-decoration:none">Learn Hub</a> → <a href="../topics/antipsychotic.html" style="color:var(--rdx-accent,#1f5f8b);text-decoration:none">Antipsychotic Pharmacology</a> → Module</div>
 
 
     <!-- nav removed: unified via rdx-nav.js -->
@@ -118,7 +126,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #0f766e; border-radius: 12px; padding: 20px; margin: 20px 0;">
+            <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #1f5f8b; border-radius: 12px; padding: 20px; margin: 20px 0;">
                 <h4 style="color: #b45309; margin-bottom: 8px;">💎 The Dopamine Pathways</h4>
                 <p style="color: #92400e; margin: 0;">Mesolimbic: blockade → treats positive symptoms (hallucinations, delusions). Mesocortical: blockade → may worsen negative symptoms. Nigrostriatal: blockade → EPS. Tuberoinfundibular: blockade → hyperprolactinemia (galactorrhea, amenorrhea).</p>
             </div>
@@ -301,7 +309,7 @@
 .mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
 .mcq-choice-title{font-weight:600;font-size:.95rem}
 .mcq-hidden{display:none!important}
-.mcq-score-bar{background:linear-gradient(135deg,#0f766e,#0d9488);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-bar{background:linear-gradient(135deg,#1f5f8b,#2874a6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
 .mcq-score-label{font-size:.9rem;font-weight:600}
 .mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
 </style>
@@ -357,9 +365,9 @@
 </div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
 </div>
 <script id="mcq-inject-js">
-let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(22,163,74,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(22,163,74,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
 </script>
-<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0fdfa);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#0f766e);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1192/bjp.2019.254" target="_blank" rel="noopener" style="color:var(--rdx-teal,#0d9488);text-decoration:none">Maudsley Prescribing Guidelines: Antipsychotics</a> — <em style="color:var(--rdx-text-muted,#64748b)">British Journal of Psychiatry</em></li></ul></div>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Clinical Guidelines & Society Resources</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;border-bottom:1px solid var(--rdx-border,#e2e8f0);font-size:0.85rem"><a href="https://doi.org/10.1192/bjp.2019.254" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">Maudsley Prescribing Guidelines: Antipsychotics</a> — <em style="color:var(--rdx-text-muted,#64748b)">British Journal of Psychiatry</em></li></ul></div>
 <div class="cross-links"><a href="schizophrenia-module.html" class="cross-link"><div class="cross-link-title">📘 Schizophrenia</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
 <a href="psychopharmacology-module.html" class="cross-link"><div class="cross-link-title">📘 Psychopharmacology</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
 <a href="depression-module.html" class="cross-link"><div class="cross-link-title">📘 Major Depressive Disorder</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>

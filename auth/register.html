@@ -16,9 +16,9 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="../dx-sanitize.js"></script>
     <style>
-        :root { --primary: #059669; --primary-dark: #047857; --pro: #2563eb; --pro-dark: #1d4ed8; --beta: #d97706; --beta-dark: #b45309; }
+        :root { --primary: #1f5f8b; --primary-dark: #1a4971; --pro: #2563eb; --pro-dark: #1d4ed8; --beta: #d97706; --beta-dark: #b45309; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%); min-height: 100vh; padding: 24px; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 50%, #f0f7fc 100%); min-height: 100vh; padding: 24px; }
         .page-container { max-width: 1000px; margin: 0 auto; }
         .page-header { text-align: center; margin-bottom: 40px; }
         .page-header h1 { font-size: 36px; font-weight: 800; color: #1e3a5f; margin-bottom: 8px; }
@@ -26,7 +26,7 @@
         .page-header .board-tags { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
         .board-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
         .board-tag.step1 { background: #dbeafe; color: #1d4ed8; }
-        .board-tag.step2 { background: #dcfce7; color: #166534; }
+        .board-tag.step2 { background: #d4e8f7; color: #166534; }
         .board-tag.shelf { background: #fef3c7; color: #92400e; }
         .board-tag.rotation { background: #ede9fe; color: #6d28d9; }
         .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
@@ -43,7 +43,7 @@
         .plan-price { text-align: center; margin-bottom: 20px; }
         .plan-price .amount { font-size: 36px; font-weight: 800; color: #1e3a5f; }
         .plan-price .period { font-size: 16px; color: #64748b; }
-        .plan-price .annual { font-size: 13px; color: #059669; margin-top: 4px; }
+        .plan-price .annual { font-size: 13px; color: #1f5f8b; margin-top: 4px; }
         .plan-features { list-style: none; margin-bottom: 24px; }
         .plan-features li { padding: 8px 0; font-size: 14px; color: #475569; display: flex; align-items: flex-start; gap: 10px; }
         .plan-features li::before { content: "\2713"; color: var(--primary); font-weight: 700; }
@@ -55,7 +55,7 @@
         .plan-card.selected.beta .plan-select-btn { background: var(--beta); border-color: var(--beta); }
         .hidden { display: none !important; }
         .form-card { background: white; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); overflow: hidden; max-width: 500px; margin: 0 auto; }
-        .form-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 24px; text-align: center; color: white; }
+        .form-header { background: linear-gradient(135deg, #1f5f8b 0%, #1a4971 100%); padding: 24px; text-align: center; color: white; }
         .form-header.pro { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
         .form-header.beta { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); }
         .form-body { padding: 32px; }
@@ -89,10 +89,10 @@
         .login-prompt a { color: var(--primary); font-weight: 600; text-decoration: none; }
         .message { padding: 12px; border-radius: 8px; font-size: 14px; margin-bottom: 16px; display: none; }
         .message.error { display: block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
-        .message.success { display: block; background: #f0fdf4; color: #166534; border: 1px solid #a7f3d0; }
+        .message.success { display: block; background: #f0f7fc; color: #166534; border: 1px solid #a7f3d0; }
         .info-box { display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 12px; margin-bottom: 20px; }
         .info-box.blue { background: #eff6ff; border: 1px solid #bfdbfe; }
-        .info-box.green { background: #f0fdf4; border: 1px solid #a7f3d0; }
+        .info-box.green { background: #f0f7fc; border: 1px solid #a7f3d0; }
         .info-box.amber { background: #fffbeb; border: 1px solid #fde68a; }
         .info-box .icon { font-size: 20px; flex-shrink: 0; }
         .info-box strong { display: block; margin-bottom: 2px; }
@@ -110,19 +110,19 @@
         .pricing-toggle { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; }
         .pricing-toggle button { padding: 8px 20px; border-radius: 20px; border: 2px solid #e2e8f0; background: white; font-size: 14px; font-weight: 500; cursor: pointer; }
         .pricing-toggle button.active { background: var(--pro); color: white; border-color: var(--pro); }
-        .savings-badge { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 4px; }
+        .savings-badge { background: #d4e8f7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 4px; }
         .success-screen { text-align: center; }
         .success-icon { font-size: 64px; margin-bottom: 16px; }
-        .referral-display { background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .referral-display { background: #f0f7fc; border: 2px solid #a7f3d0; border-radius: 12px; padding: 20px; margin: 20px 0; }
         .referral-display .label { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-        .referral-display .code { font-size: 24px; font-weight: 700; color: #059669; font-family: monospace; letter-spacing: 2px; }
+        .referral-display .code { font-size: 24px; font-weight: 700; color: #1f5f8b; font-family: monospace; letter-spacing: 2px; }
         .share-row { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
         .share-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0; background: white; font-size: 13px; cursor: pointer; font-weight: 500; }
         .share-btn:hover { background: #f8fafc; }
         .exam-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 16px; }
         .exam-tag { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
         .exam-tag.s1 { background: #dbeafe; color: #1d4ed8; }
-        .exam-tag.s2 { background: #dcfce7; color: #166534; }
+        .exam-tag.s2 { background: #d4e8f7; color: #166534; }
         .exam-tag.shelf { background: #fef3c7; color: #92400e; }
         .beta-note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px; margin-top: 16px; font-size: 13px; color: #92400e; text-align: center; }
     </style>
@@ -203,8 +203,8 @@
                 <h3 style="font-size: 18px; color: #1e3a5f; margin-bottom: 8px;">Refer a Friend, Get Rewarded</h3>
                 <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">Share your referral code after signup. For each friend who joins Pro:</p>
                 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                    <div style="background: #f0fdf4; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
-                        <div style="font-size: 20px; font-weight: 700; color: #059669;">1 referral</div>
+                    <div style="background: #f0f7fc; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
+                        <div style="font-size: 20px; font-weight: 700; color: #1f5f8b;">1 referral</div>
                         <div style="font-size: 13px; color: #64748b;">Free month for both of you</div>
                     </div>
                     <div style="background: #eff6ff; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
@@ -378,7 +378,7 @@
                         <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;" id="paymentLabel">You'll be charged</div>
                         <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
                         <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
-                        <div style="font-size: 13px; color: #059669; margin-top: 4px;" id="referralCredit" class="hidden">🎁 Your friend gets a free month too!</div>
+                        <div style="font-size: 13px; color: #1f5f8b; margin-top: 4px;" id="referralCredit" class="hidden">🎁 Your friend gets a free month too!</div>
                     </div>
                     <div class="form-group">
                         <div id="card-element" style="padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; text-align: center;">

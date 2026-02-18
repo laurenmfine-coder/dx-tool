@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#0f766e">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"training.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +32,12 @@
         .score-display { display: flex; gap: 20px; font-size: 0.9rem; margin-top: 10px; }
         .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
         .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #99f6e4, #0f766e); border-radius: 3px; transition: width 0.3s; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a3cfe6, #1f5f8b); border-radius: 3px; transition: width 0.3s; }
         .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
         .scene-phase { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; }
         .scene-title { font-size: 1.5rem; font-weight: 700; color:var(--rdx-text); margin-top: 4px; }
         .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #64748b; line-height: 1.7; }
-        .highlight { color: #0f766e; font-weight: 600; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
         .critical { color: #dc2626; font-weight: 600; }
         .question-box { background: linear-gradient(135deg, rgba(100,116,139,0.2), rgba(251,191,36,0.2)); border: 1px solid rgba(100,116,139,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .question-prompt { font-size: 1.1rem; font-weight: 600; color:var(--rdx-text); margin-bottom: 16px; }
@@ -49,14 +57,14 @@
         .mechanism-box { background:var(--rdx-bg-hover); border-radius:12px; padding: 16px; margin: 12px 0; }
         .mechanism-title { color: #94a3b8; font-weight: 600; margin-bottom: 10px; }
         .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; }
-        .btn { background: #0f766e; color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn { background: #1f5f8b; color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
         .btn.show { display: inline-block; }
     
 /* Crossplatform Navigation */
 .rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
 .rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
 .rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
-.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #0f766e; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #1f5f8b; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
 .rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
 </style>
@@ -98,7 +106,7 @@
     
     function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=10;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}document.getElementById('teaching').classList.add('show');document.getElementById('next-btn').classList.add('show');}
     
-    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene" style="text-align:center;padding:40px;"><h2 style="color:#94a3b8;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong>/70</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:12px;border:1px solid rgba(59,130,246,0.3);"><p style="color:var(--rdx-teal-light,#ccfbf1);margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../mechanism/testicular-cancer-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 ReasonDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=testicular+cancer" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK563159/" target="_blank" style="color:var(--rdx-teal-light,#ccfbf1);font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Testicular Cancer!</p><p style="margin-top:15px;color: #0f766e;">Remember: Painless mass = cancer until proven otherwise!</p></div>';}}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene" style="text-align:center;padding:40px;"><h2 style="color:#94a3b8;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong>/70</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:12px;border:1px solid rgba(59,130,246,0.3);"><p style="color:var(--rdx-teal-light,#d4e8f7);margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../mechanism/testicular-cancer-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 ReasonDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=testicular+cancer" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK563159/" target="_blank" style="color:var(--rdx-teal-light,#d4e8f7);font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Testicular Cancer!</p><p style="margin-top:15px;color: #1f5f8b;">Remember: Painless mass = cancer until proven otherwise!</p></div>';}}
     
     renderStage();
     </script>
@@ -119,16 +127,16 @@
 </div>
 
 <script src="../js/rdx-nav.js"></script>
-<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(13,148,136,.06),rgba(20,184,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(40,116,166,.06),rgba(40,116,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
 <span style="font-size:1.2rem">🩻</span>
-<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#0f766e);margin:0">Imaging Reasoning</h4>
-<span style="background:var(--rdx-teal-50,#f0fdfa);color:var(--rdx-teal,#0d9488);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">Ultrasound with Doppler</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0f7fc);color:var(--rdx-teal,#2874a6);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">Ultrasound with Doppler</span>
 </div>
 <p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Absent blood flow (torsion), intratesticular mass, hydrocele, epididymal changes</p>
 <div style="display:flex;gap:10px;flex-wrap:wrap">
-<a href="../modules/raddx-renal-gu.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#0d9488);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
-<a href="https://radiopaedia.org/articles/testicular-torsion" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#0d9488);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+<a href="../modules/raddx-renal-gu.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#2874a6);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/testicular-torsion" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#2874a6);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
 </div></div>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
