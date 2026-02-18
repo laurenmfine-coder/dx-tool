@@ -3822,5 +3822,80 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
   closePopup();
 });
 </script>
+<script src="dx-plan-gate.js"></script>
+<script>
+// ============================================
+// PLAN GATING — Study Hub Integration
+// ============================================
+(function() {
+  if (typeof DxPlanGate === 'undefined') return;
+  if (DxPlanGate.isPro()) return;
+
+  // 1. Show free-tier usage banner
+  var summary = DxPlanGate.getUsageSummary();
+  var banner = document.createElement('div');
+  banner.id = 'freeBanner';
+  banner.style.cssText = 'max-width:960px;margin:0 auto 20px;padding:16px 24px;background:white;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:Inter,sans-serif;';
+  banner.innerHTML = '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
+    '<span style="font-size:13px;font-weight:600;color:#1e3a5f;">Free Plan</span>' +
+    '<span style="font-size:12px;color:#64748b;">Modules: <strong style="color:#2874A6;">' + summary.modules.used + '/' + summary.modules.limit + '</strong></span>' +
+    '<span style="font-size:12px;color:#64748b;">Cases this week: <strong style="color:#2874A6;">' + summary.cases.used + '/' + summary.cases.limit + '</strong></span>' +
+    '<span style="font-size:12px;color:#64748b;">MCQs: <strong style="color:#2874A6;">' + summary.mcqs.used + '/' + summary.mcqs.limit + '</strong></span>' +
+  '</div>' +
+  '<a href="auth/register.html" style="font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;white-space:nowrap;">Upgrade to Pro &rarr;</a>';
+
+  // Insert after the page header
+  var header = document.querySelector('.hero-section') || document.querySelector('.search-section') || document.body.firstElementChild;
+  if (header && header.parentNode) {
+    header.parentNode.insertBefore(banner, header.nextSibling);
+  }
+
+  // 2. Delegated click interceptor — gate content links
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (!link) return;
+    var href = link.getAttribute('href') || '';
+    if (!href || href === '#') return;
+
+    var type = null;
+    var contentId = href.split('/').pop().replace('.html','').replace(/\?.*/,'');
+
+    // Determine content type from URL
+    if (href.indexOf('modules/') !== -1 && href.indexOf('premed') === -1) {
+      type = 'module';
+    } else if (href.indexOf('cases/') !== -1 || href.indexOf('adventure') !== -1) {
+      type = 'case';
+    } else if (href.indexOf('deep-dive') !== -1) {
+      type = 'deepDive';
+    } else if (href.indexOf('ai-trainer') !== -1 || href.indexOf('mentor-chat') !== -1) {
+      type = 'aiTutor';
+    }
+
+    if (!type) return; // Not gated content
+
+    var result = DxPlanGate.checkAccess(type, contentId);
+    if (!result.allowed) {
+      e.preventDefault();
+      e.stopPropagation();
+      DxPlanGate.showUpgradeModal(result);
+      return;
+    }
+
+    // Track usage for allowed access
+    if (!result.revisit) {
+      DxPlanGate.trackUsage(type, contentId);
+    }
+  }, true);
+
+  // 3. Add lock badges to deep dive and AI tutor links
+  setTimeout(function() {
+    document.querySelectorAll('a[href*="deep-dive"], a[href*="ai-trainer"], a[href*="mentor-chat"]').forEach(function(link) {
+      if (!link.querySelector('.pro-lock')) {
+        link.insertAdjacentHTML('beforeend', '<span class="pro-lock" style="margin-left:4px;">' + DxPlanGate.lockBadge() + '</span>');
+      }
+    });
+  }, 500);
+})();
+</script>
 </body>
 </html>

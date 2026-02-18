@@ -30,10 +30,8 @@
 const REFERRAL_CONFIG = {
     // Stripe Price IDs — replace with your actual IDs from Stripe Dashboard
     STRIPE_PRICES: {
-        pro_monthly:  'price_pro_monthly_placeholder',
-        pro_annual:   'price_pro_annual_placeholder',
-        beta_monthly: 'price_beta_monthly_placeholder',
-        beta_annual:  'price_beta_annual_placeholder'
+        pro_monthly:  'price_1SvpACDEGaZdouAQ6l2xx5D4',
+        pro_annual:   'price_1SynQRDEGaZdouAQ4ggXuvpj'
     },
 
     // Referral reward tiers

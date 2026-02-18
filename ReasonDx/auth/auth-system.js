@@ -379,7 +379,7 @@
                 .dx-modal-content p { color: #64748b; margin-bottom: 8px; }
                 .dx-modal-feature { font-weight: 600; color: #18181b !important; }
                 .dx-modal-buttons { display: flex; gap: 12px; margin-top: 24px; }
-                .dx-btn-primary { flex: 1; padding: 14px; background: #0f766e; color: white; border: none; border-radius: 10px; font-weight: 600; text-decoration: none; cursor: pointer; }
+                .dx-btn-primary { flex: 1; padding: 14px; background: #1f5f8b; color: white; border: none; border-radius: 10px; font-weight: 600; text-decoration: none; cursor: pointer; }
                 .dx-btn-secondary { flex: 1; padding: 14px; background: #f1f5f9; color: #64748b; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
             `;
             document.head.appendChild(style);

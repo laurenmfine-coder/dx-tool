@@ -113,7 +113,7 @@
             width: 52px;
             height: 52px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #0f766e, #115e59);
+            background: linear-gradient(135deg, #1f5f8b, #1a4971);
             border: none;
             color: white;
             font-size: 22px;
@@ -179,7 +179,7 @@
             background: #f1f5f9;
         }
         .dx-panel-item.active {
-            background: #ccfbf1;
+            background: #d4e8f7;
             font-weight: 600;
             color: #166534;
         }
@@ -195,7 +195,7 @@
             flex-shrink: 0;
         }
         .dx-panel-item.active .dx-nav-icon {
-            background: #99f6e4;
+            background: #a3cfe6;
         }
         .dx-panel-footer {
             border-top: 1px solid #f1f5f9;
@@ -203,7 +203,7 @@
         }
         .dx-panel-footer .dx-panel-item {
             font-weight: 500;
-            color: #0f766e;
+            color: #1f5f8b;
         }
     `;
     document.head.appendChild(style);

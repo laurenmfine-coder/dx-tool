@@ -200,7 +200,7 @@ function showSuccessMessage() {
     // You can customize this
     const banner = document.createElement('div');
     banner.innerHTML = `
-        <div style="position: fixed; top: 0; left: 0; right: 0; padding: 16px; background: #ccfbf1; color: #166534; text-align: center; z-index: 9999;">
+        <div style="position: fixed; top: 0; left: 0; right: 0; padding: 16px; background: #d4e8f7; color: #166534; text-align: center; z-index: 9999;">
             🎉 Welcome to Premium! Your subscription is now active.
             <button onclick="this.parentElement.remove()" style="margin-left: 16px; background: none; border: none; cursor: pointer; font-size: 18px;">×</button>
         </div>

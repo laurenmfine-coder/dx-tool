@@ -7,7 +7,7 @@
   const parts = path.split('/').filter(Boolean);
   const filename = parts[parts.length - 1] || 'index.html';
   let section = 'Home';
-  let sectionColor = '#0d9488';
+  let sectionColor = '#2874a6';
   
   if (path.includes('/modules/')) section = 'Modules';
   else if (path.includes('/cases/')) section = 'Cases';
@@ -39,18 +39,18 @@
         white-space: nowrap;
       }
       .dx-universal-nav .dx-nav-home {
-        color: #0d9488; font-weight: 700; font-size: 15px; margin-right: 4px;
+        color: #2874a6; font-weight: 700; font-size: 15px; margin-right: 4px;
       }
-      .dx-universal-nav .dx-nav-home:hover { background: #f0fdfa; }
+      .dx-universal-nav .dx-nav-home:hover { background: #f0f7fc; }
       .dx-nav-sep { color: #cbd5e1; font-size: 12px; }
       .dx-nav-section {
-        background: #f0fdfa; color: #0d9488; font-weight: 600; font-size: 12px;
+        background: #f0f7fc; color: #2874a6; font-weight: 600; font-size: 12px;
         padding: 4px 10px; border-radius: 12px;
       }
       .dx-nav-links { display: flex; gap: 2px; margin-left: auto; }
       .dx-nav-links a { color: #64748b; font-size: 12px; }
       .dx-nav-links a:hover { background: #f1f5f9; color: #1e293b; }
-      .dx-nav-links a.active { color: #0d9488; background: #f0fdfa; }
+      .dx-nav-links a.active { color: #2874a6; background: #f0f7fc; }
       @media (max-width: 640px) {
         .dx-universal-nav { padding: 0 10px; gap: 4px; }
         .dx-nav-links a span { display: none; }

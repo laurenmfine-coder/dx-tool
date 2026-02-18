@@ -387,7 +387,7 @@ const DxAITutor = (function() {
                 width: auto;
                 height: 48px;
                 padding: 0 20px;
-                background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+                background: linear-gradient(135deg, #1f5f8b 0%, #1a4971 100%);
                 border: none;
                 border-radius: 24px;
                 color: white;
@@ -448,7 +448,7 @@ const DxAITutor = (function() {
             
             /* Header */
             .tutor-header {
-                background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+                background: linear-gradient(135deg, #1f5f8b 0%, #1a4971 100%);
                 padding: 16px;
                 display: flex;
                 justify-content: space-between;
@@ -541,7 +541,7 @@ const DxAITutor = (function() {
             }
             
             .tutor-message.user .message-bubble {
-                background: #0f766e;
+                background: #1f5f8b;
                 color: white;
                 border-bottom-right-radius: 4px;
             }
@@ -576,7 +576,7 @@ const DxAITutor = (function() {
             .thinking-indicator .dot {
                 width: 8px;
                 height: 8px;
-                background: #0f766e;
+                background: #1f5f8b;
                 border-radius: 50%;
                 animation: bounce 1.4s infinite ease-in-out;
             }
@@ -635,14 +635,14 @@ const DxAITutor = (function() {
             }
             
             #tutor-input:focus {
-                border-color: #0f766e;
+                border-color: #1f5f8b;
             }
             
             #tutor-send-btn {
                 width: 44px;
                 height: 44px;
                 border: none;
-                background: #0f766e;
+                background: #1f5f8b;
                 border-radius: 12px;
                 color: white;
                 cursor: pointer;
@@ -654,7 +654,7 @@ const DxAITutor = (function() {
             }
             
             #tutor-send-btn:hover:not(:disabled) {
-                background: #115e59;
+                background: #1a4971;
             }
             
             #tutor-send-btn:disabled {

@@ -9,7 +9,7 @@
   gtag('js', new Date());
   gtag('config', 'G-EKCVJ1SMN3');
 </script>
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
@@ -24,10 +24,10 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100vh}
 .header{background:var(--rdx-bg-card);border-bottom:1px solid #e2e8f0;padding:16px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
-.header a{color:#0d9488;text-decoration:none;font-size:14px;font-weight:500}
+.header a{color:#2874a6;text-decoration:none;font-size:14px;font-weight:500}
 .header h1{font-family:var(--rdx-font-serif);font-size:24px}
 .container{max-width:1000px;margin:0 auto;padding:24px}
-.hero{background:linear-gradient(135deg,#0f766e,#0d9488);color:#fff;border-radius:20px;padding:32px;margin-bottom:28px;text-align:center}
+.hero{background:linear-gradient(135deg,#1f5f8b,#2874a6);color:#fff;border-radius:20px;padding:32px;margin-bottom:28px;text-align:center}
 .hero h2{font-family:var(--rdx-font-serif);font-size:28px;margin-bottom:4px}
 .hero p{opacity:.8;font-size:14px;margin-bottom:20px}
 .xp-bar{background:rgba(255,255,255,.2);height:16px;border-radius:8px;overflow:hidden;max-width:500px;margin:0 auto 8px}
@@ -36,7 +36,7 @@ body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100
 .level-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);padding:8px 20px;border-radius:20px;font-weight:700;font-size:18px;margin-bottom:16px}
 .badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px}
 .badge-card{background:var(--rdx-bg-card);border:2px solid #e2e8f0;border-radius:12px;padding:16px;text-align:center;transition:.2s}
-.badge-card.earned{border-color: #0f766e;background:#fffbeb}
+.badge-card.earned{border-color: #1f5f8b;background:#fffbeb}
 .badge-card .icon{font-size:36px;margin-bottom:8px}
 .badge-card.locked .icon{filter:grayscale(1);opacity:.4}
 .badge-card .name{font-weight:700;font-size:13px;margin-bottom:2px}
@@ -48,18 +48,18 @@ body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100
 .board-header{display:grid;grid-template-columns:50px 1fr 100px 100px 100px;padding:12px 16px;background:#f1f5f9;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
 .board-row{display:grid;grid-template-columns:50px 1fr 100px 100px 100px;padding:14px 16px;border-top:1px solid #f1f5f9;align-items:center;font-size:14px}
 .board-row:hover{background:#f8fafc}
-.board-row.you{background:#f0fdfa;font-weight:600}
+.board-row.you{background:#f0f7fc;font-weight:600}
 .rank{font-weight:700;color:#64748b}
 .rank.gold{color:#eab308}
 .rank.silver{color:#94a3b8}
 .rank.bronze{color:#b45309}
 .user-info{display:flex;align-items:center;gap:10px}
 .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
-.xp-small{font-weight:600;color:#0d9488}
-.streak-small{color: #0f766e;font-weight:600}
+.xp-small{font-weight:600;color:#2874a6}
+.streak-small{color: #1f5f8b;font-weight:600}
 .tabs{display:flex;gap:4px;margin-bottom:20px;background:#f1f5f9;border-radius:12px;padding:3px}
 .tab{flex:1;padding:8px;text-align:center;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;border:none;background:none;font-family:inherit;color:#64748b}
-.tab.active{background:var(--rdx-bg-card);color:#0d9488;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tab.active{background:var(--rdx-bg-card);color:#2874a6;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
@@ -180,7 +180,7 @@ body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100
     { name: 'Avery N.', base: 20 },
   ];
 
-  const colors = ['#ef4444','#f97316','#eab308','#22c55e','#14b8a6','#8b5cf6','#ec4899','#14b8a6','#f43f5e'];
+  const colors = ['#ef4444','#f97316','#eab308','#22c55e','#3a90c0','#8b5cf6','#ec4899','#3a90c0','#f43f5e'];
 
   function buildBoard(multiplier) {
     const students = simStudents.map(s => ({
@@ -215,7 +215,7 @@ body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100
     document.getElementById('boardRows').innerHTML = boardData.map((d, i) => {
       const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
       const initial = d.you ? '👤' : d.name.charAt(0);
-      const bgColor = d.you ? '#0d9488' : colors[simStudents.findIndex(s => s.name === d.name) % colors.length] || '#94a3b8';
+      const bgColor = d.you ? '#2874a6' : colors[simStudents.findIndex(s => s.name === d.name) % colors.length] || '#94a3b8';
       return '<div class="board-row ' + (d.you ? 'you' : '') + '" role="listitem">' +
         '<div class="rank ' + rankClass + '">' + (i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i + 1)) + '</div>' +
         '<div class="user-info">' +

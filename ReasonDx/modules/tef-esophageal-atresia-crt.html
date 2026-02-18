@@ -9,7 +9,7 @@
   gtag('js', new Date());
   gtag('config', 'G-EKCVJ1SMN3');
 </script>
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
@@ -28,7 +28,7 @@
 .card{background:var(--rdx-bg-card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px}.card-title{font-size:1.5rem;font-weight:700;margin-top:4px}.card-body{padding:24px}
 .narrative{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(251,191,36,.1));border-left:4px solid var(--rdx-teal);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.hl{background:rgba(245,158,11,.3);padding:2px 6px;border-radius:4px;font-weight:500}
 .vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:var(--rdx-bg-hover);padding:12px;border-radius:12px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}
-.choices{display:grid;gap:12px;margin-top:20px}.choice{background:var(--rdx-bg-card);border:2px solid var(--border);padding:16px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(16,185,129,.2);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.2);pointer-events:none}.choice-icon{font-size:1.5rem}.choice-title{font-weight:600}.choice-desc{font-size:.85rem;color:var(--muted)}
+.choices{display:grid;gap:12px;margin-top:20px}.choice{background:var(--rdx-bg-card);border:2px solid var(--border);padding:16px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s}.choice:hover{border-color:var(--accent);transform:translateX(4px)}.choice.correct{border-color:var(--success);background:rgba(22,163,74,.2);pointer-events:none}.choice.wrong{border-color:var(--danger);background:rgba(220,38,38,.2);pointer-events:none}.choice-icon{font-size:1.5rem}.choice-title{font-weight:600}.choice-desc{font-size:.85rem;color:var(--muted)}
 .teaching{background:var(--rdx-info-bg);border:1px solid var(--rdx-info);border-radius:12px;padding:16px;margin:20px 0}.teaching h4{color:var(--info);margin-bottom:8px}
 .alert{padding:16px;border-radius:12px;margin:20px 0;display:flex;gap:12px}.alert.info{background:var(--rdx-info-bg);border:1px solid var(--rdx-info)}.alert-icon{font-size:1.5rem}.alert-title{font-weight:600}
 .btn{padding:12px 24px;border-radius:12px;font-weight:600;cursor:pointer;border:none;font-size:1rem}.btn-primary{background:var(--accent);color:#fff}.btn:hover{opacity:.9}.hidden{display:none!important}
@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">Learn Hub</a> → <a href="../topics/tef-esophageal-atresia.html" style="color:var(--rdx-accent,#0f766e);text-decoration:none">TEF & Esophageal Atresia</a> → Module</div>
+<div style="padding:8px 16px;font-size:13px;color:var(--rdx-text-muted,#64748b)"><a href="index.html" style="color:var(--rdx-accent,#1f5f8b);text-decoration:none">Learn Hub</a> → <a href="../topics/tef-esophageal-atresia.html" style="color:var(--rdx-accent,#1f5f8b);text-decoration:none">TEF & Esophageal Atresia</a> → Module</div>
 
 <div class="header"><div class="header-row">
 <div class="header-title">👶 The Baby Who Can't Swallow<span class="badge">NEONATAL EMERGENCY</span></div>
@@ -150,8 +150,8 @@ function pick(el,sn){
   if(correct){score+=100;document.getElementById('score').textContent=score;try{var cs=JSON.parse(localStorage.getItem('crtScores')||'{}');if(!cs[crtId])cs[crtId]={attempts:0,best:0,last:null};cs[crtId].last=new Date().toISOString();var pts=score/100;if(pts>cs[crtId].best)cs[crtId].best=pts;localStorage.setItem('crtScores',JSON.stringify(cs))}catch(e){}}
   if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}
   const fbDiv=document.getElementById('fbText'+sn);
-  fbDiv.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';
-  fbDiv.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');
+  fbDiv.style.background=correct?'rgba(22,163,74,.15)':'rgba(220,38,38,.15)';
+  fbDiv.style.border='1px solid '+(correct?'rgba(22,163,74,.3)':'rgba(220,38,38,.3)');
   fbDiv.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;
   document.getElementById('fb'+sn).classList.remove('hidden');
 }

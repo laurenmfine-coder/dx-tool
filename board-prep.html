@@ -1211,11 +1211,84 @@ initializeUI();
          data-specialty="Board Prep"
          style="display:none;"></div>
 <script src="data/rdx-persist.js"></script>
+<script src="dx-plan-gate.js"></script>
 <script src="./js/rdx-nav.js"></script>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 </script>
 <script src="js/rdx-help-widget.js"></script>
+<script>
+// ============================================
+// PLAN GATING — Board Prep Integration
+// ============================================
+(function() {
+  if (typeof DxPlanGate === 'undefined') return;
+  if (DxPlanGate.isPro()) return;
+
+  var summary = DxPlanGate.getUsageSummary();
+  var mcqsLeft = summary.mcqs.limit - summary.mcqs.used;
+
+  // Show usage banner on start screen
+  var startScreen = document.getElementById('startScreen');
+  if (startScreen) {
+    var banner = document.createElement('div');
+    banner.style.cssText = 'margin:16px 0;padding:14px 20px;background:white;border:1px solid #e2e8f0;border-radius:12px;text-align:center;font-size:14px;color:#475569;';
+    if (mcqsLeft <= 0) {
+      banner.innerHTML = '<strong style="color:#dc2626;">You\'ve used all ' + summary.mcqs.limit + ' free questions.</strong><br><a href="auth/register.html" style="color:#2874A6;font-weight:600;">Upgrade to Pro</a> for unlimited access to all 615 questions.';
+    } else {
+      banner.innerHTML = '<strong style="color:#1e3a5f;">Free Plan:</strong> ' + mcqsLeft + ' of ' + summary.mcqs.limit + ' questions remaining. <a href="auth/register.html" style="color:#2874A6;font-weight:600;">Upgrade to Pro &rarr;</a>';
+    }
+    var modeSection = startScreen.querySelector('.mode-options') || startScreen.firstElementChild;
+    if (modeSection) startScreen.insertBefore(banner, modeSection);
+  }
+
+  // Wrap startQuiz to enforce MCQ limit
+  var origStartQuiz = window.startQuiz;
+  window.startQuiz = function() {
+    var result = DxPlanGate.checkAccess('mcq');
+    if (!result.allowed) {
+      DxPlanGate.showUpgradeModal(result);
+      return;
+    }
+
+    // Limit question count to remaining quota
+    origStartQuiz.apply(this, arguments);
+
+    // After quiz starts, cap questions at remaining quota
+    if (typeof state !== 'undefined' && state.questions) {
+      var remaining = DxPlanGate.LIMITS.mcqs - (DxPlanGate.getUsageSummary().mcqs.used);
+      if (state.questions.length > remaining) {
+        state.questions = state.questions.slice(0, Math.max(1, remaining));
+        if (document.getElementById('totalQ')) {
+          document.getElementById('totalQ').textContent = state.questions.length;
+        }
+        buildGrid();
+      }
+    }
+  };
+
+  // Track each question answered
+  var origSubmitOrNext = window.submitOrNext;
+  window.submitOrNext = function() {
+    // Track before submitting
+    if (typeof state !== 'undefined' && state.answers && state.answers[state.currentQuestion] !== undefined) {
+      if (!state.submitted || !state.submitted[state.currentQuestion]) {
+        DxPlanGate.trackUsage('mcq');
+        
+        // Check if they've now hit the limit
+        var newResult = DxPlanGate.checkAccess('mcq');
+        if (!newResult.allowed && state.currentQuestion < state.questions.length - 1) {
+          // Let them see the answer for this question, then end the session
+          setTimeout(function() {
+            DxPlanGate.showUpgradeModal(newResult);
+          }, 2000);
+        }
+      }
+    }
+    origSubmitOrNext.apply(this, arguments);
+  };
+})();
+</script>
 </body>
 </html>
 
