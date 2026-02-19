@@ -396,7 +396,7 @@
                         <div class="password-strength"><div class="bar" id="strengthBar1"></div><div class="bar" id="strengthBar2"></div><div class="bar" id="strengthBar3"></div><div class="bar" id="strengthBar4"></div></div>
                     </div>
                     <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter password"></div>
-                    <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label></div>
+                    <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the <a href="terms.html" target="_blank" style="color:#2874A6; text-decoration:underline;">Terms of Service</a> and <a href="privacy.html" target="_blank" style="color:#2874A6; text-decoration:underline;">Privacy Policy</a></label></div>
                     <button type="button" class="btn btn-primary" onclick="createAccount()">Create Account</button>
                 </div>
 
@@ -492,16 +492,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../dx-progress.js"></script>
-  <script src="email-service.js"></script>
     <script>
         // ============================================
         // CONFIGURATION
         // ============================================
         const CONFIG = {
             GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
-            STRIPE_PUBLIC_KEY: 'pk_live_51SbAuvDEGaZdouAQBZQjWwMc449xCuIMfYjqWBRHm30OQDQ73omSpXgBrtPMbBtLaNUFVJuIaFVYFdDzAk5beHqX000iJ04kjk',
-            STRIPE_PRICE_MONTHLY: 'price_1T21xA1MnPQG4LfN6EXHi4qU',
-            STRIPE_PRICE_ANNUAL: 'price_1T22141MnPQG4LfNFdajhzsI',
+            STRIPE_PUBLIC_KEY: 'pk_live_51T2KKACQYcGAAnaNsFyEw9c72eZpXTI2hjidIv9FLlYt5rsmyXWLAtEqk4dDwa9rHvpdYUXlXM2MnfXIaK6qeCAY002Za1ZPfl',
+            STRIPE_PRICE_MONTHLY: 'price_1T2LFTCQYcGAAnaN9s9isvzR',
+            STRIPE_PRICE_ANNUAL: 'price_1T2LGkCQYcGAAnaNbAV6gUDO',
             DEMO_MODE: false,
             PRO_MONTHLY: 14.99,
             PRO_ANNUAL: 99.00,
@@ -830,7 +829,7 @@
 
                 var baseUrl = window.location.origin + window.location.pathname;
 
-                var response = await fetch('/api/create-checkout-session', {
+                var response = await fetch('https://lpwbiqpojisqgezycupw.supabase.co/functions/v1/create-checkout', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -847,7 +846,6 @@
                     throw new Error(data.error || 'Failed to create checkout session');
                 }
 
-                // Redirect to Stripe Checkout
                 window.location.href = data.url;
 
             } catch (error) {
@@ -902,7 +900,7 @@
             } catch(e) { console.log('Supabase not available, localStorage auth only'); }
 
             // Initialize the unified progress engine with profile data
-            if (window.DxProgress) {
+            if (window.DxProgress && typeof window.DxProgress.syncProfile === 'function') {
                 window.DxProgress.syncProfile();
             }
 
@@ -929,10 +927,10 @@
             if (state.selectedPlan === 'pro') {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro!';
                 var s = window.RdxSiteStats || {};
-                document.getElementById('successMessage').textContent = 'Full access to all ' + (s.topicsDisplay || '297') + ' topics, ' + (s.mcqsDisplay || '2,900+') + ' MCQs, and AI tutor is now unlocked.';
+                document.getElementById('successMessage').innerHTML = 'Full access to all ' + (s.topicsDisplay || '297') + ' topics, ' + (s.mcqsDisplay || '2,900+') + ' MCQs, and AI tutor is now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             } else {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx!';
-                document.getElementById('successMessage').textContent = 'Your free account is ready. Explore board-prep content and upgrade anytime.';
+                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Explore board-prep content and upgrade anytime.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             }
             showSection('sectionSuccess');
         }
@@ -1126,8 +1124,8 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closePopup();
 });
 
-// Show popup after 30 seconds
-setTimeout(showPopup, 30000);
+// Show popup after 10 seconds
+setTimeout(showPopup, 10000);
 </script>
 </body>
 </html>
