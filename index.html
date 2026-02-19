@@ -13,19 +13,26 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReasonDx — Clinical Reasoning Platform</title>
-<meta name="description" content="ReasonDx: Interactive clinical reasoning education platform for medical students. 316 topics, 400+ modules, 344+ Cases, and 615 board-prep questions across all specialties.">
+<meta name="description" content="ReasonDx: AI-powered clinical reasoning trainer for medical students. Practice diagnostic thinking, SBAR communication, and get personalized coaching across 323 cases and 29 specialties.">
 <meta property="og:title" content="ReasonDx — Clinical Reasoning Platform">
-<meta property="og:description" content="ReasonDx: Interactive clinical reasoning education platform for medical students. 316 topics, 400+ modules, 320+ cases, and 615 board-prep questions across all specialties.">
+<meta property="og:description" content="ReasonDx: AI-powered clinical reasoning trainer. Build differentials, practice SBAR handoffs, and get personalized coaching across 323 cases and 29 specialties.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ═══ LAUNCH VISUAL REFRESH ═══
+   Matches walkthrough + Flodesk editorial tone:
+   - Fraunces display, DM Sans body
+   - Muted ocean palette, lots of breathing room
+   - Soft shadows, calm card treatments
+   ═══════════════════════════════ */
 
 
 
@@ -47,8 +54,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--white);
-  border-bottom: 1px solid var(--slate-200);
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid #E2E8F0;
   padding: 0 24px;
   height: 56px;
   display: flex;
@@ -57,11 +66,12 @@ body {
 }
 
 .nav-brand {
-  font-family:var(--rdx-font-serif);
+  font-family: 'Fraunces', Georgia, serif;
   font-size: 20px;
-  color: var(--teal-dark);
+  color: #1B4F72;
   text-decoration: none;
   letter-spacing: -0.3px;
+  font-weight: 700;
 }
 
 .nav-links {
@@ -87,25 +97,27 @@ body {
    HERO — Search-first
    ============================================ */
 .hero {
-  padding: 80px 24px 48px;
+  padding: 72px 24px 44px;
   text-align: center;
-  background: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
 }
 
 .hero h1 {
-  font-family:var(--rdx-font-serif);
-  font-size: clamp(28px, 5vw, 44px);
-  color: var(--slate-900);
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(28px, 5vw, 42px);
+  color: #1E293B;
   letter-spacing: -0.5px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-weight: 400;
+  line-height: 1.25;
 }
 
 .hero p {
-  font-size: 17px;
-  color: var(--slate-500);
-  max-width: 500px;
-  margin: 0 auto 36px;
+  font-size: 16px;
+  color: #64748B;
+  max-width: 520px;
+  margin: 0 auto 32px;
+  line-height: 1.65;
 }
 
 .search-wrap {
@@ -126,21 +138,21 @@ body {
 
 .search-input {
   width: 100%;
-  padding: 16px 20px 16px 50px;
-  font-size: 17px;
+  padding: 14px 20px 14px 48px;
+  font-size: 16px;
   font-family: inherit;
-  border: 2px solid var(--slate-200);
-  border-radius: 16px;
-  background: var(--white);
-  color: var(--slate-800);
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: #1E293B;
   outline: none;
   transition: all 0.2s;
-  box-shadow: var(--shadow);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .search-input:focus {
-  border-color: var(--teal);
-  box-shadow: 0 0 0 4px rgba(40, 116, 166, 0.1), var(--shadow-md);
+  border-color: #2874A6;
+  box-shadow: 0 0 0 3px rgba(40, 116, 166, 0.08), 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .search-input::placeholder { color: var(--slate-400); }
@@ -231,64 +243,64 @@ body {
 .paths {
   max-width: 960px;
   margin: 0 auto;
-  padding: 16px 24px 64px;
+  padding: 8px 24px 56px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .path-card {
-  background: var(--white);
-  border: 1px solid var(--slate-200);
-  border-radius: var(--radius);
-  padding: 28px 24px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 24px 20px;
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
 }
 
 .path-card:hover {
-  border-color: var(--teal);
-  box-shadow: var(--shadow-md);
+  border-color: #BFD7EA;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
   transform: translateY(-2px);
 }
 
 .path-icon {
   width: 44px;
   height: 44px;
-  border-radius:12px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-size: 22px;
 }
 
-.path-icon.learn { background: #ede9fe; }
-.path-icon.practice { background: #d4e8f7; }
-.path-icon.test { background: #d4e8f7; }
-.path-icon.tools { background: #fef3c7; }
+.path-icon.learn { background: #D4E6F1; }
+.path-icon.practice { background: #D4E6F1; }
+.path-icon.test { background: #EDE9FE; }
+.path-icon.tools { background: #D1FAE5; }
 
 .path-card h3 {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--slate-900);
+  margin-bottom: 5px;
+  color: #1E293B;
 }
 
 .path-card p {
-  font-size: 14px;
-  color: var(--slate-500);
-  line-height: 1.5;
+  font-size: 13.5px;
+  color: #64748B;
+  line-height: 1.55;
   margin-bottom: 12px;
 }
 
 .path-count {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--teal-dark);
+  color: #2874A6;
   letter-spacing: 0.3px;
   text-transform: uppercase;
 }
@@ -845,13 +857,13 @@ body {
 </script>
 </head>
 <body>
-<!-- Mastery Dashboard CTA -->
+<!-- Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
-  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(40,116,166,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(40,116,166,0.08),rgba(40,116,166,0.04));border:1px solid rgba(40,116,166,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(40,116,166,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
     <div style="font-size:28px;flex-shrink:0;">📊</div>
     <div style="flex:1;min-width:0;">
-      <div style="font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);font-size:15px;margin-bottom:2px;">Your Learning Dashboard & Content Mastery Fingerprint</div>
-      <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your progress across all topics, see your reasoning strengths, and review with spaced repetition</div>
+      <div style="font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);font-size:15px;margin-bottom:2px;">Your Reasoning Dashboard & Fingerprint</div>
+      <div style="color:var(--rdx-text-muted,#64748b);font-size:13px;">Track your clinical reasoning progress, see your strengths, and identify growth areas</div>
     </div>
     <div style="color:var(--rdx-teal,#2874a6);font-size:20px;flex-shrink:0;">→</div>
   </a>
@@ -861,20 +873,21 @@ body {
 
 <!-- nav removed: unified via rdx-nav.js -->
 
-<!-- HERO — Search-first -->
+<!-- HERO — Launch version -->
 <section class="hero">
-  <h1>What do you want to study?</h1>
-  <p>Search 316 clinical topics, each with interactive cases, review modules, and study guides.</p>
+  <h1>Learn to <em style="font-style:italic;color:#2874A6">reason</em>. Communicate it. Grow.</h1>
+  <p>Train your clinical thinking with AI-powered cases, structured SBAR communication, and personalized coaching across 29 specialties.</p>
   
   <div class="search-wrap">
     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" class="search-input" id="searchInput" placeholder="Search topics — sepsis, DKA, anaphylaxis..." autocomplete="off">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search cases — sepsis, DKA, chest pain, anaphylaxis..." autocomplete="off">
     <div class="search-results" id="searchResults"></div>
   </div>
-  <div class="search-hint">Try: <kbd>sepsis</kbd> <kbd>heart failure</kbd> <kbd>meningitis</kbd> <kbd>DKA</kbd> <kbd>stroke</kbd></div>
+  <div class="search-hint">Try: <kbd>sepsis</kbd> <kbd>heart failure</kbd> <kbd>chest pain</kbd> <kbd>DKA</kbd> <kbd>stroke</kbd></div>
 </section>
 
-<!-- STUDENT LEVEL SELECTOR -->
+<!-- STUDENT LEVEL SELECTOR — hidden for launch -->
+<!--
 <section class="level-selector">
   <div class="level-label">I'm studying for:</div>
   <div class="level-pills">
@@ -885,59 +898,61 @@ body {
     <button class="level-pill" onclick="setLevel('m4', this)" data-level="m4">Step 2 / COMLEX</button>
   </div>
 </section>
+-->
 
-<!-- 4 PATHS -->
+<!-- 4 PATHS — Launch: Train / SBAR / Coach / Dashboard -->
 <section class="paths">
-  <a href="#" class="path-card" onclick="openPath('learn'); return false;">
-    <div class="path-icon learn">📖</div>
-    <h3>Learn</h3>
-    <p>Topic reviews that build pathophysiology understanding from the ground up</p>
-    <span class="path-count">400+ modules</span>
+  <a href="modules/training.html" class="path-card">
+    <div class="path-icon practice">🧠</div>
+    <h3>Train</h3>
+    <p>Build differentials, interview AI patients, and refine your diagnostic reasoning</p>
+    <span class="path-count">Clinical Reasoning Trainer</span>
   </a>
   
-  <a href="#" class="path-card" onclick="openPath('practice'); return false;">
-    <div class="path-icon practice">🩺</div>
-    <h3>Practice Cases</h3>
-    <p>Interactive clinical scenarios where your decisions shape patient outcomes</p>
-    <span class="path-count">320+ cases</span>
+  <a href="#" class="path-card" onclick="openPath('sbar'); return false;">
+    <div class="path-icon tools">📋</div>
+    <h3>Communicate</h3>
+    <p>Practice structured SBAR handoffs and get AI-scored feedback on your presentations</p>
+    <span class="path-count">SBAR Practice</span>
   </a>
   
-  <a href="#" class="path-card" onclick="openPath('test'); return false;">
-    <div class="path-icon test">📝</div>
-    <h3>Test Yourself</h3>
-    <p>Board-style questions, quizzes, and ECG practice for exam readiness</p>
-    <span class="path-count">615 questions</span>
+  <a href="CoachDx/index.html" class="path-card">
+    <div class="path-icon learn">🗣️</div>
+    <h3>Coach</h3>
+    <p>Reflect on your reasoning with an AI coach that identifies patterns and growth areas</p>
+    <span class="path-count">CoachDx</span>
   </a>
   
-  <a href="#" class="path-card" onclick="openPath('tools'); return false;">
-    <div class="path-icon tools">🛠️</div>
-    <h3>Quick Tools</h3>
-    <p>Calculators, ECG practice, and clinical reference at your fingertips</p>
-    <span class="path-count">10 tools</span>
+  <a href="tools/learning-dashboard.html" class="path-card">
+    <div class="path-icon test">📊</div>
+    <h3>Dashboard</h3>
+    <p>Track your progress, view your Reasoning Fingerprint, and see how you're growing</p>
+    <span class="path-count">Analytics + RPFS</span>
   </a>
 </section>
 
-<!-- STATS -->
+<!-- STATS — Launch metrics -->
 <section class="stats-bar">
   <div class="stat">
-    <div class="stat-number">316</div>
-    <div class="stat-label">Topics</div>
+    <div class="stat-number">323</div>
+    <div class="stat-label">Reasoning Cases</div>
   </div>
   <div class="stat">
-    <div class="stat-number">400+</div>
-    <div class="stat-label">Modules</div>
+    <div class="stat-number">29</div>
+    <div class="stat-label">Specialties</div>
   </div>
   <div class="stat">
-    <div class="stat-number">320+</div>
-    <div class="stat-label">Cases</div>
+    <div class="stat-number">13</div>
+    <div class="stat-label">SBAR Scenarios</div>
   </div>
   <div class="stat">
-    <div class="stat-number">211</div>
-    <div class="stat-label">Study Guides</div>
+    <div class="stat-number">AI</div>
+    <div class="stat-label">Coaching</div>
   </div>
 </section>
 
-<!-- POPULAR TOPICS -->
+<!-- POPULAR TOPICS — hidden for launch -->
+<!--
 <section class="section">
   <div class="section-header">
     <h2>Popular Topics</h2>
@@ -951,8 +966,10 @@ body {
   
   <div class="topic-grid" id="popularTopics"></div>
 </section>
+-->
 
-<!-- BROWSE BY SPECIALTY -->
+<!-- BROWSE BY SPECIALTY — hidden for launch -->
+<!--
 <section class="section">
   <div class="section-header">
     <h2>Browse by Specialty</h2>
@@ -961,12 +978,13 @@ body {
   <div class="specialty-pills" id="specialtyPills"></div>
   <div class="topic-grid" id="specialtyTopics"></div>
 </section>
+-->
 
 <!-- EMAIL SIGNUP -->
 <section class="email-signup" id="emailSignup">
   <div class="signup-inner">
-    <h2>Stay Sharp Between Cases</h2>
-    <p>Get weekly clinical reasoning tips, new case announcements, and study strategies — straight from a physician-educator who's been where you are.</p>
+    <h2>Sharpen Your Clinical Reasoning</h2>
+    <p>Get weekly reasoning tips, new case announcements, and strategies to think like a clinician — from a physician-educator who's been where you are.</p>
     <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
       <input type="text" id="signupName" placeholder="First name" required>
       <input type="email" id="signupEmail" placeholder="Email address" required>
@@ -980,8 +998,8 @@ body {
 <div class="email-popup-overlay" id="emailPopup">
   <div class="email-popup">
     <button class="popup-close" onclick="closePopup()">&times;</button>
-    <h3>Don't miss what's next</h3>
-    <p>Weekly clinical reasoning tips & new case alerts — built for students like you.</p>
+    <h3>Level up your reasoning</h3>
+    <p>Weekly clinical reasoning tips & new case alerts — built for students who want to think like clinicians.</p>
     <form class="popup-form" onsubmit="handleSignup(event)">
       <input type="text" class="popup-input" placeholder="First name" required>
       <input type="email" class="popup-input" placeholder="Email address" required>
@@ -3319,35 +3337,17 @@ function doSearch() {
   if (q.length < 2) { searchResults.classList.remove('open'); return; }
   
   const matches = TOPICS.filter(t => 
-    t.t.toLowerCase().includes(q) || (t.tags && t.tags.toLowerCase().includes(q))
+    !t.premed && (t.a) && (t.t.toLowerCase().includes(q) || (t.tags && t.tags.toLowerCase().includes(q)))
   ).slice(0, 10);
   
   if (matches.length === 0) {
-    searchResults.innerHTML = '<div class="search-empty">No topics found for "' + q + '"</div>';
+    searchResults.innerHTML = '<div class="search-empty">No cases found for "' + q + '"</div>';
   } else {
     searchResults.innerHTML = matches.map(t => {
       let links = '';
-      const isPremed = t.premed;
-      if (isPremed) {
-        links += `<a href="${t.m}" class="tag-review" style="background:#f0f7fc;color:#1f5f8b" onclick="event.stopPropagation()">Open Module</a>`;
-        links += `<a href="modules/premed-hub.html" class="tag-guide" style="background:#d4e8f7;color:#1f5f8b" onclick="event.stopPropagation()">Premed Hub</a>`;
-      } else {
-        if (t.m) links += `<a href="${t.m}" class="tag-review" onclick="event.stopPropagation()">Topic Review</a>`;
-        if (t.a) links += `<a href="${t.a}" class="tag-case" onclick="event.stopPropagation()">Interactive Case</a>`;
-        if (t.d) links += `<a href="deep-dive-player.html?file=${t.d}" class="tag-guide" onclick="event.stopPropagation()">Study Guide</a>`;
-      }
-      // Level-aware hint
-      let levelHint = '';
-      if (isPremed) {
-        levelHint = '<span style="font-size:10px;padding:2px 8px;border-radius:12px;background:#f0f7fc;color:#1f5f8b;font-weight:600;margin-left:6px;vertical-align:middle">PREMED</span>';
-      } else if (currentLevel !== 'all' && currentLevel !== 'premed') {
-        const lvl = currentLevel;
-        const tips = { m2: 'Start with Topic Review', m3: 'Try the Interactive Case', m4: 'Board-focused review' };
-        const labels = { m2: 'PATHOPHYS', m3: 'SHELF', m4: 'STEP 2' };
-        levelHint = `<span class="level-badge-tag ${lvl}" style="font-size:10px;margin-left:6px;vertical-align:middle">${labels[lvl]}: ${tips[lvl]}</span>`;
-      }
-      return `<div class="search-result" onclick="window.location.href='${t.p || t.m || t.a || ''}'">
-        <div class="search-result-title">${highlightMatch(t.t, q)} <span style="font-size:11px;color:var(--slate-400);font-weight:400">${t.c} resource${t.c > 1 ? "s" : ""}</span>${levelHint}</div>
+      if (t.a) links += `<a href="${t.a}" class="tag-case" onclick="event.stopPropagation()">Interactive Case</a>`;
+      return `<div class="search-result" onclick="window.location.href='${t.a || ''}'">
+        <div class="search-result-title">${highlightMatch(t.t, q)} <span style="font-size:11px;color:var(--slate-400);font-weight:400">case</span></div>
         <div class="search-result-links">${links}</div>
       </div>`;
     }).join('');
@@ -3423,57 +3423,22 @@ function selectSpecialty(spec, el) {
 // PATH OVERLAYS
 // ============================================
 const pathContent = {
-  learn: {
-    title: 'Learn',
-    desc: 'Build pathophysiology understanding with structured topic reviews',
+  // Launch version: only SBAR uses overlay. Train/Coach/Dashboard link directly.
+  sbar: {
+    title: 'SBAR Communication',
+    desc: 'Practice structured clinical handoffs with AI-scored feedback',
     items: [
-      { icon: '⚙️', bg: '#ede9fe', title: 'Pathophysiology Modules', desc: '220 structured topic reviews covering mechanism-based learning', href: 'modules/index.html', levels: ['m2','m3','m4'] },
-      { icon: '📖', bg: '#d4e8f7', title: 'Study Guides', desc: '211 deep-dive guides with layered pathophysiology', href: 'deep-dive-hub.html', levels: ['m2','m3'] },
-      { icon: '🧬', bg: '#fce7f3', title: 'Embryology', desc: 'Developmental biology modules across 8 organ systems', href: 'modules/gi-embryology-module.html', levels: ['m2'] },
-    ]
-  },
-  practice: {
-    title: 'Practice Cases',
-    desc: 'Apply your knowledge to interactive clinical scenarios',
-    items: [
-      { icon: '🎮', bg: '#d4e8f7', title: 'Interactive Cases', desc: '239 branching scenarios where your decisions shape outcomes', href: 'adventure-hub.html', levels: ['m2','m3','m4'] },
-      { icon: '🧠', bg: '#d4e8f7', title: 'Clinical Reasoning Trainer', desc: '323 cases across 29 specialties with step-by-step reasoning', href: 'modules/training.html', levels: ['m3','m4'] },
-      { icon: '🗣️', bg: '#fef3c7', title: 'AI Coach Sessions', desc: 'Socratic dialogue with an AI attending physician', href: 'CoachDx/index.html', levels: ['m3','m4'] },
-    ]
-  },
-  test: {
-    title: 'Test Yourself',
-    desc: 'Assess your readiness for boards and shelf exams',
-    items: [
-      { icon: '📝', bg: '#d4e8f7', title: 'Board Review Questions', desc: '615 USMLE/COMLEX-style questions organized by specialty', href: 'board-prep.html', levels: ['m3','m4'] },
-      { icon: '💓', bg: '#fee2e2', title: 'ECG Quiz', desc: 'Rhythm interpretation practice with instant feedback', href: 'ecg/ecg-quiz.html', levels: ['m2','m3','m4'] },
-      { icon: '📊', bg: '#ede9fe', title: 'Board Coverage Tracker', desc: 'See your mastery across specialties and topics', href: 'board-prep-coverage.html', levels: ['m4'] },
-    ]
-  },
-  tools: {
-    title: 'Quick Tools',
-    desc: 'Clinical utilities, calculators, and study aids at your fingertips',
-    items: [
-      { icon: '🧮', bg: '#f0f7fc', title: 'Calculator Hub', desc: 'ABG analyzer, anion gap, eGFR, MELD-Na & more', href: 'tools/calculator-hub.html', levels: ['m2','m3','m4'] },
-      { icon: '🔍', bg: '#fce7f3', title: 'DDx Builder', desc: 'Build ranked differentials from symptoms', href: 'tools/ddx-builder.html', levels: ['m3','m4'] },
-      { icon: '📇', bg: '#d4e8f7', title: 'Flashcard Studio', desc: 'Spaced repetition flashcards with pre-built decks', href: 'tools/flashcard-studio.html', levels: ['m2','m3'] },
-      { icon: '📋', bg: '#fef3c7', title: 'EPA Dashboard', desc: 'Track entrustable professional activities', href: 'tools/epa-dashboard.html', levels: ['m3','m4'] },
-      { icon: '📊', bg: '#d4e8f7', title: 'Learning Dashboard', desc: 'Progress tracking and learning fingerprint', href: 'tools/learning-dashboard.html', levels: ['m3','m4'] },
-      { icon: '🏆', bg: '#fae8ff', title: 'Scoreboard', desc: 'XP, achievements, and leaderboard', href: 'tools/scoreboard.html', levels: ['m2','m3','m4'] },
-      { icon: '💓', bg: '#fee2e2', title: 'ECG Generator', desc: 'Generate and study ECG rhythm strips', href: 'ecg/ecg-generator.html', levels: ['m2','m3','m4'] },
-      { icon: '📈', bg: '#f0f7fc', title: 'ECG Viewer', desc: 'Interactive ECG waveform analysis', href: 'ecg/ecg-viewer.html', levels: ['m2','m3','m4'] },
-      { icon: '🔬', bg: '#d4e8f7', title: 'Predict Labs', desc: 'Predict lab values from clinical presentations', href: 'predict-labs-library.html', levels: ['m3','m4'] },
-      { icon: '📝', bg: '#fff7ed', title: 'Guidelines Audit', desc: 'Evidence-based guideline update tracker', href: 'guidelines-audit.html', levels: ['m4'] },
+      { icon: '📞', bg: '#fef3c7', title: 'Consult Trainer (13 Scenarios)', desc: 'Practice calling consults with realistic ED, floor, and ICU settings', href: 'consult-trainer.html', levels: ['m3','m4'] },
+      { icon: '🩺', bg: '#d4e8f7', title: 'CoachDx SBAR: Pediatric Urology', desc: 'Structured SBAR practice for pediatric urology scenarios', href: 'topics/pediatric-urology-sbar.html', levels: ['m3','m4'] },
+      { icon: '🏥', bg: '#d4e8f7', title: 'CoachDx SBAR: Urology Essentials', desc: 'SBAR communication practice for core urology presentations', href: 'topics/urology-sbar-collection.html', levels: ['m3','m4'] },
     ]
   }
 };
 
 function openPath(key) {
   const data = pathContent[key];
+  if (!data) return;
   const panel = document.getElementById('pathPanel');
-  const guidance = currentLevel !== 'all' ? LEVEL_GUIDANCE[currentLevel] : null;
-  
-  const levelHint = guidance ? `<div style="padding:10px 16px;background:#f0f7fc;border:1px solid #a3cfe6;border-radius:8px;margin-bottom:16px;font-size:13px;color:#1f5f8b"><strong>${guidance.title}:</strong> ${guidance.pathDescs[key] || ''}</div>` : '';
   
   panel.innerHTML = `
     <div class="path-panel-header">
@@ -3484,22 +3449,16 @@ function openPath(key) {
       <button class="close-btn" onclick="closePath()">✕</button>
     </div>
     <div class="path-panel-body">
-      ${levelHint}
-      ${data.items.map(item => {
-        const isRecommended = !guidance || (item.levels && item.levels.includes(currentLevel)) || (guidance.recommended && guidance.recommended.includes(item.title));
-        const dimStyle = guidance && !isRecommended ? 'opacity:0.45;' : '';
-        const levelLabels = {m2:'PATHOPHYS',m3:'SHELF',m4:'STEP 2'};
-        const badge = guidance && isRecommended && item.levels ? '<span class="level-badge-tag ' + currentLevel + '">' + (levelLabels[currentLevel] || currentLevel.toUpperCase()) + '</span>' : '';
-        return `
-        <a href="${item.href}" class="path-item" style="${dimStyle}">
+      ${data.items.map(item => `
+        <a href="${item.href}" class="path-item">
           <div class="path-item-icon" style="background:${item.bg}">${item.icon}</div>
           <div>
-            <div class="path-item-title">${item.title}${badge}</div>
+            <div class="path-item-title">${item.title}</div>
             <div class="path-item-desc">${item.desc}</div>
           </div>
           <span class="path-item-arrow">→</span>
         </a>
-      `}).join('')}
+      `).join('')}
     </div>
   `;
   document.getElementById('pathOverlay').classList.add('open');
@@ -3603,8 +3562,8 @@ function setLevel(level, el) {
   // NON-PREMED — restore normal paths
   pathsSection.style.display = '';
   if (premedSection) premedSection.style.display = 'none';
-  document.querySelector('.hero h1').textContent = 'What do you want to study?';
-  document.querySelector('.hero p').textContent = 'Search 316 clinical topics, each with interactive cases, review modules, and study guides.';
+  document.querySelector('.hero h1').textContent = 'What do you want to work on?';
+  document.querySelector('.hero p').textContent = 'Search 323 clinical reasoning cases across 29 specialties.';
   
   // Update path card descriptions based on level
   if (level !== 'all') {
@@ -3619,7 +3578,7 @@ function setLevel(level, el) {
     });
   } else {
     // Reset to default descriptions
-    const defaults = ['Topic reviews that build pathophysiology understanding from the ground up', 'Interactive clinical scenarios where your decisions shape patient outcomes', 'Board-style questions, quizzes, and ECG practice for exam readiness', 'Calculators, ECG practice, and clinical reference at your fingertips'];
+    const defaults = ['Build differentials, interview AI patients, and refine your diagnostic reasoning', 'Practice structured SBAR communication with real clinical scenarios', 'Get AI coaching debriefs on your reasoning patterns and growth areas', 'Track your progress, Reasoning Fingerprint, and session history'];
     document.querySelectorAll('.paths .path-card').forEach((card, i) => {
       const desc = card.querySelector('p');
       if (desc) desc.textContent = defaults[i];
@@ -3628,12 +3587,11 @@ function setLevel(level, el) {
 }
 
 // ============================================
-// INIT
+// INIT — Launch version (topics/specialty browsing disabled)
 // ============================================
-renderPopular();
-renderSpecialties();
-// Auto-select first specialty
-document.querySelector('.specialty-pill')?.click();
+// renderPopular();    // hidden for launch
+// renderSpecialties(); // hidden for launch
+// document.querySelector('.specialty-pill')?.click();
 </script>
 
 <script>
@@ -3766,13 +3724,15 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 })();
 </script>
 
-<!-- Additional Tools -->
+<!-- Additional Tools — hidden for launch -->
+<!--
 <div style="max-width:900px;margin:24px auto;padding:0 20px;">
   <h3 style="font-family:var(--rdx-font-serif);font-size:1.1rem;color:var(--rdx-teal-dark,#1f5f8b);margin-bottom:10px;">Additional Tools</h3>
   <div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="study-mode.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">📖 Study Mode</a>
 <a href="validation-roadmap.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;">🗺️ Validation Roadmap</a>
 </div>
 </div>
+-->
 <script src="js/rdx-help-widget.js"></script>
 <!-- Email Signup & Popup Logic -->
 <script>
@@ -3825,27 +3785,25 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
 <script src="dx-plan-gate.js"></script>
 <script>
 // ============================================
-// PLAN GATING — Study Hub Integration
+// PLAN GATING — Launch Version
 // ============================================
 (function() {
   if (typeof DxPlanGate === 'undefined') return;
   if (DxPlanGate.isPro()) return;
 
-  // 1. Show free-tier usage banner
+  // 1. Show free-tier usage banner — launch version
   var summary = DxPlanGate.getUsageSummary();
   var banner = document.createElement('div');
   banner.id = 'freeBanner';
   banner.style.cssText = 'max-width:960px;margin:0 auto 20px;padding:16px 24px;background:white;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:Inter,sans-serif;';
   banner.innerHTML = '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
     '<span style="font-size:13px;font-weight:600;color:#1e3a5f;">Free Plan</span>' +
-    '<span style="font-size:12px;color:#64748b;">Modules: <strong style="color:#2874A6;">' + summary.modules.used + '/' + summary.modules.limit + '</strong></span>' +
-    '<span style="font-size:12px;color:#64748b;">Cases this week: <strong style="color:#2874A6;">' + summary.cases.used + '/' + summary.cases.limit + '</strong></span>' +
-    '<span style="font-size:12px;color:#64748b;">MCQs: <strong style="color:#2874A6;">' + summary.mcqs.used + '/' + summary.mcqs.limit + '</strong></span>' +
+    '<span style="font-size:12px;color:#64748b;">Cases this month: <strong style="color:#2874A6;">' + (summary.cases ? summary.cases.used + '/' + summary.cases.limit : '0/3') + '</strong></span>' +
   '</div>' +
   '<a href="auth/register.html" style="font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;white-space:nowrap;">Upgrade to Pro &rarr;</a>';
 
   // Insert after the page header
-  var header = document.querySelector('.hero-section') || document.querySelector('.search-section') || document.body.firstElementChild;
+  var header = document.querySelector('.hero') || document.body.firstElementChild;
   if (header && header.parentNode) {
     header.parentNode.insertBefore(banner, header.nextSibling);
   }
@@ -3860,14 +3818,10 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
     var type = null;
     var contentId = href.split('/').pop().replace('.html','').replace(/\?.*/,'');
 
-    // Determine content type from URL
-    if (href.indexOf('modules/') !== -1 && href.indexOf('premed') === -1) {
-      type = 'module';
-    } else if (href.indexOf('cases/') !== -1 || href.indexOf('adventure') !== -1) {
+    // Determine content type from URL — launch gating
+    if (href.indexOf('training') !== -1 || href.indexOf('cases/') !== -1) {
       type = 'case';
-    } else if (href.indexOf('deep-dive') !== -1) {
-      type = 'deepDive';
-    } else if (href.indexOf('ai-trainer') !== -1 || href.indexOf('mentor-chat') !== -1) {
+    } else if (href.indexOf('CoachDx') !== -1 || href.indexOf('mentor-chat') !== -1) {
       type = 'aiTutor';
     }
 
@@ -3886,15 +3840,6 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
       DxPlanGate.trackUsage(type, contentId);
     }
   }, true);
-
-  // 3. Add lock badges to deep dive and AI tutor links
-  setTimeout(function() {
-    document.querySelectorAll('a[href*="deep-dive"], a[href*="ai-trainer"], a[href*="mentor-chat"]').forEach(function(link) {
-      if (!link.querySelector('.pro-lock')) {
-        link.insertAdjacentHTML('beforeend', '<span class="pro-lock" style="margin-left:4px;">' + DxPlanGate.lockBadge() + '</span>');
-      }
-    });
-  }, 500);
 })();
 </script>
 
