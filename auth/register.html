@@ -939,7 +939,8 @@
         // GOOGLE SHEETS
         // ============================================
        function sendToSheets(data) {
-    if (!CONFIG.GOOGLE_SHEETS_URL || CONFIG.GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') { console.log('Sheets not configured. Data:', JSON.stringify(data, null, 2)); return; }
+            if (!CONFIG.GOOGLE_SHEETS_URL || CONFIG.GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') { console.log('Sheets not configured. Data:', JSON.stringify(data, null, 2)); return; }
+            try { fetch(CONFIG.GOOGLE_SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); }
             catch (e) { console.error('Sheets error:', e); }
         }
 
