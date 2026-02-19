@@ -3600,24 +3600,33 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 <!-- PWA Install Modal (session-based, shows each visit) -->
 <div class="pwa-modal-overlay" id="pwa-modal" style="display:none">
   <div class="pwa-modal-card">
+    <button class="pwa-modal-close" id="pwa-modal-close" aria-label="Close">&times;</button>
     <div class="pwa-modal-icon">📱</div>
     <h2 class="pwa-modal-title">Use ReasonDx as an App</h2>
     <p class="pwa-modal-subtitle">Add to your home screen for full-screen, app-like access — works offline too.</p>
     <div class="pwa-modal-steps" id="pwa-steps-android">
       <button class="pwa-modal-install-btn" id="pwa-modal-install">Install ReasonDx</button>
     </div>
-    <div class="pwa-modal-steps" id="pwa-steps-ios" style="display:none">
-      <div class="pwa-ios-step"><span class="pwa-step-num">1</span> Tap the <strong>Share</strong> button <span style="font-size:1.2em">⬆</span> at the bottom of Safari</div>
+    <div class="pwa-modal-steps" id="pwa-steps-ios-safari" style="display:none">
+      <div class="pwa-ios-step"><span class="pwa-step-num">1</span> Tap the <strong>Share</strong> button <span style="font-size:1.2em">⬆</span> at the bottom of your screen</div>
       <div class="pwa-ios-step"><span class="pwa-step-num">2</span> Scroll down and tap <strong>Add to Home Screen</strong></div>
       <div class="pwa-ios-step"><span class="pwa-step-num">3</span> Tap <strong>Add</strong> to confirm</div>
+    </div>
+    <div class="pwa-modal-steps" id="pwa-steps-ios-other" style="display:none">
+      <div class="pwa-ios-step" style="flex-direction:column;align-items:flex-start;gap:6px;text-align:left;">
+        <div style="color:#475569;font-size:14px;line-height:1.5;">To add ReasonDx to your home screen, you'll need to open this page in <strong>Safari</strong>. Other browsers on iPhone don't support this feature.</div>
+        <button class="pwa-modal-install-btn" style="margin-top:8px;font-size:14px;padding:12px;" onclick="navigator.clipboard.writeText(window.location.href).then(function(){this.textContent='✓ Link Copied — Open Safari & Paste';this.style.background='#059669'}.bind(this))">Copy Link to Open in Safari</button>
+      </div>
     </div>
     <button class="pwa-modal-later" id="pwa-modal-later">Continue to site →</button>
   </div>
 </div>
 <style>
 .pwa-modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px}
-.pwa-modal-card{background:#fff;border-radius:20px;padding:36px 28px 28px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:pwaSlideUp 0.35s ease}
+.pwa-modal-card{background:#fff;border-radius:20px;padding:36px 28px 28px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:pwaSlideUp 0.35s ease;position:relative}
 @keyframes pwaSlideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.pwa-modal-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:24px;color:#94a3b8;cursor:pointer;line-height:1;padding:4px 8px;border-radius:8px;transition:all 0.15s}
+.pwa-modal-close:hover{background:#f1f5f9;color:#475569}
 .pwa-modal-icon{font-size:48px;margin-bottom:12px}
 .pwa-modal-title{font-family:var(--rdx-font-serif,Georgia,serif);font-size:1.5rem;color:#1f5f8b;margin-bottom:8px}
 .pwa-modal-subtitle{font-size:0.95rem;color:#64748b;line-height:1.5;margin-bottom:24px}
@@ -3640,15 +3649,26 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
   const modal = document.getElementById('pwa-modal');
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
   const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  // Safari on iOS: no Chrome/CriOS/FxiOS/EdgiOS/OPiOS in UA
+  const isSafari = isIOS && !/(CriOS|FxiOS|EdgiOS|OPiOS|GSA|DuckDuckGo)/.test(navigator.userAgent);
   
-  // Show modal on each new session (sessionStorage resets per tab session)
+  function dismissModal(){
+    modal.style.display='none';
+    sessionStorage.setItem('rdx-pwa-seen','1');
+  }
+  
+  // Show modal on each new session
   function showModal(){
-    if(isStandalone) return; // Already installed
-    if(sessionStorage.getItem('rdx-pwa-seen')) return; // Already shown this session
+    if(isStandalone) return;
+    if(sessionStorage.getItem('rdx-pwa-seen')) return;
     
     if(isIOS){
       document.getElementById('pwa-steps-android').style.display='none';
-      document.getElementById('pwa-steps-ios').style.display='block';
+      if(isSafari){
+        document.getElementById('pwa-steps-ios-safari').style.display='block';
+      } else {
+        document.getElementById('pwa-steps-ios-other').style.display='block';
+      }
     }
     modal.style.display='flex';
   }
@@ -3666,23 +3686,18 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
       deferredPrompt.prompt();
       const result = await deferredPrompt.userChoice;
       deferredPrompt = null;
-      if(result.outcome === 'accepted'){
-        modal.style.display='none';
-        sessionStorage.setItem('rdx-pwa-seen','1');
-        return;
-      }
+      if(result.outcome === 'accepted'){ dismissModal(); return; }
     }
-    modal.style.display='none';
-    sessionStorage.setItem('rdx-pwa-seen','1');
+    dismissModal();
   });
   
-  // "Continue to site" button — dismiss for this session only
-  document.getElementById('pwa-modal-later').addEventListener('click', () => {
-    modal.style.display='none';
-    sessionStorage.setItem('rdx-pwa-seen','1');
-  });
+  // Close buttons — × and "Continue to site"
+  document.getElementById('pwa-modal-later').addEventListener('click', dismissModal);
+  document.getElementById('pwa-modal-close').addEventListener('click', dismissModal);
+  // Click overlay to close
+  modal.addEventListener('click', function(e){ if(e.target === modal) dismissModal(); });
   
-  // iOS: Show modal after short delay (no beforeinstallprompt event on iOS)
+  // iOS: Show modal after short delay
   if(isIOS && !isStandalone){
     setTimeout(showModal, 800);
   }
@@ -3695,7 +3710,11 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
       banner.className = 'pwa-hero-banner';
       banner.id = 'pwa-hero-inline';
       if(isIOS){
-        banner.innerHTML = '📱 For the best experience, add ReasonDx to your Home Screen <button class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Show Me How</button>';
+        if(isSafari){
+          banner.innerHTML = '📱 For the best experience, add ReasonDx to your Home Screen <button class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Show Me How</button>';
+        } else {
+          banner.innerHTML = '📱 Open in Safari to add ReasonDx to your Home Screen <button class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Learn More</button>';
+        }
       } else {
         banner.innerHTML = '📱 Install ReasonDx as an app for offline access <button class="pwa-hero-btn" id="pwa-hero-install-btn">Install App</button>';
       }
