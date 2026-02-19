@@ -132,7 +132,7 @@
     <div class="page-container">
         <div class="page-header">
             <h1 style="font-family: 'Playfair Display', 'Georgia', serif; font-size: 42px; font-weight: 800; color: #1e3a5f; letter-spacing: -0.5px;">Reason<span style="border-bottom: 3px solid #2874A6;">Dx</span></h1>
-            <p>Master clinical reasoning. Crush your boards.</p>
+            <p>Master clinical reasoning. Think like a clinician.</p>
             <div class="board-tags">
                 <span class="board-tag step1">Premed</span>
                 <span class="board-tag step1">Step 1 Ready</span>
@@ -154,17 +154,18 @@
                     <div class="exam-tags">
                         <span class="exam-tag s1">Step 1</span>
                         <span class="exam-tag s2">Step 2</span>
+                        <span class="exam-tag shelf">Clinical Rotations</span>
                     </div>
                     <ul class="plan-features">
-                        <li>5 MechanismDx learning modules</li>
-                        <li>3 clinical cases per week</li>
-                        <li>20 board-style MCQs</li>
-                        <li>Basic progress tracking</li>
+                        <li>3 clinical reasoning cases per month</li>
+                        <li>SBAR Trainer (template view)</li>
+                        <li>CoachDx summary debrief</li>
+                        <li>Dashboard (last 3 sessions)</li>
                         <li>All clinical calculators</li>
-                        <li class="excluded">Full module library (316 topics)</li>
-                        <li class="excluded">Unlimited cases &amp; MCQs</li>
-                        <li class="excluded">Deep dive content</li>
-                        <li class="excluded">AI Tutor</li>
+                        <li class="excluded">Unlimited cases</li>
+                        <li class="excluded">AI-scored SBAR feedback</li>
+                        <li class="excluded">Full CoachDx coaching</li>
+                        <li class="excluded">Reasoning Fingerprint</li>
                     </ul>
                     <button class="plan-select-btn">Get Started Free</button>
                 </div>
@@ -184,14 +185,14 @@
                         <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>All 316 topics across 28 specialties</li>
-                        <li>615 board-style MCQs</li>
-                        <li>320+ interactive case adventures</li>
-                        <li>400+ learning modules</li>
-                        <li>Board-prep mode (Step 1, Step 2, Shelf)</li>
-                        <li>Reasoning pathway fingerprinting</li>
-                        <li>AI Tutor (unlimited)</li>
-                        <li>Spaced repetition &amp; analytics</li>
+                        <li>Unlimited clinical reasoning cases</li>
+                        <li>320+ cases across 28 specialties</li>
+                        <li>AI-scored SBAR feedback</li>
+                        <li>Full CoachDx metacognitive debrief</li>
+                        <li>Reasoning Pathway Fingerprint</li>
+                        <li>Complete session history &amp; analytics</li>
+                        <li>Exportable progress reports</li>
+                        <li>All clinical calculators</li>
                     </ul>
                     <button class="plan-select-btn">Start Pro</button>
                 </div>
@@ -497,7 +498,7 @@
         // CONFIGURATION
         // ============================================
         const CONFIG = {
-            GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
+            GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec',
             STRIPE_PUBLIC_KEY: 'pk_live_51T2KKACQYcGAAnaNsFyEw9c72eZpXTI2hjidIv9FLlYt5rsmyXWLAtEqk4dDwa9rHvpdYUXlXM2MnfXIaK6qeCAY002Za1ZPfl',
             STRIPE_PRICE_MONTHLY: 'price_1T2LFTCQYcGAAnaN9s9isvzR',
             STRIPE_PRICE_ANNUAL: 'price_1T2LGkCQYcGAAnaNbAV6gUDO',
@@ -926,11 +927,10 @@
             document.getElementById('referralCodeValue').textContent = state.generatedReferral;
             if (state.selectedPlan === 'pro') {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro!';
-                var s = window.RdxSiteStats || {};
-                document.getElementById('successMessage').innerHTML = 'Full access to all ' + (s.topicsDisplay || '297') + ' topics, ' + (s.mcqsDisplay || '2,900+') + ' MCQs, and AI tutor is now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                document.getElementById('successMessage').innerHTML = 'Unlimited clinical reasoning cases, AI-scored SBAR feedback, full CoachDx coaching, and your Reasoning Fingerprint are now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             } else {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx!';
-                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Explore board-prep content and upgrade anytime.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Start with 3 cases per month, SBAR practice, and CoachDx summaries. Upgrade anytime for unlimited access.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             }
             showSection('sectionSuccess');
         }
