@@ -11,22 +11,22 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join ReasonDx | AI-Powered Clinical Reasoning</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+    <title>Join ReasonDx | Board-Ready Clinical Reasoning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
     <script src="../dx-sanitize.js"></script>
     <style>
         :root { --primary: #2874A6; --primary-dark: #1f5f8b; --pro: #2874A6; --pro-dark: #1f5f8b; --beta: #d97706; --beta-dark: #b45309; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', -apple-system, sans-serif; background: #F8FAFC; min-height: 100vh; padding: 24px; }
+        body { font-family: 'Inter', sans-serif; background: #f0f5f9; min-height: 100vh; padding: 24px; }
         .page-container { max-width: 1000px; margin: 0 auto; }
         .page-header { text-align: center; margin-bottom: 40px; }
         .page-header h1 { font-size: 36px; font-weight: 800; color: #1e3a5f; margin-bottom: 8px; }
         .page-header p { font-size: 18px; color: #64748b; }
         .page-header .board-tags { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
         .board-tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
-        .board-tag.tag-a { background: #dbeafe; color: #1d4ed8; }
-        .board-tag.tag-b { background: #d4e8f7; color: #166534; }
+        .board-tag.step1 { background: #dbeafe; color: #1d4ed8; }
+        .board-tag.step2 { background: #d4e8f7; color: #166534; }
         .board-tag.shelf { background: #fef3c7; color: #92400e; }
         .board-tag.rotation { background: #ede9fe; color: #6d28d9; }
         .plans-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; max-width: 740px; margin-left: auto; margin-right: auto; }
@@ -131,72 +131,14 @@
 <body>
     <div class="page-container">
         <div class="page-header">
-            <h1 style="font-family: 'Fraunces', 'Georgia', serif; font-size: 40px; font-weight: 700; color: #1B4F72; letter-spacing: -0.5px;">Reason<span style="border-bottom: 3px solid #2874A6;">Dx</span></h1>
-            <p>Train your reasoning. Communicate it. Grow.</p>
+            <h1 style="font-family: 'Playfair Display', 'Georgia', serif; font-size: 42px; font-weight: 800; color: #1e3a5f; letter-spacing: -0.5px;">Reason<span style="border-bottom: 3px solid #2874A6;">Dx</span></h1>
+            <p>Master clinical reasoning. Think like a clinician.</p>
             <div class="board-tags">
-                <span class="board-tag tag-a">323 Cases</span>
-                <span class="board-tag tag-b">29 Specialties</span>
-                <span class="board-tag shelf">SBAR Training</span>
-                <span class="board-tag rotation">AI Coaching</span>
-            </div>
-        </div>
-
-        <!-- ═══ VIDEO SHOWCASE — See ReasonDx Before You Sign Up ═══ -->
-        <div style="max-width:700px; margin:0 auto 36px; text-align:center;">
-            <h2 style="font-family:'Fraunces',Georgia,serif; font-size:24px; font-weight:400; color:#1E293B; margin-bottom:6px;">See it in action</h2>
-            <p style="font-size:14px; color:#64748B; margin-bottom:24px;">Watch how ReasonDx trains clinical reasoning — no signup required.</p>
-            
-            <div style="display:flex; flex-direction:column; gap:16px;">
-                <!-- Video 1: Platform Overview / CoachDx Walkthrough -->
-                <div style="background:#fff; border:1px solid #E2E8F0; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-                    <video controls playsinline preload="metadata" poster=""
-                           style="width:100%; display:block; border-radius:14px 14px 0 0; max-height:380px; object-fit:contain; background:#0F172A;"
-                           aria-label="CoachDx walkthrough video">
-                        <!-- UPDATE PATH: Point to wherever you host the video file -->
-                        <source src="../videos/Video_Overview_CoachDx.mp4" type="video/mp4">
-                        Your browser does not support video playback.
-                    </video>
-                    <div style="padding:14px 18px; text-align:left;">
-                        <div style="font-weight:600; font-size:14px; color:#1E293B; margin-bottom:3px;">🎬 CoachDx Walkthrough</div>
-                        <div style="font-size:12.5px; color:#64748B; line-height:1.5;">See how AI-powered Socratic coaching guides you from case presentation to clinical decision — step by step.</div>
-                    </div>
-                </div>
-
-                <!-- Video 2: Interactive Walkthrough (optional — uncomment when ready)
-                <div style="background:#fff; border:1px solid #E2E8F0; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-                    <video controls playsinline preload="metadata"
-                           style="width:100%; display:block; border-radius:14px 14px 0 0; max-height:380px; object-fit:contain; background:#0F172A;">
-                        <source src="../videos/CRT_walkthrough.mp4" type="video/mp4">
-                    </video>
-                    <div style="padding:14px 18px; text-align:left;">
-                        <div style="font-weight:600; font-size:14px; color:#1E293B; margin-bottom:3px;">🧠 Clinical Reasoning Trainer</div>
-                        <div style="font-size:12.5px; color:#64748B; line-height:1.5;">Watch the CRT in action — build a differential, interview an AI patient, and get immediate feedback.</div>
-                    </div>
-                </div>
-                -->
-
-                <!-- OR: If you upload to YouTube, use this instead:
-                <div style="background:#fff; border:1px solid #E2E8F0; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
-                        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
-                                style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:14px 14px 0 0;"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                    <div style="padding:14px 18px; text-align:left;">
-                        <div style="font-weight:600; font-size:14px; color:#1E293B; margin-bottom:3px;">🎬 Platform Overview</div>
-                        <div style="font-size:12.5px; color:#64748B;">See how ReasonDx trains clinical thinking.</div>
-                    </div>
-                </div>
-                -->
-            </div>
-
-            <!-- Interactive walkthrough link -->
-            <div style="margin-top:16px;">
-                <a href="../coachdx-walkthrough-launch.html" target="_blank" 
-                   style="font-size:13px; color:#2874A6; font-weight:600; text-decoration:none;">
-                    ▶ Try the interactive walkthrough →
-                </a>
+                <span class="board-tag step1">Premed</span>
+                <span class="board-tag step1">Step 1 Ready</span>
+                <span class="board-tag step2">Step 2 CK</span>
+                <span class="board-tag shelf">Shelf Exams</span>
+                <span class="board-tag rotation">Clinical Rotations</span>
             </div>
         </div>
 
@@ -210,18 +152,19 @@
                         <span class="period"></span>
                     </div>
                     <div class="exam-tags">
-                        <span class="exam-tag s1">Train</span>
-                        <span class="exam-tag s2">Communicate</span>
+                        <span class="exam-tag s1">Step 1</span>
+                        <span class="exam-tag s2">Step 2</span>
+                        <span class="exam-tag shelf">Clinical Rotations</span>
                     </div>
                     <ul class="plan-features">
                         <li>3 clinical reasoning cases per month</li>
-                        <li>Introductory difficulty level</li>
-                        <li>SBAR template walkthroughs</li>
-                        <li>CoachDx session summaries</li>
-                        <li>Last 3 sessions in history</li>
-                        <li class="excluded">Unlimited cases &amp; all difficulties</li>
+                        <li>SBAR Trainer (template view)</li>
+                        <li>CoachDx summary debrief</li>
+                        <li>Dashboard (last 3 sessions)</li>
+                        <li>All clinical calculators</li>
+                        <li class="excluded">Unlimited cases</li>
                         <li class="excluded">AI-scored SBAR feedback</li>
-                        <li class="excluded">Full CoachDx metacognitive debrief</li>
+                        <li class="excluded">Full CoachDx coaching</li>
                         <li class="excluded">Reasoning Fingerprint</li>
                     </ul>
                     <button class="plan-select-btn">Get Started Free</button>
@@ -237,19 +180,19 @@
                         <div class="annual">or $99/year (save 45%)</div>
                     </div>
                     <div class="exam-tags">
-                        <span class="exam-tag s1">Train</span>
-                        <span class="exam-tag s2">Communicate</span>
-                        <span class="exam-tag shelf">Coach</span>
+                        <span class="exam-tag s1">Step 1</span>
+                        <span class="exam-tag s2">Step 2 CK</span>
+                        <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>Unlimited cases across all difficulties</li>
-                        <li>323 cases across 29 specialties</li>
-                        <li>AI-scored SBAR communication feedback</li>
-                        <li>Full CoachDx metacognitive debriefs</li>
-                        <li>Reasoning Fingerprint visualization</li>
-                        <li>Complete session history &amp; trends</li>
+                        <li>Unlimited clinical reasoning cases</li>
+                        <li>320+ cases across 28 specialties</li>
+                        <li>AI-scored SBAR feedback</li>
+                        <li>Full CoachDx metacognitive debrief</li>
+                        <li>Reasoning Pathway Fingerprint</li>
+                        <li>Complete session history &amp; analytics</li>
                         <li>Exportable progress reports</li>
-                        <li>Priority access to new features</li>
+                        <li>All clinical calculators</li>
                     </ul>
                     <button class="plan-select-btn">Start Pro</button>
                 </div>
@@ -442,9 +385,9 @@
                         <label class="form-label">Why are you here? <span class="optional">(optional)</span></label>
                         <select id="studyGoal" class="form-select">
                             <option value="">Select your main goal...</option>
+                            <option value="board-prep">Board Prep (Step 1, Step 2, or Shelf)</option>
                             <option value="clinical-reasoning">Improve Clinical Reasoning</option>
-                            <option value="communication">Strengthen Clinical Communication</option>
-                            <option value="both">Both Reasoning & Communication</option>
+                            <option value="both">Both Board Prep & Clinical Reasoning</option>
                             <option value="exploring">Just Exploring</option>
                         </select>
                     </div>
@@ -529,7 +472,7 @@
         <!-- FLODESK EMAIL SIGNUP CTA -->
         <div id="flodeskCTA" style="max-width: 600px; margin: 40px auto 0; text-align: center; padding: 32px 24px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
             <div style="width: 48px; height: 3px; background: #2874A6; margin: 0 auto 20px; border-radius: 2px;"></div>
-            <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; color: #1e3a5f; margin-bottom: 8px;">Not ready to sign up yet?</h3>
+            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #1e3a5f; margin-bottom: 8px;">Not ready to sign up yet?</h3>
             <p style="font-size: 15px; color: #64748b; margin-bottom: 20px; line-height: 1.5;">Join our email list for clinical reasoning tips, platform updates, and early access to new features.</p>
             <a href="https://graceful-paper-87888.myflodesk.com/ar69dn04i8" target="_blank" style="display: inline-block; padding: 14px 36px; background: #2874A6; color: white; border-radius: 28px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.2s; letter-spacing: 0.3px;">Join the Email List</a>
             <p style="font-size: 12px; color: #94a3b8; margin-top: 14px;">No spam. Unsubscribe anytime.</p>
@@ -541,7 +484,7 @@
         <div style="background:white; border-radius:20px; padding:40px 32px; max-width:440px; width:90%; position:relative; text-align:center; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
             <button onclick="closePopup()" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; color:#94a3b8; cursor:pointer; line-height:1;">&times;</button>
             <div style="width: 48px; height: 3px; background: #2874A6; margin: 0 auto 20px; border-radius: 2px;"></div>
-            <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; color: #1e3a5f; margin-bottom: 8px;">Stay in the loop</h3>
+            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #1e3a5f; margin-bottom: 8px;">Stay in the loop</h3>
             <p style="font-size: 14px; color: #64748b; margin-bottom: 24px; line-height: 1.5;">Get clinical reasoning tips, platform updates, and early access to new features delivered to your inbox.</p>
             <a href="https://graceful-paper-87888.myflodesk.com/ar69dn04i8" target="_blank" onclick="closePopup()" style="display: inline-block; padding: 14px 36px; background: #2874A6; color: white; border-radius: 28px; font-size: 15px; font-weight: 600; text-decoration: none; letter-spacing: 0.3px;">Join the Email List</a>
             <div style="margin-top: 16px;"><button onclick="closePopup()" style="background:none; border:none; color:#94a3b8; font-size:13px; cursor:pointer;">No thanks, maybe later</button></div>
@@ -550,13 +493,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../dx-progress.js"></script>
-  <script src="email-service.js"></script>
     <script>
         // ============================================
         // CONFIGURATION
         // ============================================
         const CONFIG = {
-            GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
+            GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec',
             STRIPE_PUBLIC_KEY: 'pk_live_51T2KKACQYcGAAnaNsFyEw9c72eZpXTI2hjidIv9FLlYt5rsmyXWLAtEqk4dDwa9rHvpdYUXlXM2MnfXIaK6qeCAY002Za1ZPfl',
             STRIPE_PRICE_MONTHLY: 'price_1T2LFTCQYcGAAnaN9s9isvzR',
             STRIPE_PRICE_ANNUAL: 'price_1T2LGkCQYcGAAnaNbAV6gUDO',
@@ -628,8 +570,8 @@
                 document.getElementById('registrationForm').className = 'form-card ' + plan;
                 document.getElementById('formHeader').className = 'form-header ' + plan;
                 var titles = {
-                    free:  ['Create Free Account', 'Free Plan — Start Reasoning'],
-                    pro:   ['Start Pro Subscription', 'Pro — Full Platform Access']
+                    free:  ['Create Free Account', 'Free Plan — Board Prep Starter'],
+                    pro:   ['Start Pro Subscription', 'Pro — Full Board Prep Access']
                 };
                 document.getElementById('formTitle').textContent = titles[plan][0];
                 document.getElementById('formSubtitle').textContent = titles[plan][1];
@@ -985,11 +927,10 @@
             document.getElementById('referralCodeValue').textContent = state.generatedReferral;
             if (state.selectedPlan === 'pro') {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro!';
-                var s = window.RdxSiteStats || {};
-                document.getElementById('successMessage').innerHTML = 'Unlimited cases, AI-scored SBAR feedback, full CoachDx debriefs, and your Reasoning Fingerprint are now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                document.getElementById('successMessage').innerHTML = 'Unlimited clinical reasoning cases, AI-scored SBAR feedback, full CoachDx coaching, and your Reasoning Fingerprint are now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             } else {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx!';
-                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Start training with clinical reasoning cases and upgrade anytime.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Start with 3 cases per month, SBAR practice, and CoachDx summaries. Upgrade anytime for unlimited access.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             }
             showSection('sectionSuccess');
         }
@@ -1187,8 +1128,7 @@ document.addEventListener('keydown', function(e) {
 setTimeout(showPopup, 10000);
 </script>
 
-<script src="../dx-feedback.js"></script>
-<script src="../dx-modal-safety.js"></script>
+<script src="dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
