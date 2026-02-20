@@ -9,100 +9,126 @@
   gtag('js', new Date());
   gtag('config', 'G-EKCVJ1SMN3');
 </script>
+<script>
+// Auth Guard
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
 <meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoachDx — AI Clinical Coaching | ReasonDx</title>
-<meta name="description" content="CoachDx: AI-powered clinical coaching on ReasonDx — practice SBAR communication, get metacognitive debriefs, and track your reasoning growth.">
-<meta property="og:title" content="CoachDx — AI Clinical Coaching | ReasonDx">
-<meta property="og:description" content="CoachDx: AI-powered clinical coaching — SBAR communication, metacognitive debriefs, and reasoning growth tracking.">
-<meta property="og:type" content="website">
+<meta name="description" content="CoachDx: AI-guided clinical coaching for medical students — practice SBAR communication, mentor chat, and case-based learning across specialties.">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:#F8FAFC;color:#1E293B;min-height:100vh;display:flex;flex-direction:column;align-items:center}
-
-/* Header — calmer gradient, more breathing room */
-.header{width:100%;background:linear-gradient(135deg,#2874A6 0%,#1B4F72 100%);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
-.header a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s}
-.header a:hover{color:#fff}
-.header-brand{font-family:'Fraunces',Georgia,serif;font-size:24px;font-weight:700;letter-spacing:-0.5px}
-
-/* Container */
-.container{max-width:880px;width:100%;padding:48px 24px 32px}
-
-/* Hero — editorial feel */
-.hero{text-align:center;margin-bottom:44px}
-.hero h2{font-family:'Fraunces',Georgia,serif;font-size:30px;font-weight:400;color:#1E293B;margin-bottom:14px;line-height:1.25}
-.hero h2 em{font-style:italic;color:#2874A6}
-.hero p{color:#64748B;font-size:15px;max-width:540px;margin:0 auto;line-height:1.65}
-
-/* Cards — soft, uniform */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.card{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:24px;transition:all 0.25s ease}
-.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06);transform:translateY(-2px)}
-.card h3{font-size:15px;font-weight:700;margin-bottom:6px;color:#1E293B}
-.card p{font-size:13.5px;color:#64748B;margin-bottom:16px;line-height:1.55}
-.card a{display:inline-block;background:#2874A6;color:#fff;padding:9px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;transition:background 0.2s}
-.card a:hover{background:#1B4F72}
-.badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;margin-bottom:12px;letter-spacing:0.3px;text-transform:uppercase}
-.badge-active{background:#D1FAE5;color:#065F46}
-
-/* Bottom link */
-.footer-link{text-align:center;padding:20px 0 8px}
-.footer-link a{color:#2874A6;font-weight:600;text-decoration:none;font-size:14px;transition:opacity 0.2s}
-.footer-link a:hover{opacity:0.8}
+body{font-family:'DM Sans','Inter',-apple-system,sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.header{width:100%;background:linear-gradient(135deg,#2874a6,#1f5f8b);color:#fff;padding:20px 24px;display:flex;align-items:center;gap:16px}
+.header a{color:#a3cfe6;text-decoration:none;font-size:14px}
+.container{max-width:900px;width:100%;padding:40px 24px}
+.hero{text-align:center;margin-bottom:40px}
+.hero h2{font-size:28px;font-weight:700;color:#2874a6;margin-bottom:12px}
+.hero p{color:#64748b;font-size:16px;max-width:600px;margin:0 auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:24px;transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.card h3{font-size:16px;font-weight:600;margin-bottom:8px;color:#1e293b}
+.card p{font-size:14px;color:#64748b;margin-bottom:16px}
+.card .btn{display:inline-block;background:#2874a6;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:500;border:none;cursor:pointer}
+.card .btn:hover{background:#1f5f8b}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;margin-bottom:12px}
+.badge-free{background:#d1fae5;color:#065f46}
+.badge-active{background:#dbeafe;color:#1e40af}
+.free-note{font-size:12px;color:#64748b;margin-top:8px;font-style:italic}
+.browse-link{text-align:center;padding:24px 16px}
+.browse-link a{color:#2874a6;font-weight:600;text-decoration:none;font-size:15px}
+.browse-link a:hover{text-decoration:underline}
 </style>
 <link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
+
 <div class="header">
-  <a href="../index.html">← ReasonDx Home</a>
-  <div class="header-brand">CoachDx</div>
+  <a href="../index.html">&larr; ReasonDx Home</a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 120" width="200" height="55" style="display:block;">
+      <text x="220" y="74" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700" fill="#ffffff" letter-spacing="-2">CoachDx</text>
+      <rect x="275" y="80" width="78" height="4" fill="#7cb8d9" rx="2"/>
+    </svg>
+  </div>
 </div>
+
 <div class="container">
   <div class="hero">
-    <h2>Your AI <em>Clinical Coach</em></h2>
-    <p>Practice SBAR communication, get personalized coaching debriefs, and track how your clinical reasoning evolves over time.</p>
+    <h2>Practice Clinical Communication</h2>
+    <p>SBAR-based coaching scenarios with real-time feedback across specialties and interprofessional contexts.</p>
   </div>
+
   <div class="cards">
+
     <div class="card">
       <span class="badge badge-active">Active</span>
-      <h3>📋 SBAR Trainer</h3>
-      <p>Practice structured clinical handoffs with 13 scenarios across specialties. Get immediate feedback on your communication.</p>
-      <a href="../tools/sbar-trainer.html">Launch SBAR Trainer</a>
+      <h3>SBAR Trainer</h3>
+      <p>23 clinical scenarios with structured SBAR communication scoring and immediate feedback.</p>
+      <a class="btn" href="../tools/sbar-trainer.html">Launch SBAR Trainer</a>
+      <div class="free-note" id="noteSbar"></div>
     </div>
+
     <div class="card">
       <span class="badge badge-active">Active</span>
-      <h3>🗣️ CoachDx Debrief</h3>
-      <p>After completing a case, review your reasoning patterns with AI coaching. Identify strengths, blind spots, and growth areas.</p>
-      <a href="coachdx-dashboard.html">View Coaching Dashboard</a>
+      <h3>Clinical Reasoning Trainer</h3>
+      <p>Work through diagnostic reasoning cases with progressive disclosure and coaching prompts.</p>
+      <a class="btn" href="../modules/training.html">Launch CRT</a>
+      <div class="free-note" id="noteCrt"></div>
     </div>
+
     <div class="card">
-      <span class="badge badge-active">Active</span>
-      <h3>🧠 Clinical Reasoning Trainer</h3>
-      <p>Work through diagnostic reasoning cases with progressive disclosure — build differentials and refine your thinking.</p>
-      <a href="../cases/clinical-reasoning-trainer.html">Launch CRT</a>
+      <span class="badge badge-free">Free Demo</span>
+      <h3>AI Clinical Trainer</h3>
+      <p>Anaphylaxis food allergy scenario with AI-guided clinical decision making.</p>
+      <a class="btn" href="../ai-trainer-anaphylaxis-food.html">Launch AI Trainer</a>
     </div>
-  </div>
-  <div class="footer-link">
-    <a href="../tools/learning-dashboard.html">📊 View Your Reasoning Dashboard & Fingerprint →</a>
+
   </div>
 </div>
+
+<div class="browse-link">
+  <a href="case-library.html">📚 Browse Case Library →</a>
+</div>
+
+<!-- Platform scripts - loaded AFTER all content so errors can't block the page -->
 <script src="../js/rdx-nav.js"></script>
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(function(){})}
 </script>
 <script src="../js/rdx-help-widget.js"></script>
-<script src="../dx-plan-gate.js"></script><script>document.addEventListener("DOMContentLoaded",function(){if(typeof DxPlanGate!=="undefined")DxPlanGate.autoGate();});</script>
+<script src="../dx-plan-gate.js"></script>
+<script>
+// Soft tier labels — all links always work, notes explain free limits
+(function() {
+  try {
+    if (typeof DxPlanGate !== "undefined") DxPlanGate.autoGate();
+  } catch(e) {}
 
+  var isPro = false;
+  try {
+    var u = localStorage.getItem('reasondx-user');
+    if (u) { var j = JSON.parse(u); isPro = j && j.plan === 'pro'; }
+  } catch(e) {}
+
+  if (!isPro) {
+    var ns = document.getElementById('noteSbar');
+    var nc = document.getElementById('noteCrt');
+    if (ns) ns.textContent = 'Free: 1 scenario included \u00b7 Upgrade to Pro for all 23';
+    if (nc) nc.textContent = 'Free: 3 cases/week \u00b7 Upgrade to Pro for unlimited';
+  }
+})();
+</script>
 <script src="../dx-feedback.js"></script>
-<script src="../dx-modal-safety.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
