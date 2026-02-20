@@ -60832,127 +60832,43 @@ to apply changes.');
         if (!variant || !caseData) return;
         
         const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
-            <!DOCTYPE html>
-<!-- VERSION WITH PLATFORM GUIDE: Added Features page -->
-            <html>
-            <head>
-<\script>
-// Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();<\/script>
-                <title>Case Summary - ${caseData.title}</title>
-                <style>
-
-/* Multi-Theme Support */
-:root {
-    --bg:var(--rdx-bg); --bg-secondary: #1e293b; --card:var(--rdx-bg-card); --card-hover: #334155;
-    --card-border: #334155; --text:var(--rdx-text); --text-secondary: #cbd5e1; --muted:var(--rdx-text-muted);
-    --accent: #3a90c0; --accent-light: rgba(59,130,246,0.15);
-    --success: #22c55e; --success-light: rgba(34,197,94,0.15);
-    --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
-    --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
-    --purple: #8b5cf6; --purple-light: rgba(139,92,246,0.15);
-}
-[data-theme="light"] {
-    --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
-    --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
-    --accent: #2874a6; --accent-light: rgba(37,99,235,0.1);
-    --success: #16a34a; --success-light: rgba(22,163,74,0.1);
-    --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
-    --danger:var(--rdx-danger); --danger-light: rgba(220,38,38,0.1);
-    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
-}
-
-
-body { transition: background 0.3s, color 0.3s; }
-
-                    body { font-family:var(--rdx-font); max-width: 800px; margin: 40px auto; padding: 20px; }
-                    h1 { color: var(--rdx-teal-dark); border-bottom: 2px solid var(--rdx-teal-dark); padding-bottom: 10px; }
-                    h2 { color: #2d5a87; margin-top: 20px; }
-                    .section { margin-bottom: 20px; padding: 15px; background: #f5f5f5; border-radius: 8px; }
-                    .diagnosis { font-size: 1.2em; font-weight: bold; color: #dc3545; }
-                    ul { margin: 10px 0; }
-                    .competency { display: inline-block; padding: 3px 8px; margin: 2px; background: #d4e8f7; border-radius: 4px; font-size: 0.9em; }
-                    @media print { body { margin: 20px; } }
-                </style>
-            </head>
-            <body>
-
-<div style="position: fixed; top: 10px; right: 10px; z-index: 9999; display: flex; gap: 6px; background: #f1f5f9; padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
-    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
-    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg,#0f172a); cursor: pointer;" title="High Contrast"></button>
-    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
-</div>
-
-                <h1>📋 Case Summary: ${caseData.title}</h1>
-                <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
-                <p><strong>Student:</strong> ${playerData.displayName || 'Anonymous'}</p>
-                
-                <div class="section">
-                    <h2>Patient Presentation</h2>
-                    <p><strong>Chief Complaint:</strong> ${variant.chiefComplaint}</p>
-                    <p><strong>Patient:</strong> ${variant.age}-year-old ${variant.gender}</p>
-                </div>
-                
-                <div class="section">
-                    <h2>Final Diagnosis</h2>
-                    <p class="diagnosis">${variant.finalDiagnosisName || 'See teaching points'}</p>
-                </div>
-                
-                <div class="section">
-                    <h2>Student's Differential</h2>
-                    <p><strong>Most Likely:</strong> ${state.selectedLikely.join(', ') || 'None selected'}</p>
-                    <p><strong>Must Not Miss:</strong> ${state.selectedMustNotMiss.join(', ') || 'None selected'}</p>
-                </div>
-                
-                <div class="section">
-                    <h2>Key Teaching Points</h2>
-                    <ul>
-                        ${(variant.teachingPoints || []).map(tp => `<li>${tp}</li>`).join('')}
-                    </ul>
-                </div>
-                
-                <div class="section">
-                    <h2>Competencies Addressed</h2>
-                    <span class="competency">PC1: History</span>
-                    <span class="competency">PC2: Physical Exam</span>
-                    <span class="competency">PC3: Clinical Reasoning</span>
-                    <span class="competency">PC4: Diagnostics</span>
-                </div>
-                
-                <p style="margin-top: 40px; text-align: center; color: #666;">
-                    Clinical Reasoning Trainer - ${CLASS_CONFIG.name}
-                </p>
-                
-                <scr` + `ipt>window.print();<` + `/script>
-            <\script src="data/rdx-persist.js"><\/script>
-<\script src="./js/rdx-nav.js"><\/script>
-<\script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
-<\/script>
-<\script src="js/rdx-help-widget.js"><\/script>
-<\script src="dx-plan-gate.js"><\/script><\script>document.addEventListener("DOMContentLoaded",function(){if(typeof DxPlanGate!=="undefined")DxPlanGate.autoGate();});<\/script>
-
-<\script src="dx-feedback.js"><\/script>
-
-<!--Start of Tawk.to Script-->
-<\script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-<\/script>
-<!--End of Tawk.to Script-->
-</body>
-            </html>
-        `);
+        const teachingHTML = (variant.teachingPoints || []).map(function(tp) { return '<li>' + tp + '</li>'; }).join('');
+        const html = '<!DOCTYPE html><html><head>'
+            + '<title>Case Summary - ' + caseData.title + '</title>'
+            + '<style>'
+            + 'body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;padding:20px;color:#0f172a;}'
+            + 'h1{color:#1B4F72;border-bottom:2px solid #1B4F72;padding-bottom:10px;}'
+            + 'h2{color:#2d5a87;margin-top:20px;}'
+            + '.section{margin-bottom:20px;padding:15px;background:#f5f5f5;border-radius:8px;}'
+            + '.diagnosis{font-size:1.2em;font-weight:bold;color:#dc3545;}'
+            + 'ul{margin:10px 0;}'
+            + '.competency{display:inline-block;padding:3px 8px;margin:2px;background:#d4e8f7;border-radius:4px;font-size:0.9em;}'
+            + '@media print{body{margin:20px;}}'
+            + '</style>'
+            + '</head><body>'
+            + '<h1>📋 Case Summary: ' + caseData.title + '</h1>'
+            + '<p><strong>Date:</strong> ' + new Date().toLocaleDateString() + '</p>'
+            + '<p><strong>Student:</strong> ' + (playerData.displayName || 'Anonymous') + '</p>'
+            + '<div class="section"><h2>Patient Presentation</h2>'
+            + '<p><strong>Chief Complaint:</strong> ' + variant.chiefComplaint + '</p>'
+            + '<p><strong>Patient:</strong> ' + variant.age + '-year-old ' + variant.gender + '</p></div>'
+            + '<div class="section"><h2>Final Diagnosis</h2>'
+            + '<p class="diagnosis">' + (variant.finalDiagnosisName || 'See teaching points') + '</p></div>'
+            + '<div class="section"><h2>Student\'s Differential</h2>'
+            + '<p><strong>Most Likely:</strong> ' + (state.selectedLikely.join(', ') || 'None selected') + '</p>'
+            + '<p><strong>Must Not Miss:</strong> ' + (state.selectedMustNotMiss.join(', ') || 'None selected') + '</p></div>'
+            + '<div class="section"><h2>Key Teaching Points</h2><ul>' + teachingHTML + '</ul></div>'
+            + '<div class="section"><h2>Competencies Addressed</h2>'
+            + '<span class="competency">PC1: History</span>'
+            + '<span class="competency">PC2: Physical Exam</span>'
+            + '<span class="competency">PC3: Clinical Reasoning</span>'
+            + '<span class="competency">PC4: Diagnostics</span></div>'
+            + '<p style="margin-top:40px;text-align:center;color:#666;">Clinical Reasoning Trainer - ' + CLASS_CONFIG.name + '</p>'
+            + '</body></html>';
+        printWindow.document.write(html);
         printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
     }
     
     // ============================================================
@@ -61039,13 +60955,13 @@ s0.parentNode.insertBefore(s1,s0);
         
         return `
             <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onclick="closeTutorial(event)">
-                <div class="bg-white dark:bg-zinc-900 rounded-lg max-w-3xl w-full max-h-[90vh] shadow-xl flex flex-col border border-zinc-200 dark:border-zinc-800" onclick="event.stopPropagation()">
-                    <div class="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-4 flex justify-between items-center flex-shrink-0">
+                <div class="bg-white dark:bg-zinc-900 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-xl border border-zinc-200 dark:border-zinc-800" onclick="event.stopPropagation()">
+                    <div class="sticky top-0 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-4 flex justify-between items-center">
                         <h2 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">📚 How to Use ReasonDx</h2>
                         <button onclick="closeTutorial()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 text-2xl leading-none">&times;</button>
                     </div>
                     
-                    <div class="p-6 space-y-6 overflow-y-auto flex-1 min-h-0">
+                    <div class="p-6 space-y-6">
                         <!-- The ReasonDx Approach -->
                         <div class="border border-teal-200 dark:border-blue-800 rounded-lg p-4 bg-teal-50 dark:bg-blue-900/20">
                             <h3 class="font-medium text-blue-900 dark:text-blue-100 mb-2">🎯 The ReasonDx Approach</h3>
@@ -69265,6 +69181,5 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-<script src="dx-modal-safety.js"></script>
-<script src="dx-difficulty.js"></script>
 </body>
+</html>
