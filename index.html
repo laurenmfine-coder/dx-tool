@@ -891,7 +891,19 @@ body {
 .ix-bar { height: 6px; background: #f1f5f9; border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
 .ix-bar-fill { height: 100%; border-radius: 3px; }
 .ix-divider { width: 48px; height: 3px; background: var(--blue); margin: 0 auto 12px; border-radius: 2px; }
-@media (max-width: 700px) { .ix-grid { grid-template-columns: 1fr !important; } .ix-showcase [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; } .ix-showcase [style*="repeat(5"] { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 700px) { .ix-grid { grid-template-columns: 1fr !important; } .ix-showcase [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; } .ix-showcase [style*="repeat(5"] { grid-template-columns: repeat(2, 1fr) !important; } #pmCards { grid-template-columns: repeat(2, 1fr) !important; } }
+
+/* Pre-Med Expandable Cards */
+.ix-pm-card { background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.25s; cursor: pointer; position: relative; }
+.ix-pm-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+.ix-pm-card.active { border-color: #7c3aed; box-shadow: 0 4px 16px rgba(124,58,237,0.15); background: #faf5ff; }
+.ix-pm-card h4 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.ix-pm-card p { font-size: 12px; color: var(--slate500); line-height: 1.4; }
+.ix-pm-arrow { display: block; margin-top: 8px; font-size: 14px; color: #7c3aed; opacity: 0; transition: opacity 0.2s; }
+.ix-pm-card.active .ix-pm-arrow { opacity: 1; }
+.ix-pm-preview { display: none; background: white; border: 1px solid var(--slate200); border-radius: 20px; padding: 32px; margin-top: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); animation: ixFadeIn 0.3s ease; }
+.ix-pm-preview.active { display: block; }
+@keyframes ixFadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 <link rel="stylesheet" href="./css/rdx-theme.css">
 <script>
@@ -1127,37 +1139,222 @@ body {
         </div>
     </div>
 
-    <!-- Pre-Med Tools -->
+    <!-- Pre-Med Tools (Interactive) -->
     <div style="text-align: center; margin-bottom: 32px;">
         <div class="ix-section-tag" style="background: #ede9fe; color: #6d28d9;">&#127891; Pre-Med Students</div>
         <h3 class="ix-title" style="max-width: 480px; margin: 0 auto 8px;">Purpose-built tools for pre-med</h3>
-        <p style="font-size: 14px; color: var(--slate500); max-width: 480px; margin: 0 auto 24px;">Not watered-down med school tools — dedicated features for where you are right now.</p>
+        <p style="font-size: 14px; color: var(--slate500); max-width: 480px; margin: 0 auto 24px;">Not watered-down med school tools — dedicated features for where you are right now. Click any card to see how it works.</p>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px;">
-        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 0;" id="pmCards">
+        <div class="ix-pm-card active" onclick="expandPm(0)">
             <div style="font-size: 28px; margin-bottom: 8px;">&#129658;</div>
-            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Encounter Companion</h4>
-            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Log &amp; analyze clinical encounters from shadowing</p>
+            <h4>Encounter Companion</h4>
+            <p>Log &amp; analyze clinical encounters from shadowing</p>
+            <span class="ix-pm-arrow">&#8595;</span>
         </div>
-        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div class="ix-pm-card" onclick="expandPm(1)">
             <div style="font-size: 28px; margin-bottom: 8px;">&#127919;</div>
-            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Diagnostic Challenges</h4>
-            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Scaffolded cases for pre-med reasoning levels</p>
+            <h4>Diagnostic Challenges</h4>
+            <p>Scaffolded cases for pre-med reasoning levels</p>
+            <span class="ix-pm-arrow">&#8595;</span>
         </div>
-        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div class="ix-pm-card" onclick="expandPm(2)">
             <div style="font-size: 28px; margin-bottom: 8px;">&#127753;</div>
-            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Bridge Mode</h4>
-            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Clinical vocabulary ramp for Day 1 readiness</p>
+            <h4>Bridge Mode</h4>
+            <p>Clinical vocabulary ramp for Day 1 readiness</p>
+            <span class="ix-pm-arrow">&#8595;</span>
         </div>
-        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div class="ix-pm-card" onclick="expandPm(3)">
             <div style="font-size: 28px; margin-bottom: 8px;">&#128221;</div>
-            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">LOR Narrative Builder</h4>
-            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Turn experiences into compelling recommendation stories</p>
+            <h4>LOR Narrative Builder</h4>
+            <p>Turn experiences into compelling recommendation stories</p>
+            <span class="ix-pm-arrow">&#8595;</span>
         </div>
-        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div class="ix-pm-card" onclick="expandPm(4)">
             <div style="font-size: 28px; margin-bottom: 8px;">&#128218;</div>
-            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Study Hub</h4>
-            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Guided learning paths from beginner to advanced</p>
+            <h4>Study Hub</h4>
+            <p>Guided learning paths from beginner to advanced</p>
+            <span class="ix-pm-arrow">&#8595;</span>
+        </div>
+    </div>
+
+    <!-- Expandable Preview Panels -->
+    <div id="pmPreviews" style="margin-bottom: 24px;">
+
+        <!-- 0: Encounter Companion -->
+        <div class="ix-pm-preview active" id="ixpm0">
+            <div class="ix-grid" style="margin-bottom: 0;">
+                <div>
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Log what you see. Learn what it means.</h3>
+                    <p style="font-size: 14px; color: var(--slate500); line-height: 1.7; margin-bottom: 14px;">After every shadowing session, the Encounter Companion helps you turn observations into structured clinical learning. Log what you saw, and the AI connects your experience to pathophysiology and clinical reasoning concepts.</p>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Structured logging — chief complaint, observations, questions</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">AI explains the reasoning behind what you observed</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Builds a portfolio of clinical experiences over time</span></div>
+                    </div>
+                </div>
+                <div class="ix-mock">
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6d28d9; margin-bottom: 10px;">&#129658; Encounter Log — Preview</div>
+                    <div class="ix-mock-sm"><div style="font-size: 10px; color: var(--slate400); margin-bottom: 3px;">SETTING</div><div style="font-size: 13px; font-weight: 600; color: var(--navy);">Cardiology Clinic · Dr. Patel</div></div>
+                    <div class="ix-mock-sm"><div style="font-size: 10px; color: var(--slate400); margin-bottom: 3px;">WHAT I OBSERVED</div><div style="font-size: 13px; color: var(--slate600); line-height: 1.5;">Patient came in for follow-up after stent placement. Doctor listened to heart and lungs, checked ankle swelling. Adjusted medication because BP was still high.</div></div>
+                    <div class="ix-mock-sm"><div style="font-size: 10px; color: var(--slate400); margin-bottom: 3px;">MY QUESTION</div><div style="font-size: 13px; color: var(--slate600);">Why did they check the ankles? What does swelling there mean?</div></div>
+                    <div style="background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 10px; padding: 12px; border-left: 3px solid #6d28d9;">
+                        <div style="font-size: 10px; font-weight: 700; color: #6d28d9; margin-bottom: 3px;">AI ANALYSIS</div>
+                        <div style="font-size: 12px; color: var(--slate600); line-height: 1.6;">The doctor was checking for <strong>peripheral edema</strong> — fluid buildup in the lower extremities. After stent placement, this can indicate the heart isn't pumping efficiently (heart failure), or it could be a medication side effect (calcium channel blockers like amlodipine commonly cause ankle swelling)...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1: Diagnostic Challenges -->
+        <div class="ix-pm-preview" id="ixpm1">
+            <div class="ix-grid" style="margin-bottom: 0;">
+                <div>
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Clinical cases designed for your level</h3>
+                    <p style="font-size: 14px; color: var(--slate500); line-height: 1.7; margin-bottom: 14px;">Not the same cases med students get — these are scaffolded for pre-med knowledge. Work through patient scenarios with built-in explanations, vocabulary help, and reasoning prompts that build your clinical thinking from the ground up.</p>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Progressive difficulty — beginner, intermediate, advanced</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Built-in vocabulary tooltips for medical terminology</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Reasoning scaffolds — "What should you think about next?"</span></div>
+                    </div>
+                </div>
+                <div class="ix-mock">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6d28d9;">&#127919; Diagnostic Challenge</div>
+                        <span style="background: #ecfdf5; color: var(--emerald); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px;">BEGINNER</span>
+                    </div>
+                    <div class="ix-mock-sm"><p style="font-size: 13px; color: var(--slate600); line-height: 1.6;">A 20-year-old college student comes to the clinic because she's been feeling really tired for the past 3 weeks. She says she's been sleeping more but still feels exhausted. She's also noticed she's been craving ice chips and her nails look different.</p></div>
+                    <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 10px; margin-bottom: 8px;">
+                        <div style="font-size: 10px; font-weight: 700; color: var(--amber); margin-bottom: 3px;">&#128161; REASONING SCAFFOLD</div>
+                        <p style="font-size: 12px; color: var(--slate600); line-height: 1.5;">When a young person is tired, there are many causes. But <strong>craving ice</strong> (called <em>pica</em>) and <strong>nail changes</strong> are very specific clues. What common condition causes all three?</p>
+                    </div>
+                    <div style="background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 10px; padding: 10px;">
+                        <div style="font-size: 10px; font-weight: 700; color: #6d28d9; margin-bottom: 3px;">&#128218; VOCABULARY HELP</div>
+                        <p style="font-size: 12px; color: var(--slate600); line-height: 1.5;"><strong>Pica:</strong> Craving non-food items (ice, dirt, starch) — often a sign of iron deficiency.<br><strong>Koilonychia:</strong> Spoon-shaped nails — another classic iron deficiency sign.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2: Bridge Mode -->
+        <div class="ix-pm-preview" id="ixpm2">
+            <div class="ix-grid" style="margin-bottom: 0;">
+                <div>
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Speak the language before Day 1</h3>
+                    <p style="font-size: 14px; color: var(--slate500); line-height: 1.7; margin-bottom: 14px;">Medical school throws hundreds of new terms at you in the first week. Bridge Mode builds your clinical vocabulary through real clinical context — not memorization.</p>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Terms presented in clinical context, not isolation</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Covers anatomy, physiology, pathology, pharmacology</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Tracks mastery — green means you own it</span></div>
+                    </div>
+                </div>
+                <div class="ix-mock">
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6d28d9; margin-bottom: 10px;">&#127753; Bridge Mode — Vocabulary Trainer</div>
+                    <div style="background: white; border: 1px solid var(--slate200); border-radius: 12px; overflow: hidden; margin-bottom: 8px;">
+                        <div style="background: linear-gradient(135deg, #6d28d9, #7c3aed); padding: 14px; color: white; text-align: center;">
+                            <div style="font-size: 10px; opacity: 0.8; margin-bottom: 3px;">CARDIOLOGY · Term 3 of 12</div>
+                            <div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800;" id="ixBridgeTerm">Dyspnea</div>
+                        </div>
+                        <div style="padding: 14px;">
+                            <div id="ixBridgeAnswer" style="display: none;">
+                                <div style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px;">Difficulty breathing or shortness of breath</div>
+                                <div style="background: var(--slate50); border-radius: 8px; padding: 10px; margin-bottom: 8px;">
+                                    <div style="font-size: 10px; font-weight: 700; color: var(--slate400); margin-bottom: 3px;">IN CLINICAL CONTEXT</div>
+                                    <p style="font-size: 12px; color: var(--slate600); line-height: 1.5;">"The patient presented with <strong>dyspnea on exertion</strong> — meaning she gets short of breath when climbing stairs. This is a key symptom of heart failure."</p>
+                                </div>
+                                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                    <span style="background: #f0f7fc; color: var(--blue); padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;">Heart Failure</span>
+                                    <span style="background: #f0f7fc; color: var(--blue); padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;">COPD</span>
+                                    <span style="background: #f0f7fc; color: var(--blue); padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;">Anemia</span>
+                                    <span style="background: #f0f7fc; color: var(--blue); padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;">PE</span>
+                                </div>
+                            </div>
+                            <div id="ixBridgePrompt" style="text-align: center; padding: 6px 0;">
+                                <p style="font-size: 13px; color: var(--slate500); margin-bottom: 10px;">Do you know what this term means?</p>
+                                <button onclick="document.getElementById('ixBridgePrompt').style.display='none';document.getElementById('ixBridgeAnswer').style.display='block';" style="padding: 8px 22px; background: #6d28d9; color: white; border: none; border-radius: 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit;">Reveal Definition →</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                        <div style="flex: 1; text-align: center; background: #ecfdf5; border-radius: 8px; padding: 5px; font-size: 11px;"><span style="color: var(--emerald); font-weight: 700;">8</span> <span style="color: var(--slate400);">Mastered</span></div>
+                        <div style="flex: 1; text-align: center; background: #fffbeb; border-radius: 8px; padding: 5px; font-size: 11px;"><span style="color: var(--amber); font-weight: 700;">3</span> <span style="color: var(--slate400);">Learning</span></div>
+                        <div style="flex: 1; text-align: center; background: var(--slate50); border-radius: 8px; padding: 5px; font-size: 11px;"><span style="color: var(--slate500); font-weight: 700;">1</span> <span style="color: var(--slate400);">New</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3: LOR Narrative Builder -->
+        <div class="ix-pm-preview" id="ixpm3">
+            <div class="ix-grid" style="margin-bottom: 0;">
+                <div>
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Turn experiences into stories that get you in</h3>
+                    <p style="font-size: 14px; color: var(--slate500); line-height: 1.7; margin-bottom: 14px;">Your letter of recommendation is only as strong as the stories behind it. The LOR Narrative Builder helps you document meaningful experiences as they happen — then transforms them into structured narratives your recommenders can use.</p>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Log experiences with guided prompts (STAR format)</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">AI generates polished narrative drafts from your notes</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Export a "brag sheet" to share with recommenders</span></div>
+                    </div>
+                </div>
+                <div class="ix-mock">
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6d28d9; margin-bottom: 10px;">&#128221; LOR Narrative Builder</div>
+                    <div class="ix-mock-sm"><div style="font-size: 10px; color: var(--slate400); margin-bottom: 4px;">YOUR RAW NOTES</div><p style="font-size: 13px; color: var(--slate600); line-height: 1.5; font-style: italic;">"Volunteered at free clinic, helped Spanish-speaking patient who was confused about diabetes medication. I translated for the doctor and helped the patient understand when to take insulin vs metformin. Patient came back next month and her A1C had improved."</p></div>
+                    <div style="text-align: center; margin: 8px 0;"><span style="font-size: 16px;">&#8595;</span><span style="font-size: 10px; color: #6d28d9; font-weight: 700; margin-left: 6px;">AI NARRATIVE GENERATION</span><span style="font-size: 16px;"> &#8595;</span></div>
+                    <div style="background: white; border: 1px solid #ddd6fe; border-left: 3px solid #6d28d9; border-radius: 10px; padding: 12px;">
+                        <div style="font-size: 10px; color: #6d28d9; font-weight: 700; margin-bottom: 4px;">POLISHED NARRATIVE</div>
+                        <p style="font-size: 12px; color: var(--slate600); line-height: 1.6;">"During their volunteer work at a community free clinic, this student demonstrated exceptional initiative and cultural competency. They identified a critical communication barrier with a Spanish-speaking patient struggling to manage a complex diabetes regimen. The patient's follow-up showed measurable clinical improvement — a direct result of this student's intervention."</p>
+                    </div>
+                    <div style="display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap;">
+                        <span style="background: #ede9fe; color: #6d28d9; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;">Initiative</span>
+                        <span style="background: #ede9fe; color: #6d28d9; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;">Cultural Competency</span>
+                        <span style="background: #ede9fe; color: #6d28d9; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;">Patient Impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4: Study Hub -->
+        <div class="ix-pm-preview" id="ixpm4">
+            <div class="ix-grid" style="margin-bottom: 0;">
+                <div>
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">A roadmap from curious to clinical</h3>
+                    <p style="font-size: 14px; color: var(--slate500); line-height: 1.7; margin-bottom: 14px;">Study Hub organizes everything into guided learning paths — from foundational anatomy through clinical reasoning fundamentals. You always know what to do next, and each path builds on the last.</p>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Structured paths from beginner to advanced</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Progress tracking with milestones and streaks</span></div>
+                        <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Integrates with Diagnostic Challenges and Bridge Mode</span></div>
+                    </div>
+                </div>
+                <div class="ix-mock">
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6d28d9; margin-bottom: 10px;">&#128218; Study Hub — Learning Paths</div>
+                    <div class="ix-mock-sm">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;"><div style="font-size: 13px; font-weight: 700; color: var(--navy);">&#129504; Clinical Reasoning Foundations</div><span style="background: #ecfdf5; color: var(--emerald); padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 700;">78%</span></div>
+                        <div class="ix-bar" style="margin-bottom: 6px;"><div class="ix-bar-fill" style="width: 78%; background: var(--emerald);"></div></div>
+                        <div style="display: flex; gap: 3px; flex-wrap: wrap;">
+                            <span style="background: #ecfdf5; color: var(--emerald); padding: 2px 6px; border-radius: 6px; font-size: 10px;">Intro ✓</span>
+                            <span style="background: #ecfdf5; color: var(--emerald); padding: 2px 6px; border-radius: 6px; font-size: 10px;">DDx ✓</span>
+                            <span style="background: #ecfdf5; color: var(--emerald); padding: 2px 6px; border-radius: 6px; font-size: 10px;">Red Flags ✓</span>
+                            <span style="background: #f0f7fc; color: var(--blue); padding: 2px 6px; border-radius: 6px; font-size: 10px; border: 1px solid #bfdbfe;">Bias ←</span>
+                            <span style="background: var(--slate50); color: var(--slate400); padding: 2px 6px; border-radius: 6px; font-size: 10px;">Tests</span>
+                        </div>
+                    </div>
+                    <div class="ix-mock-sm">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;"><div style="font-size: 13px; font-weight: 700; color: var(--navy);">&#129657; Cardiovascular System</div><span style="background: #fffbeb; color: var(--amber); padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 700;">45%</span></div>
+                        <div class="ix-bar" style="margin-bottom: 6px;"><div class="ix-bar-fill" style="width: 45%; background: var(--amber);"></div></div>
+                        <div style="display: flex; gap: 3px; flex-wrap: wrap;">
+                            <span style="background: #ecfdf5; color: var(--emerald); padding: 2px 6px; border-radius: 6px; font-size: 10px;">Anatomy ✓</span>
+                            <span style="background: #ecfdf5; color: var(--emerald); padding: 2px 6px; border-radius: 6px; font-size: 10px;">Physiology ✓</span>
+                            <span style="background: #f0f7fc; color: var(--blue); padding: 2px 6px; border-radius: 6px; font-size: 10px; border: 1px solid #bfdbfe;">Pathology ←</span>
+                            <span style="background: var(--slate50); color: var(--slate400); padding: 2px 6px; border-radius: 6px; font-size: 10px;">Pharm</span>
+                        </div>
+                    </div>
+                    <div class="ix-mock-sm" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;"><div style="font-size: 13px; font-weight: 700; color: var(--navy);">&#128172; Clinical Communication</div><span style="background: var(--slate50); color: var(--slate500); padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 700;">Locked</span></div>
+                        <div class="ix-bar"><div class="ix-bar-fill" style="width: 0%;"></div></div>
+                        <p style="font-size: 11px; color: var(--slate400); margin-top: 3px;">Unlocks after Clinical Reasoning Foundations</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -1229,6 +1426,26 @@ body {
 <div class="path-overlay" id="pathOverlay" onclick="if(event.target===this)closePath()">
   <div class="path-panel" id="pathPanel"></div>
 </div>
+
+<script>
+// Pre-Med expandable card previews
+function expandPm(idx) {
+    document.querySelectorAll('.ix-pm-card').forEach(function(c, i) { c.classList.toggle('active', i === idx); });
+    document.querySelectorAll('.ix-pm-preview').forEach(function(p) { p.classList.remove('active'); });
+    var panel = document.getElementById('ixpm' + idx);
+    if (panel) {
+        panel.classList.add('active');
+        setTimeout(function() { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+    }
+    // Reset Bridge Mode interactive if switching away
+    if (idx !== 2) {
+        var bp = document.getElementById('ixBridgePrompt');
+        var ba = document.getElementById('ixBridgeAnswer');
+        if (bp) bp.style.display = 'block';
+        if (ba) ba.style.display = 'none';
+    }
+}
+</script>
 
 <script>
 // ============================================
