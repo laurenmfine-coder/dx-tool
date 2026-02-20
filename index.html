@@ -923,6 +923,13 @@ body {
     <span class="path-count">CoachDx</span>
   </a>
   
+  <a href="simroomdx.html" class="path-card">
+    <div class="path-icon practice">🏥</div>
+    <h3>Simulate</h3>
+    <p>Enter a virtual sim room with AI patients, nurses, attendings, and specialists</p>
+    <span class="path-count">SimRoomDx</span>
+  </a>
+  
   <a href="tools/learning-dashboard.html" class="path-card">
     <div class="path-icon test">📊</div>
     <h3>Dashboard</h3>
@@ -3481,6 +3488,7 @@ const LEVEL_GUIDANCE = {
     pathDescs: {
       learn: 'Start here — build your pathophysiology foundation',
       practice: 'Reinforce mechanisms through clinical scenarios',
+      simulate: 'Practice patient encounters in a virtual sim room',
       test: 'Self-check your understanding with quizzes',
       tools: 'Flashcards and calculators for study sessions'
     }
@@ -3492,6 +3500,7 @@ const LEVEL_GUIDANCE = {
     pathDescs: {
       learn: 'Review key topics before rotations',
       practice: 'Build clinical reasoning with cases and coaching',
+      simulate: 'Multi-character sim room with AI patients and attendings',
       test: 'Shelf exam questions and ECG practice',
       tools: 'DDx builder, calculators, and EPA tracking for rotations'
     }
@@ -3503,6 +3512,7 @@ const LEVEL_GUIDANCE = {
     pathDescs: {
       learn: 'Fill gaps in your knowledge base',
       practice: 'Advanced clinical reasoning and coaching',
+      simulate: 'High-fidelity AI simulation with full clinical teams',
       test: 'Full board review with coverage tracking',
       tools: 'Track your progress and identify weak areas'
     }
@@ -3569,7 +3579,7 @@ function setLevel(level, el) {
   if (level !== 'all') {
     const guidance = LEVEL_GUIDANCE[level];
     const pathCards = document.querySelectorAll('.paths .path-card');
-    const pathKeys = ['learn', 'practice', 'test', 'tools'];
+    const pathKeys = ['learn', 'practice', 'coach', 'simulate', 'tools'];
     pathCards.forEach((card, i) => {
       const desc = card.querySelector('p');
       if (desc && guidance.pathDescs[pathKeys[i]]) {
@@ -3578,7 +3588,7 @@ function setLevel(level, el) {
     });
   } else {
     // Reset to default descriptions
-    const defaults = ['Build differentials, interview AI patients, and refine your diagnostic reasoning', 'Practice structured SBAR communication with real clinical scenarios', 'Get AI coaching debriefs on your reasoning patterns and growth areas', 'Track your progress, Reasoning Fingerprint, and session history'];
+    const defaults = ['Build differentials, interview AI patients, and refine your diagnostic reasoning', 'Practice structured SBAR communication with real clinical scenarios', 'Get AI coaching debriefs on your reasoning patterns and growth areas', 'Enter a virtual sim room with AI patients, nurses, attendings, and specialists', 'Track your progress, Reasoning Fingerprint, and session history'];
     document.querySelectorAll('.paths .path-card').forEach((card, i) => {
       const desc = card.querySelector('p');
       if (desc) desc.textContent = defaults[i];

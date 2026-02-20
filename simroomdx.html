@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Auth Guard -->
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+<!-- User Bar -->
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>SimRoomDx — Virtual Clinical Simulation</title>
+<meta name="description" content="SimRoomDx: Multi-character AI clinical simulation. Practice with virtual patients, attending physicians, nurses, family members, and specialists in an immersive sim room.">
+<meta property="og:title" content="SimRoomDx — Virtual Clinical Simulation">
+<meta property="og:description" content="Multi-character AI clinical simulation for medical education. Practice clinical reasoning with 6 AI characters in a virtual sim room.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg">
+
+<style>
+/* ─── PLATFORM CSS VARIABLES (matches ReasonDx theme system) ─── */
+:root {
+  --rdx-font: 'DM Sans', 'Inter', -apple-system, sans-serif;
+  --rdx-font-serif: 'DM Serif Display', Georgia, serif;
+  --rdx-brand: #2874A6;
+  --rdx-brand-dark: #1B4F72;
+  --rdx-brand-light: #D4E6F1;
+  --sim-surface: #0F172A;
+  --sim-surface-2: #1E293B;
+  --sim-border: #334155;
+  --sim-text: #F8FAFC;
+  --sim-text-muted: #94A3B8;
+  --sim-text-dim: #64748B;
+}
+/* SimRoomDx always uses dark theme internally regardless of platform theme */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--rdx-font);
+  background: var(--sim-surface);
+  color: var(--sim-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── OFFSET FOR rdx-nav.js (56px sticky nav) ─── */
+.sim-wrapper {
+  height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── HEADER ─── */
+.sim-header {
+  background: linear-gradient(135deg, var(--sim-surface-2) 0%, var(--sim-surface) 100%);
+  border-bottom: 1px solid var(--sim-border);
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+.sim-logo { font-family: var(--rdx-font-serif); font-size: 18px; font-weight: 700; color: var(--rdx-brand); white-space: nowrap; }
+.sim-logo span { color: var(--sim-text-muted); font-weight: 400; font-family: var(--rdx-font); font-size: 12px; display: block; margin-top: -2px; }
+.sim-case-info { flex: 1; text-align: center; }
+.sim-case-title { font-size: 14px; font-weight: 600; color: var(--sim-text); }
+.sim-case-sub { font-size: 11px; color: var(--sim-text-dim); }
+.sim-controls { display: flex; gap: 8px; align-items: center; }
+.sim-btn { background: var(--sim-surface-2); border: 1px solid var(--sim-border); color: var(--sim-text-muted); border-radius: 8px; padding: 6px 12px; font-size: 12px; cursor: pointer; font-family: var(--rdx-font); transition: all 0.2s; }
+.sim-btn:hover { border-color: var(--rdx-brand); color: var(--rdx-brand); }
+.sim-btn.active { background: var(--rdx-brand); color: white; border-color: var(--rdx-brand); }
+
+/* ─── CHARACTER STRIP ─── */
+.char-strip {
+  background: var(--sim-surface-2);
+  border-bottom: 1px solid var(--sim-border);
+  padding: 8px 16px;
+  display: flex; gap: 12px; align-items: center;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.char-chip {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--sim-surface);
+  border: 2px solid var(--sim-border);
+  border-radius: 24px;
+  padding: 4px 12px 4px 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.char-chip.active { border-color: var(--rdx-brand); background: rgba(40,116,166,0.15); }
+.char-chip.disabled { opacity: 0.35; pointer-events: none; }
+.char-chip.locked { opacity: 0.45; cursor: not-allowed; position: relative; }
+.char-chip img { width: 28px; height: 28px; border-radius: 50%; }
+.char-chip .char-name { font-size: 11px; font-weight: 600; color: #CBD5E1; }
+.char-chip .char-role { font-size: 9px; color: var(--sim-text-dim); }
+.char-chip.speaking { animation: pulse-glow 1.5s ease-in-out infinite; }
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(40,116,166,0.4); }
+  50% { box-shadow: 0 0 12px 4px rgba(40,116,166,0.3); }
+}
+.pro-chip-badge {
+  font-size: 8px; padding: 1px 5px; border-radius: 6px;
+  background: var(--rdx-brand); color: white; font-weight: 700; letter-spacing: 0.3px;
+  margin-left: 4px;
+}
+
+/* ─── CHAT AREA ─── */
+.chat-area {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth;
+}
+.msg {
+  max-width: 85%; padding: 10px 14px; border-radius: 16px;
+  font-size: 14px; line-height: 1.5; position: relative;
+  animation: msg-in 0.3s ease-out;
+}
+@keyframes msg-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.msg-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.msg-avatar { width: 22px; height: 22px; border-radius: 50%; }
+.msg-name { font-size: 11px; font-weight: 700; }
+.msg-time { font-size: 9px; color: inherit; opacity: 0.5; margin-left: auto; }
+.msg-speak-btn { background: none; border: none; cursor: pointer; font-size: 14px; opacity: 0.4; transition: opacity 0.2s; padding: 0 4px; }
+.msg-speak-btn:hover { opacity: 1; }
+.msg-body { font-size: 14px; line-height: 1.55; }
+
+.msg.patient { background: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD; align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.attending { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.nurse { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.family { background: #EDE9FE; color: #5B21B6; border: 1px solid #C4B5FD; align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.consultant { background: #FFEDD5; color: #9A3412; border: 1px solid #FDBA74; align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.pharmacist { background: #FCE7F3; color: #9D174D; border: 1px solid #F9A8D4; align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.student { background: #F1F5F9; color: #334155; border: 1px solid #CBD5E1; align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg.system { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; align-self: center; text-align: center; font-size: 12px; font-weight: 600; max-width: 95%; border-radius: 8px; }
+
+.typing-indicator { display: flex; gap: 4px; padding: 8px 16px; align-self: flex-start; }
+.typing-indicator span { width: 8px; height: 8px; border-radius: 50%; background: var(--rdx-brand); animation: typing-bounce 1.2s ease-in-out infinite; }
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.3; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ─── INPUT AREA ─── */
+.input-area {
+  background: var(--sim-surface-2);
+  border-top: 1px solid var(--sim-border);
+  padding: 10px 16px;
+  flex-shrink: 0;
+}
+.addressing-bar { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.addr-btn {
+  font-size: 11px; padding: 4px 10px; border-radius: 16px;
+  border: 1px solid #475569; background: transparent; color: var(--sim-text-muted);
+  cursor: pointer; font-family: var(--rdx-font); transition: all 0.2s;
+}
+.addr-btn.selected { background: var(--rdx-brand); color: white; border-color: var(--rdx-brand); }
+.addr-btn:hover:not(.selected) { border-color: var(--sim-text-muted); color: var(--sim-text); }
+.input-row { display: flex; gap: 8px; align-items: flex-end; }
+.input-row textarea {
+  flex: 1; background: var(--sim-surface); border: 1px solid var(--sim-border);
+  border-radius: 12px; color: var(--sim-text); padding: 10px 14px; font-size: 14px;
+  font-family: var(--rdx-font); resize: none; min-height: 44px; max-height: 120px;
+  outline: none; transition: border-color 0.2s;
+}
+.input-row textarea:focus { border-color: var(--rdx-brand); }
+.input-row textarea::placeholder { color: #475569; }
+.send-btn {
+  width: 44px; height: 44px; border-radius: 12px; background: var(--rdx-brand);
+  border: none; color: white; font-size: 18px; cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+}
+.send-btn:hover { background: var(--rdx-brand-dark); transform: scale(1.05); }
+.send-btn:disabled { opacity: 0.4; pointer-events: none; }
+
+.quick-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.qa-btn {
+  font-size: 11px; padding: 4px 10px; border-radius: 8px;
+  border: 1px solid var(--sim-border); background: var(--sim-surface);
+  color: var(--sim-text-muted); cursor: pointer; font-family: var(--rdx-font); transition: all 0.2s;
+}
+.qa-btn:hover { border-color: var(--rdx-brand); color: var(--rdx-brand); }
+
+/* ─── CASE SELECTOR ─── */
+.case-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px; }
+.case-card {
+  display: flex; align-items: center; gap: 12px; padding: 12px;
+  border-radius: 12px; border: 2px solid var(--sim-border); cursor: pointer;
+  transition: all 0.2s; background: var(--sim-surface);
+}
+.case-card:hover { border-color: var(--rdx-brand); background: rgba(40,116,166,0.08); }
+.case-card.selected { border-color: var(--rdx-brand); background: rgba(40,116,166,0.15); box-shadow: 0 0 0 2px rgba(40,116,166,0.2); }
+.case-card.locked { opacity: 0.5; cursor: not-allowed; }
+.case-card.locked:hover { border-color: var(--sim-border); background: var(--sim-surface); }
+.case-emoji { font-size: 28px; flex-shrink: 0; width: 40px; text-align: center; }
+.case-info { flex: 1; min-width: 0; }
+.case-title { font-size: 14px; font-weight: 600; color: var(--sim-text); }
+.case-brief { font-size: 11px; color: var(--sim-text-dim); line-height: 1.4; }
+.case-free-badge {
+  font-size: 9px; padding: 2px 7px; border-radius: 6px;
+  background: rgba(34,197,94,0.15); color: #22C55E; font-weight: 700;
+  letter-spacing: 0.3px; flex-shrink: 0;
+}
+
+/* ─── SETUP MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  animation: fade-in 0.3s;
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: var(--sim-surface-2); border: 1px solid var(--sim-border);
+  border-radius: 20px; padding: 28px; max-width: 520px; width: 90%;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal h2 { font-family: var(--rdx-font-serif); color: var(--rdx-brand); font-size: 24px; margin-bottom: 4px; }
+.modal .subtitle { color: var(--sim-text-dim); font-size: 13px; margin-bottom: 20px; }
+.modal label { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; cursor: pointer; transition: background 0.2s; margin-bottom: 4px; }
+.modal label:hover { background: rgba(255,255,255,0.05); }
+.modal label.locked-char { opacity: 0.55; cursor: not-allowed; }
+.modal label.locked-char:hover { background: transparent; }
+.modal label img { width: 36px; height: 36px; border-radius: 50%; }
+.modal label .lbl-info { flex: 1; }
+.modal label .lbl-name { font-weight: 600; font-size: 14px; color: var(--sim-text); }
+.modal label .lbl-desc { font-size: 11px; color: var(--sim-text-dim); }
+.modal input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--rdx-brand); }
+.modal-section { margin-bottom: 20px; }
+.modal-section h3 { font-size: 13px; font-weight: 700; color: var(--sim-text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.start-btn {
+  width: 100%; padding: 14px; background: var(--rdx-brand); color: white;
+  border: none; border-radius: 12px; font-size: 16px; font-weight: 700;
+  font-family: var(--rdx-font); cursor: pointer; transition: all 0.2s;
+}
+.start-btn:hover { background: var(--rdx-brand-dark); }
+.voice-toggle { display: flex; align-items: center; gap: 8px; padding: 10px; }
+.voice-toggle label { font-size: 13px; color: #CBD5E1; cursor: pointer; }
+.pro-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: var(--rdx-brand); color: white; font-size: 9px; font-weight: 700;
+  padding: 2px 7px; border-radius: 8px; letter-spacing: 0.3px; margin-left: 6px; vertical-align: middle;
+}
+.pro-badge svg { width: 9px; height: 9px; fill: white; }
+
+/* ─── VITALS PANEL ─── */
+.vitals-bar {
+  display: none; background: var(--sim-surface); border-bottom: 1px solid var(--sim-border);
+  padding: 6px 16px; font-size: 11px; color: var(--sim-text-muted);
+  gap: 16px; flex-shrink: 0; overflow-x: auto; white-space: nowrap;
+}
+.vitals-bar.visible { display: flex; }
+.vital { display: flex; align-items: center; gap: 4px; }
+.vital .v-label { color: var(--sim-text-dim); }
+.vital .v-value { color: var(--sim-text); font-weight: 600; }
+.vital .v-value.critical { color: #EF4444; }
+.vital .v-value.warning { color: #F59E0B; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sim-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+@media (max-width: 640px) {
+  .sim-header { padding: 8px 12px; }
+  .sim-logo span { display: none; }
+  .msg { max-width: 92%; }
+  .chat-area { padding: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── PLATFORM SCRIPTS ─── -->
+<script src="rdx-nav.js"></script>
+<script src="dx-plan-gate.js"></script>
+
+<!-- ─── SETUP MODAL (tier-gated) ─── -->
+<div class="modal-overlay" id="setupModal">
+<div class="modal">
+  <h2>🏥 SimRoomDx</h2>
+  <p class="subtitle">Configure your virtual simulation room</p>
+
+  <!-- CASE SELECTOR -->
+  <div class="modal-section">
+    <h3>Select a Case</h3>
+    <div class="case-grid" id="caseGrid"></div>
+  </div>
+
+  <!-- CASE DETAILS (updates when case is selected) -->
+  <div class="modal-section" id="caseDetails">
+    <h3 id="caseDetailTitle">Anterior STEMI</h3>
+    <p id="caseDetailBrief" style="font-size:13px;color:#94A3B8;margin-bottom:8px;">58-year-old male, crushing chest pain, ST elevation V1-V4. Door-to-balloon clock is ticking.</p>
+  </div>
+
+  <div class="modal-section">
+    <h3>Characters in the Room</h3>
+    <!-- Patient: always present, all tiers -->
+    <label>
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=RobertJohnson&backgroundColor=DBEAFE" alt="" id="avatarPatient">
+      <div class="lbl-info"><div class="lbl-name" id="namePatient">🛏️ Mr. Robert Johnson (Patient)</div><div class="lbl-desc" id="descPatient">58M, crushing chest pain, diaphoretic</div></div>
+      <input type="checkbox" checked disabled>
+    </label>
+    <!-- Attending: all tiers -->
+    <label>
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrChenAttending&backgroundColor=DCFCE7" alt="">
+      <div class="lbl-info"><div class="lbl-name">🩺 Dr. Chen (Attending)</div><div class="lbl-desc">Socratic coaching, probes your reasoning</div></div>
+      <input type="checkbox" id="chkAttending" checked>
+    </label>
+    <!-- Nurse: PRO ONLY -->
+    <label id="lblNurse">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=NurseRamirez&backgroundColor=FEF9C3" alt="">
+      <div class="lbl-info"><div class="lbl-name">👩‍⚕️ Sarah Ramirez, RN (Nurse) <span class="pro-badge" id="badgeNurse" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Vitals, meds given, nursing assessments</div></div>
+      <input type="checkbox" id="chkNurse" checked>
+    </label>
+    <!-- Family: PRO ONLY -->
+    <label id="lblFamily">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=LindaJohnsonWife&backgroundColor=EDE9FE" alt="">
+      <div class="lbl-info"><div class="lbl-name">👨‍👩‍👦 Linda Johnson (Wife) <span class="pro-badge" id="badgeFamily" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Collateral history, emotional, wants answers</div></div>
+      <input type="checkbox" id="chkFamily">
+    </label>
+    <!-- Consultant: PRO ONLY -->
+    <label id="lblConsultant">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrPatelCards&backgroundColor=FFEDD5" alt="">
+      <div class="lbl-info"><div class="lbl-name">👨‍⚕️ Dr. Patel (Cardiology Consult) <span class="pro-badge" id="badgeConsultant" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Expects SBAR format. Specialist expertise.</div></div>
+      <input type="checkbox" id="chkConsultant">
+    </label>
+    <!-- Pharmacist: PRO ONLY -->
+    <label id="lblPharmacist">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=PharmDKim&backgroundColor=FCE7F3" alt="">
+      <div class="lbl-info"><div class="lbl-name">💊 Dr. Kim, PharmD (Pharmacist) <span class="pro-badge" id="badgePharmacist" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Drug dosing, interactions, formulary</div></div>
+      <input type="checkbox" id="chkPharmacist">
+    </label>
+  </div>
+
+  <div class="modal-section">
+    <h3>Settings</h3>
+    <div class="voice-toggle">
+      <input type="checkbox" id="chkVoice" checked>
+      <label for="chkVoice">🔊 Enable character voices (Puter.js neural TTS) <span class="pro-badge" id="badgeVoice" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></label>
+    </div>
+    <div class="voice-toggle">
+      <input type="checkbox" id="chkCoaching" checked>
+      <label for="chkCoaching">🩺 Attending interjects with coaching</label>
+    </div>
+  </div>
+
+  <!-- Upgrade banner for free users -->
+  <div id="freeUpgradeBanner" style="display:none;background:linear-gradient(135deg,rgba(40,116,166,0.12),rgba(124,58,237,0.08));border:1px solid rgba(40,116,166,0.25);border-radius:12px;padding:14px 16px;margin-bottom:16px;text-align:center;">
+    <div style="font-size:14px;font-weight:600;color:#D4E6F1;margin-bottom:4px;">🏥 Free tier: 1 demo case, patient + attending only</div>
+    <div style="font-size:12px;color:#94A3B8;margin-bottom:10px;">Upgrade to Pro for all cases, 6 characters, voice, multiplayer & more</div>
+    <a id="upgradeLink" href="auth/register.html" style="display:inline-block;padding:8px 24px;background:#2874A6;color:white;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;">Upgrade to Pro — $14.99/mo</a>
+  </div>
+
+  <button class="start-btn" id="startBtn" onclick="startSimulation()">Enter Simulation Room →</button>
+</div>
+</div>
+
+<!-- ─── MAIN INTERFACE (inside wrapper for nav offset) ─── -->
+<div class="sim-wrapper">
+
+<header class="sim-header">
+  <div class="sim-logo">SimRoomDx<span>Virtual Simulation</span></div>
+  <div class="sim-case-info">
+    <div class="sim-case-title">Anterior STEMI — Mr. Johnson</div>
+    <div class="sim-case-sub">Room: SIM-7X3K • Solo Practice</div>
+  </div>
+  <div class="sim-controls">
+    <button class="sim-btn" id="btnVoice" onclick="toggleVoice()" title="Toggle voice">🔊</button>
+    <button class="sim-btn" onclick="injectEvent()" title="Clinical event">⚡ Event</button>
+  </div>
+</header>
+
+<div class="vitals-bar visible" id="vitalsBar">
+  <div class="vital"><span class="v-label">HR</span> <span class="v-value" id="vHR">92</span></div>
+  <div class="vital"><span class="v-label">BP</span> <span class="v-value warning" id="vBP">148/88</span></div>
+  <div class="vital"><span class="v-label">SpO₂</span> <span class="v-value" id="vSpO2">96%</span></div>
+  <div class="vital"><span class="v-label">RR</span> <span class="v-value" id="vRR">20</span></div>
+  <div class="vital"><span class="v-label">Temp</span> <span class="v-value" id="vTemp">37.1°C</span></div>
+  <div class="vital"><span class="v-label">Pain</span> <span class="v-value critical" id="vPain">9/10</span></div>
+  <div class="vital"><span class="v-label">ECG</span> <span class="v-value critical" id="vECG">ST↑ V1-V4</span></div>
+  <div class="vital"><span class="v-label">Trop</span> <span class="v-value" id="vTrop">Pending</span></div>
+</div>
+
+<div class="char-strip" id="charStrip"></div>
+
+<div class="chat-area" id="chatArea"></div>
+
+<div class="input-area">
+  <div class="addressing-bar" id="addressBar"></div>
+  <div class="input-row">
+    <textarea id="msgInput" placeholder="Type your message..." rows="1" onkeydown="handleKey(event)"></textarea>
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
+  </div>
+  <div class="quick-actions" id="quickActions"></div>
+</div>
+
+</div><!-- .sim-wrapper -->
+
+<script src="https://js.puter.com/v2/"></script>
+<script>
+// ═══════════════════════════════════════════════
+//  CASE LIBRARY
+// ═══════════════════════════════════════════════
+const CASE_LIBRARY = [
+  {
+    id: 'stemi-anterior',
+    title: 'Anterior STEMI',
+    emoji: '🫀',
+    brief: '58M, crushing chest pain radiating to left arm, ST elevation V1-V4. Door-to-balloon clock is ticking.',
+    specialty: 'Cardiology / EM',
+    difficulty: 'Standard',
+    patient: { name: 'Mr. Robert Johnson', age: '58M', seed: 'RobertJohnson', complaint: 'crushing chest pain, diaphoretic' },
+  },
+  {
+    id: 'copd-exacerbation',
+    title: 'COPD Exacerbation',
+    emoji: '🫁',
+    brief: '67F, worsening dyspnea and productive cough x3 days, increased O₂ requirement, wheezing.',
+    specialty: 'Pulmonology / EM',
+    difficulty: 'Standard',
+    patient: { name: 'Mrs. Patricia Wells', age: '67F', seed: 'PatriciaWells', complaint: 'worsening dyspnea, productive cough' },
+  },
+  {
+    id: 'acute-stroke',
+    title: 'Acute Ischemic Stroke',
+    emoji: '🧠',
+    brief: '72M, sudden onset right-sided weakness and slurred speech 45 min ago. Last known well 1 hour ago.',
+    specialty: 'Neurology / EM',
+    difficulty: 'Standard',
+    patient: { name: 'Mr. James Whitfield', age: '72M', seed: 'JamesWhitfield', complaint: 'right-sided weakness, slurred speech' },
+  },
+  {
+    id: 'sepsis-uti',
+    title: 'Urosepsis',
+    emoji: '🦠',
+    brief: '78F from nursing home, altered mental status, fever 39.4°C, tachycardic, hypotensive. Foley catheter in place.',
+    specialty: 'ID / EM',
+    difficulty: 'Standard',
+    patient: { name: 'Mrs. Dorothy Huang', age: '78F', seed: 'DorothyHuang', complaint: 'altered mental status, fever, hypotension' },
+  },
+  {
+    id: 'dka',
+    title: 'Diabetic Ketoacidosis',
+    emoji: '💉',
+    brief: '22M, new-onset T1DM presenting with nausea, vomiting, Kussmaul breathing, glucose 480, pH 7.12.',
+    specialty: 'Endocrine / EM',
+    difficulty: 'Standard',
+    patient: { name: 'Marcus Rivera', age: '22M', seed: 'MarcusRivera', complaint: 'nausea, vomiting, rapid deep breathing' },
+  },
+  {
+    id: 'eclampsia',
+    title: 'Preeclampsia with Severe Features',
+    emoji: '🤰',
+    brief: '28F at 34 weeks, severe headache, BP 178/112, proteinuria, visual changes, epigastric pain.',
+    specialty: 'OB/GYN / EM',
+    difficulty: 'Expert',
+    patient: { name: 'Jessica Okafor', age: '28F, 34wk', seed: 'JessicaOkafor', complaint: 'severe headache, high blood pressure, blurred vision' },
+  },
+];
+
+// ═══════════════════════════════════════════════
+//  PLAN GATING — Apply tier restrictions on load
+// ═══════════════════════════════════════════════
+let simFeatures = { plan: 'free', maxCharacters: 2, allowedCharacters: ['patient','attending'], multiplayer: false, voice: false, freeCases: ['stemi-anterior'], allCases: false };
+let selectedCaseId = 'stemi-anterior';
+
+(function applyTierGating() {
+  // Use DxPlanGate if available (platform integration)
+  if (typeof DxPlanGate !== 'undefined' && DxPlanGate.getSimRoomFeatures) {
+    simFeatures = DxPlanGate.getSimRoomFeatures();
+  }
+
+  // Build case grid
+  buildCaseGrid();
+
+  if (simFeatures.plan === 'pro') return; // Pro: everything unlocked
+
+  // Free tier: lock non-allowed characters
+  const proChars = ['nurse', 'family', 'consultant', 'pharmacist'];
+  proChars.forEach(id => {
+    const lbl = document.getElementById('lbl' + id.charAt(0).toUpperCase() + id.slice(1));
+    const chk = document.getElementById('chk' + id.charAt(0).toUpperCase() + id.slice(1));
+    const badge = document.getElementById('badge' + id.charAt(0).toUpperCase() + id.slice(1));
+    if (lbl) { lbl.classList.add('locked-char'); lbl.onclick = function(e) { e.preventDefault(); if (typeof DxPlanGate !== 'undefined') DxPlanGate.showUpgradeModal({ reason: 'Additional SimRoom characters (nurse, family, consultant, pharmacist) are available with Pro.', type: 'simRoomPro' }); }; }
+    if (chk) { chk.checked = false; chk.disabled = true; }
+    if (badge) badge.style.display = 'inline-flex';
+  });
+
+  // Lock voice for free
+  if (!simFeatures.voice) {
+    const chkV = document.getElementById('chkVoice');
+    const badgeV = document.getElementById('badgeVoice');
+    if (chkV) { chkV.checked = false; chkV.disabled = true; }
+    if (badgeV) badgeV.style.display = 'inline-flex';
+  }
+
+  // Show upgrade banner
+  document.getElementById('freeUpgradeBanner').style.display = 'block';
+})();
+
+// ═══════════════════════════════════════════════
+//  CASE GRID BUILDER
+// ═══════════════════════════════════════════════
+function buildCaseGrid() {
+  const grid = document.getElementById('caseGrid');
+  grid.innerHTML = '';
+  const isFree = simFeatures.plan !== 'pro';
+
+  CASE_LIBRARY.forEach(c => {
+    const isFreeCase = simFeatures.freeCases && simFeatures.freeCases.indexOf(c.id) !== -1;
+    const isLocked = isFree && !isFreeCase;
+    const isSelected = c.id === selectedCaseId;
+
+    const card = document.createElement('div');
+    card.className = `case-card${isSelected ? ' selected' : ''}${isLocked ? ' locked' : ''}`;
+    card.dataset.caseId = c.id;
+
+    card.innerHTML = `
+      <div class="case-emoji">${c.emoji}</div>
+      <div class="case-info">
+        <div class="case-title">${c.title}${isLocked ? ' <span class="pro-badge"><svg viewBox="0 0 24 24" style="width:9px;height:9px;fill:white;vertical-align:middle;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span>' : ''}${isFreeCase && isFree ? ' <span class="case-free-badge">FREE DEMO</span>' : ''}</div>
+        <div class="case-brief">${c.brief}</div>
+      </div>`;
+
+    card.onclick = () => {
+      if (isLocked) {
+        if (typeof DxPlanGate !== 'undefined') {
+          DxPlanGate.showUpgradeModal({ reason: 'This simulation case requires Pro. Free users can practice with the Anterior STEMI demo case.', type: 'simRoomPro' });
+        }
+        return;
+      }
+      selectCase(c.id);
+    };
+
+    grid.appendChild(card);
+  });
+}
+
+function selectCase(caseId) {
+  selectedCaseId = caseId;
+  const c = CASE_LIBRARY.find(x => x.id === caseId);
+  if (!c) return;
+
+  // Update selection UI
+  document.querySelectorAll('.case-card').forEach(el => {
+    el.classList.toggle('selected', el.dataset.caseId === caseId);
+  });
+
+  // Update case details
+  document.getElementById('caseDetailTitle').textContent = c.title;
+  document.getElementById('caseDetailBrief').textContent = c.brief;
+
+  // Update patient info in character list
+  document.getElementById('namePatient').innerHTML = `🛏️ ${c.patient.name} (Patient)`;
+  document.getElementById('descPatient').textContent = `${c.patient.age}, ${c.patient.complaint}`;
+  document.getElementById('avatarPatient').src = `https://api.dicebear.com/7.x/adventurer/svg?seed=${c.patient.seed}&backgroundColor=DBEAFE`;
+
+  // Update header (preview)
+  document.querySelector('.sim-case-title').textContent = `${c.title} — ${c.patient.name}`;
+}
+
+// ═══════════════════════════════════════════════
+//  CHARACTER DEFINITIONS
+// ═══════════════════════════════════════════════
+const CHARACTERS = {
+  patient: {
+    id: 'patient', name: 'Mr. Johnson', role: 'Patient', icon: '🛏️',
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=RobertJohnson&backgroundColor=DBEAFE',
+    cssClass: 'patient',
+    voice: { puter: 'Matthew', webSpeech: { name: 'Alex', pitch: 0.85, rate: 0.9 } },
+    systemPrompt: `You are Robert Johnson, a 58-year-old man in the emergency department with crushing chest pain. You are scared but trying to be tough. You have hypertension, type 2 diabetes, and smoke a pack a day for 35 years. Your wife Linda made you come in.
+
+SYMPTOMS: Crushing substernal chest pressure for 45 minutes, radiating to your left arm and jaw. You're sweating profusely. Feels like "an elephant sitting on my chest." Pain is 9/10. Started while watching TV after dinner. Took 2 Tums thinking it was heartburn — no relief. Never had pain like this before. Slight nausea. Short of breath.
+
+HISTORY: HTN (on lisinopril 20mg, amlodipine 5mg), Type 2 DM (metformin 1000mg BID, A1c 7.8), hyperlipidemia (atorvastatin 40mg — admits he doesn't always take it). No prior cardiac history, no surgeries. Father died of MI at 62. No drug allergies.
+
+RULES:
+- Speak like a real patient — use everyday language, not medical terms
+- You're in pain and scared. Short sentences. May grunt or pause.
+- If asked about the pain, describe it vividly but not technically
+- Don't volunteer information unless directly asked
+- If someone is kind to you, you open up more
+- You can ask worried questions back: "Am I having a heart attack?" "Am I going to die?"
+- If asked about meds, you might not remember the exact names — "that blood pressure pill"
+- You do NOT know your ECG findings or lab results`
+  },
+
+  attending: {
+    id: 'attending', name: 'Dr. Chen', role: 'Attending Physician', icon: '🩺',
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=DrChenAttending&backgroundColor=DCFCE7',
+    cssClass: 'attending',
+    voice: { puter: 'Amy', webSpeech: { name: 'Samantha', pitch: 1.05, rate: 1.0 } },
+    systemPrompt: `You are Dr. Chen, an experienced emergency medicine attending physician supervising a medical student. Your style is Socratic — you ask probing questions rather than giving answers. You are supportive but push the student to think critically.
+
+CASE: 58M with anterior STEMI (4mm ST elevation V1-V4, reciprocal inferior changes). HTN, DM, smoker. Door-to-balloon target is 90 minutes.
+
+KEY TEACHING POINTS you want the student to discover through questioning:
+- STEMI is an ECG diagnosis — don't wait for troponin
+- This is LAD territory (anterior = "widow maker")
+- Door-to-balloon target <90 min
+- Immediate: ASA 325mg chewed, P2Y12 inhibitor, anticoagulation
+- Risk stratification: Killip class, hemodynamic stability
+- Recognize and manage complications: arrhythmias, cardiogenic shock
+
+COACHING STYLE:
+- After the student asks the patient 2-3 good questions, interject with: "Good history taking. What's at the top of your differential?"
+- If the student misses something critical, hint: "Is there anything else about the timing that concerns you?"
+- Use positive reinforcement: "Exactly right." "Good instinct."
+- If student is on wrong track, redirect gently: "Let me challenge you on that..."
+- Keep your interjections to 1-3 sentences. Don't lecture.
+- Address the student as "Doctor" to build their professional identity
+- Occasionally inject urgency: "Time check — we're at 20 minutes since arrival."`
+  },
+
+  nurse: {
+    id: 'nurse', name: 'Sarah, RN', role: 'Bedside Nurse', icon: '👩‍⚕️',
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=NurseRamirez&backgroundColor=FEF9C3',
+    cssClass: 'nurse',
+    voice: { puter: 'Kendra', webSpeech: { name: 'Victoria', pitch: 1.1, rate: 1.05 } },
+    systemPrompt: `You are Sarah Ramirez, RN, an experienced emergency nurse caring for Mr. Johnson, a 58M with anterior STEMI.
+
+WHAT YOU KNOW:
+- Vitals: HR 92, BP 148/88, SpO2 96% on 2L NC, RR 20, Temp 37.1°C, Pain 9/10
+- ECG: 4mm ST elevation V1-V4, reciprocal inferior depression
+- IV access: 2 large-bore (18g) IVs placed. Running NS at 125mL/hr.
+- Meds given: ASA 325mg PO (chewed, given 5 min ago), morphine 2mg IV ordered but not yet given
+- Labs drawn: CBC, BMP, troponin, coag panel, type & screen — results pending
+- Cardiac monitor: NSR with occasional PVCs
+- O2 started at 2L nasal cannula
+
+STYLE: Efficient, clinical, helpful. You use medical shorthand. You anticipate needs. You'll update on vital sign changes if asked. You're a great nurse — experienced, calm, organized.`
+  },
+
+  family: {
+    id: 'family', name: 'Linda Johnson', role: "Patient's Wife", icon: '👨‍👩‍👦',
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=LindaJohnsonWife&backgroundColor=EDE9FE',
+    cssClass: 'family',
+    voice: { puter: 'Ruth', webSpeech: { name: 'Karen', pitch: 1.15, rate: 0.95 } },
+    systemPrompt: `You are Linda Johnson, 56, wife of Robert Johnson who is in the ED with chest pain. You're terrified.
+
+WHAT YOU KNOW ABOUT ROBERT:
+- He hasn't been great about taking his medications — especially the cholesterol one
+- He smokes and you've been begging him to quit for years
+- His father died of a heart attack at 62
+- He's been more tired than usual the past few weeks
+- He had some indigestion-like episodes last month but brushed them off
+- No drug allergies that you know of
+- His regular doctor is Dr. Williams at Riverside Medical
+
+STYLE: Emotional, worried. You ask questions: "Is he going to be okay?" You provide crucial collateral history the patient won't mention. You're not a medical person but you're intelligent and attentive.`
+  },
+
+  consultant: {
+    id: 'consultant', name: 'Dr. Patel', role: 'Cardiology Consult', icon: '👨‍⚕️',
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=DrPatelCards&backgroundColor=FFEDD5',
+    cssClass: 'consultant',
+    voice: { puter: 'Gregory', webSpeech: { name: 'Daniel', pitch: 0.95, rate: 1.1 } },
+    systemPrompt: `You are Dr. Patel, an interventional cardiologist on call. A medical student is calling you about a STEMI activation.
+
+EXPECTATIONS: You expect a structured SBAR consult call. If the student doesn't organize their presentation well, redirect: "Let me stop you — start with the situation."
+
+RESPONSES:
+- Good SBAR: "Good presentation. Cath lab is being activated. I'll be there in 10 minutes."
+- Poor SBAR: "I need more information. What's the ST elevation in millimeters? Has he gotten aspirin?"
+
+STYLE: Direct, efficient, no-nonsense. Busy but professional. Values structured communication.`
+  },
+
+  pharmacist: {
+    id: 'pharmacist', name: 'Dr. Kim, PharmD', role: 'Clinical Pharmacist', icon: '💊',
+    avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=PharmDKim&backgroundColor=FCE7F3',
+    cssClass: 'pharmacist',
+    voice: { puter: 'Ivy', webSpeech: { name: 'Tessa', pitch: 1.0, rate: 1.0 } },
+    systemPrompt: `You are Dr. Kim, a clinical pharmacist in the ED. Available for medication questions.
+
+CASE: 58M anterior STEMI. Current meds: lisinopril 20mg, amlodipine 5mg, metformin 1000mg BID, atorvastatin 40mg. NKDA.
+
+KNOWLEDGE:
+- STEMI protocol: ASA 325mg (chew), P2Y12 inhibitor (ticagrelor 180mg loading preferred), UFH bolus
+- Morphine: Use sparingly (may reduce P2Y12 absorption). 2-4mg IV PRN.
+- Hold metformin peri-procedurally (contrast risk)
+- NTG: 0.4mg SL q5min x3, avoid if SBP<90 or RV infarct
+- Beta-blocker: NOT in acute phase if HR>100 or signs of CHF
+
+STYLE: Evidence-based, precise, guideline-driven. You proactively flag issues.`
+  }
+};
+
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+let activeChars = ['patient'];
+let currentTarget = 'patient';
+let voiceEnabled = true;
+let coachingEnabled = true;
+let conversationHistory = [];
+let studentMsgCount = 0;
+let isProcessing = false;
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+function startSimulation() {
+  // Get selected case
+  const selectedCase = CASE_LIBRARY.find(c => c.id === selectedCaseId) || CASE_LIBRARY[0];
+
+  activeChars = ['patient'];
+  if (document.getElementById('chkAttending').checked) activeChars.push('attending');
+  if (document.getElementById('chkNurse').checked && !document.getElementById('chkNurse').disabled) activeChars.push('nurse');
+  if (document.getElementById('chkFamily').checked && !document.getElementById('chkFamily').disabled) activeChars.push('family');
+  if (document.getElementById('chkConsultant').checked && !document.getElementById('chkConsultant').disabled) activeChars.push('consultant');
+  if (document.getElementById('chkPharmacist').checked && !document.getElementById('chkPharmacist').disabled) activeChars.push('pharmacist');
+  voiceEnabled = document.getElementById('chkVoice').checked && !document.getElementById('chkVoice').disabled;
+  coachingEnabled = document.getElementById('chkCoaching').checked;
+
+  // Update header with selected case
+  document.querySelector('.sim-case-title').textContent = `${selectedCase.title} — ${selectedCase.patient.name}`;
+
+  // Update patient avatar in character definitions
+  CHARACTERS.patient.name = selectedCase.patient.name.replace(/^(Mr\.|Mrs\.|Ms\.|Dr\.)\s*/, '').split(' ').pop() !== selectedCase.patient.name
+    ? selectedCase.patient.name : selectedCase.patient.name;
+  CHARACTERS.patient.avatar = `https://api.dicebear.com/7.x/adventurer/svg?seed=${selectedCase.patient.seed}&backgroundColor=DBEAFE`;
+
+  document.getElementById('setupModal').style.display = 'none';
+  updateBtnVoice();
+  buildCharStrip();
+  buildAddressBar();
+  buildQuickActions();
+
+  addSystemMsg(`Simulation started: ${selectedCase.title}. You are a 3rd-year medical student on your Emergency Medicine rotation.`);
+
+  setTimeout(() => {
+    addSystemMsg(`You walk into the room. ${selectedCase.patient.age} patient — ${selectedCase.patient.complaint}. ${selectedCase.brief}`);
+  }, 800);
+
+  setTimeout(() => {
+    if (activeChars.includes('nurse')) {
+      addCharacterMsg('nurse', `Hey Doctor, this is ${selectedCase.patient.name}. ${selectedCase.patient.age}, ${selectedCase.patient.complaint}. I've got the initial workup started — vitals are on the board. You should take a look.`);
+    }
+  }, 2500);
+
+  setTimeout(() => {
+    addCharacterMsg('patient', `*grimacing* Doc... please... something's really wrong. Can you help me?`);
+  }, activeChars.includes('nurse') ? 5000 : 2000);
+
+  setTimeout(() => {
+    if (activeChars.includes('family')) {
+      addCharacterMsg('family', `*standing nearby, visibly worried* Please help. We didn't know what else to do. Is it serious?`);
+    }
+  }, 6500);
+}
+
+function buildCharStrip() {
+  const strip = document.getElementById('charStrip');
+  strip.innerHTML = '';
+  Object.values(CHARACTERS).forEach(ch => {
+    const isActive = activeChars.includes(ch.id);
+    const isLocked = !simFeatures.allowedCharacters.includes(ch.id) && simFeatures.plan !== 'pro';
+    const chip = document.createElement('div');
+    chip.className = `char-chip ${isActive ? 'active' : isLocked ? 'locked' : 'disabled'}`;
+    chip.id = `chip-${ch.id}`;
+    chip.innerHTML = `<img src="${ch.avatar}" alt="${ch.name}"><div><div class="char-name">${ch.icon} ${ch.name}${isLocked ? '<span class="pro-chip-badge">PRO</span>' : ''}</div><div class="char-role">${ch.role}</div></div>`;
+    if (isActive) chip.onclick = () => selectTarget(ch.id);
+    strip.appendChild(chip);
+  });
+}
+
+function buildAddressBar() {
+  const bar = document.getElementById('addressBar');
+  bar.innerHTML = '';
+  activeChars.forEach(id => {
+    const ch = CHARACTERS[id];
+    const btn = document.createElement('button');
+    btn.className = `addr-btn ${id === currentTarget ? 'selected' : ''}`;
+    btn.textContent = `@${ch.name}`;
+    btn.onclick = () => selectTarget(id);
+    bar.appendChild(btn);
+  });
+}
+
+function buildQuickActions() {
+  const qa = document.getElementById('quickActions');
+  qa.innerHTML = '';
+  const actions = [
+    { label: '📋 Order Labs', msg: '@nurse Can you draw a troponin, CBC, BMP, coags, and type & screen?' },
+    { label: '🫀 12-Lead ECG', msg: '@nurse Can I see the ECG please?' },
+    { label: '🩺 Physical Exam', msg: '@patient Mr. Johnson, I need to listen to your heart and lungs. Can you sit up slightly for me?' },
+    { label: '📞 Call Consult', msg: '@consultant Dr. Patel, I have a STEMI activation for you.' },
+    { label: '💊 Med Question', msg: '@pharmacist What\'s the loading dose protocol for this STEMI?' },
+  ];
+  actions.forEach(a => {
+    if (a.msg.includes('@consultant') && !activeChars.includes('consultant')) return;
+    if (a.msg.includes('@pharmacist') && !activeChars.includes('pharmacist')) return;
+    if (a.msg.includes('@nurse') && !activeChars.includes('nurse')) return;
+    const btn = document.createElement('button');
+    btn.className = 'qa-btn';
+    btn.textContent = a.label;
+    btn.onclick = () => {
+      const target = a.msg.match(/@(\w+)/)?.[1];
+      if (target) {
+        const charId = Object.keys(CHARACTERS).find(k => CHARACTERS[k].name.toLowerCase().startsWith(target.toLowerCase())) ||
+                       Object.keys(CHARACTERS).find(k => k === target);
+        if (charId) selectTarget(charId);
+      }
+      document.getElementById('msgInput').value = a.msg.replace(/@\w+\s*/, '');
+      document.getElementById('msgInput').focus();
+    };
+    qa.appendChild(btn);
+  });
+}
+
+function selectTarget(id) {
+  currentTarget = id;
+  document.querySelectorAll('.addr-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.addr-btn').forEach(b => {
+    if (b.textContent === `@${CHARACTERS[id].name}`) b.classList.add('selected');
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  MESSAGING
+// ═══════════════════════════════════════════════
+function addSystemMsg(text) {
+  const chat = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = 'msg system';
+  div.innerHTML = `<div class="msg-body">⚡ ${text}</div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function addCharacterMsg(charId, text) {
+  const ch = CHARACTERS[charId];
+  const chat = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = `msg ${ch.cssClass}`;
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  div.innerHTML = `
+    <div class="msg-header">
+      <img class="msg-avatar" src="${ch.avatar}" alt="">
+      <span class="msg-name">${ch.icon} ${ch.name}</span>
+      <span class="msg-time">${time}</span>
+      <button class="msg-speak-btn" onclick="speakText('${charId}', this)" title="Listen">🔊</button>
+    </div>
+    <div class="msg-body">${text}</div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+
+  const chip = document.getElementById(`chip-${charId}`);
+  if (chip) { chip.classList.add('speaking'); setTimeout(() => chip.classList.remove('speaking'), 3000); }
+
+  if (voiceEnabled) speakText(charId, null, text);
+  conversationHistory.push({ role: 'assistant', charId, content: text });
+}
+
+function addStudentMsg(text) {
+  const chat = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = 'msg student';
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  div.innerHTML = `
+    <div class="msg-header">
+      <span class="msg-name">🎓 You → ${CHARACTERS[currentTarget].icon} ${CHARACTERS[currentTarget].name}</span>
+      <span class="msg-time">${time}</span>
+    </div>
+    <div class="msg-body">${text}</div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  conversationHistory.push({ role: 'user', target: currentTarget, content: text });
+}
+
+function showTyping(charId) {
+  const chat = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = 'typing-indicator';
+  div.id = `typing-${charId}`;
+  div.innerHTML = `<span></span><span></span><span></span>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function hideTyping(charId) {
+  const el = document.getElementById(`typing-${charId}`);
+  if (el) el.remove();
+}
+
+// ═══════════════════════════════════════════════
+//  AI ROUTING
+// ═══════════════════════════════════════════════
+async function sendMessage() {
+  const input = document.getElementById('msgInput');
+  const text = input.value.trim();
+  if (!text || isProcessing) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  isProcessing = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  addStudentMsg(text);
+  studentMsgCount++;
+
+  showTyping(currentTarget);
+
+  try {
+    const response = await getAIResponse(currentTarget, text);
+    hideTyping(currentTarget);
+    addCharacterMsg(currentTarget, response);
+
+    // Attending coaching interjection
+    if (coachingEnabled && activeChars.includes('attending') && currentTarget !== 'attending' && studentMsgCount % 3 === 0) {
+      setTimeout(async () => {
+        showTyping('attending');
+        try {
+          const coaching = await getAIResponse('attending', `[The student just said to ${CHARACTERS[currentTarget].name}: "${text}" and ${CHARACTERS[currentTarget].name} responded: "${response}". Provide a brief coaching interjection — 1-2 sentences max.]`);
+          hideTyping('attending');
+          addCharacterMsg('attending', coaching);
+        } catch (e) { hideTyping('attending'); }
+      }, 1500);
+    }
+  } catch (error) {
+    hideTyping(currentTarget);
+    addSystemMsg("Connection issue — try again.");
+    console.error(error);
+  }
+
+  isProcessing = false;
+  document.getElementById('sendBtn').disabled = false;
+  input.focus();
+}
+
+async function getAIResponse(charId, userText) {
+  const ch = CHARACTERS[charId];
+  const selectedCase = CASE_LIBRARY.find(c => c.id === selectedCaseId) || CASE_LIBRARY[0];
+  const recentHistory = conversationHistory.slice(-10).map(m => {
+    if (m.role === 'user') return `Student (to ${CHARACTERS[m.target]?.name || 'unknown'}): ${m.content}`;
+    return `${CHARACTERS[m.charId]?.name || 'unknown'}: ${m.content}`;
+  }).join('\n');
+
+  // Inject case context so all characters stay case-aware
+  const caseContext = `ACTIVE CASE: ${selectedCase.title} — ${selectedCase.patient.name} (${selectedCase.patient.age}). Chief complaint: ${selectedCase.patient.complaint}. ${selectedCase.brief}`;
+
+  const prompt = `${ch.systemPrompt}\n\n${caseContext}\n\nCONVERSATION SO FAR:\n${recentHistory}\n\nThe student says to you: "${userText}"\n\nRespond in character. Keep it conversational and natural — 2-5 sentences typically. Stay in character at all times.`;
+
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 400,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+
+  const data = await response.json();
+  return data.content?.map(b => b.text || '').join('') || "...";
+}
+
+// ═══════════════════════════════════════════════
+//  VOICE
+// ═══════════════════════════════════════════════
+let currentAudio = null;
+
+async function speakText(charId, btn, textOverride) {
+  if (!voiceEnabled && !btn) return; // Skip auto-speak if voice disabled
+  const ch = CHARACTERS[charId];
+  const text = textOverride || btn?.closest('.msg')?.querySelector('.msg-body')?.textContent || '';
+  if (!text) return;
+
+  if (currentAudio) { try { currentAudio.pause(); } catch(e){} currentAudio = null; }
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+  if (typeof puter !== 'undefined' && puter.ai?.txt2speech) {
+    try {
+      const audio = await puter.ai.txt2speech(text, { voice: ch.voice.puter, engine: 'neural', language: 'en-US' });
+      currentAudio = audio;
+      audio.play();
+      return;
+    } catch (e) { console.warn('Puter TTS failed, falling back to Web Speech', e); }
+  }
+
+  if (window.speechSynthesis) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = speechSynthesis.getVoices();
+    const preferred = voices.find(v => v.name.includes(ch.voice.webSpeech.name)) || voices[0];
+    if (preferred) utterance.voice = preferred;
+    utterance.pitch = ch.voice.webSpeech.pitch;
+    utterance.rate = ch.voice.webSpeech.rate;
+    speechSynthesis.speak(utterance);
+  }
+}
+
+function toggleVoice() {
+  voiceEnabled = !voiceEnabled;
+  updateBtnVoice();
+  if (!voiceEnabled) {
+    if (currentAudio) { try { currentAudio.pause(); } catch(e){} currentAudio = null; }
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+}
+
+function updateBtnVoice() {
+  const btn = document.getElementById('btnVoice');
+  btn.textContent = voiceEnabled ? '🔊' : '🔇';
+  btn.classList.toggle('active', voiceEnabled);
+}
+
+// ═══════════════════════════════════════════════
+//  CLINICAL EVENTS
+// ═══════════════════════════════════════════════
+const EVENTS = [
+  { text: "⚠️ ALERT: Mr. Johnson's BP just dropped to 88/54. HR rising to 110.", vitals: { vBP: '88/54', vHR: '110' } },
+  { text: "⚠️ ALERT: New run of V-tach on the monitor — 8 beats, self-terminated.", vitals: {} },
+  { text: "⚠️ Lab results back: Troponin I = 4.2 ng/mL (elevated). BMP normal. CBC normal.", vitals: { vTrop: '4.2 ↑↑' } },
+  { text: "⚠️ Cath lab team is on the phone — they need an ETA. Door time was 12 minutes ago.", vitals: {} },
+  { text: "⚠️ Mr. Johnson is becoming more diaphoretic and says the pain is now 10/10.", vitals: { vPain: '10/10' } },
+];
+let eventIndex = 0;
+
+function injectEvent() {
+  if (eventIndex >= EVENTS.length) { addSystemMsg("No more clinical events in this scenario."); return; }
+  const ev = EVENTS[eventIndex++];
+  addSystemMsg(ev.text);
+  Object.entries(ev.vitals).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  INPUT HANDLING
+// ═══════════════════════════════════════════════
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+document.getElementById('msgInput').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+}
+</script>
+</body>
+</html>
