@@ -90,7 +90,6 @@
         .message { padding: 12px; border-radius: 8px; font-size: 14px; margin-bottom: 16px; display: none; }
         .message.error { display: block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
         .message.success { display: block; background: #f0f7fc; color: #166534; border: 1px solid #a7f3d0; }
-        .message.info { display: block; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
         .info-box { display: flex; align-items: flex-start; gap: 12px; padding: 16px; border-radius: 12px; margin-bottom: 20px; }
         .info-box.blue { background: #eff6ff; border: 1px solid #bfdbfe; }
         .info-box.green { background: #f0f7fc; border: 1px solid #a7f3d0; }
@@ -141,31 +140,7 @@
                 <span class="board-tag shelf">Shelf Exams</span>
                 <span class="board-tag rotation">Clinical Rotations</span>
             </div>
-        </div>
-
-        <!-- VIDEO SHOWCASE -->
-        <div id="videoShowcase" style="max-width: 800px; margin: 0 auto 40px;">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #1e3a5f; margin-bottom: 6px;">See ReasonDx in Action</h2>
-                <p style="font-size: 15px; color: #64748b;">Watch how students build clinical reasoning skills — before you even sign up.</p>
-            </div>
-            <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 16px;">
-                <button onclick="switchVideo('overview')" id="tabOverview" class="video-tab active" style="padding: 10px 24px; border-radius: 24px; border: 2px solid #2874A6; background: #2874A6; color: white; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;">Platform Overview</button>
-                <button onclick="switchVideo('fingerprint')" id="tabFingerprint" class="video-tab" style="padding: 10px 24px; border-radius: 24px; border: 2px solid #e2e8f0; background: white; color: #475569; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;">Reasoning Fingerprint</button>
-            </div>
-            <div style="position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); background: #0f172a;">
-                <video id="videoOverview" src="../media/Video_Overview_CoachDx.mp4" autoplay muted loop playsinline style="width: 100%; display: block; cursor: pointer;"></video>
-                <video id="videoFingerprint" src="../media/Fingerprint_Demo_Video.mp4" muted loop playsinline style="width: 100%; display: none; cursor: pointer;"></video>
-                <div id="videoSoundOverlay" onclick="unmuteVideo()" style="position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); color: white; padding: 10px 24px; border-radius: 24px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: opacity 0.3s; letter-spacing: 0.3px;">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                    Click for sound
-                </div>
-                <div id="videoTimeBar" style="position: absolute; bottom: 0; left: 0; height: 3px; background: #2874A6; width: 0%; transition: width 0.3s;"></div>
-            </div>
-            <div style="display: flex; justify-content: center; gap: 16px; margin-top: 12px;">
-                <span id="videoCaptionOverview" style="font-size: 13px; color: #64748b; font-style: italic;">62-second walkthrough of CoachDx clinical reasoning sessions</span>
-                <span id="videoCaptionFingerprint" style="font-size: 13px; color: #64748b; font-style: italic; display: none;">35-second preview of your personalized Reasoning Fingerprint</span>
-            </div>
+            <p style="margin-top: 16px; font-size: 15px; color: #64748b;">Already have an account? <a href="#" onclick="showLogin(); return false;" style="color: #2874A6; font-weight: 600; text-decoration: none;">Sign in →</a></p>
         </div>
 
         <div id="planSelection">
@@ -180,18 +155,17 @@
                     <div class="exam-tags">
                         <span class="exam-tag s1">Step 1</span>
                         <span class="exam-tag s2">Step 2</span>
-                        <span class="exam-tag shelf">Clinical Rotations</span>
                     </div>
                     <ul class="plan-features">
-                        <li>3 clinical reasoning cases per month</li>
-                        <li>SBAR Trainer (template view)</li>
-                        <li>CoachDx summary debrief</li>
-                        <li>Dashboard (last 3 sessions)</li>
+                        <li>5 MechanismDx learning modules</li>
+                        <li>3 clinical cases per week</li>
+                        <li>20 board-style MCQs</li>
+                        <li>Basic progress tracking</li>
                         <li>All clinical calculators</li>
-                        <li class="excluded">Unlimited cases</li>
-                        <li class="excluded">AI-scored SBAR feedback</li>
-                        <li class="excluded">Full CoachDx coaching</li>
-                        <li class="excluded">Reasoning Fingerprint</li>
+                        <li class="excluded">Full module library (316 topics)</li>
+                        <li class="excluded">Unlimited cases &amp; MCQs</li>
+                        <li class="excluded">Deep dive content</li>
+                        <li class="excluded">AI Tutor</li>
                     </ul>
                     <button class="plan-select-btn">Get Started Free</button>
                 </div>
@@ -211,14 +185,14 @@
                         <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>Unlimited clinical reasoning cases</li>
-                        <li>320+ cases across 28 specialties</li>
-                        <li>AI-scored SBAR feedback</li>
-                        <li>Full CoachDx metacognitive debrief</li>
-                        <li>Reasoning Pathway Fingerprint</li>
-                        <li>Complete session history &amp; analytics</li>
-                        <li>Exportable progress reports</li>
-                        <li>All clinical calculators</li>
+                        <li>All 316 topics across 28 specialties</li>
+                        <li>615 board-style MCQs</li>
+                        <li>320+ interactive case adventures</li>
+                        <li>400+ learning modules</li>
+                        <li>Board-prep mode (Step 1, Step 2, Shelf)</li>
+                        <li>Reasoning pathway fingerprinting</li>
+                        <li>AI Tutor (unlimited)</li>
+                        <li>Spaced repetition &amp; analytics</li>
                     </ul>
                     <button class="plan-select-btn">Start Pro</button>
                 </div>
@@ -366,39 +340,7 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <div class="form-group"><label class="form-label">Institution <span class="optional">(optional)</span></label><input type="text" id="institution" class="form-input" placeholder="Your school or hospital" list="institutionList"><datalist id="institutionList">
-                        <option value="Baylor College of Medicine">
-                        <option value="Columbia Vagelos College of Physicians and Surgeons">
-                        <option value="Duke University School of Medicine">
-                        <option value="Emory University School of Medicine">
-                        <option value="Florida Atlantic University Schmidt COM">
-                        <option value="Florida International University Wertheim COM">
-                        <option value="Harvard Medical School">
-                        <option value="Icahn School of Medicine at Mount Sinai">
-                        <option value="Johns Hopkins School of Medicine">
-                        <option value="Mayo Clinic Alix School of Medicine">
-                        <option value="Northwestern Feinberg School of Medicine">
-                        <option value="NSU — Nova Southeastern University Kiran Patel COM">
-                        <option value="NYU Grossman School of Medicine">
-                        <option value="Oregon Health &amp; Science University">
-                        <option value="Perelman School of Medicine (Penn)">
-                        <option value="Stanford University School of Medicine">
-                        <option value="UCLA David Geffen School of Medicine">
-                        <option value="UCSF School of Medicine">
-                        <option value="University of Central Florida COM">
-                        <option value="University of Florida COM">
-                        <option value="University of Miami Miller School of Medicine">
-                        <option value="University of Michigan Medical School">
-                        <option value="University of Pittsburgh School of Medicine">
-                        <option value="University of South Florida Morsani COM">
-                        <option value="University of Virginia School of Medicine">
-                        <option value="University of Wisconsin School of Medicine">
-                        <option value="Vanderbilt University School of Medicine">
-                        <option value="Washington University in St. Louis">
-                        <option value="Weill Cornell Medicine">
-                        <option value="Yale School of Medicine">
-                        <option value="Other">
-                    </datalist></div>
+                    <div class="form-group"><label class="form-label">Institution <span class="optional">(optional)</span></label><input type="text" id="institution" class="form-input" placeholder="Your school or hospital" list="institutionList"><datalist id="institutionList"><option value="Harvard Medical School"><option value="Johns Hopkins School of Medicine"><option value="Stanford University School of Medicine"><option value="UCSF School of Medicine"><option value="Columbia Vagelos College of Physicians and Surgeons"><option value="University of Michigan Medical School"><option value="Perelman School of Medicine (Penn)"><option value="Washington University in St. Louis"><option value="Duke University School of Medicine"><option value="NYU Grossman School of Medicine"><option value="Vanderbilt University School of Medicine"><option value="Baylor College of Medicine"><option value="Emory University School of Medicine"><option value="Northwestern Feinberg School of Medicine"><option value="UCLA David Geffen School of Medicine"><option value="University of Pittsburgh School of Medicine"><option value="Mayo Clinic Alix School of Medicine"><option value="Yale School of Medicine"><option value="Icahn School of Medicine at Mount Sinai"><option value="Weill Cornell Medicine"><option value="University of Virginia School of Medicine"><option value="University of Wisconsin School of Medicine"><option value="Oregon Health & Science University"><option value="Nova Southeastern University Kiran Patel COM"><option value="University of Central Florida COM"><option value="Florida International University Wertheim COM"><option value="Florida Atlantic University Schmidt COM"><option value="University of South Florida Morsani COM"><option value="University of Florida COM"><option value="University of Miami Miller School of Medicine"><option value="Other"></datalist></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Primary Specialty Interest <span class="optional">(optional)</span></label>
@@ -551,18 +493,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../dx-progress.js"></script>
+  <script src="email-service.js"></script>
     <script>
         // ============================================
         // CONFIGURATION
         // ============================================
         const CONFIG = {
-            GOOGLE_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec',
+            GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
             STRIPE_PUBLIC_KEY: 'pk_live_51T2KKACQYcGAAnaNsFyEw9c72eZpXTI2hjidIv9FLlYt5rsmyXWLAtEqk4dDwa9rHvpdYUXlXM2MnfXIaK6qeCAY002Za1ZPfl',
             STRIPE_PRICE_MONTHLY: 'price_1T2LFTCQYcGAAnaN9s9isvzR',
             STRIPE_PRICE_ANNUAL: 'price_1T2LGkCQYcGAAnaNbAV6gUDO',
             DEMO_MODE: false,
             PRO_MONTHLY: 14.99,
             PRO_ANNUAL: 99.00,
+            // Two-tier referral reward system:
+            // Tier 1: Free signups → Pro trial days (1=7d, 3=30d, 5=90d)
+            // Tier 2: Pro upgrades → Stripe coupon months (1=1mo, 3=4mo, 5=12mo)
+            // Tier 1 is processed at registration via the GAS backend
+            // Tier 2 is processed via Stripe webhook (checkout.session.completed)
             REFERRAL_REWARDS: { 1: 1, 3: 4, 5: 12 },
             REFERRAL_NEW_USER_BONUS: 1
         };
@@ -695,19 +643,18 @@
             state.verifiedEmail = email;
             document.getElementById('sentToEmail').textContent = email;
             nextSection();
-            // Send verification email via Apps Script + Resend
+            // Send verification email
             var emailSent = false;
-            try {
-                await fetch(CONFIG.GOOGLE_SHEETS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'send_verification', email: email, code: state.generatedCode })
-                });
-                emailSent = true;
-                console.log('Verification email sent');
-            } catch(e) { console.error('Email send error:', e); }
-            // Fallback: show code on screen if email send failed
+            if (typeof DxEmail !== 'undefined' && DxEmail.sendVerificationEmail) {
+                try {
+                    var result = await DxEmail.sendVerificationEmail(email, state.generatedCode);
+                    if (result && result.success) {
+                        console.log('Verification email sent successfully');
+                        emailSent = true;
+                    }
+                } catch(e) { console.error('Email send error:', e); }
+            }
+            // TEMPORARY FALLBACK: show code if email fails (remove once edge function is deployed)
             if (!emailSent) {
                 var verifyErr = document.getElementById('verifyError');
                 if (verifyErr) {
@@ -744,20 +691,14 @@
         }
         async function resendCode() {
             state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-            try {
-                await fetch(CONFIG.GOOGLE_SHEETS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'send_verification', email: state.verifiedEmail, code: state.generatedCode })
-                });
-                console.log('Verification code resent');
-                var verifyErr = document.getElementById('verifyError');
-                if (verifyErr) {
-                    verifyErr.textContent = 'A new code has been sent to your email.';
-                    verifyErr.className = 'message success';
-                }
-            } catch(e) { console.error('Resend error:', e); }
+            if (typeof DxEmail !== 'undefined' && DxEmail.sendVerificationEmail) {
+                try {
+                    var result = await DxEmail.sendVerificationEmail(state.verifiedEmail, state.generatedCode);
+                    if (result && result.success) {
+                        console.log('Verification code resent successfully');
+                    }
+                } catch(e) { console.error('Resend error:', e); }
+            }
         }
 
         // ============================================
@@ -860,9 +801,11 @@
             errEl.className = 'message';
             errEl.textContent = '';
 
+            // Disable button and show loading
             payBtn.disabled = true;
             payBtn.textContent = 'Redirecting to Stripe...';
 
+            // Save profile data to sessionStorage before redirect
             sessionStorage.setItem('reasondx-pending-profile', JSON.stringify({
                 firstName: document.getElementById('firstName').value.trim(),
                 lastName: document.getElementById('lastName').value.trim(),
@@ -912,7 +855,7 @@
                 errEl.textContent = 'Unable to start checkout. Please try again or contact support.';
                 errEl.className = 'message error';
                 payBtn.disabled = false;
-                setBilling(state.billingPeriod);
+                setBilling(state.billingPeriod); // Reset button text
             }
         }
 
@@ -937,7 +880,7 @@
             };
             localStorage.setItem('reasondx-user', JSON.stringify(userData));
 
-            // Create Supabase account in background
+            // Create Supabase account in background (for consistent auth sessions)
             try {
                 var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
                 var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
@@ -954,28 +897,42 @@
                             localStorage.setItem('reasondx-user', JSON.stringify(userData));
                         }
                     }).catch(function(e) { console.log('Supabase signup background error:', e); });
-                    state.password = null;
+                    state.password = null; // Clear password from memory
                 }
             } catch(e) { console.log('Supabase not available, localStorage auth only'); }
 
+            // Initialize the unified progress engine with profile data
             if (window.DxProgress && typeof window.DxProgress.syncProfile === 'function') {
                 window.DxProgress.syncProfile();
             }
 
             sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, timestamp: new Date().toISOString() });
 
+            // Log referral for the referrer (Stripe hook)
             if (state.referralCode) {
                 sendToSheets({ action: 'referral_completed', referrerCode: state.referralCode, newUserEmail: state.verifiedEmail, newUserPlan: state.selectedPlan, timestamp: new Date().toISOString() });
+                // STRIPE PRODUCTION HOOK:
+                // POST /api/referral/apply → { referrerCode, newUserStripeId }
+                // Backend: (1) Look up referrer by code in DB
+                //          (2) Increment referrer's referralCount
+                //          (3) Check against REFERRAL_REWARDS tiers
+                //          (4) If new tier reached, create Stripe coupon:
+                //              stripe.coupons.create({ percent_off: 100, duration: 'repeating', duration_in_months: rewardMonths })
+                //          (5) Apply coupon to referrer's subscription:
+                //              stripe.subscriptions.update(subId, { coupon: couponId })
+                //          (6) Apply 1-month coupon to new user's first invoice:
+                //              stripe.invoiceItems.create({ customer: newCustId, coupon: newUserCouponId })
                 console.log('REFERRAL: Code ' + state.referralCode + ' used. Stripe coupon hook ready.');
             }
 
             document.getElementById('referralCodeValue').textContent = state.generatedReferral;
             if (state.selectedPlan === 'pro') {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro!';
-                document.getElementById('successMessage').innerHTML = 'Unlimited clinical reasoning cases, AI-scored SBAR feedback, full CoachDx coaching, and your Reasoning Fingerprint are now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                var s = window.RdxSiteStats || {};
+                document.getElementById('successMessage').innerHTML = 'Full access to all ' + (s.topicsDisplay || '297') + ' topics, ' + (s.mcqsDisplay || '2,900+') + ' MCQs, and AI tutor is now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             } else {
                 document.getElementById('successTitle').textContent = 'Welcome to ReasonDx!';
-                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Start with 3 cases per month, SBAR practice, and CoachDx summaries. Upgrade anytime for unlimited access.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Explore board-prep content and upgrade anytime.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             }
             showSection('sectionSuccess');
         }
@@ -984,7 +941,7 @@
         // GOOGLE SHEETS
         // ============================================
         function sendToSheets(data) {
-            if (!CONFIG.GOOGLE_SHEETS_URL || CONFIG.GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') { console.log('Sheets not configured. Data:', JSON.stringify(data, null, 2)); return; }
+            if (CONFIG.GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') { console.log('Sheets not configured. Data:', JSON.stringify(data, null, 2)); return; }
             try { fetch(CONFIG.GOOGLE_SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); }
             catch (e) { console.error('Sheets error:', e); }
         }
@@ -999,9 +956,11 @@
             var pw = document.getElementById('loginPassword').value;
             if (!email || !pw) { document.getElementById('loginError').textContent = 'Please enter your email and password.'; document.getElementById('loginError').className = 'message error'; return; }
             
+            // Show loading state
             var loginBtn = document.querySelector('#loginForm .btn-primary');
             if (loginBtn) { loginBtn.disabled = true; loginBtn.textContent = 'Signing in...'; }
             
+            // Try Supabase auth first
             var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
             var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
             
@@ -1011,14 +970,17 @@
                     if (loginBtn) { loginBtn.disabled = false; loginBtn.textContent = 'Sign In'; }
                     
                     if (result.error) {
+                        // Supabase auth failed - show error
                         document.getElementById('loginError').textContent = result.error.message || 'Invalid email or password.';
                         document.getElementById('loginError').className = 'message error';
                         return;
                     }
                     
+                    // Success - get user name from Supabase profile
                     var user = result.data.user;
                     var fullName = (user.user_metadata && user.user_metadata.full_name) || email.split('@')[0];
                     
+                    // Try to get name from profiles table
                     sb.from('profiles').select('full_name, subscription_tier').eq('id', user.id).single().then(function(profileResult) {
                         var profile = profileResult.data;
                         var displayName = (profile && profile.full_name) || fullName;
@@ -1032,10 +994,13 @@
                             createdAt: user.created_at || new Date().toISOString()
                         }));
                         
+                        // Redirect to saved page or home
                         var redirect = sessionStorage.getItem('reasondx-redirect') || '../index.html';
+                        sessionStorage.removeItem('reasondx-redirect');
                         sessionStorage.removeItem('reasondx-redirect');
                         window.location.href = redirect;
                     }).catch(function() {
+                        // Profile fetch failed but auth succeeded - use metadata name
                         localStorage.setItem('reasondx-user', JSON.stringify({
                             email: user.email,
                             name: fullName,
@@ -1053,6 +1018,7 @@
                 });
             } catch(e) {
                 if (loginBtn) { loginBtn.disabled = false; loginBtn.textContent = 'Sign In'; }
+                // Supabase SDK not available - show error
                 console.error('Auth SDK error:', e);
                 document.getElementById('loginError').textContent = 'Authentication service unavailable. Please refresh and try again.';
                 document.getElementById('loginError').className = 'message error';
@@ -1064,14 +1030,17 @@
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Auto-show sign-in if redirected with #signin hash
             if (window.location.hash === '#signin') {
                 showLogin();
             }
 
             var params = new URLSearchParams(window.location.search);
 
+            // Handle Stripe Checkout return
             var checkoutStatus = params.get('checkout');
             if (checkoutStatus === 'success') {
+                // Restore state from sessionStorage
                 try {
                     var pendingProfile = JSON.parse(sessionStorage.getItem('reasondx-pending-profile'));
                     var pendingState = JSON.parse(sessionStorage.getItem('reasondx-pending-state'));
@@ -1083,10 +1052,13 @@
                         state.generatedReferral = pendingState.generatedReferral;
                         state.password = pendingState.password;
                         finalizeAccount(pendingProfile);
+                        // Clean up
                         sessionStorage.removeItem('reasondx-pending-profile');
                         sessionStorage.removeItem('reasondx-pending-state');
+                        // Clean URL
                         window.history.replaceState({}, '', window.location.pathname);
                     } else {
+                        // No pending data — show success anyway (payment went through)
                         document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
                         document.getElementById('sectionSuccess').classList.add('active');
                         document.getElementById('successTitle').textContent = 'Payment Successful!';
@@ -1095,10 +1067,11 @@
                 } catch(e) {
                     console.error('Error restoring checkout state:', e);
                 }
-                return;
+                return; // Skip normal init
             }
 
             if (checkoutStatus === 'cancelled') {
+                // User cancelled at Stripe — show payment section with message
                 try {
                     var pendingState2 = JSON.parse(sessionStorage.getItem('reasondx-pending-state'));
                     if (pendingState2) {
@@ -1115,6 +1088,7 @@
                 document.getElementById('paymentError').textContent = 'Checkout was cancelled. You can try again whenever you\'re ready.';
                 document.getElementById('paymentError').className = 'message error';
                 setupPaymentSection();
+                // Clean URL
                 window.history.replaceState({}, '', window.location.pathname);
                 return;
             }
@@ -1128,78 +1102,7 @@
 <script src="../data/rdx-persist.js"></script>
 <script src="../rdx-site-stats.js"></script>
 <script>
-// Video Showcase
-var currentVideo = 'overview';
-var videoUnmuted = false;
-
-function switchVideo(which) {
-    var overviewVid = document.getElementById('videoOverview');
-    var fingerprintVid = document.getElementById('videoFingerprint');
-    var tabO = document.getElementById('tabOverview');
-    var tabF = document.getElementById('tabFingerprint');
-    var capO = document.getElementById('videoCaptionOverview');
-    var capF = document.getElementById('videoCaptionFingerprint');
-    
-    currentVideo = which;
-    
-    if (which === 'overview') {
-        overviewVid.style.display = 'block';
-        fingerprintVid.style.display = 'none';
-        fingerprintVid.pause();
-        overviewVid.play();
-        tabO.style.background = '#2874A6'; tabO.style.color = 'white'; tabO.style.borderColor = '#2874A6';
-        tabF.style.background = 'white'; tabF.style.color = '#475569'; tabF.style.borderColor = '#e2e8f0';
-        capO.style.display = ''; capF.style.display = 'none';
-    } else {
-        fingerprintVid.style.display = 'block';
-        overviewVid.style.display = 'none';
-        overviewVid.pause();
-        fingerprintVid.play();
-        tabF.style.background = '#2874A6'; tabF.style.color = 'white'; tabF.style.borderColor = '#2874A6';
-        tabO.style.background = 'white'; tabO.style.color = '#475569'; tabO.style.borderColor = '#e2e8f0';
-        capF.style.display = ''; capO.style.display = 'none';
-    }
-    
-    if (videoUnmuted) {
-        var active = which === 'overview' ? overviewVid : fingerprintVid;
-        active.muted = false;
-    }
-}
-
-function unmuteVideo() {
-    var active = currentVideo === 'overview' 
-        ? document.getElementById('videoOverview') 
-        : document.getElementById('videoFingerprint');
-    active.muted = false;
-    videoUnmuted = true;
-    var overlay = document.getElementById('videoSoundOverlay');
-    overlay.style.opacity = '0';
-    setTimeout(function() { overlay.style.display = 'none'; }, 300);
-}
-
-// Progress bar
-setInterval(function() {
-    var vid = currentVideo === 'overview' 
-        ? document.getElementById('videoOverview') 
-        : document.getElementById('videoFingerprint');
-    if (vid && vid.duration) {
-        var pct = (vid.currentTime / vid.duration) * 100;
-        document.getElementById('videoTimeBar').style.width = pct + '%';
-    }
-}, 250);
-
-// Click video to toggle play/pause
-document.getElementById('videoOverview').addEventListener('click', function() {
-    if (!videoUnmuted) { unmuteVideo(); return; }
-    this.paused ? this.play() : this.pause();
-});
-document.getElementById('videoFingerprint').addEventListener('click', function() {
-    if (!videoUnmuted) { unmuteVideo(); return; }
-    this.paused ? this.play() : this.pause();
-});
-</script>
-<script>
-// Flodesk popup — show after 10s, only once per session
+// Flodesk popup — show after 30s, only once per session
 function closePopup() {
     document.getElementById('emailPopup').style.display = 'none';
     sessionStorage.setItem('rdx-popup-dismissed', 'true');
@@ -1213,18 +1116,21 @@ function showPopup() {
     sessionStorage.setItem('rdx-popup-shown', 'true');
 }
 
+// Close on overlay click
 document.getElementById('emailPopup').addEventListener('click', function(e) {
     if (e.target === this) closePopup();
 });
 
+// Close on Escape
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closePopup();
 });
 
+// Show popup after 10 seconds
 setTimeout(showPopup, 10000);
 </script>
 
-<script src="dx-feedback.js"></script>
+<script src="../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
