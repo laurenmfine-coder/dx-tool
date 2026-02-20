@@ -1509,13 +1509,13 @@ function showBridgeAnswer() {
 .fb-success p { font-size: 13px; color: #64748b; line-height: 1.5; }
 </style>
 
-<div class="fb-float" id="fbWidget">
+<div class="fb-float" id="fbWidget" style="display: none;">
     <button class="fb-btn" onclick="toggleFeedback()" id="fbToggle" aria-label="Send feedback">
         💬 <span>Feedback</span>
     </button>
 </div>
 
-<div class="fb-panel" id="fbPanel">
+<div class="fb-panel open" id="fbPanel">
     <div id="fbForm">
         <div class="fb-panel-header">
             <div>
@@ -1553,7 +1553,14 @@ var fbCategory = '';
 
 function toggleFeedback() {
     var panel = document.getElementById('fbPanel');
-    panel.classList.toggle('open');
+    var btn = document.getElementById('fbWidget');
+    var isOpen = panel.classList.contains('open');
+    if (isOpen) {
+        closeFeedbackPanel();
+    } else {
+        panel.classList.add('open');
+        btn.style.display = 'none';
+    }
 }
 
 function pickEmoji(btn, cat) {
@@ -1610,14 +1617,20 @@ function resetFeedback() {
     document.getElementById('fbSuccess').style.display = 'none';
 }
 
-// Minimize to icon after 8 seconds for returning visitors
-setTimeout(function() {
-    if (!document.getElementById('fbPanel').classList.contains('open')) {
-        var seen = sessionStorage.getItem('fb-seen');
-        if (seen) document.getElementById('fbToggle').classList.add('minimized');
-        sessionStorage.setItem('fb-seen', '1');
+// Panel starts open — button appears when user closes it
+// Only auto-open once per session; if user closed it, respect that
+(function() {
+    if (sessionStorage.getItem('fb-closed')) {
+        document.getElementById('fbPanel').classList.remove('open');
+        document.getElementById('fbWidget').style.display = 'block';
     }
-}, 8000);
+})();
+
+function closeFeedbackPanel() {
+    document.getElementById('fbPanel').classList.remove('open');
+    document.getElementById('fbWidget').style.display = 'block';
+    sessionStorage.setItem('fb-closed', '1');
+}
 </script>
 </body>
 </html>
