@@ -1474,5 +1474,150 @@ function showBridgeAnswer() {
     document.getElementById('bridgeAnswer').style.display = 'block';
 }
 </script>
+<!-- ═══════════════════════════════════════════ -->
+<!-- ANONYMOUS FEEDBACK WIDGET                 -->
+<!-- ═══════════════════════════════════════════ -->
+<style>
+.fb-float { position: fixed; bottom: 24px; left: 24px; z-index: 9998; }
+.fb-btn { display: flex; align-items: center; gap: 6px; padding: 10px 18px; background: linear-gradient(135deg, #2874A6, #1f5f8b); color: white; border: none; border-radius: 24px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(40,116,166,0.35); transition: all 0.25s; font-family: 'Inter', -apple-system, sans-serif; }
+.fb-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(40,116,166,0.45); }
+.fb-btn.minimized { padding: 10px 12px; border-radius: 50%; width: 44px; height: 44px; justify-content: center; }
+.fb-btn.minimized span { display: none; }
+.fb-panel { position: fixed; bottom: 80px; left: 24px; z-index: 9999; width: 360px; max-width: calc(100vw - 48px); background: white; border-radius: 20px; box-shadow: 0 12px 48px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; display: none; animation: fbSlideUp 0.25s ease; }
+.fb-panel.open { display: block; }
+@keyframes fbSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.fb-panel-header { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: start; }
+.fb-panel-header h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 800; color: #1e3a5f; margin: 0; }
+.fb-panel-close { background: none; border: none; font-size: 20px; color: #94a3b8; cursor: pointer; padding: 0; line-height: 1; }
+.fb-panel-body { padding: 16px 20px 20px; }
+.fb-emoji-row { display: flex; gap: 6px; margin-bottom: 14px; }
+.fb-emoji { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.fb-emoji:hover { border-color: #2874A6; background: #f0f7fc; }
+.fb-emoji.selected { border-color: #2874A6; background: #f0f7fc; box-shadow: 0 0 0 2px rgba(40,116,166,0.15); }
+.fb-emoji .em { font-size: 22px; line-height: 1; }
+.fb-emoji .el { font-size: 10px; font-weight: 600; color: #64748b; }
+.fb-text { width: 100%; min-height: 88px; padding: 12px 14px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 14px; font-family: 'Inter', -apple-system, sans-serif; color: #334155; resize: vertical; outline: none; transition: border-color 0.2s; line-height: 1.5; }
+.fb-text:focus { border-color: #2874A6; box-shadow: 0 0 0 3px rgba(40,116,166,0.08); }
+.fb-text::placeholder { color: #94a3b8; }
+.fb-submit { width: 100%; padding: 12px; background: linear-gradient(135deg, #2874A6, #1f5f8b); color: white; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; margin-top: 10px; }
+.fb-submit:hover { box-shadow: 0 4px 12px rgba(40,116,166,0.3); }
+.fb-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.fb-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 8px; }
+.fb-success { text-align: center; padding: 32px 20px; }
+.fb-success .check { font-size: 48px; margin-bottom: 8px; }
+.fb-success h4 { font-family: 'Playfair Display', serif; font-size: 18px; color: #1e3a5f; margin-bottom: 6px; }
+.fb-success p { font-size: 13px; color: #64748b; line-height: 1.5; }
+</style>
+
+<div class="fb-float" id="fbWidget">
+    <button class="fb-btn" onclick="toggleFeedback()" id="fbToggle" aria-label="Send feedback">
+        💬 <span>Feedback</span>
+    </button>
+</div>
+
+<div class="fb-panel" id="fbPanel">
+    <div id="fbForm">
+        <div class="fb-panel-header">
+            <div>
+                <h3>Share your thoughts</h3>
+                <p style="font-size: 12px; color: #94a3b8; margin-top: 2px;">100% anonymous — no login needed</p>
+            </div>
+            <button class="fb-panel-close" onclick="toggleFeedback()">&times;</button>
+        </div>
+        <div class="fb-panel-body">
+            <div class="fb-emoji-row">
+                <button class="fb-emoji" onclick="pickEmoji(this,'love')" data-cat="love"><span class="em">😍</span><span class="el">Love It</span></button>
+                <button class="fb-emoji" onclick="pickEmoji(this,'idea')" data-cat="idea"><span class="em">💡</span><span class="el">Idea</span></button>
+                <button class="fb-emoji" onclick="pickEmoji(this,'confused')" data-cat="confused"><span class="em">🤔</span><span class="el">Confused</span></button>
+                <button class="fb-emoji" onclick="pickEmoji(this,'bug')" data-cat="bug"><span class="em">🐛</span><span class="el">Bug</span></button>
+            </div>
+            <textarea class="fb-text" id="fbText" placeholder="Tell us anything — ideas, feedback, what you wish existed, what's confusing, what's great..." maxlength="2000"></textarea>
+            <button class="fb-submit" id="fbSubmitBtn" onclick="submitFeedback()">Send Feedback</button>
+            <p class="fb-note">Your feedback shapes what we build next.</p>
+        </div>
+    </div>
+    <div id="fbSuccess" class="fb-success" style="display: none;">
+        <div class="check">✨</div>
+        <h4>Thank you!</h4>
+        <p>Your feedback was received — it goes straight to the team. We read every single one.</p>
+        <button onclick="resetFeedback()" style="margin-top: 14px; padding: 8px 20px; background: none; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 13px; color: #64748b; cursor: pointer; font-family: inherit;">Send another</button>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// FEEDBACK WIDGET
+// ═══════════════════════════════════════════
+var FB_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec'; // Google Apps Script URL for feedback
+var fbCategory = '';
+
+function toggleFeedback() {
+    var panel = document.getElementById('fbPanel');
+    panel.classList.toggle('open');
+}
+
+function pickEmoji(btn, cat) {
+    document.querySelectorAll('.fb-emoji').forEach(function(b) { b.classList.remove('selected'); });
+    if (fbCategory === cat) { fbCategory = ''; }
+    else { btn.classList.add('selected'); fbCategory = cat; }
+}
+
+function submitFeedback() {
+    var text = document.getElementById('fbText').value.trim();
+    if (!text && !fbCategory) { document.getElementById('fbText').focus(); return; }
+
+    var btn = document.getElementById('fbSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    // Detect auth status without revealing identity
+    var isSignedIn = false;
+    try { var u = localStorage.getItem('reasondx-user'); if (u) { var j = JSON.parse(u); isSignedIn = !!(j && j.email); } } catch(e) {}
+
+    var payload = {
+        action: 'feedback',
+        category: fbCategory || 'none',
+        message: text,
+        page: location.pathname,
+        signedIn: isSignedIn,
+        timestamp: new Date().toISOString()
+    };
+
+    // Send to Google Sheets
+    if (FB_SHEETS_URL !== 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec') {
+        try {
+            fetch(FB_SHEETS_URL, {
+                method: 'POST', mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        } catch(e) {}
+    }
+    console.log('Feedback submitted:', JSON.stringify(payload, null, 2));
+
+    // Show success
+    document.getElementById('fbForm').style.display = 'none';
+    document.getElementById('fbSuccess').style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Send Feedback';
+}
+
+function resetFeedback() {
+    document.getElementById('fbText').value = '';
+    fbCategory = '';
+    document.querySelectorAll('.fb-emoji').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('fbForm').style.display = 'block';
+    document.getElementById('fbSuccess').style.display = 'none';
+}
+
+// Minimize to icon after 8 seconds for returning visitors
+setTimeout(function() {
+    if (!document.getElementById('fbPanel').classList.contains('open')) {
+        var seen = sessionStorage.getItem('fb-seen');
+        if (seen) document.getElementById('fbToggle').classList.add('minimized');
+        sessionStorage.setItem('fb-seen', '1');
+    }
+}, 8000);
+</script>
 </body>
 </html>
