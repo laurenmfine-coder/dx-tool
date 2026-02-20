@@ -126,6 +126,30 @@
         .exam-tag.shelf { background: #fef3c7; color: #92400e; }
         .beta-note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px; margin-top: 16px; font-size: 13px; color: #92400e; text-align: center; }
     </style>
+<script>
+// Early-load sign-in toggle so it works even if other scripts fail
+function showLogin() {
+    var ps = document.getElementById('planSelection');
+    var rf = document.getElementById('registrationForm');
+    var sc = document.getElementById('platformShowcase');
+    var lf = document.getElementById('loginForm');
+    if (ps) ps.classList.add('hidden');
+    if (rf) rf.classList.add('hidden');
+    if (sc) sc.classList.add('hidden');
+    if (lf) lf.classList.remove('hidden');
+    if (lf) lf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function showPlanSelection() {
+    var lf = document.getElementById('loginForm');
+    var rf = document.getElementById('registrationForm');
+    var ps = document.getElementById('planSelection');
+    var sc = document.getElementById('platformShowcase');
+    if (lf) lf.classList.add('hidden');
+    if (rf) rf.classList.add('hidden');
+    if (ps) ps.classList.remove('hidden');
+    if (sc) sc.classList.remove('hidden');
+}
+</script>
 <script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
@@ -254,8 +278,8 @@
                         <thead>
                             <tr style="border-bottom: 2px solid #e2e8f0;">
                                 <th style="text-align: left; padding: 10px 12px; color: #64748b; font-weight: 600;">Feature</th>
-                                <th style="padding: 10px 12px; color: #64748b; font-weight: 600;">UWorld / AMBOSS</th>
-                                <th style="padding: 10px 12px; color: #64748b; font-weight: 600;">Anki</th>
+                                <th style="padding: 10px 12px; color: #64748b; font-weight: 600;">Qbanks</th>
+                                <th style="padding: 10px 12px; color: #64748b; font-weight: 600;">Flashcards</th>
                                 <th style="padding: 10px 12px; color: white; font-weight: 700; background: #2874A6; border-radius: 8px 8px 0 0;">ReasonDx</th>
                             </tr>
                         </thead>
@@ -1095,8 +1119,7 @@
         // ============================================
         // LOGIN
         // ============================================
-        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
-        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.remove('hidden'); }
+        // showLogin() and showPlanSelection() defined in early-load script block in <head>
         function login() {
             var email = document.getElementById('loginEmail').value.trim();
             var pw = document.getElementById('loginPassword').value;
