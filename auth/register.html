@@ -143,6 +143,31 @@
             </div>
         </div>
 
+        <!-- VIDEO SHOWCASE -->
+        <div id="videoShowcase" style="max-width: 800px; margin: 0 auto 40px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #1e3a5f; margin-bottom: 6px;">See ReasonDx in Action</h2>
+                <p style="font-size: 15px; color: #64748b;">Watch how students build clinical reasoning skills — before you even sign up.</p>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 16px;">
+                <button onclick="switchVideo('overview')" id="tabOverview" class="video-tab active" style="padding: 10px 24px; border-radius: 24px; border: 2px solid #2874A6; background: #2874A6; color: white; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;">Platform Overview</button>
+                <button onclick="switchVideo('fingerprint')" id="tabFingerprint" class="video-tab" style="padding: 10px 24px; border-radius: 24px; border: 2px solid #e2e8f0; background: white; color: #475569; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;">Reasoning Fingerprint</button>
+            </div>
+            <div style="position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); background: #0f172a;">
+                <video id="videoOverview" src="../media/Video_Overview_CoachDx.mp4" autoplay muted loop playsinline style="width: 100%; display: block; cursor: pointer;"></video>
+                <video id="videoFingerprint" src="../media/Fingerprint_Demo_Video.mp4" muted loop playsinline style="width: 100%; display: none; cursor: pointer;"></video>
+                <div id="videoSoundOverlay" onclick="unmuteVideo()" style="position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); color: white; padding: 10px 24px; border-radius: 24px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: opacity 0.3s; letter-spacing: 0.3px;">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                    Click for sound
+                </div>
+                <div id="videoTimeBar" style="position: absolute; bottom: 0; left: 0; height: 3px; background: #2874A6; width: 0%; transition: width 0.3s;"></div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 16px; margin-top: 12px;">
+                <span id="videoCaptionOverview" style="font-size: 13px; color: #64748b; font-style: italic;">62-second walkthrough of CoachDx clinical reasoning sessions</span>
+                <span id="videoCaptionFingerprint" style="font-size: 13px; color: #64748b; font-style: italic; display: none;">35-second preview of your personalized Reasoning Fingerprint</span>
+            </div>
+        </div>
+
         <div id="planSelection">
             <div class="plans-grid">
                 <div class="plan-card" onclick="selectPlan('free')" id="planFree">
@@ -341,7 +366,39 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <div class="form-group"><label class="form-label">Institution <span class="optional">(optional)</span></label><input type="text" id="institution" class="form-input" placeholder="Your school or hospital" list="institutionList"><datalist id="institutionList"><option value="Harvard Medical School"><option value="Johns Hopkins School of Medicine"><option value="Stanford University School of Medicine"><option value="UCSF School of Medicine"><option value="Columbia Vagelos College of Physicians and Surgeons"><option value="University of Michigan Medical School"><option value="Perelman School of Medicine (Penn)"><option value="Washington University in St. Louis"><option value="Duke University School of Medicine"><option value="NYU Grossman School of Medicine"><option value="Vanderbilt University School of Medicine"><option value="Baylor College of Medicine"><option value="Emory University School of Medicine"><option value="Northwestern Feinberg School of Medicine"><option value="UCLA David Geffen School of Medicine"><option value="University of Pittsburgh School of Medicine"><option value="Mayo Clinic Alix School of Medicine"><option value="Yale School of Medicine"><option value="Icahn School of Medicine at Mount Sinai"><option value="Weill Cornell Medicine"><option value="University of Virginia School of Medicine"><option value="University of Wisconsin School of Medicine"><option value="Oregon Health & Science University"><option value="Nova Southeastern University Kiran Patel COM"><option value="University of Central Florida COM"><option value="Florida International University Wertheim COM"><option value="Florida Atlantic University Schmidt COM"><option value="University of South Florida Morsani COM"><option value="University of Florida COM"><option value="University of Miami Miller School of Medicine"><option value="Other"></datalist></div>
+                    <div class="form-group"><label class="form-label">Institution <span class="optional">(optional)</span></label><input type="text" id="institution" class="form-input" placeholder="Your school or hospital" list="institutionList"><datalist id="institutionList">
+                        <option value="Baylor College of Medicine">
+                        <option value="Columbia Vagelos College of Physicians and Surgeons">
+                        <option value="Duke University School of Medicine">
+                        <option value="Emory University School of Medicine">
+                        <option value="Florida Atlantic University Schmidt COM">
+                        <option value="Florida International University Wertheim COM">
+                        <option value="Harvard Medical School">
+                        <option value="Icahn School of Medicine at Mount Sinai">
+                        <option value="Johns Hopkins School of Medicine">
+                        <option value="Mayo Clinic Alix School of Medicine">
+                        <option value="Northwestern Feinberg School of Medicine">
+                        <option value="NSU — Nova Southeastern University Kiran Patel COM">
+                        <option value="NYU Grossman School of Medicine">
+                        <option value="Oregon Health &amp; Science University">
+                        <option value="Perelman School of Medicine (Penn)">
+                        <option value="Stanford University School of Medicine">
+                        <option value="UCLA David Geffen School of Medicine">
+                        <option value="UCSF School of Medicine">
+                        <option value="University of Central Florida COM">
+                        <option value="University of Florida COM">
+                        <option value="University of Miami Miller School of Medicine">
+                        <option value="University of Michigan Medical School">
+                        <option value="University of Pittsburgh School of Medicine">
+                        <option value="University of South Florida Morsani COM">
+                        <option value="University of Virginia School of Medicine">
+                        <option value="University of Wisconsin School of Medicine">
+                        <option value="Vanderbilt University School of Medicine">
+                        <option value="Washington University in St. Louis">
+                        <option value="Weill Cornell Medicine">
+                        <option value="Yale School of Medicine">
+                        <option value="Other">
+                    </datalist></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label">Primary Specialty Interest <span class="optional">(optional)</span></label>
@@ -1070,6 +1127,77 @@
     </script>
 <script src="../data/rdx-persist.js"></script>
 <script src="../rdx-site-stats.js"></script>
+<script>
+// Video Showcase
+var currentVideo = 'overview';
+var videoUnmuted = false;
+
+function switchVideo(which) {
+    var overviewVid = document.getElementById('videoOverview');
+    var fingerprintVid = document.getElementById('videoFingerprint');
+    var tabO = document.getElementById('tabOverview');
+    var tabF = document.getElementById('tabFingerprint');
+    var capO = document.getElementById('videoCaptionOverview');
+    var capF = document.getElementById('videoCaptionFingerprint');
+    
+    currentVideo = which;
+    
+    if (which === 'overview') {
+        overviewVid.style.display = 'block';
+        fingerprintVid.style.display = 'none';
+        fingerprintVid.pause();
+        overviewVid.play();
+        tabO.style.background = '#2874A6'; tabO.style.color = 'white'; tabO.style.borderColor = '#2874A6';
+        tabF.style.background = 'white'; tabF.style.color = '#475569'; tabF.style.borderColor = '#e2e8f0';
+        capO.style.display = ''; capF.style.display = 'none';
+    } else {
+        fingerprintVid.style.display = 'block';
+        overviewVid.style.display = 'none';
+        overviewVid.pause();
+        fingerprintVid.play();
+        tabF.style.background = '#2874A6'; tabF.style.color = 'white'; tabF.style.borderColor = '#2874A6';
+        tabO.style.background = 'white'; tabO.style.color = '#475569'; tabO.style.borderColor = '#e2e8f0';
+        capF.style.display = ''; capO.style.display = 'none';
+    }
+    
+    if (videoUnmuted) {
+        var active = which === 'overview' ? overviewVid : fingerprintVid;
+        active.muted = false;
+    }
+}
+
+function unmuteVideo() {
+    var active = currentVideo === 'overview' 
+        ? document.getElementById('videoOverview') 
+        : document.getElementById('videoFingerprint');
+    active.muted = false;
+    videoUnmuted = true;
+    var overlay = document.getElementById('videoSoundOverlay');
+    overlay.style.opacity = '0';
+    setTimeout(function() { overlay.style.display = 'none'; }, 300);
+}
+
+// Progress bar
+setInterval(function() {
+    var vid = currentVideo === 'overview' 
+        ? document.getElementById('videoOverview') 
+        : document.getElementById('videoFingerprint');
+    if (vid && vid.duration) {
+        var pct = (vid.currentTime / vid.duration) * 100;
+        document.getElementById('videoTimeBar').style.width = pct + '%';
+    }
+}, 250);
+
+// Click video to toggle play/pause
+document.getElementById('videoOverview').addEventListener('click', function() {
+    if (!videoUnmuted) { unmuteVideo(); return; }
+    this.paused ? this.play() : this.pause();
+});
+document.getElementById('videoFingerprint').addEventListener('click', function() {
+    if (!videoUnmuted) { unmuteVideo(); return; }
+    this.paused ? this.play() : this.pause();
+});
+</script>
 <script>
 // Flodesk popup — show after 10s, only once per session
 function closePopup() {
