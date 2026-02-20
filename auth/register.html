@@ -481,6 +481,11 @@ function showPlanSelection() {
                         <div class="form-group"><label class="form-label">Last Name</label><input type="text" id="lastName" class="form-input" placeholder="Doe"></div>
                     </div>
                     <div class="form-group">
+                        <label class="form-label">Preferred Display Name <span class="optional">(optional)</span></label>
+                        <input type="text" id="displayName" class="form-input" placeholder="What should we call you? (e.g. Jane, Dr. Fine, JD)">
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;">This is how you'll be greeted across the platform. Defaults to your first name.</div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">I am a...</label>
                         <select id="userRole" class="form-select">
                             <option value="">Select your training level</option>
@@ -906,9 +911,11 @@ function showPlanSelection() {
             if (!terms) { err.textContent = 'Please agree to the Terms of Service.'; err.className = 'message error'; return; }
             state.generatedReferral = generateReferralCode(fn, ln);
             state.password = pw;
+            var dn = document.getElementById('displayName').value.trim() || fn;
             var profileData = {
                 firstName: fn,
                 lastName: ln,
+                displayName: dn,
                 role: role,
                 institution: document.getElementById('institution').value.trim(),
                 specialty: document.getElementById('specialtyInterest').value,
@@ -957,6 +964,7 @@ function showPlanSelection() {
                 finalizeAccount({
                     firstName: document.getElementById('firstName').value.trim(),
                     lastName: document.getElementById('lastName').value.trim(),
+                    displayName: document.getElementById('displayName').value.trim() || document.getElementById('firstName').value.trim(),
                     role: document.getElementById('userRole').value,
                     institution: document.getElementById('institution').value.trim(),
                     specialty: document.getElementById('specialtyInterest').value,
@@ -979,6 +987,7 @@ function showPlanSelection() {
             sessionStorage.setItem('reasondx-pending-profile', JSON.stringify({
                 firstName: document.getElementById('firstName').value.trim(),
                 lastName: document.getElementById('lastName').value.trim(),
+                displayName: document.getElementById('displayName').value.trim() || document.getElementById('firstName').value.trim(),
                 role: document.getElementById('userRole').value,
                 institution: document.getElementById('institution').value.trim(),
                 specialty: document.getElementById('specialtyInterest').value,
@@ -1036,6 +1045,7 @@ function showPlanSelection() {
             var userData = {
                 email: state.verifiedEmail,
                 name: profile.firstName + ' ' + profile.lastName,
+                displayName: profile.displayName || profile.firstName,
                 plan: state.selectedPlan,
                 trainingLevel: profile.role,
                 specialty: profile.specialty || '',
@@ -1059,7 +1069,7 @@ function showPlanSelection() {
                     sb.auth.signUp({
                         email: state.verifiedEmail,
                         password: state.password,
-                        options: { data: { full_name: userData.name } }
+                        options: { data: { full_name: userData.name, display_name: userData.displayName } }
                     }).then(function(result) {
                         if (result.data && result.data.user) {
                             console.log('Supabase account created:', result.data.user.id);
@@ -1076,7 +1086,7 @@ function showPlanSelection() {
                 window.DxProgress.syncProfile();
             }
 
-            sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, timestamp: new Date().toISOString() });
+            sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, displayName: userData.displayName, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, timestamp: new Date().toISOString() });
 
             // Log referral for the referrer (Stripe hook)
             if (state.referralCode) {
@@ -1096,12 +1106,13 @@ function showPlanSelection() {
             }
 
             document.getElementById('referralCodeValue').textContent = state.generatedReferral;
+            var greetName = (profile && profile.displayName) || (profile && profile.firstName) || '';
             if (state.selectedPlan === 'pro') {
-                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro!';
+                document.getElementById('successTitle').textContent = greetName ? ('Welcome to ReasonDx Pro, ' + greetName + '!') : 'Welcome to ReasonDx Pro!';
                 var s = window.RdxSiteStats || {};
                 document.getElementById('successMessage').innerHTML = 'Full access to unlimited clinical reasoning cases across 29 specialties, CoachDx AI coaching, SBAR Trainer, SimRoomDx, and your Reasoning Fingerprint is now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             } else {
-                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx!';
+                document.getElementById('successTitle').textContent = greetName ? ('Welcome to ReasonDx, ' + greetName + '!') : 'Welcome to ReasonDx!';
                 document.getElementById('successMessage').innerHTML = 'Your free account is ready. Start practicing clinical reasoning and upgrade anytime.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             }
             showSection('sectionSuccess');
@@ -1148,16 +1159,19 @@ function showPlanSelection() {
                     // Success - get user name from Supabase profile
                     var user = result.data.user;
                     var fullName = (user.user_metadata && user.user_metadata.full_name) || email.split('@')[0];
+                    var metaDisplayName = (user.user_metadata && user.user_metadata.display_name) || '';
                     
                     // Try to get name from profiles table
-                    sb.from('profiles').select('full_name, subscription_tier').eq('id', user.id).single().then(function(profileResult) {
+                    sb.from('profiles').select('full_name, display_name, subscription_tier').eq('id', user.id).single().then(function(profileResult) {
                         var profile = profileResult.data;
-                        var displayName = (profile && profile.full_name) || fullName;
+                        var displayName = (profile && profile.display_name) || metaDisplayName || (profile && profile.full_name) || fullName;
+                        var nameForDisplay = (profile && profile.full_name) || fullName;
                         var plan = (profile && profile.subscription_tier) || 'free';
                         
                         localStorage.setItem('reasondx-user', JSON.stringify({
                             email: user.email,
-                            name: displayName,
+                            name: nameForDisplay,
+                            displayName: displayName,
                             plan: plan,
                             supabaseId: user.id,
                             createdAt: user.created_at || new Date().toISOString()
@@ -1173,6 +1187,7 @@ function showPlanSelection() {
                         localStorage.setItem('reasondx-user', JSON.stringify({
                             email: user.email,
                             name: fullName,
+                            displayName: metaDisplayName || fullName,
                             plan: 'free',
                             supabaseId: user.id
                         }));
