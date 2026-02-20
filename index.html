@@ -9,12 +9,28 @@
   gtag('js', new Date());
   gtag('config', 'G-EKCVJ1SMN3');
 </script>
-<script>window.location.replace('case-preview.html');</script>
+<script>
+// Redirect non-authenticated visitors to case-preview.html
+// Signed-in users (Supabase auth token present) stay on index.html
+(function() {
+    var hasAuth = false;
+    try {
+        for (var i = 0; i < localStorage.length; i++) {
+            var k = localStorage.key(i);
+            if (k && k.indexOf('sb-') === 0 && k.indexOf('-auth-token') > -1) {
+                var val = localStorage.getItem(k);
+                if (val && val.length > 10) { hasAuth = true; break; }
+            }
+        }
+    } catch(e) {}
+    if (!hasAuth) window.location.replace('case-preview.html');
+})();
+</script>
 <meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,21 +45,33 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* ═══ LAUNCH VISUAL REFRESH ═══
-   Matches walkthrough + Flodesk editorial tone:
-   - Fraunces display, DM Sans body
-   - Muted ocean palette, lots of breathing room
-   - Soft shadows, calm card treatments
+   Matches register page aesthetic:
+   - Playfair Display headings, Inter body
+   - Ocean blue #2874A6, navy #1e3a5f
+   - Soft shadows, clean card treatments
    ═══════════════════════════════ */
 
-
-
-/* Dark theme overrides for landing page variables */
-
+:root {
+  --blue: #2874A6;
+  --navy: #1e3a5f;
+  --slate50: #f8fafc;
+  --slate200: #e2e8f0;
+  --slate400: #94a3b8;
+  --slate500: #64748b;
+  --slate600: #475569;
+  --emerald: #059669;
+  --purple: #7c3aed;
+  --amber: #d97706;
+  --rose: #e11d48;
+  /* Override rdx-theme.css font variables */
+  --rdx-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  --rdx-font-serif: 'Playfair Display', Georgia, serif !important;
+}
 
 body {
-  font-family:var(--rdx-font);
-  background: var(--slate-50);
-  color: var(--slate-800);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--slate50);
+  color: #334155;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -67,12 +95,12 @@ body {
 }
 
 .nav-brand {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 20px;
-  color: #1B4F72;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  color: var(--navy);
   text-decoration: none;
   letter-spacing: -0.3px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .nav-links {
@@ -91,8 +119,8 @@ body {
   transition: all 0.15s;
 }
 
-.nav-links a:hover { background: var(--slate-100); color: var(--slate-900); }
-.nav-links a.active { background: var(--teal-50); color: var(--teal-dark); }
+.nav-links a:hover { background: #f0f7fc; color: var(--navy); }
+.nav-links a.active { background: #f0f7fc; color: var(--blue); }
 
 /* ============================================
    HERO — Search-first
@@ -100,16 +128,16 @@ body {
 .hero {
   padding: 72px 24px 44px;
   text-align: center;
-  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(180deg, #f0f7fc 0%, var(--slate50) 100%);
 }
 
 .hero h1 {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(28px, 5vw, 42px);
-  color: #1E293B;
+  color: var(--navy);
   letter-spacing: -0.5px;
   margin-bottom: 14px;
-  font-weight: 400;
+  font-weight: 800;
   line-height: 1.25;
 }
 
@@ -253,7 +281,7 @@ body {
 .path-card {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px 20px;
   text-decoration: none;
   color: inherit;
@@ -263,9 +291,9 @@ body {
 }
 
 .path-card:hover {
-  border-color: #BFD7EA;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  transform: translateY(-2px);
+  border-color: var(--blue);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+  transform: translateY(-3px);
 }
 
 .path-icon {
@@ -285,10 +313,11 @@ body {
 .path-icon.tools { background: #D1FAE5; }
 
 .path-card h3 {
-  font-size: 16px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
   font-weight: 700;
   margin-bottom: 5px;
-  color: #1E293B;
+  color: var(--navy);
 }
 
 .path-card p {
@@ -441,9 +470,10 @@ body {
 }
 
 .stat-number {
-  font-family:var(--rdx-font-serif);
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 32px;
-  color: var(--teal-dark);
+  font-weight: 800;
+  color: var(--blue);
 }
 
 .stat-label {
@@ -843,6 +873,25 @@ body {
 .level-badge-tag.m3 { background: #fef3c7; color: #92400e; }
 .level-badge-tag.m4 { background: #fce7f3; color: #9d174d; }
 .level-badge-tag.all-levels { background: #d4e8f7; color: #166534; }
+
+/* ============================================
+   PLATFORM SHOWCASE (index.html)
+   ============================================ */
+.ix-showcase { max-width: 960px; margin: 0 auto; padding: 0 24px 64px; }
+.ix-section-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 14px; border-radius: 6px; margin-bottom: 12px; }
+.ix-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.ix-desc { font-size: 14px; color: var(--slate500); line-height: 1.7; max-width: 560px; margin-bottom: 28px; }
+.ix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-bottom: 48px; }
+.ix-mock { background: var(--slate50); border: 1px solid var(--slate200); border-radius: 16px; padding: 20px; }
+.ix-mock-sm { background: white; border: 1px solid var(--slate200); border-radius: 12px; padding: 14px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.ix-mock-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; margin-bottom: 6px; }
+.ix-chat { padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.55; margin-bottom: 8px; max-width: 88%; }
+.ix-chat-user { background: #f0f7fc; color: #1a4971; border: 1px solid #bfdbfe; margin-left: auto; border-bottom-right-radius: 4px; }
+.ix-chat-ai { background: #f5f3ff; color: #4c1d95; border: 1px solid #ddd6fe; border-bottom-left-radius: 4px; }
+.ix-bar { height: 6px; background: #f1f5f9; border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
+.ix-bar-fill { height: 100%; border-radius: 3px; }
+.ix-divider { width: 48px; height: 3px; background: var(--blue); margin: 0 auto 12px; border-radius: 2px; }
+@media (max-width: 700px) { .ix-grid { grid-template-columns: 1fr !important; } .ix-showcase [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; } .ix-showcase [style*="repeat(5"] { grid-template-columns: repeat(2, 1fr) !important; } }
 </style>
 <link rel="stylesheet" href="./css/rdx-theme.css">
 <script>
@@ -958,6 +1007,160 @@ body {
     <div class="stat-label">Coaching</div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PLATFORM FEATURE SHOWCASE                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="ix-showcase">
+    <div style="text-align: center; margin-bottom: 40px;">
+        <div class="ix-divider"></div>
+        <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue);">Inside the Platform</p>
+    </div>
+
+    <!-- CRT -->
+    <div class="ix-grid">
+        <div>
+            <div class="ix-section-tag" style="background: #f0f7fc; color: var(--blue);">&#128300; Clinical Reasoning Trainer</div>
+            <h3 class="ix-title">Cases that teach reasoning, not pattern matching</h3>
+            <p class="ix-desc">Every case unfolds like a real clinical encounter. You get information piece by piece — history, exam, labs — and make decisions at each stage. Progressive disclosure forces the kind of systematic thinking you need on the wards.</p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #f0f7fc; color: var(--blue);">29 Specialties</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #ecfdf5; color: var(--emerald);">Hundreds of Cases</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #f5f3ff; color: var(--purple);">AI Coaching</span>
+            </div>
+        </div>
+        <div class="ix-mock">
+            <div class="ix-mock-sm" style="border-left: 3px solid var(--blue);">
+                <div class="ix-mock-label" style="color: var(--blue);">Progressive Disclosure</div>
+                <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+                    <span style="padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; background: var(--blue); color: white;">History ✓</span>
+                    <span style="padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; background: var(--blue); color: white;">Exam ✓</span>
+                    <span style="padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; background: #f0f7fc; color: var(--blue); border: 1px solid #bfdbfe;">Labs</span>
+                    <span style="padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; background: #f1f5f9; color: var(--slate400);">Imaging</span>
+                </div>
+                <p style="font-size: 12px; color: var(--slate500); line-height: 1.5;">Each phase reveals new data only after you commit to a differential and management plan.</p>
+            </div>
+            <div class="ix-mock-sm" style="border-left: 3px solid var(--emerald);">
+                <div class="ix-mock-label" style="color: var(--emerald);">Differential Scoring</div>
+                <div style="margin-bottom: 4px;"><div style="display: flex; justify-content: space-between; font-size: 12px;"><span style="color: var(--slate600);">ACS (Correct #1)</span><span style="color: var(--emerald); font-weight: 600;">+15 pts</span></div><div class="ix-bar"><div class="ix-bar-fill" style="width: 100%; background: var(--emerald);"></div></div></div>
+                <div style="margin-bottom: 4px;"><div style="display: flex; justify-content: space-between; font-size: 12px;"><span style="color: var(--slate600);">PE (Reasonable)</span><span style="color: var(--amber); font-weight: 600;">+8 pts</span></div><div class="ix-bar"><div class="ix-bar-fill" style="width: 55%; background: var(--amber);"></div></div></div>
+                <div><div style="display: flex; justify-content: space-between; font-size: 12px;"><span style="color: var(--slate600);">GERD (Low priority)</span><span style="color: var(--slate400); font-weight: 600;">+2 pts</span></div><div class="ix-bar"><div class="ix-bar-fill" style="width: 15%; background: var(--slate400);"></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CoachDx -->
+    <div class="ix-grid">
+        <div class="ix-mock">
+            <div class="ix-mock-label" style="color: var(--purple);">CoachDx — Live Session</div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+                <div class="ix-chat ix-chat-user">I think this is pneumonia because of the fever and cough.</div>
+                <div class="ix-chat ix-chat-ai"><strong>CoachDx:</strong> Pneumonia is reasonable. But the patient also has pleuritic chest pain and a swollen leg. What diagnoses explain ALL three findings simultaneously?</div>
+                <div class="ix-chat ix-chat-user">Oh — could this be a PE with pulmonary infarction?</div>
+                <div class="ix-chat ix-chat-ai"><strong>CoachDx:</strong> Exactly. Now you're seeing the whole picture. What risk factors support your revised hypothesis?</div>
+            </div>
+            <div style="margin-top: 10px; padding: 8px 12px; background: #faf5ff; border-radius: 10px; border: 1px solid #e9d5ff;">
+                <p style="font-size: 11px; font-weight: 700; color: var(--purple); margin-bottom: 2px;">BIAS DETECTED: Anchoring</p>
+                <p style="font-size: 12px; color: var(--slate600);">You initially fixed on pneumonia and missed the leg swelling.</p>
+            </div>
+        </div>
+        <div>
+            <div class="ix-section-tag" style="background: #f5f3ff; color: var(--purple);">&#129504; CoachDx</div>
+            <h3 class="ix-title">A coach that asks the question you need to hear</h3>
+            <p class="ix-desc">CoachDx doesn't give you the answer. It uses Socratic questioning to guide you there yourself — the same way an experienced attending teaches at the bedside.</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 24px; height: 24px; background: #f5f3ff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px;">&#127919;</span><span style="font-size: 13px; color: var(--slate600);">Real-time Socratic prompts — no spoilers</span></div>
+                <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 24px; height: 24px; background: #f5f3ff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px;">&#128200;</span><span style="font-size: 13px; color: var(--slate600);">Post-case debrief with reasoning pathway analysis</span></div>
+                <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 24px; height: 24px; background: #f5f3ff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px;">&#128161;</span><span style="font-size: 13px; color: var(--slate600);">Adaptive difficulty based on your performance</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SBAR + SimRoomDx side by side -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px;">
+        <div style="background: white; border: 1px solid var(--slate200); border-radius: 16px; padding: 24px; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div class="ix-section-tag" style="background: #fffbeb; color: var(--amber);">&#128172; SBAR Trainer</div>
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">Practice the handoff before it counts</h4>
+            <p style="font-size: 13px; color: var(--slate500); line-height: 1.6; margin-bottom: 12px;">13 realistic scenarios where you deliver SBAR handoffs and get AI-scored feedback on clarity, completeness, and clinical prioritization.</p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span style="background: #fffbeb; color: #92400e; padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 700;">Post-op Fever</span>
+                <span style="background: #fee2e2; color: #b91c1c; padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 700;">Chest Pain</span>
+                <span style="background: #f0f7fc; color: var(--blue); padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 700;">Newborn Feed</span>
+                <span style="background: #f1f5f9; color: var(--slate500); padding: 3px 10px; border-radius: 8px; font-size: 10px; font-weight: 600;">+10 more</span>
+            </div>
+        </div>
+        <div style="background: white; border: 1px solid var(--slate200); border-radius: 16px; padding: 24px; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div class="ix-section-tag" style="background: #ecfdf5; color: var(--emerald);">&#127973; SimRoomDx</div>
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">Full encounter simulation with an AI team</h4>
+            <p style="font-size: 13px; color: var(--slate500); line-height: 1.6; margin-bottom: 12px;">Run encounters from triage to disposition with AI patients, nurses, attendings, and specialists. Order tests, call consults, manage complications in real time.</p>
+            <div style="display: flex; gap: 8px;">
+                <span style="background: #ecfdf5; color: var(--emerald); padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;">&#129489;&#8205;&#9877;&#65039; AI Patient</span>
+                <span style="background: #ecfdf5; color: var(--emerald); padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;">&#128105;&#8205;&#9877;&#65039; AI Nurse</span>
+                <span style="background: #ecfdf5; color: var(--emerald); padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;">&#128104;&#8205;&#9877;&#65039; Attending</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reasoning Fingerprint -->
+    <div class="ix-grid">
+        <div>
+            <div class="ix-section-tag" style="background: #fff1f2; color: var(--rose);">&#128200; Reasoning Fingerprint</div>
+            <h3 class="ix-title">A visual map of how you think</h3>
+            <p class="ix-desc">Most platforms tell you your score. ReasonDx shows you <em>how</em> you think — mapping cognitive biases, system coverage, diagnostic calibration, and reasoning patterns across every case.</p>
+            <p style="font-size: 13px; color: var(--slate500); line-height: 1.6;">Your fingerprint evolves with every case, showing you patterns you can't see on your own.</p>
+        </div>
+        <div class="ix-mock">
+            <div class="ix-mock-sm">
+                <div class="ix-mock-label" style="color: var(--rose);">Your Fingerprint</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+                    <div style="text-align: center;"><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--blue);">72%</div><div style="font-size: 10px; color: var(--slate400);">DDx Accuracy</div></div>
+                    <div style="text-align: center;"><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--emerald);">89%</div><div style="font-size: 10px; color: var(--slate400);">Safety Score</div></div>
+                    <div style="text-align: center;"><div style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--purple);">84%</div><div style="font-size: 10px; color: var(--slate400);">Calibration</div></div>
+                </div>
+            </div>
+            <div class="ix-mock-sm" style="margin-bottom: 0;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--slate500); margin-bottom: 6px;">BIAS TRACKING</div>
+                <div style="margin-bottom: 4px;"><div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2px;"><span style="color: var(--slate600);">Anchoring Bias</span><span style="color: var(--emerald); font-weight: 600;">&#8595; 23%</span></div><div class="ix-bar"><div class="ix-bar-fill" style="width: 35%; background: var(--amber);"></div></div></div>
+                <div style="margin-bottom: 4px;"><div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2px;"><span style="color: var(--slate600);">Premature Closure</span><span style="color: var(--emerald); font-weight: 600;">&#8595; 18%</span></div><div class="ix-bar"><div class="ix-bar-fill" style="width: 28%; background: var(--amber);"></div></div></div>
+                <div><div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2px;"><span style="color: var(--slate600);">Availability Bias</span><span style="color: var(--amber); font-weight: 600;">&#8594; stable</span></div><div class="ix-bar"><div class="ix-bar-fill" style="width: 42%; background: var(--amber);"></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pre-Med Tools -->
+    <div style="text-align: center; margin-bottom: 32px;">
+        <div class="ix-section-tag" style="background: #ede9fe; color: #6d28d9;">&#127891; Pre-Med Students</div>
+        <h3 class="ix-title" style="max-width: 480px; margin: 0 auto 8px;">Purpose-built tools for pre-med</h3>
+        <p style="font-size: 14px; color: var(--slate500); max-width: 480px; margin: 0 auto 24px;">Not watered-down med school tools — dedicated features for where you are right now.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px;">
+        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="font-size: 28px; margin-bottom: 8px;">&#129658;</div>
+            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Encounter Companion</h4>
+            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Log &amp; analyze clinical encounters from shadowing</p>
+        </div>
+        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="font-size: 28px; margin-bottom: 8px;">&#127919;</div>
+            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Diagnostic Challenges</h4>
+            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Scaffolded cases for pre-med reasoning levels</p>
+        </div>
+        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="font-size: 28px; margin-bottom: 8px;">&#127753;</div>
+            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Bridge Mode</h4>
+            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Clinical vocabulary ramp for Day 1 readiness</p>
+        </div>
+        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="font-size: 28px; margin-bottom: 8px;">&#128221;</div>
+            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">LOR Narrative Builder</h4>
+            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Turn experiences into compelling recommendation stories</p>
+        </div>
+        <div style="background: white; border: 1px solid var(--slate200); border-radius: 14px; padding: 20px; text-align: center; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.07)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="font-size: 28px; margin-bottom: 8px;">&#128218;</div>
+            <h4 style="font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">Study Hub</h4>
+            <p style="font-size: 12px; color: var(--slate500); line-height: 1.4;">Guided learning paths from beginner to advanced</p>
+        </div>
+    </div>
+</div>
 
 <!-- POPULAR TOPICS — hidden for launch -->
 <!--
