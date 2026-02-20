@@ -902,7 +902,7 @@ body {
 
 <!-- 4 PATHS — Launch: Train / SBAR / Coach / Dashboard -->
 <section class="paths">
-  <a href="modules/training.html" class="path-card">
+  <a href="training.html" class="path-card">
     <div class="path-icon practice">🧠</div>
     <h3>Train</h3>
     <p>Build differentials, interview AI patients, and refine your diagnostic reasoning</p>
@@ -3435,9 +3435,8 @@ const pathContent = {
     title: 'SBAR Communication',
     desc: 'Practice structured clinical handoffs with AI-scored feedback',
     items: [
-      { icon: '📞', bg: '#fef3c7', title: 'Consult Trainer (13 Scenarios)', desc: 'Practice calling consults with realistic ED, floor, and ICU settings', href: 'consult-trainer.html', levels: ['m3','m4'] },
-      { icon: '🩺', bg: '#d4e8f7', title: 'CoachDx SBAR: Pediatric Urology', desc: 'Structured SBAR practice for pediatric urology scenarios', href: 'topics/pediatric-urology-sbar.html', levels: ['m3','m4'] },
-      { icon: '🏥', bg: '#d4e8f7', title: 'CoachDx SBAR: Urology Essentials', desc: 'SBAR communication practice for core urology presentations', href: 'topics/urology-sbar-collection.html', levels: ['m3','m4'] },
+      { icon: '📞', bg: '#fef3c7', title: 'Consult Trainer (13 Scenarios)', desc: 'Practice calling consults across ED, floor, and ICU settings', href: 'consult-trainer.html', levels: ['m3','m4'] },
+      { icon: '📋', bg: '#d4e8f7', title: 'SBAR Trainer (23 Scenarios)', desc: 'Structured SBAR practice across multiple specialties with scoring', href: 'tools/sbar-trainer.html', levels: ['m3','m4'] },
     ]
   }
 };
@@ -3848,9 +3847,9 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
     var contentId = href.split('/').pop().replace('.html','').replace(/\?.*/,'');
 
     // Determine content type from URL — launch gating
-    if (href.indexOf('training') !== -1 || href.indexOf('cases/') !== -1) {
+    if (href.indexOf('cases/') !== -1 && href.indexOf('training') === -1) {
       type = 'case';
-    } else if (href.indexOf('CoachDx') !== -1 || href.indexOf('mentor-chat') !== -1) {
+    } else if (href.indexOf('mentor-chat') !== -1) {
       type = 'aiTutor';
     }
 

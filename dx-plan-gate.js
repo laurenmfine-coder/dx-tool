@@ -322,7 +322,7 @@
         } else if (path.indexOf('board-prep') !== -1) {
             // Board prep gating handled within board-prep.html itself
             return;
-        } else if (path.indexOf('ai-trainer') !== -1 || path.indexOf('mentor-chat') !== -1) {
+        } else if (path.indexOf('mentor-chat') !== -1) {
             result = checkAccess('aiTutor');
         } else if (path.indexOf('simroomdx') !== -1 || path.indexOf('sim-room') !== -1) {
             result = checkAccess('simRoom');

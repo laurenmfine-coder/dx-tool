@@ -430,6 +430,37 @@ const CASE_LIBRARY = [
     specialty: 'Cardiology / EM',
     difficulty: 'Standard',
     patient: { name: 'Mr. Robert Johnson', age: '58M', seed: 'RobertJohnson', complaint: 'crushing chest pain, diaphoretic' },
+    mechanism: {
+      pathophysiology: [
+        'Atherosclerotic plaque in LAD → plaque rupture → platelet aggregation + fibrin thrombus → complete coronary occlusion',
+        'Transmural ischemia → ST elevation (injury current) in V1-V4 = LAD territory (anterior wall)',
+        'Ischemic cascade: ATP depletion (seconds) → anaerobic glycolysis + lactate → membrane dysfunction (minutes) → cell death (20-40 min without reperfusion)',
+        'Stunned myocardium (viable but dysfunctional) vs hibernating vs infarcted — reperfusion window determines salvage',
+        'Sympathetic activation → tachycardia, diaphoresis, nausea (vagal from inferior wall irritation)'
+      ],
+      anatomy: [
+        'LAD supplies anterior wall, anterior septum, and apex — largest territory of any single coronary ("widow maker")',
+        'V1-V4 correspond to anterior wall; reciprocal ST depression in II, III, aVF = inferior leads confirming anterior process',
+        'Chest pain radiates to left arm and jaw via shared visceral afferent pathways through T1-T4 spinal segments (convergence-projection theory)',
+        'Diaphoresis = sympathetic nervous system activation from catecholamine surge in response to pain and cardiac output drop'
+      ],
+      pharmacology: [
+        'ASA 325mg chewed: irreversible COX-1 inhibition → blocks TXA2 → prevents further platelet aggregation at the ruptured plaque site',
+        'P2Y12 inhibitor (ticagrelor/clopidogrel): blocks ADP receptor on platelets → dual antiplatelet therapy targets two different activation pathways',
+        'Heparin (UFH/enoxaparin): potentiates antithrombin III → inhibits factors IIa and Xa → prevents thrombus propagation',
+        'Nitroglycerin: venodilation → reduced preload → decreased wall stress and O₂ demand. Also coronary vasodilation. Contraindicated if SBP <90 or RV infarct (preload-dependent)',
+        'Morphine: use sparingly — reduces pain/anxiety but may decrease P2Y12 absorption and cause hypotension',
+        'Beta-blocker: reduces HR and contractility → decreased myocardial O₂ demand. NOT in acute phase if signs of heart failure or hypotension',
+        'Hold metformin peri-cath: risk of contrast-induced nephropathy → lactic acidosis without renal metformin clearance'
+      ],
+      clinicalReasoning: [
+        'STEMI is an ECG diagnosis — do NOT wait for troponin to act. Troponin rise takes 3-6 hours.',
+        'Door-to-balloon <90 min is the benchmark — every 30 min delay increases mortality',
+        'Killip classification: I (no CHF), II (rales, S3), III (pulmonary edema), IV (cardiogenic shock) — determines risk stratification',
+        'Right-sided ECG (V4R) if inferior STEMI suspected — RV involvement changes fluid management (volume-dependent, avoid nitrates)',
+        'Key complications to anticipate: VF/VT (most common cause of pre-hospital death), complete heart block (if septal involvement), cardiogenic shock, free wall rupture (days 3-7), papillary muscle rupture → acute MR'
+      ]
+    }
   },
   {
     id: 'copd-exacerbation',
@@ -439,6 +470,36 @@ const CASE_LIBRARY = [
     specialty: 'Pulmonology / EM',
     difficulty: 'Standard',
     patient: { name: 'Mrs. Patricia Wells', age: '67F', seed: 'PatriciaWells', complaint: 'worsening dyspnea, productive cough' },
+    mechanism: {
+      pathophysiology: [
+        'COPD: chronic inflammation → airway remodeling (goblet cell hyperplasia, smooth muscle hypertrophy) + alveolar destruction (emphysema) → fixed airflow obstruction (FEV1/FVC <0.70)',
+        'Exacerbation trigger (viral/bacterial) → neutrophilic inflammation surge → increased mucus production + bronchospasm + mucosal edema → acute worsening of airflow limitation',
+        'Air trapping (dynamic hyperinflation): expiratory airflow limitation → incomplete exhalation → increased residual volume → auto-PEEP → flattened diaphragm → increased work of breathing',
+        'V/Q mismatch: mucus plugging + bronchospasm → areas of low V/Q → hypoxemia. Some areas have high V/Q (emphysematous bullae = dead space ventilation) → increased CO₂',
+        'Hypercapnic respiratory failure: respiratory muscle fatigue + increased dead space → CO₂ retention → respiratory acidosis'
+      ],
+      anatomy: [
+        'Terminal bronchioles (no cartilage) are most vulnerable to collapse during forced expiration — this is where obstruction is worst',
+        'Emphysema destroys alveolar septae → loss of elastic recoil AND loss of radial traction on small airways → airways collapse during expiration',
+        'Diaphragm flattening from hyperinflation → poor length-tension relationship → diaphragm becomes less effective → relies on accessory muscles (SCM, scalenes, intercostals)',
+        'Pulmonary hypertension develops from chronic hypoxic pulmonary vasoconstriction (HPV) → RV hypertrophy → cor pulmonale'
+      ],
+      pharmacology: [
+        'Albuterol (SABA): beta-2 agonist → activates adenylyl cyclase → increased cAMP → bronchial smooth muscle relaxation. First-line for acute bronchospasm',
+        'Ipratropium: muscarinic antagonist → blocks vagal-mediated bronchoconstriction. Additive effect with SABA. Parasympathetic tone is the primary reversible component in COPD',
+        'Systemic corticosteroids (prednisone 40mg x 5 days): suppress neutrophilic inflammation → reduce airway edema and mucus production. Shorten exacerbation duration and reduce relapse',
+        'Antibiotics (if purulent sputum + increased dyspnea/volume): most common organisms are H. influenzae, M. catarrhalis, S. pneumoniae. Azithromycin or amoxicillin-clavulanate',
+        'O₂ target 88-92% in COPD: chronic CO₂ retainers rely partly on hypoxic drive. Over-oxygenation → Haldane effect (O₂ displaces CO₂ from Hb) + decreased hypoxic pulmonary vasoconstriction → worsened V/Q mismatch + decreased ventilatory drive → CO₂ narcosis',
+        'BiPAP/NIPPV: positive pressure splints open airways → reduces auto-PEEP → decreases work of breathing → avoids intubation in 50% of cases'
+      ],
+      clinicalReasoning: [
+        'Distinguish exacerbation severity: mild (SABA only), moderate (SABA + antibiotics/steroids), severe (hospitalization, possible ICU)',
+        'ABG interpretation: pH <7.35 + pCO₂ >45 = acute respiratory acidosis. If HCO₃ elevated, there is chronic retention with acute-on-chronic decompensation',
+        'Look for pneumothorax: hyperinflated lungs + blebs = risk. Sudden pleuritic pain + unilateral decreased breath sounds = emergency',
+        'CHF mimics COPD exacerbation: check BNP, look for peripheral edema, JVD, bilateral crackles vs wheezing. Many patients have overlap (COPD-CHF)',
+        'Intubation criteria: progressive acidosis despite BiPAP, altered mental status, hemodynamic instability, inability to protect airway'
+      ]
+    }
   },
   {
     id: 'acute-stroke',
@@ -448,6 +509,36 @@ const CASE_LIBRARY = [
     specialty: 'Neurology / EM',
     difficulty: 'Standard',
     patient: { name: 'Mr. James Whitfield', age: '72M', seed: 'JamesWhitfield', complaint: 'right-sided weakness, slurred speech' },
+    mechanism: {
+      pathophysiology: [
+        'Ischemic stroke: thrombotic or embolic occlusion of cerebral artery → downstream tissue ischemia → neuronal dysfunction within seconds, death within minutes to hours',
+        'Ischemic penumbra: core infarct (irreversible) surrounded by penumbra (hypoperfused but viable tissue) — this is the target of reperfusion therapy',
+        'Excitotoxicity cascade: ischemia → ATP depletion → failure of Na⁺/K⁺-ATPase → glutamate release → Ca²⁺ influx → activates proteases, lipases, endonucleases → cell death',
+        'Cytotoxic edema (minutes-hours): intracellular swelling from osmotic gradient. Vasogenic edema (hours-days): BBB breakdown → extracellular fluid accumulation → herniation risk',
+        'Common mechanisms: large vessel atherosclerosis (carotid/MCA), cardioembolism (AFib most common source), small vessel lacunar infarct, cryptogenic'
+      ],
+      anatomy: [
+        'Left MCA territory (most common): right hemiparesis + right facial droop + aphasia (Broca = expressive, Wernicke = receptive). Left MCA = "clinical stroke"',
+        'MCA supplies lateral cortex: motor strip (face/arm > leg), sensory strip, Broca area (frontal), Wernicke area (temporal). Leg sparing = MCA vs ACA (leg predominant)',
+        'Dysarthria (slurred speech) vs aphasia (language dysfunction): dysarthria = motor problem (cranial nerves, cerebellum, UMN); aphasia = cortical language area',
+        'Homunculus: face and arm representation are lateral (MCA territory), leg is medial (ACA territory) — explains why MCA strokes spare the leg',
+        'Internal capsule lacunar stroke: pure motor hemiparesis (face, arm, leg equally) from small vessel occlusion of lenticulostriate arteries (branches of MCA)'
+      ],
+      pharmacology: [
+        'tPA (alteplase): serine protease → converts plasminogen to plasmin → cleaves fibrin → dissolves thrombus. Window: 4.5 hours from last known well. 10% hemorrhagic transformation risk',
+        'Tenecteplase: modified tPA with longer half-life → single bolus (vs 1-hour tPA infusion). Emerging as preferred agent for large vessel occlusion',
+        'Antihypertensives: allow permissive hypertension (up to 220/120 without tPA, 185/110 with tPA) — brain is autoregulating to maintain perfusion to penumbra. Dropping BP too fast → penumbra infarcts',
+        'Antiplatelet therapy: ASA 325mg within 24-48 hours (NOT within 24h of tPA). Dual antiplatelet (ASA + clopidogrel) for minor stroke/TIA within 24h = 21-day DAPT per CHANCE/POINT trials',
+        'Anticoagulation for AFib: warfarin or DOAC for secondary prevention — but NOT in acute phase (hemorrhagic transformation risk). Start at 4-14 days depending on infarct size'
+      ],
+      clinicalReasoning: [
+        'Time is brain: 1.9 million neurons die per minute of untreated large vessel stroke. Last known well time determines tPA eligibility',
+        'NIHSS score: standardized assessment of stroke severity. >6 = moderate, consider thrombectomy evaluation. Score components: consciousness, gaze, visual fields, facial palsy, motor, ataxia, sensory, language, dysarthria, neglect',
+        'CT head STAT: rule out hemorrhage (hyperdense = blood). Ischemic stroke is often CT-negative in first 6 hours. Dense MCA sign = clot in vessel',
+        'Large vessel occlusion → thrombectomy window up to 24 hours (DAWN/DEFUSE-3 trials) if favorable perfusion imaging. CTA to identify occlusion site',
+        'Stroke mimics: hypoglycemia (check glucose FIRST), seizure with Todd paralysis, complex migraine, conversion disorder. Always check glucose before imaging'
+      ]
+    }
   },
   {
     id: 'sepsis-uti',
@@ -457,6 +548,37 @@ const CASE_LIBRARY = [
     specialty: 'ID / EM',
     difficulty: 'Standard',
     patient: { name: 'Mrs. Dorothy Huang', age: '78F', seed: 'DorothyHuang', complaint: 'altered mental status, fever, hypotension' },
+    mechanism: {
+      pathophysiology: [
+        'Urinary tract colonization (Foley catheter = biofilm) → ascending infection → bacteremia → systemic inflammatory response',
+        'Sepsis cascade: PAMPs (bacterial LPS/lipoteichoic acid) bind TLRs on immune cells → massive cytokine release (TNF-α, IL-1, IL-6) → systemic inflammation',
+        'Vasodilation: NO (nitric oxide) overproduction → systemic vasodilation → distributive shock → warm shock (warm extremities, bounding pulses, LOW SVR)',
+        'Capillary leak: endothelial dysfunction → increased permeability → third-spacing → intravascular volume depletion despite total body fluid overload',
+        'Organ dysfunction: maldistribution of blood flow + microvascular thrombosis (DIC pathway) → end-organ ischemia → MODS (kidneys, liver, lungs, brain)',
+        'Altered mental status in elderly: often the FIRST and ONLY sign of sepsis. Elderly may not mount fever or tachycardia due to blunted physiologic reserve'
+      ],
+      anatomy: [
+        'Foley catheter → biofilm formation within 24-48 hours → bypasses normal urethral defense mechanisms (mucosal IgA, urinary flow)',
+        'Female urethra (4cm) shorter than male (20cm) → higher UTI risk. Post-menopausal: decreased estrogen → vaginal pH rises → altered flora → increased colonization',
+        'Ascending infection: bladder → ureters → renal pelvis (pyelonephritis) → renal parenchyma → bloodstream (bacteremia) → sepsis',
+        'Kidneys receive 25% of cardiac output → highly vascular organ → efficient route for bacteria to enter bloodstream'
+      ],
+      pharmacology: [
+        'Empiric broad-spectrum antibiotics WITHIN 1 HOUR of sepsis recognition: each hour delay increases mortality 7-8%',
+        'Urosepsis coverage: gram-negative predominant (E. coli 75%, Klebsiella, Proteus, Pseudomonas). Ceftriaxone or piperacillin-tazobactam ± vancomycin (if MRSA risk)',
+        'Nursing home patient → higher MDR risk → consider broader coverage (pip-tazo or meropenem) and MRSA coverage (vancomycin)',
+        'IV fluids: 30 mL/kg crystalloid bolus within 3 hours (SEP-1 bundle). Lactated Ringers preferred over NS (less hyperchloremic acidosis, lower AKI risk)',
+        'Vasopressors: norepinephrine first-line if MAP <65 after fluid resuscitation. NE = alpha-1 (vasoconstriction) + mild beta-1 (inotropy). Central line preferred but can start peripherally',
+        'Lactate clearance: measure q2-4h. Initial lactate >4 = severe. 10% clearance in 6h associated with improved survival'
+      ],
+      clinicalReasoning: [
+        'Sepsis-3 criteria: suspected infection + SOFA score ≥2 (or qSOFA ≥2 at bedside: AMS, RR≥22, SBP≤100)',
+        'SEP-1 bundle (3-hour): lactate, blood cultures BEFORE antibiotics, broad-spectrum antibiotics, 30mL/kg fluid if hypotensive or lactate ≥4',
+        'Source control: remove/replace Foley catheter — the biofilm IS the source. Urology consult if obstruction suspected',
+        'Blood cultures x2 (from 2 different sites) BEFORE antibiotics — but do NOT delay antibiotics to obtain cultures',
+        'Elderly patients: atypical presentations. No fever in 30-50% of elderly sepsis. Confusion may be only sign. Low threshold for sepsis workup in nursing home patients with any acute change'
+      ]
+    }
   },
   {
     id: 'dka',
@@ -466,6 +588,36 @@ const CASE_LIBRARY = [
     specialty: 'Endocrine / EM',
     difficulty: 'Standard',
     patient: { name: 'Marcus Rivera', age: '22M', seed: 'MarcusRivera', complaint: 'nausea, vomiting, rapid deep breathing' },
+    mechanism: {
+      pathophysiology: [
+        'Absolute insulin deficiency (T1DM: autoimmune beta-cell destruction) → glucose cannot enter cells → profound hyperglycemia',
+        'Counter-regulatory hormone surge (glucagon, cortisol, catecholamines, GH) → hepatic glycogenolysis + gluconeogenesis → worsening hyperglycemia → osmotic diuresis → severe dehydration (avg 5-7L deficit)',
+        'Without insulin, cells switch to fat metabolism → lipolysis → free fatty acids → hepatic beta-oxidation → acetyl-CoA → ketogenesis (acetoacetate → beta-hydroxybutyrate + acetone)',
+        'Ketone bodies are organic acids → consume bicarbonate buffer → elevated anion gap metabolic acidosis (AGMA). AG = Na - (Cl + HCO₃), normal 10-12',
+        'Kussmaul breathing: respiratory compensation for metabolic acidosis — deep, rapid breathing to blow off CO₂ → lower pCO₂ → attempt to normalize pH (Winter formula: expected pCO₂ = 1.5 × HCO₃ + 8 ± 2)',
+        'Osmotic diuresis → K⁺ loss in urine, but acidosis shifts K⁺ extracellularly → serum K⁺ may appear normal or HIGH despite total body K⁺ depletion. CRITICAL: when insulin is given, K⁺ shifts back into cells → precipitous drop → arrhythmia risk'
+      ],
+      anatomy: [
+        'Pancreatic beta cells (Islets of Langerhans) → insulin production. T1DM: autoimmune destruction by CD8+ T cells and autoantibodies (anti-GAD, anti-IA2, anti-insulin)',
+        'Fruity breath odor = acetone (volatile ketone) exhaled through lungs — pathognomonic for DKA',
+        'Cerebral edema: most feared complication especially in pediatric DKA — rapid correction of osmolality → fluid shifts into brain → herniation. This is why you correct glucose gradually (target drop 50-70 mg/dL/hr)',
+        'Dehydration: dry mucous membranes, poor skin turgor, tachycardia, hypotension — average 5-7L fluid deficit in adult DKA'
+      ],
+      pharmacology: [
+        'IV insulin drip: 0.1 units/kg/hr (NO bolus in current guidelines). Insulin drives glucose AND potassium into cells, turns off ketogenesis. Target glucose drop: 50-70 mg/dL/hr',
+        'IV fluids: NS bolus 15-20 mL/kg in first hour, then 250-500 mL/hr. Switch to D5 half-NS when glucose <250 — you need insulin to stay running to close the anion gap, but must prevent hypoglycemia',
+        'Potassium replacement: if K⁺ <3.3, replace BEFORE starting insulin (risk of fatal hypokalemia). If 3.3-5.3, add 20-40 mEq/L to each liter of fluids. If >5.3, hold K⁺ but recheck q2h',
+        'Bicarbonate: ONLY if pH <6.9 (controversial). Bicarb can worsen CNS acidosis paradoxically and shift K⁺',
+        'DKA is resolved when: pH >7.3, HCO₃ >15, AG normalizes, patient tolerating PO. Overlap SC insulin for 2 hours before stopping drip'
+      ],
+      clinicalReasoning: [
+        'DKA diagnostic triad: hyperglycemia (>250), ketosis (positive serum ketones or beta-hydroxybutyrate >3), acidosis (pH <7.3, HCO₃ <18)',
+        'Anion gap calculation is essential: AG = Na - (Cl + HCO₃). If AG >12 → AGMA. Use delta-delta to check for concurrent non-AG metabolic acidosis',
+        'DKA triggers (the 5 I\'s): Infection, Insulin non-compliance, Infarction, Intoxication, Initial presentation (new-onset T1DM — this case)',
+        'Pseudohyponatremia: high glucose → osmotic water shift → dilutional hyponatremia. Corrected Na = measured Na + 1.6 × ((glucose - 100) / 100)',
+        'Monitor: glucose q1h, BMP q2-4h (K⁺ !!), ABG or VBG for pH trend. Close the anion gap, not just the glucose'
+      ]
+    }
   },
   {
     id: 'eclampsia',
@@ -475,6 +627,35 @@ const CASE_LIBRARY = [
     specialty: 'OB/GYN / EM',
     difficulty: 'Expert',
     patient: { name: 'Jessica Okafor', age: '28F, 34wk', seed: 'JessicaOkafor', complaint: 'severe headache, high blood pressure, blurred vision' },
+    mechanism: {
+      pathophysiology: [
+        'Preeclampsia origin: abnormal placentation — cytotrophoblasts fail to adequately remodel spiral arteries → inadequate placental perfusion → placental ischemia',
+        'Ischemic placenta releases anti-angiogenic factors (sFlt-1, soluble endoglin) → systemic endothelial dysfunction → the unifying mechanism of ALL preeclampsia features',
+        'Endothelial dysfunction → vasospasm → hypertension. Glomerular endotheliosis → proteinuria. Hepatic sinusoidal obstruction → elevated LFTs + epigastric pain. Cerebral vasospasm → headache, visual changes, seizures',
+        'HELLP syndrome: Hemolysis (microangiopathic, schistocytes) + Elevated Liver enzymes + Low Platelets — a severe variant reflecting widespread endothelial damage',
+        'Seizure (eclampsia): cerebral vasospasm + posterior reversible encephalopathy syndrome (PRES) → seizures. Can occur before, during, or after delivery'
+      ],
+      anatomy: [
+        'Spiral arteries: normally remodeled by trophoblast invasion to become low-resistance, high-flow vessels. In preeclampsia, they retain high resistance → reduced uteroplacental blood flow',
+        'Epigastric/RUQ pain: hepatic capsule distension from swelling + subcapsular hemorrhage → Glisson capsule stretching. Risk of hepatic rupture in severe cases',
+        'Visual changes: retinal arteriolar vasospasm, serous retinal detachment, cortical blindness (PRES involving occipital lobes)',
+        'Cerebral edema preferentially affects posterior circulation (PRES) → visual symptoms (scotomata, blindness) and seizures'
+      ],
+      pharmacology: [
+        'Magnesium sulfate: FIRST-LINE for seizure prophylaxis and treatment. MOA: NMDA receptor antagonist → reduces neuronal excitability + vasodilation → reduces cerebral vasospasm. 4-6g IV loading → 1-2g/hr maintenance',
+        'Mg toxicity monitoring: loss of DTRs (8-12 mg/dL), respiratory depression (12-15), cardiac arrest (>15). Antidote: calcium gluconate 1g IV',
+        'Antihypertensives (acute severe): IV labetalol (alpha+beta blocker) or IV hydralazine (arteriolar vasodilator) or PO nifedipine (CCB). Target: <160/110 to prevent stroke, but NOT too low (placental perfusion depends on maternal BP)',
+        'Betamethasone 12mg IM x2 doses (24h apart): if <34 weeks, accelerate fetal lung maturity by inducing surfactant production in type II pneumocytes',
+        'Definitive treatment: DELIVERY of the placenta. The placenta IS the disease. Timing depends on gestational age vs severity — balance maternal risk vs fetal prematurity'
+      ],
+      clinicalReasoning: [
+        'Severe features (any ONE = severe): SBP ≥160 or DBP ≥110 (on 2 occasions), platelets <100k, LFTs >2x normal, creatinine >1.1, pulmonary edema, new-onset headache unresponsive to meds, visual disturbances',
+        'At 34 weeks with severe features → delivery is indicated (ACOG). Before 34 weeks → attempt to stabilize + steroids for fetal lungs if possible',
+        'HELLP labs: CBC with smear (schistocytes = microangiopathic hemolysis), LDH (elevated), haptoglobin (low), LFTs (elevated AST/ALT), platelets (falling)',
+        'Differential: HELLP vs TTP vs HUS vs acute fatty liver of pregnancy — all present with thrombocytopenia + end-organ damage in pregnancy',
+        'Post-partum monitoring: preeclampsia can worsen 24-48h AFTER delivery. Eclamptic seizures occur postpartum in 30% of cases. Continue Mg for 24-48h after delivery'
+      ]
+    }
   },
 ];
 
@@ -588,21 +769,13 @@ const CHARACTERS = {
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=RobertJohnson&backgroundColor=DBEAFE',
     cssClass: 'patient',
     voice: { puter: 'Matthew', webSpeech: { name: 'Alex', pitch: 0.85, rate: 0.9 } },
-    systemPrompt: `You are Robert Johnson, a 58-year-old man in the emergency department with crushing chest pain. You are scared but trying to be tough. You have hypertension, type 2 diabetes, and smoke a pack a day for 35 years. Your wife Linda made you come in.
-
-SYMPTOMS: Crushing substernal chest pressure for 45 minutes, radiating to your left arm and jaw. You're sweating profusely. Feels like "an elephant sitting on my chest." Pain is 9/10. Started while watching TV after dinner. Took 2 Tums thinking it was heartburn — no relief. Never had pain like this before. Slight nausea. Short of breath.
-
-HISTORY: HTN (on lisinopril 20mg, amlodipine 5mg), Type 2 DM (metformin 1000mg BID, A1c 7.8), hyperlipidemia (atorvastatin 40mg — admits he doesn't always take it). No prior cardiac history, no surgeries. Father died of MI at 62. No drug allergies.
-
-RULES:
-- Speak like a real patient — use everyday language, not medical terms
-- You're in pain and scared. Short sentences. May grunt or pause.
-- If asked about the pain, describe it vividly but not technically
-- Don't volunteer information unless directly asked
-- If someone is kind to you, you open up more
-- You can ask worried questions back: "Am I having a heart attack?" "Am I going to die?"
-- If asked about meds, you might not remember the exact names — "that blood pressure pill"
-- You do NOT know your ECG findings or lab results`
+    getSystemPrompt: function(caseData) {
+      var m = caseData.mechanism || {};
+      var symptomMech = (m.pathophysiology || []).filter(function(p) {
+        return /symptom|pain|breath|nausea|sweat|confusion|alter|vomit|headache|visual|edema|diaphor|kussmaul|seizure/i.test(p);
+      }).join(' ');
+      return 'You are ' + caseData.patient.name + ', a ' + caseData.patient.age + ' patient in the emergency department.\n\nCHIEF COMPLAINT: ' + caseData.patient.complaint + '\nCASE CONTEXT: ' + caseData.brief + '\n\nYOUR EXPERIENCE (how the pathophysiology FEELS to you — describe in everyday language, never medical terms):\n' + (symptomMech || 'You feel very unwell and scared.') + '\n\nRULES:\n- Speak like a real patient — everyday language, never medical terms\n- You are in distress. Short sentences. May pause or express fear/pain.\n- Describe symptoms vividly when asked but do not volunteer everything at once\n- If someone is kind, you open up more. If rushed, you get anxious.\n- You can ask worried questions: "Am I going to be okay?" "What is happening to me?"\n- You may not remember exact medication names\n- You do NOT know your test results, ECG findings, or lab values\n- If asked something you would not know as a patient, say "I don\'t know, doctor"';
+    }
   },
 
   attending: {
@@ -610,26 +783,10 @@ RULES:
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=DrChenAttending&backgroundColor=DCFCE7',
     cssClass: 'attending',
     voice: { puter: 'Amy', webSpeech: { name: 'Samantha', pitch: 1.05, rate: 1.0 } },
-    systemPrompt: `You are Dr. Chen, an experienced emergency medicine attending physician supervising a medical student. Your style is Socratic — you ask probing questions rather than giving answers. You are supportive but push the student to think critically.
-
-CASE: 58M with anterior STEMI (4mm ST elevation V1-V4, reciprocal inferior changes). HTN, DM, smoker. Door-to-balloon target is 90 minutes.
-
-KEY TEACHING POINTS you want the student to discover through questioning:
-- STEMI is an ECG diagnosis — don't wait for troponin
-- This is LAD territory (anterior = "widow maker")
-- Door-to-balloon target <90 min
-- Immediate: ASA 325mg chewed, P2Y12 inhibitor, anticoagulation
-- Risk stratification: Killip class, hemodynamic stability
-- Recognize and manage complications: arrhythmias, cardiogenic shock
-
-COACHING STYLE:
-- After the student asks the patient 2-3 good questions, interject with: "Good history taking. What's at the top of your differential?"
-- If the student misses something critical, hint: "Is there anything else about the timing that concerns you?"
-- Use positive reinforcement: "Exactly right." "Good instinct."
-- If student is on wrong track, redirect gently: "Let me challenge you on that..."
-- Keep your interjections to 1-3 sentences. Don't lecture.
-- Address the student as "Doctor" to build their professional identity
-- Occasionally inject urgency: "Time check — we're at 20 minutes since arrival."`
+    getSystemPrompt: function(caseData) {
+      var m = caseData.mechanism || {};
+      return 'You are Dr. Chen, an experienced attending physician supervising a medical student. Your teaching style is Socratic — you ask probing WHY questions to build deep understanding.\n\nCASE: ' + caseData.brief + '\n\nYOUR DEEP KNOWLEDGE (use to craft teaching questions — NEVER lecture. Ask questions that lead the student to discover these concepts):\n\nPATHOPHYSIOLOGY CHAIN:\n' + (m.pathophysiology || []).map(function(p, i) { return (i+1) + '. ' + p; }).join('\n') + '\n\nANATOMY CONNECTIONS:\n' + (m.anatomy || []).map(function(a, i) { return (i+1) + '. ' + a; }).join('\n') + '\n\nPHARMACOLOGY RATIONALE:\n' + (m.pharmacology || []).map(function(p, i) { return (i+1) + '. ' + p; }).join('\n') + '\n\nCLINICAL REASONING PEARLS:\n' + (m.clinicalReasoning || []).map(function(c, i) { return (i+1) + '. ' + c; }).join('\n') + '\n\nTEACHING METHOD — CRITICAL:\n- Ask WHY questions connecting pathophysiology to clinical findings: "Why is this patient diaphoretic?" "What is the mechanism behind that symptom?"\n- When student gives a correct answer, push deeper: "Good — now WHY does that happen at the cellular level?"\n- Connect pharmacology to mechanism: "You ordered that medication — what is it actually doing at the receptor level?"\n- Link anatomy to presentation: "Which anatomic structure explains that finding?"\n- If student orders a test, ask WHY: "What are you looking for? How will the result change your management?"\n- If student misses a concept, hint through questions, do not tell them the answer\n- Weave in 1-2 mechanism questions naturally per exchange\n- Use positive reinforcement: "Exactly right, Doctor." "Good clinical reasoning."\n- Keep responses to 2-4 sentences. Ask ONE probing question per response.\n- Address the student as "Doctor"';
+    }
   },
 
   nurse: {
@@ -637,53 +794,31 @@ COACHING STYLE:
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=NurseRamirez&backgroundColor=FEF9C3',
     cssClass: 'nurse',
     voice: { puter: 'Kendra', webSpeech: { name: 'Victoria', pitch: 1.1, rate: 1.05 } },
-    systemPrompt: `You are Sarah Ramirez, RN, an experienced emergency nurse caring for Mr. Johnson, a 58M with anterior STEMI.
-
-WHAT YOU KNOW:
-- Vitals: HR 92, BP 148/88, SpO2 96% on 2L NC, RR 20, Temp 37.1°C, Pain 9/10
-- ECG: 4mm ST elevation V1-V4, reciprocal inferior depression
-- IV access: 2 large-bore (18g) IVs placed. Running NS at 125mL/hr.
-- Meds given: ASA 325mg PO (chewed, given 5 min ago), morphine 2mg IV ordered but not yet given
-- Labs drawn: CBC, BMP, troponin, coag panel, type & screen — results pending
-- Cardiac monitor: NSR with occasional PVCs
-- O2 started at 2L nasal cannula
-
-STYLE: Efficient, clinical, helpful. You use medical shorthand. You anticipate needs. You'll update on vital sign changes if asked. You're a great nurse — experienced, calm, organized.`
+    getSystemPrompt: function(caseData) {
+      var m = caseData.mechanism || {};
+      return 'You are Sarah Ramirez, RN, an experienced emergency nurse caring for ' + caseData.patient.name + ', ' + caseData.patient.age + '.\n\nCASE: ' + caseData.brief + '\n\nMEDICATION KNOWLEDGE:\n' + (m.pharmacology || []).slice(0, 4).map(function(p) { return '- ' + p; }).join('\n') + '\n\nMONITORING & REASONING:\n' + (m.clinicalReasoning || []).slice(0, 3).map(function(c) { return '- ' + c; }).join('\n') + '\n\nSTYLE:\n- Efficient, clinical, helpful. Use medical shorthand naturally.\n- Report vitals and changes proactively\n- If student orders something concerning, flag it: "Just to confirm, doctor?"\n- Anticipate needs: "I can get that drawn" or "Want me to set up for that?"\n- If asked about a medication, explain from a nursing perspective\n- Reinforce learning with practical questions: "Loading dose or maintenance?" "Any allergies before I hang this?"\n- Keep responses to 1-3 sentences.';
+    }
   },
 
   family: {
-    id: 'family', name: 'Linda Johnson', role: "Patient's Wife", icon: '👨‍👩‍👦',
+    id: 'family', name: 'Family Member', role: "Patient's Family", icon: '👨‍👩‍👦',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=LindaJohnsonWife&backgroundColor=EDE9FE',
     cssClass: 'family',
     voice: { puter: 'Ruth', webSpeech: { name: 'Karen', pitch: 1.15, rate: 0.95 } },
-    systemPrompt: `You are Linda Johnson, 56, wife of Robert Johnson who is in the ED with chest pain. You're terrified.
-
-WHAT YOU KNOW ABOUT ROBERT:
-- He hasn't been great about taking his medications — especially the cholesterol one
-- He smokes and you've been begging him to quit for years
-- His father died of a heart attack at 62
-- He's been more tired than usual the past few weeks
-- He had some indigestion-like episodes last month but brushed them off
-- No drug allergies that you know of
-- His regular doctor is Dr. Williams at Riverside Medical
-
-STYLE: Emotional, worried. You ask questions: "Is he going to be okay?" You provide crucial collateral history the patient won't mention. You're not a medical person but you're intelligent and attentive.`
+    getSystemPrompt: function(caseData) {
+      return 'You are a close family member of ' + caseData.patient.name + ' (' + caseData.patient.age + ') in the emergency department.\n\nCASE: ' + caseData.brief + '\n\nYOUR ROLE:\n- You are worried and emotional but intelligent\n- Provide crucial collateral history the patient may not mention: medication compliance, recent symptoms dismissed, family history, lifestyle\n- Ask real family questions: "Is this serious?" "What does that test show?" "Will they be okay?"\n- When student explains clearly, you calm down. When they use jargon, ask what it means — forcing health literacy practice\n- You are NOT a medical person\n- Keep responses to 2-3 sentences.';
+    }
   },
 
   consultant: {
-    id: 'consultant', name: 'Dr. Patel', role: 'Cardiology Consult', icon: '👨‍⚕️',
+    id: 'consultant', name: 'Specialist', role: 'Consulting Physician', icon: '👨‍⚕️',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=DrPatelCards&backgroundColor=FFEDD5',
     cssClass: 'consultant',
     voice: { puter: 'Gregory', webSpeech: { name: 'Daniel', pitch: 0.95, rate: 1.1 } },
-    systemPrompt: `You are Dr. Patel, an interventional cardiologist on call. A medical student is calling you about a STEMI activation.
-
-EXPECTATIONS: You expect a structured SBAR consult call. If the student doesn't organize their presentation well, redirect: "Let me stop you — start with the situation."
-
-RESPONSES:
-- Good SBAR: "Good presentation. Cath lab is being activated. I'll be there in 10 minutes."
-- Poor SBAR: "I need more information. What's the ST elevation in millimeters? Has he gotten aspirin?"
-
-STYLE: Direct, efficient, no-nonsense. Busy but professional. Values structured communication.`
+    getSystemPrompt: function(caseData) {
+      var m = caseData.mechanism || {};
+      return 'You are a specialist consultant being called about ' + caseData.patient.name + ', ' + caseData.patient.age + '. Case: ' + caseData.brief + '\n\nSPECIALTY: ' + caseData.specialty.split('/')[0].trim() + '\n\nPATHOPHYSIOLOGY:\n' + (m.pathophysiology || []).slice(0, 3).map(function(p) { return '- ' + p; }).join('\n') + '\n\nCLINICAL REASONING:\n' + (m.clinicalReasoning || []).map(function(c) { return '- ' + c; }).join('\n') + '\n\nEXPECTATIONS:\n- Expect structured SBAR. If disorganized, redirect: "Start with the situation."\n- After a good presentation, give specialty guidance that teaches mechanism\n- If student asks a good pathophysiology question, answer it\n- If student plan is wrong, explain WHY using mechanism\n- Direct, efficient, busy but willing to teach\n- Keep responses to 2-4 sentences.';
+    }
   },
 
   pharmacist: {
@@ -691,18 +826,10 @@ STYLE: Direct, efficient, no-nonsense. Busy but professional. Values structured 
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=PharmDKim&backgroundColor=FCE7F3',
     cssClass: 'pharmacist',
     voice: { puter: 'Ivy', webSpeech: { name: 'Tessa', pitch: 1.0, rate: 1.0 } },
-    systemPrompt: `You are Dr. Kim, a clinical pharmacist in the ED. Available for medication questions.
-
-CASE: 58M anterior STEMI. Current meds: lisinopril 20mg, amlodipine 5mg, metformin 1000mg BID, atorvastatin 40mg. NKDA.
-
-KNOWLEDGE:
-- STEMI protocol: ASA 325mg (chew), P2Y12 inhibitor (ticagrelor 180mg loading preferred), UFH bolus
-- Morphine: Use sparingly (may reduce P2Y12 absorption). 2-4mg IV PRN.
-- Hold metformin peri-procedurally (contrast risk)
-- NTG: 0.4mg SL q5min x3, avoid if SBP<90 or RV infarct
-- Beta-blocker: NOT in acute phase if HR>100 or signs of CHF
-
-STYLE: Evidence-based, precise, guideline-driven. You proactively flag issues.`
+    getSystemPrompt: function(caseData) {
+      var m = caseData.mechanism || {};
+      return 'You are Dr. Kim, a clinical pharmacist in the ED consulted on ' + caseData.patient.name + ', ' + caseData.patient.age + '.\n\nCASE: ' + caseData.brief + '\n\nPHARMACOLOGY EXPERTISE:\n' + (m.pharmacology || []).map(function(p) { return '- ' + p; }).join('\n') + '\n\nRELEVANT PATHOPHYSIOLOGY:\n' + (m.pathophysiology || []).slice(0, 3).map(function(p) { return '- ' + p; }).join('\n') + '\n\nSTYLE:\n- Evidence-based, precise, guideline-driven\n- ALWAYS explain mechanism of action and connect to pathophysiology\n- Flag drug interactions, contraindications, monitoring parameters\n- If student orders something inappropriate, explain WHY\n- Connect drug choices to patient-specific factors\n- Keep responses to 2-4 sentences unless detailed mechanism explanation warranted.';
+    }
   }
 };
 
@@ -957,10 +1084,10 @@ async function getAIResponse(charId, userText) {
     return `${CHARACTERS[m.charId]?.name || 'unknown'}: ${m.content}`;
   }).join('\n');
 
-  // Inject case context so all characters stay case-aware
-  const caseContext = `ACTIVE CASE: ${selectedCase.title} — ${selectedCase.patient.name} (${selectedCase.patient.age}). Chief complaint: ${selectedCase.patient.complaint}. ${selectedCase.brief}`;
+  // Build case-adaptive system prompt with mechanism knowledge injected per character
+  const sysPrompt = (typeof ch.getSystemPrompt === 'function') ? ch.getSystemPrompt(selectedCase) : (ch.systemPrompt || '');
 
-  const prompt = `${ch.systemPrompt}\n\n${caseContext}\n\nCONVERSATION SO FAR:\n${recentHistory}\n\nThe student says to you: "${userText}"\n\nRespond in character. Keep it conversational and natural — 2-5 sentences typically. Stay in character at all times.`;
+  const prompt = `${sysPrompt}\n\nCONVERSATION SO FAR:\n${recentHistory}\n\nThe student says to you: "${userText}"\n\nRespond in character. Keep it conversational and natural — 2-5 sentences typically. Stay in character at all times.`;
 
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
