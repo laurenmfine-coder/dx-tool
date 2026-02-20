@@ -711,6 +711,7 @@
             document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
             setTimeout(function(){
                 document.getElementById('planSelection').classList.add('hidden');
+                var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.add('hidden');
                 document.getElementById('registrationForm').classList.remove('hidden');
                 document.getElementById('registrationForm').className = 'form-card ' + plan;
                 document.getElementById('formHeader').className = 'form-header ' + plan;
@@ -738,6 +739,7 @@
         function backToPlanSelection() {
             document.getElementById('registrationForm').classList.add('hidden');
             document.getElementById('planSelection').classList.remove('hidden');
+            var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.remove('hidden');
             state.selectedPlan = null;
             state.currentSection = 0;
         }
@@ -1093,8 +1095,8 @@
         // ============================================
         // LOGIN
         // ============================================
-        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
-        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
+        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
+        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.remove('hidden'); }
         function login() {
             var email = document.getElementById('loginEmail').value.trim();
             var pw = document.getElementById('loginPassword').value;
