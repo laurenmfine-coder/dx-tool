@@ -1,0 +1,331 @@
+{
+  "id": "chest-pain",
+  "presentation": "Chest Pain",
+  "category": "cardiovascular",
+  "difficulty": 3,
+  "rotations": ["em", "medicine"],
+  "demographics": {
+    "ageRange": [45, 75],
+    "genderDistribution": { "male": 0.6, "female": 0.4 },
+    "nameOptions": {
+      "male": ["John Smith", "Robert Johnson", "Michael Williams", "David Brown", "James Garcia"],
+      "female": ["Maria Santos", "Linda Chen", "Patricia Williams", "Susan Miller", "Jennifer Davis"]
+    }
+  },
+  "sources": [
+    {
+      "name": "Acute Coronary Syndrome - StatPearls",
+      "type": "statpearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK459157/",
+      "accessDate": "2026-02",
+      "citedFor": ["symptom presentation", "risk factors", "physical findings"]
+    },
+    {
+      "name": "2021 AHA/ACC Chest Pain Guideline",
+      "type": "guideline",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001029",
+      "accessDate": "2026-02",
+      "citedFor": ["diagnostic approach", "management"]
+    }
+  ],
+  "variants": [
+    {
+      "id": "stemi-v1",
+      "diagnosis": "ST-Elevation Myocardial Infarction (STEMI)",
+      "acuity": 2,
+      "patient": {
+        "personalityTraits": ["anxious", "cooperative", "family-oriented"],
+        "communicationStyle": "Cooperative but frightened. Wants reassurance. May minimize symptoms initially due to denial.",
+        "emotionalState": "Anxious, scared, sense of impending doom",
+        "medicalLiteracy": "moderate",
+        "languageNotes": "English fluent. May use lay terms like 'sugar' for diabetes, 'pressure' for hypertension.",
+        "occupation": ["teacher", "office manager", "retail supervisor", "accountant"]
+      },
+      "clinicalFacts": {
+        "chiefComplaint": {
+          "patientPhrasing": ["tight", "pressure", "heavy", "squeezing", "elephant on my chest"],
+          "avoidPhrasing": ["sharp", "stabbing", "knife-like", "tearing"],
+          "location": "Substernal, center of chest",
+          "radiation": ["left shoulder", "left arm", "jaw", "neck"],
+          "onset": "Gradual onset over 20-30 minutes",
+          "duration": "Constant since onset, approximately 2-3 hours",
+          "severity": "8-10/10, worst chest discomfort of my life",
+          "timing": "Started at rest, while watching TV / in bed",
+          "aggravating": ["nothing specific", "not worse with breathing or movement"],
+          "relieving": ["nothing helps", "tried antacid with no relief"]
+        },
+        "associatedSymptoms": {
+          "present": [
+            "diaphoresis (sweating profusely, cold sweats)",
+            "nausea (no vomiting)",
+            "shortness of breath",
+            "anxiety / sense of doom",
+            "lightheadedness"
+          ],
+          "absent": [
+            "cough",
+            "fever",
+            "pleuritic component (not worse with deep breath)",
+            "positional component (not worse lying flat)",
+            "leg swelling",
+            "recent travel or immobility",
+            "calf pain",
+            "recent illness",
+            "syncope",
+            "palpitations"
+          ]
+        },
+        "pmh": [
+          "Type 2 Diabetes Mellitus (10 years)",
+          "Hypertension (8 years)",
+          "Hyperlipidemia (5 years)"
+        ],
+        "medications": [
+          { "name": "Metformin", "dose": "500mg twice daily", "compliance": "Sometimes forgets evening dose" },
+          { "name": "Lisinopril", "dose": "10mg daily", "compliance": "Takes regularly" },
+          { "name": "Atorvastatin", "dose": "40mg at night", "compliance": "Takes regularly" },
+          { "name": "Aspirin", "dose": "81mg daily", "compliance": "Takes regularly" }
+        ],
+        "allergies": [
+          { "allergen": "Penicillin", "reaction": "Rash as a child" }
+        ],
+        "socialHistory": {
+          "smoking": "Never smoker",
+          "alcohol": "Occasional glass of wine with dinner, 1-2 per week",
+          "drugs": "Denies any illicit drug use",
+          "occupation": "Teacher, mostly desk work, moderate stress",
+          "livingSituation": "Lives with spouse, supportive family"
+        },
+        "familyHistory": [
+          "Mother: Heart attack at age 58, deceased",
+          "Father: Type 2 diabetes, alive at 78",
+          "Sister: Hypertension, age 55"
+        ],
+        "riskFactors": {
+          "present": [
+            "diabetes",
+            "hypertension", 
+            "hyperlipidemia",
+            "family history of premature CAD",
+            "age > 45"
+          ],
+          "absent": [
+            "smoking",
+            "cocaine use",
+            "recent surgery",
+            "known CAD",
+            "prior MI"
+          ]
+        }
+      },
+      "physicalExam": {
+        "vitalSigns": {
+          "BP": "168/102",
+          "HR": "108",
+          "RR": "22",
+          "Temp": "98.6°F",
+          "SpO2": "94% on room air"
+        },
+        "general": "Alert, anxious-appearing, diaphoretic, in moderate distress, clutching chest",
+        "heent": "Pupils equal, reactive. Mucous membranes moist.",
+        "neck": "Supple, no JVD, no carotid bruits",
+        "cardiovascular": "Tachycardic, regular rhythm, no murmurs/rubs/gallops. PMI non-displaced.",
+        "pulmonary": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi",
+        "abdominal": "Soft, non-tender, non-distended, normoactive bowel sounds",
+        "extremities": "No edema, 2+ pulses bilaterally, warm and well-perfused",
+        "neurologic": "Alert and oriented x4, no focal deficits",
+        "skin": "Diaphoretic, no rashes or lesions"
+      },
+      "diagnostics": {
+        "ecg": {
+          "findings": [
+            "Sinus tachycardia at 108 bpm",
+            "ST elevations in V2-V5 (2-3mm)",
+            "Reciprocal ST depressions in III, aVF",
+            "No pathologic Q waves yet"
+          ],
+          "interpretation": "Anterior STEMI, likely LAD occlusion"
+        },
+        "labs": [
+          { "test": "Troponin I (initial)", "value": "0.04", "unit": "ng/mL", "reference": "<0.04", "status": "abnormal", "interpretation": "Borderline elevated, early in course" },
+          { "test": "Troponin I (1 hour)", "value": "0.58", "unit": "ng/mL", "reference": "<0.04", "status": "critical", "interpretation": "Rising troponin confirms myocardial injury" },
+          { "test": "BNP", "value": "180", "unit": "pg/mL", "reference": "<100", "status": "abnormal", "interpretation": "Mildly elevated, suggests cardiac stress" },
+          { "test": "Glucose", "value": "186", "unit": "mg/dL", "reference": "70-100", "status": "abnormal", "interpretation": "Elevated, known diabetic" },
+          { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "reference": "0.7-1.3", "status": "normal", "interpretation": "Normal renal function" },
+          { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "reference": "3.5-5.0", "status": "normal", "interpretation": "Normal" },
+          { "test": "WBC", "value": "11.2", "unit": "K/uL", "reference": "4.5-11.0", "status": "abnormal", "interpretation": "Mild leukocytosis, stress response" }
+        ],
+        "imaging": [
+          {
+            "study": "Chest X-ray",
+            "findings": "Cardiac silhouette upper limits of normal. Mild pulmonary vascular congestion. No focal consolidation or pneumothorax.",
+            "impression": "Early pulmonary vascular congestion, no acute cardiopulmonary process",
+            "critical": false
+          }
+        ]
+      },
+      "evolution": {
+        "onCorrectTreatment": {
+          "vitalsTrend": "HR decreases to 80s, BP normalizes to 130s/80s, SpO2 improves to 98% on 2L NC",
+          "symptomsTrend": "Chest pressure resolving post-PCI, patient reports 2/10 discomfort",
+          "labsTrend": "Troponin peaks at 12 hours then trends down over 24-48 hours",
+          "narrative": "Patient taken emergently to cath lab. LAD 100% occlusion found and stented. Good flow restored. Patient comfortable post-procedure."
+        },
+        "onDelayedTreatment": {
+          "vitalsTrend": "HR increases to 120s, BP drops to 100s/60s, SpO2 drops to 90%",
+          "complications": ["Cardiogenic shock", "Ventricular arrhythmia", "Extension of infarct"],
+          "narrative": "Patient becoming more diaphoretic and hypotensive. Repeat ECG shows expanding ST elevations. Becoming confused."
+        },
+        "onNoTreatment": {
+          "deteriorationRate": "Rapid - within 30-60 minutes",
+          "triggerRapidResponse": true,
+          "narrative": "Patient found unresponsive. Code blue called. VF arrest on monitor."
+        }
+      },
+      "teaching": {
+        "keyLearningPoints": [
+          "Classic STEMI presentation: substernal pressure + radiation + diaphoresis + nausea",
+          "Women may present with atypical symptoms (fatigue, dyspnea, nausea)",
+          "Time is muscle - door-to-balloon <90 minutes is the goal",
+          "Rising troponin with ischemic symptoms = acute coronary syndrome",
+          "Reciprocal ECG changes increase specificity for STEMI"
+        ],
+        "mustNotMiss": [
+          "Aortic dissection (check for tearing pain, back radiation, pulse deficits)",
+          "Pulmonary embolism (check for pleuritic pain, leg symptoms, risk factors)",
+          "Tension pneumothorax (check for unilateral breath sounds, trauma)"
+        ],
+        "commonPitfalls": [
+          "Anchoring on GERD in patient with cardiac risk factors",
+          "Not getting ECG within 10 minutes of arrival",
+          "Missing posterior STEMI (get posterior leads if high suspicion)",
+          "Delaying cath lab activation for confirmatory troponin"
+        ],
+        "expertApproach": {
+          "differentialWithProbabilities": [
+            { "diagnosis": "STEMI", "probability": 75, "reasoning": "Classic presentation with risk factors, diaphoresis, and radiation" },
+            { "diagnosis": "NSTEMI/Unstable Angina", "probability": 15, "reasoning": "Similar presentation, would need ECG to differentiate" },
+            { "diagnosis": "Aortic Dissection", "probability": 5, "reasoning": "Must rule out given severity, but less likely without tearing quality or back pain" },
+            { "diagnosis": "Pulmonary Embolism", "probability": 3, "reasoning": "Less likely without pleuritic component or DVT symptoms" },
+            { "diagnosis": "Pericarditis", "probability": 2, "reasoning": "Would expect positional component and possibly friction rub" }
+          ],
+          "keyQuestions": [
+            "Can you describe the pain - is it pressure, sharp, or tearing?",
+            "Does it radiate anywhere - arm, jaw, back?",
+            "Are you sweating more than usual?",
+            "Any nausea or vomiting?",
+            "Is it worse when you breathe deeply or change position?",
+            "Any leg swelling or recent travel?",
+            "Family history of heart disease?"
+          ],
+          "reasoning": "This 52-year-old female with multiple cardiac risk factors (DM, HTN, HLD, family history) presents with substernal pressure radiating to the left arm and jaw, associated with diaphoresis and nausea. This is a classic STEMI presentation. The absence of pleuritic or positional components makes pericarditis and PE less likely. The gradual onset and pressure quality argue against dissection. ECG and emergent cardiology consultation are the immediate priorities."
+        },
+        "teachingHooks": {
+          "ifAsksAboutFamilyHistory": "Mother's death from MI at 58 is highly relevant - this is a major risk factor and also explains patient's anxiety",
+          "ifMissesRadiation": "Patient might rub left shoulder unconsciously or mention 'my arm feels funny'",
+          "ifDoesntAskAboutDiaphoresis": "Observant student would note patient is visibly sweating",
+          "ifAsksAboutMedCompliance": "Metformin compliance issue is relevant for management but not diagnosis",
+          "ifConsidersDissection": "Good safety thinking - absence of tearing, maximal-at-onset, and back pain makes it less likely"
+        }
+      }
+    },
+    {
+      "id": "pericarditis-v1",
+      "diagnosis": "Acute Pericarditis",
+      "acuity": 3,
+      "patient": {
+        "personalityTraits": ["young", "healthy", "anxious", "athletic"],
+        "communicationStyle": "Generally healthy person who is surprised to be in the ED. Concerned about returning to normal activities.",
+        "emotionalState": "Anxious but not in extremis",
+        "medicalLiteracy": "moderate",
+        "occupation": ["software engineer", "teacher", "graduate student"]
+      },
+      "clinicalFacts": {
+        "chiefComplaint": {
+          "patientPhrasing": ["sharp", "stabbing", "catches when I breathe"],
+          "avoidPhrasing": ["pressure", "squeezing", "elephant"],
+          "location": "Left chest, precordial area",
+          "radiation": ["trapezius ridge", "left shoulder"],
+          "onset": "Started yesterday, gradually worsening",
+          "duration": "Comes and goes, worse with movement/breathing",
+          "severity": "7/10 at worst, 3/10 when still and leaning forward",
+          "timing": "Worse in the morning, when lying down",
+          "aggravating": ["lying flat", "deep breathing", "coughing"],
+          "relieving": ["sitting up", "leaning forward"]
+        },
+        "associatedSymptoms": {
+          "present": [
+            "viral illness 1 week ago (sore throat, runny nose, mild fever)",
+            "low-grade fever",
+            "mild dyspnea with deep breathing"
+          ],
+          "absent": [
+            "diaphoresis",
+            "nausea/vomiting",
+            "arm radiation",
+            "jaw pain",
+            "leg swelling",
+            "syncope"
+          ]
+        },
+        "pmh": ["None"],
+        "medications": [{ "name": "None", "dose": "", "compliance": "" }],
+        "allergies": [],
+        "socialHistory": {
+          "smoking": "Never",
+          "alcohol": "Social, 2-3 drinks per week",
+          "drugs": "Denies",
+          "occupation": "Graduate student",
+          "livingSituation": "Lives with roommate"
+        },
+        "familyHistory": ["No cardiac disease", "No sudden death"],
+        "riskFactors": {
+          "present": ["recent viral illness"],
+          "absent": ["cardiac risk factors", "autoimmune disease", "malignancy", "recent procedure"]
+        }
+      },
+      "physicalExam": {
+        "vitalSigns": {
+          "BP": "122/78",
+          "HR": "88",
+          "RR": "18",
+          "Temp": "100.4°F",
+          "SpO2": "99% on room air"
+        },
+        "general": "Young adult, appears mildly uncomfortable, sitting forward",
+        "cardiovascular": "Regular rhythm, THREE-COMPONENT FRICTION RUB heard at left sternal border (scratchy, squeaky sound), no murmurs",
+        "pulmonary": "Clear to auscultation bilaterally"
+      },
+      "diagnostics": {
+        "ecg": {
+          "findings": [
+            "Normal sinus rhythm at 88 bpm",
+            "Diffuse ST elevations (concave up) in multiple leads",
+            "PR depression in multiple leads",
+            "No reciprocal changes"
+          ],
+          "interpretation": "Classic pericarditis pattern"
+        },
+        "labs": [
+          { "test": "Troponin I", "value": "0.08", "unit": "ng/mL", "reference": "<0.04", "status": "abnormal", "interpretation": "Mildly elevated - myopericarditis component" },
+          { "test": "CRP", "value": "8.5", "unit": "mg/dL", "reference": "<0.5", "status": "abnormal", "interpretation": "Elevated inflammation" },
+          { "test": "ESR", "value": "45", "unit": "mm/hr", "reference": "<20", "status": "abnormal", "interpretation": "Elevated" }
+        ]
+      },
+      "teaching": {
+        "keyLearningPoints": [
+          "Pericarditis: sharp/pleuritic pain, better leaning forward, friction rub",
+          "ECG shows diffuse ST elevation (concave up) and PR depression",
+          "Recent viral illness is common precipitant",
+          "Friction rub is pathognomonic but may come and go",
+          "Most cases are idiopathic/viral and self-limited"
+        ],
+        "mustNotMiss": [
+          "STEMI (check for risk factors, pressure quality, radiation)",
+          "Aortic dissection (check for tearing, back pain, pulse deficits)",
+          "Cardiac tamponade (check for hypotension, JVD, muffled heart sounds)"
+        ]
+      }
+    }
+  ]
+}

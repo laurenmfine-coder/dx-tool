@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx Virtual Hospital — ED Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2874A6;
+  --primary-dark: #1B4F72;
+  --primary-light: #EBF5FB;
+  --accent: #3498DB;
+  --success: #27AE60;
+  --success-light: #E8F8F0;
+  --warning: #F39C12;
+  --warning-light: #FEF9E7;
+  --danger: #E74C3C;
+  --danger-light: #FDEDEC;
+  --text: #1a1a2e;
+  --text-muted: #64748b;
+  --bg: #f0f4f8;
+  --card: #ffffff;
+  --border: #dce3eb;
+  --esi-1: #DC2626;
+  --esi-2: #EF4444;
+  --esi-3: #F59E0B;
+  --esi-4: #22C55E;
+  --esi-5: #3B82F6;
+  --font: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', 'Consolas', monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --radius: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ===== TOP BAR ===== */
+.topbar {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  color: white;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.topbar-logo span { opacity: 0.7; font-weight: 400; }
+
+.topbar-badge {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.topbar-time {
+  font-family: var(--mono);
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ===== BOARD HEADER ===== */
+.board-header {
+  padding: 20px 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.board-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.board-title .count {
+  background: var(--primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.board-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover { background: var(--primary-dark); }
+
+.btn-outline {
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); border-color: var(--primary); }
+
+.btn-success { background: var(--success); color: white; }
+.btn-success:hover { background: #219653; }
+
+.btn-warning { background: var(--warning); color: white; }
+.btn-warning:hover { background: #d68910; }
+
+.btn-danger { background: var(--danger); color: white; }
+.btn-danger:hover { background: #c0392b; }
+
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+
+/* ===== STATS BAR ===== */
+.stats-bar {
+  padding: 0 24px 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  min-width: 120px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.stat-value.esi-high { color: var(--esi-2); }
+.stat-value.esi-mid { color: var(--esi-3); }
+
+/* ===== ED BOARD TABLE ===== */
+.board-container {
+  padding: 0 24px 24px;
+}
+
+.board-table-wrap {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.board-table thead th {
+  background: #f7f9fc;
+  border-bottom: 2px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  position: sticky;
+  top: 56px;
+  z-index: 10;
+}
+
+.board-table tbody tr {
+  border-bottom: 1px solid #f0f2f5;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.board-table tbody tr:hover { background: var(--primary-light); }
+.board-table tbody tr.active { background: #dbeafe; }
+
+.board-table tbody tr:last-child { border-bottom: none; }
+
+.board-table td {
+  padding: 12px 14px;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.bed-number {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--primary);
+  background: var(--primary-light);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.patient-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.patient-age {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.chief-complaint {
+  font-weight: 500;
+}
+
+.acuity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.acuity-1 { background: #fef2f2; color: var(--esi-1); border: 1px solid #fecaca; }
+.acuity-2 { background: #fef2f2; color: var(--esi-2); border: 1px solid #fecaca; }
+.acuity-3 { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.acuity-4 { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.acuity-5 { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+.acuity-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.acuity-1 .acuity-dot { background: var(--esi-1); }
+.acuity-2 .acuity-dot { background: var(--esi-2); }
+.acuity-3 .acuity-dot { background: var(--esi-3); }
+.acuity-4 .acuity-dot { background: var(--esi-4); }
+.acuity-5 .acuity-dot { background: var(--esi-5); }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-waiting { background: #fef9e7; color: #b45309; }
+.status-being-seen { background: #ebf5fb; color: var(--primary); }
+.status-labs-pending { background: #faf5ff; color: #7c3aed; }
+.status-admitted { background: var(--success-light); color: #15803d; }
+.status-discharged { background: #f1f5f9; color: var(--text-muted); }
+
+.status-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.status-being-seen .status-pulse { background: var(--primary); }
+.status-waiting .status-pulse { background: var(--warning); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.wait-time {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.provider-cell {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.provider-you {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.empty-state p { font-size: 14px; margin-bottom: 20px; }
+
+/* ===== PATIENT DETAIL PANEL ===== */
+.panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.panel-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.detail-panel {
+  position: fixed;
+  top: 0;
+  right: -600px;
+  width: 600px;
+  max-width: 90vw;
+  height: 100vh;
+  background: white;
+  z-index: 300;
+  box-shadow: -4px 0 30px rgba(0,0,0,0.15);
+  transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.detail-panel.open { right: 0; }
+
+.panel-header {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.panel-patient-info h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.panel-patient-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.panel-close {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.panel-close:hover { background: rgba(255,255,255,0.25); }
+
+/* EMR Tabs */
+.emr-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border);
+  background: #f7f9fc;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.emr-tab {
+  font-family: var(--font);
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.emr-tab:hover { color: var(--primary); }
+
+.emr-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  background: white;
+}
+
+/* EMR Content */
+.emr-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.emr-section {
+  margin-bottom: 20px;
+}
+
+.emr-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.emr-field {
+  display: flex;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.emr-field-label {
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 130px;
+  flex-shrink: 0;
+}
+
+.emr-field-value {
+  color: var(--text);
+}
+
+.vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.vital-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.vital-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+}
+
+.vital-value {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.vital-value.abnormal { color: var(--danger); }
+.vital-value.critical { color: var(--danger); animation: pulse 1.5s infinite; }
+
+.lab-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.lab-table th {
+  text-align: left;
+  padding: 6px 8px;
+  background: var(--bg);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.lab-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.lab-table .abnormal { color: var(--danger); font-weight: 600; }
+.lab-table .critical { color: var(--danger); font-weight: 700; background: #fef2f2; }
+.lab-table .normal { color: var(--success); }
+
+.lab-flag {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.lab-flag.H { background: #fef2f2; color: var(--danger); }
+.lab-flag.L { background: #eff6ff; color: #1d4ed8; }
+.lab-flag.C { background: #fef2f2; color: var(--danger); animation: pulse 1.5s infinite; }
+
+/* ECG */
+.ecg-findings {
+  background: #fffff5;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.ecg-findings h4 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #92400e;
+}
+
+.ecg-finding-item {
+  font-size: 13px;
+  padding: 3px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.ecg-finding-item::before {
+  content: "▸";
+  color: var(--warning);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.ecg-interpretation {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #fde68a;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+/* Imaging */
+.imaging-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.imaging-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.imaging-card p { font-size: 13px; margin-bottom: 4px; }
+
+/* Teaching */
+.teaching-card {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.teaching-card h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.teaching-item {
+  font-size: 13px;
+  padding: 3px 0;
+  display: flex;
+  gap: 6px;
+}
+
+.teaching-item::before {
+  content: "💡";
+  flex-shrink: 0;
+}
+
+.pitfall-item::before {
+  content: "⚠️";
+}
+
+.must-not-miss-item::before {
+  content: "🚨";
+}
+
+/* DDx */
+.ddx-bar {
+  margin-bottom: 6px;
+}
+
+.ddx-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.ddx-bar-track {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ddx-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Panel Footer / Disposition */
+.panel-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  background: #f7f9fc;
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ===== DISPOSITION MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  width: 420px;
+  max-width: 90vw;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95);
+  transition: transform 0.2s;
+}
+
+.modal-overlay.open .modal { transform: scale(1); }
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 { font-size: 16px; font-weight: 700; }
+
+.modal-body { padding: 20px; }
+
+.modal-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.dispo-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: all 0.15s;
+}
+
+.dispo-option:hover { border-color: var(--primary); background: var(--primary-light); }
+.dispo-option.selected { border-color: var(--primary); background: var(--primary-light); }
+
+.dispo-icon { font-size: 24px; }
+
+.dispo-label { font-weight: 600; font-size: 14px; }
+.dispo-desc { font-size: 12px; color: var(--text-muted); }
+
+/* ===== TOAST ===== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  background: var(--text);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: toastIn 0.3s forwards, toastOut 0.3s 2.7s forwards;
+}
+
+@keyframes toastIn { to { transform: translateY(0); opacity: 1; } }
+@keyframes toastOut { to { transform: translateY(20px); opacity: 0; } }
+
+.toast.success { background: var(--success); }
+.toast.warning { background: var(--warning); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .board-header { padding: 12px 16px; }
+  .stats-bar { padding: 0 16px 12px; }
+  .board-container { padding: 0 16px 16px; }
+  .board-table td, .board-table th { padding: 8px 10px; }
+  .detail-panel { width: 100vw; max-width: 100vw; }
+  .hide-mobile { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div>
+    <div class="topbar-badge">Emergency Dept</div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-time" id="simTime">07:14 AM — Day 1</div>
+    <div class="topbar-user">
+      <div class="topbar-avatar">MS</div>
+      <span>Medical Student</span>
+    </div>
+  </div>
+</div>
+
+<!-- BOARD HEADER -->
+<div class="board-header">
+  <div class="board-title">
+    ED Tracking Board <span class="count" id="patientCount">0</span>
+  </div>
+  <div class="board-controls">
+    <button class="btn btn-primary" onclick="addNewPatient()">
+      + New Patient
+    </button>
+    <button class="btn btn-outline" onclick="addNewPatient()">
+      ↻ Next Arrival
+    </button>
+    <button class="btn btn-outline" onclick="resetBoard()">
+      Reset Board
+    </button>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="stat-label">Total Patients</div>
+    <div class="stat-value" id="statTotal">0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Waiting</div>
+    <div class="stat-value esi-mid" id="statWaiting">0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Being Seen</div>
+    <div class="stat-value" id="statBeingSeen">0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">High Acuity</div>
+    <div class="stat-value esi-high" id="statHighAcuity">0</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Avg Wait</div>
+    <div class="stat-value" id="statAvgWait">—</div>
+  </div>
+</div>
+
+<!-- BOARD TABLE -->
+<div class="board-container">
+  <div class="board-table-wrap">
+    <table class="board-table">
+      <thead>
+        <tr>
+          <th>Bed</th>
+          <th>Patient</th>
+          <th>Chief Complaint</th>
+          <th>Acuity</th>
+          <th>Status</th>
+          <th class="hide-mobile">Wait</th>
+          <th class="hide-mobile">Provider</th>
+        </tr>
+      </thead>
+      <tbody id="boardBody">
+        <tr>
+          <td colspan="7">
+            <div class="empty-state">
+              <h3>No patients on the board</h3>
+              <p>Click "New Patient" to begin your ED shift.</p>
+              <button class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PANEL OVERLAY -->
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+
+<!-- PATIENT DETAIL PANEL -->
+<div class="detail-panel" id="detailPanel">
+  <div class="panel-header">
+    <div class="panel-patient-info">
+      <h2 id="panelName">—</h2>
+      <div class="panel-patient-meta">
+        <span id="panelAge">—</span>
+        <span>MRN: <span id="panelMRN">—</span></span>
+        <span id="panelBed">—</span>
+      </div>
+    </div>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+
+  <!-- EMR Tabs -->
+  <div class="emr-tabs" id="emrTabs">
+    <button class="emr-tab active" data-tab="overview" onclick="switchTab('overview')">Overview</button>
+    <button class="emr-tab" data-tab="vitals" onclick="switchTab('vitals')">Vitals</button>
+    <button class="emr-tab" data-tab="labs" onclick="switchTab('labs')">Labs</button>
+    <button class="emr-tab" data-tab="imaging" onclick="switchTab('imaging')">Imaging</button>
+    <button class="emr-tab" data-tab="history" onclick="switchTab('history')">Hx</button>
+    <button class="emr-tab" data-tab="exam" onclick="switchTab('exam')">Exam</button>
+    <button class="emr-tab" data-tab="teaching" onclick="switchTab('teaching')">Teaching</button>
+  </div>
+
+  <!-- EMR Content -->
+  <div class="emr-content" id="emrContent">
+    <!-- Populated dynamically -->
+  </div>
+
+  <!-- Panel Footer -->
+  <div class="panel-footer">
+    <button class="btn btn-primary btn-sm" onclick="beginCRT()">🩺 Begin History</button>
+    <button class="btn btn-success btn-sm" onclick="openDisposition('discharge')">✓ Discharge</button>
+    <button class="btn btn-warning btn-sm" onclick="openDisposition('admit')">⬆ Admit</button>
+    <button class="btn btn-outline btn-sm" onclick="changeStatus()">Status ▾</button>
+  </div>
+</div>
+
+<!-- DISPOSITION MODAL -->
+<div class="modal-overlay" id="dispoModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="dispoTitle">Disposition</h3>
+    </div>
+    <div class="modal-body" id="dispoBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeDispoModal()">Cancel</button>
+      <button class="btn btn-primary" id="dispoConfirmBtn" onclick="confirmDisposition()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ============================================================
+// CASE TEMPLATES — embedded from src/data/cases/chest-pain.json
+// ============================================================
+const CASE_TEMPLATES = [
+  {
+    id: "chest-pain",
+    presentation: "Chest Pain",
+    category: "cardiovascular",
+    difficulty: 3,
+    rotations: ["em", "medicine"],
+    demographics: {
+      ageRange: [45, 75],
+      genderDistribution: { male: 0.6, female: 0.4 },
+      nameOptions: {
+        male: ["John Smith", "Robert Johnson", "Michael Williams", "David Brown", "James Garcia", "William Davis", "Richard Martinez"],
+        female: ["Maria Santos", "Linda Chen", "Patricia Williams", "Susan Miller", "Jennifer Davis", "Karen Thompson", "Nancy Rodriguez"]
+      }
+    },
+    sources: [
+      { name: "Acute Coronary Syndrome - StatPearls", type: "statpearls", url: "https://www.ncbi.nlm.nih.gov/books/NBK459157/" },
+      { name: "Pericarditis - StatPearls", type: "statpearls", url: "https://www.ncbi.nlm.nih.gov/books/NBK431080/" },
+      { name: "2021 AHA/ACC Chest Pain Guideline", type: "guideline", url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001029" }
+    ],
+    variants: [
+      {
+        id: "stemi-v1",
+        diagnosis: "ST-Elevation Myocardial Infarction (STEMI)",
+        acuity: 2,
+        patient: {
+          personalityTraits: ["anxious", "cooperative", "family-oriented"],
+          communicationStyle: "Cooperative but frightened. Wants reassurance.",
+          emotionalState: "Anxious, scared, sense of impending doom",
+          medicalLiteracy: "moderate"
+        },
+        clinicalFacts: {
+          chiefComplaint: {
+            patientPhrasing: ["tight", "pressure", "heavy", "squeezing", "elephant on my chest"],
+            avoidPhrasing: ["sharp", "stabbing", "knife-like", "tearing"],
+            location: "Substernal, center of chest",
+            radiation: ["left shoulder", "left arm", "jaw", "neck"],
+            onset: "Gradual onset over 20-30 minutes",
+            duration: "Constant since onset, approximately 2-3 hours",
+            severity: "8-10/10, worst chest discomfort of my life",
+            aggravating: ["nothing specific", "not worse with breathing or movement"],
+            relieving: ["nothing helps", "tried antacid with no relief"]
+          },
+          associatedSymptoms: {
+            present: ["diaphoresis (sweating profusely)", "nausea (no vomiting)", "shortness of breath", "anxiety / sense of doom", "lightheadedness"],
+            absent: ["cough", "fever", "pleuritic component", "positional component", "leg swelling", "recent travel", "calf pain", "syncope", "palpitations"]
+          },
+          pmh: ["Type 2 Diabetes Mellitus (10 years)", "Hypertension (8 years)", "Hyperlipidemia (5 years)"],
+          medications: [
+            { name: "Metformin", dose: "500mg twice daily", compliance: "Sometimes forgets evening dose" },
+            { name: "Lisinopril", dose: "10mg daily", compliance: "Takes regularly" },
+            { name: "Atorvastatin", dose: "40mg at night", compliance: "Takes regularly" },
+            { name: "Aspirin", dose: "81mg daily", compliance: "Takes regularly" }
+          ],
+          allergies: [{ allergen: "Penicillin", reaction: "Rash as a child" }],
+          socialHistory: { smoking: "Never smoker", alcohol: "Occasional wine, 1-2/week", drugs: "Denies", occupation: "Teacher", livingSituation: "Lives with spouse" },
+          familyHistory: ["Mother: MI at age 58 (deceased)", "Father: T2DM, alive at 78", "Sister: HTN, age 55"],
+          riskFactors: {
+            present: ["diabetes", "hypertension", "hyperlipidemia", "family history of premature CAD", "age > 45"],
+            absent: ["smoking", "cocaine use", "recent surgery", "known CAD", "prior MI"]
+          }
+        },
+        physicalExam: {
+          vitalSigns: { BP: "168/102", HR: "108", RR: "22", Temp: "98.6°F", SpO2: "94%" },
+          general: "Alert, anxious, diaphoretic, clutching chest",
+          heent: "Pupils equal, reactive. Mucous membranes moist.",
+          neck: "Supple, no JVD, no carotid bruits",
+          cardiovascular: "Tachycardic, regular rhythm, no murmurs/rubs/gallops",
+          pulmonary: "Clear bilaterally, no wheezes or rales",
+          abdominal: "Soft, non-tender, non-distended",
+          extremities: "No edema, 2+ pulses, warm",
+          neurologic: "Alert and oriented x4, no focal deficits",
+          skin: "Diaphoretic, no rashes"
+        },
+        diagnostics: {
+          ecg: {
+            findings: ["Sinus tachycardia at 108 bpm", "ST elevations in V2-V5 (2-3mm)", "Reciprocal ST depressions in III, aVF", "No pathologic Q waves yet"],
+            interpretation: "Anterior STEMI — likely LAD occlusion"
+          },
+          labs: [
+            { test: "Troponin I (initial)", value: "0.04", unit: "ng/mL", reference: "<0.04", status: "abnormal", interpretation: "Borderline elevated" },
+            { test: "Troponin I (1 hour)", value: "0.58", unit: "ng/mL", reference: "<0.04", status: "critical", interpretation: "Rising — myocardial injury confirmed" },
+            { test: "BNP", value: "180", unit: "pg/mL", reference: "<100", status: "abnormal", interpretation: "Mildly elevated" },
+            { test: "Glucose", value: "186", unit: "mg/dL", reference: "70-100", status: "abnormal", interpretation: "Elevated, known DM" },
+            { test: "Creatinine", value: "1.1", unit: "mg/dL", reference: "0.7-1.3", status: "normal", interpretation: "Normal renal function" },
+            { test: "Potassium", value: "4.2", unit: "mEq/L", reference: "3.5-5.0", status: "normal", interpretation: "Normal" },
+            { test: "WBC", value: "11.2", unit: "K/uL", reference: "4.5-11.0", status: "abnormal", interpretation: "Mild leukocytosis, stress response" },
+            { test: "Hemoglobin", value: "14.1", unit: "g/dL", reference: "12-16", status: "normal", interpretation: "Normal" }
+          ],
+          imaging: [
+            { study: "Chest X-ray", findings: "Cardiac silhouette upper limits of normal. Mild pulmonary vascular congestion. No focal consolidation or pneumothorax.", impression: "Mild cardiomegaly with early pulmonary congestion", critical: false }
+          ]
+        },
+        teaching: {
+          keyLearningPoints: [
+            "Classic STEMI: substernal pressure + radiation + diaphoresis + nausea",
+            "Women may present atypically (fatigue, dyspnea, nausea without chest pain)",
+            "Time is muscle — door-to-balloon target <90 minutes",
+            "Rising troponin + ischemic symptoms = acute coronary syndrome",
+            "Reciprocal ECG changes increase specificity for STEMI"
+          ],
+          mustNotMiss: [
+            "Aortic dissection (tearing pain, back radiation, pulse deficits)",
+            "Pulmonary embolism (pleuritic pain, leg symptoms, risk factors)",
+            "Tension pneumothorax (unilateral breath sounds, trauma)"
+          ],
+          commonPitfalls: [
+            "Anchoring on GERD in patient with cardiac risk factors",
+            "Not getting ECG within 10 minutes of arrival",
+            "Missing posterior STEMI (get posterior leads if high suspicion)",
+            "Delaying cath lab activation waiting for confirmatory troponin"
+          ],
+          expertApproach: {
+            differentialWithProbabilities: [
+              { diagnosis: "STEMI", probability: 75, reasoning: "Classic presentation, risk factors, diaphoresis, radiation" },
+              { diagnosis: "NSTEMI/Unstable Angina", probability: 15, reasoning: "Similar, need ECG to differentiate" },
+              { diagnosis: "Aortic Dissection", probability: 5, reasoning: "Must rule out but less likely without tearing/back pain" },
+              { diagnosis: "Pulmonary Embolism", probability: 3, reasoning: "Less likely without pleuritic component" },
+              { diagnosis: "Pericarditis", probability: 2, reasoning: "Would expect positional component, friction rub" }
+            ]
+          }
+        }
+      },
+      {
+        id: "pericarditis-v1",
+        diagnosis: "Acute Pericarditis",
+        acuity: 3,
+        patient: {
+          personalityTraits: ["young", "healthy", "anxious", "athletic"],
+          communicationStyle: "Generally healthy, surprised to be in the ED.",
+          emotionalState: "Anxious but not in extremis",
+          medicalLiteracy: "moderate"
+        },
+        clinicalFacts: {
+          chiefComplaint: {
+            patientPhrasing: ["sharp", "stabbing", "catches when I breathe"],
+            avoidPhrasing: ["pressure", "squeezing", "elephant"],
+            location: "Left chest, precordial area",
+            radiation: ["trapezius ridge", "left shoulder"],
+            onset: "Started yesterday, gradually worsening",
+            duration: "Comes and goes, worse with movement/breathing",
+            severity: "7/10 at worst, 3/10 when sitting up and leaning forward",
+            aggravating: ["lying flat", "deep breathing", "coughing"],
+            relieving: ["sitting up", "leaning forward"]
+          },
+          associatedSymptoms: {
+            present: ["viral illness 1 week ago (sore throat, runny nose)", "low-grade fever", "mild dyspnea with deep breathing"],
+            absent: ["diaphoresis", "nausea/vomiting", "arm radiation", "jaw pain", "leg swelling", "syncope"]
+          },
+          pmh: ["None"],
+          medications: [],
+          allergies: [],
+          socialHistory: { smoking: "Never", alcohol: "Social, 2-3 drinks/week", drugs: "Denies", occupation: "Graduate student", livingSituation: "Lives with roommate" },
+          familyHistory: ["No cardiac disease", "No sudden death"],
+          riskFactors: { present: ["recent viral illness"], absent: ["cardiac risk factors", "autoimmune disease"] }
+        },
+        physicalExam: {
+          vitalSigns: { BP: "122/78", HR: "88", RR: "18", Temp: "100.4°F", SpO2: "99%" },
+          general: "Young adult, mildly uncomfortable, sitting forward",
+          cardiovascular: "Regular rhythm, THREE-COMPONENT FRICTION RUB at left sternal border",
+          pulmonary: "Clear bilaterally"
+        },
+        diagnostics: {
+          ecg: {
+            findings: ["Normal sinus rhythm at 88 bpm", "Diffuse ST elevations (concave up) in multiple leads", "PR depression in multiple leads", "No reciprocal changes"],
+            interpretation: "Classic pericarditis pattern"
+          },
+          labs: [
+            { test: "Troponin I", value: "0.08", unit: "ng/mL", reference: "<0.04", status: "abnormal", interpretation: "Mildly elevated — myopericarditis" },
+            { test: "CRP", value: "8.5", unit: "mg/dL", reference: "<0.5", status: "abnormal", interpretation: "Elevated inflammation" },
+            { test: "ESR", value: "45", unit: "mm/hr", reference: "<20", status: "abnormal", interpretation: "Elevated" },
+            { test: "WBC", value: "10.8", unit: "K/uL", reference: "4.5-11.0", status: "normal", interpretation: "High normal" },
+            { test: "BNP", value: "32", unit: "pg/mL", reference: "<100", status: "normal", interpretation: "Normal — no heart failure" }
+          ],
+          imaging: [
+            { study: "Chest X-ray", findings: "Normal cardiac silhouette. Clear lungs. No effusion.", impression: "Unremarkable", critical: false }
+          ]
+        },
+        teaching: {
+          keyLearningPoints: [
+            "Pericarditis triad: sharp/pleuritic pain, better leaning forward, friction rub",
+            "ECG: diffuse ST elevation (concave up) + PR depression",
+            "Recent viral illness is most common precipitant",
+            "Friction rub is pathognomonic but transient",
+            "Most cases idiopathic/viral — self-limited with NSAIDs + colchicine"
+          ],
+          mustNotMiss: [
+            "STEMI (risk factors, pressure quality, reciprocal changes on ECG)",
+            "Aortic dissection (tearing, back pain, pulse deficits)",
+            "Cardiac tamponade (hypotension, JVD, muffled heart sounds)"
+          ],
+          commonPitfalls: [
+            "Confusing diffuse ST elevation of pericarditis with STEMI",
+            "Missing the PR depression (subtle but highly specific)",
+            "Not checking for pericardial effusion with bedside echo",
+            "Treating with NSAIDs without considering myopericarditis"
+          ],
+          expertApproach: {
+            differentialWithProbabilities: [
+              { diagnosis: "Acute Pericarditis", probability: 70, reasoning: "Sharp, positional, friction rub, post-viral, young" },
+              { diagnosis: "Myocarditis", probability: 15, reasoning: "Elevated troponin suggests myocardial involvement" },
+              { diagnosis: "STEMI", probability: 5, reasoning: "ST elevations but concave-up, diffuse, no reciprocal changes" },
+              { diagnosis: "Pulmonary Embolism", probability: 5, reasoning: "Pleuritic component but no risk factors" },
+              { diagnosis: "Musculoskeletal", probability: 5, reasoning: "Young patient but systemic symptoms argue against" }
+            ]
+          }
+        }
+      }
+    ]
+  }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let patients = [];
+let selectedPatientId = null;
+let currentTab = 'overview';
+let nextBed = 1;
+let shiftStartTime = Date.now();
+let variantHistory = JSON.parse(localStorage.getItem('rdx-variant-history') || '{}');
+
+const ED_BEDS = [1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20];
+let availableBeds = [...ED_BEDS];
+
+// ============================================================
+// PATIENT GENERATOR
+// ============================================================
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generatePatient() {
+  // Pick a random template
+  const template = CASE_TEMPLATES[randomInt(0, CASE_TEMPLATES.length - 1)];
+
+  // Get unseen variants
+  const seen = variantHistory[template.id] || [];
+  let available = template.variants.filter(v => !seen.includes(v.id));
+
+  // If all seen, reset cooldown
+  if (available.length === 0) {
+    variantHistory[template.id] = [];
+    available = [...template.variants];
+  }
+
+  // Pick variant
+  const variant = available[randomInt(0, available.length - 1)];
+
+  // Generate demographics
+  const demo = template.demographics;
+  const age = randomInt(demo.ageRange[0], demo.ageRange[1]);
+  const gender = Math.random() < demo.genderDistribution.male ? 'male' : 'female';
+  const nameList = demo.nameOptions[gender];
+  const name = nameList[randomInt(0, nameList.length - 1)];
+  const mrn = String(randomInt(100000, 999999));
+
+  // Assign bed
+  if (availableBeds.length === 0) {
+    showToast("ED is full — no beds available!", "warning");
+    return null;
+  }
+  const bedIdx = randomInt(0, availableBeds.length - 1);
+  const bed = availableBeds.splice(bedIdx, 1)[0];
+
+  const patient = {
+    id: 'pt-' + Date.now() + '-' + randomInt(1000,9999),
+    name,
+    age,
+    gender,
+    mrn,
+    bed,
+    chiefComplaint: template.presentation,
+    acuity: variant.acuity,
+    status: 'waiting',
+    arrivalTime: Date.now(),
+    provider: null,
+    templateId: template.id,
+    variantId: variant.id,
+    variant,
+    template
+  };
+
+  // Track variant
+  if (!variantHistory[template.id]) variantHistory[template.id] = [];
+  variantHistory[template.id].push(variant.id);
+  localStorage.setItem('rdx-variant-history', JSON.stringify(variantHistory));
+
+  return patient;
+}
+
+// ============================================================
+// BOARD RENDERING
+// ============================================================
+function renderBoard() {
+  const tbody = document.getElementById('boardBody');
+  const active = patients.filter(p => p.status !== 'discharged' && p.status !== 'admitted');
+
+  if (active.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7">
+      <div class="empty-state">
+        <h3>No patients on the board</h3>
+        <p>Click "New Patient" to begin your ED shift.</p>
+        <button class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button>
+      </div>
+    </td></tr>`;
+  } else {
+    // Sort by acuity then arrival
+    active.sort((a, b) => a.acuity - b.acuity || a.arrivalTime - b.arrivalTime);
+
+    tbody.innerHTML = active.map(p => {
+      const waitMin = Math.floor((Date.now() - p.arrivalTime) / 60000);
+      const waitStr = waitMin < 60 ? `${waitMin}m` : `${Math.floor(waitMin/60)}h ${waitMin%60}m`;
+      const isSelected = p.id === selectedPatientId;
+
+      const statusClass = {
+        'waiting': 'status-waiting',
+        'being-seen': 'status-being-seen',
+        'labs-pending': 'status-labs-pending',
+        'admitted': 'status-admitted',
+        'discharged': 'status-discharged'
+      }[p.status] || 'status-waiting';
+
+      const statusLabel = {
+        'waiting': 'Waiting',
+        'being-seen': 'Being Seen',
+        'labs-pending': 'Labs Pending',
+        'admitted': 'Admitted',
+        'discharged': 'Discharged'
+      }[p.status] || p.status;
+
+      return `<tr class="${isSelected ? 'active' : ''}" onclick="selectPatient('${p.id}')">
+        <td><div class="bed-number">${p.bed}</div></td>
+        <td>
+          <div class="patient-name">${p.name}</div>
+          <div class="patient-age">${p.age}${p.gender === 'male' ? 'M' : 'F'}</div>
+        </td>
+        <td><span class="chief-complaint">${p.chiefComplaint}</span></td>
+        <td><span class="acuity-badge acuity-${p.acuity}"><span class="acuity-dot"></span> ESI-${p.acuity}</span></td>
+        <td><span class="status-badge ${statusClass}">${p.status === 'being-seen' || p.status === 'waiting' ? '<span class="status-pulse"></span>' : ''}${statusLabel}</span></td>
+        <td class="hide-mobile"><span class="wait-time">${waitStr}</span></td>
+        <td class="hide-mobile"><span class="${p.provider ? 'provider-you' : ''}">${p.provider || '—'}</span></td>
+      </tr>`;
+    }).join('');
+  }
+
+  updateStats();
+}
+
+function updateStats() {
+  const active = patients.filter(p => p.status !== 'discharged' && p.status !== 'admitted');
+  document.getElementById('patientCount').textContent = active.length;
+  document.getElementById('statTotal').textContent = active.length;
+  document.getElementById('statWaiting').textContent = active.filter(p => p.status === 'waiting').length;
+  document.getElementById('statBeingSeen').textContent = active.filter(p => p.status === 'being-seen' || p.status === 'labs-pending').length;
+  document.getElementById('statHighAcuity').textContent = active.filter(p => p.acuity <= 2).length;
+
+  const waits = active.map(p => Math.floor((Date.now() - p.arrivalTime) / 60000));
+  if (waits.length > 0) {
+    const avg = Math.round(waits.reduce((a,b) => a + b, 0) / waits.length);
+    document.getElementById('statAvgWait').textContent = avg < 60 ? `${avg}m` : `${Math.floor(avg/60)}h`;
+  } else {
+    document.getElementById('statAvgWait').textContent = '—';
+  }
+}
+
+// ============================================================
+// PATIENT ACTIONS
+// ============================================================
+function addNewPatient() {
+  const patient = generatePatient();
+  if (!patient) return;
+  patients.push(patient);
+  renderBoard();
+  showToast(`New patient: ${patient.name} — ${patient.chiefComplaint} (ESI-${patient.acuity})`, 'success');
+}
+
+function selectPatient(id) {
+  const patient = patients.find(p => p.id === id);
+  if (!patient) return;
+
+  selectedPatientId = id;
+
+  // Auto-set status to being-seen and assign provider
+  if (patient.status === 'waiting') {
+    patient.status = 'being-seen';
+    patient.provider = 'You';
+  }
+
+  renderBoard();
+  openPanel(patient);
+}
+
+function resetBoard() {
+  if (!confirm('Reset the ED board? All current patients will be cleared.')) return;
+  patients = [];
+  selectedPatientId = null;
+  availableBeds = [...ED_BEDS];
+  renderBoard();
+  closePanel();
+  showToast('Board reset — ready for a new shift');
+}
+
+// ============================================================
+// DETAIL PANEL
+// ============================================================
+function openPanel(patient) {
+  document.getElementById('panelName').textContent = patient.name;
+  document.getElementById('panelAge').textContent = `${patient.age}${patient.gender === 'male' ? 'M' : 'F'}`;
+  document.getElementById('panelMRN').textContent = patient.mrn;
+  document.getElementById('panelBed').textContent = `Bed ${patient.bed}`;
+
+  document.getElementById('detailPanel').classList.add('open');
+  document.getElementById('panelOverlay').classList.add('open');
+
+  switchTab('overview');
+}
+
+function closePanel() {
+  document.getElementById('detailPanel').classList.remove('open');
+  document.getElementById('panelOverlay').classList.remove('open');
+  selectedPatientId = null;
+  renderBoard();
+}
+
+// ============================================================
+// EMR TABS
+// ============================================================
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.emr-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+
+  const patient = patients.find(p => p.id === selectedPatientId);
+  if (!patient) return;
+
+  const v = patient.variant;
+  const cf = v.clinicalFacts;
+  const content = document.getElementById('emrContent');
+
+  switch (tab) {
+    case 'overview':
+      content.innerHTML = renderOverview(patient);
+      break;
+    case 'vitals':
+      content.innerHTML = renderVitals(v.physicalExam.vitalSigns);
+      break;
+    case 'labs':
+      content.innerHTML = renderLabs(v.diagnostics);
+      break;
+    case 'imaging':
+      content.innerHTML = renderImaging(v.diagnostics);
+      break;
+    case 'history':
+      content.innerHTML = renderHistory(cf);
+      break;
+    case 'exam':
+      content.innerHTML = renderExam(v.physicalExam);
+      break;
+    case 'teaching':
+      content.innerHTML = renderTeaching(v.teaching, v);
+      break;
+  }
+}
+
+function renderOverview(p) {
+  const v = p.variant;
+  const cf = v.clinicalFacts;
+  const vs = v.physicalExam.vitalSigns;
+
+  return `
+    <div class="emr-section">
+      <div class="emr-section-title">Chief Complaint</div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:4px">${p.chiefComplaint}</div>
+      <div style="font-size:13px;color:var(--text-muted)">
+        "${cf.chiefComplaint.patientPhrasing[0]}" — ${cf.chiefComplaint.location}
+        <br>Onset: ${cf.chiefComplaint.onset} | Duration: ${cf.chiefComplaint.duration}
+        <br>Severity: ${cf.chiefComplaint.severity}
+      </div>
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Vital Signs</div>
+      <div class="vitals-grid">
+        <div class="vital-card">
+          <div class="vital-label">BP</div>
+          <div class="vital-value ${parseInt(vs.BP) > 140 ? 'abnormal' : ''}">${vs.BP}</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">HR</div>
+          <div class="vital-value ${parseInt(vs.HR) > 100 ? 'abnormal' : ''}">${vs.HR}</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">RR</div>
+          <div class="vital-value ${parseInt(vs.RR) > 20 ? 'abnormal' : ''}">${vs.RR}</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">Temp</div>
+          <div class="vital-value ${parseFloat(vs.Temp) > 100.4 ? 'abnormal' : ''}">${vs.Temp}</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">SpO₂</div>
+          <div class="vital-value ${parseInt(vs.SpO2) < 95 ? 'abnormal' : ''}">${vs.SpO2}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Acuity & Status</div>
+      <div class="emr-field">
+        <span class="emr-field-label">ESI Level</span>
+        <span class="acuity-badge acuity-${p.acuity}"><span class="acuity-dot"></span> ESI-${p.acuity}</span>
+      </div>
+      <div class="emr-field">
+        <span class="emr-field-label">Diagnosis</span>
+        <span class="emr-field-value" style="font-weight:600">${v.diagnosis}</span>
+      </div>
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Key History</div>
+      <div class="emr-field">
+        <span class="emr-field-label">PMH</span>
+        <span class="emr-field-value">${cf.pmh.join('; ') || 'None'}</span>
+      </div>
+      <div class="emr-field">
+        <span class="emr-field-label">Medications</span>
+        <span class="emr-field-value">${cf.medications.map(m => m.name + ' ' + m.dose).join('; ') || 'None'}</span>
+      </div>
+      <div class="emr-field">
+        <span class="emr-field-label">Allergies</span>
+        <span class="emr-field-value">${cf.allergies.length > 0 ? cf.allergies.map(a => a.allergen + ' (' + a.reaction + ')').join('; ') : 'NKDA'}</span>
+      </div>
+    </div>
+
+    ${v.diagnostics.ecg ? `
+    <div class="emr-section">
+      <div class="emr-section-title">ECG</div>
+      <div class="ecg-findings">
+        <h4>12-Lead ECG Findings</h4>
+        ${v.diagnostics.ecg.findings.map(f => `<div class="ecg-finding-item">${f}</div>`).join('')}
+        <div class="ecg-interpretation">Interpretation: ${v.diagnostics.ecg.interpretation}</div>
+      </div>
+    </div>` : ''}
+  `;
+}
+
+function renderVitals(vs) {
+  return `
+    <div class="emr-section">
+      <div class="emr-section-title">Current Vital Signs</div>
+      <div class="vitals-grid">
+        ${Object.entries(vs).map(([k, v]) => {
+          let abnormal = false;
+          if (k === 'BP' && parseInt(v) > 140) abnormal = true;
+          if (k === 'HR' && (parseInt(v) > 100 || parseInt(v) < 60)) abnormal = true;
+          if (k === 'RR' && parseInt(v) > 20) abnormal = true;
+          if (k === 'Temp' && parseFloat(v) > 100.4) abnormal = true;
+          if (k === 'SpO2' && parseInt(v) < 95) abnormal = true;
+
+          const labels = { BP: 'Blood Pressure', HR: 'Heart Rate', RR: 'Respiratory Rate', Temp: 'Temperature', SpO2: 'O₂ Saturation' };
+          const units = { HR: 'bpm', RR: '/min' };
+
+          return `<div class="vital-card">
+            <div class="vital-label">${labels[k] || k}</div>
+            <div class="vital-value ${abnormal ? 'abnormal' : ''}">${v}</div>
+            ${units[k] ? `<div style="font-size:10px;color:var(--text-muted)">${units[k]}</div>` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div class="emr-section" style="margin-top:16px; padding:12px; background:var(--bg); border-radius:6px; font-size:12px; color:var(--text-muted)">
+      Vitals trend will populate with time simulation in future build. Current snapshot shown.
+    </div>
+  `;
+}
+
+function renderLabs(diagnostics) {
+  if (!diagnostics.labs || diagnostics.labs.length === 0) {
+    return '<div class="empty-state"><p>No lab results available yet.</p></div>';
+  }
+
+  return `
+    <div class="emr-section">
+      <div class="emr-section-title">Laboratory Results</div>
+      <table class="lab-table">
+        <thead>
+          <tr>
+            <th>Test</th>
+            <th>Value</th>
+            <th>Ref</th>
+            <th>Flag</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${diagnostics.labs.map(l => {
+            const cls = l.status === 'critical' ? 'critical' : l.status === 'abnormal' ? 'abnormal' : 'normal';
+            const flag = l.status === 'critical' ? 'C' : l.status === 'abnormal' ? 'H' : '';
+            return `<tr class="${cls}">
+              <td style="font-weight:500">${l.test}</td>
+              <td class="${cls}" style="font-family:var(--mono)">${l.value} ${l.unit}</td>
+              <td style="color:var(--text-muted);font-size:11px">${l.reference}</td>
+              <td>${flag ? `<span class="lab-flag ${flag}">${flag}</span>` : '✓'}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderImaging(diagnostics) {
+  if (!diagnostics.imaging || diagnostics.imaging.length === 0) {
+    return '<div class="empty-state"><p>No imaging results available yet.</p></div>';
+  }
+
+  let html = '<div class="emr-section"><div class="emr-section-title">Imaging Results</div>';
+  diagnostics.imaging.forEach(img => {
+    html += `<div class="imaging-card">
+      <h4>${img.study} ${img.critical ? '🔴 CRITICAL' : ''}</h4>
+      <p><strong>Findings:</strong> ${img.findings}</p>
+      <p><strong>Impression:</strong> ${img.impression}</p>
+    </div>`;
+  });
+
+  if (diagnostics.ecg) {
+    html += `<div class="ecg-findings" style="margin-top:12px">
+      <h4>12-Lead ECG</h4>
+      ${diagnostics.ecg.findings.map(f => `<div class="ecg-finding-item">${f}</div>`).join('')}
+      <div class="ecg-interpretation">Interpretation: ${diagnostics.ecg.interpretation}</div>
+    </div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function renderHistory(cf) {
+  return `
+    <div class="emr-section">
+      <div class="emr-section-title">Past Medical History</div>
+      ${cf.pmh.map(p => `<div class="emr-field"><span class="emr-field-value">• ${p}</span></div>`).join('') || '<div class="emr-field-value">None</div>'}
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Medications</div>
+      ${cf.medications.length > 0 ? cf.medications.map(m => `<div class="emr-field">
+        <span class="emr-field-label">${m.name}</span>
+        <span class="emr-field-value">${m.dose} ${m.compliance ? '— ' + m.compliance : ''}</span>
+      </div>`).join('') : '<div class="emr-field-value">None</div>'}
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Allergies</div>
+      ${cf.allergies.length > 0 ? cf.allergies.map(a => `<div class="emr-field">
+        <span class="emr-field-label" style="color:var(--danger)">${a.allergen}</span>
+        <span class="emr-field-value">${a.reaction}</span>
+      </div>`).join('') : '<div class="emr-field-value" style="color:var(--success);font-weight:600">No Known Drug Allergies (NKDA)</div>'}
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Social History</div>
+      <div class="emr-field"><span class="emr-field-label">Smoking</span><span class="emr-field-value">${cf.socialHistory.smoking}</span></div>
+      <div class="emr-field"><span class="emr-field-label">Alcohol</span><span class="emr-field-value">${cf.socialHistory.alcohol}</span></div>
+      <div class="emr-field"><span class="emr-field-label">Substances</span><span class="emr-field-value">${cf.socialHistory.drugs}</span></div>
+      <div class="emr-field"><span class="emr-field-label">Occupation</span><span class="emr-field-value">${cf.socialHistory.occupation}</span></div>
+      <div class="emr-field"><span class="emr-field-label">Living</span><span class="emr-field-value">${cf.socialHistory.livingSituation}</span></div>
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Family History</div>
+      ${cf.familyHistory.map(f => `<div class="emr-field"><span class="emr-field-value">• ${f}</span></div>`).join('') || '<div class="emr-field-value">Non-contributory</div>'}
+    </div>
+
+    <div class="emr-section">
+      <div class="emr-section-title">Risk Factors</div>
+      ${cf.riskFactors.present.map(r => `<div class="emr-field"><span class="emr-field-value" style="color:var(--danger)">✚ ${r}</span></div>`).join('')}
+      ${cf.riskFactors.absent.map(r => `<div class="emr-field"><span class="emr-field-value" style="color:var(--success)">✗ ${r}</span></div>`).join('')}
+    </div>
+  `;
+}
+
+function renderExam(pe) {
+  const systems = [
+    ['General', pe.general],
+    ['HEENT', pe.heent],
+    ['Neck', pe.neck],
+    ['Cardiovascular', pe.cardiovascular],
+    ['Pulmonary', pe.pulmonary],
+    ['Abdominal', pe.abdominal],
+    ['Extremities', pe.extremities],
+    ['Neurologic', pe.neurologic],
+    ['Skin', pe.skin]
+  ].filter(([_, val]) => val);
+
+  return `
+    <div class="emr-section">
+      <div class="emr-section-title">Physical Examination</div>
+      ${systems.map(([sys, finding]) => `
+        <div class="emr-field" style="margin-bottom:10px">
+          <span class="emr-field-label">${sys}</span>
+          <span class="emr-field-value">${finding}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderTeaching(teaching, variant) {
+  if (!teaching) return '<div class="empty-state"><p>Teaching points not available for this case.</p></div>';
+
+  let html = '';
+
+  // DDx with probability bars
+  if (teaching.expertApproach && teaching.expertApproach.differentialWithProbabilities) {
+    const colors = ['var(--primary)', 'var(--accent)', 'var(--warning)', '#8B5CF6', 'var(--text-muted)'];
+    html += `<div class="emr-section">
+      <div class="emr-section-title">Expert Differential Diagnosis</div>
+      ${teaching.expertApproach.differentialWithProbabilities.map((d, i) => `
+        <div class="ddx-bar">
+          <div class="ddx-bar-label">
+            <span>${d.diagnosis}</span>
+            <span>${d.probability}%</span>
+          </div>
+          <div class="ddx-bar-track">
+            <div class="ddx-bar-fill" style="width:${d.probability}%;background:${colors[i % colors.length]}"></div>
+          </div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">${d.reasoning}</div>
+        </div>
+      `).join('')}
+    </div>`;
+  }
+
+  // Key Learning Points
+  if (teaching.keyLearningPoints) {
+    html += `<div class="teaching-card">
+      <h4>Key Learning Points</h4>
+      ${teaching.keyLearningPoints.map(p => `<div class="teaching-item">${p}</div>`).join('')}
+    </div>`;
+  }
+
+  // Must Not Miss
+  if (teaching.mustNotMiss) {
+    html += `<div class="teaching-card" style="background:#fef2f2;border-color:#fecaca">
+      <h4 style="color:var(--danger)">Must-Not-Miss Diagnoses</h4>
+      ${teaching.mustNotMiss.map(p => `<div class="teaching-item must-not-miss-item">${p}</div>`).join('')}
+    </div>`;
+  }
+
+  // Common Pitfalls
+  if (teaching.commonPitfalls) {
+    html += `<div class="teaching-card" style="background:#fffbeb;border-color:#fde68a">
+      <h4 style="color:#92400e">Common Pitfalls</h4>
+      ${teaching.commonPitfalls.map(p => `<div class="teaching-item pitfall-item">${p}</div>`).join('')}
+    </div>`;
+  }
+
+  // Sources
+  const sources = variant ? patients.find(p => p.id === selectedPatientId)?.template?.sources : null;
+  if (sources && sources.length > 0) {
+    html += `<div class="emr-section" style="margin-top:16px">
+      <div class="emr-section-title">Evidence Sources</div>
+      ${sources.map(s => `<div style="font-size:12px;margin-bottom:4px">
+        <a href="${s.url}" target="_blank" style="color:var(--primary);text-decoration:none">${s.name}</a>
+        <span style="color:var(--text-muted)"> — ${s.type}</span>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  return html;
+}
+
+// ============================================================
+// DISPOSITION
+// ============================================================
+let dispoType = null;
+let dispoSelection = null;
+
+function openDisposition(type) {
+  dispoType = type;
+  dispoSelection = null;
+  const modal = document.getElementById('dispoModal');
+
+  if (type === 'discharge') {
+    document.getElementById('dispoTitle').textContent = 'Discharge Patient';
+    document.getElementById('dispoBody').innerHTML = `
+      <div class="dispo-option" onclick="selectDispo(this, 'home')">
+        <div class="dispo-icon">🏠</div>
+        <div>
+          <div class="dispo-label">Discharge Home</div>
+          <div class="dispo-desc">Patient stable, follow up with PCP</div>
+        </div>
+      </div>
+      <div class="dispo-option" onclick="selectDispo(this, 'ama')">
+        <div class="dispo-icon">⚠️</div>
+        <div>
+          <div class="dispo-label">AMA (Against Medical Advice)</div>
+          <div class="dispo-desc">Patient elects to leave before disposition complete</div>
+        </div>
+      </div>
+    `;
+  } else {
+    document.getElementById('dispoTitle').textContent = 'Admit Patient';
+    document.getElementById('dispoBody').innerHTML = `
+      <div class="dispo-option" onclick="selectDispo(this, 'medicine')">
+        <div class="dispo-icon">🩺</div>
+        <div>
+          <div class="dispo-label">Internal Medicine</div>
+          <div class="dispo-desc">General medical floor admission</div>
+        </div>
+      </div>
+      <div class="dispo-option" onclick="selectDispo(this, 'icu')">
+        <div class="dispo-icon">🏥</div>
+        <div>
+          <div class="dispo-label">ICU / Critical Care</div>
+          <div class="dispo-desc">Intensive monitoring required</div>
+        </div>
+      </div>
+      <div class="dispo-option" onclick="selectDispo(this, 'surgery')">
+        <div class="dispo-icon">🔪</div>
+        <div>
+          <div class="dispo-label">Surgery</div>
+          <div class="dispo-desc">Surgical evaluation and management</div>
+        </div>
+      </div>
+      <div class="dispo-option" onclick="selectDispo(this, 'cardiology')">
+        <div class="dispo-icon">❤️</div>
+        <div>
+          <div class="dispo-label">Cardiology / Cath Lab</div>
+          <div class="dispo-desc">Cardiac catheterization or monitoring</div>
+        </div>
+      </div>
+    `;
+  }
+
+  modal.classList.add('open');
+}
+
+function selectDispo(el, choice) {
+  dispoSelection = choice;
+  document.querySelectorAll('.dispo-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function confirmDisposition() {
+  if (!dispoSelection) {
+    showToast('Please select a disposition option', 'warning');
+    return;
+  }
+
+  const patient = patients.find(p => p.id === selectedPatientId);
+  if (!patient) return;
+
+  if (dispoType === 'discharge') {
+    patient.status = 'discharged';
+    availableBeds.push(patient.bed);
+    showToast(`${patient.name} discharged (${dispoSelection === 'ama' ? 'AMA' : 'home'})`, 'success');
+  } else {
+    patient.status = 'admitted';
+    availableBeds.push(patient.bed);
+    const serviceNames = { medicine: 'Medicine', icu: 'ICU', surgery: 'Surgery', cardiology: 'Cardiology/Cath Lab' };
+    showToast(`${patient.name} admitted to ${serviceNames[dispoSelection]}`, 'success');
+  }
+
+  closeDispoModal();
+  closePanel();
+  renderBoard();
+}
+
+function closeDispoModal() {
+  document.getElementById('dispoModal').classList.remove('open');
+}
+
+function changeStatus() {
+  const patient = patients.find(p => p.id === selectedPatientId);
+  if (!patient) return;
+
+  const statuses = ['waiting', 'being-seen', 'labs-pending'];
+  const current = statuses.indexOf(patient.status);
+  patient.status = statuses[(current + 1) % statuses.length];
+  if (patient.status === 'being-seen') patient.provider = 'You';
+
+  renderBoard();
+  switchTab(currentTab);
+  showToast(`Status updated: ${patient.name} → ${patient.status}`);
+}
+
+function beginCRT() {
+  showToast('CRT integration coming soon — history taking will launch here', 'warning');
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(message, type = '') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3200);
+}
+
+// ============================================================
+// CLOCK
+// ============================================================
+function updateClock() {
+  const elapsed = Date.now() - shiftStartTime;
+  const simMinutes = Math.floor(elapsed / 1000) * 2; // 2 sim minutes per real second
+  const hours = 7 + Math.floor(simMinutes / 60);
+  const mins = simMinutes % 60;
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const displayHours = hours > 12 ? hours - 12 : hours;
+  const day = Math.floor(hours / 24) + 1;
+  document.getElementById('simTime').textContent =
+    `${String(displayHours).padStart(2, '0')}:${String(mins).padStart(2, '0')} ${ampm} — Day ${day}`;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderBoard();
+setInterval(updateClock, 5000);
+setInterval(renderBoard, 30000); // Re-render every 30s to update wait times
+updateClock();
+</script>
+
+</body>
+</html>

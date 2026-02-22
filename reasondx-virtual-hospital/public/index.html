@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReasonDx Virtual Hospital | Immersive Clinical Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2874A6;
+            --primary-dark: #1B4F72;
+            --primary-light: #EBF5FB;
+            --accent: #3498DB;
+            --success: #27AE60;
+            --success-light: #E8F8F0;
+            --warning: #F39C12;
+            --danger: #E74C3C;
+            --text: #1a1a2e;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --purple: #8B5CF6;
+            --purple-light: #EDE9FE;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        
+        .logo-text span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: 0 4px 14px rgba(40, 116, 166, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 116, 166, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 24px 100px;
+            background: linear-gradient(180deg, white 0%, var(--bg) 100%);
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .hero-cta .btn {
+            padding: 14px 28px;
+            font-size: 1rem;
+        }
+        
+        .hero-image {
+            max-width: 1100px;
+            margin: 60px auto 0;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.12);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .hero-image-placeholder {
+            background: linear-gradient(135deg, var(--primary-light), var(--purple-light));
+            padding: 60px;
+            text-align: center;
+        }
+        
+        .ed-board-preview {
+            background: var(--text);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+        }
+        
+        .ed-board-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .ed-board-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .ed-board-time {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .ed-patient-row {
+            display: grid;
+            grid-template-columns: 60px 1fr 80px 140px 100px;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #2a2a3e;
+            font-size: 0.9rem;
+            align-items: center;
+        }
+        
+        .ed-patient-row:last-child {
+            border-bottom: none;
+        }
+        
+        .ed-bed {
+            background: var(--primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .ed-patient-name {
+            font-weight: 500;
+        }
+        
+        .ed-patient-age {
+            color: #888;
+        }
+        
+        .ed-acuity {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .ed-acuity.esi-2 { background: #EF4444; }
+        .ed-acuity.esi-3 { background: #F59E0B; }
+        .ed-acuity.esi-4 { background: #22C55E; }
+        
+        .ed-status {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .ed-status.active {
+            color: var(--accent);
+        }
+        
+        /* What Makes It Different */
+        .difference {
+            padding: 100px 24px;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .comparison-card {
+            padding: 40px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+        }
+        
+        .comparison-card.old {
+            background: #fafafa;
+        }
+        
+        .comparison-card.new {
+            background: linear-gradient(135deg, var(--primary-light), var(--purple-light));
+            border-color: var(--primary);
+        }
+        
+        .comparison-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .comparison-card.old h3 {
+            color: var(--text-muted);
+        }
+        
+        .comparison-card.new h3 {
+            color: var(--primary);
+        }
+        
+        .comparison-list {
+            list-style: none;
+        }
+        
+        .comparison-list li {
+            padding: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.75rem;
+        }
+        
+        .comparison-card.old .comparison-icon {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+        
+        .comparison-card.new .comparison-icon {
+            background: var(--success-light);
+            color: var(--success);
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 24px;
+            background: var(--bg);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-light), var(--purple-light));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 100px 24px;
+            background: white;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: var(--bg);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid var(--border);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .pricing-card.featured {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(40, 116, 166, 0.15);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        
+        .pricing-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .pricing-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .pricing-price {
+            margin: 20px 0;
+        }
+        
+        .pricing-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .pricing-amount span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        .pricing-annual {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+        
+        .pricing-features li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        .pricing-features li.disabled {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        .pricing-features li.disabled::before {
+            content: "—";
+            color: var(--text-muted);
+        }
+        
+        .pricing-cta {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+        }
+        
+        .pricing-card.enterprise {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            border-color: transparent;
+        }
+        
+        .pricing-card.enterprise .pricing-name,
+        .pricing-card.enterprise .pricing-amount {
+            color: white;
+        }
+        
+        .pricing-card.enterprise .pricing-desc,
+        .pricing-card.enterprise .pricing-annual {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .pricing-card.enterprise .pricing-features li {
+            color: white;
+        }
+        
+        .pricing-card.enterprise .pricing-features li::before {
+            color: #7DD3FC;
+        }
+        
+        .pricing-card.enterprise .btn {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .pricing-card.enterprise .btn:hover {
+            background: var(--primary-light);
+        }
+        
+        /* Rotations */
+        .rotations {
+            padding: 100px 24px;
+            background: var(--bg);
+        }
+        
+        .rotations-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+        
+        .rotation-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .rotation-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        
+        .rotation-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        
+        .rotation-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        /* Social Proof */
+        .social-proof {
+            padding: 80px 24px;
+            background: white;
+            text-align: center;
+        }
+        
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+        }
+        
+        .testimonial-role {
+            color: var(--text-muted);
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            text-align: center;
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+            padding: 16px 32px;
+            font-size: 1.1rem;
+        }
+        
+        .cta .btn:hover {
+            background: var(--primary-light);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 60px 24px 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+        
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            margin-top: 16px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-links h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .footer-links a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 6px 0;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 2.5rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 450px; }
+            .rotations-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .rotations-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🏥</div>
+                <div class="logo-text">Reason<span>Dx</span></div>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#rotations">Rotations</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-cta">
+                <a href="#" class="btn btn-outline">Log In</a>
+                <a href="#" class="btn btn-primary">Start Free</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">
+            🚀 Now in Beta — Medical Education Reimagined
+        </div>
+        <h1>The First <span>Virtual Hospital</span> for Medical Education</h1>
+        <p class="hero-subtitle">
+            Stop learning medicine from static cases. Experience a living, breathing hospital simulation with AI-powered patients, realistic EMRs, and multi-day continuity of care.
+        </p>
+        <div class="hero-cta">
+            <a href="#" class="btn btn-primary">Start Free Trial</a>
+            <a href="#pricing" class="btn btn-outline">View Pricing</a>
+        </div>
+        
+        <div class="hero-image">
+            <div class="hero-image-placeholder">
+                <div class="ed-board-preview">
+                    <div class="ed-board-header">
+                        <div class="ed-board-title">🏥 Emergency Department Tracking Board</div>
+                        <div class="ed-board-time">14:32 | 4 patients</div>
+                    </div>
+                    <div class="ed-patient-row">
+                        <div class="ed-bed">Bed 3</div>
+                        <div><span class="ed-patient-name">Maria Santos</span> <span class="ed-patient-age">52F</span></div>
+                        <div class="ed-acuity esi-2">ESI-2</div>
+                        <div>Chest Pain</div>
+                        <div class="ed-status active">Being Seen</div>
+                    </div>
+                    <div class="ed-patient-row">
+                        <div class="ed-bed">Bed 7</div>
+                        <div><span class="ed-patient-name">James Wilson</span> <span class="ed-patient-age">28M</span></div>
+                        <div class="ed-acuity esi-3">ESI-3</div>
+                        <div>Abdominal Pain</div>
+                        <div class="ed-status">Waiting</div>
+                    </div>
+                    <div class="ed-patient-row">
+                        <div class="ed-bed">Bed 12</div>
+                        <div><span class="ed-patient-name">Linda Chen</span> <span class="ed-patient-age">67F</span></div>
+                        <div class="ed-acuity esi-3">ESI-3</div>
+                        <div>Shortness of Breath</div>
+                        <div class="ed-status">Labs Pending</div>
+                    </div>
+                    <div class="ed-patient-row">
+                        <div class="ed-bed">Bed 2</div>
+                        <div><span class="ed-patient-name">Robert Taylor</span> <span class="ed-patient-age">45M</span></div>
+                        <div class="ed-acuity esi-4">ESI-4</div>
+                        <div>Laceration</div>
+                        <div class="ed-status">Waiting</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- What Makes It Different -->
+    <section class="difference">
+        <div class="container">
+            <div class="section-header">
+                <h2>This Isn't Another Case Bank</h2>
+                <p>Traditional case-based learning misses the complexity of real clinical work. We built something different.</p>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card old">
+                    <h3>❌ Traditional Case Learning</h3>
+                    <ul class="comparison-list">
+                        <li>
+                            <span class="comparison-icon">✕</span>
+                            <span>One patient at a time, linear progression</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✕</span>
+                            <span>Scripted responses that feel robotic</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✕</span>
+                            <span>Case resets after completion</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✕</span>
+                            <span>No documentation practice</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✕</span>
+                            <span>Isolated from hospital workflow</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✕</span>
+                            <span>Students learn the script, not the medicine</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card new">
+                    <h3>✓ ReasonDx Virtual Hospital</h3>
+                    <ul class="comparison-list">
+                        <li>
+                            <span class="comparison-icon">✓</span>
+                            <span>Manage multiple patients simultaneously</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✓</span>
+                            <span>AI-powered patients with natural conversation</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✓</span>
+                            <span>Patients persist—see them on Day 2, Day 3...</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✓</span>
+                            <span>Write real notes in a realistic EMR</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✓</span>
+                            <span>Full hospital workflow: pages, admits, handoffs</span>
+                        </li>
+                        <li>
+                            <span class="comparison-icon">✓</span>
+                            <span>Every case is unique—no memorization possible</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Built for How Medicine Is Actually Practiced</h2>
+                <p>Every feature designed to bridge the gap between classroom and clinic.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3>ED Tracking Board</h3>
+                    <p>See all your patients at a glance. Pick up new arrivals. Manage your workload just like a real ED shift.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Patients</h3>
+                    <p>Patients respond naturally to any question. Grounded in peer-reviewed clinical literature for accuracy.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Realistic EMR</h3>
+                    <p>Full electronic medical record with notes, labs, imaging, vitals, and medication lists.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Documentation Practice</h3>
+                    <p>Write real clinical notes. Get AI feedback on your documentation quality and reasoning.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Multi-Day Continuity</h3>
+                    <p>Patients evolve over time. See them on rounds. Handle complications. Experience real continuity.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Clinical Reasoning Tracking</h3>
+                    <p>OLDCARTS depth tracking, must-not-miss DDx tagging, and a "fingerprint" of your reasoning patterns.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📟</div>
+                    <h3>Paging System</h3>
+                    <p>Get paged for new admissions, critical values, and consults—just like real residency.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Shift Handoffs</h3>
+                    <p>Practice giving and receiving sign-out. A critical skill rarely taught explicitly.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Achievements & Progress</h3>
+                    <p>Earn badges for clinical skills. Track your growth over time. Identify areas to improve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Rotations -->
+    <section class="rotations" id="rotations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Every Core Rotation</h2>
+                <p>Prepare for your clerkships with rotation-specific workflows and cases.</p>
+            </div>
+            
+            <div class="rotations-grid">
+                <div class="rotation-card">
+                    <div class="rotation-icon">🚑</div>
+                    <div class="rotation-name">Emergency Medicine</div>
+                </div>
+                <div class="rotation-card">
+                    <div class="rotation-icon">🩺</div>
+                    <div class="rotation-name">Internal Medicine</div>
+                </div>
+                <div class="rotation-card">
+                    <div class="rotation-icon">🔪</div>
+                    <div class="rotation-name">Surgery</div>
+                </div>
+                <div class="rotation-card">
+                    <div class="rotation-icon">👶</div>
+                    <div class="rotation-name">Pediatrics</div>
+                </div>
+                <div class="rotation-card">
+                    <div class="rotation-icon">🤰</div>
+                    <div class="rotation-name">OB/Gyn</div>
+                </div>
+                <div class="rotation-card">
+                    <div class="rotation-icon">🧠</div>
+                    <div class="rotation-name">Psychiatry</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Start free. Upgrade when you need more.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Free</div>
+                        <div class="pricing-desc">Get started learning</div>
+                        <div class="pricing-price">
+                            <div class="pricing-amount">$0</div>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>5 cases per month</li>
+                        <li>ED rotation only</li>
+                        <li>Basic CRT features</li>
+                        <li>Hybrid AI responses</li>
+                        <li class="disabled">Multi-day cases</li>
+                        <li class="disabled">Documentation practice</li>
+                        <li class="disabled">Progress analytics</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline pricing-cta">Start Free</a>
+                </div>
+                
+                <!-- Pro Tier -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <div class="pricing-name">Pro</div>
+                        <div class="pricing-desc">For serious learners</div>
+                        <div class="pricing-price">
+                            <div class="pricing-amount">$14.99<span>/mo</span></div>
+                            <div class="pricing-annual">or $99/year (save 45%)</div>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Unlimited cases</li>
+                        <li>All 6 rotations</li>
+                        <li>Full AI-powered patients</li>
+                        <li>Multi-day case progression</li>
+                        <li>Documentation practice + AI feedback</li>
+                        <li>Progress analytics & achievements</li>
+                        <li>Expert comparison mode</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary pricing-cta">Start 7-Day Trial</a>
+                </div>
+                
+                <!-- Institutional -->
+                <div class="pricing-card enterprise">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Institutional</div>
+                        <div class="pricing-desc">For schools & programs</div>
+                        <div class="pricing-price">
+                            <div class="pricing-amount">Custom</div>
+                            <div class="pricing-annual">Volume pricing available</div>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Everything in Pro</li>
+                        <li>Cohort management dashboard</li>
+                        <li>Student progress tracking</li>
+                        <li>Custom case development</li>
+                        <li>LMS integration (Canvas, Blackboard)</li>
+                        <li>Dedicated support</li>
+                        <li>HIPAA-compliant hosting options</li>
+                    </ul>
+                    <a href="mailto:institutions@reasondx.com?subject=Institutional%20Pricing%20Inquiry" class="btn pricing-cta">Request a Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="testimonial">
+            <p class="testimonial-text">
+                "This isn't just another case-based learning tool—it's The Sims for medical education. Students don't just learn about patient care; they experience it."
+            </p>
+            <p class="testimonial-author">Dr. Lauren Fine, MD, FAAAAI</p>
+            <p class="testimonial-role">Assistant Dean of Clinical Skills Education</p>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <h2>Ready to Transform Your Clinical Training?</h2>
+        <p>Join thousands of medical students practicing in the most realistic simulation available.</p>
+        <a href="#" class="btn">Start Your Free Trial</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🏥</div>
+                    <div class="logo-text">Reason<span>Dx</span></div>
+                </a>
+                <p>The most immersive clinical simulation platform for medical education. Built by educators, for educators.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#rotations">Rotations</a>
+                <a href="#">Case Library</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="#">Documentation</a>
+                <a href="#">Blog</a>
+                <a href="#">Research</a>
+                <a href="#">Support</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Careers</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 ReasonDx. All rights reserved.</p>
+            <p>Built with ❤️ for medical education</p>
+        </div>
+    </footer>
+</body>
+</html>
