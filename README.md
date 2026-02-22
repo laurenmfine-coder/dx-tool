@@ -1,174 +1,129 @@
-# ReasonDx
+# ReasonDx Virtual Hospital
 
-**Clinical Reasoning Education Platform**
+The most immersive clinical simulation platform for medical education. Built by educators, for educators.
 
-ReasonDx is an interactive, browser-based medical education platform designed to teach clinical reasoning through case-based learning, pathophysiology modules, and board-style practice questions. Built as a progressive web app (PWA) for offline-capable, mobile-friendly access.
+## Overview
 
-## Platform Overview
+ReasonDx Virtual Hospital is a comprehensive hospital simulation platform where medical students manage patients across every phase of hospital-based care — from ED triage to admission, overnight cross-cover, and daily rounds. Every interaction features AI-powered patients, realistic EMRs, and structured clinical reasoning feedback.
 
-| Content Type | Count | Description |
-|---|---|---|
-| Clinical Topics | 316 | Searchable topic pages with integrated learning paths |
-| Interactive Cases | 196 | Expanded adventure-style clinical scenarios with scoring |
-| Pathophysiology Modules | 401 | Mechanism-based teaching modules |
-| Deep Dives | 278 | In-depth explorations of high-yield topics |
-| Board-Prep Questions | 615 | MCQ bank with balanced answer distributions |
-| Clinical Reasoning Trainers | 79 | Focused diagnostic reasoning exercises |
-| ECG Modules | 4 | Interactive electrocardiogram interpretation |
-| CoachDx Tools | 3 | Coaching and self-assessment dashboards |
-| Utility Tools | 17 | Calculators, dashboards, study aids |
+## Platform Architecture
 
-## Architecture
+### Hospital Simulation Boards
 
-```
-reasondx/
-├── index.html              # Landing page (search-first, PWA install)
-├── adventure-hub.html      # Central hub for all interactive cases
-├── board-prep.html         # Board-style question bank entry
-├── help.html               # User guide and site map
-├── manifest.json           # PWA manifest
-├── sw.js                   # Service worker for offline access
-│
-├── cases/                  # 196 interactive expanded-adventure cases
-│   ├── {topic}-expanded-adventure.html
-│   └── ...
-│
-├── modules/                # 401 pathophysiology teaching modules
-│   ├── index.html          # Browse by specialty
-│   ├── {topic}-mechanism.html
-│   └── ...
-│
-├── topics/                 # 316 topic overview pages
-│   └── {topic}.html
-│
-├── data/                   # JSON data stores
-│   ├── topic-map.json      # Master topic index with cross-links
-│   ├── board-prep-questions.json  # 615 MCQs
-│   ├── deep-dives/         # 278 deep-dive JSON files
-│   ├── crt-cases/          # 31 clinical reasoning trainer datasets
-│   └── ...
-│
-├── css/                    # Stylesheets
-│   ├── rdx-theme.css       # Unified design system
-│   ├── rdx-a11y.css        # Accessibility styles
-│   ├── mobile.css           # Mobile-responsive overrides
-│   └── ...
-│
-├── js/                     # Shared JavaScript
-│   ├── rdx-nav.js          # Unified navigation
-│   ├── rdx-search-index.js # Search index (283 entries + abbreviations)
-│   ├── rdx-help-widget.js  # Floating help/dashboard widget
-│   └── ...
-│
-├── tools/                  # Utility tools and dashboards
-│   ├── learning-dashboard.html
-│   ├── dx-dashboard.html
-│   └── ...
-│
-├── ecg/                    # ECG interpretation modules
-├── CoachDx/                # Coaching dashboards
-├── icons/                  # PWA icons
-│
-└── scripts/                # Build and generation scripts
-    ├── master-gen.py        # Case generation engine
-    ├── cases_micro.py       # Microbiology case data (38 organisms)
-    └── ...
-```
+| Board | File | Description | Cases |
+|-------|------|-------------|-------|
+| **ED Board** | `src/ed-board.jsx` | Emergency Department tracking board — triage, workup, stabilize, disposition | 8 templates with variants |
+| **Admitting Board** | `src/admitting-board.jsx` | Receive ED handoffs, admission orders (ADC VAAN DIMLS), H&P, med reconciliation | 4 IM cases with tiered SBAR handoffs |
+| **On-Call Board** | *(in development)* | Cross-cover overnight pages — fevers, falls, critical labs, acute decompensation | 12 scenarios planned |
+| **Rounding Board** | *(in development)* | Daily rounds, progress notes, discharge planning, multi-day continuity | Planned |
 
-## Features
+### Communication Training Tools
 
-### Interactive Cases
-- **6-scene clinical adventures** with branching narratives and vital signs
-- **Difficulty selector** (Beginner / Standard / Advanced) toggles hints
-- **Score tracking** with mastery levels (Developing → Competent → Proficient → Mastery)
-- **Progress persistence** via localStorage
-- **Balanced answer positions** — correct answers distributed 25% across A/B/C/D
-- **Why-chains** — Socratic follow-up questions that teach the reasoning behind each answer
-- **Mechanism teaching boxes** — embedded pathophysiology explanations within cases
+| Tool | File | Description |
+|------|------|-------------|
+| **SP Practice Trainer** | `src/sp-trainer.jsx` | Practice as a standardized patient with AI medical student interviewer. Microphone dictation via Web Speech API, real-time accuracy feedback, SBAR handoff practice mode with verbal recording. |
+| **SBAR Handoff Trainer** | *(integrated in sp-trainer.jsx)* | Structured SBAR handoff practice — ED→Floor, Nurse→MD, shift sign-out, surgery consults. Write → Score → Record verbal → Continue AI conversation. |
+| **Case Selector** | `src/case-selector.jsx` | Central navigation hub — select boards, browse case libraries, filter by rotation/specialty/difficulty, launch all training tools. |
+| **CRT Hub** | `src/crt-hub.html` | Clinical Reasoning Trainer hub — focused case modules across all specialties with labs, imaging, and expert differentials. |
 
-### Case Categories
-- **Clinical** (46 topics): Emergency medicine, cardiology, GI, neuro, heme, endocrine, psychiatry, surgery, OB/GYN, pediatrics, pulmonary, rheumatology, urology, toxicology
-- **Microbiology** (38 organisms): Full organism arc — Presentation → Identification → Virulence → Treatment → Resistance → Prevention
-- **Pharmacology** (15 drug classes): MOA → Spectrum → Dosing → Adverse Effects → Resistance → Clinical Application
-- **Embryology** (8 systems): Development → Normal formation → What goes wrong → Clinical presentation → Diagnosis → Management
-
-### Design System
-- **Teal-based color palette** with CSS custom properties (`--rdx-teal`, `--rdx-purple`, etc.)
-- **DM Sans / DM Serif** font stack
-- **3-tier border radius** system (8px / 12px / 16px)
-- **Mobile-first responsive** design with safe-area support
-- **Floating help widget** on all pages (📊 dashboard + ? help)
-
-### PWA Support
-- Full offline capability via service worker
-- Session-based install prompt (modal + inline banner)
-- iOS step-by-step Add to Home Screen guide
-- Android native install via beforeinstallprompt API
-
-## Content Standards
-
-All cases follow a **Gold Standard Specification**:
-- 6 scenes per case, 6 questions (4 options each)
-- 6 mechanism teaching boxes with why-chains
-- 6 hint pairs (beginner + advanced)
-- Vital signs display where clinically appropriate
-- 2+ open-access references (StatPearls, PubMed, CDC, etc.)
-- Cross-links to mechanism modules and board prep
-- Completion screen with score, mastery level, retry, and navigation
-
-### Content Policy
-- **Open-access sources only** — no paywalled references
-- **Original educational content** — all text is original, not copied from any source
-- **Answer balance enforced** — algorithmic distribution prevents position bias
-- **Evidence-based** — treatment recommendations follow current guidelines
-
-## Development
-
-### Case Generation
-The `scripts/master-gen.py` engine generates HTML cases from structured data:
-
-```bash
-cd scripts
-python3 master-gen.py
-```
-
-Case data is organized by category:
-- `cases_micro.py` — 38 microbiology organisms
-- Pharmacology and clinical cases defined inline in generation scripts
-
-### Serving Locally
-ReasonDx is a static site — serve with any HTTP server:
-
-```bash
-# Python
-python3 -m http.server 8000
-
-# Node
-npx serve .
-```
-
-Then open `http://localhost:8000` in your browser.
-
-## Data Files
+### Shared Infrastructure
 
 | File | Description |
-|---|---|
-| `data/topic-map.json` | Master index of all 316 topics with cross-links, adventures, modules |
-| `data/board-prep-questions.json` | 615 board-style MCQs across all specialties |
-| `data/deep-dives/*.json` | 278 deep-dive content files |
-| `data/crt-cases/*.json` | 31 clinical reasoning trainer datasets |
-| `data/quiz-bank.json` | Additional quiz content |
-| `js/rdx-search-index.js` | Search index with 283 entries + 29 abbreviation tags |
+|------|-------------|
+| `src/utils/ai-patient-service.js` | Claude API integration for AI patient responses |
+| `src/utils/patient-generator.js` | Dynamic patient generation with demographic variation |
+| `src/utils/storage-service.js` | LocalStorage persistence for case state |
+| `src/data/case-template-schema.json` | JSON schema for case template validation |
+| `src/data/cases/chest-pain.json` | Example case data file |
+| `src/styles/variables.css` | Shared CSS variables (ocean blue brand) |
 
-## Browser Support
+## Key Features
 
-- Chrome / Edge 90+
-- Safari 15+ (iOS and macOS)
-- Firefox 90+
-- PWA install supported on Chrome, Edge, and Safari (iOS)
+### Clinical Simulation
+- **AI-Powered Patients**: Claude API integration with clinically grounded responses and scripted fallback
+- **CoachDx Attending**: Socratic AI attending (Dr. Chen) provides guidance without giving direct answers
+- **Realistic Labs & Imaging**: Full lab panels with reference ranges, abnormal flagging, ECG interpretations, and imaging reports
+- **Vital Signs Simulation**: Dynamic vitals with realistic physiologic variation
 
-## Copyright
+### Hospital Workflow
+- **Multi-Patient Management**: Track board with multiple active patients simultaneously
+- **Tiered SBAR Handoffs**: Level 1 (minimal), Level 2 (partial), Level 3 (full) handoff information
+- **ADC VAAN DIMLS Orders**: Complete admission order framework with 142 order items across 12 categories
+- **Medication Reconciliation**: Continue/Hold/Modify/D/C decisions for home medications
+- **Documentation**: H&P notes, progress notes with structured templates
 
-© 2025–2026 ReasonDx. All rights reserved.
+### Communication Training
+- **Microphone Dictation**: Web Speech API for real-time speech-to-text in SP Trainer and SBAR Trainer
+- **Verbal Recording**: MediaRecorder API for recording and reviewing verbal SBAR deliveries
+- **SBAR Scoring**: AI evaluation of written SBAR with section-by-section feedback
+- **AI Conversation Continuation**: After SBAR submission, continue the handoff conversation with the AI receiver
 
-Content is intended for educational purposes. Clinical information should not be used as a substitute for professional medical judgment.
+### Assessment
+- **Completion Tracking**: 6-step checklist per case (accept, service, level, exam, orders, note)
+- **Expert Teaching Tab**: Correct diagnosis, ranked differential, key orders, critical misses, learning points
+- **Performance Scoring**: SP accuracy ratings, SBAR section scores, overall percentages
+
+## Tech Stack
+
+- **Frontend**: React (JSX) with inline styles, no external CSS frameworks
+- **AI**: Anthropic Claude API (claude-sonnet-4-20250514) for patient responses, coaching, and evaluation
+- **Persistence**: LocalStorage with JSON serialization
+- **Speech**: Web Speech API (SpeechRecognition) + MediaRecorder API
+- **Design**: Ocean blue brand (#2874A6), DM Sans font family
+
+## File Structure
+
+```
+reasondx-virtual-hospital/
+├── public/
+│   └── index.html              # Landing page (reasondx.com)
+├── src/
+│   ├── ed-board.jsx            # ED Board (2,707 lines)
+│   ├── admitting-board.jsx     # Admitting Board (1,773 lines)
+│   ├── sp-trainer.jsx          # SP Trainer + SBAR Handoff Trainer
+│   ├── case-selector.jsx       # Navigation hub / case browser
+│   ├── crt-hub.html            # Clinical Reasoning Trainer hub
+│   ├── data/
+│   │   ├── case-template-schema.json
+│   │   └── cases/
+│   │       └── chest-pain.json
+│   ├── utils/
+│   │   ├── ai-patient-service.js
+│   │   ├── patient-generator.js
+│   │   └── storage-service.js
+│   └── styles/
+│       └── variables.css
+├── docs/
+│   ├── ReasonDx-Virtual-Hospital-Design.docx
+│   ├── ReasonDx-Virtual-Hospital-Architecture.docx
+│   ├── ReasonDx-Virtual-Hospital-Board-Expansion.docx
+│   └── ReasonDx-AI-Patient-Responses.docx
+├── legacy/
+│   ├── ed-board-v1.html        # Original ED board (HTML version)
+│   └── clinical-reasoning-trainer-enhanced.html
+├── HANDOFF.md
+├── README.md
+└── package.json
+```
+
+## Getting Started
+
+Each `.jsx` file is a self-contained React component that can be rendered independently. They use the Claude API at `https://api.anthropic.com/v1/messages` — no API key is needed when running inside Claude.ai artifacts.
+
+For standalone deployment:
+1. Import any board component into a React app
+2. Configure Claude API key for AI patient responses
+3. Components fall back to scripted responses when API is unavailable
+
+## Clinical Content Sources
+
+All clinical content is grounded in open-access, peer-reviewed sources:
+- StatPearls (NCBI)
+- AHA/ACC Guidelines
+- Cochrane Reviews
+- IDSA Guidelines
+- ADA Standards of Care
+
+## License
+
+Proprietary — ReasonDx © 2026. All rights reserved.
