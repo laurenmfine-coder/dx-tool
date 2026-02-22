@@ -1087,17 +1087,23 @@ async function getAIResponse(charId, userText) {
   // Build case-adaptive system prompt with mechanism knowledge injected per character
   const sysPrompt = (typeof ch.getSystemPrompt === 'function') ? ch.getSystemPrompt(selectedCase) : (ch.systemPrompt || '');
 
-  const prompt = `${sysPrompt}\n\nCONVERSATION SO FAR:\n${recentHistory}\n\nThe student says to you: "${userText}"\n\nRespond in character. Keep it conversational and natural — 2-5 sentences typically. Stay in character at all times.`;
+  const systemField = sysPrompt + '\n\nCONVERSATION SO FAR:\n' + recentHistory + '\n\nRespond in character. Keep it conversational and natural — 2-5 sentences typically. Stay in character at all times.';
+  const userMsg = String(userText || 'Hello');
+
+  const payload = {
+    type: "passthrough",
+    model: "claude-sonnet-4-5-20250929",
+    max_tokens: 400,
+    system: systemField,
+    messages: [{ role: "user", content: userMsg }]
+  };
+
+  console.log('SimRoomDx sending:', { model: payload.model, systemLen: systemField.length, userMsg: userMsg, msgCount: payload.messages.length });
 
   const response = await fetch("https://coachdx-attending.laurenmfine.workers.dev", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      type: "passthrough",
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 400,
-      messages: [{ role: "user", content: prompt }]
-    })
+    body: JSON.stringify(payload)
   });
 
   const data = await response.json();
