@@ -2,233 +2,540 @@
 <html lang="en">
 <head>
 <script>
-(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
-</script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seize the Moment | NEUROLOGY Adventure | ReasonDx</title>
+    <title>Status Epilepticus Adventure | ReasonDx</title>
     <style>
         :root {
-            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
-            --muted: #94A3B8; --accent: #7C3AED; --success: #10B981;
-            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
-            --header-bg: linear-gradient(135deg, #581C87 0%, #7C3AED 50%, #8B5CF6 100%);
+            --primary: #1e3a5f; --primary-dark: #0f2744; --accent: #7c3aed;
+            --success: #059669; --warning: #d97706; --danger: #dc2626;
+            --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
+            --text: #1e293b; --text-secondary: #64748b;
+            --peds: #ec4899;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
-        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
-        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
-        .header-stats { display: flex; gap: 12px; }
-        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
-        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
-        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
-        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
-        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
-        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .card-title { font-size: 1.5rem; font-weight: 700; }
-        .card-body { padding: 24px; }
-        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
-        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
-        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
-        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
-        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
-        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
-        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
-        .choice-btn { display: block; width: 100%; text-align: left; padding: 16px 20px; margin: 10px 0; background: var(--card); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; color: var(--text); transition: all 0.2s; font-family: inherit; font-size: inherit; }
-        .choice-btn:hover { border-color: var(--accent); transform: translateX(4px); }
-        .choice-label { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
-        .choice-detail { font-size: 0.85rem; color: var(--muted); }
-        .alert { display: flex; gap: 16px; padding: 16px 20px; border-radius: 12px; margin: 16px 0; align-items: flex-start; }
-        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
-        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
-        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
-        .alert-icon { font-size: 1.5rem; }
-        .alert-title { font-weight: 700; margin-bottom: 4px; }
-        .alert-desc { font-size: 0.9rem; line-height: 1.6; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 32px 24px; border-radius: 16px; margin-bottom: 24px; }
+        .header h1 { font-size: 1.75rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-top: 12px; }
+        
+        /* Patient Toggle */
+        .patient-toggle { display: flex; gap: 12px; margin-bottom: 24px; justify-content: center; }
+        .toggle-btn { padding: 12px 24px; border: 2px solid var(--border); background: var(--card); border-radius: 12px; cursor: pointer; font-weight: 600; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+        .toggle-btn:hover { border-color: var(--accent); }
+        .toggle-btn.active { border-color: var(--accent); background: #f5f3ff; }
+        .toggle-btn.active.peds { border-color: var(--peds); background: #fdf2f8; }
+        .toggle-icon { font-size: 1.25rem; }
+        
+        .scene { background: var(--card); border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        .scene-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .scene-icon { font-size: 1.5rem; }
+        .scene-title { font-size: 1.1rem; font-weight: 700; }
+        .scene-tag { background: #f5f3ff; color: var(--accent); padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-left: auto; }
+        .scene-tag.peds { background: #fdf2f8; color: var(--peds); }
+        
+        .narrative { font-size: 1rem; margin-bottom: 20px; padding: 16px; background: #f1f5f9; border-radius: 12px; border-left: 4px solid var(--accent); }
+        .narrative.peds { border-left-color: var(--peds); }
+        
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 16px 0; }
+        .vital { background: #f8fafc; padding: 12px; border-radius: 10px; text-align: center; border: 1px solid var(--border); }
+        .vital-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        .vital-value.critical { color: var(--danger); }
+        
+        .choices { display: flex; flex-direction: column; gap: 10px; }
+        .choice-btn { background: var(--card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; cursor: pointer; text-align: left; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .choice-btn:hover { border-color: var(--accent); background: #f5f3ff; }
+        .choice-btn.correct { border-color: var(--success); background: #ecfdf5; }
+        .choice-btn.incorrect { border-color: var(--danger); background: #fef2f2; }
+        .choice-letter { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+        .choice-text { flex: 1; font-size: 0.95rem; }
+        
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 12px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #ecfdf5; border: 1px solid #059669; color: #065f46; }
+        .feedback.incorrect { background: #fef2f2; border: 1px solid #dc2626; color: #991b1b; }
+        .feedback h4 { font-size: 0.9rem; margin-bottom: 8px; }
+        
+        .peds-callout { background: #fdf2f8; border: 1px solid var(--peds); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .peds-callout h4 { color: #be185d; font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .peds-callout p { color: #9d174d; font-size: 0.9rem; }
+        
+        .teaching-point { background: #f5f3ff; border: 1px solid var(--accent); border-radius: 12px; padding: 16px; margin-top: 16px; }
+        .teaching-point h4 { color: #5b21b6; font-size: 0.85rem; margin-bottom: 8px; }
+        .teaching-point p { color: #6b21a8; font-size: 0.9rem; }
+        
+        .nav-btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.95rem; margin-top: 16px; }
+        .nav-btn:hover { background: #6d28d9; }
+        .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 24px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s; }
         .hidden { display: none !important; }
-        .tracker { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
-        .tracker-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .tracker-items { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tracker-item { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: var(--muted); }
-        .tracker-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
-        @media(max-width:480px) { .main { padding: 12px; } .card-body { padding: 16px; } }
+        
+        .protocol-timeline { margin: 20px 0; }
+        .protocol-item { display: flex; gap: 16px; padding: 16px; background: #f8fafc; border-radius: 10px; margin: 8px 0; border-left: 4px solid var(--accent); }
+        .protocol-time { font-weight: 700; color: var(--accent); min-width: 80px; }
+        .dose-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        .dose-table th, .dose-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        .dose-table th { background: #f5f3ff; color: var(--accent); font-weight: 600; }
+        .dose-table .adult { background: #f0fdf4; }
+        .dose-table .peds { background: #fdf2f8; }
+        
+        .summary-card { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border: 1px solid var(--accent); border-radius: 16px; padding: 24px; margin-top: 20px; }
+        .summary-card h3 { color: #5b21b6; margin-bottom: 16px; }
+        .key-points { list-style: none; }
+        .key-points li { padding: 8px 0; padding-left: 24px; position: relative; color: #6b21a8; }
+        .key-points li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+        
+        @media (max-width: 640px) { .container { padding: 16px; } .scene { padding: 20px; } .vitals-grid { grid-template-columns: repeat(3, 1fr); } .patient-toggle { flex-direction: column; } }
     </style>
-<script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
-    <header class="header">
-        <div class="header-row">
-            <div class="header-title">🎮 Seize the Moment <span class="badge">NEUROLOGY</span></div>
-            <div class="header-stats">
-                <div class="stat"><div class="stat-value" id="timer">00:00</div><div class="stat-label">Time</div></div>
-                <div class="stat"><div class="stat-value" id="stepCount">1/3</div><div class="stat-label">Progress</div></div>
-            </div>
-        </div>
-    </header>
-    <main class="main">
-        <div class="tracker">
-            <div class="tracker-title">SE Protocol</div>
-            <div class="tracker-items" id="trackerItems">
-                <span class="tracker-item" id="track_0">Benzo</span> <span class="tracker-item" id="track_1">Airway</span> <span class="tracker-item" id="track_2">2nd-Line AED</span> <span class="tracker-item" id="track_3">Labs/Imaging</span> <span class="tracker-item" id="track_4">Refractory Plan</span> <span class="tracker-item" id="track_5">Disposition</span>
-            </div>
-        </div>
-
-        <!-- Incoming Patient Card -->
-        <div class="card" id="stage_intro">
-            <div class="card-header">
-                <div class="card-phase">Incoming Patient</div>
-                <div class="card-title">🚨 EMS Radio Call</div>
-            </div>
-            <div class="card-body">
-                <div class="narrative">
-                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">42-year-old female</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">witnessed generalized tonic-clonic seizure ongoing for 8 minutes</span>. Known epilepsy on levetiracetam. Husband says she had a UTI and hasn't been eating. EMS gave midazolam 10mg IM en route. Still seizing on arrival."
-                </div>
-                <div class="vitals-grid">
-                    <div class="vital warning"><div class="vital-label">Temp</div><div class="vital-value">101.4°F</div></div><div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">132</div></div><div class="vital warning"><div class="vital-label">BP</div><div class="vital-value">172/98</div></div><div class="vital critical"><div class="vital-label">RR</div><div class="vital-value">8 (agonal)</div></div><div class="vital critical"><div class="vital-label">SpO2</div><div class="vital-value">84%</div></div>
-                </div>
-                <div class="alert warning">
-                    <span class="alert-icon">⚠️</span>
-                    <div>
-                        <div class="alert-title">Clinical Decision Point</div>
-                        <div class="alert-desc">Status epilepticus: continuous seizure >5 minutes despite initial benzodiazepine. This is a neurological emergency — untreated SE causes permanent brain injury. Structured protocol required.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div></div>
         
-        <div id="stage_arrival" class="card">
-            <div class="card-header">
-                <div class="card-phase">DECISION 1</div>
-                <div class="card-title">0-5 Minutes: Stabilize + Benzo</div>
-            </div>
-            <div class="card-body">
-                
-                
-                <div id="choices_arrival">
-                    <button class="choice-btn" onclick="choose('arrival', 'second_benzo_airway')">
-                <div class="choice-label">💉 IV lorazepam 4mg + airway positioning + O2</div>
-                <div class="choice-detail">Second benzodiazepine dose, jaw thrust, NPA, high-flow O2</div>
-            </button><button class="choice-btn" onclick="choose('arrival', 'intubate_first')">
-                <div class="choice-label">🫁 Immediate RSI intubation</div>
-                <div class="choice-detail">SpO2 84%, secure airway first</div>
-            </button><button class="choice-btn" onclick="choose('arrival', 'load_phenytoin')">
-                <div class="choice-label">💊 Skip to IV phenytoin loading</div>
-                <div class="choice-detail">Benzos didn't work, go to second-line immediately</div>
+        <header class="header">
+            <h1>⚡ Status Epilepticus</h1>
+            <p id="headerDesc">A patient presents with prolonged seizure activity</p>
+            <span class="badge">🚨 Neurologic Emergency</span>
+        </header>
+        
+        <!-- Patient Toggle -->
+        <div class="patient-toggle">
+            <button class="toggle-btn active" onclick="setPatient('adult')" id="adultToggle">
+                <span class="toggle-icon">🧑</span>
+                <span>Adult Patient (45F)</span>
             </button>
-                </div>
-                <div id="fb_arrival_second_benzo_airway" class="hidden">
-                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! She already got midazolam IM from EMS (1st line). Give IV lorazepam 0.1 mg/kg (4mg) as the repeat dose. Simultaneously: position airway (recovery position or jaw thrust), NPA, high-flow O2 via NRB mask, suction PRN. BVM if needed. Do NOT attempt oral airway during active seizure. Draw labs: glucose, BMP, AED levels, CBC, tox screen.</div></div></div>
-                        <button class="choice-btn" onclick="goTo('still_seizing')" style="margin-top:16px">Continue →</button></div><div id="fb_arrival_intubate_first" class="hidden">
-                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Intubation during active generalized seizure is extremely difficult and dangerous (trismus, patient movement, aspiration risk). Treat the seizure first — most patients' oxygenation improves once seizure activity stops. Use BVM + jaw thrust to support ventilation while benzodiazepines take effect. Intubate only if seizures are refractory and airway cannot be maintained.</div></div></div>
-                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div><div id="fb_arrival_load_phenytoin" class="hidden">
-                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">She only had one dose of benzodiazepine. Guidelines recommend two adequate doses of benzodiazepines before moving to second-line agents. ~60% of SE responds to appropriate benzodiazepine dosing. Phenytoin/fosphenytoin takes 20+ minutes to infuse — it's not an emergency rescue medication.</div></div></div>
-                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div>
-            </div>
-        </div>
-        <div id="stage_still_seizing" class="card hidden">
-            <div class="card-header">
-                <div class="card-phase">DECISION 2</div>
-                <div class="card-title">5-20 Minutes: Second-Line Agent</div>
-            </div>
-            <div class="card-body">
-                <div class="narrative">After second lorazepam dose, seizure briefly pauses then resumes within 1 minute. She has received 2 adequate doses of benzodiazepines. Glucose is low, LEV level is subtherapeutic, UTI confirmed as trigger. <strong>Established status epilepticus — need second-line agent.</strong></div>
-                <div class="vitals-grid"><div class="vital warning"><div class="vital-label">Glucose</div><div class="vital-value">62 mg/dL</div></div><div class="vital critical"><div class="vital-label">LEV level</div><div class="vital-value"><5 mcg/mL (subtherapeutic)</div></div><div class="vital warning"><div class="vital-label">Na+</div><div class="vital-value">128 mEq/L</div></div><div class="vital warning"><div class="vital-label">WBC</div><div class="vital-value">16,800</div></div><div class="vital "><div class="vital-label">UA</div><div class="vital-value">Positive nitrites, bacteria</div></div></div>
-                <div id="choices_still_seizing">
-                    <button class="choice-btn" onclick="choose('still_seizing', 'fosphenytoin_dextrose')">
-                <div class="choice-label">💉 IV fosphenytoin 20mg PE/kg + D50 push + LEV reload</div>
-                <div class="choice-detail">Second-line AED, correct hypoglycemia, address subtherapeutic LEV</div>
-            </button><button class="choice-btn" onclick="choose('still_seizing', 'more_benzos')">
-                <div class="choice-label">💉 Third dose of benzodiazepine</div>
-                <div class="choice-detail">One more lorazepam might work</div>
-            </button><button class="choice-btn" onclick="choose('still_seizing', 'propofol')">
-                <div class="choice-label">💉 Propofol drip + intubation</div>
-                <div class="choice-detail">Go straight to continuous infusion for refractory SE</div>
+            <button class="toggle-btn" onclick="setPatient('peds')" id="pedsToggle">
+                <span class="toggle-icon">👶</span>
+                <span>Pediatric Patient (4M)</span>
             </button>
-                </div>
-                <div id="fb_still_seizing_fosphenytoin_dextrose" class="hidden">
-                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! (1) Fosphenytoin 20 mg PE/kg IV at 150 mg PE/min (or valproic acid 40 mg/kg as alternative — may be preferred in generalized epilepsy). (2) D50 50mL IV push — glucose of 62 may be contributing to seizures. (3) LEV level subtherapeutic — reload levetiracetam 60 mg/kg IV. (4) Treat UTI trigger with antibiotics. Address all reversible causes simultaneously.</div></div></div>
-                        <button class="choice-btn" onclick="goTo('seizure_breaks')" style="margin-top:16px">Continue →</button></div><div id="fb_still_seizing_more_benzos" class="hidden">
-                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">After two adequate doses of benzodiazepines, additional doses have diminishing returns and increasing risk of respiratory depression. The SE protocol mandates escalation to a second-line agent (fosphenytoin, valproic acid, or levetiracetam) at this stage. Continued benzodiazepine stacking leads to respiratory failure without stopping seizures.</div></div></div>
-                    <button class="choice-btn" onclick="goTo('still_seizing')" style="margin-top:16px">Try Again</button></div><div id="fb_still_seizing_propofol" class="hidden">
-                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Propofol/midazolam/pentobarbital drips are for REFRACTORY SE — defined as seizure continuing despite both first-line (benzos) AND second-line agents (fosphenytoin/VPA/LEV). Jumping to anesthetic doses requiring intubation before trying second-line agents exposes the patient to unnecessary intubation risks and ICU stay.</div></div></div>
-                    <button class="choice-btn" onclick="goTo('still_seizing')" style="margin-top:16px">Try Again</button></div>
-            </div>
         </div>
-        <div id="stage_seizure_breaks" class="card hidden">
-            <div class="card-header">
-                <div class="card-phase">RESOLUTION</div>
-                <div class="card-title">Seizure Terminates</div>
+
+        <!-- Scene 1: Initial Presentation -->
+        <div class="scene" id="scene1">
+            <div class="scene-header">
+                <span class="scene-icon">🏥</span>
+                <span class="scene-title">ED Presentation</span>
+                <span class="scene-tag" id="tag1">Scene 1 of 6</span>
             </div>
-            <div class="card-body">
-                <div class="narrative">Fosphenytoin loading + D50 push + LEV reload given. Seizure terminates after 3 minutes of fosphenytoin infusion. Total seizure duration: ~22 minutes. Patient is postictal but breathing spontaneously. SpO2 improves to 95% on 4L NC.</div>
-                
-                <div id="choices_seizure_breaks">
-                    <button class="choice-btn" onclick="choose('seizure_breaks', 'good_outcome')">
-                <div class="choice-label">📋 ICU monitoring + treat triggers + EEG</div>
-                <div class="choice-detail">Continuous EEG monitoring, antibiotics for UTI, correct hyponatremia, neuro consult</div>
-            </button>
-                </div>
-                <div id="fb_seizure_breaks_good_outcome" class="hidden">
-                        <div class="card"><div class="card-header"><div class="card-phase">OUTCOME</div><div class="card-title">🏆 Excellent Clinical Reasoning</div></div><div class="card-body">
-                        <div class="narrative">Excellent SE management! Post-SE care: (1) Continuous EEG monitoring for 24-48h (20-30% of SE patients have subclinical seizures). (2) Treat UTI with appropriate antibiotics. (3) Correct hyponatremia carefully (Na+ 128 — avoid overcorrection >8 mEq/24h to prevent osmotic demyelination). (4) Optimize AED regimen. (5) Neurology consult. (6) Monitor for complications: rhabdomyolysis (check CK), aspiration, hyperthermia.</div>
-                        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
-                            <button class="choice-btn" onclick="location.reload()" style="flex:1;min-width:200px">🔄 Play Again</button>
-                            <button class="choice-btn" onclick="location.href='status-epilepticus-module.html'" style="flex:1;min-width:200px">📚 Review Module</button>
-                        </div></div></div></div>
+            <div class="narrative" id="narrative1">
+                <!-- Content loaded by JS based on patient type -->
             </div>
+            <div class="vitals-grid" id="vitals1">
+                <!-- Vitals loaded by JS -->
+            </div>
+            <div class="peds-callout hidden" id="pedsNote1">
+                <h4>👶 Pediatric Consideration</h4>
+                <p>Febrile seizures are common in children 6 months to 5 years. However, a seizure lasting >5 minutes or with focal features requires aggressive treatment as status epilepticus regardless of fever.</p>
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">The seizure has been ongoing for 8 minutes. What is your FIRST intervention?</p>
+            <div class="choices">
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text" id="choice1a">IV lorazepam 4mg (or IM midazolam if no IV)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Order stat EEG before treatment</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Load with phenytoin/fosphenytoin first</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 1)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Obtain CT head before any medications</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+            <button class="nav-btn hidden" id="next1" onclick="nextScene(2)">Continue →</button>
         </div>
-    </main>
+
+        <!-- Scene 2: First-Line Treatment -->
+        <div class="scene hidden" id="scene2">
+            <div class="scene-header">
+                <span class="scene-icon">💉</span>
+                <span class="scene-title">First-Line Benzodiazepine</span>
+                <span class="scene-tag" id="tag2">Scene 2 of 6</span>
+            </div>
+            <div class="narrative" id="narrative2">
+                You administer benzodiazepine. The seizure continues after 5 minutes. Per protocol, you can give a second dose of benzodiazepine.
+            </div>
+            <table class="dose-table">
+                <tr><th>Medication</th><th>Adult Dose</th><th>Pediatric Dose</th></tr>
+                <tr><td>Lorazepam IV</td><td class="adult">4mg, may repeat x1</td><td class="peds">0.1 mg/kg (max 4mg), repeat x1</td></tr>
+                <tr><td>Midazolam IM</td><td class="adult">10mg IM</td><td class="peds">0.2 mg/kg IM (max 10mg)</td></tr>
+                <tr><td>Diazepam IV</td><td class="adult">10mg, may repeat</td><td class="peds">0.15-0.2 mg/kg (max 10mg)</td></tr>
+                <tr><td>Diazepam PR</td><td class="adult">20mg PR</td><td class="peds">0.5 mg/kg PR (max 20mg)</td></tr>
+            </table>
+            <div class="peds-callout hidden" id="pedsNote2">
+                <h4>👶 Pediatric Routes</h4>
+                <p>If IV access is delayed, IM midazolam or rectal diazepam are effective alternatives. Intranasal midazolam (0.2 mg/kg) is another option. Don't delay treatment waiting for IV access!</p>
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">After the second benzodiazepine dose, seizure continues. What is the NEXT step?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Give a third dose of benzodiazepine</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text" id="choice2b">Load with second-line agent (fosphenytoin, levetiracetam, or valproate)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Start propofol infusion</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 2)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Order emergent MRI</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback2"></div>
+            <button class="nav-btn hidden" id="next2" onclick="nextScene(3)">Continue →</button>
+        </div>
+
+        <!-- Scene 3: Second-Line Treatment -->
+        <div class="scene hidden" id="scene3">
+            <div class="scene-header">
+                <span class="scene-icon">💊</span>
+                <span class="scene-title">Second-Line Antiepileptic</span>
+                <span class="scene-tag" id="tag3">Scene 3 of 6</span>
+            </div>
+            <div class="narrative" id="narrative3">
+                You decide to load with a second-line agent. The Neurocritical Care Society and AES guidelines support several options with similar efficacy (~50% seizure termination).
+            </div>
+            <table class="dose-table">
+                <tr><th>Agent</th><th>Adult Loading</th><th>Pediatric Loading</th><th>Considerations</th></tr>
+                <tr><td>Fosphenytoin</td><td class="adult">20 mg PE/kg IV</td><td class="peds">20 mg PE/kg IV</td><td>Avoid in cardiac disease; monitor BP/HR</td></tr>
+                <tr><td>Levetiracetam</td><td class="adult">60 mg/kg (max 4500mg)</td><td class="peds">60 mg/kg (max 4500mg)</td><td>Safest profile; fewer drug interactions</td></tr>
+                <tr><td>Valproate</td><td class="adult">40 mg/kg (max 3000mg)</td><td class="peds">40 mg/kg</td><td>Avoid in pregnancy, liver disease, metabolic d/o</td></tr>
+            </table>
+            <div class="peds-callout hidden" id="pedsNote3">
+                <h4>👶 Pediatric Agent Selection</h4>
+                <p><strong>Levetiracetam</strong> is often preferred in pediatrics due to its favorable safety profile. <strong>Avoid valproate</strong> in children &lt;2 years (mitochondrial disease risk) and in suspected metabolic disorders. Fosphenytoin requires cardiac monitoring.</p>
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">You choose levetiracetam. Despite loading, seizures continue at 25 minutes. This is now:</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Still early status epilepticus - continue same medications</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Established status epilepticus - try another second-line agent</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Refractory status epilepticus - prepare for anesthetic infusion and intubation</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 3)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Pseudo-status epilepticus - stop all medications</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+            <button class="nav-btn hidden" id="next3" onclick="nextScene(4)">Continue →</button>
+        </div>
+
+        <!-- Scene 4: Refractory SE -->
+        <div class="scene hidden" id="scene4">
+            <div class="scene-header">
+                <span class="scene-icon">🏥</span>
+                <span class="scene-title">Refractory Status Epilepticus</span>
+                <span class="scene-tag" id="tag4">Scene 4 of 6</span>
+            </div>
+            <div class="narrative" id="narrative4">
+                The patient is now in refractory status epilepticus (RSE) - seizures persisting despite adequate doses of benzodiazepine AND one second-line agent. This requires ICU admission, intubation, and continuous anesthetic infusion with EEG monitoring.
+            </div>
+            <table class="dose-table">
+                <tr><th>Agent</th><th>Loading</th><th>Infusion</th><th>Notes</th></tr>
+                <tr><td>Midazolam</td><td>0.2 mg/kg bolus</td><td>0.1-2 mg/kg/hr</td><td>First choice; titrate to burst suppression</td></tr>
+                <tr><td>Propofol</td><td>2 mg/kg bolus</td><td>2-10 mg/kg/hr</td><td>Risk of PRIS (propofol infusion syndrome)</td></tr>
+                <tr><td>Pentobarbital</td><td>5-15 mg/kg</td><td>0.5-5 mg/kg/hr</td><td>Most potent; significant hypotension</td></tr>
+            </table>
+            <div class="peds-callout hidden" id="pedsNote4">
+                <h4>👶 Pediatric Anesthetic Considerations</h4>
+                <p><strong>Propofol infusion syndrome (PRIS)</strong> risk is higher in children - avoid prolonged high-dose infusions. Midazolam is generally preferred for pediatric RSE. Pentobarbital is reserved for super-refractory cases. Continuous EEG monitoring is essential.</p>
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;">What is the EEG TARGET for anesthetic therapy in RSE?</p>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Completely flat (isoelectric) EEG</span>
+                </button>
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Burst suppression pattern on continuous EEG</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Clinical seizure cessation (no EEG needed)</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 4)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Normal alpha rhythm</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback4"></div>
+            <button class="nav-btn hidden" id="next4" onclick="nextScene(5)">Continue →</button>
+        </div>
+
+        <!-- Scene 5: Workup -->
+        <div class="scene hidden" id="scene5">
+            <div class="scene-header">
+                <span class="scene-icon">🔬</span>
+                <span class="scene-title">Etiology Workup</span>
+                <span class="scene-tag" id="tag5">Scene 5 of 6</span>
+            </div>
+            <div class="narrative" id="narrative5">
+                While managing the seizures, you must identify and treat the underlying cause. The mnemonic VITAMINS helps remember causes of status epilepticus.
+            </div>
+            <div class="teaching-point">
+                <h4>📚 VITAMINS - Causes of Status Epilepticus</h4>
+                <p>
+                <strong>V</strong>ascular (stroke, hemorrhage, PRES, vasculitis)<br>
+                <strong>I</strong>nfection (meningitis, encephalitis, abscess)<br>
+                <strong>T</strong>rauma (TBI, subdural)<br>
+                <strong>A</strong>utoimmune (anti-NMDA, autoimmune encephalitis)<br>
+                <strong>M</strong>etabolic (hypoglycemia, hyponatremia, uremia, hepatic)<br>
+                <strong>I</strong>ngestion/Intoxication (drugs, toxins, withdrawal)<br>
+                <strong>N</strong>eoplasm (primary CNS, metastases, paraneoplastic)<br>
+                <strong>S</strong>eizure disorder (breakthrough, non-compliance)
+                </p>
+            </div>
+            <div class="peds-callout hidden" id="pedsNote5">
+                <h4>👶 Pediatric-Specific Causes</h4>
+                <p><strong>Febrile SE:</strong> Most common in children 6mo-5yr. <strong>Genetic epilepsies:</strong> Dravet, SCN1A mutations. <strong>Metabolic:</strong> Higher index of suspicion for inborn errors. <strong>Infectious:</strong> HSV encephalitis, bacterial meningitis. <strong>Always check glucose!</strong></p>
+            </div>
+            <p style="margin-bottom: 20px; font-weight: 600;" id="workupQ">What is the MOST important lab to check immediately?</p>
+            <div class="choices">
+                <button class="choice-btn" data-correct="true" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">A</span>
+                    <span class="choice-text">Fingerstick glucose</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">B</span>
+                    <span class="choice-text">Antiepileptic drug levels</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">C</span>
+                    <span class="choice-text">Lumbar puncture</span>
+                </button>
+                <button class="choice-btn" onclick="checkAnswer(this, 5)">
+                    <span class="choice-letter">D</span>
+                    <span class="choice-text">Autoimmune encephalitis panel</span>
+                </button>
+            </div>
+            <div class="feedback" id="feedback5"></div>
+            <button class="nav-btn hidden" id="next5" onclick="nextScene(6)">Continue →</button>
+        </div>
+
+        <!-- Scene 6: Summary -->
+        <div class="scene hidden" id="scene6">
+            <div class="scene-header">
+                <span class="scene-icon">🎓</span>
+                <span class="scene-title">Case Summary</span>
+                <span class="scene-tag" id="tag6">Scene 6 of 6</span>
+            </div>
+            <div class="narrative" id="narrative6">
+                After midazolam infusion titrated to burst suppression on continuous EEG, seizures are controlled. Workup reveals subtherapeutic phenytoin levels due to medication non-compliance. The patient is successfully weaned from sedation after 24 hours and transitioned back to oral antiepileptics.
+            </div>
+            <div class="protocol-timeline">
+                <h4 style="margin-bottom: 12px; color: var(--accent);">⏱️ Status Epilepticus Timeline Protocol</h4>
+                <div class="protocol-item">
+                    <span class="protocol-time">0-5 min</span>
+                    <div><strong>Stabilize:</strong> ABCs, O2, IV access, glucose check, benzodiazepine</div>
+                </div>
+                <div class="protocol-item">
+                    <span class="protocol-time">5-20 min</span>
+                    <div><strong>Early SE:</strong> Second benzo dose if needed, start second-line AED loading</div>
+                </div>
+                <div class="protocol-item">
+                    <span class="protocol-time">20-40 min</span>
+                    <div><strong>Established SE:</strong> Complete second-line load, prepare for RSE protocol</div>
+                </div>
+                <div class="protocol-item">
+                    <span class="protocol-time">>40 min</span>
+                    <div><strong>Refractory SE:</strong> Intubate, anesthetic infusion, continuous EEG, ICU</div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <h3>🔑 Key Learning Points</h3>
+                <ul class="key-points">
+                    <li><strong>Time is brain:</strong> Start benzodiazepines immediately - don't wait for IV access</li>
+                    <li><strong>Definition:</strong> Seizure ≥5 min OR ≥2 seizures without return to baseline = status epilepticus</li>
+                    <li><strong>Benzos first:</strong> Lorazepam IV or midazolam IM - up to 2 doses</li>
+                    <li><strong>Second-line agents:</strong> Fosphenytoin, levetiracetam, or valproate are equivalent</li>
+                    <li><strong>RSE definition:</strong> Seizures despite benzo + one second-line agent</li>
+                    <li><strong>EEG target:</strong> Burst suppression for 24-48 hours, then slow wean</li>
+                    <li><strong>Always check glucose:</strong> Hypoglycemia is rapidly reversible cause</li>
+                </ul>
+            </div>
+            <div class="peds-callout" id="pedsNote6" style="display: none;">
+                <h4>👶 Pediatric Key Points</h4>
+                <p>• Weight-based dosing is critical - have a reference or calculator ready<br>
+                • Don't delay for IV - use IM/IN/PR benzodiazepines if needed<br>
+                • Levetiracetam preferred over valproate in young children<br>
+                • PRIS risk higher - use midazolam over propofol for RSE<br>
+                • Febrile SE still requires full treatment but prognosis often good</p>
+            </div>
+            <button class="nav-btn" onclick="location.href='../adventure-hub.html'">← Back to Adventures</button>
+            <button class="nav-btn" style="margin-left: 12px; background: var(--success);" onclick="location.href='../deep-dive-player.html?topic=status-epilepticus'">📖 Deep Dive</button>
+        </div>
+    </div>
 
     <script>
-    let currentStep = 0;
-    const totalSteps = 3;
-    let timerInterval;
-    let seconds = 0;
-
-    // Start timer
-    timerInterval = setInterval(() => {
-        seconds++;
-        const m = String(Math.floor(seconds/60)).padStart(2,'0');
-        const s = String(seconds%60).padStart(2,'0');
-        document.getElementById('timer').textContent = m + ':' + s;
-    }, 1000);
-
-    function choose(stage, choice) {
-        // Hide choices
-        const choicesDiv = document.getElementById('choices_' + stage);
-        if (choicesDiv) choicesDiv.classList.add('hidden');
-
-        // Show feedback
-        const fb = document.getElementById('fb_' + stage + '_' + choice);
-        if (fb) fb.classList.remove('hidden');
-
-        // Update tracker
-        if (currentStep < totalSteps) {
-            const trackEl = document.getElementById('track_' + currentStep);
-            if (trackEl) trackEl.classList.add('done');
+        let currentScene = 1;
+        const totalScenes = 6;
+        let patientType = 'adult';
+        
+        const patientData = {
+            adult: {
+                desc: "A 45-year-old woman with epilepsy presents with ongoing seizure activity",
+                narrative1: "A 45-year-old woman with known epilepsy is brought to the ED by EMS. She began seizing at home 8 minutes ago and has not stopped. Her husband reports she ran out of her seizure medication 3 days ago. EMS gave midazolam IM en route without effect.",
+                vitals1: `
+                    <div class="vital"><div class="vital-label">HR</div><div class="vital-value critical">128</div></div>
+                    <div class="vital"><div class="vital-label">BP</div><div class="vital-value">165/95</div></div>
+                    <div class="vital"><div class="vital-label">RR</div><div class="vital-value">24</div></div>
+                    <div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">88% RA</div></div>
+                    <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">37.8°C</div></div>
+                `,
+                choice1a: "IV lorazepam 4mg (or IM midazolam 10mg if no IV)",
+                narrative6: "After midazolam infusion titrated to burst suppression on continuous EEG, seizures are controlled. Workup reveals subtherapeutic phenytoin levels due to medication non-compliance. The patient is successfully weaned from sedation after 24 hours and transitioned back to oral antiepileptics."
+            },
+            peds: {
+                desc: "A 4-year-old boy presents with prolonged febrile seizure",
+                narrative1: "A 4-year-old boy with no seizure history is brought to the ED. His mother reports he had fever to 103°F with an upper respiratory infection. He started shaking 10 minutes ago and hasn't stopped. This is his first seizure. EMS gave rectal diazepam without effect. Weight: 18 kg.",
+                vitals1: `
+                    <div class="vital"><div class="vital-label">HR</div><div class="vital-value critical">165</div></div>
+                    <div class="vital"><div class="vital-label">BP</div><div class="vital-value">95/60</div></div>
+                    <div class="vital"><div class="vital-label">RR</div><div class="vital-value">32</div></div>
+                    <div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">90% RA</div></div>
+                    <div class="vital"><div class="vital-label">Temp</div><div class="vital-value critical">39.4°C</div></div>
+                    <div class="vital"><div class="vital-label">Wt</div><div class="vital-value">18 kg</div></div>
+                `,
+                choice1a: "IV lorazepam 0.1 mg/kg (1.8mg) or IM midazolam 0.2 mg/kg (3.6mg)",
+                narrative6: "After midazolam infusion and fever control, seizures stop. LP and CSF are normal, ruling out meningitis. EEG shows post-ictal slowing without epileptiform discharges. Diagnosis: Complex febrile status epilepticus. The child recovers well and is discharged with outpatient neurology follow-up. Parents are counseled on febrile seizure recurrence risk and rescue medication (rectal diazepam)."
+            }
+        };
+        
+        function setPatient(type) {
+            patientType = type;
+            document.getElementById('adultToggle').classList.toggle('active', type === 'adult');
+            document.getElementById('pedsToggle').classList.toggle('active', type === 'peds');
+            document.getElementById('pedsToggle').classList.toggle('peds', type === 'peds');
+            
+            // Update content based on patient type
+            document.getElementById('headerDesc').textContent = patientData[type].desc;
+            document.getElementById('narrative1').textContent = patientData[type].narrative1;
+            document.getElementById('narrative1').classList.toggle('peds', type === 'peds');
+            document.getElementById('vitals1').innerHTML = patientData[type].vitals1;
+            document.getElementById('choice1a').textContent = patientData[type].choice1a;
+            document.getElementById('narrative6').textContent = patientData[type].narrative6;
+            
+            // Show/hide pediatric callouts
+            document.querySelectorAll('.peds-callout').forEach(el => {
+                el.classList.toggle('hidden', type === 'adult');
+            });
+            
+            // Update scene tags
+            document.querySelectorAll('.scene-tag').forEach(tag => {
+                tag.classList.toggle('peds', type === 'peds');
+            });
+            
+            // Update narratives for pediatric
+            document.querySelectorAll('.narrative').forEach(nar => {
+                nar.classList.toggle('peds', type === 'peds');
+            });
         }
-    }
-
-    function goTo(stageId) {
-        // Hide all stages
-        document.querySelectorAll('[id^="stage_"]').forEach(el => el.classList.add('hidden'));
-
-        // Show target stage
-        const target = document.getElementById('stage_' + stageId);
-        if (target) {
-            target.classList.remove('hidden');
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        function updateProgress() {
+            const progress = ((currentScene - 1) / (totalScenes - 1)) * 100;
+            document.getElementById('progress').style.width = progress + '%';
         }
-
-        currentStep++;
-        document.getElementById('stepCount').textContent = Math.min(currentStep + 1, totalSteps) + '/' + totalSteps;
-    }
+        
+        function checkAnswer(btn, scene) {
+            const choices = btn.parentElement.querySelectorAll('.choice-btn');
+            const isCorrect = btn.dataset.correct === 'true';
+            
+            choices.forEach(c => {
+                c.disabled = true;
+                if (c.dataset.correct === 'true') c.classList.add('correct');
+                else if (c === btn && !isCorrect) c.classList.add('incorrect');
+            });
+            
+            const feedback = document.getElementById('feedback' + scene);
+            feedback.classList.add('show');
+            
+            const feedbackContent = {
+                1: {
+                    correct: "Correct! Benzodiazepines are first-line for status epilepticus. Don't wait for IV - IM midazolam is equally effective. Every minute of ongoing seizure increases risk of neuronal injury and treatment resistance.",
+                    incorrect: "Benzodiazepines should be given immediately. EEG, imaging, and second-line agents come after initial stabilization. Each minute of untreated SE increases morbidity."
+                },
+                2: {
+                    correct: "Correct! After 2 adequate doses of benzodiazepines, move to second-line agents. Per NCS guidelines, fosphenytoin, levetiracetam, and valproate have similar efficacy (~50%). A third benzodiazepine dose adds respiratory depression risk without much benefit.",
+                    incorrect: "After 2 doses of benzodiazepines, adding a third adds respiratory depression risk without significant efficacy gain. Anesthetics are for refractory SE, after second-line agents fail."
+                },
+                3: {
+                    correct: "Correct! Refractory SE is defined as seizures persisting despite adequate doses of benzodiazepine AND one second-line agent. This requires ICU admission, intubation, and continuous anesthetic infusion (midazolam, propofol, or pentobarbital) with EEG monitoring.",
+                    incorrect: "At 25 minutes with failed benzo + second-line agent, this is refractory SE requiring anesthetic infusion. Trying another second-line agent delays definitive treatment."
+                },
+                4: {
+                    correct: "Correct! Burst suppression on continuous EEG is the target for anesthetic therapy in RSE. This indicates adequate cortical suppression. Isoelectric EEG is overly aggressive; clinical observation alone misses non-convulsive seizures.",
+                    incorrect: "Burst suppression is the EEG target - it confirms adequate seizure suppression while avoiding excessive medication. Clinical observation alone misses non-convulsive seizures which occur in up to 50% of RSE."
+                },
+                5: {
+                    correct: "Correct! Fingerstick glucose is the FIRST test - hypoglycemia is immediately reversible with dextrose. Give D50W (adults) or D10W (pediatrics) empirically if glucose unavailable. All other workup is important but not immediately life-saving.",
+                    incorrect: "Hypoglycemia can cause and perpetuate seizures and is immediately reversible. Check glucose first! All other tests are important but not immediately life-saving."
+                }
+            };
+            
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = `<h4>✓ Correct!</h4><p>${feedbackContent[scene].correct}</p>`;
+            } else {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = `<h4>✗ Not quite</h4><p>${feedbackContent[scene].incorrect}</p>`;
+            }
+            
+            document.getElementById('next' + scene).classList.remove('hidden');
+        }
+        
+        function nextScene(scene) {
+            document.getElementById('scene' + (scene - 1)).classList.add('hidden');
+            document.getElementById('scene' + scene).classList.remove('hidden');
+            currentScene = scene;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Show final pediatric summary if applicable
+            if (scene === 6 && patientType === 'peds') {
+                document.getElementById('pedsNote6').style.display = 'block';
+            }
+        }
+        
+        // Initialize
+        updateProgress();
+        setPatient('adult');
     </script>
-<script src="../data/rdx-persist.js"></script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Status Epilepticus Adventure"
+         data-key-points="🔑 Key Learning Points, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 
 <script src="../dx-feedback.js"></script>
 

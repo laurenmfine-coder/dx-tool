@@ -8,7 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Golden Hour | Sepsis Adventure | ReasonDx</title>
-    <style>
+    <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
+<link href="../css/rdx-a11y.css" rel="stylesheet">
+<style>
         :root {
             --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
             --muted: #94A3B8; --accent: #F59E0B; --success: #10B981;
@@ -106,6 +108,7 @@
         .bundle-item { font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); }
         .bundle-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
     </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
 </head>
 <body>
     <header class="header">
@@ -686,15 +689,27 @@
         render();
     });
     </script>
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
 
-    <!-- DxSuite AI Tutor Integration -->
+    <!-- ReasonDx AI Tutor Integration -->
     <div data-dx-tutor
          data-module-title="The Golden Hour"
-         data-key-points="pathophysiology, clinical presentation, diagnosis, management, complications"
-         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         data-key-points="clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../data/rdx-persist.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/33081529/" target="_blank" style="color:#7dd3fc">ACLS Algorithm - AHA</a> — Circulation 2020</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK531492/" target="_blank" style="color:#7dd3fc">Shock Management - NCBI</a> — StatPearls</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
 
 <script src="../dx-feedback.js"></script>
 
