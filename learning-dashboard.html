@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Dashboard — ReasonDx</title>
+<meta name="description" content="Track your clinical reasoning progress with a visual map of how you think. See your strengths, identify growth areas, and watch your diagnostic calibration impr">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: linear-gradient(155deg, #061424 0%, #0d2240 40%, #1a3d6e 70%, #2874A6 100%);
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.container {
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin-bottom: 48px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: white; }
+
+.icon-wrap {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 24px;
+}
+
+h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.tagline {
+  font-size: 20px;
+  color: #2874A6;
+  font-weight: 600;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(52,211,153,0.12);
+  border: 1px solid rgba(52,211,153,0.3);
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #34d399;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 32px;
+}
+
+.badge .dot {
+  width: 8px;
+  height: 8px;
+  background: #34d399;
+  border-radius: 50%;
+}
+
+.desc {
+  font-size: 18px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.features {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.features-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 18px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.feature-item:last-child { border-bottom: none; }
+
+.check {
+  width: 28px;
+  height: 28px;
+  background: rgba(52,211,153,0.12);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #34d399;
+  flex-shrink: 0;
+}
+
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: #1a3d6e;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.cta-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+
+.cta-secondary {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+}
+.cta-secondary a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: underline;
+}
+
+.footer-logo {
+  margin-top: 56px;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+}
+.footer-logo strong { color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">← Back to ReasonDx</a>
+  
+  <div class="icon-wrap">📊</div>
+  <h1>Learning Dashboard</h1>
+  <div class="tagline">Your Reasoning Fingerprint</div>
+  
+  <div class="badge"><div class="dot"></div> Coming Soon</div>
+  
+  <p class="desc">Track your clinical reasoning progress with a visual map of how you think. See your strengths, identify growth areas, and watch your diagnostic calibration improve over time.</p>
+  
+  <div class="features">
+    <div class="features-title">What's coming</div>
+            <div class="feature-item"><div class="check">✓</div><span>Reasoning Fingerprint visualization</span></div>
+            <div class="feature-item"><div class="check">✓</div><span>Differential accuracy tracking</span></div>
+            <div class="feature-item"><div class="check">✓</div><span>Cognitive bias trends over time</span></div>
+            <div class="feature-item"><div class="check">✓</div><span>System coverage heat map</span></div>
+  </div>
+  
+  <div class="cta-group">
+    <a href="register.html" class="cta-primary">Join the Beta — Free →</a>
+    <div class="cta-secondary">Or <a href="index.html">explore what's live now</a></div>
+  </div>
+  
+  <div class="footer-logo"><strong>Reason</strong>Dx</div>
+</div>
+</body>
+</html>

@@ -899,7 +899,7 @@ body {
 .ix-pm-preview.active { display: block; }
 @keyframes ixFadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 </style>
-<link rel="stylesheet" href="./css/rdx-theme.css">
+<link rel="stylesheet" href="rdx-theme.css">
 <script>
   // Apply saved theme immediately to prevent flash
   (function(){
@@ -915,7 +915,7 @@ body {
 <body>
 <!-- Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
-  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(40,116,166,0.08),rgba(40,116,166,0.04));border:1px solid rgba(40,116,166,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(40,116,166,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+  <a href="learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(40,116,166,0.08),rgba(40,116,166,0.04));border:1px solid rgba(40,116,166,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(40,116,166,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
     <div style="font-size:28px;flex-shrink:0;">📊</div>
     <div style="flex:1;min-width:0;">
       <div style="font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);font-size:15px;margin-bottom:2px;">Your Reasoning Dashboard & Fingerprint</div>
@@ -963,14 +963,14 @@ body {
     <span class="path-count">Clinical Reasoning Trainer</span>
   </a>
   
-  <a href="#" class="path-card" onclick="openPath('sbar'); return false;">
+  <a href="sbar-trainer.html" class="path-card">
     <div class="path-icon tools">📋</div>
     <h3>Communicate</h3>
     <p>Practice structured SBAR handoffs and get AI-scored feedback on your presentations</p>
     <span class="path-count">SBAR Practice</span>
   </a>
   
-  <a href="CoachDx/index.html" class="path-card">
+  <a href="coachdx.html" class="path-card">
     <div class="path-icon learn">🗣️</div>
     <h3>Coach</h3>
     <p>Reflect on your reasoning with an AI coach that identifies patterns and growth areas</p>
@@ -984,7 +984,7 @@ body {
     <span class="path-count">SimRoomDx</span>
   </a>
   
-  <a href="tools/learning-dashboard.html" class="path-card">
+  <a href="learning-dashboard.html" class="path-card">
     <div class="path-icon test">📊</div>
     <h3>Dashboard</h3>
     <p>Track your progress, view your Reasoning Fingerprint, and see how you're growing</p>
@@ -3676,7 +3676,7 @@ const TOPICS = [
 
 // Premed modules — searchable alongside med student content
 const PREMED_TOPICS = [
-  {t:"Clinical Encounter Companion",m:"modules/premed-encounter.html",c:1,premed:true,tags:"shadowing clinical encounter logging follow-up"},
+  {t:"Clinical Encounter Companion",m:"premed-encounter.html",c:1,premed:true,tags:"shadowing clinical encounter logging follow-up"},
   {t:"Shadowing Companion",m:"modules/premed-shadowing.html",c:1,premed:true,tags:"shadowing observation pediatrics obgyn psychiatry cardiology dermatology orthopedics"},
   {t:"Guided Reflection Journal",m:"modules/premed-journal.html",c:1,premed:true,tags:"reflection journal writing personal statement"},
   {t:"LOR Strategy & Physician Toolkit",m:"modules/premed-lor.html",c:1,premed:true,tags:"letter recommendation physician relationship LOR"},
@@ -3687,10 +3687,10 @@ const PREMED_TOPICS = [
   {t:"How Doctors Think (Premed Lesson)",m:"modules/premed-lesson-hdt.html",c:1,premed:true,tags:"clinical reasoning cognitive bias System 1 System 2 pattern recognition"},
   {t:"Chest Pain: 5 Diagnoses (Premed Lesson)",m:"modules/premed-lesson-cp.html",c:1,premed:true,tags:"chest pain ACS PE aortic dissection pneumothorax Boerhaave"},
   {t:"Biostatistics in Medicine (Premed Lesson)",m:"modules/premed-lesson-biostats.html",c:1,premed:true,tags:"biostatistics sensitivity specificity PPV NPV NNT"},
-  {t:"MCAT Clinical Bridge",m:"modules/premed-mcat-bridge.html",c:1,premed:true,tags:"MCAT biochemistry physiology psychology sociology clinical connection"},
+  {t:"MCAT Clinical Bridge",m:"premed-mcat-bridge.html",c:1,premed:true,tags:"MCAT biochemistry physiology psychology sociology clinical connection"},
   {t:"Secondary Essay Workshop",m:"modules/premed-essays.html",c:1,premed:true,tags:"secondary essay personal statement application writing diversity why medicine"},
   {t:"Accountability Tracker",m:"modules/premed-tracker.html",c:1,premed:true,tags:"goals habits milestones streak accountability tracker"},
-  {t:"Premed Hub",m:"modules/premed-hub.html",c:1,premed:true,tags:"premed hub home dashboard"}
+  {t:"Premed Hub",m:"premed-hub.html",c:1,premed:true,tags:"premed hub home dashboard"}
 ];
 TOPICS.push(...PREMED_TOPICS);
 
@@ -3878,7 +3878,7 @@ const pathContent = {
     title: 'SBAR Communication',
     desc: 'Practice structured clinical handoffs with AI-scored feedback',
     items: [
-      { icon: '📋', bg: '#d4e8f7', title: 'SBAR Trainer (23 Scenarios)', desc: 'Structured SBAR practice across multiple specialties with scoring', href: 'tools/sbar-trainer.html', levels: ['m3','m4'] },
+      { icon: '📋', bg: '#d4e8f7', title: 'SBAR Trainer (23 Scenarios)', desc: 'Structured SBAR practice across multiple specialties with scoring', href: 'sbar-trainer.html', levels: ['m3','m4'] },
     ]
   }
 };
@@ -3976,19 +3976,19 @@ function setLevel(level, el) {
       pm.id = 'premed-paths-section';
       pm.className = 'premed-paths';
       pm.innerHTML = `
-        <a href="modules/premed-hub.html" class="premed-path-card">
+        <a href="premed-hub.html" class="premed-path-card">
           <div class="path-icon" style="background:#f0f7fc">🩺</div>
           <h3>Premed Hub</h3>
           <p>Your home base — clinical reasoning foundations, shadowing tools, and MCAT connections</p>
           <span class="path-count">All premed tools</span>
         </a>
-        <a href="modules/premed-encounter.html" class="premed-path-card">
+        <a href="premed-encounter.html" class="premed-path-card">
           <div class="path-icon" style="background:#ecfdf5">📋</div>
           <h3>Clinical Encounter Companion</h3>
           <p>Log your shadowing observations and connect them to clinical concepts</p>
           <span class="path-count">Shadowing tool</span>
         </a>
-        <a href="modules/premed-mcat-bridge.html" class="premed-path-card">
+        <a href="premed-mcat-bridge.html" class="premed-path-card">
           <div class="path-icon" style="background:#fff7ed">🔗</div>
           <h3>MCAT Clinical Bridge</h3>
           <p>Connect your prereq coursework to real clinical medicine</p>
@@ -4276,7 +4276,7 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
     '<span style="font-size:13px;font-weight:600;color:#1e3a5f;">Free Plan</span>' +
     '<span style="font-size:12px;color:#64748b;">Cases this month: <strong style="color:#2874A6;">' + (summary.cases ? summary.cases.used + '/' + summary.cases.limit : '0/3') + '</strong></span>' +
   '</div>' +
-  '<a href="auth/register.html" style="font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;white-space:nowrap;">Upgrade to Pro &rarr;</a>';
+  '<a href="register.html" style="font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;white-space:nowrap;">Upgrade to Pro &rarr;</a>';
 
   // Insert after the page header
   var header = document.querySelector('.hero') || document.body.firstElementChild;
