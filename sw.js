@@ -1,5 +1,5 @@
 // ReasonDx Service Worker — Cache-first for offline access
-const CACHE_NAME = 'reasondx-v1';
+const CACHE_NAME = 'reasondx-v2';
 
 // Core shell to cache on install
 const SHELL_URLS = [
