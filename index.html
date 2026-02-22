@@ -604,16 +604,27 @@ body {
 .popup-close {
   position: absolute;
   top: 12px;
-  right: 16px;
-  background: none;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: var(--slate-100);
   border: none;
-  font-size: 24px;
-  color: var(--slate-400);
+  border-radius: 8px;
+  font-size: 20px;
+  color: var(--slate-500);
   cursor: pointer;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  z-index: 10;
 }
 
-.popup-close:hover { color: var(--slate-700); }
+.popup-close:hover { 
+  background: var(--slate-200); 
+  color: var(--slate-700); 
+}
 
 .email-popup h3 {
   font-family: var(--rdx-font-serif);
@@ -4207,6 +4218,9 @@ function closePopup() {
 function showPopup() {
   if (sessionStorage.getItem('rdx-popup-dismissed')) return;
   if (sessionStorage.getItem('rdx-popup-shown')) return;
+  // Close PWA modal if open (mutual exclusion)
+  const pwaModal = document.getElementById('pwa-modal');
+  if (pwaModal) pwaModal.style.display = 'none';
   document.getElementById('emailPopup').classList.add('active');
   sessionStorage.setItem('rdx-popup-shown', 'true');
 }
