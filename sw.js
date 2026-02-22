@@ -1,11 +1,9 @@
 // ReasonDx Service Worker — Cache-first for offline access
-const CACHE_NAME = 'reasondx-v3';
+const CACHE_NAME = 'reasondx-v4';
 
-// Core shell to cache on install
+// Core shell to cache on install — only files guaranteed to exist
 const SHELL_URLS = [
   '/index.html',
-  '/training.html',
-  '/simroomdx.html',
   '/mobile.css',
   '/manifest.json'
 ];
@@ -13,7 +11,11 @@ const SHELL_URLS = [
 // Install: cache core shell
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL_URLS))
+    caches.open(CACHE_NAME).then(cache =>
+      Promise.allSettled(SHELL_URLS.map(url =>
+        cache.add(url).catch(err => console.warn('SW: failed to cache', url, err))
+      ))
+    )
   );
   self.skipWaiting();
 });
@@ -28,15 +30,29 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// Fetch: cache-first for HTML/CSS, network-first for everything else
+// Fetch: network-first for HTML (always get latest), cache-first for assets
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
   // Only handle same-origin GET requests
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
 
-  // HTML and CSS: cache-first with network fallback and background update
-  if (event.request.destination === 'document' || url.pathname.endsWith('.html') || url.pathname.endsWith('.css')) {
+  // HTML: network-first (so deploys are seen immediately)
+  if (event.request.destination === 'document' || url.pathname.endsWith('.html')) {
+    event.respondWith(
+      fetch(event.request).then(response => {
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // CSS/JS/JSON: cache-first with background update
+  if (url.pathname.endsWith('.css') || url.pathname.endsWith('.js') || url.pathname.endsWith('.json')) {
     event.respondWith(
       caches.match(event.request).then(cached => {
         const fetchPromise = fetch(event.request).then(response => {
@@ -48,23 +64,6 @@ self.addEventListener('fetch', event => {
         }).catch(() => cached);
 
         return cached || fetchPromise;
-      })
-    );
-    return;
-  }
-
-  // JSON data: cache-first
-  if (url.pathname.endsWith('.json')) {
-    event.respondWith(
-      caches.match(event.request).then(cached => {
-        if (cached) return cached;
-        return fetch(event.request).then(response => {
-          if (response.ok) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          }
-          return response;
-        });
       })
     );
     return;
