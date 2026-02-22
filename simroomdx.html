@@ -1067,8 +1067,8 @@ async function sendMessage() {
     }
   } catch (error) {
     hideTyping(currentTarget);
-    addSystemMsg("Connection issue — try again.");
-    console.error(error);
+    addSystemMsg("⚠️ " + (error.message || "Connection issue — try again."));
+    console.error('SimRoomDx error:', error);
   }
 
   isProcessing = false;
@@ -1101,6 +1101,10 @@ async function getAIResponse(charId, userText) {
   });
 
   const data = await response.json();
+  if (!response.ok) {
+    console.error('SimRoomDx API error:', response.status, data);
+    throw new Error(data.error || data.details?.error?.message || `API error ${response.status}`);
+  }
   return data.content?.map(b => b.text || '').join('') || "...";
 }
 
