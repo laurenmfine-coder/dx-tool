@@ -133,9 +133,13 @@ function showLogin() {
     var rf = document.getElementById('registrationForm');
     var sc = document.getElementById('platformShowcase');
     var lf = document.getElementById('loginForm');
+    var fp = document.getElementById('forgotPasswordForm');
+    var up = document.getElementById('updatePasswordForm');
     if (ps) ps.classList.add('hidden');
     if (rf) rf.classList.add('hidden');
     if (sc) sc.classList.add('hidden');
+    if (fp) fp.classList.add('hidden');
+    if (up) up.classList.add('hidden');
     if (lf) lf.classList.remove('hidden');
     if (lf) lf.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -639,6 +643,28 @@ function showPlanSelection() {
                 <button type="button" class="btn btn-primary" onclick="login()">Sign In</button>
                 <button type="button" class="btn btn-link" onclick="showForgotPassword()">Forgot password?</button>
                 <div class="login-prompt">Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a></div>
+            </div>
+        </div>
+
+        <!-- FORGOT PASSWORD -->
+        <div class="form-card hidden" id="forgotPasswordForm">
+            <div class="form-header"><h2>Reset Password</h2><p>Enter your email to receive a reset link</p></div>
+            <div class="form-body">
+                <div id="forgotError" class="message"></div>
+                <div class="form-group"><label class="form-label">Email</label><input type="email" id="forgotEmail" class="form-input" placeholder="you@email.com"></div>
+                <button type="button" class="btn btn-primary" onclick="sendPasswordReset()">Send Reset Link</button>
+                <button type="button" class="btn btn-link" onclick="showLogin()">← Back to Sign In</button>
+            </div>
+        </div>
+
+        <!-- UPDATE PASSWORD (shown after clicking reset link) -->
+        <div class="form-card hidden" id="updatePasswordForm">
+            <div class="form-header"><h2>Set New Password</h2><p>Choose a new password for your account</p></div>
+            <div class="form-body">
+                <div id="updateError" class="message"></div>
+                <div class="form-group"><label class="form-label">New Password</label><input type="password" id="newPassword" class="form-input" placeholder="New password (min 6 characters)"></div>
+                <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="confirmPassword" class="form-input" placeholder="Confirm new password"></div>
+                <button type="button" class="btn btn-primary" onclick="updatePassword()">Update Password</button>
             </div>
         </div>
 
@@ -1208,14 +1234,87 @@ function showPlanSelection() {
                 document.getElementById('loginError').className = 'message error';
             }
         }
-        function showForgotPassword() { alert('Password reset coming soon.'); }
+        function showForgotPassword() {
+            var lf = document.getElementById('loginForm');
+            var fp = document.getElementById('forgotPasswordForm');
+            var ps = document.getElementById('planSelection');
+            var rf = document.getElementById('registrationForm');
+            var sc = document.getElementById('platformShowcase');
+            if (lf) lf.classList.add('hidden');
+            if (ps) ps.classList.add('hidden');
+            if (rf) rf.classList.add('hidden');
+            if (sc) sc.classList.add('hidden');
+            if (fp) fp.classList.remove('hidden');
+            if (fp) fp.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        async function sendPasswordReset() {
+            var email = document.getElementById('forgotEmail').value.trim();
+            var errEl = document.getElementById('forgotError');
+            if (!email) { errEl.textContent = 'Please enter your email.'; errEl.className = 'message error'; return; }
+            try {
+                var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+                var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+                var sb = window.supabase.createClient(sbUrl, sbKey);
+                var result = await sb.auth.resetPasswordForEmail(email, {
+                    redirectTo: 'https://www.reasondx.com/auth/register.html#recovery'
+                });
+                if (result.error) throw result.error;
+                errEl.textContent = 'Check your email for a password reset link.';
+                errEl.className = 'message success';
+                errEl.style.color = '#059669';
+            } catch(e) {
+                errEl.textContent = e.message || 'Failed to send reset email. Please try again.';
+                errEl.className = 'message error';
+            }
+        }
+
+        async function updatePassword() {
+            var pw = document.getElementById('newPassword').value;
+            var pw2 = document.getElementById('confirmPassword').value;
+            var errEl = document.getElementById('updateError');
+            if (!pw || pw.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.className = 'message error'; return; }
+            if (pw !== pw2) { errEl.textContent = 'Passwords do not match.'; errEl.className = 'message error'; return; }
+            try {
+                var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+                var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+                var sb = window.supabase.createClient(sbUrl, sbKey);
+                var result = await sb.auth.updateUser({ password: pw });
+                if (result.error) throw result.error;
+                errEl.textContent = 'Password updated! Redirecting to sign in...';
+                errEl.className = 'message success';
+                errEl.style.color = '#059669';
+                setTimeout(function() { window.location.href = 'register.html#signin'; window.location.reload(); }, 2000);
+            } catch(e) {
+                errEl.textContent = e.message || 'Failed to update password. The link may have expired.';
+                errEl.className = 'message error';
+            }
+        }
 
         // ============================================
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Handle password recovery redirect from Supabase
+            var hash = window.location.hash;
+            if (hash && (hash.includes('type=recovery') || hash.includes('recovery'))) {
+                // Supabase puts tokens in the hash fragment
+                var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+                var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+                var sb = window.supabase.createClient(sbUrl, sbKey);
+                // Let Supabase process the token from the URL
+                sb.auth.getSession().then(function(res) {
+                    if (res.data.session) {
+                        // Show the update password form
+                        var allForms = document.querySelectorAll('.form-card, #planSelection, #platformShowcase');
+                        allForms.forEach(function(f) { f.classList.add('hidden'); });
+                        var upf = document.getElementById('updatePasswordForm');
+                        if (upf) { upf.classList.remove('hidden'); upf.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+                    }
+                });
+            }
             // Auto-show sign-in if redirected with #signin hash
-            if (window.location.hash === '#signin') {
+            else if (window.location.hash === '#signin') {
                 showLogin();
             }
 
