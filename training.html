@@ -419,6 +419,15 @@
             <p>Choose a training mode to build your clinical reasoning skills.</p>
         </div>
         
+        <!-- Difficulty Level Selector -->
+        <div class="level-selector" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+            <button class="level-pill active" onclick="setDifficulty('all', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:var(--brand);color:white;font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">All Levels</button>
+            <button class="level-pill" onclick="setDifficulty('premed', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">🩺 Premed</button>
+            <button class="level-pill" onclick="setDifficulty('beginner', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">Beginner</button>
+            <button class="level-pill" onclick="setDifficulty('intermediate', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">Intermediate</button>
+            <button class="level-pill" onclick="setDifficulty('advanced', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">Advanced</button>
+        </div>
+        
         <!-- Stats Bar (Free users) -->
         <div class="stats-bar" id="statsBar">
             <div class="stat" id="casesStat">
@@ -465,12 +474,12 @@
                 </a>
                 
                 <!-- Deep Dive Cases (Pro) -->
-                <a href="/cases/deep-dive-hub.html" class="mode-card" id="deepDiveCard">
+                <div class="mode-card locked" id="deepDiveCard" onclick="showUpgradeModal()">
                     <div class="mode-icon orange">🔍</div>
                     <h3>Deep Dive Cases <span class="pro-badge">Pro</span></h3>
                     <p>Extended cases with comprehensive workups, complex decision trees, and detailed pathophysiology exploration.</p>
                     <span class="lock-overlay" id="deepDiveLock">🔒</span>
-                </a>
+                </div>
             </div>
         </section>
         
@@ -482,29 +491,56 @@
             </div>
             
             <div class="case-list" id="quickCases">
-                <a href="/cases/chest-pain-crt.html" class="case-item">
-                    <span class="case-specialty">❤️</span>
-                    <div class="case-info">
-                        <div class="case-title">Chest Pain — Acute Coronary Syndrome</div>
-                        <div class="case-meta">Cardiology • 15-20 min • Beginner</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-                
-                <a href="/cases/dyspnea-crt.html" class="case-item">
-                    <span class="case-specialty">🫁</span>
-                    <div class="case-info">
-                        <div class="case-title">Shortness of Breath — Pulmonary Embolism</div>
-                        <div class="case-meta">Pulmonology • 15-20 min • Intermediate</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-                
-                <a href="/cases/abdominal-pain-crt.html" class="case-item">
+                <a href="/cases/hematuria-crt.html" class="case-item">
                     <span class="case-specialty">🩺</span>
                     <div class="case-info">
-                        <div class="case-title">Abdominal Pain — Appendicitis</div>
-                        <div class="case-meta">General Surgery • 15-20 min • Beginner</div>
+                        <div class="case-title">Hematuria Workup</div>
+                        <div class="case-meta">Urology • 15-20 min • Intermediate</div>
+                    </div>
+                    <span class="case-arrow">→</span>
+                </a>
+                
+                <a href="/cases/testicular-torsion-crt.html" class="case-item">
+                    <span class="case-specialty">🚨</span>
+                    <div class="case-info">
+                        <div class="case-title">Testicular Torsion</div>
+                        <div class="case-meta">Urology/Emergency • 10-15 min • Beginner</div>
+                    </div>
+                    <span class="case-arrow">→</span>
+                </a>
+                
+                <a href="/cases/hirschsprung-disease-crt.html" class="case-item">
+                    <span class="case-specialty">👶</span>
+                    <div class="case-info">
+                        <div class="case-title">Hirschsprung Disease</div>
+                        <div class="case-meta">Pediatric Surgery • 15-20 min • Intermediate</div>
+                    </div>
+                    <span class="case-arrow">→</span>
+                </a>
+                
+                <a href="/cases/kidney-stones-crt.html" class="case-item">
+                    <span class="case-specialty">💎</span>
+                    <div class="case-info">
+                        <div class="case-title">Kidney Stones</div>
+                        <div class="case-meta">Urology • 15 min • Beginner • Premed-friendly</div>
+                    </div>
+                    <span class="case-arrow">→</span>
+                </a>
+                
+                <a href="/cases/prostate-cancer-crt.html" class="case-item">
+                    <span class="case-specialty">🎗️</span>
+                    <div class="case-info">
+                        <div class="case-title">Prostate Cancer</div>
+                        <div class="case-meta">Oncology/Urology • 20 min • Advanced</div>
+                    </div>
+                    <span class="case-arrow">→</span>
+                </a>
+                
+                <a href="/cases/cryptorchidism-crt.html" class="case-item">
+                    <span class="case-specialty">👶</span>
+                    <div class="case-info">
+                        <div class="case-title">Cryptorchidism</div>
+                        <div class="case-meta">Pediatric Urology • 15 min • Beginner • Premed-friendly</div>
                     </div>
                     <span class="case-arrow">→</span>
                 </a>
@@ -530,6 +566,51 @@
         // ============================================================
         // PAGE INITIALIZATION
         // ============================================================
+        
+        // Difficulty filter function
+        function setDifficulty(level, btn) {
+            // Update button styles
+            document.querySelectorAll('.level-pill').forEach(p => {
+                p.style.background = 'white';
+                p.style.color = 'var(--text)';
+            });
+            btn.style.background = 'var(--brand)';
+            btn.style.color = 'white';
+            
+            // Filter case items
+            document.querySelectorAll('.case-item').forEach(item => {
+                const meta = item.querySelector('.case-meta')?.textContent.toLowerCase() || '';
+                const isPremed = meta.includes('premed');
+                const isBeginner = meta.includes('beginner');
+                const isIntermediate = meta.includes('intermediate');
+                const isAdvanced = meta.includes('advanced');
+                
+                let show = true;
+                if (level === 'premed') show = isPremed || isBeginner;
+                else if (level === 'beginner') show = isBeginner;
+                else if (level === 'intermediate') show = isIntermediate;
+                else if (level === 'advanced') show = isAdvanced;
+                
+                item.style.display = show ? 'flex' : 'none';
+            });
+            
+            // Check URL params on load
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('level') === 'premed') {
+                document.querySelector('.welcome p').textContent = 
+                    'Cases adapted for pre-medical students — connect MCAT concepts to clinical reasoning.';
+            }
+        }
+        
+        // Check for level param on load
+        window.addEventListener('load', function() {
+            const params = new URLSearchParams(window.location.search);
+            const level = params.get('level');
+            if (level) {
+                const btn = document.querySelector(`[onclick*="'${level}'"]`);
+                if (btn) setDifficulty(level, btn);
+            }
+        });
         
         document.addEventListener('DOMContentLoaded', function() {
             initializePage();

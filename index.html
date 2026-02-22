@@ -953,14 +953,13 @@ body {
   
   <div class="search-wrap">
     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" class="search-input" id="searchInput" placeholder="Search cases — sepsis, DKA, chest pain, anaphylaxis..." autocomplete="off">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search cases — kidney, prostate, hernia, testicular..." autocomplete="off">
     <div class="search-results" id="searchResults"></div>
   </div>
-  <div class="search-hint">Try: <kbd>sepsis</kbd> <kbd>heart failure</kbd> <kbd>chest pain</kbd> <kbd>DKA</kbd> <kbd>stroke</kbd></div>
+  <div class="search-hint">Try: <kbd>kidney</kbd> <kbd>prostate</kbd> <kbd>hernia</kbd> <kbd>testicular</kbd> <kbd>bladder</kbd></div>
 </section>
 
-<!-- STUDENT LEVEL SELECTOR — hidden for launch -->
-<!--
+<!-- STUDENT LEVEL SELECTOR — Now enabled -->
 <section class="level-selector">
   <div class="level-label">I'm studying for:</div>
   <div class="level-pills">
@@ -971,7 +970,6 @@ body {
     <button class="level-pill" onclick="setLevel('m4', this)" data-level="m4">Step 2 / COMLEX</button>
   </div>
 </section>
--->
 
 <!-- 4 PATHS — Launch: Train / SBAR / Coach / Dashboard -->
 <section class="paths">
@@ -3775,17 +3773,47 @@ function doSearch() {
   const q = searchInput.value.trim().toLowerCase();
   if (q.length < 2) { searchResults.classList.remove('open'); return; }
   
-  const matches = TOPICS.filter(t => 
-    !t.premed && (t.a) && (t.t.toLowerCase().includes(q) || (t.tags && t.tags.toLowerCase().includes(q)))
+  // CRT cases that are active (not in _legacy)
+  const CRT_CASES = [
+    { t: "Anorectal Malformations", a: "cases/anorectal-malformations-crt.html", tags: "imperforate anus" },
+    { t: "BPH (Benign Prostatic Hyperplasia)", a: "cases/bph-crt.html", tags: "prostate enlargement urinary retention" },
+    { t: "Branchial Cleft Anomalies", a: "cases/branchial-cleft-crt.html", tags: "neck mass cyst" },
+    { t: "Congenital Diaphragmatic Hernia", a: "cases/cdh-crt.html", tags: "CDH bochdalek" },
+    { t: "Cleft Lip and Palate", a: "cases/cleft-lip-palate-crt.html", tags: "craniofacial" },
+    { t: "Craniosynostosis", a: "cases/craniosynostosis-crt.html", tags: "skull suture" },
+    { t: "Cryptorchidism", a: "cases/cryptorchidism-crt.html", tags: "undescended testis" },
+    { t: "GI Embryology & Malrotation", a: "cases/gi-embryology-malrotation-crt.html", tags: "midgut volvulus" },
+    { t: "Hematuria Workup", a: "cases/hematuria-crt.html", tags: "blood urine bladder kidney" },
+    { t: "Hemifacial Microsomia", a: "cases/hemifacial-microsomia-crt.html", tags: "goldenhar" },
+    { t: "Hirschsprung Disease", a: "cases/hirschsprung-disease-crt.html", tags: "megacolon aganglionic" },
+    { t: "Hypospadias", a: "cases/hypospadias-crt.html", tags: "urethra penis" },
+    { t: "Kidney Stones", a: "cases/kidney-stones-crt.html", tags: "nephrolithiasis renal colic" },
+    { t: "Neonatal Respiratory Distress", a: "cases/neonatal-respiratory-distress-crt.html", tags: "RDS TTN newborn" },
+    { t: "Neurogenic Bladder", a: "cases/neurogenic-bladder-crt.html", tags: "spina bifida" },
+    { t: "Pierre Robin Sequence", a: "cases/pierre-robin-crt.html", tags: "micrognathia glossoptosis" },
+    { t: "Prostate Cancer", a: "cases/prostate-cancer-crt.html", tags: "PSA adenocarcinoma" },
+    { t: "Posterior Urethral Valves", a: "cases/puv-crt.html", tags: "PUV obstruction" },
+    { t: "Renal Cell Carcinoma", a: "cases/rcc-crt.html", tags: "kidney cancer" },
+    { t: "TEF & Esophageal Atresia", a: "cases/tef-esophageal-atresia-crt.html", tags: "tracheoesophageal fistula" },
+    { t: "Testicular Cancer", a: "cases/testicular-cancer-crt.html", tags: "seminoma teratoma" },
+    { t: "Testicular Torsion", a: "cases/testicular-torsion-crt.html", tags: "acute scrotum" },
+    { t: "Treacher Collins Syndrome", a: "cases/treacher-collins-crt.html", tags: "mandibulofacial dysostosis" },
+    { t: "UPJ Obstruction", a: "cases/upj-obstruction-crt.html", tags: "hydronephrosis" },
+    { t: "Urinary Incontinence", a: "cases/urinary-incontinence-crt.html", tags: "stress urge" },
+    { t: "Vesicoureteral Reflux", a: "cases/vur-crt.html", tags: "VUR UTI" },
+    { t: "Wilms Tumor", a: "cases/wilms-tumor-crt.html", tags: "nephroblastoma pediatric kidney" }
+  ];
+  
+  const matches = CRT_CASES.filter(t => 
+    t.t.toLowerCase().includes(q) || (t.tags && t.tags.toLowerCase().includes(q))
   ).slice(0, 10);
   
   if (matches.length === 0) {
-    searchResults.innerHTML = '<div class="search-empty">No cases found for "' + q + '"</div>';
+    searchResults.innerHTML = '<div class="search-empty">No cases found for "' + q + '". Try: kidney, prostate, hernia, testicular</div>';
   } else {
     searchResults.innerHTML = matches.map(t => {
-      let links = '';
-      if (t.a) links += `<a href="${t.a}" class="tag-case" onclick="event.stopPropagation()">Interactive Case</a>`;
-      return `<div class="search-result" onclick="window.location.href='${t.a || ''}'">
+      let links = `<a href="${t.a}" class="tag-case" onclick="event.stopPropagation()">Interactive Case</a>`;
+      return `<div class="search-result" onclick="window.location.href='${t.a}'">
         <div class="search-result-title">${highlightMatch(t.t, q)} <span style="font-size:11px;color:var(--slate-400);font-weight:400">case</span></div>
         <div class="search-result-links">${links}</div>
       </div>`;
@@ -3867,7 +3895,6 @@ const pathContent = {
     title: 'SBAR Communication',
     desc: 'Practice structured clinical handoffs with AI-scored feedback',
     items: [
-      { icon: '📞', bg: '#fef3c7', title: 'Consult Trainer (13 Scenarios)', desc: 'Practice calling consults across ED, floor, and ICU settings', href: 'consult-trainer.html', levels: ['m3','m4'] },
       { icon: '📋', bg: '#d4e8f7', title: 'SBAR Trainer (23 Scenarios)', desc: 'Structured SBAR practice across multiple specialties with scoring', href: 'tools/sbar-trainer.html', levels: ['m3','m4'] },
     ]
   }
@@ -3956,13 +3983,12 @@ function setLevel(level, el) {
   el.classList.add('active');
 
   const pathsSection = document.querySelector('.paths');
-  const premedSection = document.getElementById('premed-paths-section');
+  let premedSection = document.getElementById('premed-paths-section');
 
-  // PREMED MODE — swap entire paths section
+  // PREMED MODE — show premed-specific paths
   if (level === 'premed') {
     pathsSection.style.display = 'none';
-    if (premedSection) { premedSection.style.display = ''; }
-    else {
+    if (!premedSection) {
       const pm = document.createElement('section');
       pm.id = 'premed-paths-section';
       pm.className = 'premed-paths';
@@ -3970,41 +3996,43 @@ function setLevel(level, el) {
         <a href="modules/premed-hub.html" class="premed-path-card">
           <div class="path-icon" style="background:#f0f7fc">🩺</div>
           <h3>Premed Hub</h3>
-          <p>Your home base — all 15 modules, learning paths, and clinical reasoning tools in one place</p>
-          <span class="path-count">15 modules</span>
+          <p>Your home base — clinical reasoning foundations, shadowing tools, and MCAT connections</p>
+          <span class="path-count">All premed tools</span>
         </a>
-        <a href="modules/premed-paths.html" class="premed-path-card">
-          <div class="path-icon" style="background:#f5f3ff">🗺️</div>
-          <h3>Learning Paths</h3>
-          <p>Three guided tracks: Explorer, Foundation, and Bridge — structured progression from premed to medical thinking</p>
-          <span class="path-count">3 paths · 3 lessons</span>
+        <a href="modules/premed-encounter.html" class="premed-path-card">
+          <div class="path-icon" style="background:#ecfdf5">📋</div>
+          <h3>Clinical Encounter Companion</h3>
+          <p>Log your shadowing observations and connect them to clinical concepts</p>
+          <span class="path-count">Shadowing tool</span>
         </a>
         <a href="modules/premed-mcat-bridge.html" class="premed-path-card">
           <div class="path-icon" style="background:#fff7ed">🔗</div>
           <h3>MCAT Clinical Bridge</h3>
-          <p>Connect your prereq coursework to real clinical medicine — 33 topic maps across all MCAT sections</p>
+          <p>Connect your prereq coursework to real clinical medicine</p>
           <span class="path-count">33 topic bridges</span>
         </a>
-        <a href="modules/premed-tracker.html" class="premed-path-card">
-          <div class="path-icon" style="background:#fef2f2">🎯</div>
-          <h3>Accountability</h3>
-          <p>Weekly goals, daily habits, streak tracking, and 20 milestones to keep you on track</p>
-          <span class="path-count">20 milestones</span>
+        <a href="training.html?level=premed" class="premed-path-card">
+          <div class="path-icon" style="background:#fef2f2">🧠</div>
+          <h3>Clinical Reasoning Cases</h3>
+          <p>Practice diagnostic thinking with premed-appropriate scaffolding</p>
+          <span class="path-count">27 cases</span>
         </a>
       `;
       pathsSection.parentNode.insertBefore(pm, pathsSection.nextSibling);
+      premedSection = pm;
     }
+    premedSection.style.display = '';
     // Update hero text for premed
-    document.querySelector('.hero h1').textContent = 'Start thinking like a physician.';
-    document.querySelector('.hero p').textContent = 'Clinical reasoning tools, shadowing guides, MCAT bridges, and application prep — built for premeds.';
+    document.querySelector('.hero h1').innerHTML = 'Start thinking like a <em style="font-style:italic;color:#2874A6">physician</em>.';
+    document.querySelector('.hero p').textContent = 'Clinical reasoning tools, shadowing guides, and MCAT connections — built for premeds who want to stand out.';
     return;
   }
 
   // NON-PREMED — restore normal paths
   pathsSection.style.display = '';
   if (premedSection) premedSection.style.display = 'none';
-  document.querySelector('.hero h1').textContent = 'What do you want to work on?';
-  document.querySelector('.hero p').textContent = 'Search 323 clinical reasoning cases across 29 specialties.';
+  document.querySelector('.hero h1').innerHTML = 'Learn to <em style="font-style:italic;color:#2874A6">reason</em>. Communicate it. Grow.';
+  document.querySelector('.hero p').textContent = 'Train your clinical thinking with AI-powered cases, structured SBAR communication, and personalized coaching.';
   
   // Update path card descriptions based on level
   if (level !== 'all') {
@@ -4013,7 +4041,7 @@ function setLevel(level, el) {
     const pathKeys = ['learn', 'practice', 'coach', 'simulate', 'tools'];
     pathCards.forEach((card, i) => {
       const desc = card.querySelector('p');
-      if (desc && guidance.pathDescs[pathKeys[i]]) {
+      if (desc && guidance && guidance.pathDescs && guidance.pathDescs[pathKeys[i]]) {
         desc.textContent = guidance.pathDescs[pathKeys[i]];
       }
     });
@@ -4023,6 +4051,8 @@ function setLevel(level, el) {
     document.querySelectorAll('.paths .path-card').forEach((card, i) => {
       const desc = card.querySelector('p');
       if (desc) desc.textContent = defaults[i];
+    });
+  }
     });
   }
 }
