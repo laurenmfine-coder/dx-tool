@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Syncope & Arrhythmias</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header"><div class="logo">💓 MechanismDx</div></header>
+    <div class="module-header"><div class="module-header-inner">
+        <div class="module-title"><span class="module-icon">💓</span><div><h1>Syncope & Arrhythmias</h1><p class="module-subtitle">Cardiac conduction, syncope mechanisms, AFib, and ventricular arrhythmias</p></div></div>
+    </div></div>
+    <main class="main">
+        <div class="phase-nav">
+            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Syncope Mechanisms</button>
+            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: Bradyarrhythmias</button>
+            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: Supraventricular</button>
+            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Ventricular</button>
+        </div>
+        <div class="content-grid">
+            <div class="questions-panel" id="questionsPanel"></div>
+            <aside>
+                <!-- Risk Stratification -->
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">⚠️ High-Risk Syncope Features</h3>
+                    <div class="risk-list">
+                        <div class="risk-item risk-high">Exertional syncope</div>
+                        <div class="risk-item risk-high">Syncope while supine/sitting</div>
+                        <div class="risk-item risk-high">Associated chest pain</div>
+                        <div class="risk-item risk-high">Family history sudden death</div>
+                        <div class="risk-item risk-high">Abnormal ECG findings</div>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">✅ Low-Risk Features</h3>
+                    <div class="risk-list">
+                        <div class="risk-item risk-low">Prodrome (warmth, nausea)</div>
+                        <div class="risk-item risk-low">Standing for long period</div>
+                        <div class="risk-item risk-low">After painful stimulus</div>
+                        <div class="risk-item risk-low">Young, no cardiac history</div>
+                    </div>
+                </div>
+                
+                <!-- Concept Map -->
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🗺️ Syncope Classification</h3>
+                    <div class="concept-map">
+                        <div class="concept-node concept-root">Syncope</div>
+                        <div class="concept-branches">
+                            <div class="concept-branch">
+                                <div class="concept-node concept-cat reflex">Reflex (Neurally-Mediated)</div>
+                                <div class="concept-leaves">
+                                    <span class="concept-leaf">Vasovagal</span>
+                                    <span class="concept-leaf">Situational</span>
+                                    <span class="concept-leaf">Carotid sinus</span>
+                                </div>
+                            </div>
+                            <div class="concept-branch">
+                                <div class="concept-node concept-cat orthostatic">Orthostatic</div>
+                                <div class="concept-leaves">
+                                    <span class="concept-leaf">Hypovolemia</span>
+                                    <span class="concept-leaf">Drug-induced</span>
+                                    <span class="concept-leaf">Autonomic failure</span>
+                                </div>
+                            </div>
+                            <div class="concept-branch">
+                                <div class="concept-node concept-cat cardiac">Cardiac</div>
+                                <div class="concept-leaves">
+                                    <span class="concept-leaf">Arrhythmias</span>
+                                    <span class="concept-leaf">Structural</span>
+                                    <span class="concept-leaf">PE/Tamponade</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Reference -->
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📊 Key Values to Remember</h3>
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-item">
+                            <span class="ref-value">≥20/10</span>
+                            <span class="ref-label">Orthostatic BP drop (SBP/DBP mmHg)</span>
+                        </div>
+                        <div class="quick-ref-item">
+                            <span class="ref-value">&lt;60 bpm</span>
+                            <span class="ref-label">Symptomatic bradycardia</span>
+                        </div>
+                        <div class="quick-ref-item">
+                            <span class="ref-value">&gt;100 bpm</span>
+                            <span class="ref-label">VT definition (≥3 beats)</span>
+                        </div>
+                        <div class="quick-ref-item">
+                            <span class="ref-value">6→12 mg</span>
+                            <span class="ref-label">Adenosine dosing IV push</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ECG Patterns -->
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📈 ECG Pattern Recognition</h3>
+                    <div class="ecg-patterns">
+                        <div class="ecg-item">
+                            <span class="ecg-rhythm">AFib</span>
+                            <span class="ecg-desc">Irregularly irregular, no P waves</span>
+                        </div>
+                        <div class="ecg-item">
+                            <span class="ecg-rhythm">AFlutter</span>
+                            <span class="ecg-desc">Sawtooth at 300/min, regular</span>
+                        </div>
+                        <div class="ecg-item">
+                            <span class="ecg-rhythm">WPW</span>
+                            <span class="ecg-desc">Short PR, delta wave, wide QRS</span>
+                        </div>
+                        <div class="ecg-item">
+                            <span class="ecg-rhythm">Torsades</span>
+                            <span class="ecg-desc">Polymorphic VT + long QT</span>
+                        </div>
+                        <div class="ecg-item">
+                            <span class="ecg-rhythm">3° AVB</span>
+                            <span class="ecg-desc">AV dissociation, regular P & QRS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resources -->
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📚 Open Access Resources</h3>
+                    <div class="resource-links">
+                        <a href="https://litfl.com/ecg-library/" target="_blank" class="resource-link">
+                            <span class="resource-icon">🔗</span>
+                            <div class="resource-info">
+                                <span class="resource-name">LITFL ECG Library</span>
+                                <span class="resource-desc">Comprehensive ECG examples</span>
+                            </div>
+                        </a>
+                        <a href="https://www.healio.com/cardiology/learn-the-heart" target="_blank" class="resource-link">
+                            <span class="resource-icon">🫀</span>
+                            <div class="resource-info">
+                                <span class="resource-name">Learn the Heart</span>
+                                <span class="resource-desc">Free cardiology education</span>
+                            </div>
+                        </a>
+                        <a href="https://ecgwaves.com/" target="_blank" class="resource-link">
+                            <span class="resource-icon">📊</span>
+                            <div class="resource-info">
+                                <span class="resource-name">ECG Waves</span>
+                                <span class="resource-desc">ECG interpretation guide</span>
+                            </div>
+                        </a>
+                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK526027/" target="_blank" class="resource-link">
+                            <span class="resource-icon">📖</span>
+                            <div class="resource-info">
+                                <span class="resource-name">StatPearls: Syncope</span>
+                                <span class="resource-desc">Evidence-based overview</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Clinical Tools -->
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🧮 Clinical Calculators</h3>
+                    <div class="tool-links">
+                        <a href="https://www.mdcalc.com/calc/10097/san-francisco-syncope-rule" target="_blank" class="tool-link">
+                            <span class="tool-name">San Francisco Syncope Rule</span>
+                            <span class="tool-arrow">→</span>
+                        </a>
+                        <a href="https://www.mdcalc.com/calc/801/cha2ds2-vasc-score-atrial-fibrillation-stroke-risk" target="_blank" class="tool-link">
+                            <span class="tool-name">CHA₂DS₂-VASc Score</span>
+                            <span class="tool-arrow">→</span>
+                        </a>
+                        <a href="https://www.mdcalc.com/calc/40/corrected-qt-interval-qtc" target="_blank" class="tool-link">
+                            <span class="tool-name">QTc Calculator</span>
+                            <span class="tool-arrow">→</span>
+                        </a>
+                        <a href="https://www.mdcalc.com/calc/1785/egsys-evaluation-guidelines-syncope-study-score-syncope" target="_blank" class="tool-link">
+                            <span class="tool-name">EGSYS Score</span>
+                            <span class="tool-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    
+        <!-- References Section -->
+        <section style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 2px solid #ef4444; margin: 40px auto; max-width: 900px; padding: 30px; border-radius: 16px;">
+            <h2 style="color: #991b1b; margin-bottom: 20px;">📚 Open-Access References</h2>
+            <div style="font-size: 14px;">
+                <div style="padding: 12px 0; border-bottom: 1px solid #fca5a5;">
+                    <strong>1. ESC Syncope Guidelines (2018)</strong><br>
+                    Brignole M, et al. 2018 ESC Guidelines for the diagnosis and management of syncope. <em>Eur Heart J</em>. 2018;39(21):1883-1948.<br>
+                    PMID: 29562304 | <a href="https://academic.oup.com/eurheartj/article/39/21/1883/4939241" target="_blank" style="color: #dc2626;">ESC Free Full Text</a>
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #fca5a5;">
+                    <strong>2. ACC/AHA Syncope Guidelines (2017)</strong><br>
+                    Shen WK, et al. 2017 ACC/AHA/HRS Guideline for Evaluation and Management of Syncope. <em>Circulation</em>. 2017;136(5):e60-e122.<br>
+                    PMID: 28280231 | <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000499" target="_blank" style="color: #dc2626;">AHA Free Full Text</a>
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #fca5a5;">
+                    <strong>3. San Francisco Syncope Rule</strong><br>
+                    Quinn J, et al. Derivation of the San Francisco Syncope Rule. <em>Ann Emerg Med</em>. 2004;43(2):224-32.<br>
+                    PMID: 14747812
+                </div>
+                <div style="padding: 12px 0;">
+                    <strong>4. ACC/AHA Arrhythmia Management Guidelines</strong><br>
+                    American College of Cardiology Guidelines Hub - Arrhythmias.<br>
+                    <a href="https://www.acc.org/Guidelines" target="_blank" style="color: #dc2626;">ACC Guidelines Portal</a>
+                </div>
+            </div>
+        </section>
+    
+    
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Syncope & Arrhythmias with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=cv04" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=syncope,arrhythmia" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Syncope Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 6+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+    <script>
+    // Correct answers: Phase 1 (D,B,C,A,E), Phase 2 (B,D,A,C,E), Phase 3 (C,A,D,B,E), Phase 4 (A,C,D,B,E)
+    const data = {
+        1: [
+            { id:'q1_1', type:'Mechanism', stem:'Vasovagal syncope results from:', options:[
+                {letter:'A',text:'Complete heart block with asystole',correct:false},
+                {letter:'B',text:'Massive pulmonary embolism',correct:false},
+                {letter:'C',text:'Severe aortic stenosis obstruction',correct:false},
+                {letter:'D',text:'Parasympathetic surge causing bradycardia and vasodilation',correct:true}
+            ], explanation:'Vasovagal syncope involves a paradoxical reflex: trigger activates vagus nerve → bradycardia AND vasodilation (via sympathetic withdrawal) → hypotension → cerebral hypoperfusion → syncope. Classic prodrome: warmth, nausea, diaphoresis.', mechanism:{title:'Vasovagal Reflex',steps:['Trigger (pain, emotion, standing)','→ Vagal activation','→ Bradycardia + Vasodilation','→ Hypotension','→ Cerebral hypoperfusion','→ Syncope']}},
+            { id:'q1_2', type:'Clinical', stem:'Which finding suggests cardiac syncope rather than vasovagal?', options:[
+                {letter:'A',text:'Prodrome of warmth and nausea',correct:false},
+                {letter:'B',text:'Syncope during exertion',correct:true},
+                {letter:'C',text:'Prolonged standing before event',correct:false},
+                {letter:'D',text:'Episode triggered by blood draw',correct:false}
+            ], explanation:'Exertional syncope suggests cardiac cause (aortic stenosis, HOCM, arrhythmia) and requires urgent evaluation. Vasovagal typically has prodrome and situational triggers. Cardiac syncope often lacks warning and may occur supine.', mechanism:{title:'Cardiac vs Vasovagal',steps:['Exertional = Cardiac (dangerous)','No prodrome = Concerning','Supine syncope = Concerning','Prodrome + trigger = Vasovagal','Young + typical = Low risk']}},
+            { id:'q1_3', type:'Clinical', vignette:'A 75-year-old with aortic stenosis reports syncope while climbing stairs.', stem:'The mechanism of syncope in aortic stenosis is:', options:[
+                {letter:'A',text:'Vagal reflex from pain sensation',correct:false},
+                {letter:'B',text:'Arrhythmia from valve calcification',correct:false},
+                {letter:'C',text:'Fixed cardiac output unable to meet demand',correct:true},
+                {letter:'D',text:'Pulmonary embolism from immobility',correct:false}
+            ], explanation:'In severe AS, the stenotic valve limits cardiac output. During exertion, peripheral vasodilation occurs but cardiac output can\'t increase → BP drops → syncope. Exertional syncope in AS indicates severe disease and is an indication for valve replacement.', mechanism:{title:'AS Syncope',steps:['Severe aortic stenosis','→ Fixed cardiac output','→ Exercise → Vasodilation','→ CO can\'t increase','→ Hypotension → Syncope']}},
+            { id:'q1_4', type:'Clinical', stem:'Orthostatic hypotension is defined as:', options:[
+                {letter:'A',text:'SBP drop ≥20 mmHg or DBP drop ≥10 mmHg within 3 minutes of standing',correct:true},
+                {letter:'B',text:'Any decrease in BP upon standing from supine',correct:false},
+                {letter:'C',text:'Heart rate increase >30 bpm on standing',correct:false},
+                {letter:'D',text:'Symptoms of lightheadedness when upright',correct:false}
+            ], explanation:'Orthostatic hypotension: SBP drop ≥20 mmHg OR DBP drop ≥10 mmHg within 3 minutes of standing. Causes include hypovolemia, medications (antihypertensives, antidepressants), autonomic dysfunction.', mechanism:{title:'Orthostatic Hypotension',steps:['Standing → Blood pools in legs','→ Inadequate compensatory response','→ SBP drops ≥20 or DBP ≥10','→ Within 3 minutes','→ Cerebral hypoperfusion']}},
+            { id:'q1_5', type:'Clinical', stem:'The San Francisco Syncope Rule identifies high-risk patients using which criteria?', options:[
+                {letter:'A',text:'Age, blood pressure, and heart rate only',correct:false},
+                {letter:'B',text:'Family history and exercise tolerance',correct:false},
+                {letter:'C',text:'Duration of syncope and recovery time',correct:false},
+                {letter:'D',text:'Troponin levels and BNP values',correct:false},
+                {letter:'E',text:'CHF history, Hematocrit, ECG, SOB, SBP (CHESS)',correct:true}
+            ], explanation:'San Francisco Syncope Rule (CHESS): CHF history, Hematocrit <30%, Abnormal ECG, Shortness of breath, Systolic BP <90. If all negative, low risk for serious outcome at 7 days. Helps with disposition decisions.', mechanism:{title:'SF Syncope Rule (CHESS)',steps:['C: CHF history','H: Hematocrit <30%','E: ECG abnormal','S: Shortness of breath','S: SBP <90 mmHg']}}
+        ],
+        2: [
+            { id:'q2_1', type:'Mechanism', stem:'The SA node normally generates impulses at a rate of:', options:[
+                {letter:'A',text:'20-40 beats per minute',correct:false},
+                {letter:'B',text:'60-100 beats per minute',correct:true},
+                {letter:'C',text:'40-60 beats per minute',correct:false},
+                {letter:'D',text:'100-150 beats per minute',correct:false}
+            ], explanation:'SA node (dominant pacemaker): 60-100 bpm. AV node escape: 40-60 bpm. Ventricular escape: 20-40 bpm. If SA node fails, lower pacemakers take over at their intrinsic rates.', mechanism:{title:'Pacemaker Hierarchy',steps:['SA node: 60-100 bpm (fastest)','AV node: 40-60 bpm','His bundle: 40-60 bpm','Purkinje: 20-40 bpm','Fastest pacemaker dominates']}},
+            { id:'q2_2', type:'Clinical', stem:'First-degree AV block is characterized by:', options:[
+                {letter:'A',text:'Intermittently dropped QRS complexes',correct:false},
+                {letter:'B',text:'Complete dissociation of P waves and QRS',correct:false},
+                {letter:'C',text:'Progressively lengthening PR until dropped beat',correct:false},
+                {letter:'D',text:'PR interval >200 ms with all P waves conducted',correct:true}
+            ], explanation:'First-degree block: PR >200 ms but every P conducts. Not true "block" - just delayed conduction. Usually benign, requires no treatment. Second-degree: some P\'s don\'t conduct. Third-degree: complete dissociation.', mechanism:{title:'AV Block Types',steps:['1st: PR >200ms, all conducted','2nd Mobitz I: Progressive PR → drop','2nd Mobitz II: Constant PR → drop','3rd: Complete dissociation','P waves march through QRS']}},
+            { id:'q2_3', type:'Clinical', vignette:'ECG shows P waves at 80/min with QRS at 35/min. No relationship between P and QRS.', stem:'What is the diagnosis?', options:[
+                {letter:'A',text:'Third-degree (complete) heart block',correct:true},
+                {letter:'B',text:'Second-degree Mobitz Type I',correct:false},
+                {letter:'C',text:'First-degree AV block',correct:false},
+                {letter:'D',text:'Sinus bradycardia with PACs',correct:false}
+            ], explanation:'Complete heart block: P waves and QRS have no relationship (AV dissociation). Atrial rate (P) normal but none conduct to ventricles. Escape rhythm (junctional or ventricular) sustains life. Requires pacemaker.', mechanism:{title:'Complete Heart Block',steps:['No conduction through AV node','P waves: 60-100 (atrial)','QRS: 20-60 (escape rhythm)','No relationship between them','Pacemaker required']}},
+            { id:'q2_4', type:'Clinical', stem:'Mobitz Type II differs from Mobitz Type I because:', options:[
+                {letter:'A',text:'It always requires emergent pacing',correct:false},
+                {letter:'B',text:'The PR interval is variable before dropped beats',correct:false},
+                {letter:'C',text:'The PR interval is constant before dropped beats',correct:true},
+                {letter:'D',text:'It only occurs in young healthy patients',correct:false}
+            ], explanation:'Mobitz II: Constant PR intervals then sudden dropped beat. Often progresses to complete block - needs pacemaker. Mobitz I (Wenckebach): Progressive PR prolongation → dropped beat. Usually benign, rarely needs pacing.', mechanism:{title:'Mobitz I vs II',steps:['Mobitz I: Progressive PR → drop','Usually at AV node, benign','Mobitz II: Constant PR → drop','Usually below His (dangerous)','Mobitz II → Pacemaker needed']}},
+            { id:'q2_5', type:'Clinical', stem:'Sick sinus syndrome may present with:', options:[
+                {letter:'A',text:'Isolated first-degree AV block',correct:false},
+                {letter:'B',text:'Sustained ventricular tachycardia',correct:false},
+                {letter:'C',text:'Isolated premature atrial contractions',correct:false},
+                {letter:'D',text:'Atrial flutter only',correct:false},
+                {letter:'E',text:'Alternating bradycardia and tachycardia (tachy-brady)',correct:true}
+            ], explanation:'Sick sinus syndrome: SA node dysfunction causing bradycardia, sinus pauses, and often paroxysmal tachyarrhythmias (tachy-brady syndrome). Symptomatic bradycardia requires pacemaker; may also need rate control for tachycardia episodes.', mechanism:{title:'Sick Sinus Syndrome',steps:['SA node dysfunction','→ Sinus bradycardia','→ Sinus pauses/arrest','→ May alternate with tachycardia','→ Pacemaker if symptomatic']}}
+        ],
+        3: [
+            { id:'q3_1', type:'Mechanism', stem:'AVNRT (AV nodal reentrant tachycardia) involves:', options:[
+                {letter:'A',text:'Accessory pathway outside the AV node',correct:false},
+                {letter:'B',text:'Automatic focus in the atrium',correct:false},
+                {letter:'C',text:'Dual pathways within the AV node',correct:true},
+                {letter:'D',text:'Triggered activity from the His bundle',correct:false}
+            ], explanation:'AVNRT uses dual AV nodal pathways (slow and fast). Typically, impulse goes down slow pathway, up fast pathway, creating reentry circuit within the AV node. Causes regular narrow-complex tachycardia.', mechanism:{title:'AVNRT Mechanism',steps:['Dual AV node pathways','PAC blocks in fast pathway','Conducts down slow pathway','Returns up fast pathway','→ Reentry → Tachycardia']}},
+            { id:'q3_2', type:'Clinical', stem:'The first-line treatment for stable SVT is:', options:[
+                {letter:'A',text:'Vagal maneuvers (Valsalva, carotid massage)',correct:true},
+                {letter:'B',text:'Immediate synchronized cardioversion',correct:false},
+                {letter:'C',text:'IV amiodarone bolus and infusion',correct:false},
+                {letter:'D',text:'Oral beta-blocker administration',correct:false}
+            ], explanation:'For stable SVT: Try vagal maneuvers first (Valsalva, carotid massage, ice to face). If ineffective: IV adenosine (6mg, then 12mg). If still refractory: IV diltiazem/verapamil or beta-blocker. Cardioversion if unstable.', mechanism:{title:'SVT Treatment',steps:['1. Vagal maneuvers first','2. Adenosine 6mg IV push','3. Adenosine 12mg if needed','4. Diltiazem or beta-blocker','Cardiovert if unstable']}},
+            { id:'q3_3', type:'Clinical', stem:'Atrial fibrillation is characterized on ECG by:', options:[
+                {letter:'A',text:'Regular sawtooth pattern at 300/min',correct:false},
+                {letter:'B',text:'Wide QRS complexes with AV dissociation',correct:false},
+                {letter:'C',text:'Delta waves with short PR interval',correct:false},
+                {letter:'D',text:'Irregularly irregular rhythm without P waves',correct:true}
+            ], explanation:'AFib: Irregularly irregular R-R intervals with fibrillatory baseline (no discrete P waves). Atrial flutter has regular sawtooth at 300/min with regular ventricular response. AFib rate typically 100-180 if untreated.', mechanism:{title:'AFib ECG',steps:['No P waves (fibrillatory baseline)','Irregularly irregular R-R','Variable ventricular rate','Usually 100-180 untreated','May be slow if AV node disease']}},
+            { id:'q3_4', type:'Clinical', vignette:'A patient with AFib has HR 150, BP 85/50, and chest pain.', stem:'What is the immediate treatment?', options:[
+                {letter:'A',text:'IV diltiazem for rate control',correct:false},
+                {letter:'B',text:'Synchronized cardioversion',correct:true},
+                {letter:'C',text:'Oral anticoagulation and observation',correct:false},
+                {letter:'D',text:'IV heparin and wait for TEE',correct:false}
+            ], explanation:'Unstable AFib (hypotension, chest pain, altered mental status, acute heart failure) requires immediate synchronized cardioversion regardless of anticoagulation status. Don\'t delay for rate control drugs or anticoagulation.', mechanism:{title:'Unstable AFib',steps:['Signs: Hypotension, chest pain','Altered mental status, shock','→ Immediate cardioversion','Don\'t wait for anticoagulation','Address stability first']}},
+            { id:'q3_5', type:'Clinical', stem:'In WPW syndrome, the delta wave represents:', options:[
+                {letter:'A',text:'Delayed conduction through the AV node',correct:false},
+                {letter:'B',text:'Retrograde atrial activation',correct:false},
+                {letter:'C',text:'Ventricular ectopy from irritable focus',correct:false},
+                {letter:'D',text:'Bundle branch block pattern',correct:false},
+                {letter:'E',text:'Early ventricular activation via accessory pathway',correct:true}
+            ], explanation:'WPW: Accessory pathway (Bundle of Kent) bypasses AV node, pre-exciting ventricles (delta wave = slurred upstroke). Short PR (<120ms) + delta wave + wide QRS. Risk: AFib conducting rapidly down accessory pathway → VFib.', mechanism:{title:'WPW Features',steps:['Accessory pathway bypasses AV node','→ Short PR (<120ms)','→ Delta wave (pre-excitation)','→ Wide QRS','AFib risk: Rapid conduction → VFib']}}
+        ],
+        4: [
+            { id:'q4_1', type:'Clinical', stem:'Ventricular tachycardia is defined as:', options:[
+                {letter:'A',text:'≥3 consecutive ventricular beats at rate >100/min',correct:true},
+                {letter:'B',text:'Any wide complex tachycardia on ECG',correct:false},
+                {letter:'C',text:'Heart rate >150 with palpitations',correct:false},
+                {letter:'D',text:'Irregular rhythm from the ventricles',correct:false}
+            ], explanation:'VT: ≥3 consecutive beats originating in ventricles at >100 bpm. Wide QRS (>120ms), often regular. Sustained VT lasts >30 seconds or causes hemodynamic instability. NSVT: <30 seconds and self-terminating.', mechanism:{title:'VT Definition',steps:['≥3 ventricular beats','Rate >100 bpm','Wide QRS >120ms','Sustained: >30 sec or unstable','NSVT: <30 sec, self-limited']}},
+            { id:'q4_2', type:'Clinical', stem:'The most reliable ECG criterion to distinguish VT from SVT with aberrancy is:', options:[
+                {letter:'A',text:'Heart rate greater than 150 bpm',correct:false},
+                {letter:'B',text:'Patient age over 65 years',correct:false},
+                {letter:'C',text:'AV dissociation (P waves independent of QRS)',correct:true},
+                {letter:'D',text:'QRS width greater than 140 ms',correct:false}
+            ], explanation:'AV dissociation is most specific for VT - P waves march through independent of QRS. Other VT features: Fusion beats, capture beats, concordance in precordial leads, extreme axis deviation. When in doubt, treat as VT.', mechanism:{title:'VT vs SVT-Aberrancy',steps:['AV dissociation → VT','Fusion/capture beats → VT','Precordial concordance → VT','Extreme axis → VT','When uncertain → Treat as VT']}},
+            { id:'q4_3', type:'Clinical', vignette:'A patient with wide-complex tachycardia is awake with BP 70/40.', stem:'What is the treatment?', options:[
+                {letter:'A',text:'IV adenosine to diagnose the rhythm',correct:false},
+                {letter:'B',text:'IV amiodarone 150mg over 10 minutes',correct:false},
+                {letter:'C',text:'Vagal maneuvers then procainamide',correct:false},
+                {letter:'D',text:'Immediate synchronized cardioversion',correct:true}
+            ], explanation:'Unstable wide-complex tachycardia (hypotension, altered consciousness, chest pain): Immediate synchronized cardioversion. Don\'t delay for medications. If pulseless, this is cardiac arrest - defibrillate. Adenosine is contraindicated in irregular WCT (may be preexcited AFib).', mechanism:{title:'Unstable WCT',steps:['Hypotension, altered, chest pain','→ Immediate cardioversion','Don\'t delay for meds','If pulseless → Defibrillate','Treat as VT until proven otherwise']}},
+            { id:'q4_4', type:'Mechanism', stem:'Torsades de Pointes is associated with:', options:[
+                {letter:'A',text:'Shortened QT interval on ECG',correct:false},
+                {letter:'B',text:'Prolonged QT interval',correct:true},
+                {letter:'C',text:'Delta waves and short PR',correct:false},
+                {letter:'D',text:'Complete heart block',correct:false}
+            ], explanation:'Torsades: Polymorphic VT with twisting QRS axis, occurring in setting of prolonged QT. Causes of long QT: Drugs (antiarrhythmics, antipsychotics, antibiotics), electrolytes (hypoK, hypoMg), congenital. Treatment: IV magnesium, correct electrolytes, pacing.', mechanism:{title:'Torsades',steps:['Prolonged QT interval','→ Polymorphic VT','→ Twisting axis','Treatment: IV magnesium','Correct K/Mg, overdrive pace']}},
+            { id:'q4_5', type:'Clinical', stem:'An ICD (implantable cardioverter-defibrillator) is indicated for:', options:[
+                {letter:'A',text:'Frequent premature ventricular contractions',correct:false},
+                {letter:'B',text:'Asymptomatic Wolff-Parkinson-White',correct:false},
+                {letter:'C',text:'First-degree AV block with syncope',correct:false},
+                {letter:'D',text:'Paroxysmal atrial fibrillation',correct:false},
+                {letter:'E',text:'Survived sudden cardiac arrest from VT/VF',correct:true}
+            ], explanation:'ICD indications: Secondary prevention after survived VT/VF arrest. Primary prevention: EF ≤35% with NYHA II-III symptoms despite optimal therapy, or certain high-risk conditions (HOCM, long QT, Brugada, ARVC).', mechanism:{title:'ICD Indications',steps:['Secondary: Survived VT/VF arrest','Primary: EF ≤35% + symptoms','High-risk conditions:','HOCM, Long QT, Brugada','ARVC, cardiac sarcoidosis']}}
+        ]
+    };
+    let currentPhase = 1, answers = {};
+    function switchPhase(p) { currentPhase = p; document.querySelectorAll('.phase-btn').forEach((b,i) => b.classList.toggle('active', i+1===p)); render(); }
+    function render() {
+        document.getElementById('questionsPanel').innerHTML = data[currentPhase].map((q,i) => `
+            <div class="question-card" id="c-${q.id}">
+                <div class="question-header"><div style="display:flex;align-items:center"><span class="q-badge">${(currentPhase-1)*5+i+1}</span><span class="q-type">${q.type}</span></div>
+                <span class="q-status ${answers[q.id]?(answers[q.id].c?'correct':'incorrect'):''}">${answers[q.id]?(answers[q.id].c?'✓':'✗'):'○'}</span></div>
+                <div class="question-body">
+                    ${q.vignette?`<div class="vignette"><div class="vignette-label">Vignette</div>${q.vignette}</div>`:''}
+                    <div class="question-stem">${q.stem}</div>
+                    <div class="options">${q.options.map(o=>`<div class="option ${answers[q.id]?.s===o.letter?'selected':''} ${answers[q.id]?(o.correct?'correct':(answers[q.id].s===o.letter?'incorrect':'')):''}}" onclick="sel('${q.id}','${o.letter}')" ${answers[q.id]?'style="pointer-events:none"':''}><span class="option-letter">${o.letter}</span><span>${o.text}</span></div>`).join('')}</div>
+                    ${!answers[q.id]?`<button class="submit-btn" onclick="sub('${q.id}')" id="b-${q.id}" disabled>Submit</button>`:`<div class="explanation show"><h4>${answers[q.id].c?'✓ Correct!':'✗ Incorrect'}</h4><p>${q.explanation}</p><div class="mechanism-box"><div class="mechanism-title">🔬 ${q.mechanism.title}</div><div class="mechanism-pathway">${q.mechanism.steps.map((s,j)=>`<span class="pathway-step">${s}</span>${j<q.mechanism.steps.length-1?'<span class="pathway-arrow">→</span>':''}`).join('')}</div></div></div>`}
+                </div>
+            </div>`).join('');
+    }
+    function sel(id,l) { if(answers[id])return; document.querySelectorAll(`#c-${id} .option`).forEach(o=>o.classList.remove('selected')); event.currentTarget.classList.add('selected'); document.getElementById(`b-${id}`).disabled=false; document.getElementById(`b-${id}`).dataset.s=l; }
+    function sub(id) { const l=document.getElementById(`b-${id}`).dataset.s, q=data[currentPhase].find(x=>x.id===id); answers[id]={s:l,c:q.options.find(o=>o.letter===l).correct}; render(); }
+    render();
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx"
+         data-key-points="📚 Open-Access References, ⚠️ High-Risk Syncope Features, ✅ Low-Risk Features, 🗺️ Syncope Classification, 📊 Key Values to Remember, 📈 ECG Pattern Recognition, 📚 Open Access Resources, 🧮 Clinical Calculators, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 22-year-old faints while standing in line on a hot day. She felt lightheaded and nauseated beforehand, and witnesses describe a brief loss of consciousness with quick recovery. What is the MOST likely diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Classic vasovagal (neurocardiogenic) syncope: prodrome (lightheadedness, nausea, warmth, diaphoresis) + identifiable trigger (prolonged standing, heat, emotional stress) + rapid recovery. Most common cause of syncope in young adults." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Vasovagal syncope</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Brugada is a channelopathy causing sudden cardiac death. Syncope from Brugada occurs without warning prodrome, often during sleep or rest, not with typical vasovagal triggers." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Brugada syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="PE causes syncope through acute right heart failure, but would present with persistent tachycardia, dyspnea, and hemodynamic compromise — not a benign quick recovery." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Pulmonary embolism</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Seizures feature tonic-clonic activity, post-ictal confusion lasting minutes-hours, tongue biting, and incontinence. Vasovagal syncope has quick recovery without post-ictal state." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Seizure disorder</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Which historical feature is MOST concerning for cardiac syncope requiring urgent evaluation?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Syncope during prolonged standing with prodromal symptoms is classic vasovagal — low risk." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Syncope while standing in church</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Exertional syncope is a red flag for hypertrophic cardiomyopathy, aortic stenosis, arrhythmia, or coronary anomaly. Requires urgent cardiac workup including echo, ECG, and possibly stress testing. Leading cause of sudden cardiac death in young athletes." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Syncope during vigorous exercise</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Situational syncope from phlebotomy with vagal prodrome is benign vasovagal. Very common and low-risk." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Syncope after blood draw with prodromal nausea</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This suggests orthostatic hypotension — check orthostatic vitals. Usually medication-related or from volume depletion. Less concerning than exertional syncope." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Syncope upon standing from a seated position</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">An ECG in a patient with syncope shows a short PR interval and delta wave. What is the diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="First-degree AV block has a PROLONGED PR interval (&gt;200ms), not short. And no delta wave." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">First-degree AV block</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="WPW: short PR (&lt;120ms) + delta wave (slurred QRS upstroke) + widened QRS = accessory pathway (bundle of Kent). Risk of sudden death from rapid atrial fibrillation conducting via the accessory pathway. Avoid AV nodal blockers in AF+WPW." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Wolff-Parkinson-White syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="LBBB has a widened QRS with specific morphology but no delta wave or short PR interval." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">LBBB</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Long QT shows a prolonged QTc interval, not a short PR with delta wave." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Long QT syndrome</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">A 75-year-old with syncope has an ECG showing a PR interval of 340 ms with intermittent non-conducted P waves (Mobitz type II). What is the management?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Mobitz type II is high-risk for progression to complete heart block and should not be managed with observation alone." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Observation and repeat ECG in 1 week</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Mobitz type II (consistent PR with sudden dropped QRS) occurs below the AV node — high risk of progression to complete heart block. Permanent pacemaker is indicated. Unlike Mobitz I (Wenckebach), which is usually benign." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Permanent pacemaker implantation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Atropine may temporarily increase conduction through the AV node but does not address the infranodal block in Mobitz II. Pacing is required." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Atropine and discharge home</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Beta-blockers would WORSEN the conduction block. They are contraindicated in symptomatic bradycardia and high-degree AV block." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Start metoprolol to control rate</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which arrhythmia is the MOST common sustained arrhythmia requiring hospitalization in adults?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="VT is the most common cause of sudden cardiac death but is less common as a sustained hospitalization-requiring arrhythmia than AF." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Ventricular tachycardia</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Atrial fibrillation is the most common sustained arrhythmia, affecting 2-3% of the general population and up to 10% of those &gt;65. It&#x27;s the most common arrhythmia-related cause of hospitalization." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Atrial fibrillation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SVT (including AVNRT, AVRT) is common but usually paroxysmal and self-terminating. Less likely to require hospitalization than AF." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Supraventricular tachycardia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Atrial flutter is less common than AF, though they frequently coexist. AF is the most common sustained arrhythmia." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Atrial flutter</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">The San Francisco Syncope Rule identifies high-risk syncope patients. Which mnemonic captures the risk factors?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="CHESS rule: CHF history, Hct &lt;30%, abnormal ECG, Shortness of breath, Systolic BP &lt;90 at triage. Any positive criterion → higher risk → consider admission for monitoring." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">CHESS: CHF, Hematocrit <30%, ECG abnormality, Shortness of breath, Systolic BP <90</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="HEART score is for chest pain risk stratification (ACS), not syncope evaluation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">HEART: History, ECG, Age, Risk factors, Troponin</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CURB-65 is for pneumonia severity assessment, not syncope risk stratification." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">CURB-65: Confusion, Urea, Respiratory rate, BP, Age ≥65</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="ABCD2 score is for stroke risk after TIA, not syncope evaluation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">ABCD2: Age, BP, Clinical features, Duration, Diabetes</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">A patient with syncope has a structurally normal heart and normal ECG. Tilt table testing reproduces symptoms with bradycardia and hypotension. What is the mechanism?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Tilt table-induced vasovagal syncope: upright positioning triggers paradoxical vagal activation → bradycardia (cardioinhibitory) and/or vasodilation (vasodepressor) → hypotension → syncope. This confirms the neurocardiogenic mechanism." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Increased vagal tone causing cardioinhibitory response</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="AS causes exertional syncope from inability to augment cardiac output. The normal echo rules this out." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Fixed cardiac output from aortic stenosis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This would be detected on ECG (delta wave) and would cause tachycardia, not bradycardia during tilt testing." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Accessory pathway-mediated tachycardia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Autonomic neuropathy causes orthostatic hypotension (without compensatory tachycardia) but the specific cardioinhibitory response on tilt table points to vasovagal syncope." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Autonomic neuropathy from diabetes</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">A 70-year-old presents after syncope while shaving. He has a 3-second pause on cardiac monitoring. What is the MOST likely mechanism?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Syncope during shaving, head turning, or tight collar → carotid sinus stimulation → excessive vagal response → bradycardia/hypotension. A pause &gt;3 seconds or SBP drop &gt;50 mmHg on carotid sinus massage confirms the diagnosis. May require pacemaker." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Carotid sinus hypersensitivity</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="VBI can cause dizziness with head turning but produces focal neurological symptoms (vertigo, diplopia, dysarthria), not isolated syncope with a cardiac pause." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Vertebrobasilar insufficiency</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Subclavian steal causes arm claudication and vertebrobasilar symptoms with arm exercise, not syncope during shaving." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Subclavian steal syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="PAF causes irregular tachycardia. The 3-second pause during carotid stimulation (shaving) points specifically to carotid sinus hypersensitivity." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Paroxysmal atrial fibrillation</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=syncope-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/syncope-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

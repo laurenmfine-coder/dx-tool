@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toxicology: Deep Mechanisms - ReasonDx</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"><div class="obj-title">🎯 Phase 1 Objectives</div><ul class="obj-list"><li>Recognize major toxidromes</li><li>Identify by vital signs and pupils</li><li>Match toxidrome to drug class</li><li>Initial stabilization</li></ul></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div><div class="card-badge" id="phaseLabel">Phase 1</div></div>
+<div class="card-content"><div class="case-narrative" id="caseNarrative"><strong>Unknown patient</strong> brought in unresponsive with <em>pinpoint pupils</em>, bradypnea, and hypotension.</div>
+<div class="data-section"><div class="data-label">Key Findings</div><div class="data-grid" id="labsGrid"><div class="data-item"><span>Pupils</span><span class="critical">Pinpoint</span></div><div class="data-item"><span>RR</span><span class="critical">6</span></div><div class="data-item"><span>HR</span><span>55</span></div></div></div>
+<div class="clinical-pearl"><div class="pearl-title">💡 Mechanism Pearl</div><div class="pearl-text" id="pearlText">Toxidromes are constellations of signs that point to drug class. Pupils + vitals + mental status = diagnosis.</div></div>
+</div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Toxicology with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=tox01" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=toxicology,overdose,poisoning" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Toxicology Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 10+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Unknown patient</strong> with <em>pinpoint pupils</em>, bradypnea, hypotension.',labs:[['Pupils','Pinpoint','critical'],['RR','6','critical'],['HR','55','']],pearl:'Toxidromes: pupils + vitals + mental status = diagnosis.',objectives:['Recognize toxidromes','Identify by pupils/vitals','Match to drug class','Initial stabilization'],refs:[{t:'Toxidromes Review (NEJM 2015)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra1208077'},{t:'ACMT Guidelines',u:'https://www.acmt.net/'}]},
+2:{qs:[6,7,8,9,10],narrative:'Common overdoses: acetaminophen, salicylates, TCAs.',labs:[['APAP level','185','critical'],['pH','7.28','abnormal'],['AG','18','abnormal']],pearl:'APAP: NAC saves lives. Salicylates: alkalinize urine. TCAs: sodium bicarb for wide QRS.',objectives:['APAP toxicity and NAC','Salicylate toxicity','TCA cardiotoxicity','Timing of interventions'],refs:[{t:'APAP Toxicity (NEJM 2008)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra0707159'},{t:'Rumack-Matthew Nomogram',u:'https://pubmed.ncbi.nlm.nih.gov/1159263/'},{t:'Salicylate Poisoning (Lancet)',u:'https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(10)60257-3/fulltext'}]},
+3:{qs:[11,12,13,14,15],narrative:'Toxic alcohols: methanol, ethylene glycol.',labs:[['Osmolar gap','35','critical'],['AG','24','abnormal'],['pH','7.18','critical']],pearl:'Osmolar gap early, anion gap late. Fomepizole blocks ADH.',objectives:['Calculate osmolar gap','Understand toxic metabolites','Fomepizole mechanism','Hemodialysis indications'],refs:[{t:'Toxic Alcohols (NEJM 2018)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra1615295'},{t:'EXTRIP Workgroup Guidelines',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4532604/'},{t:'Fomepizole vs Ethanol (Ann Emerg Med)',u:'https://pubmed.ncbi.nlm.nih.gov/19556028/'}]},
+4:{qs:[16,17,18,19,20],narrative:'Antidotes and specific treatments.',labs:[],pearl:'Every major toxin has a specific antidote. Know mechanism = remember antidote.',objectives:['Match toxin to antidote','Understand antidote mechanisms','Decontamination principles','When to dialyze'],refs:[{t:'Antidotes Review (Clin Toxicol)',u:'https://www.tandfonline.com/doi/full/10.3109/15563650.2015.1052498'},{t:'Activated Charcoal Position Statement',u:'https://pubmed.ncbi.nlm.nih.gov/15638639/'},{t:'Serotonin Syndrome (NEJM)',u:'https://www.nejm.org/doi/full/10.1056/NEJMra041867'}]}
+};
+
+var Qs={
+1:{type:'Opioid Toxidrome',isNBME:true,difficulty:'easy',domains:['mechanism'],tags:['Step2'],
+vig:{demo:'Found unresponsive',exam:'Pinpoint pupils, RR 6, BP 90/60'},
+stem:'What toxidrome is characterized by pinpoint pupils, respiratory depression, and decreased consciousness?',
+opts:[['a','Opioid toxidrome - mu receptor agonism causes miosis, CNS/respiratory depression; reverse with naloxone'],['b','Anticholinergic'],['c','Sympathomimetic'],['d','Cholinergic']],
+exp:'<strong>Opioid toxidrome:</strong> Classic triad = miosis (pinpoint pupils) + respiratory depression + CNS depression. Mu receptor stimulation in Edinger-Westphal nucleus → miosis. Respiratory center depression → bradypnea → hypoxia → death. Treat with naloxone.',
+kp:'Naloxone: 0.4-2mg IV/IM/IN, repeat q2-3min. Start low in opioid-dependent patients to avoid withdrawal. Short half-life - may need repeated dosing or infusion.',
+dd:{mechanism:{title:'Opioid Toxidrome',content:'<h4>Classic Triad</h4><ul><li>Pinpoint pupils (miosis)</li><li>Respiratory depression</li><li>CNS depression</li></ul><h4>Mechanism</h4><div class="mech-pathway"><span class="mech-step">Mu receptor agonism</span><span class="mech-arrow">→</span><span class="mech-step">↓ cAMP in neurons</span><span class="mech-arrow">→</span><span class="mech-step">CNS/respiratory depression</span></div><h4>Naloxone</h4><ul><li>Competitive mu antagonist</li><li>Onset: 1-2 min IV</li><li>Duration: 30-90 min (shorter than most opioids)</li><li>May need repeated doses or infusion</li></ul><h4>Exceptions</h4><ul><li>Meperidine: may cause mydriasis, seizures</li><li>Tramadol: seizures</li><li>Methadone: very long-acting</li></ul>',bw:['Pinpoint pupils','Respiratory depression','Naloxone reverses','Short naloxone duration']}},
+dist:{b:'Would have mydriasis, tachycardia',c:'Would have mydriasis, HTN, tachycardia',d:'Would have SLUDGE'},related:[2,3]},
+
+2:{type:'Anticholinergic Toxidrome',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'Elderly patient confused',exam:'Mydriasis, dry skin, tachycardia, urinary retention, fever'},
+stem:'What toxidrome presents with "hot as a hare, blind as a bat, dry as a bone, red as a beet, mad as a hatter"?',
+opts:[['a','Anticholinergic - muscarinic blockade causes mydriasis, dry skin/mucosa, tachycardia, urinary retention, hyperthermia, delirium'],['b','Opioid'],['c','Cholinergic'],['d','Sedative-hypnotic']],
+exp:'<strong>Anticholinergic toxidrome:</strong> Block muscarinic receptors → opposite of SLUDGE. Mnemonic: Hot (hyperthermia - no sweating), Blind (mydriasis, cycloplegia), Dry (no secretions), Red (flushing), Mad (delirium/hallucinations). Causes: antihistamines, TCAs, atropine, scopolamine, jimson weed.',
+kp:'Physostigmine (acetylcholinesterase inhibitor) is antidote but use cautiously - can cause seizures, bradycardia. Reserve for severe agitation/delirium unresponsive to benzos.',
+dd:{mechanism:{title:'Anticholinergic Toxidrome',content:'<h4>Mnemonic</h4><ul><li><strong>Hot</strong> as a hare (hyperthermia)</li><li><strong>Blind</strong> as a bat (mydriasis)</li><li><strong>Dry</strong> as a bone (anhidrosis, dry mucosa)</li><li><strong>Red</strong> as a beet (flushing)</li><li><strong>Mad</strong> as a hatter (delirium)</li></ul><h4>Additional Signs</h4><ul><li>Tachycardia</li><li>Urinary retention</li><li>Decreased bowel sounds</li><li>Picking/mumbling behavior</li></ul><h4>Common Causes</h4><ul><li>Antihistamines (diphenhydramine)</li><li>TCAs</li><li>Antipsychotics</li><li>Atropine/scopolamine</li><li>Jimson weed (Datura)</li></ul><h4>Treatment</h4><ul><li>Supportive (cooling, benzos for agitation)</li><li>Physostigmine 1-2mg IV slowly if severe</li></ul>',bw:['Hot Blind Dry Red Mad','Mydriasis + tachycardia','No sweating','Physostigmine antidote']}},
+dist:{b:'Would have miosis',c:'Would have SLUDGE and miosis',d:'Would have normal pupils, hypothermia'},related:[1,3]},
+
+3:{type:'Cholinergic Toxidrome',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'Farm worker found seizing',exam:'Miosis, salivation, lacrimation, urination, diarrhea, bradycardia'},
+stem:'What toxidrome presents with SLUDGE/DUMBELS and is caused by organophosphates?',
+opts:[['a','Cholinergic - acetylcholinesterase inhibition → excess ACh at muscarinic and nicotinic receptors; treat with atropine + pralidoxime'],['b','Anticholinergic'],['c','Sympathomimetic'],['d','Opioid']],
+exp:'<strong>Cholinergic toxidrome:</strong> Organophosphates/carbamates inhibit acetylcholinesterase → ACh accumulates. SLUDGE: Salivation, Lacrimation, Urination, Defecation, GI upset, Emesis. DUMBELS adds: Diaphoresis, Miosis, Bronchospasm/Bradycardia. Nicotinic: muscle fasciculations, weakness, paralysis.',
+kp:'Treatment: Atropine (blocks muscarinic effects, use large doses) + Pralidoxime (regenerates AChE if given before "aging"). Pralidoxime must be given early.',
+dd:{mechanism:{title:'Cholinergic Toxidrome',content:'<h4>Mnemonics</h4><p><strong>SLUDGE:</strong> Salivation, Lacrimation, Urination, Defecation, GI distress, Emesis</p><p><strong>DUMBELS:</strong> Diarrhea, Urination, Miosis, Bronchospasm/Bradycardia, Emesis, Lacrimation, Salivation</p><h4>Mechanism</h4><div class="mech-pathway"><span class="mech-step">Organophosphate</span><span class="mech-arrow">→</span><span class="mech-step">Inhibits AChE</span><span class="mech-arrow">→</span><span class="mech-step">↑ ACh everywhere</span><span class="mech-arrow">→</span><span class="mech-step">Muscarinic + Nicotinic overload</span></div><h4>Nicotinic Effects</h4><ul><li>Muscle fasciculations</li><li>Weakness → paralysis</li><li>Tachycardia (can override bradycardia)</li></ul><h4>Treatment</h4><ul><li><strong>Atropine:</strong> Large doses (2mg, double q5min until secretions dry)</li><li><strong>Pralidoxime:</strong> 1-2g IV, reactivates AChE (must give before "aging")</li><li>Benzos for seizures</li><li>Decontamination</li></ul>',bw:['SLUDGE/DUMBELS','Miosis','Atropine + pralidoxime','Pralidoxime before aging']}},
+dist:{b:'Opposite effects',c:'No SLUDGE',d:'No SLUDGE'},related:[1,2]},
+
+4:{type:'Sympathomimetic Toxidrome',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+vig:{demo:'23M agitated at party',exam:'Mydriasis, tachycardia, hypertension, hyperthermia, diaphoresis'},
+stem:'What toxidrome presents with mydriasis, tachycardia, hypertension, hyperthermia, and agitation?',
+opts:[['a','Sympathomimetic (cocaine, amphetamines, MDMA) - catecholamine excess; treat with benzos for agitation, cooling for hyperthermia'],['b','Opioid'],['c','Anticholinergic'],['d','Sedative']],
+exp:'<strong>Sympathomimetic toxidrome:</strong> Catecholamine excess from cocaine, amphetamines, MDMA, bath salts. Signs: mydriasis, tachycardia, hypertension, hyperthermia, DIAPHORESIS (distinguishes from anticholinergic), agitation. Complications: seizures, arrhythmias, MI, stroke, rhabdo.',
+kp:'Key distinction from anticholinergic: sympathomimetics have DIAPHORESIS (sweating), anticholinergics are DRY. Treat with benzos (first-line for everything), cooling. Avoid beta-blockers (unopposed alpha).',
+dd:{mechanism:{title:'Sympathomimetic Toxidrome',content:'<h4>Signs</h4><ul><li>Mydriasis</li><li>Tachycardia, hypertension</li><li>Hyperthermia</li><li>DIAPHORESIS (sweating!)</li><li>Agitation, psychosis</li></ul><h4>Causes</h4><ul><li>Cocaine</li><li>Amphetamines, methamphetamine</li><li>MDMA (ecstasy)</li><li>Synthetic cathinones (bath salts)</li></ul><h4>Complications</h4><ul><li>Seizures</li><li>Arrhythmias</li><li>MI, stroke</li><li>Rhabdomyolysis</li><li>Hyperthermia</li></ul><h4>Treatment</h4><ul><li>Benzodiazepines (first-line for all symptoms)</li><li>Cooling for hyperthermia</li><li>Avoid beta-blockers (unopposed alpha → worsens HTN)</li></ul><h4>Anticholinergic vs Sympathomimetic</h4><table><tr><th>Feature</th><th>Sympathomimetic</th><th>Anticholinergic</th></tr><tr><td>Skin</td><td>Diaphoretic</td><td>Dry</td></tr><tr><td>Bowel sounds</td><td>Normal/↑</td><td>↓</td></tr></table>',bw:['Diaphoresis = sympathomimetic','Dry = anticholinergic','Benzos first-line','No beta-blockers']}},
+dist:{b:'Would be sedated, miosis',c:'Would be dry, no sweating',d:'Would be sedated'},related:[2]},
+
+5:{type:'Sedative-Hypnotic Toxidrome',isNBME:false,difficulty:'easy',domains:['mechanism'],tags:['Step2'],
+ctx:'Recognizing sedative overdose.',
+stem:'What characterizes the sedative-hypnotic toxidrome?',
+opts:[['a','CNS depression, respiratory depression, normal pupils, hypothermia; caused by benzos, barbiturates, alcohols - flumazenil reverses benzos'],['b','Mydriasis and tachycardia'],['c','Miosis and bradycardia'],['d','Hyperthermia']],
+exp:'<strong>Sedative-hypnotic toxidrome:</strong> CNS depression, respiratory depression, hypothermia, normal/small pupils (not pinpoint like opioids). Causes: benzodiazepines, barbiturates, alcohols, GHB, Z-drugs. Flumazenil reverses benzos but risk of seizures in chronic users.',
+kp:'Flumazenil: Use cautiously - can precipitate seizures in chronic benzo users or mixed OD with seizure-causing drugs (TCAs). Generally avoid unless pure benzo OD in benzo-naive patient.',
+dd:{mechanism:{title:'Sedative-Hypnotic',content:'<h4>Features</h4><ul><li>CNS depression</li><li>Respiratory depression</li><li>Hypothermia</li><li>Normal to small pupils (not pinpoint)</li><li>Hyporeflexia</li></ul><h4>Causes</h4><ul><li>Benzodiazepines</li><li>Barbiturates</li><li>Alcohols</li><li>GHB</li><li>Z-drugs (zolpidem)</li></ul><h4>Flumazenil</h4><ul><li>Competitive GABA-A antagonist</li><li>Reverses benzos</li><li>Risk: seizures in dependent patients</li><li>Short half-life</li></ul><h4>Barbiturate OD</h4><ul><li>No specific antidote</li><li>Supportive care</li><li>Alkalinize urine for phenobarbital</li></ul>',bw:['Normal pupils','Hypothermia','Flumazenil for benzos cautiously','No barbiturate antidote']}},
+dist:{b:'Thats sympathomimetic',c:'Thats opioid',d:'Hypothermia in sedative OD'},related:[1]},
+
+6:{type:'Acetaminophen Toxicity',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'22F intentional ingestion',hpi:'Took bottle of Tylenol 6 hours ago',labs:{APAP:'185 mcg/mL','4h level':'Above treatment line'}},
+stem:'What is the mechanism of acetaminophen hepatotoxicity?',
+opts:[['a','NAPQI (toxic metabolite via CYP2E1) accumulates when glutathione depleted → hepatocyte necrosis; NAC replenishes glutathione'],['b','Direct APAP toxicity'],['c','Allergic reaction'],['d','Mitochondrial toxicity']],
+exp:'<strong>APAP toxicity:</strong> Therapeutic doses: APAP → glucuronidation/sulfation (90%) + CYP2E1 → NAPQI (10%) → glutathione conjugation → safe metabolite. Overdose: conjugation saturated, more NAPQI produced, glutathione depleted → NAPQI binds hepatocyte proteins → centrilobular necrosis.',
+kp:'Rumack-Matthew nomogram: plot level vs time (must be 4h+ post-ingestion). NAC most effective <8h but give up to 24h+. IV or oral NAC equally effective.',
+dd:{mechanism:{title:'APAP Toxicity',content:'<h4>Normal Metabolism</h4><div class="mech-pathway"><span class="mech-step">APAP</span><span class="mech-arrow">→</span><span class="mech-step">90% glucuronidation/sulfation</span><span class="mech-arrow">→</span><span class="mech-step">Safe excretion</span></div><div class="mech-pathway"><span class="mech-step">APAP</span><span class="mech-arrow">→</span><span class="mech-step">10% CYP2E1</span><span class="mech-arrow">→</span><span class="mech-step">NAPQI</span><span class="mech-arrow">→</span><span class="mech-step">Glutathione conjugation</span><span class="mech-arrow">→</span><span class="mech-step">Safe</span></div><h4>Overdose</h4><div class="mech-pathway"><span class="mech-step">↑ APAP</span><span class="mech-arrow">→</span><span class="mech-step">Conjugation saturated</span><span class="mech-arrow">→</span><span class="mech-step">↑ NAPQI</span><span class="mech-arrow">→</span><span class="mech-step">Glutathione depleted</span><span class="mech-arrow">→</span><span class="mech-step">NAPQI binds proteins</span><span class="mech-arrow">→</span><span class="mech-step">Hepatocyte death</span></div><h4>Clinical Stages</h4><table><tr><th>Stage</th><th>Time</th><th>Features</th></tr><tr><td>I</td><td>0-24h</td><td>Asymptomatic or N/V</td></tr><tr><td>II</td><td>24-72h</td><td>RUQ pain, ↑ AST/ALT</td></tr><tr><td>III</td><td>72-96h</td><td>Peak hepatotoxicity, possible ALF</td></tr><tr><td>IV</td><td>>96h</td><td>Recovery or death</td></tr></table><h4>NAC</h4><ul><li>Replenishes glutathione</li><li>Most effective <8h post-ingestion</li><li>Still beneficial up to 24h+</li><li>IV: 150mg/kg load → 50mg/kg over 4h → 100mg/kg over 16h</li></ul>',bw:['NAPQI is toxic metabolite','Glutathione depleted','NAC replenishes glutathione','Nomogram at 4h+']}},
+dist:{b:'NAPQI is the toxin',c:'Not allergic',d:'Primarily hepatotoxic'},related:[7]},
+
+7:{type:'Salicylate Toxicity',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'65M confused',hpi:'Chronic aspirin use for arthritis, now tinnitus and altered mental status',labs:{pH:'7.48→7.32',AG:'22',Salicylate:'65 mg/dL'}},
+stem:'What is the classic acid-base disturbance in salicylate toxicity?',
+opts:[['a','Mixed respiratory alkalosis (direct respiratory center stimulation) + anion gap metabolic acidosis (uncoupled oxidative phosphorylation); alkalinize urine to trap salicylate'],['b','Pure metabolic acidosis'],['c','Pure respiratory alkalosis'],['d','Metabolic alkalosis']],
+exp:'<strong>Salicylate toxicity:</strong> Early: direct respiratory center stimulation → hyperventilation → respiratory alkalosis. Late: uncouples oxidative phosphorylation → lactate, ketones → AGMA. Classic = mixed resp alkalosis + AGMA. Trapping: alkalinize urine (NaHCO3) to ionize salicylate (weak acid) → cant reabsorb → excreted.',
+kp:'Salicylate level >90-100 mg/dL or refractory acidosis → hemodialysis. Tinnitus is early sign. Altered mental status, pulmonary edema, seizures are severe.',
+dd:{mechanism:{title:'Salicylate Toxicity',content:'<h4>Mechanism</h4><div class="mech-pathway"><span class="mech-step">Salicylate</span><span class="mech-arrow">→</span><span class="mech-step">Stimulates respiratory center</span><span class="mech-arrow">→</span><span class="mech-step">Hyperventilation</span><span class="mech-arrow">→</span><span class="mech-step">Respiratory alkalosis</span></div><div class="mech-pathway"><span class="mech-step">Salicylate</span><span class="mech-arrow">→</span><span class="mech-step">Uncouples oxidative phosphorylation</span><span class="mech-arrow">→</span><span class="mech-step">↑ Lactate, ketones</span><span class="mech-arrow">→</span><span class="mech-step">AGMA</span></div><h4>Clinical Features</h4><ul><li>Tinnitus (early)</li><li>Nausea, vomiting</li><li>Hyperthermia</li><li>Altered mental status</li><li>Pulmonary edema (non-cardiogenic)</li><li>Seizures</li></ul><h4>Treatment</h4><ul><li><strong>Alkalinize urine:</strong> NaHCO3 → pH 7.5-8 → ionizes salicylate → traps in urine</li><li>IV fluids, glucose</li><li>Hemodialysis if: level >90-100, AMS, pulmonary edema, refractory acidosis, renal failure</li></ul><h4>Do NOT Intubate Unless Necessary</h4><p>Loss of hyperventilation → rapid acidosis → more salicylate crosses into brain</p>',bw:['Resp alkalosis + AGMA','Tinnitus early sign','Alkalinize urine','Avoid intubation if possible']}},
+dist:{b:'Has resp alkalosis component',c:'Has AGMA component',d:'Not alkalosis'},related:[6]},
+
+8:{type:'TCA Toxicity',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'35F found unresponsive',hpi:'Empty amitriptyline bottle',labs:{ECG:'Wide QRS (140ms), right axis'}},
+stem:'What causes cardiotoxicity in TCA overdose and how is it treated?',
+opts:[['a','Na channel blockade → QRS widening, arrhythmias; treat with sodium bicarbonate (overcomes Na channel block + alkalinization reduces free drug)'],['b','K channel block'],['c','Ca channel block'],['d','Pure anticholinergic']],
+exp:'<strong>TCA toxicity:</strong> Multiple mechanisms: (1) Na channel block → QRS widening, ventricular arrhythmias (VT/VF). (2) Anticholinergic → tachycardia, delirium, seizures. (3) Alpha block → hypotension. (4) GABA antagonism → seizures. QRS >100ms predicts seizures, >160ms predicts arrhythmias.',
+kp:'Sodium bicarbonate: (1) Na load overcomes Na channel block, (2) Alkalinization increases protein binding (less free drug). Target pH 7.50-7.55. Give if QRS >100ms.',
+dd:{mechanism:{title:'TCA Toxicity',content:'<h4>Mechanisms of Toxicity</h4><table><tr><th>Effect</th><th>Mechanism</th><th>Result</th></tr><tr><td>Na channel block</td><td>Slows phase 0 depolarization</td><td>Wide QRS, arrhythmias</td></tr><tr><td>Anticholinergic</td><td>Muscarinic block</td><td>Tachycardia, delirium, hyperthermia</td></tr><tr><td>Alpha-1 block</td><td>Vasodilation</td><td>Hypotension</td></tr><tr><td>K channel block</td><td>Delays repolarization</td><td>Prolonged QT</td></tr><tr><td>GABA antagonism</td><td>Lowers seizure threshold</td><td>Seizures</td></tr></table><h4>ECG Findings</h4><ul><li>Sinus tachycardia</li><li>Wide QRS (>100ms concerning)</li><li>Right axis deviation</li><li>Tall R in aVR (>3mm)</li><li>Prolonged QT</li></ul><h4>Sodium Bicarbonate</h4><div class="mech-pathway"><span class="mech-step">Na+ load</span><span class="mech-arrow">→</span><span class="mech-step">Overcomes Na channel block</span></div><div class="mech-pathway"><span class="mech-step">Alkalinization</span><span class="mech-arrow">→</span><span class="mech-step">↑ Protein binding</span><span class="mech-arrow">→</span><span class="mech-step">↓ Free drug</span></div><p>Give 1-2 mEq/kg bolus, target pH 7.50-7.55</p>',bw:['Na channel block → wide QRS','QRS >100ms = seizure risk','NaHCO3 for wide QRS','R in aVR >3mm']}},
+dist:{b:'Na channel is primary',c:'Na channel primary',d:'Multiple mechanisms'},related:[6,7]},
+
+9:{type:'Beta-Blocker Toxicity',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+ctx:'Cardiovascular drug overdose.',
+stem:'What is the treatment for severe beta-blocker overdose with refractory hypotension?',
+opts:[['a','Glucagon (bypasses beta receptor, activates adenylyl cyclase directly) + high-dose insulin/glucose; atropine for bradycardia; vasopressors'],['b','More beta-blockers'],['c','Calcium alone'],['d','Flumazenil']],
+exp:'<strong>Beta-blocker toxicity:</strong> Bradycardia, hypotension, heart block, hypoglycemia (blocks glycogenolysis), bronchospasm. Propranolol also has Na channel blockade (wide QRS). Treatment: atropine (often ineffective), glucagon (first-line, works independent of beta receptor), high-dose insulin (inotropic), vasopressors, lipid emulsion for lipophilic agents.',
+kp:'Glucagon: 3-5mg IV bolus, then 2-5mg/hr infusion. Works by directly activating adenylyl cyclase → ↑cAMP independent of beta receptor. May cause vomiting.',
+dd:{mechanism:{title:'Beta-Blocker Toxicity',content:'<h4>Effects</h4><ul><li>Bradycardia, heart blocks</li><li>Hypotension, cardiogenic shock</li><li>Hypoglycemia</li><li>Bronchospasm</li><li>CNS depression (lipophilic agents)</li></ul><h4>Glucagon Mechanism</h4><div class="mech-pathway"><span class="mech-step">Glucagon receptor</span><span class="mech-arrow">→</span><span class="mech-step">Gs protein</span><span class="mech-arrow">→</span><span class="mech-step">Adenylyl cyclase</span><span class="mech-arrow">→</span><span class="mech-step">↑ cAMP</span><span class="mech-arrow">→</span><span class="mech-step">↑ Inotropy/chronotropy</span></div><p>Bypasses blocked beta receptors!</p><h4>Treatment Algorithm</h4><ol><li>Atropine (often ineffective)</li><li>Glucagon 3-5mg IV bolus</li><li>High-dose insulin + glucose</li><li>Vasopressors (epi, norepi)</li><li>Lipid emulsion (lipophilic agents)</li><li>Consider pacing, ECMO</li></ol>',bw:['Glucagon bypasses beta receptor','High-dose insulin','Lipid emulsion for lipophilic','Propranolol → wide QRS']}},
+dist:{b:'Would worsen',c:'More effective for CCB',d:'For benzos'},related:[10]},
+
+10:{type:'Calcium Channel Blocker Toxicity',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+ctx:'CCB overdose.',
+stem:'How does CCB overdose differ from beta-blocker overdose in presentation and treatment?',
+opts:[['a','CCB causes hyperglycemia (blocks insulin release), more hypotension; treat with calcium, high-dose insulin (first-line), vasopressors, lipid emulsion'],['b','Identical presentation'],['c','CCB causes hypoglycemia'],['d','Glucagon is first-line for CCB']],
+exp:'<strong>CCB vs BB toxicity:</strong> Both cause bradycardia/hypotension. Key difference: CCB → HYPERglycemia (blocks pancreatic Ca channels needed for insulin release), BB → HYPOglycemia. CCB treatment: calcium (partially effective), HIGH-DOSE IMedical SchoolLIN (first-line, improves inotropy), vasopressors, lipid emulsion.',
+kp:'High-dose insulin for CCB: 1 unit/kg bolus then 0.5-1 unit/kg/hr infusion. Give with dextrose to prevent hypoglycemia. Works by improving cardiac myocyte glucose uptake.',
+dd:{mechanism:{title:'CCB vs BB Toxicity',content:'<h4>Comparison</h4><table><tr><th>Feature</th><th>CCB</th><th>BB</th></tr><tr><td>Glucose</td><td>Hyperglycemia</td><td>Hypoglycemia</td></tr><tr><td>First-line</td><td>High-dose insulin</td><td>Glucagon</td></tr><tr><td>Calcium</td><td>Helpful</td><td>Less helpful</td></tr></table><h4>Why Hyperglycemia in CCB?</h4><div class="mech-pathway"><span class="mech-step">CCB blocks pancreatic Ca channels</span><span class="mech-arrow">→</span><span class="mech-step">↓ Insulin release</span><span class="mech-arrow">→</span><span class="mech-step">Hyperglycemia</span></div><h4>High-Dose Insulin Mechanism</h4><ul><li>Improves cardiac myocyte glucose uptake</li><li>Positive inotropy</li><li>Dose: 1 unit/kg bolus, 0.5-1 unit/kg/hr</li><li>Give dextrose concurrently</li></ul>',bw:['CCB = hyperglycemia','BB = hypoglycemia','High-dose insulin for CCB','Glucagon for BB']}},
+dist:{b:'Key glucose difference',c:'CCB causes HYPERglycemia',d:'Glucagon for BB'},related:[9]},
+
+11:{type:'Toxic Alcohol Overview',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'45M found altered',labs:{Osmolar_gap:'32',AG:'12',pH:'7.38'}},
+stem:'A patient has elevated osmolar gap but normal anion gap. What does this suggest?',
+opts:[['a','Early toxic alcohol ingestion - parent compound (methanol/ethylene glycol) raises osmolar gap; later metabolites cause anion gap acidosis'],['b','Late toxic alcohol'],['c','Ethanol only'],['d','DKA']],
+exp:'<strong>Toxic alcohol timeline:</strong> EARLY: Parent alcohol raises osmolar gap, AG normal. LATE: ADH metabolizes parent → toxic acids (formic, glycolic, oxalic) → AGMA, osmolar gap normalizes. Osmolar gap = measured - calculated osm. >10 suggests unmeasured osmoles.',
+kp:'Formula: Calculated osm = 2(Na) + glucose/18 + BUN/2.8 + EtOH/4.6. If osmolar gap high and AG low → early ingestion. If AG high and osmolar gap normalizing → late.',
+dd:{mechanism:{title:'Toxic Alcohol Gaps',content:'<h4>Timeline</h4><table><tr><th>Phase</th><th>Osmolar Gap</th><th>Anion Gap</th></tr><tr><td>Early (0-6h)</td><td>HIGH (parent alcohol)</td><td>Normal</td></tr><tr><td>Middle</td><td>Decreasing</td><td>Increasing</td></tr><tr><td>Late (12-24h)</td><td>Normal</td><td>HIGH (metabolites)</td></tr></table><h4>Osmolar Gap Calculation</h4><div class="formula-box">Calculated Osm = 2(Na) + Glucose/18 + BUN/2.8<br>Add EtOH/4.6 if drinking<br><br>Osmolar Gap = Measured - Calculated<br>Normal <10</div><h4>Which Toxic Alcohol?</h4><ul><li><strong>Methanol:</strong> Vision changes, retinal toxicity</li><li><strong>Ethylene glycol:</strong> Calcium oxalate crystals, renal failure</li><li><strong>Isopropanol:</strong> Ketones WITHOUT acidosis</li></ul>',bw:['Early = high osm gap, normal AG','Late = high AG, normal osm gap','Methanol → vision','Ethylene glycol → crystals']}},
+dist:{b:'Late would have high AG',c:'Ethanol alone doesnt cause AG',d:'DKA has high AG'},related:[12,13]},
+
+12:{type:'Methanol Toxicity',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'Patient from Q11 now with vision changes'},
+stem:'What is the toxic metabolite of methanol and how does it cause harm?',
+opts:[['a','Formic acid (via ADH → formaldehyde → formic acid) → retinal toxicity, optic nerve damage, blindness; treat with fomepizole (ADH inhibitor) ± dialysis'],['b','Acetaldehyde'],['c','Glycolic acid'],['d','Acetone']],
+exp:'<strong>Methanol toxicity:</strong> Methanol → (ADH) → formaldehyde → (ALDH) → formic acid. Formic acid inhibits cytochrome oxidase → cellular hypoxia, especially retina/optic nerve. Classic: "snowfield vision," blindness. Treatment: fomepizole (blocks ADH), folate (enhances formate metabolism), dialysis if severe.',
+kp:'Fomepizole inhibits ADH, preventing metabolism to toxic metabolites. Give folate (cofactor for formate breakdown). Dialysis if: pH <7.3, visual changes, renal failure, level >50 mg/dL.',
+dd:{mechanism:{title:'Methanol Toxicity',content:'<h4>Metabolism</h4><div class="mech-pathway"><span class="mech-step">Methanol</span><span class="mech-arrow">ADH→</span><span class="mech-step">Formaldehyde</span><span class="mech-arrow">ALDH→</span><span class="mech-step">Formic acid</span><span class="mech-arrow">→</span><span class="mech-step">TOXIC</span></div><h4>Formic Acid Effects</h4><ul><li>Inhibits cytochrome oxidase</li><li>Retinal toxicity → blindness</li><li>Optic disc hyperemia</li><li>Basal ganglia hemorrhage</li></ul><h4>Clinical Features</h4><ul><li>"Snowfield" or blurred vision</li><li>Central scotoma</li><li>Headache, confusion</li><li>AGMA</li></ul><h4>Treatment</h4><ul><li><strong>Fomepizole:</strong> 15mg/kg load, then 10mg/kg q12h</li><li>Folate/folic acid (enhances formate metabolism)</li><li>Hemodialysis if severe</li></ul>',bw:['Formic acid is toxic','Vision changes/blindness','Fomepizole blocks ADH','Give folate']}},
+dist:{b:'Thats ethanol metabolite',c:'Thats ethylene glycol',d:'Thats isopropanol'},related:[11,13]},
+
+13:{type:'Ethylene Glycol Toxicity',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'Different patient with AKI'},
+stem:'What are the toxic metabolites of ethylene glycol?',
+opts:[['a','Glycolic acid (causes AGMA) and oxalic acid (forms calcium oxalate crystals → renal tubular damage, hypocalcemia); treat with fomepizole, thiamine/pyridoxine, dialysis'],['b','Formic acid'],['c','Acetaldehyde'],['d','Formaldehyde']],
+exp:'<strong>Ethylene glycol toxicity:</strong> Ethylene glycol → glycoaldehyde → glycolic acid (causes most of acidosis) → glyoxylic acid → oxalic acid → calcium oxalate crystals (renal tubular precipitation, hypocalcemia). No vision changes (unlike methanol).',
+kp:'Classic: AGMA + AKI + calcium oxalate crystals on UA (envelope-shaped). Give thiamine and pyridoxine (shunt metabolism away from oxalate). Fomepizole + dialysis if severe.',
+dd:{mechanism:{title:'Ethylene Glycol Toxicity',content:'<h4>Metabolism</h4><div class="mech-pathway"><span class="mech-step">Ethylene glycol</span><span class="mech-arrow">ADH→</span><span class="mech-step">Glycoaldehyde</span><span class="mech-arrow">→</span><span class="mech-step">Glycolic acid</span><span class="mech-arrow">→</span><span class="mech-step">Oxalic acid</span></div><h4>Oxalic Acid Effects</h4><ul><li>Binds calcium → hypocalcemia</li><li>Calcium oxalate crystals → renal tubules</li><li>AKI (often oliguric)</li></ul><h4>Clinical Stages</h4><ol><li><strong>0-12h:</strong> CNS depression (appears drunk)</li><li><strong>12-24h:</strong> Cardiopulmonary (metabolic acidosis)</li><li><strong>24-72h:</strong> Renal failure</li></ol><h4>Treatment</h4><ul><li>Fomepizole (same as methanol)</li><li>Thiamine + pyridoxine (cofactors shunting away from oxalate)</li><li>Hemodialysis if severe</li><li>Calcium for symptomatic hypocalcemia</li></ul><h4>Methanol vs EG</h4><table><tr><th></th><th>Methanol</th><th>Ethylene Glycol</th></tr><tr><td>Vision</td><td>Affected</td><td>Normal</td></tr><tr><td>Renal</td><td>Less common</td><td>Common (crystals)</td></tr><tr><td>Cofactor</td><td>Folate</td><td>Thiamine/pyridoxine</td></tr></table>',bw:['Glycolic + oxalic acid','Calcium oxalate crystals','Hypocalcemia','Thiamine/pyridoxine cofactors']}},
+dist:{b:'Thats methanol',c:'Thats ethanol',d:'Thats methanol intermediate'},related:[11,12]},
+
+14:{type:'Isopropanol Toxicity',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+ctx:'Third toxic alcohol.',
+stem:'How does isopropanol toxicity differ from methanol and ethylene glycol?',
+opts:[['a','Isopropanol → acetone (not acid) → ketosis WITHOUT acidosis; no AGMA; osmolar gap elevated; treatment is supportive'],['b','Causes severe acidosis'],['c','Causes vision changes'],['d','Causes renal failure']],
+exp:'<strong>Isopropanol:</strong> Metabolized by ADH to acetone (a ketone, not an acid). Causes ketosis without acidosis (acetone is not an acid). High osmolar gap (parent alcohol) but NORMAL anion gap. No specific antidote needed - supportive care, dialysis only if hemodynamically unstable.',
+kp:'Key distinguisher: ketones positive but no acidosis. Fruity breath from acetone. Most common toxic alcohol ingestion (rubbing alcohol).',
+dd:{mechanism:{title:'Isopropanol',content:'<h4>Metabolism</h4><div class="mech-pathway"><span class="mech-step">Isopropanol</span><span class="mech-arrow">ADH→</span><span class="mech-step">Acetone</span><span class="mech-arrow">→</span><span class="mech-step">Excreted (lungs/kidneys)</span></div><h4>Key Point</h4><p>Acetone is a KETONE, not an ACID → ketosis WITHOUT acidosis</p><h4>Lab Findings</h4><ul><li>Elevated osmolar gap</li><li>NORMAL anion gap</li><li>Positive ketones</li><li>Normal or mildly low pH</li></ul><h4>Clinical Features</h4><ul><li>CNS depression (more potent than ethanol)</li><li>Fruity breath (acetone)</li><li>Hypotension, GI irritation</li><li>NO vision changes or renal failure</li></ul><h4>Treatment</h4><ul><li>Supportive care</li><li>NO fomepizole needed (metabolite not toxic)</li><li>Dialysis only if severe hypotension</li></ul>',bw:['Ketosis WITHOUT acidosis','Acetone metabolite','Normal anion gap','Supportive care only']}},
+dist:{b:'No acidosis with isopropanol',c:'Thats methanol',d:'Thats ethylene glycol'},related:[11,12]},
+
+15:{type:'Fomepizole Mechanism',isNBME:false,difficulty:'medium',domains:['pharmacology'],tags:['Step1'],
+ctx:'Toxic alcohol antidote.',
+stem:'How does fomepizole work?',
+opts:[['a','Competitive inhibitor of alcohol dehydrogenase (ADH) → blocks metabolism of methanol/ethylene glycol to toxic metabolites'],['b','Provides alternative substrate'],['c','Enhances excretion'],['d','Neutralizes acid']],
+exp:'<strong>Fomepizole (4-methylpyrazole):</strong> Competitive ADH inhibitor with much higher affinity than toxic alcohols. Blocks conversion of methanol → formaldehyde and ethylene glycol → glycoaldehyde. Parent alcohols are relatively nontoxic; its the metabolites that kill.',
+kp:'Ethanol also blocks ADH (same principle) but fomepizole preferred: no CNS depression, predictable kinetics, no need to maintain blood level. Fomepizole: 15mg/kg load, then 10mg/kg q12h.',
+dd:{mechanism:{title:'Fomepizole',content:'<h4>Mechanism</h4><div class="mech-pathway"><span class="mech-step">Fomepizole</span><span class="mech-arrow">→</span><span class="mech-step">Binds ADH (high affinity)</span><span class="mech-arrow">→</span><span class="mech-step">Blocks toxic alcohol metabolism</span><span class="mech-arrow">→</span><span class="mech-step">Parent alcohol excreted unchanged</span></div><h4>Fomepizole vs Ethanol</h4><table><tr><th>Feature</th><th>Fomepizole</th><th>Ethanol</th></tr><tr><td>CNS effects</td><td>None</td><td>Intoxication</td></tr><tr><td>Monitoring</td><td>Minimal</td><td>Frequent levels</td></tr><tr><td>Cost</td><td>High</td><td>Low</td></tr><tr><td>Preferred</td><td>Yes</td><td>If fomepizole unavailable</td></tr></table><h4>Dosing</h4><ul><li>15 mg/kg loading dose</li><li>10 mg/kg q12h × 4 doses</li><li>Then 15 mg/kg q12h until level undetectable</li><li>Increase frequency during dialysis</li></ul>',bw:['ADH inhibitor','Blocks toxic metabolite formation','Better than ethanol','15mg/kg load']}},
+dist:{b:'Thats ethanol mechanism',c:'Dialysis enhances excretion',d:'Bicarb for that'},related:[12,13]},
+
+16:{type:'Antidote Matching',isNBME:true,difficulty:'medium',domains:['pharmacology'],tags:['Step2'],
+ctx:'Know your antidotes.',
+stem:'Match toxin to antidote: Organophosphate, Iron, Cyanide',
+opts:[['a','Organophosphate = Atropine + Pralidoxime; Iron = Deferoxamine; Cyanide = Hydroxocobalamin/Nitrites + Thiosulfate'],['b','All treated with NAC'],['c','All treated with charcoal'],['d','All treated with dialysis']],
+exp:'<strong>Key antidotes:</strong> Organophosphate: atropine (muscarinic block) + pralidoxime (regenerates AChE). Iron: deferoxamine (chelates Fe). Cyanide: hydroxocobalamin (binds CN) or nitrites (induce methemoglobin to bind CN) + thiosulfate (converts CN to thiocyanate).',
+kp:'Cyanide: "bitter almonds" smell, cherry red skin (not always), severe lactic acidosis with high venous O2 (tissues cant use O2).',
+dd:{pharmacology:{title:'Key Antidotes',content:'<h4>Major Toxin-Antidote Pairs</h4><table><tr><th>Toxin</th><th>Antidote</th><th>Mechanism</th></tr><tr><td>Opioid</td><td>Naloxone</td><td>Mu receptor antagonist</td></tr><tr><td>Benzodiazepine</td><td>Flumazenil</td><td>GABA-A antagonist</td></tr><tr><td>Acetaminophen</td><td>NAC</td><td>Glutathione precursor</td></tr><tr><td>Organophosphate</td><td>Atropine + pralidoxime</td><td>Block muscarinic + regenerate AChE</td></tr><tr><td>Beta-blocker</td><td>Glucagon</td><td>Bypasses beta receptor</td></tr><tr><td>CCB</td><td>Calcium + insulin</td><td>Overcomes Ca block + inotropy</td></tr><tr><td>TCA</td><td>Sodium bicarbonate</td><td>Overcomes Na block</td></tr><tr><td>Methanol/EG</td><td>Fomepizole</td><td>ADH inhibitor</td></tr><tr><td>Iron</td><td>Deferoxamine</td><td>Chelates iron</td></tr><tr><td>Cyanide</td><td>Hydroxocobalamin</td><td>Binds cyanide</td></tr><tr><td>Warfarin</td><td>Vitamin K, FFP, PCC</td><td>Replaces factors</td></tr><tr><td>Heparin</td><td>Protamine</td><td>Binds heparin</td></tr><tr><td>Digoxin</td><td>Digoxin Fab</td><td>Binds digoxin</td></tr></table>',bw:['Know toxin-antidote pairs','Mechanism helps memory','Some have multiple antidotes']}},
+dist:{b:'Different antidotes needed',c:'Iron not adsorbed by charcoal',d:'Different treatments'},related:[17]},
+
+17:{type:'Activated Charcoal',isNBME:false,difficulty:'easy',domains:['pharmacology'],tags:['Step2'],
+ctx:'Decontamination.',
+stem:'When is activated charcoal useful and when is it NOT?',
+opts:[['a','Useful if given within 1h of ingestion for most drugs; NOT useful for metals (iron, lithium), alcohols, hydrocarbons, caustics'],['b','Always useful'],['c','Never useful'],['d','Only for opioids']],
+exp:'<strong>Activated charcoal:</strong> Adsorbs most drugs if given within 1 hour (ideally sooner). Doesnt adsorb: metals (iron, lithium), alcohols (methanol, ethylene glycol, ethanol), caustics (acids, alkali), hydrocarbons. Remember: PHAILS (Pesticides/petroleum, Hydrocarbons, Acids/alcohols/alkali, Iron, Lithium, Solvents).',
+kp:'Multi-dose charcoal (MDAC) enhances elimination of: theophylline, phenobarbital, carbamazepine, dapsone, quinine ("TPCQD"). Contraindicated if airway not protected or caustic ingestion.',
+dd:{pharmacology:{title:'Activated Charcoal',content:'<h4>Mechanism</h4><p>Large surface area adsorbs drug in GI tract, preventing absorption</p><h4>When Effective</h4><ul><li>Within 1 hour of ingestion (best)</li><li>May extend for sustained-release or drugs with slow absorption</li><li>Large ingestions</li></ul><h4>Does NOT Adsorb (PHAILS)</h4><ul><li><strong>P</strong>esticides (some), Petroleum</li><li><strong>H</strong>ydrocarbons</li><li><strong>A</strong>cids, Alcohols, Alkali</li><li><strong>I</strong>ron</li><li><strong>L</strong>ithium</li><li><strong>S</strong>olvents</li></ul><h4>Contraindications</h4><ul><li>Unprotected airway</li><li>Caustic ingestion (obscures endoscopy)</li><li>GI perforation/obstruction</li></ul><h4>Multi-Dose Activated Charcoal</h4><p>Enhances elimination of: theophylline, phenobarbital, carbamazepine, dapsone, quinine</p>',bw:['Within 1 hour best','PHAILS not adsorbed','Protect airway first','MDAC for some drugs']}},
+dist:{b:'Many exceptions',c:'Often helpful',d:'Works for many drugs'},related:[16]},
+
+18:{type:'Dialysis Indications',isNBME:false,difficulty:'medium',domains:['pharmacology'],tags:['Step2'],
+ctx:'When to dialyze.',
+stem:'What drug characteristics make hemodialysis effective?',
+opts:[['a','Low molecular weight, low protein binding, low volume of distribution, water soluble; examples: lithium, salicylates, methanol, ethylene glycol, theophylline'],['b','High protein binding'],['c','Large volume of distribution'],['d','Fat soluble']],
+exp:'<strong>Dialyzable drugs:</strong> Small molecule (crosses membrane), low protein binding (free drug in plasma), low Vd (drug in blood not tissues), water soluble. Classic examples: lithium (small, no binding, low Vd), toxic alcohols, salicylates, theophylline. NOT dialyzable: digoxin (high Vd), TCAs (protein bound, high Vd).',
+kp:'Mnemonic for dialyzable: "I STUMBLED" - Isopropanol, Salicylates, Theophylline, Uremia toxins, Methanol, Barbiturates, Lithium, Ethylene glycol, Depakote (valproate).',
+dd:{pharmacology:{title:'Hemodialysis in Toxicology',content:'<h4>Drug Characteristics Favoring Dialysis</h4><table><tr><th>Property</th><th>Dialyzable</th><th>Not Dialyzable</th></tr><tr><td>Molecular weight</td><td>Low (<500 Da)</td><td>High</td></tr><tr><td>Protein binding</td><td>Low</td><td>High</td></tr><tr><td>Volume of distribution</td><td>Low (<1 L/kg)</td><td>High</td></tr><tr><td>Water solubility</td><td>High</td><td>Low (lipophilic)</td></tr></table><h4>I STUMBLED</h4><ul><li><strong>I</strong>sopropanol</li><li><strong>S</strong>alicylates</li><li><strong>T</strong>heophylline</li><li><strong>U</strong>remia toxins</li><li><strong>M</strong>ethanol</li><li><strong>B</strong>arbiturates</li><li><strong>L</strong>ithium</li><li><strong>E</strong>thylene glycol</li><li><strong>D</strong>epakote</li></ul><h4>NOT Dialyzable Examples</h4><ul><li>Digoxin (large Vd)</li><li>TCAs (protein bound, large Vd)</li><li>Benzodiazepines (protein bound)</li><li>Opioids (large Vd)</li></ul>',bw:['Low MW, low binding, low Vd','I STUMBLED mnemonic','Lithium classic example','TCAs not dialyzable']}},
+dist:{b:'Low binding needed',c:'Low Vd needed',d:'Water soluble better'},related:[16,17]},
+
+19:{type:'Serotonin Syndrome',isNBME:true,difficulty:'medium',domains:['mechanism'],tags:['Step1','Step2'],
+vig:{demo:'28F on multiple meds',hpi:'Started tramadol for pain, now with fever, agitation, diaphoresis, clonus'},
+stem:'What is serotonin syndrome and how is it treated?',
+opts:[['a','Excess serotonin activity from drug interactions → hyperthermia, agitation, clonus, hyperreflexia, diaphoresis; treat with benzos, cyproheptadine (serotonin antagonist), cooling, discontinue offending agents'],['b','Dopamine excess'],['c','Cholinergic crisis'],['d','NMS']],
+exp:'<strong>Serotonin syndrome:</strong> Too much serotonergic activity, usually from drug combinations (SSRIs + MAOIs, SSRIs + tramadol, SSRIs + triptans). Triad: mental status changes, autonomic instability, neuromuscular abnormalities (CLONUS, hyperreflexia, tremor). Distinguished from NMS by rapid onset and CLONUS.',
+kp:'Clonus (especially lower extremity) is key finding. Cyproheptadine is serotonin antagonist. Onset is rapid (hours). NMS has rigidity ("lead pipe"), slow onset (days).',
+dd:{mechanism:{title:'Serotonin Syndrome',content:'<h4>Mechanism</h4><div class="mech-pathway"><span class="mech-step">↑ Serotonin activity</span><span class="mech-arrow">→</span><span class="mech-step">5-HT1A/2A receptor overstimulation</span><span class="mech-arrow">→</span><span class="mech-step">Syndrome</span></div><h4>Clinical Triad</h4><ol><li><strong>Mental status:</strong> Agitation, confusion</li><li><strong>Autonomic:</strong> Hyperthermia, diaphoresis, tachycardia, HTN</li><li><strong>Neuromuscular:</strong> Clonus, hyperreflexia, tremor, rigidity</li></ol><h4>Serotonin Syndrome vs NMS</h4><table><tr><th>Feature</th><th>Serotonin Syndrome</th><th>NMS</th></tr><tr><td>Onset</td><td>Rapid (hours)</td><td>Slow (days-weeks)</td></tr><tr><td>Reflexes</td><td>Hyperreflexia, clonus</td><td>Normal/decreased</td></tr><tr><td>Rigidity</td><td>Less prominent</td><td>"Lead pipe"</td></tr><tr><td>Pupils</td><td>Dilated</td><td>Normal</td></tr><tr><td>Cause</td><td>Serotonergic drugs</td><td>Dopamine blockers</td></tr></table><h4>Treatment</h4><ul><li>Stop serotonergic agents</li><li>Benzodiazepines</li><li>Cyproheptadine 12mg then 4mg q6h</li><li>Cooling if hyperthermic</li></ul>',bw:['Clonus is key','Rapid onset (hours)','Cyproheptadine antidote','NMS = slow, rigid']}},
+dist:{b:'Thats NMS',c:'Would have SLUDGE',d:'NMS is dopamine-related'},related:[20]},
+
+20:{type:'NMS vs Serotonin Syndrome',isNBME:true,difficulty:'hard',domains:['mechanism'],tags:['Step2'],
+vig:{demo:'55M on haloperidol',hpi:'Gradually developing fever, severe rigidity, altered mental status over 3 days'},
+stem:'How do you distinguish NMS from serotonin syndrome?',
+opts:[['a','NMS: dopamine blockade (antipsychotics), slow onset (days), lead-pipe rigidity, normal/decreased reflexes; Serotonin: serotonin excess, rapid onset (hours), clonus, hyperreflexia'],['b','Same syndrome'],['c','NMS has clonus'],['d','Serotonin syndrome is slower']],
+exp:'<strong>NMS vs Serotonin Syndrome:</strong> NMS = dopamine blockade by antipsychotics → slow onset (days), "lead pipe" rigidity, normal/decreased reflexes, ↑CK from rigidity. Serotonin = excess serotonin → rapid onset (hours), CLONUS/hyperreflexia, less rigidity. Both have hyperthermia and AMS.',
+kp:'NMS treatment: Stop antipsychotic, dantrolene (muscle relaxant), bromocriptine (dopamine agonist). Serotonin syndrome: cyproheptadine.',
+dd:{mechanism:{title:'NMS vs Serotonin Syndrome',content:'<h4>Comparison</h4><table><tr><th>Feature</th><th>NMS</th><th>Serotonin Syndrome</th></tr><tr><td>Cause</td><td>Dopamine blockade</td><td>Serotonin excess</td></tr><tr><td>Drugs</td><td>Antipsychotics, metoclopramide</td><td>SSRIs, MAOIs, tramadol</td></tr><tr><td>Onset</td><td>Days to weeks</td><td>Hours</td></tr><tr><td>Rigidity</td><td>"Lead pipe" (severe)</td><td>Less prominent</td></tr><tr><td>Reflexes</td><td>Normal or ↓</td><td>Hyperreflexia, clonus</td></tr><tr><td>CK</td><td>Very elevated</td><td>Mildly elevated</td></tr><tr><td>Treatment</td><td>Dantrolene, bromocriptine</td><td>Cyproheptadine</td></tr></table><h4>NMS Treatment</h4><ul><li>Stop offending agent</li><li>Dantrolene (skeletal muscle relaxant)</li><li>Bromocriptine (dopamine agonist)</li><li>Supportive care, cooling</li></ul><h4>Key Distinguisher</h4><p>CLONUS = serotonin syndrome<br>Lead-pipe RIGIDITY = NMS</p>',bw:['Clonus = serotonin','Rigidity = NMS','NMS slow, serotonin fast','Different antidotes']}},
+dist:{b:'Different syndromes',c:'Clonus is serotonin syndrome',d:'Serotonin is faster'},related:[19]}
+};
+
+var answers={1:'b',2:'d',3:'a',4:'a',5:'d',6:'b',7:'a',8:'c',9:'c',10:'a',11:'d',12:'b',13:'b',14:'d',15:'b',16:'c',17:'d',18:'c',19:'c',20:'a'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked','completed');if(i+1===phase)el.classList.add('active');else if(i+1<phase)el.classList.add('completed');else el.classList.add('locked');});document.getElementById('phaseLabel').textContent='Phase '+phase;document.getElementById('caseNarrative').innerHTML=ph.narrative;var labsHtml='';ph.labs.forEach(function(l){labsHtml+='<div class="data-item"><span>'+l[0]+'</span><span class="'+(l[2]||'')+'">'+l[1]+'</span></div>';});document.getElementById('labsGrid').innerHTML=labsHtml;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs&&ph.refs.length){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border)"><div style="font-size:10px;font-weight:600;color: var(--text-secondary);margin-bottom:6px">📚 Academic References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:var(--primary-dark);text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';if(q.isNBME)html+='<span class="quiz-tag nbme">NBME</span>';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';if(q.vig){html+='<div class="quiz-vignette">';if(q.vig.demo)html+='<div class="vig-section"><span class="vig-label">Patient</span> '+q.vig.demo+'</div>';if(q.vig.hpi)html+='<div class="vig-section"><span class="vig-label">HPI</span> '+q.vig.hpi+'</div>';if(q.vig.exam)html+='<div class="vig-section"><span class="vig-label">Exam</span> '+q.vig.exam+'</div>';if(q.vig.labs){html+='<div class="vig-section"><span class="vig-label">Labs</span> ';for(var k in q.vig.labs)html+=k+': '+q.vig.labs[k]+'; ';html+='</div>';}html+='</div>';}if(q.ctx)html+='<div class="quiz-context">'+q.ctx+'</div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div class="exp-header '+(isCorrect?'correct':'incorrect')+'">'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Toxicology: Deep Mechanisms"
+         data-key-points="🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

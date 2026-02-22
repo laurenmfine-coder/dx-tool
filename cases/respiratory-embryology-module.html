@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Respiratory Embryology - Lung Development & Congenital Anomalies</title>
+  <style>
+    :root { --primary: #0EA5E9; --primary-dark: #0284C7; --secondary: #06B6D4; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #8B5CF6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #0c1929 0%, #1a2f4a 100%); color: var(--text-primary, #E5E7EB); min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(14, 165, 233, 0.1); border-radius: 1rem; border: 1px solid rgba(14, 165, 233, 0.3); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept { background: rgba(14, 165, 233, 0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(139, 92, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(14, 165, 233, 0.2); color: var(--primary); }
+    tr:hover { background: rgba(255,255,255,0.03); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .mnemonic { background: rgba(16, 185, 129, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mnemonic strong { color: var(--success); font-size: 1.1rem; }
+    .dev-card { background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.3); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .dev-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .timeline-item { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-left: 0.5rem; margin-bottom: 1.5rem; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -8px; top: 0; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 2px solid #0c1929; }
+    .timeline-item h4 { color: var(--accent); margin-bottom: 0.5rem; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; overflow-x: auto; }
+    .condition-link { display: inline-block; background: rgba(14,165,233,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; margin: 0.25rem; font-size: 0.85rem; color: #7dd3fc; text-decoration: none; transition: all 0.2s; }
+    .condition-link:hover { background: rgba(14,165,233,0.4); }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+    .quiz-option:hover { background: rgba(14, 165, 233, 0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+  
+    /* DxSuite Theme System Override */
+    body { background: var(--bg-main) !important; color: var(--text-primary) !important; transition: background 0.3s, color 0.3s; }
+    .container { background: transparent; }
+    .module-section { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border, rgba(255,255,255,0.1)); }
+    header { background: var(--primary-bg, rgba(245,158,11,0.1)); border-color: var(--primary, rgba(245,158,11,0.3)); }
+    header h1 { -webkit-text-fill-color: var(--primary, unset); }
+    .nav-tab { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border, rgba(255,255,255,0.1)); color: var(--text-secondary, #9CA3AF); }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: var(--nav-active-text, white); border-color: var(--primary); }
+    table th { background: var(--primary-bg, rgba(245,158,11,0.2)); color: var(--primary); }
+    table td { border-color: var(--border, rgba(255,255,255,0.1)); }
+    .quiz-option { background: var(--bg-card, rgba(255,255,255,0.05)); border-color: var(--border); color: var(--text-primary); }
+    .quiz-option:hover { background: var(--primary-bg); }
+    .pathway-box { background: var(--bg-card, rgba(0,0,0,0.3)); color: var(--text-primary); }
+    /* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    
+</style>
+</head>
+<body>
+<!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/index.html" class="dx-nav-link">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../ReasonDx/reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../ReasonDx/analytics-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+  <div class="container">
+    <header>
+      <h1>🫁 Respiratory Embryology</h1>
+      <p class="subtitle">Lung Development • Stages • Surfactant • Congenital Anomalies</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('stages')">Development Stages</div>
+      <div class="nav-tab" onclick="showTab('diaphragm')">Diaphragm</div>
+      <div class="nav-tab" onclick="showTab('surfactant')">Surfactant</div>
+      <div class="nav-tab" onclick="showTab('anomalies')">Anomalies</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Respiratory Development Overview</h2>
+
+        <div class="key-concept">
+          The respiratory system develops from the <strong>foregut</strong>. During week 4, the <strong>respiratory diverticulum</strong> (lung bud) appears as a ventral outgrowth from the foregut, which is separated by the <strong>tracheoesophageal septum</strong> into the trachea (ventral) and esophagus (dorsal).
+        </div>
+
+        <h3>Embryonic Origins</h3>
+        <table>
+          <tr>
+            <th>Structure</th>
+            <th>Embryonic Origin</th>
+          </tr>
+          <tr>
+            <td>Laryngeal epithelium, tracheal epithelium, bronchial epithelium, alveolar epithelium</td>
+            <td><strong>Endoderm</strong> (foregut)</td>
+          </tr>
+          <tr>
+            <td>Cartilage, smooth muscle, connective tissue, pulmonary vasculature</td>
+            <td><strong>Mesoderm</strong> (splanchnic mesenchyme)</td>
+          </tr>
+          <tr>
+            <td>Laryngeal muscles, laryngeal cartilages</td>
+            <td><strong>Neural crest</strong> (pharyngeal arches 4 & 6)</td>
+          </tr>
+        </table>
+
+        <h3>Key Timeline</h3>
+        <div class="timeline-item">
+          <h4>Week 4: Lung Bud Appears</h4>
+          <p>Respiratory diverticulum forms from ventral foregut. Tracheoesophageal septum divides it from esophagus.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Week 5: Primary Bronchi</h4>
+          <p>Lung bud divides into 2 primary bronchial buds (right larger, more vertical).</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Week 5-16: Branching Morphogenesis</h4>
+          <p>Repeated branching creates bronchial tree. By week 16, all conducting airways formed.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Week 24-36: Surfactant Production</h4>
+          <p>Type II pneumocytes mature and begin producing surfactant. Viability threshold ~24 weeks.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Week 36-Birth-8 years: Alveolarization</h4>
+          <p>True alveoli form. Most alveolar development is postnatal!</p>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> Why is the right mainstem bronchus more prone to aspiration? It's <strong>wider, shorter, and more vertical</strong> than the left - established from the embryonic asymmetry of the lung buds.
+        </div>
+
+        <div class="mnemonic">
+          <strong>💡 Lung Development Stages Mnemonic: "Every Premie Can Surf Alright"</strong><br>
+          <strong>E</strong>mbryonic → <strong>P</strong>seudoglandular → <strong>C</strong>analicular → <strong>S</strong>accular → <strong>A</strong>lveolar
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGES TAB -->
+    <div id="stages" class="tab-content">
+      <div class="module-section">
+        <h2>📅 Stages of Lung Development</h2>
+
+        <div class="key-concept">
+          Lung development occurs in <strong>5 overlapping stages</strong>. Disruption at different stages causes different types of anomalies. The critical clinical milestone is surfactant production starting at ~24 weeks.
+        </div>
+
+        <table>
+          <tr>
+            <th>Stage</th>
+            <th>Timing</th>
+            <th>Key Events</th>
+            <th>Clinical Relevance</th>
+          </tr>
+          <tr>
+            <td><strong>Embryonic</strong></td>
+            <td>Weeks 4-7</td>
+            <td>Lung bud → trachea → main bronchi → lobar bronchi</td>
+            <td>TEF/EA, tracheal agenesis, bronchial atresia</td>
+          </tr>
+          <tr>
+            <td><strong>Pseudoglandular</strong></td>
+            <td>Weeks 7-17</td>
+            <td>All conducting airways form (to terminal bronchioles). Looks like a gland histologically.</td>
+            <td>CPAM, sequestration, CDH (lung hypoplasia)</td>
+          </tr>
+          <tr>
+            <td><strong>Canalicular</strong></td>
+            <td>Weeks 17-26</td>
+            <td>Respiratory bronchioles & primitive alveoli form. Capillaries approach airspaces. Type I & II pneumocytes differentiate.</td>
+            <td>Viability threshold (~24 weeks); surfactant begins</td>
+          </tr>
+          <tr>
+            <td><strong>Saccular</strong></td>
+            <td>Weeks 26-36</td>
+            <td>Terminal saccules (primitive alveoli) expand. Blood-air barrier thins. Surfactant production increases.</td>
+            <td>RDS if premature; antenatal steroids help</td>
+          </tr>
+          <tr>
+            <td><strong>Alveolar</strong></td>
+            <td>Week 36 - 8 years</td>
+            <td>True alveoli form by septation. Alveoli increase from ~50 million at birth to ~300 million by age 8.</td>
+            <td>Bronchopulmonary dysplasia affects alveolarization</td>
+          </tr>
+        </table>
+
+        <div class="dev-card">
+          <h4>📍 Pseudoglandular Stage Details</h4>
+          <p>Called "pseudoglandular" because the lung looks like an exocrine gland - branching tubules lined by cuboidal epithelium surrounded by mesenchyme. No gas exchange possible.</p>
+          <ul>
+            <li>All conducting airways complete by week 16</li>
+            <li>Cartilage, smooth muscle, and mucous glands develop</li>
+            <li>Fetus born at this stage <strong>cannot survive</strong></li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>📍 Canalicular Stage - The Viability Threshold</h4>
+          <p>Critical transition to potential viability:</p>
+          <ul>
+            <li>Respiratory bronchioles form (gas exchange possible)</li>
+            <li>Capillaries come into close contact with airspaces</li>
+            <li>Type I pneumocytes (gas exchange) and Type II pneumocytes (surfactant) differentiate</li>
+            <li><strong>~24 weeks = viability threshold</strong> with intensive support</li>
+          </ul>
+        </div>
+
+        <div class="danger-box">
+          <strong>⚠️ Premature Birth Complications</strong>
+          <ul>
+            <li><strong>22-24 weeks:</strong> Borderline viability, very high mortality</li>
+            <li><strong>24-28 weeks:</strong> Surfactant deficiency common → RDS</li>
+            <li><strong>28-34 weeks:</strong> Better outcomes, may still need surfactant</li>
+            <li><strong>34+ weeks:</strong> Usually adequate surfactant</li>
+          </ul>
+          <strong>Antenatal corticosteroids</strong> (betamethasone) accelerate lung maturation if preterm delivery expected.
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> The lecithin/sphingomyelin (L/S) ratio in amniotic fluid indicates lung maturity. L/S ≥ 2.0 suggests adequate surfactant. Phosphatidylglycerol (PG) presence is another marker.
+        </div>
+      </div>
+    </div>
+
+    <!-- DIAPHRAGM TAB -->
+    <div id="diaphragm" class="tab-content">
+      <div class="module-section">
+        <h2>🫀 Diaphragm Development</h2>
+
+        <div class="key-concept">
+          The diaphragm develops from <strong>4 structures</strong> that fuse together. Failure of fusion, especially of the <strong>pleuroperitoneal membranes</strong>, causes congenital diaphragmatic hernia (CDH).
+        </div>
+
+        <h3>Components of the Diaphragm</h3>
+        <table>
+          <tr>
+            <th>Structure</th>
+            <th>Contribution</th>
+            <th>Adult Derivative</th>
+          </tr>
+          <tr>
+            <td><strong>Septum transversum</strong></td>
+            <td>Central tendon</td>
+            <td>Central tendon</td>
+          </tr>
+          <tr>
+            <td><strong>Pleuroperitoneal membranes</strong></td>
+            <td>Close pleuroperitoneal canals</td>
+            <td>Posterolateral diaphragm</td>
+          </tr>
+          <tr>
+            <td><strong>Body wall mesoderm</strong></td>
+            <td>Peripheral muscular rim</td>
+            <td>Costal part of diaphragm</td>
+          </tr>
+          <tr>
+            <td><strong>Esophageal mesenchyme</strong></td>
+            <td>Crura</td>
+            <td>Right and left crura</td>
+          </tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>💡 Diaphragm Components: "Several Parts Build Diaphragm"</strong><br>
+          <strong>S</strong>eptum transversum, <strong>P</strong>leuroperitoneal membranes, <strong>B</strong>ody wall, <strong>D</strong>orsal mesentery (esophageal mesenchyme)
+        </div>
+
+        <h3>Pleuroperitoneal Canal Closure</h3>
+        <p>The pleuroperitoneal canals connect the thoracic and abdominal cavities. They close during <strong>week 6</strong> as the pleuroperitoneal membranes fuse with other components.</p>
+        <ul>
+          <li><strong>Right side closes first</strong> (week 6)</li>
+          <li><strong>Left side closes later</strong> → explains why CDH is more common on left</li>
+        </ul>
+
+        <div class="danger-box">
+          <strong>⚠️ Congenital Diaphragmatic Hernia (CDH)</strong><br>
+          Failure of pleuroperitoneal membrane fusion → abdominal contents herniate into thorax → <strong>pulmonary hypoplasia</strong>.<br><br>
+          <strong>Key Facts:</strong>
+          <ul>
+            <li><strong>85-90% are LEFT-sided</strong> (Bochdalek hernia - posterolateral)</li>
+            <li>Usually contains stomach, intestines, spleen, sometimes liver</li>
+            <li>Lung compressed → hypoplastic with abnormal vasculature</li>
+            <li>Presents at birth: respiratory distress, scaphoid abdomen, absent breath sounds on affected side</li>
+            <li><strong>DO NOT bag-mask ventilate</strong> (inflates stomach, worsens compression)</li>
+            <li>Management: intubate, NG decompression, stabilize → surgical repair</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>📍 Types of Diaphragmatic Hernias</h4>
+          <ul>
+            <li><strong>Bochdalek hernia (posterolateral):</strong> 85-90%, usually left, most common CDH</li>
+            <li><strong>Morgagni hernia (anterior/parasternal):</strong> ~5%, usually right, often asymptomatic until adulthood</li>
+            <li><strong>Hiatal hernia:</strong> Esophageal hiatus; sliding vs paraesophageal types</li>
+            <li><strong>Eventration:</strong> Thin, weak diaphragm (not true hernia)</li>
+          </ul>
+        </div>
+
+        <h3>Phrenic Nerve</h3>
+        <p>The phrenic nerve (C3-C5) innervates the diaphragm. It descends with the diaphragm as the septum transversum migrates from cervical region to its final position.</p>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> "C3, 4, 5 keeps the diaphragm alive." The long course of the phrenic nerve (from neck to diaphragm) makes it vulnerable to injury during cardiothoracic surgery.
+        </div>
+      </div>
+    </div>
+
+    <!-- SURFACTANT TAB -->
+    <div id="surfactant" class="tab-content">
+      <div class="module-section">
+        <h2>🧪 Surfactant Biology</h2>
+
+        <div class="key-concept">
+          <strong>Surfactant</strong> is produced by <strong>Type II pneumocytes</strong> starting around 24 weeks. It reduces alveolar surface tension, preventing collapse. Deficiency causes <strong>Respiratory Distress Syndrome (RDS)</strong> in premature infants.
+        </div>
+
+        <h3>Surfactant Composition</h3>
+        <table>
+          <tr>
+            <th>Component</th>
+            <th>Percentage</th>
+            <th>Function</th>
+          </tr>
+          <tr>
+            <td>Phospholipids (mainly DPPC - dipalmitoylphosphatidylcholine)</td>
+            <td>~80%</td>
+            <td>Surface tension reduction</td>
+          </tr>
+          <tr>
+            <td>Surfactant proteins (SP-A, SP-B, SP-C, SP-D)</td>
+            <td>~10%</td>
+            <td>SP-B & SP-C: surfactant function<br>SP-A & SP-D: innate immunity</td>
+          </tr>
+          <tr>
+            <td>Neutral lipids (cholesterol)</td>
+            <td>~10%</td>
+            <td>Membrane fluidity</td>
+          </tr>
+        </table>
+
+        <div class="danger-box">
+          <strong>⚠️ Respiratory Distress Syndrome (RDS) / Hyaline Membrane Disease</strong><br>
+          <strong>Pathophysiology:</strong> Surfactant deficiency → high surface tension → alveolar collapse (atelectasis) → hypoxia → ischemia → protein-rich fluid leaks into alveoli → "hyaline membranes"<br><br>
+          <strong>Risk Factors:</strong>
+          <ul>
+            <li>Prematurity (most important)</li>
+            <li>Maternal diabetes (insulin inhibits surfactant)</li>
+            <li>C-section without labor (catecholamines promote surfactant release)</li>
+            <li>Male sex</li>
+            <li>Perinatal asphyxia</li>
+          </ul>
+          <strong>Presentation:</strong> Tachypnea, grunting, nasal flaring, retractions within hours of birth<br>
+          <strong>X-ray:</strong> "Ground glass" appearance, air bronchograms, low lung volumes
+        </div>
+
+        <h3>Prevention & Treatment of RDS</h3>
+
+        <div class="success-box">
+          <strong>🟢 Prevention: Antenatal Corticosteroids</strong>
+          <ul>
+            <li><strong>Betamethasone</strong> or dexamethasone given to mother</li>
+            <li>Indicated if preterm delivery expected at 24-34 weeks</li>
+            <li>Optimal benefit 24-48 hours after administration</li>
+            <li>Accelerates surfactant production and lung maturation</li>
+            <li>Reduces RDS, IVH, NEC, and mortality</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <strong>🔵 Treatment: Exogenous Surfactant</strong>
+          <ul>
+            <li>Given via endotracheal tube</li>
+            <li>Natural (animal-derived) or synthetic preparations</li>
+            <li>Dramatically reduces mortality and morbidity</li>
+            <li>May need multiple doses</li>
+          </ul>
+        </div>
+
+        <h3>Lung Maturity Testing</h3>
+        <table>
+          <tr>
+            <th>Test</th>
+            <th>Mature Value</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>L/S ratio (Lecithin/Sphingomyelin)</td>
+            <td>≥ 2.0</td>
+            <td>Traditional gold standard</td>
+          </tr>
+          <tr>
+            <td>Phosphatidylglycerol (PG)</td>
+            <td>Present</td>
+            <td>Very specific; appears late (~35 weeks)</td>
+          </tr>
+          <tr>
+            <td>Lamellar body count</td>
+            <td>≥ 50,000/μL</td>
+            <td>Quick, automated</td>
+          </tr>
+        </table>
+
+        <div class="clinical-pearl">
+          <strong>🎯 Clinical Pearl:</strong> In diabetic mothers, the L/S ratio may be falsely reassuring - PG is more reliable. Diabetes delays surfactant maturation (insulin inhibits SP-A and SP-B production).
+        </div>
+      </div>
+    </div>
+
+    <!-- ANOMALIES TAB -->
+    <div id="anomalies" class="tab-content">
+      <div class="module-section">
+        <h2>⚠️ Congenital Respiratory Anomalies</h2>
+
+        <div class="key-concept">
+          Respiratory anomalies can affect the <strong>airways</strong> (trachea, bronchi), <strong>lung parenchyma</strong> (CPAM, sequestration), or <strong>diaphragm</strong> (CDH). Many cause respiratory distress at birth.
+        </div>
+
+        <h3>Tracheoesophageal Fistula (TEF) / Esophageal Atresia (EA)</h3>
+
+        <div class="danger-box">
+          <strong>⚠️ TEF/EA - Failure of Tracheoesophageal Septum Formation</strong><br>
+          <strong>Most common type (85%):</strong> Proximal EA with distal TEF
+          <ul>
+            <li>Proximal esophagus ends in blind pouch</li>
+            <li>Distal esophagus connects to trachea</li>
+          </ul>
+          <strong>Presentation:</strong>
+          <ul>
+            <li>Polyhydramnios (can't swallow amniotic fluid)</li>
+            <li>Excessive drooling, "foaming" at mouth</li>
+            <li>Choking, coughing, cyanosis with first feed</li>
+            <li>Unable to pass NG tube (coils in blind pouch)</li>
+          </ul>
+          <strong>Associations:</strong> VACTERL (Vertebral, Anorectal, Cardiac, TE fistula, Renal, Limb)
+        </div>
+
+        <h3>Congenital Pulmonary Airway Malformation (CPAM)</h3>
+        <p>Formerly called CCAM (Congenital Cystic Adenomatoid Malformation)</p>
+
+        <div class="dev-card">
+          <h4>📍 CPAM Features</h4>
+          <ul>
+            <li>Abnormal bronchial development → cystic or adenomatoid lung tissue</li>
+            <li>Usually affects <strong>one lobe</strong></li>
+            <li>Has systemic blood supply (from aorta) vs normal pulmonary supply</li>
+            <li>Types based on cyst size (Type 1 = large cysts, better prognosis)</li>
+            <li>May cause hydrops in utero or respiratory distress at birth</li>
+            <li>Risk of malignancy (pleuropulmonary blastoma)</li>
+            <li>Treatment: surgical resection (lobectomy)</li>
+          </ul>
+        </div>
+
+        <h3>Pulmonary Sequestration</h3>
+
+        <div class="dev-card">
+          <h4>📍 Sequestration = Nonfunctioning lung tissue with systemic blood supply</h4>
+          <table style="margin-top: 0.5rem;">
+            <tr>
+              <th>Feature</th>
+              <th>Intralobar</th>
+              <th>Extralobar</th>
+            </tr>
+            <tr>
+              <td>Location</td>
+              <td>Within normal lung (no own pleura)</td>
+              <td>Outside lung (has own pleura)</td>
+            </tr>
+            <tr>
+              <td>Frequency</td>
+              <td>75%</td>
+              <td>25%</td>
+            </tr>
+            <tr>
+              <td>Side</td>
+              <td>Left lower lobe (60%)</td>
+              <td>Left lower (90%)</td>
+            </tr>
+            <tr>
+              <td>Presentation</td>
+              <td>Recurrent pneumonia</td>
+              <td>Often asymptomatic, found incidentally</td>
+            </tr>
+            <tr>
+              <td>Associations</td>
+              <td>Usually isolated</td>
+              <td>Other anomalies (CDH, cardiac)</td>
+            </tr>
+          </table>
+          <p style="margin-top: 0.75rem;"><strong>Key feature:</strong> Systemic arterial supply (usually from aorta) - important for surgical planning!</p>
+        </div>
+
+        <h3>Other Anomalies</h3>
+
+        <div class="dev-card">
+          <h4>📍 Bronchogenic Cyst</h4>
+          <ul>
+            <li>Abnormal budding from foregut/tracheobronchial tree</li>
+            <li>Usually mediastinal (near carina) or intrapulmonary</li>
+            <li>Filled with mucus, lined by respiratory epithelium</li>
+            <li>May compress airways or become infected</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>📍 Tracheomalacia / Bronchomalacia</h4>
+          <ul>
+            <li>Weakness of tracheal/bronchial wall (deficient cartilage)</li>
+            <li>Airway collapses during expiration</li>
+            <li>May be primary or secondary (compression, intubation)</li>
+            <li>Presents with stridor, "barking" cough, recurrent infections</li>
+            <li>Usually improves with growth (by age 2)</li>
+          </ul>
+        </div>
+
+        <div class="dev-card">
+          <h4>📍 Laryngomalacia</h4>
+          <ul>
+            <li>Most common cause of stridor in infants</li>
+            <li>Floppy supraglottic structures collapse during inspiration</li>
+            <li>Inspiratory stridor, worse when feeding, supine, or with URI</li>
+            <li>Usually self-limited (resolves by 12-18 months)</li>
+          </ul>
+        </div>
+
+        <h3>Summary Table</h3>
+        <table>
+          <tr>
+            <th>Anomaly</th>
+            <th>Key Feature</th>
+            <th>Classic Presentation</th>
+          </tr>
+          <tr>
+            <td>TEF/EA</td>
+            <td>Septation failure</td>
+            <td>Drooling, choking with feeds, can't pass NG</td>
+          </tr>
+          <tr>
+            <td>CDH</td>
+            <td>Pleuroperitoneal membrane failure</td>
+            <td>Respiratory distress, scaphoid abdomen</td>
+          </tr>
+          <tr>
+            <td>CPAM</td>
+            <td>Abnormal bronchial development</td>
+            <td>Cystic lung mass, respiratory distress or recurrent infection</td>
+          </tr>
+          <tr>
+            <td>Sequestration</td>
+            <td>Systemic arterial supply</td>
+            <td>Recurrent LLL pneumonia</td>
+          </tr>
+          <tr>
+            <td>Laryngomalacia</td>
+            <td>Floppy supraglottis</td>
+            <td>Inspiratory stridor, worse with feeding</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUIZ TAB -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>📝 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>The respiratory epithelium (trachea, bronchi, alveoli) is derived from which germ layer?</p>
+          <div class="quiz-option" onclick="checkQ('q1', this, true)">A. Endoderm</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">B. Mesoderm</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">C. Ectoderm</div>
+          <div class="quiz-option" onclick="checkQ('q1', this, false)">D. Neural crest</div>
+          <div id="exp-q1" class="explanation"><strong>Answer: A.</strong> The respiratory epithelium is derived from endoderm (foregut). The cartilage, smooth muscle, and blood vessels come from mesoderm.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>At which gestational age does surfactant production typically begin, marking the threshold of viability?</p>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">A. 20 weeks</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, true)">B. 24 weeks</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">C. 28 weeks</div>
+          <div class="quiz-option" onclick="checkQ('q2', this, false)">D. 32 weeks</div>
+          <div id="exp-q2" class="explanation"><strong>Answer: B.</strong> Surfactant production begins around 24 weeks (canalicular stage), marking the threshold of viability. Type II pneumocytes differentiate and begin producing surfactant.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>A newborn has respiratory distress, a scaphoid abdomen, and absent breath sounds on the left. What is the most likely diagnosis?</p>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">A. TEF/Esophageal atresia</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, true)">B. Congenital diaphragmatic hernia</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">C. CPAM</div>
+          <div class="quiz-option" onclick="checkQ('q3', this, false)">D. Pneumothorax</div>
+          <div id="exp-q3" class="explanation"><strong>Answer: B.</strong> This triad (respiratory distress, scaphoid abdomen, absent breath sounds) is classic for CDH. The scaphoid abdomen occurs because abdominal contents have herniated into the chest.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>Why is congenital diaphragmatic hernia (Bochdalek type) more common on the left side?</p>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">A. The left lung is smaller</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, true)">B. The left pleuroperitoneal canal closes later</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">C. The liver protects the right side</div>
+          <div class="quiz-option" onclick="checkQ('q4', this, false)">D. The heart is on the left side</div>
+          <div id="exp-q4" class="explanation"><strong>Answer: B.</strong> The left pleuroperitoneal canal closes later than the right, providing a longer window for herniation to occur. While the liver may provide some protection on the right, the primary reason is the timing of closure.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>A preterm infant has grunting, nasal flaring, and a "ground glass" appearance on chest X-ray. Which cell type is deficient?</p>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">A. Type I pneumocytes</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, true)">B. Type II pneumocytes</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">C. Clara cells</div>
+          <div class="quiz-option" onclick="checkQ('q5', this, false)">D. Alveolar macrophages</div>
+          <div id="exp-q5" class="explanation"><strong>Answer: B.</strong> This is RDS (Respiratory Distress Syndrome) caused by surfactant deficiency. Surfactant is produced by Type II pneumocytes. Treatment includes exogenous surfactant and supportive care.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 6</h3>
+          <p>Which lung development stage are conducting airways complete, and what mnemonic letter does it correspond to?</p>
+          <div class="quiz-option" onclick="checkQ('q6', this, false)">A. Embryonic (E)</div>
+          <div class="quiz-option" onclick="checkQ('q6', this, true)">B. Pseudoglandular (P)</div>
+          <div class="quiz-option" onclick="checkQ('q6', this, false)">C. Canalicular (C)</div>
+          <div class="quiz-option" onclick="checkQ('q6', this, false)">D. Saccular (S)</div>
+          <div id="exp-q6" class="explanation"><strong>Answer: B.</strong> By the end of the pseudoglandular stage (week 17), all conducting airways down to terminal bronchioles are formed. "Every Premie Can Surf Alright" - P is Pseudoglandular.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFERENCES -->
+    <section class="module-section" style="margin-top:1.5rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);">
+      <h2 style="color: #93c5fd;">📖 References</h2>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK544372/" target="_blank" style="color: #93c5fd;">StatPearls: Embryology, Lung</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK513268/" target="_blank" style="color: #93c5fd;">StatPearls: Congenital Diaphragmatic Hernia</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK537160/" target="_blank" style="color: #93c5fd;">StatPearls: Neonatal Respiratory Distress Syndrome</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK532269/" target="_blank" style="color: #93c5fd;">StatPearls: Tracheoesophageal Fistula</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK551664/" target="_blank" style="color: #93c5fd;">StatPearls: Pulmonary Sequestration</a></li>
+        <li style="margin: 0.75rem 0;"><a href="https://radiopaedia.org/articles/congenital-pulmonary-airway-malformation" target="_blank" style="color: #93c5fd;">Radiopaedia: CPAM</a></li>
+      </ul>
+    </section>
+
+    <!-- CROSS-LINKS -->
+    <section class="module-section" style="margin-top:1.5rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);">
+      <h2 style="color: #6ee7b7;">🔗 Related Modules</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+        <a href="gi-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">GI Embryology</a>
+        <a href="cardiac-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Cardiac Embryology</a>
+        <a href="neuro-embryology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Neuro Embryology</a>
+        <a href="teratology-module.html" class="condition-link" style="background: rgba(16,185,129,0.2); color: #6ee7b7;">Teratology</a>
+      </div>
+      <h3 style="color: #86efac; margin-top: 1rem;">Clinical Reasoning Trainers</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <a href="../ReasonDx/adventure-cases/tef-esophageal-atresia-crt.html" class="condition-link">TEF/EA CRT</a>
+        <a href="../ReasonDx/adventure-cases/cdh-crt.html" class="condition-link">CDH CRT</a>
+        <a href="../ReasonDx/adventure-cases/neonatal-respiratory-distress-crt.html" class="condition-link">Neonatal RDS CRT</a>
+        <a href="../ReasonDx/adventure-cases/bronchiolitis-expanded.html" class="condition-link">Bronchiolitis CRT</a>
+        <a href="../ReasonDx/adventure-cases/croup-expanded.html" class="condition-link">Croup CRT</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function checkQ(qId, el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(opt => { opt.classList.remove('correct', 'incorrect'); opt.style.pointerEvents = 'none'; });
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) section.querySelectorAll('.quiz-option').forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+      document.getElementById('exp-' + qId).style.display = 'block';
+    }
+  </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="MechanismDx: Respiratory Embryology"
+         data-key-points="📚 Respiratory Development Overview, 📅 Stages of Lung Development, 🫀 Diaphragm Development, 🧪 Surfactant Biology, ⚠️ Congenital Respiratory Anomalies, 📝 Test Your Knowledge, 📖 References, 🔗 Related Modules, clinical reasoning, pathophysiology, diagnosis, evidence-based management"
+         data-objectives="Apply clinical reasoning frameworks, integrate pathophysiology with presentation"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+    <!-- Cross-Platform Links -->
+    <div style="max-width:950px;margin:2rem auto;padding:0 2rem;">
+        <div style="background:var(--bg-card,rgba(255,255,255,0.05));border:1px solid var(--border,rgba(255,255,255,0.1));border-radius:1rem;padding:1.5rem;">
+            <h3 style="color:var(--primary);margin-bottom:1rem;">📚 Related Platform Content</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+                <a href="../ReasonDx/board-prep.html" style="padding:12px;background:var(--primary-bg,rgba(59,130,246,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">📝 Board Prep MCQs</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">Test your embryology knowledge</div>
+                </a>
+                <a href="../ReasonDx/training.html" style="padding:12px;background:var(--primary-bg,rgba(16,185,129,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">🩺 Clinical Cases</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">Apply concepts in clinical scenarios</div>
+                </a>
+                <a href="../CoachDx/case-library.html" style="padding:12px;background:var(--primary-bg,rgba(139,92,246,0.1));border-radius:8px;text-decoration:none;color:var(--text-primary);">
+                    <div style="font-weight:600;font-size:0.9rem;">💬 CoachDx Sessions</div>
+                    <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;">AI-guided case discussion</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+<!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+
+<script>
+(function() {
+    const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+    document.body.setAttribute('data-theme', saved);
+    document.addEventListener('DOMContentLoaded', updateThemeOptions);
+})();
+
+function setDxTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('dx-theme', theme);
+    updateThemeOptions();
+    closeDxThemeModal();
+}
+
+function updateThemeOptions() {
+    const current = document.body.getAttribute('data-theme');
+    document.querySelectorAll('.dx-theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === current);
+    });
+}
+
+function openDxThemeModal() {
+    document.getElementById('dxThemeModal')?.classList.add('open');
+}
+
+function closeDxThemeModal() {
+    document.getElementById('dxThemeModal')?.classList.remove('open');
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDxThemeModal();
+});
+</script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">The respiratory diverticulum (lung bud) arises from which embryologic structure during week 4?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The midgut gives rise to the small intestine and proximal colon, not the respiratory system." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Midgut endoderm</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="The lung bud evaginates from the ventral foregut endoderm during week 4. The tracheoesophageal septum separates it from the dorsal esophagus. Failure of this septation → tracheoesophageal fistula (TEF). The endoderm forms the epithelial lining; splanchnic mesoderm forms cartilage, smooth muscle, and vasculature." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Ventral wall of the foregut endoderm</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neural crest contributes to craniofacial structures and the enteric nervous system, not respiratory epithelium." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Neural crest ectoderm</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Intermediate mesoderm forms the urogenital system, not the respiratory system." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Intermediate mesoderm</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Type II pneumocytes begin producing surfactant at approximately which gestational age?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="At 16 weeks, the lungs are in the pseudoglandular stage — no alveolar development or surfactant production yet." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">16 weeks</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Type II pneumocytes appear during the canalicular stage (~24 weeks) and begin producing surfactant (dipalmitoylphosphatidylcholine/DPPC). Adequate surfactant for extrauterine life is usually present by 35 weeks. Premature infants &lt;35 weeks → surfactant deficiency → neonatal respiratory distress syndrome (RDS). Antenatal corticosteroids accelerate surfactant production." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">24-28 weeks (with adequate amounts by 35 weeks)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="By 36-40 weeks surfactant is abundant, but production begins much earlier at 24-28 weeks." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">36-40 weeks</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="At 8 weeks, the lung is in the embryonic period — only primitive bronchial buds exist." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">8 weeks</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Congenital diaphragmatic hernia (CDH) most commonly occurs through which defect?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Morgagni hernia (retrosternal/parasternal) accounts for only ~5% of CDH. It&#x27;s typically right-sided and presents later in life." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Foramen of Morgagni (anterior)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Bochdalek hernia: ~85-90% of CDH, typically LEFT posterolateral. Failure of the pleuroperitoneal membrane to close → abdominal viscera herniate into the thorax → pulmonary hypoplasia (both ipsilateral and contralateral) + pulmonary hypertension. Presents with respiratory distress at birth, scaphoid abdomen, absent breath sounds on affected side." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Foramen of Bochdalek (posterolateral)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Central tendon defects (eventration) are uncommon and usually present differently from classic CDH." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Central tendon defect</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Hiatal hernia is an acquired adult condition, not the congenital CDH that presents in neonates." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Esophageal hiatus</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">The tracheoesophageal septum fails to properly divide the foregut. What is the MOST common type of tracheoesophageal fistula (TEF)?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="H-type (isolated fistula, no atresia) is uncommon (~4%). The most common type involves esophageal atresia." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">H-type fistula without atresia</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Type C (Gross classification): ~85% of cases. Proximal esophageal pouch (blind-ending) + distal TEF connecting the trachea to the distal esophageal segment. Presentation: polyhydramnios prenatally, inability to pass NG tube, drooling, choking with feeds, gas in stomach on X-ray. Associated with VACTERL anomalies." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Esophageal atresia with distal TEF (Type C)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Pure atresia without fistula (~8%) presents with a gasless abdomen on X-ray (no air reaches the stomach)." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Esophageal atresia without fistula (Type A)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Double fistula (Type D) is the rarest form (&lt;1%)." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Esophageal atresia with proximal and distal fistulas (Type D)</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which stage of lung development is characterized by formation of terminal sacs (primitive alveoli) and the beginning of the blood-air barrier?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Pseudoglandular: conducting airways form (bronchi through terminal bronchioles). No gas exchange possible — resembles a gland histologically." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Pseudoglandular stage (weeks 5-17)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Saccular stage: terminal sacs (primitive alveoli) form, capillaries come into close contact with thin epithelium → primitive blood-air barrier. Type I and Type II pneumocytes differentiate. Extrauterine survival becomes possible (with intensive support) from ~24 weeks. True alveolarization continues into the alveolar stage (36 weeks through age 8)." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Saccular stage (weeks 26-36)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Canalicular: respiratory bronchioles and early acini form, capillary networks develop. Type II pneumocytes appear. Viability threshold (~24 weeks) occurs at the transition from canalicular to saccular." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Canalicular stage (weeks 16-26)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The alveolar stage is post-saccular — true alveoli form by septation of terminal sacs. The blood-air barrier begins in the saccular stage." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Alveolar stage (36 weeks to 8 years)</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Pulmonary sequestration is characterized by:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Normal connections mean normal lung tissue, not a sequestration." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Lung tissue with normal bronchial connection and normal pulmonary arterial supply</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Pulmonary sequestration: ectopic lung tissue receiving systemic arterial supply (usually from the aorta), NO connection to the bronchial tree. Intralobar (75%): within visceral pleura, presents with recurrent pneumonia. Extralobar (25%): separate pleural covering, often left lower lobe, associated with other congenital anomalies. Diagnosis: CT angiography showing anomalous systemic artery." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Non-functioning lung tissue with systemic arterial blood supply and no connection to the tracheobronchial tree</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This describes congenital lobar emphysema (overinflation), not sequestration." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Overdistended lobe due to cartilage deficiency</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="A cystic lesion communicating with airways describes a CPAM (congenital pulmonary airway malformation), not a sequestration." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cystic lesion with communication to the bronchial tree</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">Antenatal corticosteroids (betamethasone) given to a mother at risk for preterm delivery at 28 weeks work by which mechanism?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Exogenous surfactant (given postnatally) directly replaces surfactant. Antenatal steroids work differently." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Directly replacing missing surfactant in the fetal lungs</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Antenatal corticosteroids: stimulate Type II pneumocyte differentiation → increased surfactant synthesis and secretion. Also promote structural maturation (thinning of alveolar walls, increased lung compliance). Most effective when given 24-48 hours before delivery. Recommended for all pregnancies at risk for preterm birth between 24-34 weeks." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Accelerating fetal lung maturation and Type II pneumocyte surfactant production</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Tocolytics (nifedipine, indomethacin) delay contractions. Corticosteroids promote lung maturity." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Preventing uterine contractions to delay delivery</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Corticosteroids do not alter hemoglobin properties. They act on lung maturation." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Increasing fetal hemoglobin oxygen affinity</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Congenital pulmonary airway malformation (CPAM, formerly CCAM) is classified by cyst size. Which type has the BEST prognosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Type 0 is the rarest and most severe — incompatible with life (complete acinar dysplasia)." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Type 0 (acinar dysplasia)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="CPAM Type 1: large cysts (&gt;2 cm), most common type (~65%), BEST prognosis. Often a single dominant cyst. Can be diagnosed prenatally on ultrasound. Some may regress; symptomatic cases require lobectomy. Small risk of rhabdomyosarcoma or bronchoalveolar carcinoma within the cyst — surgical resection generally recommended even if asymptomatic." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Type 1 (large cysts >2 cm)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Type 2 has smaller cysts and intermediate prognosis. Often associated with other anomalies (renal agenesis, CDH)." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Type 2 (small cysts <2 cm)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Type 3 is a large, solid-appearing mass (microcysts &lt;0.5 cm) with a poorer prognosis — can cause mediastinal shift and hydrops." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Type 3 (microcystic/solid)</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="cdh-congenital-diaphragmatic-hernia-crt.html" class="cross-link"><div class="cross-link-title">🧪 Congenital Diaphragmatic Hernia CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="surfactant-deficiency-rds-crt.html" class="cross-link"><div class="cross-link-title">🧪 Surfactant Deficiency / RDS CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="tef-esophageal-atresia-crt.html" class="cross-link"><div class="cross-link-title">🧪 TEF & Esophageal Atresia CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="congenital-lobar-emphysema-crt.html" class="cross-link"><div class="cross-link-title">🧪 Congenital Lobar Emphysema CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="cpam-bronchogenic-cyst-crt.html" class="cross-link"><div class="cross-link-title">🧪 CPAM & Bronchogenic Cyst CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="pulmonary-sequestration-crt.html" class="cross-link"><div class="cross-link-title">🧪 Pulmonary Sequestration CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="laryngotracheal-development-crt.html" class="cross-link"><div class="cross-link-title">🧪 Laryngotracheal Development CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="obstructive-lung-module.html" class="cross-link"><div class="cross-link-title">📘 Obstructive Lung Disease</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="respiratory-pft-module.html" class="cross-link"><div class="cross-link-title">📘 Respiratory PFTs</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="pft-interpretation-module.html" class="cross-link"><div class="cross-link-title">📘 PFT Interpretation</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="croup-module.html" class="cross-link"><div class="cross-link-title">📘 Croup</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="bronchiolitis-module.html" class="cross-link"><div class="cross-link-title">📘 Bronchiolitis</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a><a href="../ReasonDx/deep-dive-player.html?module=pediatric-urology-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

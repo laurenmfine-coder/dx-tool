@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pediatrics - ReasonDx</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 Peds Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Pediatrics with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=peds01" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=pediatric,child,infant,fever" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Pediatric Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 12+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Emma</strong>, 6-month-old female, presents for well-child visit. Parents ask about developmental milestones, feeding, and vaccinations.',pearl:'6 months: sits with support, babbles, transfers objects. Vaccines: DTaP, IPV, Hib, PCV, RV, HepB. Introduce solids around 6 months.',objectives:['Know developmental milestones','Understand vaccine schedule','Screen for developmental delays','Counsel on nutrition'],refs:[{t:'AAP Bright Futures',u:'https://brightfutures.aap.org/'}]},
+2:{qs:[6,7,8,9,10],narrative:'<strong>Liam</strong>, 2-year-old male, presents with fever, rhinorrhea, and fussiness for 2 days. Need to evaluate for serious bacterial infection.',pearl:'Fever without source: age matters. <28 days: full sepsis workup. 29-60 days: Rochester/Philadelphia criteria. >60 days: clinical judgment.',objectives:['Evaluate pediatric fever','Know when to do sepsis workup','Identify serious bacterial infection','Manage viral illness'],refs:[{t:'Pediatric Fever Guidelines',u:'https://www.aap.org/'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Sophia</strong>, 18-month-old, presents with barky cough, stridor, and mild respiratory distress. Classic croup presentation.',pearl:'Croup: 6mo-3yr, barky cough, inspiratory stridor, steeple sign. Dexamethasone for all. Nebulized epinephrine if moderate-severe.',objectives:['Diagnose croup vs epiglottitis','Manage upper airway obstruction','Know bronchiolitis treatment','Recognize respiratory emergencies'],refs:[{t:'Croup Management',u:'https://www.aap.org/'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Noah</strong>, 4-year-old, presents obtunded after ingesting grandparents medications. Pediatric emergency requiring rapid assessment.',pearl:'Pediatric emergencies: ABC approach. Weight-based dosing critical. Common toxidromes: anticholinergic, cholinergic, opioid, sympathomimetic.',objectives:['Apply pediatric ABCD assessment','Calculate weight-based dosing','Recognize pediatric toxidromes','Manage pediatric resuscitation'],refs:[{t:'PALS Guidelines',u:'https://www.heart.org/'}]}
+};
+var Qs={
+1:{type:'Milestones',difficulty:'medium',domains:['development'],tags:['Step2','Peds'],stem:'A 9-month-old cannot sit unsupported and does not babble. What is the appropriate next step?',
+opts:[['a','Reassure parents this is normal variation'],['b','Refer for developmental evaluation'],['c','Repeat assessment at 12 months'],['d','Start physical therapy immediately']],
+ans:'b',
+exp:'<strong>Developmental delay:</strong> By 9 months, should sit unsupported (6mo milestone) and babble. Missing multiple milestones warrants developmental evaluation.',
+kp:'Sitting unsupported by 6-7 months. Babbling by 6-9 months. Red flags warrant evaluation.',
+dd:{mechanism:{title:'9-Month Milestones',content:'<ul><li>Sits unsupported (by 6mo)</li><li>Babbles (mama, dada nonspecific)</li><li>Stranger anxiety</li><li>Pincer grasp developing</li></ul>',bw:['Sits by 6-7 months','Babbles by 9 months','Stranger anxiety normal']}}},
+2:{type:'Vaccines',difficulty:'medium',domains:['prevention'],tags:['Step2','Peds'],stem:'Which vaccines are given at the 2-month well-child visit?',
+opts:[['a','MMR, varicella, and hepatitis A'],['b','DTaP, IPV, Hib, PCV13, RV, and HepB'],['c','Tdap, meningococcal, and HPV'],['d','Influenza and pneumococcal only']],
+ans:'b',
+exp:'<strong>2-month vaccines:</strong> DTaP, IPV, Hib, PCV13, Rotavirus, HepB (if not given earlier). MMR/varicella at 12 months.',
+kp:'2, 4, 6 months: DTaP, IPV, Hib, PCV, RV. HepB at birth, 1-2mo, 6mo. MMR/Var at 12mo.',
+dd:{mechanism:{title:'Vaccine Schedule',content:'<table><tr><th>Age</th><th>Vaccines</th></tr><tr><td>Birth</td><td>HepB</td></tr><tr><td>2,4,6 mo</td><td>DTaP, IPV, Hib, PCV, RV</td></tr><tr><td>12-15 mo</td><td>MMR, Var, Hib, PCV</td></tr></table>',bw:['DTaP at 2,4,6,15-18mo, 4-6yr','MMR at 12-15mo','IPV at 2,4,6-18mo, 4-6yr']}}},
+3:{type:'Growth',difficulty:'medium',domains:['development'],tags:['Step2','Peds'],stem:'A breastfed infant has dropped from 50th to 10th percentile for weight over 3 months. What should be assessed?',
+opts:[['a','This is normal for breastfed infants'],['b','Feeding adequacy and technique'],['c','Immediately switch to formula'],['d','Order genetic testing first']],
+ans:'b',
+exp:'<strong>Failure to thrive:</strong> Crossing two major percentile lines is concerning. Assess feeding (frequency, duration, latch), wet diapers, maternal milk supply.',
+kp:'Crossing 2 percentile lines = evaluate. Assess feeding first. Most FTT is inadequate intake.',
+dd:{mechanism:{title:'FTT Evaluation',content:'<h4>Feeding Assessment</h4><ul><li>Frequency and duration</li><li>Latch quality</li><li>Wet diapers (6+/day)</li><li>Maternal supply</li></ul>',bw:['Crossing percentiles','Assess intake first','Most FTT = inadequate intake']}}},
+4:{type:'Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','Peds'],stem:'At what age is autism spectrum disorder screening recommended?',
+opts:[['a','6 months of age'],['b','18 and 24 months of age'],['c','4 years old at school entry'],['d','Only if parents express concerns']],
+ans:'b',
+exp:'<strong>ASD screening:</strong> M-CHAT-R at 18 and 24 months per AAP. Also screen if parental concern or risk factors at any visit.',
+kp:'Screen at 18 and 24 months (M-CHAT-R). Developmental surveillance at every visit.',
+dd:{mechanism:{title:'ASD Red Flags',content:'<ul><li>No babbling by 12 months</li><li>No pointing/waving by 12 months</li><li>No single words by 16 months</li><li>No 2-word phrases by 24 months</li><li>Any language regression</li></ul>',bw:['M-CHAT at 18, 24 months','Early intervention key','Regression is red flag']}}},
+5:{type:'Lead Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','Peds'],stem:'When should universal lead screening be performed?',
+opts:[['a','At birth only'],['b','At 12 and 24 months of age'],['c','At 5 years old before school'],['d','Only in high-risk populations']],
+ans:'b',
+exp:'<strong>Lead screening:</strong> Varies by state, but generally at 12 and 24 months in high-risk areas. Risk assessment at each visit. Treat if BLL ≥45 μg/dL.',
+kp:'Screen at 12 and 24 months in high-risk areas. BLL ≥5 requires monitoring. ≥45 needs chelation.',
+dd:{mechanism:{title:'Lead Levels',content:'<table><tr><th>BLL (μg/dL)</th><th>Action</th></tr><tr><td>≥5</td><td>Monitor, reduce exposure</td></tr><tr><td>≥45</td><td>Chelation therapy</td></tr><tr><td>≥70</td><td>Emergent chelation</td></tr></table>',bw:['Screen at 12, 24 months','≥5 elevated','≥45 chelation']}}},
+6:{type:'Fever Evaluation',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 3-week-old with fever 38.5°C appears well. What is the appropriate management?',
+opts:[['a','Reassurance and outpatient follow-up'],['b','Oral antibiotics and discharge home'],['c','Full sepsis workup and admission'],['d','Acetaminophen and watch for 24 hours']],
+ans:'c',
+exp:'<strong>Neonate fever:</strong> <28 days with fever = full sepsis workup (CBC, blood cx, urine, LP) and admission for empiric antibiotics. Cannot exclude serious bacterial infection clinically.',
+kp:'<28 days + fever = full sepsis workup + admit. 3-5% have serious bacterial infection.',
+dd:{mechanism:{title:'Fever by Age',content:'<table><tr><th>Age</th><th>Management</th></tr><tr><td><28 days</td><td>Full sepsis workup, admit</td></tr><tr><td>29-60 days</td><td>Risk stratify (Rochester)</td></tr><tr><td>3-36 months</td><td>Clinical assessment</td></tr></table>',bw:['<28 days always admit','29-60 days stratify','LP for neonates']}}},
+7:{type:'Otitis Media',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A 2-year-old with acute otitis media and mild symptoms. What is appropriate initial management?',
+opts:[['a','Immediate high-dose amoxicillin'],['b','Observation for 48-72 hours without antibiotics'],['c','Tympanostomy tube placement'],['d','IV antibiotics and admission']],
+ans:'b',
+exp:'<strong>AOM management:</strong> Observation option for ≥6 months with mild symptoms, unilateral, non-severe. Treat if <6mo, severe, bilateral, or fails observation.',
+kp:'Observation option for mild, unilateral AOM in children ≥6 months. Amoxicillin if treating.',
+dd:{mechanism:{title:'AOM Treatment',content:'<h4>Treat Immediately If:</h4><ul><li>Age <6 months</li><li>Bilateral AOM in 6-23 mo</li><li>Severe symptoms</li><li>Otorrhea</li></ul><h4>May Observe If:</h4><ul><li>≥6 months, mild, unilateral</li></ul>',bw:['Amoxicillin 80-90mg/kg/day','<6 months always treat','Observation option exists']}}},
+8:{type:'Pharyngitis',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A 7-year-old has sore throat, fever, and tonsillar exudates. Rapid strep is positive. What is the treatment?',
+opts:[['a','Symptomatic treatment only'],['b','Penicillin or amoxicillin for 10 days'],['c','Azithromycin for 3 days'],['d','Oral steroids for inflammation']],
+ans:'b',
+exp:'<strong>GAS pharyngitis:</strong> Penicillin V or amoxicillin x10 days is first-line. Prevents rheumatic fever. Azithromycin only if penicillin allergic.',
+kp:'Amoxicillin or penicillin x10 days. Prevents rheumatic fever. Azithromycin for allergy only.',
+dd:{mechanism:{title:'Strep Pharyngitis',content:'<h4>Treatment</h4><ul><li>Amoxicillin 50mg/kg/day x 10 days</li><li>Or Pen V x 10 days</li><li>Azithromycin if allergic</li></ul><h4>Centor Criteria</h4><ul><li>Fever, exudates, tender nodes, no cough</li></ul>',bw:['10-day course','Prevents rheumatic fever','Test before treating']}}},
+9:{type:'UTI',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 6-month-old girl with fever has pyuria and positive urine culture. What additional workup is needed?',
+opts:[['a','No imaging needed for first UTI'],['b','Renal and bladder ultrasound'],['c','Immediate VCUG in all cases'],['d','CT scan of abdomen and pelvis']],
+ans:'b',
+exp:'<strong>Pediatric UTI:</strong> Renal/bladder US for all children 2-24 months with first febrile UTI. VCUG if US abnormal or recurrent UTI.',
+kp:'US for first febrile UTI (2-24 months). VCUG if abnormal US or recurrent UTI.',
+dd:{mechanism:{title:'UTI Workup',content:'<h4>First Febrile UTI (2-24mo)</h4><ul><li>Renal/bladder ultrasound</li><li>VCUG if US abnormal</li></ul><h4>Recurrent UTI</h4><ul><li>VCUG recommended</li><li>Evaluate for VUR</li></ul>',bw:['US for first UTI','VCUG if abnormal','VUR prophylaxis if grade III-V']}}},
+10:{type:'Gastroenteritis',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A toddler with viral gastroenteritis has mild dehydration. What is the preferred treatment?',
+opts:[['a','IV fluid bolus and admission'],['b','Oral rehydration solution (ORS)'],['c','Clear fluids like apple juice'],['d','Anti-diarrheal medications']],
+ans:'b',
+exp:'<strong>Dehydration management:</strong> Mild-moderate: ORS (50-100 mL/kg over 4h). Severe: IV fluids. Resume age-appropriate diet early. Avoid anti-diarrheals in children.',
+kp:'ORS for mild-moderate dehydration. Continue breastfeeding. Resume diet early. No anti-diarrheals.',
+dd:{mechanism:{title:'Dehydration',content:'<table><tr><th>Severity</th><th>Treatment</th></tr><tr><td>Mild (<5%)</td><td>ORS 50mL/kg/4h</td></tr><tr><td>Moderate (5-10%)</td><td>ORS 100mL/kg/4h</td></tr><tr><td>Severe (>10%)</td><td>IV fluids</td></tr></table>',bw:['ORS first-line','Continue breastfeeding','Early diet resumption']}}},
+11:{type:'Croup',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 2-year-old with barky cough, hoarseness, and inspiratory stridor. What is the most likely diagnosis?',
+opts:[['a','Epiglottitis with bacterial infection'],['b','Viral croup (laryngotracheobronchitis)'],['c','Bronchiolitis from RSV'],['d','Bacterial tracheitis']],
+ans:'b',
+exp:'<strong>Croup:</strong> Parainfluenza virus most common. Age 6mo-3yr. Barky cough, inspiratory stridor, hoarseness. "Steeple sign" on X-ray (subglottic narrowing).',
+kp:'Parainfluenza most common. Barky cough + stridor. Steeple sign on X-ray.',
+dd:{mechanism:{title:'Croup vs Epiglottitis',content:'<table><tr><th>Feature</th><th>Croup</th><th>Epiglottitis</th></tr><tr><td>Age</td><td>6mo-3yr</td><td>Any (rare now)</td></tr><tr><td>Cough</td><td>Barky</td><td>Minimal</td></tr><tr><td>Drooling</td><td>No</td><td>Yes</td></tr><tr><td>Toxic</td><td>No</td><td>Yes</td></tr></table>',bw:['Parainfluenza virus','Steeple sign','6mo-3yr peak']}}},
+12:{type:'Croup Management',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A child with croup has stridor at rest but no respiratory distress. What is the initial treatment?',
+opts:[['a','Observation only without medications'],['b','Dexamethasone (single dose)'],['c','Racemic epinephrine immediately'],['d','Intubation for airway protection']],
+ans:'b',
+exp:'<strong>Croup treatment:</strong> Dexamethasone (0.6 mg/kg, max 10mg) for all croup (even mild). Add nebulized epinephrine for moderate-severe (stridor at rest with distress).',
+kp:'Dexamethasone for ALL croup. Epinephrine for moderate-severe. Observe 3-4h after epi.',
+dd:{mechanism:{title:'Croup Treatment',content:'<h4>All Cases</h4><ul><li>Dexamethasone 0.6mg/kg PO/IM</li><li>Single dose effective</li></ul><h4>Moderate-Severe</h4><ul><li>Add nebulized epinephrine</li><li>Observe 3-4 hours after</li></ul>',bw:['Dex for all','Epi for moderate-severe','Observe after epi']}}},
+13:{type:'Bronchiolitis',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 4-month-old with wheezing, nasal congestion, and hypoxia after URI symptoms. What is the most likely diagnosis?',
+opts:[['a','Viral croup'],['b','Bronchiolitis (likely RSV)'],['c','Asthma exacerbation'],['d','Bacterial pneumonia']],
+ans:'b',
+exp:'<strong>Bronchiolitis:</strong> RSV most common. Age <2 years. Starts with URI, then wheezing, crackles, hypoxia. Peak incidence 2-6 months.',
+kp:'RSV most common cause. Age <2 years. Wheezing + hypoxia after URI prodrome.',
+dd:{mechanism:{title:'Bronchiolitis',content:'<h4>Features</h4><ul><li>Age <2 years (peak 2-6mo)</li><li>URI prodrome</li><li>Wheezing, crackles</li><li>Hypoxia</li></ul><h4>RSV Testing</h4><ul><li>Not required for management</li><li>May help cohorting</li></ul>',bw:['RSV most common','Age <2 years','URI prodrome']}}},
+14:{type:'Bronchiolitis Rx',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'What is the recommended treatment for bronchiolitis?',
+opts:[['a','Bronchodilators and systemic steroids'],['b','Supportive care with oxygen and hydration'],['c','Antibiotics for bacterial superinfection'],['d','Inhaled hypertonic saline routinely']],
+ans:'b',
+exp:'<strong>Bronchiolitis treatment:</strong> Supportive care only. O2 if SpO2 <90%, hydration, suctioning. Bronchodilators, steroids, and antibiotics NOT recommended.',
+kp:'Supportive care only. No bronchodilators, no steroids. O2 if SpO2 <90%.',
+dd:{mechanism:{title:'Bronchiolitis Rx',content:'<h4>Recommended</h4><ul><li>Supplemental O2 if SpO2 <90%</li><li>Hydration (oral or IV)</li><li>Nasal suctioning</li></ul><h4>NOT Recommended</h4><ul><li>Bronchodilators</li><li>Steroids</li><li>Antibiotics</li></ul>',bw:['Supportive care only','No bronchodilators','No steroids']}}},
+15:{type:'Asthma',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A 6-year-old with asthma exacerbation has SpO2 88% and severe distress. What is immediate treatment?',
+opts:[['a','Oral steroids and discharge home'],['b','Albuterol nebulizers, oxygen, and systemic steroids'],['c','Inhaled corticosteroids only'],['d','Observation without bronchodilators']],
+ans:'b',
+exp:'<strong>Asthma exacerbation:</strong> Continuous/frequent albuterol, supplemental O2, systemic corticosteroids (oral as effective as IV). Add ipratropium for severe.',
+kp:'Albuterol + oxygen + steroids for acute exacerbation. Ipratropium for severe. Oral steroids = IV.',
+dd:{mechanism:{title:'Asthma Exacerbation',content:'<h4>Treatment</h4><ul><li>Albuterol nebulizer q20min or continuous</li><li>Oxygen to maintain SpO2 >92%</li><li>Systemic corticosteroids</li><li>Ipratropium for severe</li></ul>',bw:['Albuterol + O2 + steroids','Ipratropium if severe','Oral steroids effective']}}},
+16:{type:'PALS',difficulty:'hard',domains:['emergency'],tags:['Step2','Peds'],stem:'An unresponsive child has no pulse. What is the correct compression to ventilation ratio for single rescuer CPR?',
+opts:[['a','15:2 compressions to ventilations'],['b','30:2 compressions to ventilations'],['c','Continuous compressions without ventilation'],['d','5:1 compressions to ventilations']],
+ans:'b',
+exp:'<strong>Pediatric CPR:</strong> Single rescuer: 30:2. Two rescuers: 15:2. Compression depth: 1/3 chest depth. Rate: 100-120/min.',
+kp:'Single rescuer 30:2, two rescuers 15:2. Depth 1/3 chest. Rate 100-120/min.',
+dd:{mechanism:{title:'Pediatric BLS',content:'<table><tr><th>Rescuers</th><th>Ratio</th></tr><tr><td>Single</td><td>30:2</td></tr><tr><td>Two</td><td>15:2</td></tr></table><h4>Compressions</h4><ul><li>Depth: 1/3 chest depth</li><li>Rate: 100-120/min</li></ul>',bw:['30:2 single rescuer','15:2 two rescuers','Depth 1/3 chest']}}},
+17:{type:'Fluid Bolus',difficulty:'medium',domains:['emergency'],tags:['Step2','Peds'],stem:'A child in septic shock needs fluid resuscitation. What is the standard bolus?',
+opts:[['a','10 mL/kg over 1 hour'],['b','20 mL/kg over 5-10 minutes'],['c','40 mL/kg over 4 hours'],['d','5 mL/kg over 30 minutes']],
+ans:'b',
+exp:'<strong>Pediatric fluid bolus:</strong> 20 mL/kg crystalloid over 5-10 minutes. May repeat up to 60 mL/kg in first hour. Reassess after each bolus.',
+kp:'20 mL/kg bolus, may repeat x3 in first hour. Use isotonic crystalloid. Reassess frequently.',
+dd:{mechanism:{title:'Septic Shock',content:'<h4>Fluid Resuscitation</h4><ul><li>20 mL/kg bolus x 3 (60 mL/kg total)</li><li>Over 5-10 minutes each</li><li>Isotonic crystalloid</li></ul><h4>Vasopressors</h4><ul><li>If fluid-refractory</li><li>Epinephrine or norepinephrine</li></ul>',bw:['20 mL/kg bolus','Up to 60 mL/kg first hour','Reassess after each']}}},
+18:{type:'Intussusception',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 9-month-old with intermittent crying, vomiting, and "currant jelly" stool. What is the diagnosis?',
+opts:[['a','Viral gastroenteritis'],['b','Intussusception'],['c','Meckel diverticulum'],['d','Pyloric stenosis']],
+ans:'b',
+exp:'<strong>Intussusception:</strong> Peak 6-36 months. Classic triad: colicky abdominal pain, vomiting, currant jelly stool (late). Sausage-shaped mass. US diagnostic, air enema therapeutic.',
+kp:'Colicky pain + currant jelly stool = intussusception. US target sign. Air enema to reduce.',
+dd:{mechanism:{title:'Intussusception',content:'<h4>Classic Features</h4><ul><li>Age 6-36 months</li><li>Colicky pain (drawing up legs)</li><li>Vomiting</li><li>Currant jelly stool (late)</li></ul><h4>Diagnosis/Treatment</h4><ul><li>US: target sign</li><li>Air enema reduction</li></ul>',bw:['Peak 6-36 months','Target sign on US','Air enema treatment']}}},
+19:{type:'Pyloric Stenosis',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 4-week-old has projectile non-bilious vomiting after feeds and appears hungry. What is the likely diagnosis?',
+opts:[['a','GERD with reflux'],['b','Pyloric stenosis'],['c','Malrotation with volvulus'],['d','Intussusception']],
+ans:'b',
+exp:'<strong>Pyloric stenosis:</strong> 3-6 weeks of age. Projectile, non-bilious vomiting. Hungry after vomiting. Olive-shaped mass. Hypochloremic, hypokalemic metabolic alkalosis.',
+kp:'3-6 weeks, projectile non-bilious vomiting, hungry after. Olive mass. Metabolic alkalosis.',
+dd:{mechanism:{title:'Pyloric Stenosis',content:'<h4>Features</h4><ul><li>Age 3-6 weeks</li><li>Projectile, non-bilious vomiting</li><li>Hungry after vomiting</li><li>Olive-shaped mass (RUQ)</li></ul><h4>Labs</h4><ul><li>Hypochloremic</li><li>Hypokalemic</li><li>Metabolic alkalosis</li></ul>',bw:['3-6 weeks old','Non-bilious','Olive mass','Metabolic alkalosis']}}},
+20:{type:'Toxicology',difficulty:'hard',domains:['emergency'],tags:['Step2','Peds'],stem:'A toddler presents with altered mental status, pinpoint pupils, and respiratory depression. What is the antidote?',
+opts:[['a','Flumazenil'],['b','Naloxone'],['c','N-acetylcysteine'],['d','Atropine']],
+ans:'b',
+exp:'<strong>Opioid toxidrome:</strong> CNS depression, miosis, respiratory depression. Antidote: naloxone. Start 0.1 mg/kg IV, may repeat.',
+kp:'Opioid triad: CNS depression, miosis, respiratory depression. Naloxone is antidote.',
+dd:{mechanism:{title:'Toxidromes',content:'<table><tr><th>Toxidrome</th><th>Features</th><th>Antidote</th></tr><tr><td>Opioid</td><td>Miosis, resp depression</td><td>Naloxone</td></tr><tr><td>Anticholinergic</td><td>Mydriasis, dry, hot</td><td>Physostigmine</td></tr><tr><td>Cholinergic</td><td>SLUDGE</td><td>Atropine</td></tr></table>',bw:['Opioid = miosis','Anticholinergic = mydriasis','SLUDGE = cholinergic']}}}
+};
+var answers={1:'d',2:'c',3:'c',4:'a',5:'b',6:'d',7:'c',8:'a',9:'c',10:'a',11:'b',12:'b',13:'b',14:'a',15:'a',16:'d',17:'d',18:'b',19:'c',20:'d'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border)"><div style="font-size:10px;font-weight:600;color: var(--text-secondary);margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#ec4899;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Pediatrics"
+         data-key-points="🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

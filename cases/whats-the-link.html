@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's the Link? - MechanismDx Calibration</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            min-height: 100vh; 
+            color: #f8fafc; 
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        
+        .exercise-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0ea5e9;
+        }
+        
+        .findings-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .finding-box {
+            background: rgba(14,165,233,0.15);
+            border: 2px solid rgba(14,165,233,0.4);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: center;
+            min-width: 150px;
+        }
+        .finding-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+        }
+        .finding-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #7dd3fc;
+        }
+        .link-symbol {
+            font-size: 2rem;
+            color: rgba(255,255,255,0.3);
+        }
+        
+        .question-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #bae6fd;
+            margin-bottom: 16px;
+        }
+        
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover:not(.disabled) { 
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+        }
+        .option.selected { border-color: #0ea5e9; background: rgba(14,165,233,0.2); }
+        .option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; }
+        .option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option.disabled { cursor: default; opacity: 0.7; }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            border: none;
+            margin-top: 16px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            color: white;
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .explanation-panel {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        .explanation-panel.show { display: block; }
+        .explanation-panel.incorrect {
+            background: rgba(239,68,68,0.1);
+            border-color: rgba(239,68,68,0.3);
+        }
+        .explanation-header {
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .explanation-text {
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+        }
+        .mechanism-highlight {
+            background: rgba(251,191,36,0.15);
+            border-left: 3px solid #fbbf24;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0ea5e9, #7dd3fc);
+            border-radius: 3px;
+            transition: width 0.5s;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .stat-value { font-weight: 700; color: #7dd3fc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 What's the Link?</h1>
+            <p>Connect findings to their underlying mechanism</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+        
+        <div class="stats">
+            <div>Question: <span class="stat-value" id="current-q">1</span>/<span id="total-q">10</span></div>
+            <div>Score: <span class="stat-value" id="score">0</span></div>
+        </div>
+        
+        <div id="exercise-container"></div>
+    </div>
+
+    <script>
+        const exercises = [
+            {
+                finding1: { label: 'Finding', value: 'Kussmaul Respirations' },
+                finding2: { label: 'Lab', value: 'Low pH, Low Bicarb' },
+                question: 'What mechanism links deep rapid breathing to these lab values?',
+                options: [
+                    'Respiratory alkalosis causing hyperventilation',
+                    'Metabolic acidosis → respiratory compensation (blowing off CO2)',
+                    'Primary respiratory failure',
+                    'Anxiety-induced hyperventilation'
+                ],
+                correct: 1,
+                explanation: 'Metabolic acidosis (low pH, low bicarb) triggers the brainstem to increase respiratory rate and depth. This "blows off" CO2 to raise pH (respiratory compensation). Kussmaul breathing is the body\'s attempt to correct the acidosis.',
+                mechanism: 'Low pH → Carotid body stimulation → Medullary respiratory center → ↑ Rate & depth → ↓ PaCO2 → Partial pH correction'
+            },
+            {
+                finding1: { label: 'Finding', value: 'Pulsus Paradoxus >10mmHg' },
+                finding2: { label: 'Finding', value: 'Distended Neck Veins' },
+                question: 'What mechanism connects these two findings?',
+                options: [
+                    'Left heart failure with pulmonary edema',
+                    'Pericardial effusion/tamponade limiting cardiac filling',
+                    'Severe hypovolemia',
+                    'Pulmonary embolism'
+                ],
+                correct: 1,
+                explanation: 'Both findings point to cardiac tamponade. The pericardial fluid limits cardiac filling. Inspiration normally increases venous return to the right heart, but in tamponade this causes the RV to bulge into the LV (septal shift), dropping LV output (pulsus paradoxus). JVD reflects impaired venous return.',
+                mechanism: 'Pericardial fluid → ↑ Intrapericardial pressure → Impaired filling → ↑ CVP (JVD) + Exaggerated ventricular interdependence (pulsus paradoxus)'
+            },
+            {
+                finding1: { label: 'Symptom', value: 'Projectile Non-Bilious Vomiting' },
+                finding2: { label: 'Lab', value: 'pH 7.52, Cl 88, K 2.9' },
+                question: 'What is the mechanistic link?',
+                options: [
+                    'Small bowel obstruction with biliary backup',
+                    'Gastric outlet obstruction → loss of HCl → hypochloremic, hypokalemic metabolic alkalosis',
+                    'Renal tubular acidosis',
+                    'Chronic diarrhea'
+                ],
+                correct: 1,
+                explanation: 'Pyloric stenosis or gastric outlet obstruction causes loss of gastric HCl. Losing H+ causes alkalosis. Losing Cl- causes hypochloremia. The kidneys try to compensate by excreting K+ to retain H+, causing hypokalemia.',
+                mechanism: 'Vomiting HCl → Loss of H+ (alkalosis) + Loss of Cl- → Kidneys excrete K+ to retain H+ → Hypokalemic, hypochloremic metabolic alkalosis'
+            },
+            {
+                finding1: { label: 'Finding', value: 'Dilated Right Pupil' },
+                finding2: { label: 'Finding', value: 'Cushing Triad (HTN, Bradycardia, Irregular Resp)' },
+                question: 'What pathophysiologic process links these?',
+                options: [
+                    'Opioid overdose',
+                    'Uncal herniation with elevated ICP compressing CN III',
+                    'Horner syndrome',
+                    'Acute stroke'
+                ],
+                correct: 1,
+                explanation: 'Both findings indicate severely elevated ICP with impending herniation. The uncus herniates through the tentorial notch, compressing CN III (dilated pupil - parasympathetics run on the outside). Cushing triad is the body\'s attempt to maintain cerebral perfusion.',
+                mechanism: '↑ ICP → Uncal herniation → CN III compression → Fixed dilated pupil; ↑ ICP → Cushing reflex (HTN to maintain CPP, reflex bradycardia)'
+            },
+            {
+                finding1: { label: 'Lab', value: 'High K+, High Phos, Low Ca++' },
+                finding2: { label: 'Context', value: 'Post-chemotherapy for lymphoma' },
+                question: 'What mechanism causes this constellation?',
+                options: [
+                    'Renal failure from contrast',
+                    'Tumor lysis syndrome - release of intracellular contents',
+                    'Medication side effect',
+                    'Parathyroid dysfunction'
+                ],
+                correct: 1,
+                explanation: 'Tumor lysis releases intracellular contents: K+ and phosphorus pour out of lysed cells. High phosphorus binds calcium, causing hypocalcemia. Uric acid (from nucleic acid breakdown) can cause AKI.',
+                mechanism: 'Rapid cell death → Release of K+ (hyperkalemia), Phos (hyperphosphatemia), nucleic acids (hyperuricemia) → Phos binds Ca2+ → Hypocalcemia'
+            },
+            {
+                finding1: { label: 'Finding', value: 'S3 Gallop' },
+                finding2: { label: 'Finding', value: 'Bilateral Crackles' },
+                question: 'What is the unifying mechanism?',
+                options: [
+                    'Pneumonia',
+                    'Left ventricular failure with volume overload and pulmonary edema',
+                    'Pulmonary fibrosis',
+                    'Mitral stenosis only'
+                ],
+                correct: 1,
+                explanation: 'S3 gallop indicates rapid ventricular filling against a dilated, volume-overloaded ventricle (systolic HF). The failing LV backs up blood into the pulmonary circulation, increasing capillary hydrostatic pressure and causing pulmonary edema (crackles).',
+                mechanism: 'LV failure → ↓ Forward output + ↑ LVEDP → ↑ LA pressure → ↑ Pulmonary venous pressure → Pulmonary edema (crackles); Volume overload + rapid filling → S3'
+            },
+            {
+                finding1: { label: 'Finding', value: 'Clonus and Hyperreflexia' },
+                finding2: { label: 'Context', value: 'Patient on SSRIs + started tramadol' },
+                question: 'What mechanism links the drug combination to the neurologic findings?',
+                options: [
+                    'Opioid overdose',
+                    'Neuroleptic malignant syndrome',
+                    'Serotonin syndrome - excess serotonergic activity',
+                    'Anticholinergic toxicity'
+                ],
+                correct: 2,
+                explanation: 'SSRIs + tramadol (also serotonergic) can cause serotonin syndrome. Excess serotonin causes neuromuscular excitability (clonus, hyperreflexia, tremor) plus autonomic instability and altered mental status.',
+                mechanism: 'SSRI (↓ reuptake) + Tramadol (↓ reuptake + direct agonism) → ↑↑ Serotonin at 5-HT receptors → Neuromuscular hyperactivity (clonus, hyperreflexia)'
+            },
+            {
+                finding1: { label: 'Lab', value: 'BUN/Cr ratio >20:1' },
+                finding2: { label: 'Finding', value: 'Orthostatic hypotension, dry mucous membranes' },
+                question: 'What mechanism explains both?',
+                options: [
+                    'Intrinsic renal failure (ATN)',
+                    'Prerenal azotemia from hypovolemia/dehydration',
+                    'Post-renal obstruction',
+                    'Glomerulonephritis'
+                ],
+                correct: 1,
+                explanation: 'Hypovolemia causes both the clinical signs (orthostasis, dry membranes) and the lab pattern. Low renal perfusion → kidneys avidly reabsorb water and urea → BUN rises disproportionately to creatinine (ratio >20:1 = prerenal).',
+                mechanism: 'Hypovolemia → ↓ Renal perfusion → ↑ Urea reabsorption (BUN rises) + Cr stable → BUN/Cr >20:1; Low volume → Orthostatic changes'
+            },
+            {
+                finding1: { label: 'Finding', value: 'Hypotension refractory to fluids' },
+                finding2: { label: 'Finding', value: 'Hyperpigmentation' },
+                question: 'What mechanism links refractory hypotension to skin changes?',
+                options: [
+                    'Septic shock',
+                    'Primary adrenal insufficiency (Addison\'s) - loss of cortisol and aldosterone',
+                    'Pheochromocytoma',
+                    'Carcinoid syndrome'
+                ],
+                correct: 1,
+                explanation: 'Primary adrenal insufficiency causes loss of cortisol (needed for vascular tone and stress response) → refractory hypotension. Loss of negative feedback → high ACTH → ACTH stimulates melanocytes → hyperpigmentation.',
+                mechanism: '↓ Cortisol → Loss of vascular tone + ↓ stress response → Refractory hypotension; ↓ Cortisol → ↑ ACTH (no negative feedback) → ACTH cross-reacts with melanocyte receptors → Hyperpigmentation'
+            },
+            {
+                finding1: { label: 'Finding', value: 'Troponin elevated' },
+                finding2: { label: 'ECG', value: 'Diffuse ST elevations, PR depression' },
+                question: 'What condition links troponin elevation to this ECG pattern?',
+                options: [
+                    'STEMI from coronary occlusion',
+                    'Acute pericarditis with myocardial involvement (myopericarditis)',
+                    'Pulmonary embolism',
+                    'Hyperkalemia'
+                ],
+                correct: 1,
+                explanation: 'Diffuse ST elevations with PR depression is classic for pericarditis, not STEMI (which has regional changes). Troponin elevation indicates myocardial involvement (myopericarditis). STEMI has ST elevations in a coronary distribution.',
+                mechanism: 'Pericardial inflammation → Diffuse ST elevation + PR depression (atrial injury); If inflammation extends to myocardium → Troponin leak (myopericarditis)'
+            },
+            {
+                finding1: { label: 'Lab', value: 'Elevated lactate' },
+                finding2: { label: 'Vitals', value: 'BP 70/40, HR 130' },
+                question: 'What links tissue hypoperfusion to lactate elevation?',
+                options: [
+                    'Liver failure decreasing lactate clearance only',
+                    'Anaerobic metabolism due to inadequate oxygen delivery',
+                    'Diabetic ketoacidosis',
+                    'Excessive exercise'
+                ],
+                correct: 1,
+                explanation: 'In shock, inadequate tissue perfusion means cells can\'t get enough oxygen. Without O2, cells switch to anaerobic glycolysis, producing lactate instead of entering the Krebs cycle.',
+                mechanism: 'Shock → ↓ Tissue O2 delivery → Anaerobic glycolysis → Pyruvate → Lactate (instead of Krebs cycle)'
+            },
+            {
+                finding1: { label: 'Lab', value: 'Na 118, Urine Osm >100' },
+                finding2: { label: 'Finding', value: 'Euvolemic, recent surgery' },
+                question: 'What mechanism causes this pattern?',
+                options: [
+                    'Psychogenic polydipsia',
+                    'SIADH - inappropriate ADH secretion',
+                    'Diuretic use',
+                    'Adrenal insufficiency'
+                ],
+                correct: 1,
+                explanation: 'SIADH: ADH is secreted despite normal/low osmolality. The kidneys concentrate urine (Uosm >100) when they should be diluting it. Common triggers: surgery, pain, medications, CNS disorders.',
+                mechanism: 'Inappropriate ADH → Continued water reabsorption → Dilutional hyponatremia; Urine is concentrated (>100) when it should be dilute'
+            },
+            {
+                finding1: { label: 'Finding', value: 'Janeway lesions, Osler nodes' },
+                finding2: { label: 'Echo', value: 'Vegetation on mitral valve' },
+                question: 'What links these peripheral findings to the cardiac abnormality?',
+                options: [
+                    'Rheumatic heart disease',
+                    'Infective endocarditis with septic emboli',
+                    'Atrial myxoma',
+                    'Libman-Sacks endocarditis'
+                ],
+                correct: 1,
+                explanation: 'Infective endocarditis: bacteria form vegetations on valves. Pieces break off → septic emboli. Janeway lesions (painless, palms/soles) = septic emboli. Osler nodes (painful, fingers) = immune complex deposition.',
+                mechanism: 'Valve vegetation → Septic emboli → Janeway lesions (embolic); Immune complex deposition → Osler nodes'
+            },
+            {
+                finding1: { label: 'Lab', value: 'Creatinine rising, FeNa <1%' },
+                finding2: { label: 'Context', value: 'Started ACEi + NSAID' },
+                question: 'Why does this drug combination cause AKI?',
+                options: [
+                    'Direct tubular toxicity from both drugs',
+                    'Loss of both afferent and efferent autoregulation',
+                    'Allergic interstitial nephritis',
+                    'Bladder outlet obstruction'
+                ],
+                correct: 1,
+                explanation: 'NSAIDs block prostaglandins that dilate the afferent arteriole. ACEi blocks angiotensin II that constricts the efferent arteriole. Together = loss of GFR autoregulation. FeNa <1% = kidneys still working (prerenal pattern).',
+                mechanism: 'NSAID → ↓ Afferent dilation; ACEi → ↓ Efferent constriction → Cannot maintain GFR → Prerenal AKI (FeNa <1%)'
+            },
+            {
+                finding1: { label: 'Symptom', value: 'Ascending weakness' },
+                finding2: { label: 'CSF', value: 'Protein 180, WBC 3 (albuminocytologic dissociation)' },
+                question: 'What mechanism causes this pattern?',
+                options: [
+                    'Bacterial meningitis',
+                    'Guillain-Barré syndrome - autoimmune demyelination',
+                    'Myasthenia gravis',
+                    'Transverse myelitis'
+                ],
+                correct: 1,
+                explanation: 'GBS: post-infectious autoimmune attack on peripheral nerve myelin. High protein (inflammation) but normal/low WBC = albuminocytologic dissociation. Ascending weakness can progress to respiratory failure.',
+                mechanism: 'Molecular mimicry → Antibodies attack myelin → Demyelination → Ascending weakness; Inflammation → ↑ CSF protein but no cells'
+            },
+            {
+                finding1: { label: 'Lab', value: 'pH 7.52, pCO2 25, HCO3 20' },
+                finding2: { label: 'Context', value: 'Anxious patient, perioral numbness' },
+                question: 'What is the acid-base disorder and compensation?',
+                options: [
+                    'Metabolic alkalosis with respiratory compensation',
+                    'Respiratory alkalosis (acute, no compensation yet)',
+                    'Mixed metabolic and respiratory alkalosis',
+                    'Respiratory acidosis'
+                ],
+                correct: 1,
+                explanation: 'Anxiety → hyperventilation → blowing off CO2 → respiratory alkalosis. Acute = no renal compensation yet (takes 3-5 days). Perioral numbness from decreased ionized calcium (alkalosis increases protein binding).',
+                mechanism: 'Hyperventilation → ↓ CO2 → pH rises; Alkalosis → ↑ Ca binding to albumin → ↓ Ionized Ca → Perioral numbness, tetany'
+            },
+            {
+                finding1: { label: 'Finding', value: 'Muffled heart sounds' },
+                finding2: { label: 'ECG', value: 'Electrical alternans' },
+                question: 'What unifies these cardiac findings?',
+                options: [
+                    'Massive MI',
+                    'Pericardial effusion with tamponade physiology',
+                    'Dilated cardiomyopathy',
+                    'Hypertrophic cardiomyopathy'
+                ],
+                correct: 1,
+                explanation: 'Large pericardial effusion: fluid muffles heart sounds. Heart swings in fluid → electrical alternans (alternating QRS amplitude). Classic Beck\'s triad: hypotension, JVD, muffled sounds.',
+                mechanism: 'Pericardial fluid → Sound dampening (muffled); Heart swinging in fluid → Alternating QRS axis/amplitude'
+            }
+        ];
+        
+        let currentIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        
+        function renderExercise() {
+            const ex = exercises[currentIndex];
+            selectedOption = null;
+            
+            document.getElementById('total-q').textContent = exercises.length;
+            document.getElementById('current-q').textContent = currentIndex + 1;
+            document.getElementById('progress').style.width = `${((currentIndex + 1) / exercises.length) * 100}%`;
+            
+            const optionsHTML = ex.options.map((opt, i) => `
+                <div class="option" data-index="${i}" onclick="selectOption(${i})">${opt}</div>
+            `).join('');
+            
+            document.getElementById('exercise-container').innerHTML = `
+                <div class="exercise-card">
+                    <div class="findings-container">
+                        <div class="finding-box">
+                            <div class="finding-label">${ex.finding1.label}</div>
+                            <div class="finding-value">${ex.finding1.value}</div>
+                        </div>
+                        <div class="link-symbol">🔗</div>
+                        <div class="finding-box">
+                            <div class="finding-label">${ex.finding2.label}</div>
+                            <div class="finding-value">${ex.finding2.value}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-box">
+                        <div class="question-text">${ex.question}</div>
+                        <div class="options-list" id="options">
+                            ${optionsHTML}
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="check-btn" onclick="checkAnswer()" disabled>Check Answer</button>
+                    
+                    <div class="explanation-panel" id="explanation">
+                        <div class="explanation-header" id="exp-header"></div>
+                        <div class="explanation-text">${ex.explanation}</div>
+                        <div class="mechanism-highlight">
+                            <strong>🔬 Mechanism:</strong> ${ex.mechanism}
+                        </div>
+                        <button class="btn btn-primary" onclick="nextExercise()" style="margin-top:20px;">Next Question →</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function selectOption(index) {
+            if (document.querySelector('.option.disabled')) return;
+            
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`.option[data-index="${index}"]`).classList.add('selected');
+            selectedOption = index;
+            document.getElementById('check-btn').disabled = false;
+        }
+        
+        function checkAnswer() {
+            const ex = exercises[currentIndex];
+            
+            document.querySelectorAll('.option').forEach((opt, i) => {
+                opt.classList.add('disabled');
+                if (i === ex.correct) opt.classList.add('correct');
+                else if (i === selectedOption) opt.classList.add('incorrect');
+            });
+            
+            const panel = document.getElementById('explanation');
+            const header = document.getElementById('exp-header');
+            
+            if (selectedOption === ex.correct) {
+                score++;
+                header.textContent = '✅ Correct! You identified the mechanism.';
+            } else {
+                panel.classList.add('incorrect');
+                header.textContent = '❌ Not quite. Here\'s the connection:';
+            }
+            
+            panel.classList.add('show');
+            document.getElementById('check-btn').style.display = 'none';
+            document.getElementById('score').textContent = score;
+        }
+        
+        function nextExercise() {
+            currentIndex++;
+            if (currentIndex >= exercises.length) {
+                currentIndex = 0;
+                score = 0;
+            }
+            renderExercise();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        renderExercise();
+    </script>
+    
+    <!-- Open-Access References -->
+    <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; font-size: 0.85rem;">
+        <h3 style="color: #8b5cf6; margin-bottom: 12px;">📚 Evidence-Based References</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK545175/" target="_blank" style="color: #a78bfa;">StatPearls: Clinical Reasoning</a> - Pattern recognition, illness scripts</li>
+            <li style="margin-bottom: 8px;">• <a href="https://www.ncbi.nlm.nih.gov/books/NBK441836/" target="_blank" style="color: #a78bfa;">StatPearls: Physical Exam Findings</a> - Correlation with pathophysiology</li>
+            <li style="margin-bottom: 8px;">• <a href="https://pubmed.ncbi.nlm.nih.gov/28622310/" target="_blank" style="color: #a78bfa;">JAMA Rational Clinical Examination Series</a> - Evidence-based physical diagnosis</li>
+        </ul>
+    </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="What's the Link?"
+         data-key-points="📚 Evidence-Based References, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

@@ -1,0 +1,155 @@
+/**
+ * Dx Learning Ecosystem - Print Stylesheet
+ * Include with: <link rel="stylesheet" href="dx-print.css" media="print">
+ */
+
+@media print {
+    /* Hide non-essential elements */
+    .dx-nav,
+    .dx-nav-links,
+    .mobile-menu-btn,
+    .quiz-section,
+    .dx-btn,
+    .footer,
+    .web-controls,
+    #knowledge-graph,
+    .search-container,
+    .quick-actions,
+    .dx-streak-display,
+    .dx-xp-display,
+    .dx-achievement-popup,
+    .sidebar,
+    .hero-ctas,
+    .cta-section,
+    button,
+    nav {
+        display: none !important;
+    }
+    
+    /* Reset backgrounds */
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    /* Ensure text is black */
+    h1, h2, h3, h4, h5, h6,
+    p, li, td, th, span, div {
+        color: black !important;
+        background: white !important;
+    }
+    
+    /* Make headers stand out */
+    h1 { font-size: 24pt; margin-bottom: 12pt; }
+    h2 { font-size: 18pt; margin-top: 18pt; margin-bottom: 12pt; border-bottom: 1pt solid #ccc; padding-bottom: 6pt; }
+    h3 { font-size: 14pt; margin-top: 14pt; margin-bottom: 8pt; }
+    
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12pt 0;
+    }
+    
+    th, td {
+        border: 1pt solid #999;
+        padding: 6pt 8pt;
+        text-align: left;
+    }
+    
+    th {
+        background: #f0f0f0 !important;
+        font-weight: bold;
+    }
+    
+    /* Cards become simple boxes */
+    .dx-card,
+    .section,
+    .comparison-card,
+    .key-point,
+    .pearl,
+    .module-card,
+    .platform-card {
+        border: 1pt solid #ccc !important;
+        padding: 12pt !important;
+        margin: 12pt 0 !important;
+        background: white !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+    
+    /* Ensure links show URL */
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 10pt;
+        color: #666;
+    }
+    
+    /* Don't show URL for internal links */
+    a[href^="#"]::after,
+    a[href^="javascript"]::after {
+        content: "";
+    }
+    
+    /* Page breaks */
+    .category-section,
+    .section {
+        page-break-inside: avoid;
+    }
+    
+    h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    /* Full width content */
+    .main-content,
+    .content,
+    .section-inner,
+    main {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Remove gradients */
+    .header,
+    .hero,
+    .objectives,
+    .algorithm-box {
+        background: white !important;
+        border: 1pt solid #ccc !important;
+    }
+    
+    /* Print header info */
+    @page {
+        margin: 0.75in;
+        @top-center {
+            content: "Dx Learning Ecosystem";
+        }
+        @bottom-center {
+            content: "Page " counter(page) " of " counter(pages);
+        }
+    }
+    
+    /* Quiz answers - show all */
+    .quiz-option {
+        display: block !important;
+        border: 1pt solid #ccc !important;
+        padding: 6pt !important;
+        margin: 4pt 0 !important;
+    }
+    
+    .quiz-option.correct {
+        background: #e8f5e9 !important;
+        border-color: #4caf50 !important;
+    }
+    
+    /* Emoji handling */
+    .category-icon,
+    .module-icon,
+    .hero-card-icon {
+        font-size: 14pt;
+    }
+}

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immunodeficiency | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.7; }
+        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
+        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: #7c3aed; color: #fff; }
+        .header { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 32px 24px; }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .objectives { background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%); border: 1px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 40px; }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        .section { background: var(--bg-card); border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid var(--border); }
+        .section h2 { color: var(--text-primary); font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        .pearl { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 1px solid #facc15; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        .danger { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 1px solid #f87171; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .danger-title { color: #b91c1c; font-weight: 600; margin-bottom: 10px; }
+        .danger p { color: #991b1b; margin-bottom: 0; }
+        .key-point { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-left: 4px solid #7c3aed; padding: 20px; border-radius: 0 12px 12px 0; margin: 24px 0; }
+        .key-point-title { color: #5b21b6; font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #6b21a8; margin-bottom: 0; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 24px 0; }
+        .comparison-card { background: var(--bg-main); border-radius: 12px; padding: 24px; border: 1px solid var(--border); }
+        .comparison-card h4 { color: var(--text-primary); margin-bottom: 16px; font-size: 17px; }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        .quiz-section { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-radius: 16px; padding: 32px; margin: 40px 0; }
+        .quiz-title { color: #5b21b6; font-size: 22px; font-weight: 700; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border); }
+        .question-num { font-size: 12px; color: #7c3aed; font-weight: 600; margin-bottom: 8px; }
+        .question-text { font-size: 16px; color: var(--text-primary); font-weight: 500; margin-bottom: 16px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { border-color: #7c3aed; background: #f5f3ff; }
+        .option.selected { border-color: #7c3aed; background: #f5f3ff; }
+        .option.correct { border-color: var(--primary); background: var(--primary-bg); }
+        .option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .option-letter { width: 28px; height: 28px; border-radius: 50%; background: var(--border-light); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; }
+        .check-btn { background: #7c3aed; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 16px; }
+        .check-btn:hover { background: #5b21b6; }
+        .explanation { display: none; margin-top: 16px; padding: 16px; background: #f0fdf4; border-radius: 8px; border: 1px solid #86efac; }
+        .explanation.show { display: block; }
+        .explanation-title { color: #047857; font-weight: 600; margin-bottom: 8px; }
+        .explanation-text { color: #065f46; font-size: 14px; }
+        .footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-secondary); font-size: 13px; background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: #7c3aed; text-decoration: none; }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Unified Navigation -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="index.html">MechanismDx</a> → Allergy &amp; Immunology</div>
+            <h1>🧬 Primary Immunodeficiency</h1>
+            <p class="header-subtitle">When to suspect, how to evaluate, and what infections to expect</p>
+        </div>
+    </header>
+    
+    <main class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Recognize warning signs of primary immunodeficiency</li>
+                <li>Understand the immune defects in major PID categories</li>
+                <li>Match infection patterns to immune deficiency type</li>
+                <li>Apply appropriate laboratory evaluation</li>
+                <li>Understand principles of immunoglobulin replacement therapy</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Warning Signs of Immunodeficiency</h2>
+            <p>The Jeffrey Modell Foundation warning signs help identify patients who need evaluation:</p>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 10 Warning Signs (Adults)</div>
+                <p>1. ≥2 new ear infections within 1 year<br>
+                2. ≥2 serious sinus infections within 1 year<br>
+                3. One pneumonia per year for &gt;1 year<br>
+                4. Chronic diarrhea with weight loss<br>
+                5. Recurrent viral infections (colds, herpes, warts)<br>
+                6. Recurrent need for IV antibiotics<br>
+                7. Recurrent deep abscesses<br>
+                8. Persistent thrush or fungal skin infections<br>
+                9. Infection with normally harmless organisms<br>
+                10. Family history of immunodeficiency</p>
+            </div>
+            
+            <div class="pearl">
+                <div class="pearl-title">💡 SPUR: When to Think Immunodeficiency</div>
+                <p><strong>S</strong>evere - hospitalization, IV antibiotics, ICU<br>
+                <strong>P</strong>ersistent - slow response, prolonged treatment<br>
+                <strong>U</strong>nusual - opportunistic organisms, atypical sites<br>
+                <strong>R</strong>ecurrent - same type of infection</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Categories of Primary Immunodeficiency</h2>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>🅱️ B Cell / Antibody Defects</h4>
+                    <ul>
+                        <li><strong>Most common</strong> (~50% of PIDs)</li>
+                        <li>Encapsulated bacteria (S. pneumo, H. flu)</li>
+                        <li>Sinopulmonary infections predominate</li>
+                        <li>CVID, XLA, IgA deficiency</li>
+                        <li>Treat with IVIG/SCIG</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>🇹 T Cell / Combined Defects</h4>
+                    <ul>
+                        <li>Most severe (SCID is emergency)</li>
+                        <li>Opportunistic infections (PJP, CMV)</li>
+                        <li>Failure to thrive in infants</li>
+                        <li>SCID, DiGeorge syndrome</li>
+                        <li>May need stem cell transplant</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>🔵 Phagocyte Defects</h4>
+                    <ul>
+                        <li>Catalase-positive organisms</li>
+                        <li>Staph, Serratia, Aspergillus</li>
+                        <li>Deep-seated abscesses, granulomas</li>
+                        <li>CGD, LAD</li>
+                        <li>Prophylactic antibiotics/antifungals</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>🔴 Complement Defects</h4>
+                    <ul>
+                        <li>Encapsulated bacteria (especially Neisseria)</li>
+                        <li>Recurrent meningococcemia</li>
+                        <li>SLE-like syndromes (early complement)</li>
+                        <li>Vaccinate against encapsulated organisms</li>
+                        <li>CH50, AH50 for screening</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Common Variable Immunodeficiency (CVID)</h2>
+            <p>The most common symptomatic primary antibody deficiency in adults.</p>
+            
+            <h3>Diagnostic Criteria</h3>
+            <p><strong>1. Low IgG</strong> (at least 2 SD below mean for age)</p>
+            <p><strong>2. Low IgA and/or IgM</strong></p>
+            <p><strong>3. Poor vaccine responses</strong> (pneumococcal, tetanus)</p>
+            <p><strong>4. Onset after age 2</strong> (excludes most genetic defects)</p>
+            <p><strong>5. Exclusion of other causes</strong></p>
+            
+            <div class="danger">
+                <div class="danger-title">⚠️ Non-Infectious Complications of CVID</div>
+                <p>• Autoimmune cytopenias (ITP, AIHA) - may precede diagnosis<br>
+                • Granulomatous disease (lung, liver, spleen)<br>
+                • Lymphoid hyperplasia, splenomegaly<br>
+                • Increased risk of lymphoma and GI malignancy<br>
+                • Enteropathy with malabsorption</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Laboratory Evaluation</h2>
+            
+            <div class="table-container">
+                <table>
+                    <tr><th>Test</th><th>What It Evaluates</th><th>When to Order</th></tr>
+                    <tr><td>Quantitative Immunoglobulins</td><td>B cell function (IgG, IgA, IgM)</td><td>First-line for recurrent infections</td></tr>
+                    <tr><td>Vaccine Titers</td><td>Functional antibody response</td><td>If Ig low-normal; test pre/post vaccination</td></tr>
+                    <tr><td>Lymphocyte Subsets</td><td>T cells (CD4, CD8), B cells (CD19), NK cells</td><td>Suspected T cell defect, opportunistic infections</td></tr>
+                    <tr><td>DHR / NBT Test</td><td>Neutrophil oxidative burst</td><td>Suspected CGD (abscesses, granulomas)</td></tr>
+                    <tr><td>CH50 / AH50</td><td>Complement pathway function</td><td>Recurrent Neisseria, SLE-like picture</td></tr>
+                    <tr><td>HIV Test</td><td>Secondary immunodeficiency</td><td>Always rule out before PID workup</td></tr>
+                </table>
+            </div>
+            
+            <div class="pearl">
+                <div class="pearl-title">💡 Interpreting Vaccine Responses</div>
+                <p>Check titers to <strong>protein antigens</strong> (tetanus, diphtheria) AND <strong>polysaccharide antigens</strong> (pneumococcal serotypes). Some patients make protein but not polysaccharide responses (specific antibody deficiency). Check 4-6 weeks post-vaccination.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Immunoglobulin Replacement Therapy</h2>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>💉 IVIG (Intravenous)</h4>
+                    <ul>
+                        <li>Given every 3-4 weeks</li>
+                        <li>Infusion center or home</li>
+                        <li>Higher peak levels</li>
+                        <li>Headache, chills common</li>
+                        <li>Good for rapid correction</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>💧 SCIG (Subcutaneous)</h4>
+                    <ul>
+                        <li>Weekly or biweekly at home</li>
+                        <li>More stable IgG levels</li>
+                        <li>Fewer systemic reactions</li>
+                        <li>Local site reactions</li>
+                        <li>Patient independence</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">🔑 IgG Trough Goals</div>
+                <p>Target trough IgG ≥500 mg/dL, ideally &gt;700-800 mg/dL. Some patients need higher levels to prevent infections. Adjust dose based on infection frequency, not just IgG level. Check trough level immediately before next infusion.</p>
+            </div>
+        </div>
+        
+        <div class="quiz-section">
+            <h2 class="quiz-title">🧪 Test Your Understanding</h2>
+            
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 1 of 5</div>
+                <div class="question-text">A 35-year-old presents with recurrent sinopulmonary infections. Labs show IgG 350 (normal 700-1600), IgA &lt;7, IgM 25. Tetanus titer is protective but pneumococcal titers are low. What is the most likely diagnosis?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Selective IgA deficiency</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Common Variable Immunodeficiency</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">X-linked agammaglobulinemia</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Hyper-IgM syndrome</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">CVID: low IgG + low IgA/IgM + poor vaccine responses. Age rules out XLA (presents in infancy when maternal Ab wanes). IgA deficiency alone wouldn't cause low IgG. Hyper-IgM would have elevated IgM.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 2 of 5</div>
+                <div class="question-text">A child with recurrent Staphylococcus and Aspergillus infections has liver abscesses and granulomas. What test would confirm the suspected diagnosis?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Quantitative immunoglobulins</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">CH50</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Dihydrorhodamine (DHR) flow cytometry</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Lymphocyte subsets</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">This is Chronic Granulomatous Disease (CGD). Catalase-positive organisms + granulomas = phagocyte oxidative burst defect. DHR test measures neutrophil respiratory burst. NBT is the older test.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 3 of 5</div>
+                <div class="question-text">Which infection pattern suggests complement deficiency?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Recurrent Neisseria meningitidis</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Pneumocystis jirovecii pneumonia</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Disseminated BCG</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Recurrent skin abscesses</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Terminal complement (C5-9) deficiency causes recurrent Neisseria infections. PJP suggests T cell defect. BCG dissemination suggests IL-12/IFN-γ pathway defect. Abscesses suggest phagocyte defect.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 4 of 5</div>
+                <div class="question-text">A patient on IVIG has trough IgG of 600 mg/dL but continues to have 3-4 sinus infections per year. What should you do?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Continue same dose - IgG is adequate</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Switch to SCIG</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Add prophylactic antibiotics only</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Increase IVIG dose to achieve higher trough</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Dose to clinical response, not just IgG level. Many patients need trough &gt;700-800 to prevent infections. If still getting infections despite "adequate" IgG, increase the dose. Some require &gt;1000.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 5 of 5</div>
+                <div class="question-text">What non-infectious complication of CVID may PRECEDE the diagnosis?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Bronchiectasis</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Autoimmune cytopenias (ITP, AIHA)</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Lymphoma</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Granulomatous lung disease</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Autoimmune cytopenias (especially ITP) may be the presenting feature of CVID, sometimes years before recurrent infections. Check immunoglobulins in patients with "idiopathic" ITP or AIHA!</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 MechanismDx · Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+    </footer>
+    
+    <script>
+        function checkAnswer(btn) {
+            const question = btn.closest('.quiz-question');
+            const correct = question.dataset.correct;
+            const options = question.querySelectorAll('.option');
+            const explanation = question.querySelector('.explanation');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt.dataset.answer === correct) opt.classList.add('correct');
+                else if (opt.classList.contains('selected')) opt.classList.add('incorrect');
+            });
+            explanation.classList.add('show');
+            btn.style.display = 'none';
+        }
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.quiz-question');
+                question.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Immunodeficiency"
+         data-key-points="🎯 Learning Objectives, Warning Signs of Immunodeficiency, Categories of Primary Immunodeficiency, Common Variable Immunodeficiency (CVID), Laboratory Evaluation, Immunoglobulin Replacement Therapy, 🧪 Test Your Understanding, Diagnostic Criteria, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 6-month-old boy presents with recurrent sinopulmonary infections. IgG, IgA, and IgM are all markedly low. B cells are absent on flow cytometry. What is the MOST likely diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="CVID typically presents later (teens/adults) and has present but dysfunctional B cells. This infant has ABSENT B cells." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Common variable immunodeficiency (CVID)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Bruton&#x27;s (XLA): mutation in BTK gene → arrest of B-cell maturation → absent B cells, absent immunoglobulins. X-linked (boys). Infections begin after 6 months when maternal IgG wanes. Treat with lifelong IVIG." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">X-linked agammaglobulinemia (Bruton's)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="DiGeorge is a T-cell deficiency (thymic hypoplasia from 22q11.2 deletion) with cardiac anomalies and hypocalcemia. B cells are present." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">DiGeorge syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Selective IgA deficiency is the most common primary immunodeficiency but only IgA is low — IgG and IgM are normal, and B cells are present." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Selective IgA deficiency</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">A 3-month-old presents with Pneumocystis jirovecii pneumonia, oral thrush, and failure to thrive. Lymphocyte count is very low. What is the MOST likely diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="SCID: absent functional T cells (± B/NK cells depending on subtype). Presents in first months of life with opportunistic infections (PJP, CMV, Candida), failure to thrive, absent thymic shadow. MEDICAL EMERGENCY — needs bone marrow transplant. Detected by newborn screening (TREC assay)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Severe combined immunodeficiency (SCID)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neonatal HIV should be considered but the very early onset (3 months) with severe lymphopenia is more classic for SCID. HIV testing should still be done." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">HIV/AIDS</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Transient hypogammaglobulinemia causes mild recurrent infections, not opportunistic infections like PJP. It resolves spontaneously." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Transient hypogammaglobulinemia of infancy</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="WAS presents with thrombocytopenia + eczema + recurrent infections (WAS triad). Not typically associated with PJP at this early age." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Wiskott-Aldrich syndrome</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Which immunodeficiency is associated with the triad of eczema, thrombocytopenia, and recurrent infections?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Chédiak-Higashi: partial albinism + recurrent pyogenic infections + giant granules in neutrophils + progressive neurologic dysfunction." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Chédiak-Higashi syndrome</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="WAS triad: (1) Thrombocytopenia with SMALL platelets, (2) Eczema, (3) Recurrent infections (both pyogenic and opportunistic). X-linked. WASP gene mutation → impaired cytoskeletal function in hematopoietic cells. Increased risk of lymphoma." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Wiskott-Aldrich syndrome</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Job syndrome: markedly elevated IgE + recurrent staphylococcal &quot;cold&quot; abscesses + eczema + retained primary teeth + coarse facies. No thrombocytopenia." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Hyper-IgE syndrome (Job syndrome)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CGD: recurrent catalase-positive organism infections (Staph aureus, Aspergillus, Serratia) due to defective NADPH oxidase. No thrombocytopenia or eczema." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Chronic granulomatous disease</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">A child has recurrent infections with catalase-positive organisms (Staphylococcus, Aspergillus, Serratia). The nitroblue tetrazolium (NBT) test is negative. What is the diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="CGD: defective NADPH oxidase → neutrophils cannot generate respiratory burst → cannot kill catalase-positive organisms (which destroy their own H2O2). NBT test negative (no color change) or abnormal DHR flow cytometry. Treat with prophylactic TMP-SMX + itraconazole ± IFN-γ." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Chronic granulomatous disease (CGD)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="LAD: impaired neutrophil migration → delayed umbilical cord separation, absent pus formation, elevated WBC. NBT test would be normal." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Leukocyte adhesion deficiency</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SCN has very low neutrophil counts. The issue in CGD is neutrophil FUNCTION, not number." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Severe congenital neutropenia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IgG subclass deficiency is a humoral immunodeficiency causing sinopulmonary infections, not the catalase-positive pattern of CGD." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">IgG subclass deficiency</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which primary immunodeficiency is the MOST common in adults?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Selective IgA deficiency is the most common PRIMARY immunodeficiency overall (1:500) but is often asymptomatic. CVID is the most common SYMPTOMATIC primary immunodeficiency in adults." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Selective IgA deficiency</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="CVID: most common symptomatic primary immunodeficiency in adults. Low IgG + low IgA and/or IgM, impaired vaccine responses, present B cells. Presents in 2nd-3rd decade with sinopulmonary infections, autoimmunity, granulomas, lymphoma risk. Treat with IVIG/SCIG." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Common variable immunodeficiency (CVID)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="XLA presents in infancy (after maternal antibody wanes), not adulthood." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">X-linked agammaglobulinemia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SCID presents in the first months of life and is fatal without transplant. It would not present in adulthood." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">SCID</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">A patient with recurrent Neisseria meningitidis infections should be evaluated for deficiency in which immune component?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="T-cell deficiency predisposes to intracellular organisms and opportunistic infections, not specifically Neisseria." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">T lymphocytes</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Terminal complement (C5-C9) deficiency → inability to form the membrane attack complex (MAC) → susceptibility to encapsulated organisms, especially Neisseria species (meningitidis, gonorrhoeae). Screen with CH50 (total complement activity)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Terminal complement components (C5-C9)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IgE deficiency is not associated with recurrent Neisseria infections. High IgE is associated with parasitic infections and atopic disease." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">IgE</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Neutropenia predisposes to bacterial and fungal infections generally, but recurrent Neisseria specifically points to complement deficiency." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Neutrophil count</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">A newborn with congenital heart defects, hypocalcemia, and absent thymic shadow has which immunodeficiency?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="DiGeorge/velocardiofacial syndrome: 22q11.2 microdeletion → CATCH-22: Cardiac defects (conotruncal), Abnormal facies, Thymic hypoplasia (T-cell deficit), Cleft palate, Hypocalcemia (parathyroid hypoplasia). Variable T-cell deficiency; most have partial DiGeorge with adequate immunity." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">DiGeorge syndrome (22q11.2 deletion)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Bruton&#x27;s is a B-cell/antibody deficiency without cardiac or endocrine features." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Bruton agammaglobulinemia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SCID can have absent thymic shadow but does not feature cardiac defects and hypocalcemia. The combination points to DiGeorge." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">SCID</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="A-T presents with cerebellar ataxia, telangiectasias, elevated AFP, and IgA deficiency — no cardiac or calcium abnormalities." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Ataxia-telangiectasia</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">What is the mechanism of protection provided by IVIG replacement therapy in antibody deficiency?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="IVIG provides PASSIVE immunity — preformed antibodies. It does not stimulate endogenous B-cell production." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Stimulates the patient's B cells to produce antibodies</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="IVIG: pooled IgG from thousands of donors → passive humoral immunity against a broad spectrum of pathogens. Given every 3-4 weeks IV or weekly-biweekly subcutaneously (SCIG). Does NOT replace IgA or IgM. Trough IgG level guides dosing." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Provides passive IgG antibodies against common pathogens</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="While IgG can activate complement, the primary benefit of IVIG is providing opsonizing antibodies for pathogen recognition, not direct complement killing." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Activates complement-mediated bacterial killing</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IVIG is &gt;95% IgG. It does NOT meaningfully replace IgA, IgM, or IgE. Patients with combined deficiencies still lack these isotypes." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Replaces all immunoglobulin classes (IgG, IgA, IgM, IgE)</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=primary-immunodeficiency-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/immunodeficiency-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

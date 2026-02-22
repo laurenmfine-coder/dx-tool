@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var K="reasondx-user";function g(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function a(){try{var u=localStorage.getItem(K);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!a()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(g())}})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pressure Drop | CRITICAL CARE Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #7F1D1D; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #450A0A 0%, #7F1D1D 50%, #991B1B 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .choice-btn { display: block; width: 100%; text-align: left; padding: 16px 20px; margin: 10px 0; background: var(--card); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; color: var(--text); transition: all 0.2s; font-family: inherit; font-size: inherit; }
+        .choice-btn:hover { border-color: var(--accent); transform: translateX(4px); }
+        .choice-label { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+        .choice-detail { font-size: 0.85rem; color: var(--muted); }
+        .alert { display: flex; gap: 16px; padding: 16px 20px; border-radius: 12px; margin: 16px 0; align-items: flex-start; }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 700; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; line-height: 1.6; }
+        .hidden { display: none !important; }
+        .tracker { background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px; }
+        .tracker-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .tracker-items { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tracker-item { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: var(--muted); }
+        .tracker-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
+        @media(max-width:480px) { .main { padding: 12px; } .card-body { padding: 16px; } }
+    </style>
+<script src="../dx-user-bar.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🎮 Pressure Drop <span class="badge">CRITICAL CARE</span></div>
+            <div class="header-stats">
+                <div class="stat"><div class="stat-value" id="timer">00:00</div><div class="stat-label">Time</div></div>
+                <div class="stat"><div class="stat-value" id="stepCount">1/3</div><div class="stat-label">Progress</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="tracker">
+            <div class="tracker-title">Shock Protocol</div>
+            <div class="tracker-items" id="trackerItems">
+                <span class="tracker-item" id="track_0">Identify Type</span> <span class="tracker-item" id="track_1">IV Access</span> <span class="tracker-item" id="track_2">Fluids vs Pressors</span> <span class="tracker-item" id="track_3">Source Control</span> <span class="tracker-item" id="track_4">Monitoring</span> <span class="tracker-item" id="track_5">Reassess</span>
+            </div>
+        </div>
+
+        <!-- Incoming Patient Card -->
+        <div class="card" id="stage_intro">
+            <div class="card-header">
+                <div class="card-phase">Incoming Patient</div>
+                <div class="card-title">🚨 EMS Radio Call</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">
+                    <strong>EMS Radio:</strong> "Incoming <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">55-year-old female</span> presenting with <span style="background:rgba(245,158,11,0.3);padding:2px 6px;border-radius:4px;font-weight:500">found unresponsive at home by paramedics after a welfare check</span>. Neighbor hadn't seen her in 3 days. Found on floor, confused and moaning. Skin is warm and flushed. Empty vodka bottles nearby. Abdomen is rigid and distended."
+                </div>
+                <div class="vitals-grid">
+                    <div class="vital critical"><div class="vital-label">Temp</div><div class="vital-value">103.8°F</div></div><div class="vital critical"><div class="vital-label">HR</div><div class="vital-value">136</div></div><div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">72/38</div></div><div class="vital critical"><div class="vital-label">RR</div><div class="vital-value">32</div></div><div class="vital critical"><div class="vital-label">SpO2</div><div class="vital-value">91%</div></div>
+                </div>
+                <div class="alert warning">
+                    <span class="alert-icon">⚠️</span>
+                    <div>
+                        <div class="alert-title">Clinical Decision Point</div>
+                        <div class="alert-desc">Undifferentiated shock with multi-organ dysfunction: hypotension, tachycardia, fever, altered mental status, rigid abdomen. Must rapidly identify shock type and intervene. The warm, flushed skin + fever suggests distributive (septic) shock.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="stage_arrival" class="card">
+            <div class="card-header">
+                <div class="card-phase">DECISION 1</div>
+                <div class="card-title">Resuscitation</div>
+            </div>
+            <div class="card-body">
+                
+                
+                <div id="choices_arrival">
+                    <button class="choice-btn" onclick="choose('arrival', 'fluids_cultures_abx')">
+                <div class="choice-label">💧 30mL/kg NS + blood cultures × 2 + broad-spectrum ABx + lactate</div>
+                <div class="choice-detail">SSC hour-1 bundle: fluids, cultures, antibiotics for septic shock</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'pressors_first')">
+                <div class="choice-label">💉 Norepinephrine drip first</div>
+                <div class="choice-detail">MAP <65, start vasopressors immediately</div>
+            </button><button class="choice-btn" onclick="choose('arrival', 'intubate_then_workup')">
+                <div class="choice-label">🫁 Intubation first, then workup</div>
+                <div class="choice-detail">GCS is low, secure airway before anything else</div>
+            </button>
+                </div>
+                <div id="fb_arrival_fluids_cultures_abx" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! Surviving Sepsis Campaign hour-1 bundle: (1) Measure lactate. (2) Blood cultures before antibiotics. (3) Broad-spectrum antibiotics (pip-tazo or meropenem + vancomycin given the rigid abdomen). (4) 30 mL/kg crystalloid for hypotension or lactate ≥4. With rigid abdomen + fever, suspect intra-abdominal catastrophe — this patient likely needs surgery.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('workup')" style="margin-top:16px">Continue →</button></div><div id="fb_arrival_pressors_first" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Volume resuscitation comes before vasopressors in most shock presentations. Norepinephrine is indicated if MAP remains <65 AFTER adequate fluid resuscitation (30 mL/kg) or if the patient is severely hypotensive. Starting pressors on an empty tank is less effective. However, in extreme cases (MAP <50), early vasopressors alongside fluids is reasonable.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div><div id="fb_arrival_intubate_then_workup" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">While this patient may eventually need intubation, premature RSI in septic shock is dangerous — induction agents cause vasodilation and can worsen hypotension catastrophically. Bolus fluids and start vasopressors to stabilize hemodynamics first. If intubation is needed, pre-load with fluids, have push-dose vasopressors ready, and use hemodynamically stable induction agents (ketamine, etomidate).</div></div></div>
+                    <button class="choice-btn" onclick="goTo('arrival')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_workup" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">DECISION 2</div>
+                <div class="card-title">Imaging + Labs</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">CT abdomen shows <strong>free intraperitoneal air</strong> consistent with hollow viscus perforation, dilated small bowel loops, and peritoneal fluid collection. Lactate 7.2. This is <strong>septic shock from perforated viscus</strong>.</div>
+                <div class="vitals-grid"><div class="vital critical"><div class="vital-label">Lactate</div><div class="vital-value">7.2 mmol/L</div></div><div class="vital critical"><div class="vital-label">WBC</div><div class="vital-value">24,600</div></div><div class="vital critical"><div class="vital-label">CT Abdomen</div><div class="vital-value">Free air, dilated loops, peritoneal fluid</div></div><div class="vital "><div class="vital-label">Lipase</div><div class="vital-value">42 U/L</div></div><div class="vital critical"><div class="vital-label">Cr</div><div class="vital-value">2.8 mg/dL</div></div><div class="vital warning"><div class="vital-label">INR</div><div class="vital-value">1.8</div></div></div>
+                <div id="choices_workup">
+                    <button class="choice-btn" onclick="choose('workup', 'emergency_surgery')">
+                <div class="choice-label">🏥 Emergent surgical consult + OR</div>
+                <div class="choice-detail">Source control is priority — perforated viscus requires operative repair</div>
+            </button><button class="choice-btn" onclick="choose('workup', 'more_antibiotics')">
+                <div class="choice-label">💊 Broaden antibiotics + admit to ICU</div>
+                <div class="choice-detail">Medical management — surgery is too risky with this instability</div>
+            </button><button class="choice-btn" onclick="choose('workup', 'interventional_radiology')">
+                <div class="choice-label">📷 IR-guided percutaneous drainage</div>
+                <div class="choice-detail">Less invasive than surgery</div>
+            </button>
+                </div>
+                <div id="fb_workup_emergency_surgery" class="hidden">
+                        <div class="alert success"><span class="alert-icon">✅</span><div><div class="alert-title">Correct!</div><div class="alert-desc">Correct! In septic shock, source control is critical and should happen within 6-12 hours when feasible. A perforated viscus with free air and peritonitis requires emergent surgery — no amount of antibiotics alone will resolve a surgical source. Continue aggressive resuscitation while prepping for OR. Notify anesthesia about the hemodynamic instability.</div></div></div>
+                        <button class="choice-btn" onclick="goTo('resolution')" style="margin-top:16px">Continue →</button></div><div id="fb_workup_more_antibiotics" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Antibiotics alone cannot cure a perforated viscus. Without source control (surgical repair), mortality approaches 100%. Yes, she is hemodynamically unstable, but the instability is CAUSED by the ongoing perforation and peritonitis. Stabilize with fluids/pressors AND proceed to OR. Delaying surgery to 'stabilize first' paradoxically worsens outcomes because the source continues to contaminate.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('workup')" style="margin-top:16px">Try Again</button></div><div id="fb_workup_interventional_radiology" class="hidden">
+                    <div class="alert danger"><span class="alert-icon">❌</span><div><div class="alert-title">Suboptimal Choice</div><div class="alert-desc">Percutaneous drainage is appropriate for localized abscesses, not free perforation with generalized peritonitis. Free air on CT with diffuse peritoneal contamination requires open or laparoscopic exploration to identify and repair the perforation, wash out the peritoneal cavity, and potentially create a diversion.</div></div></div>
+                    <button class="choice-btn" onclick="goTo('workup')" style="margin-top:16px">Try Again</button></div>
+            </div>
+        </div>
+        <div id="stage_resolution" class="card hidden">
+            <div class="card-header">
+                <div class="card-phase">RESOLUTION</div>
+                <div class="card-title">Post-Operative</div>
+            </div>
+            <div class="card-body">
+                <div class="narrative">Emergent laparotomy reveals perforated sigmoid diverticulum with fecal peritonitis. Hartmann procedure performed (sigmoid resection + end colostomy). Post-op in ICU on vasopressors, which are weaning. Lactate clearing: 7.2 → 4.1 → 2.0.</div>
+                
+                <div id="choices_resolution">
+                    <button class="choice-btn" onclick="choose('resolution', 'good_outcome')">
+                <div class="choice-label">📋 ICU management + wean pressors + de-escalate ABx</div>
+                <div class="choice-detail">Source controlled, now optimize critical care</div>
+            </button>
+                </div>
+                <div id="fb_resolution_good_outcome" class="hidden">
+                        <div class="card"><div class="card-header"><div class="card-phase">OUTCOME</div><div class="card-title">🏆 Excellent Clinical Reasoning</div></div><div class="card-body">
+                        <div class="narrative">Excellent management of septic shock with surgical source! Post-op priorities: (1) Wean vasopressors as tolerated (target MAP ≥65). (2) De-escalate antibiotics based on culture results (typically 4-7 day course post-source control). (3) Monitor for complications: wound infection, anastomotic issues, ARDS, DIC. (4) Nutrition within 24-48 hours. (5) After recovery: address alcohol use disorder (likely contributed to malnutrition and delayed presentation), ostomy education, and reversal planning.</div>
+                        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+                            <button class="choice-btn" onclick="location.reload()" style="flex:1;min-width:200px">🔄 Play Again</button>
+                            <button class="choice-btn" onclick="location.href='shock-module.html'" style="flex:1;min-width:200px">📚 Review Module</button>
+                        </div></div></div></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    let currentStep = 0;
+    const totalSteps = 3;
+    let timerInterval;
+    let seconds = 0;
+
+    // Start timer
+    timerInterval = setInterval(() => {
+        seconds++;
+        const m = String(Math.floor(seconds/60)).padStart(2,'0');
+        const s = String(seconds%60).padStart(2,'0');
+        document.getElementById('timer').textContent = m + ':' + s;
+    }, 1000);
+
+    function choose(stage, choice) {
+        // Hide choices
+        const choicesDiv = document.getElementById('choices_' + stage);
+        if (choicesDiv) choicesDiv.classList.add('hidden');
+
+        // Show feedback
+        const fb = document.getElementById('fb_' + stage + '_' + choice);
+        if (fb) fb.classList.remove('hidden');
+
+        // Update tracker
+        if (currentStep < totalSteps) {
+            const trackEl = document.getElementById('track_' + currentStep);
+            if (trackEl) trackEl.classList.add('done');
+        }
+    }
+
+    function goTo(stageId) {
+        // Hide all stages
+        document.querySelectorAll('[id^="stage_"]').forEach(el => el.classList.add('hidden'));
+
+        // Show target stage
+        const target = document.getElementById('stage_' + stageId);
+        if (target) {
+            target.classList.remove('hidden');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        currentStep++;
+        document.getElementById('stepCount').textContent = Math.min(currentStep + 1, totalSteps) + '/' + totalSteps;
+    }
+    </script>
+<script src="../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

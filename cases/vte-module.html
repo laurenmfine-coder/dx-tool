@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venous Thromboembolism | MechanismDx</title>
+    <script src="../dx-scoring.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    
+    </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">🩸</div>
+            <h1>Venous Thromboembolism</h1>
+            <p>Understanding DVT and PE — from Virchow's triad to risk stratification and anticoagulation mechanisms.</p>
+            <div class="hero-meta">
+                <span>📚 10 Concepts</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~40 min</span>
+                <span>🎯 High Yield</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <!-- Section 1: Virchow's Triad -->
+        <section class="section" id="section-1">
+            <h2 class="section-title">🔺 Virchow's Triad: The Foundation</h2>
+            
+            <div class="concept-card">
+                <h3>Three Factors Predisposing to Thrombosis</h3>
+                <p>Rudolf Virchow identified three categories of factors that promote venous thrombosis. Most VTE events involve at least one of these:</p>
+                <ul>
+                    <li><strong>Stasis</strong> — Reduced blood flow allows accumulation of clotting factors</li>
+                    <li><strong>Endothelial injury</strong> — Damage exposes subendothelial collagen and tissue factor</li>
+                    <li><strong>Hypercoagulability</strong> — Inherited or acquired states favoring clot formation</li>
+                </ul>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🔄 How Each Factor Contributes</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step">
+                        <div class="step-num">S</div>
+                        <div class="step-text"><strong>Stasis:</strong> Immobility, paralysis, long flights, venous obstruction, heart failure</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">E</div>
+                        <div class="step-text"><strong>Endothelial injury:</strong> Surgery, trauma, central lines, prior DVT, vasculitis</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">H</div>
+                        <div class="step-text"><strong>Hypercoagulability:</strong> Cancer, pregnancy, estrogen, Factor V Leiden, antiphospholipid syndrome</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Common Risk Factors in Clinical Practice</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Strong Risk Factors</th>
+                            <th>Moderate Risk Factors</th>
+                            <th>Weak Risk Factors</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Major surgery<br>Hip/knee replacement<br>Major trauma<br>Spinal cord injury<br>Active cancer</td>
+                            <td>Hospitalization<br>Estrogen therapy/OCPs<br>Pregnancy/postpartum<br>Prior VTE<br>Central venous catheter</td>
+                            <td>Age &gt;60<br>Obesity<br>Varicose veins<br>Long-haul travel<br>Minor surgery</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Always ask about recent surgery, travel, immobility, cancer history, pregnancy, and hormone use. A patient with no identifiable risk factors who develops unprovoked VTE should be evaluated for occult malignancy.</p>
+            </div>
+            
+            <div class="reference-box">
+                <h4>📖 References</h4>
+                <ul>
+                    <li>Cushman M. Epidemiology and risk factors for VTE. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2726856/" target="_blank">Semin Hematol. 2007</a></li>
+                    <li>Heit JA. Epidemiology of VTE. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4624298/" target="_blank">Nat Rev Cardiol. 2015</a></li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Quiz 1 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q1">
+                <p>A 45-year-old woman presents with unilateral leg swelling 5 days after a 12-hour international flight. She takes oral contraceptives. Which components of Virchow's triad are present?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Stasis only, since prolonged immobility is the primary mechanism here</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, true)">Stasis from immobility and hypercoagulability from estrogen therapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Endothelial injury and hypercoagulability from the estrogen therapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">All three components are equally present in this clinical scenario</div>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 2: PE Pathophysiology -->
+        <section class="section" id="section-2">
+            <h2 class="section-title">🫁 Pulmonary Embolism Pathophysiology</h2>
+            
+            <div class="concept-card">
+                <h3>Hemodynamic Consequences</h3>
+                <p>When clot embolizes to the pulmonary arteries, the effects depend on clot burden and underlying cardiopulmonary reserve:</p>
+                <ul>
+                    <li><strong>Mechanical obstruction</strong> — Blocks blood flow through pulmonary vasculature</li>
+                    <li><strong>Increased RV afterload</strong> — RV pressure rises to overcome obstruction</li>
+                    <li><strong>RV dilation</strong> — RV dilates as it fails against increased afterload</li>
+                    <li><strong>Interventricular dependence</strong> — Dilated RV compresses LV, reducing LV filling</li>
+                    <li><strong>Decreased cardiac output</strong> — LV can't fill properly → systemic hypotension</li>
+                </ul>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🔄 The Hemodynamic Spiral</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step">
+                        <div class="step-num">1</div>
+                        <div class="step-text">PE causes acute increase in pulmonary vascular resistance</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">2</div>
+                        <div class="step-text">RV dilates and wall tension increases (Laplace's law)</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">3</div>
+                        <div class="step-text">RV oxygen demand rises while coronary perfusion falls</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">4</div>
+                        <div class="step-text">RV ischemia leads to further dysfunction → cardiogenic shock</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>A normal oxygen saturation does not rule out PE. Young patients with good cardiopulmonary reserve can maintain saturation despite significant clot burden through compensatory hyperventilation and vasoconstriction.</p>
+            </div>
+            
+            <div class="reference-box">
+                <h4>📖 References</h4>
+                <ul>
+                    <li>Konstantinides SV, et al. 2019 ESC Guidelines for PE. <a href="https://academic.oup.com/eurheartj/article/41/4/543/5556136" target="_blank">Eur Heart J. 2020</a> (Open Access)</li>
+                    <li>Wood KE. Major pulmonary embolism. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6542454/" target="_blank">Chest. 2002</a></li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Section 3: Clinical Probability -->
+        <section class="section" id="section-3">
+            <h2 class="section-title">📊 Clinical Probability Assessment</h2>
+            
+            <div class="concept-card">
+                <h3>Wells Criteria for PE</h3>
+                <p>The Wells score helps estimate pre-test probability of PE:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Criterion</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Clinical signs/symptoms of DVT</td><td>+3</td></tr>
+                        <tr><td>PE is #1 diagnosis or equally likely</td><td>+3</td></tr>
+                        <tr><td>Heart rate &gt;100 bpm</td><td>+1.5</td></tr>
+                        <tr><td>Immobilization ≥3 days or surgery in past 4 weeks</td><td>+1.5</td></tr>
+                        <tr><td>Previous PE or DVT</td><td>+1.5</td></tr>
+                        <tr><td>Hemoptysis</td><td>+1</td></tr>
+                        <tr><td>Malignancy (treatment within 6 months or palliative)</td><td>+1</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Interpretation:</strong> ≤4 points = PE unlikely; &gt;4 points = PE likely</p>
+            </div>
+            
+            <div class="concept-card">
+                <h3>D-dimer: Understanding the Test</h3>
+                <p>D-dimer is a fibrin degradation product released when cross-linked fibrin is broken down:</p>
+                <ul>
+                    <li><strong>High sensitivity (~95%)}}</strong> — A negative result effectively rules out VTE in low-probability patients</li>
+                    <li><strong>Low specificity (~40%)</strong> — Elevated in infection, inflammation, cancer, pregnancy, recent surgery</li>
+                    <li><strong>Age-adjusted cutoff</strong> — Using (age × 10) μg/L for patients &gt;50 improves specificity</li>
+                </ul>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ When NOT to Use D-dimer</h4>
+                <p>D-dimer should not be used to rule out PE in high-probability patients. If clinical suspicion is high, proceed directly to imaging regardless of D-dimer result.</p>
+            </div>
+            
+            <div class="reference-box">
+                <h4>📖 References</h4>
+                <ul>
+                    <li>Wells PS, et al. Clinical model for PE. <a href="https://pubmed.ncbi.nlm.nih.gov/11157647/" target="_blank">Thromb Haemost. 2000</a></li>
+                    <li>Righini M, et al. Age-adjusted D-dimer. <a href="https://jamanetwork.com/journals/jama/fullarticle/1846025" target="_blank">JAMA. 2014</a></li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Quiz 2 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q2">
+                <p>A 35-year-old woman presents with dyspnea and pleuritic chest pain. HR 110, recently had knee surgery, no leg swelling, no prior VTE or cancer. If PE is your leading diagnosis, what is her Wells score?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Wells score 3.0 (PE unlikely); D-dimer can reliably exclude PE</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Wells score 4.0 (PE unlikely); D-dimer can reliably exclude PE</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, true)">Wells score 6.0 (PE likely); proceed directly to CT pulmonary angiography</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Wells score 7.5 (PE likely); start anticoagulation without imaging</div>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q3">
+                <p>Which statement best explains why D-dimer has limited utility in hospitalized patients?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">D-dimer assays are less accurate when performed on inpatient blood samples</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, true)">Many inpatient conditions cause D-dimer elevation, reducing test specificity</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Hospitalized patients have higher baseline fibrinolytic activity in their blood</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Inpatient D-dimer results take significantly longer to result than outpatient</div>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 4: Risk Stratification -->
+        <section class="section" id="section-4">
+            <h2 class="section-title">⚠️ PE Risk Stratification</h2>
+            
+            <div class="concept-card">
+                <h3>Why Stratification Matters</h3>
+                <p>PE mortality ranges from &lt;1% to &gt;50% depending on hemodynamic status. Risk stratification determines treatment intensity:</p>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Features</th>
+                        <th>Mortality</th>
+                        <th>Management</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Low Risk</strong></td>
+                        <td>Stable, no RV dysfunction, normal biomarkers</td>
+                        <td>&lt;1%</td>
+                        <td>Outpatient anticoagulation possible</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermediate-Low</strong></td>
+                        <td>Stable, RV dysfunction OR elevated troponin</td>
+                        <td>3-5%</td>
+                        <td>Inpatient anticoagulation, monitoring</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermediate-High</strong></td>
+                        <td>Stable, RV dysfunction AND elevated troponin</td>
+                        <td>5-15%</td>
+                        <td>ICU monitoring, rescue reperfusion ready</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High Risk (Massive)</strong></td>
+                        <td>Hypotension, shock, or cardiac arrest</td>
+                        <td>&gt;15%</td>
+                        <td>Reperfusion therapy (thrombolysis, embolectomy)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="concept-card">
+                <h3>Markers of RV Dysfunction</h3>
+                <ul>
+                    <li><strong>Echocardiography</strong> — RV dilation, hypokinesis, McConnell's sign</li>
+                    <li><strong>CT findings</strong> — RV/LV ratio &gt;1.0, septal bowing into LV</li>
+                    <li><strong>ECG</strong> — S1Q3T3 pattern, right heart strain, new RBBB</li>
+                    <li><strong>BNP/NT-proBNP</strong> — Elevated due to RV wall stress</li>
+                    <li><strong>Troponin</strong> — Indicates RV myocardial injury</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>The classic S1Q3T3 pattern is specific but insensitive (seen in only ~20% of PE). Sinus tachycardia is the most common ECG finding. A normal ECG does not exclude PE.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 3 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q4">
+                <p>A patient with PE has BP 85/50 mmHg despite fluid resuscitation. Echo shows severe RV dilation. What risk category and treatment is indicated?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Intermediate-high risk; intensify anticoagulation and admit to the ICU</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Intermediate-high risk; start thrombolysis only if patient deteriorates further</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, true)">High risk (massive PE); reperfusion therapy with thrombolysis or embolectomy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">High risk (massive PE); IVC filter placement is the priority intervention here</div>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q5">
+                <p>A 60-year-old develops DVT after knee replacement surgery. How long should anticoagulation continue?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, true)">Three months, as this is a provoked VTE with a transient risk factor</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Six months minimum, as lower extremity DVT requires extended therapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Indefinitely, because post-surgical VTE has high risk of recurrence</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">One month, since the provoking surgical risk factor has now resolved</div>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 5: Anticoagulation -->
+        <section class="section" id="section-5">
+            <h2 class="section-title">💊 Anticoagulation Mechanisms</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Drug Class</th>
+                        <th>Mechanism</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Heparins</strong></td>
+                        <td>Enhance antithrombin III activity → inhibits thrombin and Xa</td>
+                        <td>Parenteral; UFH reversible with protamine</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Warfarin</strong></td>
+                        <td>Inhibits vitamin K epoxide reductase → reduces II, VII, IX, X</td>
+                        <td>Oral; requires INR monitoring; many interactions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Direct Xa inhibitors</strong></td>
+                        <td>Direct factor Xa inhibition</td>
+                        <td>Oral; fixed dosing; fewer interactions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Direct thrombin inhibitors</strong></td>
+                        <td>Direct thrombin (factor IIa) inhibition</td>
+                        <td>Oral (dabigatran); reversible with idarucizumab</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="reference-box">
+                <h4>📖 References</h4>
+                <ul>
+                    <li>Kearon C, et al. Antithrombotic therapy for VTE. <a href="https://journal.chestnet.org/article/S0012-3692(16)01278-7/fulltext" target="_blank">Chest. 2016</a></li>
+                    <li>Ortel TL, et al. ASH 2020 VTE Guidelines. <a href="https://ashpublications.org/bloodadvances/article/4/19/4693/463998" target="_blank">Blood Adv. 2020</a> (Open Access)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Quiz 4 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q6">
+                <p>Which mechanism explains why heparin requires antithrombin III to exert its anticoagulant effect?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Heparin directly binds thrombin only when antithrombin III is present as cofactor</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, true)">Heparin binds antithrombin and accelerates its inhibition of thrombin and Xa</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Antithrombin III converts heparin into its active anticoagulant form in plasma</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Heparin and antithrombin together form a complex that activates protein C</div>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q7">
+                <p>A 28-year-old woman with unprovoked DVT is found to have Factor V Leiden heterozygosity. Which statement about her management is most accurate?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">She requires lifelong anticoagulation because of her genetic thrombophilia diagnosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Her treatment duration is shorter because Factor V Leiden is relatively low risk</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, true)">Thrombophilia results alone do not determine anticoagulation duration decisions</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">She should switch from DOACs to warfarin due to her inherited thrombophilia</div>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q8">
+                <p>A pregnant woman at 28 weeks presents with leg swelling. D-dimer is elevated. What is the most appropriate diagnostic approach?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Elevated D-dimer confirms the diagnosis of DVT; start treatment without imaging</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, true)">Perform compression ultrasound; D-dimer is unreliable during normal pregnancy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Proceed to CT venography for definitive diagnosis of lower extremity DVT</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Repeat D-dimer in 24 hours to assess for rising levels indicating thrombosis</div>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Cross-Platform Links -->
+        <div class="cross-link">
+            <div class="cross-link-icon">💬</div>
+            <div class="cross-link-content">
+                <h4>Practice Your Clinical Reasoning</h4>
+                <p>Apply what you've learned in a Socratic dialogue with Dr. Chen</p>
+            </div>
+            <a href="../CoachDx/mentor-chat.html?case=dvt" class="cross-link-btn">Try Leg Swelling Case →</a>
+        </div>
+        
+        <div class="cross-link" style="background: #fef3c7; border-color: #fcd34d;">
+            <div class="cross-link-icon">🫁</div>
+            <div class="cross-link-content">
+                <h4>Related: Dyspnea Case</h4>
+                <p>Work through a PE presentation with pleuritic chest pain</p>
+            </div>
+            <a href="../CoachDx/mentor-chat.html?case=pulmonary-embolism" class="cross-link-btn" style="background: #f59e0b;">Try PE Case →</a>
+        </div>
+        
+        
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Venous Thromboembolism with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=pulm06" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=pe,dvt,vte" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">VTE Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 8+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+        <!-- Module Complete -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-color: #a5b4fc; text-align: center; padding: 32px;">
+            <h3 style="color: #3730a3; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #4338ca; margin-bottom: 16px;">You've completed the Venous Thromboembolism module.</p>
+            <p style="color: #3730a3;" id="scoreDisplay">Score: Calculating...</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025 MechanismDx · Part of the <a href="index.html">Dx Suite</a></p>
+    </footer>
+    
+    <script>
+        const feedbackText = {
+            q1: {
+                correct: "Correct! This patient has stasis from the long flight and hypercoagulability from OCPs. There's no clear endothelial injury described.",
+                incorrect: "Consider all three elements: Stasis (long flight), Endothelial injury (not present here), Hypercoagulability (OCPs). Two of three are present."
+            },
+            q2: {
+                correct: "Correct! Wells score: HR >100 (+1.5) + recent surgery (+1.5) + PE is leading diagnosis (+3) = 6.0. With PE 'likely' (>4), D-dimer cannot reliably exclude — proceed to CTPA.",
+                incorrect: "Calculate Wells: HR >100 (1.5) + surgery (1.5) + PE as leading diagnosis (3) = 6.0. With >4 points, PE is 'likely' and D-dimer cannot rule it out."
+            },
+            q3: {
+                correct: "Correct! D-dimer is elevated in infection, inflammation, malignancy, recent surgery, and many other conditions common in hospitalized patients, making positive results non-specific.",
+                incorrect: "D-dimer measures fibrin degradation. Many inpatient conditions elevate it (infection, surgery, inflammation), reducing its specificity for VTE."
+            },
+            q4: {
+                correct: "Correct! Hypotension despite resuscitation defines high-risk (massive) PE. This patient needs reperfusion — thrombolysis, catheter-directed therapy, or surgical embolectomy.",
+                incorrect: "Persistent hypotension (SBP <90) despite resuscitation defines high-risk/massive PE with >15% mortality, requiring reperfusion therapy."
+            },
+            q5: {
+                correct: "Correct! Surgery is a major transient risk factor. Once resolved, recurrence risk is low (~3%/year), so 3 months of anticoagulation is sufficient.",
+                incorrect: "This is provoked VTE — the transient risk factor (surgery) has resolved. Guidelines recommend 3 months for provoked VTE."
+            },
+            q6: {
+                correct: "Correct! Heparin acts as a catalyst — it binds antithrombin III and induces a conformational change that accelerates antithrombin's inhibition of thrombin and factor Xa by ~1000-fold.",
+                incorrect: "Heparin doesn't directly inhibit clotting factors. It binds antithrombin III and dramatically accelerates its natural inhibition of thrombin and Xa."
+            },
+            q7: {
+                correct: "Correct! Thrombophilia results inform recurrence risk but don't alone determine duration. The decision depends on overall clinical picture including bleeding risk.",
+                incorrect: "Thrombophilia provides context but doesn't dictate duration. Treatment decisions consider multiple factors beyond genetic testing results."
+            },
+            q8: {
+                correct: "Correct! D-dimer is physiologically elevated in pregnancy and cannot reliably exclude VTE. Compression ultrasound is the appropriate first test.",
+                incorrect: "D-dimer rises throughout normal pregnancy and cannot reliably exclude VTE. Compression ultrasound is the appropriate initial test."
+            }
+        };
+        
+        let correctAnswers = 0;
+        let totalQuestions = 8;
+        let answeredQuestions = new Set();
+        
+        function checkAnswer(questionId, element, isCorrect) {
+            if (answeredQuestions.has(questionId)) return;
+            answeredQuestions.add(questionId);
+            
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === element) {
+                    opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            });
+            
+            if (!isCorrect) {
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            const feedback = document.getElementById(questionId + '-feedback');
+            feedback.textContent = isCorrect ? feedbackText[questionId].correct : feedbackText[questionId].incorrect;
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                correctAnswers++;
+                if (typeof DxScoring !== 'undefined') {
+                    DxScoring.addXP(25, 'MECH');
+                }
+            }
+            
+            updateProgress();
+            updateScore();
+        }
+        
+        function updateProgress() {
+            const progress = (answeredQuestions.size / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        
+        function updateScore() {
+            document.getElementById('scoreDisplay').textContent = 
+                `Score: ${correctAnswers}/${answeredQuestions.size} correct (${totalQuestions - answeredQuestions.size} remaining)`;
+        }
+        
+        updateScore();
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    
+<!-- BOARD PREP MCQ SECTION (Phase 4 Upgrade) -->
+<div style="max-width:900px;margin:20px auto;padding:0 20px;">
+<div style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;">
+<div style="padding:20px 24px;border-bottom:1px solid #334155;">
+<div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">BOARD PREP</div>
+<div style="font-size:1.4rem;font-weight:700;margin-top:4px;">🎯 Practice Questions</div>
+</div><div style="padding:24px;"><div class="mcq-card" id="mcq0" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 1 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">What is the initial anticoagulation of choice for most patients with new DVT?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="false" data-fb="Warfarin alone is insufficient initially — it takes 5-7 days to reach therapeutic effect and paradoxically causes a hypercoagulable state (protein C depletion) early on." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Warfarin alone with target INR 2-3</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! DOACs (rivaroxaban, apixaban) are now preferred for most DVT/PE. Rivaroxaban and apixaban can be started without initial heparin (lead-in higher dosing). Edoxaban and dabangatran require 5 days of initial heparin. DOACs are preferred over warfarin for most non-cancer VTE due to: no monitoring needed, fewer drug/food interactions, lower bleeding risk, and fixed dosing. Exceptions: pregnancy, severe CKD, antiphospholipid syndrome, mechanical heart valves." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Direct oral anticoagulant (rivaroxaban or apixaban) — no heparin bridge needed</div></div></div>
+<div class="choice" data-correct="false" data-fb="UFH alone for 7-10 days without transition to long-term anticoagulation would not prevent recurrence." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Unfractionated heparin for 7-10 days, then stop</div></div></div>
+<div class="choice" data-correct="false" data-fb="Aspirin has minimal role in VTE treatment — it provides modest secondary prevention but is not adequate primary treatment." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Aspirin 325 mg daily</div></div></div>
+</div><div id="mcqFb0" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText0" style="padding:12px;border-radius:8px"></div></div></div></div>
+<div class="mcq-card" id="mcq1" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 2 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">What is the recommended duration of anticoagulation for a first unprovoked DVT?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="false" data-fb="3 months is the minimum for provoked VTE. Unprovoked VTE has high recurrence risk and warrants extended therapy consideration." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">3 months only</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! First unprovoked VTE: treat for at least 3 months, then reassess risk-benefit of extended therapy. Factors favoring indefinite anticoagulation: male sex, persistently elevated D-dimer after stopping, proximal DVT/PE, thrombophilia. Low-dose apixaban (2.5 mg BID) or rivaroxaban (10 mg daily) are options for extended therapy with reduced bleeding risk vs full dose." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">3 months minimum, then consider indefinite/extended therapy based on bleeding risk and patient preference</div></div></div>
+<div class="choice" data-correct="false" data-fb="This applies to provoked VTE. Unprovoked VTE warrants longer consideration." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">6 weeks for distal DVT, 3 months for proximal</div></div></div>
+<div class="choice" data-correct="false" data-fb="Not all unprovoked VTE requires lifelong therapy, and warfarin is no longer preferred over DOACs for most patients." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Lifelong warfarin with INR 2-3 for all unprovoked VTE</div></div></div>
+</div><div id="mcqFb1" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText1" style="padding:12px;border-radius:8px"></div></div></div></div>
+<div class="mcq-card" id="mcq2" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 3 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">When is catheter-directed thrombolysis indicated for DVT?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="false" data-fb="Routine CDT for all proximal DVTs is not supported — the ATTRACT trial showed no reduction in PTS with CDT." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">All proximal DVTs to prevent post-thrombotic syndrome</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Catheter-directed thrombolysis (CDT) is reserved for massive iliofemoral DVT with threatened limb (phlegmasia cerulea dolens) — characterized by severe swelling, cyanosis, and impending venous gangrene. The ATTRACT trial showed CDT did NOT reduce post-thrombotic syndrome in general proximal DVT. CDT carries significant bleeding risk. Surgical thrombectomy is an alternative for truly limb-threatening cases." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">Acute iliofemoral DVT with limb-threatening ischemia (phlegmasia cerulea dolens)</div></div></div>
+<div class="choice" data-correct="false" data-fb="Age alone is not an indication for CDT. Standard anticoagulation is appropriate for most young patients." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">All DVTs in young patients under 30</div></div></div>
+<div class="choice" data-correct="false" data-fb="D-dimer level does not determine the need for CDT. Clinical severity of limb compromise is the deciding factor." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">Any DVT with D-dimer >10,000</div></div></div>
+</div><div id="mcqFb2" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText2" style="padding:12px;border-radius:8px"></div></div></div></div>
+<div class="mcq-card" id="mcq3" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 4 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">What is the preferred anticoagulant for cancer-associated VTE?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="false" data-fb="Warfarin has inferior efficacy in cancer-associated VTE compared to LMWH and DOACs, with more variable INR control." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">Warfarin with INR target 2-3</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Cancer-associated VTE: LMWH (dalteparin, enoxaparin) has been the historic standard (CLOT trial). Recent trials (Hokusai-VTE Cancer, SELECT-D) showed DOACs (edoxaban, rivaroxaban) are non-inferior. Caution with DOACs in GI/GU cancers (higher mucosal bleeding). Duration: minimum 6 months, often continued as long as cancer is active or being treated. Apixaban (ADAM-VTE, CARAVAGGIO) also shows favorable results." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">Low molecular weight heparin (LMWH) or DOACs (edoxaban, rivaroxaban) for at least 6 months</div></div></div>
+<div class="choice" data-correct="false" data-fb="Continuous UFH is impractical for long-term anticoagulation. LMWH or DOACs are preferred for outpatient use." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">Unfractionated heparin continuously throughout chemotherapy</div></div></div>
+<div class="choice" data-correct="false" data-fb="Aspirin is inadequate for cancer-associated VTE treatment. Full anticoagulation is required." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">Aspirin and compression stockings only</div></div></div>
+</div><div id="mcqFb3" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText3" style="padding:12px;border-radius:8px"></div></div></div></div>
+<div class="mcq-card" id="mcq4" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 5 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">A patient on heparin for DVT develops thrombocytopenia (platelets drop from 200K to 60K) on day 7. What is the most likely diagnosis and immediate management?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="true" data-fb="Correct! HIT type II: immune-mediated (anti-PF4/heparin antibodies), typically occurs days 5-10, platelets drop >50% from baseline. Paradoxically causes THROMBOSIS (not bleeding). Management: STOP ALL heparin (including flushes, coated catheters), start a non-heparin anticoagulant (argatroban for hepatic metabolism, bivalirudin, or fondaparinux). Send HIT antibody (PF4/heparin ELISA) and serotonin release assay. Do NOT give warfarin until platelets recover (causes skin necrosis/venous limb gangrene)." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">Heparin-induced thrombocytopenia (HIT) — stop all heparin, start argatroban or bivalirudin</div></div></div>
+<div class="choice" data-correct="false" data-fb="A 50%+ drop in platelets on heparin is a medical emergency, not an expected finding to monitor." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">Expected heparin side effect — continue heparin and monitor</div></div></div>
+<div class="choice" data-correct="false" data-fb="ITP is not associated with heparin timing. The temporal relationship (day 5-10) and medication history point to HIT." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">ITP — treat with steroids and IVIG</div></div></div>
+<div class="choice" data-correct="false" data-fb="DIC would show schistocytes, elevated D-dimer, low fibrinogen. The timing and platelet pattern suggest HIT." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">DIC from underlying DVT — add platelets and fresh frozen plasma</div></div></div>
+</div><div id="mcqFb4" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText4" style="padding:12px;border-radius:8px"></div></div></div></div>
+<div class="mcq-card" id="mcq5" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 6 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">What is the role of IVC filters in VTE management?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="false" data-fb="Anticoagulation is first-line for PE. IVC filters are reserved for specific situations." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">First-line for all PE patients</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! IVC filter indications: (1) Acute VTE with absolute contraindication to anticoagulation (active life-threatening hemorrhage, recent craniotomy). (2) VTE recurrence despite adequate anticoagulation (rare). Use RETRIEVABLE filters and remove once anticoagulation can be safely initiated. Permanent filters increase long-term DVT risk. PREPIC2 trial showed no benefit of routine filter + anticoagulation vs anticoagulation alone in PE." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">Only when anticoagulation is absolutely contraindicated (active hemorrhage, recent neurosurgery), and should be retrievable</div></div></div>
+<div class="choice" data-correct="false" data-fb="Anticoagulation alone is effective for proximal DVT. Filters add no benefit when anticoagulation is possible." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">Recommended for all DVTs above the knee</div></div></div>
+<div class="choice" data-correct="false" data-fb="Retrievable filters are preferred. Permanent filters cause long-term complications including filter thrombosis, IVC occlusion, and migration." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">Permanent filters for all patients with recurrent VTE</div></div></div>
+</div><div id="mcqFb5" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText5" style="padding:12px;border-radius:8px"></div></div></div></div>
+<div class="mcq-card" id="mcq6" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 7 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">What Well's score component has the highest point value for DVT probability assessment?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="false" data-fb="Calf swelling difference >3 cm is worth 1 point in the Wells DVT score." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">Calf swelling >3 cm compared to asymptomatic leg</div></div></div>
+<div class="choice" data-correct="false" data-fb="Active cancer is worth 1 point in the Wells DVT score." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">Active cancer (treatment within 6 months or palliative)</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! The single most impactful component of the Wells DVT score is 'alternative diagnosis at least as likely as DVT' which subtracts 2 points. This reflects clinical gestalt. Total score interpretation: ≤0 = low probability (DVT in ~5%, can use D-dimer to exclude), 1-2 = moderate (~17%), ≥3 = high (~53%, proceed to ultrasound). The scoring emphasizes that clinical assessment of alternative diagnoses is the strongest predictor." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Alternative diagnosis at least as likely as DVT (negative 2 points)</div></div></div>
+<div class="choice" data-correct="false" data-fb="Previous DVT is worth 1 point in the Wells score." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Previously documented DVT</div></div></div>
+</div><div id="mcqFb6" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText6" style="padding:12px;border-radius:8px"></div></div></div></div>
+<div class="mcq-card" id="mcq7" style="background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px;"><div style="padding:20px 24px;border-bottom:1px solid #334155;"><div style="font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px;">QUESTION 8 OF 8</div><div style="font-size:1.2rem;font-weight:700;margin-top:4px;">A hemodynamically stable patient is diagnosed with submassive PE (RV dilation on CT, elevated troponin, normal BP). What is the recommended management?</div></div><div style="padding:24px;"><div class="choices" style="display:grid;gap:12px;"><div class="choice" data-correct="false" data-fb="Systemic thrombolysis is reserved for massive PE with hemodynamic instability. The PEITHO trial showed increased bleeding without mortality benefit in submassive PE." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">Immediate systemic thrombolysis with alteplase</div></div></div>
+<div class="choice" data-correct="true" data-fb="Correct! Submassive PE (RV strain + biomarker elevation but hemodynamically stable): start anticoagulation (heparin → DOAC). Monitor closely in ICU/step-down. The PEITHO trial showed thrombolysis in submassive PE reduced hemodynamic decompensation but increased major bleeding (including intracranial) without mortality benefit. Escalate to thrombolysis, catheter-directed therapy, or surgical embolectomy ONLY if the patient deteriorates hemodynamically." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">Anticoagulation with close monitoring; consider escalation to thrombolysis only if hemodynamic deterioration occurs</div></div></div>
+<div class="choice" data-correct="false" data-fb="Surgical embolectomy is reserved for massive PE with failed/contraindicated thrombolysis, not stable submassive PE." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">Surgical embolectomy as first-line</div></div></div>
+<div class="choice" data-correct="false" data-fb="All PE patients (except those with absolute contraindications) require anticoagulation. Observation alone is inadequate." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">Observation with serial troponins and no anticoagulation</div></div></div>
+</div><div id="mcqFb7" class="hidden" style="display:none;margin-top:16px"><div id="mcqFbText7" style="padding:12px;border-radius:8px"></div></div></div></div>
+</div></div></div>
+<style>.choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.choice-title{font-weight:600;font-size:.95rem}</style>
+<script>function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).style.display='block'}</script>
+
+<script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Venous Thromboembolism"
+         data-key-points="🔺 Virchow's Triad: The Foundation, 🫁 Pulmonary Embolism Pathophysiology, 📊 Clinical Probability Assessment, ⚠️ PE Risk Stratification, 💊 Anticoagulation Mechanisms, Three Factors Predisposing to Thrombosis, 🔄 How Each Factor Contributes, Common Risk Factors in Clinical Practice, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=dvt-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/dvt-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

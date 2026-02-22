@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Failure - ReasonDx</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 HF Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Heart Failure with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=cv03" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=heart-failure,chf" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Heart Failure Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 8+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+        
+        <!-- Related Tools Section -->
+        <div class="section" style="background: linear-gradient(135deg, var(--primary-bg), #ecfdf5); border: 1px solid var(--primary);">
+            <h3 style="margin-bottom: 20px; color: var(--primary-dark);">📈 Related Diagnostic Tools</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <a href="../ReasonDx/ecg/ecg-quiz.html" style="display: block; padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: all 0.2s;">
+                    <div style="font-size: 24px; margin-bottom: 8px;">💓</div>
+                    <div style="font-weight: 600; color: var(--text-primary);">ECG Quiz</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Practice HF-related rhythms</div>
+                </a>
+                <a href="ecg-patterns.html" style="display: block; padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: all 0.2s;">
+                    <div style="font-size: 24px; margin-bottom: 8px;">📊</div>
+                    <div style="font-weight: 600; color: var(--text-primary);">ECG Patterns</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Visual ECG recognition guide</div>
+                </a>
+                <a href="challenges.html" style="display: block; padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: all 0.2s;">
+                    <div style="font-size: 24px; margin-bottom: 8px;">🎯</div>
+                    <div style="font-weight: 600; color: var(--text-primary);">Calibration</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">HF mechanism challenges</div>
+                </a>
+                <a href="acs-module.html" style="display: block; padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: all 0.2s;">
+                    <div style="font-size: 24px; margin-bottom: 8px;">❤️</div>
+                    <div style="font-weight: 600; color: var(--text-primary);">ACS Module</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Related: Ischemic cardiomyopathy</div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Dorothy Williams</strong>, 68F with HTN and DM, presents with progressive dyspnea, orthopnea, and leg swelling. Echo: EF 30%, elevated BNP.',pearl:'HFrEF ≤40%: full GDMT (ARNi, BB, MRA, SGLT2i). HFpEF ≥50%: SGLT2i + diuretics. BNP <100 helps rule OUT HF.',objectives:['Classify HF by ejection fraction','Interpret BNP/NT-proBNP','Understand HF staging','Recognize HFpEF criteria'],refs:[{t:'ACC/AHA HF Guidelines 2022',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063'}]},
+2:{qs:[6,7,8,9,10],narrative:'Dorothy needs GDMT optimization. Four pillars: ARNi (or ACEi), beta-blocker, MRA, SGLT2 inhibitor. Each reduces mortality independently.',pearl:'GDMT quadruple therapy: ARNi > ACEi (PARADIGM-HF). Evidence-based BB: carvedilol, metoprolol succinate. SGLT2i works regardless of diabetes.',objectives:['Prescribe quadruple therapy','Uptitrate to target doses','Manage side effects','Know contraindications'],refs:[{t:'PARADIGM-HF Trial',u:'https://www.nejm.org/doi/full/10.1056/NEJMoa1409077'}]},
+3:{qs:[11,12,13,14,15],narrative:'Dorothy presents with acute decompensated HF: severe dyspnea, SpO2 88%, elevated JVP, rales. Needs IV diuretics and hemodynamic assessment.',pearl:'Acute HF: IV furosemide 1-2x home dose. Vasodilators if BP allows. Inotropes only for cardiogenic shock. Identify precipitants.',objectives:['Manage acute decompensation','Dose IV diuretics correctly','Know inotrope indications','Identify HF precipitants'],refs:[{t:'DOSE Trial',u:'https://www.nejm.org/doi/full/10.1056/NEJMoa1005419'}]},
+4:{qs:[16,17,18,19,20],narrative:'Despite optimal GDMT, Dorothy remains symptomatic. Evaluation for ICD, CRT, or advanced therapies (LVAD, transplant) is needed.',pearl:'ICD: EF ≤35% after 3+ months GDMT. CRT: LBBB ≥150ms + EF ≤35% + NYHA II-IV. Stage D: consider LVAD/transplant.',objectives:['Know ICD indications','Identify CRT candidates','Understand LVAD/transplant','Recognize Stage D HF'],refs:[{t:'Device Therapy Guidelines',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063'}]}
+};
+var Qs={
+1:{type:'HF Classification',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'How is heart failure classified by ejection fraction?',opts:[['a','HFrEF (≤40%), HFmrEF (41-49%), HFpEF (≥50%) - EF determines treatment strategy'],['b','By symptoms only'],['c','By BNP level only'],['d','Only two categories exist']],exp:'<strong>HF classification:</strong> HFrEF ≤40% has most GDMT evidence. HFpEF ≥50% mainly benefits from SGLT2i. HFmrEF 41-49% often treated like HFrEF.',kp:'HFrEF ≤40%: all four GDMT drugs proven. HFpEF ≥50%: SGLT2i + symptom management.',dd:{mechanism:{title:'HF Classification',content:'<h4>By EF</h4><table><tr><th>Type</th><th>EF</th><th>Treatment</th></tr><tr><td>HFrEF</td><td>≤40%</td><td>Quadruple GDMT</td></tr><tr><td>HFmrEF</td><td>41-49%</td><td>Similar to HFrEF</td></tr><tr><td>HFpEF</td><td>≥50%</td><td>SGLT2i, diuretics</td></tr></table>',bw:['HFrEF ≤40%','HFpEF ≥50%','EF determines therapy']}},dist:{b:'EF essential',c:'BNP supports diagnosis',d:'Three categories'},related:[2]},
+2:{type:'BNP Interpretation',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'BNP is 850 pg/mL. What does this indicate?',opts:[['a','Strongly supports HF - BNP >400 has high PPV for HF; <100 helps rule out'],['b','Rules out HF'],['c','Normal finding'],['d','Specific for HFrEF only']],exp:'<strong>BNP cutoffs:</strong> <100 = rules out, 100-400 = grey zone, >400 = rules in HF. Elevated by renal failure, AFib. Decreased by obesity.',kp:'BNP <100 rules OUT HF. BNP >400 supports diagnosis. Obesity lowers, renal failure raises levels.',dd:{mechanism:{title:'BNP',content:'<h4>Cutoffs</h4><ul><li><100: Rule out</li><li>100-400: Grey zone</li><li>>400: Rule in</li></ul>',bw:['<100 rules out','>400 rules in','Obesity lowers BNP']}},dist:{b:'High BNP supports HF',c:'Elevated',d:'Works for all HF'},related:[1]},
+3:{type:'HF Staging',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'Patient has HTN and DM but no structural heart disease or symptoms. What ACC/AHA stage?',opts:[['a','Stage A - at risk, no structural disease yet'],['b','Stage B'],['c','Stage C'],['d','Stage D']],exp:'<strong>ACC/AHA Stages:</strong> A = risk factors only. B = structural disease, no symptoms. C = structural + symptoms. D = refractory.',kp:'Stage A: risk factors. Stage B: structural, asymptomatic. Stage C: symptomatic. Stage D: refractory.',dd:{mechanism:{title:'HF Staging',content:'<table><tr><th>Stage</th><th>Description</th></tr><tr><td>A</td><td>At risk</td></tr><tr><td>B</td><td>Structural, no Sx</td></tr><tr><td>C</td><td>Structural + Sx</td></tr><tr><td>D</td><td>Refractory</td></tr></table>',bw:['Stage A: at risk','Stage C: symptomatic','Stage D: refractory']}},dist:{b:'No structural disease',c:'No symptoms',d:'Not refractory'},related:[1]},
+4:{type:'Framingham Criteria',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'Which are MAJOR Framingham criteria for HF?',opts:[['a','PND, JVD, rales, S3 gallop, cardiomegaly, pulmonary edema - need 2 major OR 1 major + 2 minor'],['b','Peripheral edema only'],['c','Dyspnea only'],['d','Fatigue only']],exp:'<strong>Framingham:</strong> Major: PND, JVD, rales, S3, cardiomegaly, pulmonary edema. Minor: ankle edema, DOE, nocturnal cough. 2 major OR 1 major + 2 minor.',kp:'S3 gallop is highly specific. JVD and rales are key findings. 2 major OR 1 major + 2 minor.',dd:{mechanism:{title:'Framingham Criteria',content:'<h4>Major</h4><ul><li>PND/orthopnea</li><li>JVD</li><li>Rales</li><li>S3 gallop</li><li>Cardiomegaly</li></ul>',bw:['S3 specific','JVD key finding','2 major or 1+2 minor']}},dist:{b:'Minor criterion',c:'Minor criterion',d:'Not criterion'},related:[1]},
+5:{type:'HFpEF',difficulty:'hard',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'Patient has HF symptoms with EF 60% and elevated BNP. What supports HFpEF diagnosis?',opts:[['a','Elevated E/e ratio >14, LA enlargement, LVH, or elevated PCWP - evidence of diastolic dysfunction'],['b','Low EF'],['c','Normal BNP'],['d','Dilated LV']],exp:'<strong>HFpEF:</strong> Symptoms + preserved EF + evidence of elevated filling pressures (E/e >14, LA enlargement, elevated PCWP).',kp:'HFpEF = preserved EF + diastolic dysfunction. E/e >14 suggests elevated filling pressures.',dd:{mechanism:{title:'HFpEF',content:'<h4>Criteria</h4><ul><li>HF symptoms</li><li>EF ≥50%</li><li>Diastolic dysfunction</li><li>E/e >14</li></ul>',bw:['EF ≥50%','E/e >14','LA enlargement']}},dist:{b:'Preserved EF',c:'BNP elevated',d:'Not dilated'},related:[1]},
+6:{type:'GDMT Quadruple',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'What are the four pillars of GDMT for HFrEF?',opts:[['a','ARNi (or ACEi/ARB), beta-blocker, MRA, and SGLT2 inhibitor - each reduces mortality'],['b','Digoxin and diuretics'],['c','ACEi only'],['d','Diuretics only']],exp:'<strong>Quadruple GDMT:</strong> ARNi preferred over ACEi. Evidence-based BB: carvedilol, metoprolol succinate. MRA: spironolactone/eplerenone. SGLT2i regardless of DM.',kp:'All four pillars reduce mortality independently. ARNi > ACEi (PARADIGM-HF). Start all four, uptitrate.',dd:{mechanism:{title:'Quadruple Therapy',content:'<table><tr><th>Class</th><th>Mortality Reduction</th></tr><tr><td>ARNi/ACEi</td><td>~20%</td></tr><tr><td>BB</td><td>~35%</td></tr><tr><td>MRA</td><td>~30%</td></tr><tr><td>SGLT2i</td><td>~25%</td></tr></table>',bw:['Four pillars','ARNi > ACEi','All reduce mortality']}},dist:{b:'Not GDMT core',c:'Need all four',d:'Not disease-modifying'},related:[7]},
+7:{type:'ARNi',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'When switching from ACEi to ARNi, what is required?',opts:[['a','36-hour washout period to reduce angioedema risk'],['b','Immediate switch'],['c','1-week washout'],['d','No washout needed']],exp:'<strong>ACEi to ARNi switch:</strong> Must have 36-hour washout to reduce angioedema risk. Can switch directly from ARB.',kp:'36-hour washout from ACEi. Direct switch from ARB OK. ARNi = sacubitril-valsartan.',dd:{mechanism:{title:'ARNi',content:'<ul><li>36h washout from ACEi</li><li>Direct from ARB OK</li><li>Reduces HF hospitalization and mortality</li></ul>',bw:['36-hour washout','Sacubitril-valsartan','PARADIGM-HF']}},dist:{b:'Risk of angioedema',c:'36 hours sufficient',d:'Washout required'},related:[6]},
+8:{type:'Beta-Blockers',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'Which beta-blockers have mortality benefit in HFrEF?',opts:[['a','Carvedilol, metoprolol succinate, bisoprolol - evidence-based agents only'],['b','Any beta-blocker'],['c','Metoprolol tartrate'],['d','Atenolol']],exp:'<strong>Evidence-based BBs:</strong> Only carvedilol, metoprolol SUCCINATE, and bisoprolol proven in HFrEF trials. NOT tartrate or atenolol.',kp:'Carvedilol, metoprolol succinate, bisoprolol only. Start low, titrate slowly. Dont initiate in decompensated HF.',dd:{mechanism:{title:'BB in HFrEF',content:'<ul><li>Carvedilol: alpha + beta block</li><li>Metoprolol succinate: XL formulation</li><li>Bisoprolol: selective beta-1</li></ul>',bw:['Evidence-based only','Not tartrate','Start low, go slow']}},dist:{b:'Specific agents only',c:'Not proven',d:'Not proven'},related:[6]},
+9:{type:'MRA',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'When are MRAs indicated in HFrEF?',opts:[['a','EF ≤35% with NYHA II-IV symptoms despite ACEi/ARNi and BB - monitor K+ and renal function'],['b','All HF patients'],['c','Only if hypokalemic'],['d','Never indicated']],exp:'<strong>MRA indication:</strong> EF ≤35% with symptoms on ACEi + BB. Spironolactone or eplerenone. Monitor potassium and creatinine - avoid if K >5 or CrCl <30.',kp:'EF ≤35% + symptomatic. Monitor K+ (stop if >5.5). Eplerenone has fewer endocrine side effects.',dd:{mechanism:{title:'MRA',content:'<ul><li>RALES: spironolactone reduces mortality 30%</li><li>Monitor K+ and creatinine</li><li>Contraindicated if K>5, CrCl<30</li></ul>',bw:['EF ≤35%','Monitor potassium','RALES trial']}},dist:{b:'EF ≤35% + symptoms',c:'Not the indication',d:'Mortality benefit'},related:[6]},
+10:{type:'SGLT2i',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'Which patients with HFrEF benefit from SGLT2 inhibitors?',opts:[['a','All HFrEF patients regardless of diabetes status - reduces HF hospitalization and CV death'],['b','Only diabetics'],['c','Only if eGFR >60'],['d','Not recommended in HF']],exp:'<strong>SGLT2i in HFrEF:</strong> DAPA-HF and EMPEROR-Reduced showed benefit regardless of diabetes. Also benefits HFpEF (EMPEROR-Preserved).',kp:'Works in HFrEF AND HFpEF. Does NOT require diabetes. DAPA-HF: dapagliflozin. Can use down to eGFR 20-25.',dd:{mechanism:{title:'SGLT2i',content:'<ul><li>Benefits independent of diabetes</li><li>Reduces HF hospitalization</li><li>Reduces CV death</li><li>Works in HFpEF too</li></ul>',bw:['Regardless of diabetes','DAPA-HF','EMPEROR trials']}},dist:{b:'Works without DM',c:'Can use lower eGFR',d:'Major benefit'},related:[6]},
+11:{type:'Acute HF Diuresis',difficulty:'medium',domains:['management'],tags:['Step2','Cards'],stem:'How should IV furosemide be dosed in acute decompensated HF?',opts:[['a','Start at 1-2.5x the home oral dose IV, given as bolus or continuous infusion'],['b','Fixed 20mg dose'],['c','Oral diuretics only'],['d','Avoid diuretics']],exp:'<strong>IV diuretics:</strong> Give 1-2.5x home oral dose as IV. DOSE trial: no difference between bolus vs continuous or low vs high dose strategy.',kp:'1-2.5x home dose IV. Monitor urine output, daily weights, electrolytes. Add thiazide if diuretic resistance.',dd:{mechanism:{title:'Diuresis',content:'<ul><li>DOSE trial: strategies equivalent</li><li>Target 1-2L negative/day</li><li>Add metolazone if resistant</li></ul>',bw:['1-2.5x home dose','Monitor output','DOSE trial']}},dist:{b:'Dose to home dose',c:'Need IV for acute',d:'Essential for congestion'},related:[12]},
+12:{type:'Vasodilators',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'When are IV vasodilators indicated in acute HF?',opts:[['a','Hypertensive acute HF (SBP >140) without hypotension - nitroglycerin or nitroprusside'],['b','All acute HF'],['c','Only with cardiogenic shock'],['d','Never indicated']],exp:'<strong>IV vasodilators:</strong> For hypertensive acute HF. NTG: venodilation, reduces preload. Nitroprusside: arterial + venous. Avoid if hypotensive.',kp:'Use if SBP >140. Reduces preload and afterload. Contraindicated if hypotensive or severe AS.',dd:{mechanism:{title:'Vasodilators',content:'<ul><li>Nitroglycerin: venous > arterial</li><li>Nitroprusside: both</li><li>Need adequate BP</li></ul>',bw:['SBP >140','NTG for preload','Avoid if hypotensive']}},dist:{b:'Need adequate BP',c:'Opposite - avoid in shock',d:'Effective in hypertensive HF'},related:[11]},
+13:{type:'Inotropes',difficulty:'hard',domains:['pharmacology'],tags:['Step2','Cards'],stem:'When are inotropes indicated in acute HF?',opts:[['a','Cardiogenic shock with end-organ hypoperfusion - dobutamine or milrinone; not routine use'],['b','All acute HF'],['c','First-line therapy'],['d','For mild symptoms']],exp:'<strong>Inotropes:</strong> Reserve for cardiogenic shock with hypoperfusion. Dobutamine: beta-1 agonist. Milrinone: PDE inhibitor, vasodilator. Increase mortality if used routinely.',kp:'Cardiogenic shock only. Dobutamine if low BP. Milrinone if adequate BP (causes vasodilation). Not routine.',dd:{mechanism:{title:'Inotropes',content:'<ul><li>Dobutamine: beta-1, increases BP</li><li>Milrinone: PDE-I, vasodilates</li><li>Reserve for shock</li></ul>',bw:['Cardiogenic shock','Dobutamine if low BP','Increase mortality if routine']}},dist:{b:'Only for shock',c:'Last resort',d:'Only for shock'},related:[11]},
+14:{type:'HF Precipitants',difficulty:'medium',domains:['management'],tags:['Step2','Cards'],stem:'What are common precipitants of acute HF decompensation?',opts:[['a','Medication/dietary non-adherence, ACS, arrhythmia, infection, uncontrolled HTN - use FAILURES mnemonic'],['b','Only medication non-adherence'],['c','Only infection'],['d','Random occurrence']],exp:'<strong>FAILURES mnemonic:</strong> Forgetting meds, Arrhythmia, Ischemia, Lifestyle (salt/fluid), Upregulation (HTN), Renal failure, Embolism (PE), Stenosis (AS).',kp:'Non-adherence most common. Always look for precipitant. Treat underlying cause along with HF.',dd:{mechanism:{title:'HF Precipitants',content:'<h4>FAILURES</h4><ul><li>Forgetting medications</li><li>Arrhythmia (AFib)</li><li>Ischemia/Infarction</li><li>Lifestyle (salt/fluid)</li><li>Upregulators (HTN, thyroid)</li><li>Renal failure</li><li>Embolism (PE)</li><li>Stenosis (valvular)</li></ul>',bw:['FAILURES mnemonic','Non-adherence most common','Always identify cause']}},dist:{b:'Multiple causes',c:'Many causes',d:'Usually identifiable cause'},related:[11]},
+15:{type:'Cardiorenal',difficulty:'hard',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'Creatinine rises from 1.2 to 1.8 during aggressive diuresis. How should you manage?',opts:[['a','Continue diuresis if decongesting and patient improving - mild creatinine rise acceptable; stop if significant rise or no response'],['b','Stop all diuretics immediately'],['c','Start dialysis'],['d','Ignore creatinine']],exp:'<strong>Cardiorenal syndrome:</strong> Mild Cr rise (up to 0.3-0.5) often acceptable if achieving decongestion. Persistent congestion worse than mild Cr bump. Assess response.',kp:'Decongestion may be more important than Cr bump. Assess clinical response. Persistent congestion → worse outcomes.',dd:{mechanism:{title:'Cardiorenal Syndrome',content:'<ul><li>Cr rise during diuresis common</li><li>Mild rise acceptable if decongesting</li><li>Persistent congestion worse prognosis</li></ul>',bw:['Decongestion priority','Mild Cr rise OK','Assess clinical response']}},dist:{b:'Assess response first',c:'Not indicated yet',d:'Monitor closely'},related:[11]},
+16:{type:'ICD Indications',difficulty:'hard',domains:['management'],tags:['Step2','Cards'],stem:'When is primary prevention ICD indicated in HFrEF?',opts:[['a','EF ≤35% despite 3+ months of GDMT with NYHA II-III symptoms and >1 year life expectancy'],['b','All HF patients'],['c','EF ≤50%'],['d','Immediately at diagnosis']],exp:'<strong>ICD primary prevention:</strong> EF ≤35% after ≥3 months optimized GDMT. NYHA II-III (not IV unless CRT candidate). Must have >1 year expected survival.',kp:'EF ≤35% after 3+ months GDMT. Not NYHA IV (unless CRT). >1 year life expectancy. Secondary prevention: post-VT/VF arrest.',dd:{mechanism:{title:'ICD Indications',content:'<h4>Primary Prevention</h4><ul><li>EF ≤35%</li><li>≥3 months GDMT</li><li>NYHA II-III</li><li>>1 year survival</li></ul><h4>Secondary Prevention</h4><ul><li>Survived VT/VF arrest</li><li>Sustained VT</li></ul>',bw:['EF ≤35%','3+ months GDMT','>1 year survival']}},dist:{b:'Specific criteria',c:'≤35% threshold',d:'Need GDMT trial first'},related:[17]},
+17:{type:'CRT',difficulty:'hard',domains:['management'],tags:['Step2','Cards'],stem:'What are the indications for CRT in HFrEF?',opts:[['a','EF ≤35%, LBBB ≥150ms, NYHA II-IV symptoms on GDMT - strongest indication for LBBB morphology'],['b','Any wide QRS'],['c','EF ≤50%'],['d','Right bundle branch block']],exp:'<strong>CRT indications:</strong> EF ≤35% + LBBB ≥150ms + NYHA II-IV has Class I indication. Non-LBBB or QRS 120-149 has weaker evidence. RBBB does not benefit.',kp:'Best response: LBBB ≥150ms + EF ≤35%. Non-LBBB less benefit. RBBB typically doesnt respond.',dd:{mechanism:{title:'CRT',content:'<h4>Class I (Strongest)</h4><ul><li>EF ≤35%</li><li>LBBB ≥150ms</li><li>NYHA II-IV on GDMT</li></ul><h4>Less Benefit</h4><ul><li>Non-LBBB</li><li>QRS 120-149</li><li>RBBB poor response</li></ul>',bw:['LBBB ≥150ms','EF ≤35%','RBBB poor response']}},dist:{b:'LBBB specific',c:'≤35% threshold',d:'Does not benefit'},related:[16]},
+18:{type:'LVAD',difficulty:'hard',domains:['management'],tags:['Step2','Cards'],stem:'When is LVAD considered in advanced HF?',opts:[['a','Stage D HF refractory to GDMT - as bridge to transplant or destination therapy if not transplant candidate'],['b','All Stage C HF'],['c','First-line treatment'],['d','Only post-MI']],exp:'<strong>LVAD:</strong> For Stage D refractory HF. Bridge to transplant (BTT), bridge to decision, or destination therapy (DT) if not transplant candidate.',kp:'Stage D refractory HF. BTT or DT. Improves survival and QoL in advanced HF. Requires anticoagulation.',dd:{mechanism:{title:'LVAD',content:'<ul><li>Stage D refractory HF</li><li>Bridge to transplant</li><li>Destination therapy</li><li>Improves survival</li></ul>',bw:['Stage D HF','Bridge to transplant','Destination therapy']}},dist:{b:'Stage D only',c:'After GDMT fails',d:'Multiple indications'},related:[19]},
+19:{type:'Transplant',difficulty:'hard',domains:['management'],tags:['Step2','Cards'],stem:'What are contraindications to heart transplant?',opts:[['a','Active malignancy, irreversible pulmonary HTN, active infection, severe comorbidities, poor social support'],['b','Age >50'],['c','Prior cardiac surgery'],['d','Diabetes']],exp:'<strong>Transplant contraindications:</strong> Active malignancy, irreversible pulm HTN (PVR >5), active infection, severe renal/liver disease, poor compliance/support, active substance abuse.',kp:'Irreversible pulm HTN key contraindication (RV failure of donor heart). Age not absolute. DM not contraindication.',dd:{mechanism:{title:'Transplant Contraindications',content:'<ul><li>Active malignancy</li><li>Irreversible pulm HTN</li><li>Active infection</li><li>Severe comorbidities</li><li>Poor social support</li><li>Active substance abuse</li></ul>',bw:['Irreversible pulm HTN','Active malignancy','Social support matters']}},dist:{b:'Not absolute',c:'Not contraindication',d:'Not contraindication'},related:[18]},
+20:{type:'Prognosis',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'Which factors predict poor prognosis in HF?',opts:[['a','Low EF, elevated BNP, hyponatremia, renal dysfunction, recurrent hospitalizations, low BP'],['b','High EF'],['c','Normal BNP'],['d','Stable weight']],exp:'<strong>Poor prognostic factors:</strong> Low EF, high BNP, hyponatremia, elevated creatinine, multiple hospitalizations, low functional capacity, low SBP, RV dysfunction.',kp:'Lower EF = worse prognosis. Hyponatremia indicates neurohormonal activation. Frequent hospitalizations predict mortality.',dd:{mechanism:{title:'HF Prognosis',content:'<h4>Poor Prognostic Factors</h4><ul><li>Low EF</li><li>Elevated BNP</li><li>Hyponatremia</li><li>Renal dysfunction</li><li>Low BP</li><li>RV dysfunction</li><li>Frequent hospitalizations</li></ul>',bw:['Low EF','Hyponatremia','Elevated BNP','Frequent admissions']}},dist:{b:'Low EF = poor prognosis',c:'High BNP = poor prognosis',d:'Weight gain = decompensation'},related:[1]}
+};
+var answers={1:'d',2:'b',3:'a',4:'d',5:'c',6:'c',7:'d',8:'a',9:'c',10:'a',11:'c',12:'d',13:'c',14:'b',15:'a',16:'b',17:'a',18:'d',19:'b',20:'b'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border)"><div style="font-size:10px;font-weight:600;color: var(--text-secondary);margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#7c3aed;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Heart Failure"
+         data-key-points="📈 Related Diagnostic Tools, 🎨 Choose Theme, 🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
+tml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eosinophilia Workup | MechanismDx</title>
+    <link rel="stylesheet" href="dx-design-system.css">
+    <link rel="stylesheet" href="module-layout-v2.css">
+    <style>
+        :root {
+            --primary: #4A90A4;
+            --primary-dark: #2D5A6A;
+            --accent: #F4A261;
+            --success: #2A9D8F;
+            --bg-light: #F8FAFC;
+        }
+        body { font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; background: var(--bg-light); }
+        .module-header { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
+        .module-header h1 { margin: 0; font-size: 1.8rem; }
+        .module-header p { opacity: 0.9; margin-top: 0.5rem; }
+        .concept-card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .concept-card h3 { color: var(--primary-dark); margin-top: 0; padding-bottom: 0.75rem; border-bottom: 2px solid var(--primary); }
+        .concept-card ul, .concept-card ol { padding-left: 1.5rem; }
+        .concept-card li { margin-bottom: 0.5rem; }
+        .clinical-pearl { background: linear-gradient(135deg, #FFF3CD, #FFF8E1); border-left: 4px solid var(--accent); padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; font-weight: 500; }
+        .key-points { background: linear-gradient(135deg, #D4EDDA, #E8F5E9); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+        .key-points h3 { color: var(--success); margin-top: 0; }
+        .key-points ul { list-style: none; padding: 0; }
+        .key-points li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .key-points li::before { content: "✓"; color: var(--success); font-weight: bold; position: absolute; left: 0; }
+        .nav-buttons { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .nav-btn { padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500; transition: all 0.2s; }
+        .nav-btn.primary { background: var(--primary); color: white; }
+        .nav-btn.secondary { background: white; color: var(--primary); border: 2px solid var(--primary); }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        @media (max-width: 768px) { .module-header { padding: 1.5rem; } .concept-card { padding: 1rem; } }
+    </style>
+</head>
+<body>
+    <div style="max-width: 900px; margin: 0 auto; padding: 1.5rem;">
+        <div class="module-header">
+            <h1>Eosinophilia Workup</h1>
+            <p>From Allergy to Malignancy</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Definition & Classification</h3>
+            <p><strong>Absolute Eosinophil Count (AEC):</strong></p>
+<ul>
+<li>Mild: 500-1500/μL</li>
+<li>Moderate: 1500-5000/μL</li>
+<li>Severe: >5000/μL</li>
+<li>Hypereosinophilia: >1500/μL on 2 occasions OR tissue eosinophilia with symptoms</li>
+</ul>
+<p><strong>Hypereosinophilic Syndrome (HES):</strong></p>
+<ul>
+<li>AEC >1500/μL for ≥6 months</li>
+<li>Evidence of organ involvement</li>
+<li>No secondary cause identified</li>
+</ul>
+        </div>
+
+        <div class="concept-card">
+            <h3>Eosinophil Biology</h3>
+            <p><strong>Key cytokines (eosinophilopoietins):</strong></p>
+<ul>
+<li><strong>IL-5:</strong> Primary driver of eosinophil production, activation, survival</li>
+<li><strong>IL-3:</strong> Stimulates bone marrow production</li>
+<li><strong>GM-CSF:</strong> Enhances survival and activation</li>
+</ul>
+<p><strong>Tissue damage mechanisms:</strong></p>
+<ul>
+<li>Major Basic Protein (MBP) → epithelial damage</li>
+<li>Eosinophil Cationic Protein (ECP) → neurotoxicity</li>
+<li>Eosinophil Peroxidase → oxidative damage</li>
+<li>Cytokine/chemokine release</li>
+</ul>
+<p class="clinical-pearl">💡 IL-5 is THE therapeutic target: mepolizumab, benralizumab block this pathway</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Differential Diagnosis (CHINA)</h3>
+            <p><strong>C - Connective tissue/Collagen vascular:</strong> EGPA (Churg-Strauss), eosinophilic fasciitis</p>
+<p><strong>H - Helminth/Parasitic:</strong> Strongyloides, Toxocara, Ascaris, Filaria, Trichinella</p>
+<p><strong>I - Idiopathic/HES:</strong> Primary clonal (FIP1L1-PDGFRA+), lymphocyte-variant, idiopathic</p>
+<p><strong>N - Neoplasm:</strong> Hodgkin lymphoma, T-cell lymphoma, mastocytosis, leukemia</p>
+<p><strong>A - Allergy/Atopy:</strong> Asthma, allergic rhinitis, atopic dermatitis, ABPA, drug reactions</p>
+<p class="clinical-pearl">💡 Always check Strongyloides serology before starting steroids - can cause fatal hyperinfection</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Systematic Workup</h3>
+            <p><strong>Initial:</strong></p>
+<ul>
+<li>CBC with differential, smear</li>
+<li>CMP, LDH, B12 (elevated in clonal disease)</li>
+<li>IgE level, tryptase</li>
+<li>Stool O&P × 3, Strongyloides serology</li>
+</ul>
+<p><strong>If persistent/severe:</strong></p>
+<ul>
+<li>CT chest/abdomen (organ involvement)</li>
+<li>Echo (cardiac eosinophilia - Löffler's)</li>
+<li>Bone marrow biopsy + flow cytometry</li>
+<li>FIP1L1-PDGFRA by FISH</li>
+<li>T-cell receptor rearrangement</li>
+</ul>
+<p><strong>Organ-specific:</strong></p>
+<ul>
+<li>PFTs + HRCT for eosinophilic lung disease</li>
+<li>EGD/colonoscopy for EoE/GI involvement</li>
+</ul>
+        </div>
+
+        <div class="key-points">
+            <h3>🎯 Key Points</h3>
+            <ul>
+                <li>IL-5 is the key eosinophilopoietin - therapeutic target</li>
+                <li>CHINA mnemonic: Connective tissue, Helminth, Idiopathic, Neoplasm, Allergy</li>
+                <li>Always rule out Strongyloides before steroids</li>
+                <li>FIP1L1-PDGFRA mutation = myeloproliferative HES, responds to imatinib</li>
+                <li>Cardiac involvement (Löffler's) is most dangerous complication</li>
+            </ul>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../ReasonDx/deep-dive-player.html?module=eosinophilia-deep-dive" class="nav-btn secondary">📖 Deep Dive</a>
+            <a href="index.html" class="nav-btn secondary">← Back to MechanismDx</a>
+            <a href="../search.html?q=Eosinophilia" class="nav-btn primary">🔍 Related Topics</a>
+        </div>
+    </div>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Eosinophilia Workup"
+         data-key-points="Definition & Classification, Eosinophil Biology, Differential Diagnosis (CHINA), Systematic Workup, 🎯 Key Points, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A patient has an absolute eosinophil count of 2,500/μL. What level defines hypereosinophilia?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="&gt;500 is the threshold for eosinophilia. Hypereosinophilia has a higher threshold." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">AEC >500/μL</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Hypereosinophilia: AEC ≥1,500/μL on ≥2 occasions (≥1 month apart). Hypereosinophilic syndrome (HES): hypereosinophilia + organ damage. Mild eosinophilia: 500-1,500; moderate: 1,500-5,000; severe: &gt;5,000." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">AEC ≥1,500/μL on two occasions at least 1 month apart, OR tissue eosinophilia with organ damage</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="AEC &gt;10,000 is severe eosinophilia, not the threshold for hypereosinophilia." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">AEC >10,000/μL</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="100/μL is well within the normal range. Normal AEC is up to 500/μL." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">AEC >100/μL</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What is the MOST common cause of eosinophilia worldwide?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Allergic diseases are the most common cause in developed countries, but not worldwide." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Allergic diseases (asthma, allergic rhinitis, atopic dermatitis)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Helminth infections are the #1 cause globally: Ascaris, hookworm, Strongyloides, Toxocara, Schistosoma. Parasites that invade tissue trigger the strongest eosinophilic response. In developed countries, allergic diseases are the leading cause." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Parasitic (helminth) infections</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Drug-induced eosinophilia is common but not the most frequent cause globally." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Drug reactions</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Malignancies like HES and eosinophilic leukemia are rare compared to parasitic and allergic causes." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Hematologic malignancies</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Which organ system is at HIGHEST risk of irreversible damage from sustained hypereosinophilia?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Skin involvement (rashes, urticaria) is common but usually reversible. The highest-stakes organ is cardiac." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Skin</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Eosinophilic cardiac disease: eosinophil granule proteins (MBP, ECP) cause endocardial damage → mural thrombi → endomyocardial fibrosis → restrictive cardiomyopathy. This is the leading cause of morbidity/mortality in HES. Echocardiogram and troponin are essential in workup." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Heart (endomyocardial fibrosis, restrictive cardiomyopathy)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Renal involvement in eosinophilic disease occurs but is less common and less devastating than cardiac involvement." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Kidneys</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Bone involvement is not a primary target of eosinophil-mediated damage." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Bones</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">A patient with eosinophilia has traveled to Southeast Asia. What parasitic infection should be SPECIFICALLY excluded before starting corticosteroids?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Malaria does NOT cause eosinophilia (it&#x27;s an intracellular protozoan). Eosinophilia is associated with helminth (worm) infections." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Plasmodium (malaria)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="CRITICAL: Exclude Strongyloides before immunosuppression. Strongyloides has a unique autoinfection cycle that can cause fatal hyperinfection syndrome with corticosteroid-induced immunosuppression → disseminated larvae → sepsis → death. Screen with serology and/or stool examination." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Strongyloides stercoralis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Giardia is a protozoan that does NOT typically cause eosinophilia. It causes watery diarrhea, not eosinophilic response." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Giardia lamblia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Entamoeba is a protozoan — protozoal infections generally do NOT cause eosinophilia (with rare exceptions). Helminths are the eosinophilia-inducing parasites." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Entamoeba histolytica</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which class of parasites causes the MOST pronounced eosinophilia?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Protozoa generally do NOT cause significant eosinophilia. They are intracellular parasites that don&#x27;t trigger the same Th2/IL-5 response." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Protozoa (Giardia, Cryptosporidium)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Tissue-invasive helminths trigger the strongest eosinophilic response: Strongyloides, Toxocara (visceral larva migrans), Trichinella, Schistosoma, filarial worms. The eosinophil response is driven by Th2 cytokines (IL-5) directed against helminth larvae in tissues." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Tissue-invasive helminths (worms)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Bacterial infections typically cause neutrophilia, not eosinophilia. Eosinophilia actually suggests against bacterial infection as the primary process." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Bacteria</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Viral infections typically cause lymphocytosis, not eosinophilia." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Viruses</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">What is the initial workup for unexplained eosinophilia?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Bone marrow biopsy is reserved for suspected hematologic malignancy or HES, not as the first-line investigation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Bone marrow biopsy as the first test</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Stepwise workup: (1) History: travel, drugs, allergies, symptoms. (2) Labs: CBC, CMP, LDH, tryptase, B12, IgE, Strongyloides serology, stool O&amp;P. (3) Organ damage: troponin, echo, PFTs. (4) If primary HES suspected: FIP1L1-PDGFRA fusion gene, bone marrow." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Detailed history (travel, medications, allergies), stool for ova/parasites, Strongyloides serology, and assessment for organ damage</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Broad imaging is not the starting point. Targeted testing based on history and basic labs is appropriate." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">CT scan of all body regions</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Starting steroids without excluding parasites (especially Strongyloides) can be fatal. Workup must precede treatment." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Immediate corticosteroids without workup</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">A patient with HES has the FIP1L1-PDGFRA fusion gene. What is the targeted treatment?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Corticosteroids are effective for lymphocyte-variant HES but not the primary treatment for PDGFRA-positive disease." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">High-dose corticosteroids</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="FIP1L1-PDGFRA-positive HES: exquisitely responsive to imatinib (same drug used for CML). Low doses achieve complete molecular remission. This is why molecular testing for the fusion gene is critical — it identifies a curable subtype of HES." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Imatinib (tyrosine kinase inhibitor)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Anti-IL-5 biologics are used for eosinophilic asthma and some HES subtypes but are not first-line for PDGFRA-positive disease, which responds to imatinib." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Anti-IL-5 therapy (mepolizumab)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Transplant is reserved for refractory HES. PDGFRA-positive disease has an excellent response to imatinib without needing transplant." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Allogeneic stem cell transplant</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">DRESS syndrome (Drug Reaction with Eosinophilia and Systemic Symptoms) typically presents how many weeks after starting the offending drug?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Immediate drug reactions (urticaria, anaphylaxis) occur within minutes to hours. DRESS has a characteristically delayed onset." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Within minutes to hours</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="DRESS has a uniquely long latency: typically 2-8 weeks after starting the drug. Presents with: fever, diffuse rash, facial edema, lymphadenopathy, eosinophilia (often &gt;1,500), atypical lymphocytes, and organ involvement (liver most common, then kidneys, lungs). Common culprits: anticonvulsants, allopurinol, antibiotics." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">2-8 weeks after drug initiation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This is too long even for DRESS. At 6-12 months, the drug reaction pattern would be unusual." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">6-12 months after drug use</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="DRESS occurs with both oral and IV medications. The most common culprits (anticonvulsants, allopurinol) are oral drugs." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Only with IV drugs, never oral</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=eosinophilia-workup-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/eosinophilia-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

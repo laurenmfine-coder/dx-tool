@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVIG & SCIG: Immunoglobulin Replacement Therapy | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html">MechanismDx</a> → <a href="pharmacology.html">Pharmacology</a> → IVIG & SCIG
+            </div>
+            <h1>💉 IVIG & SCIG: Immunoglobulin Replacement Therapy</h1>
+            <p>Mechanisms, dosing, administration, and monitoring for immunoglobulin replacement</p>
+        </div>
+    </header>
+    
+    <div class="content-meta">
+        <span class="meta-badge updated">📅 Content last updated: January 7, 2026</span>
+        <span class="meta-badge time">⏱️ ~40 minutes</span>
+        <span class="meta-badge audience">👥 Medicine, Nursing, Pharmacy</span>
+    </div>
+    
+    <main class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Compare IVIG and SCIG pharmacokinetics, advantages, and disadvantages</li>
+                <li>Calculate appropriate dosing for immunodeficiency patients</li>
+                <li>Describe proper administration techniques and infusion protocols</li>
+                <li>Recognize and manage infusion reactions</li>
+                <li>Understand monitoring parameters including trough IgG levels</li>
+                <li>Teach patients self-administration of SCIG</li>
+            </ul>
+        </div>
+        
+        <!-- Section 1: Overview -->
+        <section class="section">
+            <h2>1. Overview: Why Immunoglobulin Replacement?</h2>
+            
+            <p>Immunoglobulin replacement therapy provides passive immunity to patients who cannot produce adequate antibodies. The goal is to maintain IgG levels sufficient to prevent infections.</p>
+            
+            <h3>Indications for IgG Replacement</h3>
+            <ul>
+                <li><strong>Primary immunodeficiency:</strong> CVID, XLA, hyper-IgM syndrome, specific antibody deficiency (selected cases)</li>
+                <li><strong>Secondary immunodeficiency:</strong> CLL with hypogammaglobulinemia, post-HSCT, certain B-cell depleting therapies</li>
+                <li><strong>Other FDA-approved uses:</strong> ITP, Kawasaki disease, CIDP, MMN (these use higher "immunomodulatory" doses)</li>
+            </ul>
+            
+            <div class="key-point">
+                <strong>Key Concept:</strong> For immunodeficiency, we use <strong>replacement doses</strong> (400-600 mg/kg/month) to maintain trough IgG levels. For autoimmune/inflammatory conditions, we use <strong>immunomodulatory doses</strong> (1-2 g/kg) which work through different mechanisms.
+            </div>
+        </section>
+        
+        <!-- Section 2: IVIG vs SCIG -->
+        <section class="section">
+            <h2>2. IVIG vs SCIG: Head-to-Head Comparison</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>IVIG (Intravenous)</th>
+                        <th>SCIG (Subcutaneous)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">Route</td>
+                        <td>IV infusion</td>
+                        <td>Subcutaneous injection/infusion</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Frequency</td>
+                        <td>Every 3-4 weeks</td>
+                        <td>Weekly (conventional) or biweekly (facilitated SCIG)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Setting</td>
+                        <td>Infusion center, hospital, or home with nurse</td>
+                        <td>Home self-administration</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Infusion Duration</td>
+                        <td>2-6 hours depending on product/rate</td>
+                        <td>1-2 hours for weekly infusions</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">IgG Levels</td>
+                        <td>Peak-trough fluctuation (high after infusion, drops before next)</td>
+                        <td>Steady-state levels (less fluctuation)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Half-life</td>
+                        <td>~21-35 days</td>
+                        <td>Same IgG half-life, but more stable levels due to frequency</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Systemic Reactions</td>
+                        <td>More common (headache, fever, chills, nausea)</td>
+                        <td>Less common systemic reactions</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Local Reactions</td>
+                        <td>IV site reactions</td>
+                        <td>Injection site swelling, redness (usually mild)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Venous Access</td>
+                        <td>Required (can be challenging in some patients)</td>
+                        <td>Not required</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Patient Autonomy</td>
+                        <td>Dependent on infusion appointments</td>
+                        <td>Self-administered, flexible scheduling</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Initial Training</td>
+                        <td>Minimal patient training</td>
+                        <td>Requires patient education on self-injection</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Many patients who experience systemic side effects with IVIG (headaches, fatigue, malaise) feel significantly better with SCIG due to steadier IgG levels and smaller, more frequent doses.
+            </div>
+        </section>
+        
+        <!-- Section 3: Pharmacokinetics -->
+        <section class="section">
+            <h2>3. Pharmacokinetics</h2>
+            
+            <h3>IgG Distribution and Elimination</h3>
+            <p>Infused IgG distributes between intravascular and extravascular compartments:</p>
+            <ul>
+                <li>~45% remains intravascular</li>
+                <li>~55% distributes to extravascular tissues</li>
+                <li>Half-life: 21-35 days (varies by product and patient)</li>
+                <li>Elimination: Catabolism by endothelial cells; FcRn receptor recycles IgG back to circulation (prolongs half-life)</li>
+            </ul>
+            
+            <h3>IVIG Kinetics</h3>
+            <p>With monthly IVIG:</p>
+            <ul>
+                <li><strong>Peak:</strong> Immediately post-infusion (significant rise)</li>
+                <li><strong>Trough:</strong> Just before next infusion (lowest level)</li>
+                <li><strong>Fluctuation:</strong> Can vary by 300-400 mg/dL between peak and trough</li>
+            </ul>
+            
+            <h3>SCIG Kinetics</h3>
+            <p>With weekly SCIG:</p>
+            <ul>
+                <li><strong>Bioavailability:</strong> ~65-70% compared to IV (dose may need to be increased)</li>
+                <li><strong>Steady-state:</strong> Achieved after 4-6 weeks of weekly dosing</li>
+                <li><strong>Fluctuation:</strong> Minimal; steady-state levels with small variations</li>
+            </ul>
+            
+            <div class="key-point">
+                <strong>Dose Conversion IVIG → SCIG:</strong><br>
+                When converting from IVIG to conventional SCIG, the total monthly dose is typically <strong>increased by 37-53%</strong> (multiply by 1.37-1.53) to achieve equivalent trough levels, then divided into weekly doses.<br><br>
+                <em>Example: IVIG 40g monthly → SCIG: 40g × 1.37 = ~55g monthly ÷ 4 = ~13.75g weekly</em>
+            </div>
+        </section>
+        
+        <!-- Section 4: Dosing -->
+        <section class="section">
+            <h2>4. Dosing for Immunodeficiency</h2>
+            
+            <h3>Initial Dosing</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Route</th>
+                        <th>Starting Dose</th>
+                        <th>Frequency</th>
+                        <th>Goal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">IVIG</td>
+                        <td>400-600 mg/kg</td>
+                        <td>Every 3-4 weeks</td>
+                        <td>Trough IgG ≥500 mg/dL (some target ≥800 if lung disease)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">SCIG (conventional)</td>
+                        <td>100-200 mg/kg/week</td>
+                        <td>Weekly</td>
+                        <td>Steady-state IgG ≥500-800 mg/dL</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">fSCIG (facilitated)</td>
+                        <td>300-600 mg/kg</td>
+                        <td>Every 3-4 weeks</td>
+                        <td>Same as IVIG</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="dosing-calculator">
+                <h4>📊 Dose Calculator</h4>
+                <div class="calc-row">
+                    <label>Patient Weight:</label>
+                    <input type="number" id="weight" placeholder="kg" style="width: 100px;">
+                    <span>kg</span>
+                </div>
+                <div class="calc-row">
+                    <label>Dose (mg/kg):</label>
+                    <input type="number" id="dosePerKg" placeholder="400-600" value="500" style="width: 100px;">
+                    <span>mg/kg</span>
+                </div>
+                <div class="calc-row">
+                    <label>Route:</label>
+                    <select id="route">
+                        <option value="ivig">IVIG (monthly)</option>
+                        <option value="scig">SCIG (convert to weekly)</option>
+                    </select>
+                </div>
+                <button onclick="calculateDose()" style="background: #166534; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; margin-top: 12px;">Calculate</button>
+                <div class="calc-result" id="doseResult">
+                    Enter values above and click Calculate
+                </div>
+            </div>
+            
+            <h3>Dose Adjustments</h3>
+            <ul>
+                <li><strong>Check trough IgG</strong> before 4th infusion (steady state)</li>
+                <li><strong>Target trough:</strong> ≥500 mg/dL minimum; many experts target ≥800 mg/dL for patients with bronchiectasis or frequent infections</li>
+                <li><strong>Adjust dose</strong> in increments of 100-200 mg/kg to achieve target</li>
+                <li><strong>More frequent dosing</strong> (every 3 weeks instead of 4) can raise trough without increasing total dose</li>
+            </ul>
+        </section>
+        
+        <!-- Section 5: Administration -->
+        <section class="section">
+            <h2>5. Administration Protocols</h2>
+            
+            <h3>IVIG Administration</h3>
+            
+            <div class="nursing-note">
+                <strong>🏥 Nursing Protocol - IVIG Infusion:</strong>
+                <ol style="margin-left: 20px; margin-top: 12px;">
+                    <li><strong>Pre-medications</strong> (if history of reactions): Acetaminophen 650mg, Diphenhydramine 25-50mg, ± Hydrocortisone 100mg IV</li>
+                    <li><strong>Hydration:</strong> Encourage oral fluids; consider IV NS for high-risk patients (renal insufficiency, elderly)</li>
+                    <li><strong>Starting rate:</strong> 0.5-1 mg/kg/min (product-specific)</li>
+                    <li><strong>Rate escalation:</strong> Increase every 15-30 minutes as tolerated to maximum rate</li>
+                    <li><strong>Monitoring:</strong> Vital signs q15min × 1 hour, then q30min, then hourly</li>
+                    <li><strong>Maximum rate:</strong> Typically 4-8 mg/kg/min (varies by product)</li>
+                </ol>
+            </div>
+            
+            <h3>SCIG Self-Administration</h3>
+            
+            <div class="nursing-note">
+                <strong>🏠 Patient Teaching - SCIG Self-Injection:</strong>
+                <ol style="margin-left: 20px; margin-top: 12px;">
+                    <li><strong>Site selection:</strong> Abdomen (avoiding 2 inches around navel), thighs, upper arms, upper back/hip</li>
+                    <li><strong>Rotate sites:</strong> Keep sites 2 inches apart; rotate systematically</li>
+                    <li><strong>Clean technique:</strong> Wash hands, clean site with alcohol, allow to dry</li>
+                    <li><strong>Needle insertion:</strong> 90-degree angle for most; 45-degree if thin subcutaneous tissue</li>
+                    <li><strong>Infusion rate:</strong> 15-25 mL/hour per site (pump-assisted) or push over several minutes (manual)</li>
+                    <li><strong>Volume per site:</strong> Maximum 20-25 mL conventional SCIG; up to 300 mL for facilitated SCIG</li>
+                    <li><strong>Number of sites:</strong> May need 2-4 sites for weekly dose; fewer with facilitated SCIG</li>
+                    <li><strong>Documentation:</strong> Log date, dose, sites used, any reactions</li>
+                </ol>
+            </div>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Local site reactions (swelling, redness) are common initially but typically improve over 4-8 weeks. Applying warm compress after infusion and using a different site can help.
+            </div>
+        </section>
+        
+        <!-- Section 6: Reactions -->
+        <section class="section">
+            <h2>6. Infusion Reactions & Management</h2>
+            
+            <h3>Types of Reactions</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Symptoms</th>
+                        <th>Timing</th>
+                        <th>Mechanism</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">Rate-Related</td>
+                        <td>Headache, flushing, chills, myalgias, nausea, fever</td>
+                        <td>During or shortly after infusion</td>
+                        <td>Complement activation, cytokine release</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Anaphylactic</td>
+                        <td>Urticaria, angioedema, bronchospasm, hypotension</td>
+                        <td>Minutes to 1 hour</td>
+                        <td>IgE-mediated (rare); anti-IgA antibodies in IgA-deficient patients</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Delayed</td>
+                        <td>Headache (including aseptic meningitis), fatigue, arthralgia</td>
+                        <td>24-72 hours post-infusion</td>
+                        <td>Immune complex formation, cytokines</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Renal</td>
+                        <td>Acute kidney injury</td>
+                        <td>Days after infusion</td>
+                        <td>Osmotic nephropathy (sucrose-containing products)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Thrombotic</td>
+                        <td>DVT, PE, stroke, MI</td>
+                        <td>During or days after</td>
+                        <td>Hyperviscosity, Factor XI contamination</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="reaction-protocol">
+                <h4>⚠️ Reaction Management Protocol</h4>
+                <div class="reaction-step">
+                    <div class="step-number">1</div>
+                    <div><strong>STOP the infusion</strong> immediately for any significant reaction</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">2</div>
+                    <div><strong>Assess ABCs:</strong> Airway, Breathing, Circulation - call for help if anaphylaxis</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">3</div>
+                    <div><strong>For mild reactions:</strong> Give diphenhydramine 25-50mg IV/PO, acetaminophen, wait 30 min</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">4</div>
+                    <div><strong>Resume at 50% rate</strong> if symptoms resolve; advance slowly</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">5</div>
+                    <div><strong>For anaphylaxis:</strong> Epinephrine 0.3-0.5mg IM, IV fluids, notify physician</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">6</div>
+                    <div><strong>Document:</strong> Reaction type, timing, interventions, outcome</div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <strong>⚠️ IgA Deficiency Warning:</strong> Patients with complete IgA deficiency (<7 mg/dL) who have anti-IgA antibodies are at risk for anaphylaxis. Use IgA-depleted products (e.g., Gammagard S/D) or SCIG if possible. Test for anti-IgA antibodies before first infusion in IgA-deficient patients.
+            </div>
+        </section>
+        
+        <!-- Section 7: Monitoring -->
+        <section class="section">
+            <h2>7. Monitoring Parameters</h2>
+            
+            <h3>Trough IgG Monitoring</h3>
+            <ul>
+                <li><strong>When to check:</strong> Just before the next scheduled infusion (true trough)</li>
+                <li><strong>Initial monitoring:</strong> Check before 4th infusion, then every 3-6 months until stable</li>
+                <li><strong>Maintenance:</strong> Every 6-12 months once stable</li>
+                <li><strong>Target:</strong> ≥500 mg/dL minimum; many experts now recommend ≥800 mg/dL for patients with bronchiectasis</li>
+            </ul>
+            
+            <h3>Additional Monitoring</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Frequency</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">Serum creatinine/BUN</td>
+                        <td>Before each infusion initially; every 6-12 months when stable</td>
+                        <td>Monitor for renal toxicity</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">CBC</td>
+                        <td>Every 6-12 months</td>
+                        <td>Hemolysis (rare), baseline</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">LFTs</td>
+                        <td>Annually</td>
+                        <td>Hepatitis monitoring (rare with current products)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Viral serologies</td>
+                        <td>Baseline</td>
+                        <td>Document pre-treatment status (Hep B, C, HIV)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Infection frequency</td>
+                        <td>Ongoing</td>
+                        <td>Clinical efficacy assessment</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Section 8: Products -->
+        <section class="section">
+            <h2>8. Available Products</h2>
+            
+            <h3>IVIG Products (Selected)</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h5>Gammagard Liquid 10%</h5>
+                    <ul>
+                        <li>10% concentration</li>
+                        <li>Can be given IV or SC</li>
+                        <li>Glycine-stabilized</li>
+                        <li>IgA content: 37 μg/mL</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Privigen 10%</h5>
+                    <ul>
+                        <li>10% concentration</li>
+                        <li>L-proline stabilized</li>
+                        <li>Ready to use</li>
+                        <li>IgA content: ≤25 μg/mL</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Gammaked 10%</h5>
+                    <ul>
+                        <li>10% concentration</li>
+                        <li>Glycine-stabilized</li>
+                        <li>Can be given IV or SC</li>
+                        <li>IgA content: 46 μg/mL</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Gammagard S/D</h5>
+                    <ul>
+                        <li>5% concentration (reconstituted)</li>
+                        <li>IgA-depleted option</li>
+                        <li>IgA content: <1 μg/mL</li>
+                        <li>Use if anti-IgA antibodies present</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>SCIG Products</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h5>Hizentra 20%</h5>
+                    <ul>
+                        <li>20% concentration (higher volume efficiency)</li>
+                        <li>L-proline stabilized</li>
+                        <li>Weekly dosing</li>
+                        <li>Up to 25 mL per site</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Cuvitru 20%</h5>
+                    <ul>
+                        <li>20% concentration</li>
+                        <li>Glycine-stabilized</li>
+                        <li>Weekly dosing</li>
+                        <li>Room temperature storage</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>HyQvia (Facilitated SCIG)</h5>
+                    <ul>
+                        <li>10% IgG + hyaluronidase</li>
+                        <li>Monthly dosing (like IVIG schedule)</li>
+                        <li>Up to 300 mL per site</li>
+                        <li>Single infusion site possible</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Xembify 20%</h5>
+                    <ul>
+                        <li>20% concentration</li>
+                        <li>Glycine-stabilized</li>
+                        <li>Weekly dosing</li>
+                        <li>Room temperature storage</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Facilitated SCIG (HyQvia) uses recombinant hyaluronidase to temporarily increase subcutaneous tissue permeability, allowing larger volumes at single sites. This enables monthly dosing similar to IVIG but with home self-administration.
+            </div>
+        </section>
+        
+        <!-- References -->
+        <div class="references">
+            <h3>📚 References & Open-Access Resources</h3>
+            
+            <div class="reference-item">
+                Bonilla FA, Khan DA, Ballas ZK, et al. <strong>Practice parameter for the diagnosis and management of primary immunodeficiency.</strong> J Allergy Clin Immunol. 2015;136(5):1186-1205.
+                <a href="https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Primary-Immunodeficiency-Disease-2015.pdf" target="_blank">AAAAI</a>
+                <span class="open-access-badge">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                Perez EE, Orange JS, Bonilla F, et al. <strong>Update on the use of immunoglobulin in human disease: A review of evidence.</strong> J Allergy Clin Immunol. 2017;139(3S):S1-S46.
+                <a href="https://www.jacionline.org/article/S0091-6749(16)31141-1/fulltext" target="_blank">JACI</a>
+                <span class="open-access-badge">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                Immune Deficiency Foundation. <strong>IDF Guide for Nurses: Immunoglobulin Therapy for Primary Immunodeficiency Diseases.</strong>
+                <a href="https://primaryimmune.org/publication/idf-guide-nurses" target="_blank">IDF</a>
+                <span class="open-access-badge">Free Download</span>
+            </div>
+            
+            <div class="reference-item">
+                Orange JS, Grossman WJ, Navickis RJ, Wilkes MM. <strong>Impact of trough IgG on pneumonia incidence in primary immunodeficiency: A meta-analysis of clinical studies.</strong> Clin Immunol. 2010;137(1):21-30.
+            </div>
+        </div>
+    </main>
+    
+    
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice Immunoglobulin Therapy with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=ai06" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=immunodeficiency" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">Immunodeficiency Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 3+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+        <footer class="footer">
+        <p>© 2025-2026 MechanismDx · Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+        
+    </footer>
+    
+    <script>
+        function calculateDose() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const dosePerKg = parseFloat(document.getElementById('dosePerKg').value);
+            const route = document.getElementById('route').value;
+            
+            if (!weight || !dosePerKg) {
+                document.getElementById('doseResult').innerHTML = 'Please enter weight and dose';
+                return;
+            }
+            
+            const monthlyDose = (weight * dosePerKg) / 1000; // Convert to grams
+            
+            let result = '';
+            if (route === 'ivig') {
+                result = `<strong>IVIG Dose:</strong> ${monthlyDose.toFixed(1)}g every 3-4 weeks<br>
+                         <em>Check trough IgG before 4th infusion</em>`;
+            } else {
+                const scigMonthly = monthlyDose * 1.37; // 37% increase for bioavailability
+                const scigWeekly = scigMonthly / 4;
+                result = `<strong>Converted SCIG Dose:</strong><br>
+                         Monthly equivalent: ${scigMonthly.toFixed(1)}g (adjusted +37% for bioavailability)<br>
+                         <strong>Weekly dose: ${scigWeekly.toFixed(1)}g</strong><br>
+                         <em>At 20% concentration = ${(scigWeekly * 5).toFixed(0)} mL weekly</em>`;
+            }
+            
+            document.getElementById('doseResult').innerHTML = result;
+        }
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="IVIG & SCIG: Immunoglobulin Replacement Therapy"
+         data-key-points="🎯 Learning Objectives, 1. Overview: Why Immunoglobulin Replacement?, 2. IVIG vs SCIG: Head-to-Head Comparison, 3. Pharmacokinetics, 4. Dosing for Immunodeficiency, 5. Administration Protocols, 6. Infusion Reactions & Management, 7. Monitoring Parameters, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 4-year-old boy with X-linked agammaglobulinemia (Bruton's) is started on immunoglobulin replacement. What is the PRIMARY goal of IgG replacement therapy?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="XLA patients have no functional B cells (BTK mutation) and cannot produce antibodies. Replacement provides passive immunity, not stimulation." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Boost the patient's own antibody production</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="IgG replacement provides donor-derived polyclonal IgG antibodies → passive immunity against common pathogens. Goal: maintain trough IgG &gt;500 mg/dL (many target &gt;700-800). Does NOT restore the patient&#x27;s immune system — lifelong replacement is required. Primarily prevents sinopulmonary bacterial infections." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Provide passive protective IgG antibodies to prevent recurrent infections</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Commercial IgG preparations contain predominantly IgG (&gt;95%). IgA content is minimal (important for IgA-deficient patients — anaphylaxis risk). IgM and IgE are not significantly replaced." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Replace all immunoglobulin classes (IgA, IgM, IgG, IgE)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IgG replacement is supportive, not curative. The underlying genetic defect persists. Only HSCT or gene therapy can potentially cure primary immunodeficiencies." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cure the underlying immunodeficiency</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">What is the key pharmacokinetic difference between IVIG and SCIG?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="IVIG produces HIGHER peak levels (bolus infusion). SCIG produces lower peaks but more stable steady-state levels." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">SCIG provides higher peak IgG levels than IVIG</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="SCIG: smaller, more frequent doses (weekly or biweekly) → steady-state IgG levels without the peak-trough swings of monthly IVIG. Patients report fewer systemic side effects (headache, fatigue) and more consistent protection. IVIG has high peaks immediately post-infusion and declining troughs before the next dose." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">SCIG provides more stable IgG levels with lower peak-to-trough variation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The IgG molecules are identical — same half-life (~21-28 days). The difference is in the absorption kinetics from the route of administration." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">IVIG has a longer half-life than SCIG</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SCIG actually requires a slightly HIGHER total monthly dose (115-137% of IVIG dose) because subcutaneous bioavailability is lower than IV." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">SCIG requires less total monthly IgG dose than IVIG</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Which PRIMARY immunodeficiency has the HIGHEST risk of anaphylaxis with IgG infusions?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="CVID patients tolerate IgG replacement well in most cases. The highest-risk group has a specific IgA issue." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Common variable immunodeficiency (CVID)</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="IgA-deficient patients who have developed anti-IgA IgE antibodies are at risk for anaphylaxis from trace IgA in commercial IgG preparations. Use IgA-depleted products (e.g., Gammagard S/D) or SCIG (lower IgA content, slower absorption reduces reaction risk). Screen for anti-IgA antibodies before starting replacement." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Selective IgA deficiency with anti-IgA antibodies</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="CGD is a phagocyte defect treated with IFN-gamma and prophylactic antibiotics/antifungals, not IgG replacement." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Chronic granulomatous disease (CGD)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="DiGeorge is primarily a T-cell deficiency. IgG replacement may be needed in complete DiGeorge but anaphylaxis risk from IgA is not the hallmark." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">DiGeorge syndrome</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">A patient on monthly IVIG develops severe headache, photophobia, and neck stiffness 24 hours after infusion. CSF shows pleocytosis with no organisms. What is the MOST likely diagnosis?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Modern IgG products are pathogen-reduced. Sterile CSF pleocytosis after IVIG points to aseptic meningitis." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Bacterial meningitis from contaminated product</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Aseptic meningitis: recognized IVIG adverse effect (1-11% incidence). Onset typically 24-48 hours post-infusion. CSF: lymphocytic pleocytosis, elevated protein, sterile cultures. Risk factors: high dose, rapid infusion rate, migraine history. Self-limited (resolves 3-5 days). Prevent with slower infusion rate, premedication, or switch to SCIG." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">IVIG-induced aseptic meningitis</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IgG products undergo viral inactivation steps. Transmission of enveloped viruses is essentially eliminated." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Viral encephalitis transmission</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SAH presents with thunderclap headache and bloody/xanthochromic CSF, not pleocytosis with sterile cultures." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Subarachnoid hemorrhage</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">What is the MOST common adverse reaction during IVIG infusion?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="True anaphylaxis during IVIG is rare (&lt;1%). Infusion reactions are much more common." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Anaphylaxis</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Rate-related reactions are the most common IVIG adverse effects (5-15%): headache, chills, myalgia, back pain, nausea, flushing. Usually occur during or shortly after infusion. Managed by slowing the infusion rate and premedication (acetaminophen, diphenhydramine, sometimes IV hydration). More common with first infusion or product switches." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Rate-related infusion reactions (headache, chills, myalgia, nausea)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Hemolysis can occur (anti-A/anti-B isohemagglutinins in IgG preparations, especially in non-O blood types receiving high doses) but is less common than infusion reactions." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Hemolytic anemia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Acute renal failure from IVIG (osmotic nephrosis) is uncommon, associated with sucrose-containing products, and a serious but infrequent complication." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Renal failure</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">High-dose IVIG (2 g/kg) is used as an immunomodulatory therapy in which condition?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="XLA requires replacement-dose IgG (400-600 mg/kg/month), not high-dose immunomodulatory IVIG." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">X-linked agammaglobulinemia</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="High-dose IVIG (1-2 g/kg): immunomodulatory mechanism — Fc receptor blockade on macrophages → reduced platelet destruction in ITP; anti-inflammatory effects → reduces coronary artery aneurysm risk in Kawasaki. Also used in GBS, CIDP, myasthenia gravis, autoimmune hemolytic anemia. Different mechanism than replacement therapy." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Immune thrombocytopenia (ITP) and Kawasaki disease</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="HIV is treated with antiretroviral therapy. IVIG is not used for HIV immunomodulation." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">HIV/AIDS</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="TB requires antimycobacterial therapy. IVIG has no role in TB treatment." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Tuberculosis</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">What advantage does subcutaneous immunoglobulin (SCIG) offer over IVIG for patients?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="SCIG still requires subcutaneous needle insertion and an infusion pump (or push method). The advantage is home-based administration." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">No need for needles or infusion devices</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="SCIG advantages: home administration (no IV access, no infusion center visits), fewer systemic reactions (headache, nausea — less common than IVIG), more stable IgG levels, patient autonomy and flexibility. Training period required. Local site reactions (swelling, redness) are common initially but improve over time." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Home self-administration with fewer systemic side effects</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SCIG is typically weekly or biweekly, more frequent than IVIG. The trade-off is smaller volumes and home administration." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Once-yearly dosing</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="SCIG and IVIG have equivalent efficacy in preventing infections when adequate trough levels are maintained." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Superior efficacy in preventing infections compared to IVIG</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">What serious thrombotic complication should be monitored in patients receiving high-dose IVIG?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="High-dose IVIG increases viscosity and contains procoagulant factors → risk of arterial and venous thromboembolism (stroke, MI, DVT/PE). Risk factors: advanced age, immobility, cardiovascular disease, hypercoagulable states. Mitigation: slow infusion rate, adequate hydration, avoid estrogen-containing medications. Screen high-risk patients." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Pulmonary embolism and stroke</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="DIC is not a typical IVIG complication. The thrombotic risk is from increased viscosity and procoagulant factors causing localized thrombi." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Disseminated intravascular coagulation (DIC)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="HIT is caused by heparin, not IVIG. Different mechanism entirely." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Heparin-induced thrombocytopenia</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="TTP is not caused by IVIG. IVIG can actually be used in some TTP-adjacent autoimmune conditions." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Thrombotic thrombocytopenic purpura</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="gbs-module.html" class="cross-link"><div class="cross-link-title">📘 Guillain-Barré Syndrome</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="guillain-barre-module.html" class="cross-link"><div class="cross-link-title">📘 Guillain-Barré Syndrome</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="allergy-testing-module.html" class="cross-link"><div class="cross-link-title">📘 Allergy Testing</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="mast-cell-disorders-module.html" class="cross-link"><div class="cross-link-title">📘 Mast Cell Disorders</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="hae-module.html" class="cross-link"><div class="cross-link-title">📘 Hereditary Angioedema</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a>
+<a href="inhaler-spacer-module.html" class="cross-link"><div class="cross-link-title">📘 Inhaler & Spacer Technique</div><div style="font-size:.75rem;color:var(--muted)">Related module</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

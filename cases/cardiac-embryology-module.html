@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechanismDx: Cardiac Embryology - Heart Development & Congenital Heart Defects</title>
+  <style>
+    :root { --primary: #EF4444; --primary-dark: #DC2626; --secondary: #F97316; --accent: #F59E0B; --success: #10B981; --danger: #EF4444; --info: #8B5CF6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 100%); color: #E5E7EB; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
+    header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: rgba(239,68,68,0.1); border-radius: 1rem; border: 1px solid rgba(239,68,68,0.3); }
+    header h1 { font-size: 2.5rem; background: linear-gradient(135deg, #EF4444 0%, #F97316 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .subtitle { color: #9CA3AF; font-size: 1.1rem; }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .nav-tab { padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; cursor: pointer; color: #9CA3AF; transition: all 0.2s; font-size: 0.9rem; }
+    .nav-tab:hover, .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .module-section { background: rgba(255, 255, 255, 0.05); border-radius: 1rem; padding: 2rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); }
+    .module-section h2 { color: var(--primary); margin-bottom: 1rem; }
+    .module-section h3 { color: var(--accent); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .key-concept { background: rgba(239,68,68,0.15); border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .danger-box { background: rgba(239, 68, 68, 0.15); border-left: 4px solid var(--danger); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .success-box { background: rgba(16, 185, 129, 0.15); border-left: 4px solid var(--success); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .clinical-pearl { background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    .info-box { background: rgba(139, 92, 246, 0.15); border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    th { background: rgba(239,68,68,0.2); color: var(--primary); }
+    tr:hover { background: rgba(255,255,255,0.03); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.5rem 0; }
+    .mnemonic { background: rgba(16, 185, 129, 0.15); border: 2px dashed var(--success); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; text-align: center; }
+    .mnemonic strong { color: var(--success); font-size: 1.1rem; }
+    .dev-card { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 1.25rem; border-radius: 0.75rem; margin: 1rem 0; }
+    .dev-card h4 { color: var(--secondary); margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .timeline-item { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-left: 0.5rem; margin-bottom: 1.5rem; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -8px; top: 0; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 2px solid #1a0a0a; }
+    .timeline-item h4 { color: var(--accent); margin-bottom: 0.5rem; }
+    .pathway-box { background: rgba(0,0,0,0.3); border-radius: 0.5rem; padding: 1rem; font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; line-height: 1.8; margin: 1rem 0; white-space: pre-wrap; overflow-x: auto; }
+    .condition-link { display: inline-block; background: rgba(239,68,68,0.2); padding: 0.25rem 0.75rem; border-radius: 1rem; margin: 0.25rem; font-size: 0.85rem; color: #fca5a5; text-decoration: none; transition: all 0.2s; }
+    .condition-link:hover { background: rgba(239,68,68,0.4); }
+    .quiz-section { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); border-radius: 1rem; padding: 1.5rem; margin-top: 2rem; }
+    .quiz-section h3 { color: var(--success); margin-bottom: 1rem; }
+    .quiz-option { display: block; padding: 0.75rem 1rem; margin: 0.5rem 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.5rem; cursor: pointer; transition: all 0.3s; }
+    .quiz-option:hover { background: rgba(239,68,68,0.2); }
+    .quiz-option.correct { background: rgba(16, 185, 129, 0.3); border-color: var(--success); }
+    .quiz-option.incorrect { background: rgba(239, 68, 68, 0.3); border-color: var(--danger); }
+    .explanation { display: none; margin-top: 1rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 0.5rem; }
+    .flow-diagram { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+    .flow-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.4); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.9rem; text-align: center; }
+    .flow-arrow { color: var(--accent); font-size: 1.2rem; font-weight: bold; }
+    @media (max-width: 600px) { .container { padding: 1rem; } header h1 { font-size: 1.8rem; } .flow-diagram { flex-direction: column; } .flow-arrow { transform: rotate(90deg); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>❤️ Cardiac Embryology</h1>
+      <p class="subtitle">Heart Development, Septation & Congenital Heart Defects</p>
+      <p style="color: #6B7280; margin-top: 0.5rem; font-size: 0.9rem;">MechanismDx Module | Open-Access Sources Only</p>
+    </header>
+
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+      <div class="nav-tab" onclick="showTab('tube')">Heart Tube</div>
+      <div class="nav-tab" onclick="showTab('septation')">Septation</div>
+      <div class="nav-tab" onclick="showTab('outflow')">Outflow Tract</div>
+      <div class="nav-tab" onclick="showTab('fetal')">Fetal Circulation</div>
+      <div class="nav-tab" onclick="showTab('defects')">Congenital Defects</div>
+      <div class="nav-tab" onclick="showTab('quiz')">Quiz</div>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="module-section">
+        <h2>📚 Cardiac Development Overview</h2>
+        <p>The heart is the <strong>first functional organ</strong> in the embryo, beginning to beat at <strong>day 22</strong> (week 3). It develops from <strong>splanchnic mesoderm</strong> in the cardiogenic area, forming a tube that loops, septates, and remodels into the four-chambered heart.</p>
+
+        <h3>Embryonic Origins</h3>
+        <table>
+          <tr><th>Structure</th><th>Embryonic Origin</th></tr>
+          <tr><td>Myocardium</td><td>Splanchnic (visceral) mesoderm</td></tr>
+          <tr><td>Endocardium</td><td>Mesenchyme (from mesoderm)</td></tr>
+          <tr><td>Epicardium</td><td>Proepicardial organ (septum transversum mesenchyme)</td></tr>
+          <tr><td>Cardiac neural crest</td><td>Neural crest cells (rhombomeres 6-8) → outflow tract septation, aortic arch remodeling</td></tr>
+          <tr><td>Cardiac conduction system</td><td>Specialized cardiomyocytes (myocardial origin)</td></tr>
+          <tr><td>Valves (AV & semilunar)</td><td>Endocardial cushions (mesenchyme from endocardium via EMT)</td></tr>
+        </table>
+
+        <div class="key-concept">
+          <strong>🔑 Two Heart Fields:</strong> The <strong>First Heart Field (FHF)</strong> forms the left ventricle and parts of the atria. The <strong>Second Heart Field (SHF)</strong> adds the right ventricle, outflow tract, and parts of the atria. SHF defects → conotruncal anomalies (TOF, TGA, truncus arteriosus).
+        </div>
+
+        <h3>Key Timeline</h3>
+        <div class="timeline-item">
+          <h4>Day 15-18: Cardiogenic Mesoderm</h4>
+          <p>Splanchnic mesoderm forms the cardiogenic crescent anterior to the developing brain. Paired endocardial tubes form within this mesoderm.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Day 21-22: Heart Tube Formation</h4>
+          <p>Lateral embryonic folding brings the paired tubes to the midline → fusion into a single heart tube. Beating begins at day 22.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Day 23-28: Cardiac Looping</h4>
+          <p>The heart tube loops to the <strong>RIGHT</strong> (D-loop). This rightward looping is critical — failure causes dextrocardia or L-looping associated with transposition.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 4-5: Septation Begins</h4>
+          <p>Atrial septation (septum primum → septum secundum), ventricular septation (muscular → membranous), and endocardial cushion formation.</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 5-7: Outflow Tract Septation</h4>
+          <p>Neural crest cells migrate to form the aorticopulmonary septum, dividing the truncus arteriosus into aorta and pulmonary trunk. The septum spirals (explaining why the aorta and PA wrap around each other).</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Week 8: Septation Complete</h4>
+          <p>Four-chambered heart with separated circulations. Fetal shunts (foramen ovale, ductus arteriosus, ductus venosus) maintain fetal circulation pattern.</p>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Clinical Pearl:</strong> Cardiac defects are the <strong>most common congenital malformation</strong>, affecting ~1% of live births. VSD is the most common individual defect. Congenital heart disease is the leading cause of infant death from birth defects.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: HEART TUBE -->
+    <div id="tube" class="tab-content">
+      <div class="module-section">
+        <h2>🫀 Heart Tube Formation & Looping</h2>
+
+        <h3>Heart Tube Segments (Cranial → Caudal)</h3>
+        <p>The primitive heart tube has 5 dilations that will form definitive structures:</p>
+
+        <div class="flow-diagram">
+          <div class="flow-box">Truncus<br>Arteriosus</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">Bulbus<br>Cordis</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">Primitive<br>Ventricle</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">Primitive<br>Atrium</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">Sinus<br>Venosus</div>
+        </div>
+
+        <table>
+          <tr><th>Heart Tube Segment</th><th>Adult Derivative</th></tr>
+          <tr><td>Truncus arteriosus</td><td>Ascending aorta + Pulmonary trunk</td></tr>
+          <tr><td>Bulbus cordis (conus cordis)</td><td>Smooth outflow tract of RV (conus arteriosus) + LV (aortic vestibule)</td></tr>
+          <tr><td>Primitive ventricle</td><td>Trabeculated parts of LV and RV</td></tr>
+          <tr><td>Primitive atrium</td><td>Trabeculated parts of LA and RA (pectinate muscles)</td></tr>
+          <tr><td>Sinus venosus</td><td>Smooth part of RA (sinus venarum), coronary sinus, oblique vein of LA</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>🧠 Mnemonic: Heart Tube Segments</strong><br>
+          "<strong>T</strong>rucks <strong>B</strong>ring <strong>V</strong>ery <strong>A</strong>wesome <strong>S</strong>tuff" = Truncus, Bulbus, Ventricle, Atrium, Sinus venosus
+        </div>
+
+        <h3>Cardiac Looping (D-Loop)</h3>
+        <p>At day 23, the straight heart tube begins to loop. The ventricular portion bends to the <strong>RIGHT</strong> (dextro-loop or D-loop). This is controlled by left-right signaling pathways involving <strong>Nodal</strong>, <strong>Lefty</strong>, and <strong>Pitx2</strong>.</p>
+
+        <div class="key-concept">
+          <strong>🔑 Why D-Looping Matters:</strong>
+          <ul>
+            <li>Normal D-loop → morphologic RV on the right, LV on the left</li>
+            <li>L-loop (reversed) → ventricular inversion (morphologic RV on left)</li>
+            <li>L-loop + L-TGA → "congenitally corrected TGA" (two wrongs make a right — circulation may be physiologically normal)</li>
+          </ul>
+        </div>
+
+        <h3>Left-Right Axis Determination</h3>
+        <p>Established at the <strong>primitive node</strong> during gastrulation:</p>
+        <ol>
+          <li><strong>Nodal cilia</strong> rotate clockwise → create leftward flow of morphogens</li>
+          <li><strong>Nodal</strong> (a TGF-β family member) concentrated on the LEFT side</li>
+          <li>Nodal activates <strong>Pitx2</strong> (left-side transcription factor)</li>
+          <li>Pitx2 directs left-sided morphogenesis (heart looping, spleen position, lung lobation)</li>
+        </ol>
+
+        <div class="danger-box">
+          <strong>⚠️ Kartagener Syndrome:</strong> Defective nodal cilia (dynein arm defect) → situs inversus (mirror-image organs) + bronchiectasis + chronic sinusitis + male infertility. Same dynein defect affects respiratory cilia and sperm motility. Autosomal recessive.
+        </div>
+
+        <div class="info-box">
+          <strong>Heterotaxy Syndromes:</strong> Disrupted laterality → ambiguous organ arrangement. <strong>Right isomerism</strong> (bilateral right-sidedness): asplenia, bilateral trilobed lungs, complex cardiac defects. <strong>Left isomerism</strong> (bilateral left-sidedness): polysplenia, bilateral bilobed lungs, often less severe cardiac defects.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: SEPTATION -->
+    <div id="septation" class="tab-content">
+      <div class="module-section">
+        <h2>🧱 Cardiac Septation</h2>
+
+        <h3>Atrial Septation</h3>
+        <p>The single primitive atrium is divided by two septa that create a <strong>one-way valve</strong> allowing right-to-left shunting in fetal life:</p>
+
+        <div class="dev-card">
+          <h4>Step 1: Septum Primum</h4>
+          <p>Grows DOWN from the roof of the atrium toward the endocardial cushions. The shrinking opening below it = <strong>ostium primum</strong> (foramen primum). Before ostium primum closes, <strong>perforations</strong> appear in the upper septum primum → coalesce to form <strong>ostium secundum</strong> (foramen secundum).</p>
+        </div>
+        <div class="dev-card">
+          <h4>Step 2: Septum Secundum</h4>
+          <p>A thicker, more rigid septum grows DOWN to the RIGHT of septum primum. It covers most of ostium secundum but leaves an opening = <strong>foramen ovale</strong>. The thin septum primum acts as a one-way flap valve over the foramen ovale.</p>
+        </div>
+        <div class="dev-card">
+          <h4>At Birth</h4>
+          <p>Increased LA pressure (from pulmonary venous return) pushes septum primum against septum secundum → functionally closes foramen ovale. Anatomic fusion occurs over months.</p>
+        </div>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Patent Foramen Ovale (PFO):</strong> Present in ~25% of adults. Usually asymptomatic, but can cause paradoxical embolism (venous thrombus crosses to arterial circulation → stroke). Associated with migraine with aura and decompression sickness in divers.
+        </div>
+
+        <h3>ASD Types by Embryology</h3>
+        <table>
+          <tr><th>ASD Type</th><th>Embryologic Defect</th><th>Frequency</th><th>Key Association</th></tr>
+          <tr><td>Ostium secundum</td><td>Excessive resorption of septum primum OR inadequate septum secundum</td><td>~70%</td><td>Most common ASD; often isolated</td></tr>
+          <tr><td>Ostium primum</td><td>Failure of septum primum to fuse with endocardial cushions</td><td>~20%</td><td>Endocardial cushion defect → often with cleft mitral valve; common in Down syndrome</td></tr>
+          <tr><td>Sinus venosus</td><td>Abnormal absorption of sinus venosus into RA</td><td>~10%</td><td>Almost always associated with anomalous pulmonary venous return (PAPVR)</td></tr>
+          <tr><td>Coronary sinus</td><td>Unroofed coronary sinus</td><td>Rare</td><td>Associated with persistent left SVC</td></tr>
+        </table>
+
+        <h3>Ventricular Septation</h3>
+        <p>The interventricular septum has two components:</p>
+        <ul>
+          <li><strong>Muscular septum</strong> (large, grows UP from the floor) — forms the majority of the IVS</li>
+          <li><strong>Membranous septum</strong> (small, closes the remaining gap) — formed by fusion of: (1) endocardial cushions, (2) muscular septum, (3) aorticopulmonary septum (conotruncal ridges)</li>
+        </ul>
+
+        <div class="key-concept">
+          <strong>🔑 Membranous VSD:</strong> The most common type of VSD (~80%). Occurs because the membranous septum requires THREE components to fuse correctly. Failure of any one → persistent opening. Muscular VSDs are the second most common and have a higher rate of spontaneous closure.
+        </div>
+
+        <h3>Endocardial Cushions</h3>
+        <p>Swellings of mesenchyme in the AV canal region. They contribute to:</p>
+        <ol>
+          <li>Atrial septation (septum primum fuses with them)</li>
+          <li>Ventricular septation (membranous septum)</li>
+          <li>AV valve formation (mitral and tricuspid leaflets)</li>
+          <li>Outflow tract septation (contribute to aorticopulmonary septum)</li>
+        </ol>
+
+        <div class="danger-box">
+          <strong>⚠️ Endocardial Cushion Defect (AV Canal Defect / AVSD):</strong> Failure of endocardial cushion fusion → ostium primum ASD + inlet VSD + common AV valve = complete AVSD. Strongly associated with <strong>Down syndrome (Trisomy 21)</strong> — 40-50% of T21 patients have cardiac defects, and AVSD is the most characteristic.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: OUTFLOW TRACT -->
+    <div id="outflow" class="tab-content">
+      <div class="module-section">
+        <h2>🩺 Outflow Tract & Great Vessels</h2>
+
+        <h3>Aorticopulmonary Septation</h3>
+        <p>The truncus arteriosus is divided into the aorta and pulmonary trunk by the <strong>aorticopulmonary (AP) septum</strong>. This septum forms from two sources:</p>
+        <ol>
+          <li><strong>Truncal ridges</strong> — mesenchymal swellings within the truncus</li>
+          <li><strong>Neural crest cells</strong> — migrate from the pharyngeal arches to populate the ridges</li>
+        </ol>
+
+        <div class="key-concept">
+          <strong>🔑 The AP septum SPIRALS</strong> as it descends through the outflow tract. This spiral is why the aorta and pulmonary artery wrap around each other (aorta posterior and to the right, PA anterior and to the left). Failure of spiraling → <strong>Transposition of the Great Arteries (TGA)</strong>.
+        </div>
+
+        <h3>Neural Crest Contribution</h3>
+        <p>Cardiac neural crest cells (from rhombomeres 6-8, pharyngeal arches 3, 4, 6) are essential for:</p>
+        <ul>
+          <li>AP septum formation (divides truncus into aorta + PA)</li>
+          <li>Aortic arch patterning (remodeling of pharyngeal arch arteries)</li>
+          <li>Parasympathetic innervation of the heart</li>
+        </ul>
+
+        <div class="danger-box">
+          <strong>⚠️ Neural Crest Ablation → Conotruncal Defects:</strong>
+          <ul>
+            <li><strong>Persistent truncus arteriosus (PTA)</strong> — complete failure of AP septum formation → single outflow vessel</li>
+            <li><strong>Tetralogy of Fallot (TOF)</strong> — unequal division of outflow tract (anterior deviation of AP septum)</li>
+            <li><strong>Transposition of Great Arteries (TGA)</strong> — failure of AP septum spiraling</li>
+            <li><strong>DiGeorge syndrome (22q11.2 deletion)</strong> — impaired neural crest migration → conotruncal defects + thymic/parathyroid aplasia</li>
+          </ul>
+        </div>
+
+        <h3>Aortic Arch Development</h3>
+        <p>Six pairs of pharyngeal (aortic) arch arteries form sequentially. Most regress; key derivatives:</p>
+
+        <table>
+          <tr><th>Arch</th><th>Left Derivative</th><th>Right Derivative</th></tr>
+          <tr><td>1st</td><td colspan="2">Mostly regresses → contributes to maxillary arteries</td></tr>
+          <tr><td>2nd</td><td colspan="2">Mostly regresses → stapedial artery (hyoid artery)</td></tr>
+          <tr><td>3rd</td><td>Left common carotid + proximal ICA</td><td>Right common carotid + proximal ICA</td></tr>
+          <tr><td>4th</td><td><strong>Aortic arch</strong> (between L common carotid & L subclavian)</td><td><strong>Proximal right subclavian artery</strong></td></tr>
+          <tr><td>5th</td><td colspan="2">Never forms or regresses immediately</td></tr>
+          <tr><td>6th</td><td><strong>Left pulmonary artery + Ductus arteriosus</strong></td><td>Right pulmonary artery (distal part regresses)</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>🧠 Aortic Arches: "3, 4, 6 — that's the fix"</strong><br>
+          3rd = <strong>C</strong>arotids (C = 3rd letter) | 4th = <strong>Arch</strong> (Aortic arch = 4 letters) + right <strong>S</strong>ubclavian | 6th = <strong>P</strong>ulmonary + <strong>D</strong>uctus arteriosus
+        </div>
+
+        <h3>Coarctation of the Aorta</h3>
+        <p>Narrowing of the aorta, typically at or just distal to the ductus arteriosus insertion (juxtaductal). Two theories:</p>
+        <ul>
+          <li><strong>Ductus tissue theory</strong> — ductal tissue extends into the aortic wall and constricts when the ductus closes</li>
+          <li><strong>Hemodynamic theory</strong> — decreased aortic flow during fetal life (e.g., from left-sided obstruction) leads to poor growth of the aortic isthmus</li>
+        </ul>
+
+        <div class="clinical-pearl">
+          <strong>⚡ Coarctation associations:</strong> Bicuspid aortic valve (in ~50%), Turner syndrome (45,X), Berry aneurysms of the circle of Willis. Classic presentation: hypertension in upper extremities + weak/absent femoral pulses + rib notching on CXR (from intercostal collateral circulation).
+        </div>
+
+        <h3>Aberrant Right Subclavian Artery</h3>
+        <p>If the right 4th arch regresses abnormally, the right subclavian arises from the distal aortic arch and courses behind the esophagus → <strong>dysphagia lusoria</strong> (difficulty swallowing from posterior esophageal compression). Most common aortic arch anomaly (~1% of population). Usually asymptomatic.</p>
+      </div>
+    </div>
+
+    <!-- TAB 5: FETAL CIRCULATION -->
+    <div id="fetal" class="tab-content">
+      <div class="module-section">
+        <h2>🩸 Fetal Circulation</h2>
+        <p>Fetal circulation is designed to bypass the non-functional lungs and deliver oxygenated blood from the placenta to the systemic circulation via three shunts:</p>
+
+        <h3>Three Fetal Shunts</h3>
+        <table>
+          <tr><th>Shunt</th><th>Function</th><th>Closes to Form</th><th>Closure Mechanism</th></tr>
+          <tr><td><strong>Ductus Venosus</strong></td><td>Bypasses liver (umbilical vein → IVC directly)</td><td>Ligamentum venosum</td><td>Loss of placental blood flow → ↓ prostaglandins</td></tr>
+          <tr><td><strong>Foramen Ovale</strong></td><td>Right-to-left atrial shunt (bypasses lungs)</td><td>Fossa ovalis</td><td>↑ LA pressure from pulmonary venous return presses septum primum against septum secundum</td></tr>
+          <tr><td><strong>Ductus Arteriosus</strong></td><td>PA → descending aorta shunt (bypasses lungs)</td><td>Ligamentum arteriosum</td><td>↑ O₂ + ↓ prostaglandins → smooth muscle contraction</td></tr>
+        </table>
+
+        <h3>Fetal Blood Flow Pattern</h3>
+        <div class="pathway-box">Placenta (highest O₂)
+  → Umbilical vein (SpO₂ ~80%)
+  → Ductus venosus (bypasses liver)
+  → IVC → Right atrium
+
+In the RA, oxygenated IVC blood is directed by the crista dividens:
+  → Through foramen ovale → LA → LV → Ascending aorta
+     → Brain + upper body (receives most oxygenated blood)
+
+Deoxygenated SVC blood:
+  → RA → RV → Pulmonary artery
+  → 90% through ductus arteriosus → Descending aorta
+     → Lower body + umbilical arteries → Placenta
+  → 10% to lungs (high PVR keeps lung flow minimal)</div>
+
+        <div class="key-concept">
+          <strong>🔑 Oxygen Saturations in the Fetus:</strong>
+          <ul>
+            <li><strong>Umbilical vein</strong>: ~80% (highest — coming from placenta)</li>
+            <li><strong>Ascending aorta / brain</strong>: ~65% (mixed with some deoxygenated IVC blood)</li>
+            <li><strong>Descending aorta</strong>: ~58% (mixed after ductus arteriosus joins)</li>
+            <li><strong>Umbilical arteries</strong>: ~58% (lowest — returning to placenta)</li>
+          </ul>
+        </div>
+
+        <h3>Transition at Birth</h3>
+        <ol>
+          <li><strong>First breath</strong> → alveoli expand → ↓↓ pulmonary vascular resistance → ↑↑ pulmonary blood flow</li>
+          <li><strong>↑ LA pressure</strong> (from pulmonary venous return) → functionally closes <strong>foramen ovale</strong></li>
+          <li><strong>Cord clamping</strong> → ↑ SVR + ↓ prostaglandins → <strong>ductus venosus</strong> closes</li>
+          <li><strong>↑ O₂ + ↓ PGE₂</strong> → <strong>ductus arteriosus</strong> constricts (functional closure in 12-24h, anatomic by 2-3 weeks)</li>
+        </ol>
+
+        <div class="danger-box">
+          <strong>⚠️ Patent Ductus Arteriosus (PDA):</strong> The ductus stays open, creating a left-to-right shunt (aorta → PA). Common in premature infants (immature smooth muscle, high prostaglandin levels). Treatment: <strong>indomethacin/ibuprofen</strong> (prostaglandin synthesis inhibitors → close the ductus). Conversely, <strong>PGE₁ (alprostadil)</strong> keeps the ductus open when needed (duct-dependent lesions like TGA, critical coarctation, pulmonary atresia).
+        </div>
+
+        <div class="success-box">
+          <strong>✅ Duct-Dependent Lesions:</strong> Some critical CHDs depend on the ductus arteriosus to maintain either pulmonary or systemic blood flow. These neonates collapse when the ductus closes (typically day 2-5). PGE₁ infusion is lifesaving while awaiting surgery. Examples: critical coarctation, interrupted aortic arch, pulmonary atresia, HLHS, critical aortic stenosis, TGA.
+        </div>
+
+        <h3>Fetal vs Adult Remnants</h3>
+        <table>
+          <tr><th>Fetal Structure</th><th>Adult Remnant</th></tr>
+          <tr><td>Umbilical vein</td><td>Ligamentum teres hepatis (round ligament of liver)</td></tr>
+          <tr><td>Ductus venosus</td><td>Ligamentum venosum</td></tr>
+          <tr><td>Foramen ovale</td><td>Fossa ovalis</td></tr>
+          <tr><td>Ductus arteriosus</td><td>Ligamentum arteriosum</td></tr>
+          <tr><td>Umbilical arteries (proximal)</td><td>Superior vesical arteries (supply bladder)</td></tr>
+          <tr><td>Umbilical arteries (distal)</td><td>Medial umbilical ligaments</td></tr>
+          <tr><td>Allantois / urachus</td><td>Median umbilical ligament</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>🧠 Umbilical Remnants:</strong> Medi<strong>AN</strong> = all<strong>AN</strong>tois (1 structure, midline). Medi<strong>AL</strong> = umbilic<strong>AL</strong> arteries (2 structures, paired).
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: CONGENITAL DEFECTS -->
+    <div id="defects" class="tab-content">
+      <div class="module-section">
+        <h2>⚠️ Congenital Heart Defects</h2>
+        <p>Classified by the embryologic mechanism and the resulting hemodynamic consequence.</p>
+
+        <h3>Left-to-Right Shunts (Acyanotic — initially)</h3>
+        <table>
+          <tr><th>Defect</th><th>Embryology</th><th>Key Features</th></tr>
+          <tr><td><strong>VSD</strong></td><td>Failed fusion of membranous septum (IVS) — requires endocardial cushions + muscular septum + AP septum</td><td>Most common CHD overall. Harsh holosystolic murmur at LLSB. Small muscular VSDs often close spontaneously.</td></tr>
+          <tr><td><strong>ASD</strong></td><td>See Septation tab — ostium secundum most common</td><td>Wide, fixed split S2. Often asymptomatic until adulthood. Right heart volume overload.</td></tr>
+          <tr><td><strong>PDA</strong></td><td>Failure of ductus arteriosus closure (↑ O₂ + ↓ PGE₂ normally close it)</td><td>Continuous "machinery" murmur. Widened pulse pressure. Common in prematurity. Close with indomethacin.</td></tr>
+          <tr><td><strong>AVSD</strong></td><td>Endocardial cushion defect — failed cushion fusion</td><td>ASD + VSD + common AV valve. Strong T21 association. Common in Down syndrome.</td></tr>
+        </table>
+
+        <div class="key-concept">
+          <strong>🔑 Eisenmenger Syndrome:</strong> Long-standing left-to-right shunt → chronic pulmonary overcirculation → pulmonary vascular remodeling → irreversible pulmonary hypertension → shunt REVERSES to right-to-left → cyanosis. Once Eisenmenger develops, the defect is generally inoperable (closing it would cause RV failure against fixed high PVR).
+        </div>
+
+        <h3>Right-to-Left Shunts (Cyanotic)</h3>
+        <table>
+          <tr><th>Defect</th><th>Embryology</th><th>Key Features</th></tr>
+          <tr><td><strong>Tetralogy of Fallot</strong></td><td>Anterosuperior deviation of AP septum → (1) RV outflow obstruction, (2) overriding aorta, (3) VSD, (4) RV hypertrophy</td><td>Most common cyanotic CHD. "Tet spells" (hypercyanotic episodes). Boot-shaped heart on CXR. Squatting increases SVR → forces blood through lungs.</td></tr>
+          <tr><td><strong>TGA (D-type)</strong></td><td>Failure of AP septum spiraling → aorta arises from RV, PA from LV → parallel circuits</td><td>Cyanosis at birth. Incompatible with life unless mixing occurs (PFO, PDA, or VSD). "Egg on a string" CXR. Arterial switch (Jatene) is definitive repair.</td></tr>
+          <tr><td><strong>Persistent Truncus Arteriosus</strong></td><td>Complete failure of AP septum formation → single outflow vessel + VSD</td><td>Associated with DiGeorge (22q11.2 deletion). Single S2. Mixing of blood → cyanosis + CHF.</td></tr>
+          <tr><td><strong>Total Anomalous Pulmonary Venous Return</strong></td><td>Pulmonary veins fail to connect to LA → drain to systemic veins instead</td><td>Obligatory right-to-left shunt through ASD/PFO for survival. "Snowman" sign on CXR (supracardiac type). Surgical correction required.</td></tr>
+          <tr><td><strong>Tricuspid Atresia</strong></td><td>Failure of tricuspid valve development — no RV inflow</td><td>Obligatory ASD + VSD or PDA for survival. Left axis deviation on ECG (small RV). Fontan palliation.</td></tr>
+        </table>
+
+        <div class="mnemonic">
+          <strong>🧠 Cyanotic Heart Defects: "5 T's"</strong><br>
+          <strong>T</strong>etralogy of Fallot | <strong>T</strong>ransposition of Great Arteries | <strong>T</strong>runcus Arteriosus | <strong>T</strong>otal Anomalous Pulmonary Venous Return | <strong>T</strong>ricuspid Atresia
+        </div>
+
+        <h3>Obstructive Lesions</h3>
+        <table>
+          <tr><th>Defect</th><th>Embryology</th><th>Key Features</th></tr>
+          <tr><td><strong>Coarctation</strong></td><td>Narrowing at ductus insertion — ductal tissue theory + hemodynamic theory</td><td>Upper limb HTN + weak femoral pulses. Bicuspid aortic valve in 50%. Turner syndrome association. Rib notching on CXR.</td></tr>
+          <tr><td><strong>Aortic Stenosis</strong></td><td>Abnormal valve development; bicuspid valve from abnormal cushion/ridge fusion</td><td>Systolic crescendo-decrescendo murmur radiating to carotids. Syncope, angina, dyspnea (SAD triad).</td></tr>
+          <tr><td><strong>Pulmonary Stenosis</strong></td><td>Dysplastic or fused pulmonary valve leaflets</td><td>Systolic murmur at LUSB with widely split S2. Associated with Noonan syndrome and congenital rubella.</td></tr>
+        </table>
+
+        <h3>DiGeorge Syndrome (22q11.2 Deletion)</h3>
+        <div class="danger-box">
+          <strong>⚠️ CATCH-22 Mnemonic:</strong>
+          <ul>
+            <li><strong>C</strong>ardiac defects (conotruncal: interrupted aortic arch, truncus arteriosus, TOF, VSD)</li>
+            <li><strong>A</strong>bnormal facies (long face, small jaw, low-set ears)</li>
+            <li><strong>T</strong>hymic aplasia/hypoplasia (T-cell deficiency → immunodeficiency)</li>
+            <li><strong>C</strong>left palate (velopharyngeal insufficiency)</li>
+            <li><strong>H</strong>ypocalcemia (absent/hypoplastic parathyroids)</li>
+          </ul>
+          <p style="margin-top:0.5rem">Caused by failure of <strong>3rd and 4th pharyngeal pouch</strong> development (neural crest dependent). Most common microdeletion syndrome (~1/4000 births).</p>
+        </div>
+
+        <h3>Summary: Embryologic Mechanism → Defect</h3>
+        <table>
+          <tr><th>Mechanism</th><th>Resulting Defects</th></tr>
+          <tr><td>Endocardial cushion failure</td><td>Ostium primum ASD, AVSD, membranous VSD, MV/TV abnormalities</td></tr>
+          <tr><td>Neural crest migration failure</td><td>PTA, TOF, TGA, interrupted aortic arch, DiGeorge</td></tr>
+          <tr><td>AP septum malalignment</td><td>TOF (anterior), Overriding aorta</td></tr>
+          <tr><td>AP septum spiral failure</td><td>D-TGA (parallel circuits)</td></tr>
+          <tr><td>Right-sided inflow obstruction</td><td>Tricuspid atresia, Ebstein anomaly</td></tr>
+          <tr><td>Left-sided flow abnormality</td><td>Coarctation, HLHS, aortic stenosis</td></tr>
+          <tr><td>Septum primum/secundum defects</td><td>Ostium secundum ASD, PFO</td></tr>
+          <tr><td>Ductus arteriosus patency</td><td>PDA</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 7: QUIZ -->
+    <div id="quiz" class="tab-content">
+      <div class="module-section">
+        <h2>📝 Test Your Knowledge</h2>
+
+        <div class="quiz-section">
+          <h3>Question 1</h3>
+          <p>The aorticopulmonary septum is formed primarily by cells migrating from which embryonic structure?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Endocardial cushions</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Neural crest (pharyngeal arches 3, 4, 6)</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Second heart field mesoderm</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Septum transversum</div>
+          <div class="explanation">Neural crest cells from rhombomeres 6-8 migrate through pharyngeal arches 3, 4, and 6 to form the AP septum. Failure → persistent truncus arteriosus, TOF, TGA. DiGeorge syndrome (22q11.2 del) impairs this neural crest migration.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 2</h3>
+          <p>A newborn with Down syndrome has an echocardiogram showing a common AV valve with ostium primum ASD and inlet VSD. Which embryologic structure failed to develop properly?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Septum secundum</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">B) Muscular interventricular septum</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">C) Endocardial cushions</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Bulbus cordis</div>
+          <div class="explanation">Complete AVSD (AV canal defect) = endocardial cushion failure → ostium primum ASD + inlet VSD + common AV valve. Strongly associated with Trisomy 21. Endocardial cushions contribute to atrial septation, ventricular septation, and AV valve formation.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 3</h3>
+          <p>Which fetal shunt is kept open by prostaglandins and closed by indomethacin?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Foramen ovale</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Ductus arteriosus</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Ductus venosus</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Umbilical vein</div>
+          <div class="explanation">The ductus arteriosus is kept patent by PGE₂ (and low O₂). After birth, ↑O₂ + ↓PGE₂ → constriction. Indomethacin/ibuprofen (COX inhibitors) block PG synthesis → close a PDA. PGE₁ (alprostadil) keeps it open for duct-dependent lesions.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 4</h3>
+          <p>D-transposition of the great arteries results from failure of which embryologic process?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Endocardial cushion fusion</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">B) Cardiac looping</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">C) Aorticopulmonary septum spiraling</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Atrial septation</div>
+          <div class="explanation">The AP septum normally spirals as it descends, so the aorta connects to the LV and PA to the RV. Failure of spiraling → aorta from RV + PA from LV = D-TGA (parallel circuits). Incompatible with life without mixing (PFO, PDA, VSD). Arterial switch (Jatene) is definitive.</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 5</h3>
+          <p>The left 4th aortic arch artery gives rise to which adult structure?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Left common carotid artery</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) Aortic arch (between left common carotid and left subclavian)</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Left pulmonary artery</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Ductus arteriosus</div>
+          <div class="explanation">Left 4th arch = aortic arch. Right 4th arch = proximal right subclavian. 3rd arches = common carotids. Left 6th arch = left PA + ductus arteriosus. Mnemonic: 4th arch = 4 letters in "arch."</div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>Question 6</h3>
+          <p>A neonate presents with cyanosis. CXR shows an "egg on a string" appearance with a narrow mediastinum. What is the most likely diagnosis?</p>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">A) Tetralogy of Fallot</div>
+          <div class="quiz-option" onclick="checkQuiz(this, true)">B) D-Transposition of the Great Arteries</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">C) Total Anomalous Pulmonary Venous Return</div>
+          <div class="quiz-option" onclick="checkQuiz(this, false)">D) Truncus arteriosus</div>
+          <div class="explanation">"Egg on a string" = narrow mediastinum (because the great arteries are stacked anteroposteriorly instead of side by side) with an egg-shaped cardiac silhouette. Classic for D-TGA. TOF = boot-shaped heart. TAPVR (supracardiac) = snowman sign.</div>
+        </div>
+      </div>
+
+      <!-- References -->
+      <div class="module-section" style="margin-top: 2rem;">
+        <h2 style="color: #93c5fd;">📖 References</h2>
+        <ul>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK459181/" target="_blank" style="color: #93c5fd;">Embryology, Heart - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK538286/" target="_blank" style="color: #93c5fd;">Atrial Septal Defect - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK532284/" target="_blank" style="color: #93c5fd;">Tetralogy of Fallot - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK538434/" target="_blank" style="color: #93c5fd;">Transposition of the Great Arteries - StatPearls</a></li>
+          <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK557623/" target="_blank" style="color: #93c5fd;">DiGeorge Syndrome - StatPearls</a></li>
+          <li><a href="https://radiopaedia.org/articles/fetal-circulation" target="_blank" style="color: #93c5fd;">Fetal Circulation - Radiopaedia</a></li>
+        </ul>
+      </div>
+
+      <!-- Related Modules -->
+      <div class="module-section">
+        <h2 style="color: #6ee7b7;">🔗 Related Modules</h2>
+        <p>
+          <a href="neuro-embryology-module.html" class="condition-link">🧠 Neuro Embryology</a>
+          <a href="gi-embryology-module.html" class="condition-link">🍽️ GI Embryology</a>
+          <a href="respiratory-embryology-module.html" class="condition-link">🫁 Respiratory Embryology</a>
+          <a href="msk-embryology-module.html" class="condition-link">🦴 MSK Embryology</a>
+        </p>
+        <h3 style="color: #86efac; margin-top: 1rem;">Clinical Reasoning Trainers</h3>
+        <p>
+          <a href="septal-defects-crt.html" class="condition-link">🫀 Septal Defects CRT</a>
+          <a href="conotruncal-defects-crt.html" class="condition-link">💙 Conotruncal Defects CRT</a>
+          <a href="pda-coarctation-crt.html" class="condition-link">🔴 PDA & Coarctation CRT</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    function checkQuiz(el, correct) {
+      const section = el.closest('.quiz-section');
+      section.querySelectorAll('.quiz-option').forEach(o => { o.style.pointerEvents = 'none'; o.style.opacity = '0.6'; });
+      el.style.opacity = '1';
+      el.classList.add(correct ? 'correct' : 'incorrect');
+      if (!correct) section.querySelectorAll('.quiz-option').forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+      section.querySelector('.explanation').style.display = 'block';
+    }
+  </script>
+<style id="mcq-inject-css">.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}.mcq-card-body{padding:24px}.mcq-choices{display:grid;gap:12px}.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}.mcq-choice-title{font-weight:600;font-size:.95rem}.mcq-hidden{display:none!important}.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}.mcq-score-label{font-size:.9rem;font-weight:600}.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">Tetralogy of Fallot results from abnormal development of which embryologic structure?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Endocardial cushion defects cause AV canal defects (common in Down syndrome), not Tetralogy of Fallot." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Endocardial cushions</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="TOF: anterosuperior malalignment of the infundibular septum → 4 features: (1) RV outflow tract obstruction (most important for severity), (2) overriding aorta, (3) VSD (malalignment type), (4) RV hypertrophy (secondary). Most common cyanotic CHD beyond infancy. Associated with 22q11.2 deletion (DiGeorge)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Anterior and superior deviation of the infundibular (conotruncal) septum</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="This causes an ostium primum ASD, not TOF." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Failure of the septum primum to fuse with the endocardial cushions</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Laterality defects cause situs inversus or heterotaxy, not TOF." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Abnormal left-right axis determination</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">Persistent truncus arteriosus results from failure of which developmental process?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Atrial septation defects cause ASDs. Truncus arteriosus involves the outflow tract." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Atrial septation</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Normally, neural crest cells migrate to form the aorticopulmonary septum, which spirally divides the truncus arteriosus into the aorta and pulmonary artery. Failure → single arterial trunk overriding both ventricles + VSD. Neural crest ablation in animal models reproduces this. Associated with DiGeorge syndrome (22q11.2 deletion)." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Aorticopulmonary septum formation (spiral septation of the truncus)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Ductus arteriosus closure is a postnatal event (PDA if it fails). Truncus arteriosus is an embryonic septation failure." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Ductus arteriosus closure</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Coronary artery anomalies are separate from truncus arteriosus." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Coronary artery budding from the aortic sinuses</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">Transposition of the great arteries (D-TGA) is caused by:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="D-TGA: the aorticopulmonary septum forms but fails to spiral → aorta arises from the RV (anterior), pulmonary artery from the LV (posterior) → parallel circulations. Incompatible with life unless mixing exists (ASD, VSD, or PDA). Presentation: cyanosis at birth unresponsive to O2. Emergent balloon atrial septostomy (Rashkind) → definitive arterial switch operation (Jatene)." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Failure of the aorticopulmonary septum to spiral</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Endocardial cushion defects cause AV canal defects, not transposition." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Endocardial cushion malformation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="PDA is a separate postnatal issue. TGA is an embryonic septation defect." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Failure of the ductus arteriosus to close</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Abnormal looping (L-loop) causes L-TGA (congenitally corrected TGA), which is a different entity from D-TGA." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Abnormal bulboventricular looping</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">The foramen ovale allows blood to flow from the right atrium to the left atrium in fetal life. What keeps it open?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="The foramen ovale is a passive flap valve, not actively maintained by muscle contraction." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Active muscular contraction</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Fetal circulation: high pulmonary vascular resistance → most RV blood shunts through ductus arteriosus → low pulmonary venous return → low LA pressure. Simultaneously, placental venous return (via IVC/ductus venosus) elevates RA pressure → septum primum flap is pushed open. At birth: first breath → pulmonary resistance drops → LA pressure rises → flap closes." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Higher right atrial pressure compared to left atrial pressure in fetal circulation</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="PGE2 maintains the ductus arteriosus, not the foramen ovale." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Prostaglandin E2 maintaining patency</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="The septum secundum is present — the foramen ovale is the opening IN the septum secundum, covered by the septum primum flap." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Absence of the septum secundum</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which congenital heart defect is MOST strongly associated with Down syndrome (trisomy 21)?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="TOF is more strongly associated with 22q11.2 deletion (DiGeorge) than Down syndrome." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Tetralogy of Fallot</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Complete AV canal (AVSD): most characteristic cardiac defect in Down syndrome (~40% of DS cardiac anomalies). Results from failed endocardial cushion fusion → common AV valve + primum ASD + inlet VSD. Presents with CHF, failure to thrive. Surgical repair typically at 3-6 months. Also associated with heterotaxy syndromes." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Complete atrioventricular canal defect (endocardial cushion defect)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Coarctation is associated with Turner syndrome (45,X) and bicuspid aortic valve, not typically Down syndrome." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Coarctation of the aorta</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Ebstein anomaly (apical displacement of the tricuspid valve) is associated with maternal lithium exposure." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Ebstein anomaly</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Patent ductus arteriosus (PDA) is kept open in fetal life by which substance?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Endothelin-1 is a vasoconstrictor that helps CLOSE the ductus postnatally." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Endothelin-1</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Fetal PDA patency: maintained by PGE2 (produced by the placenta) + low fetal PaO2. At birth: loss of placental PGE2 + rising PaO2 → ductal smooth muscle constriction → functional closure (hours) → anatomic closure (weeks). Indomethacin/ibuprofen (PG inhibitors) close a PDA. PGE1 infusion keeps it open (ductal-dependent lesions)." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Prostaglandin E2 (PGE2) and low oxygen tension</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="NO is a vasodilator that helps reduce pulmonary vascular resistance after birth but is not the primary factor maintaining ductal patency." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Nitric oxide</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="ANP regulates fluid/electrolyte balance, not ductal patency." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Atrial natriuretic peptide</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">A VSD is the most common congenital heart defect. Which type is most common?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Muscular VSDs are common but many are small and close spontaneously. The most common clinically significant type is perimembranous." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Muscular VSD</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Perimembranous VSD: ~80% of VSDs. Located in the membranous septum near the AV valves and conduction system. Small ones may close spontaneously. Large VSDs → left-to-right shunt → pulmonary overcirculation → CHF. If uncorrected → Eisenmenger syndrome (irreversible pulmonary hypertension → shunt reversal → cyanosis)." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Perimembranous (membranous) VSD</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Outlet VSDs (~5-8%) are beneath the pulmonary valve. More common in Asian populations. Risk of aortic valve prolapse." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Supracristal (outlet) VSD</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Inlet VSDs are part of the AV canal defect spectrum, associated with endocardial cushion defects." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Inlet (AV canal type) VSD</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">Coarctation of the aorta presents differently in neonates vs older children. What is the classic presentation in a neonate with severe coarctation?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Asymptomatic presentation is typical of older children/adults with milder coarctation, not neonates with severe disease." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Asymptomatic murmur detected at routine visit</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Severe (preductal) coarctation: lower body perfusion depends on the PDA. When the ductus closes (days 1-7) → acute heart failure, shock, metabolic acidosis, absent femoral pulses, blood pressure differential (upper &gt; lower extremities). Emergency: PGE1 infusion to reopen ductus → surgical repair. Associated with Turner syndrome and bicuspid aortic valve." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Cardiovascular collapse when the ductus arteriosus closes</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Coarctation causes UPPER extremity hypertension and lower extremity hypotension (opposite of this answer)." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Hypertension in the lower extremities</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Differential cyanosis (lower body cyanotic, upper body pink) can occur with coarctation + PDA + pulmonary hypertension, but cardiovascular collapse is the critical neonatal presentation." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Cyanosis of the upper body only</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="conotruncal-defects-crt.html" class="cross-link"><div class="cross-link-title">🧪 Conotruncal Defects CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="septal-defects-crt.html" class="cross-link"><div class="cross-link-title">🧪 Septal Defects CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="pda-coarctation-crt.html" class="cross-link"><div class="cross-link-title">🧪 PDA & Coarctation CRT</div><div style="font-size:.75rem;color:var(--muted)">Embryology case trainer</div></a>
+<a href="hf-module.html" class="cross-link"><div class="cross-link-title">📘 Heart Failure Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a>
+<a href="syncope-arrhythmia-module.html" class="cross-link"><div class="cross-link-title">📘 Syncope & Arrhythmia</div><div style="font-size:.75rem;color:var(--muted)">Clinical deep dive</div></a><a href="../ReasonDx/adventure-cases/pediatric-urology-sbar.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

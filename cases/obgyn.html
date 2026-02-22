@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OB/GYN - ReasonDx</title>
+<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .dx-nav {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.15s;
+        }
+        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
+        .dx-nav-link.active { background: var(--primary); color: #fff; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 24px;
+            border-bottom: 3px solid var(--primary-dark);
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .section h3 { color: var(--text-primary); font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: var(--text-secondary); }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comparison-card {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+        .comparison-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comparison-card ul { margin-left: 20px; color: var(--text-secondary); font-size: 14px; }
+        .comparison-card li { margin-bottom: 8px; }
+        .comparison-card.preferred { border-color: var(--primary); border-width: 2px; background: #eff6ff; }
+        .pro { color: var(--primary-dark); font-weight: 500; }
+        .con { color: #dc2626; font-weight: 500; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: var(--border-light); color: var(--text-primary); padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-main); }
+        
+        .key-point {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .key-point-title { color: var(--primary-dark); font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #1e40af; margin-bottom: 0; }
+        
+        .pearl {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border: 1px solid #facc15;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+        .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #854d0e; margin-bottom: 0; }
+        
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .component-name { font-weight: 600; color: var(--text-primary); font-size: 16px; }
+        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
+        .badge-low-risk { background: #dcfce7; color: #15803d; }
+        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
+        .component-protein { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+        .component-desc { font-size: 14px; color: var(--text-secondary); }
+        
+        .algorithm-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .algorithm-title { color: var(--primary-dark); font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+        .step-num {
+            width: 36px; height: 36px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content { flex: 1; background: var(--bg-card); padding: 14px 18px; border-radius: 10px; border: 1px solid var(--border); }
+        .step-content strong { color: var(--primary-dark); }
+        .algorithm-arrow { text-align: center; color: var(--primary); font-size: 20px; margin: 8px 0; }
+        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .branch-positive { background: var(--primary-bg); border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-negative { background: #eff6ff; border: 1px solid var(--primary); border-radius: 10px; padding: 14px; }
+        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .branch-positive .branch-title { color: var(--primary-dark); }
+        .branch-negative .branch-title { color: var(--primary-dark); }
+        .branch-content { font-size: 13px; color: var(--text-secondary); }
+        
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .interp-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .interp-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .interp-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .interp-meaning { font-size: 11px; color: var(--primary-dark); margin-top: 8px; padding: 4px 8px; background: var(--primary-bg); border-radius: 6px; display: inline-block; }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #eff6ff 0%, var(--primary-bg) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            border: 1px solid #93c5fd;
+        }
+        .quiz-title { color: var(--primary-dark); font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .quiz-q-text { color: var(--text-primary); font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            background: var(--bg-main);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .quiz-option:hover { border-color: var(--primary); background: #eff6ff; }
+        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        .links-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border);
+        }
+        .links-title { color: var(--text-primary); font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .link-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: var(--text-primary); font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: var(--text-secondary); font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--primary-bg); color: var(--primary-dark); }
+        
+        .footer { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 13px; border-top: 1px solid var(--border); background: var(--bg-card); margin-top: 40px; }
+        .footer a { color: var(--primary); text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .decision-branch { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+            .content { padding: 24px 16px; }
+            .section { padding: 20px; }
+        }
+
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    <link rel="stylesheet" href="module-enhance.css">
+    <link rel="stylesheet" href="module-fix.css">
+        <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 OB/GYN Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel">
+        <!-- Cross-Platform Links - Apply What You Learned -->
+        <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+                    border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 32px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 18px;">Apply What You've Learned</div>
+                    <div style="font-size: 13px; color: var(--text-secondary);">Practice OB/GYN with interactive cases</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; gap: 12px;">
+                <a href="../CoachDx/mentor-chat.html?case=obgyn01" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+                          border: 1px solid #c4b5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(139,92,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: #8b5cf6; 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">💬</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: #6d28d9; font-size: 15px;">Practice with AI Coach</div>
+                        <div style="font-size: 13px; color: #7c3aed;">
+                            <strong>CoachDx</strong> • Socratic dialogue with AI attending
+                        </div>
+                    </div>
+                    <span style="color: #8b5cf6; font-size: 20px;">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?filter=pregnancy,bleeding,pelvic" 
+                   style="display: flex; align-items: center; gap: 16px; padding: 16px; 
+                          background: linear-gradient(135deg, var(--primary-bg) 0%, #bfdbfe 100%);
+                          border: 1px solid #93c5fd; border-radius: 12px;
+                          text-decoration: none; transition: all 0.2s;"
+                   onmouseover="this.style.transform='translateX(4px)'; this.style.boxShadow='0 4px 12px rgba(59,130,246,0.15)'"
+                   onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary); 
+                                display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 24px;">🩺</span>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--primary-dark); font-size: 15px;">OB/GYN Cases</div>
+                        <div style="font-size: 13px; color: var(--primary-dark);">
+                            <strong>ReasonDx</strong> • 10+ complete clinical cases
+                        </div>
+                    </div>
+                    <span style="color: var(--primary); font-size: 20px;">→</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">
+                    💡 Tip: Complete a CoachDx session first, then test yourself with a full ReasonDx case
+                </span>
+            </div>
+        </div>
+
+    </main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Jessica</strong>, 28F G1P0, presents at 8 weeks for first prenatal visit. Needs comprehensive prenatal care planning and screening.',pearl:'First prenatal: confirm pregnancy, dating US, labs (CBC, type/screen, rubella, HIV, HBsAg, UA, Pap). Discuss genetic screening options.',objectives:['Perform initial prenatal workup','Know screening tests by trimester','Understand genetic screening options','Counsel on prenatal vitamins'],refs:[{t:'ACOG Prenatal Care',u:'https://www.acog.org/'}]},
+2:{qs:[6,7,8,9,10],narrative:'Jessica is now at 39 weeks in active labor. Understanding stages of labor and recognizing complications is essential.',pearl:'Stage 1: cervical dilation. Stage 2: delivery of baby. Stage 3: delivery of placenta. Prolonged labor, fetal distress require intervention.',objectives:['Know stages of labor','Interpret fetal heart tracings','Recognize labor abnormalities','Manage common complications'],refs:[{t:'Labor Management',u:'https://www.acog.org/'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Amanda</strong>, 35F, presents with heavy menstrual bleeding and pelvic pain. Need to evaluate common gynecologic disorders.',pearl:'AUB workup: pregnancy test first always. Structural: PALM (Polyp, Adenomyosis, Leiomyoma, Malignancy). Non-structural: COEIN.',objectives:['Evaluate abnormal uterine bleeding','Diagnose common GYN conditions','Know contraceptive options','Manage pelvic pain'],refs:[{t:'AUB Guidelines',u:'https://www.acog.org/'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Maria</strong>, 32F at 32 weeks, presents with severe headache, BP 165/105, and proteinuria. This is a hypertensive emergency.',pearl:'Preeclampsia with severe features: BP ≥160/110, symptoms, labs. Treat with magnesium, antihypertensives. Delivery is definitive treatment.',objectives:['Diagnose preeclampsia severity','Manage hypertensive emergencies','Recognize placental abruption','Handle OB emergencies'],refs:[{t:'Hypertension in Pregnancy',u:'https://www.acog.org/'}]}
+};
+var Qs={
+1:{type:'Prenatal Labs',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'Which test is included in routine first prenatal visit labs?',
+opts:[['a','Glucose tolerance test'],['b','Group B strep culture'],['c','Blood type and antibody screen'],['d','Third trimester ultrasound']],
+ans:'c',
+exp:'<strong>First prenatal labs:</strong> CBC, blood type/Rh/antibody screen, rubella, HIV, HBsAg, syphilis, UA/culture, Pap if due. GBS at 36 weeks.',
+kp:'Type and screen at first visit. GBS at 36 weeks. GTT at 24-28 weeks.',
+dd:{mechanism:{title:'Prenatal Testing Timeline',content:'<table><tr><th>Timing</th><th>Tests</th></tr><tr><td>First visit</td><td>CBC, type/screen, HIV, HBsAg, rubella, UA</td></tr><tr><td>15-20 wks</td><td>Quad screen or cfDNA</td></tr><tr><td>24-28 wks</td><td>Glucose tolerance test</td></tr><tr><td>36 wks</td><td>GBS culture</td></tr></table>',bw:['Type/screen first visit','GTT 24-28 weeks','GBS at 36 weeks']}}},
+2:{type:'Dating',difficulty:'medium',domains:['diagnosis'],tags:['Step2','OB'],stem:'What is the most accurate method for pregnancy dating?',
+opts:[['a','Last menstrual period alone'],['b','First trimester ultrasound measurement'],['c','Second trimester fundal height'],['d','Quickening reported by patient']],
+ans:'b',
+exp:'<strong>Pregnancy dating:</strong> First trimester US most accurate (±5-7 days). Crown-rump length before 14 weeks. LMP can be inaccurate.',
+kp:'First trimester US most accurate. CRL before 14 weeks. Dates rarely changed after 20 weeks.',
+dd:{mechanism:{title:'Dating Accuracy',content:'<table><tr><th>Method</th><th>Accuracy</th></tr><tr><td>1st tri US</td><td>±5-7 days</td></tr><tr><td>2nd tri US</td><td>±10-14 days</td></tr><tr><td>3rd tri US</td><td>±21 days</td></tr></table>',bw:['1st trimester most accurate','CRL before 14 weeks','Dont change dates late']}}},
+3:{type:'Genetic Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'Cell-free DNA (cfDNA) screening tests for which conditions?',
+opts:[['a','Neural tube defects only'],['b','Trisomy 21, 18, 13 and sex chromosome abnormalities'],['c','All genetic conditions comprehensively'],['d','Structural heart defects']],
+ans:'b',
+exp:'<strong>cfDNA (NIPT):</strong> Screens for trisomy 21, 18, 13 and sex chromosome aneuploidies. High sensitivity for T21. Not diagnostic - confirm with amnio/CVS.',
+kp:'cfDNA screens for trisomies 21, 18, 13. Screening not diagnostic. Amnio confirms.',
+dd:{mechanism:{title:'Prenatal Screening',content:'<h4>cfDNA (NIPT)</h4><ul><li>T21, T18, T13</li><li>Sex chromosome abnormalities</li><li>99% sensitivity for T21</li><li>Screening only</li></ul>',bw:['Screens for trisomies','Not diagnostic','Amnio/CVS confirms']}}},
+4:{type:'Teratogens',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'Which medication is contraindicated in pregnancy due to teratogenic effects?',
+opts:[['a','Acetaminophen for pain'],['b','Isotretinoin (Accutane)'],['c','Penicillin for infection'],['d','Ondansetron for nausea']],
+ans:'b',
+exp:'<strong>Teratogens:</strong> Isotretinoin causes severe birth defects (CNS, cardiac, craniofacial). Also avoid: warfarin, valproate, ACE inhibitors, lithium (1st tri).',
+kp:'Isotretinoin highly teratogenic. Also warfarin, valproate, ACEi. iPLEDGE program required.',
+dd:{mechanism:{title:'Common Teratogens',content:'<table><tr><th>Drug</th><th>Effect</th></tr><tr><td>Isotretinoin</td><td>CNS, cardiac defects</td></tr><tr><td>Warfarin</td><td>Nasal hypoplasia, CNS</td></tr><tr><td>Valproate</td><td>Neural tube defects</td></tr><tr><td>ACE inhibitors</td><td>Renal dysgenesis</td></tr></table>',bw:['Isotretinoin severe','Warfarin in 1st trimester','Valproate NTDs']}}},
+5:{type:'Prenatal Vitamins',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'What folic acid dose prevents neural tube defects in most pregnancies?',
+opts:[['a','100 mcg daily'],['b','400-800 mcg daily'],['c','4 mg daily for all'],['d','No supplementation needed']],
+ans:'b',
+exp:'<strong>Folic acid:</strong> 400-800 mcg/day for all women. 4 mg/day if prior NTD, on antiepileptics, or diabetes. Start before conception.',
+kp:'400-800 mcg for all. 4 mg if high risk (prior NTD, AEDs). Start preconception.',
+dd:{mechanism:{title:'Folic Acid',content:'<h4>Dosing</h4><ul><li>Standard: 400-800 mcg/day</li><li>High risk: 4 mg/day</li></ul><h4>High Risk</h4><ul><li>Prior NTD</li><li>On valproate/carbamazepine</li><li>Diabetes</li><li>Obesity</li></ul>',bw:['400-800 mcg standard','4 mg if high risk','Start preconception']}}},
+6:{type:'Labor Stages',difficulty:'medium',domains:['diagnosis'],tags:['Step2','OB'],stem:'A woman is 6 cm dilated and 100% effaced. What stage of labor is this?',
+opts:[['a','Latent phase of first stage'],['b','Active phase of first stage'],['c','Second stage of labor'],['d','Third stage of labor']],
+ans:'b',
+exp:'<strong>Labor stages:</strong> Stage 1 latent: 0-6 cm. Stage 1 active: 6-10 cm. Stage 2: full dilation to delivery. Stage 3: delivery to placenta.',
+kp:'Latent: 0-6 cm. Active: 6-10 cm. Stage 2: pushing. Stage 3: placenta.',
+dd:{mechanism:{title:'Labor Stages',content:'<table><tr><th>Stage</th><th>Definition</th></tr><tr><td>1 Latent</td><td>0-6 cm dilation</td></tr><tr><td>1 Active</td><td>6-10 cm dilation</td></tr><tr><td>2</td><td>Full dilation → delivery</td></tr><tr><td>3</td><td>Delivery → placenta</td></tr></table>',bw:['Active at 6 cm','Stage 2 = pushing','Stage 3 = placenta']}}},
+7:{type:'Fetal Monitoring',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'Fetal heart tracing shows repetitive late decelerations with minimal variability. What does this indicate?',
+opts:[['a','Normal reassuring tracing'],['b','Head compression during contractions'],['c','Uteroplacental insufficiency with possible hypoxia'],['d','Umbilical cord compression']],
+ans:'c',
+exp:'<strong>Late decelerations:</strong> Start after contraction peak, gradual. Indicate uteroplacental insufficiency. With minimal variability = Category III, concerning.',
+kp:'Late decels = uteroplacental insufficiency. Variable decels = cord compression. Minimal variability concerning.',
+dd:{mechanism:{title:'FHR Patterns',content:'<table><tr><th>Pattern</th><th>Cause</th></tr><tr><td>Early decels</td><td>Head compression (benign)</td></tr><tr><td>Variable decels</td><td>Cord compression</td></tr><tr><td>Late decels</td><td>Uteroplacental insufficiency</td></tr></table>',bw:['Late = uteroplacental','Variable = cord','Early = head (benign)']}}},
+8:{type:'Labor Arrest',difficulty:'hard',domains:['management'],tags:['Step2','OB'],stem:'A patient at 8 cm has not progressed for 4 hours despite adequate contractions. What is the diagnosis?',
+opts:[['a','Normal labor progression'],['b','Arrest of dilation requiring intervention'],['c','Precipitous labor'],['d','Prodromal labor']],
+ans:'b',
+exp:'<strong>Arrest of dilation:</strong> No cervical change for ≥4 hours with adequate contractions. May need oxytocin augmentation or cesarean delivery.',
+kp:'Arrest: no change for ≥4 hours with adequate contractions. Consider cesarean if arrest.',
+dd:{mechanism:{title:'Labor Dystocia',content:'<h4>Arrest Criteria</h4><ul><li>Active phase: no change ≥4 hours</li><li>With adequate contractions</li><li>Or ≥6 hours if inadequate</li></ul>',bw:['4 hours no change','Adequate contractions','May need cesarean']}}},
+9:{type:'Shoulder Dystocia',difficulty:'hard',domains:['emergency'],tags:['Step2','OB'],stem:'After delivery of the head, the shoulders do not deliver with gentle traction. What is the first maneuver?',
+opts:[['a','Fundal pressure to push baby out'],['b','McRoberts maneuver with suprapubic pressure'],['c','Immediate cesarean delivery'],['d','Forceps application to shoulders']],
+ans:'b',
+exp:'<strong>Shoulder dystocia:</strong> First: McRoberts (hyperflexion of hips) + suprapubic pressure. Never fundal pressure. May need Woods screw, deliver posterior arm.',
+kp:'McRoberts + suprapubic pressure first. Never fundal pressure. Call for help.',
+dd:{mechanism:{title:'Shoulder Dystocia',content:'<h4>Management Steps</h4><ol><li>Call for help</li><li>McRoberts maneuver</li><li>Suprapubic pressure</li><li>Woods screw/Rubin</li><li>Deliver posterior arm</li></ol>',bw:['McRoberts first','Suprapubic (not fundal)','Call for help']}}},
+10:{type:'Postpartum Hemorrhage',difficulty:'hard',domains:['emergency'],tags:['Step2','OB'],stem:'A patient has heavy vaginal bleeding after vaginal delivery. The uterus is soft and boggy. What is the likely cause?',
+opts:[['a','Cervical laceration'],['b','Uterine atony'],['c','Retained placental fragments'],['d','Coagulation disorder']],
+ans:'b',
+exp:'<strong>PPH causes:</strong> 4 Ts - Tone (atony, most common), Trauma (lacerations), Tissue (retained placenta), Thrombin (coagulopathy). Boggy uterus = atony.',
+kp:'Uterine atony most common PPH cause. Boggy uterus. Treat with massage, uterotonics.',
+dd:{mechanism:{title:'PPH - 4 Ts',content:'<table><tr><th>Cause</th><th>Finding</th></tr><tr><td>Tone (atony)</td><td>Boggy uterus</td></tr><tr><td>Trauma</td><td>Lacerations</td></tr><tr><td>Tissue</td><td>Retained placenta</td></tr><tr><td>Thrombin</td><td>Coagulopathy</td></tr></table>',bw:['Atony most common','4 Ts mnemonic','Uterotonics for atony']}}},
+11:{type:'AUB Workup',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A 32-year-old presents with irregular heavy periods. What is the first test to order?',
+opts:[['a','Pelvic ultrasound'],['b','Urine pregnancy test'],['c','Endometrial biopsy'],['d','Coagulation studies']],
+ans:'b',
+exp:'<strong>AUB workup:</strong> Always pregnancy test first in reproductive age. Then assess for structural (PALM) vs non-structural (COEIN) causes.',
+kp:'Pregnancy test first always. Then US, labs. Biopsy if >45 or risk factors.',
+dd:{mechanism:{title:'AUB Workup',content:'<h4>Order of Evaluation</h4><ol><li>Pregnancy test</li><li>CBC, TSH</li><li>Pelvic ultrasound</li><li>Endometrial biopsy if indicated</li></ol>',bw:['Pregnancy test first','PALM-COEIN classification','Biopsy if >45']}}},
+12:{type:'Fibroids',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A patient has heavy periods and a pelvic mass. Ultrasound shows multiple uterine fibroids. What is the best initial treatment for bleeding?',
+opts:[['a','Immediate hysterectomy'],['b','Hormonal management with OCPs or IUD'],['c','Uterine artery embolization first'],['d','Observation without treatment']],
+ans:'b',
+exp:'<strong>Fibroid treatment:</strong> Medical first for bleeding: OCPs, progestin IUD, GnRH agonists. Surgery if failed medical or desire fertility. Hysterectomy definitive.',
+kp:'Hormonal therapy first-line for bleeding. Mirena IUD effective. Surgery if medical fails.',
+dd:{mechanism:{title:'Fibroid Management',content:'<h4>Medical</h4><ul><li>NSAIDs, tranexamic acid</li><li>OCPs, progestin IUD</li><li>GnRH agonists (short-term)</li></ul><h4>Surgical</h4><ul><li>Myomectomy (preserve fertility)</li><li>UAE</li><li>Hysterectomy (definitive)</li></ul>',bw:['Medical first','Mirena IUD helpful','Hysterectomy definitive']}}},
+13:{type:'Endometriosis',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A patient has cyclic pelvic pain, dysmenorrhea, and dyspareunia. What is the most likely diagnosis?',
+opts:[['a','Uterine fibroids'],['b','Endometriosis'],['c','Ovarian cyst'],['d','Pelvic inflammatory disease']],
+ans:'b',
+exp:'<strong>Endometriosis:</strong> Cyclic pain, dysmenorrhea, dyspareunia, infertility. Definitive diagnosis by laparoscopy. Treat with NSAIDs, OCPs, GnRH agonists.',
+kp:'Cyclic pain + dyspareunia + infertility = endometriosis. Laparoscopy diagnostic.',
+dd:{mechanism:{title:'Endometriosis',content:'<h4>Classic Triad</h4><ul><li>Dysmenorrhea</li><li>Dyspareunia</li><li>Infertility</li></ul><h4>Treatment</h4><ul><li>NSAIDs</li><li>Continuous OCPs</li><li>GnRH agonists</li><li>Laparoscopic excision</li></ul>',bw:['3 Ds: dysmenorrhea, dyspareunia, dyschezia','Laparoscopy gold standard','OCPs suppress']}}},
+14:{type:'PCOS',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A patient has irregular periods, hirsutism, and polycystic ovaries on ultrasound. What is the diagnosis?',
+opts:[['a','Premature ovarian insufficiency'],['b','Polycystic ovary syndrome'],['c','Hypothyroidism'],['d','Cushings syndrome']],
+ans:'b',
+exp:'<strong>PCOS:</strong> Rotterdam criteria - 2 of 3: oligo/anovulation, hyperandrogenism (clinical or lab), polycystic ovaries. Exclude other causes.',
+kp:'Rotterdam: 2 of 3 criteria. Exclude thyroid, prolactin, CAH. Metformin if insulin resistant.',
+dd:{mechanism:{title:'PCOS Criteria',content:'<h4>Rotterdam (2 of 3)</h4><ul><li>Oligo/anovulation</li><li>Hyperandrogenism</li><li>Polycystic ovaries on US</li></ul><h4>Treatment</h4><ul><li>OCPs for cycle regulation</li><li>Metformin if IR</li><li>Spironolactone for hirsutism</li></ul>',bw:['2 of 3 Rotterdam','Exclude other causes','OCPs first-line']}}},
+15:{type:'Contraception',difficulty:'medium',domains:['management'],tags:['Step2','GYN'],stem:'Which contraceptive method has the highest typical-use effectiveness?',
+opts:[['a','Combined oral contraceptive pills'],['b','Male condoms'],['c','Copper or hormonal IUD'],['d','Depot medroxyprogesterone injection']],
+ans:'c',
+exp:'<strong>Contraceptive effectiveness:</strong> LARCs (IUDs, implant) most effective - not user dependent. IUDs >99% effective. Pills ~91% typical use.',
+kp:'IUDs and implants most effective. Not user-dependent. Pills 91% typical use.',
+dd:{mechanism:{title:'Contraceptive Failure Rates',content:'<table><tr><th>Method</th><th>Typical Use</th></tr><tr><td>IUD/Implant</td><td><1%</td></tr><tr><td>DMPA</td><td>6%</td></tr><tr><td>Pills/patch/ring</td><td>9%</td></tr><tr><td>Condoms</td><td>18%</td></tr></table>',bw:['LARCs most effective','IUDs <1% failure','User-independence key']}}},
+16:{type:'Preeclampsia Dx',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'A patient at 34 weeks has BP 152/98 on two occasions and proteinuria. What is the diagnosis?',
+opts:[['a','Gestational hypertension'],['b','Preeclampsia without severe features'],['c','Chronic hypertension'],['d','HELLP syndrome']],
+ans:'b',
+exp:'<strong>Preeclampsia:</strong> HTN (≥140/90) after 20 weeks + proteinuria (or other end-organ dysfunction). Without severe features if BP <160/110, no symptoms.',
+kp:'Preeclampsia: HTN after 20 weeks + proteinuria. Severe if BP ≥160/110 or symptoms.',
+dd:{mechanism:{title:'Hypertensive Disorders',content:'<table><tr><th>Diagnosis</th><th>Criteria</th></tr><tr><td>Gestational HTN</td><td>HTN alone, no proteinuria</td></tr><tr><td>Preeclampsia</td><td>HTN + proteinuria</td></tr><tr><td>Severe preeclampsia</td><td>BP ≥160/110 or symptoms</td></tr></table>',bw:['HTN + proteinuria','After 20 weeks','Severe if BP ≥160/110']}}},
+17:{type:'Preeclampsia Rx',difficulty:'hard',domains:['management'],tags:['Step2','OB'],stem:'A patient has preeclampsia with severe features at 34 weeks. What medication prevents seizures?',
+opts:[['a','Hydralazine'],['b','Magnesium sulfate'],['c','Labetalol'],['d','Nifedipine']],
+ans:'b',
+exp:'<strong>Eclampsia prophylaxis:</strong> Magnesium sulfate prevents and treats seizures in preeclampsia/eclampsia. Continue 24-48h postpartum. Monitor for toxicity.',
+kp:'Magnesium prevents seizures. Monitor reflexes, RR, UOP. Calcium gluconate is antidote.',
+dd:{mechanism:{title:'Severe Preeclampsia Rx',content:'<h4>Medications</h4><ul><li>Magnesium: seizure prophylaxis</li><li>Labetalol/hydralazine: BP control</li><li>Betamethasone: fetal lungs if <34 wks</li></ul><h4>Definitive</h4><ul><li>Delivery</li></ul>',bw:['Magnesium for seizures','Labetalol for BP','Delivery is cure']}}},
+18:{type:'Ectopic',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'A patient with positive pregnancy test has pelvic pain and no intrauterine pregnancy on ultrasound. β-hCG is 2500 mIU/mL. What is the concern?',
+opts:[['a','Normal early intrauterine pregnancy'],['b','Ectopic pregnancy until proven otherwise'],['c','Complete miscarriage'],['d','Molar pregnancy']],
+ans:'b',
+exp:'<strong>Ectopic pregnancy:</strong> β-hCG >2000-3000 should see IUP on transvaginal US. No IUP = ectopic until proven otherwise. Risk of rupture.',
+kp:'No IUP with β-hCG >2000 = suspect ectopic. Discriminatory zone. Risk of rupture.',
+dd:{mechanism:{title:'Ectopic Diagnosis',content:'<h4>Discriminatory Zone</h4><ul><li>β-hCG 1500-2500 mIU/mL</li><li>Should see IUP on TVUS</li></ul><h4>Risk Factors</h4><ul><li>Prior ectopic</li><li>PID history</li><li>Tubal surgery</li></ul>',bw:['Discriminatory zone','No IUP = ectopic','Risk of rupture']}}},
+19:{type:'Placental Abruption',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'A patient at 35 weeks presents with painful vaginal bleeding, uterine tenderness, and fetal distress. What is the likely diagnosis?',
+opts:[['a','Placenta previa'],['b','Placental abruption'],['c','Vasa previa'],['d','Bloody show of labor']],
+ans:'b',
+exp:'<strong>Placental abruption:</strong> Painful bleeding, rigid/tender uterus, fetal distress. Risk factors: HTN, trauma, cocaine. May need emergent delivery.',
+kp:'Abruption: painful bleeding, tender uterus. Previa: painless bleeding. Abruption = emergency.',
+dd:{mechanism:{title:'Abruption vs Previa',content:'<table><tr><th>Feature</th><th>Abruption</th><th>Previa</th></tr><tr><td>Pain</td><td>Painful</td><td>Painless</td></tr><tr><td>Uterus</td><td>Tender, rigid</td><td>Soft</td></tr><tr><td>Fetal status</td><td>Often distressed</td><td>Usually stable</td></tr></table>',bw:['Painful = abruption','Painless = previa','Abruption = emergency']}}},
+20:{type:'GBS Prophylaxis',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'A GBS-positive patient presents in labor. What antibiotic is given for prophylaxis?',
+opts:[['a','Azithromycin'],['b','Penicillin G intravenously'],['c','Metronidazole'],['d','Ceftriaxone']],
+ans:'b',
+exp:'<strong>GBS prophylaxis:</strong> IV penicillin G (or ampicillin) in labor if GBS positive, unknown status with risk factors, or prior GBS baby. Give ≥4 hours before delivery.',
+kp:'IV penicillin for GBS prophylaxis. Give ≥4 hours before delivery. Cefazolin if mild allergy.',
+dd:{mechanism:{title:'GBS Prophylaxis',content:'<h4>Indications</h4><ul><li>GBS positive culture</li><li>GBS bacteriuria this pregnancy</li><li>Prior infant with GBS disease</li></ul><h4>Antibiotics</h4><ul><li>Penicillin G (first-line)</li><li>Cefazolin (penicillin allergy)</li><li>Vancomycin (severe allergy)</li></ul>',bw:['Penicillin G first-line','≥4 hours before delivery','Screen at 36 weeks']}}}
+};
+var answers={1:'c',2:'d',3:'d',4:'a',5:'c',6:'a',7:'d',8:'c',9:'a',10:'c',11:'b',12:'b',13:'a',14:'b',15:'d',16:'b',17:'b',18:'a',19:'d',20:'c'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed var(--border)"><div style="font-size:10px;font-weight:600;color: var(--text-secondary);margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#be185d;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "MechanismDx", platformRoot: "../" }); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="OB/GYN"
+         data-key-points="🎨 Choose Theme, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

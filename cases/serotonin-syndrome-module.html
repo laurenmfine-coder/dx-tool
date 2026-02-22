@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serotonin Syndrome: Pathophysiology | MechanismDx</title>
+    <style>
+        :root { --primary: #0891b2; --primary-dark: #0e7490; --primary-bg: #ecfeff; --bg: #f8fafc; --card: #fff; --border: #e2e8f0; --text: #1e293b; --text-secondary: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 32px 24px; color: white; }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .header-subtitle { font-size: 15px; color: rgba(255,255,255,0.85); }
+        .content { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+        .objectives { background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%); border: 1px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .objectives h2 { color: #047857; font-size: 16px; margin-bottom: 12px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 6px; font-size: 0.95rem; }
+        .section { background: var(--card); border-radius: 16px; padding: 28px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: var(--primary-dark); font-size: 1.25rem; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-bg); }
+        .section h3 { color: var(--text); font-size: 1rem; margin: 16px 0 8px; }
+        .section p { margin-bottom: 12px; }
+        .pathway-box { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .pathway-box h4 { color: #92400e; font-size: 0.9rem; margin-bottom: 8px; }
+        .pathway-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .pathway-step { background: white; border: 1px solid #fbbf24; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; }
+        .pathway-arrow { color: #f59e0b; font-weight: bold; }
+        .clinical-box { background: #f0fdf4; border: 1px solid #22c55e; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .clinical-box h4 { color: #166534; font-size: 0.9rem; margin-bottom: 8px; }
+        .key-point { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: #1e40af; }
+        .mcq-container { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mcq-question { font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-option { padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .mcq-option:hover { border-color: var(--primary); background: var(--primary-bg); }
+        .mcq-option.correct { border-color: #22c55e; background: #f0fdf4; }
+        .mcq-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .mcq-feedback { margin-top: 12px; padding: 12px; border-radius: 8px; display: none; }
+        .mcq-feedback.show { display: block; }
+        .mcq-feedback.correct { background: #f0fdf4; color: #166534; }
+        .mcq-feedback.incorrect { background: #fef2f2; color: #991b1b; }
+        .nav-links { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+        .nav-link { padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .nav-link.back { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+        .nav-link.adventure { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="../index.html">DxSuite</a> → <a href="index.html">MechanismDx</a> → Serotonin Syndrome</div>
+            <h1>⚙️ Serotonin Syndrome</h1>
+            <div class="header-subtitle">Pathophysiology & Clinical Correlations | Toxicology</div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul><li>Hunter criteria: serotonergic drug + clonus OR tremor + hyperreflexia</li><li>Clonus = serotonin syndrome; rigidity = NMS</li><li>Treatment: stop offending agents, cyproheptadine, supportive care</li><li>Usually resolves in 24-72 hours with drug cessation</li></ul>
+        </div>
+        <div class="section">
+            <h2>🔬 Core Pathophysiology</h2>
+<h3>Serotonergic Excess</h3><p>Overstimulation of central and peripheral serotonin receptors, primarily 5-HT2A.</p>
+            <div class="pathway-box"><h4>Pathway</h4><div class="pathway-steps"><span class="pathway-step">Serotonergic drug(s) exposure</span><span class="pathway-arrow">→</span><span class="pathway-step">Excess 5-HT at synapses</span><span class="pathway-arrow">→</span><span class="pathway-step">5-HT2A receptor overstimulation</span><span class="pathway-arrow">→</span><span class="pathway-step">Neuromuscular excitation</span><span class="pathway-arrow">→</span><span class="pathway-step">Autonomic instability + hyperthermia</span></div></div>
+        </div>
+        <div class="section">
+            <h2>🏥 Clinical Correlations</h2>
+<div class="clinical-box"><h4>Clonus (especially lower extremity)</h4><p><strong>Mechanism:</strong> 5-HT2A activation in spinal cord</p><p><strong>Clinical Significance:</strong> Key distinguishing feature from NMS</p></div>
+<div class="clinical-box"><h4>Mydriasis</h4><p><strong>Mechanism:</strong> Serotonergic stimulation of iris dilator</p><p><strong>Clinical Significance:</strong> Consistent finding in serotonin syndrome</p></div>
+<div class="clinical-box"><h4>Hyperthermia</h4><p><strong>Mechanism:</strong> Hypothalamic dysregulation + muscle hyperactivity</p><p><strong>Clinical Significance:</strong> Can be severe (>41°C); requires aggressive cooling</p></div>
+        </div>
+        <div class="section">
+            <h2>📝 Knowledge Check</h2>
+<div class="mcq-container" id="mcq0"><div class="mcq-question">1. Which finding best distinguishes serotonin syndrome from NMS?</div><div class="mcq-options"><div class="mcq-option" onclick="checkMCQ(0,0,false)">A. Fever</div><div class="mcq-option" onclick="checkMCQ(0,1,false)">B. Altered mental status</div><div class="mcq-option" onclick="checkMCQ(0,2,true)">C. Hyperreflexia and clonus</div><div class="mcq-option" onclick="checkMCQ(0,3,false)">D. Muscle rigidity</div></div><div class="mcq-feedback" id="feedback0"></div></div>
+        </div>
+        <div class="section">
+            <h2>🔑 Key Takeaways</h2>
+<div class="key-point"><strong>✓</strong> Hunter criteria: serotonergic drug + clonus OR tremor + hyperreflexia</div>
+<div class="key-point"><strong>✓</strong> Clonus = serotonin syndrome; rigidity = NMS</div>
+<div class="key-point"><strong>✓</strong> Treatment: stop offending agents, cyproheptadine, supportive care</div>
+<div class="key-point"><strong>✓</strong> Usually resolves in 24-72 hours with drug cessation</div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link back">← Back to MechanismDx</a>
+            <a href="../ReasonDx/adventure-hub.html" class="nav-link adventure">Practice Cases →</a>
+        </div>
+    </div>
+    <script>
+        const mcqFeedback = [{"correct":"Serotonin syndrome causes HYPERreflexia and clonus (neuromuscular excitation). NMS causes HYPOreflexia and lead-pipe rigidity (dopamine blockade). This is the key differentiator.","incorrect":"Both cause fever, AMS, and rigidity. The reflex pattern distinguishes them."}];
+        function checkMCQ(qIdx, optIdx, isCorrect) {
+            const container = document.getElementById('mcq' + qIdx);
+            const options = container.querySelectorAll('.mcq-option');
+            const feedback = document.getElementById('feedback' + qIdx);
+            options.forEach((opt, i) => { opt.style.pointerEvents = 'none'; if (i === optIdx) opt.classList.add(isCorrect ? 'correct' : 'incorrect'); });
+            feedback.className = 'mcq-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct!' : '✗ Not quite') + '</strong><br>' + (isCorrect ? mcqFeedback[qIdx].correct : mcqFeedback[qIdx].incorrect);
+        }
+    </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Serotonin Syndrome: Pathophysiology"
+         data-key-points="🎯 Learning Objectives, 🔬 Core Pathophysiology, 🏥 Clinical Correlations, 📝 Knowledge Check, 🔑 Key Takeaways, Serotonergic Excess, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div class="card"><div class="card-header"><div class="card-phase">BOARD PREP</div><div class="card-title">🎯 Practice Questions</div></div><div class="card-body">
+<div class="card" id="mcq0"><div class="card-header"><div class="card-phase">QUESTION 1 OF 8</div><div class="card-title">Which triad of findings is characteristic of serotonin syndrome?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="This describes neuroleptic malignant syndrome (NMS), not serotonin syndrome. NMS features lead-pipe rigidity." onclick="pickQ(this,0)"><div class="choice-icon">A</div><div><div class="choice-title">Fever, rigidity, elevated CK</div></div></div><div class="choice" data-correct="true" data-fb="Correct! The serotonin syndrome triad: (1) altered mental status (agitation, confusion), (2) autonomic instability (hyperthermia, tachycardia, diaphoresis), (3) neuromuscular excitability (clonus, hyperreflexia, tremor)." onclick="pickQ(this,0)"><div class="choice-icon">B</div><div><div class="choice-title">Altered mental status, autonomic instability, neuromuscular excitability</div></div></div><div class="choice" data-fb="These are signs of cholinergic or opioid toxicity, not serotonin syndrome." onclick="pickQ(this,0)"><div class="choice-icon">C</div><div><div class="choice-title">Hypothermia, bradycardia, miosis</div></div></div><div class="choice" data-fb="While these can complicate severe serotonin syndrome, they are not the diagnostic triad." onclick="pickQ(this,0)"><div class="choice-icon">D</div><div><div class="choice-title">Seizures, rhabdomyolysis, renal failure</div></div></div></div><div id="mcqFb0" class="hidden" style="margin-top:12px"><div id="mcqFbText0" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq1"><div class="card-header"><div class="card-phase">QUESTION 2 OF 8</div><div class="card-title">Which neuromuscular finding is most specific for serotonin syndrome and helps distinguish it from NMS?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Lead-pipe rigidity is characteristic of NMS, not serotonin syndrome." onclick="pickQ(this,1)"><div class="choice-icon">A</div><div><div class="choice-title">Lead-pipe rigidity</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Clonus — particularly inducible ankle clonus and ocular clonus — is the hallmark of serotonin syndrome. NMS features rigidity; serotonin syndrome features hyperreflexia and clonus." onclick="pickQ(this,1)"><div class="choice-icon">B</div><div><div class="choice-title">Clonus (especially inducible at ankles)</div></div></div><div class="choice" data-fb="Cogwheel rigidity is associated with parkinsonism and NMS, not serotonin syndrome." onclick="pickQ(this,1)"><div class="choice-icon">C</div><div><div class="choice-title">Cogwheel rigidity</div></div></div><div class="choice" data-fb="Flaccid paralysis is not a feature of serotonin syndrome, which causes neuromuscular EXCITATION." onclick="pickQ(this,1)"><div class="choice-icon">D</div><div><div class="choice-title">Flaccid paralysis</div></div></div></div><div id="mcqFb1" class="hidden" style="margin-top:12px"><div id="mcqFbText1" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq2"><div class="card-header"><div class="card-phase">QUESTION 3 OF 8</div><div class="card-title">Which drug combination most commonly precipitates serotonin syndrome?</div></div><div class="card-body"><div class="choices"><div class="choice" data-correct="true" data-fb="Correct! SSRI + MAOI is the highest-risk combination for serotonin syndrome. MAOIs prevent serotonin breakdown while SSRIs block reuptake, causing dangerous serotonin accumulation. A 2-week washout (5 weeks for fluoxetine) is required between these drug classes." onclick="pickQ(this,2)"><div class="choice-icon">A</div><div><div class="choice-title">SSRI + MAOI</div></div></div><div class="choice" data-fb="This combination does not affect serotonin pathways." onclick="pickQ(this,2)"><div class="choice-icon">B</div><div><div class="choice-title">Acetaminophen + ibuprofen</div></div></div><div class="choice" data-fb="This combination affects cardiac conduction, not serotonin." onclick="pickQ(this,2)"><div class="choice-icon">C</div><div><div class="choice-title">Beta-blocker + calcium channel blocker</div></div></div><div class="choice" data-fb="This causes respiratory depression, not serotonin syndrome." onclick="pickQ(this,2)"><div class="choice-icon">D</div><div><div class="choice-title">Benzodiazepine + opioid</div></div></div></div><div id="mcqFb2" class="hidden" style="margin-top:12px"><div id="mcqFbText2" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq3"><div class="card-header"><div class="card-phase">QUESTION 4 OF 8</div><div class="card-title">What is the first-line treatment for serotonin syndrome?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Dantrolene is the specific treatment for NMS (and malignant hyperthermia), not serotonin syndrome." onclick="pickQ(this,3)"><div class="choice-icon">A</div><div><div class="choice-title">Dantrolene</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Management: (1) discontinue ALL serotonergic agents, (2) benzodiazepines for agitation and autonomic instability, (3) supportive care. Cyproheptadine (serotonin antagonist) is used for moderate-severe cases." onclick="pickQ(this,3)"><div class="choice-icon">B</div><div><div class="choice-title">Discontinue serotonergic agents + benzodiazepines for agitation</div></div></div><div class="choice" data-fb="Bromocriptine (dopamine agonist) is used for NMS, not serotonin syndrome." onclick="pickQ(this,3)"><div class="choice-icon">C</div><div><div class="choice-title">Bromocriptine</div></div></div><div class="choice" data-fb="Charcoal may be considered if very early after ingestion, but is not the first-line treatment." onclick="pickQ(this,3)"><div class="choice-icon">D</div><div><div class="choice-title">Activated charcoal</div></div></div></div><div id="mcqFb3" class="hidden" style="margin-top:12px"><div id="mcqFbText3" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq4"><div class="card-header"><div class="card-phase">QUESTION 5 OF 8</div><div class="card-title">Which serotonin antagonist is specifically used as an antidote in moderate-to-severe serotonin syndrome?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Ondansetron is a 5-HT3 antagonist used for nausea. It does not treat serotonin syndrome and some sources suggest it may worsen it." onclick="pickQ(this,4)"><div class="choice-icon">A</div><div><div class="choice-title">Ondansetron</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Cyproheptadine is a 5-HT2A antagonist used specifically for serotonin syndrome. It is given orally or via NGT (no IV formulation). Dose: 12mg initially, then 2mg q2h as needed." onclick="pickQ(this,4)"><div class="choice-icon">B</div><div><div class="choice-title">Cyproheptadine</div></div></div><div class="choice" data-fb="Sumatriptan is a 5-HT1 agonist for migraines — it could WORSEN serotonin syndrome." onclick="pickQ(this,4)"><div class="choice-icon">C</div><div><div class="choice-title">Sumatriptan</div></div></div><div class="choice" data-fb="Metoclopramide has serotonergic properties and could worsen serotonin syndrome." onclick="pickQ(this,4)"><div class="choice-icon">D</div><div><div class="choice-title">Metoclopramide</div></div></div></div><div id="mcqFb4" class="hidden" style="margin-top:12px"><div id="mcqFbText4" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq5"><div class="card-header"><div class="card-phase">QUESTION 6 OF 8</div><div class="card-title">How does the onset of serotonin syndrome differ from NMS?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="NMS develops over days to weeks. Serotonin syndrome has a much more rapid onset." onclick="pickQ(this,5)"><div class="choice-icon">A</div><div><div class="choice-title">Serotonin syndrome develops over days to weeks</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Serotonin syndrome develops rapidly, usually within 24 hours (often within 6 hours) of starting, increasing, or combining serotonergic agents. NMS develops over days to weeks after starting or increasing dopamine antagonists." onclick="pickQ(this,5)"><div class="choice-icon">B</div><div><div class="choice-title">Serotonin syndrome typically develops within 24 hours of drug change</div></div></div><div class="choice" data-fb="The timeline is a key differentiator. Serotonin syndrome is rapid-onset; NMS is gradual." onclick="pickQ(this,5)"><div class="choice-icon">C</div><div><div class="choice-title">Both have identical timelines</div></div></div><div class="choice" data-fb="Serotonin syndrome can occur at therapeutic doses, especially with drug combinations." onclick="pickQ(this,5)"><div class="choice-icon">D</div><div><div class="choice-title">Serotonin syndrome only occurs with overdose</div></div></div></div><div id="mcqFb5" class="hidden" style="margin-top:12px"><div id="mcqFbText5" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq6"><div class="card-header"><div class="card-phase">QUESTION 7 OF 8</div><div class="card-title">Which of the following is a serotonergic agent that is commonly overlooked as a precipitant?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Amoxicillin has no serotonergic properties." onclick="pickQ(this,6)"><div class="choice-icon">A</div><div><div class="choice-title">Amoxicillin</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Linezolid is a weak MAOI that can precipitate serotonin syndrome when combined with SSRIs/SNRIs. Other commonly overlooked serotonergic agents include tramadol, fentanyl, dextromethorphan, and St. John&#39;s Wort." onclick="pickQ(this,6)"><div class="choice-icon">B</div><div><div class="choice-title">Linezolid</div></div></div><div class="choice" data-fb="Beta-blockers do not affect serotonin pathways." onclick="pickQ(this,6)"><div class="choice-icon">C</div><div><div class="choice-title">Metoprolol</div></div></div><div class="choice" data-fb="ACE inhibitors have no serotonergic properties." onclick="pickQ(this,6)"><div class="choice-icon">D</div><div><div class="choice-title">Lisinopril</div></div></div></div><div id="mcqFb6" class="hidden" style="margin-top:12px"><div id="mcqFbText6" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+<div class="card" id="mcq7"><div class="card-header"><div class="card-phase">QUESTION 8 OF 8</div><div class="card-title">A patient on an SSRI requires urgent surgery and needs pain management. Which opioid has the LOWEST risk of serotonin syndrome?</div></div><div class="card-body"><div class="choices"><div class="choice" data-fb="Tramadol is a strong serotonin reuptake inhibitor and has HIGH risk for serotonin syndrome." onclick="pickQ(this,7)"><div class="choice-icon">A</div><div><div class="choice-title">Tramadol</div></div></div><div class="choice" data-fb="Fentanyl has weak serotonergic properties and has been associated with serotonin syndrome, especially in combination." onclick="pickQ(this,7)"><div class="choice-icon">B</div><div><div class="choice-title">Fentanyl</div></div></div><div class="choice" data-fb="Meperidine is one of the HIGHEST-risk opioids for serotonin syndrome due to potent serotonin reuptake inhibition. It is contraindicated with MAOIs." onclick="pickQ(this,7)"><div class="choice-icon">C</div><div><div class="choice-title">Meperidine</div></div></div><div class="choice" data-correct="true" data-fb="Correct! Morphine has minimal serotonergic activity and is generally considered the safest opioid option in patients on serotonergic medications. Hydromorphone is another low-risk option." onclick="pickQ(this,7)"><div class="choice-icon">D</div><div><div class="choice-title">Morphine</div></div></div></div><div id="mcqFb7" class="hidden" style="margin-top:12px"><div id="mcqFbText7" style="padding:12px;border-radius:8px;font-size:.9rem"></div></div></div></div>
+</div></div>
+
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=serotonin-syndrome-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/serotonin-syndrome-adventure.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script>let score=0;function pickQ(el,qi){const all=el.parentElement.querySelectorAll('.choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){score+=12;document.getElementById('score').textContent=score}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqFb'+qi).classList.remove('hidden')}</script>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

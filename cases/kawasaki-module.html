@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawasaki Disease: Pathophysiology | MechanismDx</title>
+    <style>
+        :root { --primary: #0891b2; --primary-dark: #0e7490; --primary-bg: #ecfeff; --bg: #f8fafc; --card: #fff; --border: #e2e8f0; --text: #1e293b; --text-secondary: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 32px 24px; color: white; }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .header-subtitle { font-size: 15px; color: rgba(255,255,255,0.85); }
+        .content { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+        .objectives { background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%); border: 1px solid var(--primary); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .objectives h2 { color: #047857; font-size: 16px; margin-bottom: 12px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 6px; font-size: 0.95rem; }
+        .section { background: var(--card); border-radius: 16px; padding: 28px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: var(--primary-dark); font-size: 1.25rem; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-bg); }
+        .section h3 { color: var(--text); font-size: 1rem; margin: 16px 0 8px; }
+        .section p { margin-bottom: 12px; }
+        .pathway-box { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .pathway-box h4 { color: #92400e; font-size: 0.9rem; margin-bottom: 8px; }
+        .pathway-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .pathway-step { background: white; border: 1px solid #fbbf24; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; }
+        .pathway-arrow { color: #f59e0b; font-weight: bold; }
+        .clinical-box { background: #f0fdf4; border: 1px solid #22c55e; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .clinical-box h4 { color: #166534; font-size: 0.9rem; margin-bottom: 8px; }
+        .key-point { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+        .key-point strong { color: #1e40af; }
+        .mcq-container { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mcq-question { font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-option { padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .mcq-option:hover { border-color: var(--primary); background: var(--primary-bg); }
+        .mcq-option.correct { border-color: #22c55e; background: #f0fdf4; }
+        .mcq-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .mcq-feedback { margin-top: 12px; padding: 12px; border-radius: 8px; display: none; }
+        .mcq-feedback.show { display: block; }
+        .mcq-feedback.correct { background: #f0fdf4; color: #166534; }
+        .mcq-feedback.incorrect { background: #fef2f2; color: #991b1b; }
+        .nav-links { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+        .nav-link { padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .nav-link.back { background: var(--card); border: 1px solid var(--border); color: var(--text); }
+        .nav-link.adventure { background: var(--primary); color: white; }
+        .nav-link:hover { opacity: 0.9; }
+        @media (max-width: 640px) { .content { padding: 20px 16px; } .section { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="../index.html">DxSuite</a> → <a href="index.html">MechanismDx</a> → Kawasaki Disease</div>
+            <h1>⚙️ Kawasaki Disease</h1>
+            <div class="header-subtitle">Pathophysiology & Clinical Correlations | Pediatrics</div>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Diagnosis: fever ≥5 days + 4 of 5 criteria (or 3 + coronary changes)</li>
+                <li>IVIG + aspirin within 10 days prevents coronary aneurysms</li>
+                <li>Most common cause of acquired heart disease in children (developed countries)</li>
+                <li>Echo at diagnosis, 2 weeks, and 6-8 weeks to monitor coronaries</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔬 Core Pathophysiology</h2>
+
+            <h3>Vasculitis Cascade</h3>
+            <p>Systemic inflammation targets medium-sized arteries, especially coronary arteries.</p>
+            <div class="pathway-box">
+                <h4>Pathway</h4>
+                <div class="pathway-steps">
+                    <span class="pathway-step">Unknown trigger → immune activation</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Cytokine storm (IL-1, IL-6, TNF)</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Endothelial inflammation</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Coronary arteritis</span><span class="pathway-arrow">→</span>
+                    <span class="pathway-step">Aneurysm formation (if untreated)</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>🏥 Clinical Correlations</h2>
+
+            <div class="clinical-box">
+                <h4>Persistent fever ≥5 days</h4>
+                <p><strong>Mechanism:</strong> Systemic inflammatory response</p>
+                <p><strong>Clinical Significance:</strong> Required diagnostic criterion</p>
+            </div>
+
+            <div class="clinical-box">
+                <h4>Conjunctival injection (limbic sparing)</h4>
+                <p><strong>Mechanism:</strong> Vasculitis of conjunctival vessels</p>
+                <p><strong>Clinical Significance:</strong> Non-purulent; spares area around iris</p>
+            </div>
+
+            <div class="clinical-box">
+                <h4>Coronary artery aneurysms</h4>
+                <p><strong>Mechanism:</strong> Destruction of internal elastic lamina</p>
+                <p><strong>Clinical Significance:</strong> Most serious complication; prevented by early IVIG</p>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>📝 Knowledge Check</h2>
+
+            <div class="mcq-container" id="mcq0">
+                <div class="mcq-question">1. Why must IVIG be given within 10 days of fever onset in Kawasaki disease?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="checkMCQ(0, 0, false)">A. Viral replication peaks at day 10</div>
+                    <div class="mcq-option" onclick="checkMCQ(0, 1, true)">B. Coronary aneurysm risk increases dramatically after day 10</div>
+                    <div class="mcq-option" onclick="checkMCQ(0, 2, false)">C. IVIG is ineffective after immune activation completes</div>
+                    <div class="mcq-option" onclick="checkMCQ(0, 3, false)">D. Fever becomes refractory after day 10</div>
+                </div>
+                <div class="mcq-feedback" id="feedback0"></div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>🔑 Key Takeaways</h2>
+            <div class="key-point"><strong>✓</strong> Diagnosis: fever ≥5 days + 4 of 5 criteria (or 3 + coronary changes)</div>
+            <div class="key-point"><strong>✓</strong> IVIG + aspirin within 10 days prevents coronary aneurysms</div>
+            <div class="key-point"><strong>✓</strong> Most common cause of acquired heart disease in children (developed countries)</div>
+            <div class="key-point"><strong>✓</strong> Echo at diagnosis, 2 weeks, and 6-8 weeks to monitor coronaries</div>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html" class="nav-link back">← Back to MechanismDx</a>
+            <a href="../ReasonDx/adventure-hub.html" class="nav-link adventure">Practice Cases →</a>
+        </div>
+    </div>
+
+    <script>
+        const mcqFeedback = [{"correct":"Coronary artery aneurysms develop in 15-25% of untreated patients, typically after day 10. Early IVIG reduces this risk to <5%. The anti-inflammatory effect prevents progression to aneurysm formation.","incorrect":"The key complication of Kawasaki is coronary aneurysm. IVIG timing is critical for prevention."}];
+        
+        function checkMCQ(qIdx, optIdx, isCorrect) {
+            const container = document.getElementById('mcq' + qIdx);
+            const options = container.querySelectorAll('.mcq-option');
+            const feedback = document.getElementById('feedback' + qIdx);
+            
+            options.forEach((opt, i) => {
+                opt.style.pointerEvents = 'none';
+                if (i === optIdx) {
+                    opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            });
+            
+            feedback.className = 'mcq-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = '<strong>' + (isCorrect ? '✓ Correct!' : '✗ Not quite') + '</strong><br>' + 
+                (isCorrect ? mcqFeedback[qIdx].correct : mcqFeedback[qIdx].incorrect);
+        }
+    </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Kawasaki Disease: Pathophysiology"
+         data-key-points="🎯 Learning Objectives, 🔬 Core Pathophysiology, 🏥 Clinical Correlations, 📝 Knowledge Check, 🔑 Key Takeaways, Vasculitis Cascade, pathophysiology, clinical presentation, diagnosis, management, complications"
+         data-objectives="Understand mechanism, recognize clinical features, apply to patient care"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<style id="mcq-inject-css">
+.mcq-section{max-width:900px;margin:32px auto;padding:0 24px}
+.mcq-card{background:#1E293B;border:1px solid #334155;border-radius:16px;margin-bottom:20px}
+.mcq-card-header{padding:20px 24px;border-bottom:1px solid #334155}
+.mcq-phase{font-size:.75rem;color:#8B5CF6;text-transform:uppercase;letter-spacing:1px}
+.mcq-title{font-size:1.1rem;font-weight:700;margin-top:4px;color:#F1F5F9;line-height:1.5}
+.mcq-card-body{padding:24px}
+.mcq-choices{display:grid;gap:12px}
+.mcq-choice{background:#1E293B;border:2px solid #334155;padding:14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;color:#F1F5F9}
+.mcq-choice:hover{border-color:#8B5CF6;transform:translateX(4px)}
+.mcq-choice.correct{border-color:#10B981;background:rgba(16,185,129,.15);pointer-events:none}
+.mcq-choice.wrong{border-color:#DC2626;background:rgba(220,38,38,.15);pointer-events:none}
+.mcq-choice-icon{font-size:1.2rem;font-weight:700;min-width:28px;text-align:center}
+.mcq-choice-title{font-weight:600;font-size:.95rem}
+.mcq-hidden{display:none!important}
+.mcq-score-bar{background:linear-gradient(135deg,#4C1D95,#8B5CF6);padding:12px 24px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 20px;color:#fff}
+.mcq-score-label{font-size:.9rem;font-weight:600}
+.mcq-score-val{font-size:1.3rem;font-weight:700;font-family:monospace}
+</style>
+<div class="mcq-section">
+<div class="mcq-score-bar"><span class="mcq-score-label">📝 Board-Style MCQs</span><span>XP: <span id="mcqScoreVal" class="mcq-score-val">0</span>/96</span></div>
+<div class="mcq-card" id="mcqI0"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 1 OF 8</div><div class="mcq-title">A 3-year-old boy has had 6 days of fever, bilateral non-exudative conjunctivitis, strawberry tongue, cervical lymphadenopathy, and a polymorphous rash. What is the MOST critical complication to prevent?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="While aseptic meningitis can occur in Kawasaki disease, it is self-limited. The major morbidity is cardiac." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Meningitis</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Coronary artery aneurysms develop in 25% of untreated Kawasaki disease — the leading cause of acquired heart disease in children in developed countries. IVIG treatment within 10 days reduces risk to ~4%." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Coronary artery aneurysms</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Renal involvement in Kawasaki is rare. The hallmark complication is coronary artery involvement (aneurysms, stenosis, thrombosis)." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Renal failure</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Hearing loss is not a recognized complication of Kawasaki disease. The vasculitis primarily targets medium-sized arteries, especially coronaries." onclick="pickMCQ(this,0)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Permanent hearing loss</div></div></div>
+</div><div id="mcqIFb0" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText0" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI1"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 2 OF 8</div><div class="mcq-title">How many of the classic diagnostic criteria must be present (in addition to ≥5 days of fever) to diagnose COMPLETE Kawasaki disease?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="2 of 5 criteria with fever may suggest INCOMPLETE Kawasaki, which requires additional laboratory and echocardiographic workup." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">2 of 5</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Complete Kawasaki: fever ≥5 days PLUS ≥4 of 5 criteria: (1) bilateral conjunctival injection, (2) oral changes, (3) extremity changes, (4) polymorphous rash, (5) cervical lymphadenopathy ≥1.5 cm." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">4 of 5</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="All 5 criteria are not required. The diagnosis is made with fever ≥5 days plus 4 of 5 criteria. Experienced clinicians may treat with fewer criteria." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">All 5 of 5</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Kawasaki disease has NO specific diagnostic test. Blood cultures are negative. The diagnosis is purely clinical based on fever duration and clinical criteria." onclick="pickMCQ(this,1)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">3 of 5 plus positive blood culture</div></div></div>
+</div><div id="mcqIFb1" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText1" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI2"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 3 OF 8</div><div class="mcq-title">What is the FIRST-LINE treatment for Kawasaki disease?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Corticosteroids are second-line (used for IVIG-resistant cases). First-line is IVIG + aspirin." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">High-dose corticosteroids</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Standard treatment: IVIG 2 g/kg single infusion over 10-12 hours + high-dose aspirin (80-100 mg/kg/day) until afebrile, then low-dose aspirin (3-5 mg/kg/day) for 6-8 weeks. Treat within day 10 of illness." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">IVIG 2 g/kg as a single infusion plus high-dose aspirin</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Kawasaki is NOT an infectious disease — antibiotics are not indicated. It is a medium-vessel vasculitis of unknown etiology." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">IV antibiotics for 14 days</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Infliximab (anti-TNF) is used for IVIG-resistant Kawasaki, not as initial therapy. First-line is always IVIG + aspirin." onclick="pickMCQ(this,2)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Infliximab as initial therapy</div></div></div>
+</div><div id="mcqIFb2" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText2" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI3"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 4 OF 8</div><div class="mcq-title">A child with Kawasaki disease receives IVIG but remains febrile 36 hours later. This is classified as:</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Most children defervesce within 24-36 hours of IVIG. Persistent fever beyond 36 hours defines IVIG resistance and warrants additional treatment." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Normal IVIG response time — observe for 5 more days</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="IVIG resistance: persistent or recrudescent fever ≥36 hours after completing IVIG infusion. Occurs in 10-20% of patients. Options: second IVIG dose, IV methylprednisolone, or infliximab." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">IVIG-resistant Kawasaki disease</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IVIG resistance is well-recognized in Kawasaki and doesn&#x27;t indicate misdiagnosis. These patients are at HIGHER risk for coronary aneurysms." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Misdiagnosis — likely bacterial infection</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IVIG reactions include headache, fever during infusion, and rarely anaphylaxis. Persistent fever after completion is IVIG resistance, not an allergic reaction." onclick="pickMCQ(this,3)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Allergic reaction to IVIG requiring discontinuation</div></div></div>
+</div><div id="mcqIFb3" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText3" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI4"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 5 OF 8</div><div class="mcq-title">Which laboratory finding is characteristically elevated in Kawasaki disease during the acute phase?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Acute phase: elevated ESR, CRP, WBC with left shift. Subacute phase (weeks 2-3): characteristic thrombocytosis (often &gt;700K). Also: elevated ALT, sterile pyuria, and hypoalbuminemia." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">ESR, CRP, and platelet count (thrombocytosis in subacute phase)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Thrombocytopenia is NOT typical of Kawasaki. In fact, thrombocytOSIS is a hallmark finding in the subacute phase. Low platelets should prompt consideration of other diagnoses." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Markedly low platelet count (thrombocytopenia)</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="ANA and anti-dsDNA are markers of lupus, not Kawasaki disease. There is no specific autoantibody for Kawasaki." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Positive ANA and anti-dsDNA</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Blood cultures are NEGATIVE in Kawasaki disease. Positive cultures would suggest a different diagnosis (bacterial sepsis, endocarditis)." onclick="pickMCQ(this,4)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Positive blood cultures</div></div></div>
+</div><div id="mcqIFb4" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText4" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI5"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 6 OF 8</div><div class="mcq-title">Why is aspirin used in Kawasaki disease despite the usual avoidance of aspirin in children (Reye syndrome risk)?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Kawasaki is ONE exception to the no-aspirin-in-children rule. High-dose aspirin provides anti-inflammatory effect; low-dose provides antiplatelet protection against coronary thrombosis. Reye syndrome risk is extremely low in this context." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">The risk of coronary aneurysms outweighs the small Reye syndrome risk</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Aspirin can theoretically still cause Reye syndrome, but the risk-benefit strongly favors treatment given the serious coronary complications of untreated Kawasaki disease." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Aspirin does not cause Reye syndrome in children with Kawasaki</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Both high-dose (acute phase) and low-dose (subacute phase) aspirin are used. The benefit of preventing coronary disease outweighs the small Reye risk." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Only low-dose aspirin is used, which has no Reye syndrome risk</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Aspirin is used in ALL ages with Kawasaki disease, including infants. Age does not determine aspirin eligibility in this condition." onclick="pickMCQ(this,5)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Aspirin is only used in children over 12 years with Kawasaki</div></div></div>
+</div><div id="mcqIFb5" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText5" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI6"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 7 OF 8</div><div class="mcq-title">A child treated for Kawasaki disease is found to have coronary artery aneurysms on echocardiography at 2 weeks. What determines long-term management?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="true" data-fb="Management is stratified by aneurysm size: small (&lt;5mm) often resolve and need low-dose aspirin; medium (5-8mm) need antiplatelet ± anticoagulation; giant (&gt;8mm) need warfarin + aspirin and have highest thrombosis risk." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">The size and persistence of the aneurysms</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="While many small aneurysms regress, giant aneurysms may persist and carry lifelong risk of stenosis and thrombosis. Long-term cardiology follow-up is essential." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">All aneurysms resolve within 1 month and need no follow-up</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Surgery (coronary artery bypass) is reserved for giant aneurysms with significant stenosis causing ischemia. Most aneurysms are managed medically." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Surgical repair is always required</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="IVIG is an acute-phase treatment for inflammation. It does not treat established coronary aneurysms. Management is antiplatelet/anticoagulation and surveillance." onclick="pickMCQ(this,6)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Repeat IVIG until aneurysms resolve</div></div></div>
+</div><div id="mcqIFb6" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText6" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+<div class="mcq-card" id="mcqI7"><div class="mcq-card-header"><div class="mcq-phase">QUESTION 8 OF 8</div><div class="mcq-title">What is INCOMPLETE Kawasaki disease?</div></div><div class="mcq-card-body"><div class="mcq-choices">
+<div class="mcq-choice" data-correct="false" data-fb="Incomplete Kawasaki still requires ≥5 days of fever (or experienced clinicians may diagnose with 4 days). It refers to having fewer clinical criteria, not shorter duration." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">A</div><div><div class="mcq-choice-title">Kawasaki with fever <5 days that resolves spontaneously</div></div></div>
+<div class="mcq-choice" data-correct="true" data-fb="Incomplete Kawasaki: fever ≥5 days + 2-3 criteria (instead of ≥4). Diagnosed with supporting labs (CRP ≥3, ESR ≥40) and/or echocardiographic findings. Particularly common in infants &lt;6 months — the group at highest coronary risk." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">B</div><div><div class="mcq-choice-title">Fever ≥5 days with 2-3 of the 5 classic criteria, supported by lab and echo findings</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="&quot;Incomplete&quot; refers to the number of diagnostic criteria met, not the arteries involved. Incomplete Kawasaki can still cause coronary aneurysms." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">C</div><div><div class="mcq-choice-title">Kawasaki that only affects peripheral arteries, not coronary arteries</div></div></div>
+<div class="mcq-choice" data-correct="false" data-fb="Incomplete refers to the clinical presentation (fewer criteria), not incomplete treatment. All suspected Kawasaki should receive IVIG + aspirin." onclick="pickMCQ(this,7)"><div class="mcq-choice-icon">D</div><div><div class="mcq-choice-title">Kawasaki that was partially treated with aspirin only</div></div></div>
+</div><div id="mcqIFb7" class="mcq-hidden" style="margin-top:16px"><div id="mcqIFbText7" style="padding:12px;border-radius:8px;color:#F1F5F9"></div></div></div></div>
+</div>
+<script id="mcq-inject-js">
+let mcqScore=0;function pickMCQ(el,qi){const all=el.parentElement.querySelectorAll('.mcq-choice');all.forEach(c=>{c.style.pointerEvents='none';c.style.opacity='.6'});el.style.opacity='1';const correct=el.dataset.correct==='true';el.classList.add(correct?'correct':'wrong');if(correct){mcqScore+=12;document.getElementById('mcqScoreVal').textContent=mcqScore}if(!correct){all.forEach(c=>{if(c.dataset.correct==='true')c.classList.add('correct')})}const fb=document.getElementById('mcqIFbText'+qi);fb.style.background=correct?'rgba(16,185,129,.15)':'rgba(220,38,38,.15)';fb.style.border='1px solid '+(correct?'rgba(16,185,129,.3)':'rgba(220,38,38,.3)');fb.innerHTML=(correct?'✅ ':'❌ ')+el.dataset.fb;document.getElementById('mcqIFb'+qi).classList.remove('mcq-hidden')}
+</script>
+<div class="card" id="crossLinkNav"><div class="card-header"><div class="card-title">🔗 Related Content</div></div><div class="card-body"><div class="cross-links"><a href="../ReasonDx/deep-dive-player.html?module=kawasaki-disease-deep-dive" class="cross-link"><div class="cross-link-title">📖 Deep Dive</div><div style="font-size:.75rem;color:var(--muted)">Comprehensive review</div></a><a href="../ReasonDx/adventure-cases/kawasaki-expanded.html" class="cross-link"><div class="cross-link-title">🎮 Clinical Adventure</div><div style="font-size:.75rem;color:var(--muted)">Interactive case simulation</div></a></div></div></div>
+<script src="../dx-progress.js"></script>
+<script src="../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
