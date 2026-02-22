@@ -9,23 +9,6 @@
   gtag('js', new Date());
   gtag('config', 'G-EKCVJ1SMN3');
 </script>
-<script>
-// Redirect non-authenticated visitors to case-preview.html
-// Signed-in users (Supabase auth token present) stay on index.html
-(function() {
-    var hasAuth = false;
-    try {
-        for (var i = 0; i < localStorage.length; i++) {
-            var k = localStorage.key(i);
-            if (k && k.indexOf('sb-') === 0 && k.indexOf('-auth-token') > -1) {
-                var val = localStorage.getItem(k);
-                if (val && val.length > 10) { hasAuth = true; break; }
-            }
-        }
-    } catch(e) {}
-    if (!hasAuth) window.location.replace('case-preview.html');
-})();
-</script>
 <meta name="theme-color" content="#1f5f8b">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
