@@ -9,8 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Gatekeeper - checks auth and tier -->
-    <script src="/rdx-gate.js"></script>
+    <!-- Gatekeeper - checks auth and tier (optional, graceful fallback) -->
+    <script>
+        window.RDXGate = window.RDXGate || {
+            getUser: () => null,
+            getUserTier: () => 'free',
+            getCaseCount: () => 0
+        };
+    </script>
+    <script src="/rdx-gate.js" onerror="console.log('rdx-gate.js not found, using defaults')"></script>
     
     <style>
         :root {
