@@ -1335,17 +1335,22 @@ async function getAIResponse(question, patient, history) {
     }));
     messages.push({ role: "user", content: question });
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://coachdx-attending.laurenmfine.workers.dev", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        type: "passthrough",
         model: "claude-sonnet-4-20250514",
         max_tokens: 1000,
         system: buildSystemPrompt(patient),
         messages
       })
     });
-    if (!response.ok) throw new Error(`API ${response.status}`);
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      console.error('ED Board API error:', response.status, errData);
+      throw new Error(`API ${response.status}`);
+    }
     const data = await response.json();
     let text = data.content.map(b => b.text || "").join("");
     // Validate: strip self-diagnosis

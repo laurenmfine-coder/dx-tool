@@ -5,7 +5,7 @@
  * Generates natural conversation grounded in clinical facts from peer-reviewed sources.
  */
 
-const API_ENDPOINT = 'https://api.anthropic.com/v1/messages';
+const API_ENDPOINT = 'https://coachdx-attending.laurenmfine.workers.dev';
 const MODEL = 'claude-sonnet-4-20250514';
 
 /**
@@ -44,14 +44,14 @@ export async function getPatientResponse(question, patient, conversationHistory 
       { role: 'user', content: question }
     ];
     
-    // Call Claude API
+    // Call Claude API via Cloudflare Worker proxy
     const response = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Note: API key should be handled server-side in production
       },
       body: JSON.stringify({
+        type: 'passthrough',
         model: MODEL,
         max_tokens: 300,
         system: systemPrompt,
@@ -60,6 +60,8 @@ export async function getPatientResponse(question, patient, conversationHistory 
     });
     
     if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      console.error('AI Patient Service error:', response.status, errData);
       throw new Error(`API error: ${response.status}`);
     }
     
