@@ -1,12 +1,11 @@
 // ReasonDx Service Worker — Cache-first for offline access
-const CACHE_NAME = 'reasondx-v2';
+const CACHE_NAME = 'reasondx-v3';
 
 // Core shell to cache on install
 const SHELL_URLS = [
   '/index.html',
-  '/modules/index.html',
-  '/modules/premed-hub.html',
-  '/modules/raddx-hub.html',
+  '/training.html',
+  '/simroomdx.html',
   '/mobile.css',
   '/manifest.json'
 ];
