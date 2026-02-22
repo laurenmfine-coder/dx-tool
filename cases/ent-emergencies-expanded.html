@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ENT Emergencies - Expanded Deep Dive Adventure</title>
+    <link href="../css/tailwind.min.css" rel="stylesheet">
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    /* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-teal-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">👂 ENT Emergencies</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-teal-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-teal-500 to-cyan-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "ENT Emergencies",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "Peritonsillar Abscess",
+            scenario: "A 22-year-old man presents with severe sore throat for 5 days, progressively worsening. He has difficulty swallowing and can barely open his mouth. His voice sounds muffled ('hot potato voice').\n\nVitals: Temp 102.8°F, HR 110, BP 125/78\n\nExam:\n• Trismus (can only open mouth ~2cm)\n• Drooling due to inability to swallow saliva\n• Left tonsil markedly enlarged, pushing uvula to the right\n• Bulging of soft palate on left side\n• Left-sided cervical lymphadenopathy\n• Mild stridor present",
+            question: "What is the diagnosis and most appropriate initial management?",
+            options: [
+                { id: "A", text: "Severe tonsillitis - IV antibiotics and steroids, observe", outcome: "Underestimates severity", feedback: "This isn't simple tonsillitis. The trismus, uvular deviation, soft palate bulging, and stridor indicate peritonsillar abscess (PTA) with possible airway compromise. She needs drainage, not just observation.", points: 2, isOptimal: false },
+                { id: "B", text: "Peritonsillar abscess - assess airway, needle aspiration or incision & drainage, IV antibiotics", outcome: "Correct diagnosis and management", feedback: "Correct! Classic PTA: trismus, 'hot potato' voice, uvular deviation, soft palate bulging. Management: (1) Assess airway (stridor = concerning), (2) Drainage (needle aspiration or I&D), (3) IV antibiotics. The stridor makes this more urgent.", points: 10, isOptimal: true },
+                { id: "C", text: "Retropharyngeal abscess - urgent CT neck and OR for drainage", outcome: "Wrong abscess location", feedback: "Retropharyngeal abscess presents with neck stiffness, limited neck extension, posterior pharyngeal swelling. This patient has lateral tonsillar/soft palate bulging and uvular deviation - classic for PTA, not retropharyngeal.", points: 4, isOptimal: false },
+                { id: "D", text: "Epiglottitis - prepare for emergent intubation", outcome: "Different presentation", feedback: "Epiglottitis has drooling and stridor but classically spares the tonsils. Patients prefer sitting upright, and direct visualization shows cherry-red epiglottis. This patient has tonsillar findings indicating PTA.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does PTA need drainage?", steps: ["Antibiotics alone can't penetrate abscess cavity well", "Abscess causes progressive swelling and pain", "Risk of airway obstruction if untreated", "Can spread to parapharyngeal or retropharyngeal space (dangerous)", "Drainage provides immediate relief and source control"] },
+            mechanism: { title: "Peritonsillar Abscess", content: "PATHOPHYSIOLOGY:\n• Usually complication of tonsillitis\n• Infection spreads beyond tonsil capsule\n• Pus collects in peritonsillar space\n• Most common deep neck infection\n\nCLASSIC PRESENTATION:\n• Severe sore throat (usually unilateral)\n• Trismus (can't open mouth - pterygoid muscle spasm)\n• 'Hot potato' or muffled voice\n• Uvular deviation AWAY from affected side\n• Soft palate bulging on affected side\n• Drooling (can't swallow)\n• Fever, cervical lymphadenopathy\n\nDIFFERENTIAL:\n• Peritonsillar cellulitis (no abscess yet)\n• Tonsillitis\n• Retropharyngeal abscess\n• Parapharyngeal abscess\n• Epiglottitis\n\nDIAGNOSIS:\n• Clinical diagnosis often sufficient\n• CT neck with contrast if unclear or deep space involvement suspected\n• Ultrasound (intraoral) can identify abscess\n\nTREATMENT:\n\nDrainage (gold standard):\n• Needle aspiration (often first-line, 90% success)\n• Incision and drainage (if aspiration fails)\n• Both done with local anesthesia\n\nAntibiotics:\n• Cover strep + anaerobes\n• Ampicillin-sulbactam IV OR\n• Clindamycin OR\n• Penicillin + metronidazole\n\nSteroids:\n• Dexamethasone may reduce symptoms and hospital stay\n\nTonsillectomy:\n• 'Quinsy tonsillectomy' (during acute episode) - controversial\n• Interval tonsillectomy if recurrent PTA" },
+            pearl: "The uvula points AWAY from the abscess (pushed by swelling). If uvula deviates left, the abscess is on the right. This distinguishes PTA from simple tonsillitis.",
+            pitfall: "Don't attempt drainage if there's concern for airway compromise - secure airway first. Stridor in PTA is a red flag that requires careful airway assessment before any procedure."
+        },
+        {
+            id: 2,
+            title: "Anterior Epistaxis",
+            scenario: "A 68-year-old man on warfarin for atrial fibrillation presents with nosebleed for 45 minutes. He's been pinching his nose but it keeps bleeding.\n\nPMH: AFib, HTN (currently 185/105)\nMedications: Warfarin, lisinopril, metoprolol\n\nExam:\n• Active bleeding from right anterior nasal cavity\n• Blood visible on anterior septum (Kiesselbach's plexus area)\n• No posterior bleeding visible\n• Stable vital signs, no signs of significant blood loss\n\nINR: 3.8 (supratherapeutic)",
+            question: "What is the appropriate management sequence?",
+            options: [
+                { id: "A", text: "Reverse warfarin with vitamin K immediately before addressing bleeding", outcome: "Wrong priority order", feedback: "For anterior epistaxis, local measures come first. Reversing anticoagulation takes time and may not be necessary if bleeding is controlled locally. Direct pressure and cautery/packing are immediate priorities.", points: 3, isOptimal: false },
+                { id: "B", text: "Direct pressure (pinch nose), topical vasoconstrictor, visualize source, chemical cautery or anterior packing if needed", outcome: "Correct stepwise approach", feedback: "Correct! (1) Direct pressure x 10-15 min with head forward, (2) Topical oxymetazoline, (3) Visualize bleeding site, (4) Silver nitrate cautery if visible vessel, (5) Anterior packing if cautery fails. Address BP and INR but local control is priority.", points: 10, isOptimal: true },
+                { id: "C", text: "Immediate anterior and posterior nasal packing", outcome: "Too aggressive initially", feedback: "Posterior packing is for posterior epistaxis or failed anterior measures. This is anterior bleeding - start with simple measures (pressure, cautery) before packing. Most anterior bleeds respond to less invasive treatments.", points: 4, isOptimal: false },
+                { id: "D", text: "Control blood pressure to 120/80 before addressing nosebleed", outcome: "Wrong priority", feedback: "While BP contributes to bleeding, controlling epistaxis takes priority. You can address BP simultaneously, but don't delay local hemostatic measures waiting for BP to normalize.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is the anterior septum common site?", steps: ["Kiesselbach's plexus: confluence of 4 arteries at anterior septum", "Highly vascularized, thin mucosa exposed to dry air and trauma", "90% of epistaxis is anterior (Kiesselbach's area)", "Posterior epistaxis (sphenopalatine artery) is more serious", "Location determines treatment approach"] },
+            mechanism: { title: "Epistaxis Management", content: "INITIAL ASSESSMENT:\n• Hemodynamic stability\n• Estimate blood loss\n• Identify site (anterior vs posterior)\n• Coagulation status (medications, liver disease)\n• Blood pressure\n\nANTERIOR EPISTAXIS (90%):\n\nStep 1 - Direct pressure:\n• Pinch soft part of nose (not bridge)\n• Head slightly forward (don't swallow blood)\n• Continuous pressure x 10-15 minutes\n• Works in majority of cases\n\nStep 2 - Topical vasoconstrictor:\n• Oxymetazoline (Afrin) spray or pledget\n• Adds vasoconstriction to pressure\n\nStep 3 - Visualize and cauterize:\n• If visible vessel, silver nitrate cautery\n• Only cauterize one side (bilateral = septal perforation risk)\n\nStep 4 - Anterior nasal packing:\n• Merocel sponge or ribbon gauze\n• Leave 2-3 days\n• Prophylactic antibiotics controversial\n\nPOSTERIOR EPISTAXIS (10%):\n• Bleeding from posterior nasal cavity\n• Often can't see source\n• Requires posterior packing (Foley balloon or commercial device)\n• Higher morbidity, may need admission\n• Consider ENT consultation, embolization, surgical ligation\n\nADDRESS CONTRIBUTING FACTORS:\n• Control blood pressure\n• Consider reversing anticoagulation if severe bleeding\n• Hold aspirin/NSAIDs temporarily\n• Humidification, saline spray, nasal ointment for prevention" },
+            pearl: "Have patient lean forward, not backward. Leaning back causes blood to flow into throat, leading to swallowing blood (nausea, aspiration risk) and underestimating blood loss.",
+            pitfall: "Don't cauterize both sides of the septum at the same session - high risk of septal perforation. If both sides are bleeding, pack instead of bilateral cautery."
+        },
+        {
+            id: 3,
+            title: "Epiglottitis",
+            scenario: "A 45-year-old man presents with rapidly progressive sore throat over 12 hours. He describes severe pain with swallowing and feels like he can't handle his secretions. He's leaning forward and drooling.\n\nPMH: Never vaccinated (religious reasons)\nVitals: Temp 103.5°F, HR 125, RR 24, SpO2 94% on RA\n\nExam:\n• Tripod position, refusing to lie down\n• Drooling, severe odynophagia\n• Muffled voice\n• Pharynx: minimal erythema, tonsils normal\n• Soft tissue lateral neck X-ray: 'thumb sign' visible",
+            question: "What is the diagnosis and what is the critical management priority?",
+            options: [
+                { id: "A", text: "Peritonsillar abscess - needle aspiration", outcome: "Wrong diagnosis", feedback: "PTA has tonsillar findings (enlarged tonsil, uvular deviation). This patient has NORMAL tonsils and pharynx with severe supraglottic symptoms. The 'thumb sign' on X-ray confirms epiglottitis.", points: 2, isOptimal: false },
+                { id: "B", text: "Epiglottitis - priority is airway protection, prepare for possible urgent intubation, IV antibiotics", outcome: "Correct diagnosis and priority", feedback: "Correct! Classic epiglottitis: rapid onset, severe odynophagia, drooling, tripod position, muffled voice, normal pharynx exam, 'thumb sign' on lateral neck film. This is an AIRWAY EMERGENCY. Have airway equipment ready, ENT/anesthesia at bedside.", points: 10, isOptimal: true },
+                { id: "C", text: "Retropharyngeal abscess - CT neck and urgent surgical drainage", outcome: "Different presentation", feedback: "Retropharyngeal abscess causes neck stiffness, limited extension, and posterior pharyngeal swelling. The 'thumb sign' indicates swollen epiglottis, not retropharyngeal abscess.", points: 3, isOptimal: false },
+                { id: "D", text: "Severe pharyngitis - throat culture and oral antibiotics", outcome: "Dangerously underestimates", feedback: "Simple pharyngitis doesn't cause tripod positioning, drooling, or thumb sign. This is epiglottitis - a true airway emergency that can deteriorate to complete obstruction rapidly.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is epiglottitis an airway emergency?", steps: ["Epiglottis swells rapidly, can obstruct laryngeal inlet", "Adult airway smaller than child's relative to swelling", "Patient can progress from stable to complete obstruction in minutes", "Once obstructed, intubation is extremely difficult", "Historically had high mortality; airway vigilance is critical"] },
+            mechanism: { title: "Adult Epiglottitis", content: "EPIDEMIOLOGY:\n• Now more common in ADULTS than children (Hib vaccine)\n• Adult cases increasing, often non-Hib organisms\n• Can be rapidly fatal if airway compromised\n\nCAUSES:\n• Haemophilus influenzae (less common now)\n• Streptococcus species\n• Staphylococcus aureus\n• Respiratory viruses\n• Thermal injury (smoking drugs)\n\nCLASSIC PRESENTATION:\n• Rapid onset (hours)\n• Severe sore throat out of proportion to exam\n• Odynophagia (pain swallowing)\n• Drooling (can't swallow secretions)\n• Muffled 'hot potato' voice\n• Tripod position (leaning forward)\n• Stridor (late, ominous)\n• Relatively normal pharyngeal exam\n\nDIAGNOSTIC IMAGING:\n• Lateral soft tissue neck X-ray:\n  - 'Thumb sign' (swollen epiglottis)\n  - 'Vallecula sign' (obliterated vallecular air)\n• CT neck if stable and diagnosis uncertain\n• Laryngoscopy (careful - can precipitate complete obstruction)\n\nMANAGEMENT:\n\nAirway first!\n• Keep patient calm, upright\n• Humidified oxygen\n• ENT and anesthesia at bedside\n• Equipment for emergent surgical airway\n• Consider prophylactic intubation if severe\n• Avoid agitating patient (can worsen obstruction)\n\nMedical:\n• IV antibiotics: Ceftriaxone or ampicillin-sulbactam + vancomycin\n• Steroids (dexamethasone) - may reduce edema\n• Racemic epinephrine for stridor\n\nAdmission:\n• ICU for moderate-severe cases\n• Close airway monitoring" },
+            pearl: "The pharynx looks relatively NORMAL in epiglottitis - the pathology is supraglottic. A patient with severe sore throat, drooling, and normal tonsils should raise red flags for epiglottitis.",
+            pitfall: "Don't lie the patient down or agitate them - this can precipitate complete airway obstruction. Keep them calm, upright, and have surgical airway equipment ready."
+        },
+        {
+            id: 4,
+            title: "Ludwig's Angina",
+            scenario: "A 55-year-old man with poorly controlled diabetes presents with rapidly progressive neck swelling and difficulty breathing that started yesterday.\n\nPMH: Type 2 DM (HbA1c 11%), recent dental pain (didn't seek treatment)\n\nVitals: Temp 103°F, HR 120, RR 28, SpO2 91% on RA, BP 145/90\n\nExam:\n• Massive bilateral submandibular swelling\n• Floor of mouth elevated, 'woody' induration\n• Tongue pushed upward and backward\n• Drooling, trismus\n• 'Bull neck' appearance\n• Decayed lower molar visible",
+            question: "What is this condition and what is the most critical immediate action?",
+            options: [
+                { id: "A", text: "Parotitis - IV antibiotics and observation", outcome: "Wrong diagnosis", feedback: "Parotitis involves the parotid gland (preauricular swelling), not the submandibular/floor of mouth. This bilateral submandibular 'woody' swelling with floor of mouth elevation is Ludwig's angina - a surgical emergency.", points: 1, isOptimal: false },
+                { id: "B", text: "Ludwig's angina - secure airway immediately (likely surgical airway), then IV antibiotics and surgical drainage", outcome: "Correct diagnosis and priorities", feedback: "Correct! Ludwig's angina: bilateral submandibular space infection with floor of mouth elevation, potential airway compromise. Priority: AIRWAY (often requires surgical airway as oral anatomy distorted), then broad-spectrum antibiotics and surgical drainage.", points: 10, isOptimal: true },
+                { id: "C", text: "Submandibular abscess - CT imaging first to guide drainage", outcome: "Delays airway management", feedback: "While imaging helps, this patient has SpO2 91% with tongue elevation - airway is the immediate priority. CT can come after airway is secured. Ludwig's angina with airway symptoms can't wait for imaging.", points: 4, isOptimal: false },
+                { id: "D", text: "Angioedema - give epinephrine and steroids", outcome: "Wrong diagnosis", feedback: "Angioedema doesn't cause fever, trismus, or 'woody' induration. The dental source, fever, and firm swelling indicate infection (Ludwig's angina), not allergic angioedema.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is Ludwig's angina so dangerous?", steps: ["Infection spreads rapidly through fascial spaces", "Bilateral submandibular infection elevates floor of mouth", "Tongue is displaced up and back, obstructing airway", "Swelling can progress to complete obstruction in hours", "Intubation may be impossible due to distorted anatomy - surgical airway often needed"] },
+            mechanism: { title: "Ludwig's Angina", content: "DEFINITION:\n• Bilateral infection of submandibular, sublingual, and submental spaces\n• Rapidly progressive cellulitis (may or may not have abscess)\n• True surgical emergency\n\nETIOLOGY:\n• Usually odontogenic (dental) origin - 70-90%\n• Most commonly 2nd/3rd mandibular molars\n• Polymicrobial: strep, staph, anaerobes\n\nRISK FACTORS:\n• Dental infection/poor dentition\n• Diabetes mellitus (major risk)\n• Immunosuppression\n• IV drug use\n• Malnutrition\n\nCLINICAL FEATURES:\n• Bilateral submandibular swelling ('bull neck')\n• 'Woody' or 'brawny' induration (not fluctuant)\n• Floor of mouth elevation\n• Tongue pushed up and back\n• Trismus\n• Drooling, difficulty swallowing\n• Fever, toxicity\n• Stridor, respiratory distress (late)\n\nDIAGNOSTIC CRITERIA:\n• Bilateral involvement\n• Gangrenous/serosanguinous infiltration (not frank pus)\n• Involves connective tissue, fascia, muscle\n• Spreads by contiguity, not lymphatics\n\nMANAGEMENT:\n\nAirway (first priority):\n• Often requires awake tracheostomy or cricothyrotomy\n• Oral intubation very difficult due to anatomy\n• Fiberoptic intubation by experienced provider\n• Have surgical airway backup ready\n\nAntibiotics (broad spectrum):\n• Ampicillin-sulbactam + metronidazole OR\n• Penicillin G + metronidazole + vancomycin OR\n• Piperacillin-tazobactam\n\nSurgery:\n• Surgical decompression/drainage\n• Dental extraction of source tooth\n• May need multiple surgeries/debridements\n\nMORTALITY:\n• Pre-antibiotic era: >50%\n• Current: 0-10% with aggressive management" },
+            pearl: "Ludwig's angina may NOT be fluctuant - it's often 'brawny' cellulitis rather than discrete abscess. Don't wait for fluctuance; the 'woody' induration is diagnostic.",
+            pitfall: "Don't attempt oral intubation by inexperienced provider - the distorted anatomy makes it extremely difficult and failed attempts can precipitate complete obstruction. Have surgical airway ready."
+        },
+        {
+            id: 5,
+            title: "Acute Mastoiditis",
+            scenario: "An 18-month-old girl is brought in with high fever and ear pulling for 5 days. Her mother says she was diagnosed with ear infection last week and started on amoxicillin but hasn't improved.\n\nVitals: Temp 104°F, HR 160, ill-appearing\n\nExam:\n• Irritable, lethargic at times\n• Right ear: Bulging, erythematous TM with purulent effusion\n• Right postauricular area: Swelling, erythema, tenderness\n• Right ear pushed forward and outward by swelling\n• Mild nuchal rigidity\n\nNo previous ear surgeries.",
+            question: "What complication has developed and what is the management?",
+            options: [
+                { id: "A", text: "Severe otitis media - switch to high-dose amoxicillin-clavulanate", outcome: "Underestimates severity", feedback: "This is beyond simple otitis media. The postauricular swelling/tenderness with the ear pushed forward indicates MASTOIDITIS - infection has spread to the mastoid bone. This requires hospitalization, IV antibiotics, and likely surgery.", points: 2, isOptimal: false },
+                { id: "B", text: "Acute mastoiditis with possible intracranial extension - CT, IV antibiotics, ENT consultation for likely mastoidectomy", outcome: "Correct diagnosis and management", feedback: "Correct! Classic mastoiditis: postauricular swelling/tenderness, ear displaced forward, following AOM. The nuchal rigidity is concerning for intracranial extension. Needs CT (temporal bone), IV antibiotics, and urgent ENT for probable mastoidectomy.", points: 10, isOptimal: true },
+                { id: "C", text: "Periauricular cellulitis - IV antibiotics and close observation", outcome: "Misses bone involvement", feedback: "Simple cellulitis wouldn't displace the ear forward or cause this degree of systemic illness. The ear displacement (from subperiosteal abscess) and bony tenderness indicate mastoiditis.", points: 3, isOptimal: false },
+                { id: "D", text: "Complicated otitis externa - aural toilet and topical antibiotics", outcome: "Wrong diagnosis", feedback: "Otitis externa (swimmer's ear) involves the ear canal, not middle ear. She has bulging TM and postauricular findings indicating middle ear disease (otitis media) that has spread to mastoid.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does AOM progress to mastoiditis?", steps: ["Middle ear communicates directly with mastoid air cells", "Infection can spread from middle ear to mastoid", "Causes osteitis of mastoid bone", "Can erode through bone (subperiosteal abscess)", "Can spread intracranially (meningitis, brain abscess, venous sinus thrombosis)"] },
+            mechanism: { title: "Acute Mastoiditis", content: "PATHOPHYSIOLOGY:\n• Complication of acute otitis media (AOM)\n• Infection spreads to mastoid air cells\n• Osteitis → coalescent mastoiditis → subperiosteal abscess\n• Less common in antibiotic era but still occurs\n\nRISK FACTORS:\n• Inadequately treated AOM\n• Resistant organisms\n• Immunocompromised\n• Cholesteatoma (chronic)\n\nCLINICAL FEATURES:\n• Fever persisting despite antibiotics for AOM\n• Postauricular swelling, erythema, tenderness\n• Ear pushed forward and outward (pathognomonic)\n• May have fluctuance (subperiosteal abscess)\n• Loss of postauricular crease\n• Otorrhea may be present\n\nINTRACRANIAL COMPLICATIONS:\n• Meningitis\n• Brain abscess (temporal, cerebellar)\n• Epidural/subdural abscess\n• Sigmoid sinus thrombosis\n• Gradenigo syndrome (CN VI palsy + retro-orbital pain)\n\nDIAGNOSIS:\n• Clinical diagnosis\n• CT temporal bone: Clouding of mastoid air cells, bony erosion, abscess\n• MRI if intracranial complication suspected\n\nTREATMENT:\n\nMedical:\n• IV antibiotics (ceftriaxone + vancomycin or clindamycin)\n• Cover S. pneumoniae, H. influenzae, S. aureus, anaerobes\n\nSurgical:\n• Myringotomy with tube (drain middle ear)\n• Mastoidectomy (if coalescent/abscess)\n• Drainage of subperiosteal abscess\n• Neurosurgical consultation if intracranial extension" },
+            pearl: "The ear pushed forward and outward by postauricular swelling is pathognomonic for mastoiditis with subperiosteal abscess. This finding should trigger immediate ENT consultation.",
+            pitfall: "Don't miss intracranial extension - nuchal rigidity, altered mental status, cranial nerve palsies, or severe headache should prompt urgent CT/MRI and neurosurgical consultation."
+        },
+        {
+            id: 6,
+            title: "Foreign Body Aspiration",
+            scenario: "A 2-year-old boy is brought to the ED after a sudden choking episode while eating peanuts 2 hours ago. He initially coughed forcefully but now seems better, though his parents note occasional cough.\n\nVitals: Temp 98.6°F, HR 110, RR 24, SpO2 98% on RA\n\nExam:\n• Alert, playful, in no acute distress\n• Decreased breath sounds on right side\n• Localized wheezing over right chest\n• No stridor, no retractions\n• Chest X-ray: Right-sided hyperinflation with mediastinal shift to left",
+            question: "What do the chest X-ray findings indicate and what is the appropriate management?",
+            options: [
+                { id: "A", text: "Normal post-choking exam - reassurance and discharge", outcome: "Misses foreign body", feedback: "He has classic findings of bronchial foreign body: unilateral decreased breath sounds, localized wheezing, and expiratory hyperinflation (ball-valve effect). This is NOT normal.", points: 0, isOptimal: false },
+                { id: "B", text: "Ball-valve obstruction from foreign body in right bronchus - rigid bronchoscopy for removal", outcome: "Correct diagnosis and management", feedback: "Correct! Unilateral hyperinflation with mediastinal shift indicates ball-valve obstruction: FB allows air in during inspiration but traps it during expiration. Rigid bronchoscopy under general anesthesia is the gold standard for removal.", points: 10, isOptimal: true },
+                { id: "C", text: "Right-sided pneumonia - IV antibiotics and observation", outcome: "Misses foreign body", feedback: "Pneumonia would show infiltrate, not hyperinflation. The history of choking + unilateral hyperinflation + localized wheeze = foreign body until proven otherwise.", points: 2, isOptimal: false },
+                { id: "D", text: "Asthma exacerbation - bronchodilators and steroids", outcome: "Wrong diagnosis", feedback: "Asthma causes bilateral wheezing, not unilateral decreased breath sounds with hyperinflation. The choking history and asymmetric findings indicate foreign body.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does foreign body cause hyperinflation?", steps: ["Foreign body lodges in bronchus (usually right - more vertical)", "Acts as ball-valve: air enters around FB during inspiration", "FB occludes more completely during expiration (airway narrows)", "Air gets trapped distal to FB = hyperinflation", "Mediastinum shifts away from hyperinflated side on expiration"] },
+            mechanism: { title: "Foreign Body Aspiration", content: "EPIDEMIOLOGY:\n• Peak age: 1-3 years\n• Peanuts most common food FB\n• Right main bronchus more common (more vertical)\n• Can be fatal if complete obstruction\n\nPRESENTATION PATTERNS:\n\nAcute (witnessed):\n• Sudden coughing, choking, gagging\n• May have cyanosis, stridor if upper airway\n• Can have symptom-free interval after initial event\n\nDelayed (unwitnessed):\n• Persistent cough, wheeze\n• Recurrent/persistent pneumonia in same location\n• Should suspect FB in any persistent localized pulmonary symptoms in young child\n\nPHYSICAL EXAM:\n• Unilateral decreased breath sounds\n• Localized wheezing\n• Asymmetric chest expansion\n• Stridor (if laryngeal/tracheal)\n\nIMAGING:\n\nChest X-ray:\n• Most FBs are radiolucent (food, plastic)\n• Inspiratory film may be normal\n• Expiratory film: Hyperinflation on affected side (air trapping)\n• Atelectasis (if complete obstruction)\n• Mediastinal shift away from hyperinflation\n\nFluoroscopy:\n• Shows asymmetric diaphragm movement\n\nDecubitus films:\n• Affected side stays hyperinflated when dependent\n\nMANAGEMENT:\n\nStable patient:\n• Rigid bronchoscopy under general anesthesia (gold standard)\n• Allows FB removal with optical forceps\n• Usually done by pulmonologist or ENT\n\nComplete obstruction/respiratory failure:\n• Back blows/chest thrusts (infant)\n• Heimlich maneuver (older child)\n• Direct laryngoscopy with Magill forceps if visible\n• Emergency bronchoscopy" },
+            pearl: "A normal inspiratory chest X-ray doesn't rule out foreign body. Get expiratory films or decubitus films to show air trapping - that's where the FB evidence often appears.",
+            pitfall: "Don't be falsely reassured by the 'symptom-free interval.' After initial choking, children often seem fine before developing complications (pneumonia, erosion). FB needs removal."
+        },
+        {
+            id: 7,
+            title: "Malignant Otitis Externa",
+            scenario: "A 72-year-old man with diabetes presents with severe right ear pain for 3 weeks that keeps him awake at night. He was treated with antibiotic ear drops without improvement.\n\nPMH: Type 2 DM (poorly controlled, HbA1c 10.5%)\nVitals: Temp 99.8°F, HR 88, BP 145/88\n\nExam:\n• Severe otalgia, worse at night\n• Right ear canal: Edematous, granulation tissue at bone-cartilage junction\n• Purulent discharge\n• Facial weakness (House-Brackmann grade III) on right\n• Tenderness over mastoid and temporomandibular joint\n\nLabs: WBC 14,000, ESR 95, CRP 8.5",
+            question: "What is the diagnosis and what organism is most likely responsible?",
+            options: [
+                { id: "A", text: "Severe otitis externa - continue topical therapy", outcome: "Misses serious diagnosis", feedback: "This is NOT simple otitis externa. The granulation tissue, facial nerve palsy, and systemic inflammation in a diabetic indicate MALIGNANT (necrotizing) otitis externa - a life-threatening skull base osteomyelitis.", points: 0, isOptimal: false },
+                { id: "B", text: "Malignant otitis externa caused by Pseudomonas aeruginosa - requires prolonged IV anti-pseudomonal antibiotics", outcome: "Correct diagnosis and organism", feedback: "Correct! Malignant (necrotizing) otitis externa: skull base osteomyelitis, almost always in diabetics/immunocompromised, caused by P. aeruginosa. Facial nerve palsy indicates advanced disease. Requires 6-8 weeks of IV anti-pseudomonal therapy.", points: 10, isOptimal: true },
+                { id: "C", text: "Cholesteatoma with complications - urgent surgical removal", outcome: "Different entity", feedback: "Cholesteatoma is a chronic middle ear condition with keratinizing epithelium. This patient has external ear findings (canal granulation, no TM/middle ear findings mentioned) typical of necrotizing otitis externa.", points: 3, isOptimal: false },
+                { id: "D", text: "Mastoiditis with facial nerve involvement - IV antibiotics and mastoidectomy", outcome: "Different pathology", feedback: "Mastoiditis follows otitis media (middle ear infection). This started as otitis externa with canal findings and no middle ear disease. The pathology originates in the external canal in malignant OE.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is this called 'malignant'?", steps: ["Term reflects aggressive, life-threatening nature (not cancer)", "Infection spreads from ear canal to temporal bone (osteomyelitis)", "Can involve skull base, spread intracranially", "Cranial nerves can be damaged (VII, IX, X, XI, XII)", "Pre-antibiotic mortality was very high; still significant today"] },
+            mechanism: { title: "Malignant (Necrotizing) Otitis Externa", content: "PATHOPHYSIOLOGY:\n• Starts as otitis externa in immunocompromised host\n• Infection spreads through fissures of Santorini to bone\n• Causes temporal bone osteomyelitis\n• Spreads along skull base\n\nRISK FACTORS:\n• Diabetes mellitus (90%+ of cases)\n• Immunocompromised (HIV, chemotherapy)\n• Elderly\n\nORGANISM:\n• Pseudomonas aeruginosa (95%+)\n• Rarely: S. aureus, Aspergillus (in HIV)\n\nCLINICAL FEATURES:\n• Severe, deep ear pain (disproportionate to exam)\n• Pain worse at night\n• Otorrhea (purulent)\n• Granulation tissue at bone-cartilage junction (pathognomonic)\n• Fails to respond to typical OE treatment\n• Elevated inflammatory markers (ESR, CRP)\n\nCRANIAL NERVE INVOLVEMENT:\n• Facial nerve (VII) - most common (present in this case)\n• CN IX, X, XI at jugular foramen\n• CN XII at hypoglossal canal\n• CN involvement indicates advanced disease, worse prognosis\n\nDIAGNOSIS:\n• Clinical suspicion in diabetic with refractory OE\n• CT temporal bone: Bony erosion\n• MRI: Soft tissue extent, intracranial involvement\n• Technetium bone scan: Very sensitive for osteomyelitis\n• Gallium scan: Monitors treatment response\n• Biopsy: Rule out malignancy, confirm diagnosis\n\nTREATMENT:\n\nAntibiotics:\n• IV anti-pseudomonal antibiotics x 6-8 weeks\n• Ciprofloxacin (good bone penetration) OR\n• Piperacillin-tazobactam, cefepime, meropenem\n• May add aminoglycoside initially\n\nDebridement:\n• Surgical debridement of granulation tissue\n• Extensive surgery rarely needed with modern antibiotics\n\nDiabetic control:\n• Optimize glucose management\n\nMonitoring:\n• Serial ESR/CRP\n• Gallium scan to confirm resolution" },
+            pearl: "Granulation tissue at the bone-cartilage junction of the ear canal in a diabetic = malignant otitis externa until proven otherwise. This is NOT granulation from simple OE.",
+            pitfall: "Don't treat as simple otitis externa and discharge home. Facial nerve palsy means the disease has spread significantly - this patient needs hospitalization and prolonged IV antibiotics."
+        },
+        {
+            id: 8,
+            title: "Post-Tonsillectomy Hemorrhage",
+            scenario: "A 6-year-old boy is brought to the ED 7 days after tonsillectomy with bleeding from his mouth. He had been recovering well until tonight when he started spitting up blood.\n\nVitals: HR 120, BP 100/65, RR 22\n\nExam:\n• Anxious, pale\n• Actively bleeding from left tonsillar fossa\n• Clot visible in posterior pharynx\n• Estimated blood loss ~100mL (by parent)",
+            question: "What is the appropriate management?",
+            options: [
+                { id: "A", text: "Reassurance - some bleeding is normal after tonsillectomy", outcome: "Dangerous underestimation", feedback: "Post-tonsillectomy hemorrhage is NEVER normal. Primary bleeding (<24h) or secondary bleeding (5-10 days, as here) requires urgent evaluation and intervention. This can be life-threatening.", points: 0, isOptimal: false },
+                { id: "B", text: "Active bleeding at day 7 - IV access, type and screen, ENT consultation for likely return to OR for cauterization", outcome: "Correct management approach", feedback: "Correct! Secondary post-tonsillectomy hemorrhage (days 5-10) is due to eschar separation. Active bleeding requires: IV access, fluid resuscitation, type and screen (crossmatch if severe), ENT consultation, and likely return to OR for hemostasis.", points: 10, isOptimal: true },
+                { id: "C", text: "Direct pressure with gauze and ice, discharge if bleeding stops", outcome: "Inadequate for active bleeding", feedback: "Direct pressure might temporarily control bleeding, but it will likely recur. Active post-tonsillectomy bleeding needs ENT evaluation and usually surgical hemostasis. Don't discharge.", points: 3, isOptimal: false },
+                { id: "D", text: "Tranexamic acid mouthwash and observation", outcome: "Insufficient intervention", feedback: "Tranexamic acid can be adjunctive, but active tonsillar hemorrhage typically requires cauterization in the OR. This isn't a 'wait and see' situation.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does bleeding occur at days 5-10?", steps: ["After tonsillectomy, eschar (scab) forms over tonsillar bed", "Eschar separates as healing progresses (days 5-10)", "Separation can expose vessels and cause bleeding", "Tonsillar bed has rich blood supply", "Secondary hemorrhage can be massive and life-threatening"] },
+            mechanism: { title: "Post-Tonsillectomy Hemorrhage", content: "TYPES:\n\nPrimary hemorrhage (<24 hours):\n• Usually due to surgical technique\n• Occurs in recovery room or first night\n• Less common with modern techniques\n\nSecondary hemorrhage (>24 hours, usually days 5-10):\n• Due to eschar separation\n• More common and more dangerous\n• Peak incidence day 5-7\n• Can occur up to 2-3 weeks post-op\n\nINCIDENCE:\n• Overall bleeding rate: 2-4%\n• Significant bleeding requiring intervention: 1-2%\n• More common in adults than children\n\nRISK FACTORS:\n• Older age (adolescents > young children)\n• Technique (hot > cold techniques)\n• Infection\n• Dehydration\n• Premature solid food intake\n• NSAID use (controversial)\n\nPRESENTATION:\n• Spitting up blood, hematemesis\n• Frequent swallowing (swallowing blood)\n• May have large volume blood loss before presentation\n• Can have hypovolemic shock\n\nINITIAL MANAGEMENT:\n• Assess airway (blood in airway?)\n• IV access, fluids\n• Type and crossmatch\n• Keep patient calm, upright, spit blood out\n• Suction available\n• Ice collar (may provide some vasoconstriction)\n• ENT consultation urgently\n\nDEFINITIVE TREATMENT:\n• Usually requires return to OR\n• Examination under anesthesia\n• Cauterization (electrocautery, silver nitrate)\n• Suture ligation\n• Rarely need tonsillar artery ligation/embolization\n\nDISPOSITION:\n• All significant post-tonsillectomy bleeds need ENT evaluation\n• Low threshold for admission/observation\n• Don't discharge without ENT clearance" },
+            pearl: "Frequent swallowing in a post-tonsillectomy patient may indicate they're swallowing blood. Ask specifically - children often swallow blood rather than spit it out.",
+            pitfall: "Don't underestimate blood loss. Patients swallow much of the blood, so estimated visible loss is often far less than actual. Tachycardia in a child is a late sign of significant hemorrhage."
+        },
+        {
+            id: 9,
+            title: "Sudden Sensorineural Hearing Loss",
+            scenario: "A 52-year-old woman presents with sudden onset of hearing loss in her left ear that she noticed when she woke up this morning. She also has tinnitus and a feeling of fullness in the ear. No vertigo.\n\nPMH: HTN, hyperlipidemia\nVitals: Normal\n\nExam:\n• Weber test: Lateralizes to RIGHT ear\n• Rinne test: Air conduction > bone conduction bilaterally\n• Left ear: Normal external canal and TM\n• Right ear: Normal\n• No nystagmus, normal neurological exam\n\nAudiometry: Left ear severe sensorineural hearing loss",
+            question: "What is the diagnosis and what is the time-sensitive treatment?",
+            options: [
+                { id: "A", text: "Conductive hearing loss from cerumen impaction - ear irrigation", outcome: "Wrong type of hearing loss", feedback: "Weber lateralizing to the GOOD ear (right) indicates sensorineural loss in the LEFT ear. Conductive loss would lateralize TO the affected ear. Her physical exam and audiometry confirm sensorineural loss.", points: 1, isOptimal: false },
+                { id: "B", text: "Sudden sensorineural hearing loss (SSNHL) - urgent high-dose oral or intratympanic corticosteroids", outcome: "Correct diagnosis and treatment", feedback: "Correct! SSNHL is an otologic emergency: ≥30dB loss over ≤3 days. Steroids (oral prednisone 60mg/day or intratympanic injection) should be started ASAP - outcomes are better with treatment within 2 weeks, ideally within 72 hours.", points: 10, isOptimal: true },
+                { id: "C", text: "Acoustic neuroma - urgent MRI then observation", outcome: "Workup needed but treatment shouldn't wait", feedback: "MRI is needed to rule out acoustic neuroma/vestibular schwannoma, but you shouldn't delay steroids. Start empiric steroids AND order MRI. SSNHL treatment is time-sensitive.", points: 5, isOptimal: false },
+                { id: "D", text: "Ménière's disease - low-salt diet and diuretics", outcome: "Wrong diagnosis", feedback: "Ménière's causes fluctuating hearing loss with episodic vertigo. This is sudden, severe, persistent hearing loss without vertigo - more consistent with SSNHL. Ménière's treatment wouldn't address this.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is timing so important?", steps: ["Hair cells in cochlea can be damaged but not yet dead", "Early intervention may rescue damaged cells", "After ~2 weeks, recovery rate drops significantly", "After 4-6 weeks, steroids unlikely to help", "This is an otologic emergency despite stable vitals"] },
+            mechanism: { title: "Sudden Sensorineural Hearing Loss (SSNHL)", content: "DEFINITION:\n• ≥30 dB hearing loss\n• Over 3 consecutive frequencies\n• Occurring within 72 hours or less\n\nETIOLOGY (often idiopathic):\n• Viral (most common presumed cause)\n• Vascular (cochlear artery occlusion)\n• Autoimmune inner ear disease\n• Acoustic neuroma (~1-2% - must rule out)\n• Ménière's disease\n• Perilymphatic fistula\n• Multiple sclerosis (rarely)\n• Ototoxic medications\n\nPRESENTATION:\n• Sudden unilateral hearing loss\n• Often noticed on waking\n• Tinnitus (common)\n• Aural fullness\n• Vertigo (present in ~30-40%)\n\nDIAGNOSIS:\n• Audiometry confirms SNHL\n• Weber lateralizes to BETTER ear\n• Rinne: AC > BC bilaterally (normal)\n\nWORKUP:\n• Audiometry\n• MRI with gadolinium (rule out acoustic neuroma)\n• Consider: CBC, metabolic panel, inflammatory markers\n• Consider: Autoimmune workup if bilateral or recurrent\n\nTREATMENT:\n\nCorticosteroids (mainstay):\n• Oral: Prednisone 60mg/day x 10-14 days with taper\n• Intratympanic: Dexamethasone injection (if oral fails or contraindicated)\n• Start ASAP - within 2 weeks, ideally 72 hours\n\nSalvage therapy:\n• Intratympanic steroids if oral fails\n• Hyperbaric oxygen (some evidence)\n\nPROGNOSIS:\n• ~30-65% have some spontaneous recovery\n• Steroids may improve recovery rates\n• Poor prognostic factors: Severe loss, vertigo, delayed treatment" },
+            pearl: "Weber lateralizes TOWARD the affected ear in conductive loss (sound conducted through bone is 'louder' in blocked ear) but AWAY from the affected ear in sensorineural loss.",
+            pitfall: "Don't wait for MRI to start steroids. Order MRI to rule out acoustic neuroma, but start empiric steroids immediately. The MRI result won't change initial management."
+        },
+        {
+            id: 10,
+            title: "ENT Emergency Triage Summary",
+            scenario: "Review of ENT emergencies:\n\n• Patient A: Severe sore throat, trismus, uvular deviation, 'hot potato' voice\n• Patient B: Elderly diabetic with severe ear pain, granulation tissue, facial weakness\n• Patient C: Child with choking history, unilateral wheezing, hyperinflation on CXR\n• Patient D: Post-tonsillectomy day 7 with active oral bleeding\n• Patient E: Rapidly progressive 'bull neck' swelling, tongue elevation, diabetes",
+            question: "Rank these by airway threat severity (most to least critical):",
+            options: [
+                { id: "A", text: "E > A > D > C > B (Ludwig's most critical)", outcome: "Correct prioritization", feedback: "Correct! Ludwig's angina (E) has the most immediate airway threat with tongue elevation. PTA (A) can threaten airway. Post-tonsillectomy bleed (D) risks aspiration. FB (C) is localized. Malignant OE (B) is serious but not immediate airway threat.", points: 10, isOptimal: true },
+                { id: "B", text: "D > E > C > A > B (bleeding is most critical)", outcome: "Overestimates bleeding risk", feedback: "While bleeding is serious, post-tonsillectomy hemorrhage doesn't typically cause airway obstruction as quickly as Ludwig's angina. Ludwig's with tongue elevation is the most immediate airway threat.", points: 6, isOptimal: false },
+                { id: "C", text: "All are equally urgent and need immediate ENT consultation", outcome: "Doesn't distinguish acuity", feedback: "While all need ENT consultation, they have different time courses. Ludwig's angina can progress to complete obstruction in hours. Malignant OE is serious but needs weeks to cause cranial nerve damage. Prioritization matters.", points: 4, isOptimal: false },
+                { id: "D", text: "B > E > A > D > C (infection severity determines acuity)", outcome: "Misunderstands threat type", feedback: "Infection severity doesn't equal airway threat. Malignant OE (B) is serious but rarely threatens airway acutely. Ludwig's (E) is the most immediate airway emergency despite both being severe infections.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is Ludwig's angina the most critical?", steps: ["Bilateral submandibular swelling elevates floor of mouth", "Tongue pushed up and back directly obstructs airway", "Can progress from stable to complete obstruction rapidly", "Intubation may be impossible - often needs surgical airway", "Other conditions threaten airway less directly or more slowly"] },
+            mechanism: { title: "ENT Emergency Airway Priorities", content: "IMMEDIATE AIRWAY THREATS:\n\n1. Ludwig's Angina\n• Floor of mouth elevation, tongue displacement\n• Can obstruct completely within hours\n• Often requires surgical airway\n\n2. Epiglottitis\n• Supraglottic swelling\n• Can progress rapidly\n• Keep patient calm, prepare surgical airway\n\n3. Deep Neck Space Infections\n• Retropharyngeal, parapharyngeal abscess\n• Can cause airway compression\n• Risk of rupture/aspiration\n\nSERIOUS BUT LESS IMMEDIATE:\n\n4. Peritonsillar Abscess\n• Usually doesn't obstruct unless massive\n• Stridor indicates more severe case\n• Drainage usually relieves symptoms\n\n5. Post-Tonsillectomy Hemorrhage\n• Aspiration risk from blood\n• Shock risk if massive bleeding\n• Usually manageable with OR return\n\n6. Foreign Body Aspiration\n• Depends on location (laryngeal > bronchial)\n• Bronchial FB rarely causes complete obstruction\n• Stable patients can go to OR for bronchoscopy\n\nSERIOUS BUT NOT AIRWAY EMERGENCY:\n\n7. Malignant Otitis Externa\n• Skull base osteomyelitis\n• Threatens cranial nerves, life\n• Not immediate airway threat\n\n8. Acute Mastoiditis\n• Intracranial complications possible\n• Not airway threatening\n\n9. SSNHL\n• Otologic emergency (for hearing)\n• No airway concern" },
+            pearl: "In ENT emergencies, the question is always: 'How fast can this obstruct the airway?' Ludwig's and epiglottitis are hours. PTA is usually days. Malignant OE is weeks to months.",
+            pitfall: "Don't let systemic illness severity distract from airway assessment. A patient with malignant OE may look sicker (fever, facial palsy) but has less immediate airway risk than someone with Ludwig's angina who appears more stable."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+function init() { caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); }); renderStage(currentStage); }
+function renderStage(stageNum) { const stage = caseData.stages[stageNum - 1]; if (!stage) { renderSummary(); return; } const answered = answeredStages[stageNum]; document.getElementById('gameContainer').innerHTML = `<div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden"><div class="bg-gradient-to-r from-teal-600 to-cyan-600 text-white p-6"><span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span><h2 class="text-2xl font-bold mt-3">${stage.title}</h2></div><div class="p-6"><div class="bg-slate-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3><div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div></div><div class="bg-teal-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-teal-800 mb-2">🤔 Clinical Question</h3><p class="text-teal-900 font-medium">${stage.question}</p></div><div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition-all ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50') : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-teal-300 hover:bg-teal-50'} ${answered ? 'cursor-default' : 'cursor-pointer'}"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span><span class="font-medium">${opt.text}</span></div></button>`).join('')}</div>${answered ? renderFeedback(stage, answered) : ''}</div></div>`; updateProgress(); }
+function renderFeedback(stage, answered) { const selected = stage.options.find(o => o.id === answered.selected); const optimal = stage.options.find(o => o.isOptimal); return `<div class="mt-6 space-y-4"><div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5"><h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4><p class="text-gray-700">${selected.feedback}</p></div>${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}<div class="why-chain rounded-xl p-5"><h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i+1}</span><span class="text-gray-700">${s}</span></div>`).join('')}</div></div><div class="mechanism-box rounded-xl p-5"><h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4><div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div></div><div class="grid md:grid-cols-2 gap-4"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div><button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-bold text-lg">${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}</button></div>`; }
+function selectOption(stageNum, optionId) { if (answeredStages[stageNum]) return; const option = caseData.stages[stageNum - 1].options.find(o => o.id === optionId); answeredStages[stageNum] = { selected: optionId, points: option.points }; totalScore += option.points; renderStage(stageNum); }
+function nextStage() { currentStage++; currentStage > caseData.totalStages ? renderSummary() : (renderStage(currentStage), window.scrollTo({ top: 0, behavior: 'smooth' })); }
+function updateProgress() { document.getElementById('progressBar').style.width = (Object.keys(answeredStages).length / caseData.totalStages * 100) + '%'; document.getElementById('score').textContent = Math.round(totalScore / maxPossibleScore * 100) + '%'; }
+function renderSummary() { const pct = Math.round(totalScore / maxPossibleScore * 100); document.getElementById('gameContainer').classList.add('hidden'); document.getElementById('summaryPanel').classList.remove('hidden'); document.getElementById('summaryPanel').innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-8"><div class="text-center mb-8"><div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">${pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D'}</div><div class="text-3xl font-bold text-gray-800">${pct}%</div></div><div class="bg-slate-50 rounded-xl p-6 mb-6"><h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3><ul class="space-y-2 text-gray-700"><li>✓ PTA: Trismus, uvular deviation, 'hot potato' voice → needle aspiration/I&D</li><li>✓ Anterior epistaxis: Pinch nose, topical vasoconstrictor, cautery, then packing</li><li>✓ Epiglottitis: Normal pharynx but supraglottic emergency - prepare surgical airway</li><li>✓ Ludwig's angina: 'Bull neck,' tongue elevation → immediate airway then drainage</li><li>✓ Mastoiditis: Ear pushed forward post-AOM → IV abx and likely mastoidectomy</li><li>✓ Foreign body: Unilateral hyperinflation = ball-valve effect → rigid bronchoscopy</li><li>✓ Malignant OE: Diabetic + granulation tissue + facial palsy = 6-8 weeks IV abx</li><li>✓ Post-tonsillectomy bleed: Days 5-10 peak, often needs OR for hemostasis</li><li>✓ SSNHL: Weber to good ear, steroids within 72 hours, MRI to rule out acoustic neuroma</li></ul></div><button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl font-bold">🔄 Restart Case</button></div>`; }
+function resetGame() { currentStage = 1; totalScore = 0; answeredStages = {}; document.getElementById('gameContainer').classList.remove('hidden'); document.getElementById('summaryPanel').classList.add('hidden'); renderStage(1); }
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ ENT Emergencies</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="../adventure-hub.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK430685/" target="_blank" class="text-blue-600 hover:underline">StatPearls Medical Library</a> | <a href="https://www.merckmanuals.com/professional" target="_blank" class="text-blue-600 hover:underline">Merck Manual Professional</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Ent Emergencies Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="ENT Emergencies"
+         data-key-points="${stage.title}, Case Complete!, 📋 Clinical Scenario, 🤔 Clinical Question, 📚 Key Learning Points, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

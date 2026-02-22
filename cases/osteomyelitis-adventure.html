@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osteomyelitis | Clinical Adventure</title>
+    <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
+<link href="../css/rdx-a11y.css" rel="stylesheet">
+<style>
+        :root { --primary: #4A90A4; --primary-dark: #2D5A6A; --accent: #F4A261; --success: #2A9D8F; --danger: #E63946; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #F8FAFC; }
+        .container { max-width: 900px; margin: 0 auto; padding: 1rem; }
+        .header { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
+        .header h1 { font-size: 1.5rem; }
+        .progress-bar { height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; margin-top: 1rem; }
+        .progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+        .scene { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .scene-title { font-size: 1.1rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 1rem; }
+        .patient-info { background: #E3F2FD; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
+        .vital { background: white; padding: 0.5rem; border-radius: 6px; text-align: center; border: 1px solid #ddd; }
+        .vital-label { font-size: 0.7rem; color: #666; }
+        .vital-value { font-weight: 600; }
+        .vital-value.critical { color: var(--danger); }
+        .narrative { line-height: 1.7; margin-bottom: 1.5rem; }
+        .question { background: #FFF8E1; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--accent); }
+        .options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .option { padding: 1rem; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: white; text-align: left; }
+        .option:hover { border-color: var(--primary); }
+        .option.correct { border-color: var(--success); background: #E8F5E9; }
+        .option.incorrect { border-color: var(--danger); background: #FFEBEE; }
+        .feedback { padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #E8F5E9; border-left: 4px solid var(--success); }
+        .feedback.incorrect { background: #FFEBEE; border-left: 4px solid var(--danger); }
+        .teaching { background: #E8F5E9; padding: 1rem; border-radius: 8px; margin-top: 1rem; }
+        .teaching h4 { color: var(--success); margin-bottom: 0.5rem; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 500; }
+        .btn-primary { background: var(--primary); color: white; }
+        .nav-row { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .score-card { background: var(--success); color: white; padding: 2rem; border-radius: 12px; text-align: center; }
+        .peds-toggle { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem; }
+        .toggle { width: 50px; height: 26px; background: #ccc; border-radius: 13px; cursor: pointer; position: relative; }
+        .toggle.active { background: var(--primary); }
+        .toggle::after { content: ''; position: absolute; width: 22px; height: 22px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.3s; }
+        .toggle.active::after { left: 26px; }
+        .peds-info { background: #E1F5FE; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #03A9F4; display: none; }
+        .peds-info.show { display: block; }
+    </style>
+    <link rel="stylesheet" href="dx-case-banner-fix.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦴 Osteomyelitis</h1>
+            <p>Bone infection: diagnosis, imaging, and prolonged antibiotic therapy</p>
+            <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+        </div>
+        <div class="peds-toggle">
+            <span>👶 Show Pediatric Considerations</span>
+            <div class="toggle" id="pedsToggle" onclick="togglePeds()"></div>
+        </div>
+        <div id="scene-container"></div>
+        <div id="completion" style="display:none;"></div>
+    </div>
+    <script>
+const scenes = [
+    {
+        icon: '🏥', title: 'Scene 1: Initial Presentation',
+        patient: '55-year-old diabetic male with 3-week history of right heel pain and wound',
+        vitals: [{label:'Temp',value:'38.2°C',critical:true},{label:'HR',value:'92'},{label:'WBC',value:'14.5',critical:true},{label:'ESR',value:'85',critical:true},{label:'CRP',value:'8.2',critical:true}],
+        narrative: 'He has a diabetic foot ulcer over the right heel that has been present for 2 months. Recently it\'s become more painful with drainage. On exam: 2cm ulcer with exposed bone visible when probed. Foot is warm with surrounding erythema.',
+        pedsNote: 'Pediatric osteomyelitis typically presents with acute hematogenous spread to metaphysis of long bones. Limping, refusal to bear weight, and point tenderness are key findings.',
+        question: 'What does the "probe-to-bone" test indicate?',
+        options: [
+            {text:'Cellulitis without bone involvement',correct:false,feedback:'If bone is palpable through a diabetic foot ulcer, osteomyelitis is highly likely.'},
+            {text:'High likelihood of osteomyelitis (89% PPV in diabetic foot)',correct:true,feedback:'Correct! Probe-to-bone test has 89% PPV for osteomyelitis in diabetic foot ulcers. If you can feel bone with a sterile probe through an ulcer, assume osteomyelitis until proven otherwise.'},
+            {text:'Need for immediate amputation',correct:false,feedback:'While this indicates serious infection, osteomyelitis is often treatable with antibiotics and debridement.'}
+        ]
+    },
+    {
+        icon: '🔬', title: 'Scene 2: Imaging Selection',
+        narrative: 'You need imaging to confirm osteomyelitis and assess extent of involvement.',
+        pedsNote: 'In children, X-rays may be normal for 10-14 days. MRI is the gold standard but may require sedation. Ultrasound can detect subperiosteal abscess.',
+        question: 'What is the BEST initial imaging for diabetic foot osteomyelitis?',
+        options: [
+            {text:'Plain X-ray of the foot',correct:false,feedback:'X-rays can show bone destruction but take 2-3 weeks to become positive. They miss early disease.'},
+            {text:'MRI of the foot',correct:true,feedback:'Correct! MRI is the gold standard - 90% sensitive and specific. Shows marrow edema, soft tissue extent, and abscess. X-ray is often obtained first but has low sensitivity early.'},
+            {text:'Bone scan (Tc-99m)',correct:false,feedback:'Bone scans are sensitive but not specific - can\'t distinguish osteomyelitis from neuropathic osteoarthropathy in diabetics.'}
+        ],
+        teaching: 'Imaging sensitivity for osteomyelitis: MRI 90-100% > Bone scan 85% > X-ray 50-60% (early). MRI also shows soft tissue involvement and guides surgical planning.'
+    },
+    {
+        icon: '🦠', title: 'Scene 3: Obtaining Cultures',
+        narrative: 'MRI shows marrow edema in the calcaneus consistent with osteomyelitis. You need to identify the pathogen before starting antibiotics.',
+        question: 'What is the BEST method to obtain cultures for diabetic foot osteomyelitis?',
+        options: [
+            {text:'Superficial wound swab culture',correct:false,feedback:'Surface cultures correlate poorly with bone pathogens - they mostly grow colonizers, not the actual cause.'},
+            {text:'Bone biopsy (percutaneous or surgical)',correct:true,feedback:'Correct! Bone biopsy is the gold standard. In diabetic foot, polymicrobial infection is common. Biopsy cultures guide targeted antibiotic therapy for the prolonged course needed.'},
+            {text:'Blood cultures only',correct:false,feedback:'Blood cultures are often negative in chronic osteomyelitis. Direct bone sampling is preferred.'}
+        ]
+    },
+    {
+        icon: '💊', title: 'Scene 4: Empiric Therapy',
+        narrative: 'While awaiting culture results, you need to start empiric antibiotics. The wound culture from debridement shows gram-positive cocci and gram-negative rods.',
+        pedsNote: 'Pediatric acute hematogenous osteomyelitis is usually monomicrobial: S. aureus (most common), Kingella kingae (<5yo), Salmonella (sickle cell).',
+        question: 'What empiric regimen covers the common pathogens in diabetic foot osteomyelitis?',
+        options: [
+            {text:'Cefazolin alone',correct:false,feedback:'Cefazolin only covers gram-positive including MSSA. Diabetic foot infections are often polymicrobial.'},
+            {text:'Vancomycin + piperacillin-tazobactam OR ampicillin-sulbactam + fluoroquinolone',correct:true,feedback:'Correct! Diabetic foot osteomyelitis requires broad coverage: MRSA (vancomycin), gram-negatives including Pseudomonas (pip-tazo or FQ), and anaerobes. Narrow based on cultures.'},
+            {text:'Oral amoxicillin-clavulanate',correct:false,feedback:'Oral therapy may be appropriate later for mild-moderate cases, but initial IV therapy is needed for osteomyelitis.'}
+        ]
+    },
+    {
+        icon: '⏱️', title: 'Scene 5: Duration of Therapy',
+        narrative: 'Cultures grow MRSA and E. coli. Surgical debridement is performed with removal of infected calcaneal bone. You narrow antibiotics to vancomycin + ciprofloxacin.',
+        question: 'What is the recommended duration of antibiotic therapy after surgical debridement?',
+        options: [
+            {text:'2 weeks IV antibiotics',correct:false,feedback:'Too short for osteomyelitis, even with debridement.'},
+            {text:'4-6 weeks total (can transition to oral with good tissue penetration)',correct:true,feedback:'Correct! Standard is 4-6 weeks. With complete surgical resection, may use shorter course. Oral therapy with good bone penetration (FQs, rifampin, linezolid, TMP-SMX, doxycycline) can replace IV if patient stable.'},
+            {text:'6 months IV antibiotics',correct:false,feedback:'Too long - this would be appropriate for tuberculosis or fungal osteomyelitis.'}
+        ],
+        teaching: 'Duration: 4-6 weeks standard. Shorter (2-3 weeks) if all infected bone resected. Monitor CRP (normalizes in 2-3 weeks if responding). Oral switch acceptable with highly bioavailable agents.'
+    },
+    {
+        icon: '✅', title: 'Scene 6: Outcome',
+        narrative: 'After 6 weeks of targeted antibiotics and wound care, inflammatory markers normalize. MRI at 8 weeks shows resolution of marrow edema. The patient begins diabetic foot care optimization and offloading.',
+        teaching: 'Osteomyelitis Summary:\n• Probe-to-bone: 89% PPV in diabetic ulcer\n• MRI: Gold standard imaging (90%+ sens/spec)\n• Bone biopsy: Gold standard for pathogen ID\n• Treatment: Surgical debridement + 4-6 weeks antibiotics\n• Diabetic foot often polymicrobial\n• Oral step-down with bioavailable agents acceptable'
+    }
+];
+        let currentScene = 0, score = 0, pedsMode = false;
+        function togglePeds() { pedsMode = !pedsMode; document.getElementById('pedsToggle').classList.toggle('active'); document.querySelectorAll('.peds-info').forEach(el => el.classList.toggle('show', pedsMode)); }
+        function renderScene() {
+            const s = scenes[currentScene];
+            document.getElementById('progress').style.width = ((currentScene+1)/scenes.length*100)+'%';
+            let h = '<div class="scene"><div class="scene-title">'+(s.icon||'📋')+' '+s.title+'</div>';
+            if(s.patient) h += '<div class="patient-info"><strong>'+s.patient+'</strong></div>';
+            if(s.vitals) { h += '<div class="vitals">'; s.vitals.forEach(v => h += '<div class="vital"><div class="vital-label">'+v.label+'</div><div class="vital-value'+(v.critical?' critical':'')+'">'+v.value+'</div></div>'); h += '</div>'; }
+            h += '<div class="narrative">'+s.narrative+'</div>';
+            if(s.pedsNote) h += '<div class="peds-info'+(pedsMode?' show':'')+'">👶 <strong>Pediatric:</strong> '+s.pedsNote+'</div>';
+            if(s.question) { h += '<div class="question"><strong>❓ '+s.question+'</strong></div><div class="options">'; s.options.forEach((o,i) => h += '<button class="option" onclick="select('+i+')" data-c="'+!!o.correct+'">'+o.text+'</button>'); h += '</div><div class="feedback" id="fb"></div>'; }
+            if(s.teaching) h += '<div class="teaching"><h4>📚 Teaching Point</h4><p>'+s.teaching+'</p></div>';
+            h += '<div class="nav-row">'+(s.question?'':'<button class="btn btn-primary" onclick="next()">Continue →</button>')+'</div></div>';
+            document.getElementById('scene-container').innerHTML = h;
+        }
+        function select(i) {
+            const opts = document.querySelectorAll('.option'), fb = document.getElementById('fb'), s = scenes[currentScene];
+            opts.forEach((o,j) => { o.style.pointerEvents='none'; if(j===i){ if(o.dataset.c==='true'){ o.classList.add('correct'); score++; fb.className='feedback show correct'; fb.innerHTML='<strong>✓ Correct!</strong> '+s.options[i].feedback; } else { o.classList.add('incorrect'); fb.className='feedback show incorrect'; fb.innerHTML='<strong>✗ Not quite.</strong> '+s.options[i].feedback; opts.forEach(x=>{ if(x.dataset.c==='true') x.classList.add('correct'); }); }}});
+            setTimeout(()=>{ document.querySelector('.nav-row').innerHTML='<button class="btn btn-primary" onclick="next()">Continue →</button>'; },800);
+        }
+        function next() { currentScene++; if(currentScene >= scenes.length) complete(); else { renderScene(); window.scrollTo({top:0,behavior:'smooth'}); }}
+        function complete() { document.getElementById('scene-container').style.display='none'; const q=scenes.filter(s=>s.question).length; document.getElementById('completion').innerHTML='<div class="score-card"><h2>🎉 Case Complete!</h2><p>Score: '+score+'/'+q+' ('+Math.round(score/q*100)+'%)</p></div><div class="nav-row" style="justify-content:center;margin-top:1rem;"><a href="../adventure-hub.html" class="btn btn-primary">← Back</a></div>'; document.getElementById('completion').style.display='block'; }
+        renderScene();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Osteomyelitis"
+         data-key-points="🎉 Case Complete!, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/34599691/" target="_blank" style="color:#7dd3fc">Surviving Sepsis Campaign 2021</a> — Crit Care Med 2021</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/31573350/" target="_blank" style="color:#7dd3fc">IDSA Guidelines: Community-Acquired Pneumonia</a> — Am J Resp Crit Care 2019</li><li><a href="https://www.who.int/publications/i/item/9789240031593" target="_blank" style="color:#7dd3fc">WHO HIV Treatment Guidelines</a> — WHO 2021</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

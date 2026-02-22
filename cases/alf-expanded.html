@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Acute Liver Failure - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #713f12 0%, #ca8a04 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fde047; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fef08a; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ca8a04; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(202,138,4,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(202,138,4,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fef08a; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(202,138,4,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #ca8a04, #713f12); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ca8a04, #fde047); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fde047; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .completion { text-align: center; padding: 60px 40px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK482374/" target="_blank" rel="noopener">Acute Liver Failure - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Confused Jaundiced Patient",content:`<div class="narrative"><p>A <span class="highlight">32-year-old woman</span> with no significant PMH presents with 5 days of nausea, vomiting, and progressive <span class="critical">jaundice</span>. She is now <span class="critical">confused</span> and her family is very concerned.</p><p style="margin-top:12px;"><strong>Vitals:</strong> BP 100/60, HR 110, T 37.8°C<br><strong>Exam:</strong> Jaundice, asterixis present, confused but arousable, no hepatomegaly<br><strong>Labs:</strong> AST 4,200, ALT 5,100, T.bili 18, <span class="critical">INR 3.8</span>, Cr 1.4</p></div>`,question:{prompt:"What defines Acute Liver Failure (ALF)?",options:[{text:"Elevated AST/ALT above 1000",correct:false},{text:"Coagulopathy (INR ≥1.5) + encephalopathy in patient without pre-existing liver disease",correct:true},{text:"Jaundice with elevated bilirubin >10",correct:false},{text:"Liver failure requiring ICU admission",correct:false}],explanation:{correct:"Correct! ALF is defined by: (1) Coagulopathy (INR ≥1.5), (2) Encephalopathy, (3) NO pre-existing liver disease, (4) Illness duration <26 weeks. This patient meets all criteria.",incorrect:"ALF requires coagulopathy (INR ≥1.5) AND encephalopathy in someone without chronic liver disease. Elevated LFTs and jaundice are supportive but not defining features."},teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 ALF Definition</div><div class="pathway">ACUTE LIVER FAILURE requires ALL of:
+• INR ≥1.5 (coagulopathy)
+• Any degree of encephalopathy
+• NO pre-existing liver disease
+• Illness duration <26 weeks
+
+Classification by time to encephalopathy:
+• Hyperacute: <7 days (best prognosis!)
+• Acute: 7-21 days
+• Subacute: 21 days - 26 weeks (worst)</div></div>`,why_chain:[{q:"Why does hyperacute have better prognosis?",a:"Paradoxically, rapid onset (like APAP) causes massive but potentially reversible hepatocyte injury. Subacute course suggests slower, more complete destruction with less regeneration potential."}],points:10}},
+        {title:"Etiology: What Caused This?",content:`<div class="narrative"><p>You need to identify the cause urgently. On further history, she admits to taking <span class="critical">"a lot of acetaminophen (Tylenol)"</span> for headaches over the past week but denies intentional overdose.</p></div>`,question:{prompt:"What is the #1 cause of acute liver failure in the United States?",options:[{text:"Viral hepatitis (Hepatitis A, B)",correct:false},{text:"Acetaminophen toxicity",correct:true},{text:"Autoimmune hepatitis",correct:false},{text:"Drug-induced liver injury (non-APAP)",correct:false}],explanation:{correct:"Correct! Acetaminophen accounts for ~50% of ALF cases in the US. It's also the most treatable cause with NAC. Always check APAP level even if patient denies use!",incorrect:"Acetaminophen is #1 in the US (~50%). Viral hepatitis is more common worldwide. Always check APAP level - patients often don't realize they took it (combination products)."},teaching:`<h4>ALF Etiology</h4><table class="comparison-table"><tr><th>Cause</th><th>Percentage (US)</th></tr><tr style="background:rgba(251,191,36,0.2);"><td>Acetaminophen</td><td>~50%</td></tr><tr><td>Drug-induced (non-APAP)</td><td>~12%</td></tr><tr><td>Viral hepatitis</td><td>~10%</td></tr><tr><td>Autoimmune</td><td>~5%</td></tr><tr><td>Ischemic/shock liver</td><td>~5%</td></tr><tr><td>Wilson disease</td><td>~5%</td></tr><tr><td>Indeterminate</td><td>~15%</td></tr></table>`,why_chain:[{q:"What if APAP level is undetectable?",a:"Late presentation! APAP is metabolized within 24-48 hours. Undetectable level doesn't rule out APAP toxicity. Look at pattern: very high AST/ALT (often >3000), low bilirubin early, and history."}],points:10}},
+        {title:"N-Acetylcysteine: Give It Early!",content:`<div class="narrative"><p>You send an APAP level and it returns at <span class="highlight">45 mcg/mL</span> (therapeutic <20). She estimates taking ~6-8 extra-strength tablets daily for 5-6 days.</p></div><div class="alert-box"><div class="alert-title">🚨 Give NAC to ALL ALF Patients!</div><p>NAC is standard of care for APAP toxicity AND improves outcomes in non-APAP ALF. Start it immediately!</p></div>`,question:{prompt:"Which statement about NAC in ALF is TRUE?",options:[{text:"NAC only works within 8 hours of ingestion",correct:false},{text:"NAC should be given to all ALF patients regardless of cause",correct:true},{text:"NAC is contraindicated in non-APAP ALF",correct:false},{text:"Oral NAC is preferred over IV in ALF",correct:false}],explanation:{correct:"Correct! NAC benefits ALL ALF patients. For APAP: replenishes glutathione. For non-APAP: improves microcirculation, oxygen delivery, and scavenges free radicals. Studies show improved transplant-free survival.",incorrect:"NAC benefits all ALF, not just APAP. It's effective even late in APAP toxicity. IV is preferred in ALF (reliable absorption, patient may be vomiting/encephalopathic)."},teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 NAC Protocol (21-hour IV)</div><div class="pathway">Loading: 150 mg/kg in D5W 200mL over 1 hour
+Dose 2: 50 mg/kg in D5W 500mL over 4 hours
+Dose 3: 100 mg/kg in D5W 1000mL over 16 hours
+
+Continue until:
+• INR <2, AND
+• Encephalopathy resolved, OR
+• Transplant occurs</div></div>`,why_chain:[{q:"How does NAC help in non-APAP ALF?",a:"Improves microcirculatory flow, increases oxygen delivery to hepatocytes, and scavenges free radicals. Multiple trials show improved transplant-free survival in non-APAP ALF."}],points:10}},
+        {title:"Hepatic Encephalopathy Management",content:`<div class="narrative"><p>Your patient has <span class="highlight">Grade 2-3 encephalopathy</span> - she's confused, lethargic, and has asterixis.</p></div>`,question:{prompt:"How does encephalopathy in ALF differ from cirrhosis?",options:[{text:"It's typically milder in ALF",correct:false},{text:"It can progress to cerebral edema in ALF",correct:true},{text:"Lactulose is contraindicated in ALF",correct:false},{text:"Ammonia levels guide treatment in ALF",correct:false}],explanation:{correct:"Correct! In ALF, encephalopathy can progress to cerebral edema and herniation - the leading cause of death. This doesn't happen in chronic liver disease. Grade 3-4 = high risk.",incorrect:"Cerebral edema is unique to ALF. In cirrhosis, encephalopathy rarely causes cerebral edema. This makes ALF encephalopathy much more dangerous."},teaching:`<h4>West Haven Criteria</h4><table class="comparison-table"><tr><th>Grade</th><th>Features</th></tr><tr><td>1</td><td>Mild confusion, sleep disturbance</td></tr><tr><td>2</td><td>Lethargy, moderate confusion, asterixis</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>3</td><td>Somnolent but arousable, marked confusion</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>4</td><td>Coma, unresponsive</td></tr></table><div class="alert-box"><div class="alert-title">⚠️ Grade 3-4 = High Cerebral Edema Risk!</div><p>Consider ICU, intubation for airway protection, ICP monitoring if awaiting transplant.</p></div>`,why_chain:[{q:"Why does ALF cause cerebral edema but cirrhosis doesn't?",a:"In ALF, massive ammonia surge + systemic inflammation overwhelm brain's ability to adapt. In chronic disease, astrocytes slowly adapt to elevated ammonia. The rapidity of ALF prevents adaptation."}],points:10}},
+        {title:"Coagulopathy: To Correct or Not?",content:`<div class="narrative"><p>The patient's INR is <span class="critical">3.8</span>. A colleague suggests giving FFP to "fix the coagulopathy."</p></div>`,question:{prompt:"What is the recommended approach to coagulopathy in ALF?",options:[{text:"Give FFP to all patients with INR >2",correct:false},{text:"Do not routinely correct INR; it's a prognostic marker",correct:true},{text:"Give vitamin K to all ALF patients",correct:false},{text:"Coagulopathy means high bleeding risk - avoid all procedures",correct:false}],explanation:{correct:"Correct! INR is a prognostic marker - correcting it obscures the trend. ALF has 'balanced' hemostasis (both pro- and anti-coagulant factors decreased). Only give FFP for active bleeding or pre-procedure.",incorrect:"Don't routinely correct INR! It's prognostic, not just a bleeding risk. Paradoxically, ALF patients have balanced hemostasis and still need DVT prophylaxis."},teaching:`<div class="mechanism-box"><div class="mechanism-title">🧬 Balanced Hemostasis in ALF</div><div class="pathway">Liver makes BOTH:
+• Pro-coagulant factors (II, V, VII, IX, X)
+• Anti-coagulant factors (Protein C, S, AT)
+
+In ALF, BOTH are decreased
+→ "Rebalanced" hemostasis
+→ Risk of bleeding AND thrombosis!
+
+INR reflects pro-coagulant factors only
+→ Overestimates true bleeding risk
+
+VTE prophylaxis is still recommended!</div></div>`,why_chain:[{q:"When should you give FFP?",a:"Active bleeding or before invasive procedures (central line, ICP monitor). Giving FFP otherwise wastes a valuable prognostic marker and doesn't prevent spontaneous bleeding."}],points:10}},
+        {title:"Cerebral Edema: The Killer",content:`<div class="narrative"><p>On day 2, the patient becomes more obtunded. You note <span class="critical">systemic hypertension (180/100)</span> with <span class="critical">bradycardia (HR 52)</span>.</p></div><div class="alert-box"><div class="alert-title">🚨 Cushing Reflex = Elevated ICP!</div><p>Hypertension + bradycardia = brainstem compression from elevated intracranial pressure. This is an emergency!</p></div>`,question:{prompt:"What is the MOST important immediate intervention for suspected elevated ICP?",options:[{text:"Emergent CT head",correct:false},{text:"Mannitol or hypertonic saline",correct:true},{text:"Lumbar puncture",correct:false},{text:"Start lactulose",correct:false}],explanation:{correct:"Correct! Osmotic therapy (mannitol 0.5-1 g/kg or hypertonic saline) is the immediate treatment for elevated ICP. CT can wait - clinical signs are enough to act. LP is contraindicated (herniation risk)!",incorrect:"Osmotic therapy is the immediate treatment. CT can confirm but shouldn't delay treatment. LP is absolutely contraindicated - can precipitate herniation."},teaching:`<div class="mechanism-box"><div class="mechanism-title">📋 ICP Management in ALF</div><div class="pathway">PREVENTION:
+• Head of bed 30°
+• Avoid hyperthermia (target 35-36°C)
+• Maintain Na 145-150 mEq/L
+• Avoid hypoxia, hypercarbia
+• Minimize stimulation
+
+TREATMENT OF ELEVATED ICP:
+• Mannitol 0.5-1 g/kg bolus
+• Hypertonic saline (23.4% or 3%)
+• Hyperventilation (temporary bridge)
+• Propofol or barbiturate coma</div></div>`,why_chain:[{q:"Why is cerebral edema the leading cause of death in ALF?",a:"Massive ammonia load + inflammatory cytokines cause astrocyte swelling. Brain is enclosed in rigid skull → increased pressure → herniation. Occurs in 25-35% of ALF with grade 3-4 encephalopathy."}],points:10}},
+        {title:"King's College Criteria",content:`<div class="narrative"><p>You need to determine if this patient needs a liver transplant. The transplant team asks for prognostic information.</p></div>`,question:{prompt:"According to King's College Criteria for APAP-induced ALF, which SINGLE finding predicts need for transplant?",options:[{text:"INR >6.5",correct:false},{text:"Arterial pH <7.30 after resuscitation",correct:true},{text:"AST >5000",correct:false},{text:"Grade 3 encephalopathy",correct:false}],explanation:{correct:"Correct! For APAP ALF: pH <7.30 ALONE after adequate resuscitation indicates transplant need. Alternatively, ALL THREE of: INR >6.5, Cr >3.4, AND Grade III-IV encephalopathy.",incorrect:"pH <7.30 is the single criterion. INR, Cr, and encephalopathy must ALL be present together as an alternative. Contact transplant center early - don't wait for criteria."},teaching:`<h4>King's College Criteria</h4><table class="comparison-table"><tr><th colspan="2">APAP-Induced ALF</th></tr><tr><td colspan="2" style="background:rgba(239,68,68,0.2);text-align:center;"><strong>pH <7.30</strong> after resuscitation</td></tr><tr><td colspan="2" style="text-align:center;">OR ALL THREE:</td></tr><tr><td colspan="2">• INR >6.5<br>• Creatinine >3.4 mg/dL<br>• Grade III-IV encephalopathy</td></tr></table><table class="comparison-table" style="margin-top:12px;"><tr><th colspan="2">Non-APAP ALF</th></tr><tr><td colspan="2" style="background:rgba(239,68,68,0.2);text-align:center;"><strong>INR >6.5</strong> alone</td></tr><tr><td colspan="2" style="text-align:center;">OR 3 of 5:</td></tr><tr><td colspan="2">• Age <10 or >40<br>• Unfavorable etiology (drugs, Wilson)<br>• Jaundice >7 days before encephalopathy<br>• INR >3.5<br>• Bilirubin >17.5</td></tr></table>`,why_chain:[{q:"Why contact transplant early?",a:"Don't wait for King's criteria to be met! Evaluation takes time, organ availability varies. Contact transplant center as soon as ALF is diagnosed."}],points:10}},
+        {title:"Case Resolution",content:`<div class="narrative"><p>Your patient received NAC, was managed in the ICU with ICP monitoring, and received aggressive supportive care. Her pH was 7.28 after resuscitation, meeting King's criteria.</p><p style="margin-top:12px;">She was listed for <span class="highlight">emergent liver transplant</span> and received a donor organ 36 hours later. Post-transplant, she made a full recovery.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 ALF Management Summary</div><div class="pathway">1. DEFINE: INR ≥1.5 + encephalopathy + no prior liver disease
+
+2. CAUSE: Always check APAP level, viral serologies, autoimmune, Wilson
+
+3. NAC: Give to ALL ALF patients regardless of cause
+
+4. SUPPORTIVE CARE:
+   • ICU admission
+   • Avoid sedatives (unless intubated)
+   • Cerebral edema prevention
+   • Don't correct INR unless bleeding
+
+5. TRANSPLANT EVALUATION: Contact early!
+
+6. KING'S CRITERIA: Determine transplant need</div></div>`,question:{prompt:"What is the MOST important early intervention in suspected ALF?",options:[{text:"Urgent liver biopsy",correct:false},{text:"Start N-acetylcysteine while determining etiology",correct:true},{text:"Correct INR with FFP",correct:false},{text:"Wait for APAP level before any treatment",correct:false}],explanation:{correct:"Correct! Start NAC immediately in all ALF - don't wait for APAP level. It benefits APAP and non-APAP causes. Contact transplant center early. Supportive care in ICU.",incorrect:"Start NAC immediately! It helps all causes of ALF. Don't wait for lab results. Biopsy is rarely needed emergently. Don't routinely correct INR."},teaching:`<h4>Key Takeaways</h4><ul style="line-height:2;margin-left:20px;"><li>ALF = INR ≥1.5 + encephalopathy + no prior liver disease</li><li>APAP is #1 cause in US (~50%)</li><li>NAC for ALL ALF patients</li><li>Don't correct INR unless actively bleeding</li><li>Cerebral edema is leading cause of death</li><li>King's criteria for transplant evaluation</li><li>Contact transplant center EARLY</li></ul>`,why_chain:[],points:10}}
+    ];
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
+    function renderStage(){const stage=stages[currentStage];let html=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage+1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>${stage.content}`;if(stage.question){html+=`<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;stage.question.options.forEach((opt,i)=>{html+=`<div class="mcq-option" onclick="checkAnswer(${i},${opt.correct})"><div class="option-letter">${String.fromCharCode(65+i)}</div><div>${opt.text}</div></div>`;});html+=`</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>${stage.question.explanation.correct}</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;if(stage.question.teaching)html+=`<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;if(stage.question.why_chain&&stage.question.why_chain.length>0){html+=`<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain</h4>`;stage.question.why_chain.forEach(w=>{html+=`<div class="why-item"><div class="why-q">${w.q}</div><div style="color:#e2e8f0;line-height:1.6;">${w.a}</div></div>`;});html+=`</div>`;}html+=`<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;}html+=`</div>`;document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');const w=document.getElementById('why-chain');if(w)w.classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML=`<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>${score}</strong> / ${stages.length*10}</p><p>You've mastered Acute Liver Failure!</p></div>`;}}
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Acute Liver Failure"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

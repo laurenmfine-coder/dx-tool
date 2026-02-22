@@ -1,0 +1,356 @@
+<!DOCTYPE html><html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+
+                    <div class="tip-header">✗ Pitfalls</div>
+                    <ul style="margin-left:16px;">
+                        <li>Using outdated 10% cross-reactivity data</li>
+                        <li>Not taking detailed history</li>
+                        <li>Failing to update EHR after delabeling</li>
+                        <li>Challenging after SCAR history</li>
+                        <li>Confusing delabeling with desensitization</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="state.stage=0;renderStage();">🔄 Review Again</button>
+        </div>
+    </div>`;
+};
+
+// Initialize
+renderStage();
+</script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Penicillin Allergy</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="allergic-rhinitis-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="asthma-phenotyping-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Phenotyping</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://ginasthma.org/gina-reports/" target="_blank" class="text-blue-600 hover:underline">GINA Asthma Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK560551/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Pulmonary Embolism</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Penicillin Delabeling Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Clinical Module"
+         data-key-points="Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Delirium - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #ddd6fe; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #7c3aed; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(124,58,237,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(124,58,237,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #ddd6fe; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(124,58,237,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #c4b5fd); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #7c3aed; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #c4b5fd; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:#475569;margin-bottom:8px;font-weight:600">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK470399/" target="_blank" rel="noopener">Delirium - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0, difficulty = 'standard';
+    const stages = [
+    {
+        title: "The Confused Elder",
+        content: `<div class="narrative"><p>You are called to see an <span class="highlight">82-year-old woman</span> who is <span class="critical">newly confused</span>. She was admitted yesterday for a hip fracture repair. The nurse reports she was oriented earlier today but is now <span class="highlight">agitated, pulling at her IV, and talking to people who aren't there</span>.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 98, BP 142/88, T 38.1°C, RR 20, SpO2 94%<br><strong>Baseline:</strong> Lives independently, no prior cognitive issues per family</p></div>
+        <div class="socratic-prompt"><h4>Defining the Problem</h4><p>What distinguishes delirium from other causes of confusion, and why is this presentation concerning?</p></div>`,
+        hint_beginner: "Key features: acute onset, fluctuating course, and inattention. Compare to her baseline.",
+        hint_advanced: "What is the pathophysiology of postoperative delirium and why are elderly surgical patients at high risk?",
+        question: {
+            prompt: "What is the HALLMARK feature that distinguishes delirium from dementia?",
+            options: [
+                { text: "Memory impairment", correct: false },
+                { text: "Inattention", correct: true },
+                { text: "Visual hallucinations", correct: false },
+                { text: "Disorientation to time", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Inattention is the hallmark of delirium. While dementia patients may have memory issues, their attention is typically preserved early in the disease. Delirious patients cannot focus, are easily distracted, and have difficulty following conversation.",
+                incorrect: "Inattention is the hallmark feature. While memory issues and disorientation occur in both conditions, the inability to focus attention is what distinguishes delirium from early dementia."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Delirium Definition</div><div class="pathway">DELIRIUM = Acute confusional state
+
+Key features:
+• Acute onset (hours to days)
+• Fluctuating course (waxes and wanes)
+• INATTENTION (hallmark!)
+• Altered level of consciousness
+• Caused by underlying medical condition
+
+Always represents a MEDICAL EMERGENCY
+- Something is wrong with the body affecting the brain</div></div>`,
+            why_chain: [{q: "Why is inattention the hallmark?", a: "Attention requires intact arousal systems (reticular activating system) and cortical integration. Delirium disrupts these systems globally, making sustained attention impossible. Dementia initially spares attention because it's a focal cortical process."}, {q: "Why are surgical patients at high risk?", a: "Multiple factors: anesthesia effects, pain, opioid medications, sleep disruption, infection risk, inflammatory response to surgery, immobility, and underlying vulnerability (age, cognitive reserve)."}],
+            points: 10
+        }
+    },
+    {
+        title: "Delirium Subtypes",
+        content: `<div class="narrative"><p>This patient is <span class="highlight">hyperactive</span> - agitated, pulling at lines, hallucinating. But you recall that this isn't the only presentation.</p></div>
+        <div class="socratic-prompt"><h4>Clinical Subtypes</h4><p>What are the subtypes of delirium and which is most commonly missed?</p></div>`,
+        hint_beginner: "Think about the opposite of agitation - what does a quiet, withdrawn delirious patient look like?",
+        hint_advanced: "What is the prognostic significance of different delirium subtypes?",
+        question: {
+            prompt: "Which subtype of delirium is MOST commonly missed and has the WORST prognosis?",
+            options: [
+                { text: "Hyperactive delirium", correct: false },
+                { text: "Hypoactive delirium", correct: true },
+                { text: "Mixed delirium", correct: false },
+                { text: "Subsyndromal delirium", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Hypoactive delirium is most commonly missed because patients are quiet and withdrawn rather than disruptive. It actually has the worst prognosis, possibly because it's often unrecognized and untreated.",
+                incorrect: "Hypoactive delirium is most commonly missed. These patients are quiet, withdrawn, and lethargic - often mistaken for depression or 'just tired.' It has worse outcomes than hyperactive delirium."
+            },
+            teaching: `<h4>Delirium Subtypes</h4><table class="comparison-table"><tr><th>Subtype</th><th>Features</th><th>Recognition</th></tr><tr><td><strong>Hyperactive</strong></td><td>Agitation, restlessness, hallucinations, pulling at lines</td><td>Easily recognized (disruptive)</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Hypoactive</strong></td><td>Withdrawn, quiet, lethargic, decreased activity</td><td>OFTEN MISSED - looks like depression</td></tr><tr><td><strong>Mixed</strong></td><td>Fluctuates between hyper and hypo</td><td>Most common type</td></tr></table>
+<div class="alert-box"><div class="alert-title">⚠️ Hypoactive Delirium</div><p>Up to 70% of delirium is hypoactive or mixed. Hypoactive has WORSE mortality, possibly because it's missed. Always screen - don't wait for agitation!</p></div>`,
+            why_chain: [{q: "Why does hypoactive delirium have worse prognosis?", a: "Likely multifactorial: (1) Often unrecognized → underlying cause not treated, (2) May reflect more severe brain dysfunction, (3) Associated with more frail patients, (4) Often caused by metabolic derangements or organ failure."}, {q: "What is mixed delirium?", a: "The most common type - patients fluctuate between hyperactive and hypoactive states, sometimes within hours. The fluctuating course is itself a hallmark of delirium."}],
+            points: 10
+        }
+    },
+    {
+        title: "The CAM Assessment",
+        content: `<div class="narrative"><p>You decide to formally assess for delirium using the <span class="highlight">Confusion Assessment Method (CAM)</span>, the gold standard screening tool.</p></div>
+        <div class="socratic-prompt"><h4>Diagnostic Criteria</h4><p>What are the four features of the CAM, and which are required for diagnosis?</p></div>`,
+        hint_beginner: "You need Features 1 AND 2, plus either 3 OR 4.",
+        hint_advanced: "How do you modify CAM assessment for intubated ICU patients (CAM-ICU)?",
+        question: {
+            prompt: "According to CAM criteria, delirium requires which combination of features?",
+            options: [
+                { text: "Any 2 of the 4 features", correct: false },
+                { text: "Features 1 + 2 + either 3 OR 4", correct: true },
+                { text: "All 4 features must be present", correct: false },
+                { text: "Feature 2 (inattention) alone is sufficient", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! CAM requires: (1) Acute onset AND fluctuating course + (2) Inattention + EITHER (3) Disorganized thinking OR (4) Altered level of consciousness.",
+                incorrect: "CAM diagnosis requires Features 1 AND 2 (both mandatory), plus EITHER Feature 3 OR 4. This combination has high sensitivity and specificity for delirium."
+            },
+            teaching: `<h4>Confusion Assessment Method (CAM)</h4><table class="comparison-table"><tr><th>Feature</th><th>Assessment</th><th>Required?</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>1. Acute onset + fluctuating</strong></td><td>Different from baseline? Waxes and wanes?</td><td>YES</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>2. Inattention</strong></td><td>Difficulty focusing? Easily distracted?</td><td>YES</td></tr><tr><td><strong>3. Disorganized thinking</strong></td><td>Rambling, illogical, incoherent?</td><td>Need 3 OR 4</td></tr><tr><td><strong>4. Altered LOC</strong></td><td>Anything other than alert?</td><td>Need 3 OR 4</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">📋 Testing Attention</div><div class="pathway">Simple tests for inattention:
+• Days of week backward
+• Months of year backward
+• Serial 7s (100-7-7-7...)
+• Digit span (repeat numbers)
+• Spell WORLD backward
+
+If patient cannot complete these → inattention present</div></div>`,
+            why_chain: [{q: "What is CAM-ICU?", a: "Modified CAM for intubated/non-verbal patients. Uses RASS for consciousness level, visual attention tasks, and simple yes/no questions. First check RASS: if -4 or -5 (coma), cannot assess for delirium."}, {q: "How sensitive/specific is CAM?", a: "When performed correctly: Sensitivity 94-100%, Specificity 90-95%. However, sensitivity drops significantly if performed incorrectly or rushed."}],
+            points: 10
+        }
+    },
+    {
+        title: "Finding the Cause",
+        content: `<div class="narrative"><p>You've confirmed delirium. Now you must find the underlying cause - delirium is always a symptom of something else!</p><p>This patient has: <span class="highlight">postoperative status, low-grade fever, on opioids for pain</span></p></div>
+        <div class="alert-box"><div class="alert-title">🚨 Delirium = Medical Emergency</div><p>Always has an underlying cause. Delirium won't resolve until the cause is identified and treated!</p></div>
+        <div class="socratic-prompt"><h4>Etiology</h4><p>What are the common causes of delirium, and what mnemonic helps you remember them?</p></div>`,
+        hint_beginner: "Remember 'I WATCH DEATH' - Infection, Withdrawal, Acute metabolic, Trauma, CNS, Hypoxia, Deficiencies, Endocrine, Acute vascular, Toxins, Heavy metals",
+        hint_advanced: "Which medications are most commonly implicated in causing delirium?",
+        question: {
+            prompt: "In this postoperative elderly patient, what is the MOST common cause of delirium?",
+            options: [
+                { text: "Primary psychiatric disorder", correct: false },
+                { text: "Medications (especially opioids and anticholinergics)", correct: true },
+                { text: "New stroke", correct: false },
+                { text: "Alcohol withdrawal", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Medications are the most common modifiable cause of delirium, especially in postoperative patients. Opioids, benzodiazepines, anticholinergics, and polypharmacy are major culprits.",
+                incorrect: "Medications are the most common cause in hospitalized patients. Opioids for pain, anticholinergics (including diphenhydramine!), benzodiazepines, and polypharmacy are frequent culprits."
+            },
+            teaching: `<h4>"I WATCH DEATH" Mnemonic</h4><table class="comparison-table"><tr><th>Letter</th><th>Cause</th></tr><tr><td><strong>I</strong></td><td>Infection (UTI, pneumonia, sepsis)</td></tr><tr><td><strong>W</strong></td><td>Withdrawal (alcohol, benzos, opioids)</td></tr><tr><td><strong>A</strong></td><td>Acute metabolic (electrolytes, glucose, uremia)</td></tr><tr><td><strong>T</strong></td><td>Trauma (head injury, pain, surgery)</td></tr><tr><td><strong>C</strong></td><td>CNS pathology (stroke, seizure, bleed)</td></tr><tr><td><strong>H</strong></td><td>Hypoxia</td></tr><tr><td><strong>D</strong></td><td>Deficiencies (B12, thiamine)</td></tr><tr><td><strong>E</strong></td><td>Endocrine (thyroid, adrenal)</td></tr><tr><td><strong>A</strong></td><td>Acute vascular (MI, PE)</td></tr><tr><td><strong>T</strong></td><td>Toxins/drugs</td></tr><tr><td><strong>H</strong></td><td>Heavy metals</td></tr></table>`,
+            why_chain: [{q: "Why are anticholinergics so problematic?", a: "Acetylcholine is crucial for attention and memory. Anticholinergic drugs (diphenhydramine, oxybutynin, TCAs, first-gen antihistamines) directly impair these functions. Elderly have reduced cholinergic reserve."}, {q: "What about 'sundowning'?", a: "Worsening confusion in evening/night is common in delirium due to disrupted circadian rhythms, reduced environmental cues, and fatigue. Not a separate diagnosis - it's still delirium."}],
+            points: 10
+        }
+    },
+    {
+        title: "Diagnostic Workup",
+        content: `<div class="narrative"><p>You order a workup to identify the underlying cause. The patient has a low-grade fever, was recently catheterized, and is postoperative.</p></div>
+        <div class="socratic-prompt"><h4>Testing Strategy</h4><p>What baseline tests should every delirious patient receive, and when do you add advanced testing?</p></div>`,
+        hint_beginner: "Start with CBC, BMP, UA, and medication review. Add imaging/LP only if indicated.",
+        hint_advanced: "What is the role of EEG in delirium evaluation?",
+        question: {
+            prompt: "Which test is MOST important in the initial evaluation of delirium?",
+            options: [
+                { text: "CT head", correct: false },
+                { text: "Lumbar puncture", correct: false },
+                { text: "Comprehensive medication review", correct: true },
+                { text: "EEG", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Medication review is critical because drugs are the most common modifiable cause. Every delirious patient needs their medication list scrutinized for culprits (opioids, anticholinergics, benzos, steroids).",
+                incorrect: "Medication review is most important. Drugs are the #1 modifiable cause. CT, LP, and EEG are selective - only when specific indications exist (focal signs, meningeal signs, seizure concern)."
+            },
+            teaching: `<h4>Initial Evaluation</h4><table class="comparison-table"><tr><th>Test</th><th>Looking For</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Medication review</strong></td><td>Offending drugs (anticholinergics, opioids, benzos)</td></tr><tr><td><strong>CBC</strong></td><td>Infection, anemia</td></tr><tr><td><strong>BMP</strong></td><td>Electrolytes, glucose, renal function</td></tr><tr><td><strong>Urinalysis</strong></td><td>UTI (but beware asymptomatic bacteriuria!)</td></tr><tr><td><strong>Pulse ox/ABG</strong></td><td>Hypoxia, hypercarbia</td></tr><tr><td><strong>CXR</strong></td><td>Pneumonia</td></tr></table>
+<div class="alert-box"><div class="alert-title">⚠️ Selective Additional Testing</div><p><strong>CT head:</strong> Focal signs, fall, anticoagulation<br><strong>LP:</strong> Fever + meningeal signs<br><strong>EEG:</strong> Seizure concern, unexplained delirium</p></div>`,
+            why_chain: [{q: "What about UTI in the elderly?", a: "Controversial! Asymptomatic bacteriuria is common in elderly and doesn't cause delirium. Don't reflexively treat positive UA - look for other causes first. However, symptomatic UTI (dysuria, frequency, fever) can cause delirium."}, {q: "When do you get an EEG?", a: "Consider EEG if: (1) Seizure is suspected, (2) Delirium is unexplained after workup, (3) Nonconvulsive status epilepticus is possible, (4) Distinguishing delirium from psychiatric condition."}],
+            points: 10
+        }
+    },
+    {
+        title: "Delirium vs Dementia",
+        content: `<div class="narrative"><p>Family asks if grandma has dementia now. You need to explain the difference - and the important overlap.</p></div>
+        <div class="socratic-prompt"><h4>Differential Diagnosis</h4><p>How do you distinguish delirium from dementia, and what is the relationship between them?</p></div>`,
+        hint_beginner: "Key differences: onset (acute vs insidious), course (fluctuating vs stable), attention (impaired vs preserved early).",
+        hint_advanced: "What is 'delirium superimposed on dementia' and why does it matter?",
+        question: {
+            prompt: "An elderly patient with known mild dementia is acutely more confused. What is the MOST appropriate interpretation?",
+            options: [
+                { text: "Expected progression of dementia", correct: false },
+                { text: "Delirium superimposed on dementia - urgent workup needed", correct: true },
+                { text: "Psychiatric consultation for depression", correct: false },
+                { text: "Reassurance that this is normal for dementia", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Any ACUTE change in a dementia patient is delirium until proven otherwise. Dementia is a major risk factor for delirium. These patients need urgent evaluation for underlying medical causes.",
+                incorrect: "Acute change = delirium, not dementia progression. Dementia is a RISK FACTOR for delirium. Any sudden worsening requires medical workup. Don't dismiss as 'just her dementia.'"
+            },
+            teaching: `<h4>Delirium vs Dementia</h4><table class="comparison-table"><tr><th>Feature</th><th>Delirium</th><th>Dementia</th></tr><tr><td><strong>Onset</strong></td><td>Acute (hours-days)</td><td>Insidious (months-years)</td></tr><tr><td><strong>Course</strong></td><td>Fluctuating</td><td>Progressive, stable day-to-day</td></tr><tr><td><strong>Attention</strong></td><td>IMPAIRED (hallmark)</td><td>Usually intact early</td></tr><tr><td><strong>Consciousness</strong></td><td>Altered</td><td>Alert until late stages</td></tr><tr><td><strong>Reversibility</strong></td><td>Usually reversible</td><td>Generally irreversible</td></tr><tr><td><strong>Cause</strong></td><td>Medical condition</td><td>Neurodegenerative</td></tr></table>
+<div class="alert-box"><div class="alert-title">🚨 Critical Point</div><p>Dementia is a RISK FACTOR for delirium. Any acute change in a dementia patient = delirium until proven otherwise!</p></div>`,
+            why_chain: [{q: "Why are dementia patients at higher risk for delirium?", a: "Reduced cognitive reserve means less capacity to compensate for metabolic stressors. Also: often on multiple medications, higher hospitalization rates, and reduced ability to communicate symptoms."}, {q: "Can delirium cause permanent cognitive decline?", a: "Yes! Delirium is associated with accelerated cognitive decline and increased dementia risk. This is why prevention and early treatment are so important."}],
+            points: 10
+        }
+    },
+    {
+        title: "Non-Pharmacologic Management",
+        content: `<div class="narrative"><p>You've identified the likely causes in your patient: <span class="highlight">postoperative inflammation, opioid medications, and possible UTI</span>. Now you implement treatment.</p></div>
+        <div class="alert-box"><div class="alert-title">🚨 Priority #1: Treat the Underlying Cause!</div><p>Delirium won't resolve until the cause is addressed. Antibiotics for infection, stop offending meds, correct electrolytes.</p></div>
+        <div class="socratic-prompt"><h4>Management</h4><p>What are the first-line interventions for delirium, and why is non-pharmacologic treatment preferred?</p></div>`,
+        hint_beginner: "Think about orientation aids, sleep hygiene, mobility, and sensory optimization.",
+        hint_advanced: "What is the evidence for the HELP program in delirium prevention?",
+        question: {
+            prompt: "What is the MOST effective intervention for treating delirium?",
+            options: [
+                { text: "Haloperidol for agitation control", correct: false },
+                { text: "Identifying and treating the underlying cause", correct: true },
+                { text: "Physical restraints to prevent injury", correct: false },
+                { text: "Benzodiazepines for sedation", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Treating the underlying cause is the ONLY way to resolve delirium. No medication treats delirium itself - they only manage symptoms and may actually prolong it.",
+                incorrect: "Treating the cause is essential. Medications don't treat delirium - they only manage symptoms. Restraints and benzos often WORSEN delirium. Find and fix the underlying problem."
+            },
+            teaching: `<h4>Non-Pharmacologic Interventions (HELP Program)</h4><table class="comparison-table"><tr><th>Domain</th><th>Intervention</th></tr><tr><td><strong>Orientation</strong></td><td>Clocks, calendars, familiar objects, family presence</td></tr><tr><td><strong>Sleep</strong></td><td>Preserve sleep-wake cycle, reduce nighttime interruptions</td></tr><tr><td><strong>Mobility</strong></td><td>Early mobilization, AVOID restraints</td></tr><tr><td><strong>Sensory</strong></td><td>Glasses, hearing aids, adequate lighting</td></tr><tr><td><strong>Hydration</strong></td><td>Ensure adequate fluid intake</td></tr><tr><td><strong>Cognition</strong></td><td>Cognitively stimulating activities</td></tr></table>
+<div class="mechanism-box"><div class="mechanism-title">📊 HELP Program Evidence</div><div class="pathway">Hospital Elder Life Program (HELP):
+• Reduces delirium incidence by 30-40%
+• Reduces falls
+• Reduces length of stay
+• Cost-effective
+
+Key: Multicomponent, non-pharmacologic
+Prevention > Treatment</div></div>`,
+            why_chain: [{q: "Why avoid restraints?", a: "Restraints increase agitation, prolong delirium, cause injuries, and are associated with worse outcomes including mortality. They should be absolute last resort only for immediate safety."}, {q: "What about family presence?", a: "Family presence is therapeutic - provides orientation, reassurance, and familiar faces. Encourage family to stay at bedside when possible."}],
+            points: 10
+        }
+    },
+    {
+        title: "Pharmacologic Management",
+        content: `<div class="narrative"><p>Despite your interventions, the patient remains severely agitated and is trying to climb out of bed, putting herself at risk for falls. She has already pulled out one IV.</p></div>
+        <div class="socratic-prompt"><h4>When to Use Medications</h4><p>When are medications indicated for delirium, and what are the options?</p></div>`,
+        hint_beginner: "Medications are LAST resort - only for severe agitation threatening safety. They don't treat delirium itself.",
+        hint_advanced: "What special considerations apply in Parkinson's disease or Lewy body dementia?",
+        question: {
+            prompt: "Which statement about antipsychotics in delirium is TRUE?",
+            options: [
+                { text: "They treat the underlying delirium and should be used early", correct: false },
+                { text: "They manage agitation symptoms but may prolong delirium", correct: true },
+                { text: "Benzodiazepines are preferred over antipsychotics", correct: false },
+                { text: "High doses are needed for efficacy", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Antipsychotics only manage agitation symptoms - they do NOT treat delirium itself and may actually prolong it. Use only when severe agitation endangers patient/staff safety, and use lowest effective doses.",
+                incorrect: "Antipsychotics manage symptoms only - they don't treat delirium. Evidence suggests they may prolong delirium duration. Reserve for severe agitation threatening safety. Use low doses."
+            },
+            teaching: `<h4>Medication Options (LAST Resort)</h4><table class="comparison-table"><tr><th>Agent</th><th>Dose</th><th>Notes</th></tr><tr><td><strong>Haloperidol</strong></td><td>0.5-1 mg</td><td>Traditional; QTc risk</td></tr><tr><td><strong>Quetiapine</strong></td><td>12.5-25 mg</td><td>Sedating; helps sleep</td></tr><tr><td><strong>Risperidone</strong></td><td>0.25-0.5 mg</td><td>Less sedating</td></tr><tr><td><strong>Olanzapine</strong></td><td>2.5-5 mg</td><td>More sedating</td></tr></table>
+<div class="alert-box"><div class="alert-title">⚠️ Special Situations</div><p><strong>Alcohol/benzo withdrawal:</strong> Use benzodiazepines<br><strong>Parkinson's/Lewy body:</strong> AVOID antipsychotics (worsen motor symptoms, neuroleptic sensitivity) - quetiapine only if absolutely necessary<br><strong>QTc prolongation:</strong> Avoid haloperidol</p></div>`,
+            why_chain: [{q: "Why are benzos usually avoided?", a: "Benzodiazepines cause sedation, respiratory depression, and paradoxical agitation in elderly. They can worsen delirium except in alcohol/benzo withdrawal where they're the treatment of choice."}, {q: "What about melatonin?", a: "Melatonin/ramelteon may help normalize sleep-wake cycle and has some evidence for delirium prevention. Low side effect profile makes it reasonable to try."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Resolution",
+        content: `<div class="narrative"><p>You implement a comprehensive plan:</p><ul style="margin:12px 0 0 20px;"><li>Switch from opioid to acetaminophen scheduled + PRN tramadol</li><li>Treat UTI with appropriate antibiotics</li><li>Implement HELP protocol interventions</li><li>Family at bedside during the day</li><li>Low-dose quetiapine at night for severe agitation</li></ul><p style="margin-top:12px;">Over 48 hours, the patient's delirium gradually resolves. She is alert, oriented, and following commands by discharge.</p></div>
+        <div class="mechanism-box"><div class="mechanism-title">📚 Delirium Management Algorithm</div><div class="pathway">Confirm delirium (CAM)
+          ↓
+Identify underlying cause (I WATCH DEATH)
+          ↓
+TREAT THE CAUSE
+• Stop offending medications
+• Treat infection
+• Correct metabolic derangements
+          ↓
+Non-pharmacologic interventions (HELP)
+• Orientation, sleep, mobility, sensory
+          ↓
+Medications ONLY if severe agitation
+• Low-dose antipsychotics
+• Benzos only for withdrawal</div></div>`,
+        question: {
+            prompt: "What is the MOST important factor in preventing delirium recurrence?",
+            options: [
+                { text: "Prophylactic antipsychotic use", correct: false },
+                { text: "Avoiding all opioid medications", correct: false },
+                { text: "Addressing modifiable risk factors and avoiding precipitants", correct: true },
+                { text: "Routine CT head screening", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Prevention focuses on addressing modifiable risk factors: medication review, adequate sleep, early mobility, sensory optimization, hydration, and treating pain appropriately. Once delirium has occurred, future risk is increased.",
+                incorrect: "Prevention through risk factor modification is key. No prophylactic medication is recommended. Opioids aren't absolutely contraindicated - undertreated pain also causes delirium. Focus on multicomponent prevention."
+            },
+            teaching: `<h4>Key Takeaways</h4>
+<ul style="line-height:2;margin-left:20px;">
+<li><strong>Definition:</strong> Acute confusional state with inattention</li>
+<li><strong>Hallmark:</strong> Inattention (distinguishes from dementia)</li>
+<li><strong>Most missed subtype:</strong> Hypoactive (worst prognosis)</li>
+<li><strong>CAM criteria:</strong> Acute + Inattention + (Disorganized OR Altered LOC)</li>
+<li><strong>Treatment priority:</strong> Find and treat underlying cause</li>
+<li><strong>Medications:</strong> Last resort for severe agitation only</li>
+<li><strong>Prevention:</strong> HELP program reduces delirium by 30-40%</li>
+<li><strong>Special:</strong> Avoid antipsychotics in Parkinson's/Lewy body</li>
+</ul>`,
+            why_chain: [],
+            points: 10
+        }
+    }
+];
+    function setDifficulty(d, btn) {
+        difficulty = d;
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.hint-beginner').forEach(h => h.style.display = d === 'beginner' ? 'block' : 'none');
+        document.querySelectorAll('.hint-advanced').forEach(h => h.style.display = d === 'advanced' ? 'block' : 'none');
+    }
+    function updateProgress() {
+        document.getElementById('progress').style.width = ((currentStage + 1) / stages.length * 100) + '%';
+        document.getElementById('maxScore').textContent = stages.length * 10;
+    }
+    function renderStage() {
+        const stage = stages[currentStage];
+        const container = document.getElementById('scene-container');
+        let html = `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div><div class="scene-title">${stage.title}</div></div>`;
+        if (stage.hint_beginner) html += `<div class="hint-beginner" style="display:${difficulty === 'beginner' ? 'block' : 'none'}">🌱 <strong>Beginner Hint:</strong> ${stage.hint_beginner}</div>`;
+        if (stage.hint_advanced) html += `<div class="hint-advanced" style="display:${difficulty === 'advanced' ? 'block' : 'none'}">🎯 <strong>Advanced Challenge:</strong> ${stage.hint_advanced}</div>`;
+        html += stage.content;
+        if (stage.question) {
+            html += `<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;
+            stage.question.options.forEach((opt, i) => {
+                html += `<div class="mcq-option" onclick="checkAnswer(${i}, ${opt.correct})"><div class="option-letter">${String.fromCharCode(65 + i)}</div><div>${opt.text}</div></div>`;
+            });
+            html += `</div><div class="feedback correct-feedback" id="fb-correct"><div class="feedback-title">✓ Correct!</div>${stage.question.explanation.correct}</div>`;
+            html += `<div class="feedback incorrect-feedback" id="fb-incorrect"><div class="feedback-title">✗ Not quite</div>${stage.question.explanation.incorrect}</div>`;
+            if (stage.question.teaching) html += `<div class="teaching-point" id="teaching">${stage.question.teaching}</div>`;
+            if (stage.question.why_chain && stage.question.why_chain.length > 0) {
+                html += `<div class="why-chain" id="why-chain"><h4>🔗 WHY Chain - Dig Deeper</h4>`;
+                stage.question.why_chain.forEach(w => {
+                    html += `<div class="why-item"><div class="why-q">${w.q}</div><div class="why-a">${w.a}</div></div>`;
+                });
+                html += `</div>`;
+            }
+            html += `<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>`;
+        }
+        html += `</div>`;
+        container.innerHTML = html;
+        updateProgress();
+    }
+    function checkAnswer(idx, correct) {
+        const options = document.querySelectorAll('.mcq-option');
+        if (options[0].classList.contains('disabled')) return;
+        options.forEach((opt, i) => {
+            opt.classList.add('disabled');
+            if (stages[currentStage].question.options[i].correct) opt.classList.add('correct');
+            else if (i === idx && !correct) opt.classList.add('incorrect');
+        });
+        if (correct) {
+            document.getElementById('fb-correct').classList.add('show');
+            score += stages[currentStage].question.points;
+            document.getElementById('score').textContent = score;
+        } else {
+            document.getElementById('fb-incorrect').classList.add('show');
+        }
+        const teaching = document.getElementById('teaching');
+        if (teaching) teaching.classList.add('show');
+        const whyChain = document.getElementById('why-chain');
+        if (whyChain) whyChain.classList.add('show');
+        document.getElementById('next-btn').classList.add('show');
+    }
+    function nextStage() {
+        if (currentStage < stages.length - 1) { currentStage++; renderStage(); window.scrollTo(0, 0); }
+        else {
+            document.getElementById('scene-container').innerHTML = `<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>${score}</strong> / ${stages.length * 10}</p><p style="margin-bottom:30px;">You've mastered Delirium!</p><div style="text-align:left;max-width:500px;margin:0 auto;"><h4 style="color:#c4b5fd;margin-bottom:12px;">Key Points:</h4><ul style="line-height:2;"><li>Hallmark: Inattention</li><li>CAM: Acute + Inattention + (Disorganized OR Altered)</li><li>Most missed: Hypoactive delirium</li><li>Treatment: Address underlying cause</li><li>Meds: Last resort only</li></ul></div></div>`;
+        }
+    }
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Delirium"
+         data-key-points="🎉 Case Complete!, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

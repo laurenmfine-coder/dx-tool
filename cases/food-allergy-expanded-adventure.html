@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Food Allergy - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3b82f6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #60a5fa; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #93c5fd; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            vertical-align: top;
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-left: 12px;
+            vertical-align: top;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #3b82f6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.aaaai.org/conditions-treatments/allergies/food-allergy" target="_blank" rel="noopener">Food Allergy - AAAAI (AAAAI)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK482187/" target="_blank" rel="noopener">Food Allergy - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+
+<script>
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Evaluation",
+        "content": "<div class=\"narrative\">\n                <p>Parents bring their <span class=\"highlight\">18-month-old boy</span> for evaluation after he developed hives, facial swelling, and vomiting within 15 minutes of eating scrambled eggs for the first time.</p>\n                <p style=\"margin-top:12px;\"><strong>Prior exposures:</strong> Previously tolerated baked goods containing egg (cookies, muffins)</p>\n            </div>",
+        "hint_beginner": "What is the clinical presentation of IgE-mediated food allergy?",
+        "hint_advanced": "How does tolerance to baked egg affect the diagnosis and prognosis?",
+        "question": {
+            "prompt": "What does the tolerance to baked egg but reaction to scrambled egg suggest?",
+            "options": [
+                {
+                    "text": "Allergy to heat-labile egg proteins (ovomucoid is heat-stable; ovotransferrin and ovalbumin are heat-labile); baked-egg tolerance suggests better prognosis",
+                    "correct": true
+                },
+                {
+                    "text": "This is not true egg allergy - reactions should occur to all forms of egg",
+                    "correct": false
+                },
+                {
+                    "text": "He can safely continue eating baked egg but has severe egg allergy requiring full avoidance",
+                    "correct": false
+                },
+                {
+                    "text": "Baked egg tolerance means he has outgrown his egg allergy",
+                    "correct": false
+                },
+                {
+                    "text": "The reaction to scrambled egg was coincidental; true egg allergy was ruled out by baked egg tolerance",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Many egg-allergic children tolerate baked egg because heating denatures conformational epitopes on heat-labile proteins (ovalbumin, ovotransferrin). Allergy to heat-stable ovomucoid causes reaction to all forms. Baked-egg tolerance is a POSITIVE prognostic factor - these children are more likely to outgrow their allergy.",
+                "incorrect": "Egg allergy exists on a spectrum. Tolerance to baked/heated egg (where proteins are denatured) while reacting to less-cooked egg is common and prognostically favorable. This is true egg allergy. Continued baked egg consumption may actually help accelerate tolerance development."
+            },
+            "teaching": "<h4>\ud83d\udcda Egg Allergy Spectrum</h4>\n                    <p><strong>Major egg allergens:</strong></p>\n                    <ul>\n                        <li>Ovomucoid (Gal d 1): Heat-stable - allergy = reacts to ALL egg forms</li>\n                        <li>Ovalbumin (Gal d 2): Heat-labile - may tolerate baked egg</li>\n                        <li>Ovotransferrin (Gal d 3): Heat-labile</li>\n                    </ul>\n                    <p><strong>Baked egg tolerance:</strong></p>\n                    <ul>\n                        <li>70% of egg-allergic children tolerate baked egg</li>\n                        <li>Better prognosis for outgrowing allergy</li>\n                        <li>Continued baked egg intake may accelerate tolerance</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Diagnostic Testing",
+        "content": "<div class=\"narrative\">\n                <p>You want to confirm egg allergy with testing.</p>\n            </div>",
+        "hint_beginner": "What tests are available for food allergy diagnosis?",
+        "hint_advanced": "How do you interpret specific IgE levels? What are the 95% positive predictive values?",
+        "question": {
+            "prompt": "Skin prick testing to egg white is positive (8mm wheal). Serum egg white specific IgE is 15 kU/L. How do you interpret these results?",
+            "options": [
+                {
+                    "text": "Confirms IgE sensitization to egg; combined with convincing clinical history, confirms diagnosis; the high specific IgE suggests allergy unlikely to be outgrown soon",
+                    "correct": true
+                },
+                {
+                    "text": "Positive testing confirms he will have anaphylaxis with any egg exposure",
+                    "correct": false
+                },
+                {
+                    "text": "Need oral food challenge to make diagnosis - testing alone cannot diagnose food allergy",
+                    "correct": false
+                },
+                {
+                    "text": "Results are indeterminate - specific IgE must be greater than 50 kU/L to diagnose allergy",
+                    "correct": false
+                },
+                {
+                    "text": "Skin testing is unreliable in children under 2 years and should be repeated later",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Positive skin test + elevated specific IgE + convincing clinical history = confirmed egg allergy. The specific IgE level of 15 kU/L exceeds the 95% PPV threshold for egg (~7 kU/L), meaning >95% chance of reaction. Higher IgE levels correlate with persistence (less likely to outgrow soon).",
+                "incorrect": "Testing confirms IgE sensitization, which with clinical history confirms allergy. Testing cannot predict severity of future reactions. The specific IgE level is useful for prognosis - higher levels suggest longer duration of allergy. Oral challenges are for unclear cases or monitoring for resolution."
+            },
+            "teaching": "<h4>\ud83d\udcda Food Allergy Testing</h4>\n                    <p><strong>Skin prick testing:</strong></p>\n                    <ul>\n                        <li>Wheal greater than 3mm above negative control = positive</li>\n                        <li>High sensitivity, lower specificity</li>\n                        <li>Negative test: high negative predictive value (95%+)</li>\n                    </ul>\n                    <p><strong>Specific IgE levels (95% PPV thresholds):</strong></p>\n                    <ul>\n                        <li>Egg: ~7 kU/L (children), ~6 kU/L (less than 2 years)</li>\n                        <li>Milk: ~15 kU/L</li>\n                        <li>Peanut: ~14 kU/L</li>\n                    </ul>\n                    <p><em>Specific IgE levels correlate with persistence, not severity</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Management Counseling",
+        "content": "<div class=\"narrative\">\n                <p>You confirm egg allergy. The parents ask about management and prognosis.</p>\n            </div>",
+        "hint_beginner": "What is the natural history of egg allergy? Do children outgrow it?",
+        "hint_advanced": "Should baked egg be continued in children who tolerate it? What about oral immunotherapy?",
+        "question": {
+            "prompt": "What dietary management do you recommend?",
+            "options": [
+                {
+                    "text": "Strict avoidance of uncooked/lightly cooked egg; can continue baked egg if tolerated (may help accelerate tolerance); prescribe epinephrine auto-injector",
+                    "correct": true
+                },
+                {
+                    "text": "Strict avoidance of ALL egg including baked goods; reintroduce only after negative testing",
+                    "correct": false
+                },
+                {
+                    "text": "No avoidance needed if reactions have been mild; treat symptoms as they occur",
+                    "correct": false
+                },
+                {
+                    "text": "Avoid egg only during respiratory illnesses when risk of severe reaction is higher",
+                    "correct": false
+                },
+                {
+                    "text": "Start oral immunotherapy immediately to prevent development of severe allergy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Management: 1) Avoid trigger form (uncooked/lightly cooked egg), 2) Continue baked egg if tolerated - studies suggest this may accelerate tolerance, 3) Epinephrine auto-injector, 4) Education on label reading and cross-contamination. About 70-80% of egg-allergic children outgrow their allergy by school age.",
+                "incorrect": "Continued baked egg consumption in tolerant children is safe and may help accelerate tolerance development. Complete avoidance of all forms is not necessary if baked form is tolerated. OIT is an option but not first-line for egg allergy at this age."
+            },
+            "teaching": "<h4>\ud83d\udcda Egg Allergy Management</h4>\n                    <p><strong>Avoidance:</strong> Avoid trigger forms (adjust based on individual tolerance)</p>\n                    <p><strong>Baked egg tolerance:</strong></p>\n                    <ul>\n                        <li>If tolerating baked egg, can continue</li>\n                        <li>May accelerate development of complete tolerance</li>\n                        <li>BADE study showed benefit of baked egg introduction</li>\n                    </ul>\n                    <p><strong>Epinephrine:</strong> Prescribe for all IgE-mediated food allergies</p>\n                    <p><strong>Prognosis:</strong> 70-80% outgrow by school age; higher specific IgE = longer duration</p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Peanut Allergy Scenario",
+        "content": "<div class=\"narrative\">\n                <p>Your next patient is a <span class=\"highlight\">6-month-old infant</span> with severe eczema. The parents ask about peanut introduction.</p>\n                <p style=\"margin-top:12px;\"><strong>Family history:</strong> Older sibling has peanut allergy</p>\n            </div>",
+        "hint_beginner": "What did the LEAP study show about early peanut introduction?",
+        "hint_advanced": "Which infants should have testing before peanut introduction? What are the guidelines?",
+        "question": {
+            "prompt": "What is the appropriate approach to peanut introduction in this high-risk infant?",
+            "options": [
+                {
+                    "text": "Testing (skin prick or specific IgE) before introduction given severe eczema; if negative or low-level positive, introduce early (4-6 months) to prevent allergy development",
+                    "correct": true
+                },
+                {
+                    "text": "Avoid peanut until age 3 given high risk factors (eczema, family history)",
+                    "correct": false
+                },
+                {
+                    "text": "No testing needed; introduce peanut at home like any other food",
+                    "correct": false
+                },
+                {
+                    "text": "Family history of peanut allergy is absolute contraindication to introduction",
+                    "correct": false
+                },
+                {
+                    "text": "Wait until eczema is fully controlled before introducing any allergenic foods",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "The LEAP study revolutionized peanut allergy prevention. For high-risk infants (severe eczema and/or egg allergy), guidelines recommend: 1) Test first (SPT or specific IgE), 2) If negative: introduce peanut by 4-6 months, 3) If low-level positive: may introduce in supervised setting or at home based on level. Early introduction reduces peanut allergy risk by 70-80%.",
+                "incorrect": "Old advice to delay allergenic foods has been reversed! LEAP showed early peanut introduction PREVENTS allergy. High-risk infants benefit MOST from early introduction. Testing helps stratify approach but negative test or mild sensitization = introduce early."
+            },
+            "teaching": "<h4>\ud83d\udcda Early Peanut Introduction (LEAP/LEAP-On)</h4>\n                    <p><strong>Who is high-risk?</strong> Severe eczema and/or egg allergy</p>\n                    <p><strong>Guidelines:</strong></p>\n                    <table>\n                        <tr><th>Risk Level</th><th>Approach</th></tr>\n                        <tr><td>Severe eczema/egg allergy</td><td>Test first, then introduce by 4-6 months</td></tr>\n                        <tr><td>Mild-moderate eczema</td><td>Introduce at ~6 months, testing optional</td></tr>\n                        <tr><td>No eczema, no food allergy</td><td>Introduce with other solids</td></tr>\n                    </table>\n                    <p><strong>LEAP results:</strong> 70-80% reduction in peanut allergy with early introduction</p>\n                    <p><em>Do NOT delay allergenic foods - early introduction is protective!</em></p>",
+            "points": 15
+        }
+    }
+,
+{
+        "title": "Component Testing Deep Dive",
+        "content": "<div class=\"narrative\"><p>You order <span class=\"highlight\">component-resolved diagnostics</span> to better characterize the allergy.</p><p style=\"margin-top:12px;\"><strong>Results:</strong><br>Ovomucoid (Gal d 1): <span class=\"lab-value\">0.5 kU/L</span><br>Ovalbumin (Gal d 2): <span class=\"lab-value\">12 kU/L</span><br>Ovotransferrin: <span class=\"lab-value\">8 kU/L</span></p></div>",
+        "hint_beginner": "Component testing tells you WHICH proteins the patient is allergic to, helping predict prognosis.",
+        "hint_advanced": "How do sequential epitope vs conformational epitope sensitivities affect tolerance development?",
+        "question": {
+                "prompt": "The LOW ovomucoid but HIGH ovalbumin IgE suggests:",
+                "options": [
+                        {
+                                "text": "Sensitization primarily to heat-labile proteins - excellent prognosis, likely to outgrow allergy",
+                                "correct": true
+                        },
+                        {
+                                "text": "Severe persistent allergy requiring lifelong strict avoidance",
+                                "correct": false
+                        },
+                        {
+                                "text": "Testing error - ovomucoid should always be the dominant allergen in egg allergy",
+                                "correct": false
+                        },
+                        {
+                                "text": "Need to repeat testing in 6 months before drawing any conclusions",
+                                "correct": false
+                        },
+                        {
+                                "text": "Cross-reactivity with chicken meat requiring poultry avoidance",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Low Gal d 1 (ovomucoid - heat-stable) with high Gal d 2 (ovalbumin - heat-labile) indicates sensitization primarily to conformational epitopes destroyed by heating. This pattern predicts baked egg tolerance and faster resolution of allergy.",
+                        "incorrect": "Component testing provides important prognostic information. Low ovomucoid IgE is favorable - these children typically tolerate baked egg and outgrow their allergy faster than those with high ovomucoid."
+                },
+                "teaching": "<h4>\ud83d\udd2c Component Testing Interpretation</h4><table class=\"comparison-table\"><tr><th>Pattern</th><th>Baked Egg</th><th>Prognosis</th></tr><tr><td>High Gal d 1 (ovomucoid)</td><td>Usually reacts</td><td>Slower resolution</td></tr><tr><td>Low Gal d 1, High Gal d 2</td><td>Usually tolerates</td><td>Faster resolution</td></tr></table><p style=\"margin-top:12px;\">Component testing helps guide dietary advice and set realistic expectations for families.</p>",
+                "points": 10
+        }
+},
+{
+        "title": "Epinephrine Education",
+        "content": "<div class=\"narrative\"><p>You prescribe epinephrine auto-injectors. The parents ask: <em>\"When exactly should we use this?\"</em></p></div>",
+        "hint_beginner": "Epinephrine is for anaphylaxis - severe reactions affecting breathing or circulation.",
+        "hint_advanced": "What are the indications vs relative contraindications? When should you NOT wait to give epinephrine?",
+        "question": {
+                "prompt": "Which scenario warrants IMMEDIATE epinephrine administration?",
+                "options": [
+                        {
+                                "text": "Hives PLUS throat tightness, difficulty breathing, or voice changes after egg exposure",
+                                "correct": true
+                        },
+                        {
+                                "text": "A few hives on the face 30 minutes after eating, child acting normally",
+                                "correct": false
+                        },
+                        {
+                                "text": "Single episode of vomiting without any other symptoms",
+                                "correct": false
+                        },
+                        {
+                                "text": "Skin itching and mild flushing without hives or systemic symptoms",
+                                "correct": false
+                        },
+                        {
+                                "text": "Lip tingling that resolves within 5 minutes",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Respiratory symptoms (throat tightness, stridor, wheezing, dyspnea, voice changes) indicate anaphylaxis requiring immediate epinephrine. Don't wait - antihistamines cannot reverse airway obstruction or cardiovascular collapse.",
+                        "incorrect": "Isolated mild skin symptoms or single GI symptoms typically don't require epinephrine. The key is multi-system involvement OR respiratory/cardiovascular compromise = anaphylaxis = epinephrine immediately."
+                },
+                "teaching": "<h4>\ud83d\udc89 Epinephrine Indications</h4><p><strong>Give IMMEDIATELY for:</strong></p><ul><li>Respiratory: stridor, wheeze, throat tightness, hoarse voice</li><li>Cardiovascular: hypotension, syncope, severe dizziness</li><li>Multi-system involvement with rapid progression</li></ul><p style=\"margin-top:12px;\"><strong>Dosing:</strong> 0.01 mg/kg IM (max 0.5mg adult, 0.3mg child)<br>epinephrine auto-injector (EpiPen) Jr (0.15mg): 10-25 kg<br>epinephrine auto-injector (EpiPen) (0.3mg): >25 kg</p>",
+                "points": 10
+        }
+},
+{
+        "title": "Natural History Counseling",
+        "content": "<div class=\"narrative\"><p>The parents ask the most important question: <em>\"Will he ever be able to eat eggs normally?\"</em></p></div>",
+        "hint_beginner": "Egg allergy has a good prognosis - most children outgrow it.",
+        "hint_advanced": "What factors predict faster vs slower resolution? How does continued baked egg exposure affect outcomes?",
+        "question": {
+                "prompt": "What do you tell them about prognosis for egg allergy?",
+                "options": [
+                        {
+                                "text": "~70% of egg-allergic children outgrow it by school age; his baked egg tolerance suggests he's likely in this favorable group",
+                                "correct": true
+                        },
+                        {
+                                "text": "Egg allergy is typically lifelong, similar to peanut and tree nut allergies",
+                                "correct": false
+                        },
+                        {
+                                "text": "He will definitely outgrow it by age 3 based on current testing",
+                                "correct": false
+                        },
+                        {
+                                "text": "Cannot predict outcome - it's essentially 50/50 whether he'll outgrow it",
+                                "correct": false
+                        },
+                        {
+                                "text": "Prognosis is poor because he reacted on first known exposure",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Most children outgrow egg allergy, especially those who tolerate baked egg. Positive prognostic factors include: baked egg tolerance, lower specific IgE levels, younger age at diagnosis, and sensitization primarily to heat-labile proteins (as shown by component testing).",
+                        "incorrect": "Egg allergy has much better prognosis than peanut/tree nut allergies. While we cannot guarantee resolution, baked egg tolerance is a strong favorable indicator. Continuing baked egg in the diet may actually accelerate tolerance development."
+                },
+                "teaching": "<h4>\ud83d\udcca Food Allergy Natural History</h4><table class=\"comparison-table\"><tr><th>Allergen</th><th>Resolution Rate</th></tr><tr><td>Egg</td><td>~70% by school age</td></tr><tr><td>Milk</td><td>~80% by school age</td></tr><tr><td>Wheat</td><td>~65% by age 12</td></tr><tr><td>Peanut</td><td>~20%</td></tr><tr><td>Tree nuts</td><td>~10%</td></tr><tr><td>Shellfish</td><td>Rarely outgrown</td></tr></table>",
+                "points": 10
+        }
+},
+{
+        "title": "Cross-Reactivity Assessment",
+        "content": "<div class=\"narrative\"><p>The parents have more questions: <em>\"Should we avoid chicken too? What about the flu shot - isn't it grown in eggs?\"</em></p></div>",
+        "hint_beginner": "Egg allergy doesn't mean allergy to all poultry products.",
+        "hint_advanced": "What's the actual cross-reactivity rate between egg and chicken? Current vaccine recommendations?",
+        "question": {
+                "prompt": "What guidance do you provide about cross-reactive foods and vaccines?",
+                "options": [
+                        {
+                                "text": "Chicken meat is safe (different proteins); influenza vaccine is safe for egg-allergic patients per current ACIP guidelines",
+                                "correct": true
+                        },
+                        {
+                                "text": "Avoid all poultry products including chicken meat due to cross-reactivity",
+                                "correct": false
+                        },
+                        {
+                                "text": "He cannot receive any vaccines that were grown in eggs",
+                                "correct": false
+                        },
+                        {
+                                "text": "Avoid chicken meat but influenza vaccine is safe",
+                                "correct": false
+                        },
+                        {
+                                "text": "Needs allergy testing to chicken before eating any poultry",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Egg proteins (albumin, ovomucoid) differ significantly from chicken muscle proteins - clinical cross-reactivity is rare. Current ACIP guidelines state influenza vaccine can be given to egg-allergic patients regardless of reaction severity (observe 30 min for history of severe reactions).",
+                        "incorrect": "Chicken meat is generally safe for egg-allergic patients - different protein profiles. Flu vaccines contain minimal residual egg protein and are recommended for egg-allergic individuals per current guidelines."
+                },
+                "teaching": "<h4>\ud83d\udd04 Egg Allergy Cross-Reactivity</h4><ul><li><strong>Chicken meat:</strong> Safe - different proteins (muscle vs egg proteins)</li><li><strong>Influenza vaccine:</strong> Safe per ACIP 2023 guidelines for all severities</li><li><strong>Yellow fever vaccine:</strong> Contraindicated (high egg protein content)</li><li><strong>MMR vaccine:</strong> Safe (grown in chick fibroblasts, not egg)</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Emergency Action Plan",
+        "content": "<div class=\"narrative\"><p>Before the family leaves, you create a written <span class=\"highlight\">Food Allergy Emergency Action Plan</span> for home, school, and daycare.</p></div>",
+        "hint_beginner": "Emergency plans should clearly outline symptoms and when to use epinephrine.",
+        "hint_advanced": "What about biphasic reactions? What elements are required for school action plans?",
+        "question": {
+                "prompt": "Which element is MOST critical in the emergency action plan?",
+                "options": [
+                        {
+                                "text": "Clear criteria for epinephrine use with instruction to ALWAYS call 911 immediately after administration",
+                                "correct": true
+                        },
+                        {
+                                "text": "Comprehensive list of all foods containing egg to avoid",
+                                "correct": false
+                        },
+                        {
+                                "text": "Physician contact information and office hours",
+                                "correct": false
+                        },
+                        {
+                                "text": "Detailed antihistamine dosing instructions for mild reactions",
+                                "correct": false
+                        },
+                        {
+                                "text": "Instructions to observe and wait before giving epinephrine",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "The action plan must prioritize recognition of anaphylaxis and immediate epinephrine administration followed by calling 911. Observation is needed because biphasic reactions occur in 5-20% of anaphylaxis cases, sometimes hours after the initial reaction.",
+                        "incorrect": "While all components matter, the most critical element is ensuring epinephrine is given promptly for anaphylaxis. Studies show delays in epinephrine administration are associated with fatal outcomes in food allergy reactions."
+                },
+                "teaching": "<h4>\ud83d\udccb Emergency Action Plan Components</h4><ol><li>Patient identification with photo</li><li>Allergen(s) clearly listed</li><li><strong>Symptoms requiring epinephrine</strong> (most critical)</li><li>Epinephrine device instructions with pictures</li><li>Call 911 AFTER epinephrine</li><li>Emergency contacts</li><li>Signed by physician</li></ol>",
+                "points": 10
+        }
+},
+{
+        "title": "School/Daycare Considerations",
+        "content": "<div class=\"narrative\"><p>The child attends daycare. What specific accommodations are needed?</p></div>",
+        "hint_beginner": "Schools must have access to epinephrine and trained staff.",
+        "hint_advanced": "What laws protect children with food allergies in schools? 504 plans?",
+        "question": {
+                "prompt": "What is essential for safe daycare/school attendance?",
+                "options": [
+                        {
+                                "text": "Epinephrine stored on-site, staff trained in administration, written action plan on file, and allergen-aware policies",
+                                "correct": true
+                        },
+                        {
+                                "text": "Complete egg elimination from the entire school menu for all students",
+                                "correct": false
+                        },
+                        {
+                                "text": "Requiring the child to eat in isolation from other children",
+                                "correct": false
+                        },
+                        {
+                                "text": "Parent must be present during all meals and snacks",
+                                "correct": false
+                        },
+                        {
+                                "text": "Homeschooling until the allergy is outgrown",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Key elements include: epinephrine availability, trained personnel, written emergency plan, allergen-aware food policies, and communication systems. A 504 plan may provide legal protections and accommodations.",
+                        "incorrect": "Complete elimination or isolation is not necessary or appropriate. The goal is safe inclusion through preparedness, training, and reasonable accommodations."
+                },
+                "teaching": "<h4>\ud83c\udfeb School Food Allergy Management</h4><ul><li>Epinephrine accessible and non-expired</li><li>Multiple staff trained in recognition and epi administration</li><li>Emergency action plan in health office AND classroom</li><li>Communication plan (field trips, substitutes)</li><li>Consider 504 plan for legal protections</li><li>Allergen-aware, not allergen-free policies</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Follow-up Planning",
+        "content": "<div class=\"narrative\"><p>Before discharge, you discuss the long-term follow-up plan with the family.</p></div>",
+        "hint_beginner": "Food allergy requires ongoing monitoring to assess for resolution.",
+        "hint_advanced": "When would you consider an oral food challenge? What parameters guide timing?",
+        "question": {
+                "prompt": "What follow-up do you recommend for monitoring egg allergy?",
+                "options": [
+                        {
+                                "text": "Annual re-evaluation with specific IgE testing; consider supervised oral food challenge when IgE decreases significantly",
+                                "correct": true
+                        },
+                        {
+                                "text": "No follow-up needed until he's school-age, then retest",
+                                "correct": false
+                        },
+                        {
+                                "text": "Home reintroduction of egg once he hasn't had symptoms for 6 months",
+                                "correct": false
+                        },
+                        {
+                                "text": "Repeat skin testing every 3 months to monitor closely",
+                                "correct": false
+                        },
+                        {
+                                "text": "Follow-up only if he has another reaction",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Annual monitoring allows tracking of specific IgE trends. Declining IgE levels suggest developing tolerance. Supervised oral food challenges should be performed in a medical setting when there is evidence suggesting possible resolution - never at home.",
+                        "incorrect": "Regular follow-up is important - egg allergy can resolve, and continued unnecessary avoidance limits nutrition and quality of life. However, challenges should always be supervised, never done at home."
+                },
+                "teaching": "<h4>\ud83d\udcc5 Follow-up Strategy</h4><ul><li>Re-evaluate every 12-24 months</li><li>Track specific IgE trends over time</li><li>Consider oral challenge when IgE drops >50% or below decision thresholds</li><li>Supervised challenges only - NEVER home introduction</li><li>Continue baked egg if tolerated (may accelerate resolution)</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Case Resolution",
+        "content": "<div class=\"narrative\"><p><strong>One year follow-up:</strong></p><p>Specific IgE to egg white has dropped from 15 to <span class=\"lab-value\">4 kU/L</span>. Component testing shows ovomucoid remains low. He has been eating baked egg regularly without reactions.</p><p style=\"margin-top:12px;\">You perform a supervised oral food challenge to scrambled egg in the office. He tolerates it without reaction!</p><p style=\"margin-top:12px;\"><em>He is now eating eggs in all forms at home without problems.</em></p></div>",
+        "hint_beginner": "This is a successful outcome - think about what predicted it.",
+        "hint_advanced": "What would you tell the family about ongoing monitoring?",
+        "question": {
+                "prompt": "This favorable outcome was best predicted by which factor at initial presentation?",
+                "options": [
+                        {
+                                "text": "Baked egg tolerance combined with low ovomucoid-specific IgE on component testing",
+                                "correct": true
+                        },
+                        {
+                                "text": "Young age at first allergic reaction",
+                                "correct": false
+                        },
+                        {
+                                "text": "The mild severity of his initial reaction (no anaphylaxis)",
+                                "correct": false
+                        },
+                        {
+                                "text": "This outcome was unexpected - most egg allergies persist",
+                                "correct": false
+                        },
+                        {
+                                "text": "The specific IgE level of 15 kU/L at diagnosis",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Baked egg tolerance and low ovomucoid (Gal d 1) IgE were the key favorable prognostic factors identified at diagnosis. These predicted his high likelihood of outgrowing the allergy relatively quickly.",
+                        "incorrect": "The strongest predictors of egg allergy resolution were baked egg tolerance and the favorable component testing pattern (low ovomucoid), not age or initial reaction severity."
+                },
+                "teaching": "<h4>\ud83c\udfaf Key Takeaways: Egg Allergy</h4><ul><li>Egg allergy exists on a spectrum of severity</li><li>Baked egg tolerance = favorable prognosis</li><li>Component testing guides counseling and expectations</li><li>Most children (70%+) outgrow egg allergy</li><li>Always prescribe epinephrine auto-injectors</li><li>Annual monitoring allows timely identification of resolution</li><li>Oral challenges must be supervised</li></ul>",
+                "points": 10
+        }
+}];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#3b82f6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../index.html" class="crossplatform-link">📚 Food Allergy Mechanisms</a>
+<a href="anaphylaxis-expanded.html" class="crossplatform-link">🎯 Anaphylaxis</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Food Allergy"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

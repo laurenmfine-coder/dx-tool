@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Acute Coronary Syndrome - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fca5a5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fef2f2; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ef4444; line-height: 1.7; }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .safe { color: #4ade80; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(239,68,68,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
+        .ecg-box { background: rgba(0,0,0,0.4); border: 2px solid #fbbf24; border-radius: 12px; padding: 20px; margin: 16px 0; font-family: 'SF Mono', Monaco, monospace; }
+        .ecg-title { color: #fbbf24; font-weight: 700; margin-bottom: 12px; }
+        .question-box { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fef2f2; margin-bottom: 16px; line-height: 1.5; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; flex-shrink: 0; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; font-size: 1.05rem; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 0.9rem; }
+        .teaching-point td, .teaching-point th { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .teaching-point th { color: #c4b5fd; font-size: 0.85rem; text-transform: uppercase; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; animation: fadeIn 0.3s ease; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(239,68,68,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #fbbf24); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #ef4444; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; font-size: 0.95rem; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 8px; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-breakdown { text-align: left; max-width: 600px; margin: 24px auto; }
+        .crossplatform { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-top: 24px; }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #fca5a5; text-decoration: none; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div class="diff-label">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.heart.org/en/health-topics/heart-attack/treatment-of-a-heart-attack" target="_blank" rel="noopener">ACS Guidelines (AHA)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK459157/" target="_blank" rel="noopener">Acute Coronary Syndrome - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/1752/heart-score-major-cardiac-events" target="_blank" rel="noopener">HEART Score (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
+
+const stages = [
+    {
+        title: "The Call",
+        content: `<div class="narrative"><p>You're the senior medical resident. The ED calls:</p><p style="margin-top:12px;"><em>"We have a <span class="highlight">58-year-old man</span> with <span class="critical">crushing substernal chest pain</span> radiating to his left arm. Started 45 minutes ago while raking leaves. He's diaphoretic and nauseated."</em></p><p style="margin-top:12px;"><strong>PMH:</strong> HTN, hyperlipidemia, DM2, 30 pack-year smoking history</p></div>
+        <div class="socratic-prompt"><h4>Before You See the Patient</h4><p>Based on this history alone, what vital sign abnormalities would you ANTICIPATE finding, and why? Think about what's happening physiologically.</p></div>`,
+        hint_beginner: "The body responds to pain and stress with sympathetic activation. What does that do to HR and BP?",
+        hint_advanced: "Consider the difference between early compensated shock vs decompensated. What determines which pattern you see?",
+        question: {
+            prompt: "What vital sign pattern would you most expect in a patient with acute MI presenting within the first hour?",
+            options: [
+                { text: "Tachycardia and hypertension - sympathetic surge from pain and catecholamine release", correct: true },
+                { text: "Bradycardia and hypotension - vagal response to inferior wall ischemia", correct: false },
+                { text: "Normal vital signs - compensatory mechanisms maintain homeostasis early", correct: false },
+                { text: "Tachycardia and hypotension - immediate cardiogenic shock", correct: false }
+            ],
+            explanation: {
+                correct: "Exactly right! In early acute MI, the sympathetic surge from pain and stress typically causes TACHYCARDIA and HYPERTENSION. However, inferior MI can cause a VAGAL response (bradycardia, hypotension).",
+                incorrect: "In the first hour of acute MI, the typical pattern is tachycardia and hypertension due to sympathetic activation. Remember that INFERIOR MI can cause bradycardia."
+            },
+            teaching: `<h4>Vital Signs in Acute MI</h4><table class="comparison-table"><tr><th>Pattern</th><th>Mechanism</th><th>Territory</th></tr><tr><td>Tachy + HTN</td><td>Sympathetic surge</td><td>Most common early</td></tr><tr><td>Brady + Hypotension</td><td>Vagal (Bezold-Jarisch)</td><td>Inferior MI</td></tr><tr><td>Tachy + Hypotension</td><td>Cardiogenic shock</td><td>Large anterior, RV</td></tr></table><p style="margin-top:12px;"><strong>This patient's vitals:</strong> BP 158/94, HR 98, RR 22, SpO2 96%</p>`,
+            why_chain: [{q: "Why does inferior MI cause bradycardia?", a: "The inferior wall has high vagal innervation. Ischemia triggers the Bezold-Jarisch reflex causing bradycardia."}, {q: "Why is RV infarct prone to hypotension?", a: "The RV is preload-dependent. When it fails, it can't fill the LV. Nitrates reduce preload further causing severe hypotension."}],
+            points: 10
+        }
+    },
+    {
+        title: "Predicting the ECG",
+        content: `<div class="narrative"><p>You're walking to the ED. The patient has <span class="critical">crushing substernal chest pain radiating to the LEFT arm</span>.</p></div>
+        <div class="socratic-prompt"><h4>Before the ECG Prints</h4><p>Left arm radiation suggests ischemia to a specific coronary territory. Which territory would you predict?</p></div>`,
+        hint_beginner: "Left arm pain suggests lateral or anterolateral wall. Which leads look at the lateral wall?",
+        hint_advanced: "Consider the sensory dermatomes. C8-T1 covers the medial arm. Which territory refers to this dermatome?",
+        question: {
+            prompt: "Given LEFT arm radiation, which ECG leads would you expect to show ST changes?",
+            options: [
+                { text: "V1-V4, I, aVL (anterior and lateral) - left arm radiation suggests LAD territory", correct: true },
+                { text: "II, III, aVF (inferior) - referred pain to the arm is non-specific", correct: false },
+                { text: "V1-V2 only (septal) - arm pain localizes to the septum", correct: false },
+                { text: "All leads equally - arm radiation doesn't localize territory", correct: false }
+            ],
+            explanation: {
+                correct: "Excellent! Left arm radiation classically indicates anterolateral ischemia (LAD territory). The anterior and lateral leads (V1-V6, I, aVL) would show changes.",
+                incorrect: "Left arm radiation is CLASSIC for anterolateral ischemia. The LAD supplies the anterior wall. The anterior leads (V1-V4) and high lateral leads (I, aVL) would show changes."
+            },
+            teaching: `<h4>Referred Pain Patterns</h4><ul><li><strong>Left arm/jaw:</strong> Anterolateral (LAD)</li><li><strong>Epigastric/nausea:</strong> Inferior (RCA)</li><li><strong>Back pain:</strong> Posterior OR aortic dissection</li></ul>`,
+            why_chain: [{q: "Why does cardiac ischemia cause arm pain?", a: "Visceral afferents from the heart share spinal neurons with somatic afferents from the arm (viscerosomatic convergence)."}, {q: "Why might diabetics have 'silent' MI?", a: "Diabetic autonomic neuropathy damages cardiac afferents, preventing typical pain signaling."}],
+            points: 10
+        }
+    },
+    {
+        title: "The ECG Reveals",
+        content: `<div class="ecg-box"><div class="ecg-title">12-Lead ECG Findings</div><p>Rate: 98 bpm, Rhythm: Sinus</p><p><span class="critical">ST elevation 3mm in V2-V4</span></p><p><span class="critical">ST elevation 2mm in V5-V6, I, aVL</span></p><p>Reciprocal ST depression in III, aVF</p><p>No Q waves yet</p></div>
+        <div class="socratic-prompt"><h4>Interpret Before Acting</h4><p>ST elevation in V2-V6, I, aVL with reciprocal depression inferiorly. What artery is occluded, and at what level?</p></div>`,
+        hint_beginner: "V1-V4 = anterior = LAD. When lateral leads are ALSO involved, what does that tell you about how proximal?",
+        hint_advanced: "A 'wraparound' LAD supplies the apex. How do you distinguish LAD-wrap from RCA occlusion?",
+        question: {
+            prompt: "This ECG pattern indicates occlusion of:",
+            options: [
+                { text: "Proximal LAD - large territory including anterior, septum, and lateral wall", correct: true },
+                { text: "Mid-LAD - would affect anterior wall but spare lateral leads", correct: false },
+                { text: "Left circumflex - causes lateral changes but not anterior", correct: false },
+                { text: "RCA - causes inferior and possibly RV changes", correct: false }
+            ],
+            explanation: {
+                correct: "Perfect! This is PROXIMAL LAD - the 'widow maker.' The extensive territory (V2-V6 + I, aVL) indicates occlusion BEFORE the diagonal branches. Proximal LAD supplies 40-50% of LV mass.",
+                incorrect: "This shows PROXIMAL LAD occlusion. The key is the EXTENT - V2-V6 (anterior) PLUS I, aVL (lateral) means the occlusion is before diagonal branches."
+            },
+            teaching: `<h4>ECG Localization</h4><table class="comparison-table"><tr><th>Leads</th><th>Wall</th><th>Artery</th></tr><tr style="background:rgba(239,68,68,0.2);"><td>V1-V4</td><td>Anterior</td><td>LAD</td></tr><tr style="background:rgba(239,68,68,0.2);"><td>V5-V6, I, aVL</td><td>Lateral</td><td>LAD diagonal/LCx</td></tr><tr><td>II, III, aVF</td><td>Inferior</td><td>RCA (85%)/LCx</td></tr><tr><td>V4R</td><td>RV</td><td>Proximal RCA</td></tr></table>`,
+            why_chain: [{q: "Why do reciprocal changes help distinguish STEMI from pericarditis?", a: "STEMI has focal injury with reciprocal changes. Pericarditis has diffuse inflammation without reciprocal changes."}, {q: "What do Q waves tell us about timing?", a: "Q waves = dead myocardium, developing over hours. Absence here means we're early and can still salvage tissue."}],
+            points: 15
+        }
+    },
+    {
+        title: "STEMI Criteria",
+        content: `<div class="narrative"><p>You need to confirm STEMI criteria before activating the cath lab.</p></div>
+        <div class="socratic-prompt"><h4>Know the Thresholds</h4><p>The ST elevation criteria are DIFFERENT for V2-V3 versus other leads, and vary by age/sex. Why would V2-V3 have higher thresholds?</p></div>`,
+        hint_beginner: "Young men commonly have 'benign early repolarization' in anterior leads.",
+        hint_advanced: "The 4th Universal Definition updated these criteria. What was the rationale for sex-specific cutoffs?",
+        question: {
+            prompt: "Why do V2-V3 have HIGHER ST elevation thresholds for STEMI?",
+            options: [
+                { text: "Early repolarization is common in V2-V3, especially in young men, causing baseline ST elevation", correct: true },
+                { text: "The anterior wall has thicker myocardium requiring more ST elevation", correct: false },
+                { text: "Lead placement variability in V2-V3 causes more measurement error", correct: false },
+                { text: "The LAD has collateral circulation that attenuates ECG changes", correct: false }
+            ],
+            explanation: {
+                correct: "Exactly! Early repolarization with baseline ST elevation up to 2-2.5mm is normal in young men. Higher cutoffs prevent false positive activations.",
+                incorrect: "The higher thresholds exist because of EARLY REPOLARIZATION - a normal variant with baseline ST elevation, especially in young men."
+            },
+            teaching: `<h4>STEMI Criteria (4th Universal Definition)</h4><table class="comparison-table"><tr><th>Leads</th><th>Population</th><th>Threshold</th></tr><tr><td>V2-V3</td><td>Men ≥40</td><td>≥2.0 mm</td></tr><tr><td>V2-V3</td><td>Men <40</td><td>≥2.5 mm</td></tr><tr><td>V2-V3</td><td>Women</td><td>≥1.5 mm</td></tr><tr><td>All others</td><td>Everyone</td><td>≥1.0 mm in 2 contiguous</td></tr></table>`,
+            why_chain: [{q: "Why are women's thresholds lower?", a: "Women have smaller hearts generating smaller ECG voltage, and early repolarization is less common."}, {q: "What about LBBB?", a: "Use Sgarbossa criteria: concordant ST elevation ≥1mm, ST depression V1-V3, or discordant ST elevation with ST/S ratio ≥0.25."}],
+            points: 10
+        }
+    },
+    {
+        title: "Time is Muscle",
+        content: `<div class="narrative"><p>You've confirmed STEMI. Pain onset: <span class="highlight">45 minutes ago</span>. Your hospital has a cath lab.</p></div>
+        <div class="socratic-prompt"><h4>The Critical Window</h4><p>The door-to-balloon goal is 90 minutes. But WHY that number? What happens to myocardial salvage over time?</p></div>`,
+        hint_beginner: "The 'wavefront phenomenon' describes how infarction spreads from endocardium to epicardium.",
+        hint_advanced: "How does total ischemic time correlate with mortality? Is there a point of diminishing returns?",
+        question: {
+            prompt: "What is the physiological basis for the 90-minute door-to-balloon goal?",
+            options: [
+                { text: "Myocardial necrosis spreads from endocardium to epicardium over 3-6 hours", correct: true },
+                { text: "Thrombus becomes organized and resistant to lysis after 90 minutes", correct: false },
+                { text: "Collateral circulation takes 90 minutes to develop", correct: false },
+                { text: "Reperfusion injury becomes prohibitive after 90 minutes", correct: false }
+            ],
+            explanation: {
+                correct: "The 'wavefront phenomenon' shows necrosis starts in the subendocardium and spreads outward over 3-6 hours. Every 30-minute delay increases mortality ~7.5%.",
+                incorrect: "The 90-minute goal is based on the WAVEFRONT PHENOMENON - necrosis spreads from endocardium outward over hours. Earlier reperfusion = more salvage."
+            },
+            teaching: `<h4>Time-to-Treatment</h4><ul><li><strong>Door-to-balloon:</strong> <90 min (PCI)</li><li><strong>Door-to-needle:</strong> <30 min (fibrinolysis)</li><li><strong>Every 30 min delay:</strong> ~7.5% ↑ mortality</li></ul><div class="mechanism-box"><div class="mechanism-title">Wavefront Phenomenon</div><div class="pathway">Complete occlusion
+→ Ischemia begins in subendocardium
+→ Necrosis spreads outward over 3-6 hours
+→ By 6 hours: transmural infarction complete</div></div>`,
+            why_chain: [{q: "Why is subendocardium most vulnerable?", a: "Highest oxygen demand (highest wall stress) AND lowest perfusion pressure (compressed during systole)."}, {q: "Is there a 'too late' for PCI?", a: "Generally beneficial up to 12 hours with ongoing ischemia. Beyond 12-24h, benefit decreases substantially."}],
+            points: 10
+        }
+    },
+    {
+        title: "Immediate Actions",
+        content: `<div class="narrative"><p>The cath lab is activated. While waiting, you initiate treatment.</p></div>
+        <div class="socratic-prompt"><h4>First-Line Interventions</h4><p>Everyone knows 'MONA.' But evidence has evolved. Which is TRULY evidence-based, and which might be harmful?</p></div>`,
+        hint_beginner: "Aspirin blocks platelets. The clot is made of... what?",
+        hint_advanced: "The AVOID trial challenged routine oxygen. What did it show?",
+        question: {
+            prompt: "Which intervention has the STRONGEST evidence for mortality reduction in acute STEMI?",
+            options: [
+                { text: "Aspirin 325mg chewed - irreversibly inhibits platelet COX-1", correct: true },
+                { text: "Oxygen 2-4L NC - ensures adequate myocardial oxygen delivery", correct: false },
+                { text: "Morphine 2-4mg IV - reduces pain and preload", correct: false },
+                { text: "Nitrates SL - coronary vasodilation and preload reduction", correct: false }
+            ],
+            explanation: {
+                correct: "ASPIRIN is the only 'MONA' component with strong mortality benefit! ISIS-2 showed 23% reduction. Oxygen may harm if SpO2 >94%. Morphine is associated with worse outcomes. Nitrates help symptoms but no mortality benefit.",
+                incorrect: "Only ASPIRIN has proven mortality benefit (ISIS-2: 23% reduction). Oxygen may be HARMFUL if SpO2 adequate. Morphine has been associated with WORSE outcomes."
+            },
+            teaching: `<h4>Updated Evidence</h4><table class="comparison-table"><tr><th>Drug</th><th>Recommendation</th><th>Evidence</th></tr><tr style="background:rgba(34,197,94,0.2);"><td>Aspirin 325mg</td><td>GIVE (chewed)</td><td>ISIS-2: 23% ↓ mortality</td></tr><tr><td>Oxygen</td><td>Only if SpO2 <90%</td><td>AVOID: harm if SpO2 >94%</td></tr><tr><td>Nitrates</td><td>For pain only</td><td>No mortality benefit</td></tr><tr><td>Morphine</td><td>Use cautiously</td><td>Worse outcomes in registries</td></tr></table>`,
+            why_chain: [{q: "Why might oxygen be harmful?", a: "Hyperoxia causes coronary vasoconstriction and generates reactive oxygen species during reperfusion."}, {q: "Why chew aspirin?", a: "Buccal absorption achieves therapeutic effect in 15-20 min vs 60+ min swallowed."}],
+            points: 15
+        }
+    },
+    {
+        title: "The Nitrate Trap",
+        content: `<div class="narrative"><p>The nurse is about to give nitroglycerin. You pause and think about the ECG...</p><p><strong>ECG:</strong> ST elevation V2-V6, I, aVL with reciprocal inferior depression</p></div>
+        <div class="socratic-prompt"><h4>Safe to Give Nitrates?</h4><p>This is an anterolateral STEMI. Any reason to be cautious about nitrates?</p></div>`,
+        hint_beginner: "RV infarcts are preload-dependent. Which artery supplies the RV?",
+        hint_advanced: "Could there be a wraparound LAD? How would you distinguish from RCA occlusion?",
+        question: {
+            prompt: "In this patient with anterolateral STEMI, what should you verify before nitrates?",
+            options: [
+                { text: "Nothing special - this is LAD territory, RV infarct is not a concern", correct: true },
+                { text: "Check V4R - even with LAD, RV involvement changes management", correct: false },
+                { text: "Get an echo first to assess RV function", correct: false },
+                { text: "Check troponin level to confirm diagnosis", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! In ANTEROLATERAL STEMI (LAD), RV infarct is NOT expected. RV involvement occurs with PROXIMAL RCA occlusion causing INFERIOR STEMI. Nitrates are safe here.",
+                incorrect: "In anterolateral STEMI (LAD), RV infarct is not expected. RV involvement occurs with PROXIMAL RCA causing INFERIOR STEMI. Nitrates are safe in this LAD pattern."
+            },
+            teaching: `<h4>When to Worry About RV Infarct</h4><p><strong>Check V4R when you see:</strong></p><ul><li>ST elevation II, III, aVF (inferior STEMI)</li><li>Hypotension disproportionate to LV injury</li><li>JVD with clear lungs</li></ul><div class="mechanism-box"><div class="mechanism-title">Why RV Infarcts Need Volume</div><div class="pathway">RV is thin-walled, low-pressure
+→ Functions as conduit to LV
+→ When infarcted: can't fill LV
+→ Nitrates ↓ preload → severe hypotension
+Treatment: Volume 500-1000mL boluses</div></div>`,
+            why_chain: [{q: "How much V4R elevation indicates RV infarct?", a: "≥1mm ST elevation has ~90% sensitivity and specificity in inferior STEMI."}, {q: "What exam findings suggest RV infarct?", a: "Hypotension, elevated JVP, clear lungs. Kussmaul's sign may be present."}],
+            points: 10
+        }
+    },
+    {
+        title: "Antiplatelet Strategy",
+        content: `<div class="narrative"><p>Aspirin is given. Now you need the P2Y12 inhibitor.</p><p><strong>Options:</strong> Clopidogrel, Prasugrel, Ticagrelor</p></div>
+        <div class="socratic-prompt"><h4>Choose Your P2Y12 Inhibitor</h4><p>All three block P2Y12 on platelets. But they differ in potency, onset, reversibility. What guides your choice?</p></div>`,
+        hint_beginner: "Prasugrel and ticagrelor are more potent. But is more potent always better?",
+        hint_advanced: "Clopidogrel requires CYP2C19 activation. What's the significance of polymorphisms?",
+        question: {
+            prompt: "Which P2Y12 inhibitor for this 58-year-old with anterolateral STEMI going to PCI?",
+            options: [
+                { text: "Ticagrelor 180mg - more potent, no CYP2C19 dependence, reversible", correct: true },
+                { text: "Prasugrel 60mg - most potent, best outcomes in STEMI", correct: false },
+                { text: "Clopidogrel 600mg - most experience, safest", correct: false },
+                { text: "No P2Y12 until cath - let cardiology decide", correct: false }
+            ],
+            explanation: {
+                correct: "Excellent! For STEMI with PCI, ticagrelor or prasugrel are preferred. Ticagrelor is often favored: reversible, no CYP2C19 dependence, mortality benefit in PLATO.",
+                incorrect: "For STEMI with PCI, ticagrelor or prasugrel are preferred over clopidogrel. Ticagrelor is often chosen: reversible, doesn't depend on CYP2C19, showed mortality benefit in PLATO."
+            },
+            teaching: `<h4>P2Y12 Inhibitor Comparison</h4><table class="comparison-table"><tr><th>Drug</th><th>Potency</th><th>Onset</th><th>Reversible</th><th>Key CI</th></tr><tr><td>Ticagrelor</td><td>High</td><td>30 min</td><td>Yes</td><td>ICH, liver disease</td></tr><tr><td>Prasugrel</td><td>Highest</td><td>30 min</td><td>No</td><td>Prior stroke/TIA</td></tr><tr><td>Clopidogrel</td><td>Moderate</td><td>2-6 hr</td><td>No</td><td>Few absolute</td></tr></table>`,
+            why_chain: [{q: "Why does ticagrelor cause dyspnea?", a: "It inhibits adenosine reuptake. Adenosine stimulates pulmonary C-fibers causing dyspnea sensation (~15% of patients)."}, {q: "Why is prasugrel contraindicated with prior stroke?", a: "TRITON-TIMI 38 showed NET HARM in prior stroke/TIA - increased ICH outweighed ischemic benefit."}],
+            points: 15
+        }
+    },
+    {
+        title: "Cath Lab Results",
+        content: `<div class="narrative"><p><strong>Angiography:</strong></p><ul><li><span class="critical">LAD: 100% proximal occlusion</span> (TIMI 0)</li><li>LCx: 50% mid-segment</li><li>RCA: 30% non-obstructive</li></ul><p><strong>Intervention:</strong> Successful PCI to LAD with DES. TIMI 3 flow restored.</p><p><strong>Door-to-balloon:</strong> 62 minutes ✓</p></div>
+        <div class="socratic-prompt"><h4>What About Other Lesions?</h4><p>The LAD is fixed, but there's a 50% LCx lesion. Stent now, stage later, or leave alone?</p></div>`,
+        hint_beginner: "A 50% stenosis is typically not flow-limiting. What percentage is usually significant?",
+        hint_advanced: "COMPLETE, PRAMI, and CvLPRIT addressed multivessel PCI in STEMI. What did they show?",
+        question: {
+            prompt: "What is the appropriate approach to the non-culprit 50% LCx lesion?",
+            options: [
+                { text: "Leave it alone - 50% is not hemodynamically significant", correct: true },
+                { text: "Stent now - complete revascularization reduces repeat procedures", correct: false },
+                { text: "Stage PCI before discharge - any visible stenosis should be treated", correct: false },
+                { text: "Refer for CABG - multivessel disease requires surgery", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! 50% stenosis is NOT hemodynamically significant (need ≥70% or FFR ≤0.80). COMPLETE trial supports staged PCI for significant non-culprit lesions, but 50% doesn't qualify.",
+                incorrect: "50% stenosis is not hemodynamically significant. If this were ≥70%, COMPLETE trial supports staged revascularization. But 50% lesions should be managed medically."
+            },
+            teaching: `<h4>Multivessel Disease in STEMI</h4><table class="comparison-table"><tr><th>Stenosis</th><th>Significance</th><th>Action</th></tr><tr><td><50%</td><td>Non-obstructive</td><td>Medical therapy</td></tr><tr><td>50-69%</td><td>Indeterminate</td><td>Consider FFR</td></tr><tr><td>≥70%</td><td>Significant</td><td>Consider staged PCI</td></tr></table>`,
+            why_chain: [{q: "Why STAGED PCI rather than immediate?", a: "During primary PCI, patients have contrast load, activated coagulation, potential instability. Staging allows stabilization while still providing benefit."}, {q: "What about CABG?", a: "If complex anatomy (left main, severe 3-vessel), Heart Team discussion. Most STEMI with MVD can be managed with staged PCI."}],
+            points: 10
+        }
+    },
+    {
+        title: "Post-PCI Monitoring",
+        content: `<div class="narrative"><p>Day 1 post-STEMI. Patient is stable, pain-free, BP 118/72, HR 78.</p></div>
+        <div class="socratic-prompt"><h4>What Are You Watching For?</h4><p>Different MI complications occur at different times. When is highest risk for mechanical complications, and why?</p></div>`,
+        hint_beginner: "When is the myocardium most vulnerable to rupture during healing?",
+        hint_advanced: "Neutrophil infiltration and MMP activity peak when?",
+        question: {
+            prompt: "When is highest risk for free wall rupture after MI, and why?",
+            options: [
+                { text: "Days 3-5 - neutrophils and macrophages weaken the wall before granulation tissue forms", correct: true },
+                { text: "First 24 hours - most ischemic immediately after occlusion", correct: false },
+                { text: "Days 7-10 - scar forming but not mature", correct: false },
+                { text: "Weeks 2-4 - chronic remodeling thins the wall", correct: false }
+            ],
+            explanation: {
+                correct: "Days 3-5 is the danger zone! Day 1-2: coagulative necrosis. Days 3-5: inflammatory cells release proteases, wall is WEAKEST. Day 7+: granulation tissue strengthens.",
+                incorrect: "Days 3-5 is highest risk. The sequence: coagulative necrosis (days 1-2) → inflammatory digestion (days 3-5) → granulation (day 7+). During days 3-5, old tissue is breaking down before new tissue forms."
+            },
+            teaching: `<h4>Timing of MI Complications</h4><table class="comparison-table"><tr><th>Timing</th><th>Complication</th><th>Mechanism</th></tr><tr><td>Minutes-hours</td><td>Arrhythmias</td><td>Electrical instability</td></tr><tr><td>Hours-days</td><td>Cardiogenic shock, acute MR</td><td>Pump failure</td></tr><tr style="background:rgba(239,68,68,0.2);"><td><strong>Days 3-5</strong></td><td><strong>Free wall rupture, VSD</strong></td><td>Inflammatory digestion</td></tr><tr><td>Days-weeks</td><td>LV aneurysm, thrombus</td><td>Scar formation</td></tr><tr><td>Weeks</td><td>Dressler syndrome</td><td>Autoimmune pericarditis</td></tr></table>`,
+            why_chain: [{q: "Why does reperfusion reduce mechanical complications?", a: "Limits infarct size (less necrotic tissue), and reperfused tissue heals with less collagen degradation."}, {q: "True vs pseudo-aneurysm?", a: "True: all layers thinned but intact, wide neck, rarely ruptures. Pseudo: contained rupture, narrow neck, HIGH rupture risk - surgical emergency."}],
+            points: 15
+        }
+    },
+    {
+        title: "Echo Results",
+        content: `<div class="narrative"><p>Day 2 echo:</p><ul><li><strong>EF:</strong> 40%</li><li><strong>Wall motion:</strong> Anterior/apical hypokinesis</li><li><strong>LV thrombus:</strong> None</li><li><strong>MR:</strong> Trace</li></ul></div>
+        <div class="socratic-prompt"><h4>ICD Consideration</h4><p>EF is 40%. Should this patient get an ICD for primary prevention?</p></div>`,
+        hint_beginner: "Standard ICD cutoff is EF ≤35%. But there's a timing consideration after MI...",
+        hint_advanced: "DINAMIT and IRIS addressed early ICD after MI. What were the unexpected findings?",
+        question: {
+            prompt: "What is the appropriate ICD strategy for EF 40% two days post-STEMI?",
+            options: [
+                { text: "Wait at least 40 days - EF may recover; early ICD shows no mortality benefit", correct: true },
+                { text: "Implant ICD now - EF 40% meets primary prevention criteria", correct: false },
+                { text: "No ICD needed - EF 40% is above the threshold", correct: false },
+                { text: "Wearable defibrillator for 40 days then reassess", correct: false }
+            ],
+            explanation: {
+                correct: "Wait at least 40 days! (1) Stunned myocardium may RECOVER. (2) DINAMIT/IRIS showed NO mortality benefit from early ICD. Reassess EF after 40 days on optimal therapy.",
+                incorrect: "The key is WAITING. Early ICD doesn't reduce mortality (DINAMIT, IRIS). Stunned myocardium recovers after reperfusion. Wait 40 days, optimize meds, then reassess."
+            },
+            teaching: `<h4>ICD After MI</h4><ul><li>EF ≤35% (or ≤30% for ischemic CMP)</li><li>At least <strong>40 days</strong> post-MI</li><li>At least <strong>90 days</strong> of optimal medical therapy</li><li>Life expectancy >1 year</li></ul><div class="mechanism-box"><div class="mechanism-title">Why Wait 40 Days?</div><div class="pathway">Stunned myocardium after reperfusion
+→ EF acutely depressed
+→ Function often recovers with time + meds
+→ Early ICD: implanting in patients who won't need it</div></div>`,
+            why_chain: [{q: "Why did early ICD increase non-arrhythmic deaths?", a: "Uncertain - possibly ICD shocks worsen HF, or selection bias. Net effect: no survival benefit from early implantation."}, {q: "What about LifeVest?", a: "VEST trial didn't show routine benefit. Some centers use for very high-risk (EF <30%, prior VT/VF) during waiting period."}],
+            points: 10
+        }
+    },
+    {
+        title: "Discharge Planning",
+        content: `<div class="narrative"><p>Day 3 post-STEMI. Patient stable, ready for discharge.</p></div>
+        <div class="socratic-prompt"><h4>The Discharge Prescription</h4><p>What medications does EVERY post-MI patient need?</p></div>`,
+        hint_beginner: "Think 'ABCDE' - Antiplatelet, Beta-blocker, Cholesterol, Diabetes, Education",
+        hint_advanced: "SGLT2i and GLP-1 agonists now have post-MI indications. What trials support this?",
+        question: {
+            prompt: "Which medication class is MOST important for reducing mortality post-STEMI?",
+            options: [
+                { text: "DAPT (aspirin + P2Y12) - prevents stent thrombosis and recurrent events", correct: true },
+                { text: "Beta-blockers - reduce reinfarction and arrhythmias", correct: false },
+                { text: "High-intensity statins - stabilize plaques", correct: false },
+                { text: "ACE inhibitors - prevent remodeling", correct: false }
+            ],
+            explanation: {
+                correct: "DAPT is arguably most critical because stent thrombosis is CATASTROPHIC. Premature P2Y12 discontinuation is #1 risk for stent thrombosis. All medications listed are important though!",
+                incorrect: "While all are important, DAPT deserves special emphasis - premature discontinuation causes stent thrombosis, which is often fatal. But beta-blockers, statins, ACEi all have mortality benefits."
+            },
+            teaching: `<h4>Post-MI Discharge Meds</h4><table class="comparison-table"><tr><th>Class</th><th>Medication</th><th>Duration/Goal</th></tr><tr style="background:rgba(239,68,68,0.2);"><td>DAPT</td><td>ASA 81 + Ticagrelor 90 BID</td><td>12 months minimum</td></tr><tr><td>Beta-blocker</td><td>Metoprolol succinate</td><td>Indefinitely if EF reduced</td></tr><tr><td>Statin</td><td>Atorvastatin 80mg</td><td>LDL <70 (or <55)</td></tr><tr><td>ACE-I</td><td>Lisinopril</td><td>Indefinitely if EF reduced</td></tr></table>`,
+            why_chain: [{q: "Why 12 months DAPT?", a: "Balances thrombotic protection vs bleeding. Beyond 12 months, benefit diminishes while bleed risk continues."}, {q: "What about colchicine?", a: "COLCOT showed colchicine 0.5mg daily reduced CV events within 30 days of MI. Now Class IIb recommendation."}],
+            points: 15
+        }
+    },
+    {
+        title: "Cardiac Rehabilitation",
+        content: `<div class="narrative"><p>The nurse asks: 'Did you order cardiac rehab?'</p></div>
+        <div class="socratic-prompt"><h4>The Underutilized Intervention</h4><p>What does the evidence show for mortality benefit from cardiac rehab?</p></div>`,
+        hint_beginner: "Cardiac rehab includes exercise, education, risk factor modification. How might exercise help?",
+        hint_advanced: "Enrollment remains low (~20-30%). What are the barriers?",
+        question: {
+            prompt: "What is the mortality benefit of cardiac rehabilitation after MI?",
+            options: [
+                { text: "~25-30% reduction in CV mortality - one of the most effective post-MI interventions", correct: true },
+                { text: "~5-10% reduction - modest benefit, mainly for quality of life", correct: false },
+                { text: "No proven mortality benefit - improves functional capacity only", correct: false },
+                { text: "~50% reduction - more effective than any medication", correct: false }
+            ],
+            explanation: {
+                correct: "Cardiac rehab reduces CV mortality by ~25-30% - comparable to or better than many medications! Yet only 20-30% of eligible patients enroll. All post-MI patients should be referred.",
+                incorrect: "Cardiac rehab reduces CV mortality by ~25-30% - one of the most underutilized but effective interventions. The gap between evidence and practice is a major quality target."
+            },
+            teaching: `<h4>Cardiac Rehabilitation</h4><p><strong>Components:</strong> Supervised exercise, risk factor modification, medication adherence, psychosocial support</p><p><strong>Benefits:</strong></p><ul><li>~25-30% ↓ CV mortality</li><li>~20% ↓ hospital readmissions</li><li>Improved functional capacity</li><li>Better quality of life</li></ul><div class="alert-box"><div class="alert-title">Referral Gap</div><p>Only 20-30% of eligible patients participate. Automatic referral improves enrollment.</p></div>`,
+            why_chain: [{q: "How does exercise help the post-MI heart?", a: "Improves endothelial function, promotes collaterals, reduces sympathetic tone, reduces inflammation, improves insulin sensitivity."}, {q: "When can patients resume sexual activity?", a: "Generally 1-2 weeks after uncomplicated MI if able to climb 2 flights without symptoms (~3-4 METs)."}],
+            points: 10
+        }
+    }
+];
+
+function shuffleArray(arr) { const s=[...arr]; for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];} return s; }
+function setDifficulty(l,b) { difficulty=l; document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); renderStage(currentStage); }
+
+function renderStage(i) {
+    const s=stages[i], opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))), ltrs='ABCDE';
+    let hints='';
+    if(difficulty==='beginner'&&s.hint_beginner) hints=`<div class="hint-beginner" style="display:block;">💡 ${s.hint_beginner}</div>`;
+    else if(difficulty==='advanced'&&s.hint_advanced) hints=`<div class="hint-advanced" style="display:block;">🎯 ${s.hint_advanced}</div>`;
+    const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>🔗 WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">❓ ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+    document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+    document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">✓ Excellent!</div><div class="feedback-explanation">${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">✗ Not Quite</div><div class="feedback-explanation">${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div></div>`;
+}
+
+function selectOption(el,i) {
+    if(answeredQuestions.has(i)) return;
+    const c=el.dataset.correct==='true', s=stages[i];
+    answeredQuestions.add(i); decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+    if(c) score+=s.question.points; maxScore+=s.question.points;
+    document.getElementById('score').textContent=score; document.getElementById('maxScore').textContent=maxScore;
+    document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+    document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+    document.getElementById('teach').classList.add('show');
+    const w=document.getElementById('why'); if(w)w.classList.add('show');
+    document.getElementById('next-btn').classList.add('show');
+}
+
+function nextStage() { if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion(); }
+
+function showCompletion() {
+    const p=Math.round(score/maxScore*100);
+    let g,m,clr;
+    if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent understanding of ACS!';}
+    else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp of ACS concepts.';}
+    else if(p>=70){g='Good Progress';clr='#f59e0b';m='Solid foundation. Review WHY chains.';}
+    else{g='Keep Learning';clr='#ef4444';m='Review ECG localization and management.';}
+    document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div class="completion-message">${m}</div><div class="completion-breakdown"><h4>Your Clinical Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span><span style="color:${d.correct?'#22c55e':'#ef4444'}">${d.correct?'✓':'✗'}</span> Stage ${j+1}: ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}pts</span></div>`).join('')}</div><div class="crossplatform"><h4>Continue Learning</h4><div class="crossplatform-links"><a href="#" class="crossplatform-link">🧬 MechanismDx: Coronary Circulation</a><a href="#" class="crossplatform-link">📚 Related: Heart Failure</a><a href="javascript:location.reload()" class="crossplatform-link">🔄 Restart</a></div></div></div>`;
+    document.getElementById('progress').style.width='100%';
+}
+
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Acute Coronary Syndrome"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

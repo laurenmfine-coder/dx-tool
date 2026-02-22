@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPIES | Clinical Adventure</title>
+    <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
+<link href="../css/rdx-a11y.css" rel="stylesheet">
+<style>
+        :root { --primary: #4A90A4; --primary-dark: #2D5A6A; --accent: #F4A261; --success: #2A9D8F; --danger: #E63946; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #F8FAFC; }
+        .container { max-width: 900px; margin: 0 auto; padding: 1rem; }
+        .header { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
+        .scene { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        .scene-title { font-size: 1.1rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 1rem; }
+        .patient-info { background: #E3F2FD; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .narrative { line-height: 1.7; margin-bottom: 1.5rem; }
+        .question { background: #FFF8E1; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--accent); }
+        .options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .option { padding: 1rem; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: white; text-align: left; }
+        .option:hover { border-color: var(--primary); }
+        .option.correct { border-color: var(--success); background: #E8F5E9; }
+        .option.incorrect { border-color: var(--danger); background: #FFEBEE; }
+        .feedback { padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #E8F5E9; border-left: 4px solid var(--success); }
+        .feedback.incorrect { background: #FFEBEE; border-left: 4px solid var(--danger); }
+        .teaching { background: #E8F5E9; padding: 1rem; border-radius: 8px; margin-top: 1rem; }
+        .teaching h4 { color: var(--success); margin-bottom: 0.5rem; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 500; }
+        .btn-primary { background: var(--primary); color: white; }
+        .nav-row { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .score-card { background: var(--success); color: white; padding: 2rem; border-radius: 12px; text-align: center; }
+        .progress-bar { height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; margin-top: 1rem; }
+        .progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+    </style>
+    <link rel="stylesheet" href="dx-case-banner-fix.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍼 FPIES (Food Protein-Induced Enterocolitis Syndrome)</h1>
+            <p>Non-IgE food allergy presenting with profuse vomiting and lethargy</p>
+            <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+        </div>
+        <div id="scene-container"></div>
+        <div id="completion" style="display:none;"></div>
+    </div>
+    <script>
+const scenes = [
+    {icon:'🚨',title:'Scene 1: ED Presentation',patient:'6-month-old male brought to ED for repeated vomiting and lethargy',narrative:'Parents report that 2 hours after eating rice cereal (new food introduced today), the infant began vomiting profusely and became pale and listless. He has vomited 5 times. No urticaria, no wheezing, no swelling noted.',question:'What type of allergic reaction does this pattern suggest?',options:[{text:'IgE-mediated food allergy (anaphylaxis)',correct:false,feedback:'IgE reactions occur within minutes, cause urticaria/angioedema/wheeze, and involve skin. This delayed pattern without skin findings suggests non-IgE.'},{text:'FPIES - non-IgE, T-cell mediated food allergy',correct:true,feedback:'Correct! FPIES classic triad: 1-4 hour delayed vomiting, no skin/respiratory symptoms, pallor/lethargy. Rice, oat, and milk are common triggers in infants.'},{text:'Gastroenteritis',correct:false,feedback:'Gastroenteritis is possible but the timing (2h after new food) and pattern (pallor, lethargy) strongly suggest FPIES.'}],teaching:'FPIES hallmarks: Delayed (1-4h), repetitive vomiting, pallor, lethargy, NO urticaria/wheeze. Common triggers: rice, oat, milk, soy, fish.'},
+    {icon:'🔬',title:'Scene 2: Evaluation',narrative:'Vitals: HR 160, BP 70/45 (low), cap refill 4 sec. Labs show: WBC 18k with neutrophilia, metabolic acidosis. No blood in stool currently.',question:'Why are neutrophilia and metabolic acidosis seen in acute FPIES?',options:[{text:'Secondary bacterial infection',correct:false,feedback:'Not infection - this is the inflammatory response to the food protein.'},{text:'T-cell mediated intestinal inflammation causing fluid shifts',correct:true,feedback:'Correct! FPIES involves T-cell activation in gut → inflammation → fluid shifts → hypovolemia → metabolic acidosis. Neutrophilia peaks 6h post-ingestion.'},{text:'Anaphylaxis causing shock',correct:false,feedback:'This is hypovolemic shock from GI losses, not anaphylactic shock (no skin/airway involvement).'}]},
+    {icon:'💊',title:'Scene 3: Treatment',narrative:'The infant is in hypovolemic shock from severe FPIES reaction.',question:'What is the FIRST-LINE treatment for acute FPIES?',options:[{text:'Epinephrine IM',correct:false,feedback:'Epinephrine is for IgE-mediated anaphylaxis. FPIES does not respond to epinephrine.'},{text:'Aggressive IV fluid resuscitation',correct:true,feedback:'Correct! FPIES is treated with IV fluids for hypovolemia. Ondansetron 0.15 mg/kg IV can help control vomiting. Steroids may help in severe cases.'},{text:'Antihistamines (diphenhydramine)',correct:false,feedback:'Antihistamines are for histamine-mediated reactions. FPIES is T-cell mediated, not histamine.'}],teaching:'FPIES acute treatment: IV fluids (NS boluses), ondansetron for vomiting, single-dose IV methylprednisolone for severe reactions. Epi not effective.'},
+    {icon:'🥛',title:'Scene 4: Diagnosis Confirmation',narrative:'After IV fluids and ondansetron, the infant improves dramatically within hours. Parents ask how to confirm the diagnosis.',question:'How is FPIES diagnosed?',options:[{text:'Skin prick testing to rice',correct:false,feedback:'Skin testing is negative in FPIES - it\'s non-IgE mediated.'},{text:'Clinical history + supervised oral food challenge',correct:true,feedback:'Correct! FPIES is a clinical diagnosis. Skin tests and specific IgE are NEGATIVE. Confirmation requires supervised OFC with IV access, but often deferred given clear history.'},{text:'Serum tryptase level',correct:false,feedback:'Tryptase elevates in mast cell activation (IgE reactions). FPIES doesn\'t involve mast cells.'}]},
+    {icon:'📋',title:'Scene 5: Management Plan',narrative:'You counsel the family on FPIES management and follow-up.',question:'What is the typical natural history of FPIES?',options:[{text:'Lifelong avoidance of trigger food',correct:false,feedback:'Unlike IgE food allergy, most children outgrow FPIES by age 3-5.'},{text:'Most children outgrow FPIES by age 3-5 years',correct:true,feedback:'Correct! ~90% outgrow rice FPIES by 3-5 years. Supervised OFC every 12-18 months can assess tolerance. Milk/soy FPIES may resolve earlier.'},{text:'Progression to IgE-mediated allergy',correct:false,feedback:'FPIES rarely progresses to IgE allergy. They are distinct mechanisms.'}],teaching:'FPIES prognosis: Typically outgrown by 3-5yo. Serial OFCs assess tolerance. Infants with FPIES to one food have ~30% risk of FPIES to another food.'},
+    {icon:'✅',title:'Scene 6: Summary',narrative:'The infant is discharged with strict rice avoidance, emergency action plan, and allergy follow-up for supervised OFC in 12-18 months.',teaching:'FPIES Key Points:\n• Non-IgE, T-cell mediated GI food allergy\n• Delayed vomiting (1-4h), pallor, lethargy, NO skin symptoms\n• Common triggers: rice, oat, milk, soy, fish\n• Treatment: IV fluids, ondansetron (NOT epinephrine)\n• Diagnosis: Clinical (skin tests negative)\n• Prognosis: Most outgrow by 3-5 years'}
+];
+let currentScene=0,score=0;
+function renderScene(){const s=scenes[currentScene];document.getElementById('progress').style.width=((currentScene+1)/scenes.length*100)+'%';let h='<div class="scene"><div class="scene-title">'+(s.icon||'📋')+' '+s.title+'</div>';if(s.patient)h+='<div class="patient-info"><strong>'+s.patient+'</strong></div>';h+='<div class="narrative">'+s.narrative+'</div>';if(s.question){h+='<div class="question"><strong>❓ '+s.question+'</strong></div><div class="options">';s.options.forEach((o,i)=>h+='<button class="option" onclick="select('+i+')" data-c="'+!!o.correct+'">'+o.text+'</button>');h+='</div><div class="feedback" id="fb"></div>';}if(s.teaching)h+='<div class="teaching"><h4>📚 Teaching</h4><p>'+s.teaching+'</p></div>';h+='<div class="nav-row">'+(s.question?'':'<button class="btn btn-primary" onclick="next()">Continue →</button>')+'</div></div>';document.getElementById('scene-container').innerHTML=h;}
+function select(i){const opts=document.querySelectorAll('.option'),fb=document.getElementById('fb'),s=scenes[currentScene];opts.forEach((o,j)=>{o.style.pointerEvents='none';if(j===i){if(o.dataset.c==='true'){o.classList.add('correct');score++;fb.className='feedback show correct';fb.innerHTML='<strong>✓ Correct!</strong> '+s.options[i].feedback;}else{o.classList.add('incorrect');fb.className='feedback show incorrect';fb.innerHTML='<strong>✗</strong> '+s.options[i].feedback;opts.forEach(x=>{if(x.dataset.c==='true')x.classList.add('correct');});}}});setTimeout(()=>{document.querySelector('.nav-row').innerHTML='<button class="btn btn-primary" onclick="next()">Continue →</button>';},800);}
+function next(){currentScene++;if(currentScene>=scenes.length)complete();else{renderScene();window.scrollTo({top:0,behavior:'smooth'});}}
+function complete(){document.getElementById('scene-container').style.display='none';const q=scenes.filter(s=>s.question).length;document.getElementById('completion').innerHTML='<div class="score-card"><h2>🎉 Complete!</h2><p>Score: '+score+'/'+q+'</p></div><div class="nav-row" style="justify-content:center;margin-top:1rem;"><a href="../adventure-hub.html" class="btn btn-primary">← Back</a></div>';document.getElementById('completion').style.display='block';}
+renderScene();
+    </script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="FPIES"
+         data-key-points="🎉 Complete!, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/24484687/" target="_blank" style="color:#7dd3fc">ICON: Anaphylaxis</a> — WAO Journal 2014</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/28122115/" target="_blank" style="color:#7dd3fc">EAACI Guidelines on Allergen Immunotherapy</a> — Allergy 2017</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/24484687/" target="_blank" style="color:#7dd3fc">PRACTALL Consensus: Drug Allergy</a> — Allergy 2014</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

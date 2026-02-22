@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gastrointestinal Bleeding - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3b82f6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #60a5fa; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #93c5fd; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            vertical-align: top;
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-left: 12px;
+            vertical-align: top;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #3b82f6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK537291/" target="_blank" rel="noopener">GI Bleeding - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/1735/glasgow-blatchford-bleeding-score-gbs" target="_blank" rel="noopener">Glasgow-Blatchford Score (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+
+<script>
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">62-year-old man</span> presents with 3 episodes of black, tarry stools over 24 hours and lightheadedness when standing. PMH: Afib on apixaban, HTN, osteoarthritis (takes ibuprofen regularly).</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">108</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP lying</div><div class=\"vital-value normal\">118/76</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP standing</div><div class=\"vital-value abnormal\">92/60</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Hgb</div><div class=\"vital-value abnormal\">8.2 g/dL</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "What does melena indicate? Upper or lower GI source?",
+        "hint_advanced": "How do you interpret orthostatic vital signs? What volume of blood loss do they suggest?",
+        "question": {
+            "prompt": "What does the orthostatic hypotension (BP drop on standing) indicate about blood loss?",
+            "options": [
+                {
+                    "text": "Approximately 15-30% volume loss (moderate hemorrhage) - significant blood loss requiring aggressive resuscitation",
+                    "correct": true
+                },
+                {
+                    "text": "Minimal blood loss - orthostatic changes are nonspecific and occur with dehydration",
+                    "correct": false
+                },
+                {
+                    "text": "Greater than 40% volume loss - patient is in hemorrhagic shock",
+                    "correct": false
+                },
+                {
+                    "text": "Cannot estimate volume loss from orthostatics - only hemoglobin is reliable",
+                    "correct": false
+                },
+                {
+                    "text": "Orthostatic changes indicate autonomic dysfunction from afib, not blood loss",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Orthostatic hypotension (SBP drop greater than 20 or DBP drop greater than 10) suggests 15-30% volume loss (Class II hemorrhage, 750-1500 mL). He also has tachycardia and significant hemoglobin drop. This is moderate-severe hemorrhage requiring volume resuscitation.",
+                "incorrect": "Orthostatic changes are clinically significant - they indicate ~15-30% volume loss. Combined with tachycardia and anemia, this patient has substantial blood loss. Hemoglobin alone underestimates acute blood loss due to hemoconcentration."
+            },
+            "teaching": "<h4>\ud83d\udcda Hemorrhage Classification</h4>\n                    <table>\n                        <tr><th>Class</th><th>Blood Loss</th><th>Signs</th></tr>\n                        <tr><td>I</td><td>Less than 15%</td><td>Minimal - may have anxiety</td></tr>\n                        <tr><td>II</td><td>15-30%</td><td>Tachycardia, orthostatic hypotension</td></tr>\n                        <tr><td>III</td><td>30-40%</td><td>Hypotension, tachycardia, altered mental status</td></tr>\n                        <tr><td>IV</td><td>Greater than 40%</td><td>Severe hypotension, obtunded</td></tr>\n                    </table>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Resuscitation",
+        "content": "<div class=\"narrative\">\n                <p>You initiate resuscitation with IV access and crystalloid. The nurse asks about blood transfusion.</p>\n            </div>",
+        "hint_beginner": "What hemoglobin threshold triggers transfusion in GI bleeding?",
+        "hint_advanced": "What did the TRIGGER trial and restrictive transfusion studies show?",
+        "question": {
+            "prompt": "At what hemoglobin threshold should you transfuse this patient?",
+            "options": [
+                {
+                    "text": "Transfuse for Hgb less than 7 g/dL (restrictive strategy) unless active massive bleeding, coronary disease, or hemodynamic instability",
+                    "correct": true
+                },
+                {
+                    "text": "Transfuse now - Hgb 8.2 is below 10 and he is symptomatic",
+                    "correct": false
+                },
+                {
+                    "text": "No transfusion threshold in acute bleeding - transfuse based on symptoms only",
+                    "correct": false
+                },
+                {
+                    "text": "Transfuse for Hgb less than 9 in all GI bleeding patients due to rebleeding risk",
+                    "correct": false
+                },
+                {
+                    "text": "Wait for hemoglobin to equilibrate in 24 hours before transfusing",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Restrictive transfusion (Hgb less than 7) improves outcomes in GI bleeding compared to liberal strategy (TRIGGER trial). More liberal threshold (less than 8-9) may be used for active massive hemorrhage, CAD, or hemodynamic instability. This patient is 8.2 and responsive to fluids, so watch and recheck.",
+                "incorrect": "Restrictive transfusion (target Hgb 7-9) has better outcomes in GI bleeding than liberal (target 9-11). Over-transfusion may worsen portal hypertension in variceal bleeding and increases mortality. His Hgb 8.2 does not mandate immediate transfusion unless he deteriorates."
+            },
+            "teaching": "<h4>\ud83d\udcda Transfusion in GI Bleeding</h4>\n                    <p><strong>Restrictive strategy (Hgb less than 7):</strong></p>\n                    <ul>\n                        <li>Lower mortality than liberal strategy</li>\n                        <li>Less rebleeding (especially variceal)</li>\n                        <li>Reduces portal pressure</li>\n                    </ul>\n                    <p><strong>Consider higher threshold (less than 8-9) if:</strong></p>\n                    <ul>\n                        <li>Active massive hemorrhage</li>\n                        <li>Coronary artery disease</li>\n                        <li>Hemodynamic instability despite resuscitation</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\">\n                <p>The patient is stabilizing with IV fluids. You need to determine timing of endoscopy.</p>\n            </div>",
+        "hint_beginner": "What scoring systems help risk-stratify upper GI bleeding?",
+        "hint_advanced": "When is urgent (less than 24h) vs emergent (less than 12h) endoscopy indicated?",
+        "question": {
+            "prompt": "When should this patient undergo upper endoscopy?",
+            "options": [
+                {
+                    "text": "Within 24 hours after resuscitation and hemodynamic stabilization - standard timing for acute upper GI bleeding",
+                    "correct": true
+                },
+                {
+                    "text": "Emergently within 2 hours - all upper GI bleeding requires immediate endoscopy",
+                    "correct": false
+                },
+                {
+                    "text": "Within 72 hours - early endoscopy has not shown benefit over delayed",
+                    "correct": false
+                },
+                {
+                    "text": "After hemoglobin normalizes with transfusion to optimize visualization",
+                    "correct": false
+                },
+                {
+                    "text": "Only if bleeding continues - stable patients may not need endoscopy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Standard recommendation is EGD within 24 hours of presentation for acute upper GI bleeding. Emergent EGD (less than 12 hours) may be indicated for hemodynamic instability, ongoing active bleeding, or high-risk features. Very early EGD (less than 6h) has not shown mortality benefit in most patients.",
+                "incorrect": "Upper GI bleeding should have EGD within 24 hours. Emergent (less than 12h) EGD is reserved for hemodynamically unstable patients or massive bleeding. Waiting 72 hours is too long. All acute upper GI bleeds warrant endoscopy for diagnosis and potential therapy."
+            },
+            "teaching": "<h4>\ud83d\udcda Timing of Endoscopy in UGIB</h4>\n                    <table>\n                        <tr><th>Timing</th><th>Indication</th></tr>\n                        <tr><td><strong>Within 24 hours</strong></td><td>All acute upper GI bleeding (standard)</td></tr>\n                        <tr><td><strong>Within 12 hours</strong></td><td>High-risk features, hemodynamic instability</td></tr>\n                        <tr><td><strong>Emergent (less than 6h)</strong></td><td>Massive ongoing hemorrhage, suspected variceal bleeding</td></tr>\n                    </table>\n                    <p><em>Glasgow-Blatchford Score helps identify low-risk patients who may not need admission</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Endoscopy Findings",
+        "content": "<div class=\"narrative\">\n                <p>EGD reveals a gastric ulcer with visible vessel but no active bleeding. The gastroenterologist performs epinephrine injection and hemoclip placement.</p>\n            </div>",
+        "hint_beginner": "What is the Forrest classification? What does it predict?",
+        "hint_advanced": "What medical therapy should be started after endoscopic hemostasis?",
+        "question": {
+            "prompt": "What medical therapy should be initiated after successful endoscopic hemostasis?",
+            "options": [
+                {
+                    "text": "High-dose IV PPI (e.g., pantoprazole 80mg bolus then 8mg/hr infusion for 72 hours) to maintain gastric pH greater than 6",
+                    "correct": true
+                },
+                {
+                    "text": "Oral PPI twice daily is equivalent to IV and preferred for cost savings",
+                    "correct": false
+                },
+                {
+                    "text": "H2 blocker (famotidine) is preferred over PPI for peptic ulcer bleeding",
+                    "correct": false
+                },
+                {
+                    "text": "Sucralfate for mucosal protection - PPIs are not indicated post-hemostasis",
+                    "correct": false
+                },
+                {
+                    "text": "No acid suppression needed after successful endoscopic therapy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "High-dose IV PPI after successful endoscopic therapy for high-risk ulcers (active bleeding, visible vessel, adherent clot) reduces rebleeding. Standard: 80mg bolus then 8mg/hr continuous infusion for 72 hours, then transition to oral PPI. Goal is pH greater than 6 to stabilize clot.",
+                "incorrect": "IV PPI infusion (not intermittent or oral) is standard after endoscopic hemostasis for high-risk ulcers. The continuous infusion maintains gastric pH greater than 6, allowing clot stabilization. This reduces rebleeding from ~25% to ~8%."
+            },
+            "teaching": "<h4>\ud83d\udcda Post-Endoscopy Management</h4>\n                    <p><strong>High-risk stigmata (need IV PPI):</strong></p>\n                    <ul>\n                        <li>Active spurting (Forrest Ia)</li>\n                        <li>Active oozing (Forrest Ib)</li>\n                        <li>Visible vessel (Forrest IIa)</li>\n                        <li>Adherent clot (Forrest IIb)</li>\n                    </ul>\n                    <p><strong>IV PPI protocol:</strong> 80mg bolus then 8mg/hr x 72 hours</p>\n                    <p><em>Low-risk stigmata (flat spot, clean base): Oral PPI is acceptable</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Anticoagulation Management",
+        "content": "<div class=\"narrative\">\n                <p>The patient is on apixaban for atrial fibrillation (CHA2DS2-VASc 4). The bleeding has stopped.</p>\n            </div>",
+        "hint_beginner": "When should anticoagulation be restarted after GI bleeding?",
+        "hint_advanced": "How do you weigh stroke risk vs rebleeding risk? What does the evidence show?",
+        "question": {
+            "prompt": "When should you restart anticoagulation in this patient?",
+            "options": [
+                {
+                    "text": "Resume anticoagulation within 7 days (often by day 3-5) after hemostasis confirmed - stroke risk outweighs rebleeding risk for most patients",
+                    "correct": true
+                },
+                {
+                    "text": "Wait 30 days after GI bleeding before restarting any anticoagulation",
+                    "correct": false
+                },
+                {
+                    "text": "Never restart anticoagulation after GI bleeding - use aspirin alone",
+                    "correct": false
+                },
+                {
+                    "text": "Restart immediately after endoscopy to prevent stroke",
+                    "correct": false
+                },
+                {
+                    "text": "Switch to warfarin as it is safer than DOACs after GI bleeding",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "For most patients with Afib, restart anticoagulation within 7 days (often day 3-5) after hemostasis is confirmed. Delaying beyond 7 days significantly increases stroke risk. With CHA2DS2-VASc 4, his annual stroke risk (~6%) exceeds rebleeding risk.",
+                "incorrect": "Early anticoagulation resumption (within 7 days) is associated with better outcomes than delayed resumption. Stroke/thrombotic risk typically outweighs rebleeding risk. DOACs are actually safer than warfarin for GI bleeding (lower intracranial hemorrhage)."
+            },
+            "teaching": "<h4>\ud83d\udcda Anticoagulation After GI Bleeding</h4>\n                    <p><strong>Timing of resumption:</strong></p>\n                    <ul>\n                        <li>Most patients: Resume within 7 days (often day 3-5)</li>\n                        <li>Very high risk (extensive ulcer, failed hemostasis): May wait longer</li>\n                        <li>Delaying beyond 7 days increases net harm in most AF patients</li>\n                    </ul>\n                    <p><strong>Evidence:</strong> Observational studies show lower mortality with early resumption (7 days) vs delayed or never resuming</p>",
+            "points": 15
+        }
+    }
+,
+{
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\"><p>You assess the severity and risk factors to guide management intensity.</p></div>",
+        "hint_beginner": "What clinical features indicate higher severity?",
+        "hint_advanced": "What validated scoring systems exist for this condition?",
+        "question": {
+                "prompt": "Which factor most influences prognosis and management intensity?",
+                "options": [
+                        {
+                                "text": "Integration of clinical presentation, comorbidities, vital signs, and objective findings",
+                                "correct": true
+                        },
+                        {
+                                "text": "A single laboratory value in isolation",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient age alone",
+                                "correct": false
+                        },
+                        {
+                                "text": "Time of presentation to the ED",
+                                "correct": false
+                        },
+                        {
+                                "text": "Insurance status or ability to follow up",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Clinical decision-making integrates multiple factors including presentation severity, comorbidities, vital signs, laboratory findings, and patient-specific factors. No single element should drive management in isolation.",
+                        "incorrect": "Risk stratification requires integration of multiple clinical factors, not reliance on any single element."
+                },
+                "teaching": "<h4>\ud83d\udcca Risk Stratification Principles</h4><ul><li>Assess severity of presenting illness</li><li>Consider relevant comorbidities</li><li>Review vital signs and trajectory</li><li>Integrate laboratory and imaging findings</li><li>Apply validated scoring tools when available</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Treatment Selection",
+        "content": "<div class=\"narrative\"><p>Based on your assessment, you must select the most appropriate initial treatment approach.</p></div>",
+        "hint_beginner": "What are the first-line evidence-based treatments?",
+        "hint_advanced": "How do patient-specific factors modify treatment selection?",
+        "question": {
+                "prompt": "What principle guides initial treatment selection?",
+                "options": [
+                        {
+                                "text": "Evidence-based guidelines tailored to patient-specific factors (comorbidities, allergies, severity)",
+                                "correct": true
+                        },
+                        {
+                                "text": "Always use the newest available medication",
+                                "correct": false
+                        },
+                        {
+                                "text": "Most expensive treatments provide best outcomes",
+                                "correct": false
+                        },
+                        {
+                                "text": "Whatever was used for the last similar patient",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient preference alone should determine treatment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Treatment should follow current evidence-based guidelines while accounting for individual patient factors including comorbidities, allergies, contraindications, disease severity, and patient preferences when appropriate.",
+                        "incorrect": "Evidence-based medicine combined with patient-centered care guides optimal treatment selection."
+                },
+                "teaching": "<h4>\ud83d\udc8a Treatment Principles</h4><ul><li>Follow current evidence-based guidelines</li><li>Assess for contraindications and allergies</li><li>Consider patient-specific factors</li><li>Start with first-line agents unless contraindicated</li><li>Monitor for response and adverse effects</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Monitoring and Reassessment",
+        "content": "<div class=\"narrative\"><p>After initiating treatment, you must establish monitoring parameters and reassessment criteria.</p></div>",
+        "hint_beginner": "What should you monitor to assess treatment response?",
+        "hint_advanced": "What triggers require escalation or change in management?",
+        "question": {
+                "prompt": "What is most important in the monitoring plan?",
+                "options": [
+                        {
+                                "text": "Clear criteria for expected response timeline and specific triggers for escalation",
+                                "correct": true
+                        },
+                        {
+                                "text": "Scheduling a follow-up appointment",
+                                "correct": false
+                        },
+                        {
+                                "text": "Completing documentation thoroughly",
+                                "correct": false
+                        },
+                        {
+                                "text": "Ensuring patient satisfaction scores",
+                                "correct": false
+                        },
+                        {
+                                "text": "Waiting for specialist consultation before any reassessment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Effective monitoring requires defining what improvement to expect and when, establishing clear escalation triggers, and setting specific reassessment timepoints. This allows early identification of treatment failure.",
+                        "incorrect": "While all aspects of care matter, defining response criteria and escalation triggers is critical for patient safety."
+                },
+                "teaching": "<h4>\ud83d\udcc8 Monitoring Essentials</h4><ul><li>Define expected response and timeline</li><li>Establish vital sign parameters</li><li>Set escalation triggers (specific criteria for concern)</li><li>Plan reassessment intervals</li><li>Document baseline for comparison</li></ul>",
+                "points": 10
+        }
+}];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#3b82f6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../index.html" class="crossplatform-link">📚 GI Bleed Pathophysiology</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- ReasonDx AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Gastrointestinal Bleeding"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
