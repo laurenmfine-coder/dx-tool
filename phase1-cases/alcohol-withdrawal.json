@@ -1,0 +1,342 @@
+{
+  "id": "alcohol-withdrawal",
+  "presentation": "Alcohol Withdrawal",
+  "category": "psychiatric",
+  "difficulty": 3,
+  "rotations": ["medicine", "psychiatry", "em"],
+  "board": "admitting",
+  "edHandoff": {
+    "summary": "52-year-old male admitted 36 hours ago for acute pancreatitis (lipase 1,200, improving). Night nurse called because he's becoming increasingly agitated, tremulous, and diaphoretic. HR spiked to 122, BP 168/98, temp 100.2°F. He's oriented but anxious, picking at his sheets, and says he sees 'bugs on the wall.' Hasn't had a drink in about 40 hours per family. No seizure activity witnessed. CIWA score 22. Lorazepam 2mg IV given x1 with mild improvement. On-call team asked to evaluate and manage.",
+    "disposition": "Already admitted — this is an inpatient complication requiring urgent management. Transfer to stepdown/ICU if CIWA remains >20 despite initial benzodiazepine dosing."
+  },
+  "demographics": {
+    "ageRange": [35, 65],
+    "genderDistribution": { "male": 0.7, "female": 0.3 },
+    "nameOptions": {
+      "male": ["Dale Kowalski", "Warren Hutchins", "Eddie Morales", "Lenny Fitzgerald", "Carl Johansson"],
+      "female": ["Donna Brightman", "Sheila O'Hara", "Marlene Vasquez", "Janice Tompkins", "Gail Sorensen"]
+    }
+  },
+  "sources": [
+    {
+      "name": "Alcohol Withdrawal - StatPearls",
+      "type": "statpearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/",
+      "accessDate": "2026-02",
+      "citedFor": ["clinical stages", "CIWA scoring", "benzodiazepine protocols", "complications"]
+    },
+    {
+      "name": "Delirium Tremens - StatPearls",
+      "type": "statpearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK482134/",
+      "accessDate": "2026-02",
+      "citedFor": ["DT recognition", "risk factors", "ICU management"]
+    }
+  ],
+  "variants": [
+    {
+      "id": "ciwa-managed-v1",
+      "diagnosis": "Moderate Alcohol Withdrawal (CIWA-Managed)",
+      "acuity": 3,
+      "patient": {
+        "personalityTraits": ["irritable", "minimizes drinking", "wants to leave AMA", "intermittently cooperative"],
+        "communicationStyle": "Agitated and restless. Snaps at questions initially. May become more cooperative after benzodiazepines take effect. Underreports alcohol consumption. Defensive about drinking habits. May threaten to leave AMA.",
+        "emotionalState": "Anxious, irritable, frightened by visual disturbances but won't admit it easily",
+        "medicalLiteracy": "low"
+      },
+      "responses": {
+        "opening": "Why are you here? I'm fine. I just need to get out of here — I don't feel right. My hands won't stop shaking and I'm sweating like crazy. Is this place always so hot? And there's something on the wall over there — can somebody clean this room?",
+        "drinkingHistory": "I have a couple drinks after work. Maybe a few more on the weekends. I'm not an alcoholic if that's what you're asking.",
+        "drinkingHistoryIfPushed": "Look... okay, maybe a six-pack most nights. A little more on weekends. I've been drinking like that for... I don't know, 15 years? I tried cutting back a few times but it's hard with my job.",
+        "lastDrink": "I haven't had anything since they brought me in. What's that been, two days? That's probably why I feel so terrible.",
+        "visualDisturbances": "I keep seeing — look, there's something crawling on the wall. Right there. You don't see that? (Becomes anxious) Am I losing my mind?",
+        "tremor": "Yeah, my hands have been shaking since this morning. I can't even hold a cup of water without spilling it.",
+        "priorWithdrawal": "I got the shakes once before when I was in the hospital for my stomach a couple years ago. They gave me something for it. I don't remember having it this bad though.",
+        "seizureHistory": "No, I've never had a seizure. At least not that I know of.",
+        "ama": "I want to leave. I can't stay here anymore. I need a drink — I mean, I just need to go home."
+      },
+      "clinicalFacts": {
+        "chiefComplaint": {
+          "patientPhrasing": ["I don't feel right", "my hands won't stop shaking", "I'm sweating like crazy", "something on the wall"],
+          "onset": "Symptoms began approximately 24 hours after last drink, now 40 hours out. Progressive worsening over past 6-8 hours.",
+          "timeline": "6-12 hours: tremor, anxiety, tachycardia. 12-24 hours: peak minor withdrawal. 24-48 hours (NOW): worsening — hallucinations beginning, autonomic instability. 48-72 hours: DT risk window."
+        },
+        "alcoholHistory": {
+          "pattern": "Daily heavy drinker: 6-12 beers nightly for 15+ years. Weekend binges higher. Prior unsuccessful quit attempts.",
+          "lastDrink": "Approximately 40 hours ago (upon hospital admission for pancreatitis)",
+          "priorWithdrawal": "One prior episode during hospitalization 2 years ago — treated with PRN benzodiazepines, no seizures, no DT",
+          "priorSeizures": "None reported",
+          "priorDT": "None reported",
+          "AUDIT_C_estimated": "≥8 (high risk)"
+        },
+        "associatedSymptoms": {
+          "present": [
+            { "name": "tremor (coarse, bilateral)", "patientSays": "My hands have been shaking all day. I can't hold anything steady." },
+            { "name": "diaphoresis", "patientSays": "I'm drenched in sweat. I've soaked through two gowns." },
+            { "name": "anxiety/agitation", "patientSays": "I can't relax. Everything's making me jumpy. I need to get out of here." },
+            { "name": "visual hallucinations", "patientSays": "There are bugs on the wall. Right there. You seriously don't see them?" },
+            { "name": "tachycardia (HR 122)", "patientSays": "My heart is pounding." },
+            { "name": "hypertension (168/98)", "patientSays": "" },
+            { "name": "nausea", "patientSays": "My stomach's been off. I feel like I'm going to throw up." },
+            { "name": "insomnia", "patientSays": "Haven't slept at all. I can't close my eyes." },
+            { "name": "low-grade fever (100.2°F)", "patientSays": "" }
+          ],
+          "absent": [
+            { "name": "seizure activity", "patientSays": "No, I haven't had a seizure." },
+            { "name": "tactile hallucinations (formication)", "patientSays": "No, nothing's crawling on me." },
+            { "name": "auditory hallucinations", "patientSays": "I'm not hearing voices." },
+            { "name": "confusion/disorientation", "patientSays": "I know where I am. I know the date. I just want out." },
+            { "name": "chest pain", "patientSays": "No chest pain." },
+            { "name": "head injury / recent fall", "patientSays": "No, I didn't fall." }
+          ]
+        },
+        "pmh": [
+          "Alcohol use disorder (undiagnosed/untreated — patient does not identify as having AUD)",
+          "Acute pancreatitis (current admission — lipase trending down, pain improving)",
+          "Hypertension (poorly controlled, partially from alcohol use)",
+          "Gastritis / GERD",
+          "Prior alcohol withdrawal (1 episode, 2 years ago, no seizures or DT)"
+        ],
+        "medications": [
+          { "name": "Pantoprazole", "dose": "40mg IV daily (for pancreatitis admission)" },
+          { "name": "Hydromorphone", "dose": "0.5mg IV PRN (pancreatitis pain — now minimal use)" },
+          { "name": "Amlodipine", "dose": "10mg daily (home med — brought from home)" },
+          { "name": "Lorazepam", "dose": "2mg IV given x1 by night nurse (for withdrawal symptoms)" }
+        ],
+        "allergies": [],
+        "socialHistory": {
+          "smoking": "1 pack/day for 25 years",
+          "alcohol": "See alcohol history above. Patient minimizes — family reports 'a case of beer every two days, more on weekends'",
+          "drugs": "Denies. Family uncertain.",
+          "occupation": "Auto mechanic. Currently working.",
+          "livingSituation": "Lives with girlfriend. Relationship strained by drinking.",
+          "support": "No AA involvement. No prior treatment for AUD."
+        },
+        "familyHistory": ["Father: alcoholism, died of cirrhosis at 58", "Brother: alcohol use disorder, in recovery"],
+        "riskFactorsForSevereWithdrawal": {
+          "present": ["long history of heavy daily drinking (15+ years)", "prior withdrawal episode", "current acute illness (pancreatitis)", "current CIWA >20", "already 40 hours since last drink", "family history of severe AUD"],
+          "absent": ["prior withdrawal seizures", "prior DT", "concurrent benzodiazepine use", "structural brain lesion"]
+        }
+      },
+      "physicalExam": {
+        "vitalSigns": { "BP": "168/98", "HR": "122", "RR": "22", "Temp": "100.2°F", "SpO2": "97% on RA" },
+        "general": "Agitated middle-aged male, sitting up in bed, visibly diaphoretic, restless, scanning the room. Coarse bilateral hand tremor visible at rest. Intermittently picking at sheets and gown.",
+        "heent": "Diaphoretic. Pupils 5mm bilaterally, reactive. No scleral icterus. Dry mucous membranes.",
+        "neck": "Supple, no meningismus",
+        "cardiovascular": "Tachycardic, regular, no murmurs",
+        "pulmonary": "Clear bilaterally, mild tachypnea",
+        "abdominal": "Mild epigastric tenderness (resolving pancreatitis). No hepatomegaly. No ascites. No spider angiomata.",
+        "extremities": "Bilateral coarse resting tremor of hands. No asterixis. No edema. Palmar erythema noted.",
+        "neurologic": {
+          "mentalStatus": "Alert, oriented to person, place, time, and situation. Attention impaired — difficulty with serial 7s. Anxious and hypervigilant.",
+          "cranialNerves": "Intact",
+          "motor": "Coarse resting tremor bilaterally. Strength 5/5 throughout. Hyperreflexia (3+) diffusely.",
+          "sensory": "Intact to light touch",
+          "cerebellar": "Finger-to-nose mildly impaired by tremor",
+          "hallucinations": "Reports visual hallucinations (bugs on wall) — knows they 'might not be real' when pressed (insight partially preserved = alcoholic hallucinosis, not yet full DT)"
+        },
+        "ciwaAssessment": {
+          "nausea_vomiting": 3,
+          "tremor": 5,
+          "paroxysmal_sweats": 5,
+          "anxiety": 4,
+          "agitation": 4,
+          "tactile_disturbances": 0,
+          "auditory_disturbances": 0,
+          "visual_disturbances": 3,
+          "headache": 2,
+          "orientation": 0,
+          "total": 26,
+          "interpretation": "Severe withdrawal (>20). Requires aggressive benzodiazepine protocol. ICU/stepdown monitoring recommended."
+        }
+      },
+      "diagnostics": {
+        "labs": [
+          { "test": "Ethanol level", "value": "<10", "unit": "mg/dL", "ref": "0", "status": "normal", "note": "Confirms no alcohol on board — withdrawal is expected" },
+          { "test": "Glucose", "value": "92", "unit": "mg/dL", "ref": "70-100", "status": "normal", "note": "Rule out hypoglycemia as cause of agitation (alcoholics prone to depleted glycogen)" },
+          { "test": "BMP", "value": "Na 136, K 3.4, Cl 98, HCO3 22, BUN 14, Cr 0.9, Glucose 92, Ca 8.4", "unit": "", "ref": "", "status": "abnormal", "note": "Mild hypokalemia and hypocalcemia — common in chronic alcohol use. Replete." },
+          { "test": "Magnesium", "value": "1.4", "unit": "mg/dL", "ref": "1.7-2.2", "status": "abnormal", "note": "LOW — chronic alcohol depletes Mg. Hypomagnesemia lowers seizure threshold. Replete aggressively." },
+          { "test": "Phosphorus", "value": "2.0", "unit": "mg/dL", "ref": "2.5-4.5", "status": "abnormal", "note": "Low — refeeding + alcohol depletion. Replete." },
+          { "test": "CBC", "value": "WBC 10.2, Hgb 12.8, MCV 104, Plt 118", "unit": "", "ref": "", "status": "abnormal", "note": "Macrocytosis (MCV 104) — chronic alcohol effect on folate/B12. Thrombocytopenia — alcohol marrow suppression." },
+          { "test": "Hepatic panel", "value": "AST 128, ALT 62, Alk Phos 95, Total Bili 1.4, Albumin 3.2", "unit": "", "ref": "", "status": "abnormal", "note": "AST:ALT ratio >2:1 — classic alcoholic pattern. Mild hypoalbuminemia." },
+          { "test": "Lipase", "value": "380", "unit": "U/L", "ref": "10-140", "status": "abnormal", "note": "Trending down from 1,200 on admission — pancreatitis improving" },
+          { "test": "INR", "value": "1.3", "unit": "", "ref": "<1.1", "status": "abnormal", "note": "Mildly elevated — early synthetic dysfunction or vitamin K deficiency" },
+          { "test": "Lactate", "value": "1.6", "unit": "mmol/L", "ref": "<2.0", "status": "normal", "note": "" },
+          { "test": "Thiamine level", "value": "Not readily available (send-out)", "unit": "", "ref": "", "status": "pending", "note": "Treat empirically — do NOT wait for level" },
+          { "test": "Urine drug screen", "value": "Negative", "unit": "", "ref": "", "status": "normal", "note": "Excludes concurrent substance use contributing to presentation" }
+        ]
+      },
+      "managementPlan": {
+        "immediateActions": [
+          "CIWA-Ar protocol: lorazepam 2mg IV for CIWA ≥20, 1mg for CIWA 10-19. Re-score every 30-60 minutes. Goal: CIWA <10.",
+          "If CIWA remains ≥20 after 3 doses (6mg) → consider phenobarbital loading or transfer to ICU for benzo-resistant withdrawal.",
+          "Thiamine 500mg IV x3 days BEFORE any glucose/dextrose (prevent Wernicke's). Then thiamine 100mg PO daily.",
+          "Folate 1mg PO daily.",
+          "Aggressive electrolyte repletion: Mg sulfate 2g IV over 1 hour (repeat until Mg >2.0). KCl 40mEq PO/IV. Replete phosphorus.",
+          "IV fluids: D5NS at 125mL/hr (hydration + glucose once thiamine on board).",
+          "Telemetry monitoring. 1:1 sitter if agitated. Bed alarm. Padded side rails.",
+          "Fall precautions. Aspiration precautions if obtunded.",
+          "Hold opioids (hydromorphone) — sedation risk with benzos. Transition pancreatitis pain to acetaminophen."
+        ],
+        "seizureProphylaxis": "Benzodiazepines per CIWA protocol provide seizure prophylaxis. No additional anticonvulsant needed unless breakthrough seizure occurs. Phenytoin is NOT effective for alcohol withdrawal seizures — do not use it.",
+        "nutritional": "Thiamine IV before glucose (prevent Wernicke's precipitated by glucose load). Banana bag (MVI + thiamine + folate + Mg in NS) after initial thiamine bolus. Advance diet as tolerated for pancreatitis.",
+        "monitoringSchedule": "CIWA-Ar every 30-60 minutes during active titration. Once CIWA <10 x3 consecutive assessments → every 4 hours. Vitals q1h during active withdrawal. BMP + Mg every 12 hours x 48 hours. Continuous telemetry.",
+        "escalationCriteria": "Transfer to ICU if: CIWA remains >20 despite cumulative lorazepam >8mg in 1 hour, seizure activity, temp >104°F, hemodynamic instability, inability to protect airway, or severe rhabdomyolysis.",
+        "consultations": "Addiction medicine or psychiatry consult for AUD treatment planning (naltrexone, acamprosate, or disulfiram on discharge). Social work for outpatient resources (AA, IOP, sober living)."
+      },
+      "teaching": {
+        "correctDiagnosis": "Moderate-Severe Alcohol Withdrawal",
+        "keyLearningPoints": [
+          "Withdrawal timeline: 6-12h minor (tremor, anxiety, tachycardia) → 12-24h seizures (peak risk) → 24-48h alcoholic hallucinosis → 48-96h delirium tremens",
+          "CIWA-Ar is the gold standard for monitoring. Score ≥20 = severe withdrawal requiring aggressive treatment. Score <10 = stable, can space assessments.",
+          "Benzodiazepines are the ONLY proven treatment to reduce seizures and DT mortality. Lorazepam preferred in liver disease (no hepatic metabolism — glucuronidation only).",
+          "ALWAYS give thiamine BEFORE glucose — glucose metabolism consumes thiamine and can precipitate Wernicke's encephalopathy in a depleted patient.",
+          "Phenytoin does NOT prevent or treat alcohol withdrawal seizures — this is a common pitfall.",
+          "Hypomagnesemia is nearly universal in chronic alcoholics and lowers seizure threshold. Replete aggressively.",
+          "AST:ALT ratio >2:1 is the classic 'alcoholic ratio' — helps identify chronic alcohol use even when patient minimizes.",
+          "Macrocytosis (high MCV) without anemia is often the first lab clue to chronic alcohol use.",
+          "This patient has partially preserved insight (knows hallucinations 'might not be real') — this is alcoholic hallucinosis, not yet DT. In DT, insight is lost and there is global confusion."
+        ],
+        "mustNotMiss": [
+          "Wernicke's encephalopathy (confusion + ataxia + ophthalmoplegia — treat empirically with IV thiamine, do NOT wait for levels)",
+          "Withdrawal seizure (peak 12-24 hours — may still occur. Treat with benzodiazepines, not phenytoin.)",
+          "Delirium tremens (48-96 hours — risk window is approaching. Watch for worsening confusion, autonomic instability, hyperthermia.)",
+          "Subdural hematoma (alcoholics fall frequently — if confusion seems disproportionate or focal, get CT head)",
+          "Hepatic encephalopathy (if liver disease more advanced than suspected)",
+          "Concurrent infection (fever in withdrawal is common but can mask sepsis — maintain low threshold for workup)"
+        ],
+        "commonPitfalls": [
+          "Under-dosing benzodiazepines — these patients have cross-tolerance. They often need larger doses than expected.",
+          "Using phenytoin for withdrawal seizures — it's ineffective. Benzodiazepines are the treatment.",
+          "Giving glucose before thiamine — can precipitate acute Wernicke's encephalopathy.",
+          "Forgetting to replete magnesium — single biggest modifiable seizure risk factor.",
+          "Attributing all symptoms to withdrawal without considering other causes (subdural, infection, metabolic).",
+          "Not anticipating the timeline — this patient is at 40 hours. The DT risk window (48-96h) is approaching. Plan ahead.",
+          "Not involving addiction medicine — the admission is an opportunity to start AUD treatment and connect to resources.",
+          "Restraining the patient instead of treating the withdrawal — benzodiazepines address the underlying pathology."
+        ],
+        "attendingQuestions": "This patient was admitted for pancreatitis and is now withdrawing. Walk me through the withdrawal timeline — where is he now and what's coming next? His CIWA is 26 — what's your protocol? And he has visual hallucinations but is still oriented — is this DT?"
+      }
+    },
+    {
+      "id": "delirium-tremens-v1",
+      "diagnosis": "Delirium Tremens",
+      "acuity": 2,
+      "patient": {
+        "personalityTraits": ["confused", "combative", "disoriented", "frightened"],
+        "communicationStyle": "Globally confused. Cannot provide reliable history. Picks at IV lines and tubes. Alternates between combativeness and somnolence. Family at bedside providing history. Not oriented to time, place, or situation.",
+        "emotionalState": "Terrified, confused, unable to engage meaningfully",
+        "medicalLiteracy": "not assessable — delirious"
+      },
+      "responses": {
+        "opening": "(Family member speaks) He was doing okay yesterday — the nurses were giving him medicine for the shakes. But overnight he got really bad. He doesn't know where he is, he keeps trying to pull out his IV, and he's been talking to people who aren't there. He's soaked in sweat and burning up.",
+        "patientAttempt": "(Patient) Get them off me! They're everywhere! (swatting at air) Where am I? Who are you people? I need to go — I need to — (becomes incoherent, reaches for IV line)",
+        "familyHistory": "(Family member) He's been drinking a lot for years. At least a pint of whiskey a day, probably more. He was hospitalized two years ago and had a seizure during withdrawal. The doctor said it was really bad that time too."
+      },
+      "clinicalFacts": {
+        "chiefComplaint": {
+          "patientPhrasing": ["get them off me", "where am I", "incoherent"],
+          "onset": "72 hours since last drink. Progressive from tremor → agitation → now full delirium with autonomic storm.",
+          "collateralHistory": "Family reports: pint of whiskey daily for 20+ years, prior withdrawal seizure, escalating agitation over 12 hours, no longer recognizes family members"
+        },
+        "alcoholHistory": {
+          "pattern": "Daily heavy drinker: pint of whiskey (approximately 8-10 standard drinks) daily for 20+ years. Family confirms.",
+          "lastDrink": "Approximately 72 hours ago",
+          "priorWithdrawal": "Multiple episodes. One hospitalization 2 years ago with withdrawal seizure.",
+          "priorSeizures": "YES — one documented withdrawal seizure (2 years ago)",
+          "priorDT": "Unclear — family describes 'very bad episode' but formal DT diagnosis uncertain"
+        },
+        "associatedSymptoms": {
+          "present": [
+            { "name": "global confusion / delirium", "patientSays": "(Unable to meaningfully respond. Disoriented to all spheres.)" },
+            { "name": "vivid visual and tactile hallucinations", "patientSays": "(Swatting at air, picking at skin, talking to people not present)" },
+            { "name": "severe autonomic instability", "patientSays": "(Measured: HR 138, BP 182/108, Temp 102.8°F, profuse diaphoresis)" },
+            { "name": "combativeness", "patientSays": "(Pulling at IV lines, swinging at staff, trying to climb out of bed)" },
+            { "name": "coarse tremor", "patientSays": "(Visible whole-body tremor)" },
+            { "name": "incontinence", "patientSays": "(Urinary incontinence noted by nursing)" }
+          ],
+          "absent": [
+            { "name": "focal neurologic deficits", "patientSays": "(Difficult to assess fully but no clear lateralizing signs)" },
+            { "name": "meningismus", "patientSays": "(No neck stiffness)" }
+          ]
+        },
+        "pmh": [
+          "Severe alcohol use disorder",
+          "Prior withdrawal seizure",
+          "Hypertension",
+          "Chronic pancreatitis",
+          "Gastritis",
+          "Malnutrition"
+        ],
+        "riskFactorsForDT": {
+          "present": ["prior withdrawal seizure (strongest predictor)", "prior severe withdrawal", "heavy daily consumption >10 drinks", "prolonged drinking history (>20 years)", "concurrent acute illness", "age >40", "tachycardia on presentation (HR >120)", "elevated temperature"],
+          "absent": []
+        }
+      },
+      "physicalExam": {
+        "vitalSigns": { "BP": "182/108", "HR": "138", "RR": "26", "Temp": "102.8°F (39.3°C)", "SpO2": "94% on 2L NC" },
+        "general": "Agitated, diaphoretic, tremulous, confused, pulling at restraints and IV lines. Global disorientation. Not following commands consistently.",
+        "heent": "Profuse diaphoresis. Pupils 6mm bilaterally, reactive. Dry cracked lips.",
+        "cardiovascular": "Tachycardic, regular, no murmurs",
+        "pulmonary": "Tachypneic, clear bilaterally",
+        "abdominal": "Soft, mild diffuse tenderness, hyperactive bowel sounds",
+        "neurologic": {
+          "mentalStatus": "GCS 12 (E3, V4, M5). Disoriented to time, place, and situation. Knows first name only. Unable to attend to examiner. Active visual and tactile hallucinations.",
+          "motor": "Coarse whole-body tremor. Moves all extremities spontaneously. No clear focal weakness.",
+          "reflexes": "Hyperreflexic (3-4+) diffusely. No clonus."
+        },
+        "ciwaAssessment": {
+          "total": 35,
+          "interpretation": "Severe/critical withdrawal. CIWA >20 indicates need for aggressive benzodiazepine loading. At this severity, symptom-triggered dosing may be insufficient — consider front-loaded or phenobarbital protocol."
+        }
+      },
+      "diagnostics": {
+        "labs": [
+          { "test": "BMP", "value": "Na 132, K 3.0, Cl 92, HCO3 18, BUN 28, Cr 1.4, Glucose 78", "unit": "", "ref": "", "status": "abnormal", "note": "Hypokalemia, hyponatremia, mild acidosis, prerenal AKI from dehydration/fever. Borderline hypoglycemia." },
+          { "test": "Magnesium", "value": "1.1", "unit": "mg/dL", "ref": "1.7-2.2", "status": "critical", "note": "CRITICALLY LOW — immediate IV repletion. Seizure risk." },
+          { "test": "Phosphorus", "value": "1.6", "unit": "mg/dL", "ref": "2.5-4.5", "status": "abnormal", "note": "Severely low" },
+          { "test": "CK", "value": "1,840", "unit": "U/L", "ref": "30-200", "status": "abnormal", "note": "Elevated — rhabdomyolysis from agitation, tremor, hyperthermia. Monitor for AKI." },
+          { "test": "Lactate", "value": "3.8", "unit": "mmol/L", "ref": "<2.0", "status": "abnormal", "note": "Elevated from agitation, tachycardia, and hypermetabolic state" },
+          { "test": "CBC", "value": "WBC 14.2, Hgb 11.8, MCV 108, Plt 92", "unit": "", "ref": "", "status": "abnormal", "note": "Leukocytosis (stress vs infection — workup), macrocytosis, thrombocytopenia" },
+          { "test": "Blood cultures", "value": "Pending", "unit": "", "ref": "", "status": "pending", "note": "Drawn given fever — must exclude infection as concurrent or alternative diagnosis" },
+          { "test": "CT Head without contrast", "value": "No acute intracranial abnormality. Mild diffuse cerebral atrophy.", "unit": "", "ref": "", "status": "normal", "note": "Rules out subdural hematoma or structural cause for altered mental status" },
+          { "test": "Chest X-ray", "value": "No consolidation. Low lung volumes.", "unit": "", "ref": "", "status": "normal", "note": "Aspiration pneumonia excluded on imaging" },
+          { "test": "Urinalysis", "value": "Concentrated, no WBC, no bacteria, trace ketones, myoglobin positive", "unit": "", "ref": "", "status": "abnormal", "note": "Myoglobinuria from rhabdomyolysis" }
+        ]
+      },
+      "managementPlan": {
+        "immediateActions": [
+          "ICU transfer for DT management. 1:1 nursing. Continuous telemetry and pulse oximetry.",
+          "Benzodiazepine loading: Diazepam 10mg IV every 5-10 minutes until calm (cumulative doses of 40-100mg+ may be needed). OR lorazepam 4mg IV every 15 minutes if liver disease concerns.",
+          "If benzo-resistant (no improvement after cumulative diazepam 40mg or lorazepam 16mg): START phenobarbital 130-260mg IV every 15-30 minutes. Intubation supplies at bedside.",
+          "Thiamine 500mg IV STAT, then 500mg IV TID x 3 days.",
+          "Magnesium sulfate 4g IV over 2 hours, then recheck and continue repletion. KCl 40mEq IV. Replete phosphorus.",
+          "IV fluids: LR at 200mL/hr (rhabdomyolysis + dehydration). Target UOP >200mL/hr for myoglobin washout.",
+          "Monitor CK every 6 hours. If CK >5,000 or rising, aggressive IV hydration for rhabdomyolysis.",
+          "Fever management: cooling blankets, acetaminophen 1g IV. If temp >104°F and not responding, consider ICU-level active cooling.",
+          "Minimize stimulation: quiet room, dim lights, limit unnecessary procedures.",
+          "Soft restraints ONLY if absolutely necessary for safety — chemical restraint (benzodiazepines) is preferred."
+        ],
+        "doNotUse": [
+          "Haloperidol or other antipsychotics as primary treatment — lowers seizure threshold, does not treat underlying GABA deficiency, risk of NMS in hypermetabolic state",
+          "Phenytoin — ineffective for alcohol withdrawal seizures",
+          "Physical restraints as substitute for adequate benzodiazepine dosing"
+        ]
+      },
+      "teaching": {
+        "correctDiagnosis": "Delirium Tremens",
+        "keyLearningPoints": [
+          "DT is defined by the triad: global confusion/delirium + autonomic instability + hallucinations in the context of alcohol cessation",
+          "DT typically occurs 48-96 hours after last drink — this patient is at 72 hours, right in the peak window",
+          "DT carries 5-15% mortality without treatment, <1% with aggressive benzodiazepine management",
+          "Prior withdrawal seizure is the SINGLE STRONGEST predictor of DT",
+          "These patients may need massive benzodiazepine doses due to GABA receptor downregulation — do not be afraid to dose aggressively",
+          "Phenobarbital is the rescue agent for benzo-resistant DT — it acts at a different GABA receptor site",
+          "Rhabdomyolysis from sustained agitation, tremor, and hyperthermia is a common complication — check CK and push fluids",
+          "DT is a diagnosis of exclusion in practice — you must rule out meningitis, subdural hematoma, sepsis, hepatic encephalopathy, and metabolic derangements"
+        ],
+        "attendingQuestions": "Your patient in bed 4 — the one who was admitted for pancreatitis — is now critically ill with DT. Walk me through: why did this happen (what did we miss or underdose), what's the difference between what he had yesterday (alcoholic hallucinosis) and what he has now (DT), and what's your ICU management plan? Also — his CK is almost 2,000. Why, and what are you doing about it?"
+      }
+    }
+  ]
+}

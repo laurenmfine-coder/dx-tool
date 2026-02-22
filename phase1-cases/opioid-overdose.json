@@ -1,0 +1,246 @@
+{
+  "id": "opioid-overdose",
+  "presentation": "Unresponsive Patient / Altered Mental Status (Toxicologic)",
+  "category": "toxicology",
+  "difficulty": 3,
+  "rotations": ["em", "medicine", "toxicology"],
+  "board": "ed",
+  "demographics": {
+    "ageRange": [18, 55],
+    "genderDistribution": { "male": 0.65, "female": 0.35 },
+    "nameOptions": {
+      "male": ["Ryan Donahue", "Andre Williams", "Christopher Tran", "Michael Petrov", "Jason Guerrero"],
+      "female": ["Nicole Brennan", "Samantha Rivera", "Amber Kowalski", "Jessica Chen", "Courtney Simmons"]
+    }
+  },
+  "sources": [
+    { "name": "Opioid Toxicity - StatPearls", "type": "statpearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431052/", "accessDate": "2026-02", "citedFor": ["toxidrome recognition", "naloxone dosing", "management"] },
+    { "name": "Naloxone - StatPearls", "type": "statpearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441910/", "accessDate": "2026-02", "citedFor": ["mechanism", "dosing", "re-narcotization"] },
+    { "name": "Toxidrome - StatPearls", "type": "statpearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK564365/", "accessDate": "2026-02", "citedFor": ["toxidrome framework"] }
+  ],
+  "variants": [
+    {
+      "id": "opioid-od-v1",
+      "diagnosis": "Acute Opioid Overdose (Fentanyl)",
+      "acuity": 1,
+      "patient": {
+        "personalityTraits": ["unresponsive initially", "agitated post-naloxone", "defensive", "in withdrawal"],
+        "communicationStyle": "INITIALLY UNRESPONSIVE. After naloxone: agitated, confused, then defensive and wants to leave. May be hostile. In acute withdrawal. Will request AMA if not engaged carefully.",
+        "emotionalState": "Unresponsive then agitated then defensive then potentially cooperative if treated with dignity",
+        "medicalLiteracy": "low",
+        "interviewNotes": "Post-naloxone interaction is the key teaching moment. Students must manage withdrawal while building rapport to keep patient for observation, assess for co-ingestion, and offer harm reduction."
+      },
+      "responses": {
+        "bystander": "(Friend) We were hanging out and he went to the bathroom. He was in there for like 20 minutes so I checked — he was on the floor, not breathing right. Lips turning blue. I shook him but he wouldn't wake up. I called 911.",
+        "emsReport": "Found unresponsive male on bathroom floor. GCS 3. RR 4, shallow. SpO2 74%. Pinpoint pupils. Needle and burnt foil on floor. Naloxone 4mg intranasal — responded in 2 minutes. Became alert, combative briefly. RR improved to 16. SpO2 94% on NRB.",
+        "postNaloxone": "(Agitated, sweating) What the — where am I? What did you give me? (Retching) I feel like crap. My skin is crawling. I want to leave. You can't keep me here.",
+        "ifTreatedWithDignity": "(After 10-15 min) Look... I know what happened. I've been using for about 3 years. Started with pills, moved to fentanyl 6 months ago. I've OD'd once before.",
+        "ifAskedAboutCoIngestion": "I didn't take anything else. (If pressed) ...okay, I might have had a couple Xanax earlier today.",
+        "ifAskedAboutHarmReduction": "(Quiet) I'm not ready to stop. But if you have a narcan kit, I'd take one. And is there something that keeps you from getting sick when you don't use?",
+        "ifAskedAboutTreatment": "I'm not going to rehab right now. But if there was something outpatient, maybe."
+      },
+      "clinicalFacts": {
+        "opioidToxidrome": {
+          "classic_triad": ["CNS depression (GCS 3)", "Respiratory depression (RR 4)", "Miosis (pinpoint pupils)"],
+          "additional": ["Hypoxemia (SpO2 74%)", "Cyanosis", "Bradycardia", "Hypothermia"],
+          "naloxone_response": "Rapid improvement within 2 min — diagnostic for opioid toxicity"
+        },
+        "substanceHistory": {
+          "primary": "Fentanyl (smoked and injected) — 6 months",
+          "prior": "Prescription oxycodone — 3 years total, transitioned to fentanyl",
+          "coIngestion": "Alprazolam earlier today — MUST elicit. BZD co-ingestion increases respiratory depression risk.",
+          "priorOverdose": "1 prior (reversed by friend with naloxone at home)",
+          "ivDrugUse": true
+        },
+        "pmh": ["Opioid use disorder (untreated)", "Hepatitis C (untreated)", "Depression (untreated)"],
+        "medications": [],
+        "socialHistory": {
+          "smoking": "1/2 ppd", "alcohol": "Occasional", "occupation": "Unemployed (was construction)",
+          "livingSituation": "Alone, has a dog, estranged from family", "insurance": "None",
+          "priorTreatment": "Never been to rehab. No MAT. No NA."
+        }
+      },
+      "physicalExam": {
+        "preNaloxone": {
+          "vitalSigns": { "BP": "92/58", "HR": "52", "RR": "4", "Temp": "96.8°F", "SpO2": "74% RA" },
+          "general": "Unresponsive. GCS 3. Cyanotic. Agonal respirations.",
+          "heent": "Pupils 1mm bilateral (PINPOINT). Perioral cyanosis.",
+          "extremities": "Track marks bilateral antecubital fossae."
+        },
+        "postNaloxone": {
+          "vitalSigns": { "BP": "138/88", "HR": "108", "RR": "20", "Temp": "97.8°F", "SpO2": "96% 2L NC" },
+          "general": "Alert, agitated, diaphoretic. GCS 15. Yawning, rhinorrhea, piloerection.",
+          "heent": "Pupils now 6mm bilateral (DILATED — withdrawal). Lacrimation, rhinorrhea.",
+          "abdominal": "Diffuse cramping, hyperactive bowel sounds, nausea."
+        }
+      },
+      "diagnostics": {
+        "labs": [
+          { "test": "UDS", "value": "Fentanyl POS, Benzodiazepines POS, Opiates NEG", "status": "abnormal", "note": "Standard opiate immunoassays do NOT detect fentanyl. Opiates negative because fentanyl is synthetic. BZD confirms co-ingestion." },
+          { "test": "BAL", "value": "0", "status": "normal" },
+          { "test": "Acetaminophen", "value": "<5", "status": "normal", "note": "Always check in OD" },
+          { "test": "ABG (pre-naloxone)", "value": "pH 7.22, pCO2 68, pO2 52", "status": "critical", "note": "Acute respiratory acidosis from hypoventilation" },
+          { "test": "ABG (post-naloxone)", "value": "pH 7.38, pCO2 40, pO2 88", "status": "normal" },
+          { "test": "Lactate", "value": "3.4", "status": "abnormal", "note": "From hypoxemia, should normalize" },
+          { "test": "CK", "value": "420", "status": "abnormal", "note": "Found down — positional rhabdomyolysis" },
+          { "test": "ECG", "value": "Sinus tach 108, normal QRS, QTc 442", "status": "normal", "note": "No prolonged QTc (methadone), no Na channel blockade (TCA)" },
+          { "test": "HCV Ab", "value": "Positive (known)", "status": "abnormal" },
+          { "test": "HIV", "value": "Pending", "status": "pending" }
+        ]
+      },
+      "managementPlan": {
+        "immediate": [
+          "BVM ventilation if RR <8 or SpO2 <90%",
+          "Naloxone 0.4mg IV (titrate to VENTILATION not consciousness). Repeat q2-3min PRN. Intranasal: 4mg if no IV.",
+          "Over-reversal precipitates severe withdrawal and patient flight."
+        ],
+        "postNaloxone": [
+          "OBSERVE MINIMUM 4-6 HOURS (fentanyl outlasts naloxone's 30-60 min → RE-NARCOTIZATION RISK)",
+          "Monitor GCS, RR, SpO2 q15min x 1h then q30min",
+          "If re-narcotization: re-dose naloxone AND consider drip (2/3 effective bolus dose per hour)",
+          "Manage withdrawal: ondansetron, acetaminophen/ibuprofen. Avoid opioids.",
+          "Extended monitoring for BZD co-ingestion."
+        ],
+        "harmReduction": {
+          "naloxoneKit": "Prescribe take-home naloxone to patient AND friend. #1 harm reduction intervention.",
+          "mat": "Offer ED-initiated buprenorphine (can start when COWS >=8). Strong evidence for engagement in treatment.",
+          "fentanylTestStrips": "Provide if available.",
+          "infectiousDisease": "Link HCV to treatment (curative DAAs). HIV screen. Hep A/B vaccination.",
+          "socialWork": "Insurance navigation, housing, outpatient treatment referral, peer recovery specialist."
+        }
+      },
+      "teaching": {
+        "keyLearningPoints": [
+          "Opioid toxidrome triad: CNS depression + respiratory depression + miosis. Recognition should be instantaneous.",
+          "Naloxone reversal is therapeutic AND diagnostic.",
+          "Titrate naloxone to VENTILATION (RR >12, SpO2 >92%), NOT consciousness. Over-reversal causes severe withdrawal.",
+          "FENTANYL does NOT appear on standard urine opiate immunoassays. Negative screen does NOT exclude opioid OD.",
+          "RE-NARCOTIZATION: naloxone lasts 30-60 min, fentanyl outlasts it. Observe minimum 4-6 hours.",
+          "BZD + opioid is the most lethal drug combination — synergistic respiratory depression. Always check UDS.",
+          "ED-initiated buprenorphine has strong evidence. This visit may be patient's only healthcare contact.",
+          "Naloxone kit to patient AND bystander is the #1 harm reduction intervention."
+        ],
+        "mustNotMiss": [
+          "Co-ingestion (BZD, APAP, alcohol, TCA — check UDS, APAP, salicylate, BAL, ECG)",
+          "Re-narcotization (can stop breathing in parking lot after 'successful' reversal)",
+          "Aspiration pneumonia (unprotected airway while down)",
+          "Rhabdomyolysis/compartment syndrome (found down — check CK)",
+          "Negative pressure pulmonary edema (sudden O2 requirement post-reversal)"
+        ],
+        "commonPitfalls": [
+          "Over-reversing with high-dose naloxone → precipitated withdrawal, agitation, patient flight",
+          "Discharging too early — re-narcotization kills",
+          "Trusting negative opiate screen — fentanyl is not detected on standard assay",
+          "Not checking for co-ingestion",
+          "Stigmatizing the patient — drives away from life-saving interventions",
+          "Not offering MAT or naloxone kit — missed critical intervention window"
+        ],
+        "toxidromeFramework": {
+          "opioid": { "pupils": "miosis", "vitals": "brady, hypotension, hypothermia, resp depression", "reversal": "naloxone" },
+          "sedativeHypnotic": { "pupils": "mid-range", "vitals": "resp depression, hypotension", "reversal": "flumazenil (cautious)" },
+          "sympathomimetic": { "pupils": "mydriasis", "vitals": "tachy, HTN, hyperthermia", "reversal": "benzodiazepines" },
+          "anticholinergic": { "pupils": "mydriasis", "vitals": "tachy, hyperthermia, dry", "reversal": "physostigmine" },
+          "cholinergic": { "pupils": "miosis", "vitals": "brady, SLUDGE", "reversal": "atropine" }
+        },
+        "teachingHooks": {
+          "ifGivesHighDoseNaloxone": "He's vomiting, thrashing, pulling his IV. What went wrong with dosing?",
+          "ifDischargesAt1Hour": "He's awake, vitals normal, 1 hour since naloxone. Safe? How long does fentanyl last vs naloxone?",
+          "ifDoesntCheckUDS": "You treated the opioid. Did he take anything else? Will UDS even detect fentanyl?",
+          "ifDoesntOfferMAT": "He's alert and about to leave. What prevents the next overdose? What's the evidence for ED buprenorphine?",
+          "ifDoesntGiveNaloxoneKit": "His friend saved his life with naloxone. What do they need for next time?"
+        }
+      }
+    },
+    {
+      "id": "polysubstance-apap-v1",
+      "diagnosis": "Intentional Polysubstance Overdose (Opioid + Acetaminophen Combination)",
+      "acuity": 2,
+      "patient": {
+        "personalityTraits": ["withdrawn", "regretful", "tearful", "ambivalent"],
+        "communicationStyle": "Took bottle of opioid/APAP pills in suicide attempt. Drowsy but arousable after partial naloxone. Tearful, initially says accident, admits intentional when asked directly.",
+        "emotionalState": "Regretful, scared, tearful"
+      },
+      "responses": {
+        "roommateReport": "I found her with an empty bottle of Percocet. She left a note. She's been depressed since losing custody of her daughter last month. Maybe 30-40 pills were in the bottle.",
+        "patientWhenAroused": "(Tearful) I made a mistake. I took all the pills. Maybe 30. They were my mom's Percocet. I drank some vodka too.",
+        "ifAskedAboutIntent": "(Quiet, tears) Yes, I was trying to kill myself. I wrote a note. I'm sorry.",
+        "ifAskedAboutAPAP": "(Confused) What's that? I just took the Percocet. (If explained) I didn't know there was Tylenol in it."
+      },
+      "clinicalFacts": {
+        "toxicologyAssessment": {
+          "opioidComponent": "Oxycodone 150mg (30 x 5mg) — significant respiratory depression",
+          "acetaminophenComponent": "9,750mg (30 x 325mg, >150mg/kg for 65kg patient = TOXIC). NAC indicated.",
+          "alcoholComponent": "Half bottle vodka. Depletes glutathione, increases APAP hepatotoxicity. Synergistic respiratory depressant.",
+          "suicideAssessment": "Psychiatric emergency in addition to toxicologic emergency."
+        },
+        "pmh": ["Depression (inconsistently treated)", "Anxiety", "No prior attempts"],
+        "medications": [{ "name": "Sertraline 50mg", "dose": "takes inconsistently" }],
+        "socialHistory": {
+          "alcohol": "Binge pattern 2-3 nights/week",
+          "drugs": "Occasional opioid use (takes others' prescriptions)",
+          "recentStressor": "Lost custody of 4-year-old daughter 1 month ago"
+        }
+      },
+      "physicalExam": {
+        "vitalSigns": { "BP": "102/64", "HR": "68", "RR": "10 then 14 post-naloxone", "Temp": "97.4°F", "SpO2": "90% RA then 96% 2L NC" },
+        "general": "Drowsy, arousable after naloxone 0.4mg IV. Tearful. Alcohol on breath.",
+        "heent": "Pupils 2mm improving post-naloxone. Alcohol odor.",
+        "abdominal": "Soft, mild RUQ tenderness."
+      },
+      "diagnostics": {
+        "labs": [
+          { "test": "Acetaminophen (4h)", "value": "180", "unit": "mcg/mL", "ref": "<150 at 4h", "status": "critical", "note": "ABOVE Rumack-Matthew treatment line. NAC MANDATORY." },
+          { "test": "AST", "value": "42", "status": "abnormal", "note": "Mildly elevated. Peak hepatotoxicity at 72-96 hours." },
+          { "test": "ALT", "value": "38", "status": "abnormal" },
+          { "test": "INR", "value": "1.1", "status": "normal", "note": "Normal now. Rising INR = most sensitive early marker of hepatic failure. Trend q12h." },
+          { "test": "BAL", "value": "148", "unit": "mg/dL", "status": "abnormal", "note": "Alcohol depletes glutathione, increases APAP toxicity" },
+          { "test": "UDS", "value": "Opioids POS", "status": "abnormal" }
+        ]
+      },
+      "managementPlan": {
+        "immediate": [
+          "Naloxone 0.4mg IV titrated to ventilation",
+          "NAC IV: 150mg/kg over 1h, then 50mg/kg over 4h, then 100mg/kg over 16h (21-hour protocol). START IMMEDIATELY.",
+          "Do NOT stop NAC for anaphylactoid reaction — slow infusion, treat reaction, continue.",
+          "Trend APAP level at 8h, AST/ALT/INR q12h x 72 hours",
+          "1:1 sitter, suicide precautions, psychiatric consult after stabilization"
+        ],
+        "nacMonitoring": {
+          "anaphylactoid": "Flushing, urticaria, bronchospasm during loading — slow infusion, give diphenhydramine, CONTINUE NAC.",
+          "endpoint": "Continue until: APAP undetectable + LFTs trending down + INR normal",
+          "transplantCriteria": "King's College Criteria if acute liver failure develops: pH <7.3, OR (INR >6.5 + Cr >3.4 + Grade 3-4 encephalopathy)"
+        }
+      },
+      "teaching": {
+        "correctDiagnosis": "Intentional Polysubstance Overdose: Opioid + Acetaminophen + Alcohol",
+        "keyLearningPoints": [
+          "Combination opioid/APAP pills (Percocet, Vicodin) — EVERY opioid OD needs an APAP level. Patients rarely know pills contain APAP.",
+          "Rumack-Matthew nomogram: plot APAP level vs time. Above treatment line = NAC required.",
+          "NAC is nearly 100% effective if started within 8 hours. Effectiveness decreases with delay. START EARLY.",
+          "Peak APAP hepatotoxicity is 72-96 hours, NOT immediately. Normal LFTs at presentation do NOT exclude serious toxicity.",
+          "Alcohol depletes glutathione AND induces CYP2E1, increasing toxic NAPQI production.",
+          "This is simultaneously toxicologic AND psychiatric emergency.",
+          "INR is the most sensitive early marker of hepatic synthetic failure in APAP toxicity."
+        ],
+        "mustNotMiss": [
+          "APAP toxicity masked by opioid presentation — the APAP kills in 3-4 days without NAC. Opioid is immediate threat; APAP is the delayed killer.",
+          "Rising INR = progressing to acute liver failure",
+          "Intentional OD with note = psychiatric emergency"
+        ],
+        "commonPitfalls": [
+          "Treating opioid and FORGETTING APAP level — most dangerous error. Patient wakes up, seems fine, gets discharged. 3 days later: fulminant hepatic failure.",
+          "Waiting for APAP results before NAC — if >150mg/kg ingested, start empirically",
+          "Stopping NAC for anaphylactoid reaction — slow it, treat it, CONTINUE",
+          "Not checking alcohol level",
+          "Discharging after opioid reversal without addressing the suicide attempt"
+        ],
+        "teachingHooks": {
+          "ifDoesntCheckAPAP": "She took Percocet. What TWO drugs did she ingest? Which one kills her in 3 days if you miss it?",
+          "ifDoesntStartNAC": "APAP 180 at 4 hours. Plot it. Above or below the treatment line? What do you start?",
+          "ifStopsNACForReaction": "She's flushing and wheezing during the NAC loading. You stop it. Now what?",
+          "ifFocusesOnlyOnOpioid": "Great opioid reversal. She's awake. But this is a combination pill. What's your plan for the next 72 hours?"
+        }
+      }
+    }
+  ]
+}

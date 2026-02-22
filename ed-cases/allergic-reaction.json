@@ -1,0 +1,177 @@
+{
+  "id": "allergic-reaction",
+  "presentation": "Allergic Reaction",
+  "category": "other",
+  "difficulty": 3,
+  "rotations": ["em", "medicine", "pediatrics"],
+  "demographics": {
+    "ageRange": [18, 55],
+    "genderDistribution": { "male": 0.5, "female": 0.5 },
+    "nameOptions": {
+      "male": ["Tyler Morgan", "Raj Mehta", "Jason Reeves", "Mikhail Petrov", "Andre Washington"],
+      "female": ["Samantha Green", "Li Wei", "Megan O'Donnell", "Sofia Herrera", "Jasmine Wright"]
+    }
+  },
+  "sources": [
+    {
+      "name": "Anaphylaxis - StatPearls",
+      "type": "statpearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+      "accessDate": "2026-02",
+      "citedFor": ["clinical criteria", "management", "epinephrine dosing"]
+    },
+    {
+      "name": "2020 WAO Anaphylaxis Guidance",
+      "type": "guideline",
+      "url": "https://www.worldallergy.org/resources/anaphylaxis",
+      "accessDate": "2026-02",
+      "citedFor": ["diagnostic criteria", "management algorithm"]
+    }
+  ],
+  "variants": [
+    {
+      "id": "anaphylaxis-v1",
+      "diagnosis": "Anaphylaxis (Food-Triggered)",
+      "acuity": 1,
+      "patient": {
+        "personalityTraits": ["frightened", "previously healthy", "articulate despite distress"],
+        "communicationStyle": "Struggling to speak due to throat tightness. Voice is hoarse. Clearly frightened. Partner/friend may provide collateral information.",
+        "emotionalState": "Terrified, sense of impending doom",
+        "medicalLiteracy": "moderate",
+        "occupation": ["software developer", "teacher", "nurse"]
+      },
+      "responses": {
+        "opening": "I ate shrimp about 20 minutes ago and I feel terrible — my lips swelled up, I'm covered in hives, and my throat feels like it's closing. I'm having a really hard time breathing.",
+        "severity": "Really bad. I feel like I can't breathe properly. My throat is tight. I'm dizzy.",
+        "onset": "About 20 minutes after I ate shrimp at a restaurant. The hives came first, then my lips started swelling, then my throat.",
+        "character": "My throat feels swollen — like it's squeezing shut. And I'm so itchy everywhere.",
+        "worse": "It's getting worse every minute. The throat tightness keeps getting worse."
+      },
+      "clinicalFacts": {
+        "chiefComplaint": {
+          "patientPhrasing": ["throat is closing", "can't breathe", "covered in hives", "lips are swollen"],
+          "avoidPhrasing": ["mild itch", "just a rash"],
+          "location": "Diffuse — skin, oropharynx, respiratory",
+          "onset": "20 minutes after shellfish ingestion, rapidly progressive",
+          "duration": "Progressive over 20 minutes, still worsening",
+          "severity": "Severe — multisystem involvement",
+          "aggravating": ["progressing spontaneously"],
+          "relieving": ["nothing attempted yet — came straight to ED"]
+        },
+        "associatedSymptoms": {
+          "present": [
+            { "name": "diffuse urticaria", "patientSays": "I've got welts all over my body — arms, chest, legs, everywhere." },
+            { "name": "angioedema (lips, tongue)", "patientSays": "My lips are huge. My tongue feels thick." },
+            { "name": "throat tightness/dysphagia", "patientSays": "My throat feels like it's closing. I can barely swallow." },
+            { "name": "stridor/hoarse voice", "patientSays": "Can you hear my voice? It sounds weird. It's getting harder to talk." },
+            { "name": "dyspnea/wheezing", "patientSays": "I can't take a full breath. Something's wheezing inside my chest." },
+            { "name": "lightheadedness", "patientSays": "I feel really dizzy, like I might pass out." },
+            { "name": "abdominal cramping/nausea", "patientSays": "My stomach is cramping too. I feel like I'm going to throw up." },
+            { "name": "generalized pruritus", "patientSays": "I'm itchy everywhere. It's driving me crazy but I'm more worried about breathing." }
+          ],
+          "absent": [
+            { "name": "fever", "patientSays": "No fever — this just happened." },
+            { "name": "prior anaphylaxis", "patientSays": "I've never had anything like this before. I've eaten shrimp before with no problem... well, actually, last time I did get a little itchy but it went away." },
+            { "name": "sting or injection", "patientSays": "No, nobody stung me. It was the shrimp." }
+          ]
+        },
+        "pmh": [
+          "Seasonal allergies (mild, spring/fall)",
+          "Mild eczema (childhood, resolved)",
+          "Asthma (childhood, outgrown — no current medications)"
+        ],
+        "medications": [
+          { "name": "Cetirizine", "dose": "10mg PRN for seasonal allergies", "patientSays": "I take Zyrtec sometimes for allergies." }
+        ],
+        "allergies": [{ "allergen": "Previously no known drug allergies", "reaction": "New shellfish reaction identified today" }],
+        "socialHistory": {
+          "smoking": "Never",
+          "alcohol": "Social — had a glass of wine with dinner tonight",
+          "drugs": "Denies",
+          "occupation": "Software developer",
+          "livingSituation": "Lives with partner"
+        },
+        "familyHistory": [
+          "Mother: food allergies (tree nuts)",
+          "Sister: asthma",
+          "Atopic family history"
+        ],
+        "riskFactors": {
+          "present": ["atopic history (eczema, seasonal allergies, childhood asthma)", "prior mild reaction to same trigger (progressive sensitization)", "family history of atopy"],
+          "absent": ["mastocytosis", "concurrent beta-blocker use", "ACE inhibitor use"]
+        }
+      },
+      "physicalExam": {
+        "vitalSigns": { "BP": "88/54", "HR": "128", "RR": "28", "Temp": "98.6°F", "SpO2": "90% on room air" },
+        "general": "Young adult in severe distress, sitting upright, audible stridor, diffusely urticarial, lip/tongue angioedema visible",
+        "heent": "Marked angioedema of lips, tongue, and uvula. Oropharynx edematous. Voice is hoarse. Audible inspiratory stridor.",
+        "neck": "No JVD, trachea midline",
+        "cardiovascular": "Tachycardic, regular, no murmurs. Hypotensive.",
+        "pulmonary": "Diffuse bilateral expiratory wheezes. Decreased air movement. Stridor on inspiration. Using accessory muscles.",
+        "abdominal": "Diffuse mild tenderness, hyperactive bowel sounds",
+        "skin": "Confluent raised urticarial wheals over trunk, extremities, and face. Erythematous. Warm. Angioedema of face/lips.",
+        "extremities": "No edema, mild urticaria on dorsal hands"
+      },
+      "diagnostics": {
+        "labs": [
+          { "test": "Tryptase (serum, at presentation)", "value": "28.5", "unit": "ng/mL", "ref": "<11.5", "status": "abnormal", "note": "Elevated — supports mast cell degranulation / anaphylaxis diagnosis" },
+          { "test": "CBC", "value": "WBC 12.1 (eosinophils 8%), Hgb 14.0", "unit": "", "ref": "", "status": "normal", "note": "Mild eosinophilia consistent with atopic background" },
+          { "test": "BMP", "value": "Normal", "unit": "", "ref": "", "status": "normal", "note": "" },
+          { "test": "ABG (RA)", "value": "pH 7.44 / pCO2 32 / pO2 72", "unit": "", "ref": "", "status": "abnormal", "note": "Mild hypoxemia, respiratory alkalosis from tachypnea" }
+        ],
+        "imaging": [
+          { "study": "Chest X-ray (if obtained)", "findings": "Hyperinflation. No focal consolidation or pneumothorax.", "impression": "Bronchospasm. No acute cardiopulmonary process." }
+        ]
+      },
+      "evolution": {
+        "onCorrectTreatment": {
+          "vitalsTrend": "BP improves to 110s/70s after epinephrine and IV fluids. HR decreases to 90s. SpO2 improves to 97% on 2L NC.",
+          "symptomsTrend": "Urticaria fading within 30-60 minutes. Angioedema slowly resolving. Stridor resolved after first IM epi dose. Wheezing improved after nebulized albuterol.",
+          "narrative": "IM epinephrine 0.3mg given immediately on arrival. IV access established, 1L NS bolus running. Diphenhydramine 50mg IV and famotidine 20mg IV administered. Nebulized albuterol. Methylprednisolone 125mg IV. Patient monitored for 4-6 hours for biphasic reaction. Discharged with EpiPen prescription and allergist referral."
+        },
+        "onDelayedTreatment": {
+          "vitalsTrend": "BP drops to 70s/40s, HR 140s, SpO2 82%, stridor worsens",
+          "complications": ["Complete airway obstruction requiring intubation", "Distributive shock requiring vasopressors", "Cardiac arrest"],
+          "narrative": "Airway edema progresses to near-complete obstruction. Difficult intubation due to edema. Requires surgical airway. Refractory hypotension requiring epinephrine drip and aggressive fluid resuscitation."
+        }
+      },
+      "teaching": {
+        "keyLearningPoints": [
+          "Anaphylaxis diagnostic criteria: acute onset + 2+ organ systems involved (skin, respiratory, cardiovascular, GI)",
+          "EPINEPHRINE is the FIRST-LINE treatment — not antihistamines, not steroids. IM 0.3-0.5mg in anterolateral thigh",
+          "There is NO contraindication to epinephrine in anaphylaxis — the risk of NOT giving it always outweighs side effects",
+          "Biphasic reactions occur in ~5-20% — observe 4-6 hours minimum",
+          "Tryptase drawn at presentation (and at baseline later) helps confirm diagnosis retrospectively",
+          "EVERY patient with anaphylaxis goes home with an EpiPen prescription and allergist referral"
+        ],
+        "mustNotMiss": [
+          "Airway compromise — assess for stridor, voice changes, tongue/uvula swelling FIRST",
+          "Cardiovascular collapse — anaphylactic shock requires epinephrine + fluids + positioning",
+          "Biphasic reaction — can occur 1-72 hours later, typically 4-12 hours"
+        ],
+        "commonPitfalls": [
+          "Giving antihistamines INSTEAD of epinephrine — antihistamines treat symptoms, not the underlying mediator cascade",
+          "Giving epinephrine IV push instead of IM (risk of arrhythmia) — IV drip is reserved for refractory shock",
+          "Sub-therapeutic epinephrine dose — adults need 0.3-0.5mg IM, can repeat every 5-15 minutes",
+          "Discharging without EpiPen prescription or allergist referral",
+          "Not recognizing atypical presentations (GI-predominant anaphylaxis, or anaphylaxis without skin findings — occurs in ~10-20%)",
+          "Not observing for biphasic reaction — minimum 4-6 hour observation"
+        ],
+        "expertDifferential": [
+          { "dx": "Anaphylaxis", "pct": 95, "why": "Known allergen exposure + rapid multisystem involvement (skin + respiratory + cardiovascular + GI) = meets diagnostic criteria" },
+          { "dx": "Acute urticaria/angioedema without anaphylaxis", "pct": 3, "why": "Skin involvement alone, but respiratory compromise and hypotension push to anaphylaxis" },
+          { "dx": "Acute asthma exacerbation", "pct": 1, "why": "Wheezing present, but diffuse urticaria and angioedema indicate systemic allergic process" },
+          { "dx": "Vasovagal reaction", "pct": 1, "why": "Hypotension and lightheadedness, but bradycardia expected (not tachycardia), and no rash/bronchospasm" }
+        ],
+        "teachingHooks": {
+          "ifGivesAntihistamineFirst": "What drug should come first in anaphylaxis? Epinephrine is ALWAYS first-line. Antihistamines help itching but do not reverse bronchospasm, angioedema, or hypotension.",
+          "ifHesitatesOnEpinephrine": "There is no contraindication to epinephrine in anaphylaxis. A brief tachycardia or tremor from epi is vastly preferable to airway loss or cardiovascular collapse.",
+          "ifAsksAboutPriorReactions": "Key insight — the patient had a 'mild itch' with prior shellfish exposure. This is a sentinel event — progressive sensitization means each subsequent exposure can be worse.",
+          "ifMissesGISymptoms": "GI involvement (cramping, nausea, vomiting, diarrhea) counts as a separate organ system for anaphylaxis criteria.",
+          "ifAsksAboutSteroidRole": "Steroids may help prevent biphasic reactions but take 4-6 hours to work. They are ADJUNCTIVE, not primary treatment.",
+          "ifAsksAboutTryptase": "Tryptase peaks 1-2 hours after onset. Draw at presentation and again at baseline (24+ hours later). Ratio >1.2x baseline + absolute >11.5 supports anaphylaxis."
+        }
+      }
+    }
+  ]
+}

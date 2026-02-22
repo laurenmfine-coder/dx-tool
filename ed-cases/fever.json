@@ -1,0 +1,189 @@
+{
+  "id": "fever",
+  "presentation": "Fever",
+  "category": "infectious",
+  "difficulty": 3,
+  "rotations": ["em", "medicine"],
+  "demographics": {
+    "ageRange": [19, 80],
+    "genderDistribution": { "male": 0.4, "female": 0.6 },
+    "nameOptions": {
+      "male": ["Walter Jenkins", "Deshawn Harris", "Ivan Sokolov", "Philip Grant", "Manuel Reyes"],
+      "female": ["Dorothy Collins", "Keisha Brown", "Margaret Sullivan", "Aisha Diallo", "Ruth Nakamura"]
+    }
+  },
+  "sources": [
+    {
+      "name": "Sepsis and Septic Shock - StatPearls",
+      "type": "statpearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK507721/",
+      "accessDate": "2026-02",
+      "citedFor": ["Sepsis-3 criteria", "management bundles"]
+    },
+    {
+      "name": "Urinary Tract Infection - StatPearls",
+      "type": "statpearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK470195/",
+      "accessDate": "2026-02",
+      "citedFor": ["complicated UTI presentation", "diagnostic workup"]
+    }
+  ],
+  "variants": [
+    {
+      "id": "urosepsis-v1",
+      "diagnosis": "Urosepsis (Complicated UTI with Sepsis)",
+      "acuity": 2,
+      "patient": {
+        "personalityTraits": ["confused at baseline", "elderly", "poor historian"],
+        "communicationStyle": "Confused and lethargic. Answers are vague or off-topic. Daughter at bedside provides most of the history. Patient may not report classic UTI symptoms.",
+        "emotionalState": "Confused, lethargic, intermittently agitated",
+        "medicalLiteracy": "low",
+        "occupation": ["retired school administrator"]
+      },
+      "responses": {
+        "opening": "(Daughter speaks) My mom is 78 and she's been acting really confused for the last two days. This isn't like her — she's normally sharp. She's had a fever and hasn't been eating or drinking. She fell yesterday trying to get to the bathroom.",
+        "severity": "(Patient) I'm fine... where am I? (Daughter) She keeps saying she's fine but she didn't know what day it was this morning.",
+        "onset": "(Daughter) She was fine on Monday. By Wednesday she seemed tired and wasn't making sense. The fever started yesterday. Today she couldn't get out of bed.",
+        "urinarySymptoms": "(Patient, when asked specifically) It burns a little when I go. I've been going a lot. (Daughter) She's been going to the bathroom every hour and she had an accident yesterday, which never happens.",
+        "backPain": "(Patient) My back hurts, down low. (Points to left flank.)",
+        "mentalStatus": "(Daughter) She keeps repeating herself. She asked me the same question five times this morning. She thought my son was my father."
+      },
+      "clinicalFacts": {
+        "chiefComplaint": {
+          "patientPhrasing": ["I'm fine", "where am I", "my back hurts a little"],
+          "avoidPhrasing": ["I have a bladder infection"],
+          "location": "Left flank discomfort (if asked); may not volunteer",
+          "onset": "Progressive confusion over 2-3 days, fever for 1 day",
+          "duration": "Worsening",
+          "severity": "Patient unable to reliably assess",
+          "collateralHistory": "Daughter reports: confusion, anorexia, fever, urinary frequency, fall, incontinence"
+        },
+        "associatedSymptoms": {
+          "present": [
+            { "name": "acute confusion/delirium", "patientSays": "What? I'm fine. What day is it?" },
+            { "name": "fever/chills", "patientSays": "(Daughter) She's been burning up. Rigors last night — she was shaking." },
+            { "name": "urinary frequency", "patientSays": "I have to go all the time." },
+            { "name": "dysuria", "patientSays": "Burns a little." },
+            { "name": "flank pain", "patientSays": "My back hurts here. (left flank)" },
+            { "name": "anorexia", "patientSays": "(Daughter) She hasn't eaten in two days. Maybe a few sips of water." },
+            { "name": "fall", "patientSays": "(Daughter) She fell yesterday getting up from her chair to go to the bathroom." },
+            { "name": "urinary incontinence (new)", "patientSays": "(Daughter) She had an accident yesterday. That's never happened before." }
+          ],
+          "absent": [
+            { "name": "cough", "patientSays": "No." },
+            { "name": "chest pain", "patientSays": "No." },
+            { "name": "abdominal pain", "patientSays": "My stomach's okay." },
+            { "name": "headache", "patientSays": "No." },
+            { "name": "neck stiffness", "patientSays": "No." },
+            { "name": "rash", "patientSays": "No rashes." },
+            { "name": "recent hospitalization", "patientSays": "(Daughter) No, she hasn't been in the hospital recently." }
+          ]
+        },
+        "pmh": [
+          "Type 2 Diabetes Mellitus (15 years, A1c 8.2%)",
+          "Hypertension",
+          "Recurrent UTI (3 in the past year)",
+          "Mild cognitive impairment (baseline — but this confusion is acute and much worse)",
+          "Osteoporosis"
+        ],
+        "medications": [
+          { "name": "Metformin", "dose": "1000mg BID", "patientSays": "I take my pills." },
+          { "name": "Glipizide", "dose": "5mg daily", "patientSays": "(Daughter) She takes this for her sugar." },
+          { "name": "Lisinopril", "dose": "20mg daily", "patientSays": "" },
+          { "name": "Alendronate", "dose": "70mg weekly", "patientSays": "" }
+        ],
+        "allergies": [{ "allergen": "Sulfa drugs", "reaction": "Rash" }],
+        "socialHistory": {
+          "smoking": "Never",
+          "alcohol": "None",
+          "drugs": "None",
+          "occupation": "Retired school administrator",
+          "livingSituation": "Lives alone. Daughter checks on her daily. Independent at baseline with IADLs.",
+          "functionalStatus": "Independent at baseline — drives, cooks, manages medications. This is a significant change."
+        },
+        "familyHistory": ["Sister: diabetes", "No relevant infectious history"],
+        "riskFactors": {
+          "present": ["diabetes (impairs immune function and bladder emptying)", "recurrent UTI", "female sex", "advanced age", "possible neurogenic bladder from diabetes"],
+          "absent": ["indwelling catheter", "recent urologic procedure", "immunosuppressive therapy", "structural urinary abnormality (known)"]
+        }
+      },
+      "physicalExam": {
+        "vitalSigns": { "BP": "92/58", "HR": "112", "RR": "24", "Temp": "102.8°F (39.3°C)", "SpO2": "94% on RA" },
+        "general": "Elderly woman appearing acutely ill, lethargic, intermittently confused and agitated, dry mucous membranes",
+        "heent": "Dry mucous membranes, no oral lesions, no neck stiffness",
+        "cardiovascular": "Tachycardic, regular, no murmurs",
+        "pulmonary": "Clear to auscultation bilaterally. Tachypneic.",
+        "abdominal": "Soft, mild suprapubic tenderness. No rebound or guarding. Bowel sounds present.",
+        "back": "Left CVA tenderness on percussion",
+        "extremities": "Mottled lower extremities, cool distal, delayed capillary refill (4 seconds). No edema.",
+        "neurologic": "CAM-positive (acute onset, fluctuating, inattentive, disorganized thinking). Oriented to name only. No focal deficits. No meningismus.",
+        "skin": "Warm trunk, cool/mottled extremities. No rash."
+      },
+      "diagnostics": {
+        "labs": [
+          { "test": "WBC", "value": "18.6", "unit": "K/uL", "ref": "4.5-11.0", "status": "abnormal", "note": "Leukocytosis with left shift (bands 15%)" },
+          { "test": "Lactate", "value": "4.2", "unit": "mmol/L", "ref": "<2.0", "status": "critical", "note": "Elevated — tissue hypoperfusion. Meets sepsis criteria." },
+          { "test": "Creatinine", "value": "2.1", "unit": "mg/dL", "ref": "0.6-1.2", "status": "abnormal", "note": "Elevated from baseline of 0.9 — acute kidney injury (prerenal vs sepsis-related)" },
+          { "test": "BUN", "value": "38", "unit": "mg/dL", "ref": "7-20", "status": "abnormal", "note": "Elevated, BUN/Cr ratio >20 suggests prerenal component" },
+          { "test": "Glucose", "value": "242", "unit": "mg/dL", "ref": "70-100", "status": "abnormal", "note": "Stress hyperglycemia in known diabetic" },
+          { "test": "Procalcitonin", "value": "8.4", "unit": "ng/mL", "ref": "<0.1", "status": "critical", "note": "Markedly elevated — strongly suggests bacterial infection" },
+          { "test": "Urinalysis", "value": "Positive nitrites, positive LE, >100 WBC/hpf, many bacteria, moderate blood", "unit": "", "ref": "", "status": "abnormal", "note": "Pyuria with bacteriuria — consistent with UTI as source" },
+          { "test": "Blood cultures x2", "value": "Pending", "unit": "", "ref": "", "status": "pending", "note": "Drawn before antibiotics — results typically 24-48 hours" },
+          { "test": "Urine culture", "value": "Pending", "unit": "", "ref": "", "status": "pending", "note": "" }
+        ],
+        "imaging": [
+          { "study": "CT Abdomen/Pelvis with contrast", "findings": "Left kidney appears edematous with perinephric fat stranding. No hydronephrosis. No obstructing stone. Small amount of perinephric fluid. Bladder wall thickening.", "impression": "Acute left pyelonephritis. No obstructing stone or abscess." }
+        ]
+      },
+      "evolution": {
+        "onCorrectTreatment": {
+          "vitalsTrend": "BP improves to 105/65 after 2L NS bolus. HR decreases to 90s. Lactate clears to 2.1 at 6 hours. Temp trends down.",
+          "symptomsTrend": "Mental status gradually clearing over 24-48 hours. Eating and drinking by day 2. Creatinine improving.",
+          "narrative": "30mL/kg crystalloid bolus initiated. Blood and urine cultures obtained. Broad-spectrum IV antibiotics started within 1 hour (ceftriaxone — avoiding fluoroquinolones given age/tendon risk). Foley placed for accurate I/Os — 200mL residual. Glucose managed with insulin sliding scale. Metformin held. Serial lactates clearing. Cultures grow E. coli sensitive to ceftriaxone. Antibiotics narrowed. ICU observation for 24 hours then step-down."
+        },
+        "onDelayedTreatment": {
+          "vitalsTrend": "MAP drops to <65 despite fluids, lactate rises to 6.5, develops multiorgan dysfunction",
+          "complications": ["Septic shock requiring vasopressors", "Acute kidney injury requiring potential dialysis", "ARDS", "DIC"],
+          "narrative": "Progressive hemodynamic instability. Norepinephrine started. Repeat lactate 6.5. Anuric. ICU admission for vasopressor-dependent septic shock."
+        }
+      },
+      "teaching": {
+        "keyLearningPoints": [
+          "Sepsis-3: suspected infection + SOFA score ≥2 (or qSOFA ≥2 for screening: altered mentation, RR≥22, SBP≤100)",
+          "In elderly patients, confusion may be the ONLY presenting symptom of serious infection",
+          "Hour-1 Sepsis Bundle: lactate, blood cultures, broad-spectrum antibiotics, 30mL/kg crystalloid for hypotension or lactate ≥4",
+          "UTI is the most common source of sepsis in elderly women",
+          "Diabetes is a major risk factor for complicated UTI — impairs immune function and bladder emptying",
+          "New confusion in elderly = delirium until proven otherwise. Always look for the underlying cause."
+        ],
+        "mustNotMiss": [
+          "Meningitis (especially if neck stiffness or severe headache)",
+          "Obstructing ureteral stone with pyonephrosis (check for hydronephrosis on imaging)",
+          "Perinephric or renal abscess (CT needed)",
+          "Spinal epidural abscess (if back pain + neurologic deficits)"
+        ],
+        "commonPitfalls": [
+          "Attributing confusion to dementia without workup",
+          "Not checking a lactate in an ill-appearing elderly patient",
+          "Delaying antibiotics for imaging — antibiotics within 1 hour is the target",
+          "Inadequate fluid resuscitation — these patients are often profoundly volume-depleted",
+          "Using fluoroquinolones as first-line in elderly (tendon rupture, QTc prolongation, C. diff risk)"
+        ],
+        "expertDifferential": [
+          { "dx": "Urosepsis (complicated UTI/pyelonephritis)", "pct": 75, "why": "Fever + confusion + urinary symptoms + pyuria + CVA tenderness + elevated lactate + sepsis physiology" },
+          { "dx": "Pneumonia with sepsis", "pct": 10, "why": "Common in elderly, but clear lungs and no cough argue against" },
+          { "dx": "Delirium from other cause (medication, metabolic)", "pct": 8, "why": "Always consider polypharmacy and metabolic derangements, but fever and lactate point to infection" },
+          { "dx": "Meningitis", "pct": 4, "why": "Fever + confusion, but no neck stiffness and urinary source identified" },
+          { "dx": "Intra-abdominal infection", "pct": 3, "why": "Fever + abdominal tenderness, but suprapubic location and UA findings point to urinary source" }
+        ],
+        "teachingHooks": {
+          "ifCollectsHistoryFromPatient": "This patient is a poor historian due to delirium. Who else can give you the story? Always seek collateral from family, caregivers, or EMS.",
+          "ifFocusesOnDementia": "This is not her baseline. The daughter says she's normally sharp and independent. Acute change in mental status in the elderly = delirium, not worsening dementia.",
+          "ifDelaysAntibiotics": "Every hour of delay in antibiotics in sepsis increases mortality. What's your threshold for starting empiric treatment?",
+          "ifMissesLactate": "Lactate is your window into tissue perfusion. A normal blood pressure doesn't mean adequate perfusion — lactate may be elevated even with a 'normal' BP.",
+          "ifAsksAboutFluidVolume": "30mL/kg is the initial target. For a 70kg patient, that's 2.1L. Give it over the first 1-3 hours. Reassess and give more if needed."
+        }
+      }
+    }
+  ]
+}

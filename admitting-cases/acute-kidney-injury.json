@@ -1,0 +1,152 @@
+{
+  "id": "acute-kidney-injury",
+  "presentation": "Acute Kidney Injury",
+  "category": "other",
+  "difficulty": 3,
+  "rotations": ["medicine"],
+  "board": "admitting",
+  "edHandoff": {
+    "summary": "71-year-old male with HTN, DM2, and CKD Stage 3 (baseline Cr 1.6) presenting with 4 days of nausea, poor PO intake, and dizziness. Cr found to be 4.8, BUN 82. K 5.8 (ECG: peaked T-waves, no widening). Given calcium gluconate, insulin/D50, and 1L NS. Foley placed — only 100mL in 2 hours. He takes lisinopril and was recently started on ibuprofen by his PCP for knee pain 10 days ago.",
+    "disposition": "Admit to medicine for AKI workup and management. Possible nephrology consult."
+  },
+  "demographics": {
+    "ageRange": [60, 80],
+    "genderDistribution": { "male": 0.55, "female": 0.45 },
+    "nameOptions": {
+      "male": ["Robert Chang", "William Donovan", "Arthur Blackwell", "Norman Takahashi", "Lester Owens"],
+      "female": ["Patricia Kowalski", "Alma Gutierrez", "Constance Reed", "Mildred Baptiste", "Jean Armstrong"]
+    }
+  },
+  "sources": [
+    {
+      "name": "Acute Kidney Injury - StatPearls",
+      "type": "statpearls",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK441896/",
+      "accessDate": "2026-02",
+      "citedFor": ["KDIGO staging", "etiology", "management"]
+    }
+  ],
+  "variant": {
+    "id": "aki-prerenal-nsaid-v1",
+    "diagnosis": "Acute Kidney Injury — Prerenal + NSAID-Induced (Multifactorial)",
+    "acuity": 3,
+    "patient": {
+      "personalityTraits": ["worried", "compliant", "trusts his doctors"],
+      "communicationStyle": "Cooperative, somewhat anxious about kidney function. Didn't realize ibuprofen could be harmful. Concerned about dialysis.",
+      "emotionalState": "Worried about needing dialysis, cooperative",
+      "medicalLiteracy": "moderate"
+    },
+    "clinicalFacts": {
+      "chiefComplaint": {
+        "patientPhrasing": ["feeling terrible for days", "dizzy", "no appetite", "barely peeing"],
+        "location": "No specific pain",
+        "onset": "Progressive over 4-5 days. Started with decreased appetite, then nausea, then dizziness.",
+        "severity": "Feeling progressively worse",
+        "aggravating": ["standing up (dizziness worse)"],
+        "relieving": ["lying down"]
+      },
+      "associatedSymptoms": {
+        "present": [
+          "nausea (no vomiting — just can't eat)",
+          "dizziness/lightheadedness (worse on standing)",
+          "oliguria (noticed decreased urine output past 2 days)",
+          "fatigue and malaise",
+          "mild bilateral lower extremity edema (new)"
+        ],
+        "absent": ["hematuria", "dysuria", "flank pain", "fever", "rash", "joint pain", "foamy urine (prior to this illness)"]
+      },
+      "pmh": [
+        "CKD Stage 3b (baseline Cr 1.5-1.6, last GFR 38)",
+        "Type 2 Diabetes Mellitus (A1c 7.8%, on insulin + metformin)",
+        "Hypertension (well-controlled on ACEi + CCB)",
+        "Osteoarthritis of bilateral knees (new diagnosis — reason for NSAID)",
+        "Benign prostatic hyperplasia"
+      ],
+      "medications": [
+        { "name": "Lisinopril", "dose": "20mg daily" },
+        { "name": "Amlodipine", "dose": "10mg daily" },
+        { "name": "Metformin", "dose": "500mg BID" },
+        { "name": "Insulin Glargine", "dose": "20 units at bedtime" },
+        { "name": "Ibuprofen", "dose": "600mg TID — started 10 days ago by PCP for knee pain" },
+        { "name": "Tamsulosin", "dose": "0.4mg at bedtime" },
+        { "name": "Atorvastatin", "dose": "40mg at night" }
+      ],
+      "allergies": [],
+      "socialHistory": {
+        "smoking": "Former, quit 20 years ago",
+        "alcohol": "Rare",
+        "drugs": "None",
+        "occupation": "Retired postal worker",
+        "livingSituation": "Lives with wife",
+        "fluidIntake": "Poor PO intake past 4-5 days — maybe a few sips of water"
+      },
+      "familyHistory": ["Brother: dialysis for diabetic nephropathy", "Mother: hypertension"],
+      "riskFactors": {
+        "present": ["CKD (reduced renal reserve)", "ACEi use (reduces compensatory GFR mechanisms)", "NSAID use (afferent arteriolar constriction)", "volume depletion (poor PO intake)", "diabetes", "advanced age"],
+        "absent": ["contrast exposure", "aminoglycoside use", "obstruction (Foley draining)"]
+      }
+    },
+    "physicalExam": {
+      "vitalSigns": { "BP": "104/62", "HR": "96", "RR": "20", "Temp": "98.2°F", "SpO2": "97% on RA" },
+      "general": "Elderly male, appears fatigued and mildly volume-depleted. Alert and oriented.",
+      "heent": "Dry mucous membranes. Decreased skin turgor.",
+      "neck": "Flat JVP (< 5cm H2O in 45° position)",
+      "cardiovascular": "Mild tachycardia, regular, no murmurs. No S3.",
+      "pulmonary": "Clear bilaterally",
+      "abdominal": "Soft, non-tender. No palpable bladder (Foley in place, draining minimal).",
+      "extremities": "1+ bilateral pitting edema to ankles (mild). No skin changes.",
+      "neurologic": "Alert, oriented x4. No asterixis. No myoclonus."
+    },
+    "diagnostics": {
+      "labs": [
+        { "test": "Creatinine", "value": "4.8", "unit": "mg/dL", "ref": "0.7-1.3", "status": "critical", "note": "Baseline 1.6 → 4.8 = KDIGO Stage 3 AKI (>3x baseline)" },
+        { "test": "BUN", "value": "82", "unit": "mg/dL", "ref": "7-20", "status": "abnormal", "note": "BUN:Cr ratio ~17:1 — not classically prerenal (>20:1), but NSAID involvement reduces ratio" },
+        { "test": "Potassium", "value": "5.8", "unit": "mEq/L", "ref": "3.5-5.0", "status": "critical", "note": "Hyperkalemia — ACEi + AKI + reduced renal excretion. ECG showed peaked T-waves." },
+        { "test": "Sodium", "value": "134", "unit": "mEq/L", "ref": "136-145", "status": "abnormal", "note": "Mild hyponatremia" },
+        { "test": "Bicarbonate", "value": "18", "unit": "mEq/L", "ref": "22-28", "status": "abnormal", "note": "Non-anion-gap metabolic acidosis — reduced renal acid excretion" },
+        { "test": "Phosphorus", "value": "5.8", "unit": "mg/dL", "ref": "2.5-4.5", "status": "abnormal", "note": "Elevated — reduced renal clearance" },
+        { "test": "Glucose", "value": "198", "unit": "mg/dL", "ref": "70-100", "status": "abnormal", "note": "Poorly controlled — stress + reduced metformin clearance" },
+        { "test": "CBC", "value": "WBC 8.4, Hgb 10.2, Plt 195", "unit": "", "ref": "", "status": "abnormal", "note": "Mild anemia — CKD-related (chronic), not acute" },
+        { "test": "Urinalysis", "value": "Specific gravity 1.022, no WBC, no bacteria, trace protein, few hyaline casts, few granular casts", "unit": "", "ref": "", "status": "abnormal", "note": "Hyaline casts = prerenal. Granular casts suggest some ATN component. No active sediment (no RBC casts, no WBC casts)." },
+        { "test": "Urine electrolytes", "value": "UNa 12, FeNa 0.6%, FEUrea 28%", "unit": "", "ref": "FeNa <1% = prerenal", "status": "abnormal", "note": "Low FeNa and low FEUrea suggest prerenal physiology predominates (kidneys still concentrating — holding onto sodium)" },
+        { "test": "Renal Ultrasound", "value": "Bilateral kidneys 10.5cm (right) and 10.2cm (left). No hydronephrosis. Increased echogenicity bilaterally (consistent with chronic kidney disease). Normal bladder (Foley in place). No masses.", "unit": "", "ref": "", "status": "normal", "note": "No obstruction. Chronic changes present." }
+      ]
+    },
+    "admittingOrders": {
+      "stopNephrotoxins": "DISCONTINUE ibuprofen (primary offender), HOLD lisinopril (worsening AKI by reducing GFR), HOLD metformin (lactic acidosis risk with Cr >1.5, and reduced clearance). These are the THREE critical medication changes.",
+      "ivFluids": "NS 250mL/hr x 4 hours, then reassess volume status and UOP. Goal UOP >0.5mL/kg/hr. Be cautious — patient has CKD and may not tolerate aggressive fluids.",
+      "hyperkalemiaManagement": "Calcium gluconate already given (cardioprotection). Insulin 10U regular + D50 25g IV (given in ED). Recheck K in 2 hours. Kayexalate 30g PO or Patiromer if K remains >5.5. Avoid repeat calcium if ECG normalizes.",
+      "monitoring": "BMP q8h x 24 hours (trending Cr, K, bicarb). Strict I&O. Daily weights. Foley for accurate UOP measurement. Continuous telemetry (hyperkalemia risk). Glucose monitoring q6h (insulin/dextrose + diabetes).",
+      "diet": "Renal diet: low potassium, low phosphorus, low sodium. 1.5L fluid restriction initially if edema worsens.",
+      "diabetesManagement": "Continue insulin glargine at reduced dose (15 units, given reduced clearance). Sliding scale insulin for correction. Hold metformin until Cr improving.",
+      "consultations": "Nephrology consult (KDIGO Stage 3 AKI on CKD, may need to discuss dialysis indications if no improvement in 24-48 hours). If K refractory, BUN uremic symptoms, volume overload, or acidosis worsening → emergent dialysis.",
+      "dvtProphylaxis": "SCDs only (hold chemical prophylaxis given AKI — clearance concerns)"
+    },
+    "teaching": {
+      "correctDiagnosis": "Acute Kidney Injury — Prerenal + NSAID-Induced",
+      "keyLearningPoints": [
+        "The triple whammy: ACEi (efferent dilation) + NSAID (afferent constriction) + volume depletion = catastrophic GFR drop",
+        "NSAIDs are CONTRAINDICATED in CKD — they block prostaglandin-mediated afferent arteriolar dilation, the kidney's last compensatory mechanism",
+        "KDIGO AKI staging: Stage 1 (1.5-1.9x), Stage 2 (2-2.9x), Stage 3 (≥3x or Cr ≥4.0 or need for RRT). This patient is Stage 3.",
+        "FeNa <1% in oliguric patient = prerenal physiology. But FeNa is unreliable on diuretics — use FEUrea instead (<35% = prerenal)",
+        "Urine microscopy: hyaline casts = prerenal; muddy brown granular casts = ATN; RBC casts = glomerulonephritis. This patient has overlap.",
+        "Always check a renal ultrasound to rule out obstruction — it's the most easily reversible cause of AKI"
+      ],
+      "mustNotMiss": [
+        "Post-renal obstruction (US normal here, Foley draining — ruled out)",
+        "Urgent dialysis indications (AEIOU): Acidosis refractory, Electrolytes (refractory hyperK), Ingestion, Overload (volume), Uremia (encephalopathy, pericarditis, bleeding)",
+        "Rhabdomyolysis (check CK if not done)",
+        "Glomerulonephritis (active urine sediment — RBC casts, dysmorphic RBCs)"
+      ],
+      "commonPitfalls": [
+        "Not stopping the NSAID — this is the single most important intervention",
+        "Not holding the ACEi — it's worsening the hemodynamic insult",
+        "Continuing metformin in AKI — risk of severe lactic acidosis",
+        "Over-resuscitating a CKD patient — they can't handle the volume. Use clinical endpoints.",
+        "Forgetting to check urine studies before giving IV fluids (dilutes the urine values)",
+        "Not checking a renal ultrasound to exclude obstruction"
+      ],
+      "attendingQuestions": "This patient's creatinine tripled. Walk me through the causes of AKI systematically — prerenal, intrinsic, postrenal. Then tell me: which medications caused this, and why does the combination matter? What's the 'triple whammy'?"
+    }
+  }
+}
