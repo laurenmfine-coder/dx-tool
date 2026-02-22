@@ -76,7 +76,27 @@ ReasonDx Virtual Hospital is a comprehensive hospital simulation platform where 
 ```
 reasondx-virtual-hospital/
 ├── public/
-│   └── index.html              # Landing page (reasondx.com)
+│   ├── index.html              # Landing page (reasondx.com)
+│   ├── auth/
+│   │   ├── register.html       # Registration + Stripe checkout
+│   │   ├── login.html          # Login page
+│   │   ├── account.html        # Account management
+│   │   ├── auth-system.js      # Supabase auth logic
+│   │   ├── auth-guard.js       # Route protection
+│   │   ├── email-service.js    # Transactional email
+│   │   ├── stripe-integration.js        # Payment processing
+│   │   ├── stripe-referral-coupons.js   # Referral system (REF-XX0000)
+│   │   ├── google-apps-script-v2.js     # Google integration
+│   │   ├── supabase-edge-functions.ts   # Edge functions
+│   │   ├── privacy.html        # Privacy policy
+│   │   └── terms.html          # Terms of service
+│   ├── data/
+│   │   └── rdx-persist.js      # Client-side persistence
+│   ├── dx-user-bar.js          # Authenticated user bar
+│   ├── dx-progress.js          # Progress tracking
+│   ├── dx-sanitize.js          # Input sanitization
+│   ├── dx-feedback.js          # Feedback widget
+│   └── rdx-site-stats.js       # Analytics
 ├── src/
 │   ├── ed-board.jsx            # ED Board (2,707 lines)
 │   ├── admitting-board.jsx     # Admitting Board (1,773 lines)
