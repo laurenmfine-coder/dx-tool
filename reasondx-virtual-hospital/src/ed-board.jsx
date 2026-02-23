@@ -1,3 +1,4 @@
+// ED Board — ReasonDx Virtual Hospital | build 2025-02-23
 import { useState, useEffect, useCallback, useRef } from "react";
 
 // ═══════════════════════════════════════════════════════════════

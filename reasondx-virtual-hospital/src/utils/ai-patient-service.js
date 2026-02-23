@@ -1,5 +1,6 @@
 /**
  * ReasonDx Virtual Hospital - AI Patient Service
+ * Build: 2025-02-23
  * 
  * Handles AI-powered patient responses using Claude API.
  * Generates natural conversation grounded in clinical facts from peer-reviewed sources.
