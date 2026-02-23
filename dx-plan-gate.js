@@ -1,5 +1,5 @@
 /**
- * ReasonDx Plan Gating System
+ * ReasonDx Plan Gating System | build 2025-02-23
  * ============================
  * Enforces Free vs Pro content limits across the platform.
  * 
@@ -48,7 +48,8 @@
                 if (expiry > new Date()) return 'pro';
             }
 
-            return (user.plan === 'pro') ? 'pro' : 'free';
+            var p = user.plan;
+            return (p === 'pro' || p === 'admin' || p === 'premium' || p === 'annual') ? 'pro' : 'free';
         } catch(e) {
             return 'free';
         }
