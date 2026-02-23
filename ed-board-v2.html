@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx Virtual Hospital — ED Board</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2874A6; --primary-dark: #1B4F72; --primary-light: #EBF5FB;
+  --accent: #3498DB; --success: #27AE60; --success-light: #E8F8F0;
+  --warning: #F39C12; --warning-light: #FEF9E7;
+  --danger: #E74C3C; --danger-light: #FDEDEC;
+  --text: #1a1a2e; --text-muted: #64748b; --bg: #f0f4f8;
+  --card: #ffffff; --border: #dce3eb;
+  --esi-1: #DC2626; --esi-2: #EF4444; --esi-3: #F59E0B; --esi-4: #22C55E; --esi-5: #3B82F6;
+  --font: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12); --radius: 8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+.topbar{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:white;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.15);position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{font-size:16px;font-weight:700}.topbar-logo span{font-weight:400;opacity:.85}
+.topbar-badge{background:rgba(255,255,255,.18);padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-time{font-family:var(--mono);font-size:13px;opacity:.9}
+.topbar-user{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500}
+.topbar-avatar{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.board-header{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.board-title{font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px}
+.count{background:var(--primary);color:white;font-size:12px;padding:2px 8px;border-radius:10px;font-weight:700}
+.board-controls{display:flex;gap:8px}
+.btn{font-family:var(--font);font-size:13px;font-weight:600;padding:8px 16px;border-radius:var(--radius);cursor:pointer;transition:all .15s;border:1px solid transparent;white-space:nowrap}
+.btn-primary{background:var(--primary);color:white;border-color:var(--primary)}.btn-primary:hover{filter:brightness(1.1)}
+.btn-success{background:var(--success);color:white}.btn-success:hover{filter:brightness(1.1)}
+.btn-warning{background:var(--warning);color:white}.btn-warning:hover{filter:brightness(1.1)}
+.btn-outline{background:white;color:var(--text);border-color:var(--border)}.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.stats-bar{padding:0 24px 12px;display:flex;gap:12px;flex-wrap:wrap}
+.stat-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:8px 16px;min-width:100px}
+.stat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)}
+.stat-value{font-family:var(--mono);font-size:22px;font-weight:700}
+.esi-high{color:var(--danger)}.esi-mid{color:var(--warning)}
+.board-container{padding:0 24px 24px}
+.board-table-wrap{background:white;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-md);overflow:hidden}
+.board-table{width:100%;border-collapse:collapse}
+.board-table thead th{background:#f7f9fc;border-bottom:2px solid var(--border);padding:10px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);white-space:nowrap}
+.board-table tbody tr{border-bottom:1px solid #f0f2f5;cursor:pointer;transition:background .12s}
+.board-table tbody tr:hover{background:var(--primary-light)}
+.board-table tbody tr.active{background:#dbeafe}
+.board-table tbody tr:last-child{border-bottom:none}
+.board-table td{padding:12px 14px;font-size:13px;vertical-align:middle}
+.bed-number{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--primary-dark)}
+.patient-name{font-weight:600;font-size:13px}.patient-demo{font-size:11px;color:var(--text-muted)}
+.acuity-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.acuity-1{background:#fef2f2;color:var(--esi-1);border:1px solid #fecaca}
+.acuity-2{background:#fef2f2;color:var(--esi-2);border:1px solid #fecaca}
+.acuity-3{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
+.acuity-4{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.acuity-5{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.acuity-dot{width:7px;height:7px;border-radius:50%}
+.acuity-1 .acuity-dot{background:var(--esi-1)}.acuity-2 .acuity-dot{background:var(--esi-2)}.acuity-3 .acuity-dot{background:var(--esi-3)}.acuity-4 .acuity-dot{background:var(--esi-4)}.acuity-5 .acuity-dot{background:var(--esi-5)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.status-waiting{background:#fef9e7;color:#b45309}
+.status-being-seen{background:#ebf5fb;color:var(--primary)}
+.status-labs-pending{background:#faf5ff;color:#7c3aed}
+.status-admitted{background:var(--success-light);color:#15803d}
+.status-discharged{background:#f1f5f9;color:var(--text-muted)}
+.status-pulse{width:6px;height:6px;border-radius:50%;animation:pulse 2s infinite}
+.status-being-seen .status-pulse{background:var(--primary)}.status-waiting .status-pulse{background:var(--warning)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.wait-time{font-family:var(--mono);font-size:12px;color:var(--text-muted)}
+.provider-cell{font-weight:500;font-size:12px}.provider-you{color:var(--primary);font-weight:700}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state h3{font-size:18px;color:var(--text);margin-bottom:8px}
+.empty-state p{font-size:14px;margin-bottom:20px}
+.panel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}.panel-overlay.open{opacity:1;pointer-events:all}
+.detail-panel{position:fixed;top:0;right:-600px;width:600px;max-width:90vw;height:100vh;background:white;z-index:300;box-shadow:-4px 0 30px rgba(0,0,0,.15);transition:right .3s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;overflow:hidden}.detail-panel.open{right:0}
+.panel-header{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:white;padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0}
+.panel-patient-info h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.panel-patient-meta{display:flex;gap:12px;font-size:12px;opacity:.85}
+.panel-close{background:rgba(255,255,255,.15);border:none;color:white;width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.panel-close:hover{background:rgba(255,255,255,.25)}
+.emr-tabs{display:flex;border-bottom:2px solid var(--border);background:#f7f9fc;flex-shrink:0;overflow-x:auto}
+.emr-tab{font-family:var(--font);padding:10px 16px;font-size:12px;font-weight:600;color:var(--text-muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s;position:relative}
+.emr-tab:hover{color:var(--primary)}.emr-tab.active{color:var(--primary);border-bottom-color:var(--primary);background:white}
+.emr-tab .tab-badge{font-size:9px;background:var(--success);color:white;padding:1px 5px;border-radius:8px;margin-left:4px;font-weight:700}
+.emr-content{flex:1;overflow-y:auto;padding:0;display:flex;flex-direction:column}
+.tab-body{padding:20px;flex:1;overflow-y:auto}
+.emr-section{margin-bottom:20px}
+.emr-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.emr-field{display:flex;margin-bottom:6px;font-size:13px}
+.emr-field-label{font-weight:600;color:var(--text-muted);min-width:130px;flex-shrink:0}
+.emr-field-value{color:var(--text)}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.vital-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;text-align:center}
+.vital-label{font-size:10px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.4px}
+.vital-value{font-family:var(--mono);font-size:16px;font-weight:700;margin-top:2px}
+.vital-value.abnormal{color:var(--danger)}
+.chat-wrap{display:flex;flex-direction:column;height:100%}
+.chat-tracker{background:#f7f9fc;border-bottom:1px solid var(--border);padding:10px 16px;flex-shrink:0}
+.tracker-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:6px}
+.tracker-grid{display:flex;gap:4px;flex-wrap:wrap}
+.tracker-pill{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;border:1px solid var(--border);background:white;color:var(--text-muted)}
+.tracker-pill.covered{background:var(--success-light);color:var(--success);border-color:#86efac}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
+.chat-msg{max-width:85%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;animation:msgIn .2s ease-out}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg-patient{background:#f1f5f9;color:var(--text);border-bottom-left-radius:4px;align-self:flex-start}
+.msg-student{background:var(--primary);color:white;border-bottom-right-radius:4px;align-self:flex-end}
+.msg-system{background:#fffbeb;color:#92400e;font-size:11px;align-self:center;border-radius:8px;text-align:center;max-width:90%;border:1px solid #fde68a}
+.typing-indicator{display:flex;gap:4px;padding:4px 0}.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--text-muted);animation:typeBounce .6s infinite alternate}.typing-dot:nth-child(2){animation-delay:.2s}.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typeBounce{from{opacity:.3;transform:translateY(0)}to{opacity:1;transform:translateY(-4px)}}
+.chat-input-area{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border);background:white;flex-shrink:0}
+.chat-input{flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:13px;outline:none;resize:none}.chat-input:focus{border-color:var(--primary)}
+.chat-send{background:var(--primary);color:white;border:none;border-radius:8px;padding:8px 14px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer}.chat-send:hover{filter:brightness(1.1)}.chat-send:disabled{opacity:.4;cursor:not-allowed}
+.lab-table{width:100%;border-collapse:collapse;font-size:12px}
+.lab-table th{text-align:left;padding:6px 8px;background:var(--bg);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--text-muted);border-bottom:1px solid var(--border)}
+.lab-table td{padding:6px 8px;border-bottom:1px solid #f0f2f5}
+.lab-table .abnormal{color:var(--danger);font-weight:600}.lab-table .critical{color:var(--danger);font-weight:700;background:#fef2f2}.lab-table .normal{color:var(--success)}
+.lab-flag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:10px;font-weight:700}
+.lab-flag.H{background:#fef2f2;color:var(--danger)}.lab-flag.C{background:#fef2f2;color:var(--danger);animation:pulse 1.5s infinite}
+.ecg-findings{background:#fffff5;border:1px solid #fde68a;border-radius:6px;padding:12px}
+.ecg-findings h4{font-size:12px;font-weight:700;margin-bottom:6px;color:#92400e}
+.ecg-finding-item{font-size:13px;padding:3px 0;display:flex;align-items:flex-start;gap:6px}.ecg-finding-item::before{content:"▸";color:var(--warning);font-weight:bold;flex-shrink:0}
+.ecg-interpretation{margin-top:8px;padding-top:8px;border-top:1px dashed #fde68a;font-weight:600;font-size:13px;color:var(--danger)}
+.imaging-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:8px}
+.imaging-card h4{font-size:13px;font-weight:700;margin-bottom:6px}.imaging-card p{font-size:13px;margin-bottom:4px}
+.teaching-card{background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:12px;margin-bottom:8px}
+.teaching-card h4{font-size:12px;font-weight:700;color:var(--primary);margin-bottom:6px}
+.teaching-item{font-size:13px;padding:3px 0;display:flex;gap:6px}.teaching-item::before{content:"💡";flex-shrink:0}
+.pitfall-item::before{content:"⚠️"}.must-not-miss-item::before{content:"🚨"}
+.ddx-bar{margin-bottom:6px}.ddx-bar-label{display:flex;justify-content:space-between;font-size:12px;font-weight:600;margin-bottom:3px}
+.ddx-bar-track{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}.ddx-bar-fill{height:100%;border-radius:4px;transition:width .5s}
+.exam-system{background:white;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:6px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px}
+.exam-system:hover{border-color:var(--primary);background:var(--primary-light)}
+.exam-system.examined{border-color:var(--success);cursor:default}.exam-system.examined:hover{background:white}
+.exam-system .sys-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center}
+.exam-system .sys-name{font-weight:600;font-size:13px;flex:1}
+.exam-system .sys-finding{font-size:12px;color:var(--text);margin-top:4px;padding-top:4px;border-top:1px solid var(--border)}
+.sys-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.sys-badge.normal{background:var(--success-light);color:var(--success)}
+.sys-badge.abnormal{background:var(--danger-light);color:var(--danger)}
+.order-section{background:#f7f9fc;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+.order-section h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:10px}
+.order-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--primary-dark);margin:10px 0 4px;padding-top:6px;border-top:1px solid var(--border)}
+.order-group-label:first-child{border-top:none;margin-top:0}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.order-item{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:4px;font-size:11px;cursor:pointer;transition:background .1s;user-select:none;line-height:1.3}
+.order-item:hover{background:white}
+.order-item input{accent-color:var(--primary);flex-shrink:0}
+.order-item.ordered{opacity:.5;pointer-events:none}
+.submit-orders{margin-top:12px}
+.processing{text-align:center;padding:16px;color:var(--text-muted);font-size:13px;background:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;margin-bottom:12px}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.locked-state{text-align:center;padding:40px 20px;color:var(--text-muted)}
+.locked-state .lock-icon{font-size:36px;margin-bottom:12px;opacity:.4}
+.locked-state h4{font-size:14px;margin-bottom:6px;color:var(--text)}
+.locked-state p{font-size:12px;max-width:280px;margin:0 auto}
+.progress-bar{margin:8px 0;display:flex;align-items:center;gap:8px}
+.progress-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .3s}
+.progress-label{font-size:11px;color:var(--text-muted);font-weight:600;min-width:28px;text-align:right}
+.panel-footer{padding:12px 20px;border-top:1px solid var(--border);background:#f7f9fc;display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:white;border-radius:12px;width:480px;max-width:90vw;box-shadow:var(--shadow-lg);transform:scale(.95);transition:transform .2s;max-height:85vh;overflow-y:auto}.modal-overlay.open .modal{transform:scale(1)}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--border)}.modal-header h3{font-size:16px;font-weight:700}
+.modal-body{padding:20px}.modal-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.dispo-option{display:flex;align-items:center;gap:12px;padding:12px;border:2px solid var(--border);border-radius:8px;cursor:pointer;margin-bottom:8px;transition:all .15s}.dispo-option:hover,.dispo-option.selected{border-color:var(--primary);background:var(--primary-light)}
+.dispo-icon{font-size:24px}.dispo-label{font-weight:600;font-size:14px}.dispo-desc{font-size:12px;color:var(--text-muted)}
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--text);color:white;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);transform:translateY(20px);opacity:0;animation:toastIn .3s forwards,toastOut .3s 2.7s forwards}
+@keyframes toastIn{to{transform:translateY(0);opacity:1}}@keyframes toastOut{to{transform:translateY(20px);opacity:0}}
+.toast.success{background:var(--success)}.toast.warning{background:var(--warning)}
+@media(max-width:768px){.board-header{padding:12px 16px}.stats-bar{padding:0 16px 12px}.board-container{padding:0 16px 16px}.board-table td,.board-table th{padding:8px 10px}.detail-panel{width:100vw;max-width:100vw}.hide-mobile{display:none}.order-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-left"><div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div><div class="topbar-badge">Emergency Dept</div></div>
+  <div class="topbar-right"><div class="topbar-time" id="simTime">07:00 AM — Day 1</div><div class="topbar-user"><div class="topbar-avatar">MS</div><span>Medical Student</span></div></div>
+</div>
+<div class="board-header">
+  <div class="board-title">ED Tracking Board <span class="count" id="patientCount">0</span></div>
+  <div class="board-controls"><button class="btn btn-primary" onclick="addNewPatient()">+ New Patient</button><button class="btn btn-outline" onclick="addNewPatient()">↻ Next Arrival</button><button class="btn btn-outline" onclick="resetBoard()">Reset Board</button></div>
+</div>
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-label">Total Patients</div><div class="stat-value" id="statTotal">0</div></div>
+  <div class="stat-card"><div class="stat-label">Waiting</div><div class="stat-value esi-mid" id="statWaiting">0</div></div>
+  <div class="stat-card"><div class="stat-label">Being Seen</div><div class="stat-value" id="statBeingSeen">0</div></div>
+  <div class="stat-card"><div class="stat-label">High Acuity</div><div class="stat-value esi-high" id="statHighAcuity">0</div></div>
+  <div class="stat-card"><div class="stat-label">Avg Wait</div><div class="stat-value" id="statAvgWait">—</div></div>
+</div>
+<div class="board-container">
+  <div class="board-table-wrap">
+    <table class="board-table">
+      <thead><tr><th>Bed</th><th>Patient</th><th>Chief Complaint</th><th>Acuity</th><th>Status</th><th class="hide-mobile">Wait</th><th class="hide-mobile">Provider</th></tr></thead>
+      <tbody id="boardBody"><tr><td colspan="7"><div class="empty-state"><h3>No patients on the board</h3><p>Click "New Patient" to begin your ED shift.</p><button class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button></div></td></tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+<div class="detail-panel" id="detailPanel">
+  <div class="panel-header"><div class="panel-patient-info"><h2 id="panelName">—</h2><div class="panel-patient-meta"><span id="panelAge">—</span><span>MRN: <span id="panelMRN">—</span></span><span id="panelBed">—</span></div></div><button class="panel-close" onclick="closePanel()">✕</button></div>
+  <div class="emr-tabs" id="emrTabs"></div>
+  <div class="emr-content" id="emrContent"></div>
+  <div class="panel-footer" id="panelFooter"></div>
+</div>
+<div class="modal-overlay" id="dispoModal"><div class="modal"><div class="modal-header"><h3 id="dispoTitle">Disposition</h3></div><div class="modal-body" id="dispoBody"></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeDispoModal()">Cancel</button><button class="btn btn-primary" onclick="confirmDisposition()">Confirm</button></div></div></div>
+<div class="toast-container" id="toastContainer"></div>
+<script>
+const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+const MODEL = 'claude-sonnet-4-20250514';
+
+const ORDERABLE_LABS = [
+  {id:'cbc',name:'CBC with Differential',group:'Hematology'},
+  {id:'retic',name:'Reticulocyte Count',group:'Hematology'},
+  {id:'peripheral-smear',name:'Peripheral Blood Smear',group:'Hematology'},
+  {id:'esr',name:'ESR (Sed Rate)',group:'Hematology'},
+  {id:'type-screen',name:'Type and Screen',group:'Hematology'},
+  {id:'type-cross',name:'Type and Crossmatch',group:'Hematology'},
+  {id:'bmp',name:'BMP (Chem-7)',group:'Chemistry'},
+  {id:'cmp',name:'CMP (Chem-14)',group:'Chemistry'},
+  {id:'magnesium',name:'Magnesium',group:'Chemistry'},
+  {id:'phosphorus',name:'Phosphorus',group:'Chemistry'},
+  {id:'uric-acid',name:'Uric Acid',group:'Chemistry'},
+  {id:'ammonia',name:'Ammonia',group:'Chemistry'},
+  {id:'hepatic',name:'Hepatic Function Panel',group:'Hepatic'},
+  {id:'lfts',name:'AST / ALT',group:'Hepatic'},
+  {id:'ggtp',name:'GGT',group:'Hepatic'},
+  {id:'lipase',name:'Lipase',group:'Hepatic'},
+  {id:'amylase',name:'Amylase',group:'Hepatic'},
+  {id:'bilirubin',name:'Total & Direct Bilirubin',group:'Hepatic'},
+  {id:'albumin',name:'Albumin',group:'Hepatic'},
+  {id:'troponin',name:'Troponin I / T',group:'Cardiac'},
+  {id:'bnp',name:'BNP / NT-proBNP',group:'Cardiac'},
+  {id:'ck',name:'CK Total',group:'Cardiac'},
+  {id:'ck-mb',name:'CK-MB',group:'Cardiac'},
+  {id:'myoglobin',name:'Myoglobin',group:'Cardiac'},
+  {id:'pt-inr',name:'PT / INR',group:'Coagulation'},
+  {id:'ptt',name:'aPTT',group:'Coagulation'},
+  {id:'fibrinogen',name:'Fibrinogen',group:'Coagulation'},
+  {id:'dimer',name:'D-dimer',group:'Coagulation'},
+  {id:'fib-degradation',name:'Fibrin Degradation Products',group:'Coagulation'},
+  {id:'crp',name:'C-Reactive Protein (CRP)',group:'Inflammatory'},
+  {id:'procalcitonin',name:'Procalcitonin',group:'Inflammatory'},
+  {id:'ana',name:'ANA',group:'Inflammatory'},
+  {id:'rf',name:'Rheumatoid Factor',group:'Inflammatory'},
+  {id:'complement',name:'C3 / C4 Complement',group:'Inflammatory'},
+  {id:'tsh',name:'TSH',group:'Endocrine'},
+  {id:'free-t4',name:'Free T4',group:'Endocrine'},
+  {id:'cortisol',name:'Random Cortisol',group:'Endocrine'},
+  {id:'hba1c',name:'Hemoglobin A1c',group:'Endocrine'},
+  {id:'bhcg',name:'β-hCG (Pregnancy)',group:'Endocrine'},
+  {id:'abg',name:'Arterial Blood Gas (ABG)',group:'Blood Gas'},
+  {id:'vbg',name:'Venous Blood Gas (VBG)',group:'Blood Gas'},
+  {id:'lactate',name:'Lactate',group:'Blood Gas'},
+  {id:'carboxyhgb',name:'Carboxyhemoglobin',group:'Blood Gas'},
+  {id:'blood-cx',name:'Blood Cultures x2',group:'Infectious'},
+  {id:'ua',name:'Urinalysis',group:'Infectious'},
+  {id:'ucx',name:'Urine Culture',group:'Infectious'},
+  {id:'flu',name:'Influenza / RSV Panel',group:'Infectious'},
+  {id:'covid',name:'COVID-19 PCR',group:'Infectious'},
+  {id:'utox',name:'Urine Drug Screen',group:'Toxicology'},
+  {id:'etoh',name:'Blood Alcohol Level',group:'Toxicology'},
+  {id:'acetaminophen',name:'Acetaminophen Level',group:'Toxicology'},
+  {id:'salicylate',name:'Salicylate Level',group:'Toxicology'},
+  {id:'digoxin',name:'Digoxin Level',group:'Toxicology'},
+  {id:'lithium',name:'Lithium Level',group:'Toxicology'}
+];
+
+const ORDERABLE_IMAGING = [
+  {id:'ecg',name:'12-Lead ECG',group:'Bedside'},
+  {id:'pocus-cardiac',name:'POCUS – Cardiac',group:'Bedside'},
+  {id:'pocus-lung',name:'POCUS – Lung',group:'Bedside'},
+  {id:'pocus-fast',name:'POCUS – FAST Exam',group:'Bedside'},
+  {id:'pocus-aorta',name:'POCUS – Aorta',group:'Bedside'},
+  {id:'cxr',name:'Chest X-ray (PA/Lateral)',group:'Plain Film'},
+  {id:'xr-abd',name:'Abdominal X-ray',group:'Plain Film'},
+  {id:'xr-cspine',name:'Cervical Spine X-ray',group:'Plain Film'},
+  {id:'xr-pelvis',name:'Pelvis X-ray',group:'Plain Film'},
+  {id:'ct-head',name:'CT Head without Contrast',group:'CT'},
+  {id:'cta-head-neck',name:'CTA Head and Neck',group:'CT'},
+  {id:'ct-cspine',name:'CT Cervical Spine',group:'CT'},
+  {id:'ct-chest',name:'CT Chest with Contrast',group:'CT'},
+  {id:'cta-pe',name:'CTA Chest (PE Protocol)',group:'CT'},
+  {id:'ct-abd-pelvis',name:'CT Abdomen/Pelvis with Contrast',group:'CT'},
+  {id:'us-dvt',name:'Lower Extremity Duplex (DVT)',group:'Advanced'},
+  {id:'us-renal',name:'Renal Ultrasound',group:'Advanced'},
+  {id:'mri-brain',name:'MRI Brain',group:'Advanced'}
+];
+
+const CASE_TEMPLATES = [{
+  id:"chest-pain", presentation:"Chest Pain", category:"cardiovascular",
+  demographics:{ ageRange:[45,75], genderDistribution:{male:0.6,female:0.4},
+    nameOptions:{ male:["John Smith","Robert Johnson","Michael Williams","David Brown","James Garcia"],
+                  female:["Maria Santos","Linda Chen","Patricia Williams","Susan Miller","Jennifer Davis"]}},
+  sources:[
+    {name:"Acute Coronary Syndrome - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK459157/"},
+    {name:"Pericarditis - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK431080/"},
+    {name:"2021 AHA/ACC Chest Pain Guideline",type:"guideline",url:"https://www.ahajournals.org/doi/10.1161/CIR.0000000000001029"}
+  ],
+  variants:[
+    {
+      id:"stemi-v1", diagnosis:"ST-Elevation Myocardial Infarction (STEMI)", acuity:2,
+      patient:{ communicationStyle:"Cooperative but frightened. Wants reassurance.", emotionalState:"Anxious, scared, sense of impending doom" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["tight","pressure","heavy","squeezing"], avoidPhrasing:["sharp","stabbing","tearing"], location:"Substernal, center of chest", radiation:["left shoulder","left arm","jaw","neck"], onset:"Gradual onset over 20-30 minutes", duration:"Constant, approximately 2-3 hours", severity:"8-10/10, worst chest discomfort ever", aggravating:["nothing specific","not worse with breathing"], relieving:["nothing helps","tried antacid with no relief"] },
+        associatedSymptoms:{ present:["diaphoresis (sweating profusely)","nausea (no vomiting)","shortness of breath","anxiety / sense of doom","lightheadedness"], absent:["cough","fever","pleuritic component","positional component","leg swelling","syncope"] },
+        pmh:["Type 2 Diabetes Mellitus (10 years)","Hypertension (8 years)","Hyperlipidemia (5 years)"],
+        medications:[{name:"Metformin",dose:"500mg BID"},{name:"Lisinopril",dose:"10mg daily"},{name:"Atorvastatin",dose:"40mg QHS"},{name:"Aspirin",dose:"81mg daily"}],
+        allergies:[{allergen:"Penicillin",reaction:"Rash as a child"}],
+        socialHistory:{smoking:"Never smoker",alcohol:"Occasional wine, 1-2/week",drugs:"Denies",occupation:"Teacher",livingSituation:"Lives with spouse"},
+        familyHistory:["Mother: MI at age 58 (deceased)","Father: T2DM, alive at 78","Sister: HTN, age 55"],
+        riskFactors:{present:["diabetes","hypertension","hyperlipidemia","family history of premature CAD","age > 45"],absent:["smoking","cocaine use","recent surgery"]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"168/102",HR:"108",RR:"22",Temp:"98.6°F",SpO2:"94%"},
+        general:"Alert, anxious, diaphoretic, clutching chest",
+        heent:"Pupils equal, reactive. Mucous membranes moist.",
+        neck:"Supple, no JVD, no carotid bruits",
+        cardiovascular:"Tachycardic, regular rhythm, no murmurs/rubs/gallops",
+        pulmonary:"Clear bilaterally, no wheezes or rales",
+        abdominal:"Soft, non-tender, non-distended",
+        extremities:"No edema, 2+ pulses, warm",
+        neurologic:"Alert and oriented x4, no focal deficits",
+        skin:"Diaphoretic, no rashes"
+      },
+      diagnostics:{
+        ecg:{ findings:["Sinus tachycardia at 108 bpm","ST elevations in V2-V5 (2-3mm)","Reciprocal ST depressions in III, aVF","No pathologic Q waves yet"], interpretation:"Anterior STEMI — likely LAD occlusion" },
+        labs:[
+          {test:"Troponin I (initial)",value:"0.04",unit:"ng/mL",reference:"<0.04",status:"abnormal",interpretation:"Borderline elevated",matchIds:["troponin"]},
+          {test:"Troponin I (1 hour)",value:"0.58",unit:"ng/mL",reference:"<0.04",status:"critical",interpretation:"Rising — myocardial injury confirmed",matchIds:["troponin"]},
+          {test:"BNP",value:"180",unit:"pg/mL",reference:"<100",status:"abnormal",interpretation:"Mildly elevated",matchIds:["bnp"]},
+          {test:"Glucose",value:"186",unit:"mg/dL",reference:"70-100",status:"abnormal",interpretation:"Elevated, known DM",matchIds:["bmp","cmp"]},
+          {test:"Creatinine",value:"1.1",unit:"mg/dL",reference:"0.7-1.3",status:"normal",interpretation:"Normal renal function",matchIds:["bmp","cmp"]},
+          {test:"Potassium",value:"4.2",unit:"mEq/L",reference:"3.5-5.0",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]},
+          {test:"Sodium",value:"139",unit:"mEq/L",reference:"136-145",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]},
+          {test:"BUN",value:"18",unit:"mg/dL",reference:"7-20",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]},
+          {test:"WBC",value:"11.2",unit:"K/uL",reference:"4.5-11.0",status:"abnormal",interpretation:"Mild leukocytosis, stress response",matchIds:["cbc"]},
+          {test:"Hemoglobin",value:"14.1",unit:"g/dL",reference:"12-16",status:"normal",interpretation:"Normal",matchIds:["cbc"]},
+          {test:"Platelets",value:"228",unit:"K/uL",reference:"150-400",status:"normal",interpretation:"Normal",matchIds:["cbc"]},
+          {test:"PT/INR",value:"1.0",unit:"",reference:"0.9-1.1",status:"normal",interpretation:"Normal coagulation",matchIds:["pt-inr"]},
+          {test:"Magnesium",value:"2.0",unit:"mg/dL",reference:"1.7-2.2",status:"normal",interpretation:"Normal",matchIds:["magnesium","cmp"]}
+        ],
+        imaging:[{study:"Chest X-ray",findings:"Cardiac silhouette upper limits of normal. Mild pulmonary vascular congestion. No focal consolidation or pneumothorax.",impression:"Mild cardiomegaly with early pulmonary congestion",critical:false,matchIds:["cxr"]}]
+      },
+      teaching:{
+        keyLearningPoints:["Classic STEMI: substernal pressure + radiation + diaphoresis + nausea","Women may present atypically (fatigue, dyspnea, nausea without chest pain)","Time is muscle — door-to-balloon target <90 minutes","Rising troponin + ischemic symptoms = acute coronary syndrome","Reciprocal ECG changes increase specificity for STEMI"],
+        mustNotMiss:["Aortic dissection (tearing pain, back radiation, pulse deficits)","Pulmonary embolism (pleuritic pain, leg symptoms, risk factors)","Tension pneumothorax (unilateral breath sounds, trauma)"],
+        commonPitfalls:["Anchoring on GERD in patient with cardiac risk factors","Not getting ECG within 10 minutes of arrival","Missing posterior STEMI (get posterior leads if high suspicion)","Delaying cath lab activation waiting for confirmatory troponin"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"STEMI",probability:75,reasoning:"Classic presentation, risk factors, diaphoresis, radiation"},
+          {diagnosis:"NSTEMI/Unstable Angina",probability:15,reasoning:"Similar, need ECG to differentiate"},
+          {diagnosis:"Aortic Dissection",probability:5,reasoning:"Must rule out but less likely without tearing/back pain"},
+          {diagnosis:"Pulmonary Embolism",probability:3,reasoning:"Less likely without pleuritic component"},
+          {diagnosis:"Pericarditis",probability:2,reasoning:"Would expect positional component, friction rub"}
+        ]}
+      }
+    },
+    {
+      id:"pericarditis-v1", diagnosis:"Acute Pericarditis", acuity:3,
+      patient:{ communicationStyle:"Generally healthy, surprised to be in the ED.", emotionalState:"Anxious but not in extremis" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["sharp","stabbing","catches when I breathe"], avoidPhrasing:["pressure","squeezing","elephant"], location:"Left chest, precordial area", radiation:["trapezius ridge","left shoulder"], onset:"Started yesterday, gradually worsening", duration:"Comes and goes, worse with movement/breathing", severity:"7/10 at worst, 3/10 sitting up and leaning forward", aggravating:["lying flat","deep breathing","coughing"], relieving:["sitting up","leaning forward"] },
+        associatedSymptoms:{ present:["viral illness 1 week ago (sore throat, runny nose)","low-grade fever","mild dyspnea with deep breathing"], absent:["diaphoresis","nausea/vomiting","arm radiation","jaw pain","leg swelling","syncope"] },
+        pmh:["None"], medications:[], allergies:[],
+        socialHistory:{smoking:"Never",alcohol:"Social, 2-3 drinks/week",drugs:"Denies",occupation:"Graduate student",livingSituation:"Lives with roommate"},
+        familyHistory:["No cardiac disease","No sudden death"],
+        riskFactors:{present:["recent viral illness"],absent:["cardiac risk factors","autoimmune disease"]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"122/78",HR:"88",RR:"18",Temp:"100.4°F",SpO2:"99%"},
+        general:"Young adult, mildly uncomfortable, sitting forward",
+        cardiovascular:"Regular rhythm, THREE-COMPONENT FRICTION RUB at left sternal border",
+        pulmonary:"Clear bilaterally"
+      },
+      diagnostics:{
+        ecg:{ findings:["Normal sinus rhythm at 88 bpm","Diffuse ST elevations (concave up) in multiple leads","PR depression in multiple leads","No reciprocal changes"], interpretation:"Classic pericarditis pattern" },
+        labs:[
+          {test:"Troponin I",value:"0.08",unit:"ng/mL",reference:"<0.04",status:"abnormal",interpretation:"Mildly elevated — myopericarditis",matchIds:["troponin"]},
+          {test:"CRP",value:"8.5",unit:"mg/dL",reference:"<0.5",status:"abnormal",interpretation:"Elevated inflammation",matchIds:["crp"]},
+          {test:"ESR",value:"45",unit:"mm/hr",reference:"<20",status:"abnormal",interpretation:"Elevated",matchIds:["esr"]},
+          {test:"WBC",value:"10.8",unit:"K/uL",reference:"4.5-11.0",status:"normal",interpretation:"High normal",matchIds:["cbc"]},
+          {test:"Hemoglobin",value:"15.2",unit:"g/dL",reference:"13.5-17.5",status:"normal",interpretation:"Normal",matchIds:["cbc"]},
+          {test:"BNP",value:"32",unit:"pg/mL",reference:"<100",status:"normal",interpretation:"Normal — no heart failure",matchIds:["bnp"]},
+          {test:"Creatinine",value:"0.9",unit:"mg/dL",reference:"0.7-1.3",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]},
+          {test:"Glucose",value:"94",unit:"mg/dL",reference:"70-100",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]}
+        ],
+        imaging:[{study:"Chest X-ray",findings:"Normal cardiac silhouette. Clear lungs. No effusion.",impression:"Unremarkable",critical:false,matchIds:["cxr"]}]
+      },
+      teaching:{
+        keyLearningPoints:["Pericarditis triad: sharp/pleuritic pain, better leaning forward, friction rub","ECG: diffuse ST elevation (concave up) + PR depression","Recent viral illness is most common precipitant","Friction rub is pathognomonic but transient","Most cases idiopathic/viral — self-limited with NSAIDs + colchicine"],
+        mustNotMiss:["STEMI (risk factors, pressure quality, reciprocal changes on ECG)","Aortic dissection (tearing, back pain, pulse deficits)","Cardiac tamponade (hypotension, JVD, muffled heart sounds)"],
+        commonPitfalls:["Confusing diffuse ST elevation of pericarditis with STEMI","Missing the PR depression (subtle but highly specific)","Not checking for pericardial effusion with bedside echo","Treating with NSAIDs without considering myopericarditis"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Acute Pericarditis",probability:70,reasoning:"Sharp, positional, friction rub, post-viral, young"},
+          {diagnosis:"Myocarditis",probability:15,reasoning:"Elevated troponin suggests myocardial involvement"},
+          {diagnosis:"STEMI",probability:5,reasoning:"ST elevations but concave-up, diffuse, no reciprocal changes"},
+          {diagnosis:"Pulmonary Embolism",probability:5,reasoning:"Pleuritic component but no risk factors"},
+          {diagnosis:"Musculoskeletal",probability:5,reasoning:"Young patient but systemic symptoms argue against"}
+        ]}
+      }
+    }
+  ]
+}
+,{
+  id:"abdominal-pain", presentation:"Abdominal Pain", category:"gastrointestinal",
+  demographics:{ ageRange:[18,75], genderDistribution:{male:0.5,female:0.5},
+    nameOptions:{ male:["Carlos Rivera","Anthony Mitchell","Kevin Park","Thomas Anderson","Marcus Bell"],
+                  female:["Sarah Thompson","Emily Nguyen","Angela Martinez","Jessica Wright","Rebecca Foster"]}},
+  sources:[
+    {name:"Appendicitis - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK493193/"},
+    {name:"AAA - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK507723/"}
+  ],
+  variants:[
+    {
+      id:"appendicitis-v1", diagnosis:"Acute Appendicitis", acuity:3,
+      patient:{ communicationStyle:"Lying very still, winces when asked about pain.", emotionalState:"Uncomfortable, nauseated, worried" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["achy","crampy","really sore"], avoidPhrasing:["tearing","ripping"], location:"Right lower belly — started around my belly button then moved", radiation:[], onset:"Started about 12 hours ago around my belly button, then moved to the right side", duration:"Constant for the last 6-8 hours, getting worse", severity:"7/10, worse than before", aggravating:["moving","walking","coughing","bumps in the car"], relieving:["lying very still","curling up on my side"] },
+        associatedSymptoms:{ present:["nausea (vomited once)","loss of appetite since yesterday","low-grade fever"], absent:["diarrhea","constipation","urinary symptoms","vaginal bleeding","chest pain","back pain"] },
+        pmh:["None significant"], medications:[], allergies:[],
+        socialHistory:{smoking:"Never",alcohol:"Occasional beer on weekends",drugs:"Denies",occupation:"Software developer",livingSituation:"Lives with partner"},
+        familyHistory:["Father had appendectomy as teenager"],
+        riskFactors:{present:["age 20-30","pain migration periumbilical to RLQ"],absent:["immunosuppression"]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"128/82",HR:"96",RR:"18",Temp:"100.8°F",SpO2:"99%"},
+        general:"Lying still on stretcher, knees drawn up, appears uncomfortable",
+        heent:"Dry mucous membranes",
+        cardiovascular:"Regular rate and rhythm, no murmurs",
+        pulmonary:"Clear bilaterally",
+        abdominal:"Tender RLQ with voluntary guarding. Positive McBurney point. Positive Rovsing sign. Positive psoas sign. No rebound yet.",
+        extremities:"Warm, well-perfused, no edema",
+        neurologic:"Alert and oriented, appropriate",
+        skin:"Warm, slightly flushed"
+      },
+      diagnostics:{
+        ecg:{ findings:["Normal sinus rhythm","No ST changes"], interpretation:"Normal ECG" },
+        labs:[
+          {test:"WBC",value:"14.2",unit:"K/uL",reference:"4.5-11.0",status:"abnormal",interpretation:"Leukocytosis with left shift",matchIds:["cbc"]},
+          {test:"CRP",value:"6.2",unit:"mg/dL",reference:"<0.5",status:"abnormal",interpretation:"Elevated inflammatory marker",matchIds:["crp"]},
+          {test:"Lipase",value:"28",unit:"U/L",reference:"10-140",status:"normal",interpretation:"Normal — rules out pancreatitis",matchIds:["lipase"]},
+          {test:"Urinalysis",value:"Normal",unit:"",reference:"Normal",status:"normal",interpretation:"No UTI or hematuria",matchIds:["ua"]},
+          {test:"β-hCG",value:"Negative",unit:"",reference:"Negative",status:"normal",interpretation:"Not pregnant",matchIds:["bhcg"]},
+          {test:"BMP Glucose",value:"102",unit:"mg/dL",reference:"70-100",status:"normal",interpretation:"Stress response",matchIds:["bmp","cmp"]},
+          {test:"Creatinine",value:"0.9",unit:"mg/dL",reference:"0.7-1.3",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]},
+          {test:"Lactate",value:"1.4",unit:"mmol/L",reference:"0.5-2.0",status:"normal",interpretation:"Normal",matchIds:["lactate"]}
+        ],
+        imaging:[
+          {study:"CT Abdomen/Pelvis with Contrast",findings:"Dilated appendix 11mm with periappendiceal fat stranding. No appendicolith. No free fluid or abscess.",impression:"Acute uncomplicated appendicitis",critical:false,matchIds:["ct-abd-pelvis"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["Classic appendicitis: periumbilical pain migrating to RLQ over 12-24h","Anorexia present in >90% of cases","McBurney, Rovsing, psoas, obturator signs — know these maneuvers","CT abdomen/pelvis gold standard (sensitivity >95%)","Surgical consult — appendectomy within 24h reduces perforation"],
+        mustNotMiss:["Ruptured ectopic pregnancy (always check beta-hCG)","Mesenteric ischemia (pain out of proportion, elderly, AFib)","Ruptured AAA (older, pulsatile mass, hypotension)"],
+        commonPitfalls:["Anchoring on gastroenteritis when pain migrates","Not checking pregnancy test before CT","Missing retrocecal appendix (flank/back pain)"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Acute Appendicitis",probability:70,reasoning:"Classic migration, anorexia, RLQ tenderness, leukocytosis"},
+          {diagnosis:"Mesenteric Lymphadenitis",probability:10,reasoning:"Similar presentation, post-viral"},
+          {diagnosis:"Ovarian Pathology",probability:8,reasoning:"Torsion/cyst rupture if female"},
+          {diagnosis:"Ureterolithiasis",probability:7,reasoning:"Can mimic RLQ pain"},
+          {diagnosis:"Crohn Flare",probability:5,reasoning:"RLQ pain in young, less likely without diarrhea"}
+        ]}
+      }
+    },
+    {
+      id:"aaa-v1", diagnosis:"Ruptured Abdominal Aortic Aneurysm", acuity:1,
+      patient:{ communicationStyle:"Severe distress, difficulty speaking in full sentences, diaphoretic.", emotionalState:"Terrified, sense of doom, writhing" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["tearing","ripping","something popped inside me"], avoidPhrasing:["crampy","achy"], location:"Belly and back, feels like it goes straight through", radiation:["back","flank","groin"], onset:"Sudden — was watching TV and it hit like a truck", duration:"About 45 minutes, has not let up", severity:"10/10, worst pain of my life", aggravating:["everything"], relieving:["nothing"] },
+        associatedSymptoms:{ present:["lightheadedness","feeling faint when standing","sweating","nausea"], absent:["chest pain","shortness of breath","fever","urinary symptoms"] },
+        pmh:["Hypertension (20 years)","Known 4.5cm AAA","Hyperlipidemia","COPD"],
+        medications:[{name:"Amlodipine",dose:"10mg daily"},{name:"Lisinopril",dose:"20mg daily"},{name:"Atorvastatin",dose:"80mg QHS"}],
+        allergies:[{allergen:"Sulfa drugs",reaction:"Hives"}],
+        socialHistory:{smoking:"Quit 5 years ago, 40 pack-year history",alcohol:"1-2 beers daily",drugs:"Denies",occupation:"Retired mechanic",livingSituation:"Lives with wife"},
+        familyHistory:["Father died of ruptured aneurysm at 68","Brother had AAA repair at 70"],
+        riskFactors:{present:["known AAA","age >65","male","smoking history","HTN","family history"],absent:[]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"88/54",HR:"124",RR:"28",Temp:"97.8°F",SpO2:"95%"},
+        general:"Elderly male, severe distress, diaphoretic, pale, writhing",
+        cardiovascular:"Tachycardic, weak pulses. Diminished left femoral pulse vs right.",
+        pulmonary:"Tachypneic, clear bilaterally",
+        abdominal:"Distended, diffusely tender. PULSATILE MASS palpable at midline. Guarding.",
+        extremities:"Cool, mottled lower extremities. Left leg cooler than right. Weak pedal pulses.",
+        neurologic:"Alert but confused, oriented to person only",
+        skin:"Pale, cool, diaphoretic, mottled"
+      },
+      diagnostics:{
+        ecg:{ findings:["Sinus tachycardia at 124 bpm","Low voltage"], interpretation:"Sinus tach — hemodynamic compromise" },
+        labs:[
+          {test:"Hemoglobin",value:"8.2",unit:"g/dL",reference:"12-16",status:"critical",interpretation:"Acute blood loss anemia",matchIds:["cbc"]},
+          {test:"Lactate",value:"5.8",unit:"mmol/L",reference:"0.5-2.0",status:"critical",interpretation:"Tissue hypoperfusion / shock",matchIds:["lactate"]},
+          {test:"Creatinine",value:"1.8",unit:"mg/dL",reference:"0.7-1.3",status:"abnormal",interpretation:"Renal hypoperfusion",matchIds:["bmp","cmp"]},
+          {test:"PT/INR",value:"1.1",unit:"",reference:"0.9-1.1",status:"normal",interpretation:"Normal baseline",matchIds:["pt-inr"]},
+          {test:"Type and Screen",value:"O Positive",unit:"",reference:"—",status:"normal",interpretation:"Ready for transfusion",matchIds:["type-screen","type-cross"]}
+        ],
+        imaging:[
+          {study:"POCUS – FAST Exam",findings:"Free fluid in Morrison pouch and pelvis. Aorta >6cm.",impression:"Positive FAST with large AAA — suspect rupture",critical:true,matchIds:["pocus-fast"]},
+          {study:"POCUS – Aorta",findings:"Infrarenal aorta 6.8cm, irregular wall, possible contained rupture.",impression:"Large AAA, likely rupture",critical:true,matchIds:["pocus-aorta"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["Classic triad: sudden abdominal/back pain + hypotension + pulsatile mass","Do NOT delay for CT — go straight to OR","Bedside POCUS can identify large AAA and free fluid in minutes","Permissive hypotension — aggressive fluids worsen bleeding","Massive transfusion protocol: 1:1:1 ratio"],
+        mustNotMiss:["Renal colic (mimics but no hemodynamic instability)","Acute mesenteric ischemia (AFib, pain out of proportion)","Aortic dissection (typically thoracic)"],
+        commonPitfalls:["Sending unstable patient to CT — this is an OR emergency","Misdiagnosing as renal colic","Normal initial Hgb does not rule out hemorrhage","Waiting for crossmatch instead of using O-neg"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Ruptured AAA",probability:85,reasoning:"Known AAA, sudden onset, pulsatile mass, hypotension, mottling"},
+          {diagnosis:"Aortic Dissection",probability:8,reasoning:"Tearing pain but more abdominal"},
+          {diagnosis:"Renal Colic",probability:4,reasoning:"Flank radiation but hemodynamics inconsistent"},
+          {diagnosis:"Mesenteric Ischemia",probability:3,reasoning:"Shock but pulsatile mass pathognomonic"}
+        ]}
+      }
+    }
+  ]
+}
+,{
+  id:"shortness-of-breath", presentation:"Shortness of Breath", category:"pulmonary",
+  demographics:{ ageRange:[25,80], genderDistribution:{male:0.5,female:0.5},
+    nameOptions:{ male:["William Turner","Daniel Kim","George Patterson","Raymond Cruz","Steven Hayes"],
+                  female:["Dorothy Campbell","Helen Rodriguez","Margaret Liu","Diane Stewart","Karen Mitchell"]}},
+  sources:[
+    {name:"Pulmonary Embolism - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK560551/"},
+    {name:"Heart Failure - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK430873/"}
+  ],
+  variants:[
+    {
+      id:"pe-v1", diagnosis:"Acute Pulmonary Embolism", acuity:2,
+      patient:{ communicationStyle:"Anxious, speaking in slightly shorter sentences due to breathlessness.", emotionalState:"Frightened, feels like something is very wrong" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["can't catch my breath","feels like I can't get enough air","short of breath"], avoidPhrasing:["heavy","squeezing"], location:"No specific location — just can't breathe", radiation:[], onset:"Started suddenly about 2 hours ago while sitting at my desk", duration:"Constant since it started, not getting better", severity:"8/10 — I feel like I'm suffocating", aggravating:["deep breathing","any movement","walking to the bathroom"], relieving:["nothing really","sitting upright maybe slightly"] },
+        associatedSymptoms:{ present:["sharp chest pain on right side with deep breath","heart racing","lightheadedness","calf pain and swelling on left leg for past 3 days"], absent:["cough","fever","wheezing","leg weakness","arm numbness","nausea"] },
+        pmh:["Obesity","Oral contraceptive use","Long flight from Europe 5 days ago"],
+        medications:[{name:"Combined oral contraceptive",dose:"daily"},{name:"Ibuprofen",dose:"PRN for headaches"}],
+        allergies:[],
+        socialHistory:{smoking:"Never",alcohol:"Wine with dinner occasionally",drugs:"Denies",occupation:"Marketing manager",livingSituation:"Lives alone in apartment"},
+        familyHistory:["Mother had a blood clot in her leg after hip surgery","No known clotting disorders"],
+        riskFactors:{present:["recent long-haul flight","oral contraceptives","obesity","family history of VTE","immobility"],absent:["recent surgery","cancer","pregnancy"]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"138/88",HR:"112",RR:"24",Temp:"99.2°F",SpO2:"91%"},
+        general:"Alert, anxious, speaking in short sentences, sitting upright",
+        cardiovascular:"Tachycardic, regular rhythm, loud P2 (pulmonic component of S2)",
+        pulmonary:"Tachypneic, clear to auscultation bilaterally (no wheezes, rales, or rhonchi)",
+        abdominal:"Soft, non-tender",
+        extremities:"Left calf swollen, warm, erythematous, tender to palpation. Positive Homans sign. Right leg normal.",
+        neurologic:"Alert and oriented x4",
+        skin:"No rashes, mild diaphoresis"
+      },
+      diagnostics:{
+        ecg:{ findings:["Sinus tachycardia at 112 bpm","Right axis deviation","S1Q3T3 pattern","T-wave inversions in V1-V3"], interpretation:"Classic PE pattern — S1Q3T3 with right heart strain" },
+        labs:[
+          {test:"D-dimer",value:"4.8",unit:"ug/mL",reference:"<0.50",status:"critical",interpretation:"Markedly elevated — high suspicion for VTE",matchIds:["dimer"]},
+          {test:"Troponin I",value:"0.12",unit:"ng/mL",reference:"<0.04",status:"abnormal",interpretation:"Mildly elevated — right heart strain",matchIds:["troponin"]},
+          {test:"BNP",value:"320",unit:"pg/mL",reference:"<100",status:"abnormal",interpretation:"Elevated — right ventricular strain",matchIds:["bnp"]},
+          {test:"ABG pH",value:"7.48",unit:"",reference:"7.35-7.45",status:"abnormal",interpretation:"Respiratory alkalosis",matchIds:["abg"]},
+          {test:"ABG pCO2",value:"28",unit:"mmHg",reference:"35-45",status:"abnormal",interpretation:"Hypocapnia from hyperventilation",matchIds:["abg"]},
+          {test:"ABG pO2",value:"62",unit:"mmHg",reference:"80-100",status:"abnormal",interpretation:"Hypoxemia",matchIds:["abg"]},
+          {test:"CBC WBC",value:"9.8",unit:"K/uL",reference:"4.5-11.0",status:"normal",interpretation:"Normal",matchIds:["cbc"]},
+          {test:"Creatinine",value:"0.8",unit:"mg/dL",reference:"0.7-1.3",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]}
+        ],
+        imaging:[
+          {study:"CTA Chest (PE Protocol)",findings:"Large saddle embolus at the main pulmonary artery bifurcation with extension into bilateral upper and lower lobe arteries. Right ventricular enlargement with RV/LV ratio >1.0. No pericardial effusion.",impression:"Massive bilateral pulmonary embolism with right heart strain",critical:true,matchIds:["cta-pe"]},
+          {study:"Chest X-ray",findings:"Subtle oligemia in right lower lobe (Westermark sign). Heart size upper limits normal. No effusion.",impression:"Findings suggestive of PE; CTA recommended",critical:false,matchIds:["cxr"]},
+          {study:"Lower Extremity Duplex (DVT)",findings:"Non-compressible left popliteal and femoral veins with echogenic thrombus. No DVT on right.",impression:"Acute left lower extremity DVT — popliteal to common femoral",critical:true,matchIds:["us-dvt"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["Wells criteria: assess pretest probability before D-dimer","Classic PE triad: sudden dyspnea + pleuritic chest pain + tachycardia (full triad in <20%)","S1Q3T3 on ECG is classic but insensitive — sinus tachycardia most common finding","CTA chest is diagnostic gold standard for PE","Massive PE (with hypotension) → consider systemic thrombolytics or catheter-directed therapy"],
+        mustNotMiss:["Tension pneumothorax (unilateral breath sounds, tracheal deviation)","Acute MI (risk factors, ECG changes, troponin)","Cardiac tamponade (Beck triad: hypotension, JVD, muffled sounds)"],
+        commonPitfalls:["Clear lungs do not rule out PE — lungs are typically clear","Using D-dimer in high pretest probability (go straight to CTA)","Missing DVT — always examine both legs","Not recognizing submassive PE (elevated troponin/BNP with normal BP = right heart strain)"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Pulmonary Embolism",probability:75,reasoning:"Sudden onset, pleuritic pain, tachycardia, calf swelling, risk factors"},
+          {diagnosis:"Pneumonia",probability:8,reasoning:"Can cause dyspnea and pleuritic pain but clear lungs argue against"},
+          {diagnosis:"Pneumothorax",probability:5,reasoning:"Sudden onset but bilateral clear lungs make unlikely"},
+          {diagnosis:"Acute Coronary Syndrome",probability:7,reasoning:"Troponin elevated but clinical picture fits PE"},
+          {diagnosis:"Anxiety/Panic Attack",probability:5,reasoning:"Diagnosis of exclusion — never assume in acute dyspnea"}
+        ]}
+      }
+    },
+    {
+      id:"chf-v1", diagnosis:"Acute Decompensated Heart Failure", acuity:2,
+      patient:{ communicationStyle:"Speaking in 3-4 word sentences. Fatigued. Sitting bolt upright.", emotionalState:"Anxious, exhausted, struggling to breathe" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["can't breathe when I lay down","woke up gasping for air","feet are swollen up like balloons"], avoidPhrasing:["sharp","stabbing"], location:"No specific spot — just can't breathe", radiation:[], onset:"Been getting worse over the past week, but really bad since last night", duration:"Worsening over days, worst overnight", severity:"9/10, I couldn't sleep at all — had to sit in a chair all night", aggravating:["lying flat","walking to bathroom","any exertion"], relieving:["sitting straight up","propping up on pillows"] },
+        associatedSymptoms:{ present:["waking up at night gasping for air (PND)","legs swelling for past week","weight gain of 10 pounds in a week","productive cough with pink frothy sputum","fatigue and weakness"], absent:["chest pain","fever","sharp pleuritic pain","calf pain"] },
+        pmh:["Heart failure with reduced EF (EF 25%, diagnosed 3 years ago)","Atrial fibrillation","Type 2 Diabetes","Hypertension","Prior MI 5 years ago"],
+        medications:[{name:"Furosemide",dose:"40mg BID"},{name:"Lisinopril",dose:"10mg daily"},{name:"Carvedilol",dose:"12.5mg BID"},{name:"Apixaban",dose:"5mg BID"},{name:"Metformin",dose:"1000mg BID"}],
+        allergies:[{allergen:"ACE inhibitors",reaction:"Angioedema — switched from enalapril to lisinopril without issue but reports this"}],
+        socialHistory:{smoking:"Quit 5 years ago, 20 pack-years",alcohol:"Stopped drinking 3 years ago at diagnosis",drugs:"Denies",occupation:"Retired bus driver",livingSituation:"Lives with adult daughter"},
+        familyHistory:["Mother died of heart failure at 72","Father had MI at 60"],
+        riskFactors:{present:["known HFrEF","prior MI","dietary indiscretion","possible medication nonadherence"],absent:[]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"168/98",HR:"110 (irregularly irregular)",RR:"28",Temp:"98.2°F",SpO2:"88%"},
+        general:"Elderly patient sitting upright, tripoding, speaking in 3-4 word sentences, appears fatigued and short of breath",
+        neck:"JVD to angle of jaw at 45 degrees. Hepatojugular reflux positive.",
+        cardiovascular:"Irregularly irregular (AFib with RVR). S3 gallop present. 2/6 systolic murmur at apex (mitral regurgitation).",
+        pulmonary:"Bilateral crackles extending to mid-lung fields. Decreased breath sounds at bases bilaterally.",
+        abdominal:"Distended, hepatomegaly (liver edge 4cm below costal margin), mildly tender RUQ. Positive fluid wave.",
+        extremities:"3+ pitting edema bilateral lower extremities to knees. Skin taut and shiny.",
+        neurologic:"Alert, oriented x3 (not oriented to date)",
+        skin:"Cool extremities, no cyanosis"
+      },
+      diagnostics:{
+        ecg:{ findings:["Atrial fibrillation with rapid ventricular response at 110 bpm","Left ventricular hypertrophy","Old Q waves in V1-V3 (prior anterior MI)","No acute ST changes"], interpretation:"AFib with RVR, LVH, old anterior MI — no new acute ischemia" },
+        labs:[
+          {test:"BNP",value:"2,840",unit:"pg/mL",reference:"<100",status:"critical",interpretation:"Markedly elevated — acute decompensated heart failure",matchIds:["bnp"]},
+          {test:"Troponin I",value:"0.06",unit:"ng/mL",reference:"<0.04",status:"abnormal",interpretation:"Mildly elevated — demand ischemia from tachycardia, not acute MI",matchIds:["troponin"]},
+          {test:"Creatinine",value:"1.6",unit:"mg/dL",reference:"0.7-1.3",status:"abnormal",interpretation:"Cardiorenal syndrome — baseline 1.2",matchIds:["bmp","cmp"]},
+          {test:"Sodium",value:"131",unit:"mEq/L",reference:"136-145",status:"abnormal",interpretation:"Dilutional hyponatremia — poor prognostic sign in HF",matchIds:["bmp","cmp"]},
+          {test:"Potassium",value:"4.8",unit:"mEq/L",reference:"3.5-5.0",status:"normal",interpretation:"High normal — monitor with diuresis",matchIds:["bmp","cmp"]},
+          {test:"Hemoglobin",value:"11.2",unit:"g/dL",reference:"12-16",status:"abnormal",interpretation:"Mild anemia — contributes to symptoms",matchIds:["cbc"]},
+          {test:"TSH",value:"2.1",unit:"mIU/L",reference:"0.4-4.0",status:"normal",interpretation:"Normal — rules out thyroid cause of AFib",matchIds:["tsh"]},
+          {test:"Hepatic Panel ALT",value:"68",unit:"U/L",reference:"7-56",status:"abnormal",interpretation:"Congestive hepatopathy",matchIds:["hepatic","lfts"]}
+        ],
+        imaging:[
+          {study:"Chest X-ray",findings:"Cardiomegaly. Bilateral pleural effusions (right > left). Cephalization of pulmonary vasculature. Kerley B lines. Bilateral alveolar infiltrates in butterfly pattern.",impression:"Pulmonary edema with bilateral pleural effusions — acute decompensated heart failure",critical:true,matchIds:["cxr"]},
+          {study:"POCUS – Cardiac",findings:"Severely reduced LV systolic function (EF ~20%). Dilated LV. Moderate mitral regurgitation. Small pericardial effusion. Dilated IVC without respiratory variation.",impression:"Severely reduced EF with volume overload",critical:false,matchIds:["pocus-cardiac"]},
+          {study:"POCUS – Lung",findings:"Bilateral B-lines in >3 lung zones (>3 B-lines per intercostal space). Small bilateral pleural effusions.",impression:"Pulmonary edema confirmed by lung ultrasound",critical:false,matchIds:["pocus-lung"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["Framingham criteria for HF diagnosis: major (PND, JVD, crackles, S3, CXR findings) and minor (edema, cough, dyspnea on exertion)","BNP >400 strongly supports acute HF; BNP <100 essentially rules it out","Treatment: sit upright, O2, IV furosemide (double their home dose), consider nitroglycerin for afterload reduction","AFib with RVR common in decompensated HF — rate control with digoxin or amiodarone (avoid beta-blockers acutely if hypotensive)","Identify precipitant: dietary indiscretion, med nonadherence, new AFib, infection, ischemia"],
+        mustNotMiss:["Acute MI causing new HF decompensation (serial troponins, ECG)","Pulmonary embolism (can mimic HF with dyspnea and edema)","Tension pneumothorax (unilateral findings, acute onset)"],
+        commonPitfalls:["Under-dosing diuretics — patients with chronic HF need aggressive dosing","Attributing mild troponin elevation to acute MI when it is demand ischemia","Not identifying and treating the precipitant","Discharging too early before euvolemia achieved"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Acute Decompensated Heart Failure",probability:85,reasoning:"Known HFrEF, orthopnea, PND, edema, crackles, JVD, elevated BNP"},
+          {diagnosis:"Pneumonia",probability:5,reasoning:"Productive cough but no fever, bilateral findings, known HF"},
+          {diagnosis:"Acute MI",probability:5,reasoning:"Troponin elevated but likely demand ischemia from AFib RVR"},
+          {diagnosis:"Pulmonary Embolism",probability:3,reasoning:"Dyspnea but bilateral edema and crackles favor HF"},
+          {diagnosis:"COPD Exacerbation",probability:2,reasoning:"Prior smoker but no wheezing, crackles predominate"}
+        ]}
+      }
+    }
+  ]
+}
+,{
+  id:"headache", presentation:"Headache", category:"neurologic",
+  demographics:{ ageRange:[20,70], genderDistribution:{male:0.45,female:0.55},
+    nameOptions:{ male:["Brian Walsh","Derek Okafor","Nathan Patel","Victor Romero","Alan Cho"],
+                  female:["Priya Sharma","Courtney Blake","Vanessa Morales","Tamara Jackson","Lisa Chen"]}},
+  sources:[
+    {name:"Subarachnoid Hemorrhage - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK441958/"},
+    {name:"Bacterial Meningitis - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK459360/"}
+  ],
+  variants:[
+    {
+      id:"sah-v1", diagnosis:"Subarachnoid Hemorrhage", acuity:1,
+      patient:{ communicationStyle:"In significant pain, eyes closed, speaking softly. Photophobic.", emotionalState:"Frightened, nauseated, wants the lights off" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["worst headache of my life","like a thunderclap","like something exploded in my head"], avoidPhrasing:["dull","mild","throbbing"], location:"All over — started in the back of my head", radiation:["neck","behind my eyes"], onset:"Sudden — hit me all at once while I was lifting a box", duration:"About 3 hours ago, constant since then, not improving", severity:"10/10, absolutely the worst headache I have ever had in my life", aggravating:["light","noise","bending over","straining"], relieving:["nothing — Tylenol did nothing, lying in a dark room helps slightly"] },
+        associatedSymptoms:{ present:["vomiting (3 times)","neck stiffness","sensitivity to light","brief loss of consciousness at onset (partner witnessed)"], absent:["fever","weakness on one side","vision loss","seizure","confusion"] },
+        pmh:["Hypertension (poorly controlled)","Migraines (but says this is completely different)","Smoker"],
+        medications:[{name:"Lisinopril",dose:"10mg daily (admits to missing doses)"},{name:"Sumatriptan",dose:"PRN for migraines"}],
+        allergies:[],
+        socialHistory:{smoking:"1 pack per day for 15 years",alcohol:"Social, 3-4 drinks per week",drugs:"Occasional cocaine use (last use 2 weeks ago)",occupation:"Construction worker",livingSituation:"Lives with partner"},
+        familyHistory:["Mother had brain aneurysm repaired at age 50","Sister has migraines"],
+        riskFactors:{present:["hypertension","smoking","cocaine use","family history of aneurysm","exertional onset"],absent:[]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"192/108",HR:"68",RR:"16",Temp:"99.0°F",SpO2:"98%"},
+        general:"Lying in fetal position, eyes closed, hand over eyes. In obvious distress.",
+        heent:"Photophobic. No papilledema on fundoscopy. Pupils equal and reactive.",
+        neck:"NUCHAL RIGIDITY — significant resistance to passive flexion. Positive Kernig sign. Positive Brudzinski sign.",
+        cardiovascular:"Regular rate, bradycardic, no murmurs",
+        pulmonary:"Clear bilaterally",
+        abdominal:"Soft, non-tender",
+        extremities:"Normal, symmetric pulses",
+        neurologic:"GCS 14 (E3V5M6). Alert but lethargic. Cranial nerves intact including III (no blown pupil). No focal motor or sensory deficits. No pronator drift.",
+        skin:"No rash, no petechiae"
+      },
+      diagnostics:{
+        ecg:{ findings:["Sinus bradycardia at 68 bpm","Diffuse T-wave inversions (cerebral T waves)","Prolonged QTc"], interpretation:"Cerebral T waves and QTc prolongation — neurogenic cardiac changes consistent with SAH" },
+        labs:[
+          {test:"WBC",value:"12.4",unit:"K/uL",reference:"4.5-11.0",status:"abnormal",interpretation:"Mild leukocytosis, stress response",matchIds:["cbc"]},
+          {test:"Hemoglobin",value:"13.8",unit:"g/dL",reference:"12-16",status:"normal",interpretation:"Normal",matchIds:["cbc"]},
+          {test:"Platelets",value:"215",unit:"K/uL",reference:"150-400",status:"normal",interpretation:"Normal",matchIds:["cbc"]},
+          {test:"PT/INR",value:"1.0",unit:"",reference:"0.9-1.1",status:"normal",interpretation:"Normal",matchIds:["pt-inr"]},
+          {test:"BMP Sodium",value:"136",unit:"mEq/L",reference:"136-145",status:"normal",interpretation:"Low-normal — monitor for SIADH/cerebral salt wasting",matchIds:["bmp","cmp"]},
+          {test:"Glucose",value:"148",unit:"mg/dL",reference:"70-100",status:"abnormal",interpretation:"Stress hyperglycemia",matchIds:["bmp","cmp"]},
+          {test:"Troponin I",value:"0.15",unit:"ng/mL",reference:"<0.04",status:"abnormal",interpretation:"Neurogenic myocardial injury — common in SAH",matchIds:["troponin"]}
+        ],
+        imaging:[
+          {study:"CT Head without Contrast",findings:"Hyperdense material in the basal cisterns, Sylvian fissures bilaterally, and interhemispheric fissure consistent with acute subarachnoid hemorrhage. Modified Fisher Grade 3. No hydrocephalus. No midline shift.",impression:"Acute subarachnoid hemorrhage — Fisher Grade 3",critical:true,matchIds:["ct-head"]},
+          {study:"CTA Head and Neck",findings:"6mm saccular aneurysm at the anterior communicating artery (AComm) with irregular contour suggesting recent rupture. No additional aneurysms identified.",impression:"Ruptured AComm aneurysm — neurosurgical emergency",critical:true,matchIds:["cta-head-neck"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["Thunderclap headache = SAH until proven otherwise","Non-contrast CT head is 98% sensitive in first 6 hours, sensitivity drops after that","If CT negative but suspicion high: LP looking for xanthochromia and elevated RBCs","CTA to identify aneurysm location for surgical/endovascular planning","Nimodipine 60mg q4h to prevent vasospasm — only calcium channel blocker shown to improve outcomes"],
+        mustNotMiss:["Bacterial meningitis (fever, nuchal rigidity, AMS — can overlap)","Cervical artery dissection (neck pain, headache, Horner syndrome)","Hypertensive emergency with end-organ damage"],
+        commonPitfalls:["Dismissing as migraine without CT — patient says this headache is different","Not doing LP when CT is negative but clinical suspicion remains high","Missing sentinel headache (warning leak days before major SAH)","Not controlling blood pressure (target SBP <160 before aneurysm secured)"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Subarachnoid Hemorrhage",probability:80,reasoning:"Thunderclap onset, worst headache ever, nuchal rigidity, syncope, HTN, risk factors"},
+          {diagnosis:"Hypertensive Emergency",probability:8,reasoning:"Very elevated BP, headache, but thunderclap onset more suggestive of SAH"},
+          {diagnosis:"Migraine",probability:5,reasoning:"History of migraines but patient distinguishes this as different"},
+          {diagnosis:"Meningitis",probability:4,reasoning:"Nuchal rigidity present but no fever, sudden onset atypical"},
+          {diagnosis:"Cervical Artery Dissection",probability:3,reasoning:"Headache with neck pain but no focal deficits"}
+        ]}
+      }
+    },
+    {
+      id:"meningitis-v1", diagnosis:"Bacterial Meningitis", acuity:2,
+      patient:{ communicationStyle:"Lethargic, slow to respond. Confused about details. Irritable when examined.", emotionalState:"Confused, miserable, wants to be left alone" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["pounding headache","head is killing me","head feels like it's going to explode"], avoidPhrasing:["thunderclap","sudden"], location:"All over my head, mostly in the front and behind my eyes", radiation:["down into my neck"], onset:"Started yesterday and got much worse overnight — woke up confused", duration:"About 18-24 hours, progressively worsening", severity:"9/10, one of the worst headaches I've had", aggravating:["light","loud noises","moving my neck"], relieving:["nothing — Advil barely touched it"] },
+        associatedSymptoms:{ present:["high fever with chills","neck stiffness (started today)","nausea and vomiting","confusion (didn't recognize roommate this morning)","sensitivity to light"], absent:["sudden thunderclap onset","weakness on one side","seizure","rash","recent travel"] },
+        pmh:["None significant","Up to date on vaccines but did not receive meningococcal booster"],
+        medications:[],
+        allergies:[{allergen:"Cephalosporins",reaction:"Rash"}],
+        socialHistory:{smoking:"Never",alcohol:"College student, drinks on weekends",drugs:"Marijuana occasionally",occupation:"College student, lives in dormitory",livingSituation:"Lives in dormitory with roommate"},
+        familyHistory:["No significant family history"],
+        riskFactors:{present:["dormitory living","close contacts","possible incomplete vaccination"],absent:["immunocompromised","recent neurosurgery","CSF leak"]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"98/62",HR:"118",RR:"22",Temp:"103.6°F",SpO2:"97%"},
+        general:"Young adult lying in darkened room, lethargic, responds slowly to questions, irritable when touched",
+        heent:"Photophobic. No papilledema.",
+        neck:"NUCHAL RIGIDITY. Positive Kernig sign. Positive Brudzinski sign.",
+        cardiovascular:"Tachycardic, regular rhythm, no murmurs",
+        pulmonary:"Clear bilaterally",
+        abdominal:"Soft, non-tender",
+        extremities:"Warm, no edema. No petechiae or purpura on initial exam.",
+        neurologic:"GCS 13 (E3V4M6). Oriented to person only. No focal deficits. No papilledema.",
+        skin:"Warm, flushed. On close inspection, scattered petechiae on trunk and lower extremities."
+      },
+      diagnostics:{
+        ecg:{ findings:["Sinus tachycardia at 118 bpm","No ST changes"], interpretation:"Sinus tachycardia — sepsis physiology" },
+        labs:[
+          {test:"WBC",value:"22.4",unit:"K/uL",reference:"4.5-11.0",status:"critical",interpretation:"Marked leukocytosis",matchIds:["cbc"]},
+          {test:"Procalcitonin",value:"8.6",unit:"ng/mL",reference:"<0.1",status:"critical",interpretation:"Markedly elevated — strong indicator of bacterial infection",matchIds:["procalcitonin"]},
+          {test:"CRP",value:"18.2",unit:"mg/dL",reference:"<0.5",status:"critical",interpretation:"Severely elevated",matchIds:["crp"]},
+          {test:"Lactate",value:"3.2",unit:"mmol/L",reference:"0.5-2.0",status:"abnormal",interpretation:"Elevated — sepsis with tissue hypoperfusion",matchIds:["lactate"]},
+          {test:"BMP Sodium",value:"128",unit:"mEq/L",reference:"136-145",status:"abnormal",interpretation:"Hyponatremia — possible SIADH",matchIds:["bmp","cmp"]},
+          {test:"Blood Cultures",value:"Pending",unit:"",reference:"No growth",status:"normal",interpretation:"Pending — drawn before antibiotics",matchIds:["blood-cx"]},
+          {test:"Creatinine",value:"1.3",unit:"mg/dL",reference:"0.7-1.3",status:"normal",interpretation:"Upper limit, monitor",matchIds:["bmp","cmp"]},
+          {test:"Glucose",value:"68",unit:"mg/dL",reference:"70-100",status:"abnormal",interpretation:"Borderline low — bacterial meningitis consumes CSF glucose",matchIds:["bmp","cmp"]}
+        ],
+        imaging:[
+          {study:"CT Head without Contrast",findings:"No acute intracranial hemorrhage. No mass lesion. No midline shift. No hydrocephalus. Mild diffuse cerebral edema.",impression:"No contraindication to lumbar puncture",critical:false,matchIds:["ct-head"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["Classic triad: fever + nuchal rigidity + altered mental status (present in ~44% of cases)","Jolt accentuation test is more sensitive than Kernig/Brudzinski signs","DO NOT delay antibiotics for LP or imaging — time to antibiotics is critical","If concern for elevated ICP → CT head BEFORE LP, but give antibiotics FIRST","Empiric therapy: Ceftriaxone + Vancomycin + Dexamethasone (dex before or with first antibiotic dose)"],
+        mustNotMiss:["Subarachnoid hemorrhage (thunderclap onset, different timeline)","Brain abscess (focal deficits, subacute course)","Herpes encephalitis (temporal lobe involvement, behavioral changes — add acyclovir)"],
+        commonPitfalls:["Delaying antibiotics waiting for CT or LP results — give antibiotics immediately","Missing petechiae (must undress patient fully — meningococcemia)","Not giving dexamethasone — reduces mortality in pneumococcal meningitis","Attributing altered mental status to intoxication in a college student"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Bacterial Meningitis",probability:75,reasoning:"Fever, nuchal rigidity, AMS, petechiae, dormitory exposure, leukocytosis"},
+          {diagnosis:"Viral Meningitis",probability:10,reasoning:"Similar but typically less toxic-appearing, lower WBC"},
+          {diagnosis:"Subarachnoid Hemorrhage",probability:5,reasoning:"Nuchal rigidity but subacute onset and fever argue against"},
+          {diagnosis:"Encephalitis",probability:7,reasoning:"AMS prominent, but nuchal rigidity and petechiae favor meningitis"},
+          {diagnosis:"Brain Abscess",probability:3,reasoning:"Headache and fever but no focal deficits"}
+        ]}
+      }
+    }
+  ]
+}
+,{
+  id:"altered-mental-status", presentation:"Altered Mental Status", category:"neurologic",
+  demographics:{ ageRange:[25,80], genderDistribution:{male:0.5,female:0.5},
+    nameOptions:{ male:["Darnell Washington","Samuel Lee","Frank Kowalski","Jose Delgado","Timothy Brooks"],
+                  female:["Grace Abernathy","Nadine Okonkwo","Marie Beaumont","Sandra Reeves","Christine Hong"]}},
+  sources:[
+    {name:"DKA - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK560723/"},
+    {name:"Acute Stroke - StatPearls",type:"statpearls",url:"https://www.ncbi.nlm.nih.gov/books/NBK535369/"}
+  ],
+  variants:[
+    {
+      id:"dka-v1", diagnosis:"Diabetic Ketoacidosis (DKA)", acuity:2,
+      patient:{ communicationStyle:"Confused, slow to respond, gives short vague answers. Kussmaul breathing visible.", emotionalState:"Confused, lethargic, intermittently agitated" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["I don't feel right","everything is fuzzy","I feel really sick"], avoidPhrasing:["sharp pain","sudden"], location:"No specific pain location — just feel terrible all over", radiation:[], onset:"Been feeling sick for 2-3 days, got much worse today — roommate brought me in", duration:"Getting progressively worse over days", severity:"Hard to rate — I just feel awful, confused, weak", aggravating:["nothing specific"], relieving:["nothing"] },
+        associatedSymptoms:{ present:["excessive thirst for days","urinating constantly","nausea and vomiting (2 days)","abdominal pain (diffuse, crampy)","fruity breath odor (roommate noticed)","lost about 10 pounds in 2 weeks"], absent:["fever","chest pain","headache","focal weakness","seizure"] },
+        pmh:["Type 1 Diabetes (diagnosed age 12)","Depression"],
+        medications:[{name:"Insulin glargine",dose:"20 units QHS (admits to running out 4 days ago)"},{name:"Insulin lispro",dose:"sliding scale with meals"},{name:"Sertraline",dose:"100mg daily"}],
+        allergies:[],
+        socialHistory:{smoking:"Never",alcohol:"Rarely",drugs:"Denies",occupation:"Freelance graphic designer — lost insurance recently",livingSituation:"Lives with roommate"},
+        familyHistory:["Mother has Type 2 Diabetes","No family history of Type 1"],
+        riskFactors:{present:["T1DM","insulin nonadherence","possible infection trigger","lost insurance/ran out of insulin"],absent:[]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"104/68",HR:"118",RR:"32 (deep, labored — Kussmaul pattern)",Temp:"99.4°F",SpO2:"99%"},
+        general:"Lethargic young adult, deep rapid breathing, fruity odor on breath, appears dehydrated",
+        heent:"Dry mucous membranes, sunken eyes, no papilledema",
+        neck:"Supple, no rigidity",
+        cardiovascular:"Tachycardic, regular rhythm, no murmurs. Weak pulses.",
+        pulmonary:"Deep rapid respirations (Kussmaul). Clear to auscultation bilaterally.",
+        abdominal:"Diffusely tender, no guarding or rebound. Normal bowel sounds.",
+        extremities:"Delayed capillary refill (>3 seconds). No edema. Poor skin turgor.",
+        neurologic:"GCS 13 (E3V4M6). Oriented to person, not place or time. No focal deficits. Moves all extremities.",
+        skin:"Dry, poor turgor, tenting present. No rashes."
+      },
+      diagnostics:{
+        ecg:{ findings:["Sinus tachycardia at 118 bpm","Peaked T waves (hyperkalemia)","Slightly prolonged QTc"], interpretation:"Sinus tachycardia with peaked T waves suggesting hyperkalemia" },
+        labs:[
+          {test:"Glucose",value:"486",unit:"mg/dL",reference:"70-100",status:"critical",interpretation:"Severe hyperglycemia",matchIds:["bmp","cmp"]},
+          {test:"Sodium",value:"128",unit:"mEq/L",reference:"136-145",status:"abnormal",interpretation:"Pseudohyponatremia (corrected Na ~136 for glucose)",matchIds:["bmp","cmp"]},
+          {test:"Potassium",value:"5.6",unit:"mEq/L",reference:"3.5-5.0",status:"abnormal",interpretation:"Elevated — will drop rapidly with insulin. Check before starting insulin.",matchIds:["bmp","cmp"]},
+          {test:"Chloride",value:"96",unit:"mEq/L",reference:"98-106",status:"normal",interpretation:"Low normal",matchIds:["bmp","cmp"]},
+          {test:"CO2 (Bicarb)",value:"8",unit:"mEq/L",reference:"22-28",status:"critical",interpretation:"Severely depleted — metabolic acidosis",matchIds:["bmp","cmp"]},
+          {test:"BUN",value:"32",unit:"mg/dL",reference:"7-20",status:"abnormal",interpretation:"Elevated — dehydration with prerenal azotemia",matchIds:["bmp","cmp"]},
+          {test:"Creatinine",value:"1.8",unit:"mg/dL",reference:"0.7-1.3",status:"abnormal",interpretation:"Prerenal AKI from dehydration",matchIds:["bmp","cmp"]},
+          {test:"Anion Gap",value:"24",unit:"mEq/L",reference:"8-12",status:"critical",interpretation:"Elevated anion gap metabolic acidosis (AGMA) — DKA",matchIds:["bmp","cmp"]},
+          {test:"VBG pH",value:"7.12",unit:"",reference:"7.32-7.42",status:"critical",interpretation:"Severe acidemia",matchIds:["vbg"]},
+          {test:"VBG pCO2",value:"18",unit:"mmHg",reference:"38-52",status:"abnormal",interpretation:"Respiratory compensation (Kussmaul breathing)",matchIds:["vbg"]},
+          {test:"Lactate",value:"2.8",unit:"mmol/L",reference:"0.5-2.0",status:"abnormal",interpretation:"Mildly elevated — dehydration contributing",matchIds:["lactate"]},
+          {test:"β-hydroxybutyrate",value:"6.2",unit:"mmol/L",reference:"<0.6",status:"critical",interpretation:"Markedly elevated — confirms ketoacidosis",matchIds:["bmp","cmp"]},
+          {test:"HbA1c",value:"12.4",unit:"%",reference:"<5.7",status:"critical",interpretation:"Very poorly controlled — chronic hyperglycemia",matchIds:["hba1c"]},
+          {test:"Urinalysis",value:"Large ketones, 3+ glucose",unit:"",reference:"Negative",status:"abnormal",interpretation:"Ketonuria and glucosuria",matchIds:["ua"]},
+          {test:"WBC",value:"14.8",unit:"K/uL",reference:"4.5-11.0",status:"abnormal",interpretation:"Leukocytosis — stress response (common in DKA even without infection)",matchIds:["cbc"]},
+          {test:"Phosphorus",value:"1.8",unit:"mg/dL",reference:"2.5-4.5",status:"abnormal",interpretation:"Low — will drop further with treatment, replete",matchIds:["phosphorus"]},
+          {test:"Magnesium",value:"1.6",unit:"mg/dL",reference:"1.7-2.2",status:"abnormal",interpretation:"Low — replete",matchIds:["magnesium"]}
+        ],
+        imaging:[
+          {study:"Chest X-ray",findings:"Clear lungs. No infiltrate. Normal cardiac silhouette.",impression:"No acute cardiopulmonary disease",critical:false,matchIds:["cxr"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["DKA diagnostic criteria: glucose >250, pH <7.3, bicarb <18, positive ketones, elevated anion gap","Always check potassium BEFORE starting insulin — if K <3.3, replete K first","Fluid resuscitation: 1-2L NS bolus, then 250-500mL/hr — these patients are 5-10L deficit","Insulin drip 0.1 units/kg/hr — do not bolus","Close the anion gap, not just the glucose — continue insulin until gap normalizes","Look for precipitant: infection, nonadherence, new-onset T1DM, substance use"],
+        mustNotMiss:["Hyperosmolar hyperglycemic state (HHS — higher glucose, less acidosis, more obtunded)","Sepsis as precipitant (check cultures, lactate, UA)","Cerebral edema (especially in children — watch for declining GCS during treatment)"],
+        commonPitfalls:["Stopping insulin when glucose normalizes but gap still open — switch to D5 + insulin","Not replacing potassium aggressively enough — K drops rapidly with insulin","Missing the precipitant (UTI, pneumonia, MI triggering DKA)","Not monitoring electrolytes q1-2h during treatment","Giving bicarbonate when pH >6.9 (not indicated, may worsen hypokalemia)"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Diabetic Ketoacidosis",probability:90,reasoning:"T1DM, insulin nonadherence, hyperglycemia, AGMA, ketones, Kussmaul breathing"},
+          {diagnosis:"Alcoholic Ketoacidosis",probability:3,reasoning:"Ketoacidosis but known T1DM, glucose very elevated"},
+          {diagnosis:"Sepsis",probability:4,reasoning:"Tachycardia, leukocytosis, but likely DKA is primary with possible infectious trigger"},
+          {diagnosis:"Toxic Ingestion",probability:3,reasoning:"AGMA but clinical picture classic for DKA"}
+        ]}
+      }
+    },
+    {
+      id:"stroke-v1", diagnosis:"Acute Ischemic Stroke (Left MCA)", acuity:1,
+      patient:{ communicationStyle:"Difficulty speaking — words come out garbled or wrong. Gets frustrated. Right-side weakness obvious.", emotionalState:"Frightened, frustrated by inability to communicate" },
+      clinicalFacts:{
+        chiefComplaint:{ patientPhrasing:["can't move my arm","face feels droopy","words won't come out right"], avoidPhrasing:["pain","sharp"], location:"Right side of body — arm and face mostly", radiation:[], onset:"Wife noticed right arm went limp and speech became garbled about 90 minutes ago while eating breakfast", duration:"About 90 minutes, has not improved at all", severity:"Can't use right arm at all, speech very difficult", aggravating:["trying to speak or use right arm"], relieving:["nothing"] },
+        associatedSymptoms:{ present:["right facial droop","slurred speech","difficulty finding words","right arm weakness","right leg mild weakness","confusion"], absent:["headache","vision loss","seizure","chest pain","fever"] },
+        pmh:["Atrial fibrillation (not on anticoagulation — patient refused)","Hypertension","Type 2 Diabetes","Hyperlipidemia"],
+        medications:[{name:"Metoprolol",dose:"50mg BID"},{name:"Amlodipine",dose:"5mg daily"},{name:"Metformin",dose:"1000mg BID"},{name:"Aspirin",dose:"81mg daily"}],
+        allergies:[{allergen:"Codeine",reaction:"Nausea"}],
+        socialHistory:{smoking:"Quit 10 years ago, 30 pack-year history",alcohol:"Rare",drugs:"Denies",occupation:"Retired accountant",livingSituation:"Lives with wife"},
+        familyHistory:["Father had stroke at 70","Mother had TIA at 65"],
+        riskFactors:{present:["atrial fibrillation without anticoagulation","hypertension","diabetes","hyperlipidemia","age","family history"],absent:["recent surgery","trauma"]}
+      },
+      physicalExam:{
+        vitalSigns:{BP:"178/96",HR:"88 (irregularly irregular)",RR:"16",Temp:"98.4°F",SpO2:"97%"},
+        general:"Elderly patient in bed, awake, right facial droop obvious, attempting to speak with difficulty",
+        heent:"Right facial droop — forehead sparing (central pattern). Eyes deviated to the LEFT.",
+        cardiovascular:"Irregularly irregular (atrial fibrillation), no murmurs",
+        pulmonary:"Clear bilaterally",
+        abdominal:"Soft, non-tender",
+        extremities:"Right arm: no movement against gravity (2/5 strength). Right leg: movement against gravity with weakness (3/5). Left side: 5/5 strength.",
+        neurologic:"GCS 12 (E4V3M5). Expressive aphasia — can understand commands but output garbled. Right homonymous hemianopia. Right hemiplegia (arm > leg). Right-sided sensory neglect. NIHSS estimated 14-18.",
+        skin:"No rashes"
+      },
+      diagnostics:{
+        ecg:{ findings:["Atrial fibrillation at 88 bpm","Left ventricular hypertrophy","No acute ST changes"], interpretation:"Atrial fibrillation — likely cardioembolic source of stroke" },
+        labs:[
+          {test:"Glucose",value:"156",unit:"mg/dL",reference:"70-100",status:"abnormal",interpretation:"Elevated — known DM, stress. Must check before tPA (exclude hypoglycemia as mimic).",matchIds:["bmp","cmp"]},
+          {test:"PT/INR",value:"1.0",unit:"",reference:"0.9-1.1",status:"normal",interpretation:"Normal — patient is a tPA candidate (not on anticoagulants)",matchIds:["pt-inr"]},
+          {test:"Platelets",value:"198",unit:"K/uL",reference:"150-400",status:"normal",interpretation:"Normal — no contraindication to tPA",matchIds:["cbc"]},
+          {test:"Hemoglobin",value:"13.5",unit:"g/dL",reference:"12-16",status:"normal",interpretation:"Normal",matchIds:["cbc"]},
+          {test:"Creatinine",value:"1.2",unit:"mg/dL",reference:"0.7-1.3",status:"normal",interpretation:"Normal",matchIds:["bmp","cmp"]},
+          {test:"Troponin I",value:"0.03",unit:"ng/mL",reference:"<0.04",status:"normal",interpretation:"Normal — no acute MI",matchIds:["troponin"]},
+          {test:"HbA1c",value:"7.8",unit:"%",reference:"<5.7",status:"abnormal",interpretation:"Suboptimally controlled DM",matchIds:["hba1c"]}
+        ],
+        imaging:[
+          {study:"CT Head without Contrast",findings:"No acute hemorrhage. No midline shift. No mass lesion. Loss of gray-white differentiation in the left insular cortex (early ischemic changes). Hyperdense left MCA sign.",impression:"Early acute left MCA territory ischemic stroke — no hemorrhage, tPA candidate",critical:true,matchIds:["ct-head"]},
+          {study:"CTA Head and Neck",findings:"Occlusion of the left M1 segment of the middle cerebral artery. Left ICA patent. Right circulation normal. No dissection.",impression:"Left M1 MCA occlusion — large vessel occlusion, candidate for mechanical thrombectomy",critical:true,matchIds:["cta-head-neck"]}
+        ]
+      },
+      teaching:{
+        keyLearningPoints:["Time is brain — every minute of ischemia = ~1.9 million neurons lost","IV tPA (alteplase): within 4.5 hours of symptom onset, NIHSS >4, no hemorrhage on CT","Mechanical thrombectomy: within 24 hours for large vessel occlusion with salvageable tissue","Must check: glucose (hypoglycemia mimic), INR, platelets, CT before tPA","AFib without anticoagulation is the most preventable cause of ischemic stroke","NIHSS standardizes severity — >15 suggests large vessel occlusion"],
+        mustNotMiss:["Hemorrhagic stroke (CT first — tPA is contraindicated)","Hypoglycemia (check glucose immediately — most common stroke mimic)","Todd paralysis (post-seizure — get history of seizure)","Aortic dissection with carotid extension"],
+        commonPitfalls:["Delaying CT head — this is a race against time","Not activating stroke team early (call before patient arrives if possible)","Treating blood pressure too aggressively before tPA (permissive HTN <220/120)","Missing last-known-well time vs symptom discovery time","Not considering thrombectomy for LVO — even outside tPA window"],
+        expertApproach:{differentialWithProbabilities:[
+          {diagnosis:"Acute Ischemic Stroke (L MCA)",probability:90,reasoning:"Sudden onset, right hemiplegia, aphasia, facial droop, AFib, eye deviation"},
+          {diagnosis:"Hemorrhagic Stroke",probability:4,reasoning:"Similar presentation but CT needed to differentiate"},
+          {diagnosis:"Todd Paralysis",probability:2,reasoning:"Post-ictal weakness can mimic but no seizure witnessed"},
+          {diagnosis:"Hypoglycemia",probability:2,reasoning:"Can cause focal deficits but glucose is elevated"},
+          {diagnosis:"Complex Migraine",probability:2,reasoning:"Can have aura with weakness but sudden onset in elderly with AFib is stroke"}
+        ]}
+      }
+    }
+  ]
+}
+];
+
+// STATE
+let patients = [];
+let selectedPatientId = null;
+let currentTab = 'overview';
+let shiftStartTime = Date.now();
+let isAiLoading = false;
+let dispoSelection = null;
+const ED_BEDS = [1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20];
+let availableBeds = [...ED_BEDS];
+function randomInt(a,b){return a+Math.floor(Math.random()*(b-a+1))}
+
+// OLDCARTS + HX TRACKING
+const OLDCARTS = [
+  {key:'onset',label:'Onset',keywords:['when','start','begin','first','how long ago']},
+  {key:'location',label:'Location',keywords:['where','location','point','show me']},
+  {key:'duration',label:'Duration',keywords:['how long','duration','constant','intermittent','come and go']},
+  {key:'character',label:'Character',keywords:['what does','describe','feel like','type of','quality','sharp','dull','pressure']},
+  {key:'aggravating',label:'Aggravating',keywords:['worse','aggravat','increase','exacerbat']},
+  {key:'relieving',label:'Relieving',keywords:['better','reliev','help','improv','alleviat']},
+  {key:'timing',label:'Timing',keywords:['timing','time of day','pattern','episode']},
+  {key:'severity',label:'Severity',keywords:['how bad','scale','severity','rate','1 to 10','one to ten']}
+];
+const HX_CATEGORIES = [
+  {key:'symptoms',label:'Assoc Sx',keywords:['nausea','vomit','sweat','breath','dizz','fever','cough','palpitat','faint','leg']},
+  {key:'pmh',label:'PMH',keywords:['medical history','health problem','past medical','condition','pmh','hospital','surgery','diagnos']},
+  {key:'meds',label:'Meds',keywords:['medication','medicine','taking','pills','prescribed','pharmacy']},
+  {key:'allergies',label:'Allergies',keywords:['allerg','react','anaphyla']},
+  {key:'social',label:'Social Hx',keywords:['smok','tobacco','alcohol','drink','drug','marijuana','cocaine','work','job','occupation','live','home','substance']},
+  {key:'family',label:'Family Hx',keywords:['family','mother','father','parent','brother','sister','relative','run in']}
+];
+
+function trackQuestion(question, patient) {
+  const q = question.toLowerCase();
+  if (!patient.tracked) patient.tracked = { oldcarts: new Set(), hxCats: new Set() };
+  OLDCARTS.forEach(item => { if (item.keywords.some(kw => q.includes(kw))) patient.tracked.oldcarts.add(item.key); });
+  HX_CATEGORIES.forEach(cat => { if (cat.keywords.some(kw => new RegExp(kw, 'i').test(q))) patient.tracked.hxCats.add(cat.key); });
+}
+
+// AI SYSTEM PROMPT
+function buildSystemPrompt(p) {
+  const cf = p.variant.clinicalFacts;
+  const cc = cf.chiefComplaint;
+  const persona = p.variant.patient;
+  return 'You are ' + p.name + ', a ' + p.age + '-year-old ' + (p.gender==='M'?'male':'female') + ' in the emergency department.\n\n' +
+    'PERSONALITY:\n' + persona.emotionalState + '. ' + persona.communicationStyle + '\n\n' +
+    'YOUR SYMPTOMS:\n' +
+    '- Chief complaint: "' + cc.patientPhrasing.join('" or "') + '"\n' +
+    '- Location: ' + cc.location + '\n' +
+    '- Started: ' + cc.onset + '\n' +
+    '- Duration: ' + cc.duration + '\n' +
+    '- Severity: ' + cc.severity + '\n' +
+    '- What makes it worse: ' + cc.aggravating.join(', ') + '\n' +
+    '- What makes it better: ' + cc.relieving.join(', ') + '\n' +
+    (cc.radiation.length > 0 ? '- Spreads to: ' + cc.radiation.join(', ') + '\n' : '') + '\n' +
+    'ASSOCIATED SYMPTOMS (confirm if asked):\n' +
+    cf.associatedSymptoms.present.map(function(s){return '- YES: '+s}).join('\n') + '\n\n' +
+    'THINGS TO DENY (pertinent negatives):\n' +
+    cf.associatedSymptoms.absent.map(function(s){return '- NO: '+s}).join('\n') + '\n\n' +
+    'YOUR MEDICAL HISTORY:\n' +
+    '- Past problems: ' + (cf.pmh.join(', ') || 'None') + '\n' +
+    '- Medications: ' + (cf.medications.map(function(m){return m.name+' '+m.dose}).join(', ') || 'None') + '\n' +
+    '- Allergies: ' + (cf.allergies.map(function(a){return a.allergen+' ('+a.reaction+')'}).join(', ') || 'None') + '\n' +
+    '- Family history: ' + (cf.familyHistory.join(', ') || 'None significant') + '\n\n' +
+    'SOCIAL HISTORY:\n' +
+    '- Smoking: ' + cf.socialHistory.smoking + '\n' +
+    '- Alcohol: ' + cf.socialHistory.alcohol + '\n' +
+    '- Drugs: ' + cf.socialHistory.drugs + '\n' +
+    '- Occupation: ' + cf.socialHistory.occupation + '\n' +
+    '- Living: ' + cf.socialHistory.livingSituation + '\n\n' +
+    'BEHAVIORAL RULES:\n' +
+    '1. Stay in character as the patient at all times\n' +
+    '2. Use everyday language, not medical terms\n' +
+    '3. Answer only what is asked - do not volunteer your entire history\n' +
+    '4. Show appropriate emotion\n' +
+    '5. NEVER diagnose yourself\n' +
+    '6. NEVER give the student medical advice or suggest tests\n' +
+    '7. Keep responses under 2-3 sentences unless asked for more\n\n' +
+    'WORD CHOICES:\n' +
+    '- USE: ' + cc.patientPhrasing.join(', ') + '\n' +
+    '- AVOID: ' + (cc.avoidPhrasing ? cc.avoidPhrasing.join(', ') : 'none');
+}
+
+// AI CALL
+async function getAIResponse(question, patient) {
+  var messages = (patient.chatHistory || []).slice(-16).map(function(m) {
+    return { role: m.role === 'student' ? 'user' : 'assistant', content: m.text };
+  });
+  messages.push({ role: 'user', content: question });
+
+  try {
+    var response = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'passthrough',
+        model: MODEL,
+        max_tokens: 300,
+        system: buildSystemPrompt(patient),
+        messages: messages
+      })
+    });
+    if (!response.ok) throw new Error('API ' + response.status);
+    var data = await response.json();
+    return (data.content && data.content[0] && data.content[0].text) || getScriptedResponse(question, patient);
+  } catch (e) {
+    console.warn('AI failed, using scripted:', e.message);
+    return getScriptedResponse(question, patient);
+  }
+}
+
+// SCRIPTED FALLBACK
+function getScriptedResponse(question, patient) {
+  var q = question.toLowerCase();
+  var cf = patient.variant.clinicalFacts;
+  var cc = cf.chiefComplaint;
+  if (/what brings you|why are you here|what.s wrong|tell me what/.test(q))
+    return 'I have this ' + cc.patientPhrasing[0] + ' feeling in my ' + cc.location.toLowerCase() + '. It started ' + cc.onset.toLowerCase() + '.';
+  if (/how bad|scale|1 to 10|severity|rate/.test(q))
+    return 'About a ' + (cc.severity.match(/\d+/) || ['8'])[0] + ' out of 10. ' + (cc.severity.includes('worst') ? "Worst I've ever felt." : '');
+  if (/where.*(pain|hurt|feel|bother)/.test(q))
+    return 'Right here, in my ' + cc.location.toLowerCase() + '.' + (cc.radiation.length > 0 ? ' It also goes to my ' + cc.radiation.join(' and ') + '.' : '');
+  if (/when.*(start|begin|first)/.test(q))
+    return 'It started ' + cc.onset.toLowerCase() + ".";
+  if (/worse|aggravat/.test(q))
+    return cc.aggravating[0] === 'nothing specific' ? 'Nothing specific makes it worse.' : 'It gets worse when ' + cc.aggravating.join(' or when ') + '.';
+  if (/better|reliev|help|improv/.test(q))
+    return cc.relieving.some(function(r){return /nothing/.test(r)}) ? "Nothing really helps." : cc.relieving.join(' and ') + ' help a bit.';
+  if (/nausea|vomit|throw up/.test(q))
+    return cf.associatedSymptoms.present.some(function(s){return /nausea/i.test(s)}) ? "Yeah, I feel pretty nauseous but haven't thrown up." : "No, my stomach feels fine.";
+  if (/sweat|diaphores/.test(q))
+    return cf.associatedSymptoms.present.some(function(s){return /diaphores|sweat/i.test(s)}) ? "Yeah, I've been sweating a lot." : "Not really sweating.";
+  if (/breath|dyspnea/.test(q))
+    return cf.associatedSymptoms.present.some(function(s){return /breath/i.test(s)}) ? "Yeah, trouble catching my breath." : "Breathing is fine.";
+  if (/fever|temperature|chills/.test(q))
+    return cf.associatedSymptoms.present.some(function(s){return /fever/i.test(s)}) ? "I've been feeling warm, had a little fever." : "No fever.";
+  if (/medication|medicine|taking|pills/.test(q))
+    return cf.medications.length === 0 ? "I don't take any medications." : 'I take ' + cf.medications.map(function(m){return m.name}).join(', ') + '.';
+  if (/allerg/.test(q))
+    return cf.allergies.length > 0 ? 'Yes, ' + cf.allergies[0].allergen + '. Got a ' + cf.allergies[0].reaction + '.' : "No allergies.";
+  if (/medical history|health problem|past.*medical|pmh/.test(q))
+    return cf.pmh[0] === 'None' ? "Pretty healthy overall." : 'I have ' + cf.pmh.join(', ').replace(/\(.*?\)/g, '') + '.';
+  if (/family|mother|father|parent/.test(q))
+    return cf.familyHistory.length > 0 ? cf.familyHistory.join('. ') + '.' : "Nothing runs in the family.";
+  if (/smok|tobacco/.test(q)) return cf.socialHistory.smoking;
+  if (/alcohol|drink/.test(q)) return cf.socialHistory.alcohol;
+  if (/drug|marijuana|cocaine|substance/.test(q)) return cf.socialHistory.drugs || "No, nothing like that.";
+  if (/work|job|occupation/.test(q)) return "I'm a " + cf.socialHistory.occupation.toLowerCase() + ".";
+  if (/live|home|who.*with/.test(q)) return cf.socialHistory.livingSituation;
+  if (/dizz|lightheaded/.test(q))
+    return cf.associatedSymptoms.present.some(function(s){return /lightheaded|dizz/i.test(s)}) ? "Yeah, a bit lightheaded." : "No dizziness.";
+  if (/radi|spread|travel|shoot|go.*to/.test(q))
+    return cc.radiation.length > 0 ? 'Yes, it goes to my ' + cc.radiation.join(' and ') + '.' : "Stays in one spot.";
+  return "Hmm, can you ask that differently?";
+}
+
+// PATIENT GENERATOR
+function generatePatient() {
+  var template = CASE_TEMPLATES[Math.floor(Math.random()*CASE_TEMPLATES.length)];
+  var variant = template.variants[Math.floor(Math.random()*template.variants.length)];
+  var isMale = Math.random() < template.demographics.genderDistribution.male;
+  var names = isMale ? template.demographics.nameOptions.male : template.demographics.nameOptions.female;
+  var age = randomInt(template.demographics.ageRange[0], template.demographics.ageRange[1]);
+  var bed = availableBeds.length > 0 ? availableBeds.splice(Math.floor(Math.random()*availableBeds.length), 1)[0] : randomInt(1,20);
+  return {
+    id: 'pt-' + Date.now() + '-' + Math.random().toString(36).substr(2,4),
+    name: names[Math.floor(Math.random()*names.length)],
+    age: age, gender: isMale ? 'M' : 'F', bed: bed,
+    mrn: String(100000 + Math.floor(Math.random()*900000)),
+    presentation: template.presentation, acuity: variant.acuity,
+    status: 'waiting', provider: '—', arrivalTime: Date.now(),
+    variant: variant, template: template,
+    chatHistory: [],
+    tracked: { oldcarts: new Set(), hxCats: new Set() },
+    discovered: { labsOrdered:[], labsReady:[], imagingOrdered:[], imagingReady:[], examSystems:[], dispositioned:false }
+  };
+}
+
+// BOARD
+function renderBoard() {
+  var body = document.getElementById('boardBody');
+  if (patients.length === 0) {
+    body.innerHTML = '<tr><td colspan="7"><div class="empty-state"><h3>No patients on the board</h3><p>Click "New Patient" to begin your ED shift.</p><button class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button></div></td></tr>';
+    document.getElementById('patientCount').textContent = '0';
+    updateStats(); return;
+  }
+  body.innerHTML = patients.map(function(p) {
+    var wait = Math.floor((Date.now()-p.arrivalTime)/60000);
+    return '<tr class="' + (p.id===selectedPatientId?'active':'') + '" onclick="selectPatient(\'' + p.id + '\')">' +
+      '<td><span class="bed-number">' + p.bed + '</span></td>' +
+      '<td><div class="patient-name">' + p.name + '</div><div class="patient-demo">' + p.age + p.gender + '</div></td>' +
+      '<td>' + p.presentation + '</td>' +
+      '<td><span class="acuity-badge acuity-' + p.acuity + '"><span class="acuity-dot"></span> ESI-' + p.acuity + '</span></td>' +
+      '<td><span class="status-badge status-' + p.status + '"><span class="status-pulse"></span> ' + p.status.replace(/-/g,' ') + '</span></td>' +
+      '<td class="hide-mobile"><span class="wait-time">' + wait + 'm</span></td>' +
+      '<td class="hide-mobile"><span class="provider-cell ' + (p.provider==='You'?'provider-you':'') + '">' + p.provider + '</span></td>' +
+    '</tr>';
+  }).join('');
+  document.getElementById('patientCount').textContent = patients.length;
+  updateStats();
+}
+
+function updateStats() {
+  var active = patients.filter(function(p){return !['admitted','discharged'].includes(p.status)});
+  document.getElementById('statTotal').textContent = patients.length;
+  document.getElementById('statWaiting').textContent = patients.filter(function(p){return p.status==='waiting'}).length;
+  document.getElementById('statBeingSeen').textContent = patients.filter(function(p){return p.status==='being-seen'}).length;
+  document.getElementById('statHighAcuity').textContent = patients.filter(function(p){return p.acuity<=2}).length;
+  if (active.length > 0) {
+    var avg = Math.round(active.reduce(function(s,p){return s+(Date.now()-p.arrivalTime)/60000},0)/active.length);
+    document.getElementById('statAvgWait').textContent = avg + 'm';
+  } else document.getElementById('statAvgWait').textContent = '—';
+}
+
+function addNewPatient() { var p = generatePatient(); patients.push(p); renderBoard(); showToast(p.name+' ('+p.age+p.gender+') — '+p.presentation+' — Bed '+p.bed, 'success'); }
+function selectPatient(id) {
+  selectedPatientId = id;
+  var p = patients.find(function(x){return x.id===id});
+  if (!p) return;
+  if (p.status === 'waiting') { p.status = 'being-seen'; p.provider = 'You'; }
+  openPanel(p); renderBoard();
+}
+function resetBoard() { patients=[]; selectedPatientId=null; availableBeds=[...ED_BEDS]; closePanel(); renderBoard(); }
+
+// PANEL
+function openPanel(p) {
+  document.getElementById('panelName').textContent = p.name;
+  document.getElementById('panelAge').textContent = p.age + p.gender;
+  document.getElementById('panelMRN').textContent = p.mrn;
+  document.getElementById('panelBed').textContent = 'Bed ' + p.bed;
+  document.getElementById('panelOverlay').classList.add('open');
+  document.getElementById('detailPanel').classList.add('open');
+  currentTab = 'overview'; renderTabs(p); switchTab('overview');
+}
+function closePanel() {
+  document.getElementById('panelOverlay').classList.remove('open');
+  document.getElementById('detailPanel').classList.remove('open');
+}
+
+function renderTabs(p) {
+  var d = p.discovered;
+  var chatCount = p.chatHistory.filter(function(m){return m.role==='student'}).length;
+  var tabs = [
+    {id:'overview',label:'Overview'},
+    {id:'vitals',label:'Vitals'},
+    {id:'history',label:'Hx' + (chatCount > 0 ? ' ('+chatCount+')' : '')},
+    {id:'exam',label:'Exam' + (d.examSystems.length > 0 ? ' ('+d.examSystems.length+')' : '')},
+    {id:'labs',label:'Labs' + (d.labsReady.length > 0 ? ' ('+d.labsReady.length+')' : ''), badge: d.labsReady.length > 0 && d.labsReady.length === d.labsOrdered.length && d.labsOrdered.length > 0},
+    {id:'imaging',label:'Imaging' + (d.imagingReady.length > 0 ? ' ('+d.imagingReady.length+')' : ''), badge: d.imagingReady.length > 0},
+    {id:'teaching',label:'Teaching'}
+  ];
+  document.getElementById('emrTabs').innerHTML = tabs.map(function(t) {
+    return '<button class="emr-tab ' + (currentTab===t.id?'active':'') + '" onclick="switchTab(\'' + t.id + '\')">' + t.label + (t.badge?'<span class="tab-badge">NEW</span>':'') + '</button>';
+  }).join('');
+}
+
+function renderFooter(p) {
+  var hasData = p.chatHistory.length > 0 || p.discovered.labsReady.length > 0 || p.discovered.examSystems.length > 0;
+  document.getElementById('panelFooter').innerHTML =
+    '<button class="btn btn-success btn-sm" onclick="openDisposition(\'discharge\')" ' + (!hasData?'disabled title="Gather clinical data first"':'') + '>✓ Discharge</button>' +
+    '<button class="btn btn-warning btn-sm" onclick="openDisposition(\'admit\')" ' + (!hasData?'disabled title="Gather clinical data first"':'') + '>⬆ Admit</button>' +
+    '<button class="btn btn-outline btn-sm" onclick="openDisposition(\'transfer\')">↗ Transfer</button>';
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p) return;
+  renderTabs(p); renderFooter(p);
+  var el = document.getElementById('emrContent');
+  switch(tab) {
+    case 'overview': el.innerHTML = '<div class="tab-body">'+renderOverview(p)+'</div>'; break;
+    case 'vitals': el.innerHTML = '<div class="tab-body">'+renderVitals(p)+'</div>'; break;
+    case 'history': el.innerHTML = renderHistoryChat(p); initChatScroll(); break;
+    case 'exam': el.innerHTML = '<div class="tab-body">'+renderExam(p)+'</div>'; break;
+    case 'labs': el.innerHTML = '<div class="tab-body">'+renderLabs(p)+'</div>'; break;
+    case 'imaging': el.innerHTML = '<div class="tab-body">'+renderImaging(p)+'</div>'; break;
+    case 'teaching': el.innerHTML = '<div class="tab-body">'+renderTeaching(p)+'</div>'; break;
+  }
+}
+
+// OVERVIEW
+function renderOverview(p) {
+  var cc = p.variant.clinicalFacts.chiefComplaint;
+  var d = p.discovered;
+  var oc = p.tracked.oldcarts.size;
+  var hc = p.tracked.hxCats.size;
+  var examTotal = Object.keys(p.variant.physicalExam).filter(function(k){return k!=='vitalSigns'}).length;
+  return '<div class="emr-section"><div class="emr-section-title">Triage Note</div>' +
+    '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:12px;font-size:13px;">' +
+    '<strong>'+p.age+p.gender+'</strong> presenting with <strong>'+p.presentation.toLowerCase()+'</strong>. ' +
+    'Describes discomfort as "'+cc.patientPhrasing[0]+'" in '+cc.location.toLowerCase()+'. ' +
+    cc.onset+'. '+p.variant.patient.emotionalState+'.</div></div>' +
+    '<div class="emr-section"><div class="emr-section-title">Triage Vitals</div>'+renderVitalsGrid(p.variant.physicalExam.vitalSigns)+'</div>' +
+    '<div class="emr-section"><div class="emr-section-title">Your Progress</div>' +
+    '<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Interview the patient, examine, order workup, then make your disposition.</div>' +
+    '<div class="progress-bar"><span style="font-size:11px;min-width:80px">OLDCARTS</span><div class="progress-track"><div class="progress-fill" style="width:'+oc/8*100+'%"></div></div><span class="progress-label">'+oc+'/8</span></div>' +
+    '<div class="progress-bar"><span style="font-size:11px;min-width:80px">Other Hx</span><div class="progress-track"><div class="progress-fill" style="width:'+hc/6*100+'%"></div></div><span class="progress-label">'+hc+'/6</span></div>' +
+    '<div class="progress-bar"><span style="font-size:11px;min-width:80px">Exam</span><div class="progress-track"><div class="progress-fill" style="width:'+d.examSystems.length/examTotal*100+'%"></div></div><span class="progress-label">'+d.examSystems.length+'/'+examTotal+'</span></div>' +
+    '<div class="progress-bar"><span style="font-size:11px;min-width:80px">Labs</span><div class="progress-track"><div class="progress-fill" style="width:'+(d.labsReady.length>0?100:0)+'%"></div></div><span class="progress-label">'+(d.labsReady.length>0?d.labsReady.length+' resulted':'None')+'</span></div>' +
+    '<div class="progress-bar"><span style="font-size:11px;min-width:80px">Imaging</span><div class="progress-track"><div class="progress-fill" style="width:'+(d.imagingReady.length>0?100:0)+'%"></div></div><span class="progress-label">'+(d.imagingReady.length>0?d.imagingReady.length+' done':'None')+'</span></div>' +
+    '</div>' +
+    (p.template.sources ? '<div class="emr-section"><div class="emr-section-title">Evidence Sources</div>'+p.template.sources.map(function(s){return '<div style="font-size:12px;margin-bottom:4px"><a href="'+s.url+'" target="_blank" style="color:var(--primary)">'+s.name+'</a> — <span style="color:var(--text-muted)">'+s.type+'</span></div>'}).join('')+'</div>' : '');
+}
+
+// VITALS
+function renderVitalsGrid(vs) {
+  var items = [
+    {label:'BP',value:vs.BP,abn:parseInt(vs.BP)>140||parseInt(vs.BP)<90},
+    {label:'HR',value:vs.HR+' bpm',abn:parseInt(vs.HR)>100||parseInt(vs.HR)<60},
+    {label:'RR',value:vs.RR,abn:parseInt(vs.RR)>20},
+    {label:'Temp',value:vs.Temp,abn:parseFloat(vs.Temp)>100.4},
+    {label:'SpO2',value:vs.SpO2,abn:parseInt(vs.SpO2)<95}
+  ];
+  return '<div class="vitals-grid">'+items.map(function(i){return '<div class="vital-card"><div class="vital-label">'+i.label+'</div><div class="vital-value '+(i.abn?'abnormal':'')+'">'+i.value+'</div></div>'}).join('')+'</div>';
+}
+function renderVitals(p) { return '<div class="emr-section"><div class="emr-section-title">Vital Signs</div>'+renderVitalsGrid(p.variant.physicalExam.vitalSigns)+'</div>'; }
+
+// HISTORY CHAT
+function renderHistoryChat(p) {
+  var allPills = OLDCARTS.concat(HX_CATEGORIES);
+  var trackerHtml = allPills.map(function(item) {
+    var covered = p.tracked.oldcarts.has(item.key) || p.tracked.hxCats.has(item.key);
+    return '<span class="tracker-pill '+(covered?'covered':'')+'">'+item.label+'</span>';
+  }).join('');
+  var msgs;
+  if (p.chatHistory.length === 0) {
+    msgs = '<div class="chat-msg msg-system">You are seeing '+p.name+', '+p.age+p.gender+', for '+p.presentation.toLowerCase()+'. Begin your interview.</div>';
+  } else {
+    msgs = p.chatHistory.map(function(m) {
+      return '<div class="chat-msg '+(m.role==='student'?'msg-student':'msg-patient')+'">'+m.text+'</div>';
+    }).join('');
+  }
+  return '<div class="chat-wrap">' +
+    '<div class="chat-tracker"><div class="tracker-title">History Elements Covered</div><div class="tracker-grid">'+trackerHtml+'</div></div>' +
+    '<div class="chat-messages" id="chatMessages">'+msgs+'</div>' +
+    '<div class="chat-input-area">' +
+    '<textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask the patient a question..." onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>' +
+    '<button class="chat-send" id="chatSendBtn" onclick="sendChat()">Send</button>' +
+    '</div></div>';
+}
+function initChatScroll() { var el = document.getElementById('chatMessages'); if (el) el.scrollTop = el.scrollHeight; }
+
+async function sendChat() {
+  if (isAiLoading) return;
+  var input = document.getElementById('chatInput');
+  var question = input.value.trim();
+  if (!question) return;
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p) return;
+  input.value = '';
+  p.chatHistory.push({ role: 'student', text: question });
+  trackQuestion(question, p);
+  var container = document.getElementById('chatMessages');
+  container.innerHTML += '<div class="chat-msg msg-student">'+question+'</div>';
+  container.innerHTML += '<div class="chat-msg msg-patient" id="typingMsg"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
+  container.scrollTop = container.scrollHeight;
+  isAiLoading = true;
+  document.getElementById('chatSendBtn').disabled = true;
+  var response = await getAIResponse(question, p);
+  var typing = document.getElementById('typingMsg');
+  if (typing) typing.remove();
+  p.chatHistory.push({ role: 'patient', text: response });
+  container.innerHTML += '<div class="chat-msg msg-patient">'+response+'</div>';
+  container.scrollTop = container.scrollHeight;
+  isAiLoading = false;
+  document.getElementById('chatSendBtn').disabled = false;
+  renderTabs(p);
+}
+
+// EXAM
+function renderExam(p) {
+  var pe = p.variant.physicalExam;
+  var d = p.discovered;
+  var systems = [
+    {key:'general',icon:'👤',name:'General Appearance'},
+    {key:'heent',icon:'👁️',name:'HEENT'},
+    {key:'neck',icon:'🦒',name:'Neck'},
+    {key:'cardiovascular',icon:'❤️',name:'Cardiovascular'},
+    {key:'pulmonary',icon:'🫁',name:'Pulmonary'},
+    {key:'abdominal',icon:'🔍',name:'Abdominal'},
+    {key:'extremities',icon:'🦵',name:'Extremities'},
+    {key:'neurologic',icon:'🧠',name:'Neurologic'},
+    {key:'skin',icon:'🩹',name:'Skin'}
+  ].filter(function(s){return pe[s.key]});
+  return '<div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Click each body system to examine. <strong>'+d.examSystems.length+'/'+systems.length+' examined.</strong></div>' +
+    systems.map(function(s) {
+      var done = d.examSystems.includes(s.key);
+      var finding = pe[s.key];
+      var isAbn = finding && !/(normal|clear|soft|supple|no |denies|unremarkable|2\+ pulses|alert and oriented|moist)/i.test(finding);
+      return '<div class="exam-system '+(done?'examined':'')+'" '+(done?'':'onclick="examineSystem(\''+s.key+'\')"')+'>' +
+        '<div class="sys-icon">'+s.icon+'</div>' +
+        '<div style="flex:1"><div class="sys-name">'+s.name+'</div>'+(done?'<div class="sys-finding">'+finding+'</div>':'')+'</div>' +
+        (done ? '<span class="sys-badge '+(isAbn?'abnormal':'normal')+'">'+(isAbn?'ABNORMAL':'Normal')+'</span>' : '<span style="font-size:11px;color:var(--text-muted)">Tap to examine →</span>') +
+      '</div>';
+    }).join('');
+}
+function examineSystem(key) {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p || p.discovered.examSystems.includes(key)) return;
+  p.discovered.examSystems.push(key);
+  switchTab('exam');
+}
+
+// LABS
+function renderLabs(p) {
+  var d = p.discovered;
+  var html = '';
+  if (d.labsReady.length > 0) {
+    var matched = p.variant.diagnostics.labs.filter(function(l){return d.labsReady.some(function(id){return l.matchIds && l.matchIds.includes(id)})});
+    if (matched.length > 0) {
+      html += '<div class="emr-section"><div class="emr-section-title">Results</div><table class="lab-table"><thead><tr><th>Test</th><th>Value</th><th>Reference</th><th>Flag</th></tr></thead><tbody>';
+      matched.forEach(function(l) {
+        var flag = l.status==='critical'?'C':l.status==='abnormal'?'H':'';
+        html += '<tr class="'+l.status+'"><td>'+l.test+'</td><td><strong>'+l.value+'</strong> '+l.unit+'</td><td>'+l.reference+'</td><td>'+(flag?'<span class="lab-flag '+flag+'">'+flag+'</span>':'')+'</td></tr>';
+        html += '<tr><td colspan="4" style="font-size:11px;color:var(--text-muted);padding:2px 8px 8px;border-bottom:1px solid var(--border)">'+l.interpretation+'</td></tr>';
+      });
+      html += '</tbody></table></div>';
+    }
+    var unmatched = d.labsReady.filter(function(id){return !p.variant.diagnostics.labs.some(function(l){return l.matchIds && l.matchIds.includes(id)})});
+    if (unmatched.length > 0) {
+      html += '<div class="emr-section"><div class="emr-section-title">Additional Results</div><div style="font-size:12px;color:var(--success);padding:8px;background:var(--success-light);border-radius:6px">' +
+        unmatched.map(function(id){var lab=ORDERABLE_LABS.find(function(l){return l.id===id});return lab?lab.name:id}).join(', ') + ' — all within normal limits</div></div>';
+    }
+  }
+  var pending = d.labsOrdered.filter(function(id){return !d.labsReady.includes(id)});
+  if (pending.length > 0) {
+    html += '<div class="processing"><span class="spinner"></span>Processing: '+pending.map(function(id){var lab=ORDERABLE_LABS.find(function(l){return l.id===id});return lab?lab.name:id}).join(', ')+'</div>';
+  }
+  var groups = {};
+  ORDERABLE_LABS.forEach(function(l){if(!groups[l.group])groups[l.group]=[];groups[l.group].push(l)});
+  html += '<div class="order-section"><h4>🧪 Order Labs</h4>';
+  Object.keys(groups).forEach(function(group) {
+    html += '<div class="order-group-label">'+group+'</div><div class="order-grid">';
+    groups[group].forEach(function(l) {
+      var ordered = d.labsOrdered.includes(l.id);
+      html += '<label class="order-item '+(ordered?'ordered':'')+'"><input type="checkbox" name="lab" value="'+l.id+'" '+(ordered?'disabled checked':'')+'> '+l.name+'</label>';
+    });
+    html += '</div>';
+  });
+  html += '<button class="btn btn-primary btn-sm submit-orders" onclick="submitLabOrders()">Submit Lab Orders</button></div>';
+  return html;
+}
+
+function submitLabOrders() {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p) return;
+  var n = 0;
+  document.querySelectorAll('input[name="lab"]:checked').forEach(function(cb) {
+    if (!p.discovered.labsOrdered.includes(cb.value)) {
+      p.discovered.labsOrdered.push(cb.value); n++;
+      setTimeout(function() {
+        p.discovered.labsReady.push(cb.value);
+        if (selectedPatientId===p.id && currentTab==='labs') switchTab('labs');
+        renderTabs(p);
+      }, 3000 + Math.random()*3000);
+    }
+  });
+  if (n > 0) { p.status='labs-pending'; renderBoard(); showToast(n+' lab order(s) submitted','success'); }
+  switchTab('labs');
+}
+
+// IMAGING
+function renderImaging(p) {
+  var d = p.discovered;
+  var html = '';
+  if (d.imagingReady.includes('ecg')) {
+    var ecg = p.variant.diagnostics.ecg;
+    html += '<div class="ecg-findings"><h4>📈 12-Lead ECG</h4>'+ecg.findings.map(function(f){return '<div class="ecg-finding-item">'+f+'</div>'}).join('')+'<div class="ecg-interpretation">Interpretation: '+ecg.interpretation+'</div></div><br>';
+  }
+  d.imagingReady.filter(function(id){return id!=='ecg'}).forEach(function(id) {
+    var match = p.variant.diagnostics.imaging.find(function(img){return img.matchIds && img.matchIds.includes(id)});
+    if (match) {
+      html += '<div class="imaging-card"><h4>📷 '+match.study+'</h4><p><strong>Findings:</strong> '+match.findings+'</p><p><strong>Impression:</strong> <span style="color:'+(match.critical?'var(--danger)':'var(--text)')+';font-weight:600">'+match.impression+'</span></p></div>';
+    } else {
+      var name = ORDERABLE_IMAGING.find(function(i){return i.id===id});
+      html += '<div class="imaging-card"><h4>📷 '+(name?name.name:id)+'</h4><p><strong>Impression:</strong> <span style="color:var(--success)">No acute findings</span></p></div>';
+    }
+  });
+  var pending = d.imagingOrdered.filter(function(id){return !d.imagingReady.includes(id)});
+  if (pending.length > 0) html += '<div class="processing"><span class="spinner"></span>Processing: '+pending.map(function(id){var i=ORDERABLE_IMAGING.find(function(x){return x.id===id});return i?i.name:id}).join(', ')+'</div>';
+  var groups = {};
+  ORDERABLE_IMAGING.forEach(function(i){if(!groups[i.group])groups[i.group]=[];groups[i.group].push(i)});
+  html += '<div class="order-section"><h4>📷 Order Imaging</h4>';
+  Object.keys(groups).forEach(function(group) {
+    html += '<div class="order-group-label">'+group+'</div><div class="order-grid">';
+    groups[group].forEach(function(i) {
+      var ordered = d.imagingOrdered.includes(i.id);
+      html += '<label class="order-item '+(ordered?'ordered':'')+'"><input type="checkbox" name="img" value="'+i.id+'" '+(ordered?'disabled checked':'')+'> '+i.name+'</label>';
+    });
+    html += '</div>';
+  });
+  html += '<button class="btn btn-primary btn-sm submit-orders" onclick="submitImagingOrders()">Submit Imaging Orders</button></div>';
+  return html;
+}
+
+function submitImagingOrders() {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p) return;
+  var n = 0;
+  document.querySelectorAll('input[name="img"]:checked').forEach(function(cb) {
+    if (!p.discovered.imagingOrdered.includes(cb.value)) {
+      p.discovered.imagingOrdered.push(cb.value); n++;
+      var delay = ['ecg','pocus-cardiac','pocus-lung','pocus-fast','pocus-aorta'].includes(cb.value) ? 2000 : 5000 + Math.random()*4000;
+      setTimeout(function() {
+        p.discovered.imagingReady.push(cb.value);
+        if (selectedPatientId===p.id && currentTab==='imaging') switchTab('imaging');
+        renderTabs(p);
+      }, delay);
+    }
+  });
+  if (n > 0) showToast(n+' imaging order(s) submitted','success');
+  switchTab('imaging');
+}
+
+// TEACHING
+function renderTeaching(p) {
+  if (!p.discovered.dispositioned) {
+    return '<div class="locked-state"><div class="lock-icon">🔒</div><h4>Teaching Points Locked</h4><p>Complete your workup and make a disposition decision to unlock teaching, expert differential, and must-not-miss diagnoses.</p></div>';
+  }
+  var t = p.variant.teaching;
+  var colors = ['var(--primary)','var(--accent)','var(--warning)','#8B5CF6','var(--text-muted)'];
+  var html = '';
+  if (t.expertApproach && t.expertApproach.differentialWithProbabilities) {
+    html += '<div class="emr-section"><div class="emr-section-title">Expert Differential Diagnosis</div>';
+    t.expertApproach.differentialWithProbabilities.forEach(function(d,i) {
+      html += '<div class="ddx-bar"><div class="ddx-bar-label"><span>'+d.diagnosis+'</span><span>'+d.probability+'%</span></div><div class="ddx-bar-track"><div class="ddx-bar-fill" style="width:'+d.probability+'%;background:'+colors[i%colors.length]+'"></div></div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">'+d.reasoning+'</div></div>';
+    });
+    html += '</div>';
+  }
+  html += '<div class="teaching-card" style="background:#f0f9ff;border-color:#bae6fd"><h4 style="color:var(--primary)">Key Learning Points</h4>'+t.keyLearningPoints.map(function(x){return '<div class="teaching-item">'+x+'</div>'}).join('')+'</div>';
+  html += '<div class="teaching-card" style="background:#fef2f2;border-color:#fecaca"><h4 style="color:var(--danger)">Must-Not-Miss Diagnoses</h4>'+t.mustNotMiss.map(function(x){return '<div class="teaching-item must-not-miss-item">'+x+'</div>'}).join('')+'</div>';
+  html += '<div class="teaching-card" style="background:#fffbeb;border-color:#fde68a"><h4 style="color:#92400e">Common Pitfalls</h4>'+t.commonPitfalls.map(function(x){return '<div class="teaching-item pitfall-item">'+x+'</div>'}).join('')+'</div>';
+  html += '<div class="emr-section"><div class="emr-section-title">Correct Diagnosis</div><div style="font-size:16px;font-weight:700;color:var(--primary);padding:12px;background:var(--primary-light);border-radius:8px">'+p.variant.diagnosis+'</div></div>';
+  return html;
+}
+
+// DISPOSITION
+function openDisposition(type) {
+  dispoSelection = null;
+  document.getElementById('dispoTitle').textContent = type==='discharge'?'Discharge Patient':type==='admit'?'Admit Patient':'Transfer Patient';
+  var options = type==='discharge' ? [
+    {id:'home',icon:'🏠',label:'Discharge Home',desc:'Patient stable, follow up as outpatient'},
+    {id:'ama',icon:'⚠️',label:'AMA',desc:'Patient leaving against medical advice'}
+  ] : type==='admit' ? [
+    {id:'tele',icon:'📊',label:'Telemetry',desc:'Cardiac monitoring required'},
+    {id:'icu',icon:'🏥',label:'ICU',desc:'Critical care / close monitoring'},
+    {id:'floor',icon:'🛏️',label:'Medical Floor',desc:'General medicine admission'},
+    {id:'obs',icon:'⏱️',label:'Observation',desc:'23-hour observation status'}
+  ] : [
+    {id:'cath',icon:'❤️',label:'Cath Lab',desc:'Emergent cardiac catheterization'},
+    {id:'or',icon:'🔪',label:'Operating Room',desc:'Surgical intervention'},
+    {id:'xfer',icon:'🚑',label:'Outside Hospital',desc:'Transfer to higher level of care'}
+  ];
+  document.getElementById('dispoBody').innerHTML = options.map(function(o) {
+    return '<div class="dispo-option" onclick="selectDispo(this,\''+o.id+'\')"><div class="dispo-icon">'+o.icon+'</div><div><div class="dispo-label">'+o.label+'</div><div class="dispo-desc">'+o.desc+'</div></div></div>';
+  }).join('');
+  document.getElementById('dispoModal').classList.add('open');
+}
+function selectDispo(el, choice) {
+  document.querySelectorAll('.dispo-option').forEach(function(e){e.classList.remove('selected')});
+  el.classList.add('selected');
+  dispoSelection = choice;
+}
+function confirmDisposition() {
+  if (!dispoSelection) { showToast('Select a disposition','warning'); return; }
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p) return;
+  p.discovered.dispositioned = true;
+  p.status = ['tele','icu','floor','obs'].includes(dispoSelection) ? 'admitted' : 'discharged';
+  p.provider = p.status==='admitted' ? 'Admitted' : 'D/C';
+  closeDispoModal(); renderBoard(); switchTab('teaching');
+  showToast(p.name+' — disposition confirmed. Teaching unlocked!', 'success');
+}
+function closeDispoModal() { document.getElementById('dispoModal').classList.remove('open'); }
+
+// TOAST + CLOCK
+function showToast(msg, type) {
+  var c = document.getElementById('toastContainer');
+  var t = document.createElement('div');
+  t.className = 'toast ' + (type||'');
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(function(){t.remove()}, 3200);
+}
+function updateClock() {
+  var elapsed = Date.now() - shiftStartTime;
+  var simMin = Math.floor(elapsed / 1000) * 2;
+  var hours = 7 + Math.floor(simMin / 60);
+  var mins = simMin % 60;
+  var ampm = hours >= 12 ? 'PM' : 'AM';
+  var dh = hours > 12 ? hours - 12 : hours;
+  var day = Math.floor(hours / 24) + 1;
+  document.getElementById('simTime').textContent = String(dh).padStart(2,'0')+':'+String(mins).padStart(2,'0')+' '+ampm+' — Day '+day;
+}
+
+renderBoard();
+setInterval(updateClock, 5000);
+setInterval(renderBoard, 30000);
+updateClock();
+</script>
+</body>
+</html>
