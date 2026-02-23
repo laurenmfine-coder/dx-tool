@@ -704,7 +704,7 @@ function renderHistory(p) {
   return `
     <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Click each category to ask the patient. <strong>${asked}/7 categories explored.</strong></div>
     ${categories.map(c => `
-      <div class="discover-card ${d[c.key]?'revealed':''}" onclick="${d[c.key]?'':'revealHistory(\\''+c.key+'\\')'}">
+      <div class="discover-card ${d[c.key]?'revealed':''}" ${d[c.key]?'':`onclick="revealHistory('${c.key}')"`}>
         <div class="discover-icon">${c.icon}</div>
         <div style="flex:1">
           <div class="discover-title">${c.title}</div>
@@ -749,7 +749,7 @@ function renderExam(p) {
       const done = d.examSystems.includes(s.key);
       const finding = pe[s.key];
       const isAbnormal = finding && !/(normal|clear|soft|supple|no |denies|unremarkable|2\+ pulses|alert and oriented|moist)/i.test(finding);
-      return `<div class="exam-system ${done?'examined':''}" onclick="${done?'':'examineSystem(\\''+s.key+'\\')'}">
+      return `<div class="exam-system ${done?'examined':''}" ${done?'':`onclick="examineSystem('${s.key}')"`}>
         <div class="sys-icon">${s.icon}</div>
         <div style="flex:1">
           <div class="sys-name">${s.name}</div>
