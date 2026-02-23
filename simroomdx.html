@@ -274,6 +274,411 @@ body {
 .vital .v-value.critical { color: #EF4444; }
 .vital .v-value.warning { color: #F59E0B; }
 
+/* ─── ONBOARDING MODAL ─── */
+.onboard-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1100; animation: fade-in 0.3s;
+}
+.onboard-modal {
+  background: var(--sim-surface-2); border: 1px solid var(--sim-border);
+  border-radius: 20px; padding: 32px; max-width: 480px; width: 92%;
+  text-align: center;
+}
+.onboard-avatar {
+  width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px;
+  border: 3px solid #86EFAC;
+}
+.onboard-modal h2 { color: #86EFAC; font-family: var(--rdx-font-serif); margin-bottom: 8px; }
+.onboard-modal p { color: var(--sim-text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+.onboard-field { margin-bottom: 16px; text-align: left; }
+.onboard-field label { display: block; font-size: 12px; font-weight: 600; color: var(--sim-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.onboard-field input, .onboard-field select {
+  width: 100%; padding: 10px 14px; border-radius: 10px;
+  background: var(--sim-surface); border: 1px solid var(--sim-border);
+  color: var(--sim-text); font-size: 14px; font-family: var(--rdx-font);
+  outline: none; transition: border-color 0.2s;
+}
+.onboard-field input:focus, .onboard-field select:focus { border-color: var(--rdx-brand); }
+.onboard-field select option { background: var(--sim-surface); color: var(--sim-text); }
+.onboard-btn {
+  width: 100%; padding: 14px; background: linear-gradient(135deg, #22C55E, #16A34A);
+  color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700;
+  font-family: var(--rdx-font); cursor: pointer; transition: all 0.2s;
+}
+.onboard-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(34,197,94,0.4); }
+.onboard-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ─── AVATAR SCENE (immersive sim room) ─── */
+.avatar-scene {
+  background: linear-gradient(180deg, #040810 0%, #0A1628 30%, #0F1D35 60%, #162544 100%);
+  border-bottom: 1px solid rgba(40,116,166,0.25);
+  padding: 18px 16px 12px;
+  display: flex; align-items: flex-end; justify-content: center; gap: 28px;
+  flex-shrink: 0; min-height: 170px; position: relative;
+  overflow: hidden; perspective: 800px;
+}
+
+/* ── Canvas layers (particles + ECG) ── */
+.scene-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+
+/* ── Ambient lighting ── */
+.scene-ambient {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 150px at 50% 120%, rgba(40,116,166,0.10) 0%, transparent 100%),
+    radial-gradient(circle 90px at 90% 10%, rgba(239,68,68,0.04) 0%, transparent 100%),
+    radial-gradient(circle 120px at 8% 18%, rgba(34,197,94,0.03) 0%, transparent 100%);
+  animation: ambient-shift 12s ease-in-out infinite alternate;
+}
+@keyframes ambient-shift {
+  0% { opacity: 0.6; filter: hue-rotate(0deg); }
+  100% { opacity: 1; filter: hue-rotate(5deg); }
+}
+
+/* ── Scanline overlay ── */
+.scene-scanlines {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.025) 3px, rgba(0,0,0,0.025) 6px
+  );
+  animation: scanline-drift 30s linear infinite;
+}
+@keyframes scanline-drift { 0% { transform: translateY(0); } 100% { transform: translateY(120px); } }
+
+/* ── Floor reflection ── */
+.scene-floor {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+  background: linear-gradient(180deg, transparent 0%, rgba(40,116,166,0.03) 40%, rgba(40,116,166,0.07) 100%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── Monitor status panel (top-right) ── */
+.scene-monitor {
+  position: absolute; top: 8px; right: 12px; z-index: 5;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 9px; color: rgba(34,197,94,0.6); font-family: 'Courier New', monospace;
+  font-weight: 700; letter-spacing: 1.5px;
+}
+.monitor-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: #22C55E;
+  box-shadow: 0 0 4px #22C55E, 0 0 10px rgba(34,197,94,0.25);
+  animation: mon-beep 1.5s ease-in-out infinite;
+}
+@keyframes mon-beep {
+  0%,100% { opacity: 1; } 15% { opacity: 0.15; } 30% { opacity: 1; } 45% { opacity: 0.15; }
+}
+.monitor-text { animation: mon-flicker 5s ease-in-out infinite; }
+@keyframes mon-flicker { 0%,95%,100% { opacity: 0.6; } 96% { opacity: 0.2; } 97% { opacity: 0.7; } }
+
+/* ── Room label (top-left) ── */
+.scene-room-label {
+  position: absolute; top: 8px; left: 12px; z-index: 5;
+  font-size: 8px; color: rgba(148,163,184,0.3); font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase;
+}
+
+/* ── ECG Waveform (live) ── */
+.ecg-canvas {
+  position: absolute; top: 0; left: 0; width: 100%; height: 32px;
+  pointer-events: none; z-index: 2; opacity: 0.25;
+}
+
+/* ═══════ CONNECTION BEAM (you → target) ═══════ */
+.connection-svg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+}
+.beam-line {
+  stroke: rgba(40,116,166,0.3); stroke-width: 1.5; fill: none;
+  stroke-dasharray: 6 4; animation: beam-dash 1.5s linear infinite;
+  filter: url(#beam-glow);
+}
+@keyframes beam-dash { 0% { stroke-dashoffset: 20; } 100% { stroke-dashoffset: 0; } }
+.beam-dot {
+  fill: rgba(40,116,166,0.7); r: 2.5;
+}
+
+/* ═══════ RIPPLE SHOCKWAVE (on speak) ═══════ */
+.speak-ripple {
+  position: absolute; border-radius: 50%; pointer-events: none; z-index: 2;
+  border: 1.5px solid rgba(40,116,166,0.45);
+  animation: ripple-out 1.2s ease-out forwards;
+}
+@keyframes ripple-out {
+  0% { width: 30px; height: 30px; margin: -15px 0 0 -15px; opacity: 0.8; }
+  100% { width: 180px; height: 180px; margin: -90px 0 0 -90px; opacity: 0; }
+}
+
+/* ═══════ AVATAR CHARACTER ═══════ */
+.avatar-char {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; flex-shrink: 0; z-index: 3;
+  opacity: 0; transform: translateY(35px) scale(0.6) rotateX(15deg);
+  animation: char-enter 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+  cursor: pointer; transition: filter 0.3s;
+}
+.avatar-char:hover { filter: brightness(1.2); }
+.avatar-char:nth-child(2) { animation-delay: 0.12s; }
+.avatar-char:nth-child(3) { animation-delay: 0.24s; }
+.avatar-char:nth-child(4) { animation-delay: 0.36s; }
+.avatar-char:nth-child(5) { animation-delay: 0.48s; }
+.avatar-char:nth-child(6) { animation-delay: 0.60s; }
+.avatar-char:nth-child(7) { animation-delay: 0.72s; }
+.avatar-char:nth-child(8) { animation-delay: 0.84s; }
+@keyframes char-enter {
+  0%   { opacity: 0; transform: translateY(35px) scale(0.6) rotateX(15deg); }
+  50%  { opacity: 1; transform: translateY(-8px) scale(1.06) rotateX(-2deg); }
+  70%  { transform: translateY(3px) scale(0.97) rotateX(1deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0); }
+}
+.avatar-char.inactive { opacity: 0.15; filter: grayscale(0.95) brightness(0.5); transform: scale(0.75); }
+
+/* ── Avatar image wrapper ── */
+.avatar-img-wrap { position: relative; width: 62px; height: 62px; }
+.avatar-char img {
+  width: 62px; height: 62px; border-radius: 50%;
+  border: 2.5px solid rgba(148,163,184,0.2);
+  position: relative; z-index: 2;
+  animation: idle-float 5s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.avatar-char:nth-child(odd) img  { animation-delay: 0s; }
+.avatar-char:nth-child(even) img { animation-delay: 2.5s; }
+@keyframes idle-float {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(0.5deg); }
+  50% { transform: translateY(-3.5px) rotate(0deg); }
+  75% { transform: translateY(-1.5px) rotate(-0.5deg); }
+}
+
+/* ── Spinning status ring ── */
+.avatar-ring {
+  position: absolute; inset: -5px; border-radius: 50%; z-index: 1;
+  border: 2px solid transparent; transition: all 0.4s;
+}
+
+/* ── Glow aura ── */
+.avatar-glow {
+  position: absolute; inset: -10px; border-radius: 50%;
+  background: transparent; z-index: 0; transition: all 0.5s;
+}
+
+/* ── Mouth animation (speaking overlay) ── */
+.avatar-mouth {
+  position: absolute; bottom: 16px; left: 50%; z-index: 3;
+  transform: translateX(-50%);
+  width: 12px; height: 3px; border-radius: 50%;
+  background: rgba(0,0,0,0.45);
+  opacity: 0; transition: opacity 0.15s;
+}
+.avatar-char.speaking .avatar-mouth {
+  opacity: 0.8;
+  animation: mouth-talk 0.25s ease-in-out infinite alternate;
+}
+@keyframes mouth-talk {
+  0%   { width: 10px; height: 2px; border-radius: 50%; }
+  33%  { width: 13px; height: 7px; border-radius: 50%; }
+  66%  { width: 8px;  height: 5px; border-radius: 50%; }
+  100% { width: 11px; height: 3px; border-radius: 50%; }
+}
+
+/* ── Floor shadow ── */
+.avatar-shadow {
+  width: 46px; height: 10px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, transparent 70%);
+  margin-top: 3px; transition: all 0.4s;
+  animation: shadow-float 5s ease-in-out infinite;
+}
+.avatar-char:nth-child(odd)  .avatar-shadow { animation-delay: 0s; }
+.avatar-char:nth-child(even) .avatar-shadow { animation-delay: 2.5s; }
+@keyframes shadow-float {
+  0%,100% { transform: scaleX(1); opacity: 0.45; }
+  50%     { transform: scaleX(0.85); opacity: 0.25; }
+}
+
+/* ── Sound wave bars ── */
+.sound-waves {
+  display: flex; gap: 2px; align-items: flex-end;
+  height: 14px; margin-top: 2px; opacity: 0; transition: opacity 0.3s;
+}
+.avatar-char.speaking .sound-waves { opacity: 1; }
+.sound-wave-bar {
+  width: 3px; border-radius: 2px; background: var(--rdx-brand);
+}
+.sound-wave-bar:nth-child(1) { height: 4px;  animation: swave 0.45s ease-in-out infinite alternate; animation-delay: 0s; }
+.sound-wave-bar:nth-child(2) { height: 9px;  animation: swave 0.5s  ease-in-out infinite alternate; animation-delay: 0.07s; }
+.sound-wave-bar:nth-child(3) { height: 14px; animation: swave 0.4s  ease-in-out infinite alternate; animation-delay: 0.14s; }
+.sound-wave-bar:nth-child(4) { height: 7px;  animation: swave 0.55s ease-in-out infinite alternate; animation-delay: 0.21s; }
+.sound-wave-bar:nth-child(5) { height: 11px; animation: swave 0.42s ease-in-out infinite alternate; animation-delay: 0.10s; }
+@keyframes swave { 0% { transform: scaleY(0.15); } 100% { transform: scaleY(1); } }
+
+/* ═══════ SPEAKING STATE ═══════ */
+.avatar-char.speaking img {
+  border-color: var(--rdx-brand);
+  box-shadow: 0 0 28px rgba(40,116,166,0.6), 0 0 56px rgba(40,116,166,0.15);
+  animation: speak-bob 0.45s ease-in-out infinite alternate;
+  transform: scale(1.12);
+}
+@keyframes speak-bob { 0% { transform: scale(1.10); } 100% { transform: scale(1.14); } }
+
+.avatar-char.speaking .avatar-ring {
+  border-color: var(--rdx-brand); border-top-color: transparent;
+  animation: ring-spin 2.5s linear infinite;
+}
+@keyframes ring-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.avatar-char.speaking .avatar-glow {
+  background: radial-gradient(circle, rgba(40,116,166,0.3) 0%, transparent 60%);
+  animation: glow-throb 0.9s ease-in-out infinite;
+}
+@keyframes glow-throb {
+  0%,100% { transform: scale(1); opacity: 0.4; }
+  50%     { transform: scale(1.5); opacity: 1; }
+}
+.avatar-char.speaking .avatar-shadow {
+  transform: scaleX(1.35); opacity: 0.8;
+  background: radial-gradient(ellipse, rgba(40,116,166,0.35) 0%, transparent 70%);
+  animation: none;
+}
+
+/* ── Per-character speaking colours ── */
+.avatar-char.patient.speaking img   { border-color:#3B82F6; box-shadow:0 0 28px rgba(59,130,246,.6),0 0 56px rgba(59,130,246,.15); }
+.avatar-char.patient.speaking .avatar-ring  { border-color:#3B82F6; border-top-color:transparent; }
+.avatar-char.patient.speaking .avatar-glow  { background:radial-gradient(circle,rgba(59,130,246,.3) 0%,transparent 60%); }
+.avatar-char.patient.speaking .sound-wave-bar { background:#3B82F6; }
+.avatar-char.patient.speaking .avatar-shadow  { background:radial-gradient(ellipse,rgba(59,130,246,.35) 0%,transparent 70%); }
+
+.avatar-char.attending.speaking img  { border-color:#22C55E; box-shadow:0 0 28px rgba(34,197,94,.6),0 0 56px rgba(34,197,94,.15); }
+.avatar-char.attending.speaking .avatar-ring { border-color:#22C55E; border-top-color:transparent; }
+.avatar-char.attending.speaking .avatar-glow { background:radial-gradient(circle,rgba(34,197,94,.3) 0%,transparent 60%); }
+.avatar-char.attending.speaking .sound-wave-bar { background:#22C55E; }
+.avatar-char.attending.speaking .avatar-shadow { background:radial-gradient(ellipse,rgba(34,197,94,.35) 0%,transparent 70%); }
+
+.avatar-char.nurse.speaking img     { border-color:#EAB308; box-shadow:0 0 28px rgba(234,179,8,.6),0 0 56px rgba(234,179,8,.15); }
+.avatar-char.nurse.speaking .avatar-ring    { border-color:#EAB308; border-top-color:transparent; }
+.avatar-char.nurse.speaking .avatar-glow    { background:radial-gradient(circle,rgba(234,179,8,.3) 0%,transparent 60%); }
+.avatar-char.nurse.speaking .sound-wave-bar { background:#EAB308; }
+.avatar-char.nurse.speaking .avatar-shadow  { background:radial-gradient(ellipse,rgba(234,179,8,.35) 0%,transparent 70%); }
+
+.avatar-char.family.speaking img    { border-color:#8B5CF6; box-shadow:0 0 28px rgba(139,92,246,.6),0 0 56px rgba(139,92,246,.15); }
+.avatar-char.family.speaking .avatar-ring   { border-color:#8B5CF6; border-top-color:transparent; }
+.avatar-char.family.speaking .avatar-glow   { background:radial-gradient(circle,rgba(139,92,246,.3) 0%,transparent 60%); }
+.avatar-char.family.speaking .sound-wave-bar { background:#8B5CF6; }
+.avatar-char.family.speaking .avatar-shadow { background:radial-gradient(ellipse,rgba(139,92,246,.35) 0%,transparent 70%); }
+
+.avatar-char.consultant.speaking img { border-color:#F97316; box-shadow:0 0 28px rgba(249,115,22,.6),0 0 56px rgba(249,115,22,.15); }
+.avatar-char.consultant.speaking .avatar-ring { border-color:#F97316; border-top-color:transparent; }
+.avatar-char.consultant.speaking .avatar-glow { background:radial-gradient(circle,rgba(249,115,22,.3) 0%,transparent 60%); }
+.avatar-char.consultant.speaking .sound-wave-bar { background:#F97316; }
+.avatar-char.consultant.speaking .avatar-shadow { background:radial-gradient(ellipse,rgba(249,115,22,.35) 0%,transparent 70%); }
+
+.avatar-char.pharmacist.speaking img { border-color:#EC4899; box-shadow:0 0 28px rgba(236,72,153,.6),0 0 56px rgba(236,72,153,.15); }
+.avatar-char.pharmacist.speaking .avatar-ring { border-color:#EC4899; border-top-color:transparent; }
+.avatar-char.pharmacist.speaking .avatar-glow { background:radial-gradient(circle,rgba(236,72,153,.3) 0%,transparent 60%); }
+.avatar-char.pharmacist.speaking .sound-wave-bar { background:#EC4899; }
+.avatar-char.pharmacist.speaking .avatar-shadow { background:radial-gradient(ellipse,rgba(236,72,153,.35) 0%,transparent 70%); }
+
+.avatar-char.you.speaking img      { border-color:#94A3B8; box-shadow:0 0 24px rgba(148,163,184,.5); }
+.avatar-char.you.speaking .avatar-ring     { border-color:#94A3B8; border-top-color:transparent; }
+.avatar-char.you.speaking .avatar-glow     { background:radial-gradient(circle,rgba(148,163,184,.2) 0%,transparent 60%); }
+.avatar-char.you.speaking .sound-wave-bar  { background:#94A3B8; }
+
+/* ═══════ EMOTION BADGES ═══════ */
+.emotion-badge {
+  position: absolute; top: -5px; right: -5px; z-index: 5;
+  font-size: 17px; line-height: 1;
+  animation: emo-pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+@keyframes emo-pop {
+  from { transform: scale(0) rotate(-30deg); }
+  to   { transform: scale(1) rotate(0); }
+}
+.avatar-char.patient .emotion-badge {
+  animation: emo-pop 0.5s cubic-bezier(0.34,1.56,0.64,1), emo-pain 2.5s ease-in-out infinite 0.5s;
+}
+@keyframes emo-pain {
+  0%,100% { transform: scale(1) rotate(0); }
+  50%     { transform: scale(1.25) rotate(8deg); }
+}
+
+/* ═══════ ADDRESSED INDICATOR ═══════ */
+.avatar-char.addressed .avatar-ring {
+  border: 2px dashed rgba(40,116,166,0.45);
+  animation: addr-spin 10s linear infinite;
+}
+@keyframes addr-spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+.avatar-char.addressed::before {
+  content: '\u25BC'; position: absolute; bottom: -14px; left: 50%;
+  transform: translateX(-50%); color: var(--rdx-brand); font-size: 8px;
+  animation: addr-bob 1.4s ease-in-out infinite;
+  z-index: 4; text-shadow: 0 0 8px rgba(40,116,166,0.5);
+  filter: drop-shadow(0 0 3px rgba(40,116,166,0.4));
+}
+@keyframes addr-bob {
+  0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+  50%     { transform: translateX(-50%) translateY(-5px); opacity: 1; }
+}
+
+/* ═══════ LABELS ═══════ */
+.avatar-char .char-label {
+  font-size: 9px; color: rgba(148,163,184,0.4); margin-top: 2px;
+  text-align: center; white-space: nowrap; font-weight: 600;
+  transition: all 0.3s;
+}
+.avatar-char.speaking .char-label  { color: #F1F5F9; text-shadow: 0 0 12px rgba(40,116,166,0.6); }
+.avatar-char.addressed .char-label { color: rgba(40,116,166,0.75); }
+
+/* ═══════ SPEECH BUBBLE ═══════ */
+.speech-bubble {
+  position: absolute; bottom: calc(100% + 16px); left: 50%;
+  transform: translateX(-50%); max-width: 260px; min-width: 100px;
+  padding: 9px 13px; border-radius: 14px 14px 14px 4px;
+  font-size: 12px; line-height: 1.45;
+  opacity: 0; transform: translateX(-50%) translateY(14px) scale(0.8);
+  transition: all 0.45s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none; z-index: 10;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+}
+.speech-bubble.visible { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+.speech-bubble::after {
+  content: ''; position: absolute; top: 100%; left: 20px;
+  border: 7px solid transparent; border-top-color: inherit;
+}
+.bubble-text { display: block; }
+.speech-bubble.typing .bubble-dots { display: flex; }
+.speech-bubble.typing .bubble-text { display: none; }
+.bubble-dots { display: none; gap: 5px; padding: 3px 4px; }
+.bubble-dots span {
+  width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.25;
+  animation: bdot 1.2s ease-in-out infinite;
+}
+.bubble-dots span:nth-child(2) { animation-delay: 0.15s; }
+.bubble-dots span:nth-child(3) { animation-delay: 0.30s; }
+@keyframes bdot {
+  0%,60%,100% { transform: translateY(0); opacity: 0.2; }
+  30%         { transform: translateY(-7px); opacity: 0.9; }
+}
+
+/* ── Bubble colours ── */
+.avatar-char.patient .speech-bubble     { background:rgba(219,234,254,.95); color:#1E40AF; border:1px solid #93C5FD; }
+.avatar-char.patient .speech-bubble::after     { border-top-color:rgba(219,234,254,.95); }
+.avatar-char.attending .speech-bubble   { background:rgba(220,252,231,.95); color:#166534; border:1px solid #86EFAC; }
+.avatar-char.attending .speech-bubble::after   { border-top-color:rgba(220,252,231,.95); }
+.avatar-char.nurse .speech-bubble       { background:rgba(254,249,195,.95); color:#854D0E; border:1px solid #FDE047; }
+.avatar-char.nurse .speech-bubble::after       { border-top-color:rgba(254,249,195,.95); }
+.avatar-char.family .speech-bubble      { background:rgba(237,233,254,.95); color:#5B21B6; border:1px solid #C4B5FD; }
+.avatar-char.family .speech-bubble::after      { border-top-color:rgba(237,233,254,.95); }
+.avatar-char.consultant .speech-bubble  { background:rgba(255,237,213,.95); color:#9A3412; border:1px solid #FDBA74; }
+.avatar-char.consultant .speech-bubble::after  { border-top-color:rgba(255,237,213,.95); }
+.avatar-char.pharmacist .speech-bubble  { background:rgba(252,231,243,.95); color:#9D174D; border:1px solid #F9A8D4; }
+.avatar-char.pharmacist .speech-bubble::after  { border-top-color:rgba(252,231,243,.95); }
+.avatar-char.you .speech-bubble         { background:rgba(241,245,249,.95); color:#334155; border:1px solid #CBD5E1; border-radius:14px 14px 4px 14px; }
+.avatar-char.you .speech-bubble::after         { border-top-color:rgba(241,245,249,.95); left:auto; right:20px; }
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -285,6 +690,15 @@ body {
   .sim-logo span { display: none; }
   .msg { max-width: 92%; }
   .chat-area { padding: 10px; }
+  .avatar-scene { gap: 14px; padding: 14px 8px 10px; min-height: 140px; }
+  .avatar-img-wrap { width: 46px; height: 46px; }
+  .avatar-char img { width: 46px; height: 46px; }
+  .speech-bubble { max-width: 170px; font-size: 11px; padding: 7px 10px; }
+  .sound-wave-bar { width: 2px; }
+  .emotion-badge { font-size: 13px; }
+  .onboard-modal { padding: 24px 20px; }
+  .scene-monitor { font-size: 8px; }
+  .avatar-char { gap: 0; }
 }
 </style>
 </head>
@@ -375,6 +789,37 @@ body {
 </div>
 </div>
 
+<!-- ─── ONBOARDING MODAL (shown after setup, attending introduces themselves) ─── -->
+<div class="onboard-overlay" id="onboardModal" style="display:none;">
+<div class="onboard-modal">
+  <img class="onboard-avatar" src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrChenAttending&backgroundColor=DCFCE7" alt="Dr. Chen">
+  <h2>🩺 Welcome to the Sim Room</h2>
+  <p>Hi there! I'm <strong>Dr. Chen</strong>, the attending on shift today. I'll be here to guide you through this case and ask you some questions along the way.</p>
+  <p style="margin-bottom:24px;">Before we get started, tell me a little about yourself:</p>
+  <div class="onboard-field">
+    <label for="learnerName">Your First Name</label>
+    <input type="text" id="learnerName" placeholder="e.g., Sarah" maxlength="30" autocomplete="given-name">
+  </div>
+  <div class="onboard-field">
+    <label for="learnerLevel">Training Level</label>
+    <select id="learnerLevel">
+      <option value="" disabled selected>Select your level...</option>
+      <option value="m1">M1 (1st Year Medical Student)</option>
+      <option value="m2">M2 (2nd Year Medical Student)</option>
+      <option value="m3">M3 (3rd Year Medical Student)</option>
+      <option value="m4">M4 (4th Year Medical Student)</option>
+      <option value="intern">Intern (PGY-1)</option>
+      <option value="resident">Resident (PGY-2+)</option>
+      <option value="fellow">Fellow</option>
+      <option value="pa_student">PA Student</option>
+      <option value="np_student">NP Student</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <button class="onboard-btn" id="onboardBtn" onclick="completeOnboarding()" disabled>Let's Go! →</button>
+</div>
+</div>
+
 <!-- ─── MAIN INTERFACE (inside wrapper for nav offset) ─── -->
 <div class="sim-wrapper">
 
@@ -400,6 +845,25 @@ body {
   <div class="vital"><span class="v-label">ECG</span> <span class="v-value critical" id="vECG">ST↑ V1-V4</span></div>
   <div class="vital"><span class="v-label">Trop</span> <span class="v-value" id="vTrop">Pending</span></div>
 </div>
+
+<!-- Avatar Scene — immersive character visualization with canvas effects -->
+<div class="avatar-scene" id="avatarScene">
+  <canvas class="scene-canvas" id="particleCanvas"></canvas>
+  <canvas class="ecg-canvas" id="ecgCanvas"></canvas>
+  <svg class="connection-svg" id="connectionSvg">
+    <defs>
+      <filter id="beam-glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <line class="beam-line" id="beamLine" x1="0" y1="0" x2="0" y2="0" style="display:none"/>
+    <circle class="beam-dot" id="beamDot" cx="0" cy="0" style="display:none"/>
+  </svg>
+  <div class="scene-ambient"></div>
+  <div class="scene-scanlines"></div>
+  <div class="scene-floor"></div>
+  <div class="scene-room-label">SIM BAY 01</div>
+  <div class="scene-monitor"><div class="monitor-dot"></div><span class="monitor-text">ACTIVE</span></div>
+</div>
+
 
 <div class="char-strip" id="charStrip"></div>
 
@@ -768,7 +1232,7 @@ const CHARACTERS = {
     id: 'patient', name: 'Mr. Johnson', role: 'Patient', icon: '🛏️',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=RobertJohnson&backgroundColor=DBEAFE',
     cssClass: 'patient',
-    voice: { puter: 'Matthew', webSpeech: { name: 'Alex', pitch: 0.85, rate: 0.9 } },
+    voice: { puter: 'Matthew', webSpeech: { name: 'Alex', fallback: 'male', pitch: 0.85, rate: 0.9 } },
     getSystemPrompt: function(caseData) {
       var m = caseData.mechanism || {};
       var symptomMech = (m.pathophysiology || []).filter(function(p) {
@@ -782,10 +1246,12 @@ const CHARACTERS = {
     id: 'attending', name: 'Dr. Chen', role: 'Attending Physician', icon: '🩺',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=DrChenAttending&backgroundColor=DCFCE7',
     cssClass: 'attending',
-    voice: { puter: 'Amy', webSpeech: { name: 'Samantha', pitch: 1.05, rate: 1.0 } },
+    voice: { puter: 'Amy', webSpeech: { name: 'Samantha', fallback: 'female', pitch: 1.05, rate: 1.0 } },
     getSystemPrompt: function(caseData) {
       var m = caseData.mechanism || {};
-      return 'You are Dr. Chen, an experienced attending physician supervising a medical student. Your teaching style is Socratic — you ask probing WHY questions to build deep understanding.\n\nCASE: ' + caseData.brief + '\n\nYOUR DEEP KNOWLEDGE (use to craft teaching questions — NEVER lecture. Ask questions that lead the student to discover these concepts):\n\nPATHOPHYSIOLOGY CHAIN:\n' + (m.pathophysiology || []).map(function(p, i) { return (i+1) + '. ' + p; }).join('\n') + '\n\nANATOMY CONNECTIONS:\n' + (m.anatomy || []).map(function(a, i) { return (i+1) + '. ' + a; }).join('\n') + '\n\nPHARMACOLOGY RATIONALE:\n' + (m.pharmacology || []).map(function(p, i) { return (i+1) + '. ' + p; }).join('\n') + '\n\nCLINICAL REASONING PEARLS:\n' + (m.clinicalReasoning || []).map(function(c, i) { return (i+1) + '. ' + c; }).join('\n') + '\n\nTEACHING METHOD — CRITICAL:\n- Ask WHY questions connecting pathophysiology to clinical findings: "Why is this patient diaphoretic?" "What is the mechanism behind that symptom?"\n- When student gives a correct answer, push deeper: "Good — now WHY does that happen at the cellular level?"\n- Connect pharmacology to mechanism: "You ordered that medication — what is it actually doing at the receptor level?"\n- Link anatomy to presentation: "Which anatomic structure explains that finding?"\n- If student orders a test, ask WHY: "What are you looking for? How will the result change your management?"\n- If student misses a concept, hint through questions, do not tell them the answer\n- Weave in 1-2 mechanism questions naturally per exchange\n- Use positive reinforcement: "Exactly right, Doctor." "Good clinical reasoning."\n- Keep responses to 2-4 sentences. Ask ONE probing question per response.\n- Address the student as "Doctor"';
+      var addr = getLearnerAddress();
+      var levelDesc = getLearnerDescription();
+      return 'You are Dr. Chen, an experienced attending physician supervising ' + addr + ', a ' + levelDesc + ' on their Emergency Medicine rotation. Your teaching style is Socratic — you ask probing WHY questions to build deep understanding.\n\nIMPORTANT: Address the learner as "' + addr + '" (never "Doctor" unless they are a resident, fellow, or intern). You have already introduced yourself. Do not re-introduce yourself.\n\nCASE: ' + caseData.brief + '\n\nYOUR DEEP KNOWLEDGE (use to craft teaching questions — NEVER lecture. Ask questions that lead the student to discover these concepts):\n\nPATHOPHYSIOLOGY CHAIN:\n' + (m.pathophysiology || []).map(function(p, i) { return (i+1) + '. ' + p; }).join('\n') + '\n\nANATOMY CONNECTIONS:\n' + (m.anatomy || []).map(function(a, i) { return (i+1) + '. ' + a; }).join('\n') + '\n\nPHARMACOLOGY RATIONALE:\n' + (m.pharmacology || []).map(function(p, i) { return (i+1) + '. ' + p; }).join('\n') + '\n\nCLINICAL REASONING PEARLS:\n' + (m.clinicalReasoning || []).map(function(c, i) { return (i+1) + '. ' + c; }).join('\n') + '\n\nTEACHING METHOD — CRITICAL:\n- Ask WHY questions connecting pathophysiology to clinical findings: "Why is this patient diaphoretic?" "What is the mechanism behind that symptom?"\n- When student gives a correct answer, push deeper: "Good — now WHY does that happen at the cellular level?"\n- Connect pharmacology to mechanism: "You ordered that medication — what is it actually doing at the receptor level?"\n- Link anatomy to presentation: "Which anatomic structure explains that finding?"\n- If student orders a test, ask WHY: "What are you looking for? How will the result change your management?"\n- If student misses a concept, hint through questions, do not tell them the answer\n- Weave in 1-2 mechanism questions naturally per exchange\n- Use positive reinforcement: "Exactly right." "Good clinical reasoning, ' + addr + '."\n- Calibrate complexity to their level (' + levelDesc + '): simpler concepts for M1-M2, more nuanced for residents/fellows\n- Keep responses to 2-4 sentences. Ask ONE probing question per response.\n- Address the learner as "' + addr + '"';
     }
   },
 
@@ -793,10 +1259,11 @@ const CHARACTERS = {
     id: 'nurse', name: 'Sarah, RN', role: 'Bedside Nurse', icon: '👩‍⚕️',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=NurseRamirez&backgroundColor=FEF9C3',
     cssClass: 'nurse',
-    voice: { puter: 'Kendra', webSpeech: { name: 'Victoria', pitch: 1.1, rate: 1.05 } },
+    voice: { puter: 'Kendra', webSpeech: { name: 'Victoria', fallback: 'female', pitch: 1.1, rate: 1.05 } },
     getSystemPrompt: function(caseData) {
       var m = caseData.mechanism || {};
-      return 'You are Sarah Ramirez, RN, an experienced emergency nurse caring for ' + caseData.patient.name + ', ' + caseData.patient.age + '.\n\nCASE: ' + caseData.brief + '\n\nMEDICATION KNOWLEDGE:\n' + (m.pharmacology || []).slice(0, 4).map(function(p) { return '- ' + p; }).join('\n') + '\n\nMONITORING & REASONING:\n' + (m.clinicalReasoning || []).slice(0, 3).map(function(c) { return '- ' + c; }).join('\n') + '\n\nSTYLE:\n- Efficient, clinical, helpful. Use medical shorthand naturally.\n- Report vitals and changes proactively\n- If student orders something concerning, flag it: "Just to confirm, doctor?"\n- Anticipate needs: "I can get that drawn" or "Want me to set up for that?"\n- If asked about a medication, explain from a nursing perspective\n- Reinforce learning with practical questions: "Loading dose or maintenance?" "Any allergies before I hang this?"\n- Keep responses to 1-3 sentences.';
+      var addr = getLearnerAddress();
+      return 'You are Sarah Ramirez, RN, an experienced emergency nurse caring for ' + caseData.patient.name + ', ' + caseData.patient.age + '.\n\nThe learner you are working with is ' + addr + ', a ' + getLearnerDescription() + '. Address them as "' + addr + '".\n\nCASE: ' + caseData.brief + '\n\nMEDICATION KNOWLEDGE:\n' + (m.pharmacology || []).slice(0, 4).map(function(p) { return '- ' + p; }).join('\n') + '\n\nMONITORING & REASONING:\n' + (m.clinicalReasoning || []).slice(0, 3).map(function(c) { return '- ' + c; }).join('\n') + '\n\nSTYLE:\n- Efficient, clinical, helpful. Use medical shorthand naturally.\n- Report vitals and changes proactively\n- If student orders something concerning, flag it: "Just to confirm, ' + addr + '?"\n- Anticipate needs: "I can get that drawn" or "Want me to set up for that?"\n- If asked about a medication, explain from a nursing perspective\n- Reinforce learning with practical questions: "Loading dose or maintenance?" "Any allergies before I hang this?"\n- Keep responses to 1-3 sentences.';
     }
   },
 
@@ -804,7 +1271,7 @@ const CHARACTERS = {
     id: 'family', name: 'Family Member', role: "Patient's Family", icon: '👨‍👩‍👦',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=LindaJohnsonWife&backgroundColor=EDE9FE',
     cssClass: 'family',
-    voice: { puter: 'Ruth', webSpeech: { name: 'Karen', pitch: 1.15, rate: 0.95 } },
+    voice: { puter: 'Ruth', webSpeech: { name: 'Karen', fallback: 'female', pitch: 1.15, rate: 0.95 } },
     getSystemPrompt: function(caseData) {
       return 'You are a close family member of ' + caseData.patient.name + ' (' + caseData.patient.age + ') in the emergency department.\n\nCASE: ' + caseData.brief + '\n\nYOUR ROLE:\n- You are worried and emotional but intelligent\n- Provide crucial collateral history the patient may not mention: medication compliance, recent symptoms dismissed, family history, lifestyle\n- Ask real family questions: "Is this serious?" "What does that test show?" "Will they be okay?"\n- When student explains clearly, you calm down. When they use jargon, ask what it means — forcing health literacy practice\n- You are NOT a medical person\n- Keep responses to 2-3 sentences.';
     }
@@ -814,10 +1281,11 @@ const CHARACTERS = {
     id: 'consultant', name: 'Specialist', role: 'Consulting Physician', icon: '👨‍⚕️',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=DrPatelCards&backgroundColor=FFEDD5',
     cssClass: 'consultant',
-    voice: { puter: 'Gregory', webSpeech: { name: 'Daniel', pitch: 0.95, rate: 1.1 } },
+    voice: { puter: 'Gregory', webSpeech: { name: 'Daniel', fallback: 'male', pitch: 0.95, rate: 1.1 } },
     getSystemPrompt: function(caseData) {
       var m = caseData.mechanism || {};
-      return 'You are a specialist consultant being called about ' + caseData.patient.name + ', ' + caseData.patient.age + '. Case: ' + caseData.brief + '\n\nSPECIALTY: ' + caseData.specialty.split('/')[0].trim() + '\n\nPATHOPHYSIOLOGY:\n' + (m.pathophysiology || []).slice(0, 3).map(function(p) { return '- ' + p; }).join('\n') + '\n\nCLINICAL REASONING:\n' + (m.clinicalReasoning || []).map(function(c) { return '- ' + c; }).join('\n') + '\n\nEXPECTATIONS:\n- Expect structured SBAR. If disorganized, redirect: "Start with the situation."\n- After a good presentation, give specialty guidance that teaches mechanism\n- If student asks a good pathophysiology question, answer it\n- If student plan is wrong, explain WHY using mechanism\n- Direct, efficient, busy but willing to teach\n- Keep responses to 2-4 sentences.';
+      var addr = getLearnerAddress();
+      return 'You are a specialist consultant being called about ' + caseData.patient.name + ', ' + caseData.patient.age + '. Case: ' + caseData.brief + '\n\nThe learner calling you is ' + addr + ', a ' + getLearnerDescription() + '. Address them as "' + addr + '".\n\nSPECIALTY: ' + caseData.specialty.split('/')[0].trim() + '\n\nPATHOPHYSIOLOGY:\n' + (m.pathophysiology || []).slice(0, 3).map(function(p) { return '- ' + p; }).join('\n') + '\n\nCLINICAL REASONING:\n' + (m.clinicalReasoning || []).map(function(c) { return '- ' + c; }).join('\n') + '\n\nEXPECTATIONS:\n- Expect structured SBAR. If disorganized, redirect: "Start with the situation."\n- After a good presentation, give specialty guidance that teaches mechanism\n- If student asks a good pathophysiology question, answer it\n- If student plan is wrong, explain WHY using mechanism\n- Direct, efficient, busy but willing to teach\n- Keep responses to 2-4 sentences.';
     }
   },
 
@@ -825,7 +1293,7 @@ const CHARACTERS = {
     id: 'pharmacist', name: 'Dr. Kim, PharmD', role: 'Clinical Pharmacist', icon: '💊',
     avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=PharmDKim&backgroundColor=FCE7F3',
     cssClass: 'pharmacist',
-    voice: { puter: 'Ivy', webSpeech: { name: 'Tessa', pitch: 1.0, rate: 1.0 } },
+    voice: { puter: 'Ivy', webSpeech: { name: 'Tessa', fallback: 'female', pitch: 1.0, rate: 1.0 } },
     getSystemPrompt: function(caseData) {
       var m = caseData.mechanism || {};
       return 'You are Dr. Kim, a clinical pharmacist in the ED consulted on ' + caseData.patient.name + ', ' + caseData.patient.age + '.\n\nCASE: ' + caseData.brief + '\n\nPHARMACOLOGY EXPERTISE:\n' + (m.pharmacology || []).map(function(p) { return '- ' + p; }).join('\n') + '\n\nRELEVANT PATHOPHYSIOLOGY:\n' + (m.pathophysiology || []).slice(0, 3).map(function(p) { return '- ' + p; }).join('\n') + '\n\nSTYLE:\n- Evidence-based, precise, guideline-driven\n- ALWAYS explain mechanism of action and connect to pathophysiology\n- Flag drug interactions, contraindications, monitoring parameters\n- If student orders something inappropriate, explain WHY\n- Connect drug choices to patient-specific factors\n- Keep responses to 2-4 sentences unless detailed mechanism explanation warranted.';
@@ -843,6 +1311,101 @@ let coachingEnabled = true;
 let conversationHistory = [];
 let studentMsgCount = 0;
 let isProcessing = false;
+
+// ═══════════════════════════════════════════════
+//  LEARNER STATE
+// ═══════════════════════════════════════════════
+let learner = { name: '', level: '', title: 'Doctor', greeting: '' };
+
+const LEVEL_MAP = {
+  m1: { title: '', greeting: 'first-year student', isDoctor: false },
+  m2: { title: '', greeting: 'second-year student', isDoctor: false },
+  m3: { title: '', greeting: 'third-year student', isDoctor: false },
+  m4: { title: '', greeting: 'fourth-year student', isDoctor: false },
+  intern: { title: 'Dr.', greeting: 'intern', isDoctor: true },
+  resident: { title: 'Dr.', greeting: 'resident', isDoctor: true },
+  fellow: { title: 'Dr.', greeting: 'fellow', isDoctor: true },
+  pa_student: { title: '', greeting: 'PA student', isDoctor: false },
+  np_student: { title: '', greeting: 'NP student', isDoctor: false },
+  other: { title: '', greeting: 'learner', isDoctor: false },
+};
+
+function getLearnerAddress() {
+  if (!learner.name) return learner.title || 'Doctor';
+  const info = LEVEL_MAP[learner.level] || LEVEL_MAP.other;
+  if (info.isDoctor) return `Dr. ${learner.name}`;
+  return learner.name;
+}
+
+function getLearnerDescription() {
+  const info = LEVEL_MAP[learner.level] || LEVEL_MAP.other;
+  return info.greeting;
+}
+
+// ═══════════════════════════════════════════════
+//  VOICE CACHE (fix accent consistency)
+// ═══════════════════════════════════════════════
+const voiceCache = {};
+let voicesReady = false;
+
+function initVoiceCache() {
+  if (!window.speechSynthesis) return;
+  const voices = speechSynthesis.getVoices();
+  if (voices.length === 0) return;
+  voicesReady = true;
+
+  Object.entries(CHARACTERS).forEach(([id, ch]) => {
+    if (!ch.voice?.webSpeech) return;
+    const pref = ch.voice.webSpeech;
+    // Try exact name match first, then partial, then language match
+    let v = voices.find(v => v.name === pref.name);
+    if (!v) v = voices.find(v => v.name.includes(pref.name));
+    if (!v) v = voices.find(v => v.lang.startsWith('en') && v.name.includes(pref.fallback || ''));
+    if (!v) v = voices.find(v => v.lang.startsWith('en-US'));
+    if (!v) v = voices.find(v => v.lang.startsWith('en'));
+    if (!v) v = voices[0];
+    voiceCache[id] = { voice: v, pitch: pref.pitch, rate: pref.rate };
+  });
+}
+
+// Init voices on load and on change (Chrome loads async)
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = () => { initVoiceCache(); };
+  // Also try immediately in case voices are already loaded
+  setTimeout(initVoiceCache, 100);
+}
+
+// ═══════════════════════════════════════════════
+//  ONBOARDING
+// ═══════════════════════════════════════════════
+(function setupOnboarding() {
+  const nameInput = document.getElementById('learnerName');
+  const levelSelect = document.getElementById('learnerLevel');
+  const btn = document.getElementById('onboardBtn');
+
+  function checkReady() {
+    btn.disabled = !(nameInput.value.trim() && levelSelect.value);
+  }
+  nameInput.addEventListener('input', checkReady);
+  levelSelect.addEventListener('change', checkReady);
+  nameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !btn.disabled) completeOnboarding();
+  });
+})();
+
+function completeOnboarding() {
+  const name = document.getElementById('learnerName').value.trim();
+  const level = document.getElementById('learnerLevel').value;
+  if (!name || !level) return;
+
+  learner.name = name;
+  learner.level = level;
+  const info = LEVEL_MAP[level] || LEVEL_MAP.other;
+  learner.title = info.isDoctor ? `Dr. ${name}` : name;
+
+  document.getElementById('onboardModal').style.display = 'none';
+  beginSimulation();
+}
 
 // ═══════════════════════════════════════════════
 //  INIT
@@ -870,24 +1433,50 @@ function startSimulation() {
 
   document.getElementById('setupModal').style.display = 'none';
   updateBtnVoice();
+
+  // Show onboarding if attending is present
+  if (activeChars.includes('attending')) {
+    document.getElementById('onboardModal').style.display = 'flex';
+    document.getElementById('learnerName').focus();
+  } else {
+    // No attending → skip onboarding
+    learner.name = 'Student';
+    learner.level = 'm3';
+    learner.title = 'Student';
+    beginSimulation();
+  }
+}
+
+function beginSimulation() {
+  const selectedCase = CASE_LIBRARY.find(c => c.id === selectedCaseId) || CASE_LIBRARY[0];
+
   buildCharStrip();
   buildAddressBar();
   buildQuickActions();
+  buildAvatarScene();
 
-  addSystemMsg(`Simulation started: ${selectedCase.title}. You are a 3rd-year medical student on your Emergency Medicine rotation.`);
+  // Attending welcomes learner by name and level
+  const addr = getLearnerAddress();
+  const levelDesc = getLearnerDescription();
+
+  addSystemMsg(`Simulation started: ${selectedCase.title}. You are a ${levelDesc} on your Emergency Medicine rotation.`);
 
   setTimeout(() => {
-    addSystemMsg(`You walk into the room. ${selectedCase.patient.age} patient — ${selectedCase.patient.complaint}. ${selectedCase.brief}`);
+    if (activeChars.includes('attending')) {
+      addCharacterMsg('attending', `Hey ${addr}, welcome! I'm Dr. Chen, the attending on shift. We've got a patient I need you to see. ${selectedCase.patient.age} — ${selectedCase.patient.complaint}. Go ahead and introduce yourself, get the history, and let me know what you're thinking. I'll be right here if you need me.`);
+    } else {
+      addSystemMsg(`You walk into the room. ${selectedCase.patient.age} patient — ${selectedCase.patient.complaint}. ${selectedCase.brief}`);
+    }
   }, 800);
 
   setTimeout(() => {
     if (activeChars.includes('nurse')) {
-      addCharacterMsg('nurse', `Hey Doctor, this is ${selectedCase.patient.name}. ${selectedCase.patient.age}, ${selectedCase.patient.complaint}. I've got the initial workup started — vitals are on the board. You should take a look.`);
+      addCharacterMsg('nurse', `Hey ${addr}, this is ${selectedCase.patient.name}. ${selectedCase.patient.age}, ${selectedCase.patient.complaint}. I've got the initial workup started — vitals are on the board. You should take a look.`);
     }
   }, 2500);
 
   setTimeout(() => {
-    addCharacterMsg('patient', `*grimacing* Doc... please... something's really wrong. Can you help me?`);
+    addCharacterMsg('patient', `*grimacing* ${LEVEL_MAP[learner.level]?.isDoctor ? 'Doc' : 'Hello'}... please... something's really wrong. Can you help me?`);
   }, activeChars.includes('nurse') ? 5000 : 2000);
 
   setTimeout(() => {
@@ -896,6 +1485,315 @@ function startSimulation() {
     }
   }, 6500);
 }
+
+// ═══════════════════════════════════════════════
+//  AVATAR SCENE (immersive sim room with canvas effects)
+// ═══════════════════════════════════════════════
+let bubbleTimers = {};
+let particleCtx, ecgCtx, particles = [], ecgX = 0, animFrameId;
+
+// ── Particle System ──
+function initParticles() {
+  const c = document.getElementById('particleCanvas');
+  if (!c) return;
+  const scene = c.parentElement;
+  c.width = scene.offsetWidth;
+  c.height = scene.offsetHeight;
+  particleCtx = c.getContext('2d');
+  particles = [];
+  for (let i = 0; i < 35; i++) {
+    particles.push({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: -Math.random() * 0.25 - 0.05,
+      r: Math.random() * 1.8 + 0.4,
+      a: Math.random() * 0.25 + 0.05,
+      pulse: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawParticles() {
+  if (!particleCtx) return;
+  const c = particleCtx.canvas;
+  particleCtx.clearRect(0, 0, c.width, c.height);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.pulse += 0.02;
+    const alpha = p.a * (0.6 + 0.4 * Math.sin(p.pulse));
+    if (p.y < -5) { p.y = c.height + 5; p.x = Math.random() * c.width; }
+    if (p.x < -5) p.x = c.width + 5;
+    if (p.x > c.width + 5) p.x = -5;
+    particleCtx.beginPath();
+    particleCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    particleCtx.fillStyle = `rgba(40,116,166,${alpha})`;
+    particleCtx.fill();
+    // tiny glow
+    particleCtx.beginPath();
+    particleCtx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+    particleCtx.fillStyle = `rgba(40,116,166,${alpha * 0.15})`;
+    particleCtx.fill();
+  });
+}
+
+// ── ECG Waveform ──
+function initECG() {
+  const c = document.getElementById('ecgCanvas');
+  if (!c) return;
+  const scene = c.parentElement;
+  c.width = scene.offsetWidth;
+  c.height = 32;
+  ecgCtx = c.getContext('2d');
+  ecgX = 0;
+}
+
+function drawECG() {
+  if (!ecgCtx) return;
+  const c = ecgCtx.canvas;
+  const w = c.width, h = c.height, mid = h / 2;
+  // Fade trail
+  ecgCtx.fillStyle = 'rgba(4,8,16,0.12)';
+  ecgCtx.fillRect(0, 0, w, h);
+  // Draw new segment
+  ecgCtx.strokeStyle = 'rgba(34,197,94,0.7)';
+  ecgCtx.lineWidth = 1.5;
+  ecgCtx.shadowColor = '#22C55E';
+  ecgCtx.shadowBlur = 4;
+  ecgCtx.beginPath();
+  const prevX = ecgX - 1.5;
+  ecgCtx.moveTo(prevX < 0 ? w + prevX : prevX, mid);
+  // Generate ECG-like waveform
+  const cycle = ecgX % 120;
+  let y = mid;
+  if (cycle > 40 && cycle < 44) y = mid - 3;           // P wave
+  else if (cycle > 50 && cycle < 52) y = mid + 4;      // Q
+  else if (cycle > 52 && cycle < 56) y = mid - 16;     // R peak
+  else if (cycle > 56 && cycle < 59) y = mid + 6;      // S
+  else if (cycle > 65 && cycle < 75) y = mid - 4;      // T wave
+  else y = mid + Math.sin(ecgX * 0.1) * 0.5;           // baseline wobble
+  ecgCtx.lineTo(ecgX, y);
+  ecgCtx.stroke();
+  ecgCtx.shadowBlur = 0;
+  // Advance and wrap
+  ecgX += 1.5;
+  if (ecgX > w) {
+    ecgX = 0;
+    ecgCtx.clearRect(0, 0, w, h);
+  }
+}
+
+// ── Animation Loop ──
+function sceneAnimLoop() {
+  drawParticles();
+  drawECG();
+  animFrameId = requestAnimationFrame(sceneAnimLoop);
+}
+
+// ── Connection Beam ──
+function updateConnectionBeam() {
+  const you = document.getElementById('scene-you');
+  const target = document.getElementById(`scene-${currentTarget}`);
+  const svg = document.getElementById('connectionSvg');
+  const line = document.getElementById('beamLine');
+  const dot = document.getElementById('beamDot');
+  if (!you || !target || !svg || !line || !dot) return;
+
+  const scene = document.getElementById('avatarScene');
+  const sr = scene.getBoundingClientRect();
+  const yr = you.getBoundingClientRect();
+  const tr = target.getBoundingClientRect();
+
+  const x1 = yr.left + yr.width/2 - sr.left;
+  const y1 = yr.top + yr.height/2 - sr.top;
+  const x2 = tr.left + tr.width/2 - sr.left;
+  const y2 = tr.top + tr.height/2 - sr.top;
+
+  line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+  line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+  line.style.display = '';
+  dot.style.display = '';
+
+  // Animate dot along beam
+  let progress = (Date.now() % 2000) / 2000;
+  dot.setAttribute('cx', x1 + (x2 - x1) * progress);
+  dot.setAttribute('cy', y1 + (y2 - y1) * progress);
+
+  requestAnimationFrame(updateConnectionBeam);
+}
+
+// ── Ripple Shockwave ──
+function spawnRipple(charId, color) {
+  const el = document.getElementById(`scene-${charId}`);
+  if (!el) return;
+  const wrap = el.querySelector('.avatar-img-wrap');
+  if (!wrap) return;
+  for (let i = 0; i < 2; i++) {
+    const ripple = document.createElement('div');
+    ripple.className = 'speak-ripple';
+    ripple.style.borderColor = color || 'rgba(40,116,166,0.45)';
+    ripple.style.top = '50%';
+    ripple.style.left = '50%';
+    ripple.style.animationDelay = `${i * 0.25}s`;
+    wrap.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 1500);
+  }
+}
+
+// ── Character colour map ──
+const CHAR_COLORS = {
+  patient: 'rgba(59,130,246,0.5)',
+  attending: 'rgba(34,197,94,0.5)',
+  nurse: 'rgba(234,179,8,0.5)',
+  family: 'rgba(139,92,246,0.5)',
+  consultant: 'rgba(249,115,22,0.5)',
+  pharmacist: 'rgba(236,72,153,0.5)',
+  you: 'rgba(148,163,184,0.4)'
+};
+
+// ── Build Scene ──
+function buildAvatarScene() {
+  const scene = document.getElementById('avatarScene');
+  // Preserve canvas and SVG layers, clear character elements
+  const keep = ['particleCanvas', 'ecgCanvas', 'connectionSvg'];
+  Array.from(scene.children).forEach(child => {
+    if (!keep.includes(child.id) && !child.classList.contains('scene-ambient') &&
+        !child.classList.contains('scene-scanlines') && !child.classList.contains('scene-floor') &&
+        !child.classList.contains('scene-room-label') && !child.classList.contains('scene-monitor')) {
+      child.remove();
+    }
+  });
+
+  const wavesHTML = `<div class="sound-waves">${'<div class="sound-wave-bar"></div>'.repeat(5)}</div>`;
+  const dotsHTML = `<div class="bubble-dots"><span></span><span></span><span></span></div>`;
+
+  // "You" avatar
+  const youDiv = document.createElement('div');
+  youDiv.className = 'avatar-char you active';
+  youDiv.id = 'scene-you';
+  youDiv.innerHTML = `
+    <div class="speech-bubble" id="bubble-you"><span class="bubble-text"></span>${dotsHTML}</div>
+    <div class="avatar-img-wrap">
+      <div class="avatar-glow"></div>
+      <div class="avatar-ring"></div>
+      <div class="avatar-mouth"></div>
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=${learner.name}Student&backgroundColor=F1F5F9" alt="You">
+    </div>
+    ${wavesHTML}
+    <div class="avatar-shadow"></div>
+    <div class="char-label">\u{1F393} ${getLearnerAddress()}</div>`;
+  scene.appendChild(youDiv);
+
+  const emotionMap = { patient:'\u{1F623}', family:'\u{1F61F}' };
+
+  activeChars.forEach(id => {
+    const ch = CHARACTERS[id];
+    const div = document.createElement('div');
+    div.className = `avatar-char ${ch.cssClass} active`;
+    div.id = `scene-${id}`;
+    const emo = emotionMap[id] || '';
+    div.innerHTML = `
+      <div class="speech-bubble" id="bubble-${id}"><span class="bubble-text"></span>${dotsHTML}</div>
+      <div class="avatar-img-wrap">
+        <div class="avatar-glow"></div>
+        <div class="avatar-ring"></div>
+        <div class="avatar-mouth"></div>
+        ${emo ? `<div class="emotion-badge" id="emotion-${id}">${emo}</div>` : ''}
+        <img src="${ch.avatar}" alt="${ch.name}">
+      </div>
+      ${wavesHTML}
+      <div class="avatar-shadow"></div>
+      <div class="char-label">${ch.icon} ${ch.name}</div>`;
+    div.onclick = () => selectTarget(id);
+    scene.appendChild(div);
+  });
+
+  updateAddressedAvatar(currentTarget);
+
+  // Init canvas effects
+  initParticles();
+  initECG();
+  if (animFrameId) cancelAnimationFrame(animFrameId);
+  sceneAnimLoop();
+
+  // Start connection beam
+  setTimeout(updateConnectionBeam, 500);
+
+  // Resize handler
+  window.addEventListener('resize', () => { initParticles(); initECG(); });
+}
+
+function updateAddressedAvatar(targetId) {
+  document.querySelectorAll('.avatar-char.addressed').forEach(el => el.classList.remove('addressed'));
+  const t = document.getElementById(`scene-${targetId}`);
+  if (t) t.classList.add('addressed');
+}
+
+function showAvatarBubble(charId, text, isStudent) {
+  const bubbleId = isStudent ? 'bubble-you' : `bubble-${charId}`;
+  const sceneId = isStudent ? 'scene-you' : `scene-${charId}`;
+  const bubble = document.getElementById(bubbleId);
+  const avatar = document.getElementById(sceneId);
+  if (!bubble || !avatar) return;
+
+  if (bubbleTimers[bubbleId]) clearTimeout(bubbleTimers[bubbleId]);
+
+  const display = text.length > 120 ? text.substring(0, 117) + '\u2026' : text;
+  const textEl = bubble.querySelector('.bubble-text');
+  if (textEl) textEl.textContent = display;
+  bubble.classList.remove('typing');
+  bubble.classList.add('visible');
+  avatar.classList.add('speaking');
+
+  // Spawn ripple shockwave
+  const cssClass = isStudent ? 'you' : (CHARACTERS[charId]?.cssClass || charId);
+  spawnRipple(isStudent ? 'you' : charId, CHAR_COLORS[cssClass] || CHAR_COLORS.you);
+
+  // Solo speaking state
+  document.querySelectorAll('.avatar-char.speaking').forEach(el => {
+    if (el.id !== sceneId) el.classList.remove('speaking');
+  });
+  document.querySelectorAll('.speech-bubble.visible').forEach(el => {
+    if (el.id !== bubbleId) el.classList.remove('visible');
+  });
+
+  const delay = Math.max(3500, Math.min(text.length * 45, 9000));
+  bubbleTimers[bubbleId] = setTimeout(() => {
+    bubble.classList.remove('visible');
+    avatar.classList.remove('speaking');
+  }, delay);
+}
+
+function showTypingBubble(charId) {
+  const bubbleId = `bubble-${charId}`;
+  const sceneId = `scene-${charId}`;
+  const bubble = document.getElementById(bubbleId);
+  const avatar = document.getElementById(sceneId);
+  if (!bubble || !avatar) return;
+  if (bubbleTimers[bubbleId]) clearTimeout(bubbleTimers[bubbleId]);
+  const textEl = bubble.querySelector('.bubble-text');
+  if (textEl) textEl.textContent = '';
+  bubble.classList.add('typing', 'visible');
+  avatar.classList.add('speaking');
+}
+
+function hideTypingBubble(charId) {
+  const bubbleId = `bubble-${charId}`;
+  const bubble = document.getElementById(bubbleId);
+  if (bubble) bubble.classList.remove('typing');
+}
+
+function updateEmotion(charId, emoji) {
+  const el = document.getElementById(`emotion-${charId}`);
+  if (el) {
+    el.textContent = emoji;
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = '';
+  }
+}
+
 
 function buildCharStrip() {
   const strip = document.getElementById('charStrip');
@@ -962,6 +1860,7 @@ function selectTarget(id) {
   document.querySelectorAll('.addr-btn').forEach(b => {
     if (b.textContent === `@${CHARACTERS[id].name}`) b.classList.add('selected');
   });
+  updateAddressedAvatar(id);
 }
 
 // ═══════════════════════════════════════════════
@@ -996,6 +1895,9 @@ function addCharacterMsg(charId, text) {
   const chip = document.getElementById(`chip-${charId}`);
   if (chip) { chip.classList.add('speaking'); setTimeout(() => chip.classList.remove('speaking'), 3000); }
 
+  // Show speech bubble on avatar
+  showAvatarBubble(charId, text, false);
+
   if (voiceEnabled) speakText(charId, null, text);
   conversationHistory.push({ role: 'assistant', charId, content: text });
 }
@@ -1007,12 +1909,16 @@ function addStudentMsg(text) {
   const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   div.innerHTML = `
     <div class="msg-header">
-      <span class="msg-name">🎓 You → ${CHARACTERS[currentTarget].icon} ${CHARACTERS[currentTarget].name}</span>
+      <span class="msg-name">🎓 ${getLearnerAddress()} → ${CHARACTERS[currentTarget].icon} ${CHARACTERS[currentTarget].name}</span>
       <span class="msg-time">${time}</span>
     </div>
     <div class="msg-body">${text}</div>`;
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
+
+  // Show speech bubble on student avatar
+  showAvatarBubble(currentTarget, text, true);
+
   conversationHistory.push({ role: 'user', target: currentTarget, content: text });
 }
 
@@ -1024,11 +1930,14 @@ function showTyping(charId) {
   div.innerHTML = `<span></span><span></span><span></span>`;
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
+  // Also show typing on avatar
+  showTypingBubble(charId);
 }
 
 function hideTyping(charId) {
   const el = document.getElementById(`typing-${charId}`);
   if (el) el.remove();
+  hideTypingBubble(charId);
 }
 
 // ═══════════════════════════════════════════════
@@ -1128,6 +2037,7 @@ async function speakText(charId, btn, textOverride) {
   if (currentAudio) { try { currentAudio.pause(); } catch(e){} currentAudio = null; }
   if (window.speechSynthesis) window.speechSynthesis.cancel();
 
+  // Try Puter TTS first (neural voices — most consistent)
   if (typeof puter !== 'undefined' && puter.ai?.txt2speech) {
     try {
       const audio = await puter.ai.txt2speech(text, { voice: ch.voice.puter, engine: 'neural', language: 'en-US' });
@@ -1137,13 +2047,25 @@ async function speakText(charId, btn, textOverride) {
     } catch (e) { console.warn('Puter TTS failed, falling back to Web Speech', e); }
   }
 
+  // Fallback: Web Speech API with cached voice (prevents accent drift)
   if (window.speechSynthesis) {
+    // Ensure cache is populated
+    if (!voicesReady) initVoiceCache();
+
     const utterance = new SpeechSynthesisUtterance(text);
-    const voices = speechSynthesis.getVoices();
-    const preferred = voices.find(v => v.name.includes(ch.voice.webSpeech.name)) || voices[0];
-    if (preferred) utterance.voice = preferred;
-    utterance.pitch = ch.voice.webSpeech.pitch;
-    utterance.rate = ch.voice.webSpeech.rate;
+    const cached = voiceCache[charId];
+    if (cached) {
+      utterance.voice = cached.voice;
+      utterance.pitch = cached.pitch;
+      utterance.rate = cached.rate;
+    } else {
+      // Emergency fallback: just use first English voice
+      const voices = speechSynthesis.getVoices();
+      const eng = voices.find(v => v.lang.startsWith('en')) || voices[0];
+      if (eng) utterance.voice = eng;
+      utterance.pitch = ch.voice?.webSpeech?.pitch || 1.0;
+      utterance.rate = ch.voice?.webSpeech?.rate || 1.0;
+    }
     speechSynthesis.speak(utterance);
   }
 }
@@ -1183,6 +2105,14 @@ function injectEvent() {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
   });
+  // Update patient emotion based on event severity
+  if (ev.text.includes('10/10') || ev.text.includes('dropped')) {
+    updateEmotion('patient', '😰');
+  } else if (ev.text.includes('V-tach')) {
+    updateEmotion('patient', '😨');
+  } else if (ev.text.includes('Lab results')) {
+    updateEmotion('patient', '😣');
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -1197,9 +2127,7 @@ document.getElementById('msgInput').addEventListener('input', function() {
   this.style.height = Math.min(this.scrollHeight, 120) + 'px';
 });
 
-if (window.speechSynthesis) {
-  speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
-}
+// Voice init handled by initVoiceCache above
 </script>
 </body>
 </html>
