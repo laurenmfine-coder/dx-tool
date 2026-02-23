@@ -12,15 +12,11 @@
   var inSubdir = /\/(topics|modules|cases|tools|ecg|CoachDx|auth|data|mechanism|ReasonDx)\//i.test(path);
   var toRoot = inSubdir ? '../' : './';
 
-  // --- Detect section ---
+  // --- Detect section (launch version) ---
   var section = 'home';
-  if (/\/modules\/premed-|premed-hub/i.test(path)) section = 'premed';
-  else if (/\/modules\/raddx-|raddx-hub/i.test(path)) section = 'raddx';
-  else if (/\/modules\//i.test(path)) section = 'learn';
-  else if (/\/topics\//i.test(path)) section = 'learn';
-  else if (/\/cases\//i.test(path)) section = 'practice';
-  else if (/board-prep|training/i.test(path)) section = 'practice';
-  else if (/\/tools\/|\/ecg\//i.test(path)) section = 'tools';
+  if (/training|cases\/|CoachDx|mentor-chat|coach|consult-trainer|sbar|ed-handoff|night-float|simroomdx/i.test(path)) section = 'coachdx';
+  else if (/learning-dashboard|dashboard/i.test(path)) section = 'dashboard';
+  else if (/auth\//i.test(path)) section = 'account';
 
   // --- Theme (ONLY light or dark) ---
   var saved = localStorage.getItem('rdx-theme') || 'light';
@@ -43,12 +39,8 @@
     '<button id="rdx-hamburger" aria-label="Menu" style="display:none;background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:var(--rdx-text-muted,#475569);-webkit-tap-highlight-color:transparent;">☰</button>' +
     '<div id="rdx-nav-menu" style="display:flex;gap:6px;align-items:center;margin-left:auto;">' +
       navLink(toRoot + 'index.html', '🏠', 'Home', section === 'home') +
-      navLink(toRoot + 'modules/index.html', '📚', 'Learn', section === 'learn') +
-      navLink(toRoot + 'cases/clinical-reasoning-trainer.html', '🧩', 'Practice', section === 'practice') +
-      navLink(toRoot + 'modules/raddx-hub.html', '🔬', 'RadDx', section === 'raddx') +
-      navLink(toRoot + 'modules/premed-hub.html', '🩺', 'Premed', section === 'premed',
-        'background:linear-gradient(135deg,#f0f7fc,#d4e8f7);color:#1f5f8b;font-weight:600;') +
-      navLink(toRoot + 'tools/index.html', '🔧', 'Tools', section === 'tools') +
+      navLink(toRoot + 'training.html', '🧠', 'CoachDx', section === 'coachdx') +
+      navLink(toRoot + 'tools/learning-dashboard.html', '📊', 'Dashboard', section === 'dashboard') +
       '<button id="rdx-info-btn" aria-label="About ReasonDx" title="About ReasonDx" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:15px;line-height:1;flex-shrink:0;">ℹ️</button>' +
       '<button id="rdx-theme-toggle" aria-label="Toggle theme" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;">' +
         (saved === 'dark' ? '☀️' : '🌙') +
@@ -62,7 +54,7 @@
   var nav = document.createElement('nav');
   nav.id = 'rdx-unified-nav';
   nav.setAttribute('role', 'navigation');
-  nav.style.cssText = 'background:var(--rdx-bg-nav,#fff);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:9000;font-family:"DM Sans","Inter",-apple-system,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,0.04);transition:background .25s,border-color .25s;';
+  nav.style.cssText = 'background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:9000;font-family:"DM Sans","Inter",-apple-system,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,0.03);transition:background .25s,border-color .25s;';
   nav.innerHTML = html;
 
   // --- Inject responsive styles ---
@@ -76,8 +68,8 @@
     '#rdx-about-modal{background:var(--rdx-bg-card,#fff);border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.3);padding:0;animation:rdxModalIn .2s ease;}' +
     '[data-theme="dark"] #rdx-about-modal{background:var(--rdx-bg-card,#1e293b);color:var(--rdx-text,#e2e8f0);}' +
     '@keyframes rdxModalIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}' +
-    '.rdx-about-hdr{background:linear-gradient(135deg,#1f5f8b,#3a90c0);padding:28px 28px 24px;border-radius:20px 20px 0 0;color:white;}' +
-    '.rdx-about-hdr h2{margin:0 0 6px;font-size:22px;font-weight:700;font-family:Georgia,serif;}.rdx-about-hdr p{margin:0;opacity:0.9;font-size:14px;}' +
+    '.rdx-about-hdr{background:linear-gradient(135deg,#2874A6,#1B4F72);padding:28px 28px 24px;border-radius:20px 20px 0 0;color:white;}' +
+    '.rdx-about-hdr h2{margin:0 0 6px;font-size:22px;font-weight:700;font-family:"Fraunces",Georgia,serif;}.rdx-about-hdr p{margin:0;opacity:0.9;font-size:14px;}' +
     '.rdx-about-body{padding:24px 28px 28px;font-size:14px;line-height:1.7;color:var(--rdx-text-secondary,#475569);}' +
     '[data-theme="dark"] .rdx-about-body{color:var(--rdx-text-secondary,#94a3b8);}' +
     '.rdx-about-body h3{font-size:15px;font-weight:700;color:var(--rdx-text,#1e293b);margin:20px 0 8px;}.rdx-about-body h3:first-child{margin-top:0;}' +
@@ -157,7 +149,7 @@
         window.location.href = toRoot + 'auth/register.html';
       });
     }
-    // --- About ReasonDx modal ---
+    // --- About ReasonDx modal (launch version) ---
     var overlay = document.createElement('div');
     overlay.id = 'rdx-about-overlay';
     overlay.innerHTML =
@@ -165,32 +157,22 @@
         '<div class="rdx-about-hdr" style="position:relative;">' +
           '<button class="rdx-about-close" id="rdx-about-close-btn">&times;</button>' +
           '<h2>ReasonDx</h2>' +
-          '<p>Clinical Reasoning Training Platform</p>' +
+          '<p>AI-Powered Clinical Reasoning Platform</p>' +
         '</div>' +
         '<div class="rdx-about-body">' +
           '<h3>What is ReasonDx?</h3>' +
-          '<p>ReasonDx is a case-based clinical reasoning platform that helps learners develop systematic diagnostic thinking. Rather than memorizing isolated facts, you learn to think through cases the way experienced clinicians do — building differentials, gathering targeted history, interpreting results, and making evidence-based decisions.</p>' +
+          '<p>ReasonDx is an AI-powered clinical reasoning platform that helps learners develop systematic diagnostic thinking. Practice building differentials, communicate your reasoning through structured SBAR handoffs, and reflect on your growth with personalized AI coaching.</p>' +
           '<div class="rdx-about-grid">' +
-            '<div class="rdx-about-stat"><div class="num">316</div><div class="lbl">Topics</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">320+</div><div class="lbl">Cases</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">400+</div><div class="lbl">Modules</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">615</div><div class="lbl">Questions</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">323</div><div class="lbl">Reasoning Cases</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">29</div><div class="lbl">Specialties</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">13</div><div class="lbl">SBAR Scenarios</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">AI</div><div class="lbl">Coaching</div></div>' +
           '</div>' +
           '<h3>The Platform</h3>' +
-          '<p><strong>ReasonDx</strong> — Interactive clinical cases with step-by-step reasoning<br>' +
-          '<strong>MechanismDx</strong> — Pathophysiology modules that explain the "why"<br>' +
-          '<strong>RadDx</strong> — Imaging reasoning with real-world scenarios<br>' +
-          '<strong>CoachDx</strong> — AI attending using Socratic questioning<br>' +
-          '<strong>Deep Dives</strong> — Multi-layered explorations of key topics</p>' +
-          '<h3>Learning Tracks</h3>' +
-          '<div class="rdx-about-tracks">' +
-            '<span class="rdx-about-pill">🩺 Premed</span>' +
-            '<span class="rdx-about-pill">📖 Pathophysiology</span>' +
-            '<span class="rdx-about-pill">📝 Shelf Exams</span>' +
-            '<span class="rdx-about-pill">🎯 Step 2 / COMLEX</span>' +
-          '</div>' +
+          '<p><strong>CoachDx</strong> \u2014 Clinical reasoning cases, AI simulations, SBAR handoffs, ED handoff training, and Socratic AI coaching \u2014 all in one hub<br>' +
+          '<strong>Dashboard</strong> \u2014 Track progress and view your Reasoning Fingerprint</p>' +
           '<h3>How It Works</h3>' +
-          '<p>Each case follows a clinical reasoning workflow: read the presentation → build a differential → gather history & exam findings → order workup → refine your diagnosis → review teaching points. Every step includes immediate feedback and evidence-based explanations.</p>' +
+          '<p>Each session follows a clinical reasoning workflow: review the presentation \u2192 build your differential \u2192 interview the patient \u2192 refine your diagnosis \u2192 communicate via SBAR \u2192 reflect with your AI coach. Your Reasoning Fingerprint tracks how your clinical thinking evolves over time.</p>' +
           '<p style="margin-top:16px;padding-top:16px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:13px;color:var(--rdx-text-muted,#64748b);">Contact: <a href="mailto:lfine@nova.edu" style="color:#1f5f8b;">lfine@nova.edu</a></p>' +
         '</div>' +
       '</div>';
@@ -206,40 +188,30 @@
         overlay.classList.add('open');
       });
     }
-    // About ReasonDx modal
+    // About ReasonDx modal (launch version - duplicate kept for backward compat)
     var overlay = document.createElement('div');
     overlay.id = 'rdx-about-overlay';
     overlay.innerHTML =
       '<div id="rdx-about-modal" style="position:relative;">' +
-        '<button class="rdx-about-close" id="rdx-about-x">✕</button>' +
+        '<button class="rdx-about-close" id="rdx-about-x">\u2715</button>' +
         '<div class="rdx-about-hdr">' +
           '<h2>ReasonDx</h2>' +
-          '<p>Clinical Reasoning Education Platform</p>' +
+          '<p>AI-Powered Clinical Reasoning Platform</p>' +
         '</div>' +
         '<div class="rdx-about-body">' +
           '<h3>What is ReasonDx?</h3>' +
-          '<p>ReasonDx is an original, case-based clinical reasoning platform designed to help learners develop systematic diagnostic thinking. Rather than memorizing isolated facts, you learn to reason through cases the way experienced clinicians do \u2014 building differentials, gathering targeted history, ordering workups, and refining diagnoses with expert feedback at every step.</p>' +
+          '<p>ReasonDx is an AI-powered clinical reasoning platform designed to help learners develop systematic diagnostic thinking. Practice building differentials, communicate your reasoning through structured SBAR handoffs, and grow with personalized AI coaching that tracks your reasoning patterns over time.</p>' +
           '<div class="rdx-about-grid">' +
-            '<div class="rdx-about-stat"><div class="num">316</div><div class="lbl">Topics</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">320+</div><div class="lbl">Cases</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">400+</div><div class="lbl">Modules</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">282</div><div class="lbl">Deep Dives</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">323</div><div class="lbl">Reasoning Cases</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">29</div><div class="lbl">Specialties</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">13</div><div class="lbl">SBAR Scenarios</div></div>' +
+            '<div class="rdx-about-stat"><div class="num">AI</div><div class="lbl">Coaching</div></div>' +
           '</div>' +
-          '<h3>Learning Tracks</h3>' +
-          '<div class="rdx-about-tracks">' +
-            '<span class="rdx-about-pill">\uD83E\uDE7A Pre-Medical</span>' +
-            '<span class="rdx-about-pill">\uD83E\uDDEC Pathophysiology</span>' +
-            '<span class="rdx-about-pill">\uD83D\uDCCB Shelf Exams</span>' +
-            '<span class="rdx-about-pill">\uD83C\uDFAF Step 2 / COMLEX</span>' +
-          '</div>' +
-          '<h3>Platform Components</h3>' +
-          '<p><strong>Learn</strong> \u2014 Pathophysiology modules that build understanding from the ground up<br>' +
-          '<strong>Practice</strong> \u2014 Interactive clinical cases with Socratic reasoning and expert feedback<br>' +
-          '<strong>RadDx</strong> \u2014 Imaging-first scenarios linked to Radiopaedia\u2019s open-access library<br>' +
-          '<strong>CoachDx</strong> \u2014 AI clinical coach using attending-level Socratic questioning<br>' +
-          '<strong>Tools</strong> \u2014 Calculators, ECG practice, DDx builder, and clinical references</p>' +
+          '<h3>Core Experience</h3>' +
+          '<p><strong>CoachDx</strong> \u2014 Clinical reasoning cases, AI simulations, SBAR handoffs, ED handoff training, and Socratic AI coaching \u2014 all in one hub<br>' +
+          '<strong>Dashboard</strong> \u2014 Track progress and your Reasoning Fingerprint over time</p>' +
           '<h3>How It Works</h3>' +
-          '<p>Every case follows a 5-stage clinical reasoning workflow: (1) Read the presentation and form initial hypotheses, (2) Build your differential diagnosis, (3) Gather targeted history and physical exam findings, (4) Order and interpret diagnostic workup, (5) Make your diagnosis and learn from detailed explanations.</p>' +
+          '<p>Every session follows a clinical reasoning workflow: (1) Review the presentation, (2) Build your differential, (3) Interview the patient and gather findings, (4) Refine your diagnosis, (5) Communicate via SBAR, (6) Reflect with your AI coach. Your Reasoning Fingerprint captures how your clinical thinking evolves.</p>' +
           '<p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center;">\u00A9 2026 ReasonDx \u00B7 Developed for medical education</p>' +
         '</div>' +
       '</div>';
