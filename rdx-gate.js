@@ -88,12 +88,13 @@
         const user = getUser();
         if (!user) return 'none';
         
-        // Check for tier in user object or separate storage
-        if (user.tier) return user.tier;
-        if (user.subscription_tier) return user.subscription_tier;
+        // Check all possible tier fields — auth-system.js writes to .plan
+        const tier = user.plan || user.tier || user.subscription_tier 
+                     || localStorage.getItem(CONFIG.STORAGE_KEYS.tier) || 'free';
         
-        const storedTier = localStorage.getItem(CONFIG.STORAGE_KEYS.tier);
-        return storedTier || 'free';
+        // Normalize: admin/premium/annual all count as pro
+        if (tier === 'pro' || tier === 'admin' || tier === 'premium' || tier === 'annual') return 'pro';
+        return tier;
     }
     
     function getCaseCount() {
