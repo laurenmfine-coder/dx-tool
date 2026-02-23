@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<!-- ED Handoff Trainer | build 2025-02-23 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ED Handoff Trainer — Diagnose from Triage | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --brand: #2874A6; --brand-dark: #1B4F72; --brand-light: #D4E6F1;
+    --bg: #F8FAFC; --bg-card: #FFFFFF; --text: #1E293B;
+    --text-muted: #64748B; --text-dim: #94A3B8; --border: #E2E8F0;
+    --red: #EF4444; --amber: #F59E0B; --green: #10B981; --purple: #7C3AED;
+    --font: 'DM Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Fraunces', Georgia, serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:var(--bg); color:var(--text); min-height:100vh; }
+
+/* ── Layout ────────────────────── */
+.app { max-width:800px; margin:0 auto; padding:24px; padding-bottom:80px; }
+
+/* ── Header ────────────────────── */
+.page-header { margin-bottom:28px; }
+.back-link { display:inline-flex; align-items:center; gap:6px; color:var(--brand); text-decoration:none; font-size:13px; font-weight:500; margin-bottom:12px; }
+.page-header h1 { font-family:var(--serif); font-size:26px; font-weight:700; margin-bottom:6px; }
+.page-header p { color:var(--text-muted); font-size:14px; line-height:1.5; }
+
+/* ── Tier Selector ─────────────── */
+.tier-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
+.tier-card {
+    background:var(--bg-card); border:2px solid var(--border); border-radius:14px;
+    padding:16px; cursor:pointer; transition:all 0.2s; text-align:center;
+}
+.tier-card:hover { border-color:var(--brand); transform:translateY(-2px); }
+.tier-card.selected { border-color:var(--brand); box-shadow:0 0 0 1px var(--brand), 0 4px 16px rgba(40,116,166,0.12); }
+.tier-icon { font-size:28px; margin-bottom:8px; }
+.tier-name { font-weight:700; font-size:14px; margin-bottom:4px; }
+.tier-desc { font-size:11px; color:var(--text-muted); line-height:1.4; }
+.tier-diff { display:inline-block; margin-top:8px; padding:2px 8px; border-radius:6px; font-size:10px; font-weight:700; }
+.diff-hard { background:#FEE2E2; color:#B91C1C; }
+.diff-med { background:#FEF3C7; color:#92400E; }
+.diff-easy { background:#DCFCE7; color:#166534; }
+
+/* ── Case Selection ────────────── */
+.case-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+.case-pick {
+    background:var(--bg-card); border:1.5px solid var(--border); border-radius:12px;
+    padding:14px; cursor:pointer; transition:all 0.2s;
+}
+.case-pick:hover { border-color:var(--brand); }
+.case-pick.selected { border-color:var(--brand); background:rgba(40,116,166,0.04); }
+.case-pick .cp-chief { font-weight:600; font-size:14px; margin-bottom:4px; }
+.case-pick .cp-meta { font-size:11px; color:var(--text-muted); }
+.random-btn {
+    background:var(--brand); color:white; border:none; border-radius:10px;
+    padding:12px 28px; font-family:var(--font); font-size:14px; font-weight:600;
+    cursor:pointer; transition:all 0.2s; width:100%;
+}
+.random-btn:hover { filter:brightness(1.1); }
+
+/* ── Triage Card ───────────────── */
+.triage-card {
+    background:var(--bg-card); border:1.5px solid var(--border); border-radius:16px;
+    overflow:hidden; margin-bottom:20px;
+}
+.triage-header {
+    background:linear-gradient(135deg, #DC2626, #B91C1C); color:white;
+    padding:12px 18px; display:flex; align-items:center; gap:10px;
+}
+.triage-header .th-icon { font-size:20px; }
+.triage-header .th-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; opacity:0.8; }
+.triage-header .th-title { font-weight:600; font-size:15px; }
+.triage-body { padding:18px; }
+.triage-oneliner {
+    font-family:var(--mono); font-size:14px; line-height:1.6;
+    background:#FEF2F2; border:1px solid #FECACA; border-radius:10px;
+    padding:14px; margin-bottom:14px; color:#7F1D1D;
+}
+.vitals-row {
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;
+}
+.vital-chip {
+    background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    padding:6px 10px; font-family:var(--mono); font-size:12px;
+}
+.vital-chip.abnormal { border-color:var(--red); color:var(--red); background:#FEF2F2; }
+.triage-note { font-size:12px; color:var(--text-muted); font-style:italic; }
+
+/* ── Partial workup (Tier 2) ──── */
+.partial-workup {
+    background:#FFFBEB; border:1px solid #FDE68A; border-radius:10px;
+    padding:14px; margin-top:14px;
+}
+.partial-workup .pw-label { font-size:11px; font-weight:700; color:#92400E; text-transform:uppercase; margin-bottom:6px; }
+.partial-workup .pw-content { font-size:13px; line-height:1.5; }
+
+/* ── Full SBAR (Tier 3) ──────── */
+.sbar-card {
+    background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px;
+    padding:14px; margin-top:14px;
+}
+.sbar-card .sbar-section { margin-bottom:10px; }
+.sbar-card .sbar-label { font-size:11px; font-weight:700; color:#1E40AF; text-transform:uppercase; margin-bottom:2px; }
+.sbar-card .sbar-text { font-size:13px; line-height:1.5; }
+
+/* ── Stage sections ────────────── */
+.stage {
+    background:var(--bg-card); border:1.5px solid var(--border); border-radius:14px;
+    padding:20px; margin-bottom:16px; animation:fadeUp 0.3s ease-out;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+.stage-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.stage-num {
+    width:28px; height:28px; border-radius:8px; background:var(--brand);
+    color:white; font-size:13px; font-weight:700; display:flex; align-items:center;
+    justify-content:center; flex-shrink:0;
+}
+.stage-title { font-family:var(--serif); font-size:17px; font-weight:600; }
+.stage p { font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:12px; }
+
+/* ── Differential input ────────── */
+.ddx-input-row { display:flex; gap:8px; margin-bottom:8px; }
+.ddx-input {
+    flex:1; padding:8px 12px; border:1.5px solid var(--border); border-radius:8px;
+    font-family:var(--font); font-size:13px; outline:none; transition:border-color 0.2s;
+}
+.ddx-input:focus { border-color:var(--brand); }
+.ddx-add {
+    background:var(--brand-light); color:var(--brand-dark); border:none; border-radius:8px;
+    padding:8px 14px; font-family:var(--font); font-size:13px; font-weight:600;
+    cursor:pointer; white-space:nowrap;
+}
+.ddx-list { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+.ddx-tag {
+    display:flex; align-items:center; gap:4px;
+    background:var(--brand-light); color:var(--brand-dark); padding:4px 10px;
+    border-radius:8px; font-size:12px; font-weight:500;
+}
+.ddx-tag .remove { cursor:pointer; opacity:0.6; font-size:14px; }
+.ddx-tag .remove:hover { opacity:1; }
+
+/* ── History questions ─────────── */
+.hx-grid { display:flex; flex-direction:column; gap:6px; }
+.hx-q {
+    display:flex; align-items:flex-start; gap:10px;
+    background:var(--bg); border:1px solid var(--border); border-radius:10px;
+    padding:10px 14px; cursor:pointer; transition:all 0.15s; font-size:13px;
+}
+.hx-q:hover { border-color:var(--brand); }
+.hx-q.asked { background:rgba(40,116,166,0.04); border-color:var(--brand-light); }
+.hx-q .q-text { font-weight:500; color:var(--text); }
+.hx-q .q-answer { margin-top:4px; font-size:12px; color:var(--text-muted); line-height:1.4; display:none; }
+.hx-q.asked .q-answer { display:block; }
+.hx-q .q-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+
+/* ── Workup ordering ───────────── */
+.workup-grid { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+.wu-btn {
+    background:var(--bg); border:1.5px solid var(--border); border-radius:8px;
+    padding:6px 12px; font-family:var(--font); font-size:12px; cursor:pointer;
+    transition:all 0.15s; color:var(--text-muted);
+}
+.wu-btn:hover { border-color:var(--brand); }
+.wu-btn.ordered { background:var(--brand-light); color:var(--brand-dark); border-color:var(--brand); }
+.wu-results {
+    background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px;
+    padding:14px; margin-top:12px; display:none;
+}
+.wu-results.visible { display:block; animation:fadeUp 0.3s ease-out; }
+.wu-results .wr-item { font-size:12px; line-height:1.5; margin-bottom:4px; }
+.wu-results .wr-item.abnormal { color:var(--red); font-weight:600; }
+
+/* ── Final diagnosis ───────────── */
+.final-input {
+    width:100%; padding:10px 14px; border:2px solid var(--border); border-radius:10px;
+    font-family:var(--font); font-size:14px; outline:none; margin-bottom:12px;
+}
+.final-input:focus { border-color:var(--brand); }
+.submit-dx {
+    background:var(--brand); color:white; border:none; border-radius:10px;
+    padding:12px 28px; font-family:var(--font); font-size:14px; font-weight:600;
+    cursor:pointer; transition:all 0.2s;
+}
+.submit-dx:hover { filter:brightness(1.1); }
+
+/* ── Feedback ──────────────────── */
+.feedback {
+    background:var(--bg-card); border:1.5px solid var(--border); border-radius:16px;
+    padding:24px; margin-top:20px;
+}
+.feedback h3 { font-family:var(--serif); font-size:20px; margin-bottom:16px; }
+.fb-score-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.fb-label { font-size:12px; color:var(--text-muted); width:160px; }
+.fb-bar { flex:1; height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+.fb-fill { height:100%; border-radius:3px; transition:width 0.8s; }
+.fb-val { font-family:var(--mono); font-size:12px; font-weight:600; width:36px; text-align:right; }
+.fb-text { font-size:13px; color:var(--text-muted); line-height:1.6; margin-top:16px; padding-top:14px; border-top:1px solid var(--border); }
+.fb-correct {
+    background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px;
+    padding:14px; margin-top:12px;
+}
+.fb-correct .fc-label { font-size:11px; font-weight:700; color:#166534; text-transform:uppercase; margin-bottom:4px; }
+.fb-correct .fc-dx { font-size:16px; font-weight:700; color:#166534; margin-bottom:6px; }
+.fb-correct .fc-explain { font-size:13px; color:#15803D; line-height:1.5; }
+.fb-actions { display:flex; gap:10px; margin-top:16px; }
+.fb-btn {
+    padding:10px 20px; border-radius:10px; font-family:var(--font); font-size:13px;
+    font-weight:600; cursor:pointer; border:none; transition:all 0.2s;
+}
+.fb-btn.primary { background:var(--brand); color:white; }
+.fb-btn.secondary { background:var(--bg); color:var(--text-muted); border:1px solid var(--border); }
+
+/* ── Progress dots ─────────────── */
+.progress-bar { display:flex; align-items:center; gap:4px; margin-bottom:20px; }
+.prog-dot { width:10px; height:10px; border-radius:5px; background:var(--border); transition:all 0.2s; }
+.prog-dot.active { background:var(--brand); width:28px; }
+.prog-dot.done { background:var(--green); }
+.prog-label { font-size:11px; color:var(--text-dim); margin-left:8px; }
+
+@media(max-width:640px) {
+    .tier-grid { grid-template-columns:1fr; }
+    .case-grid { grid-template-columns:1fr; }
+    .app { padding:16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+    <!-- Header -->
+    <div class="page-header">
+        <a href="/training.html" class="back-link">← Back to Training</a>
+        <h1>🚑 ED Handoff Trainer</h1>
+        <p>You're the admitting intern. The ED is calling with a new patient — but how much information you get depends on the tier. Can you reach the right diagnosis with less to go on?</p>
+    </div>
+
+    <!-- Step 1: Choose tier -->
+    <div id="setupPanel">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dim);margin-bottom:10px;">Step 1 — Choose your handoff tier</div>
+        <div class="tier-grid">
+            <div class="tier-card" onclick="selectTier(1)" id="tier1">
+                <div class="tier-icon">🟥</div>
+                <div class="tier-name">Tier 1 — Triage Only</div>
+                <div class="tier-desc">One-line triage note + vitals. No labs, no assessment. You figure it out.</div>
+                <span class="tier-diff diff-hard">Hardest</span>
+            </div>
+            <div class="tier-card" onclick="selectTier(2)" id="tier2">
+                <div class="tier-icon">🟧</div>
+                <div class="tier-name">Tier 2 — Partial Workup</div>
+                <div class="tier-desc">Triage note + vitals + some lab results. ED resident gives a vague assessment.</div>
+                <span class="tier-diff diff-med">Intermediate</span>
+            </div>
+            <div class="tier-card" onclick="selectTier(3)" id="tier3">
+                <div class="tier-icon">🟩</div>
+                <div class="tier-name">Tier 3 — Full SBAR</div>
+                <div class="tier-desc">Complete SBAR handoff with diagnosis, workup results, and plan. Verify and add orders.</div>
+                <span class="tier-diff diff-easy">Standard</span>
+            </div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dim);margin-bottom:10px;">Step 2 — Choose a case</div>
+        <div class="case-grid" id="caseGrid"></div>
+        <button class="random-btn" id="startBtn" onclick="startCase()" style="display:none;">Start Case →</button>
+    </div>
+
+    <!-- Game area -->
+    <div id="gameArea" style="display:none;"></div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// CASE LIBRARY
+// ════════════════════════════════════════════════════════════
+const CASES = [
+    {
+        id: 'missed-mi',
+        chief: 'Chest pain — "probably anxiety"',
+        meta: '52M, triage at 2 AM',
+        triage: {
+            oneliner: '52M c/o chest pain x 2 hours. States feels anxious. Smells of alcohol. Triage acuity: ESI 4.',
+            vitals: { HR:'98', BP:'148/92', RR:'18', SpO2:'97%', Temp:'98.4°F' },
+            abnormalVitals: ['HR','BP'],
+            triageNote: 'Pt appears anxious, mildly diaphoretic. States he had wine at dinner. Denies SOB.'
+        },
+        partial: {
+            labs: 'CBC normal. BMP unremarkable. Troponin pending (sent 20 min ago). No ECG done yet.',
+            assessment: 'ED resident says: "Probably anxiety or reflux, but we\'re boarding him until the trop comes back. He seems fine."'
+        },
+        sbar: {
+            situation: '52-year-old male presenting with substernal chest pain radiating to left arm for 2 hours.',
+            background: 'HTN, hyperlipidemia, 30 pack-year smoking history (quit 5 years ago). Father died of MI at age 54. Had 2 glasses of wine tonight but is clinically sober.',
+            assessment: 'Concerned for ACS. ECG shows ST depressions in V3-V5. First troponin 0.18 (elevated). Patient is diaphoretic.',
+            recommendation: 'Started aspirin 325, heparin drip. Cardiology aware. Admitting for serial troponins and likely cath in AM.'
+        },
+        history: [
+            { q:'Describe the pain', a:'Substernal pressure, 7/10, radiating to left arm and jaw. Started during a walk after dinner. Constant, not positional, not pleuritic.', category:'HPI', critical:true },
+            { q:'Any shortness of breath?', a:'Mild. He says he feels like he can\'t take a deep breath. No cough, no wheezing.', category:'HPI', critical:false },
+            { q:'Nausea or vomiting?', a:'Yes, mild nausea, no vomiting. Also feels "sweaty."', category:'HPI', critical:true },
+            { q:'How much did you drink?', a:'Two glasses of wine at dinner, about 3 hours ago. He\'s coherent and oriented.', category:'Social', critical:false },
+            { q:'Medical history?', a:'Hypertension (on lisinopril), hyperlipidemia (on atorvastatin), former smoker — 30 pack-years, quit 5 years ago.', category:'PMH', critical:true },
+            { q:'Family history?', a:'Father died of MI at age 54. Mother has type 2 diabetes.', category:'FHx', critical:true },
+            { q:'Any chest pain before?', a:'Never. This is completely new for him.', category:'HPI', critical:false },
+            { q:'Current medications?', a:'Lisinopril 20mg daily, atorvastatin 40mg daily. No aspirin.', category:'Meds', critical:false },
+            { q:'Allergies?', a:'NKDA.', category:'Allergies', critical:false },
+            { q:'Did anything make it better?', a:'Sublingual nitro in the ED helped briefly, then pain returned.', category:'HPI', critical:true }
+        ],
+        workup: {
+            available: ['ECG','Troponin','CBC','BMP','Chest X-ray','D-dimer','Lipase','VBG','CT Angio'],
+            results: {
+                'ECG': { text:'ST depressions V3-V5, T-wave inversions in aVL. No ST elevation.', abnormal:true },
+                'Troponin': { text:'Troponin I: 0.18 ng/mL (normal <0.04) — ELEVATED', abnormal:true },
+                'CBC': { text:'WBC 8.2, Hgb 14.1, Plt 245. Normal.', abnormal:false },
+                'BMP': { text:'Na 138, K 4.2, Cr 0.9, Glucose 142. Normal except mildly elevated glucose.', abnormal:false },
+                'Chest X-ray': { text:'No acute cardiopulmonary process. Normal cardiac silhouette.', abnormal:false },
+                'D-dimer': { text:'D-dimer 0.32 (normal <0.50). Normal.', abnormal:false },
+                'Lipase': { text:'Lipase 28 (normal). Not pancreatitis.', abnormal:false },
+                'VBG': { text:'pH 7.38, pCO2 42, HCO3 24. Normal.', abnormal:false },
+                'CT Angio': { text:'No pulmonary embolism. No aortic dissection. Coronary calcifications present.', abnormal:false }
+            },
+            critical: ['ECG','Troponin']
+        },
+        diagnosis: 'NSTEMI',
+        diagnosisAlt: ['nstemi','non-st elevation myocardial infarction','non st elevation mi','acs','acute coronary syndrome','unstable angina'],
+        explanation: 'This patient has a classic NSTEMI presentation masked by triage bias. The "smells of alcohol" note anchored the initial assessment toward anxiety/intoxication. Key findings: substernal pressure radiating to arm/jaw + diaphoresis + nausea + cardiac risk factors (HTN, HLD, smoking, family hx of premature CAD) + elevated troponin + ECG changes. The triage ESI 4 rating was dangerously low — this should have been ESI 2.',
+        mustNotMiss: 'STEMI (check ECG immediately), aortic dissection (tearing pain, BP differential), PE (if pleuritic)',
+        keyTeaching: 'Never let someone else\'s framing replace your own clinical assessment. "Smells of alcohol" is not a diagnosis. Chest pain + diaphoresis + risk factors = ACS until proven otherwise.'
+    },
+    {
+        id: 'meningitis',
+        chief: 'Headache and fever',
+        meta: '22F, college student',
+        triage: {
+            oneliner: '22F c/o worst headache of her life x 6 hours with fever. Triage acuity: ESI 3.',
+            vitals: { HR:'112', BP:'108/62', RR:'20', SpO2:'99%', Temp:'103.2°F' },
+            abnormalVitals: ['HR','BP','Temp'],
+            triageNote: 'Pt appears ill, lying with eyes closed. Reports photophobia. Lives in college dorm.'
+        },
+        partial: {
+            labs: 'WBC 18.4 with 92% neutrophils. Lactate 2.8. BMP normal except glucose 62. No LP done — ED is "too busy."',
+            assessment: 'ED resident says: "Bad headache with a fever. Could be flu, could be something worse. She looks sick though."'
+        },
+        sbar: {
+            situation: '22-year-old female college student with sudden severe headache, fever 103.2°F, and photophobia for 6 hours.',
+            background: 'Previously healthy, lives in a college dorm. Up to date on vaccines per patient but unable to confirm meningococcal. No recent travel or sick contacts she knows of. Roommate had a cold last week.',
+            assessment: 'High suspicion for bacterial meningitis. Nuchal rigidity on exam. Kernig sign positive. WBC 18.4 with left shift. LP needs to be done urgently.',
+            recommendation: 'Started empiric ceftriaxone + vancomycin + dexamethasone before LP per guidelines. Blood cultures drawn. CT head negative. Admitting to ICU for close monitoring.'
+        },
+        history: [
+            { q:'When did the headache start?', a:'About 6 hours ago. Came on fast — worst headache of her life. Generalized, throbbing, 10/10.', category:'HPI', critical:true },
+            { q:'Any neck stiffness?', a:'Yes, she can barely move her neck. It hurts to flex forward.', category:'HPI', critical:true },
+            { q:'Sensitivity to light?', a:'Intense photophobia. She\'s been keeping the lights off and has sunglasses on.', category:'HPI', critical:true },
+            { q:'Any rash?', a:'You notice petechiae on her lower extremities and trunk when you examine her.', category:'PE', critical:true },
+            { q:'Nausea or vomiting?', a:'Vomited twice in the last 2 hours.', category:'HPI', critical:false },
+            { q:'Any recent illness?', a:'Her roommate had a cold last week. She felt fine until today.', category:'Social', critical:false },
+            { q:'Vaccination history?', a:'She thinks she got her meningococcal vaccine but isn\'t sure which type. "My parents handled all that."', category:'PMH', critical:true },
+            { q:'Medical history?', a:'None. Takes oral contraceptives only.', category:'PMH', critical:false },
+            { q:'Altered mental status?', a:'Oriented x3 but appears confused at times. Slow to answer questions.', category:'Neuro', critical:true },
+            { q:'Any recent procedures?', a:'No surgeries, no dental work, no piercings recently.', category:'PMH', critical:false }
+        ],
+        workup: {
+            available: ['CBC','BMP','Lactate','Blood cultures','CT Head','Lumbar puncture','UA','CRP','Procalcitonin'],
+            results: {
+                'CBC': { text:'WBC 18,400 (92% neutrophils, 3% bands). Hgb 13.2, Plt 156.', abnormal:true },
+                'BMP': { text:'Na 134, K 3.8, Cr 0.7, Glucose 62 (low). BUN 18.', abnormal:true },
+                'Lactate': { text:'Lactate 2.8 mmol/L (elevated, normal <2.0)', abnormal:true },
+                'Blood cultures': { text:'Pending — drawn before antibiotics.', abnormal:false },
+                'CT Head': { text:'No acute intracranial pathology. No mass, no bleed, no midline shift. Safe to proceed with LP.', abnormal:false },
+                'Lumbar puncture': { text:'Opening pressure 32 cm H2O (elevated). WBC 2,400 (95% PMNs). Protein 280 (elevated). Glucose 22 (low — serum 62, ratio 0.35). Gram stain: gram-negative diplococci.', abnormal:true },
+                'UA': { text:'Clear, no infection.', abnormal:false },
+                'CRP': { text:'CRP 18.4 mg/dL (markedly elevated)', abnormal:true },
+                'Procalcitonin': { text:'Procalcitonin 8.2 ng/mL (highly elevated — strongly suggests bacterial infection)', abnormal:true }
+            },
+            critical: ['CT Head','Lumbar puncture','Blood cultures']
+        },
+        diagnosis: 'Bacterial meningitis',
+        diagnosisAlt: ['bacterial meningitis','meningitis','meningococcal meningitis','neisseria meningitidis','meningococcemia'],
+        explanation: 'Classic triad: headache + fever + nuchal rigidity in a college-age patient (high-risk for N. meningitidis). Petechiae indicate meningococcemia. LP shows neutrophilic pleocytosis, elevated protein, low glucose, and gram-negative diplococci (Neisseria). Empiric antibiotics (ceftriaxone + vancomycin + dexamethasone) should be given BEFORE LP if there will be any delay.',
+        mustNotMiss: 'SAH (thunderclap headache — but fever + meningismus + petechiae point to infection). HSV encephalitis (add acyclovir if altered mental status is prominent).',
+        keyTeaching: 'Do NOT delay antibiotics for LP. If CT is needed first, give antibiotics → CT → LP. The dexamethasone should be given before or with the first antibiotic dose to reduce hearing loss risk. Close contacts need prophylaxis (ciprofloxacin or rifampin).'
+    },
+    {
+        id: 'pe-postop',
+        chief: 'Post-op SOB and tachycardia',
+        meta: '45M, POD 3 knee replacement',
+        triage: {
+            oneliner: '45M s/p R TKA POD3, new dyspnea and tachycardia. Triage acuity: ESI 3.',
+            vitals: { HR:'118', BP:'132/78', RR:'24', SpO2:'91%', Temp:'99.8°F' },
+            abnormalVitals: ['HR','RR','SpO2'],
+            triageNote: 'Pt was doing well post-op, ambulatory yesterday. Woke today with sudden SOB and chest tightness. Anxious.'
+        },
+        partial: {
+            labs: 'CBC normal. BMP normal. Troponin negative. D-dimer 4.8 (very elevated). ABG shows respiratory alkalosis. Chest X-ray clear.',
+            assessment: 'ED resident says: "Could be a PE but could also be atelectasis or anxiety. He just had surgery so D-dimer is expected to be elevated. Ortho wants him back on the floor."'
+        },
+        sbar: {
+            situation: '45-year-old male, post-op day 3 from right total knee arthroplasty, presenting with acute onset dyspnea, tachycardia to 118, and hypoxia to 91% on room air.',
+            background: 'Surgery 3 days ago. Was ambulatory yesterday. BMI 34. Was on Lovenox prophylaxis but missed last night\'s dose per nursing. No prior VTE history.',
+            assessment: 'High clinical suspicion for pulmonary embolism given post-surgical state, immobility, missed anticoagulation dose, and sudden onset dyspnea with hypoxia. Wells score is high.',
+            recommendation: 'CTA chest ordered — results pending. Started therapeutic heparin drip. Patient on 4L NC, sats improving to 94%. If CTA positive, will need admission to medicine with anticoagulation. If massive PE with hemodynamic compromise, will need tPA discussion.'
+        },
+        history: [
+            { q:'When did the SOB start?', a:'Woke up about 2 hours ago feeling short of breath. Came on suddenly. Was fine yesterday — walked the halls.', category:'HPI', critical:true },
+            { q:'Any chest pain?', a:'Some tightness on the right side, worse with deep breaths. Not substernal, not pressure-like.', category:'HPI', critical:true },
+            { q:'Any leg swelling?', a:'His right leg is swollen from surgery but his LEFT calf seems more swollen and tender than before.', category:'PE', critical:true },
+            { q:'Did you receive your blood thinner?', a:'He says the nurse mentioned something about missing a dose last night because of a pharmacy delay.', category:'Meds', critical:true },
+            { q:'Any prior blood clots?', a:'No personal history. His mother had a DVT after a long flight once.', category:'FHx', critical:true },
+            { q:'Cough or hemoptysis?', a:'Mild dry cough since this morning. No blood.', category:'HPI', critical:false },
+            { q:'Any lightheadedness?', a:'Felt dizzy when he first stood up. Better lying down.', category:'HPI', critical:false },
+            { q:'Smoking history?', a:'Never smoker.', category:'Social', critical:false },
+            { q:'Any calf pain?', a:'Yes — left calf is tender when you dorsiflex his foot. He thought it was just from being in bed.', category:'PE', critical:true },
+            { q:'Current medications?', a:'Enoxaparin 40mg subQ daily (prophylactic), oxycodone PRN, acetaminophen, aspirin 81mg.', category:'Meds', critical:false }
+        ],
+        workup: {
+            available: ['CBC','BMP','Troponin','D-dimer','ABG','Chest X-ray','CT Angio Chest','ECG','BNP','Lower extremity duplex'],
+            results: {
+                'CBC': { text:'WBC 9.8, Hgb 12.4, Plt 312. Normal.', abnormal:false },
+                'BMP': { text:'Normal.', abnormal:false },
+                'Troponin': { text:'Troponin I: 0.06 ng/mL (mildly elevated — suggests RV strain)', abnormal:true },
+                'D-dimer': { text:'D-dimer: 4.8 μg/mL (markedly elevated, normal <0.50)', abnormal:true },
+                'ABG': { text:'pH 7.48, pCO2 28, pO2 64, HCO3 22. Respiratory alkalosis with hypoxemia.', abnormal:true },
+                'Chest X-ray': { text:'Clear lung fields. No pneumothorax, no consolidation. Subtle right heart enlargement.', abnormal:false },
+                'CT Angio Chest': { text:'Large saddle embolus at the main pulmonary artery bifurcation extending into bilateral pulmonary arteries. RV/LV ratio 1.4 (RV strain). No pleural effusion.', abnormal:true },
+                'ECG': { text:'Sinus tachycardia at 118. S1Q3T3 pattern. Right axis deviation. T-wave inversions V1-V4.', abnormal:true },
+                'BNP': { text:'BNP: 480 pg/mL (elevated — suggests right heart strain)', abnormal:true },
+                'Lower extremity duplex': { text:'Acute deep vein thrombosis in left popliteal and femoral veins. Right leg post-surgical changes.', abnormal:true }
+            },
+            critical: ['CT Angio Chest','ECG','D-dimer']
+        },
+        diagnosis: 'Pulmonary embolism',
+        diagnosisAlt: ['pulmonary embolism','pe','saddle embolus','saddle pe','massive pe','submassive pe','vte','venous thromboembolism'],
+        explanation: 'Classic post-operative PE: sudden dyspnea + tachycardia + hypoxia in a post-surgical patient who missed anticoagulation prophylaxis. Risk factors: surgery, immobility, obesity. Physical exam clue: contralateral leg swelling (left DVT). CTA shows saddle embolus with RV strain (submassive PE). Mildly elevated troponin and BNP indicate right heart strain. The S1Q3T3 ECG pattern is classic but not sensitive.',
+        mustNotMiss: 'Massive PE with hemodynamic instability (would need tPA or embolectomy). Fat embolism syndrome (usually POD 1-3, petechial rash, confusion — less likely here but worth considering post-orthopedic surgery).',
+        keyTeaching: 'D-dimer is expected to be elevated post-operatively — but that doesn\'t mean you ignore it. In high clinical suspicion (Wells >4), go straight to CTA regardless of D-dimer. A missed prophylaxis dose in a high-risk patient is a systems error that should be reported. Submassive PE (RV strain but stable BP) is a gray zone — consider ICU admission, anticoagulation, and close monitoring for deterioration.'
+    },
+    {
+        id: 'sbo',
+        chief: 'Abdominal pain and vomiting',
+        meta: '67F, prior abdominal surgery',
+        triage: {
+            oneliner: '67F c/o abd pain, N/V x 2 days, no BM x 3 days. Hx of prior surgery. ESI 3.',
+            vitals: { HR:'104', BP:'118/68', RR:'18', SpO2:'98%', Temp:'100.1°F' },
+            abnormalVitals: ['HR','Temp'],
+            triageNote: 'Pt with distended abdomen, in moderate distress. Vomiting bilious material. Hx of hysterectomy 10 years ago.'
+        },
+        partial: {
+            labs: 'WBC 14.2. BMP: K 3.2, BUN 32, Cr 1.4 (baseline 0.8). Lactate 1.6. Lipase normal. KUB shows dilated loops of small bowel.',
+            assessment: 'ED resident says: "Looks like a small bowel obstruction. She\'s dehydrated. Surgery should probably see her but she\'s not peritoneal."'
+        },
+        sbar: {
+            situation: '67-year-old female with 2 days of progressive abdominal pain, bilious vomiting, and obstipation (no BM x 3 days). Distended, tympanitic abdomen.',
+            background: 'History of total abdominal hysterectomy 10 years ago (adhesions risk). No prior obstructions. PMH: HTN, GERD.',
+            assessment: 'Small bowel obstruction, likely adhesive. CT abdomen shows transition point in the mid-ileum with proximal dilation. No signs of closed-loop obstruction or ischemia currently. AKI from dehydration.',
+            recommendation: 'NPO, NG tube placed with 600mL output. Aggressive IV fluid resuscitation. Surgical consult for admission. Serial abdominal exams. Repeat lactate in 4-6 hours.'
+        },
+        history: [
+            { q:'When did the pain start?', a:'Two days ago, intermittent crampy pain that\'s gotten worse. Now constant. Diffuse but worst periumbilical.', category:'HPI', critical:true },
+            { q:'Vomiting?', a:'Bilious vomiting, about 8 times today. Can\'t keep anything down.', category:'HPI', critical:true },
+            { q:'Last bowel movement?', a:'Three days ago. She hasn\'t passed gas either in 2 days.', category:'HPI', critical:true },
+            { q:'Any prior surgeries?', a:'Total abdominal hysterectomy 10 years ago for fibroids. Appendectomy in her 20s.', category:'Surgical', critical:true },
+            { q:'Any fever or chills?', a:'Low-grade temp at home, mild chills. No rigors.', category:'HPI', critical:false },
+            { q:'Abdominal exam findings?', a:'Distended, tympanitic. Diffuse tenderness but no rebound or guarding. High-pitched, tinkling bowel sounds.', category:'PE', critical:true },
+            { q:'Previous obstructions?', a:'Never had this before.', category:'PMH', critical:false },
+            { q:'Medications?', a:'Lisinopril, omeprazole. Started iron supplements last month (constipating but this is different).', category:'Meds', critical:false },
+            { q:'Hernias?', a:'No visible hernias on exam. No incisional hernias.', category:'PE', critical:true },
+            { q:'Urinary output?', a:'Very little urine output today — dark concentrated urine.', category:'HPI', critical:false }
+        ],
+        workup: {
+            available: ['CBC','BMP','Lactate','Lipase','LFTs','CT Abdomen/Pelvis','KUB','UA','Blood cultures','Upright chest X-ray'],
+            results: {
+                'CBC': { text:'WBC 14,200 (82% neutrophils). Hgb 15.2 (hemoconcentrated). Plt 310.', abnormal:true },
+                'BMP': { text:'Na 141, K 3.2 (low), Cl 94, CO2 30, BUN 32, Cr 1.4 (baseline 0.8). Glucose 118.', abnormal:true },
+                'Lactate': { text:'Lactate 1.6 mmol/L (borderline — reassuring but repeat in 4-6h)', abnormal:false },
+                'Lipase': { text:'Lipase 42 (normal). Not pancreatitis.', abnormal:false },
+                'LFTs': { text:'AST 22, ALT 18, Alk Phos 84, T.bili 0.8. Normal.', abnormal:false },
+                'CT Abdomen/Pelvis': { text:'Dilated proximal small bowel loops up to 4.2cm. Transition point in mid-ileum with decompressed distal bowel. Consistent with adhesive small bowel obstruction. No free air, no signs of closed-loop obstruction. Small amount of free fluid.', abnormal:true },
+                'KUB': { text:'Dilated loops of small bowel with air-fluid levels. No free air under diaphragm.', abnormal:true },
+                'UA': { text:'Concentrated, SG 1.030. No infection.', abnormal:false },
+                'Blood cultures': { text:'Pending.', abnormal:false },
+                'Upright chest X-ray': { text:'No free air under diaphragm. Lungs clear.', abnormal:false }
+            },
+            critical: ['CT Abdomen/Pelvis','Lactate','BMP']
+        },
+        diagnosis: 'Small bowel obstruction',
+        diagnosisAlt: ['small bowel obstruction','sbo','adhesive small bowel obstruction','bowel obstruction','intestinal obstruction'],
+        explanation: 'Classic adhesive SBO in a patient with prior abdominal surgery: crampy abdominal pain + bilious vomiting + obstipation + distension. The CT confirms a transition point without signs of strangulation. Key management: NPO, NGT decompression, aggressive IV fluids (she\'s dehydrated — elevated BUN/Cr, low K+, hemoconcentrated Hgb), serial exams, and surgery consult. Normal lactate is reassuring but needs serial monitoring.',
+        mustNotMiss: 'Closed-loop obstruction or strangulation (would show signs of ischemia: elevated lactate, peritoneal signs, fever). Large bowel obstruction from malignancy (CT helps differentiate). Incarcerated hernia (exam showed none).',
+        keyTeaching: 'Adhesions are the #1 cause of SBO. Every patient with SBO gets: NPO + NGT + IV fluids + surgery consult + serial exams. The key question is always: does this need operative intervention (closed-loop, ischemia, failure to resolve) or can it be managed non-operatively? Repeat lactate is critical — a rising lactate changes the game.'
+    }
+];
+
+// ════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════
+let selectedTier = null;
+let selectedCase = null;
+let currentCase = null;
+let ddxList = [];
+let askedQuestions = new Set();
+let orderedTests = new Set();
+let stage = 0; // 0=setup, 1=triage, 2=differential, 3=history, 4=workup, 5=diagnosis, 6=feedback
+
+// ════════════════════════════════════════════════════════════
+// SETUP
+// ════════════════════════════════════════════════════════════
+function selectTier(t) {
+    selectedTier = t;
+    document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('tier'+t).classList.add('selected');
+    renderCaseGrid();
+}
+
+function renderCaseGrid() {
+    const grid = document.getElementById('caseGrid');
+    grid.innerHTML = CASES.map(c => `
+        <div class="case-pick" onclick="selectCaseById('${c.id}')" id="cp-${c.id}">
+            <div class="cp-chief">${c.chief}</div>
+            <div class="cp-meta">${c.meta}</div>
+        </div>
+    `).join('') + `
+        <div class="case-pick" onclick="selectRandom()" id="cp-random" style="text-align:center;border-style:dashed;">
+            <div class="cp-chief">🎲 Random Case</div>
+            <div class="cp-meta">Surprise me</div>
+        </div>
+    `;
+    document.getElementById('startBtn').style.display = selectedTier ? 'block' : 'none';
+}
+
+function selectCaseById(id) {
+    selectedCase = id;
+    document.querySelectorAll('.case-pick').forEach(c => c.classList.remove('selected'));
+    document.getElementById('cp-'+id)?.classList.add('selected');
+    document.getElementById('startBtn').style.display = 'block';
+}
+
+function selectRandom() {
+    const r = CASES[Math.floor(Math.random() * CASES.length)];
+    selectCaseById(r.id);
+}
+
+// ════════════════════════════════════════════════════════════
+// GAME FLOW
+// ════════════════════════════════════════════════════════════
+function startCase() {
+    if (!selectedTier) { alert('Pick a tier first'); return; }
+    if (!selectedCase) { selectRandom(); }
+    currentCase = CASES.find(c => c.id === selectedCase);
+    if (!currentCase) return;
+
+    document.getElementById('setupPanel').style.display = 'none';
+    document.getElementById('gameArea').style.display = 'block';
+    ddxList = [];
+    askedQuestions = new Set();
+    orderedTests = new Set();
+    stage = 1;
+    renderStage();
+}
+
+function renderStage() {
+    const area = document.getElementById('gameArea');
+    const c = currentCase;
+    const dots = [1,2,3,4,5].map(i => `<div class="prog-dot ${i<stage?'done':''} ${i===stage?'active':''}"></div>`).join('');
+    const labels = ['','Triage','Differential','History','Workup','Diagnosis'];
+    const progress = `<div class="progress-bar">${dots}<div class="prog-label">${labels[stage] || ''}</div></div>`;
+
+    if (stage === 1) {
+        // Show triage info based on tier
+        let triageContent = `
+            <div class="triage-oneliner">${c.triage.oneliner}</div>
+            <div class="vitals-row">
+                ${Object.entries(c.triage.vitals).map(([k,v]) =>
+                    `<div class="vital-chip ${c.triage.abnormalVitals.includes(k)?'abnormal':''}">${k}: ${v}</div>`
+                ).join('')}
+            </div>
+            <div class="triage-note">${c.triage.triageNote}</div>
+        `;
+
+        if (selectedTier >= 2 && c.partial) {
+            triageContent += `
+                <div class="partial-workup">
+                    <div class="pw-label">📋 Partial Workup (from ED)</div>
+                    <div class="pw-content">${c.partial.labs}<br><br><em>${c.partial.assessment}</em></div>
+                </div>
+            `;
+        }
+
+        if (selectedTier >= 3 && c.sbar) {
+            triageContent += `
+                <div class="sbar-card">
+                    <div class="sbar-section"><div class="sbar-label">S — Situation</div><div class="sbar-text">${c.sbar.situation}</div></div>
+                    <div class="sbar-section"><div class="sbar-label">B — Background</div><div class="sbar-text">${c.sbar.background}</div></div>
+                    <div class="sbar-section"><div class="sbar-label">A — Assessment</div><div class="sbar-text">${c.sbar.assessment}</div></div>
+                    <div class="sbar-section"><div class="sbar-label">R — Recommendation</div><div class="sbar-text">${c.sbar.recommendation}</div></div>
+                </div>
+            `;
+        }
+
+        area.innerHTML = `${progress}
+            <div class="triage-card">
+                <div class="triage-header">
+                    <div class="th-icon">🚑</div>
+                    <div>
+                        <div class="th-label">${selectedTier===1?'Tier 1 — Triage Only':selectedTier===2?'Tier 2 — Partial Workup':'Tier 3 — Full SBAR'}</div>
+                        <div class="th-title">Incoming Patient</div>
+                    </div>
+                </div>
+                <div class="triage-body">${triageContent}</div>
+            </div>
+            <button class="submit-dx" onclick="nextStage()">Build My Differential →</button>
+        `;
+    }
+
+    else if (stage === 2) {
+        area.innerHTML = `${progress}
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-num">2</div>
+                    <div class="stage-title">Initial Differential Diagnosis</div>
+                </div>
+                <p>Based on what you know so far, what are you considering? List your differential in order of likelihood. Include at least one must-not-miss diagnosis.</p>
+                <div class="ddx-input-row">
+                    <input class="ddx-input" id="ddxInput" placeholder="Type a diagnosis and press Enter or Add" onkeydown="if(event.key==='Enter')addDdx()">
+                    <button class="ddx-add" onclick="addDdx()">+ Add</button>
+                </div>
+                <div class="ddx-list" id="ddxList"></div>
+                <p style="font-size:11px;color:var(--text-dim);margin-top:8px;" id="ddxHint">Add at least 3 diagnoses to proceed.</p>
+                <button class="submit-dx" onclick="nextStage()" id="ddxNext" style="display:none;margin-top:12px;">Gather More Information →</button>
+            </div>
+        `;
+        document.getElementById('ddxInput').focus();
+    }
+
+    else if (stage === 3) {
+        const questions = c.history.map((h,i) => `
+            <div class="hx-q" onclick="askQuestion(${i})" id="hxq-${i}">
+                <div class="q-icon">${askedQuestions.has(i)?'✅':'❓'}</div>
+                <div>
+                    <div class="q-text">${h.q}</div>
+                    <div class="q-answer">${h.a}</div>
+                </div>
+            </div>
+        `).join('');
+
+        area.innerHTML = `${progress}
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-num">3</div>
+                    <div class="stage-title">Take a History</div>
+                </div>
+                <p>Click questions to ask the patient. You don't have to ask all of them — choose wisely. Critical questions will be scored.</p>
+                <div class="hx-grid">${questions}</div>
+                <button class="submit-dx" onclick="nextStage()" style="margin-top:16px;">Order Workup →</button>
+            </div>
+        `;
+    }
+
+    else if (stage === 4) {
+        const tests = c.workup.available.map(t => `
+            <button class="wu-btn ${orderedTests.has(t)?'ordered':''}" onclick="orderTest('${t}')">${t}</button>
+        `).join('');
+
+        let resultsHtml = '';
+        if (orderedTests.size > 0) {
+            const items = Array.from(orderedTests).map(t => {
+                const r = c.workup.results[t];
+                return r ? `<div class="wr-item ${r.abnormal?'abnormal':''}"><strong>${t}:</strong> ${r.text}</div>` : '';
+            }).join('');
+            resultsHtml = `<div class="wu-results visible"><div style="font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;margin-bottom:6px;">📊 Results</div>${items}</div>`;
+        }
+
+        area.innerHTML = `${progress}
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-num">4</div>
+                    <div class="stage-title">Order Workup</div>
+                </div>
+                <p>Select the tests you want to order. Results appear as they're ordered. Not every test is necessary — ordering appropriately is part of the score.</p>
+                <div class="workup-grid" id="wuGrid">${tests}</div>
+                ${resultsHtml}
+                <button class="submit-dx" onclick="nextStage()" style="margin-top:16px;">Make My Diagnosis →</button>
+            </div>
+        `;
+    }
+
+    else if (stage === 5) {
+        area.innerHTML = `${progress}
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-num">5</div>
+                    <div class="stage-title">Final Diagnosis</div>
+                </div>
+                <p>Based on your history and workup, what is the most likely diagnosis?</p>
+                <input class="final-input" id="finalDx" placeholder="Type your diagnosis..." onkeydown="if(event.key==='Enter')submitDiagnosis()">
+                <button class="submit-dx" onclick="submitDiagnosis()">Submit Diagnosis</button>
+            </div>
+        `;
+        document.getElementById('finalDx').focus();
+    }
+}
+
+// ════════════════════════════════════════════════════════════
+// STAGE ACTIONS
+// ════════════════════════════════════════════════════════════
+function nextStage() {
+    stage++;
+    renderStage();
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function addDdx() {
+    const input = document.getElementById('ddxInput');
+    const val = input.value.trim();
+    if (!val) return;
+    ddxList.push(val);
+    input.value = '';
+    input.focus();
+
+    document.getElementById('ddxList').innerHTML = ddxList.map((d,i) => `
+        <div class="ddx-tag">${i+1}. ${d} <span class="remove" onclick="removeDdx(${i})">×</span></div>
+    `).join('');
+
+    if (ddxList.length >= 3) {
+        document.getElementById('ddxNext').style.display = 'block';
+        document.getElementById('ddxHint').textContent = `${ddxList.length} diagnoses listed. You can add more or proceed.`;
+    }
+}
+
+function removeDdx(i) {
+    ddxList.splice(i, 1);
+    document.getElementById('ddxList').innerHTML = ddxList.map((d,j) => `
+        <div class="ddx-tag">${j+1}. ${d} <span class="remove" onclick="removeDdx(${j})">×</span></div>
+    `).join('');
+    if (ddxList.length < 3) {
+        document.getElementById('ddxNext').style.display = 'none';
+        document.getElementById('ddxHint').textContent = 'Add at least 3 diagnoses to proceed.';
+    }
+}
+
+function askQuestion(idx) {
+    askedQuestions.add(idx);
+    const el = document.getElementById('hxq-'+idx);
+    if (el) {
+        el.classList.add('asked');
+        el.querySelector('.q-icon').textContent = '✅';
+    }
+}
+
+function orderTest(name) {
+    orderedTests.add(name);
+    renderStage(); // Re-render to show results
+}
+
+// ════════════════════════════════════════════════════════════
+// SCORING & FEEDBACK
+// ════════════════════════════════════════════════════════════
+function submitDiagnosis() {
+    const input = document.getElementById('finalDx')?.value.trim().toLowerCase();
+    if (!input) return;
+    const c = currentCase;
+
+    // Check correctness
+    const isCorrect = c.diagnosisAlt.some(alt => input.includes(alt) || alt.includes(input));
+
+    // Score differential
+    const ddxLower = ddxList.map(d => d.toLowerCase());
+    const hadCorrectInDdx = c.diagnosisAlt.some(alt => ddxLower.some(d => d.includes(alt) || alt.includes(d)));
+    const ddxBreadth = Math.min(100, ddxList.length * 15);
+
+    // Score history
+    const criticalQs = c.history.filter(h => h.critical);
+    const criticalAsked = criticalQs.filter((h,i) => askedQuestions.has(c.history.indexOf(h)));
+    const hxScore = criticalQs.length > 0 ? Math.round((criticalAsked.length / criticalQs.length) * 100) : 50;
+
+    // Score workup
+    const criticalTests = c.workup.critical;
+    const criticalOrdered = criticalTests.filter(t => orderedTests.has(t));
+    const workupScore = Math.round((criticalOrdered.length / criticalTests.length) * 100);
+    const efficiency = orderedTests.size <= criticalTests.length + 2 ? 100 : Math.max(40, 100 - (orderedTests.size - criticalTests.length - 2) * 10);
+
+    // Tier bonus
+    const tierBonus = selectedTier === 1 ? 15 : selectedTier === 2 ? 5 : 0;
+
+    // Overall
+    const diagScore = isCorrect ? 100 : (hadCorrectInDdx ? 40 : 0);
+    const overall = Math.round((diagScore * 0.35 + hxScore * 0.25 + workupScore * 0.25 + efficiency * 0.15) + tierBonus);
+
+    const area = document.getElementById('gameArea');
+    const dots = [1,2,3,4,5].map(i => `<div class="prog-dot done"></div>`).join('');
+
+    const scoreColor = (s) => s >= 80 ? 'var(--green)' : s >= 50 ? 'var(--amber)' : 'var(--red)';
+
+    area.innerHTML = `
+        <div class="progress-bar">${dots}<div class="prog-label">Complete</div></div>
+        <div class="feedback">
+            <h3>${isCorrect ? '✅' : '❌'} Case Complete</h3>
+
+            <div class="fb-correct">
+                <div class="fc-label">${isCorrect ? 'Correct Diagnosis' : 'Correct Diagnosis Was'}</div>
+                <div class="fc-dx">${c.diagnosis}</div>
+                <div class="fc-explain">${c.explanation}</div>
+            </div>
+
+            ${!isCorrect ? `<p style="margin-top:12px;font-size:13px;color:var(--red);"><strong>Your answer:</strong> ${input}. ${hadCorrectInDdx ? 'You had the correct diagnosis in your differential but didn\'t commit to it.' : 'The correct diagnosis was not in your differential — consider broadening early on.'}</p>` : ''}
+
+            <div style="margin-top:20px;">
+                <div class="fb-score-row">
+                    <div class="fb-label">Diagnosis</div>
+                    <div class="fb-bar"><div class="fb-fill" style="width:${diagScore}%;background:${scoreColor(diagScore)}"></div></div>
+                    <div class="fb-val" style="color:${scoreColor(diagScore)}">${diagScore}%</div>
+                </div>
+                <div class="fb-score-row">
+                    <div class="fb-label">History Gathering</div>
+                    <div class="fb-bar"><div class="fb-fill" style="width:${hxScore}%;background:${scoreColor(hxScore)}"></div></div>
+                    <div class="fb-val" style="color:${scoreColor(hxScore)}">${hxScore}%</div>
+                </div>
+                <div class="fb-score-row">
+                    <div class="fb-label">Workup Selection</div>
+                    <div class="fb-bar"><div class="fb-fill" style="width:${workupScore}%;background:${scoreColor(workupScore)}"></div></div>
+                    <div class="fb-val" style="color:${scoreColor(workupScore)}">${workupScore}%</div>
+                </div>
+                <div class="fb-score-row">
+                    <div class="fb-label">Test Efficiency</div>
+                    <div class="fb-bar"><div class="fb-fill" style="width:${efficiency}%;background:${scoreColor(efficiency)}"></div></div>
+                    <div class="fb-val" style="color:${scoreColor(efficiency)}">${efficiency}%</div>
+                </div>
+                ${tierBonus > 0 ? `<div class="fb-score-row"><div class="fb-label">Tier ${selectedTier} Bonus</div><div class="fb-bar"><div class="fb-fill" style="width:100%;background:var(--purple)"></div></div><div class="fb-val" style="color:var(--purple)">+${tierBonus}</div></div>` : ''}
+                <div class="fb-score-row" style="padding-top:10px;border-top:1px solid var(--border);margin-top:6px;">
+                    <div class="fb-label" style="font-weight:700;color:var(--text);">Overall</div>
+                    <div class="fb-bar"><div class="fb-fill" style="width:${Math.min(100,overall)}%;background:${scoreColor(overall)}"></div></div>
+                    <div class="fb-val" style="color:${scoreColor(overall)};font-size:14px;">${Math.min(100,overall)}%</div>
+                </div>
+            </div>
+
+            <div class="fb-text">
+                <strong>Must-Not-Miss:</strong> ${c.mustNotMiss}<br><br>
+                <strong>Key Teaching Point:</strong> ${c.keyTeaching}
+                <br><br>
+                <strong>Your differential:</strong> ${ddxList.join(', ') || 'None entered'}.<br>
+                <strong>History questions asked:</strong> ${askedQuestions.size} of ${c.history.length} (${criticalAsked.length}/${criticalQs.length} critical).<br>
+                <strong>Tests ordered:</strong> ${orderedTests.size} (${criticalOrdered.length}/${criticalTests.length} critical).
+            </div>
+
+            <div class="fb-actions">
+                <button class="fb-btn primary" onclick="resetTrainer()">Try Another Case</button>
+                <a href="/training.html" class="fb-btn secondary" style="text-decoration:none;">← Back to Training</a>
+            </div>
+        </div>
+    `;
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function resetTrainer() {
+    selectedTier = null;
+    selectedCase = null;
+    currentCase = null;
+    ddxList = [];
+    askedQuestions = new Set();
+    orderedTests = new Set();
+    stage = 0;
+    document.getElementById('setupPanel').style.display = 'block';
+    document.getElementById('gameArea').style.display = 'none';
+    document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('caseGrid').innerHTML = '';
+    document.getElementById('startBtn').style.display = 'none';
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Init case grid if tier already selected
+renderCaseGrid();
+</script>
+
+<!-- Nav + Gate -->
+<script src="/data/rdx-persist.js"></script>
+<script src="/js/rdx-nav.js"></script>
+<script src="/rdx-gate.js"></script>
+</body>
+</html>
