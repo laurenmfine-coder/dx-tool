@@ -14,7 +14,7 @@
 
   // --- Detect section (launch version) ---
   var section = 'home';
-  if (/training|cases\/|CoachDx|mentor-chat|coach|consult-trainer|sbar|ed-handoff|night-float|simroomdx/i.test(path)) section = 'coachdx';
+  if (/training|cases\/|CoachDx|mentor-chat|coach|consult-|sbar|ed-handoff|night-float|simroomdx/i.test(path)) section = 'coachdx';
   else if (/learning-dashboard|dashboard/i.test(path)) section = 'dashboard';
   else if (/auth\//i.test(path)) section = 'account';
 
