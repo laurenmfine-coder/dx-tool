@@ -1,703 +1,252 @@
 <!DOCTYPE html>
+<!-- training.html | build 2025-02-23 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReasonDx — Clinical Reasoning Trainer</title>
+    <title>ReasonDx — Clinical Reasoning Training</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Gatekeeper - checks auth and tier (optional, graceful fallback) -->
-    <script>
-        window.RDXGate = window.RDXGate || {
-            getUser: () => null,
-            getUserTier: () => 'free',
-            getCaseCount: () => 0
-        };
-    </script>
-    <script src="/rdx-gate.js" onerror="console.log('rdx-gate.js not found, using defaults')"></script>
-    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/rdx-theme.css">
+    <link rel="stylesheet" href="/mobile.css">
     <style>
         :root {
-            --brand: #2874A6;
-            --brand-dark: #1B4F72;
-            --brand-light: #D4E6F1;
-            --brand-glow: rgba(40, 116, 166, 0.12);
-            --bg: #F8FAFC;
-            --bg-card: #FFFFFF;
-            --text: #1E293B;
-            --text-secondary: #64748B;
-            --text-muted: #94A3B8;
-            --border: #E2E8F0;
-            --success: #059669;
-            --warning: #D97706;
-            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --brand: #2874A6; --brand-dark: #1B4F72; --brand-light: #D4E6F1;
+            --bg: #F8FAFC; --bg-card: #FFFFFF; --text: #1E293B;
+            --text-muted: #64748B; --border: #E2E8F0;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
             --font-display: 'Fraunces', Georgia, serif;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: var(--font-body);
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-        
-        /* Header */
-        .header {
-            background: white;
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-        
-        .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-            text-decoration: none;
-        }
-        
-        .logo span { color: var(--brand); }
-        
-        .nav {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        
-        .nav-link {
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: all 0.2s;
-        }
-        
-        .nav-link:hover { background: var(--brand-light); color: var(--brand-dark); }
-        .nav-link.active { background: var(--brand); color: white; }
-        
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .user-tier {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .user-tier.free { background: #FEF3C7; color: #92400E; }
-        .user-tier.pro { background: var(--brand-light); color: var(--brand-dark); }
-        
-        .user-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--brand);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-        
-        /* Main Content */
-        .main {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 24px;
-        }
-        
-        .welcome {
-            margin-bottom: 32px;
-        }
-        
-        .welcome h1 {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .welcome p {
-            color: var(--text-secondary);
-        }
-        
-        /* Stats Bar */
-        .stats-bar {
-            display: flex;
-            gap: 24px;
-            padding: 20px 24px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
-        
-        .stat {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--brand);
-        }
-        
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .stat.warning .stat-value { color: var(--warning); }
-        
-        /* Section Headers */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-        
-        .section-header h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .section-header a {
-            font-size: 0.85rem;
-            color: var(--brand);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        /* Training Modes Grid */
-        .modes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-        
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        /* ── Welcome ─────────────────────────── */
+        .welcome { max-width: 960px; margin: 0 auto; padding: 40px 24px 0; }
+        .welcome h1 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+        .welcome p { color: var(--text-muted); font-size: 15px; }
+
+        /* ── Stats row ───────────────────────── */
+        .stats-row { max-width: 960px; margin: 20px auto 0; padding: 0 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .stat-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; flex: 1; min-width: 140px; }
+        .stat-val { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--brand); }
+        .stat-val .inf { font-size: 22px; }
+        .stat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 2px; }
+
+        /* ── Training Modes ──────────────────── */
+        .section { max-width: 960px; margin: 0 auto; padding: 32px 24px 0; }
+        .section-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+
+        .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .mode-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
+            background: white; border: 1.5px solid var(--border); border-radius: 16px;
+            padding: 28px 24px; text-decoration: none; color: inherit;
+            transition: all 0.25s; position: relative; overflow: hidden;
         }
-        
-        .mode-card:hover {
-            border-color: var(--brand);
-            box-shadow: 0 4px 20px var(--brand-glow);
-            transform: translateY(-2px);
-        }
-        
-        .mode-card.locked {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        
-        .mode-card.locked:hover {
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .mode-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-        }
-        
-        .mode-icon.blue { background: var(--brand-light); }
-        .mode-icon.purple { background: #EDE9FE; }
-        .mode-icon.green { background: #D1FAE5; }
-        .mode-icon.orange { background: #FEF3C7; }
-        
-        .mode-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .mode-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-        
+        .mode-card:hover { border-color: var(--brand); box-shadow: 0 8px 30px rgba(40,116,166,0.1); transform: translateY(-2px); }
+        .mode-card .icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
+        .mode-card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+        .mode-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        .mode-card .tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+        .mode-card .tag { padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+
+        .mode-card.crt .icon { background: #F3E8FF; }
+        .mode-card.crt:hover { border-color: #7C3AED; }
+        .mode-card.crt .tag { background: #F3E8FF; color: #6D28D9; }
+
+        .mode-card.sim .icon { background: #E0F2FE; }
+        .mode-card.sim:hover { border-color: #0284C7; }
+        .mode-card.sim .tag { background: #E0F2FE; color: #0369A1; }
+
+        .mode-card.sbar .icon { background: #DCFCE7; }
+        .mode-card.sbar:hover { border-color: #16A34A; }
+        .mode-card.sbar .tag { background: #DCFCE7; color: #15803D; }
+
+        .mode-card.coach .icon { background: #FEF3C7; }
+        .mode-card.coach:hover { border-color: #D97706; }
+        .mode-card.coach .tag { background: #FEF3C7; color: #B45309; }
+
+        .mode-card.night .icon { background: #1E1B4B; }
+        .mode-card.night:hover { border-color: #6366F1; }
+        .mode-card.night .tag { background: #EEF2FF; color: #4338CA; }
+
         .pro-badge {
-            font-size: 0.65rem;
-            padding: 3px 8px;
-            background: var(--brand);
-            color: white;
-            border-radius: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 3px;
+            background: var(--brand); color: white; font-size: 9px; font-weight: 700;
+            padding: 2px 7px; border-radius: 6px; letter-spacing: 0.3px;
+            margin-left: 6px; vertical-align: middle;
         }
-        
-        .lock-overlay {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            font-size: 1.25rem;
+
+        /* ── Featured banner ─────────────────── */
+        .featured-banner {
+            max-width: 960px; margin: 32px auto 0; padding: 0 24px;
         }
-        
-        /* Case List */
-        .case-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 40px;
+        .featured-inner {
+            background: linear-gradient(135deg, #0F172A 0%, #1B3A5C 60%, #2874A6 100%);
+            border-radius: 16px; padding: 28px 32px; display: flex; align-items: center; gap: 24px;
+            text-decoration: none; color: white; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
-        
-        .case-item {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.2s;
-        }
-        
-        .case-item:hover {
-            border-color: var(--brand);
-            background: var(--brand-glow);
-        }
-        
-        .case-specialty {
-            font-size: 1.5rem;
-        }
-        
-        .case-info {
-            flex: 1;
-        }
-        
-        .case-title {
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-        
-        .case-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-        
-        .case-arrow {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-        }
-        
-        /* Upgrade Banner */
-        .upgrade-banner {
-            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
-            border-radius: 16px;
-            padding: 24px;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .upgrade-banner h3 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
-        }
-        
-        .upgrade-banner p {
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-        
-        .upgrade-btn {
-            background: white;
-            color: var(--brand-dark);
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: transform 0.2s;
-        }
-        
-        .upgrade-btn:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Footer */
-        .footer {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 24px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        
-        .footer a {
-            color: var(--brand);
-            text-decoration: none;
-        }
-        
-        /* Mobile */
+        .featured-inner:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+        .featured-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+        .featured-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+        .featured-desc { font-size: 13px; opacity: 0.85; line-height: 1.4; }
+        .featured-icon { width: 64px; height: 64px; border-radius: 16px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; }
+        .featured-arrow { font-size: 28px; opacity: 0.6; margin-left: auto; flex-shrink: 0; }
+
+        /* ── Footer spacer ───────────────────── */
+        .footer-space { height: 60px; }
+
         @media (max-width: 640px) {
-            .header-inner { flex-wrap: wrap; }
-            .nav { order: 3; width: 100%; justify-content: center; margin-top: 12px; }
-            .stats-bar { justify-content: space-around; }
-            .modes-grid { grid-template-columns: 1fr; }
-            .upgrade-banner { flex-direction: column; text-align: center; }
+            .mode-grid { grid-template-columns: 1fr; }
+            .quick-grid { grid-template-columns: 1fr; }
+            .stats-row { flex-direction: column; }
+            .featured-inner { flex-direction: column; text-align: center; }
+            .featured-arrow { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-inner">
-            <a href="/" class="logo">Reason<span>Dx</span></a>
-            
-            <nav class="nav">
-                <a href="/training.html" class="nav-link active">Train</a>
-                <a href="/CoachDx/index.html" class="nav-link">Coach</a>
-                <a href="/tools/learning-dashboard.html" class="nav-link">Dashboard</a>
-            </nav>
-            
-            <div class="user-menu">
-                <span class="user-tier free" id="userTier">FREE</span>
-                <div class="user-avatar" id="userAvatar" title="Account">?</div>
-            </div>
+
+    <!-- Welcome -->
+    <div class="welcome" id="welcomeSection">
+        <h1 id="welcomeTitle">Welcome to ReasonDx</h1>
+        <p>Choose a training mode to build your clinical reasoning skills.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow">
+        <div class="stat-card">
+            <div class="stat-val" id="casesStat">0 <span class="inf">/ ∞</span></div>
+            <div class="stat-label">Cases This Month</div>
         </div>
-    </header>
-    
-    <!-- Main Content -->
-    <main class="main">
-        <!-- Welcome Section -->
-        <div class="welcome">
-            <h1 id="welcomeMessage">Welcome back</h1>
-            <p>Choose a training mode to build your clinical reasoning skills.</p>
+        <div class="stat-card">
+            <div class="stat-val" id="streakStat">0</div>
+            <div class="stat-label">Day Streak</div>
         </div>
-        
-        <!-- Difficulty Level Selector -->
-        <div class="level-selector" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
-            <button class="level-pill active" onclick="setDifficulty('all', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:var(--brand);color:white;font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">All Levels</button>
-            <button class="level-pill" onclick="setDifficulty('premed', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">🩺 Premed</button>
-            <button class="level-pill" onclick="setDifficulty('beginner', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">Beginner</button>
-            <button class="level-pill" onclick="setDifficulty('intermediate', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">Intermediate</button>
-            <button class="level-pill" onclick="setDifficulty('advanced', this)" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:white;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;font-size:14px;">Advanced</button>
+        <div class="stat-card">
+            <div class="stat-val" id="totalStat">0</div>
+            <div class="stat-label">Total Completed</div>
         </div>
-        
-        <!-- Stats Bar (Free users) -->
-        <div class="stats-bar" id="statsBar">
-            <div class="stat" id="casesStat">
-                <span class="stat-value"><span id="casesUsed">0</span> / <span id="casesLimit">3</span></span>
-                <span class="stat-label">Cases this month</span>
-            </div>
-            <div class="stat">
-                <span class="stat-value" id="streakCount">0</span>
-                <span class="stat-label">Day streak</span>
-            </div>
-            <div class="stat">
-                <span class="stat-value" id="totalCases">0</span>
-                <span class="stat-label">Total completed</span>
-            </div>
-        </div>
-        
-        <!-- Training Modes -->
-        <section>
-            <div class="section-header">
-                <h2>🎯 Training Modes</h2>
-            </div>
-            
-            <div class="modes-grid">
-                <!-- Clinical Reasoning Trainer (Main focus) -->
-                <a href="/cases/crt-hub.html" class="mode-card">
-                    <div class="mode-icon blue">🧠</div>
-                    <h3>Clinical Reasoning Trainer</h3>
-                    <p>Work through staged cases: gather history, build differentials, order tests, and reach diagnosis with AI-powered feedback.</p>
-                </a>
-                
-                <!-- SBAR Trainer -->
-                <a href="/tools/sbar-trainer.html" class="mode-card">
-                    <div class="mode-icon green">📋</div>
-                    <h3>SBAR Communication</h3>
-                    <p>Practice structured clinical handoffs. Learn to present cases clearly and efficiently using the SBAR framework.</p>
-                </a>
-                
-                <!-- CoachDx (Pro) -->
-                <a href="/CoachDx/mentor-chat.html" class="mode-card" id="coachCard">
-                    <div class="mode-icon purple">🗣️</div>
-                    <h3>AI Clinical Coach <span class="pro-badge">Pro</span></h3>
-                    <p>Get personalized coaching from an AI mentor. Discuss cases, explore reasoning strategies, and deepen understanding.</p>
-                    <span class="lock-overlay" id="coachLock">🔒</span>
-                </a>
-                
-                <!-- Deep Dive Cases (Pro) -->
-                <div class="mode-card locked" id="deepDiveCard" onclick="showUpgradeModal()">
-                    <div class="mode-icon orange">🔍</div>
-                    <h3>Deep Dive Cases <span class="pro-badge">Pro</span></h3>
-                    <p>Extended cases with comprehensive workups, complex decision trees, and detailed pathophysiology exploration.</p>
-                    <span class="lock-overlay" id="deepDiveLock">🔒</span>
+    </div>
+
+    <!-- Training Modes -->
+    <div class="section">
+        <div class="section-title">🎯 Training Modes</div>
+        <div class="mode-grid">
+            <a href="/cases/crt-hub.html" class="mode-card crt">
+                <div class="icon">🧠</div>
+                <h3>Clinical Reasoning Trainer</h3>
+                <p>See a chief complaint, build your differential, take a history, examine the patient, order workup, and refine your reasoning with AI feedback.</p>
+                <div class="tags">
+                    <span class="tag">55 CRT Cases</span>
+                    <span class="tag">30 Trainer Cases</span>
+                    <span class="tag">Differential Building</span>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Quick Start Cases -->
-        <section>
-            <div class="section-header">
-                <h2>⚡ Quick Start — Popular Cases</h2>
-                <a href="/cases/crt-hub.html">View all cases →</a>
-            </div>
-            
-            <div class="case-list" id="quickCases">
-                <a href="/cases/hematuria-crt.html" class="case-item">
-                    <span class="case-specialty">🩺</span>
-                    <div class="case-info">
-                        <div class="case-title">Hematuria Workup</div>
-                        <div class="case-meta">Urology • 15-20 min • Intermediate</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-                
-                <a href="/cases/testicular-torsion-crt.html" class="case-item">
-                    <span class="case-specialty">🚨</span>
-                    <div class="case-info">
-                        <div class="case-title">Testicular Torsion</div>
-                        <div class="case-meta">Urology/Emergency • 10-15 min • Beginner</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-                
-                <a href="/cases/hirschsprung-disease-crt.html" class="case-item">
-                    <span class="case-specialty">👶</span>
-                    <div class="case-info">
-                        <div class="case-title">Hirschsprung Disease</div>
-                        <div class="case-meta">Pediatric Surgery • 15-20 min • Intermediate</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-                
-                <a href="/cases/kidney-stones-crt.html" class="case-item">
-                    <span class="case-specialty">💎</span>
-                    <div class="case-info">
-                        <div class="case-title">Kidney Stones</div>
-                        <div class="case-meta">Urology • 15 min • Beginner • Premed-friendly</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-                
-                <a href="/cases/prostate-cancer-crt.html" class="case-item">
-                    <span class="case-specialty">🎗️</span>
-                    <div class="case-info">
-                        <div class="case-title">Prostate Cancer</div>
-                        <div class="case-meta">Oncology/Urology • 20 min • Advanced</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-                
-                <a href="/cases/cryptorchidism-crt.html" class="case-item">
-                    <span class="case-specialty">👶</span>
-                    <div class="case-info">
-                        <div class="case-title">Cryptorchidism</div>
-                        <div class="case-meta">Pediatric Urology • 15 min • Beginner • Premed-friendly</div>
-                    </div>
-                    <span class="case-arrow">→</span>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Upgrade Banner (Free users only) -->
-        <div class="upgrade-banner" id="upgradeBanner">
-            <div>
-                <h3>Unlock unlimited training</h3>
-                <p>Get unlimited cases, AI coaching, deep dives, and detailed analytics.</p>
-            </div>
-            <a href="/auth/register.html?plan=pro" class="upgrade-btn">Upgrade to Pro — $14.99/mo</a>
+            </a>
+
+            <a href="/simroomdx.html" class="mode-card sim">
+                <div class="icon">🎭</div>
+                <h3>SimRoomDx</h3>
+                <p>Immersive AI simulation room. Talk to patients, nurses, attendings, consultants, and pharmacists. Socratic coaching in real time.</p>
+                <div class="tags">
+                    <span class="tag">🎙️ Voice</span>
+                    <span class="tag">👥 6 Characters</span>
+                    <span class="tag">Socratic</span>
+                </div>
+            </a>
+
+            <a href="/modules/sbar-trainer.html" class="mode-card sbar">
+                <div class="icon">📋</div>
+                <h3>SBAR Communication</h3>
+                <p>Practice structured clinical handoffs. Present cases clearly using the Situation-Background-Assessment-Recommendation framework.</p>
+                <div class="tags">
+                    <span class="tag">Handoff Practice</span>
+                    <span class="tag">AI Scoring</span>
+                </div>
+            </a>
+
+            <a href="/mechanism/mentor-chat.html" class="mode-card coach">
+                <div class="icon">🗣️</div>
+                <h3>AI Clinical Coach <span class="pro-badge">PRO</span></h3>
+                <p>Get personalized coaching from an AI mentor. Discuss cases, explore reasoning strategies, and receive Socratic guidance on your growth areas.</p>
+                <div class="tags">
+                    <span class="tag">Socratic Mentoring</span>
+                    <span class="tag">Pattern Analysis</span>
+                </div>
+            </a>
+
+            <a href="/night-float.html" class="mode-card night" style="grid-column:1/-1;">
+                <div class="icon" style="background:#1E1B4B;">🌙</div>
+                <h3>Night Float Simulator <span class="pro-badge">PRO</span></h3>
+                <p>Run overnight call on Internal Medicine. Accept ED admissions, write admission orders, handle nurse pages, prioritize competing demands, and hand off to the day team at 7 AM using I-PASS.</p>
+                <div class="tags">
+                    <span class="tag">3 Admissions</span>
+                    <span class="tag">3 Nurse Pages</span>
+                    <span class="tag">Admission Orders</span>
+                    <span class="tag">I-PASS Handoff</span>
+                </div>
+            </a>
         </div>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2026 ReasonDx. <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="mailto:support@reasondx.com">Support</a></p>
-    </footer>
-    
+    </div>
+
+    <!-- Featured: ED Board -->
+    <div class="featured-banner">
+        <a href="/reasondx-virtual-hospital/src/ed-board.html" class="featured-inner">
+            <div class="featured-icon">🏥</div>
+            <div>
+                <div class="featured-badge">✨ Virtual Hospital</div>
+                <div class="featured-title">ED Board — Run the Department</div>
+                <div class="featured-desc">Manage multiple AI patients, place orders from a full EMR, interpret results, and make disposition decisions.</div>
+            </div>
+            <div class="featured-arrow">→</div>
+        </a>
+    </div>
+
+
+
+    <div class="footer-space"></div>
+
+    <!-- Scripts -->
+    <script src="/data/rdx-persist.js"></script>
+    <script src="/js/rdx-nav.js"></script>
+    <script src="/rdx-gate.js"></script>
     <script>
-        // ============================================================
-        // PAGE INITIALIZATION
-        // ============================================================
-        
-        // Difficulty filter function
-        function setDifficulty(level, btn) {
-            // Update button styles
-            document.querySelectorAll('.level-pill').forEach(p => {
-                p.style.background = 'white';
-                p.style.color = 'var(--text)';
-            });
-            btn.style.background = 'var(--brand)';
-            btn.style.color = 'white';
-            
-            // Filter case items
-            document.querySelectorAll('.case-item').forEach(item => {
-                const meta = item.querySelector('.case-meta')?.textContent.toLowerCase() || '';
-                const isPremed = meta.includes('premed');
-                const isBeginner = meta.includes('beginner');
-                const isIntermediate = meta.includes('intermediate');
-                const isAdvanced = meta.includes('advanced');
-                
-                let show = true;
-                if (level === 'premed') show = isPremed || isBeginner;
-                else if (level === 'beginner') show = isBeginner;
-                else if (level === 'intermediate') show = isIntermediate;
-                else if (level === 'advanced') show = isAdvanced;
-                
-                item.style.display = show ? 'flex' : 'none';
-            });
-            
-            // Check URL params on load
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('level') === 'premed') {
-                document.querySelector('.welcome p').textContent = 
-                    'Cases adapted for pre-medical students — connect MCAT concepts to clinical reasoning.';
+    // Personalize welcome
+    (function() {
+        try {
+            const raw = localStorage.getItem('reasondx-user');
+            if (raw) {
+                const user = JSON.parse(raw);
+                if (user && user.name) {
+                    document.getElementById('welcomeTitle').textContent = 'Welcome back, ' + user.name;
+                }
             }
-        }
-        
-        // Check for level param on load
-        window.addEventListener('load', function() {
-            const params = new URLSearchParams(window.location.search);
-            const level = params.get('level');
-            if (level) {
-                const btn = document.querySelector(`[onclick*="'${level}'"]`);
-                if (btn) setDifficulty(level, btn);
-            }
-        });
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            initializePage();
-        });
-        
-        function initializePage() {
-            // Get user data (RDXGate should have already verified auth)
-            const user = window.RDXGate ? window.RDXGate.getUser() : null;
-            const tier = window.RDXGate ? window.RDXGate.getUserTier() : 'free';
-            const caseCount = window.RDXGate ? window.RDXGate.getCaseCount() : 0;
+        } catch(e) {}
+
+        // Load stats from localStorage
+        try {
+            const progress = JSON.parse(localStorage.getItem('reasondx-plan-usage') || '{}');
+            const cases = (progress.cases || []);
+            const now = new Date();
+            const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+            const thisMonth = cases.filter(c => c.timestamp >= monthStart);
+            const uniqueThisMonth = [...new Set(thisMonth.map(c => c.id))];
             
-            // Update welcome message
-            const welcomeEl = document.getElementById('welcomeMessage');
-            if (user) {
-                const name = user.displayName || user.name || user.email?.split('@')[0] || 'there';
-                welcomeEl.textContent = `Welcome back, ${name}`;
-            }
+            // Check if pro
+            const user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+            const plan = user.plan || 'free';
+            const isPro = (plan === 'pro' || plan === 'admin' || plan === 'premium' || plan === 'annual');
             
-            // Update user avatar
-            const avatarEl = document.getElementById('userAvatar');
-            if (user) {
-                const initial = (user.displayName || user.name || user.email || '?')[0].toUpperCase();
-                avatarEl.textContent = initial;
-                avatarEl.title = user.email || 'Account';
-            }
+            document.getElementById('casesStat').innerHTML = uniqueThisMonth.length + (isPro ? ' <span class="inf">/ ∞</span>' : ' <span class="inf">/ 3</span>');
             
-            // Update tier badge
-            const tierEl = document.getElementById('userTier');
-            if (tier === 'pro' || tier === 'premium' || tier === 'admin') {
-                tierEl.textContent = 'PRO';
-                tierEl.className = 'user-tier pro';
-            } else {
-                tierEl.textContent = 'FREE';
-                tierEl.className = 'user-tier free';
-            }
-            
-            // Update case count
-            document.getElementById('casesUsed').textContent = caseCount;
-            
-            // Warning color if near limit
-            if (tier === 'free' && caseCount >= 2) {
-                document.getElementById('casesStat').classList.add('warning');
-            }
-            
-            // Load stored stats
-            const totalCases = localStorage.getItem('reasondx-total-cases') || '0';
-            const streak = localStorage.getItem('reasondx-streak') || '0';
-            document.getElementById('totalCases').textContent = totalCases;
-            document.getElementById('streakCount').textContent = streak;
-            
-            // Handle Pro features
-            if (tier === 'pro' || tier === 'premium' || tier === 'admin') {
-                // Unlock pro features
-                document.getElementById('coachLock').style.display = 'none';
-                document.getElementById('deepDiveLock').style.display = 'none';
-                document.getElementById('coachCard').classList.remove('locked');
-                document.getElementById('deepDiveCard').classList.remove('locked');
-                
-                // Hide upgrade banner
-                document.getElementById('upgradeBanner').style.display = 'none';
-                
-                // Hide case limit (show different stats)
-                document.getElementById('casesLimit').textContent = '∞';
-            } else {
-                // Lock pro features
-                document.getElementById('coachCard').classList.add('locked');
-                document.getElementById('deepDiveCard').classList.add('locked');
-                
-                // Prevent clicks on locked cards
-                document.getElementById('coachCard').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.RDXGate?.showUpgradeModal('AI Clinical Coaching is a Pro feature. Upgrade to get personalized guidance and deeper case discussions.');
-                });
-                
-                document.getElementById('deepDiveCard').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.RDXGate?.showUpgradeModal('Deep Dive Cases are a Pro feature. Upgrade for extended cases with complex decision trees and detailed pathophysiology.');
-                });
-            }
-        }
+            // Streak & total from progress tracker
+            const tracker = JSON.parse(localStorage.getItem('reasondx-progress') || '{}');
+            if (tracker.streak) document.getElementById('streakStat').textContent = tracker.streak;
+            if (tracker.totalCompleted) document.getElementById('totalStat').textContent = tracker.totalCompleted;
+        } catch(e) {}
+    })();
     </script>
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
+    <script src="/js/rdx-help-widget.js"></script>
 </body>
 </html>
