@@ -3700,6 +3700,38 @@ const CASE_TEMPLATES = [{
 
 ];
 
+// BOARD CHIEF COMPLAINTS — what triage nurse writes (symptom, not diagnosis category)
+const BOARD_CC = {
+  'stemi-v1':'Chest Pain','pericarditis-v1':'Chest Pain',
+  'appendicitis-v1':'Abdominal Pain','aaa-v1':'Abdominal Pain',
+  'pe-v1':'Shortness of Breath','chf-v1':'Shortness of Breath',
+  'sah-v1':'Headache','meningitis-v1':'Headache / Fever',
+  'dka-v1':'Altered Mental Status','stroke-v1':'Arm Weakness / Face Drooping',
+  'tension-ptx':'MVC / Chest Pain','epidural-hematoma':'Fall / Head Injury',
+  'vt-syncope':'Syncope','gi-bleed-syncope':'Syncope / Black Stools',
+  'status-epilepticus':'Seizure (Ongoing)','new-seizure-mass':'Seizure (First-Time)',
+  'apap-overdose':'Ingestion / Nausea','salicylate-toxicity':'Ear Ringing / Confusion',
+  'epiglottitis':'Child — Difficulty Breathing','intussusception':'Child — Abdominal Pain / Crying',
+  'cauda-equina':'Back Pain / Leg Weakness','aortic-dissection-back':'Back Pain (Tearing)',
+  'anaphylaxis':'Throat Swelling / Rash','ace-angioedema':'Lip and Tongue Swelling',
+  'ectopic-pregnancy':'Lower Abdominal Pain','eclampsia':'Seizure / Headache (Pregnant)',
+  'nms':'Fever / Rigidity','serotonin-syndrome':'Agitation / Tremor',
+  'septic-shock-urosepsis':'Fever / Confusion','neutropenic-fever':'Fever',
+  'angle-closure-glaucoma':'Eye Pain / Vision Change','crao':'Sudden Vision Loss',
+  'testicular-torsion':'Groin Pain','fournier-gangrene':'Perineal Pain / Swelling',
+  'nec-fasciitis':'Leg Pain / Redness','sjs-ten':'Rash / Skin Peeling',
+  'thyroid-storm':'Racing Heart / Tremor','adrenal-crisis':'Weakness / Dizziness',
+  'acute-limb-ischemia':'Cold Painful Leg','mesenteric-ischemia':'Abdominal Pain',
+  'hip-fracture-anticoag':'Fall / Hip Pain','subdural-hematoma':'Confusion / Unsteady Gait',
+  'heat-stroke':'Collapse at Event','severe-hypothermia':'Found Unresponsive',
+  'sbo-strangulation':'Abdominal Pain / Vomiting','severe-pancreatitis':'Abdominal Pain (Epigastric)',
+  'cardiac-tamponade':'Shortness of Breath / Chest Pressure','complete-heart-block':'Near-Syncope / Dizziness',
+  'peritonsillar-abscess':'Sore Throat','ludwigs-angina':'Neck Swelling / Difficulty Breathing',
+  'ttp':'Confusion / Bruising','dic-massive-transfusion':'Post-Op Bleeding',
+  'septic-arthritis':'Knee Pain / Swelling','compartment-syndrome':'Leg Pain (Post-MVC)',
+  'hyperkalemia-cardiac':'Generalized Weakness','severe-hyponatremia':'Seizure'
+};
+
 // STATE
 let patients = [];
 let selectedPatientId = null;
@@ -3875,7 +3907,7 @@ function generatePatient() {
     name: names[Math.floor(Math.random()*names.length)],
     age: age, gender: isMale ? 'M' : 'F', bed: bed,
     mrn: String(100000 + Math.floor(Math.random()*900000)),
-    presentation: template.presentation, acuity: variant.acuity,
+    presentation: template.presentation, boardCC: BOARD_CC[variant.id] || template.presentation, acuity: variant.acuity,
     status: 'waiting', provider: '—', arrivalTime: Date.now(),
     variant: variant, template: template,
     chatHistory: [],
@@ -3897,7 +3929,7 @@ function renderBoard() {
     return '<tr class="' + (p.id===selectedPatientId?'active':'') + '" onclick="selectPatient(\'' + p.id + '\')">' +
       '<td><span class="bed-number">' + p.bed + '</span></td>' +
       '<td><div class="patient-name">' + p.name + '</div><div class="patient-demo">' + p.age + p.gender + '</div></td>' +
-      '<td>' + p.presentation + '</td>' +
+      '<td>' + p.boardCC + '</td>' +
       '<td><span class="acuity-badge acuity-' + p.acuity + '"><span class="acuity-dot"></span> ESI-' + p.acuity + '</span></td>' +
       '<td><span class="status-badge status-' + p.status + '"><span class="status-pulse"></span> ' + p.status.replace(/-/g,' ') + '</span></td>' +
       '<td class="hide-mobile"><span class="wait-time">' + wait + 'm</span></td>' +
@@ -3920,7 +3952,7 @@ function updateStats() {
   } else document.getElementById('statAvgWait').textContent = '—';
 }
 
-function addNewPatient() { var p = generatePatient(); patients.push(p); renderBoard(); showToast(p.name+' ('+p.age+p.gender+') — '+p.presentation+' — Bed '+p.bed, 'success'); }
+function addNewPatient() { var p = generatePatient(); patients.push(p); renderBoard(); showToast(p.name+' ('+p.age+p.gender+') — '+p.boardCC+' — Bed '+p.bed, 'success'); }
 function selectPatient(id) {
   selectedPatientId = id;
   var p = patients.find(function(x){return x.id===id});
@@ -3996,7 +4028,7 @@ function renderOverview(p) {
   var examTotal = Object.keys(p.variant.physicalExam).filter(function(k){return k!=='vitalSigns'}).length;
   return '<div class="emr-section"><div class="emr-section-title">Triage Note</div>' +
     '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:12px;font-size:13px;">' +
-    '<strong>'+p.age+p.gender+'</strong> presenting with <strong>'+p.presentation.toLowerCase()+'</strong>. ' +
+    '<strong>'+p.age+p.gender+'</strong> presenting with <strong>'+p.boardCC.toLowerCase()+'</strong>. ' +
     'States: "'+cc.patientPhrasing[0]+'." '+
     (cc.duration ? 'Duration: '+cc.duration.split(',')[0].split('—')[0].split('(')[0].trim()+'. ' : '') +
     p.variant.patient.communicationStyle.split('.')[0] + '.</div></div>' +
@@ -4034,7 +4066,7 @@ function renderHistoryChat(p) {
   }).join('');
   var msgs;
   if (p.chatHistory.length === 0) {
-    msgs = '<div class="chat-msg msg-system">You are seeing '+p.name+', '+p.age+p.gender+', for '+p.presentation.toLowerCase()+'. Begin your interview.</div>';
+    msgs = '<div class="chat-msg msg-system">You are seeing '+p.name+', '+p.age+p.gender+', for '+p.boardCC.toLowerCase()+'. Begin your interview.</div>';
   } else {
     msgs = p.chatHistory.map(function(m) {
       return '<div class="chat-msg '+(m.role==='student'?'msg-student':'msg-patient')+'">'+m.text+'</div>';
