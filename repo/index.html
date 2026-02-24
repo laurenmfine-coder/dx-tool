@@ -12,9 +12,10 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
 
-<!-- Auth Guard -->
+<!-- Public page — no auth required -->
 <script>
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+/* Smart CTA: if user is logged in, go direct; if not, redirect to register then bounce back */
+function authGo(url){try{var u=localStorage.getItem("reasondx-user");if(u){var j=JSON.parse(u);if(j&&j.email&&j.name){location.href=url;return}}}catch(e){}sessionStorage.setItem("reasondx-redirect",url);location.href="auth/register.html"}
 </script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 
@@ -148,9 +149,10 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font
     <h1>Your clinical decisions<br>follow the <em>patient</em>.</h1>
     <p class="hero-sub">The only platform where a single patient flows from ED triage through overnight management to morning rounds — with every lab, image, medication, and handoff intact.</p>
     <div class="hero-actions">
-        <a href="legacy/ed-board-v2.html" class="btn-primary">Start in the ED →</a>
+        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="btn-primary">Start in the ED →</a>
         <a href="#how-it-works" class="btn-secondary">See how it works ↓</a>
     </div>
+    <p style="margin-top:16px;font-size:13px;opacity:.6"><a href="auth/register.html" style="color:#fff;text-decoration:underline">Sign in</a> or create a free account to get started</p>
 </div>
 </section>
 
@@ -199,7 +201,7 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font
     <h2 class="section-title">One patient. Three stages. Everything carries forward.</h2>
     <p class="section-desc">For 11 high-acuity cases, your clinical decisions in the ED create the patient that arrives on the night float team's list — and the patient you present on morning rounds. Labs, imaging, treatments, vitals, and your handoff all flow through.</p>
     <div class="journey-flow">
-        <a href="legacy/ed-board-v2.html" class="journey-stage stage-ed">
+        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="journey-stage stage-ed">
             <div class="stage-num">1</div>
             <div class="stage-icon">🚑</div>
             <div class="stage-title">ED Board</div>
@@ -214,7 +216,7 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font
             </div>
         </a>
         <div class="journey-connector"><div class="connector-arrow">→</div><div class="connector-label">Patient<br>admitted</div></div>
-        <a href="night-float.html" class="journey-stage stage-nf">
+        <a href="#" onclick="authGo('night-float.html');return false" class="journey-stage stage-nf">
             <div class="stage-num">2</div>
             <div class="stage-icon">🌙</div>
             <div class="stage-title">Night Float</div>
@@ -228,7 +230,7 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font
             </div>
         </a>
         <div class="journey-connector"><div class="connector-arrow">→</div><div class="connector-label">Morning<br>handoff</div></div>
-        <a href="simroomdx.html" class="journey-stage stage-sr">
+        <a href="#" onclick="authGo('simroomdx.html');return false" class="journey-stage stage-sr">
             <div class="stage-num">3</div>
             <div class="stage-icon">🩺</div>
             <div class="stage-title">SimRoomDx</div>
@@ -248,7 +250,7 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font
             <div class="journey-cta-title">Start at any stage — or play the full journey</div>
             <div class="journey-cta-desc">Each simulator works standalone with built-in cases. For connected cases (STEMI, NSTEMI, DKA, Stroke, COPD, Urosepsis, PE, CHF, Meningitis, GI Bleed, Pancreatitis), the full path carries one patient with all clinical data intact.</div>
         </div>
-        <a href="legacy/ed-board-v2.html" class="btn-primary" style="background:#fff;color:var(--brand-dark)">Begin in the ED →</a>
+        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="btn-primary" style="background:#fff;color:var(--brand-dark)">Begin in the ED →</a>
     </div>
     <div class="journey-stats">
         <div class="journey-stat"><div class="journey-stat-num">58</div><div class="journey-stat-label">ED Cases</div></div>
@@ -267,12 +269,12 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font
     <h2 class="section-title">Practice specific skills independently.</h2>
     <p class="section-desc">Standalone trainers for clinical reasoning, communication, handoffs, and consultant interactions. Each one targets a different skill the clinical journey demands.</p>
     <div class="trainer-grid">
-        <a href="cases/crt-hub.html" class="trainer-card"><div class="trainer-icon">🧩</div><div class="trainer-name">Clinical Reasoning Trainer</div><div class="trainer-desc">Build your differential, take a history, examine, order workup, and refine your reasoning with AI feedback at each stage.</div><div class="trainer-tags"><span class="trainer-tag">55 CRT Cases</span><span class="trainer-tag">30 Trainers</span><span class="trainer-tag">29 Specialties</span></div></a>
-        <a href="tools/sbar-trainer.html" class="trainer-card"><div class="trainer-icon">📋</div><div class="trainer-name">SBAR Communication</div><div class="trainer-desc">Practice structured handoffs using Situation-Background-Assessment-Recommendation with AI-scored feedback on clarity and prioritization.</div><div class="trainer-tags"><span class="trainer-tag">13 Scenarios</span><span class="trainer-tag">AI Scoring</span></div></a>
-        <a href="ed-handoff-trainer.html" class="trainer-card"><div class="trainer-icon">📞</div><div class="trainer-name">ED Handoff Trainer</div><div class="trainer-desc">The ED calls with a new admission. How much info you get depends on the difficulty tier. Build your differential and make the diagnosis.</div><div class="trainer-tags"><span class="trainer-tag">3 Difficulty Tiers</span><span class="trainer-tag">4 Cases</span></div></a>
-        <a href="consult-callback.html" class="trainer-card"><div class="trainer-icon">🗣️</div><div class="trainer-name">Consultant Callback</div><div class="trainer-desc">The specialist calls back with questions and pushback. Present your case, justify the consult, and hold your ground against 8 different personalities.</div><div class="trainer-tags"><span class="trainer-tag">8 Specialties</span><span class="trainer-tag">Pushback Training</span></div></a>
-        <a href="CoachDx/index.html" class="trainer-card"><div class="trainer-icon">💡</div><div class="trainer-name">AI Clinical Coach</div><div class="trainer-desc">Personalized Socratic coaching. Discuss cases, explore reasoning strategies, identify cognitive biases, and get post-case debriefs.</div><div class="trainer-tags"><span class="trainer-tag">Socratic Mentoring</span><span class="trainer-tag pro">PRO</span></div></a>
-        <a href="case-browser.html" class="trainer-card" style="border-style:dashed"><div class="trainer-icon">🔍</div><div class="trainer-name">Browse All Cases</div><div class="trainer-desc">Search and filter 323 clinical reasoning cases across 29 specialties. Find cases by topic, system, or difficulty level.</div><div class="trainer-tags"><span class="trainer-tag">323 Cases</span><span class="trainer-tag">29 Specialties</span><span class="trainer-tag">Search &amp; Filter</span></div></a>
+        <a href="#" onclick="authGo('cases/crt-hub.html');return false" class="trainer-card"><div class="trainer-icon">🧩</div><div class="trainer-name">Clinical Reasoning Trainer</div><div class="trainer-desc">Build your differential, take a history, examine, order workup, and refine your reasoning with AI feedback at each stage.</div><div class="trainer-tags"><span class="trainer-tag">55 CRT Cases</span><span class="trainer-tag">30 Trainers</span><span class="trainer-tag">29 Specialties</span></div></a>
+        <a href="#" onclick="authGo('tools/sbar-trainer.html');return false" class="trainer-card"><div class="trainer-icon">📋</div><div class="trainer-name">SBAR Communication</div><div class="trainer-desc">Practice structured handoffs using Situation-Background-Assessment-Recommendation with AI-scored feedback on clarity and prioritization.</div><div class="trainer-tags"><span class="trainer-tag">13 Scenarios</span><span class="trainer-tag">AI Scoring</span></div></a>
+        <a href="#" onclick="authGo('ed-handoff-trainer.html');return false" class="trainer-card"><div class="trainer-icon">📞</div><div class="trainer-name">ED Handoff Trainer</div><div class="trainer-desc">The ED calls with a new admission. How much info you get depends on the difficulty tier. Build your differential and make the diagnosis.</div><div class="trainer-tags"><span class="trainer-tag">3 Difficulty Tiers</span><span class="trainer-tag">4 Cases</span></div></a>
+        <a href="#" onclick="authGo('consult-callback.html');return false" class="trainer-card"><div class="trainer-icon">🗣️</div><div class="trainer-name">Consultant Callback</div><div class="trainer-desc">The specialist calls back with questions and pushback. Present your case, justify the consult, and hold your ground against 8 different personalities.</div><div class="trainer-tags"><span class="trainer-tag">8 Specialties</span><span class="trainer-tag">Pushback Training</span></div></a>
+        <a href="#" onclick="authGo('CoachDx/index.html');return false" class="trainer-card"><div class="trainer-icon">💡</div><div class="trainer-name">AI Clinical Coach</div><div class="trainer-desc">Personalized Socratic coaching. Discuss cases, explore reasoning strategies, identify cognitive biases, and get post-case debriefs.</div><div class="trainer-tags"><span class="trainer-tag">Socratic Mentoring</span><span class="trainer-tag pro">PRO</span></div></a>
+        <a href="#" onclick="authGo('case-browser.html');return false" class="trainer-card" style="border-style:dashed"><div class="trainer-icon">🔍</div><div class="trainer-name">Browse All Cases</div><div class="trainer-desc">Search and filter 323 clinical reasoning cases across 29 specialties. Find cases by topic, system, or difficulty level.</div><div class="trainer-tags"><span class="trainer-tag">323 Cases</span><span class="trainer-tag">29 Specialties</span><span class="trainer-tag">Search &amp; Filter</span></div></a>
     </div>
 </div>
 </div>
@@ -291,13 +293,13 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font
     <h2>Ready to start reasoning?</h2>
     <p>Pick a patient. Make decisions. See what happens.</p>
     <div class="cta-actions">
-        <a href="legacy/ed-board-v2.html" class="btn-primary">Start in the ED →</a>
-        <a href="training.html" class="btn-outline">Go to Dashboard</a>
+        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="btn-primary">Start in the ED →</a>
+        <a href="#" onclick="authGo('training.html');return false" class="btn-outline">Go to Dashboard</a>
     </div>
 </section>
 
 <footer class="site-footer">
-    <p>ReasonDx — Clinical Reasoning Platform &nbsp;·&nbsp; <a href="case-browser.html">Browse Cases</a> &nbsp;·&nbsp; <a href="training.html">Dashboard</a></p>
+    <p>ReasonDx — Clinical Reasoning Platform &nbsp;·&nbsp; <a href="#" onclick="authGo('case-browser.html');return false">Browse Cases</a> &nbsp;·&nbsp; <a href="#" onclick="authGo('training.html');return false">Dashboard</a></p>
 </footer>
 
 </body>
