@@ -222,14 +222,20 @@ const ORDERABLE_LABS = [
   {id:'retic',name:'Reticulocyte Count',group:'Hematology'},
   {id:'peripheral-smear',name:'Peripheral Blood Smear',group:'Hematology'},
   {id:'esr',name:'ESR (Sed Rate)',group:'Hematology'},
+  {id:'haptoglobin',name:'Haptoglobin',group:'Hematology'},
+  {id:'ldh',name:'LDH (Lactate Dehydrogenase)',group:'Hematology'},
+  {id:'coombs',name:'Direct Coombs (DAT)',group:'Hematology'},
   {id:'type-screen',name:'Type and Screen',group:'Hematology'},
   {id:'type-cross',name:'Type and Crossmatch',group:'Hematology'},
   {id:'bmp',name:'BMP (Chem-7)',group:'Chemistry'},
   {id:'cmp',name:'CMP (Chem-14)',group:'Chemistry'},
+  {id:'icalcium',name:'Ionized Calcium',group:'Chemistry'},
   {id:'magnesium',name:'Magnesium',group:'Chemistry'},
   {id:'phosphorus',name:'Phosphorus',group:'Chemistry'},
   {id:'uric-acid',name:'Uric Acid',group:'Chemistry'},
   {id:'ammonia',name:'Ammonia',group:'Chemistry'},
+  {id:'osm',name:'Serum Osmolality',group:'Chemistry'},
+  {id:'lipid',name:'Lipid Panel',group:'Chemistry'},
   {id:'hepatic',name:'Hepatic Function Panel',group:'Hepatic'},
   {id:'lfts',name:'AST / ALT',group:'Hepatic'},
   {id:'ggtp',name:'GGT',group:'Hepatic'},
@@ -264,14 +270,18 @@ const ORDERABLE_LABS = [
   {id:'blood-cx',name:'Blood Cultures x2',group:'Infectious'},
   {id:'ua',name:'Urinalysis',group:'Infectious'},
   {id:'ucx',name:'Urine Culture',group:'Infectious'},
+  {id:'urine-na',name:'Urine Sodium',group:'Renal'},
+  {id:'urine-osm',name:'Urine Osmolality',group:'Renal'},
   {id:'flu',name:'Influenza / RSV Panel',group:'Infectious'},
   {id:'covid',name:'COVID-19 PCR',group:'Infectious'},
+  {id:'lyme',name:'Lyme Antibody (IgM/IgG)',group:'Infectious'},
   {id:'utox',name:'Urine Drug Screen',group:'Toxicology'},
   {id:'etoh',name:'Blood Alcohol Level',group:'Toxicology'},
   {id:'acetaminophen',name:'Acetaminophen Level',group:'Toxicology'},
   {id:'salicylate',name:'Salicylate Level',group:'Toxicology'},
   {id:'digoxin',name:'Digoxin Level',group:'Toxicology'},
-  {id:'lithium',name:'Lithium Level',group:'Toxicology'}
+  {id:'lithium',name:'Lithium Level',group:'Toxicology'},
+  {id:'arthrocentesis',name:'Arthrocentesis (Joint Aspiration)',group:'Procedures'}
 ];
 
 const ORDERABLE_IMAGING = [
@@ -284,12 +294,15 @@ const ORDERABLE_IMAGING = [
   {id:'xr-abd',name:'Abdominal X-ray',group:'Plain Film'},
   {id:'xr-cspine',name:'Cervical Spine X-ray',group:'Plain Film'},
   {id:'xr-pelvis',name:'Pelvis X-ray',group:'Plain Film'},
+  {id:'xr-ext',name:'Extremity X-ray',group:'Plain Film'},
   {id:'ct-head',name:'CT Head without Contrast',group:'CT'},
   {id:'cta-head-neck',name:'CTA Head and Neck',group:'CT'},
   {id:'ct-cspine',name:'CT Cervical Spine',group:'CT'},
+  {id:'ct-neck',name:'CT Neck with Contrast',group:'CT'},
   {id:'ct-chest',name:'CT Chest with Contrast',group:'CT'},
   {id:'cta-pe',name:'CTA Chest (PE Protocol)',group:'CT'},
   {id:'ct-abd-pelvis',name:'CT Abdomen/Pelvis with Contrast',group:'CT'},
+  {id:'cta-lower-ext',name:'CTA Lower Extremity',group:'CT'},
   {id:'us-dvt',name:'Lower Extremity Duplex (DVT)',group:'Advanced'},
   {id:'us-renal',name:'Renal Ultrasound',group:'Advanced'},
   {id:'mri-brain',name:'MRI Brain',group:'Advanced'}
@@ -2696,7 +2709,7 @@ const CASE_TEMPLATES = [{
           {test:"Hemoglobin",value:"14.2",unit:"g/dL",reference:"13.5-17.5",status:"normal",interpretation:"Normal — hemoconcentration from third-spacing",matchIds:["cbc"]},
           {test:"D-dimer",value:"6.8",unit:"mcg/mL",reference:"<0.5",status:"critical",interpretation:"Markedly elevated — thrombosis/embolism",matchIds:["dimer"]},
           {test:"Amylase",value:"220",unit:"U/L",reference:"30-110",status:"abnormal",interpretation:"Elevated — ischemic bowel releases amylase (can mimic pancreatitis)",matchIds:["amylase"]},
-          {test:"Phosphate",value:"6.2",unit:"mg/dL",reference:"2.5-4.5",status:"critical",interpretation:"Elevated — released from ischemic cells (sensitive late marker of bowel necrosis)",matchIds:["phosphate"]},
+          {test:"Phosphate",value:"6.2",unit:"mg/dL",reference:"2.5-4.5",status:"critical",interpretation:"Elevated — released from ischemic cells (sensitive late marker of bowel necrosis)",matchIds:["phosphorus"]},
           {test:"ABG pH",value:"7.22",unit:"",reference:"7.35-7.45",status:"critical",interpretation:"Severe metabolic acidosis — lactic acidosis from bowel infarction",matchIds:["abg"]},
           {test:"Creatinine",value:"1.8",unit:"mg/dL",reference:"0.7-1.3",status:"abnormal",interpretation:"Elevated — prerenal from dehydration and low cardiac output",matchIds:["bmp","cmp"]}
         ],
@@ -3605,7 +3618,7 @@ const CASE_TEMPLATES = [{
           {test:"BUN",value:"98",unit:"mg/dL",reference:"7-20",status:"critical",interpretation:"Severely elevated — uremia. Ratio >20:1 suggests pre-renal component on top of ESRD.",matchIds:["bmp","cmp"]},
           {test:"Bicarbonate",value:"14",unit:"mEq/L",reference:"22-26",status:"critical",interpretation:"Metabolic acidosis — uremic acidosis. Acidosis shifts potassium extracellularly, worsening hyperkalemia.",matchIds:["bmp","cmp"]},
           {test:"Calcium (Ionized)",value:"0.98",unit:"mmol/L",reference:"1.12-1.32",status:"critical",interpretation:"LOW — hypocalcemia from ESRD (decreased calcitriol) and hyperphosphatemia. Hypocalcemia worsens cardiac effects of hyperkalemia.",matchIds:["icalcium"]},
-          {test:"Phosphate",value:"8.8",unit:"mg/dL",reference:"2.5-4.5",status:"critical",interpretation:"Severely elevated — missed dialysis + ESRD. Contributes to hypocalcemia.",matchIds:["phosphate"]},
+          {test:"Phosphate",value:"8.8",unit:"mg/dL",reference:"2.5-4.5",status:"critical",interpretation:"Severely elevated — missed dialysis + ESRD. Contributes to hypocalcemia.",matchIds:["phosphorus"]},
           {test:"Hemoglobin",value:"9.2",unit:"g/dL",reference:"13.5-17.5",status:"abnormal",interpretation:"Anemia — ESRD (decreased erythropoietin). Chronic and expected.",matchIds:["cbc"]},
           {test:"Chest X-ray Correlate",value:"Pulmonary edema pattern",unit:"",reference:"Normal",status:"critical",interpretation:"Volume overload from missed dialysis",matchIds:["cxr"]}
         ],
@@ -3798,18 +3811,25 @@ async function getAIResponse(question, patient) {
 }
 
 // SCRIPTED FALLBACK
+function getBriefOnset(onset) {
+  // Extract just the first sentence/clause for triage-appropriate response
+  var brief = onset.split('.')[0].split('—')[0].split('(')[0].trim();
+  return brief.length > 80 ? brief.substring(0, 80).replace(/,?\s+\w*$/, '') : brief;
+}
 function getScriptedResponse(question, patient) {
   var q = question.toLowerCase();
   var cf = patient.variant.clinicalFacts;
   var cc = cf.chiefComplaint;
   if (/what brings you|why are you here|what.s wrong|tell me what/.test(q))
-    return 'I have this ' + cc.patientPhrasing[0] + ' feeling in my ' + cc.location.toLowerCase() + '. It started ' + cc.onset.toLowerCase() + '.';
+    return 'I have this ' + cc.patientPhrasing[0] + ' feeling in my ' + cc.location.toLowerCase() + '. ' + getBriefOnset(cc.onset) + '.';
   if (/how bad|scale|1 to 10|severity|rate/.test(q))
     return 'About a ' + (cc.severity.match(/\d+/) || ['8'])[0] + ' out of 10. ' + (cc.severity.includes('worst') ? "Worst I've ever felt." : '');
   if (/where.*(pain|hurt|feel|bother)/.test(q))
     return 'Right here, in my ' + cc.location.toLowerCase() + '.' + (cc.radiation.length > 0 ? ' It also goes to my ' + cc.radiation.join(' and ') + '.' : '');
   if (/when.*(start|begin|first)/.test(q))
-    return 'It started ' + cc.onset.toLowerCase() + ".";
+    return getBriefOnset(cc.onset) + ".";
+  if (/long.*(going on|been|had|having)/.test(q))
+    return cc.duration ? cc.duration.split(',')[0].split('—')[0].trim() + '.' : getBriefOnset(cc.onset) + '.';
   if (/worse|aggravat/.test(q))
     return cc.aggravating[0] === 'nothing specific' ? 'Nothing specific makes it worse.' : 'It gets worse when ' + cc.aggravating.join(' or when ') + '.';
   if (/better|reliev|help|improv/.test(q))
@@ -3977,8 +3997,9 @@ function renderOverview(p) {
   return '<div class="emr-section"><div class="emr-section-title">Triage Note</div>' +
     '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:12px;font-size:13px;">' +
     '<strong>'+p.age+p.gender+'</strong> presenting with <strong>'+p.presentation.toLowerCase()+'</strong>. ' +
-    'Describes discomfort as "'+cc.patientPhrasing[0]+'" in '+cc.location.toLowerCase()+'. ' +
-    cc.onset+'. '+p.variant.patient.emotionalState+'.</div></div>' +
+    'States: "'+cc.patientPhrasing[0]+'." '+
+    (cc.duration ? 'Duration: '+cc.duration.split(',')[0].split('—')[0].split('(')[0].trim()+'. ' : '') +
+    p.variant.patient.communicationStyle.split('.')[0] + '.</div></div>' +
     '<div class="emr-section"><div class="emr-section-title">Triage Vitals</div>'+renderVitalsGrid(p.variant.physicalExam.vitalSigns)+'</div>' +
     '<div class="emr-section"><div class="emr-section-title">Your Progress</div>' +
     '<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Interview the patient, examine, order workup, then make your disposition.</div>' +
