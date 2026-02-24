@@ -1123,6 +1123,243 @@ const CASE_LIBRARY = [
       ]
     }
   },
+  {
+    id: 'nstemi',
+    title: 'NSTEMI / Unstable Angina',
+    emoji: '💔',
+    brief: '68F, substernal pressure at rest with nausea, troponin rising, ST depressions V4-V6. Risk stratification pending.',
+    specialty: 'Cardiology / IM',
+    difficulty: 'Standard',
+    patient: { name: 'Eleanor Marsh', age: '68F', seed: 'EleanorMarsh', complaint: 'substernal chest pressure at rest, nausea' },
+    mechanism: {
+      pathophysiology: [
+        'Non-ST elevation ACS: partial coronary occlusion or microembolization from ruptured/eroded atherosclerotic plaque → subendocardial ischemia (NOT transmural)',
+        'Subendocardial ischemia → ST depression and/or T-wave inversion (injury current directed AWAY from leads) — contrast with STEMI where transmural injury points TOWARD leads → ST elevation',
+        'Troponin release: cardiomyocyte necrosis releases cardiac troponin I/T into bloodstream. Rise-and-fall pattern distinguishes MI from chronic elevation (renal failure, CHF)',
+        'Plaque pathophysiology: lipid-rich core + thin fibrous cap → vulnerable plaque → rupture exposes subendothelial collagen → platelet adhesion + activation + aggregation → partial thrombus',
+        'NSTEMI vs Unstable Angina: same pathophysiology, distinguished only by troponin. Positive troponin = NSTEMI (myocyte death occurred). Negative troponin = UA (ischemia without necrosis)',
+        'Dynamic risk: partially occlusive thrombus can propagate → complete occlusion → STEMI. This is why NSTEMI requires urgent risk stratification and anticoagulation'
+      ],
+      anatomy: [
+        'Subendocardium is most vulnerable to ischemia: farthest from epicardial coronary supply, highest wall stress during systole, compressed during contraction → first to die when flow is reduced',
+        'ST depression in V4-V6 suggests lateral wall ischemia → likely LCx or diagonal branch of LAD territory',
+        'Coronary anatomy: RCA (35% of MIs), LAD (45%), LCx (15%). NSTEMI can involve any territory — culprit identified by cath',
+        'Referred pain: substernal pressure → T1-T5 visceral afferents. Women and elderly more likely to have atypical presentations (dyspnea, nausea, jaw/back pain without classic chest pressure)'
+      ],
+      pharmacology: [
+        'Dual antiplatelet therapy: ASA 325mg (COX-1 inhibition) + P2Y12 inhibitor (ticagrelor preferred over clopidogrel per PLATO — faster onset, more potent, reversible)',
+        'Anticoagulation: heparin (UFH or enoxaparin) prevents thrombus propagation. UFH preferred if early invasive strategy planned (reversible with protamine)',
+        'High-intensity statin: atorvastatin 80mg — plaque stabilization (anti-inflammatory, endothelial function) begins within hours. Not just for cholesterol lowering',
+        'Beta-blocker (metoprolol PO): reduces HR and contractility → decreases myocardial O₂ demand. Oral, NOT IV in acute setting unless persistent tachycardia. Hold if CHF, bradycardia, hypotension',
+        'Nitroglycerin: venodilation → preload reduction → decreased wall stress. Coronary vasodilation. Avoid if SBP <90, RV infarct, PDE-5 inhibitor use within 24-48h',
+        'Morphine: use sparingly — may decrease antiplatelet absorption, cause hypotension/bradycardia. WHO removed from routine ACS protocols'
+      ],
+      clinicalReasoning: [
+        'HEART score for risk stratification: History, ECG, Age, Risk factors, Troponin. Score ≥7 = high risk → early invasive strategy. Score 0-3 = low risk → consider discharge with follow-up',
+        'TIMI risk score: 7 variables predicting 14-day cardiac events. High TIMI → cath within 24h. Low TIMI → medical management with possible delayed cath',
+        'Early invasive vs conservative: high-risk features (rising troponin, dynamic ST changes, hemodynamic instability, GRACE score >140) → cath within 24h',
+        'Serial ECGs: dynamic ST changes indicate ongoing ischemia and higher risk. Compare to prior ECGs. New T-wave inversions in contiguous leads = ischemia',
+        'Chest pain recurrence: recurrent ischemia on medical therapy = failure of conservative management → escalate to urgent cath. Pain-free ≠ risk-free'
+      ]
+    }
+  },
+  {
+    id: 'chf-acute',
+    title: 'Acute Decompensated Heart Failure',
+    emoji: '🫀',
+    brief: '74M, progressive dyspnea, orthopnea, bilateral crackles, JVD, BNP 1850. EF 25% on prior echo.',
+    specialty: 'Cardiology / IM',
+    difficulty: 'Standard',
+    patient: { name: 'Harold Washington', age: '74M', seed: 'HaroldWashington', complaint: 'worsening shortness of breath, can\'t lie flat' },
+    mechanism: {
+      pathophysiology: [
+        'Heart failure with reduced EF (HFrEF): impaired systolic function → decreased cardiac output → compensatory neurohormonal activation (RAAS, sympathetic nervous system)',
+        'Decompensation triggers: medication non-compliance (most common), dietary indiscretion (salt/fluid), infection, arrhythmia (new AFib), ACS, anemia, renal worsening',
+        'Backward failure: elevated LV end-diastolic pressure → LA pressure rises → pulmonary venous congestion → transudative pulmonary edema → crackles, orthopnea, PND',
+        'Forward failure: decreased cardiac output → renal hypoperfusion → RAAS activation → Na/H₂O retention → volume overload → worsening congestion (vicious cycle)',
+        'BNP/NT-proBNP: ventricular myocytes release BNP in response to wall stretch. BNP >400 = heart failure likely. BNP <100 = HF unlikely. Grey zone 100-400 = consider other causes',
+        'Cardiorenal syndrome: decreased CO → renal venous congestion + decreased renal perfusion → AKI → impaired diuresis → worsening fluid overload → worsening cardiac function'
+      ],
+      anatomy: [
+        'Left ventricle: EF 25% = severely reduced (normal >55%). Dilated LV → increased wall stress (LaPlace law: wall stress = pressure × radius / 2 × wall thickness)',
+        'Pulmonary capillary hydrostatic pressure exceeds oncotic pressure → fluid transudation into alveoli → impaired gas exchange → hypoxemia',
+        'JVD (jugular venous distension): elevated RA pressure transmitted to internal jugular vein. JVP >8 cmH₂O = elevated. Hepatojugular reflux = volume overload confirmation',
+        'S3 gallop: rapid ventricular filling into a dilated, compliant ventricle → low-frequency sound in early diastole. Pathognomonic for decompensated systolic HF in adults',
+        'Peripheral edema: elevated venous pressure → increased capillary hydrostatic pressure → interstitial fluid accumulation → pitting edema (gravity-dependent: ankles, sacrum if supine)'
+      ],
+      pharmacology: [
+        'IV furosemide (loop diuretic): blocks Na-K-2Cl cotransporter in thick ascending limb → massive natriuresis and diuresis. Dose = at least home oral dose given IV (2-2.5x bioavailability). Bolus vs continuous drip',
+        'IV nitroglycerin: venodilation → preload reduction → rapid relief of pulmonary congestion. Arteriolar dilation at higher doses → afterload reduction. First-line for "wet and warm" patients with adequate BP',
+        'BiPAP/CPAP: positive pressure → recruits atelectatic alveoli, reduces preload (decreased venous return), reduces afterload (reduced transmural LV pressure) → avoids intubation',
+        'ACE inhibitor/ARB/ARNI: neurohormonal blockade. DO NOT start in acute decompensation with hypotension/AKI. Resume or initiate once stabilized, euvolemic, renal function stable',
+        'Beta-blocker: HOLD or reduce dose in acute decompensation — negative inotrope worsens low-output state. Resume at lower dose once euvolemic and stable',
+        'Avoid NS bolus: these patients are volume OVERLOADED. IV fluids worsen pulmonary edema. Inotropes (dobutamine/milrinone) if cardiogenic shock with low output'
+      ],
+      clinicalReasoning: [
+        'Classify phenotype: Wet vs Dry (congested vs euvolemic) × Warm vs Cold (adequate vs inadequate perfusion). Most ADHF = "wet and warm" → diurese + vasodilate',
+        'Cold and wet (cardiogenic shock): worst prognosis. Inotropes + diuretics. Consider mechanical support (IABP, Impella). Cardiology/HF consult urgent',
+        'Daily weights most reliable indicator of fluid balance. Target 1-2 kg/day net negative. Track I&Os but daily weight is gold standard',
+        'Check troponin: ACS as trigger for decompensation. New ischemia in an already-failing heart = emergency',
+        'Discharge readiness: euvolemic (no JVD, clear lungs, dry weight), stable on oral regimen, renal function not worsening, on GDMT (ACEi/ARNI + BB + MRA + SGLT2i)'
+      ]
+    }
+  },
+  {
+    id: 'pe-acute',
+    title: 'Acute Pulmonary Embolism',
+    emoji: '🫁',
+    brief: '45F, sudden dyspnea and pleuritic chest pain, tachycardic, hypoxic, recent 8-hour flight. D-dimer elevated.',
+    specialty: 'Pulmonology / EM',
+    difficulty: 'Standard',
+    patient: { name: 'Sarah Lindström', age: '45F', seed: 'SarahLindstrom', complaint: 'sudden shortness of breath, sharp chest pain with breathing' },
+    mechanism: {
+      pathophysiology: [
+        'Virchow triad: stasis (long flight) + endothelial injury + hypercoagulability → deep vein thrombosis → embolizes to pulmonary vasculature',
+        'Thrombus lodges in pulmonary arteries → increased pulmonary vascular resistance (PVR) → RV afterload acutely rises → RV dilation → interventricular septum bows left → impaired LV filling → decreased cardiac output',
+        'V/Q mismatch: perfusion blocked by clot → ventilated but not perfused lung segments (dead space) → hypoxemia + increased A-a gradient',
+        'Massive PE: >50% vascular bed occluded → acute RV failure → obstructive shock → PEA arrest. Submassive: RV strain without systemic hypotension. Low-risk: no RV strain',
+        'Reflex bronchoconstriction and atelectasis in affected segments (loss of surfactant) → worsens V/Q mismatch',
+        'Pleuritic pain: pulmonary infarction → pleural inflammation. Only ~10% of PEs cause infarction (dual blood supply from pulmonary and bronchial arteries)'
+      ],
+      anatomy: [
+        'Most PEs originate from deep veins of lower extremities (iliac, femoral, popliteal). Calf DVTs rarely embolize; proximal DVTs frequently do',
+        'RV is a thin-walled, compliant, low-pressure chamber — cannot acutely handle elevated afterload. RV dilates → tricuspid regurgitation → RV failure cascade',
+        'McConnell sign on echo: RV free wall akinesis with preserved apical motion. RV/LV ratio >1.0 = RV strain. D-shaped septum = RV pressure overload',
+        'Saddle PE: thrombus straddling the main pulmonary artery bifurcation. Large clot burden but location alone does not determine severity — hemodynamic status matters more'
+      ],
+      pharmacology: [
+        'Heparin (UFH or LMWH): immediate anticoagulation prevents clot propagation. UFH preferred for massive PE (short half-life, reversible, can escalate to thrombolytics)',
+        'tPA (alteplase) for massive PE: 100mg IV over 2 hours. Indications: hemodynamic instability (SBP <90), cardiac arrest presumed PE. Contraindicated: recent surgery/bleeding',
+        'Cautious IV fluids: RV is preload-sensitive when acutely dilated. Small bolus (250-500mL) may help, but aggressive fluids → RV overdistension → worsened septal bowing → hemodynamic collapse',
+        'Vasopressors: norepinephrine first-line for PE-related shock (maintains coronary perfusion of failing RV). Dobutamine may help if low-output RV failure',
+        'Long-term anticoagulation: DOAC (rivaroxaban, apixaban) preferred for most patients. Duration: 3 months minimum; indefinite if unprovoked or recurrent. Provoked (surgery, travel) = 3 months'
+      ],
+      clinicalReasoning: [
+        'Wells score: clinical probability assessment. >6 = PE likely → skip D-dimer, go straight to CTA. ≤4 = PE unlikely → D-dimer to rule out (high negative predictive value)',
+        'D-dimer: highly sensitive, poorly specific. Age-adjusted cutoff (age × 10 for patients >50) improves specificity. Only useful when pre-test probability is LOW',
+        'Risk stratification determines treatment: Low-risk (no RV strain) = anticoag + discharge planning. Submassive (RV strain, stable BP) = anticoag + close monitoring ± thrombolytics. Massive (shock) = thrombolytics + ICU',
+        'CTA chest is diagnostic gold standard. If CTA unavailable or contraindicated → V/Q scan. If cardiac arrest → bedside echo for RV strain → empiric thrombolytics',
+        'PERT team (Pulmonary Embolism Response Team): multidisciplinary activation for submassive and massive PE — IR, CT surgery, pulm, cardiology, heme decide on catheter-directed therapy vs surgical embolectomy vs systemic lysis'
+      ]
+    }
+  },
+  {
+    id: 'bacterial-meningitis',
+    title: 'Bacterial Meningitis',
+    emoji: '🧠',
+    brief: '19M college student, severe headache, fever 39.8°C, neck stiffness, photophobia, petechial rash. Rapidly declining.',
+    specialty: 'ID / Neurology',
+    difficulty: 'Standard',
+    patient: { name: 'Tyler Okonkwo', age: '19M', seed: 'TylerOkonkwo', complaint: 'worst headache of my life, stiff neck, fever' },
+    mechanism: {
+      pathophysiology: [
+        'Bacterial colonization of nasopharynx → bacteremia → crosses blood-brain barrier → meningeal seeding → intense neutrophilic inflammatory response in subarachnoid space',
+        'N. meningitidis (most likely in college student): polysaccharide capsule evades complement → survives in bloodstream → crosses BBB via transcytosis through brain endothelial cells',
+        'Meningeal inflammation → increased BBB permeability → vasogenic cerebral edema → elevated ICP → headache, altered mental status, herniation risk',
+        'Purulent exudate in subarachnoid space → blocks CSF absorption at arachnoid granulations → obstructive/communicating hydrocephalus → further ICP elevation',
+        'Petechial rash (meningococcemia): DIC + direct endothelial invasion by N. meningitidis → purpura fulminans → microvascular thrombosis → skin necrosis, multiorgan failure',
+        'Cerebral vasculitis: inflammation extends to penetrating arteries → vasospasm → cerebral ischemia/infarction → focal neurological deficits'
+      ],
+      anatomy: [
+        'Meninges layers: dura (tough outer), arachnoid (middle), pia (adherent to brain). Infection fills subarachnoid space between arachnoid and pia with purulent exudate',
+        'Nuchal rigidity: inflammation of cervical meninges → reflex spasm of posterior neck muscles → pain with neck flexion. Brudzinski sign (hip flexion with neck flexion), Kernig sign (pain with knee extension when hip flexed)',
+        'Lumbar puncture at L3-L4 or L4-L5 interspace (below conus medullaris at L1-L2) → needle traverses: skin → subcutaneous fat → supraspinous ligament → interspinous ligament → ligamentum flavum → epidural space → dura → arachnoid → subarachnoid space',
+        'Photophobia: meningeal inflammation → irritation of cranial nerve afferents → pain amplification with light stimulation. NOT from direct optic nerve involvement'
+      ],
+      pharmacology: [
+        'Empiric antibiotics: ceftriaxone 2g IV (covers N. meningitidis, S. pneumoniae) + vancomycin 15-20mg/kg IV (drug-resistant pneumococcus). Add ampicillin if age >50 or immunocompromised (Listeria coverage)',
+        'DO NOT DELAY ANTIBIOTICS for LP. If LP will be delayed >30 min → blood cultures + antibiotics FIRST, then LP. CSF culture may still be positive hours after antibiotics',
+        'Dexamethasone 0.15mg/kg IV q6h x 4 days: MUST be given BEFORE or WITH first antibiotic dose. Reduces inflammation → decreased hearing loss and neurological sequelae (strongest evidence for pneumococcal meningitis)',
+        'Acyclovir 10mg/kg IV: add if HSV encephalitis cannot be excluded (temporal lobe involvement, seizures, behavioral changes). HSV PCR from CSF takes 24-48h',
+        'Chemoprophylaxis for close contacts (meningococcal): ciprofloxacin 500mg PO x1, rifampin 600mg PO BID x 2 days, or ceftriaxone 250mg IM x1. Notify public health'
+      ],
+      clinicalReasoning: [
+        'Classic triad: fever + nuchal rigidity + altered mental status — present in only 44% of cases. Any TWO of four (headache, fever, neck stiffness, AMS) should prompt LP',
+        'LP first vs CT first: CT before LP ONLY if focal neuro deficits, papilledema, seizure, immunocompromised, or GCS <10. Otherwise LP directly — CT delays treatment',
+        'CSF interpretation: bacterial = WBC >1000 (>80% PMN), glucose <40 (or CSF/serum ratio <0.4), protein >250, positive Gram stain/culture. Viral = lymphocytic predominance, normal glucose',
+        'Gram stain: gram-negative diplococci = N. meningitidis; gram-positive diplococci = S. pneumoniae; gram-positive rods = Listeria. Guides targeted therapy',
+        'Complications to watch for: seizures (25%), SIADH (cerebral salt wasting), DIC (especially meningococcal), hydrocephalus, cerebral venous thrombosis, hearing loss'
+      ]
+    }
+  },
+  {
+    id: 'gi-bleed',
+    title: 'Upper GI Hemorrhage',
+    emoji: '🩸',
+    brief: '62M, hematemesis and melena, HR 118, BP 88/52, Hgb 6.8. History of NSAID use and alcohol. Hemodynamically unstable.',
+    specialty: 'GI / EM',
+    difficulty: 'Standard',
+    patient: { name: 'Frank Delgado', age: '62M', seed: 'FrankDelgado', complaint: 'vomiting blood, black tarry stools, feeling faint' },
+    mechanism: {
+      pathophysiology: [
+        'Upper GI bleed (above ligament of Treitz): peptic ulcer disease is most common cause (35-50%). NSAIDs inhibit COX-1 → decreased prostaglandin → decreased mucosal blood flow + mucus/bicarb production → ulcer formation',
+        'Alcohol: direct mucosal irritant + stimulates gastric acid secretion + impairs mucosal repair mechanisms → synergistic with NSAIDs for ulcer risk',
+        'H. pylori: chronic infection → chronic active gastritis → altered acid secretion + mucosal defense → ulcer formation. Test and treat in ALL peptic ulcer patients',
+        'Hemorrhagic shock: volume loss → decreased preload → decreased cardiac output → compensatory tachycardia + vasoconstriction → eventual decompensation → hypotension, organ hypoperfusion',
+        'Rebleeding risk: Forrest classification of ulcer appearance at endoscopy — IIa (visible vessel) = 43% rebleed rate, IIb (adherent clot) = 22%, IIc (flat spot) = 10%, III (clean base) = 5%',
+        'Variceal bleeding (if portal HTN): portal hypertension → gastroesophageal varices → thin-walled, high-pressure veins → massive hemorrhage when ruptured. Mortality 15-20% per episode'
+      ],
+      anatomy: [
+        'Ligament of Treitz: peritoneal fold at duodenojejunal junction — anatomic landmark dividing upper from lower GI bleed',
+        'Peptic ulcer locations: duodenal (anterior → perforation risk; posterior → GDA erosion → massive bleed), gastric (lesser curvature most common; must biopsy to rule out malignancy)',
+        'Gastroduodenal artery (GDA): posterior to duodenal bulb — posterior duodenal ulcer eroding into GDA = massive arterial hemorrhage',
+        'Melena: black, tarry stool from degradation of hemoglobin by intestinal bacteria → requires >50mL blood and transit time >14 hours. Upper GI blood + intestinal transit = melena. Bright red = lower or massive upper'
+      ],
+      pharmacology: [
+        'IV PPI (pantoprazole 80mg bolus → 8mg/hr drip): raises gastric pH → stabilizes clot over ulcer bed → reduces rebleeding. Start empirically before endoscopy',
+        'Transfusion: restrictive threshold (Hgb <7) in hemodynamically stable patients (TRICC trial). Liberal threshold (Hgb <9) if active hemorrhage, CAD, hemodynamic instability',
+        'Octreotide 50mcg bolus → 50mcg/hr drip: splanchnic vasoconstriction → reduces portal pressure → first-line adjunct for suspected variceal bleed. Start empirically if cirrhosis/portal HTN suspected',
+        'Erythromycin 250mg IV (prokinetic): given 30 min before endoscopy → accelerates gastric emptying → improves visualization → better endoscopic yield',
+        'Avoid NSAIDs permanently. H. pylori eradication: triple therapy (PPI + amoxicillin + clarithromycin) or quadruple therapy (PPI + bismuth + metronidazole + tetracycline)'
+      ],
+      clinicalReasoning: [
+        'Glasgow-Blatchford Score (GBS): pre-endoscopy risk score. GBS 0 = safe for outpatient management. GBS ≥6 = high risk → ICU, emergent endoscopy',
+        'Rockall Score: post-endoscopy risk score incorporating patient factors + endoscopic findings. Guides disposition and rebleed monitoring',
+        'Resuscitate BEFORE endoscopy: 2 large-bore IVs (18G or larger), type and crossmatch, massive transfusion protocol if hemodynamically unstable. Don\'t scope a crashing patient',
+        'Endoscopy timing: emergent (<12h) if hemodynamically unstable, urgent (<24h) for all admitted upper GI bleeds. Endoscopic hemostasis (clips, cautery, injection) achieves primary hemostasis in >90%',
+        'Rebleeding after endoscopy: repeat endoscopy first. If fails → interventional radiology (angiography + embolization) or surgery (last resort)'
+      ]
+    }
+  },
+  {
+    id: 'acute-pancreatitis',
+    title: 'Acute Pancreatitis',
+    emoji: '🔥',
+    brief: '48M, severe epigastric pain radiating to back, lipase 2400, WBC 16k, recent binge drinking. CT shows peripancreatic inflammation.',
+    specialty: 'GI / Surgery',
+    difficulty: 'Standard',
+    patient: { name: 'David Kowalski', age: '48M', seed: 'DavidKowalski', complaint: 'severe upper belly pain going through to my back, nausea, vomiting' },
+    mechanism: {
+      pathophysiology: [
+        'Pancreatitis initiation: premature activation of trypsinogen → trypsin within pancreatic acinar cells → autodigestion → cell injury → local inflammatory cascade',
+        'Alcohol: direct toxic metabolite (FAEE, acetaldehyde) injury to acinar cells + increased pancreatic duct pressure + premature zymogen activation → most common cause in men',
+        'Gallstone pancreatitis: stone impacts at ampulla of Vater → obstructs both bile and pancreatic duct → biliopancreatic reflux + increased ductal pressure → acinar cell injury',
+        'SIRS response: pancreatic necrosis → cytokine release (TNF-α, IL-1, IL-6) → capillary leak → third-spacing (5-6L fluid sequestration) → hypovolemia → organ failure',
+        'Severity spectrum: mild (interstitial edema, self-limited) → moderately severe (transient organ failure <48h) → severe (persistent organ failure >48h, 15-30% mortality)',
+        'Infected necrosis: sterile necrosis → bacterial translocation from gut (coliforms) → infected pancreatic necrosis (typically week 2-4) → sepsis → markedly increased mortality'
+      ],
+      anatomy: [
+        'Pancreas: retroperitoneal organ at L1-L2. Head nestled in C-loop of duodenum, tail extends to splenic hilum. Retroperitoneal location = pain radiates to back',
+        'Main pancreatic duct (Wirsung) joins common bile duct at ampulla of Vater → both obstructed by impacted gallstone',
+        'Peripancreatic fat necrosis: lipase released from injured acinar cells digests surrounding fat → fat saponification → calcium soap formation → hypocalcemia (Cullen sign = periumbilical ecchymosis; Grey Turner = flank ecchymosis — both from retroperitoneal hemorrhage/necrosis tracking along tissue planes)',
+        'Splenic vein thrombosis: inflamed pancreatic tail → splenic vein compression/thrombosis → left-sided portal hypertension → gastric varices (unique complication)'
+      ],
+      pharmacology: [
+        'Aggressive IV fluid resuscitation (LR preferred): goal-directed therapy, 3 mL/kg/hr initially. LR reduces SIRS compared to NS (anti-inflammatory effect of lactate buffer). Titrate to UOP >0.5 mL/kg/hr',
+        'Multimodal analgesia: IV opioids (hydromorphone preferred) + IV acetaminophen + ketorolac. Morphine sphincter-of-Oddi spasm concern is NOT evidence-based per AGA guidelines',
+        'NO prophylactic antibiotics: multiple RCTs show no benefit for sterile necrosis. Only treat documented infection (gas in necrosis on CT, FNA culture-positive, clinical sepsis)',
+        'Early enteral nutrition: oral diet as tolerated within 24h. Do NOT wait for pain resolution or lipase normalization. NJ tube feeding if unable to eat. TPN only as absolute last resort (increases infection rate)',
+        'Cholecystectomy: same-admission for mild gallstone pancreatitis (prevents 30-40% recurrence rate). Delayed 4-6 weeks for severe pancreatitis with necrosis'
+      ],
+      clinicalReasoning: [
+        'Diagnosis requires 2 of 3: (1) characteristic epigastric pain, (2) lipase >3x upper limit of normal, (3) imaging findings. Do NOT need all three — lipase + pain = pancreatitis',
+        'CT timing: NOT needed for diagnosis. CT useful at 72-96h to assess necrosis extent (Balthazar grade). Early CT underestimates necrosis. Obtain earlier only if diagnostic uncertainty or failure to improve',
+        'BISAP score (day 1): BUN>25, Impaired mental status, SIRS, Age>60, Pleural effusion. ≥3 = severe disease likely → ICU monitoring',
+        'Ranson criteria: 5 at admission + 6 at 48h. ≥3 = severe. Limited by 48h delay. APACHE II ≥8 at admission also predicts severity',
+        'Watch for complications: organ failure (pulmonary most common → ARDS), pancreatic pseudocyst (4-6 weeks), walled-off necrosis (intervention if infected or symptomatic), splenic vein thrombosis, pancreatic duct disruption'
+      ]
+    }
+  },
 ];
 
 // ═══════════════════════════════════════════════
