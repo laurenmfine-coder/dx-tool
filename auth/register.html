@@ -30,7 +30,7 @@
         .board-tag.shelf { background: #fef3c7; color: #92400e; }
         .board-tag.rotation { background: #ede9fe; color: #6d28d9; }
         .plans-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; max-width: 740px; margin-left: auto; margin-right: auto; }
-        @media (max-width: 800px) { .plans-grid { grid-template-columns: 1fr; } #platformShowcase [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; } }
+        @media (max-width: 800px) { .plans-grid { grid-template-columns: 1fr; } }
         .plan-card { background: white; border-radius: 20px; padding: 32px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 3px solid transparent; cursor: pointer; transition: all 0.3s; position: relative; }
         .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
         .plan-card.selected { border-color: var(--primary); }
@@ -125,40 +125,18 @@
         .exam-tag.s2 { background: #d4e8f7; color: #166534; }
         .exam-tag.shelf { background: #fef3c7; color: #92400e; }
         .beta-note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px; margin-top: 16px; font-size: 13px; color: #92400e; text-align: center; }
+        /* Suppress injected marketing sections — that content now lives on index.html */
+        .rdx-marketing, .rdx-features-showcase, .rdx-live-preview, .rdx-site-stats-inject,
+        [data-rdx-inject], .what-inside, .features-section, .live-preview-section { display: none !important; }
+        .back-home { display: inline-flex; align-items: center; gap: 6px; color: #2874A6; text-decoration: none; font-size: 13px; font-weight: 600; margin-bottom: 20px; }
+        .back-home:hover { text-decoration: underline; }
     </style>
-<script>
-// Early-load sign-in toggle so it works even if other scripts fail
-function showLogin() {
-    var ps = document.getElementById('planSelection');
-    var rf = document.getElementById('registrationForm');
-    var sc = document.getElementById('platformShowcase');
-    var lf = document.getElementById('loginForm');
-    var fp = document.getElementById('forgotPasswordForm');
-    var up = document.getElementById('updatePasswordForm');
-    if (ps) ps.classList.add('hidden');
-    if (rf) rf.classList.add('hidden');
-    if (sc) sc.classList.add('hidden');
-    if (fp) fp.classList.add('hidden');
-    if (up) up.classList.add('hidden');
-    if (lf) lf.classList.remove('hidden');
-    if (lf) lf.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-function showPlanSelection() {
-    var lf = document.getElementById('loginForm');
-    var rf = document.getElementById('registrationForm');
-    var ps = document.getElementById('planSelection');
-    var sc = document.getElementById('platformShowcase');
-    if (lf) lf.classList.add('hidden');
-    if (rf) rf.classList.add('hidden');
-    if (ps) ps.classList.remove('hidden');
-    if (sc) sc.classList.remove('hidden');
-}
-</script>
 <script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
     <div class="page-container">
         <div class="page-header">
+            <a href="../index.html" class="back-home">&larr; Back to Home</a>
             <h1 style="font-family: 'Playfair Display', 'Georgia', serif; font-size: 42px; font-weight: 800; color: #1e3a5f; letter-spacing: -0.5px;">Reason<span style="border-bottom: 3px solid #2874A6;">Dx</span></h1>
             <p>Master clinical reasoning. Think like a clinician.</p>
             <div class="board-tags">
@@ -169,150 +147,6 @@ function showPlanSelection() {
             </div>
             <p style="margin-top: 16px; font-size: 15px; color: #64748b;">Already have an account? <a href="#" onclick="showLogin(); return false;" style="color: #2874A6; font-weight: 600; text-decoration: none;">Sign in →</a></p>
         </div>
-
-        <!-- ═══════════ PLATFORM SHOWCASE ═══════════ -->
-        <div id="platformShowcase" style="max-width: 900px; margin: 0 auto 48px;">
-
-            <!-- Try Before You Sign Up -->
-            <div style="text-align: center; margin-bottom: 40px;">
-                <a href="../case-preview.html" style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #2874A6 0%, #1f5f8b 100%); color: white; padding: 16px 36px; border-radius: 28px; font-size: 17px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(40,116,166,0.35); transition: all 0.2s; letter-spacing: 0.3px;">
-                    <span style="font-size: 22px;">&#9654;</span> Try a Case — No Signup Required
-                </a>
-                <p style="color: #94a3b8; font-size: 14px; margin-top: 12px;">Experience clinical reasoning in action before you commit.</p>
-            </div>
-
-            <!-- Section Title -->
-            <div style="text-align: center; margin-bottom: 32px;">
-                <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2874A6; margin-bottom: 8px;">What's Inside</p>
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 800; color: #1e3a5f; margin-bottom: 8px;">Five tools that teach you to think, not just memorize</h2>
-                <p style="color: #64748b; font-size: 15px; max-width: 560px; margin: 0 auto;">Every feature works together to build diagnostic reasoning skills you'll use from Day 1 of clerkships through residency.</p>
-            </div>
-
-            <!-- Feature Cards Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 40px;">
-
-                <!-- CRT -->
-                <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; border-top: 3px solid #2874A6; transition: transform 0.2s; position: relative;" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='none'">
-                    <div style="width: 40px; height: 40px; background: #f0f7fc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px;">&#128300;</div>
-                    <h3 style="font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 6px;">Clinical Reasoning Trainer</h3>
-                    <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 12px;">Work through patient cases with progressive disclosure. Build differentials, order tests, and get AI coaching that adapts to your reasoning — not just your answers.</p>
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <span style="background: #f0f7fc; color: #2874A6; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">29 Specialties</span>
-                        <span style="background: #f0f7fc; color: #2874A6; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">AI Coaching</span>
-                    </div>
-                </div>
-
-                <!-- SBAR -->
-                <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; border-top: 3px solid #d97706; transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='none'">
-                    <div style="width: 40px; height: 40px; background: #fffbeb; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px;">&#128172;</div>
-                    <h3 style="font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 6px;">SBAR Trainer</h3>
-                    <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 12px;">Practice structured clinical communication with 13 real scenarios. Get AI-scored feedback on your Situation, Background, Assessment, and Recommendation delivery.</p>
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <span style="background: #fffbeb; color: #92400e; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">13 Scenarios</span>
-                        <span style="background: #fffbeb; color: #92400e; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">AI Feedback</span>
-                    </div>
-                </div>
-
-                <!-- CoachDx -->
-                <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; border-top: 3px solid #7c3aed; transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='none'">
-                    <div style="width: 40px; height: 40px; background: #f5f3ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px;">&#129504;</div>
-                    <h3 style="font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 6px;">CoachDx</h3>
-                    <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 12px;">Socratic AI coaching that doesn't give you the answer — it asks the question you need to hear. Post-case debriefs analyze your reasoning patterns and metacognitive gaps.</p>
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <span style="background: #f5f3ff; color: #6d28d9; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">Socratic Method</span>
-                        <span style="background: #f5f3ff; color: #6d28d9; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">Debriefs</span>
-                    </div>
-                </div>
-
-                <!-- SimRoomDx -->
-                <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; border-top: 3px solid #059669; transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='none'">
-                    <div style="width: 40px; height: 40px; background: #ecfdf5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px;">&#127973;</div>
-                    <h3 style="font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 6px;">SimRoomDx</h3>
-                    <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 12px;">Virtual simulation room with AI patients, nurses, attendings, and specialists. Practice the full clinical encounter — from triage to disposition — in a realistic team setting.</p>
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <span style="background: #ecfdf5; color: #059669; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">AI Team</span>
-                        <span style="background: #ecfdf5; color: #059669; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">Full Encounters</span>
-                    </div>
-                </div>
-
-                <!-- Reasoning Fingerprint -->
-                <div style="background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; border-top: 3px solid #e11d48; transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-3px)'" onmouseleave="this.style.transform='none'">
-                    <div style="width: 40px; height: 40px; background: #fff1f2; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px;">&#128200;</div>
-                    <h3 style="font-size: 17px; font-weight: 700; color: #1e3a5f; margin-bottom: 6px;">Reasoning Fingerprint</h3>
-                    <p style="font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 12px;">A visual map of how you think. Track anchoring bias, premature closure, system coverage gaps, and calibration accuracy. See growth over time — not just scores.</p>
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                        <span style="background: #fff1f2; color: #e11d48; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">Bias Tracking</span>
-                        <span style="background: #fff1f2; color: #e11d48; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">Analytics</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CRT Visual Preview -->
-            <div style="background: white; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 40px; border: 1px solid #e2e8f0;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;">
-                    <div>
-                        <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2874A6; margin-bottom: 8px;">&#128300; Live Preview</p>
-                        <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 800; color: #1e3a5f; margin-bottom: 10px;">Cases that teach reasoning, not pattern matching</h3>
-                        <p style="font-size: 14px; color: #64748b; line-height: 1.7; margin-bottom: 16px;">Every case unfolds like a real clinical encounter. You get information piece by piece — history, exam, labs — and make decisions at each stage. The AI coach doesn't give you the answer. It asks the question you need to hear.</p>
-                        <a href="../case-preview.html" style="display: inline-block; padding: 12px 28px; background: #2874A6; color: white; border-radius: 24px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s;">Try It Now &#8594;</a>
-                    </div>
-                    <!-- Mock Case UI -->
-                    <div style="background: #f0f5f9; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
-                        <div style="background: linear-gradient(135deg, #1e3a5f, #2874A6); border-radius: 12px 12px 0 0; padding: 14px 18px; color: white;">
-                            <span style="font-size: 11px; opacity: 0.8;">Emergency Medicine · Cardiology</span>
-                            <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 15px; font-weight: 700; margin-top: 4px;">62-year-old male — crushing substernal chest pain</div>
-                        </div>
-                        <div style="background: white; padding: 14px 18px; border-radius: 0 0 12px 12px; border: 1px solid #e2e8f0; border-top: none;">
-                            <p style="font-size: 12px; color: #475569; line-height: 1.6; margin-bottom: 10px;">A 62-year-old man with HTN and T2DM presents with 45 min of crushing substernal pressure radiating to the left arm. Diaphoretic, nauseated. HR 98, BP 148/92, SpO2 96%.</p>
-                            <p style="font-size: 12px; font-weight: 600; color: #2874A6;">What is your initial differential? What do you need next?</p>
-                        </div>
-                        <div style="background: white; margin-top: 8px; border-radius: 12px; padding: 12px 16px; border-left: 3px solid #7c3aed; border: 1px solid #e2e8f0; border-left: 3px solid #7c3aed;">
-                            <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #7c3aed; margin-bottom: 4px;">CoachDx</p>
-                            <p style="font-size: 12px; color: #475569; line-height: 1.5;">You've identified ACS as your lead. Good. But you listed PE third — what specific finding made you rank it there? What would change your ranking?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comparison Row -->
-            <div style="background: white; border-radius: 20px; padding: 28px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 40px; border: 1px solid #e2e8f0;">
-                <h3 style="text-align: center; font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 800; color: #1e3a5f; margin-bottom: 20px;">How ReasonDx is different</h3>
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                        <thead>
-                            <tr style="border-bottom: 2px solid #e2e8f0;">
-                                <th style="text-align: left; padding: 10px 12px; color: #64748b; font-weight: 600;">Feature</th>
-                                <th style="padding: 10px 12px; color: #64748b; font-weight: 600;">Qbanks</th>
-                                <th style="padding: 10px 12px; color: #64748b; font-weight: 600;">Flashcards</th>
-                                <th style="padding: 10px 12px; color: white; font-weight: 700; background: #2874A6; border-radius: 8px 8px 0 0;">ReasonDx</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 10px 12px; color: #475569;">Teaches reasoning process</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; background:#f0f7fc; color:#2874A6; font-weight:700;">&#10003; AI Socratic coaching</td></tr>
-                            <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 10px 12px; color: #475569;">Interactive cases with progressive disclosure</td><td style="text-align:center; color:#94a3b8; font-size:12px;">Limited vignettes</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; background:#f0f7fc; color:#2874A6; font-weight:700;">&#10003; Full case simulation</td></tr>
-                            <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 10px 12px; color: #475569;">Tracks cognitive biases</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; background:#f0f7fc; color:#2874A6; font-weight:700;">&#10003; Reasoning Fingerprint</td></tr>
-                            <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 10px 12px; color: #475569;">Clinical communication practice</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; background:#f0f7fc; color:#2874A6; font-weight:700;">&#10003; SBAR Trainer (13 scenarios)</td></tr>
-                            <tr style="border-bottom: 1px solid #f1f5f9;"><td style="padding: 10px 12px; color: #475569;">Team simulation (nurse, attending, specialist)</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; background:#f0f7fc; color:#2874A6; font-weight:700;">&#10003; SimRoomDx</td></tr>
-                            <tr><td style="padding: 10px 12px; color: #475569;">Pre-med tools</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; color:#cbd5e1;">—</td><td style="text-align:center; background:#f0f7fc; color:#2874A6; font-weight:700;">&#10003; Encounters, Bridge Mode, LOR</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Built By -->
-            <div style="text-align: center; max-width: 600px; margin: 0 auto 48px;">
-                <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2874A6; margin-bottom: 8px;">Who Built This</p>
-                <p style="font-size: 15px; color: #475569; line-height: 1.7;">Created by <strong style="color: #1e3a5f;">Lauren Fine, MD, FAAAAI</strong> — a board-certified allergist/immunologist and medical educator with over a decade of clinical practice. Deep expertise in clinical reasoning instruction combined with educational technology innovation.</p>
-                <p style="font-size: 13px; color: #94a3b8; margin-top: 8px;">Board-certified allergist/immunologist · TEDx speaker · ICF coaching candidate</p>
-            </div>
-
-            <!-- Choose Your Plan Divider -->
-            <div style="text-align: center; margin-bottom: 8px;">
-                <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2874A6; margin-bottom: 8px;">Choose Your Plan</p>
-                <div style="width: 48px; height: 3px; background: #2874A6; margin: 0 auto; border-radius: 2px;"></div>
-            </div>
-        </div>
-        <!-- ═══════════ END SHOWCASE ═══════════ -->
 
         <div id="planSelection">
             <div class="plans-grid">
@@ -485,11 +319,6 @@ function showPlanSelection() {
                         <div class="form-group"><label class="form-label">Last Name</label><input type="text" id="lastName" class="form-input" placeholder="Doe"></div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Preferred Display Name <span class="optional">(optional)</span></label>
-                        <input type="text" id="displayName" class="form-input" placeholder="What should we call you? (e.g. Jane, Dr. Fine, JD)">
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;">This is how you'll be greeted across the platform. Defaults to your first name.</div>
-                    </div>
-                    <div class="form-group">
                         <label class="form-label">I am a...</label>
                         <select id="userRole" class="form-select">
                             <option value="">Select your training level</option>
@@ -646,28 +475,6 @@ function showPlanSelection() {
             </div>
         </div>
 
-        <!-- FORGOT PASSWORD -->
-        <div class="form-card hidden" id="forgotPasswordForm">
-            <div class="form-header"><h2>Reset Password</h2><p>Enter your email to receive a reset link</p></div>
-            <div class="form-body">
-                <div id="forgotError" class="message"></div>
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="forgotEmail" class="form-input" placeholder="you@email.com"></div>
-                <button type="button" class="btn btn-primary" onclick="sendPasswordReset()">Send Reset Link</button>
-                <button type="button" class="btn btn-link" onclick="showLogin()">← Back to Sign In</button>
-            </div>
-        </div>
-
-        <!-- UPDATE PASSWORD (shown after clicking reset link) -->
-        <div class="form-card hidden" id="updatePasswordForm">
-            <div class="form-header"><h2>Set New Password</h2><p>Choose a new password for your account</p></div>
-            <div class="form-body">
-                <div id="updateError" class="message"></div>
-                <div class="form-group"><label class="form-label">New Password</label><input type="password" id="newPassword" class="form-input" placeholder="New password (min 6 characters)"></div>
-                <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="confirmPassword" class="form-input" placeholder="Confirm new password"></div>
-                <button type="button" class="btn btn-primary" onclick="updatePassword()">Update Password</button>
-            </div>
-        </div>
-
         <!-- FLODESK EMAIL SIGNUP CTA -->
         <div id="flodeskCTA" style="max-width: 600px; margin: 40px auto 0; text-align: center; padding: 32px 24px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
             <div style="width: 48px; height: 3px; background: #2874A6; margin: 0 auto 20px; border-radius: 2px;"></div>
@@ -766,7 +573,6 @@ function showPlanSelection() {
             document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
             setTimeout(function(){
                 document.getElementById('planSelection').classList.add('hidden');
-                var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.add('hidden');
                 document.getElementById('registrationForm').classList.remove('hidden');
                 document.getElementById('registrationForm').className = 'form-card ' + plan;
                 document.getElementById('formHeader').className = 'form-header ' + plan;
@@ -794,7 +600,6 @@ function showPlanSelection() {
         function backToPlanSelection() {
             document.getElementById('registrationForm').classList.add('hidden');
             document.getElementById('planSelection').classList.remove('hidden');
-            var sc = document.getElementById('platformShowcase'); if (sc) sc.classList.remove('hidden');
             state.selectedPlan = null;
             state.currentSection = 0;
         }
@@ -937,11 +742,9 @@ function showPlanSelection() {
             if (!terms) { err.textContent = 'Please agree to the Terms of Service.'; err.className = 'message error'; return; }
             state.generatedReferral = generateReferralCode(fn, ln);
             state.password = pw;
-            var dn = document.getElementById('displayName').value.trim() || fn;
             var profileData = {
                 firstName: fn,
                 lastName: ln,
-                displayName: dn,
                 role: role,
                 institution: document.getElementById('institution').value.trim(),
                 specialty: document.getElementById('specialtyInterest').value,
@@ -990,7 +793,6 @@ function showPlanSelection() {
                 finalizeAccount({
                     firstName: document.getElementById('firstName').value.trim(),
                     lastName: document.getElementById('lastName').value.trim(),
-                    displayName: document.getElementById('displayName').value.trim() || document.getElementById('firstName').value.trim(),
                     role: document.getElementById('userRole').value,
                     institution: document.getElementById('institution').value.trim(),
                     specialty: document.getElementById('specialtyInterest').value,
@@ -1013,7 +815,6 @@ function showPlanSelection() {
             sessionStorage.setItem('reasondx-pending-profile', JSON.stringify({
                 firstName: document.getElementById('firstName').value.trim(),
                 lastName: document.getElementById('lastName').value.trim(),
-                displayName: document.getElementById('displayName').value.trim() || document.getElementById('firstName').value.trim(),
                 role: document.getElementById('userRole').value,
                 institution: document.getElementById('institution').value.trim(),
                 specialty: document.getElementById('specialtyInterest').value,
@@ -1071,7 +872,6 @@ function showPlanSelection() {
             var userData = {
                 email: state.verifiedEmail,
                 name: profile.firstName + ' ' + profile.lastName,
-                displayName: profile.displayName || profile.firstName,
                 plan: state.selectedPlan,
                 trainingLevel: profile.role,
                 specialty: profile.specialty || '',
@@ -1095,7 +895,7 @@ function showPlanSelection() {
                     sb.auth.signUp({
                         email: state.verifiedEmail,
                         password: state.password,
-                        options: { data: { full_name: userData.name, display_name: userData.displayName } }
+                        options: { data: { full_name: userData.name } }
                     }).then(function(result) {
                         if (result.data && result.data.user) {
                             console.log('Supabase account created:', result.data.user.id);
@@ -1112,7 +912,7 @@ function showPlanSelection() {
                 window.DxProgress.syncProfile();
             }
 
-            sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, displayName: userData.displayName, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, timestamp: new Date().toISOString() });
+            sendToSheets({ action: 'registration', plan: state.selectedPlan, email: state.verifiedEmail, name: userData.name, trainingLevel: userData.trainingLevel, specialty: userData.specialty, institution: userData.institution, graduationYear: userData.graduationYear, studyGoal: userData.studyGoal, referralCode: state.generatedReferral, referredBy: state.referralCode, billingPeriod: state.billingPeriod, timestamp: new Date().toISOString() });
 
             // Log referral for the referrer (Stripe hook)
             if (state.referralCode) {
@@ -1132,13 +932,12 @@ function showPlanSelection() {
             }
 
             document.getElementById('referralCodeValue').textContent = state.generatedReferral;
-            var greetName = (profile && profile.displayName) || (profile && profile.firstName) || '';
             if (state.selectedPlan === 'pro') {
-                document.getElementById('successTitle').textContent = greetName ? ('Welcome to ReasonDx Pro, ' + greetName + '!') : 'Welcome to ReasonDx Pro!';
+                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro!';
                 var s = window.RdxSiteStats || {};
                 document.getElementById('successMessage').innerHTML = 'Full access to unlimited clinical reasoning cases across 29 specialties, CoachDx AI coaching, SBAR Trainer, SimRoomDx, and your Reasoning Fingerprint is now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             } else {
-                document.getElementById('successTitle').textContent = greetName ? ('Welcome to ReasonDx, ' + greetName + '!') : 'Welcome to ReasonDx!';
+                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx!';
                 document.getElementById('successMessage').innerHTML = 'Your free account is ready. Start practicing clinical reasoning and upgrade anytime.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
             }
             showSection('sectionSuccess');
@@ -1156,7 +955,8 @@ function showPlanSelection() {
         // ============================================
         // LOGIN
         // ============================================
-        // showLogin() and showPlanSelection() defined in early-load script block in <head>
+        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
+        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
         function login() {
             var email = document.getElementById('loginEmail').value.trim();
             var pw = document.getElementById('loginPassword').value;
@@ -1185,19 +985,16 @@ function showPlanSelection() {
                     // Success - get user name from Supabase profile
                     var user = result.data.user;
                     var fullName = (user.user_metadata && user.user_metadata.full_name) || email.split('@')[0];
-                    var metaDisplayName = (user.user_metadata && user.user_metadata.display_name) || '';
                     
                     // Try to get name from profiles table
-                    sb.from('profiles').select('full_name, display_name, subscription_tier').eq('id', user.id).single().then(function(profileResult) {
+                    sb.from('profiles').select('full_name, subscription_tier').eq('id', user.id).single().then(function(profileResult) {
                         var profile = profileResult.data;
-                        var displayName = (profile && profile.display_name) || metaDisplayName || (profile && profile.full_name) || fullName;
-                        var nameForDisplay = (profile && profile.full_name) || fullName;
+                        var displayName = (profile && profile.full_name) || fullName;
                         var plan = (profile && profile.subscription_tier) || 'free';
                         
                         localStorage.setItem('reasondx-user', JSON.stringify({
                             email: user.email,
-                            name: nameForDisplay,
-                            displayName: displayName,
+                            name: displayName,
                             plan: plan,
                             supabaseId: user.id,
                             createdAt: user.created_at || new Date().toISOString()
@@ -1213,7 +1010,6 @@ function showPlanSelection() {
                         localStorage.setItem('reasondx-user', JSON.stringify({
                             email: user.email,
                             name: fullName,
-                            displayName: metaDisplayName || fullName,
                             plan: 'free',
                             supabaseId: user.id
                         }));
@@ -1234,87 +1030,14 @@ function showPlanSelection() {
                 document.getElementById('loginError').className = 'message error';
             }
         }
-        function showForgotPassword() {
-            var lf = document.getElementById('loginForm');
-            var fp = document.getElementById('forgotPasswordForm');
-            var ps = document.getElementById('planSelection');
-            var rf = document.getElementById('registrationForm');
-            var sc = document.getElementById('platformShowcase');
-            if (lf) lf.classList.add('hidden');
-            if (ps) ps.classList.add('hidden');
-            if (rf) rf.classList.add('hidden');
-            if (sc) sc.classList.add('hidden');
-            if (fp) fp.classList.remove('hidden');
-            if (fp) fp.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        async function sendPasswordReset() {
-            var email = document.getElementById('forgotEmail').value.trim();
-            var errEl = document.getElementById('forgotError');
-            if (!email) { errEl.textContent = 'Please enter your email.'; errEl.className = 'message error'; return; }
-            try {
-                var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
-                var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
-                var sb = window.supabase.createClient(sbUrl, sbKey);
-                var result = await sb.auth.resetPasswordForEmail(email, {
-                    redirectTo: 'https://www.reasondx.com/auth/register.html#recovery'
-                });
-                if (result.error) throw result.error;
-                errEl.textContent = 'Check your email for a password reset link.';
-                errEl.className = 'message success';
-                errEl.style.color = '#059669';
-            } catch(e) {
-                errEl.textContent = e.message || 'Failed to send reset email. Please try again.';
-                errEl.className = 'message error';
-            }
-        }
-
-        async function updatePassword() {
-            var pw = document.getElementById('newPassword').value;
-            var pw2 = document.getElementById('confirmPassword').value;
-            var errEl = document.getElementById('updateError');
-            if (!pw || pw.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.className = 'message error'; return; }
-            if (pw !== pw2) { errEl.textContent = 'Passwords do not match.'; errEl.className = 'message error'; return; }
-            try {
-                var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
-                var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
-                var sb = window.supabase.createClient(sbUrl, sbKey);
-                var result = await sb.auth.updateUser({ password: pw });
-                if (result.error) throw result.error;
-                errEl.textContent = 'Password updated! Redirecting to sign in...';
-                errEl.className = 'message success';
-                errEl.style.color = '#059669';
-                setTimeout(function() { window.location.href = 'register.html#signin'; window.location.reload(); }, 2000);
-            } catch(e) {
-                errEl.textContent = e.message || 'Failed to update password. The link may have expired.';
-                errEl.className = 'message error';
-            }
-        }
+        function showForgotPassword() { alert('Password reset coming soon.'); }
 
         // ============================================
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle password recovery redirect from Supabase
-            var hash = window.location.hash;
-            if (hash && (hash.includes('type=recovery') || hash.includes('recovery'))) {
-                // Supabase puts tokens in the hash fragment
-                var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
-                var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
-                var sb = window.supabase.createClient(sbUrl, sbKey);
-                // Let Supabase process the token from the URL
-                sb.auth.getSession().then(function(res) {
-                    if (res.data.session) {
-                        // Show the update password form
-                        var allForms = document.querySelectorAll('.form-card, #planSelection, #platformShowcase');
-                        allForms.forEach(function(f) { f.classList.add('hidden'); });
-                        var upf = document.getElementById('updatePasswordForm');
-                        if (upf) { upf.classList.remove('hidden'); upf.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-                    }
-                });
-            }
             // Auto-show sign-in if redirected with #signin hash
-            else if (window.location.hash === '#signin') {
+            if (window.location.hash === '#signin') {
                 showLogin();
             }
 
@@ -1383,7 +1106,7 @@ function showPlanSelection() {
         });
     </script>
 <script src="../data/rdx-persist.js"></script>
-<script src="../rdx-site-stats.js"></script>
+<!-- rdx-site-stats.js removed — marketing content now lives on index.html -->
 <script>
 // Flodesk popup — show after 30s, only once per session
 function closePopup() {
@@ -1428,135 +1151,5 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- ANONYMOUS FEEDBACK WIDGET                 -->
-<!-- ═══════════════════════════════════════════ -->
-<style>
-.fb-float { position: fixed; bottom: 24px; left: 24px; z-index: 9998; }
-.fb-btn { display: flex; align-items: center; gap: 6px; padding: 10px 18px; background: linear-gradient(135deg, #2874A6, #1f5f8b); color: white; border: none; border-radius: 24px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(40,116,166,0.35); transition: all 0.25s; font-family: 'Inter', -apple-system, sans-serif; }
-.fb-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(40,116,166,0.45); }
-.fb-panel { position: fixed; bottom: 80px; left: 24px; z-index: 9999; width: 360px; max-width: calc(100vw - 48px); background: white; border-radius: 20px; box-shadow: 0 12px 48px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; display: none; animation: fbSlideUp 0.25s ease; }
-.fb-panel.open { display: block; }
-@keyframes fbSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-.fb-panel-header { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: start; }
-.fb-panel-header h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 800; color: #1e3a5f; margin: 0; }
-.fb-panel-close { background: none; border: none; font-size: 20px; color: #94a3b8; cursor: pointer; padding: 0; line-height: 1; }
-.fb-panel-body { padding: 16px 20px 20px; }
-.fb-emoji-row { display: flex; gap: 6px; margin-bottom: 14px; }
-.fb-emoji { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; transition: all 0.15s; font-family: inherit; }
-.fb-emoji:hover { border-color: #2874A6; background: #f0f7fc; }
-.fb-emoji.selected { border-color: #2874A6; background: #f0f7fc; box-shadow: 0 0 0 2px rgba(40,116,166,0.15); }
-.fb-emoji .em { font-size: 22px; line-height: 1; }
-.fb-emoji .el { font-size: 10px; font-weight: 600; color: #64748b; }
-.fb-text { width: 100%; min-height: 88px; padding: 12px 14px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 14px; font-family: 'Inter', -apple-system, sans-serif; color: #334155; resize: vertical; outline: none; transition: border-color 0.2s; line-height: 1.5; }
-.fb-text:focus { border-color: #2874A6; box-shadow: 0 0 0 3px rgba(40,116,166,0.08); }
-.fb-text::placeholder { color: #94a3b8; }
-.fb-submit { width: 100%; padding: 12px; background: linear-gradient(135deg, #2874A6, #1f5f8b); color: white; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; margin-top: 10px; }
-.fb-submit:hover { box-shadow: 0 4px 12px rgba(40,116,166,0.3); }
-.fb-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-.fb-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 8px; }
-.fb-success { text-align: center; padding: 32px 20px; }
-.fb-success .check { font-size: 48px; margin-bottom: 8px; }
-.fb-success h4 { font-family: 'Playfair Display', serif; font-size: 18px; color: #1e3a5f; margin-bottom: 6px; }
-.fb-success p { font-size: 13px; color: #64748b; line-height: 1.5; }
-</style>
-
-<div class="fb-float" id="fbWidget" style="display: none;">
-    <button class="fb-btn" onclick="toggleFeedback()" id="fbToggle" aria-label="Send feedback">
-        💬 <span>Feedback</span>
-    </button>
-</div>
-
-<div class="fb-panel open" id="fbPanel">
-    <div id="fbForm">
-        <div class="fb-panel-header">
-            <div>
-                <h3>Share your thoughts</h3>
-                <p style="font-size: 12px; color: #94a3b8; margin-top: 2px;">100% anonymous — no login needed</p>
-            </div>
-            <button class="fb-panel-close" onclick="toggleFeedback()">&times;</button>
-        </div>
-        <div class="fb-panel-body">
-            <div class="fb-emoji-row">
-                <button class="fb-emoji" onclick="pickEmoji(this,'love')" data-cat="love"><span class="em">😍</span><span class="el">Love It</span></button>
-                <button class="fb-emoji" onclick="pickEmoji(this,'idea')" data-cat="idea"><span class="em">💡</span><span class="el">Idea</span></button>
-                <button class="fb-emoji" onclick="pickEmoji(this,'confused')" data-cat="confused"><span class="em">🤔</span><span class="el">Confused</span></button>
-                <button class="fb-emoji" onclick="pickEmoji(this,'bug')" data-cat="bug"><span class="em">🐛</span><span class="el">Bug</span></button>
-            </div>
-            <textarea class="fb-text" id="fbText" placeholder="Tell us anything — ideas, feedback, what you wish existed, what's confusing, what's great..." maxlength="2000"></textarea>
-            <button class="fb-submit" id="fbSubmitBtn" onclick="submitFeedback()">Send Feedback</button>
-            <p class="fb-note">Your feedback shapes what we build next.</p>
-        </div>
-    </div>
-    <div id="fbSuccess" class="fb-success" style="display: none;">
-        <div class="check">✨</div>
-        <h4>Thank you!</h4>
-        <p>Your feedback was received — it goes straight to the team. We read every single one.</p>
-        <button onclick="resetFeedback()" style="margin-top: 14px; padding: 8px 20px; background: none; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 13px; color: #64748b; cursor: pointer; font-family: inherit;">Send another</button>
-    </div>
-</div>
-
-<script>
-var FB_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec';
-var fbCategory = '';
-
-// Session-aware: auto-open once per session, respect close
-(function() {
-    if (sessionStorage.getItem('fb-closed')) {
-        document.getElementById('fbPanel').classList.remove('open');
-        document.getElementById('fbWidget').style.display = 'block';
-    }
-})();
-
-function closeFeedbackPanel() {
-    document.getElementById('fbPanel').classList.remove('open');
-    document.getElementById('fbWidget').style.display = 'block';
-    sessionStorage.setItem('fb-closed', '1');
-}
-
-function toggleFeedback() {
-    var panel = document.getElementById('fbPanel');
-    var isOpen = panel.classList.contains('open');
-    if (isOpen) {
-        closeFeedbackPanel();
-    } else {
-        panel.classList.add('open');
-        document.getElementById('fbWidget').style.display = 'none';
-    }
-}
-
-function pickEmoji(btn, cat) {
-    document.querySelectorAll('.fb-emoji').forEach(function(b) { b.classList.remove('selected'); });
-    if (fbCategory === cat) { fbCategory = ''; }
-    else { btn.classList.add('selected'); fbCategory = cat; }
-}
-
-function submitFeedback() {
-    var text = document.getElementById('fbText').value.trim();
-    if (!text && !fbCategory) { document.getElementById('fbText').focus(); return; }
-    var btn = document.getElementById('fbSubmitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    var isSignedIn = false;
-    try { var u = localStorage.getItem('reasondx-user'); if (u) { var j = JSON.parse(u); isSignedIn = !!(j && j.email); } } catch(e) {}
-    var payload = { action: 'feedback', category: fbCategory || 'none', message: text, page: location.pathname, signedIn: isSignedIn, timestamp: new Date().toISOString() };
-    try { fetch(FB_SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); } catch(e) {}
-    console.log('Feedback submitted:', JSON.stringify(payload, null, 2));
-    document.getElementById('fbForm').style.display = 'none';
-    document.getElementById('fbSuccess').style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = 'Send Feedback';
-}
-
-function resetFeedback() {
-    document.getElementById('fbText').value = '';
-    fbCategory = '';
-    document.querySelectorAll('.fb-emoji').forEach(function(b) { b.classList.remove('selected'); });
-    document.getElementById('fbForm').style.display = 'block';
-    document.getElementById('fbSuccess').style.display = 'none';
-}
-</script>
-
 </body>
 </html>
