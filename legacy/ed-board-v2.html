@@ -178,6 +178,33 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 @keyframes toastIn{to{transform:translateY(0);opacity:1}}@keyframes toastOut{to{transform:translateY(20px);opacity:0}}
 .toast.success{background:var(--success)}.toast.warning{background:var(--warning)}
 @media(max-width:768px){.board-header{padding:12px 16px}.stats-bar{padding:0 16px 12px}.board-container{padding:0 16px 16px}.board-table td,.board-table th{padding:8px 10px}.detail-panel{width:100vw;max-width:100vw}.hide-mobile{display:none}.order-grid{grid-template-columns:1fr}}
+.tx-group-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin:14px 0 6px;padding-left:2px}
+.tx-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tx-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:12px;cursor:pointer;transition:all .15s;background:white}
+.tx-item:hover{border-color:var(--primary);background:var(--primary-light)}
+.tx-item.ordered{border-color:var(--success);background:#ECFDF5;opacity:.8;pointer-events:none}
+.tx-item.critical-miss{border-color:var(--error);background:#FEF2F2}
+.tx-item input[type=checkbox]{accent-color:var(--primary)}
+.reassess-card{background:linear-gradient(135deg,#EBF5FB,#FDFEFE);border:2px solid var(--primary);border-radius:12px;padding:16px;margin:12px 0}
+.reassess-card h4{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--primary)}
+.reassess-delta{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:6px}
+.reassess-delta.improved{background:#ECFDF5;color:var(--success)}
+.reassess-delta.worsened{background:#FEF2F2;color:var(--error)}
+.reassess-delta.unchanged{background:#F3F4F6;color:var(--text-muted)}
+.phase-timeline{display:flex;gap:0;margin:12px 0 16px;position:relative}
+.phase-step{flex:1;text-align:center;padding:8px 4px;font-size:11px;font-weight:600;border-bottom:3px solid var(--border);color:var(--text-muted);position:relative}
+.phase-step.active{border-color:var(--primary);color:var(--primary)}
+.phase-step.completed{border-color:var(--success);color:var(--success)}
+.phase-dot{width:10px;height:10px;border-radius:50%;background:var(--border);margin:0 auto 4px;border:2px solid white;box-shadow:0 0 0 2px var(--border)}
+.phase-step.active .phase-dot{background:var(--primary);box-shadow:0 0 0 2px var(--primary)}
+.phase-step.completed .phase-dot{background:var(--success);box-shadow:0 0 0 2px var(--success)}
+.tx-teaching{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:12px;font-size:12px;line-height:1.5;margin-top:12px}
+.tx-teaching strong{color:var(--warning)}
+.save-indicator{position:fixed;bottom:8px;left:8px;font-size:10px;color:var(--text-muted);opacity:.6;z-index:100}
+.admit-bridge-banner{background:linear-gradient(135deg,#1E3A5F,#2874A6);color:white;border-radius:10px;padding:16px;margin:12px 0;text-align:center}
+.admit-bridge-banner h4{font-size:15px;margin-bottom:6px}
+.admit-bridge-banner p{font-size:12px;opacity:.85;margin-bottom:10px}
+.admit-bridge-banner button{background:white;color:#2874A6;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer}
 </style>
 </head>
 <body>
@@ -187,7 +214,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 </div>
 <div class="board-header">
   <div class="board-title">ED Tracking Board <span class="count" id="patientCount">0</span></div>
-  <div class="board-controls"><button class="btn btn-primary" onclick="addNewPatient()">+ New Patient</button><button class="btn btn-outline" onclick="addNewPatient()">↻ Next Arrival</button><button class="btn btn-outline" onclick="resetBoard()">Reset Board</button></div>
+  <div class="board-controls"><button class="btn btn-primary" onclick="addNewPatient()">+ New Patient</button><button class="btn btn-outline" onclick="addNewPatient()">↻ Next Arrival</button><button class="btn btn-outline" onclick="resetBoard()">Reset Board</button><button class="btn btn-outline" id="resumeBtn" style="display:none" onclick="loadState()">📂 Resume Session</button></div>
 </div>
 <div class="stats-bar">
   <div class="stat-card"><div class="stat-label">Total Patients</div><div class="stat-value" id="statTotal">0</div></div>
@@ -213,6 +240,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 </div>
 <div class="modal-overlay" id="dispoModal"><div class="modal"><div class="modal-header"><h3 id="dispoTitle">Disposition</h3></div><div class="modal-body" id="dispoBody"></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeDispoModal()">Cancel</button><button class="btn btn-primary" onclick="confirmDisposition()">Confirm</button></div></div></div>
 <div class="toast-container" id="toastContainer"></div>
+<div class="save-indicator" id="saveIndicator"></div>
 <script>
 const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
 const MODEL = 'claude-sonnet-4-20250514';
@@ -375,7 +403,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Pericarditis",probability:2,reasoning:"Would expect positional component, friction rub"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"asa-load","name":"Aspirin 325mg PO (chewed)","group":"Antiplatelet","critical":true,"correct":true,"phase":1,"teaching":"IMMEDIATE — chewing ensures rapid absorption. Reduces mortality 23%. Give even before ECG confirmation if suspicion high."},{"id":"heparin-stemi","name":"Heparin 60u/kg IV bolus + drip","group":"Anticoagulation","critical":true,"correct":true,"phase":1,"teaching":"Weight-based dosing. Prevents clot propagation while awaiting PCI. Goal aPTT 50-70s."},{"id":"ticagrelor-load","name":"Ticagrelor 180mg PO loading dose","group":"Antiplatelet","critical":false,"correct":true,"phase":1,"teaching":"P2Y12 inhibitor for DAPT. Give before or at cath per institutional protocol."},{"id":"ntg-sl-stemi","name":"Nitroglycerin 0.4mg SL q5min x3","group":"Anti-Ischemic","critical":false,"correct":true,"phase":1,"teaching":"Reduces preload and coronary vasospasm. Contraindicated if SBP <90, RV infarct, or PDE5 inhibitor use."},{"id":"morphine-stemi","name":"Morphine 4mg IV","group":"Anti-Ischemic","critical":false,"correct":false,"teaching":"⚠️ MONA is outdated — morphine may increase mortality in STEMI. Causes hypotension and reduces clopidogrel absorption."},{"id":"metoprolol-stemi","name":"Metoprolol 5mg IV push","group":"Anti-Ischemic","critical":false,"correct":false,"teaching":"⚠️ Avoid IV beta-blockers acutely — risk of cardiogenic shock, especially in inferior STEMI with RV involvement."},{"id":"cath-activate","name":"Activate Cath Lab (Code STEMI)","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Door-to-balloon <90 min. Call immediately when STEMI criteria met. Do NOT delay for labs."},{"id":"cardiac-mon-stemi","name":"Continuous monitoring + defib at bedside","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"High risk for VFib/VT in first hours. Defibrillator must be immediately available."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"148/92","HR":"88","RR":"20","Temp":"98.6°F","SpO2":"96%"},"ecg":"ST elevation >2mm in II, III, aVF with reciprocal depression in I, aVL — INFERIOR STEMI","labHighlights":{"Troponin":"0.04 ng/mL (early — will rise)"},"examNote":"Diaphoretic, clutching chest. Regular rhythm, lungs clear.","aiPatientUpdate":null},{"id":"tx-started","label":"ASA + Heparin + Cath Activated","requires":["asa-load","heparin-stemi","cath-activate"],"vitals":{"BP":"138/84","HR":"82","RR":"18","Temp":"98.6°F","SpO2":"97%"},"ecg":"Persistent ST elevation. Cath team en route — ETA 8 min.","labHighlights":{"Troponin":"0.42 ng/mL (rising — confirming MI)"},"examNote":"NTG providing some relief. Hemodynamically stable. No cardiogenic shock.","aiPatientUpdate":"The medicine under my tongue helped a little. Someone said they're taking me to a special room?","teaching":"✅ Core STEMI bundle initiated. Door-to-balloon clock running. Transfer to cath lab."},{"id":"post-pci","label":"Post-PCI","requires":["cath-activate"],"vitals":{"BP":"128/76","HR":"74","RR":"14","Temp":"98.4°F","SpO2":"98%"},"ecg":"ST segments resolving >50%. NSR. No arrhythmias.","labHighlights":{"Troponin":"8.4 ng/mL (peaked — expected)"},"examNote":"Pain-free. Groin access hemostatic. Strong pulses. Lungs clear.","aiPatientUpdate":"The pain is completely gone. They put a stent in? I feel like a different person.","teaching":"✅ Successful PCI. Admit CCU. Start DAPT, statin, ACE-I, beta-blocker within 24h. Echo before discharge."}],"pitfallEvents":[{"trigger":"metoprolol-stemi","event":"cardiogenic-shock","message":"⚠️ After IV metoprolol, BP drops to 78/50, HR 44. Cardiogenic shock — inferior STEMI with RV involvement. Beta-blockers are preload-dependent and dangerous here.","recovery":"IV fluids (RV infarct is volume-responsive), vasopressors. No more beta-blockers.","vitals":{"BP":"78/50","HR":"44","RR":"24","Temp":"98.6°F","SpO2":"90%"}}]}},
     {
       id:"pericarditis-v1", diagnosis:"Acute Pericarditis", acuity:3,
       patient:{ communicationStyle:"Generally healthy, surprised to be in the ED.", emotionalState:"Anxious but not in extremis" },
@@ -419,7 +448,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Musculoskeletal",probability:5,reasoning:"Young patient but systemic symptoms argue against"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"ibuprofen-peri","name":"Ibuprofen 800mg PO q8h","group":"Anti-Inflammatory","critical":true,"correct":true,"phase":1,"teaching":"First-line for acute pericarditis. High-dose NSAIDs are the cornerstone. Taper over 1-2 weeks after symptom resolution."},{"id":"colchicine-peri","name":"Colchicine 0.5mg BID x 3 months","group":"Anti-Inflammatory","critical":true,"correct":true,"phase":1,"teaching":"COPE/CORP trials: reduces recurrence by 50%. Start immediately. Continue 3 months minimum."},{"id":"steroids-peri","name":"Prednisone 0.5mg/kg/day","group":"Anti-Inflammatory","critical":false,"correct":false,"teaching":"⚠️ Steroids INCREASE recurrence. Only if NSAIDs/colchicine contraindicated or autoimmune etiology."},{"id":"heparin-peri","name":"Heparin IV drip","group":"Anticoagulation","critical":false,"correct":false,"teaching":"⚠️ DANGEROUS — risk of hemorrhagic pericardial effusion and tamponade."},{"id":"omeprazole-peri","name":"Omeprazole 20mg daily","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"GI protection with high-dose NSAIDs."},{"id":"echo-peri","name":"Echocardiogram","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"Assess for effusion. If large → monitor for tamponade."},{"id":"activity-restrict","name":"Activity restriction until CRP normalizes","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Athletes: no exercise until symptoms AND CRP resolve — typically 3+ months."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"128/78","HR":"92","RR":"18","Temp":"100.4°F","SpO2":"98%"},"ecg":"Diffuse concave-up ST elevation. PR depression in II, PR elevation in aVR (pathognomonic).","labHighlights":{"Troponin":"0.08 ng/mL","CRP":"8.4 mg/dL"},"examNote":"Pleuritic chest pain, worse supine, improved leaning forward. Friction rub present.","aiPatientUpdate":null},{"id":"treated","label":"NSAID + Colchicine Started","requires":["ibuprofen-peri","colchicine-peri"],"vitals":{"BP":"124/76","HR":"78","RR":"16","Temp":"99.2°F","SpO2":"99%"},"ecg":"ST changes persisting but clinically improved.","labHighlights":{"Troponin":"0.06 ng/mL (trending down)","CRP":"6.2 mg/dL"},"examNote":"Pain improved significantly. Friction rub less prominent. Comfortable sitting up.","aiPatientUpdate":"That ibuprofen really helped — pain went from 9 to about 3. Still hurts with deep breaths but so much better.","teaching":"✅ Correct first-line therapy. Discharge candidates: hemodynamically stable, no large effusion, pain controlled, reliable follow-up. Admit if: large effusion, high fever, immunosuppressed, or on anticoagulation."}],"pitfallEvents":[{"trigger":"heparin-peri","event":"hemorrhagic-effusion","message":"⚠️ Repeat echo shows rapidly expanding pericardial effusion. Tachycardia with muffled heart sounds — tamponade developing.","recovery":"STOP heparin. Prepare for emergent pericardiocentesis.","vitals":{"BP":"90/68","HR":"118","RR":"22","Temp":"100.2°F","SpO2":"94%"}}]}}
   ]
 }
 ,{
@@ -482,7 +512,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Crohn Flare",probability:5,reasoning:"RLQ pain in young, less likely without diarrhea"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"npo-appy","name":"NPO (nothing by mouth)","group":"Pre-Operative","critical":true,"correct":true,"phase":1,"teaching":"Essential for surgical planning. Reduces aspiration risk under anesthesia."},{"id":"ivf-appy","name":"Lactated Ringer 1L IV bolus","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Volume-depleted from poor intake, vomiting, third-spacing. LR preferred over NS."},{"id":"abx-appy","name":"Piperacillin-Tazobactam 4.5g IV","group":"Antibiotics","critical":true,"correct":true,"phase":1,"teaching":"Broad-spectrum for peritoneal contamination. Give BEFORE surgery."},{"id":"pain-appy","name":"Morphine 4mg IV PRN","group":"Pain Management","critical":false,"correct":true,"phase":1,"teaching":"Pain control does NOT mask peritoneal signs (myth debunked). Withholding analgesia is unethical."},{"id":"zofran-appy","name":"Ondansetron 4mg IV","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Anti-emetic for nausea/vomiting."},{"id":"surg-consult-appy","name":"Surgical Consult — Appendectomy","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Laparoscopic appendectomy is standard. Consult early — don't wait for CT if clinical picture is classic."},{"id":"abx-only-appy","name":"Antibiotics only (no surgery)","group":"Definitive","critical":false,"correct":false,"teaching":"⚠️ This patient has peritoneal signs and likely perforation. Surgery is indicated."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"132/82","HR":"96","RR":"18","Temp":"100.8°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"WBC":"14,800/μL with left shift"},"examNote":"RLQ tenderness, rebound, guarding. Positive Rovsing, psoas, obturator.","aiPatientUpdate":null},{"id":"resuscitated","label":"IVF + Abx + Surgery Consulted","requires":["ivf-appy","surg-consult-appy","abx-appy"],"vitals":{"BP":"128/78","HR":"84","RR":"16","Temp":"100.4°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"WBC":"14,200/μL","Lactate":"1.1 mmol/L"},"examNote":"Pain improved with morphine. Peritoneal signs persist. Surgeon booking OR.","aiPatientUpdate":"The pain medicine helped. The surgeon said I need an operation tonight — that's scary but I trust you.","teaching":"✅ IVF, abx before the knife, pain control, early surgical consult. Appendectomy within hours."},{"id":"post-op","label":"Post-Appendectomy","requires":["surg-consult-appy"],"vitals":{"BP":"122/74","HR":"76","RR":"14","Temp":"99.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"WBC":"10,200/μL (trending down)"},"examNote":"Post-op: port sites clean, abdomen soft, passing flatus, tolerating clears.","aiPatientUpdate":"So much better. Surgeon said it was about to burst. Thank you for getting me to surgery fast.","teaching":"✅ Gangrenous appendix — would have perforated within hours. PO abx, advance diet, discharge 24-48h."}],"pitfallEvents":[]}},
     {
       id:"aaa-v1", diagnosis:"Ruptured Abdominal Aortic Aneurysm", acuity:1,
       patient:{ communicationStyle:"Severe distress, difficulty speaking in full sentences, diaphoretic.", emotionalState:"Terrified, sense of doom, writhing" },
@@ -531,7 +562,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Mesenteric Ischemia",probability:3,reasoning:"Shock but pulsatile mass pathognomonic"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"mtp-aaa","name":"Activate Massive Transfusion Protocol","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"1:1:1 PRBCs:FFP:Platelets. Use O-neg blood — do NOT wait for crossmatch."},{"id":"permissive-hypo-aaa","name":"Permissive hypotension — target SBP 80-90","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Aggressive fluid raises BP and disrupts clot, worsening hemorrhage. Counterintuitive but life-saving."},{"id":"crystalloid-aaa","name":"Normal Saline 2L wide open","group":"Resuscitation","critical":false,"correct":false,"teaching":"⚠️ Crystalloid dilutes clotting factors, raises BP, worsens hemorrhage. Use blood products."},{"id":"vascsurg-aaa","name":"STAT Vascular Surgery — Emergent Repair","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Patient will die without repair. Open or EVAR. ZERO delay."},{"id":"type-cross-aaa","name":"Type & Crossmatch 10 units pRBCs","group":"Blood Bank","critical":true,"correct":true,"phase":1,"teaching":"Send immediately but start O-neg while waiting. May need 10-20+ units."},{"id":"txa-aaa","name":"Tranexamic Acid 1g IV","group":"Hemostatic","critical":false,"correct":true,"phase":1,"teaching":"Anti-fibrinolytic — may reduce blood loss. Give early."},{"id":"large-bore-aaa","name":"Two 14G or 16G large-bore IVs","group":"Access","critical":true,"correct":true,"phase":1,"teaching":"Massive volume resuscitation requires large-bore access. Consider rapid infuser."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"82/58","HR":"118","RR":"24","Temp":"97.8°F","SpO2":"94%"},"ecg":"Sinus tachycardia 118","labHighlights":{"Hemoglobin":"8.2 g/dL","Lactate":"5.8 mmol/L"},"examNote":"Ashen, diaphoretic. Pulsatile abdominal mass. Cullen sign. Hypotensive.","aiPatientUpdate":null},{"id":"resuscitation","label":"MTP + Vascular Surgery","requires":["mtp-aaa","vascsurg-aaa"],"vitals":{"BP":"88/62","HR":"108","RR":"22","Temp":"97.6°F","SpO2":"95%"},"ecg":"Sinus tach improving","labHighlights":{"Hemoglobin":"7.4 g/dL (after 2u pRBCs)","Lactate":"4.2 mmol/L"},"examNote":"Receiving blood via rapid infuser. Permissive hypotension maintained. Vascular at bedside — OR being prepared.","aiPatientUpdate":"Am I going to die? Please help me...","teaching":"✅ Blood products, permissive hypotension, immediate surgical mobilization. Every minute counts."},{"id":"or","label":"Intra-Operative","requires":["vascsurg-aaa"],"vitals":{"BP":"110/72","HR":"88","RR":"14","Temp":"97.2°F","SpO2":"98%"},"ecg":"NSR","labHighlights":{"Hemoglobin":"9.8 g/dL (after 6u)","Lactate":"2.4 mmol/L"},"examNote":"Post-op: open AAA repair with tube graft. 6u pRBCs, 4 FFP, 1 plt. Intubated → SICU.","aiPatientUpdate":null,"teaching":"✅ Successful repair. 6.8cm infrarenal AAA, contained retroperitoneal rupture. Post-op: watch renal function, compartment syndrome, lower extremity perfusion, coagulopathy."}],"pitfallEvents":[{"trigger":"crystalloid-aaa","event":"dilutional-coagulopathy","message":"⚠️ After 2L crystalloid, hemorrhage accelerates. Hgb 6.1, INR 2.4, fibrinogen 88. Clotting factors diluted, clot disrupted.","recovery":"STOP crystalloid. Switch to MTP blood products. Resume permissive hypotension.","vitals":{"BP":"72/48","HR":"132","RR":"28","Temp":"96.8°F","SpO2":"88%"}}]}}
   ]
 }
 ,{
@@ -597,7 +629,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Anxiety/Panic Attack",probability:5,reasoning:"Diagnosis of exclusion — never assume in acute dyspnea"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"heparin-pe","name":"Heparin 80u/kg bolus + 18u/kg/hr drip","group":"Anticoagulation","critical":true,"correct":true,"phase":1,"teaching":"Immediate full-dose anticoagulation. Do NOT wait for CTA if clinical suspicion high."},{"id":"tpa-pe","name":"Alteplase 100mg IV (systemic thrombolysis)","group":"Thrombolysis","critical":false,"correct":true,"phase":2,"teaching":"Reserved for MASSIVE PE with hemodynamic instability. This patient is submassive — consider if deteriorating."},{"id":"ivf-small-pe","name":"Cautious IV fluid 500mL NS","group":"Resuscitation","critical":false,"correct":true,"phase":1,"teaching":"Small volume challenge may help RV preload. STOP if no improvement — over-hydration worsens RV."},{"id":"massive-fluid-pe","name":"Normal Saline 2L wide open","group":"Resuscitation","critical":false,"correct":false,"teaching":"⚠️ DANGEROUS: aggressive fluids worsen RV overload. RV is already failing — additional volume causes septal bowing."},{"id":"norepi-pe","name":"Norepinephrine (if hypotensive)","group":"Vasopressors","critical":false,"correct":true,"phase":2,"teaching":"First-line vasopressor for PE shock. Improves coronary perfusion to struggling RV."},{"id":"hfnc-pe","name":"High-Flow Nasal Cannula O2","group":"Respiratory","critical":false,"correct":true,"phase":1,"teaching":"For hypoxemia from V/Q mismatch. Avoid intubation if possible (positive pressure worsens RV preload)."},{"id":"pert-pe","name":"PE Response Team consult","group":"Consultation","critical":false,"correct":true,"phase":1,"teaching":"Coordinates catheter-directed therapy, surgical embolectomy, ECMO decisions."},{"id":"monitor-pe","name":"Continuous monitoring + ICU admission","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Submassive can deteriorate to massive rapidly. Serial troponin and echo."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"108/72","HR":"112","RR":"24","Temp":"98.2°F","SpO2":"89%"},"ecg":"Sinus tach. S1Q3T3. T-wave inversions V1-V4 (RV strain).","labHighlights":{"Troponin":"0.28 ng/mL","BNP":"340 pg/mL"},"examNote":"Tachycardic, tachypneic. JVD. Loud P2. Right leg swollen.","aiPatientUpdate":null},{"id":"anticoagulated","label":"Heparin + ICU","requires":["heparin-pe","monitor-pe"],"vitals":{"BP":"112/74","HR":"102","RR":"20","Temp":"98.4°F","SpO2":"93%"},"ecg":"Sinus tach improving. Persistent T-inversions V1-V3.","labHighlights":{"aPTT":"68s (therapeutic)","Troponin":"0.34 ng/mL (plateauing)"},"examNote":"Slightly improved. Still tachycardic. JVD persists. RV not dilating further on serial echo.","aiPatientUpdate":"I can breathe a little better with the oxygen. Still feels wrong though.","teaching":"✅ Submassive PE managed correctly. Monitor for deterioration — if unstable, escalate to thrombolysis or catheter-directed therapy."}],"pitfallEvents":[{"trigger":"massive-fluid-pe","event":"rv-failure","message":"⚠️ After 2L NS, BP drops to 82/54, SpO2 84%. Massively dilated RV with septal bowing. Fluids worsened RV overload.","recovery":"STOP fluids. Start norepinephrine. Consider emergent thrombolysis.","vitals":{"BP":"82/54","HR":"128","RR":"28","Temp":"98.2°F","SpO2":"84%"}}]}},
     {
       id:"chf-v1", diagnosis:"Acute Decompensated Heart Failure", acuity:2,
       patient:{ communicationStyle:"Speaking in 3-4 word sentences. Fatigued. Sitting bolt upright.", emotionalState:"Anxious, exhausted, struggling to breathe" },
@@ -652,7 +685,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"COPD Exacerbation",probability:2,reasoning:"Prior smoker but no wheezing, crackles predominate"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"lasix-chf","name":"Furosemide 80mg IV (double home dose)","group":"Diuresis","critical":true,"correct":true,"phase":1,"teaching":"First-line. Double PO dose for IV conversion. Onset 5-15 min. Monitor urine output."},{"id":"ntg-drip-chf","name":"Nitroglycerin drip 10-200mcg/min","group":"Vasodilator","critical":false,"correct":true,"phase":1,"teaching":"Reduces preload/afterload. Effective for flash pulmonary edema. Hold if SBP <100."},{"id":"bipap-chf","name":"BiPAP 10/5 cmH2O","group":"Respiratory","critical":true,"correct":true,"phase":1,"teaching":"Reduces work of breathing AND preload. Avoids intubation in most patients. Start immediately."},{"id":"intubate-chf","name":"Endotracheal intubation","group":"Respiratory","critical":false,"correct":false,"teaching":"⚠️ Avoid — BiPAP works in most acute HF. Intubation causes hemodynamic collapse. Reserve for refractory hypoxia or AMS."},{"id":"ns-chf","name":"Normal Saline 1L IV","group":"Fluids","critical":false,"correct":false,"teaching":"⚠️ DANGEROUS: volume OVERLOADED. IV fluids worsen pulmonary edema. Need removal, not addition."},{"id":"metoprolol-chf","name":"Metoprolol 5mg IV","group":"Rate Control","critical":false,"correct":false,"teaching":"⚠️ IV beta-blockers in acute decompensated HF → cardiogenic shock. Use digoxin or amiodarone for AFib rate control."},{"id":"digoxin-chf","name":"Digoxin 0.25mg IV","group":"Rate Control","critical":false,"correct":true,"phase":2,"teaching":"Safe rate control for AFib/RVR in HF — positive inotrope (unlike beta-blockers)."},{"id":"cardiology-chf","name":"Cardiology consult","group":"Consultation","critical":false,"correct":true,"phase":1,"teaching":"Identify precipitant: new AFib, dietary indiscretion, med noncompliance, ACS, infection."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"178/104","HR":"128","RR":"28","Temp":"98.4°F","SpO2":"86%"},"ecg":"AFib with RVR at 128. LVH.","labHighlights":{"BNP":"2,840 pg/mL","Troponin":"0.09 ng/mL"},"examNote":"Severe respiratory distress, tripoding. Diffuse crackles. JVD to jaw angle. 3+ edema. S3.","aiPatientUpdate":null},{"id":"treated","label":"BiPAP + Diuresis","requires":["lasix-chf","bipap-chf"],"vitals":{"BP":"148/88","HR":"106","RR":"20","Temp":"98.4°F","SpO2":"94%"},"ecg":"AFib rate improving 106","labHighlights":{"Urine output":"400mL in first hour"},"examNote":"Dramatic improvement. Speaking full sentences. Crackles improving from apices.","aiPatientUpdate":"Oh God, I can finally breathe. That mask is uncomfortable but I can get air again. I'm peeing a lot — is that normal?","teaching":"✅ \"3 Ls\" of acute HF: Lasix, Lowers preload (NTG), Lungs (BiPAP). Good UOP is best marker. Admit tele/ICU. Identify precipitant."}],"pitfallEvents":[{"trigger":"ns-chf","event":"worsening-edema","message":"⚠️ After NS bolus, SpO2 drops to 80%. Frothy sputum. Severe pulmonary edema worsened.","recovery":"Stop fluids. Increase BiPAP. Push IV furosemide. NTG drip. May now need intubation.","vitals":{"BP":"188/112","HR":"138","RR":"34","Temp":"98.4°F","SpO2":"80%"}}]}}
   ]
 }
 ,{
@@ -718,7 +752,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Cervical Artery Dissection",probability:3,reasoning:"Headache with neck pain but no focal deficits"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"nicardipine-sah","name":"Nicardipine drip — target SBP <160","group":"Blood Pressure","critical":true,"correct":true,"phase":1,"teaching":"Prevent rebleeding. Titratable IV CCB. Avoid labetalol (masks neuro exam changes)."},{"id":"nimodipine-sah","name":"Nimodipine 60mg PO q4h x 21 days","group":"Neuroprotection","critical":true,"correct":true,"phase":1,"teaching":"Only proven drug to reduce vasospasm and improve outcomes. Start within 96h. Continue 21 days."},{"id":"neurosurg-sah","name":"Emergent Neurosurgery consult","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Aneurysm secured (coil or clip) within 24-72h. Rebleed mortality 40%."},{"id":"lev-sah","name":"Levetiracetam 1000mg IV (seizure ppx)","group":"Neuroprotection","critical":false,"correct":true,"phase":1,"teaching":"Brief seizure prophylaxis reasonable. Levetiracetam preferred — phenytoin worsens outcomes in SAH."},{"id":"phenytoin-sah","name":"Phenytoin 20mg/kg IV load","group":"Neuroprotection","critical":false,"correct":false,"teaching":"⚠️ Associated with worse outcomes in SAH. Use levetiracetam instead."},{"id":"tpa-sah","name":"tPA (thrombolysis)","group":"Thrombolysis","critical":false,"correct":false,"teaching":"⚠️ ABSOLUTELY CONTRAINDICATED — patient is BLEEDING into the brain. CT MUST precede thrombolytics."},{"id":"antiemetic-sah","name":"Anti-emetics + stool softener (prevent Valsalva)","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Straining/vomiting increases ICP and rebleeding risk."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"192/108","HR":"68","RR":"16","Temp":"98.6°F","SpO2":"98%"},"ecg":"Deep T-wave inversions, QT prolongation (\"cerebral T waves\")","labHighlights":{"Troponin":"0.05 ng/mL (neurogenic stunned myocardium)"},"examNote":"GCS 14. Photophobia, neck stiffness. Kernig/Brudzinski positive. No focal deficits.","aiPatientUpdate":null},{"id":"stabilized","label":"BP Controlled + NSx Consulted","requires":["nicardipine-sah","neurosurg-sah","nimodipine-sah"],"vitals":{"BP":"148/86","HR":"64","RR":"14","Temp":"98.6°F","SpO2":"99%"},"ecg":"Persistent T-wave changes (expected)","labHighlights":{"Sodium":"136 mEq/L (watch for salt wasting days 3-14)"},"examNote":"GCS 15. BP in target. CTA: ruptured 7mm AComm aneurysm. Coiling planned for AM.","aiPatientUpdate":"Headache is a little better but still the worst ever. The brain doctor said they need to fix a blood vessel?","teaching":"✅ Core bundle: BP control, nimodipine, neurosurgery. Admit Neuro ICU. Monitor for vasospasm (days 3-14), hydrocephalus, rebleeding, salt wasting."}],"pitfallEvents":[{"trigger":"tpa-sah","event":"catastrophic-hemorrhage","message":"⚠️ CATASTROPHIC: tPA given to active intracranial hemorrhage. GCS drops to 3, bilateral fixed dilated pupils. Massive blood expansion.","recovery":"Likely non-survivable. CT MUST precede thrombolytics. SAH is absolute contraindication.","vitals":{"BP":"220/130","HR":"42","RR":"6","Temp":"98.6°F","SpO2":"78%"}}]}},
     {
       id:"meningitis-v1", diagnosis:"Bacterial Meningitis", acuity:2,
       patient:{ communicationStyle:"Lethargic, slow to respond. Confused about details. Irritable when examined.", emotionalState:"Confused, miserable, wants to be left alone" },
@@ -772,7 +807,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Brain Abscess",probability:3,reasoning:"Headache and fever but no focal deficits"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"ceftriaxone-men","name":"Ceftriaxone 2g IV q12h","group":"Antibiotics","critical":true,"correct":true,"phase":1,"teaching":"Covers pneumococcus, meningococcus, H. flu. Give IMMEDIATELY — do NOT delay for LP or imaging."},{"id":"vanc-men","name":"Vancomycin 15-20mg/kg IV","group":"Antibiotics","critical":true,"correct":true,"phase":1,"teaching":"Covers penicillin-resistant pneumococcus. Vanc + ceftriaxone = standard empiric adult meningitis regimen."},{"id":"dexa-men","name":"Dexamethasone 0.15mg/kg IV q6h x 4 days","group":"Adjunctive","critical":true,"correct":true,"phase":1,"teaching":"MUST give BEFORE or WITH first antibiotic dose. Reduces mortality from pneumococcal meningitis. Benefit lost if given after antibiotics."},{"id":"acyclovir-men","name":"Acyclovir 10mg/kg IV q8h","group":"Antibiotics","critical":false,"correct":true,"phase":1,"teaching":"Add if HSV encephalitis possible. Safe empirically while awaiting CSF PCR."},{"id":"lp-men","name":"Lumbar Puncture","group":"Diagnostic","critical":true,"correct":true,"phase":1,"teaching":"NEVER delay antibiotics for LP. Give abx first, LP when feasible. CSF still diagnostic for hours after abx."},{"id":"bcx-men","name":"Blood cultures x2 STAT","group":"Diagnostic","critical":false,"correct":true,"phase":1,"teaching":"Positive in 50-80% of bacterial meningitis. Draw before abx if <5 min delay. Never delay abx for cultures."},{"id":"droplet-men","name":"Droplet isolation precautions","group":"Infection Control","critical":false,"correct":true,"phase":1,"teaching":"N. meningitidis: droplet transmission. Isolate until 24h of antibiotics. Contacts need chemoprophylaxis."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"92/58","HR":"116","RR":"22","Temp":"103.2°F","SpO2":"96%"},"ecg":"Sinus tachycardia","labHighlights":{"WBC":"22,400/μL","Procalcitonin":"12.4 ng/mL"},"examNote":"Toxic, photophobic. Neck stiffness. Kernig/Brudzinski positive. Petechial rash. GCS 13.","aiPatientUpdate":null},{"id":"abx-given","label":"Abx + Dexamethasone Given","requires":["ceftriaxone-men","vanc-men","dexa-men"],"vitals":{"BP":"98/64","HR":"108","RR":"20","Temp":"102.4°F","SpO2":"97%"},"ecg":"Sinus tach improving","labHighlights":{"CSF":"WBC 2400 (95% PMNs), glucose 18, protein 380, GPC on Gram stain"},"examNote":"Abx + dexa within 15 min. LP: purulent CSF. Still febrile but hemodynamics stabilizing.","aiPatientUpdate":"My head is still pounding... the light hurts so much. Can you turn off the lights?","teaching":"✅ Abx + dexa within first hour is the most important intervention. Gram stain: GPC = S. pneumoniae. Admit ICU. Monitor for cerebral edema, seizures, hydrocephalus, hearing loss."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -846,7 +882,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Toxic Ingestion",probability:3,reasoning:"AGMA but clinical picture classic for DKA"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"ns-bolus-dka","name":"Normal Saline 1L IV bolus, then 500mL/hr","group":"Fluid Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"DKA patients are 5-10L volume-depleted. Aggressive NS initially. Switch to 0.45% NS when Na normalizes."},{"id":"insulin-drip-dka","name":"Regular Insulin drip 0.1 u/kg/hr (no bolus)","group":"Insulin","critical":true,"correct":true,"phase":2,"teaching":"Continuous drip — NO bolus. Check K FIRST: if K <3.3, replete K before insulin. Target glucose drop 50-70/hr."},{"id":"insulin-bolus-dka","name":"Regular Insulin 10u IV bolus","group":"Insulin","critical":false,"correct":false,"teaching":"⚠️ Insulin bolus NOT recommended in current guidelines — increases hypoglycemia and hypokalemia risk. Use drip only."},{"id":"k-repletion-dka","name":"Potassium 20-40 mEq/hr IV (if K <5.3)","group":"Electrolytes","critical":true,"correct":true,"phase":1,"teaching":"K drops RAPIDLY with insulin. If K <3.3 → replete BEFORE insulin. If 3.3-5.3 → add K to fluids. If >5.3 → hold K, recheck in 2h."},{"id":"bicarb-dka","name":"Sodium Bicarbonate IV","group":"Electrolytes","critical":false,"correct":false,"teaching":"⚠️ NOT indicated unless pH <6.9. Paradoxically worsens CNS acidosis, may worsen hypokalemia, and delays ketosis resolution."},{"id":"phosphorus-dka","name":"Potassium Phosphate replacement","group":"Electrolytes","critical":false,"correct":true,"phase":2,"teaching":"Phosphorus will drop with treatment. Replace if <1.0 mg/dL. Use K-Phos to address both K and phos simultaneously."},{"id":"monitor-dka","name":"BMP + glucose checks q1-2h","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Monitor K, glucose, anion gap, bicarb every 1-2h. Close the GAP, not just the glucose. Continue insulin until gap normalizes."},{"id":"search-precip","name":"Search for precipitant (UA, CXR, cultures)","group":"Workup","critical":false,"correct":true,"phase":1,"teaching":"Identify trigger: infection (UTI, pneumonia), medication noncompliance, new-onset T1DM, substance use, MI."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"102/64","HR":"118","RR":"28 (Kussmaul)","Temp":"99.2°F","SpO2":"99%"},"ecg":"Sinus tachycardia. Low voltage.","labHighlights":{"Glucose":"486 mg/dL","pH":"7.12","Anion gap":"28","Potassium":"5.8 mEq/L","Bicarbonate":"8 mEq/L"},"examNote":"Confused, fruity breath (ketones). Kussmaul respirations. Dry mucous membranes. Diffuse abd tenderness.","aiPatientUpdate":null},{"id":"resuscitated","label":"Fluids + K + Insulin Started","requires":["ns-bolus-dka","k-repletion-dka","insulin-drip-dka"],"vitals":{"BP":"112/72","HR":"102","RR":"22","Temp":"99.0°F","SpO2":"99%"},"ecg":"Sinus tach improving","labHighlights":{"Glucose":"328 mg/dL","pH":"7.22","Anion gap":"20","Potassium":"4.2 mEq/L","Bicarbonate":"14 mEq/L"},"examNote":"More alert, oriented. Kussmaul breathing resolving. UOP improving. Gap closing.","aiPatientUpdate":"I'm starting to feel more like myself. Really thirsty though. My stomach doesn't hurt as much.","teaching":"✅ Classic DKA protocol: fluids first, then K, then insulin. Gap closing (28→20). Continue insulin until gap normalizes, NOT until glucose normalizes — add D5 when glucose <300 to allow continued insulin."},{"id":"resolved","label":"Gap Closed","requires":["insulin-drip-dka","monitor-dka"],"vitals":{"BP":"118/74","HR":"82","RR":"16","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"Glucose":"182 mg/dL","pH":"7.38","Anion gap":"12 (CLOSED)","Potassium":"4.0 mEq/L","Bicarbonate":"22 mEq/L"},"examNote":"Alert, oriented, hungry. Vitals normalized. Tolerating PO. Gap closed.","aiPatientUpdate":"I feel so much better. I'm really sorry — I ran out of insulin and couldn't afford the refill. Can someone help me with that?","teaching":"✅ Gap closed. Transition to subcutaneous insulin (give SQ 2h before stopping drip to prevent rebound DKA). Address the precipitant — in this case, medication access/cost. Social work consult."}],"pitfallEvents":[{"trigger":"bicarb-dka","event":"paradoxical-cns-acidosis","message":"⚠️ After bicarb administration, the patient becomes MORE confused. CO2 from bicarb crosses BBB faster than bicarb itself, paradoxically worsening CNS acidosis. K drops to 3.1.","recovery":"Stop bicarb. Increase K replacement. Monitor closely. Bicarb is only indicated if pH <6.9.","vitals":{"BP":"108/68","HR":"112","RR":"26","Temp":"99.0°F","SpO2":"99%"}}]}},
     {
       id:"stroke-v1", diagnosis:"Acute Ischemic Stroke (Left MCA)", acuity:1,
       patient:{ communicationStyle:"Difficulty speaking — words come out garbled or wrong. Gets frustrated. Right-side weakness obvious.", emotionalState:"Frightened, frustrated by inability to communicate" },
@@ -899,7 +936,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Complex Migraine",probability:2,reasoning:"Can have aura with weakness but sudden onset in elderly with AFib is stroke"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"tpa-stroke","name":"Alteplase (tPA) 0.9mg/kg IV (10% bolus, rest over 60min)","group":"Thrombolysis","critical":true,"correct":true,"phase":1,"teaching":"Window: within 4.5h of symptom onset. NIHSS >4, no hemorrhage on CT. 10% bolus, 90% infusion over 60 min. Check glucose, INR, platelets first."},{"id":"thrombectomy","name":"Activate Neurointerventional — Mechanical Thrombectomy","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Large vessel occlusion (LVO) on CTA — thrombectomy within 24h with salvageable tissue. Number needed to treat = 2.6. Can be given WITH tPA."},{"id":"bp-permissive","name":"Permissive hypertension (allow BP <220/120 if no tPA)","group":"Blood Pressure","critical":false,"correct":true,"phase":1,"teaching":"Do NOT drop BP aggressively in acute stroke — brain needs perfusion pressure. If giving tPA: keep <185/110. If no tPA: allow <220/120."},{"id":"bp-lower-stroke","name":"Labetalol to lower BP to <140/90","group":"Blood Pressure","critical":false,"correct":false,"teaching":"⚠️ Aggressive BP lowering in acute stroke worsens ischemia. The brain is using collaterals that require higher pressure. Only lower if giving tPA (target <185/110)."},{"id":"asa-stroke","name":"Aspirin 325mg (AFTER tPA — 24h delay)","group":"Antiplatelet","critical":false,"correct":true,"phase":2,"teaching":"Give aspirin 24h after tPA (bleeding risk if given concurrently). If NOT a tPA candidate, give ASA immediately."},{"id":"heparin-stroke","name":"Heparin IV drip","group":"Anticoagulation","critical":false,"correct":false,"teaching":"⚠️ NOT recommended in acute ischemic stroke. No benefit over aspirin and increases hemorrhagic conversion risk."},{"id":"swallow-eval","name":"NPO + Swallow evaluation","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Stroke patients aspirate. Keep NPO until bedside swallow screen by trained provider. Aspiration pneumonia is a major preventable complication."},{"id":"neuro-checks","name":"Neuro checks q15min + ICU admission","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Serial NIH Stroke Scale. Watch for hemorrhagic transformation, worsening deficit (clot extension), or cerebral edema."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"178/96","HR":"88 (irregular)","RR":"16","Temp":"98.4°F","SpO2":"97%"},"ecg":"Atrial fibrillation — likely embolic source","labHighlights":{"Glucose":"142 mg/dL","INR":"1.0","Platelets":"224K"},"examNote":"Right hemiparesis, right facial droop, global aphasia. NIHSS 18. Left gaze preference. LKW 45 minutes ago.","aiPatientUpdate":null},{"id":"tpa-given","label":"tPA + Thrombectomy Activated","requires":["tpa-stroke","thrombectomy"],"vitals":{"BP":"168/88","HR":"84","RR":"16","Temp":"98.4°F","SpO2":"97%"},"ecg":"AFib, rate controlled","labHighlights":{},"examNote":"tPA infusing. Neurointerventional team mobilized — CTA confirmed left MCA M1 occlusion. Patient being prepared for angio suite.","aiPatientUpdate":null,"teaching":"✅ tPA + thrombectomy is the standard for LVO stroke within window. Combined therapy has the best outcomes. Door-to-needle <45 min achieved."},{"id":"post-thrombectomy","label":"Post-Thrombectomy","requires":["thrombectomy"],"vitals":{"BP":"152/82","HR":"78","RR":"14","Temp":"98.6°F","SpO2":"98%"},"ecg":"AFib, rate controlled","labHighlights":{},"examNote":"Dramatic improvement. NIHSS improved from 18 to 4. Speaking with mild word-finding difficulty. Right arm 4/5, leg 5/5. Smiling symmetrically.","aiPatientUpdate":"I can... talk. What happened to me? My arm still feels heavy but I can move it now.","teaching":"✅ Successful thrombectomy with TICI 2b/3 reperfusion. NIHSS 18→4. Admit stroke unit/ICU. Start anticoagulation for AFib once stable (48-72h). Echo, lipids, HbA1c. PT/OT/SLP consults. Secondary prevention."}],"pitfallEvents":[{"trigger":"bp-lower-stroke","event":"worsening-deficit","message":"⚠️ After aggressive BP lowering, NIHSS worsens from 18 to 24. Patient becomes obtunded. Penumbral tissue has infarcted — you eliminated the collateral flow by dropping BP too fast.","recovery":"STOP antihypertensive. Allow BP to rise. This damage may be irreversible. In acute stroke, permissive hypertension preserves collateral flow.","vitals":{"BP":"118/68","HR":"88","RR":"18","Temp":"98.4°F","SpO2":"96%"}}]}}
   ]
 }
 ,{
@@ -968,7 +1006,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Aortic Injury",probability:2,reasoning:"High-speed mechanism but presentation more consistent with pneumothorax"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"needle-decomp","name":"Needle Decompression — 2nd ICS midclavicular (14G)","group":"Emergent Intervention","critical":true,"correct":true,"phase":1,"teaching":"CLINICAL diagnosis — do NOT delay for imaging. 14G needle, 2nd ICS midclavicular or 5th ICS anterior axillary. Immediate rush of air = decompression."},{"id":"chest-tube","name":"Tube Thoracostomy (28-32 Fr)","group":"Definitive","critical":true,"correct":true,"phase":2,"teaching":"Follow needle decompression immediately. Needle is temporizing — chest tube is definitive. Insert 5th ICS, anterior axillary line."},{"id":"cxr-first-ptx","name":"Portable CXR before any intervention","group":"Imaging","critical":false,"correct":false,"teaching":"⚠️ NEVER delay treatment for imaging in tension pneumothorax. This is a CLINICAL diagnosis — unstable patients die waiting for X-ray."},{"id":"intubation-ptx","name":"Endotracheal intubation (if needed)","group":"Airway","critical":false,"correct":true,"phase":2,"teaching":"May need definitive airway for respiratory failure. BUT decompress BEFORE intubating — positive pressure ventilation worsens tension physiology."},{"id":"ivf-ptx","name":"IV fluid resuscitation 1L LR","group":"Resuscitation","critical":false,"correct":true,"phase":1,"teaching":"Obstructive shock from impaired venous return. Volume may help transiently. Primary fix is decompression."},{"id":"fast-exam-ptx","name":"FAST exam (concurrent abdominal injury)","group":"Workup","critical":false,"correct":true,"phase":1,"teaching":"MVC patients — always check for concurrent injuries. FAST for intra-abdominal hemorrhage."},{"id":"cspine-ptx","name":"C-spine immobilization","group":"Trauma","critical":false,"correct":true,"phase":1,"teaching":"MVC mechanism — maintain cervical precautions until cleared."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"78/52","HR":"128","RR":"32","Temp":"98.2°F","SpO2":"82%"},"ecg":"Sinus tachycardia","labHighlights":{"Lactate":"4.6 mmol/L"},"examNote":"Severe respiratory distress post-MVC. Absent breath sounds LEFT. Tracheal deviation to RIGHT. JVD. Hypotensive.","aiPatientUpdate":null},{"id":"decompressed","label":"Needle Decompressed","requires":["needle-decomp"],"vitals":{"BP":"98/64","HR":"108","RR":"24","Temp":"98.2°F","SpO2":"92%"},"ecg":"Sinus tach improving","labHighlights":{"Lactate":"3.2 mmol/L"},"examNote":"Audible rush of air with decompression. Breath sounds partially restored LEFT. BP improving. Trachea midline. Proceed to chest tube.","aiPatientUpdate":"*gasping* I can... breathe... a little better...","teaching":"✅ Needle decompression successful. This is temporizing — chest tube needed now. BP improving as venous return restored."},{"id":"chest-tube-placed","label":"Chest Tube Placed","requires":["chest-tube"],"vitals":{"BP":"118/74","HR":"92","RR":"18","Temp":"98.2°F","SpO2":"97%"},"ecg":"NSR","labHighlights":{"Lactate":"1.8 mmol/L"},"examNote":"Chest tube in place, air evacuated, lung re-expanded on CXR. Breath sounds bilateral. Hemodynamics normalized. No FAST fluid.","aiPatientUpdate":"I can breathe now. My chest still hurts but I can actually get air in. What happened to me?","teaching":"✅ Definitive management complete. Admit trauma/surgical service. CT chest to assess for concurrent injuries. Monitor chest tube output."}],"pitfallEvents":[{"trigger":"cxr-first-ptx","event":"delayed-decompression","message":"⚠️ While waiting for portable CXR, the patient decompensates — PEA arrest. Tension physiology has progressed to cardiac arrest from obstructive shock.","recovery":"Immediate needle decompression + CPR. This is why tension pneumothorax is a CLINICAL diagnosis. Never delay for imaging.","vitals":{"BP":"0/0","HR":"0 (PEA)","RR":"0","Temp":"98.2°F","SpO2":"Undetectable"}}]}},
     {
       id:"epidural-hematoma", diagnosis:"Epidural Hematoma", acuity:1,
       patient:{ communicationStyle:"Initially conversational but progressively more confused and drowsy. Speech slowing. Repetitive questions.", emotionalState:"Initially calm but becoming increasingly confused and agitated" },
@@ -1023,7 +1062,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Post-concussion with Intracranial Hypertension",probability:2,reasoning:"Less likely given focal findings and progressive nature"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"neurosurg-epidural","name":"STAT Neurosurgery — Emergent Craniotomy","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Epidural hematoma is a neurosurgical EMERGENCY. Expanding hematoma causes uncal herniation. Patient is in the \"lucid interval\" — rapid deterioration is imminent."},{"id":"mannitol-epidural","name":"Mannitol 1g/kg IV (osmotic therapy)","group":"ICP Management","critical":true,"correct":true,"phase":1,"teaching":"Temporizing measure to reduce ICP while awaiting surgery. Osmotic diuretic draws water from brain parenchyma."},{"id":"hypertonic-epidural","name":"Hypertonic Saline 23.4% 30mL IV","group":"ICP Management","critical":false,"correct":true,"phase":1,"teaching":"Alternative to mannitol for ICP reduction. Some prefer HTS because it also expands intravascular volume (unlike mannitol which is a diuretic)."},{"id":"intubation-epidural","name":"Intubation + HOB 30° + slight hyperventilation","group":"Airway/ICP","critical":true,"correct":true,"phase":1,"teaching":"Protect airway (declining GCS). Head of bed 30° reduces ICP. Mild hyperventilation (target PaCO2 30-35) is a temporizing ICP measure."},{"id":"seizure-ppx-epidural","name":"Levetiracetam 1000mg IV","group":"Neuroprotection","critical":false,"correct":true,"phase":1,"teaching":"Seizure prophylaxis for 7 days post-TBI per Brain Trauma Foundation guidelines."},{"id":"observe-only","name":"Observation without surgery","group":"Management","critical":false,"correct":false,"teaching":"⚠️ This patient has a rapidly expanding epidural with midline shift and declining GCS. Observation alone will result in herniation and death. Surgery is emergent."},{"id":"reverse-anticoag-ep","name":"Check coags, reverse if on anticoagulants","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Always check coagulation status in head trauma. If on anticoagulants, emergent reversal is critical."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"168/94","HR":"58","RR":"14","Temp":"98.4°F","SpO2":"98%"},"ecg":"Sinus bradycardia (Cushing reflex)","labHighlights":{"Hemoglobin":"13.2 g/dL","INR":"1.0"},"examNote":"Post-fall. \"Lucid interval\" — was alert, now becoming drowsy. Left temporal scalp hematoma. Left pupil 5mm, sluggish. Right-sided weakness developing. GCS declining 14→11.","aiPatientUpdate":null},{"id":"stabilized","label":"Intubated + Mannitol + NSx Called","requires":["intubation-epidural","mannitol-epidural","neurosurg-epidural"],"vitals":{"BP":"152/88","HR":"64","RR":"14 (ventilator)","Temp":"98.4°F","SpO2":"99%"},"ecg":"Sinus rhythm","labHighlights":{"PaCO2":"32 mmHg (mild hyperventilation)"},"examNote":"Intubated, sedated. Pupils now equal (3mm bilateral) after mannitol. Neurosurgery at bedside — OR being prepared for emergent craniotomy.","aiPatientUpdate":null,"teaching":"✅ Bridge to surgery: airway secured, ICP lowered with mannitol, neurosurgery mobilized. The \"lucid interval\" is closing — every minute matters."},{"id":"post-crani","label":"Post-Craniotomy","requires":["neurosurg-epidural"],"vitals":{"BP":"132/78","HR":"72","RR":"14","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{},"examNote":"Post-craniotomy: epidural hematoma evacuated (ruptured middle meningeal artery). ICP monitor placed — normal pressures. Pupils equal and reactive. Beginning to follow commands.","aiPatientUpdate":null,"teaching":"✅ Successful evacuation. Epidural hematomas have excellent prognosis with timely surgery (mortality <10% with surgical evacuation vs >90% without). Admit Neuro ICU. ICP monitoring for 48-72h."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -1091,7 +1131,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Orthostatic Hypotension",probability:5,reasoning:"On diuretics/vasodilators but was sitting, not standing"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"amiodarone-vt","name":"Amiodarone 150mg IV over 10 min","group":"Antiarrhythmic","critical":true,"correct":true,"phase":1,"teaching":"First-line for stable VT. 150mg over 10 min, then 1mg/min drip x6h, then 0.5mg/min x18h. Slows and terminates VT."},{"id":"lidocaine-vt","name":"Lidocaine 1mg/kg IV push","group":"Antiarrhythmic","critical":false,"correct":true,"phase":1,"teaching":"Second-line alternative to amiodarone. May be preferred if amiodarone is contraindicated or unavailable."},{"id":"sync-cardiovert","name":"Synchronized Cardioversion 100J (if unstable)","group":"Emergent","critical":true,"correct":true,"phase":1,"teaching":"If patient becomes hemodynamically unstable (SBP <90, altered consciousness, chest pain) — synchronized cardioversion immediately. Sedate first if time allows."},{"id":"defib-pads","name":"Defibrillator pads on (standby)","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"VT can degenerate to VFib at any moment. Defib pads on = ready for immediate cardioversion or defibrillation."},{"id":"verapamil-vt","name":"Verapamil IV","group":"Antiarrhythmic","critical":false,"correct":false,"teaching":"⚠️ DANGEROUS in VT — calcium channel blockers cause cardiovascular collapse in ventricular tachycardia. Only appropriate for SVT. If unsure of rhythm, treat as VT."},{"id":"mag-vt","name":"Magnesium 2g IV (if polymorphic VT/Torsades)","group":"Electrolytes","critical":false,"correct":true,"phase":1,"teaching":"First-line for Torsades de Pointes (polymorphic VT with long QT). Also replete if hypomagnesemic."},{"id":"electrophysiology","name":"Electrophysiology consult","group":"Consultation","critical":false,"correct":true,"phase":2,"teaching":"EP study for risk stratification. Likely needs ICD (implantable cardioverter-defibrillator) given VT with syncope."},{"id":"replete-k-vt","name":"Potassium repletion to >4.0 mEq/L","group":"Electrolytes","critical":false,"correct":true,"phase":1,"teaching":"Hypokalemia lowers VT/VFib threshold. Target K >4.0 in cardiac patients."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"92/58","HR":"188","RR":"22","Temp":"98.4°F","SpO2":"94%"},"ecg":"Wide complex tachycardia at 188 bpm — monomorphic VT. AV dissociation present (confirms VT over SVT with aberrancy).","labHighlights":{"Potassium":"3.4 mEq/L","Troponin":"0.12 ng/mL","Magnesium":"1.6 mg/dL"},"examNote":"Pale, diaphoretic post-syncope. Alert but feels lightheaded. Wide-complex regular tachycardia on monitor.","aiPatientUpdate":null},{"id":"converted","label":"Amiodarone — Converted to NSR","requires":["amiodarone-vt","defib-pads"],"vitals":{"BP":"118/72","HR":"78","RR":"16","Temp":"98.4°F","SpO2":"98%"},"ecg":"NSR at 78 bpm. QTc 440ms. No ST changes. Old LBBB pattern.","labHighlights":{"Potassium":"4.2 mEq/L (after repletion)","Troponin":"0.14 ng/mL (stable)"},"examNote":"Converted to sinus rhythm after amiodarone load. Alert, oriented, comfortable. No heart failure signs. Hemodynamically stable.","aiPatientUpdate":"Oh wow, I feel completely different. My heart was doing that scary fast thing and now it's normal. Am I going to be okay?","teaching":"✅ Chemical cardioversion successful. VT with syncope is a high-risk presentation — this patient will likely need an ICD. Admit to telemetry/CCU. Continue amiodarone drip. EP consult. Echo to assess LV function. Replete electrolytes."}],"pitfallEvents":[{"trigger":"verapamil-vt","event":"cardiovascular-collapse","message":"⚠️ CRITICAL: After verapamil, BP crashes to 60/40 and patient becomes pulseless. Verapamil + VT = cardiovascular collapse. This is why uncertain wide-complex tachycardia should ALWAYS be treated as VT.","recovery":"Immediate defibrillation. CPR. IV calcium chloride to reverse verapamil. Vasopressors.","vitals":{"BP":"60/40","HR":"220 (VFib)","RR":"0","Temp":"98.4°F","SpO2":"Undetectable"}}]}},
     {
       id:"gi-bleed-syncope", diagnosis:"Upper GI Hemorrhage with Syncope", acuity:2,
       patient:{ communicationStyle:"Weak, speaks slowly. Cooperative but clearly unwell. Wants to lie still.", emotionalState:"Exhausted and frightened by the blood" },
@@ -1148,7 +1189,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Cardiac Syncope",probability:3,reasoning:"Age-appropriate concern but clear hemorrhagic etiology"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"large-bore-gib","name":"Two large-bore IVs (18G or larger)","group":"Access","critical":true,"correct":true,"phase":1,"teaching":"Massive resuscitation requires large-bore access. Do NOT waste time with 20G or 22G. Consider rapid infuser."},{"id":"type-cross-gib","name":"Type & Crossmatch 4 units pRBCs","group":"Blood Bank","critical":true,"correct":true,"phase":1,"teaching":"Active GI hemorrhage — crossmatch and have blood available. Transfuse if Hgb <7 (or <9 with active bleeding/cardiac disease)."},{"id":"transfuse-gib","name":"Transfuse 2 units pRBCs","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Active hemorrhage with syncope and orthostasis. Transfuse to maintain Hgb >7. Remember: Hgb is falsely normal early in acute bleed."},{"id":"ppi-drip-gib","name":"Pantoprazole 80mg IV bolus + 8mg/hr drip","group":"GI Therapy","critical":true,"correct":true,"phase":1,"teaching":"High-dose IV PPI for suspected upper GI bleed. Raises gastric pH to promote clot stability. Continue until endoscopy."},{"id":"gi-consult-gib","name":"GI Consult — Urgent Endoscopy","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Endoscopy within 24h (within 12h if high-risk features). Diagnostic and therapeutic — can cauterize, clip, or inject bleeding vessel."},{"id":"ns-bolus-gib","name":"Normal Saline 1L IV while awaiting blood","group":"Resuscitation","critical":false,"correct":true,"phase":1,"teaching":"Reasonable bridge while waiting for blood products. But transition to blood as soon as available."},{"id":"octreotide-gib","name":"Octreotide 50mcg IV bolus + drip","group":"GI Therapy","critical":false,"correct":true,"phase":1,"teaching":"If variceal bleed suspected — reduces portal pressure. Give empirically if cirrhosis/liver disease present."},{"id":"hold-nsaids","name":"Discontinue all NSAIDs","group":"Medication Changes","critical":false,"correct":true,"phase":1,"teaching":"NSAIDs are the likely cause of this peptic ulcer bleed. Must be permanently discontinued."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"88/54","HR":"116","RR":"20","Temp":"98.4°F","SpO2":"97%"},"ecg":"Sinus tachycardia. ST depressions V4-V6 (demand ischemia from anemia).","labHighlights":{"Hemoglobin":"7.2 g/dL","BUN":"68 mg/dL","BUN:Cr ratio":"34:1 (upper GI source)"},"examNote":"Pale, diaphoretic. Melena on rectal. Orthostatic. Tachycardic. Epigastric tenderness.","aiPatientUpdate":null},{"id":"resuscitated","label":"Transfusing + PPI + GI Consulted","requires":["transfuse-gib","ppi-drip-gib","gi-consult-gib"],"vitals":{"BP":"104/68","HR":"96","RR":"18","Temp":"98.4°F","SpO2":"98%"},"ecg":"Sinus tach improving. ST depressions resolving.","labHighlights":{"Hemoglobin":"8.8 g/dL (after 2 units)","Lactate":"2.1 mmol/L"},"examNote":"Color improving. Less orthostatic. GI team aware — endoscopy being scheduled within 12h.","aiPatientUpdate":"I feel a lot less dizzy now. The blood transfusion is helping. I'm still scared about the black stools though.","teaching":"✅ Resuscitation before scope. Blood + PPI + GI consult. Glasgow-Blatchford score is high-risk. The ST depressions are demand ischemia (Type 2 MI) from anemia — NOT ACS. Treat the bleed, not the troponin."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -1218,7 +1260,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Metabolic (Hypoglycemia/Hyponatremia)",probability:3,reasoning:"Glucose elevated, sodium mildly low but not seizure-level"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"lorazepam-se","name":"Lorazepam 0.1mg/kg IV (4mg for average adult)","group":"First-Line (Benzodiazepine)","critical":true,"correct":true,"phase":1,"teaching":"IMMEDIATE — every minute of seizure causes neuronal injury. Lorazepam 0.1mg/kg IV. Can repeat x1 after 5 min. If no IV → midazolam IM 10mg."},{"id":"midazolam-im-se","name":"Midazolam 10mg IM (if no IV access)","group":"First-Line (Benzodiazepine)","critical":false,"correct":true,"phase":1,"teaching":"RAMPART trial: IM midazolam is as effective as IV lorazepam and faster when no IV access. Give in deltoid."},{"id":"fosphenytoin-se","name":"Fosphenytoin 20mg PE/kg IV","group":"Second-Line","critical":true,"correct":true,"phase":2,"teaching":"If still seizing after 2 doses of benzo. Load over 10-15 min. Alternative: levetiracetam 60mg/kg or valproate 40mg/kg."},{"id":"lev-se","name":"Levetiracetam 60mg/kg IV (max 4500mg)","group":"Second-Line","critical":false,"correct":true,"phase":2,"teaching":"Alternative second-line. ESETT trial showed equivalent efficacy to fosphenytoin and valproate. Fewer drug interactions."},{"id":"propofol-se","name":"Propofol drip + intubation (refractory SE)","group":"Third-Line","critical":false,"correct":true,"phase":3,"teaching":"If still seizing after benzo + second-line agent → intubate + propofol or midazolam drip. This is refractory status epilepticus. Continuous EEG monitoring."},{"id":"glucose-check-se","name":"Fingerstick glucose STAT","group":"Immediate Workup","critical":true,"correct":true,"phase":1,"teaching":"Check IMMEDIATELY — hypoglycemia is the most treatable cause of seizure. If <60, give D50 (or thiamine first if malnourished/alcoholic)."},{"id":"ivf-se","name":"IV access + NS maintenance","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Secure IV access for medication delivery. Maintenance fluids."},{"id":"cbc-bmp-se","name":"CBC, BMP, AED levels, tox screen","group":"Workup","critical":false,"correct":true,"phase":1,"teaching":"Med noncompliance (#1 cause in known epileptics), metabolic derangement, toxins. Check AED levels."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"168/102","HR":"132","RR":"8 (irregular)","Temp":"101.8°F","SpO2":"88%"},"ecg":"Sinus tachycardia with motion artifact from seizure activity","labHighlights":{"Glucose":"92 mg/dL (not hypoglycemia)","AED level":"Subtherapeutic (noncompliance)"},"examNote":"Active generalized tonic-clonic seizure >10 minutes. Cyanotic. Incontinent. No purposeful movement. GCS 3.","aiPatientUpdate":null},{"id":"benzo-given","label":"Benzodiazepine Given","requires":["lorazepam-se","glucose-check-se"],"vitals":{"BP":"148/92","HR":"118","RR":"14","Temp":"101.2°F","SpO2":"92%"},"ecg":"Sinus tachycardia","labHighlights":{"Lactate":"6.4 mmol/L (from prolonged seizure)","CK":"1,240 U/L (rhabdomyolysis developing)"},"examNote":"Seizure stopped after 2nd dose of lorazepam. Post-ictal — GCS 7 (E1V2M4). Protecting airway so far but respiratory effort marginal.","aiPatientUpdate":null,"teaching":"✅ Seizure terminated with benzodiazepines. Now post-ictal. Load second-line agent to prevent recurrence. Monitor airway closely. Check CK — rhabdomyolysis from prolonged seizure."},{"id":"second-line","label":"Second-Line Agent Loaded","requires":["fosphenytoin-se"],"vitals":{"BP":"138/84","HR":"96","RR":"16","Temp":"100.4°F","SpO2":"96%"},"ecg":"NSR","labHighlights":{"Lactate":"3.2 mmol/L (improving)","CK":"2,800 U/L"},"examNote":"No seizure recurrence. GCS improving to 10 (E2V3M5). Moving all extremities. Beginning to respond to voice. CK rising — start IV fluids for rhabdomyolysis.","aiPatientUpdate":"Mmmm... where am I? What happened? My whole body hurts...","teaching":"✅ Second-line agent prevents recurrence. Admit ICU. Aggressive IVF for rhabdomyolysis (CK will peak at 24-48h). Restart home AEDs. Address noncompliance — why did they stop?"}],"pitfallEvents":[]}},
     {
       id:"new-seizure-mass", diagnosis:"New-Onset Seizure Secondary to Brain Mass (Glioblastoma)", acuity:2,
       patient:{ communicationStyle:"Postictal, slowly becoming more coherent. Confused, repeats questions. Cooperative once alert.", emotionalState:"Confused, scared, does not understand what happened" },
@@ -1273,7 +1316,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"CNS Lymphoma",probability:5,reasoning:"Possible but more common in immunocompromised, typically periventricular"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"lev-mass","name":"Levetiracetam 1000mg IV","group":"Seizure Management","critical":true,"correct":true,"phase":1,"teaching":"AED for new-onset seizure. Levetiracetam preferred — no drug interactions, no hepatic metabolism, safer with steroids. Avoid phenytoin (interacts with dexamethasone)."},{"id":"dexa-mass","name":"Dexamethasone 10mg IV, then 4mg q6h","group":"Cerebral Edema","critical":true,"correct":true,"phase":1,"teaching":"Reduces peritumoral vasogenic edema. Rapid clinical improvement expected. This is NOT the same as treating the tumor — it treats the edema around it."},{"id":"neurosurg-mass","name":"Neurosurgery/Neuro-Oncology consult","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Brain mass needs biopsy for tissue diagnosis. May need surgical resection. Neuro-oncology coordinates radiation/chemo. Do NOT start treatment without tissue."},{"id":"ct-head-mass","name":"CT Head (already done — confirms mass)","group":"Imaging","critical":false,"correct":true,"phase":1,"teaching":"CT shows the mass and edema. MRI with contrast is next step for better characterization before surgery. Already obtained."},{"id":"mri-mass","name":"MRI Brain with contrast (characterize mass)","group":"Imaging","critical":false,"correct":true,"phase":2,"teaching":"Better anatomic detail than CT. Shows relationship to eloquent cortex. Helps surgical planning."},{"id":"whole-body-pet","name":"PET scan / metastatic workup","group":"Workup","critical":false,"correct":true,"phase":2,"teaching":"GBM is a primary brain tumor but must rule out metastatic disease. CT chest/abd/pelvis or PET to screen."},{"id":"phenytoin-mass","name":"Phenytoin 20mg/kg IV load","group":"Seizure Management","critical":false,"correct":false,"teaching":"⚠️ Phenytoin interacts with dexamethasone (enzyme induction reduces steroid levels). Use levetiracetam instead."},{"id":"dvt-ppx-mass","name":"DVT prophylaxis (SCDs + enoxaparin when safe)","group":"Supportive","critical":false,"correct":true,"phase":2,"teaching":"Brain tumor patients have high VTE risk. SCDs immediately. Pharmacologic prophylaxis after neurosurgery clearance."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"142/88","HR":"86","RR":"16","Temp":"98.6°F","SpO2":"98%"},"ecg":"NSR","labHighlights":{"Sodium":"138 mEq/L","WBC":"8,200/μL"},"examNote":"Post-ictal, gradually clearing. Subtle right pronator drift. Mild expressive aphasia (mass effect on left motor/speech cortex). Papilledema on fundoscopy.","aiPatientUpdate":null},{"id":"treated","label":"AED + Steroids + Consults","requires":["lev-mass","dexa-mass","neurosurg-mass"],"vitals":{"BP":"136/82","HR":"78","RR":"14","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"Glucose":"168 mg/dL (steroid-induced — expected)"},"examNote":"Neurologically improved. Aphasia resolving as edema decreases from dexamethasone. No further seizures. Pronator drift less prominent. MRI being scheduled.","aiPatientUpdate":"I can think more clearly now. The words are coming easier. What did the scan show? Is it bad?","teaching":"✅ Steroids dramatically reduce peritumoral edema — often rapid improvement. AED prevents seizure recurrence. MRI next for surgical planning. This is likely GBM (WHO Grade IV) given imaging appearance — tissue diagnosis needed. Prognosis discussion with neuro-oncology and family."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -1342,7 +1386,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Cholelithiasis/Cholecystitis",probability:1,reasoning:"RUQ tenderness but labs and history point to toxicologic cause"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"nac-apap","name":"N-Acetylcysteine (NAC) 150mg/kg IV over 1h (loading)","group":"Antidote","critical":true,"correct":true,"phase":1,"teaching":"THE antidote. Replenishes glutathione to detoxify NAPQI metabolite. Give IMMEDIATELY if level above treatment line on Rumack-Matthew nomogram. Do NOT wait for level if >8h post-ingestion."},{"id":"nac-oral","name":"N-Acetylcysteine 140mg/kg PO loading (72h protocol)","group":"Antidote","critical":false,"correct":true,"phase":1,"teaching":"PO alternative — 72h protocol: 140mg/kg load, then 70mg/kg q4h x 17 doses. IV preferred for vomiting or liver failure."},{"id":"activated-charcoal","name":"Activated Charcoal 1g/kg PO (if <4h post-ingestion)","group":"Decontamination","critical":false,"correct":true,"phase":1,"teaching":"Only effective within 1-2h of ingestion (up to 4h). Binds remaining APAP in GI tract. Patient is 8h post-ingestion → charcoal is too late here."},{"id":"apap-level-serial","name":"Repeat APAP level in 4h + LFTs q12h","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Serial levels track clearance. LFTs monitor for hepatotoxicity (peak at 72-96h). ALT >1000 = severe hepatotoxicity."},{"id":"coags-apap","name":"INR q12h","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"INR is the best marker of synthetic function. Rising INR = liver failure progressing. INR >6.5 = consider transplant criteria (King's College)."},{"id":"psych-consult","name":"Psychiatry consult — suicide risk assessment","group":"Psychiatric","critical":true,"correct":true,"phase":1,"teaching":"Intentional overdose requires psychiatric evaluation. 1:1 observation. Assess suicidal intent, plan, lethality understanding, protective factors."},{"id":"poison-control","name":"Call Poison Control","group":"Consultation","critical":false,"correct":true,"phase":1,"teaching":"Regional Poison Center (1-800-222-1222) provides expert guidance on dosing, nomogram interpretation, and disposition."},{"id":"ivf-apap","name":"IV fluids — D5 NS maintenance","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Maintain hydration and glucose. Dextrose-containing fluids help support hepatic glycogen stores."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"108/72","HR":"88","RR":"16","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"APAP level":"185 mcg/mL at 8h (TOXIC — above treatment line)","ALT":"42 U/L (early — will rise)","INR":"1.1"},"examNote":"Appears well currently (APAP has asymptomatic early phase). Nausea, RUQ tenderness. Alert and cooperative but guarded about intent.","aiPatientUpdate":null},{"id":"nac-started","label":"NAC Started + Psych Consulted","requires":["nac-apap","psych-consult"],"vitals":{"BP":"112/74","HR":"82","RR":"14","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"APAP level":"98 mcg/mL (decreasing)","ALT":"284 U/L (rising — hepatotoxicity developing)","INR":"1.3"},"examNote":"NAC infusion running. APAP level decreasing. LFTs beginning to rise (expected — hepatotoxicity develops 24-72h). 1:1 sitter placed. Psychiatry evaluating.","aiPatientUpdate":"I didn't really want to die... I just wanted the pain to stop. I'm scared now about what I did to my liver.","teaching":"✅ NAC started within treatment window. LFTs rising but NAC dramatically reduces hepatotoxicity risk. Continue NAC until APAP undetectable AND LFTs trending down AND INR normalizing. This patient needs both medical AND psychiatric care."}],"pitfallEvents":[]}},
     {
       id:"salicylate-toxicity", diagnosis:"Salicylate Toxicity (Chronic)", acuity:2,
       patient:{ communicationStyle:"Confused, agitated, talking rapidly. Tinnitus makes it hard to hear questions. Answers are tangential.", emotionalState:"Agitated, confused, frightened by the ringing and confusion" },
@@ -1399,7 +1444,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Thyroid Storm",probability:3,reasoning:"Agitation, tachycardia, diaphoresis, fever — but tinnitus and aspirin use clinch the diagnosis"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"bicarb-drip-sal","name":"Sodium Bicarbonate drip — target urine pH >7.5","group":"Enhanced Elimination","critical":true,"correct":true,"phase":1,"teaching":"Alkalinize the urine to \"ion trap\" salicylate in renal tubules, enhancing excretion. Target urine pH >7.5. Also alkalinize serum to keep salicylate ionized (out of CNS)."},{"id":"dextrose-sal","name":"D5W in IV fluids (prevent neuroglycopenia)","group":"Supportive","critical":true,"correct":true,"phase":1,"teaching":"Salicylates cause CNS glucose depletion even with normal serum glucose. Add dextrose to all IV fluids. Neuroglycopenia drives altered mental status."},{"id":"nephrology-sal","name":"Nephrology consult — Emergent Hemodialysis","group":"Definitive","critical":true,"correct":true,"phase":2,"teaching":"Dialysis indications in salicylate toxicity: level >90, renal failure, pulmonary edema, seizure, refractory acidosis, or clinical deterioration despite bicarb."},{"id":"serial-sal","name":"Serial salicylate levels q2h + ABG","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Salicylate levels can RISE after admission (continued absorption, especially with enteric-coated). ABG shows mixed respiratory alkalosis + metabolic acidosis (classic)."},{"id":"intubate-sal","name":"Endotracheal intubation","group":"Airway","critical":false,"correct":false,"teaching":"⚠️ EXTREMELY DANGEROUS — intubation removes the compensatory hyperventilation. If you can't match the patient's respiratory rate (30-40/min) on the vent, pH crashes and salicylate floods into the CNS. Intubate only as absolute last resort."},{"id":"k-repletion-sal","name":"Potassium repletion (K >4.0)","group":"Electrolytes","critical":false,"correct":true,"phase":1,"teaching":"Hypokalemia prevents urinary alkalinization — kidneys retain K and excrete H+ instead of alkalinizing urine. Must replete K for bicarb to work."},{"id":"activated-charcoal-sal","name":"Activated Charcoal 50g PO (if recent ingestion)","group":"Decontamination","critical":false,"correct":true,"phase":1,"teaching":"Salicylates form bezoars — charcoal can be effective even hours after ingestion. Whole bowel irrigation for enteric-coated preparations."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"138/82","HR":"108","RR":"32","Temp":"100.2°F","SpO2":"97%"},"ecg":"Sinus tachycardia","labHighlights":{"Salicylate level":"68 mg/dL (severe >40)","ABG pH":"7.42 (mixed: resp alk + met acidosis)","Anion gap":"22"},"examNote":"Tinnitus, confusion, tachypnea (respiratory alkalosis compensating for metabolic acidosis). Diaphoretic.","aiPatientUpdate":null},{"id":"treated","label":"Bicarb Drip + Monitoring","requires":["bicarb-drip-sal","serial-sal"],"vitals":{"BP":"132/78","HR":"98","RR":"28","Temp":"99.8°F","SpO2":"98%"},"ecg":"Sinus tach improving","labHighlights":{"Salicylate level":"52 mg/dL (decreasing)","Urine pH":"7.8 (target achieved)","ABG":"pH 7.46"},"examNote":"Tinnitus improving. Less confused. Urine alkalinized. Salicylate level decreasing. Still tachypneic (do NOT suppress this — it's compensatory).","aiPatientUpdate":"The ringing in my ears is getting quieter. I can think more clearly. I didn't even know aspirin could do this — I've been taking extra for my arthritis pain for months.","teaching":"✅ Urinary alkalinization working — level decreasing. Key: do NOT intubate (removes compensatory hyperventilation), keep urine alkaline, replete K, add dextrose. If level rises or patient deteriorates → hemodialysis."}],"pitfallEvents":[{"trigger":"intubate-sal","event":"respiratory-acidosis","message":"⚠️ CRITICAL: After intubation at standard vent settings (RR 14), pH crashes to 7.08. Salicylate floods into CNS. Patient seizes. You removed the compensatory hyperventilation that was keeping pH stable.","recovery":"Increase vent rate to 30-40/min to match pre-intubation rate. Emergent hemodialysis NOW. This may be non-recoverable.","vitals":{"BP":"88/54","HR":"142","RR":"14 (vent)","Temp":"100.4°F","SpO2":"94%"}}]}}
   ]
 }
 ,{
@@ -1465,7 +1511,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Peritonsillar Abscess",probability:3,reasoning:"Sore throat and drooling but usually older children/adolescents with trismus and uvular deviation"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"anesthesia-epiglottitis","name":"Call Anesthesia + ENT to bedside — controlled airway","group":"Airway","critical":true,"correct":true,"phase":1,"teaching":"AIRWAY FIRST. This child has impending obstruction. Anesthesia performs controlled intubation in OR with ENT backup for surgical airway. Do NOT attempt blind intubation in ED."},{"id":"ceftriaxone-epig","name":"Ceftriaxone 50mg/kg IV","group":"Antibiotics","critical":true,"correct":true,"phase":1,"teaching":"Empiric coverage for H. influenzae type b, S. pneumoniae, S. aureus. Give after airway is secured (or before if delay to OR)."},{"id":"dexamethasone-epig","name":"Dexamethasone 0.6mg/kg IV","group":"Adjunctive","critical":false,"correct":true,"phase":1,"teaching":"Reduces airway edema. Helpful adjunct but airway management is the priority."},{"id":"keep-calm-epig","name":"Keep child calm — position of comfort, parent at bedside","group":"Supportive","critical":true,"correct":true,"phase":1,"teaching":"CRITICAL: agitation worsens obstruction. Let child sit upright in parent's lap (tripod/sniffing position). No IV starts, no labs, no throat exam until airway secured."},{"id":"tongue-depressor","name":"Examine throat with tongue depressor","group":"Examination","critical":false,"correct":false,"teaching":"⚠️ DANGEROUS — throat examination can precipitate complete airway obstruction and laryngospasm. Visualization only in controlled setting (OR)."},{"id":"racemic-epi","name":"Racemic Epinephrine nebulizer","group":"Respiratory","critical":false,"correct":false,"teaching":"⚠️ Not effective for epiglottitis (unlike croup). Epiglottitis is a supraglottic bacterial infection — nebulized epi works for subglottic croup. Different disease, different anatomy."},{"id":"heliox-epig","name":"Heliox (helium-oxygen mixture)","group":"Respiratory","critical":false,"correct":true,"phase":1,"teaching":"Bridge therapy — lower-density gas improves flow through narrowed airway. Temporizing while arranging definitive airway management."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"92/58","HR":"158","RR":"36","Temp":"103.8°F","SpO2":"91%"},"ecg":"Sinus tachycardia","labHighlights":{"WBC":"18,400/μL"},"examNote":"Toxic child in tripod position, drooling, stridor. \"Hot potato\" voice. Refusing to swallow. Do NOT lay supine. Do NOT examine throat.","aiPatientUpdate":null},{"id":"airway-secured","label":"Airway Secured in OR","requires":["anesthesia-epiglottitis","ceftriaxone-epig"],"vitals":{"BP":"88/56","HR":"138","RR":"20 (ventilated)","Temp":"103.2°F","SpO2":"99%"},"ecg":"Sinus tach improving","labHighlights":{"Blood":"culture pending","WBC":"17,800/μL"},"examNote":"Controlled intubation in OR by anesthesia — cherry-red, edematous epiglottis visualized. Intubated with 1 size smaller ETT than expected. Child now stable and ventilated.","aiPatientUpdate":null,"teaching":"✅ Controlled airway management is THE priority. Cherry-red epiglottis confirmed diagnosis. Antibiotics running. Admit PICU. Typically extubate in 24-72h once air leak develops around ETT (edema resolving). Blood cultures to guide antibiotic narrowing."}],"pitfallEvents":[{"trigger":"tongue-depressor","event":"complete-obstruction","message":"⚠️ Throat examination triggers complete laryngospasm. Child cannot ventilate. SpO2 dropping rapidly. Emergency cricothyrotomy may be needed in a pediatric patient.","recovery":"Bag-valve-mask with jaw thrust. Call anesthesia/ENT STAT. Prepare for surgical airway. This is why we NEVER examine the throat in suspected epiglottitis outside the OR.","vitals":{"BP":"74/42","HR":"178","RR":"0 (obstructed)","Temp":"103.8°F","SpO2":"62%"}}]}},
     {
       id:"intussusception", diagnosis:"Ileocolic Intussusception", acuity:2,
       patient:{ communicationStyle:"Parent is historian. Toddler intermittently screaming in pain (drawing knees up), then quiet and lethargic between episodes. Inconsolable during pain.", emotionalState:"Child: alternating between screaming/distress and exhausted lethargy. Parent: very worried, describes episodic behavior." },
@@ -1522,7 +1569,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Gastroenteritis",probability:2,reasoning:"Recent viral illness but episodic pattern with pain-free intervals and mass palpation argue against"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"air-enema","name":"Air Enema Reduction (Radiology)","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"First-line treatment — air (or barium) enema reduces intussusception in 80-95% of cases. Done under fluoroscopy. Radiology must be notified as emergent."},{"id":"ivf-intuss","name":"NS 20mL/kg IV bolus","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Dehydrated from vomiting and poor PO intake. Resuscitate before reduction. Ensure IV access for sedation during enema."},{"id":"surgery-intuss","name":"Pediatric Surgery consult (standby)","group":"Surgical","critical":true,"correct":true,"phase":1,"teaching":"Surgery must be aware and standing by — if air enema fails (or perforation occurs), emergent surgical reduction/resection is needed immediately."},{"id":"npo-intuss","name":"NPO","group":"Pre-procedural","critical":false,"correct":true,"phase":1,"teaching":"NPO in case surgical intervention is needed. Also reduces aspiration risk during sedation for enema."},{"id":"abx-intuss","name":"Antibiotics (if peritonitis suspected)","group":"Antibiotics","critical":false,"correct":true,"phase":2,"teaching":"If signs of perforation or peritonitis — broad-spectrum antibiotics. Otherwise hold unless enema fails."},{"id":"pain-intuss","name":"Fentanyl 1mcg/kg IV for pain","group":"Pain","critical":false,"correct":true,"phase":1,"teaching":"Opioid analgesia for severe colicky pain. Weight-based dosing in pediatrics. Monitor closely."},{"id":"repeat-us","name":"Repeat ultrasound post-reduction","group":"Monitoring","critical":false,"correct":true,"phase":2,"teaching":"Confirm successful reduction. Also monitor for recurrence (10-15% rate). Admit for observation."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"84/56","HR":"168","RR":"34","Temp":"100.4°F","SpO2":"98%"},"ecg":"Sinus tachycardia","labHighlights":{"WBC":"14,200/μL"},"examNote":"Inconsolable infant with episodic crying and drawing up knees. \"Sausage-shaped\" mass RUQ. \"Currant jelly\" stool. Lethargic between episodes.","aiPatientUpdate":null},{"id":"reduced","label":"Air Enema — Successful Reduction","requires":["air-enema","ivf-intuss"],"vitals":{"BP":"90/60","HR":"138","RR":"28","Temp":"99.8°F","SpO2":"99%"},"ecg":"Sinus tach improving","labHighlights":{},"examNote":"Successful air enema reduction under fluoroscopy. Child immediately more comfortable. Passing gas. Mass no longer palpable. Tolerating pedialyte.","aiPatientUpdate":null,"teaching":"✅ Non-operative reduction successful (80-95% success rate). Admit for 24h observation — recurrence rate 10-15%. Monitor for perforation signs. Advance diet as tolerated. Discharge if no recurrence in 24h."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -1589,7 +1637,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Conus Medullaris Syndrome",probability:2,reasoning:"Similar bladder/saddle findings but would expect UMN signs, lesion at L1-L2"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"mri-emergent-ce","name":"EMERGENT MRI Lumbar Spine","group":"Imaging","critical":true,"correct":true,"phase":1,"teaching":"MRI is the gold standard. THIS IS EMERGENT — not \"when MRI is available.\" Cauda equina progresses to permanent paraplegia. Must get imaging within 1-2 hours."},{"id":"neurosurg-ce","name":"STAT Neurosurgery/Spine Surgery consult","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Surgical decompression within 24-48h of symptom onset has the best outcomes. Beyond 48h, deficit may be permanent. Call BEFORE MRI results if suspicion is high."},{"id":"dexa-ce","name":"Dexamethasone 10mg IV","group":"Anti-Inflammatory","critical":false,"correct":true,"phase":1,"teaching":"Reduce inflammation and edema around compressed nerve roots. Evidence is limited but commonly given while awaiting surgery."},{"id":"foley-ce","name":"Foley catheter (urinary retention)","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"This patient likely has urinary retention (bladder dysfunction is a red flag). Decompress bladder and monitor I/O. Post-void residual >200mL is significant."},{"id":"rectal-exam-ce","name":"Rectal exam — assess perianal sensation and tone","group":"Examination","critical":true,"correct":true,"phase":1,"teaching":"CRITICAL exam finding — decreased perianal sensation (\"saddle anesthesia\") and decreased rectal tone are hallmarks of cauda equina. Must document before surgery."},{"id":"pain-ce","name":"Multimodal analgesia (ketorolac + opioid)","group":"Pain","critical":false,"correct":true,"phase":1,"teaching":"Severe pain — multimodal approach. Ketorolac 30mg IV + opioid PRN. Avoid neuraxial techniques (the problem IS in the spine)."},{"id":"ct-only-ce","name":"CT Lumbar Spine (instead of MRI)","group":"Imaging","critical":false,"correct":false,"teaching":"⚠️ CT is INADEQUATE for cauda equina — cannot visualize the thecal sac, nerve roots, or soft tissue compression well enough. MRI is mandatory. CT only if MRI absolutely unavailable."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"148/88","HR":"92","RR":"18","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"WBC":"7,800/μL","ESR":"12 mm/hr"},"examNote":"Bilateral leg weakness (4/5 hip flexors, 3/5 ankle dorsiflexion). Saddle anesthesia. Decreased rectal tone. Urinary retention. Bilateral positive straight leg raise.","aiPatientUpdate":null},{"id":"imaged-consulted","label":"MRI Done + Surgery Consulted","requires":["mri-emergent-ce","neurosurg-ce"],"vitals":{"BP":"142/84","HR":"86","RR":"16","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{},"examNote":"MRI: large L4-5 disc herniation with severe cauda equina compression. Neurosurgery reviewing — planning emergent decompressive laminectomy tonight.","aiPatientUpdate":"I can barely feel anything down there. Are they going to operate? Am I going to be able to walk again?","teaching":"✅ Emergent MRI confirmed cauda equina compression. Surgical decompression planned within 24h. Outcomes depend on timing: <48h onset to surgery has best prognosis. This patient presented early — good sign. Foley placed for urinary retention."}],"pitfallEvents":[]}},
     {
       id:"aortic-dissection-back", diagnosis:"Acute Aortic Dissection (Type B — Descending)", acuity:1,
       patient:{ communicationStyle:"In extreme pain, unable to find comfortable position. Anxious, restless, answers in short bursts between waves of pain.", emotionalState:"Terrified — describes the pain as the worst of their life" },
@@ -1644,7 +1693,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Renal Colic",probability:3,reasoning:"Flank pain present but tearing onset, migration from upper back, and BP differential clinch dissection"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"esmolol-dissection","name":"Esmolol drip — target HR <60 and SBP <120","group":"Anti-Impulse Therapy","critical":true,"correct":true,"phase":1,"teaching":"FIRST-LINE: IV beta-blocker reduces aortic wall shear stress (dP/dt). Must control HEART RATE before blood pressure. Target HR <60, SBP 100-120."},{"id":"nicardipine-dissection","name":"Nicardipine drip (add after beta-blocker)","group":"Anti-Impulse Therapy","critical":false,"correct":true,"phase":2,"teaching":"Add vasodilator ONLY after beta-blocker on board. Vasodilator alone causes reflex tachycardia → increased shear stress → worse dissection."},{"id":"nitroprusside-first","name":"Nitroprusside drip (without beta-blocker)","group":"Anti-Impulse Therapy","critical":false,"correct":false,"teaching":"⚠️ DANGEROUS: vasodilators WITHOUT beta-blocker cause reflex tachycardia and increased dP/dt — worsens dissection propagation. Always beta-blocker FIRST."},{"id":"cta-dissection","name":"CTA Chest/Abdomen/Pelvis (already obtained)","group":"Imaging","critical":false,"correct":true,"phase":1,"teaching":"CTA is imaging of choice. Shows entry/re-entry tears, true vs false lumen, branch vessel involvement, extent of dissection."},{"id":"ct-surgery-dissection","name":"Cardiothoracic Surgery consult","group":"Consultation","critical":true,"correct":true,"phase":1,"teaching":"Type A (ascending) = emergent surgery. Type B (descending, this patient) = medical management unless complicated (malperfusion, rupture, refractory pain)."},{"id":"pain-dissection","name":"IV morphine/fentanyl for pain","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Aggressive pain control — pain drives hypertension and tachycardia which worsen dissection. Opioids are appropriate."},{"id":"bilateral-bp","name":"Bilateral arm blood pressures","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"Asymmetric BPs suggest involvement of subclavian artery. >20mmHg difference is significant. Monitor in both arms."},{"id":"art-line-dissection","name":"Arterial line for continuous BP monitoring","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"Need continuous BP for titrating anti-impulse therapy. Use arm with higher pressure."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"198/112","HR":"108","RR":"22","Temp":"98.2°F","SpO2":"96%"},"ecg":"Sinus tachycardia. LVH pattern.","labHighlights":{"Lactate":"2.4 mmol/L","Creatinine":"1.4 mg/dL"},"examNote":"Severe interscapular pain, \"tearing\" quality. BP asymmetry (R 198/112, L 178/98). No aortic regurgitation murmur. Femoral pulses present bilaterally.","aiPatientUpdate":null},{"id":"controlled","label":"HR + BP Controlled","requires":["esmolol-dissection","ct-surgery-dissection"],"vitals":{"BP":"118/72","HR":"58","RR":"16","Temp":"98.2°F","SpO2":"98%"},"ecg":"Sinus bradycardia at 58 (target)","labHighlights":{"Lactate":"1.6 mmol/L","Creatinine":"1.2 mg/dL (improving — no malperfusion)"},"examNote":"Pain significantly improved. HR and BP at target. CTA: Stanford Type B dissection from left subclavian to celiac trunk. No branch vessel compromise. No rupture.","aiPatientUpdate":"The pain is so much better now that my blood pressure is down. It was the most terrifying pain I've ever felt.","teaching":"✅ Uncomplicated Type B dissection — medical management with anti-impulse therapy. Admit ICU. Continue esmolol + nicardipine drips. Serial imaging. If complicated (malperfusion, rupture, refractory pain/HTN) → endovascular repair (TEVAR). Long-term: oral beta-blocker, BP control, serial CT surveillance."}],"pitfallEvents":[{"trigger":"nitroprusside-first","event":"dissection-extension","message":"⚠️ After nitroprusside alone, HR rises to 128 (reflex tachycardia). Repeat CTA shows dissection has extended — now involving renal arteries. Left renal malperfusion developing. Creatinine rising.","recovery":"STOP nitroprusside. Start esmolol IMMEDIATELY to control HR. This is now a COMPLICATED Type B dissection — may need emergent TEVAR.","vitals":{"BP":"108/62","HR":"128","RR":"22","Temp":"98.2°F","SpO2":"95%"}}]}}
   ]
 }
 ,{
@@ -1710,7 +1760,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Vocal Cord Dysfunction",probability:1,reasoning:"Can mimic stridor but systemic findings confirm anaphylaxis"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"epi-im","name":"Epinephrine 0.3mg IM (anterolateral thigh)","group":"First-Line","critical":true,"correct":true,"phase":1,"teaching":"THE treatment. IM in lateral thigh — NOT subcutaneous, NOT IV push. Repeat q5-15min if no improvement. No contraindications in anaphylaxis."},{"id":"epi-iv","name":"Epinephrine 1mg IV push (cardiac dose)","group":"First-Line","critical":false,"correct":false,"teaching":"⚠️ IV push epinephrine at cardiac arrest dose causes fatal arrhythmia/hypertensive crisis in a patient WITH a pulse. Only use IV epi drip if refractory to IM."},{"id":"ivf-anaph","name":"NS 1-2L IV bolus (rapid)","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Distributive shock — massive vasodilation and capillary leak. Aggressive volume resuscitation needed. May need 2-4L."},{"id":"albuterol-anaph","name":"Albuterol nebulizer for bronchospasm","group":"Respiratory","critical":false,"correct":true,"phase":1,"teaching":"Adjunct for bronchospasm component. Does NOT replace epinephrine."},{"id":"diphenhydramine","name":"Diphenhydramine 50mg IV","group":"Adjunctive","critical":false,"correct":true,"phase":2,"teaching":"H1 blocker — relieves urticaria/itching. Does NOT treat the life-threatening components (hypotension, airway edema). Adjunct only."},{"id":"famotidine-anaph","name":"Famotidine 20mg IV","group":"Adjunctive","critical":false,"correct":true,"phase":2,"teaching":"H2 blocker — some evidence for additive benefit with H1 blocker in anaphylaxis."},{"id":"methylpred-anaph","name":"Methylprednisolone 125mg IV","group":"Adjunctive","critical":false,"correct":true,"phase":2,"teaching":"May prevent biphasic reaction (occurs in 5-20% at 4-12h). Does NOT help acute anaphylaxis. Takes hours for effect."},{"id":"monitor-anaph","name":"Monitor 4-6h for biphasic reaction","group":"Monitoring","critical":false,"correct":true,"phase":2,"teaching":"Biphasic anaphylaxis can recur hours later without re-exposure. Observe minimum 4h (some guidelines say 6-12h for severe reactions)."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"72/40","HR":"132","RR":"28","Temp":"98.6°F","SpO2":"88%"},"ecg":"Sinus tachycardia","labHighlights":{"Tryptase":"Send serum tryptase (confirms mast cell degranulation — draw within 1-2h)"},"examNote":"Diffuse urticaria, angioedema (lips, tongue). Stridor. Wheezing. Hypotensive. Ate peanut-containing food 20 min ago.","aiPatientUpdate":null},{"id":"epi-given","label":"Epinephrine + Fluids","requires":["epi-im","ivf-anaph"],"vitals":{"BP":"98/64","HR":"108","RR":"20","Temp":"98.6°F","SpO2":"94%"},"ecg":"Sinus tach improving","labHighlights":{},"examNote":"Dramatic improvement within 5 min of epinephrine. Stridor resolving. Urticaria fading. BP improving. Still wheezy.","aiPatientUpdate":"I can breathe again... oh my God that was terrifying. My throat was closing. The shot worked so fast.","teaching":"✅ Epinephrine is THE drug. IM in the thigh. Observe 4-6h for biphasic reaction. Prescribe EpiPen on discharge. Allergy referral. Educate on allergen avoidance."}],"pitfallEvents":[{"trigger":"epi-iv","event":"hypertensive-crisis","message":"⚠️ After 1mg IV push epi, BP shoots to 240/140, HR 180. Patient develops crushing chest pain — demand ischemia from hypertensive crisis and extreme tachycardia. The cardiac dose of IV epinephrine is for PULSELESS patients only.","recovery":"Treat hypertensive emergency. Short-acting vasodilator. This was preventable — IM epinephrine 0.3mg is the correct dose and route for anaphylaxis with a pulse.","vitals":{"BP":"240/140","HR":"180","RR":"26","Temp":"98.6°F","SpO2":"96%"}}]}},
     {
       id:"ace-angioedema", diagnosis:"ACE Inhibitor-Induced Angioedema", acuity:2,
       patient:{ communicationStyle:"Speech muffled by swollen tongue and lips. Pointing to throat. Drooling. Increasingly unable to speak clearly.", emotionalState:"Frightened — woke up with swelling that is rapidly progressing" },
@@ -1764,7 +1815,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Acquired C1-Esterase Inhibitor Deficiency",probability:1,reasoning:"Rare, associated with lymphoproliferative disorders — C4 would be low"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"stop-acei-angio","name":"Discontinue ACE Inhibitor PERMANENTLY","group":"Medication Changes","critical":true,"correct":true,"phase":1,"teaching":"ACE-I angioedema can be fatal. NEVER rechallenge. Also avoid ARBs (small cross-reactivity risk). Document allergy prominently."},{"id":"epi-angio","name":"Epinephrine 0.3mg IM","group":"Airway","critical":true,"correct":true,"phase":1,"teaching":"Give for significant airway compromise. Less effective than in allergic angioedema (bradykinin-mediated, not histamine), but still first-line for airway emergency."},{"id":"airway-angio","name":"Anesthesia/ENT for airway management","group":"Airway","critical":true,"correct":true,"phase":1,"teaching":"ACE-I angioedema can progress rapidly to complete obstruction. Have definitive airway team at bedside. Consider fiberoptic intubation or surgical airway if needed."},{"id":"icatibant-angio","name":"Icatibant 30mg SQ (bradykinin B2 antagonist)","group":"Targeted Therapy","critical":false,"correct":true,"phase":1,"teaching":"Bradykinin receptor antagonist — directly targets the mechanism (ACE-I causes bradykinin accumulation). Off-label for ACE-I angioedema but growing evidence supports use."},{"id":"ffp-angio","name":"Fresh Frozen Plasma 2 units","group":"Targeted Therapy","critical":false,"correct":true,"phase":1,"teaching":"Contains ACE enzyme which degrades bradykinin. Can help in refractory cases. Alternative: C1-esterase inhibitor concentrate."},{"id":"steroids-angio","name":"Methylprednisolone 125mg IV","group":"Adjunctive","critical":false,"correct":false,"teaching":"⚠️ Steroids are NOT effective for bradykinin-mediated angioedema. ACE-I angioedema is NOT an allergic/histamine process. Steroids treat IgE-mediated reactions, not this."},{"id":"benadryl-angio","name":"Diphenhydramine 50mg IV","group":"Adjunctive","critical":false,"correct":false,"teaching":"⚠️ Antihistamines are NOT effective — this is bradykinin-mediated, not histamine-mediated. Common error: treating ACE-I angioedema like allergic angioedema."},{"id":"observe-angio","name":"Observe in monitored bed 24-48h","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"ACE-I angioedema can wax and wane over 24-72h. Observe until swelling is clearly resolving and airway is secure."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"158/92","HR":"96","RR":"22","Temp":"98.6°F","SpO2":"95%"},"ecg":"NSR with LVH","labHighlights":{"Tryptase":"Normal (NOT mast cell / allergic — confirms bradykinin mechanism)"},"examNote":"Massive lip, tongue, and floor-of-mouth swelling. Muffled voice. Mild stridor. No urticaria (key differentiator from allergic angioedema). Started lisinopril 3 months ago.","aiPatientUpdate":null},{"id":"managed","label":"ACE-I Stopped + Airway Managed","requires":["stop-acei-angio","epi-angio","airway-angio"],"vitals":{"BP":"148/86","HR":"84","RR":"18","Temp":"98.6°F","SpO2":"97%"},"ecg":"NSR","labHighlights":{},"examNote":"Swelling stabilized and beginning to decrease. Airway patent. Team at bedside with surgical airway equipment. Stridor resolved.","aiPatientUpdate":"I can talk a little better now. My lips and tongue are still huge but I can breathe. I had no idea my blood pressure medicine could do this.","teaching":"✅ Key teaching: ACE-I angioedema is BRADYKININ-mediated, not histamine. Antihistamines and steroids don't work. Discontinue ACE-I permanently. Avoid ARBs. Document allergy. Switch to amlodipine or other non-RAAS antihypertensive. Observe 24-48h."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -1832,7 +1884,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Ovarian Torsion",probability:1,reasoning:"Acute pelvic pain but positive β-hCG and free fluid pattern favor ectopic"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"large-bore-ectopic","name":"Two large-bore IVs + Type & Cross","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Ruptured ectopic = surgical emergency with massive hemoperitoneum. Must have large-bore access and blood ready immediately."},{"id":"obgyn-stat-ectopic","name":"STAT OB/GYN — Emergent Laparoscopy/Laparotomy","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Ruptured ectopic is a SURGICAL emergency. No medical management option once ruptured. Salpingectomy or salpingostomy."},{"id":"transfuse-ectopic","name":"Transfuse pRBCs (O-neg if unstable)","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Active hemorrhage — transfuse to hemodynamic stability. Use O-neg if crossmatch not back."},{"id":"rhogam-ectopic","name":"RhoGAM 300mcg IM (if Rh negative)","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Prevent Rh isoimmunization in Rh-negative mothers. Give within 72h of any pregnancy-related bleeding event."},{"id":"methotrexate-ectopic","name":"Methotrexate (medical management)","group":"Treatment","critical":false,"correct":false,"teaching":"⚠️ Methotrexate is for UNRUPTURED ectopic only (stable, small, low beta-hCG). This patient has RUPTURED ectopic with hemodynamic instability — surgery is the only option."},{"id":"ivf-ectopic","name":"LR 1L IV bolus","group":"Resuscitation","critical":false,"correct":true,"phase":1,"teaching":"Bridge while awaiting blood products. Crystalloid as temporizing measure."},{"id":"quant-hcg","name":"Quantitative beta-hCG","group":"Diagnostic","critical":false,"correct":true,"phase":1,"teaching":"Confirms pregnancy and provides baseline. Level helps with surgical planning but do NOT delay surgery for results."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"82/48","HR":"128","RR":"22","Temp":"98.4°F","SpO2":"98%"},"ecg":"Sinus tachycardia","labHighlights":{"Hemoglobin":"7.8 g/dL","Beta-hCG":"12,400 mIU/mL","FAST":"Large amount of free fluid (hemoperitoneum)"},"examNote":"Severe lower abdominal pain. Peritoneal signs. Vaginal bleeding. Positive pregnancy test. FAST showing free fluid. Hemodynamically unstable.","aiPatientUpdate":null},{"id":"to-or","label":"Resuscitating → OR","requires":["obgyn-stat-ectopic","transfuse-ectopic"],"vitals":{"BP":"94/62","HR":"108","RR":"20","Temp":"98.4°F","SpO2":"98%"},"ecg":"Sinus tach improving","labHighlights":{"Hemoglobin":"8.4 g/dL (after 2u pRBCs)"},"examNote":"OB/GYN at bedside. OR being prepared. Receiving blood via rapid infuser. BP stabilizing but still tachycardic.","aiPatientUpdate":"Am I losing the baby? The pain is so bad... please help me.","teaching":"✅ Correct: rapid resuscitation + emergent surgery. Ruptured ectopic is a leading cause of first-trimester maternal mortality. Every minute to OR matters. Emotional support is critical — this patient is losing a pregnancy."},{"id":"post-op","label":"Post-Salpingectomy","requires":["obgyn-stat-ectopic"],"vitals":{"BP":"112/72","HR":"84","RR":"16","Temp":"98.6°F","SpO2":"99%"},"ecg":"NSR","labHighlights":{"Hemoglobin":"9.2 g/dL","Beta-hCG":"Will trend to 0"},"examNote":"Laparoscopic left salpingectomy. 800mL hemoperitoneum evacuated. Right tube and ovary normal. Hemodynamically stable.","aiPatientUpdate":"I'm so relieved the pain is gone but I'm heartbroken about the pregnancy. Will I be able to have children?","teaching":"✅ Successful salpingectomy. Counsel: future pregnancy possible with remaining tube. Slightly higher ectopic risk in future. Follow serial hCG to zero. Emotional support and follow-up."}],"pitfallEvents":[]}},
     {
       id:"eclampsia", diagnosis:"Eclampsia", acuity:1,
       patient:{ communicationStyle:"Postictal on arrival — progressively becoming more responsive. Confused, agitated, complaining of severe headache. Spouse provides history.", emotionalState:"Confused, frightened, concerned about the baby" },
@@ -1890,7 +1943,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Thrombotic Thrombocytopenic Purpura",probability:2,reasoning:"Thrombocytopenia and hemolysis overlap with HELLP, but pregnancy context makes eclampsia/HELLP far more likely"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"mag-eclampsia","name":"Magnesium Sulfate 4-6g IV load + 1-2g/hr drip","group":"Seizure Treatment","critical":true,"correct":true,"phase":1,"teaching":"FIRST-LINE for eclamptic seizures — superior to phenytoin and diazepam (Magpie and Eclampsia trials). 4-6g over 15-20 min, then 1-2g/hr maintenance."},{"id":"phenytoin-eclampsia","name":"Phenytoin IV load","group":"Seizure Treatment","critical":false,"correct":false,"teaching":"⚠️ Phenytoin is INFERIOR to magnesium for eclamptic seizures. Eclampsia trial proved this definitively. Use magnesium."},{"id":"labetalol-eclampsia","name":"Labetalol 20mg IV, then 40-80mg q10min","group":"Blood Pressure","critical":true,"correct":true,"phase":1,"teaching":"Acute severe HTN in pregnancy. Target SBP <160, DBP <110. Labetalol first-line. Alternative: hydralazine 5-10mg IV."},{"id":"hydralazine-eclampsia","name":"Hydralazine 5-10mg IV","group":"Blood Pressure","critical":false,"correct":true,"phase":1,"teaching":"Alternative to labetalol for acute hypertension in pregnancy. Slightly less predictable response."},{"id":"delivery-eclampsia","name":"EMERGENT DELIVERY (OB consult for C-section)","group":"Definitive","critical":true,"correct":true,"phase":1,"teaching":"Delivery is the CURE for eclampsia. Stabilize mother (mag + BP control), then deliver. C-section if not rapidly progressing to vaginal delivery."},{"id":"fetal-monitoring","name":"Continuous fetal monitoring","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Eclamptic seizures cause fetal bradycardia (uteroplacental insufficiency). Monitor fetus continuously. Fetal distress may mandate emergent delivery."},{"id":"mag-monitoring","name":"Monitor for Mg toxicity (reflexes, RR, UOP)","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"Mg toxicity: loss of DTRs (first sign), respiratory depression, cardiac arrest. Check reflexes hourly. Keep calcium gluconate at bedside for reversal."},{"id":"labs-eclampsia","name":"CBC, LFTs, LDH, UA, uric acid (HELLP screen)","group":"Workup","critical":false,"correct":true,"phase":1,"teaching":"Rule out HELLP syndrome: Hemolysis + Elevated Liver enzymes + Low Platelets. Complicates 10-20% of severe preeclampsia/eclampsia."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"192/118","HR":"108","RR":"20","Temp":"98.8°F","SpO2":"94%"},"ecg":"Sinus tachycardia","labHighlights":{"Platelets":"118K (trending down)","AST":"142 U/L","LDH":"420 U/L","Urine protein":">300 mg"},"examNote":"34-week pregnant, post-ictal after witnessed generalized seizure. Severe hypertension. 3+ edema. Hyperreflexia with clonus. Fetal heart tones present.","aiPatientUpdate":null},{"id":"stabilized","label":"Mag + BP Control + OB","requires":["mag-eclampsia","labetalol-eclampsia","delivery-eclampsia"],"vitals":{"BP":"152/94","HR":"92","RR":"16","Temp":"98.6°F","SpO2":"97%"},"ecg":"NSR","labHighlights":{"Platelets":"108K","AST":"158 U/L","Mg level":"5.2 mg/dL (therapeutic 4-7)"},"examNote":"No further seizures on magnesium. BP responding to labetalol. OB team preparing for emergent C-section. Fetal heart tones reactive.","aiPatientUpdate":"Is my baby okay? Please tell me the baby is okay. I don't remember the seizure — just woke up here.","teaching":"✅ Magnesium + BP control + delivery is the triad. This patient has evolving HELLP (low platelets, elevated LFTs). Emergent C-section planned. Continue mag 24h postpartum. Monitor for postpartum eclampsia (can occur up to 6 weeks)."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -1961,7 +2015,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Malignant Hyperthermia",probability:2,reasoning:"Similar presentation but triggered by anesthesia agents, not antipsychotics"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"stop-antipsych","name":"STOP all antipsychotics/dopamine antagonists","group":"Medication Changes","critical":true,"correct":true,"phase":1,"teaching":"Remove the offending agent immediately. NMS is caused by dopamine D2 receptor blockade. This is the most important intervention."},{"id":"dantrolene-nms","name":"Dantrolene 1-2.5mg/kg IV","group":"Specific Treatment","critical":true,"correct":true,"phase":1,"teaching":"Direct-acting muscle relaxant — reduces rigidity, hyperthermia, and rhabdomyolysis. Blocks calcium release from sarcoplasmic reticulum."},{"id":"bromocriptine-nms","name":"Bromocriptine 2.5mg PO/NG q8h","group":"Specific Treatment","critical":false,"correct":true,"phase":1,"teaching":"Dopamine agonist — directly counteracts the dopamine blockade causing NMS. Can use with dantrolene. Continue until symptoms resolve, then taper slowly."},{"id":"aggressive-cooling","name":"Active cooling (ice packs, cooling blanket)","group":"Temperature","critical":true,"correct":true,"phase":1,"teaching":"Hyperthermia in NMS is from muscle rigidity (not infection). Core temp >40°C causes organ damage. Active cooling is essential."},{"id":"ivf-nms","name":"Aggressive IV fluids (NS 200-300mL/hr)","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Prevent rhabdomyolysis-induced renal failure. Target UOP 200-300mL/hr. Monitor CK — can exceed 100,000 in severe NMS."},{"id":"bicarb-nms","name":"Sodium Bicarbonate drip (if CK >5000)","group":"Renal Protection","critical":false,"correct":true,"phase":2,"teaching":"Alkalinize urine to prevent myoglobin precipitation in renal tubules. Target urine pH >6.5."},{"id":"monitor-nms","name":"ICU admission, continuous monitoring","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"NMS mortality is 10-20%. ICU for hemodynamic monitoring, serial CK, renal function, electrolytes. May need intubation if rigidity compromises ventilation."},{"id":"antipyretic-nms","name":"Acetaminophen for fever","group":"Temperature","critical":false,"correct":false,"teaching":"⚠️ Antipyretics are INEFFECTIVE in NMS — the fever is from muscle activity, not hypothalamic reset. Cooling + dantrolene address the mechanism."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"168/102","HR":"128","RR":"24","Temp":"105.8°F","SpO2":"92%"},"ecg":"Sinus tachycardia","labHighlights":{"CK":"42,000 U/L","WBC":"16,800/μL","Creatinine":"2.4 mg/dL"},"examNote":"Severe \"lead pipe\" rigidity. Altered mental status (GCS 10). Diaphoretic. Hyperthermia 105.8°F. Started haloperidol 5 days ago.","aiPatientUpdate":null},{"id":"treated","label":"Antipsychotic Stopped + Dantrolene","requires":["stop-antipsych","dantrolene-nms","aggressive-cooling"],"vitals":{"BP":"142/88","HR":"104","RR":"18","Temp":"101.2°F","SpO2":"96%"},"ecg":"Sinus tach improving","labHighlights":{"CK":"38,000 U/L (stabilizing)","Creatinine":"2.8 mg/dL (still rising — renal injury from rhabdo)"},"examNote":"Rigidity markedly improved with dantrolene. Temperature coming down. More alert — following commands intermittently. UOP improving with aggressive fluids.","aiPatientUpdate":"Where am I? Everything hurts... my muscles are so sore. I feel like I ran a marathon.","teaching":"✅ Dantrolene reduces rigidity → reduces heat generation → temperature drops. Continue dantrolene + bromocriptine until symptoms fully resolve. Aggressive fluids for renal protection. When psychiatrically stable, can restart antipsychotic from different class at lowest dose (avoid rechallenge with same agent)."}],"pitfallEvents":[]}},
     {
       id:"serotonin-syndrome", diagnosis:"Serotonin Syndrome", acuity:2,
       patient:{ communicationStyle:"Agitated and restless, answering questions but jittery and diaphoretic. Can't sit still. Appears anxious and confused.", emotionalState:"Anxious, restless, says 'something is really wrong with me'" },
@@ -2015,7 +2070,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Anticholinergic Toxicity",probability:2,reasoning:"Agitation + mydriasis + tachycardia but patient is WET (diaphoretic) and has clonus — anticholinergic patients are DRY"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"stop-serotonergic","name":"STOP all serotonergic medications","group":"Medication Changes","critical":true,"correct":true,"phase":1,"teaching":"Remove ALL serotonergic drugs: SSRIs, SNRIs, MAOIs, tramadol, linezolid, triptans, ondansetron, St. John's Wort. This is the most important step."},{"id":"cyproheptadine-ss","name":"Cyproheptadine 12mg PO/NG load, then 2mg q2h","group":"Specific Antidote","critical":true,"correct":true,"phase":1,"teaching":"Serotonin antagonist — only available PO/NG (no IV formulation). 12mg initial dose, then 2-4mg q2h. Continue until symptoms resolve."},{"id":"benzos-ss","name":"Lorazepam 1-2mg IV for agitation/myoclonus","group":"Symptom Management","critical":false,"correct":true,"phase":1,"teaching":"Benzodiazepines help with agitation, seizures, and myoclonus. Also reduce muscle activity which helps temperature."},{"id":"cooling-ss","name":"Active cooling (if temp >41°C)","group":"Temperature","critical":false,"correct":true,"phase":1,"teaching":"Hyperthermia from neuromuscular hyperactivity. Cooling + sedation + cyproheptadine. Avoid antipyretics (ineffective, same as NMS)."},{"id":"ivf-ss","name":"IV fluids 150-200mL/hr","group":"Supportive","critical":false,"correct":true,"phase":1,"teaching":"Hydration for rhabdomyolysis prevention. Monitor CK and renal function."},{"id":"dantrolene-ss","name":"Dantrolene IV","group":"Treatment","critical":false,"correct":false,"teaching":"⚠️ Dantrolene is for NMS, not serotonin syndrome. Key distinction: NMS has \"lead pipe\" rigidity; SS has clonus, hyperreflexia, and agitation. Different mechanism, different treatment."},{"id":"monitor-ss","name":"Telemetry + serial neuro exams","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"Monitor for progression: mild→moderate→severe. Severe SS requires ICU. Most cases resolve within 24-72h after removing offending agents."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"158/94","HR":"118","RR":"22","Temp":"102.8°F","SpO2":"96%"},"ecg":"Sinus tachycardia","labHighlights":{"CK":"2,400 U/L","WBC":"12,200/μL"},"examNote":"Agitated, diaphoretic. Bilateral CLONUS (>3 beats — key differentiator from NMS). Hyperreflexia. Mydriasis. Tremor. Diarrhea. On SSRI + tramadol (serotonergic combination).","aiPatientUpdate":null},{"id":"treated","label":"Serotonergics Stopped + Cyproheptadine","requires":["stop-serotonergic","cyproheptadine-ss"],"vitals":{"BP":"138/82","HR":"94","RR":"16","Temp":"100.4°F","SpO2":"98%"},"ecg":"Sinus tach improving","labHighlights":{"CK":"1,800 U/L (improving)"},"examNote":"Clonus resolving. Less agitated. Temperature normalizing. Pupils less dilated. Tremor diminishing.","aiPatientUpdate":"I feel calmer now. Less shaky. Everything was moving so fast before — I couldn't sit still and my legs kept jerking.","teaching":"✅ SS vs NMS pearls: SS = clonus + hyperreflexia + agitation (serotonergic drugs). NMS = rigidity + bradykinesia + AMS (antipsychotic drugs). SS resolves faster (24-72h). Discharge when asymptomatic. Avoid serotonergic combinations in future."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -2085,7 +2141,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Dehydration with UTI (without shock)",probability:2,reasoning:"Elderly with poor intake but lactate 5.8, hypotension despite fluids = true septic shock"}
         ]}
       }
-    },
+    ,
+      treatments:{"orders":[{"id":"ivf-sepsis","name":"Lactated Ringer 30mL/kg IV bolus (within 1h)","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"SSC/Hour-1 Bundle: 30mL/kg crystalloid for hypotension or lactate ≥4. LR preferred over NS (less hyperchloremic acidosis). Give within 1 hour."},{"id":"blood-cx-sepsis","name":"Blood cultures x2 BEFORE antibiotics","group":"Diagnostic","critical":true,"correct":true,"phase":1,"teaching":"Draw before abx if possible within 5 minutes. Do NOT delay antibiotics if cultures take longer. Positive cultures guide de-escalation."},{"id":"broad-abx-sepsis","name":"Piperacillin-Tazobactam 4.5g IV + Vancomycin","group":"Antibiotics","critical":true,"correct":true,"phase":1,"teaching":"Broad-spectrum within 1 hour of recognition. Each hour delay increases mortality 7.6%. Pip-tazo covers gram-negatives/anaerobes. Vanc for MRSA coverage."},{"id":"norepi-sepsis","name":"Norepinephrine drip (if MAP <65 after fluids)","group":"Vasopressors","critical":true,"correct":true,"phase":2,"teaching":"First-line vasopressor for septic shock. Start if MAP <65 despite 30mL/kg fluids. Titrate to MAP ≥65. Early vasopressors improve outcomes."},{"id":"lactate-serial","name":"Serial lactate q2-4h","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Lactate clearance guides resuscitation. Target >10% decrease per 2 hours. Persistent elevation despite treatment = poor prognostic sign."},{"id":"foley-sepsis","name":"Foley catheter — hourly UOP","group":"Monitoring","critical":false,"correct":true,"phase":1,"teaching":"Monitor end-organ perfusion. Target UOP ≥0.5mL/kg/hr. In urosepsis, also need to rule out obstructive uropathy (hydronephrosis)."},{"id":"ua-urine-cx","name":"Urinalysis + Urine culture","group":"Source","critical":false,"correct":true,"phase":1,"teaching":"Confirm urinary source. UA with pyuria and bacteriuria. Culture guides antibiotic narrowing."},{"id":"ct-abd-sepsis","name":"CT Abdomen/Pelvis (if concern for obstruction/abscess)","group":"Source","critical":false,"correct":true,"phase":2,"teaching":"Rule out obstructive uropathy (stone, stricture) or perinephric abscess. May need emergent urology for decompression (nephrostomy/stent)."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"78/44","HR":"124","RR":"24","Temp":"103.6°F","SpO2":"94%"},"ecg":"Sinus tachycardia","labHighlights":{"Lactate":"5.8 mmol/L","WBC":"24,600/μL","Creatinine":"2.8 mg/dL","Procalcitonin":"28.4 ng/mL"},"examNote":"Toxic, confused. CVA tenderness. Rigors. Hypotensive despite initial IVF. MAP 55.","aiPatientUpdate":null},{"id":"resuscitated","label":"Hour-1 Bundle Complete","requires":["ivf-sepsis","broad-abx-sepsis","blood-cx-sepsis","lactate-serial"],"vitals":{"BP":"92/58","HR":"108","RR":"20","Temp":"102.4°F","SpO2":"96%"},"ecg":"Sinus tach improving","labHighlights":{"Lactate":"3.8 mmol/L (decreasing)","MAP":"69 (≥65 target met)"},"examNote":"Received 2L LR. Antibiotics given within 30 min. MAP improving but may need vasopressors if deteriorates. More alert. UA: WBC too numerous to count, + nitrites, + LE.","aiPatientUpdate":"I feel a little warmer... less shivery. Still feel terrible but the fluids are helping.","teaching":"✅ Hour-1 sepsis bundle: fluids + cultures + antibiotics + lactate. Lactate clearing (5.8→3.8). If MAP drops below 65 again → start norepinephrine. CT to rule out obstruction. Admit ICU. De-escalate abx once cultures return."}],"pitfallEvents":[]}},
     {
       id:"neutropenic-fever", diagnosis:"Neutropenic Fever (Chemotherapy-Induced)", acuity:2,
       patient:{ communicationStyle:"Weak but alert. Cooperative, understands the urgency. Reports oncologist told them to come to ED if fever develops.", emotionalState:"Anxious but compliant — knows this is serious" },
@@ -2140,7 +2197,8 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Viral Reactivation",probability:5,reasoning:"Immunosuppression can reactivate HSV, VZV — but bacterial coverage is priority"}
         ]}
       }
-    }
+    ,
+      treatments:{"orders":[{"id":"cefepime-nf","name":"Cefepime 2g IV STAT","group":"Antibiotics","critical":true,"correct":true,"phase":1,"teaching":"Anti-pseudomonal cephalosporin — first-line monotherapy for neutropenic fever per IDSA guidelines. Give within 60 minutes. Pseudomonas coverage is essential."},{"id":"vanc-nf","name":"Vancomycin 15-20mg/kg IV (if MRSA risk)","group":"Antibiotics","critical":false,"correct":true,"phase":1,"teaching":"Add if: hemodynamic instability, skin/soft tissue infection, catheter-related infection, or pneumonia. Not routine — add only with specific indications."},{"id":"antifungal-nf","name":"Micafungin or Fluconazole (if persistent fever >4-7 days)","group":"Antifungal","critical":false,"correct":true,"phase":2,"teaching":"Empiric antifungal if still febrile after 4-7 days of antibiotics. Invasive candidiasis or aspergillosis must be considered."},{"id":"gcsf-nf","name":"G-CSF (Filgrastim) 5mcg/kg SQ daily","group":"Growth Factor","critical":false,"correct":true,"phase":2,"teaching":"Stimulates neutrophil production. Consider if ANC <100 and expected prolonged neutropenia. Discuss with oncology."},{"id":"blood-cx-nf","name":"Blood cultures x2 (peripheral + each lumen of central line)","group":"Diagnostic","critical":true,"correct":true,"phase":1,"teaching":"Culture ALL lumens of central venous catheter + peripheral. Differential time to positivity identifies line infections."},{"id":"cxr-nf","name":"Chest X-ray","group":"Diagnostic","critical":false,"correct":true,"phase":1,"teaching":"Neutropenic patients may NOT show infiltrate early (no WBCs to create infiltrate). CXR may be falsely negative. Low threshold for CT chest."},{"id":"ua-nf","name":"Urinalysis + Urine culture","group":"Diagnostic","critical":false,"correct":true,"phase":1,"teaching":"Screen for UTI source. Note: pyuria may be absent in neutropenic patients (no WBCs)."},{"id":"narrowspectrum-nf","name":"Amoxicillin-Clavulanate PO (oral antibiotics)","group":"Antibiotics","critical":false,"correct":false,"teaching":"⚠️ Neutropenic fever requires IV anti-pseudomonal antibiotics. Oral agents are inadequate — these patients have no immune defense. Need IV broad-spectrum coverage."}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"98/62","HR":"112","RR":"20","Temp":"102.8°F","SpO2":"97%"},"ecg":"Sinus tachycardia","labHighlights":{"ANC":"80/μL (severely neutropenic)","WBC":"200/μL","Lactate":"2.4 mmol/L"},"examNote":"Post-chemo (day 10). Febrile. Port-a-cath in place. Mucositis. No obvious source of infection (neutropenic patients have blunted inflammatory response).","aiPatientUpdate":null},{"id":"abx-started","label":"Cefepime Started + Cultures Drawn","requires":["cefepime-nf","blood-cx-nf"],"vitals":{"BP":"104/68","HR":"102","RR":"18","Temp":"101.8°F","SpO2":"98%"},"ecg":"Sinus tach improving","labHighlights":{"ANC":"80/μL (nadir — will take days to recover)","Lactate":"1.8 mmol/L"},"examNote":"Cefepime within 30 minutes. Cultures drawn. Hemodynamically stable. Mucositis improving with mouth care. Oncology aware.","aiPatientUpdate":"I knew this might happen — my oncologist warned me about fever after chemo. I'm glad I came in right away.","teaching":"✅ Neutropenic fever is a medical emergency — cefepime within 60 minutes. Time to antibiotics correlates with survival. Admit for IV antibiotics until ANC recovering and afebrile 48h. Monitor for septic shock. Do NOT narrow antibiotics empirically until ANC >500."}],"pitfallEvents":[]}}
   ]
 }
 ,{
@@ -3637,6 +3695,93 @@ const CASE_TEMPLATES = [{
           {diagnosis:"Rhabdomyolysis-Induced Hyperkalemia",probability:2,reasoning:"Could contribute but no trauma, no muscle pain, CK not dramatically elevated — missed dialysis is the clear etiology"},
           {diagnosis:"Adrenal Insufficiency (Hyperkalemia Component)",probability:2,reasoning:"Can cause hyperkalemia + hyponatremia but known ESRD with missed dialysis explains electrolyte derangements completely"}
         ]}
+      },
+      treatments:{
+        orders:[
+          {id:'calcium-gluconate',name:'Calcium Gluconate 10% — 10mL IV over 2-3 min',group:'Cardiac Stabilization',critical:true,correct:true,phase:1,
+           teaching:'FIRST-LINE: Stabilizes cardiac membrane within seconds. Does NOT lower potassium — must follow with shifting and removal agents.'},
+          {id:'calcium-chloride',name:'Calcium Chloride 10% — 10mL IV (central line)',group:'Cardiac Stabilization',critical:false,correct:true,phase:1,
+           teaching:'Alternative to gluconate — 3x more elemental calcium but requires central line (causes tissue necrosis if extravasates).'},
+          {id:'atropine',name:'Atropine 1mg IV push',group:'Cardiac Stabilization',critical:false,correct:false,
+           teaching:'Atropine is unlikely to help here — bradycardia is from direct potassium effect on myocardium, not vagal. Calcium is the correct membrane stabilizer.'},
+          {id:'transcutaneous-pacing',name:'Transcutaneous Pacing (standby)',group:'Cardiac Stabilization',critical:false,correct:true,phase:1,
+           teaching:'Appropriate to have on standby — if patient arrests or calcium fails, pacing may capture while you correct the potassium.'},
+          {id:'insulin-d50',name:'Regular Insulin 10u IV + D50 1 amp',group:'Potassium Shifting',critical:true,correct:true,phase:2,
+           teaching:'MUST give together — insulin drives K into cells (onset 15-30 min, lowers K ~0.5-1.2 mEq/L). D50 prevents fatal hypoglycemia. Check glucose q30min.'},
+          {id:'insulin-only',name:'Regular Insulin 10u IV (no dextrose)',group:'Potassium Shifting',critical:false,correct:false,
+           teaching:'⚠️ DANGEROUS: Insulin without dextrose causes hypoglycemia. This patient is already obtunded — hypoglycemia could be fatal. ALWAYS pair with D50.'},
+          {id:'albuterol-neb',name:'Albuterol Nebulizer 10-20mg (high dose)',group:'Potassium Shifting',critical:false,correct:true,phase:2,
+           teaching:'Adjunct — shifts K intracellularly via β2-adrenergic stimulation. ED dose is 10-20mg (4-8x standard asthma dose). Additive with insulin.'},
+          {id:'bicarb',name:'Sodium Bicarbonate 50 mEq IV',group:'Potassium Shifting',critical:false,correct:true,phase:2,
+           teaching:'Appropriate — this patient has metabolic acidosis (bicarb 14). Correcting acidosis shifts K intracellularly. Less effective alone but synergistic.'},
+          {id:'kayexalate',name:'Kayexalate (SPS) 30g PO/PR',group:'Potassium Removal',critical:false,correct:false,
+           teaching:'Slow onset (hours), unpredictable efficacy, risk of GI necrosis. Largely falling out of favor. In ESRD, dialysis is far superior for removal.'},
+          {id:'patiromer',name:'Patiromer 8.4g PO',group:'Potassium Removal',critical:false,correct:false,
+           teaching:'Newer K binder — better tolerated than kayexalate but still slow onset (hours to days). Not appropriate for acute life-threatening hyperkalemia. Use dialysis.'},
+          {id:'emergent-dialysis',name:'Emergent Hemodialysis (call nephrology)',group:'Potassium Removal',critical:true,correct:true,phase:3,
+           teaching:'DEFINITIVE TREATMENT in ESRD — only way to actually remove potassium from the body. Also addresses fluid overload and acidosis. AV fistula is functioning.'},
+          {id:'stop-acei',name:'Discontinue Lisinopril (ACE-I)',group:'Medication Changes',critical:true,correct:true,phase:1,
+           teaching:'ACE-inhibitors block aldosterone → reduce K excretion. Contributing to this crisis. Must discontinue in ESRD with hyperkalemia.'},
+          {id:'stop-spiro',name:'Discontinue Spironolactone',group:'Medication Changes',critical:true,correct:true,phase:1,
+           teaching:'Potassium-SPARING diuretic in a patient with NO renal K excretion. This should never have been prescribed in ESRD. Discontinue immediately.'},
+          {id:'ns-bolus',name:'Normal Saline 500mL IV bolus',group:'Fluid/Supportive',critical:false,correct:false,
+           teaching:'This patient is volume OVERLOADED (elevated JVP, bibasilar crackles, missed dialysis). IV fluids will worsen pulmonary edema. Fluid removal via dialysis is appropriate.'},
+          {id:'furosemide',name:'Furosemide 40mg IV',group:'Fluid/Supportive',critical:false,correct:false,
+           teaching:'Furosemide requires functioning kidneys to work — this patient is ANURIC on dialysis. Loop diuretics are ineffective in ESRD. Dialysis removes fluid.'},
+          {id:'cardiac-monitor',name:'Continuous Cardiac Monitoring',group:'Monitoring',critical:true,correct:true,phase:1,
+           teaching:'Essential — this patient is approaching sine wave. Need continuous monitoring for VFib, asystole, or response to treatment.'},
+          {id:'repeat-ecg',name:'Repeat 12-Lead ECG in 5 minutes',group:'Monitoring',critical:false,correct:true,phase:1,
+           teaching:'Verify calcium gluconate is working — QRS should narrow and T waves should become less peaked within 1-3 minutes.'},
+          {id:'repeat-bmp',name:'Repeat BMP in 1 hour',group:'Monitoring',critical:false,correct:true,phase:2,
+           teaching:'Monitor potassium after shifting agents — insulin effect lasts 4-6 hours. K will rebound without definitive removal (dialysis).'}
+        ],
+        phases:[
+          {
+            id:'initial', label:'Presentation', auto:true,
+            vitals:{BP:'168/98',HR:'48',RR:'20',Temp:'98.0°F',SpO2:'93%'},
+            ecg:'Approaching sine wave — peaked T waves, loss of P waves, widened QRS 0.16s, merging QRS-T',
+            labHighlights:{Potassium:'8.2 mEq/L',Bicarbonate:'14 mEq/L','Ionized Calcium':'0.98 mmol/L'},
+            examNote:'Bradycardic, weak, diffuse hyporeflexia. Bibasilar crackles. AV fistula patent.',
+            aiPatientUpdate:null
+          },
+          {
+            id:'stabilized', label:'Post-Calcium', requires:['calcium-gluconate'],
+            vitals:{BP:'158/90',HR:'56',RR:'18',Temp:'98.0°F',SpO2:'94%'},
+            ecg:'QRS narrowed to 0.10s. T waves still peaked but less prominent. P waves returning. No longer approaching sine wave.',
+            labHighlights:{Potassium:'8.2 mEq/L (unchanged — calcium stabilizes membrane, does NOT lower K)'},
+            examNote:'Heart rate improved to 56. Still weak but less obtunded. Rhythm more regular. Crackles persist.',
+            aiPatientUpdate:'Feeling a tiny bit better... heart doesn\'t feel as weird. Still really weak though. Can I get something to drink?',
+            teaching:'✅ Calcium gluconate worked — QRS narrowed, rhythm stabilizing. But K is STILL 8.2. You\'ve bought time. Now shift potassium intracellularly and arrange definitive removal.'
+          },
+          {
+            id:'shifting', label:'Post-Insulin/Shifting', requires:['insulin-d50'],
+            vitals:{BP:'148/84',HR:'68',RR:'16',Temp:'98.2°F',SpO2:'95%'},
+            ecg:'Normal sinus rhythm at 68 bpm. T waves normalizing (still mildly peaked). QRS 0.09s. Normal intervals.',
+            labHighlights:{Potassium:'6.4 mEq/L',Glucose:'142 mg/dL (monitor — D50 preventing hypoglycemia)',Bicarbonate:'16 mEq/L'},
+            examNote:'Alert, oriented, speaking normally. Strength improving (4/5 throughout). Heart rate 68, regular. Crackles still present bilaterally. Edema persistent.',
+            aiPatientUpdate:'Oh thank God, I\'m starting to feel more like myself. Still weak but way better. My legs are still puffy though. When can I get dialysis?',
+            teaching:'✅ Insulin+D50 shifted K from 8.2 → 6.4. ECG normalizing. But this is TEMPORARY — K will rebound in 4-6 hours. Dialysis is still needed for definitive removal AND fluid overload.'
+          },
+          {
+            id:'definitive', label:'Post-Dialysis', requires:['emergent-dialysis'],
+            vitals:{BP:'138/78',HR:'72',RR:'14',Temp:'98.4°F',SpO2:'97%'},
+            ecg:'Normal sinus rhythm at 72 bpm. Normal T waves. Normal QRS. No conduction abnormalities.',
+            labHighlights:{Potassium:'5.1 mEq/L',Bicarbonate:'22 mEq/L','Ionized Calcium':'1.14 mmol/L',Creatinine:'8.2 mg/dL (improved from 12.4)'},
+            examNote:'Alert, oriented, comfortable. Strength 5/5 throughout. Heart rate 72, regular rhythm. Lungs CLEAR — crackles resolved with ultrafiltration. Edema markedly improved. AV fistula functioning well.',
+            aiPatientUpdate:'I feel so much better. Like night and day. I\'m sorry I missed those sessions — the transport didn\'t show up. Can you help me figure out how to not let that happen again?',
+            teaching:'✅ Dialysis removed potassium, corrected acidosis, removed excess fluid. Patient is stabilized. Key disposition: admit to telemetry for monitoring, arrange reliable dialysis transport, discontinue ACE-I and spironolactone permanently, and address the social determinant (transportation barrier).'
+          }
+        ],
+        pitfallEvents:[
+          {trigger:'insulin-only', event:'hypoglycemia',
+           message:'⚠️ CRITICAL ERROR: 15 minutes after insulin administration, the patient becomes unresponsive. Fingerstick glucose: 28 mg/dL. Seizure imminent. You gave insulin WITHOUT dextrose.',
+           recovery:'Give D50 (50mL of 50% dextrose) STAT. Recheck glucose in 15 minutes. This is a preventable iatrogenic emergency.',
+           vitals:{BP:'158/92',HR:'118',RR:'24',Temp:'98.0°F',SpO2:'92%'}},
+          {trigger:'ns-bolus', event:'fluid-overload',
+           message:'⚠️ WARNING: After the saline bolus, the patient\'s SpO2 drops to 88%. Crackles are now diffuse bilaterally. You are worsening pulmonary edema in an anuric, volume-overloaded ESRD patient.',
+           recovery:'Stop fluids immediately. This patient needs fluid REMOVAL via dialysis, not fluid administration.',
+           vitals:{BP:'178/102',HR:'52',RR:'26',Temp:'98.0°F',SpO2:'88%'}}
+        ]
       }
     },
     {
@@ -3912,7 +4057,7 @@ function generatePatient() {
     variant: variant, template: template,
     chatHistory: [],
     tracked: { oldcarts: new Set(), hxCats: new Set() },
-    discovered: { labsOrdered:[], labsReady:[], imagingOrdered:[], imagingReady:[], examSystems:[], dispositioned:false }
+    discovered: { labsOrdered:[], labsReady:[], imagingOrdered:[], imagingReady:[], examSystems:[], dispositioned:false, txOrdered:[], currentPhase:0, txReassessed:false, pitfallEvents:[] }
   };
 }
 
@@ -3960,7 +4105,7 @@ function selectPatient(id) {
   if (p.status === 'waiting') { p.status = 'being-seen'; p.provider = 'You'; }
   openPanel(p); renderBoard();
 }
-function resetBoard() { patients=[]; selectedPatientId=null; availableBeds=[...ED_BEDS]; closePanel(); renderBoard(); }
+function resetBoard() { patients=[]; selectedPatientId=null; availableBeds=[...ED_BEDS]; closePanel(); clearSavedState(); renderBoard(); }
 
 // PANEL
 function openPanel(p) {
@@ -3986,9 +4131,13 @@ function renderTabs(p) {
     {id:'history',label:'Hx' + (chatCount > 0 ? ' ('+chatCount+')' : '')},
     {id:'exam',label:'Exam' + (d.examSystems.length > 0 ? ' ('+d.examSystems.length+')' : '')},
     {id:'labs',label:'Labs' + (d.labsReady.length > 0 ? ' ('+d.labsReady.length+')' : ''), badge: d.labsReady.length > 0 && d.labsReady.length === d.labsOrdered.length && d.labsOrdered.length > 0},
-    {id:'imaging',label:'Imaging' + (d.imagingReady.length > 0 ? ' ('+d.imagingReady.length+')' : ''), badge: d.imagingReady.length > 0},
-    {id:'teaching',label:'Teaching'}
+    {id:'imaging',label:'Imaging' + (d.imagingReady.length > 0 ? ' ('+d.imagingReady.length+')' : ''), badge: d.imagingReady.length > 0}
   ];
+  if (p.variant.treatments) {
+    var txCount = (d.txOrdered||[]).length;
+    tabs.push({id:'treatment',label:'Tx' + (txCount > 0 ? ' ('+txCount+')' : ''), badge: (d.currentPhase||0) > 0 && !d.txReassessed});
+  }
+  tabs.push({id:'teaching',label:'Teaching'});
   document.getElementById('emrTabs').innerHTML = tabs.map(function(t) {
     return '<button class="emr-tab ' + (currentTab===t.id?'active':'') + '" onclick="switchTab(\'' + t.id + '\')">' + t.label + (t.badge?'<span class="tab-badge">NEW</span>':'') + '</button>';
   }).join('');
@@ -4015,6 +4164,7 @@ function switchTab(tab) {
     case 'exam': el.innerHTML = '<div class="tab-body">'+renderExam(p)+'</div>'; break;
     case 'labs': el.innerHTML = '<div class="tab-body">'+renderLabs(p)+'</div>'; break;
     case 'imaging': el.innerHTML = '<div class="tab-body">'+renderImaging(p)+'</div>'; break;
+    case 'treatment': el.innerHTML = '<div class="tab-body">'+renderTreatment(p)+'</div>'; break;
     case 'teaching': el.innerHTML = '<div class="tab-body">'+renderTeaching(p)+'</div>'; break;
   }
 }
@@ -4106,6 +4256,7 @@ async function sendChat() {
   container.scrollTop = container.scrollHeight;
   isAiLoading = false;
   document.getElementById('chatSendBtn').disabled = false;
+  autoSave();
   renderTabs(p);
 }
 
@@ -4197,7 +4348,7 @@ function submitLabOrders() {
       }, 3000 + Math.random()*3000);
     }
   });
-  if (n > 0) { p.status='labs-pending'; renderBoard(); showToast(n+' lab order(s) submitted','success'); }
+  if (n > 0) { p.status='labs-pending'; renderBoard(); showToast(n+' lab order(s) submitted','success'); autoSave(); }
   switchTab('labs');
 }
 
@@ -4250,7 +4401,7 @@ function submitImagingOrders() {
       }, delay);
     }
   });
-  if (n > 0) showToast(n+' imaging order(s) submitted','success');
+  if (n > 0) { showToast(n+' imaging order(s) submitted','success'); autoSave(); }
   switchTab('imaging');
 }
 
@@ -4273,10 +4424,376 @@ function renderTeaching(p) {
   html += '<div class="teaching-card" style="background:#fef2f2;border-color:#fecaca"><h4 style="color:var(--danger)">Must-Not-Miss Diagnoses</h4>'+t.mustNotMiss.map(function(x){return '<div class="teaching-item must-not-miss-item">'+x+'</div>'}).join('')+'</div>';
   html += '<div class="teaching-card" style="background:#fffbeb;border-color:#fde68a"><h4 style="color:#92400e">Common Pitfalls</h4>'+t.commonPitfalls.map(function(x){return '<div class="teaching-item pitfall-item">'+x+'</div>'}).join('')+'</div>';
   html += '<div class="emr-section"><div class="emr-section-title">Correct Diagnosis</div><div style="font-size:16px;font-weight:700;color:var(--primary);padding:12px;background:var(--primary-light);border-radius:8px">'+p.variant.diagnosis+'</div></div>';
+
+  // Admit bridge banner
+  if (p.admitBridged) {
+    var dispoLabels = {tele:'Telemetry',icu:'ICU',floor:'Medical Floor',obs:'Observation'};
+    html += '<div class="admit-bridge-banner">' +
+      '<h4>🏥 Patient Admitted to '+(dispoLabels[p.dispoChoice]||'Inpatient')+'</h4>' +
+      '<p>'+p.name+' has been transferred to your inpatient census. Continue following this patient during your overnight call simulation.</p>' +
+      '<button onclick="window.open(\'night-float.html\',\'_blank\')">Open Night Float Simulator →</button></div>';
+  }
+
   return html;
 }
 
 // DISPOSITION
+// ═══════════════════════════════════════════════════
+// TREATMENT & REASSESSMENT SYSTEM
+// ═══════════════════════════════════════════════════
+function renderTreatment(p) {
+  var tx = p.variant.treatments;
+  if (!tx) return '<div class="emr-section"><div style="text-align:center;padding:24px;color:var(--text-muted)">Treatment module not available for this case yet.</div></div>';
+  var d = p.discovered;
+  var html = '';
+
+  // Phase timeline
+  html += '<div class="phase-timeline">';
+  tx.phases.forEach(function(phase, i) {
+    var state = i < d.currentPhase ? 'completed' : i === d.currentPhase ? 'active' : '';
+    html += '<div class="phase-step '+state+'"><div class="phase-dot"></div>'+phase.label+'</div>';
+  });
+  html += '</div>';
+
+  // Pitfall events
+  if (d.pitfallEvents.length > 0) {
+    d.pitfallEvents.forEach(function(evt) {
+      html += '<div class="reassess-card" style="border-color:var(--error);background:linear-gradient(135deg,#FEF2F2,#FEFEFE)">' +
+        '<h4 style="color:var(--error)">⚠️ Adverse Event</h4>' +
+        '<p style="font-size:13px;margin-bottom:8px">'+evt.message+'</p>' +
+        '<div class="tx-teaching"><strong>Recovery: </strong>'+evt.recovery+'</div></div>';
+    });
+  }
+
+  // Current phase reassessment card
+  if (d.currentPhase > 0) {
+    var phase = tx.phases[d.currentPhase];
+    html += '<div class="reassess-card"><h4>📋 Reassessment — '+phase.label+'</h4>';
+    // Updated vitals
+    html += '<div style="margin-bottom:8px"><strong style="font-size:11px;text-transform:uppercase;color:var(--text-muted)">Updated Vitals</strong></div>';
+    html += renderVitalsComparison(tx.phases[0].vitals, phase.vitals);
+    // ECG
+    html += '<div style="margin:10px 0"><strong style="font-size:11px;text-transform:uppercase;color:var(--text-muted)">ECG</strong><div style="font-size:12px;margin-top:4px;padding:8px;background:white;border-radius:6px;border:1px solid var(--border)">'+phase.ecg+'</div></div>';
+    // Labs
+    html += '<div style="margin:10px 0"><strong style="font-size:11px;text-transform:uppercase;color:var(--text-muted)">Key Labs</strong><div style="font-size:12px;margin-top:4px">';
+    Object.entries(phase.labHighlights).forEach(function(kv) {
+      html += '<div style="padding:4px 0;border-bottom:1px solid #f3f4f6"><span style="font-weight:600">'+kv[0]+':</span> '+kv[1]+'</div>';
+    });
+    html += '</div></div>';
+    // Exam
+    html += '<div style="margin:10px 0"><strong style="font-size:11px;text-transform:uppercase;color:var(--text-muted)">Exam Findings</strong><div style="font-size:12px;margin-top:4px">'+phase.examNote+'</div></div>';
+    // Patient quote
+    if (phase.aiPatientUpdate) {
+      html += '<div style="margin:10px 0;padding:10px;background:#F0F9FF;border-radius:8px;border-left:3px solid var(--primary);font-size:12px;font-style:italic">"'+phase.aiPatientUpdate+'"</div>';
+    }
+    // Teaching
+    if (phase.teaching) {
+      html += '<div class="tx-teaching">'+phase.teaching+'</div>';
+    }
+    html += '</div>';
+  }
+
+  // Orderable treatments
+  var groups = {};
+  tx.orders.forEach(function(o) { if (!groups[o.group]) groups[o.group] = []; groups[o.group].push(o); });
+  html += '<div class="order-section"><h4>💊 Order Treatments</h4>';
+  Object.keys(groups).forEach(function(group) {
+    html += '<div class="tx-group-label">'+group+'</div><div class="tx-grid">';
+    groups[group].forEach(function(o) {
+      var ordered = d.txOrdered.includes(o.id);
+      html += '<label class="tx-item '+(ordered?'ordered':'')+'">' +
+        '<input type="checkbox" name="tx" value="'+o.id+'" '+(ordered?'disabled checked':'')+'>' +
+        o.name + '</label>';
+    });
+    html += '</div>';
+  });
+  html += '<button class="btn btn-primary btn-sm submit-orders" onclick="submitTxOrders()" style="margin-top:12px">Submit Treatment Orders</button>';
+
+  // Reassess button
+  var nextPhase = getNextPhase(p);
+  if (nextPhase && d.txOrdered.length > 0) {
+    html += '<button class="btn btn-success btn-sm" onclick="reassessPatient()" style="margin-top:8px;margin-left:8px">🔄 Reassess Patient</button>';
+  }
+  html += '</div>';
+
+  // Treatment log
+  if (d.txOrdered.length > 0) {
+    html += '<div class="emr-section" style="margin-top:16px"><div class="emr-section-title">📝 Treatment Log</div><div style="font-size:12px">';
+    d.txOrdered.forEach(function(id) {
+      var order = tx.orders.find(function(o){return o.id===id});
+      if (order) {
+        var icon = order.correct ? '✅' : '❌';
+        html += '<div style="padding:6px 0;border-bottom:1px solid #f3f4f6">'+icon+' <strong>'+order.name+'</strong>' +
+          '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">'+order.teaching+'</div></div>';
+      }
+    });
+    html += '</div></div>';
+  }
+  return html;
+}
+
+function renderVitalsComparison(before, after) {
+  var keys = ['BP','HR','RR','Temp','SpO2'];
+  var html = '<div class="vitals-grid">';
+  keys.forEach(function(k) {
+    var bVal = parseInt(before[k]) || 0;
+    var aVal = parseInt(after[k]) || 0;
+    var delta = '';
+    if (k === 'HR' || k === 'RR') delta = aVal < bVal ? 'improved' : aVal > bVal ? 'worsened' : 'unchanged';
+    else if (k === 'SpO2') delta = aVal > bVal ? 'improved' : aVal < bVal ? 'worsened' : 'unchanged';
+    else if (k === 'BP') {
+      var bSys = parseInt(before.BP); var aSys = parseInt(after.BP);
+      delta = Math.abs(aSys - 120) < Math.abs(bSys - 120) ? 'improved' : 'unchanged';
+    } else delta = 'unchanged';
+    var abn = (k==='HR' && (aVal>100||aVal<60)) || (k==='SpO2' && aVal<95) || (k==='RR' && aVal>20) || (k==='Temp' && parseFloat(after[k])>100.4);
+    html += '<div class="vital-card"><div class="vital-label">'+k+'</div><div class="vital-value '+(abn?'abnormal':'')+'">'+after[k]+'</div>' +
+      '<span class="reassess-delta '+delta+'">'+(delta==='improved'?'↑':'↓')+' '+delta+'</span></div>';
+  });
+  return html + '</div>';
+}
+
+function getNextPhase(p) {
+  var tx = p.variant.treatments;
+  if (!tx) return null;
+  var d = p.discovered;
+  for (var i = d.currentPhase + 1; i < tx.phases.length; i++) {
+    var phase = tx.phases[i];
+    if (!phase.requires) continue;
+    var met = phase.requires.every(function(req) { return d.txOrdered.includes(req); });
+    if (met) return { index: i, phase: phase };
+  }
+  return null;
+}
+
+function submitTxOrders() {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p || !p.variant.treatments) return;
+  var tx = p.variant.treatments;
+  var d = p.discovered;
+  var n = 0;
+  document.querySelectorAll('input[name="tx"]:checked').forEach(function(cb) {
+    if (!d.txOrdered.includes(cb.value)) {
+      d.txOrdered.push(cb.value);
+      n++;
+      // Check for pitfall events
+      if (tx.pitfallEvents) {
+        tx.pitfallEvents.forEach(function(pe) {
+          if (pe.trigger === cb.value && !d.pitfallEvents.some(function(e){return e.event===pe.event})) {
+            d.pitfallEvents.push(pe);
+          }
+        });
+      }
+    }
+  });
+  if (n > 0) {
+    showToast(n + ' treatment order(s) submitted', 'success');
+    saveState();
+    switchTab('treatment');
+  }
+}
+
+function reassessPatient() {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p || !p.variant.treatments) return;
+  var next = getNextPhase(p);
+  if (next) {
+    p.discovered.currentPhase = next.index;
+    p.discovered.txReassessed = true;
+    // Update the AI patient's communication based on phase
+    if (next.phase.aiPatientUpdate) {
+      p.chatHistory.push({ role:'patient', text: next.phase.aiPatientUpdate });
+    }
+    showToast('Reassessment complete — '+next.phase.label, 'success');
+    saveState();
+    renderTabs(p);
+    switchTab('treatment');
+  } else {
+    showToast('No new reassessment available — check if all required treatments are ordered', 'warning');
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// LOCAL STORAGE PERSISTENCE
+// ═══════════════════════════════════════════════════
+function saveState() {
+  try {
+    var state = {
+      patients: patients.map(function(p) {
+        return {
+          id:p.id, name:p.name, age:p.age, gender:p.gender, bed:p.bed, mrn:p.mrn,
+          presentation:p.presentation, boardCC:p.boardCC, acuity:p.acuity,
+          status:p.status, provider:p.provider, arrivalTime:p.arrivalTime,
+          variantId:p.variant.id, templateId:p.template.id,
+          chatHistory:p.chatHistory,
+          tracked:{ oldcarts:Array.from(p.tracked.oldcarts), hxCats:Array.from(p.tracked.hxCats) },
+          discovered:{
+            labsOrdered:p.discovered.labsOrdered, labsReady:p.discovered.labsReady,
+            imagingOrdered:p.discovered.imagingOrdered, imagingReady:p.discovered.imagingReady,
+            examSystems:p.discovered.examSystems, dispositioned:p.discovered.dispositioned,
+            txOrdered:p.discovered.txOrdered||[], currentPhase:p.discovered.currentPhase||0,
+            txReassessed:p.discovered.txReassessed||false, pitfallEvents:p.discovered.pitfallEvents||[]
+          }
+        };
+      }),
+      availableBeds: availableBeds,
+      shiftStartTime: shiftStartTime,
+      savedAt: new Date().toISOString()
+    };
+    localStorage.setItem('rdx-ed-board-state', JSON.stringify(state));
+    updateSaveIndicator();
+  } catch(e) { console.warn('Save failed:', e); }
+}
+
+function loadState() {
+  try {
+    var raw = localStorage.getItem('rdx-ed-board-state');
+    if (!raw) return false;
+    var state = JSON.parse(raw);
+    if (!state.patients || state.patients.length === 0) return false;
+
+    availableBeds = state.availableBeds || [...ED_BEDS];
+    shiftStartTime = state.shiftStartTime || Date.now();
+    patients = [];
+
+    state.patients.forEach(function(saved) {
+      var template = CASE_TEMPLATES.find(function(t){return t.id===saved.templateId});
+      if (!template) return;
+      var variant = template.variants.find(function(v){return v.id===saved.variantId});
+      if (!variant) return;
+
+      patients.push({
+        id:saved.id, name:saved.name, age:saved.age, gender:saved.gender,
+        bed:saved.bed, mrn:saved.mrn,
+        presentation:saved.presentation, boardCC:saved.boardCC, acuity:saved.acuity,
+        status:saved.status, provider:saved.provider, arrivalTime:saved.arrivalTime,
+        variant:variant, template:template,
+        chatHistory:saved.chatHistory||[],
+        tracked:{ oldcarts:new Set(saved.tracked.oldcarts||[]), hxCats:new Set(saved.tracked.hxCats||[]) },
+        discovered:{
+          labsOrdered:saved.discovered.labsOrdered||[], labsReady:saved.discovered.labsReady||[],
+          imagingOrdered:saved.discovered.imagingOrdered||[], imagingReady:saved.discovered.imagingReady||[],
+          examSystems:saved.discovered.examSystems||[], dispositioned:saved.discovered.dispositioned||false,
+          txOrdered:saved.discovered.txOrdered||[], currentPhase:saved.discovered.currentPhase||0,
+          txReassessed:saved.discovered.txReassessed||false, pitfallEvents:saved.discovered.pitfallEvents||[]
+        }
+      });
+    });
+
+    renderBoard();
+    showToast('Session restored — '+patients.length+' patient(s) on board', 'success');
+    updateSaveIndicator();
+    return true;
+  } catch(e) { console.warn('Load failed:', e); return false; }
+}
+
+function clearSavedState() {
+  localStorage.removeItem('rdx-ed-board-state');
+  showToast('Saved session cleared', 'warning');
+  updateSaveIndicator();
+}
+
+function updateSaveIndicator() {
+  var el = document.getElementById('saveIndicator');
+  if (!el) return;
+  var raw = localStorage.getItem('rdx-ed-board-state');
+  if (raw) {
+    var state = JSON.parse(raw);
+    var d = new Date(state.savedAt);
+    el.textContent = '💾 Saved ' + d.toLocaleTimeString();
+  } else {
+    el.textContent = '';
+  }
+}
+
+// Auto-save on key actions
+function autoSave() { if (patients.length > 0) saveState(); }
+
+// ═══════════════════════════════════════════════════
+// ADMIT → NIGHT FLOAT BRIDGE
+// ═══════════════════════════════════════════════════
+function bridgeToNightFloat(p) {
+  try {
+    var tx = p.variant.treatments;
+    var phase = tx ? tx.phases[p.discovered.currentPhase] : null;
+    var cf = p.variant.clinicalFacts || {};
+    var admitData = {
+      id: 'ed-' + p.id,
+      name: p.name,
+      age: p.age,
+      sex: p.gender,
+      dx: p.variant.diagnosis,
+      boardCC: p.boardCC,
+      acuity: p.acuity,
+      bed: p.bed,
+      mrn: p.mrn,
+      // Full clinical history for downstream continuity
+      clinicalHistory: {
+        chiefComplaint: cf.chiefComplaint ? (cf.chiefComplaint.location || '') + ' — ' + (cf.chiefComplaint.onset || '') : p.boardCC,
+        pmh: cf.pmh || [],
+        medications: cf.medications || [],
+        allergies: cf.allergies || [],
+        socialHistory: cf.socialHistory || {},
+        familyHistory: cf.familyHistory || [],
+        riskFactors: cf.riskFactors || []
+      },
+      physicalExam: {
+        vitals: p.variant.physicalExam ? p.variant.physicalExam.vitalSigns : {},
+        general: p.variant.physicalExam ? p.variant.physicalExam.general : ''
+      },
+      edCourse: {
+        hxSummary: p.chatHistory.filter(function(m){return m.role==='patient'}).slice(-5).map(function(m){return m.text}).join(' '),
+        labsOrdered: p.discovered.labsOrdered,
+        imagingOrdered: p.discovered.imagingOrdered,
+        // Resolve ordered labs to actual results
+        labResults: (function() {
+          var results = [];
+          var allLabs = (p.variant.diagnostics && p.variant.diagnostics.labs) || [];
+          (p.discovered.labsReady || p.discovered.labsOrdered || []).forEach(function(matchId) {
+            allLabs.forEach(function(lab) {
+              if (lab.matchIds && lab.matchIds.indexOf(matchId) !== -1) {
+                results.push({ test: lab.test, value: lab.value, unit: lab.unit || '', reference: lab.reference || '', status: lab.status || 'normal', interpretation: lab.interpretation || '' });
+              }
+            });
+          });
+          return results;
+        })(),
+        // Resolve ordered imaging to actual results
+        imagingResults: (function() {
+          var results = [];
+          var allImg = (p.variant.diagnostics && p.variant.diagnostics.imaging) || [];
+          (p.discovered.imagingReady || p.discovered.imagingOrdered || []).forEach(function(matchId) {
+            allImg.forEach(function(img) {
+              if (img.matchIds && img.matchIds.indexOf(matchId) !== -1) {
+                results.push({ study: img.study, findings: img.findings || '', impression: img.impression || '', critical: img.critical || false });
+              }
+            });
+          });
+          return results;
+        })(),
+        // ECG findings
+        ecg: (p.variant.diagnostics && p.variant.diagnostics.ecg) ? {
+          findings: Array.isArray(p.variant.diagnostics.ecg.findings) ? p.variant.diagnostics.ecg.findings.join('; ') : (p.variant.diagnostics.ecg.findings || ''),
+          interpretation: p.variant.diagnostics.ecg.interpretation || ''
+        } : null,
+        txOrdered: p.discovered.txOrdered || [],
+        currentPhase: p.discovered.currentPhase || 0,
+        currentVitals: phase ? phase.vitals : p.variant.physicalExam.vitalSigns,
+        currentExam: phase ? phase.examNote : p.variant.physicalExam.general,
+        disposition: p.dispoChoice || 'admitted'
+      },
+      admittedAt: new Date().toISOString(),
+      source: 'ed-board-v2'
+    };
+
+    // Store in shared localStorage for night-float to pick up
+    var existing = JSON.parse(localStorage.getItem('rdx-admitted-patients') || '[]');
+    existing = existing.filter(function(a) { return a.id !== admitData.id; }); // dedup
+    existing.push(admitData);
+    localStorage.setItem('rdx-admitted-patients', JSON.stringify(existing));
+    return true;
+  } catch(e) { console.warn('Bridge failed:', e); return false; }
+}
+
 function openDisposition(type) {
   dispoSelection = null;
   document.getElementById('dispoTitle').textContent = type==='discharge'?'Discharge Patient':type==='admit'?'Admit Patient':'Transfer Patient';
@@ -4308,10 +4825,26 @@ function confirmDisposition() {
   var p = patients.find(function(x){return x.id===selectedPatientId});
   if (!p) return;
   p.discovered.dispositioned = true;
+  p.dispoChoice = dispoSelection;
   p.status = ['tele','icu','floor','obs'].includes(dispoSelection) ? 'admitted' : 'discharged';
   p.provider = p.status==='admitted' ? 'Admitted' : 'D/C';
-  closeDispoModal(); renderBoard(); switchTab('teaching');
-  showToast(p.name+' — disposition confirmed. Teaching unlocked!', 'success');
+
+  // Bridge to Night Float if admitted
+  if (p.status === 'admitted') {
+    var bridged = bridgeToNightFloat(p);
+    if (bridged) {
+      p.admitBridged = true;
+    }
+  }
+
+  closeDispoModal(); saveState(); renderBoard(); switchTab('teaching');
+
+  if (p.admitBridged) {
+    var dispoLabels = {tele:'Telemetry',icu:'ICU',floor:'Medical Floor',obs:'Observation'};
+    showToast(p.name+' admitted to '+(dispoLabels[dispoSelection]||dispoSelection)+' — available in Night Float!', 'success');
+  } else {
+    showToast(p.name+' — disposition confirmed. Teaching unlocked!', 'success');
+  }
 }
 function closeDispoModal() { document.getElementById('dispoModal').classList.remove('open'); }
 
@@ -4339,6 +4872,25 @@ renderBoard();
 setInterval(updateClock, 5000);
 setInterval(renderBoard, 30000);
 updateClock();
+
+// Check for saved session on load
+(function() {
+  var saved = localStorage.getItem('rdx-ed-board-state');
+  if (saved) {
+    try {
+      var state = JSON.parse(saved);
+      if (state.patients && state.patients.length > 0) {
+        document.getElementById('resumeBtn').style.display = '';
+        // Auto-resume if session is less than 4 hours old
+        var age = Date.now() - new Date(state.savedAt).getTime();
+        if (age < 4 * 60 * 60 * 1000) {
+          loadState();
+          document.getElementById('resumeBtn').style.display = 'none';
+        }
+      }
+    } catch(e) {}
+  }
+})();
 </script>
 </body>
 </html>

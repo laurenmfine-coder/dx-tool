@@ -316,6 +316,7 @@ body { font-family:var(--font); background:var(--bg); color:var(--text); min-hei
                 6 clinical events • Admission orders • Nurse pages • End-of-shift handoff
             </p>
             <button class="start-btn" onclick="startShift()">Start Your Shift</button>
+            <div id="edAdmitPreview" style="display:none;margin-top:16px;padding:12px;background:rgba(40,116,166,0.15);border:1px solid rgba(40,116,166,0.3);border-radius:8px;font-size:12px;text-align:left;"></div>
         </div>
     </div>
 
@@ -449,7 +450,16 @@ let pendingOrdersFor = null;
 function startShift() {
     STATE.started = true;
     document.getElementById('introPanel').style.display = 'none';
-    addLog('Shift started. You received sign-out from the day team — no active issues on the floor.');
+
+    // ── Load ED Board admissions from localStorage bridge ──
+    loadEDAdmissions();
+
+    if (STATE.patients.length > 0) {
+        addLog('Shift started. You received sign-out — ' + STATE.patients.length + ' patient(s) admitted from the ED are on your census.');
+        addTask('Review admission orders for ED patients', 'urgent');
+    } else {
+        addLog('Shift started. You received sign-out from the day team — no active issues on the floor.');
+    }
     addTask('Accept new admissions as they come', 'pending');
 
     // Start game clock (1 real second ≈ 2 game minutes)
@@ -464,6 +474,49 @@ function startShift() {
         }
     }, 1000);
     updateClock();
+}
+
+function loadEDAdmissions() {
+    try {
+        const raw = localStorage.getItem('rdx-admitted-patients');
+        if (!raw) return;
+        const admissions = JSON.parse(raw);
+        if (!Array.isArray(admissions) || admissions.length === 0) return;
+
+        admissions.forEach(function(a) {
+            // Skip if already in census (avoid duplicates on re-start)
+            if (STATE.patients.some(function(p) { return p.id === a.id; })) return;
+
+            const acuityMap = { 1:'critical', 2:'critical', 3:'urgent', 4:'routine', 5:'routine' };
+            const dispoMap = { icu:'ICU', tele:'Telemetry', floor:'Medical Floor', obs:'Observation' };
+            const disposition = a.edCourse ? a.edCourse.disposition : 'admitted';
+
+            const pt = {
+                id: a.id,
+                name: a.name,
+                age: a.age,
+                sex: a.sex || 'U',
+                dx: a.dx || 'ED Admission',
+                acuity: acuityMap[a.acuity] || 'urgent',
+                admitted: true,
+                ordersWritten: false,
+                fromED: true,
+                edCourse: a.edCourse || null,
+                clinicalHistory: a.clinicalHistory || null,
+                physicalExam: a.physicalExam || null,
+                location: dispoMap[disposition] || 'Medical Floor',
+                mrn: a.mrn || null,
+                bed: a.bed || null
+            };
+            STATE.patients.push(pt);
+        });
+
+        if (STATE.patients.length > 0) {
+            renderCensus();
+        }
+    } catch(e) {
+        console.warn('Failed to load ED admissions:', e);
+    }
 }
 
 function updateClock() {
@@ -785,17 +838,50 @@ function submitHandoff() {
     // Score handoff completeness
     let filledFields = 0;
     let totalFields = STATE.patients.length * 4;
+    const handoffData = {};
     for (const pt of STATE.patients) {
+        handoffData[pt.id] = {};
         ['i','p','a','s'].forEach(f => {
             const val = document.getElementById(`ho-${f}-${pt.id}`)?.value.trim();
+            handoffData[pt.id][f] = val || '';
             if (val && val.length > 10) filledFields++;
         });
     }
     const handoffScore = Math.round((filledFields / totalFields) * 100);
     STATE.scores.communication = handoffScore;
 
+    // Save overnight context for SimRoomDx morning rounds
+    saveMorningRoundsContext(handoffData);
+
     // Calculate final scores
     const avgClinical = STATE.scores.count > 0 ? Math.round((STATE.scores.clinical + STATE.scores.orders) / STATE.scores.count) : 0;
+
+    // ED Board variant → SimRoomDx case mapping
+    const simRoomMap = {
+        'stemi-v1':'stemi-anterior', 'dka-v1':'dka', 'stroke-v1':'acute-stroke',
+        'septic-shock-urosepsis':'sepsis-uti', 'eclampsia':'eclampsia'
+    };
+
+    // Build morning rounds links for matching patients
+    let roundsHtml = '';
+    const matchedPatients = STATE.patients.filter(pt => {
+        if (!pt.fromED || !pt.edCourse) return false;
+        // Extract variant ID from ed course or id
+        const edId = pt.id.replace('ed-','');
+        return simRoomMap[edId];
+    });
+
+    if (matchedPatients.length > 0) {
+        roundsHtml = '<div style="background:linear-gradient(135deg,#1E3A5F,#2874A6);border-radius:10px;padding:16px;margin-top:16px;color:white;">' +
+            '<h4 style="margin-bottom:8px;">🏥 Continue to Morning Rounds</h4>' +
+            '<p style="font-size:12px;opacity:.85;margin-bottom:12px;">Your handoff is complete. The day team is rounding now — join them in the SimRoom to present your patients with the attending, nurse, family, and consultants.</p>';
+        matchedPatients.forEach(pt => {
+            const edId = pt.id.replace('ed-','');
+            const simCase = simRoomMap[edId];
+            roundsHtml += '<a href="simroomdx.html?case='+simCase+'&rounds=true" target="_blank" style="display:inline-block;background:white;color:#2874A6;padding:8px 16px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;margin:4px 4px 4px 0;">🩺 Round on '+pt.name+' →</a>';
+        });
+        roundsHtml += '</div>';
+    }
 
     const center = document.getElementById('centerPanel');
     center.innerHTML = `
@@ -820,6 +906,7 @@ function submitHandoff() {
                 <strong>Shift Summary:</strong> You managed ${STATE.patients.length} patients overnight, including ${STATE.patients.filter(p=>p.admitted).length} new admissions from the ED and ${EVENTS.filter(e=>e.type==='page').length} nurse pages. 
                 ${handoffScore >= 80 ? 'Your handoff was thorough — the day team has what they need.' : 'Your handoff had gaps — try to include specific action items and contingency plans for each patient.'}
             </div>
+            ${roundsHtml}
             <div style="text-align:center;margin-top:20px;">
                 <button class="start-btn" onclick="location.reload()">🔄 Try Again</button>
                 <a href="/training.html" class="start-btn" style="display:inline-block;text-decoration:none;background:var(--bg-card);color:var(--text);border:1px solid var(--border);margin-left:8px;">← Back to Training</a>
@@ -828,6 +915,33 @@ function submitHandoff() {
     `;
     completeTask('Complete I-PASS handoff for all patients');
     addLog(`📊 Final scores — Clinical: ${avgClinical}%, Handoff: ${handoffScore}%`);
+}
+
+function saveMorningRoundsContext(handoffData) {
+    try {
+        const roundsContext = {
+            patients: STATE.patients.map(pt => ({
+                id: pt.id,
+                name: pt.name,
+                age: pt.age,
+                sex: pt.sex,
+                dx: pt.dx,
+                location: pt.location || 'Medical Floor',
+                fromED: pt.fromED || false,
+                edCourse: pt.edCourse || null,
+                clinicalHistory: pt.clinicalHistory || null,
+                physicalExam: pt.physicalExam || null,
+                ordersWritten: pt.ordersWritten,
+                handoff: handoffData[pt.id] || null
+            })),
+            overnightLog: STATE.log.slice(0, 20),
+            scores: STATE.scores,
+            savedAt: new Date().toISOString()
+        };
+        localStorage.setItem('rdx-morning-rounds', JSON.stringify(roundsContext));
+    } catch(e) {
+        console.warn('Failed to save morning rounds context:', e);
+    }
 }
 
 // ════════════════════════════════════════════════════════════
@@ -841,8 +955,8 @@ function renderCensus() {
     }
     list.innerHTML = STATE.patients.map(pt => `
         <div class="pt-card ${pt.acuity}">
-            <div class="pt-name">${pt.name}</div>
-            <div class="pt-summary">${pt.age}${pt.sex} — ${pt.dx}</div>
+            <div class="pt-name">${pt.name}${pt.fromED ? ' <span style="font-size:9px;background:#2874A6;color:white;padding:1px 6px;border-radius:8px;font-weight:600;vertical-align:middle;margin-left:4px">ED ADMIT</span>' : ''}</div>
+            <div class="pt-summary">${pt.age}${pt.sex} — ${pt.dx}${pt.location ? ' → ' + pt.location : ''}</div>
             <span class="pt-badge ${pt.ordersWritten ? 'badge-orders' : 'badge-admit'}">${pt.ordersWritten ? '✓ Orders placed' : '⏳ Needs orders'}</span>
         </div>
     `).join('');
@@ -899,6 +1013,29 @@ function resumeClock() {
         }
     }, 1000);
 }
+
+// Check for ED admissions before shift starts
+(function() {
+    try {
+        var raw = localStorage.getItem('rdx-admitted-patients');
+        if (!raw) return;
+        var admissions = JSON.parse(raw);
+        if (!Array.isArray(admissions) || admissions.length === 0) return;
+        var preview = document.getElementById('edAdmitPreview');
+        if (!preview) return;
+        preview.style.display = 'block';
+        preview.innerHTML = '<div style="font-weight:700;color:#2874A6;margin-bottom:6px;">🏥 ' + admissions.length + ' ED Admission' + (admissions.length > 1 ? 's' : '') + ' Waiting</div>' +
+            admissions.map(function(a) {
+                return '<div style="padding:4px 0;border-bottom:1px solid rgba(40,116,166,0.15)">' + a.name + ' — ' + (a.dx || 'Pending dx') + '</div>';
+            }).join('') +
+            '<div style="margin-top:8px;color:#2874A6;font-weight:600">These patients will appear in your census when you start your shift.</div>';
+        // Also update the census empty state
+        var censusList = document.getElementById('censusList');
+        if (censusList) {
+            censusList.innerHTML = '<div class="census-empty">' + admissions.length + ' patient' + (admissions.length > 1 ? 's' : '') + ' admitted from ED.<br>Start your shift to see them.</div>';
+        }
+    } catch(e) {}
+})();
 </script>
 
 <!-- Nav + Gate -->

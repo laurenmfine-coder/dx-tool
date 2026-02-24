@@ -1130,6 +1130,123 @@ const CASE_LIBRARY = [
 // ═══════════════════════════════════════════════
 let simFeatures = { plan: 'free', maxCharacters: 2, allowedCharacters: ['patient','attending'], multiplayer: false, voice: false, freeCases: ['stemi-anterior'], allCases: false };
 let selectedCaseId = 'stemi-anterior';
+let roundsMode = false;
+let overnightContext = null;
+let roundsPatientHistory = ''; // Injected into all AI prompts in rounds mode
+
+// Check for URL deep-link (?case=xxx) and rounds mode (?rounds=true)
+(function() {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var caseParam = params.get('case');
+    if (caseParam && CASE_LIBRARY.some(function(c) { return c.id === caseParam; })) {
+      selectedCaseId = caseParam;
+    }
+    if (params.get('rounds') === 'true') {
+      roundsMode = true;
+      var raw = localStorage.getItem('rdx-morning-rounds');
+      if (raw) {
+        overnightContext = JSON.parse(raw);
+        // Override case library patient with real patient data
+        if (overnightContext && overnightContext.patients && overnightContext.patients.length > 0) {
+          var realPt = overnightContext.patients[0];
+          var caseEntry = CASE_LIBRARY.find(function(c) { return c.id === selectedCaseId; });
+          if (caseEntry && realPt.name) {
+            // Override patient identity
+            caseEntry.patient.name = realPt.name;
+            caseEntry.patient.age = (realPt.age || '') + (realPt.sex || '');
+            caseEntry.patient.seed = realPt.name.replace(/\s/g, '');
+            caseEntry.patient.complaint = realPt.dx || caseEntry.patient.complaint;
+            caseEntry.brief = realPt.dx + ' — admitted overnight from ED to ' + (realPt.location || 'the ward');
+
+            // Build clinical history string for AI prompts
+            var hx = realPt.clinicalHistory;
+            if (hx) {
+              var lines = [];
+              lines.push('PATIENT: ' + realPt.name + ', ' + realPt.age + realPt.sex);
+              lines.push('DIAGNOSIS: ' + (realPt.dx || 'Unknown'));
+              lines.push('LOCATION: ' + (realPt.location || 'Medical Floor'));
+              if (hx.chiefComplaint) lines.push('CHIEF COMPLAINT: ' + hx.chiefComplaint);
+              if (hx.pmh && hx.pmh.length > 0) lines.push('PMH: ' + hx.pmh.join(', '));
+              if (hx.medications && hx.medications.length > 0) {
+                lines.push('MEDICATIONS: ' + hx.medications.map(function(m) {
+                  return typeof m === 'string' ? m : (m.name + (m.dose ? ' ' + m.dose : ''));
+                }).join(', '));
+              }
+              if (hx.allergies && hx.allergies.length > 0) {
+                lines.push('ALLERGIES: ' + hx.allergies.map(function(a) {
+                  return typeof a === 'string' ? a : (a.allergen + (a.reaction ? ' (' + a.reaction + ')' : ''));
+                }).join(', '));
+              }
+              if (hx.socialHistory) {
+                var sh = hx.socialHistory;
+                var shParts = [];
+                if (sh.smoking) shParts.push('Smoking: ' + sh.smoking);
+                if (sh.alcohol) shParts.push('Alcohol: ' + sh.alcohol);
+                if (sh.occupation) shParts.push('Occupation: ' + sh.occupation);
+                if (sh.livingSituation) shParts.push(sh.livingSituation);
+                if (shParts.length > 0) lines.push('SOCIAL: ' + shParts.join('. '));
+              }
+              if (hx.familyHistory && hx.familyHistory.length > 0) lines.push('FAMILY HX: ' + hx.familyHistory.join(', '));
+              roundsPatientHistory = lines.join('\n');
+            }
+
+            // Add ED course info
+            var ed = realPt.edCourse;
+            if (ed) {
+              var edLines = [];
+              if (ed.txOrdered && ed.txOrdered.length > 0) edLines.push('ED TREATMENTS GIVEN: ' + ed.txOrdered.join(', '));
+              if (ed.currentVitals) {
+                var v = ed.currentVitals;
+                edLines.push('LAST VITALS: BP ' + (v.BP||'') + ', HR ' + (v.HR||'') + ', RR ' + (v.RR||'') + ', SpO2 ' + (v.SpO2||'') + ', Temp ' + (v.Temp||''));
+              }
+              // ECG
+              if (ed.ecg) {
+                var ecgParts = [];
+                if (ed.ecg.findings) ecgParts.push(ed.ecg.findings);
+                if (ed.ecg.interpretation) ecgParts.push('Interpretation: ' + ed.ecg.interpretation);
+                if (ecgParts.length > 0) edLines.push('ECG: ' + ecgParts.join('. '));
+              }
+              // Lab results
+              if (ed.labResults && ed.labResults.length > 0) {
+                edLines.push('LAB RESULTS:');
+                ed.labResults.forEach(function(lab) {
+                  var line = '  ' + lab.test + ': ' + lab.value + (lab.unit ? ' ' + lab.unit : '');
+                  if (lab.reference) line += ' (ref: ' + lab.reference + ')';
+                  if (lab.status === 'critical' || lab.status === 'abnormal') line += ' [' + lab.status.toUpperCase() + ']';
+                  if (lab.interpretation) line += ' — ' + lab.interpretation;
+                  edLines.push(line);
+                });
+              }
+              // Imaging results
+              if (ed.imagingResults && ed.imagingResults.length > 0) {
+                edLines.push('IMAGING RESULTS:');
+                ed.imagingResults.forEach(function(img) {
+                  edLines.push('  ' + img.study + ': ' + (img.impression || img.findings || 'Pending'));
+                  if (img.findings && img.impression) edLines.push('    Findings: ' + img.findings);
+                });
+              }
+              if (ed.currentExam) edLines.push('LAST EXAM: ' + ed.currentExam);
+              if (ed.disposition) edLines.push('DISPOSITION: Admitted to ' + ed.disposition);
+              if (edLines.length > 0) roundsPatientHistory += '\n\nED COURSE:\n' + edLines.join('\n');
+            }
+
+            // Add handoff if present
+            var ho = realPt.handoff;
+            if (ho) {
+              var hoLines = [];
+              if (ho.i) hoLines.push('Illness Severity: ' + ho.i);
+              if (ho.p) hoLines.push('Patient Summary: ' + ho.p);
+              if (ho.a) hoLines.push('Action List: ' + ho.a);
+              if (ho.s) hoLines.push('Situation Awareness: ' + ho.s);
+              if (hoLines.length > 0) roundsPatientHistory += '\n\nOVERNIGHT HANDOFF (I-PASS):\n' + hoLines.join('\n');
+            }
+          }
+        }
+      }
+    }
+  } catch(e) { console.warn('Rounds mode init error:', e); }
+})();
 
 (function applyTierGating() {
   // Use DxPlanGate if available (platform integration)
@@ -1457,35 +1574,66 @@ function beginSimulation() {
   buildQuickActions();
   buildAvatarScene();
 
-  // Attending welcomes learner by name and level
   const addr = getLearnerAddress();
   const levelDesc = getLearnerDescription();
 
-  addSystemMsg(`Simulation started: ${selectedCase.title}. You are a ${levelDesc} on your Emergency Medicine rotation.`);
+  if (roundsMode) {
+    // Morning rounds mode — different opening
+    const ptContext = overnightContext && overnightContext.patients ? overnightContext.patients[0] : null;
+    const location = ptContext ? (ptContext.location || 'the medical floor') : 'the ward';
 
-  setTimeout(() => {
-    if (activeChars.includes('attending')) {
-      addCharacterMsg('attending', `Hey ${addr}, I need you to see the patient in this room. ${selectedCase.patient.age}, came in with ${selectedCase.patient.complaint.split(',')[0]}. Go introduce yourself, take a history, and come back to me with your assessment.`);
-    } else {
-      addSystemMsg(`You walk into the room. ${selectedCase.patient.age} patient — ${selectedCase.patient.complaint}.`);
-    }
-  }, 800);
+    addSystemMsg(`Morning Rounds: ${selectedCase.title}. This patient was admitted overnight from the ED to ${location}. You are presenting on rounds as a ${levelDesc}.`);
 
-  setTimeout(() => {
-    if (activeChars.includes('nurse')) {
-      addCharacterMsg('nurse', `Hey ${addr}, this is ${selectedCase.patient.name}, ${selectedCase.patient.age}. Came in with ${selectedCase.patient.complaint.split(',')[0]}. Vitals are on the board.`);
-    }
-  }, 2500);
+    setTimeout(() => {
+      if (activeChars.includes('attending')) {
+        addCharacterMsg('attending', `Good morning ${addr}. Let's round on our patients. You admitted this one overnight from the ED — ${selectedCase.patient.age}, ${selectedCase.patient.complaint.split(',')[0]}. Go ahead and present.`);
+      }
+    }, 800);
 
-  setTimeout(() => {
-    addCharacterMsg('patient', `*grimacing* ${LEVEL_MAP[learner.level]?.isDoctor ? 'Doc' : 'Hello'}... please... something's really wrong. Can you help me?`);
-  }, activeChars.includes('nurse') ? 5000 : 2000);
+    setTimeout(() => {
+      if (activeChars.includes('nurse')) {
+        addCharacterMsg('nurse', `Morning ${addr}. ${selectedCase.patient.name} had a stable night. Vitals have been trending well. I have the overnight numbers when you need them.`);
+      }
+    }, 2500);
 
-  setTimeout(() => {
-    if (activeChars.includes('family')) {
-      addCharacterMsg('family', `*standing nearby, visibly worried* Please help. We didn't know what else to do. Is it serious?`);
-    }
-  }, 6500);
+    setTimeout(() => {
+      addCharacterMsg('patient', `*looking up from bed* Oh, morning. I'm feeling better than last night. Are you the one who took care of me when I came in?`);
+    }, activeChars.includes('nurse') ? 5000 : 2000);
+
+    setTimeout(() => {
+      if (activeChars.includes('family')) {
+        addCharacterMsg('family', `*sitting in the visitor chair* Good morning. Thank you for taking care of them last night. How are things looking today?`);
+      }
+    }, 6500);
+
+  } else {
+    // Standard ED simulation mode
+    addSystemMsg(`Simulation started: ${selectedCase.title}. You are a ${levelDesc} on your Emergency Medicine rotation.`);
+
+    setTimeout(() => {
+      if (activeChars.includes('attending')) {
+        addCharacterMsg('attending', `Hey ${addr}, I need you to see the patient in this room. ${selectedCase.patient.age}, came in with ${selectedCase.patient.complaint.split(',')[0]}. Go introduce yourself, take a history, and come back to me with your assessment.`);
+      } else {
+        addSystemMsg(`You walk into the room. ${selectedCase.patient.age} patient — ${selectedCase.patient.complaint}.`);
+      }
+    }, 800);
+
+    setTimeout(() => {
+      if (activeChars.includes('nurse')) {
+        addCharacterMsg('nurse', `Hey ${addr}, this is ${selectedCase.patient.name}, ${selectedCase.patient.age}. Came in with ${selectedCase.patient.complaint.split(',')[0]}. Vitals are on the board.`);
+      }
+    }, 2500);
+
+    setTimeout(() => {
+      addCharacterMsg('patient', `*grimacing* ${LEVEL_MAP[learner.level]?.isDoctor ? 'Doc' : 'Hello'}... please... something's really wrong. Can you help me?`);
+    }, activeChars.includes('nurse') ? 5000 : 2000);
+
+    setTimeout(() => {
+      if (activeChars.includes('family')) {
+        addCharacterMsg('family', `*standing nearby, visibly worried* Please help. We didn't know what else to do. Is it serious?`);
+      }
+    }, 6500);
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -2004,7 +2152,14 @@ async function getAIResponse(charId, userText) {
   // Build case-adaptive system prompt with mechanism knowledge injected per character
   const sysPrompt = (typeof ch.getSystemPrompt === 'function') ? ch.getSystemPrompt(selectedCase) : (ch.systemPrompt || '');
 
-  const systemField = sysPrompt + '\n\nCONVERSATION SO FAR:\n' + recentHistory + '\n\nRespond in character. Keep it conversational and natural — 2-5 sentences typically. Stay in character at all times.';
+  // Inject morning rounds context if available
+  let roundsPrefix = '';
+  if (roundsMode && roundsPatientHistory) {
+    const ptContext = overnightContext && overnightContext.patients ? overnightContext.patients[0] : null;
+    roundsPrefix = '\n\n=== MORNING ROUNDS MODE ===\nIMPORTANT SETTING CHANGE: This is NOT the emergency department. It is now 8:00 AM the next morning. The patient was admitted overnight from the ED and is now on the inpatient ward (' + (ptContext ? ptContext.location || 'Medical Floor' : 'Medical Floor') + '). The overnight intern is presenting on morning rounds.\n\nTHIS PATIENT\'S COMPLETE HISTORY AND COURSE:\n' + roundsPatientHistory + '\n\nKEY BEHAVIOR RULES FOR ROUNDS:\n- Patient: You are ' + (ptContext ? ptContext.name : 'the patient') + '. You have been in the hospital overnight. You are improved compared to your ED arrival. Use the EXACT medical history, medications, and allergies listed above — these are YOUR real details.\n- Attending: You know this patient\'s full history (above). Ask the learner to present using SOAP format. Challenge on pathophysiology, treatment rationale, and today\'s plan. Use real PMH, medications, and clinical details in your questions.\n- Nurse: Report from the real vitals listed above. Mention nursing concerns.\n- Family: You know the home medications and social history from above. Ask about discharge plans.\n- Consultant: Ask what has been done and what the current plan is.\n- Pharmacist: Reference the real medication list. Ask about drug interactions, renal dosing, discharge med reconciliation.\n=== END ROUNDS CONTEXT ===\n';
+  }
+
+  const systemField = sysPrompt + roundsPrefix + '\n\nCONVERSATION SO FAR:\n' + recentHistory + '\n\nRespond in character. Keep it conversational and natural — 2-5 sentences typically. Stay in character at all times.';
   const userMsg = String(userText || 'Hello');
 
   const payload = {
