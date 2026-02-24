@@ -2202,7 +2202,7 @@ const CASE_TEMPLATES = [{
 }
 ,{
   id:"fever-sepsis", presentation:"Fever / Sepsis", category:"infectious",
-  demographics:{ ageRange:[55,85], genderDistribution:{male:0.5,female:0.5},
+  demographics:{ ageRange:[55,85], genderDistribution:{male:0,female:1},
     nameOptions:{ male:["Eugene Hartfield","Albert Nakamura","Roy Pemberton","Gerald Okafor","Stanley Kowalczyk"],
                   female:["Edna Fitzgerald","Ruby Vasquez","Pearl Tanaka","Gladys Mitchell","Irene Beaumont"]}},
   sources:[
@@ -3540,7 +3540,7 @@ const CASE_TEMPLATES = [{
 }
 ,{
   id:"hematologic-emergency", presentation:"Hematologic Emergency", category:"hematologic",
-  demographics:{ ageRange:[25,75], genderDistribution:{male:0.45,female:0.55},
+  demographics:{ ageRange:[25,75], genderDistribution:{male:0,female:1},
     nameOptions:{ male:["Carlton Hughes","Rafael Espinoza","Nigel Worthington","Tadashi Ono","Demetrius Franklin"],
                   female:["Vivian Chambers","Esperanza Ruiz","Chantal Moreau","Sunita Sharma","Marjorie Kowalski"]}},
   sources:[
@@ -3785,7 +3785,7 @@ const CASE_TEMPLATES = [{
 }
 ,{
   id:"renal-electrolyte-emergency", presentation:"Renal / Electrolyte Emergency", category:"renal",
-  demographics:{ ageRange:[30,80], genderDistribution:{male:0.5,female:0.5},
+  demographics:{ ageRange:[30,80], genderDistribution:{male:0,female:1},
     nameOptions:{ male:["Mitchell Caldwell","Hector Ramirez","Liam O'Connor","Akira Yoshida","Winston Abiola"],
                   female:["Rochelle DuPont","Ingrid Andersen","Keiko Fujimoto","Tamika Jefferson","Vera Petrović"]}},
   sources:[
@@ -4293,9 +4293,11 @@ function renderHistoryChat(p) {
     '<div class="chat-input-area">' +
     '<textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask the patient a question..." onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>' +
     '<button class="chat-send" id="chatSendBtn" onclick="sendChat()">Send</button>' +
-    '</div></div>';
+    '</div>' +
+    '<div id="voiceStatus" class="voice-status" style="display:none;padding:4px 16px"></div>' +
+    '</div>';
 }
-function initChatScroll() { var el = document.getElementById('chatMessages'); if (el) el.scrollTop = el.scrollHeight; }
+function initChatScroll() { var el = document.getElementById('chatMessages'); if (el) el.scrollTop = el.scrollHeight; initVoiceForChat(); }
 
 async function sendChat() {
   if (isAiLoading) return;
@@ -4956,6 +4958,54 @@ updateClock();
       }
     } catch(e) {}
   }
+})();
+</script>
+<script src="../voice-input.js"></script>
+<script src="../dx-bias-assessment.js"></script>
+<script>
+// Voice input for patient chat
+function initVoiceForChat() {
+  if (typeof VoiceInput !== 'undefined' && VoiceInput.isSupported()) {
+    setTimeout(function() {
+      var input = document.getElementById('chatInput');
+      var sendBtn = document.getElementById('chatSendBtn');
+      if (input && sendBtn && !document.getElementById('voiceBtn')) {
+        var btn = document.createElement('button');
+        btn.id = 'voiceBtn';
+        btn.type = 'button';
+        btn.className = 'voice-btn';
+        btn.title = 'Click to speak';
+        btn.innerHTML = '<span id="voiceIcon">🎤</span>';
+        btn.style.cssText = 'width:36px;height:36px;min-width:36px;border-radius:50%;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0';
+        btn.onclick = function(e) { e.preventDefault(); VoiceInput.toggle('chatInput'); };
+        sendBtn.insertAdjacentElement('beforebegin', btn);
+      }
+    }, 200);
+  }
+}
+
+// Bias assessment hooks — log every exchange
+(function() {
+  var origSendChat = window.sendChat;
+  if (!origSendChat) return;
+  window.sendChat = async function() {
+    var input = document.getElementById('chatInput');
+    var question = input ? input.value.trim() : '';
+    await origSendChat.apply(this, arguments);
+    // After AI responds, log both sides
+    var p = patients && patients.find(function(x){return x.id===selectedPatientId});
+    if (p && p.chatHistory && p.chatHistory.length >= 2) {
+      var last2 = p.chatHistory.slice(-2);
+      if (last2[0] && last2[0].role === 'student') {
+        BiasAssessment.logExchange('student', last2[0].text, { stage:'ED', caseId: p.caseId || '' });
+      }
+      if (last2[1] && last2[1].role === 'patient') {
+        BiasAssessment.logExchange('patient', last2[1].text, { characterName: p.name || 'Patient', stage:'ED' });
+      }
+    }
+    // Set context
+    BiasAssessment.setContext('ED patient encounter — ' + (p ? p.presentation || '' : ''));
+  };
 })();
 </script>
 </body>

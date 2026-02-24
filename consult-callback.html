@@ -623,8 +623,10 @@ function showResponseInput(idx) {
         <div class="resp-label">${exchange.hint || 'Your response'}</div>
         <div class="free-input-row">
             <textarea class="free-input" id="freeResponse" placeholder="Type your response..." rows="2" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendResponse()}"></textarea>
+            <button type="button" id="voiceBtn" title="Click to speak" onclick="VoiceInput.toggle('freeResponse')" style="width:36px;height:36px;min-width:36px;border-radius:50%;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span id="voiceIcon">🎤</span></button>
             <button class="send-btn" onclick="sendResponse()">Send</button>
         </div>
+        <div id="voiceStatus" class="voice-status" style="display:none;font-size:11px;color:#6B7280;padding:4px 0"></div>
     `;
     document.getElementById('freeResponse')?.focus();
 }
@@ -768,5 +770,46 @@ renderSetup();
 <script src="/data/rdx-persist.js"></script>
 <script src="/js/rdx-nav.js"></script>
 <script src="/rdx-gate.js"></script>
+<script src="voice-input.js"></script>
+<script src="dx-bias-assessment.js"></script>
+<script>
+// Bias hooks for Consultant Callback
+(function() {
+  var origSend = window.sendResponse;
+  if (origSend) {
+    window.sendResponse = function() {
+      var input = document.getElementById('freeResponse');
+      var text = input ? input.value.trim() : '';
+      if (text) {
+        BiasAssessment.logExchange('student', text, { stage:'ConsultCallback', specialist: window.selectedSpec || '' });
+        BiasAssessment.setContext('Consultant Callback — ' + (window.selectedSpec || 'Specialist') + ' consult');
+      }
+      origSend.apply(this, arguments);
+    };
+  }
+  // Also log consultant messages
+  var origShowConsultant = window.showConsultantMessage;
+  if (origShowConsultant) {
+    window.showConsultantMessage = function(idx) {
+      origShowConsultant.apply(this, arguments);
+      // Log the consultant message after it renders
+      setTimeout(function() {
+        var msgs = document.querySelectorAll('.msg.consultant .msg-bubble');
+        if (msgs.length > 0) {
+          var lastMsg = msgs[msgs.length - 1];
+          BiasAssessment.logExchange('consultant', lastMsg.textContent || '', { characterName: window.selectedSpec || 'Specialist', stage:'ConsultCallback' });
+        }
+      }, 800);
+    };
+  }
+  // Hide voice if unsupported
+  if (typeof VoiceInput !== 'undefined' && !VoiceInput.isSupported()) {
+    document.addEventListener('DOMContentLoaded', function() {
+      var vb = document.getElementById('voiceBtn');
+      if (vb) vb.style.display = 'none';
+    });
+  }
+})();
+</script>
 </body>
 </html>
