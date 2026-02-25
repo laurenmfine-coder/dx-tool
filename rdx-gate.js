@@ -27,6 +27,7 @@
             '/',
             '/auth/register.html',
             '/auth/login.html',
+            '/auth/quick-access.html',
             '/privacy.html',
             '/terms.html',
             '/about.html'

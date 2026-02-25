@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!-- ReasonDx Quick Access — Beta Testing Auth -->
+<!-- Streamlined sign-in: Google SSO + Magic Link (no password required) -->
+<!-- Bridges to existing localStorage auth for full platform compatibility -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Quick Access</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+    --brand: #2874A6; --brand-dark: #1B4F72; --brand-light: #D4E6F1;
+    --bg: #F8FAFC; --card: #FFFFFF; --text: #1E293B; --muted: #64748B;
+    --border: #E2E8F0; --green: #16A34A; --red: #DC2626;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',-apple-system,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; align-items:center; justify-content:center; }
+
+.container { width:100%; max-width:420px; padding:24px; }
+
+/* Logo */
+.logo { text-align:center; margin-bottom:32px; }
+.logo h1 { font-family:'Fraunces',serif; font-size:32px; font-weight:800; color:var(--brand); }
+.logo p { color:var(--muted); font-size:14px; margin-top:4px; }
+
+/* Card */
+.card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px; box-shadow:0 4px 24px rgba(0,0,0,0.06); }
+
+/* Beta badge */
+.beta-badge { display:inline-block; background:linear-gradient(135deg,#2874A6,#1B4F72); color:white; font-size:11px; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:0.5px; margin-bottom:16px; }
+
+.card h2 { font-size:20px; font-weight:700; margin-bottom:4px; }
+.card .subtitle { color:var(--muted); font-size:14px; margin-bottom:24px; line-height:1.5; }
+
+/* Google button */
+.btn-google {
+    width:100%; display:flex; align-items:center; justify-content:center; gap:12px;
+    padding:14px; border:1.5px solid var(--border); border-radius:12px;
+    background:white; font-size:15px; font-weight:600; color:var(--text);
+    cursor:pointer; transition:all 0.2s; font-family:inherit;
+}
+.btn-google:hover { border-color:var(--brand); background:#F8FAFC; transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+.btn-google:active { transform:translateY(0); }
+.btn-google svg { width:20px; height:20px; flex-shrink:0; }
+
+/* Divider */
+.divider { display:flex; align-items:center; gap:12px; margin:24px 0; }
+.divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
+.divider span { color:var(--muted); font-size:12px; font-weight:600; letter-spacing:0.5px; }
+
+/* Magic link form */
+.magic-form { display:flex; flex-direction:column; gap:12px; }
+.magic-form input {
+    width:100%; padding:14px 16px; border:1.5px solid var(--border); border-radius:12px;
+    font-size:15px; font-family:inherit; color:var(--text); outline:none; transition:border-color 0.2s;
+}
+.magic-form input:focus { border-color:var(--brand); }
+.magic-form input::placeholder { color:#94A3B8; }
+
+.btn-magic {
+    width:100%; padding:14px; border:none; border-radius:12px;
+    background:var(--brand); color:white; font-size:15px; font-weight:600;
+    cursor:pointer; transition:all 0.2s; font-family:inherit;
+}
+.btn-magic:hover { background:var(--brand-dark); }
+.btn-magic:disabled { opacity:0.5; cursor:not-allowed; }
+
+/* Status messages */
+.status { display:none; padding:14px 16px; border-radius:12px; font-size:14px; line-height:1.5; margin-top:16px; }
+.status.success { display:block; background:#DCFCE7; color:#166534; border:1px solid #86EFAC; }
+.status.error { display:block; background:#FEE2E2; color:#991B1B; border:1px solid #FECACA; }
+.status.info { display:block; background:var(--brand-light); color:var(--brand-dark); border:1px solid #A9CCE3; }
+
+/* Footer */
+.footer { text-align:center; margin-top:24px; }
+.footer a { color:var(--brand); text-decoration:none; font-size:13px; font-weight:500; }
+.footer a:hover { text-decoration:underline; }
+.footer .existing { margin-top:16px; font-size:13px; color:var(--muted); }
+.footer .existing a { color:var(--brand); }
+
+/* Loading */
+.loading { display:none; text-align:center; padding:24px; }
+.loading .spinner { width:32px; height:32px; border:3px solid var(--border); border-top-color:var(--brand); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 12px; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* QR landing */
+.qr-note { text-align:center; margin-top:12px; font-size:11px; color:var(--muted); }
+
+/* Features preview */
+.features { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:20px; padding-top:20px; border-top:1px solid var(--border); }
+.feature { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); }
+.feature-icon { font-size:16px; }
+
+/* Responsive */
+@media (max-width:480px) {
+    .container { padding:16px; }
+    .card { padding:24px 20px; }
+    .features { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <h1>Reason<span style="color:var(--brand-dark)">Dx</span></h1>
+        <p>AI-Powered Clinical Reasoning Training</p>
+    </div>
+
+    <!-- MAIN AUTH CARD -->
+    <div class="card" id="authCard">
+        <div style="text-align:center;">
+            <span class="beta-badge">FREE BETA ACCESS</span>
+        </div>
+        <h2 style="text-align:center;">Get Started in Seconds</h2>
+        <p class="subtitle" style="text-align:center;">No password needed. Sign in with Google or get a magic link sent to your .edu email.</p>
+
+        <!-- Google SSO -->
+        <button class="btn-google" onclick="signInWithGoogle()" id="googleBtn">
+            <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Continue with Google
+        </button>
+
+        <div class="divider"><span>OR</span></div>
+
+        <!-- Magic Link -->
+        <div class="magic-form">
+            <input type="email" id="emailInput" placeholder="your.name@university.edu" autocomplete="email" onkeydown="if(event.key==='Enter')sendMagicLink()">
+            <button class="btn-magic" onclick="sendMagicLink()" id="magicBtn">Send Me a Login Link</button>
+        </div>
+
+        <!-- Status messages -->
+        <div class="status" id="statusMsg"></div>
+
+        <!-- Features preview -->
+        <div class="features">
+            <div class="feature"><span class="feature-icon">🏥</span> 58 ED Cases</div>
+            <div class="feature"><span class="feature-icon">📞</span> Admission Call Sim</div>
+            <div class="feature"><span class="feature-icon">🌙</span> Night Float Sim</div>
+            <div class="feature"><span class="feature-icon">🩺</span> Morning Rounds AI</div>
+        </div>
+    </div>
+
+    <!-- LOADING STATE -->
+    <div class="loading" id="loadingState">
+        <div class="spinner"></div>
+        <p style="font-weight:600;">Signing you in...</p>
+        <p style="color:var(--muted);font-size:13px;margin-top:4px;">Setting up your account</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="existing">
+            Already have an account? <a href="/auth/register.html" onclick="showLoginMode()">Sign in here</a>
+        </div>
+        <div style="margin-top:8px;">
+            <a href="/index.html">Learn more about ReasonDx</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// CONFIGURATION
+// ════════════════════════════════════════════════════════════
+var SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+// Where to redirect after successful auth
+var REDIRECT_TO = '/training.html';
+// For QR code deep links, check URL params
+var urlParams = new URLSearchParams(window.location.search);
+var deepLink = urlParams.get('next') || REDIRECT_TO;
+var referral = urlParams.get('ref') || '';
+
+// Initialize Supabase
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ════════════════════════════════════════════════════════════
+// CHECK IF ALREADY SIGNED IN
+// ════════════════════════════════════════════════════════════
+(async function checkSession() {
+    try {
+        var { data: { session } } = await sb.auth.getSession();
+        if (session && session.user) {
+            // Already signed in — bridge to localStorage and redirect
+            bridgeToLocalStorage(session.user);
+            window.location.href = deepLink;
+        }
+    } catch(e) { console.log('Session check:', e); }
+
+    // Also handle OAuth redirect callback
+    var hashParams = new URLSearchParams(window.location.hash.substring(1));
+    if (hashParams.get('access_token')) {
+        showLoading();
+        // Supabase will handle the token exchange via onAuthStateChange
+    }
+})();
+
+// Listen for auth state changes (handles OAuth callback)
+sb.auth.onAuthStateChange(function(event, session) {
+    if (event === 'SIGNED_IN' && session && session.user) {
+        bridgeToLocalStorage(session.user);
+        showLoading();
+        setTimeout(function() {
+            window.location.href = deepLink;
+        }, 500);
+    }
+});
+
+// ════════════════════════════════════════════════════════════
+// GOOGLE SIGN-IN
+// ════════════════════════════════════════════════════════════
+async function signInWithGoogle() {
+    var btn = document.getElementById('googleBtn');
+    btn.disabled = true;
+    btn.textContent = 'Connecting...';
+
+    try {
+        var { data, error } = await sb.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin + '/auth/quick-access.html?next=' + encodeURIComponent(deepLink),
+                queryParams: {
+                    // Request minimal scopes
+                    access_type: 'offline',
+                    prompt: 'select_account'
+                }
+            }
+        });
+
+        if (error) {
+            showStatus('Google sign-in is not yet enabled. Use the magic link below, or ask the admin to enable Google OAuth in Supabase.', 'error');
+            btn.disabled = false;
+            btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Continue with Google';
+        }
+        // If no error, Supabase will redirect to Google
+    } catch(e) {
+        showStatus('Could not connect to Google. Try the magic link instead.', 'error');
+        btn.disabled = false;
+    }
+}
+
+// ════════════════════════════════════════════════════════════
+// MAGIC LINK (passwordless email)
+// ════════════════════════════════════════════════════════════
+async function sendMagicLink() {
+    var email = document.getElementById('emailInput').value.trim().toLowerCase();
+    if (!email || !email.includes('@')) {
+        showStatus('Please enter a valid email address.', 'error');
+        return;
+    }
+
+    var btn = document.getElementById('magicBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+        var { data, error } = await sb.auth.signInWithOtp({
+            email: email,
+            options: {
+                emailRedirectTo: window.location.origin + '/auth/quick-access.html?next=' + encodeURIComponent(deepLink),
+                data: {
+                    source: 'beta',
+                    referral: referral
+                }
+            }
+        });
+
+        if (error) {
+            showStatus('Error: ' + error.message, 'error');
+            btn.disabled = false;
+            btn.textContent = 'Send Me a Login Link';
+            return;
+        }
+
+        showStatus('Check your email! We sent a login link to <strong>' + email + '</strong>. Click it to sign in instantly — no password needed.', 'success');
+        btn.textContent = 'Link Sent!';
+        setTimeout(function() {
+            btn.disabled = false;
+            btn.textContent = 'Resend Link';
+        }, 30000); // Allow resend after 30s
+
+    } catch(e) {
+        showStatus('Something went wrong. Please try again.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Send Me a Login Link';
+    }
+}
+
+// ════════════════════════════════════════════════════════════
+// BRIDGE: Supabase session → localStorage (platform compat)
+// ════════════════════════════════════════════════════════════
+function bridgeToLocalStorage(user) {
+    // Extract name from various sources
+    var meta = user.user_metadata || {};
+    var name = meta.full_name || meta.name || meta.preferred_username || user.email.split('@')[0];
+
+    // Check if they already have a localStorage profile
+    var existing = {};
+    try { existing = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); } catch(e) {}
+
+    // Merge — preserve any existing fields (training level, rotation, etc.)
+    var profile = {
+        email: user.email,
+        name: name,
+        firstName: (meta.given_name || name.split(' ')[0] || ''),
+        lastName: (meta.family_name || ''),
+        avatar: meta.avatar_url || meta.picture || '',
+        trainingLevel: existing.trainingLevel || 'ms3',
+        currentRotation: existing.currentRotation || 'im',
+        specialty: existing.specialty || '',
+        plan: existing.plan || 'free',
+        supabaseId: user.id,
+        provider: user.app_metadata?.provider || 'email',
+        referral: referral || existing.referral || '',
+        signupDate: existing.signupDate || new Date().toISOString(),
+        source: 'beta-quick-access'
+    };
+
+    localStorage.setItem('reasondx-user', JSON.stringify(profile));
+
+    // Also try to sync to Supabase profiles table
+    syncProfile(user.id, profile);
+}
+
+async function syncProfile(userId, profile) {
+    try {
+        await sb.from('profiles').upsert({
+            id: userId,
+            email: profile.email,
+            full_name: profile.name,
+            subscription_tier: profile.plan || 'free',
+            updated_at: new Date().toISOString()
+        }, { onConflict: 'id' });
+    } catch(e) { console.log('Profile sync (non-critical):', e); }
+}
+
+// ════════════════════════════════════════════════════════════
+// UI HELPERS
+// ════════════════════════════════════════════════════════════
+function showStatus(msg, type) {
+    var el = document.getElementById('statusMsg');
+    el.innerHTML = msg;
+    el.className = 'status ' + type;
+}
+
+function showLoading() {
+    document.getElementById('authCard').style.display = 'none';
+    document.getElementById('loadingState').style.display = 'block';
+}
+
+function showLoginMode() {
+    // For students who already have password-based accounts
+    event.preventDefault();
+    window.location.href = '/auth/register.html?mode=login';
+}
+
+// ════════════════════════════════════════════════════════════
+// QR CODE SUPPORT
+// If accessed via QR with ?case=xxx, redirect to that case after auth
+// ════════════════════════════════════════════════════════════
+var directCase = urlParams.get('case');
+if (directCase) {
+    deepLink = '/ed-board-v2.html?case=' + directCase;
+    // Update subtitle
+    var sub = document.querySelector('.subtitle');
+    if (sub) sub.textContent = 'Sign in to start your case immediately. No password needed.';
+}
+</script>
+
+</body>
+</html>
