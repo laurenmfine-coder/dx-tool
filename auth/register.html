@@ -170,53 +170,57 @@
             <p style="margin-top: 16px; font-size: 15px; color: #64748b;">Already have an account? <a href="#" onclick="showLogin(); return false;" style="color: #2874A6; font-weight: 600; text-decoration: none;">Sign in →</a></p>
         </div>
 
-        <!-- QUICK ACCESS: Google + Magic Link -->
-        <div class="quick-access-box" id="quickAccessBox">
-            <h3>⚡ Quick Access</h3>
-            <p class="qa-sub">Sign in instantly — no password needed</p>
-            <button class="btn-google" id="googleBtnMain" onclick="signInWithGoogle('main')">
-                <svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                Continue with Google
-            </button>
-            <div class="qa-divider">or enter your email</div>
-            <div class="qa-magic-row">
-                <input type="email" id="magicEmailMain" placeholder="you@email.com" onkeydown="if(event.key==='Enter')sendMagicLink('main')">
-                <button id="magicBtnMain" onclick="sendMagicLink('main')">Send Link</button>
-            </div>
-            <div class="qa-status" id="qaStatusMain"></div>
-        </div>
-
-        <div class="qa-or-section">or choose a plan to get started</div>
-
+        <!-- PLAN SELECTION WITH INTEGRATED QUICK ACCESS -->
         <div id="planSelection">
             <div class="plans-grid">
-                <div class="plan-card" onclick="selectPlan('free')" id="planFree">
+                <!-- FREE / BETA ACCESS CARD -->
+                <div class="plan-card selected" id="planFree" style="border-color: #2874A6; cursor: default;">
+                    <div class="plan-badge" style="background: #16a34a;">✓ Beta — Full Access Free</div>
                     <div class="plan-icon" style="font-size:14px; font-weight:700; color:#2874A6; background:#f0f7fc; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin: 0 auto 16px;">FREE</div>
-                    <div class="plan-name">Free</div>
+                    <div class="plan-name">Beta Access</div>
                     <div class="plan-price">
                         <span class="amount">$0</span>
-                        <span class="period"></span>
+                        <span class="period" style="display:block; font-size: 13px; color: #16a34a; font-weight: 600; margin-top: 4px;">Everything included during beta</span>
                     </div>
                     <div class="exam-tags">
                         <span class="exam-tag s1">Reasoning</span>
-                        <span class="exam-tag s2">SBAR</span>
+                        <span class="exam-tag s2">Simulators</span>
+                        <span class="exam-tag shelf">AI Coaching</span>
                     </div>
                     <ul class="plan-features">
-                        <li>3 clinical reasoning cases per month</li>
-                        <li>SBAR Trainer access</li>
-                        <li>Basic Reasoning Fingerprint</li>
-                        <li>Progress tracking</li>
+                        <li>Clinical reasoning cases across 29 specialties</li>
+                        <li>Full Clinical Journey (ED → Night Float → SimRoomDx)</li>
+                        <li>23 SimRoomDx virtual simulations</li>
+                        <li>CoachDx AI coaching &amp; debriefs</li>
+                        <li>SBAR Trainer with AI feedback</li>
+                        <li>Admission Call &amp; Night Float simulators</li>
+                        <li>Clerkship Hub with rotation order templates</li>
+                        <li>Reasoning Fingerprint with bias tracking</li>
+                        <li>Pre-med tools (Bridge Mode, Encounters, LOR)</li>
                         <li>All clinical calculators</li>
-                        <li class="excluded">Unlimited cases across 29 specialties</li>
-                        <li class="excluded">Full CoachDx AI coaching</li>
-                        <li class="excluded">SimRoomDx virtual simulation</li>
-                        <li class="excluded">Pre-med tools (Bridge Mode, LOR)</li>
                     </ul>
-                    <button class="plan-select-btn">Get Started Free</button>
+
+                    <!-- QUICK ACCESS BUILT INTO CARD -->
+                    <div style="border-top: 2px solid #e2e8f0; padding-top: 20px; margin-top: 8px;">
+                        <p style="font-size: 14px; font-weight: 600; color: #1e3a5f; margin-bottom: 12px; text-align: center;">Sign up instantly — no password needed</p>
+                        <button class="btn-google" id="googleBtnMain" onclick="signInWithGoogle('main')">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                            Continue with Google
+                        </button>
+                        <div class="qa-divider">or enter your email</div>
+                        <div class="qa-magic-row">
+                            <input type="email" id="magicEmailMain" placeholder="you@email.com" onkeydown="if(event.key==='Enter')sendMagicLink('main')">
+                            <button id="magicBtnMain" onclick="sendMagicLink('main')">Send Link</button>
+                        </div>
+                        <div class="qa-status" id="qaStatusMain"></div>
+                        <div class="qa-divider">or</div>
+                        <button class="plan-select-btn" onclick="selectPlan('free')" style="width:100%;">Sign Up with Email &amp; Password</button>
+                    </div>
                 </div>
 
-                <div class="plan-card pro" onclick="selectPlan('pro')" id="planPro">
-                    <div class="plan-badge">Most Popular</div>
+                <!-- PRO CARD (Coming Soon) -->
+                <div class="plan-card pro" id="planPro" style="opacity: 0.7; cursor: default;">
+                    <div class="plan-badge" style="background: #94a3b8;">Coming Soon</div>
                     <div class="plan-icon" style="font-size:14px; font-weight:700; color:white; background:#2874A6; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin: 0 auto 16px;">PRO</div>
                     <div class="plan-name">Pro</div>
                     <div class="plan-price">
@@ -226,20 +230,22 @@
                     </div>
                     <div class="exam-tags">
                         <span class="exam-tag s1">Reasoning</span>
-                        <span class="exam-tag s2">SBAR</span>
+                        <span class="exam-tag s2">Simulators</span>
                         <span class="exam-tag shelf">AI Coaching</span>
+                        <span class="exam-tag rotation">Priority</span>
                     </div>
                     <ul class="plan-features">
-                        <li>Unlimited reasoning cases across 29 specialties</li>
-                        <li>Full CoachDx AI coaching &amp; debriefs</li>
-                        <li>Unlimited SBAR practice with AI feedback</li>
-                        <li>SimRoomDx virtual simulation</li>
-                        <li>Full Reasoning Fingerprint with bias tracking</li>
-                        <li>Pre-med tools (Bridge Mode, Encounters, LOR)</li>
+                        <li>Everything in Beta Access</li>
+                        <li>Priority AI response times</li>
                         <li>Advanced analytics &amp; export</li>
+                        <li>Custom study plans</li>
                         <li>Priority support</li>
+                        <li>Early access to new features</li>
                     </ul>
-                    <button class="plan-select-btn">Start Pro</button>
+                    <div style="background: #f0f7fc; border-radius: 10px; padding: 14px; text-align: center; margin-top: 8px;">
+                        <p style="font-size: 13px; color: #1e3a5f; font-weight: 600; margin-bottom: 4px;">🎉 All Pro features are free during beta!</p>
+                        <p style="font-size: 12px; color: #64748b;">Sign up with the Free plan to get full access.</p>
+                    </div>
                 </div>
 
             </div>
@@ -764,8 +770,6 @@
             document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
             setTimeout(function(){
                 document.getElementById('planSelection').classList.add('hidden');
-                document.getElementById('quickAccessBox').classList.add('hidden');
-                document.querySelector('.qa-or-section').classList.add('hidden');
                 document.getElementById('registrationForm').classList.remove('hidden');
                 document.getElementById('registrationForm').className = 'form-card ' + plan;
                 document.getElementById('formHeader').className = 'form-header ' + plan;
@@ -793,8 +797,6 @@
         function backToPlanSelection() {
             document.getElementById('registrationForm').classList.add('hidden');
             document.getElementById('planSelection').classList.remove('hidden');
-            document.getElementById('quickAccessBox').classList.remove('hidden');
-            document.querySelector('.qa-or-section').classList.remove('hidden');
             state.selectedPlan = null;
             state.currentSection = 0;
         }
@@ -1154,8 +1156,8 @@
         // ============================================
         // LOGIN
         // ============================================
-        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); document.getElementById('quickAccessBox').classList.add('hidden'); document.querySelector('.qa-or-section').classList.add('hidden'); }
-        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); document.getElementById('quickAccessBox').classList.remove('hidden'); document.querySelector('.qa-or-section').classList.remove('hidden'); }
+        function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
+        function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
         function login() {
             var email = document.getElementById('loginEmail').value.trim();
             var pw = document.getElementById('loginPassword').value;
