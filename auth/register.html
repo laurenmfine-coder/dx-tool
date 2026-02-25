@@ -596,8 +596,10 @@
         var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         var qaRedirect = '/training.html';
 
-        // Check if returning from OAuth callback
+        // Check if returning from OAuth callback (has hash token or special param)
+        var isOAuthReturn = window.location.hash.includes('access_token') || new URLSearchParams(window.location.search).get('code');
         (async function checkOAuthReturn() {
+            if (!isOAuthReturn) return;
             try {
                 var { data: { session } } = await sb.auth.getSession();
                 if (session && session.user) {
@@ -609,7 +611,7 @@
 
         // Listen for auth state changes (handles OAuth redirect)
         sb.auth.onAuthStateChange(function(event, session) {
-            if (event === 'SIGNED_IN' && session && session.user) {
+            if (event === 'SIGNED_IN' && session && session.user && isOAuthReturn) {
                 bridgeToLocalStorage(session.user);
                 setTimeout(function() { window.location.href = qaRedirect; }, 500);
             }
