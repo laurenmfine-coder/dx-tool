@@ -243,7 +243,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 </head>
 <body>
 <div class="topbar">
-  <div class="topbar-left"><a href="../training.html" class="topbar-home" title="Back to Training Hub" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;margin-right:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Hub</a><div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div><div class="topbar-badge">Emergency Dept</div></div>
+  <div class="topbar-left"><a href="../index.html" class="topbar-home" title="Back to Home" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;margin-right:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Exit ED</a><div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div><div class="topbar-badge">Emergency Dept</div></div>
   <div class="topbar-right"><div class="topbar-time" id="simTime">07:00 AM — Day 1</div><div class="topbar-user"><div class="topbar-avatar">MS</div><span>Medical Student</span></div></div>
 </div>
 <div class="board-header">
@@ -3490,7 +3490,6 @@ const CASE_TEMPLATES = [{
         ]}
       },
       treatments:{"orders":[{"id":"tcp-chb","name":"Transcutaneous Pacing (TCP)","group":"Emergent Pacing","critical":true,"correct":true,"phase":1,"teaching":"Immediate bridge for symptomatic CHB. Anterior/posterior pads. Rate 60, increase output until capture.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"TCP bridge for symptomatic bradycardia"},{"source":"2020 AHA ACLS Guidelines","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916","detail":"TCP for unstable bradycardia not responsive to atropine"}]},{"id":"atropine-chb","name":"Atropine 1mg IV","group":"Pharmacologic","critical":false,"correct":false,"teaching":"⚠️ INEFFECTIVE in CHB — works on AV node which is completely blocked. Ventricular escape not vagally mediated. Wastes critical time.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"Atropine ineffective in third-degree block"},{"source":"2020 AHA ACLS Guidelines","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916","detail":"Atropine unlikely to help in CHB"}]},{"id":"iso-chb","name":"Isoproterenol drip 2-10 mcg/min","group":"Pharmacologic","critical":false,"correct":true,"phase":1,"teaching":"Pure beta-agonist increases ventricular rate. Bridge to transvenous pacing.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"Isoproterenol increases ventricular automaticity"}]},{"id":"dopa-chb","name":"Dopamine drip 5-20 mcg/kg/min","group":"Pharmacologic","critical":false,"correct":true,"phase":1,"teaching":"Chronotropic and vasopressor support. Alternative bridge to pacing.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"Dopamine for chronotropic support"},{"source":"2020 AHA ACLS Guidelines","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916","detail":"Dopamine for symptomatic bradycardia"}]},{"id":"tvp-chb","name":"Transvenous Pacemaker placement","group":"Emergent Pacing","critical":true,"correct":true,"phase":2,"teaching":"Definitive temporary pacing. RIJ preferred. Confirm capture on ECG. Required when TCP is bridge only.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"TVP definitive bridge to permanent pacemaker"}]},{"id":"perm-chb","name":"Cardiology — permanent pacemaker","group":"Consultation","critical":true,"correct":true,"phase":2,"teaching":"All symptomatic CHB requires PPM (Class I). Evaluate for reversible causes first.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"PPM Class I for symptomatic CHB"},{"source":"2020 AHA ACLS Guidelines","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916","detail":"Evaluate: hyperkalemia, drugs, inferior MI, Lyme"}]},{"id":"ccb-chb","name":"Diltiazem IV for rate control","group":"Pharmacologic","critical":false,"correct":false,"teaching":"⚠️ AV nodal blockers (CCB/BB/digoxin) CONTRAINDICATED — worsen block further. This patient is already ON metoprolol + diltiazem (dual blockade contributing to CHB).","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"CCB/BB/digoxin CI — worsen conduction block"}]},{"id":"check-k-chb","name":"STAT BMP — check potassium","group":"Diagnostic","critical":false,"correct":true,"phase":1,"teaching":"Hyperkalemia is #1 reversible cause. Also check dig level, Lyme, TSH.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"Hyperkalemia most common reversible cause of CHB"}]},{"id":"hold-meds-chb","name":"HOLD metoprolol + diltiazem","group":"Medication Management","critical":true,"correct":true,"phase":1,"teaching":"Patient is on DUAL AV nodal blockade (metoprolol + diltiazem). Both must be held immediately — this combination is a major contributor to the conduction block.","references":[{"source":"Third-Degree Heart Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK545199/","detail":"Discontinue AV nodal blocking agents"},{"source":"2020 AHA ACLS Guidelines","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916","detail":"Identify and treat reversible causes: drug-induced bradycardia"}]}],"phases":[{"id":"initial","label":"Presentation","auto":true,"vitals":{"BP":"96/64","HR":"34","RR":"18","Temp":"98.4°F","SpO2":"94%"},"ecg":"Complete AV dissociation. Wide QRS escape rhythm at 34 bpm. No relationship between P waves and QRS complexes. Escape QRS >120ms (infranodal origin — high risk).","labHighlights":{"Potassium":"5.1 mEq/L","BUN/Cr":"28/1.4"},"examNote":"Weak, pale, near-syncope on standing. JVP elevated with cannon A waves. Variable S1 intensity. HR 34 regular. Alert but fatigued.","aiPatientUpdate":null},{"id":"paced","label":"TCP Capture + Meds Held","requires":["tcp-chb","hold-meds-chb"],"vitals":{"BP":"118/72","HR":"60 (paced)","RR":"16","Temp":"98.4°F","SpO2":"98%"},"ecg":"Transcutaneous pacing with 1:1 capture at 60 bpm. Pacing spikes followed by wide QRS. Underlying rhythm still complete heart block when pacer briefly inhibited.","labHighlights":{"Potassium":"4.8 mEq/L (trending down)","Magnesium":"2.0 mg/dL"},"examNote":"Dramatic improvement with pacing. Alert, oriented, comfortable. BP normalized. No longer lightheaded. Cannon A waves resolved. Cardiology at bedside — planning transvenous pacer.","aiPatientUpdate":"Oh, that pacing thing is uncomfortable but I feel so much better. My head isn't spinning anymore. Everything was in slow motion before.","teaching":"✅ TCP captured. Hemodynamics restored. Now bridge to transvenous pacer and evaluate for permanent pacemaker. Dual AV nodal blockade (metoprolol + diltiazem) held — this was a major contributor."},{"id":"tvp-placed","label":"Transvenous Pacer + Cardiology","requires":["tvp-chb","perm-chb"],"vitals":{"BP":"124/76","HR":"60 (paced)","RR":"14","Temp":"98.4°F","SpO2":"99%"},"ecg":"Transvenous pacing at 60 bpm with consistent capture. Underlying rhythm: persistent complete heart block even after holding AV nodal agents — degenerative conduction disease confirmed.","labHighlights":{"Potassium":"4.4 mEq/L","TSH":"2.4 (normal)"},"examNote":"Stable on transvenous pacer. Cardiology confirms: underlying degenerative conduction disease (calcific aortic stenosis extending to His bundle) exacerbated by dual AV blockade. Permanent pacemaker scheduled for tomorrow.","aiPatientUpdate":"The cardiologist said I need a permanent pacemaker. He said my heart's electrical wiring is worn out and the heart medicines made it worse. Will I be okay?","teaching":"✅ Definitive plan: PPM implantation. Degenerative conduction disease + medication-exacerbated CHB. Never restart dual AV nodal blockade. Post-PPM: device check, rate optimization, medication reconciliation. Excellent prognosis with pacing."}],"pitfallEvents":[{"trigger":"atropine-chb","event":"no-response","message":"⚠️ Atropine given — no response. HR remains 34. Atropine works on the AV node, but the block is BELOW the AV node (infranodal). Wide QRS escape confirms this. Time wasted on an ineffective drug.","recovery":"Proceed immediately to transcutaneous pacing. Do not give additional atropine doses.","vitals":{"BP":"92/60","HR":"34","RR":"20","Temp":"98.4°F","SpO2":"93%"}},{"trigger":"ccb-chb","event":"asystole","message":"⚠️ CRITICAL: Diltiazem given to a patient in complete heart block. The escape rhythm slows to 22 bpm, then pauses. 6-second asystole episode. This patient's CHB was WORSENED by AV nodal blockers — adding more is catastrophic.","recovery":"Immediate transcutaneous pacing. Calcium chloride 1g IV to reverse CCB. Vasopressors if needed.","vitals":{"BP":"68/40","HR":"22","RR":"24","Temp":"98.4°F","SpO2":"84%"}}]}}
-    }
   ]
 }
 ,{
@@ -4326,8 +4325,7 @@ function renderOverview(p) {
     '<div class="progress-bar"><span style="font-size:11px;min-width:80px">Exam</span><div class="progress-track"><div class="progress-fill" style="width:'+d.examSystems.length/examTotal*100+'%"></div></div><span class="progress-label">'+d.examSystems.length+'/'+examTotal+'</span></div>' +
     '<div class="progress-bar"><span style="font-size:11px;min-width:80px">Labs</span><div class="progress-track"><div class="progress-fill" style="width:'+(d.labsReady.length>0?100:0)+'%"></div></div><span class="progress-label">'+(d.labsReady.length>0?d.labsReady.length+' resulted':'None')+'</span></div>' +
     '<div class="progress-bar"><span style="font-size:11px;min-width:80px">Imaging</span><div class="progress-track"><div class="progress-fill" style="width:'+(d.imagingReady.length>0?100:0)+'%"></div></div><span class="progress-label">'+(d.imagingReady.length>0?d.imagingReady.length+' done':'None')+'</span></div>' +
-    '</div>' +
-    (p.template.sources ? '<div class="emr-section"><div class="emr-section-title">Evidence Sources</div>'+p.template.sources.map(function(s){return '<div style="font-size:12px;margin-bottom:4px"><a href="'+s.url+'" target="_blank" style="color:var(--primary)">'+s.name+'</a> — <span style="color:var(--text-muted)">'+s.type+'</span></div>'}).join('')+'</div>' : '');
+    '</div>';
 }
 
 // VITALS
@@ -4432,23 +4430,85 @@ function renderExam(p) {
   // Progress bar
   var pct = systems.length>0?Math.round(d.examSystems.length/systems.length*100):0;
   html += '<div class="exam-progress"><span>🩺 <strong>'+d.examSystems.length+'/'+systems.length+'</strong> systems examined</span><div class="exam-progress-bar"><div class="exam-progress-fill" style="width:'+pct+'%"></div></div><span>'+pct+'%</span></div>';
-  // System cards
+  // System cards with exam maneuver sub-menus
+  var EXAM_MANEUVERS = {
+    general: ['Appearance','Level of consciousness','Distress assessment','Body habitus'],
+    heent: ['Pupil exam','Oral/pharyngeal','Ear/TM exam','Nasal exam','Fundoscopy'],
+    neck: ['Lymph nodes','JVD assessment','Thyroid','Meningeal signs','Tracheal position'],
+    cardiovascular: ['Auscultation','PMI palpation','Peripheral pulses','Edema check','Capillary refill'],
+    pulmonary: ['Auscultation','Percussion','Chest expansion','Accessory muscle use','Respiratory effort'],
+    abdominal: ['Inspection','Auscultation','Palpation','Peritoneal signs','Guarding/rigidity','Costovertebral angle'],
+    extremities: ['Range of motion','Pulses','Edema','Sensation','Compartment check','Skin temperature'],
+    neurologic: ['Mental status','Cranial nerves','Motor strength','Sensation','Reflexes','Coordination/gait'],
+    skin: ['Inspection','Rash distribution','Turgor','Wounds/lesions','Color/perfusion','Nail exam']
+  };
   html += systems.map(function(s) {
     var done = d.examSystems.includes(s.key);
     var finding = pe[s.key];
     var isAbn = finding && !/(normal|clear|soft|supple|no |denies|unremarkable|2\+ pulses|alert and oriented|moist|symmetric|non-tender)/i.test(finding);
-    return '<div class="exam-system '+(done?'examined':'')+'" '+(done?'':'onclick="examineSystem(\''+s.key+'\')"')+'>' +
+    var expanding = d._expandedExam === s.key && !done;
+    var maneuvers = EXAM_MANEUVERS[s.key] || ['Examine'];
+    if (done) {
+      return '<div class="exam-system examined">' +
+        '<div class="sys-icon">'+s.icon+'</div>' +
+        '<div style="flex:1"><div class="sys-name">'+s.name+(isAbn?' <span style="color:var(--danger);font-size:10px;font-weight:700">⚡ KEY FINDING</span>':'')+'</div><div class="sys-finding">'+finding+'</div></div>' +
+        '<span class="sys-badge '+(isAbn?'abnormal':'normal')+'">'+(isAbn?'ABNORMAL':'Normal')+'</span></div>';
+    }
+    if (expanding) {
+      return '<div class="exam-system" style="flex-direction:column;align-items:stretch;cursor:default;border-color:var(--primary);background:var(--primary-light)">' +
+        '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">' +
+          '<div class="sys-icon">'+s.icon+'</div>' +
+          '<div class="sys-name" style="flex:1">'+s.name+' — Select maneuvers</div>' +
+          '<span onclick="collapseExam()" style="cursor:pointer;font-size:18px;color:var(--text-muted)">✕</span>' +
+        '</div>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">' +
+          maneuvers.map(function(m,i){
+            var checked = d._selectedManeuvers && d._selectedManeuvers.includes(i);
+            return '<label style="display:flex;align-items:center;gap:5px;font-size:12px;padding:6px 10px;background:white;border:1.5px solid '+(checked?'var(--primary)':'var(--border)')+';border-radius:8px;cursor:pointer;transition:all .15s" onclick="toggleManeuver('+i+')">' +
+              '<input type="checkbox" '+(checked?'checked':'')+' style="pointer-events:none"> '+m+'</label>';
+          }).join('') +
+        '</div>' +
+        '<button onclick="performExam(\''+s.key+'\')" style="padding:10px;border-radius:8px;background:var(--primary);color:white;border:none;font-weight:600;font-size:13px;cursor:pointer;transition:all .15s" ' +
+          (d._selectedManeuvers && d._selectedManeuvers.length>0 ? '' : 'disabled style="padding:10px;border-radius:8px;background:#cbd5e1;color:white;border:none;font-weight:600;font-size:13px;cursor:not-allowed"') +
+        '>🩺 Perform Exam'+(d._selectedManeuvers && d._selectedManeuvers.length>0 ? ' ('+d._selectedManeuvers.length+' selected)' : ' — select at least one')+'</button>' +
+      '</div>';
+    }
+    return '<div class="exam-system" onclick="expandExam(\''+s.key+'\')">' +
       '<div class="sys-icon">'+s.icon+'</div>' +
-      '<div style="flex:1"><div class="sys-name">'+s.name+(isAbn&&done?' <span style="color:var(--danger);font-size:10px;font-weight:700">⚡ KEY FINDING</span>':'')+'</div>'+(done?'<div class="sys-finding">'+finding+'</div>':'')+'</div>' +
-      (done ? '<span class="sys-badge '+(isAbn?'abnormal':'normal')+'">'+(isAbn?'ABNORMAL':'Normal')+'</span>' : '<span style="font-size:11px;color:var(--text-muted)">Tap to examine →</span>') +
-    '</div>';
+      '<div style="flex:1"><div class="sys-name">'+s.name+'</div></div>' +
+      '<span style="font-size:11px;color:var(--text-muted)">Tap to examine →</span></div>';
   }).join('');
   return html;
 }
-function examineSystem(key) {
+function expandExam(key) {
   var p = patients.find(function(x){return x.id===selectedPatientId});
-  if (!p || p.discovered.examSystems.includes(key)) return;
+  if (!p) return;
+  p.discovered._expandedExam = key;
+  p.discovered._selectedManeuvers = [];
+  switchTab('exam');
+}
+function collapseExam() {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p) return;
+  p.discovered._expandedExam = null;
+  p.discovered._selectedManeuvers = [];
+  switchTab('exam');
+}
+function toggleManeuver(idx) {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p) return;
+  if (!p.discovered._selectedManeuvers) p.discovered._selectedManeuvers = [];
+  var i = p.discovered._selectedManeuvers.indexOf(idx);
+  if (i === -1) p.discovered._selectedManeuvers.push(idx);
+  else p.discovered._selectedManeuvers.splice(i,1);
+  switchTab('exam');
+}
+function performExam(key) {
+  var p = patients.find(function(x){return x.id===selectedPatientId});
+  if (!p || !p.discovered._selectedManeuvers || p.discovered._selectedManeuvers.length === 0) return;
   p.discovered.examSystems.push(key);
+  p.discovered._expandedExam = null;
+  p.discovered._selectedManeuvers = [];
   switchTab('exam');
 }
 
@@ -4817,6 +4877,11 @@ function renderTeaching(p) {
   html += '<div class="teaching-card" style="background:#fef2f2;border-color:#fecaca"><h4 style="color:var(--danger)">Must-Not-Miss Diagnoses</h4>'+t.mustNotMiss.map(function(x){return '<div class="teaching-item must-not-miss-item">'+x+'</div>'}).join('')+'</div>';
   html += '<div class="teaching-card" style="background:#fffbeb;border-color:#fde68a"><h4 style="color:#92400e">Common Pitfalls</h4>'+t.commonPitfalls.map(function(x){return '<div class="teaching-item pitfall-item">'+x+'</div>'}).join('')+'</div>';
   html += '<div class="emr-section"><div class="emr-section-title">Correct Diagnosis</div><div style="font-size:16px;font-weight:700;color:var(--primary);padding:12px;background:var(--primary-light);border-radius:8px">'+p.variant.diagnosis+'</div></div>';
+
+  // Evidence Sources — only shown here in Teaching (post-disposition)
+  if (p.template.sources) {
+    html += '<div class="emr-section"><div class="emr-section-title">📚 Evidence Sources</div>'+p.template.sources.map(function(s){return '<div style="font-size:12px;margin-bottom:4px"><a href="'+s.url+'" target="_blank" style="color:var(--primary)">'+s.name+'</a> — <span style="color:var(--text-muted)">'+s.type+'</span></div>'}).join('')+'</div>';
+  }
 
   // Admit bridge banner
   if (p.admitBridged) {
@@ -5293,7 +5358,21 @@ updateClock();
 </script>
 <script src="../voice-input.js"></script>
 <script src="../dx-bias-assessment.js"></script>
-<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"js/rdx-nav.js";document.head.appendChild(s)})();</script>
+<script>
+// Load rdx-nav.js — try multiple paths
+(function(){
+  var paths = ['../js/rdx-nav.js', '../ReasonDx/js/rdx-nav.js', '/js/rdx-nav.js', '/ReasonDx/js/rdx-nav.js'];
+  var idx = 0;
+  function tryNext() {
+    if (idx >= paths.length) return;
+    var s = document.createElement('script');
+    s.src = paths[idx++];
+    s.onerror = tryNext;
+    document.head.appendChild(s);
+  }
+  tryNext();
+})();
+</script>
 <script>
 // Voice input for patient chat
 function initVoiceForChat() {

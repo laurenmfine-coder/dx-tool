@@ -1,306 +1,307 @@
 <!DOCTYPE html>
-<!-- ReasonDx Landing | redesign 2026-02-24 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReasonDx — Clinical Reasoning Platform</title>
-<meta name="description" content="The only platform where your clinical decisions follow the patient. AI-powered clinical reasoning training across 58 ED cases, 23 simulation scenarios, and 326 reasoning cases.">
-<meta property="og:title" content="ReasonDx — Clinical Reasoning Platform">
-<meta property="og:description" content="Train clinical reasoning with AI patients that remember your decisions. ED triage through overnight management to morning rounds — one patient, one story.">
+<title>ReasonDx — Virtual Teaching Hospital</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
-
-<!-- Public page — no auth required -->
-<script>
-/* Smart CTA: free launch — go direct to all content */
-function authGo(url){location.href=url}
-</script>
-<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-:root{--brand:#2874A6;--brand-dark:#1B4F72;--brand-light:#D4E6F1;--brand-subtle:#EBF5FB;--navy:#0F2B3D;--text:#1E293B;--text-muted:#64748B;--text-dim:#94A3B8;--bg:#FAFCFE;--bg-warm:#F8FAFC;--white:#FFF;--border:#E2E8F0;--border-light:#F1F5F9;--green:#059669;--amber:#D97706;--purple:#7C3AED;--red:#DC2626;--font:'DM Sans',-apple-system,sans-serif;--font-display:'DM Serif Display',Georgia,serif}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--font);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#060a10;--card:#0c1118;--border:rgba(255,255,255,.06);--text:#e0e0e0;--dim:rgba(255,255,255,.4);--blue:#2874A6;--blue-bg:rgba(40,116,166,.08);--red:#DC2626;--purple:#7C3AED;--green:#059669;--amber:#D97706}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 
 /* ═══ HERO ═══ */
-.hero{position:relative;overflow:hidden;padding:80px 24px 72px;background:linear-gradient(168deg,var(--navy) 0%,#1B4F72 48%,var(--brand) 100%);color:#fff;text-align:center}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(40,116,166,.25) 0%,transparent 70%),radial-gradient(circle at 20% 80%,rgba(255,255,255,.04) 0%,transparent 50%);pointer-events:none}
-.hero-inner{position:relative;max-width:780px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;letter-spacing:.03em;margin-bottom:28px;backdrop-filter:blur(4px)}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#34D399;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);line-height:1.15;font-weight:400;margin-bottom:20px;letter-spacing:-.01em}
-.hero h1 em{font-style:italic;color:#7DD3FC}
-.hero-sub{font-size:clamp(15px,2vw,18px);line-height:1.65;color:rgba(255,255,255,.78);max-width:600px;margin:0 auto 36px}
-.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--brand-dark);font-weight:700;font-size:15px;padding:14px 32px;border-radius:12px;text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(0,0,0,.15)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:600;font-size:14px;padding:13px 28px;border-radius:12px;text-decoration:none;transition:all .2s;backdrop-filter:blur(4px)}
-.btn-secondary:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35)}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(40,116,166,.06) 0%,transparent 70%);pointer-events:none}
+.hero-badge{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);background:var(--blue-bg);padding:6px 16px;border-radius:100px;border:1px solid rgba(40,116,166,.15);margin-bottom:24px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(40px,6vw,72px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:12px}
+.hero h1 span{color:var(--blue);font-style:italic}
+.hero .tagline{font-size:clamp(15px,2vw,18px);color:var(--dim);max-width:560px;line-height:1.7;margin-bottom:40px}
 
-/* ═══ SECTIONS ═══ */
-.section-wrap{max-width:1060px;margin:0 auto;padding:80px 24px}
-.section-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--brand);margin-bottom:12px}
-.section-tag .line{width:24px;height:2px;background:var(--brand);border-radius:2px}
-.section-title{font-family:var(--font-display);font-size:clamp(24px,3vw,36px);color:var(--navy);margin-bottom:12px;line-height:1.2}
-.section-desc{font-size:16px;color:var(--text-muted);line-height:1.65;max-width:640px}
+/* CTAs */
+.cta-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
+.cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;padding:16px 32px;border-radius:12px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:inherit}
+.cta-primary:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 12px 32px rgba(40,116,166,.25)}
+.cta-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);color:#fff;font-size:14px;font-weight:600;padding:14px 28px;border-radius:12px;text-decoration:none;border:1px solid var(--border);transition:all .2s;cursor:pointer;font-family:inherit}
+.cta-secondary:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);transform:translateY(-1px)}
 
-/* ═══ ECOSYSTEM ═══ */
-.eco-bg{background:var(--bg-warm);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
-.eco-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:40px;background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.04)}
-.eco-card{padding:36px 28px;text-align:center;position:relative;transition:background .25s}
-.eco-card:not(:last-child){border-right:1px solid var(--border-light)}
-.eco-card:hover{background:var(--brand-subtle)}
-.eco-icon{width:56px;height:56px;border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:26px}
-.eco-card:nth-child(1) .eco-icon{background:#EBF5FB}
-.eco-card:nth-child(2) .eco-icon{background:#FEF3C7}
-.eco-card:nth-child(3) .eco-icon{background:#F3E8FF}
-.eco-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-.eco-card:nth-child(1) .eco-label{color:var(--brand)}
-.eco-card:nth-child(2) .eco-label{color:var(--amber)}
-.eco-card:nth-child(3) .eco-label{color:var(--purple)}
-.eco-name{font-family:var(--font-display);font-size:22px;color:var(--navy);margin-bottom:10px}
-.eco-desc{font-size:13px;color:var(--text-muted);line-height:1.6}
-.eco-connector{position:absolute;top:50%;transform:translateY(-50%);right:-21px;width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--brand);z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.eco-loop{margin-top:32px;padding:24px;background:#fff;border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;gap:20px;box-shadow:0 2px 12px rgba(0,0,0,.03)}
-.eco-loop-icon{font-size:32px;flex-shrink:0}
-.eco-loop-text h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px}
-.eco-loop-text p{font-size:13px;color:var(--text-muted);line-height:1.6}
+/* Search bar */
+.search-wrap{width:100%;max-width:520px;position:relative;margin-bottom:8px}
+.search-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 20px 14px 44px;color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:all .2s}
+.search-input:focus{border-color:rgba(40,116,166,.4);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.search-input::placeholder{color:rgba(255,255,255,.25)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:16px;pointer-events:none}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;display:none;z-index:20;max-height:320px;overflow-y:auto;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.search-results.active{display:block}
+.sr-item{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s;text-decoration:none;color:var(--text)}
+.sr-item:last-child{border-bottom:none}
+.sr-item:hover{background:rgba(255,255,255,.04)}
+.sr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sr-name{font-weight:600;font-size:13px}
+.sr-desc{font-size:11px;color:var(--dim)}
+.sr-category{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-left:auto;white-space:nowrap}
 
-/* ═══ JOURNEY ═══ */
-.journey-bg{background:#fff}
-.journey-flow{display:flex;align-items:stretch;gap:0;margin-top:36px}
-.journey-stage{flex:1;min-width:0;background:var(--bg-warm);border:2px solid var(--border);border-radius:16px;padding:28px 20px 22px;position:relative;z-index:2;text-decoration:none;color:var(--text);transition:all .25s}
-.journey-stage:hover{border-color:var(--brand);transform:translateY(-4px);box-shadow:0 12px 32px rgba(40,116,166,.12)}
-.stage-num{position:absolute;top:-14px;left:20px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
-.stage-ed .stage-num{background:#DC2626}.stage-nf .stage-num{background:#7C3AED}.stage-sr .stage-num{background:#059669}
-.stage-icon{font-size:28px;margin-bottom:10px}
-.stage-title{font-family:var(--font-display);font-size:20px;color:var(--navy);margin-bottom:4px}
-.stage-role{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);margin-bottom:10px}
-.stage-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}
-.data-pills{display:flex;flex-wrap:wrap;gap:5px}
-.data-pill{font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;background:var(--brand-subtle);color:var(--brand);white-space:nowrap}
-.stage-nf .data-pill{background:#F3E8FF;color:#7C3AED}
-.stage-sr .data-pill{background:#ECFDF5;color:#059669}
-.journey-connector{display:flex;flex-direction:column;align-items:center;justify-content:center;width:60px;flex-shrink:0;position:relative;z-index:3}
-.connector-arrow{width:36px;height:36px;border-radius:50%;background:#fff;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--brand);box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.connector-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-dim);text-align:center;margin-top:6px;line-height:1.3}
-.journey-cta{margin-top:28px;padding:20px 24px;background:linear-gradient(135deg,var(--navy) 0%,var(--brand-dark) 100%);border-radius:14px;color:#fff;display:flex;align-items:center;gap:16px}
-.journey-cta-text{flex:1}
-.journey-cta-title{font-weight:700;font-size:15px;margin-bottom:4px}
-.journey-cta-desc{font-size:12px;opacity:.8;line-height:1.5}
-.journey-cta .btn-primary{font-size:13px;padding:10px 22px;flex-shrink:0}
-.journey-stats{display:flex;gap:24px;margin-top:20px;justify-content:center;flex-wrap:wrap}
-.journey-stat{text-align:center;min-width:80px}
-.journey-stat-num{font-family:var(--font-display);font-size:28px;color:var(--brand)}
-.journey-stat-label{font-size:11px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em}
+.hero-hint{font-size:11px;color:rgba(255,255,255,.2);margin-top:4px}
 
-/* ═══ TRAINERS ═══ */
-.trainers-bg{background:var(--bg-warm);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
-.trainer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:36px}
-.trainer-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 22px;text-decoration:none;color:var(--text);transition:all .25s;display:flex;flex-direction:column}
-.trainer-card:hover{border-color:var(--brand);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
-.trainer-icon{font-size:28px;margin-bottom:12px}
-.trainer-name{font-weight:700;font-size:16px;color:var(--navy);margin-bottom:6px}
-.trainer-desc{font-size:13px;color:var(--text-muted);line-height:1.55;margin-bottom:14px;flex:1}
-.trainer-tags{display:flex;gap:6px;flex-wrap:wrap}
-.trainer-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--bg-warm);color:var(--text-muted)}
-.trainer-tag.pro{background:#FEF3C7;color:#92400E}
+/* ═══ QUICK NAV (below hero) ═══ */
+.quick-nav{padding:0 24px 60px;max-width:1100px;margin:0 auto}
+.quick-nav h2{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:#fff;text-align:center;margin-bottom:8px}
+.quick-nav .qn-sub{text-align:center;font-size:13px;color:var(--dim);margin-bottom:32px}
 
-/* ═══ STATS ═══ */
-.stats-strip{background:var(--navy);color:#fff;padding:32px 24px;text-align:center}
-.stats-row{max-width:860px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px}
-.stat{min-width:100px}.stat-num{font-family:var(--font-display);font-size:36px;color:#7DD3FC}
-.stat-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.65;margin-top:2px}
+.dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.dept-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:var(--text);transition:all .2s;position:relative;overflow:hidden}
+.dept-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;opacity:.6}
+.dept-card:hover{border-color:rgba(255,255,255,.1);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.dept-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.dept-info h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:3px}
+.dept-info p{font-size:12px;color:var(--dim);line-height:1.5}
+.dept-info .dept-stat{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
 
-/* ═══ CTA ═══ */
-.cta-footer{padding:72px 24px;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--brand-subtle) 100%)}
-.cta-footer h2{font-family:var(--font-display);font-size:32px;color:var(--navy);margin-bottom:12px}
-.cta-footer p{font-size:16px;color:var(--text-muted);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
-.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.cta-actions .btn-primary{background:var(--brand);color:#fff}.cta-actions .btn-primary:hover{background:var(--brand-dark)}
-.cta-actions .btn-outline{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--border);color:var(--text);font-weight:600;font-size:14px;padding:12px 26px;border-radius:12px;text-decoration:none;transition:all .2s}
-.cta-actions .btn-outline:hover{border-color:var(--brand);color:var(--brand)}
-.site-footer{padding:32px 24px;text-align:center;border-top:1px solid var(--border);font-size:12px;color:var(--text-dim)}
-.site-footer a{color:var(--brand);text-decoration:none}
+/* Color accents */
+.dept-card[data-c="red"]::before{background:var(--red)}
+.dept-card[data-c="purple"]::before{background:var(--purple)}
+.dept-card[data-c="green"]::before{background:var(--green)}
+.dept-card[data-c="amber"]::before{background:var(--amber)}
+.dept-card[data-c="blue"]::before{background:var(--blue)}
+.dept-card[data-c="pink"]::before{background:#EC4899}
+.dept-card[data-c="indigo"]::before{background:#6366F1}
 
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:800px){
-.eco-grid{grid-template-columns:1fr}.eco-card:not(:last-child){border-right:none;border-bottom:1px solid var(--border-light)}.eco-connector{display:none}
-.journey-flow{flex-direction:column;gap:12px}.journey-connector{width:auto;height:40px;flex-direction:row}
-.journey-cta{flex-direction:column;text-align:center}.trainer-grid{grid-template-columns:1fr}
+/* ═══ HOW IT WORKS ═══ */
+.how-section{padding:60px 24px;max-width:900px;margin:0 auto}
+.how-section h2{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:#fff;text-align:center;margin-bottom:8px}
+.how-sub{text-align:center;font-size:13px;color:var(--dim);margin-bottom:36px}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.how-step{text-align:center;padding:24px 16px;background:var(--card);border:1px solid var(--border);border-radius:14px}
+.how-num{font-size:32px;font-weight:700;color:var(--blue);opacity:.3;font-family:'DM Serif Display',serif}
+.how-title{font-size:15px;font-weight:700;color:#fff;margin:8px 0 6px}
+.how-desc{font-size:12px;color:var(--dim);line-height:1.6}
+
+/* ═══ FOOTER ═══ */
+.footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);max-width:900px;margin:0 auto}
+.footer-stats{display:flex;justify-content:center;gap:32px;margin-bottom:20px;flex-wrap:wrap}
+.footer-stat .fs-num{font-size:24px;font-weight:700;color:var(--blue);font-family:'DM Serif Display',serif}
+.footer-stat .fs-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.footer-links{display:flex;gap:16px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.footer-links a{font-size:12px;color:var(--dim);text-decoration:none}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.15)}
+.save-prompt{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--blue);background:var(--blue-bg);padding:8px 16px;border-radius:8px;border:1px solid rgba(40,116,166,.15);text-decoration:none;margin-bottom:16px;transition:all .15s}
+.save-prompt:hover{background:rgba(40,116,166,.15);border-color:rgba(40,116,166,.3)}
+
+@media(max-width:768px){
+  .how-steps{grid-template-columns:1fr}
+  .dept-grid{grid-template-columns:1fr}
+  .cta-group{flex-direction:column;align-items:center}
 }
-@media(max-width:500px){.hero{padding:56px 20px 52px}.hero-actions{flex-direction:column;align-items:stretch}.btn-primary,.btn-secondary{justify-content:center}}
 </style>
 </head>
 <body>
 
-<script src="rdx-nav.js"></script>
-
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-<div class="hero-inner">
-    <div class="hero-badge"><span class="dot"></span> Now with 11 full-journey cases</div>
-    <h1>Your clinical decisions<br>follow the <em>patient</em>.</h1>
-    <p class="hero-sub">The only platform where a single patient flows from ED triage through overnight management to morning rounds — with every lab, image, medication, and handoff intact.</p>
-    <div class="hero-actions">
-        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="btn-primary">Start in the ED →</a>
-        <a href="#how-it-works" class="btn-secondary">See how it works ↓</a>
-    </div>
-    <p style="margin-top:16px;font-size:13px;opacity:.6"><a href="auth/register.html" style="color:#fff;text-decoration:underline">Sign in</a> or create a free account to get started</p>
-</div>
+  <div class="hero-badge">Free & Open Access</div>
+  <h1>Welcome to <span>ReasonDx</span></h1>
+  <p class="tagline">A virtual teaching hospital for clinical reasoning. Walk the halls, see patients, work through cases, and build diagnostic skill — no login required.</p>
+
+  <div class="cta-group">
+    <a class="cta-primary" href="hospital-3d.html">🏥 Enter the Hospital</a>
+    <a class="cta-secondary" href="#departments">📋 Browse Departments</a>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search" type="text" placeholder="Search for a case, topic, or tool…" autocomplete="off" oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)" onblur="setTimeout(()=>document.getElementById('search-results').classList.remove('active'),200)">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="hero-hint">Try: "chest pain", "ABG", "clinical reasoning", "SBAR"</div>
 </section>
 
-<!-- ═══ ECOSYSTEM ═══ -->
-<div class="eco-bg" id="how-it-works">
-<div class="section-wrap">
-    <div class="section-tag"><span class="line"></span> THE PLATFORM</div>
-    <h2 class="section-title">Three layers. One ecosystem.</h2>
-    <p class="section-desc">ReasonDx is both the name of the platform and one of three integrated learning layers. Each layer makes the others stronger — practicing cases surfaces gaps in mechanism knowledge, understanding mechanisms improves reasoning, and coaching reveals the blind spots you can't see yourself.</p>
-    <div class="eco-grid">
-        <div class="eco-card">
-            <div class="eco-icon">🧠</div>
-            <div class="eco-label">Layer 1 — Reason</div>
-            <div class="eco-name">ReasonDx</div>
-            <div class="eco-desc">Build differentials, take histories from AI patients, order workups, interpret results, and make disposition decisions. 326 cases across 29 specialties with progressive disclosure and AI feedback.</div>
-            <div class="eco-connector">→</div>
-        </div>
-        <div class="eco-card">
-            <div class="eco-icon">⚙️</div>
-            <div class="eco-label">Layer 2 — Understand</div>
-            <div class="eco-name">MechanismDx</div>
-            <div class="eco-desc">When you miss a case, understand <em>why</em>. Pathophysiology modules explain the mechanism behind each diagnosis — anatomy, pharmacology, and the clinical reasoning chain that connects symptoms to disease.</div>
-            <div class="eco-connector">→</div>
-        </div>
-        <div class="eco-card">
-            <div class="eco-icon">🗣️</div>
-            <div class="eco-label">Layer 3 — Reflect</div>
-            <div class="eco-name">CoachDx</div>
-            <div class="eco-desc">An AI clinical coach uses Socratic questioning to surface reasoning patterns, cognitive biases, and growth areas. No spoilers — it guides you to the answer yourself, the way an attending teaches at the bedside.</div>
-        </div>
-    </div>
-    <div class="eco-loop">
-        <div class="eco-loop-icon">🔄</div>
-        <div class="eco-loop-text">
-            <h4>The reinforcing loop</h4>
-            <p>Practice a case in ReasonDx → review the mechanism in MechanismDx → debrief your reasoning with CoachDx → return to the next case with sharper instincts. Each rotation through the loop compounds your clinical judgment.</p>
-        </div>
-    </div>
-</div>
-</div>
+<!-- ═══ DEPARTMENTS ═══ -->
+<section class="quick-nav" id="departments">
+  <h2>Department Directory</h2>
+  <p class="qn-sub">Jump straight to where you want to work</p>
 
-<!-- ═══ CLINICAL JOURNEY ═══ -->
-<div class="journey-bg">
-<div class="section-wrap">
-    <div class="section-tag"><span class="line"></span> THE CLINICAL JOURNEY</div>
-    <h2 class="section-title">One patient. Three stages. Everything carries forward.</h2>
-    <p class="section-desc">For 11 high-acuity cases, your clinical decisions in the ED create the patient that arrives on the night float team's list — and the patient you present on morning rounds. Labs, imaging, treatments, vitals, and your handoff all flow through.</p>
-    <div class="journey-flow">
-        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="journey-stage stage-ed">
-            <div class="stage-num">1</div>
-            <div class="stage-icon">🚑</div>
-            <div class="stage-title">ED Board</div>
-            <div class="stage-role">Emergency Department</div>
-            <div class="stage-desc">Run the department. AI patients arrive with undifferentiated complaints. Take a history, examine, order labs and imaging, interpret results, start evidence-based treatments, and make the disposition call.</div>
-            <div class="data-pills">
-                <span class="data-pill">History &amp; Exam</span>
-                <span class="data-pill">Labs</span>
-                <span class="data-pill">Imaging</span>
-                <span class="data-pill">ECG</span>
-                <span class="data-pill">455 Treatment Orders</span>
-            </div>
-        </a>
-        <div class="journey-connector"><div class="connector-arrow">→</div><div class="connector-label">Patient<br>admitted</div></div>
-        <a href="#" onclick="authGo('night-float.html');return false" class="journey-stage stage-nf">
-            <div class="stage-num">2</div>
-            <div class="stage-icon">🌙</div>
-            <div class="stage-title">Night Float</div>
-            <div class="stage-role">Overnight Call</div>
-            <div class="stage-desc">Accept new admissions from the ED and manage floor patients overnight. Write admission orders, respond to nurse pages, handle clinical decompensations, and hand off to the day team at 7 AM using I-PASS.</div>
-            <div class="data-pills">
-                <span class="data-pill">ED Admits</span>
-                <span class="data-pill">Floor Pages</span>
-                <span class="data-pill">Admission Orders</span>
-                <span class="data-pill">I-PASS Handoff</span>
-            </div>
-        </a>
-        <div class="journey-connector"><div class="connector-arrow">→</div><div class="connector-label">Morning<br>handoff</div></div>
-        <a href="#" onclick="authGo('simroomdx.html');return false" class="journey-stage stage-sr">
-            <div class="stage-num">3</div>
-            <div class="stage-icon">🩺</div>
-            <div class="stage-title">SimRoomDx</div>
-            <div class="stage-role">Morning Rounds</div>
-            <div class="stage-desc">Present your patient on rounds. The AI attending, nurse, pharmacist, family member, and specialist all know the real history, meds, labs, and overnight course. They ask questions. They push back. They teach.</div>
-            <div class="data-pills">
-                <span class="data-pill">6 AI Characters</span>
-                <span class="data-pill">Full History</span>
-                <span class="data-pill">All Labs &amp; Imaging</span>
-                <span class="data-pill">Your Handoff</span>
-            </div>
-        </a>
-    </div>
-    <div class="journey-cta">
-        <div style="font-size:28px;flex-shrink:0">🔄</div>
-        <div class="journey-cta-text">
-            <div class="journey-cta-title">Start at any stage — or play the full journey</div>
-            <div class="journey-cta-desc">Each simulator works standalone with built-in cases. For connected cases (STEMI, NSTEMI, DKA, Stroke, COPD, Urosepsis, PE, CHF, Meningitis, GI Bleed, Pancreatitis), the full path carries one patient with all clinical data intact.</div>
-        </div>
-        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="btn-primary" style="background:#fff;color:var(--brand-dark)">Begin in the ED →</a>
-    </div>
-    <div class="journey-stats">
-        <div class="journey-stat"><div class="journey-stat-num">58</div><div class="journey-stat-label">ED Cases</div></div>
-        <div class="journey-stat"><div class="journey-stat-num">23</div><div class="journey-stat-label">Sim Scenarios</div></div>
-        <div class="journey-stat"><div class="journey-stat-num">455</div><div class="journey-stat-label">Treatment Orders</div></div>
-        <div class="journey-stat"><div class="journey-stat-num">11</div><div class="journey-stat-label">Full Journey</div></div>
-        <div class="journey-stat"><div class="journey-stat-num">106</div><div class="journey-stat-label">Evidence Sources</div></div>
-    </div>
-</div>
-</div>
-
-<!-- ═══ SKILL TRAINERS ═══ -->
-<div class="trainers-bg">
-<div class="section-wrap">
-    <div class="section-tag"><span class="line"></span> SKILL TRAINERS</div>
-    <h2 class="section-title">Practice specific skills independently.</h2>
-    <p class="section-desc">Standalone trainers for clinical reasoning, communication, handoffs, and consultant interactions. Each one targets a different skill the clinical journey demands.</p>
-    <div class="trainer-grid">
-        <a href="#" onclick="authGo('cases/crt-hub.html');return false" class="trainer-card"><div class="trainer-icon">🧩</div><div class="trainer-name">Clinical Reasoning Trainer</div><div class="trainer-desc">Build your differential, take a history, examine, order workup, and refine your reasoning with AI feedback at each stage.</div><div class="trainer-tags"><span class="trainer-tag">55 CRT Cases</span><span class="trainer-tag">30 Trainers</span><span class="trainer-tag">29 Specialties</span></div></a>
-        <a href="#" onclick="authGo('tools/sbar-trainer.html');return false" class="trainer-card"><div class="trainer-icon">📋</div><div class="trainer-name">SBAR Communication</div><div class="trainer-desc">Practice structured handoffs using Situation-Background-Assessment-Recommendation with AI-scored feedback on clarity and prioritization.</div><div class="trainer-tags"><span class="trainer-tag">13 Scenarios</span><span class="trainer-tag">AI Scoring</span></div></a>
-        <a href="#" onclick="authGo('ed-handoff-trainer.html');return false" class="trainer-card"><div class="trainer-icon">📞</div><div class="trainer-name">ED Handoff Trainer</div><div class="trainer-desc">The ED calls with a new admission. How much info you get depends on the difficulty tier. Build your differential and make the diagnosis.</div><div class="trainer-tags"><span class="trainer-tag">3 Difficulty Tiers</span><span class="trainer-tag">4 Cases</span></div></a>
-        <a href="#" onclick="authGo('consult-callback.html');return false" class="trainer-card"><div class="trainer-icon">🗣️</div><div class="trainer-name">Consultant Callback</div><div class="trainer-desc">The specialist calls back with questions and pushback. Present your case, justify the consult, and hold your ground against 8 different personalities.</div><div class="trainer-tags"><span class="trainer-tag">8 Specialties</span><span class="trainer-tag">Pushback Training</span></div></a>
-        <a href="#" onclick="authGo('CoachDx/index.html');return false" class="trainer-card"><div class="trainer-icon">💡</div><div class="trainer-name">AI Clinical Coach</div><div class="trainer-desc">Personalized Socratic coaching. Discuss cases, explore reasoning strategies, identify cognitive biases, and get post-case debriefs.</div><div class="trainer-tags"><span class="trainer-tag">Socratic Mentoring</span><span class="trainer-tag pro">PRO</span></div></a>
-        <a href="#" onclick="authGo('case-browser.html');return false" class="trainer-card" style="border-style:dashed"><div class="trainer-icon">🔍</div><div class="trainer-name">Browse All Cases</div><div class="trainer-desc">Search and filter 326 clinical reasoning cases across 29 specialties. Find cases by topic, system, or difficulty level.</div><div class="trainer-tags"><span class="trainer-tag">326 cases</span><span class="trainer-tag">29 Specialties</span><span class="trainer-tag">Search &amp; Filter</span></div></a>
-    </div>
-</div>
-</div>
-
-<!-- ═══ STATS ═══ -->
-<div class="stats-strip"><div class="stats-row">
-    <div class="stat"><div class="stat-num">326</div><div class="stat-label">Reasoning Cases</div></div>
-    <div class="stat"><div class="stat-num">29</div><div class="stat-label">Specialties</div></div>
-    <div class="stat"><div class="stat-num">455</div><div class="stat-label">Evidence-Based Orders</div></div>
-    <div class="stat"><div class="stat-num">106</div><div class="stat-label">Open-Access Sources</div></div>
-    <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Powered Throughout</div></div>
-</div></div>
-
-<!-- ═══ CTA ═══ -->
-<section class="cta-footer">
-    <h2>Ready to start reasoning?</h2>
-    <p>Pick a patient. Make decisions. See what happens.</p>
-    <div class="cta-actions">
-        <a href="#" onclick="authGo('legacy/ed-board-v2.html');return false" class="btn-primary">Start in the ED →</a>
-        <a href="#" onclick="authGo('training.html');return false" class="btn-outline">Go to Dashboard</a>
-    </div>
+  <div class="dept-grid">
+    <a class="dept-card" data-c="red" href="ed-3d.html">
+      <span class="dept-icon">🚑</span>
+      <div class="dept-info">
+        <h3>Emergency Department</h3>
+        <p>Walk the ED corridor. Enter patient rooms. Take histories, examine patients, order labs and imaging, and make disposition decisions.</p>
+        <div class="dept-stat">26 cases · Full EMR · 6-dimension scoring</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="purple" href="night-float.html">
+      <span class="dept-icon">🌙</span>
+      <div class="dept-info">
+        <h3>Night Float</h3>
+        <p>Cross-cover overnight call. Manage a patient list, respond to nurse pages, handle decompensations, and practice I-PASS handoff.</p>
+        <div class="dept-stat">Randomized or topic-based lists</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="green" href="simroomdx.html">
+      <span class="dept-icon">🩺</span>
+      <div class="dept-info">
+        <h3>Morning Rounds — SimRoomDx</h3>
+        <p>Present your patient to the attending. Practice oral presentations with AI characters who ask questions and push back.</p>
+        <div class="dept-stat">23 scenarios · 6 AI characters</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="amber" href="cases/crt-hub.html">
+      <span class="dept-icon">🧩</span>
+      <div class="dept-info">
+        <h3>Skills Lab — CRT</h3>
+        <p>Focused clinical reasoning trainers. SBAR handoffs, consultant callbacks, ED transitions, and diagnostic frameworks.</p>
+        <div class="dept-stat">79 cases · Multiple formats</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="blue" href="case-browser.html">
+      <span class="dept-icon">📚</span>
+      <div class="dept-info">
+        <h3>Medical Library</h3>
+        <p>Browse the full case and module library. MechanismDx pathophysiology, interactive cases, and guideline-referenced content.</p>
+        <div class="dept-stat">330+ modules · 325+ cases · 29 specialties</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="pink" href="CoachDx/index.html">
+      <span class="dept-icon">💡</span>
+      <div class="dept-info">
+        <h3>CoachDx</h3>
+        <p>AI Socratic coaching. Cognitive bias identification, clinical reasoning debriefs, and guided reflection on your diagnostic process.</p>
+        <div class="dept-stat">Post-case debriefs</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="indigo" href="tools/index.html">
+      <span class="dept-icon">🔧</span>
+      <div class="dept-info">
+        <h3>Clinical Tools</h3>
+        <p>ECG practice, ABG analyzer, clinical calculators, DDx builder, and spaced repetition flashcards.</p>
+        <div class="dept-stat">5 tool suites</div>
+      </div>
+    </a>
+  </div>
 </section>
 
-<footer class="site-footer">
-    <p>ReasonDx — Clinical Reasoning Platform &nbsp;·&nbsp; <a href="#" onclick="authGo('case-browser.html');return false">Browse Cases</a> &nbsp;·&nbsp; <a href="#" onclick="authGo('training.html');return false">Dashboard</a></p>
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section">
+  <h2>How Your Shift Works</h2>
+  <p class="how-sub">ReasonDx follows the patient from ED triage through overnight call to morning rounds</p>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-title">Emergency Department</div>
+      <div class="how-desc">Walk the ED. Enter patient rooms. Interview the patient, perform your exam, order workup, and make your clinical decisions.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-title">Night Float</div>
+      <div class="how-desc">Accept admissions from the ED. Manage overnight cross-cover. Respond to nurse pages, handle deteriorations, and hand off at dawn.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-title">Morning Rounds</div>
+      <div class="how-desc">Present your patient. The attending asks about your differential, workup, and plan. Defend your reasoning under questioning.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <a class="save-prompt" href="register.html">💾 Create a free account to save your progress</a>
+  <div class="footer-stats">
+    <div class="footer-stat"><div class="fs-num">330+</div><div class="fs-label">Modules</div></div>
+    <div class="footer-stat"><div class="fs-num">325+</div><div class="fs-label">Cases</div></div>
+    <div class="footer-stat"><div class="fs-num">79</div><div class="fs-label">CRTs</div></div>
+    <div class="footer-stat"><div class="fs-num">29</div><div class="fs-label">Specialties</div></div>
+  </div>
+  <div class="footer-links">
+    <a href="register.html">Sign Up</a>
+    <a href="hospital-3d.html">Virtual Hospital</a>
+    <a href="case-browser.html">Case Library</a>
+    <a href="tools/index.html">Tools</a>
+  </div>
+  <div class="footer-copy">ReasonDx · Clinical Reasoning Education Platform · © 2025</div>
 </footer>
 
+<script>
+// ═══ SEARCH ═══
+const SEARCH_INDEX = [
+  // ED cases
+  {name:'Chest Pain — STEMI',desc:'58M crushing substernal pressure, diaphoresis',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  {name:'Appendicitis',desc:'24F RLQ pain, migration from periumbilical',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  {name:'Subarachnoid Hemorrhage',desc:'42M thunderclap headache, worst of life',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  {name:'Pulmonary Embolism',desc:'31F pleuritic chest pain, calf swelling, OCP use',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  {name:'Bacterial Meningitis',desc:'19M fever, confusion, petechial rash',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  {name:'DKA',desc:'67F altered mental status, Kussmaul breathing',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  {name:'Acute Stroke',desc:'73M sudden left-sided weakness, afib',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  {name:'Necrotizing Fasciitis',desc:'45F rapidly spreading leg erythema, crepitus',cat:'ED Case',color:'#DC2626',url:'ed-3d.html'},
+  // Night Float
+  {name:'CHF Exacerbation',desc:'Night float cross-cover management',cat:'Night Float',color:'#7C3AED',url:'night-float.html'},
+  {name:'Post-Op Fever',desc:'POD2 right hemicolectomy, temperature spike',cat:'Night Float',color:'#7C3AED',url:'night-float.html'},
+  {name:'Hypokalemia',desc:'Critical K+ 2.9 in pneumonia patient',cat:'Night Float',color:'#7C3AED',url:'night-float.html'},
+  {name:'Post-Op Delirium',desc:'Elderly hip fracture, acute agitation',cat:'Night Float',color:'#7C3AED',url:'night-float.html'},
+  {name:'CO2 Narcosis',desc:'COPD exacerbation, over-oxygenation',cat:'Night Float',color:'#7C3AED',url:'night-float.html'},
+  {name:'Hypoglycemia in DKA Recovery',desc:'Glucose 52 after insulin transition',cat:'Night Float',color:'#7C3AED',url:'night-float.html'},
+  // Tools
+  {name:'ECG Practice',desc:'12-lead ECG interpretation trainer',cat:'Tool',color:'#6366F1',url:'tools/index.html'},
+  {name:'ABG Analyzer',desc:'Arterial blood gas interpretation',cat:'Tool',color:'#6366F1',url:'tools/index.html'},
+  {name:'Clinical Calculators',desc:'GCS, Wells, CURB-65, CHADS-VASc, etc.',cat:'Tool',color:'#6366F1',url:'tools/index.html'},
+  {name:'DDx Builder',desc:'Differential diagnosis generator',cat:'Tool',color:'#6366F1',url:'tools/index.html'},
+  {name:'Flashcards',desc:'Spaced repetition review',cat:'Tool',color:'#6366F1',url:'tools/index.html'},
+  // Skills
+  {name:'SBAR Handoff Trainer',desc:'Practice structured communication',cat:'Skills',color:'#D97706',url:'cases/crt-hub.html'},
+  {name:'Consultant Callback',desc:'Call the specialist with your question',cat:'Skills',color:'#D97706',url:'cases/crt-hub.html'},
+  {name:'ED Handoff Practice',desc:'Transition of care from ED to floor',cat:'Skills',color:'#D97706',url:'cases/crt-hub.html'},
+  {name:'I-PASS Handoff',desc:'Standardized overnight sign-out',cat:'Skills',color:'#D97706',url:'night-float.html'},
+  // Departments
+  {name:'CoachDx',desc:'AI Socratic coaching and reasoning debrief',cat:'Department',color:'#EC4899',url:'CoachDx/index.html'},
+  {name:'SimRoomDx — Morning Rounds',desc:'Present patients to the attending',cat:'Department',color:'#059669',url:'simroomdx.html'},
+  {name:'Medical Library',desc:'Browse all modules and cases',cat:'Department',color:'#2874A6',url:'case-browser.html'},
+  // Topics
+  {name:'Clinical Reasoning',desc:'Frameworks, diagnostic process, cognitive biases',cat:'Topic',color:'#2874A6',url:'case-browser.html'},
+  {name:'Cardiology',desc:'Cardiology cases, modules, and tools',cat:'Topic',color:'#DC2626',url:'case-browser.html'},
+  {name:'Pulmonary',desc:'Respiratory cases and modules',cat:'Topic',color:'#2874A6',url:'case-browser.html'},
+  {name:'Neurology',desc:'Neurologic emergencies and reasoning',cat:'Topic',color:'#2874A6',url:'case-browser.html'},
+  {name:'Infectious Disease',desc:'Sepsis, meningitis, soft tissue infections',cat:'Topic',color:'#2874A6',url:'case-browser.html'},
+];
+
+function handleSearch(val) {
+  const results = document.getElementById('search-results');
+  val = val.trim().toLowerCase();
+  if (!val || val.length < 2) { results.classList.remove('active'); return; }
+
+  const matches = SEARCH_INDEX.filter(item =>
+    item.name.toLowerCase().includes(val) ||
+    item.desc.toLowerCase().includes(val) ||
+    item.cat.toLowerCase().includes(val)
+  ).slice(0, 8);
+
+  if (!matches.length) {
+    results.innerHTML = '<div style="padding:16px;font-size:13px;color:rgba(255,255,255,.3)">No results found. Try a different search term.</div>';
+    results.classList.add('active');
+    return;
+  }
+
+  results.innerHTML = matches.map(m =>
+    `<a class="sr-item" href="${m.url}">
+      <div class="sr-dot" style="background:${m.color}"></div>
+      <div><div class="sr-name">${highlight(m.name, val)}</div><div class="sr-desc">${m.desc}</div></div>
+      <div class="sr-category">${m.cat}</div>
+    </a>`
+  ).join('');
+  results.classList.add('active');
+}
+
+function highlight(text, query) {
+  const idx = text.toLowerCase().indexOf(query);
+  if (idx === -1) return text;
+  return text.substring(0, idx) + '<strong style="color:#fff">' + text.substring(idx, idx+query.length) + '</strong>' + text.substring(idx+query.length);
+}
+
+// Close search on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('search-results').classList.remove('active');
+});
+</script>
 </body>
 </html>

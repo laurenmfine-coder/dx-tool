@@ -10,6 +10,7 @@
   else if (/\/modules\/raddx-|raddx-hub/i.test(path)) sec = 'raddx';
   else if (/\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
   else if (/\/cases\/|board-prep|training|adventure|\/CoachDx\//i.test(path)) sec = 'practice';
+  else if (/hospital-3d|ed-3d|night-float|simroomdx|virtual-hospital/i.test(path)) sec = 'simulate';
   else if (/\/tools\/|\/ecg\//i.test(path)) sec = 'tools';
   var saved = localStorage.getItem('rdx-theme') || 'light';
   if (saved !== 'light' && saved !== 'dark') saved = 'light';
@@ -38,6 +39,12 @@
         di(R+'cases/clinical-reasoning-trainer.html','\uD83E\uDDE9','Clinical Reasoning Trainer','Step-by-step CRTs')+
         di(R+'CoachDx/index.html','\uD83E\uDD16','CoachDx','AI clinical coaching')+
         di(R+'board-prep.html','\uD83D\uDCDD','Board Prep','615 board-style questions')
+      )+
+      dd('Simulate', sec==='simulate',
+        di(R+'hospital-3d.html','\uD83C\uDFE5','Virtual Hospital','3D walkthrough — all departments')+
+        di(R+'ed-3d.html','\uD83D\uDE91','Emergency Department','8 patient rooms with full encounters')+
+        di(R+'night-float.html','\uD83C\uDF19','Night Float','Overnight cross-cover with I-PASS')+
+        di(R+'simroomdx.html','\uD83E\uDE7A','SimRoomDx','Morning rounds — 6 AI characters')
       )+
       dd('Tools', sec==='tools',
         di(R+'tools/index.html','\uD83D\uDD27','All Tools','Calculators & references')+

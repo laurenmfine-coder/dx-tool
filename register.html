@@ -9,16 +9,60 @@
   gtag('js', new Date());
   gtag('config', 'G-EKCVJ1SMN3');
 </script>
+<script>
+// EARLY GOOGLE CALLBACK INTERCEPT — runs before page renders
+(function() {
+    var hasCallback = window.location.search.indexOf('callback=google') !== -1;
+    var hasToken = window.location.hash.indexOf('access_token') !== -1;
+    if (!hasCallback && !hasToken) return;
+
+    // Parse tokens from hash
+    var hash = window.location.hash.substring(1);
+    var params = {};
+    hash.split('&').forEach(function(part) {
+        var eq = part.indexOf('=');
+        if (eq > 0) params[part.substring(0, eq)] = decodeURIComponent(part.substring(eq + 1));
+    });
+
+    var accessToken = params['access_token'];
+    if (!accessToken) return;
+
+    // Decode JWT payload
+    try {
+        var parts = accessToken.split('.');
+        var payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+        var jwt = JSON.parse(atob(payload));
+        if (jwt && jwt.email) {
+            var meta = jwt.user_metadata || {};
+            localStorage.setItem('reasondx-user', JSON.stringify({
+                email: jwt.email,
+                name: meta.full_name || meta.name || jwt.email.split('@')[0],
+                tier: 'free',
+                supabaseId: jwt.sub,
+                registeredAt: new Date().toISOString(),
+                authProvider: 'google'
+            }));
+            // Redirect immediately — page never renders
+            var redirect = sessionStorage.getItem('reasondx-redirect');
+            if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.replace(redirect); }
+            else { window.location.replace('../index.html'); }
+        }
+    } catch(e) {
+        console.error('Early Google callback failed:', e);
+        // Fall through to normal page load — handleGoogleCallback will retry
+    }
+})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join ReasonDx | Clinical Reasoning Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <title>Join ReasonDx | Board-Ready Clinical Reasoning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
     <script src="../dx-sanitize.js"></script>
     <style>
-        :root { --primary: #2874A6; --primary-dark: #1f5f8b; --pro: #2874A6; --pro-dark: #1f5f8b; --beta: #d97706; --beta-dark: #b45309; }
+        :root { --primary: #1f5f8b; --primary-dark: #1a4971; --pro: #2563eb; --pro-dark: #1d4ed8; --beta: #d97706; --beta-dark: #b45309; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f0f5f9; min-height: 100vh; padding: 24px; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 50%, #f0f7fc 100%); min-height: 100vh; padding: 24px; }
         .page-container { max-width: 1000px; margin: 0 auto; }
         .page-header { text-align: center; margin-bottom: 40px; }
         .page-header h1 { font-size: 36px; font-weight: 800; color: #1e3a5f; margin-bottom: 8px; }
@@ -29,14 +73,14 @@
         .board-tag.step2 { background: #d4e8f7; color: #166534; }
         .board-tag.shelf { background: #fef3c7; color: #92400e; }
         .board-tag.rotation { background: #ede9fe; color: #6d28d9; }
-        .plans-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; max-width: 740px; margin-left: auto; margin-right: auto; }
-        @media (max-width: 800px) { .plans-grid { grid-template-columns: 1fr; } }
+        .plans-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; }
+        @media (max-width: 680px) { .plans-grid { grid-template-columns: 1fr !important; max-width: 400px !important; } }
         .plan-card { background: white; border-radius: 20px; padding: 32px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 3px solid transparent; cursor: pointer; transition: all 0.3s; position: relative; }
         .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
         .plan-card.selected { border-color: var(--primary); }
         .plan-card.selected.pro { border-color: var(--pro); }
         .plan-card.selected.beta { border-color: var(--beta); }
-        .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2874A6; color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+        .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--pro); color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
         .plan-badge.beta-badge { background: var(--beta); }
         .plan-icon { font-size: 48px; margin-bottom: 16px; text-align: center; }
         .plan-name { font-size: 24px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; text-align: center; }
@@ -49,14 +93,14 @@
         .plan-features li::before { content: "\2713"; color: var(--primary); font-weight: 700; }
         .plan-features li.excluded { color: #94a3b8; text-decoration: line-through; }
         .plan-features li.excluded::before { content: "\2717"; color: #dc2626; }
-        .plan-select-btn { width: 100%; padding: 14px; border-radius: 28px; font-size: 16px; font-weight: 600; cursor: pointer; border: 2px solid #e2e8f0; background: white; color: #475569; transition: all 0.2s; }
-        .plan-card.selected .plan-select-btn { background: #2874A6; color: white; border-color: #2874A6; }
-        .plan-card.selected.pro .plan-select-btn { background: #2874A6; border-color: #2874A6; }
+        .plan-select-btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; border: 2px solid #e2e8f0; background: white; color: #475569; transition: all 0.2s; }
+        .plan-card.selected .plan-select-btn { background: var(--primary); color: white; border-color: var(--primary); }
+        .plan-card.selected.pro .plan-select-btn { background: var(--pro); border-color: var(--pro); }
         .plan-card.selected.beta .plan-select-btn { background: var(--beta); border-color: var(--beta); }
         .hidden { display: none !important; }
         .form-card { background: white; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); overflow: hidden; max-width: 500px; margin: 0 auto; }
-        .form-header { background: linear-gradient(135deg, #2874A6 0%, #1f5f8b 100%); padding: 24px; text-align: center; color: white; }
-        .form-header.pro { background: linear-gradient(135deg, #2874A6 0%, #1f5f8b 100%); }
+        .form-header { background: linear-gradient(135deg, #1f5f8b 0%, #1a4971 100%); padding: 24px; text-align: center; color: white; }
+        .form-header.pro { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
         .form-header.beta { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); }
         .form-body { padding: 32px; }
         .steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; }
@@ -77,13 +121,18 @@
         .form-hint { font-size: 12px; color: #94a3b8; margin-top: 4px; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .optional { color: #94a3b8; font-weight: 400; }
-        .btn { width: 100%; padding: 14px; border-radius: 28px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.3px; }
-        .btn-primary { background: #2874A6; color: white; }
-        .btn-primary:hover { background: #1f5f8b; }
+        .btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
         .form-card.pro .btn-primary { background: var(--pro); }
         .form-card.pro .btn-primary:hover { background: var(--pro-dark); }
         .form-card.beta .btn-primary { background: var(--beta); }
         .form-card.beta .btn-primary:hover { background: var(--beta-dark); }
+        .btn-google { display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px 16px;border:1.5px solid #dadce0;border-radius:12px;background:white;color:#3c4043;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit;margin-bottom:12px }
+        .btn-google:hover { background:#f8f9fa;border-color:#c4c7cc;box-shadow:0 1px 3px rgba(0,0,0,.08) }
+        .btn-google svg { flex-shrink:0 }
+        .auth-divider { display:flex;align-items:center;gap:12px;margin:16px 0;color:#94a3b8;font-size:13px }
+        .auth-divider::before,.auth-divider::after { content:'';flex:1;height:1px;background:#e2e8f0 }
         .btn-link { background: none; color: #64748b; font-size: 14px; border: none; cursor: pointer; padding: 10px; }
         .login-prompt { text-align: center; margin-top: 16px; font-size: 14px; color: #64748b; }
         .login-prompt a { color: var(--primary); font-weight: 600; text-decoration: none; }
@@ -109,7 +158,7 @@
         .checkbox-group input { width: 18px; height: 18px; accent-color: var(--primary); }
         .pricing-toggle { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; }
         .pricing-toggle button { padding: 8px 20px; border-radius: 20px; border: 2px solid #e2e8f0; background: white; font-size: 14px; font-weight: 500; cursor: pointer; }
-        .pricing-toggle button.active { background: #2874A6; color: white; border-color: #2874A6; }
+        .pricing-toggle button.active { background: var(--pro); color: white; border-color: var(--pro); }
         .savings-badge { background: #d4e8f7; color: #166534; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 4px; }
         .success-screen { text-align: center; }
         .success-icon { font-size: 64px; margin-bottom: 16px; }
@@ -125,57 +174,53 @@
         .exam-tag.s2 { background: #d4e8f7; color: #166534; }
         .exam-tag.shelf { background: #fef3c7; color: #92400e; }
         .beta-note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px; margin-top: 16px; font-size: 13px; color: #92400e; text-align: center; }
-        .rdx-marketing, .rdx-features-showcase, .rdx-live-preview, .rdx-site-stats-inject, [data-rdx-inject], .what-inside, .features-section, .live-preview-section { display: none !important; }
-        .back-home { display: inline-flex; align-items: center; gap: 6px; color: #2874A6; text-decoration: none; font-size: 13px; font-weight: 600; margin-bottom: 20px; }
-        .back-home:hover { text-decoration: underline; }
     </style>
 <script src="../dx-user-bar.js" defer></script>
 </head>
 <body>
     <div class="page-container">
-        <div style="text-align:center;margin-bottom:12px"><a href="index.html" class="back-home">&larr; Back to Home</a></div>
         <div class="page-header">
-            <h1 style="font-family: 'Playfair Display', 'Georgia', serif; font-size: 42px; font-weight: 800; color: #1e3a5f; letter-spacing: -0.5px;">Reason<span style="border-bottom: 3px solid #2874A6;">Dx</span></h1>
-            <p>Master clinical reasoning. Think like a clinician.</p>
+            <h1><img src="../images/reasondx-logo.png" alt="ReasonDx" style="height:48px;vertical-align:middle;"></h1>
+            <p>Master clinical reasoning. Crush your boards.</p>
+            <p style="font-size:11px;color:#94a3b8;margin-top:4px">🟢 Updated</p>
             <div class="board-tags">
-                <span class="board-tag step1">Pre-Med</span>
-                <span class="board-tag step2">Medical Students</span>
-                <span class="board-tag shelf">Clinical Rotations</span>
-                <span class="board-tag rotation">29 Specialties</span>
+                <span class="board-tag step1">Step 1 Ready</span>
+                <span class="board-tag step2">Step 2 CK</span>
+                <span class="board-tag shelf">Shelf Exams</span>
+                <span class="board-tag rotation">Clinical Rotations</span>
             </div>
-            <p style="margin-top: 16px; font-size: 15px; color: #64748b;">Already have an account? <a href="#" onclick="showLogin(); return false;" style="color: #2874A6; font-weight: 600; text-decoration: none;">Sign in →</a></p>
         </div>
 
         <div id="planSelection">
-            <div class="plans-grid">
+            <!-- PLAN CARDS (centered) -->
+            <div class="plans-grid" style="grid-template-columns:repeat(2,1fr);max-width:680px;margin:0 auto 0">
                 <div class="plan-card" onclick="selectPlan('free')" id="planFree">
-                    <div class="plan-icon" style="font-size:14px; font-weight:700; color:#2874A6; background:#f0f7fc; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin: 0 auto 16px;">FREE</div>
+                    <div class="plan-icon">🌱</div>
                     <div class="plan-name">Free</div>
                     <div class="plan-price">
                         <span class="amount">$0</span>
-                        <span class="period"></span>
+                        <span class="period"> forever</span>
                     </div>
                     <div class="exam-tags">
-                        <span class="exam-tag s1">Reasoning</span>
-                        <span class="exam-tag s2">SBAR</span>
+                        <span class="exam-tag s1">Step 1</span>
+                        <span class="exam-tag s2">Step 2 CK</span>
+                        <span class="exam-tag shelf">Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>3 clinical reasoning cases per month</li>
-                        <li>SBAR Trainer access</li>
-                        <li>Basic Reasoning Fingerprint</li>
-                        <li>Progress tracking</li>
-                        <li>All clinical calculators</li>
-                        <li class="excluded">Unlimited cases across 29 specialties</li>
-                        <li class="excluded">Full CoachDx AI coaching</li>
-                        <li class="excluded">SimRoomDx virtual simulation</li>
-                        <li class="excluded">Pre-med tools (Bridge Mode, LOR)</li>
+                        <li>330+ MechanismDx pathophysiology modules</li>
+                        <li>325+ interactive case adventures</li>
+                        <li>79 clinical reasoning trainers</li>
+                        <li>ED Board, Night Float &amp; SimRoomDx sims</li>
+                        <li>Consult Callback &amp; SBAR trainers</li>
+                        <li>ECG practice, ABG analyzer &amp; clinical tools</li>
+                        <li>20 systems across 29 specialties</li>
                     </ul>
                     <button class="plan-select-btn">Get Started Free</button>
                 </div>
 
-                <div class="plan-card pro" onclick="selectPlan('pro')" id="planPro">
-                    <div class="plan-badge">Most Popular</div>
-                    <div class="plan-icon" style="font-size:14px; font-weight:700; color:white; background:#2874A6; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin: 0 auto 16px;">PRO</div>
+                <div class="plan-card pro" id="planPro" style="cursor:default">
+                    <div class="plan-badge">Coming Soon</div>
+                    <div class="plan-icon">🚀</div>
                     <div class="plan-name">Pro</div>
                     <div class="plan-price">
                         <span class="amount">$14.99</span>
@@ -183,83 +228,36 @@
                         <div class="annual">or $99/year (save 45%)</div>
                     </div>
                     <div class="exam-tags">
-                        <span class="exam-tag s1">Reasoning</span>
-                        <span class="exam-tag s2">SBAR</span>
-                        <span class="exam-tag shelf">AI Coaching</span>
+                        <span class="exam-tag s1">Step 1</span>
+                        <span class="exam-tag s2">Step 2 CK</span>
+                        <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>Unlimited reasoning cases across 29 specialties</li>
-                        <li>Full CoachDx AI coaching &amp; debriefs</li>
-                        <li>Unlimited SBAR practice with AI feedback</li>
-                        <li>SimRoomDx virtual simulation</li>
-                        <li>Full Reasoning Fingerprint with bias tracking</li>
-                        <li>Pre-med tools (Bridge Mode, Encounters, LOR)</li>
-                        <li>Advanced analytics &amp; export</li>
+                        <li>Everything in Free, plus:</li>
+                        <li>CoachDx — AI clinical reasoning coach</li>
+                        <li>Reasoning pathway fingerprinting</li>
+                        <li>Performance analytics dashboard</li>
+                        <li>Personalized study plans</li>
+                        <li>Spaced repetition system</li>
                         <li>Priority support</li>
                     </ul>
-                    <button class="plan-select-btn">Start Pro</button>
+
+                    <!-- FREE DURING LAUNCH + GOOGLE SIGN-IN -->
+                    <div style="background:linear-gradient(135deg,#ecfdf5,#f0f9ff);border:2px solid #6ee7b7;border-radius:14px;padding:16px;text-align:center;margin-top:8px">
+                        <div style="font-size:15px;font-weight:700;color:#065f46;margin-bottom:4px">🎉 Free During Launch</div>
+                        <p style="font-size:13px;color:#475569;margin:0 0 14px">All Pro features unlocked — no credit card needed.</p>
+                        <button type="button" class="btn-google" onclick="signInWithGoogle()" style="width:100%;padding:12px 16px;font-size:15px;border-radius:12px;margin-bottom:8px">
+                            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                            Continue with Google
+                        </button>
+                        <div style="font-size:12px;color:#94a3b8">or <a href="#" onclick="selectPlan('free');return false" style="color:var(--primary);font-weight:600">sign up with email</a></div>
+                    </div>
                 </div>
 
             </div>
 
-            <!-- TWO-TIER REFERRAL CALLOUT -->
-            <div style="max-width: 680px; margin: 0 auto 30px; background: white; border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 28px; margin-bottom: 8px;"></div>
-                    <h3 style="font-size: 18px; color: #1e3a5f; margin-bottom: 4px;">Refer a Friend, Get Rewarded</h3>
-                    <p style="font-size: 14px; color: #64748b;">You'll get a referral code after signup. Every friend who joins earns you rewards — automatically.</p>
-                </div>
-
-                <!-- Tier 1 -->
-                <div style="margin-bottom: 16px;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <span style="background: #2874A6; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;">TIER 1</span>
-                        <span style="font-size: 14px; font-weight: 600; color: #1e3a5f;">Friends sign up free</span>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <div style="background: #f0f7fc; border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #2874A6;">1 signup</div>
-                            <div style="font-size: 12px; color: #64748b;">7-day Pro trial</div>
-                        </div>
-                        <div style="background: #f0f7fc; border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #2874A6;">3 signups</div>
-                            <div style="font-size: 12px; color: #64748b;">30-day Pro trial</div>
-                        </div>
-                        <div style="background: #f0f7fc; border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #2874A6;">5 signups</div>
-                            <div style="font-size: 12px; color: #64748b;">90-day Pro trial</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tier 2 -->
-                <div>
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <span style="background: linear-gradient(135deg, #d97706, #b45309); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;">TIER 2</span>
-                        <span style="font-size: 14px; font-weight: 600; color: #1e3a5f;">Friends upgrade to Pro</span>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <div style="background: #fffbeb; border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #92400e;">1 upgrade</div>
-                            <div style="font-size: 12px; color: #64748b;">Free month for both</div>
-                        </div>
-                        <div style="background: #fffbeb; border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #92400e;">3 upgrades</div>
-                            <div style="font-size: 12px; color: #64748b;">Free semester (4 mo)</div>
-                        </div>
-                        <div style="background: #fffbeb; border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 130px; text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #92400e;">5 upgrades</div>
-                            <div style="font-size: 12px; color: #64748b;">Free year of Pro</div>
-                        </div>
-                    </div>
-                </div>
-
-                <p style="text-align: center; color: #94a3b8; font-size: 12px; margin-top: 16px; margin-bottom: 0;">Both tiers stack. Rewards are applied automatically — no tracking on your end.</p>
-            </div>
-
-            <div style="text-align: center; margin-top: 16px;">
+            <div style="text-align: center; margin-top: 20px;">
                 <p style="color: #64748b; font-size: 14px;">Already have an account? <a href="#" onclick="showLogin()" style="color: var(--primary); font-weight: 600;">Sign in</a></p>
-                <p style="color: #94a3b8; font-size: 13px; margin-top: 8px;">Have a referral code? You'll enter it during signup. Even free signups count!</p>
             </div>
         </div>
 
@@ -274,7 +272,12 @@
 
                 <!-- EMAIL -->
                 <div class="section" id="sectionEmail">
-                    <div class="info-box blue" id="emailInfoBox"><span class="icon" style="font-size:16px; color:#2874A6; font-weight:700;">1</span><div id="emailInfoText"><strong>Enter your email</strong><br>We'll send a verification code.</div></div>
+                    <button type="button" class="btn-google" onclick="signUpWithGoogle()">
+                        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                        Sign up with Google
+                    </button>
+                    <div class="auth-divider">or sign up with email</div>
+                    <div class="info-box blue" id="emailInfoBox"><span class="icon">📧</span><div id="emailInfoText"><strong>Enter your email</strong><br>We'll send a verification code.</div></div>
                     <div id="emailError" class="message"></div>
                     <div class="form-group">
                         <label class="form-label">Email Address</label>
@@ -284,7 +287,7 @@
                     <div class="form-group">
                         <label class="form-label">Referral Code <span class="optional">(optional)</span></label>
                         <input type="text" id="referralCodeInput" class="form-input" placeholder="e.g. REF-JD7842" style="text-transform: uppercase; letter-spacing: 1px;">
-                        <p class="form-hint">Got a code from a friend? You both get rewarded when you sign up.</p>
+                        <p class="form-hint">Got a code from a friend? Enter it for a free month.</p>
                     </div>
                     <button type="button" class="btn btn-primary" onclick="sendVerificationCode()">Send Verification Code</button>
                     <div class="login-prompt"><a href="#" onclick="backToPlanSelection()">← Choose a different plan</a></div>
@@ -292,7 +295,7 @@
 
                 <!-- VERIFY -->
                 <div class="section" id="sectionVerify">
-                    <div class="info-box green"><span class="icon" style="font-size:16px; color:#166534; font-weight:700;">2</span><div><strong>Check your email</strong><br>Code sent to <strong id="sentToEmail"></strong></div></div>
+                    <div class="info-box green"><span class="icon">📧</span><div><strong>Check your email</strong><br>Code sent to <strong id="sentToEmail"></strong></div></div>
                     <div id="verifyError" class="message"></div>
                     <div class="form-group">
                         <label class="form-label">Enter verification code</label>
@@ -320,7 +323,6 @@
                         <label class="form-label">I am a...</label>
                         <select id="userRole" class="form-select">
                             <option value="">Select your training level</option>
-                            <option value="premed">Pre-Medical Student</option>
                             <option value="ms1">Medical Student — MS-1</option>
                             <option value="ms2">Medical Student — MS-2</option>
                             <option value="ms3">Medical Student — MS-3 (Clinical Rotations)</option>
@@ -388,10 +390,9 @@
                         <label class="form-label">Why are you here? <span class="optional">(optional)</span></label>
                         <select id="studyGoal" class="form-select">
                             <option value="">Select your main goal...</option>
+                            <option value="board-prep">Board Prep (Step 1, Step 2, or Shelf)</option>
                             <option value="clinical-reasoning">Improve Clinical Reasoning</option>
-                            <option value="sbar-communication">Practice Clinical Communication (SBAR)</option>
-                            <option value="rotation-prep">Prepare for Clinical Rotations</option>
-                            <option value="premed-explore">Pre-med: Explore Clinical Thinking</option>
+                            <option value="both">Both Board Prep & Clinical Reasoning</option>
                             <option value="exploring">Just Exploring</option>
                         </select>
                     </div>
@@ -401,13 +402,13 @@
                         <div class="password-strength"><div class="bar" id="strengthBar1"></div><div class="bar" id="strengthBar2"></div><div class="bar" id="strengthBar3"></div><div class="bar" id="strengthBar4"></div></div>
                     </div>
                     <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter password"></div>
-                    <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the <a href="terms.html" target="_blank" style="color:#2874A6; text-decoration:underline;">Terms of Service</a> and <a href="privacy.html" target="_blank" style="color:#2874A6; text-decoration:underline;">Privacy Policy</a></label></div>
+                    <div class="checkbox-group"><input type="checkbox" id="agreeTerms"><label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label></div>
                     <button type="button" class="btn btn-primary" onclick="createAccount()">Create Account</button>
                 </div>
 
                 <!-- PAYMENT -->
                 <div class="section" id="sectionPayment">
-                    <div class="info-box blue"><span class="icon" style="font-size:16px; color:#2874A6; font-weight:700;">4</span><div><strong id="paymentTitle">Complete your subscription</strong><br>Secure payment via Stripe</div></div>
+                    <div class="info-box blue"><span class="icon">💳</span><div><strong id="paymentTitle">Complete your subscription</strong><br>Secure payment via Stripe</div></div>
                     <div id="paymentError" class="message"></div>
                     <div style="text-align: center; margin-bottom: 24px;">
                         <div class="pricing-toggle">
@@ -419,39 +420,30 @@
                         <div style="font-size: 14px; color: #64748b; margin-bottom: 4px;" id="paymentLabel">You'll be charged</div>
                         <div style="font-size: 36px; font-weight: 800; color: #1e3a5f;" id="paymentAmount">$14.99</div>
                         <div style="font-size: 14px; color: #64748b;" id="paymentPeriod">per month</div>
-                        <div style="font-size: 13px; color: #1f5f8b; margin-top: 4px;" id="referralCredit" class="hidden">Your friend earns Pro trial days for referring you — and you get a free month if you go Pro!</div>
+                        <div style="font-size: 13px; color: #1f5f8b; margin-top: 4px;" id="referralCredit" class="hidden">🎁 Your friend gets a free month too!</div>
                     </div>
                     <div class="form-group">
                         <div id="card-element" style="padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; background: #f8fafc; text-align: center;">
-                            <p style="color: #475569; font-size: 14px; margin: 0;">You'll be securely redirected to Stripe to complete payment</p>
+                            <p style="color: #475569; font-size: 14px; margin: 0;">🔒 You'll be securely redirected to Stripe to complete payment</p>
                         </div>
                     </div>
                     <button type="button" class="btn btn-primary" onclick="processPayment()" id="payBtn">Subscribe — $14.99/month</button>
-                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">Secure payment via Stripe · Cancel anytime · 30-day money-back guarantee</p>
+                    <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 16px;">🔒 Secure payment via Stripe · Cancel anytime · 30-day money-back guarantee</p>
                 </div>
 
                 <!-- SUCCESS -->
                 <div class="section" id="sectionSuccess">
                     <div class="success-screen">
-                        <div class="success-icon" style="font-size:48px; color:#2874A6;">&#10003;</div>
+                        <div class="success-icon">🎉</div>
                         <h3 id="successTitle">Welcome to ReasonDx!</h3>
                         <p id="successMessage">Your account has been created successfully.</p>
                         <div class="referral-display" id="referralDisplay">
                             <div class="label">Your Referral Code</div>
                             <div class="code" id="referralCodeValue">REF-XX0000</div>
-                            <div style="margin-top: 12px; text-align: left; font-size: 13px; color: #475569;">
-                                <div style="margin-bottom: 8px;">
-                                    <span style="background: #2874A6; color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px;">TIER 1</span>
-                                    <span style="margin-left: 6px;">Friends sign up free → you earn Pro trial days</span>
-                                </div>
-                                <div>
-                                    <span style="background: linear-gradient(135deg, #d97706, #b45309); color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px;">TIER 2</span>
-                                    <span style="margin-left: 6px;">Friends go Pro → you both earn free months</span>
-                                </div>
-                            </div>
+                            <p style="font-size: 13px; color: #64748b; margin-top: 8px;">Share this code — earn free months for every friend who joins!</p>
                             <div class="share-row">
-                                <button class="share-btn" onclick="copyReferral()">Copy Code</button>
-                                <button class="share-btn" onclick="copyReferralLink()">Copy Link</button>
+                                <button class="share-btn" onclick="copyReferral()">📋 Copy Code</button>
+                                <button class="share-btn" onclick="copyReferralLink()">🔗 Copy Link</button>
                             </div>
                         </div>
                         <a href="../index.html" class="btn btn-primary" style="display: block; text-decoration: none; margin-top: 24px;">Start Studying →</a>
@@ -464,6 +456,11 @@
         <div class="form-card hidden" id="loginForm">
             <div class="form-header"><h2>Welcome Back</h2><p>Sign in to your ReasonDx account</p></div>
             <div class="form-body">
+                <button type="button" class="btn-google" onclick="signInWithGoogle()">
+                    <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                    Continue with Google
+                </button>
+                <div class="auth-divider">or sign in with email</div>
                 <div id="loginError" class="message"></div>
                 <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" class="form-input" placeholder="you@email.com"></div>
                 <div class="form-group"><label class="form-label">Password</label><input type="password" id="loginPassword" class="form-input" placeholder="Your password"></div>
@@ -472,49 +469,26 @@
                 <div class="login-prompt">Don't have an account? <a href="#" onclick="showPlanSelection()">Sign up</a></div>
             </div>
         </div>
-
-        <!-- FLODESK EMAIL SIGNUP CTA -->
-        <div id="flodeskCTA" style="max-width: 600px; margin: 40px auto 0; text-align: center; padding: 32px 24px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
-            <div style="width: 48px; height: 3px; background: #2874A6; margin: 0 auto 20px; border-radius: 2px;"></div>
-            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #1e3a5f; margin-bottom: 8px;">Not ready to sign up yet?</h3>
-            <p style="font-size: 15px; color: #64748b; margin-bottom: 20px; line-height: 1.5;">Join our email list for clinical reasoning tips, platform updates, and early access to new features.</p>
-            <a href="https://graceful-paper-87888.myflodesk.com/ar69dn04i8" target="_blank" style="display: inline-block; padding: 14px 36px; background: #2874A6; color: white; border-radius: 28px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.2s; letter-spacing: 0.3px;">Join the Email List</a>
-            <p style="font-size: 12px; color: #94a3b8; margin-top: 14px;">No spam. Unsubscribe anytime.</p>
-        </div>
-    </div>
-
-    <!-- FLODESK POPUP (shows after 30s if not dismissed) -->
-    <div class="email-popup-overlay" id="emailPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
-        <div style="background:white; border-radius:20px; padding:40px 32px; max-width:440px; width:90%; position:relative; text-align:center; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
-            <button onclick="closePopup()" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; color:#94a3b8; cursor:pointer; line-height:1;">&times;</button>
-            <div style="width: 48px; height: 3px; background: #2874A6; margin: 0 auto 20px; border-radius: 2px;"></div>
-            <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #1e3a5f; margin-bottom: 8px;">Stay in the loop</h3>
-            <p style="font-size: 14px; color: #64748b; margin-bottom: 24px; line-height: 1.5;">Get clinical reasoning tips, platform updates, and early access to new features delivered to your inbox.</p>
-            <a href="https://graceful-paper-87888.myflodesk.com/ar69dn04i8" target="_blank" onclick="closePopup()" style="display: inline-block; padding: 14px 36px; background: #2874A6; color: white; border-radius: 28px; font-size: 15px; font-weight: 600; text-decoration: none; letter-spacing: 0.3px;">Join the Email List</a>
-            <div style="margin-top: 16px;"><button onclick="closePopup()" style="background:none; border:none; color:#94a3b8; font-size:13px; cursor:pointer;">No thanks, maybe later</button></div>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../dx-progress.js"></script>
-  <script src="email-service.js"></script>
     <script>
         // ============================================
         // CONFIGURATION
         // ============================================
         const CONFIG = {
             GOOGLE_SHEETS_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE',
-            STRIPE_PUBLIC_KEY: 'pk_live_51T2KKACQYcGAAnaNsFyEw9c72eZpXTI2hjidIv9FLlYt5rsmyXWLAtEqk4dDwa9rHvpdYUXlXM2MnfXIaK6qeCAY002Za1ZPfl',
-            STRIPE_PRICE_MONTHLY: 'price_1T2LFTCQYcGAAnaN9s9isvzR',
-            STRIPE_PRICE_ANNUAL: 'price_1T2LGkCQYcGAAnaNbAV6gUDO',
+            STRIPE_PUBLIC_KEY: 'pk_live_51SbAuvDEGaZdouAQBZQjWwMc449xCuIMfYjqWBRHm30OQDQ73omSpXgBrtPMbBtLaNUFVJuIaFVYFdDzAk5beHqX000iJ04kjk',
+            STRIPE_PRICE_MONTHLY: 'price_1SvpACDEGaZdouAQ6l2xx5D4',
+            STRIPE_PRICE_ANNUAL: 'price_1SynQRDEGaZdouAQ4ggXuvpj',
             DEMO_MODE: false,
             PRO_MONTHLY: 14.99,
             PRO_ANNUAL: 99.00,
-            // Two-tier referral reward system:
-            // Tier 1: Free signups → Pro trial days (1=7d, 3=30d, 5=90d)
-            // Tier 2: Pro upgrades → Stripe coupon months (1=1mo, 3=4mo, 5=12mo)
-            // Tier 1 is processed at registration via the GAS backend
-            // Tier 2 is processed via Stripe webhook (checkout.session.completed)
+            // Referral reward tiers: { minReferrals: freeMonths }
+            // When Stripe is live, each tier triggers a Stripe coupon via the backend:
+            //   POST /api/referral/apply → creates coupon with duration_in_months
+            //   Applied to referrer's subscription as a credit balance or coupon
             REFERRAL_REWARDS: { 1: 1, 3: 4, 5: 12 },
             REFERRAL_NEW_USER_BONUS: 1
         };
@@ -549,8 +523,8 @@
             var code = state.generatedReferral || document.getElementById('referralCodeValue').textContent;
             if (navigator.clipboard) navigator.clipboard.writeText(code);
             var btn = event.target;
-            btn.textContent = 'Copied!';
-            setTimeout(function(){ btn.textContent = 'Copy Code'; }, 2000);
+            btn.textContent = '✅ Copied!';
+            setTimeout(function(){ btn.textContent = '📋 Copy Code'; }, 2000);
         }
 
         function copyReferralLink() {
@@ -558,29 +532,27 @@
             var link = window.location.origin + window.location.pathname + '?ref=' + code;
             if (navigator.clipboard) navigator.clipboard.writeText(link);
             var btn = event.target;
-            btn.textContent = 'Copied!';
-            setTimeout(function(){ btn.textContent = 'Copy Link'; }, 2000);
+            btn.textContent = '✅ Copied!';
+            setTimeout(function(){ btn.textContent = '🔗 Copy Link'; }, 2000);
         }
 
         // ============================================
         // PLAN SELECTION
         // ============================================
         function selectPlan(plan) {
-            state.selectedPlan = plan;
+            // During launch period, all plans get full access as 'free'
+            state.selectedPlan = 'free';
             document.querySelectorAll('.plan-card').forEach(function(c){ c.classList.remove('selected'); });
-            document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
+            var cardId = 'plan' + plan.charAt(0).toUpperCase() + plan.slice(1);
+            document.getElementById(cardId).classList.add('selected');
             setTimeout(function(){
                 document.getElementById('planSelection').classList.add('hidden');
                 document.getElementById('registrationForm').classList.remove('hidden');
-                document.getElementById('registrationForm').className = 'form-card ' + plan;
-                document.getElementById('formHeader').className = 'form-header ' + plan;
-                var titles = {
-                    free:  ['Create Free Account', 'Free Plan — Clinical Reasoning'],
-                    pro:   ['Start Pro Subscription', 'Pro — Full Platform Access']
-                };
-                document.getElementById('formTitle').textContent = titles[plan][0];
-                document.getElementById('formSubtitle').textContent = titles[plan][1];
-                setupStepsForPlan(plan);
+                document.getElementById('registrationForm').className = 'form-card';
+                document.getElementById('formHeader').className = 'form-header';
+                document.getElementById('formTitle').textContent = 'Create Your Account';
+                document.getElementById('formSubtitle').textContent = 'Full Access — Free During Launch';
+                setupStepsForPlan('free');
             }, 200);
         }
 
@@ -631,7 +603,7 @@
         // ============================================
         // EMAIL VERIFICATION
         // ============================================
-        async function sendVerificationCode() {
+        function sendVerificationCode() {
             var email = document.getElementById('emailInput').value.trim().toLowerCase();
             var err = document.getElementById('emailError');
             err.className = 'message';
@@ -645,27 +617,9 @@
             else if (ref) { err.textContent = 'That referral code doesn\'t look right. Format: REF-XX0000. Leave blank to skip.'; err.className = 'message error'; return; }
             state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             state.verifiedEmail = email;
+            if (CONFIG.DEMO_MODE) alert('Demo Mode: Your verification code is ' + state.generatedCode);
             document.getElementById('sentToEmail').textContent = email;
             nextSection();
-            // Send verification email
-            var emailSent = false;
-            if (typeof DxEmail !== 'undefined' && DxEmail.sendVerificationEmail) {
-                try {
-                    var result = await DxEmail.sendVerificationEmail(email, state.generatedCode);
-                    if (result && result.success) {
-                        console.log('Verification email sent successfully');
-                        emailSent = true;
-                    }
-                } catch(e) { console.error('Email send error:', e); }
-            }
-            // TEMPORARY FALLBACK: show code if email fails (remove once edge function is deployed)
-            if (!emailSent) {
-                var verifyErr = document.getElementById('verifyError');
-                if (verifyErr) {
-                    verifyErr.innerHTML = '<strong>Email service connecting...</strong> For testing, your code is: <code style="font-size:16px;font-weight:bold;color:#2874A6;">' + state.generatedCode + '</code>';
-                    verifyErr.className = 'message info';
-                }
-            }
         }
 
         function handleCodeInput(input) {
@@ -693,16 +647,9 @@
                 document.querySelector('.code-input').focus();
             }
         }
-        async function resendCode() {
+        function resendCode() {
             state.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-            if (typeof DxEmail !== 'undefined' && DxEmail.sendVerificationEmail) {
-                try {
-                    var result = await DxEmail.sendVerificationEmail(state.verifiedEmail, state.generatedCode);
-                    if (result && result.success) {
-                        console.log('Verification code resent successfully');
-                    }
-                } catch(e) { console.error('Resend error:', e); }
-            }
+            if (CONFIG.DEMO_MODE) alert('Demo: New code is ' + state.generatedCode);
         }
 
         // ============================================
@@ -835,7 +782,7 @@
 
                 var baseUrl = window.location.origin + window.location.pathname;
 
-                var response = await fetch('https://lpwbiqpojisqgezycupw.supabase.co/functions/v1/create-checkout', {
+                var response = await fetch('/api/create-checkout-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -852,6 +799,7 @@
                     throw new Error(data.error || 'Failed to create checkout session');
                 }
 
+                // Redirect to Stripe Checkout
                 window.location.href = data.url;
 
             } catch (error) {
@@ -906,7 +854,7 @@
             } catch(e) { console.log('Supabase not available, localStorage auth only'); }
 
             // Initialize the unified progress engine with profile data
-            if (window.DxProgress && typeof window.DxProgress.syncProfile === 'function') {
+            if (window.DxProgress) {
                 window.DxProgress.syncProfile();
             }
 
@@ -931,12 +879,12 @@
 
             document.getElementById('referralCodeValue').textContent = state.generatedReferral;
             if (state.selectedPlan === 'pro') {
-                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro!';
+                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx Pro! 🚀';
                 var s = window.RdxSiteStats || {};
-                document.getElementById('successMessage').innerHTML = 'Full access to unlimited clinical reasoning cases across 29 specialties, CoachDx AI coaching, SBAR Trainer, SimRoomDx, and your Reasoning Fingerprint is now unlocked.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                document.getElementById('successMessage').textContent = 'Full access to all ' + (s.topicsDisplay || '297') + ' topics, ' + (s.mcqsDisplay || '2,900+') + ' MCQs, and AI tutor is now unlocked.';
             } else {
-                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx!';
-                document.getElementById('successMessage').innerHTML = 'Your free account is ready. Start practicing clinical reasoning and upgrade anytime.<br><br><strong style="color:#2874A6;">Check your email to confirm your account.</strong><br><span style="font-size:13px; color:#64748b;">Look for an email from ReasonDx. If you don\'t see it within a few minutes, check your spam folder.</span>';
+                document.getElementById('successTitle').textContent = 'Welcome to ReasonDx! 🌱';
+                document.getElementById('successMessage').textContent = 'Your free account is ready. Explore board-prep content and upgrade anytime.';
             }
             showSection('sectionSuccess');
         }
@@ -953,6 +901,123 @@
         // ============================================
         // LOGIN
         // ============================================
+        // ============================================
+        // GOOGLE OAUTH
+        // ============================================
+        function signInWithGoogle() {
+            var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+            var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+            if (!window.supabase) { alert('Auth system loading, please try again.'); return; }
+            var sb = window.supabase.createClient(sbUrl, sbKey);
+            // Do NOT put a hash fragment in the redirect URL — Supabase uses the hash for tokens
+            // Use current page path so it works regardless of deployment location
+            var redirectUrl = window.location.origin + window.location.pathname + '?callback=google';
+            sb.auth.signInWithOAuth({
+                provider: 'google',
+                options: { redirectTo: redirectUrl }
+            }).then(function(result) {
+                if (result.error) {
+                    console.error('Google sign-in error:', result.error);
+                    var errEl = document.getElementById('loginError');
+                    if (errEl) errEl.textContent = 'Google sign-in failed: ' + result.error.message;
+                }
+            });
+        }
+        function signUpWithGoogle() { signInWithGoogle(); }
+
+        // Handle Google OAuth callback
+        function handleGoogleCallback() {
+            var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+            var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+            // Show loading state
+            document.getElementById('planSelection').classList.add('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registrationForm').classList.add('hidden');
+
+            // Parse tokens directly from the URL hash
+            var hash = window.location.hash.substring(1); // strip leading #
+            var params = {};
+            hash.split('&').forEach(function(part) {
+                var kv = part.split('=');
+                if (kv.length === 2) params[kv[0]] = decodeURIComponent(kv[1]);
+            });
+
+            var accessToken = params['access_token'];
+            var refreshToken = params['refresh_token'];
+
+            if (!accessToken || !refreshToken) {
+                console.error('Google callback: missing tokens in URL hash');
+                document.getElementById('planSelection').classList.remove('hidden');
+                return;
+            }
+
+            // Decode JWT payload to get user info (no verification needed — Supabase will verify)
+            function decodeJWT(token) {
+                try {
+                    var parts = token.split('.');
+                    var payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+                    return JSON.parse(atob(payload));
+                } catch(e) { return null; }
+            }
+
+            var jwt = decodeJWT(accessToken);
+
+            // Save user data immediately from JWT (don't wait for Supabase SDK)
+            if (jwt && jwt.email) {
+                var meta = jwt.user_metadata || {};
+                var userData = {
+                    email: jwt.email,
+                    name: meta.full_name || meta.name || jwt.email.split('@')[0],
+                    tier: 'free',
+                    supabaseId: jwt.sub,
+                    registeredAt: new Date().toISOString(),
+                    authProvider: 'google'
+                };
+                localStorage.setItem('reasondx-user', JSON.stringify(userData));
+
+                // Clean URL
+                history.replaceState(null, '', window.location.pathname);
+
+                // Redirect
+                var redirect = sessionStorage.getItem('reasondx-redirect');
+                if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
+                else { window.location.href = '../index.html'; }
+                return;
+            }
+
+            // Fallback: if JWT decode fails, try Supabase SDK setSession
+            function trySupabaseSDK() {
+                if (!window.supabase) {
+                    setTimeout(trySupabaseSDK, 200);
+                    return;
+                }
+                var sb = window.supabase.createClient(sbUrl, sbKey);
+                sb.auth.setSession({ access_token: accessToken, refresh_token: refreshToken }).then(function(result) {
+                    if (result.data && result.data.user) {
+                        var user = result.data.user;
+                        var userData = {
+                            email: user.email,
+                            name: (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0],
+                            tier: 'free',
+                            supabaseId: user.id,
+                            registeredAt: new Date().toISOString(),
+                            authProvider: 'google'
+                        };
+                        localStorage.setItem('reasondx-user', JSON.stringify(userData));
+                        history.replaceState(null, '', window.location.pathname);
+                        var redirect = sessionStorage.getItem('reasondx-redirect');
+                        if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
+                        else { window.location.href = '../index.html'; }
+                    } else {
+                        console.error('setSession failed:', result.error);
+                        document.getElementById('planSelection').classList.remove('hidden');
+                    }
+                });
+            }
+            trySupabaseSDK();
+        }
+
         function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
         function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
         function login() {
@@ -1034,6 +1099,14 @@
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Handle Google OAuth callback — detect via query param or access_token in hash
+            var isGoogleCallback = (window.location.search.indexOf('callback=google') !== -1) ||
+                                   (window.location.hash.indexOf('access_token') !== -1);
+            if (isGoogleCallback) {
+                handleGoogleCallback();
+                return;
+            }
+
             // Auto-show sign-in if redirected with #signin hash
             if (window.location.hash === '#signin') {
                 showLogin();
@@ -1065,7 +1138,7 @@
                         // No pending data — show success anyway (payment went through)
                         document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
                         document.getElementById('sectionSuccess').classList.add('active');
-                        document.getElementById('successTitle').textContent = 'Payment Successful!';
+                        document.getElementById('successTitle').textContent = 'Payment Successful! 🎉';
                         document.getElementById('successMessage').textContent = 'Your Pro subscription is active. Please sign in to access your account.';
                     }
                 } catch(e) {
@@ -1104,37 +1177,9 @@
         });
     </script>
 <script src="../data/rdx-persist.js"></script>
-<!-- rdx-site-stats.js removed — marketing content now lives on index.html -->
-<script>
-// Flodesk popup — show after 30s, only once per session
-function closePopup() {
-    document.getElementById('emailPopup').style.display = 'none';
-    sessionStorage.setItem('rdx-popup-dismissed', 'true');
-}
+<script src="../rdx-site-stats.js"></script>
 
-function showPopup() {
-    if (sessionStorage.getItem('rdx-popup-dismissed')) return;
-    if (sessionStorage.getItem('rdx-popup-shown')) return;
-    var popup = document.getElementById('emailPopup');
-    popup.style.display = 'flex';
-    sessionStorage.setItem('rdx-popup-shown', 'true');
-}
-
-// Close on overlay click
-document.getElementById('emailPopup').addEventListener('click', function(e) {
-    if (e.target === this) closePopup();
-});
-
-// Close on Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closePopup();
-});
-
-// Show popup after 10 seconds
-setTimeout(showPopup, 10000);
-</script>
-
-<script src="../dx-feedback.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
