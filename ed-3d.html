@@ -1360,6 +1360,9 @@ function enterRoom(idx) {
 }
 
 function exitRoom() {
+  // Save patient state before exiting (for cross-module continuity)
+  if(currentCase) savePatientState();
+
   // Smooth fade transition back to 3D
   const overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed;inset:0;background:#0a0e14;z-index:150;opacity:0;transition:opacity 0.3s;pointer-events:none';
@@ -1487,6 +1490,7 @@ function askQuestion(idx) {
   questionState[currentCase.room+'-'+idx] = true;
   renderTalkPanel(document.getElementById('panel-talk'), currentCase);
   updateProgress();
+  savePatientState();
   // Scroll to bottom
   const dp = document.getElementById('data-panel');
   dp.scrollTop = dp.scrollHeight;
@@ -1511,6 +1515,7 @@ function doExam(sys) {
   examState[currentCase.room+'-'+sys] = true;
   renderExamPanel(document.getElementById('panel-exam'), currentCase);
   updateProgress();
+  savePatientState();
 }
 
 // ═══ VITALS PANEL ═══
@@ -1589,6 +1594,7 @@ function placeOrder(item) {
   playBeep(600,0.02);
   renderTreatmentPanel(document.getElementById('panel-treatment'), currentCase);
   updateProgress();
+  savePatientState();
 }
 
 // ═══ DISPOSITION PANEL ═══

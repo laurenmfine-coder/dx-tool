@@ -259,7 +259,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
   </div>
   <div id="dash-grid">
     <div id="patient-list">
-      <div id="ed-crossover" style="display:none;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:10px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.7);display:none;align-items:center;gap:8px"></div>
+      <div id="ed-crossover" style="display:none;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:10px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.7);align-items:center;gap:8px"></div>
       <h2>Your <em>patients</em> tonight</h2>
       <p id="pl-subtitle"></p>
       <div id="pl-cards"></div>
@@ -1389,9 +1389,10 @@ function addEDPatients() {
     document.getElementById('pl-subtitle').textContent =
       `${shiftPatients.length} patients · Includes ${edPts.length} ED admission(s)`;
 
-    // Rebuild page queue if in pages mode
-    if(practiceMode === 'pages') {
+    // Rebuild page queue to include new patient pages
+    if(practiceMode === 'pages' || practiceMode === 'admits') {
       buildPageQueue();
+      scheduleNextPage();
     }
 
     // Hide the banner
