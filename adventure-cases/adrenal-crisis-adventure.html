@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrenal Crisis - Clinical Reasoning Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); min-height: 100vh; color: #e2e8f0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; margin-bottom: 5px; color: #fbd38d; }
+        .subtitle { text-align: center; color: #ecc94b; margin-bottom: 20px; }
+        .scene-card { background: #1a202c; border-radius: 12px; padding: 25px; margin-bottom: 20px; border-left: 4px solid #ecc94b; }
+        .scene-title { color: #ecc94b; font-size: 1.3em; margin-bottom: 15px; }
+        .narrative { background: #2d3748; padding: 15px; border-radius: 8px; margin-bottom: 20px; line-height: 1.7; }
+        .vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; background: #2d3748; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .vital-item { text-align: center; }
+        .vital-label { font-size: 0.8em; color: #a0aec0; }
+        .vital-value { font-size: 1.2em; font-weight: bold; }
+        .vital-value.critical { color: #fc8181; }
+        .lab-box { background: #2d3748; padding: 15px; border-radius: 8px; margin: 15px 0; border: 2px solid #ecc94b; }
+        .lab-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #4a5568; }
+        .lab-critical { color: #fc8181; font-weight: bold; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { background: #4a5568; padding: 15px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; }
+        .option:hover { background: #5a6578; border-color: #ecc94b; }
+        .option.selected { border-color: #68d391; background: #2f4a3f; }
+        .option.wrong { border-color: #fc8181; background: #4a2f3f; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #2f4a3f; border-left: 4px solid #68d391; }
+        .feedback.incorrect { background: #4a2f3f; border-left: 4px solid #fc8181; }
+        .next-btn { background: #ecc94b; color: #1a202c; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+        .hidden { display: none; }
+        .pearl-box { background: linear-gradient(135deg, #744210 0%, #975a16 100%); padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .pearl-box h4 { color: #faf089; margin-bottom: 8px; }
+        .finding-box { background: #2d3748; padding: 10px 15px; border-radius: 6px; margin: 5px 0; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border-bottom: 1px solid #4a5568; }
+        .comparison-table th { background: #2d3748; color: #ecc94b; }
+        .progress-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+        .progress-dot { width: 10px; height: 10px; border-radius: 50%; background: #4a5568; }
+        .progress-dot.active { background: #ecc94b; }
+        .progress-dot.completed { background: #68d391; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚠️ Adrenal Crisis</h1>
+        <p class="subtitle">Clinical Reasoning Adventure</p>
+        
+        <div class="progress-bar">
+            <div class="progress-dot active" id="dot-0"></div>
+            <div class="progress-dot" id="dot-1"></div>
+            <div class="progress-dot" id="dot-2"></div>
+            <div class="progress-dot" id="dot-3"></div>
+        </div>
+
+        <div class="scene-card" id="scene-0">
+            <div class="scene-title">Scene 1: The Collapsing Patient</div>
+            <div class="narrative">
+                <p>A 52-year-old woman with rheumatoid arthritis is brought to the ED after collapsing at home. Her husband reports she's had 3 days of flu-like symptoms with vomiting and diarrhea. She stopped taking her "arthritis pill" (prednisone 10mg daily for 2 years) about a week ago because she ran out.</p>
+                <p style="margin-top: 15px;">She appears acutely ill, confused, and her skin looks unusually tanned despite it being winter.</p>
+            </div>
+            
+            <div class="vitals">
+                <div class="vital-item"><div class="vital-label">HR</div><div class="vital-value warning">118</div></div>
+                <div class="vital-item"><div class="vital-label">BP</div><div class="vital-value critical">72/48</div></div>
+                <div class="vital-item"><div class="vital-label">RR</div><div class="vital-value">24</div></div>
+                <div class="vital-item"><div class="vital-label">Temp</div><div class="vital-value">38.6°C</div></div>
+                <div class="vital-item"><div class="vital-label">Glucose</div><div class="vital-value critical">52 mg/dL</div></div>
+            </div>
+
+            <div class="lab-box">
+                <h4 style="color: #ecc94b; margin-bottom: 10px;">📊 Initial Labs</h4>
+                <div class="lab-item"><span>Sodium</span><span class="lab-critical">126 mEq/L ↓</span></div>
+                <div class="lab-item"><span>Potassium</span><span class="lab-critical">5.9 mEq/L ↑</span></div>
+                <div class="lab-item"><span>BUN/Cr</span><span>32/1.4</span></div>
+                <div class="lab-item"><span>WBC</span><span>4,200 (eosinophils 12%)</span></div>
+            </div>
+
+            <p><strong>What is your leading diagnosis?</strong></p>
+            <div class="options" id="options-0">
+                <div class="option" onclick="selectOption(0, 0)">A. Septic shock from viral gastroenteritis</div>
+                <div class="option" onclick="selectOption(0, 1)">B. Adrenal crisis precipitated by illness and steroid withdrawal</div>
+                <div class="option" onclick="selectOption(0, 2)">C. Diabetic ketoacidosis</div>
+                <div class="option" onclick="selectOption(0, 3)">D. Hypovolemic shock from GI losses</div>
+            </div>
+            <div class="feedback" id="feedback-0"></div>
+            <button class="next-btn hidden" id="next-0" onclick="nextScene(1)">Continue →</button>
+        </div>
+
+        <div class="scene-card hidden" id="scene-1">
+            <div class="scene-title">Scene 2: Understanding the Pathophysiology</div>
+            <div class="narrative">
+                <p>This patient has <strong>secondary adrenal insufficiency</strong> from chronic steroid use, now in crisis. Let's understand why.</p>
+            </div>
+
+            <div class="pearl-box">
+                <h4>🔬 Why Chronic Steroids Cause Adrenal Suppression</h4>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li>Exogenous steroids suppress ACTH release from pituitary</li>
+                    <li>Adrenal glands atrophy without ACTH stimulation</li>
+                    <li>Takes 2-3 weeks of daily steroids (≥5mg prednisone) to suppress HPA axis</li>
+                    <li>Recovery takes weeks to MONTHS after stopping</li>
+                    <li>During stress, atrophied adrenals can't mount cortisol response → CRISIS</li>
+                </ul>
+            </div>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Primary (Addison's)</th>
+                    <th>Secondary (This Patient)</th>
+                </tr>
+                <tr>
+                    <td><strong>Problem</strong></td>
+                    <td>Adrenal gland destroyed</td>
+                    <td>Pituitary doesn't make ACTH</td>
+                </tr>
+                <tr>
+                    <td><strong>Hyperpigmentation</strong></td>
+                    <td>YES (↑ACTH → ↑MSH)</td>
+                    <td>NO (ACTH is LOW)</td>
+                </tr>
+                <tr>
+                    <td><strong>Mineralocorticoid</strong></td>
+                    <td>Deficient (severe hypoNa, hyperK)</td>
+                    <td>Usually preserved (milder)</td>
+                </tr>
+                <tr>
+                    <td><strong>Common cause</strong></td>
+                    <td>Autoimmune, infection</td>
+                    <td>Chronic steroids, pituitary tumor</td>
+                </tr>
+            </table>
+
+            <p style="margin-top: 20px;"><strong>Wait - the patient has hyperpigmentation. How do you explain this with secondary AI?</strong></p>
+            <div class="options" id="options-1">
+                <div class="option" onclick="selectOption(1, 0)">A. She must have primary adrenal insufficiency instead</div>
+                <div class="option" onclick="selectOption(1, 1)">B. The "tan" might be from illness, not true hyperpigmentation</div>
+                <div class="option" onclick="selectOption(1, 2)">C. Hyperpigmentation occurs in both primary and secondary AI</div>
+                <div class="option" onclick="selectOption(1, 3)">D. This finding rules out adrenal crisis</div>
+            </div>
+            <div class="feedback" id="feedback-1"></div>
+            <button class="next-btn hidden" id="next-1" onclick="nextScene(2)">Continue →</button>
+        </div>
+
+        <div class="scene-card hidden" id="scene-2">
+            <div class="scene-title">Scene 3: Emergency Treatment</div>
+            <div class="narrative">
+                <p>You strongly suspect adrenal crisis. BP is now 68/40 despite 2L NS. What's your immediate management?</p>
+            </div>
+
+            <div class="pearl-box">
+                <h4>🚨 Adrenal Crisis Treatment Protocol</h4>
+                <ol style="margin-left: 20px; line-height: 2;">
+                    <li><strong>Hydrocortisone 100mg IV bolus</strong> (has mineralocorticoid activity)</li>
+                    <li><strong>Aggressive IV saline</strong> (often need 3-4L in first 24h)</li>
+                    <li><strong>Dextrose</strong> for hypoglycemia</li>
+                    <li><strong>Treat precipitant</strong> (infection, etc.)</li>
+                    <li><strong>Then:</strong> Hydrocortisone 50-100mg IV q6-8h, taper as patient stabilizes</li>
+                </ol>
+            </div>
+
+            <p><strong>Should you wait for cortisol levels before giving hydrocortisone?</strong></p>
+            <div class="options" id="options-2">
+                <div class="option" onclick="selectOption(2, 0)">A. Yes - need to confirm diagnosis first</div>
+                <div class="option" onclick="selectOption(2, 1)">B. No - treat empirically, can draw cortisol but don't wait</div>
+                <div class="option" onclick="selectOption(2, 2)">C. Only wait if the patient is hemodynamically stable</div>
+                <div class="option" onclick="selectOption(2, 3)">D. Order ACTH stimulation test first</div>
+            </div>
+            <div class="feedback" id="feedback-2"></div>
+            <button class="next-btn hidden" id="next-2" onclick="nextScene(3)">Continue →</button>
+        </div>
+
+        <div class="scene-card hidden" id="scene-3">
+            <div class="scene-title">Scene 4: Stress Dosing & Prevention</div>
+            <div class="narrative">
+                <p>The patient responds dramatically to hydrocortisone - BP improves to 102/68 within an hour. The intern asks about preventing this in the future.</p>
+            </div>
+
+            <div class="pearl-box">
+                <h4>📋 Stress Dosing Rules</h4>
+                <table class="comparison-table">
+                    <tr><th>Stress Level</th><th>Steroid Dose</th><th>Examples</th></tr>
+                    <tr>
+                        <td>Minor illness/procedure</td>
+                        <td>Double or triple usual dose</td>
+                        <td>Dental work, minor surgery, mild fever</td>
+                    </tr>
+                    <tr>
+                        <td>Moderate stress</td>
+                        <td>50mg hydrocortisone IV/PO q8h</td>
+                        <td>Moderate surgery, significant illness</td>
+                    </tr>
+                    <tr>
+                        <td>Major stress/surgery</td>
+                        <td>100mg hydrocortisone IV q8h</td>
+                        <td>Major surgery, ICU illness, trauma</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p><strong>For how long after stopping chronic steroids should a patient carry stress-dose steroids?</strong></p>
+            <div class="options" id="options-3">
+                <div class="option" onclick="selectOption(3, 0)">A. 1 week</div>
+                <div class="option" onclick="selectOption(3, 1)">B. 1 month</div>
+                <div class="option" onclick="selectOption(3, 2)">C. Up to 1 year (and must taper, not stop abruptly)</div>
+                <div class="option" onclick="selectOption(3, 3)">D. No need if they feel fine after stopping</div>
+            </div>
+            <div class="feedback" id="feedback-3"></div>
+            
+            <div class="pearl-box hidden" id="final-pearl">
+                <h4>🎯 Key Takeaways</h4>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>Classic triad:</strong> Hypotension + Hyponatremia + Hypoglycemia (+ hyperkalemia in primary)</li>
+                    <li><strong>Precipitants:</strong> Infection, trauma, surgery, stopping steroids, any stress</li>
+                    <li><strong>TREAT FIRST, test later:</strong> Don't wait for labs - hydrocortisone 100mg IV STAT</li>
+                    <li><strong>Hydrocortisone preferred:</strong> Has mineralocorticoid activity (vs dexamethasone)</li>
+                    <li><strong>Chronic steroids:</strong> Taper slowly; HPA recovery takes up to 1 year</li>
+                    <li><strong>Stress dosing:</strong> All patients on chronic steroids need sick-day rules</li>
+                    <li><strong>Hyperpigmentation = primary AI only</strong> (elevated ACTH → MSH)</li>
+                </ul>
+            </div>
+            <button class="next-btn hidden" id="next-3" onclick="location.reload()">🔄 Restart Case</button>
+        </div>
+    </div>
+
+    <script>
+        const answers = [1, 1, 1, 2];
+        const feedbackData = [
+            {
+                correct: "Correct! The combination of: (1) chronic steroid use stopped abruptly, (2) physiologic stressor (infection/GI illness), (3) refractory hypotension, (4) classic electrolyte pattern (hyponatremia + hyperkalemia), and (5) hypoglycemia = textbook adrenal crisis.",
+                incorrect: "This presentation is classic for adrenal crisis: chronic steroid use (HPA suppression) + stopped steroids + stress (infection) → crisis. The hypotension unresponsive to fluids, hyponatremia, hyperkalemia, hypoglycemia, and eosinophilia all point to cortisol deficiency."
+            },
+            {
+                correct: "Good clinical thinking! True hyperpigmentation occurs in PRIMARY AI (high ACTH stimulates melanocytes). In secondary AI, ACTH is LOW. The 'tan' appearance in this acutely ill patient is likely from dehydration, poor perfusion, or fever - not true hyperpigmentation. Always examine carefully in good light.",
+                incorrect: "Hyperpigmentation is specific to PRIMARY adrenal insufficiency where elevated ACTH (trying to stimulate dead adrenals) cross-reacts with melanocyte receptors. In secondary AI (like steroid-induced), ACTH is LOW, so no hyperpigmentation. The apparent 'tan' here is likely illness-related."
+            },
+            {
+                correct: "Never delay treatment! Draw a random cortisol (and ACTH if possible) but give hydrocortisone 100mg IV immediately. A single dose won't interfere with later testing, and adrenal crisis has high mortality if untreated. You can sort out the diagnosis once the patient is stabilized.",
+                incorrect: "Adrenal crisis is a clinical diagnosis that requires immediate empiric treatment. Waiting for lab confirmation risks death. Give hydrocortisone 100mg IV immediately. You can draw cortisol before (won't be affected by one dose), but never delay treatment."
+            },
+            {
+                correct: "HPA axis recovery after chronic steroid suppression can take up to 1 YEAR. Patients must: (1) taper steroids slowly - never stop abruptly, (2) carry emergency stress dose steroids, (3) wear medical alert identification, and (4) know sick-day dosing rules. This patient stopped abruptly - a dangerous mistake.",
+                incorrect: "HPA axis recovery takes much longer than most realize - up to 1 year after chronic steroid use. During this time, the patient cannot mount an adequate cortisol response to stress. They need a medical alert bracelet, emergency injection kit, and clear sick-day dosing instructions."
+            }
+        ];
+
+        function selectOption(scene, choice) {
+            const options = document.querySelectorAll(`#options-${scene} .option`);
+            const feedback = document.getElementById(`feedback-${scene}`);
+            const nextBtn = document.getElementById(`next-${scene}`);
+            if (feedback.classList.contains('show')) return;
+            options.forEach((opt, idx) => {
+                if (idx === answers[scene]) opt.classList.add('selected');
+                else if (idx === choice) opt.classList.add('wrong');
+            });
+            const isCorrect = choice === answers[scene];
+            feedback.innerHTML = `<strong>${isCorrect ? '✓ Correct!' : '✗ Not quite.'}</strong><br><br>${isCorrect ? feedbackData[scene].correct : feedbackData[scene].incorrect}`;
+            feedback.className = `feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
+            nextBtn.classList.remove('hidden');
+            document.getElementById(`dot-${scene}`).classList.add('completed');
+            if (scene === 3) document.getElementById('final-pearl').classList.remove('hidden');
+        }
+
+        function nextScene(sceneNum) {
+            document.getElementById(`scene-${sceneNum - 1}`).classList.add('hidden');
+            document.getElementById(`scene-${sceneNum}`).classList.remove('hidden');
+            document.getElementById(`dot-${sceneNum}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Adrenal Crisis"
+         data-key-points="clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/19564476/" target="_blank" style="color:#7dd3fc">ADA Standards of Care: DKA</a> — Diabetes Care 2009</li><li><a href="https://pubmed.ncbi.nlm.nih.gov/27521067/" target="_blank" style="color:#7dd3fc">ATA Thyroid Storm Guidelines</a> — Thyroid 2016</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK499968/" target="_blank" style="color:#7dd3fc">Adrenal Crisis Management</a> — StatPearls</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

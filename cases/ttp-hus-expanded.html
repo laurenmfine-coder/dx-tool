@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>TTP-HUS | Dual-Mode Clinical Adventure</title>
+    <meta name="description" content="In-depth clinical case study: TTP-HUS | Dual-Mode Clinical Adventure. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>TTP-HUS | Dual-Mode Clinical Adventure</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
-        body.adult { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); }
-        body.peds { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        body { font-family:var(--rdx-font); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; }
+        body.adult { background: linear-gradient(135deg, #042f2e 0%, #1f5f8b 100%); }
+        body.peds { background:linear-gradient(135deg,#1f5f8b,#3a90c0); }
         .container { max-width: 900px; margin: 0 auto; }
-        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 4px; }
-        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; background: transparent; color: #e2e8f0; }
+        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: #f1f5f9; border-radius: 12px; padding: 4px; }
+        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius:12px; font-weight: 600; cursor: pointer; background: transparent; color:var(--rdx-text); }
         .mode-btn.active { background: rgba(255,255,255,0.2); }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-radius: 16px; margin-bottom: 20px; }
         .adult .header { background: rgba(127, 29, 29, 0.9); }
@@ -28,7 +41,7 @@
         .adult .progress-fill { background: linear-gradient(90deg, #b91c1c, #fca5a5); }
         .peds .progress-fill { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
         .scene { border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
-        .adult .scene { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
+        .adult .scene { background: linear-gradient(135deg, #1a4971, #1f5f8b); }
         .peds .scene { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
         .scene-header { padding: 16px 20px; }
         .adult .scene-header { background: rgba(185, 28, 28, 0.15); }
@@ -36,27 +49,27 @@
         .scene-phase { font-size: 0.75rem; text-transform: uppercase; }
         .scene-title { font-size: 1.4rem; font-weight: 700; }
         .scene-body { padding: 24px; }
-        .highlight { color: #fbbf24; font-weight: 600; }
-        .critical { color: #f87171; font-weight: 600; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(185,28,28,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
-        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #1f5f8b; margin-bottom: 10px; }
         .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
         .btn { padding: 16px 28px; border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
-        .adult .btn { background: linear-gradient(135deg, #b91c1c, #991b1b); }
+        .adult .btn { background: linear-gradient(135deg, var(--rdx-teal), var(--rdx-teal-dark)); }
         .peds .btn { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; }
         .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
         .pearl, .pitfall { padding: 20px; border-radius: 12px; }
         .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
         .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
         .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: #4ade80; }
+        .pearl .tip-header { color: var(--rdx-teal, #2874a6); }
         .pitfall .tip-header { color: #f87171; }
         @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
     /* Mobile Responsive - iPhone 16/17 optimized */
@@ -76,8 +89,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -85,6 +98,7 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body class="adult">
     <div class="container">
@@ -113,18 +127,18 @@
     window.render_arrival = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">Confusion and Bruising</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What comorbidities would change your management approach?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
                 </div><div class="narrative"><p>A <span class="highlight">32-year-old woman</span> presents with <span class="critical">confusion, fatigue, and petechiae</span> × 3 days. Previously healthy.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 108, BP 142/88, T 100.6°F<br><strong>Labs:</strong> Hgb 7.2, Plt 12K, Cr 1.4, LDH 1850<br><strong>Smear:</strong> Numerous schistocytes</p></div><div class="alert-box"><div class="alert-title">🚨 TTP = Hematologic Emergency!</div><p>Untreated mortality >90%. With plasma exchange, survival >80%. Don't wait for ADAMTS13 results!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Key Finding</div><div class="pathway"><strong>MAHA + Thrombocytopenia</strong><br>= Think TMA!<br><br>Schistocytes + ↓ platelets + hemolysis<br>+ Normal PT/PTT (NOT DIC!)<br>→ TTP until proven otherwise</div></div><button class="btn" onclick="nextStage()">Classic Features →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">Bloody Diarrhea Then Pallor</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -136,7 +150,7 @@
     window.render_features = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 10</div><div class="scene-title">Classic TTP Pentad</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What's the most likely diagnosis given this presentation?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -147,7 +161,7 @@
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 TTP Pentad (Only 5-10% have all 5!)</div><table class="comparison-table"><tr><th>Feature</th><th>Frequency</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>MAHA (schistocytes)</strong></td><td>~100%</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Thrombocytopenia</strong></td><td>~100%</td></tr><tr><td><strong>Neurologic symptoms</strong></td><td>~65%</td></tr><tr><td><strong>Renal dysfunction</strong></td><td>~50% (usually mild)</td></tr><tr><td><strong>Fever</strong></td><td>~25%</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ Don't Wait for Full Pentad!</div><p>MAHA + thrombocytopenia alone is enough to suspect TTP. Waiting kills patients!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Neurologic Manifestations</div><div class="pathway">• Confusion (most common)<br>• Headache<br>• Focal deficits<br>• Seizures<br>• "Waxing and waning" symptoms</div></div><button class="btn" onclick="nextStage()">Pathophysiology →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 10</div><div class="scene-title">HUS Features</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What key history element is most helpful here?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -159,7 +173,7 @@
     window.render_pathophys = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">ADAMTS13 Deficiency</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Which physical exam finding is most specific?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -170,7 +184,7 @@
                 </div><div class="mechanism-box"><div class="mechanism-title">🧬 TTP Mechanism</div><div class="pathway"><strong>Normal:</strong><br>ADAMTS13 cleaves ultra-large vWF multimers<br>→ Prevents spontaneous platelet clumping<br><br><strong>TTP:</strong><br>ADAMTS13 deficient (<10% activity)<br>→ Ultra-large vWF multimers persist<br>→ Spontaneous platelet aggregation<br>→ Microthrombi in small vessels<br>→ Platelet consumption<br>→ RBC shearing → schistocytes<br>→ Organ ischemia</div></div><div class="boards-tip"><div class="boards-tip-title">📚 Types of TTP</div><table class="comparison-table"><tr><th>Type</th><th>Mechanism</th></tr><tr><td><strong>Acquired (immune)</strong></td><td>Autoantibody to ADAMTS13 (~95%)</td></tr><tr><td><strong>Congenital (Upshaw-Schulman)</strong></td><td>Inherited ADAMTS13 deficiency (~5%)</td></tr></table></div><button class="btn" onclick="nextStage()">Labs →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">Shiga Toxin Mechanism</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Consider the most common causes first, then rarer ones</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -181,7 +195,7 @@
 
     window.render_labs = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 10</div><div class="scene-title">Laboratory Findings</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -195,7 +209,7 @@
     window.render_scoring = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 10</div><div class="scene-title">PLASMIC Score</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -203,21 +217,21 @@
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 PLASMIC Score for TTP</div><table class="comparison-table"><tr><th>Criterion</th><th>Points</th></tr><tr><td><strong>P</strong>latelet count <30K</td><td>1</td></tr><tr><td>Hemo<strong>L</strong>ysis (retic >2.5%, haptoglobin undetectable, or indirect bili >2)</td><td>1</td></tr><tr><td><strong>A</strong>ctive cancer (none)</td><td>1</td></tr><tr><td><strong>S</strong>tem cell or organ transplant (none)</td><td>1</td></tr><tr><td><strong>M</strong>CV <90 fL</td><td>1</td></tr><tr><td><strong>I</strong>NR <1.5</td><td>1</td></tr><tr><td><strong>C</strong>reatinine <2.0</td><td>1</td></tr></table><p style="margin-top:12px;"><strong>Score 0-4:</strong> Low probability (~0-4%)<br><strong>Score 5:</strong> Intermediate (~24%)<br><strong>Score 6-7:</strong> High probability (~72%)</p></div><div class="alert-box"><div class="alert-title">⚠️ Clinical Judgment Still Key!</div><p>PLASMIC helps but doesn't replace clinical judgment. High suspicion + MAHA + thrombocytopenia → treat empirically!</p></div><button class="btn" onclick="nextStage()">TTP vs HUS →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 10</div><div class="scene-title">Severity Assessment</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What's the most likely diagnosis given this presentation?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What if the patient doesn't respond to initial treatment?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 HUS Severity Indicators</div><table class="comparison-table"><tr><th>Finding</th><th>Implication</th></tr><tr><td>Anuria >24 hours</td><td>Likely needs dialysis</td></tr><tr><td>Severe HTN</td><td>Fluid overload, may need dialysis</td></tr><tr><td>Seizures</td><td>CNS involvement (less common)</td></tr><tr><td>Hgb <6</td><td>Likely needs transfusion</td></tr><tr><td>Platelets <20K</td><td>Severe consumption</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Dialysis Indications</div><div class="pathway"><strong>~50% of STEC-HUS need dialysis:</strong><br>• Anuria/severe oliguria<br>• Volume overload<br>• Refractory hypertension<br>• Severe electrolyte abnormalities<br>• Uremic symptoms<br><br>Usually temporary (days to weeks)</div></div><button class="btn" onclick="nextStage()">Differentiation →</button></div></div>`;
         }
     };
 
     window.render_differentiation = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 10</div><div class="scene-title">TTP vs HUS vs DIC</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What key history element is most helpful here?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -228,7 +242,7 @@
     window.render_treatment = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 10</div><div class="scene-title">Plasma Exchange</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Which physical exam finding is most specific?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -239,7 +253,7 @@
                 </div><div class="alert-box"><div class="alert-title">🚨 Plasma Exchange is Life-Saving!</div><p>Reduces mortality from >90% to <20%. Start IMMEDIATELY if TTP suspected. Don't wait for ADAMTS13!</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Treatment Protocol</div><table class="comparison-table"><tr><th>Therapy</th><th>Details</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Plasma exchange (PEX)</strong></td><td>Daily until platelets >150K × 2 days</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Corticosteroids</strong></td><td>Methylprednisolone 1g/day × 3, then prednisone</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Caplacizumab</strong></td><td>Anti-vWF nanobody (if available)</td></tr><tr><td><strong>Rituximab</strong></td><td>For refractory/relapsing cases</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 How PEX Works</div><div class="pathway"><strong>Removes:</strong><br>• Anti-ADAMTS13 antibodies<br>• Ultra-large vWF multimers<br><br><strong>Replaces:</strong><br>• Functional ADAMTS13<br><br>1-1.5 plasma volumes exchanged daily<br>Continue until sustained remission</div></div><button class="btn" onclick="nextStage()">Supportive Care →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 10</div><div class="scene-title">Supportive Care</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Consider the most common causes first, then rarer ones</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -251,7 +265,7 @@
     window.render_supportive = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 10</div><div class="scene-title">Caplacizumab & Rituximab</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -262,7 +276,7 @@
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 Newer Therapies</div><table class="comparison-table"><tr><th>Agent</th><th>Mechanism</th><th>Use</th></tr><tr><td><strong>Caplacizumab</strong></td><td>Anti-vWF nanobody, blocks platelet binding</td><td>Added to PEX + steroids</td></tr><tr><td><strong>Rituximab</strong></td><td>Anti-CD20, depletes B cells making antibody</td><td>Refractory or relapsing TTP</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Caplacizumab</div><div class="pathway"><strong>Benefits:</strong><br>• Faster platelet recovery<br>• Fewer PEX sessions needed<br>• Lower recurrence rate<br><br><strong>Dosing:</strong><br>11 mg IV before first PEX<br>Then 11 mg SQ daily<br>Continue 30 days after PEX stops</div></div><div class="alert-box"><div class="alert-title">⚠️ Platelet Transfusion</div><p>Generally AVOID platelet transfusion in TTP! May "add fuel to fire" by providing more platelets to form microthrombi. Exception: life-threatening bleeding or procedures.</p></div><button class="btn" onclick="nextStage()">Prognosis →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 10</div><div class="scene-title">Atypical HUS</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -274,7 +288,7 @@
     window.render_prognosis = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 10</div><div class="scene-title">Outcomes & Follow-up</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What's the most likely diagnosis given this presentation?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -285,7 +299,7 @@
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 TTP Prognosis</div><table class="comparison-table"><tr><th>Outcome</th><th>Rate</th></tr><tr><td>Survival with PEX</td><td>>80-90%</td></tr><tr><td>Relapse rate</td><td>~30-40% (lifetime)</td></tr><tr><td>Refractory to initial PEX</td><td>~10-20%</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Long-term Monitoring</div><div class="pathway"><strong>Follow-up required:</strong><br>• ADAMTS13 activity monitoring<br>• Watch for relapse (fatigue, petechiae)<br>• Educate patient on warning signs<br><br><strong>Relapse triggers:</strong><br>• Infection<br>• Surgery<br>• Pregnancy<br>• May occur years later</div></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 10</div><div class="scene-title">HUS Outcomes</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What key history element is most helpful here?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -296,15 +310,15 @@
 
     window.render_debrief = function() {
         const title = state.mode === 'adult' ? 'TTP' : 'HUS';
-        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🩸</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">${title} Mastery!</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🩸</div><div style="font-size:1.8rem;font-weight:700;color:var(--rdx-teal,#2874a6);">${title} Mastery!</div></div><div class="scene-body">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Which physical exam finding is most specific?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When would you involve subspecialty consultation?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr>${state.mode === 'adult' ? `<tr><td>Pentad</td><td>MAHA, thrombocytopenia, neuro, renal, fever</td></tr><tr><td>ADAMTS13</td><td><10% = TTP</td></tr><tr><td>Treatment</td><td>Plasma exchange + steroids ± caplacizumab</td></tr><tr><td>Don't wait</td><td>Start PEX before ADAMTS13 results!</td></tr><tr><td>Avoid</td><td>Platelet transfusion (usually)</td></tr>` : `<tr><td>Triad</td><td>MAHA, thrombocytopenia, AKI</td></tr><tr><td>Trigger</td><td>Bloody diarrhea (E. coli O157:H7)</td></tr><tr><td>Treatment</td><td>Supportive care ONLY</td></tr><tr><td>AVOID</td><td>Antibiotics (worsen outcome!)</td></tr><tr><td>Dialysis</td><td>~50% need it (usually temporary)</td></tr>`}</table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;">${state.mode === 'adult' ? `<li>Normal PT/PTT = not DIC</li><li>Don't wait for pentad</li><li>PLASMIC score helps</li><li>PEX is life-saving</li>` : `<li>Diarrhea → 5-10 days → HUS</li><li>Kidneys hit hardest</li><li>Most recover fully</li><li>No antibiotics!</li>`}</ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;">${state.mode === 'adult' ? `<li>Waiting for ADAMTS13</li><li>Transfusing platelets</li><li>Missing subtle neuro changes</li><li>Confusing with DIC</li>` : `<li>Giving antibiotics</li><li>Anti-diarrheals</li><li>Missing aHUS (no diarrhea)</li><li>Not monitoring long-term</li>`}</ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
     };
 
@@ -315,11 +329,11 @@
 <style>
 /* Enhanced Feature Styles */
 .rdx-difficulty-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 16px;
     padding: 16px 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow:var(--rdx-shadow-md);
     position: fixed;
     top: 10px;
     right: 10px;
@@ -337,7 +351,7 @@
     margin: 2px;
 }
 .rdx-diff-btn.active {
-    background: #3b82f6;
+    background: #3a90c0;
     color: white;
 }
 .rdx-diff-btn:not(.active) {
@@ -348,8 +362,8 @@
     background: #e2e8f0;
 }
 .rdx-refs-panel {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #93c5fd;
+    background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+    border: 1px solid #7cb8d9;
     border-radius: 12px;
     padding: 16px 20px;
     margin: 20px auto;
@@ -357,7 +371,7 @@
 }
 .rdx-refs-title {
     font-weight: 700;
-    color: #1e40af;
+    color: #1a4971;
     margin-bottom: 8px;
 }
 .rdx-refs-links {
@@ -365,7 +379,7 @@
     line-height: 1.8;
 }
 .rdx-refs-links a {
-    color: #2563eb;
+    color: #2874a6;
     text-decoration: none;
 }
 .rdx-refs-links a:hover {
@@ -385,7 +399,7 @@
     padding: 20px;
 }
 .rdx-debrief-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 20px;
     padding: 32px;
     max-width: 800px;
@@ -400,7 +414,7 @@
     margin-bottom: 8px;
 }
 .rdx-path-optimal {
-    background: #dcfce7;
+    background: #d4e8f7;
     border-left: 4px solid #22c55e;
 }
 .rdx-path-suboptimal {
@@ -412,8 +426,8 @@
     border-left: 4px solid #ef4444;
 }
 .rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
+    background: #f0f7fc;
+    border: 1px solid #7cb8d9;
     padding: 10px 14px;
     border-radius: 8px;
     margin: 8px 0;
@@ -446,8 +460,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -467,27 +481,27 @@
 
 <!-- CROSS-PLATFORM LEARNING LINKS -->
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#1f5f8b); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ TTP/HUS</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 ReasonDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ TTP/HUS</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
-            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="../adventure-hub.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #3a90c0;">
+            <h5 style="color: #3a90c0; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="../adventure-hub.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #2874a6;">
+            <h5 style="color: #2874a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
 <!-- END CROSS-PLATFORM LINKS -->
 <div class="rdx-refs-panel" id="rdxRefsPanel">
     <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
-    <div class="rdx-refs-links"><a href="https://www.hematology.org/education/clinicians/guidelines-and-quality-care" target="_blank" class="text-blue-600 hover:underline">ASH Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK560634/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Hematology</a></div>
+    <div class="rdx-refs-links"><a href="https://www.hematology.org/education/clinicians/guidelines-and-quality-care" target="_blank" class="text-teal-600 hover:underline">ASH Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK560634/" target="_blank" class="text-teal-600 hover:underline">StatPearls: Hematology</a></div>
 </div>
 
 <div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
@@ -542,7 +556,7 @@
         
         let grade, gradeColor, gradeEmoji;
         if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2874a6'; gradeEmoji = '⭐'; }
         else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
         else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
         
@@ -569,15 +583,15 @@
         document.getElementById('rdxDebriefContent').innerHTML = 
             '<div style="text-align:center;margin-bottom:24px;">' +
             '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
-            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:var(--rdx-text,#1e293b);">Case Complete!</h2>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
             '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
             '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
             '</div></div>' +
-            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<h3 style="font-weight:700;color:var(--rdx-text-secondary,#475569);margin-bottom:16px;">📊 Your Decision Path</h3>' +
             '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
             '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
-            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<h4 style="font-weight:600;color:var(--rdx-text-secondary,#475569);margin-bottom:8px;">🎯 Performance Legend</h4>' +
             '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
@@ -585,7 +599,7 @@
             '</div></div>' +
             '<div style="display:flex;gap:12px;">' +
             '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3a90c0,#3a90c0);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
             '</div>';
         
         document.getElementById('rdxDebriefOverlay').style.display = 'flex';
@@ -594,8 +608,7 @@
     // Auto-inject hint examples into existing content
     window.rdxInit = function() {
         // Could add dynamic hint injection here based on difficulty
-        console.log('ReasonDx Enhanced Features loaded for: Ttp Hus Expanded Dual Adventure');
-    };
+};
     
     // Initialize on load
     if (document.readyState === 'loading') {
@@ -617,12 +630,18 @@
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1111/jth.14264" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">ISTH Guidelines for TTP</a> — <em style="color:var(--rdx-text-muted,#64748b)">J Thromb Haemost</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
 
-<script src="../dx-feedback.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

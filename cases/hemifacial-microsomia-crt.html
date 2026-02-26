@@ -1,57 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Hemifacial Microsomia - ReasonDx Clinical Reasoning Case</title>
+    <meta name="description" content="Interactive clinical reasoning case: Hemifacial Microsomia. Work through history, exam, labs, and diagnosis step by step on ReasonDx.">
+<title>Hemifacial Microsomia - ReasonDx Clinical Reasoning Case</title>
     <link href="../css/rdx-adventure-responsive.css" rel="stylesheet">
 <link href="../css/rdx-a11y.css" rel="stylesheet">
 <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:var(--rdx-font); background:linear-gradient(135deg,#1f5f8b,#3a90c0); min-height: 100vh; padding: 20px; color: #1e293b; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .header h1 { font-size: 1.5rem; color: #fef3c7; }
+        .header h1 { font-size: 1.5rem; color: #334155; }
         .score-display { display: flex; gap: 20px; font-size: 0.9rem; }
         .score-item { background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 20px; }
         .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin-top: 12px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #fbbf24); border-radius: 3px; transition: width 0.3s; }
-        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
-        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a3cfe6, #1f5f8b); border-radius: 3px; transition: width 0.3s; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
         .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; letter-spacing: 1px; }
         .scene-title { font-size: 1.5rem; font-weight: 700; color: #e9d5ff; margin-top: 4px; }
-        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a78bfa; line-height: 1.7; }
-        .highlight { color: #fbbf24; font-weight: 600; }
-        .critical { color: #f87171; font-weight: 600; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a78bfa; line-height: 1.7; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
         .question-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(236,72,153,0.2)); border: 1px solid rgba(168,85,247,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .question-prompt { font-size: 1.1rem; font-weight: 600; color: #e9d5ff; margin-bottom: 16px; }
         .mcq-options { display: flex; flex-direction: column; gap: 10px; }
-        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
         .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
         .mcq-option.disabled { cursor: default; opacity: 0.7; }
         .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
         .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.2) !important; }
         .option-letter { width: 28px; height: 28px; background: rgba(139,92,246,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
-        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius: 10px; }
+        .feedback { display: none; margin-top: 16px; padding: 16px; border-radius:12px; }
         .feedback.show { display: block; }
         .correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
         .incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
-        .teaching-point { display: none; margin-top: 20px; background: rgba(139,92,246,0.15); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; }
+        .teaching-point { display: none; margin-top: 20px; background:var(--rdx-info-bg); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; }
         .teaching-point.show { display: block; }
-        .mechanism-box { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .mechanism-box { background:var(--rdx-bg-hover); border-radius:12px; padding: 16px; margin: 12px 0; }
         .mechanism-title { color: #c4b5fd; font-weight: 600; font-size: 1rem; margin-bottom: 10px; }
-        .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; color: #e2e8f0; }
+        .pathway { font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85rem; white-space: pre-wrap; line-height: 1.6; color:var(--rdx-text); }
         .btn { background: linear-gradient(135deg, #a78bfa, #f472b6); color: white; border: none; padding: 12px 28px; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: none; margin-top: 16px; }
         .btn.show { display: inline-block; }
         .btn:hover { transform: translateY(-2px); }
-        .alert-box { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin: 16px 0; }
-        .alert-title { color: #fbbf24; font-weight: 700; margin-bottom: 8px; }
+        .alert-box { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #1f5f8b; font-weight: 700; margin-bottom: 8px; }
         .completion { text-align: center; padding: 40px; }
-    </style>
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #1f5f8b; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container">
@@ -131,7 +153,7 @@
             renderStage();
             window.scrollTo(0,0);
         }else{
-            document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:#a78bfa;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:10px;border:1px solid rgba(59,130,246,0.3);"><p style="color:#93c5fd;margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../../mechanism/hemifacial-microsomia-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 MechanismDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=hemifacial+microsomia" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK557424/" target="_blank" style="color:#93c5fd;font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Hemifacial Microsomia!</p></div>';
+            document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:var(--rdx-teal-dark,#1f5f8b);margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><div style="margin-top:20px;padding:15px;background:rgba(59,130,246,0.15);border-radius:12px;border:1px solid rgba(59,130,246,0.3);"><p style="color:var(--rdx-teal,#2874a6);margin-bottom:10px;font-weight:600;">📚 Learn More:</p><div style="display:flex;flex-wrap:wrap;gap:8px;"><a href="../mechanism/hemifacial-microsomia-module.html" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📘 ReasonDx</a><a href="https://www.ncbi.nlm.nih.gov/books/?term=hemifacial+microsomia" target="_blank" title="Deep dive via StatPearls" style="padding:6px 12px;background:rgba(255,255,255,0.1);border-radius:20px;color:#a5f3fc;text-decoration:none;font-size:0.85rem;">📊 Deep Dive</a></div><div style="margin-top:10px;"><a href="https://www.ncbi.nlm.nih.gov/books/NBK557424/" target="_blank" style="color:var(--rdx-teal,#2874a6);font-size:0.8rem;">📖 StatPearls Reference</a></div></div><p>You mastered Hemifacial Microsomia!</p></div>';
         }
     }
     
@@ -145,12 +167,21 @@
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
 
-<script src="../dx-feedback.js"></script>
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

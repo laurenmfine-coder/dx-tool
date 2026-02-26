@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Eosinophilia - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #065f46 0%, #10b981 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #6ee7b7; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #ecfdf5; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #10b981; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(16,185,129,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #10b981, #6ee7b7); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #10b981; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK560929/" target="_blank" rel="noopener">Eosinophilia - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Elevated Eosinophils",content:`<div class="narrative"><p>34-year-old man referred for persistent eosinophilia found on routine labs. AEC 2,400/µL (normal <500). He has mild asthma controlled on ICS and seasonal allergies.</p><p style="margin-top:12px;"><strong>History:</strong> No recent travel, no new medications, no weight loss or fevers<br><strong>Review of Systems:</strong> Occasional heartburn, mild nasal congestion<br><strong>Exam:</strong> Clear lungs, no rash, no lymphadenopathy, no hepatosplenomegaly</p></div><div class="socratic-prompt"><h4>Define and Classify</h4><p>What defines eosinophilia, and how is severity classified?</p></div>`,
+hint_beginner:"Mild, moderate, severe based on absolute eosinophil count",hint_advanced:"What AEC level raises concern for organ damage?",
+question:{prompt:"AEC 2,400/µL. How do you classify this eosinophilia?",
+options:[{text:"Moderate eosinophilia (1,500-5,000/µL); Mild is 500-1,500, Severe (hypereosinophilia) is >5,000; >1,500 warrants workup for underlying cause",correct:true},
+{text:"This is normal - no workup needed",correct:false},
+{text:"Severe eosinophilia requiring immediate treatment",correct:false},
+{text:"Eosinophilia only matters if >10,000",correct:false}],
+explanation:{correct:"Classification: Mild (500-1,500/µL), Moderate (1,500-5,000/µL), Severe/Hypereosinophilia (>5,000/µL). Any persistent elevation >500 deserves investigation. >1,500 (hypereosinophilia) warrants thorough workup. >5,000 raises concern for eosinophilic organ damage.",incorrect:"AEC 2,400 is moderate eosinophilia and warrants investigation. Persistent eosinophilia can cause organ damage (heart, lungs, GI, skin, nervous system) even at moderate levels."},
+teaching:`<h4>Eosinophilia Classification</h4><p><strong>Mild:</strong> 500-1,500/µL</p><p><strong>Moderate:</strong> 1,500-5,000/µL</p><p><strong>Severe (Hypereosinophilia):</strong> >5,000/µL</p><p><strong>Hypereosinophilic syndrome:</strong> >1,500 + organ damage or dysfunction</p>`,
+why_chain:[{q:"Why does the absolute count matter more than percentage?",a:"Percentage can be misleading - a high percentage with low WBC may be normal absolute count. AEC = WBC × eosinophil percentage. Always use absolute eosinophil count for classification and management decisions."}],points:10}},
+
+{title:"The NAACP Mnemonic",content:`<div class="narrative"><p>Approach eosinophilia systematically with the major categories of causes.</p></div><div class="socratic-prompt"><h4>Differential Diagnosis</h4><p>What are the major categories of eosinophilia causes?</p></div>`,
+hint_beginner:"NAACP: Neoplasm, Allergy, Adrenal insufficiency, Connective tissue, Parasites",hint_advanced:"What's the most common cause worldwide vs in developed countries?",
+question:{prompt:"What causes eosinophilia? (NAACP)",
+options:[{text:"Neoplasm (lymphoma, leukemia, solid tumors), Allergy/Atopy (asthma, allergic rhinitis, eczema, drug reactions), Adrenal insufficiency, Connective tissue disease (EGPA, eosinophilic fasciitis), Parasites (helminths - most common worldwide)",correct:true},
+{text:"Only parasites cause eosinophilia",correct:false},
+{text:"Only allergies cause eosinophilia",correct:false},
+{text:"Bacterial infections cause eosinophilia",correct:false}],
+explanation:{correct:"NAACP: Neoplasm, Allergy/Atopy, Adrenal insufficiency, Connective tissue disease, Parasites. Also: drugs (common!), primary eosinophilic GI disorders, idiopathic hypereosinophilic syndrome. Worldwide, parasites (helminths) are #1. In developed countries, allergic diseases and drugs are most common.",incorrect:"Multiple categories cause eosinophilia. Bacterial infections typically cause neutrophilia, NOT eosinophilia (exception: scarlet fever recovery). Parasites cause eosinophilia because helminths trigger Th2/IgE response."},
+teaching:`<h4>NAACP Differential</h4><p><strong>N</strong>eoplasm: Lymphoma, leukemia, solid tumors</p><p><strong>A</strong>llergy: Asthma, rhinitis, eczema, drug reactions</p><p><strong>A</strong>drenal insufficiency</p><p><strong>C</strong>onnective tissue: EGPA, eosinophilic fasciitis</p><p><strong>P</strong>arasites: Helminths (tissue-invasive especially)</p>`,
+why_chain:[{q:"Why don't bacteria cause eosinophilia?",a:"Bacteria trigger Th1 immune response → neutrophils. Parasites (helminths) and allergens trigger Th2 response → IL-5 → eosinophil production and activation. This is why eosinophilia suggests allergy, parasites, or certain malignancies - not bacterial infection."}],points:15}},
+
+{title:"Initial Workup",content:`<div class="narrative"><p>Begin the systematic evaluation.</p></div><div class="socratic-prompt"><h4>Diagnostic Approach</h4><p>What is the initial workup for unexplained eosinophilia?</p></div>`,
+hint_beginner:"History is key - travel, drugs, allergies, symptoms",hint_advanced:"When do you need bone marrow biopsy?",
+question:{prompt:"What is the initial workup for eosinophilia?",
+options:[{text:"Thorough history (travel, medications, allergies, symptoms), CBC with differential, comprehensive metabolic panel, stool ova & parasites (×3 if travel), IgE level, peripheral smear; consider chest X-ray, echocardiogram if significant eosinophilia",correct:true},
+{text:"Bone marrow biopsy immediately",correct:false},
+{text:"No workup needed until AEC >10,000",correct:false},
+{text:"Treat empirically with steroids first",correct:false}],
+explanation:{correct:"Systematic workup: detailed history (travel to endemic areas, ALL medications including OTC/supplements, atopic history, symptoms suggesting organ involvement), labs (CBC, CMP, stool O&P ×3 if travel/exposure, IgE, peripheral smear), imaging if needed. Bone marrow if concern for primary hematologic disorder.",incorrect:"History is the most important first step - often reveals the cause (drug, travel, atopy). Bone marrow reserved for unexplained hypereosinophilia or concern for clonal disorder. Don't treat with steroids before diagnosis."},
+teaching:`<h4>Eosinophilia Workup</h4><p><strong>History:</strong> Travel, drugs, allergies, symptoms by organ system</p><p><strong>Labs:</strong> CBC, CMP, stool O&P ×3, IgE, peripheral smear</p><p><strong>Consider:</strong> CXR, echo (if HES concern), HIV, B12</p><p><strong>Advanced:</strong> Bone marrow, FISH for FIP1L1-PDGFRA if unexplained</p>`,
+why_chain:[{q:"Why stool O&P times three?",a:"Parasites shed eggs intermittently. Single stool sample sensitivity is only 60-70%. Three samples on different days increases sensitivity to >90%. Also consider serology for specific parasites based on exposure history."}],points:10}},
+
+{title:"Drug-Induced Eosinophilia",content:`<div class="narrative"><p>Review of medications reveals the patient started a new supplement 2 months ago. Drug-induced eosinophilia is very common.</p></div><div class="socratic-prompt"><h4>Medication Causes</h4><p>What drugs commonly cause eosinophilia?</p></div>`,
+hint_beginner:"Antibiotics, NSAIDs, anticonvulsants are common culprits",hint_advanced:"What is DRESS syndrome?",
+question:{prompt:"What medications commonly cause eosinophilia?",
+options:[{text:"Antibiotics (penicillins, sulfonamides, quinolones), NSAIDs, anticonvulsants (phenytoin, carbamazepine), allopurinol, supplements; can range from benign eosinophilia to DRESS syndrome",correct:true},
+{text:"Only IV medications cause eosinophilia",correct:false},
+{text:"Steroids cause eosinophilia",correct:false},
+{text:"Drug-induced eosinophilia is rare",correct:false}],
+explanation:{correct:"Drug-induced eosinophilia is VERY common. Major culprits: antibiotics (beta-lactams, sulfonamides), NSAIDs, anticonvulsants, allopurinol. Can be benign or part of DRESS syndrome (Drug Reaction with Eosinophilia and Systemic Symptoms). Always review ALL medications including supplements.",incorrect:"Drug-induced eosinophilia is one of the most common causes in developed countries. Steroids actually DECREASE eosinophils. Always suspect medications in any patient with new eosinophilia."},
+teaching:`<h4>Drug-Induced Eosinophilia</h4><p><strong>Antibiotics:</strong> Penicillins, cephalosporins, sulfonamides, quinolones</p><p><strong>Anticonvulsants:</strong> Phenytoin, carbamazepine, lamotrigine</p><p><strong>Others:</strong> NSAIDs, allopurinol, famotidine, supplements</p><p><strong>Severe:</strong> DRESS syndrome (eosinophilia + rash + organ involvement)</p>`,
+why_chain:[{q:"How long after starting a drug does eosinophilia appear?",a:"Typically 2-8 weeks after starting the medication. DRESS syndrome is characteristically delayed (2-8 weeks). This delayed onset can make the connection less obvious - always ask about medications started in the past 2-3 months."}],points:10}},
+
+{title:"Parasitic Causes",content:`<div class="narrative"><p>Patient denies recent travel but ate sushi regularly. Consider parasitic causes of eosinophilia.</p></div><div class="socratic-prompt"><h4>Parasites and Eosinophilia</h4><p>Which parasites cause eosinophilia, and which don't?</p></div>`,
+hint_beginner:"Helminths (worms) cause eosinophilia; protozoa generally don't",hint_advanced:"What is Strongyloides hyperinfection?",
+question:{prompt:"Which parasites cause eosinophilia?",
+options:[{text:"Helminths (tissue-invasive worms) cause eosinophilia: Strongyloides, Ascaris, hookworm, Toxocara, Trichinella, filarial worms; Protozoa (Giardia, Entamoeba) generally do NOT cause eosinophilia",correct:true},
+{text:"All parasites cause eosinophilia equally",correct:false},
+{text:"Only tropical parasites cause eosinophilia",correct:false},
+{text:"Giardia is the most common cause of eosinophilia",correct:false}],
+explanation:{correct:"Key distinction: HELMINTHS (worms) cause eosinophilia; PROTOZOA (Giardia, Entamoeba, Cryptosporidium) generally don't. Tissue-invasive phase is most eosinophilic. Strongyloides is critical - can persist for decades and cause fatal hyperinfection with immunosuppression.",incorrect:"Not all parasites are equal. Helminths trigger Th2/IL-5/eosinophil response. Protozoa don't typically cause eosinophilia. This distinction helps narrow the differential."},
+teaching:`<h4>Parasites and Eosinophilia</h4><p><strong>Helminths (YES):</strong> Strongyloides, Ascaris, hookworm, Toxocara, Trichinella, filaria, schistosomiasis</p><p><strong>Protozoa (NO):</strong> Giardia, Entamoeba, Cryptosporidium</p><p><strong>Critical:</strong> Strongyloides - can persist decades, hyperinfection if immunosuppressed</p>`,
+why_chain:[{q:"Why is Strongyloides so dangerous?",a:"Strongyloides can autoinfect (complete life cycle within host), persisting for decades after initial infection. If patient becomes immunosuppressed (steroids!), massive autoinfection causes hyperinfection syndrome with up to 90% mortality. Screen before starting steroids in anyone with possible exposure."}],points:15}},
+
+{title:"Eosinophilic GI Disorders",content:`<div class="narrative"><p>Patient mentions heartburn and occasional dysphagia. Consider eosinophilic GI disease.</p></div><div class="socratic-prompt"><h4>GI Manifestations</h4><p>What are the primary eosinophilic GI disorders?</p></div>`,
+hint_beginner:"EoE is most common - presents with dysphagia and food impaction",hint_advanced:"How many eosinophils on biopsy define EoE?",
+question:{prompt:"What eosinophilic GI disorders should you consider?",
+options:[{text:"Eosinophilic esophagitis (EoE) - most common; presents with dysphagia, food impaction; requires ≥15 eos/hpf on biopsy; also eosinophilic gastritis, enteritis, colitis (rarer)",correct:true},
+{text:"Eosinophilic GI disease doesn't cause peripheral eosinophilia",correct:false},
+{text:"Only diagnosed by blood tests",correct:false},
+{text:"EoE only occurs in children",correct:false}],
+explanation:{correct:"EoE is increasingly recognized, often with atopy history. Presents: dysphagia, food impaction, heartburn not responsive to PPI. Diagnosis requires ≥15 eos/hpf on esophageal biopsy. May or may not have peripheral eosinophilia. Treatment: PPI trial, swallowed topical steroids, elimination diets.",incorrect:"EoE can occur at any age (increasingly diagnosed in adults). Diagnosis requires biopsy - can't diagnose by blood tests alone. Peripheral eosinophilia may be absent."},
+teaching:`<h4>Eosinophilic GI Disorders</h4><p><strong>EoE:</strong> Dysphagia, food impaction, ≥15 eos/hpf, atopy association</p><p><strong>Eosinophilic gastritis:</strong> Nausea, vomiting, abdominal pain</p><p><strong>Eosinophilic enteritis:</strong> Diarrhea, malabsorption, protein loss</p><p><strong>Note:</strong> Peripheral eosinophilia may be mild or absent</p>`,
+why_chain:[{q:"What's the connection between EoE and food allergy?",a:"EoE is not classic IgE-mediated food allergy - skin testing and specific IgE are often negative. It's likely a mixed IgE and non-IgE (Th2-mediated) response. Elimination diets work but identifying triggers is challenging. Six-food elimination diet removes most common triggers."}],points:10}},
+
+{title:"Hypereosinophilic Syndrome",content:`<div class="narrative"><p>If no secondary cause found and eosinophilia persists with organ involvement, consider hypereosinophilic syndrome (HES).</p></div><div class="socratic-prompt"><h4>When to Suspect HES</h4><p>What defines hypereosinophilic syndrome?</p></div>`,
+hint_beginner:"Persistent hypereosinophilia + organ damage + no secondary cause",hint_advanced:"What genetic abnormality defines a subset of HES?",
+question:{prompt:"What defines hypereosinophilic syndrome (HES)?",
+options:[{text:"Persistent AEC >1,500/µL + eosinophil-mediated organ damage/dysfunction + exclusion of secondary causes; can be idiopathic, lymphocytic variant (T-cell driven), or myeloproliferative (FIP1L1-PDGFRA positive)",correct:true},
+{text:"Any eosinophilia above normal",correct:false},
+{text:"Only diagnosed if AEC >50,000",correct:false},
+{text:"HES never causes organ damage",correct:false}],
+explanation:{correct:"HES criteria: AEC >1,500 on ≥2 occasions + organ damage/dysfunction attributable to eosinophilia + exclusion of secondary causes. Subtypes: idiopathic, lymphocytic (aberrant T-cells producing IL-5), myeloproliferative (FIP1L1-PDGFRA fusion - responds dramatically to imatinib).",incorrect:"HES is defined by persistent hypereosinophilia PLUS organ damage, not just elevated count. The distinction matters because HES requires treatment to prevent irreversible organ damage, especially cardiac."},
+teaching:`<h4>Hypereosinophilic Syndrome</h4><p><strong>Criteria:</strong> AEC >1,500 (×2) + organ damage + no secondary cause</p><p><strong>Subtypes:</strong> Idiopathic, lymphocytic (T-cell), myeloproliferative (PDGFRA+)</p><p><strong>Organs affected:</strong> Heart, lungs, skin, GI, nervous system</p><p><strong>Key test:</strong> FIP1L1-PDGFRA (if positive → imatinib)</p>`,
+why_chain:[{q:"Why is cardiac involvement so important?",a:"Eosinophilic cardiac disease (Loeffler endocarditis) can cause irreversible endomyocardial fibrosis, restrictive cardiomyopathy, and mural thrombi. Screen with echocardiogram and troponin. Cardiac involvement is a major cause of morbidity and mortality in HES."}],points:15}},
+
+{title:"EGPA (Churg-Strauss)",content:`<div class="narrative"><p>Consider eosinophilic granulomatosis with polyangiitis (EGPA) in patients with asthma and eosinophilia.</p></div><div class="socratic-prompt"><h4>Vasculitis Connection</h4><p>What is EGPA and when should you suspect it?</p></div>`,
+hint_beginner:"Asthma + eosinophilia + vasculitis = EGPA",hint_advanced:"What percentage are ANCA positive?",
+question:{prompt:"When should you suspect EGPA (Churg-Strauss)?",
+options:[{text:"Triad of asthma (often severe/late-onset) + eosinophilia + vasculitis (neuropathy, skin, cardiac, sinus); ANCA positive in ~40% (usually MPO/p-ANCA); eosinophils often very high",correct:true},
+{text:"EGPA only affects lungs",correct:false},
+{text:"EGPA never has asthma",correct:false},
+{text:"All EGPA is ANCA positive",correct:false}],
+explanation:{correct:"EGPA (formerly Churg-Strauss): adult-onset or worsening asthma + eosinophilia (often >1,500, can be very high) + vasculitis affecting multiple organs (mononeuritis multiplex, cardiac, skin purpura, sinusitis). ~40% ANCA positive (MPO/p-ANCA pattern). ANCA-negative EGPA tends to have more cardiac involvement.",incorrect:"EGPA is a systemic vasculitis, not just lung disease. The combination of asthma, eosinophilia, and multisystem involvement is the key. Negative ANCA doesn't rule out EGPA."},
+teaching:`<h4>EGPA (Churg-Strauss)</h4><p><strong>Triad:</strong> Asthma + eosinophilia + vasculitis</p><p><strong>Organs:</strong> Nerves (mononeuritis multiplex), heart, skin, sinuses, lungs</p><p><strong>ANCA:</strong> ~40% positive (MPO/p-ANCA)</p><p><strong>Treatment:</strong> Steroids ± cyclophosphamide; mepolizumab approved</p>`,
+why_chain:[{q:"Why is cardiac involvement critical in EGPA?",a:"Cardiac involvement (myocarditis, coronary arteritis, pericarditis) is the leading cause of death in EGPA. It's more common in ANCA-negative patients. Screen with echo and cardiac MRI if suspected. Early aggressive treatment is critical."}],points:10}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>Our patient's eosinophilia was attributed to the new supplement (stopped) plus underlying atopic disease. AEC normalized after supplement discontinuation. No organ involvement identified.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>What are the essential principles of eosinophilia evaluation?</p></div>`,
+hint_beginner:"Systematic approach with NAACP, always check for organ damage",hint_advanced:"When do you treat empirically?",
+question:{prompt:"What are the key principles in evaluating eosinophilia?",
+options:[{text:"Use AEC not percentage, classify severity, systematic differential (NAACP), thorough medication review, check for organ involvement (especially cardiac), screen for Strongyloides before steroids, identify and treat underlying cause",correct:true},
+{text:"Only treat if AEC >10,000",correct:false},
+{text:"All eosinophilia requires steroids",correct:false},
+{text:"Eosinophilia is always benign",correct:false}],
+explanation:{correct:"Key principles: 1) Use absolute count (AEC), 2) Classify severity, 3) Systematic differential (NAACP + drugs), 4) Detailed medication history, 5) Assess for organ involvement (cardiac, pulmonary, GI, neuro, skin), 6) Screen for Strongyloides before immunosuppression, 7) Treat underlying cause when identified.",incorrect:"Eosinophilia can cause significant organ damage even at moderate levels. Don't dismiss it. Systematic evaluation identifies the cause in most cases. Screen for Strongyloides before steroids to prevent hyperinfection."},
+teaching:`<h4>Eosinophilia Summary</h4><p>1. Use AEC, not percentage</p><p>2. Classify: mild (500-1,500), moderate (1,500-5,000), severe (>5,000)</p><p>3. NAACP differential + medications</p><p>4. Assess organ involvement (cardiac echo if >1,500)</p><p>5. Strongyloides screening before steroids</p><p>6. Treat underlying cause</p><p>7. Refer to hematology/allergy if unexplained or end-organ damage</p>`,
+why_chain:[{q:"When should you refer to a specialist?",a:"Refer if: unexplained persistent eosinophilia, AEC >1,500 without clear cause, any organ involvement, suspected HES or EGPA, need for steroid therapy (Strongyloides risk), or FIP1L1-PDGFRA testing needed."}],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent eosinophilia workup!';}
+else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp. Review EGPA features.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on helminths vs protozoa distinction.';}
+else{g='Keep Learning';clr='#ef4444';m='Review NAACP differential and organ involvement.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Eosinophilia"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

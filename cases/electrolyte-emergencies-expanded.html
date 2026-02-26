@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Electrolyte Emergencies - Expanded Deep Dive Adventure</title>
+    <meta name="description" content="In-depth clinical case study: Electrolyte Emergencies - Expanded Deep Dive Adventure. Explore pathophysiology, diagnosis, and management with teaching points...">
+<title>Electrolyte Emergencies - Expanded Deep Dive Adventure</title>
     <link href="../css/tailwind.min.css" rel="stylesheet">
     <style>
         .stage-card { transition: all 0.3s ease; }
-        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
-        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .why-chain { background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); }
         .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
         .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
-        .optimal-path { background-color: #dcfce7; border-left: 4px solid #22c55e; }
+        .optimal-path { background-color: #2874a6; border-left: 4px solid #22c55e; }
         .suboptimal-path { background-color: #fef9c3; border-left: 4px solid #eab308; }
         .wrong-path { background-color: #fecaca; border-left: 4px solid #ef4444; }
     /* Mobile Responsive - iPhone 16/17 optimized */
@@ -35,8 +48,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -44,6 +57,7 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
     <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
@@ -56,13 +70,13 @@
                 <div class="flex items-center gap-4">
                     <div class="text-right">
                         <div class="text-sm text-gray-500">Progress</div>
-                        <div class="text-2xl font-bold text-blue-600" id="score">0%</div>
+                        <div class="text-2xl font-bold text-teal-600" id="score">0%</div>
                     </div>
                     <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
                 </div>
             </div>
             <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div id="progressBar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-500" style="width: 0%"></div>
+                <div id="progressBar" class="h-full bg-gradient-to-r from-teal-500 to-indigo-500 transition-all duration-500" style="width: 0%"></div>
             </div>
         </div>
         <div id="gameContainer" class="space-y-6"></div>
@@ -235,12 +249,12 @@
             document.getElementById('gameContainer').innerHTML = `
                 <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Stage ${stage.id} of ${stages.length}</span>
+                        <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm font-medium">Stage ${stage.id} of ${stages.length}</span>
                         <h2 class="text-xl font-bold text-gray-800">${stage.title}</h2>
                     </div>
                     <div class="bg-slate-50 rounded-xl p-4 mb-6"><pre class="whitespace-pre-wrap font-sans text-gray-700">${stage.scenario}</pre></div>
                     <p class="font-semibold text-gray-800 mb-4">${stage.question}</p>
-                    <div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption('${opt.id}')" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all"><span class="font-bold text-blue-600">${opt.id}.</span> ${opt.text}</button>`).join('')}</div>
+                    <div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption('${opt.id}')" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:bg-teal-50 transition-all"><span class="font-bold text-teal-600">${opt.id}.</span> ${opt.text}</button>`).join('')}</div>
                 </div>`;
         }
 
@@ -258,11 +272,11 @@
             document.getElementById('gameContainer').innerHTML = `
                 <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
                     <div class="${pathClass} p-4 rounded-xl mb-6"><div class="flex items-center gap-2 mb-2"><span class="font-bold">${option.isOptimal ? '✓ Optimal' : option.points >= 5 ? '~ Suboptimal' : '✗ Incorrect'}</span><span class="text-gray-600">• ${option.points} pts</span></div><p class="font-semibold text-gray-800">${option.outcome}</p></div>
-                    <div class="bg-blue-50 rounded-xl p-4 mb-6"><p class="text-gray-700">${option.feedback}</p></div>
-                    <div class="why-chain rounded-xl p-4 mb-6"><h3 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h3><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-2"><span class="text-blue-500 font-bold">${i+1}.</span><span>${s}</span></div>`).join('')}</div></div>
+                    <div class="bg-teal-50 rounded-xl p-4 mb-6"><p class="text-gray-700">${option.feedback}</p></div>
+                    <div class="why-chain rounded-xl p-4 mb-6"><h3 class="font-bold text-teal-800 mb-3">🔗 ${stage.whyChain.title}</h3><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-2"><span class="text-teal-500 font-bold">${i+1}.</span><span>${s}</span></div>`).join('')}</div></div>
                     <div class="mechanism-box rounded-xl p-4 mb-6"><h3 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h3><pre class="whitespace-pre-wrap font-sans text-gray-700 text-sm">${stage.mechanism.content}</pre></div>
                     <div class="grid md:grid-cols-2 gap-4 mb-6"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div>
-                    <button onclick="nextStage()" class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl font-semibold hover:opacity-90">${currentStage < stages.length - 1 ? 'Continue →' : 'View Summary'}</button>
+                    <button onclick="nextStage()" class="w-full py-3 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-xl font-semibold hover:opacity-90">${currentStage < stages.length - 1 ? 'Continue →' : 'View Summary'}</button>
                 </div>`;
         }
 
@@ -276,8 +290,8 @@
                 <div class="bg-white rounded-2xl shadow-lg p-6">
                     <h2 class="text-2xl font-bold mb-4">📊 Complete! ${pct}%</h2>
                     <div class="space-y-2 mb-6">${decisionPath.map(d => `<div class="${d.isOptimal ? 'optimal-path' : d.points >= 5 ? 'suboptimal-path' : 'wrong-path'} p-2 rounded-lg text-sm"><strong>Stage ${d.stage}:</strong> ${d.outcome} (${d.points}/${d.maxPoints})</div>`).join('')}</div>
-                    <div class="bg-blue-50 p-4 rounded-xl mb-4"><h4 class="font-bold text-blue-800 mb-2">🎯 Key Points</h4><ul class="text-sm space-y-1"><li>• Hyperkalemia: Calcium → Insulin → Dialysis</li><li>• Hyponatremia: 3% saline for severe; limit 8-10 mEq/L per 24h</li><li>• Hypercalcemia: Fluids first</li><li>• Hypomagnesemia: Fix Mg before K+ and Ca2+</li></ul></div>
-                    <button onclick="location.reload()" class="mt-4 w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl font-semibold">🔄 Try Again</button>
+                    <div class="bg-teal-50 p-4 rounded-xl mb-4"><h4 class="font-bold text-teal-800 mb-2">🎯 Key Points</h4><ul class="text-sm space-y-1"><li>• Hyperkalemia: Calcium → Insulin → Dialysis</li><li>• Hyponatremia: 3% saline for severe; limit 8-10 mEq/L per 24h</li><li>• Hypercalcemia: Fluids first</li><li>• Hypomagnesemia: Fix Mg before K+ and Ca2+</li></ul></div>
+                    <button onclick="location.reload()" class="mt-4 w-full py-3 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-xl font-semibold">🔄 Try Again</button>
                 </div>`;
         }
         
@@ -288,10 +302,10 @@
 <!-- REASONDX ENHANCED FEATURES -->
 <style>
 .rdx-difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
-.rdx-diff-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; font-size: 14px; }
-.rdx-diff-btn.active { border-color: #3b82f6; background: #3b82f6; color: white; }
-.rdx-refs-panel { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 12px; padding: 16px; margin: 20px auto; max-width: 1000px; }
-.rdx-refs-links a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; margin: 4px; display: inline-block; }
+.rdx-diff-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background:var(--rdx-bg-card); cursor: pointer; font-size: 14px; }
+.rdx-diff-btn.active { border-color: #3a90c0; background: #3a90c0; color: white; }
+.rdx-refs-panel { background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); border-radius: 12px; padding: 16px; margin: 20px auto; max-width: 1000px; }
+.rdx-refs-links a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2874a6; margin: 4px; display: inline-block; }
 /* Mobile Responsive - iPhone 16/17 optimized */
         @media (max-width: 480px) {
             body { padding: 12px !important; }
@@ -309,8 +323,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -325,37 +339,37 @@
 </div>
 
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning Journey</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#1f5f8b); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning Journey</h4>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 8px;">📚 MechanismDx Modules</h5>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 8px;">📚 ReasonDx Modules</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Master the pathophysiology</p>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ AKI/CKD Mechanisms</a>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acid-Base Disorders</a>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hyponatremia Deep Dive</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ AKI/CKD Mechanisms</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Acid-Base Disorders</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Hyponatremia Deep Dive</a>
         </div>
         
-        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #3b82f6;">
-            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 8px;">🎮 Related ReasonDx Cases</h5>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 16px; border-left: 4px solid #3a90c0;">
+            <h5 style="color: #3a90c0; font-weight: 600; margin-bottom: 8px;">🎮 Related ReasonDx Cases</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice similar scenarios</p>
-            <a href="hyperkalemia-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hyperkalemia Deep Dive</a>
-            <a href="hyponatremia-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hyponatremia Deep Dive</a>
-            <a href="aki-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ AKI Management</a>
-            <a href="dka-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ DKA Management</a>
+            <a href="hyperkalemia-expanded.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Hyperkalemia Deep Dive</a>
+            <a href="hyponatremia-expanded.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Hyponatremia Deep Dive</a>
+            <a href="aki-expanded-adventure.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ AKI Management</a>
+            <a href="dka-expanded-adventure.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ DKA Management</a>
         </div>
         
-        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 8px;">💬 CoachDx Practice</h5>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 16px; border-left: 4px solid #2874a6;">
+            <h5 style="color: #2874a6; font-weight: 600; margin-bottom: 8px;">💬 CoachDx Practice</h5>
             <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice communication skills</p>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Electrolyte Emergency Coach</a>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ SBAR Communication</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Electrolyte Emergency Coach</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
 
 <div class="rdx-refs-panel">
-    <div style="font-weight:700;color:#1e40af;margin-bottom:12px;">📚 Open-Access References</div>
+    <div style="font-weight:700;color:#1a4971;margin-bottom:12px;">📚 Open-Access References</div>
     <div class="rdx-refs-links">
         <a href="https://kdigo.org/guidelines/" target="_blank">KDIGO Guidelines</a>
         <a href="https://www.ncbi.nlm.nih.gov/books/NBK470284/" target="_blank">StatPearls: Hyperkalemia</a>
@@ -374,12 +388,18 @@
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1016/j.ejim.2014.01.026" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">European Society of Endocrinology Guideline on Hyponatremia</a> — <em style="color:var(--rdx-text-muted,#64748b)">EJIM</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
 
-<script src="../dx-feedback.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

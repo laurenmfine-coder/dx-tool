@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Thyroid Storm - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #4a044e 0%, #a855f7 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #d8b4fe; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #faf5ff; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #a855f7; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(168,85,247,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #d8b4fe); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #a855f7; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK448095/" target="_blank" rel="noopener">Thyroid Storm - StatPearls (StatPearls)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Agitated Febrile Patient",content:`<div class="narrative"><p>38-year-old woman with Graves' disease (non-compliant with methimazole) presents after a URI with fever, confusion, and palpitations.</p><p style="margin-top:12px;"><strong>Vitals:</strong> T 104.2F, HR 158 (irregular), BP 168/72, RR 26<br><strong>Exam:</strong> Agitated, diaphoretic, tremulous, lid lag, diffuse goiter with bruit, atrial fibrillation<br><strong>Labs:</strong> TSH <0.01, Free T4 6.8 (high), Free T3 18 (high)</p></div><div class="socratic-prompt"><h4>Recognize the Emergency</h4><p>What distinguishes thyroid storm from uncomplicated hyperthyroidism?</p></div>`,
+hint_beginner:"Thyroid storm = hyperthyroidism + systemic decompensation",hint_advanced:"What is the Burch-Wartofsky score?",
+question:{prompt:"Hyperthyroid patient with high fever, tachycardia, AFib, and altered mental status. What is this?",
+options:[{text:"Thyroid storm - life-threatening decompensated hyperthyroidism with multisystem involvement; distinguished from hyperthyroidism by fever, severe tachycardia, CNS dysfunction, GI symptoms, and precipitant",correct:true},
+{text:"Uncomplicated Graves' disease",correct:false},
+{text:"Sepsis only",correct:false},
+{text:"Simple AFib with rapid ventricular response",correct:false}],
+explanation:{correct:"Thyroid storm is a clinical diagnosis: hyperthyroidism + systemic decompensation (high fever, severe tachycardia, CNS changes, GI symptoms). Often precipitated by infection, surgery, trauma, or medication non-compliance. Mortality 10-30% even with treatment.",incorrect:"Thyroid storm is more than hyperthyroidism - it's decompensated thyrotoxicosis with multiorgan dysfunction. The degree of fever, tachycardia, and CNS involvement distinguishes it from uncomplicated hyperthyroidism."},
+teaching:`<h4>Thyroid Storm vs Hyperthyroidism</h4><p><strong>Fever:</strong> >101.3F (38.5C)</p><p><strong>Cardiovascular:</strong> HR >140, AFib, heart failure</p><p><strong>CNS:</strong> Agitation, delirium, psychosis, coma</p><p><strong>GI:</strong> Nausea, vomiting, diarrhea, jaundice</p><p><strong>Precipitant:</strong> Infection, surgery, trauma, iodine load</p>`,
+why_chain:[{q:"What is the Burch-Wartofsky score?",a:"Point-based system to diagnose thyroid storm: temperature, CNS effects, GI-hepatic dysfunction, cardiovascular dysfunction, heart failure, AFib, precipitant. Score ≥45 = highly suggestive of thyroid storm."}],points:15}},
+
+{title:"Treatment Priorities",content:`<div class="narrative"><p>Thyroid storm diagnosed. What is the treatment approach?</p></div><div class="socratic-prompt"><h4>Treatment Sequence</h4><p>What is the order of treatments for thyroid storm?</p></div>`,
+hint_beginner:"Block synthesis, block release, block conversion, block symptoms",hint_advanced:"Why give PTU before iodine?",
+question:{prompt:"What is the correct treatment sequence for thyroid storm?",
+options:[{text:"1) Beta-blocker (control symptoms), 2) Thionamide (block synthesis), 3) Iodine (block release - give 1 hour AFTER thionamide), 4) Glucocorticoids (block T4→T3 conversion), 5) Supportive care",correct:true},
+{text:"Iodine first, then beta-blocker",correct:false},
+{text:"Surgery immediately",correct:false},
+{text:"Radioactive iodine ablation",correct:false}],
+explanation:{correct:"Treatment sequence matters: 1) Beta-blocker for symptoms, 2) Thionamide (PTU preferred - also blocks T4→T3 conversion), 3) Iodine 1 HOUR AFTER thionamide (blocks hormone release but can increase synthesis if given first), 4) Glucocorticoids (block conversion, treat possible adrenal insufficiency), 5) Supportive care.",incorrect:"Must give thionamide BEFORE iodine. Iodine given first can transiently increase thyroid hormone synthesis (Jod-Basedow phenomenon). Wait 1 hour after thionamide, then give iodine."},
+teaching:`<h4>Thyroid Storm Treatment Sequence</h4><p><strong>1. Beta-blocker:</strong> Propranolol (also blocks T4→T3)</p><p><strong>2. Thionamide:</strong> PTU preferred (blocks synthesis + conversion)</p><p><strong>3. Iodine:</strong> SSKI or Lugol's - 1 hour AFTER thionamide</p><p><strong>4. Glucocorticoids:</strong> Hydrocortisone 100mg q8h</p><p><strong>5. Supportive:</strong> Cooling, fluids, treat precipitant</p>`,
+why_chain:[{q:"Why PTU over methimazole in thyroid storm?",a:"PTU blocks both thyroid hormone synthesis (like methimazole) AND peripheral T4→T3 conversion. This dual mechanism provides faster control in thyroid storm. Methimazole only blocks synthesis."}],points:15}},
+
+{title:"Beta-Blocker Selection",content:`<div class="narrative"><p>Start with symptom control using beta-blockers.</p></div><div class="socratic-prompt"><h4>Control the Hyperadrenergic State</h4><p>Which beta-blocker is preferred and why?</p></div>`,
+hint_beginner:"Propranolol has additional benefits beyond beta-blockade",hint_advanced:"What if the patient has asthma or heart failure?",
+question:{prompt:"Which beta-blocker is preferred for thyroid storm?",
+options:[{text:"Propranolol (non-selective) - controls tachycardia AND inhibits peripheral T4→T3 conversion; IV for severe cases, then transition to oral",correct:true},
+{text:"Metoprolol is always first choice",correct:false},
+{text:"Beta-blockers are contraindicated in thyroid storm",correct:false},
+{text:"Only use if heart rate >200",correct:false}],
+explanation:{correct:"Propranolol is preferred: non-selective beta-blocker controls tachycardia, tremor, and diaphoresis PLUS inhibits T4→T3 conversion at high doses. IV propranolol 1mg every 10 minutes initially, then oral 60-80mg q4-6h. Esmolol IV for more titratability.",incorrect:"Propranolol has the advantage of blocking T4→T3 conversion. Cardioselective beta-blockers (metoprolol) can be used but don't have this benefit."},
+teaching:`<h4>Beta-Blocker Therapy</h4><p><strong>Propranolol (preferred):</strong> Blocks symptoms + T4→T3 conversion</p><p><strong>Dose:</strong> IV 1mg q10min, then PO 60-80mg q4-6h</p><p><strong>Esmolol:</strong> IV for tight control, short-acting</p><p><strong>If asthma/HF:</strong> Cardioselective (metoprolol) or esmolol (short-acting)</p>`,
+why_chain:[{q:"What if patient has severe heart failure from thyroid storm?",a:"Heart failure from thyroid storm is usually high-output and responds to treatment of thyrotoxicosis. Beta-blockers may be needed cautiously. If severe decompensated HF, use esmolol (short-acting, titratable) and treat the underlying thyrotoxicosis aggressively."}],points:10}},
+
+{title:"Block Hormone Synthesis",content:`<div class="narrative"><p>Now block thyroid hormone synthesis.</p></div><div class="socratic-prompt"><h4>Thionamides</h4><p>What do thionamides do and which is preferred in thyroid storm?</p></div>`,
+hint_beginner:"PTU blocks synthesis AND conversion",hint_advanced:"What are the side effects of thionamides?",
+question:{prompt:"Which thionamide and why?",
+options:[{text:"PTU (propylthiouracil) preferred in thyroid storm - blocks thyroid peroxidase (synthesis) AND 5'-deiodinase (T4→T3 conversion); loading dose 500-1000mg, then 250mg q4h",correct:true},
+{text:"Methimazole is always preferred",correct:false},
+{text:"Thionamides are not used in thyroid storm",correct:false},
+{text:"Give iodine instead of thionamide",correct:false}],
+explanation:{correct:"PTU is preferred in thyroid storm for its dual action: blocks synthesis (like methimazole) AND blocks peripheral T4→T3 conversion. Loading dose 500-1000mg, then 250mg q4h. Methimazole only blocks synthesis. Outside of storm, methimazole is preferred (less hepatotoxicity).",incorrect:"PTU is specifically preferred in thyroid storm due to its additional effect on T4→T3 conversion. In non-emergent hyperthyroidism, methimazole is preferred due to PTU's hepatotoxicity risk."},
+teaching:`<h4>Thionamides</h4><p><strong>PTU:</strong> Blocks synthesis + T4→T3 conversion; preferred in storm</p><p><strong>Dose:</strong> 500-1000mg load, then 250mg q4h</p><p><strong>Methimazole:</strong> Blocks synthesis only; preferred in non-emergent</p><p><strong>Side effects:</strong> Agranulocytosis (both), hepatotoxicity (PTU>methimazole)</p>`,
+why_chain:[{q:"When is methimazole preferred over PTU?",a:"Outside of thyroid storm and first trimester pregnancy, methimazole is preferred: once-daily dosing, lower hepatotoxicity risk. PTU is preferred in first trimester (methimazole teratogenic) and thyroid storm (blocks T4→T3)."}],points:10}},
+
+{title:"Block Hormone Release",content:`<div class="narrative"><p>After thionamide, add iodine to block hormone release.</p></div><div class="socratic-prompt"><h4>Iodine Timing</h4><p>Why must iodine be given AFTER thionamide?</p></div>`,
+hint_beginner:"Iodine can paradoxically increase thyroid hormone synthesis",hint_advanced:"What is the Wolff-Chaikoff effect vs Jod-Basedow?",
+question:{prompt:"Why give iodine 1 hour AFTER thionamide?",
+options:[{text:"Iodine blocks thyroid hormone RELEASE (Wolff-Chaikoff effect) but can initially increase synthesis if given first; thionamide given first blocks synthesis, then iodine safely blocks release",correct:true},
+{text:"Order doesn't matter",correct:false},
+{text:"Iodine should always be given first",correct:false},
+{text:"Iodine is contraindicated in thyroid storm",correct:false}],
+explanation:{correct:"Iodine has dual effects: inhibits hormone release (Wolff-Chaikoff effect - therapeutic) but also provides substrate for increased synthesis (Jod-Basedow effect - harmful). Give thionamide first to block synthesis, then iodine safely blocks release without feeding new synthesis.",incorrect:"Timing is critical. Iodine given before thionamide can transiently increase thyroid hormone production, worsening the storm. Wait at least 1 hour after thionamide."},
+teaching:`<h4>Iodine in Thyroid Storm</h4><p><strong>Mechanism:</strong> Blocks thyroid hormone release (Wolff-Chaikoff)</p><p><strong>Timing:</strong> Give 1 hour AFTER thionamide</p><p><strong>Options:</strong> SSKI (5 drops q6h), Lugol's solution, IV iodine</p><p><strong>Caution:</strong> Can worsen storm if given before synthesis blocked</p>`,
+why_chain:[{q:"What is Jod-Basedow phenomenon?",a:"Iodine-induced hyperthyroidism - giving iodine to an iodine-deficient patient with underlying thyroid pathology can trigger hyperthyroidism by providing substrate for increased hormone synthesis. This is why we block synthesis first."}],points:10}},
+
+{title:"Glucocorticoids",content:`<div class="narrative"><p>Add glucocorticoids as part of the treatment regimen.</p></div><div class="socratic-prompt"><h4>Multiple Benefits</h4><p>Why give glucocorticoids in thyroid storm?</p></div>`,
+hint_beginner:"Block T4→T3 conversion + treat relative adrenal insufficiency",hint_advanced:"What dose of hydrocortisone?",
+question:{prompt:"Why are glucocorticoids given in thyroid storm?",
+options:[{text:"Multiple benefits: block peripheral T4→T3 conversion, treat possible relative adrenal insufficiency (increased cortisol metabolism in hyperthyroidism), provide hemodynamic support",correct:true},
+{text:"Only for autoimmune thyroiditis",correct:false},
+{text:"Glucocorticoids worsen thyroid storm",correct:false},
+{text:"Only if patient has known adrenal disease",correct:false}],
+explanation:{correct:"Glucocorticoids in thyroid storm: 1) Inhibit T4→T3 conversion, 2) Address relative adrenal insufficiency (hyperthyroidism increases cortisol metabolism, depleting reserves), 3) Hemodynamic support. Use hydrocortisone 100mg IV q8h or dexamethasone 2mg IV q6h.",incorrect:"Steroids are standard therapy in thyroid storm - they address multiple pathophysiologic mechanisms and are particularly important given increased cortisol demands."},
+teaching:`<h4>Glucocorticoids in Thyroid Storm</h4><p><strong>Benefits:</strong> Block T4→T3, treat adrenal insufficiency, hemodynamic support</p><p><strong>Dose:</strong> Hydrocortisone 100mg IV q8h OR Dexamethasone 2mg IV q6h</p><p><strong>Rationale:</strong> Increased cortisol metabolism in hyperthyroidism</p>`,
+why_chain:[{q:"Why does hyperthyroidism cause relative adrenal insufficiency?",a:"Thyroid hormones increase cortisol metabolism and clearance. During the stress of thyroid storm, cortisol demand exceeds the adrenal's ability to compensate for increased clearance. This creates relative adrenal insufficiency."}],points:10}},
+
+{title:"Identify and Treat Precipitant",content:`<div class="narrative"><p>This patient's thyroid storm was precipitated by a URI. Identify and treat the trigger.</p></div><div class="socratic-prompt"><h4>Find the Trigger</h4><p>What commonly precipitates thyroid storm?</p></div>`,
+hint_beginner:"Infection is the most common precipitant",hint_advanced:"What about iodine contrast exposure?",
+question:{prompt:"What are common thyroid storm precipitants?",
+options:[{text:"Infection (most common), surgery, trauma, medication non-compliance, iodine load (contrast, amiodarone), DKA, pregnancy/labor, MI, stroke",correct:true},
+{text:"Only thyroid surgery causes thyroid storm",correct:false},
+{text:"Thyroid storm has no precipitants",correct:false},
+{text:"Only occurs with Graves' disease",correct:false}],
+explanation:{correct:"Precipitants: Infection (#1), surgery (thyroid or non-thyroid), trauma, stopping antithyroid medications, iodine load (IV contrast, amiodarone), DKA, pregnancy/labor, MI, stroke. Always search for and treat the precipitant. This patient had a URI.",incorrect:"Infection is the most common trigger. Always look for a precipitant - treating the underlying cause is essential for recovery."},
+teaching:`<h4>Thyroid Storm Precipitants</h4><p><strong>Infection:</strong> Most common (#1)</p><p><strong>Surgery:</strong> Thyroid or non-thyroid</p><p><strong>Medication:</strong> Non-compliance, stopping antithyroid drugs</p><p><strong>Iodine:</strong> IV contrast, amiodarone</p><p><strong>Others:</strong> DKA, trauma, MI, stroke, pregnancy</p>`,
+why_chain:[{q:"Why does infection precipitate thyroid storm?",a:"Infection causes catecholamine release and cytokine production, which increase metabolic demands and can tip compensated hyperthyroidism into decompensated thyroid storm. The febrile response also accelerates hormone metabolism."}],points:10}},
+
+{title:"Definitive Treatment",content:`<div class="narrative"><p>Patient stabilized on medical therapy. Plan for definitive treatment.</p></div><div class="socratic-prompt"><h4>Long-term Management</h4><p>What are the definitive treatment options for Graves' disease after thyroid storm?</p></div>`,
+hint_beginner:"Surgery or radioactive iodine ablation after medical stabilization",hint_advanced:"When is surgery preferred over RAI?",
+question:{prompt:"What definitive treatment options exist after stabilization?",
+options:[{text:"Radioactive iodine (RAI) ablation or thyroidectomy after medical stabilization; RAI most common in US; surgery preferred if large goiter, suspicious nodule, or contraindication to RAI",correct:true},
+{text:"Lifelong thionamide therapy only",correct:false},
+{text:"No further treatment needed",correct:false},
+{text:"Emergent thyroidectomy during storm",correct:false}],
+explanation:{correct:"After stabilizing thyroid storm, definitive treatment options: RAI ablation (most common in US, but delayed until stable), thyroidectomy (preferred for large goiter, compressive symptoms, suspicious nodule, or if RAI contraindicated), or long-term antithyroid drugs (higher relapse rate).",incorrect:"Definitive treatment is needed - relying on antithyroid drugs alone has high relapse rates. RAI or surgery after medical stabilization."},
+teaching:`<h4>Definitive Treatment</h4><p><strong>Radioactive iodine:</strong> Most common; causes hypothyroidism (desired)</p><p><strong>Thyroidectomy:</strong> Large goiter, compression, pregnancy planning</p><p><strong>Antithyroid drugs:</strong> 12-18 months; 30-50% remission rate</p><p><strong>Timing:</strong> After medical stabilization, not during storm</p>`,
+why_chain:[{q:"Why not operate during thyroid storm?",a:"Surgery during thyroid storm has very high mortality. Must stabilize medically first (usually 5-7 days). Surgery precipitates massive hormone release and catecholamine surge. Only perform emergent surgery if patient can't tolerate any medications."}],points:10}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>Patient treated with propranolol, PTU, iodine (after PTU), hydrocortisone, cooling, and antibiotics for URI. Stabilized over 48 hours. Scheduled for RAI ablation after discharge.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>What are the essential principles of thyroid storm management?</p></div>`,
+hint_beginner:"Clinical diagnosis, treat before labs, specific sequence matters",hint_advanced:"What is the mortality of untreated thyroid storm?",
+question:{prompt:"What are the key thyroid storm management principles?",
+options:[{text:"Clinical diagnosis (don't wait for labs), treatment sequence matters (beta-blocker → thionamide → iodine AFTER thionamide → steroids), identify/treat precipitant, supportive care, definitive treatment after stabilization",correct:true},
+{text:"Wait for thyroid function tests before treating",correct:false},
+{text:"Treatment order doesn't matter",correct:false},
+{text:"Surgery is first-line treatment",correct:false}],
+explanation:{correct:"Key principles: 1) Clinical diagnosis - treat based on presentation, 2) Sequence matters - especially thionamide before iodine, 3) Multi-modal therapy (beta-blocker + thionamide + iodine + steroids), 4) Find and treat precipitant, 5) Supportive care (cooling, fluids), 6) Definitive treatment after stabilization.",incorrect:"Thyroid storm is a clinical diagnosis requiring immediate treatment. The specific sequence of therapies is critical - especially giving thionamide before iodine."},
+teaching:`<h4>Thyroid Storm Summary</h4><p>1. Clinical diagnosis - don't wait for labs</p><p>2. Beta-blocker (propranolol) - symptom control + blocks T4→T3</p><p>3. PTU - blocks synthesis + T4→T3 conversion</p><p>4. Iodine - 1 hour AFTER PTU - blocks release</p><p>5. Glucocorticoids - blocks conversion + adrenal support</p><p>6. Identify and treat precipitant</p><p>7. Supportive care, then definitive treatment</p>`,
+why_chain:[{q:"What is the mortality of thyroid storm?",a:"10-30% even with treatment. Higher if delayed diagnosis, delayed treatment, or failure to identify precipitant. Mortality from cardiac arrhythmias, heart failure, hyperthermia, and multiorgan failure."}],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent thyroid storm management!';}
+else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp. Review treatment sequence.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on why thionamide before iodine.';}
+else{g='Keep Learning';clr='#ef4444';m='Review treatment sequence and precipitants.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Thyroid Storm"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

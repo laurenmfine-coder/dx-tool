@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Angioedema - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3b82f6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #60a5fa; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #93c5fd; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            vertical-align: top;
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-left: 12px;
+            vertical-align: top;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #3b82f6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
+    </div>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK538489/" target="_blank" rel="noopener">Angioedema - StatPearls (StatPearls)</a>
+<a href="https://www.aaaai.org/conditions-treatments/related-conditions/hereditary-angioedema" target="_blank" rel="noopener">HAE - AAAAI (AAAAI)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+
+<script>
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">58-year-old African American man</span> presents to the ED with acute lip and tongue swelling that started 3 hours ago. He denies any itching or hives.</p>\n                <p style=\"margin-top:12px;\"><strong>PMH:</strong> Hypertension (well-controlled), type 2 diabetes</p>\n                <p><strong>Medications:</strong> Lisinopril 20mg daily (started 8 months ago), metformin</p>\n                <p><strong>Previous episodes:</strong> One episode of hand swelling 2 months ago that resolved on its own</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value normal\">132/84</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value normal\">88</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value normal\">97% RA</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Voice</div><div class=\"vital-value normal\">Normal</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "What is the most common cause of isolated angioedema without hives in a patient on an ACE inhibitor?",
+        "hint_advanced": "Why are African Americans at higher risk for ACE inhibitor-induced angioedema?",
+        "question": {
+            "prompt": "What is the most likely cause of this patient's angioedema?",
+            "options": [
+                {
+                    "text": "ACE inhibitor-induced angioedema - isolated angioedema without urticaria on lisinopril, higher risk in African Americans",
+                    "correct": true
+                },
+                {
+                    "text": "IgE-mediated allergic angioedema - requires immediate epinephrine treatment",
+                    "correct": false
+                },
+                {
+                    "text": "Hereditary angioedema - must be considered in any adult with recurrent angioedema",
+                    "correct": false
+                },
+                {
+                    "text": "Idiopathic angioedema - diagnosis of exclusion after negative allergy workup",
+                    "correct": false
+                },
+                {
+                    "text": "Food allergy - likely delayed reaction to something eaten earlier today",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "ACE inhibitor angioedema is the most likely diagnosis: isolated angioedema (no urticaria), on ACE inhibitor, African American (3-4x higher risk), face/tongue predilection, previous episode while on medication. ACE inhibitors cause bradykinin-mediated angioedema, NOT histamine-mediated.",
+                "incorrect": "The key features pointing to ACE inhibitor-induced angioedema: 1) Isolated angioedema without hives (allergic angioedema almost always has urticaria), 2) On ACE inhibitor, 3) African American ethnicity, 4) Face/lips/tongue involvement. This is bradykinin-mediated, not IgE-mediated."
+            },
+            "teaching": "<h4>\ud83d\udcda ACE Inhibitor Angioedema</h4>\n                    <p><strong>Mechanism:</strong> ACE inhibitors block bradykinin degradation \u2192 bradykinin accumulates \u2192 increased vascular permeability</p>\n                    <p><strong>Risk factors:</strong></p>\n                    <ul>\n                        <li>African American: 3-4x higher risk</li>\n                        <li>Can occur ANY time on ACE inhibitor (months to years)</li>\n                        <li>Higher risk with prior angioedema or cough</li>\n                    </ul>\n                    <p><strong>Key features distinguishing from allergic:</strong></p>\n                    <ul>\n                        <li>NO urticaria (isolated angioedema)</li>\n                        <li>Does NOT respond to epinephrine/antihistamines</li>\n                        <li>Predilection for face, lips, tongue</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Acute Management",
+        "content": "<div class=\"narrative\">\n                <p>The swelling is progressing slowly. His tongue is noticeably enlarged but he can still speak clearly and manage secretions.</p>\n                <p style=\"margin-top:12px;\">The nurse has prepared epinephrine and diphenhydramine anticipating an allergic reaction.</p>\n            </div>",
+        "hint_beginner": "Will epinephrine and antihistamines work for ACE inhibitor angioedema?",
+        "hint_advanced": "What specific therapies target bradykinin-mediated angioedema?",
+        "question": {
+            "prompt": "What is the most appropriate acute treatment approach?",
+            "options": [
+                {
+                    "text": "Stop ACE inhibitor; supportive care with airway monitoring; consider icatibant or C1-INH concentrate if available; epinephrine/antihistamines may be given but are unlikely to help",
+                    "correct": true
+                },
+                {
+                    "text": "Epinephrine IM immediately as for anaphylaxis - this is the standard treatment for all angioedema",
+                    "correct": false
+                },
+                {
+                    "text": "High-dose IV corticosteroids will rapidly reverse bradykinin-mediated swelling",
+                    "correct": false
+                },
+                {
+                    "text": "Fresh frozen plasma is first-line treatment for ACE inhibitor angioedema",
+                    "correct": false
+                },
+                {
+                    "text": "Observation only - ACE inhibitor angioedema is always self-limited and benign",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "ACE inhibitor angioedema is bradykinin-mediated, so standard allergic treatments (epinephrine, antihistamines, steroids) have limited efficacy. Management: 1) Stop ACE inhibitor permanently, 2) Airway monitoring (can be life-threatening), 3) Consider bradykinin-targeted therapy (icatibant, C1-INH concentrate, or FFP as last resort).",
+                "incorrect": "Bradykinin-mediated angioedema does NOT respond well to epinephrine, antihistamines, or corticosteroids - these target histamine pathways. Specific treatments include icatibant (bradykinin B2 receptor antagonist) or C1-INH concentrate. FFP may help but carries risks."
+            },
+            "teaching": "<h4>\ud83d\udcda Treatment of ACE-I Angioedema</h4>\n                    <p><strong>Essential steps:</strong></p>\n                    <ul>\n                        <li>Discontinue ACE inhibitor permanently</li>\n                        <li>Close airway monitoring - can progress to life-threatening</li>\n                        <li>Prepare for emergent airway management</li>\n                    </ul>\n                    <p><strong>Pharmacotherapy:</strong></p>\n                    <table>\n                        <tr><th>Agent</th><th>Mechanism</th><th>Notes</th></tr>\n                        <tr><td>Icatibant</td><td>Bradykinin B2 antagonist</td><td>indicated for HAE; used off-label</td></tr>\n                        <tr><td>C1-INH concentrate</td><td>Replaces C1-INH</td><td>Reduces bradykinin generation</td></tr>\n                        <tr><td>FFP</td><td>Contains ACE</td><td>Last resort; infection/volume risk</td></tr>\n                    </table>\n                    <p><em>Epinephrine/antihistamines/steroids: May be given but unlikely to help bradykinin-mediated swelling</em></p>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Airway Decision",
+        "content": "<div class=\"narrative\">\n                <p>Over the next 2 hours, despite stopping lisinopril, the tongue swelling worsens. He now has a \"hot potato\" voice and is drooling slightly.</p>\n                <p style=\"margin-top:12px;\">ENT is at bedside with fiberoptic scope showing significant tongue base edema but visible vocal cords.</p>\n            </div>",
+        "hint_beginner": "What are the indications for securing the airway in angioedema?",
+        "hint_advanced": "What makes intubation in angioedema high-risk? What preparations should be made?",
+        "question": {
+            "prompt": "What is the most appropriate airway management strategy?",
+            "options": [
+                {
+                    "text": "Prepare for awake fiberoptic intubation or surgical airway in controlled setting NOW before further deterioration",
+                    "correct": true
+                },
+                {
+                    "text": "Continue observation - vocal cords are visible so intubation can wait",
+                    "correct": false
+                },
+                {
+                    "text": "Rapid sequence intubation with paralysis for optimal intubating conditions",
+                    "correct": false
+                },
+                {
+                    "text": "BiPAP to stent the airway open while waiting for swelling to resolve",
+                    "correct": false
+                },
+                {
+                    "text": "Administer more icatibant and recheck in 2 hours",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Voice changes (\"hot potato voice\") and drooling indicate significant airway edema requiring urgent action. Angioedema airways are HIGH RISK - edema can rapidly progress and make intubation impossible. Prepare for awake fiberoptic intubation (maintains spontaneous respiration) with surgical airway backup before the patient deteriorates further.",
+                "incorrect": "Voice changes and drooling are late signs of airway compromise. Don't wait for complete obstruction - angioedema can progress rapidly. Avoid paralytics (RSI) as you may lose the airway. BiPAP doesn't help anatomic obstruction. Awake technique with surgical backup is safest approach."
+            },
+            "teaching": "<h4>\ud83d\udcda Airway Management in Angioedema</h4>\n                    <p><strong>Warning signs requiring airway intervention:</strong></p>\n                    <ul>\n                        <li>Voice changes (\"hot potato\" voice)</li>\n                        <li>Drooling/inability to manage secretions</li>\n                        <li>Stridor</li>\n                        <li>Progressive tongue swelling</li>\n                    </ul>\n                    <p><strong>Approach:</strong></p>\n                    <ul>\n                        <li>Act EARLY before complete obstruction</li>\n                        <li>Awake fiberoptic intubation preferred (maintains spontaneous breathing)</li>\n                        <li>Avoid paralytics - risk of cannot-intubate-cannot-ventilate</li>\n                        <li>Have surgical airway backup immediately available</li>\n                        <li>Most experienced operator should perform</li>\n                    </ul>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Discharge Planning",
+        "content": "<div class=\"narrative\">\n                <p>The patient was intubated and extubated 36 hours later after swelling resolved. He is ready for discharge.</p>\n                <p style=\"margin-top:12px;\"><strong>Medication reconciliation needed:</strong> He was on lisinopril for blood pressure control.</p>\n            </div>",
+        "hint_beginner": "Can this patient take an ARB instead of ACE inhibitor?",
+        "hint_advanced": "What is the cross-reactivity rate between ACE inhibitors and ARBs for angioedema?",
+        "question": {
+            "prompt": "What blood pressure medication is most appropriate going forward?",
+            "options": [
+                {
+                    "text": "Avoid all ACE inhibitors permanently; ARBs may be used with caution (small cross-reactivity risk) or choose alternative class like CCB or thiazide",
+                    "correct": true
+                },
+                {
+                    "text": "Can switch to different ACE inhibitor as angioedema is drug-specific",
+                    "correct": false
+                },
+                {
+                    "text": "ARBs are absolutely contraindicated - must use non-RAAS inhibitor medications only",
+                    "correct": false
+                },
+                {
+                    "text": "Can restart lisinopril at lower dose with antihistamine pretreatment",
+                    "correct": false
+                },
+                {
+                    "text": "ACE inhibitors safe to use again after 6 months as angioedema resolves",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "ACE inhibitor angioedema is a CLASS effect - must avoid ALL ACE inhibitors permanently. ARBs have ~2-8% cross-reactivity for angioedema and can be used with caution if strongly indicated, but many guidelines recommend avoiding ARBs too, especially after severe reaction. Safest is to use alternative BP medication class.",
+                "incorrect": "This is a CLASS effect - all ACE inhibitors are contraindicated, not just lisinopril. ARBs have small but real cross-reactivity (~2-8%). Given his severe life-threatening episode, safest approach is alternative antihypertensive class entirely (CCB, thiazide, etc.)."
+            },
+            "teaching": "<h4>\ud83d\udcda Post-ACE-I Angioedema Recommendations</h4>\n                    <p><strong>Absolutely contraindicated:</strong> All ACE inhibitors (class effect)</p>\n                    <p><strong>ARBs:</strong></p>\n                    <ul>\n                        <li>Cross-reactivity ~2-8%</li>\n                        <li>Can use with caution if benefit outweighs risk</li>\n                        <li>After severe/life-threatening episode: consider avoiding</li>\n                    </ul>\n                    <p><strong>Alternative antihypertensives:</strong></p>\n                    <ul>\n                        <li>Calcium channel blockers (amlodipine)</li>\n                        <li>Thiazide diuretics</li>\n                        <li>Beta-blockers (if not contraindicated)</li>\n                    </ul>\n                    <p><em>Document ACE-I allergy clearly; patient should wear medical alert</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Alternative Diagnosis",
+        "content": "<div class=\"narrative\">\n                <p>Your next patient is a <span class=\"highlight\">28-year-old woman</span> with recurrent episodes of facial and hand swelling since age 16. Today she has lip and tongue swelling.</p>\n                <p style=\"margin-top:12px;\"><strong>Key history:</strong></p>\n                <ul>\n                    <li>No urticaria ever</li>\n                    <li>Not on ACE inhibitor</li>\n                    <li>Episodes last 2-4 days</li>\n                    <li>Family history: mother and brother have similar episodes</li>\n                    <li>Sometimes preceded by tingling sensation</li>\n                </ul>\n            </div>",
+        "hint_beginner": "What diagnosis does the family history and recurrent isolated angioedema suggest?",
+        "hint_advanced": "What lab tests confirm hereditary angioedema? What are the different types?",
+        "question": {
+            "prompt": "What is the most likely diagnosis and what testing should be ordered?",
+            "options": [
+                {
+                    "text": "Hereditary angioedema (HAE) - order C4 level (screening), C1-inhibitor level and function",
+                    "correct": true
+                },
+                {
+                    "text": "Recurrent idiopathic angioedema - extensive allergy testing indicated",
+                    "correct": false
+                },
+                {
+                    "text": "Undisclosed ACE inhibitor use - detailed medication reconciliation is the only workup needed",
+                    "correct": false
+                },
+                {
+                    "text": "Acquired C1-inhibitor deficiency - order lymphoma workup first",
+                    "correct": false
+                },
+                {
+                    "text": "Chronic spontaneous urticaria presenting as angioedema alone - treat with antihistamines",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "This is classic HAE presentation: recurrent isolated angioedema without urticaria, family history (autosomal dominant), onset in adolescence, prolonged episodes, prodromal symptoms. C4 is the best screening test (low even between attacks). Confirm with C1-INH level and function. Type 1 HAE = low level; Type 2 = normal level but low function.",
+                "incorrect": "Family history of similar episodes + recurrent isolated angioedema without urticaria + onset in adolescence = hereditary angioedema until proven otherwise. C4 is an excellent screening test. Acquired C1-INH deficiency presents later in life without family history."
+            },
+            "teaching": "<h4>\ud83d\udcda Hereditary Angioedema (HAE)</h4>\n                    <p><strong>Clinical features:</strong></p>\n                    <ul>\n                        <li>Recurrent angioedema WITHOUT urticaria</li>\n                        <li>Family history (autosomal dominant)</li>\n                        <li>Onset usually in childhood/adolescence</li>\n                        <li>Episodes last 2-5 days</li>\n                        <li>Can involve face, extremities, GI tract, larynx</li>\n                    </ul>\n                    <p><strong>Diagnostic workup:</strong></p>\n                    <table>\n                        <tr><th>Test</th><th>HAE Type 1</th><th>HAE Type 2</th></tr>\n                        <tr><td>C4</td><td>Low</td><td>Low</td></tr>\n                        <tr><td>C1-INH level</td><td>Low</td><td>Normal</td></tr>\n                        <tr><td>C1-INH function</td><td>Low</td><td>Low</td></tr>\n                    </table>\n                    <p><em>C4 is an excellent screening test - low even between attacks</em></p>",
+            "points": 10
+        }
+    }
+,
+{
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\"><p>You assess the severity and risk factors to guide management intensity.</p></div>",
+        "hint_beginner": "What clinical features indicate higher severity?",
+        "hint_advanced": "What validated scoring systems exist for this condition?",
+        "question": {
+                "prompt": "Which factor most influences prognosis and management intensity?",
+                "options": [
+                        {
+                                "text": "Integration of clinical presentation, comorbidities, vital signs, and objective findings",
+                                "correct": true
+                        },
+                        {
+                                "text": "A single laboratory value in isolation",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient age alone",
+                                "correct": false
+                        },
+                        {
+                                "text": "Time of presentation to the ED",
+                                "correct": false
+                        },
+                        {
+                                "text": "Insurance status or ability to follow up",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Clinical decision-making integrates multiple factors including presentation severity, comorbidities, vital signs, laboratory findings, and patient-specific factors. No single element should drive management in isolation.",
+                        "incorrect": "Risk stratification requires integration of multiple clinical factors, not reliance on any single element."
+                },
+                "teaching": "<h4>\ud83d\udcca Risk Stratification Principles</h4><ul><li>Assess severity of presenting illness</li><li>Consider relevant comorbidities</li><li>Review vital signs and trajectory</li><li>Integrate laboratory and imaging findings</li><li>Apply validated scoring tools when available</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Treatment Selection",
+        "content": "<div class=\"narrative\"><p>Based on your assessment, you must select the most appropriate initial treatment approach.</p></div>",
+        "hint_beginner": "What are the first-line evidence-based treatments?",
+        "hint_advanced": "How do patient-specific factors modify treatment selection?",
+        "question": {
+                "prompt": "What principle guides initial treatment selection?",
+                "options": [
+                        {
+                                "text": "Evidence-based guidelines tailored to patient-specific factors (comorbidities, allergies, severity)",
+                                "correct": true
+                        },
+                        {
+                                "text": "Always use the newest available medication",
+                                "correct": false
+                        },
+                        {
+                                "text": "Most expensive treatments provide best outcomes",
+                                "correct": false
+                        },
+                        {
+                                "text": "Whatever was used for the last similar patient",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient preference alone should determine treatment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Treatment should follow current evidence-based guidelines while accounting for individual patient factors including comorbidities, allergies, contraindications, disease severity, and patient preferences when appropriate.",
+                        "incorrect": "Evidence-based medicine combined with patient-centered care guides optimal treatment selection."
+                },
+                "teaching": "<h4>\ud83d\udc8a Treatment Principles</h4><ul><li>Follow current evidence-based guidelines</li><li>Assess for contraindications and allergies</li><li>Consider patient-specific factors</li><li>Start with first-line agents unless contraindicated</li><li>Monitor for response and adverse effects</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Monitoring and Reassessment",
+        "content": "<div class=\"narrative\"><p>After initiating treatment, you must establish monitoring parameters and reassessment criteria.</p></div>",
+        "hint_beginner": "What should you monitor to assess treatment response?",
+        "hint_advanced": "What triggers require escalation or change in management?",
+        "question": {
+                "prompt": "What is most important in the monitoring plan?",
+                "options": [
+                        {
+                                "text": "Clear criteria for expected response timeline and specific triggers for escalation",
+                                "correct": true
+                        },
+                        {
+                                "text": "Scheduling a follow-up appointment",
+                                "correct": false
+                        },
+                        {
+                                "text": "Completing documentation thoroughly",
+                                "correct": false
+                        },
+                        {
+                                "text": "Ensuring patient satisfaction scores",
+                                "correct": false
+                        },
+                        {
+                                "text": "Waiting for specialist consultation before any reassessment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Effective monitoring requires defining what improvement to expect and when, establishing clear escalation triggers, and setting specific reassessment timepoints. This allows early identification of treatment failure.",
+                        "incorrect": "While all aspects of care matter, defining response criteria and escalation triggers is critical for patient safety."
+                },
+                "teaching": "<h4>\ud83d\udcc8 Monitoring Essentials</h4><ul><li>Define expected response and timeline</li><li>Establish vital sign parameters</li><li>Set escalation triggers (specific criteria for concern)</li><li>Plan reassessment intervals</li><li>Document baseline for comparison</li></ul>",
+                "points": 10
+        }
+}];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#3b82f6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../index.html" class="crossplatform-link">📚 Angioedema Mechanisms</a>
+<a href="anaphylaxis-expanded.html" class="crossplatform-link">🎯 Anaphylaxis</a>
+<a href="hae-expanded.html" class="crossplatform-link">💊 HAE</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Angioedema"
+         data-key-points="📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Shock Complete | Dual-Mode Clinical Adventure</title>
+    <meta name="description" content="In-depth clinical case study: Shock Complete | Dual-Mode Clinical Adventure. Explore pathophysiology, diagnosis, and management with teaching points on Reaso...">
+<title>Shock Complete | Dual-Mode Clinical Adventure</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; transition: background 0.3s; }
-        body.adult { background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); }
-        body.peds { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        body { font-family:var(--rdx-font); min-height: 100vh; color:var(--rdx-text); line-height: 1.6; padding: 20px; transition: background 0.3s; }
+        body.adult { background: linear-gradient(135deg, #042f2e 0%, #1f5f8b 100%); }
+        body.peds { background:linear-gradient(135deg,#1f5f8b,#3a90c0); }
         .container { max-width: 900px; margin: 0 auto; }
-        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 4px; }
-        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; background: transparent; color: #e2e8f0; }
+        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: #f1f5f9; border-radius: 12px; padding: 4px; }
+        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius:12px; font-weight: 600; cursor: pointer; transition: all 0.3s; background: transparent; color:var(--rdx-text); }
         .mode-btn.active { background: rgba(255,255,255,0.2); }
         .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-radius: 16px; margin-bottom: 20px; }
         .adult .header { background: rgba(153, 27, 27, 0.9); }
@@ -36,31 +49,31 @@
         .scene-phase { font-size: 0.75rem; text-transform: uppercase; }
         .scene-title { font-size: 1.4rem; font-weight: 700; }
         .scene-body { padding: 24px; }
-        .highlight { color: #fbbf24; font-weight: 600; }
-        .critical { color: #f87171; font-weight: 600; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(220,38,38,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
-        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #1f5f8b; margin-bottom: 10px; }
         .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
         .btn { padding: 16px 28px; border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
-        .adult .btn { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+        .adult .btn { background:linear-gradient(135deg,#1f5f8b,#2874a6); }
         .peds .btn { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); }
-        .why-chain { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(220,38,38,0.15)); border: 1px solid rgba(139,92,246,0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; }
+        .why-chain { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(220,38,38,0.15)); border:1px solid var(--rdx-info); border-radius: 16px; padding: 24px; margin: 24px 0; }
         .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
-        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-item { background:var(--rdx-bg-hover); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
         .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
         .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
         .pearl, .pitfall { padding: 20px; border-radius: 12px; }
         .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
         .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
         .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: #4ade80; }
+        .pearl .tip-header { color: var(--rdx-teal, #2874a6); }
         .pitfall .tip-header { color: #f87171; }
         @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
     /* Mobile Responsive - iPhone 16/17 optimized */
@@ -80,8 +93,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -89,6 +102,7 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body class="adult">
     <div class="container">
@@ -117,18 +131,18 @@
     window.render_arrival = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 11</div><div class="scene-title">The Hypotensive Patient</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What comorbidities would change your management approach?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
                 </div><div class="narrative"><p>A <span class="highlight">62-year-old man</span> is brought by EMS with <span class="critical">altered mental status and hypotension</span>.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 118, BP 78/52, RR 26, SpO2 94%, T 101.4°F<br><strong>Exam:</strong> Confused, warm extremities, bounding pulses<br><strong>Labs:</strong> Lactate 5.2, WBC 18.4</p></div><div class="alert-box"><div class="alert-title">🚨 Shock = Inadequate Tissue Perfusion</div><p>Shock is failure to deliver adequate O2 to meet metabolic demands - not just low BP.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Shock Definition</div><div class="pathway">DO2 = CO × CaO2<br>DO2 = (HR × SV) × (Hgb × 1.34 × SaO2)<br><br>Shock = O2 delivery < O2 demand</div></div><button class="btn" onclick="nextStage()">Types of Shock →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 11</div><div class="scene-title">The Sick Child</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -139,7 +153,7 @@
 
     window.render_types = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 11</div><div class="scene-title">Four Types of Shock</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What's the most likely diagnosis given this presentation?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -152,7 +166,7 @@
 
     window.render_hemodynamics = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 11</div><div class="scene-title">Warm vs Cold Shock</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What key history element is most helpful here?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -162,7 +176,7 @@
 
     window.render_hypovolemic = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 11</div><div class="scene-title">Hypovolemic Shock</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Which physical exam finding is most specific?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -176,7 +190,7 @@
     window.render_cardiogenic = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 11</div><div class="scene-title">Cardiogenic Shock</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Consider the most common causes first, then rarer ones</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -184,7 +198,7 @@
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 Causes</div><table class="comparison-table"><tr><th>Category</th><th>Examples</th></tr><tr><td>Myocardial</td><td>Acute MI (most common), myocarditis</td></tr><tr><td>Mechanical</td><td>Acute MR, VSD, free wall rupture</td></tr><tr><td>Arrhythmic</td><td>VT, complete heart block</td></tr></table></div><div class="alert-box"><div class="alert-title">🚨 Fluids Can Be Harmful!</div><p>Cardiogenic shock patients are often volume overloaded. Fluids worsen pulmonary edema. Use inotropes/vasopressors.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Hemodynamics</div><div class="pathway">• CI <2.2 L/min/m²<br>• PCWP >15 mmHg<br>• SVR elevated<br>• Cool extremities + pulmonary edema</div></div><button class="btn" onclick="nextStage()">Distributive Shock →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 11</div><div class="scene-title">Pediatric Cardiogenic Shock</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -198,7 +212,7 @@
 
     window.render_distributive = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 11</div><div class="scene-title">Distributive Shock</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -208,21 +222,21 @@
 
     window.render_obstructive = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 11</div><div class="scene-title">Obstructive Shock</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What's the most likely diagnosis given this presentation?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
                     <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What if the patient doesn't respond to initial treatment?</p>
                 </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
+                <div class="rdx-clinical-pearl" style="background:#f0f7fc; border:1px solid #3a90c0; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3a90c0;">
+                    <p style="margin:0; color:#1a4971; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Always consider mimics and look-alikes in your differential</p>
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 Causes</div><table class="comparison-table"><tr><th>Cause</th><th>Mechanism</th><th>Key Finding</th></tr><tr><td><strong>Tension PTX</strong></td><td>↓ Venous return</td><td>Absent breath sounds, tracheal deviation</td></tr><tr><td><strong>Tamponade</strong></td><td>Impaired filling</td><td>Beck's triad, pulsus paradoxus</td></tr><tr><td><strong>Massive PE</strong></td><td>RV obstruction</td><td>RV strain, ↑troponin</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Beck's Triad (Tamponade)</div><div class="pathway">1. Hypotension<br>2. JVD<br>3. Muffled heart sounds<br><br>Pulsus paradoxus: >10 mmHg ↓SBP with inspiration</div></div><div class="alert-box"><div class="alert-title">🚨 Immediate Intervention Required!</div><p>Tension PTX: Needle decompression. Tamponade: Pericardiocentesis. Massive PE: Consider thrombolytics.</p></div><button class="btn" onclick="nextStage()">Resuscitation →</button></div></div>`;
     };
 
     window.render_resuscitation = function() {
         if (state.mode === 'adult') {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 11</div><div class="scene-title">Initial Resuscitation</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> What key history element is most helpful here?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -230,7 +244,7 @@
                 </div><div class="boards-tip"><div class="boards-tip-title">📚 Sepsis Hour-1 Bundle</div><ul style="margin-left:20px;line-height:2;"><li>Measure lactate</li><li>Blood cultures before antibiotics</li><li>Broad-spectrum antibiotics</li><li>30 mL/kg crystalloid if hypotensive or lactate ≥4</li><li>Vasopressors if still hypotensive</li></ul></div><div class="mechanism-box"><div class="mechanism-title">🧬 Fluid Responsiveness</div><div class="pathway">Not everyone needs more fluid!<br><br>• Passive leg raise: ↑CO >10% = responsive<br>• IVC variability >12%<br>• Pulse pressure variation >13%<br><br>Only ~50% of ICU patients are fluid responsive</div></div><button class="btn" onclick="nextStage()">Vasopressors →</button></div></div>`;
         } else {
             return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 11</div><div class="scene-title">Pediatric Resuscitation</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Which physical exam finding is most specific?</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -244,7 +258,7 @@
 
     window.render_vasopressors = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 11</div><div class="scene-title">Vasopressor Selection</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Consider the most common causes first, then rarer ones</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -254,7 +268,7 @@
 
     window.render_monitoring = function() {
         return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 11</div><div class="scene-title">Resuscitation Endpoints</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Start with ABCs - Airway, Breathing, Circulation</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -266,8 +280,8 @@
     };
 
     window.render_debrief = function() {
-        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">💔</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">${state.mode === 'adult' ? 'Shock' : 'Pediatric Shock'} Mastery Complete!</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">💔</div><div style="font-size:1.8rem;font-weight:700;color:var(--rdx-teal,#2874a6);">${state.mode === 'adult' ? 'Shock' : 'Pediatric Shock'} Mastery Complete!</div></div><div class="scene-body">
+                <div class="rdx-hint-beginner" style="display:none; background:#f0f7fc; border:1px solid #7cb8d9; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #2874a6;">
                     <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Review vital signs carefully - they indicate acuity</p>
                 </div>
                 <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
@@ -282,11 +296,11 @@
 <style>
 /* Enhanced Feature Styles */
 .rdx-difficulty-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 16px;
     padding: 16px 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow:var(--rdx-shadow-md);
     position: fixed;
     top: 10px;
     right: 10px;
@@ -304,7 +318,7 @@
     margin: 2px;
 }
 .rdx-diff-btn.active {
-    background: #3b82f6;
+    background: #3a90c0;
     color: white;
 }
 .rdx-diff-btn:not(.active) {
@@ -315,8 +329,8 @@
     background: #e2e8f0;
 }
 .rdx-refs-panel {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #93c5fd;
+    background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+    border: 1px solid #7cb8d9;
     border-radius: 12px;
     padding: 16px 20px;
     margin: 20px auto;
@@ -324,7 +338,7 @@
 }
 .rdx-refs-title {
     font-weight: 700;
-    color: #1e40af;
+    color: #1a4971;
     margin-bottom: 8px;
 }
 .rdx-refs-links {
@@ -332,7 +346,7 @@
     line-height: 1.8;
 }
 .rdx-refs-links a {
-    color: #2563eb;
+    color: #2874a6;
     text-decoration: none;
 }
 .rdx-refs-links a:hover {
@@ -352,7 +366,7 @@
     padding: 20px;
 }
 .rdx-debrief-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 20px;
     padding: 32px;
     max-width: 800px;
@@ -367,7 +381,7 @@
     margin-bottom: 8px;
 }
 .rdx-path-optimal {
-    background: #dcfce7;
+    background: #d4e8f7;
     border-left: 4px solid #22c55e;
 }
 .rdx-path-suboptimal {
@@ -379,8 +393,8 @@
     border-left: 4px solid #ef4444;
 }
 .rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
+    background: #f0f7fc;
+    border: 1px solid #7cb8d9;
     padding: 10px 14px;
     border-radius: 8px;
     margin: 8px 0;
@@ -413,8 +427,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -434,28 +448,28 @@
 
 <!-- CROSS-PLATFORM LEARNING LINKS -->
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#1f5f8b); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Shock</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 ReasonDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Shock</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
-            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="neutropenic-fever-expanded.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Neutropenic Fever Expanded Dua</a>
-            <a href="sepsis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Sepsis</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #3a90c0;">
+            <h5 style="color: #3a90c0; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="neutropenic-fever-expanded.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Neutropenic Fever Expanded Dua</a>
+            <a href="sepsis-expanded-adventure.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Sepsis</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #2874a6;">
+            <h5 style="color: #2874a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
 <!-- END CROSS-PLATFORM LINKS -->
 <div class="rdx-refs-panel" id="rdxRefsPanel">
     <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
-    <div class="rdx-refs-links"><a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank" class="text-blue-600 hover:underline">Surviving Sepsis Campaign 2021</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK507824/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Sepsis</a></div>
+    <div class="rdx-refs-links"><a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank" class="text-teal-600 hover:underline">Surviving Sepsis Campaign 2021</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK507824/" target="_blank" class="text-teal-600 hover:underline">StatPearls: Sepsis</a></div>
 </div>
 
 <div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
@@ -510,7 +524,7 @@
         
         let grade, gradeColor, gradeEmoji;
         if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2874a6'; gradeEmoji = '⭐'; }
         else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
         else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
         
@@ -537,15 +551,15 @@
         document.getElementById('rdxDebriefContent').innerHTML = 
             '<div style="text-align:center;margin-bottom:24px;">' +
             '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
-            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:var(--rdx-text,#1e293b);">Case Complete!</h2>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
             '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
             '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
             '</div></div>' +
-            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<h3 style="font-weight:700;color:var(--rdx-text-secondary,#475569);margin-bottom:16px;">📊 Your Decision Path</h3>' +
             '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
             '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
-            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<h4 style="font-weight:600;color:var(--rdx-text-secondary,#475569);margin-bottom:8px;">🎯 Performance Legend</h4>' +
             '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
@@ -553,7 +567,7 @@
             '</div></div>' +
             '<div style="display:flex;gap:12px;">' +
             '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3a90c0,#3a90c0);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
             '</div>';
         
         document.getElementById('rdxDebriefOverlay').style.display = 'flex';
@@ -562,8 +576,7 @@
     // Auto-inject hint examples into existing content
     window.rdxInit = function() {
         // Could add dynamic hint injection here based on difficulty
-        console.log('ReasonDx Enhanced Features loaded for: Shock Expanded Dual Adventure');
-    };
+};
     
     // Initialize on load
     if (document.readyState === 'loading') {
@@ -585,12 +598,18 @@
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1097/CCM.0000000000005357" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">Surviving Sepsis Campaign: Hemodynamic Management</a> — <em style="color:var(--rdx-text-muted,#64748b)">Critical Care Medicine</em></li><li style="padding:6px 0;font-size:0.85rem"><a href="https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">ATLS: Hemorrhagic Shock</a> — <em style="color:var(--rdx-text-muted,#64748b)">ACS Committee on Trauma</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
 
-<script src="../dx-feedback.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

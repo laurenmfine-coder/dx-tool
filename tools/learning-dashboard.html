@@ -13,15 +13,15 @@
 <link rel="manifest" href="../manifest.json">
 <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
 <link rel="stylesheet" href="../mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 // Auth Guard - Redirect if not logged in
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Reasoning Dashboard — track your clinical reasoning growth, session history, and Reasoning Fingerprint on ReasonDx.">
-<title>Reasoning Dashboard | ReasonDx</title>
+    <meta name="description" content="My Learning Dashboard — clinical education tool on ReasonDx. Interactive learning resource for medical students and educators.">
+<title>My Learning Dashboard | ReasonDx</title>
     
     <style>
         :root {
@@ -37,8 +37,8 @@
         body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
         
         .header {
-            background: linear-gradient(135deg, #2874A6 0%, #1B4F72 100%);
-            padding: 28px 24px;
+            background: linear-gradient(135deg, #3a90c0 0%, #1f5f8b 100%);
+            padding: 32px 24px;
             color: white;
         }
         .header-inner {
@@ -48,8 +48,8 @@
             justify-content: space-between;
             align-items: center;
         }
-        .header h1 { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; }
-        .header p { opacity: 0.85; font-size: 14px; margin-top: 4px; }
+        .header h1 { font-size: 24px; }
+        .header p { opacity: 0.9; font-size: 14px; margin-top: 4px; }
         .streak-badge {
             background: rgba(255,255,255,0.2);
             padding: 8px 16px;
@@ -332,17 +332,15 @@
     <header class="header">
         <div class="header-inner">
             <div>
-                <h1 id="welcomeGreeting">👋 Welcome back, Learner!</h1>
-                <p>Track your reasoning growth — cases, communication, and coaching all in one place</p>
+                <h1>👋 Welcome back, Learner!</h1>
+<div style="text-align:center;margin:12px 0;"><a href="../analytics-dashboard.html" style="color:var(--rdx-teal);font-weight:600;font-size:14px;text-decoration:none;">📈 View Full Analytics & Content Mastery Fingerprint →</a></div>
+                <p>Keep up the momentum — you're making great progress</p>
             </div>
             <div class="streak-badge">
                 🔥 <span id="streak-count">0</span> day streak
             </div>
         </div>
     </header>
-    <script>
-    (function(){try{var u=JSON.parse(localStorage.getItem('reasondx-user')||'{}');var n=u.displayName||u.name||'Learner';document.getElementById('welcomeGreeting').textContent='\uD83D\uDC4B Welcome back, '+n+'!';}catch(e){}})();
-    </script>
 
     <main class="content">
         <!-- First-Run Welcome Panel -->
@@ -351,24 +349,24 @@
             <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
                 <div style="font-size: 48px;">👋</div>
                 <div style="flex: 1; min-width: 260px;">
-                    <h2 style="font-family:'Fraunces',Georgia,serif; font-size: 22px; color: #166534; margin-bottom: 8px; font-weight: 600;">Welcome to Your Reasoning Dashboard!</h2>
-                    <p style="color: #1a4971; font-size: 14px; margin-bottom: 16px;">This is your home base for tracking growth across ReasonDx. Here's how to get started:</p>
+                    <h2 style="font-size: 22px; color: #166534; margin-bottom: 8px;">Welcome to Your Learning Dashboard!</h2>
+                    <p style="color: #1a4971; font-size: 14px; margin-bottom: 16px;">This is your home base for tracking progress across all ReasonDx tools. Here's how to get started:</p>
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;">
-                        <a href="../modules/training.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                        <a href="../mechanism/index.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
                             <span style="font-size: 24px;">🧠</span>
-                            <div><strong style="font-size: 13px;">1. Train</strong><br><span style="font-size: 12px; color: #6b7280;">Build differentials & reason through cases</span></div>
+                            <div><strong style="font-size: 13px;">1. Learn</strong><br><span style="font-size: 12px; color: #6b7280;">Start with ReasonDx modules</span></div>
                         </a>
-                        <a href="sbar-trainer.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
-                            <span style="font-size: 24px;">📋</span>
-                            <div><strong style="font-size: 13px;">2. Communicate</strong><br><span style="font-size: 12px; color: #6b7280;">Practice structured SBAR handoffs</span></div>
+                        <a href="../ReasonDx/training.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                            <span style="font-size: 24px;">🩺</span>
+                            <div><strong style="font-size: 13px;">2. Practice</strong><br><span style="font-size: 12px; color: #6b7280;">Try a clinical reasoning case</span></div>
                         </a>
-                        <a href="../CoachDx/index.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
-                            <span style="font-size: 24px;">🗣️</span>
-                            <div><strong style="font-size: 13px;">3. Coach</strong><br><span style="font-size: 12px; color: #6b7280;">Get AI coaching on your reasoning</span></div>
+                        <a href="flashcard-studio.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                            <span style="font-size: 24px;">🎴</span>
+                            <div><strong style="font-size: 13px;">3. Review</strong><br><span style="font-size: 12px; color: #6b7280;">Study with spaced repetition</span></div>
                         </a>
-                        <a href="#" onclick="dismissWelcome();return false;" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
-                            <span style="font-size: 24px;">📊</span>
-                            <div><strong style="font-size: 13px;">4. Dashboard</strong><br><span style="font-size: 12px; color: #6b7280;">Track progress & Reasoning Fingerprint</span></div>
+                        <a href="calculator-hub.html" style="display: flex; align-items: center; gap: 10px; padding: 12px; background:var(--rdx-bg-card); border-radius:12px; text-decoration: none; color: inherit; border: 1px solid #a7f3d0; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+                            <span style="font-size: 24px;">🧮</span>
+                            <div><strong style="font-size: 13px;">4. Calculate</strong><br><span style="font-size: 12px; color: #6b7280;">22 clinical calculators</span></div>
                         </a>
                     </div>
                     <p style="margin-top: 14px; font-size: 12px; color: #6b7280;">Your progress will appear here as you explore the platform. Dashboard updates automatically.</p>
@@ -379,19 +377,19 @@
         <!-- Stats Grid -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="icon blue">🧠</div>
+                <div class="icon blue">📚</div>
                 <div class="value" id="modules-completed">0</div>
-                <div class="label">Cases Completed</div>
+                <div class="label">Modules Completed</div>
             </div>
             <div class="stat-card">
                 <div class="icon green">⏱️</div>
                 <div class="value" id="hours-studied">0</div>
-                <div class="label">Total Sessions</div>
+                <div class="label">Hours Studied</div>
             </div>
             <div class="stat-card">
                 <div class="icon purple">🎯</div>
                 <div class="value" id="avg-score">0%</div>
-                <div class="label">Avg Reasoning Score</div>
+                <div class="label">Average Quiz Score</div>
             </div>
             <div class="stat-card">
                 <div class="icon orange">📈</div>
@@ -407,7 +405,7 @@
                 <div class="card">
                     <h2>📊 Progress by Category</h2>
                     <div id="categoryProgress">
-                        <p style="font-size: 13px; color: var(--text-secondary);">Complete cases and SBAR scenarios to see your progress by specialty.</p>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Complete modules and cases to see your progress by specialty.</p>
                     </div>
                 </div>
 
@@ -430,7 +428,7 @@
                 <div class="card">
                     <h2>🎯 Recommended Next</h2>
                     <div id="recommendedNext">
-                        <p style="font-size: 13px; color: var(--text-secondary);">Complete a few cases to get personalized recommendations.</p>
+                        <p style="font-size: 13px; color: var(--text-secondary);">Complete a few modules or cases to get personalized recommendations.</p>
                     </div>
                 </div>
                 </div>
@@ -473,19 +471,19 @@
                     <div id="todaysGoals">
                         <div class="goal-item">
                             <div class="goal-checkbox" id="goal-module-check"></div>
-                            <span class="goal-text" id="goal-module-text">Complete 1 reasoning case</span>
+                            <span class="goal-text" id="goal-module-text">Complete 1 new module</span>
                         </div>
                         <div class="goal-item">
                             <div class="goal-checkbox" id="goal-case-check"></div>
-                            <span class="goal-text" id="goal-case-text">Practice 1 SBAR handoff</span>
+                            <span class="goal-text" id="goal-case-text">Try 1 clinical case</span>
                         </div>
                         <div class="goal-item">
                             <div class="goal-checkbox" id="goal-quiz-check"></div>
-                            <span class="goal-text" id="goal-quiz-text">Review CoachDx feedback</span>
+                            <span class="goal-text" id="goal-quiz-text">Take 1 practice quiz</span>
                         </div>
                         <div class="goal-item">
                             <div class="goal-checkbox" id="goal-time-check"></div>
-                            <span class="goal-text" id="goal-time-text">Spend 20 min training</span>
+                            <span class="goal-text" id="goal-time-text">Spend 30 min studying</span>
                         </div>
                     </div>
                 </div>
@@ -507,21 +505,19 @@
                     </div>
                 </div>
 
-                <!-- Spaced Repetition Review Queue — HIDDEN FOR LAUNCH (Phase 2) -->
-                <!--
+                <!-- Spaced Repetition Review Queue -->
                 <div class="card" id="spacedRepCard" style="display: none;">
                     <h2>🔄 Due for Review</h2>
                     <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 12px;">Topics that need reinforcement based on your performance</p>
                     <div id="spacedRepContainer"></div>
                 </div>
-                -->
 
                 <!-- Recent Activity -->
                 <div class="card">
                     <h2>🕐 Recent Activity</h2>
                     <ul class="activity-list" id="recentActivity">
                         <li class="activity-item" style="color: var(--text-secondary); font-size: 13px;">
-                            No activity yet. Start a case or SBAR scenario!
+                            No activity yet. Start exploring modules and cases!
                         </li>
                     </ul>
                 </div>
@@ -677,7 +673,7 @@
             // Check if any progress exists
             var hasAnyProgress = cats.some(function(c) { return topicsByCategory[c].completed > 0; });
             if (!hasAnyProgress) {
-                container.innerHTML = '<p style="font-size:13px;color:var(--text-secondary);">Complete cases to see your progress by specialty.</p>';
+                container.innerHTML = '<p style="font-size:13px;color:var(--text-secondary);">Complete modules to see your progress by specialty.</p>';
                 return;
             }
 
@@ -691,7 +687,7 @@
                 html += '<div class="progress-item">' +
                     '<div class="progress-header">' +
                     '<span class="label">' + cat + '</span>' +
-                    '<span class="value">' + d.completed + '/' + d.total + ' topics</span>' +
+                    '<span class="value">' + d.completed + '/' + d.total + ' modules</span>' +
                     '</div>' +
                     '<div class="progress-bar">' +
                     '<div class="progress-fill ' + colors[idx % colors.length] + '" style="width:' + pct + '%"></div>' +
@@ -863,8 +859,7 @@
                     }
                 });
 
-                // Spaced rep items — HIDDEN FOR LAUNCH
-                /*
+                // Also add spaced rep items
                 var dueItems = window.DxProgress ? DxProgress.getDueForReview() : [];
                 dueItems.slice(0, 2).forEach(function(item) {
                     var t = topicData[item.id];
@@ -879,7 +874,6 @@
                         });
                     }
                 });
-                */
 
                 if (recs.length === 0) return;
 
@@ -973,8 +967,7 @@
             DxRecommend.render('#recommendationsContainer', { maxItems: 5, showHeader: true });
         }
 
-        // Render spaced repetition review queue — HIDDEN FOR LAUNCH
-        /*
+        // Render spaced repetition review queue
         function renderSpacedRep() {
             if (!window.DxProgress) return;
             const dueTopics = DxProgress.getDueForReview();
@@ -1002,12 +995,11 @@
                 `;
             }).join('');
         }
-        */
-        // renderSpacedRep(); — disabled for launch
+        renderSpacedRep();
 
         loadProgress();
     </script>
-<!-- <script src="../dx-epa-integration.js"></script> --> <!-- EPA deferred for launch -->
+<script src="../dx-epa-integration.js"></script>
 <script src="dx-tools-nav.js"></script>
 <script src="../js/rdx-nav.js"></script>
 <script>
@@ -1015,8 +1007,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').ca
 </script>
 <script src="../js/rdx-help-widget.js"></script>
 
-<script src="../dx-feedback.js"></script>
-<script src="../dx-modal-safety.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

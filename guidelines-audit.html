@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Guidelines Audit — clinical reasoning education platform for medical students and healthcare professionals.">
+<title>Guidelines Audit | ReasonDx</title>
+
+<style>
+:root{--bg:var(--rdx-bg);--bg2:#1e293b;--card:var(--rdx-bg-card);--border:var(--rdx-border);--text:var(--rdx-text);--text2:#cbd5e1;--muted:var(--rdx-text-muted);--accent:#3a90c0;--success:#22c55e;--success-light:rgba(34,197,94,.15);--warning:#f59e0b;--warning-light:rgba(245,158,11,.15);--danger:#ef4444;--danger-light:rgba(239,68,68,.15);--purple:#8b5cf6;--teal:#3a90c0}
+[data-theme="light"]{--bg:#f8fafc;--bg2:#fff;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#334155;--muted:#64748b;--accent:#2874a6;--success:#16a34a;--warning:#d97706;--danger:var(--rdx-danger);--purple:#7c3aed;--teal:#2874a6;--success-light:rgba(22,163,74,.1);--warning-light:rgba(217,119,6,.1);--danger-light:rgba(220,38,38,.1)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);min-height:100vh;padding:1.5rem}
+.header{text-align:center;margin-bottom:2rem}.header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--warning),var(--danger));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem}.header p{color:var(--muted);font-size:.95rem}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:1.5rem}.back-link:hover{text-decoration:underline}
+.summary{max-width:1000px;margin:0 auto 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.sum-card{background:var(--rdx-bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}.sum-card .num{font-size:2rem;font-weight:800}.sum-card .label{font-size:.8rem;color:var(--muted);margin-top:.3rem}
+.filters{max-width:1000px;margin:0 auto 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap}
+.filter-btn{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-size:.85rem;transition:.2s}.filter-btn:hover,.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.audit-table{max-width:1000px;margin:0 auto}
+table{width:100%;border-collapse:collapse;background:var(--rdx-bg-card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+th,td{padding:.65rem 1rem;text-align:left;border-bottom:1px solid var(--border)}th{background:var(--bg2);color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;position:sticky;top:0}td{font-size:.85rem;color:var(--text2)}tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:20px;font-size:.72rem;font-weight:600}.badge-current{background:var(--success-light);color:var(--success)}.badge-review{background:var(--warning-light);color:var(--warning)}.badge-outdated{background:var(--danger-light);color:var(--danger)}
+.gl-name{font-weight:600;color:var(--text)}.gl-org{font-size:.78rem;color:var(--muted)}
+.search{max-width:1000px;margin:0 auto 1rem}
+.search input{width:100%;padding:.65rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:.9rem;outline:none}
+.search input:focus{border-color:var(--accent)}
+</style>
+<link rel="stylesheet" href="./css/rdx-theme.css">
+</head>
+<body>
+<a href="index.html" class="back-link">← Back to ReasonDx</a>
+<div class="header"><h1>📋 Guidelines Audit Tracker</h1><p>Track guideline concordance and flag content needing updates</p></div>
+<div class="summary" id="summary"></div>
+<div class="search"><input type="text" id="search" placeholder="Search guidelines or topics..."></div>
+<div class="filters" id="filters"></div>
+<div class="audit-table"><table><thead><tr><th>Topic</th><th>Guideline</th><th>Organization</th><th>Last Updated</th><th>Content Status</th><th>Action</th></tr></thead><tbody id="tbody"></tbody></table></div>
+<script>
+const guidelines=[
+  {topic:'Sepsis & Septic Shock',tid:'sepsis',gl:'Surviving Sepsis Campaign',org:'SCCM/ESICM',year:2021,status:'current'},
+  {topic:'Acute Coronary Syndrome',tid:'acs',gl:'ACS Management Guidelines',org:'AHA/ACC',year:2023,status:'current'},
+  {topic:'Heart Failure',tid:'heart-failure',gl:'Heart Failure Guidelines',org:'AHA/ACC/HFSA',year:2022,status:'current'},
+  {topic:'Atrial Fibrillation',tid:'afib',gl:'AF Management Guidelines',org:'AHA/ACC/HRS',year:2023,status:'current'},
+  {topic:'Asthma',tid:'asthma',gl:'Asthma Management (GINA)',org:'GINA',year:2024,status:'current'},
+  {topic:'COPD',tid:'copd',gl:'GOLD Report',org:'GOLD',year:2024,status:'current'},
+  {topic:'DKA Management',tid:'dka',gl:'DKA/HHS Consensus',org:'ADA',year:2024,status:'current'},
+  {topic:'Hypertension',tid:'htn-emergency',gl:'HTN Clinical Practice',org:'AHA/ACC',year:2017,status:'review'},
+  {topic:'Stroke',tid:'stroke',gl:'Stroke Management',org:'AHA/ASA',year:2019,status:'review'},
+  {topic:'Anaphylaxis',tid:'anaphylaxis',gl:'Anaphylaxis Practice Parameter',org:'AAAAI/ACAAI',year:2020,status:'current'},
+  {topic:'Drug Allergy',tid:'drug-allergy',gl:'Drug Allergy Practice Parameter',org:'AAAAI/ACAAI',year:2022,status:'current'},
+  {topic:'DVT/PE',tid:'dvt',gl:'VTE Guidelines',org:'ASH',year:2020,status:'current'},
+  {topic:'Pneumonia',tid:'pneumonia',gl:'CAP Guidelines',org:'ATS/IDSA',year:2019,status:'review'},
+  {topic:'Tuberculosis',tid:'tuberculosis',gl:'TB Treatment Guidelines',org:'ATS/CDC/IDSA',year:2016,status:'review'},
+  {topic:'Meningitis',tid:'meningitis-encephalitis',gl:'Bacterial Meningitis',org:'IDSA',year:2017,status:'review'},
+  {topic:'Preeclampsia',tid:'preeclampsia',gl:'Hypertensive Disorders in Pregnancy',org:'ACOG',year:2020,status:'current'},
+  {topic:'Postpartum Hemorrhage',tid:'pph',gl:'PPH Management Bundle',org:'ACOG',year:2023,status:'current'},
+  {topic:'Depression',tid:'depression',gl:'MDD Practice Guideline',org:'APA',year:2023,status:'current'},
+  {topic:'Schizophrenia',tid:'schizophrenia',gl:'Schizophrenia Treatment',org:'APA',year:2020,status:'current'},
+  {topic:'Gout',tid:'gout-pseudogout',gl:'Gout Management',org:'ACR',year:2020,status:'current'},
+  {topic:'Rheumatoid Arthritis',tid:'rheumatoid-arthritis',gl:'RA Treatment',org:'ACR',year:2021,status:'current'},
+  {topic:'SLE',tid:'sle',gl:'Lupus Management',org:'ACR/EULAR',year:2023,status:'current'},
+  {topic:'Neutropenic Fever',tid:'neutropenic-fever',gl:'Febrile Neutropenia',org:'IDSA',year:2011,status:'outdated'},
+  {topic:'UTI',tid:'uti-pyelonephritis',gl:'Uncomplicated UTI',org:'IDSA',year:2011,status:'outdated'},
+  {topic:'ARDS',tid:'ards',gl:'ARDS Management',org:'ATS/ESICM/SCCM',year:2024,status:'current'},
+  {topic:'C. difficile',tid:'cdiff',gl:'CDI Guidelines',org:'IDSA/SHEA',year:2021,status:'current'},
+  {topic:'HIV/AIDS',tid:'hiv-aids',gl:'HIV Treatment Guidelines',org:'DHHS',year:2024,status:'current'},
+  {topic:'Hepatitis B',tid:'hepatitis-viruses',gl:'HBV Guidelines',org:'AASLD',year:2018,status:'review'},
+  {topic:'Seizure Disorders',tid:'seizure-disorders',gl:'Epilepsy Treatment',org:'AAN/AES',year:2022,status:'current'},
+  {topic:'Status Epilepticus',tid:'status-epilepticus',gl:'SE Management',org:'NCS',year:2022,status:'current'}
+];
+const cur=guidelines.filter(g=>g.status==='current').length,rev=guidelines.filter(g=>g.status==='review').length,out=guidelines.filter(g=>g.status==='outdated').length;
+document.getElementById('summary').innerHTML=[
+  {n:guidelines.length,l:'Guidelines Tracked',c:'var(--accent)'},{n:cur,l:'Current',c:'var(--success)'},{n:rev,l:'Needs Review',c:'var(--warning)'},{n:out,l:'Outdated',c:'var(--danger)'}
+].map(i=>'<div class="sum-card"><div class="num" style="color:'+i.c+'">'+i.n+'</div><div class="label">'+i.l+'</div></div>').join('');
+const statuses=['all','current','review','outdated'];
+document.getElementById('filters').innerHTML=statuses.map((s,i)=>'<button class="filter-btn'+(i===0?' active':'')+'" data-filter="'+s+'">'+(s==='all'?'All':s.charAt(0).toUpperCase()+s.slice(1))+' ('+({all:guidelines.length,current:cur,review:rev,outdated:out}[s])+')</button>').join('');
+function render(filter,search){
+  let items=guidelines;
+  if(filter&&filter!=='all')items=items.filter(g=>g.status===filter);
+  if(search)items=items.filter(g=>(g.topic+g.gl+g.org).toLowerCase().includes(search.toLowerCase()));
+  document.getElementById('tbody').innerHTML=items.map(g=>'<tr><td class="gl-name">'+g.topic+'</td><td>'+g.gl+'</td><td class="gl-org">'+g.org+'</td><td>'+g.year+'</td><td><span class="badge badge-'+g.status+'">'+(g.status==='current'?'✓ Current':g.status==='review'?'⚠ Review':'✕ Outdated')+'</span></td><td>'+(g.status!=='current'?'<a href="data-governance.html" style="color:var(--accent);font-size:.82rem">Update →</a>':'—')+'</td></tr>').join('');
+}
+render('all','');
+document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',function(){
+  document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));this.classList.add('active');
+  render(this.dataset.filter,document.getElementById('search').value);
+}));
+document.getElementById('search').addEventListener('input',function(){
+  const active=document.querySelector('.filter-btn.active');
+  render(active?active.dataset.filter:'all',this.value);
+});
+</script>
+<script src="data/rdx-persist.js"></script>
+<script src="./js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+<script src="js/rdx-help-widget.js"></script>
+
+<script src="../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body></html>

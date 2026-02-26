@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1f5f8b">
+<meta name="description" content="Mast Cell Disorders. Interactive Socratic clinical case with guided reasoning on ReasonDx.">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<title>Mast Cell Disorders | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--rdx-font);background:var(--rdx-bg,#f8fafc);min-height:100vh;color:var(--rdx-text,#1e293b)}
+.container{max-width:800px;margin:0 auto;padding:20px}
+.progress-bar{background:var(--rdx-border,#e2e8f0);border-radius:8px;height:6px;margin-bottom:24px;overflow:hidden}
+.progress-fill{background:linear-gradient(90deg,#2874a6,#3a90c0);height:100%;border-radius:8px;transition:width 0.5s}
+.score-tracker{position:fixed;top:12px;right:60px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:8px 16px;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;align-items:center;gap:8px;font-size:14px}
+.score-label{color:var(--rdx-text-muted,#64748b);font-size:12px}
+.score-value{font-weight:700;color:var(--rdx-teal,#2874a6);font-size:18px}
+.difficulty-panel{text-align:center;margin-bottom:20px}
+.diff-btn{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:500;color:var(--rdx-text-muted,#64748b);transition:all 0.2s}
+.diff-btn.active{background:var(--rdx-teal,#2874a6);color:#fff;border-color:var(--rdx-teal,#2874a6)}
+.diff-btn:hover{border-color:var(--rdx-teal,#2874a6)}
+.scene-title{font-family:var(--rdx-font-serif);font-size:1.6rem;color:var(--rdx-teal-dark,#1f5f8b);margin-bottom:16px}
+.narrative{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin-bottom:16px;line-height:1.7}
+.narrative .highlight{background:rgba(40,116,166,0.1);padding:2px 6px;border-radius:4px;font-weight:600}
+.narrative .critical{background:rgba(220,38,38,0.1);color:#dc2626;padding:2px 6px;border-radius:4px;font-weight:600}
+.vital-signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin:12px 0;padding:12px;background:rgba(40,116,166,0.04);border-radius:8px;border:1px solid rgba(40,116,166,0.1)}
+.vital-item{text-align:center;font-size:13px}.vital-item .label{color:var(--rdx-text-muted,#64748b);font-size:11px;display:block}.vital-item .value{font-weight:700;color:var(--rdx-teal-dark,#1f5f8b)}
+.socratic-prompt{background:linear-gradient(135deg,rgba(124,58,237,0.06),rgba(40,116,166,0.06));border:1px solid rgba(124,58,237,0.15);border-radius:12px;padding:16px 20px;margin:16px 0}
+.socratic-prompt h4{color:var(--rdx-purple,#7c3aed);font-size:0.95rem;margin-bottom:8px}
+.hint-box{background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);border-radius:8px;padding:12px;margin:8px 0;font-size:0.9rem;color:#92400e;display:none}
+.options-grid{display:grid;gap:10px;margin:16px 0}
+.option-btn{background:var(--rdx-bg-card,#fff);border:2px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:14px 18px;cursor:pointer;text-align:left;font-size:14px;transition:all 0.2s;font-family:var(--rdx-font)}
+.option-btn:hover{border-color:var(--rdx-teal,#2874a6);background:rgba(40,116,166,0.03)}
+.option-btn.correct{border-color:#16a34a;background:rgba(22,163,74,0.06)}
+.option-btn.incorrect{border-color:#dc2626;background:rgba(220,38,38,0.04)}
+.option-btn.disabled{pointer-events:none;opacity:0.7}
+.explanation-box{border-radius:12px;padding:16px;margin:12px 0;display:none}
+.explanation-box.correct{background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.2)}
+.explanation-box.incorrect{background:rgba(220,38,38,0.04);border:1px solid rgba(220,38,38,0.15)}
+.mechanism-box{background:linear-gradient(135deg,rgba(40,116,166,0.06),rgba(40,116,166,0.02));border:1px solid rgba(40,116,166,0.15);border-radius:12px;padding:20px;margin:16px 0}
+.mechanism-title{color:var(--rdx-teal-dark,#1f5f8b);font-weight:700;font-size:0.95rem;margin-bottom:10px}
+.pathway{line-height:1.8;font-size:0.93rem;color:var(--rdx-text,#1e293b)}
+.why-chain{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px;margin:8px 0}
+.why-q{font-weight:600;color:var(--rdx-purple,#7c3aed);cursor:pointer;font-size:0.9rem}.why-a{display:none;margin-top:6px;font-size:0.88rem;color:var(--rdx-text-muted,#64748b)}
+.next-btn{background:linear-gradient(135deg,#1f5f8b,#2874a6);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:600;cursor:pointer;margin:20px 0;display:none;font-family:var(--rdx-font)}
+.next-btn:hover{opacity:0.9;transform:translateY(-1px)}
+.completion-card{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:16px;padding:32px;text-align:center;margin:24px 0}
+.completion-card h2{font-family:var(--rdx-font-serif);color:var(--rdx-teal-dark,#1f5f8b);margin-bottom:12px}
+.references-panel{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:16px;margin:20px 0}
+.references-panel a{display:block;color:var(--rdx-teal,#2874a6);font-size:13px;margin:4px 0;text-decoration:none;word-break:break-all}
+.references-panel a:hover{text-decoration:underline}
+.rdx-crossplatform-nav{background:var(--rdx-bg-card,#f8fafc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:20px;margin:24px 0}
+.rdx-crossplatform-nav h4{color:var(--rdx-text-muted,#64748b);margin-bottom:12px;font-size:0.9rem}
+.rdx-crossplatform-links{display:flex;gap:12px;flex-wrap:wrap}
+.rdx-crossplatform-link{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:12px 16px;text-decoration:none;color:var(--rdx-text,#1e293b);font-size:13px;font-weight:500;transition:all 0.2s}
+.rdx-crossplatform-link:hover{background:rgba(40,116,166,0.05);transform:translateY(-2px)}
+@media(max-width:640px){.score-tracker{top:auto;bottom:12px;right:12px}.container{padding:12px}.vital-signs{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+<div class="container">
+    <div style="margin-bottom:12px"><a href="../adventure-hub.html" style="color:var(--rdx-teal,#2874a6);text-decoration:none;font-size:14px;font-weight:600">← Back to Cases</a></div>
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:var(--rdx-text-muted,#64748b);margin-bottom:8px;font-weight:600">Difficulty</div>
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div>
+    <div class="references-panel" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="toggleReferences()">
+            <span>📚 Open-Access References</span><span id="refToggle">▸</span>
+        </div>
+        <div id="referencesContent" style="display:none;margin-top:8px">
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK536985/" target="_blank" rel="noopener">Mastocytosis - StatPearls</a>
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6103785/" target="_blank" rel="noopener">Mast Cell Activation - JACI</a>
+        </div>
+    </div>
+    <div id="scene-container"></div>
+    <div class="rdx-crossplatform-nav">
+        <h4>🔗 Continue Learning</h4>
+        <div class="rdx-crossplatform-links">
+<a href="../modules/mast-cell-module.html" class="rdx-crossplatform-link">🧬 Mechanism Module</a>
+<a href="../board-prep.html" class="rdx-crossplatform-link">📝 Board Prep</a>
+<a href="../training.html" class="rdx-crossplatform-link">🏋️ Training Hub</a>
+        </div>
+    </div>
+</div>
+<script>
+let currentStage=0,score=0,difficulty='standard';
+const stages=[
+    {
+        title: "The Flushing Patient",
+        content: `<div class="narrative"><p>A <span class="highlight">38-year-old woman</span> presents with recurrent episodes of flushing, abdominal cramping, diarrhea, and near-syncope for 6 months. Episodes are unpredictable but sometimes triggered by hot showers, alcohol, or NSAIDs. She was recently stung by a wasp and had a severe anaphylactic reaction.</p><div class="vital-signs"><div class="vital-item"><span class="label">BP</span><span class="value">102/64</span></div><div class="vital-item"><span class="label">HR</span><span class="value">98</span></div><div class="vital-item"><span class="label">RR</span><span class="value">18</span></div><div class="vital-item"><span class="label">SpO2</span><span class="value">98%</span></div><div class="vital-item"><span class="label">Temp</span><span class="value">37.0°C</span></div></div></div>`,
+        hint_beginner: "What conditions can cause episodic flushing with systemic symptoms?",
+        hint_advanced: "Compare the mediator profiles: histamine (mast cells) vs serotonin (carcinoid) vs catecholamines (pheochromocytoma).",
+        question: {
+            prompt: "Which feature most strongly suggests a mast cell disorder over carcinoid syndrome?",
+            options: [{ text: "Flushing episodes", correct: false, explanation: "Both cause flushing." }, { text: "Diarrhea", correct: false, explanation: "Both can cause GI symptoms." }, { text: "Severe anaphylaxis to Hymenoptera sting in an adult", correct: true, explanation: "" }, { text: "Hypotension during episodes", correct: false, explanation: "Both can cause hemodynamic instability." }],
+            explanation: { correct: "Correct! Severe anaphylaxis to Hymenoptera venom in adults should always raise suspicion for underlying mastocytosis/MCAS. Up to 7% of adults with severe venom anaphylaxis have underlying clonal mast cell disease.", incorrect: "Severe Hymenoptera anaphylaxis in adults is a red flag for underlying mast cell disease — always test tryptase." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Mast Cell Disorder Clues</div><div class="pathway"><strong>Red flags for mastocytosis/MCAS:</strong><br>• Recurrent anaphylaxis (especially to venom)<br>• Flushing + hypotension (not just flushing)<br>• GI symptoms (cramping, diarrhea)<br>• Urticaria pigmentosa (brown macules)<br>• Osteoporosis in young patients<br>• Triggers: heat, alcohol, NSAIDs, opioids, exercise<br><br><strong>Key distinction from carcinoid:</strong> Carcinoid flushing is typically DRY; mast cell flushing is often WET (with urticaria).</div></div>`,
+            why_chain: [{q: "Why are NSAIDs a trigger?", a: "NSAIDs inhibit COX-1, shunting arachidonic acid toward the lipoxygenase pathway → increased leukotriene production → mast cell activation. Some patients tolerate COX-2 selective agents."}],
+            points: 10
+        }
+    },
+    {
+        title: "The Diagnostic Workup",
+        content: `<div class="narrative"><p>Physical exam reveals several tan-brown macules on the trunk that urticate when stroked (positive Darier sign). You suspect a mast cell disorder.</p></div>`,
+        hint_beginner: "What is the Darier sign and what does it indicate?",
+        hint_advanced: "Consider which serum and urine biomarkers reflect mast cell burden vs activation.",
+        question: {
+            prompt: "What is the MOST important initial lab test when evaluating for systemic mastocytosis?",
+            options: [{ text: "24-hour urine histamine", correct: false, explanation: "Useful but not first-line; less specific than tryptase." }, { text: "Serum tryptase level", correct: true, explanation: "" }, { text: "Complete blood count", correct: false, explanation: "Important for staging but not diagnostic." }, { text: "Serum IgE level", correct: false, explanation: "Not specific for mast cell disease." }],
+            explanation: { correct: "Correct! Baseline serum tryptase is the most important initial test. Persistently elevated tryptase (>20 ng/mL) suggests increased mast cell burden and is a minor WHO criterion for systemic mastocytosis.", incorrect: "Serum tryptase is the cornerstone initial test — a persistently elevated baseline (>20 ng/mL) strongly suggests systemic mast cell disease." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 Diagnostic Algorithm</div><div class="pathway"><strong>Step 1:</strong> Baseline serum tryptase (>20 ng/mL = minor criterion)<br><strong>Step 2:</strong> 24-hour urine: N-methylhistamine, 11β-prostaglandin F2α<br><strong>Step 3:</strong> Bone marrow biopsy (if tryptase elevated) — look for mast cell aggregates, spindle-shaped morphology, CD25+/CD2+ aberrant markers<br><strong>Step 4:</strong> KIT D816V mutation testing<br><br><strong>WHO criteria for SM:</strong> 1 major + 1 minor, OR 3 minor criteria. Major = multifocal dense BM mast cell aggregates (≥15 cells).</div></div>`,
+            why_chain: [{q: "What if tryptase is normal?", a: "Mast cell activation syndrome (MCAS) can occur with normal baseline tryptase. Document a rise of ≥20% + 2 ng/mL during an episode. Consider urine metabolites for diagnosis."}],
+            points: 10
+        }
+    },
+    {
+        title: "Bone Marrow Results",
+        content: `<div class="narrative"><p>Serum tryptase returns at 42 ng/mL. Bone marrow biopsy shows multifocal aggregates of spindle-shaped mast cells (>15 per cluster), CD25+, and KIT D816V mutation is detected.</p></div>`,
+        hint_beginner: "Does this meet criteria for systemic mastocytosis?",
+        hint_advanced: "Review the WHO major and minor criteria and how many are needed for diagnosis.",
+        question: {
+            prompt: "How many WHO diagnostic criteria does this patient meet?",
+            options: [{ text: "1 (major criterion only)", correct: false, explanation: "Count again — she meets more." }, { text: "3 (1 major + 2 minor)", correct: false, explanation: "Check all five criteria against her findings." }, { text: "4 (1 major + 3 minor)", correct: true, explanation: "" }, { text: "All 5 criteria", correct: false, explanation: "Serum tryptase must be >20 to count — it is (42 ng/mL), but re-examine if mast cell morphology >25% spindle-shaped is confirmed as separate." }],
+            explanation: { correct: "Correct! Major: multifocal dense aggregates (≥15 mast cells). Minor: spindle-shaped morphology, CD25+ expression, KIT D816V mutation, tryptase >20 ng/mL. She meets 1 major + 3 minor — well exceeding the diagnostic threshold.", incorrect: "This patient clearly meets WHO criteria: 1 major + 3 minor criteria. Only 1 major + 1 minor (or 3 minor alone) is needed." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 WHO Criteria for Systemic Mastocytosis</div><div class="pathway"><strong>MAJOR:</strong> Multifocal dense mast cell aggregates (≥15 cells) in BM or extracutaneous tissue<br><br><strong>MINOR (need 1 if major present, or 3 alone):</strong><br>1. >25% spindle-shaped mast cells in BM<br>2. KIT D816V mutation<br>3. CD25+ and/or CD2+ expression on mast cells<br>4. Baseline tryptase >20 ng/mL<br><br><strong>Diagnosis:</strong> 1 major + 1 minor, OR 3 minor criteria</div></div>`,
+            why_chain: [{q: "What does KIT D816V mutation mean therapeutically?", a: "D816V confers resistance to imatinib (which works on wild-type KIT). Midostaurin and avapritinib are effective against D816V-mutated mast cells."}],
+            points: 10
+        }
+    },
+    {
+        title: "Classification and Prognosis",
+        content: `<div class="narrative"><p>With the diagnosis confirmed, you need to determine the subtype. CBC shows normal counts. No hepatosplenomegaly. No evidence of organ dysfunction (B-findings or C-findings). Skin lesions present.</p></div>`,
+        hint_beginner: "What subtype categories exist for systemic mastocytosis?",
+        hint_advanced: "B-findings indicate high mast cell burden; C-findings indicate organ damage. How does their absence guide classification?",
+        question: {
+            prompt: "What subtype of systemic mastocytosis does this patient have?",
+            options: [{ text: "Aggressive systemic mastocytosis", correct: false, explanation: "ASM requires C-findings (organ damage)." }, { text: "Indolent systemic mastocytosis", correct: true, explanation: "" }, { text: "Mast cell leukemia", correct: false, explanation: "Requires >20% mast cells in peripheral blood or >30% in BM aspirate." }, { text: "Smoldering systemic mastocytosis", correct: false, explanation: "SSM requires 2+ B-findings without C-findings." }],
+            explanation: { correct: "Correct! Indolent SM (ISM): meets SM criteria, no B-findings or C-findings, no associated hematologic neoplasm. This is the most common subtype (~80%) and has an excellent prognosis (normal life expectancy).", incorrect: "No organ damage (C-findings) and no high-burden markers (B-findings) = indolent SM, the most common and most favorable subtype." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 SM Classification</div><div class="pathway"><strong>Indolent SM (ISM):</strong> No B/C-findings. Best prognosis.<br><strong>Smoldering SM (SSM):</strong> ≥2 B-findings, no C-findings<br><strong>Aggressive SM (ASM):</strong> ≥1 C-finding (cytopenias, hepatomegaly with dysfunction, skeletal lesions, malabsorption)<br><strong>SM-AHN:</strong> SM + associated hematologic neoplasm<br><strong>Mast Cell Leukemia:</strong> ≥20% mast cells in blood<br><br><strong>B-findings:</strong> BM infiltration >30%, tryptase >200, hepatosplenomegaly, dysplasia<br><strong>C-findings:</strong> Organ damage from mast cell infiltration</div></div>`,
+            why_chain: [{q: "What's the life expectancy for ISM?", a: "Near-normal life expectancy. The main morbidity is from mediator-release symptoms (anaphylaxis risk) rather than organ infiltration."}],
+            points: 10
+        }
+    },
+    {
+        title: "Mediator Management",
+        content: `<div class="narrative"><p>You need to initiate therapy to control her mediator-release symptoms (flushing, GI symptoms, anaphylaxis risk).</p></div>`,
+        hint_beginner: "What are the pillars of pharmacologic management for ISM?",
+        hint_advanced: "Think about blocking histamine at both H1 and H2 receptors, plus mast cell stabilization.",
+        question: {
+            prompt: "What is the foundation of pharmacologic therapy for indolent SM symptoms?",
+            options: [{ text: "KIT inhibitor therapy (avapritinib)", correct: false, explanation: "Cytoreductive therapy is reserved for advanced SM, not ISM symptom management." }, { text: "Dual antihistamine therapy (H1 + H2 blockers)", correct: true, explanation: "" }, { text: "Systemic corticosteroids", correct: false, explanation: "Not first-line for chronic management; used for acute flares." }, { text: "Omalizumab (anti-IgE)", correct: false, explanation: "May help IgE-mediated symptoms but is not first-line for ISM." }],
+            explanation: { correct: "Correct! H1 blocker (cetirizine, fexofenadine) + H2 blocker (famotidine) form the backbone of ISM management. Add cromolyn sodium for GI symptoms. Leukotriene inhibitor (montelukast) for flushing. Epinephrine autoinjector is mandatory.", incorrect: "Dual antihistamine therapy (H1 + H2) is the foundation. Every patient with SM must also carry epinephrine autoinjectors." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 ISM Management Ladder</div><div class="pathway"><strong>Tier 1 (All patients):</strong><br>• H1 antihistamine (cetirizine 10 mg BID or fexofenadine)<br>• H2 antihistamine (famotidine 20 mg BID)<br>• Epinephrine autoinjector (2 doses at all times)<br><br><strong>Tier 2 (Add-on):</strong><br>• Cromolyn sodium (GI symptoms)<br>• Montelukast (flushing)<br>• Aspirin (if tolerated — for flushing/vascular symptoms)<br><br><strong>Tier 3:</strong> Omalizumab for refractory anaphylaxis<br><strong>Tier 4:</strong> Cytoreductive therapy (only for advanced SM)</div></div>`,
+            why_chain: [{q: "Why H2 blockers?", a: "Mast cells release histamine that acts on both H1 (skin, airways) and H2 (gastric acid, cardiac) receptors. Blocking both provides broader symptom control. H2 blockers also reduce GI symptoms and acid hypersecretion."}],
+            points: 10
+        }
+    },
+    {
+        title: "Anaphylaxis Prevention",
+        content: `<div class="narrative"><p>The patient asks about venom immunotherapy since her anaphylaxis was triggered by a wasp sting. She is anxious about outdoor activities.</p></div>`,
+        hint_beginner: "Is venom immunotherapy (VIT) recommended in mastocytosis?",
+        hint_advanced: "Consider the evidence for VIT in clonal mast cell disease — does it work the same as in patients without mastocytosis?",
+        question: {
+            prompt: "What is the recommendation for venom immunotherapy in this patient?",
+            options: [{ text: "VIT is contraindicated in mastocytosis due to high reaction risk", correct: false, explanation: "VIT is actually strongly recommended despite the risk." }, { text: "Lifelong VIT is recommended — do not discontinue after the standard 5 years", correct: true, explanation: "" }, { text: "VIT for the standard 5 years, then reassess", correct: false, explanation: "In mastocytosis, stopping VIT carries significant relapse risk." }, { text: "VIT is unnecessary if she carries epinephrine", correct: false, explanation: "Epinephrine treats reactions but VIT prevents them." }],
+            explanation: { correct: "Correct! VIT is strongly recommended AND should be continued indefinitely in patients with mastocytosis. Unlike the general population where 5 years is standard, mastocytosis patients have a high relapse rate (up to 30-40%) after VIT discontinuation.", incorrect: "Lifelong VIT is recommended for mastocytosis patients with Hymenoptera anaphylaxis — do NOT stop after the standard 5-year course." },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">📋 VIT in Mastocytosis</div><div class="pathway"><strong>Indication:</strong> All mastocytosis patients with Hymenoptera anaphylaxis<br><strong>Duration:</strong> LIFELONG (vs 5 years in general population)<br><strong>Efficacy:</strong> Reduces reaction risk from ~60% to ~10% per sting<br><strong>Precautions:</strong> Premedicate with antihistamines, have epinephrine ready, consider extended observation<br><br><strong>Additional prevention:</strong><br>• Medical alert bracelet<br>• Avoid triggers (alcohol, NSAIDs, extreme heat)<br>• Pre-procedure protocols (surgery, contrast)</div></div>`,
+            why_chain: [{q: "Why lifelong?", a: "The underlying clonal mast cell population persists indefinitely. Without ongoing VIT, the risk of severe anaphylaxis to future stings returns. Stopping VIT is associated with 30-40% relapse rate in mastocytosis vs <5% in general population."}],
+            points: 10
+        }
+    }
+];
+document.getElementById('maxScore').textContent=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);
+function setDifficulty(d,btn){difficulty=d;document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const hb=document.querySelector('.hint-box');if(hb)hb.style.display=d==='beginner'?'block':'none'}
+function toggleReferences(){const c=document.getElementById('referencesContent');const t=document.getElementById('refToggle');if(c.style.display==='none'){c.style.display='block';t.textContent='▾'}else{c.style.display='none';t.textContent='▸'}}
+function renderStage(idx){if(idx>=stages.length){showCompletion();return}const st=stages[idx];const pct=((idx)/stages.length*100);document.getElementById('progress').style.width=pct+'%';let h='<h2 class="scene-title">'+st.title+'</h2>';h+='<div class="scene-content">'+st.content+'</div>';if(st.hint_beginner)h+='<div class="hint-box" id="hint-box"'+(difficulty==='beginner'?' style="display:block"':'')+'>💡 '+st.hint_beginner+'</div>';if(difficulty==='advanced'&&st.hint_advanced)h+='<div class="hint-box" style="display:block;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.15);color:#5b21b6">🎓 '+st.hint_advanced+'</div>';if(st.question){h+='<div class="socratic-prompt"><h4>Clinical Question</h4><p>'+st.question.prompt+'</p></div>';h+='<div class="options-grid" id="options-'+idx+'">';st.question.options.forEach((opt,oi)=>{h+='<button class="option-btn" id="option-'+idx+'-'+oi+'" onclick="checkAnswer('+idx+','+oi+')">'+String.fromCharCode(65+oi)+'. '+opt.text+'</button>'});h+='</div>';h+='<div class="explanation-box" id="explain-'+idx+'"></div>';h+='<div id="teaching-'+idx+'" style="display:none">'+st.question.teaching+'</div>';if(st.question.why_chain&&st.question.why_chain.length>0){h+='<div id="why-'+idx+'" style="display:none">';st.question.why_chain.forEach((wc,wi)=>{h+='<div class="why-chain"><div class="why-q" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'none\'?\'block\':\'none\'">🔍 '+wc.q+'</div><div class="why-a">'+wc.a+'</div></div>'});h+='</div>'}}h+='<button class="next-btn" id="next-'+idx+'" onclick="nextStage()">Continue →</button>';document.getElementById('scene-container').innerHTML=h}
+function checkAnswer(si,oi){const st=stages[si];const opt=st.question.options[oi];document.querySelectorAll('#options-'+si+' .option-btn').forEach((b,i)=>{b.classList.add('disabled');if(st.question.options[i].correct)b.classList.add('correct');if(i===oi&&!opt.correct)b.classList.add('incorrect')});const eb=document.getElementById('explain-'+si);if(opt.correct){score+=st.question.points;document.getElementById('score').textContent=score;eb.className='explanation-box correct';eb.innerHTML='<strong>✓ Correct!</strong> '+st.question.explanation.correct}else{eb.className='explanation-box incorrect';eb.innerHTML='<strong>✗ Not quite.</strong> '+st.question.explanation.incorrect}eb.style.display='block';document.getElementById('teaching-'+si).style.display='block';const why=document.getElementById('why-'+si);if(why)why.style.display='block';document.getElementById('next-'+si).style.display='inline-block'}
+function nextStage(){currentStage++;renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'})}
+function showCompletion(){const mx=stages.reduce((s,st)=>s+(st.question?st.question.points:0),0);const pct=mx>0?Math.round(score/mx*100):0;document.getElementById('progress').style.width='100%';let lvl='Developing';if(pct>=90)lvl='Mastery';else if(pct>=70)lvl='Proficient';else if(pct>=50)lvl='Competent';document.getElementById('scene-container').innerHTML='<div class="completion-card"><h2>🎉 Case Complete!</h2><p style="font-size:2rem;font-weight:700;color:var(--rdx-teal,#2874a6)">'+pct+'%</p><p style="color:var(--rdx-text-muted,#64748b)">Score: '+score+'/'+mx+'</p><p style="margin:12px 0;font-weight:600">Level: '+lvl+'</p><div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="../adventure-hub.html" style="padding:10px 20px;background:var(--rdx-teal,#2874a6);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">More Cases</a><a href="../tools/learning-dashboard.html" style="padding:10px 20px;background:var(--rdx-purple,#7c3aed);color:#fff;border-radius:8px;text-decoration:none;font-weight:600">📊 Dashboard</a><button onclick="currentStage=0;score=0;document.getElementById(\'score\').textContent=0;renderStage(0)" style="padding:10px 20px;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;cursor:pointer;font-weight:600">🔄 Retry</button></div></div>';try{const progress=JSON.parse(localStorage.getItem('reasondx-progress')||'{}');if(!progress.cases)progress.cases={};progress.cases['mast-cell-disorders']=Math.max(progress.cases['mast-cell-disorders']||0,pct);localStorage.setItem('reasondx-progress',JSON.stringify(progress))}catch(e){}}
+renderStage(0);
+</script>
+<script src="../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}</script>
+<script src="../js/rdx-help-widget.js"></script>
+
+<script src="../../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

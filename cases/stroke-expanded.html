@@ -1,34 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Acute Ischemic Stroke - ReasonDx Socratic Case</title>
+    <meta name="description" content="In-depth clinical case study: Acute Ischemic Stroke. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Acute Ischemic Stroke - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:var(--rdx-font); background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 100%); min-height: 100vh; padding: 20px; color: #1e293b; }
         .container { max-width: 900px; margin: 0 auto; }
-        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); border: 1px solid #e2e8f0; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
         .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .scene-title { font-size: 1.5rem; font-weight: 700; color: #f3e8ff; }
-        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #8b5cf6; line-height: 1.7; }
+        .narrative { background:var(--rdx-bg-card); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #8b5cf6; line-height: 1.7; }
         .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
-        .highlight { color: #fbbf24; font-weight: 600; }
-        .critical { color: #f87171; font-weight: 600; }
-        .safe { color: #4ade80; font-weight: 600; }
-        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(139,92,246,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
-        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
-        .question-box { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .safe { color: var(--rdx-teal, #2874a6); font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(139,92,246,0.15)); border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #475569; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #334155; }
+        .question-box { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(251,191,36,0.15)); border:1px solid var(--rdx-info); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .question-prompt { font-size: 1.1rem; font-weight: 600; color: #f3e8ff; margin-bottom: 16px; line-height: 1.5; }
         .mcq-options { display: flex; flex-direction: column; gap: 10px; }
-        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
-        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: #f1f5f9; transform: translateX(4px); }
         .mcq-option.disabled { cursor: default; opacity: 0.7; }
         .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
         .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
@@ -36,67 +49,67 @@
         .mcq-option.correct .option-letter { background: #22c55e; color: white; }
         .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
         .option-text { flex: 1; line-height: 1.5; }
-        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
         .feedback.show { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
         .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
         .feedback-title { font-weight: 700; margin-bottom: 8px; font-size: 1.05rem; }
-        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.correct-feedback .feedback-title { color: var(--rdx-teal, #2874a6); }
         .feedback.incorrect-feedback .feedback-title { color: #f87171; }
-        .teaching-point { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
         .teaching-point.show { display: block; animation: fadeIn 0.3s ease; }
-        .teaching-point h4 { color: #93c5fd; margin-bottom: 12px; }
+        .teaching-point h4 { color: var(--rdx-teal, #2874a6); margin-bottom: 12px; }
         .teaching-point ul, .teaching-point ol { margin-left: 20px; }
-        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color:var(--rdx-text); }
         .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 0.9rem; }
-        .teaching-point td, .teaching-point th { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .teaching-point td, .teaching-point th { padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
         .teaching-point th { color: #c4b5fd; font-size: 0.85rem; text-transform: uppercase; }
-        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius:12px; padding: 16px; margin-top: 12px; display: none; }
         .why-chain.show { display: block; animation: fadeIn 0.3s ease; }
-        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain h4 { color: #475569; margin-bottom: 12px; }
         .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
-        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
-        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .why-chain .why-q { color: #1f5f8b; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color:var(--rdx-text); line-height: 1.6; }
         .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
-        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4); border-radius: 10px; padding: 16px; margin: 12px 0; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4); border-radius:12px; padding: 16px; margin: 12px 0; }
         .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .comparison-table th, .comparison-table td { padding: 10px; border: 1px solid #e2e8f0; text-align: left; }
         .comparison-table th { background: rgba(139,92,246,0.2); color: #c4b5fd; }
-        .btn { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; border: none; padding: 14px 28px; border-radius:12px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
         .btn.show { display: inline-block; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #c4b5fd); border-radius: 3px; transition: width 0.5s; }
-        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
         .score-label { font-size: 0.8rem; color: #94a3b8; }
-        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
-        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal, #2874a6); }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius:12px; margin-left: 12px; }
         .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
         .diff-btns { display: flex; gap: 4px; }
-        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius:8px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
         .diff-btn.active { background: #8b5cf6; color: white; }
         .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; font-size: 0.95rem; }
-        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
-        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--rdx-teal, #2874a6); }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #eab308; }
         .completion { text-align: center; padding: 40px 20px; }
         .completion-grade { font-size: 2.5rem; font-weight: 800; margin-bottom: 8px; }
         .completion-percent { font-size: 4rem; font-weight: 800; margin-bottom: 16px; }
-        .completion-message { font-size: 1.2rem; color: #e2e8f0; margin-bottom: 32px; }
-        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .completion-message { font-size: 1.2rem; color:var(--rdx-text); margin-bottom: 32px; }
+        .completion-breakdown { text-align: left; background:var(--rdx-bg-hover); border-radius: 12px; padding: 20px; margin: 24px 0; }
         .completion-breakdown h4 { margin-bottom: 16px; color: #c4b5fd; }
         .crossplatform { margin-top: 32px; padding: 20px; background: rgba(139,92,246,0.1); border-radius: 12px; }
         .crossplatform h4 { margin-bottom: 16px; color: #c4b5fd; }
         .crossplatform-links { display: flex; flex-direction: column; gap: 8px; }
-        .crossplatform-link { color: #c4b5fd; text-decoration: none; padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.2s; }
-        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .crossplatform-link { color: #c4b5fd; text-decoration: none; padding: 12px 16px; background:var(--rdx-bg-card); border-radius: 8px; transition: all 0.2s; }
+        .crossplatform-link:hover { background: #f1f5f9; transform: translateX(4px); }
     
 /* Visual Debrief Styles */
 .debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
 .debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
-.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
 .debrief-header { text-align: center; margin-bottom: 24px; }
 .debrief-grade { font-size: 4rem; margin-bottom: 8px; }
 .debrief-score { font-size: 2.5rem; font-weight: 700; }
@@ -104,30 +117,30 @@
 .decision-path { margin: 24px 0; }
 .decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
 .path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
-.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
-.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-optimal { background: #d4e8f7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #1f5f8b; }
 .path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
 .path-stage { font-weight: 700; color: #1f2937; }
 .path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
-.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
 .path-points { font-weight: 600; font-size: 0.9rem; }
 .debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
 .debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
 .debrief-summary ul { margin-left: 20px; }
 .debrief-summary li { margin-bottom: 8px; }
-.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: #1f5f8b; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
 .debrief-btn:hover { opacity: 0.9; }
 
 /* References Panel Styles */
-.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
-.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.references-panel { background: #f0f7fc; border: 1px solid #d1d5db; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1a4971; display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
 .references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
-.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
-.references-content a:hover { background: #2563eb; color: white; }
+.references-content a { background:var(--rdx-bg-card); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2874a6; font-size: 0.85rem; border: 1px solid #a3cfe6; transition: all 0.2s; }
+.references-content a:hover { background: #2874a6; color: white; }
 
 /* Platform Panel Styles */
-.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-panel { background: #f8fafc; border: 1px solid #d1d5db; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
 .platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
 .platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
 .platform-icon { font-size: 1.1rem; }
@@ -149,8 +162,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -158,6 +171,7 @@
 
     </style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container">
@@ -472,10 +486,10 @@ function showCompletion() {
     const p=Math.round(score/maxScore*100);
     let g,m,clr;
     if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent understanding of acute stroke management!';}
-    else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp of stroke concepts. Review time windows and contraindications.';}
+    else if(p>=80){g='Great Work!';clr='#3a90c0';m='Strong grasp of stroke concepts. Review time windows and contraindications.';}
     else if(p>=70){g='Good Progress';clr='#f59e0b';m='Solid foundation. Focus on the treatment algorithm and secondary prevention.';}
     else{g='Keep Learning';clr='#ef4444';m='Review time windows, tPA criteria, and thrombectomy eligibility.';}
-    document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div class="completion-message">${m}</div><div class="completion-breakdown"><h4>Your Clinical Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span><span style="color:${d.correct?'#22c55e':'#ef4444'}">${d.correct?'✓':'✗'}</span> Stage ${j+1}: ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}pts</span></div>`).join('')}</div><div class="crossplatform"><h4>Continue Learning</h4><div class="crossplatform-links"><a href="#" class="crossplatform-link">🧬 MechanismDx: Cerebrovascular Anatomy</a><a href="#" class="crossplatform-link">📚 Related: Hemorrhagic Stroke Case</a><a href="javascript:location.reload()" class="crossplatform-link">🔄 Restart</a></div></div></div>`;
+    document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div class="completion-message">${m}</div><div class="completion-breakdown"><h4>Your Clinical Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;"><span><span style="color:${d.correct?'#22c55e':'#ef4444'}">${d.correct?'✓':'✗'}</span> Stage ${j+1}: ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}pts</span></div>`).join('')}</div><div class="crossplatform"><h4>Continue Learning</h4><div class="crossplatform-links"><a href="#" class="crossplatform-link">🧬 ReasonDx: Cerebrovascular Anatomy</a><a href="#" class="crossplatform-link">📚 Related: Hemorrhagic Stroke Case</a><a href="javascript:location.reload()" class="crossplatform-link">🔄 Restart</a></div></div></div>`;
     document.getElementById('progress').style.width='100%';
 }
 
@@ -491,8 +505,8 @@ function showDebrief() {
     let grade, gradeEmoji, gradeColor;
     
     if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
-    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
-    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3a90c0'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#b45309'; }
     else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
     
     let pathHTML = '';
@@ -508,7 +522,7 @@ function showDebrief() {
                             <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
                             ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
                         </div>
-                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#b45309'}">${d.points}/${d.maxPoints || 10}</div>
                     </div>
                 </div>
             `;
@@ -529,7 +543,7 @@ function showDebrief() {
             <h4>🎯 Performance Legend</h4>
             <ul>
                 <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
-                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color: #1f5f8b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
                 <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
             </ul>
         </div>
@@ -573,12 +587,29 @@ function toggleReferences() {
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1161/STR.0000000000000211" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">AHA/ASA Guideline for Acute Ischemic Stroke</a> — <em style="color:var(--rdx-text-muted,#64748b)">Stroke</em></li></ul></div>
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(40,116,166,.06),rgba(40,116,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0f7fc);color:var(--rdx-teal,#2874a6);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">CT Head (non-contrast) → CTA → CT Perfusion</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Hyperdense vessel sign, loss of grey-white differentiation, ASPECTS score, CTA occlusion</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-neuro.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#2874a6);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/ischaemic-stroke" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#2874a6);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
 
-<script src="../dx-feedback.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

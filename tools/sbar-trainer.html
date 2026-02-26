@@ -1293,7 +1293,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <div class="sbar-card-body">
                         <p class="sbar-prompt">"I'm calling about... The reason I'm calling is..."</p>
                         <textarea class="sbar-input" id="inputSituation" placeholder="Identify yourself, your unit, and the patient. State the problem concisely."></textarea>
-                        <button type="button" class="sbar-mic" onclick="VoiceInput.toggle('inputSituation')" title="Click to speak">🎤</button>
                         <button class="hint-toggle" onclick="toggleHint('situation')">💡 Show hint</button>
                         <div class="sbar-hint" id="hintSituation">
                             <strong>Good Situation statements include:</strong><br>
@@ -1314,7 +1313,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <div class="sbar-card-body">
                         <p class="sbar-prompt">"The patient was admitted for... Their baseline is..."</p>
                         <textarea class="sbar-input" id="inputBackground" placeholder="Relevant history, reason for admission, and baseline status."></textarea>
-                        <button type="button" class="sbar-mic" onclick="VoiceInput.toggle('inputBackground')" title="Click to speak">🎤</button>
                         <button class="hint-toggle" onclick="toggleHint('background')">💡 Show hint</button>
                         <div class="sbar-hint" id="hintBackground">
                             <strong>Background should include:</strong><br>
@@ -1336,7 +1334,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <div class="sbar-card-body">
                         <p class="sbar-prompt">"I think the problem is... I'm concerned about..."</p>
                         <textarea class="sbar-input" id="inputAssessment" placeholder="Your clinical assessment - what do YOU think is going on?"></textarea>
-                        <button type="button" class="sbar-mic" onclick="VoiceInput.toggle('inputAssessment')" title="Click to speak">🎤</button>
                         <button class="hint-toggle" onclick="toggleHint('assessment')">💡 Show hint</button>
                         <div class="sbar-hint" id="hintAssessment">
                             <strong>Assessment is YOUR clinical judgment:</strong><br>
@@ -1358,7 +1355,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     <div class="sbar-card-body">
                         <p class="sbar-prompt">"I think we need... I'm requesting..."</p>
                         <textarea class="sbar-input" id="inputRecommendation" placeholder="What do you think should happen? What are you asking for?"></textarea>
-                        <button type="button" class="sbar-mic" onclick="VoiceInput.toggle('inputRecommendation')" title="Click to speak">🎤</button>
                         <button class="hint-toggle" onclick="toggleHint('recommendation')">💡 Show hint</button>
                         <div class="sbar-hint" id="hintRecommendation">
                             <strong>Recommendation should be specific:</strong><br>
@@ -3277,12 +3273,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').ca
 </script>
 <script src="../js/rdx-help-widget.js"></script>
 
-<script src="../dx-feedback.js"></script>
-<script src="../dx-modal-safety.js"></script>
-
-<script src="../dx-plan-gate.js"></script>
-<script>document.addEventListener("DOMContentLoaded",function(){if(typeof DxPlanGate!=="undefined")DxPlanGate.autoGate();});</script>
-<script src="../dx-sbar-gate.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -3297,30 +3288,5 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-<style>.sbar-mic{position:absolute;right:12px;bottom:12px;width:32px;height:32px;border-radius:50%;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}.sbar-mic:hover{border-color:#2874A6;background:#EBF5FB}.sbar-section{position:relative}</style>
-<script src="../voice-input.js"></script>
-<script src="../dx-bias-assessment.js"></script>
-<script>
-// Bias hooks for SBAR submission
-(function() {
-  var origSubmit = window.submitSBAR;
-  if (origSubmit) {
-    window.submitSBAR = function() {
-      var s = document.getElementById('inputSituation')?.value || '';
-      var b = document.getElementById('inputBackground')?.value || '';
-      var a = document.getElementById('inputAssessment')?.value || '';
-      var r = document.getElementById('inputRecommendation')?.value || '';
-      var full = 'S: ' + s + '\nB: ' + b + '\nA: ' + a + '\nR: ' + r;
-      BiasAssessment.logExchange('student', full, { stage:'SBAR', format:'structured' });
-      BiasAssessment.setContext('SBAR Communication — structured handoff practice');
-      origSubmit.apply(this, arguments);
-    };
-  }
-  // Hide mics if unsupported
-  if (typeof VoiceInput !== 'undefined' && !VoiceInput.isSupported()) {
-    document.querySelectorAll('.sbar-mic').forEach(function(b){ b.style.display='none'; });
-  }
-})();
-</script>
 </body>
 </html>

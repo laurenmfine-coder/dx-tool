@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sepsis & Septic Shock - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #dc2626 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #fca5a5; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #fecaca; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #dc2626; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(220,38,38,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(220,38,38,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #fecaca; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(220,38,38,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #dc2626, #991b1b); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #dc2626, #fca5a5); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: static; display: inline-block; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; margin-left: 12px; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #dc2626; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
+        .completion { text-align: center; padding: 60px 40px; }
+        @media (max-width: 768px) { .score-tracker, .difficulty-panel { position: static; display: inline-block; margin: 0 12px 12px 0; } }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+/* Mobile Responsive - iPhone 16/17 optimized */
+        @media (max-width: 480px) {
+            body { padding: 12px !important; }
+            .container { padding: 0; }
+            .scene { padding: 16px; margin-bottom: 14px; border-radius: 12px; }
+            .scene-title { font-size: 1.25rem; }
+            .narrative { padding: 12px 14px; margin: 12px 0; font-size: 0.95rem; }
+            .socratic-prompt { padding: 14px; }
+            .question-box { padding: 14px; }
+            .question-prompt { font-size: 1rem; }
+            .mcq-option { padding: 12px 14px; min-height: 48px; }
+            .option-text { font-size: 0.9rem; }
+            .teaching-point { padding: 12px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 8px; }
+            .nav-buttons { flex-direction: column; gap: 10px; }
+            .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
+            .dx-nav { padding: 10px 12px; }
+            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+            .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
+        }
+        @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
+
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <div class="score-tracker"><div class="score-label">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="difficulty-panel"><div style="font-size:0.75rem;color:#475569;margin-bottom:8px;font-weight:600">Difficulty</div><div class="diff-btns">
+        <button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button>
+        <button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button>
+        <button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button>
+    </div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank" rel="noopener">Surviving Sepsis Campaign Guidelines (SCCM)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK537054/" target="_blank" rel="noopener">Sepsis - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/2654/qsofa-quick-sofa-score-sepsis" target="_blank" rel="noopener">qSOFA Calculator (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    
+<!-- Platform Recommendations -->
+<div class="platform-panel">
+    <div class="platform-header">🔗 Continue Learning</div>
+    <div class="platform-item"><span class="platform-icon">🔬</span><span>MechanismDx: Inflammatory Response Module</span></div><div class="platform-item"><span class="platform-icon">🎯</span><span>CoachDx: Sepsis Recognition Scenario</span></div><div class="platform-item"><span class="platform-icon">📖</span><span>Deep Dive: Lactate & Tissue Perfusion</span></div>
+</div>
+
+</div>
+<script>
+let currentStage = 0, score = 0, maxScore = 0, difficulty = 'standard', answeredQuestions = new Set(), decisionPath = [];
+
+const stages = [
+    {
+        title: "The Septic Patient",
+        content: `<div class="narrative"><p>A <span class="highlight">68-year-old woman</span> with diabetes is brought from a nursing home with <span class="critical">fever, confusion, and hypotension</span>. Vitals: T 39.2°C, HR 118, BP 82/48, RR 26, SpO2 92% on RA.</p><p>She's confused, with CVA tenderness and a foley catheter in place. Labs show <span class="critical">WBC 18,000, Cr 2.8 (baseline 1.0), lactate 4.8</span>.</p></div>
+        <div class="socratic-prompt"><h4>Recognition Challenge</h4><p>This patient has infection (likely UTI) plus organ dysfunction. The old SIRS criteria are OUT. What is the current definition of sepsis according to Sepsis-3?</p></div>`,
+        hint_beginner: "Sepsis-3 (2016) replaced SIRS criteria with organ dysfunction measured by SOFA score.",
+        hint_advanced: "How do the definitions of sepsis vs septic shock differ in terms of prognostic implications?",
+        question: {
+            prompt: "According to Sepsis-3 criteria, what DEFINES sepsis?",
+            options: [
+                { text: "Life-threatening organ dysfunction caused by dysregulated host response to infection", correct: true },
+                { text: "Meeting 2 or more SIRS criteria with suspected infection", correct: false },
+                { text: "Positive blood cultures with fever", correct: false },
+                { text: "Hypotension requiring vasopressors", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Sepsis-3 (2016) defines sepsis as life-threatening organ dysfunction from dysregulated host response to infection. Organ dysfunction is measured by SOFA score ≥2. SIRS criteria are no longer used - they were too sensitive and non-specific.",
+                incorrect: "Sepsis-3 moved away from SIRS criteria. The new definition is: life-threatening organ dysfunction (SOFA ≥2) caused by dysregulated host response to infection. This better predicts mortality than SIRS."
+            },
+            teaching: `<h4>Sepsis-3 Definitions</h4><table class="comparison-table"><tr><th>Term</th><th>Definition</th><th>Mortality</th></tr><tr><td><strong>Sepsis</strong></td><td>Infection + SOFA ≥2</td><td>~10%</td></tr><tr><td><strong>Septic Shock</strong></td><td>Sepsis + vasopressors for MAP ≥65 + lactate >2 despite fluids</td><td>>40%</td></tr></table><p style="margin-top:12px;">This patient: Infection (UTI) + SOFA ≥2 (AKI, altered mental status, hypotension) = <strong>Sepsis</strong></p>`,
+            why_chain: [{q: "Why did we abandon SIRS?", a: "SIRS criteria (temp, HR, RR, WBC) were present in >90% of ICU admissions, including non-infectious conditions. Too sensitive, not specific enough. SOFA-based definition better predicts mortality."}, {q: "What makes this septic SHOCK specifically?", a: "Needs vasopressors to maintain MAP ≥65 AND lactate >2 mmol/L despite adequate fluid resuscitation. Both criteria must be met."}],
+            points: 10
+        }
+    },
+    {
+        title: "The First Hour",
+        content: `<div class="narrative"><p>You recognize this as <span class="critical">septic shock</span>. Time is critical - <strong>each hour of delay in antibiotics increases mortality ~7.6%</strong>.</p><p>The Hour-1 Bundle must be initiated immediately.</p></div>
+        <div class="socratic-prompt"><h4>Bundle Elements</h4><p>What are the 5 components of the Hour-1 Bundle that must ALL be initiated within 1 hour of sepsis recognition?</p></div>`,
+        hint_beginner: "Think: Lactate, Cultures, Antibiotics, Fluids, Vasopressors (if needed)",
+        hint_advanced: "What's the evidence behind the 1-hour timing? What if cultures delay antibiotics?",
+        question: {
+            prompt: "Which action should NEVER delay antibiotic administration in septic shock?",
+            options: [
+                { text: "Waiting for blood culture results", correct: false },
+                { text: "Obtaining blood cultures - draw quickly, don't wait for results", correct: true },
+                { text: "Completing a CT scan to identify source", correct: false },
+                { text: "Waiting for lactate results", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Draw cultures BEFORE antibiotics - but don't wait for results. The key is to not let the culture-taking process delay antibiotic administration. Each hour delay = ~7.6% increased mortality (Kumar et al., 2006).",
+                incorrect: "Blood cultures should be obtained before antibiotics, but the actual drawing takes only minutes. Never wait for culture RESULTS or imaging before starting antibiotics in septic shock."
+            },
+            teaching: `<h4>Hour-1 Bundle (2021 SSC Guidelines)</h4><ol style="line-height:2;margin-left:20px;"><li><strong>Measure lactate</strong> (remeasure if >2)</li><li><strong>Obtain blood cultures</strong> before antibiotics</li><li><strong>Administer broad-spectrum antibiotics</strong></li><li><strong>30 mL/kg crystalloid</strong> for hypotension or lactate ≥4</li><li><strong>Vasopressors</strong> if hypotensive during/after fluid resuscitation</li></ol>`,
+            why_chain: [{q: "Why 1 hour specifically?", a: "Kumar et al. showed each hour delay in antibiotics increases mortality ~7.6%. Seymour et al. confirmed faster bundle completion = lower risk-adjusted mortality. The 'golden hour' concept applies to sepsis."}, {q: "Can cultures realistically be obtained before antibiotics?", a: "Yes - drawing blood cultures takes ~5 minutes. Don't wait for results, but do attempt to draw before antibiotics when possible without significant delay."}],
+            points: 10
+        }
+    },
+    {
+        title: "Fluid Resuscitation",
+        content: `<div class="narrative"><p>The nurse asks how much fluid to give. The patient weighs 70 kg.</p><p>Current guideline: <span class="highlight">30 mL/kg crystalloid</span> for hypotension or lactate ≥4.</p></div>
+        <div class="socratic-prompt"><h4>Fluid Choice</h4><p>What crystalloid should you choose for initial resuscitation, and why does it matter?</p></div>`,
+        hint_beginner: "Balanced crystalloids (LR, Plasmalyte) vs Normal Saline - which causes less kidney injury?",
+        hint_advanced: "What does the SMART trial tell us about crystalloid choice in sepsis?",
+        question: {
+            prompt: "Which fluid is PREFERRED for initial sepsis resuscitation based on SMART trial data?",
+            options: [
+                { text: "Normal saline - most studied and safest", correct: false },
+                { text: "Balanced crystalloids (LR/Plasmalyte) - less AKI and death", correct: true },
+                { text: "Albumin - better volume expansion", correct: false },
+                { text: "D5W - provides calories during illness", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! SMART trial showed balanced crystalloids (LR, Plasmalyte) reduced major adverse kidney events and mortality compared to NS, especially in sepsis. NS has supraphysiologic chloride (154 mEq/L vs plasma ~100) leading to hyperchloremic acidosis.",
+                incorrect: "Balanced crystalloids (LR, Plasmalyte) are preferred. Normal saline causes hyperchloremic metabolic acidosis and renal vasoconstriction with large volumes. SMART trial showed better outcomes with balanced fluids."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Why Balanced Crystalloids?</div><div class="pathway">Normal saline: 154 mEq/L chloride (plasma ~100)
+→ Large volumes → hyperchloremic acidosis
+→ Renal vasoconstriction → ↓ GFR
+
+SMART trial (2018): Balanced crystalloids
+→ ↓ Major adverse kidney events
+→ ↓ Mortality in sepsis subgroup
+→ NNT ~100 for mortality benefit</div></div>`,
+            why_chain: [{q: "How much fluid should this patient get initially?", a: "30 mL/kg × 70 kg = 2.1 liters. This is the INITIAL bolus. After that, assess fluid responsiveness before giving more - avoid fluid overload!"}, {q: "How do you assess fluid responsiveness?", a: "Passive leg raise test, pulse pressure variation (if ventilated), bedside echo (IVC variability). Static measures like CVP are poor predictors."}],
+            points: 10
+        }
+    },
+    {
+        title: "Vasopressor Selection",
+        content: `<div class="narrative"><p>After 2L crystalloid, BP remains 78/44 (MAP 55). The patient needs <span class="critical">vasopressors</span> to maintain perfusion.</p><p>You must choose the right agent and target.</p></div>
+        <div class="socratic-prompt"><h4>First-Line Agent</h4><p>What is the FIRST-LINE vasopressor in septic shock and why?</p></div>`,
+        hint_beginner: "Norepinephrine is first-line. Think about the primary problem in septic shock - vasodilation.",
+        hint_advanced: "When do you add vasopressin? What's the mechanism and dose?",
+        question: {
+            prompt: "What is the FIRST-LINE vasopressor for septic shock?",
+            options: [
+                { text: "Norepinephrine - strong α1 agonist to restore SVR", correct: true },
+                { text: "Dopamine - provides renal protection", correct: false },
+                { text: "Epinephrine - strongest overall effect", correct: false },
+                { text: "Phenylephrine - pure α1 without cardiac effects", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Norepinephrine is first-line because septic shock is primarily DISTRIBUTIVE (↓↓ SVR). NE's strong α1 effect restores vascular tone, with some β1 maintaining cardiac output. It has fewer arrhythmias than dopamine.",
+                incorrect: "Norepinephrine is first-line. Dopamine causes more arrhythmias (De Backer trial). Epinephrine is added for cardiac dysfunction. Phenylephrine lacks inotropy and may reduce cardiac output."
+            },
+            teaching: `<h4>Vasopressor Hierarchy</h4><table class="comparison-table"><tr><th>Line</th><th>Drug</th><th>Mechanism</th><th>Notes</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>1st</strong></td><td>Norepinephrine</td><td>α1 >> β1</td><td>↑ SVR, some inotropy</td></tr><tr><td><strong>2nd</strong></td><td>Vasopressin</td><td>V1 receptor</td><td>Add at NE 0.25-0.5 mcg/kg/min</td></tr><tr><td><strong>3rd</strong></td><td>Epinephrine</td><td>α1, β1, β2</td><td>Add for cardiac dysfunction</td></tr></table>`,
+            why_chain: [{q: "Why not dopamine first?", a: "De Backer (NEJM 2010): Dopamine had higher arrhythmia rates. 'Renal-dose dopamine' is a myth - no proven renal protection. Norepinephrine is safer."}, {q: "When do you add vasopressin?", a: "When NE reaches 0.25-0.5 mcg/kg/min. Vasopressin acts on V1 receptors (different pathway). Fixed dose 0.03-0.04 units/min - NOT titrated. Allows lower NE dose."}],
+            points: 10
+        }
+    },
+    {
+        title: "Antibiotic Selection",
+        content: `<div class="narrative"><p>You suspect <span class="highlight">urosepsis</span> given the foley catheter and CVA tenderness, but can't rule out other sources. The patient was in a nursing home.</p><p>Empiric antibiotics must cover all likely pathogens.</p></div>
+        <div class="socratic-prompt"><h4>Coverage Decisions</h4><p>What empiric antibiotic regimen provides appropriate coverage for this nursing home patient with likely urosepsis?</p></div>`,
+        hint_beginner: "Need to cover: Gram-negatives (including Pseudomonas in nursing home patients), Gram-positives including MRSA, and some anaerobes.",
+        hint_advanced: "How do you decide between pip-tazo vs meropenem? When must you add MRSA coverage?",
+        question: {
+            prompt: "What is the MOST appropriate empiric antibiotic regimen for this nursing home patient with septic shock?",
+            options: [
+                { text: "Ceftriaxone alone - covers most UTI pathogens", correct: false },
+                { text: "Vancomycin + Piperacillin-tazobactam - covers MRSA and broad GNR/anaerobes", correct: true },
+                { text: "Ciprofloxacin - standard UTI coverage", correct: false },
+                { text: "Ampicillin-sulbactam - good nursing home coverage", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Nursing home + septic shock = need broad coverage. Vancomycin covers MRSA (healthcare exposure). Pip-tazo covers Pseudomonas, other GNR, and anaerobes. This combination is the workhorse for undifferentiated severe sepsis.",
+                incorrect: "Nursing home patients need broader coverage. They have healthcare exposure (MRSA risk), may have resistant organisms (Pseudomonas), and source may not be confirmed. Vanc + pip-tazo provides the necessary breadth."
+            },
+            teaching: `<h4>Empiric Antibiotic Selection</h4><table class="comparison-table"><tr><th>Source</th><th>Empiric Coverage</th></tr><tr><td>Unknown/undifferentiated</td><td>Vanc + Pip-tazo (or meropenem)</td></tr><tr><td>Community-acquired pneumonia</td><td>Ceftriaxone + azithromycin</td></tr><tr><td>Hospital-acquired pneumonia</td><td>Vanc + cefepime (or pip-tazo)</td></tr><tr><td>Intra-abdominal</td><td>Pip-tazo or meropenem ± vanc</td></tr><tr><td>Skin/soft tissue with MRSA risk</td><td>Vanc + pip-tazo + clindamycin</td></tr></table>`,
+            why_chain: [{q: "When would you use meropenem instead of pip-tazo?", a: "ESBL risk (prior resistant GNR, prior broad antibiotics, extensive healthcare exposure). Meropenem has broader GNR coverage but shouldn't be used routinely to preserve efficacy."}, {q: "What about fungal coverage?", a: "Consider empiric antifungals (fluconazole/echinocandin) for: prolonged ICU stay, TPN, broad-spectrum antibiotics >7 days, neutropenia, or known Candida colonization."}],
+            points: 10
+        }
+    },
+    {
+        title: "Source Control",
+        content: `<div class="narrative"><p>Antibiotics alone cannot cure sepsis if there's an ongoing source. CT abdomen shows a <span class="critical">perinephric abscess</span> on the left, likely from ascending UTI.</p><p>The foley has already been exchanged.</p></div>
+        <div class="socratic-prompt"><h4>The Undrained Source</h4><p>Why can't antibiotics penetrate the abscess, and what must be done?</p></div>`,
+        hint_beginner: "Abscesses have no blood flow inside - antibiotics travel through blood.",
+        hint_advanced: "What are the time-sensitive source control emergencies where delay hours matter?",
+        question: {
+            prompt: "What is the MOST important intervention for this perinephric abscess?",
+            options: [
+                { text: "Increase antibiotic dose to penetrate the abscess", correct: false },
+                { text: "Percutaneous drainage or surgical intervention", correct: true },
+                { text: "Add a second antibiotic with better tissue penetration", correct: false },
+                { text: "Continue current antibiotics for 2 weeks before considering drainage", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Antibiotics cannot penetrate abscess cavities - there's no blood flow. The pus must be physically drained. Source control is essential: undrained abscesses, necrotic tissue, infected devices, and obstructed hollow viscera require intervention.",
+                incorrect: "Antibiotics travel through blood. Abscess cavities have no blood supply. No amount or type of antibiotic will sterilize an undrained abscess. Physical drainage is mandatory."
+            },
+            teaching: `<h4>Source Control Emergencies</h4><table class="comparison-table"><tr><th>Source</th><th>Intervention</th></tr><tr><td>Abscess (any location)</td><td>Percutaneous or surgical drainage</td></tr><tr><td>Necrotizing fasciitis</td><td>Emergent surgical debridement</td></tr><tr><td>Cholecystitis/cholangitis</td><td>Cholecystectomy or ERCP</td></tr><tr><td>Obstructed pyelonephritis</td><td>Nephrostomy or ureteral stent</td></tr><tr><td>Infected catheter/device</td><td>Remove the device!</td></tr><tr><td>Perforated viscus</td><td>Surgical repair</td></tr></table>`,
+            why_chain: [{q: "How quickly does source control need to happen?", a: "As soon as medically feasible - ideally within 6-12 hours. Necrotizing fasciitis is the most time-critical: mortality increases 7-9% per hour of delayed surgery."}, {q: "Can antibiotics buy time to optimize the patient first?", a: "Brief stabilization is acceptable, but source control should not be delayed for extensive optimization. An undrained source will prevent stabilization."}],
+            points: 10
+        }
+    },
+    {
+        title: "Lactate-Guided Resuscitation",
+        content: `<div class="narrative"><p>Initial lactate: <span class="critical">4.8 mmol/L</span>. After 2L fluids and norepinephrine, repeat lactate: <span class="highlight">3.6 mmol/L</span> (25% clearance).</p><p>Lactate clearance is a key marker of resuscitation adequacy.</p></div>
+        <div class="socratic-prompt"><h4>Lactate Physiology</h4><p>Why is lactate elevated in sepsis, and what does clearance tell us?</p></div>`,
+        hint_beginner: "Lactate comes from anaerobic metabolism when tissues don't get enough oxygen.",
+        hint_advanced: "What's the difference between Type A and Type B lactic acidosis in sepsis?",
+        question: {
+            prompt: "What is the resuscitation TARGET for lactate in sepsis?",
+            options: [
+                { text: "Normalize lactate OR decrease by ≥10% every 2 hours", correct: true },
+                { text: "Any decrease in lactate is acceptable", correct: false },
+                { text: "Lactate <4 mmol/L is the only goal", correct: false },
+                { text: "Lactate monitoring is not recommended in current guidelines", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Goal is normalization OR ≥10% decrease every 2 hours. Lactate clearance predicts survival better than absolute values. If lactate isn't clearing, reassess: Is source controlled? Is cardiac output adequate? Are antibiotics appropriate?",
+                incorrect: "The target is lactate normalization OR ≥10% decrease every 2 hours. Lactate clearance reflects tissue perfusion and is a key resuscitation endpoint. Persistent elevation despite intervention suggests ongoing shock."
+            },
+            teaching: `<div class="mechanism-box"><div class="mechanism-title">🧬 Lactate in Sepsis</div><div class="pathway"><strong>Type A (hypoxic):</strong>
+Tissue hypoperfusion → anaerobic metabolism
+→ Pyruvate shunted to lactate
+
+<strong>Type B (non-hypoxic):</strong>
+• Catecholamine-driven aerobic glycolysis
+• Impaired hepatic lactate clearance  
+• Mitochondrial dysfunction
+• Medications (metformin, epinephrine)
+
+Higher lactate = higher mortality
+Lactate ≥4 = ~30% mortality</div></div>`,
+            why_chain: [{q: "Why use lactate instead of ScvO2?", a: "ANDROMEDA-SHOCK (2019): Lactate-guided was non-inferior to ScvO2-guided, with trend toward better outcomes. Lactate is simpler - no central line required for measurement."}, {q: "Can lactate be falsely elevated?", a: "Yes - metformin, epinephrine infusions, liver failure, seizures, and intense muscular activity can elevate lactate independent of tissue hypoperfusion."}],
+            points: 10
+        }
+    },
+    {
+        title: "Refractory Shock",
+        content: `<div class="narrative"><p>Despite fluids and norepinephrine at 0.4 mcg/kg/min, MAP remains 60. Vasopressin 0.03 units/min has been added. The patient is still hypotensive.</p><p>This is <span class="critical">refractory septic shock</span>.</p></div>
+        <div class="socratic-prompt"><h4>Adjunctive Therapies</h4><p>What adjunctive therapy should be considered when vasopressors are escalating or shock is not responding?</p></div>`,
+        hint_beginner: "Steroids can help restore vascular tone by increasing sensitivity to catecholamines.",
+        hint_advanced: "What's the evidence from CORTICUS, ADRENAL, and APROCCHSS trials?",
+        question: {
+            prompt: "What is the recommended steroid regimen for refractory septic shock?",
+            options: [
+                { text: "Methylprednisolone 125mg IV x1", correct: false },
+                { text: "Hydrocortisone 50mg IV q6h (200mg/day)", correct: true },
+                { text: "Dexamethasone 10mg IV daily", correct: false },
+                { text: "Prednisone 60mg PO daily", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Hydrocortisone 200mg/day (50mg q6h or continuous infusion) is the recommended regimen. It speeds shock reversal and may reduce mortality (APROCCHSS trial). Continue until vasopressors are discontinued.",
+                incorrect: "Hydrocortisone 200mg/day (not methylprednisolone or dexamethasone) is recommended. It provides both glucocorticoid and mineralocorticoid activity. The dose is physiologic replacement, not high-dose."
+            },
+            teaching: `<h4>Steroids in Septic Shock</h4><table class="comparison-table"><tr><th>Trial</th><th>Finding</th></tr><tr><td>CORTICUS (2008)</td><td>No mortality benefit; faster shock reversal</td></tr><tr><td>ADRENAL (2018)</td><td>No 90-day mortality benefit</td></tr><tr><td>APROCCHSS (2018)</td><td>↓ 90-day mortality with hydrocortisone + fludrocortisone</td></tr></table><div class="mechanism-box"><div class="mechanism-title">🧬 Why Steroids Help</div><div class="pathway">Critical illness-related corticosteroid insufficiency:
+• Adrenal reserve exhausted
+• Tissue resistance to cortisol
+
+Hydrocortisone:
+• Restores vascular catecholamine sensitivity
+• Reduces inflammatory response
+• Speeds shock reversal</div></div>`,
+            why_chain: [{q: "Do steroids improve survival?", a: "Evidence is mixed. They consistently speed shock reversal. APROCCHSS showed mortality benefit; ADRENAL did not. Guidelines recommend considering steroids if shock is refractory or vasopressors are escalating."}, {q: "Should you do a cosyntropin stimulation test first?", a: "No. Response to cosyntropin doesn't predict who benefits from steroids. Treat based on clinical picture (refractory shock), not cortisol levels."}],
+            points: 10
+        }
+    },
+    {
+        title: "Troubleshooting Refractory Shock",
+        content: `<div class="narrative"><p>The patient remains hypotensive. Before escalating further, you must think systematically about why shock is refractory.</p></div>
+        <div class="socratic-prompt"><h4>Differential Diagnosis</h4><p>What are the causes of persistent hypotension despite appropriate sepsis management?</p></div>`,
+        hint_beginner: "Think: Uncontrolled source, wrong antibiotics, wrong diagnosis, cardiac dysfunction.",
+        hint_advanced: "How do you differentiate distributive shock with cardiac dysfunction from primary cardiogenic shock?",
+        question: {
+            prompt: "Which cause of refractory septic shock requires BEDSIDE ECHO to diagnose?",
+            options: [
+                { text: "Resistant organism", correct: false },
+                { text: "Uncontrolled source", correct: false },
+                { text: "Septic cardiomyopathy or occult cardiac tamponade", correct: true },
+                { text: "Adrenal insufficiency", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! Bedside echo can reveal septic cardiomyopathy (reduced EF from myocardial depression) or cardiac tamponade (effusion with RV collapse). Both change management - add inotropes for cardiomyopathy, pericardiocentesis for tamponade.",
+                incorrect: "Bedside echo diagnoses septic cardiomyopathy and pericardial tamponade. These conditions require different interventions (inotropes vs pericardiocentesis) and won't respond to standard sepsis management."
+            },
+            teaching: `<h4>Causes of Refractory Septic Shock</h4><ul style="line-height:2;margin-left:20px;"><li><strong>Inadequate source control</strong> - undrained abscess, necrotic tissue</li><li><strong>Wrong antibiotics</strong> - resistant organism, fungal infection</li><li><strong>Wrong diagnosis</strong> - not sepsis (cardiogenic, hemorrhagic, PE)</li><li><strong>Septic cardiomyopathy</strong> - myocardial depression (reversible)</li><li><strong>Adrenal insufficiency</strong> - give hydrocortisone empirically</li><li><strong>Occult bleeding</strong> - check H/H, consider CT</li><li><strong>Fluid overload</strong> - causing pulmonary edema, poor cardiac output</li></ul>`,
+            why_chain: [{q: "How common is septic cardiomyopathy?", a: "20-40% of septic shock patients have some degree of myocardial depression. It's usually reversible over days. Dobutamine or epinephrine can be added for inotropy."}, {q: "When should you suspect a resistant organism?", a: "No clinical improvement at 48-72 hours despite appropriate source control. Consider broadening antibiotics, adding fungal coverage, or consulting ID."}],
+            points: 10
+        }
+    },
+    {
+        title: "De-escalation",
+        content: `<div class="narrative"><p>After 72 hours, the patient has stabilized. Blood cultures grew <span class="highlight">E. coli</span> (susceptible to ceftriaxone). Abscess was drained. Vasopressors are weaned.</p><p>Time to narrow antibiotics.</p></div>
+        <div class="socratic-prompt"><h4>Antibiotic Stewardship</h4><p>When and how should you de-escalate antibiotics in sepsis?</p></div>`,
+        hint_beginner: "Once you know the organism and source, narrow to the smallest spectrum antibiotic that works.",
+        hint_advanced: "What role does procalcitonin play in guiding antibiotic duration?",
+        question: {
+            prompt: "What antibiotic change is appropriate now that E. coli susceptibilities are known?",
+            options: [
+                { text: "Continue vancomycin + pip-tazo for full 14-day course", correct: false },
+                { text: "Stop vancomycin, narrow to ceftriaxone (E. coli susceptible)", correct: true },
+                { text: "Switch to oral ciprofloxacin immediately", correct: false },
+                { text: "Add gentamicin for synergy", correct: false }
+            ],
+            explanation: {
+                correct: "Correct! De-escalation: Stop unnecessary antibiotics (vancomycin - no MRSA), narrow spectrum based on susceptibilities. Ceftriaxone covers this E. coli. This reduces C. diff risk, resistance selection, and costs.",
+                incorrect: "De-escalation is essential. Vancomycin can stop (no MRSA grown). Pip-tazo can narrow to ceftriaxone (covers E. coli, less broad). This reduces adverse effects and resistance development."
+            },
+            teaching: `<h4>De-escalation Principles</h4><ul style="line-height:2;margin-left:20px;"><li><strong>Culture-directed</strong> - narrow based on susceptibilities</li><li><strong>Stop unnecessary coverage</strong> - if no MRSA, stop vancomycin</li><li><strong>Shortest effective duration</strong> - 7 days often sufficient for many infections</li><li><strong>Procalcitonin-guided</strong> - can help determine when to stop</li></ul><div class="mechanism-box"><div class="mechanism-title">🧬 Procalcitonin for Duration</div><div class="pathway">Procalcitonin rises with bacterial infection
+Falls with successful treatment
+
+Use to guide stopping antibiotics:
+• If PCT <0.5 or ↓ >80% from peak
+• Consider stopping antibiotics
+• Reduces antibiotic exposure ~2 days</div></div>`,
+            why_chain: [{q: "How long should antibiotics continue?", a: "Depends on source. Bacteremia: 7-14 days. Pyelonephritis: 7-14 days (complicated). Pneumonia: 5-7 days. Intra-abdominal with source control: 4-7 days. Shorter courses are often effective."}, {q: "When is procalcitonin NOT helpful?", a: "Non-bacterial infections (viral, fungal), localized infections without systemic response, and chronic infections may not elevate PCT reliably."}],
+            points: 10
+        }
+    },
+    {
+        title: "Case Complete",
+        content: `<div class="completion">
+            <h2 style="font-size:2rem;margin-bottom:20px">🏆 Case Complete!</h2>
+            <p style="font-size:1.2rem;opacity:0.9;margin-bottom:30px">You successfully managed septic shock from urosepsis with perinephric abscess.</p>
+            <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:24px;text-align:left;max-width:500px;margin:0 auto;">
+                <h3 style="margin-bottom:16px;color:#fca5a5;">Key Takeaways</h3>
+                <ul style="line-height:2;margin-left:20px;">
+                    <li>Sepsis = infection + organ dysfunction (SOFA ≥2)</li>
+                    <li>Hour-1 Bundle: Lactate, cultures, abx, fluids, vasopressors</li>
+                    <li>Norepinephrine is first-line vasopressor</li>
+                    <li>Source control is essential - drain abscesses!</li>
+                    <li>Lactate clearance guides resuscitation</li>
+                    <li>Hydrocortisone 200mg/day for refractory shock</li>
+                    <li>De-escalate antibiotics based on cultures</li>
+                </ul>
+            </div>
+        </div>`,
+        hint_beginner: "",
+        hint_advanced: "",
+        question: null
+    }
+];
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateHints();
+}
+
+function updateHints() {
+    document.querySelectorAll('.hint-beginner').forEach(h => h.style.display = difficulty === 'beginner' ? 'block' : 'none');
+    document.querySelectorAll('.hint-advanced').forEach(h => h.style.display = difficulty === 'advanced' ? 'block' : 'none');
+}
+
+function renderStage() {
+    const stage = stages[currentStage];
+    const progress = ((currentStage + 1) / stages.length) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+    
+    let html = `<div class="scene"><div class="scene-header">
+        <div class="scene-phase">Stage ${currentStage + 1} of ${stages.length}</div>
+        <div class="scene-title">${stage.title}</div></div>`;
+    
+    if (stage.hint_beginner) {
+        html += `<div class="hint-beginner" style="display:${difficulty === 'beginner' ? 'block' : 'none'}">🌱 <strong>Beginner Hint:</strong> ${stage.hint_beginner}</div>`;
+    }
+    if (stage.hint_advanced) {
+        html += `<div class="hint-advanced" style="display:${difficulty === 'advanced' ? 'block' : 'none'}">🎯 <strong>Advanced Challenge:</strong> ${stage.hint_advanced}</div>`;
+    }
+    
+    html += stage.content;
+    
+    if (stage.question) {
+        const qId = `q${currentStage}`;
+        const answered = answeredQuestions.has(qId);
+        html += `<div class="question-box"><div class="question-prompt">${stage.question.prompt}</div><div class="mcq-options">`;
+        stage.question.options.forEach((opt, i) => {
+            const letter = String.fromCharCode(65 + i);
+            let classes = 'mcq-option';
+            if (answered) {
+                classes += ' disabled';
+                if (opt.correct) classes += ' correct';
+                else if (decisionPath[currentStage] === i && !opt.correct) classes += ' incorrect';
+            }
+            html += `<div class="${classes}" onclick="selectOption(${i}, ${opt.correct})">
+                <div class="option-letter">${letter}</div><div>${opt.text}</div></div>`;
+        });
+        html += '</div>';
+        
+        html += `<div class="feedback ${answered ? 'show' : ''} ${answered ? (stage.question.options[decisionPath[currentStage]]?.correct ? 'correct-feedback' : 'incorrect-feedback') : ''}">
+            <div class="feedback-title">${answered && stage.question.options[decisionPath[currentStage]]?.correct ? '✓ Correct!' : '✗ Not quite'}</div>
+            <p>${answered ? (stage.question.options[decisionPath[currentStage]]?.correct ? stage.question.explanation.correct : stage.question.explanation.incorrect) : ''}</p></div>`;
+        
+        if (stage.question.teaching) {
+            html += `<div class="teaching-point ${answered ? 'show' : ''}">${stage.question.teaching}</div>`;
+        }
+        
+        if (stage.question.why_chain) {
+            html += `<div class="why-chain ${answered ? 'show' : ''}"><h4>🔗 Why Chain - Deeper Understanding</h4>`;
+            stage.question.why_chain.forEach(item => {
+                html += `<div class="why-item"><div class="why-q">Q: ${item.q}</div><div class="why-a">${item.a}</div></div>`;
+            });
+            html += '</div>';
+        }
+        
+        html += `<button class="btn ${answered ? 'show' : ''}" onclick="nextStage()">Continue →</button></div>`;
+    } else {
+        html += `<div style="text-align:center;margin-top:24px;"><p style="font-size:1.2rem;">Final Score: <strong>${score}</strong> / ${maxScore}</p></div>`;
+    }
+    
+    html += '</div>';
+    document.getElementById('scene-container').innerHTML = html;
+}
+
+function selectOption(index, correct) {
+    const qId = `q${currentStage}`;
+    if (answeredQuestions.has(qId)) return;
+    
+    answeredQuestions.add(qId);
+    decisionPath[currentStage] = index;
+    
+    const stage = stages[currentStage];
+    maxScore += stage.question.points;
+    if (correct) score += stage.question.points;
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    renderStage();
+}
+
+function nextStage() {
+    if (currentStage < stages.length - 1) {
+        currentStage++;
+        renderStage();
+        window.scrollTo(0, 0);
+    }
+}
+
+// Initialize
+stages.forEach(s => { if (s.question) maxScore += s.question.points; });
+maxScore = 0; // Reset - will accumulate as questions are answered
+document.getElementById('maxScore').textContent = '0';
+renderStage();
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="Sepsis & Septic Shock"
+         data-key-points="🏆 Case Complete!, Key Takeaways, 📊 Your Decision Path, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

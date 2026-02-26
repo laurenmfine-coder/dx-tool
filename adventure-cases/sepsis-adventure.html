@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Auth Guard - Redirect if not logged in
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Golden Hour | Sepsis Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #F59E0B; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #78350F 0%, #92400E 50%, #B45309 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        
+        /* Header */
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        
+        /* Main Layout */
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        
+        /* Cards */
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        
+        /* Narrative */
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .narrative .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        
+        /* Vitals */
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        
+        /* Choices */
+        .choices { display: grid; gap: 12px; margin-top: 24px; }
+        .choice-btn { background: var(--card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; text-align: left; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .choice-btn:hover { border-color: var(--accent); background: rgba(245,158,11,0.1); transform: translateX(4px); }
+        .choice-icon { font-size: 1.5rem; }
+        .choice-text { flex: 1; }
+        .choice-title { font-weight: 600; margin-bottom: 2px; }
+        .choice-desc { font-size: 0.85rem; color: var(--muted); }
+        
+        /* Alerts */
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.info { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        
+        /* Outcome */
+        .outcome { text-align: center; padding: 40px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .outcome.good .outcome-title { color: var(--success); }
+        .outcome.bad .outcome-title { color: var(--danger); }
+        .outcome-desc { color: var(--muted); max-width: 500px; margin: 0 auto 24px; }
+        
+        /* Buttons */
+        .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { background: #D97706; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn-secondary:hover { border-color: var(--accent); }
+        
+        /* Timer Animation */
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .timer-critical { animation: pulse 1s infinite; color: var(--danger); }
+        
+        /* Lab Results */
+        .lab-results { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); }
+        .lab-row:last-child { border-bottom: none; }
+        .lab-name { color: var(--muted); }
+        .lab-value { font-family: monospace; font-weight: 600; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.warning { color: var(--warning); }
+        
+        /* Progress Bar */
+        .bundle-progress { margin: 20px 0; }
+        .bundle-title { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; }
+        .bundle-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .bundle-fill { height: 100%; background: var(--success); transition: width 0.5s; }
+        .bundle-items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .bundle-item { font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); }
+        .bundle-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
+    </style>
+    <link rel="stylesheet" href="dx-case-nav.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">
+                🦠 The Golden Hour
+                <span class="badge">SEPSIS</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <div class="stat-value" id="timer">00:00</div>
+                    <div class="stat-label">Time Elapsed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="bundleCount">0/6</div>
+                    <div class="stat-label">Bundle Items</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div id="stageContainer"></div>
+    </main>
+
+    <script>
+    // Game State
+    const state = {
+        stage: 'arrival',
+        timeElapsed: 0,
+        bundleComplete: {
+            lactate: false,
+            cultures: false,
+            antibiotics: false,
+            fluids: false,
+            vasopressors: false,
+            repeat_lactate: false
+        },
+        decisions: [],
+        patientStatus: 'unstable' // stable, unstable, critical, deceased
+    };
+
+    // Timer
+    let timerInterval;
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            state.timeElapsed++;
+            const mins = Math.floor(state.timeElapsed / 60);
+            const secs = state.timeElapsed % 60;
+            const timerEl = document.getElementById('timer');
+            timerEl.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+            
+            // Critical after 60 minutes
+            if (state.timeElapsed >= 3600 && !timerEl.classList.contains('timer-critical')) {
+                timerEl.classList.add('timer-critical');
+            }
+        }, 1000);
+    }
+
+    function updateBundleCount() {
+        const done = Object.values(state.bundleComplete).filter(v => v).length;
+        document.getElementById('bundleCount').textContent = `${done}/6`;
+    }
+
+    function getBundleHTML() {
+        const items = [
+            { key: 'lactate', label: 'Lactate' },
+            { key: 'cultures', label: 'Blood Cultures' },
+            { key: 'antibiotics', label: 'Antibiotics' },
+            { key: 'fluids', label: '30mL/kg Fluids' },
+            { key: 'vasopressors', label: 'Vasopressors (if needed)' },
+            { key: 'repeat_lactate', label: 'Repeat Lactate' }
+        ];
+        return `
+            <div class="bundle-progress">
+                <div class="bundle-title">SEP-1 Bundle Progress (Target: &lt;1 hour)</div>
+                <div class="bundle-bar">
+                    <div class="bundle-fill" style="width: ${Object.values(state.bundleComplete).filter(v=>v).length / 6 * 100}%"></div>
+                </div>
+                <div class="bundle-items">
+                    ${items.map(i => `<span class="bundle-item ${state.bundleComplete[i.key] ? 'done' : ''}">${state.bundleComplete[i.key] ? '✓' : '○'} ${i.label}</span>`).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // Stages
+    const stages = {
+        arrival: {
+            phase: 'Initial Presentation',
+            title: 'EMS Notification',
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Incoming Patient</div>
+                        <div class="card-title">🚨 EMS Radio Call</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="narrative">
+                            <strong>EMS Radio:</strong> "County General, Medic 7. We're 5 minutes out with a <span class="hl">78-year-old female</span> from Sunny Acres Nursing Home. Staff called for <span class="hl">altered mental status and fever</span>. She was fine at breakfast, found confused at lunch. 
+                            <br><br>
+                            Vitals en route: <span class="hl">Temp 101.8°F, HR 112, BP 88/54, RR 24, SpO2 93% on room air</span>. She's got a Foley catheter in place. Staff says she's had a cough for a few days. We've got her on 2L NC, IV established."
+                        </div>
+                        
+                        <div class="vitals-grid">
+                            <div class="vital warning"><div class="vital-label">Temp</div><div class="vital-value">101.8°F</div></div>
+                            <div class="vital warning"><div class="vital-label">HR</div><div class="vital-value">112</div></div>
+                            <div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">88/54</div></div>
+                            <div class="vital warning"><div class="vital-label">RR</div><div class="vital-value">24</div></div>
+                            <div class="vital warning"><div class="vital-label">SpO2</div><div class="vital-value">93%</div></div>
+                        </div>
+
+                        <div class="alert warning">
+                            <span class="alert-icon">⚠️</span>
+                            <div>
+                                <div class="alert-title">Clinical Decision Point</div>
+                                <div class="alert-desc">This patient meets SIRS criteria (fever, tachycardia, tachypnea) with suspected infection and hypotension. What's your immediate priority?</div>
+                            </div>
+                        </div>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('arrival', 'sepsis_alert')">
+                                <span class="choice-icon">🚨</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Activate Sepsis Alert</div>
+                                    <div class="choice-desc">Call for sepsis protocol, mobilize team for rapid intervention</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('arrival', 'wait_assessment')">
+                                <span class="choice-icon">📋</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Complete Assessment First</div>
+                                    <div class="choice-desc">Do a thorough exam and get labs before making any calls</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('arrival', 'fluids_only')">
+                                <span class="choice-icon">💧</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Just Start Fluids</div>
+                                    <div class="choice-desc">She's probably just dehydrated - give a liter of saline and reassess</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        sepsis_activated: {
+            phase: 'Hour One',
+            title: 'Sepsis Protocol Initiated',
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Sepsis Alert Activated</div>
+                        <div class="card-title">⏱️ The Clock Starts Now</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert success">
+                            <span class="alert-icon">✓</span>
+                            <div>
+                                <div class="alert-title">Good Call!</div>
+                                <div class="alert-desc">Early sepsis recognition is critical. The sepsis team is assembling. You now have access to expedited labs and pharmacy support.</div>
+                            </div>
+                        </div>
+
+                        ${getBundleHTML()}
+
+                        <div class="narrative">
+                            The patient arrives. She's lethargic but rousable, oriented only to self. Skin is warm and flushed. You note <span class="hl">decreased breath sounds at the right base</span> and <span class="hl">cloudy urine in the Foley bag</span>.
+                            <br><br>
+                            The sepsis nurse is ready to draw labs. What do you order?
+                        </div>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('sepsis_activated', 'full_workup')">
+                                <span class="choice-icon">🧪</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Full Sepsis Workup</div>
+                                    <div class="choice-desc">Lactate, blood cultures x2, CBC, BMP, UA, procalcitonin, chest X-ray</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('sepsis_activated', 'basic_labs')">
+                                <span class="choice-icon">📋</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Basic Labs Only</div>
+                                    <div class="choice-desc">CBC and BMP for now, add more later if needed</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        labs_ordered: {
+            phase: 'Hour One',
+            title: 'Initial Results',
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Lab Results</div>
+                        <div class="card-title">📊 Critical Values</div>
+                    </div>
+                    <div class="card-body">
+                        ${getBundleHTML()}
+
+                        <div class="lab-results">
+                            <div class="lab-row"><span class="lab-name">Lactate</span><span class="lab-value critical">4.8 mmol/L</span></div>
+                            <div class="lab-row"><span class="lab-name">WBC</span><span class="lab-value warning">18.2 K/uL</span></div>
+                            <div class="lab-row"><span class="lab-name">Creatinine</span><span class="lab-value warning">2.1 mg/dL (baseline 0.9)</span></div>
+                            <div class="lab-row"><span class="lab-name">Glucose</span><span class="lab-value">186 mg/dL</span></div>
+                            <div class="lab-row"><span class="lab-name">Procalcitonin</span><span class="lab-value critical">8.4 ng/mL</span></div>
+                        </div>
+
+                        <div class="alert danger">
+                            <span class="alert-icon">🚨</span>
+                            <div>
+                                <div class="alert-title">Lactate &gt; 4 mmol/L = Septic Shock</div>
+                                <div class="alert-desc">This patient has septic shock with evidence of end-organ dysfunction (elevated lactate, AKI). Time is critical.</div>
+                            </div>
+                        </div>
+
+                        <div class="narrative">
+                            Blood cultures are drawn and sent. The nurse asks about antibiotics and fluids. Current BP is still <span class="hl">86/52</span> despite the 500mL bolus EMS gave.
+                            <br><br>
+                            What's your next move?
+                        </div>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('labs_ordered', 'abx_fluids')">
+                                <span class="choice-icon">💊💧</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Broad Antibiotics + Aggressive Fluids</div>
+                                    <div class="choice-desc">Vanc + piperacillin-tazobactam (Zosyn) + 30mL/kg crystalloid bolus (about 2L for this patient)</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('labs_ordered', 'wait_cultures')">
+                                <span class="choice-icon">🧫</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Wait for Culture Results</div>
+                                    <div class="choice-desc">Targeted therapy is better than broad spectrum - wait 24-48h for cultures</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('labs_ordered', 'narrow_abx')">
+                                <span class="choice-icon">💊</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Narrow Antibiotics Only</div>
+                                    <div class="choice-desc">Probably UTI - just give ceftriaxone and see how she does</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        treatment_started: {
+            phase: 'Hour One',
+            title: 'Treatment Response',
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">30 Minutes Later</div>
+                        <div class="card-title">📈 Reassessment</div>
+                    </div>
+                    <div class="card-body">
+                        ${getBundleHTML()}
+
+                        <div class="narrative">
+                            The patient has received <span class="hl">2 liters of crystalloid</span> and her first doses of vancomycin and piperacillin-tazobactam. Chest X-ray shows a <span class="hl">right lower lobe infiltrate</span>. UA shows pyuria and bacteriuria.
+                            <br><br>
+                            Current vitals after fluids:
+                        </div>
+
+                        <div class="vitals-grid">
+                            <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">101.2°F</div></div>
+                            <div class="vital warning"><div class="vital-label">HR</div><div class="vital-value">108</div></div>
+                            <div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">82/48</div></div>
+                            <div class="vital"><div class="vital-label">MAP</div><div class="vital-value critical">59</div></div>
+                            <div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">96%</div></div>
+                            <div class="vital"><div class="vital-label">Urine</div><div class="vital-value warning">15 mL/hr</div></div>
+                        </div>
+
+                        <div class="alert danger">
+                            <span class="alert-icon">⚠️</span>
+                            <div>
+                                <div class="alert-title">Fluid-Refractory Hypotension</div>
+                                <div class="alert-desc">MAP &lt;65 despite 30mL/kg fluids. This is persistent septic shock requiring vasopressor support.</div>
+                            </div>
+                        </div>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('treatment_started', 'start_pressors')">
+                                <span class="choice-icon">💉</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Start Norepinephrine</div>
+                                    <div class="choice-desc">Begin vasopressor through peripheral IV while central line is placed</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('treatment_started', 'more_fluids')">
+                                <span class="choice-icon">💧</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">More Fluids First</div>
+                                    <div class="choice-desc">Give another 2 liters before starting pressors</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('treatment_started', 'wait_central')">
+                                <span class="choice-icon">⏳</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Wait for Central Line</div>
+                                    <div class="choice-desc">Vasopressors are dangerous through peripheral IVs - wait for central access</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        pressors_started: {
+            phase: 'Hour Two',
+            title: 'Stabilization',
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">One Hour After Pressors</div>
+                        <div class="card-title">📊 Bundle Completion</div>
+                    </div>
+                    <div class="card-body">
+                        ${getBundleHTML()}
+
+                        <div class="alert success">
+                            <span class="alert-icon">✓</span>
+                            <div>
+                                <div class="alert-title">Patient Responding</div>
+                                <div class="alert-desc">Norepinephrine at 8 mcg/min. MAP now 68. Mental status improving - she's following commands.</div>
+                            </div>
+                        </div>
+
+                        <div class="vitals-grid">
+                            <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">100.4°F</div></div>
+                            <div class="vital"><div class="vital-label">HR</div><div class="vital-value">96</div></div>
+                            <div class="vital"><div class="vital-label">BP</div><div class="vital-value">98/62</div></div>
+                            <div class="vital"><div class="vital-label">MAP</div><div class="vital-value">68</div></div>
+                            <div class="vital"><div class="vital-label">Urine</div><div class="vital-value">35 mL/hr</div></div>
+                        </div>
+
+                        <div class="narrative">
+                            Time for the last step in the bundle - a repeat lactate to assess clearance. The lab calls with the result: <span class="hl">Lactate 2.4 mmol/L</span> (down from 4.8).
+                            <br><br>
+                            Excellent - that's >10% clearance. The bundle is complete within the golden hour.
+                        </div>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('pressors_started', 'good_outcome')">
+                                <span class="choice-icon">✓</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Continue to Outcome</div>
+                                    <div class="choice-desc">See how this case resolves</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        // OUTCOMES
+        good_outcome: {
+            isOutcome: true,
+            outcome: 'good',
+            title: 'Patient Survived',
+            render: () => `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome good">
+                            <div class="outcome-icon">🎉</div>
+                            <div class="outcome-title">Excellent Outcome!</div>
+                            <div class="outcome-desc">
+                                Mrs. Patterson was admitted to the ICU and weaned off vasopressors within 36 hours. Blood cultures grew E. coli (UTI source) and sputum grew Streptococcus pneumoniae (pneumonia). She was stepped down to the floor on day 4 and discharged to rehab on day 7.
+                            </div>
+                        </div>
+
+                        <div class="alert success">
+                            <span class="alert-icon">📊</span>
+                            <div>
+                                <div class="alert-title">Your Performance</div>
+                                <div class="alert-desc">
+                                    Bundle completion: ${Object.values(state.bundleComplete).filter(v=>v).length}/6 items<br>
+                                    Time to antibiotics: &lt;1 hour ✓<br>
+                                    Lactate clearance achieved ✓
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="narrative">
+                            <strong>Key Learning Points:</strong>
+                            <ul style="margin-top: 12px; margin-left: 20px;">
+                                <li>Early sepsis recognition with SIRS criteria + suspected infection</li>
+                                <li>Lactate >4 defines septic shock</li>
+                                <li>SEP-1 bundle: cultures, lactate, antibiotics, fluids within 1 hour</li>
+                                <li>Vasopressors for fluid-refractory hypotension (can start peripherally)</li>
+                                <li>Repeat lactate to assess clearance</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="location.reload()">Play Again</button>
+                            <button class="btn btn-secondary" onclick="location.href='deep-dive-hub.html?case=sepsis'">📚 Review Sepsis Deep Dive</button>
+                            <button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Back to Adventures</button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        bad_outcome_delayed: {
+            isOutcome: true,
+            outcome: 'bad',
+            title: 'Poor Outcome',
+            render: () => `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome bad">
+                            <div class="outcome-icon">💔</div>
+                            <div class="outcome-title">Patient Deteriorated</div>
+                            <div class="outcome-desc">
+                                By the time antibiotics were started, the patient had developed worsening shock and multi-organ failure. She required intubation and high-dose vasopressors. Despite aggressive care, she passed away 48 hours later.
+                            </div>
+                        </div>
+
+                        <div class="alert danger">
+                            <span class="alert-icon">⚠️</span>
+                            <div>
+                                <div class="alert-title">What Went Wrong</div>
+                                <div class="alert-desc">
+                                    Delayed recognition and treatment of sepsis. Each hour of delayed antibiotics increases mortality by ~7.6%. The SEP-1 bundle exists because timing matters.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
+                            <button class="btn btn-secondary" onclick="location.href='deep-dive-hub.html?case=sepsis'">📚 Review Sepsis Deep Dive</button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        bad_outcome_fluids: {
+            isOutcome: true,
+            outcome: 'bad',
+            title: 'Fluid Overload',
+            render: () => `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome bad">
+                            <div class="outcome-icon">💔</div>
+                            <div class="outcome-title">Iatrogenic Harm</div>
+                            <div class="outcome-desc">
+                                Continued aggressive fluids without vasopressors led to massive fluid overload. The patient developed pulmonary edema and required emergent intubation. Her course was complicated and prolonged.
+                            </div>
+                        </div>
+
+                        <div class="alert danger">
+                            <span class="alert-icon">⚠️</span>
+                            <div>
+                                <div class="alert-title">Learning Point</div>
+                                <div class="alert-desc">
+                                    After 30mL/kg of crystalloid, if hypotension persists, the answer is vasopressors - not more fluids. Fluid overload increases mortality in sepsis.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
+                            <button class="btn btn-secondary" onclick="location.href='deep-dive-hub.html?case=sepsis'">📚 Review Sepsis Deep Dive</button>
+                        </div>
+                    </div>
+                </div>
+            `
+        }
+    };
+
+    // Choice Handler
+    function choose(stage, choice) {
+        state.decisions.push({ stage, choice, time: state.timeElapsed });
+
+        const transitions = {
+            'arrival': {
+                'sepsis_alert': () => {
+                    goTo('sepsis_activated');
+                },
+                'wait_assessment': () => {
+                    // Delay leads to worse outcome
+                    setTimeout(() => goTo('bad_outcome_delayed'), 500);
+                },
+                'fluids_only': () => {
+                    setTimeout(() => goTo('bad_outcome_delayed'), 500);
+                }
+            },
+            'sepsis_activated': {
+                'full_workup': () => {
+                    state.bundleComplete.lactate = true;
+                    state.bundleComplete.cultures = true;
+                    updateBundleCount();
+                    goTo('labs_ordered');
+                },
+                'basic_labs': () => {
+                    // Incomplete workup delays care
+                    goTo('labs_ordered');
+                }
+            },
+            'labs_ordered': {
+                'abx_fluids': () => {
+                    state.bundleComplete.antibiotics = true;
+                    state.bundleComplete.fluids = true;
+                    updateBundleCount();
+                    goTo('treatment_started');
+                },
+                'wait_cultures': () => {
+                    goTo('bad_outcome_delayed');
+                },
+                'narrow_abx': () => {
+                    // Narrow coverage for this sick patient is risky
+                    state.bundleComplete.fluids = true;
+                    goTo('treatment_started');
+                }
+            },
+            'treatment_started': {
+                'start_pressors': () => {
+                    state.bundleComplete.vasopressors = true;
+                    state.bundleComplete.repeat_lactate = true;
+                    updateBundleCount();
+                    goTo('pressors_started');
+                },
+                'more_fluids': () => {
+                    goTo('bad_outcome_fluids');
+                },
+                'wait_central': () => {
+                    // Delay in pressors worsens outcome
+                    goTo('bad_outcome_delayed');
+                }
+            },
+            'pressors_started': {
+                'good_outcome': () => {
+                    goTo('good_outcome');
+                }
+            }
+        };
+
+        if (transitions[stage] && transitions[stage][choice]) {
+            transitions[stage][choice]();
+        }
+    }
+
+    function goTo(stageId) {
+        state.stage = stageId;
+        render();
+    }
+
+    function render() {
+        const stage = stages[state.stage];
+        if (!stage) return;
+
+        if (stage.isOutcome) {
+            clearInterval(timerInterval);
+        }
+
+        document.getElementById('stageContainer').innerHTML = stage.render();
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        startTimer();
+        render();
+    });
+    </script>
+    <script src="dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init(); });</script>
+
+    <!-- DxSuite AI Tutor Integration -->
+    <div data-dx-tutor
+         data-module-title="The Golden Hour"
+         data-key-points="clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="dx-ai-tutor.js"></script>
+
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
+<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/33081529/" target="_blank" style="color:#7dd3fc">ACLS Algorithm - AHA</a> — Circulation 2020</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK531492/" target="_blank" style="color:#7dd3fc">Shock Management - NCBI</a> — StatPearls</li></ul>
+<p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
+</div>
+
+<script src="../../dx-progress.js"></script>
+<script src="dx-adventure-tracker.js"></script>
+<script src="../../dx-cross-links.js"></script>
+<script src="../../data/rdx-persist.js"></script>
+
+<script src="../../dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

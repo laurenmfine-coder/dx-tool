@@ -1,7 +1,22 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css"><meta name="description" content="In-depth clinical case study: Atopic Dermatitis. Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Atopic Dermatitis | ReasonDx</title><link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
 </script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 ", text: "IgE testing will tell you which foods to eliminate", outcome: "Overinterpretation of testing", feedback: "Positive IgE tests indicate sensitization, NOT clinical allergy. Many AD patients have positive tests to foods they tolerate. Elimination based only on IgE testing leads to unnecessary restrictions.", points: 4, isOptimal: false }
@@ -96,7 +111,7 @@
                 <div class="bg-white rounded-2xl shadow-lg p-6">
                     <div class="${pc} p-4 rounded-xl mb-6"><span class="font-bold">${lb}</span> • ${opt.points}pts<p class="font-semibold mt-2">${opt.outcome}</p></div>
                     <div class="bg-rose-50 rounded-xl p-4 mb-6">${opt.feedback}</div>
-                    <div class="why-chain rounded-xl p-4 mb-6"><h3 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h3>${stage.whyChain.steps.map((s,i)=>`<div class="flex gap-2"><span class="text-blue-500 font-bold">${i+1}.</span>${s}</div>`).join('')}</div>
+                    <div class="why-chain rounded-xl p-4 mb-6"><h3 class="font-bold text-teal-800 mb-3">🔗 ${stage.whyChain.title}</h3>${stage.whyChain.steps.map((s,i)=>`<div class="flex gap-2"><span class="text-teal-500 font-bold">${i+1}.</span>${s}</div>`).join('')}</div>
                     <div class="mechanism-box rounded-xl p-4 mb-6"><h3 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h3><pre class="whitespace-pre-wrap font-sans text-sm">${stage.mechanism.content}</pre></div>
                     <div class="grid md:grid-cols-2 gap-4 mb-6">
                         <div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-sm">${stage.pearl}</p></div>
@@ -111,7 +126,7 @@
             const p = document.getElementById('summaryPanel'); p.classList.remove('hidden');
             const pct = Math.round(totalScore/maxScore*100);
             const gr = pct>=90?'Outstanding!':pct>=80?'Excellent!':pct>=70?'Good!':'Keep Learning!';
-            const gc = pct>=90?'text-green-600':pct>=80?'text-blue-600':pct>=70?'text-yellow-600':'text-red-600';
+            const gc = pct>=90?'text-green-600':pct>=80?'text-teal-600':pct>=70?'text-amber-700':'text-red-600';
             p.innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-6">
                 <h2 class="text-2xl font-bold mb-2">📊 Complete!</h2>
                 <div class="flex items-center gap-4 mb-6"><div class="text-4xl font-bold ${gc}">${pct}%</div><div class="text-xl">${gr}</div></div>
@@ -136,11 +151,11 @@
 <style>
 /* Enhanced Feature Styles */
 .rdx-difficulty-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 16px;
     padding: 16px 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow:var(--rdx-shadow-md);
     max-width: 300px;
 }
 .rdx-diff-btn {
@@ -154,7 +169,7 @@
     margin: 2px;
 }
 .rdx-diff-btn.active {
-    background: #3b82f6;
+    background: #3a90c0;
     color: white;
 }
 .rdx-diff-btn:not(.active) {
@@ -165,8 +180,8 @@
     background: #e2e8f0;
 }
 .rdx-refs-panel {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #93c5fd;
+    background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%);
+    border: 1px solid #7cb8d9;
     border-radius: 12px;
     padding: 16px 20px;
     margin: 20px auto;
@@ -174,7 +189,7 @@
 }
 .rdx-refs-title {
     font-weight: 700;
-    color: #1e40af;
+    color: #1a4971;
     margin-bottom: 8px;
 }
 .rdx-refs-links {
@@ -182,7 +197,7 @@
     line-height: 1.8;
 }
 .rdx-refs-links a {
-    color: #2563eb;
+    color: #2874a6;
     text-decoration: none;
 }
 .rdx-refs-links a:hover {
@@ -202,7 +217,7 @@
     padding: 20px;
 }
 .rdx-debrief-panel {
-    background: white;
+    background:var(--rdx-bg-card);
     border-radius: 20px;
     padding: 32px;
     max-width: 800px;
@@ -217,7 +232,7 @@
     margin-bottom: 8px;
 }
 .rdx-path-optimal {
-    background: #dcfce7;
+    background: #d4e8f7;
     border-left: 4px solid #22c55e;
 }
 .rdx-path-suboptimal {
@@ -229,8 +244,8 @@
     border-left: 4px solid #ef4444;
 }
 .rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
+    background: #f0f7fc;
+    border: 1px solid #7cb8d9;
     padding: 10px 14px;
     border-radius: 8px;
     margin: 8px 0;
@@ -263,8 +278,8 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
@@ -284,27 +299,27 @@
 
 <!-- CROSS-PLATFORM LEARNING LINKS -->
 <div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <h4 style="font-weight: 700; color:var(--rdx-teal-dark,#1f5f8b); margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Atopic Dermatitis</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 ReasonDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Atopic Dermatitis</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
-            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="../adventure-hub.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #3a90c0;">
+            <h5 style="color: #3a90c0; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="../adventure-hub.html" style="display: block; color: #2874a6; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
         </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../index.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        <div style="background:var(--rdx-bg-card); border-radius: 8px; padding: 14px; border-left: 4px solid #2874a6;">
+            <h5 style="color: #2874a6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../index.html" style="display: block; color: #2874a6; font-size: 14px;">→ SBAR Communication</a>
         </div>
     </div>
 </div>
 <!-- END CROSS-PLATFORM LINKS -->
 <div class="rdx-refs-panel" id="rdxRefsPanel">
     <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
-    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-teal-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-teal-600 hover:underline">StatPearls: Anaphylaxis</a></div>
 </div>
 
 <div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
@@ -359,7 +374,7 @@
         
         let grade, gradeColor, gradeEmoji;
         if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2874a6'; gradeEmoji = '⭐'; }
         else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
         else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
         
@@ -386,15 +401,15 @@
         document.getElementById('rdxDebriefContent').innerHTML = 
             '<div style="text-align:center;margin-bottom:24px;">' +
             '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
-            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:var(--rdx-text,#1e293b);">Case Complete!</h2>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
             '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
             '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
             '</div></div>' +
-            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<h3 style="font-weight:700;color:var(--rdx-text-secondary,#475569);margin-bottom:16px;">📊 Your Decision Path</h3>' +
             '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
             '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
-            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<h4 style="font-weight:600;color:var(--rdx-text-secondary,#475569);margin-bottom:8px;">🎯 Performance Legend</h4>' +
             '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
             '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
@@ -402,7 +417,7 @@
             '</div></div>' +
             '<div style="display:flex;gap:12px;">' +
             '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3a90c0,#3a90c0);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
             '</div>';
         
         document.getElementById('rdxDebriefOverlay').style.display = 'flex';
@@ -411,8 +426,7 @@
     // Auto-inject hint examples into existing content
     window.rdxInit = function() {
         // Could add dynamic hint injection here based on difficulty
-        console.log('ReasonDx Enhanced Features loaded for: Atopic Dermatitis Expanded Adventure');
-    };
+};
     
     // Initialize on load
     if (document.readyState === 'loading') {
@@ -434,11 +448,17 @@
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1016/j.jaad.2022.09.049" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">AAD Guidelines of Care for Atopic Dermatitis</a> — <em style="color:var(--rdx-text-muted,#64748b)">JAAD</em></li><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1016/j.jaip.2023.10.009" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">AAAAI/ACAAI Atopic Dermatitis Practice Parameter</a> — <em style="color:var(--rdx-text-muted,#64748b)">JACI: In Practice</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
 
-<script src="../dx-feedback.js"></script>
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

@@ -1,236 +1,160 @@
-/* ============================================================
-   rdx-nav.js — Unified ReasonDx Navigation + Theme Toggle
-   Auto-injects a consistent nav on every page.
-   Removes any old inline navs to prevent duplicates.
-   ============================================================ */
+/* rdx-nav.js — Unified ReasonDx Navigation v3 — Dropdowns, CoachDx, no theme dots */
 (function() {
   'use strict';
   if (document.getElementById('rdx-unified-nav')) return;
-
-  // --- Path prefix ---
   var path = window.location.pathname;
   var inSubdir = /\/(topics|modules|cases|tools|ecg|CoachDx|auth|data|mechanism|ReasonDx)\//i.test(path);
-  var toRoot = inSubdir ? '../' : './';
-
-  // --- Detect section (launch version) ---
-  var section = 'home';
-  if (/training|cases\//i.test(path)) section = 'train';
-  else if (/CoachDx|mentor-chat|coach/i.test(path)) section = 'coach';
-  else if (/consult-trainer|sbar/i.test(path)) section = 'train';
-  else if (/learning-dashboard|dashboard/i.test(path)) section = 'dashboard';
-  else if (/auth\//i.test(path)) section = 'account';
-
-  // --- Theme (ONLY light or dark) ---
+  var R = inSubdir ? '../' : './';
+  var sec = 'home';
+  if (/\/modules\/premed-|premed-hub/i.test(path)) sec = 'premed';
+  else if (/\/modules\/raddx-|raddx-hub/i.test(path)) sec = 'raddx';
+  else if (/\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
+  else if (/\/cases\/|board-prep|training|adventure|\/CoachDx\//i.test(path)) sec = 'practice';
+  else if (/\/tools\/|\/ecg\//i.test(path)) sec = 'tools';
   var saved = localStorage.getItem('rdx-theme') || 'light';
-  if (saved !== 'light' && saved !== 'dark') { saved = 'light'; localStorage.setItem('rdx-theme', saved); }
+  if (saved !== 'light' && saved !== 'dark') saved = 'light';
   document.documentElement.setAttribute('data-theme', saved);
 
-  // --- Link helper ---
-  function navLink(href, icon, label, active, extra) {
-    return '<a href="' + href + '" style="text-decoration:none;font-size:14px;font-weight:' +
-      (active ? '600' : '500') + ';color:' + (active ? '#1f5f8b' : 'var(--rdx-text-muted,#475569)') +
-      ';padding:6px 12px;border-radius:8px;white-space:nowrap;transition:all .15s;' +
-      (active ? 'background:var(--rdx-teal-50,#f0f7fc);' : '') +
-      (extra || '') +
-      '"><span class="rdx-nav-icon">' + icon + '</span> <span class="rdx-nav-label">' + label + '</span></a>';
+  function di(href, icon, title, desc) {
+    return '<a href="'+href+'" class="rdx-dd-item"><span class="rdx-dd-icon">'+icon+'</span><div><strong>'+title+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</div></a>';
+  }
+  function dd(label, active, items) {
+    return '<div class="rdx-dd"><button class="rdx-nav-top'+(active?' active':'')+'" aria-haspopup="true">'+label+' <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button><div class="rdx-dd-panel">'+items+'</div></div>';
   }
 
-  // --- Build nav ---
   var html =
-    '<a href="' + toRoot + 'index.html" style="text-decoration:none;flex-shrink:0;display:flex;align-items:center;"><img src="' + toRoot + 'images/reasondx-logo.png" alt="ReasonDx" style="height:28px;width:auto;"></a>' +
-    '<button id="rdx-hamburger" aria-label="Menu" style="display:none;background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:var(--rdx-text-muted,#475569);-webkit-tap-highlight-color:transparent;">☰</button>' +
-    '<div id="rdx-nav-menu" style="display:flex;gap:6px;align-items:center;margin-left:auto;">' +
-      navLink(toRoot + 'index.html', '🏠', 'Home', section === 'home') +
-      navLink(toRoot + 'modules/training.html', '🧠', 'Train', section === 'train') +
-      navLink(toRoot + 'CoachDx/index.html', '🗣️', 'Coach', section === 'coach') +
-      navLink(toRoot + 'tools/learning-dashboard.html', '📊', 'Dashboard', section === 'dashboard') +
-      '<button id="rdx-info-btn" aria-label="About ReasonDx" title="About ReasonDx" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:15px;line-height:1;flex-shrink:0;">ℹ️</button>' +
-      '<button id="rdx-theme-toggle" aria-label="Toggle theme" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;">' +
-        (saved === 'dark' ? '☀️' : '🌙') +
-      '</button>' +
-      '<button id="rdx-logout-btn" aria-label="Log out" style="background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:13px;line-height:1;flex-shrink:0;color:var(--rdx-text-muted,#64748b);font-family:inherit;">' +
-        '↪ Log out' +
-      '</button>' +
+    '<a href="'+R+'index.html" class="rdx-logo-link"><span class="rdx-logo-text">Reason<span class="rdx-logo-dx">Dx</span></span></a>'+
+    '<button id="rdx-hamburger" aria-label="Menu">\u2630</button>'+
+    '<div id="rdx-nav-menu">'+
+      '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
+      dd('Learn', sec==='learn'||sec==='raddx'||sec==='premed',
+        di(R+'modules/index.html','\uD83D\uDCDA','MechanismDx','400+ pathophysiology modules')+
+        di(R+'modules/raddx-hub.html','\uD83D\uDD2C','RadDx','Imaging reasoning')+
+        di(R+'modules/premed-hub.html','\uD83E\uDE7A','Premed Hub','Pre-clinical foundations')+
+        di(R+'study-mode.html','\uD83D\uDCD6','Study Guides','Topic-based study')
+      )+
+      dd('Practice', sec==='practice',
+        di(R+'adventure-hub.html','\uD83D\uDDFA\uFE0F','Case Adventures','320+ interactive scenarios')+
+        di(R+'cases/clinical-reasoning-trainer.html','\uD83E\uDDE9','Clinical Reasoning Trainer','Step-by-step CRTs')+
+        di(R+'CoachDx/index.html','\uD83E\uDD16','CoachDx','AI clinical coaching')+
+        di(R+'board-prep.html','\uD83D\uDCDD','Board Prep','615 board-style questions')
+      )+
+      dd('Tools', sec==='tools',
+        di(R+'tools/index.html','\uD83D\uDD27','All Tools','Calculators & references')+
+        di(R+'ecg/ecg-generator.html','\uD83D\uDC93','ECG Practice','Rhythm interpretation')+
+        di(R+'analytics-dashboard.html','\uD83D\uDCCA','Dashboard','Track your progress')+
+        di(R+'deep-dive-hub.html','\uD83D\uDD0D','Deep Dives','Multi-layer explorations')
+      )+
+      '<div class="rdx-nav-right">'+
+        '<button id="rdx-info-btn" class="rdx-nav-btn" title="About">\u2139\uFE0F</button>'+
+        '<button id="rdx-theme-toggle" class="rdx-nav-btn">'+(saved==='dark'?'\u2600\uFE0F':'\uD83C\uDF19')+'</button>'+
+        '<button id="rdx-logout-btn" class="rdx-nav-btn rdx-logout">Log out</button>'+
+      '</div>'+
     '</div>';
 
-  // --- Create nav element ---
-  var nav = document.createElement('nav');
-  nav.id = 'rdx-unified-nav';
-  nav.setAttribute('role', 'navigation');
-  nav.style.cssText = 'background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:9000;font-family:"DM Sans","Inter",-apple-system,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,0.03);transition:background .25s,border-color .25s;';
-  nav.innerHTML = html;
-
-  // --- Inject responsive styles ---
   var style = document.createElement('style');
   style.textContent =
-    '[data-theme="dark"] #rdx-unified-nav{background:var(--rdx-bg-nav,#1e293b);border-color:var(--rdx-border,#334155);box-shadow:0 1px 3px rgba(0,0,0,0.3);}' +
-    '[data-theme="dark"] #rdx-unified-nav a[style*="Georgia"]{color:#5ba3cc!important;}' +
-    '[data-theme="dark"] #rdx-logout-btn{color:var(--rdx-text-muted,#94a3b8)!important;border-color:var(--rdx-border,#334155)!important;}' +
-    '#rdx-about-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:10000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}' +
-    '#rdx-about-overlay.open{display:flex;}' +
-    '#rdx-about-modal{background:var(--rdx-bg-card,#fff);border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.3);padding:0;animation:rdxModalIn .2s ease;}' +
-    '[data-theme="dark"] #rdx-about-modal{background:var(--rdx-bg-card,#1e293b);color:var(--rdx-text,#e2e8f0);}' +
-    '@keyframes rdxModalIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}' +
-    '.rdx-about-hdr{background:linear-gradient(135deg,#2874A6,#1B4F72);padding:28px 28px 24px;border-radius:20px 20px 0 0;color:white;}' +
-    '.rdx-about-hdr h2{margin:0 0 6px;font-size:22px;font-weight:700;font-family:"Fraunces",Georgia,serif;}.rdx-about-hdr p{margin:0;opacity:0.9;font-size:14px;}' +
-    '.rdx-about-body{padding:24px 28px 28px;font-size:14px;line-height:1.7;color:var(--rdx-text-secondary,#475569);}' +
-    '[data-theme="dark"] .rdx-about-body{color:var(--rdx-text-secondary,#94a3b8);}' +
-    '.rdx-about-body h3{font-size:15px;font-weight:700;color:var(--rdx-text,#1e293b);margin:20px 0 8px;}.rdx-about-body h3:first-child{margin-top:0;}' +
-    '[data-theme="dark"] .rdx-about-body h3{color:var(--rdx-text,#e2e8f0);}' +
-    '.rdx-about-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0;}' +
-    '.rdx-about-stat{background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:12px;text-align:center;}' +
-    '[data-theme="dark"] .rdx-about-stat{background:rgba(40,116,166,0.08);border-color:var(--rdx-border,#334155);}' +
-    '.rdx-about-stat .num{font-size:22px;font-weight:700;color:#1f5f8b;}.rdx-about-stat .lbl{font-size:12px;color:var(--rdx-text-muted,#64748b);}' +
-    '.rdx-about-tracks{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}' +
-    '.rdx-about-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--rdx-border,#e2e8f0);background:var(--rdx-bg-card,#fff);color:var(--rdx-text-secondary,#475569);}' +
-    '[data-theme="dark"] .rdx-about-pill{background:rgba(255,255,255,0.05);border-color:var(--rdx-border,#334155);color:var(--rdx-text-secondary,#94a3b8);}' +
-    '.rdx-about-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.2);border:none;border-radius:8px;width:32px;height:32px;font-size:18px;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center;}' +
-    '@media(max-width:768px){' +
-      '#rdx-unified-nav{flex-wrap:wrap;height:auto;min-height:52px;padding:0 16px;}' +
-      '#rdx-hamburger{display:block!important;}' +
-      '#rdx-nav-menu{display:none!important;flex-direction:column;width:100%;gap:4px;padding:8px 0 12px;border-top:1px solid var(--rdx-border,#e2e8f0);}' +
-      '#rdx-nav-menu.open{display:flex!important;}' +
-      '#rdx-nav-menu a{display:block;width:100%;padding:12px 16px!important;font-size:15px!important;min-height:44px;box-sizing:border-box;border-radius:12px;}' +
-      '#rdx-nav-menu button{width:100%;min-height:44px;text-align:left;padding:12px 16px!important;font-size:15px!important;border-radius:12px;}' +
-    '}' +
-    '@media(min-width:769px){' +
-      '#rdx-hamburger{display:none!important;}' +
-      '.rdx-nav-icon{display:none;}' +
+    '#rdx-unified-nav{background:var(--rdx-bg-nav,#fff);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;position:sticky;top:0;z-index:9000;font-family:"DM Sans","Inter",-apple-system,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.04)}'+
+    '[data-theme="dark"] #rdx-unified-nav{background:var(--rdx-bg-nav,#1e293b);border-color:var(--rdx-border,#334155);box-shadow:0 1px 3px rgba(0,0,0,.3)}'+
+    '.rdx-logo-link{text-decoration:none;flex-shrink:0;margin-right:24px}'+
+    '.rdx-logo-text{font-family:Georgia,"Times New Roman",serif;font-size:22px;font-weight:700;color:#2f3640;letter-spacing:-.5px}'+
+    '.rdx-logo-dx{border-bottom:2.5px solid #2874a6;padding-bottom:1px}'+
+    '[data-theme="dark"] .rdx-logo-text{color:#e2e8f0}[data-theme="dark"] .rdx-logo-dx{border-color:#5ba3cc}'+
+    '#rdx-nav-menu{display:flex;align-items:center;gap:2px;margin-left:auto}'+
+    '.rdx-nav-top{background:none;border:none;font-family:inherit;font-size:14px;font-weight:500;color:var(--rdx-text-muted,#64748b);padding:8px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .15s;display:inline-flex;align-items:center}'+
+    '.rdx-nav-top:hover{color:#1f5f8b;background:#f0f7fc}.rdx-nav-top.active{color:#1f5f8b;font-weight:600;background:#f0f7fc}'+
+    'a.rdx-nav-top{text-decoration:none}'+
+    '[data-theme="dark"] .rdx-nav-top:hover,[data-theme="dark"] .rdx-nav-top.active{color:#7cb8d9;background:rgba(40,116,166,.12)}'+
+    '.rdx-dd{position:relative}'+
+    '.rdx-dd-panel{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.1);padding:8px;min-width:265px;z-index:9100;animation:rdxDdIn .15s ease}'+
+    '.rdx-dd:hover .rdx-dd-panel,.rdx-dd-panel:hover{display:block}'+
+    '[data-theme="dark"] .rdx-dd-panel{background:var(--rdx-bg-card,#1e293b);border-color:var(--rdx-border,#334155);box-shadow:0 8px 24px rgba(0,0,0,.4)}'+
+    '@keyframes rdxDdIn{from{opacity:0;transform:translateX(-50%) translateY(-4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}'+
+    '.rdx-dd-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);transition:background .12s}'+
+    '.rdx-dd-item:hover{background:#f0f7fc}[data-theme="dark"] .rdx-dd-item:hover{background:rgba(40,116,166,.1)}'+
+    '.rdx-dd-icon{font-size:18px;line-height:1;flex-shrink:0;margin-top:2px}'+
+    '.rdx-dd-item strong{font-size:13px;font-weight:600;display:block;color:var(--rdx-text,#1e293b)}'+
+    '.rdx-dd-item small{font-size:11px;color:var(--rdx-text-muted,#64748b);display:block;margin-top:1px}'+
+    '[data-theme="dark"] .rdx-dd-item strong{color:var(--rdx-text,#e2e8f0)}'+
+    '.rdx-nav-right{display:flex;align-items:center;gap:6px;margin-left:12px;padding-left:12px;border-left:1px solid var(--rdx-border,#e2e8f0)}'+
+    '.rdx-nav-btn{background:none;border:none;border-radius:8px;padding:6px 8px;cursor:pointer;font-size:15px;line-height:1;color:var(--rdx-text-muted,#64748b);transition:all .15s}'+
+    '.rdx-nav-btn:hover{background:#f0f7fc}'+
+    '.rdx-logout{font-size:12px;font-family:inherit;padding:6px 12px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px}'+
+    '.rdx-logout:hover{border-color:#2874a6;color:#1f5f8b}'+
+    '[data-theme="dark"] .rdx-nav-btn:hover{background:rgba(255,255,255,.08)}'+
+    '[data-theme="dark"] .rdx-nav-right{border-color:var(--rdx-border,#334155)}'+
+    '#rdx-hamburger{display:none;background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:var(--rdx-text-muted,#475569);margin-left:auto}'+
+    '#rdx-about-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}'+
+    '#rdx-about-overlay.open{display:flex}'+
+    '#rdx-about-modal{background:var(--rdx-bg-card,#fff);border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,.3);animation:rdxModalIn .2s ease}'+
+    '@keyframes rdxModalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}'+
+    '.rdx-about-hdr{background:linear-gradient(135deg,#1f5f8b,#2874a6);padding:28px;border-radius:20px 20px 0 0;color:#fff;position:relative}'+
+    '.rdx-about-hdr h2{margin:0 0 6px;font-size:22px;font-weight:700;font-family:Georgia,serif}.rdx-about-hdr p{margin:0;opacity:.9;font-size:14px}'+
+    '.rdx-about-body{padding:24px 28px 28px;font-size:14px;line-height:1.7;color:var(--rdx-text-secondary,#475569)}'+
+    '.rdx-about-body h3{font-size:15px;font-weight:700;color:var(--rdx-text,#1e293b);margin:20px 0 8px}.rdx-about-body h3:first-child{margin-top:0}'+
+    '.rdx-about-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}'+
+    '.rdx-about-stat{background:#f0f7fc;border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:12px;text-align:center}'+
+    '.rdx-about-stat .num{font-size:22px;font-weight:700;color:#1f5f8b}.rdx-about-stat .lbl{font-size:12px;color:var(--rdx-text-muted,#64748b)}'+
+    '.rdx-about-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);border:none;border-radius:8px;width:32px;height:32px;font-size:18px;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center}'+
+    '.rdx-about-tracks{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}'+
+    '.rdx-about-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--rdx-border,#e2e8f0);background:var(--rdx-bg-card,#fff);color:var(--rdx-text-secondary,#475569)}'+
+    '@media(max-width:768px){'+
+      '#rdx-hamburger{display:block!important}'+
+      '#rdx-nav-menu{display:none!important;flex-direction:column;width:100%;gap:0;padding:8px 0 12px;border-top:1px solid var(--rdx-border,#e2e8f0)}'+
+      '#rdx-nav-menu.open{display:flex!important}'+
+      '#rdx-unified-nav{flex-wrap:wrap;height:auto;min-height:52px;padding:0 16px}'+
+      '.rdx-dd{width:100%}.rdx-nav-top{width:100%;justify-content:space-between;padding:12px 16px;border-radius:12px;font-size:15px}'+
+      'a.rdx-nav-top{display:flex;width:100%;padding:12px 16px;border-radius:12px;font-size:15px}'+
+      '.rdx-dd-panel{position:static;transform:none;box-shadow:none;border:none;padding:0 0 0 16px;min-width:auto;display:none;animation:none}'+
+      '.rdx-dd.open .rdx-dd-panel{display:block}'+
+      '.rdx-nav-right{width:100%;justify-content:flex-end;margin-left:0;padding-left:0;padding-top:8px;border-left:none;border-top:1px solid var(--rdx-border,#e2e8f0)}'+
     '}';
   document.head.appendChild(style);
 
-  // --- Remove ALL old inline navs ---
+  var nav = document.createElement('nav');
+  nav.id = 'rdx-unified-nav';
+  nav.setAttribute('role','navigation');
+  nav.innerHTML = html;
+
   function removeOldNavs() {
-    // Pattern 1: <nav class="nav">
-    var old1 = document.querySelectorAll('nav.nav:not(#rdx-unified-nav)');
-    for (var i = 0; i < old1.length; i++) old1[i].parentNode.removeChild(old1[i]);
-    // Pattern 2: <nav class="dx-nav">
-    var old2 = document.querySelectorAll('nav.dx-nav');
-    for (var i = 0; i < old2.length; i++) old2[i].parentNode.removeChild(old2[i]);
-    // Pattern 3: old rdx-nav
-    var old3 = document.querySelectorAll('nav.rdx-nav:not(#rdx-unified-nav)');
-    for (var i = 0; i < old3.length; i++) old3[i].parentNode.removeChild(old3[i]);
-    // Pattern 4: dx-universal-nav
-    var old4 = document.querySelectorAll('.dx-universal-nav');
-    for (var i = 0; i < old4.length; i++) old4[i].parentNode.removeChild(old4[i]);
+    ['nav.nav:not(#rdx-unified-nav)','nav.dx-nav','nav.rdx-nav:not(#rdx-unified-nav)','.dx-universal-nav'].forEach(function(s){
+      document.querySelectorAll(s).forEach(function(el){el.remove()});
+    });
   }
 
-  // --- Insert ---
   function insert() {
     removeOldNavs();
-    if (document.body.firstChild) {
-      document.body.insertBefore(nav, document.body.firstChild);
-    } else {
-      document.body.appendChild(nav);
-    }
-    // Wire hamburger
-    var btn = document.getElementById('rdx-hamburger');
-    if (btn) {
-      btn.addEventListener('click', function() {
-        document.getElementById('rdx-nav-menu').classList.toggle('open');
-      });
-    }
-    // Wire theme toggle
-    var themeBtn = document.getElementById('rdx-theme-toggle');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', function() {
-        var cur = document.documentElement.getAttribute('data-theme');
-        var next = cur === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('rdx-theme', next);
-        this.textContent = next === 'dark' ? '☀️' : '🌙';
-      });
-    }
-    // Wire logout
-    var logoutBtn = document.getElementById('rdx-logout-btn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', function() {
-        localStorage.removeItem('reasondx-user');
-        localStorage.removeItem('reasondx_student_code');
-        localStorage.removeItem('rdx-progress');
-        sessionStorage.clear();
-        window.location.href = toRoot + 'auth/register.html';
-      });
-    }
-    // --- About ReasonDx modal (launch version) ---
-    var overlay = document.createElement('div');
-    overlay.id = 'rdx-about-overlay';
-    overlay.innerHTML =
-      '<div id="rdx-about-modal">' +
-        '<div class="rdx-about-hdr" style="position:relative;">' +
-          '<button class="rdx-about-close" id="rdx-about-close-btn">&times;</button>' +
-          '<h2>ReasonDx</h2>' +
-          '<p>AI-Powered Clinical Reasoning Platform</p>' +
-        '</div>' +
-        '<div class="rdx-about-body">' +
-          '<h3>What is ReasonDx?</h3>' +
-          '<p>ReasonDx is an AI-powered clinical reasoning platform that helps learners develop systematic diagnostic thinking. Practice building differentials, communicate your reasoning through structured SBAR handoffs, and reflect on your growth with personalized AI coaching.</p>' +
-          '<div class="rdx-about-grid">' +
-            '<div class="rdx-about-stat"><div class="num">323</div><div class="lbl">Reasoning Cases</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">29</div><div class="lbl">Specialties</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">13</div><div class="lbl">SBAR Scenarios</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">AI</div><div class="lbl">Coaching</div></div>' +
-          '</div>' +
-          '<h3>The Platform</h3>' +
-          '<p><strong>Train</strong> \u2014 Build differentials, interview AI patients, and refine your diagnostic reasoning<br>' +
-          '<strong>Communicate</strong> \u2014 Practice structured SBAR handoffs with AI-scored feedback<br>' +
-          '<strong>CoachDx</strong> \u2014 AI coach that identifies reasoning patterns and growth areas<br>' +
-          '<strong>Dashboard</strong> \u2014 Track progress and view your Reasoning Fingerprint</p>' +
-          '<h3>How It Works</h3>' +
-          '<p>Each session follows a clinical reasoning workflow: review the presentation \u2192 build your differential \u2192 interview the patient \u2192 refine your diagnosis \u2192 communicate via SBAR \u2192 reflect with your AI coach. Your Reasoning Fingerprint tracks how your clinical thinking evolves over time.</p>' +
-          '<p style="margin-top:16px;padding-top:16px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:13px;color:var(--rdx-text-muted,#64748b);">Contact: <a href="mailto:lfine@nova.edu" style="color:#1f5f8b;">lfine@nova.edu</a></p>' +
-        '</div>' +
-      '</div>';
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) overlay.classList.remove('open');
+    if (document.body.firstChild) document.body.insertBefore(nav, document.body.firstChild);
+    else document.body.appendChild(nav);
+
+    document.getElementById('rdx-hamburger').addEventListener('click', function(){
+      document.getElementById('rdx-nav-menu').classList.toggle('open');
     });
-    var closeBtn = document.getElementById('rdx-about-close-btn');
-    if (closeBtn) closeBtn.addEventListener('click', function() { overlay.classList.remove('open'); });
-    var infoBtn = document.getElementById('rdx-info-btn');
-    if (infoBtn) {
-      infoBtn.addEventListener('click', function() {
-        overlay.classList.add('open');
+    // Mobile: click to toggle dropdowns
+    if (window.innerWidth <= 768) {
+      nav.querySelectorAll('.rdx-dd > .rdx-nav-top').forEach(function(btn){
+        btn.addEventListener('click', function(e){ e.preventDefault(); this.parentElement.classList.toggle('open'); });
       });
     }
-    // About ReasonDx modal (launch version - duplicate kept for backward compat)
-    var overlay = document.createElement('div');
-    overlay.id = 'rdx-about-overlay';
-    overlay.innerHTML =
-      '<div id="rdx-about-modal" style="position:relative;">' +
-        '<button class="rdx-about-close" id="rdx-about-x">\u2715</button>' +
-        '<div class="rdx-about-hdr">' +
-          '<h2>ReasonDx</h2>' +
-          '<p>AI-Powered Clinical Reasoning Platform</p>' +
-        '</div>' +
-        '<div class="rdx-about-body">' +
-          '<h3>What is ReasonDx?</h3>' +
-          '<p>ReasonDx is an AI-powered clinical reasoning platform designed to help learners develop systematic diagnostic thinking. Practice building differentials, communicate your reasoning through structured SBAR handoffs, and grow with personalized AI coaching that tracks your reasoning patterns over time.</p>' +
-          '<div class="rdx-about-grid">' +
-            '<div class="rdx-about-stat"><div class="num">323</div><div class="lbl">Reasoning Cases</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">29</div><div class="lbl">Specialties</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">13</div><div class="lbl">SBAR Scenarios</div></div>' +
-            '<div class="rdx-about-stat"><div class="num">AI</div><div class="lbl">Coaching</div></div>' +
-          '</div>' +
-          '<h3>Core Experience</h3>' +
-          '<p><strong>Train</strong> \u2014 Build differentials, interview AI patients, refine your diagnostic reasoning<br>' +
-          '<strong>Communicate</strong> \u2014 Practice structured SBAR handoffs with AI-scored feedback<br>' +
-          '<strong>CoachDx</strong> \u2014 AI coach using Socratic questioning to develop metacognition<br>' +
-          '<strong>Dashboard</strong> \u2014 Track progress and your Reasoning Fingerprint over time</p>' +
-          '<h3>How It Works</h3>' +
-          '<p>Every session follows a clinical reasoning workflow: (1) Review the presentation, (2) Build your differential, (3) Interview the patient and gather findings, (4) Refine your diagnosis, (5) Communicate via SBAR, (6) Reflect with your AI coach. Your Reasoning Fingerprint captures how your clinical thinking evolves.</p>' +
-          '<p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center;">\u00A9 2026 ReasonDx \u00B7 Developed for medical education</p>' +
-        '</div>' +
-      '</div>';
-    document.body.appendChild(overlay);
-    overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.classList.remove('open'); });
-    document.getElementById('rdx-about-x').addEventListener('click', function() { overlay.classList.remove('open'); });
-    var infoBtn = document.getElementById('rdx-info-btn');
-    if (infoBtn) {
-      infoBtn.addEventListener('click', function() { overlay.classList.toggle('open'); });
-    }
+    document.getElementById('rdx-theme-toggle').addEventListener('click', function(){
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('rdx-theme', next);
+      this.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+    });
+    document.getElementById('rdx-logout-btn').addEventListener('click', function(){
+      localStorage.removeItem('reasondx-user');localStorage.removeItem('reasondx_student_code');localStorage.removeItem('rdx-progress');sessionStorage.clear();
+      window.location.href = R + 'auth/register.html';
+    });
+    // About modal
+    var ov = document.createElement('div'); ov.id = 'rdx-about-overlay';
+    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">316</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">320+</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">400+</div><div class="lbl">Modules</div></div><div class="rdx-about-stat"><div class="num">615</div><div class="lbl">Questions</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 Pathophysiology modules<br><strong>CoachDx</strong> \u2014 AI clinical coaching<br><strong>RadDx</strong> \u2014 Imaging reasoning<br><strong>Deep Dives</strong> \u2014 Multi-layer explorations</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A Premed</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Shelf Exams</span><span class="rdx-about-pill">\uD83C\uDFAF Step 2 / COMLEX</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2026 ReasonDx \u00B7 <a href="mailto:lfine@nova.edu" style="color:#2874a6">lfine@nova.edu</a></p></div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('open'); });
+    document.getElementById('rdx-about-x').addEventListener('click', function(){ ov.classList.remove('open'); });
+    document.getElementById('rdx-info-btn').addEventListener('click', function(){ ov.classList.toggle('open'); });
   }
 
-  if (document.body) { insert(); }
-  else { document.addEventListener('DOMContentLoaded', insert); }
+  if (document.body) insert();
+  else document.addEventListener('DOMContentLoaded', insert);
 })();

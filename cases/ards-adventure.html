@@ -1,35 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARDS Management | Clinical Adventure</title>
+    <meta name="description" content="Interactive clinical adventure: ARDS Management | Clinical. Make real-time diagnostic decisions in this branching case scenario on ReasonDx.">
+<title>ARDS Management | Clinical Adventure</title>
     <style>
         :root { --primary: #4A90A4; --primary-dark: #2D5A6A; --accent: #F4A261; --success: #2A9D8F; --danger: #E63946; --bg: #F8FAFC; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); min-height: 100vh; }
+        body { font-family:var(--rdx-font); background:var(--rdx-bg); min-height: 100vh; }
         .container { max-width: 900px; margin: 0 auto; padding: 1rem; }
         .header { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
         .header h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
         .header p { opacity: 0.9; font-size: 0.95rem; }
         .progress-bar { height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px; margin-top: 1rem; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
-        .scene { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+        .scene { background:var(--rdx-bg-card); border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 1rem; }
         .scene-title { font-size: 1.1rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
         .patient-info { background: #E3F2FD; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
         .vital-signs { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
-        .vital { background: white; padding: 0.5rem; border-radius: 6px; text-align: center; border: 1px solid #E0E0E0; }
+        .vital { background:var(--rdx-bg-card); padding: 0.5rem; border-radius:8px; text-align: center; border: 1px solid #E0E0E0; }
         .vital-label { font-size: 0.75rem; color: #666; }
         .vital-value { font-weight: 600; color: var(--primary-dark); }
         .vital-value.critical { color: var(--danger); }
         .narrative { line-height: 1.7; margin-bottom: 1.5rem; color: #333; }
-        .question { background: #FFF8E1; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--accent); }
+        .question { background: #FFF8E1; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left:4px solid var(--rdx-teal); }
         .options { display: flex; flex-direction: column; gap: 0.75rem; }
-        .option { padding: 1rem; border: 2px solid #E0E0E0; border-radius: 8px; cursor: pointer; transition: all 0.2s; background: white; text-align: left; font-size: 0.95rem; }
+        .option { padding: 1rem; border: 2px solid #E0E0E0; border-radius: 8px; cursor: pointer; transition: all 0.2s; background:var(--rdx-bg-card); text-align: left; font-size: 0.95rem; }
         .option:hover { border-color: var(--primary); background: #F0F7FA; }
         .option.selected { border-color: var(--primary); background: #E3F2FD; }
         .option.correct { border-color: var(--success); background: #E8F5E9; }
@@ -43,21 +56,30 @@
         .btn { padding: 0.75rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 500; transition: all 0.2s; }
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--primary-dark); }
-        .btn-secondary { background: white; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-secondary { background:var(--rdx-bg-card); color: var(--primary); border: 2px solid var(--primary); }
         .nav-row { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
         .score-card { background: linear-gradient(135deg, var(--success), #1E7D6E); color: white; padding: 2rem; border-radius: 12px; text-align: center; margin-top: 2rem; }
         .score-card h2 { font-size: 2rem; margin-bottom: 0.5rem; }
         .peds-toggle { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: #FFF3CD; border-radius: 8px; margin-bottom: 1rem; }
         .toggle-switch { position: relative; width: 50px; height: 26px; background: #ccc; border-radius: 13px; cursor: pointer; transition: background 0.3s; }
         .toggle-switch.active { background: var(--primary); }
-        .toggle-switch::after { content: ''; position: absolute; width: 22px; height: 22px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: left 0.3s; }
+        .toggle-switch::after { content: ''; position: absolute; width: 22px; height: 22px; background:var(--rdx-bg-card); border-radius: 50%; top: 2px; left: 2px; transition: left 0.3s; }
         .toggle-switch.active::after { left: 26px; }
         .peds-info { background: #E1F5FE; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #03A9F4; display: none; }
         .peds-info.show { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 600px) { .vital-signs { grid-template-columns: repeat(3, 1fr); } }
-    </style>
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #1f5f8b; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
     <link rel="stylesheet" href="dx-case-banner-fix.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="container">
@@ -363,7 +385,7 @@
                 '<div class="score-card"><h2>🎉 Case Complete!</h2>' +
                 '<p>Score: ' + score + '/' + scenes.filter(s => s.question).length + ' (' + pct + '%)</p></div>' +
                 '<div class="nav-row" style="justify-content:center;margin-top:1rem;">' +
-                '<a href="../../index.html" class="btn btn-secondary">← Back to Adventures</a>' +
+                '<a href="../index.html" class="btn btn-secondary">← Back to Adventures</a>' +
                 '<button class="btn btn-primary" onclick="location.reload()">🔄 Try Again</button></div>';
         }
 
@@ -378,18 +400,39 @@
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
 
-<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:rgba(0,0,0,0.2);border-radius:12px;border:1px solid rgba(255,255,255,0.1)">
-<h3 style="color:#fbbf24;margin-bottom:12px">📚 References & Evidence Base</h3>
-<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/33081529/" target="_blank" style="color:#7dd3fc">ACLS Algorithm - AHA</a> — Circulation 2020</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK531492/" target="_blank" style="color:#7dd3fc">Shock Management - NCBI</a> — StatPearls</li></ul>
+<div id="references-panel" style="margin:20px auto;max-width:800px;padding:20px;background:var(--rdx-bg-hover);border-radius:12px;border: 1px solid #e2e8f0">
+<h3 style="color:var(--rdx-teal-dark,#1f5f8b);margin-bottom:12px">📚 References & Evidence Base</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px"><li><a href="https://pubmed.ncbi.nlm.nih.gov/33081529/" target="_blank" style="color: #64748b">ACLS Algorithm - AHA</a> — Circulation 2020</li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK531492/" target="_blank" style="color: #64748b">Shock Management - NCBI</a> — StatPearls</li></ul>
 <p style="color:#94a3b8;font-size:0.8rem;margin-top:12px">All references are open-access, peer-reviewed sources.</p>
 </div>
 
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
 
-<script src="../dx-feedback.js"></script>
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1164/rccm.202009-3536ST" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">ATS/ESICM/SCCM Guideline for ARDS Management</a> — <em style="color:var(--rdx-text-muted,#64748b)">AJRCCM</em></li></ul></div>
+<div class="rdx-imaging-card" style="margin:20px 0;padding:20px;background:linear-gradient(135deg,rgba(40,116,166,.06),rgba(40,116,166,.06));border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+<span style="font-size:1.2rem">🩻</span>
+<h4 style="font-size:.9rem;font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);margin:0">Imaging Reasoning</h4>
+<span style="background:var(--rdx-teal-50,#f0f7fc);color:var(--rdx-teal,#2874a6);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">CXR + CT</span>
+</div>
+<p style="font-size:.85rem;color:var(--rdx-text-muted,#64748b);margin:0 0 12px;line-height:1.5"><strong>Key imaging focus:</strong> Bilateral opacities, dependent consolidation, ground-glass opacities</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="../modules/raddx-chest.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-teal,#2874a6);color:#fff;border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📐 RadDx Reasoning Module →</a>
+<a href="https://radiopaedia.org/articles/acute-respiratory-distress-syndrome" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--rdx-bg-hover,#f1f5f9);border:1px solid var(--rdx-border,#e2e8f0);color:var(--rdx-teal,#2874a6);border-radius:8px;text-decoration:none;font-size:.8rem;font-weight:600">📚 Radiopaedia Cases →</a>
+</div></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

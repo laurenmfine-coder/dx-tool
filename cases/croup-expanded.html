@@ -1,66 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
 <script>
 // Auth Guard - Redirect if not logged in
-(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/login.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
+(function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();</script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Croup (Laryngotracheobronchitis) - ReasonDx Socratic Case</title>
+    <meta name="description" content="In-depth clinical case study: Croup (Laryngotracheobronchitis). Explore pathophysiology, diagnosis, and management with teaching points on ReasonDx.">
+<title>Croup (Laryngotracheobronchitis) - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        body { font-family:var(--rdx-font); background: #1f5f8b; min-height: 100vh; padding: 20px; color: #1e293b; }
         .container { max-width: 900px; margin: 0 auto; }
-        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; display: none; }
+        .scene { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 20px; display: none; }
         .scene.active { display: block; }
-        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .scene-phase { font-size: 0.85rem; color: #7dd3fc; text-transform: uppercase; letter-spacing: 1px; }
-        .scene-title { font-size: 1.5rem; font-weight: 700; color: #bae6fd; }
-        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #0ea5e9; line-height: 1.7; }
-        .highlight { color: #fbbf24; font-weight: 600; }
-        .critical { color: #f87171; font-weight: 600; }
-        .safe { color: #4ade80; font-weight: 600; }
-        .question-box { background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(14,165,233,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #bae6fd; margin-bottom: 16px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; }
+        .scene-phase { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #1e293b; }
+        .narrative { background: #f8fafc; border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #94a3b8; line-height: 1.7; }
+        .highlight { color: #1f5f8b; font-weight: 600; }
+        .critical { color: #dc2626; font-weight: 600; }
+        .safe { color: var(--rdx-teal, #2874a6); font-weight: 600; }
+        .question-box { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 16px; }
         .mcq-options { display: flex; flex-direction: column; gap: 10px; }
-        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option { background:var(--rdx-bg-card); border: 2px solid #e2e8f0; border-radius:12px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
         .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
         .mcq-option.disabled { cursor: default; opacity: 0.7; }
         .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
         .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
         .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; flex-shrink: 0; }
-        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius:12px; display: none; }
         .feedback.show { display: block; }
         .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
         .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
-        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point { background:var(--rdx-info-bg); border:1px solid var(--rdx-info); border-radius:12px; padding: 16px; margin-top: 16px; display: none; }
         .teaching-point.show { display: block; }
-        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(14,165,233,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-box { background: #f0f7fc; border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
         .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; }
-        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 16px; margin: 16px 0; }
-        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .btn { background: linear-gradient(135deg, #0ea5e9, #0369a1); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; transition: all 0.2s; }
+        .pathway { background: #f1f5f9; border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid #cbd5e1; border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .boards-tip-title { font-weight: 700; color: #1f5f8b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .btn { background: #1f5f8b; color: white; border: none; padding: 14px 28px; border-radius:12px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; transition: all 0.2s; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
         .btn.show { display: inline-block; }
         .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #0ea5e9, #7dd3fc); border-radius: 3px; transition: width 0.5s; }
-        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; margin-right: 12px; vertical-align: top; }
-        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .progress-fill { height: 100%; background: #1f5f8b; border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { display: inline-block; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius:12px; margin-right: 12px; vertical-align: top; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: var(--rdx-teal, #2874a6); }
         .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); color: #7dd3fc; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid #e2e8f0; }
+        .comparison-table th { background: #f1f5f9; color: #64748b; }
         .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
         .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .completion { text-align: center; padding: 60px 40px; }
-        .difficulty-toggle { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 10px; z-index: 100; }
-        .difficulty-toggle select { background: #1e293b; color: white; border: 1px solid #475569; padding: 6px 12px; border-radius: 6px; }
+        .difficulty-toggle { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius:12px; z-index: 100; }
+        .difficulty-toggle select { background:var(--rdx-bg-card); color: white; border: 1px solid #475569; padding: 6px 12px; border-radius:8px; }
         
         /* Visual Debrief Styles */
         .debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
         .debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
-        .debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+        .debrief-content { background:var(--rdx-bg-card); border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
         .debrief-header { text-align: center; margin-bottom: 24px; }
         .debrief-grade { font-size: 4rem; margin-bottom: 8px; }
         .debrief-score { font-size: 2.5rem; font-weight: 700; }
@@ -68,31 +81,31 @@
         .decision-path { margin: 24px 0; }
         .decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
         .path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
-        .path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
-        .path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+        .path-optimal { background: #d4e8f7; border: 2px solid #22c55e; }
+        .path-suboptimal { background: #fef3c7; border: 2px solid #1f5f8b; }
         .path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
         .path-stage { font-weight: 700; color: #1f2937; }
         .path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
-        .path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+        .path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius:8px; color: #6b7280; }
         .path-points { font-weight: 600; font-size: 0.9rem; }
         .debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
         .debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
         .debrief-summary ul { margin-left: 20px; }
         .debrief-summary li { margin-bottom: 8px; }
-        .debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #0ea5e9, #0369a1); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+        .debrief-btn { display: block; width: 100%; padding: 16px; background: #1f5f8b; color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
 
         /* References Panel */
-        .references-panel { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; margin: 20px 0; overflow: hidden; }
-        .references-header { padding: 14px 20px; font-weight: 600; color: #bae6fd; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .references-panel { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 1px solid #e2e8f0; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+        .references-header { padding: 14px 20px; font-weight: 600; color: #1e293b; display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
-        .references-content a { background: rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #7dd3fc; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s; }
+        .references-content a { background: rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #64748b; font-size: 0.85rem; border: 1px solid #e2e8f0; transition: all 0.2s; }
         .references-content a:hover { background: rgba(255,255,255,0.2); color: white; }
 
         /* Platform Panel */
-        .platform-panel { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+        .platform-panel { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border:1px solid var(--rdx-info); border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
         .platform-header { font-weight: 600; color: #c4b5fd; margin-bottom: 12px; }
         .platform-links { display: flex; flex-wrap: wrap; gap: 8px; }
-        .platform-link { background: rgba(139,92,246,0.2); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; color: #e9d5ff; }
+        .platform-link { background: rgba(139,92,246,0.2); padding: 6px 12px; border-radius:8px; font-size: 0.85rem; color: #e9d5ff; }
     /* Mobile Responsive - iPhone 16/17 optimized */
         @media (max-width: 480px) {
             body { padding: 12px !important; }
@@ -110,15 +123,24 @@
             th, td { padding: 6px 8px; }
             .nav-buttons { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; padding: 14px; min-height: 48px; }
-            .dx-nav { padding: 10px 12px; }
-            .dx-nav-links { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            
             .dx-nav-link { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
             .score-tracker, .difficulty-panel { position: static !important; display: block; margin: 8px 0; width: 100%; }
         }
         @media (pointer: coarse) { .mcq-option, .nav-btn, button { min-height: 44px; } }
 
-    </style>
+    
+/* Crossplatform Navigation */
+.rdx-crossplatform-nav { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px auto; max-width: 900px; }
+.rdx-crossplatform-nav h4 { color: #64748b; margin-bottom: 16px; font-size: 0.9rem; }
+.rdx-crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.rdx-crossplatform-link { background:var(--rdx-bg-card); border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; color: #1f5f8b; text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+.rdx-crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+</style>
     <link rel="stylesheet" href="dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
     <div class="score-tracker">
@@ -684,7 +706,7 @@ Risk of "REBOUND" stridor when epi wears off
         <div class="platform-panel">
             <div class="platform-header">🔗 Related ReasonDx Content</div>
             <div class="platform-links">
-                <span class="platform-link">📚 MechanismDx: Pediatric Airway</span>
+                <span class="platform-link">📚 ReasonDx: Pediatric Airway</span>
                 <span class="platform-link">🎯 SpacedRep: Pediatric Emergencies</span>
                 <span class="platform-link">🤖 CoachDx: Parent Communication</span>
                 <span class="platform-link">📖 Deep Dive: Stridor Differential</span>
@@ -755,7 +777,7 @@ Risk of "REBOUND" stridor when epi wears off
             
             if (isCorrect) {
                 score += correct.points;
-                feedback.innerHTML = `<span style="color:#4ade80">✓ ${correct.explanation}</span>`;
+                feedback.innerHTML = `<span style="color:var(--rdx-teal,#2874a6)">✓ ${correct.explanation}</span>`;
                 feedback.classList.add('correct-feedback');
                 decisions.push({ stage, choice: selected, result: 'optimal', points: correct.points });
             } else {
@@ -837,7 +859,7 @@ Risk of "REBOUND" stridor when epi wears off
         
         function updateDifficulty() {
             // Could add difficulty-specific content variations here
-            console.log('Difficulty changed to:', document.getElementById('difficulty').value);
+.value);
         }
     </script>
     <script src="dx-case-nav.js"></script>
@@ -850,12 +872,22 @@ Risk of "REBOUND" stridor when epi wears off
          data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
          style="display:none;"></div>
     <script src="dx-ai-tutor.js"></script>
-<script src="../../dx-progress.js"></script>
+<script src="../dx-progress.js"></script>
 <script src="dx-adventure-tracker.js"></script>
-<script src="../../dx-cross-links.js"></script>
-<script src="../../data/rdx-persist.js"></script>
+<script src="../dx-cross-links.js"></script>
+<script src="../data/rdx-persist.js"></script>
 
-<script src="../dx-feedback.js"></script>
+
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<div class="rdx-specialty-refs" style="margin:20px 0;padding:16px;background:var(--rdx-teal-50,#f0f7fc);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px"><h4 style="color:var(--rdx-teal-dark,#1f5f8b);font-size:0.85rem;margin-bottom:8px">Evidence-Based Guidelines</h4><ul style="list-style:none;padding:0;margin:0"><li style="padding:6px 0;font-size:0.85rem"><a href="https://doi.org/10.1542/peds.2015-0382" target="_blank" rel="noopener" style="color:var(--rdx-teal,#2874a6);text-decoration:none">AAP/CPS Practice Guideline: Croup Management</a> — <em style="color:var(--rdx-text-muted,#64748b)">Pediatrics</em></li></ul></div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+
+<script src="../../dx-feedback.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">

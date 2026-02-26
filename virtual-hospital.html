@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx Virtual Hospital</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand: #2874A6; --brand-dark: #1B4F72; --brand-light: #EBF5FB;
+  --accent: #F39C12; --green: #27AE60; --red: #E74C3C; --purple: #8E44AD;
+  --text: #1a1a2e; --text-muted: #64748b; --bg: #0f1923;
+  --card: #1a2634; --card-hover: #1f2f42; --border: #2a3f55;
+  --floor-bg: #16202c; --room-bg: #1c2a38; --room-active: #1f3347;
+  --font: 'DM Sans', -apple-system, sans-serif; --mono: 'JetBrains Mono', monospace;
+  --shadow: 0 4px 20px rgba(0,0,0,0.3);
+  --glow: 0 0 20px rgba(40,116,166,0.3);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:var(--bg); color:#e0e8f0; min-height:100vh; overflow-x:hidden; }
+
+/* ═══ TOPBAR ═══ */
+.topbar {
+  background: linear-gradient(135deg, #0d1520, #162030);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 200;
+}
+.topbar-left { display:flex; align-items:center; gap:12px; }
+.topbar-logo { font-size:15px; font-weight:700; color:white; }
+.topbar-logo span { color:var(--brand); }
+.topbar-badge { background:var(--brand); color:white; padding:2px 10px; border-radius:10px; font-size:10px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; }
+.topbar-nav { display:flex; gap:4px; }
+.topbar-nav a {
+  color: var(--text-muted); text-decoration:none; font-size:12px; font-weight:600;
+  padding: 6px 12px; border-radius:6px; transition: all .15s;
+}
+.topbar-nav a:hover { color:white; background:rgba(255,255,255,.08); }
+.topbar-nav a.active { color:var(--brand); background:rgba(40,116,166,.15); }
+.topbar-right { display:flex; align-items:center; gap:16px; }
+.topbar-clock { font-family:var(--mono); font-size:12px; color:var(--text-muted); }
+.topbar-census { font-size:11px; color:var(--brand); font-weight:600; }
+
+/* ═══ MAIN LAYOUT ═══ */
+.hospital-container {
+  display: flex; height: calc(100vh - 52px);
+}
+
+/* ═══ FLOOR SELECTOR (Left rail) ═══ */
+.floor-rail {
+  width: 72px; background: #0d1520; border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 12px 0; gap: 4px; flex-shrink:0;
+}
+.floor-btn {
+  width: 56px; padding: 8px 4px; border: none; border-radius: 8px;
+  background: transparent; color: var(--text-muted); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-family: var(--font); font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .3px; transition: all .2s;
+  position: relative;
+}
+.floor-btn .floor-icon { font-size: 20px; }
+.floor-btn:hover { background: rgba(40,116,166,.12); color: #a0b8d0; }
+.floor-btn.active { background: var(--brand); color: white; box-shadow: var(--glow); }
+.floor-btn .floor-count {
+  position:absolute; top:2px; right:4px;
+  background:var(--red); color:white; font-size:8px; font-weight:700;
+  min-width:14px; height:14px; border-radius:7px; display:flex;
+  align-items:center; justify-content:center; padding:0 3px;
+}
+.floor-btn .floor-count:empty { display:none; }
+
+.elevator-shaft {
+  width:56px; margin:8px 0; position:relative;
+  background: linear-gradient(to bottom, rgba(40,116,166,.08), rgba(40,116,166,.03));
+  border-radius: 4px; flex:1; min-height:40px;
+}
+.elevator-car {
+  position:absolute; left:4px; right:4px; height:24px;
+  background: var(--brand); border-radius:4px;
+  transition: top .6s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 0 12px rgba(40,116,166,.4);
+  display:flex; align-items:center; justify-content:center;
+}
+.elevator-car::after { content:'▪▪▪'; color:rgba(255,255,255,.6); font-size:6px; letter-spacing:2px; }
+
+/* ═══ FLOOR VIEW (Center) ═══ */
+.floor-view {
+  flex:1; overflow-y:auto; padding:20px 24px;
+  background: linear-gradient(180deg, #0f1923, #131f2b);
+}
+.floor-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--border);
+}
+.floor-title { font-size:22px; font-weight:700; color:white; display:flex; align-items:center; gap:10px; }
+.floor-title .floor-emoji { font-size:28px; }
+.floor-subtitle { font-size:12px; color:var(--text-muted); margin-top:2px; }
+.floor-stats { display:flex; gap:16px; }
+.floor-stat {
+  text-align:center; padding:8px 14px; background:rgba(40,116,166,.1);
+  border:1px solid rgba(40,116,166,.2); border-radius:8px;
+}
+.floor-stat-value { font-size:20px; font-weight:700; color:var(--brand); font-family:var(--mono); }
+.floor-stat-label { font-size:9px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; font-weight:600; }
+
+/* ═══ ROOM GRID ═══ */
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.room-card {
+  background: var(--room-bg); border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 14px; cursor: pointer;
+  transition: all .2s; position:relative; overflow:hidden;
+}
+.room-card:hover { background: var(--room-active); border-color: var(--brand); transform: translateY(-2px); box-shadow: var(--glow); }
+.room-card.occupied { border-left: 3px solid var(--brand); }
+.room-card.critical { border-left: 3px solid var(--red); }
+.room-card.empty { opacity:.5; border-style:dashed; }
+.room-card.empty:hover { opacity:.7; }
+
+.room-number {
+  font-family:var(--mono); font-size:11px; font-weight:600;
+  color:var(--brand); margin-bottom:8px; display:flex;
+  align-items:center; justify-content:space-between;
+}
+.room-type-badge {
+  font-size:8px; padding:2px 6px; border-radius:4px;
+  background:rgba(40,116,166,.15); color:var(--brand);
+  text-transform:uppercase; font-weight:700; letter-spacing:.3px;
+}
+.room-type-badge.trauma { background:rgba(231,76,60,.15); color:var(--red); }
+.room-type-badge.icu { background:rgba(142,68,173,.15); color:var(--purple); }
+.room-type-badge.or { background:rgba(39,174,96,.15); color:var(--green); }
+
+.room-patient { margin-top:4px; }
+.room-patient-name { font-size:14px; font-weight:600; color:white; }
+.room-patient-info { font-size:11px; color:var(--text-muted); margin-top:2px; }
+.room-patient-dx { font-size:11px; color:var(--accent); margin-top:4px; font-weight:500; }
+.room-vitals-mini {
+  display:flex; gap:8px; margin-top:8px; padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.06); font-family:var(--mono); font-size:10px;
+}
+.room-vital { color:var(--text-muted); }
+.room-vital.abnormal { color:var(--red); font-weight:600; }
+.room-vital span { color:rgba(255,255,255,.3); font-size:8px; }
+
+.room-status-dot {
+  width:8px; height:8px; border-radius:50%; display:inline-block;
+  margin-right:4px; vertical-align:middle;
+}
+.room-status-dot.stable { background:var(--green); box-shadow:0 0 6px rgba(39,174,96,.4); }
+.room-status-dot.guarded { background:var(--accent); box-shadow:0 0 6px rgba(243,156,18,.4); }
+.room-status-dot.critical { background:var(--red); box-shadow:0 0 6px rgba(231,76,60,.4); animation:pulse-dot 1.5s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.room-empty-label { font-size:12px; color:var(--text-muted); font-style:italic; }
+.room-bed-icon { font-size:24px; opacity:.3; text-align:center; margin:8px 0; }
+
+/* ═══ SPECIAL AREAS ═══ */
+.area-section {
+  margin-top:20px; padding-top:16px; border-top:1px solid var(--border);
+}
+.area-title {
+  font-size:13px; font-weight:700; color:var(--text-muted);
+  text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;
+}
+.station-row {
+  display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;
+}
+.station-card {
+  background: var(--room-bg); border:1px solid var(--border); border-radius:10px;
+  padding:12px 16px; flex:1; min-width:140px; cursor:pointer; transition:all .2s;
+  display:flex; align-items:center; gap:10px;
+}
+.station-card:hover { border-color:var(--brand); background:var(--room-active); }
+.station-icon { font-size:24px; }
+.station-info { flex:1; }
+.station-name { font-size:13px; font-weight:600; color:white; }
+.station-desc { font-size:10px; color:var(--text-muted); }
+
+/* ═══ PATIENT DETAIL PANEL (Right slide-in) ═══ */
+.patient-panel {
+  width: 380px; background: #0d1520; border-left:1px solid var(--border);
+  height: calc(100vh - 52px); overflow-y:auto;
+  transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+  position:fixed; right:0; top:52px; z-index:150;
+  box-shadow: -8px 0 30px rgba(0,0,0,.4);
+}
+.patient-panel.open { transform: translateX(0); }
+.panel-header {
+  padding:16px 20px; background:linear-gradient(135deg,var(--brand-dark),var(--brand));
+  color:white; position:sticky; top:0; z-index:10;
+}
+.panel-close {
+  position:absolute; top:12px; right:12px; background:rgba(255,255,255,.15);
+  border:none; color:white; width:28px; height:28px; border-radius:50%;
+  cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;
+  transition: background .15s;
+}
+.panel-close:hover { background:rgba(255,255,255,.25); }
+.panel-room-num { font-family:var(--mono); font-size:11px; opacity:.8; }
+.panel-patient-name { font-size:18px; font-weight:700; margin-top:4px; }
+.panel-patient-meta { font-size:12px; opacity:.85; margin-top:2px; }
+
+.panel-body { padding:16px 20px; }
+.panel-section { margin-bottom:16px; }
+.panel-section-title {
+  font-size:10px; font-weight:700; color:var(--brand);
+  text-transform:uppercase; letter-spacing:.8px; margin-bottom:8px;
+  display:flex; align-items:center; gap:6px;
+}
+.panel-vitals-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:6px;
+}
+.panel-vital-chip {
+  background:var(--card); border:1px solid var(--border); border-radius:6px;
+  padding:6px; text-align:center;
+}
+.panel-vital-chip.abnormal { border-color:rgba(231,76,60,.4); background:rgba(231,76,60,.08); }
+.panel-vital-label { font-size:8px; color:var(--text-muted); text-transform:uppercase; font-weight:600; letter-spacing:.3px; }
+.panel-vital-value { font-size:14px; font-weight:700; font-family:var(--mono); margin-top:2px; color:white; }
+.panel-vital-chip.abnormal .panel-vital-value { color:var(--red); }
+
+.panel-dx {
+  background:rgba(40,116,166,.1); border:1px solid rgba(40,116,166,.2);
+  border-radius:8px; padding:10px 12px; font-size:13px; font-weight:600; color:var(--brand);
+}
+.panel-history-item {
+  font-size:12px; color:#c0ccd8; padding:3px 0;
+  display:flex; align-items:flex-start; gap:6px;
+}
+.panel-history-item::before { content:'•'; color:var(--brand); flex-shrink:0; }
+
+.panel-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.panel-action-btn {
+  padding:8px 14px; border-radius:8px; border:1px solid var(--border);
+  background:var(--card); color:white; font-family:var(--font);
+  font-size:12px; font-weight:600; cursor:pointer; transition:all .15s;
+  display:flex; align-items:center; gap:6px;
+}
+.panel-action-btn:hover { border-color:var(--brand); background:var(--brand); }
+.panel-action-btn.primary { background:var(--brand); border-color:var(--brand); }
+.panel-action-btn.primary:hover { filter:brightness(1.15); }
+
+/* ═══ BLUEPRINT GRID OVERLAY ═══ */
+.floor-view::before {
+  content:''; position:fixed; inset:52px 0 0 72px; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(40,116,166,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40,116,166,.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.floor-view > * { position:relative; z-index:1; }
+
+/* ═══ CROSS-SECTION MINI-MAP ═══ */
+.minimap {
+  width:56px; margin:0 auto 8px; padding:4px;
+  background:rgba(40,116,166,.08); border:1px solid rgba(40,116,166,.15);
+  border-radius:6px;
+}
+.minimap-floor {
+  height:8px; margin:1px 0; border-radius:2px;
+  background:rgba(255,255,255,.06); transition:all .2s; cursor:pointer;
+}
+.minimap-floor.active { background:var(--brand); box-shadow:0 0 6px rgba(40,116,166,.5); }
+.minimap-floor:hover { background:rgba(40,116,166,.4); }
+
+/* ═══ WELCOME OVERLAY ═══ */
+.welcome-overlay {
+  position:fixed; inset:0; z-index:300;
+  background:linear-gradient(135deg, #0a1018 0%, #0f1923 40%, #162030 100%);
+  display:flex; align-items:center; justify-content:center;
+  transition: opacity .5s, visibility .5s;
+}
+.welcome-overlay.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+.welcome-content { text-align:center; max-width:520px; padding:40px; }
+.welcome-hospital {
+  font-size:80px; margin-bottom:20px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.welcome-title { font-size:32px; font-weight:700; color:white; margin-bottom:8px; }
+.welcome-title span { color:var(--brand); }
+.welcome-subtitle { font-size:14px; color:var(--text-muted); margin-bottom:32px; line-height:1.6; }
+.welcome-floors {
+  display:flex; flex-direction:column; gap:6px; margin-bottom:28px; text-align:left;
+}
+.welcome-floor-row {
+  display:flex; align-items:center; gap:12px; padding:8px 14px;
+  background:rgba(40,116,166,.06); border:1px solid rgba(40,116,166,.1);
+  border-radius:8px; font-size:13px; color:#a0b8d0;
+}
+.welcome-floor-row .wf-icon { font-size:18px; width:28px; text-align:center; }
+.welcome-floor-row .wf-name { font-weight:600; color:white; min-width:100px; }
+.welcome-enter {
+  padding:14px 40px; background:var(--brand); color:white; border:none;
+  border-radius:10px; font-family:var(--font); font-size:15px; font-weight:700;
+  cursor:pointer; transition:all .2s; letter-spacing:.3px;
+}
+.welcome-enter:hover { filter:brightness(1.15); transform:scale(1.03); box-shadow:var(--glow); }
+
+/* ═══ TOAST ═══ */
+.toast {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px);
+  background:var(--card); border:1px solid var(--border); color:white;
+  padding:10px 20px; border-radius:10px; font-size:13px; font-weight:500;
+  box-shadow:var(--shadow); z-index:300; transition:transform .3s;
+  display:flex; align-items:center; gap:8px;
+}
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px) {
+  .floor-rail { width:56px; }
+  .floor-btn { width:44px; font-size:8px; }
+  .floor-btn .floor-icon { font-size:16px; }
+  .room-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .patient-panel { width:100vw; }
+  .floor-title { font-size:18px; }
+  .building-wrap { padding:16px; }
+  .building-floor { min-height:60px; }
+}
+
+/* ═══ VIEW TOGGLE ═══ */
+.view-toggle {
+  display:flex; gap:2px; background:rgba(255,255,255,.06); border-radius:8px; padding:2px;
+}
+.view-toggle-btn {
+  padding:5px 12px; border:none; border-radius:6px; background:transparent;
+  color:var(--text-muted); font-family:var(--font); font-size:11px; font-weight:600;
+  cursor:pointer; transition:all .15s;
+}
+.view-toggle-btn.active { background:var(--brand); color:white; }
+.view-toggle-btn:hover:not(.active) { color:white; }
+
+/* ═══ BUILDING CROSS-SECTION ═══ */
+.building-wrap {
+  padding:24px; height:100%; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; position:relative;
+}
+.building-outer {
+  position:relative; width:100%; max-width:900px;
+  background:linear-gradient(135deg,#0a1018,#101c28);
+  border:2px solid var(--border); border-radius:16px;
+  overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+/* Building shell decoration */
+.building-outer::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(40,116,166,.06) 79px, rgba(40,116,166,.06) 80px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(40,116,166,.04) 59px, rgba(40,116,166,.04) 60px);
+}
+.building-label {
+  text-align:center; padding:12px 0 4px; font-size:11px; color:var(--text-muted);
+  font-weight:600; text-transform:uppercase; letter-spacing:1.5px;
+}
+.building-floor {
+  display:flex; align-items:stretch; min-height:80px;
+  border-top:1.5px solid rgba(40,116,166,.15); cursor:pointer;
+  transition:all .25s; position:relative; z-index:1;
+}
+.building-floor:hover { background:rgba(40,116,166,.08); }
+.building-floor.active-floor { background:rgba(40,116,166,.12); box-shadow:inset 4px 0 0 var(--brand); }
+
+.bf-sidebar {
+  width:80px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:8px; border-right:1px solid rgba(40,116,166,.1); flex-shrink:0;
+}
+.bf-emoji { font-size:22px; }
+.bf-label { font-size:9px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; margin-top:2px; }
+.bf-floor-num { font-family:var(--mono); font-size:8px; color:rgba(255,255,255,.25); }
+
+.bf-rooms {
+  flex:1; display:flex; flex-wrap:wrap; align-items:center; gap:5px;
+  padding:10px 14px; position:relative;
+}
+.bf-room {
+  width:32px; height:24px; border-radius:4px; border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center; font-size:8px;
+  transition:all .2s; position:relative;
+}
+.bf-room.empty { background:rgba(255,255,255,.02); border-style:dashed; border-color:rgba(255,255,255,.08); }
+.bf-room.occupied { background:rgba(40,116,166,.15); border-color:rgba(40,116,166,.4); }
+.bf-room.critical { background:rgba(231,76,60,.12); border-color:rgba(231,76,60,.4); }
+.bf-room .bf-dot {
+  width:6px; height:6px; border-radius:50%;
+}
+.bf-room.occupied .bf-dot { background:var(--brand); }
+.bf-room.critical .bf-dot { background:var(--red); animation:pulse-dot 1.5s infinite; }
+.bf-room.empty .bf-dot { background:rgba(255,255,255,.1); width:4px; height:4px; }
+
+.bf-room:hover { transform:scale(1.3); z-index:5; }
+.bf-room:hover::after {
+  content:attr(data-tip); position:absolute; bottom:calc(100% + 4px); left:50%;
+  transform:translateX(-50%); background:#1a2634; color:white; padding:3px 8px;
+  border-radius:4px; font-size:9px; white-space:nowrap; border:1px solid var(--border);
+  pointer-events:none; z-index:10; box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+
+.bf-stats {
+  width:120px; display:flex; flex-direction:column; justify-content:center;
+  align-items:flex-end; padding:8px 14px; border-left:1px solid rgba(40,116,166,.1);
+  flex-shrink:0;
+}
+.bf-stat-num { font-family:var(--mono); font-size:18px; font-weight:700; color:var(--brand); }
+.bf-stat-of { font-size:9px; color:var(--text-muted); }
+.bf-stat-bar {
+  width:100%; height:4px; background:rgba(255,255,255,.06); border-radius:2px;
+  margin-top:4px; overflow:hidden;
+}
+.bf-stat-fill { height:100%; background:var(--brand); border-radius:2px; transition:width .5s; }
+
+/* ═══ ELEVATOR SHAFT IN BUILDING ═══ */
+.building-elevator {
+  position:absolute; right:132px; top:0; bottom:0; width:24px; z-index:2;
+  background:linear-gradient(90deg, rgba(40,116,166,.04), rgba(40,116,166,.08), rgba(40,116,166,.04));
+  border-left:1px solid rgba(40,116,166,.1); border-right:1px solid rgba(40,116,166,.1);
+}
+.building-elev-car {
+  position:absolute; left:2px; right:2px; height:18px;
+  background:var(--brand); border-radius:3px;
+  transition:top .7s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 10px rgba(40,116,166,.5);
+}
+.building-elev-car::after { content:'▪▪'; color:rgba(255,255,255,.6); font-size:5px; display:flex; align-items:center; justify-content:center; height:100%; letter-spacing:1px; }
+
+/* ═══ TRANSPORT ANIMATION ═══ */
+.transport-overlay {
+  position:fixed; inset:0; z-index:250; background:rgba(0,0,0,.7);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transition:all .3s;
+}
+.transport-overlay.active { opacity:1; visibility:visible; }
+.transport-card {
+  background:var(--card); border:1px solid var(--border); border-radius:16px;
+  padding:28px 32px; max-width:420px; width:90%; text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.transport-title { font-size:18px; font-weight:700; color:white; margin-bottom:4px; }
+.transport-sub { font-size:12px; color:var(--text-muted); margin-bottom:20px; }
+.transport-dest-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+.transport-dest {
+  padding:12px; border:1.5px solid var(--border); border-radius:10px;
+  cursor:pointer; transition:all .2s; text-align:center;
+}
+.transport-dest:hover { border-color:var(--brand); background:rgba(40,116,166,.08); }
+.transport-dest.selected { border-color:var(--brand); background:rgba(40,116,166,.15); box-shadow:var(--glow); }
+.transport-dest .td-emoji { font-size:24px; }
+.transport-dest .td-name { font-size:12px; font-weight:600; color:white; margin-top:4px; }
+.transport-dest .td-desc { font-size:10px; color:var(--text-muted); }
+.transport-confirm {
+  padding:10px 28px; background:var(--brand); color:white; border:none;
+  border-radius:8px; font-family:var(--font); font-size:13px; font-weight:700;
+  cursor:pointer; transition:all .15s; margin-right:8px;
+}
+.transport-confirm:hover { filter:brightness(1.15); }
+.transport-confirm:disabled { opacity:.4; cursor:not-allowed; }
+.transport-cancel {
+  padding:10px 20px; background:transparent; color:var(--text-muted); border:1px solid var(--border);
+  border-radius:8px; font-family:var(--font); font-size:13px; font-weight:600; cursor:pointer;
+}
+.transport-cancel:hover { color:white; border-color:rgba(255,255,255,.2); }
+
+/* Transport in-progress animation */
+.transport-anim {
+  position:fixed; z-index:260; pointer-events:none;
+  width:44px; height:44px; border-radius:50%;
+  background:var(--brand); display:flex; align-items:center; justify-content:center;
+  font-size:20px; box-shadow:0 0 30px rgba(40,116,166,.6), 0 0 60px rgba(40,116,166,.3);
+  transition:all 1.2s cubic-bezier(.4,0,.2,1);
+  opacity:0;
+}
+.transport-anim.moving { opacity:1; }
+.transport-anim .ta-ring {
+  position:absolute; inset:-6px; border:2px solid var(--brand); border-radius:50%;
+  animation:ta-pulse 1s infinite;
+}
+@keyframes ta-pulse { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(1.5);opacity:0} }
+</style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">Reason<span>Dx</span></div>
+    <div class="topbar-badge">Virtual Hospital</div>
+  </div>
+  <div class="topbar-nav">
+    <a href="/training.html">Training Hub</a>
+    <a href="/legacy/ed-board-v2.html">ED Board</a>
+    <a href="/night-float.html">Night Float</a>
+    <a href="/simroomdx.html">SimRoom</a>
+    <a href="#" class="active">Hospital</a>
+  </div>
+  <div class="topbar-right">
+    <div class="view-toggle">
+      <button class="view-toggle-btn" id="togBuilding" onclick="switchView('building')">🏥 Building</button>
+      <button class="view-toggle-btn active" id="togFloor" onclick="switchView('floor')">📋 Floor</button>
+    </div>
+    <div class="topbar-census" id="censusCount"></div>
+    <div class="topbar-clock" id="clock"></div>
+  </div>
+</div>
+
+<!-- ═══ WELCOME OVERLAY ═══ -->
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-content">
+    <div class="welcome-hospital">🏥</div>
+    <div class="welcome-title">Reason<span>Dx</span> Virtual Hospital</div>
+    <div class="welcome-subtitle">Navigate a fully explorable hospital. Walk the halls, enter patient rooms, and manage your census across every floor — from the Emergency Department to the ICU.</div>
+    <div class="welcome-floors">
+      <div class="welcome-floor-row"><span class="wf-icon">🚁</span><span class="wf-name">Rooftop</span>Helipad &amp; EMS arrivals</div>
+      <div class="welcome-floor-row"><span class="wf-icon">🔪</span><span class="wf-name">Floor 5</span>Operating Suites &amp; PACU</div>
+      <div class="welcome-floor-row"><span class="wf-icon">🛏️</span><span class="wf-name">Floor 4</span>Medical / Surgical Ward</div>
+      <div class="welcome-floor-row"><span class="wf-icon">📟</span><span class="wf-name">Floor 3</span>Telemetry &amp; Step-Down Unit</div>
+      <div class="welcome-floor-row"><span class="wf-icon">🫀</span><span class="wf-name">Floor 2</span>Intensive Care Unit (ICU / CCU)</div>
+      <div class="welcome-floor-row"><span class="wf-icon">🚨</span><span class="wf-name">Floor 1</span>Emergency Department</div>
+    </div>
+    <button class="welcome-enter" onclick="enterHospital()">Enter the Hospital →</button>
+  </div>
+</div>
+
+<!-- ═══ MAIN LAYOUT ═══ -->
+<div class="hospital-container">
+
+  <!-- LEFT RAIL: Floor selector -->
+  <div class="floor-rail">
+    <div class="minimap" id="minimap"></div>
+
+    <button class="floor-btn" data-floor="roof" onclick="goToFloor('roof')">
+      <span class="floor-icon">🚁</span>Roof
+      <span class="floor-count" id="count-roof"></span>
+    </button>
+    <button class="floor-btn" data-floor="or" onclick="goToFloor('or')">
+      <span class="floor-icon">🔪</span>F5 · OR
+      <span class="floor-count" id="count-or"></span>
+    </button>
+    <button class="floor-btn" data-floor="medsurg" onclick="goToFloor('medsurg')">
+      <span class="floor-icon">🛏️</span>F4 · Ward
+      <span class="floor-count" id="count-medsurg"></span>
+    </button>
+    <button class="floor-btn" data-floor="tele" onclick="goToFloor('tele')">
+      <span class="floor-icon">📟</span>F3 · Tele
+      <span class="floor-count" id="count-tele"></span>
+    </button>
+    <button class="floor-btn" data-floor="icu" onclick="goToFloor('icu')">
+      <span class="floor-icon">🫀</span>F2 · ICU
+      <span class="floor-count" id="count-icu"></span>
+    </button>
+    <button class="floor-btn active" data-floor="ed" onclick="goToFloor('ed')">
+      <span class="floor-icon">🚨</span>F1 · ED
+      <span class="floor-count" id="count-ed"></span>
+    </button>
+
+    <div class="elevator-shaft" id="elevatorShaft">
+      <div class="elevator-car" id="elevatorCar" style="top:calc(100% - 28px)"></div>
+    </div>
+  </div>
+
+  <!-- CENTER: Floor view -->
+  <div class="floor-view" id="floorView"></div>
+</div>
+
+<!-- ═══ PATIENT DETAIL PANEL ═══ -->
+<div class="patient-panel" id="patientPanel">
+  <div class="panel-header">
+    <button class="panel-close" onclick="closePanel()">✕</button>
+    <div class="panel-room-num" id="panelRoom"></div>
+    <div class="panel-patient-name" id="panelName"></div>
+    <div class="panel-patient-meta" id="panelMeta"></div>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══ TRANSPORT OVERLAY ═══ -->
+<div class="transport-overlay" id="transportOverlay">
+  <div class="transport-card">
+    <div class="transport-title" id="transportTitle">Transfer Patient</div>
+    <div class="transport-sub" id="transportSub">Select destination</div>
+    <div class="transport-dest-grid" id="transportDests"></div>
+    <div>
+      <button class="transport-confirm" id="transportConfirm" disabled onclick="confirmTransport()">🚑 Transfer Now</button>
+      <button class="transport-cancel" onclick="cancelTransport()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TRANSPORT ANIMATION DOT ═══ -->
+<div class="transport-anim" id="transportAnim">🛏️<div class="ta-ring"></div></div>
+
+<script>
+// ═══════════════════════════════════════════
+//  HOSPITAL DATA MODEL
+// ═══════════════════════════════════════════
+
+const FLOORS = {
+  ed: {
+    name: 'Emergency Department', emoji: '🚨', floor: 'Floor 1',
+    subtitle: 'Trauma bays, exam rooms, triage, resuscitation',
+    zones: [
+      { name: 'Trauma Bays', type: 'trauma', rooms: [
+        { id:'T1', label:'Trauma 1', type:'trauma' },
+        { id:'T2', label:'Trauma 2', type:'trauma' },
+      ]},
+      { name: 'Resuscitation', type: 'resus', rooms: [
+        { id:'R1', label:'Resus 1', type:'resus' },
+        { id:'R2', label:'Resus 2', type:'resus' },
+      ]},
+      { name: 'Exam Rooms', type: 'exam', rooms: [
+        { id:'ED-1', label:'Exam 1' },{ id:'ED-2', label:'Exam 2' },
+        { id:'ED-3', label:'Exam 3' },{ id:'ED-4', label:'Exam 4' },
+        { id:'ED-5', label:'Exam 5' },{ id:'ED-6', label:'Exam 6' },
+        { id:'ED-7', label:'Exam 7' },{ id:'ED-8', label:'Exam 8' },
+        { id:'ED-9', label:'Exam 9' },{ id:'ED-10', label:'Exam 10' },
+        { id:'ED-11', label:'Exam 11' },{ id:'ED-12', label:'Exam 12' },
+      ]},
+      { name: 'Fast Track', type: 'fast', rooms: [
+        { id:'FT-1', label:'Fast Track 1' },{ id:'FT-2', label:'Fast Track 2' },
+        { id:'FT-3', label:'Fast Track 3' },
+      ]},
+    ],
+    stations: [
+      { icon:'🖥️', name:'Nurses Station', desc:'Central monitoring, orders' },
+      { icon:'🗂️', name:'Triage', desc:'ESI acuity assignment', link:'/legacy/ed-board-v2.html' },
+      { icon:'💊', name:'Med Room', desc:'Medication dispensing' },
+      { icon:'🩻', name:'Radiology', desc:'CT, X-ray, Ultrasound' },
+    ]
+  },
+  icu: {
+    name: 'Intensive Care Unit', emoji: '🫀', floor: 'Floor 2',
+    subtitle: 'ICU, CCU, and critical care beds with continuous monitoring',
+    zones: [
+      { name: 'Medical ICU', type: 'icu', rooms: [
+        { id:'ICU-1', label:'MICU Bed 1', type:'icu' },{ id:'ICU-2', label:'MICU Bed 2', type:'icu' },
+        { id:'ICU-3', label:'MICU Bed 3', type:'icu' },{ id:'ICU-4', label:'MICU Bed 4', type:'icu' },
+        { id:'ICU-5', label:'MICU Bed 5', type:'icu' },{ id:'ICU-6', label:'MICU Bed 6', type:'icu' },
+      ]},
+      { name: 'Coronary Care Unit', type: 'icu', rooms: [
+        { id:'CCU-1', label:'CCU Bed 1', type:'icu' },{ id:'CCU-2', label:'CCU Bed 2', type:'icu' },
+        { id:'CCU-3', label:'CCU Bed 3', type:'icu' },{ id:'CCU-4', label:'CCU Bed 4', type:'icu' },
+      ]},
+    ],
+    stations: [
+      { icon:'🖥️', name:'Central Monitor Bank', desc:'Real-time telemetry, alarms' },
+      { icon:'🧪', name:'ABG/POC Lab', desc:'Point-of-care testing' },
+      { icon:'💊', name:'Pyxis Station', desc:'Medication dispensing' },
+    ]
+  },
+  tele: {
+    name: 'Telemetry / Step-Down', emoji: '📟', floor: 'Floor 3',
+    subtitle: 'Continuous cardiac monitoring, step-down from ICU',
+    zones: [
+      { name: 'Telemetry Beds', type: 'tele', rooms: [
+        { id:'TELE-301', label:'Room 301', type:'tele' },{ id:'TELE-302', label:'Room 302', type:'tele' },
+        { id:'TELE-303', label:'Room 303', type:'tele' },{ id:'TELE-304', label:'Room 304', type:'tele' },
+        { id:'TELE-305', label:'Room 305', type:'tele' },{ id:'TELE-306', label:'Room 306', type:'tele' },
+        { id:'TELE-307', label:'Room 307', type:'tele' },{ id:'TELE-308', label:'Room 308', type:'tele' },
+      ]},
+    ],
+    stations: [
+      { icon:'📟', name:'Tele Monitor Station', desc:'Central rhythm monitoring' },
+      { icon:'🖥️', name:'Nurses Station 3N', desc:'Orders, charting' },
+    ]
+  },
+  medsurg: {
+    name: 'Medical / Surgical Ward', emoji: '🛏️', floor: 'Floor 4',
+    subtitle: 'General inpatient beds, post-operative care',
+    zones: [
+      { name: '4 North — Medicine', type: 'medsurg', rooms: [
+        { id:'401', label:'Room 401' },{ id:'402', label:'Room 402' },
+        { id:'403', label:'Room 403' },{ id:'404', label:'Room 404' },
+        { id:'405', label:'Room 405' },{ id:'406', label:'Room 406' },
+      ]},
+      { name: '4 South — Surgery', type: 'medsurg', rooms: [
+        { id:'411', label:'Room 411' },{ id:'412', label:'Room 412' },
+        { id:'413', label:'Room 413' },{ id:'414', label:'Room 414' },
+        { id:'415', label:'Room 415' },{ id:'416', label:'Room 416' },
+      ]},
+    ],
+    stations: [
+      { icon:'🖥️', name:'Nurses Station 4N', desc:'Medicine wing' },
+      { icon:'🖥️', name:'Nurses Station 4S', desc:'Surgery wing' },
+      { icon:'🚿', name:'Rehab Gym', desc:'PT/OT sessions' },
+    ]
+  },
+  or: {
+    name: 'Operating Suites', emoji: '🔪', floor: 'Floor 5',
+    subtitle: 'Operating rooms, PACU, pre-op holding',
+    zones: [
+      { name: 'Operating Rooms', type: 'or', rooms: [
+        { id:'OR-1', label:'OR Suite 1', type:'or' },{ id:'OR-2', label:'OR Suite 2', type:'or' },
+        { id:'OR-3', label:'OR Suite 3', type:'or' },{ id:'OR-4', label:'OR Suite 4', type:'or' },
+      ]},
+      { name: 'PACU (Recovery)', type: 'pacu', rooms: [
+        { id:'PACU-1', label:'PACU Bay 1' },{ id:'PACU-2', label:'PACU Bay 2' },
+        { id:'PACU-3', label:'PACU Bay 3' },{ id:'PACU-4', label:'PACU Bay 4' },
+      ]},
+    ],
+    stations: [
+      { icon:'🖥️', name:'OR Control Desk', desc:'Scheduling, board' },
+      { icon:'🧊', name:'Sterile Processing', desc:'Instruments, supply' },
+      { icon:'☕', name:'Pre-Op Holding', desc:'IV access, consent, marking' },
+    ]
+  },
+  roof: {
+    name: 'Rooftop / Helipad', emoji: '🚁', floor: 'Roof',
+    subtitle: 'Air medical arrivals, EMS access',
+    zones: [
+      { name: 'Landing Zone', type: 'helipad', rooms: [
+        { id:'HELI-1', label:'Helipad A', type:'helipad' },
+        { id:'HELI-2', label:'Helipad B', type:'helipad' },
+      ]},
+    ],
+    stations: [
+      { icon:'🚁', name:'Air Medical Base', desc:'Flight team ready room' },
+      { icon:'📡', name:'Communications', desc:'EMS patch, hospital command' },
+      { icon:'🌤️', name:'Weather Station', desc:'Flight conditions' },
+    ]
+  }
+};
+
+const FLOOR_ORDER = ['roof','or','medsurg','tele','icu','ed'];
+let currentFloor = 'ed';
+let hospitalPatients = {}; // roomId → patient data
+let selectedRoomId = null;
+
+// ═══════════════════════════════════════════
+//  DATA BRIDGE — Pull from ED Board & Night Float
+// ═══════════════════════════════════════════
+
+function loadPatientData() {
+  hospitalPatients = {};
+
+  // 1. Load ED Board active patients (from localStorage state)
+  try {
+    var edState = localStorage.getItem('ed-board-state');
+    if (edState) {
+      var parsed = JSON.parse(edState);
+      if (parsed.patients && Array.isArray(parsed.patients)) {
+        parsed.patients.forEach(function(p, i) {
+          var roomId = p.bed || 'ED-'+(i+1);
+          // Map bed names to our room IDs
+          var mapped = roomId;
+          if (/^T\d/.test(roomId)) mapped = roomId;
+          else if (/^R\d/.test(roomId)) mapped = roomId;
+          else if (/^\d+$/.test(roomId)) mapped = 'ED-'+roomId;
+          else if (!roomId.startsWith('ED-')) mapped = 'ED-'+(i+1);
+
+          hospitalPatients[mapped] = {
+            name: p.name || 'Unknown',
+            age: p.age || '',
+            sex: p.gender || '',
+            dx: (p.variant && p.variant.diagnosis) || p.boardCC || '',
+            cc: p.boardCC || '',
+            acuity: p.acuity || 3,
+            status: getPatientStatus(p),
+            vitals: (p.variant && p.variant.physicalExam && p.variant.physicalExam.vitalSigns) || {},
+            pmh: (p.variant && p.variant.clinicalFacts && p.variant.clinicalFacts.pmh) || [],
+            meds: (p.variant && p.variant.clinicalFacts && p.variant.clinicalFacts.medications) || [],
+            source: 'ed-board',
+            rawId: p.id,
+            labsOrdered: (p.discovered && p.discovered.labsOrdered) || [],
+            imagingOrdered: (p.discovered && p.discovered.imagingOrdered) || [],
+          };
+        });
+      }
+    }
+  } catch(e) { console.warn('ED Board data load failed:', e); }
+
+  // 2. Load admitted patients (Night Float bridge)
+  try {
+    var admitted = localStorage.getItem('rdx-admitted-patients');
+    if (admitted) {
+      var pts = JSON.parse(admitted);
+      if (Array.isArray(pts)) {
+        pts.forEach(function(a, i) {
+          var dispo = (a.edCourse && a.edCourse.disposition) || 'floor';
+          var floorMap = { icu:'ICU-', tele:'TELE-30', floor:'40', obs:'TELE-30' };
+          var prefix = floorMap[dispo] || '40';
+          var roomId = prefix + (i+1);
+
+          hospitalPatients[roomId] = {
+            name: a.name || 'Unknown',
+            age: a.age || '',
+            sex: a.sex || '',
+            dx: a.dx || 'Admitted',
+            cc: (a.clinicalHistory && a.clinicalHistory.chiefComplaint) || '',
+            acuity: a.acuity || 3,
+            status: dispo === 'icu' ? 'critical' : 'guarded',
+            vitals: (a.edCourse && a.edCourse.currentVitals) || (a.physicalExam && a.physicalExam.vitals) || {},
+            pmh: (a.clinicalHistory && a.clinicalHistory.pmh) || [],
+            meds: (a.clinicalHistory && a.clinicalHistory.medications) || [],
+            source: 'admitted',
+            rawId: a.id,
+            edCourse: a.edCourse || null,
+          };
+        });
+      }
+    }
+  } catch(e) { console.warn('Admitted patients load failed:', e); }
+
+  // 3. If no real data, populate demo patients
+  if (Object.keys(hospitalPatients).length === 0) {
+    loadDemoPatients();
+  }
+
+  updateFloorCounts();
+}
+
+function loadDemoPatients() {
+  var demos = [
+    { room:'T1', name:'Mr. David Chen', age:'45', sex:'M', dx:'Multi-System Trauma', cc:'MVC — unrestrained driver', acuity:1, status:'critical',
+      vitals:{BP:'88/56',HR:'128',RR:'28',Temp:'97.2°F',SpO2:'91%'}, pmh:['HTN','DM2'], meds:['Metformin 1000mg','Lisinopril 20mg'] },
+    { room:'R1', name:'Mrs. Barbara Thompson', age:'71', sex:'F', dx:'STEMI — Inferior', cc:'Crushing chest pain × 1h', acuity:1, status:'critical',
+      vitals:{BP:'148/92',HR:'88',RR:'20',Temp:'98.6°F',SpO2:'96%'}, pmh:['HTN','Hyperlipidemia','DM2'], meds:['Atorvastatin 40mg','Metoprolol 50mg'] },
+    { room:'ED-1', name:'Ms. Sarah Mitchell', age:'28', sex:'F', dx:'Acute Appendicitis', cc:'RLQ pain × 12h', acuity:2, status:'guarded',
+      vitals:{BP:'132/82',HR:'96',RR:'18',Temp:'100.8°F',SpO2:'99%'}, pmh:[], meds:['OCP'] },
+    { room:'ED-3', name:'Mr. James Okonkwo', age:'62', sex:'M', dx:'COPD Exacerbation', cc:'Worsening SOB × 3d', acuity:2, status:'guarded',
+      vitals:{BP:'142/88',HR:'102',RR:'26',Temp:'99.8°F',SpO2:'88%'}, pmh:['COPD','CHF','AFib'], meds:['Tiotropium','Eliquis 5mg','Furosemide 40mg'] },
+    { room:'ED-5', name:'Mr. Robert Garcia', age:'34', sex:'M', dx:'Kidney Stone', cc:'L flank pain, hematuria', acuity:3, status:'stable',
+      vitals:{BP:'158/94',HR:'92',RR:'18',Temp:'98.6°F',SpO2:'99%'}, pmh:['Prior stones x2'], meds:[] },
+    { room:'ED-7', name:'Mrs. Linda Park', age:'55', sex:'F', dx:'Migraine with Aura', cc:'Severe headache, visual changes', acuity:3, status:'stable',
+      vitals:{BP:'136/84',HR:'76',RR:'16',Temp:'98.4°F',SpO2:'99%'}, pmh:['Migraines','Anxiety'], meds:['Sumatriptan PRN','Sertraline 100mg'] },
+    { room:'ED-9', name:'Mr. Ahmed Hassan', age:'19', sex:'M', dx:'Ankle Fracture', cc:'Inversion injury playing basketball', acuity:4, status:'stable',
+      vitals:{BP:'118/72',HR:'78',RR:'14',Temp:'98.4°F',SpO2:'100%'}, pmh:[], meds:[] },
+    { room:'FT-1', name:'Ms. Emily Rivera', age:'42', sex:'F', dx:'UTI', cc:'Dysuria, frequency × 2d', acuity:4, status:'stable',
+      vitals:{BP:'122/76',HR:'82',RR:'16',Temp:'99.4°F',SpO2:'99%'}, pmh:['Recurrent UTIs'], meds:[] },
+    // ICU
+    { room:'ICU-1', name:'Mr. William Foster', age:'68', sex:'M', dx:'Septic Shock — Urosepsis', cc:'Admitted from ED, on vasopressors', acuity:1, status:'critical',
+      vitals:{BP:'82/54',HR:'112',RR:'24',Temp:'102.4°F',SpO2:'94%'}, pmh:['BPH','DM2','CKD3'], meds:['Tamsulosin','Metformin','Insulin glargine'] },
+    { room:'ICU-3', name:'Ms. Karen Wu', age:'52', sex:'F', dx:'DKA — ICU', cc:'Found altered, glucose 580', acuity:1, status:'critical',
+      vitals:{BP:'98/64',HR:'118',RR:'32',Temp:'97.8°F',SpO2:'97%'}, pmh:['DM1','Hypothyroidism'], meds:['Insulin pump','Levothyroxine'] },
+    { room:'CCU-1', name:'Mr. Frank Delgado', age:'74', sex:'M', dx:'Acute CHF Exacerbation', cc:'Post-STEMI, EF 25%', acuity:2, status:'guarded',
+      vitals:{BP:'108/68',HR:'92',RR:'22',Temp:'98.2°F',SpO2:'93%'}, pmh:['CAD','CHF','DM2'], meds:['Entresto','Carvedilol','Furosemide','Dapagliflozin'] },
+    // Telemetry
+    { room:'TELE-301', name:'Mrs. Dorothy Huang', age:'78', sex:'F', dx:'NSTEMI — Trending Troponins', cc:'Substernal pressure, trop 0.28', acuity:2, status:'guarded',
+      vitals:{BP:'142/82',HR:'78',RR:'16',Temp:'98.4°F',SpO2:'98%'}, pmh:['HTN','DM2','CKD3'], meds:['Amlodipine 10mg','Metformin 500mg'] },
+    { room:'TELE-303', name:'Mr. George Patterson', age:'66', sex:'M', dx:'New-Onset AFib with RVR', cc:'Palpitations, HR 148', acuity:2, status:'guarded',
+      vitals:{BP:'138/88',HR:'148',RR:'20',Temp:'98.6°F',SpO2:'96%'}, pmh:['HTN','OSA'], meds:['Lisinopril 20mg','CPAP'] },
+    // Med-Surg
+    { room:'401', name:'Mrs. Patricia Wells', age:'67', sex:'F', dx:'COPD — Improving', cc:'Day 2, weaning O2', acuity:3, status:'stable',
+      vitals:{BP:'128/78',HR:'84',RR:'18',Temp:'98.4°F',SpO2:'94%'}, pmh:['COPD','HTN'], meds:['Tiotropium','Albuterol PRN','Prednisone taper'] },
+    { room:'403', name:'Mr. Thomas Wright', age:'58', sex:'M', dx:'Post-Op Appendectomy', cc:'POD 1, tolerating diet', acuity:3, status:'stable',
+      vitals:{BP:'122/74',HR:'76',RR:'14',Temp:'99.0°F',SpO2:'99%'}, pmh:['Obesity'], meds:['Acetaminophen 1g q6h','Ibuprofen 400mg q8h'] },
+    // OR
+    { room:'OR-1', name:'Mr. Ahmad Patel', age:'72', sex:'M', dx:'Ruptured AAA — Emergent Repair', cc:'In OR, open repair', acuity:1, status:'critical',
+      vitals:{BP:'92/60',HR:'108',RR:'—',Temp:'96.8°F',SpO2:'96%'}, pmh:['HTN','Smoking 40py','PAD'], meds:['Amlodipine','ASA 81mg'] },
+  ];
+  demos.forEach(function(d) {
+    hospitalPatients[d.room] = d;
+  });
+}
+
+function getPatientStatus(p) {
+  if (!p || !p.acuity) return 'stable';
+  if (p.acuity <= 1) return 'critical';
+  if (p.acuity <= 2) return 'guarded';
+  return 'stable';
+}
+
+function updateFloorCounts() {
+  var counts = { ed:0, icu:0, tele:0, medsurg:0, or:0, roof:0 };
+  Object.keys(hospitalPatients).forEach(function(roomId) {
+    if (/^(T|R|ED-|FT-)/.test(roomId)) counts.ed++;
+    else if (/^(ICU|CCU)/.test(roomId)) counts.icu++;
+    else if (/^TELE/.test(roomId)) counts.tele++;
+    else if (/^(4\d\d|40)/.test(roomId)) counts.medsurg++;
+    else if (/^(OR|PACU)/.test(roomId)) counts.or++;
+    else if (/^HELI/.test(roomId)) counts.roof++;
+  });
+  Object.keys(counts).forEach(function(f) {
+    var el = document.getElementById('count-'+f);
+    if (el) el.textContent = counts[f] > 0 ? counts[f] : '';
+  });
+  var total = Object.values(counts).reduce(function(a,b){return a+b},0);
+  document.getElementById('censusCount').textContent = '🏥 Census: '+total+' patients';
+}
+
+// ═══════════════════════════════════════════
+//  FLOOR RENDERING
+// ═══════════════════════════════════════════
+
+function renderFloor(floorId) {
+  var floor = FLOORS[floorId];
+  if (!floor) return;
+
+  var occupied = 0, total = 0;
+  floor.zones.forEach(function(z) {
+    z.rooms.forEach(function(r) {
+      total++;
+      if (hospitalPatients[r.id]) occupied++;
+    });
+  });
+
+  var html = '<div class="floor-header">' +
+    '<div><div class="floor-title"><span class="floor-emoji">'+floor.emoji+'</span>'+floor.name+'</div>' +
+    '<div class="floor-subtitle">'+floor.floor+' — '+floor.subtitle+'</div></div>' +
+    '<div class="floor-stats">' +
+    '<div class="floor-stat"><div class="floor-stat-value">'+occupied+'</div><div class="floor-stat-label">Occupied</div></div>' +
+    '<div class="floor-stat"><div class="floor-stat-value">'+total+'</div><div class="floor-stat-label">Total Beds</div></div>' +
+    '<div class="floor-stat"><div class="floor-stat-value">'+Math.round(occupied/total*100||0)+'%</div><div class="floor-stat-label">Occupancy</div></div>' +
+    '</div></div>';
+
+  // Render zones
+  floor.zones.forEach(function(zone) {
+    html += '<div class="area-section"><div class="area-title">'+zone.name+'</div><div class="room-grid">';
+    zone.rooms.forEach(function(room) {
+      var pt = hospitalPatients[room.id];
+      var typeClass = room.type || '';
+      if (pt) {
+        var statusClass = pt.status || 'stable';
+        var cardClass = statusClass === 'critical' ? 'critical' : 'occupied';
+        html += '<div class="room-card '+cardClass+'" onclick="openRoom(\''+room.id+'\')">' +
+          '<div class="room-number">'+room.label+' <span class="room-type-badge '+typeClass+'">'+typeClass.toUpperCase()+'</span></div>' +
+          '<div class="room-patient">' +
+          '<div class="room-patient-name"><span class="room-status-dot '+statusClass+'"></span>'+pt.name+'</div>' +
+          '<div class="room-patient-info">'+pt.age+pt.sex+' · ESI '+pt.acuity+'</div>' +
+          '<div class="room-patient-dx">'+pt.dx+'</div>';
+        if (pt.vitals && pt.vitals.BP) {
+          var v = pt.vitals;
+          html += '<div class="room-vitals-mini">' +
+            vitalMini('BP', v.BP) + vitalMini('HR', v.HR) + vitalMini('SpO2', v.SpO2) +
+            '</div>';
+        }
+        html += '</div></div>';
+      } else {
+        html += '<div class="room-card empty" onclick="openEmptyRoom(\''+room.id+'\',\''+room.label+'\')">' +
+          '<div class="room-number">'+room.label+' <span class="room-type-badge '+typeClass+'">'+(typeClass||'exam').toUpperCase()+'</span></div>' +
+          '<div class="room-bed-icon">🛏️</div>' +
+          '<div class="room-empty-label">Available</div></div>';
+      }
+    });
+    html += '</div></div>';
+  });
+
+  // Stations
+  if (floor.stations && floor.stations.length > 0) {
+    html += '<div class="area-section"><div class="area-title">Stations &amp; Utilities</div><div class="station-row">';
+    floor.stations.forEach(function(s) {
+      var onclick = s.link ? 'onclick="window.open(\''+s.link+'\',\'_blank\')"' : '';
+      html += '<div class="station-card" '+onclick+'>' +
+        '<div class="station-icon">'+s.icon+'</div>' +
+        '<div class="station-info"><div class="station-name">'+s.name+'</div><div class="station-desc">'+s.desc+'</div></div>' +
+        (s.link ? '<span style="font-size:11px;color:var(--brand)">Open →</span>' : '') +
+        '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  document.getElementById('floorView').innerHTML = html;
+}
+
+function vitalMini(label, value) {
+  if (!value) return '';
+  var abnormal = false;
+  if (label==='BP' && /^(1[89]|[2-9]\d)\d/.test(value)) abnormal = true;
+  if (label==='HR' && (parseInt(value)>100 || parseInt(value)<50)) abnormal = true;
+  if (label==='SpO2' && parseInt(value)<94) abnormal = true;
+  return '<div class="room-vital '+(abnormal?'abnormal':'')+'"><span>'+label+'</span> '+value+'</div>';
+}
+
+// ═══════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════
+
+function goToFloor(floorId) {
+  currentFloor = floorId;
+
+  // Update button states
+  document.querySelectorAll('.floor-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.floor === floorId);
+  });
+
+  // Animate elevator
+  var idx = FLOOR_ORDER.indexOf(floorId);
+  var shaft = document.getElementById('elevatorShaft');
+  var shaftH = shaft.offsetHeight;
+  var carH = 24;
+  var topPos = (idx / (FLOOR_ORDER.length - 1)) * (shaftH - carH);
+  document.getElementById('elevatorCar').style.top = topPos + 'px';
+
+  // Update minimap
+  document.querySelectorAll('.minimap-floor').forEach(function(mf, i) {
+    mf.classList.toggle('active', FLOOR_ORDER[i] === floorId);
+  });
+
+  // If in building view, update highlight but stay in building view
+  if (currentView === 'building') {
+    renderBuilding();
+  } else {
+    renderFloor(floorId);
+  }
+  closePanel();
+}
+
+// ═══════════════════════════════════════════
+//  PATIENT PANEL
+// ═══════════════════════════════════════════
+
+function openRoom(roomId) {
+  var pt = hospitalPatients[roomId];
+  if (!pt) return;
+  selectedRoomId = roomId;
+
+  document.getElementById('panelRoom').textContent = '📍 ' + roomId;
+  document.getElementById('panelName').textContent = pt.name;
+  document.getElementById('panelMeta').textContent = pt.age + pt.sex + ' · ESI ' + pt.acuity + ' · ' + pt.cc;
+
+  var html = '';
+
+  // Status
+  var statusLabels = {critical:'🔴 Critical',guarded:'🟡 Guarded',stable:'🟢 Stable'};
+  html += '<div class="panel-section"><div class="panel-section-title">📊 Status</div>' +
+    '<div style="font-size:14px;font-weight:600;">'+(statusLabels[pt.status]||'Unknown')+'</div></div>';
+
+  // Diagnosis
+  html += '<div class="panel-section"><div class="panel-section-title">🏷️ Working Diagnosis</div>' +
+    '<div class="panel-dx">'+pt.dx+'</div></div>';
+
+  // Vitals
+  if (pt.vitals && pt.vitals.BP) {
+    var v = pt.vitals;
+    html += '<div class="panel-section"><div class="panel-section-title">💓 Vital Signs</div><div class="panel-vitals-grid">';
+    var vitals = [
+      {l:'BP',v:v.BP,a:/^(1[89]|[2-9]\d)\d|^([4-8]\d)\//.test(v.BP||'')},
+      {l:'HR',v:v.HR,a:parseInt(v.HR)>100||parseInt(v.HR)<50},
+      {l:'RR',v:v.RR,a:parseInt(v.RR)>20||parseInt(v.RR)<10},
+      {l:'Temp',v:v.Temp,a:/10[0-9]|104|105|97\.[0-3]|96|95/.test(v.Temp||'')},
+      {l:'SpO₂',v:v.SpO2,a:parseInt(v.SpO2)<94},
+    ];
+    vitals.forEach(function(vi) {
+      if (!vi.v) return;
+      html += '<div class="panel-vital-chip '+(vi.a?'abnormal':'')+'"><div class="panel-vital-label">'+vi.l+'</div><div class="panel-vital-value">'+vi.v+'</div></div>';
+    });
+    html += '</div></div>';
+  }
+
+  // PMH
+  if (pt.pmh && pt.pmh.length > 0) {
+    html += '<div class="panel-section"><div class="panel-section-title">📋 Past Medical History</div>';
+    pt.pmh.forEach(function(h) {
+      var text = typeof h === 'string' ? h : h.condition || JSON.stringify(h);
+      html += '<div class="panel-history-item">'+text+'</div>';
+    });
+    html += '</div>';
+  }
+
+  // Medications
+  if (pt.meds && pt.meds.length > 0) {
+    html += '<div class="panel-section"><div class="panel-section-title">💊 Medications</div>';
+    pt.meds.forEach(function(m) {
+      var text = typeof m === 'string' ? m : (m.name||'') + ' ' + (m.dose||'');
+      html += '<div class="panel-history-item">'+text+'</div>';
+    });
+    html += '</div>';
+  }
+
+  // ED Course (for admitted patients)
+  if (pt.edCourse) {
+    var ed = pt.edCourse;
+    html += '<div class="panel-section"><div class="panel-section-title">🏥 ED Course</div>';
+    if (ed.txOrdered && ed.txOrdered.length > 0) {
+      html += '<div style="font-size:11px;color:#a0b8d0;margin-bottom:4px;"><strong>Treatments:</strong> '+ed.txOrdered.join(', ')+'</div>';
+    }
+    if (ed.disposition) {
+      html += '<div style="font-size:11px;color:var(--brand);"><strong>Disposition:</strong> '+ed.disposition+'</div>';
+    }
+    html += '</div>';
+  }
+
+  // Actions
+  html += '<div class="panel-section"><div class="panel-section-title">⚡ Actions</div><div class="panel-actions">';
+  if (pt.source === 'ed-board') {
+    html += '<button class="panel-action-btn primary" onclick="openInEDBoard()">Open in ED Board →</button>';
+  }
+  html += '<button class="panel-action-btn" onclick="openTransport(\''+roomId+'\')">🚑 Transfer</button>';
+  html += '<button class="panel-action-btn" onclick="openInSimRoom()">🩺 SimRoom</button>';
+  html += '<button class="panel-action-btn" onclick="showToast(\'📋 Chart opened\')">📋 Full Chart</button>';
+  html += '</div></div>';
+
+  document.getElementById('panelBody').innerHTML = html;
+  document.getElementById('patientPanel').classList.add('open');
+}
+
+function openEmptyRoom(roomId, label) {
+  selectedRoomId = roomId;
+  document.getElementById('panelRoom').textContent = '📍 ' + roomId;
+  document.getElementById('panelName').textContent = label;
+  document.getElementById('panelMeta').textContent = 'Unoccupied';
+  document.getElementById('panelBody').innerHTML =
+    '<div style="text-align:center;padding:40px 20px;">' +
+    '<div style="font-size:48px;margin-bottom:16px;opacity:.3;">🛏️</div>' +
+    '<div style="font-size:16px;font-weight:600;color:var(--text-muted);margin-bottom:8px;">Room Available</div>' +
+    '<div style="font-size:12px;color:var(--text-muted);">This bed is clean and ready for the next patient.</div>' +
+    '</div>';
+  document.getElementById('patientPanel').classList.add('open');
+}
+
+function closePanel() {
+  document.getElementById('patientPanel').classList.remove('open');
+  selectedRoomId = null;
+}
+
+function openInEDBoard() {
+  window.open('/legacy/ed-board-v2.html', '_blank');
+}
+
+function openInSimRoom() {
+  window.open('/simroomdx.html', '_blank');
+}
+
+// ═══════════════════════════════════════════
+//  INITIALIZATION
+// ═══════════════════════════════════════════
+
+function buildMinimap() {
+  var mm = document.getElementById('minimap');
+  mm.innerHTML = '';
+  FLOOR_ORDER.forEach(function(f) {
+    var div = document.createElement('div');
+    div.className = 'minimap-floor' + (f === currentFloor ? ' active' : '');
+    div.onclick = function() { goToFloor(f); };
+    mm.appendChild(div);
+  });
+}
+
+function updateClock() {
+  var now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' }) +
+    ' · ' + now.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2500);
+}
+
+function enterHospital() {
+  document.getElementById('welcomeOverlay').classList.add('hidden');
+  switchView('building');
+}
+
+// Keyboard nav
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePanel();
+  var idx = FLOOR_ORDER.indexOf(currentFloor);
+  if (e.key === 'ArrowUp' && idx > 0) goToFloor(FLOOR_ORDER[idx-1]);
+  if (e.key === 'ArrowDown' && idx < FLOOR_ORDER.length-1) goToFloor(FLOOR_ORDER[idx+1]);
+});
+
+// Boot
+buildMinimap();
+loadPatientData();
+updateClock();
+setInterval(updateClock, 30000);
+renderFloor('ed');
+
+// ═══════════════════════════════════════════
+//  VIEW TOGGLE (Building vs Floor)
+// ═══════════════════════════════════════════
+let currentView = 'floor'; // 'building' or 'floor'
+
+function switchView(view) {
+  currentView = view;
+  document.getElementById('togBuilding').classList.toggle('active', view==='building');
+  document.getElementById('togFloor').classList.toggle('active', view==='floor');
+  if (view === 'building') {
+    renderBuilding();
+  } else {
+    renderFloor(currentFloor);
+  }
+  closePanel();
+}
+
+// ═══════════════════════════════════════════
+//  BUILDING CROSS-SECTION RENDERER
+// ═══════════════════════════════════════════
+
+function renderBuilding() {
+  var html = '<div class="building-wrap">' +
+    '<div class="building-label">ReasonDx Teaching Hospital — Cross Section</div>' +
+    '<div class="building-outer" id="buildingOuter">';
+
+  // Elevator shaft
+  html += '<div class="building-elevator"><div class="building-elev-car" id="buildingElevCar"></div></div>';
+
+  // Render floors top-to-bottom
+  FLOOR_ORDER.forEach(function(floorId) {
+    var floor = FLOORS[floorId];
+    if (!floor) return;
+
+    var allRooms = [];
+    floor.zones.forEach(function(z) { z.rooms.forEach(function(r) { allRooms.push(r); }); });
+    var occupied = allRooms.filter(function(r) { return hospitalPatients[r.id]; }).length;
+    var total = allRooms.length;
+    var pct = total > 0 ? Math.round(occupied/total*100) : 0;
+    var isActive = floorId === currentFloor;
+
+    html += '<div class="building-floor'+(isActive?' active-floor':'')+'" data-floor="'+floorId+'" onclick="goToFloorFromBuilding(\''+floorId+'\')">';
+
+    // Sidebar
+    html += '<div class="bf-sidebar"><div class="bf-emoji">'+floor.emoji+'</div><div class="bf-label">'+floor.name.split(' ')[0]+'</div><div class="bf-floor-num">'+floor.floor+'</div></div>';
+
+    // Room indicators
+    html += '<div class="bf-rooms">';
+    allRooms.forEach(function(room) {
+      var pt = hospitalPatients[room.id];
+      var cls = pt ? (pt.status==='critical' ? 'critical' : 'occupied') : 'empty';
+      var tip = pt ? (room.label + ': ' + pt.name + ' — ' + pt.dx) : (room.label + ': Available');
+      html += '<div class="bf-room '+cls+'" data-tip="'+tip.replace(/"/g,'&quot;')+'" onclick="event.stopPropagation();'+(pt?'openRoom(\''+room.id+'\')':'')+'"><div class="bf-dot"></div></div>';
+    });
+    html += '</div>';
+
+    // Stats
+    html += '<div class="bf-stats"><div class="bf-stat-num">'+occupied+'</div><div class="bf-stat-of">of '+total+' beds</div><div class="bf-stat-bar"><div class="bf-stat-fill" style="width:'+pct+'%"></div></div></div>';
+
+    html += '</div>';
+  });
+
+  html += '</div></div>';
+  document.getElementById('floorView').innerHTML = html;
+
+  // Position elevator car in building view
+  positionBuildingElevator();
+}
+
+function positionBuildingElevator() {
+  var outer = document.getElementById('buildingOuter');
+  var car = document.getElementById('buildingElevCar');
+  if (!outer || !car) return;
+
+  var floors = outer.querySelectorAll('.building-floor');
+  var idx = FLOOR_ORDER.indexOf(currentFloor);
+  if (idx < 0 || !floors[idx]) return;
+
+  var outerRect = outer.getBoundingClientRect();
+  var floorRect = floors[idx].getBoundingClientRect();
+  var top = floorRect.top - outerRect.top + (floorRect.height/2) - 9;
+  car.style.top = top + 'px';
+}
+
+function goToFloorFromBuilding(floorId) {
+  currentFloor = floorId;
+
+  // Update floor buttons
+  document.querySelectorAll('.floor-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.floor === floorId);
+  });
+
+  // Update minimap
+  document.querySelectorAll('.minimap-floor').forEach(function(mf, i) {
+    mf.classList.toggle('active', FLOOR_ORDER[i] === floorId);
+  });
+
+  // Update left rail elevator
+  var idx = FLOOR_ORDER.indexOf(floorId);
+  var shaft = document.getElementById('elevatorShaft');
+  var shaftH = shaft.offsetHeight;
+  document.getElementById('elevatorCar').style.top = (idx / (FLOOR_ORDER.length - 1)) * (shaftH - 24) + 'px';
+
+  // Switch to floor detail view
+  switchView('floor');
+}
+
+// ═══════════════════════════════════════════
+//  PATIENT TRANSPORT SYSTEM
+// ═══════════════════════════════════════════
+let transportPatient = null;
+let transportFrom = null;
+let transportDest = null;
+
+const TRANSPORT_DESTINATIONS = [
+  { id:'icu', emoji:'🫀', name:'ICU / CCU', desc:'Critical care', prefix:'ICU-' },
+  { id:'tele', emoji:'📟', name:'Telemetry', desc:'Cardiac monitoring', prefix:'TELE-30' },
+  { id:'medsurg', emoji:'🛏️', name:'Med/Surg Floor', desc:'General ward', prefix:'40' },
+  { id:'or', emoji:'🔪', name:'Operating Room', desc:'Surgical suite', prefix:'OR-' },
+  { id:'ed', emoji:'🚨', name:'Back to ED', desc:'Return to ED', prefix:'ED-' },
+  { id:'discharge', emoji:'🏠', name:'Discharge', desc:'Home / facility', prefix:null },
+];
+
+function openTransport(roomId) {
+  var pt = hospitalPatients[roomId];
+  if (!pt) return;
+  transportPatient = pt;
+  transportFrom = roomId;
+  transportDest = null;
+
+  document.getElementById('transportTitle').textContent = '🚑 Transfer ' + pt.name;
+  document.getElementById('transportSub').textContent = 'Current: ' + roomId + ' · ' + pt.dx;
+
+  // Determine current floor
+  var currentPtFloor = getRoomFloor(roomId);
+
+  var html = '';
+  TRANSPORT_DESTINATIONS.forEach(function(d) {
+    if (d.id === currentPtFloor) return; // Don't show current floor as destination
+    html += '<div class="transport-dest" data-dest="'+d.id+'" onclick="selectTransportDest(\''+d.id+'\')">' +
+      '<div class="td-emoji">'+d.emoji+'</div><div class="td-name">'+d.name+'</div><div class="td-desc">'+d.desc+'</div></div>';
+  });
+  document.getElementById('transportDests').innerHTML = html;
+  document.getElementById('transportConfirm').disabled = true;
+  document.getElementById('transportOverlay').classList.add('active');
+}
+
+function selectTransportDest(destId) {
+  transportDest = destId;
+  document.querySelectorAll('.transport-dest').forEach(function(d) {
+    d.classList.toggle('selected', d.dataset.dest === destId);
+  });
+  document.getElementById('transportConfirm').disabled = false;
+}
+
+function cancelTransport() {
+  document.getElementById('transportOverlay').classList.remove('active');
+  transportPatient = null; transportFrom = null; transportDest = null;
+}
+
+function confirmTransport() {
+  if (!transportPatient || !transportFrom || !transportDest) return;
+
+  document.getElementById('transportOverlay').classList.remove('active');
+
+  if (transportDest === 'discharge') {
+    // Discharge — remove from census
+    delete hospitalPatients[transportFrom];
+    updateFloorCounts();
+    showToast('🏠 ' + transportPatient.name + ' discharged');
+    closePanel();
+    if (currentView === 'building') renderBuilding(); else renderFloor(currentFloor);
+    return;
+  }
+
+  // Find available room on destination floor
+  var destFloor = FLOORS[transportDest];
+  var destRoom = null;
+  if (destFloor) {
+    destFloor.zones.some(function(z) {
+      return z.rooms.some(function(r) {
+        if (!hospitalPatients[r.id]) { destRoom = r.id; return true; }
+        return false;
+      });
+    });
+  }
+
+  if (!destRoom) {
+    showToast('⚠️ No beds available on ' + (destFloor ? destFloor.name : 'that floor'));
+    return;
+  }
+
+  // Animate transport
+  animateTransport(transportFrom, destRoom, transportDest, function() {
+    // Move patient data
+    var pt = hospitalPatients[transportFrom];
+    delete hospitalPatients[transportFrom];
+    pt.status = transportDest === 'icu' ? 'critical' : (transportDest === 'tele' ? 'guarded' : 'stable');
+    hospitalPatients[destRoom] = pt;
+    updateFloorCounts();
+    closePanel();
+
+    // Navigate to destination floor
+    currentFloor = transportDest;
+    document.querySelectorAll('.floor-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.floor === transportDest);
+    });
+    var idx = FLOOR_ORDER.indexOf(transportDest);
+    var shaft = document.getElementById('elevatorShaft');
+    document.getElementById('elevatorCar').style.top = (idx / (FLOOR_ORDER.length - 1)) * (shaft.offsetHeight - 24) + 'px';
+    document.querySelectorAll('.minimap-floor').forEach(function(mf, i) {
+      mf.classList.toggle('active', FLOOR_ORDER[i] === transportDest);
+    });
+
+    if (currentView === 'building') renderBuilding(); else renderFloor(transportDest);
+    showToast('✅ ' + pt.name + ' transferred to ' + destRoom);
+  });
+}
+
+function animateTransport(fromRoom, toRoom, destFloorId, callback) {
+  var anim = document.getElementById('transportAnim');
+  var fromFloorId = getRoomFloor(fromRoom);
+
+  // Get floor button positions for animation path
+  var fromBtn = document.querySelector('.floor-btn[data-floor="'+fromFloorId+'"]');
+  var toBtn = document.querySelector('.floor-btn[data-floor="'+destFloorId+'"]');
+
+  if (!fromBtn || !toBtn) { callback(); return; }
+
+  var fromRect = fromBtn.getBoundingClientRect();
+  var toRect = toBtn.getBoundingClientRect();
+
+  // Start at source floor
+  anim.style.left = (fromRect.right + 20) + 'px';
+  anim.style.top = (fromRect.top + fromRect.height/2 - 22) + 'px';
+  anim.classList.add('moving');
+
+  // Animate to destination floor
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      anim.style.left = (toRect.right + 20) + 'px';
+      anim.style.top = (toRect.top + toRect.height/2 - 22) + 'px';
+    });
+  });
+
+  setTimeout(function() {
+    anim.classList.remove('moving');
+    callback();
+  }, 1400);
+}
+
+function getRoomFloor(roomId) {
+  if (/^(T|R|ED-|FT-)/.test(roomId)) return 'ed';
+  if (/^(ICU|CCU)/.test(roomId)) return 'icu';
+  if (/^TELE/.test(roomId)) return 'tele';
+  if (/^(4\d\d|40)/.test(roomId)) return 'medsurg';
+  if (/^(OR|PACU)/.test(roomId)) return 'or';
+  if (/^HELI/.test(roomId)) return 'roof';
+  return 'ed';
+}
+</script>
+</body>
+</html>
