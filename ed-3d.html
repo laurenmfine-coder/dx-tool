@@ -143,6 +143,31 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
 /* Waiting / empty state */
 .empty-state{text-align:center;padding:40px 20px;color:rgba(255,255,255,.2);font-size:13px}
 
+/* Treatment orders */
+.order-category{margin-bottom:14px}
+.order-cat-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:rgba(255,255,255,.3);margin-bottom:6px}
+.order-item{display:flex;align-items:center;gap:8px;padding:8px 12px;margin-bottom:4px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:6px;cursor:pointer;transition:all .15s;font-size:12px;color:rgba(255,255,255,.6)}
+.order-item:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+.order-item.ordered{border-color:rgba(52,211,153,.2);background:rgba(52,211,153,.04);color:#34D399}
+.order-item .ord-check{width:16px;height:16px;border:2px solid rgba(255,255,255,.15);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px}
+.order-item.ordered .ord-check{border-color:#34D399;background:rgba(52,211,153,.15);color:#34D399}
+
+/* Disposition */
+.dispo-option{padding:14px;margin-bottom:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;cursor:pointer;transition:all .15s}
+.dispo-option:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+.dispo-option.selected{border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06)}
+.dispo-option.correct{border-color:#34D399;background:rgba(52,211,153,.1)}
+.dispo-option.incorrect{border-color:#EF4444;background:rgba(239,68,68,.05)}
+.dispo-option .do-title{font-weight:600;font-size:13px;color:#fff;margin-bottom:3px}
+.dispo-option .do-desc{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+.dispo-explain{margin-top:12px;padding:14px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.12);border-radius:10px;font-size:12px;line-height:1.7;color:rgba(255,255,255,.65);display:none}
+
+/* Progress tracker (top of scene) */
+.progress-bar{display:flex;gap:4px;padding:8px 16px;background:rgba(6,10,16,.6);border-bottom:1px solid rgba(255,255,255,.03)}
+.prog-step{flex:1;text-align:center;padding:4px 0;border-radius:4px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:rgba(255,255,255,.2);background:rgba(255,255,255,.02)}
+.prog-step.done{color:#34D399;background:rgba(52,211,153,.08)}
+.prog-step.active{color:#60A5FA;background:rgba(96,165,250,.08)}
+
 /* Responsive */
 @media(max-width:768px){
   #room-body{grid-template-columns:1fr;grid-template-rows:45vh 1fr}
@@ -193,6 +218,15 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
   <div id="room-body">
     <!-- LEFT: Patient scene -->
     <div id="patient-scene">
+      <div class="progress-bar" id="progress-bar">
+        <div class="prog-step" id="prog-hx">History</div>
+        <div class="prog-step" id="prog-exam">Exam</div>
+        <div class="prog-step" id="prog-vitals">Vitals</div>
+        <div class="prog-step" id="prog-labs">Labs</div>
+        <div class="prog-step" id="prog-img">Imaging</div>
+        <div class="prog-step" id="prog-tx">Orders</div>
+        <div class="prog-step" id="prog-dispo">Dispo</div>
+      </div>
       <div id="scene-visual">
         <div class="vitals-monitor" id="vitals-monitor">
           <div class="vm-title">Bedside Monitor</div>
@@ -218,6 +252,8 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
         <button class="action-btn" data-panel="vitals" onclick="showPanel('vitals')"><span class="btn-icon">📊</span> Vitals</button>
         <button class="action-btn" data-panel="labs" onclick="showPanel('labs')"><span class="btn-icon">🧪</span> Labs</button>
         <button class="action-btn" data-panel="imaging" onclick="showPanel('imaging')"><span class="btn-icon">📷</span> Imaging</button>
+        <button class="action-btn" data-panel="treatment" onclick="showPanel('treatment')"><span class="btn-icon">💊</span> Orders</button>
+        <button class="action-btn" data-panel="dispo" onclick="showPanel('dispo')" style="border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06);color:#34D399"><span class="btn-icon">🚪</span> Disposition</button>
       </div>
     </div>
     <!-- RIGHT: Data panel -->
@@ -228,6 +264,8 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
       <div id="panel-vitals" class="panel-section" style="display:none"></div>
       <div id="panel-labs" class="panel-section" style="display:none"></div>
       <div id="panel-imaging" class="panel-section" style="display:none"></div>
+      <div id="panel-treatment" class="panel-section" style="display:none"></div>
+      <div id="panel-dispo" class="panel-section" style="display:none"></div>
     </div>
   </div>
 </div>
@@ -512,6 +550,145 @@ const CASES = [
 ];
 
 // ═══════════════════════════════════════
+// TREATMENT ORDERS & DISPOSITION DATA
+// ═══════════════════════════════════════
+const TREATMENTS = {
+  1:{orders:[
+    {cat:'Immediate',items:['Aspirin 325mg PO','Clopidogrel 600mg PO loading','Heparin IV bolus + drip','Morphine 4mg IV PRN pain','Nitroglycerin 0.4mg SL','Supplemental O2 2L NC']},
+    {cat:'Labs/Monitoring',items:['Serial troponins q3h','Continuous telemetry','12-lead ECG q15 min','Type and screen','PT/INR, aPTT']},
+    {cat:'Consults',items:['Cardiology STAT — cath lab activation','Cardiac surgery standby']}
+  ],dispo:[
+    {text:'Activate cath lab — emergent PCI',desc:'STEMI protocol: door-to-balloon <90 min. Cardiology to perform emergent catheterization and intervention.',correct:true},
+    {text:'Admit to telemetry — serial troponins',desc:'Medical management with anticoagulation and monitoring.',correct:false},
+    {text:'Thrombolytics (tPA) — then admit to ICU',desc:'Fibrinolytic therapy if PCI not available within 120 minutes.',correct:false},
+    {text:'Observe in ED — repeat ECG in 4 hours',desc:'Continue monitoring and reassess.',correct:false}
+  ],dispoExplain:'Acute STEMI with ST elevations in II/III/aVF requires emergent PCI (primary percutaneous coronary intervention). The goal is door-to-balloon time <90 minutes. Thrombolytics are second-line only if PCI is unavailable within 120 min. Observation alone is dangerous — this is an actively evolving infarction.'},
+  2:{orders:[
+    {cat:'Immediate',items:['NPO status','IV NS bolus 1L','Morphine 4mg IV PRN pain','Ondansetron 4mg IV PRN nausea','Acetaminophen 1g IV']},
+    {cat:'Labs',items:['CBC with differential','CMP','Lipase','Urinalysis','Urine hCG']},
+    {cat:'Consults',items:['Surgery consult — appendicitis','Anesthesia pre-op evaluation']}
+  ],dispo:[
+    {text:'Surgical consult — laparoscopic appendectomy',desc:'Operative management for acute uncomplicated appendicitis.',correct:true},
+    {text:'IV antibiotics only — non-operative management',desc:'Antibiotic-first approach with interval follow-up.',correct:false},
+    {text:'Admit for observation — serial abdominal exams',desc:'Watch-and-wait with repeat imaging if worsening.',correct:false},
+    {text:'Discharge with PO antibiotics and surgery follow-up',desc:'Outpatient management.',correct:false}
+  ],dispoExplain:'Acute appendicitis with an 11mm appendix and appendicolith warrants surgical consultation for laparoscopic appendectomy. While antibiotic-first approaches exist, the appendicolith increases perforation risk, making surgery preferred. Discharge is inappropriate for confirmed appendicitis.'},
+  3:{orders:[
+    {cat:'Immediate',items:['IV access x2 large bore','Labetalol IV — goal SBP 140-160','Nimodipine 60mg PO q4h','Antiemetics PRN','Strict bed rest, HOB 30°','Seizure precautions']},
+    {cat:'Monitoring',items:['Neuro checks q1h','Continuous telemetry','Strict I/O','External ventricular drain standby']},
+    {cat:'Consults',items:['Neurosurgery STAT','Neuro-interventional radiology']}
+  ],dispo:[
+    {text:'Neurosurgery — ICU admission for surgical clipping or coiling',desc:'Emergent neurosurgical intervention for ruptured AComm aneurysm.',correct:true},
+    {text:'Admit to neuro step-down — IV nimodipine and monitoring',desc:'Medical management without surgical intervention.',correct:false},
+    {text:'Observe in ED — repeat CT in 6 hours',desc:'Continued observation with reimaging.',correct:false},
+    {text:'Transfer to higher level of care',desc:'Arrange interfacility transfer.',correct:false}
+  ],dispoExplain:'Ruptured aneurysmal SAH requires emergent neurosurgical intervention — either microsurgical clipping or endovascular coiling of the AComm aneurysm. ICU admission with nimodipine for vasospasm prevention. Observation alone risks rebleeding (4% in first 24h, often fatal). The aneurysm needs to be secured.'},
+  4:{orders:[
+    {cat:'Immediate',items:['IV heparin bolus + drip (weight-based)','Supplemental O2 — target SpO2 >92%','IV NS at 100mL/hr','Morphine 2mg IV PRN pleuritic pain']},
+    {cat:'Monitoring',items:['Continuous telemetry','Repeat troponin in 6h','Trend BNP','Monitor for RV strain signs']},
+    {cat:'Consults',items:['Pulmonology/PE response team','IR for catheter-directed therapy evaluation']}
+  ],dispo:[
+    {text:'ICU admission — systemic anticoagulation ± catheter-directed therapy',desc:'Submassive/massive PE with RV strain requires ICU-level care and possible escalation.',correct:true},
+    {text:'Admit to telemetry — heparin drip',desc:'Standard anticoagulation on monitored floor.',correct:false},
+    {text:'Systemic tPA — then ICU',desc:'Full-dose thrombolytics for massive PE.',correct:false},
+    {text:'Start DOAC and discharge with follow-up',desc:'Outpatient anticoagulation.',correct:false}
+  ],dispoExplain:'Saddle PE with RV dilation (RV:LV >1.0) and elevated troponin/BNP is a submassive PE requiring ICU admission. Systemic anticoagulation is first-line. Catheter-directed therapy (lower dose tPA directly into clot) may be considered for worsening despite anticoagulation. Full systemic tPA is reserved for hemodynamically unstable massive PE. Discharge on DOAC alone is dangerous with this clot burden.'},
+  5:{orders:[
+    {cat:'Immediate — DO NOT DELAY',items:['Ceftriaxone 2g IV STAT','Vancomycin 20mg/kg IV STAT','Dexamethasone 0.15mg/kg IV (before or with first abx)','IV NS bolus 30mL/kg — sepsis protocol','Supplemental O2 PRN']},
+    {cat:'Monitoring',items:['ICU bed request','Continuous telemetry','Neuro checks q1h','Repeat lactate in 2h','Contact precautions + droplet isolation']},
+    {cat:'Consults',items:['Infectious disease','Report to public health department']}
+  ],dispo:[
+    {text:'ICU admission — bacterial meningitis protocol + sepsis management',desc:'Critically ill with meningococcal meningitis and sepsis. Requires ICU, isolation, and contact tracing.',correct:true},
+    {text:'Admit to step-down — IV antibiotics and monitoring',desc:'Floor-level care with antibiotics.',correct:false},
+    {text:'Observe in ED 6 hours — reassess after antibiotics',desc:'Extended ED observation.',correct:false},
+    {text:'Admit to general medicine — continue antibiotics',desc:'General ward admission.',correct:false}
+  ],dispoExplain:'Bacterial meningitis with sepsis (lactate 4.8, hypotension, thrombocytopenia, AKI) requires ICU admission. Empiric antibiotics should be given IMMEDIATELY — do not wait for LP results. Dexamethasone before/with first dose reduces neurologic complications. Gram-negative diplococci = Neisseria meningitidis — requires droplet precautions and public health notification for contact prophylaxis. This patient has meningococcemia (petechiae/purpura).'},
+  6:{orders:[
+    {cat:'Immediate',items:['Insulin drip protocol (start 0.1 U/kg/hr)','IV NS bolus 1L over 1h, then 250mL/hr','Potassium: HOLD insulin repletion until K<5.3, then add 20-40 mEq/L to IVF','D5 ½NS when glucose <250','Continuous telemetry']},
+    {cat:'Monitoring',items:['Fingerstick glucose q1h','BMP q2h (K+, bicarb, anion gap)','Strict I/O','VBG q2-4h until AG closed']},
+    {cat:'Consults',items:['Endocrinology','Social work — insulin affordability']}
+  ],dispo:[
+    {text:'ICU admission — DKA protocol with insulin drip and aggressive monitoring',desc:'Critical DKA (pH 7.12, glucose 486, AG 28) requires ICU-level care.',correct:true},
+    {text:'Admit to step-down — insulin drip',desc:'Monitored bed with DKA protocol.',correct:false},
+    {text:'Admit to medicine — SQ insulin and IVF',desc:'Start subcutaneous insulin and hydration.',correct:false},
+    {text:'ED observation — run DKA protocol then reassess',desc:'Manage in ED with plan to admit after stabilization.',correct:false}
+  ],dispoExplain:'Severe DKA (pH <7.2, bicarb <10, AG 28, altered mental status) requires ICU admission for continuous insulin drip, aggressive IVF, and hourly monitoring. The high potassium (5.8) will drop rapidly with insulin — must be monitored closely. Critical: address the social determinant — she ran out of Humalog due to cost. Social work for insulin assistance programs is essential to prevent recurrence.'},
+  7:{orders:[
+    {cat:'Immediate — TIME IS BRAIN',items:['Activate stroke code/team','Alteplase (tPA) 0.9mg/kg IV (if within window and eligible)','Permissive hypertension — do NOT treat BP unless >220/120','NPO until swallow evaluation','HOB flat']},
+    {cat:'Monitoring',items:['Neuro checks q15 min x 2h post-tPA','Repeat CT head 24h post-tPA','Continuous telemetry','Fingerstick glucose q1h']},
+    {cat:'Consults',items:['Neurology/stroke team STAT','Neuro-interventional — evaluate for thrombectomy','Speech therapy (swallow eval)']}
+  ],dispo:[
+    {text:'Stroke unit/ICU — IV tPA + emergent mechanical thrombectomy evaluation',desc:'Large vessel occlusion with significant penumbra — candidate for both IV thrombolysis and endovascular thrombectomy.',correct:true},
+    {text:'Stroke unit — IV tPA only',desc:'Thrombolytics alone without interventional evaluation.',correct:false},
+    {text:'ICU admission — supportive care only (subtherapeutic INR)',desc:'Conservative management without reperfusion therapy.',correct:false},
+    {text:'Admit to telemetry — anticoagulation optimization',desc:'Resume warfarin and monitor.',correct:false}
+  ],dispoExplain:'Acute ischemic stroke with large vessel occlusion (right MCA M1) and favorable perfusion imaging (large penumbra, small core) is indication for BOTH IV tPA AND mechanical thrombectomy. His INR of 1.3 (subtherapeutic) does not contraindicate tPA. Time is critical — the CT perfusion shows 90mL of salvageable tissue. NIHSS 14 with LVO qualifies for thrombectomy out to 24 hours if perfusion imaging is favorable.'},
+  8:{orders:[
+    {cat:'Immediate — SURGICAL EMERGENCY',items:['IV NS wide open — sepsis resuscitation','Vancomycin 25mg/kg IV','Piperacillin-tazobactam 4.5g IV','Clindamycin 900mg IV (anti-toxin)','Blood cultures x2 before antibiotics if possible','Type and screen, crossmatch 4 units']},
+    {cat:'Monitoring',items:['Continuous telemetry','Foley catheter — strict I/O','Repeat lactate in 2h','Mark erythema borders with time']},
+    {cat:'Consults',items:['Surgery EMERGENT — operative debridement','Anesthesia for emergent OR','Infectious disease']}
+  ],dispo:[
+    {text:'Emergent OR — surgical exploration and debridement',desc:'Necrotizing fasciitis is a surgical emergency. Definitive treatment is aggressive surgical debridement.',correct:true},
+    {text:'ICU admission — IV antibiotics and close monitoring',desc:'Medical management with antibiotics and reassessment.',correct:false},
+    {text:'MRI first — confirm diagnosis before surgery',desc:'Advanced imaging to confirm necrotizing process.',correct:false},
+    {text:'Admit to surgery — OR in the morning',desc:'Surgical consult with planned operation next day.',correct:false}
+  ],dispoExplain:'Necrotizing fasciitis is a SURGICAL EMERGENCY. The combination of pain out of proportion, crepitus, gas on imaging, systemic toxicity (sepsis), and rapidly advancing infection demands immediate operative debridement — every hour of delay increases mortality. Antibiotics alone are insufficient. MRI would cause dangerous delay. "OR in the morning" is unacceptable — this patient needs the OR NOW. Mortality doubles with every 6 hours of surgical delay.'}
+};
+
+// ═══ ORDER & PROGRESS STATE ═══
+let orderState = {}; // room -> Set of ordered items
+let dispoState = {}; // room -> chosen dispo
+let progressState = {}; // room -> {hx, exam, vitals, labs, imaging, tx, dispo}
+
+function getProgress(room){
+  if(!progressState[room])progressState[room]={hx:false,exam:false,vitals:false,labs:false,imaging:false,tx:false,dispo:false};
+  return progressState[room];
+}
+function updateProgress(){
+  if(!currentCase)return;
+  const r=currentCase.room, p=getProgress(r);
+  const qAsked=currentCase.questions.filter((_,i)=>questionState[r+'-'+i]).length;
+  p.hx=qAsked>=2;
+  const exDone=Object.keys(currentCase.exam).filter(s=>examState[r+'-'+s]).length;
+  p.exam=exDone>=3;
+  p.vitals=true; // always visible
+  p.labs=true;
+  p.imaging=true;
+  if(orderState[r])p.tx=orderState[r].size>=3;
+  if(dispoState[r])p.dispo=true;
+  // Update UI
+  ['hx','exam','vitals','labs','imaging','tx','dispo'].forEach(k=>{
+    const el=document.getElementById('prog-'+k);
+    if(el)el.className='prog-step'+(p[k]?' done':'');
+  });
+  // Save to localStorage for cross-module continuity
+  try{localStorage.setItem('rdx-ed-progress-'+r,JSON.stringify(p))}catch(e){}
+}
+
+// ═══ ED AUDIO ═══
+let edAudioCtx;
+function initEDAudio(){
+  if(edAudioCtx)return;
+  edAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
+}
+function playBeep(freq,vol){
+  if(!edAudioCtx)return;
+  const o=edAudioCtx.createOscillator(),g=edAudioCtx.createGain();
+  o.frequency.value=freq||880;o.type='sine';
+  g.gain.setValueAtTime(0,edAudioCtx.currentTime);
+  g.gain.linearRampToValueAtTime(vol||0.04,edAudioCtx.currentTime+0.02);
+  g.gain.linearRampToValueAtTime(0,edAudioCtx.currentTime+0.12);
+  o.connect(g);g.connect(edAudioCtx.destination);
+  o.start();o.stop(edAudioCtx.currentTime+0.15);
+}
+let beepInterval;
+function startRoomBeeps(){
+  if(!currentCase||currentCase.acuity!=='critical')return;
+  beepInterval=setInterval(()=>playBeep(880,0.03),1200);
+}
+function stopRoomBeeps(){if(beepInterval)clearInterval(beepInterval);beepInterval=null;}
+
+// ═══════════════════════════════════════
 // 3D ED CORRIDOR
 // ═══════════════════════════════════════
 const PLAYER_H = 1.7, MOVE_SPEED = 5, MOUSE_SENS = 0.002;
@@ -526,6 +703,8 @@ let minimapCtx;
 function startED() {
   document.getElementById('splash').style.display = 'none';
   initThree();
+  initEDAudio();
+  startCorridorAudio();
   renderer.domElement.requestPointerLock();
 }
 
@@ -598,7 +777,7 @@ function textLabel(text, color, fontSize, w, h) {
   return new THREE.CanvasTexture(c);
 }
 
-function roomWhiteboard(c) {
+function roomWhiteboard(c, progress) {
   const cv=document.createElement('canvas');cv.width=320;cv.height=200;
   const x=cv.getContext('2d');
   x.fillStyle='#f8f6f2';x.fillRect(0,0,320,200);
@@ -620,6 +799,17 @@ function roomWhiteboard(c) {
   x.fillStyle='#444';x.font='11px "Segoe UI",monospace';
   x.fillText(`HR ${c.vitals.hr} · BP ${c.vitals.bp} · RR ${c.vitals.rr} · SpO₂ ${c.vitals.spo2}%`,16,148);
   x.fillText(`Temp ${c.vitals.temp}`,16,166);
+  // Dynamic status indicators
+  if(progress){
+    const p=progress;
+    x.font='bold 10px "Segoe UI",sans-serif';let sx=16;
+    [['Hx',p.hx],['PE',p.exam],['Labs',p.labs],['Img',p.imaging],['Tx',p.tx],['Dispo',p.dispo]].forEach(([lbl,done])=>{
+      x.fillStyle=done?'#059669':'#ccc';
+      x.fillRect(sx,176,x.measureText(lbl).width+10,16);
+      x.fillStyle=done?'#fff':'#888';x.fillText(lbl,sx+5,188);
+      sx+=x.measureText(lbl).width+14;
+    });
+  }
   return new THREE.CanvasTexture(cv);
 }
 
@@ -768,6 +958,194 @@ function buildED() {
   const edTex = textLabel('EMERGENCY DEPARTMENT', 0xDC2626, 24, 512, 72);
   const edSign = new THREE.Mesh(new THREE.PlaneGeometry(2.8,0.38),new THREE.MeshBasicMaterial({map:edTex}));
   edSign.position.set(0,2.6,17.5);scene.add(edSign);
+
+  // ═══ TRIAGE AREA (south end of corridor) ═══
+  const triageMat=new THREE.MeshStandardMaterial({color:0x2a3848,roughness:.4,metalness:.1});
+  const triageDesk=new THREE.Mesh(new THREE.BoxGeometry(2.2,1,0.8),triageMat);
+  triageDesk.position.set(0,0.5,15.5);triageDesk.castShadow=true;scene.add(triageDesk);
+  const triageTop=new THREE.Mesh(new THREE.BoxGeometry(2.3,.04,.9),new THREE.MeshStandardMaterial({color:0x3a4858,roughness:.25,metalness:.12}));
+  triageTop.position.set(0,1.02,15.5);scene.add(triageTop);
+  // Triage sign
+  const triTex=textLabel('TRIAGE',0xD97706,18,280,50);
+  const triSign=new THREE.Mesh(new THREE.PlaneGeometry(1.4,0.25),new THREE.MeshBasicMaterial({map:triTex,side:THREE.DoubleSide}));
+  triSign.position.set(0,2.6,16);scene.add(triSign);
+  // Clipboard on triage desk
+  const clipMat=new THREE.MeshStandardMaterial({color:0x8B7355,roughness:.5});
+  const clip=new THREE.Mesh(new THREE.BoxGeometry(0.2,0.02,0.3),clipMat);clip.position.set(0.4,1.04,15.5);scene.add(clip);
+  const clipPaper=new THREE.Mesh(new THREE.BoxGeometry(0.18,0.005,0.26),new THREE.MeshStandardMaterial({color:0xf0ece0,roughness:.8}));
+  clipPaper.position.set(0.4,1.06,15.5);scene.add(clipPaper);
+  // BP cuff on desk
+  const bpCuff=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,0.12,8),new THREE.MeshStandardMaterial({color:0x1a3050,roughness:.6}));
+  bpCuff.position.set(-0.6,1.08,15.5);scene.add(bpCuff);
+
+  // ═══ NPC: TRIAGE NURSE ═══
+  const skinM=new THREE.MeshStandardMaterial({color:0xc49a70,roughness:.7});
+  const scrubM=new THREE.MeshStandardMaterial({color:0x2a6848,roughness:.65});
+  function addNPC(px,pz,rotY,scrubColor,skinColor,hairColor){
+    const g=new THREE.Group();g.position.set(px,0,pz);if(rotY)g.rotation.y=rotY;
+    const sc=new THREE.MeshStandardMaterial({color:scrubColor||0x2a6848,roughness:.65});
+    const sk=new THREE.MeshStandardMaterial({color:skinColor||0xc49a70,roughness:.7});
+    const hr=new THREE.MeshStandardMaterial({color:hairColor||0x2a1a0a,roughness:.85});
+    // Body
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.36,0.52,0.22),sc),{position:new THREE.Vector3(0,1.38,0)}));
+    // Head
+    g.add(Object.assign(new THREE.Mesh(new THREE.SphereGeometry(0.11,10,8),sk),{position:new THREE.Vector3(0,1.78,0)}));
+    // Hair
+    const h=new THREE.Mesh(new THREE.SphereGeometry(0.12,10,8),hr);h.position.set(0,1.81,-0.02);h.scale.set(1,0.78,0.9);g.add(h);
+    // Arms
+    [-0.22,0.22].forEach(s=>{g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.09,0.36,0.1),sc),{position:new THREE.Vector3(s,1.24,0)}));});
+    // Legs
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.3,0.52,0.18),sc),{position:new THREE.Vector3(0,0.72,0)}));
+    // Shoes
+    [-0.08,0.08].forEach(s=>{g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.1,0.05,0.15),new THREE.MeshStandardMaterial({color:0x222222,roughness:.5})),{position:new THREE.Vector3(s,0.025,0.02)}));});
+    // Badge
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.07,0.09,0.005),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.5})),{position:new THREE.Vector3(0.1,1.5,0.12)}));
+    scene.add(g);return g;
+  }
+  addNPC(0,14.8,Math.PI,0x2a6848,0xc49a70,0x1a0a00); // Triage nurse
+  addNPC(-1.5,2,Math.PI*0.3,0x3a7aaa,0xd4a888,0x3a2a10); // Nurse at station
+  addNPC(1.8,-8,Math.PI*0.7,0xf0f0e8,0xb08860,0x2a1a0a); // Doctor in corridor (white coat)
+  addNPC(-1.2,-4,Math.PI*1.5,0x6a2d8a,0xc4a080,0x0a0a0a); // Tech in purple scrubs
+
+  // ═══ VISIBLE ROOM INTERIORS (through door glass) ═══
+  const bedMat=new THREE.MeshStandardMaterial({color:0xd0ccc4,roughness:.6});
+  const bedFrameM=new THREE.MeshStandardMaterial({color:0x999999,roughness:.25,metalness:.45});
+  const ivMat=new THREE.MeshStandardMaterial({color:0xbbbbbb,roughness:.2,metalness:.6});
+  const blanketMat=new THREE.MeshStandardMaterial({color:0x1e6f9f,roughness:.7});
+  const patientMat=new THREE.MeshStandardMaterial({color:0xc4a882,roughness:.7});
+  const gownMat=new THREE.MeshStandardMaterial({color:0x4a7a9a,roughness:.65});
+
+  CASES.forEach((c,i)=>{
+    const side=i<4?-1:1;
+    const idx=i<4?i:i-4;
+    const rz=startZ+idx*roomSpacing;
+    const rx=side*(corrW/2+2.5); // inside room
+
+    // Bed frame
+    const bed=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.06,2),bedMat);
+    bed.position.set(rx,0.75,rz);scene.add(bed);
+    const frame=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,1.9),bedFrameM);
+    frame.position.set(rx,0.42,rz);scene.add(frame);
+    // Blanket
+    const bk=new THREE.Mesh(new THREE.BoxGeometry(0.75,0.08,1.3),blanketMat);
+    bk.position.set(rx,0.82,rz+0.2);scene.add(bk);
+    // Pillow
+    const pw=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.06,0.3),new THREE.MeshStandardMaterial({color:0xf0ece6,roughness:.8}));
+    pw.position.set(rx,0.82,rz-0.75);scene.add(pw);
+    // Patient body (simplified)
+    const pHead=new THREE.Mesh(new THREE.SphereGeometry(0.1,8,6),patientMat);
+    pHead.position.set(rx,0.92,rz-0.65);scene.add(pHead);
+    const pBody=new THREE.Mesh(new THREE.BoxGeometry(0.35,0.12,0.8),gownMat);
+    pBody.position.set(rx,0.88,rz-0.1);scene.add(pBody);
+
+    // IV pole
+    const ivPole=new THREE.Mesh(new THREE.CylinderGeometry(0.015,0.015,1.8,6),ivMat);
+    ivPole.position.set(rx+side*-0.3,1.2,rz-0.5);scene.add(ivPole);
+    // IV bag
+    const ivBag=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.15,0.04),new THREE.MeshStandardMaterial({color:0xc8e0f0,transparent:true,opacity:0.7}));
+    ivBag.position.set(rx+side*-0.3,2.0,rz-0.5);scene.add(ivBag);
+    // IV line
+    const ivLine=new THREE.Mesh(new THREE.CylinderGeometry(0.003,0.003,1,4),new THREE.MeshStandardMaterial({color:0x88aacc,transparent:true,opacity:0.5}));
+    ivLine.position.set(rx+side*-0.3,1.4,rz-0.5);scene.add(ivLine);
+
+    // Bedside monitor
+    const monBox=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.25,0.08),new THREE.MeshStandardMaterial({color:0x1a1a1a,roughness:.2,metalness:.4}));
+    monBox.position.set(rx+side*-0.25,1.55,rz+0.7);scene.add(monBox);
+    // Screen glow
+    const monGlow=new THREE.Mesh(new THREE.PlaneGeometry(0.25,0.2),new THREE.MeshBasicMaterial({color:c.acuity==='critical'?0x331111:0x112233}));
+    monGlow.position.set(rx+side*-0.25-side*0.042,1.55,rz+0.7);
+    if(side===-1)monGlow.rotation.y=Math.PI/2;else monGlow.rotation.y=-Math.PI/2;
+    scene.add(monGlow);
+
+    // Curtain rail (thin torus arc above bed)
+    const curtainTrack=new THREE.Mesh(new THREE.TorusGeometry(1.2,0.01,4,16,Math.PI*0.8),
+      new THREE.MeshStandardMaterial({color:0x888888,metalness:0.4}));
+    curtainTrack.position.set(rx,2.8,rz);curtainTrack.rotation.x=Math.PI/2;scene.add(curtainTrack);
+  });
+
+  // ═══ DYNAMIC WHITEBOARD TRACKING ═══
+  // Store whiteboard meshes for later updates
+  window.whiteboardMeshes = {};
+  CASES.forEach((c,i)=>{
+    const side=i<4?-1:1;
+    const idx=i<4?i:i-4;
+    const rz=startZ+idx*roomSpacing;
+    const wbZ=rz+(idx%2===0?doorW/2+0.8:-doorW/2-0.8);
+    // Find the whiteboard (already created) - we'll track by room number
+    // We re-generate these dynamically when state changes
+    window.whiteboardMeshes[c.room]={side,rz,wbZ,caseIdx:i,mesh:null};
+  });
+
+  // ═══ CORRIDOR AMBIENT EFFECTS ═══
+  // Hand sanitizer dispensers
+  const sanitizerMat=new THREE.MeshStandardMaterial({color:0xe0e0e0,roughness:.3,metalness:.15});
+  [6,-6,10,-10].forEach(z=>{
+    const san=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.18,0.08),sanitizerMat);
+    san.position.set(-corrW/2+0.08,1.15,z);scene.add(san);
+  });
+  // Crash cart (red, near nurses station)
+  const crashMat=new THREE.MeshStandardMaterial({color:0xcc2222,roughness:.4,metalness:.15});
+  const crash=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.7,0.4),crashMat);
+  crash.position.set(1.8,0.35,1.5);crash.castShadow=true;scene.add(crash);
+  // Cart wheels
+  [[-0.2,-0.15],[0.2,-0.15],[-0.2,0.15],[0.2,0.15]].forEach(([cx,cz])=>{
+    const w=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,0.03,8),new THREE.MeshStandardMaterial({color:0x333333,metalness:.4}));
+    w.position.set(1.8+cx,0.04,1.5+cz);w.rotation.x=Math.PI/2;scene.add(w);
+  });
+  // "CRASH CART" label
+  const ccTex=textLabel('CRASH CART',0xcc2222,12,200,30);
+  const ccLabel=new THREE.Mesh(new THREE.PlaneGeometry(0.5,0.08),new THREE.MeshBasicMaterial({map:ccTex}));
+  ccLabel.position.set(1.8,0.75,1.72);scene.add(ccLabel);
+
+  // Hallway handrails
+  const railMat=new THREE.MeshStandardMaterial({color:0xa09080,roughness:.3,metalness:.15});
+  [-1,1].forEach(side=>{
+    const rail=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,32,8),railMat);
+    rail.position.set(side*(corrW/2-0.1),0.9,0);rail.rotation.x=Math.PI/2;scene.add(rail);
+  });
+}
+
+// ═══ CORRIDOR AMBIENT AUDIO ═══
+let corridorAudioStarted=false;
+function startCorridorAudio(){
+  if(corridorAudioStarted||!edAudioCtx)return;
+  corridorAudioStarted=true;
+  const gain=edAudioCtx.createGain();gain.gain.value=0.06;gain.connect(edAudioCtx.destination);
+  // HVAC hum
+  const hum=edAudioCtx.createOscillator();hum.type='sine';hum.frequency.value=60;
+  const humG=edAudioCtx.createGain();humG.gain.value=0.08;hum.connect(humG);humG.connect(gain);hum.start();
+  // Periodic distant beep (other rooms)
+  function distantBeep(){
+    setTimeout(()=>{
+      if(!edAudioCtx)return;
+      const o=edAudioCtx.createOscillator();o.type='sine';o.frequency.value=700+Math.random()*300;
+      const g=edAudioCtx.createGain();g.gain.value=0;
+      g.gain.setValueAtTime(0,edAudioCtx.currentTime);
+      g.gain.linearRampToValueAtTime(0.008,edAudioCtx.currentTime+0.02);
+      g.gain.linearRampToValueAtTime(0,edAudioCtx.currentTime+0.1);
+      o.connect(g);g.connect(gain);o.start();o.stop(edAudioCtx.currentTime+0.15);
+      distantBeep();
+    },(3+Math.random()*8)*1000);
+  }
+  distantBeep();
+  // PA chime occasionally
+  function paChime(){
+    setTimeout(()=>{
+      if(!edAudioCtx)return;
+      [523.25,659.25,783.99].forEach((f,i)=>{
+        setTimeout(()=>{
+          const o=edAudioCtx.createOscillator();o.type='sine';o.frequency.value=f;
+          const g2=edAudioCtx.createGain();g2.gain.value=0;
+          g2.gain.setValueAtTime(0,edAudioCtx.currentTime);
+          g2.gain.linearRampToValueAtTime(0.012,edAudioCtx.currentTime+0.04);
+          g2.gain.linearRampToValueAtTime(0,edAudioCtx.currentTime+0.5);
+          o.connect(g2);g2.connect(gain);o.start();o.stop(edAudioCtx.currentTime+0.6);
+        },i*300);
+      });
+      paChime();
+    },(25+Math.random()*50)*1000);
+  }
+  paChime();
 }
 
 // ═══ LIGHTING ═══
@@ -935,39 +1313,77 @@ let questionState = {}; // track which questions asked
 
 function enterRoom(idx) {
   currentCase = CASES[idx];
-  examState = {};
-  questionState = {};
 
-  // Exit pointer lock and show room view
+  initEDAudio();
+
+  // ═══ CINEMATIC TRANSITION ═══
+  // Fade 3D view to black, then reveal room
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:#0a0e14;z-index:150;opacity:0;transition:opacity 0.4s;pointer-events:none';
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.style.opacity = '1');
+
+  // Exit pointer lock during transition
   document.exitPointerLock();
   document.getElementById('splash').style.display = 'none';
-  document.getElementById('room-view').style.display = 'block';
 
-  // Header
-  document.getElementById('rv-room').textContent = 'Room ' + currentCase.room;
-  document.getElementById('rv-name').textContent = currentCase.name + ', ' + currentCase.age + currentCase.sex;
-  document.getElementById('rv-cc').textContent = 'CC: ' + currentCase.cc;
-  const acBadge = document.getElementById('rv-acuity');
-  acBadge.textContent = currentCase.acuity.toUpperCase() + ' · ESI ' + currentCase.esi;
-  acBadge.style.background = currentCase.acuity==='critical' ? 'rgba(220,38,38,.15)' : 'rgba(217,119,6,.15)';
-  acBadge.style.color = currentCase.acuity==='critical' ? '#EF4444' : '#FBBF24';
+  setTimeout(() => {
+    document.getElementById('room-view').style.display = 'block';
 
-  // Vitals monitor
-  renderVitalsMonitor();
-  startECGWave();
+    // Header
+    document.getElementById('rv-room').textContent = 'Room ' + currentCase.room;
+    document.getElementById('rv-name').textContent = currentCase.name + ', ' + currentCase.age + currentCase.sex;
+    document.getElementById('rv-cc').textContent = 'CC: ' + currentCase.cc;
+    const acBadge = document.getElementById('rv-acuity');
+    acBadge.textContent = currentCase.acuity.toUpperCase() + ' · ESI ' + currentCase.esi;
+    acBadge.style.background = currentCase.acuity==='critical' ? 'rgba(220,38,38,.15)' : 'rgba(217,119,6,.15)';
+    acBadge.style.color = currentCase.acuity==='critical' ? '#EF4444' : '#FBBF24';
 
-  // Reset panels
-  showPanel(null);
-  document.querySelectorAll('.action-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-empty').style.display = 'block';
+    // Vitals monitor
+    renderVitalsMonitor();
+    startECGWave();
+
+    // Reset panels
+    showPanel(null);
+    document.querySelectorAll('.action-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('panel-empty').style.display = 'block';
+
+    startRoomBeeps();
+    updateProgress();
+
+    // Fade overlay out
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 400);
+    });
+  }, 450);
 }
 
 function exitRoom() {
-  document.getElementById('room-view').style.display = 'none';
-  currentCase = null;
-  stopECGWave();
-  // Re-enter 3D
-  setTimeout(() => renderer.domElement.requestPointerLock(), 100);
+  // Smooth fade transition back to 3D
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:#0a0e14;z-index:150;opacity:0;transition:opacity 0.3s;pointer-events:none';
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.style.opacity = '1');
+
+  setTimeout(() => {
+    document.getElementById('room-view').style.display = 'none';
+    currentCase = null;
+    stopECGWave();
+    stopRoomBeeps();
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 300);
+    });
+    // Re-enter 3D
+    setTimeout(() => renderer.domElement.requestPointerLock(), 150);
+  }, 350);
+}
+
+function openFullEMR() {
+  // Navigate to the full ED Board with this patient's room number as context
+  const roomNum = currentCase ? currentCase.room : 1;
+  window.location.href = 'legacy/ed-board-v2.html?room=' + roomNum;
 }
 
 function renderVitalsMonitor() {
@@ -1019,7 +1435,7 @@ function stopECGWave() { if(ecgAnim) cancelAnimationFrame(ecgAnim); }
 
 // ═══ PANEL SWITCHING ═══
 function showPanel(panel) {
-  ['talk','exam','vitals','labs','imaging'].forEach(p => {
+  ['talk','exam','vitals','labs','imaging','treatment','dispo'].forEach(p => {
     document.getElementById('panel-'+p).style.display = p===panel ? 'block' : 'none';
   });
   document.getElementById('panel-empty').style.display = panel ? 'none' : 'block';
@@ -1038,7 +1454,10 @@ function renderPanel(panel) {
     case 'vitals': renderVitalsPanel(el, c); break;
     case 'labs': renderLabsPanel(el, c); break;
     case 'imaging': renderImagingPanel(el, c); break;
+    case 'treatment': renderTreatmentPanel(el, c); break;
+    case 'dispo': renderDispoPanel(el, c); break;
   }
+  updateProgress();
 }
 
 // ═══ TALK PANEL ═══
@@ -1067,6 +1486,7 @@ function renderTalkPanel(el, c) {
 function askQuestion(idx) {
   questionState[currentCase.room+'-'+idx] = true;
   renderTalkPanel(document.getElementById('panel-talk'), currentCase);
+  updateProgress();
   // Scroll to bottom
   const dp = document.getElementById('data-panel');
   dp.scrollTop = dp.scrollHeight;
@@ -1090,6 +1510,7 @@ function renderExamPanel(el, c) {
 function doExam(sys) {
   examState[currentCase.room+'-'+sys] = true;
   renderExamPanel(document.getElementById('panel-exam'), currentCase);
+  updateProgress();
 }
 
 // ═══ VITALS PANEL ═══
@@ -1135,6 +1556,96 @@ function renderImagingPanel(el, c) {
     html += `<div class="imaging-card"><div class="img-name">${img.name}</div><div class="img-result">${img.result}</div></div>`;
   });
   el.innerHTML = html;
+}
+
+// ═══ TREATMENT PANEL ═══
+function renderTreatmentPanel(el, c) {
+  const tx = TREATMENTS[c.room];
+  if(!tx){el.innerHTML='<div class="empty-state">No treatment data for this case</div>';return;}
+  if(!orderState[c.room])orderState[c.room]=new Set();
+  const ordered = orderState[c.room];
+  let html = '<h3><span class="sec-icon">💊</span> Order Entry</h3>';
+  html += '<p style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:14px">Click to place orders. Select all appropriate interventions.</p>';
+  tx.orders.forEach(cat => {
+    html += `<div class="order-category"><div class="order-cat-title">${cat.cat}</div>`;
+    cat.items.forEach(item => {
+      const isOrdered = ordered.has(item);
+      html += `<div class="order-item${isOrdered?' ordered':''}" onclick="placeOrder('${item.replace(/'/g,"\\'")}')">
+        <div class="ord-check">${isOrdered?'✓':''}</div>
+        <div>${item}</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  const total = tx.orders.reduce((s,cat)=>s+cat.items.length,0);
+  html += `<div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.3);text-align:center">${ordered.size}/${total} orders placed</div>`;
+  el.innerHTML = html;
+}
+
+function placeOrder(item) {
+  if(!orderState[currentCase.room])orderState[currentCase.room]=new Set();
+  const s = orderState[currentCase.room];
+  if(s.has(item))s.delete(item); else s.add(item);
+  playBeep(600,0.02);
+  renderTreatmentPanel(document.getElementById('panel-treatment'), currentCase);
+  updateProgress();
+}
+
+// ═══ DISPOSITION PANEL ═══
+function renderDispoPanel(el, c) {
+  const tx = TREATMENTS[c.room];
+  if(!tx){el.innerHTML='<div class="empty-state">No disposition data for this case</div>';return;}
+  let html = '<h3><span class="sec-icon">🚪</span> Disposition Decision</h3>';
+  html += '<p style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:14px">Where does this patient go next?</p>';
+  const chosen = dispoState[c.room];
+  tx.dispo.forEach((opt,i) => {
+    let cls = 'dispo-option';
+    if(chosen !== undefined){
+      if(opt.correct) cls += ' correct';
+      else if(i === chosen) cls += ' incorrect';
+    }
+    html += `<div class="${cls}" onclick="chooseDispo(${i})" ${chosen!==undefined?'style="pointer-events:none"':''}>
+      <div class="do-title">${opt.text}</div>
+      <div class="do-desc">${opt.desc}</div>
+    </div>`;
+  });
+  html += `<div class="dispo-explain" id="dispo-explain">${tx.dispoExplain}</div>`;
+  el.innerHTML = html;
+  if(chosen !== undefined) el.querySelector('.dispo-explain').style.display = 'block';
+}
+
+function chooseDispo(idx) {
+  dispoState[currentCase.room] = idx;
+  renderDispoPanel(document.getElementById('panel-dispo'), currentCase);
+  updateProgress();
+  // Save patient outcome to localStorage for Night Float / SimRoom continuity
+  savePatientState();
+}
+
+// ═══ CROSS-MODULE STATE (localStorage) ═══
+function savePatientState() {
+  if(!currentCase) return;
+  const r = currentCase.room;
+  const tx = TREATMENTS[r];
+  const state = {
+    room: r,
+    name: currentCase.name,
+    age: currentCase.age,
+    sex: currentCase.sex,
+    cc: currentCase.cc,
+    dx: tx ? (tx.dispo.find(d=>d.correct)||{}).text : '',
+    vitals: currentCase.vitals,
+    ordersPlaced: orderState[r] ? [...orderState[r]] : [],
+    dispoChosen: dispoState[r],
+    dispoCorrect: tx && dispoState[r]!==undefined ? tx.dispo[dispoState[r]].correct : null,
+    progress: getProgress(r),
+    timestamp: Date.now()
+  };
+  try {
+    let patients = JSON.parse(localStorage.getItem('rdx-ed-patients')||'{}');
+    patients[r] = state;
+    localStorage.setItem('rdx-ed-patients', JSON.stringify(patients));
+  } catch(e) {}
 }
 </script>
 </body>
