@@ -84,6 +84,11 @@
         .form-card.pro .btn-primary:hover { background: var(--pro-dark); }
         .form-card.beta .btn-primary { background: var(--beta); }
         .form-card.beta .btn-primary:hover { background: var(--beta-dark); }
+        .btn-google { display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px 16px;border:1.5px solid #dadce0;border-radius:12px;background:white;color:#3c4043;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit;margin-bottom:12px }
+        .btn-google:hover { background:#f8f9fa;border-color:#c4c7cc;box-shadow:0 1px 3px rgba(0,0,0,.08) }
+        .btn-google svg { flex-shrink:0 }
+        .auth-divider { display:flex;align-items:center;gap:12px;margin:16px 0;color:#94a3b8;font-size:13px }
+        .auth-divider::before,.auth-divider::after { content:'';flex:1;height:1px;background:#e2e8f0 }
         .btn-link { background: none; color: #64748b; font-size: 14px; border: none; cursor: pointer; padding: 10px; }
         .login-prompt { text-align: center; margin-top: 16px; font-size: 14px; color: #64748b; }
         .login-prompt a { color: var(--primary); font-weight: 600; text-decoration: none; }
@@ -235,6 +240,11 @@
 
                 <!-- EMAIL -->
                 <div class="section" id="sectionEmail">
+                    <button type="button" class="btn-google" onclick="signUpWithGoogle()">
+                        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                        Sign up with Google
+                    </button>
+                    <div class="auth-divider">or sign up with email</div>
                     <div class="info-box blue" id="emailInfoBox"><span class="icon">📧</span><div id="emailInfoText"><strong>Enter your email</strong><br>We'll send a verification code.</div></div>
                     <div id="emailError" class="message"></div>
                     <div class="form-group">
@@ -414,6 +424,11 @@
         <div class="form-card hidden" id="loginForm">
             <div class="form-header"><h2>Welcome Back</h2><p>Sign in to your ReasonDx account</p></div>
             <div class="form-body">
+                <button type="button" class="btn-google" onclick="signInWithGoogle()">
+                    <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                    Continue with Google
+                </button>
+                <div class="auth-divider">or sign in with email</div>
                 <div id="loginError" class="message"></div>
                 <div class="form-group"><label class="form-label">Email</label><input type="email" id="loginEmail" class="form-input" placeholder="you@email.com"></div>
                 <div class="form-group"><label class="form-label">Password</label><input type="password" id="loginPassword" class="form-input" placeholder="Your password"></div>
@@ -856,6 +871,54 @@
         // ============================================
         // LOGIN
         // ============================================
+        // ============================================
+        // GOOGLE OAUTH
+        // ============================================
+        function signInWithGoogle() {
+            var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+            var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+            if (!window.supabase) { alert('Auth system loading, please try again.'); return; }
+            var sb = window.supabase.createClient(sbUrl, sbKey);
+            var redirectUrl = window.location.origin + '/ReasonDx/auth/register.html#google-callback';
+            sb.auth.signInWithOAuth({
+                provider: 'google',
+                options: { redirectTo: redirectUrl }
+            }).then(function(result) {
+                if (result.error) {
+                    console.error('Google sign-in error:', result.error);
+                    var errEl = document.getElementById('loginError');
+                    if (errEl) errEl.textContent = 'Google sign-in failed: ' + result.error.message;
+                }
+            });
+        }
+        function signUpWithGoogle() { signInWithGoogle(); }
+
+        // Handle Google OAuth callback
+        function handleGoogleCallback() {
+            var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
+            var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+            if (!window.supabase) return;
+            var sb = window.supabase.createClient(sbUrl, sbKey);
+            sb.auth.getSession().then(function(result) {
+                if (result.data && result.data.session) {
+                    var user = result.data.session.user;
+                    var userData = {
+                        email: user.email,
+                        name: user.user_metadata && user.user_metadata.full_name ? user.user_metadata.full_name : user.email.split('@')[0],
+                        tier: 'free',
+                        supabaseId: user.id,
+                        registeredAt: new Date().toISOString(),
+                        authProvider: 'google'
+                    };
+                    localStorage.setItem('reasondx-user', JSON.stringify(userData));
+                    // Redirect to main site
+                    var redirect = sessionStorage.getItem('reasondx-redirect');
+                    if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
+                    else { window.location.href = '../index.html'; }
+                }
+            });
+        }
+
         function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
         function showPlanSelection() { document.getElementById('loginForm').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('planSelection').classList.remove('hidden'); }
         function login() {
@@ -937,6 +1000,12 @@
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Handle Google OAuth callback
+            if (window.location.hash.indexOf('access_token') !== -1 || window.location.hash === '#google-callback') {
+                handleGoogleCallback();
+                return;
+            }
+
             // Auto-show sign-in if redirected with #signin hash
             if (window.location.hash === '#signin') {
                 showLogin();
