@@ -22,7 +22,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
-.topbar{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:white;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.15);position:sticky;top:0;z-index:100}
+.topbar{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:white;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.15);position:sticky;top:56px;z-index:100}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-logo{font-size:16px;font-weight:700}.topbar-logo span{font-weight:400;opacity:.85}
 .topbar-badge{background:rgba(255,255,255,.18);padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
@@ -243,7 +243,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 </head>
 <body>
 <div class="topbar">
-  <div class="topbar-left"><a href="/training.html" class="topbar-home" title="Back to Training Hub" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;margin-right:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Hub</a><div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div><div class="topbar-badge">Emergency Dept</div></div>
+  <div class="topbar-left"><a href="../training.html" class="topbar-home" title="Back to Training Hub" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;margin-right:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Hub</a><div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div><div class="topbar-badge">Emergency Dept</div></div>
   <div class="topbar-right"><div class="topbar-time" id="simTime">07:00 AM — Day 1</div><div class="topbar-user"><div class="topbar-avatar">MS</div><span>Medical Student</span></div></div>
 </div>
 <div class="board-header">
@@ -5293,6 +5293,7 @@ updateClock();
 </script>
 <script src="../voice-input.js"></script>
 <script src="../dx-bias-assessment.js"></script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"js/rdx-nav.js";document.head.appendChild(s)})();</script>
 <script>
 // Voice input for patient chat
 function initVoiceForChat() {
