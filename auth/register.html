@@ -889,43 +889,73 @@
         function handleGoogleCallback() {
             var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
             var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
-            if (!window.supabase) return;
 
-            // Show a loading state while we process the callback
+            // Show loading state
             document.getElementById('planSelection').classList.add('hidden');
             document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registrationForm').classList.add('hidden');
 
-            var sb = window.supabase.createClient(sbUrl, sbKey);
-
-            // Supabase auto-detects tokens in the URL hash on createClient.
-            // Use onAuthStateChange to catch the session once it's processed.
-            sb.auth.onAuthStateChange(function(event, session) {
-                if (event === 'SIGNED_IN' && session) {
-                    var user = session.user;
-                    var userData = {
-                        email: user.email,
-                        name: (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0],
-                        tier: 'free',
-                        supabaseId: user.id,
-                        registeredAt: new Date().toISOString(),
-                        authProvider: 'google'
-                    };
-                    localStorage.setItem('reasondx-user', JSON.stringify(userData));
-
-                    // Clean the URL hash before redirecting
-                    history.replaceState(null, '', window.location.pathname + window.location.search);
-
-                    var redirect = sessionStorage.getItem('reasondx-redirect');
-                    if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
-                    else { window.location.href = '../index.html'; }
-                }
+            // Parse tokens directly from the URL hash
+            var hash = window.location.hash.substring(1); // strip leading #
+            var params = {};
+            hash.split('&').forEach(function(part) {
+                var kv = part.split('=');
+                if (kv.length === 2) params[kv[0]] = decodeURIComponent(kv[1]);
             });
 
-            // Fallback: if onAuthStateChange doesn't fire within 5s, try getSession
-            setTimeout(function() {
-                sb.auth.getSession().then(function(result) {
-                    if (result.data && result.data.session) {
-                        var user = result.data.session.user;
+            var accessToken = params['access_token'];
+            var refreshToken = params['refresh_token'];
+
+            if (!accessToken || !refreshToken) {
+                console.error('Google callback: missing tokens in URL hash');
+                document.getElementById('planSelection').classList.remove('hidden');
+                return;
+            }
+
+            // Decode JWT payload to get user info (no verification needed — Supabase will verify)
+            function decodeJWT(token) {
+                try {
+                    var parts = token.split('.');
+                    var payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+                    return JSON.parse(atob(payload));
+                } catch(e) { return null; }
+            }
+
+            var jwt = decodeJWT(accessToken);
+
+            // Save user data immediately from JWT (don't wait for Supabase SDK)
+            if (jwt && jwt.email) {
+                var meta = jwt.user_metadata || {};
+                var userData = {
+                    email: jwt.email,
+                    name: meta.full_name || meta.name || jwt.email.split('@')[0],
+                    tier: 'free',
+                    supabaseId: jwt.sub,
+                    registeredAt: new Date().toISOString(),
+                    authProvider: 'google'
+                };
+                localStorage.setItem('reasondx-user', JSON.stringify(userData));
+
+                // Clean URL
+                history.replaceState(null, '', window.location.pathname);
+
+                // Redirect
+                var redirect = sessionStorage.getItem('reasondx-redirect');
+                if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
+                else { window.location.href = '../index.html'; }
+                return;
+            }
+
+            // Fallback: if JWT decode fails, try Supabase SDK setSession
+            function trySupabaseSDK() {
+                if (!window.supabase) {
+                    setTimeout(trySupabaseSDK, 200);
+                    return;
+                }
+                var sb = window.supabase.createClient(sbUrl, sbKey);
+                sb.auth.setSession({ access_token: accessToken, refresh_token: refreshToken }).then(function(result) {
+                    if (result.data && result.data.user) {
+                        var user = result.data.user;
                         var userData = {
                             email: user.email,
                             name: (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0],
@@ -935,16 +965,17 @@
                             authProvider: 'google'
                         };
                         localStorage.setItem('reasondx-user', JSON.stringify(userData));
-                        history.replaceState(null, '', window.location.pathname + window.location.search);
+                        history.replaceState(null, '', window.location.pathname);
                         var redirect = sessionStorage.getItem('reasondx-redirect');
                         if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
                         else { window.location.href = '../index.html'; }
                     } else {
-                        // No session found — show the page normally
+                        console.error('setSession failed:', result.error);
                         document.getElementById('planSelection').classList.remove('hidden');
                     }
                 });
-            }, 3000);
+            }
+            trySupabaseSDK();
         }
 
         function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
