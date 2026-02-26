@@ -870,7 +870,8 @@
             var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
             if (!window.supabase) { alert('Auth system loading, please try again.'); return; }
             var sb = window.supabase.createClient(sbUrl, sbKey);
-            var redirectUrl = window.location.origin + '/ReasonDx/auth/register.html#google-callback';
+            // Do NOT put a hash fragment in the redirect URL — Supabase uses the hash for tokens
+            var redirectUrl = window.location.origin + '/ReasonDx/auth/register.html?callback=google';
             sb.auth.signInWithOAuth({
                 provider: 'google',
                 options: { redirectTo: redirectUrl }
@@ -889,25 +890,61 @@
             var sbUrl = 'https://lpwbiqpojisqgezycupw.supabase.co';
             var sbKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
             if (!window.supabase) return;
+
+            // Show a loading state while we process the callback
+            document.getElementById('planSelection').classList.add('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+
             var sb = window.supabase.createClient(sbUrl, sbKey);
-            sb.auth.getSession().then(function(result) {
-                if (result.data && result.data.session) {
-                    var user = result.data.session.user;
+
+            // Supabase auto-detects tokens in the URL hash on createClient.
+            // Use onAuthStateChange to catch the session once it's processed.
+            sb.auth.onAuthStateChange(function(event, session) {
+                if (event === 'SIGNED_IN' && session) {
+                    var user = session.user;
                     var userData = {
                         email: user.email,
-                        name: user.user_metadata && user.user_metadata.full_name ? user.user_metadata.full_name : user.email.split('@')[0],
+                        name: (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0],
                         tier: 'free',
                         supabaseId: user.id,
                         registeredAt: new Date().toISOString(),
                         authProvider: 'google'
                     };
                     localStorage.setItem('reasondx-user', JSON.stringify(userData));
-                    // Redirect to main site
+
+                    // Clean the URL hash before redirecting
+                    history.replaceState(null, '', window.location.pathname + window.location.search);
+
                     var redirect = sessionStorage.getItem('reasondx-redirect');
                     if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
                     else { window.location.href = '../index.html'; }
                 }
             });
+
+            // Fallback: if onAuthStateChange doesn't fire within 5s, try getSession
+            setTimeout(function() {
+                sb.auth.getSession().then(function(result) {
+                    if (result.data && result.data.session) {
+                        var user = result.data.session.user;
+                        var userData = {
+                            email: user.email,
+                            name: (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0],
+                            tier: 'free',
+                            supabaseId: user.id,
+                            registeredAt: new Date().toISOString(),
+                            authProvider: 'google'
+                        };
+                        localStorage.setItem('reasondx-user', JSON.stringify(userData));
+                        history.replaceState(null, '', window.location.pathname + window.location.search);
+                        var redirect = sessionStorage.getItem('reasondx-redirect');
+                        if (redirect) { sessionStorage.removeItem('reasondx-redirect'); window.location.href = redirect; }
+                        else { window.location.href = '../index.html'; }
+                    } else {
+                        // No session found — show the page normally
+                        document.getElementById('planSelection').classList.remove('hidden');
+                    }
+                });
+            }, 3000);
         }
 
         function showLogin() { document.getElementById('planSelection').classList.add('hidden'); document.getElementById('registrationForm').classList.add('hidden'); document.getElementById('loginForm').classList.remove('hidden'); }
@@ -991,8 +1028,10 @@
         // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle Google OAuth callback
-            if (window.location.hash.indexOf('access_token') !== -1 || window.location.hash === '#google-callback') {
+            // Handle Google OAuth callback — detect via query param or access_token in hash
+            var isGoogleCallback = (window.location.search.indexOf('callback=google') !== -1) ||
+                                   (window.location.hash.indexOf('access_token') !== -1);
+            if (isGoogleCallback) {
                 handleGoogleCallback();
                 return;
             }
