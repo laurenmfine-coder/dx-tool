@@ -910,7 +910,8 @@
             if (!window.supabase) { alert('Auth system loading, please try again.'); return; }
             var sb = window.supabase.createClient(sbUrl, sbKey);
             // Do NOT put a hash fragment in the redirect URL — Supabase uses the hash for tokens
-            var redirectUrl = window.location.origin + '/ReasonDx/auth/register.html?callback=google';
+            // Use current page path so it works regardless of deployment location
+            var redirectUrl = window.location.origin + window.location.pathname + '?callback=google';
             sb.auth.signInWithOAuth({
                 provider: 'google',
                 options: { redirectTo: redirectUrl }
