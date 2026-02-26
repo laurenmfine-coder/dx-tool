@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Virtual Hospital</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{overflow:hidden;background:#000;font-family:'Segoe UI',system-ui,sans-serif}
+#blocker{position:fixed;inset:0;background:rgba(8,20,32,.92);display:flex;align-items:center;justify-content:center;z-index:100;cursor:pointer;backdrop-filter:blur(8px)}
+#blocker-inner{text-align:center;color:#fff;max-width:560px;padding:32px}
+#blocker h1{font-size:42px;font-weight:300;margin-bottom:6px;letter-spacing:-1px}
+#blocker h1 em{color:#7DD3FC;font-style:italic}
+#blocker .sub{color:rgba(255,255,255,.55);font-size:15px;margin-bottom:32px;line-height:1.6}
+#blocker .start-btn{display:inline-block;background:#2874A6;color:#fff;font-size:16px;font-weight:600;padding:16px 40px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+#blocker .start-btn:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#blocker .controls{margin-top:24px;font-size:12px;color:rgba(255,255,255,.35);line-height:1.8}
+#blocker .controls kbd{background:rgba(255,255,255,.1);padding:2px 8px;border-radius:4px;font-family:inherit;border:1px solid rgba(255,255,255,.15)}
+#hud{position:fixed;top:0;left:0;right:0;pointer-events:none;z-index:50;padding:16px 20px;display:none;flex-wrap:wrap;gap:8px;align-items:center}
+#hud-location{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);text-shadow:0 1px 4px rgba(0,0,0,.6)}
+#hud-role{font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;color:#fff;margin-left:auto}
+#hud-hint{width:100%;font-size:11px;color:rgba(255,255,255,.3);margin-top:2px}
+#crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:50;pointer-events:none;display:none}
+#crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(0,0,0,.35)}
+#crosshair::before{width:16px;height:2px;top:50%;left:50%;transform:translate(-50%,-50%)}
+#crosshair::after{width:2px;height:16px;top:50%;left:50%;transform:translate(-50%,-50%)}
+#interact-prompt{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);z-index:50;pointer-events:none;display:none;text-align:center}
+#interact-prompt .prompt-box{background:rgba(0,0,0,.75);color:#fff;padding:10px 20px;border-radius:10px;font-size:14px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1)}
+#interact-prompt .prompt-box kbd{background:rgba(255,255,255,.15);padding:1px 8px;border-radius:4px;margin:0 2px;border:1px solid rgba(255,255,255,.2)}
+#interact-prompt .prompt-name{font-weight:700;color:#7DD3FC;font-size:15px}
+#interact-prompt .prompt-desc{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px}
+#minimap{position:fixed;bottom:20px;right:20px;width:180px;height:180px;z-index:50;pointer-events:none;display:none}
+#minimap canvas{border-radius:12px;border:2px solid rgba(255,255,255,.15);box-shadow:0 4px 20px rgba(0,0,0,.5)}
+#info-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:80;display:none;pointer-events:auto}
+#info-panel .panel{background:rgba(10,20,35,.95);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:28px;max-width:520px;width:90vw;max-height:75vh;overflow-y:auto;color:#fff;backdrop-filter:blur(12px);box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#info-panel h2{font-size:22px;font-weight:300;margin-bottom:4px}
+#info-panel h2 em{color:#7DD3FC;font-style:italic}
+#info-panel .panel-sub{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:20px}
+#info-panel .dept-list{display:flex;flex-direction:column;gap:8px}
+#info-panel .dept-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;cursor:pointer;transition:all .15s;text-decoration:none;color:#fff}
+#info-panel .dept-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateX(4px)}
+#info-panel .dept-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#info-panel .dept-info{flex:1}
+#info-panel .dept-title{font-weight:600;font-size:14px}
+#info-panel .dept-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+#info-panel .dept-arrow{color:rgba(255,255,255,.3);font-size:18px}
+#info-panel .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:rgba(255,255,255,.4);font-size:24px;cursor:pointer;padding:4px}
+#info-panel .close-btn:hover{color:#fff}
+#role-select{position:fixed;inset:0;background:rgba(8,20,32,.95);display:none;align-items:center;justify-content:center;z-index:110;backdrop-filter:blur(10px)}
+#role-select-inner{text-align:center;color:#fff;max-width:620px;padding:32px;width:90vw}
+#role-select h2{font-size:28px;font-weight:300;margin-bottom:6px}
+#role-select h2 em{color:#7DD3FC;font-style:italic}
+#role-select .role-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px;line-height:1.6}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:left;margin-bottom:24px}
+.role-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.role-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);transform:translateY(-2px)}
+.role-card.selected{border-color:#7DD3FC;background:rgba(125,211,252,.08)}
+.role-icon{font-size:24px;margin-bottom:6px}
+.role-name{font-weight:700;font-size:15px;margin-bottom:4px}
+.role-desc{font-size:11px;color:rgba(255,255,255,.45);line-height:1.5}
+.role-dest{font-size:10px;font-weight:600;color:#7DD3FC;margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+#role-confirm{display:inline-block;background:#2874A6;color:#fff;font-size:15px;font-weight:600;padding:14px 36px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;opacity:.4;pointer-events:none}
+#role-confirm.active{opacity:1;pointer-events:auto}
+#role-confirm.active:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.role-skip{display:block;margin-top:14px;font-size:12px;color:rgba(255,255,255,.3);cursor:pointer;background:none;border:none;text-decoration:underline}
+.role-skip:hover{color:rgba(255,255,255,.5)}
+</style>
+</head>
+<body>
+
+<div id="blocker">
+<div id="blocker-inner">
+    <h1>Welcome to <em>ReasonDx</em></h1>
+    <h1 style="font-size:28px;margin-bottom:16px;opacity:.7">Virtual Hospital</h1>
+    <p class="sub">Walk through a 3D teaching hospital. Visit the information desk. Find your department. Your clinical decisions follow the patient from ED triage through overnight call to morning rounds.</p>
+    <button class="start-btn" id="startBtn">🏥 Enter the Hospital</button>
+    <div class="controls">
+        <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> to walk &nbsp;·&nbsp; Mouse to look &nbsp;·&nbsp; <kbd>E</kbd> or Click to interact &nbsp;·&nbsp; <kbd>Esc</kbd> to pause
+    </div>
+</div>
+</div>
+
+<div id="hud"><div id="hud-location">Hospital Lobby</div><div id="hud-role"></div><div id="hud-hint"></div></div>
+<div id="crosshair"></div>
+<div id="interact-prompt"><div class="prompt-box"><div class="prompt-name"></div><div class="prompt-desc"></div><div style="margin-top:6px"><strong>Click</strong> to open &nbsp;·&nbsp; or press <kbd>E</kbd></div></div></div>
+<div id="minimap"><canvas id="minimap-canvas" width="180" height="180"></canvas></div>
+
+<div id="info-panel">
+<div class="panel" style="position:relative">
+    <button class="close-btn" onclick="closeInfoPanel()">✕</button>
+    <h2><em>ReasonDx</em> Directory</h2>
+    <p class="panel-sub">INFORMATION DESK — Choose a department to visit</p>
+    <div class="dept-list">
+        <a class="dept-item" href="ed-3d.html"><div class="dept-dot" style="background:#DC2626"></div><div class="dept-info"><div class="dept-title">🚑 Emergency Department — ED Board</div><div class="dept-sub">26 cases · 87 labs · 35 imaging · Full EMR with treatment orders and scoring</div></div><div class="dept-arrow">→</div></a>
+        <a class="dept-item" href="night-float.html"><div class="dept-dot" style="background:#7C3AED"></div><div class="dept-info"><div class="dept-title">🌙 Inpatient Floor — Night Float</div><div class="dept-sub">Admission orders · Nurse pages · Decompensation events · I-PASS handoff</div></div><div class="dept-arrow">→</div></a>
+        <a class="dept-item" href="simroomdx.html"><div class="dept-dot" style="background:#059669"></div><div class="dept-info"><div class="dept-title">🩺 Conference Room — SimRoomDx</div><div class="dept-sub">23 scenarios · 6 AI characters · Present on rounds with full case data</div></div><div class="dept-arrow">→</div></a>
+        <a class="dept-item" href="cases/crt-hub.html"><div class="dept-dot" style="background:#D97706"></div><div class="dept-info"><div class="dept-title">🧩 Skills Lab — Clinical Reasoning Trainers</div><div class="dept-sub">79 CRT cases · SBAR trainer · Consultant callback · ED handoff practice</div></div><div class="dept-arrow">→</div></a>
+        <a class="dept-item" href="case-browser.html"><div class="dept-dot" style="background:#2874A6"></div><div class="dept-info"><div class="dept-title">📚 Medical Library — MechanismDx & Cases</div><div class="dept-sub">330+ pathophysiology modules · 325+ interactive cases · 29 specialties</div></div><div class="dept-arrow">→</div></a>
+        <a class="dept-item" href="CoachDx/index.html"><div class="dept-dot" style="background:#EC4899"></div><div class="dept-info"><div class="dept-title">💡 Faculty Office — CoachDx</div><div class="dept-sub">AI Socratic coaching · Cognitive bias identification · Post-case debriefs</div></div><div class="dept-arrow">→</div></a>
+        <a class="dept-item" href="tools/index.html"><div class="dept-dot" style="background:#6366F1"></div><div class="dept-info"><div class="dept-title">🔧 Clinical Tools</div><div class="dept-sub">ECG practice · ABG analyzer · Clinical calculators · DDx builder · Flashcards</div></div><div class="dept-arrow">→</div></a>
+    </div>
+</div>
+</div>
+
+<div id="role-select">
+<div id="role-select-inner">
+    <h2>Choose your <em>rotation</em></h2>
+    <p class="role-sub">What are you doing today? Your role determines your assignment and highlights where to go in the hospital.</p>
+    <div class="role-grid">
+        <div class="role-card" data-role="ed" onclick="selectRole(this)"><div class="role-icon">🚑</div><div class="role-name">ED Student</div><div class="role-desc">You're on your emergency medicine rotation. Run the ED — triage, diagnose, treat, and dispo patients.</div><div class="role-dest">→ Emergency Department</div></div>
+        <div class="role-card" data-role="nf" onclick="selectRole(this)"><div class="role-icon">🌙</div><div class="role-name">Night Float Intern</div><div class="role-desc">Overnight call. Accept ED admissions, manage floor patients, respond to pages, hand off at 7 AM.</div><div class="role-dest">→ Inpatient Floor</div></div>
+        <div class="role-card" data-role="admit" onclick="selectRole(this)"><div class="role-icon">🩺</div><div class="role-name">Admitting Team / Sub-I</div><div class="role-desc">You're the presenting student on rounds. Present your patient to the attending and defend your plan.</div><div class="role-dest">→ Morning Rounds (SimRoomDx)</div></div>
+        <div class="role-card" data-role="skill" onclick="selectRole(this)"><div class="role-icon">🧩</div><div class="role-name">Skills Lab Session</div><div class="role-desc">Focused practice on clinical reasoning, SBAR communication, consultant callbacks, or ED handoffs.</div><div class="role-dest">→ Skills Lab</div></div>
+        <div class="role-card" data-role="study" onclick="selectRole(this)"><div class="role-icon">📚</div><div class="role-name">Independent Study</div><div class="role-desc">Review pathophysiology modules, browse cases, work with CoachDx, or use clinical tools at your own pace.</div><div class="role-dest">→ Medical Library</div></div>
+        <div class="role-card" data-role="explore" onclick="selectRole(this)"><div class="role-icon">🏥</div><div class="role-name">Free Exploration</div><div class="role-desc">No assignment — walk the hospital, visit any department, and explore everything at your own pace.</div><div class="role-dest">→ Explore freely</div></div>
+    </div>
+    <button id="role-confirm" onclick="confirmRole()">Begin Your Shift →</button>
+    <button class="role-skip" onclick="skipRole()">Skip — just let me explore</button>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════
+// REASONDX VIRTUAL HOSPITAL — PHOTOREALISTIC 3D BUILD
+// ═══════════════════════════════════════════════════════
+
+// roundRect polyfill
+if(!CanvasRenderingContext2D.prototype.roundRect){
+  CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
+    r=Math.min(r||0,w/2,h/2);this.beginPath();this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this;
+  };
+}
+
+// ═══ ROLE SYSTEM (unchanged) ═══
+const ROLES = {
+  ed:{name:'ED Student',color:'#DC2626',bg:'rgba(220,38,38,.25)',dept:'ed',hint:'Head east → Emergency Department (red door)'},
+  nf:{name:'Night Float Intern',color:'#7C3AED',bg:'rgba(124,58,237,.25)',dept:'nf',hint:'Head east → Night Float (purple door)'},
+  admit:{name:'Admitting Team',color:'#059669',bg:'rgba(5,150,105,.25)',dept:'sim',hint:'Head north → SimRoomDx (green door)'},
+  skill:{name:'Skills Lab',color:'#D97706',bg:'rgba(217,119,6,.25)',dept:'skill',hint:'Head north → Skills Lab (amber door)'},
+  study:{name:'Independent Study',color:'#2874A6',bg:'rgba(40,116,166,.25)',dept:'lib',hint:'Head west → Medical Library (blue door)'},
+  explore:{name:'Free Exploration',color:'#6366F1',bg:'rgba(99,102,241,.25)',dept:null,hint:'Explore any department — all doors are open to you'}
+};
+let selectedRole=null, activeRole=null;
+function selectRole(el){document.querySelectorAll('.role-card').forEach(c=>{c.classList.remove('selected');c.style.borderColor=''});el.classList.add('selected');selectedRole=el.dataset.role;el.style.borderColor=ROLES[selectedRole].color;document.getElementById('role-confirm').classList.add('active')}
+function confirmRole(){if(!selectedRole)return;activeRole=ROLES[selectedRole];applyRole();document.getElementById('role-select').style.display='none';renderer.domElement.requestPointerLock()}
+function skipRole(){selectedRole='explore';activeRole=ROLES.explore;applyRole();document.getElementById('role-select').style.display='none';renderer.domElement.requestPointerLock()}
+function applyRole(){const b=document.getElementById('hud-role');b.textContent=activeRole.name;b.style.background=activeRole.bg;b.style.borderLeft='3px solid '+activeRole.color;const h=document.getElementById('hud-hint');h.textContent=activeRole.hint;setTimeout(()=>{h.style.transition='opacity 2s';h.style.opacity='0'},8000)}
+
+// ═══ DEPARTMENTS ═══
+const DEPARTMENTS = [
+  {id:'ed',name:'Emergency Department',sub:'ED Board — 8 walkable patient rooms',color:0xDC2626,url:'ed-3d.html',doorX:-13,doorZ:3.15,faceDir:'south',hinge:'left'},
+  {id:'nf',name:'Night Float',sub:'Inpatient Floor — Overnight cross-cover',color:0x7C3AED,url:'night-float.html',doorX:-13,doorZ:-3.15,faceDir:'north',hinge:'left'},
+  {id:'sim',name:'SimRoomDx',sub:'Morning Rounds — 6 AI characters',color:0x059669,url:'simroomdx.html',doorX:3.15,doorZ:-13,faceDir:'east',hinge:'left'},
+  {id:'skill',name:'Skills Lab',sub:'79 CRT cases, SBAR, Consult Callback',color:0xD97706,url:'cases/crt-hub.html',doorX:-3.15,doorZ:-13,faceDir:'west',hinge:'left'},
+  {id:'lib',name:'Medical Library',sub:'330+ modules, 325+ interactive cases',color:0x2874A6,url:'case-browser.html',doorX:13,doorZ:3.15,faceDir:'south',hinge:'right'},
+  {id:'coach',name:'CoachDx',sub:'AI Socratic clinical coaching',color:0xEC4899,url:'CoachDx/index.html',doorX:13,doorZ:-3.15,faceDir:'north',hinge:'right'},
+  {id:'tools',name:'Clinical Tools',sub:'ECG, ABG, Calculators, Flashcards',color:0x6366F1,url:'tools/index.html',doorX:3.15,doorZ:13,faceDir:'east',hinge:'right'}
+];
+
+const PLAYER_HEIGHT=1.7, MOVE_SPEED=5.5, MOUSE_SENS=0.002;
+let scene,camera,renderer,clock;
+let moveState={forward:false,backward:false,left:false,right:false};
+let euler=new THREE.Euler(0,0,0,'YXZ');
+let playerPos=new THREE.Vector3(0,PLAYER_HEIGHT,12);
+let locked=false, interactables=[], currentTarget=null, infoPanelOpen=false, animatingDoors=[], minimapCtx;
+
+// ═══ INIT ═══
+function init(){
+  scene=new THREE.Scene();
+  // Bright warm hospital ambient — NOT dark
+  scene.background=new THREE.Color(0xd8d4cc);
+  scene.fog=new THREE.Fog(0xd8d4cc, 30, 55);
+
+  camera=new THREE.PerspectiveCamera(68,innerWidth/innerHeight,0.1,100);
+  camera.position.copy(playerPos);
+
+  renderer=new THREE.WebGLRenderer({antialias:true, powerPreference:'high-performance'});
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.35; // brighter — hospitals are well lit
+  renderer.physicallyCorrectLights=true;
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  document.body.appendChild(renderer.domElement);
+
+  clock=new THREE.Clock();
+  minimapCtx=document.getElementById('minimap-canvas').getContext('2d');
+
+  buildHospital();
+  buildLighting();
+  setupControls();
+  animate();
+}
+
+// ═══════════════════════════════════
+// PHOTOREALISTIC PROCEDURAL TEXTURES
+// ═══════════════════════════════════
+
+function makeFloorTexture(){
+  const c=document.createElement('canvas');c.width=512;c.height=512;
+  const x=c.getContext('2d');
+  // VCT (vinyl composite tile) — beige/tan with subtle marbling
+  const baseR=205,baseG=198,baseB=185;
+  x.fillStyle=`rgb(${baseR},${baseG},${baseB})`;x.fillRect(0,0,512,512);
+  // Marbling effect (multiple layers)
+  for(let layer=0;layer<3;layer++){
+    for(let i=0;i<400;i++){
+      const r=baseR-15+Math.random()*30, g=baseG-15+Math.random()*30, b=baseB-15+Math.random()*30;
+      const a=0.03+Math.random()*0.06;
+      x.fillStyle=`rgba(${r|0},${g|0},${b|0},${a})`;
+      const sz=8+Math.random()*40;
+      x.beginPath();x.ellipse(Math.random()*512,Math.random()*512,sz,sz*0.4,Math.random()*Math.PI,0,Math.PI*2);x.fill();
+    }
+  }
+  // Fine speckle (VCT has embedded chips)
+  for(let i=0;i<2000;i++){
+    const v=170+Math.random()*60;
+    x.fillStyle=`rgba(${v|0},${v-3|0},${v-8|0},0.12)`;
+    x.fillRect(Math.random()*512,Math.random()*512,1+Math.random()*2.5,1+Math.random()*2.5);
+  }
+  // Tile grid lines (12×12 inch tiles)
+  x.strokeStyle='rgba(0,0,0,0.045)';x.lineWidth=1.5;
+  const tileCount=4;
+  for(let i=0;i<=tileCount;i++){
+    const p=i*(512/tileCount);
+    x.beginPath();x.moveTo(p,0);x.lineTo(p,512);x.stroke();
+    x.beginPath();x.moveTo(0,p);x.lineTo(512,p);x.stroke();
+  }
+  // Subtle wax/polish sheen (slightly lighter center of each tile)
+  for(let ty=0;ty<tileCount;ty++)for(let tx=0;tx<tileCount;tx++){
+    const cx=tx*128+64, cy=ty*128+64;
+    const grad=x.createRadialGradient(cx,cy,0,cx,cy,55);
+    grad.addColorStop(0,'rgba(255,255,255,0.04)');grad.addColorStop(1,'rgba(255,255,255,0)');
+    x.fillStyle=grad;x.fillRect(tx*128,ty*128,128,128);
+  }
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(12,12);t.anisotropy=4;return t;
+}
+
+function makeWallTexture(){
+  const c=document.createElement('canvas');c.width=512;c.height=512;
+  const x=c.getContext('2d');
+  // Upper wall — semi-gloss warm white paint
+  x.fillStyle='#ece8e0';x.fillRect(0,0,512,370);
+  // Very subtle paint texture
+  for(let i=0;i<300;i++){
+    const v=230+Math.random()*18;
+    x.fillStyle=`rgba(${v|0},${v-2|0},${v-6|0},0.08)`;
+    x.fillRect(Math.random()*512,Math.random()*370,6+Math.random()*20,2+Math.random()*6);
+  }
+  // Chair rail / bumper guard (wood-grain strip at waist height)
+  x.fillStyle='#a08868';x.fillRect(0,260,512,14);
+  x.fillStyle='#8a7556';x.fillRect(0,274,512,2);
+  x.fillStyle='#b8a080';x.fillRect(0,260,512,2); // highlight
+  // Wood grain on chair rail
+  for(let i=0;i<40;i++){x.fillStyle='rgba(100,70,40,0.06)';x.fillRect(Math.random()*512,261,Math.random()*80,12)}
+  // Lower wall — slightly different tone (common in hospitals)
+  x.fillStyle='#e4e0d6';x.fillRect(0,276,512,190);
+  for(let i=0;i<200;i++){const v=220+Math.random()*18;x.fillStyle=`rgba(${v|0},${v-2|0},${v-6|0},0.06)`;x.fillRect(Math.random()*512,276+Math.random()*190,8+Math.random()*20,3+Math.random()*8)}
+  // Rubber baseboard (dark)
+  x.fillStyle='#4a4540';x.fillRect(0,466,512,46);
+  x.fillStyle='#3a3530';x.fillRect(0,466,512,3); // shadow line
+  x.fillStyle='#5a5550';x.fillRect(0,508,512,4); // bottom edge
+  // Slight rubber texture on baseboard
+  for(let i=0;i<100;i++){x.fillStyle='rgba(60,55,48,0.15)';x.fillRect(Math.random()*512,468+Math.random()*40,4+Math.random()*12,2+Math.random()*4)}
+  const t=new THREE.CanvasTexture(c);t.wrapS=THREE.RepeatWrapping;t.repeat.set(4,1);t.anisotropy=4;return t;
+}
+
+function makeCeilingTexture(){
+  const c=document.createElement('canvas');c.width=256;c.height=256;
+  const x=c.getContext('2d');
+  // Acoustic ceiling tile
+  x.fillStyle='#e6e2da';x.fillRect(0,0,256,256);
+  // Tiny texture dots (acoustic panel perforations)
+  for(let py=0;py<256;py+=4)for(let px=0;px<256;px+=4){
+    if(Math.random()>0.4){
+      x.fillStyle=`rgba(0,0,0,${0.02+Math.random()*0.03})`;
+      x.beginPath();x.arc(px+Math.random()*2,py+Math.random()*2,0.5+Math.random()*0.5,0,Math.PI*2);x.fill();
+    }
+  }
+  // Grid lines (T-bar ceiling grid)
+  x.strokeStyle='rgba(180,175,165,0.5)';x.lineWidth=3;
+  x.strokeRect(2,2,252,252);
+  // Shadow in grid channels
+  x.fillStyle='rgba(0,0,0,0.04)';x.fillRect(0,0,4,256);x.fillRect(0,0,256,4);
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(12,12);t.anisotropy=4;return t;
+}
+
+// ═══ TEXT LABELS — Hospital-style wayfinding signs ═══
+function makeWayfindingSign(text, color, bgColor){
+  const c=document.createElement('canvas');c.width=600;c.height=100;
+  const x=c.getContext('2d');
+  // Rounded rect background
+  const bg=bgColor||'#1b3a5c';
+  x.fillStyle=bg;
+  x.beginPath();x.roundRect(0,0,600,100,8);x.fill();
+  // Border
+  x.strokeStyle='rgba(255,255,255,0.15)';x.lineWidth=2;x.beginPath();x.roundRect(1,1,598,98,8);x.stroke();
+  // Color accent stripe
+  const hex='#'+(color||0xffffff).toString(16).padStart(6,'0');
+  x.fillStyle=hex;x.fillRect(0,0,8,100);
+  // Text
+  x.fillStyle='#fff';x.font='bold 32px "Segoe UI",system-ui,sans-serif';
+  x.textBaseline='middle';x.fillText(text,28,52);
+  return new THREE.CanvasTexture(c);
+}
+
+function makeRoomSign(text,subtext,color){
+  const c=document.createElement('canvas');c.width=280;c.height=120;
+  const x=c.getContext('2d');
+  x.fillStyle='#1a2e42';
+  x.beginPath();x.roundRect(0,0,280,120,6);x.fill();
+  const hex='#'+(color||0xffffff).toString(16).padStart(6,'0');
+  x.fillStyle=hex;x.fillRect(0,0,280,4);
+  x.fillStyle='#fff';x.font='bold 24px "Segoe UI",sans-serif';x.textAlign='center';x.fillText(text,140,48);
+  if(subtext){x.fillStyle='rgba(255,255,255,0.5)';x.font='13px "Segoe UI",sans-serif';x.fillText(subtext,140,78);}
+  return new THREE.CanvasTexture(c);
+}
+
+// ═══ DIRECTORY BOARD (wall-mounted) ═══
+function makeDirectoryBoard(){
+  const c=document.createElement('canvas');c.width=1024;c.height=768;
+  const x=c.getContext('2d');
+  x.fillStyle='#0d1f30';x.fillRect(0,0,1024,768);
+  // Frame
+  x.strokeStyle='#2874A6';x.lineWidth=3;x.strokeRect(8,8,1008,752);
+  x.strokeStyle='rgba(40,116,166,0.25)';x.lineWidth=1;x.strokeRect(16,16,992,736);
+  // Title
+  x.fillStyle='#7DD3FC';x.font='bold 36px "Segoe UI",system-ui,sans-serif';x.textAlign='center';
+  x.fillText('HOSPITAL DIRECTORY',512,56);
+  x.fillStyle='rgba(255,255,255,0.3)';x.font='14px "Segoe UI",sans-serif';
+  x.fillText('ReasonDx Virtual Teaching Hospital',512,82);
+  x.strokeStyle='rgba(125,211,252,0.15)';x.beginPath();x.moveTo(60,100);x.lineTo(964,100);x.stroke();
+
+  const depts=[
+    {icon:'🚑',name:'Emergency Department — ED Board',wing:'East Wing',desc:'8 walkable rooms · Full patient encounters · History, exam, labs, imaging',color:'#DC2626'},
+    {icon:'🌙',name:'Inpatient Floor — Night Float',wing:'East Wing',desc:'I-PASS handoff board · Nurse pages · Cross-cover scenarios',color:'#7C3AED'},
+    {icon:'🩺',name:'Conference Room — SimRoomDx',wing:'North Wing',desc:'23 scenarios · 6 AI characters · Morning rounds presentations',color:'#059669'},
+    {icon:'🧩',name:'Skills Lab — Clinical Reasoning Trainers',wing:'North Wing',desc:'79 CRT cases · SBAR trainer · Consultant callback · ED handoff',color:'#D97706'},
+    {icon:'📚',name:'Medical Library — MechanismDx & Cases',wing:'West Wing',desc:'330+ pathophysiology modules · 325+ interactive cases · 29 specialties',color:'#2874A6'},
+    {icon:'💡',name:'Faculty Office — CoachDx',wing:'West Wing',desc:'AI Socratic coaching · Cognitive bias identification · Post-case debriefs',color:'#EC4899'},
+    {icon:'🔧',name:'Clinical Tools',wing:'South Wing',desc:'ECG practice · ABG analyzer · Calculators · DDx builder · Flashcards',color:'#6366F1'}
+  ];
+  let y=125;
+  depts.forEach(d=>{
+    x.fillStyle=d.color;x.beginPath();x.arc(52,y+18,8,0,Math.PI*2);x.fill();
+    x.fillStyle='#fff';x.font='bold 20px "Segoe UI",sans-serif';x.textAlign='left';
+    x.fillText(d.icon+'  '+d.name,72,y+12);
+    x.fillStyle='rgba(125,211,252,0.55)';x.font='bold 12px "Segoe UI",sans-serif';x.textAlign='right';
+    x.fillText(d.wing,975,y+12);
+    x.fillStyle='rgba(255,255,255,0.35)';x.font='14px "Segoe UI",sans-serif';x.textAlign='left';
+    x.fillText(d.desc,72,y+36);
+    x.strokeStyle='rgba(255,255,255,0.04)';x.beginPath();x.moveTo(50,y+52);x.lineTo(974,y+52);x.stroke();
+    y+=73;
+  });
+  x.fillStyle='rgba(255,255,255,0.15)';x.font='12px "Segoe UI",sans-serif';x.textAlign='center';
+  x.fillText('Walk to any color-coded door · Press E or Click to enter',512,740);
+  return new THREE.CanvasTexture(c);
+}
+
+// ═══════════════════════════
+// BUILD REALISTIC HOSPITAL
+// ═══════════════════════════
+function buildHospital(){
+  const floorTex=makeFloorTexture(),wallTex=makeWallTexture(),ceilTex=makeCeilingTexture();
+  // PBR materials with realistic properties
+  const wallMat=new THREE.MeshStandardMaterial({map:wallTex,roughness:0.65,metalness:0.0});
+  const floorMat=new THREE.MeshStandardMaterial({map:floorTex,roughness:0.35,metalness:0.02}); // waxed floor — slightly reflective
+  const ceilMat=new THREE.MeshStandardMaterial({map:ceilTex,roughness:0.95,metalness:0.0});
+
+  const H=3.4, W=0.3, lobbySize=14, hallW=6, hallL=12;
+
+  // === FLOOR (large, extends into hallways) ===
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(60,60),floorMat);
+  floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+
+  // === CEILING ===
+  const ceil=new THREE.Mesh(new THREE.PlaneGeometry(60,60),ceilMat);
+  ceil.rotation.x=Math.PI/2;ceil.position.y=H;scene.add(ceil);
+
+  // === WALL BUILDER ===
+  function wall(x,z,w,d,mat){
+    const m=new THREE.Mesh(new THREE.BoxGeometry(w,H,d),mat||wallMat);
+    m.position.set(x,H/2,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m;
+  }
+
+  // === LOBBY WALLS (with hallway openings) ===
+  wall(5,lobbySize/2+W/2,lobbySize/2-hallW/2,W);
+  wall(-5,lobbySize/2+W/2,lobbySize/2-hallW/2,W);
+  wall(5,-lobbySize/2-W/2,lobbySize/2-hallW/2,W);
+  wall(-5,-lobbySize/2-W/2,lobbySize/2-hallW/2,W);
+  wall(-lobbySize/2-W/2,5,W,lobbySize/2-hallW/2);
+  wall(-lobbySize/2-W/2,-5,W,lobbySize/2-hallW/2);
+  wall(lobbySize/2+W/2,5,W,lobbySize/2-hallW/2);
+  wall(lobbySize/2+W/2,-5,W,lobbySize/2-hallW/2);
+
+  // === HALLWAY WALLS (with door gaps) ===
+  const doorW=2;
+  function wallWithDoor(wS,wE,pP,orient,gC){
+    const s1S=wS,s1E=gC-doorW/2,s2S=gC+doorW/2,s2E=wE;
+    if(orient==='x'){
+      if(s1E>s1S)wall((s1S+s1E)/2,pP,s1E-s1S,W);
+      if(s2E>s2S)wall((s2S+s2E)/2,pP,s2E-s2S,W);
+    }else{
+      if(s1E>s1S)wall(pP,(s1S+s1E)/2,W,s1E-s1S);
+      if(s2E>s2S)wall(pP,(s2S+s2E)/2,W,s2E-s2S);
+    }
+  }
+  wallWithDoor(-19,-7,hallW/2+W/2,'x',-13);
+  wallWithDoor(-19,-7,-hallW/2-W/2,'x',-13);
+  wall(-lobbySize/2-hallL-W/2,0,W,hallW+W*2);
+  wallWithDoor(7,19,hallW/2+W/2,'x',13);
+  wallWithDoor(7,19,-hallW/2-W/2,'x',13);
+  wall(lobbySize/2+hallL+W/2,0,W,hallW+W*2);
+  wallWithDoor(-19,-7,hallW/2+W/2,'z',-13);
+  wallWithDoor(-19,-7,-hallW/2-W/2,'z',-13);
+  wall(0,-lobbySize/2-hallL-W/2,hallW+W*2,W);
+  wallWithDoor(7,19,hallW/2+W/2,'z',13);
+  wall(-hallW/2-W/2,lobbySize/2+hallL/2,W,hallL);
+  wall(0,lobbySize/2+hallL+W/2,hallW+W*2,W);
+
+  // ══════════════════════════════════════
+  // HANDRAILS (split around door openings)
+  // ══════════════════════════════════════
+  const railMat=new THREE.MeshStandardMaterial({color:0xa09080,roughness:0.3,metalness:0.15});
+  const railH=0.95, railR=0.03;
+  function addRail(x1,z1,x2,z2){
+    const dx=x2-x1, dz=z2-z1;
+    const len=Math.sqrt(dx*dx+dz*dz);
+    if(len<0.3)return;
+    const rail=new THREE.Mesh(new THREE.CylinderGeometry(railR,railR,len,8),railMat);
+    rail.position.set((x1+x2)/2,railH,(z1+z2)/2);
+    rail.rotation.z=Math.PI/2;
+    if(Math.abs(dz)>Math.abs(dx))rail.rotation.y=Math.PI/2;
+    scene.add(rail);
+    // Brackets every 2m
+    const count=Math.max(1,Math.floor(len/2));
+    for(let i=0;i<=count;i++){
+      const t=count===0?0.5:i/count;
+      const bx=x1+dx*t, bz=z1+dz*t;
+      const brack=new THREE.Mesh(new THREE.BoxGeometry(0.04,0.12,0.06),railMat);
+      brack.position.set(bx,railH,bz);scene.add(brack);
+    }
+  }
+  // Door opening gap = 2.5 units wide (doorW + clearance)
+  const dGap=1.5;
+  // East hall (x runs -18.5 to -7.5): doors at x=-13
+  // South wall z=2.8 (ED door at x=-13)
+  addRail(-18.5,2.8,-13-dGap,2.8); addRail(-13+dGap,2.8,-7.5,2.8);
+  // North wall z=-2.8 (NF door at x=-13)
+  addRail(-18.5,-2.8,-13-dGap,-2.8); addRail(-13+dGap,-2.8,-7.5,-2.8);
+  // West hall (x runs 7.5 to 18.5): doors at x=13
+  addRail(7.5,2.8,13-dGap,2.8); addRail(13+dGap,2.8,18.5,2.8);
+  addRail(7.5,-2.8,13-dGap,-2.8); addRail(13+dGap,-2.8,18.5,-2.8);
+  // North hall (z runs -18.5 to -7.5): SimRoom at z=-13 (east wall x=2.8), Skills at z=-13 (west wall x=-2.8)
+  addRail(2.8,-18.5,2.8,-13-dGap); addRail(2.8,-13+dGap,2.8,-7.5);
+  addRail(-2.8,-18.5,-2.8,-13-dGap); addRail(-2.8,-13+dGap,-2.8,-7.5);
+  // South hall (z runs 7.5 to 18.5): Tools at z=13 (east wall x=2.8), west wall solid (no door)
+  addRail(2.8,7.5,2.8,13-dGap); addRail(2.8,13+dGap,2.8,18.5);
+  addRail(-2.8,7.5,-2.8,18.5); // solid wall — no gap needed
+
+  // ══════════════════════════════════════
+  // RECEPTION / INFO DESK (realistic)
+  // ══════════════════════════════════════
+  // Main counter — curved front with Corian-like surface
+  const deskBodyMat=new THREE.MeshStandardMaterial({color:0x2c4a62,roughness:0.3,metalness:0.08});
+  const deskTopMat=new THREE.MeshStandardMaterial({color:0xd4cec4,roughness:0.15,metalness:0.03}); // light stone countertop
+  const deskKickMat=new THREE.MeshStandardMaterial({color:0x1a2e3e,roughness:0.5,metalness:0.1});
+
+  // L-shaped main body
+  const d1=new THREE.Mesh(new THREE.BoxGeometry(4,1.1,1),deskBodyMat);d1.position.set(0,0.55,1.8);d1.castShadow=true;scene.add(d1);
+  const d2=new THREE.Mesh(new THREE.BoxGeometry(1,1.1,3),deskBodyMat);d2.position.set(2,0.55,2.8);d2.castShadow=true;scene.add(d2);
+  // Countertop (overhang)
+  const dt1=new THREE.Mesh(new THREE.BoxGeometry(4.15,0.05,1.15),deskTopMat);dt1.position.set(0,1.12,1.8);scene.add(dt1);
+  const dt2=new THREE.Mesh(new THREE.BoxGeometry(1.15,0.05,3.15),deskTopMat);dt2.position.set(2,1.12,2.8);scene.add(dt2);
+  // Kick panel (recessed)
+  const dk1=new THREE.Mesh(new THREE.BoxGeometry(3.8,0.15,0.9),deskKickMat);dk1.position.set(0,0.08,1.8);scene.add(dk1);
+
+  // Monitor on desk
+  const monMat=new THREE.MeshStandardMaterial({color:0x222222,roughness:0.2,metalness:0.6});
+  const mon=new THREE.Mesh(new THREE.BoxGeometry(0.65,0.42,0.04),monMat);mon.position.set(-0.8,1.55,1.9);mon.rotation.y=0.15;scene.add(mon);
+  const monScreen=new THREE.Mesh(new THREE.PlaneGeometry(0.58,0.35),new THREE.MeshBasicMaterial({color:0x1a3858}));monScreen.position.set(-0.8,1.55,1.87);monScreen.rotation.y=0.15;scene.add(monScreen);
+  // Monitor stand
+  const monStand=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.04,0.2,8),monMat);monStand.position.set(-0.8,1.24,1.9);scene.add(monStand);
+  // Keyboard
+  const kb=new THREE.Mesh(new THREE.BoxGeometry(0.35,0.02,0.12),new THREE.MeshStandardMaterial({color:0x333333,roughness:0.4,metalness:0.3}));kb.position.set(-0.8,1.13,2.15);scene.add(kb);
+
+  // Phone on desk
+  const phoneMat=new THREE.MeshStandardMaterial({color:0x2a2a2a,roughness:0.3,metalness:0.4});
+  const phoneBase=new THREE.Mesh(new THREE.BoxGeometry(0.2,0.04,0.15),phoneMat);phoneBase.position.set(0.4,1.14,2.1);scene.add(phoneBase);
+  const phoneHandset=new THREE.Mesh(new THREE.BoxGeometry(0.05,0.02,0.18),phoneMat);phoneHandset.position.set(0.4,1.18,2.1);scene.add(phoneHandset);
+
+  // ═══ WALL DIRECTORY BOARD (behind desk) ═══
+  const boardTex=makeDirectoryBoard();
+  const boardMesh=new THREE.Mesh(new THREE.PlaneGeometry(5.2,3.9),new THREE.MeshBasicMaterial({map:boardTex}));
+  boardMesh.position.set(0,1.95,0.2);scene.add(boardMesh);
+  // Frame
+  const frameMat2=new THREE.MeshStandardMaterial({color:0x3a4a5a,roughness:0.3,metalness:0.2});
+  [[0,3.97,0.17,5.4,0.08,0.06],[0,-0.02+1.95,0.17,5.4,0.08,0.06],[-2.65,1.95,0.17,0.08,4.1,0.06],[2.65,1.95,0.17,0.08,4.1,0.06]].forEach(([px,py,pz,sx,sy,sz])=>{
+    const f=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),frameMat2);f.position.set(px,py,pz);scene.add(f);
+  });
+
+  // ═══ INFORMATION sign (illuminated backlit style) ═══
+  const infoTex=makeRoomSign('ℹ️ INFORMATION','Reception & Hospital Directory',0x2874A6);
+  const infoSign=new THREE.Mesh(new THREE.PlaneGeometry(1.4,0.6),new THREE.MeshBasicMaterial({map:infoTex}));
+  infoSign.position.set(0,2.8,1.4);scene.add(infoSign);
+
+  interactables.push({type:'info',name:'Information Desk',sub:'View interactive directory & navigation',pos:new THREE.Vector3(0,0,2),radius:3.5,action:()=>openInfoPanel()});
+
+  // ══════════════════════════════════════
+  // DEPARTMENT DOORS (realistic hospital)
+  // ══════════════════════════════════════
+  DEPARTMENTS.forEach(dept=>{
+    const dx=dept.doorX,dz=dept.doorZ;
+    const isXWall=(dept.faceDir==='north'||dept.faceDir==='south');
+
+    // Door pivot
+    const pivot=new THREE.Group();pivot.position.set(dx,0,dz);scene.add(pivot);
+
+    // Commercial hospital door (matte finish)
+    const doorCol=new THREE.Color(dept.color);
+    const doorMat=new THREE.MeshStandardMaterial({color:doorCol,roughness:0.5,metalness:0.08,emissive:doorCol,emissiveIntensity:0.02});
+    const doorH=2.8,dw2=1.8;
+    const doorMesh=new THREE.Mesh(new THREE.BoxGeometry(isXWall?dw2:0.1,doorH,isXWall?0.1:dw2),doorMat);
+    if(isXWall){
+      const ho=dept.hinge==='left'?-dw2/2:dw2/2;
+      doorMesh.position.set(ho,doorH/2,0);pivot.position.x=dx-ho;
+    }else{
+      const ho=dept.hinge==='left'?-dw2/2:dw2/2;
+      doorMesh.position.set(0,doorH/2,ho);pivot.position.z=dz-ho;
+    }
+    doorMesh.castShadow=true;pivot.add(doorMesh);
+
+    // Push plate (stainless steel)
+    const pushMat=new THREE.MeshStandardMaterial({color:0xcccccc,roughness:0.15,metalness:0.7});
+    const push=new THREE.Mesh(new THREE.BoxGeometry(isXWall?0.08:0.04,0.25,isXWall?0.04:0.08),pushMat);
+    if(isXWall){
+      const hx=dept.hinge==='left'?dw2*0.3:-dw2*0.3;
+      push.position.set(doorMesh.position.x+hx,1.05,dept.faceDir==='south'?-0.06:0.06);
+    }else{
+      const hz=dept.hinge==='left'?dw2*0.3:-dw2*0.3;
+      push.position.set(dept.faceDir==='east'?-0.06:0.06,1.05,doorMesh.position.z+hz);
+    }
+    pivot.add(push);
+
+    // Vision panel (safety glass window)
+    const glassMat=new THREE.MeshStandardMaterial({color:0xc8dae8,roughness:0.02,metalness:0.1,transparent:true,opacity:0.3});
+    const glass=new THREE.Mesh(new THREE.PlaneGeometry(isXWall?dw2*0.4:0.01,0.8),glassMat);
+    if(isXWall)glass.position.set(doorMesh.position.x,1.9,dept.faceDir==='south'?-0.06:0.06);
+    else{glass.position.set(dept.faceDir==='east'?-0.06:0.06,1.9,doorMesh.position.z);glass.rotation.y=Math.PI/2}
+    pivot.add(glass);
+    // Wire glass reinforcement (thin lines in the glass)
+    const wireGlass=new THREE.Mesh(new THREE.PlaneGeometry(isXWall?dw2*0.4:0.01,0.8),
+      new THREE.MeshBasicMaterial({color:0x889098,transparent:true,opacity:0.08,wireframe:true}));
+    wireGlass.position.copy(glass.position);wireGlass.rotation.copy(glass.rotation);pivot.add(wireGlass);
+
+    // Door frame (commercial aluminum)
+    const fMat=new THREE.MeshStandardMaterial({color:0x808080,roughness:0.25,metalness:0.55});
+    const topF=new THREE.Mesh(new THREE.BoxGeometry(isXWall?dw2+0.3:0.2,0.15,isXWall?0.2:dw2+0.3),fMat);
+    topF.position.set(dx,doorH+0.08,dz);scene.add(topF);
+    [-1,1].forEach(side=>{
+      const sf=new THREE.Mesh(new THREE.BoxGeometry(isXWall?0.1:0.2,doorH+0.15,isXWall?0.2:0.1),fMat);
+      if(isXWall)sf.position.set(dx+side*(dw2/2+0.05),doorH/2,dz);
+      else sf.position.set(dx,doorH/2,dz+side*(dw2/2+0.05));
+      scene.add(sf);
+    });
+
+    // ═══ WAYFINDING SIGN (above door — backlit panel style) ═══
+    const signTex=makeRoomSign(dept.name,dept.sub,dept.color);
+    const signMesh=new THREE.Mesh(new THREE.PlaneGeometry(1.8,0.75),new THREE.MeshBasicMaterial({map:signTex,side:THREE.DoubleSide}));
+    signMesh.position.set(dx,doorH+0.55,dz);
+    if(!isXWall)signMesh.rotation.y=Math.PI/2;
+    scene.add(signMesh);
+
+    // Sign light (backlit glow)
+    const signLight=new THREE.PointLight(dept.color,0.6,5);
+    signLight.position.set(dx,doorH+0.7,dz);scene.add(signLight);
+
+    // Color floor stripe (wayfinding)
+    const stripeMat=new THREE.MeshBasicMaterial({color:dept.color,transparent:true,opacity:0.25});
+    const stripe=new THREE.Mesh(new THREE.PlaneGeometry(isXWall?0.2:1.5,isXWall?1.5:0.2),stripeMat);
+    stripe.rotation.x=-Math.PI/2;
+    if(isXWall)stripe.position.set(dx,0.005,dz+(dept.faceDir==='south'?-1:1));
+    else stripe.position.set(dx+(dept.faceDir==='east'?-1:1),0.005,dz);
+    scene.add(stripe);
+
+    // Interactable
+    const iPos=new THREE.Vector3(dx,0,dz);
+    if(dept.faceDir==='south')iPos.z-=1;else if(dept.faceDir==='north')iPos.z+=1;
+    else if(dept.faceDir==='east')iPos.x-=1;else iPos.x+=1;
+    interactables.push({type:'door',name:dept.name,sub:dept.sub,color:dept.color,pos:iPos,radius:3,
+      action:()=>{
+        const tA=Math.PI/2.2;const dir=(dept.faceDir==='south'||dept.faceDir==='west')?1:-1;
+        animatingDoors.push({pivot,targetAngle:dir*tA,speed:3,url:dept.url,navigateDelay:0.8,elapsed:0});
+      },doorPivot:pivot,doorMesh,light:signLight});
+  });
+
+  // (Elevator removed — was blocking south hallway entrance)
+
+  // ══════════════════════════════════════
+  // HANGING WAYFINDING SIGNS (realistic)
+  // ══════════════════════════════════════
+  function hangingSign(x,z,text,arrowDir,color,rotY){
+    const tex=makeWayfindingSign((arrowDir==='left'?'← ':'→ ')+text,color);
+    const sign=new THREE.Mesh(new THREE.PlaneGeometry(2.8,0.45),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}));
+    sign.position.set(x,2.7,z);if(rotY)sign.rotation.y=rotY;
+    scene.add(sign);
+    // Mounting cables (two thin lines)
+    [-0.9,0.9].forEach(off=>{
+      const cable=new THREE.Mesh(new THREE.CylinderGeometry(0.005,0.005,0.5),new THREE.MeshStandardMaterial({color:0x999999,metalness:0.6}));
+      cable.position.set(x+(rotY?0:off),2.97,z+(rotY?off:0));scene.add(cable);
+    });
+  }
+  hangingSign(-4,0,'Emergency Dept · Night Float','left',0xDC2626);
+  hangingSign(4,0,'Library · CoachDx','right',0x2874A6);
+  hangingSign(0,-4,'SimRoom · Skills Lab','left',0x059669,Math.PI/2);
+  hangingSign(0,4,'Tools · Entrance','right',0x6366F1,Math.PI/2);
+
+  // ══════════════════════════════════════
+  // LOBBY FURNITURE (realistic)
+  // ══════════════════════════════════════
+  // Waiting chairs (modern hospital — blue fabric with chrome legs)
+  const chairSeatMat=new THREE.MeshStandardMaterial({color:0x3a6888,roughness:0.7,metalness:0.0});
+  const chairLegMat=new THREE.MeshStandardMaterial({color:0xc0c0c0,roughness:0.15,metalness:0.7});
+  function addChairRow(cx,cz,count,rotY){
+    for(let i=0;i<count;i++){
+      const ox=(i-count/2+0.5)*0.55;
+      const sx=cx+(rotY?0:ox), sz=cz+(rotY?ox:0);
+      // Seat
+      const seat=new THREE.Mesh(new THREE.BoxGeometry(0.45,0.06,0.42),chairSeatMat);
+      seat.position.set(sx,0.44,sz);seat.castShadow=true;scene.add(seat);
+      // Back
+      const back=new THREE.Mesh(new THREE.BoxGeometry(0.45,0.35,0.04),chairSeatMat);
+      back.position.set(sx+(rotY?-0.19:0),0.68,sz+(rotY?0:-0.19));
+      if(rotY)back.rotation.y=Math.PI/2;
+      scene.add(back);
+      // Legs (4 chrome legs)
+      [[-0.18,-0.17],[0.18,-0.17],[-0.18,0.17],[0.18,0.17]].forEach(([lx,lz])=>{
+        const leg=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.44,6),chairLegMat);
+        leg.position.set(sx+(rotY?lz:lx),0.22,sz+(rotY?lx:lz));scene.add(leg);
+      });
+    }
+  }
+  addChairRow(-3.5,-3.5,4,false);
+  addChairRow(3.5,-3.5,4,false);
+
+  // Side table between chair rows
+  const tableMat=new THREE.MeshStandardMaterial({color:0x8a7a65,roughness:0.4,metalness:0.05});
+  const table=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.02,0.5),tableMat);table.position.set(0,-3.5+0.44,0);
+  // Actually, let me put tables next to chairs
+  const st=new THREE.Mesh(new THREE.CylinderGeometry(0.25,0.25,0.42,12),tableMat);st.position.set(0,0.21,-3.5);scene.add(st);
+  const stTop=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.3,0.03,12),new THREE.MeshStandardMaterial({color:0x9a8a75,roughness:0.3}));stTop.position.set(0,0.43,-3.5);scene.add(stTop);
+
+  // ══════════════════════════════════════
+  // POTTED PLANTS (tall lobby plants in nice containers)
+  // ══════════════════════════════════════
+  const plantPotMat=new THREE.MeshStandardMaterial({color:0x5a5550,roughness:0.5,metalness:0.1});
+  const leafMat=new THREE.MeshStandardMaterial({color:0x2d7a2d,roughness:0.75});
+  const darkLeaf=new THREE.MeshStandardMaterial({color:0x1d5a1d,roughness:0.8});
+  [[-5.8,5.8],[5.8,5.8],[5.8,-5.8],[-5.8,-5.8]].forEach(([px,pz])=>{
+    // Pot (tapered modern style)
+    const pot=new THREE.Mesh(new THREE.CylinderGeometry(0.28,0.22,0.65,10),plantPotMat);
+    pot.position.set(px,0.325,pz);pot.castShadow=true;scene.add(pot);
+    // Soil
+    const soil=new THREE.Mesh(new THREE.CylinderGeometry(0.26,0.26,0.04,10),new THREE.MeshStandardMaterial({color:0x3a2a1a,roughness:0.95}));
+    soil.position.set(px,0.66,pz);scene.add(soil);
+    // Trunk
+    const trunk=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.04,0.6,6),new THREE.MeshStandardMaterial({color:0x6a5a40,roughness:0.8}));
+    trunk.position.set(px,0.95,pz);scene.add(trunk);
+    // Foliage (multiple spheres for volume)
+    for(let li=0;li<5;li++){
+      const lf=new THREE.Mesh(new THREE.SphereGeometry(0.2+Math.random()*0.15,6,5),li%2?leafMat:darkLeaf);
+      lf.position.set(px+(Math.random()-0.5)*0.3,1.2+Math.random()*0.3,pz+(Math.random()-0.5)*0.3);
+      lf.scale.y=0.7+Math.random()*0.3;
+      lf.castShadow=true;scene.add(lf);
+    }
+  });
+
+  // ══════════════════════════════════════
+  // HOSPITAL DETAILS / PROPS
+  // ══════════════════════════════════════
+  const propMat=new THREE.MeshStandardMaterial({color:0xe0e0e0,roughness:0.3,metalness:0.15});
+  const redMat=new THREE.MeshStandardMaterial({color:0xcc2222,roughness:0.4});
+
+  // Hand sanitizer dispensers (on walls near hallway entrances)
+  function addSanitizer(x,z,rotY){
+    const box=new THREE.Mesh(new THREE.BoxGeometry(0.12,0.22,0.1),propMat);box.position.set(x,1.2,z);
+    if(rotY)box.rotation.y=rotY;scene.add(box);
+    // Drip tray
+    const tray=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.02,0.08),new THREE.MeshStandardMaterial({color:0xcccccc,metalness:0.4}));
+    tray.position.set(x,1.0,z);scene.add(tray);
+  }
+  addSanitizer(-6.8,5,0); addSanitizer(6.8,5,0);
+  addSanitizer(5,-6.8,Math.PI/2); addSanitizer(-5,6.8,Math.PI/2);
+
+  // EXIT signs (illuminated red — at hallway entrances)
+  function addExitSign(x,z,rotY){
+    const c=document.createElement('canvas');c.width=180;c.height=60;
+    const cx=c.getContext('2d');
+    cx.fillStyle='#cc0000';cx.fillRect(0,0,180,60);
+    cx.fillStyle='#fff';cx.font='bold 32px "Segoe UI",sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+    cx.fillText('EXIT',90,32);
+    const tex=new THREE.CanvasTexture(c);
+    const sign=new THREE.Mesh(new THREE.PlaneGeometry(0.6,0.2),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}));
+    sign.position.set(x,3.0,z);if(rotY)sign.rotation.y=rotY;scene.add(sign);
+    // Glow
+    const gl=new THREE.PointLight(0xff2222,0.15,3);gl.position.set(x,3.0,z);scene.add(gl);
+  }
+  addExitSign(0,6.5,Math.PI/2);
+  addExitSign(-6.5,0,0);
+  addExitSign(6.5,0,0);
+
+  // Fire extinguisher (in case / on wall)
+  function addFireExt(x,z){
+    const cab=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.35,0.12),new THREE.MeshStandardMaterial({color:0xdddddd,roughness:0.3}));
+    cab.position.set(x,1.4,z);scene.add(cab);
+    const ext=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,0.25,8),redMat);
+    ext.position.set(x,1.38,z);scene.add(ext);
+  }
+  addFireExt(-6.9,-2); addFireExt(6.9,2);
+
+  // Wheelchair (parked in lobby corner)
+  function addWheelchair(x,z,rotY){
+    const wcMat=new THREE.MeshStandardMaterial({color:0x222222,roughness:0.3,metalness:0.4});
+    const chromeMat=new THREE.MeshStandardMaterial({color:0xcccccc,roughness:0.15,metalness:0.7});
+    // Seat frame
+    const frame=new THREE.Mesh(new THREE.BoxGeometry(0.55,0.04,0.5),wcMat);frame.position.set(x,0.5,z);
+    if(rotY)frame.rotation.y=rotY;scene.add(frame);
+    // Back
+    const bk=new THREE.Mesh(new THREE.BoxGeometry(0.55,0.4,0.04),new THREE.MeshStandardMaterial({color:0x1a3050,roughness:0.6}));
+    bk.position.set(x,0.7,z-0.23);if(rotY)bk.rotation.y=rotY;scene.add(bk);
+    // Large wheels (2)
+    [-0.3,0.3].forEach(side=>{
+      const wheel=new THREE.Mesh(new THREE.TorusGeometry(0.22,0.02,8,20),chromeMat);
+      wheel.position.set(x+side,0.28,z-0.05);wheel.rotation.y=Math.PI/2;
+      if(rotY){wheel.position.set(x-0.05,0.28,z+side);wheel.rotation.x=Math.PI/2;wheel.rotation.y=0}
+      scene.add(wheel);
+    });
+    // Handles
+    [-0.2,0.2].forEach(side=>{
+      const handle=new THREE.Mesh(new THREE.CylinderGeometry(0.01,0.01,0.25,6),chromeMat);
+      handle.position.set(x+side,1.0,z-0.26);scene.add(handle);
+    });
+  }
+  addWheelchair(-5.5,4.5,0);
+
+  // Gurney/stretcher (parked against wall in east hallway)
+  const gurneyMat=new THREE.MeshStandardMaterial({color:0xe8e4dc,roughness:0.5,metalness:0.05});
+  const gurneyFrame=new THREE.MeshStandardMaterial({color:0xbbbbbb,roughness:0.2,metalness:0.55});
+  const gTop=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.08,2),gurneyMat);gTop.position.set(-16,0.85,2.2);scene.add(gTop);
+  const gFrame=new THREE.Mesh(new THREE.BoxGeometry(0.65,0.6,1.9),gurneyFrame);gFrame.position.set(-16,0.52,2.2);scene.add(gFrame);
+  // Wheels
+  [[-0.3,-0.8],[0.3,-0.8],[-0.3,0.8],[0.3,0.8]].forEach(([wx,wz])=>{
+    const w=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,0.04,10),new THREE.MeshStandardMaterial({color:0x444444,metalness:0.5}));
+    w.position.set(-16+wx,0.06,2.2+wz);w.rotation.x=Math.PI/2;scene.add(w);
+  });
+  // Pillow
+  const pillow=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.08,0.35),new THREE.MeshStandardMaterial({color:0xf0ece6,roughness:0.8}));
+  pillow.position.set(-16,0.93,2.2-0.7);scene.add(pillow);
+
+  // Water fountain (on a wall)
+  const wfMat=new THREE.MeshStandardMaterial({color:0xcccccc,roughness:0.2,metalness:0.5});
+  const wf=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.3,0.3),wfMat);wf.position.set(6.85,0.9,3);scene.add(wf);
+  const wfBowl=new THREE.Mesh(new THREE.BoxGeometry(0.35,0.06,0.25),new THREE.MeshStandardMaterial({color:0xbbbbbb,metalness:0.6}));
+  wfBowl.position.set(6.85,1.07,3.05);scene.add(wfBowl);
+
+  // ══════════════════════════════════════
+  // FLUORESCENT LIGHT FIXTURES (realistic recessed panels)
+  // ══════════════════════════════════════
+  function addFluorescentFixture(x,z,w,d){
+    w=w||1.2;d=d||0.3;
+    // Recessed housing
+    const housing=new THREE.Mesh(new THREE.BoxGeometry(w+0.1,0.06,d+0.1),new THREE.MeshStandardMaterial({color:0xd0ccc4,roughness:0.7}));
+    housing.position.set(x,H-0.01,z);scene.add(housing);
+    // Diffuser panel (glowing)
+    const diffuser=new THREE.Mesh(new THREE.PlaneGeometry(w,d),new THREE.MeshBasicMaterial({color:0xfff8ee}));
+    diffuser.rotation.x=Math.PI/2;diffuser.position.set(x,H-0.04,z);scene.add(diffuser);
+  }
+
+  // Lobby fixtures (grid)
+  for(let gx=-4;gx<=4;gx+=4)for(let gz=-4;gz<=4;gz+=4)addFluorescentFixture(gx,gz);
+  // Hallway fixtures
+  for(let i=-16;i<=16;i+=3.5){
+    if(Math.abs(i)>7){
+      addFluorescentFixture(i,0);addFluorescentFixture(0,i);
+    }
+  }
+}
+
+// ═══════════════════════════
+// REALISTIC HOSPITAL LIGHTING
+// ═══════════════════════════
+function buildLighting(){
+  // Strong ambient — hospitals are BRIGHT
+  scene.add(new THREE.AmbientLight(0xf5f0e8,0.55));
+  // Hemisphere — warm from ceiling, cooler from floor reflection
+  scene.add(new THREE.HemisphereLight(0xfff5e6,0xd8d0c4,0.6));
+
+  // Main overhead lights (strong, even illumination)
+  const positions=[
+    [0,0],[-4,0],[4,0],[0,-4],[0,4],[-4,-4],[4,-4],[-4,4],[4,4],
+    [-10,0],[-14,0],[-18,0],[10,0],[14,0],[18,0],
+    [0,-10],[0,-14],[0,-18],[0,10],[0,14],[0,18]
+  ];
+  positions.forEach(([lx,lz])=>{
+    const l=new THREE.PointLight(0xfff5e6,0.8,12,1.5);
+    l.position.set(lx,3.2,lz);scene.add(l);
+  });
+
+  // Reception desk spotlight
+  const spot=new THREE.SpotLight(0xfff8f0,1.0,8,Math.PI/5,0.5,1.5);
+  spot.position.set(0,3.2,2);spot.target.position.set(0,1,2);
+  spot.castShadow=true;spot.shadow.mapSize.set(1024,1024);
+  scene.add(spot);scene.add(spot.target);
+
+  // Secondary fill light from south (entrance)
+  const fill=new THREE.DirectionalLight(0xfff5e8,0.3);
+  fill.position.set(0,3,15);fill.target.position.set(0,1,0);
+  scene.add(fill);scene.add(fill.target);
+}
+
+// ═══ CONTROLS ═══
+function setupControls(){
+  document.getElementById('startBtn').addEventListener('click',()=>{
+    document.getElementById('blocker').style.display='none';
+    document.getElementById('role-select').style.display='flex';
+  });
+  document.addEventListener('pointerlockchange',()=>{
+    locked=document.pointerLockElement===renderer.domElement;
+    if(!locked&&activeRole){
+      const bl=document.getElementById('blocker');bl.style.display='flex';
+      document.getElementById('startBtn').textContent='▶ Resume';
+      document.getElementById('startBtn').onclick=()=>renderer.domElement.requestPointerLock();
+    }else if(!locked){document.getElementById('blocker').style.display='flex'}
+    else{document.getElementById('blocker').style.display='none'}
+    document.getElementById('hud').style.display=locked?'flex':'none';
+    document.getElementById('crosshair').style.display=locked?'block':'none';
+    document.getElementById('minimap').style.display=locked?'block':'none';
+    if(!locked&&infoPanelOpen)closeInfoPanel();
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!locked||infoPanelOpen)return;
+    euler.setFromQuaternion(camera.quaternion);
+    euler.y-=e.movementX*MOUSE_SENS;euler.x-=e.movementY*MOUSE_SENS;
+    euler.x=Math.max(-Math.PI/2.5,Math.min(Math.PI/2.5,euler.x));
+    camera.quaternion.setFromEuler(euler);
+  });
+  document.addEventListener('keydown',e=>{
+    switch(e.code){
+      case'KeyW':case'ArrowUp':moveState.forward=true;break;
+      case'KeyS':case'ArrowDown':moveState.backward=true;break;
+      case'KeyA':case'ArrowLeft':moveState.left=true;break;
+      case'KeyD':case'ArrowRight':moveState.right=true;break;
+      case'KeyE':if(currentTarget)currentTarget.action();break;
+    }
+  });
+  document.addEventListener('keyup',e=>{
+    switch(e.code){
+      case'KeyW':case'ArrowUp':moveState.forward=false;break;
+      case'KeyS':case'ArrowDown':moveState.backward=false;break;
+      case'KeyA':case'ArrowLeft':moveState.left=false;break;
+      case'KeyD':case'ArrowRight':moveState.right=false;break;
+    }
+  });
+  document.addEventListener('click',()=>{if(!locked)return;if(currentTarget&&!infoPanelOpen)currentTarget.action()});
+  window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+}
+
+// ═══ COLLISION ═══
+function canMoveTo(x,z){
+  const ls=6.8,hw=2.7,he=19;
+  if(Math.abs(x)<ls&&Math.abs(z)<ls)return true;
+  if(x<-ls&&x>-he&&Math.abs(z)<hw)return true;
+  if(x>ls&&x<he&&Math.abs(z)<hw)return true;
+  if(z<-ls&&z>-he&&Math.abs(x)<hw)return true;
+  if(z>ls&&z<he&&Math.abs(x)<hw)return true;
+  return false;
+}
+
+// ═══ INFO PANEL ═══
+function openInfoPanel(){infoPanelOpen=true;document.getElementById('info-panel').style.display='block';document.exitPointerLock()}
+function closeInfoPanel(){infoPanelOpen=false;document.getElementById('info-panel').style.display='none'}
+
+// ═══ HUD ═══
+function getLocationName(x,z){
+  if(Math.abs(x)<7&&Math.abs(z)<7)return'Hospital Lobby';
+  if(x<-7)return'East Wing — ED & Night Float';
+  if(x>7)return'West Wing — Library & CoachDx';
+  if(z<-7)return'North Wing — SimRoom & Skills Lab';
+  if(z>7)return'South Wing — Entrance & Tools';
+  return'Hospital';
+}
+
+// ═══ MINIMAP ═══
+function drawMinimap(){
+  const ctx=minimapCtx,s=180,sc=4.2;
+  ctx.fillStyle='rgba(10,15,20,0.88)';ctx.fillRect(0,0,s,s);
+  ctx.save();ctx.translate(s/2,s/2);
+  ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=1;
+  function drawRoom(rx,rz,rw,rh){ctx.strokeRect((rx-playerPos.x)*sc-rw*sc/2,(rz-playerPos.z)*sc-rh*sc/2,rw*sc,rh*sc)}
+  drawRoom(0,0,14,14);drawRoom(-13,0,12,6);drawRoom(13,0,12,6);drawRoom(0,-13,6,12);drawRoom(0,13,6,12);
+  DEPARTMENTS.forEach(d=>{
+    ctx.fillStyle='#'+d.color.toString(16).padStart(6,'0');
+    ctx.beginPath();ctx.arc((d.doorX-playerPos.x)*sc,(d.doorZ-playerPos.z)*sc,4,0,Math.PI*2);ctx.fill();
+  });
+  ctx.fillStyle='#2874A6';ctx.fillRect(-playerPos.x*sc-4,(2-playerPos.z)*sc-3,8,6);
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,0,3,0,Math.PI*2);ctx.fill();
+  const dir=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);
+  ctx.strokeStyle='#7DD3FC';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(dir.x*12,dir.z*12);ctx.stroke();
+  ctx.restore();
+}
+
+// ═══ ANIMATION LOOP ═══
+function animate(){
+  requestAnimationFrame(animate);
+  const dt=Math.min(clock.getDelta(),0.1);
+  if(locked&&!infoPanelOpen){
+    const forward=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);forward.y=0;forward.normalize();
+    const right=new THREE.Vector3(1,0,0).applyQuaternion(camera.quaternion);right.y=0;right.normalize();
+    const vel=new THREE.Vector3();
+    if(moveState.forward)vel.add(forward);if(moveState.backward)vel.sub(forward);
+    if(moveState.right)vel.add(right);if(moveState.left)vel.sub(right);
+    if(vel.length()>0){
+      vel.normalize().multiplyScalar(MOVE_SPEED*dt);
+      const nx=playerPos.x+vel.x,nz=playerPos.z+vel.z;
+      if(canMoveTo(nx,nz)){playerPos.x=nx;playerPos.z=nz}
+      else if(canMoveTo(nx,playerPos.z))playerPos.x=nx;
+      else if(canMoveTo(playerPos.x,nz))playerPos.z=nz;
+    }
+    playerPos.y=PLAYER_HEIGHT+(vel.length()>0.001?Math.sin(clock.elapsedTime*8)*0.012:0);
+    camera.position.copy(playerPos);
+    // Door animations
+    for(let i=animatingDoors.length-1;i>=0;i--){
+      const ad=animatingDoors[i];ad.elapsed+=dt;
+      ad.pivot.rotation.y=ad.targetAngle*(1-Math.pow(1-Math.min(ad.elapsed*ad.speed,1),3));
+      if(ad.elapsed>=ad.navigateDelay){window.location.href=ad.url;animatingDoors.splice(i,1)}
+    }
+    // Interactable proximity
+    currentTarget=null;let closest=null,cDist=Infinity;
+    interactables.forEach(item=>{
+      const dist=playerPos.distanceTo(new THREE.Vector3(item.pos.x,PLAYER_HEIGHT,item.pos.z));
+      if(dist<item.radius&&dist<cDist){closest=item;cDist=dist}
+      if(item.light)item.light.intensity=dist<item.radius?1.0+Math.sin(clock.elapsedTime*3)*0.2:0.6;
+      if(item.doorMesh)item.doorMesh.material.emissiveIntensity=dist<item.radius?0.12+Math.sin(clock.elapsedTime*2)*0.04:0.02;
+    });
+    const pr=document.getElementById('interact-prompt');
+    if(closest){currentTarget=closest;pr.style.display='block';pr.querySelector('.prompt-name').textContent=closest.name;pr.querySelector('.prompt-desc').textContent=closest.sub}
+    else{pr.style.display='none'}
+    document.getElementById('hud-location').textContent=getLocationName(playerPos.x,playerPos.z);
+    drawMinimap();
+  }
+  renderer.render(scene,camera);
+}
+
+init();
+</script>
+</body>
+</html>
