@@ -26,6 +26,9 @@
     }
     
     function isAuthenticated() {
+        // FREE LAUNCH PERIOD — all access granted
+        return true;
+        /* Original auth check (re-enable when paid tiers launch):
         try {
             // Check local session first
             var user = localStorage.getItem(AUTH_KEY);
@@ -43,6 +46,7 @@
             console.warn('Auth check failed:', e);
         }
         return false;
+        */
     }
     
     function enforceAuth() {

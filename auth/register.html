@@ -29,8 +29,8 @@
         .board-tag.step2 { background: #d4e8f7; color: #166534; }
         .board-tag.shelf { background: #fef3c7; color: #92400e; }
         .board-tag.rotation { background: #ede9fe; color: #6d28d9; }
-        .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
-        @media (max-width: 800px) { .plans-grid { grid-template-columns: 1fr; } }
+        .plans-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; }
+        @media (max-width: 680px) { .plans-grid { grid-template-columns: 1fr !important; max-width: 400px !important; } }
         .plan-card { background: white; border-radius: 20px; padding: 32px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 3px solid transparent; cursor: pointer; transition: all 0.3s; position: relative; }
         .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
         .plan-card.selected { border-color: var(--primary); }
@@ -147,34 +147,50 @@
         </div>
 
         <div id="planSelection">
-            <div class="plans-grid">
+            <!-- GOOGLE SIGN-IN (prominent) -->
+            <div style="max-width:440px;margin:0 auto 28px;text-align:center">
+                <button type="button" class="btn-google" onclick="signInWithGoogle()" style="padding:16px 20px;font-size:16px;border-radius:14px;margin-bottom:6px">
+                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                    Continue with Google
+                </button>
+                <div class="auth-divider">or create an account with email</div>
+            </div>
+
+            <!-- FREE ACCESS BANNER -->
+            <div style="max-width:600px;margin:0 auto 28px;background:linear-gradient(135deg,#ecfdf5,#f0f9ff);border:2px solid #6ee7b7;border-radius:16px;padding:20px 24px;text-align:center">
+                <div style="font-size:28px;margin-bottom:6px">🎉</div>
+                <h3 style="font-size:18px;color:#065f46;margin-bottom:6px">Launch Period — Full Access Free</h3>
+                <p style="font-size:14px;color:#475569;margin:0">All features are currently unlocked for every user. Create an account to get started.</p>
+            </div>
+
+            <!-- PLAN CARDS (centered) -->
+            <div class="plans-grid" style="grid-template-columns:repeat(2,1fr);max-width:680px;margin:0 auto 32px">
                 <div class="plan-card" onclick="selectPlan('free')" id="planFree">
                     <div class="plan-icon">🌱</div>
                     <div class="plan-name">Free</div>
                     <div class="plan-price">
                         <span class="amount">$0</span>
-                        <span class="period"></span>
+                        <span class="period"> forever</span>
                     </div>
                     <div class="exam-tags">
                         <span class="exam-tag s1">Step 1</span>
-                        <span class="exam-tag s2">Step 2</span>
+                        <span class="exam-tag s2">Step 2 CK</span>
+                        <span class="exam-tag shelf">Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>5 MechanismDx learning modules</li>
-                        <li>3 clinical cases per week</li>
-                        <li>20 board-style MCQs</li>
-                        <li>Basic progress tracking</li>
-                        <li>All clinical calculators</li>
-                        <li class="excluded">Full module library (<span data-rdx-stat="topics"></span> topics)</li>
-                        <li class="excluded">Unlimited cases &amp; MCQs</li>
-                        <li class="excluded">Deep dive content</li>
-                        <li class="excluded">AI Tutor</li>
+                        <li>330+ MechanismDx pathophysiology modules</li>
+                        <li>325+ interactive case adventures</li>
+                        <li>79 clinical reasoning trainers</li>
+                        <li>ED Board, Night Float &amp; SimRoomDx sims</li>
+                        <li>Consult Callback &amp; SBAR trainers</li>
+                        <li>ECG practice, ABG analyzer &amp; clinical tools</li>
+                        <li>20 systems across 29 specialties</li>
                     </ul>
                     <button class="plan-select-btn">Get Started Free</button>
                 </div>
 
                 <div class="plan-card pro" onclick="selectPlan('pro')" id="planPro">
-                    <div class="plan-badge">Most Popular</div>
+                    <div class="plan-badge">Coming Soon</div>
                     <div class="plan-icon">🚀</div>
                     <div class="plan-name">Pro</div>
                     <div class="plan-price">
@@ -188,44 +204,21 @@
                         <span class="exam-tag shelf">All Shelf Exams</span>
                     </div>
                     <ul class="plan-features">
-                        <li>All <span data-rdx-stat="topics"></span> topics across <span data-rdx-stat="specialties"></span> specialties</li>
-                        <li><span data-rdx-stat="mcqs"></span> board-style MCQs</li>
-                        <li><span data-rdx-stat="adventures"></span> interactive case adventures</li>
-                        <li><span data-rdx-stat="deepDives"></span> deep dive modules</li>
-                        <li>Board-prep mode (Step 1, Step 2, Shelf)</li>
+                        <li>Everything in Free, plus:</li>
+                        <li>CoachDx — AI clinical reasoning coach</li>
                         <li>Reasoning pathway fingerprinting</li>
-                        <li>AI Tutor (unlimited)</li>
-                        <li>Spaced repetition &amp; analytics</li>
+                        <li>Performance analytics dashboard</li>
+                        <li>Personalized study plans</li>
+                        <li>Spaced repetition system</li>
+                        <li>Priority support</li>
                     </ul>
-                    <button class="plan-select-btn">Start Pro</button>
+                    <button class="plan-select-btn">Free During Launch</button>
                 </div>
 
-            </div>
-
-            <!-- REFERRAL CALLOUT -->
-            <div style="max-width: 600px; margin: 0 auto 30px; background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center;">
-                <div style="font-size: 28px; margin-bottom: 8px;">🎁</div>
-                <h3 style="font-size: 18px; color: #1e3a5f; margin-bottom: 8px;">Refer a Friend, Get Rewarded</h3>
-                <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">Share your referral code after signup. For each friend who joins Pro:</p>
-                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                    <div style="background: #f0f7fc; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
-                        <div style="font-size: 20px; font-weight: 700; color: #1f5f8b;">1 referral</div>
-                        <div style="font-size: 13px; color: #64748b;">Free month for both of you</div>
-                    </div>
-                    <div style="background: #eff6ff; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
-                        <div style="font-size: 20px; font-weight: 700; color: #2563eb;">3 referrals</div>
-                        <div style="font-size: 13px; color: #64748b;">Free semester (4 months)</div>
-                    </div>
-                    <div style="background: #fef3c7; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 140px;">
-                        <div style="font-size: 20px; font-weight: 700; color: #d97706;">5 referrals</div>
-                        <div style="font-size: 13px; color: #64748b;">Free year of Pro</div>
-                    </div>
-                </div>
             </div>
 
             <div style="text-align: center; margin-top: 16px;">
                 <p style="color: #64748b; font-size: 14px;">Already have an account? <a href="#" onclick="showLogin()" style="color: var(--primary); font-weight: 600;">Sign in</a></p>
-                <p style="color: #94a3b8; font-size: 13px; margin-top: 8px;">Have a referral code? You'll enter it during signup.</p>
             </div>
         </div>
 
@@ -508,21 +501,19 @@
         // PLAN SELECTION
         // ============================================
         function selectPlan(plan) {
-            state.selectedPlan = plan;
+            // During launch period, all plans get full access as 'free'
+            state.selectedPlan = 'free';
             document.querySelectorAll('.plan-card').forEach(function(c){ c.classList.remove('selected'); });
-            document.getElementById('plan' + plan.charAt(0).toUpperCase() + plan.slice(1)).classList.add('selected');
+            var cardId = 'plan' + plan.charAt(0).toUpperCase() + plan.slice(1);
+            document.getElementById(cardId).classList.add('selected');
             setTimeout(function(){
                 document.getElementById('planSelection').classList.add('hidden');
                 document.getElementById('registrationForm').classList.remove('hidden');
-                document.getElementById('registrationForm').className = 'form-card ' + plan;
-                document.getElementById('formHeader').className = 'form-header ' + plan;
-                var titles = {
-                    free:  ['Create Free Account', 'Free Plan — Board Prep Starter'],
-                    pro:   ['Start Pro Subscription', 'Pro — Full Board Prep Access']
-                };
-                document.getElementById('formTitle').textContent = titles[plan][0];
-                document.getElementById('formSubtitle').textContent = titles[plan][1];
-                setupStepsForPlan(plan);
+                document.getElementById('registrationForm').className = 'form-card';
+                document.getElementById('formHeader').className = 'form-header';
+                document.getElementById('formTitle').textContent = 'Create Your Account';
+                document.getElementById('formSubtitle').textContent = 'Full Access — Free During Launch';
+                setupStepsForPlan('free');
             }, 200);
         }
 

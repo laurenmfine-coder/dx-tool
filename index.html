@@ -14,8 +14,8 @@
 
 <!-- Public page — no auth required -->
 <script>
-/* Smart CTA: if user is logged in, go direct; if not, redirect to register then bounce back */
-function authGo(url){try{var u=localStorage.getItem("reasondx-user");if(u){var j=JSON.parse(u);if(j&&j.email&&j.name){location.href=url;return}}}catch(e){}var abs=new URL(url,location.href).href;sessionStorage.setItem("reasondx-redirect",abs);location.href="auth/register.html"}
+/* Smart CTA: free launch — go direct to all content */
+function authGo(url){location.href=url}
 </script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 
