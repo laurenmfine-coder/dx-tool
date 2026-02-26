@@ -18,6 +18,9 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
 #splash .sub{color:rgba(255,255,255,.45);font-size:14px;margin-bottom:28px;line-height:1.7}
 #splash .enter-btn{background:#DC2626;color:#fff;font-size:15px;font-weight:600;padding:14px 36px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em}
 #splash .enter-btn:hover{background:#B91C1C;transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,38,38,.3)}
+#splash .board-btn{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-size:14px;font-weight:600;padding:12px 28px;border-radius:10px;border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .2s;letter-spacing:.02em;font-family:'DM Sans',sans-serif}
+#splash .board-btn:hover{background:rgba(255,255,255,.12);color:#fff;transform:translateY(-2px)}
+#splash .btn-row{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
 #splash .controls-hint{margin-top:20px;font-size:11px;color:rgba(255,255,255,.25);line-height:1.8}
 #splash .controls-hint kbd{background:rgba(255,255,255,.08);padding:2px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.1)}
 
@@ -28,8 +31,8 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
 #hud{position:fixed;top:0;left:0;right:0;z-index:50;pointer-events:none;padding:12px 16px;display:none}
 #hud-bar{display:flex;align-items:center;gap:12px}
 #hud-location{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace}
-#hud-back{pointer-events:auto;font-size:11px;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:4px 12px;border-radius:6px;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;margin-left:auto}
-#hud-back:hover{background:rgba(255,255,255,.12);color:#fff}
+#hud-menu-hint{pointer-events:none;font-size:10px;color:rgba(255,255,255,.2);font-family:'DM Sans',sans-serif;margin-left:auto}
+#hud-menu-hint kbd{background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px;border:1px solid rgba(255,255,255,.1);font-size:10px}
 #crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:50;pointer-events:none;display:none}
 #crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(255,255,255,.5)}
 #crosshair::before{width:14px;height:1.5px;top:50%;left:50%;transform:translate(-50%,-50%)}
@@ -52,14 +55,28 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
 #minimap canvas{border-radius:10px;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 16px rgba(0,0,0,.5)}
 
 /* ═══ ROOM VIEW (2D overlay) ═══ */
-#room-view{position:fixed;inset:0;z-index:100;display:none;background:#0a0e14}
+#pause-overlay{position:fixed;inset:0;z-index:180;display:none;align-items:center;justify-content:center;background:rgba(10,14,20,.82);cursor:default;backdrop-filter:blur(6px)}
+#pause-overlay .pause-box{text-align:center;max-width:340px}
+#pause-overlay .pause-icon{font-size:36px;margin-bottom:8px;opacity:.6}
+#pause-overlay .pause-text{font-size:18px;font-weight:600;color:rgba(255,255,255,.8);font-family:'DM Sans',sans-serif;margin-bottom:20px}
+#pause-overlay .pause-nav{display:flex;flex-direction:column;gap:8px}
+#pause-overlay .pn-btn{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:rgba(255,255,255,.7);font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;text-decoration:none}
+#pause-overlay .pn-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:#fff;transform:translateX(4px)}
+#pause-overlay .pn-btn.pn-resume{border-color:rgba(220,38,38,.3);background:rgba(220,38,38,.08);color:#EF4444}
+#pause-overlay .pn-btn.pn-resume:hover{background:rgba(220,38,38,.18);color:#fff}
+#pause-overlay .pn-btn .pn-icon{font-size:16px;width:22px;text-align:center}
+#pause-overlay .pn-divider{height:1px;background:rgba(255,255,255,.06);margin:4px 0}
+#room-view{position:fixed;inset:0;z-index:100;display:none;background:#0a0e14;cursor:default}
 #room-header{display:flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(15,20,28,.95);border-bottom:1px solid rgba(255,255,255,.06)}
 #room-header .rh-room{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#DC2626;background:rgba(220,38,38,.1);padding:4px 10px;border-radius:6px}
 #room-header .rh-name{font-weight:600;font-size:15px}
 #room-header .rh-cc{font-size:12px;color:rgba(255,255,255,.4)}
-#room-header .rh-acuity{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;margin-left:auto;text-transform:uppercase;letter-spacing:.05em}
+#room-header .rh-acuity{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.05em}
 #room-header .rh-back{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;margin-left:12px}
 #room-header .rh-back:hover{background:rgba(255,255,255,.12)}
+#room-header .rh-nav{display:flex;gap:6px;margin-left:auto;align-items:center}
+#room-header .rh-nav-link{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.45);padding:5px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all .15s}
+#room-header .rh-nav-link:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8)}
 
 #room-body{display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 50px);overflow:hidden}
 
@@ -181,11 +198,29 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
 <div id="splash-inner">
   <h1><span>Emergency</span> Department</h1>
   <p class="sub">Walk the ED corridor. Check the track board. Enter patient rooms to take histories, perform exams, review vitals, and order diagnostics. 8 patients are waiting.</p>
-  <button class="enter-btn" onclick="startED()">🚑 Begin Your Shift</button>
+  <div class="btn-row">
+    <button class="enter-btn" onclick="startED()">🚑 Walk the ED</button>
+    <button class="board-btn" onclick="window.location.href='legacy/ed-board-v2.html'">📋 ED Track Board</button>
+  </div>
   <div class="controls-hint">
-    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · Mouse look · <kbd>E</kbd> or Click interact · <kbd>Esc</kbd> pause
+    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · Mouse look · <kbd>E</kbd> or Click interact · <kbd>Esc</kbd> menu
   </div>
 </div>
+</div>
+
+<!-- PAUSE OVERLAY — Navigation Menu -->
+<div id="pause-overlay">
+  <div class="pause-box">
+    <div class="pause-icon">⏸</div>
+    <div class="pause-text">Paused</div>
+    <div class="pause-nav">
+      <div class="pn-btn pn-resume" onclick="resumeWalk()"><span class="pn-icon">▶</span> Resume Walking</div>
+      <div class="pn-divider"></div>
+      <a class="pn-btn" href="legacy/ed-board-v2.html"><span class="pn-icon">📋</span> ED Track Board</a>
+      <a class="pn-btn" href="hospital-3d.html"><span class="pn-icon">🏥</span> Hospital Lobby</a>
+      <a class="pn-btn" href="training.html"><span class="pn-icon">🎓</span> Training Hub</a>
+    </div>
+  </div>
 </div>
 
 <!-- 3D CANVAS -->
@@ -195,7 +230,7 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
 <div id="hud">
   <div id="hud-bar">
     <div id="hud-location">ED Corridor</div>
-    <a id="hud-back" href="hospital-3d.html">← Hospital Lobby</a>
+    <div id="hud-menu-hint">Press <kbd>Esc</kbd> for menu</div>
   </div>
 </div>
 <div id="crosshair"></div>
@@ -213,7 +248,11 @@ body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-ser
     <div class="rh-room" id="rv-room"></div>
     <div><div class="rh-name" id="rv-name"></div><div class="rh-cc" id="rv-cc"></div></div>
     <div class="rh-acuity" id="rv-acuity"></div>
-    <button class="rh-back" onclick="exitRoom()">← Back to Hallway</button>
+    <div class="rh-nav">
+      <a class="rh-nav-link" href="legacy/ed-board-v2.html">📋 Track Board</a>
+      <a class="rh-nav-link" href="training.html">🎓 Training Hub</a>
+      <button class="rh-back" onclick="exitRoom()">← Back to Hallway</button>
+    </div>
   </div>
   <div id="room-body">
     <!-- LEFT: Patient scene -->
@@ -700,11 +739,18 @@ let locked = false, currentTarget = null;
 let interactables = [];
 let minimapCtx;
 
+let inRoomView = false;
+
 function startED() {
   document.getElementById('splash').style.display = 'none';
   initThree();
   initEDAudio();
   startCorridorAudio();
+  renderer.domElement.requestPointerLock();
+}
+
+function resumeWalk() {
+  document.getElementById('pause-overlay').style.display = 'none';
   renderer.domElement.requestPointerLock();
 }
 
@@ -1183,14 +1229,11 @@ function setupControls() {
     document.getElementById('crosshair').style.display = show;
     document.getElementById('minimap').style.display = show;
     document.getElementById('ed-board').style.display = locked ? 'block' : 'none';
-    if(!locked) {
-      // Show splash as pause screen if not in room view
-      if(document.getElementById('room-view').style.display !== 'flex') {
-        const sp = document.getElementById('splash');
-        sp.style.display='flex';
-        sp.querySelector('h1 span').textContent = '▶ Resume';
-        sp.querySelector('.sub').textContent = 'Click to resume your shift.';
-        sp.querySelector('.enter-btn').textContent = '▶ Resume';
+    document.getElementById('pause-overlay').style.display = 'none';
+    if(!locked && !inRoomView) {
+      // Show lightweight pause overlay (not the full splash)
+      if(document.getElementById('splash').style.display === 'none') {
+        document.getElementById('pause-overlay').style.display = 'flex';
       }
     }
   });
@@ -1314,6 +1357,7 @@ let questionState = {}; // track which questions asked
 
 function enterRoom(idx) {
   currentCase = CASES[idx];
+  inRoomView = true;
 
   initEDAudio();
 
@@ -1327,6 +1371,7 @@ function enterRoom(idx) {
   // Exit pointer lock during transition
   document.exitPointerLock();
   document.getElementById('splash').style.display = 'none';
+  document.getElementById('pause-overlay').style.display = 'none';
 
   setTimeout(() => {
     document.getElementById('room-view').style.display = 'block';
@@ -1363,6 +1408,7 @@ function enterRoom(idx) {
 function exitRoom() {
   // Save patient state before exiting (for cross-module continuity)
   if(currentCase) savePatientState();
+  inRoomView = false;
 
   // Smooth fade transition back to 3D
   const overlay = document.createElement('div');
