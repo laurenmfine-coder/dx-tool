@@ -986,20 +986,21 @@ function buildED() {
     const sc=new THREE.MeshStandardMaterial({color:scrubColor||0x2a6848,roughness:.65});
     const sk=new THREE.MeshStandardMaterial({color:skinColor||0xc49a70,roughness:.7});
     const hr=new THREE.MeshStandardMaterial({color:hairColor||0x2a1a0a,roughness:.85});
+    function m(mesh,x,y,z){mesh.position.set(x,y,z);g.add(mesh);return mesh;}
     // Body
-    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.36,0.52,0.22),sc),{position:new THREE.Vector3(0,1.38,0)}));
+    m(new THREE.Mesh(new THREE.BoxGeometry(0.36,0.52,0.22),sc),0,1.38,0);
     // Head
-    g.add(Object.assign(new THREE.Mesh(new THREE.SphereGeometry(0.11,10,8),sk),{position:new THREE.Vector3(0,1.78,0)}));
+    m(new THREE.Mesh(new THREE.SphereGeometry(0.11,10,8),sk),0,1.78,0);
     // Hair
-    const h=new THREE.Mesh(new THREE.SphereGeometry(0.12,10,8),hr);h.position.set(0,1.81,-0.02);h.scale.set(1,0.78,0.9);g.add(h);
+    const h=m(new THREE.Mesh(new THREE.SphereGeometry(0.12,10,8),hr),0,1.81,-0.02);h.scale.set(1,0.78,0.9);
     // Arms
-    [-0.22,0.22].forEach(s=>{g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.09,0.36,0.1),sc),{position:new THREE.Vector3(s,1.24,0)}));});
+    [-0.22,0.22].forEach(s=>{m(new THREE.Mesh(new THREE.BoxGeometry(0.09,0.36,0.1),sc),s,1.24,0);});
     // Legs
-    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.3,0.52,0.18),sc),{position:new THREE.Vector3(0,0.72,0)}));
+    m(new THREE.Mesh(new THREE.BoxGeometry(0.3,0.52,0.18),sc),0,0.72,0);
     // Shoes
-    [-0.08,0.08].forEach(s=>{g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.1,0.05,0.15),new THREE.MeshStandardMaterial({color:0x222222,roughness:.5})),{position:new THREE.Vector3(s,0.025,0.02)}));});
+    [-0.08,0.08].forEach(s=>{m(new THREE.Mesh(new THREE.BoxGeometry(0.1,0.05,0.15),new THREE.MeshStandardMaterial({color:0x222222,roughness:.5})),s,0.025,0.02);});
     // Badge
-    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.07,0.09,0.005),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.5})),{position:new THREE.Vector3(0.1,1.5,0.12)}));
+    m(new THREE.Mesh(new THREE.BoxGeometry(0.07,0.09,0.005),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.5})),0.1,1.5,0.12);
     scene.add(g);return g;
   }
   addNPC(0,14.8,Math.PI,0x2a6848,0xc49a70,0x1a0a00); // Triage nurse
