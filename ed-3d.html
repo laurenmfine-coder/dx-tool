@@ -5,131 +5,1654 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReasonDx — Emergency Department</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0e14;font-family:'DM Sans',system-ui,sans-serif;color:#e0e0e0;min-height:100vh;display:flex;flex-direction:column}
+body{overflow:hidden;background:#0a0e14;font-family:'DM Sans',system-ui,sans-serif;color:#e0e0e0}
 
-/* Nav bar */
-.topnav{display:flex;align-items:center;gap:12px;padding:12px 24px;background:rgba(15,20,28,.95);border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:10}
-.topnav .brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#DC2626;letter-spacing:.02em}
-.topnav .sep{width:1px;height:16px;background:rgba(255,255,255,.08)}
-.topnav .page-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.5)}
-.topnav .nav-links{margin-left:auto;display:flex;gap:6px}
-.nav-link{font-size:11px;color:rgba(255,255,255,.35);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);padding:5px 12px;border-radius:6px;text-decoration:none;font-weight:600;transition:all .15s}
-.nav-link:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+/* ═══ SPLASH ═══ */
+#splash{position:fixed;inset:0;background:linear-gradient(145deg,#0a0e14 0%,#12181f 50%,#0d1117 100%);display:flex;align-items:center;justify-content:center;z-index:200}
+#splash-inner{text-align:center;max-width:560px;padding:32px}
+#splash h1{font-size:44px;font-weight:300;color:#fff;margin-bottom:4px;letter-spacing:-1px}
+#splash h1 span{color:#DC2626}
+#splash .sub{color:rgba(255,255,255,.45);font-size:14px;margin-bottom:28px;line-height:1.7}
+#splash .enter-btn{background:#DC2626;color:#fff;font-size:15px;font-weight:600;padding:14px 36px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+#splash .enter-btn:hover{background:#B91C1C;transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,38,38,.3)}
+#splash .controls-hint{margin-top:20px;font-size:11px;color:rgba(255,255,255,.25);line-height:1.8}
+#splash .controls-hint kbd{background:rgba(255,255,255,.08);padding:2px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.1)}
 
-/* Hero section */
-.hero{text-align:center;padding:48px 24px 32px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(220,38,38,.06),transparent);pointer-events:none}
-.hero h1{font-size:38px;font-weight:300;color:#fff;letter-spacing:-1px;margin-bottom:6px}
-.hero h1 span{color:#DC2626;font-weight:600}
-.hero .sub{color:rgba(255,255,255,.35);font-size:14px;max-width:520px;margin:0 auto 24px;line-height:1.7}
-.hero .enter-btn{display:inline-flex;align-items:center;gap:8px;background:#DC2626;color:#fff;font-size:15px;font-weight:700;padding:14px 36px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em;text-decoration:none;font-family:'DM Sans',sans-serif}
-.hero .enter-btn:hover{background:#B91C1C;transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,38,38,.3)}
+/* ═══ 3D CANVAS ═══ */
+#three-container{position:fixed;inset:0;z-index:1}
 
-/* Board section */
-.board-section{flex:1;padding:0 24px 48px;max-width:900px;margin:0 auto;width:100%}
-.board-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.2);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.board-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+/* ═══ HUD ═══ */
+#hud{position:fixed;top:0;left:0;right:0;z-index:50;pointer-events:none;padding:12px 16px;display:none}
+#hud-bar{display:flex;align-items:center;gap:12px}
+#hud-location{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace}
+#hud-back{pointer-events:auto;font-size:11px;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:4px 12px;border-radius:6px;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;margin-left:auto}
+#hud-back:hover{background:rgba(255,255,255,.12);color:#fff}
+#crosshair{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:50;pointer-events:none;display:none}
+#crosshair::before,#crosshair::after{content:'';position:absolute;background:rgba(255,255,255,.5)}
+#crosshair::before{width:14px;height:1.5px;top:50%;left:50%;transform:translate(-50%,-50%)}
+#crosshair::after{width:1.5px;height:14px;top:50%;left:50%;transform:translate(-50%,-50%)}
+#interact-prompt{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:50;pointer-events:none;display:none;text-align:center}
+.prompt-box{background:rgba(0,0,0,.8);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1)}
+.prompt-box .pname{font-weight:700;color:#DC2626;font-size:14px}
+.prompt-box .psub{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px}
+.prompt-box kbd{background:rgba(255,255,255,.12);padding:1px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.15);font-size:12px}
 
-/* Patient cards */
-.patient-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.patient-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .2s;text-decoration:none;display:block;position:relative;overflow:hidden}
-.patient-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
-.patient-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;border-radius:2px 0 0 2px}
-.patient-card.critical::before{background:#DC2626}
-.patient-card.urgent::before{background:#D97706}
-.pc-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.pc-room{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#DC2626;background:rgba(220,38,38,.1);padding:3px 8px;border-radius:5px;letter-spacing:.03em}
-.pc-room.urgent{color:#D97706;background:rgba(217,119,6,.1)}
-.pc-name{font-weight:600;font-size:14px;color:rgba(255,255,255,.85)}
-.pc-demo{font-size:11px;color:rgba(255,255,255,.3);margin-left:auto;font-family:'JetBrains Mono',monospace}
-.pc-cc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5}
-.pc-bottom{display:flex;align-items:center;gap:8px;margin-top:10px}
-.pc-acuity{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:100px}
-.pc-acuity.critical{color:#EF4444;background:rgba(239,68,68,.1)}
-.pc-acuity.urgent{color:#FBBF24;background:rgba(251,191,36,.1)}
-.pc-vitals{font-size:10px;color:rgba(255,255,255,.2);font-family:'JetBrains Mono',monospace;margin-left:auto}
+/* ═══ ED BOARD (top bar when in hallway) ═══ */
+#ed-board{position:fixed;top:50px;left:50%;transform:translateX(-50%);z-index:50;pointer-events:none;display:none;font-family:'JetBrains Mono',monospace}
+#ed-board-inner{background:rgba(6,10,16,.9);border:1px solid rgba(220,38,38,.15);border-radius:10px;padding:10px 14px;backdrop-filter:blur(10px);display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.board-chip{font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);white-space:nowrap}
+.board-chip.occupied{color:#fff;border-color:rgba(220,38,38,.3);background:rgba(220,38,38,.08)}
+.board-chip .chip-room{font-weight:700;color:#DC2626}
 
-/* Stats bar */
-.stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:32px;flex-wrap:wrap}
-.stat{text-align:center}
-.stat-num{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700}
-.stat-num.red{color:#EF4444}
-.stat-num.amber{color:#FBBF24}
-.stat-num.green{color:#34D399}
-.stat-label{font-size:10px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+/* ═══ MINIMAP ═══ */
+#minimap{position:fixed;bottom:16px;right:16px;z-index:50;pointer-events:none;display:none}
+#minimap canvas{border-radius:10px;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 16px rgba(0,0,0,.5)}
 
-@media(max-width:600px){
-  .hero h1{font-size:28px}
-  .patient-grid{grid-template-columns:1fr}
-  .topnav{padding:10px 16px;flex-wrap:wrap}
+/* ═══ ROOM VIEW (2D overlay) ═══ */
+#room-view{position:fixed;inset:0;z-index:100;display:none;background:#0a0e14}
+#room-header{display:flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(15,20,28,.95);border-bottom:1px solid rgba(255,255,255,.06)}
+#room-header .rh-room{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#DC2626;background:rgba(220,38,38,.1);padding:4px 10px;border-radius:6px}
+#room-header .rh-name{font-weight:600;font-size:15px}
+#room-header .rh-cc{font-size:12px;color:rgba(255,255,255,.4)}
+#room-header .rh-acuity{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;margin-left:auto;text-transform:uppercase;letter-spacing:.05em}
+#room-header .rh-back{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;margin-left:12px}
+#room-header .rh-back:hover{background:rgba(255,255,255,.12)}
+
+#room-body{display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 50px);overflow:hidden}
+
+/* LEFT: patient scene */
+#patient-scene{position:relative;background:linear-gradient(180deg,#10161e 0%,#0d1219 100%);overflow:hidden;display:flex;flex-direction:column}
+#scene-visual{flex:1;position:relative;display:flex;align-items:flex-end;justify-content:center;padding-bottom:20px;overflow:hidden}
+
+/* Patient in bed - CSS illustration */
+.bed-frame{position:relative;width:380px;height:180px}
+.bed-base{position:absolute;bottom:0;left:10px;right:10px;height:60px;background:linear-gradient(180deg,#2a3040 0%,#1e2530 100%);border-radius:8px;border:1px solid rgba(255,255,255,.06)}
+.bed-mattress{position:absolute;bottom:55px;left:15px;right:15px;height:30px;background:linear-gradient(180deg,#3a4a5a 0%,#2d3a48 100%);border-radius:6px 6px 0 0}
+.bed-pillow{position:absolute;bottom:80px;right:20px;width:80px;height:22px;background:linear-gradient(180deg,#e8e4dd 0%,#d4cfc8 100%);border-radius:10px;border:1px solid rgba(255,255,255,.08)}
+.bed-blanket{position:absolute;bottom:55px;left:15px;right:100px;height:50px;background:linear-gradient(135deg,#1e6f9f 0%,#1a5f8a 100%);border-radius:4px;border:1px solid rgba(255,255,255,.04)}
+.patient-body{position:absolute;bottom:75px;right:30px;width:60px;height:80px}
+.patient-head{width:40px;height:40px;background:linear-gradient(180deg,#c4a882 0%,#b09070 100%);border-radius:50%;margin:0 auto;border:1px solid rgba(0,0,0,.1)}
+.patient-gown{width:55px;height:42px;background:linear-gradient(180deg,#4a7a9a 0%,#3a6a8a 100%);border-radius:6px 6px 12px 12px;margin:-4px auto 0;border:1px solid rgba(255,255,255,.04)}
+.bed-rail{position:absolute;bottom:40px;width:4px;height:70px;background:linear-gradient(180deg,#888 0%,#666 100%);border-radius:2px}
+.bed-rail.left{left:6px}
+.bed-rail.right{right:6px}
+.iv-pole{position:absolute;bottom:40px;left:-30px;width:3px;height:130px;background:linear-gradient(180deg,#aaa 0%,#888 100%);border-radius:2px}
+.iv-bag{position:absolute;bottom:155px;left:-42px;width:26px;height:32px;background:rgba(200,220,240,.25);border-radius:4px 4px 8px 8px;border:1px solid rgba(255,255,255,.1)}
+.iv-drip{position:absolute;bottom:125px;left:-30px;width:1px;height:30px;background:rgba(200,220,240,.15)}
+
+/* Vitals monitor on bedside */
+.vitals-monitor{position:absolute;top:20px;right:20px;width:200px;background:rgba(6,10,16,.95);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;font-family:'JetBrains Mono',monospace}
+.vm-title{font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.vm-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.vm-label{font-size:10px;color:rgba(255,255,255,.4)}
+.vm-val{font-size:14px;font-weight:600}
+.vm-val.normal{color:#34D399}
+.vm-val.warn{color:#FBBF24}
+.vm-val.critical{color:#EF4444}
+.vm-wave{height:24px;margin-top:6px;position:relative;overflow:hidden;border-radius:4px;background:rgba(0,0,0,.3)}
+.vm-wave canvas{width:100%;height:100%}
+
+/* Action buttons (bottom of patient scene) */
+#action-bar{display:flex;gap:8px;padding:12px 16px;background:rgba(6,10,16,.8);border-top:1px solid rgba(255,255,255,.04);flex-wrap:wrap;justify-content:center}
+.action-btn{padding:10px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#fff;transition:all .15s;display:flex;align-items:center;gap:6px}
+.action-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
+.action-btn.active{border-color:#DC2626;background:rgba(220,38,38,.1);color:#DC2626}
+.action-btn .btn-icon{font-size:15px}
+
+/* RIGHT: data panels */
+#data-panel{background:#0d1219;overflow-y:auto;border-left:1px solid rgba(255,255,255,.04)}
+#data-panel::-webkit-scrollbar{width:6px}
+#data-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:3px}
+.panel-section{padding:20px}
+.panel-section h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.3);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.panel-section h3 .sec-icon{font-size:16px}
+
+/* Talk / History panel */
+.dialogue-bubble{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:14px;margin-bottom:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,.7)}
+.dialogue-bubble .speaker{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.dialogue-bubble .speaker.patient{color:#60A5FA}
+.dialogue-bubble .speaker.you{color:#34D399}
+.q-btn{display:block;width:100%;text-align:left;padding:10px 14px;margin-bottom:6px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.12);border-radius:8px;color:#93C5FD;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.q-btn:hover{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.25)}
+.q-btn.asked{opacity:.4;pointer-events:none;border-color:rgba(255,255,255,.05);color:rgba(255,255,255,.3);background:rgba(255,255,255,.02)}
+
+/* Exam panel */
+.exam-system{display:flex;flex-direction:column;gap:6px}
+.exam-system-btn{padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,.7);transition:all .15s;text-align:left}
+.exam-system-btn:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+.exam-system-btn.examined{border-color:rgba(52,211,153,.2);background:rgba(52,211,153,.04)}
+.exam-finding{margin-top:6px;font-size:12px;padding:8px 12px;background:rgba(52,211,153,.06);border-left:3px solid #34D399;border-radius:0 6px 6px 0;color:rgba(255,255,255,.65);line-height:1.6}
+.exam-finding.abnormal{border-left-color:#EF4444;background:rgba(239,68,68,.06)}
+
+/* Labs panel */
+.lab-table{width:100%;border-collapse:collapse}
+.lab-table th{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.25);text-align:left;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.lab-table td{font-size:12px;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.03);font-family:'JetBrains Mono',monospace}
+.lab-table .flag-high{color:#EF4444;font-weight:600}
+.lab-table .flag-low{color:#FBBF24;font-weight:600}
+.lab-table .flag-normal{color:#34D399}
+
+/* Imaging panel */
+.imaging-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:14px;margin-bottom:8px}
+.imaging-card .img-name{font-weight:600;font-size:13px;margin-bottom:6px;color:#fff}
+.imaging-card .img-result{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6}
+
+/* Waiting / empty state */
+.empty-state{text-align:center;padding:40px 20px;color:rgba(255,255,255,.2);font-size:13px}
+
+/* Treatment orders */
+.order-category{margin-bottom:14px}
+.order-cat-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:rgba(255,255,255,.3);margin-bottom:6px}
+.order-item{display:flex;align-items:center;gap:8px;padding:8px 12px;margin-bottom:4px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:6px;cursor:pointer;transition:all .15s;font-size:12px;color:rgba(255,255,255,.6)}
+.order-item:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+.order-item.ordered{border-color:rgba(52,211,153,.2);background:rgba(52,211,153,.04);color:#34D399}
+.order-item .ord-check{width:16px;height:16px;border:2px solid rgba(255,255,255,.15);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px}
+.order-item.ordered .ord-check{border-color:#34D399;background:rgba(52,211,153,.15);color:#34D399}
+
+/* Disposition */
+.dispo-option{padding:14px;margin-bottom:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;cursor:pointer;transition:all .15s}
+.dispo-option:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+.dispo-option.selected{border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06)}
+.dispo-option.correct{border-color:#34D399;background:rgba(52,211,153,.1)}
+.dispo-option.incorrect{border-color:#EF4444;background:rgba(239,68,68,.05)}
+.dispo-option .do-title{font-weight:600;font-size:13px;color:#fff;margin-bottom:3px}
+.dispo-option .do-desc{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+.dispo-explain{margin-top:12px;padding:14px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.12);border-radius:10px;font-size:12px;line-height:1.7;color:rgba(255,255,255,.65);display:none}
+
+/* Progress tracker (top of scene) */
+.progress-bar{display:flex;gap:4px;padding:8px 16px;background:rgba(6,10,16,.6);border-bottom:1px solid rgba(255,255,255,.03)}
+.prog-step{flex:1;text-align:center;padding:4px 0;border-radius:4px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:rgba(255,255,255,.2);background:rgba(255,255,255,.02)}
+.prog-step.done{color:#34D399;background:rgba(52,211,153,.08)}
+.prog-step.active{color:#60A5FA;background:rgba(96,165,250,.08)}
+
+/* Responsive */
+@media(max-width:768px){
+  #room-body{grid-template-columns:1fr;grid-template-rows:45vh 1fr}
 }
 </style>
 </head>
 <body>
 
-<nav class="topnav">
-  <div class="brand">ReasonDx</div>
-  <div class="sep"></div>
-  <div class="page-title">Emergency Department</div>
-  <div class="nav-links">
-    <a class="nav-link" href="hospital-3d.html">🏥 Hospital</a>
-    <a class="nav-link" href="training.html">🎓 Training Hub</a>
-  </div>
-</nav>
-
-<div class="hero">
+<!-- SPLASH -->
+<div id="splash">
+<div id="splash-inner">
   <h1><span>Emergency</span> Department</h1>
-  <p class="sub">10 patients are waiting. Interview, examine, order diagnostics, and make disposition decisions in a fully interactive clinical simulation.</p>
-  <a class="enter-btn" href="legacy/ed-board-v2.html">🚑 Open ED Track Board</a>
-</div>
-
-<div class="board-section">
-  <div class="stats-bar">
-    <div class="stat"><div class="stat-num red">6</div><div class="stat-label">Critical</div></div>
-    <div class="stat"><div class="stat-num amber">4</div><div class="stat-label">Urgent</div></div>
-    <div class="stat"><div class="stat-num green">10</div><div class="stat-label">Total</div></div>
+  <p class="sub">Walk the ED corridor. Check the track board. Enter patient rooms to take histories, perform exams, review vitals, and order diagnostics. 8 patients are waiting.</p>
+  <button class="enter-btn" onclick="startED()">🚑 Begin Your Shift</button>
+  <div class="controls-hint">
+    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk · Mouse look · <kbd>E</kbd> or Click interact · <kbd>Esc</kbd> pause
   </div>
-
-  <div class="board-label">Patient Board Preview</div>
-  <div class="patient-grid" id="patient-grid"></div>
+</div>
 </div>
 
+<!-- 3D CANVAS -->
+<div id="three-container"></div>
+
+<!-- HUD -->
+<div id="hud">
+  <div id="hud-bar">
+    <div id="hud-location">ED Corridor</div>
+    <a id="hud-back" href="hospital-3d.html">← Hospital Lobby</a>
+  </div>
+</div>
+<div id="crosshair"></div>
+<div id="interact-prompt"><div class="prompt-box"><div class="pname"></div><div class="psub"></div><div style="margin-top:5px">Press <kbd>E</kbd> or <strong>Click</strong> to enter room</div></div></div>
+
+<!-- ED BOARD CHIPS -->
+<div id="ed-board"><div id="ed-board-inner"></div></div>
+
+<!-- MINIMAP -->
+<div id="minimap"><canvas id="minimap-canvas" width="160" height="160"></canvas></div>
+
+<!-- ROOM VIEW (2D overlay) -->
+<div id="room-view">
+  <div id="room-header">
+    <div class="rh-room" id="rv-room"></div>
+    <div><div class="rh-name" id="rv-name"></div><div class="rh-cc" id="rv-cc"></div></div>
+    <div class="rh-acuity" id="rv-acuity"></div>
+    <button class="rh-back" onclick="exitRoom()">← Back to Hallway</button>
+  </div>
+  <div id="room-body">
+    <!-- LEFT: Patient scene -->
+    <div id="patient-scene">
+      <div class="progress-bar" id="progress-bar">
+        <div class="prog-step" id="prog-hx">History</div>
+        <div class="prog-step" id="prog-exam">Exam</div>
+        <div class="prog-step" id="prog-vitals">Vitals</div>
+        <div class="prog-step" id="prog-labs">Labs</div>
+        <div class="prog-step" id="prog-img">Imaging</div>
+        <div class="prog-step" id="prog-tx">Orders</div>
+        <div class="prog-step" id="prog-dispo">Dispo</div>
+      </div>
+      <div id="scene-visual">
+        <div class="vitals-monitor" id="vitals-monitor">
+          <div class="vm-title">Bedside Monitor</div>
+          <div id="vm-rows"></div>
+          <div class="vm-wave"><canvas id="ecg-wave" width="176" height="24"></canvas></div>
+        </div>
+        <div class="bed-frame">
+          <div class="iv-pole"></div>
+          <div class="iv-bag"></div>
+          <div class="iv-drip"></div>
+          <div class="bed-rail left"></div>
+          <div class="bed-rail right"></div>
+          <div class="bed-base"></div>
+          <div class="bed-mattress"></div>
+          <div class="bed-pillow"></div>
+          <div class="bed-blanket"></div>
+          <div class="patient-body"><div class="patient-head"></div><div class="patient-gown"></div></div>
+        </div>
+      </div>
+      <div id="action-bar">
+        <button class="action-btn" data-panel="talk" onclick="showPanel('talk')"><span class="btn-icon">💬</span> Talk to Patient</button>
+        <button class="action-btn" data-panel="exam" onclick="showPanel('exam')"><span class="btn-icon">🩺</span> Physical Exam</button>
+        <button class="action-btn" data-panel="vitals" onclick="showPanel('vitals')"><span class="btn-icon">📊</span> Vitals</button>
+        <button class="action-btn" data-panel="labs" onclick="showPanel('labs')"><span class="btn-icon">🧪</span> Labs</button>
+        <button class="action-btn" data-panel="imaging" onclick="showPanel('imaging')"><span class="btn-icon">📷</span> Imaging</button>
+        <button class="action-btn" data-panel="treatment" onclick="showPanel('treatment')"><span class="btn-icon">💊</span> Orders</button>
+        <button class="action-btn" data-panel="dispo" onclick="showPanel('dispo')" style="border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06);color:#34D399"><span class="btn-icon">🚪</span> Disposition</button>
+      </div>
+    </div>
+    <!-- RIGHT: Data panel -->
+    <div id="data-panel">
+      <div class="empty-state" id="panel-empty">Select an action to begin your workup</div>
+      <div id="panel-talk" class="panel-section" style="display:none"></div>
+      <div id="panel-exam" class="panel-section" style="display:none"></div>
+      <div id="panel-vitals" class="panel-section" style="display:none"></div>
+      <div id="panel-labs" class="panel-section" style="display:none"></div>
+      <div id="panel-imaging" class="panel-section" style="display:none"></div>
+      <div id="panel-treatment" class="panel-section" style="display:none"></div>
+      <div id="panel-dispo" class="panel-section" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const PATIENTS = [
-  {room:1,name:'James Morrison',age:'58M',cc:'Chest pain — radiating to L arm/jaw, diaphoretic',acuity:'critical',esi:2,vitals:'HR 102 · BP 158/94'},
-  {room:2,name:'Anthony Russo',age:'52M',cc:'Substernal pressure — exertional angina now at rest',acuity:'urgent',esi:3,vitals:'HR 92 · BP 158/94'},
-  {room:3,name:'Rachel Torres',age:'28F',cc:'Pleuritic chest pain — worse supine, friction rub',acuity:'urgent',esi:3,vitals:'HR 92 · BP 128/78'},
-  {room:4,name:'Sarah Chen',age:'24F',cc:'RLQ abdominal pain — migrating, fever, guarding',acuity:'urgent',esi:3,vitals:'HR 92 · BP 128/78'},
-  {room:5,name:'Thomas Walsh',age:'76M',cc:'Pulsatile abdominal mass — hypotensive, back pain',acuity:'critical',esi:1,vitals:'HR 118 · BP 82/58'},
-  {room:6,name:'Maria Gonzalez',age:'31F',cc:'Acute dyspnea — tachycardic, hypoxic, calf swelling',acuity:'critical',esi:2,vitals:'HR 118 · BP 132/82'},
-  {room:7,name:'Patricia Chen',age:'72F',cc:'Acute dyspnea — crackles, JVD, 3+ edema, AFib/RVR',acuity:'critical',esi:2,vitals:'HR 128 · BP 178/104'},
-  {room:8,name:'Harold Washington',age:'68M',cc:'Worsening dyspnea — COPD exacerbation, purulent sputum',acuity:'urgent',esi:3,vitals:'HR 104 · BP 148/82'},
-  {room:9,name:'Robert Williams',age:'42M',cc:'Thunderclap headache — worst of life, nuchal rigidity',acuity:'critical',esi:2,vitals:'HR 88 · BP 172/98'},
-  {room:10,name:'David Park',age:'19M',cc:'Fever, confusion, petechiae — neck stiffness, toxic',acuity:'critical',esi:1,vitals:'HR 124 · BP 94/58'}
+// ═══════════════════════════════════════
+// CASE DATA — 8 ED PATIENTS
+// ═══════════════════════════════════════
+const CASES = [
+{room:1,name:'James Morrison',age:58,sex:'M',cc:'Chest pain',acuity:'critical',esi:2,
+ vitals:{hr:102,bp:'158/94',rr:22,spo2:96,temp:'98.4°F'},
+ questions:[
+   {q:"Tell me about your chest pain.",a:"It started about 2 hours ago while I was watching TV. Feels like an elephant sitting on my chest — a heavy pressure right here [points to sternum]. It goes into my left arm and up into my jaw."},
+   {q:"How bad is the pain, 1-10?",a:"I'd say an 8. It hasn't let up at all since it started. Nothing I do makes it better or worse — I tried antacids, didn't help."},
+   {q:"Any other symptoms?",a:"I've been sweating a lot and feeling nauseous. A little short of breath too, but it's mostly this pressure that's killing me."},
+   {q:"Medical history and medications?",a:"High blood pressure, high cholesterol, and type 2 diabetes. I take lisinopril, atorvastatin, and metformin. I used to smoke — about a pack a day for 30 years — but I quit 5 years ago. No allergies to anything."}
+ ],
+ exam:{
+   General:{finding:'Anxious, diaphoretic male in moderate distress, clutching chest',abnormal:true},
+   HEENT:{finding:'Anicteric sclerae, mucous membranes moist',abnormal:false},
+   Neck:{finding:'No JVD, no carotid bruits, trachea midline',abnormal:false},
+   Cardiovascular:{finding:'Tachycardic, regular rhythm. No murmurs, rubs, or gallops. S1/S2 normal. No displaced PMI.',abnormal:true},
+   Pulmonary:{finding:'Clear to auscultation bilaterally. No wheezes, crackles, or rhonchi.',abnormal:false},
+   Abdomen:{finding:'Soft, non-tender, non-distended. Normal bowel sounds.',abnormal:false},
+   Extremities:{finding:'No edema. Pulses 2+ bilaterally. Cool, diaphoretic skin.',abnormal:true},
+   Neurologic:{finding:'Alert, oriented x4. No focal deficits.',abnormal:false}
+ },
+ labs:[
+   {name:'Troponin I',value:'2.4 ng/mL',ref:'<0.04',flag:'high'},
+   {name:'BNP',value:'340 pg/mL',ref:'<100',flag:'high'},
+   {name:'Potassium',value:'4.2 mEq/L',ref:'3.5-5.0',flag:''},
+   {name:'Creatinine',value:'1.1 mg/dL',ref:'0.7-1.3',flag:''},
+   {name:'Glucose',value:'186 mg/dL',ref:'70-100',flag:'high'},
+   {name:'WBC',value:'11.2 K/μL',ref:'4.5-11.0',flag:'high'},
+   {name:'Hemoglobin',value:'14.1 g/dL',ref:'13.5-17.5',flag:''},
+   {name:'PT/INR',value:'12.8s / 1.0',ref:'11-13.5 / 0.8-1.2',flag:''}
+ ],
+ imaging:[
+   {name:'12-Lead ECG',result:'Sinus tachycardia at 102 bpm. ST-segment elevations in leads II, III, and aVF with reciprocal ST depressions in I and aVL. Consistent with acute inferior STEMI.'},
+   {name:'Chest X-Ray (portable)',result:'Mild cardiomegaly. No focal consolidation, pneumothorax, or pleural effusion. Mediastinal contours normal.'}
+ ]},
+
+{room:2,name:'Sarah Chen',age:24,sex:'F',cc:'RLQ abdominal pain',acuity:'urgent',esi:3,
+ vitals:{hr:92,bp:'128/78',rr:18,spo2:99,temp:'100.8°F'},
+ questions:[
+   {q:"Tell me about your pain.",a:"It started yesterday, around my belly button — kind of a dull ache. But over the last 12 hours it's moved down to my right side and gotten a lot sharper."},
+   {q:"What makes it better or worse?",a:"It's worse when I walk or cough. The car ride here was terrible — every bump made it worse. Lying still helps a little but it still hurts. I'd say it's a 7 out of 10 now."},
+   {q:"Any other symptoms?",a:"I threw up twice this morning. I really have no appetite at all. I haven't had a fever at home but I've been feeling warm."},
+   {q:"Medical and surgical history?",a:"I'm pretty healthy — no surgeries, no chronic conditions. I take birth control pills, that's it. No allergies. Last period was 2 weeks ago, normal."}
+ ],
+ exam:{
+   General:{finding:'Young woman lying still, knees drawn up, appears uncomfortable',abnormal:true},
+   HEENT:{finding:'Mucous membranes slightly dry',abnormal:true},
+   Cardiovascular:{finding:'Regular rate and rhythm, no murmurs',abnormal:false},
+   Pulmonary:{finding:'Clear bilaterally',abnormal:false},
+   Abdomen:{finding:'Tender in RLQ with involuntary guarding. Positive McBurney point tenderness. Positive Rovsing sign (LLQ palpation causes RLQ pain). Positive psoas sign. Decreased bowel sounds.',abnormal:true},
+   Extremities:{finding:'Normal, no edema',abnormal:false},
+   Neurologic:{finding:'Alert, oriented, appropriate',abnormal:false},
+   Skin:{finding:'Warm, slightly flushed',abnormal:false}
+ },
+ labs:[
+   {name:'WBC',value:'14.8 K/μL',ref:'4.5-11.0',flag:'high'},
+   {name:'Neutrophils',value:'82%',ref:'40-70%',flag:'high'},
+   {name:'Hemoglobin',value:'13.4 g/dL',ref:'12.0-16.0',flag:''},
+   {name:'CRP',value:'4.2 mg/dL',ref:'<0.5',flag:'high'},
+   {name:'Lipase',value:'28 U/L',ref:'10-140',flag:''},
+   {name:'Urine hCG',value:'Negative',ref:'Negative',flag:''},
+   {name:'Urinalysis',value:'Normal, no WBCs or bacteria',ref:'Normal',flag:''},
+   {name:'BMP',value:'Na 138, K 3.9, Cr 0.8, Glucose 94',ref:'WNL',flag:''}
+ ],
+ imaging:[
+   {name:'CT Abdomen/Pelvis with contrast',result:'Dilated appendix measuring 11mm with periappendiceal fat stranding and a small appendicolith. No free fluid or abscess. Findings consistent with acute uncomplicated appendicitis.'},
+   {name:'Abdominal X-Ray',result:'Nonspecific bowel gas pattern. No free air or air-fluid levels.'}
+ ]},
+
+{room:3,name:'Robert Williams',age:42,sex:'M',cc:'Sudden severe headache',acuity:'critical',esi:2,
+ vitals:{hr:88,bp:'172/98',rr:16,spo2:98,temp:'99.1°F'},
+ questions:[
+   {q:"Tell me about your headache.",a:"It hit me out of nowhere — like someone hit me in the back of the head with a baseball bat. Worst headache of my entire life. I was just bending over to tie my shoe and BAM."},
+   {q:"When did it start? How bad?",a:"About 3 hours ago. It's a 10 out of 10, easily. Nothing has ever hurt this bad. The Tylenol I took at home did absolutely nothing."},
+   {q:"Any other symptoms?",a:"My neck is really stiff and it hurts when I look down. I threw up once. The light is really bothering my eyes. I feel a little confused, honestly."},
+   {q:"Medical history?",a:"I'm generally healthy. I smoke about half a pack a day. My mom had a brain aneurysm when she was 50 — she survived but it was bad. I take no medications. No allergies."}
+ ],
+ exam:{
+   General:{finding:'Male in significant distress, holding head, eyes closed, photophobic',abnormal:true},
+   HEENT:{finding:'Photophobia bilaterally. No papilledema on fundoscopic exam (limited by patient cooperation).',abnormal:true},
+   Neck:{finding:'Severe nuchal rigidity. Positive Kernig sign. Positive Brudzinski sign.',abnormal:true},
+   Cardiovascular:{finding:'Regular rate and rhythm, mild hypertension',abnormal:false},
+   Pulmonary:{finding:'Clear bilaterally',abnormal:false},
+   Neurologic:{finding:'GCS 14 (E3V5M6). Alert but mildly confused. Pupils equal and reactive. Cranial nerves II-XII intact. Strength 5/5 all extremities. No pronator drift. Mild left ptosis noted.',abnormal:true},
+   Extremities:{finding:'Normal',abnormal:false},
+   Skin:{finding:'Normal',abnormal:false}
+ },
+ labs:[
+   {name:'WBC',value:'12.1 K/μL',ref:'4.5-11.0',flag:'high'},
+   {name:'Hemoglobin',value:'15.2 g/dL',ref:'13.5-17.5',flag:''},
+   {name:'Platelets',value:'210 K/μL',ref:'150-400',flag:''},
+   {name:'PT/INR',value:'12.5s / 1.0',ref:'11-13.5 / 0.8-1.2',flag:''},
+   {name:'BMP',value:'Na 141, K 4.0, Cr 0.9, Glucose 112',ref:'WNL',flag:''},
+   {name:'Troponin I',value:'<0.01 ng/mL',ref:'<0.04',flag:''}
+ ],
+ imaging:[
+   {name:'CT Head without contrast',result:'Diffuse subarachnoid hemorrhage in the basal cisterns, Sylvian fissures bilaterally, and interhemispheric fissure. No hydrocephalus. No midline shift. No intraparenchymal hemorrhage.'},
+   {name:'CT Angiography Head',result:'7mm saccular aneurysm at the anterior communicating artery (AComm). No other vascular abnormality identified.'}
+ ]},
+
+{room:4,name:'Maria Gonzalez',age:31,sex:'F',cc:'Shortness of breath, pleuritic chest pain',acuity:'critical',esi:2,
+ vitals:{hr:118,bp:'132/82',rr:26,spo2:91,temp:'99.5°F'},
+ questions:[
+   {q:"Tell me what's happening.",a:"I woke up this morning and couldn't catch my breath. It hurts to take a deep breath — like a sharp stab on my right side. It came on really suddenly."},
+   {q:"Any cough or leg symptoms?",a:"I've had a dry cough since this morning. My right calf has been a little swollen and sore for the past 3 or 4 days — I figured I just pulled something at the gym."},
+   {q:"Anything that might put you at risk?",a:"I'm on birth control pills. I flew back from a trip to Colombia about 10 days ago — it was a long flight, maybe 6 hours. I was pretty cramped in my seat."},
+   {q:"Other medical history?",a:"Nothing major. I had a miscarriage about 2 years ago. No surgeries. Just the birth control for meds. No allergies."}
+ ],
+ exam:{
+   General:{finding:'Anxious young woman, tachypneic, speaking in short phrases',abnormal:true},
+   HEENT:{finding:'Normal',abnormal:false},
+   Neck:{finding:'Mild JVD present',abnormal:true},
+   Cardiovascular:{finding:'Tachycardic, regular rhythm. Loud P2 component of S2. No murmurs. RV heave palpable.',abnormal:true},
+   Pulmonary:{finding:'Tachypneic. Decreased breath sounds at right base. No wheezes. Mild crackles right lower lobe.',abnormal:true},
+   Abdomen:{finding:'Soft, non-tender',abnormal:false},
+   Extremities:{finding:'Right calf: 3cm larger circumference than left, tender to palpation, mild erythema and warmth. Positive Homan sign.',abnormal:true},
+   Neurologic:{finding:'Alert, oriented, anxious but appropriate',abnormal:false}
+ },
+ labs:[
+   {name:'D-Dimer',value:'4,200 ng/mL',ref:'<500',flag:'high'},
+   {name:'Troponin I',value:'0.08 ng/mL',ref:'<0.04',flag:'high'},
+   {name:'BNP',value:'220 pg/mL',ref:'<100',flag:'high'},
+   {name:'ABG',value:'pH 7.48, pCO2 28, pO2 62, HCO3 22',ref:'',flag:'high'},
+   {name:'WBC',value:'10.8 K/μL',ref:'4.5-11.0',flag:''},
+   {name:'Hemoglobin',value:'12.8 g/dL',ref:'12.0-16.0',flag:''},
+   {name:'Urine hCG',value:'Negative',ref:'Negative',flag:''}
+ ],
+ imaging:[
+   {name:'CT Pulmonary Angiography',result:'Large saddle embolus at the main pulmonary artery bifurcation with extension into right and left main pulmonary arteries. Additional subsegmental emboli in the right lower lobe. Right ventricular dilation (RV:LV ratio 1.3). No pleural effusion.'},
+   {name:'Lower Extremity Duplex Ultrasound',result:'Acute non-compressible thrombus in the right popliteal and posterior tibial veins extending into the distal femoral vein. No DVT on the left.'},
+   {name:'Chest X-Ray',result:'Subtle right basilar opacity (Hampton hump). No pneumothorax. Mild enlargement of the right heart silhouette.'}
+ ]},
+
+{room:5,name:'David Park',age:19,sex:'M',cc:'Fever, confusion, neck stiffness',acuity:'critical',esi:1,
+ vitals:{hr:124,bp:'94/58',rr:24,spo2:97,temp:'103.6°F'},
+ questions:[
+   {q:"Can you tell me what's going on?",a:"[Slow, confused response] I... I don't feel good. My head hurts really bad. Everything is too bright... [Grimaces, turns away from light]"},
+   {q:"When did you start feeling sick?",a:"I think... yesterday? I had a sore throat and was really tired. Then last night I started throwing up and got a bad headache. My roommate says I was talking weird this morning and brought me in."},
+   {q:"Any rash or other symptoms?",a:"[Roommate interjects: 'He showed me some spots on his legs this morning — they weren't there last night. And he didn't recognize me at first when I woke him up.']"},
+   {q:"Medical history? Any sick contacts?",a:"[Roommate: 'He's healthy, just a college freshman. He's in the dorms. A couple people on his floor have been sick. He's not on any medications and has no allergies. He hasn't been vaccinated for meningitis — his parents opted out.']"}
+ ],
+ exam:{
+   General:{finding:'Ill-appearing young male, somnolent, photophobic, toxic appearance',abnormal:true},
+   HEENT:{finding:'Photophobia. Oropharynx mildly erythematous. No papilledema.',abnormal:true},
+   Neck:{finding:'Severe nuchal rigidity. Positive Kernig and Brudzinski signs.',abnormal:true},
+   Cardiovascular:{finding:'Tachycardic, regular, thready pulses. Capillary refill 4 seconds.',abnormal:true},
+   Pulmonary:{finding:'Tachypneic. Clear bilaterally.',abnormal:false},
+   Abdomen:{finding:'Soft, non-tender',abnormal:false},
+   Extremities:{finding:'Scattered non-blanching petechiae and purpura on lower extremities bilaterally. Cool extremities.',abnormal:true},
+   Neurologic:{finding:'GCS 13 (E3V4M6). Confused, oriented to person only. Pupils equal and reactive. Moves all extremities. No focal motor deficits.',abnormal:true}
+ },
+ labs:[
+   {name:'WBC',value:'22.4 K/μL',ref:'4.5-11.0',flag:'high'},
+   {name:'Bands',value:'18%',ref:'0-5%',flag:'high'},
+   {name:'Platelets',value:'88 K/μL',ref:'150-400',flag:'low'},
+   {name:'Lactate',value:'4.8 mmol/L',ref:'0.5-2.0',flag:'high'},
+   {name:'Procalcitonin',value:'12.4 ng/mL',ref:'<0.1',flag:'high'},
+   {name:'CRP',value:'18.6 mg/dL',ref:'<0.5',flag:'high'},
+   {name:'Creatinine',value:'1.8 mg/dL',ref:'0.7-1.3',flag:'high'},
+   {name:'PT/INR',value:'16.2s / 1.4',ref:'11-13.5 / 0.8-1.2',flag:'high'},
+   {name:'Blood Cultures',value:'Pending (drawn before antibiotics)',ref:'',flag:''},
+   {name:'CSF WBC',value:'2,400/μL (95% PMNs)',ref:'0-5',flag:'high'},
+   {name:'CSF Protein',value:'280 mg/dL',ref:'15-45',flag:'high'},
+   {name:'CSF Glucose',value:'18 mg/dL',ref:'40-70',flag:'low'},
+   {name:'CSF Gram Stain',value:'Gram-negative diplococci',ref:'No organisms',flag:'high'}
+ ],
+ imaging:[
+   {name:'CT Head without contrast',result:'No intracranial hemorrhage, mass, or midline shift. No hydrocephalus. Normal for age.'},
+   {name:'Chest X-Ray',result:'Clear lungs. No consolidation.'}
+ ]},
+
+{room:6,name:'Linda Thompson',age:67,sex:'F',cc:'Altered mental status, fruity breath',acuity:'critical',esi:2,
+ vitals:{hr:110,bp:'108/62',rr:32,spo2:98,temp:'97.8°F'},
+ questions:[
+   {q:"Can you tell me your name?",a:"[Drowsy, slow] Linda... I'm Linda. Where am I? [Appears confused, Kussmaul breathing noted]"},
+   {q:"What happened?",a:"[Daughter present: 'She has type 1 diabetes. She's been sick the last 3 days — vomiting, couldn't keep food down. She was supposed to check her sugars but I don't think she did. When I came to check on her this morning she was barely responsive.']"},
+   {q:"Has this happened before?",a:"[Daughter: 'She was in DKA once about 5 years ago when she had pneumonia. She takes insulin — Lantus and Humalog — but she told me she ran out of Humalog 4 days ago and couldn't afford the refill.']"},
+   {q:"Other medical history?",a:"[Daughter: 'Type 1 diabetes since she was 30, high blood pressure, neuropathy in her feet. She takes Lantus, lisinopril. Allergic to sulfa drugs.']"}
+ ],
+ exam:{
+   General:{finding:'Elderly woman, drowsy but arousable, deep rapid respirations (Kussmaul), fruity odor on breath, dry mucous membranes',abnormal:true},
+   HEENT:{finding:'Dry mucous membranes, sunken eyes. Fruity ketotic breath.',abnormal:true},
+   Neck:{finding:'Supple, no JVD (flat neck veins)',abnormal:false},
+   Cardiovascular:{finding:'Tachycardic, regular. No murmurs. Diminished peripheral pulses.',abnormal:true},
+   Pulmonary:{finding:'Kussmaul respirations (deep, rapid). Clear to auscultation.',abnormal:true},
+   Abdomen:{finding:'Diffusely tender, no rebound or guarding. Decreased bowel sounds.',abnormal:true},
+   Extremities:{finding:'Decreased skin turgor. Diminished sensation in feet bilaterally (baseline). No edema.',abnormal:true},
+   Neurologic:{finding:'GCS 13 (E3V4M6). Oriented to person only. Sluggish but reactive pupils. Moves all extremities.',abnormal:true}
+ },
+ labs:[
+   {name:'Glucose',value:'486 mg/dL',ref:'70-100',flag:'high'},
+   {name:'pH (VBG)',value:'7.12',ref:'7.35-7.45',flag:'low'},
+   {name:'Bicarbonate',value:'8 mEq/L',ref:'22-28',flag:'low'},
+   {name:'Anion Gap',value:'28',ref:'8-12',flag:'high'},
+   {name:'Beta-hydroxybutyrate',value:'6.8 mmol/L',ref:'<0.6',flag:'high'},
+   {name:'Potassium',value:'5.8 mEq/L',ref:'3.5-5.0',flag:'high'},
+   {name:'Sodium',value:'128 mEq/L',ref:'136-145',flag:'low'},
+   {name:'Creatinine',value:'2.1 mg/dL',ref:'0.6-1.1',flag:'high'},
+   {name:'WBC',value:'16.2 K/μL',ref:'4.5-11.0',flag:'high'},
+   {name:'Urinalysis',value:'Glucose 3+, Ketones 4+, No WBCs',ref:'',flag:'high'}
+ ],
+ imaging:[
+   {name:'Chest X-Ray',result:'Clear lungs bilaterally. No infiltrate or effusion. Heart size normal.'},
+   {name:'ECG',result:'Sinus tachycardia at 110 bpm. Peaked T-waves in precordial leads consistent with hyperkalemia. No ST changes.'}
+ ]},
+
+{room:7,name:'Thomas Wright',age:73,sex:'M',cc:'Sudden left-sided weakness',acuity:'critical',esi:1,
+ vitals:{hr:88,bp:'188/102',rr:18,spo2:96,temp:'98.6°F'},
+ questions:[
+   {q:"Can you tell me what happened?",a:"[Slurred speech, left facial droop] I... was eating... breakfast... and my arm [gestures weakly with right hand toward left arm] ...stopped working. My wife... she called 911."},
+   {q:"When exactly did this start?",a:"[Wife: 'I was sitting across from him. It was about 45 minutes ago — at 8:15 this morning. He dropped his coffee cup, and then I noticed his face looked different on the left side. He couldn't lift his left arm at all.']"},
+   {q:"Has anything like this happened before?",a:"[Wife: 'He had a small stroke about 2 years ago — the doctors called it a TIA. He recovered completely from that one. He's supposed to be on blood thinners but he keeps missing doses.']"},
+   {q:"Medications and medical history?",a:"[Wife: 'Atrial fibrillation, high blood pressure, previous TIA, type 2 diabetes. He takes warfarin, metoprolol, lisinopril, and metformin. He's allergic to aspirin — it gives him a bad stomach bleed.']"}
+ ],
+ exam:{
+   General:{finding:'Elderly male, alert, left facial droop, slurred speech, left arm plegic',abnormal:true},
+   HEENT:{finding:'Left-sided facial droop (upper and lower face). Tongue deviates right on protrusion. Left visual field cut.',abnormal:true},
+   Neck:{finding:'No carotid bruits. Supple.',abnormal:false},
+   Cardiovascular:{finding:'Irregular rhythm (atrial fibrillation). No murmurs.',abnormal:true},
+   Pulmonary:{finding:'Clear bilaterally',abnormal:false},
+   Neurologic:{finding:'GCS 14 (E4V4M6). Dysarthria present. Left facial droop (UMN pattern). Left arm 0/5 strength, left leg 2/5 strength. Left-sided neglect. Positive pronator drift left. Left Babinski sign positive. Right side 5/5 throughout. NIHSS Score: 14.',abnormal:true},
+   Extremities:{finding:'Left arm flaccid. No edema.',abnormal:true},
+   Skin:{finding:'Normal',abnormal:false}
+ },
+ labs:[
+   {name:'INR',value:'1.3',ref:'2.0-3.0 (therapeutic)',flag:'low'},
+   {name:'Glucose',value:'142 mg/dL',ref:'70-100',flag:'high'},
+   {name:'Platelets',value:'198 K/μL',ref:'150-400',flag:''},
+   {name:'Creatinine',value:'1.2 mg/dL',ref:'0.7-1.3',flag:''},
+   {name:'PT',value:'15.1 seconds',ref:'11-13.5',flag:'high'},
+   {name:'Hemoglobin',value:'13.8 g/dL',ref:'13.5-17.5',flag:''}
+ ],
+ imaging:[
+   {name:'CT Head without contrast (STAT)',result:'No intracranial hemorrhage. No midline shift. Early loss of gray-white differentiation in right MCA territory. Hyperdense right MCA sign (vessel sign) present.'},
+   {name:'CT Angiography Head and Neck',result:'Occlusion of the right middle cerebral artery (M1 segment). Right internal carotid artery patent with moderate atherosclerotic disease. Left circulation patent.'},
+   {name:'CT Perfusion',result:'Large penumbra in right MCA territory (mismatch ratio >1.8). Core infarct approximately 15mL. Salvageable tissue approximately 90mL.'}
+ ]},
+
+{room:8,name:'Angela Foster',age:45,sex:'F',cc:'Rapidly worsening leg pain and swelling',acuity:'urgent',esi:2,
+ vitals:{hr:112,bp:'142/88',rr:22,spo2:97,temp:'102.4°F'},
+ questions:[
+   {q:"Tell me about your leg.",a:"I scraped it gardening 3 days ago — just a little cut on my shin. But yesterday it started getting really red and swollen, and now the pain is unbelievable. It's spreading fast — this morning the redness was at my ankle and now it's past my knee."},
+   {q:"How bad is the pain?",a:"It's a 10 — the worst pain I've ever felt. It feels like my leg is on fire from the inside. The skin is so tender that even a bedsheet touching it is agonizing. It hurts way more than it looks like it should."},
+   {q:"Any other symptoms?",a:"I've had chills and felt feverish since last night. I feel really weak and kind of dizzy. I threw up once this morning."},
+   {q:"Medical history?",a:"I have type 2 diabetes — my sugars haven't been great lately. I also take prednisone for lupus, so I know my immune system isn't the best. My medications are metformin, prednisone, and hydroxychloroquine. No allergies."}
+ ],
+ exam:{
+   General:{finding:'Ill-appearing woman, febrile, tachycardic, in severe distress from leg pain',abnormal:true},
+   HEENT:{finding:'Dry mucous membranes',abnormal:true},
+   Cardiovascular:{finding:'Tachycardic, regular rhythm. No murmurs.',abnormal:true},
+   Pulmonary:{finding:'Clear, tachypneic',abnormal:false},
+   Abdomen:{finding:'Soft, non-tender',abnormal:false},
+   Extremities:{finding:'LEFT LEG: Extensive erythema from mid-foot to above knee with rapid proximal spread. Tense edema. Skin dusky/violaceous centrally with hemorrhagic bullae over shin. Exquisite tenderness — pain disproportionate to exam. Crepitus palpable along anterior shin. Sensation decreased over erythematous area. Dorsalis pedis pulse faintly palpable.',abnormal:true},
+   Neurologic:{finding:'Alert, oriented, but appears toxic. Sensation decreased over affected limb.',abnormal:true},
+   Skin:{finding:'Left lower extremity: Rapidly advancing erythema with violaceous center, hemorrhagic bullae, and crepitus. 2cm healing abrasion on anterior shin (initial wound). Surrounding tissue indurated.',abnormal:true}
+ },
+ labs:[
+   {name:'WBC',value:'24.6 K/μL',ref:'4.5-11.0',flag:'high'},
+   {name:'Bands',value:'22%',ref:'0-5%',flag:'high'},
+   {name:'Hemoglobin',value:'10.2 g/dL',ref:'12.0-16.0',flag:'low'},
+   {name:'Platelets',value:'92 K/μL',ref:'150-400',flag:'low'},
+   {name:'Lactate',value:'5.2 mmol/L',ref:'0.5-2.0',flag:'high'},
+   {name:'Creatinine',value:'2.4 mg/dL',ref:'0.6-1.1',flag:'high'},
+   {name:'CRP',value:'28.4 mg/dL',ref:'<0.5',flag:'high'},
+   {name:'Glucose',value:'268 mg/dL',ref:'70-100',flag:'high'},
+   {name:'Sodium',value:'131 mEq/L',ref:'136-145',flag:'low'},
+   {name:'CK',value:'1,840 U/L',ref:'30-170',flag:'high'},
+   {name:'Blood Cultures',value:'Pending',ref:'',flag:''},
+   {name:'LRINEC Score',value:'9 (high risk for necrotizing fasciitis)',ref:'≤5 low risk',flag:'high'}
+ ],
+ imaging:[
+   {name:'X-Ray Left Tibia/Fibula',result:'Soft tissue gas tracking along fascial planes of the anterior and lateral compartments of the left lower leg. No fracture or foreign body.'},
+   {name:'CT Left Lower Extremity with contrast',result:'Extensive fascial thickening and gas tracking along the deep fascia of the left lower leg, extending from mid-shin to the popliteal fossa. Fat stranding and fluid collections along fascial planes. Findings highly concerning for necrotizing fasciitis. No discrete abscess.'}
+ ]}
 ];
 
-const grid = document.getElementById('patient-grid');
-PATIENTS.forEach(p => {
-  const isCrit = p.acuity === 'critical';
-  const card = document.createElement('a');
-  card.href = 'legacy/ed-board-v2.html';
-  card.className = 'patient-card ' + p.acuity;
-  card.innerHTML =
-    '<div class="pc-top">' +
-      '<span class="pc-room' + (isCrit ? '' : ' urgent') + '">R' + p.room + '</span>' +
-      '<span class="pc-name">' + p.name + '</span>' +
-      '<span class="pc-demo">' + p.age + '</span>' +
-    '</div>' +
-    '<div class="pc-cc">' + p.cc + '</div>' +
-    '<div class="pc-bottom">' +
-      '<span class="pc-acuity ' + p.acuity + '">' + p.acuity.toUpperCase() + ' · ESI ' + p.esi + '</span>' +
-      '<span class="pc-vitals">' + p.vitals + '</span>' +
-    '</div>';
-  grid.appendChild(card);
-});
+// ═══════════════════════════════════════
+// TREATMENT ORDERS & DISPOSITION DATA
+// ═══════════════════════════════════════
+const TREATMENTS = {
+  1:{orders:[
+    {cat:'Immediate',items:['Aspirin 325mg PO','Clopidogrel 600mg PO loading','Heparin IV bolus + drip','Morphine 4mg IV PRN pain','Nitroglycerin 0.4mg SL','Supplemental O2 2L NC']},
+    {cat:'Labs/Monitoring',items:['Serial troponins q3h','Continuous telemetry','12-lead ECG q15 min','Type and screen','PT/INR, aPTT']},
+    {cat:'Consults',items:['Cardiology STAT — cath lab activation','Cardiac surgery standby']}
+  ],dispo:[
+    {text:'Activate cath lab — emergent PCI',desc:'STEMI protocol: door-to-balloon <90 min. Cardiology to perform emergent catheterization and intervention.',correct:true},
+    {text:'Admit to telemetry — serial troponins',desc:'Medical management with anticoagulation and monitoring.',correct:false},
+    {text:'Thrombolytics (tPA) — then admit to ICU',desc:'Fibrinolytic therapy if PCI not available within 120 minutes.',correct:false},
+    {text:'Observe in ED — repeat ECG in 4 hours',desc:'Continue monitoring and reassess.',correct:false}
+  ],dispoExplain:'Acute STEMI with ST elevations in II/III/aVF requires emergent PCI (primary percutaneous coronary intervention). The goal is door-to-balloon time <90 minutes. Thrombolytics are second-line only if PCI is unavailable within 120 min. Observation alone is dangerous — this is an actively evolving infarction.'},
+  2:{orders:[
+    {cat:'Immediate',items:['NPO status','IV NS bolus 1L','Morphine 4mg IV PRN pain','Ondansetron 4mg IV PRN nausea','Acetaminophen 1g IV']},
+    {cat:'Labs',items:['CBC with differential','CMP','Lipase','Urinalysis','Urine hCG']},
+    {cat:'Consults',items:['Surgery consult — appendicitis','Anesthesia pre-op evaluation']}
+  ],dispo:[
+    {text:'Surgical consult — laparoscopic appendectomy',desc:'Operative management for acute uncomplicated appendicitis.',correct:true},
+    {text:'IV antibiotics only — non-operative management',desc:'Antibiotic-first approach with interval follow-up.',correct:false},
+    {text:'Admit for observation — serial abdominal exams',desc:'Watch-and-wait with repeat imaging if worsening.',correct:false},
+    {text:'Discharge with PO antibiotics and surgery follow-up',desc:'Outpatient management.',correct:false}
+  ],dispoExplain:'Acute appendicitis with an 11mm appendix and appendicolith warrants surgical consultation for laparoscopic appendectomy. While antibiotic-first approaches exist, the appendicolith increases perforation risk, making surgery preferred. Discharge is inappropriate for confirmed appendicitis.'},
+  3:{orders:[
+    {cat:'Immediate',items:['IV access x2 large bore','Labetalol IV — goal SBP 140-160','Nimodipine 60mg PO q4h','Antiemetics PRN','Strict bed rest, HOB 30°','Seizure precautions']},
+    {cat:'Monitoring',items:['Neuro checks q1h','Continuous telemetry','Strict I/O','External ventricular drain standby']},
+    {cat:'Consults',items:['Neurosurgery STAT','Neuro-interventional radiology']}
+  ],dispo:[
+    {text:'Neurosurgery — ICU admission for surgical clipping or coiling',desc:'Emergent neurosurgical intervention for ruptured AComm aneurysm.',correct:true},
+    {text:'Admit to neuro step-down — IV nimodipine and monitoring',desc:'Medical management without surgical intervention.',correct:false},
+    {text:'Observe in ED — repeat CT in 6 hours',desc:'Continued observation with reimaging.',correct:false},
+    {text:'Transfer to higher level of care',desc:'Arrange interfacility transfer.',correct:false}
+  ],dispoExplain:'Ruptured aneurysmal SAH requires emergent neurosurgical intervention — either microsurgical clipping or endovascular coiling of the AComm aneurysm. ICU admission with nimodipine for vasospasm prevention. Observation alone risks rebleeding (4% in first 24h, often fatal). The aneurysm needs to be secured.'},
+  4:{orders:[
+    {cat:'Immediate',items:['IV heparin bolus + drip (weight-based)','Supplemental O2 — target SpO2 >92%','IV NS at 100mL/hr','Morphine 2mg IV PRN pleuritic pain']},
+    {cat:'Monitoring',items:['Continuous telemetry','Repeat troponin in 6h','Trend BNP','Monitor for RV strain signs']},
+    {cat:'Consults',items:['Pulmonology/PE response team','IR for catheter-directed therapy evaluation']}
+  ],dispo:[
+    {text:'ICU admission — systemic anticoagulation ± catheter-directed therapy',desc:'Submassive/massive PE with RV strain requires ICU-level care and possible escalation.',correct:true},
+    {text:'Admit to telemetry — heparin drip',desc:'Standard anticoagulation on monitored floor.',correct:false},
+    {text:'Systemic tPA — then ICU',desc:'Full-dose thrombolytics for massive PE.',correct:false},
+    {text:'Start DOAC and discharge with follow-up',desc:'Outpatient anticoagulation.',correct:false}
+  ],dispoExplain:'Saddle PE with RV dilation (RV:LV >1.0) and elevated troponin/BNP is a submassive PE requiring ICU admission. Systemic anticoagulation is first-line. Catheter-directed therapy (lower dose tPA directly into clot) may be considered for worsening despite anticoagulation. Full systemic tPA is reserved for hemodynamically unstable massive PE. Discharge on DOAC alone is dangerous with this clot burden.'},
+  5:{orders:[
+    {cat:'Immediate — DO NOT DELAY',items:['Ceftriaxone 2g IV STAT','Vancomycin 20mg/kg IV STAT','Dexamethasone 0.15mg/kg IV (before or with first abx)','IV NS bolus 30mL/kg — sepsis protocol','Supplemental O2 PRN']},
+    {cat:'Monitoring',items:['ICU bed request','Continuous telemetry','Neuro checks q1h','Repeat lactate in 2h','Contact precautions + droplet isolation']},
+    {cat:'Consults',items:['Infectious disease','Report to public health department']}
+  ],dispo:[
+    {text:'ICU admission — bacterial meningitis protocol + sepsis management',desc:'Critically ill with meningococcal meningitis and sepsis. Requires ICU, isolation, and contact tracing.',correct:true},
+    {text:'Admit to step-down — IV antibiotics and monitoring',desc:'Floor-level care with antibiotics.',correct:false},
+    {text:'Observe in ED 6 hours — reassess after antibiotics',desc:'Extended ED observation.',correct:false},
+    {text:'Admit to general medicine — continue antibiotics',desc:'General ward admission.',correct:false}
+  ],dispoExplain:'Bacterial meningitis with sepsis (lactate 4.8, hypotension, thrombocytopenia, AKI) requires ICU admission. Empiric antibiotics should be given IMMEDIATELY — do not wait for LP results. Dexamethasone before/with first dose reduces neurologic complications. Gram-negative diplococci = Neisseria meningitidis — requires droplet precautions and public health notification for contact prophylaxis. This patient has meningococcemia (petechiae/purpura).'},
+  6:{orders:[
+    {cat:'Immediate',items:['Insulin drip protocol (start 0.1 U/kg/hr)','IV NS bolus 1L over 1h, then 250mL/hr','Potassium: HOLD insulin repletion until K<5.3, then add 20-40 mEq/L to IVF','D5 ½NS when glucose <250','Continuous telemetry']},
+    {cat:'Monitoring',items:['Fingerstick glucose q1h','BMP q2h (K+, bicarb, anion gap)','Strict I/O','VBG q2-4h until AG closed']},
+    {cat:'Consults',items:['Endocrinology','Social work — insulin affordability']}
+  ],dispo:[
+    {text:'ICU admission — DKA protocol with insulin drip and aggressive monitoring',desc:'Critical DKA (pH 7.12, glucose 486, AG 28) requires ICU-level care.',correct:true},
+    {text:'Admit to step-down — insulin drip',desc:'Monitored bed with DKA protocol.',correct:false},
+    {text:'Admit to medicine — SQ insulin and IVF',desc:'Start subcutaneous insulin and hydration.',correct:false},
+    {text:'ED observation — run DKA protocol then reassess',desc:'Manage in ED with plan to admit after stabilization.',correct:false}
+  ],dispoExplain:'Severe DKA (pH <7.2, bicarb <10, AG 28, altered mental status) requires ICU admission for continuous insulin drip, aggressive IVF, and hourly monitoring. The high potassium (5.8) will drop rapidly with insulin — must be monitored closely. Critical: address the social determinant — she ran out of Humalog due to cost. Social work for insulin assistance programs is essential to prevent recurrence.'},
+  7:{orders:[
+    {cat:'Immediate — TIME IS BRAIN',items:['Activate stroke code/team','Alteplase (tPA) 0.9mg/kg IV (if within window and eligible)','Permissive hypertension — do NOT treat BP unless >220/120','NPO until swallow evaluation','HOB flat']},
+    {cat:'Monitoring',items:['Neuro checks q15 min x 2h post-tPA','Repeat CT head 24h post-tPA','Continuous telemetry','Fingerstick glucose q1h']},
+    {cat:'Consults',items:['Neurology/stroke team STAT','Neuro-interventional — evaluate for thrombectomy','Speech therapy (swallow eval)']}
+  ],dispo:[
+    {text:'Stroke unit/ICU — IV tPA + emergent mechanical thrombectomy evaluation',desc:'Large vessel occlusion with significant penumbra — candidate for both IV thrombolysis and endovascular thrombectomy.',correct:true},
+    {text:'Stroke unit — IV tPA only',desc:'Thrombolytics alone without interventional evaluation.',correct:false},
+    {text:'ICU admission — supportive care only (subtherapeutic INR)',desc:'Conservative management without reperfusion therapy.',correct:false},
+    {text:'Admit to telemetry — anticoagulation optimization',desc:'Resume warfarin and monitor.',correct:false}
+  ],dispoExplain:'Acute ischemic stroke with large vessel occlusion (right MCA M1) and favorable perfusion imaging (large penumbra, small core) is indication for BOTH IV tPA AND mechanical thrombectomy. His INR of 1.3 (subtherapeutic) does not contraindicate tPA. Time is critical — the CT perfusion shows 90mL of salvageable tissue. NIHSS 14 with LVO qualifies for thrombectomy out to 24 hours if perfusion imaging is favorable.'},
+  8:{orders:[
+    {cat:'Immediate — SURGICAL EMERGENCY',items:['IV NS wide open — sepsis resuscitation','Vancomycin 25mg/kg IV','Piperacillin-tazobactam 4.5g IV','Clindamycin 900mg IV (anti-toxin)','Blood cultures x2 before antibiotics if possible','Type and screen, crossmatch 4 units']},
+    {cat:'Monitoring',items:['Continuous telemetry','Foley catheter — strict I/O','Repeat lactate in 2h','Mark erythema borders with time']},
+    {cat:'Consults',items:['Surgery EMERGENT — operative debridement','Anesthesia for emergent OR','Infectious disease']}
+  ],dispo:[
+    {text:'Emergent OR — surgical exploration and debridement',desc:'Necrotizing fasciitis is a surgical emergency. Definitive treatment is aggressive surgical debridement.',correct:true},
+    {text:'ICU admission — IV antibiotics and close monitoring',desc:'Medical management with antibiotics and reassessment.',correct:false},
+    {text:'MRI first — confirm diagnosis before surgery',desc:'Advanced imaging to confirm necrotizing process.',correct:false},
+    {text:'Admit to surgery — OR in the morning',desc:'Surgical consult with planned operation next day.',correct:false}
+  ],dispoExplain:'Necrotizing fasciitis is a SURGICAL EMERGENCY. The combination of pain out of proportion, crepitus, gas on imaging, systemic toxicity (sepsis), and rapidly advancing infection demands immediate operative debridement — every hour of delay increases mortality. Antibiotics alone are insufficient. MRI would cause dangerous delay. "OR in the morning" is unacceptable — this patient needs the OR NOW. Mortality doubles with every 6 hours of surgical delay.'}
+};
+
+// ═══ ORDER & PROGRESS STATE ═══
+let orderState = {}; // room -> Set of ordered items
+let dispoState = {}; // room -> chosen dispo
+let progressState = {}; // room -> {hx, exam, vitals, labs, imaging, tx, dispo}
+
+function getProgress(room){
+  if(!progressState[room])progressState[room]={hx:false,exam:false,vitals:false,labs:false,imaging:false,tx:false,dispo:false};
+  return progressState[room];
+}
+function updateProgress(){
+  if(!currentCase)return;
+  const r=currentCase.room, p=getProgress(r);
+  const qAsked=currentCase.questions.filter((_,i)=>questionState[r+'-'+i]).length;
+  p.hx=qAsked>=2;
+  const exDone=Object.keys(currentCase.exam).filter(s=>examState[r+'-'+s]).length;
+  p.exam=exDone>=3;
+  p.vitals=true; // always visible
+  p.labs=true;
+  p.imaging=true;
+  if(orderState[r])p.tx=orderState[r].size>=3;
+  if(dispoState[r])p.dispo=true;
+  // Update UI
+  ['hx','exam','vitals','labs','imaging','tx','dispo'].forEach(k=>{
+    const el=document.getElementById('prog-'+k);
+    if(el)el.className='prog-step'+(p[k]?' done':'');
+  });
+  // Save to localStorage for cross-module continuity
+  try{localStorage.setItem('rdx-ed-progress-'+r,JSON.stringify(p))}catch(e){}
+}
+
+// ═══ ED AUDIO ═══
+let edAudioCtx;
+function initEDAudio(){
+  if(edAudioCtx)return;
+  edAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
+}
+function playBeep(freq,vol){
+  if(!edAudioCtx)return;
+  const o=edAudioCtx.createOscillator(),g=edAudioCtx.createGain();
+  o.frequency.value=freq||880;o.type='sine';
+  g.gain.setValueAtTime(0,edAudioCtx.currentTime);
+  g.gain.linearRampToValueAtTime(vol||0.04,edAudioCtx.currentTime+0.02);
+  g.gain.linearRampToValueAtTime(0,edAudioCtx.currentTime+0.12);
+  o.connect(g);g.connect(edAudioCtx.destination);
+  o.start();o.stop(edAudioCtx.currentTime+0.15);
+}
+let beepInterval;
+function startRoomBeeps(){
+  if(!currentCase||currentCase.acuity!=='critical')return;
+  beepInterval=setInterval(()=>playBeep(880,0.03),1200);
+}
+function stopRoomBeeps(){if(beepInterval)clearInterval(beepInterval);beepInterval=null;}
+
+// ═══════════════════════════════════════
+// 3D ED CORRIDOR
+// ═══════════════════════════════════════
+const PLAYER_H = 1.7, MOVE_SPEED = 5, MOUSE_SENS = 0.002;
+let scene, camera, renderer, clock;
+let moveState = {f:0,b:0,l:0,r:0};
+let euler = new THREE.Euler(0,0,0,'YXZ');
+let playerPos = new THREE.Vector3(0, PLAYER_H, 14);
+let locked = false, currentTarget = null;
+let interactables = [];
+let minimapCtx;
+
+function startED() {
+  document.getElementById('splash').style.display = 'none';
+  initThree();
+  initEDAudio();
+  startCorridorAudio();
+  renderer.domElement.requestPointerLock();
+}
+
+function initThree() {
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a0e14);
+  scene.fog = new THREE.Fog(0x0a0e14, 20, 45);
+
+  camera = new THREE.PerspectiveCamera(72, innerWidth/innerHeight, 0.1, 80);
+  camera.position.copy(playerPos);
+
+  renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.9;
+  document.getElementById('three-container').appendChild(renderer.domElement);
+
+  clock = new THREE.Clock();
+  minimapCtx = document.getElementById('minimap-canvas').getContext('2d');
+
+  buildED();
+  buildLights();
+  setupControls();
+  buildBoardChips();
+  animate();
+}
+
+// ═══ PROCEDURAL TEXTURES ═══
+function floorTex() {
+  const c = document.createElement('canvas'); c.width=256; c.height=256;
+  const x = c.getContext('2d');
+  x.fillStyle='#c8c2b8'; x.fillRect(0,0,256,256);
+  for(let i=0;i<600;i++){const g=175+Math.random()*40;x.fillStyle=`rgb(${g},${g-3},${g-10})`;x.fillRect(Math.random()*256,Math.random()*256,1+Math.random()*2,1+Math.random()*2)}
+  x.strokeStyle='rgba(0,0,0,.05)';x.lineWidth=1;
+  for(let i=0;i<=4;i++){x.beginPath();x.moveTo(i*64,0);x.lineTo(i*64,256);x.stroke();x.beginPath();x.moveTo(0,i*64);x.lineTo(256,i*64);x.stroke()}
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(16,6);return t;
+}
+function wallTex() {
+  const c = document.createElement('canvas'); c.width=128; c.height=256;
+  const x = c.getContext('2d');
+  x.fillStyle='#e8e4dc'; x.fillRect(0,0,128,230);
+  for(let i=0;i<150;i++){x.fillStyle=`rgba(${200+Math.random()*30},${195+Math.random()*30},${185+Math.random()*30},.12)`;x.fillRect(Math.random()*128,Math.random()*230,4,3)}
+  // Chair rail
+  x.fillStyle='#bbb5a8'; x.fillRect(0,130,128,4);
+  // Lower wall slightly different tone
+  x.fillStyle='#ddd8ce'; x.fillRect(0,134,128,96);
+  // Baseboard
+  x.fillStyle='#8B7355'; x.fillRect(0,228,128,28);
+  const t=new THREE.CanvasTexture(c);t.wrapS=THREE.RepeatWrapping;t.repeat.set(4,1);return t;
+}
+function ceilTex() {
+  const c = document.createElement('canvas'); c.width=128; c.height=128;
+  const x = c.getContext('2d');
+  x.fillStyle='#e4e0d8'; x.fillRect(0,0,128,128);
+  x.strokeStyle='rgba(0,0,0,.06)';x.lineWidth=2;x.strokeRect(2,2,124,124);
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(14,6);return t;
+}
+
+function textLabel(text, color, fontSize, w, h) {
+  w=w||512; h=h||96;
+  const c=document.createElement('canvas');c.width=w;c.height=h;
+  const x=c.getContext('2d');
+  x.fillStyle='#12181f';x.fillRect(0,0,w,h);
+  const hex='#'+(color||0xffffff).toString(16).padStart(6,'0');
+  x.strokeStyle=hex;x.lineWidth=3;x.strokeRect(3,3,w-6,h-6);
+  x.fillStyle='#fff';x.font=`bold ${fontSize||28}px "Segoe UI",system-ui,sans-serif`;
+  x.textAlign='center';x.textBaseline='middle';x.fillText(text,w/2,h/2);
+  return new THREE.CanvasTexture(c);
+}
+
+function roomWhiteboard(c, progress) {
+  const cv=document.createElement('canvas');cv.width=320;cv.height=200;
+  const x=cv.getContext('2d');
+  x.fillStyle='#f8f6f2';x.fillRect(0,0,320,200);
+  x.strokeStyle='#ddd';x.lineWidth=1;x.strokeRect(2,2,316,196);
+  // Room number
+  x.fillStyle='#DC2626';x.font='bold 28px "Segoe UI",sans-serif';x.fillText('Room '+c.room,16,36);
+  // Acuity badge
+  const acCol = c.acuity==='critical'?'#DC2626':'#D97706';
+  x.fillStyle=acCol;x.font='bold 12px "Segoe UI",sans-serif';
+  const aw=x.measureText(c.acuity.toUpperCase()).width;
+  x.fillRect(240,14,aw+16,22);x.fillStyle='#fff';x.fillText(c.acuity.toUpperCase(),248,30);
+  // Patient name
+  x.fillStyle='#222';x.font='600 16px "Segoe UI",sans-serif';x.fillText(c.name+', '+c.age+c.sex,16,70);
+  // CC
+  x.fillStyle='#666';x.font='14px "Segoe UI",sans-serif';x.fillText('CC: '+c.cc,16,95);
+  // ESI
+  x.fillStyle='#888';x.font='12px "Segoe UI",sans-serif';x.fillText('ESI Level '+c.esi,16,118);
+  // Vitals summary
+  x.fillStyle='#444';x.font='11px "Segoe UI",monospace';
+  x.fillText(`HR ${c.vitals.hr} · BP ${c.vitals.bp} · RR ${c.vitals.rr} · SpO₂ ${c.vitals.spo2}%`,16,148);
+  x.fillText(`Temp ${c.vitals.temp}`,16,166);
+  // Dynamic status indicators
+  if(progress){
+    const p=progress;
+    x.font='bold 10px "Segoe UI",sans-serif';let sx=16;
+    [['Hx',p.hx],['PE',p.exam],['Labs',p.labs],['Img',p.imaging],['Tx',p.tx],['Dispo',p.dispo]].forEach(([lbl,done])=>{
+      x.fillStyle=done?'#059669':'#ccc';
+      x.fillRect(sx,176,x.measureText(lbl).width+10,16);
+      x.fillStyle=done?'#fff':'#888';x.fillText(lbl,sx+5,188);
+      sx+=x.measureText(lbl).width+14;
+    });
+  }
+  return new THREE.CanvasTexture(cv);
+}
+
+// ═══ BUILD ED ENVIRONMENT ═══
+function buildED() {
+  const ft=floorTex(), wt=wallTex(), ct=ceilTex();
+  const wMat=new THREE.MeshStandardMaterial({map:wt,roughness:.85});
+  const fMat=new THREE.MeshStandardMaterial({map:ft,roughness:.7,metalness:.05});
+  const cMat=new THREE.MeshStandardMaterial({map:ct,roughness:.9});
+  const H=3.2, W=0.25;
+
+  // Corridor: runs along Z axis, -18 to 18
+  const corrL=36, corrW=5;
+
+  // Floor
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(corrW+12,corrL+10),fMat);
+  floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+  // Ceiling
+  const ceil=new THREE.Mesh(new THREE.PlaneGeometry(corrW+12,corrL+10),cMat);
+  ceil.rotation.x=Math.PI/2;ceil.position.y=H;scene.add(ceil);
+
+  function wall(x,z,w,d,mat){
+    const m=new THREE.Mesh(new THREE.BoxGeometry(w,H,d),mat||wMat);
+    m.position.set(x,H/2,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m;
+  }
+
+  // Corridor walls (with door openings for each room)
+  const roomSpacing = 4.5;
+  const doorW = 2;
+  const startZ = -13.5;
+
+  // Build walls on left side (x = -corrW/2) and right side (x = corrW/2)
+  // Each side has 4 rooms
+  [-1, 1].forEach(side => {
+    const wx = side * (corrW/2 + W/2);
+    let lastZ = -18;
+    for (let i = 0; i < 4; i++) {
+      const roomZ = startZ + i * roomSpacing;
+      // Wall segment before door
+      const segEnd = roomZ - doorW/2;
+      if (segEnd > lastZ) {
+        wall(wx, (lastZ+segEnd)/2, W, segEnd-lastZ);
+      }
+      lastZ = roomZ + doorW/2;
+    }
+    // Wall segment after last door
+    wall(wx, (lastZ+18)/2, W, 18-lastZ);
+  });
+
+  // End walls
+  wall(0, -18-W/2, corrW+W*2, W);
+  wall(0, 18+W/2, corrW+W*2, W);
+
+  // ═══ ROOMS + DOORS ═══
+  CASES.forEach((c, i) => {
+    const side = i < 4 ? -1 : 1;
+    const idx = i < 4 ? i : i - 4;
+    const rz = startZ + idx * roomSpacing;
+    const rx = side * (corrW/2 + 0.1);
+    const acCol = c.acuity==='critical' ? 0xDC2626 : 0xD97706;
+
+    // Door
+    const doorMat = new THREE.MeshStandardMaterial({color:acCol,roughness:.4,metalness:.15,emissive:acCol,emissiveIntensity:0.05});
+    const door = new THREE.Mesh(new THREE.BoxGeometry(W+0.05, 2.5, doorW-0.1), doorMat);
+    door.position.set(rx, 1.25, rz);
+    door.castShadow=true; scene.add(door);
+
+    // Door frame
+    const frameMat = new THREE.MeshStandardMaterial({color:0x444444,roughness:.5,metalness:.3});
+    const topF=new THREE.Mesh(new THREE.BoxGeometry(W+0.15,0.15,doorW+0.1),frameMat);
+    topF.position.set(rx,2.55,rz);scene.add(topF);
+
+    // Glass window in door
+    const glass=new THREE.Mesh(new THREE.PlaneGeometry(doorW*0.5,0.6),
+      new THREE.MeshStandardMaterial({color:0xaaccee,transparent:true,opacity:.3,roughness:.05,metalness:.2}));
+    glass.position.set(rx + side*0.15, 1.8, rz);
+    if(side===-1)glass.rotation.y=Math.PI/2; else glass.rotation.y=-Math.PI/2;
+    scene.add(glass);
+
+    // Room light (visible through door)
+    const roomLight = new THREE.PointLight(0xfff5e6, 0.3, 6);
+    roomLight.position.set(rx + side*2, 2.8, rz);
+    scene.add(roomLight);
+
+    // Whiteboard next to door (on corridor wall)
+    const wb = roomWhiteboard(c);
+    const wbMesh = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.88), new THREE.MeshBasicMaterial({map:wb}));
+    const wbX = rx;
+    const wbZ = rz + (idx%2===0 ? doorW/2+0.8 : -doorW/2-0.8);
+    wbMesh.position.set(rx - side*0.01, 1.6, wbZ);
+    if(side===-1) wbMesh.rotation.y = Math.PI/2;
+    else wbMesh.rotation.y = -Math.PI/2;
+    scene.add(wbMesh);
+
+    // Acuity light above door
+    const dLight = new THREE.PointLight(acCol, 0.4, 4);
+    dLight.position.set(rx, 2.7, rz);
+    scene.add(dLight);
+
+    // Floor stripe to door
+    const stripe = new THREE.Mesh(new THREE.PlaneGeometry(side===-1?1.5:1.5, 0.15),
+      new THREE.MeshBasicMaterial({color:acCol,transparent:true,opacity:.35}));
+    stripe.rotation.x=-Math.PI/2;
+    stripe.position.set(rx + side*-0.75, 0.01, rz);
+    scene.add(stripe);
+
+    // Interactable
+    interactables.push({
+      type:'room', caseIdx:i,
+      name:'Room '+c.room+' — '+c.name,
+      sub:c.cc+' · '+c.acuity.toUpperCase(),
+      pos:new THREE.Vector3(rx - side*1.2, 0, rz),
+      radius:2.5,
+      action:()=>enterRoom(i),
+      doorMesh:door, light:dLight
+    });
+  });
+
+  // ═══ NURSES STATION (center of corridor) ═══
+  const nsMat = new THREE.MeshStandardMaterial({color:0x2a3040,roughness:.4,metalness:.1});
+  // Desk
+  const nsDesk = new THREE.Mesh(new THREE.BoxGeometry(3,1,1.2), nsMat);
+  nsDesk.position.set(0,0.5,0);nsDesk.castShadow=true;scene.add(nsDesk);
+  // Desk top
+  const nsTop = new THREE.Mesh(new THREE.BoxGeometry(3.1,.04,1.3),
+    new THREE.MeshStandardMaterial({color:0x1a2030,roughness:.3,metalness:.15}));
+  nsTop.position.set(0,1.02,0);scene.add(nsTop);
+
+  // Monitor on desk
+  const monMat = new THREE.MeshStandardMaterial({color:0x111111,roughness:.2,metalness:.5});
+  const mon = new THREE.Mesh(new THREE.BoxGeometry(0.8,0.5,0.05),monMat);
+  mon.position.set(-0.5,1.5,0.2);scene.add(mon);
+  const monScreen = new THREE.Mesh(new THREE.PlaneGeometry(0.7,0.4),
+    new THREE.MeshBasicMaterial({color:0x1a3050}));
+  monScreen.position.set(-0.5,1.5,0.17);scene.add(monScreen);
+  // Second monitor
+  const mon2 = new THREE.Mesh(new THREE.BoxGeometry(0.8,0.5,0.05),monMat);
+  mon2.position.set(0.5,1.5,0.2);scene.add(mon2);
+
+  // "NURSES STATION" sign
+  const nsTex = textLabel('NURSES STATION', 0x2874A6, 20, 400, 60);
+  const nsSign = new THREE.Mesh(new THREE.PlaneGeometry(2,0.3),new THREE.MeshBasicMaterial({map:nsTex,side:THREE.DoubleSide}));
+  nsSign.position.set(0,2.6,0); scene.add(nsSign);
+
+  // ED ENTRANCE sign at south end
+  const edTex = textLabel('EMERGENCY DEPARTMENT', 0xDC2626, 24, 512, 72);
+  const edSign = new THREE.Mesh(new THREE.PlaneGeometry(2.8,0.38),new THREE.MeshBasicMaterial({map:edTex}));
+  edSign.position.set(0,2.6,17.5);scene.add(edSign);
+
+  // ═══ TRIAGE AREA (south end of corridor) ═══
+  const triageMat=new THREE.MeshStandardMaterial({color:0x2a3848,roughness:.4,metalness:.1});
+  const triageDesk=new THREE.Mesh(new THREE.BoxGeometry(2.2,1,0.8),triageMat);
+  triageDesk.position.set(0,0.5,15.5);triageDesk.castShadow=true;scene.add(triageDesk);
+  const triageTop=new THREE.Mesh(new THREE.BoxGeometry(2.3,.04,.9),new THREE.MeshStandardMaterial({color:0x3a4858,roughness:.25,metalness:.12}));
+  triageTop.position.set(0,1.02,15.5);scene.add(triageTop);
+  // Triage sign
+  const triTex=textLabel('TRIAGE',0xD97706,18,280,50);
+  const triSign=new THREE.Mesh(new THREE.PlaneGeometry(1.4,0.25),new THREE.MeshBasicMaterial({map:triTex,side:THREE.DoubleSide}));
+  triSign.position.set(0,2.6,16);scene.add(triSign);
+  // Clipboard on triage desk
+  const clipMat=new THREE.MeshStandardMaterial({color:0x8B7355,roughness:.5});
+  const clip=new THREE.Mesh(new THREE.BoxGeometry(0.2,0.02,0.3),clipMat);clip.position.set(0.4,1.04,15.5);scene.add(clip);
+  const clipPaper=new THREE.Mesh(new THREE.BoxGeometry(0.18,0.005,0.26),new THREE.MeshStandardMaterial({color:0xf0ece0,roughness:.8}));
+  clipPaper.position.set(0.4,1.06,15.5);scene.add(clipPaper);
+  // BP cuff on desk
+  const bpCuff=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,0.12,8),new THREE.MeshStandardMaterial({color:0x1a3050,roughness:.6}));
+  bpCuff.position.set(-0.6,1.08,15.5);scene.add(bpCuff);
+
+  // ═══ NPC: TRIAGE NURSE ═══
+  const skinM=new THREE.MeshStandardMaterial({color:0xc49a70,roughness:.7});
+  const scrubM=new THREE.MeshStandardMaterial({color:0x2a6848,roughness:.65});
+  function addNPC(px,pz,rotY,scrubColor,skinColor,hairColor){
+    const g=new THREE.Group();g.position.set(px,0,pz);if(rotY)g.rotation.y=rotY;
+    const sc=new THREE.MeshStandardMaterial({color:scrubColor||0x2a6848,roughness:.65});
+    const sk=new THREE.MeshStandardMaterial({color:skinColor||0xc49a70,roughness:.7});
+    const hr=new THREE.MeshStandardMaterial({color:hairColor||0x2a1a0a,roughness:.85});
+    // Body
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.36,0.52,0.22),sc),{position:new THREE.Vector3(0,1.38,0)}));
+    // Head
+    g.add(Object.assign(new THREE.Mesh(new THREE.SphereGeometry(0.11,10,8),sk),{position:new THREE.Vector3(0,1.78,0)}));
+    // Hair
+    const h=new THREE.Mesh(new THREE.SphereGeometry(0.12,10,8),hr);h.position.set(0,1.81,-0.02);h.scale.set(1,0.78,0.9);g.add(h);
+    // Arms
+    [-0.22,0.22].forEach(s=>{g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.09,0.36,0.1),sc),{position:new THREE.Vector3(s,1.24,0)}));});
+    // Legs
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.3,0.52,0.18),sc),{position:new THREE.Vector3(0,0.72,0)}));
+    // Shoes
+    [-0.08,0.08].forEach(s=>{g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.1,0.05,0.15),new THREE.MeshStandardMaterial({color:0x222222,roughness:.5})),{position:new THREE.Vector3(s,0.025,0.02)}));});
+    // Badge
+    g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(0.07,0.09,0.005),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.5})),{position:new THREE.Vector3(0.1,1.5,0.12)}));
+    scene.add(g);return g;
+  }
+  addNPC(0,14.8,Math.PI,0x2a6848,0xc49a70,0x1a0a00); // Triage nurse
+  addNPC(-1.5,2,Math.PI*0.3,0x3a7aaa,0xd4a888,0x3a2a10); // Nurse at station
+  addNPC(1.8,-8,Math.PI*0.7,0xf0f0e8,0xb08860,0x2a1a0a); // Doctor in corridor (white coat)
+  addNPC(-1.2,-4,Math.PI*1.5,0x6a2d8a,0xc4a080,0x0a0a0a); // Tech in purple scrubs
+
+  // ═══ VISIBLE ROOM INTERIORS (through door glass) ═══
+  const bedMat=new THREE.MeshStandardMaterial({color:0xd0ccc4,roughness:.6});
+  const bedFrameM=new THREE.MeshStandardMaterial({color:0x999999,roughness:.25,metalness:.45});
+  const ivMat=new THREE.MeshStandardMaterial({color:0xbbbbbb,roughness:.2,metalness:.6});
+  const blanketMat=new THREE.MeshStandardMaterial({color:0x1e6f9f,roughness:.7});
+  const patientMat=new THREE.MeshStandardMaterial({color:0xc4a882,roughness:.7});
+  const gownMat=new THREE.MeshStandardMaterial({color:0x4a7a9a,roughness:.65});
+
+  CASES.forEach((c,i)=>{
+    const side=i<4?-1:1;
+    const idx=i<4?i:i-4;
+    const rz=startZ+idx*roomSpacing;
+    const rx=side*(corrW/2+2.5); // inside room
+
+    // Bed frame
+    const bed=new THREE.Mesh(new THREE.BoxGeometry(0.8,0.06,2),bedMat);
+    bed.position.set(rx,0.75,rz);scene.add(bed);
+    const frame=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.5,1.9),bedFrameM);
+    frame.position.set(rx,0.42,rz);scene.add(frame);
+    // Blanket
+    const bk=new THREE.Mesh(new THREE.BoxGeometry(0.75,0.08,1.3),blanketMat);
+    bk.position.set(rx,0.82,rz+0.2);scene.add(bk);
+    // Pillow
+    const pw=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.06,0.3),new THREE.MeshStandardMaterial({color:0xf0ece6,roughness:.8}));
+    pw.position.set(rx,0.82,rz-0.75);scene.add(pw);
+    // Patient body (simplified)
+    const pHead=new THREE.Mesh(new THREE.SphereGeometry(0.1,8,6),patientMat);
+    pHead.position.set(rx,0.92,rz-0.65);scene.add(pHead);
+    const pBody=new THREE.Mesh(new THREE.BoxGeometry(0.35,0.12,0.8),gownMat);
+    pBody.position.set(rx,0.88,rz-0.1);scene.add(pBody);
+
+    // IV pole
+    const ivPole=new THREE.Mesh(new THREE.CylinderGeometry(0.015,0.015,1.8,6),ivMat);
+    ivPole.position.set(rx+side*-0.3,1.2,rz-0.5);scene.add(ivPole);
+    // IV bag
+    const ivBag=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.15,0.04),new THREE.MeshStandardMaterial({color:0xc8e0f0,transparent:true,opacity:0.7}));
+    ivBag.position.set(rx+side*-0.3,2.0,rz-0.5);scene.add(ivBag);
+    // IV line
+    const ivLine=new THREE.Mesh(new THREE.CylinderGeometry(0.003,0.003,1,4),new THREE.MeshStandardMaterial({color:0x88aacc,transparent:true,opacity:0.5}));
+    ivLine.position.set(rx+side*-0.3,1.4,rz-0.5);scene.add(ivLine);
+
+    // Bedside monitor
+    const monBox=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.25,0.08),new THREE.MeshStandardMaterial({color:0x1a1a1a,roughness:.2,metalness:.4}));
+    monBox.position.set(rx+side*-0.25,1.55,rz+0.7);scene.add(monBox);
+    // Screen glow
+    const monGlow=new THREE.Mesh(new THREE.PlaneGeometry(0.25,0.2),new THREE.MeshBasicMaterial({color:c.acuity==='critical'?0x331111:0x112233}));
+    monGlow.position.set(rx+side*-0.25-side*0.042,1.55,rz+0.7);
+    if(side===-1)monGlow.rotation.y=Math.PI/2;else monGlow.rotation.y=-Math.PI/2;
+    scene.add(monGlow);
+
+    // Curtain rail (thin torus arc above bed)
+    const curtainTrack=new THREE.Mesh(new THREE.TorusGeometry(1.2,0.01,4,16,Math.PI*0.8),
+      new THREE.MeshStandardMaterial({color:0x888888,metalness:0.4}));
+    curtainTrack.position.set(rx,2.8,rz);curtainTrack.rotation.x=Math.PI/2;scene.add(curtainTrack);
+  });
+
+  // ═══ DYNAMIC WHITEBOARD TRACKING ═══
+  // Store whiteboard meshes for later updates
+  window.whiteboardMeshes = {};
+  CASES.forEach((c,i)=>{
+    const side=i<4?-1:1;
+    const idx=i<4?i:i-4;
+    const rz=startZ+idx*roomSpacing;
+    const wbZ=rz+(idx%2===0?doorW/2+0.8:-doorW/2-0.8);
+    // Find the whiteboard (already created) - we'll track by room number
+    // We re-generate these dynamically when state changes
+    window.whiteboardMeshes[c.room]={side,rz,wbZ,caseIdx:i,mesh:null};
+  });
+
+  // ═══ CORRIDOR AMBIENT EFFECTS ═══
+  // Hand sanitizer dispensers
+  const sanitizerMat=new THREE.MeshStandardMaterial({color:0xe0e0e0,roughness:.3,metalness:.15});
+  [6,-6,10,-10].forEach(z=>{
+    const san=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.18,0.08),sanitizerMat);
+    san.position.set(-corrW/2+0.08,1.15,z);scene.add(san);
+  });
+  // Crash cart (red, near nurses station)
+  const crashMat=new THREE.MeshStandardMaterial({color:0xcc2222,roughness:.4,metalness:.15});
+  const crash=new THREE.Mesh(new THREE.BoxGeometry(0.6,0.7,0.4),crashMat);
+  crash.position.set(1.8,0.35,1.5);crash.castShadow=true;scene.add(crash);
+  // Cart wheels
+  [[-0.2,-0.15],[0.2,-0.15],[-0.2,0.15],[0.2,0.15]].forEach(([cx,cz])=>{
+    const w=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,0.03,8),new THREE.MeshStandardMaterial({color:0x333333,metalness:.4}));
+    w.position.set(1.8+cx,0.04,1.5+cz);w.rotation.x=Math.PI/2;scene.add(w);
+  });
+  // "CRASH CART" label
+  const ccTex=textLabel('CRASH CART',0xcc2222,12,200,30);
+  const ccLabel=new THREE.Mesh(new THREE.PlaneGeometry(0.5,0.08),new THREE.MeshBasicMaterial({map:ccTex}));
+  ccLabel.position.set(1.8,0.75,1.72);scene.add(ccLabel);
+
+  // Hallway handrails
+  const railMat=new THREE.MeshStandardMaterial({color:0xa09080,roughness:.3,metalness:.15});
+  [-1,1].forEach(side=>{
+    const rail=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,32,8),railMat);
+    rail.position.set(side*(corrW/2-0.1),0.9,0);rail.rotation.x=Math.PI/2;scene.add(rail);
+  });
+}
+
+// ═══ CORRIDOR AMBIENT AUDIO ═══
+let corridorAudioStarted=false;
+function startCorridorAudio(){
+  if(corridorAudioStarted||!edAudioCtx)return;
+  corridorAudioStarted=true;
+  const gain=edAudioCtx.createGain();gain.gain.value=0.06;gain.connect(edAudioCtx.destination);
+  // HVAC hum
+  const hum=edAudioCtx.createOscillator();hum.type='sine';hum.frequency.value=60;
+  const humG=edAudioCtx.createGain();humG.gain.value=0.08;hum.connect(humG);humG.connect(gain);hum.start();
+  // Periodic distant beep (other rooms)
+  function distantBeep(){
+    setTimeout(()=>{
+      if(!edAudioCtx)return;
+      const o=edAudioCtx.createOscillator();o.type='sine';o.frequency.value=700+Math.random()*300;
+      const g=edAudioCtx.createGain();g.gain.value=0;
+      g.gain.setValueAtTime(0,edAudioCtx.currentTime);
+      g.gain.linearRampToValueAtTime(0.008,edAudioCtx.currentTime+0.02);
+      g.gain.linearRampToValueAtTime(0,edAudioCtx.currentTime+0.1);
+      o.connect(g);g.connect(gain);o.start();o.stop(edAudioCtx.currentTime+0.15);
+      distantBeep();
+    },(3+Math.random()*8)*1000);
+  }
+  distantBeep();
+  // PA chime occasionally
+  function paChime(){
+    setTimeout(()=>{
+      if(!edAudioCtx)return;
+      [523.25,659.25,783.99].forEach((f,i)=>{
+        setTimeout(()=>{
+          const o=edAudioCtx.createOscillator();o.type='sine';o.frequency.value=f;
+          const g2=edAudioCtx.createGain();g2.gain.value=0;
+          g2.gain.setValueAtTime(0,edAudioCtx.currentTime);
+          g2.gain.linearRampToValueAtTime(0.012,edAudioCtx.currentTime+0.04);
+          g2.gain.linearRampToValueAtTime(0,edAudioCtx.currentTime+0.5);
+          o.connect(g2);g2.connect(gain);o.start();o.stop(edAudioCtx.currentTime+0.6);
+        },i*300);
+      });
+      paChime();
+    },(25+Math.random()*50)*1000);
+  }
+  paChime();
+}
+
+// ═══ LIGHTING ═══
+function buildLights() {
+  scene.add(new THREE.AmbientLight(0xe8e0d4, 0.35));
+  scene.add(new THREE.HemisphereLight(0xf5f0e8, 0xd4cfc8, 0.4));
+  // Fluorescent strips along corridor
+  for(let z=-16; z<=16; z+=4) {
+    const l=new THREE.PointLight(0xfff5e6, 0.4, 8, 2);
+    l.position.set(0, 3.1, z); scene.add(l);
+    // Fixture visual
+    const fix=new THREE.Mesh(new THREE.BoxGeometry(1.2,.03,.2),new THREE.MeshBasicMaterial({color:0xfffff0}));
+    fix.position.set(0,3.15,z);scene.add(fix);
+  }
+}
+
+// ═══ ED BOARD CHIPS ═══
+function buildBoardChips() {
+  const inner = document.getElementById('ed-board-inner');
+  CASES.forEach(c => {
+    const chip = document.createElement('div');
+    chip.className = 'board-chip occupied';
+    chip.innerHTML = `<span class="chip-room">R${c.room}</span> ${c.name.split(' ')[1]} · ${c.cc}`;
+    inner.appendChild(chip);
+  });
+}
+
+// ═══ CONTROLS ═══
+function setupControls() {
+  document.addEventListener('pointerlockchange', () => {
+    locked = document.pointerLockElement === renderer.domElement;
+    const show = locked ? 'block' : 'none';
+    document.getElementById('hud').style.display = locked?'flex':'none';
+    document.getElementById('crosshair').style.display = show;
+    document.getElementById('minimap').style.display = show;
+    document.getElementById('ed-board').style.display = locked ? 'block' : 'none';
+    if(!locked) {
+      // Show splash as pause screen if not in room view
+      if(document.getElementById('room-view').style.display !== 'flex') {
+        const sp = document.getElementById('splash');
+        sp.style.display='flex';
+        sp.querySelector('h1 span').textContent = '▶ Resume';
+        sp.querySelector('.sub').textContent = 'Click to resume your shift.';
+        sp.querySelector('.enter-btn').textContent = '▶ Resume';
+      }
+    }
+  });
+  document.addEventListener('mousemove', e => {
+    if(!locked)return;
+    euler.setFromQuaternion(camera.quaternion);
+    euler.y -= e.movementX * MOUSE_SENS;
+    euler.x -= e.movementY * MOUSE_SENS;
+    euler.x = Math.max(-Math.PI/2.5, Math.min(Math.PI/2.5, euler.x));
+    camera.quaternion.setFromEuler(euler);
+  });
+  document.addEventListener('keydown', e => {
+    switch(e.code){
+      case 'KeyW':case 'ArrowUp':moveState.f=1;break;
+      case 'KeyS':case 'ArrowDown':moveState.b=1;break;
+      case 'KeyA':case 'ArrowLeft':moveState.l=1;break;
+      case 'KeyD':case 'ArrowRight':moveState.r=1;break;
+      case 'KeyE':if(currentTarget)currentTarget.action();break;
+    }
+  });
+  document.addEventListener('keyup', e => {
+    switch(e.code){
+      case 'KeyW':case 'ArrowUp':moveState.f=0;break;
+      case 'KeyS':case 'ArrowDown':moveState.b=0;break;
+      case 'KeyA':case 'ArrowLeft':moveState.l=0;break;
+      case 'KeyD':case 'ArrowRight':moveState.r=0;break;
+    }
+  });
+  document.addEventListener('click', () => {
+    if(!locked) return;
+    if(currentTarget) currentTarget.action();
+  });
+  window.addEventListener('resize', () => {
+    camera.aspect=innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  });
+}
+
+// ═══ COLLISION ═══
+function canMove(x,z) {
+  return Math.abs(x) < 2.2 && z > -17.5 && z < 17.5;
+}
+
+// ═══ MINIMAP ═══
+function drawMinimap() {
+  const ctx=minimapCtx, s=160, sc=3.8;
+  ctx.fillStyle='rgba(10,14,20,.88)';ctx.fillRect(0,0,s,s);
+  ctx.save();ctx.translate(s/2,s/2);
+  // Corridor
+  ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=1;
+  ctx.strokeRect(-2.5*sc,-18*sc,5*sc,36*sc);
+  // Rooms
+  CASES.forEach((c,i)=>{
+    const side=i<4?-1:1, idx=i<4?i:i-4;
+    const rz=-13.5+idx*4.5;
+    const acCol=c.acuity==='critical'?'#DC2626':'#D97706';
+    ctx.fillStyle=acCol;
+    ctx.fillRect((side*2.5-0.4-playerPos.x)*sc,(rz-0.4-playerPos.z)*sc,0.8*sc,0.8*sc);
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='7px sans-serif';ctx.textAlign='center';
+    ctx.fillText(c.room,(side*2.5-playerPos.x)*sc,(rz+0.15-playerPos.z)*sc);
+  });
+  // Player
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc((-playerPos.x)*sc,(-playerPos.z)*sc,3,0,Math.PI*2);ctx.fill();
+  // Direction
+  const dir=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);
+  ctx.strokeStyle='#7DD3FC';ctx.lineWidth=2;ctx.beginPath();
+  ctx.moveTo((-playerPos.x)*sc,(-playerPos.z)*sc);
+  ctx.lineTo((-playerPos.x+dir.x*2)*sc,(-playerPos.z+dir.z*2)*sc);ctx.stroke();
+  ctx.restore();
+}
+
+// ═══ ANIMATE ═══
+function animate() {
+  requestAnimationFrame(animate);
+  const dt=Math.min(clock.getDelta(),.1);
+  if(locked) {
+    const fwd=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);
+    fwd.y=0;fwd.normalize();
+    const rt=new THREE.Vector3(1,0,0).applyQuaternion(camera.quaternion);
+    rt.y=0;rt.normalize();
+    const v=new THREE.Vector3();
+    if(moveState.f)v.add(fwd);if(moveState.b)v.sub(fwd);
+    if(moveState.r)v.add(rt);if(moveState.l)v.sub(rt);
+    if(v.length()>0){
+      v.normalize().multiplyScalar(MOVE_SPEED*dt);
+      const nx=playerPos.x+v.x,nz=playerPos.z+v.z;
+      if(canMove(nx,nz)){playerPos.x=nx;playerPos.z=nz}
+      else if(canMove(nx,playerPos.z))playerPos.x=nx;
+      else if(canMove(playerPos.x,nz))playerPos.z=nz;
+    }
+    playerPos.y=PLAYER_H+(v.length()>0.001?Math.sin(clock.elapsedTime*8)*0.015:0);
+    camera.position.copy(playerPos);
+
+    // Interactable check
+    currentTarget=null;
+    let closest=null,cDist=99;
+    interactables.forEach(it=>{
+      const d=playerPos.distanceTo(new THREE.Vector3(it.pos.x,PLAYER_H,it.pos.z));
+      if(d<it.radius&&d<cDist){closest=it;cDist=d}
+      if(it.light)it.light.intensity=d<it.radius?0.8+Math.sin(clock.elapsedTime*3)*0.2:0.4;
+      if(it.doorMesh)it.doorMesh.material.emissiveIntensity=d<it.radius?0.15+Math.sin(clock.elapsedTime*2)*0.05:0.05;
+    });
+    const pr=document.getElementById('interact-prompt');
+    if(closest){
+      currentTarget=closest;pr.style.display='block';
+      pr.querySelector('.pname').textContent=closest.name;
+      pr.querySelector('.psub').textContent=closest.sub;
+    }else{pr.style.display='none'}
+    drawMinimap();
+  }
+  renderer.render(scene,camera);
+}
+
+// ═══════════════════════════════════════
+// ROOM VIEW — 2D PATIENT INTERACTION
+// ═══════════════════════════════════════
+let currentCase = null;
+let examState = {}; // track which systems examined
+let questionState = {}; // track which questions asked
+
+function enterRoom(idx) {
+  currentCase = CASES[idx];
+
+  initEDAudio();
+
+  // ═══ CINEMATIC TRANSITION ═══
+  // Fade 3D view to black, then reveal room
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:#0a0e14;z-index:150;opacity:0;transition:opacity 0.4s;pointer-events:none';
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.style.opacity = '1');
+
+  // Exit pointer lock during transition
+  document.exitPointerLock();
+  document.getElementById('splash').style.display = 'none';
+
+  setTimeout(() => {
+    document.getElementById('room-view').style.display = 'block';
+
+    // Header
+    document.getElementById('rv-room').textContent = 'Room ' + currentCase.room;
+    document.getElementById('rv-name').textContent = currentCase.name + ', ' + currentCase.age + currentCase.sex;
+    document.getElementById('rv-cc').textContent = 'CC: ' + currentCase.cc;
+    const acBadge = document.getElementById('rv-acuity');
+    acBadge.textContent = currentCase.acuity.toUpperCase() + ' · ESI ' + currentCase.esi;
+    acBadge.style.background = currentCase.acuity==='critical' ? 'rgba(220,38,38,.15)' : 'rgba(217,119,6,.15)';
+    acBadge.style.color = currentCase.acuity==='critical' ? '#EF4444' : '#FBBF24';
+
+    // Vitals monitor
+    renderVitalsMonitor();
+    startECGWave();
+
+    // Reset panels
+    showPanel(null);
+    document.querySelectorAll('.action-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('panel-empty').style.display = 'block';
+
+    startRoomBeeps();
+    updateProgress();
+
+    // Fade overlay out
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 400);
+    });
+  }, 450);
+}
+
+function exitRoom() {
+  // Save patient state before exiting (for cross-module continuity)
+  if(currentCase) savePatientState();
+
+  // Smooth fade transition back to 3D
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:#0a0e14;z-index:150;opacity:0;transition:opacity 0.3s;pointer-events:none';
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.style.opacity = '1');
+
+  setTimeout(() => {
+    document.getElementById('room-view').style.display = 'none';
+    currentCase = null;
+    stopECGWave();
+    stopRoomBeeps();
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 300);
+    });
+    // Re-enter 3D
+    setTimeout(() => renderer.domElement.requestPointerLock(), 150);
+  }, 350);
+}
+
+function openFullEMR() {
+  // Navigate to the full ED Board with this patient's room number as context
+  const roomNum = currentCase ? currentCase.room : 1;
+  window.location.href = 'legacy/ed-board-v2.html?room=' + roomNum;
+}
+
+function renderVitalsMonitor() {
+  const v = currentCase.vitals;
+  const rows = document.getElementById('vm-rows');
+  const data = [
+    {label:'HR',val:v.hr,unit:'bpm',status:v.hr>100||v.hr<60?'warn':'normal'},
+    {label:'BP',val:v.bp,unit:'mmHg',status:parseInt(v.bp)>140?'warn':'normal'},
+    {label:'RR',val:v.rr,unit:'/min',status:v.rr>20?'warn':'normal'},
+    {label:'SpO₂',val:v.spo2+'%',unit:'',status:v.spo2<94?'critical':v.spo2<96?'warn':'normal'},
+    {label:'Temp',val:v.temp,unit:'',status:parseFloat(v.temp)>100.4?'warn':'normal'}
+  ];
+  rows.innerHTML = data.map(d=>
+    `<div class="vm-row"><span class="vm-label">${d.label}</span><span class="vm-val ${d.status}">${d.val} <span style="font-size:9px;opacity:.5">${d.unit}</span></span></div>`
+  ).join('');
+}
+
+// ECG wave animation
+let ecgAnim = null;
+function startECGWave() {
+  const canvas = document.getElementById('ecg-wave');
+  const ctx = canvas.getContext('2d');
+  let x = 0;
+  const hr = currentCase.vitals.hr;
+  const beatLen = Math.round(176 * (60/hr) / 2);
+
+  function draw() {
+    ctx.fillStyle = 'rgba(0,0,0,.15)';
+    ctx.fillRect(x, 0, 3, 24);
+    // Simple ECG pattern
+    const phase = x % beatLen;
+    const mid = 12;
+    let y = mid;
+    if (phase > beatLen*0.4 && phase < beatLen*0.45) y = mid - 8; // R wave
+    else if (phase > beatLen*0.45 && phase < beatLen*0.5) y = mid + 4; // S wave
+    else if (phase > beatLen*0.6 && phase < beatLen*0.7) y = mid - 2; // T wave
+    else y = mid + Math.random()*0.5;
+
+    ctx.fillStyle = '#34D399';
+    ctx.fillRect(x, y, 1.5, 1.5);
+
+    x = (x + 1) % 176;
+    if(x === 0) { ctx.clearRect(0,0,176,24); }
+    ecgAnim = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function stopECGWave() { if(ecgAnim) cancelAnimationFrame(ecgAnim); }
+
+// ═══ PANEL SWITCHING ═══
+function showPanel(panel) {
+  ['talk','exam','vitals','labs','imaging','treatment','dispo'].forEach(p => {
+    document.getElementById('panel-'+p).style.display = p===panel ? 'block' : 'none';
+  });
+  document.getElementById('panel-empty').style.display = panel ? 'none' : 'block';
+  document.querySelectorAll('.action-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.panel === panel);
+  });
+  if(panel) renderPanel(panel);
+}
+
+function renderPanel(panel) {
+  const el = document.getElementById('panel-'+panel);
+  const c = currentCase;
+  switch(panel) {
+    case 'talk': renderTalkPanel(el, c); break;
+    case 'exam': renderExamPanel(el, c); break;
+    case 'vitals': renderVitalsPanel(el, c); break;
+    case 'labs': renderLabsPanel(el, c); break;
+    case 'imaging': renderImagingPanel(el, c); break;
+    case 'treatment': renderTreatmentPanel(el, c); break;
+    case 'dispo': renderDispoPanel(el, c); break;
+  }
+  updateProgress();
+}
+
+// ═══ TALK PANEL ═══
+function renderTalkPanel(el, c) {
+  let html = '<h3><span class="sec-icon">💬</span> Patient Interview</h3>';
+  // Show asked questions/answers first
+  c.questions.forEach((q,i) => {
+    if(questionState[c.room+'-'+i]) {
+      html += `<div class="dialogue-bubble"><div class="speaker you">You</div>${q.q}</div>`;
+      html += `<div class="dialogue-bubble"><div class="speaker patient">${c.name}</div>${q.a}</div>`;
+    }
+  });
+  // Show remaining questions as buttons
+  const remaining = c.questions.filter((_,i) => !questionState[c.room+'-'+i]);
+  if(remaining.length) {
+    html += '<div style="margin-top:12px">';
+    c.questions.forEach((q,i) => {
+      const asked = questionState[c.room+'-'+i];
+      html += `<button class="q-btn${asked?' asked':''}" onclick="askQuestion(${i})">${asked?'✓ ':''}"${q.q}"</button>`;
+    });
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function askQuestion(idx) {
+  questionState[currentCase.room+'-'+idx] = true;
+  renderTalkPanel(document.getElementById('panel-talk'), currentCase);
+  updateProgress();
+  savePatientState();
+  // Scroll to bottom
+  const dp = document.getElementById('data-panel');
+  dp.scrollTop = dp.scrollHeight;
+}
+
+// ═══ EXAM PANEL ═══
+function renderExamPanel(el, c) {
+  let html = '<h3><span class="sec-icon">🩺</span> Physical Examination</h3><p style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:14px">Click a body system to examine</p>';
+  html += '<div class="exam-system">';
+  Object.entries(c.exam).forEach(([sys, data]) => {
+    const done = examState[c.room+'-'+sys];
+    html += `<button class="exam-system-btn${done?' examined':''}" onclick="doExam('${sys}')">
+      ${done?'✓ ':''}${sys}
+      ${done?`<div class="exam-finding${data.abnormal?' abnormal':''}">${data.finding}</div>`:''}
+    </button>`;
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function doExam(sys) {
+  examState[currentCase.room+'-'+sys] = true;
+  renderExamPanel(document.getElementById('panel-exam'), currentCase);
+  updateProgress();
+  savePatientState();
+}
+
+// ═══ VITALS PANEL ═══
+function renderVitalsPanel(el, c) {
+  const v = c.vitals;
+  let html = '<h3><span class="sec-icon">📊</span> Vital Signs</h3>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
+  const vitals = [
+    {label:'Heart Rate',val:v.hr+' bpm',icon:'❤️',warn:v.hr>100||v.hr<60},
+    {label:'Blood Pressure',val:v.bp+' mmHg',icon:'🩸',warn:parseInt(v.bp)>140||parseInt(v.bp)<90},
+    {label:'Respiratory Rate',val:v.rr+'/min',icon:'🫁',warn:v.rr>20||v.rr<12},
+    {label:'O₂ Saturation',val:v.spo2+'%',icon:'💨',warn:v.spo2<95},
+    {label:'Temperature',val:v.temp,icon:'🌡️',warn:parseFloat(v.temp)>100.4}
+  ];
+  vitals.forEach(vt => {
+    html += `<div style="background:rgba(255,255,255,.03);border:1px solid ${vt.warn?'rgba(239,68,68,.2)':'rgba(255,255,255,.05)'};border-radius:10px;padding:12px">
+      <div style="font-size:10px;color:rgba(255,255,255,.35);margin-bottom:4px">${vt.icon} ${vt.label}</div>
+      <div style="font-size:20px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${vt.warn?'#EF4444':'#34D399'}">${vt.val}</div>
+    </div>`;
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+// ═══ LABS PANEL ═══
+function renderLabsPanel(el, c) {
+  let html = '<h3><span class="sec-icon">🧪</span> Laboratory Results</h3>';
+  html += '<table class="lab-table"><thead><tr><th>Test</th><th>Value</th><th>Reference</th></tr></thead><tbody>';
+  c.labs.forEach(l => {
+    const cls = l.flag==='high'?'flag-high':l.flag==='low'?'flag-low':'flag-normal';
+    html += `<tr><td style="color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif">${l.name}</td>
+      <td class="${cls}">${l.value}</td>
+      <td style="color:rgba(255,255,255,.25);font-size:10px">${l.ref}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+// ═══ IMAGING PANEL ═══
+function renderImagingPanel(el, c) {
+  let html = '<h3><span class="sec-icon">📷</span> Imaging Results</h3>';
+  c.imaging.forEach(img => {
+    html += `<div class="imaging-card"><div class="img-name">${img.name}</div><div class="img-result">${img.result}</div></div>`;
+  });
+  el.innerHTML = html;
+}
+
+// ═══ TREATMENT PANEL ═══
+function renderTreatmentPanel(el, c) {
+  const tx = TREATMENTS[c.room];
+  if(!tx){el.innerHTML='<div class="empty-state">No treatment data for this case</div>';return;}
+  if(!orderState[c.room])orderState[c.room]=new Set();
+  const ordered = orderState[c.room];
+  let html = '<h3><span class="sec-icon">💊</span> Order Entry</h3>';
+  html += '<p style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:14px">Click to place orders. Select all appropriate interventions.</p>';
+  tx.orders.forEach(cat => {
+    html += `<div class="order-category"><div class="order-cat-title">${cat.cat}</div>`;
+    cat.items.forEach(item => {
+      const isOrdered = ordered.has(item);
+      html += `<div class="order-item${isOrdered?' ordered':''}" onclick="placeOrder('${item.replace(/'/g,"\\'")}')">
+        <div class="ord-check">${isOrdered?'✓':''}</div>
+        <div>${item}</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  const total = tx.orders.reduce((s,cat)=>s+cat.items.length,0);
+  html += `<div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.3);text-align:center">${ordered.size}/${total} orders placed</div>`;
+  el.innerHTML = html;
+}
+
+function placeOrder(item) {
+  if(!orderState[currentCase.room])orderState[currentCase.room]=new Set();
+  const s = orderState[currentCase.room];
+  if(s.has(item))s.delete(item); else s.add(item);
+  playBeep(600,0.02);
+  renderTreatmentPanel(document.getElementById('panel-treatment'), currentCase);
+  updateProgress();
+  savePatientState();
+}
+
+// ═══ DISPOSITION PANEL ═══
+function renderDispoPanel(el, c) {
+  const tx = TREATMENTS[c.room];
+  if(!tx){el.innerHTML='<div class="empty-state">No disposition data for this case</div>';return;}
+  let html = '<h3><span class="sec-icon">🚪</span> Disposition Decision</h3>';
+  html += '<p style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:14px">Where does this patient go next?</p>';
+  const chosen = dispoState[c.room];
+  tx.dispo.forEach((opt,i) => {
+    let cls = 'dispo-option';
+    if(chosen !== undefined){
+      if(opt.correct) cls += ' correct';
+      else if(i === chosen) cls += ' incorrect';
+    }
+    html += `<div class="${cls}" onclick="chooseDispo(${i})" ${chosen!==undefined?'style="pointer-events:none"':''}>
+      <div class="do-title">${opt.text}</div>
+      <div class="do-desc">${opt.desc}</div>
+    </div>`;
+  });
+  html += `<div class="dispo-explain" id="dispo-explain">${tx.dispoExplain}</div>`;
+  el.innerHTML = html;
+  if(chosen !== undefined) el.querySelector('.dispo-explain').style.display = 'block';
+}
+
+function chooseDispo(idx) {
+  dispoState[currentCase.room] = idx;
+  renderDispoPanel(document.getElementById('panel-dispo'), currentCase);
+  updateProgress();
+  // Save patient outcome to localStorage for Night Float / SimRoom continuity
+  savePatientState();
+}
+
+// ═══ CROSS-MODULE STATE (localStorage) ═══
+function savePatientState() {
+  if(!currentCase) return;
+  const r = currentCase.room;
+  const tx = TREATMENTS[r];
+  const state = {
+    room: r,
+    name: currentCase.name,
+    age: currentCase.age,
+    sex: currentCase.sex,
+    cc: currentCase.cc,
+    dx: tx ? (tx.dispo.find(d=>d.correct)||{}).text : '',
+    vitals: currentCase.vitals,
+    ordersPlaced: orderState[r] ? [...orderState[r]] : [],
+    dispoChosen: dispoState[r],
+    dispoCorrect: tx && dispoState[r]!==undefined ? tx.dispo[dispoState[r]].correct : null,
+    progress: getProgress(r),
+    timestamp: Date.now()
+  };
+  try {
+    let patients = JSON.parse(localStorage.getItem('rdx-ed-patients')||'{}');
+    patients[r] = state;
+    localStorage.setItem('rdx-ed-patients', JSON.stringify(patients));
+  } catch(e) {}
+}
 </script>
 </body>
 </html>

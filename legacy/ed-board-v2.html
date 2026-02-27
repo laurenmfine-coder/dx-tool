@@ -4464,18 +4464,13 @@ function renderExam(p) {
         '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">' +
           maneuvers.map(function(m,i){
             var checked = d._selectedManeuvers && d._selectedManeuvers.includes(i);
-            return '<div style="display:flex;align-items:center;gap:5px;font-size:12px;padding:6px 10px;background:white;border:1.5px solid '+(checked?'var(--primary)':'var(--border)')+';border-radius:8px;cursor:pointer;transition:all .15s;user-select:none" onclick="toggleManeuver('+i+')">' +
-              '<span style="display:inline-block;width:14px;height:14px;border:1.5px solid '+(checked?'var(--primary)':'#ccc')+';border-radius:3px;text-align:center;line-height:14px;font-size:10px;background:'+(checked?'var(--primary)':'white')+';color:white">'+(checked?'✓':'')+'</span> '+m+'</div>';
+            return '<label style="display:flex;align-items:center;gap:5px;font-size:12px;padding:6px 10px;background:white;border:1.5px solid '+(checked?'var(--primary)':'var(--border)')+';border-radius:8px;cursor:pointer;transition:all .15s" onclick="toggleManeuver('+i+')">' +
+              '<input type="checkbox" '+(checked?'checked':'')+' style="pointer-events:none"> '+m+'</label>';
           }).join('') +
         '</div>' +
-        (function(){
-          var hasSelected = d._selectedManeuvers && d._selectedManeuvers.length>0;
-          if(hasSelected) {
-            return '<button onclick="performExam(\''+s.key+'\')" style="padding:10px;border-radius:8px;background:var(--primary);color:white;border:none;font-weight:600;font-size:13px;cursor:pointer;transition:all .15s">🩺 Perform Exam ('+d._selectedManeuvers.length+' selected)</button>';
-          } else {
-            return '<button disabled style="padding:10px;border-radius:8px;background:#cbd5e1;color:white;border:none;font-weight:600;font-size:13px;cursor:not-allowed">🩺 Perform Exam — select at least one</button>';
-          }
-        })() +
+        '<button onclick="performExam(\''+s.key+'\')" style="padding:10px;border-radius:8px;background:var(--primary);color:white;border:none;font-weight:600;font-size:13px;cursor:pointer;transition:all .15s" ' +
+          (d._selectedManeuvers && d._selectedManeuvers.length>0 ? '' : 'disabled style="padding:10px;border-radius:8px;background:#cbd5e1;color:white;border:none;font-weight:600;font-size:13px;cursor:not-allowed"') +
+        '>🩺 Perform Exam'+(d._selectedManeuvers && d._selectedManeuvers.length>0 ? ' ('+d._selectedManeuvers.length+' selected)' : ' — select at least one')+'</button>' +
       '</div>';
     }
     return '<div class="exam-system" onclick="expandExam(\''+s.key+'\')">' +
