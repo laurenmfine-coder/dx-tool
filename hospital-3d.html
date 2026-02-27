@@ -688,7 +688,11 @@ function buildHospital(){
     const signTex=makeRoomSign(dept.name,dept.sub,dept.color);
     const signMesh=new THREE.Mesh(new THREE.PlaneGeometry(1.8,0.75),new THREE.MeshBasicMaterial({map:signTex,side:THREE.DoubleSide}));
     signMesh.position.set(dx,doorH+0.55,dz);
-    if(!isXWall)signMesh.rotation.y=Math.PI/2;
+    // Rotate sign to face INTO the hallway based on door orientation
+    if(dept.faceDir==='south') signMesh.rotation.y=Math.PI;
+    else if(dept.faceDir==='east') signMesh.rotation.y=-Math.PI/2;
+    else if(dept.faceDir==='west') signMesh.rotation.y=Math.PI/2;
+    // 'north' = default (faces +Z, into hallway) — no rotation needed
     scene.add(signMesh);
 
     // Sign light (backlit glow)
@@ -1288,11 +1292,21 @@ function animate(){
     }
     // Interactable proximity
     currentTarget=null;let closest=null,cDist=Infinity;
+    // Camera forward direction (xz plane)
+    const camDir=new THREE.Vector3(0,0,-1);camDir.applyEuler(euler);camDir.y=0;camDir.normalize();
     interactables.forEach(item=>{
       const dist=playerPos.distanceTo(new THREE.Vector3(item.pos.x,PLAYER_HEIGHT,item.pos.z));
-      if(dist<item.radius&&dist<cDist){closest=item;cDist=dist}
-      if(item.light)item.light.intensity=dist<item.radius?1.0+Math.sin(clock.elapsedTime*3)*0.2:0.6;
-      if(item.doorMesh)item.doorMesh.material.emissiveIntensity=dist<item.radius?0.12+Math.sin(clock.elapsedTime*2)*0.04:0.02;
+      const inRange=dist<item.radius;
+      // For doors, require player to be roughly facing the interactable
+      let canInteract=inRange&&dist<cDist;
+      if(canInteract&&item.type==='door'){
+        const toItem=new THREE.Vector3(item.pos.x-playerPos.x,0,item.pos.z-playerPos.z).normalize();
+        const dot=camDir.dot(toItem);
+        if(dot<0.25)canInteract=false; // skip if facing away (cos ~75°)
+      }
+      if(canInteract){closest=item;cDist=dist}
+      if(item.light)item.light.intensity=inRange?1.0+Math.sin(clock.elapsedTime*3)*0.2:0.6;
+      if(item.doorMesh)item.doorMesh.material.emissiveIntensity=inRange?0.12+Math.sin(clock.elapsedTime*2)*0.04:0.02;
     });
     const pr=document.getElementById('interact-prompt');
     if(closest){currentTarget=closest;pr.style.display='block';pr.querySelector('.prompt-name').textContent=closest.name;pr.querySelector('.prompt-desc').textContent=closest.sub}
