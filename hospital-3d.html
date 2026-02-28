@@ -191,6 +191,7 @@ let euler=new THREE.Euler(0,0,0,'YXZ');
 let playerPos=new THREE.Vector3(0,PLAYER_HEIGHT,12);
 let locked=false, interactables=[], currentTarget=null, infoPanelOpen=false, animatingDoors=[], minimapCtx;
 let npcList=[], dustParticles=null;
+let checkNPCGreetings=function(){};
 
 // ═══ LOADING PROGRESS ═══
 function updateLoading(pct, msg){
@@ -1186,7 +1187,7 @@ function buildHospitalExtras(){
   ];
   let activeGreeting=null,greetingTimer=null;
 
-  function checkNPCGreetings(){
+  checkNPCGreetings=function(){
     let closestNpc=null,closestDist=Infinity;
     npcGreetings.forEach(npc=>{
       if(!npc.group)return;
