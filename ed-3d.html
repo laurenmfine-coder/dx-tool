@@ -573,15 +573,29 @@ function build(){
     pos:new THREE.Vector3(0,0,bz+2.5),radius:4.5,action:openBoard});
 
   // ═══ HALLWAY PROPS ═══
-  // Handrails
+  // Handrails (segmented — gap at each doorway)
   const rlM=new THREE.MeshStandardMaterial({color:0xa09080,roughness:0.3,metalness:0.15});
   [-1,1].forEach(side=>{
     const rx=side*(HW-0.06);
-    const rl=new THREE.Mesh(new THREE.CylinderGeometry(0.016,0.016,HL*2-2,8),rlM);
-    rl.position.set(rx,0.92,0);rl.rotation.x=Math.PI/2;scene.add(rl);
-    for(let bz=-HL+1;bz<HL;bz+=2.2){
-      const br=new THREE.Mesh(new THREE.BoxGeometry(0.035,0.09,0.035),rlM);br.position.set(rx,0.92,bz);scene.add(br);
+    // Build segments between door openings (same logic as walls)
+    let zStart=-HL+0.5;
+    const segs=[];
+    for(let i=0;i<RZ.length;i++){
+      const doorStart=RZ[i]-DW/2-0.08;
+      const doorEnd=RZ[i]+DW/2+0.08;
+      if(doorStart>zStart+0.05) segs.push([zStart,doorStart]);
+      zStart=doorEnd;
     }
+    if(zStart<HL-0.5) segs.push([zStart,HL-0.5]);
+    segs.forEach(([z0,z1])=>{
+      const len=z1-z0;
+      const cz=(z0+z1)/2;
+      const rl=new THREE.Mesh(new THREE.CylinderGeometry(0.016,0.016,len,8),rlM);
+      rl.position.set(rx,0.92,cz);rl.rotation.x=Math.PI/2;scene.add(rl);
+      for(let bz=z0+0.3;bz<z1-0.1;bz+=2.2){
+        const br=new THREE.Mesh(new THREE.BoxGeometry(0.035,0.09,0.035),rlM);br.position.set(rx,0.92,bz);scene.add(br);
+      }
+    });
   });
   // Fluorescent lights
   for(let fz=-HL+2;fz<HL;fz+=3){
