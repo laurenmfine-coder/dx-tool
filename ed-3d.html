@@ -603,7 +603,7 @@ function build(){
     eg.fillStyle='#cc0000';eg.fillRect(0,0,160,50);eg.fillStyle='#fff';eg.font='bold 26px sans-serif';eg.textAlign='center';eg.textBaseline='middle';eg.fillText('EXIT',80,27);
     const s=new THREE.Mesh(new THREE.PlaneGeometry(0.45,0.14),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(ec),side:THREE.DoubleSide}));
     s.position.set(x,2.95,z);if(ry)s.rotation.y=ry;scene.add(s);
-    scene.add(Object.assign(new THREE.PointLight(0xff2222,0.1,2.5),{position:new THREE.Vector3(x,2.95,z)}));
+    const el=new THREE.PointLight(0xff2222,0.1,2.5);el.position.set(x,2.95,z);scene.add(el);
   }
   exitSign(0,HL-0.4,0);exitSign(0,-HL+0.4,0);
   // Crash cart
