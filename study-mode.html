@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+// Auth Guard - DISABLED for launch (free access)
+// Auth guard disabled for free launch period</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Study Mode — clinical reasoning education platform for medical students and healthcare professionals.">
+<title>Study Mode - ReasonDx</title>
+    
+    <link rel="stylesheet" >
+    <style>
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--dx-space-8);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--dx-space-8);
+        }
+
+        .page-header h1 {
+            font-size: var(--dx-text-4xl);
+            font-weight: 700;
+            margin-bottom: var(--dx-space-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--dx-space-3);
+        }
+
+        .page-header p {
+            color: var(--dx-text-secondary);
+            font-size: var(--dx-text-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto var(--dx-space-8);
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--dx-space-4) var(--dx-space-6);
+            padding-left: 3rem;
+            font-size: var(--dx-text-lg);
+            border: 2px solid var(--dx-border-light);
+            border-radius: var(--dx-radius-xl);
+            background: var(--dx-bg-primary);
+            transition: all var(--dx-transition-fast);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--dx-primary);
+            box-shadow: 0 0 0 4px var(--dx-primary-light);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            color: var(--dx-text-muted);
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--dx-space-2);
+            margin-bottom: var(--dx-space-8);
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: var(--dx-space-2) var(--dx-space-4);
+            border-radius: var(--dx-radius-full);
+            border: 1px solid var(--dx-border-light);
+            background: var(--dx-bg-primary);
+            font-weight: 500;
+            font-size: var(--dx-text-sm);
+            cursor: pointer;
+            transition: all var(--dx-transition-fast);
+            color: var(--dx-text-secondary);
+        }
+
+        .filter-tab:hover {
+            border-color: var(--dx-primary);
+            color: var(--dx-primary);
+        }
+
+        .filter-tab.active {
+            background: var(--dx-primary);
+            color: white;
+            border-color: var(--dx-primary);
+        }
+
+        /* Topic Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--dx-space-6);
+        }
+
+        .topic-card {
+            background: var(--dx-bg-primary);
+            border-radius: var(--dx-radius-xl);
+            border: 1px solid var(--dx-border-light);
+            overflow: hidden;
+            transition: all var(--dx-transition-base);
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--dx-shadow-xl);
+            border-color: var(--dx-primary);
+        }
+
+        .topic-card-header {
+            padding: var(--dx-space-5);
+            display: flex;
+            align-items: center;
+            gap: var(--dx-space-4);
+        }
+
+        .topic-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--dx-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+
+        .topic-info h3 {
+            font-size: var(--dx-text-lg);
+            font-weight: 600;
+            margin-bottom: var(--dx-space-1);
+        }
+
+        .topic-category {
+            font-size: var(--dx-text-sm);
+            color: var(--dx-text-muted);
+        }
+
+        .topic-resources {
+            padding: 0 var(--dx-space-5) var(--dx-space-5);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--dx-space-2);
+        }
+
+        .resource-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--dx-space-1);
+            padding: var(--dx-space-1) var(--dx-space-3);
+            border-radius: var(--dx-radius-full);
+            font-size: var(--dx-text-xs);
+            font-weight: 500;
+        }
+
+        .resource-badge.deep-dive {
+            background: var(--dx-primary-light);
+            color: var(--dx-primary-dark);
+        }
+
+        .resource-badge.mechanism {
+            background: var(--dx-success-light);
+            color: var(--dx-success-dark);
+        }
+
+        .resource-badge.mcq {
+            background: var(--dx-secondary-light);
+            color: var(--dx-secondary-dark);
+        }
+
+        .resource-badge.cases {
+            background: var(--dx-warning-light);
+            color: var(--dx-warning-dark);
+        }
+
+        .resource-badge.coach {
+            background: #fae8ff;
+            color: #a21caf;
+        }
+
+        /* Category colors */
+        .cat-cardiology { background: #fef2f2; }
+        .cat-pulmonary { background: #f0f7fc; }
+        .cat-neurology { background: #faf5ff; }
+        .cat-gi { background: #fff7ed; }
+        .cat-renal { background: #ecfeff; }
+        .cat-infectious { background: #f0f7fc; }
+        .cat-endocrine { background: #fdf2f8; }
+        .cat-hematology { background: #fef2f2; }
+        .cat-allergy { background: #d4e8f7; }
+        .cat-toxicology { background: #fefce8; }
+        .cat-critical { background: #f1f5f9; }
+
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--dx-space-8);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--dx-bg-primary);
+            border-radius: var(--dx-radius-xl);
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: var(--dx-space-6);
+            border-bottom: 1px solid var(--dx-border-light);
+            display: flex;
+            align-items: center;
+            gap: var(--dx-space-4);
+            position: sticky;
+            top: 0;
+            background: var(--dx-bg-primary);
+            z-index: 10;
+        }
+
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--dx-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .modal-title-area h2 {
+            font-size: var(--dx-text-2xl);
+            font-weight: 700;
+            margin-bottom: var(--dx-space-1);
+        }
+
+        .modal-category {
+            font-size: var(--dx-text-sm);
+            color: var(--dx-text-muted);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: var(--dx-space-4);
+            right: var(--dx-space-4);
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dx-text-muted);
+            padding: var(--dx-space-2);
+            border-radius: var(--dx-radius-md);
+            transition: all var(--dx-transition-fast);
+        }
+
+        .modal-close:hover {
+            background: var(--dx-bg-secondary);
+            color: var(--dx-text-primary);
+        }
+
+        .modal-body {
+            padding: var(--dx-space-6);
+        }
+
+        .modal-section {
+            margin-bottom: var(--dx-space-6);
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: var(--dx-text-sm);
+            font-weight: 600;
+            color: var(--dx-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--dx-space-3);
+            display: flex;
+            align-items: center;
+            gap: var(--dx-space-2);
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: center;
+            gap: var(--dx-space-4);
+            padding: var(--dx-space-4);
+            background: var(--dx-bg-secondary);
+            border-radius: var(--dx-radius-lg);
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: var(--dx-space-3);
+            transition: all var(--dx-transition-fast);
+            border: 1px solid transparent;
+        }
+
+        .resource-link:hover {
+            background: var(--dx-bg-primary);
+            border-color: var(--dx-primary);
+            transform: translateX(4px);
+        }
+
+        .resource-link-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--dx-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .resource-link-info h4 {
+            font-weight: 600;
+            margin-bottom: var(--dx-space-1);
+        }
+
+        .resource-link-info p {
+            font-size: var(--dx-text-sm);
+            color: var(--dx-text-muted);
+            margin: 0;
+        }
+
+        .resource-link-arrow {
+            margin-left: auto;
+            color: var(--dx-text-muted);
+            font-size: 1.25rem;
+        }
+
+        /* Quick Stats in Modal */
+        .quick-stats {
+            display: flex;
+            gap: var(--dx-space-4);
+            margin-bottom: var(--dx-space-6);
+            flex-wrap: wrap;
+        }
+
+        .quick-stat {
+            background: var(--dx-bg-secondary);
+            padding: var(--dx-space-3) var(--dx-space-4);
+            border-radius: var(--dx-radius-md);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .quick-stat-value {
+            font-size: var(--dx-text-xl);
+            font-weight: 700;
+            color: var(--dx-primary);
+        }
+
+        .quick-stat-label {
+            font-size: var(--dx-text-xs);
+            color: var(--dx-text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Start Study Button */
+        .start-study-btn {
+            width: 100%;
+            padding: var(--dx-space-4);
+            background: var(--dx-primary);
+            color: white;
+            border: none;
+            border-radius: var(--dx-radius-lg);
+            font-size: var(--dx-text-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--dx-transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--dx-space-2);
+        }
+
+        .start-study-btn:hover {
+            background: var(--dx-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--dx-space-12);
+            color: var(--dx-text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: var(--dx-space-4);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                margin: var(--dx-space-4);
+                max-height: 90vh;
+            }
+
+            .filter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: var(--dx-space-2);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="css/dx-case-nav.css">
+<link rel="stylesheet" href="./css/rdx-theme.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="dx-nav" data-active="learn" data-streak="7" data-user-initials="LF"></div>
+
+    <main class="main">
+        <div class="page-header">
+            <h1>🎯 Study Mode</h1>
+            <p>Pick a topic and access ALL learning resources in one place — Deep Dives, Cases, Board Prep MCQs, ReasonDx, and CoachDx</p>
+        </div>
+
+        <!-- Search -->
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search topics (e.g., sepsis, ACS, PE...)">
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All Topics</button>
+            <button class="filter-tab" data-filter="cardiology">❤️ Cardiology</button>
+            <button class="filter-tab" data-filter="pulmonary">🫁 Pulmonary</button>
+            <button class="filter-tab" data-filter="neurology">🧠 Neurology</button>
+            <button class="filter-tab" data-filter="gi">🫄 GI</button>
+            <button class="filter-tab" data-filter="renal">🫘 Renal</button>
+            <button class="filter-tab" data-filter="infectious">🦠 Infectious</button>
+            <button class="filter-tab" data-filter="endocrine">⚗️ Endocrine</button>
+            <button class="filter-tab" data-filter="allergy">🌸 Allergy/Immunology</button>
+            <button class="filter-tab" data-filter="hematology">🩸 Hematology</button>
+            <button class="filter-tab" data-filter="toxicology">☠️ Toxicology</button>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="topics-grid" id="topicsGrid">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-state-icon">🔍</div>
+            <h3>No topics found</h3>
+            <p>Try a different search term or filter</p>
+        </div>
+    </main>
+
+    <!-- Topic Detail Modal -->
+    <div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target.id==='modalBackdrop') closeModal()">
+        <div class="modal">
+            <div class="modal-header" id="modalHeader">
+                <!-- Populated by JS -->
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Script -->
+    <script src="js/dx-case-nav.js"></script>
+
+    <script>
+        // ============ TOPIC DATABASE ============
+        const TOPICS = [
+            // Cardiology
+            {
+                id: 'acs',
+                name: 'Acute Coronary Syndrome',
+                category: 'cardiology',
+                icon: '🫀',
+                resources: {
+                    mechanism: { url: 'topics/acs-module.html', modules: 1 },
+                    mcq: { count: 12, tags: ['acs', 'stemi', 'nstemi', 'cardiac-enzymes'] },
+                    cases: { url: 'training.html?case=acs', count: 3 },
+                    coach: { url: '../CoachDx/coachdx-dashboard.html?topic=acs', scenarios: 2 }
+                }
+            },
+            {
+                id: 'heart-failure',
+                name: 'Heart Failure',
+                category: 'cardiology',
+                icon: '💔',
+                resources: {
+                    mechanism: { url: 'topics/heart-failure-module.html', modules: 1 },
+                    mcq: { count: 8, tags: ['hfref', 'hfpef', 'bnp'] },
+                    cases: { url: 'training.html?case=chf', count: 2 },
+                    coach: { url: '../CoachDx/coachdx-dashboard.html?topic=hf', scenarios: 1 }
+                }
+            },
+            {
+                id: 'afib',
+                name: 'Atrial Fibrillation',
+                category: 'cardiology',
+                icon: '⚡',
+                resources: {
+                    mcq: { count: 6, tags: ['afib', 'anticoagulation', 'rate-control'] },
+                    cases: { url: 'training.html?case=afib', count: 1 }
+                }
+            },
+            {
+                id: 'aortic-dissection',
+                name: 'Aortic Dissection',
+                category: 'cardiology',
+                icon: '🩸',
+                resources: {
+                    mcq: { count: 4, tags: ['aortic-dissection', 'stanford'] }
+                }
+            },
+            {
+                id: 'cardiac-tamponade',
+                name: 'Cardiac Tamponade',
+                category: 'cardiology',
+                icon: '🫀',
+                resources: {
+                    mcq: { count: 3, tags: ['tamponade', 'pericardial-effusion'] }
+                }
+            },
+            {
+                id: 'shock',
+                name: 'Shock States',
+                category: 'cardiology',
+                icon: '⚠️',
+                resources: {
+                    mechanism: { url: 'topics/shock-module.html', modules: 1 },
+                    mcq: { count: 8, tags: ['shock', 'cardiogenic', 'hypovolemic', 'distributive'] }
+                }
+            },
+
+            // Pulmonary
+            {
+                id: 'pe',
+                name: 'Pulmonary Embolism',
+                category: 'pulmonary',
+                icon: '🫁',
+                resources: {
+                    mechanism: { url: 'topics/pe-module.html', modules: 1 },
+                    mcq: { count: 10, tags: ['pe', 'dvt', 'wells-score', 'anticoagulation'] },
+                    cases: { url: 'training.html?case=pe', count: 2 },
+                    coach: { url: '../CoachDx/coachdx-dashboard.html?topic=pe', scenarios: 1 }
+                }
+            },
+            {
+                id: 'pneumonia',
+                name: 'Pneumonia',
+                category: 'pulmonary',
+                icon: '🦠',
+                resources: {
+                    mcq: { count: 12, tags: ['cap', 'hap', 'curb-65', 'pneumonia'] },
+                    cases: { url: 'training.html?case=pneumonia', count: 3 }
+                }
+            },
+            {
+                id: 'asthma',
+                name: 'Asthma Exacerbation',
+                category: 'pulmonary',
+                icon: '💨',
+                resources: {
+                    mechanism: { url: 'topics/asthma-module.html', modules: 1 },
+                    mcq: { count: 6, tags: ['asthma', 'bronchodilator', 'status-asthmaticus'] }
+                }
+            },
+            {
+                id: 'copd',
+                name: 'COPD Exacerbation',
+                category: 'pulmonary',
+                icon: '🌬️',
+                resources: {
+                    mechanism: { url: 'topics/copd-module.html', modules: 1 },
+                    mcq: { count: 5, tags: ['copd', 'gold-criteria'] }
+                }
+            },
+            {
+                id: 'ards',
+                name: 'ARDS',
+                category: 'pulmonary',
+                icon: '🫁',
+                resources: {
+                    mcq: { count: 4, tags: ['ards', 'berlin-criteria', 'lung-protective'] }
+                }
+            },
+
+            // Infectious
+            {
+                id: 'sepsis',
+                name: 'Sepsis & Septic Shock',
+                category: 'infectious',
+                icon: '🦠',
+                resources: {
+                    mechanism: { url: 'topics/sepsis-module.html', modules: 1 },
+                    mcq: { count: 14, tags: ['sepsis', 'sofa', 'qsofa', 'hour-1-bundle'] },
+                    cases: { url: 'training.html?case=sepsis', count: 4 },
+                    coach: { url: '../CoachDx/coachdx-dashboard.html?topic=sepsis', scenarios: 2 }
+                }
+            },
+            {
+                id: 'meningitis',
+                name: 'Meningitis',
+                category: 'infectious',
+                icon: '🧠',
+                resources: {
+                    mcq: { count: 6, tags: ['meningitis', 'csf-analysis', 'empiric-antibiotics'] },
+                    cases: { url: 'training.html?case=meningitis', count: 1 }
+                }
+            },
+            {
+                id: 'uti',
+                name: 'UTI / Pyelonephritis',
+                category: 'infectious',
+                icon: '🫘',
+                resources: {
+                    mcq: { count: 5, tags: ['uti', 'pyelonephritis', 'urosepsis'] }
+                }
+            },
+
+            // Neurology
+            {
+                id: 'stroke',
+                name: 'Ischemic Stroke',
+                category: 'neurology',
+                icon: '🧠',
+                resources: {
+                    mechanism: { url: 'topics/stroke-module.html', modules: 1 },
+                    mcq: { count: 10, tags: ['stroke', 'tpa', 'nihss', 'thrombectomy'] },
+                    cases: { url: 'training.html?case=stroke', count: 2 }
+                }
+            },
+            {
+                id: 'seizure',
+                name: 'Seizures / Status Epilepticus',
+                category: 'neurology',
+                icon: '⚡',
+                resources: {
+                    mcq: { count: 6, tags: ['seizure', 'status-epilepticus', 'anticonvulsants'] }
+                }
+            },
+            {
+                id: 'ich',
+                name: 'Intracranial Hemorrhage',
+                category: 'neurology',
+                icon: '🩸',
+                resources: {
+                    mcq: { count: 5, tags: ['ich', 'sah', 'subdural', 'epidural'] }
+                }
+            },
+
+            // GI
+            {
+                id: 'gi-bleed',
+                name: 'GI Bleeding',
+                category: 'gi',
+                icon: '🩸',
+                resources: {
+                    mcq: { count: 8, tags: ['ugib', 'lgib', 'gi-bleed', 'glasgow-blatchford'] },
+                    cases: { url: 'training.html?case=gi-bleed', count: 2 }
+                }
+            },
+            {
+                id: 'pancreatitis',
+                name: 'Acute Pancreatitis',
+                category: 'gi',
+                icon: '🫄',
+                resources: {
+                    mcq: { count: 5, tags: ['pancreatitis', 'ranson', 'apache'] }
+                }
+            },
+            {
+                id: 'liver-failure',
+                name: 'Acute Liver Failure',
+                category: 'gi',
+                icon: '🫁',
+                resources: {
+                    mcq: { count: 4, tags: ['alf', 'hepatic-encephalopathy', 'kings-criteria'] }
+                }
+            },
+
+            // Renal
+            {
+                id: 'aki',
+                name: 'Acute Kidney Injury',
+                category: 'renal',
+                icon: '🫘',
+                resources: {
+                    mechanism: { url: 'topics/aki-module.html', modules: 1 },
+                    mcq: { count: 10, tags: ['aki', 'kdigo', 'fena', 'prerenal'] },
+                    cases: { url: 'training.html?case=aki', count: 2 }
+                }
+            },
+            {
+                id: 'hyperkalemia',
+                name: 'Hyperkalemia',
+                category: 'renal',
+                icon: '⚡',
+                resources: {
+                    mcq: { count: 5, tags: ['hyperkalemia', 'ecg-changes', 'calcium-gluconate'] }
+                }
+            },
+            {
+                id: 'hyponatremia',
+                name: 'Hyponatremia',
+                category: 'renal',
+                icon: '💧',
+                resources: {
+                    mcq: { count: 6, tags: ['hyponatremia', 'siadh', 'osmolality'] }
+                }
+            },
+
+            // Endocrine
+            {
+                id: 'dka',
+                name: 'DKA / HHS',
+                category: 'endocrine',
+                icon: '🍬',
+                resources: {
+                    mechanism: { url: 'topics/diabetes-dka-module.html', modules: 1 },
+                    mcq: { count: 8, tags: ['dka', 'hhs', 'anion-gap', 'insulin'] },
+                    cases: { url: 'training.html?case=dka', count: 2 }
+                }
+            },
+            {
+                id: 'thyroid-storm',
+                name: 'Thyroid Storm',
+                category: 'endocrine',
+                icon: '🔥',
+                resources: {
+                    mcq: { count: 4, tags: ['thyroid-storm', 'graves', 'ptu'] }
+                }
+            },
+            {
+                id: 'adrenal-crisis',
+                name: 'Adrenal Crisis',
+                category: 'endocrine',
+                icon: '⚠️',
+                resources: {
+                    mcq: { count: 3, tags: ['adrenal-crisis', 'addison', 'cortisol'] }
+                }
+            },
+
+            // Allergy/Immunology
+            {
+                id: 'anaphylaxis',
+                name: 'Anaphylaxis',
+                category: 'allergy',
+                icon: '🚨',
+                resources: {
+                    mechanism: { url: 'topics/anaphylaxis-module.html', modules: 1 },
+                    mcq: { count: 8, tags: ['anaphylaxis', 'epinephrine', 'biphasic'] },
+                    cases: { url: 'training.html?case=anaphylaxis', count: 2 },
+                    coach: { url: '../CoachDx/coachdx-dashboard.html?topic=anaphylaxis', scenarios: 1 }
+                }
+            },
+            {
+                id: 'drug-allergy',
+                name: 'Drug Allergy',
+                category: 'allergy',
+                icon: '💊',
+                resources: {
+                    mcq: { count: 6, tags: ['drug-allergy', 'penicillin', 'desensitization'] },
+                    coach: { url: '../CoachDx/coachdx-dashboard.html?topic=drug-allergy', scenarios: 2 }
+                }
+            },
+            {
+                id: 'food-allergy',
+                name: 'Food Allergy',
+                category: 'allergy',
+                icon: '🥜',
+                resources: {
+                    mcq: { count: 5, tags: ['food-allergy', 'ige-mediated', 'oral-immunotherapy'] }
+                }
+            },
+            {
+                id: 'venom-allergy',
+                name: 'Venom Allergy',
+                category: 'allergy',
+                icon: '🐝',
+                resources: {
+                    mcq: { count: 4, tags: ['venom-allergy', 'vit', 'hymenoptera'] }
+                }
+            },
+            {
+                id: 'urticaria',
+                name: 'Urticaria & Angioedema',
+                category: 'allergy',
+                icon: '🔴',
+                resources: {
+                    mcq: { count: 5, tags: ['urticaria', 'angioedema', 'antihistamine'] }
+                }
+            },
+            {
+                id: 'immunodeficiency',
+                name: 'Primary Immunodeficiency',
+                category: 'allergy',
+                icon: '🛡️',
+                resources: {
+                    mcq: { count: 6, tags: ['cvid', 'scid', 'immunodeficiency'] }
+                }
+            },
+            {
+                id: 'eosinophilia',
+                name: 'Eosinophilia Workup',
+                category: 'allergy',
+                icon: '🔬',
+                resources: {
+                    mcq: { count: 4, tags: ['eosinophilia', 'hes', 'egpa'] }
+                }
+            },
+            {
+                id: 'mast-cell',
+                name: 'Mast Cell Disorders',
+                category: 'allergy',
+                icon: '🧫',
+                resources: {
+                    mcq: { count: 3, tags: ['mastocytosis', 'tryptase', 'mcas'] }
+                }
+            },
+
+            // Hematology
+            {
+                id: 'dic',
+                name: 'DIC',
+                category: 'hematology',
+                icon: '🩸',
+                resources: {
+                    mcq: { count: 5, tags: ['dic', 'coagulopathy', 'fibrinogen'] }
+                }
+            },
+            {
+                id: 'ttp-hus',
+                name: 'TTP / HUS',
+                category: 'hematology',
+                icon: '🔬',
+                resources: {
+                    mcq: { count: 4, tags: ['ttp', 'hus', 'adamts13', 'plasmapheresis'] }
+                }
+            },
+
+            // Toxicology
+            {
+                id: 'overdose',
+                name: 'Opioid Overdose',
+                category: 'toxicology',
+                icon: '💉',
+                resources: {
+                    mcq: { count: 5, tags: ['opioid-overdose', 'naloxone', 'toxidrome'] }
+                }
+            },
+            {
+                id: 'alcohol-withdrawal',
+                name: 'Alcohol Withdrawal',
+                category: 'toxicology',
+                icon: '🍺',
+                resources: {
+                    mcq: { count: 4, tags: ['alcohol-withdrawal', 'ciwa', 'delirium-tremens'] }
+                }
+            },
+            {
+                id: 'serotonin-syndrome',
+                name: 'Serotonin Syndrome',
+                category: 'toxicology',
+                icon: '🧠',
+                resources: {
+                    mcq: { count: 3, tags: ['serotonin-syndrome', 'cyproheptadine'] }
+                }
+            }
+        ];
+
+        // ============ STATE ============
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // ============ RENDER ============
+        function renderTopics() {
+            const grid = document.getElementById('topicsGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            const filtered = TOPICS.filter(topic => {
+                const matchesFilter = currentFilter === 'all' || topic.category === currentFilter;
+                const matchesSearch = searchQuery === '' || 
+                    topic.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    topic.category.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            emptyState.style.display = 'none';
+
+            grid.innerHTML = filtered.map(topic => {
+                const resourceBadges = [];
+                if (topic.resources.mechanism) resourceBadges.push('<span class="resource-badge mechanism">⚙️ Mechanism</span>');
+                if (topic.resources.mcq) resourceBadges.push(`<span class="resource-badge mcq">📝 ${topic.resources.mcq.count} MCQs</span>`);
+                if (topic.resources.cases) resourceBadges.push('<span class="resource-badge cases">🎯 Cases</span>');
+                if (topic.resources.coach) resourceBadges.push('<span class="resource-badge coach">🤖 Coach</span>');
+
+                return `
+                    <div class="topic-card" onclick="openTopicModal('${topic.id}')">
+                        <div class="topic-card-header">
+                            <div class="topic-icon cat-${topic.category}">${topic.icon}</div>
+                            <div class="topic-info">
+                                <h3>${topic.name}</h3>
+                                <div class="topic-category">${formatCategory(topic.category)}</div>
+                            </div>
+                        </div>
+                        <div class="topic-resources">
+                            ${resourceBadges.join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function formatCategory(cat) {
+            const names = {
+                cardiology: '❤️ Cardiology',
+                pulmonary: '🫁 Pulmonary',
+                neurology: '🧠 Neurology',
+                gi: '🫄 GI/Hepatology',
+                renal: '🫘 Renal',
+                infectious: '🦠 Infectious Disease',
+                endocrine: '⚗️ Endocrine',
+                hematology: '🩸 Hematology',
+                allergy: '🌸 Allergy/Immunology',
+                toxicology: '☠️ Toxicology',
+                critical: '🚨 Critical Care'
+            };
+            return names[cat] || cat;
+        }
+
+        // ============ MODAL ============
+        function openTopicModal(topicId) {
+            const topic = TOPICS.find(t => t.id === topicId);
+            if (!topic) return;
+
+            const r = topic.resources;
+            let totalQuestions = 0;
+            let totalResources = 0;
+
+            if (r.mechanism) totalResources++;
+            if (r.mcq) { totalQuestions += r.mcq.count; totalResources++; }
+            if (r.cases) totalResources++;
+            if (r.coach) totalResources++;
+
+            document.getElementById('modalHeader').innerHTML = `
+                <div class="modal-icon cat-${topic.category}">${topic.icon}</div>
+                <div class="modal-title-area">
+                    <h2>${topic.name}</h2>
+                    <div class="modal-category">${formatCategory(topic.category)}</div>
+                </div>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            `;
+
+            let bodyHTML = `
+                <div class="quick-stats">
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${totalResources}</div>
+                        <div class="quick-stat-label">Resources</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">${totalQuestions}</div>
+                        <div class="quick-stat-label">Questions</div>
+                    </div>
+
+                </div>
+            `;
+
+
+            // ReasonDx
+            if (r.mechanism) {
+                bodyHTML += `
+                    <div class="modal-section">
+                        <div class="modal-section-title">⚙️ ReasonDx</div>
+                        <a href="${r.mechanism.url}" class="resource-link">
+                            <div class="resource-link-icon" style="background: var(--dx-success-light);">⚙️</div>
+                            <div class="resource-link-info">
+                                <h4>Pathophysiology Module</h4>
+                                <p>Visual flowcharts and mechanism maps</p>
+                            </div>
+                            <span class="resource-link-arrow">→</span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            // Board Prep MCQs
+            if (r.mcq) {
+                bodyHTML += `
+                    <div class="modal-section">
+                        <div class="modal-section-title">📝 Board Prep MCQs</div>
+                        <a href="board-prep.html?tags=${r.mcq.tags.join(',')}" class="resource-link">
+                            <div class="resource-link-icon" style="background: var(--dx-secondary-light);">📝</div>
+                            <div class="resource-link-info">
+                                <h4>${r.mcq.count} Practice Questions</h4>
+                                <p>Tags: ${r.mcq.tags.slice(0, 3).join(', ')}${r.mcq.tags.length > 3 ? '...' : ''}</p>
+                            </div>
+                            <span class="resource-link-arrow">→</span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            // Clinical Cases
+            if (r.cases) {
+                bodyHTML += `
+                    <div class="modal-section">
+                        <div class="modal-section-title">🎯 Clinical Cases</div>
+                        <a href="${r.cases.url}" class="resource-link">
+                            <div class="resource-link-icon" style="background: var(--dx-warning-light);">🎯</div>
+                            <div class="resource-link-info">
+                                <h4>${r.cases.count} Interactive Case${r.cases.count > 1 ? 's' : ''}</h4>
+                                <p>Clinical reasoning simulation with feedback</p>
+                            </div>
+                            <span class="resource-link-arrow">→</span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            // CoachDx
+            if (r.coach) {
+                bodyHTML += `
+                    <div class="modal-section">
+                        <div class="modal-section-title">🤖 CoachDx AI Mentor</div>
+                        <a href="${r.coach.url}" class="resource-link">
+                            <div class="resource-link-icon" style="background: #fae8ff;">🤖</div>
+                            <div class="resource-link-info">
+                                <h4>${r.coach.scenarios} AI Coaching Scenario${r.coach.scenarios > 1 ? 's' : ''}</h4>
+                                <p>Practice with an AI attending physician</p>
+                            </div>
+                            <span class="resource-link-arrow">→</span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            // Start Study Button
+            const primaryUrl = r.cases?.url || r.mechanism?.url || 'board-prep.html';
+            bodyHTML += `
+                <button class="start-study-btn" onclick="window.location.href='${primaryUrl}'">
+                    🚀 Start Studying ${topic.name}
+                </button>
+            `;
+
+            document.getElementById('modalBody').innerHTML = bodyHTML;
+            document.getElementById('modalBackdrop').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalBackdrop').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ============ EVENT HANDLERS ============
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.filter;
+                renderTopics();
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderTopics();
+        });
+
+        // Keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+            if (e.key === '/' && !e.target.matches('input')) {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+
+        // ============ INIT ============
+        renderTopics();
+    </script>
+    <script src="js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
+
+    
+    <div data-dx-tutor
+         data-module-title="Study Mode"
+         data-key-points="${topic.name}, No topics found, ${topic.name}, clinical reasoning, differential diagnosis, diagnostic workup, illness scripts"
+         data-objectives="Develop systematic clinical reasoning, refine differential diagnosis skills"
+         style="display:none;"></div>
+    <script src="js/dx-ai-tutor.js"></script>
+<script src="js/rdx-persist.js"></script>
+<script src="./js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+<script src="js/rdx-help-widget.js"></script>
+
+<script src="js/dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EKCVJ1SMN3');
+</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<script>
+// Auth Guard - DISABLED for launch (free access)
+// Auth guard disabled for free launch period</script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Referral Letter Generator | Interprofessional Communication — clinical education tool on ReasonDx. Interactive learning resource for medical students and edu...">
+<title>Referral Letter Generator | Interprofessional Communication</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family:var(--rdx-font);
+            background: linear-gradient(135deg, #f0f7fc 0%, var(--primary-bg) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        
+        .header {
+            background:var(--rdx-bg-card);
+            border-bottom: 1px solid #a3cfe6;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon { font-size: 28px; }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a4971;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .hero h1 {
+            font-size: 32px;
+            color: #1a4971;
+            margin-bottom: 8px;
+        }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        .generator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        @media (max-width: 900px) {
+            .generator-grid { grid-template-columns: 1fr; }
+        }
+        
+        .panel {
+            background:var(--rdx-bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .panel h2 {
+            color: #1a4971;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-bg);
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--border-light);
+            border-radius:8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .checkbox-item:hover {
+            background: #e2e8f0;
+        }
+        .checkbox-item input {
+            width: auto;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius:12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+            transition: all 0.2s;
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Output Panel */
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .output-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .copy-btn {
+            background: #22c55e;
+            color: white;
+        }
+        .copy-btn:hover { background: #16a34a; }
+        .template-btn {
+            background: var(--border-light);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .template-btn:hover { background: #e2e8f0; }
+        
+        .letter-output {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .placeholder-text {
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        /* Quick Templates */
+        .template-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .template-card {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius:12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .template-card:hover {
+            background: #e0f2fe;
+            border-color: #64748b;
+        }
+        .template-card h4 {
+            font-size: 13px;
+            color: #1f5f8b;
+            margin-bottom: 4px;
+        }
+        .template-card p {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        /* Feedback Section */
+        .feedback-panel {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .feedback-panel h3 {
+            color: #92400e;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .feedback-panel ul {
+            margin-left: 20px;
+            font-size: 13px;
+            color: #78350f;
+        }
+        .feedback-panel li {
+            margin-bottom: 4px;
+        }
+        
+        /* Specialty Badges */
+        .specialty-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+        .badge-ai { background: #f3e8ff; color: #7c3aed; }
+        .badge-gi { background: #fce7f3; color: #be185d; }
+        .badge-pulm { background: var(--primary-bg); color: var(--primary-dark); }
+        .badge-derm { background: #fef3c7; color: #b45309; }
+        .badge-ent { background: #d1fae5; color: #1a4971; }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #2874a6;
+    --primary-light: #7cb8d9;
+    --primary-dark: #1f5f8b;
+    --primary-bg: #f0f7fc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #2874a6;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Unified Navigation */
+
+
+
+
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    
+    
+}
+
+    </style>
+        <link rel="stylesheet" href="../css/dx-case-nav.css">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+</head>
+<body>
+
+    <!-- nav removed: unified via rdx-nav.js -->
+
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">✉️</span>
+            <span class="logo-text">Referral Letter Generator</span>
+        </div>
+        <!-- Unified Navigation -->
+    </header>
+    
+    <main class="main-content">
+        <section class="hero">
+            <h1>📝 Referral Letter Generator</h1>
+            <p>Practice writing professional consultation requests and referral letters</p>
+        </section>
+        
+        <div class="generator-grid">
+            <!-- Input Panel -->
+            <div class="panel">
+                <h2>📋 Letter Details</h2>
+                
+                <div class="form-group">
+                    <label>Letter Type</label>
+                    <select id="letterType" onchange="updateFormFields()">
+                        <option value="">Select type...</option>
+                        <option value="consult-to-ai">Consult Request TO Allergy/Immunology</option>
+                        <option value="consult-from-ai">Consult Request FROM A/I to Other Specialty</option>
+                        <option value="referral-to-ai">Primary Care Referral TO A/I</option>
+                        <option value="referral-from-ai">A/I Referral to Other Specialty</option>
+                        <option value="comanagement">Co-management Communication</option>
+                        <option value="school-letter">School 504/Action Plan Letter</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>From (Your Service)</label>
+                        <select id="fromService">
+                            <option value="allergy-immunology">Allergy/Immunology</option>
+                            <option value="internal-medicine">Internal Medicine</option>
+                            <option value="pediatrics">Pediatrics</option>
+                            <option value="emergency">Emergency Medicine</option>
+                            <option value="infectious-disease">Infectious Disease</option>
+                            <option value="pulmonology">Pulmonology</option>
+                            <option value="gastroenterology">Gastroenterology</option>
+                            <option value="dermatology">Dermatology</option>
+                            <option value="ent">ENT</option>
+                            <option value="oncology">Oncology</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>To (Receiving Service)</label>
+                        <select id="toService">
+                            <option value="allergy-immunology">Allergy/Immunology</option>
+                            <option value="gastroenterology">Gastroenterology</option>
+                            <option value="pulmonology">Pulmonology</option>
+                            <option value="ent">ENT</option>
+                            <option value="dermatology">Dermatology</option>
+                            <option value="hematology">Hematology</option>
+                            <option value="infectious-disease">Infectious Disease</option>
+                            <option value="speech-therapy">Speech Therapy</option>
+                            <option value="psychology">Psychology</option>
+                            <option value="dietitian">Dietitian/Nutrition</option>
+                            <option value="school">School Nurse/504 Coordinator</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Urgency</label>
+                    <select id="urgency">
+                        <option value="routine">Routine</option>
+                        <option value="urgent">Urgent (24-48 hours)</option>
+                        <option value="emergent">Emergent (same day)</option>
+                    </select>
+                </div>
+                
+                <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
+                
+                <h3 style="font-size: 15px; color:var(--rdx-text-secondary,#475569); margin-bottom: 12px;">Patient Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Patient Name</label>
+                        <input type="text" id="patientName" placeholder="e.g., John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label>Age / Sex</label>
+                        <input type="text" id="patientAgeSex" placeholder="e.g., 34 yo M">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Primary Diagnosis</label>
+                    <input type="text" id="diagnosis" placeholder="e.g., Suspected EoE">
+                </div>
+                
+                <div class="form-group">
+                    <label>Reason for Referral</label>
+                    <textarea id="reason" placeholder="Brief statement of why you are requesting consultation..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Relevant History</label>
+                    <textarea id="history" placeholder="Key history points, prior workup, current symptoms..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Current Management</label>
+                    <textarea id="management" placeholder="Current treatments, medications, interventions..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Specific Questions</label>
+                    <textarea id="questions" placeholder="1. Is this patient a candidate for...&#10;2. What additional testing do you recommend..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Include Sections</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="includeAllergies" checked> Allergy List
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="includeMeds" checked> Medications
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="includeLabs"> Recent Labs
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="includeImaging"> Imaging
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="includeCoordination" checked> Coordination Plan
+                        </label>
+                    </div>
+                </div>
+                
+                <button class="generate-btn" onclick="generateLetter()">Generate Letter</button>
+                
+                <!-- Quick Templates -->
+                <h3 style="font-size: 14px; color: var(--text-secondary); margin-top: 24px; margin-bottom: 12px;">Quick Templates</h3>
+                <div class="template-cards">
+                    <div class="template-card" onclick="loadTemplate('penicillin')">
+                        <h4>💊 Penicillin Allergy Eval</h4>
+                        <p>ID → A/I for delabeling</p>
+                    </div>
+                    <div class="template-card" onclick="loadTemplate('eoe')">
+                        <h4>🔬 EoE Evaluation</h4>
+                        <p>A/I → GI for endoscopy</p>
+                    </div>
+                    <div class="template-card" onclick="loadTemplate('vcd')">
+                        <h4>🗣️ VCD Therapy</h4>
+                        <p>A/I → Speech for retraining</p>
+                    </div>
+                    <div class="template-card" onclick="loadTemplate('school')">
+                        <h4>🏫 School 504 Plan</h4>
+                        <p>A/I → School for food allergy</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Output Panel -->
+            <div class="panel">
+                <div class="output-header">
+                    <h2>📄 Generated Letter</h2>
+                    <div class="output-actions">
+                        <button class="action-btn copy-btn" onclick="copyLetter()">📋 Copy</button>
+                        <button class="action-btn template-btn" onclick="saveDraft()" id="saveDraftBtn">💾 Save</button>
+                        <button class="action-btn template-btn" onclick="toggleDraftsList()" id="loadDraftsBtn">📂 Drafts</button>
+                        <button class="action-btn template-btn" onclick="clearLetter()">Clear</button>
+                    </div>
+                </div>
+                
+                <!-- Saved Drafts Panel -->
+                <div id="draftsPanel" style="display:none;background:#f8fafc;border:1px solid #e4e4e7;border-radius:12px;padding:16px;margin-bottom:16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <h3 style="font-size:14px;margin:0;">📂 Saved Drafts</h3>
+                        <button onclick="toggleDraftsList()" style="background:none;border:none;cursor:pointer;font-size:16px;">✕</button>
+                    </div>
+                    <div id="draftsList"></div>
+                </div>
+                
+                <div class="letter-output" id="letterOutput">
+                    <div class="placeholder-text">
+                        Fill out the form and click "Generate Letter" to create your referral communication.
+                        
+                        Or select a quick template to get started.
+                    </div>
+                </div>
+                
+                <!-- Feedback Panel -->
+                <div class="feedback-panel" id="feedbackPanel" style="display: none;">
+                    <h3>💡 Communication Tips</h3>
+                    <ul id="feedbackList">
+                        <!-- Populated dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        const serviceLabels = {
+            'allergy-immunology': 'Allergy/Immunology',
+            'internal-medicine': 'Internal Medicine',
+            'pediatrics': 'Pediatrics',
+            'emergency': 'Emergency Medicine',
+            'infectious-disease': 'Infectious Disease',
+            'pulmonology': 'Pulmonology',
+            'gastroenterology': 'Gastroenterology',
+            'dermatology': 'Dermatology',
+            'ent': 'Otolaryngology (ENT)',
+            'oncology': 'Oncology',
+            'hematology': 'Hematology',
+            'speech-therapy': 'Speech-Language Pathology',
+            'psychology': 'Psychology',
+            'dietitian': 'Nutrition Services',
+            'school': 'School Health Services'
+        };
+        
+        function updateFormFields() {
+            const letterType = document.getElementById('letterType').value;
+            
+            if (letterType.includes('to-ai')) {
+                document.getElementById('toService').value = 'allergy-immunology';
+            } else if (letterType.includes('from-ai')) {
+                document.getElementById('fromService').value = 'allergy-immunology';
+            }
+        }
+        
+        function generateLetter() {
+            const letterType = document.getElementById('letterType').value;
+            const fromService = document.getElementById('fromService').value;
+            const toService = document.getElementById('toService').value;
+            const urgency = document.getElementById('urgency').value;
+            const patientName = document.getElementById('patientName').value || '[Patient Name]';
+            const patientAgeSex = document.getElementById('patientAgeSex').value || '[Age/Sex]';
+            const diagnosis = document.getElementById('diagnosis').value || '[Diagnosis]';
+            const reason = document.getElementById('reason').value || '[Reason for referral]';
+            const history = document.getElementById('history').value || '[Relevant history]';
+            const management = document.getElementById('management').value || '[Current management]';
+            const questions = document.getElementById('questions').value || '[Specific questions]';
+            
+            const includeAllergies = document.getElementById('includeAllergies').checked;
+            const includeMeds = document.getElementById('includeMeds').checked;
+            const includeLabs = document.getElementById('includeLabs').checked;
+            const includeImaging = document.getElementById('includeImaging').checked;
+            const includeCoordination = document.getElementById('includeCoordination').checked;
+            
+            const urgencyLabel = urgency === 'emergent' ? '🚨 EMERGENT' : 
+                                urgency === 'urgent' ? '⚠️ URGENT' : 'Routine';
+            
+            const today = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', month: 'long', day: 'numeric' 
+            });
+            
+            let letter = `═══════════════════════════════════════════════════════════════
+                     CONSULTATION REQUEST
+═══════════════════════════════════════════════════════════════
+
+Date: ${today}
+Urgency: ${urgencyLabel}
+
+TO: ${serviceLabels[toService] || toService}
+FROM: ${serviceLabels[fromService] || fromService}
+
+───────────────────────────────────────────────────────────────
+PATIENT INFORMATION
+───────────────────────────────────────────────────────────────
+Name: ${patientName}
+Age/Sex: ${patientAgeSex}
+Primary Diagnosis: ${diagnosis}
+
+───────────────────────────────────────────────────────────────
+REASON FOR CONSULTATION
+───────────────────────────────────────────────────────────────
+${reason}
+
+───────────────────────────────────────────────────────────────
+RELEVANT HISTORY
+───────────────────────────────────────────────────────────────
+${history}
+`;
+
+            if (includeAllergies) {
+                letter += `
+───────────────────────────────────────────────────────────────
+ALLERGIES
+───────────────────────────────────────────────────────────────
+[List patient allergies here]
+`;
+            }
+
+            if (includeMeds) {
+                letter += `
+───────────────────────────────────────────────────────────────
+CURRENT MEDICATIONS
+───────────────────────────────────────────────────────────────
+[List current medications here]
+`;
+            }
+
+            letter += `
+───────────────────────────────────────────────────────────────
+CURRENT MANAGEMENT
+───────────────────────────────────────────────────────────────
+${management}
+`;
+
+            if (includeLabs) {
+                letter += `
+───────────────────────────────────────────────────────────────
+RELEVANT LABORATORY DATA
+───────────────────────────────────────────────────────────────
+[Insert relevant lab results]
+`;
+            }
+
+            if (includeImaging) {
+                letter += `
+───────────────────────────────────────────────────────────────
+IMAGING/PROCEDURES
+───────────────────────────────────────────────────────────────
+[Insert relevant imaging findings]
+`;
+            }
+
+            letter += `
+───────────────────────────────────────────────────────────────
+SPECIFIC QUESTIONS
+───────────────────────────────────────────────────────────────
+${questions}
+`;
+
+            if (includeCoordination) {
+                letter += `
+───────────────────────────────────────────────────────────────
+COORDINATION PLAN
+───────────────────────────────────────────────────────────────
+Please contact me to discuss findings and coordinate care.
+I am available for questions or to provide additional information.
+`;
+            }
+
+            letter += `
+───────────────────────────────────────────────────────────────
+CONTACT INFORMATION
+───────────────────────────────────────────────────────────────
+Provider: [Your Name, Credentials]
+Phone: [Contact Number]
+Pager: [Pager Number]
+Email: [Email Address]
+
+═══════════════════════════════════════════════════════════════
+`;
+
+            document.getElementById('letterOutput').textContent = letter;
+            
+            // Generate feedback
+            generateFeedback(reason, history, questions);
+        }
+        
+        function generateFeedback(reason, history, questions) {
+            const feedbackPanel = document.getElementById('feedbackPanel');
+            const feedbackList = document.getElementById('feedbackList');
+            
+            const tips = [];
+            
+            if (reason.length < 50) {
+                tips.push('Consider providing more detail in the reason for referral');
+            }
+            if (!questions.includes('1.') && !questions.includes('2.')) {
+                tips.push('Numbering your specific questions improves clarity');
+            }
+            if (!history.toLowerCase().includes('allerg') && !history.toLowerCase().includes('reaction')) {
+                tips.push('For A/I consults, include any prior allergic reactions or testing');
+            }
+            if (tips.length === 0) {
+                tips.push('Good structure! Clear questions help the consultant respond efficiently');
+                tips.push('Remember to follow up if you don\'t hear back within the expected timeframe');
+            }
+            
+            tips.push('Include your contact information so the consultant can reach you with questions');
+            
+            feedbackList.innerHTML = tips.map(tip => `<li>${tip}</li>`).join('');
+            feedbackPanel.style.display = 'block';
+        }
+        
+        function copyLetter() {
+            const letterText = document.getElementById('letterOutput').textContent;
+            navigator.clipboard.writeText(letterText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => { btn.textContent = '📋 Copy'; }, 2000);
+            });
+        }
+        
+        function clearLetter() {
+            document.getElementById('letterOutput').innerHTML = `
+                <div class="placeholder-text">
+                    Fill out the form and click "Generate Letter" to create your referral communication.
+                    
+                    Or select a quick template to get started.
+                </div>
+            `;
+            document.getElementById('feedbackPanel').style.display = 'none';
+            
+            // Clear form fields
+            document.querySelectorAll('input[type="text"], textarea').forEach(el => el.value = '');
+        }
+        
+        // ═══════════════════════════════════════════════
+        // DRAFT PERSISTENCE (DxStorage)
+        // ═══════════════════════════════════════════════
+        function saveDraft() {
+            if (typeof DxStorage === 'undefined') { alert('Storage not available'); return; }
+            const formData = {
+                letterType: document.getElementById('letterType').value,
+                fromService: document.getElementById('fromService').value,
+                toService: document.getElementById('toService').value,
+                urgency: document.getElementById('urgency').value,
+                patientName: document.getElementById('patientName').value,
+                patientAgeSex: document.getElementById('patientAgeSex').value,
+                diagnosis: document.getElementById('diagnosis').value,
+                reason: document.getElementById('reason').value,
+                history: document.getElementById('history').value,
+                management: document.getElementById('management').value,
+                questions: document.getElementById('questions').value
+            };
+            const label = formData.patientName || 'Untitled';
+            const id = DxStorage.generateId('draft');
+            DxStorage.save('referral', id, {
+                label: label,
+                savedAt: new Date().toISOString(),
+                form: formData,
+                letterText: document.getElementById('letterOutput').textContent
+            });
+            const btn = document.getElementById('saveDraftBtn');
+            btn.textContent = '✅ Saved!';
+            setTimeout(() => { btn.textContent = '💾 Save'; }, 2000);
+        }
+        
+        function toggleDraftsList() {
+            const panel = document.getElementById('draftsPanel');
+            const isShowing = panel.style.display !== 'none';
+            panel.style.display = isShowing ? 'none' : 'block';
+            if (!isShowing) renderDraftsList();
+        }
+        
+        function renderDraftsList() {
+            if (typeof DxStorage === 'undefined') { 
+                document.getElementById('draftsList').innerHTML = '<p style="color:#6b7280;font-size:13px;">Storage not available.</p>';
+                return;
+            }
+            const keys = DxStorage.list('referral');
+            if (!keys || keys.length === 0) {
+                document.getElementById('draftsList').innerHTML = '<p style="color:#6b7280;font-size:13px;">No saved drafts yet. Generate a letter and click Save.</p>';
+                return;
+            }
+            const drafts = keys.map(k => ({ key: k, data: DxStorage.load('referral', k) })).filter(d => d.data).sort((a, b) => (b.data.savedAt || '').localeCompare(a.data.savedAt || ''));
+            document.getElementById('draftsList').innerHTML = drafts.map(d => {
+                const date = d.data.savedAt ? new Date(d.data.savedAt).toLocaleDateString() : '';
+                return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--rdx-bg-card);border:1px solid #e4e4e7;border-radius:8px;margin-bottom:6px;font-size:13px;">' +
+                    '<div style="cursor:pointer;flex:1;" onclick="loadDraft(\'' + d.key + '\')">' +
+                        '<strong>' + (d.data.label || 'Untitled') + '</strong>' +
+                        '<span style="color:#6b7280;margin-left:8px;">' + date + '</span>' +
+                    '</div>' +
+                    '<button onclick="deleteDraft(\'' + d.key + '\')" style="background:none;border:none;cursor:pointer;color:#ef4444;font-size:14px;" title="Delete">🗑️</button>' +
+                '</div>';
+            }).join('');
+        }
+        
+        function loadDraft(key) {
+            if (typeof DxStorage === 'undefined') return;
+            const draft = DxStorage.load('referral', key);
+            if (!draft || !draft.form) return;
+            const f = draft.form;
+            document.getElementById('letterType').value = f.letterType || '';
+            document.getElementById('fromService').value = f.fromService || '';
+            document.getElementById('toService').value = f.toService || '';
+            document.getElementById('urgency').value = f.urgency || '';
+            document.getElementById('patientName').value = f.patientName || '';
+            document.getElementById('patientAgeSex').value = f.patientAgeSex || '';
+            document.getElementById('diagnosis').value = f.diagnosis || '';
+            document.getElementById('reason').value = f.reason || '';
+            document.getElementById('history').value = f.history || '';
+            document.getElementById('management').value = f.management || '';
+            document.getElementById('questions').value = f.questions || '';
+            generateLetter();
+            document.getElementById('draftsPanel').style.display = 'none';
+        }
+        
+        function deleteDraft(key) {
+            if (typeof DxStorage === 'undefined') return;
+            DxStorage.remove('referral', key);
+            renderDraftsList();
+        }
+        
+        function loadTemplate(template) {
+            const templates = {
+                penicillin: {
+                    letterType: 'consult-to-ai',
+                    fromService: 'infectious-disease',
+                    toService: 'allergy-immunology',
+                    urgency: 'urgent',
+                    patientName: 'Robert Chen',
+                    patientAgeSex: '58 yo M',
+                    diagnosis: 'MSSA Endocarditis with documented penicillin allergy',
+                    reason: 'Requesting evaluation for penicillin allergy delabeling. Patient with MSSA endocarditis not responding optimally to vancomycin. Would prefer nafcillin-based therapy but patient has documented penicillin allergy from childhood.',
+                    history: '• MSSA endocarditis diagnosed 5 days ago\n• Persistent bacteremia on vancomycin\n• Penicillin allergy documented since childhood\n• Described as "rash" - no anaphylaxis features reported\n• No beta-lactam exposure since childhood\n• Otherwise healthy, no drug allergies',
+                    management: '• Vancomycin 1g IV q12h (day 5)\n• Blood cultures still positive day 4\n• Hemodynamically stable\n• Echo: 1.2cm vegetation on aortic valve',
+                    questions: '1. Can this patient be safely tested for penicillin allergy?\n2. What is your recommended approach (skin test vs direct challenge)?\n3. Timeline for results given clinical urgency?\n4. If testing positive, what are the safest alternatives?'
+                },
+                eoe: {
+                    letterType: 'consult-from-ai',
+                    fromService: 'allergy-immunology',
+                    toService: 'gastroenterology',
+                    urgency: 'routine',
+                    patientName: 'Brandon Lee',
+                    patientAgeSex: '14 yo M',
+                    diagnosis: 'Multiple food allergies with suspected EoE',
+                    reason: 'Requesting EGD with esophageal biopsies to evaluate for eosinophilic esophagitis. Patient with known IgE-mediated food allergies now with dysphagia and food impaction symptoms.',
+                    history: '• Known IgE-mediated allergies: peanut, tree nuts, egg\n• History of eczema (controlled) and allergic rhinitis\n• 6 months progressive dysphagia\n• Describes food "getting stuck" - drinks water to help\n• One episode of food impaction (resolved spontaneously)\n• Avoids certain textures\n• No weight loss, adequate growth',
+                    management: '• Strict allergen avoidance for known IgE-mediated allergies\n• epinephrine auto-injector (EpiPen) for anaphylaxis risk\n• Cetirizine 10mg daily for rhinitis\n• No current GI-directed therapy',
+                    questions: '1. Please perform EGD with biopsies (proximal and distal esophagus)\n2. If EoE confirmed, should we trial PPI before dietary elimination?\n3. Would you recommend testing-directed vs empiric elimination diet?\n4. How should we coordinate follow-up and co-management?'
+                },
+                vcd: {
+                    letterType: 'consult-from-ai',
+                    fromService: 'allergy-immunology',
+                    toService: 'speech-therapy',
+                    urgency: 'routine',
+                    patientName: 'Emma Davis',
+                    patientAgeSex: '16 yo F',
+                    diagnosis: 'Vocal Cord Dysfunction (confirmed)',
+                    reason: 'Requesting speech therapy for respiratory retraining. Patient with confirmed VCD by laryngoscopy, not responding to asthma medications, needs laryngeal control techniques.',
+                    history: '• Competitive swimmer\n• Episodes of throat tightness and stridor with exercise\n• Diagnosed as "exercise-induced asthma" but not responding to albuterol\n• Laryngoscopy during symptoms: paradoxical vocal cord adduction\n• Normal spirometry between episodes\n• Some anxiety around competition\n• No GERD symptoms',
+                    management: '• Discontinued albuterol (ineffective)\n• Laryngoscopy confirmed diagnosis\n• Psychology referral placed for anxiety component\n• Goal: return to competitive swimming',
+                    questions: '1. Please initiate respiratory retraining for VCD\n2. Focus on rescue breathing techniques for acute episodes\n3. Exercise-specific strategies for swimming\n4. Coordinate with psychology re: anxiety component\n5. Please update me on progress and any barriers'
+                },
+                school: {
+                    letterType: 'school-letter',
+                    fromService: 'allergy-immunology',
+                    toService: 'school',
+                    urgency: 'routine',
+                    patientName: 'Tyler Morrison',
+                    patientAgeSex: '8 yo M',
+                    diagnosis: 'Peanut Anaphylaxis - requires 504 Plan',
+                    reason: 'Request for 504 Plan accommodations for student with life-threatening peanut allergy and history of anaphylaxis.',
+                    history: '• Confirmed peanut allergy (IgE 45 kU/L, Ara h 2 positive)\n• History of anaphylaxis at school (required EpiPen)\n• Symptoms: hives, facial swelling, vomiting within 15 minutes\n• No other food allergies identified\n• No asthma',
+                    management: '• Strict peanut avoidance\n• EpiPens prescribed (2) - one for school, one for home\n• Emergency Action Plan provided\n• Parents trained on epinephrine auto-injector (EpiPen) administration\n• Medical alert bracelet worn',
+                    questions: '504 ACCOMMODATIONS REQUESTED:\n1. Peanut-free table in cafeteria\n2. No peanut products in classroom\n3. epinephrine auto-injector (EpiPen) stored in nurse\'s office AND classroom\n4. Trained staff on field trips\n5. Communication plan for substitute teachers\n6. Permission to carry backup epinephrine auto-injector (EpiPen)'
+                }
+            };
+            
+            const t = templates[template];
+            if (t) {
+                document.getElementById('letterType').value = t.letterType;
+                document.getElementById('fromService').value = t.fromService;
+                document.getElementById('toService').value = t.toService;
+                document.getElementById('urgency').value = t.urgency;
+                document.getElementById('patientName').value = t.patientName;
+                document.getElementById('patientAgeSex').value = t.patientAgeSex;
+                document.getElementById('diagnosis').value = t.diagnosis;
+                document.getElementById('reason').value = t.reason;
+                document.getElementById('history').value = t.history;
+                document.getElementById('management').value = t.management;
+                document.getElementById('questions').value = t.questions;
+                
+                generateLetter();
+            }
+        }
+    </script>
+
+    <script src="../js/dx-case-nav.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "index.html", parentName: "Home", platformRoot: "" }); });</script>
+<script src="dx-storage.js"></script>
+<script src="../js/dx-progress.js"></script>
+<script src="dx-tools-integration.js"></script>
+<script src="../js/rdx-persist.js"></script>
+<script src="dx-tools-nav.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
+</script>
+<script src="../js/rdx-help-widget.js"></script>
+
+<script src="../js/dx-feedback.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

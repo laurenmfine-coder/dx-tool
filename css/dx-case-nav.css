@@ -1,0 +1,435 @@
+/* DxSuite Unified Case Navigation
+   Sticky floating nav for adventure cases and other content pages
+   Provides consistent back/exit/menu functionality */
+
+/* Navigation Container - Sticky at top */
+.dx-case-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.dx-case-nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    gap: 16px;
+}
+
+/* Left side - Back button and breadcrumb */
+.dx-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.dx-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(168, 85, 247, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    border-radius: 8px;
+    color: #d8b4fe;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.dx-back-btn:hover {
+    background: rgba(168, 85, 247, 0.35);
+    transform: translateX(-2px);
+}
+
+.dx-back-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Breadcrumb */
+.dx-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dx-breadcrumb a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.dx-breadcrumb a:hover {
+    color: #e2e8f0;
+}
+
+.dx-breadcrumb-sep {
+    color: #475569;
+}
+
+.dx-breadcrumb-current {
+    color: #d8b4fe;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Center - Case title (optional) */
+.dx-nav-center {
+    flex: 0 1 auto;
+    text-align: center;
+}
+
+.dx-case-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Right side - Actions */
+.dx-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dx-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.dx-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.dx-nav-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Exit button - more prominent */
+.dx-exit-btn {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+}
+
+.dx-exit-btn:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: rgba(239, 68, 68, 0.6);
+}
+
+/* Menu dropdown */
+.dx-menu-dropdown {
+    position: relative;
+}
+
+.dx-menu-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 220px;
+    background: rgba(30, 41, 59, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.dx-menu-dropdown.open .dx-menu-content {
+    display: block;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dx-menu-section {
+    padding: 4px 0;
+}
+
+.dx-menu-section:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 4px;
+}
+
+.dx-menu-section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    padding: 8px 12px 4px;
+    font-weight: 600;
+}
+
+.dx-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    color: #e2e8f0;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+}
+
+.dx-menu-item:hover {
+    background: rgba(168, 85, 247, 0.2);
+    color: #f3e8ff;
+}
+
+.dx-menu-item-icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* Progress indicator */
+.dx-progress-mini {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.dx-progress-bar-mini {
+    width: 60px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.dx-progress-fill-mini {
+    height: 100%;
+    background: linear-gradient(90deg, #a855f7, #06b6d4);
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+/* Body padding to account for fixed nav */
+body.has-dx-nav {
+    padding-top: 60px !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .dx-case-nav-inner {
+        padding: 8px 12px;
+    }
+    
+    .dx-breadcrumb {
+        display: none;
+    }
+    
+    .dx-nav-center {
+        display: none;
+    }
+    
+    .dx-back-btn span {
+        display: none;
+    }
+    
+    .dx-nav-btn span {
+        display: none;
+    }
+    
+    .dx-back-btn,
+    .dx-nav-btn {
+        padding: 8px 10px;
+    }
+}
+
+/* Quick access floating button (alternative to full nav) */
+.dx-quick-nav {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9998;
+}
+
+.dx-quick-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #0891b2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dx-quick-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(168, 85, 247, 0.6);
+}
+
+.dx-quick-menu {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 12px);
+    right: 0;
+    background: rgba(30, 41, 59, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 8px;
+    min-width: 200px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.dx-quick-nav.open .dx-quick-menu {
+    display: block;
+    animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dx-quick-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    color: #e2e8f0;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+}
+
+.dx-quick-item:hover {
+    background: rgba(168, 85, 247, 0.2);
+}
+
+.dx-quick-item-icon {
+    font-size: 1.2rem;
+}
+
+/* Confirmation modal for exit */
+.dx-exit-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.dx-exit-modal.show {
+    display: flex;
+}
+
+.dx-exit-modal-content {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dx-exit-modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+}
+
+.dx-exit-modal-text {
+    color: #94a3b8;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.dx-exit-modal-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.dx-exit-modal-btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.dx-exit-modal-btn.cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+.dx-exit-modal-btn.cancel:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.dx-exit-modal-btn.confirm {
+    background: #ef4444;
+    color: white;
+}
+
+.dx-exit-modal-btn.confirm:hover {
+    background: #dc2626;
+}

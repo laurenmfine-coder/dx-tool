@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!-- training.html | CoachDx Hub | build 2025-02-24 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx — Clinical Reasoning Platform | ReasonDx</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/rdx-theme.css">
+    <link rel="stylesheet" href="mobile.css">
+    <style>
+        :root {
+            --brand: #2874A6; --brand-dark: #1B4F72; --brand-light: #D4E6F1;
+            --bg: #F8FAFC; --bg-card: #FFFFFF; --text: #1E293B;
+            --text-muted: #64748B; --border: #E2E8F0;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+            --font-display: 'Fraunces', Georgia, serif;
+            --green: #16A34A; --amber: #D97706; --red: #DC2626;
+            --purple: #7C3AED; --indigo: #4338CA;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        /* ── Welcome ─────────────────────────── */
+        .welcome { max-width: 1060px; margin: 0 auto; padding: 40px 24px 0; }
+        .welcome h1 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+        .welcome p { color: var(--text-muted); font-size: 15px; }
+
+        /* ── Stats row ───────────────────────── */
+        .stats-row { max-width: 1060px; margin: 20px auto 0; padding: 0 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .stat-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; flex: 1; min-width: 140px; }
+        .stat-val { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--brand); }
+        .stat-val .inf { font-size: 22px; }
+        .stat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 2px; }
+
+        /* ═══════════════════════════════════════
+           CLINICAL JOURNEY — Visual Flow
+           ═══════════════════════════════════════ */
+        .journey-section { max-width: 1060px; margin: 36px auto 0; padding: 0 24px; }
+        .journey-header { margin-bottom: 8px; }
+        .journey-header h2 {
+            font-family: var(--font-display); font-size: 22px; font-weight: 700;
+            color: var(--text); display: flex; align-items: center; gap: 10px;
+        }
+        .journey-header p { color: var(--text-muted); font-size: 14px; margin-top: 4px; line-height: 1.5; max-width: 680px; }
+
+        /* The flow container */
+        .journey-flow {
+            position: relative;
+            display: flex; align-items: stretch; gap: 0;
+            margin-top: 20px;
+        }
+
+        /* Stage cards */
+        .journey-stage {
+            flex: 1; min-width: 0;
+            background: white; border: 2px solid var(--border);
+            border-radius: 16px; padding: 24px 20px 20px;
+            position: relative; z-index: 2;
+            text-decoration: none; color: inherit;
+            transition: all 0.3s ease;
+            display: flex; flex-direction: column;
+        }
+        .journey-stage:hover {
+            box-shadow: 0 8px 32px rgba(40,116,166,0.12);
+            transform: translateY(-3px);
+        }
+        .stage-number {
+            position: absolute; top: -14px; left: 20px;
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 700; color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .stage-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-bottom: 14px;
+        }
+        .stage-title {
+            font-family: var(--font-display); font-size: 17px; font-weight: 700;
+            margin-bottom: 6px; line-height: 1.3;
+        }
+        .stage-role {
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 10px;
+        }
+        .stage-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; flex: 1; }
+        .stage-data {
+            margin-top: 14px; padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .stage-data-label {
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 6px;
+        }
+        .data-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+        .data-pill {
+            font-size: 10px; font-weight: 600;
+            padding: 3px 8px; border-radius: 8px;
+        }
+
+        /* Stage themes */
+        .stage-ed .stage-number { background: var(--red); }
+        .stage-ed .stage-icon { background: #FEE2E2; }
+        .stage-ed .stage-role { color: var(--red); }
+        .stage-ed .stage-data-label { color: var(--red); }
+        .stage-ed .data-pill { background: #FEE2E2; color: #991B1B; }
+        .stage-ed:hover { border-color: var(--red); }
+
+        .stage-nf .stage-number { background: var(--indigo); }
+        .stage-nf .stage-icon { background: #EEF2FF; }
+        .stage-nf .stage-role { color: var(--indigo); }
+        .stage-nf .stage-data-label { color: var(--indigo); }
+        .stage-nf .data-pill { background: #EEF2FF; color: var(--indigo); }
+        .stage-nf:hover { border-color: var(--indigo); }
+
+        .stage-sr .stage-number { background: var(--green); }
+        .stage-sr .stage-icon { background: #DCFCE7; }
+        .stage-sr .stage-role { color: var(--green); }
+        .stage-sr .stage-data-label { color: var(--green); }
+        .stage-sr .data-pill { background: #DCFCE7; color: #15803D; }
+        .stage-sr:hover { border-color: var(--green); }
+
+        /* Connectors between stages */
+        .journey-connector {
+            width: 64px; flex-shrink: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            position: relative; z-index: 1;
+        }
+        .connector-line {
+            position: relative; width: 100%; height: 2px;
+        }
+        .connector-line::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: repeating-linear-gradient(90deg, var(--border) 0, var(--border) 6px, transparent 6px, transparent 12px);
+        }
+        /* Animated data pulse */
+        .connector-pulse {
+            position: absolute; top: -4px; left: -6px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--brand); opacity: 0;
+            animation: dataPulse 3s ease-in-out infinite;
+        }
+        .journey-connector:nth-child(2) .connector-pulse { animation-delay: 0s; }
+        .journey-connector:nth-child(4) .connector-pulse { animation-delay: 1.5s; }
+        @keyframes dataPulse {
+            0% { left: -6px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: calc(100% - 4px); opacity: 0; }
+        }
+        .connector-label {
+            font-size: 9px; font-weight: 700; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 0.04em;
+            text-align: center; margin-top: 8px; line-height: 1.3;
+        }
+
+        /* Journey try-it banner */
+        .journey-cta {
+            margin-top: 16px;
+            background: linear-gradient(135deg, #0F172A 0%, #1B3A5C 50%, #2874A6 100%);
+            border-radius: 12px; padding: 16px 24px;
+            display: flex; align-items: center; gap: 16px;
+            color: white;
+        }
+        .journey-cta-icon { font-size: 28px; flex-shrink: 0; }
+        .journey-cta-text { flex: 1; }
+        .journey-cta-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+        .journey-cta-desc { font-size: 12px; opacity: 0.8; line-height: 1.4; }
+        .journey-cta-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: white; color: var(--brand-dark);
+            font-size: 13px; font-weight: 700;
+            padding: 10px 20px; border-radius: 10px;
+            text-decoration: none; flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .journey-cta-btn:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+
+        /* ═══════════════════════════════════════
+           STANDALONE TOOLS — Grid
+           ═══════════════════════════════════════ */
+        .tools-section { max-width: 1060px; margin: 40px auto 0; padding: 0 24px; }
+        .tools-header { margin-bottom: 16px; }
+        .tools-header h2 {
+            font-family: var(--font-display); font-size: 20px; font-weight: 600;
+            color: var(--text); display: flex; align-items: center; gap: 8px;
+        }
+        .tools-header p { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+
+        .tool-card {
+            background: white; border: 1.5px solid var(--border); border-radius: 14px;
+            padding: 22px 20px; text-decoration: none; color: inherit;
+            transition: all 0.25s; display: flex; gap: 14px; align-items: flex-start;
+        }
+        .tool-card:hover { border-color: var(--brand); box-shadow: 0 6px 24px rgba(40,116,166,0.08); transform: translateY(-2px); }
+        .tool-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
+        }
+        .tool-info { flex: 1; min-width: 0; }
+        .tool-title { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+        .tool-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+        .tool-tags { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+        .tool-tag { padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; }
+
+        .tool-card.crt .tool-icon { background: #F3E8FF; }
+        .tool-card.crt .tool-tag { background: #F3E8FF; color: #6D28D9; }
+        .tool-card.crt:hover { border-color: var(--purple); }
+
+        .tool-card.sbar .tool-icon { background: #DCFCE7; }
+        .tool-card.sbar .tool-tag { background: #DCFCE7; color: #15803D; }
+        .tool-card.sbar:hover { border-color: var(--green); }
+
+        .tool-card.edh .tool-icon { background: #FEF3C7; }
+        .tool-card.edh .tool-tag { background: #FEF3C7; color: #B45309; }
+        .tool-card.edh:hover { border-color: var(--amber); }
+
+        .tool-card.consult .tool-icon { background: #E0F2FE; }
+        .tool-card.consult .tool-tag { background: #E0F2FE; color: #0369A1; }
+        .tool-card.consult:hover { border-color: #0284C7; }
+
+        .tool-card.coach .tool-icon { background: #FCE7F3; }
+        .tool-card.coach .tool-tag { background: #FCE7F3; color: #BE185D; }
+        .tool-card.coach:hover { border-color: #DB2777; }
+
+        .pro-badge {
+            display: inline-flex; align-items: center; gap: 3px;
+            background: var(--brand); color: white; font-size: 9px; font-weight: 700;
+            padding: 2px 7px; border-radius: 6px; letter-spacing: 0.3px;
+            margin-left: 6px; vertical-align: middle;
+        }
+
+        /* ── Footer spacer ───────────────────── */
+        .footer-space { height: 60px; }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 840px) {
+            .journey-flow {
+                flex-direction: column; gap: 0;
+            }
+            .journey-connector {
+                width: 100%; height: 48px;
+                flex-direction: row; gap: 10px;
+                justify-content: flex-start;
+                padding-left: 34px;
+            }
+            .connector-line {
+                width: 2px; height: 32px;
+            }
+            .connector-line::before {
+                width: 2px; height: 100%;
+                background: repeating-linear-gradient(180deg, var(--border) 0, var(--border) 6px, transparent 6px, transparent 12px);
+            }
+            .connector-pulse {
+                animation: dataPulseV 3s ease-in-out infinite;
+                top: -6px; left: -4px;
+            }
+            @keyframes dataPulseV {
+                0% { top: -6px; opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { top: calc(100% - 4px); opacity: 0; }
+            }
+            .connector-label { margin-top: 0; margin-left: 10px; text-align: left; }
+            .journey-cta { flex-direction: column; text-align: center; gap: 12px; }
+            .journey-cta-btn { align-self: center; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .stats-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome -->
+    <div class="welcome" id="welcomeSection">
+        <h1 id="welcomeTitle">Welcome to CoachDx</h1>
+        <p>Your clinical reasoning platform — reason through cases, practice communication, and get AI coaching.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow">
+        <div class="stat-card">
+            <div class="stat-val" id="casesStat">0 <span class="inf">/ &#8734;</span></div>
+            <div class="stat-label">Cases This Month</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-val" id="streakStat">0</div>
+            <div class="stat-label">Day Streak</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-val" id="totalStat">0</div>
+            <div class="stat-label">Total Completed</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         VIRTUAL HOSPITAL — Hero Entry Point
+         ═══════════════════════════════════════════════ -->
+    <div style="max-width:960px;margin:0 auto 32px;padding:0 24px;">
+        <a href="hospital-3d.html" style="display:block;text-decoration:none;background:linear-gradient(135deg,#0d1520 0%,#162030 40%,#1B4F72 100%);border:1.5px solid rgba(40,116,166,.3);border-radius:16px;padding:28px 32px;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.2);" onmouseover="this.style.borderColor='#2874A6';this.style.boxShadow='0 8px 30px rgba(40,116,166,.25)'" onmouseout="this.style.borderColor='rgba(40,116,166,.3)';this.style.boxShadow='0 4px 20px rgba(0,0,0,.2)'">
+            <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+                <div style="font-size:48px;">🏥</div>
+                <div style="flex:1;min-width:200px;">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+                        <span style="font-size:20px;font-weight:700;color:white;">Virtual Hospital</span>
+                        <span style="background:#2874A6;color:white;padding:2px 10px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;">NEW</span>
+                    </div>
+                    <div style="font-size:13px;color:#a0b8d0;line-height:1.5;">Walk through a 3D teaching hospital in first person. Visit the information desk, choose your rotation, and navigate to 7 department doors — ED, Night Float, SimRoomDx, Skills Lab, Library, CoachDx, and Clinical Tools.</div>
+                    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+                        <span style="font-size:10px;padding:3px 10px;background:rgba(40,116,166,.15);color:#5dade2;border-radius:6px;font-weight:600;">3D First-Person</span>
+                        <span style="font-size:10px;padding:3px 10px;background:rgba(40,116,166,.15);color:#5dade2;border-radius:6px;font-weight:600;">7 Departments</span>
+                        <span style="font-size:10px;padding:3px 10px;background:rgba(40,116,166,.15);color:#5dade2;border-radius:6px;font-weight:600;">Role Selection</span>
+                        <span style="font-size:10px;padding:3px 10px;background:rgba(40,116,166,.15);color:#5dade2;border-radius:6px;font-weight:600;">Interactive Wayfinding</span>
+                        <span style="font-size:10px;padding:3px 10px;background:rgba(40,116,166,.15);color:#5dade2;border-radius:6px;font-weight:600;">Ambient Audio</span>
+                    </div>
+                </div>
+                <div style="font-size:14px;color:#2874A6;font-weight:700;">Enter Hospital &#8594;</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         CLINICAL JOURNEY — Visual Flow
+         ═══════════════════════════════════════════════ -->
+    <div class="journey-section">
+        <div class="journey-header">
+            <h2>&#127973; The Clinical Journey</h2>
+            <p>Follow a patient from the emergency department through overnight management to morning rounds. For select high-acuity cases, your clinical decisions, labs, imaging, and history carry through every stage — the same patient, the same story. Each stage also works as a standalone simulator.</p>
+        </div>
+
+        <div class="journey-flow">
+            <!-- STAGE 1: ED Board -->
+            <a href="ed-3d.html" class="journey-stage stage-ed">
+                <div class="stage-number">1</div>
+                <div class="stage-icon">&#128657;</div>
+                <div class="stage-title">ED Board</div>
+                <div class="stage-role">Emergency Department</div>
+                <div class="stage-desc">
+                    Run the department. Manage AI patients arriving with undifferentiated chief complaints. Take a history, examine, order labs and imaging, interpret results, start treatments, and make the disposition call.
+                </div>
+                <div class="stage-data">
+                    <div class="stage-data-label">You generate &#8594;</div>
+                    <div class="data-pills">
+                        <span class="data-pill">History &amp; Exam</span>
+                        <span class="data-pill">Lab Results</span>
+                        <span class="data-pill">Imaging</span>
+                        <span class="data-pill">ECG</span>
+                        <span class="data-pill">Treatments</span>
+                        <span class="data-pill">Disposition</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Connector 1-2 -->
+            <div class="journey-connector">
+                <div class="connector-line">
+                    <div class="connector-pulse"></div>
+                </div>
+                <div class="connector-label">Patient<br>admitted</div>
+            </div>
+
+            <!-- STAGE 2: Night Float -->
+            <a href="night-float.html" class="journey-stage stage-nf">
+                <div class="stage-number">2</div>
+                <div class="stage-icon">&#127769;</div>
+                <div class="stage-title">Night Float</div>
+                <div class="stage-role">Overnight Call</div>
+                <div class="stage-desc">
+                    Accept new admissions from the ED and manage existing patients on the floor. Write admission orders, respond to nurse pages, handle overnight clinical events, and hand off to the day team at 7 AM with I-PASS.
+                </div>
+                <div class="stage-data">
+                    <div class="stage-data-label">Carries through &#8594;</div>
+                    <div class="data-pills">
+                        <span class="data-pill">ED Admits</span>
+                        <span class="data-pill">Floor Pages</span>
+                        <span class="data-pill">Admission Orders</span>
+                        <span class="data-pill">Overnight Events</span>
+                        <span class="data-pill">I-PASS Handoff</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Connector 2-3 -->
+            <div class="journey-connector">
+                <div class="connector-line">
+                    <div class="connector-pulse"></div>
+                </div>
+                <div class="connector-label">Morning<br>handoff</div>
+            </div>
+
+            <!-- STAGE 3: SimRoomDx -->
+            <a href="simroomdx.html" class="journey-stage stage-sr">
+                <div class="stage-number">3</div>
+                <div class="stage-icon">&#129658;</div>
+                <div class="stage-title">SimRoomDx</div>
+                <div class="stage-role">Morning Rounds</div>
+                <div class="stage-desc">
+                    Present your patient on morning rounds. In connected mode, the attending, nurse, pharmacist, and family are AI characters who know the real history, meds, labs, and overnight course from earlier stages. Also works standalone with built-in cases.
+                </div>
+                <div class="stage-data">
+                    <div class="stage-data-label">AI characters know &#8594;</div>
+                    <div class="data-pills">
+                        <span class="data-pill">PMH &amp; Meds</span>
+                        <span class="data-pill">All Labs</span>
+                        <span class="data-pill">Imaging</span>
+                        <span class="data-pill">Treatments</span>
+                        <span class="data-pill">Your Handoff</span>
+                        <span class="data-pill">6 Characters</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- CTA to start the journey -->
+        <div class="journey-cta">
+            <div class="journey-cta-icon">&#128260;</div>
+            <div class="journey-cta-text">
+                <div class="journey-cta-title">Start at any stage — or play the full journey</div>
+                <div class="journey-cta-desc">Each simulator works standalone. For connected cases (STEMI, NSTEMI, DKA, Stroke, COPD, Urosepsis, PE, CHF, Meningitis, GI Bleed, Pancreatitis, Appendicitis, Ruptured AAA, SAH, Eclampsia), the full ED &#8594; Night Float &#8594; Rounds path carries one patient with all clinical data intact. Night Float also includes floor pages and independent admissions.</div>
+            </div>
+            <a href="ed-3d.html" class="journey-cta-btn">Begin in the ED &#8594;</a>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         STANDALONE TOOLS
+         ═══════════════════════════════════════════════ -->
+    <div class="tools-section">
+        <div class="tools-header">
+            <h2>&#128736;&#65039; Skill Trainers</h2>
+            <p>Practice specific clinical skills independently.</p>
+        </div>
+
+        <div class="tools-grid">
+            <a href="crt-hub.html" class="tool-card crt">
+                <div class="tool-icon">&#129504;</div>
+                <div class="tool-info">
+                    <div class="tool-title">Clinical Reasoning Trainer</div>
+                    <div class="tool-desc">Build your differential, take a history, examine the patient, order workup, and refine your reasoning with AI feedback.</div>
+                    <div class="tool-tags">
+                        <span class="tool-tag">55 CRT Cases</span>
+                        <span class="tool-tag">30 Trainers</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="tools/sbar-trainer.html" class="tool-card sbar">
+                <div class="tool-icon">&#128203;</div>
+                <div class="tool-info">
+                    <div class="tool-title">SBAR Communication</div>
+                    <div class="tool-desc">Practice structured handoffs using the Situation-Background-Assessment-Recommendation framework with AI scoring.</div>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Handoff Practice</span>
+                        <span class="tool-tag">AI Scoring</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="night-float.html" class="tool-card edh">
+                <div class="tool-icon">&#128222;</div>
+                <div class="tool-info">
+                    <div class="tool-title">ED Handoff Trainer</div>
+                    <div class="tool-desc">The ED calls with a new admit. How much info you get depends on the difficulty tier. Build your differential and make the diagnosis.</div>
+                    <div class="tool-tags">
+                        <span class="tool-tag">3 Tiers</span>
+                        <span class="tool-tag">4 Cases</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="consult-callback.html" class="tool-card consult">
+                <div class="tool-icon">&#128483;&#65039;</div>
+                <div class="tool-info">
+                    <div class="tool-title">Consultant Callback</div>
+                    <div class="tool-desc">The specialist is calling back with questions and pushback. Present your case, justify the consult, and handle 8 different personalities.</div>
+                    <div class="tool-tags">
+                        <span class="tool-tag">8 Specialties</span>
+                        <span class="tool-tag">Pushback Training</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="CoachDx/mentor-chat.html" class="tool-card coach">
+                <div class="tool-icon">&#128161;</div>
+                <div class="tool-info">
+                    <div class="tool-title">AI Clinical Coach <span class="pro-badge">PRO</span></div>
+                    <div class="tool-desc">Personalized coaching from an AI mentor. Discuss cases, explore reasoning strategies, and receive Socratic guidance.</div>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Socratic Mentoring</span>
+                        <span class="tool-tag">Pattern Analysis</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-space"></div>
+
+    <!-- Scripts -->
+    <script src="js/rdx-persist.js"></script>
+    <script src="js/rdx-nav.js"></script>
+    <script src="js/rdx-gate.js"></script>
+    <script>
+    // Personalize welcome
+    (function() {
+        try {
+            const raw = localStorage.getItem('reasondx-user');
+            if (raw) {
+                const user = JSON.parse(raw);
+                if (user && user.name) {
+                    document.getElementById('welcomeTitle').textContent = 'Welcome back, ' + user.name + ' \u{1F44B}';
+                }
+            }
+        } catch(e) {}
+
+        // Load stats from localStorage
+        try {
+            const progress = JSON.parse(localStorage.getItem('reasondx-plan-usage') || '{}');
+            const cases = (progress.cases || []);
+            const now = new Date();
+            const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+            const thisMonth = cases.filter(c => c.timestamp >= monthStart);
+            const uniqueThisMonth = [...new Set(thisMonth.map(c => c.id))];
+            
+            // Check if pro
+            const user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+            const plan = user.plan || 'free';
+            const isPro = (plan === 'pro' || plan === 'admin' || plan === 'premium' || plan === 'annual');
+            
+            document.getElementById('casesStat').innerHTML = uniqueThisMonth.length + (isPro ? ' <span class="inf">/ \u221E</span>' : ' <span class="inf">/ 3</span>');
+            
+            // Streak & total from progress tracker
+            const tracker = JSON.parse(localStorage.getItem('reasondx-progress') || '{}');
+            if (tracker.streak) document.getElementById('streakStat').textContent = tracker.streak;
+            if (tracker.totalCompleted) document.getElementById('totalStat').textContent = tracker.totalCompleted;
+        } catch(e) {}
+    })();
+    </script>
+    <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}</script>
+    <script src="js/rdx-help-widget.js"></script>
+</body>
+</html>
