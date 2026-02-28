@@ -1,1 +1,0 @@
-window.DxProgressTracker=window.DxProgressTracker||{};

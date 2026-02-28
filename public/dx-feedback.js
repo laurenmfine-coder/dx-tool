@@ -1,1 +1,0 @@
-/* ReasonDx feedback widget — placeholder */

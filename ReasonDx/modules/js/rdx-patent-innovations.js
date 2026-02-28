@@ -1,1 +1,0 @@
-/* Patent innovations - placeholder */
