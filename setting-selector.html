@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Clinical Setting Selector</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F0F2F5;
+  --surface: #FFF;
+  --surface-alt: #F7F8FA;
+  --brand: #2874A6;
+  --brand-dark: #1B5E8A;
+  --brand-light: #E3F2FD;
+  --accent: #00897B;
+  --accent-light: #E0F2F1;
+  --danger: #C62828;
+  --text: #1A1A2E;
+  --text-secondary: #5A6178;
+  --text-muted: #8C92A4;
+  --border: #DFE1E6;
+  --border-light: #ECEEF2;
+  --radius: 10px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'IBM Plex Sans',-apple-system,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.02); } }
+
+/* ─── HEADER ─── */
+.header {
+  background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 60%, var(--accent) 100%);
+  padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
+}
+.header-logo { display:flex; align-items:center; gap:12px; color:#fff; }
+.header-logo-icon { width:32px; height:32px; background:rgba(255,255,255,.15); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; }
+.header-logo-text { font-size:16px; font-weight:700; letter-spacing:-.3px; }
+.header-logo-sub { font-size:12px; color:rgba(255,255,255,.5); margin-left:4px; }
+.header-right { display:flex; align-items:center; gap:16px; }
+.header-user { color:rgba(255,255,255,.7); font-size:12px; }
+.header-setting-badge { padding:4px 12px; border-radius:6px; font-size:11px; font-weight:600; color:#fff; background:rgba(255,255,255,.15); }
+
+/* ─── MAIN LAYOUT ─── */
+.main { max-width:1080px; margin:0 auto; padding:32px 24px; }
+.section-title { font-size:22px; font-weight:700; color:var(--text); margin-bottom:4px; letter-spacing:-.3px; }
+.section-subtitle { font-size:14px; color:var(--text-secondary); margin-bottom:24px; line-height:1.5; }
+
+/* ─── PILLAR BAR ─── */
+.pillar-bar {
+  display:flex; gap:0; margin-bottom:32px; border-radius:var(--radius); overflow:hidden;
+  box-shadow: var(--shadow-sm);
+}
+.pillar-item {
+  flex:1; padding:14px 16px; display:flex; align-items:center; gap:10px;
+  border:none; cursor:default; font-family:inherit; font-size:12px; font-weight:600;
+  text-transform:uppercase; letter-spacing:.5px;
+}
+.pillar-reason { background:#E3F2FD; color:#2874A6; }
+.pillar-mechanism { background:#F3E5F5; color:#7C3AED; }
+.pillar-coach { background:#E8F5E9; color:#2E7D32; }
+.pillar-icon { font-size:16px; }
+.pillar-label { white-space:nowrap; }
+.pillar-desc { font-size:11px; font-weight:400; color:inherit; opacity:.7; display:none; }
+@media(min-width:768px) { .pillar-desc { display:inline; } }
+
+/* ─── STEP INDICATOR ─── */
+.steps { display:flex; align-items:center; gap:0; margin-bottom:28px; }
+.step {
+  display:flex; align-items:center; gap:8px; padding:8px 16px; font-size:13px; font-weight:500;
+  color:var(--text-muted); position:relative;
+}
+.step.active { color:var(--brand); font-weight:700; }
+.step.done { color:var(--accent); }
+.step-num {
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; border:2px solid var(--border);
+  background:var(--surface); transition:all .2s;
+}
+.step.active .step-num { border-color:var(--brand); background:var(--brand); color:#fff; }
+.step.done .step-num { border-color:var(--accent); background:var(--accent); color:#fff; }
+.step-connector { width:40px; height:2px; background:var(--border); margin:0 4px; }
+.step-connector.done { background:var(--accent); }
+
+/* ─── SETTING CARDS ─── */
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; }
+.setting-card {
+  background:var(--surface); border-radius:12px; padding:20px; cursor:pointer;
+  border:2px solid transparent; transition:all .2s ease;
+  box-shadow:var(--shadow-sm); animation:slideUp .4s ease both;
+  position:relative; overflow:hidden;
+}
+.setting-card:hover { border-color:var(--border); transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.setting-card.selected { border-color:var(--brand); box-shadow:0 0 0 3px rgba(40,116,166,.15); }
+.setting-card.selected::after {
+  content:'✓'; position:absolute; top:12px; right:12px; width:24px; height:24px;
+  background:var(--brand); color:#fff; border-radius:50%; display:flex;
+  align-items:center; justify-content:center; font-size:12px; font-weight:700;
+}
+.card-icon { font-size:28px; margin-bottom:8px; }
+.card-label { font-size:16px; font-weight:700; margin-bottom:4px; }
+.card-role { font-size:12px; color:var(--text-muted); font-weight:500; margin-bottom:8px; }
+.card-desc { font-size:13px; color:var(--text-secondary); line-height:1.5; }
+.card-color-bar { position:absolute; top:0; left:0; right:0; height:3px; }
+
+/* ─── SPECIALTY CARDS ─── */
+.specialty-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:12px; }
+.specialty-card {
+  background:var(--surface); border-radius:10px; padding:16px; cursor:pointer;
+  border:2px solid transparent; transition:all .2s ease;
+  box-shadow:var(--shadow-sm); animation:slideUp .3s ease both;
+  display:flex; align-items:center; gap:12px;
+}
+.specialty-card:hover { border-color:var(--border); transform:translateY(-1px); }
+.specialty-card.selected { border-color:var(--brand); box-shadow:0 0 0 3px rgba(40,116,166,.15); }
+.specialty-card.unavailable { opacity:.4; cursor:not-allowed; pointer-events:none; }
+.specialty-icon { font-size:24px; flex-shrink:0; }
+.specialty-label { font-size:14px; font-weight:600; }
+.specialty-sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
+
+/* ─── SUMMARY / CONFIRMATION ─── */
+.summary-card {
+  background:var(--surface); border-radius:12px; padding:28px; box-shadow:var(--shadow-md);
+  animation:slideUp .4s ease both; border-left:4px solid var(--brand);
+}
+.summary-row { display:flex; gap:16px; margin-bottom:16px; align-items:flex-start; }
+.summary-label { font-size:12px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; min-width:120px; }
+.summary-value { font-size:14px; font-weight:500; color:var(--text); }
+.summary-value small { font-weight:400; color:var(--text-secondary); }
+.summary-divider { border:none; border-top:1px solid var(--border-light); margin:20px 0; }
+
+/* ─── HANDOFF PREVIEW ─── */
+.handoff-card {
+  background:linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+  border-radius:12px; padding:24px; color:#fff; margin-top:20px;
+  box-shadow:var(--shadow-lg); animation:slideUp .5s ease both;
+}
+.handoff-title { font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.5); margin-bottom:4px; }
+.handoff-oneliner { font-size:15px; line-height:1.6; color:rgba(255,255,255,.9); margin-bottom:16px; padding:12px 16px; background:rgba(255,255,255,.06); border-radius:8px; border-left:3px solid var(--brand); }
+.handoff-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.handoff-item { }
+.handoff-item-label { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; color:rgba(255,255,255,.4); margin-bottom:2px; }
+.handoff-item-value { font-size:13px; color:rgba(255,255,255,.85); }
+.handoff-watchouts { margin-top:16px; }
+.handoff-watchout {
+  padding:8px 12px; margin-bottom:6px; background:rgba(198,40,40,.15);
+  border-radius:6px; border-left:3px solid #C62828; font-size:12px;
+  color:rgba(255,255,255,.85); line-height:1.5;
+}
+
+/* ─── BUTTONS ─── */
+.btn-row { display:flex; gap:12px; margin-top:28px; justify-content:flex-end; }
+.btn {
+  padding:12px 28px; border-radius:var(--radius); font-size:14px; font-weight:600;
+  font-family:'IBM Plex Sans',sans-serif; cursor:pointer; transition:all .2s;
+  display:flex; align-items:center; gap:8px; border:none;
+}
+.btn-primary { background:var(--brand); color:#fff; }
+.btn-primary:hover { background:var(--brand-dark); transform:translateY(-1px); box-shadow:var(--shadow-md); }
+.btn-secondary { background:var(--surface); color:var(--text); border:1px solid var(--border); }
+.btn-secondary:hover { background:var(--surface-alt); }
+.btn-primary:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+.btn-launch { background:linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); color:#fff; padding:14px 36px; font-size:15px; }
+.btn-launch:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(40,116,166,.3); }
+
+/* ─── NOTE TEMPLATE PREVIEW ─── */
+.note-preview {
+  background:var(--surface); border-radius:12px; padding:24px; margin-top:20px;
+  border:1px solid var(--border-light); box-shadow:var(--shadow-sm);
+}
+.note-preview-title { font-size:14px; font-weight:700; margin-bottom:12px; color:var(--brand); }
+.note-section-preview {
+  padding:8px 12px; margin-bottom:4px; background:var(--surface-alt);
+  border-radius:6px; font-size:12px; display:flex; justify-content:space-between; align-items:center;
+}
+.note-section-label { font-weight:600; font-family:'IBM Plex Mono',monospace; letter-spacing:.3px; color:var(--text); }
+.note-section-hint { color:var(--text-muted); font-size:11px; }
+
+/* ─── INFO BADGES ─── */
+.info-badge {
+  display:inline-flex; align-items:center; gap:6px; padding:4px 10px;
+  border-radius:6px; font-size:11px; font-weight:600;
+}
+.info-badge-blue { background:var(--brand-light); color:var(--brand); }
+.info-badge-green { background:#E8F5E9; color:#2E7D32; }
+.info-badge-amber { background:#FFF8E1; color:#F57F17; }
+.info-badge-red { background:#FFEBEE; color:#C62828; }
+.case-count { font-size:13px; color:var(--text-secondary); margin-top:8px; }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:640px) {
+  .card-grid { grid-template-columns:1fr; }
+  .specialty-grid { grid-template-columns:1fr 1fr; }
+  .handoff-grid { grid-template-columns:1fr; }
+  .pillar-bar { flex-direction:column; }
+  .steps { flex-wrap:wrap; justify-content:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">
+    <div class="header-logo-icon">📋</div>
+    <span class="header-logo-text">Virtual EMR<span class="header-logo-sub">ReasonDx</span></span>
+  </div>
+  <div class="header-right">
+    <span class="header-user" id="headerContext"></span>
+  </div>
+</div>
+
+<div class="main" id="app"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// INLINE DATA (in production, these load from clinical-settings.js)
+// ═══════════════════════════════════════════════════════════════
+
+const SETTINGS = [
+  { id:"ed", label:"Emergency Department", icon:"🚨", color:"#C62828",
+    description:"Diagnose, stabilize, dispo. Triage acuity drives urgency. Time-pressured reasoning with incomplete data.",
+    roleFrame:"ED Physician / Student", timeModel:"Minutes to hours" },
+  { id:"inpatient", label:"Inpatient Floor", icon:"🏥", color:"#1565C0",
+    description:"Inherit the ED workup. Refine the diagnosis. Build a management plan. Anticipate complications. Plan for discharge.",
+    roleFrame:"Admitting Resident / Student", timeModel:"Days (1–7)" },
+  { id:"consult", label:"Inpatient Consult", icon:"📋", color:"#6A1B9A",
+    description:"Answer the specific clinical question. Provide specialty-level assessment. Recommend targeted workup.",
+    roleFrame:"Consulting Specialist", timeModel:"Single encounter" },
+  { id:"icu", label:"ICU", icon:"💓", color:"#AD1457",
+    description:"Manage multi-organ failure. Titrate drips. Monitor ventilator settings. Navigate goals-of-care.",
+    roleFrame:"Critical Care Team", timeModel:"Hour-by-hour" },
+  { id:"clinic", label:"Outpatient Clinic", icon:"🩺", color:"#2E7D32",
+    description:"Longitudinal management. Preventive care. Medication adjustments. Coordination across providers.",
+    roleFrame:"PCP or Specialist", timeModel:"Visit-based" },
+  { id:"post-discharge", label:"Post-Discharge Follow-Up", icon:"🔄", color:"#00838F",
+    description:"Transition of care. Reconcile medications. Assess recovery. Prevent readmission.",
+    roleFrame:"Outpatient Provider", timeModel:"2-week follow-up" }
+];
+
+const SPECIALTIES = [
+  { id:"im", label:"Internal Medicine", icon:"🫀", color:"#1565C0",
+    settings:["ed","inpatient","icu","clinic","post-discharge","consult"],
+    focus:"Systems-based assessment. Comorbidity management. Evidence-based guidelines." },
+  { id:"surgery", label:"Surgery", icon:"🔪", color:"#B71C1C",
+    settings:["ed","inpatient","icu","clinic","post-discharge","consult"],
+    focus:"Operative vs. non-operative decision-making. Pre/post-op management." },
+  { id:"pediatrics", label:"Pediatrics", icon:"👶", color:"#FF6F00",
+    settings:["ed","inpatient","icu","clinic","post-discharge","consult"],
+    focus:"Age-appropriate differentials. Weight-based dosing. Family-centered care." },
+  { id:"obgyn", label:"OB/GYN", icon:"🤰", color:"#880E4F",
+    settings:["ed","inpatient","icu","clinic","post-discharge","consult"],
+    focus:"Pregnancy physiology. Teratogenic awareness. Reproductive health." },
+  { id:"psychiatry", label:"Psychiatry", icon:"🧠", color:"#4A148C",
+    settings:["ed","inpatient","clinic","post-discharge","consult"],
+    focus:"Risk assessment. Capacity evaluation. Psychotropic management." },
+  { id:"fm", label:"Family Medicine", icon:"👨‍👩‍👧‍👦", color:"#2E7D32",
+    settings:["ed","inpatient","clinic","post-discharge"],
+    focus:"Whole-patient context. Preventive care. Social determinants." },
+  { id:"neurology", label:"Neurology", icon:"⚡", color:"#311B92",
+    settings:["ed","inpatient","icu","clinic","post-discharge","consult"],
+    focus:"Localization-first reasoning. Time-sensitive interventions." },
+  { id:"em", label:"Emergency Medicine", icon:"🚑", color:"#C62828",
+    settings:["ed"],
+    focus:"Triage, stabilize, diagnose, dispo. Can't-miss diagnoses." }
+];
+
+// Sample case counts by setting+specialty (illustrative)
+const CASE_COUNTS = {
+  "ed-im":226, "ed-surgery":85, "ed-pediatrics":28, "ed-obgyn":18, "ed-psychiatry":22,
+  "ed-fm":226, "ed-neurology":48, "ed-em":226,
+  "inpatient-im":180, "inpatient-surgery":75, "inpatient-pediatrics":22, "inpatient-obgyn":14,
+  "inpatient-psychiatry":16, "inpatient-fm":180, "inpatient-neurology":40,
+  "consult-im":120, "consult-surgery":65, "consult-pediatrics":18, "consult-obgyn":12,
+  "consult-psychiatry":20, "consult-neurology":35,
+  "icu-im":60, "icu-surgery":30, "icu-pediatrics":10, "icu-obgyn":6, "icu-neurology":18,
+  "clinic-im":160, "clinic-surgery":50, "clinic-pediatrics":20, "clinic-obgyn":12,
+  "clinic-psychiatry":14, "clinic-fm":180, "clinic-neurology":32,
+  "post-discharge-im":160, "post-discharge-surgery":50, "post-discharge-pediatrics":18,
+  "post-discharge-obgyn":10, "post-discharge-fm":160, "post-discharge-neurology":30
+};
+
+// Note templates by setting
+const NOTE_TEMPLATES = {
+  "ed": { label:"ED Note", sections:["Chief Complaint","HPI","PMH/PSH","Medications","Allergies","Family/Social Hx","ROS","Physical Exam","Assessment","Plan"] },
+  "inpatient": { label:"Admission H&P", sections:["Reason for Admission","HPI (incl. ED course)","PMH/PSH","Home Medications","Allergies","Family/Social Hx","ROS","Physical Exam","Assessment (by problem)","Plan (by problem)","Overnight Anticipatory Guidance","Anticipated Disposition"] },
+  "consult": { label:"Consultation Note", sections:["Reason for Consultation","Focused History","Specialty-Focused Exam","Assessment","Recommendations","Follow-Up Plan"] },
+  "icu": { label:"ICU Progress Note", sections:["24-Hour Events","Neuro","Cardiovascular","Respiratory","GI/Nutrition","Renal/Fluids","ID","Heme","Endo","Overall Assessment","Plan by System"] },
+  "clinic": { label:"Outpatient Visit Note", sections:["Visit Reason","HPI/Interval History","ROS","Physical Exam","Results Review","Assessment","Plan","Preventive Care"] },
+  "post-discharge": { label:"Post-Discharge Follow-Up Note", sections:["Discharge Summary Review","Interval History","Medication Reconciliation","Physical Exam","Pending Results","Assessment","Plan"] }
+};
+
+// Sample handoff for demo
+const SAMPLE_HANDOFF = {
+  physician: "Dr. Rebecca Marsh, MD",
+  time: "02:15",
+  bed: "4 West — Room 412",
+  oneLiner: "65-year-old male with HFrEF, EF 25%, presenting with 5 days of progressive dyspnea, orthopnea, and weight gain — bilateral crackles and 3+ pitting edema on exam. BNP 2,400. This is his third CHF exacerbation admission this year.",
+  dx: "Acute Decompensated Heart Failure (ADHF)",
+  pending: ["Repeat troponin at 06:00","Repeat BMP (post-diuresis Cr/K)","Echo — not yet scheduled","TSH pending"],
+  watchOuts: [
+    "Cr trending up (1.4→1.8). Cardiorenal risk. If Cr >2.2 or UOP drops, call nephrology.",
+    "K 4.8 pre-diuresis — will drop with furosemide. Replete if <4.0.",
+    "History of diuretic resistance — may need continuous drip if boluses plateau.",
+    "Wife Denise at bedside, very involved, knows medication regimen well."
+  ]
+};
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+const state = {
+  step: 1,        // 1=setting, 2=specialty, 3=confirm
+  setting: null,
+  specialty: null
+};
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════
+function render() {
+  const app = document.getElementById('app');
+  const ctx = document.getElementById('headerContext');
+
+  // Update header context
+  if (state.setting && state.specialty) {
+    const s = SETTINGS.find(x=>x.id===state.setting);
+    const sp = SPECIALTIES.find(x=>x.id===state.specialty);
+    ctx.innerHTML = `<span class="header-setting-badge">${s.icon} ${sp.label} — ${s.label}</span>`;
+  } else {
+    ctx.textContent = '';
+  }
+
+  app.innerHTML = renderPillarBar() + renderSteps() + renderCurrentStep();
+}
+
+function renderPillarBar() {
+  return `
+    <div class="pillar-bar">
+      <div class="pillar-item pillar-reason">
+        <span class="pillar-icon">🎯</span>
+        <span class="pillar-label">ReasonDx</span>
+        <span class="pillar-desc">— Clinical Reasoning</span>
+      </div>
+      <div class="pillar-item pillar-mechanism">
+        <span class="pillar-icon">🧬</span>
+        <span class="pillar-label">MechanismDx</span>
+        <span class="pillar-desc">— Pathophysiology</span>
+      </div>
+      <div class="pillar-item pillar-coach">
+        <span class="pillar-icon">🗣️</span>
+        <span class="pillar-label">CoachDx</span>
+        <span class="pillar-desc">— AI Coaching</span>
+      </div>
+    </div>`;
+}
+
+function renderSteps() {
+  const steps = [
+    { num:1, label:"Clinical Setting" },
+    { num:2, label:"Specialty Rotation" },
+    { num:3, label:"Confirm & Launch" }
+  ];
+  return `<div class="steps">${steps.map((s,i) => {
+    const cls = state.step === s.num ? 'active' : (state.step > s.num ? 'done' : '');
+    const conn = i < steps.length-1 ? `<div class="step-connector ${state.step > s.num ? 'done' : ''}"></div>` : '';
+    return `<div class="step ${cls}"><span class="step-num">${state.step > s.num ? '✓' : s.num}</span><span>${s.label}</span></div>${conn}`;
+  }).join('')}</div>`;
+}
+
+function renderCurrentStep() {
+  if (state.step === 1) return renderSettingStep();
+  if (state.step === 2) return renderSpecialtyStep();
+  if (state.step === 3) return renderConfirmStep();
+  return '';
+}
+
+// ─── STEP 1: SETTING ───
+function renderSettingStep() {
+  return `
+    <h2 class="section-title">Where are you working today?</h2>
+    <p class="section-subtitle">Select your clinical setting. This determines the workflow, documentation templates, and the type of clinical reasoning you'll practice.</p>
+    <div class="card-grid">
+      ${SETTINGS.map((s,i) => `
+        <div class="setting-card ${state.setting===s.id?'selected':''}" 
+             onclick="selectSetting('${s.id}')" 
+             style="animation-delay:${i*60}ms">
+          <div class="card-color-bar" style="background:${s.color}"></div>
+          <div class="card-icon">${s.icon}</div>
+          <div class="card-label">${s.label}</div>
+          <div class="card-role">${s.roleFrame} · ${s.timeModel}</div>
+          <div class="card-desc">${s.description}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" ${!state.setting?'disabled':''} onclick="goStep(2)">
+        Continue to Specialty →
+      </button>
+    </div>`;
+}
+
+// ─── STEP 2: SPECIALTY ───
+function renderSpecialtyStep() {
+  const setting = SETTINGS.find(s=>s.id===state.setting);
+  return `
+    <h2 class="section-title">What rotation are you on?</h2>
+    <p class="section-subtitle">
+      You're in the <strong>${setting.icon} ${setting.label}</strong>. 
+      Select your specialty to filter cases and configure your reasoning prompts, documentation templates, and CoachDx attending persona.
+    </p>
+    <div class="specialty-grid">
+      ${SPECIALTIES.map((sp,i) => {
+        const available = sp.settings.includes(state.setting);
+        const count = CASE_COUNTS[state.setting+'-'+sp.id] || 0;
+        return `
+          <div class="specialty-card ${state.specialty===sp.id?'selected':''} ${!available?'unavailable':''}" 
+               onclick="${available?`selectSpecialty('${sp.id}')`:'void(0)'}"
+               style="animation-delay:${i*50}ms">
+            <div class="specialty-icon">${sp.icon}</div>
+            <div>
+              <div class="specialty-label">${sp.label}</div>
+              <div class="specialty-sub">${available ? count+' cases available' : 'Not available in this setting'}</div>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(1)">← Back</button>
+      <button class="btn btn-primary" ${!state.specialty?'disabled':''} onclick="goStep(3)">
+        Review & Launch →
+      </button>
+    </div>`;
+}
+
+// ─── STEP 3: CONFIRM ───
+function renderConfirmStep() {
+  const setting = SETTINGS.find(s=>s.id===state.setting);
+  const specialty = SPECIALTIES.find(s=>s.id===state.specialty);
+  const count = CASE_COUNTS[state.setting+'-'+state.specialty] || 0;
+  const noteTemplate = NOTE_TEMPLATES[state.setting];
+  const showHandoff = (state.setting === 'inpatient' || state.setting === 'icu' || state.setting === 'consult');
+
+  return `
+    <h2 class="section-title">Ready to begin</h2>
+    <p class="section-subtitle">Review your clinical context. All three pillars — ReasonDx, MechanismDx, and CoachDx — will adapt to this setting.</p>
+
+    <div class="summary-card">
+      <div class="summary-row">
+        <div class="summary-label">Setting</div>
+        <div class="summary-value">${setting.icon} ${setting.label} <small>— ${setting.roleFrame}</small></div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-label">Specialty</div>
+        <div class="summary-value">${specialty.icon} ${specialty.label}</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-label">Cases Available</div>
+        <div class="summary-value">${count} cases across the case library</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-label">Reasoning Focus</div>
+        <div class="summary-value" style="font-size:13px;line-height:1.5">${specialty.focus}</div>
+      </div>
+      <hr class="summary-divider">
+      <div class="summary-row">
+        <div class="summary-label">How each pillar adapts</div>
+        <div>
+          <div style="margin-bottom:8px">
+            <span class="info-badge info-badge-blue">🎯 ReasonDx</span>
+            <span style="font-size:13px;color:var(--text-secondary);margin-left:8px">
+              ${state.setting==='ed' ? 'Diagnostic reasoning. Build a differential. Can\'t-miss diagnoses.' :
+                state.setting==='inpatient' ? 'Management reasoning. Problem-based A&P. Overnight anticipation.' :
+                state.setting==='icu' ? 'Organ-system monitoring. Escalation/de-escalation. Trends over values.' :
+                state.setting==='clinic' ? 'Longitudinal reasoning. Preventive care gaps. Medication optimization.' :
+                state.setting==='consult' ? 'Focused consultation reasoning. Answer the clinical question.' :
+                'Transitions of care. Readmission prevention. Medication reconciliation.'}
+            </span>
+          </div>
+          <div style="margin-bottom:8px">
+            <span class="info-badge info-badge-green" style="background:#F3E5F5;color:#7C3AED">🧬 MechanismDx</span>
+            <span style="font-size:13px;color:var(--text-secondary);margin-left:8px">
+              ${state.setting==='ed' ? 'Diagnostic mechanism links fire at clinical findings.' :
+                state.setting==='inpatient' ? 'Management mechanism links at treatment decisions. Pharmacology connections.' :
+                state.setting==='icu' ? 'Pathophysiology of organ failure. Ventilator physiology. Hemodynamics.' :
+                state.setting==='clinic' ? 'Chronic disease mechanisms. Screening rationale. Drug mechanisms.' :
+                state.setting==='consult' ? 'Specialty-specific pathophysiology deep dives.' :
+                'Recovery physiology. Medication mechanisms of action.'}
+            </span>
+          </div>
+          <div>
+            <span class="info-badge info-badge-green">🗣️ CoachDx</span>
+            <span style="font-size:13px;color:var(--text-secondary);margin-left:8px">
+              ${state.setting==='ed' ? 'ED attending: urgent, focused, what kills this patient in the next hour?' :
+                state.setting==='inpatient' ? 'Rounding attending: reflective, thorough, what happens at 3 AM?' :
+                state.setting==='icu' ? 'ICU attending: systems-based, trend-focused, goals-of-care aware.' :
+                state.setting==='clinic' ? 'Clinic preceptor: longitudinal, prevention-oriented, motivational.' :
+                state.setting==='consult' ? 'Consulting specialist: depth over breadth, answer the question.' :
+                'Follow-up preceptor: transitions of care, medication reconciliation, was anything missed?'}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    ${showHandoff ? renderHandoffPreview() : ''}
+    ${renderNoteTemplatePreview(noteTemplate)}
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(2)">← Change Specialty</button>
+      <button class="btn btn-launch" onclick="launch()">
+        Launch ${setting.label} →
+      </button>
+    </div>`;
+}
+
+function renderHandoffPreview() {
+  const h = SAMPLE_HANDOFF;
+  return `
+    <div class="handoff-card">
+      <div class="handoff-title">Sample ED Handoff — What You'll Receive</div>
+      <div class="handoff-oneliner">"${h.oneLiner}"</div>
+      <div class="handoff-grid">
+        <div class="handoff-item">
+          <div class="handoff-item-label">ED Physician</div>
+          <div class="handoff-item-value">${h.physician}</div>
+        </div>
+        <div class="handoff-item">
+          <div class="handoff-item-label">Handoff Time</div>
+          <div class="handoff-item-value">${h.time}</div>
+        </div>
+        <div class="handoff-item">
+          <div class="handoff-item-label">Working Diagnosis</div>
+          <div class="handoff-item-value">${h.dx}</div>
+        </div>
+        <div class="handoff-item">
+          <div class="handoff-item-label">Bed Assignment</div>
+          <div class="handoff-item-value">${h.bed}</div>
+        </div>
+      </div>
+      <div class="handoff-watchouts">
+        <div class="handoff-item-label" style="margin-bottom:6px">Watch-Outs</div>
+        ${h.watchOuts.map(w => `<div class="handoff-watchout">⚠️ ${w}</div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function renderNoteTemplatePreview(template) {
+  return `
+    <div class="note-preview">
+      <div class="note-preview-title">📝 Documentation Template: ${template.label}</div>
+      ${template.sections.map(s => `
+        <div class="note-section-preview">
+          <span class="note-section-label">${s}</span>
+        </div>
+      `).join('')}
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════════════════════════════
+function selectSetting(id) {
+  state.setting = id;
+  // Reset specialty if not available in new setting
+  if (state.specialty) {
+    const sp = SPECIALTIES.find(s=>s.id===state.specialty);
+    if (!sp.settings.includes(id)) state.specialty = null;
+  }
+  render();
+}
+
+function selectSpecialty(id) {
+  state.specialty = id;
+  render();
+}
+
+function goStep(n) {
+  state.step = n;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function launch() {
+  // In production: set URL params and redirect to virtual-emr.html
+  // virtual-emr.html?setting=inpatient&specialty=im&case=chf-exacerbation
+  const setting = SETTINGS.find(s=>s.id===state.setting);
+  const specialty = SPECIALTIES.find(s=>s.id===state.specialty);
+  alert(
+    `Launching Virtual EMR\n\n` +
+    `Setting: ${setting.label}\n` +
+    `Specialty: ${specialty.label}\n\n` +
+    `In production, this redirects to:\n` +
+    `virtual-emr.html?setting=${state.setting}&specialty=${state.specialty}\n\n` +
+    `The EMR will load with:\n` +
+    `• Filtered case library (${state.specialty} cases in ${state.setting})\n` +
+    `• ${state.setting !== 'ed' ? 'Handoff from ED' : 'Triage board'}\n` +
+    `• ${NOTE_TEMPLATES[state.setting].label} documentation template\n` +
+    `• CoachDx configured as ${state.setting} attending`
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+render();
+</script>
+</body>
+</html>
