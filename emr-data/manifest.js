@@ -1,8 +1,6 @@
-// EMR Case Manifest — merged from original + Batches 1-17, 22-28
+// EMR Case Manifest — Complete
 // Generated: February 2026
-// Total cases: 256
-// Batches 18-21 merged February 2026
-// 4 Syncope cases pending file generation (cardiac-arrhythmias, mallory-weiss-tear, upper-gi-hemorrhage, variceal-bleeding)
+// Total cases: 256 (All batches 1-28 merged, all case files present)
 
 window.EMR_MANIFEST = [
   {
