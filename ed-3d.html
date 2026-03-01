@@ -71,7 +71,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 /* ═══ BOARD TABLE ═══ */
 .board-wrap{padding:12px 20px 20px}
 .board-table{width:100%;border-collapse:separate;border-spacing:0;background:white;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm)}
-.board-table th{background:#f7f9fc;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:2px solid var(--border);text-align:left;position:sticky;top:104px;z-index:5}
+.board-table th{background:#f7f9fc;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:2px solid var(--border);text-align:left;position:sticky;top:var(--header-offset,104px);z-index:5}
 .board-table th.sortable{cursor:pointer;user-select:none}
 .board-table th.sortable:hover{color:var(--primary)}
 .board-table th .sort-arrow{margin-left:3px;opacity:.4;font-size:9px}
@@ -514,8 +514,21 @@ function init(){
     board.push(p);
   }
   renderBoard();
+  updateHeaderOffset();
   setInterval(tickClock,3000);
 }
+
+// Dynamically calculate sticky offset for table header
+// based on actual rendered height of topbar + filter bar
+function updateHeaderOffset(){
+  var topbar=document.querySelector('.topbar');
+  var filterBar=document.querySelector('.filter-bar');
+  if(topbar&&filterBar){
+    var offset=topbar.offsetHeight+filterBar.offsetHeight;
+    document.documentElement.style.setProperty('--header-offset',offset+'px');
+  }
+}
+window.addEventListener('resize',updateHeaderOffset);
 init();
 </script>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>

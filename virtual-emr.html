@@ -1003,10 +1003,7 @@ var PATIENT, PROBLEMS, MEDICATIONS, ALLERGIES, VITALS, VISITS, LABS, IMAGING, IM
 var CASE_ID = new URLSearchParams(window.location.search).get('case') || '';
 var URL_SETTING = new URLSearchParams(window.location.search).get('setting') || '';
 var URL_SPECIALTY = new URLSearchParams(window.location.search).get('specialty') || '';
-if (URL_SETTING) S.clinicalSetting = URL_SETTING;
-if (URL_SPECIALTY) S.specialty = URL_SPECIALTY;
-// Backward compat: if a case is loaded without a setting, default to ED/EM
-if (CASE_ID && !S.clinicalSetting) { S.clinicalSetting = 'ed'; S.specialty = 'em'; }
+// URL params applied to S after state is declared (see below)
 
 // ═══════════════════════════════════════════════════════════════
 // MULTI-SETTING SELECTOR — Data & Renderers
@@ -1337,6 +1334,11 @@ const S={
   coachError:null,
   coachConcepts:[],      // concepts explored during session
 };
+
+// Apply URL parameters to state (must be after S declaration)
+if (URL_SETTING) S.clinicalSetting = URL_SETTING;
+if (URL_SPECIALTY) S.specialty = URL_SPECIALTY;
+if (CASE_ID && !S.clinicalSetting) { S.clinicalSetting = 'ed'; S.specialty = 'em'; }
 
 // ═══════════════════════════════════════════════════════════════
 // HELPERS
