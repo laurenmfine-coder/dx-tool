@@ -11,17 +11,17 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part B",
     "pcp": "Dr. Patricia Moore, MD",
-    "pharmacy": "Publix \u2014 Davie, FL",
+    "pharmacy": "Publix \u2014 Riverside, FL",
     "language": "English",
     "race": "Asian (Chinese)",
-    "address": "5520 SW 39th St, Davie, FL",
+    "address": "5520 SW 39th St, Riverside, FL",
     "phone": "(954) 555-3322",
     "email": "r.chen52@email.com",
     "emergencyContact": {
       "name": "Linda Chen (Wife)",
       "phone": "(954) 555-3340"
     },
-    "mrn": "NSU-2025-40169"
+    "mrn": "RDX-2025-40169"
   },
   "problems": [
     {
@@ -149,7 +149,7 @@ window.EMR_DATA = {
       "time": "10:00",
       "orderedBy": "Dr. Santos",
       "collected": "02/26/2026 10:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261000",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -298,7 +298,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Stroke alert \u2014 acute R hemiplegia, aphasia, NIHSS 16",
       "technique": "Non-contrast CT head.",
@@ -314,7 +314,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Large vessel occlusion evaluation",
       "technique": "CTA head and neck with IV contrast.",

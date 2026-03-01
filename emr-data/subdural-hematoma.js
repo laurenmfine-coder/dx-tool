@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Nancy Mitchell (Daughter)",
       "phone": "(954) 555-7760"
     },
-    "mrn": "NSU-2025-80008"
+    "mrn": "RDX-2025-80008"
   },
   "problems": [
     {
@@ -121,7 +121,7 @@ window.EMR_DATA = {
       "time": "11:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 11:10",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260441",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -209,7 +209,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Thomas Lee, MD (Neuroradiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Anticoagulated elderly patient, progressive confusion and L hemiparesis after head trauma 10 days ago",
       "technique": "Non-contrast CT head.",

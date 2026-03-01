@@ -11,17 +11,17 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Parent plan \u2014 Aetna PPO",
     "pcp": "Dr. Rachel Kim, DO",
-    "pharmacy": "Walgreens \u2014 Davie, FL",
+    "pharmacy": "Walgreens \u2014 Riverside, FL",
     "language": "English/Spanish",
     "race": "Hispanic",
-    "address": "2840 SW 42nd St, Davie, FL",
+    "address": "2840 SW 42nd St, Riverside, FL",
     "phone": "(954) 555-1144",
     "email": "s.martinez01@email.com",
     "emergencyContact": {
       "name": "Isabel Martinez (Mother)",
       "phone": "(954) 555-1160"
     },
-    "mrn": "NSU-2025-71863"
+    "mrn": "RDX-2025-71863"
   },
   "problems": [
     {
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "time": "15:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 15:10",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260320",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -179,7 +179,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "L peritonsillar abscess \u2014 extent evaluation",
       "technique": "CT neck with IV contrast.",

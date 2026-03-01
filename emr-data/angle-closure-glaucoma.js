@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Michael Stein (Husband)",
       "phone": "(561) 555-2304"
     },
-    "mrn": "NSU-2025-82592"
+    "mrn": "RDX-2025-82592"
   },
   "problems": [
     {
@@ -106,7 +106,7 @@ window.EMR_DATA = {
       "time": "16:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 16:10",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260380",
       "status": "Final",
       "specimenType": "Venous Blood",

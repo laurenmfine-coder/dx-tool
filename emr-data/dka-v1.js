@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Elena Rivera (Mother)",
       "phone": "(954) 555-8860"
     },
-    "mrn": "NSU-2025-31919"
+    "mrn": "RDX-2025-31919"
   },
   "problems": [
     {
@@ -111,7 +111,7 @@ window.EMR_DATA = {
       "time": "08:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 08:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02260800",
       "status": "Final",
       "specimenType": "Venous Blood",

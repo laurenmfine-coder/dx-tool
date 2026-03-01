@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Marcus Washington (Son)",
       "phone": "(954) 555-4502"
     },
-    "mrn": "NSU-2025-84070"
+    "mrn": "RDX-2025-84070"
   },
   "problems": [
     {
@@ -126,7 +126,7 @@ window.EMR_DATA = {
       "time": "14:00",
       "orderedBy": "Dr. Torres",
       "collected": "02/26/2026 14:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261400",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -209,7 +209,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Torres",
       "readBy": "Dr. Kevin Park, MD (ENT)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "ACEi angioedema, airway assessment",
       "technique": "Flexible fiberoptic nasolaryngoscopy at bedside.",

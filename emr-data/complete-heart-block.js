@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Barbara Thompson (Wife)",
       "phone": "(954) 555-2260"
     },
-    "mrn": "NSU-2025-87940"
+    "mrn": "RDX-2025-87940"
   },
   "problems": [
     {
@@ -141,7 +141,7 @@ window.EMR_DATA = {
       "time": "09:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 09:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02260900",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -271,7 +271,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. James Carter, MD",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Bradycardia, near-syncope",
       "technique": "Standard 12-lead ECG.",

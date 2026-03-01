@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Ryan Taylor (Husband)",
       "phone": "(954) 555-1838"
     },
-    "mrn": "NSU-2025-10899"
+    "mrn": "RDX-2025-10899"
   },
   "problems": [
     {
@@ -103,7 +103,7 @@ window.EMR_DATA = {
       "time": "15:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 15:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261500",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -167,7 +167,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Carter, MD",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Suspected ectopic \u2014 7wk amenorrhea, acute abdomen, hemodynamic instability",
       "technique": "Bedside transvaginal ultrasound.",

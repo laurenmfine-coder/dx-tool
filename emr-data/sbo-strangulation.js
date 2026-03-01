@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Susan Kowalski (Wife)",
       "phone": "(954) 555-8838"
     },
-    "mrn": "NSU-2025-65129"
+    "mrn": "RDX-2025-65129"
   },
   "problems": [
     {
@@ -125,7 +125,7 @@ window.EMR_DATA = {
       "time": "10:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 10:10",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260411",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -222,7 +222,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "SBO with signs of strangulation",
       "technique": "CT abdomen/pelvis with IV contrast.",

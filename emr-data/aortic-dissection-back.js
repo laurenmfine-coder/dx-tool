@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Patricia Foster (Wife)",
       "phone": "(954) 555-1204"
     },
-    "mrn": "NSU-2025-75173"
+    "mrn": "RDX-2025-75173"
   },
   "problems": [
     {
@@ -126,7 +126,7 @@ window.EMR_DATA = {
       "time": "11:00",
       "orderedBy": "Dr. Mitchell",
       "collected": "02/26/2026 11:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261100",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -242,7 +242,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Mitchell",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Suspected aortic dissection \u2014 tearing pain, BP differential, Marfan",
       "technique": "CT angiography of the aorta from arch through iliacs.",

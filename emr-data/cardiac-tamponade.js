@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "David Brooks (Son)",
       "phone": "(954) 555-7728"
     },
-    "mrn": "NSU-2025-78456"
+    "mrn": "RDX-2025-78456"
   },
   "problems": [
     {
@@ -134,7 +134,7 @@ window.EMR_DATA = {
       "time": "14:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 14:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261400",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -250,7 +250,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Carter",
       "readBy": "Dr. Carter, MD",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Suspected tamponade \u2014 hypotension, JVD, muffled sounds",
       "technique": "Bedside focused echocardiography.",

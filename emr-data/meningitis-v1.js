@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Brenda Johnson (Mother)",
       "phone": "(954) 555-3338"
     },
-    "mrn": "NSU-2025-58035"
+    "mrn": "RDX-2025-58035"
   },
   "problems": [
     {
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "time": "08:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 08:05",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260461",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -228,7 +228,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Meningitis symptoms with AMS \u2014 pre-LP CT",
       "technique": "Non-contrast CT head.",

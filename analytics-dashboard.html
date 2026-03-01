@@ -566,10 +566,18 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     
 }
 
-    </style>
+    /* RDX Loading */
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+.rdx-loading.hide{opacity:0;pointer-events:none}
+.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
+@keyframes rdxSpin{to{transform:rotate(360deg)}}
+.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
+</style>
     <link rel="stylesheet" href="./css/rdx-theme.css">
+<script src="auth/auth-guard.js"></script>
 </head>
 <body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 <!-- Mastery Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
   <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(40,116,166,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
@@ -978,6 +986,128 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 </div>
             </div>
         </div>
+
+        <!-- ═══ ENGINE ANALYTICS (OrderValidator + CaseFrame + Night Float) ═══ -->
+        <h2 class="section-title" style="margin-top:32px">
+            <span class="icon" style="background: #FEF2F2;">🛡️</span>
+            Clinical Decision Support — Order Safety
+        </h2>
+        <div class="platform-grid" id="ov-panel">
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-info">
+                        <div class="platform-icon" style="background:linear-gradient(135deg,#059669,#10B981)">🛡️</div>
+                        <div>
+                            <div class="platform-name">Order Validation Engine</div>
+                            <div class="platform-desc">CDS safety scoring across all EMR encounters</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px" id="ov-stats">
+                    <div style="text-align:center;padding:12px;background:#F9FAFB;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#1E293B" id="ov-total">—</div>
+                        <div style="font-size:11px;color:#64748B">Total Orders</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#FEF2F2;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#DC2626" id="ov-danger">—</div>
+                        <div style="font-size:11px;color:#64748B">Alerts Triggered</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#FFFBEB;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#D97706" id="ov-override">—</div>
+                        <div style="font-size:11px;color:#64748B">Overridden</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#ECFDF5;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#059669" id="ov-safety">—%</div>
+                        <div style="font-size:11px;color:#64748B">Safety Score</div>
+                    </div>
+                </div>
+                <div id="ov-alerts" style="margin-top:14px;font-size:12px;color:#64748B"></div>
+                <div id="ov-empty" style="text-align:center;padding:20px;color:#94A3B8;font-size:13px">
+                    Complete EMR cases to generate order safety data
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top:28px">
+            <span class="icon" style="background: #F0F7FC;">🧠</span>
+            CaseFrame — Illness Script Scoring
+        </h2>
+        <div class="platform-grid" id="cf-panel">
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-info">
+                        <div class="platform-icon" style="background:linear-gradient(135deg,#2874A6,#3498DB)">🧠</div>
+                        <div>
+                            <div class="platform-name">CaseFrame Engine</div>
+                            <div class="platform-desc">8-dimension documentation quality scoring</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px" id="cf-stats">
+                    <div style="text-align:center;padding:12px;background:#F9FAFB;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#1E293B" id="cf-cases">—</div>
+                        <div style="font-size:11px;color:#64748B">Cases Scored</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#F0F7FC;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#2874A6" id="cf-avg">—</div>
+                        <div style="font-size:11px;color:#64748B">Avg Score</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#ECFDF5;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#059669" id="cf-best">—</div>
+                        <div style="font-size:11px;color:#64748B">Best Grade</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#FFFBEB;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#D97706" id="cf-improve">—</div>
+                        <div style="font-size:11px;color:#64748B">Needs Work</div>
+                    </div>
+                </div>
+                <!-- Dimension breakdown bars -->
+                <div id="cf-dimensions" style="margin-top:16px"></div>
+                <div id="cf-empty" style="text-align:center;padding:20px;color:#94A3B8;font-size:13px">
+                    Submit documentation in the Virtual EMR to generate CaseFrame scores
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top:28px">
+            <span class="icon" style="background: #F5F3FF;">🌙</span>
+            Night Float — Shift Performance
+        </h2>
+        <div class="platform-grid" id="nf-panel">
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-info">
+                        <div class="platform-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">🌙</div>
+                        <div>
+                            <div class="platform-name">Night Float Simulator</div>
+                            <div class="platform-desc">Overnight cross-cover performance tracking</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px" id="nf-stats">
+                    <div style="text-align:center;padding:12px;background:#F9FAFB;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#1E293B" id="nf-shifts">—</div>
+                        <div style="font-size:11px;color:#64748B">Shifts Completed</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#F5F3FF;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#7C3AED" id="nf-pages">—%</div>
+                        <div style="font-size:11px;color:#64748B">Page Accuracy</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#ECFDF5;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#059669" id="nf-handoff">—%</div>
+                        <div style="font-size:11px;color:#64748B">Handoff Score</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#F0F7FC;border-radius:10px">
+                        <div style="font-size:24px;font-weight:700;color:#2874A6" id="nf-grade">—</div>
+                        <div style="font-size:11px;color:#64748B">Avg Grade</div>
+                    </div>
+                </div>
+                <div id="nf-empty" style="text-align:center;padding:20px;color:#94A3B8;font-size:13px">
+                    Complete Night Float shifts to generate performance data
+                </div>
+            </div>
+        </div>
+
     </main>
     
     <!-- Footer -->
@@ -1271,6 +1401,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             renderKnowledgeHeatmap();
             renderCrtProgress();
             renderDynamicPerformance();
+            wireOrderValidatorPanel();
+            wireCaseFramePanel();
+            wireNightFloatPanel();
         });
         
         // =====================================================
@@ -1551,6 +1684,144 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             strengths.innerHTML = top.map(s => `<div class="strength-item"><span class="item-name">${s.system}</span><span class="item-score">${s.pct}%</span></div>`).join('');
             weaknesses.innerHTML = bottom.filter(s => s.pct < 80).map(s => `<div class="weakness-item"><span class="item-name">${s.system}</span><span class="item-score">${s.pct}%</span></div>`).join('') || '<div style="font-size:0.8rem;color:var(--gray-400);padding:8px;">All systems above 80%!</div>';
         }
+
+        // ═══════════════════════════════════════════════════
+        // ORDER VALIDATOR ANALYTICS PANEL
+        // Reads: rdx-order-validation-log (from order-validation.js)
+        // ═══════════════════════════════════════════════════
+        function wireOrderValidatorPanel() {
+            try {
+                const log = JSON.parse(localStorage.getItem('rdx-order-validation-log') || '[]');
+                if (log.length === 0) return;
+                
+                document.getElementById('ov-empty').style.display = 'none';
+                
+                const total = log.length;
+                const danger = log.filter(e => e.status === 'danger').length;
+                const overridden = log.filter(e => e.action === 'overridden').length;
+                const cancelled = log.filter(e => e.action === 'cancelled').length;
+                const safe = log.filter(e => e.status === 'safe').length;
+                const safetyScore = total > 0 ? Math.round(((safe + cancelled) / total) * 100) : 100;
+                
+                document.getElementById('ov-total').textContent = total;
+                document.getElementById('ov-danger').textContent = danger;
+                document.getElementById('ov-override').textContent = overridden;
+                document.getElementById('ov-safety').textContent = safetyScore + '%';
+                document.getElementById('ov-safety').style.color = safetyScore >= 90 ? '#059669' : safetyScore >= 70 ? '#D97706' : '#DC2626';
+                
+                // Top alerts
+                const alertCounts = {};
+                log.forEach(e => {
+                    if (e.alerts) e.alerts.forEach(a => {
+                        alertCounts[a.ruleName || a.message] = (alertCounts[a.ruleName || a.message] || 0) + 1;
+                    });
+                });
+                const topAlerts = Object.entries(alertCounts).sort((a,b) => b[1] - a[1]).slice(0, 5);
+                if (topAlerts.length) {
+                    document.getElementById('ov-alerts').innerHTML = 
+                        '<div style="font-weight:600;color:#1E293B;margin-bottom:6px;font-size:12px">Most Common Alerts</div>' +
+                        topAlerts.map(([name, count]) => 
+                            `<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #F3F4F6"><span>${name}</span><span style="font-weight:600;color:#DC2626">${count}x</span></div>`
+                        ).join('');
+                }
+            } catch(e) { console.warn('OV panel error:', e); }
+        }
+
+        // ═══════════════════════════════════════════════════
+        // CASEFRAME ANALYTICS PANEL
+        // Reads: rdx-cf-history-* (from caseframe-engine.js)
+        // ═══════════════════════════════════════════════════
+        function wireCaseFramePanel() {
+            try {
+                // Find user history — check multiple possible usernames
+                let history = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith('rdx-cf-history-')) {
+                        const h = JSON.parse(localStorage.getItem(key) || '[]');
+                        history = history.concat(h);
+                    }
+                }
+                if (history.length === 0) return;
+                
+                document.getElementById('cf-empty').style.display = 'none';
+                
+                const cases = history.length;
+                const avgPct = Math.round(history.reduce((s, h) => s + (h.pct || 0), 0) / cases);
+                const grades = history.map(h => h.grade);
+                const gradeOrder = { 'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0 };
+                const bestGrade = grades.reduce((best, g) => gradeOrder[g] > gradeOrder[best] ? g : best, 'F');
+                const needsWork = history.filter(h => (h.pct || 0) < 60).length;
+                
+                document.getElementById('cf-cases').textContent = cases;
+                document.getElementById('cf-avg').textContent = avgPct + '%';
+                document.getElementById('cf-best').textContent = bestGrade;
+                document.getElementById('cf-improve').textContent = needsWork;
+                
+                // Build dimension breakdown from individual case results
+                const dimTotals = {};
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith('rdx-cf-') && !key.includes('history')) {
+                        try {
+                            const stored = JSON.parse(localStorage.getItem(key));
+                            if (stored && stored.result && stored.result.sections) {
+                                stored.result.sections.forEach(sec => {
+                                    if (!dimTotals[sec.label]) dimTotals[sec.label] = { score: 0, max: 0, count: 0 };
+                                    dimTotals[sec.label].score += sec.score;
+                                    dimTotals[sec.label].max += sec.max;
+                                    dimTotals[sec.label].count++;
+                                });
+                            }
+                        } catch(e) {}
+                    }
+                }
+                
+                const dims = Object.entries(dimTotals);
+                if (dims.length) {
+                    const icons = {'Problem Identification':'📋','Medication Reconciliation':'💊','Allergy Documentation':'⚠️','HPI Quality':'📝','Physical Examination':'🩺','Assessment & Clinical Reasoning':'🧠','Plan Quality':'📊','Workup Completeness':'🔬'};
+                    document.getElementById('cf-dimensions').innerHTML = 
+                        '<div style="font-weight:600;color:#1E293B;margin-bottom:8px;font-size:12px">Dimension Breakdown (avg across all cases)</div>' +
+                        dims.map(([label, d]) => {
+                            const pct = d.max > 0 ? Math.round((d.score / d.max) * 100) : 0;
+                            const color = pct >= 80 ? '#059669' : pct >= 60 ? '#D97706' : '#DC2626';
+                            return `<div style="margin-bottom:6px">
+                                <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px">
+                                    <span>${icons[label]||''} ${label}</span>
+                                    <span style="font-weight:600;color:${color}">${pct}%</span>
+                                </div>
+                                <div style="height:4px;background:#F3F4F6;border-radius:2px;overflow:hidden">
+                                    <div style="height:100%;width:${pct}%;background:${color};border-radius:2px"></div>
+                                </div>
+                            </div>`;
+                        }).join('');
+                }
+            } catch(e) { console.warn('CF panel error:', e); }
+        }
+
+        // ═══════════════════════════════════════════════════
+        // NIGHT FLOAT ANALYTICS PANEL
+        // Reads: rdx-nf-history (from night-float.html)
+        // ═══════════════════════════════════════════════════
+        function wireNightFloatPanel() {
+            try {
+                const history = JSON.parse(localStorage.getItem('rdx-nf-history') || '[]');
+                if (history.length === 0) return;
+                
+                document.getElementById('nf-empty').style.display = 'none';
+                
+                const shifts = history.length;
+                const avgPageAcc = Math.round(history.reduce((s,h) => s + (h.pageAccuracy||0), 0) / shifts);
+                const avgHandoff = Math.round(history.reduce((s,h) => s + (h.handoffPct||0), 0) / shifts);
+                const avgGradePct = Math.round(history.reduce((s,h) => s + (h.overallPct||0), 0) / shifts);
+                const grade = avgGradePct >= 90 ? 'A' : avgGradePct >= 80 ? 'B' : avgGradePct >= 70 ? 'C' : avgGradePct >= 60 ? 'D' : 'F';
+                
+                document.getElementById('nf-shifts').textContent = shifts;
+                document.getElementById('nf-pages').textContent = avgPageAcc + '%';
+                document.getElementById('nf-handoff').textContent = avgHandoff + '%';
+                document.getElementById('nf-grade').textContent = grade;
+            } catch(e) { console.warn('NF panel error:', e); }
+        }
     </script>
 
     <script src="js/rdx-persist.js"></script>
@@ -1575,5 +1846,7 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
+<script src="rdx-demo-tour.js"></script>
 </body>
 </html>

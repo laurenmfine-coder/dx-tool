@@ -11,17 +11,17 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "BCBS PPO",
     "pcp": "Dr. Sarah Kim, MD",
-    "pharmacy": "Walgreens \u2014 Davie, FL",
+    "pharmacy": "Walgreens \u2014 Riverside, FL",
     "language": "English",
     "race": "Asian (Indian)",
-    "address": "1420 SW 3rd Ave, Davie, FL",
+    "address": "1420 SW 3rd Ave, Riverside, FL",
     "phone": "(954) 555-8844",
     "email": "r.patel98@email.com",
     "emergencyContact": {
       "name": "Sunita Patel (Mother)",
       "phone": "(954) 555-8860"
     },
-    "mrn": "NSU-2025-61603"
+    "mrn": "RDX-2025-61603"
   },
   "problems": [
     {
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "time": "16:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 16:05",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260491",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -167,7 +167,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Outside facility",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Motorcycle accident, tibial fracture with compartment syndrome concern",
       "technique": "AP and lateral radiographs of the right tibia/fibula.",

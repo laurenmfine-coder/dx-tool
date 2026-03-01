@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Rosa Martinez (Mother)",
       "phone": "(954) 555-9028"
     },
-    "mrn": "NSU-2025-44634"
+    "mrn": "RDX-2025-44634"
   },
   "problems": [
     {
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "time": "17:00",
       "orderedBy": "Dr. Mitchell",
       "collected": "02/26/2026 17:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261700",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -146,7 +146,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Mitchell",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Suspected epiglottitis \u2014 drooling, stridor, tripod positioning",
       "technique": "Lateral soft tissue neck radiograph, upright.",

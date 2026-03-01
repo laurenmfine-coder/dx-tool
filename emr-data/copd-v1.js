@@ -11,17 +11,17 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare + Medicaid",
     "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "Walgreens \u2014 Davie, FL",
+    "pharmacy": "Walgreens \u2014 Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "4480 SW 64th Ave, Davie, FL",
+    "address": "4480 SW 64th Ave, Riverside, FL",
     "phone": "(954) 555-2288",
     "email": "b.collins58@email.com",
     "emergencyContact": {
       "name": "Tom Collins (Husband)",
       "phone": "(954) 555-2302"
     },
-    "mrn": "NSU-2025-13247"
+    "mrn": "RDX-2025-13247"
   },
   "problems": [
     {
@@ -150,7 +150,7 @@ window.EMR_DATA = {
       "time": "12:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 12:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261200",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -259,7 +259,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "COPD exacerbation, fever, r/o pneumonia",
       "technique": "PA and lateral CXR.",

@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Brian Anderson (Husband)",
       "phone": "(954) 555-6660"
     },
-    "mrn": "NSU-2025-66258"
+    "mrn": "RDX-2025-66258"
   },
   "problems": [
     {
@@ -141,7 +141,7 @@ window.EMR_DATA = {
       "time": "07:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 07:10",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260421",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -292,7 +292,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Severe pancreatitis \u2014 staging, complications",
       "technique": "CT abdomen/pelvis with IV contrast.",

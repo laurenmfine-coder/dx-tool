@@ -121,7 +121,7 @@ body {
 .floor-item:hover .floor-arrow { color: rgba(255,255,255,0.5); transform: translateX(3px); }
 
 /* ─── QUICK LINKS ─── */
-.quick-links { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quick-links { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
 .quick-link {
   display: flex; align-items: center; gap: 8px;
   padding: 12px 14px;
@@ -170,9 +170,17 @@ body {
   .floor-desc { font-size: 11px; }
   .quick-links { grid-template-columns: 1fr; }
 }
+/* RDX Loading */
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+.rdx-loading.hide{opacity:0;pointer-events:none}
+.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
+@keyframes rdxSpin{to{transform:rotate(360deg)}}
+.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
+<script src="auth/auth-guard.js"></script>
 </head>
 <body>
+
 
 <div class="header">
   <a href="index.html" class="header-logo">
@@ -204,7 +212,7 @@ body {
       <div class="floor-badge" style="background:#C62828;">1</div>
       <div class="floor-info">
         <div class="floor-name">🚑 Emergency Department</div>
-        <div class="floor-desc">ED Board · Triage, diagnose, treat, and dispo patients</div>
+        <div class="floor-desc">Live Track Board · Filter by acuity, category & status</div>
       </div>
       <div class="floor-arrow">→</div>
     </a>
@@ -262,11 +270,44 @@ body {
       </div>
       <div class="floor-arrow">→</div>
     </a>
+
+    <a class="floor-item" href="analytics-dashboard.html">
+      <div class="floor-badge" style="background:#059669;">8</div>
+      <div class="floor-info">
+        <div class="floor-name">📊 Analytics Dashboard</div>
+        <div class="floor-desc">Track progress · CaseFrame scores · Order safety · Board prep analytics</div>
+      </div>
+      <div class="floor-arrow">→</div>
+    </a>
+
+    <a class="floor-item" href="board-prep.html">
+      <div class="floor-badge" style="background:#D97706;">9</div>
+      <div class="floor-info">
+        <div class="floor-name">📝 Board Prep</div>
+        <div class="floor-desc">615 board-style questions · Spaced repetition · System-based practice</div>
+      </div>
+      <div class="floor-arrow">→</div>
+    </a>
+
+    <a class="floor-item" href="study-mode.html">
+      <div class="floor-badge" style="background:#7C3AED;">10</div>
+      <div class="floor-info">
+        <div class="floor-name">📖 Study Mode</div>
+        <div class="floor-desc">Topic-based study guides · Focused review · Quick reference</div>
+      </div>
+      <div class="floor-arrow">→</div>
+    </a>
   </div>
 
   <div class="quick-links">
     <a class="quick-link" href="virtual-emr.html">
       <span class="quick-link-icon">📋</span> Virtual EMR
+    </a>
+    <a class="quick-link" href="analytics-dashboard.html">
+      <span class="quick-link-icon">📊</span> Dashboard
+    </a>
+    <a class="quick-link" href="board-prep.html">
+      <span class="quick-link-icon">📝</span> Board Prep
     </a>
     <a class="quick-link" href="auth/register.html">
       <span class="quick-link-icon">💾</span> Save Progress
@@ -280,5 +321,7 @@ body {
 
 </div>
 
+<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
+<script src="rdx-demo-tour.js"></script>
 </body>
 </html>

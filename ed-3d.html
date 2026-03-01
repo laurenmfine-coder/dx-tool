@@ -2,844 +2,524 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReasonDx — Emergency Department</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ReasonDx — ED Track Board</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
 <style>
+:root {
+  --primary:#2874A6; --primary-dark:#1B4F72; --primary-light:#EBF5FB;
+  --accent:#3498DB; --success:#27AE60; --success-light:#E8F8F0;
+  --warning:#F39C12; --warning-light:#FEF9E7;
+  --danger:#E74C3C; --danger-light:#FDEDEC;
+  --text:#1a1a2e; --text-muted:#64748b; --bg:#f0f4f8;
+  --card:#ffffff; --border:#dce3eb;
+  --esi-1:#DC2626; --esi-2:#EF4444; --esi-3:#F59E0B; --esi-4:#22C55E; --esi-5:#3B82F6;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --mono:'Courier New',monospace;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06); --shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 30px rgba(0,0,0,.12); --radius:8px;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{overflow:hidden;background:#000;font-family:'Segoe UI',system-ui,sans-serif}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
 
-/* ─── Loading ─── */
-#loading{position:fixed;inset:0;background:#0a0606;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s}
-#loading.done{opacity:0;pointer-events:none}
-#loading .t{font-size:30px;font-weight:300;color:#fff;letter-spacing:-1px;margin-bottom:4px}
-#loading .t em{color:#EF4444;font-style:italic}
-#loading .s{font-size:12px;color:rgba(255,255,255,.3);margin-bottom:24px}
-#load-track{width:240px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
-#load-fill{width:0%;height:100%;background:linear-gradient(90deg,#DC2626,#EF4444);border-radius:4px;transition:width .25s}
+/* ═══ TOP BAR ═══ */
+.topbar{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.topbar-home{text-decoration:none;color:#fff;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.1);transition:background .15s}
+.topbar-home:hover{background:rgba(255,255,255,.2)}
+.topbar-logo{font-size:15px;font-weight:700;letter-spacing:-.3px}
+.topbar-logo span{font-weight:400;opacity:.7}
+.topbar-badge{background:var(--danger);padding:3px 10px;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;animation:pulse-badge 2s infinite}
+@keyframes pulse-badge{0%,100%{opacity:1}50%{opacity:.7}}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.topbar-clock{font-family:var(--mono);font-size:13px;opacity:.8;letter-spacing:.5px}
+.topbar-shift{font-size:10px;padding:3px 8px;border-radius:8px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.shift-day{background:rgba(246,211,101,.2);color:#f6d365}
+.shift-night{background:rgba(99,102,241,.2);color:#a5b4fc}
 
-/* ─── Blocker ─── */
-#blocker{position:fixed;inset:0;background:rgba(12,6,6,.92);display:flex;align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(6px)}
-#blocker-inner{text-align:center;color:#fff;max-width:520px;padding:32px}
-#blocker h1{font-size:38px;font-weight:300;margin-bottom:4px;letter-spacing:-1px}
-#blocker h1 em{color:#EF4444;font-style:italic}
-#blocker .sub{color:rgba(255,255,255,.45);font-size:14px;margin-bottom:24px;line-height:1.7}
-.enter-btn{display:inline-block;background:#DC2626;color:#fff;font-size:16px;font-weight:600;padding:14px 36px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em}
-.enter-btn:hover{background:#B91C1C;transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,38,38,.4)}
-#blocker .hint{margin-top:16px;font-size:11px;color:rgba(255,255,255,.25);line-height:1.8}
-#blocker .hint kbd{background:rgba(255,255,255,.1);padding:2px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.12)}
+/* ═══ FILTER BAR ═══ */
+.filter-bar{background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:52px;z-index:90}
+.filter-group{display:flex;align-items:center;gap:6px}
+.filter-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);white-space:nowrap}
+.filter-chips{display:flex;gap:4px;flex-wrap:wrap}
+.filter-chip{font-size:11px;padding:4px 10px;border-radius:14px;border:1.5px solid var(--border);background:white;cursor:pointer;font-weight:500;transition:all .15s;white-space:nowrap;user-select:none}
+.filter-chip:hover{border-color:var(--primary);color:var(--primary)}
+.filter-chip.active{background:var(--primary);color:white;border-color:var(--primary)}
+.filter-chip.esi-1.active{background:var(--esi-1);border-color:var(--esi-1)}
+.filter-chip.esi-2.active{background:var(--esi-2);border-color:var(--esi-2)}
+.filter-chip.esi-3.active{background:var(--esi-3);border-color:var(--esi-3)}
+.filter-chip.esi-4.active{background:var(--esi-4);border-color:var(--esi-4)}
+.filter-search{padding:5px 10px 5px 28px;border:1.5px solid var(--border);border-radius:14px;font-size:12px;width:180px;outline:none;transition:border-color .15s;background:white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E") no-repeat 8px center}
+.filter-search:focus{border-color:var(--primary)}
+.filter-divider{width:1px;height:24px;background:var(--border);margin:0 4px}
+.filter-reset{font-size:11px;color:var(--text-muted);cursor:pointer;text-decoration:underline;white-space:nowrap}
+.filter-reset:hover{color:var(--danger)}
 
-/* ─── HUD ─── */
-#hud{position:fixed;top:0;left:0;right:0;pointer-events:none;z-index:50;padding:12px 18px;display:none;align-items:center;gap:8px;flex-wrap:wrap}
-#hud-loc{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);text-shadow:0 1px 4px rgba(0,0,0,.6)}
-#hud-pills{margin-left:auto;display:flex;gap:8px}
-.pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.07)}
-.pill.r{color:#EF4444}.pill.a{color:#FBBF24}.pill.g{color:#34D399}
+/* ═══ STATS ROW ═══ */
+.stats-row{display:flex;gap:8px;padding:12px 20px 0;flex-wrap:wrap}
+.stat-pill{display:flex;align-items:center;gap:6px;background:white;border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:500}
+.stat-pill strong{font-weight:700}
+.stat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.stat-dot.waiting{background:var(--warning)}
+.stat-dot.seeing{background:var(--primary);animation:pulse-dot 1.5s infinite}
+.stat-dot.critical{background:var(--danger);animation:pulse-dot 1s infinite}
+.stat-dot.admitted{background:var(--success)}
+.stat-dot.discharged{background:var(--text-muted)}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
 
-/* ─── Crosshair ─── */
-#cross{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:18px;height:18px;z-index:50;pointer-events:none;display:none}
-#cross::before,#cross::after{content:'';position:absolute;background:rgba(255,255,255,.22);border-radius:1px}
-#cross::before{width:18px;height:2px;top:8px;left:0}
-#cross::after{width:2px;height:18px;top:0;left:8px}
+/* ═══ BOARD TABLE ═══ */
+.board-wrap{padding:12px 20px 20px}
+.board-table{width:100%;border-collapse:separate;border-spacing:0;background:white;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.board-table th{background:#f7f9fc;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:2px solid var(--border);text-align:left;position:sticky;top:104px;z-index:5}
+.board-table th.sortable{cursor:pointer;user-select:none}
+.board-table th.sortable:hover{color:var(--primary)}
+.board-table th .sort-arrow{margin-left:3px;opacity:.4;font-size:9px}
+.board-table th.sorted .sort-arrow{opacity:1;color:var(--primary)}
+.board-table td{padding:10px 14px;border-bottom:1px solid #f1f3f5;font-size:13px;vertical-align:middle}
+.board-table tr{transition:background .1s;cursor:pointer}
+.board-table tbody tr:hover{background:var(--primary-light)}
+.board-table tbody tr.row-new{animation:row-flash .8s}
+@keyframes row-flash{0%{background:#dbeafe}100%{background:white}}
+.board-table tbody tr.row-critical{border-left:3px solid var(--danger)}
+.board-table tbody tr.row-discharged{opacity:.45}
+.bed-cell{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--primary-dark);width:55px}
+.patient-cell{min-width:130px}
+.patient-name{font-weight:600;font-size:13px}
+.patient-age{font-size:11px;color:var(--text-muted);font-weight:400}
+.cc-cell{font-weight:500;max-width:200px}
+.cc-category{font-size:10px;color:var(--text-muted);margin-top:1px}
+.esi-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-weight:800;font-size:13px;color:white}
+.esi-1{background:var(--esi-1)}.esi-2{background:var(--esi-2)}.esi-3{background:var(--esi-3)}.esi-4{background:var(--esi-4)}.esi-5{background:var(--esi-5)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;white-space:nowrap}
+.status-waiting{background:#fef9e7;color:#b45309}
+.status-triage{background:#fef3c7;color:#92400e}
+.status-being-seen{background:var(--primary-light);color:var(--primary)}
+.status-labs-pending{background:#faf5ff;color:#7c3aed}
+.status-imaging{background:#f0fdf4;color:#15803d}
+.status-admitted{background:var(--success-light);color:#15803d}
+.status-discharged{background:#f1f5f9;color:var(--text-muted)}
+.status-critical{background:var(--danger-light);color:var(--danger);animation:pulse-status 1.5s infinite}
+@keyframes pulse-status{0%,100%{opacity:1}50%{opacity:.6}}
+.status-pulse{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.status-being-seen .status-pulse{background:var(--primary);animation:pulse-dot 2s infinite}
+.status-waiting .status-pulse{background:var(--warning)}
+.status-critical .status-pulse{background:var(--danger);animation:pulse-dot 1s infinite}
+.wait-time{font-family:var(--mono);font-size:12px;color:var(--text-muted)}
+.wait-time.long{color:var(--danger);font-weight:600}
+.provider-cell{font-size:12px;color:var(--text-muted)}
+.action-link{font-size:15px;text-decoration:none;opacity:.6;transition:opacity .15s}
+.action-link:hover{opacity:1}
 
-/* ─── Interact prompt ─── */
-#prompt{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);z-index:50;pointer-events:none;display:none;text-align:center}
-.prompt-box{background:rgba(0,0,0,.82);color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1)}
-.prompt-box .pn{font-weight:700;color:#EF4444;font-size:14px}
-.prompt-box .pd{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px}
-.prompt-box .pk{margin-top:5px;font-size:12px}
-.prompt-box kbd{background:rgba(255,255,255,.15);padding:1px 7px;border-radius:4px;border:1px solid rgba(255,255,255,.18)}
+/* ═══ HOVER PREVIEW ═══ */
+.preview-card{position:fixed;z-index:200;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-lg);width:330px;pointer-events:none;opacity:0;transition:opacity .15s;overflow:hidden}
+.preview-card.visible{opacity:1}
+.preview-header{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.preview-esi{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:white;flex-shrink:0}
+.preview-info h3{font-size:13px;font-weight:700;margin-bottom:1px}
+.preview-info p{font-size:10px;color:var(--text-muted)}
+.preview-body{padding:10px 14px}
+.preview-section{margin-bottom:8px}
+.preview-section h4{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:3px}
+.preview-vitals{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.preview-vital{text-align:center;padding:3px;background:#f8fafc;border-radius:3px;font-size:10px}
+.preview-vital .v-label{font-size:7px;text-transform:uppercase;color:var(--text-muted);font-weight:700}
+.preview-vital .v-val{font-weight:700;font-family:var(--mono);font-size:11px}
+.preview-vital.abnormal .v-val{color:var(--danger)}
+.preview-dx{font-size:12px;font-weight:600;color:var(--text)}
+.preview-footer{padding:6px 14px;background:#f8fafc;border-top:1px solid var(--border);font-size:9px;color:var(--text-muted);text-align:center}
 
-/* ─── Vignette ─── */
-#vig{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.35) 100%)}
+/* ═══ CODE ALERT ═══ */
+.code-alert{display:none;background:linear-gradient(90deg,#DC2626,#B91C1C);color:white;text-align:center;padding:6px 20px;font-size:12px;font-weight:700;letter-spacing:.3px;animation:code-flash 1s infinite}
+.code-alert.active{display:block}
+@keyframes code-flash{0%,100%{opacity:1}50%{opacity:.7}}
 
-/* ─── Minimap ─── */
-#mmap{position:fixed;bottom:16px;right:16px;z-index:50;pointer-events:none;display:none}
-#mmap canvas{border-radius:8px;border:2px solid rgba(255,255,255,.1);box-shadow:0 4px 16px rgba(0,0,0,.5)}
+/* ═══ TOAST ═══ */
+.toast-container{position:fixed;bottom:20px;right:20px;z-index:300;display:flex;flex-direction:column;gap:6px;max-width:320px}
+.toast{background:var(--text);color:white;padding:10px 16px;border-radius:8px;font-size:12px;font-weight:500;box-shadow:var(--shadow-lg);animation:toastIn .3s forwards,toastOut .3s 3s forwards}
+.toast.arrival{background:var(--primary)}.toast.critical{background:var(--danger)}.toast.discharge{background:var(--success)}
+@keyframes toastIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes toastOut{to{transform:translateY(20px);opacity:0}}
 
-/* ─── Board overlay ─── */
-#board-ov{position:fixed;inset:0;z-index:90;display:none;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);overflow-y:auto}
-#board-pnl{max-width:760px;margin:36px auto;background:rgba(10,14,20,.97);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:24px;color:#fff;position:relative}
-#board-pnl h2{font-size:21px;font-weight:300;margin-bottom:3px}
-#board-pnl h2 em{color:#EF4444}
-#board-pnl .psub{font-size:11px;color:rgba(255,255,255,.3);margin-bottom:14px}
-.bclose{position:absolute;top:10px;right:14px;background:none;border:none;color:rgba(255,255,255,.4);font-size:20px;cursor:pointer;padding:4px}.bclose:hover{color:#fff}
-.brow{display:flex;align-items:center;gap:10px;padding:11px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:9px;margin-bottom:5px;cursor:pointer;transition:all .15s;text-decoration:none;color:#fff}
-.brow:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);transform:translateX(3px)}
-.bbed{font-family:monospace;font-size:11px;font-weight:700;padding:3px 7px;border-radius:5px;min-width:32px;text-align:center}
-.bbed.c{background:rgba(239,68,68,.15);color:#EF4444}
-.bbed.u{background:rgba(251,191,36,.12);color:#FBBF24}
-.bname{font-weight:600;font-size:13px;min-width:120px}
-.bcc{font-size:11px;color:rgba(255,255,255,.45);flex:1}
-.bacuity{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:100px;white-space:nowrap}
-.bacuity.c{color:#EF4444;background:rgba(239,68,68,.1)}
-.bacuity.u{color:#FBBF24;background:rgba(251,191,36,.1)}
-.full-btn{display:inline-block;background:#DC2626;color:#fff;font-size:13px;font-weight:600;padding:10px 24px;border-radius:9px;text-decoration:none;transition:all .2s;margin-top:14px}
-.full-btn:hover{background:#B91C1C;transform:translateY(-1px)}
+/* ═══ EMPTY ═══ */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state h3{font-size:16px;margin-bottom:6px;color:var(--text)}
+.empty-state p{font-size:13px}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  .filter-bar{padding:8px 12px;gap:6px}
+  .filter-search{width:120px}
+  .board-wrap{padding:8px 10px 16px}
+  .board-table th,.board-table td{padding:8px 8px}
+  .hide-mobile{display:none}
+  .stats-row{padding:8px 12px 0;gap:4px}
+  .stat-pill{padding:4px 8px;font-size:10px}
+  .topbar{padding:0 12px;height:46px}
+  .filter-divider{display:none}
+  .preview-card{display:none!important}
+  .board-table th{top:96px}
+}
+/* RDX Loading */
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+.rdx-loading.hide{opacity:0;pointer-events:none}
+.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
+@keyframes rdxSpin{to{transform:rotate(360deg)}}
+.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
+<script src="auth/auth-guard.js"></script>
 </head>
 <body>
 
-<div id="loading">
-<div class="t"><em>Emergency</em> Department</div>
-<div class="s">Building environment…</div>
-<div id="load-track"><div id="load-fill"></div></div>
-</div>
 
-<div id="vig"></div>
-<div id="exit-fade" style="position:fixed;inset:0;z-index:200;background:#0a0a0a;opacity:0;pointer-events:none;transition:opacity .4s ease;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px">
-  <div id="exit-label" style="font-size:20px;font-weight:300;color:#fff;letter-spacing:-0.5px;opacity:0;transition:opacity .3s ease .1s"></div>
-  <div style="width:40px;height:2px;background:#DC2626;border-radius:2px;opacity:0;transition:opacity .3s ease .2s" id="exit-line"></div>
-</div>
+<div class="code-alert" id="codeAlert"></div>
 
-<div id="blocker">
-<div id="blocker-inner">
-  <h1><em>Emergency</em> Department</h1>
-  <p class="sub">Walk the ED corridor. Check the track board at the entrance. Enter any patient room or pick a patient from the board.</p>
-  <button class="enter-btn" id="startBtn">🚑 Enter the ED</button>
-  <div class="hint">
-    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk &nbsp;·&nbsp; Mouse look &nbsp;·&nbsp; <kbd>E</kbd> / Click interact &nbsp;·&nbsp; <kbd>Esc</kbd> pause
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-home" href="hospital-3d.html">← Lobby</a>
+    <div class="topbar-logo">🚑 ReasonDx <span>Emergency Dept</span></div>
+    <div class="topbar-badge">LIVE</div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-shift shift-day" id="shiftBadge">Day Shift</span>
+    <span class="topbar-clock" id="simClock">07:00</span>
   </div>
 </div>
-</div>
 
-<div id="hud">
-  <div id="hud-loc">ED Entrance</div>
-  <div id="hud-pills">
-    <div class="pill r">6 Critical</div>
-    <div class="pill a">4 Urgent</div>
-    <div class="pill g">10 Beds</div>
+<div class="filter-bar">
+  <div class="filter-group">
+    <span class="filter-label">Acuity</span>
+    <div class="filter-chips" id="esiFilters">
+      <div class="filter-chip esi-1" data-esi="1" onclick="toggleFilter('esi',1)">ESI-1</div>
+      <div class="filter-chip esi-2" data-esi="2" onclick="toggleFilter('esi',2)">ESI-2</div>
+      <div class="filter-chip esi-3" data-esi="3" onclick="toggleFilter('esi',3)">ESI-3</div>
+      <div class="filter-chip esi-4" data-esi="4" onclick="toggleFilter('esi',4)">ESI-4</div>
+    </div>
   </div>
+  <div class="filter-divider"></div>
+  <div class="filter-group">
+    <span class="filter-label">Category</span>
+    <div class="filter-chips" id="catFilters"></div>
+  </div>
+  <div class="filter-divider"></div>
+  <div class="filter-group">
+    <span class="filter-label">Status</span>
+    <div class="filter-chips" id="statusFilters">
+      <div class="filter-chip" data-status="waiting" onclick="toggleFilter('status','waiting')">Waiting</div>
+      <div class="filter-chip" data-status="being-seen" onclick="toggleFilter('status','being-seen')">Active</div>
+      <div class="filter-chip" data-status="labs-pending" onclick="toggleFilter('status','labs-pending')">Labs</div>
+      <div class="filter-chip" data-status="admitted" onclick="toggleFilter('status','admitted')">Admitted</div>
+    </div>
+  </div>
+  <div class="filter-divider"></div>
+  <input type="text" class="filter-search" id="searchBox" placeholder="Search…" oninput="applyFilters()">
+  <span class="filter-reset" onclick="clearFilters()">Clear all</span>
 </div>
-<div id="cross"></div>
-<div id="prompt"><div class="prompt-box"><div class="pn"></div><div class="pd"></div><div class="pk"><strong>Click</strong> or <kbd>E</kbd></div></div></div>
-<div id="mmap"><canvas id="mc" width="150" height="180"></canvas></div>
 
-<div id="board-ov" onclick="if(event.target===this)closeBoard()">
-<div id="board-pnl">
-  <button class="bclose" onclick="closeBoard()">✕</button>
-  <h2><em>ED</em> Track Board</h2>
-  <p class="psub">Click a patient to start their encounter, or close and walk to their room.</p>
-  <div id="brows"></div>
-  <div style="text-align:center"><a class="full-btn" href="ed-board-v2.html">🚑 Open Full Board</a></div>
-</div>
+<div class="stats-row" id="statsRow"></div>
+
+<div class="board-wrap">
+  <table class="board-table">
+    <thead>
+      <tr>
+        <th class="sortable" onclick="sortBy('bed')">Bed <span class="sort-arrow">↕</span></th>
+        <th class="sortable" onclick="sortBy('name')">Patient <span class="sort-arrow">↕</span></th>
+        <th>Chief Complaint</th>
+        <th class="sortable" onclick="sortBy('esi')">ESI <span class="sort-arrow">↕</span></th>
+        <th class="sortable" onclick="sortBy('status')">Status <span class="sort-arrow">↕</span></th>
+        <th class="sortable hide-mobile" onclick="sortBy('wait')">Wait <span class="sort-arrow">↕</span></th>
+        <th class="hide-mobile">Provider</th>
+        <th style="width:36px"></th>
+      </tr>
+    </thead>
+    <tbody id="boardBody">
+      <tr><td colspan="8"><div class="empty-state"><h3>Initializing shift…</h3><p>Patients arriving shortly.</p></div></td></tr>
+    </tbody>
+  </table>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<div class="preview-card" id="previewCard"></div>
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="emr-data/manifest.js"></script>
+<script src="emr-data/case-specialty-map.js"></script>
+
 <script>
-// ════════════════════════════════════════════
-// REASONDX — 3D WALKABLE EMERGENCY DEPARTMENT
-// ════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// ED TRACK BOARD — Dynamic, manifest-driven, filterable
+// ═══════════════════════════════════════════════════════════════
 
-const PTS=[
-  {r:1,nm:'James Morrison',age:'58M',cc:'Chest pain — radiating to L arm, diaphoretic',acu:'critical',esi:2,vit:'HR 102 · BP 158/94'},
-  {r:2,nm:'Anthony Russo',age:'52M',cc:'Substernal pressure — exertional angina at rest',acu:'urgent',esi:3,vit:'HR 92 · BP 158/94'},
-  {r:3,nm:'Rachel Torres',age:'28F',cc:'Pleuritic chest pain — worse supine, friction rub',acu:'urgent',esi:3,vit:'HR 92 · BP 128/78'},
-  {r:4,nm:'Sarah Chen',age:'24F',cc:'RLQ pain — migrating, fever, guarding',acu:'urgent',esi:3,vit:'HR 92 · BP 128/78'},
-  {r:5,nm:'Thomas Walsh',age:'76M',cc:'Pulsatile abd mass — hypotensive, back pain',acu:'critical',esi:1,vit:'HR 118 · BP 82/58'},
-  {r:6,nm:'Maria Gonzalez',age:'31F',cc:'Acute dyspnea — tachycardic, hypoxic, calf swelling',acu:'critical',esi:2,vit:'HR 118 · BP 132/82'},
-  {r:7,nm:'Patricia Chen',age:'72F',cc:'Acute dyspnea — crackles, JVD, 3+ edema',acu:'critical',esi:2,vit:'HR 128 · BP 178/104'},
-  {r:8,nm:'Harold Washington',age:'68M',cc:'Worsening dyspnea — COPD exacerbation',acu:'urgent',esi:3,vit:'HR 104 · BP 148/82'},
-  {r:9,nm:'Robert Williams',age:'42M',cc:'Thunderclap headache — worst of life, nuchal rigidity',acu:'critical',esi:2,vit:'HR 88 · BP 172/98'},
-  {r:10,nm:'David Park',age:'19M',cc:'Fever, confusion, petechiae — toxic',acu:'critical',esi:1,vit:'HR 124 · BP 94/58'}
-];
+var board = [], nextBed = 1, simMinutes = 420, sortField = 'bed', sortAsc = true;
+var filters = { esi: [], status: [], category: [], search: '' };
+var usedCases = new Set(), allCases = [];
 
-// ═══ LAYOUT — all measurements in meters ═══
-// Hallway: 24m long (Z: -12 to +12), 4m wide (X: -2 to +2)
-// Player enters from south (Z=+12), track board on south wall
-// 5 rooms left, 5 rooms right
-const HW=2;          // hallway half-width
-const HL=12;         // hallway half-length
-const WH=3.2;        // wall height
-const WT=0.15;       // wall thickness
-const RW=2.8;        // room width (along Z)
-const RD=3.0;        // room depth (along X, outward from hall)
-const DW=1.4;        // door width
-const RZ=[-8,-4,0,4,8]; // room center Z positions (5 rooms per side)
-const PH=1.7;        // player eye height
-const SPD=4.8;       // walk speed
-const SENS=0.002;    // mouse sensitivity
+var NAMES_M=["James Wilson","Robert Chen","Michael Davis","William Turner","David Garcia","Charles Kim","Thomas Brown","Richard Patel","Joseph Carter","Daniel Wright","Christopher Lee","Andrew Mitchell","Benjamin Torres","Samuel Rodriguez","Patrick O'Brien","Marcus Johnson","Steven Nguyen","Gregory Hall","Timothy Clark","Nathan Phillips"];
+var NAMES_F=["Sarah Mitchell","Maria Santos","Jennifer Liu","Patricia Williams","Amanda Torres","Linda Martinez","Elizabeth Park","Margaret Harris","Dorothy Nguyen","Susan Anderson","Jessica Lee","Emily Carter","Ashley Rivera","Rachel Green","Katherine Baker","Megan Thompson","Lauren Scott","Nicole Adams","Stephanie White","Olivia Cooper"];
+var ATTENDINGS=["Dr. Marsh","Dr. Carter","Dr. Santos","Dr. Liu","Dr. Park","Dr. Brennan","Dr. Kim","Dr. Torres"];
+var RESIDENTS=["Dr. Williams (PGY-3)","Dr. Chen (PGY-2)","Dr. Singh (PGY-3)","Dr. Lopez (PGY-2)","Dr. Patel (PGY-1)","Dr. Kim (PGY-2)"];
 
-let scene,cam,ren,clk;
-let mv={f:0,b:0,l:0,r:0};
-let euler=new THREE.Euler(0,0,0,'YXZ');
-let pos=new THREE.Vector3(0,PH,HL-2); // start near south entrance
-let lk=false, ints=[], curTgt=null, brdOpen=false, mmCtx;
+var STATUS_ORDER=['waiting','triage','being-seen','labs-pending','imaging','being-seen','admitted','discharged'];
+var STATUS_LABELS={
+  'waiting':     {label:'Waiting',      css:'status-waiting'},
+  'triage':      {label:'Triage',       css:'status-triage'},
+  'being-seen':  {label:'Being Seen',   css:'status-being-seen'},
+  'labs-pending':{label:'Labs Pending',  css:'status-labs-pending'},
+  'imaging':     {label:'Imaging',      css:'status-imaging'},
+  'admitted':    {label:'Admitted',      css:'status-admitted'},
+  'discharged':  {label:'Discharged',   css:'status-discharged'},
+  'critical':    {label:'CRITICAL',     css:'status-critical'}
+};
 
-// ─── Loading ───
-function ld(p){document.getElementById('load-fill').style.width=p+'%'}
-function ldDone(){const e=document.getElementById('loading');e.classList.add('done');setTimeout(()=>e.style.display='none',700)}
-
-// ════════════════════════
-// PROCEDURAL TEXTURES
-// ════════════════════════
-function floorTex(){
-  const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d');
-  g.fillStyle='#c5bfb5';g.fillRect(0,0,512,512);
-  // VCT marbling
-  for(let L=0;L<3;L++)for(let i=0;i<350;i++){
-    const v=185+Math.random()*35;
-    g.fillStyle='rgba('+[v|0,(v-3)|0,(v-8)|0].join(',')+','+(0.03+Math.random()*0.04)+')';
-    g.beginPath();g.ellipse(Math.random()*512,Math.random()*512,6+Math.random()*30,4+Math.random()*16,Math.random()*Math.PI,0,Math.PI*2);g.fill();
-  }
-  // Speckles
-  for(let i=0;i<2000;i++){const v=155+Math.random()*65;g.fillStyle='rgba('+v+','+v+','+(v-5)+',0.07)';g.fillRect(Math.random()*512,Math.random()*512,1+Math.random()*2,1+Math.random()*2)}
-  // Tile grid
-  g.strokeStyle='rgba(0,0,0,0.03)';g.lineWidth=1;
-  for(let i=0;i<=4;i++){const p=i*128;g.beginPath();g.moveTo(p,0);g.lineTo(p,512);g.stroke();g.beginPath();g.moveTo(0,p);g.lineTo(512,p);g.stroke()}
-  // Wax sheen
-  for(let ty=0;ty<4;ty++)for(let tx=0;tx<4;tx++){
-    const cx=tx*128+64,cy=ty*128+64;const gr=g.createRadialGradient(cx-8,cy-8,0,cx,cy,55);
-    gr.addColorStop(0,'rgba(255,255,255,0.05)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(tx*128,ty*128,128,128);
-  }
-  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(12,12);t.anisotropy=8;return t;
+function initCases(){
+  if(!window.EMR_MANIFEST)return;
+  EMR_MANIFEST.forEach(function(g){
+    g.cases.forEach(function(c){
+      if(c.category==='demo')return;
+      allCases.push({id:c.id,diagnosis:c.diagnosis,acuity:c.acuity||3,category:c.category||'general',presentation:g.presentation});
+    });
+  });
+  // Shuffle
+  for(var i=allCases.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=allCases[i];allCases[i]=allCases[j];allCases[j]=t}
+  buildCategoryFilters();
 }
 
-function wallTex(){
-  const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d');
-  // Upper wall
-  g.fillStyle='#e8e4dc';g.fillRect(0,0,512,255);
-  for(let i=0;i<250;i++){const v=225+Math.random()*20;g.fillStyle='rgba('+v+','+(v-2)+','+(v-5)+',0.04)';g.fillRect(Math.random()*512,Math.random()*255,4+Math.random()*18,1+Math.random()*3)}
-  // Chair rail
-  const rg=g.createLinearGradient(0,254,0,274);rg.addColorStop(0,'#b8a080');rg.addColorStop(0.5,'#9a8060');rg.addColorStop(1,'#8a7556');
-  g.fillStyle=rg;g.fillRect(0,254,512,20);
-  // Lower wall
-  g.fillStyle='#e0dcd4';g.fillRect(0,274,512,188);
-  for(let i=0;i<180;i++){const v=215+Math.random()*18;g.fillStyle='rgba('+v+','+(v-2)+','+(v-5)+',0.04)';g.fillRect(Math.random()*512,274+Math.random()*188,4+Math.random()*14,2+Math.random()*4)}
-  // Baseboard
-  g.fillStyle='#4a4540';g.fillRect(0,462,512,50);
-  const t=new THREE.CanvasTexture(c);t.wrapS=THREE.RepeatWrapping;t.repeat.set(3,1);t.anisotropy=8;return t;
+function pickRandom(arr){return arr[Math.floor(Math.random()*arr.length)]}
+
+function generatePatient(){
+  var c=null;
+  for(var i=0;i<allCases.length;i++){if(!usedCases.has(allCases[i].id)){c=allCases[i];usedCases.add(c.id);break}}
+  if(!c){usedCases.clear();c=pickRandom(allCases);usedCases.add(c.id)}
+  var male=Math.random()>.5;
+  var bedPfx=c.acuity<=2?'T':(c.acuity>=4?'F':'R');
+  return {
+    id:'pt-'+Date.now()+'-'+Math.random().toString(36).substr(2,4),
+    caseId:c.id, name:pickRandom(male?NAMES_M:NAMES_F), age:18+Math.floor(Math.random()*62),
+    sex:male?'M':'F', bed:bedPfx+(nextBed++), cc:c.presentation, diagnosis:c.diagnosis,
+    category:c.category, esi:c.acuity, status:'waiting', arrivalTime:simMinutes,
+    provider:pickRandom(ATTENDINGS), resident:pickRandom(RESIDENTS), isNew:true,
+    vitals:genVitals(c.acuity)
+  };
 }
 
-function ceilTex(){
-  const c=document.createElement('canvas');c.width=256;c.height=256;const g=c.getContext('2d');
-  g.fillStyle='#e4e0d8';g.fillRect(0,0,256,256);
-  for(let py=3;py<256;py+=3.5)for(let px=3;px<256;px+=3.5)if(Math.random()>0.4){
-    g.fillStyle='rgba(0,0,0,'+(0.01+Math.random()*0.02)+')';g.beginPath();g.arc(px,py,0.4+Math.random()*0.4,0,Math.PI*2);g.fill();
-  }
-  g.strokeStyle='rgba(170,165,155,0.5)';g.lineWidth=2.5;g.strokeRect(2,2,252,252);
-  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(10,12);t.anisotropy=4;return t;
+function genVitals(esi){
+  var v={bp_s:120+Math.floor(Math.random()*20)-5, hr:75+Math.floor(Math.random()*15), rr:16+Math.floor(Math.random()*4), temp:(98+Math.random()*1.2).toFixed(1), spo2:97+Math.floor(Math.random()*3)};
+  if(esi<=2){v.hr=95+Math.floor(Math.random()*25);v.bp_s=85+Math.floor(Math.random()*35);v.spo2=86+Math.floor(Math.random()*10);v.rr=22+Math.floor(Math.random()*8);v.temp=(99.5+Math.random()*3).toFixed(1)}
+  else if(esi===3){v.hr=80+Math.floor(Math.random()*20);v.spo2=93+Math.floor(Math.random()*5)}
+  v.bp_d=Math.round(v.bp_s*0.6+Math.random()*8);
+  return v;
 }
 
-// ═══ ROOM SIGN ═══
-function roomSign(p){
-  const c=document.createElement('canvas');c.width=320;c.height=190;const g=c.getContext('2d');
-  const cr=p.acu==='critical';
-  g.fillStyle='#0d1824';g.fillRect(0,0,320,190);
-  g.fillStyle=cr?'#DC2626':'#D97706';g.fillRect(0,0,320,4);
-  g.textAlign='center';
-  g.fillStyle=cr?'#EF4444':'#FBBF24';g.font='bold 30px sans-serif';g.fillText('R'+p.r,160,40);
-  g.fillStyle='#fff';g.font='bold 16px sans-serif';g.fillText(p.nm,160,68);
-  g.fillStyle='rgba(255,255,255,0.4)';g.font='13px sans-serif';g.fillText(p.age,160,88);
-  g.fillStyle='rgba(255,255,255,0.5)';g.font='11px sans-serif';
-  // Word wrap CC
-  const words=p.cc.split(' ');let line='',y=110;
-  words.forEach(w=>{const t=line+w+' ';if(g.measureText(t).width>280&&line){g.fillText(line.trim(),160,y);y+=14;line=w+' '}else line=t});
-  if(line)g.fillText(line.trim(),160,y);
-  // Acuity badge
-  g.fillStyle=cr?'rgba(239,68,68,0.15)':'rgba(251,191,36,0.12)';
-  g.fillRect(100,y+8,120,20);
-  g.fillStyle=cr?'#EF4444':'#FBBF24';g.font='bold 9px sans-serif';
-  g.fillText((cr?'CRITICAL':'URGENT')+' · ESI '+p.esi,160,y+22);
-  return new THREE.CanvasTexture(c);
-}
+// ─── Clock ───
+function tickClock(){
+  simMinutes++;
+  var h=Math.floor(simMinutes/60)%24, m=simMinutes%60;
+  document.getElementById('simClock').textContent=pad(h%12||12)+':'+pad(m)+' '+(h>=12?'PM':'AM');
+  var badge=document.getElementById('shiftBadge');
+  if(h>=7&&h<19){badge.textContent='Day Shift';badge.className='topbar-shift shift-day'}
+  else{badge.textContent='Night Shift';badge.className='topbar-shift shift-night'}
 
-// ═══ TRACK BOARD ═══
-// ═══ LIVE TRACK BOARD ═══
-// Persistent canvas that redraws each frame with animations
-const boardCvs=document.createElement('canvas');boardCvs.width=1024;boardCvs.height=600;
-const boardG=boardCvs.getContext('2d');
-let boardTexRef=null; // set during build()
-// Assign randomized "arrival" times (minutes ago) for wait timer display
-const ptArrivals=PTS.map((_,i)=>Math.floor(12+Math.random()*90+(i*4)));
-
-function drawBoard(t){
-  const g=boardG;
-  g.fillStyle='#0a0e14';g.fillRect(0,0,1024,600);
-
-  // Border — subtle pulse on critical count
-  const borderAlpha=0.8+Math.sin(t*1.2)*0.2;
-  g.strokeStyle='rgba(220,38,38,'+borderAlpha.toFixed(2)+')';g.lineWidth=2;g.strokeRect(3,3,1018,594);
-
-  // Header
-  g.fillStyle='#EF4444';g.font='bold 22px sans-serif';g.textAlign='center';g.fillText('ED TRACK BOARD',512,34);
-  // Active patient count — blinks
-  const countAlpha=0.3+Math.sin(t*2)*0.1;
-  g.fillStyle='rgba(255,255,255,'+countAlpha.toFixed(2)+')';g.font='11px sans-serif';
-  g.fillText('10 Active Patients  \u00B7  6 Critical  \u00B7  4 Urgent',512,52);
-
-  // Clock (top right)
-  const now=new Date();
-  const hh=String(now.getHours()).padStart(2,'0'), mm=String(now.getMinutes()).padStart(2,'0'), ss=String(now.getSeconds()).padStart(2,'0');
-  const clockBlink=Math.floor(t*2)%2===0;
-  g.fillStyle='rgba(255,255,255,0.2)';g.font='10px monospace';g.textAlign='right';
-  g.fillText(hh+(clockBlink?':':' ')+mm+(clockBlink?':':' ')+ss,990,34);
-  g.textAlign='left';
-
-  // Divider
-  g.strokeStyle='rgba(239,68,68,0.1)';g.beginPath();g.moveTo(30,62);g.lineTo(994,62);g.stroke();
-
-  // Column headers
-  g.fillStyle='rgba(255,255,255,0.25)';g.font='bold 9px sans-serif';
-  g.fillText('BED',40,78);g.fillText('PATIENT',100,78);g.fillText('CHIEF COMPLAINT',300,78);
-  g.fillText('ACUITY',680,78);g.fillText('WAIT',780,78);g.fillText('VITALS',860,78);
-
-  // Patient rows
-  let y=100;
-  PTS.forEach((p,i)=>{
-    const cr=p.acu==='critical';
-
-    // Row background
-    g.fillStyle=cr?'rgba(239,68,68,0.04)':'rgba(251,191,36,0.03)';g.fillRect(30,y-10,964,42);
-
-    // Blinking critical indicator dot
-    if(cr){
-      const dotAlpha=0.3+Math.sin(t*3+i*0.7)*0.7;
-      g.fillStyle='rgba(239,68,68,'+Math.max(0,dotAlpha).toFixed(2)+')';
-      g.beginPath();g.arc(35,y+4,3,0,Math.PI*2);g.fill();
-    }
-
-    // Bed number
-    g.fillStyle=cr?'#EF4444':'#FBBF24';g.font='bold 13px sans-serif';g.textAlign='left';
-    g.fillText('R'+p.r,44,y+7);
-
-    // Patient name + age
-    g.fillStyle='#fff';g.font='600 12px sans-serif';g.fillText(p.nm,100,y+4);
-    g.fillStyle='rgba(255,255,255,0.3)';g.font='10px sans-serif';g.fillText(p.age,100,y+18);
-
-    // Chief complaint
-    g.fillStyle='rgba(255,255,255,0.45)';g.font='11px sans-serif';
-    g.fillText(p.cc.length>42?p.cc.substring(0,40)+'\u2026':p.cc,300,y+8);
-
-    // Acuity badge
-    g.fillStyle=cr?'#EF4444':'#FBBF24';g.font='bold 9px sans-serif';
-    g.fillText((cr?'CRITICAL':'URGENT')+' \u00B7 ESI '+p.esi,680,y+8);
-
-    // Wait timer (counts up)
-    const waitMin=ptArrivals[i]+Math.floor(t/60);
-    const wh=Math.floor(waitMin/60), wm=waitMin%60;
-    const waitStr=(wh>0?wh+'h ':'')+(wm<10?'0':'')+wm+'m';
-    const waitColor=waitMin>60?'rgba(239,68,68,0.5)':waitMin>30?'rgba(251,191,36,0.4)':'rgba(255,255,255,0.2)';
-    g.fillStyle=waitColor;g.font='10px monospace';g.fillText(waitStr,780,y+8);
-
-    // Vitals — with subtle number flicker for critical patients
-    g.fillStyle='rgba(255,255,255,0.2)';g.font='9px monospace';
-    if(cr&&Math.random()<0.02){
-      // Occasional flicker: slightly different value
-      const flicker=p.vit.replace(/\d+/,m=>''+(parseInt(m)+Math.round(Math.random()*4-2)));
-      g.fillText(flicker,860,y+8);
-    } else {
-      g.fillText(p.vit,860,y+8);
-    }
-
-    // Row divider
-    g.strokeStyle='rgba(255,255,255,0.025)';g.beginPath();g.moveTo(30,y+28);g.lineTo(994,y+28);g.stroke();
-    y+=46;
+  // Progress patients
+  board.forEach(function(p){
+    if(p.status==='discharged'||p.status==='admitted')return;
+    var el=simMinutes-p.arrivalTime, r=Math.random();
+    if(p.status==='waiting'&&el>3&&r<.25)setStatus(p,'triage');
+    else if(p.status==='triage'&&el>6&&r<.3)setStatus(p,'being-seen');
+    else if(p.status==='being-seen'&&el>12&&r<.2)setStatus(p,'labs-pending');
+    else if(p.status==='labs-pending'&&el>25&&r<.15)setStatus(p,r>.5?'imaging':'being-seen');
+    else if(p.status==='imaging'&&el>35&&r<.2)setStatus(p,'being-seen');
+    else if(p.status==='being-seen'&&el>45&&r<.15)setStatus(p,p.esi<=2?'admitted':(r>.4?'admitted':'discharged'));
+    // Critical events
+    if(p.esi===1&&p.status!=='critical'&&r<.015){setStatus(p,'critical');triggerCode(p);setTimeout(function(){if(p.status==='critical')setStatus(p,'being-seen')},15000)}
   });
 
-  // Footer — pulsing hint
-  const footAlpha=0.08+Math.sin(t*1.5)*0.04;
-  g.fillStyle='rgba(255,255,255,'+footAlpha.toFixed(2)+')';g.font='10px sans-serif';g.textAlign='center';
-  g.fillText('Click to open interactive board  \u00B7  Walk to any room to start encounter',512,585);
+  // Arrivals (cap at 22 active)
+  var active=board.filter(function(p){return p.status!=='discharged'}).length;
+  if(active<22&&Math.random()<.18){
+    var np=generatePatient();board.push(np);
+    showToast('🚑 '+np.name+' — '+np.cc+' (ESI-'+np.esi+')','arrival');
+    setTimeout(function(){np.isNew=false;renderBoard()},2000);
+  }
 
-  // Scanline effect (subtle)
-  const scanY=(t*40)%600;
-  g.fillStyle='rgba(255,255,255,0.008)';g.fillRect(0,scanY,1024,2);
+  // Auto-remove discharged after 20 min
+  board=board.filter(function(p){return p.status!=='discharged'||simMinutes-p.arrivalTime<80});
 
-  // Mark texture for GPU upload
-  if(boardTexRef) boardTexRef.needsUpdate=true;
+  renderBoard();
 }
 
-// ════════════════
-// SCENE SETUP
-// ════════════════
+function setStatus(p,s){
+  p.status=s;
+  if(s==='admitted')showToast('🏥 '+p.name+' admitted','discharge');
+  if(s==='discharged')showToast('✓ '+p.name+' discharged','discharge');
+}
+function triggerCode(p){
+  var el=document.getElementById('codeAlert');
+  el.innerHTML='🚨 CODE BLUE — Bed '+p.bed+' — '+p.name+' — '+p.cc;
+  el.classList.add('active');setTimeout(function(){el.classList.remove('active')},12000);
+}
+
+// ─── Render ───
+function renderBoard(){
+  var f=board.filter(filterPt);
+  f.sort(function(a,b){
+    var va,vb;
+    if(sortField==='bed'){va=a.bed;vb=b.bed}
+    else if(sortField==='name'){va=a.name;vb=b.name}
+    else if(sortField==='esi'){va=a.esi;vb=b.esi}
+    else if(sortField==='status'){va=STATUS_ORDER.indexOf(a.status);vb=STATUS_ORDER.indexOf(b.status)}
+    else if(sortField==='wait'){va=a.arrivalTime;vb=b.arrivalTime}
+    else{va=a.bed;vb=b.bed}
+    return (va<vb?-1:va>vb?1:0)*(sortAsc?1:-1);
+  });
+
+  var tbody=document.getElementById('boardBody');
+  if(!f.length){tbody.innerHTML='<tr><td colspan="8"><div class="empty-state"><h3>No patients match filters</h3><p>Adjust filters or wait for arrivals.</p></div></td></tr>';updateStats();return}
+
+  var h='';
+  f.forEach(function(p){
+    var wm=simMinutes-p.arrivalTime;
+    var ws=wm<60?wm+'m':Math.floor(wm/60)+'h '+wm%60+'m';
+    var st=STATUS_LABELS[p.status]||STATUS_LABELS.waiting;
+    var rc=p.isNew?' row-new':'';
+    if(p.esi===1)rc+=' row-critical';
+    if(p.status==='discharged')rc+=' row-discharged';
+
+    h+='<tr class="'+rc+'" onclick="openCase(\''+esc(p.caseId)+'\')" onmouseenter="showPreview(event,\''+p.id+'\')" onmouseleave="hidePreview()">';
+    h+='<td class="bed-cell">'+esc(p.bed)+'</td>';
+    h+='<td class="patient-cell"><div class="patient-name">'+esc(p.name)+'</div><span class="patient-age">'+p.age+p.sex+'</span></td>';
+    h+='<td class="cc-cell">'+esc(p.cc)+'<div class="cc-category">'+cap(p.category)+'</div></td>';
+    h+='<td><span class="esi-badge esi-'+p.esi+'">'+p.esi+'</span></td>';
+    h+='<td><span class="status-badge '+st.css+'"><span class="status-pulse"></span>'+st.label+'</span></td>';
+    h+='<td class="hide-mobile"><span class="wait-time'+(wm>60?' long':'')+'">'+ws+'</span></td>';
+    h+='<td class="hide-mobile provider-cell">'+esc(p.provider)+'</td>';
+    h+='<td><a class="action-link" href="ed-board-v2.html?bed='+esc(p.bed)+'" onclick="event.stopPropagation()" title="Open encounter mode">📋</a></td>';
+    h+='</tr>';
+  });
+  tbody.innerHTML=h;
+  updateStats();
+}
+
+function updateStats(){
+  var t=board.length;
+  var w=board.filter(function(p){return p.status==='waiting'||p.status==='triage'}).length;
+  var a=board.filter(function(p){return p.status==='being-seen'||p.status==='labs-pending'||p.status==='imaging'||p.status==='critical'}).length;
+  var c=board.filter(function(p){return p.esi<=2&&p.status!=='discharged'&&p.status!=='admitted'}).length;
+  var ad=board.filter(function(p){return p.status==='admitted'}).length;
+  document.getElementById('statsRow').innerHTML=
+    '<div class="stat-pill"><span class="stat-dot" style="background:var(--text)"></span>Total: <strong>'+t+'</strong></div>'+
+    '<div class="stat-pill"><span class="stat-dot waiting"></span>Waiting: <strong>'+w+'</strong></div>'+
+    '<div class="stat-pill"><span class="stat-dot seeing"></span>Active: <strong>'+a+'</strong></div>'+
+    '<div class="stat-pill"><span class="stat-dot critical"></span>High Acuity: <strong>'+c+'</strong></div>'+
+    '<div class="stat-pill"><span class="stat-dot admitted"></span>Admitted: <strong>'+ad+'</strong></div>';
+}
+
+// ─── Preview ───
+function showPreview(evt,pid){
+  var p=board.find(function(x){return x.id===pid});if(!p)return;
+  var card=document.getElementById('previewCard');
+  var st=STATUS_LABELS[p.status];var v=p.vitals;
+  card.innerHTML=
+    '<div class="preview-header"><div class="preview-esi esi-'+p.esi+'">'+p.esi+'</div>'+
+    '<div class="preview-info"><h3>'+esc(p.name)+'</h3><p>'+p.age+p.sex+' · Bed '+esc(p.bed)+' · '+st.label+'</p></div></div>'+
+    '<div class="preview-body">'+
+    '<div class="preview-section"><h4>Vitals</h4><div class="preview-vitals">'+
+    vt('BP',v.bp_s+'/'+v.bp_d,v.bp_s>160||v.bp_s<90)+vt('HR',v.hr,v.hr>100||v.hr<60)+vt('RR',v.rr,v.rr>22)+
+    vt('Temp',v.temp+'°',parseFloat(v.temp)>100.4)+vt('SpO2',v.spo2+'%',v.spo2<93)+vt('ESI',p.esi,p.esi<=2)+
+    '</div></div>'+
+    '<div class="preview-section"><h4>Working Diagnosis</h4><div class="preview-dx">'+esc(p.diagnosis)+'</div></div>'+
+    '<div class="preview-section"><h4>Team</h4><div style="font-size:11px;color:var(--text)">'+esc(p.provider)+' / '+esc(p.resident)+'</div></div>'+
+    '</div><div class="preview-footer">Click to open EMR · 📋 for encounter mode</div>';
+  var r=evt.currentTarget.getBoundingClientRect();
+  var x=r.right+10,y=r.top;
+  if(x+340>window.innerWidth)x=r.left-342;
+  if(y+280>window.innerHeight)y=window.innerHeight-290;
+  card.style.left=Math.max(4,x)+'px';card.style.top=Math.max(4,y)+'px';
+  card.classList.add('visible');
+}
+function hidePreview(){document.getElementById('previewCard').classList.remove('visible')}
+function vt(l,v,ab){return '<div class="preview-vital'+(ab?' abnormal':'')+'"><div class="v-label">'+l+'</div><div class="v-val">'+v+'</div></div>'}
+
+// ─── Filters ───
+function toggleFilter(type,val){
+  var arr=filters[type];var i=arr.indexOf(val);
+  if(i>=0)arr.splice(i,1);else arr.push(val);
+  var cont=type==='esi'?document.getElementById('esiFilters'):type==='status'?document.getElementById('statusFilters'):document.getElementById('catFilters');
+  if(cont)cont.querySelectorAll('.filter-chip').forEach(function(ch){
+    var cv=ch.dataset.esi?parseInt(ch.dataset.esi):ch.dataset.status||ch.dataset.category;
+    ch.classList.toggle('active',arr.indexOf(cv)>=0);
+  });
+  applyFilters();
+}
+function applyFilters(){filters.search=document.getElementById('searchBox').value.toLowerCase();renderBoard()}
+function clearFilters(){
+  filters={esi:[],status:[],category:[],search:''};
+  document.getElementById('searchBox').value='';
+  document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active')});
+  renderBoard();
+}
+function filterPt(p){
+  if(filters.esi.length&&filters.esi.indexOf(p.esi)<0)return false;
+  if(filters.status.length){
+    // "being-seen" filter includes labs-pending, imaging, critical
+    var match=filters.status.indexOf(p.status)>=0;
+    if(!match&&filters.status.indexOf('being-seen')>=0&&(p.status==='imaging'||p.status==='critical'))match=true;
+    if(!match&&filters.status.indexOf('waiting')>=0&&p.status==='triage')match=true;
+    if(!match)return false;
+  }
+  if(filters.category.length&&filters.category.indexOf(p.category)<0)return false;
+  if(filters.search){var q=filters.search;if(p.name.toLowerCase().indexOf(q)<0&&p.cc.toLowerCase().indexOf(q)<0&&p.diagnosis.toLowerCase().indexOf(q)<0&&p.category.indexOf(q)<0)return false}
+  return true;
+}
+function buildCategoryFilters(){
+  var cats={};allCases.forEach(function(c){cats[c.category]=(cats[c.category]||0)+1});
+  var sorted=Object.keys(cats).sort(function(a,b){return cats[b]-cats[a]});
+  var h='';sorted.slice(0,8).forEach(function(cat){
+    h+='<div class="filter-chip" data-category="'+cat+'" onclick="toggleFilter(\'category\',\''+cat+'\')">'+cap(cat)+'</div>';
+  });
+  document.getElementById('catFilters').innerHTML=h;
+}
+
+// ─── Sort ───
+function sortBy(field){
+  if(sortField===field)sortAsc=!sortAsc;else{sortField=field;sortAsc=true}
+  document.querySelectorAll('.board-table th').forEach(function(th){th.classList.remove('sorted')});
+  event.currentTarget.classList.add('sorted');
+  renderBoard();
+}
+
+// ─── Navigation ───
+function openCase(caseId){window.location.href='virtual-emr.html?case='+caseId+'&setting=ed&specialty=em'}
+
+// ─── Utils ───
+function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+function pad(n){return n<10?'0'+n:''+n}
+function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):''}
+function showToast(msg,type){
+  var t=document.createElement('div');t.className='toast '+(type||'');t.textContent=msg;
+  document.getElementById('toastContainer').appendChild(t);
+  setTimeout(function(){t.remove()},3800);
+}
+
+// ─── Init ───
 function init(){
-  ld(5);
-  scene=new THREE.Scene();
-  scene.background=new THREE.Color(0xdddad2);
-  scene.fog=new THREE.FogExp2(0xdddad2,0.022);
-  cam=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,0.1,60);
-  cam.position.copy(pos);
-  // Face north (toward -Z) on start — looking down the ED corridor
-  euler.y=0; cam.quaternion.setFromEuler(euler);
-  ren=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
-  ren.setSize(innerWidth,innerHeight);ren.setPixelRatio(Math.min(devicePixelRatio,2));
-  ren.shadowMap.enabled=true;ren.shadowMap.type=THREE.PCFSoftShadowMap;
-  ren.toneMapping=THREE.ACESFilmicToneMapping;ren.toneMappingExposure=1.1;
-  ren.physicallyCorrectLights=true;ren.outputEncoding=THREE.sRGBEncoding;
-  document.body.appendChild(ren.domElement);
-  clk=new THREE.Clock();
-  mmCtx=document.getElementById('mc').getContext('2d');
-  ld(10);
-  setTimeout(()=>{build();ld(55);setTimeout(()=>{lights();ld(80);setTimeout(()=>{controls();ld(100);setTimeout(()=>{ldDone();loop()},200)},20)},20)},20);
-}
-
-// ════════════════
-// BUILD ED
-// ════════════════
-function build(){
-  const fT=floorTex(),wT=wallTex(),cT=ceilTex();
-  const wM=new THREE.MeshStandardMaterial({map:wT,roughness:0.6});
-  const fM=new THREE.MeshStandardMaterial({map:fT,roughness:0.18,metalness:0.04});
-  const cM=new THREE.MeshStandardMaterial({map:cT,roughness:0.92});
-
-  // Helper: place a wall box
-  function W(x,y,z,sx,sy,sz,mat){
-    const m=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),mat||wM);
-    m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m;
+  initCases();
+  var n=6+Math.floor(Math.random()*5);
+  for(var i=0;i<n;i++){
+    var p=generatePatient();p.isNew=false;
+    p.arrivalTime=simMinutes-Math.floor(Math.random()*90)-5;
+    var el=simMinutes-p.arrivalTime;
+    if(el>50)p.status=Math.random()>.5?'labs-pending':'imaging';
+    else if(el>30)p.status='labs-pending';
+    else if(el>15)p.status='being-seen';
+    else if(el>5)p.status='triage';
+    board.push(p);
   }
-
-  // FLOOR & CEILING (large enough to cover hallway + rooms)
-  const totalW=HW*2+RD*2+WT*4; // ~14m
-  const totalL=HL*2+WT*2;       // ~24m
-  const fl=new THREE.Mesh(new THREE.PlaneGeometry(totalW+4,totalL+4),fM);
-  fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;scene.add(fl);
-  const cl=new THREE.Mesh(new THREE.PlaneGeometry(totalW+4,totalL+4),cM);
-  cl.rotation.x=Math.PI/2;cl.position.y=WH;scene.add(cl);
-
-  // ═══ END WALLS ═══
-  W(0,WH/2,-HL-WT/2, totalW,WH,WT); // North
-  W(0,WH/2, HL+WT/2, totalW,WH,WT); // South (entrance)
-
-  // ═══ OUTER WALLS (beyond rooms) ═══
-  const outerX=HW+WT+RD+WT/2;
-  W(-outerX,WH/2,0, WT,WH,totalL); // Far left
-  W( outerX,WH/2,0, WT,WH,totalL); // Far right
-
-  // ═══ HALLWAY SIDE WALLS (with gaps for doors) ═══
-  // For each side, we place wall segments between room openings
-  [-1,1].forEach(side=>{
-    const wx=side*(HW+WT/2); // wall center X
-    // Wall segment boundaries along Z
-    const segs=[];
-    let zStart=-HL;
-    for(let i=0;i<5;i++){
-      const doorStart=RZ[i]-DW/2;
-      const doorEnd=RZ[i]+DW/2;
-      if(doorStart>zStart+0.01) segs.push([zStart,doorStart]);
-      zStart=doorEnd;
-    }
-    if(zStart<HL-0.01) segs.push([zStart,HL]);
-    segs.forEach(([z1,z2])=>{
-      const len=z2-z1;
-      W(wx,WH/2,(z1+z2)/2, WT,WH,len);
-    });
-  });
-
-  // ═══ ROOMS ═══
-  for(let i=0;i<10;i++){
-    const p=PTS[i];
-    const side=i<5?-1:1;
-    const ri=i<5?i:i-5;
-    const rz=RZ[ri];
-    const cr=p.acu==='critical';
-
-    // Room interior center X
-    const rcx=side*(HW+WT+RD/2);
-    // Back wall (far from hallway)
-    const backX=side*(HW+WT+RD+WT/2);
-    W(backX,WH/2,rz, WT,WH,RW);
-    // Side walls
-    W(rcx,WH/2,rz-RW/2-WT/2, RD+WT*2,WH,WT);
-    W(rcx,WH/2,rz+RW/2+WT/2, RD+WT*2,WH,WT);
-    // Front wall segments (around door gap) — these are on the hallway wall line
-    const fwx=side*(HW+WT/2);
-    const sideLen=(RW-DW)/2;
-    if(sideLen>0.05){
-      W(fwx,WH/2,rz-DW/2-sideLen/2, WT,WH,sideLen);
-      W(fwx,WH/2,rz+DW/2+sideLen/2, WT,WH,sideLen);
-    }
-
-    // ─── Door (visual) ───
-    const dCol=new THREE.Color(cr?0xDC2626:0xD97706);
-    const dMat=new THREE.MeshStandardMaterial({color:dCol,roughness:0.45,metalness:0.08,emissive:dCol,emissiveIntensity:0.03});
-    const dh=2.6;
-    const door=new THREE.Mesh(new THREE.BoxGeometry(WT*0.6,dh,DW*0.4),dMat);
-    // Door pushed to one side of opening (partially open look)
-    door.position.set(fwx,dh/2,rz+DW*0.3);door.castShadow=true;scene.add(door);
-
-    // Door frame
-    const frMat=new THREE.MeshStandardMaterial({color:0x808080,roughness:0.25,metalness:0.55});
-    const frTop=new THREE.Mesh(new THREE.BoxGeometry(WT+0.06,0.1,DW+0.15),frMat);
-    frTop.position.set(fwx,dh+0.05,rz);scene.add(frTop);
-    [-1,1].forEach(s=>{
-      const frSide=new THREE.Mesh(new THREE.BoxGeometry(WT+0.06,dh+0.1,0.06),frMat);
-      frSide.position.set(fwx,dh/2,rz+s*(DW/2+0.06));scene.add(frSide);
-    });
-
-    // ─── Room Sign (above door, hallway-facing) ───
-    const sgnTex=roomSign(p);
-    const sgn=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.72),new THREE.MeshBasicMaterial({map:sgnTex}));
-    sgn.position.set(fwx-side*0.15,dh+0.5,rz);
-    if(side<0)sgn.rotation.y=Math.PI;
-    scene.add(sgn);
-
-    // Sign glow
-    const sgnL=new THREE.PointLight(cr?0xEF4444:0xFBBF24,0.25,3.5);
-    sgnL.position.set(fwx-side*0.4,dh+0.55,rz);scene.add(sgnL);
-
-    // Floor stripe
-    const stMat=new THREE.MeshBasicMaterial({color:cr?0xDC2626:0xD97706,transparent:true,opacity:0.15});
-    const st=new THREE.Mesh(new THREE.PlaneGeometry(0.8,0.1),stMat);
-    st.rotation.x=-Math.PI/2;st.position.set(fwx-side*0.6,0.003,rz);scene.add(st);
-
-    // ─── Room Interior ───
-    const bx=rcx+side*0.3; // bed X shifted toward back wall
-    // Bed frame
-    const bedF=new THREE.MeshStandardMaterial({color:0xbbbbbb,roughness:0.2,metalness:0.55});
-    const bedB=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.45,1.75),bedF);bedB.position.set(bx,0.45,rz);scene.add(bedB);
-    // Mattress
-    const matM=new THREE.MeshStandardMaterial({color:0xe8e4dc,roughness:0.5});
-    const matt=new THREE.Mesh(new THREE.BoxGeometry(0.72,0.06,1.78),matM);matt.position.set(bx,0.7,rz);scene.add(matt);
-    // Pillow
-    const pil=new THREE.Mesh(new THREE.BoxGeometry(0.45,0.06,0.25),new THREE.MeshStandardMaterial({color:0xf0ece6,roughness:0.8}));
-    pil.position.set(bx,0.76,rz-0.6);scene.add(pil);
-    // Blanket
-    const blk=new THREE.Mesh(new THREE.BoxGeometry(0.68,0.025,1.0),new THREE.MeshStandardMaterial({color:0xc8d8e8,roughness:0.7}));
-    blk.position.set(bx,0.75,rz+0.2);scene.add(blk);
-    // Monitor
-    const monM=new THREE.MeshStandardMaterial({color:0x222222,roughness:0.2,metalness:0.6});
-    const mon=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.2,0.025),monM);
-    mon.position.set(rcx+side*1.1,1.5,rz-0.2);scene.add(mon);
-    const monScr=new THREE.Mesh(new THREE.PlaneGeometry(0.25,0.16),new THREE.MeshBasicMaterial({color:cr?0x180808:0x081818}));
-    monScr.position.set(rcx+side*1.1,1.5,rz-0.2-(side>0?0.014:-0.014));
-    if(side<0)monScr.rotation.y=Math.PI;scene.add(monScr);
-    // IV pole
-    const ivM=new THREE.MeshStandardMaterial({color:0xcccccc,roughness:0.15,metalness:0.7});
-    const iv=new THREE.Mesh(new THREE.CylinderGeometry(0.01,0.01,1.6,6),ivM);
-    iv.position.set(bx-side*0.5,0.8,rz+0.4);scene.add(iv);
-    // Chair
-    const chM=new THREE.MeshStandardMaterial({color:0x3a6888,roughness:0.7});
-    const chS=new THREE.Mesh(new THREE.BoxGeometry(0.36,0.04,0.34),chM);chS.position.set(rcx-side*0.3,0.42,rz+0.8);scene.add(chS);
-    const chB=new THREE.Mesh(new THREE.BoxGeometry(0.36,0.28,0.04),chM);chB.position.set(rcx-side*0.3,0.6,rz+0.95);scene.add(chB);
-
-    // ─── Interactable ───
-    const iPos=new THREE.Vector3(fwx-side*1.0,0,rz);
-    ints.push({
-      type:'room', name:'Room '+p.r+' — '+p.nm, sub:p.cc,
-      pos:iPos, radius:2.4, doorMesh:door, light:sgnL,
-      action:()=>{transitionTo('ed-board-v2.html?bed=R'+p.r,'Room '+p.r+' \u2014 '+p.nm)}
-    });
-  }
-
-  // ═══ NURSES STATION ═══
-  const nsz=-0.5;
-  const dkM=new THREE.MeshStandardMaterial({color:0x2c4a62,roughness:0.3,metalness:0.08});
-  const dkT=new THREE.MeshStandardMaterial({color:0xd4cec4,roughness:0.15});
-  W(0,0.5,nsz, 2.6,1.0,0.7,dkM);
-  W(0,1.02,nsz, 2.7,0.04,0.8,dkT);
-  // Desk monitors
-  const dMonM=new THREE.MeshStandardMaterial({color:0x222222,roughness:0.2,metalness:0.6});
-  [-0.55,0.55].forEach(ox=>{
-    const m=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.26,0.025),dMonM);m.position.set(ox,1.38,nsz-0.06);scene.add(m);
-    const ms=new THREE.Mesh(new THREE.PlaneGeometry(0.35,0.22),new THREE.MeshBasicMaterial({color:0x0a1828}));
-    ms.position.set(ox,1.38,nsz-0.08);scene.add(ms);
-    const st=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.025,0.14,6),dMonM);
-    st.position.set(ox,1.16,nsz-0.06);scene.add(st);
-  });
-  // Keyboard
-  const kb=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.012,0.08),new THREE.MeshStandardMaterial({color:0x333333,roughness:0.4,metalness:0.3}));
-  kb.position.set(0,1.04,nsz+0.1);scene.add(kb);
-  // Office chair
-  const ocM=new THREE.MeshStandardMaterial({color:0x2a2a2a,roughness:0.5});
-  const ocS=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.05,0.38),ocM);ocS.position.set(0,0.46,nsz+0.5);scene.add(ocS);
-  const ocB=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.35,0.04),ocM);ocB.position.set(0,0.7,nsz+0.66);scene.add(ocB);
-  // Station label
-  const nsC=document.createElement('canvas');nsC.width=280;nsC.height=50;const nsg=nsC.getContext('2d');
-  nsg.fillStyle='#0d1824';nsg.fillRect(0,0,280,50);nsg.fillStyle='#DC2626';nsg.fillRect(0,0,4,50);
-  nsg.fillStyle='#fff';nsg.font='bold 16px sans-serif';nsg.textBaseline='middle';nsg.fillText('NURSES STATION',14,27);
-  const nsLbl=new THREE.Mesh(new THREE.PlaneGeometry(1.0,0.18),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(nsC)}));
-  nsLbl.position.set(0,1.22,nsz-0.37);scene.add(nsLbl);
-
-  // ═══ TRACK BOARD (on north wall — visible from entrance) ═══
-  const bz=-HL+0.02;
-  drawBoard(0); // Initial draw
-  boardTexRef=new THREE.CanvasTexture(boardCvs);
-  const bMesh=new THREE.Mesh(new THREE.PlaneGeometry(4.8,2.8),new THREE.MeshBasicMaterial({map:boardTexRef}));
-  bMesh.position.set(0,1.8,bz);scene.add(bMesh);
-  // Frame
-  const frM=new THREE.MeshStandardMaterial({color:0x3a4a5a,roughness:0.3,metalness:0.2});
-  [[-2.45,1.8,0.05,2.9],[2.45,1.8,0.05,2.9],[0,3.25,4.95,0.05],[0,0.32,4.95,0.05]].forEach(([fx,fy,fw,fh])=>{
-    const f=new THREE.Mesh(new THREE.BoxGeometry(fw,fh,0.04),frM);f.position.set(fx,fy,bz);scene.add(f);
-  });
-  // Board label
-  const blC=document.createElement('canvas');blC.width=360;blC.height=60;const blg=blC.getContext('2d');
-  blg.fillStyle='#1a0808';blg.fillRect(0,0,360,60);blg.fillStyle='#DC2626';blg.fillRect(0,0,5,60);
-  blg.fillStyle='#fff';blg.font='bold 20px sans-serif';blg.textBaseline='middle';blg.fillText('ED TRACK BOARD',18,32);
-  const blLbl=new THREE.Mesh(new THREE.PlaneGeometry(1.4,0.24),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(blC)}));
-  blLbl.position.set(0,2.75,bz+0.01);scene.add(blLbl);
-
-  ints.push({type:'board',name:'ED Track Board',sub:'View all patients — click to open',
-    pos:new THREE.Vector3(0,0,bz+2.5),radius:4.5,action:openBoard});
-
-  // ═══ HALLWAY PROPS ═══
-  // Handrails (segmented — gap at each doorway)
-  const rlM=new THREE.MeshStandardMaterial({color:0xa09080,roughness:0.3,metalness:0.15});
-  [-1,1].forEach(side=>{
-    const rx=side*(HW-0.06);
-    // Build segments between door openings (same logic as walls)
-    let zStart=-HL+0.5;
-    const segs=[];
-    for(let i=0;i<RZ.length;i++){
-      const doorStart=RZ[i]-DW/2-0.08;
-      const doorEnd=RZ[i]+DW/2+0.08;
-      if(doorStart>zStart+0.05) segs.push([zStart,doorStart]);
-      zStart=doorEnd;
-    }
-    if(zStart<HL-0.5) segs.push([zStart,HL-0.5]);
-    segs.forEach(([z0,z1])=>{
-      const len=z1-z0;
-      const cz=(z0+z1)/2;
-      const rl=new THREE.Mesh(new THREE.CylinderGeometry(0.016,0.016,len,8),rlM);
-      rl.position.set(rx,0.92,cz);rl.rotation.x=Math.PI/2;scene.add(rl);
-      for(let bz=z0+0.3;bz<z1-0.1;bz+=2.2){
-        const br=new THREE.Mesh(new THREE.BoxGeometry(0.035,0.09,0.035),rlM);br.position.set(rx,0.92,bz);scene.add(br);
-      }
-    });
-  });
-  // Fluorescent lights
-  for(let fz=-HL+2;fz<HL;fz+=3){
-    const hsg=new THREE.Mesh(new THREE.BoxGeometry(1.1,0.045,0.3),new THREE.MeshStandardMaterial({color:0xd0ccc4,roughness:0.7}));
-    hsg.position.set(0,WH-0.01,fz);scene.add(hsg);
-    const dif=new THREE.Mesh(new THREE.PlaneGeometry(1.0,0.25),new THREE.MeshBasicMaterial({color:0xfff8ee}));
-    dif.rotation.x=Math.PI/2;dif.position.set(0,WH-0.04,fz);scene.add(dif);
-    const gSp=new THREE.SpriteMaterial({color:0xfff5e0,transparent:true,opacity:0.05,blending:THREE.AdditiveBlending});
-    const g=new THREE.Sprite(gSp);g.position.set(0,WH-0.06,fz);g.scale.set(2,0.8,1);scene.add(g);
-    const pool=new THREE.Mesh(new THREE.PlaneGeometry(1.4,0.7),new THREE.MeshBasicMaterial({color:0xfff8ee,transparent:true,opacity:0.02}));
-    pool.rotation.x=-Math.PI/2;pool.position.set(0,0.003,fz);scene.add(pool);
-  }
-  // Red center line
-  const cL=new THREE.Mesh(new THREE.PlaneGeometry(0.06,HL*2-3),new THREE.MeshBasicMaterial({color:0xDC2626,transparent:true,opacity:0.1}));
-  cL.rotation.x=-Math.PI/2;cL.position.set(0,0.004,0);scene.add(cL);
-  // EXIT signs
-  function exitSign(x,z,ry){
-    const ec=document.createElement('canvas');ec.width=160;ec.height=50;const eg=ec.getContext('2d');
-    eg.fillStyle='#cc0000';eg.fillRect(0,0,160,50);eg.fillStyle='#fff';eg.font='bold 26px sans-serif';eg.textAlign='center';eg.textBaseline='middle';eg.fillText('EXIT',80,27);
-    const s=new THREE.Mesh(new THREE.PlaneGeometry(0.45,0.14),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(ec),side:THREE.DoubleSide}));
-    s.position.set(x,2.95,z);if(ry)s.rotation.y=ry;scene.add(s);
-    const el=new THREE.PointLight(0xff2222,0.1,2.5);el.position.set(x,2.95,z);scene.add(el);
-  }
-  exitSign(0,HL-0.4,0);exitSign(0,-HL+0.4,0);
-  // Crash cart
-  W(HW-0.4,0.4,-6, 0.5,0.7,0.35,new THREE.MeshStandardMaterial({color:0xcc2222,roughness:0.35,metalness:0.15}));
-  W(HW-0.4,0.78,-6, 0.55,0.03,0.4,new THREE.MeshStandardMaterial({color:0xcccccc,metalness:0.6,roughness:0.15}));
-  // Hand sanitizer dispensers
-  const hsM=new THREE.MeshStandardMaterial({color:0xe0e0e0,roughness:0.3,metalness:0.15});
-  [[-HW+0.1,-3],[HW-0.1,3],[HW-0.1,9]].forEach(([hx,hz])=>{
-    const h=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.16,0.06),hsM);h.position.set(hx,1.2,hz);scene.add(h);
-  });
-  // Whiteboard (near nurses station, on east hallway wall)
-  W(HW-0.08,1.65,-2.5, 0.03,1.2,2.0,new THREE.MeshStandardMaterial({color:0xf0f0f0,roughness:0.2}));
-  // Return to hospital
-  const bkM=new THREE.MeshStandardMaterial({color:0x4a6a8a,roughness:0.5,metalness:0.08});
-  const bkD=new THREE.Mesh(new THREE.BoxGeometry(1.3,2.5,WT*0.5),bkM);
-  bkD.position.set(0,1.25,HL-WT);scene.add(bkD);
-  ints.push({type:'exit',name:'Return to Hospital',sub:'Back to the main hallway',
-    pos:new THREE.Vector3(0,0,HL-0.8),radius:2,action:()=>{transitionTo('hospital-3d.html','Returning to Hospital')}});
-  // Dust particles
-  const dN=70,dG=new THREE.BufferGeometry(),dP=new Float32Array(dN*3);
-  for(let i=0;i<dN;i++){dP[i*3]=(Math.random()-0.5)*HW*2;dP[i*3+1]=0.3+Math.random()*2.2;dP[i*3+2]=(Math.random()-0.5)*HL*2}
-  dG.setAttribute('position',new THREE.BufferAttribute(dP,3));
-  scene.add(new THREE.Points(dG,new THREE.PointsMaterial({color:0xfff8ee,size:0.01,transparent:true,opacity:0.18,blending:THREE.AdditiveBlending,sizeAttenuation:true})));
+  renderBoard();
+  setInterval(tickClock,3000);
 }
-
-// ═══ LIGHTING ═══
-function lights(){
-  scene.add(new THREE.AmbientLight(0xf0ebe2,0.38));
-  scene.add(new THREE.HemisphereLight(0xfff5e6,0xc8c4ba,0.45));
-  // Hallway overhead
-  for(let lz=-HL+2;lz<HL;lz+=3){
-    const l=new THREE.PointLight(0xfff3e0,0.5,7,1.8);l.position.set(0,WH-0.1,lz);scene.add(l);
-  }
-  // Room interior lights
-  for(let i=0;i<10;i++){
-    const side=i<5?-1:1;const ri=i<5?i:i-5;
-    const rx=side*(HW+WT+RD/2);
-    const l=new THREE.PointLight(0xfff0e0,0.28,4.5,2);l.position.set(rx,WH-0.2,RZ[ri]);scene.add(l);
-  }
-  // Board spotlight (on north wall)
-  const sp=new THREE.SpotLight(0xfff5e0,0.6,6,Math.PI/5,0.5,1.5);
-  sp.position.set(0,WH-0.2,-HL+2.5);sp.target.position.set(0,1.8,-HL);scene.add(sp);scene.add(sp.target);
-}
-
-// ═══ PAGE TRANSITIONS ═══
-function transitionTo(url, label) {
-  const fade = document.getElementById('exit-fade');
-  const lbl = document.getElementById('exit-label');
-  const line = document.getElementById('exit-line');
-  lbl.textContent = label || '';
-  fade.style.opacity = '1';
-  fade.style.pointerEvents = 'all';
-  lbl.style.opacity = '1';
-  line.style.opacity = '1';
-  setTimeout(() => { window.location.href = url; }, 600);
-}
-
-// ═══ BOARD OVERLAY ═══
-function openBoard(){
-  brdOpen=true;document.exitPointerLock();
-  const el=document.getElementById('brows');
-  el.innerHTML=PTS.map(p=>{
-    const cr=p.acu==='critical';
-    return '<a class="brow" href="ed-board-v2.html?bed=R'+p.r+'">'+
-      '<span class="bbed '+(cr?'c':'u')+'">R'+p.r+'</span>'+
-      '<span class="bname">'+p.nm+' <span style="font-weight:400;color:rgba(255,255,255,.3);font-size:11px">'+p.age+'</span></span>'+
-      '<span class="bcc">'+p.cc+'</span>'+
-      '<span class="bacuity '+(cr?'c':'u')+'">'+(cr?'CRIT':'URG')+' '+p.esi+'</span></a>';
-  }).join('');
-  document.getElementById('board-ov').style.display='block';
-}
-function closeBoard(){
-  brdOpen=false;document.getElementById('board-ov').style.display='none';
-  ren.domElement.requestPointerLock();
-}
-
-// ═══ CONTROLS ═══
-function controls(){
-  document.getElementById('startBtn').addEventListener('click',()=>{
-    document.getElementById('blocker').style.display='none';ren.domElement.requestPointerLock();
-  });
-  document.addEventListener('pointerlockchange',()=>{
-    lk=document.pointerLockElement===ren.domElement;
-    if(!lk&&!brdOpen){document.getElementById('blocker').style.display='flex';document.getElementById('startBtn').textContent='▶ Resume'}
-    else if(lk)document.getElementById('blocker').style.display='none';
-    document.getElementById('hud').style.display=lk?'flex':'none';
-    document.getElementById('cross').style.display=lk?'block':'none';
-    document.getElementById('mmap').style.display=lk?'block':'none';
-  });
-  document.addEventListener('mousemove',e=>{
-    if(!lk)return;
-    euler.setFromQuaternion(cam.quaternion);
-    euler.y-=e.movementX*SENS;euler.x-=e.movementY*SENS;
-    euler.x=Math.max(-Math.PI/2.5,Math.min(Math.PI/2.5,euler.x));
-    cam.quaternion.setFromEuler(euler);
-  });
-  const kd={KeyW:'f',ArrowUp:'f',KeyS:'b',ArrowDown:'b',KeyA:'l',ArrowLeft:'l',KeyD:'r',ArrowRight:'r'};
-  document.addEventListener('keydown',e=>{
-    if(kd[e.code])mv[kd[e.code]]=1;
-    if(e.code==='KeyE'&&curTgt)curTgt.action();
-    if(e.code==='Escape'&&brdOpen){e.preventDefault();closeBoard()}
-  });
-  document.addEventListener('keyup',e=>{if(kd[e.code])mv[kd[e.code]]=0});
-  document.addEventListener('click',()=>{if(lk&&curTgt&&!brdOpen)curTgt.action()});
-  window.addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight)});
-}
-
-// ═══ COLLISION ═══
-function canGo(x,z){
-  const pad=0.25;
-  // Hallway
-  if(Math.abs(x)<=HW-pad && Math.abs(z)<=HL-pad) return true;
-  // Rooms: check if inside any room boundary (through door gaps)
-  for(let i=0;i<5;i++){
-    const rz=RZ[i];
-    const zOk=z>=rz-RW/2+pad && z<=rz+RW/2-pad;
-    if(!zOk) continue;
-    // Left room (rooms 1-5)
-    if(x>=-(HW+WT+RD-pad) && x<=-(HW-pad-0.2)) return true;
-    // Right room (rooms 6-10)
-    if(x>=(HW-pad-0.2) && x<=(HW+WT+RD-pad)) return true;
-  }
-  return false;
-}
-
-// ═══ HUD LOCATION ═══
-function locName(x,z){
-  if(Math.abs(x)<=HW){
-    if(z<-HL+3.5) return 'ED Track Board';
-    if(z>HL-3) return 'ED Entrance';
-    if(z>-1.5&&z<1) return 'Nurses Station';
-    return 'ED Hallway';
-  }
-  for(let i=0;i<5;i++){
-    if(Math.abs(z-RZ[i])<RW/2){
-      if(x<-HW) return 'Room '+(i+1)+' — '+PTS[i].nm;
-      if(x>HW) return 'Room '+(i+6)+' — '+PTS[i+5].nm;
-    }
-  }
-  return 'Emergency Department';
-}
-
-// ═══ MINIMAP ═══
-function minimap(){
-  const c=mmCtx,w=150,h=180,s=3;
-  c.fillStyle='rgba(8,8,8,0.92)';c.fillRect(0,0,w,h);
-  c.save();c.translate(w/2,h/2);
-  // Hallway outline
-  c.strokeStyle='rgba(255,255,255,0.08)';c.lineWidth=1;
-  c.strokeRect((-HW-pos.x)*s,(-HL-pos.z)*s,HW*2*s,HL*2*s);
-  // Rooms
-  for(let i=0;i<5;i++){
-    const rz=RZ[i];
-    const cr1=PTS[i].acu==='critical',cr2=PTS[i+5].acu==='critical';
-    // Left
-    c.fillStyle=cr1?'rgba(220,38,38,0.14)':'rgba(217,119,6,0.1)';
-    c.fillRect((-HW-WT-RD-pos.x)*s,(rz-RW/2-pos.z)*s,RD*s,RW*s);
-    // Right
-    c.fillStyle=cr2?'rgba(220,38,38,0.14)':'rgba(217,119,6,0.1)';
-    c.fillRect((HW+WT-pos.x)*s,(rz-RW/2-pos.z)*s,RD*s,RW*s);
-    // Labels
-    c.textAlign='center';c.font='bold 6px sans-serif';
-    c.fillStyle=cr1?'#EF4444':'#FBBF24';
-    c.fillText(''+(i+1),(-HW-WT-RD/2-pos.x)*s,(rz-pos.z)*s+2);
-    c.fillStyle=cr2?'#EF4444':'#FBBF24';
-    c.fillText(''+(i+6),(HW+WT+RD/2-pos.x)*s,(rz-pos.z)*s+2);
-  }
-  // Player dot
-  c.fillStyle='#fff';c.beginPath();c.arc(0,0,2.5,0,Math.PI*2);c.fill();
-  // Direction
-  const d=new THREE.Vector3(0,0,-1).applyQuaternion(cam.quaternion);
-  c.strokeStyle='#EF4444';c.lineWidth=1.5;c.beginPath();c.moveTo(0,0);c.lineTo(d.x*10,d.z*10);c.stroke();
-  c.restore();
-}
-
-// ═══ MAIN LOOP ═══
-let lastBoardDraw=0;
-function loop(){
-  requestAnimationFrame(loop);
-  const dt=Math.min(clk.getDelta(),0.1);
-  const t=clk.elapsedTime;
-
-  // Redraw board canvas ~5 fps (every 200ms)
-  if(boardTexRef&&t-lastBoardDraw>0.2){drawBoard(t);lastBoardDraw=t}
-  if(lk&&!brdOpen){
-    const fwd=new THREE.Vector3(0,0,-1).applyQuaternion(cam.quaternion);fwd.y=0;fwd.normalize();
-    const rt=new THREE.Vector3(1,0,0).applyQuaternion(cam.quaternion);rt.y=0;rt.normalize();
-    const vel=new THREE.Vector3();
-    if(mv.f)vel.add(fwd);if(mv.b)vel.sub(fwd);
-    if(mv.r)vel.add(rt);if(mv.l)vel.sub(rt);
-    const moving=vel.length()>0.001;
-    if(moving){
-      vel.normalize().multiplyScalar(SPD*dt);
-      const nx=pos.x+vel.x,nz=pos.z+vel.z;
-      if(canGo(nx,nz)){pos.x=nx;pos.z=nz}
-      else if(canGo(nx,pos.z))pos.x=nx;
-      else if(canGo(pos.x,nz))pos.z=nz;
-    }
-    pos.y=PH+(moving?Math.sin(clk.elapsedTime*7.5)*0.014+Math.sin(clk.elapsedTime*15)*0.003:0);
-    cam.position.copy(pos);
-
-    // Interactable proximity check
-    curTgt=null;let best=null,bDist=Infinity;
-    const pp=new THREE.Vector3(pos.x,PH,pos.z);
-    ints.forEach(it=>{
-      const d=pp.distanceTo(new THREE.Vector3(it.pos.x,PH,it.pos.z));
-      if(d<it.radius&&d<bDist){best=it;bDist=d}
-      // Animate door glow on proximity
-      if(it.light)it.light.intensity=d<it.radius?0.45+Math.sin(clk.elapsedTime*3)*0.12:0.25;
-      if(it.doorMesh)it.doorMesh.material.emissiveIntensity=d<it.radius?0.08+Math.sin(clk.elapsedTime*2)*0.03:0.03;
-    });
-    const pr=document.getElementById('prompt');
-    if(best){curTgt=best;pr.style.display='block';pr.querySelector('.pn').textContent=best.name;pr.querySelector('.pd').textContent=best.sub}
-    else pr.style.display='none';
-
-    document.getElementById('hud-loc').textContent=locName(pos.x,pos.z);
-    minimap();
-  }
-  ren.render(scene,cam);
-}
-
 init();
 </script>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
+<script src="rdx-demo-tour.js"></script>
 </body>
 </html>

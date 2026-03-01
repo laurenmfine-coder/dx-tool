@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Ravi Sharma (Father)",
       "phone": "(954) 555-2930"
     },
-    "mrn": "NSU-2025-61303"
+    "mrn": "RDX-2025-61303"
   },
   "problems": [
     {
@@ -111,7 +111,7 @@ window.EMR_DATA = {
       "time": "16:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 16:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261600",
       "status": "Final",
       "specimenType": "Venous Blood",

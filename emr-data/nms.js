@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Family Member",
       "phone": "(954) 555-0001"
     },
-    "mrn": "NSU-2025-60470"
+    "mrn": "RDX-2025-60470"
   },
   "problems": [
     {
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "time": "14:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 14:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261400",
       "status": "Final",
       "specimenType": "Venous Blood",

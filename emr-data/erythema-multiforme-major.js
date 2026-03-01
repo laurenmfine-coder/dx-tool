@@ -8,7 +8,7 @@ window.EMR_DATA = {
     "dob": "03/11/2001",
     "age": 24,
     "sex": "Male",
-    "mrn": "NSU-2025-41348",
+    "mrn": "RDX-2025-41348",
     "pronouns": "He/Him",
     "insurance": "United Healthcare (parent plan)",
     "pcp": "Dr. James Weatherly, MD",
@@ -141,7 +141,7 @@ window.EMR_DATA = {
       "time": "10:30",
       "orderedBy": "Dr. Weatherly",
       "collected": "08/10/2025 10:45",
-      "facility": "NSU Health — Davie Campus Lab",
+      "facility": "ReasonDx Medical Center Lab",
       "accession": "LAB-2025-801040",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -184,7 +184,7 @@ window.EMR_DATA = {
     "Maternal aunt: Autoimmune hepatitis"
   ],
   "socialHistory": [
-    ["Occupation", "Graduate student (MPH program at NSU); part-time research assistant"],
+    ["Occupation", "Graduate student (MPH program at State University); part-time research assistant"],
     ["Marital", "Single; lives with 2 roommates"],
     ["Tobacco", "Never smoker"],
     ["Alcohol", "Social — 3-4 drinks on weekends"],

@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Nursing Facility \u2014 Charge Nurse",
       "phone": "(954) 555-3400"
     },
-    "mrn": "NSU-2025-79788"
+    "mrn": "RDX-2025-79788"
   },
   "problems": [
     {
@@ -148,7 +148,7 @@ window.EMR_DATA = {
       "time": "08:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 08:05",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260401",
       "status": "Final",
       "specimenType": "Venous Blood",

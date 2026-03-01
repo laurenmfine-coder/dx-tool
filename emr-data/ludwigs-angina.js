@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Rosa Gutierrez (Wife)",
       "phone": "(954) 555-8828"
     },
-    "mrn": "NSU-2025-36031"
+    "mrn": "RDX-2025-36031"
   },
   "problems": [
     {
@@ -98,7 +98,7 @@ window.EMR_DATA = {
       "time": "13:00",
       "orderedBy": "Dr. Mitchell",
       "collected": "02/26/2026 13:10",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260330",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -200,7 +200,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Mitchell",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Ludwig angina \u2014 extent of infection, airway patency",
       "technique": "CT neck with IV contrast (performed post-intubation).",

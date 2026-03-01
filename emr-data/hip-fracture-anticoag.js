@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Patrick Fitzgerald (Son)",
       "phone": "(561) 555-4504"
     },
-    "mrn": "NSU-2025-29996"
+    "mrn": "RDX-2025-29996"
   },
   "problems": [
     {
@@ -137,7 +137,7 @@ window.EMR_DATA = {
       "time": "14:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 14:10",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260431",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -225,7 +225,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Fall, hip pain, on anticoagulation",
       "technique": "AP and lateral radiographs of the left hip.",

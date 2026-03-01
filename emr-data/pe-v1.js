@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Michael Park (Husband)",
       "phone": "(954) 555-7206"
     },
-    "mrn": "NSU-2025-66899"
+    "mrn": "RDX-2025-66899"
   },
   "problems": [
     {
@@ -110,7 +110,7 @@ window.EMR_DATA = {
       "time": "14:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 14:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261400",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -200,7 +200,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Suspected PE \u2014 tachycardia, hypoxia, DVT signs, high Wells",
       "technique": "CTA chest with PE protocol.",

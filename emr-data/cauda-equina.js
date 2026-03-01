@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Karen Morrison (Wife)",
       "phone": "(954) 555-9028"
     },
-    "mrn": "NSU-2025-51727"
+    "mrn": "RDX-2025-51727"
   },
   "problems": [
     {
@@ -99,7 +99,7 @@ window.EMR_DATA = {
       "time": "12:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 12:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261200",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -208,7 +208,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Thomas Lee, MD (Neuroradiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Acute bilateral leg weakness, saddle anesthesia, urinary retention \u2014 r/o cauda equina",
       "technique": "MRI lumbar spine without contrast, sagittal and axial sequences.",

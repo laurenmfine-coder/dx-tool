@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Carol Jenkins (Wife)",
       "phone": "(954) 555-7815"
     },
-    "mrn": "NSU-2025-86272"
+    "mrn": "RDX-2025-86272"
   },
   "problems": [
     {
@@ -156,7 +156,7 @@ window.EMR_DATA = {
       "time": "15:00",
       "orderedBy": "Dr. Mitchell",
       "collected": "02/26/2026 15:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261500",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -251,7 +251,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Mitchell",
       "readBy": "Dr. Mitchell, MD",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Known AAA, hypotension, suspected rupture",
       "technique": "Bedside eFAST with aortic views.",

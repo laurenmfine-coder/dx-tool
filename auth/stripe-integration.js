@@ -17,14 +17,14 @@
 // ============================================
 
 // Your Stripe publishable key (safe to expose in frontend)
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_your_publishable_key_here';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_your_publishable_key_here'; // Replace with your live key
 
 // Stripe Price IDs (get these from Stripe Dashboard → Products)
 const STRIPE_PRICES = {
-    premium_monthly: 'price_xxxxxxxxxxxxx', // $9.99/month
-    premium_annual: 'price_xxxxxxxxxxxxx',   // $79.99/year
-    team_monthly: 'price_xxxxxxxxxxxxx',     // $6.99/user/month
-    team_annual: 'price_xxxxxxxxxxxxx'       // $4.99/user/month (annual)
+    pro_monthly: 'price_1SvpACDEGaZdouAQ6l2xx5D4', // $14.99/month
+    pro_annual: 'price_1SynQRDEGaZdouAQ4ggXuvpj',   // $99/year
+    team_monthly: 'price_xxxxxxxxxxxxx',     // Institutional — contact sales
+    team_annual: 'price_xxxxxxxxxxxxx'       // Institutional — contact sales
 };
 
 // Your backend endpoint for creating checkout sessions

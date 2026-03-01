@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Carlos Reyes (Partner)",
       "phone": "(954) 555-6696"
     },
-    "mrn": "NSU-2025-30966"
+    "mrn": "RDX-2025-30966"
   },
   "problems": [
     {
@@ -111,7 +111,7 @@ window.EMR_DATA = {
       "time": "16:00",
       "orderedBy": "Dr. Kim",
       "collected": "02/26/2026 16:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261600",
       "status": "Final",
       "specimenType": "Venous Blood",

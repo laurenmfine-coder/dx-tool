@@ -11,17 +11,17 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Workers Comp + Cigna",
     "pcp": "Dr. Mark Peterson, MD",
-    "pharmacy": "Walgreens \u2014 Davie, FL",
+    "pharmacy": "Walgreens \u2014 Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "2240 SW 64th Ave, Davie, FL",
+    "address": "2240 SW 64th Ave, Riverside, FL",
     "phone": "(954) 555-1122",
     "email": "t.brown75@email.com",
     "emergencyContact": {
       "name": "Jennifer Brown (Wife)",
       "phone": "(954) 555-1138"
     },
-    "mrn": "NSU-2025-27013"
+    "mrn": "RDX-2025-27013"
   },
   "problems": [
     {
@@ -96,7 +96,7 @@ window.EMR_DATA = {
       "time": "15:00",
       "orderedBy": "Dr. Mitchell",
       "collected": "02/26/2026 15:05",
-      "facility": "NSU Memorial \u2014 Trauma Lab",
+      "facility": "ReasonDx Memorial — Trauma Lab",
       "accession": "LAB-2026-260481",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -226,7 +226,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Mitchell",
       "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "NSU Memorial \u2014 ED",
+      "facility": "ReasonDx Memorial — ED",
       "priority": "STAT",
       "clinical": "Trauma \u2014 decreased L breath sounds",
       "technique": "Portable AP chest radiograph.",

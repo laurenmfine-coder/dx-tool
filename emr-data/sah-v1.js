@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "David Wu (Husband)",
       "phone": "(954) 555-9938"
     },
-    "mrn": "NSU-2025-49373"
+    "mrn": "RDX-2025-49373"
   },
   "problems": [
     {
@@ -126,7 +126,7 @@ window.EMR_DATA = {
       "time": "10:00",
       "orderedBy": "Dr. Santos",
       "collected": "02/26/2026 10:05",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260451",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -228,7 +228,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Santos",
       "readBy": "Dr. Thomas Lee, MD (Neuroradiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Thunderclap headache, nuchal rigidity \u2014 SAH evaluation",
       "technique": "Non-contrast CT head.",
@@ -244,7 +244,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. Santos",
       "readBy": "Dr. Thomas Lee, MD (Neuroradiology)",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "SAH \u2014 aneurysm localization",
       "technique": "CTA of the head with IV contrast.",

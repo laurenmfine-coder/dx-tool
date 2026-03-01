@@ -11,17 +11,17 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "University health plan",
     "pcp": "Student Health Center",
-    "pharmacy": "CVS \u2014 Davie, FL",
+    "pharmacy": "CVS \u2014 Riverside, FL",
     "language": "English",
     "race": "Black",
-    "address": "NSU Student Housing, 3200 College Ave, Davie, FL",
+    "address": "University Student Housing, 3200 College Ave, Riverside, FL",
     "phone": "(954) 555-4412",
     "email": "d.harris03@email.com",
     "emergencyContact": {
       "name": "Angela Harris (Mother)",
       "phone": "(404) 555-8822"
     },
-    "mrn": "NSU-2025-95737"
+    "mrn": "RDX-2025-95737"
   },
   "problems": [
     {
@@ -96,7 +96,7 @@ window.EMR_DATA = {
       "time": "14:00",
       "orderedBy": "Dr. Mitchell",
       "collected": "02/26/2026 14:05",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260360",
       "status": "Final",
       "specimenType": "Venous Blood",

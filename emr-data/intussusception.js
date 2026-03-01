@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Andrea Williams (Mother)",
       "phone": "(954) 555-4438"
     },
-    "mrn": "NSU-2025-39565"
+    "mrn": "RDX-2025-39565"
   },
   "problems": [
     {
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "time": "16:00",
       "orderedBy": "Dr. Mitchell",
       "collected": "02/26/2026 16:00",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-02261600",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -141,7 +141,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Patel, MD",
-      "facility": "NSU Memorial \u2014 Radiology",
+      "facility": "ReasonDx Memorial — Radiology",
       "priority": "STAT",
       "clinical": "Suspected intussusception \u2014 colicky pain, bloody stools, abdominal mass",
       "technique": "Focused abdominal ultrasound.",

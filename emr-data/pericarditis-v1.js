@@ -21,7 +21,7 @@ window.EMR_DATA = {
       "name": "Grace Okafor (Wife)",
       "phone": "(954) 555-6638"
     },
-    "mrn": "NSU-2025-24078"
+    "mrn": "RDX-2025-24078"
   },
   "problems": [
     {
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "time": "10:00",
       "orderedBy": "Dr. James Carter, MD",
       "collected": "02/26/2026 10:15",
-      "facility": "NSU Memorial \u2014 ED Lab",
+      "facility": "ReasonDx Memorial — ED Lab",
       "accession": "LAB-2026-260301",
       "status": "Final",
       "specimenType": "Venous Blood",
@@ -160,7 +160,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. James Carter, MD",
-      "facility": "NSU Memorial \u2014 ED",
+      "facility": "ReasonDx Memorial — ED",
       "priority": "STAT",
       "clinical": "Chest pain, suspected pericarditis",
       "technique": "Standard 12-lead ECG.",
@@ -176,7 +176,7 @@ window.EMR_DATA = {
       "status": "FINAL",
       "orderedBy": "Dr. James Carter, MD",
       "readBy": "Dr. Carter, MD",
-      "facility": "NSU Memorial \u2014 ED",
+      "facility": "ReasonDx Memorial — ED",
       "priority": "STAT",
       "clinical": "Pericarditis \u2014 assess for effusion",
       "technique": "Focused bedside echocardiography.",

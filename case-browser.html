@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Browse Cases — ReasonDx</title>
-<meta name="description" content="ReasonDx: AI-powered clinical reasoning trainer for medical students. Practice diagnostic thinking, SBAR communication, and get personalized coaching across 326 cases and 29 specialties.">
+<meta name="description" content="ReasonDx: AI-powered clinical reasoning trainer for health professions learners. Practice diagnostic thinking, SBAR communication, and get personalized coaching across 326 cases and 29 specialties.">
 <meta property="og:title" content="ReasonDx — Clinical Reasoning Platform">
 <meta property="og:description" content="ReasonDx: AI-powered clinical reasoning trainer. Build differentials, practice SBAR handoffs, and get personalized coaching across 326 cases and 29 specialties.">
 <meta property="og:type" content="website">
@@ -899,6 +899,12 @@ body {
 .ix-pm-preview { display: none; background: white; border: 1px solid var(--slate200); border-radius: 20px; padding: 32px; margin-top: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); animation: ixFadeIn 0.3s ease; }
 .ix-pm-preview.active { display: block; }
 @keyframes ixFadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+/* RDX Loading */
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+.rdx-loading.hide{opacity:0;pointer-events:none}
+.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
+@keyframes rdxSpin{to{transform:rotate(360deg)}}
+.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
 <link rel="stylesheet" href="./css/rdx-theme.css">
 <script>
@@ -912,8 +918,10 @@ body {
     });
   })();
 </script>
+<script src="auth/auth-guard.js"></script>
 </head>
 <body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 <!-- Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
   <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(40,116,166,0.08),rgba(40,116,166,0.04));border:1px solid rgba(40,116,166,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(40,116,166,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
@@ -1205,7 +1213,7 @@ body {
             <div class="ix-grid" style="margin-bottom: 0;">
                 <div>
                     <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Clinical cases designed for your level</h3>
-                    <p style="font-size: 14px; color: var(--slate500); line-height: 1.7; margin-bottom: 14px;">Not the same cases med students get — these are scaffolded for pre-med knowledge. Work through patient scenarios with built-in explanations, vocabulary help, and reasoning prompts that build your clinical thinking from the ground up.</p>
+                    <p style="font-size: 14px; color: var(--slate500); line-height: 1.7; margin-bottom: 14px;">Not the same cases most learners get — these are scaffolded for pre-med knowledge. Work through patient scenarios with built-in explanations, vocabulary help, and reasoning prompts that build your clinical thinking from the ground up.</p>
                     <div style="display: flex; flex-direction: column; gap: 6px;">
                         <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Progressive difficulty — beginner, intermediate, advanced</span></div>
                         <div style="display: flex; align-items: center; gap: 8px;"><span style="color: #6d28d9;">&#10003;</span><span style="font-size: 13px; color: var(--slate600);">Built-in vocabulary tooltips for medical terminology</span></div>
@@ -1401,7 +1409,7 @@ body {
   <div class="email-popup">
     <button class="popup-close" onclick="closePopup()">&times;</button>
     <h3>Level up your reasoning</h3>
-    <p>Weekly clinical reasoning tips & new case alerts — built for students who want to think like clinicians.</p>
+    <p>Weekly clinical reasoning tips & new case alerts — built for learners who want to think like clinicians.</p>
     <form class="popup-form" onsubmit="handleSignup(event)">
       <input type="text" class="popup-input" placeholder="First name" required>
       <input type="email" class="popup-input" placeholder="Email address" required>
@@ -2904,7 +2912,7 @@ const TOPICS = [
   }
 ];
 
-// Premed modules — searchable alongside med student content
+// Premed modules — searchable alongside all clinical content
 const PREMED_TOPICS = [
 
 ];
@@ -3660,5 +3668,7 @@ function closeFeedbackPanel() {
 }
 </script>
 
+<script src="rdx-demo-tour.js"></script>
+<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 </body>
 </html>

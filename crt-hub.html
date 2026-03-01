@@ -18,6 +18,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
 
+        /* Loading skeleton */
+        .loading-skeleton { padding: 40px 24px; max-width: 1100px; margin: 0 auto; }
+        .skel-bar { height: 14px; background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%); background-size: 200%; border-radius: 6px; margin-bottom: 12px; animation: shimmer 1.5s infinite; }
+        .skel-bar.w80 { width: 80%; } .skel-bar.w60 { width: 60%; } .skel-bar.w40 { width: 40%; }
+        .skel-card { height: 56px; background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%); background-size: 200%; border-radius: 10px; margin-bottom: 8px; animation: shimmer 1.5s infinite; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
         .header { background: white; border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--brand-dark); text-decoration: none; }
         .logo span { color: var(--brand); }
@@ -98,14 +105,29 @@
             .topic-links { width: 100%; margin-top: 4px; }
         }
     </style>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<script src="auth/auth-guard.js"></script>
 </head>
 <body>
-    <header class="header">
-        <a href="/" class="logo">Reason<span>Dx</span></a>
-        <nav class="nav">
-            <a href="training.html" class="active">CoachDx</a>
-            <a href="tools/learning-dashboard.html">Dashboard</a>
-        </nav>
+    <!-- Loading skeleton shown before content renders -->
+    <div id="loading-skeleton" class="loading-skeleton">
+        <div class="skel-bar w80"></div>
+        <div class="skel-bar w60"></div>
+        <div style="height:20px"></div>
+        <div class="skel-card"></div><div class="skel-card"></div><div class="skel-card"></div>
+        <div class="skel-card"></div><div class="skel-card"></div><div class="skel-card"></div>
+    </div>
+
+    <div id="main-content" style="display:none">
+
+    <!-- Progress banner -->
+    <div id="progress-banner" style="background:linear-gradient(90deg,#1B4F72,#2874A6);color:white;padding:10px 24px;font-size:13px;display:flex;align-items:center;gap:16px;justify-content:center">
+        <span id="pb-text">Loading progress...</span>
+        <div style="flex:0 0 200px;height:6px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden">
+            <div id="pb-bar" style="height:100%;width:0%;background:#10B981;border-radius:3px;transition:width .5s"></div>
+        </div>
+        <span id="pb-pct" style="font-weight:700;min-width:36px">0%</span>
+    </div>
     </header>
 
     <div class="hero">
@@ -120,7 +142,7 @@
     </div>
 
     <div class="container">
-        <a href="training.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--brand);text-decoration:none;font-weight:500;margin-bottom:20px;">← Back to CoachDx</a>
+        <a href="hospital-3d.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--brand);text-decoration:none;font-weight:500;margin-bottom:20px;">← Back to Hospital</a>
 
         <!-- Featured: Immersive Simulations -->
         <div class="featured-section" id="featured">
@@ -303,6 +325,62 @@ function render() {
 
 initFilters();
 render();
+
+    // Progress tracking
+    function loadProgress() {
+        try {
+            const scores = JSON.parse(localStorage.getItem('crtScores') || '{}');
+            const visited = JSON.parse(localStorage.getItem('rdx-crt-visited') || '[]');
+            const total = TOPICS.length;
+            const completed = visited.length;
+            const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            document.getElementById('pb-text').textContent = `${completed} of ${total} topics explored`;
+            document.getElementById('pb-bar').style.width = pct + '%';
+            document.getElementById('pb-pct').textContent = pct + '%';
+            
+            // Mark visited topics with checkmarks
+            document.querySelectorAll('.topic').forEach(el => {
+                const name = el.querySelector('.topic-name');
+                if (name) {
+                    const topicId = name.textContent.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                    if (visited.includes(topicId)) {
+                        name.innerHTML = '✅ ' + name.textContent;
+                    }
+                }
+            });
+        } catch(e) {}
+    }
+
+    // Track clicks
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('.topic-links a, .featured-card');
+        if (link) {
+            try {
+                const topic = link.closest('.topic');
+                if (topic) {
+                    const name = topic.querySelector('.topic-name').textContent.replace('✅ ','').toLowerCase().replace(/[^a-z0-9]/g, '-');
+                    const visited = JSON.parse(localStorage.getItem('rdx-crt-visited') || '[]');
+                    if (!visited.includes(name)) {
+                        visited.push(name);
+                        localStorage.setItem('rdx-crt-visited', JSON.stringify(visited));
+                    }
+                }
+            } catch(e) {}
+        }
+    });
+
+    // Show content after render
+    setTimeout(function() {
+        document.getElementById('loading-skeleton').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        loadProgress();
+    }, 300);
     </script>
+    </div><!-- close main-content -->
+
+<script src="./rdx-nav.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="rdx-demo-tour.js"></script>
 </body>
 </html>
