@@ -97,3 +97,10 @@
   style.textContent = '@media(max-width:600px){#dx-user-bar a:not(:first-child){display:none}#dx-user-bar{padding:0 10px;height:32px}}';
   document.head.appendChild(style);
 })();
+
+/* Dx Brand Styling - injected globally */
+(function(){
+  var s=document.createElement('style');
+  s.textContent='.dx-brand{font-weight:700;letter-spacing:-0.3px;white-space:nowrap}.dx-brand .dx-pre{color:#1A3A5C}.dx-brand .dx-suf{color:#2874A6}[data-theme="dark"] .dx-brand .dx-pre{color:#CBD5E1}[data-theme="dark"] .dx-brand .dx-suf{color:#5BA3CC}.dx-brand-light .dx-pre{color:#FFF}.dx-brand-light .dx-suf{color:#93C5E6}';
+  document.head.appendChild(s);
+})();

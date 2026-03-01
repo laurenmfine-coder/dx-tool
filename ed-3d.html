@@ -6,6 +6,7 @@
 <title>ReasonDx — ED Track Board</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary:#2874A6; --primary-dark:#1B4F72; --primary-light:#EBF5FB;
@@ -15,7 +16,7 @@
   --text:#1a1a2e; --text-muted:#64748b; --bg:#f0f4f8;
   --card:#ffffff; --border:#dce3eb;
   --esi-1:#DC2626; --esi-2:#EF4444; --esi-3:#F59E0B; --esi-4:#22C55E; --esi-5:#3B82F6;
-  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --font:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:'Courier New',monospace;
   --shadow-sm:0 1px 3px rgba(0,0,0,.06); --shadow-md:0 4px 12px rgba(0,0,0,.08);
   --shadow-lg:0 8px 30px rgba(0,0,0,.12); --radius:8px;
@@ -24,7 +25,7 @@
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
 
 /* ═══ TOP BAR ═══ */
-.topbar{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
+.topbar{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:var(--topbar-offset,0px);z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
 .topbar-left{display:flex;align-items:center;gap:14px}
 .topbar-home{text-decoration:none;color:#fff;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.1);transition:background .15s}
 .topbar-home:hover{background:rgba(255,255,255,.2)}
@@ -39,7 +40,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .shift-night{background:rgba(99,102,241,.2);color:#a5b4fc}
 
 /* ═══ FILTER BAR ═══ */
-.filter-bar{background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:52px;z-index:90}
+.filter-bar{background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:var(--filter-offset,52px);z-index:90}
 .filter-group{display:flex;align-items:center;gap:6px}
 .filter-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);white-space:nowrap}
 .filter-chips{display:flex;gap:4px;flex-wrap:wrap}
@@ -165,7 +166,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .rdx-loading.hide{opacity:0;pointer-events:none}
 .rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
 @keyframes rdxSpin{to{transform:rotate(360deg)}}
-.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
+.rdx-load-text{font-family:"IBM Plex Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
 <script src="auth/auth-guard.js"></script>
 </head>
@@ -514,19 +515,25 @@ function init(){
     board.push(p);
   }
   renderBoard();
-  updateHeaderOffset();
+  // Run offset calculation after dx-user-bar.js has had time to inject (loaded async)
+  setTimeout(updateHeaderOffset,100);
+  setTimeout(updateHeaderOffset,500);
   setInterval(tickClock,3000);
 }
 
-// Dynamically calculate sticky offset for table header
-// based on actual rendered height of topbar + filter bar
+// Dynamically calculate sticky offsets for topbar, filter bar, and table header
+// Accounts for the dx-user-bar (36px fixed bar injected by dx-user-bar.js)
 function updateHeaderOffset(){
+  var userBar=document.getElementById('dx-user-bar');
   var topbar=document.querySelector('.topbar');
   var filterBar=document.querySelector('.filter-bar');
-  if(topbar&&filterBar){
-    var offset=topbar.offsetHeight+filterBar.offsetHeight;
-    document.documentElement.style.setProperty('--header-offset',offset+'px');
-  }
+  var userBarH=userBar?userBar.offsetHeight:0;
+  var topbarH=topbar?topbar.offsetHeight:0;
+  var filterBarH=filterBar?filterBar.offsetHeight:0;
+  var root=document.documentElement;
+  root.style.setProperty('--topbar-offset',userBarH+'px');
+  root.style.setProperty('--filter-offset',(userBarH+topbarH)+'px');
+  root.style.setProperty('--header-offset',(userBarH+topbarH+filterBarH)+'px');
 }
 window.addEventListener('resize',updateHeaderOffset);
 init();

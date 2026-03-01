@@ -8,319 +8,397 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
+  --bg: #F0F2F5;
+  --surface: #FFF;
+  --surface-alt: #F7F8FA;
   --brand: #2874A6;
   --brand-dark: #1B5E8A;
+  --brand-light: #E3F2FD;
+  --accent: #00897B;
+  --text: #1A1A2E;
+  --text-secondary: #5A6178;
+  --text-muted: #8C92A4;
+  --border: #DFE1E6;
+  --border-light: #ECEEF2;
+  --radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.08);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { height:100%; }
 body {
-  font-family:'IBM Plex Sans',-apple-system,sans-serif;
+  font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   min-height:100%;
-  background: linear-gradient(170deg, #0d1b2a 0%, #1b2838 40%, #162a3a 100%);
-  color: #fff;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--bg);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
 }
 
 /* ─── HEADER ─── */
-.header {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 14px 24px;
+.page-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+.header-left { display:flex; align-items:center; gap:16px; }
 .header-logo {
-  display: flex; align-items: center; gap: 10px;
-  color: #fff; text-decoration: none;
+  display:flex; align-items:center; gap:8px;
+  text-decoration:none; color:var(--text);
 }
-.header-logo-icon {
-  width: 36px; height: 36px;
-  background: rgba(40,116,166,0.3);
-  border: 1px solid rgba(40,116,166,0.4);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-.header-logo-text { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
-.header-logo-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-left: 2px; }
+.header-logo svg { color:var(--brand); }
+.header-logo-text { font-size:16px; font-weight:700; color:var(--brand); letter-spacing:-0.3px; }
+.header-divider { width:1px; height:24px; background:var(--border); }
+.header-title { font-size:14px; font-weight:500; color:var(--text-secondary); }
 .header-back {
-  font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none;
-  display: flex; align-items: center; gap: 6px; transition: color 0.2s;
+  font-size:13px; color:var(--text-muted); text-decoration:none;
+  display:flex; align-items:center; gap:4px; transition:color .15s;
 }
-.header-back:hover { color: rgba(255,255,255,0.8); }
+.header-back:hover { color:var(--brand); }
 
-/* ─── LOBBY ─── */
-.lobby { max-width: 640px; margin: 0 auto; padding: 40px 20px 60px; }
+/* ─── LAYOUT ─── */
+.page-body { max-width:800px; margin:0 auto; padding:32px 24px 64px; }
 
-/* ─── WELCOME ─── */
-.welcome { text-align: center; margin-bottom: 36px; }
-.welcome-icon { font-size: 48px; margin-bottom: 12px; }
-.welcome h1 { font-size: 28px; font-weight: 300; letter-spacing: -0.5px; margin-bottom: 4px; }
-.welcome h1 em { color: #7DD3FC; font-style: italic; font-weight: 500; }
-.welcome p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 420px; margin: 0 auto; }
+/* ─── WELCOME BANNER ─── */
+.welcome-banner {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.welcome-icon {
+  width:52px; height:52px; border-radius:12px;
+  background: var(--brand-light);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.welcome-icon svg { width:26px; height:26px; color:var(--brand); }
+.welcome-text h1 {
+  font-size:20px; font-weight:600; color:var(--text);
+  letter-spacing:-0.3px; margin-bottom:4px;
+}
+.welcome-text p { font-size:13px; color:var(--text-muted); line-height:1.5; }
 
-/* ─── DIRECTORY ─── */
+/* ─── DIRECTORY TABLE ─── */
 .directory {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
   overflow: hidden;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
 }
 .directory-header {
-  padding: 16px 20px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  display: flex; align-items: center; gap: 10px;
-}
-.directory-header-icon {
-  width: 32px; height: 32px;
-  background: rgba(40,116,166,0.2);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px;
-}
-.directory-header-text h2 {
-  font-size: 14px; font-weight: 700;
-  color: rgba(255,255,255,0.85);
-  text-transform: uppercase; letter-spacing: 0.8px;
-}
-.directory-header-text p { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 1px; }
-
-/* ─── FLOOR ITEMS ─── */
-.floor-item {
-  display: flex; align-items: center; gap: 14px;
   padding: 14px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  cursor: pointer; transition: all 0.15s ease;
-  text-decoration: none; color: inherit;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  border-bottom: 1px solid var(--border-light);
+  display:flex; align-items:center; justify-content:space-between;
 }
-.floor-item:last-child { border-bottom: none; }
-.floor-item:hover, .floor-item:active { background: rgba(255,255,255,0.06); }
+.directory-header-left { display:flex; align-items:center; gap:8px; }
+.directory-header-left svg { width:16px; height:16px; color:var(--text-muted); }
+.directory-header h2 {
+  font-size:12px; font-weight:700; color:var(--text-secondary);
+  text-transform:uppercase; letter-spacing:0.6px;
+}
+.directory-count {
+  font-size:11px; color:var(--text-muted); font-weight:500;
+  background:var(--surface-alt); padding:3px 10px; border-radius:12px;
+  border:1px solid var(--border-light);
+}
 
-.floor-badge {
-  width: 44px; height: 44px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; font-size: 11px; font-weight: 800;
-  letter-spacing: 0.5px; color: #fff;
+/* ─── FLOOR ROWS ─── */
+.floor-row {
+  display:flex; align-items:center; gap:16px;
+  padding:14px 20px;
+  border-bottom:1px solid var(--border-light);
+  text-decoration:none; color:inherit;
+  transition:background .12s;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
-.floor-info { flex: 1; min-width: 0; }
-.floor-name { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 2px; }
-.floor-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+.floor-row:last-child { border-bottom:none; }
+.floor-row:hover { background:var(--brand-light); }
+
+.floor-icon {
+  width:40px; height:40px; border-radius:var(--radius);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.floor-icon svg { width:20px; height:20px; color:#fff; }
+
+.floor-info { flex:1; min-width:0; }
+.floor-name { font-size:14px; font-weight:600; color:var(--text); margin-bottom:2px; }
+.floor-desc { font-size:12px; color:var(--text-muted); line-height:1.4; }
+.floor-tag {
+  font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.4px;
+  padding:3px 8px; border-radius:4px; white-space:nowrap;
+}
+.floor-tag.core { background:var(--brand-light); color:var(--brand); }
+.floor-tag.new { background:#E8F5E9; color:#2E7D32; }
+.floor-tag.ai { background:#F3E5F5; color:#7B1FA2; }
 .floor-arrow {
-  color: rgba(255,255,255,0.2); font-size: 18px; flex-shrink: 0;
-  transition: transform 0.15s, color 0.15s;
+  color:var(--border); flex-shrink:0; transition:color .12s, transform .12s;
 }
-.floor-item:hover .floor-arrow { color: rgba(255,255,255,0.5); transform: translateX(3px); }
+.floor-row:hover .floor-arrow { color:var(--brand); transform:translateX(2px); }
 
-/* ─── QUICK LINKS ─── */
-.quick-links { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
-.quick-link {
-  display: flex; align-items: center; gap: 8px;
-  padding: 12px 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px; text-decoration: none;
-  color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 500;
-  transition: all 0.15s;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+/* ─── QUICK ACCESS ─── */
+.quick-section {
+  margin-top:20px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
 }
-.quick-link:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); }
-.quick-link-icon { font-size: 18px; }
+.quick-card {
+  background:var(--surface);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius);
+  padding:14px;
+  text-decoration:none; color:var(--text);
+  transition:border-color .15s, box-shadow .15s;
+  display:flex; flex-direction:column; gap:8px;
+}
+.quick-card:hover { border-color:var(--brand); box-shadow:var(--shadow-md); }
+.quick-card-icon {
+  width:32px; height:32px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+}
+.quick-card-icon svg { width:16px; height:16px; color:#fff; }
+.quick-card-label { font-size:12px; font-weight:600; color:var(--text); }
+.quick-card-desc { font-size:11px; color:var(--text-muted); line-height:1.3; }
 
 /* ─── FOOTER ─── */
-.lobby-footer { text-align: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); }
-.lobby-footer p { font-size: 11px; color: rgba(255,255,255,0.25); line-height: 1.6; }
-.lobby-footer a { color: rgba(125,211,252,0.6); text-decoration: none; }
-.lobby-footer a:hover { color: #7DD3FC; }
+.page-footer {
+  text-align:center; margin-top:32px; padding-top:20px;
+  border-top:1px solid var(--border-light);
+}
+.page-footer p { font-size:11px; color:var(--text-muted); line-height:1.6; }
+.page-footer a { color:var(--brand); text-decoration:none; }
+.page-footer a:hover { text-decoration:underline; }
 
 /* ─── ANIMATIONS ─── */
-@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-.floor-item { animation: fadeUp 0.3s ease both; }
-.floor-item:nth-child(1) { animation-delay: 0.05s; }
-.floor-item:nth-child(2) { animation-delay: 0.10s; }
-.floor-item:nth-child(3) { animation-delay: 0.15s; }
-.floor-item:nth-child(4) { animation-delay: 0.20s; }
-.floor-item:nth-child(5) { animation-delay: 0.25s; }
-.floor-item:nth-child(6) { animation-delay: 0.30s; }
-.floor-item:nth-child(7) { animation-delay: 0.35s; }
-.quick-link { animation: fadeUp 0.3s ease both; animation-delay: 0.4s; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.floor-row { animation:fadeIn .25s ease both; }
+.floor-row:nth-child(1){animation-delay:.02s}.floor-row:nth-child(2){animation-delay:.04s}
+.floor-row:nth-child(3){animation-delay:.06s}.floor-row:nth-child(4){animation-delay:.08s}
+.floor-row:nth-child(5){animation-delay:.10s}.floor-row:nth-child(6){animation-delay:.12s}
+.floor-row:nth-child(7){animation-delay:.14s}.floor-row:nth-child(8){animation-delay:.16s}
+.floor-row:nth-child(9){animation-delay:.18s}.floor-row:nth-child(10){animation-delay:.20s}
 
 /* ─── MOBILE ─── */
-@media (max-width: 430px) {
-  .lobby { padding: 24px 16px 40px; }
-  .welcome { margin-bottom: 24px; }
-  .welcome-icon { font-size: 40px; }
-  .welcome h1 { font-size: 24px; }
-  .welcome p { font-size: 13px; }
-  .header { padding: 10px 16px; }
-  .header-logo-text { font-size: 15px; }
-  .header-logo-sub { display: none; }
-  .floor-item { padding: 12px 16px; gap: 12px; }
-  .floor-badge { width: 40px; height: 40px; font-size: 10px; }
-  .floor-name { font-size: 14px; }
-  .floor-desc { font-size: 11px; }
-  .quick-links { grid-template-columns: 1fr; }
+@media (max-width:640px) {
+  .page-body { padding:20px 16px 48px; }
+  .welcome-banner { padding:20px; flex-direction:column; text-align:center; gap:12px; }
+  .page-header { padding:0 16px; height:50px; }
+  .header-title { display:none; }
+  .quick-section { grid-template-columns:1fr 1fr; }
+  .floor-tag { display:none; }
 }
-/* RDX Loading */
-.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+
+/* ─── LOADER ─── */
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
 .rdx-loading.hide{opacity:0;pointer-events:none}
-.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
+.rdx-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:rdxSpin .8s linear infinite}
 @keyframes rdxSpin{to{transform:rotate(360deg)}}
-.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
+.rdx-load-text{font-size:14px;color:var(--text-muted);font-weight:500}
 </style>
 <script src="auth/auth-guard.js"></script>
 </head>
 <body>
 
-
-<div class="header">
-  <a href="index.html" class="header-logo">
-    <div class="header-logo-icon">🏥</div>
-    <span class="header-logo-text">ReasonDx</span>
-    <span class="header-logo-sub">Virtual Hospital</span>
+<div class="page-header">
+  <div class="header-left">
+    <a href="index.html" class="header-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="header-logo-text">ReasonDx</span>
+    </a>
+    <div class="header-divider"></div>
+    <span class="header-title">Virtual Hospital</span>
+  </div>
+  <a href="index.html" class="header-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Home
   </a>
-  <a href="index.html" class="header-back">← Home</a>
 </div>
 
-<div class="lobby">
+<div class="page-body">
 
-  <div class="welcome">
-    <div class="welcome-icon">🏥</div>
-    <h1>Welcome to <em>ReasonDx</em></h1>
-    <p>Information Desk &amp; Elevator Lobby — Choose a floor to begin.</p>
+  <div class="welcome-banner">
+    <div class="welcome-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+    </div>
+    <div class="welcome-text">
+      <h1>Virtual Teaching Hospital</h1>
+      <p>Select a department below to begin your clinical experience. Each area offers a different workflow, documentation style, and reasoning challenge.</p>
+    </div>
   </div>
 
   <div class="directory">
     <div class="directory-header">
-      <div class="directory-header-icon">🛗</div>
-      <div class="directory-header-text">
-        <h2>Floor Directory</h2>
-        <p>Select a destination</p>
+      <div class="directory-header-left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <h2>Department Directory</h2>
       </div>
+      <span class="directory-count">10 areas</span>
     </div>
 
-    <a class="floor-item" href="ed-3d.html">
-      <div class="floor-badge" style="background:#C62828;">1</div>
-      <div class="floor-info">
-        <div class="floor-name">🚑 Emergency Department</div>
-        <div class="floor-desc">Live Track Board · Filter by acuity, category & status</div>
+    <a class="floor-row" href="ed-3d.html">
+      <div class="floor-icon" style="background:#C62828;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
-      <div class="floor-arrow">→</div>
+      <div class="floor-info">
+        <div class="floor-name">Emergency Department</div>
+        <div class="floor-desc">Live track board with acuity, category &amp; status filters</div>
+      </div>
+      <span class="floor-tag core">Core</span>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="night-float.html">
-      <div class="floor-badge" style="background:#6A1B9A;">2</div>
+    <a class="floor-row" href="night-float.html">
+      <div class="floor-icon" style="background:#6A1B9A;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">🌙 Inpatient Floor — Night Float</div>
+        <div class="floor-name">Inpatient Floor — Night Float</div>
         <div class="floor-desc">Admission orders · Nurse pages · I-PASS handoff</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="simroomdx.html">
-      <div class="floor-badge" style="background:#059669;">3</div>
+    <a class="floor-row" href="simroomdx.html">
+      <div class="floor-icon" style="background:#059669;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">🩺 Conference Room — SimRoomDx</div>
+        <div class="floor-name">Conference Room — SimRoomDx</div>
         <div class="floor-desc">Morning rounds · Present to the attending · AI characters</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <span class="floor-tag ai">AI</span>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="crt-hub.html">
-      <div class="floor-badge" style="background:#D97706;">4</div>
+    <a class="floor-row" href="crt-hub.html">
+      <div class="floor-icon" style="background:#D97706;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">🧩 Skills Lab</div>
+        <div class="floor-name">Skills Lab</div>
         <div class="floor-desc">Clinical reasoning trainers · SBAR · Consultant callback</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <span class="floor-tag core">Core</span>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="case-browser.html">
-      <div class="floor-badge" style="background:#2874A6;">5</div>
-      <div class="floor-info">
-        <div class="floor-name">📚 Medical Library</div>
-        <div class="floor-desc">MechanismDx modules · 256 interactive cases · 29 specialties</div>
+    <a class="floor-row" href="case-browser.html">
+      <div class="floor-icon" style="background:#2874A6;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       </div>
-      <div class="floor-arrow">→</div>
+      <div class="floor-info">
+        <div class="floor-name">Medical Library</div>
+        <div class="floor-desc"><span class="dx-brand"><span class="dx-pre">Mechanism</span><span class="dx-suf">Dx</span></span> modules · 256 interactive cases · 29 specialties</div>
+      </div>
+      <span class="floor-tag core">Core</span>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="CoachDx/index.html">
-      <div class="floor-badge" style="background:#DB2777;">6</div>
+    <a class="floor-row" href="CoachDx/index.html">
+      <div class="floor-icon" style="background:#DB2777;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">💡 CoachDx</div>
+        <div class="floor-name"><span class="dx-brand"><span class="dx-pre">Coach</span><span class="dx-suf">Dx</span></span></div>
         <div class="floor-desc">AI Socratic coaching · Cognitive bias identification · Debriefs</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <span class="floor-tag ai">AI</span>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="tools/index.html">
-      <div class="floor-badge" style="background:#4F46E5;">7</div>
+    <a class="floor-row" href="tools/index.html">
+      <div class="floor-icon" style="background:#4F46E5;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">🔧 Clinical Tools</div>
+        <div class="floor-name">Clinical Tools</div>
         <div class="floor-desc">ECG practice · ABG analyzer · Calculators · DDx builder</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="analytics-dashboard.html">
-      <div class="floor-badge" style="background:#059669;">8</div>
+    <a class="floor-row" href="analytics-dashboard.html">
+      <div class="floor-icon" style="background:#059669;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">📊 Analytics Dashboard</div>
+        <div class="floor-name">Analytics Dashboard</div>
         <div class="floor-desc">Track progress · CaseFrame scores · Order safety · Board prep analytics</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="board-prep.html">
-      <div class="floor-badge" style="background:#D97706;">9</div>
+    <a class="floor-row" href="board-prep.html">
+      <div class="floor-icon" style="background:#D97706;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">📝 Board Prep</div>
+        <div class="floor-name">Board Prep</div>
         <div class="floor-desc">615 board-style questions · Spaced repetition · System-based practice</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-item" href="study-mode.html">
-      <div class="floor-badge" style="background:#7C3AED;">10</div>
+    <a class="floor-row" href="study-mode.html">
+      <div class="floor-icon" style="background:#7C3AED;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+      </div>
       <div class="floor-info">
-        <div class="floor-name">📖 Study Mode</div>
+        <div class="floor-name">Study Mode</div>
         <div class="floor-desc">Topic-based study guides · Focused review · Quick reference</div>
       </div>
-      <div class="floor-arrow">→</div>
+      <span class="floor-tag new">New</span>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
   </div>
 
-  <div class="quick-links">
-    <a class="quick-link" href="virtual-emr.html">
-      <span class="quick-link-icon">📋</span> Virtual EMR
+  <div class="quick-section">
+    <a class="quick-card" href="virtual-emr.html">
+      <div class="quick-card-icon" style="background:#2874A6;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+      </div>
+      <span class="quick-card-label">Virtual EMR</span>
+      <span class="quick-card-desc">Standardized patient encounters</span>
     </a>
-    <a class="quick-link" href="analytics-dashboard.html">
-      <span class="quick-link-icon">📊</span> Dashboard
+    <a class="quick-card" href="analytics-dashboard.html">
+      <div class="quick-card-icon" style="background:#059669;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <span class="quick-card-label">Dashboard</span>
+      <span class="quick-card-desc">Your performance analytics</span>
     </a>
-    <a class="quick-link" href="board-prep.html">
-      <span class="quick-link-icon">📝</span> Board Prep
+    <a class="quick-card" href="board-prep.html">
+      <div class="quick-card-icon" style="background:#D97706;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <span class="quick-card-label">Board Prep</span>
+      <span class="quick-card-desc">615 practice questions</span>
     </a>
-    <a class="quick-link" href="auth/register.html">
-      <span class="quick-link-icon">💾</span> Save Progress
+    <a class="quick-card" href="auth/register.html">
+      <div class="quick-card-icon" style="background:#4F46E5;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <span class="quick-card-label">My Account</span>
+      <span class="quick-card-desc">Settings &amp; saved progress</span>
     </a>
   </div>
 
-  <div class="lobby-footer">
-    <p>ReasonDx Virtual Teaching Hospital<br>
-    <a href="index.html">Return to main site</a></p>
+  <div class="page-footer">
+    <p>ReasonDx Virtual Teaching Hospital · <a href="index.html">Return to home</a></p>
   </div>
 
 </div>
 
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
 </body>
