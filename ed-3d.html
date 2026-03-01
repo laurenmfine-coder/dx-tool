@@ -25,7 +25,7 @@
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
 
 /* ═══ TOP BAR ═══ */
-.topbar{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:var(--topbar-offset,0px);z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
+.topbar{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:var(--topbar-offset,36px);z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
 .topbar-left{display:flex;align-items:center;gap:14px}
 .topbar-home{text-decoration:none;color:#fff;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,.1);transition:background .15s}
 .topbar-home:hover{background:rgba(255,255,255,.2)}
@@ -40,7 +40,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .shift-night{background:rgba(99,102,241,.2);color:#a5b4fc}
 
 /* ═══ FILTER BAR ═══ */
-.filter-bar{background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:var(--filter-offset,52px);z-index:90}
+.filter-bar{background:white;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:var(--filter-offset,88px);z-index:90}
 .filter-group{display:flex;align-items:center;gap:6px}
 .filter-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);white-space:nowrap}
 .filter-chips{display:flex;gap:4px;flex-wrap:wrap}
@@ -72,7 +72,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 /* ═══ BOARD TABLE ═══ */
 .board-wrap{padding:12px 20px 20px}
 .board-table{width:100%;border-collapse:separate;border-spacing:0;background:white;border-radius:10px;overflow:hidden;box-shadow:var(--shadow-sm)}
-.board-table th{background:#f7f9fc;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:2px solid var(--border);text-align:left;position:sticky;top:var(--header-offset,104px);z-index:5}
+.board-table th{background:#f7f9fc;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);border-bottom:2px solid var(--border);text-align:left;position:sticky;top:var(--header-offset,140px);z-index:80}
 .board-table th.sortable{cursor:pointer;user-select:none}
 .board-table th.sortable:hover{color:var(--primary)}
 .board-table th .sort-arrow{margin-left:3px;opacity:.4;font-size:9px}
@@ -515,9 +515,8 @@ function init(){
     board.push(p);
   }
   renderBoard();
-  // Run offset calculation after dx-user-bar.js has had time to inject (loaded async)
-  setTimeout(updateHeaderOffset,100);
-  setTimeout(updateHeaderOffset,500);
+  // Sticky offset calculation will start once dx-user-bar is detected (see below)
+  waitForUserBar();
   setInterval(tickClock,3000);
 }
 
@@ -527,13 +526,45 @@ function updateHeaderOffset(){
   var userBar=document.getElementById('dx-user-bar');
   var topbar=document.querySelector('.topbar');
   var filterBar=document.querySelector('.filter-bar');
-  var userBarH=userBar?userBar.offsetHeight:0;
-  var topbarH=topbar?topbar.offsetHeight:0;
-  var filterBarH=filterBar?filterBar.offsetHeight:0;
+  var userBarH=userBar?userBar.offsetHeight:36; // default 36 if bar exists but not measured yet
+  var topbarH=topbar?topbar.offsetHeight:52;
+  var filterBarH=filterBar?filterBar.offsetHeight:52;
   var root=document.documentElement;
   root.style.setProperty('--topbar-offset',userBarH+'px');
   root.style.setProperty('--filter-offset',(userBarH+topbarH)+'px');
   root.style.setProperty('--header-offset',(userBarH+topbarH+filterBarH)+'px');
+}
+
+// Wait for dx-user-bar.js to inject the bar before calculating offsets
+function waitForUserBar(){
+  var bar=document.getElementById('dx-user-bar');
+  if(bar){
+    startOffsetTracking();
+    return;
+  }
+  // Use MutationObserver to detect when dx-user-bar is added to the DOM
+  var observer=new MutationObserver(function(mutations){
+    if(document.getElementById('dx-user-bar')){
+      observer.disconnect();
+      startOffsetTracking();
+    }
+  });
+  observer.observe(document.body,{childList:true,subtree:false});
+  // Fallback: if bar never appears within 3s, calculate with defaults anyway
+  setTimeout(function(){
+    observer.disconnect();
+    startOffsetTracking();
+  },3000);
+}
+
+function startOffsetTracking(){
+  // Initial calculation
+  updateHeaderOffset();
+  // Watch filter-bar for height changes (pill wrapping on resize or filter toggle)
+  var filterBar=document.querySelector('.filter-bar');
+  if(filterBar && typeof ResizeObserver!=='undefined'){
+    new ResizeObserver(function(){updateHeaderOffset()}).observe(filterBar);
+  }
 }
 window.addEventListener('resize',updateHeaderOffset);
 init();
