@@ -1,7 +1,7 @@
 // EMR Case Manifest — merged from original + Batches 1-17, 22-28
 // Generated: February 2026
-// Total cases: 226
-// Batches 18-21 pending — will be merged when ready
+// Total cases: 256
+// Batches 18-21 merged February 2026
 // 4 Syncope cases pending file generation (cardiac-arrhythmias, mallory-weiss-tear, upper-gi-hemorrhage, variceal-bleeding)
 
 window.EMR_MANIFEST = [
@@ -1504,6 +1504,56 @@ window.EMR_MANIFEST = [
         "acuity": 1,
         "category": "vascular"
       }
+    ]
+  },
+  {
+    "presentation": "Pediatric Emergency",
+    "cases": [
+      { "id": "bacterial-tracheitis", "diagnosis": "Bacterial Tracheitis (Membranous Croup) — Post-Viral Staphylococcus aureus Superinfection", "acuity": 2, "category": "infectious" },
+      { "id": "gastroenteritis", "diagnosis": "Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis", "acuity": 3, "category": "infectious" },
+      { "id": "incarcerated-inguinal-hernia", "diagnosis": "Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant", "acuity": 2, "category": "surgical" },
+      { "id": "meckel-diverticulum", "diagnosis": "Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage", "acuity": 2, "category": "surgical" },
+      { "id": "midgut-volvulus", "diagnosis": "Intestinal Malrotation with Midgut Volvulus — Acute Presentation with Metabolic Acidosis", "acuity": 1, "category": "surgical" },
+      { "id": "retropharyngeal-abscess", "diagnosis": "Retropharyngeal Abscess (C2-C4) with Airway Compromise — Complication of AOM/URI", "acuity": 2, "category": "infectious" },
+      { "id": "severe-croup", "diagnosis": "Severe Viral Croup (Laryngotracheobronchitis) — Westley Score 8, Requiring Nebulized Epinephrine", "acuity": 2, "category": "respiratory" }
+    ]
+  },
+  {
+    "presentation": "Psychiatric Emergency",
+    "cases": [
+      { "id": "anticholinergic-toxicity", "diagnosis": "Anticholinergic Toxidrome — Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine)", "acuity": 2, "category": "toxicologic" },
+      { "id": "lethal-catatonia", "diagnosis": "Lethal (Malignant) Catatonia with Autonomic Instability, Rhabdomyolysis, and Concurrent Lithium Toxicity", "acuity": 1, "category": "psychiatric" },
+      { "id": "malignant-hyperthermia", "diagnosis": "Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy", "acuity": 1, "category": "anesthetic" },
+      { "id": "sepsis-with-rigidity", "diagnosis": "Urosepsis with Parkinson-Akinetic Crisis (Dopaminergic Withdrawal) — Confounding Presentation Mimicking NMS", "acuity": 2, "category": "neurologic" },
+      { "id": "sympathomimetic-toxicity", "diagnosis": "Sympathomimetic Toxidrome — Prescription Amphetamine Excess + Caffeine with Demand Ischemia", "acuity": 2, "category": "toxicologic" }
+    ]
+  },
+  {
+    "presentation": "Renal / Electrolyte Emergency",
+    "cases": [
+      { "id": "adrenal-insufficiency", "diagnosis": "Acute Adrenal Crisis with Hyperkalemia, Hyponatremia, and Hypoglycemia — Triggered by Missed Hydrocortisone Doses During Viral Illness", "acuity": 2, "category": "endocrine" },
+      { "id": "cerebral-salt-wasting", "diagnosis": "Cerebral Salt Wasting Syndrome (Post-SAH) with Severe Hyponatremia and Volume Depletion", "acuity": 2, "category": "neurologic" },
+      { "id": "hyperkalemia-with-concurrent-acs", "diagnosis": "Hyperkalemia (K+ 7.1) with Concurrent NSTEMI — Dual Emergency Requiring Simultaneous Cardiac and Electrolyte Management", "acuity": 1, "category": "cardiac" },
+      { "id": "hypothyroidismrelated-hyponatremia", "diagnosis": "Severe Hypothyroidism-Related Hyponatremia (Na 119) — Undiagnosed Myxedema with Hyponatremic Encephalopathy", "acuity": 2, "category": "endocrine" },
+      { "id": "medication-overdose", "diagnosis": "Medication Overdose (ACE-I/Spironolactone) — Iatrogenic Hyperkalemia with AKI and ECG Changes", "acuity": 2, "category": "pharmacologic" },
+      { "id": "psychogenic-polydipsia", "diagnosis": "Psychogenic Polydipsia with Acute Water Intoxication and Hyponatremic Seizure", "acuity": 2, "category": "psychiatric" },
+      { "id": "rhabdomyolysisinduced-hyperkalemia", "diagnosis": "Rhabdomyolysis-Induced Hyperkalemia (K+ 6.8) — Exertional Rhabdomyolysis with AKI and Myoglobinuria", "acuity": 2, "category": "renal" },
+      { "id": "siadh", "diagnosis": "SIADH (Drug-Induced — Sertraline + HCTZ) with Chronic Hyponatremia and Acute Decompensation", "acuity": 3, "category": "endocrine" },
+      { "id": "severe-hyperkalemia-from-missed-dialysis", "diagnosis": "Severe Hyperkalemia (K+ 7.8) with ECG Changes from Missed Hemodialysis — ESRD with Volume Overload and Metabolic Acidosis", "acuity": 1, "category": "renal" },
+      { "id": "thiazideinduced-hyponatremia", "diagnosis": "Thiazide-Induced Hyponatremia (Na 118) — 6 Weeks After HCTZ Initiation in Elderly Female with Symptomatic Hyponatremic Encephalopathy", "acuity": 3, "category": "pharmacologic" }
+    ]
+  },
+  {
+    "presentation": "Seizure",
+    "cases": [
+      { "id": "alcohol-withdrawal-seizures", "diagnosis": "Alcohol Withdrawal Seizure (GTC) — 48 Hours Post-Cessation with High Risk for Delirium Tremens", "acuity": 2, "category": "toxicologic" },
+      { "id": "brain-metastasis", "diagnosis": "Brain Metastases (3 Lesions) from NSCLC with New-Onset Seizure — Left Frontal Dominant Lesion", "acuity": 2, "category": "oncologic" },
+      { "id": "cns-infection", "diagnosis": "CNS Toxoplasmosis with New-Onset Seizure in AIDS — Multiple Ring-Enhancing Lesions", "acuity": 2, "category": "infectious" },
+      { "id": "cns-lymphoma", "diagnosis": "Primary CNS Lymphoma (Suspected) — Periventricular Butterfly Lesion in Immunosuppressed Patient", "acuity": 2, "category": "oncologic" },
+      { "id": "meningioma", "diagnosis": "Right Parasagittal Meningioma (4.8 cm) with New-Onset Seizure and Midline Shift", "acuity": 3, "category": "oncologic" },
+      { "id": "metabolic", "diagnosis": "Metabolic Seizure — Dual Etiology: Severe Hypoglycemia (BG 28) and Hyponatremia (Na 124)", "acuity": 2, "category": "metabolic" },
+      { "id": "primary-brain-tumor", "diagnosis": "Glioblastoma Multiforme (GBM, WHO Grade IV) — Left Frontotemporal with New-Onset Seizure", "acuity": 2, "category": "oncologic" },
+      { "id": "structural-lesion", "diagnosis": "Cerebral Cavernous Malformation (Left Mesial Temporal) with Acute Hemorrhage and Seizure", "acuity": 3, "category": "vascular" }
     ]
   }
 ];

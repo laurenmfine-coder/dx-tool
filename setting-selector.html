@@ -586,22 +586,7 @@ function goStep(n) {
 }
 
 function launch() {
-  // In production: set URL params and redirect to virtual-emr.html
-  // virtual-emr.html?setting=inpatient&specialty=im&case=chf-exacerbation
-  const setting = SETTINGS.find(s=>s.id===state.setting);
-  const specialty = SPECIALTIES.find(s=>s.id===state.specialty);
-  alert(
-    `Launching Virtual EMR\n\n` +
-    `Setting: ${setting.label}\n` +
-    `Specialty: ${specialty.label}\n\n` +
-    `In production, this redirects to:\n` +
-    `virtual-emr.html?setting=${state.setting}&specialty=${state.specialty}\n\n` +
-    `The EMR will load with:\n` +
-    `• Filtered case library (${state.specialty} cases in ${state.setting})\n` +
-    `• ${state.setting !== 'ed' ? 'Handoff from ED' : 'Triage board'}\n` +
-    `• ${NOTE_TEMPLATES[state.setting].label} documentation template\n` +
-    `• CoachDx configured as ${state.setting} attending`
-  );
+  window.location.href = `virtual-emr.html?setting=${state.setting}&specialty=${state.specialty}`;
 }
 
 // ═══════════════════════════════════════════════════════════════
