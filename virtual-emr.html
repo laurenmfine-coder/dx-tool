@@ -596,6 +596,8 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="emr-supabase.js"></script>
 <script src="emr-chart-tracking.js"></script>
 <script src="order-validation.js"></script>
 <script src="emr-caseframe.js"></script>
@@ -898,44 +900,77 @@ if(typeof window!=='undefined'){
 }
 
 // ═══════════════════════════════════════════════════════════════
-// USER DATABASE & AUTH SYSTEM
+// USER DATABASE (localStorage persistence for EMR data)
 // ═══════════════════════════════════════════════════════════════
 function db(key){try{return JSON.parse(localStorage.getItem("vemr-"+key))}catch{return null}}
 function dbSet(key,val){localStorage.setItem("vemr-"+key,JSON.stringify(val))}
 function caseDb(key){try{return JSON.parse(localStorage.getItem("vemr-c-"+(CASE_ID||"default")+"-"+key))}catch{return null}}
 function caseDbSet(key,val){localStorage.setItem("vemr-c-"+(CASE_ID||"default")+"-"+key,JSON.stringify(val))}
 
-// Initialize default admin if no users exist
-function initDB(){
-  if(!db("users")){
-    dbSet("users",{
-      admin:{username:"admin",password:"admin2025",role:"admin",displayName:"System Admin",createdAt:new Date().toISOString()},
-    });
-    dbSet("assignments",{});
-  }
+// ═══════════════════════════════════════════════════════════════
+// AUTH BRIDGE — Reads from Supabase session (reasondx-user)
+// ═══════════════════════════════════════════════════════════════
+function getSupabaseUser(){
+  try{
+    var raw=localStorage.getItem("reasondx-user");
+    return raw?JSON.parse(raw):null;
+  }catch(e){return null}
 }
 
-function getUsers(){return db("users")||{}}
-function getUser(username){return(db("users")||{})[username]||null}
-function saveUsers(users){dbSet("users",users)}
+function initDB(){
+  if(!db("assignments"))dbSet("assignments",{});
+  if(!db("emr-roles"))dbSet("emr-roles",{});
+  if(!db("emr-users"))dbSet("emr-users",{});
+}
+
+// EMR user registry — tracks users who have visited the EMR
+function registerEMRUser(supaUser){
+  var users=db("emr-users")||{};
+  var uid=supaUser.email||supaUser.supabaseId;
+  if(!users[uid]){
+    users[uid]={username:uid,displayName:supaUser.name||uid.split("@")[0],email:supaUser.email||"",tier:supaUser.tier||"free",createdAt:new Date().toISOString()};
+  }else{
+    users[uid].displayName=supaUser.name||users[uid].displayName;
+    users[uid].tier=supaUser.tier||users[uid].tier;
+  }
+  dbSet("emr-users",users);
+  return users[uid];
+}
+
+function getEMRRole(uid){
+  var roles=db("emr-roles")||{};
+  return roles[uid]||"student";
+}
+function setEMRRole(uid,role){
+  var roles=db("emr-roles")||{};
+  roles[uid]=role;
+  dbSet("emr-roles",roles);
+}
+
+function getUsers(){return db("emr-users")||{}}
+function getUser(username){return(db("emr-users")||{})[username]||null}
 function getAssignments(){return db("assignments")||{}}
 function saveAssignments(a){dbSet("assignments",a)}
 
-function registerUser(username,password,role,displayName){
-  const users=getUsers();
-  if(users[username])return{ok:false,msg:"Username already exists"};
-  if(!username||username.length<3)return{ok:false,msg:"Username must be 3+ characters"};
-  if(!password||password.length<4)return{ok:false,msg:"Password must be 4+ characters"};
-  users[username]={username,password,role,displayName:displayName||username,createdAt:new Date().toISOString()};
-  saveUsers(users);
-  return{ok:true}
+// Build currentUser object from Supabase session
+function buildCurrentUser(supaUser){
+  var uid=supaUser.email||supaUser.supabaseId;
+  registerEMRUser(supaUser);
+  var role=getEMRRole(uid);
+  // Admin tier in Supabase → admin role in EMR
+  if(supaUser.tier==="admin")role="admin";
+  return{username:uid,role:role,displayName:supaUser.name||uid.split("@")[0]}
 }
 
-function loginUser(username,password){
-  const user=getUser(username);
-  if(!user)return{ok:false,msg:"User not found"};
-  if(user.password!==password)return{ok:false,msg:"Incorrect password"};
-  return{ok:true,user}
+// Redirect to auth if no session
+function requireAuth(){
+  var supaUser=getSupabaseUser();
+  if(!supaUser){
+    sessionStorage.setItem("reasondx-redirect",location.href);
+    location.replace("auth/register.html");
+    return null;
+  }
+  return supaUser;
 }
 
 // Assignment helpers
@@ -1277,8 +1312,7 @@ const I={user:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" strok
 // STATE
 // ═══════════════════════════════════════════════════════════════
 const S={
-  currentUser:null, // {username, role, displayName}
-  authScreen:"login", // "login" | "register"
+  currentUser:null, // {username, role, displayName} — from Supabase session
   activeTab:"demographics",
   encounterWeek:"Week 5",
   noteFields:{},
@@ -1292,7 +1326,6 @@ const S={
   gradeComments:{},
   overallComment:"",
   expanded:{},
-  authError:"",
   // Multi-setting expansion
   clinicalSetting:null, // "ed"|"inpatient"|"consult"|"icu"|"clinic"|"post-discharge"
   specialty:null,        // "im"|"surgery"|"pediatrics"|"obgyn"|"psychiatry"|"fm"|"neurology"|"em"
@@ -1329,7 +1362,8 @@ function loadUserData(){
     S.annotations=db("annotations-"+u+"-"+S.encounterWeek)||[];
   }
   if(S.currentUser.role==="faculty"||S.currentUser.role==="admin"){
-    const students=S.currentUser.role==="admin"?Object.values(getUsers()).filter(u=>u.role==="student").map(u=>u.username):getFacultyStudents(u);
+    const emrUsers=getUsers();
+    const students=S.currentUser.role==="admin"?Object.values(emrUsers).filter(eu=>getEMRRole(eu.username)==="student").map(eu=>eu.username):getFacultyStudents(u);
     let all=[];
     students.forEach(sn=>{const subs=db("subs-"+sn)||[];all.push(...subs.map(s=>({...s,studentName:sn})))});
     S.allSubmissions=all;
@@ -1340,53 +1374,16 @@ function loadUserData(){
 // AUTH SCREENS
 // ═══════════════════════════════════════════════════════════════
 function renderAuth(){
-  if(S.authScreen==="register")return renderRegister();
-  return renderLogin();
-}
-
-function renderLogin(){
-  return'<div class="login-wrapper"><div class="login-card"><div style="text-align:center;margin-bottom:32px"><div class="login-icon">'+I.filePlus+'</div><h1 class="login-title">Virtual EMR</h1><p class="login-subtitle">Standardized Patient Encounter System</p></div>'+(S.authError?'<div class="auth-error">'+esc(S.authError)+'</div>':'')+'<div style="margin-bottom:16px"><label class="login-label">Username</label><input id="loginUser" class="login-input" placeholder="Enter username" onkeydown="if(event.key===\'Enter\')document.getElementById(\'loginPass\').focus()"></div><div style="margin-bottom:20px"><label class="login-label">Password</label><input id="loginPass" type="password" class="login-input" placeholder="Enter password" onkeydown="if(event.key===\'Enter\')doLogin()"></div><button class="btn-login-full" onclick="doLogin()">'+I.lock+' Sign In</button><div style="margin-top:16px;text-align:center"><span style="font-size:12px;color:var(--text-muted)">No account? </span><button class="btn-link" onclick="S.authScreen=\'register\';S.authError=\'\';render()">Register here</button></div><div class="login-hint"><strong>Default admin:</strong> admin / admin2025</div></div></div>'
-}
-
-function renderRegister(){
-  return'<div class="login-wrapper"><div class="login-card"><div style="text-align:center;margin-bottom:32px"><div class="login-icon">'+I.filePlus+'</div><h1 class="login-title">Create Account</h1><p class="login-subtitle">Register for the Virtual EMR</p></div>'+(S.authError?'<div class="auth-error">'+esc(S.authError)+'</div>':'')+'<div style="margin-bottom:12px"><label class="login-label">Full Name</label><input id="regName" class="login-input" placeholder="Your full name"></div><div style="margin-bottom:12px"><label class="login-label">Username</label><input id="regUser" class="login-input" placeholder="Choose a username (3+ chars)"></div><div style="margin-bottom:12px"><label class="login-label">Password</label><input id="regPass" type="password" class="login-input" placeholder="Choose a password (4+ chars)"></div><div style="margin-bottom:20px"><label class="login-label">Role</label><div class="role-selector"><button class="role-btn role-student selected" id="roleStudent" onclick="selectRegRole(\'student\')">🎓 Student</button><button class="role-btn role-faculty" id="roleFaculty" onclick="selectRegRole(\'faculty\')">👨‍⚕️ Faculty</button></div></div><button class="btn-login-full" onclick="doRegister()">Create Account</button><div style="margin-top:16px;text-align:center"><span style="font-size:12px;color:var(--text-muted)">Already have an account? </span><button class="btn-link" onclick="S.authScreen=\'login\';S.authError=\'\';render()">Sign in</button></div></div></div>'
-}
-
-let regRole="student";
-function selectRegRole(r){
-  regRole=r;
-  document.getElementById("roleStudent").classList.toggle("selected",r==="student");
-  document.getElementById("roleFaculty").classList.toggle("selected",r==="faculty");
-}
-
-function doLogin(){
-  const u=document.getElementById("loginUser").value.trim();
-  const p=document.getElementById("loginPass").value;
-  const result=loginUser(u,p);
-  if(!result.ok){S.authError=result.msg;render();return}
-  S.currentUser=result.user;S.authError="";
-  dbSet("session",{username:u});
-  if(window.ChartTracker&&result.user.role==="student"&&CASE_ID){ChartTracker.start(CASE_ID,u)}
-  loadUserData();render();
-}
-
-function doRegister(){
-  const name=document.getElementById("regName").value.trim();
-  const u=document.getElementById("regUser").value.trim();
-  const p=document.getElementById("regPass").value;
-  const result=registerUser(u,p,regRole,name);
-  if(!result.ok){S.authError=result.msg;render();return}
-  S.currentUser={username:u,role:regRole,displayName:name};S.authError="";
-  dbSet("session",{username:u});
-  if(window.ChartTracker&&regRole==="student"&&CASE_ID){ChartTracker.start(CASE_ID,u)}
-  loadUserData();render();
+  // Should never reach here — requireAuth redirects before render
+  return'<div class="login-wrapper"><div class="login-card" style="text-align:center"><div class="login-icon">'+I.filePlus+'</div><h1 class="login-title">Virtual EMR</h1><p class="login-subtitle" style="margin-top:12px">Redirecting to sign in...</p></div></div>';
 }
 
 function doSignOut(){
   if(window.ChartTracker){ChartTracker.stop()}
   S.currentUser=null;S.activeTab="demographics";S.submitted=false;S.noteFields={};S.feedback=null;S.coachMessages=[];S.coachLoading=false;S.coachError=null;S.coachConcepts=[];
   S.selectedSubmission=null;S.gradeScores={};S.gradeComments={};S.overallComment="";S.annotations=[];S.expanded={};
-  localStorage.removeItem("vemr-session");render();
+  localStorage.removeItem("reasondx-user");
+  location.replace("auth/register.html");
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1468,28 +1465,43 @@ function renderGrading(){
 // ═══════════════════════════════════════════════════════════════
 function renderAdmin(){
   const users=getUsers();
+  const roles=db("emr-roles")||{};
   const assignments=getAssignments();
-  const students=Object.values(users).filter(u=>u.role==="student");
-  const faculty=Object.values(users).filter(u=>u.role==="faculty");
+  
+  // Attach role to each user for display
+  const userList=Object.values(users).map(u=>{
+    var r=getEMRRole(u.username);
+    if(u.tier==="admin")r="admin";
+    return Object.assign({},u,{role:r});
+  });
+  const students=userList.filter(u=>u.role==="student");
+  const faculty=userList.filter(u=>u.role==="faculty");
 
-  // User roster
-  let userRows=Object.values(users).map(u=>{
+  // User roster with role promotion
+  let userRows=userList.map(u=>{
     const roleBadge=u.role==="admin"?"badge-danger":u.role==="faculty"?"badge-purple":"badge-primary";
-    return'<tr><td class="td-bold">'+esc(u.displayName)+'</td><td class="td-mono">'+esc(u.username)+'</td><td>'+badge(u.role,roleBadge)+'</td><td class="td-muted">'+new Date(u.createdAt).toLocaleDateString()+'</td><td>'+(u.role!=="admin"?'<button class="btn-remove" onclick="adminDeleteUser(\''+esc(u.username)+'\')">Delete</button>':'')+'</td></tr>';
+    var roleControl='';
+    if(u.tier!=="admin"){ // Don't allow changing Supabase admins
+      roleControl='<select class="week-select" style="width:auto;padding:4px 8px;font-size:11px" onchange="adminChangeRole(\''+esc(u.username)+'\',this.value)">';
+      ["student","faculty","admin"].forEach(function(r){
+        roleControl+='<option value="'+r+'"'+(u.role===r?' selected':'')+'>'+r+'</option>';
+      });
+      roleControl+='</select>';
+    }
+    return'<tr><td class="td-bold">'+esc(u.displayName)+'</td><td class="td-mono" style="font-size:11px">'+esc(u.username)+'</td><td>'+badge(u.role,roleBadge)+'</td><td>'+roleControl+'</td><td class="td-muted">'+new Date(u.createdAt).toLocaleDateString()+'</td></tr>';
   });
 
   // Assignment matrix
   let assignHTML='<div style="margin-top:8px">';
   faculty.forEach(f=>{
     const assigned=assignments[f.username]||[];
-    assignHTML+='<div style="margin-bottom:16px;padding:12px;border:1px solid var(--border-light);border-radius:var(--radius)"><div style="font-weight:600;margin-bottom:8px">'+I.user+' '+esc(f.displayName)+' <span class="td-muted">('+esc(f.username)+')</span></div>';
+    assignHTML+='<div style="margin-bottom:16px;padding:12px;border:1px solid var(--border-light);border-radius:var(--radius)"><div style="font-weight:600;margin-bottom:8px">'+I.user+' '+esc(f.displayName)+' <span class="td-muted" style="font-size:11px">('+esc(f.username)+')</span></div>';
     assignHTML+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">';
     assigned.forEach(sn=>{
       const su=getUser(sn);
       assignHTML+='<span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:16px;background:var(--primary-light);font-size:12px">'+esc(su?su.displayName:sn)+' <button style="background:none;border:none;cursor:pointer;color:var(--danger);font-weight:700;padding:0 2px" onclick="adminUnassign(\''+esc(sn)+'\',\''+esc(f.username)+'\')">✕</button></span>';
     });
     assignHTML+='</div>';
-    // Add student dropdown
     const unassigned=students.filter(s=>!assigned.includes(s.username));
     if(unassigned.length){
       assignHTML+='<select class="week-select" onchange="adminAssign(this.value,\''+esc(f.username)+'\');this.value=\'\'"><option value="">+ Assign student...</option>';
@@ -1500,27 +1512,47 @@ function renderAdmin(){
   });
   assignHTML+='</div>';
 
-  return sectionCard("User Roster ("+Object.keys(users).length+" users)",I.people,tableHTML(["Name","Username","Role","Created",""],userRows))+
+  return sectionCard("User Roster ("+Object.keys(users).length+" users)",I.people,
+    '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">Users appear here after signing in to the Virtual EMR via their ReasonDx account. Change roles using the dropdown.</div>'+
+    tableHTML(["Name","Email","Role","Change Role","Joined"],userRows))+
     sectionCard("Faculty → Student Assignments",I.settings,
       '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">Assign students to faculty graders. Faculty can only see submissions from their assigned students. Admins can see all.</div>'+
-      (faculty.length?assignHTML:'<div class="empty-state">No faculty accounts registered yet.</div>'));
+      (faculty.length?assignHTML:'<div class="empty-state">No faculty accounts yet. Promote a user to Faculty in the roster above.</div>'));
+}
+
+function adminChangeRole(username,newRole){
+  setEMRRole(username,newRole);
+  // Cloud sync
+  if(window.EMRCloud){EMRCloud.syncRole(username,newRole)}
+  // Refresh current user if they changed their own role
+  if(S.currentUser&&S.currentUser.username===username){
+    S.currentUser.role=newRole;
+  }
+  showToast("Role updated: "+username+" → "+newRole);
+  loadUserData();render();
 }
 
 function adminDeleteUser(username){
-  if(!confirm("Delete user '"+username+"'? This cannot be undone."))return;
-  const users=getUsers();delete users[username];saveUsers(users);
+  if(!confirm("Remove user '"+username+"' from EMR? This cannot be undone."))return;
+  const users=getUsers();delete users[username];dbSet("emr-users",users);
   // Clean assignments
   const a=getAssignments();Object.keys(a).forEach(f=>{a[f]=a[f].filter(s=>s!==username)});
   if(a[username])delete a[username];saveAssignments(a);
-  showToast("User deleted");render();
+  // Clean roles
+  var roles=db("emr-roles")||{};delete roles[username];dbSet("emr-roles",roles);
+  // Cloud sync
+  if(window.EMRCloud){EMRCloud.deleteUser(username);EMRCloud.syncAssignments(a)}
+  showToast("User removed");render();
 }
 function adminAssign(student,faculty){
   if(!student)return;
   assignStudentToFaculty(student,faculty);
+  if(window.EMRCloud){EMRCloud.syncAssignments(getAssignments())}
   showToast("Assigned "+student+" → "+faculty);render();
 }
 function adminUnassign(student,faculty){
   unassignStudent(student,faculty);
+  if(window.EMRCloud){EMRCloud.syncAssignments(getAssignments())}
   showToast("Unassigned "+student);render();
 }
 
@@ -1532,8 +1564,8 @@ function handleTextSelection(){const sel=window.getSelection();const text=sel.to
 function showAnnotationPopover(rect){const pop=document.getElementById("annotationPopover");let top=rect.bottom+8,left=rect.left;if(left+320>window.innerWidth)left=window.innerWidth-340;if(left<10)left=10;const cb=ANNOT_COLORS.map(c=>'<button class="annotation-color-btn" style="background:'+c.bg+'" onclick="selectAnnotColor(\''+c.id+'\',this)" title="'+c.label+'" data-color="'+c.id+'"></button>').join("");pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">Add Annotation</span><button class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">"'+esc(pendingSelection.text.substring(0,60))+(pendingSelection.text.length>60?"...":"")+'"</div><div style="font-size:11px;font-weight:600;margin-bottom:4px">COLOR</div><div class="annotation-color-row">'+cb+'</div><textarea id="annotCommentInput" class="annotation-comment-input" placeholder="Your comment..."></textarea><div><button class="annotation-save-btn" onclick="saveAnnotation()">Add Annotation</button></div>';pop.style.top=top+"px";pop.style.left=left+"px";pop.classList.add("visible");setTimeout(()=>selectAnnotColor("yellow",pop.querySelector('[data-color="yellow"]')),10)}
 function selectAnnotColor(id,btn){selectedAnnotColor=id;document.querySelectorAll(".annotation-color-btn").forEach(b=>b.classList.remove("selected"));if(btn)btn.classList.add("selected")}
 function hideAnnotationPopover(){document.getElementById("annotationPopover").classList.remove("visible");pendingSelection=null}
-function saveAnnotation(){if(!pendingSelection)return;const c=document.getElementById("annotCommentInput").value.trim();if(!c){showToast("Please add a comment");return}const sub=S.allSubmissions[S.selectedSubmission];const anns=db("annotations-"+sub.studentName+"-"+sub.week)||[];anns.push({selectedText:pendingSelection.text,comment:c,color:selectedAnnotColor,grader:S.currentUser.displayName,timestamp:new Date().toISOString()});dbSet("annotations-"+sub.studentName+"-"+sub.week,anns);hideAnnotationPopover();showToast("✓ Annotation added");render()}
-function deleteAnnotation(idx){const sub=S.allSubmissions[S.selectedSubmission];const anns=db("annotations-"+sub.studentName+"-"+sub.week)||[];anns.splice(idx,1);dbSet("annotations-"+sub.studentName+"-"+sub.week,anns);showToast("Annotation removed");render()}
+function saveAnnotation(){if(!pendingSelection)return;const c=document.getElementById("annotCommentInput").value.trim();if(!c){showToast("Please add a comment");return}const sub=S.allSubmissions[S.selectedSubmission];const anns=db("annotations-"+sub.studentName+"-"+sub.week)||[];anns.push({selectedText:pendingSelection.text,comment:c,color:selectedAnnotColor,grader:S.currentUser.displayName,timestamp:new Date().toISOString()});dbSet("annotations-"+sub.studentName+"-"+sub.week,anns);if(window.EMRCloud){EMRCloud.syncAnnotations(sub.studentName,sub.week,CASE_ID||'',anns)}hideAnnotationPopover();showToast("✓ Annotation added");render()}
+function deleteAnnotation(idx){const sub=S.allSubmissions[S.selectedSubmission];const anns=db("annotations-"+sub.studentName+"-"+sub.week)||[];anns.splice(idx,1);dbSet("annotations-"+sub.studentName+"-"+sub.week,anns);if(window.EMRCloud){EMRCloud.syncAnnotations(sub.studentName,sub.week,CASE_ID||'',anns)}showToast("Annotation removed");render()}
 
 // ═══════════════════════════════════════════════════════════════
 // MAIN RENDER
@@ -1866,10 +1898,13 @@ function switchTab(id){if(window.ChartTracker&&S.currentUser&&S.currentUser.role
 function toggleExpand(k){var wasOpen=S.expanded[k];S.expanded[k]=!S.expanded[k];if(window.ChartTracker&&S.currentUser&&S.currentUser.role==="student"){ChartTracker.trackExpand(k,!wasOpen)}render()}
 function changeWeek(w){S.encounterWeek=w;loadUserData();render()}
 
+var _draftSyncTimer=null;
 function updateNoteField(id,val){
   S.noteFields[id]=val;
   if(window.ChartTracker&&S.currentUser&&S.currentUser.role==="student"){ChartTracker.trackDocStart();ChartTracker.trackDocEdit(id)}
   dbSet("draft-"+S.currentUser.username+"-"+S.encounterWeek,S.noteFields);
+  // Debounced cloud sync (2s after last keystroke)
+  if(window.EMRCloud){clearTimeout(_draftSyncTimer);_draftSyncTimer=setTimeout(function(){var k="draft-"+S.currentUser.username+"-"+S.encounterWeek;EMRCloud.syncSessionData(S.currentUser.username,k,CASE_ID||'',S.noteFields)},2000)}
   // Update word count without re-render
   const wc=document.getElementById("wordCount");
   if(wc){const w=totalWords();wc.textContent=w?w+" words":""}
@@ -1888,7 +1923,8 @@ function submitDoc(){
   S.submissions=[...S.submissions.filter(s=>s.week!==S.encounterWeek),sub];
   S.submitted=true;
   dbSet("subs-"+S.currentUser.username,S.submissions);
-  // Auto-harvest SpacedRep flashcards from learning gaps
+  // Cloud sync
+  if(window.EMRCloud){EMRCloud.syncSubmission(S.currentUser.username,CASE_ID||'',sub)}
   if(window.VEMR_SPACEDREP&&CASE_ID){var _pn=(window.EMR_DATA&&EMR_DATA.patient)?EMR_DATA.patient.name:"Patient";var _nc=VEMR_SPACEDREP.harvestAndGenerate(CASE_ID,_pn);if(_nc.length>0){showToast("📚 "+_nc.length+" flashcard"+(_nc.length>1?"s":"")+" added to Study Hub")}}
   showToast("✓ Documentation submitted successfully");
   render();
@@ -1902,20 +1938,39 @@ function saveGrade(){
   const sub=S.allSubmissions[S.selectedSubmission];
   const fb={scores:{...S.gradeScores},comments:{...S.gradeComments},overallComment:S.overallComment,grader:S.currentUser.displayName,timestamp:new Date().toISOString(),totalScore:Object.values(S.gradeScores).reduce((a,b)=>a+(parseInt(b)||0),0),maxScore:RUBRIC.reduce((a,b)=>a+b.max,0)};
   dbSet("feedback-"+sub.studentName+"-"+sub.week,fb);
+  // Cloud sync
+  if(window.EMRCloud){EMRCloud.syncFeedback(sub.studentName,sub.week,CASE_ID||'',fb)}
   showToast("✓ Feedback saved for "+sub.studentName);
 }
 
 // ═══════════════════════════════════════════════════════════════
 // INIT — Load case data first, then bootstrap app
 // ═══════════════════════════════════════════════════════════════
-function bootstrapApp() {
+async function bootstrapApp() {
   initDB();
   // Default to handoff tab for non-ED settings (student sees sign-out first)
   if(S.clinicalSetting && S.clinicalSetting!=="ed" && S.clinicalSetting!=="clinic" && S.activeTab==="demographics"){
     S.activeTab="handoff";
   }
-  const session=db("session");
-  if(session){const u=getUser(session.username);if(u){S.currentUser=u;loadUserData();if(window.ChartTracker&&u.role==="student"&&CASE_ID){ChartTracker.start(CASE_ID,u.username)}}}
+  // Auth: read from Supabase session
+  var supaUser=requireAuth();
+  if(!supaUser)return; // redirect in progress
+
+  // Pull cloud data into localStorage before building UI
+  if(window.EMRCloud){
+    try{ await EMRCloud.init(supaUser.email||supaUser.supabaseId); }
+    catch(e){ console.warn('Cloud sync failed, using local cache:', e); }
+  }
+
+  S.currentUser=buildCurrentUser(supaUser);
+
+  // Sync this user to cloud registry
+  if(window.EMRCloud){
+    EMRCloud.syncUser({email:S.currentUser.username,displayName:S.currentUser.displayName,role:S.currentUser.role,tier:supaUser.tier||'free'});
+  }
+
+  loadUserData();
+  if(window.ChartTracker&&S.currentUser.role==="student"&&CASE_ID){ChartTracker.start(CASE_ID,S.currentUser.username)}
   render();
   document.addEventListener("mousedown",e=>{const p=document.getElementById("annotationPopover");if(p&&p.classList.contains("visible")&&!p.contains(e.target))hideAnnotationPopover()});
   window.addEventListener("beforeunload",function(){if(window.ChartTracker){ChartTracker.stop()}});
@@ -1962,6 +2017,7 @@ function saveStudentData(key,val){
   const u=S.currentUser.username;
   const w=S.encounterWeek;
   dbSet(key+"-"+u+"-"+w,val);
+  if(window.EMRCloud){EMRCloud.syncSessionData(u,key+"-"+u+"-"+w,CASE_ID||'',val)}
 }
 
 function getActiveMeds(){return S.studentMeds||[...MEDICATIONS]}
@@ -3452,6 +3508,7 @@ function saveValidation(type) {
   };
   
   dbSet((type === "doc" ? "doc-validation-" : "oral-validation-") + sub.studentName + "-" + sub.week, validation);
+  if(window.EMRCloud){var _vk=(type==="doc"?"doc-validation-":"oral-validation-")+sub.studentName+"-"+sub.week;EMRCloud.syncSessionData(sub.studentName,_vk,CASE_ID||'',validation)}
   showToast("✓ " + (type === "doc" ? "Documentation" : "Oral presentation") + " scores validated and shared with student");
   render();
 }
@@ -3627,6 +3684,8 @@ submitDoc = function(){
   S.submissions=[...S.submissions.filter(s=>s.week!==S.encounterWeek),sub];
   S.submitted=true;
   dbSet("subs-"+S.currentUser.username,S.submissions);
+  // Cloud sync
+  if(window.EMRCloud){EMRCloud.syncSubmission(S.currentUser.username,CASE_ID||'',sub)}
   showToast("✓ Documentation and clinical actions submitted");
   render();
 };
