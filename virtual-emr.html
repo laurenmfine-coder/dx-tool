@@ -25,7 +25,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .btn-student{border:none;background:var(--primary);color:#fff}.btn-student:hover{background:var(--primary-dark)}
 .btn-faculty{border:2px solid var(--primary);background:transparent;color:var(--primary)}.btn-faculty:hover{background:var(--primary-light)}
 
-.app-container{min-height:100vh;display:flex;flex-direction:column}
+.app-container{height:100vh;height:100dvh;display:flex;flex-direction:column}
 .header-bar{background:var(--primary-dark);padding:0 24px;height:48px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.15);flex-shrink:0}
 .header-logo{display:flex;align-items:center;gap:12px;color:#fff}
 .header-logo-text{font-size:15px;font-weight:700;letter-spacing:-.3px}
@@ -38,13 +38,13 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .patient-avatar{width:40px;height:40px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary);font-size:14px;flex-shrink:0}
 .patient-info{margin-left:16px}.patient-name{font-size:15px;font-weight:700}.patient-meta{font-size:12px;color:var(--text-secondary)}
 
-.content-layout{display:flex;flex:1;min-height:0}
-.sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border-light);padding:8px 0;overflow-y:auto;flex-shrink:0}
+.content-layout{display:flex;flex:1;min-height:0;overflow:hidden}
+.sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border-light);padding:8px 0;overflow-y:auto;flex-shrink:0;min-height:0}
 .sidebar-btn{width:100%;padding:10px 16px;border:none;text-align:left;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:400;font-family:'IBM Plex Sans',sans-serif;color:var(--text-secondary);background:transparent;border-left:3px solid transparent;transition:all .15s}
 .sidebar-btn:hover{background:var(--surface-alt)}
 .sidebar-btn.active{background:var(--primary-light);color:var(--primary);font-weight:600;border-left-color:var(--primary)}
 .sidebar-btn svg{flex-shrink:0}
-.main-content{flex:1;padding:24px;overflow-y:auto;animation:fadeIn .25s ease}
+.main-content{flex:1;padding:24px;overflow-y:auto;min-height:0;animation:fadeIn .25s ease}
 
 .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;letter-spacing:.3px}
 .badge-primary{color:var(--primary);background:var(--primary-light)}
@@ -174,7 +174,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .week-select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-family:'IBM Plex Sans',sans-serif}
 .doc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
 .toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;background:var(--accent);color:#fff;border-radius:var(--radius);font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:1000;display:none;animation:fadeIn .2s ease}.toast.visible{display:block}
-@media(max-width:900px){.sidebar{width:56px;overflow:hidden}.sidebar-btn span{display:none}.sidebar-btn{justify-content:center;padding:10px 0}.demo-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
+@media(max-width:900px){.sidebar{width:56px;overflow-x:hidden;overflow-y:auto;min-height:0}.sidebar-btn span{display:none}.sidebar-btn{justify-content:center;padding:10px 0}.demo-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
 /* ═══ Interactive Feature Styles ═══ */
 
 /* Assign/form inputs */
@@ -488,7 +488,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
   .sidebar-btn svg{width:16px;height:16px}
 
   /* Main content fills remaining space */
-  .main-content{padding:12px;min-height:calc(100vh - 160px)}
+  .main-content{padding:12px;min-height:0}
 
   /* Patient banner compact */
   .patient-banner{padding:8px 12px;gap:4px}
@@ -557,7 +557,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 
 /* Tablet breakpoint (iPad / wider phones) */
 @media(min-width:431px) and (max-width:900px){
-  .sidebar{width:56px;overflow:hidden}
+  .sidebar{width:56px;overflow-x:hidden;overflow-y:auto;min-height:0}
   .sidebar-btn span{display:none}
   .sidebar-btn{justify-content:center;padding:10px 0}
   .demo-grid{grid-template-columns:1fr 1fr}
