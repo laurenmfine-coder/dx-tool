@@ -702,9 +702,17 @@ body {
   .scene-monitor { font-size: 8px; }
   .avatar-char { gap: 0; }
 }
+/* RDX Loading */
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+.rdx-loading.hide{opacity:0;pointer-events:none}
+.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
+@keyframes rdxSpin{to{transform:rotate(360deg)}}
+.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
+<script src="auth/auth-guard.js"></script>
 </head>
 <body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 
 <!-- ─── PLATFORM SCRIPTS ─── -->
 <script src="rdx-nav.js"></script>
@@ -2701,5 +2709,7 @@ document.getElementById('msgInput').addEventListener('input', function() {
   }
 })();
 </script>
+<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
+<script src="rdx-demo-tour.js"></script>
 </body>
 </html>

@@ -187,9 +187,18 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
 .sum-stat{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px}
 .sum-stat .ss-val{font-size:24px;font-weight:700;font-family:'JetBrains Mono',monospace}
 .sum-stat .ss-label{font-size:10px;color:var(--dim);margin-top:2px}
+/* RDX Loading */
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+.rdx-loading.hide{opacity:0;pointer-events:none}
+.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
+@keyframes rdxSpin{to{transform:rotate(360deg)}}
+.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<script src="auth/auth-guard.js"></script>
 </head>
 <body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 
 <!-- ═══ SETUP SCREEN ═══ -->
 <div id="setup">
@@ -209,6 +218,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
         <div class="mode-icon">🎯</div>
         <div class="mode-name">Choose by Topic</div>
         <div class="mode-desc">Select specific conditions to practice. Build your list around areas you want to strengthen.</div>
+      </div>
+      <div class="mode-card" data-mode="emr" onclick="selectListMode(this)">
+        <div class="mode-icon">🏥</div>
+        <div class="mode-name">EMR Cases (255)</div>
+        <div class="mode-desc">Pull patients from the full ReasonDx case library with real ED-to-floor handoff data.</div>
       </div>
     </div>
     <div class="topic-grid" id="topic-grid"></div>
@@ -327,6 +341,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
     </div>
   </div>
 </div>
+
+<script src="emr-data/manifest.js"></script>
+<script src="emr-data/handoff-data.js"></script>
 
 <script>
 // ═══════════════════════════════════════
@@ -477,7 +494,149 @@ const PAGE_TEMPLATES = [
 ];
 
 // ═══ TOPICS ═══
-const TOPICS = ['cardiology','pulmonary','gi','endocrine','infectious','surgery','orthopedic','rheumatology','neurology'];
+const TOPICS = ['cardiology','pulmonary','gi','endocrine','infectious','surgery','orthopedic','rheumatology','neurology','renal','hematologic','neurologic','toxicology','psychiatric','dermatologic','obstetric','pediatric','trauma','vascular'];
+
+// ═══ CATEGORY → TOPIC MAP ═══
+const CAT_TO_TOPIC = {
+  cardiovascular:'cardiology',cardiac:'cardiology',vascular:'cardiology',
+  pulmonary:'pulmonary',respiratory:'pulmonary',
+  gastrointestinal:'gi',
+  endocrine:'endocrine',metabolic:'endocrine',
+  infectious:'infectious',immunologic:'infectious',
+  surgical:'surgery',anesthetic:'surgery',
+  orthopedic:'orthopedic',musculoskeletal:'orthopedic',
+  rheumatologic:'rheumatology',
+  neurologic:'neurology',
+  renal:'renal',urologic:'renal',
+  hematologic:'hematologic',oncologic:'hematologic',
+  toxicologic:'toxicology',toxicology:'toxicology',pharmacologic:'toxicology',environmental:'toxicology',
+  psychiatric:'psychiatric',geriatric:'psychiatric',
+  dermatologic:'dermatologic',ophthalmologic:'dermatologic',ent:'dermatologic',
+  obstetric:'obstetric',gynecologic:'obstetric',
+  pediatric:'pediatric',
+  trauma:'trauma'
+};
+
+// ═══ HANDOFF DATA BRIDGE ═══
+// Converts 255 structured EMR handoffs into Night Float patients
+const HANDOFF_POOL = (function(){
+  if(!window.HANDOFF_DATA || !window.HANDOFF_DATA.handoffs) return [];
+  const manifest = window.EMR_MANIFEST || [];
+  const caseMap = {};
+  manifest.forEach(pres => (pres.cases||[]).forEach(c => { caseMap[c.id] = c; }));
+
+  // Page templates by severity
+  const PAGE_TEMPLATES = {
+    acute: [
+      {type:'nurse',urgency:'urgent',
+       gen:(p,h)=>({from:'RN, '+h.bedAssignment.split('—')[0].trim(),time:String(22+Math.floor(Math.random()*4)).padStart(2,'0')+':'+String(Math.floor(Math.random()*60)).padStart(2,'0'),
+         msg:`${p.name}'s vitals show ${p.severity==='acute'?'significant changes':'new findings'}. Please review.`,
+         scenario:`${h.oneLiner} Current vitals: ${h.lastVitals||'pending'}. ${h.watchOuts?h.watchOuts[0]:'Monitor closely.'}`,
+         options:[
+           {text:'Order stat labs, go assess now, call attending if unstable',correct:true},
+           {text:'Continue current plan, recheck in 2 hours',correct:false},
+           {text:'Increase IV fluid rate and monitor',correct:false},
+           {text:'Transfer to ICU immediately without assessment',correct:false}
+         ],
+         explain:`For a ${p.severity} patient, bedside assessment is always the first step. Obtain updated vitals and focused exam, order stat labs if indicated, and escalate to attending based on findings. ${h.watchOuts?'Key watchout: '+h.watchOuts[0]:''}`})},
+      {type:'lab',urgency:'urgent',
+       gen:(p,h)=>({from:'Lab Auto-Alert',time:String(23+Math.floor(Math.random()*3)).padStart(2,'0')+':'+String(Math.floor(Math.random()*60)).padStart(2,'0'),
+         msg:`Critical lab result for ${p.name}: ${h.keyLabs&&h.keyLabs[0]?h.keyLabs[0]:'abnormal value flagged'}.`,
+         scenario:`${h.oneLiner} ${h.keyLabs?'Lab results include: '+h.keyLabs.slice(0,3).join('; '):'Awaiting results.'}`,
+         options:[
+           {text:'Acknowledge, assess patient, treat the value and underlying cause',correct:true},
+           {text:'Repeat the lab to confirm before acting',correct:false},
+           {text:'Note in chart, address in the morning',correct:false},
+           {text:'Call the lab to verify the result',correct:false}
+         ],
+         explain:`Critical lab values require acknowledgment, patient assessment, and treatment. While repeating a lab is sometimes appropriate, it should not delay treatment when the clinical picture is consistent. ${h.keyLabs?'Relevant labs: '+h.keyLabs.join(', '):''}`})}
+    ],
+    watch: [
+      {type:'nurse',urgency:'routine',
+       gen:(p,h)=>({from:'RN, '+h.bedAssignment.split('—')[0].trim(),time:String(Math.floor(Math.random()*5)+22).padStart(2,'0')+':'+String(Math.floor(Math.random()*60)).padStart(2,'0'),
+         msg:`${p.name} is asking about their plan and when they can go home. Family is here with questions.`,
+         scenario:`${h.oneLiner} Patient and family are anxious. ${h.pendingItems?'Pending: '+h.pendingItems[0]:'No pending items.'}`,
+         options:[
+           {text:'Go see the patient, review the plan, answer questions, and document',correct:true},
+           {text:'Tell the nurse to let them know the doctor will round in the morning',correct:false},
+           {text:'Call the family on the phone and explain the plan',correct:false},
+           {text:'Write a note updating the plan but don\'t go see the patient',correct:false}
+         ],
+         explain:'Patient and family communication is a core competency. Go see the patient, review the chart first so you can speak accurately, address concerns, and document the conversation. Night float communication prevents morning surprises and builds trust.'})}
+    ],
+    stable: [
+      {type:'nurse',urgency:'routine',
+       gen:(p,h)=>({from:'RN, '+h.bedAssignment.split('—')[0].trim(),time:String(Math.floor(Math.random()*6)+22).padStart(2,'0')+':'+String(Math.floor(Math.random()*60)).padStart(2,'0'),
+         msg:`${p.name} is having trouble sleeping and requesting a sleep aid.`,
+         scenario:`${h.oneLiner} Patient is alert, comfortable, but unable to sleep. Current meds: ${h.homeMeds?h.homeMeds.slice(0,3).join(', '):'see chart'}. ${p.age>=65?'Note: patient is ≥65 years old — Beers Criteria considerations.':''}`,
+         options:[
+           {text:`${p.age>=65?'Offer melatonin 3mg + sleep hygiene. Avoid benzodiazepines/anticholinergics (Beers Criteria).':'Offer melatonin 3mg PO + sleep hygiene measures. Avoid benzodiazepines if possible.'}`,correct:true},
+           {text:'Order lorazepam 0.5mg PO PRN insomnia',correct:false},
+           {text:'Order diphenhydramine 25mg PO',correct:false},
+           {text:'Order zolpidem 5mg PO',correct:false}
+         ],
+         explain:`${p.age>=65?'In patients ≥65, benzodiazepines, zolpidem, and diphenhydramine are on the AGS Beers Criteria as potentially inappropriate — risk of falls, delirium, and over-sedation.':'Sedative-hypnotics carry risk especially in hospitalized patients.'} Melatonin with sleep hygiene (dim lights, minimize disruptions, address pain) is the safest approach.`})}
+    ]
+  };
+
+  return Object.values(window.HANDOFF_DATA.handoffs).map(h => {
+    const caseInfo = caseMap[h.caseId] || {};
+    const cat = caseInfo.category || 'general';
+    const topic = CAT_TO_TOPIC[cat] || 'cardiology';
+    const sev = h.acuity.esi <= 2 ? 'acute' : h.acuity.esi === 3 ? 'watch' : 'stable';
+
+    // Parse vitals from string
+    const vMatch = (h.lastVitals||'').match(/BP\s*([\d]+)\/([\d]+).*HR\s*([\d]+).*RR\s*([\d]+).*Temp\s*([\d.]+).*SpO2\s*([\d]+)/i);
+    const vitals = vMatch ? {hr:+vMatch[3],bp_s:+vMatch[1],bp_d:+vMatch[2],rr:+vMatch[4],spo2:+vMatch[6],temp:vMatch[5]} : null;
+
+    // Extract age/sex from one-liner
+    const ageMatch = (h.oneLiner||'').match(/(\d+)-year-old\s*(male|female|man|woman)/i);
+    const age = ageMatch ? +ageMatch[1] : 55;
+    const sex = ageMatch ? (ageMatch[2].toLowerCase().startsWith('f') ? 'F' : 'M') : 'M';
+
+    // Extract name (first part of oneLiner before age, or use caseId)
+    const nameFromId = h.caseId.split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+    // Generate a plausible name from case data
+    const NAMES_M = ['James Wilson','Robert Chen','Michael Torres','David Park','Thomas Brooks','Kevin Washington','Marcus Johnson','Anthony Davis','Brian Mitchell','Steven Garcia'];
+    const NAMES_F = ['Sarah Mitchell','Emily Chen','Jessica Santos','Maria Rodriguez','Dorothy Miller','Patricia Kim','Barbara Johnson','Linda Thompson','Nancy Williams','Karen Davis'];
+    const namePool = sex==='F' ? NAMES_F : NAMES_M;
+    const nameIdx = Math.abs(h.caseId.split('').reduce((s,c)=>s+c.charCodeAt(0),0)) % namePool.length;
+    const name = namePool[nameIdx];
+
+    // Build IPASS from handoff data
+    const ipass = {
+      i: `${sev==='acute'?'Acute/Unstable':sev==='watch'?'Worsening/Requires monitoring':'Stable'} — ${h.workingDx}. ${h.edCourse?h.edCourse.substring(0,120)+'...':''}`,
+      p: `${h.completedOrders?h.completedOrders.join('. '):''} ${h.activeIVs?'IVs: '+h.activeIVs.join(', '):''} ${h.homeMeds?'Home meds: '+h.homeMeds.slice(0,3).join(', '):''}`.trim(),
+      a: `${h.pendingItems?h.pendingItems.join('. '):'No pending items.'} ${h.watchOuts?h.watchOuts[0]:''}`.trim(),
+      s: `${h.keyLabs?'Key labs: '+h.keyLabs.slice(0,3).join('; ')+'.':''} ${h.keyImaging?'Imaging: '+(h.keyImaging[0]||'').substring(0,100):''}`.trim(),
+      syn: `${h.disposition}. ${h.familyUpdate||''} Code status: ${h.codeStatus||'Full code'}.`
+    };
+
+    // Generate pages
+    const templates = PAGE_TEMPLATES[sev] || PAGE_TEMPLATES.stable;
+    const pages = templates.map(t => {
+      const pg = t.gen({name,age,sex,severity:sev}, h);
+      pg.type = t.type;
+      return pg;
+    });
+
+    return {
+      name: name,
+      age: age,
+      sex: sex,
+      room: h.bedAssignment ? h.bedAssignment.split('—')[0].trim().replace(/Room\s*/,'').substring(0,6) : '4A-01',
+      dx: h.workingDx || caseInfo.diagnosis || h.caseId,
+      admitDay: Math.floor(Math.random()*3),
+      severity: sev,
+      topic: topic,
+      ipass: ipass,
+      pages: pages,
+      _handoffRef: h, // Keep reference for scoring
+      _caseId: h.caseId,
+      currentVitals: vitals
+    };
+  });
+})();
 
 // ═══ SETUP STATE ═══
 let listMode = 'random';
@@ -513,7 +672,7 @@ function selectListMode(el) {
   document.querySelectorAll('.mode-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
   listMode = el.dataset.mode;
-  document.getElementById('topic-grid').style.display = listMode==='topic' ? 'flex' : 'none';
+  document.getElementById('topic-grid').style.display = (listMode==='topic' || listMode==='emr') ? 'flex' : 'none';
 }
 
 function selectPractice(el) {
@@ -525,19 +684,34 @@ function selectPractice(el) {
 // ═══ START SHIFT ═══
 function startShift() {
   const count = parseInt(document.getElementById('pt-count').value);
-  let pool = [...PATIENT_POOL];
+  let pool;
 
-  if(listMode === 'topic' && selectedTopics.size > 0) {
-    pool = pool.filter(p => selectedTopics.has(p.topic));
-    if(pool.length < count) {
-      // Fill remaining with random from full pool
-      const extra = PATIENT_POOL.filter(p => !selectedTopics.has(p.topic));
-      shuffleArray(extra);
-      pool = pool.concat(extra);
+  if(listMode === 'emr' && HANDOFF_POOL.length > 0) {
+    // Use the full 255-patient handoff pool
+    pool = [...HANDOFF_POOL];
+    shuffleArray(pool);
+  } else {
+    pool = [...PATIENT_POOL];
+
+    if(listMode === 'topic' && selectedTopics.size > 0) {
+      // Filter by topic — check both pools
+      let topicPool = pool.filter(p => selectedTopics.has(p.topic));
+      // Also pull from handoff pool if available
+      if(HANDOFF_POOL.length > 0) {
+        let handoffFiltered = HANDOFF_POOL.filter(p => selectedTopics.has(p.topic));
+        shuffleArray(handoffFiltered);
+        topicPool = topicPool.concat(handoffFiltered);
+      }
+      if(topicPool.length < count) {
+        const extra = PATIENT_POOL.filter(p => !selectedTopics.has(p.topic));
+        shuffleArray(extra);
+        topicPool = topicPool.concat(extra);
+      }
+      pool = topicPool;
     }
-  }
 
-  shuffleArray(pool);
+    shuffleArray(pool);
+  }
   shiftPatients = pool.slice(0, Math.min(count, pool.length));
 
   // Re-assign rooms sequentially
@@ -550,7 +724,7 @@ function startShift() {
   document.getElementById('dashboard').style.display = 'block';
 
   document.getElementById('pl-subtitle').textContent =
-    `${shiftPatients.length} patients · ${listMode==='topic'?'Topic-focused':'Randomized'} list · ${practiceMode==='pages'?'Nurse pages active':''}`;
+    `${shiftPatients.length} patients · ${listMode==='emr'?'EMR Case Library':listMode==='topic'?'Topic-focused':'Randomized'} list · ${practiceMode==='pages'?'Nurse pages active':''}`;
 
   renderPatientList();
   startClock();
@@ -638,6 +812,7 @@ function renderPatientList() {
         </div>
         ${p.pages && p.pages.length ? `<div class="ipass-actions">
           <button class="ipass-btn primary" onclick="event.stopPropagation();openScenario(${i},0)">📟 View Active Page Scenario</button>
+          ${p._caseId ? `<a class="ipass-btn" href="virtual-emr.html?case=${p._caseId}" target="_blank" onclick="event.stopPropagation()" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">🏥 View in EMR</a>` : ''}
         </div>` : ''}
         ${getVitalsHTML(p)}
       </div>`;
@@ -996,11 +1171,27 @@ function showHandoffModal() {
   const container = document.getElementById('handoff-patients');
   container.innerHTML = '';
   shiftPatients.forEach((p, i) => {
+    const hasRef = !!p._handoffRef;
     const div = document.createElement('div');
     div.className = 'ho-section';
     div.innerHTML = `
-      <div style="font-weight:600;color:#fff;font-size:14px;margin-bottom:8px">${p.name}, ${p.age}${p.sex} — ${p.room}</div>
-      <div style="font-size:11px;color:var(--dim);margin-bottom:8px">${p.dx} · Admit Day ${p.admitDay}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div>
+          <div style="font-weight:600;color:#fff;font-size:14px">${p.name}, ${p.age}${p.sex} — ${p.room}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">${p.dx} · Admit Day ${p.admitDay}${hasRef?' · <span style="color:var(--accent)">EMR Case</span>':''}</div>
+        </div>
+        ${hasRef?'<button class="ipass-btn" onclick="toggleRef('+i+')" style="font-size:10px;padding:4px 10px" id="ref-btn-'+i+'">Show Reference</button>':''}
+      </div>
+      <div id="ref-panel-${i}" style="display:none;margin-bottom:12px;padding:10px 14px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:8px;font-size:11px;line-height:1.6">
+        ${hasRef?`
+          <div style="font-weight:700;color:var(--accent);margin-bottom:6px">📋 Reference I-PASS (from ED handoff)</div>
+          <div><span style="color:var(--accent);font-weight:600">I:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.i)}</span></div>
+          <div><span style="color:var(--accent);font-weight:600">P:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.p)}</span></div>
+          <div><span style="color:var(--accent);font-weight:600">A:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.a)}</span></div>
+          <div><span style="color:var(--accent);font-weight:600">S:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.s)}</span></div>
+          <div style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.35)">Dx: ${esc(p._handoffRef.workingDx||'')} · Allergies: ${esc(p._handoffRef.allergies||'NKDA')} · Code: ${esc(p._handoffRef.codeStatus||'Full code')}</div>
+        `:''}
+      </div>
       <div class="ho-label">I — Illness Severity</div>
       <textarea class="ho-textarea" data-pt="${i}" data-field="i" rows="2" placeholder="Current status and trajectory..."></textarea>
       <div class="ho-label">P — Patient Summary / Plan</div>
@@ -1012,6 +1203,20 @@ function showHandoffModal() {
     `;
     container.appendChild(div);
   });
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+
+function toggleRef(idx) {
+  const panel = document.getElementById('ref-panel-'+idx);
+  const btn = document.getElementById('ref-btn-'+idx);
+  if(panel.style.display === 'none') {
+    panel.style.display = 'block';
+    btn.textContent = 'Hide Reference';
+  } else {
+    panel.style.display = 'none';
+    btn.textContent = 'Show Reference';
+  }
 }
 
 function submitHandoff() {
@@ -1099,6 +1304,19 @@ function showSummary() {
       grade, pct, stats: shiftStats, patients: shiftPatients.map(p=>({name:p.name,room:p.room,dx:p.dx})),
       timestamp: Date.now()
     }));
+    // Append to history array for analytics dashboard
+    var nfHist = JSON.parse(localStorage.getItem('rdx-nf-history') || '[]');
+    nfHist.push({
+      overallPct: pct,
+      grade: grade,
+      pageAccuracy: shiftStats.pagesAnswered > 0 ? Math.round(shiftStats.pagesCorrect / shiftStats.pagesAnswered * 100) : 0,
+      handoffPct: shiftStats.handoffTotal > 0 ? Math.round(shiftStats.handoffScore / shiftStats.handoffTotal * 100) : 0,
+      patientCount: shiftPatients.length,
+      mode: listMode,
+      timestamp: Date.now()
+    });
+    if(nfHist.length > 100) nfHist = nfHist.slice(-100);
+    localStorage.setItem('rdx-nf-history', JSON.stringify(nfHist));
   } catch(e) {}
 }
 
@@ -1287,38 +1505,103 @@ function scoreHandoff() {
   let feedback = [];
 
   shiftPatients.forEach((p, i) => {
+    const hasRef = !!p._handoffRef;
+    const ref = p._handoffRef || {};
+    const refIpass = p.ipass || {};
+
+    // Build field-specific reference keywords from the actual handoff data
     const fields = {
-      i: {label: 'Illness Severity', keywords: ['stable','improving','worsening','acute','critical','unchanged']},
-      p: {label: 'Plan', keywords: ['continue','monitor','hold','start','adjust','fluids','meds','consult']},
-      a: {label: 'Action', keywords: ['check','recheck','follow','call','reassess','if','when','labs','vitals']},
-      s: {label: 'Situation', keywords: ['if','concern','watch','escalate','notify','worsen','decompensate']}
+      i: {label:'Illness Severity',
+        keywords:['stable','improving','worsening','acute','critical','unchanged','resolving','declining','monitoring'],
+        refKeywords: hasRef ? extractKeywords(refIpass.i + ' ' + (ref.workingDx||'') + ' ' + (ref.edCourse||'')) : []},
+      p: {label:'Plan',
+        keywords:['continue','monitor','hold','start','adjust','fluids','meds','consult','antibiotics','drip','diet'],
+        refKeywords: hasRef ? extractKeywords(refIpass.p + ' ' + (ref.completedOrders||[]).join(' ') + ' ' + (ref.activeIVs||[]).join(' ') + ' ' + (ref.homeMeds||[]).join(' ')) : []},
+      a: {label:'Action',
+        keywords:['check','recheck','follow','call','reassess','if','when','labs','vitals','pending','repeat'],
+        refKeywords: hasRef ? extractKeywords(refIpass.a + ' ' + (ref.pendingItems||[]).join(' ') + ' ' + (ref.watchOuts||[]).join(' ')) : []},
+      s: {label:'Situation',
+        keywords:['if','concern','watch','escalate','notify','worsen','decompensate','contingency'],
+        refKeywords: hasRef ? extractKeywords(refIpass.s + ' ' + (ref.keyLabs||[]).join(' ') + ' ' + (ref.keyImaging||[]).join(' ')) : []}
     };
+
     Object.entries(fields).forEach(([field, info]) => {
-      handoffTotal += 2; // 2 points possible per field (1 for length, 1 for quality)
+      // Base: 2 points (length + generic keywords)
+      // Bonus: 2 points for reference keyword matching (if EMR case)
+      const maxPts = hasRef ? 4 : 2;
+      handoffTotal += maxPts;
+
       const ta = document.querySelector(`textarea[data-pt="${i}"][data-field="${field}"]`);
       if(!ta) return;
       const text = ta.value.trim().toLowerCase();
-      // Length check
+
       if(text.length > 10) {
-        handoffScore++;
-        // Quality check — does it contain relevant clinical keywords?
+        handoffScore++; // length point
+        // Generic keyword check
         if(info.keywords.some(kw => text.includes(kw))) {
           handoffScore++;
         } else {
-          feedback.push(`${p.name} — ${info.label}: Consider including more specific clinical language`);
+          feedback.push(`${p.name} — ${info.label}: Consider more specific clinical language`);
+        }
+        // Reference keyword matching (EMR cases only)
+        if(hasRef && info.refKeywords.length > 0) {
+          const matchCount = info.refKeywords.filter(kw => text.includes(kw)).length;
+          const matchPct = matchCount / info.refKeywords.length;
+          if(matchPct >= 0.3) {
+            handoffScore += 2;
+          } else if(matchPct >= 0.15) {
+            handoffScore += 1;
+            feedback.push(`${p.name} — ${info.label}: Good, but missing key details from the case`);
+          } else {
+            feedback.push(`${p.name} — ${info.label}: Review the reference — important clinical details were missed`);
+          }
         }
       } else if(text.length > 0) {
-        feedback.push(`${p.name} — ${info.label}: Too brief — expand with more detail`);
+        feedback.push(`${p.name} — ${info.label}: Too brief — expand with specifics`);
       } else {
-        feedback.push(`${p.name} — ${info.label}: Missing — this is critical for patient safety`);
+        feedback.push(`${p.name} — ${info.label}: Missing — critical for patient safety`);
       }
     });
+
+    // Bonus: did they mention the working diagnosis?
+    if(hasRef && ref.workingDx) {
+      const allText = ['i','p','a','s'].map(f => {
+        const ta = document.querySelector(`textarea[data-pt="${i}"][data-field="${f}"]`);
+        return ta ? ta.value.toLowerCase() : '';
+      }).join(' ');
+      const dxWords = ref.workingDx.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+      const dxHit = dxWords.some(w => allText.includes(w));
+      if(!dxHit) feedback.push(`${p.name}: Working diagnosis (${ref.workingDx}) not mentioned in your handoff`);
+    }
+
+    // Bonus: did they mention allergies?
+    if(hasRef && ref.allergies && ref.allergies !== 'NKDA') {
+      const allText = ['i','p','a','s'].map(f => {
+        const ta = document.querySelector(`textarea[data-pt="${i}"][data-field="${f}"]`);
+        return ta ? ta.value.toLowerCase() : '';
+      }).join(' ');
+      if(!allText.includes(ref.allergies.toLowerCase().split(',')[0].trim().toLowerCase())) {
+        feedback.push(`${p.name}: Allergies (${ref.allergies}) not mentioned — important for safety`);
+      }
+    }
   });
 
   shiftStats.handoffScore = handoffScore;
   shiftStats.handoffTotal = handoffTotal;
   shiftStats.handoffFeedback = feedback;
   return {score: handoffScore, total: handoffTotal, feedback};
+}
+
+// Extract meaningful clinical keywords from reference text
+function extractKeywords(text) {
+  if(!text) return [];
+  const stop = new Set(['the','and','for','with','from','that','this','was','are','has','had','but','not','all','can','will','been','have','more','when','than','them','into','over','just','also','some','any','its','our','his','her','she','you','they','were','which','their','would','could','should','about','after','before','between','under','above','other','there','been','being','those','these','only','such','each','made']);
+  return [...new Set(
+    text.toLowerCase()
+      .replace(/[^a-z0-9\s]/g,' ')
+      .split(/\s+/)
+      .filter(w => w.length > 3 && !stop.has(w))
+  )].slice(0, 20);
 }
 function loadEDPatients() {
   try {
@@ -1412,5 +1695,8 @@ function addEDPatients() {
 }
 
 </script>
+<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
+<script src="./rdx-nav.js"></script>
+<script src="rdx-demo-tour.js"></script>
 </body>
 </html>
