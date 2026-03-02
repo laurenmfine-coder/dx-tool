@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admissions | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<style>
+:root{--bg:#0f1117;--card:#181b25;--border:rgba(255,255,255,.08);--accent:#2874A6;--accent-bg:rgba(40,116,166,.12);--text:#e8eaed;--dim:#8b8fa3;--green:#22c55e;--red:#ef4444;--orange:#f59e0b;--purple:#7c3aed}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+
+/* Topbar */
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--border);background:#14161e}
+.topbar-logo{font-size:16px;font-weight:600;letter-spacing:-.3px}
+.topbar-logo span{opacity:.5}
+.topbar-logo em{font-style:normal;color:var(--accent);margin-left:4px}
+.topbar-nav{margin-left:auto;display:flex;gap:12px;font-size:12px}
+.topbar-nav a{color:var(--dim);padding:6px 10px;border-radius:6px;transition:.15s}
+.topbar-nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+
+/* Setup Screen */
+#setup{display:flex;justify-content:center;align-items:flex-start;padding:40px 20px;min-height:calc(100vh - 48px)}
+#setup-inner{max-width:680px;width:100%;text-align:center}
+.setup-title{font-size:28px;font-weight:700;margin-bottom:8px}
+.setup-sub{font-size:14px;color:var(--dim);margin-bottom:30px;line-height:1.5}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;text-align:left;margin-bottom:20px}
+.case-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:.15s}
+.case-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.case-card.selected{border-color:var(--accent);background:var(--accent-bg)}
+.case-card .cc-name{font-size:13px;font-weight:600;margin-bottom:4px}
+.case-card .cc-dx{font-size:11px;color:var(--dim)}
+.case-card .cc-esi{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:6px}
+.esi-1,.esi-2{background:rgba(239,68,68,.15);color:#ef4444}
+.esi-3{background:rgba(245,158,11,.15);color:#f59e0b}
+.esi-4,.esi-5{background:rgba(34,197,94,.15);color:#22c55e}
+
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--dim);font-size:11px;padding:6px 14px;border-radius:20px;cursor:pointer;transition:.15s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.start-btn{display:inline-block;background:var(--accent);color:#fff;border:none;padding:14px 40px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:20px;transition:.15s}
+.start-btn:hover{filter:brightness(1.15)}
+.start-btn:disabled{opacity:.4;cursor:default}
+
+/* Main Simulation */
+#sim{display:none;height:calc(100vh - 48px);overflow:hidden}
+.sim-layout{display:grid;grid-template-columns:320px 1fr;height:100%}
+
+/* Sidebar */
+.sidebar{background:#14161e;border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+.sb-header{padding:16px;border-bottom:1px solid var(--border)}
+.sb-patient-name{font-size:16px;font-weight:700;margin-bottom:2px}
+.sb-one-liner{font-size:12px;color:var(--dim);line-height:1.4}
+.sb-vitals{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.sb-vital{background:var(--card);border-radius:8px;padding:8px;text-align:center}
+.sb-vital .v-label{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
+.sb-vital .v-val{font-size:15px;font-weight:600;margin-top:2px}
+.sb-vital.abnormal .v-val{color:var(--red)}
+
+.sb-tabs{display:flex;border-bottom:1px solid var(--border)}
+.sb-tab{flex:1;padding:10px 0;text-align:center;font-size:11px;font-weight:600;color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;transition:.15s}
+.sb-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.sb-panel{padding:12px 16px;overflow-y:auto;flex:1;font-size:12px;line-height:1.6}
+.sb-panel h4{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);margin:12px 0 6px;font-weight:600}
+.sb-panel h4:first-child{margin-top:0}
+.sb-panel ul{padding-left:16px;margin:0}
+.sb-panel li{margin-bottom:4px;color:var(--dim)}
+.sb-panel .lab-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.lab-row .lab-name{color:var(--dim)}
+.lab-row .lab-val{font-weight:500}
+.lab-row .lab-val.abnormal{color:var(--red)}
+
+/* Main Content */
+.main-content{overflow-y:auto;padding:24px 32px}
+.step-indicator{display:flex;gap:4px;margin-bottom:24px}
+.step-dot{width:32px;height:4px;border-radius:2px;background:rgba(255,255,255,.1)}
+.step-dot.active{background:var(--accent)}
+.step-dot.done{background:var(--green)}
+
+.step-title{font-size:22px;font-weight:700;margin-bottom:6px}
+.step-desc{font-size:13px;color:var(--dim);margin-bottom:24px;line-height:1.5}
+
+/* Handoff Display */
+.handoff-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.handoff-card h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);margin-bottom:8px;font-weight:600}
+.handoff-card p{font-size:13px;color:var(--dim);line-height:1.6}
+.handoff-card .ipass-label{display:inline-block;background:var(--accent-bg);color:var(--accent);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;margin-right:6px;min-width:20px;text-align:center}
+
+/* Order Entry */
+.order-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.order-section h4{font-size:13px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.order-section h4 .order-icon{width:24px;height:24px;background:var(--accent-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px}
+.order-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.order-row:last-child{border-bottom:none}
+.order-row label{font-size:12px;color:var(--dim);flex:1}
+.order-check{width:18px;height:18px;border:2px solid var(--border);border-radius:4px;cursor:pointer;appearance:none;-webkit-appearance:none;background:transparent;transition:.15s;flex-shrink:0}
+.order-check:checked{background:var(--accent);border-color:var(--accent)}
+.order-check:checked::after{content:'✓';display:block;text-align:center;color:#fff;font-size:11px;line-height:14px}
+.order-select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;font-family:inherit}
+.order-input{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;font-family:inherit;width:120px}
+
+/* Note Writing */
+.note-section{margin-bottom:16px}
+.note-section label{display:block;font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.note-textarea{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px;border-radius:8px;font-size:13px;font-family:inherit;line-height:1.6;resize:vertical;min-height:80px}
+.note-textarea:focus{outline:none;border-color:var(--accent)}
+.note-hint{font-size:11px;color:var(--dim);margin-top:4px}
+
+/* Buttons */
+.btn-row{display:flex;gap:12px;margin-top:24px}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.btn-primary:hover{filter:brightness(1.15)}
+.btn-secondary{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:12px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.btn-secondary:hover{background:var(--accent-bg)}
+
+/* Feedback / Coaching */
+.feedback-box{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:20px;margin-top:16px}
+.feedback-box.warn{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2)}
+.feedback-box.error{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
+.feedback-box h4{font-size:13px;font-weight:600;margin-bottom:8px}
+.feedback-box p{font-size:12px;color:var(--dim);line-height:1.6}
+.feedback-box ul{padding-left:16px;margin:8px 0 0;font-size:12px;color:var(--dim);line-height:1.8}
+
+/* Score Summary */
+.score-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;text-align:center;margin:20px 0}
+.score-pct{font-size:56px;font-weight:700;color:var(--accent)}
+.score-label{font-size:14px;color:var(--dim);margin-top:4px}
+.score-details{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;text-align:center}
+.score-det .sd-val{font-size:24px;font-weight:700}
+.score-det .sd-label{font-size:11px;color:var(--dim);margin-top:2px}
+
+/* Responsive */
+@media(max-width:768px){
+  .sim-layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .main-content{padding:16px}
+}
+</style>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="Practice the admission workflow on ReasonDx. Receive ED handoffs, write admission orders, complete H&P notes, and present patients.">
+<meta property="og:title" content="Admissions Simulator | ReasonDx">
+<meta property="og:description" content="Practice ED-to-floor handoffs, admission orders, and H&P presentations.">
+<meta property="og:url" content="https://reasondx.com/admissions.html">
+<meta property="og:type" content="website">
+<script src="auth/auth-guard.js"></script>
+
+<link rel="canonical" href="https://reasondx.com/admissions.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Admissions | ReasonDx">
+<meta name="twitter:description" content="Practice ED handoffs, admission orders, and H&P presentations.">
+</head>
+<body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+
+<div class="topbar">
+  <div class="topbar-logo"><span>Reason</span><span style="color:var(--accent)">Dx</span> <em>Admissions</em></div>
+  <div class="topbar-nav">
+    <a href="hospital-3d.html">Hospital</a>
+    <a href="ed-3d.html">ED</a>
+    <a href="night-float.html">Night Float</a>
+    <a href="index.html">Home</a>
+  </div>
+</div>
+
+<!-- SETUP SCREEN -->
+<div id="setup">
+  <div id="setup-inner">
+    <div class="setup-title">Admissions Simulator</div>
+    <p class="setup-sub">You're the admitting intern. Receive the ED handoff, review the chart, write your admission H&P, enter orders, and present the patient.</p>
+    <div class="filter-row" id="filter-row"></div>
+    <div class="case-grid" id="case-grid"></div>
+    <button type="button" class="start-btn" id="start-btn" disabled onclick="startSim()">Select a Patient to Begin</button>
+  </div>
+</div>
+
+<!-- SIMULATION -->
+<div id="sim">
+  <div class="sim-layout">
+    <!-- Sidebar: Chart -->
+    <div class="sidebar">
+      <div class="sb-header">
+        <div class="sb-patient-name" id="sb-name"></div>
+        <div class="sb-one-liner" id="sb-oneliner"></div>
+      </div>
+      <div class="sb-vitals" id="sb-vitals"></div>
+      <div class="sb-tabs">
+        <div class="sb-tab active" data-tab="labs" onclick="switchSbTab(this)">Labs</div>
+        <div class="sb-tab" data-tab="meds" onclick="switchSbTab(this)">Meds</div>
+        <div class="sb-tab" data-tab="imaging" onclick="switchSbTab(this)">Imaging</div>
+        <div class="sb-tab" data-tab="pmh" onclick="switchSbTab(this)">PMH</div>
+      </div>
+      <div class="sb-panel" id="sb-panel"></div>
+    </div>
+
+    <!-- Main Content: Steps -->
+    <div class="main-content" id="main-content" role="main">
+      <div class="step-indicator" id="step-indicator"></div>
+      <div id="step-content"></div>
+    </div>
+  </div>
+</div>
+
+<script src="emr-data/manifest.js"></script>
+<script src="emr-data/patient-names.js"></script>
+<script src="emr-data/handoff-data.js"></script>
+<script src="emr-data/auto-handoff.js"></script>
+<script>
+'use strict';
+
+// ═══ STATE ═══
+let selectedCaseId = null;
+let caseData = null;
+let handoffData = null;
+let currentStep = 0;
+const STEPS = ['Handoff','Chart Review','Admission Orders','H&P Note','Present'];
+let orderState = {};
+let noteState = {};
+let scores = {orders:0, note:0, presentation:0};
+
+// ═══ SETUP: POPULATE CASES ═══
+(function initSetup(){
+  if(!window.EMR_MANIFEST) return;
+  const cats = new Set();
+  const allCases = [];
+  EMR_MANIFEST.forEach(g => {
+    g.cases.forEach(c => {
+      if(c.id === 'maria-santos') return;
+      const pn = PATIENT_NAMES && PATIENT_NAMES[c.id];
+      allCases.push({id:c.id, name:pn?pn.name:c.id, dx:c.diagnosis, acuity:c.acuity||3, category:c.category||'general', presentation:g.presentation});
+      cats.add(c.category||'general');
+    });
+  });
+
+  // Filters
+  const row = document.getElementById('filter-row');
+  const btn0 = document.createElement('button');
+  btn0.className = 'filter-btn active';
+  btn0.textContent = 'All';
+  btn0.onclick = () => filterCases('all');
+  row.appendChild(btn0);
+  [...cats].sort().forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'filter-btn';
+    b.textContent = cat.charAt(0).toUpperCase()+cat.slice(1);
+    b.dataset.cat = cat;
+    b.onclick = () => filterCases(cat);
+    row.appendChild(b);
+  });
+
+  // Shuffle and show first 24
+  allCases.sort(() => Math.random()-0.5);
+  window._allCases = allCases;
+  window._displayCount = 24;
+  renderCaseGrid(allCases.slice(0, 24));
+
+  // More button
+  const more = document.createElement('button');
+  more.className = 'filter-btn';
+  more.textContent = 'Show More Cases';
+  more.style.marginTop = '12px';
+  more.onclick = () => {
+    window._displayCount += 24;
+    renderCaseGrid(window._filteredCases ? window._filteredCases.slice(0, window._displayCount) : window._allCases.slice(0, window._displayCount));
+  };
+  document.getElementById('case-grid').after(more);
+  window._moreBtnEl = more;
+})();
+
+function renderCaseGrid(cases) {
+  const grid = document.getElementById('case-grid');
+  grid.innerHTML = '';
+  cases.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'case-card' + (selectedCaseId===c.id?' selected':'');
+    card.innerHTML = `<div class="cc-name">${c.name}</div><div class="cc-dx">${c.dx}</div><span class="cc-esi esi-${c.acuity}">ESI ${c.acuity}</span>`;
+    card.onclick = () => selectCase(c.id, card);
+    grid.appendChild(card);
+  });
+}
+
+function filterCases(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', (cat==='all'&&!b.dataset.cat)||(b.dataset.cat===cat)));
+  window._filteredCases = cat==='all' ? window._allCases : window._allCases.filter(c=>c.category===cat);
+  window._displayCount = 24;
+  renderCaseGrid(window._filteredCases.slice(0, 24));
+}
+
+function selectCase(id, el) {
+  selectedCaseId = id;
+  document.querySelectorAll('.case-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = document.getElementById('start-btn');
+  btn.disabled = false;
+  btn.textContent = 'Begin Admission';
+}
+
+// ═══ START SIMULATION ═══
+function startSim() {
+  if(!selectedCaseId) return;
+  // Load EMR data
+  const script = document.createElement('script');
+  script.src = 'emr-data/' + selectedCaseId + '.js';
+  script.onload = () => {
+    caseData = window.EMR_DATA;
+    // Get handoff
+    handoffData = (window.HANDOFF_DATA && window.HANDOFF_DATA.handoffs && window.HANDOFF_DATA.handoffs[selectedCaseId]) || null;
+    document.getElementById('setup').style.display = 'none';
+    document.getElementById('sim').style.display = 'block';
+    initSidebar();
+    goToStep(0);
+  };
+  document.head.appendChild(script);
+}
+
+// ═══ SIDEBAR ═══
+function initSidebar() {
+  const p = caseData.patient;
+  document.getElementById('sb-name').textContent = p.name + ' (' + p.age + p.sex.charAt(0) + ')';
+  const ho = handoffData;
+  document.getElementById('sb-oneliner').textContent = ho ? ho.oneLiner : (caseData.diagnosis || '');
+
+  // Vitals
+  const vBox = document.getElementById('sb-vitals');
+  const v = ho ? parseVitals(ho.lastVitals) : {};
+  const vitals = [
+    {label:'BP',val:v.bp||'--',abn:isAbnBP(v.bp)},
+    {label:'HR',val:v.hr||'--',abn:isAbnHR(v.hr)},
+    {label:'RR',val:v.rr||'--',abn:isAbnRR(v.rr)},
+    {label:'Temp',val:v.temp||'--',abn:isAbnTemp(v.temp)},
+    {label:'SpO2',val:v.spo2||'--',abn:isAbnSpo2(v.spo2)},
+    {label:'Pain',val:v.pain||'--',abn:false}
+  ];
+  vBox.innerHTML = vitals.map(vt => `<div class="sb-vital${vt.abn?' abnormal':''}"><div class="v-label">${vt.label}</div><div class="v-val">${vt.val}</div></div>`).join('');
+
+  switchSbTab(document.querySelector('.sb-tab.active'));
+}
+
+function parseVitals(str) {
+  if(!str) return {};
+  const v = {};
+  const bpM = str.match(/BP\s*([\d\/]+)/i); if(bpM) v.bp=bpM[1];
+  const hrM = str.match(/HR\s*(\d+)/i); if(hrM) v.hr=hrM[1];
+  const rrM = str.match(/RR\s*(\d+)/i); if(rrM) v.rr=rrM[1];
+  const tmpM = str.match(/Temp?\s*([\d.]+)/i); if(tmpM) v.temp=tmpM[1]+'°F';
+  const spM = str.match(/SpO2\s*([\d.]+)/i); if(spM) v.spo2=spM[1]+'%';
+  return v;
+}
+function isAbnBP(bp){if(!bp)return false;const s=parseInt(bp);return s>160||s<90}
+function isAbnHR(hr){if(!hr)return false;const v=parseInt(hr);return v>100||v<50}
+function isAbnRR(rr){if(!rr)return false;const v=parseInt(rr);return v>22||v<10}
+function isAbnTemp(t){if(!t)return false;const v=parseFloat(t);return v>100.4||v<96}
+function isAbnSpo2(s){if(!s)return false;const v=parseFloat(s);return v<94}
+
+function switchSbTab(el) {
+  document.querySelectorAll('.sb-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const tab = el.dataset.tab;
+  const panel = document.getElementById('sb-panel');
+  if(tab==='labs') renderLabsPanel(panel);
+  else if(tab==='meds') renderMedsPanel(panel);
+  else if(tab==='imaging') renderImagingPanel(panel);
+  else if(tab==='pmh') renderPMHPanel(panel);
+}
+
+function renderLabsPanel(el) {
+  const ho = handoffData;
+  if(!ho || !ho.keyLabs || !ho.keyLabs.length) {el.innerHTML='<p style="color:var(--dim)">No labs available yet.</p>';return;}
+  let html = '<h4>Key Labs</h4>';
+  ho.keyLabs.forEach(l => {
+    const abn = /\(H\)|\(L\)|\(CRIT\)/i.test(l);
+    const parts = l.split(/\s+/);
+    const name = parts.slice(0,-2).join(' ');
+    const val = parts.slice(-2).join(' ');
+    html += `<div class="lab-row"><span class="lab-name">${name||l}</span><span class="lab-val${abn?' abnormal':''}">${val||''}</span></div>`;
+  });
+  el.innerHTML = html;
+}
+
+function renderMedsPanel(el) {
+  const ho = handoffData;
+  let html = '<h4>Home Medications</h4>';
+  if(ho && ho.homeMeds && ho.homeMeds.length) {
+    html += '<ul>' + ho.homeMeds.map(m => '<li>'+m+'</li>').join('') + '</ul>';
+  }
+  if(ho && ho.activeIVs && ho.activeIVs.length) {
+    html += '<h4>Active IVs</h4><ul>' + ho.activeIVs.map(m => '<li>'+m+'</li>').join('') + '</ul>';
+  }
+  if(caseData.medications && caseData.medications.length) {
+    html += '<h4>Full Med List</h4><ul>' + caseData.medications.slice(0,15).map(m => '<li>'+m.name+'</li>').join('') + '</ul>';
+  }
+  el.innerHTML = html;
+}
+
+function renderImagingPanel(el) {
+  const ho = handoffData;
+  if(!ho || !ho.keyImaging || !ho.keyImaging.length) {el.innerHTML='<p style="color:var(--dim)">No imaging results available.</p>';return;}
+  let html = '<h4>Imaging Results</h4>';
+  ho.keyImaging.forEach(img => {
+    html += '<div style="background:rgba(255,255,255,.03);border-radius:8px;padding:10px;margin-bottom:8px;font-size:11px;color:var(--dim);line-height:1.5;white-space:pre-wrap">'+img+'</div>';
+  });
+  el.innerHTML = html;
+}
+
+function renderPMHPanel(el) {
+  let html = '';
+  if(caseData.problems && caseData.problems.length) {
+    html += '<h4>Problem List</h4><ul>';
+    caseData.problems.forEach(p => html += '<li><strong>'+p.problem+'</strong>'+(p.notes?' — '+p.notes:'')+'</li>');
+    html += '</ul>';
+  }
+  if(caseData.allergies) {
+    const allg = Array.isArray(caseData.allergies) ? caseData.allergies : [caseData.allergies];
+    html += '<h4>Allergies</h4><ul>' + allg.map(a => '<li>'+(typeof a==='string'?a:a.allergen+' → '+(a.reaction||''))+'</li>').join('') + '</ul>';
+  }
+  if(ho && ho.codeStatus) html += '<h4>Code Status</h4><p>'+handoffData.codeStatus+'</p>';
+  el.innerHTML = html || '<p style="color:var(--dim)">No PMH available.</p>';
+}
+
+// ═══ STEP NAVIGATION ═══
+function goToStep(n) {
+  currentStep = n;
+  const ind = document.getElementById('step-indicator');
+  ind.innerHTML = STEPS.map((s,i) => `<div class="step-dot${i===n?' active':''}${i<n?' done':''}" title="${s}"></div>`).join('');
+
+  const el = document.getElementById('step-content');
+  if(n===0) renderHandoffStep(el);
+  else if(n===1) renderChartReviewStep(el);
+  else if(n===2) renderOrdersStep(el);
+  else if(n===3) renderNoteStep(el);
+  else if(n===4) renderPresentStep(el);
+
+  document.getElementById('main-content').scrollTop = 0;
+}
+
+// ═══ STEP 1: HANDOFF ═══
+function renderHandoffStep(el) {
+  const ho = handoffData;
+  if(!ho) {
+    el.innerHTML = '<div class="step-title">ED Handoff</div><p style="color:var(--dim)">No structured handoff available for this case. Proceed to chart review.</p><div class="btn-row"><button type="button" class="btn-primary" onclick="goToStep(1)">Proceed to Chart Review</button></div>';
+    return;
+  }
+  let html = '<div class="step-title">Receiving the ED Handoff</div>';
+  html += '<div class="step-desc">The ED attending is signing out this patient to you for admission. Review the I-PASS handoff carefully before accepting the patient.</div>';
+
+  html += '<div class="handoff-card"><h4>ED Physician</h4><p>'+ho.edPhysician+' · Handoff time: '+ho.handoffTime+'</p></div>';
+  html += '<div class="handoff-card"><h4>Admitting Service</h4><p>'+ho.admittingService+' · '+ho.bedAssignment+'</p></div>';
+
+  // I-PASS format
+  html += '<div class="handoff-card">';
+  html += '<h4>I-PASS Handoff</h4>';
+  html += '<p><span class="ipass-label">I</span> <strong>Illness Severity:</strong> ESI '+ho.acuity.esi+' — '+ho.acuity.code+'</p>';
+  html += '<p style="margin-top:8px"><span class="ipass-label">P</span> <strong>Patient Summary:</strong> '+ho.oneLiner+'</p>';
+  html += '<p style="margin-top:8px"><span class="ipass-label">A</span> <strong>Action List:</strong></p>';
+  if(ho.pendingItems) html += '<ul style="padding-left:24px;margin:4px 0">' + ho.pendingItems.map(i=>'<li>'+i+'</li>').join('') + '</ul>';
+  html += '<p style="margin-top:8px"><span class="ipass-label">S</span> <strong>Situation Awareness:</strong></p>';
+  if(ho.watchOuts) html += '<ul style="padding-left:24px;margin:4px 0">' + ho.watchOuts.map(i=>'<li>'+i+'</li>').join('') + '</ul>';
+  html += '<p style="margin-top:8px"><span class="ipass-label">S</span> <strong>Synthesis:</strong> '+ho.disposition+'</p>';
+  html += '</div>';
+
+  // ED Course
+  html += '<div class="handoff-card"><h4>ED Course</h4><p>'+ho.edCourse+'</p></div>';
+
+  // Completed work
+  if(ho.completedOrders && ho.completedOrders.length) {
+    html += '<div class="handoff-card"><h4>Completed in ED</h4><ul style="padding-left:16px">';
+    ho.completedOrders.forEach(o => html += '<li>'+o+'</li>');
+    html += '</ul></div>';
+  }
+
+  html += '<div class="btn-row"><button type="button" class="btn-primary" onclick="goToStep(1)">Accept Patient &amp; Review Chart</button></div>';
+  el.innerHTML = html;
+}
+
+// ═══ STEP 2: CHART REVIEW ═══
+function renderChartReviewStep(el) {
+  let html = '<div class="step-title">Chart Review</div>';
+  html += '<div class="step-desc">Review the patient\'s chart in the sidebar (labs, meds, imaging, PMH). When ready, proceed to write your admission orders.</div>';
+
+  // Quick summary cards
+  const ho = handoffData;
+  if(ho) {
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">';
+    html += '<div class="handoff-card"><h4>Working Diagnosis</h4><p style="font-size:16px;font-weight:600;color:var(--text)">'+ho.workingDx+'</p></div>';
+    html += '<div class="handoff-card"><h4>Allergies</h4><p>'+(ho.allergies||'NKDA')+'</p></div>';
+    html += '</div>';
+
+    if(ho.keyLabs && ho.keyLabs.length) {
+      html += '<div class="handoff-card"><h4>Key Lab Results</h4>';
+      ho.keyLabs.forEach(l => {
+        const abn = /\(H\)|\(L\)|\(CRIT\)/i.test(l);
+        html += '<div class="lab-row"><span class="lab-name">'+l.replace(/\s*\([HLC]\w*\)\s*/g,'')+'</span><span class="lab-val'+(abn?' abnormal':'')+'">'+((l.match(/\([HLC]\w*\)/)||[''])[0])+'</span></div>';
+      });
+      html += '</div>';
+    }
+    if(ho.keyImaging && ho.keyImaging.length) {
+      html += '<div class="handoff-card"><h4>Imaging</h4>';
+      ho.keyImaging.forEach(img => html += '<p style="font-size:12px;color:var(--dim);white-space:pre-wrap;line-height:1.5">'+img+'</p>');
+      html += '</div>';
+    }
+  }
+
+  html += '<div class="btn-row"><button type="button" class="btn-secondary" onclick="goToStep(0)">Back to Handoff</button><button type="button" class="btn-primary" onclick="goToStep(2)">Write Admission Orders</button></div>';
+  el.innerHTML = html;
+}
+
+// ═══ STEP 3: ADMISSION ORDERS ═══
+function renderOrdersStep(el) {
+  const ho = handoffData;
+  const acuity = ho ? ho.acuity.esi : 3;
+  const isICU = acuity <= 2;
+
+  let html = '<div class="step-title">Admission Orders</div>';
+  html += '<div class="step-desc">Write your admission orders using the "ADC VANDALISM" framework. Select appropriate orders for this patient.</div>';
+
+  // ADC VANDALISM
+  html += orderSection('admit','Admit To', [
+    {id:'admit-service',type:'select',label:'Admitting Service',options:['Internal Medicine','Cardiology','Pulmonary','Neurology','Surgery','ICU','Step-down/Telemetry','Pediatrics','OB/GYN','Psychiatry']},
+    {id:'admit-level',type:'select',label:'Level of Care',options:['General Medical Floor','Telemetry','Step-down (IMC)','ICU','Observation']},
+    {id:'admit-code',type:'select',label:'Code Status',options:['Full Code','DNR/DNI','DNR/Full Treatment','Comfort Measures Only']}
+  ]);
+
+  html += orderSection('diagnosis','Diagnosis', [
+    {id:'dx-primary',type:'text',label:'Primary Diagnosis',placeholder:'e.g., Acute decompensated CHF'},
+    {id:'dx-secondary',type:'text',label:'Secondary Diagnoses',placeholder:'e.g., CKD Stage 3b, Afib'}
+  ]);
+
+  html += orderSection('condition','Condition', [
+    {id:'condition',type:'select',label:'Patient Condition',options:['Stable','Guarded','Serious','Critical']}
+  ]);
+
+  html += orderSection('vitals','Vitals', [
+    {id:'vitals-freq',type:'select',label:'Frequency',options:['Q4H','Q2H','Q1H','Continuous monitoring','Q shift']},
+    {id:'vitals-tele',type:'check',label:'Continuous telemetry monitoring'},
+    {id:'vitals-neuro',type:'check',label:'Neurological checks'},
+    {id:'vitals-io',type:'check',label:'Strict I&Os'}
+  ]);
+
+  html += orderSection('activity','Activity', [
+    {id:'activity',type:'select',label:'Activity Level',options:['Ad lib','Ambulate with assist','Bed rest with BRP','Strict bed rest','Up in chair TID']},
+    {id:'fall-risk',type:'check',label:'Fall risk precautions'},
+    {id:'dvt-proph',type:'check',label:'DVT prophylaxis (SCDs/enoxaparin)'}
+  ]);
+
+  html += orderSection('nursing','Nursing Orders', [
+    {id:'nsg-daily-wt',type:'check',label:'Daily weights'},
+    {id:'nsg-foley',type:'check',label:'Foley catheter — strict output monitoring'},
+    {id:'nsg-wound',type:'check',label:'Wound care / dressing changes'},
+    {id:'nsg-fall',type:'check',label:'Bed alarm / fall prevention'},
+    {id:'nsg-glucose',type:'check',label:'Fingerstick glucose monitoring (AC+HS)'}
+  ]);
+
+  html += orderSection('diet','Diet', [
+    {id:'diet',type:'select',label:'Diet Order',options:['Regular','Cardiac/Low sodium','Diabetic/Consistent carb','NPO','Clear liquids','Renal diet','Mechanical soft','Pureed/Thickened liquids']},
+    {id:'fluid-restrict',type:'check',label:'Fluid restriction (1.5L/day)'}
+  ]);
+
+  html += orderSection('iv','IV Fluids', [
+    {id:'iv-type',type:'select',label:'IV Fluid',options:['None','NS @ 125 mL/hr','NS @ 75 mL/hr','LR @ 125 mL/hr','D5 1/2NS @ 75 mL/hr','Heplock/Saline lock']},
+    {id:'iv-bolus',type:'check',label:'NS 500mL bolus now'}
+  ]);
+
+  html += orderSection('meds','Medications', [
+    {id:'med-home',type:'check',label:'Continue home medications (reconcile below)'},
+    {id:'med-pain',type:'select',label:'Pain Management',options:['None','Acetaminophen 650mg PO Q6H PRN','Ketorolac 15mg IV Q6H PRN (max 5 days)','Morphine 2mg IV Q4H PRN','Multimodal (APAP + Ketorolac scheduled)']},
+    {id:'med-nausea',type:'select',label:'Antiemetic',options:['None','Ondansetron 4mg IV Q6H PRN','Promethazine 12.5mg IV Q6H PRN']},
+    {id:'med-sleep',type:'select',label:'Sleep Aid',options:['None','Melatonin 3mg PO QHS PRN','Trazodone 25mg PO QHS PRN']},
+    {id:'med-bowel',type:'select',label:'Bowel Regimen',options:['None','Docusate + Senna','Polyethylene glycol 17g daily','Bisacodyl 10mg PR PRN']},
+    {id:'med-dvt',type:'select',label:'DVT Prophylaxis',options:['SCDs only','Enoxaparin 40mg SQ daily','Heparin 5000u SQ Q8H','Contraindicated (active bleeding)']}
+  ]);
+
+  html += orderSection('labs','Labs & Studies', [
+    {id:'lab-cbc',type:'check',label:'CBC in AM'},
+    {id:'lab-bmp',type:'check',label:'BMP in AM'},
+    {id:'lab-mag',type:'check',label:'Mag/Phos in AM'},
+    {id:'lab-coag',type:'check',label:'PT/INR/PTT'},
+    {id:'lab-trop',type:'check',label:'Serial troponins Q6H'},
+    {id:'lab-lactate',type:'check',label:'Repeat lactate in 4-6 hours'},
+    {id:'lab-cultures',type:'check',label:'Blood cultures x2 (if not already drawn)'},
+    {id:'lab-ua',type:'check',label:'Urinalysis + culture'},
+    {id:'lab-ekg',type:'check',label:'Repeat ECG in AM'},
+    {id:'lab-cxr',type:'check',label:'Portable CXR in AM'}
+  ]);
+
+  html += '<div id="order-feedback"></div>';
+  html += '<div class="btn-row"><button type="button" class="btn-secondary" onclick="goToStep(1)">Back</button><button type="button" class="btn-primary" onclick="submitOrders()">Submit Orders &amp; Get Feedback</button><button type="button" class="btn-secondary" onclick="goToStep(3)">Skip to H&P</button></div>';
+  el.innerHTML = html;
+}
+
+function orderSection(id, title, fields) {
+  let html = '<div class="order-section"><h4><span class="order-icon">'+title.charAt(0)+'</span> '+title+'</h4>';
+  fields.forEach(f => {
+    html += '<div class="order-row">';
+    if(f.type==='check') {
+      html += '<input type="checkbox" class="order-check" id="'+f.id+'" data-field="'+f.id+'"><label for="'+f.id+'">'+f.label+'</label>';
+    } else if(f.type==='select') {
+      html += '<label>'+f.label+'</label><select class="order-select" id="'+f.id+'" data-field="'+f.id+'"><option value="">-- Select --</option>';
+      f.options.forEach(o => html += '<option value="'+o+'">'+o+'</option>');
+      html += '</select>';
+    } else if(f.type==='text') {
+      html += '<label>'+f.label+'</label><input type="text" class="order-input" id="'+f.id+'" data-field="'+f.id+'" placeholder="'+(f.placeholder||'')+'" style="width:250px">';
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function submitOrders() {
+  // Collect all order state
+  const fields = document.querySelectorAll('[data-field]');
+  fields.forEach(f => {
+    if(f.type==='checkbox') orderState[f.dataset.field] = f.checked;
+    else orderState[f.dataset.field] = f.value;
+  });
+
+  // Score orders
+  let feedback = [];
+  let score = 0;
+  let total = 0;
+
+  // Check critical items
+  const checks = [
+    {field:'admit-service',any:true,msg:'Select an admitting service'},
+    {field:'admit-level',any:true,msg:'Specify level of care'},
+    {field:'admit-code',any:true,msg:'Document code status'},
+    {field:'dx-primary',any:true,msg:'Enter primary diagnosis'},
+    {field:'condition',any:true,msg:'Specify patient condition'},
+    {field:'vitals-freq',any:true,msg:'Order vital sign frequency'},
+    {field:'activity',any:true,msg:'Specify activity level'},
+    {field:'diet',any:true,msg:'Order a diet'},
+    {field:'iv-type',any:true,msg:'Address IV fluids (even if none needed)'},
+    {field:'med-dvt',any:true,msg:'Address DVT prophylaxis'},
+    {field:'lab-cbc',val:true,msg:'Order AM labs (CBC)'},
+    {field:'lab-bmp',val:true,msg:'Order AM labs (BMP)'},
+  ];
+
+  checks.forEach(c => {
+    total++;
+    const v = orderState[c.field];
+    const pass = c.val ? v===true : (v && v!=='');
+    if(pass) score++;
+    else feedback.push({type:'warn',msg:c.msg});
+  });
+
+  // Bonus for thorough orders
+  if(orderState['vitals-io']) {score++; total++;}
+  else {total++; feedback.push({type:'info',msg:'Consider strict I&Os for fluid management'});}
+
+  if(orderState['nsg-daily-wt']) {score++; total++;}
+  else {total++; feedback.push({type:'info',msg:'Consider daily weights for volume status monitoring'});}
+
+  scores.orders = Math.round(score/total*100);
+
+  // Render feedback
+  const fbEl = document.getElementById('order-feedback');
+  let html = '';
+  if(scores.orders >= 80) {
+    html += '<div class="feedback-box"><h4>Well done — '+scores.orders+'% Complete</h4><p>Your admission orders cover the key elements. A few suggestions for improvement:</p>';
+  } else {
+    html += '<div class="feedback-box warn"><h4>'+scores.orders+'% Complete — Missing Key Items</h4><p>Review and address these items:</p>';
+  }
+  html += '<ul>';
+  feedback.forEach(f => html += '<li>'+f.msg+'</li>');
+  html += '</ul></div>';
+  fbEl.innerHTML = html;
+  fbEl.scrollIntoView({behavior:'smooth'});
+}
+
+// ═══ STEP 4: H&P NOTE ═══
+function renderNoteStep(el) {
+  const p = caseData.patient;
+  const ho = handoffData;
+  let html = '<div class="step-title">Admission H&P</div>';
+  html += '<div class="step-desc">Write your admission history and physical. Use the sidebar to reference labs, imaging, and medications.</div>';
+
+  const sections = [
+    {id:'note-cc',label:'Chief Complaint / Reason for Admission',hint:'One-line reason for admission',rows:2},
+    {id:'note-hpi',label:'History of Present Illness',hint:'Include ED course, relevant positives/negatives, timeline. Start with demographics + context.',rows:6},
+    {id:'note-pmh',label:'Past Medical / Surgical History',hint:'Active problems with relevant details',rows:3},
+    {id:'note-meds',label:'Home Medications',hint:'Include doses when known',rows:3},
+    {id:'note-allergies',label:'Allergies',hint:'Drug allergies with reactions',rows:1},
+    {id:'note-social',label:'Social History',hint:'Tobacco, alcohol, drugs, living situation, functional status',rows:2},
+    {id:'note-fhx',label:'Family History',hint:'Relevant to current presentation',rows:2},
+    {id:'note-ros',label:'Review of Systems',hint:'Pertinent positives and negatives',rows:3},
+    {id:'note-pe',label:'Physical Examination',hint:'Vitals + complete systems exam. Note significant findings.',rows:6},
+    {id:'note-assess',label:'Assessment & Plan',hint:'Problem-based. For each active problem: assessment, workup, treatment plan. Include disposition planning.',rows:8}
+  ];
+
+  sections.forEach(s => {
+    html += '<div class="note-section"><label>'+s.label+'</label><textarea class="note-textarea" id="'+s.id+'" rows="'+s.rows+'" placeholder="'+s.hint+'">'+(noteState[s.id]||'')+'</textarea></div>';
+  });
+
+  html += '<div id="note-feedback"></div>';
+  html += '<div class="btn-row"><button type="button" class="btn-secondary" onclick="saveNoteState();goToStep(2)">Back to Orders</button><button type="button" class="btn-primary" onclick="saveNoteState();submitNote()">Submit H&P &amp; Get Feedback</button><button type="button" class="btn-secondary" onclick="saveNoteState();goToStep(4)">Skip to Presentation</button></div>';
+  el.innerHTML = html;
+}
+
+function saveNoteState() {
+  document.querySelectorAll('.note-textarea').forEach(t => noteState[t.id] = t.value);
+}
+
+function submitNote() {
+  saveNoteState();
+  let score = 0;
+  let total = 0;
+  let feedback = [];
+
+  const sections = ['note-cc','note-hpi','note-pmh','note-meds','note-allergies','note-social','note-ros','note-pe','note-assess'];
+  sections.forEach(s => {
+    total++;
+    const val = (noteState[s]||'').trim();
+    if(val.length > 10) score++;
+    else feedback.push('Missing or incomplete: ' + document.querySelector('label[for="'+s+'"]')?.textContent || s);
+  });
+
+  // Bonus for quality
+  const hpi = (noteState['note-hpi']||'');
+  if(hpi.length > 100) {score++; total++;} else {total++; feedback.push('HPI could be more detailed');}
+  const ap = (noteState['note-assess']||'');
+  if(ap.length > 80) {score++; total++;} else {total++; feedback.push('Assessment & Plan could be more thorough');}
+
+  scores.note = Math.round(score/total*100);
+
+  const fbEl = document.getElementById('note-feedback');
+  let html = '';
+  if(scores.note >= 80) {
+    html += '<div class="feedback-box"><h4>Solid H&P — '+scores.note+'% Complete</h4><p>Your note covers the essential elements.</p>';
+  } else {
+    html += '<div class="feedback-box warn"><h4>'+scores.note+'% Complete — Areas to Strengthen</h4>';
+  }
+  if(feedback.length) html += '<ul>' + feedback.map(f=>'<li>'+f+'</li>').join('') + '</ul>';
+  html += '</div>';
+  fbEl.innerHTML = html;
+  fbEl.scrollIntoView({behavior:'smooth'});
+}
+
+// ═══ STEP 5: PRESENTATION ═══
+function renderPresentStep(el) {
+  const p = caseData.patient;
+  const ho = handoffData;
+  let html = '<div class="step-title">Present Your Patient</div>';
+  html += '<div class="step-desc">You\'re presenting this patient on morning rounds. Structure your oral presentation, then review the coaching feedback.</div>';
+
+  html += '<div class="note-section"><label>Oral Presentation (type it out as you\'d say it)</label>';
+  html += '<textarea class="note-textarea" id="note-presentation" rows="10" placeholder="This is a [age] year-old [sex] with a history of [PMH] who presents with [CC]...\n\nInclude: One-liner, HPI summary, key exam findings, labs/imaging, assessment & plan.">'+(noteState['note-presentation']||'')+'</textarea></div>';
+
+  html += '<div id="present-feedback"></div>';
+  html += '<div class="btn-row"><button type="button" class="btn-secondary" onclick="noteState[\'note-presentation\']=document.getElementById(\'note-presentation\').value;goToStep(3)">Back to H&P</button><button type="button" class="btn-primary" onclick="submitPresentation()">Get Feedback</button><button type="button" class="btn-primary" onclick="showFinalScore()" style="background:var(--green)">Finish &amp; See Score</button></div>';
+  el.innerHTML = html;
+}
+
+function submitPresentation() {
+  const text = document.getElementById('note-presentation').value.trim();
+  noteState['note-presentation'] = text;
+  let score = 0;
+  let total = 6;
+  let feedback = [];
+
+  // Check key components
+  if(text.length > 30) {score++;}
+  else {feedback.push('Presentation is too brief');}
+
+  if(/year.old|y\.?o\.?|yo /i.test(text)) {score++;}
+  else {feedback.push('Start with demographics (age/sex)');}
+
+  if(/history of|pmh|h\/o/i.test(text)) {score++;}
+  else {feedback.push('Include relevant past medical history');}
+
+  if(/present|complain|came in|brought in/i.test(text)) {score++;}
+  else {feedback.push('State the chief complaint / reason for presentation');}
+
+  if(/exam|physical|lung|heart|abdomen|neuro/i.test(text)) {score++;}
+  else {feedback.push('Include pertinent physical exam findings');}
+
+  if(/plan|recommend|will|start|continue|consult/i.test(text)) {score++;}
+  else {feedback.push('End with your assessment and plan');}
+
+  scores.presentation = Math.round(score/total*100);
+
+  const fbEl = document.getElementById('present-feedback');
+  let html = '';
+  if(scores.presentation >= 80) {
+    html += '<div class="feedback-box"><h4>Strong Presentation — '+scores.presentation+'%</h4><p>Your oral presentation hits the key elements of a structured patient presentation.</p>';
+  } else {
+    html += '<div class="feedback-box warn"><h4>'+scores.presentation+'% — Structure Tips</h4><p>A strong oral presentation follows this structure:</p>';
+    html += '<ul><li>One-liner: age, sex, PMH, presenting complaint</li><li>Brief HPI with timeline</li><li>Key exam findings</li><li>Relevant labs/imaging</li><li>Assessment: working diagnosis</li><li>Plan: by problem</li></ul>';
+  }
+  if(feedback.length) html += '<ul>' + feedback.map(f=>'<li>'+f+'</li>').join('') + '</ul>';
+  html += '</div>';
+  fbEl.innerHTML = html;
+  fbEl.scrollIntoView({behavior:'smooth'});
+}
+
+function showFinalScore() {
+  const avg = Math.round((scores.orders + scores.note + scores.presentation) / 3);
+  const el = document.getElementById('step-content');
+  let html = '<div class="step-title">Admission Complete</div>';
+  html += '<div class="score-card"><div class="score-pct">'+avg+'%</div><div class="score-label">Overall Admission Score</div>';
+  html += '<div class="score-details">';
+  html += '<div class="score-det"><div class="sd-val" style="color:'+(scores.orders>=70?'var(--green)':'var(--orange)')+'">'+scores.orders+'%</div><div class="sd-label">Admission Orders</div></div>';
+  html += '<div class="score-det"><div class="sd-val" style="color:'+(scores.note>=70?'var(--green)':'var(--orange)')+'">'+scores.note+'%</div><div class="sd-label">H&P Note</div></div>';
+  html += '<div class="score-det"><div class="sd-val" style="color:'+(scores.presentation>=70?'var(--green)':'var(--orange)')+'">'+scores.presentation+'%</div><div class="sd-label">Oral Presentation</div></div>';
+  html += '</div></div>';
+
+  html += '<div class="feedback-box"><h4>Key Takeaways</h4><ul>';
+  html += '<li>Use ADC VANDALISM to ensure complete admission orders</li>';
+  html += '<li>A thorough H&P is both a communication tool and a medicolegal document</li>';
+  html += '<li>Structure oral presentations: one-liner → HPI → exam → data → A&P</li>';
+  html += '</ul></div>';
+
+  html += '<div class="btn-row"><button type="button" class="btn-primary" onclick="location.reload()">Admit Another Patient</button><button type="button" class="btn-secondary" onclick="location.href=\'hospital-3d.html\'">Back to Hospital</button></div>';
+  el.innerHTML = html;
+}
+</script>
+
+<script src="js/rdx-nav.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+</body>
+</html>

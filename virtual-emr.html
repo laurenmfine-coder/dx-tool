@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-<title>Virtual EMR — SP Encounter System</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Virtual EMR | ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F0F2F5;--surface:#FFF;--surface-alt:#F7F8FA;--primary:#2874A6;--primary-dark:#1B5E8A;--primary-light:#E3F2FD;--accent:#00897B;--accent-light:#E0F2F1;--danger:#C62828;--danger-light:#FFEBEE;--warning:#F57F17;--warning-light:#FFF8E1;--text:#1A1A2E;--text-secondary:#5A6178;--text-muted:#8C92A4;--border:#DFE1E6;--border-light:#ECEEF2;--flag-high:#C62828;--flag-low:#1565C0;--radius:8px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -651,9 +660,27 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <script src="caseframe-engine.js"></script>
 <script src="caseframe-integration.js"></script>
 <script src="auth/auth-guard.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Virtual EMR on ReasonDx. Review patient charts, write clinical notes, and practice clinical documentation in a realistic electronic health record.">
+<meta property="og:title" content="Virtual EMR | ReasonDx">
+<meta property="og:description" content="Realistic EMR simulation with 256 patient cases.">
+<meta property="og:url" content="https://reasondx.com/virtual-emr.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://reasondx.com/virtual-emr.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Virtual EMR | ReasonDx">
+<meta name="twitter:description" content="Realistic EMR simulation with 256 patient cases.">
 </head>
 <body>
-<div id="app"></div>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<div id="app" id="main-content" role="main"></div>
 <div id="toast" class="toast"></div>
 <div id="annotationPopover" class="annotation-popover"></div>
 <script>
@@ -1040,9 +1067,11 @@ function getStudentFaculty(studentUsername){
 // DYNAMIC CASE DATA LOADER
 // ═══════════════════════════════════════════════════════════════
 var PATIENT, PROBLEMS, MEDICATIONS, ALLERGIES, VITALS, VISITS, LABS, IMAGING, IMMUNIZATIONS, FAMILY_HISTORY, SOCIAL_HISTORY;
-var CASE_ID = new URLSearchParams(window.location.search).get('case') || '';
-var URL_SETTING = new URLSearchParams(window.location.search).get('setting') || '';
-var URL_SPECIALTY = new URLSearchParams(window.location.search).get('specialty') || '';
+var _urlParams = new URLSearchParams(window.location.search);
+var _cxRaw = _urlParams.get('cx') || '';
+var CASE_ID = _cxRaw ? (function(){try{var s=_cxRaw;while(s.length%4)s+='=';return atob(s)}catch(e){return _cxRaw}})() : (_urlParams.get('case') || '');
+var URL_SETTING = _urlParams.get('setting') || '';
+var URL_SPECIALTY = _urlParams.get('specialty') || '';
 // URL params applied to S after state is declared (see below)
 
 // ═══════════════════════════════════════════════════════════════
@@ -1143,7 +1172,7 @@ function renderSettingSelector() {
     var cards = SETTINGS_DATA.map(function(s) {
       return '<div class="setting-card '+(S.clinicalSetting===s.id?'selected':'')+'" onclick="selectClinicalSetting(\''+s.id+'\')"><div class="setting-card-bar" style="background:'+s.color+'"></div><div class="setting-card-icon">'+s.icon+'</div><div class="setting-card-label">'+s.label+'</div><div class="setting-card-role">'+esc(s.role)+' \u00B7 '+s.time+'</div><div class="setting-card-desc">'+esc(s.desc)+'</div></div>';
     }).join('');
-    return '<div class="setting-wrapper"><div class="setting-inner">'+pillarBar+'<div class="setting-header"><h1 class="setting-title">Where are you working today?</h1><p class="setting-subtitle">Select your clinical setting. This determines the workflow, documentation templates, and the type of reasoning you\u2019ll practice.</p></div><div class="setting-grid">'+cards+'</div><div class="setting-btn-row"><button class="btn-setting btn-setting-primary" '+(S.clinicalSetting?'':'disabled')+' onclick="S.settingStep=2;render()">Continue to Specialty \u2192</button></div></div></div>';
+    return '<div class="setting-wrapper"><div class="setting-inner">'+pillarBar+'<div class="setting-header"><h1 class="setting-title">Where are you working today?</h1><p class="setting-subtitle">Select your clinical setting. This determines the workflow, documentation templates, and the type of reasoning you\u2019ll practice.</p></div><div class="setting-grid">'+cards+'</div><div class="setting-btn-row"><button type="button" class="btn-setting btn-setting-primary" '+(S.clinicalSetting?'':'disabled')+' onclick="S.settingStep=2;render()">Continue \u2192</button></div></div></div>';
   }
 
   // Step 2: Specialty
@@ -1152,7 +1181,7 @@ function renderSettingSelector() {
     var avail = sp.settings.indexOf(S.clinicalSetting) >= 0;
     return '<div class="specialty-card '+(S.specialty===sp.id?'selected':'')+' '+(avail?'':'unavail')+'" onclick="'+(avail?"selectSpecialty('"+sp.id+"')":"void(0)")+'"><div class="specialty-card-icon">'+sp.icon+'</div><div><div class="specialty-card-label">'+sp.label+'</div><div class="specialty-card-sub">'+(avail?'Available':'Not in this setting')+'</div></div></div>';
   }).join('');
-  return '<div class="setting-wrapper"><div class="setting-inner">'+pillarBar+'<div class="setting-header"><h1 class="setting-title">What rotation are you on?</h1><p class="setting-subtitle">You\u2019re in the <strong>'+setting.icon+' '+setting.label+'</strong>. Select your specialty rotation.</p></div><div class="specialty-grid">'+specCards+'</div><div class="setting-btn-row"><button class="btn-setting btn-setting-secondary" onclick="S.settingStep=1;render()">\u2190 Back</button><button class="btn-setting btn-setting-primary" '+(S.specialty?'':'disabled')+' onclick="launchWithSetting()">Launch Case Library \u2192</button></div></div></div>';
+  return '<div class="setting-wrapper"><div class="setting-inner">'+pillarBar+'<div class="setting-header"><h1 class="setting-title">Select your rotation</h1><p class="setting-subtitle">You\u2019re in the <strong>'+setting.icon+' '+setting.label+'</strong>. Select your specialty rotation.</p></div><div class="specialty-grid">'+specCards+'</div><div class="setting-btn-row"><button type="button" class="btn-setting btn-setting-secondary" onclick="S.settingStep=1;render()">\u2190 Back</button><button type="button" class="btn-setting btn-setting-primary" '+(S.specialty?'':'disabled')+' onclick="launchWithSetting()">Launch Case Library \u2192</button></div></div></div>';
 }
 
 function selectClinicalSetting(id) {
@@ -1272,9 +1301,9 @@ function _renderCasePicker() {
     if (settingCtx) {
       html += '<p style="color:#64748b;font-size:14px;margin:0">Select a patient \u00B7 <strong style="color:#1e293b">' + settingCtx + '</strong></p>';
       html += '<div style="margin-top:8px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">';
-      html += '<button onclick="window.location.href=\'virtual-emr.html\'" style="font-size:12px;color:#2874A6;background:none;border:1px solid #2874A6;border-radius:6px;padding:8px 14px;cursor:pointer;font-family:inherit;font-weight:600;min-height:44px;touch-action:manipulation">\u2190 Change Setting</button>';
+      html += '<button type="button" onclick="window.location.href=\'virtual-emr.html\'" style="font-size:12px;color:#2874A6;background:none;border:1px solid #2874A6;border-radius:6px;padding:8px 14px;cursor:pointer;font-family:inherit;font-weight:600;min-height:44px;touch-action:manipulation">\u2190 Change Setting</button>';
       if (isFiltered) {
-        html += '<button onclick="S.specialty=\'em\';_renderCasePicker()" style="font-size:12px;color:#607D8B;background:none;border:1px solid #94a3b8;border-radius:6px;padding:8px 14px;cursor:pointer;font-family:inherit;font-weight:600;min-height:44px;touch-action:manipulation">Show All Cases</button>';
+        html += '<button type="button" onclick="S.specialty=\'em\';_renderCasePicker()" style="font-size:12px;color:#607D8B;background:none;border:1px solid #94a3b8;border-radius:6px;padding:8px 14px;cursor:pointer;font-family:inherit;font-weight:600;min-height:44px;touch-action:manipulation">Show All Cases</button>';
       }
       html += '</div>';
       if (isFiltered) {
@@ -1460,7 +1489,7 @@ function renderDocumentation(){
     return'<div class="note-section"><div class="note-section-header">▸ '+esc(sec.label)+'</div><div><textarea class="note-field'+sc+'" id="note-'+sec.id+'" placeholder="'+esc(sec.hint)+'" '+(S.submitted?"disabled":"")+' oninput="updateNoteField(\''+sec.id+'\',this.value)">'+esc(v)+'</textarea></div></div>';
   }).join("");
   // FIX: Submit button always enabled when role is student, check content in handler
-  const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button class="btn-submit" id="submitBtn" onclick="submitDoc()">'+I.send+' Submit Documentation</button>';
+  const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">'+I.send+' Submit Documentation</button>';
   const wc=totalWords();
   return sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+'</div>')+sectionCard("Documentation Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')));
 }
@@ -1488,7 +1517,7 @@ function renderGrading(){
     const sub=S.allSubmissions[S.selectedSubmission];
     const nt=sub.fields?assembleNoteText(sub.fields):(sub.text||"");
     const ea=db("annotations-"+sub.studentName+"-"+sub.week)||[];
-    gh+=sectionCard(sub.studentName+" — "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <strong>To annotate:</strong> Select text → color → comment<span style="margin-left:auto">'+badge(ea.length+" annotations")+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
+    gh+=sectionCard(sub.studentName+" — "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <strong>To annotate:</strong> Select text → color → comment<span style="margin-left:auto">'+badge(ea.length+" annotations")+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button type="button" class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
     const tot=Object.values(S.gradeScores).reduce((a,b)=>a+(parseInt(b)||0),0);
     // Chart Review Summary panel (from tracking module)
     if(window.ChartTracker&&sub.chartReviewData){gh+=ChartTracker.renderSummary(sub.chartReviewData.chartReview)}
@@ -1497,7 +1526,7 @@ function renderGrading(){
     if(window.OrderValidator){gh+=OrderValidator.renderSummary(sub.studentName,CASE_ID)}
     // CaseFrame Completion Analysis panel (from Phase 3 CaseFrame engine)
     if(window.CaseFrame){var _cfStored=sub.caseFrameResult||null;if(!_cfStored){var _cfLoaded=CaseFrame.loadResult(sub.studentName,CASE_ID);if(_cfLoaded)_cfStored=_cfLoaded.result}if(!_cfStored&&sub.fields){var _cfX={labOrders:S.labOrders||[],imgOrders:S.imgOrders||[]};_cfStored=CaseFrame.score(CASE_ID,sub.fields,_cfX)}if(_cfStored){var _cfCR=null;if(sub.chartReviewData){_cfCR={highValueCoverage:(sub.chartReviewData.chartReview||sub.chartReviewData).highValueCoverage}}var _cfOV=sub.orderValidationData||null;gh+=CaseFrame.renderSummary(_cfStored,{chartReview:_cfCR,orderValidation:_cfOV})}}
-    gh+=sectionCard("Grade & Feedback",I.star,tableHTML(["Criterion","Max","Score","Comment"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono td-muted">'+r.max+'</td><td><input type="number" class="grade-input" min="0" max="'+r.max+'" value="'+(S.gradeScores[r.id]||"")+'" onchange="setGradeScore(\''+r.id+'\',this.value)"></td><td><input type="text" class="comment-input" value="'+esc(S.gradeComments[r.id]||"")+'" placeholder="Comment..." onchange="setGradeComment(\''+r.id+'\',this.value)"></td></tr>'))+'<div class="grade-total-bar"><span style="font-weight:600">Total: <span class="td-mono" style="color:var(--primary)">'+tot+'</span> / '+RUBRIC.reduce((a,b)=>a+b.max,0)+'</span></div><div style="margin-top:16px"><label class="demo-label">Overall Comments</label><textarea class="overall-textarea" placeholder="Detailed narrative feedback..." oninput="S.overallComment=this.value">'+esc(S.overallComment)+'</textarea></div><div style="margin-top:16px;display:flex;justify-content:flex-end"><button class="btn-submit" onclick="saveGrade()">'+I.check+' Save & Share Feedback</button></div>');
+    gh+=sectionCard("Grade & Feedback",I.star,tableHTML(["Criterion","Max","Score","Comment"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono td-muted">'+r.max+'</td><td><input type="number" class="grade-input" min="0" max="'+r.max+'" value="'+(S.gradeScores[r.id]||"")+'" onchange="setGradeScore(\''+r.id+'\',this.value)"></td><td><input type="text" class="comment-input" value="'+esc(S.gradeComments[r.id]||"")+'" placeholder="Comment..." onchange="setGradeComment(\''+r.id+'\',this.value)"></td></tr>'))+'<div class="grade-total-bar"><span style="font-weight:600">Total: <span class="td-mono" style="color:var(--primary)">'+tot+'</span> / '+RUBRIC.reduce((a,b)=>a+b.max,0)+'</span></div><div style="margin-top:16px"><label class="demo-label">Overall Comments</label><textarea class="overall-textarea" placeholder="Detailed narrative feedback..." oninput="S.overallComment=this.value">'+esc(S.overallComment)+'</textarea></div><div style="margin-top:16px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" onclick="saveGrade()">'+I.check+' Save & Share Feedback</button></div>');
   }
   return sectionCard("Student Submissions",I.fileText,sh)+gh;
 }
@@ -1541,7 +1570,7 @@ function renderAdmin(){
     assignHTML+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">';
     assigned.forEach(sn=>{
       const su=getUser(sn);
-      assignHTML+='<span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:16px;background:var(--primary-light);font-size:12px">'+esc(su?su.displayName:sn)+' <button style="background:none;border:none;cursor:pointer;color:var(--danger);font-weight:700;padding:0 2px" onclick="adminUnassign(\''+esc(sn)+'\',\''+esc(f.username)+'\')">✕</button></span>';
+      assignHTML+='<span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:16px;background:var(--primary-light);font-size:12px">'+esc(su?su.displayName:sn)+' <button type="button" style="background:none;border:none;cursor:pointer;color:var(--danger);font-weight:700;padding:0 2px" onclick="adminUnassign(\''+esc(sn)+'\',\''+esc(f.username)+'\')">✕</button></span>';
     });
     assignHTML+='</div>';
     const unassigned=students.filter(s=>!assigned.includes(s.username));
@@ -1603,7 +1632,7 @@ function adminUnassign(student,faculty){
 // ═══════════════════════════════════════════════════════════════
 let pendingSelection=null,selectedAnnotColor="yellow";
 function handleTextSelection(){const sel=window.getSelection();const text=sel.toString().trim();if(!text||text.length<3)return;const range=sel.getRangeAt(0);const rect=range.getBoundingClientRect();pendingSelection={text};showAnnotationPopover(rect)}
-function showAnnotationPopover(rect){const pop=document.getElementById("annotationPopover");let top=rect.bottom+8,left=rect.left;if(left+320>window.innerWidth)left=window.innerWidth-340;if(left<10)left=10;const cb=ANNOT_COLORS.map(c=>'<button class="annotation-color-btn" style="background:'+c.bg+'" onclick="selectAnnotColor(\''+c.id+'\',this)" title="'+c.label+'" data-color="'+c.id+'"></button>').join("");pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">Add Annotation</span><button class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">"'+esc(pendingSelection.text.substring(0,60))+(pendingSelection.text.length>60?"...":"")+'"</div><div style="font-size:11px;font-weight:600;margin-bottom:4px">COLOR</div><div class="annotation-color-row">'+cb+'</div><textarea id="annotCommentInput" class="annotation-comment-input" placeholder="Your comment..."></textarea><div><button class="annotation-save-btn" onclick="saveAnnotation()">Add Annotation</button></div>';pop.style.top=top+"px";pop.style.left=left+"px";pop.classList.add("visible");setTimeout(()=>selectAnnotColor("yellow",pop.querySelector('[data-color="yellow"]')),10)}
+function showAnnotationPopover(rect){const pop=document.getElementById("annotationPopover");let top=rect.bottom+8,left=rect.left;if(left+320>window.innerWidth)left=window.innerWidth-340;if(left<10)left=10;const cb=ANNOT_COLORS.map(c=>'<button type="button" class="annotation-color-btn" style="background:'+c.bg+'" onclick="selectAnnotColor(\''+c.id+'\',this)" title="'+c.label+'" data-color="'+c.id+'"></button>').join("");pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">Add Annotation</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">"'+esc(pendingSelection.text.substring(0,60))+(pendingSelection.text.length>60?"...":"")+'"</div><div style="font-size:11px;font-weight:600;margin-bottom:4px">COLOR</div><div class="annotation-color-row">'+cb+'</div><textarea id="annotCommentInput" class="annotation-comment-input" placeholder="Your comment..."></textarea><div><button type="button" class="annotation-save-btn" onclick="saveAnnotation()">Add Annotation</button></div>';pop.style.top=top+"px";pop.style.left=left+"px";pop.classList.add("visible");setTimeout(()=>selectAnnotColor("yellow",pop.querySelector('[data-color="yellow"]')),10)}
 function selectAnnotColor(id,btn){selectedAnnotColor=id;document.querySelectorAll(".annotation-color-btn").forEach(b=>b.classList.remove("selected"));if(btn)btn.classList.add("selected")}
 function hideAnnotationPopover(){document.getElementById("annotationPopover").classList.remove("visible");pendingSelection=null}
 function saveAnnotation(){if(!pendingSelection)return;const c=document.getElementById("annotCommentInput").value.trim();if(!c){showToast("Please add a comment");return}const sub=S.allSubmissions[S.selectedSubmission];const anns=db("annotations-"+sub.studentName+"-"+sub.week)||[];anns.push({selectedText:pendingSelection.text,comment:c,color:selectedAnnotColor,grader:S.currentUser.displayName,timestamp:new Date().toISOString()});dbSet("annotations-"+sub.studentName+"-"+sub.week,anns);if(window.EMRCloud){EMRCloud.syncAnnotations(sub.studentName,sub.week,CASE_ID||'',anns)}hideAnnotationPopover();showToast("✓ Annotation added");render()}
@@ -1640,7 +1669,7 @@ function render(){
   if(role==="faculty"||role==="admin"){tabs.push({id:"grading",label:"Grading",icon:I.check})}
   if(role==="admin"){tabs.push({id:"admin",label:"Admin Panel",icon:I.settings})}
 
-  const sb=tabs.map(t=>'<button class="sidebar-btn '+(S.activeTab===t.id?"active":"")+'" onclick="switchTab(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>').join("");
+  const sb=tabs.map(t=>'<button type="button" class="sidebar-btn '+(S.activeTab===t.id?"active":"")+'" onclick="switchTab(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>').join("");
   const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,documentation:renderDocumentation,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx,studyhub:renderStudyHub};
   const ct=(fn[S.activeTab]||renderDemographics)();
   const em=role==="admin"?"🔑":role==="faculty"?"👨‍⚕️":"🎓";
@@ -1654,7 +1683,7 @@ function render(){
 
   var casesUrl='virtual-emr.html';if(S.clinicalSetting){casesUrl+='?setting='+S.clinicalSetting;if(S.specialty)casesUrl+='&specialty='+S.specialty}
   var settingBadge=getSettingLabel()?'<span class="setting-context-badge">'+getSettingLabel()+'</span>':'';
-  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px;-webkit-tap-highlight-color:transparent">\u2190 Cases</a><a href="index.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+dayBarHtml+'<div class="content-layout"><div class="sidebar">'+sb+'</div><div class="main-content">'+ct+'</div></div></div>';
+  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px;-webkit-tap-highlight-color:transparent">\u2190 Cases</a><a href="index.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+dayBarHtml+'<div class="content-layout"><div class="sidebar">'+sb+'</div><div class="main-content">'+ct+'</div></div></div>';
 }
 
 // Day change handler — evolves clinical data using DAY_EVOLUTION engine
@@ -1692,8 +1721,8 @@ function renderStudyHub() {
 
   // Harvest button
   html += '<div style="margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">';
-  html += '<button class="btn-primary" onclick="harvestFlashcards()" style="font-size:13px;padding:8px 16px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;font-weight:600">🔍 Harvest Learning Gaps</button>';
-  html += '<button class="btn-secondary" onclick="reviewNextCard()" style="font-size:13px;padding:8px 16px;border-radius:8px;border:1px solid var(--border-light);background:var(--surface);cursor:pointer;font-weight:600">📖 Review Due Cards</button>';
+  html += '<button type="button" class="btn-primary" onclick="harvestFlashcards()" style="font-size:13px;padding:8px 16px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;font-weight:600">🔍 Harvest Learning Gaps</button>';
+  html += '<button type="button" class="btn-secondary" onclick="reviewNextCard()" style="font-size:13px;padding:8px 16px;border-radius:8px;border:1px solid var(--border-light);background:var(--surface);cursor:pointer;font-weight:600">📖 Review Due Cards</button>';
   html += '</div>';
 
   // SpacedRep hub content
@@ -1816,7 +1845,7 @@ function renderCoachDx(){
     conceptsHtml+
     '<div class="coach-input-row">'+
       '<textarea class="coach-input" id="coachInput" rows="2" placeholder="Share your reasoning, ask a question, or present your assessment\u2026" onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();sendCoachMessage()}"></textarea>'+
-      '<button class="coach-send" onclick="sendCoachMessage()" '+(S.coachLoading?"disabled":"")+'>Send</button>'+
+      '<button type="button" class="coach-send" onclick="sendCoachMessage()" '+(S.coachLoading?"disabled":"")+'>Send</button>'+
     '</div>'+
     conceptMapHtml+
   '</div>';
@@ -2087,7 +2116,7 @@ function renderMedicationsInteractive(){
     const reconBadge=reconStatus?badge(reconStatus,reconStatus==="Discontinued"?"badge-danger":reconStatus==="Hold"?"badge-warning":reconStatus==="Verified"?"badge-accent":"badge-primary"):"";
     let actions="";
     if(isStudent){
-      actions='<td><select class="week-select" style="font-size:11px;padding:2px 6px" onchange="setMedReconStatus('+i+',this.value)"><option value="">— Review —</option>'+MED_RECON_STATUS.map(s=>'<option '+(reconStatus===s?"selected":"")+'>'+s+'</option>').join("")+'</select><button class="btn-remove" style="margin-left:4px" onclick="deleteMed('+i+')">✕</button></td>';
+      actions='<td><select class="week-select" style="font-size:11px;padding:2px 6px" onchange="setMedReconStatus('+i+',this.value)"><option value="">— Review —</option>'+MED_RECON_STATUS.map(s=>'<option '+(reconStatus===s?"selected":"")+'>'+s+'</option>').join("")+'</select><button type="button" class="btn-remove" style="margin-left:4px" onclick="deleteMed('+i+')">✕</button></td>';
     }
     return'<tr style="'+(reconStatus==="Discontinued"?"opacity:0.5;text-decoration:line-through":"")+'"><td class="td-bold">'+esc(m.name)+'</td><td class="td-muted">'+esc(m.sig)+'</td><td class="td-muted">'+esc(m.prescriber)+'</td><td>'+badge(m.status,m.status==="PRN"?"badge-warning":"badge-accent")+' '+reconBadge+'</td>'+actions+'</tr>';
   });
@@ -2097,7 +2126,7 @@ function renderMedicationsInteractive(){
 
   let addForm="";
   if(isStudent){
-    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.pill+' Add Medication</div><div style="display:grid;grid-template-columns:1.5fr 2fr 1fr auto;gap:8px;align-items:end"><div><label class="demo-label">Medication + Dose</label><input id="newMedName" class="assign-input" style="padding:8px 10px" placeholder="e.g. Amlodipine 5mg"></div><div><label class="demo-label">Sig (Instructions)</label><input id="newMedSig" class="assign-input" style="padding:8px 10px" placeholder="e.g. Take 1 tablet PO daily"></div><div><label class="demo-label">Status</label><select id="newMedStatus" class="week-select" style="width:100%;padding:8px"><option>Active</option><option>PRN</option></select></div><button class="btn-submit" style="padding:8px 16px" onclick="addMedication()">Add</button></div></div>';
+    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.pill+' Add Medication</div><div style="display:grid;grid-template-columns:1.5fr 2fr 1fr auto;gap:8px;align-items:end"><div><label class="demo-label">Medication + Dose</label><input id="newMedName" class="assign-input" style="padding:8px 10px" placeholder="e.g. Amlodipine 5mg"></div><div><label class="demo-label">Sig (Instructions)</label><input id="newMedSig" class="assign-input" style="padding:8px 10px" placeholder="e.g. Take 1 tablet PO daily"></div><div><label class="demo-label">Status</label><select id="newMedStatus" class="week-select" style="width:100%;padding:8px"><option>Active</option><option>PRN</option></select></div><button type="button" class="btn-submit" style="padding:8px 16px" onclick="addMedication()">Add</button></div></div>';
   }
 
   return reconHTML+sectionCard("Medications"+(isStudent?" — Interactive":""),I.pill,tableHTML(headers,rows)+addForm);
@@ -2147,7 +2176,7 @@ function renderAllergiesInteractive(){
 
   const rows=allergies.map((a,i)=>{
     let actions="";
-    if(isStudent)actions='<td><button class="btn-remove" onclick="deleteAllergy('+i+')">Remove</button></td>';
+    if(isStudent)actions='<td><button type="button" class="btn-remove" onclick="deleteAllergy('+i+')">Remove</button></td>';
     return'<tr><td class="td-bold">'+esc(a.allergen)+'</td><td>'+badge(a.type)+'</td><td class="td-muted">'+esc(a.reaction)+'</td><td>'+badge(a.severity,a.severity==="Severe"?"badge-danger":"badge-accent")+'</td><td class="td-muted">'+esc(a.verified)+'</td>'+actions+'</tr>';
   });
 
@@ -2156,7 +2185,7 @@ function renderAllergiesInteractive(){
 
   let addForm="";
   if(isStudent){
-    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.alert+' Add Allergy</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:8px;align-items:end"><div><label class="demo-label">Allergen</label><input id="newAllergen" class="assign-input" style="padding:8px 10px" placeholder="e.g. Codeine"></div><div><label class="demo-label">Type</label><select id="newAllergyType" class="week-select" style="width:100%;padding:8px"><option>Drug</option><option>Food</option><option>Environmental</option><option>Contact</option></select></div><div><label class="demo-label">Reaction</label><input id="newAllergyRx" class="assign-input" style="padding:8px 10px" placeholder="e.g. Nausea, rash"></div><div><label class="demo-label">Severity</label><select id="newAllergySev" class="week-select" style="width:100%;padding:8px"><option>Mild</option><option>Moderate</option><option>Severe</option></select></div><button class="btn-submit" style="padding:8px 16px" onclick="addAllergy()">Add</button></div></div>';
+    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.alert+' Add Allergy</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:8px;align-items:end"><div><label class="demo-label">Allergen</label><input id="newAllergen" class="assign-input" style="padding:8px 10px" placeholder="e.g. Codeine"></div><div><label class="demo-label">Type</label><select id="newAllergyType" class="week-select" style="width:100%;padding:8px"><option>Drug</option><option>Food</option><option>Environmental</option><option>Contact</option></select></div><div><label class="demo-label">Reaction</label><input id="newAllergyRx" class="assign-input" style="padding:8px 10px" placeholder="e.g. Nausea, rash"></div><div><label class="demo-label">Severity</label><select id="newAllergySev" class="week-select" style="width:100%;padding:8px"><option>Mild</option><option>Moderate</option><option>Severe</option></select></div><button type="button" class="btn-submit" style="padding:8px 16px" onclick="addAllergy()">Add</button></div></div>';
   }
 
   return sectionCard("Allergies"+(isStudent?" — Interactive":""),I.alert,'<div class="allergy-alert-bar">'+I.alert+'<span>'+allergies.length+' documented allergies</span></div>'+tableHTML(headers,rows)+addForm);
@@ -2187,7 +2216,7 @@ function renderProblemsInteractive(){
 
   const rows=problems.map((p,i)=>{
     let actions="";
-    if(isStudent)actions='<td><button class="btn-remove" style="margin-right:4px" onclick="resolveProblem('+i+')">Resolve</button><button class="btn-remove" onclick="deleteProblem('+i+')">✕</button></td>';
+    if(isStudent)actions='<td><button type="button" class="btn-remove" style="margin-right:4px" onclick="resolveProblem('+i+')">Resolve</button><button type="button" class="btn-remove" onclick="deleteProblem('+i+')">✕</button></td>';
     return'<tr style="'+(p.status==="Resolved"?"opacity:0.5":"")+'"><td class="td-bold">'+esc(p.problem)+'</td><td>'+badge(p.icd)+'</td><td class="td-muted">'+esc(p.onset)+'</td><td>'+badge(p.status,p.status==="Resolved"?"badge-warning":"badge-accent")+'</td><td class="td-muted">'+esc(p.notes)+'</td>'+actions+'</tr>';
   });
 
@@ -2196,7 +2225,7 @@ function renderProblemsInteractive(){
 
   let addForm="";
   if(isStudent){
-    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.clipboard+' Add Problem</div><div style="display:grid;grid-template-columns:2fr 1fr 1fr 2fr auto;gap:8px;align-items:end"><div><label class="demo-label">Problem</label><input id="newProblem" class="assign-input" style="padding:8px 10px" placeholder="e.g. Iron deficiency anemia"></div><div><label class="demo-label">ICD-10</label><input id="newProbIcd" class="assign-input" style="padding:8px 10px" placeholder="e.g. D50.9"></div><div><label class="demo-label">Onset</label><input id="newProbOnset" class="assign-input" style="padding:8px 10px" placeholder="e.g. 2025"></div><div><label class="demo-label">Notes</label><input id="newProbNotes" class="assign-input" style="padding:8px 10px" placeholder="Clinical notes"></div><button class="btn-submit" style="padding:8px 16px" onclick="addProblem()">Add</button></div></div>';
+    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.clipboard+' Add Problem</div><div style="display:grid;grid-template-columns:2fr 1fr 1fr 2fr auto;gap:8px;align-items:end"><div><label class="demo-label">Problem</label><input id="newProblem" class="assign-input" style="padding:8px 10px" placeholder="e.g. Iron deficiency anemia"></div><div><label class="demo-label">ICD-10</label><input id="newProbIcd" class="assign-input" style="padding:8px 10px" placeholder="e.g. D50.9"></div><div><label class="demo-label">Onset</label><input id="newProbOnset" class="assign-input" style="padding:8px 10px" placeholder="e.g. 2025"></div><div><label class="demo-label">Notes</label><input id="newProbNotes" class="assign-input" style="padding:8px 10px" placeholder="Clinical notes"></div><button type="button" class="btn-submit" style="padding:8px 16px" onclick="addProblem()">Add</button></div></div>';
   }
 
   return sectionCard("Problem List"+(isStudent?" — Interactive":""),I.clipboard,tableHTML(headers,rows)+addForm);
@@ -2232,11 +2261,11 @@ function renderOrders(){
   let completedImgs=S.imgOrders.filter(o=>o.resulted);
 
   // Order buttons
-  let html='<div style="display:flex;gap:12px;margin-bottom:16px"><button class="btn-submit" onclick="showLabOrderDialog()">'+I.flask+' Order Labs</button><button class="btn-submit" style="background:var(--accent)" onclick="showImgOrderDialog()">'+I.image+' Order Imaging</button><button class="btn-submit" style="background:#6A1B9A" onclick="showReferralDialog()">'+I.people+' Referral</button></div>';
+  let html='<div style="display:flex;gap:12px;margin-bottom:16px"><button type="button" class="btn-submit" onclick="showLabOrderDialog()">'+I.flask+' Order Labs</button><button type="button" class="btn-submit" style="background:var(--accent)" onclick="showImgOrderDialog()">'+I.image+' Order Imaging</button><button type="button" class="btn-submit" style="background:#6A1B9A" onclick="showReferralDialog()">'+I.people+' Referral</button></div>';
 
   // Pending orders
   if(pendingLabs.length||pendingImgs.length){
-    let pRows=[...pendingLabs.map((o,i)=>'<tr><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+badge("Pending","badge-warning")+'</td><td><button class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultLabOrder('+i+')">View Results</button> <button class="btn-remove" onclick="cancelLabOrder('+i+')">Cancel</button></td></tr>'),...pendingImgs.map((o,i)=>'<tr><td>'+badge("Imaging","badge-purple")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+badge("Pending","badge-warning")+'</td><td><button class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultImgOrder('+i+')">View Results</button> <button class="btn-remove" onclick="cancelImgOrder('+i+')">Cancel</button></td></tr>')];
+    let pRows=[...pendingLabs.map((o,i)=>'<tr><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+badge("Pending","badge-warning")+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultLabOrder('+i+')">View Results</button> <button type="button" class="btn-remove" onclick="cancelLabOrder('+i+')">Cancel</button></td></tr>'),...pendingImgs.map((o,i)=>'<tr><td>'+badge("Imaging","badge-purple")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+badge("Pending","badge-warning")+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultImgOrder('+i+')">View Results</button> <button type="button" class="btn-remove" onclick="cancelImgOrder('+i+')">Cancel</button></td></tr>')];
     html+=sectionCard("Pending Orders ("+pRows.length+")",I.calendar,tableHTML(["Type","Study","Ordered","Status",""],pRows));
   }
 
@@ -2266,7 +2295,7 @@ function renderOrders(){
 
   // Referrals
   if(S.referralOrders.length){
-    const rRows=S.referralOrders.map((r,i)=>'<tr><td class="td-bold">'+esc(r.specialty)+'</td><td class="td-muted">'+esc(r.reason)+'</td><td class="td-muted">'+esc(r.urgency)+'</td><td class="td-muted">'+esc(r.orderedAt)+'</td><td><button class="btn-remove" onclick="deleteReferral('+i+')">Cancel</button></td></tr>');
+    const rRows=S.referralOrders.map((r,i)=>'<tr><td class="td-bold">'+esc(r.specialty)+'</td><td class="td-muted">'+esc(r.reason)+'</td><td class="td-muted">'+esc(r.urgency)+'</td><td class="td-muted">'+esc(r.orderedAt)+'</td><td><button type="button" class="btn-remove" onclick="deleteReferral('+i+')">Cancel</button></td></tr>');
     html+=sectionCard("Referral Orders",I.people,tableHTML(["Specialty","Reason","Urgency","Ordered",""],rRows));
   }
 
@@ -2297,10 +2326,10 @@ function showLabOrderDialog(){
     listHTML+='<div style="font-size:11px;font-weight:700;color:var(--primary-dark);text-transform:uppercase;padding:6px 0;margin-top:8px;border-bottom:1px solid var(--border-light)">'+esc(cat)+'</div>';
     labs.forEach(l=>{
       const already=S.labOrders.some(o=>o.id===l.id);
-      listHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-light)"><div><span style="font-size:12px;font-weight:500">'+esc(l.name)+'</span><span style="font-size:10px;color:var(--text-muted);margin-left:8px">TAT: '+esc(l.tat)+'</span></div>'+(already?'<span style="font-size:10px;color:var(--accent)">✓ Ordered</span>':'<button class="btn-submit" style="padding:3px 10px;font-size:10px" onclick="orderLab(\''+l.id+'\')">Order</button>')+'</div>';
+      listHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-light)"><div><span style="font-size:12px;font-weight:500">'+esc(l.name)+'</span><span style="font-size:10px;color:var(--text-muted);margin-left:8px">TAT: '+esc(l.tat)+'</span></div>'+(already?'<span style="font-size:10px;color:var(--accent)">✓ Ordered</span>':'<button type="button" class="btn-submit" style="padding:3px 10px;font-size:10px" onclick="orderLab(\''+l.id+'\')">Order</button>')+'</div>';
     });
   });
-  pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">'+I.flask+' Order Laboratory Tests</span><button class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="max-height:400px;overflow-y:auto">'+listHTML+'</div>';
+  pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">'+I.flask+' Order Laboratory Tests</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="max-height:400px;overflow-y:auto">'+listHTML+'</div>';
   pop.style.top="100px";pop.style.left=Math.max(10,(window.innerWidth-340)/2)+"px";pop.style.width="360px";pop.classList.add("visible");
 }
 
@@ -2313,17 +2342,17 @@ function showImgOrderDialog(){
     listHTML+='<div style="font-size:11px;font-weight:700;color:var(--primary-dark);text-transform:uppercase;padding:6px 0;margin-top:8px;border-bottom:1px solid var(--border-light)">'+esc(cat)+'</div>';
     imgs.forEach(im=>{
       const already=S.imgOrders.some(o=>o.id===im.id);
-      listHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-light)"><div><span style="font-size:12px;font-weight:500">'+esc(im.name)+'</span><span style="font-size:10px;color:var(--text-muted);margin-left:8px">'+esc(im.tat)+'</span></div>'+(already?'<span style="font-size:10px;color:var(--accent)">✓ Ordered</span>':'<button class="btn-submit" style="padding:3px 10px;font-size:10px;background:var(--accent)" onclick="orderImg(\''+im.id+'\')">Order</button>')+'</div>';
+      listHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-light)"><div><span style="font-size:12px;font-weight:500">'+esc(im.name)+'</span><span style="font-size:10px;color:var(--text-muted);margin-left:8px">'+esc(im.tat)+'</span></div>'+(already?'<span style="font-size:10px;color:var(--accent)">✓ Ordered</span>':'<button type="button" class="btn-submit" style="padding:3px 10px;font-size:10px;background:var(--accent)" onclick="orderImg(\''+im.id+'\')">Order</button>')+'</div>';
     });
   });
-  pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">'+I.image+' Order Imaging</span><button class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="max-height:400px;overflow-y:auto">'+listHTML+'</div>';
+  pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">'+I.image+' Order Imaging</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="max-height:400px;overflow-y:auto">'+listHTML+'</div>';
   pop.style.top="100px";pop.style.left=Math.max(10,(window.innerWidth-340)/2)+"px";pop.style.width="360px";pop.classList.add("visible");
 }
 
 function showReferralDialog(){
   const pop=document.getElementById("annotationPopover");
-  let listHTML='<div style="margin-bottom:10px"><label class="demo-label">Specialty</label><select id="refSpecialty" class="week-select" style="width:100%;padding:8px">'+REFERRAL_TYPES.map(r=>'<option>'+r+'</option>').join("")+'</select></div><div style="margin-bottom:10px"><label class="demo-label">Reason for Referral</label><textarea id="refReason" class="annotation-comment-input" style="min-height:50px" placeholder="Clinical indication for referral..."></textarea></div><div style="margin-bottom:10px"><label class="demo-label">Urgency</label><select id="refUrgency" class="week-select" style="width:100%;padding:8px"><option>Routine</option><option>Urgent</option><option>STAT</option></select></div><button class="btn-submit" style="width:100%" onclick="placeReferral()">Place Referral</button>';
-  pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">'+I.people+' Referral Order</span><button class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div>'+listHTML;
+  let listHTML='<div style="margin-bottom:10px"><label class="demo-label">Specialty</label><select id="refSpecialty" class="week-select" style="width:100%;padding:8px">'+REFERRAL_TYPES.map(r=>'<option>'+r+'</option>').join("")+'</select></div><div style="margin-bottom:10px"><label class="demo-label">Reason for Referral</label><textarea id="refReason" class="annotation-comment-input" style="min-height:50px" placeholder="Clinical indication for referral..."></textarea></div><div style="margin-bottom:10px"><label class="demo-label">Urgency</label><select id="refUrgency" class="week-select" style="width:100%;padding:8px"><option>Routine</option><option>Urgent</option><option>STAT</option></select></div><button type="button" class="btn-submit" style="width:100%" onclick="placeReferral()">Place Referral</button>';
+  pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">'+I.people+' Referral Order</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div>'+listHTML;
   pop.style.top="100px";pop.style.left=Math.max(10,(window.innerWidth-340)/2)+"px";pop.style.width="340px";pop.classList.add("visible");
 }
 
@@ -2459,13 +2488,13 @@ function showOrderValidationDialog(vResult,onProceed,onCancel){
 
   pop.innerHTML='<div class="annotation-popover-header" style="background:#fef2f2"><span class="annotation-popover-title" style="color:#991b1b">'+
     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> '+
-    'Order Safety Alert</span><button class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div>'+
+    'Order Safety Alert</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div>'+
     '<div style="padding:12px;max-height:350px;overflow-y:auto">'+
     '<div style="font-size:12px;font-weight:600;color:#475569;margin-bottom:8px">'+esc(vResult.order.name)+'</div>'+
     alertHTML+
     '<div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end">'+
-    '<button class="btn-remove" style="padding:6px 16px;font-size:12px" onclick="hideAnnotationPopover();window._ovCancel&&window._ovCancel()">Cancel Order</button>'+
-    '<button class="btn-submit" style="padding:6px 16px;font-size:12px;background:#ef4444" onclick="hideAnnotationPopover();window._ovProceed&&window._ovProceed()">Override & Place</button>'+
+    '<button type="button" class="btn-remove" style="padding:6px 16px;font-size:12px" onclick="hideAnnotationPopover();window._ovCancel&&window._ovCancel()">Cancel Order</button>'+
+    '<button type="button" class="btn-submit" style="padding:6px 16px;font-size:12px;background:#ef4444" onclick="hideAnnotationPopover();window._ovProceed&&window._ovProceed()">Override & Place</button>'+
     '</div></div>';
   pop.style.top="80px";pop.style.left=Math.max(10,(window.innerWidth-380)/2)+"px";pop.style.width="380px";pop.classList.add("visible");
   window._ovProceed=function(){if(onProceed)onProceed();window._ovProceed=null;window._ovCancel=null};
@@ -2481,7 +2510,7 @@ function renderImmunizationsInteractive(){
 
   const rows=imms.map((im,i)=>{
     let actions="";
-    if(isStudent)actions='<td><button class="btn-remove" onclick="deleteImmunization('+i+')">Remove</button></td>';
+    if(isStudent)actions='<td><button type="button" class="btn-remove" onclick="deleteImmunization('+i+')">Remove</button></td>';
     return'<tr><td style="font-weight:500">'+esc(im.vaccine)+'</td><td class="td-muted">'+esc(im.date)+'</td><td class="td-muted">'+esc(im.site)+'</td><td class="td-mono td-muted" style="font-size:12px">'+esc(im.lot)+'</td>'+actions+'</tr>';
   });
 
@@ -2490,7 +2519,7 @@ function renderImmunizationsInteractive(){
 
   let addForm="";
   if(isStudent){
-    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.syringe+' Record Immunization</div><div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:8px;align-items:end"><div><label class="demo-label">Vaccine</label><select id="newVaccine" class="week-select" style="width:100%;padding:8px">'+VACCINE_CATALOG.map(v=>'<option>'+v+'</option>').join("")+'</select></div><div><label class="demo-label">Date</label><input id="newVaccDate" type="date" class="assign-input" style="padding:8px 10px" value="'+new Date().toISOString().split("T")[0]+'"></div><div><label class="demo-label">Site</label><select id="newVaccSite" class="week-select" style="width:100%;padding:8px"><option>Left deltoid IM</option><option>Right deltoid IM</option><option>Left thigh IM</option><option>Right thigh IM</option><option>Oral</option><option>Intranasal</option><option>Subcutaneous</option></select></div><div><label class="demo-label">Lot #</label><input id="newVaccLot" class="assign-input" style="padding:8px 10px" placeholder="Lot number"></div><button class="btn-submit" style="padding:8px 16px" onclick="addImmunization()">Record</button></div></div>';
+    addForm='<div style="margin-top:16px;padding:16px;background:var(--surface-alt);border-radius:var(--radius);border:1px dashed var(--border)"><div style="font-size:12px;font-weight:600;margin-bottom:10px">'+I.syringe+' Record Immunization</div><div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:8px;align-items:end"><div><label class="demo-label">Vaccine</label><select id="newVaccine" class="week-select" style="width:100%;padding:8px">'+VACCINE_CATALOG.map(v=>'<option>'+v+'</option>').join("")+'</select></div><div><label class="demo-label">Date</label><input id="newVaccDate" type="date" class="assign-input" style="padding:8px 10px" value="'+new Date().toISOString().split("T")[0]+'"></div><div><label class="demo-label">Site</label><select id="newVaccSite" class="week-select" style="width:100%;padding:8px"><option>Left deltoid IM</option><option>Right deltoid IM</option><option>Left thigh IM</option><option>Right thigh IM</option><option>Oral</option><option>Intranasal</option><option>Subcutaneous</option></select></div><div><label class="demo-label">Lot #</label><input id="newVaccLot" class="assign-input" style="padding:8px 10px" placeholder="Lot number"></div><button type="button" class="btn-submit" style="padding:8px 16px" onclick="addImmunization()">Record</button></div></div>';
   }
 
   return sectionCard("Immunizations"+(isStudent?" — Interactive":""),I.syringe,tableHTML(headers,rows)+addForm);
@@ -2527,7 +2556,7 @@ function renderVitalsInteractive(){
     const vals=cv||{};
     entryForm=sectionCard("Record Today's Encounter Vitals",I.activity,
       (cv?'<div style="padding:8px 14px;background:var(--accent-light);border-radius:var(--radius);margin-bottom:12px;font-size:12px;font-weight:600;color:var(--accent)">✓ Vitals recorded for this encounter</div>':'')+
-      '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px"><div><label class="demo-label">Blood Pressure</label><input id="vBP" class="assign-input" style="padding:8px" placeholder="e.g. 138/86" value="'+esc(vals.bp||"")+'"></div><div><label class="demo-label">Heart Rate</label><input id="vHR" class="assign-input" style="padding:8px" placeholder="e.g. 78" value="'+esc(vals.hr||"")+'"></div><div><label class="demo-label">Resp Rate</label><input id="vRR" class="assign-input" style="padding:8px" placeholder="e.g. 16" value="'+esc(vals.rr||"")+'"></div><div><label class="demo-label">Temperature</label><input id="vTemp" class="assign-input" style="padding:8px" placeholder="e.g. 98.6°F" value="'+esc(vals.temp||"")+'"></div><div><label class="demo-label">SpO₂</label><input id="vSpo2" class="assign-input" style="padding:8px" placeholder="e.g. 98%" value="'+esc(vals.spo2||"")+'"></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px"><div><label class="demo-label">Weight</label><input id="vWt" class="assign-input" style="padding:8px" placeholder="e.g. 187 lbs" value="'+esc(vals.wt||"")+'"></div><div><label class="demo-label">Height</label><input id="vHt" class="assign-input" style="padding:8px" placeholder="e.g. 5\'4&quot;" value="'+esc(vals.ht||"")+'"></div><div><label class="demo-label">BMI</label><input id="vBMI" class="assign-input" style="padding:8px" placeholder="Auto or manual" value="'+esc(vals.bmi||"")+'"></div></div><div style="margin-top:12px;display:flex;justify-content:flex-end"><button class="btn-submit" onclick="saveEncounterVitals()">'+I.check+' Save Vitals</button></div>');
+      '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px"><div><label class="demo-label">Blood Pressure</label><input id="vBP" class="assign-input" style="padding:8px" placeholder="e.g. 138/86" value="'+esc(vals.bp||"")+'"></div><div><label class="demo-label">Heart Rate</label><input id="vHR" class="assign-input" style="padding:8px" placeholder="e.g. 78" value="'+esc(vals.hr||"")+'"></div><div><label class="demo-label">Resp Rate</label><input id="vRR" class="assign-input" style="padding:8px" placeholder="e.g. 16" value="'+esc(vals.rr||"")+'"></div><div><label class="demo-label">Temperature</label><input id="vTemp" class="assign-input" style="padding:8px" placeholder="e.g. 98.6°F" value="'+esc(vals.temp||"")+'"></div><div><label class="demo-label">SpO₂</label><input id="vSpo2" class="assign-input" style="padding:8px" placeholder="e.g. 98%" value="'+esc(vals.spo2||"")+'"></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px"><div><label class="demo-label">Weight</label><input id="vWt" class="assign-input" style="padding:8px" placeholder="e.g. 187 lbs" value="'+esc(vals.wt||"")+'"></div><div><label class="demo-label">Height</label><input id="vHt" class="assign-input" style="padding:8px" placeholder="e.g. 5\'4&quot;" value="'+esc(vals.ht||"")+'"></div><div><label class="demo-label">BMI</label><input id="vBMI" class="assign-input" style="padding:8px" placeholder="Auto or manual" value="'+esc(vals.bmi||"")+'"></div></div><div style="margin-top:12px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" onclick="saveEncounterVitals()">'+I.check+' Save Vitals</button></div>');
   }
 
   return entryForm+vitalsTable;
@@ -3317,11 +3346,11 @@ function renderOralPresentation() {
     html += sectionCard("Oral Presentation Trainer", I.activity,
       '<div class="empty-state"><p style="color:var(--warning)">⚠ Speech recognition requires <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong>.</p><p>You can also type/paste your presentation below for analysis.</p></div>' +
       '<textarea id="manualTranscript" class="overall-textarea" style="min-height:200px" placeholder="Type or paste your oral presentation transcript here...">' + esc(oralTranscript || (saved ? saved.transcript : "")) + '</textarea>' +
-      '<div style="margin-top:12px;display:flex;gap:12px;justify-content:flex-end"><button class="btn-submit" onclick="oralTranscript=document.getElementById(\'manualTranscript\').value;saveOralPresentation()">Save Transcript</button></div>'
+      '<div style="margin-top:12px;display:flex;gap:12px;justify-content:flex-end"><button type="button" class="btn-submit" onclick="oralTranscript=document.getElementById(\'manualTranscriptAlt\').value;saveOralPresentation()">Save Transcript</button></div>'
     );
   } else if (isRecording) {
     html += sectionCard("🔴 Recording Oral Presentation", I.activity,
-      '<div style="text-align:center;padding:20px"><div class="recording-pulse"></div><div style="font-size:24px;font-weight:700;color:var(--danger);margin:16px 0" id="recordingTimer">' + formatDuration(recordingDuration) + '</div><div style="font-size:12px;color:var(--text-secondary);margin-bottom:16px">Speak clearly — present the case as you would to an attending</div><button class="btn-submit" style="background:var(--danger);padding:12px 32px;font-size:14px" onclick="stopRecording()">⏹ Stop Recording</button></div>' +
+      '<div style="text-align:center;padding:20px"><div class="recording-pulse"></div><div style="font-size:24px;font-weight:700;color:var(--danger);margin:16px 0" id="recordingTimer">' + formatDuration(recordingDuration) + '</div><div style="font-size:12px;color:var(--text-secondary);margin-bottom:16px">Speak clearly — present the case as you would to an attending</div><button type="button" class="btn-submit" style="background:var(--danger);padding:12px 32px;font-size:14px" onclick="stopRecording()">⏹ Stop Recording</button></div>' +
       '<div style="margin-top:16px"><div style="font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;margin-bottom:6px">Live Transcription <span id="oralWordCount" style="font-weight:400"></span></div><div id="liveTranscript" class="annotated-text" style="min-height:150px;max-height:300px;font-family:\'IBM Plex Sans\',sans-serif;font-size:13px;line-height:1.8">' + esc(oralTranscript) + '</div></div>'
     );
   } else {
@@ -3329,10 +3358,10 @@ function renderOralPresentation() {
     html += sectionCard("Oral Presentation Trainer — " + S.encounterWeek, I.activity,
       '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:16px">Present the case of <strong>' + esc(PATIENT.name) + '</strong> as you would to an attending physician. The system will transcribe, analyze, and provide structured feedback on your presentation.</div>' +
       (hasSaved ? '<div style="padding:10px 14px;background:var(--accent-light);border-radius:var(--radius);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:600;color:var(--accent)">✓ Presentation saved — ' + saved.wordCount + ' words, ' + formatDuration(saved.duration) + '</span><span style="font-size:11px;color:var(--text-muted)">' + new Date(saved.timestamp).toLocaleString() + '</span></div>' : '') +
-      '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn-submit" style="padding:12px 24px;font-size:14px" onclick="startRecording()">🎙 ' + (hasSaved ? 'Re-record' : 'Start Recording') + '</button>' +
-      (hasSaved ? '<button class="btn-submit" style="background:var(--accent);padding:12px 24px" onclick="runOralAnalysis()">' + I.star + ' Analyze Presentation</button>' : '') + '</div>' +
+      '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button type="button" class="btn-submit" style="padding:12px 24px;font-size:14px" onclick="startRecording()">🎙 ' + (hasSaved ? 'Re-record' : 'Start Recording') + '</button>' +
+      (hasSaved ? '<button type="button" class="btn-submit" style="background:var(--accent);padding:12px 24px" onclick="runOralAnalysis()">' + I.star + ' Analyze Presentation</button>' : '') + '</div>' +
       (hasSaved ? '<div style="margin-top:16px"><div style="font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;margin-bottom:6px">Saved Transcript</div><div class="annotated-text" style="font-family:\'IBM Plex Sans\',sans-serif;font-size:13px;line-height:1.8">' + esc(saved.transcript) + '</div></div>' : '') +
-      '<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light)"><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">Or type/paste your presentation:</div><textarea id="manualTranscript" class="overall-textarea" style="min-height:120px" placeholder="Type or paste your oral presentation transcript here...">' + esc(saved ? saved.transcript : "") + '</textarea><div style="margin-top:8px;display:flex;justify-content:flex-end"><button class="btn-submit" style="padding:8px 16px;font-size:12px;background:var(--text-secondary)" onclick="oralTranscript=document.getElementById(\'manualTranscript\').value;saveOralPresentation()">Save Typed Transcript</button></div></div>'
+      '<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light)"><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">Or type/paste your presentation:</div><textarea id="manualTranscript" class="overall-textarea" style="min-height:120px" placeholder="Type or paste your oral presentation transcript here...">' + esc(saved ? saved.transcript : "") + '</textarea><div style="margin-top:8px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" style="padding:8px 16px;font-size:12px;background:var(--text-secondary)" onclick="oralTranscript=document.getElementById(\'manualTranscriptAlt\').value;saveOralPresentation()">Save Typed Transcript</button></div></div>'
     );
   }
   
@@ -3362,7 +3391,7 @@ function renderAutoFeedback() {
   } else {
     html += sectionCard("Documentation Assessment — " + S.encounterWeek, I.star,
       '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:16px">Get detailed automated feedback on your clinical documentation before faculty review.</div>' +
-      '<button class="btn-submit" style="padding:12px 24px" onclick="runDocAnalysis()">' + I.star + ' ' + (analysis ? 'Re-analyze' : 'Analyze My Documentation') + '</button>'
+      '<button type="button" class="btn-submit" style="padding:12px 24px" onclick="runDocAnalysis()">' + I.star + ' ' + (analysis ? 'Re-analyze' : 'Analyze My Documentation') + '</button>'
     );
   }
   
@@ -3470,7 +3499,7 @@ function renderFacultyValidation() {
       })
     ) + '</div>';
     html += '<div style="margin-top:12px"><textarea class="overall-textarea" id="docValOverall" placeholder="Overall faculty comments on documentation..." style="min-height:80px">' + esc(existing.overallComment || "") + '</textarea></div>';
-    html += '<div style="margin-top:12px;display:flex;justify-content:flex-end"><button class="btn-submit" onclick="saveValidation(\'doc\')">✓ Validate Documentation Scores</button></div></div>';
+    html += '<div style="margin-top:12px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" onclick="saveValidation(\'doc\')">✓ Validate Documentation Scores</button></div></div>';
   }
   
   // Oral validation
@@ -3493,7 +3522,7 @@ function renderFacultyValidation() {
       })
     ) + '</div>';
     html += '<div style="margin-top:12px"><textarea class="overall-textarea" id="oralValOverall" placeholder="Overall faculty comments on oral presentation..." style="min-height:80px">' + esc(existing.overallComment || "") + '</textarea></div>';
-    html += '<div style="margin-top:12px;display:flex;justify-content:flex-end"><button class="btn-submit" style="background:var(--accent)" onclick="saveValidation(\'oral\')">✓ Validate Oral Presentation Scores</button></div></div>';
+    html += '<div style="margin-top:12px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" style="background:var(--accent)" onclick="saveValidation(\'oral\')">✓ Validate Oral Presentation Scores</button></div></div>';
   }
   
   html += '</div>';
@@ -3658,18 +3687,18 @@ render = function(){
   }
 
   var PRIMARY_TAB_IDS=['demographics','labs','medications','vitals','imaging'];
-  var sb=tabs.map(function(t){var pri=PRIMARY_TAB_IDS.indexOf(t.id)>=0?'primary':'secondary';return'<button class="sidebar-btn '+(S.activeTab===t.id?'active':'')+'" data-priority="'+pri+'" onclick="switchTab(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('');
+  var sb=tabs.map(function(t){var pri=PRIMARY_TAB_IDS.indexOf(t.id)>=0?'primary':'secondary';return'<button type="button" class="sidebar-btn '+(S.activeTab===t.id?'active':'')+'" data-priority="'+pri+'" onclick="switchTab(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('');
   var secTabs=tabs.filter(function(t){return PRIMARY_TAB_IDS.indexOf(t.id)<0});
   var isSecActive=secTabs.some(function(t){return t.id===S.activeTab});
-  var moreBtn='<button class="sidebar-more-btn'+(isSecActive?' active':'')+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
-  var overflowHtml='<div class="sidebar-overflow" id="sidebarOverflow"><div class="sidebar-overflow-backdrop" onclick="closeMoreTabs()"></div><div class="sidebar-overflow-sheet"><div class="sheet-handle"></div>'+secTabs.map(function(t){return'<button class="sheet-btn '+(S.activeTab===t.id?'active':'')+'" onclick="switchTabFromMore(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('')+'</div></div>';
+  var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
+  var overflowHtml='<div class="sidebar-overflow" id="sidebarOverflow"><div class="sidebar-overflow-backdrop" onclick="closeMoreTabs()"></div><div class="sidebar-overflow-sheet"><div class="sheet-handle"></div>'+secTabs.map(function(t){return'<button type="button" class="sheet-btn '+(S.activeTab===t.id?'active':'')+'" onclick="switchTabFromMore(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('')+'</div></div>';
   const ct=(fn[S.activeTab]||renderDemographics)();
   const em=role==="admin"?"🔑":role==="faculty"?"👨‍⚕️":"🎓";
   const roleBadge=role==="admin"?"badge-danger":role==="faculty"?"badge-purple":"badge-primary";
 
   var casesUrl='virtual-emr.html';if(S.clinicalSetting){casesUrl+='?setting='+S.clinicalSetting;if(S.specialty)casesUrl+='&specialty='+S.specialty}
   var settingBadge=getSettingLabel()?'<span class="setting-context-badge">'+getSettingLabel()+'</span>':'';
-  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px">\u2190 Cases</a><a href="index.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div><div class="content-layout"><div class="sidebar">'+sb+moreBtn+'</div><div class="main-content">'+ct+'</div></div>'+overflowHtml+'</div>';
+  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px">\u2190 Cases</a><a href="index.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div><div class="content-layout"><div class="sidebar">'+sb+moreBtn+'</div><div class="main-content">'+ct+'</div></div>'+overflowHtml+'</div>';
 };
 
 // Mobile "More" tab overflow menu
@@ -3753,5 +3782,10 @@ submitDoc = function(){
 
 </script>
 <script src="rdx-demo-tour.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-nav.js"></script>
+<script src="js/rdx-help-widget.js"></script>
 </body>
 </html>

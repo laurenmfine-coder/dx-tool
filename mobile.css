@@ -1,424 +1,63 @@
-/* ============================================================
-   ReasonDx Mobile Stylesheet
-   Loaded across all pages via injection script.
-   Handles: hamburger nav, touch targets, typography, layouts.
-   ============================================================ */
+/* mobile.css — ReasonDx Global Mobile Responsive Styles */
 
-/* ---------- HAMBURGER TOGGLE ---------- */
-.mobile-menu-btn {
-  display: none;
-  background: none;
-  border: 1px solid var(--slate-200, #e2e8f0);
-  border-radius: 8px;
-  padding: 8px 10px;
-  cursor: pointer;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--slate-600, #475569);
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* ---------- INSTALL PROMPT BANNER ---------- */
-.pwa-install-banner {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: linear-gradient(135deg, #1f5f8b, #2874a6);
-  color: white;
-  padding: 14px 20px;
-  font-family: inherit;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-  animation: slideUp 0.3s ease;
-}
-.pwa-install-banner .pwa-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-.pwa-install-banner .pwa-text {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-.pwa-install-banner .pwa-text strong { display: block; font-size: 15px; margin-bottom: 2px; }
-.pwa-install-banner button {
-  white-space: nowrap;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-}
-.pwa-install-banner .pwa-install-btn { background: white; color: #1f5f8b; }
-.pwa-install-banner .pwa-dismiss-btn { background: rgba(255,255,255,0.2); color: white; }
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-/* ============================================================
-   MOBILE BREAKPOINT: ≤ 768px
-   ============================================================ */
+/* ─── Base responsive adjustments ─── */
 @media (max-width: 768px) {
-
-  /* ---------- HAMBURGER VISIBLE ---------- */
-  .mobile-menu-btn { display: block; }
-
-  /* ---------- NAV COLLAPSE ---------- */
-  .nav, nav.nav, .dx-nav, [class*="nav-bar"] {
-    flex-wrap: wrap;
-    padding: 0 16px;
-    height: auto;
-    min-height: 52px;
+  body {
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
   }
-  .nav-brand, .dx-nav-brand {
-    font-size: 18px !important;
-    padding: 14px 0;
+
+  h1 { font-size: 28px !important; }
+  h2 { font-size: 22px !important; }
+  h3 { font-size: 18px !important; }
+
+  .container,
+  .section,
+  .page-content {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
-  .nav-links, .nav-right, nav .nav-links,
-  .dx-nav-links, .dx-nav nav .dx-nav-links {
-    display: none !important;
+
+  /* Card grids → single column */
+  .feature-grid,
+  .card-grid,
+  .cards,
+  .how-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Stats strips */
+  .stats-strip {
     flex-direction: column;
-    width: 100%;
-    gap: 4px;
-    padding: 8px 0 12px;
-    border-top: 1px solid var(--slate-200, #e2e8f0);
-  }
-  .nav-links.open, .nav-right.open, nav .nav-links.open,
-  .dx-nav-links.open {
-    display: flex !important;
-  }
-  .nav-links a, .nav-links button, .nav-right a,
-  .dx-nav-links a, .dx-nav-links .nav-link, .dx-nav-links .dx-nav-link {
-    display: block;
-    width: 100%;
-    padding: 12px 16px !important;
-    font-size: 15px !important;
-    border-radius: 10px;
-    text-align: left;
-    min-height: 44px;
-    box-sizing: border-box;
+    gap: 20px !important;
+    padding: 32px 16px !important;
   }
 
-  /* Dropdown menus in mobile nav */
-  .dropdown, .nav-dropdown { position: static !important; width: 100%; }
-  .dropdown-toggle::after, .nav-dropdown > a::after { float: right; }
-  .dropdown-menu, .dropdown-content, .nav-dropdown-content,
-  [class*="dropdown-menu"], [class*="dropdown-content"] {
-    position: static !important;
-    box-shadow: none !important;
-    border: none !important;
-    background: var(--slate-50, #f8fafc) !important;
-    border-radius: 10px !important;
-    margin: 4px 0 !important;
-    padding: 4px !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    width: 100%;
-    max-height: none !important;
-  }
-  /* On mobile, show dropdown content directly (no hover) */
-  .nav-dropdown .nav-dropdown-content {
-    display: block !important;
-  }
-  .dropdown-menu a, .dropdown-content a, .dropdown-item,
-  .nav-dropdown-content a {
-    padding: 12px 16px !important;
-    min-height: 44px;
-    font-size: 14px !important;
-  }
-
-  /* ---------- HERO ---------- */
-  .hero {
-    padding: 32px 16px 24px !important;
-  }
-  .hero h1 {
-    font-size: 24px !important;
-    line-height: 1.3;
-  }
-  .hero p {
-    font-size: 15px !important;
-    line-height: 1.5;
-  }
-
-  /* ---------- SEARCH ---------- */
-  .search-wrap, .search-box, [class*="search-wrap"] {
-    max-width: 100% !important;
-  }
-  .search-input, input[type="search"], input.search-input {
-    font-size: 16px !important; /* prevents iOS zoom */
-    padding: 14px 14px 14px 42px !important;
-    min-height: 48px;
-  }
-  .search-results, .search-dropdown, [class*="search-results"] {
-    max-height: 60vh !important;
-    font-size: 14px;
-  }
-  .search-hint { font-size: 13px !important; }
-  .search-hint kbd {
-    padding: 4px 10px !important;
-    font-size: 13px !important;
-    min-height: 32px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  /* ---------- LEVEL PILLS ---------- */
-  .level-selector, [class*="level-selector"] {
-    padding: 16px !important;
-  }
-  .level-pills, [class*="pill-bar"], [class*="level-pills"] {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px !important;
-    justify-content: center;
-  }
-  .level-pill, [class*="level-pill"] {
-    padding: 10px 16px !important;
-    font-size: 14px !important;
-    min-height: 44px;
-    flex: 0 0 auto;
-  }
-
-  /* ---------- PATH CARDS / GRIDS ---------- */
-  .paths, .path-grid, [class*="paths"] {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    padding: 16px !important;
-  }
-  .path-card, [class*="path-card"] {
-    padding: 20px 16px !important;
-  }
-  .path-card .path-icon, [class*="path-card"] .path-icon {
-    font-size: 28px !important;
-  }
-  .path-card h3 {
-    font-size: 16px !important;
-  }
-  .path-card p {
-    font-size: 14px !important;
-    line-height: 1.5;
-  }
-
-  /* ---------- FEATURE GRIDS ---------- */
-  .features, [class*="feature-grid"] {
-    padding: 0 16px !important;
-  }
-  .feature-grid, .features .grid, [class*="feature-grid"] {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-  }
-
-  /* ---------- STAT BARS ---------- */
-  .stats-bar, .stat-bar, [class*="stat-bar"] {
-    flex-wrap: wrap;
-    gap: 8px !important;
-    padding: 12px !important;
-  }
-  .stat, .stat-item {
-    min-width: 70px;
-    padding: 8px 12px !important;
-  }
-
-  /* ---------- MODULE CARDS ---------- */
-  .module-grid, [class*="module-grid"] {
-    grid-template-columns: 1fr !important;
-  }
-  .module-card, [class*="module-card"] {
-    padding: 16px !important;
-  }
-
-  /* ---------- CHIPS (encounter, settings) ---------- */
-  .chip-group, [class*="chip-group"] {
-    flex-wrap: wrap;
-    gap: 8px !important;
-  }
-  .chip, [class*="chip"] {
-    padding: 10px 14px !important;
-    font-size: 14px !important;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  /* ---------- FORM ELEMENTS ---------- */
-  select, input[type="text"], input[type="date"], input[type="time"], textarea {
-    font-size: 16px !important; /* prevents iOS zoom */
-    padding: 12px !important;
-    min-height: 48px;
-    border-radius: 10px;
-  }
-  select {
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23475569' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px !important;
-  }
-  label {
-    font-size: 14px !important;
-    margin-bottom: 6px;
-  }
-
-  /* ---------- BUTTONS ---------- */
-  .btn, button[class*="btn"], [class*="btn-primary"], [class*="btn-secondary"] {
-    min-height: 48px !important;
-    padding: 12px 20px !important;
-    font-size: 15px !important;
-    border-radius: 12px;
-  }
-
-  /* ---------- TABLES ---------- */
-  .compare-table, table {
-    font-size: 13px;
-    display: block;
+  /* Tables → horizontal scroll */
+  .table-wrapper,
+  table {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .compare-table th, .compare-table td, table th, table td {
-    padding: 8px 10px !important;
-    white-space: nowrap;
-  }
 
-  /* ---------- MCQ / QUIZ CHOICES ---------- */
-  .choices, [class*="choices"] {
-    gap: 10px !important;
+  /* Buttons → full width on small screens */
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .choice, [class*="choice"] {
-    padding: 14px 16px !important;
-    font-size: 14px !important;
-    min-height: 48px;
-    border-radius: 12px !important;
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-ghost {
+    width: 100%;
+    justify-content: center;
   }
+}
 
-  /* ---------- OVERLAYS / MODALS ---------- */
-  .path-overlay.open, [class*="overlay"].open, [class*="modal"].open {
-    padding-top: 0 !important;
-    align-items: flex-end !important;
-  }
-  .path-overlay-content, [class*="overlay-content"], [class*="modal-content"] {
-    max-width: 100% !important;
-    width: 100% !important;
-    max-height: 90vh !important;
-    border-radius: 20px 20px 0 0 !important;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* ---------- TOPIC GRID ---------- */
-  .topic-grid, [class*="topic-grid"] {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-  }
-
-  /* ---------- PREMED SPECIFIC ---------- */
-  .audience-grid { grid-template-columns: 1fr !important; }
-  .paths-grid, .premed-paths { grid-template-columns: 1fr !important; }
-
-  /* ---------- RADDX SPECIFIC ---------- */
-  .body-map, [class*="body-map"] {
-    flex-direction: column !important;
-  }
-
-  /* ---------- MODULE CONTENT ---------- */
-  .main, [class*="main-content"] {
-    padding: 12px !important;
-  }
-  .card-body, [class*="card-body"] {
-    padding: 16px !important;
-  }
-  .card-header, [class*="card-header"] {
-    padding: 16px !important;
-  }
-  .card-title, [class*="card-title"] {
-    font-size: 1.2rem !important;
-  }
-  .pearl, .danger, [class*="pearl"], [class*="danger"] {
-    padding: 14px !important;
-    margin: 12px 0 !important;
-    font-size: 14px;
-  }
-
-  /* ---------- CROSS LINKS ---------- */
-  .cross-links, [class*="cross-links"] {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* ---------- HEADER (sticky module headers) ---------- */
-  .header, [class*="module-header"] {
-    padding: 10px 16px !important;
-  }
-  .header-row, [class*="header-row"] {
-    gap: 6px !important;
-  }
-  .header-title, [class*="header-title"] {
-    font-size: 0.95rem !important;
-  }
-  .stats .stat, [class*="stats"] .stat {
-    padding: 4px 10px !important;
-  }
-  .stat-value, [class*="stat-value"] {
-    font-size: 0.95rem !important;
-  }
-  .stat-label, [class*="stat-label"] {
-    font-size: 0.55rem !important;
-  }
-
-  /* ---------- BREADCRUMBS ---------- */
-  [style*="opacity:.55"], .breadcrumb, [class*="breadcrumb"] {
-    font-size: 13px !important;
-    padding: 8px 16px;
-  }
-
-  /* ---------- TYPOGRAPHY ---------- */
+@media (max-width: 480px) {
   h1 { font-size: 24px !important; }
-  h2 { font-size: 20px !important; }
-  h3 { font-size: 17px !important; }
 
-  /* ---------- GENERAL SPACING ---------- */
-  body { -webkit-text-size-adjust: 100%; }
-  * { -webkit-tap-highlight-color: transparent; }
-
-  /* Prevent horizontal overflow */
-  html, body { overflow-x: hidden; max-width: 100vw; }
-
-  /* Better scroll on iOS */
-  .scrollable, [style*="overflow"] {
-    -webkit-overflow-scrolling: touch;
+  .cred-bar {
+    flex-direction: column;
+    gap: 12px !important;
   }
-
-  /* ---------- SAFE AREA (notch devices) ---------- */
-  .nav, nav.nav, [class*="nav-bar"] {
-    padding-top: env(safe-area-inset-top, 0);
-  }
-  .pwa-install-banner {
-    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0));
-  }
-
-} /* end 768px breakpoint */
-
-/* ============================================================
-   SMALL PHONE: ≤ 380px
-   ============================================================ */
-@media (max-width: 380px) {
-  .level-pills, [class*="level-pills"] {
-    gap: 6px !important;
-  }
-  .level-pill, [class*="level-pill"] {
-    padding: 8px 10px !important;
-    font-size: 12px !important;
-  }
-  .hero h1 { font-size: 22px !important; }
-  .stat, .stat-item { min-width: 60px; font-size: 12px; }
 }

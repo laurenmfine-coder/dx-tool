@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="stylesheet" href="../mobile.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse 316 clinical topic study guides covering all major organ systems and specialties on ReasonDx.">
+<meta property="og:title" content="Topics Library | ReasonDx">
+<meta property="og:description" content="316 clinical topic study pages across all specialties.">
+<meta property="og:url" content="https://reasondx.com/topics/">
+<meta property="og:type" content="website">
+<title>Topics Library | ReasonDx</title>
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+body{font-family:'IBM Plex Sans',-apple-system,sans-serif;background:var(--rdx-bg,#F0F2F5);color:var(--rdx-text,#1e293b);min-height:100vh;margin:0}
+.hero{background:linear-gradient(135deg,#1B4F72,#2874A6);color:#fff;padding:48px 24px 40px;text-align:center}
+.hero h1{font-size:32px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:15px;opacity:.8;max-width:520px;margin:0 auto 24px}
+.search-wrap{max-width:560px;margin:0 auto;position:relative}
+.search-wrap input{width:100%;padding:14px 20px 14px 44px;border:none;border-radius:12px;font-size:15px;font-family:inherit;background:rgba(255,255,255,.95);color:#1e293b;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.search-wrap input:focus{outline:2px solid #2874A6;outline-offset:2px}
+.search-wrap input::placeholder{color:#94a3b8}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.alpha-nav{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-bottom:24px}
+.alpha-btn{width:32px;height:32px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:6px;background:var(--rdx-bg-card,#fff);color:var(--rdx-text-secondary,#475569);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.alpha-btn:hover,.alpha-btn.active{background:#2874A6;color:#fff;border-color:#2874A6}
+.alpha-btn.disabled{opacity:.3;cursor:default}
+.count-bar{text-align:center;font-size:13px;color:var(--rdx-text-muted,#64748b);margin-bottom:20px}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.topic-card{display:block;background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:10px;padding:14px 18px;text-decoration:none;color:var(--rdx-text,#1e293b);transition:.15s;font-size:14px;font-weight:500}
+.topic-card:hover{border-color:#2874A6;box-shadow:0 2px 8px rgba(40,116,166,.12);transform:translateY(-1px)}
+.letter-header{grid-column:1/-1;font-size:20px;font-weight:700;color:#2874A6;padding:16px 0 4px;border-bottom:2px solid #2874A6;margin-top:8px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--rdx-text-muted,#64748b)}
+.empty-state h3{font-size:18px;margin-bottom:8px}
+@media(max-width:640px){.hero{padding:32px 16px 28px}.hero h1{font-size:24px}.topic-grid{grid-template-columns:1fr}}
+</style>
+<script src="../auth/auth-guard.js"></script>
+<link rel="canonical" href="https://reasondx.com/topics/">
+</head>
+<body>
+<noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<div id="main-content"></div>
+
+<div class="hero">
+  <h1>Topics Library</h1>
+  <p>316 clinical topic study guides covering all major organ systems and specialties.</p>
+  <div class="search-wrap">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Search topics — pneumonia, fracture, ECG, diabetes..." autocomplete="off">
+  </div>
+</div>
+
+<div class="container">
+  <div class="alpha-nav" id="alpha-nav"></div>
+  <div class="count-bar" id="count-bar"></div>
+  <div class="topic-grid" id="grid"></div>
+</div>
+
+<script>
+var ALL_TOPICS=[
+{i:"acetaminophen-overdose",t:"Acetaminophen Overdose"},
+{i:"acid-base-interpretation",t:"Acid-Base Interpretation: A Systematic Approach"},
+{i:"acid-base",t:"Acid-Base Disorders"},
+{i:"acls-rhythms",t:"ACLS Rhythms"},
+{i:"acs",t:"Acute Coronary Syndrome"},
+{i:"acute-abdomen",t:"Acute Abdomen"},
+{i:"acute-appendicitis",t:"Acute Appendicitis"},
+{i:"acute-leukemia",t:"Acute Leukemia: ALL vs AML"},
+{i:"acute-liver-failure",t:"Acute Liver Failure"},
+{i:"acute-pancreatitis",t:"Acute Pancreatitis"},
+{i:"acute-sinusitis",t:"Acute Rhinosinusitis"},
+{i:"adrenal-crisis",t:"Adrenal Crisis"},
+{i:"adrenal-disorders",t:"Adrenal Disorders: Cushing &amp; Addison"},
+{i:"afib",t:"Atrial Fibrillation"},
+{i:"aki-workup",t:"AKI Workup"},
+{i:"aki",t:"Acute Kidney Injury"},
+{i:"alcohol-withdrawal",t:"Alcohol Withdrawal"},
+{i:"alf",t:"Redirecting"},
+{i:"allergic-rhinitis",t:"Allergic Rhinitis"},
+{i:"allergy-testing",t:"Allergy Testing & Interpretation"},
+{i:"altered-mental-status",t:"Altered Mental Status"},
+{i:"amniotic-band",t:"Amniotic Band Syndrome"},
+{i:"anaphylaxis",t:"Anaphylaxis"},
+{i:"anemia",t:"Anemia"},
+{i:"angioedema",t:"Angioedema"},
+{i:"anorectal-malformations",t:"Anorectal Malformations: A Systematic Approach"},
+{i:"antidepressant",t:"Antidepressant Pharmacology"},
+{i:"antiphospholipid-syndrome",t:"Antiphospholipid Syndrome"},
+{i:"antipsychotic",t:"Antipsychotic Pharmacology"},
+{i:"anxiety",t:"Anxiety Disorders"},
+{i:"aortic-dissection",t:"Aortic Dissection"},
+{i:"apap-overdose",t:"Redirecting"},
+{i:"appendicitis",t:"Appendicitis"},
+{i:"ards",t:"Ards"},
+{i:"asthma-biologics",t:"Asthma Biologics Selection"},
+{i:"asthma-exacerbation",t:"Redirecting"},
+{i:"asthma-phenotyping-biologics",t:"Asthma Phenotyping & Biologic Selection"},
+{i:"asthma-phenotyping",t:"Asthma Phenotyping & Biologics"},
+{i:"asthma",t:"Asthma Exacerbation"},
+{i:"atopic-dermatitis",t:"Atopic Dermatitis"},
+{i:"aub",t:"Abnormal Uterine Bleeding"},
+{i:"biliary-disease",t:"Biliary Disease"},
+{i:"bipolar-disorder",t:"Redirecting"},
+{i:"bipolar",t:"Bipolar Disorder"},
+{i:"bladder-cancer",t:"ReasonDx: Bladder Cancer"},
+{i:"bowel-obstruction",t:"Bowel Obstruction"},
+{i:"bph",t:"ReasonDx: Benign Prostatic Hyperplasia (BPH)"},
+{i:"branchial-cleft-anomalies",t:"Redirecting"},
+{i:"branchial-cleft",t:"Branchial Cleft Anomalies"},
+{i:"breast-mass",t:"Breast Disease"},
+{i:"bronchiolitis",t:"Bronchiolitis"},
+{i:"burns",t:"Burns"},
+{i:"calcium-disorders",t:"Calcium &amp; Parathyroid Disorders"},
+{i:"capacity",t:"Capacity Assessment"},
+{i:"carbon-monoxide",t:"Carbon Monoxide Poisoning"},
+{i:"cardiac-embryology",t:"ReasonDx: Cardiac Embryology"},
+{i:"cardiac-tamponade",t:"Cardiac Tamponade"},
+{i:"cdh-congenital-diaphragmatic-hernia",t:"Congenital Diaphragmatic Hernia"},
+{i:"cdh",t:"Congenital Diaphragmatic Hernia CRT"},
+{i:"cdiff",t:"C. difficile &amp; Infectious Diarrhea"},
+{i:"celiac",t:"Celiac Disease &amp; Malabsorption"},
+{i:"cellulitis-abscess",t:"Cellulitis & Skin Abscess"},
+{i:"cellulitis-necfasc",t:"Cellulitis vs Necrotizing Fasciitis"},
+{i:"chest-pain",t:"Chest Pain Algorithm"},
+{i:"chiari-malformation",t:"Chiari Malformation: A Systematic Approach"},
+{i:"cholecystitis-cholangitis",t:"Acute Cholecystitis & Cholangitis"},
+{i:"cholecystitis",t:"Acute Cholecystitis"},
+{i:"chronic-urticaria-angioedema",t:"Chronic Urticaria & Angioedema"},
+{i:"cirrhosis",t:"Cirrhosis &amp; Liver Disease"},
+{i:"cleft-lip-palate",t:"ReasonDx: Cleft Lip & Palate"},
+{i:"clinical-reasoning-trainer-v2",t:"Redirecting"},
+{i:"clubfoot-limb-development",t:"Clubfoot & Limb Development"},
+{i:"congenital-hydrocephalus",t:"Congenital Hydrocephalus"},
+{i:"congenital-lobar-emphysema",t:"Congenital Lobar Emphysema"},
+{i:"conotruncal-defects",t:"Conotruncal Defects"},
+{i:"contact-dermatitis",t:"Contact Dermatitis"},
+{i:"contraception",t:"Contraception"},
+{i:"copd-exacerbation",t:"Redirecting"},
+{i:"copd",t:"COPD Exacerbation"},
+{i:"corpus-callosum-agenesis",t:"Agenesis of Corpus Callosum"},
+{i:"cpam-bronchogenic-cyst",t:"CPAM & Bronchogenic Cyst"},
+{i:"craniosynostosis",t:"ReasonDx: Craniosynostosis"},
+{i:"croup",t:"Croup (Laryngotracheobronchitis)"},
+{i:"cryptorchidism",t:"ReasonDx: Cryptorchidism"},
+{i:"dandy-walker",t:"Dandy-Walker Malformation"},
+{i:"ddh-developmental-dysplasia",t:"Developmental Dysplasia of the Hip"},
+{i:"delirium",t:"Delirium"},
+{i:"depression",t:"Major Depressive Disorder"},
+{i:"derm-emergencies",t:"Dermatologic Emergencies"},
+{i:"dermatologic-emergencies",t:"Redirecting"},
+{i:"developmental-milestones",t:"Developmental Milestones"},
+{i:"dfi",t:"Diabetic Foot Infection"},
+{i:"diabetes-dka",t:"Diabetes & DKA"},
+{i:"diabetic-foot-infection",t:"Diabetic Foot Infection (DFI)"},
+{i:"diabetic-ketoacidosis",t:"Diabetic Ketoacidosis"},
+{i:"dic",t:"Disseminated Intravascular Coagulation"},
+{i:"dka-hhs",t:"DKA vs Hyperosmolar Hyperglycemic State"},
+{i:"dka",t:"Redirecting"},
+{i:"dress-scar",t:"DRESS & SCARs"},
+{i:"dress-sjs",t:"DRESS/SJS/TEN"},
+{i:"drug-allergy",t:"Drug Allergy"},
+{i:"duodenal-atresia",t:"Duodenal Atresia"},
+{i:"dvt-pe",t:"DVT &amp; Pulmonary Embolism"},
+{i:"dvt",t:"DVT & VTE"},
+{i:"ectopic-pregnancy",t:"Ectopic Pregnancy"},
+{i:"ekg",t:"EKG Interpretation"},
+{i:"electrolyte-emergencies",t:"Electrolyte Emergencies"},
+{i:"electrolytes",t:"Electrolyte Disorders"},
+{i:"encephalitis",t:"Encephalitis"},
+{i:"endocrine-embryology",t:"ReasonDx: Endocrine Embryology"},
+{i:"ent-emergencies",t:"ENT Emergencies"},
+{i:"eosinophilia-workup",t:"Redirecting"},
+{i:"eosinophilia",t:"Eosinophilia Workup"},
+{i:"epinephrine",t:"Epinephrine in Anaphylaxis"},
+{i:"eye-emergencies",t:"Eye Emergencies"},
+{i:"febrile-seizure",t:"Febrile Seizures"},
+{i:"food-allergy",t:"Food Allergy: Diagnosis & Management"},
+{i:"fpies",t:"FPIES (Food Protein-Induced Enterocolitis)"},
+{i:"fuo",t:"Fever of Unknown Origin"},
+{i:"gbs",t:"Guillain-Barré Syndrome"},
+{i:"gerd-pud",t:"GERD &amp; Peptic Ulcer Disease"},
+{i:"gi-bleed",t:"Gastrointestinal Bleeding"},
+{i:"gi-bleeding",t:"GI Bleeding"},
+{i:"gi-embryology-malrotation",t:"Intestinal Malrotation & Volvulus"},
+{i:"gi-embryology",t:"ReasonDx: GI Embryology"},
+{i:"gout-pseudogout",t:"Gout &amp; Pseudogout"},
+{i:"gu-embryology",t:"ReasonDx: Genitourinary Embryology"},
+{i:"guillain-barre",t:"Redirecting"},
+{i:"gyn-oncology",t:"Gynecologic Oncology"},
+{i:"hae",t:"Hereditary Angioedema"},
+{i:"headache-icp",t:"Headache &amp; Increased ICP"},
+{i:"headache",t:"Headache"},
+{i:"heart-failure",t:"Heart Failure"},
+{i:"hematuria",t:"Hematuria Workup"},
+{i:"hemifacial-microsomia",t:"ReasonDx: Hemifacial Microsomia"},
+{i:"hepatitis",t:"Viral Hepatitis"},
+{i:"hereditary-angioedema",t:"Redirecting"},
+{i:"hernia",t:"Hernias"},
+{i:"hf",t:"Redirecting"},
+{i:"hhs-dka-comparison",t:"Diabetic Emergencies"},
+{i:"hhs",t:"Hyperosmolar Hyperglycemic State (HHS)"},
+{i:"hirschsprung-disease",t:"Hirschsprung Disease"},
+{i:"hiv-aids",t:"HIV/AIDS: Diagnosis &amp; Management"},
+{i:"holoprosencephaly",t:"Holoprosencephaly"},
+{i:"horseshoe-kidney",t:"Horseshoe Kidney"},
+{i:"htn-emergency",t:"Hypertensive Emergency"},
+{i:"hypercalcemia-malignancy",t:"Hypercalcemia of Malignancy"},
+{i:"hyperkalemia",t:"Hyperkalemia"},
+{i:"hypertensive-emergency",t:"Redirecting"},
+{i:"hypoglycemia",t:"Hypoglycemia"},
+{i:"hyponatremia",t:"Hyponatremia"},
+{i:"hypospadias",t:"ReasonDx: Hypospadias"},
+{i:"ibd",t:"Inflammatory Bowel Disease"},
+{i:"ich",t:"Intracranial Hemorrhage"},
+{i:"immunodeficiency",t:"Immunodeficiency"},
+{i:"immunotherapy-allergy",t:"Allergen Immunotherapy"},
+{i:"immunotherapy",t:"Immunotherapy"},
+{i:"infective-endocarditis",t:"Infective Endocarditis"},
+{i:"inflammatory-myopathy",t:"Inflammatory Myopathies"},
+{i:"inhaler-spacer",t:"Inhaler Spacer"},
+{i:"intracranial-hemorrhage",t:"Redirecting"},
+{i:"intussusception",t:"ReasonDx: Intussusception"},
+{i:"ivig-scig",t:"IVIG & SCIG: Immunoglobulin Replacement Therapy"},
+{i:"jejunal-ileal-atresia",t:"Jejunal/Ileal Atresia"},
+{i:"kawasaki-disease",t:"Redirecting"},
+{i:"kawasaki",t:"Kawasaki Disease"},
+{i:"kidney-stones",t:"ReasonDx: Nephrolithiasis (Kidney Stones)"},
+{i:"labor-delivery",t:"Labor &amp; Delivery"},
+{i:"labor-stages",t:"Stages of Labor & Delivery"},
+{i:"laryngotracheal-development",t:"Laryngotracheal Development"},
+{i:"liver-cirrhosis",t:"Liver Disease & Cirrhosis"},
+{i:"liver-disease",t:"Redirecting"},
+{i:"malignant-hyperthermia",t:"Malignant Hyperthermia"},
+{i:"mast-cell-disorders",t:"Redirecting"},
+{i:"mast-cell",t:"Mast Cell Disorders"},
+{i:"meckel-diverticulum",t:"Meckel Diverticulum"},
+{i:"meningitis-encephalitis",t:"Meningitis &amp; Encephalitis"},
+{i:"meningitis",t:"Meningitis"},
+{i:"metabolic-acidosis",t:"Metabolic Acidosis"},
+{i:"ms",t:"Multiple Sclerosis"},
+{i:"mse",t:"Mental Status Examination"},
+{i:"msk-embryology",t:"ReasonDx: MSK Embryology"},
+{i:"multiple-sclerosis",t:"Redirecting"},
+{i:"myasthenia-crisis",t:"Myasthenic Crisis"},
+{i:"myasthenia-gravis",t:"Myasthenia Gravis"},
+{i:"myasthenic-crisis",t:"Redirecting"},
+{i:"myxedema-coma",t:"Myxedema Coma"},
+{i:"nec-fasc",t:"Necrotizing Fasciitis"},
+{i:"neonatal-respiratory-distress",t:"Neonatal Respiratory Distress CRT"},
+{i:"neonatal-screening",t:"Neonatal Screening"},
+{i:"neural-tube-defects",t:"Neural Tube Defects"},
+{i:"neuro-embryology",t:"ReasonDx: Neuro Embryology"},
+{i:"neurogenic-bladder",t:"ReasonDx: Neurogenic Bladder"},
+{i:"neuroleptic-malignant-syndrome",t:"Neuroleptic Malignant Syndrome"},
+{i:"neuronal-migration",t:"Neuronal Migration Disorders"},
+{i:"neutropenic-fever",t:"Neutropenic Fever"},
+{i:"nms",t:"Redirecting"},
+{i:"obstructive-lung",t:"Obstructive Lung Disease"},
+{i:"omphalocele-gastroschisis",t:"Omphalocele & Gastroschisis"},
+{i:"opioid-overdose",t:"Opioid Overdose"},
+{i:"organophosphate",t:"Organophosphate &amp; Nerve Agent Poisoning"},
+{i:"osteomyelitis",t:"Osteomyelitis"},
+{i:"ovarian-torsion",t:"Ovarian Torsion"},
+{i:"pancreatitis",t:"Redirecting"},
+{i:"parkinson",t:"Parkinson Disease"},
+{i:"parkinsons",t:"Redirecting"},
+{i:"pda-coarctation",t:"Pda Coarctation"},
+{i:"pe",t:"Pulmonary Embolism"},
+{i:"pediatric-emergencies",t:"Pediatric Emergencies"},
+{i:"pediatric-urology-sbar",t:"CoachDx SBAR: Pediatric Urology"},
+{i:"pediatric-urology",t:"Pediatric Urology Essentials"},
+{i:"peds-anaphylaxis",t:"Pediatric Anaphylaxis Adventure"},
+{i:"peds-dka",t:"The Sleepy Child"},
+{i:"penicillin-delabeling",t:"Penicillin Delabeling"},
+{i:"personality-disorders",t:"Personality Disorders"},
+{i:"pft-interpretation",t:"PFT Interpretation"},
+{i:"pharyngeal-apparatus",t:"ReasonDx: Pharyngeal Apparatus"},
+{i:"pid-toa",t:"PID & TOA"},
+{i:"pierre-robin",t:"ReasonDx: Pierre Robin Sequence"},
+{i:"pituitary-disorders",t:"Pituitary Disorders"},
+{i:"placental-abruption",t:"Placental Abruption"},
+{i:"placental-disorders",t:"Placental Disorders"},
+{i:"pleural-effusion",t:"Pleural Effusion"},
+{i:"pneumonia",t:"Pneumonia"},
+{i:"polydactyly-syndactyly",t:"Polydactyly & Syndactyly"},
+{i:"posterior-urethral-valves",t:"ReasonDx: Posterior Urethral Valves"},
+{i:"postpartum-hemorrhage",t:"Postpartum Hemorrhage"},
+{i:"potassium",t:"Potassium Disorders"},
+{i:"pph",t:"Redirecting"},
+{i:"preeclampsia",t:"Preeclampsia &amp; Eclampsia"},
+{i:"preop-postop",t:"Pre/Post-Operative Management"},
+{i:"primary-immunodeficiency",t:"Primary Immunodeficiency"},
+{i:"prostate-cancer",t:"ReasonDx: Prostate Cancer"},
+{i:"psychopharmacology",t:"Psychopharmacology"},
+{i:"psychosis",t:"Psychosis & Schizophrenia Spectrum"},
+{i:"pulmonary-sequestration",t:"Pulmonary Sequestration"},
+{i:"puv-obstructive-uropathy",t:"Posterior Urethral Valves: A Systematic Approach"},
+{i:"puv",t:"Redirecting"},
+{i:"pyelonephritis",t:"Pyelonephritis"},
+{i:"pyloric-stenosis",t:"ReasonDx: Pyloric Stenosis"},
+{i:"radiology-raddx",t:"RadDx: Imaging Reasoning"},
+{i:"rcc",t:"ReasonDx: Renal Cell Carcinoma"},
+{i:"renal-acid-base",t:"Renal Function & Acid-Base"},
+{i:"renal-embryology",t:"ReasonDx: Renal Embryology"},
+{i:"respiratory-embryology",t:"ReasonDx: Respiratory Embryology"},
+{i:"respiratory-pft",t:"Respiratory Pft"},
+{i:"rhabdo",t:"Rhabdomyolysis"},
+{i:"rhabdomyolysis",t:"Redirecting"},
+{i:"rheum-emergencies",t:"Rheumatologic Emergencies"},
+{i:"rheumatoid-arthritis",t:"Rheumatoid Arthritis"},
+{i:"sah",t:"Subarachnoid Hemorrhage"},
+{i:"salicylate-poisoning",t:"Redirecting"},
+{i:"salicylate",t:"Salicylate Poisoning"},
+{i:"sbo",t:"Small Bowel Obstruction"},
+{i:"schizophrenia",t:"Schizophrenia"},
+{i:"scleroderma",t:"Scleroderma (Systemic Sclerosis)"},
+{i:"seizure-disorders",t:"Seizure Disorders & Epilepsy"},
+{i:"seizure",t:"Seizures and Status Epilepticus"},
+{i:"sepsis-shock",t:"Sepsis & Shock"},
+{i:"sepsis",t:"Sepsis & Septic Shock"},
+{i:"septal-defects",t:"Atrial & Ventricular Septal Defects"},
+{i:"serotonin-syndrome",t:"Serotonin Syndrome"},
+{i:"shock",t:"Shock"},
+{i:"sickle-cell-disease",t:"Redirecting"},
+{i:"sickle-cell",t:"Sickle Cell Disease"},
+{i:"sinusitis",t:"Acute Sinusitis"},
+{i:"skeletal-dysplasia",t:"Skeletal Dysplasia & Bone Formation"},
+{i:"sle",t:"Systemic Lupus Erythematosus"},
+{i:"spinal-cord-compression",t:"Redirecting"},
+{i:"spinal-cord",t:"Spinal Cord Compression"},
+{i:"spondyloarthropathy",t:"Spondyloarthropathies"},
+{i:"status-epilepticus",t:"Status Epilepticus"},
+{i:"stroke",t:"Stroke"},
+{i:"subarachnoid-hemorrhage",t:"Redirecting"},
+{i:"substance-use",t:"Substance Use Disorders"},
+{i:"surfactant-deficiency-rds",t:"Surfactant Deficiency & RDS"},
+{i:"svt-wpw",t:"SVT & WPW"},
+{i:"syncope-arrhythmia",t:"Syncope & Arrhythmia"},
+{i:"syncope",t:"Syncope"},
+{i:"tbi-icp",t:"TBI & ICP Management"},
+{i:"tef-esophageal-atresia",t:"TEF & Esophageal Atresia"},
+{i:"tension-pneumothorax",t:"Tension Pneumothorax"},
+{i:"tension-ptx",t:"Redirecting"},
+{i:"testicular-cancer",t:"ReasonDx: Testicular Cancer"},
+{i:"testicular-torsion",t:"ReasonDx: Testicular Torsion"},
+{i:"thrombocytopenia",t:"Thrombocytopenia: ITP, TTP, HUS &amp; DIC"},
+{i:"thyroglossal-branchial",t:"Thyroglossal & Branchial Cleft Anomalies"},
+{i:"thyroid-deep-dive",t:"Redirecting"},
+{i:"thyroid-storm",t:"Thyroid Storm"},
+{i:"thyroid",t:"Thyroid Disorders"},
+{i:"toxic-alcohols",t:"Toxic Alcohol Ingestion"},
+{i:"toxidromes",t:"Toxidromes"},
+{i:"transfusion-medicine",t:"Transfusion Medicine &amp; Blood Products"},
+{i:"trauma",t:"Trauma Management"},
+{i:"treacher-collins",t:"ReasonDx: Treacher Collins Syndrome"},
+{i:"ttp-hus",t:"TTP-HUS"},
+{i:"ttp",t:"TTP/HUS"},
+{i:"tuberculosis",t:"Tuberculosis: Diagnosis &amp; Treatment"},
+{i:"tumor-lysis-syndrome",t:"Redirecting"},
+{i:"tumor-lysis",t:"Tumor Lysis Syndrome"},
+{i:"upj-obstruction",t:"ReasonDx: UPJ Obstruction"},
+{i:"urinary-incontinence",t:"ReasonDx: Urinary Incontinence"},
+{i:"urology-sbar-collection",t:"CoachDx SBAR: Urology Essentials"},
+{i:"urticaria-angioedema",t:"Urticaria &amp; Angioedema"},
+{i:"urticaria",t:"Chronic Urticaria"},
+{i:"uti-pyelonephritis",t:"UTI &amp; Pyelonephritis"},
+{i:"valvular-disease",t:"Valvular Heart Disease"},
+{i:"vasculitis",t:"Vasculitis"},
+{i:"venom-allergy",t:"Venom Allergy"},
+{i:"venom-vit",t:"Venom Vit"},
+{i:"vte-pe",t:"Redirecting"},
+{i:"vte",t:"Venous Thromboembolism"},
+{i:"vur",t:"ReasonDx: Vesicoureteral Reflux (VUR)"},
+{i:"well-child-milestones",t:"Well-Child Milestones"},
+{i:"wilms-tumor",t:"ReasonDx: Wilms Tumor (Nephroblastoma)"},
+{i:"wound-healing",t:"Wound Healing &amp; Surgical Nutrition"},
+];
+
+var activeFilter = null;
+var searchTerm = '';
+
+function render() {
+  var filtered = ALL_TOPICS.filter(function(tp) {
+    if (searchTerm && tp.t.toLowerCase().indexOf(searchTerm) === -1 && tp.i.toLowerCase().indexOf(searchTerm) === -1) return false;
+    if (activeFilter && tp.t.charAt(0).toUpperCase() !== activeFilter) return false;
+    return true;
+  });
+
+  document.getElementById('count-bar').textContent = filtered.length + ' of ' + ALL_TOPICS.length + ' topics';
+
+  var grid = document.getElementById('grid');
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state"><h3>No topics found</h3><p>Try a different search term.</p></div>';
+    return;
+  }
+
+  // Group by first letter
+  var groups = {};
+  filtered.forEach(function(tp) {
+    var letter = tp.t.charAt(0).toUpperCase();
+    if (!groups[letter]) groups[letter] = [];
+    groups[letter].push(tp);
+  });
+
+  var html = '';
+  var letters = Object.keys(groups).sort();
+  letters.forEach(function(letter) {
+    html += '<div class="letter-header">' + letter + '</div>';
+    groups[letter].sort(function(a,b) { return a.t.localeCompare(b.t); }).forEach(function(tp) {
+      html += '<a class="topic-card" href="' + tp.i + '.html">' + tp.t + '</a>';
+    });
+  });
+  grid.innerHTML = html;
+}
+
+// Build alpha nav
+(function() {
+  var letters = {};
+  ALL_TOPICS.forEach(function(tp) { letters[tp.t.charAt(0).toUpperCase()] = true; });
+  var nav = document.getElementById('alpha-nav');
+  var allBtn = document.createElement('button');
+  allBtn.className = 'alpha-btn active';
+  allBtn.textContent = 'All';
+  allBtn.onclick = function() { activeFilter = null; updateAlpha(); render(); };
+  nav.appendChild(allBtn);
+  for (var c = 65; c <= 90; c++) {
+    var ch = String.fromCharCode(c);
+    var btn = document.createElement('button');
+    btn.className = 'alpha-btn' + (letters[ch] ? '' : ' disabled');
+    btn.textContent = ch;
+    btn.dataset.letter = ch;
+    if (letters[ch]) {
+      btn.onclick = function() { activeFilter = this.dataset.letter; updateAlpha(); render(); };
+    }
+    nav.appendChild(btn);
+  }
+})();
+
+function updateAlpha() {
+  document.querySelectorAll('.alpha-btn').forEach(function(b) {
+    b.classList.toggle('active', activeFilter ? b.dataset.letter === activeFilter : b.textContent === 'All');
+  });
+}
+
+document.getElementById('search').addEventListener('input', function(e) {
+  searchTerm = e.target.value.toLowerCase().trim();
+  if (searchTerm) { activeFilter = null; updateAlpha(); }
+  render();
+});
+
+render();
+</script>
+
+<script src="../js/rdx-nav.js"></script>
+<script src="../js/rdx-help-widget.js"></script>
+<script src="../js/dx-feedback.js"></script>
+<script src="../js/dx-user-bar.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(function(){})}</script>
+</body>
+</html>

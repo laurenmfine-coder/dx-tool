@@ -13,7 +13,9 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
 // Auth Guard - DISABLED for launch (free access)
@@ -22,7 +24,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Study Mode — clinical reasoning education platform for learners across medicine and the health professions.">
-<title>Study Mode - ReasonDx</title>
+<meta property="og:title" content="Study Mode | ReasonDx">
+<meta property="og:description" content="Topic-based study guides across 316 clinical topics.">
+<meta property="og:url" content="https://reasondx.com/study-mode.html">
+<meta property="og:type" content="website">
+<title>Study Mode | ReasonDx</title>
     
     <link rel="stylesheet" >
     <style>
@@ -224,6 +230,17 @@
         .cat-allergy { background: #d4e8f7; }
         .cat-toxicology { background: #fefce8; }
         .cat-critical { background: #f1f5f9; }
+        .topic-icon.cat-cardiology{background:#ef4444}
+        .topic-icon.cat-pulmonary{background:#3b82f6}
+        .topic-icon.cat-neurology{background:#8b5cf6}
+        .topic-icon.cat-gi{background:#f59e0b}
+        .topic-icon.cat-renal{background:#06b6d4}
+        .topic-icon.cat-infectious{background:#10b981}
+        .topic-icon.cat-endocrine{background:#ec4899}
+        .topic-icon.cat-hematology{background:#dc2626}
+        .topic-icon.cat-allergy{background:#f97316}
+        .topic-icon.cat-toxicology{background:#84cc16}
+        .topic-icon.cat-critical{background:#64748b}
 
         /* Modal */
         .modal-backdrop {
@@ -471,37 +488,46 @@
     <link rel="stylesheet" href="css/dx-case-nav.css">
 <link rel="stylesheet" href="./css/rdx-theme.css">
 <script src="auth/auth-guard.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="canonical" href="https://reasondx.com/study-mode.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Study Mode | ReasonDx">
+<meta name="twitter:description" content="Topic-based study guides across 316 clinical topics.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
     <!-- Navigation -->
     <div id="dx-nav" data-active="learn" data-streak="7" data-user-initials="LF"></div>
 
-    <main class="main">
+    <main id="main-content" class="main">
         <div class="page-header">
             <h1>🎯 Study Mode</h1>
-            <p>Pick a topic and access ALL learning resources in one place — Deep Dives, Cases, Board Prep MCQs, ReasonDx, and CoachDx</p>
+            <p>Pick a topic and access ALL learning resources in one place — Deep Dives, Cases, ReasonDx, and CoachDx</p>
         </div>
 
         <!-- Search -->
         <div class="search-container">
             <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search topics (e.g., sepsis, ACS, PE...)">
+            <input type="text" class="search-input" id="searchInput" aria-label="Search topics (e.g., sepsis, ACS, PE...)" placeholder="Search topics (e.g., sepsis, ACS, PE...)">
         </div>
 
         <!-- Filter Tabs -->
         <div class="filter-tabs">
-            <button class="filter-tab active" data-filter="all">All Topics</button>
-            <button class="filter-tab" data-filter="cardiology">❤️ Cardiology</button>
-            <button class="filter-tab" data-filter="pulmonary">🫁 Pulmonary</button>
-            <button class="filter-tab" data-filter="neurology">🧠 Neurology</button>
-            <button class="filter-tab" data-filter="gi">🫄 GI</button>
-            <button class="filter-tab" data-filter="renal">🫘 Renal</button>
-            <button class="filter-tab" data-filter="infectious">🦠 Infectious</button>
-            <button class="filter-tab" data-filter="endocrine">⚗️ Endocrine</button>
-            <button class="filter-tab" data-filter="allergy">🌸 Allergy/Immunology</button>
-            <button class="filter-tab" data-filter="hematology">🩸 Hematology</button>
-            <button class="filter-tab" data-filter="toxicology">☠️ Toxicology</button>
+            <button type="button" class="filter-tab active" data-filter="all">All Topics</button>
+            <button type="button" class="filter-tab" data-filter="cardiology">Cardiology</button>
+            <button type="button" class="filter-tab" data-filter="pulmonary">Pulmonary</button>
+            <button type="button" class="filter-tab" data-filter="neurology">Neurology</button>
+            <button type="button" class="filter-tab" data-filter="gi">🫄 GI</button>
+            <button type="button" class="filter-tab" data-filter="renal">🫘 Renal</button>
+            <button type="button" class="filter-tab" data-filter="infectious">🦠 Infectious</button>
+            <button type="button" class="filter-tab" data-filter="endocrine">⚗️ Endocrine</button>
+            <button type="button" class="filter-tab" data-filter="allergy">🌸 Allergy/Immunology</button>
+            <button type="button" class="filter-tab" data-filter="hematology">🩸 Hematology</button>
+            <button type="button" class="filter-tab" data-filter="toxicology">☠️ Toxicology</button>
         </div>
 
         <!-- Topics Grid -->
@@ -971,7 +997,7 @@
                 return `
                     <div class="topic-card" onclick="openTopicModal('${topic.id}')">
                         <div class="topic-card-header">
-                            <div class="topic-icon cat-${topic.category}">${topic.icon}</div>
+                            <div class="topic-icon cat-${topic.category}"></div>
                             <div class="topic-info">
                                 <h3>${topic.name}</h3>
                                 <div class="topic-category">${formatCategory(topic.category)}</div>
@@ -987,17 +1013,17 @@
 
         function formatCategory(cat) {
             const names = {
-                cardiology: '❤️ Cardiology',
-                pulmonary: '🫁 Pulmonary',
-                neurology: '🧠 Neurology',
-                gi: '🫄 GI/Hepatology',
-                renal: '🫘 Renal',
-                infectious: '🦠 Infectious Disease',
-                endocrine: '⚗️ Endocrine',
-                hematology: '🩸 Hematology',
-                allergy: '🌸 Allergy/Immunology',
-                toxicology: '☠️ Toxicology',
-                critical: '🚨 Critical Care'
+                cardiology: 'Cardiology',
+                pulmonary: 'Pulmonary',
+                neurology: 'Neurology',
+                gi: 'GI/Hepatology',
+                renal: 'Renal',
+                infectious: 'Infectious Disease',
+                endocrine: 'Endocrine',
+                hematology: 'Hematology',
+                allergy: 'Allergy/Immunology',
+                toxicology: 'Toxicology',
+                critical: 'Critical Care'
             };
             return names[cat] || cat;
         }
@@ -1017,12 +1043,12 @@
             if (r.coach) totalResources++;
 
             document.getElementById('modalHeader').innerHTML = `
-                <div class="modal-icon cat-${topic.category}">${topic.icon}</div>
+                <div class="modal-icon cat-${topic.category}"></div>
                 <div class="modal-title-area">
                     <h2>${topic.name}</h2>
                     <div class="modal-category">${formatCategory(topic.category)}</div>
                 </div>
-                <button class="modal-close" onclick="closeModal()">×</button>
+                <button type="button" class="modal-close" onclick="closeModal()">×</button>
             `;
 
             let bodyHTML = `
@@ -1057,21 +1083,6 @@
                 `;
             }
 
-            // Board Prep MCQs
-            if (r.mcq) {
-                bodyHTML += `
-                    <div class="modal-section">
-                        <div class="modal-section-title">📝 Board Prep MCQs</div>
-                        <a href="board-prep.html?tags=${r.mcq.tags.join(',')}" class="resource-link">
-                            <div class="resource-link-icon" style="background: var(--dx-secondary-light);">📝</div>
-                            <div class="resource-link-info">
-                                <h4>${r.mcq.count} Practice Questions</h4>
-                                <p>Tags: ${r.mcq.tags.slice(0, 3).join(', ')}${r.mcq.tags.length > 3 ? '...' : ''}</p>
-                            </div>
-                            <span class="resource-link-arrow">→</span>
-                        </a>
-                    </div>
-                `;
             }
 
             // Clinical Cases
@@ -1109,9 +1120,9 @@
             }
 
             // Start Study Button
-            const primaryUrl = r.cases?.url || r.mechanism?.url || 'board-prep.html';
+            const primaryUrl = r.cases?.url || r.mechanism?.url || 'case-browser.html';
             bodyHTML += `
-                <button class="start-study-btn" onclick="window.location.href='${primaryUrl}'">
+                <button type="button" class="start-study-btn" onclick="window.location.href='${primaryUrl}'">
                     🚀 Start Studying ${topic.name}
                 </button>
             `;
@@ -1153,7 +1164,7 @@
         // ============ INIT ============
         renderTopics();
     </script>
-    <script src="js/dx-case-nav.js"></script>
+    
     <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
 
     
@@ -1172,19 +1183,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 
 <script src="js/dx-feedback.js"></script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
 </body>

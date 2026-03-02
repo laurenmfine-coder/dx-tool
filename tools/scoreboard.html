@@ -1,257 +1,48 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="en">
+<html lang="en">
 <head>
-<!-- Google Analytics (ReasonDx) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EKCVJ1SMN3');
-</script>
 <meta name="theme-color" content="#1f5f8b">
-<link rel="manifest" href="../manifest.json">
-<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-<link rel="stylesheet" href="../mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Scoreboard — clinical education tool on ReasonDx. Interactive learning resource for learners and educators across the health professions.">
 <title>Scoreboard | ReasonDx</title>
-
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="description" content="See how you rank among peers and track your learning streaks.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../mobile.css">
 <style>
+:root{--blue:#2874A6;--font:'IBM Plex Sans',-apple-system,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100vh}
-.header{background:var(--rdx-bg-card);border-bottom:1px solid #e2e8f0;padding:16px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
-.header a{color:#2874a6;text-decoration:none;font-size:14px;font-weight:500}
-.header h1{font-family:var(--rdx-font-serif);font-size:24px}
-.container{max-width:1000px;margin:0 auto;padding:24px}
-.hero{background:linear-gradient(135deg,#1f5f8b,#2874a6);color:#fff;border-radius:20px;padding:32px;margin-bottom:28px;text-align:center}
-.hero h2{font-family:var(--rdx-font-serif);font-size:28px;margin-bottom:4px}
-.hero p{opacity:.8;font-size:14px;margin-bottom:20px}
-.xp-bar{background:rgba(255,255,255,.2);height:16px;border-radius:8px;overflow:hidden;max-width:500px;margin:0 auto 8px}
-.xp-fill{height:100%;background:var(--rdx-bg-card);border-radius:8px;transition:.5s}
-.xp-label{font-size:13px;opacity:.7}
-.level-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);padding:8px 20px;border-radius:20px;font-weight:700;font-size:18px;margin-bottom:16px}
-.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px}
-.badge-card{background:var(--rdx-bg-card);border:2px solid #e2e8f0;border-radius:12px;padding:16px;text-align:center;transition:.2s}
-.badge-card.earned{border-color: #1f5f8b;background:#fffbeb}
-.badge-card .icon{font-size:36px;margin-bottom:8px}
-.badge-card.locked .icon{filter:grayscale(1);opacity:.4}
-.badge-card .name{font-weight:700;font-size:13px;margin-bottom:2px}
-.badge-card .desc{font-size:11px;color:#64748b}
-.badge-card.locked .name{color:#94a3b8}
-.section{margin-bottom:28px}
-.section h2{font-family:var(--rdx-font-serif);font-size:20px;margin-bottom:16px}
-.board{background:var(--rdx-bg-card);border:1px solid #e2e8f0;border-radius:16px;overflow:hidden}
-.board-header{display:grid;grid-template-columns:50px 1fr 100px 100px 100px;padding:12px 16px;background:#f1f5f9;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
-.board-row{display:grid;grid-template-columns:50px 1fr 100px 100px 100px;padding:14px 16px;border-top:1px solid #f1f5f9;align-items:center;font-size:14px}
-.board-row:hover{background:#f8fafc}
-.board-row.you{background:#f0f7fc;font-weight:600}
-.rank{font-weight:700;color:#64748b}
-.rank.gold{color:#eab308}
-.rank.silver{color:#94a3b8}
-.rank.bronze{color:#b45309}
-.user-info{display:flex;align-items:center;gap:10px}
-.avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
-.xp-small{font-weight:600;color:#2874a6}
-.streak-small{color: #1f5f8b;font-weight:600}
-.tabs{display:flex;gap:4px;margin-bottom:20px;background:#f1f5f9;border-radius:12px;padding:3px}
-.tab{flex:1;padding:8px;text-align:center;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;border:none;background:none;font-family:inherit;color:#64748b}
-.tab.active{background:var(--rdx-bg-card);color:#2874a6;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+body{font-family:var(--font);background:#f0f4f8;color:#1e293b;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.container{text-align:center;padding:24px}
+.icon{font-size:56px;margin-bottom:16px}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+h1 span{color:var(--blue)}
+p{color:#64748b;font-size:15px;margin-bottom:24px}
+.badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;background:#FEF9E7;color:#D97706}
+.back{display:inline-block;margin-top:24px;color:var(--blue);font-size:13px;font-weight:600;text-decoration:none}
+
+[data-theme="dark"] body{background:var(--rdx-bg,#0f172a);color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] h1{color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] p{color:var(--rdx-text-muted,#64748b)}
+[data-theme="dark"] .back{color:#5ba3cc}
 </style>
-<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-<div class="header">
-  <a href="../index.html">← Home</a>
-  <h1>🏆 Scoreboard</h1>
-</div>
+<noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
+<script src="../auth/auth-guard.js"></script>
 <div class="container">
-  <!-- Hero XP -->
-  <div class="hero">
-    <div class="level-badge" id="hero-level" role="status" aria-label="Current level">⭐ Level 1</div>
-    <h2 id="hero-title">Getting Started</h2>
-    <p id="hero-subtitle">Complete your first activity to start earning XP!</p>
-    <div class="xp-bar"><div class="xp-fill" id="hero-xp-fill" style="width:0%"></div></div>
-    <div class="xp-label" id="hero-xp-label">0 / 100 XP to next level</div>
-  </div>
-
-  <!-- Badges -->
-  <div class="section">
-    <h2>🎖️ Achievements</h2>
-    <div class="badges-grid" id="badges" role="list" aria-label="Achievement badges"></div>
-  </div>
-
-  <!-- Leaderboard -->
-  <div class="section">
-    <h2>🏅 Leaderboard</h2>
-    <div class="tabs" role="tablist" aria-label="Leaderboard time period">
-      <button class="tab active" role="tab" aria-label="weekly leaderboard" onclick="showBoard('weekly',this)">This Week</button>
-      <button class="tab" role="tab" aria-label="monthly leaderboard" onclick="showBoard('monthly',this)">This Month</button>
-      <button class="tab" role="tab" aria-label="alltime leaderboard" onclick="showBoard('alltime',this)">All Time</button>
-    </div>
-    <div class="board">
-      <div class="board-header">
-        <div>Rank</div><div>Student</div><div style="text-align:center">XP</div><div style="text-align:center">Streak</div><div style="text-align:center">Cases</div>
-      </div>
-      <div id="boardRows" role="list" aria-label="Leaderboard rankings"></div>
-    </div>
-  </div>
+  <div class="icon">🏆</div>
+  <span class="badge">Coming Soon</span>
+  <h1><span>Scoreboard</span></h1>
+  <p>See how you rank among peers and track your learning streaks.</p>
+  <a href="index.html" class="back">← Back to Tools</a>
 </div>
-
-<script src="../js/rdx-persist.js"></script>
-<script>
-// === SCOREBOARD — reads from DxProgress ===
-(function renderScoreboard() {
-  const data = window.DxProgress ? DxProgress.get() : {
-    xp: 0, level: 1, streak: 0,
-    completed: { modules: [], cases: [], quizzes: [] },
-    badges: {}
-  };
-
-  const xp = data.xp || 0;
-  const level = data.level || Math.floor(xp / 100) + 1;
-  const streak = data.streak || 0;
-  const cases = data.completed.cases?.length || 0;
-
-  // Level titles
-  const levelTitles = [
-    'Getting Started', 'Novice Learner', 'Clinical Observer', 'Active Learner',
-    'Pattern Seeker', 'Hypothesis Builder', 'Clinical Analyst', 'Diagnostic Thinker',
-    'Reasoning Apprentice', 'Clinical Integrator', 'Diagnostic Navigator',
-    'Clinical Reasoning Explorer', 'Diagnostic Detective', 'Master Clinician',
-    'Expert Diagnostician', 'Clinical Sage'
-  ];
-  const title = levelTitles[Math.min(level - 1, levelTitles.length - 1)];
-  const nextTitle = levelTitles[Math.min(level, levelTitles.length - 1)];
-  const xpForNextLevel = level * 100;
-  const xpInLevel = xp % 100;
-  const pct = Math.round((xpInLevel / 100) * 100);
-
-  // Update hero
-  document.getElementById('hero-level').textContent = '⭐ Level ' + level;
-  document.getElementById('hero-title').textContent = title;
-  document.getElementById('hero-subtitle').textContent = xp > 0
-    ? 'Keep learning to reach Level ' + (level + 1) + ': ' + nextTitle
-    : 'Complete your first activity to start earning XP!';
-  document.getElementById('hero-xp-fill').style.width = pct + '%';
-  document.getElementById('hero-xp-label').textContent = xp + ' / ' + xpForNextLevel + ' XP to next level';
-
-  // Badges — based on actual DxProgress data
-  const b = data.badges || {};
-  const c = data.completed;
-  const totalCompleted = (c.modules?.length || 0) + (c.cases?.length || 0) + (c.quizzes?.length || 0);
-
-  const badgeDefs = [
-    { icon: '🎯', name: 'First Case', desc: 'Complete your first case', earned: !!b.firstCase },
-    { icon: '🔥', name: '7-Day Streak', desc: 'Study 7 days in a row', earned: !!b.streak7 },
-    { icon: '📚', name: 'Scholar', desc: 'Study 100 topics', earned: !!b.scholar },
-    { icon: '🌟', name: 'Perfect Score', desc: 'Get 100% on any quiz', earned: !!b.perfectScore },
-    { icon: '📝', name: 'Board Ready', desc: 'Answer 500 board questions', earned: !!b.boardReady },
-    { icon: '🧠', name: 'Critical Thinker', desc: 'Complete 50 cases', earned: (c.cases?.length || 0) >= 50 },
-    { icon: '🩺', name: 'Diagnostician', desc: 'Build 25 differentials', earned: totalCompleted >= 25 },
-    { icon: '⚡', name: 'Quick Study', desc: 'Earn 500 XP', earned: xp >= 500 },
-    { icon: '💪', name: 'Dedicated', desc: 'Earn 1,000 XP', earned: xp >= 1000 },
-    { icon: '🏆', name: 'Champion', desc: 'Earn 5,000 XP', earned: xp >= 5000 },
-    { icon: '🔬', name: 'Lab Whisperer', desc: 'Use calculator 20 times', earned: false },
-    { icon: '🫀', name: 'Cardio Champion', desc: 'Complete all cardiology', earned: false },
-  ];
-
-  document.getElementById('badges').innerHTML = badgeDefs.map(bd =>
-    '<div class="badge-card ' + (bd.earned ? 'earned' : 'locked') + '" role="listitem" aria-label="' + bd.name + ': ' + (bd.earned ? 'earned' : 'locked') + '">' +
-      '<div class="icon">' + bd.icon + '</div>' +
-      '<div class="name">' + bd.name + '</div>' +
-      '<div class="desc">' + bd.desc + '</div>' +
-    '</div>'
-  ).join('');
-
-  // Leaderboard — insert user's real data among simulated classmates
-  const simStudents = [
-    { name: 'Alex M.', base: 85 },
-    { name: 'Jordan K.', base: 72 },
-    { name: 'Taylor R.', base: 68 },
-    { name: 'Casey L.', base: 55 },
-    { name: 'Morgan P.', base: 48 },
-    { name: 'Riley S.', base: 42 },
-    { name: 'Quinn D.', base: 35 },
-    { name: 'Drew H.', base: 28 },
-    { name: 'Avery N.', base: 20 },
-  ];
-
-  const colors = ['#ef4444','#f97316','#eab308','#22c55e','#3a90c0','#8b5cf6','#ec4899','#3a90c0','#f43f5e'];
-
-  function buildBoard(multiplier) {
-    const students = simStudents.map(s => ({
-      name: s.name,
-      xp: Math.round(s.base * multiplier * (0.9 + Math.random() * 0.2)),
-      streak: Math.floor(Math.random() * 14) + 1,
-      cases: Math.floor(s.base * multiplier * 0.03),
-    }));
-
-    // Add real user
-    students.push({
-      name: 'You',
-      xp: Math.round(xp * (multiplier === 1 ? 0.15 : multiplier === 4 ? 0.5 : 1)),
-      streak: streak,
-      cases: cases,
-      you: true
-    });
-
-    return students.sort((a, b) => b.xp - a.xp);
-  }
-
-  window._boards = {
-    weekly: buildBoard(1),
-    monthly: buildBoard(4),
-    alltime: buildBoard(12)
-  };
-
-  window.showBoard = function(period, btn) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    const boardData = window._boards[period];
-    document.getElementById('boardRows').innerHTML = boardData.map((d, i) => {
-      const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-      const initial = d.you ? '👤' : d.name.charAt(0);
-      const bgColor = d.you ? '#2874a6' : colors[simStudents.findIndex(s => s.name === d.name) % colors.length] || '#94a3b8';
-      return '<div class="board-row ' + (d.you ? 'you' : '') + '" role="listitem">' +
-        '<div class="rank ' + rankClass + '">' + (i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (i + 1)) + '</div>' +
-        '<div class="user-info">' +
-          '<div class="avatar" style="background:' + bgColor + '">' + initial + '</div>' +
-          '<span>' + d.name + (d.you ? ' (You)' : '') + '</span>' +
-        '</div>' +
-        '<div style="text-align:center" class="xp-small">' + d.xp.toLocaleString() + '</div>' +
-        '<div style="text-align:center" class="streak-small">🔥 ' + d.streak + '</div>' +
-        '<div style="text-align:center">' + d.cases + '</div>' +
-      '</div>';
-    }).join('');
-  };
-
-  showBoard('weekly', document.querySelector('.tab.active'));
-})();
-</script>
 <script src="../js/rdx-nav.js"></script>
-<script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
-</script>
 <script src="../js/rdx-help-widget.js"></script>
-
-<script src="../js/dx-feedback.js"></script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script>
 </body>
 </html>

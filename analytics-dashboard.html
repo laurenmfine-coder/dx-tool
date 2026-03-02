@@ -19,9 +19,15 @@
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dx Analytics Dashboard - Your Learning Journey — USMLE-style board preparation with spaced repetition and detailed teaching explanations on ReasonDx.">
-<title>Dx Analytics Dashboard - Your Learning Journey</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Dx Analytics Dashboard - Your Learning Journey — Clinical reasoning analytics and progress tracking on ReasonDx.">
+<meta property="og:title" content="Analytics Dashboard | ReasonDx">
+<meta property="og:description" content="Track your clinical reasoning progress across all ReasonDx modules.">
+<meta property="og:url" content="https://reasondx.com/analytics-dashboard.html">
+<meta property="og:type" content="website">
+<title>Analytics Dashboard | ReasonDx</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -576,8 +582,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 </style>
     <link rel="stylesheet" href="./css/rdx-theme.css">
 <script src="auth/auth-guard.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="canonical" href="https://reasondx.com/analytics-dashboard.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Analytics Dashboard | ReasonDx">
+<meta name="twitter:description" content="Track your clinical reasoning progress.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 <!-- Mastery Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
@@ -592,7 +607,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 </div>
 
 
-    <!-- nav removed: unified via rdx-nav.js -->
 
     <!-- Navigation -->
     <!-- Unified Navigation -->
@@ -605,7 +619,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </header>
     
     <!-- Main Content -->
-    <main class="main">
+    <main id="main-content" class="main">
         <!-- Overall Stats -->
         <div class="stats-grid">
             <div class="stat-card highlight">
@@ -774,133 +788,6 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
         </div>
         
-        <!-- Board Prep Analytics -->
-        <h2 class="section-title">
-            <span class="icon" style="background: #f0f7fc;">📝</span>
-            Board Prep Analytics
-        </h2>
-        <div class="platform-grid">
-            <!-- Board Prep Overview -->
-            <div class="platform-card">
-                <div class="platform-header">
-                    <div class="platform-info">
-                        <div class="platform-icon" style="background: linear-gradient(135deg, #3a90c0, #1f5f8b); color: white;">📝</div>
-                        <div>
-                            <div class="platform-name">Board Prep MCQ</div>
-                            <div class="platform-subtitle">536 Questions · 20 Systems</div>
-                        </div>
-                    </div>
-                    <div class="platform-score">
-                        <div class="platform-score-value" id="bpAccuracy">—</div>
-                        <div class="platform-score-label">Overall Accuracy</div>
-                    </div>
-                </div>
-                <div class="progress-section">
-                    <div class="progress-header">
-                        <span class="progress-label">Questions Attempted</span>
-                        <span class="progress-value"><span id="bpAttempted">0</span>/536</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill blue" id="bpProgress" style="width: 0%"></div>
-                    </div>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px;">
-                    <div style="text-align: center; padding: 12px; background: var(--gray-50); border-radius: 8px;">
-                        <div style="font-size: 1.5rem; font-weight: 700; color: #16a34a;" id="bpCorrectCount">0</div>
-                        <div style="font-size: 0.75rem; color: var(--gray-500);">Correct</div>
-                    </div>
-                    <div style="text-align: center; padding: 12px; background: var(--gray-50); border-radius: 8px;">
-                        <div style="font-size: 1.5rem; font-weight: 700; color: #dc2626;" id="bpIncorrectCount">0</div>
-                        <div style="font-size: 0.75rem; color: var(--gray-500);">Incorrect</div>
-                    </div>
-                    <div style="text-align: center; padding: 12px; background: var(--gray-50); border-radius: 8px;">
-                        <div style="font-size: 1.5rem; font-weight: 700; color: #3a90c0;" id="bpSessionCount">0</div>
-                        <div style="font-size: 0.75rem; color: var(--gray-500);">Sessions</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- System Heatmap -->
-            <div class="platform-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                    <div style="font-weight: 600; font-size: 0.95rem;">System Performance</div>
-                    <div style="font-size: 0.75rem; color: var(--gray-400);">Accuracy by system</div>
-                </div>
-                <div id="bpSystemHeatmap" style="display: flex; flex-direction: column; gap: 4px;"></div>
-            </div>
-        </div>
-        
-        <!-- Spaced Rep & Variant Tracking -->
-        <div class="platform-grid" style="margin-top: 0;">
-            <!-- Spaced Repetition Progress -->
-            <div class="platform-card">
-                <div style="font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.1rem;">🔄</span> Spaced Repetition
-                </div>
-                <div id="bpSpacedRepStats">
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;">
-                        <div style="text-align: center; padding: 10px; background: #f0f7fc; border-radius: 8px;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: #16a34a;" id="bpMastered">0</div>
-                            <div style="font-size: 0.7rem; color: var(--gray-500);">Mastered</div>
-                        </div>
-                        <div style="text-align: center; padding: 10px; background: #fefce8; border-radius: 8px;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: #ca8a04;" id="bpLearning">0</div>
-                            <div style="font-size: 0.7rem; color: var(--gray-500);">Learning</div>
-                        </div>
-                        <div style="text-align: center; padding: 10px; background: #fef2f2; border-radius: 8px;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: #dc2626;" id="bpDueReview">0</div>
-                            <div style="font-size: 0.7rem; color: var(--gray-500);">Due Review</div>
-                        </div>
-                    </div>
-                    <div style="font-size: 0.8rem; color: var(--gray-500);">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <span>Retention Rate</span>
-                            <span style="font-weight: 600; color: var(--gray-700);" id="bpRetention">—</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Current Streak</span>
-                            <span style="font-weight: 600; color: var(--gray-700);" id="bpStreak">—</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Knowledge Transfer (Variant Groups) -->
-            <div class="platform-card">
-                <div style="font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.1rem;">🧬</span> Knowledge Transfer
-                </div>
-                <div id="bpVariantStats">
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px;">
-                        <div style="text-align: center; padding: 12px; background: #f0f9ff; border-radius: 8px;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: #1f5f8b;" id="bpVariantGroups">185</div>
-                            <div style="font-size: 0.7rem; color: var(--gray-500);">Variant Groups</div>
-                        </div>
-                        <div style="text-align: center; padding: 12px; background: #f5f3ff; border-radius: 8px;">
-                            <div style="font-size: 1.25rem; font-weight: 700; color: #7c3aed;" id="bpTransfers">0</div>
-                            <div style="font-size: 0.7rem; color: var(--gray-500);">Transfers Detected</div>
-                        </div>
-                    </div>
-                    <div id="bpTransferList" style="display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto;"></div>
-                    <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 8px;">
-                        Knowledge transfer = applying lessons from one question to succeed on related variants
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Adaptive Tutor Insights -->
-        <div class="platform-grid" style="margin-top: 0;">
-            <div class="platform-card" style="grid-column: span 2;">
-                <div style="font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.1rem;">🧠</span> Cognitive Bias Patterns
-                </div>
-                <div id="bpBiasPatterns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;"></div>
-                <div style="font-size: 0.75rem; color: var(--gray-400); margin-top: 12px;">
-                    Tracked across board-prep sessions. Use the Adaptive Tutor (🧠) on incorrect answers for personalized coaching.
-                </div>
-            </div>
-        </div>
         
         <!-- Strengths & Weaknesses (Dynamic from boardPrepSystems) -->
         <h2 class="section-title">
@@ -912,7 +799,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         <div class="platform-grid" style="margin-top:0;margin-bottom:20px;">
             <div class="platform-card" style="grid-column: span 2;">
                 <div style="font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.1rem;">🗺️</span> Knowledge Gap Map
+                    <span style="font-size: 1.1rem;">🗺️</span> Knowledge Map
                     <span style="font-size: 0.7rem; color: var(--gray-400); margin-left: auto;">By System × Question Type</span>
                 </div>
                 <div id="knowledgeHeatmap" style="overflow-x:auto;"></div>
@@ -982,7 +869,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="recommendation-icon" style="background: #d1fae5;">🩺</div>
                 <div class="recommendation-content">
                     <div class="recommendation-title">Complete Your A/I Series</div>
-                    <div class="recommendation-desc">You've done 8/13 Allergy-Immunology cases. The new Asthma Phenotyping case covers biologic selection - perfect for board prep!</div>
+                    <div class="recommendation-desc">You've done 8/13 Allergy-Immunology cases. The new Asthma Phenotyping case covers biologic selection - a great next step!</div>
                     <a href="training.html?category=allergy-immunology" class="recommendation-action">Continue Cases →</a>
                 </div>
             </div>
@@ -1151,6 +1038,22 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 } catch (e) {
                     console.error('Error loading profile:', e);
                     this.profile = this.createDefaultProfile();
+                }
+                
+                // Try to get real user name from Supabase session or virtual-emr auth
+                if (this.profile.name === 'Learner') {
+                    try {
+                        // Check Supabase session
+                        var sbKey = Object.keys(localStorage).find(function(k){return k.indexOf('sb-')===0 && k.indexOf('-auth-token')>0});
+                        if (sbKey) {
+                            var sess = JSON.parse(localStorage.getItem(sbKey));
+                            var u = sess && sess.user;
+                            var meta = u && u.user_metadata;
+                            if (meta && meta.name) { this.profile.name = meta.name; this.saveProfile(); }
+                            else if (meta && meta.full_name) { this.profile.name = meta.full_name; this.saveProfile(); }
+                            else if (u && u.email) { this.profile.name = u.email.split('@')[0]; this.saveProfile(); }
+                        }
+                    } catch(e) {}
                 }
                 
                 // Also try to aggregate from individual platforms
@@ -1409,7 +1312,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         
         // =====================================================
         // BOARD PREP ANALYTICS ENGINE
-        // Reads from board-prep.html's localStorage keys
+        // Reads from localStorage keys
         // =====================================================
         function loadBoardPrepAnalytics() {
             // 1. Core stats
@@ -1449,7 +1352,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     </div>`;
                 }).join('');
             } else {
-                heatmapEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--gray-400);font-size:0.85rem;">Complete board-prep sessions to see system performance</div>';
+                heatmapEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--gray-400);font-size:0.85rem;">Complete clinical reasoning sessions to see system performance</div>';
             }
             
             // 3. Spaced repetition progress
@@ -1576,7 +1479,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             const sysStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
             const typeStats = JSON.parse(localStorage.getItem('boardPrepTypeStats') || '{}');
             const el = document.getElementById('knowledgeHeatmap');
-            if (!Object.keys(sysStats).length) { el.innerHTML = '<div style="text-align:center;color:var(--gray-400);padding:16px;">Complete board prep sessions to see your knowledge map.</div>'; return; }
+            if (!Object.keys(sysStats).length) { el.innerHTML = '<div style="text-align:center;color:var(--gray-400);padding:16px;">Complete clinical reasoning sessions to see your knowledge map.</div>'; return; }
 
             const types = ['Diagnosis', 'Workup', 'Next Step'];
             const systems = Object.keys(sysStats).sort();
@@ -1834,19 +1737,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 
 <script src="js/dx-feedback.js"></script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
 </body>

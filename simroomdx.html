@@ -11,11 +11,16 @@
 </script>
 <meta name="theme-color" content="#1f5f8b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/rdx-theme.css">
 <link rel="stylesheet" href="mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Auth Guard -->
 <script>
+function rdxEsc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
 (function(){var AUTH_KEY="reasondx-user";function getAuthPath(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";return p+"auth/register.html"}function isAuth(){try{var u=localStorage.getItem(AUTH_KEY);if(u){var j=JSON.parse(u);return j&&j.email&&j.name}}catch(e){}return false}if(!isAuth()){sessionStorage.setItem("reasondx-redirect",location.href);location.replace(getAuthPath())}})();
 </script>
 <!-- User Bar -->
@@ -23,10 +28,11 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>SimRoomDx — Virtual Clinical Simulation</title>
+<title>SimRoomDx | ReasonDx</title>
 <meta name="description" content="SimRoomDx: Multi-character AI clinical simulation. Practice with virtual patients, attending physicians, nurses, family members, and specialists in an immersive sim room.">
 <meta property="og:title" content="SimRoomDx — Virtual Clinical Simulation">
 <meta property="og:description" content="Multi-character AI clinical simulation for medical education. Practice clinical reasoning with 6 AI characters in a virtual sim room.">
+<meta property="og:url" content="https://reasondx.com/simroomdx.html">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.svg">
 
@@ -710,12 +716,22 @@ body {
 .rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
 <script src="auth/auth-guard.js"></script>
+<link rel="manifest" href="manifest.json">
+
+<link rel="canonical" href="https://reasondx.com/simroomdx.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SimRoomDx | ReasonDx">
+<meta name="twitter:description" content="Morning rounds simulation with 6 AI characters.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<div id="main-content" role="main"></div>
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 
 <!-- ─── PLATFORM SCRIPTS ─── -->
-<script src="rdx-nav.js"></script>
+<script src="js/rdx-nav.js"></script>
 <script src="js/dx-plan-gate.js"></script>
 
 <!-- ─── SETUP MODAL (tier-gated) ─── -->
@@ -740,37 +756,37 @@ body {
     <h3>Characters in the Room</h3>
     <!-- Patient: always present, all tiers -->
     <label>
-      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=RobertJohnson&backgroundColor=DBEAFE" alt="" id="avatarPatient">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=RobertJohnson&backgroundColor=DBEAFE" alt="Patient: Robert Johnson" id="avatarPatient" loading="lazy">
       <div class="lbl-info"><div class="lbl-name" id="namePatient">🛏️ Mr. Robert Johnson (Patient)</div><div class="lbl-desc" id="descPatient">58M, crushing chest pain, diaphoretic</div></div>
       <input type="checkbox" checked disabled>
     </label>
     <!-- Attending: all tiers -->
     <label>
-      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrChenAttending&backgroundColor=DCFCE7" alt="">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrChenAttending&backgroundColor=DCFCE7" alt="Dr. Chen, Attending Physician" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">🩺 Dr. Chen (Attending)</div><div class="lbl-desc">Socratic coaching, probes your reasoning</div></div>
       <input type="checkbox" id="chkAttending" checked>
     </label>
     <!-- Nurse: PRO ONLY -->
     <label id="lblNurse">
-      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=NurseRamirez&backgroundColor=FEF9C3" alt="">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=NurseRamirez&backgroundColor=FEF9C3" alt="Nurse Ramirez" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">👩‍⚕️ Sarah Ramirez, RN (Nurse) <span class="pro-badge" id="badgeNurse" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Vitals, meds given, nursing assessments</div></div>
       <input type="checkbox" id="chkNurse" checked>
     </label>
     <!-- Family: PRO ONLY -->
     <label id="lblFamily">
-      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=LindaJohnsonWife&backgroundColor=EDE9FE" alt="">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=LindaJohnsonWife&backgroundColor=EDE9FE" alt="Linda Johnson, Patient's Wife" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">👨‍👩‍👦 Linda Johnson (Wife) <span class="pro-badge" id="badgeFamily" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Collateral history, emotional, wants answers</div></div>
       <input type="checkbox" id="chkFamily">
     </label>
     <!-- Consultant: PRO ONLY -->
     <label id="lblConsultant">
-      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrPatelCards&backgroundColor=FFEDD5" alt="">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrPatelCards&backgroundColor=FFEDD5" alt="Dr. Patel, Cardiologist" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">👨‍⚕️ Dr. Patel (Cardiology Consult) <span class="pro-badge" id="badgeConsultant" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Expects SBAR format. Specialist expertise.</div></div>
       <input type="checkbox" id="chkConsultant">
     </label>
     <!-- Pharmacist: PRO ONLY -->
     <label id="lblPharmacist">
-      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=PharmDKim&backgroundColor=FCE7F3" alt="">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=PharmDKim&backgroundColor=FCE7F3" alt="PharmD Kim, Pharmacist" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">💊 Dr. Kim, PharmD (Pharmacist) <span class="pro-badge" id="badgePharmacist" style="display:none;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span></div><div class="lbl-desc">Drug dosing, interactions, formulary</div></div>
       <input type="checkbox" id="chkPharmacist">
     </label>
@@ -795,7 +811,7 @@ body {
     <a id="upgradeLink" href="auth/register.html" style="display:inline-block;padding:8px 24px;background:#2874A6;color:white;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;">Upgrade to Pro — $14.99/mo</a>
   </div>
 
-  <button class="start-btn" id="startBtn" onclick="startSimulation()">Enter Simulation Room →</button>
+  <button type="button" class="start-btn" id="startBtn" onclick="startSimulation()">Enter Simulation Room →</button>
 </div>
 </div>
 
@@ -826,7 +842,7 @@ body {
       <option value="other">Other</option>
     </select>
   </div>
-  <button class="onboard-btn" id="onboardBtn" onclick="completeOnboarding()" disabled>Let's Go! →</button>
+  <button type="button" class="onboard-btn" id="onboardBtn" onclick="completeOnboarding()" disabled>Let's Go! →</button>
 </div>
 </div>
 
@@ -840,8 +856,8 @@ body {
     <div class="sim-case-sub">Room: SIM-7X3K • Solo Practice</div>
   </div>
   <div class="sim-controls">
-    <button class="sim-btn" id="btnVoice" onclick="toggleVoice()" title="Toggle voice">🔊</button>
-    <button class="sim-btn" onclick="injectEvent()" title="Clinical event">⚡ Event</button>
+    <button type="button" class="sim-btn" id="btnVoice" onclick="toggleVoice()" title="Toggle voice">🔊</button>
+    <button type="button" class="sim-btn" onclick="injectEvent()" title="Clinical event">⚡ Event</button>
   </div>
 </header>
 
@@ -856,7 +872,6 @@ body {
   <div class="vital"><span class="v-label">Trop</span> <span class="v-value" id="vTrop">Pending</span></div>
 </div>
 
-<!-- Avatar Scene — immersive character visualization with canvas effects | build 2025-02-23b -->
 <div class="avatar-scene" id="avatarScene" style="min-height:170px;border-top:2px solid rgba(40,116,166,0.5);border-bottom:2px solid rgba(40,116,166,0.5);">
   <canvas class="scene-canvas" id="particleCanvas"></canvas>
   <canvas class="ecg-canvas" id="ecgCanvas"></canvas>
@@ -884,7 +899,7 @@ body {
   <div class="input-row">
     <textarea id="msgInput" placeholder="Type your message..." rows="1" onkeydown="handleKey(event)"></textarea>
     <button type="button" id="voiceBtn" class="voice-btn" title="Click to speak" onclick="VoiceInput.toggle('msgInput')" style="width:36px;height:36px;min-width:36px;border-radius:50%;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0"><span id="voiceIcon">🎤</span></button>
-    <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
+    <button type="button" class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
   </div>
   <div class="quick-actions" id="quickActions"></div>
 </div>
@@ -2193,11 +2208,11 @@ const CHAR_COLORS = {
 
 // ── Build Scene ──
 function buildAvatarScene() {
-  console.log('[SimRoomDx] buildAvatarScene called');
+  void('[SimRoomDx] buildAvatarScene called');
   try {
   const scene = document.getElementById('avatarScene');
   if (!scene) { console.error('[SimRoomDx] avatarScene element NOT FOUND'); return; }
-  console.log('[SimRoomDx] avatarScene found, offsetHeight:', scene.offsetHeight, 'display:', getComputedStyle(scene).display, 'minHeight:', getComputedStyle(scene).minHeight);
+  void('[SimRoomDx] avatarScene found, offsetHeight:', scene.offsetHeight, 'display:', getComputedStyle(scene).display, 'minHeight:', getComputedStyle(scene).minHeight);
   // Preserve canvas and SVG layers, clear character elements
   const keep = ['particleCanvas', 'ecgCanvas', 'connectionSvg'];
   Array.from(scene.children).forEach(child => {
@@ -2221,7 +2236,7 @@ function buildAvatarScene() {
       <div class="avatar-glow"></div>
       <div class="avatar-ring"></div>
       <div class="avatar-mouth"></div>
-      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=${learner.name}Student&backgroundColor=F1F5F9" alt="You">
+      <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=${learner.name}Student&backgroundColor=F1F5F9" alt="You" loading="lazy">
     </div>
     ${wavesHTML}
     <div class="avatar-shadow"></div>
@@ -2265,7 +2280,7 @@ function buildAvatarScene() {
 
   // Resize handler
   window.addEventListener('resize', () => { initParticles(); initECG(); });
-  console.log('[SimRoomDx] buildAvatarScene complete, chars:', scene.querySelectorAll('.avatar-char').length);
+  void('[SimRoomDx] buildAvatarScene complete, chars:', scene.querySelectorAll('.avatar-char').length);
   } catch(err) { console.error('[SimRoomDx] buildAvatarScene ERROR:', err); }
 }
 
@@ -2431,7 +2446,7 @@ function addCharacterMsg(charId, text) {
       <img class="msg-avatar" src="${ch.avatar}" alt="">
       <span class="msg-name">${ch.icon} ${ch.name}</span>
       <span class="msg-time">${time}</span>
-      <button class="msg-speak-btn" onclick="speakText('${charId}', this)" title="Listen">🔊</button>
+      <button type="button" class="msg-speak-btn" onclick="speakText('${charId}', this)" title="Listen">🔊</button>
     </div>
     <div class="msg-body">${text}</div>`;
   chat.appendChild(div);
@@ -2559,7 +2574,7 @@ async function getAIResponse(charId, userText) {
     messages: [{ role: "user", content: userMsg }]
   };
 
-  console.log('SimRoomDx sending:', { model: payload.model, systemLen: systemField.length, userMsg: userMsg, msgCount: payload.messages.length });
+  void('SimRoomDx sending:', { model: payload.model, systemLen: systemField.length, userMsg: userMsg, msgCount: payload.messages.length });
 
   const response = await fetch("https://coachdx-attending.laurenmfine.workers.dev", {
     method: "POST",
@@ -2711,5 +2726,8 @@ document.getElementById('msgInput').addEventListener('input', function() {
 </script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
 </body>
 </html>

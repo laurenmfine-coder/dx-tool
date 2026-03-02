@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ReasonDx — Virtual Hospital</title>
+<title>Virtual Hospital | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -205,8 +211,26 @@ body {
 .rdx-load-text{font-size:14px;color:var(--text-muted);font-weight:500}
 </style>
 <script src="auth/auth-guard.js"></script>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Explore the ReasonDx Virtual Teaching Hospital. Navigate departments including the ED, inpatient floor, ICU, and simulation rooms.">
+<meta property="og:title" content="Virtual Hospital | ReasonDx">
+<meta property="og:description" content="3D virtual hospital walkthrough — explore all departments.">
+<meta property="og:url" content="https://reasondx.com/hospital-3d.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://reasondx.com/hospital-3d.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Virtual Hospital | ReasonDx">
+<meta name="twitter:description" content="3D virtual hospital walkthrough — explore all departments.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<div id="main-content" role="main"></div>
 
 <div class="page-header">
   <div class="header-left">
@@ -267,6 +291,17 @@ body {
       <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
+    <a class="floor-row" href="admissions.html">
+      <div class="floor-icon" style="background:#1565C0;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+      </div>
+      <div class="floor-info">
+        <div class="floor-name">Admissions — Admitting Team</div>
+        <div class="floor-desc">ED handoff · Orders · H&P · Oral presentation</div>
+      </div>
+      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
     <a class="floor-row" href="simroomdx.html">
       <div class="floor-icon" style="background:#059669;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -291,7 +326,7 @@ body {
       <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
-    <a class="floor-row" href="case-browser.html">
+    <a class="floor-row" href="topics/index.html">
       <div class="floor-icon" style="background:#2874A6;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       </div>
@@ -332,18 +367,7 @@ body {
       </div>
       <div class="floor-info">
         <div class="floor-name">Analytics Dashboard</div>
-        <div class="floor-desc">Track progress · CaseFrame scores · Order safety · Board prep analytics</div>
-      </div>
-      <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-    </a>
-
-    <a class="floor-row" href="board-prep.html">
-      <div class="floor-icon" style="background:#D97706;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="floor-info">
-        <div class="floor-name">Board Prep</div>
-        <div class="floor-desc">615 board-style questions · Spaced repetition · System-based practice</div>
+        <div class="floor-desc">Track progress · CaseFrame scores · Order safety · Performance analytics</div>
       </div>
       <svg class="floor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
@@ -376,12 +400,12 @@ body {
       <span class="quick-card-label">Dashboard</span>
       <span class="quick-card-desc">Your performance analytics</span>
     </a>
-    <a class="quick-card" href="board-prep.html">
-      <div class="quick-card-icon" style="background:#D97706;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <a class="quick-card" href="study-mode.html">
+      <div class="quick-card-icon" style="background:#7C3AED;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
       </div>
-      <span class="quick-card-label">Board Prep</span>
-      <span class="quick-card-desc">615 practice questions</span>
+      <span class="quick-card-label">Study Mode</span>
+      <span class="quick-card-desc">Topic-based learning</span>
     </a>
     <a class="quick-card" href="auth/register.html">
       <div class="quick-card-icon" style="background:#4F46E5;">
@@ -401,5 +425,9 @@ body {
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/rdx-nav.js"></script>
 </body>
 </html>

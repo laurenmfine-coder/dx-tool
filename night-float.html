@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReasonDx — Night Float</title>
+<title>Night Float | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0a0d12;--card:#0f1318;--border:rgba(255,255,255,.06);--text:#e0e0e0;--dim:rgba(255,255,255,.4);--accent:#7C3AED;--accent-bg:rgba(124,58,237,.1)}
@@ -196,8 +205,26 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 </style>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 <script src="auth/auth-guard.js"></script>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Night Float simulator on ReasonDx. Respond to nurse pages, manage cross-cover patients, and practice I-PASS handoffs overnight.">
+<meta property="og:title" content="Night Float | ReasonDx">
+<meta property="og:description" content="Overnight cross-cover simulation with I-PASS handoffs.">
+<meta property="og:url" content="https://reasondx.com/night-float.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://reasondx.com/night-float.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Night Float | ReasonDx">
+<meta name="twitter:description" content="Overnight cross-cover simulation with I-PASS handoffs.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<div id="main-content" role="main"></div>
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 
 <!-- ═══ SETUP SCREEN ═══ -->
@@ -254,14 +281,14 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
     </div>
   </div>
 
-  <button class="start-btn" onclick="startShift()">🌙 Start Your Shift</button>
+  <button type="button" class="start-btn" onclick="startShift()">🌙 Start Your Shift</button>
 </div>
 </div>
 
 <!-- ═══ MAIN DASHBOARD ═══ -->
 <div id="dashboard">
   <div id="topbar">
-    <div class="tb-logo"><em>Night Float</em></div>
+    <div class="tb-logo"><span style="opacity:.5">Reason</span><span style="color:var(--accent)">Dx</span> <em>Night Float</em></div>
     <div class="tb-time" id="clock-display">21:00</div>
     <div class="tb-shift" id="shift-label">Cross-Cover Intern</div>
     <div class="tb-spacer"></div>
@@ -302,7 +329,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
       <div style="font-weight:700;font-size:16px;color:#fff" id="pr-title"></div>
       <div style="font-size:11px;color:var(--dim);margin-top:2px" id="pr-from"></div>
     </div>
-    <button class="pr-close" onclick="closePageResponse()">✕</button>
+    <button type="button" class="pr-close" onclick="closePageResponse()">✕</button>
   </div>
   <div class="pr-scenario" id="pr-scenario"></div>
   <div class="pr-options" id="pr-options"></div>
@@ -311,7 +338,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 </div>
 
 <!-- Lifeline: Call the senior -->
-<button id="lifeline-btn" onclick="callSenior()">📞 Call Senior Resident</button>
+<button type="button" id="lifeline-btn" onclick="callSenior()">📞 Call Senior Resident</button>
 
 <!-- Handoff writing modal -->
 <div id="handoff-modal">
@@ -320,8 +347,8 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
     <p style="font-size:12px;color:var(--dim);margin-bottom:20px">Write your I-PASS handoff for the day team. You'll be scored on completeness.</p>
     <div id="handoff-patients"></div>
     <div style="display:flex;gap:10px;margin-top:16px;justify-content:flex-end">
-      <button onclick="skipHandoff()" style="padding:10px 20px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;color:var(--dim);cursor:pointer;font-family:'IBM Plex Sans',sans-serif">Skip</button>
-      <button onclick="submitHandoff()" style="padding:10px 24px;background:var(--accent);border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:600;font-family:'IBM Plex Sans',sans-serif">Submit Handoff</button>
+      <button type="button" onclick="skipHandoff()" style="padding:10px 20px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;color:var(--dim);cursor:pointer;font-family:'IBM Plex Sans',sans-serif">Skip</button>
+      <button type="button" onclick="submitHandoff()" style="padding:10px 24px;background:var(--accent);border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:600;font-family:'IBM Plex Sans',sans-serif">Submit Handoff</button>
     </div>
   </div>
 </div>
@@ -336,7 +363,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
     <div class="sum-stats" id="sum-stats"></div>
     <div id="sum-details" style="text-align:left;margin-top:16px"></div>
     <div style="margin-top:20px;display:flex;gap:10px;justify-content:center">
-      <button onclick="location.reload()" style="padding:10px 20px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;color:var(--dim);cursor:pointer;font-family:'IBM Plex Sans',sans-serif">New Shift</button>
+      <button type="button" onclick="location.reload()" style="padding:10px 20px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;color:var(--dim);cursor:pointer;font-family:'IBM Plex Sans',sans-serif">New Shift</button>
       <a href="hospital-3d.html" style="padding:10px 20px;background:var(--accent);border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:600;font-family:'IBM Plex Sans',sans-serif;text-decoration:none;display:inline-block">Return to Hospital</a>
     </div>
   </div>
@@ -811,7 +838,7 @@ function renderPatientList() {
           <div class="ipass-label">S — Synthesis</div><div class="ipass-val">${p.ipass.syn}</div>
         </div>
         ${p.pages && p.pages.length ? `<div class="ipass-actions">
-          <button class="ipass-btn primary" onclick="event.stopPropagation();openScenario(${i},0)">📟 View Active Page Scenario</button>
+          <button type="button" class="ipass-btn primary" onclick="event.stopPropagation();openScenario(${i},0)">📟 View Active Page Scenario</button>
           ${p._caseId ? `<a class="ipass-btn" href="virtual-emr.html?case=${p._caseId}" target="_blank" onclick="event.stopPropagation()" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">🏥 View in EMR</a>` : ''}
         </div>` : ''}
         ${getVitalsHTML(p)}
@@ -1146,7 +1173,7 @@ function callSenior() {
     <div style="font-size:13px;color:var(--accent);font-weight:600;margin-bottom:10px">📞 Senior Resident</div>
     <div style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.75);font-style:italic">${advice}</div>
     <div style="margin-top:14px;font-size:10px;color:var(--dim)">Lifelines used: ${lifelinesUsed}</div>
-    <button onclick="this.closest('[data-senior-overlay]').remove()" style="margin-top:14px;padding:8px 18px;background:var(--accent);border:none;border-radius:8px;color:#fff;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-weight:600">Got it</button>
+    <button type="button" onclick="this.closest('[data-senior-overlay]').remove()" style="margin-top:14px;padding:8px 18px;background:var(--accent);border:none;border-radius:8px;color:#fff;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-weight:600">Got it</button>
   </div>`;
   overlay.setAttribute('data-senior-overlay','1');
   overlay.onclick = (e) => { if(e.target===overlay) overlay.remove(); };
@@ -1180,7 +1207,7 @@ function showHandoffModal() {
           <div style="font-weight:600;color:#fff;font-size:14px">${p.name}, ${p.age}${p.sex} — ${p.room}</div>
           <div style="font-size:11px;color:var(--dim);margin-top:2px">${p.dx} · Admit Day ${p.admitDay}${hasRef?' · <span style="color:var(--accent)">EMR Case</span>':''}</div>
         </div>
-        ${hasRef?'<button class="ipass-btn" onclick="toggleRef('+i+')" style="font-size:10px;padding:4px 10px" id="ref-btn-'+i+'">Show Reference</button>':''}
+        ${hasRef?'<button type="button" class="ipass-btn" onclick="toggleRef('+i+')" style="font-size:10px;padding:4px 10px" id="ref-btn-'+i+'">Show Reference</button>':''}
       </div>
       <div id="ref-panel-${i}" style="display:none;margin-bottom:12px;padding:10px 14px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:8px;font-size:11px;line-height:1.6">
         ${hasRef?`
@@ -1613,7 +1640,7 @@ function loadEDPatients() {
       if(banner) {
         banner.style.display = 'flex';
         banner.innerHTML = `<span>🚑 ${edPts.length} patient(s) admitted from ED are available to add to your list.</span>
-          <button onclick="addEDPatients()" style="margin-left:auto;padding:6px 14px;background:var(--accent);border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:11px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;white-space:nowrap">+ Add to List</button>`;
+          <button type="button" onclick="addEDPatients()" style="margin-left:auto;padding:6px 14px;background:var(--accent);border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:11px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;white-space:nowrap">+ Add to List</button>`;
       }
     }
   } catch(e) {}
@@ -1696,7 +1723,10 @@ function addEDPatients() {
 
 </script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
-<script src="./rdx-nav.js"></script>
+<script src="./js/rdx-nav.js"></script>
 <script src="rdx-demo-tour.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
 </body>
 </html>

@@ -1,271 +1,48 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="en">
+<html lang="en">
 <head>
-<!-- Google Analytics (ReasonDx) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EKCVJ1SMN3');
-</script>
 <meta name="theme-color" content="#1f5f8b">
-<link rel="manifest" href="../manifest.json">
-<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-<link rel="stylesheet" href="../mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="EPA Dashboard — clinical education tool on ReasonDx. Interactive learning resource for learners and educators across the health professions.">
 <title>EPA Dashboard | ReasonDx</title>
-
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="description" content="Track entrustable professional activities across your training.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../mobile.css">
 <style>
+:root{--blue:#2874A6;--font:'IBM Plex Sans',-apple-system,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--rdx-font);background:#f8fafc;color:#1e293b;min-height:100vh}
-.header{background:var(--rdx-bg-card);border-bottom:1px solid #e2e8f0;padding:16px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
-.header a{color:#2874a6;text-decoration:none;font-size:14px;font-weight:500}
-.header h1{font-family:var(--rdx-font-serif);font-size:24px}
-.container{max-width:1100px;margin:0 auto;padding:24px}
-.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
-@media(max-width:768px){.summary-grid{grid-template-columns:repeat(2,1fr)}}
-.summary-card{background:var(--rdx-bg-card);border:1px solid #e2e8f0;border-radius:12px;padding:20px;text-align:center}
-.summary-card .num{font-family:var(--rdx-font-serif);font-size:36px;color:#2874a6}
-.summary-card .label{font-size:13px;color:#64748b;margin-top:4px}
-.epa-list{display:flex;flex-direction:column;gap:16px}
-.epa-item{background:var(--rdx-bg-card);border:1px solid #e2e8f0;border-radius:16px;padding:20px;transition:.2s}
-.epa-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.epa-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px}
-.epa-num{font-size:12px;font-weight:700;color:#2874a6;background:#f0f7fc;padding:4px 10px;border-radius:8px}
-.epa-level{display:flex;gap:4px;align-items:center;font-size:13px;font-weight:600}
-.level-dot{width:12px;height:12px;border-radius:50%}
-.epa-title{font-family:var(--rdx-font-serif);font-size:17px;margin-bottom:8px}
-.epa-desc{font-size:13px;color:#64748b;margin-bottom:12px;line-height:1.5}
-.epa-progress{display:flex;gap:3px;margin-bottom:8px}
-.epa-progress .seg{flex:1;height:8px;border-radius:4px;background:#e2e8f0;transition:.3s}
-.epa-activities{display:flex;flex-wrap:wrap;gap:6px}
-.epa-act{font-size:11px;padding:3px 8px;border-radius:4px;background:#f1f5f9;color:#475569}
-.epa-act.done{background:#d4e8f7;color:#166534}
-.legend{display:flex;gap:16px;margin-bottom:24px;font-size:13px;color:#64748b;flex-wrap:wrap}
-.legend-item{display:flex;align-items:center;gap:6px}
-.legend-dot{width:12px;height:12px;border-radius:50%}
-.log-btn{background:#2874a6;color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;align-items:center;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal{background:var(--rdx-bg-card);border-radius:16px;padding:32px;max-width:500px;width:90%}
-.modal h3{font-family:var(--rdx-font-serif);margin-bottom:16px}
-.modal .form-group{margin-bottom:16px}
-.modal .form-group label{display:block;font-weight:600;font-size:13px;color:#475569;margin-bottom:6px}
-.modal .form-group select,.modal .form-group textarea,.modal .form-group input{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;font-family:inherit}
-.modal-btns{display:flex;gap:8px;justify-content:flex-end}
-.modal-btns button{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid #e2e8f0;background:var(--rdx-bg-card)}
-.modal-btns .primary{background:#2874a6;color:#fff;border:none}
+body{font-family:var(--font);background:#f0f4f8;color:#1e293b;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.container{text-align:center;padding:24px}
+.icon{font-size:56px;margin-bottom:16px}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+h1 span{color:var(--blue)}
+p{color:#64748b;font-size:15px;margin-bottom:24px}
+.badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;background:#FEF9E7;color:#D97706}
+.back{display:inline-block;margin-top:24px;color:var(--blue);font-size:13px;font-weight:600;text-decoration:none}
+
+[data-theme="dark"] body{background:var(--rdx-bg,#0f172a);color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] h1{color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] p{color:var(--rdx-text-muted,#64748b)}
+[data-theme="dark"] .back{color:#5ba3cc}
 </style>
-<link rel="stylesheet" href="../css/rdx-theme.css">
 </head>
 <body>
-<div class="header">
-  <a href="../index.html">← Home</a>
-  <h1>📋 EPA Dashboard</h1>
-</div>
+<noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
+<script src="../auth/auth-guard.js"></script>
 <div class="container">
-  <div class="summary-grid">
-    <div class="summary-card"><div class="num" id="totalObs">0</div><div class="label">Total Observations</div></div>
-    <div class="summary-card"><div class="num" id="epasStarted">0</div><div class="label">EPAs Started</div></div>
-    <div class="summary-card"><div class="num" id="epasEntrust">0</div><div class="label">Entrustable</div></div>
-    <div class="summary-card"><div class="num" id="avgLevel">—</div><div class="label">Avg Entrustment</div></div>
-  </div>
-
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#e2e8f0"></div> Not observed</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fca5a5"></div> Level 1: Observe only</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fcd34d"></div> Level 2: Direct supervision</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#86efac"></div> Level 3: Indirect supervision</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#2874a6"></div> Level 4: Unsupervised</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#1a4971"></div> Level 5: Supervise others</div>
-  </div>
-
-  <div class="epa-list" id="epaList" role="list" aria-label="EPA milestones list"></div>
+  <div class="icon">🎯</div>
+  <span class="badge">Coming Soon</span>
+  <h1>EPA <span>Dashboard</span></h1>
+  <p>Track entrustable professional activities across your training.</p>
+  <a href="index.html" class="back">← Back to Tools</a>
 </div>
-
-<!-- Log Observation Modal -->
-<div class="modal-overlay" id="logModal">
-  <div class="modal">
-    <h3>Log Observation</h3>
-    <div id="modalEpaName" style="font-weight:600;margin-bottom:16px;color:#2874a6"></div>
-    <div class="form-group">
-      <label>Entrustment Level</label>
-      <select id="logLevel" aria-label="Entrustment level">
-        <option value="1">Level 1 — Observe only</option>
-        <option value="2">Level 2 — Direct supervision</option>
-        <option value="3" selected>Level 3 — Indirect supervision</option>
-        <option value="4">Level 4 — Unsupervised/independent</option>
-        <option value="5">Level 5 — Can supervise others</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Setting</label>
-      <select id="logSetting" aria-label="Clinical setting">
-        <option>Simulation</option><option>Standardized Patient</option><option>Clinical Encounter</option><option>Written Assessment</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Notes (optional)</label>
-      <textarea id="logNotes" aria-label="Observation notes" rows="3" placeholder="Brief description of the encounter..."></textarea>
-    </div>
-    <div class="modal-btns">
-      <button onclick="closeModal()">Cancel</button>
-      <button class="primary" onclick="saveLog()">Save Observation</button>
-    </div>
-  </div>
-</div>
-
-<script src="../js/rdx-persist.js"></script>
-<script>
-const EPAS = [
-  { id: 1, title: 'Gather a History and Perform a Physical Examination', desc: 'Gather essential and accurate information about patients through history-taking, physical examination, and review of prior data.', acts: ['History taking','Physical exam','Chart review','Focused vs comprehensive'] },
-  { id: 2, title: 'Prioritize a Differential Diagnosis', desc: 'Integrate clinical information to develop a prioritized differential diagnosis following an analytic reasoning framework.', acts: ['Problem representation','Illness scripts','Bayesian reasoning','Anchoring avoidance'] },
-  { id: 3, title: 'Recommend and Interpret Diagnostic Tests', desc: 'Recommend cost-effective, evidence-based diagnostic studies, interpret results in clinical context.', acts: ['Test selection','Pre-test probability','Sensitivity/specificity','Result interpretation'] },
-  { id: 4, title: 'Enter and Discuss Orders and Prescriptions', desc: 'Enter and discuss patient orders including medications, with attention to safety, cost, and patient factors.', acts: ['Order writing','Drug interactions','Dose adjustments','Patient communication'] },
-  { id: 5, title: 'Document a Clinical Encounter', desc: 'Document a clinical encounter in the patient record, including a well-organized note with accurate assessment and plan.', acts: ['H&P documentation','Progress notes','Discharge summaries','Problem-oriented charting'] },
-  { id: 6, title: 'Provide an Oral Presentation', desc: 'Provide an oral presentation of a clinical encounter to faculty and/or team members in a structured, prioritized format.', acts: ['Case presentation','SBAR communication','Prioritized summary','Audience adaptation'] },
-  { id: 7, title: 'Form Clinical Questions and Retrieve Evidence', desc: 'Ask well-formed clinical questions, search for and appraise evidence, and apply findings to clinical care.', acts: ['PICO questions','Literature search','Evidence appraisal','Application to care'] },
-  { id: 8, title: 'Give or Receive a Patient Handover', desc: 'Give or receive a patient handover to transition care responsibility using a structured approach.', acts: ['I-PASS framework','Anticipatory guidance','Contingency planning','Read-back verification'] },
-  { id: 9, title: 'Collaborate as a Member of an Interprofessional Team', desc: 'Collaborate effectively with other healthcare professionals to optimize patient care.', acts: ['Team dynamics','Role clarity','Conflict resolution','Shared decision-making'] },
-  { id: 10, title: 'Recognize a Patient Requiring Urgent Care', desc: 'Recognize a patient requiring urgent or emergent care and initiate evaluation and management.', acts: ['ABC assessment','Critical vital signs','Emergent intervention','Escalation/activation'] },
-  { id: 11, title: 'Obtain Informed Consent', desc: 'Obtain informed consent for tests and/or procedures in a patient-centered manner.', acts: ['Risk/benefit discussion','Alternatives presentation','Decision capacity','Documentation'] },
-  { id: 12, title: 'Perform General Procedures', desc: 'Perform general procedures of a physician, including sterile technique and core procedural skills.', acts: ['Sterile technique','Venipuncture/IV','Wound care','BLS/ACLS'] },
-  { id: 13, title: 'Identify System Failures and Contribute to Safety', desc: 'Identify system failures and contribute to a culture of safety and improvement.', acts: ['Error recognition','Root cause analysis','Safety reporting','QI participation'] },
-];
-
-// In-memory state
-let observations = {};
-let logTarget = null;
-
-// Load saved observations from DxProgress
-(function loadEpaData() {
-  if (window.DxProgress) {
-    const saved = DxProgress.getEpaObservations();
-    if (saved && Object.keys(saved).length > 0) {
-      observations = saved;
-    }
-  } else if (window.RdxPersist) {
-    observations = RdxPersist.load('epa_observations', {});
-  }
-})();
-
-function getLevel(epaId) {
-  const obs = observations[epaId] || [];
-  if (obs.length === 0) return 0;
-  return Math.round(obs.reduce((s, o) => s + o.level, 0) / obs.length);
-}
-
-const levelColors = ['#e2e8f0','#fca5a5','#fcd34d','#86efac','#2874a6','#1a4971'];
-const levelLabels = ['Not observed','Observe only','Direct supervision','Indirect supervision','Unsupervised','Supervise others'];
-
-function render() {
-  const list = document.getElementById('epaList');
-  let totalObs = 0, started = 0, entrust = 0, levelSum = 0, levelCount = 0;
-
-  list.innerHTML = EPAS.map(epa => {
-    const obs = observations[epa.id] || [];
-    const level = getLevel(epa.id);
-    totalObs += obs.length;
-    if (obs.length > 0) { started++; levelSum += level; levelCount++; }
-    if (level >= 4) entrust++;
-
-    const segs = [1,2,3,4,5].map(l =>
-      `<div class="seg" style="background:${level >= l ? levelColors[l] : '#e2e8f0'}"></div>`
-    ).join('');
-
-    return `
-      <div class="epa-item">
-        <div class="epa-top">
-          <div class="epa-num">EPA ${epa.id}</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <div class="epa-level">
-              <div class="level-dot" style="background:${levelColors[level]}"></div>
-              ${level > 0 ? `Level ${level}` : 'Not observed'}
-            </div>
-            <button class="log-btn" onclick="openLog(${epa.id})">+ Log</button>
-          </div>
-        </div>
-        <div class="epa-title">${epa.title}</div>
-        <div class="epa-desc">${epa.desc}</div>
-        <div class="epa-progress">${segs}</div>
-        <div class="epa-activities">
-          ${epa.acts.map(a => `<span class="epa-act">${a}</span>`).join('')}
-        </div>
-        ${obs.length > 0 ? `<div style="margin-top:8px;font-size:12px;color:#94a3b8">${obs.length} observation${obs.length>1?'s':''} logged</div>` : ''}
-      </div>
-    `;
-  }).join('');
-
-  document.getElementById('totalObs').textContent = totalObs;
-  document.getElementById('epasStarted').textContent = started;
-  document.getElementById('epasEntrust').textContent = entrust;
-  document.getElementById('avgLevel').textContent = levelCount > 0 ? (levelSum / levelCount).toFixed(1) : '—';
-}
-
-function openLog(epaId) {
-  logTarget = epaId;
-  const epa = EPAS.find(e => e.id === epaId);
-  document.getElementById('modalEpaName').textContent = `EPA ${epa.id}: ${epa.title}`;
-  document.getElementById('logModal').classList.add('show');
-}
-
-function closeModal() {
-  document.getElementById('logModal').classList.remove('show');
-  logTarget = null;
-}
-
-function saveLog() {
-  if (!logTarget) return;
-  const level = +document.getElementById('logLevel').value;
-  const setting = document.getElementById('logSetting').value;
-  const notes = document.getElementById('logNotes').value;
-  
-  if (!level) { alert('Please select an entrustment level'); return; }
-  
-  const observation = { level, setting, notes, date: new Date().toISOString() };
-  if (!observations[logTarget]) observations[logTarget] = [];
-  observations[logTarget].push(observation);
-  
-  // Persist to DxProgress
-  if (window.DxProgress) {
-    DxProgress.addEpaObservation(logTarget, observation);
-    DxProgress.addXP(5, 'epa-observation');
-  } else if (window.RdxPersist) {
-    RdxPersist.save('epa_observations', observations);
-  }
-  
-  document.getElementById('logNotes').value = '';
-  closeModal();
-  render();
-}
-
-render();
-</script>
 <script src="../js/rdx-nav.js"></script>
-<script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
-</script>
 <script src="../js/rdx-help-widget.js"></script>
-
-<script src="../js/dx-feedback.js"></script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script>
 </body>
 </html>

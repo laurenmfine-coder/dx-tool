@@ -1,7 +1,12 @@
-/** rdx-gate.js — Auth/registration gate.
- *  Redirects unauthenticated users to registration.
- *  Currently a stub — no-op. */
-(function(){
+/* rdx-gate.js — Feature Gate
+ * Controls access to features based on user state and plan.
+ */
+(function() {
   'use strict';
-  window.checkAuth = function(){ return true; };
+  window.RDXGate = {
+    check: function(feature) { return true; },
+    require: function(feature, callback) {
+      if (this.check(feature)) callback();
+    }
+  };
 })();

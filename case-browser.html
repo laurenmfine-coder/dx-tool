@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- ReasonDx Landing | build 2025-02-23 -->
 <html data-theme="light" lang="en">
 <head>
 <!-- Google Analytics (ReasonDx) -->
@@ -14,14 +13,15 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Browse Cases — ReasonDx</title>
+<title>Case Library | ReasonDx</title>
 <meta name="description" content="ReasonDx: AI-powered clinical reasoning trainer for health professions learners. Practice diagnostic thinking, SBAR communication, and get personalized coaching across 326 cases and 29 specialties.">
 <meta property="og:title" content="ReasonDx — Clinical Reasoning Platform">
 <meta property="og:description" content="ReasonDx: AI-powered clinical reasoning trainer. Build differentials, practice SBAR handoffs, and get personalized coaching across 326 cases and 29 specialties.">
+<meta property="og:url" content="https://reasondx.com/case-browser.html">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -919,8 +919,17 @@ body {
   })();
 </script>
 <script src="auth/auth-guard.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="canonical" href="https://reasondx.com/case-browser.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Case Library | ReasonDx">
+<meta name="twitter:description" content="Browse 256 interactive clinical cases across 28 specialties.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 <!-- Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
@@ -934,19 +943,18 @@ body {
   </a>
 </div>
 
-<script src="rdx-nav.js"></script>
+<script src="js/rdx-nav.js"></script>
 
-<!-- nav removed: unified via rdx-nav.js -->
 
 <!-- HERO — Browse Cases -->
-<section class="hero">
+<section class="hero" id="main-content" role="main">
   <div style="margin-bottom:12px"><a href="index.html" style="color:#2874A6;text-decoration:none;font-size:13px;font-weight:600">&larr; Back to Home</a></div>
   <h1>Browse All <em style="font-style:italic;color:#2874A6">Cases</em></h1>
   <p>326 clinical reasoning cases across 29 specialties. Search by topic, filter by level, and start training.</p>
   
   <div class="search-wrap">
     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" class="search-input" id="searchInput" placeholder="Search cases — kidney, prostate, hernia, testicular..." autocomplete="off">
+    <input type="text" class="search-input" id="searchInput" aria-label="Search cases" placeholder="Search cases — kidney, prostate, hernia, testicular..." autocomplete="off">
     <div class="search-results" id="searchResults"></div>
   </div>
   <div class="search-hint">Try: <kbd>kidney</kbd> <kbd>prostate</kbd> <kbd>hernia</kbd> <kbd>testicular</kbd> <kbd>bladder</kbd></div>
@@ -956,11 +964,11 @@ body {
 <section class="level-selector">
   <div class="level-label">I'm studying for:</div>
   <div class="level-pills">
-    <button class="level-pill active" onclick="setLevel('all', this)" data-level="all">All Content</button>
-    <button class="level-pill premed-pill" onclick="setLevel('premed', this)" data-level="premed">🩺 Premed</button>
-    <button class="level-pill" onclick="setLevel('m2', this)" data-level="m2">Pathophysiology</button>
-    <button class="level-pill" onclick="setLevel('m3', this)" data-level="m3">Shelf Exams</button>
-    <button class="level-pill" onclick="setLevel('m4', this)" data-level="m4">Step 2 / COMLEX</button>
+    <button type="button" class="level-pill active" onclick="setLevel('all', this)" data-level="all">All Content</button>
+    <button type="button" class="level-pill premed-pill" onclick="setLevel('premed', this)" data-level="premed">🩺 Premed</button>
+    <button type="button" class="level-pill" onclick="setLevel('m2', this)" data-level="m2">Pathophysiology</button>
+    <button type="button" class="level-pill" onclick="setLevel('m3', this)" data-level="m3">Shelf Exams</button>
+    <button type="button" class="level-pill" onclick="setLevel('m4', this)" data-level="m4">Step 2 / COMLEX</button>
   </div>
 </section>
 
@@ -1273,7 +1281,7 @@ body {
                             </div>
                             <div id="ixBridgePrompt" style="text-align: center; padding: 6px 0;">
                                 <p style="font-size: 13px; color: var(--slate500); margin-bottom: 10px;">Do you know what this term means?</p>
-                                <button onclick="document.getElementById('ixBridgePrompt').style.display='none';document.getElementById('ixBridgeAnswer').style.display='block';" style="padding: 8px 22px; background: #6d28d9; color: white; border: none; border-radius: 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit;">Reveal Definition →</button>
+                                <button type="button" onclick="document.getElementById('ixBridgePrompt').style.display='none';document.getElementById('ixBridgeAnswer').style.display='block';" style="padding: 8px 22px; background: #6d28d9; color: white; border: none; border-radius: 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit;">Reveal Definition →</button>
                             </div>
                         </div>
                     </div>
@@ -1407,7 +1415,7 @@ body {
 <!-- EMAIL POPUP -->
 <div class="email-popup-overlay" id="emailPopup">
   <div class="email-popup">
-    <button class="popup-close" onclick="closePopup()">&times;</button>
+    <button type="button" class="popup-close" onclick="closePopup()">&times;</button>
     <h3>Level up your reasoning</h3>
     <p>Weekly clinical reasoning tips & new case alerts — built for learners who want to think like clinicians.</p>
     <form class="popup-form" onsubmit="handleSignup(event)">
@@ -3039,7 +3047,7 @@ function renderSpecialties() {
   const topicsContainer = document.getElementById('specialtyTopics');
   
   pillsContainer.innerHTML = Object.keys(SPECIALTIES).map(spec => 
-    `<button class="specialty-pill" onclick="selectSpecialty('${spec}', this)">${spec}</button>`
+    `<button type="button" class="specialty-pill" onclick="selectSpecialty('${spec}', this)">${spec}</button>`
   ).join('');
 }
 
@@ -3092,7 +3100,7 @@ function openPath(key) {
         <h2>${data.title}</h2>
         <p>${data.desc}</p>
       </div>
-      <button class="close-btn" onclick="closePath()">✕</button>
+      <button type="button" class="close-btn" onclick="closePath()">✕</button>
     </div>
     <div class="path-panel-body">
       ${data.items.map(item => `
@@ -3252,12 +3260,12 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 <!-- PWA Install Modal (session-based, shows each visit) -->
 <div class="pwa-modal-overlay" id="pwa-modal" style="display:none">
   <div class="pwa-modal-card">
-    <button class="pwa-modal-close" id="pwa-modal-close" aria-label="Close">&times;</button>
+    <button type="button" class="pwa-modal-close" id="pwa-modal-close" aria-label="Close">&times;</button>
     <div class="pwa-modal-icon">📱</div>
     <h2 class="pwa-modal-title">Use ReasonDx as an App</h2>
     <p class="pwa-modal-subtitle">Add to your home screen for full-screen, app-like access — works offline too.</p>
     <div class="pwa-modal-steps" id="pwa-steps-android">
-      <button class="pwa-modal-install-btn" id="pwa-modal-install">Install ReasonDx</button>
+      <button type="button" class="pwa-modal-install-btn" id="pwa-modal-install">Install ReasonDx</button>
     </div>
     <div class="pwa-modal-steps" id="pwa-steps-ios-safari" style="display:none">
       <div class="pwa-ios-step"><span class="pwa-step-num">1</span> Tap the <strong>Share</strong> button <span style="font-size:1.2em">⬆</span> at the bottom of your screen</div>
@@ -3267,10 +3275,10 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
     <div class="pwa-modal-steps" id="pwa-steps-ios-other" style="display:none">
       <div class="pwa-ios-step" style="flex-direction:column;align-items:flex-start;gap:6px;text-align:left;">
         <div style="color:#475569;font-size:14px;line-height:1.5;">To add ReasonDx to your home screen, you'll need to open this page in <strong>Safari</strong>. Other browsers on iPhone don't support this feature.</div>
-        <button class="pwa-modal-install-btn" style="margin-top:8px;font-size:14px;padding:12px;" onclick="navigator.clipboard.writeText(window.location.href).then(function(){this.textContent='✓ Link Copied — Open Safari & Paste';this.style.background='#059669'}.bind(this))">Copy Link to Open in Safari</button>
+        <button type="button" class="pwa-modal-install-btn" style="margin-top:8px;font-size:14px;padding:12px;" onclick="navigator.clipboard.writeText(window.location.href).then(function(){this.textContent='✓ Link Copied — Open Safari & Paste';this.style.background='#059669'}.bind(this))">Copy Link to Open in Safari</button>
       </div>
     </div>
-    <button class="pwa-modal-later" id="pwa-modal-later">Continue to site →</button>
+    <button type="button" class="pwa-modal-later" id="pwa-modal-later">Continue to site →</button>
   </div>
 </div>
 <style>
@@ -3363,12 +3371,12 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
       banner.id = 'pwa-hero-inline';
       if(isIOS){
         if(isSafari){
-          banner.innerHTML = '📱 For the best experience, add ReasonDx to your Home Screen <button class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Show Me How</button>';
+          banner.innerHTML = '📱 For the best experience, add ReasonDx to your Home Screen <button type="button" class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Show Me How</button>';
         } else {
-          banner.innerHTML = '📱 Open in Safari to add ReasonDx to your Home Screen <button class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Learn More</button>';
+          banner.innerHTML = '📱 Open in Safari to add ReasonDx to your Home Screen <button type="button" class="pwa-hero-btn" onclick="document.getElementById(\'pwa-modal\').style.display=\'flex\'">Learn More</button>';
         }
       } else {
-        banner.innerHTML = '📱 Install ReasonDx as an app for offline access <button class="pwa-hero-btn" id="pwa-hero-install-btn">Install App</button>';
+        banner.innerHTML = '📱 Install ReasonDx as an app for offline access <button type="button" class="pwa-hero-btn" id="pwa-hero-install-btn">Install App</button>';
       }
       hero.after(banner);
       // Wire up inline install button for Android
@@ -3520,19 +3528,7 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
 <script src="js/dx-feedback.js"></script>
 <script src="js/dx-modal-safety.js"></script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- ANONYMOUS FEEDBACK WIDGET                 -->
@@ -3570,7 +3566,7 @@ s0.parentNode.insertBefore(s1,s0);
 </style>
 
 <div class="fb-float" id="fbWidget" style="display: none;">
-    <button class="fb-btn" onclick="toggleFeedback()" id="fbToggle" aria-label="Send feedback">
+    <button type="button" class="fb-btn" onclick="toggleFeedback()" id="fbToggle" aria-label="Send feedback">
         💬 <span>Feedback</span>
     </button>
 </div>
@@ -3582,17 +3578,17 @@ s0.parentNode.insertBefore(s1,s0);
                 <h3>Share your thoughts</h3>
                 <p style="font-size: 12px; color: #94a3b8; margin-top: 2px;">100% anonymous — no login needed</p>
             </div>
-            <button class="fb-panel-close" onclick="toggleFeedback()">&times;</button>
+            <button type="button" class="fb-panel-close" onclick="toggleFeedback()">&times;</button>
         </div>
         <div class="fb-panel-body">
             <div class="fb-emoji-row">
-                <button class="fb-emoji" onclick="pickEmoji(this,'love')" data-cat="love"><span class="em">😍</span><span class="el">Love It</span></button>
-                <button class="fb-emoji" onclick="pickEmoji(this,'idea')" data-cat="idea"><span class="em">💡</span><span class="el">Idea</span></button>
-                <button class="fb-emoji" onclick="pickEmoji(this,'confused')" data-cat="confused"><span class="em">🤔</span><span class="el">Confused</span></button>
-                <button class="fb-emoji" onclick="pickEmoji(this,'bug')" data-cat="bug"><span class="em">🐛</span><span class="el">Bug</span></button>
+                <button type="button" class="fb-emoji" onclick="pickEmoji(this,'love')" data-cat="love"><span class="em">😍</span><span class="el">Love It</span></button>
+                <button type="button" class="fb-emoji" onclick="pickEmoji(this,'idea')" data-cat="idea"><span class="em">💡</span><span class="el">Idea</span></button>
+                <button type="button" class="fb-emoji" onclick="pickEmoji(this,'confused')" data-cat="confused"><span class="em">🤔</span><span class="el">Confused</span></button>
+                <button type="button" class="fb-emoji" onclick="pickEmoji(this,'bug')" data-cat="bug"><span class="em">🐛</span><span class="el">Bug</span></button>
             </div>
             <textarea class="fb-text" id="fbText" placeholder="Tell us anything — ideas, feedback, what you wish existed, what's confusing, what's great..." maxlength="2000"></textarea>
-            <button class="fb-submit" id="fbSubmitBtn" onclick="submitFeedback()">Send Feedback</button>
+            <button type="button" class="fb-submit" id="fbSubmitBtn" onclick="submitFeedback()">Send Feedback</button>
             <p class="fb-note">Your feedback shapes what we build next.</p>
         </div>
     </div>
@@ -3600,7 +3596,7 @@ s0.parentNode.insertBefore(s1,s0);
         <div class="check">✨</div>
         <h4>Thank you!</h4>
         <p>Your feedback was received — it goes straight to the team. We read every single one.</p>
-        <button onclick="resetFeedback()" style="margin-top: 14px; padding: 8px 20px; background: none; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 13px; color: #64748b; cursor: pointer; font-family: inherit;">Send another</button>
+        <button type="button" onclick="resetFeedback()" style="margin-top: 14px; padding: 8px 20px; background: none; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 13px; color: #64748b; cursor: pointer; font-family: inherit;">Send another</button>
     </div>
 </div>
 
@@ -3638,7 +3634,7 @@ function submitFeedback() {
     if (FB_SHEETS_URL !== 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec') {
         try { fetch(FB_SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); } catch(e) {}
     }
-    console.log('Feedback submitted:', JSON.stringify(payload, null, 2));
+    void(0););
     document.getElementById('fbForm').style.display = 'none';
     document.getElementById('fbSuccess').style.display = 'block';
     btn.disabled = false;
@@ -3670,5 +3666,6 @@ function closeFeedbackPanel() {
 
 <script src="rdx-demo-tour.js"></script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
+<script src="js/dx-user-bar.js"></script>
 </body>
 </html>

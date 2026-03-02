@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics (ReasonDx) -->
+<meta name="theme-color" content="#1f5f8b">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EKCVJ1SMN3');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign In | ReasonDx</title>
-<script>
-  // Redirect to register.html which handles both sign-in and sign-up
-  // Preserve any redirect URL stored in sessionStorage
-  window.location.replace('register.html#signin');
-</script>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../mobile.css">
+<title>Log In | ReasonDx</title>
+<meta name="description" content="Log in to your ReasonDx account.">
+<style>
+:root{--blue:#2874A6;--dark:#1B4F72;--font:'IBM Plex Sans',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:#f0f4f8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,.08);max-width:400px;width:100%;padding:40px}
+.logo{font-family:Georgia,serif;font-size:28px;font-weight:700;color:#2f3640;text-align:center;margin-bottom:8px}
+.logo span{border-bottom:3px solid var(--blue);padding-bottom:2px}
+h1{font-size:24px;font-weight:700;color:#1e293b;margin-bottom:4px;text-align:center;margin-top:12px}
+label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;margin-top:16px}
+input{width:100%;padding:12px 14px;border:1px solid #d1d5db;border-radius:10px;font-size:14px;font-family:inherit}
+input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.btn{display:block;width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:24px}
+.btn:hover{background:var(--dark)}
+.switch{text-align:center;margin-top:16px;font-size:13px;color:#64748b}
+.switch a{color:var(--blue);font-weight:600;text-decoration:none}
+
+/* Dark mode */
+[data-theme="dark"] body{background:var(--rdx-bg,#0f172a);color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] .card,[data-theme="dark"] .container{background:var(--rdx-bg-card,#1e293b);color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] input,[data-theme="dark"] select{background:#1e293b;color:#e2e8f0;border-color:#334155}
+[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3{color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] p{color:var(--rdx-text-secondary,#94a3b8)}
+[data-theme="dark"] .subtitle,[data-theme="dark"] .plan-price,[data-theme="dark"] .switch{color:var(--rdx-text-muted,#64748b)}
+[data-theme="dark"] label{color:#94a3b8}
+[data-theme="dark"] .plan{border-color:#334155;background:#1e293b}
+[data-theme="dark"] .plan.active,[data-theme="dark"] .plan:hover{background:rgba(40,116,166,.15);border-color:#5ba3cc}
+[data-theme="dark"] .legal{color:#475569}
+[data-theme="dark"] .badge{background:rgba(217,119,6,.15)}
+[data-theme="dark"] .back{color:#5ba3cc}
+</style>
+<meta name="robots" content="noindex, nofollow">
 </head>
 <body>
-<p>Redirecting to sign in...</p>
-
-<script src="../js/dx-feedback.js"></script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+<noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<div id="main-content"></div>
+<div class="card">
+  <div class="logo">Reason<span>Dx</span></div>
+  <h1>Welcome Back</h1>
+  <label>Email</label><input type="email" placeholder="you@school.edu" id="login-email">
+  <label>Password</label><input type="password" placeholder="Your password" id="login-pass">
+  <button class="btn" onclick="localStorage.setItem('reasondx-user',JSON.stringify({email:document.getElementById('login-email').value}));window.location.href='../index.html'">Log In</button>
+  <p class="switch">New here? <a href="register.html">Create an account</a></p>
+</div>
+<script src="../js/rdx-help-widget.js"></script>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{})</script>
 </body>
 </html>

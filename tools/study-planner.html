@@ -1,416 +1,48 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="en">
+<html lang="en">
 <head>
-<!-- Google Analytics (ReasonDx) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EKCVJ1SMN3');
-</script>
 <meta name="theme-color" content="#1f5f8b">
-<link rel="manifest" href="../manifest.json">
-<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-<link rel="stylesheet" href="../mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>
-// Auth Guard - DISABLED for launch (free access)
-// Auth guard disabled for free launch period</script>
-<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Study Planner — clinical education tool on ReasonDx. Interactive learning resource for learners and educators across the health professions.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Study Planner | ReasonDx</title>
-    
-    <style>
-        :root { --primary: #1f5f8b; --text-primary: #18181b; --text-secondary: #52525b; --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e4e4e7; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family:var(--rdx-font); background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #1f5f8b 0%, #5b21b6 100%); padding: 32px 24px; color: white; text-align: center; }
-        .header h1 { font-size: 28px; margin-bottom: 8px; }
-        .header p { opacity: 0.9; font-size: 14px; }
-        .content { max-width: 900px; margin: 0 auto; padding: 24px; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
-        .card h2 { font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .setup-form { display: grid; gap: 20px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
-        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
-        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 15px; font-family: inherit; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
-        .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-        .checkbox-item { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #f1f5f9; border-radius:8px; cursor: pointer; font-size: 13px; }
-        .checkbox-item input { margin: 0; }
-        .checkbox-item.checked { background: #d4e8f7; color: #166534; }
-        .btn-primary { background: var(--primary); color: white; border: none; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; }
-        .btn-primary:hover { background: #1a4971; }
-        .schedule-grid { display: grid; gap: 12px; }
-        .schedule-day { border: 1px solid var(--border); border-radius:12px; overflow: hidden; }
-        .schedule-day-header { background: #f8fafc; padding: 12px 16px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
-        .schedule-day-header .date { font-size: 14px; }
-        .schedule-day-header .badge { font-size: 12px; padding: 4px 10px; border-radius: 12px; background: #d4e8f7; color: #1f5f8b; }
-        .schedule-tasks { padding: 12px 16px; }
-        .schedule-task { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-        .schedule-task:last-child { border-bottom: none; }
-        .task-checkbox { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-        .task-checkbox.done { background: var(--primary); border-color: var(--primary); color: white; }
-        .task-info { flex: 1; }
-        .task-title { font-size: 14px; font-weight: 500; }
-        .task-meta { font-size: 12px; color: var(--text-secondary); }
-        .task-time { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
-        .summary-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-        @media (max-width: 600px) { .summary-stats { grid-template-columns: repeat(2, 1fr); } }
-        .stat-box { background: #f8fafc; border-radius:12px; padding: 16px; text-align: center; }
-        .stat-box .value { font-size: 28px; font-weight: 700; color: var(--primary); }
-        .stat-box .label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
-        .today-highlight { background: linear-gradient(135deg, #f0f7fc 0%, #d1fae5 100%); border: 2px solid #2874a6; }
-        .today-highlight .schedule-day-header { background: transparent; }
-        .motivational { background: linear-gradient(135deg, #f0f7fc 0%, #d4e8f7 100%); border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 24px; }
-        .motivational .emoji { font-size: 32px; margin-bottom: 8px; }
-        .motivational p { color: #92400e; font-weight: 500; }
-    </style>
-<link rel="stylesheet" href="../css/rdx-theme.css">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="description" content="Plan your study schedule with spaced repetition optimization.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../mobile.css">
+<style>
+:root{--blue:#2874A6;--font:'IBM Plex Sans',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:#f0f4f8;color:#1e293b;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.container{text-align:center;padding:24px}
+.icon{font-size:56px;margin-bottom:16px}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+h1 span{color:var(--blue)}
+p{color:#64748b;font-size:15px;margin-bottom:24px}
+.badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;background:#FEF9E7;color:#D97706}
+.back{display:inline-block;margin-top:24px;color:var(--blue);font-size:13px;font-weight:600;text-decoration:none}
+
+[data-theme="dark"] body{background:var(--rdx-bg,#0f172a);color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] h1{color:var(--rdx-text,#e2e8f0)}
+[data-theme="dark"] p{color:var(--rdx-text-muted,#64748b)}
+[data-theme="dark"] .back{color:#5ba3cc}
+</style>
 </head>
 <body>
-    <header class="header">
-        <h1>📅 Study Planner</h1>
-        <p>Create a personalized study schedule for your exam</p>
-    </header>
-    <main class="content">
-        <!-- Setup Section -->
-        <div class="card" id="setup-section">
-            <h2>🎯 Set Your Goal</h2>
-            <div class="setup-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Exam Date</label>
-                        <input type="date" id="exam-date">
-                    </div>
-                    <div class="form-group">
-                        <label>Daily Study Time (hours)</label>
-                        <select id="daily-hours">
-                            <option value="1">1 hour</option>
-                            <option value="2" selected>2 hours</option>
-                            <option value="3">3 hours</option>
-                            <option value="4">4 hours</option>
-                            <option value="5">5+ hours</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Topics to Cover (select all that apply)</label>
-                    <div class="checkbox-group" id="topics">
-                        <label class="checkbox-item"><input type="checkbox" checked> Microbiology</label>
-                        <label class="checkbox-item"><input type="checkbox" checked> Pharmacology</label>
-                        <label class="checkbox-item"><input type="checkbox"> Cardiology</label>
-                        <label class="checkbox-item"><input type="checkbox"> Pulmonology</label>
-                        <label class="checkbox-item"><input type="checkbox" checked> Renal</label>
-                        <label class="checkbox-item"><input type="checkbox"> Neurology</label>
-                        <label class="checkbox-item"><input type="checkbox"> GI</label>
-                        <label class="checkbox-item"><input type="checkbox"> Endocrine</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Study Days</label>
-                    <div class="checkbox-group" id="days">
-                        <label class="checkbox-item checked"><input type="checkbox" checked> Mon</label>
-                        <label class="checkbox-item checked"><input type="checkbox" checked> Tue</label>
-                        <label class="checkbox-item checked"><input type="checkbox" checked> Wed</label>
-                        <label class="checkbox-item checked"><input type="checkbox" checked> Thu</label>
-                        <label class="checkbox-item checked"><input type="checkbox" checked> Fri</label>
-                        <label class="checkbox-item"><input type="checkbox"> Sat</label>
-                        <label class="checkbox-item"><input type="checkbox"> Sun</label>
-                    </div>
-                </div>
-                <button class="btn-primary" onclick="generateSchedule()">Generate My Study Plan</button>
-            </div>
-        </div>
-
-        <!-- Generated Schedule Section -->
-        <div id="schedule-section" style="display: none;">
-            <div class="motivational">
-                <div class="emoji">💪</div>
-                <p>You've got this! Stay consistent and trust the process.</p>
-            </div>
-            
-            <div class="summary-stats">
-                <div class="stat-box">
-                    <div class="value" id="days-until">14</div>
-                    <div class="label">Days Until Exam</div>
-                </div>
-                <div class="stat-box">
-                    <div class="value" id="total-hours">28</div>
-                    <div class="label">Total Study Hours</div>
-                </div>
-                <div class="stat-box">
-                    <div class="value" id="modules-count">47</div>
-                    <div class="label">Modules to Cover</div>
-                </div>
-                <div class="stat-box">
-                    <div class="value" id="per-day">~3</div>
-                    <div class="label">Modules/Day</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>📋 Your Study Schedule</h2>
-                <div class="schedule-grid" id="schedule-grid">
-                    <!-- Generated by JS -->
-                </div>
-            </div>
-
-            <button class="btn-primary" onclick="location.reload()" style="width: 100%;">Regenerate Schedule</button>
-        </div>
-    </main>
-
-    <script src="dx-storage.js"></script>
-    <script>
-        // Toggle checkbox styling
-        document.querySelectorAll('.checkbox-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const checkbox = item.querySelector('input');
-                checkbox.checked = !checkbox.checked;
-                item.classList.toggle('checked', checkbox.checked);
-            });
-        });
-
-        // Set default exam date to 2 weeks from now
-        const defaultDate = new Date();
-        defaultDate.setDate(defaultDate.getDate() + 14);
-        document.getElementById('exam-date').valueAsDate = defaultDate;
-
-        function generateSchedule() {
-            const examDate = new Date(document.getElementById('exam-date').value);
-            const dailyHours = parseInt(document.getElementById('daily-hours').value);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            const daysUntil = Math.ceil((examDate - today) / (1000 * 60 * 60 * 24));
-            
-            // Get selected topics
-            const topics = [];
-            document.querySelectorAll('#topics .checkbox-item input:checked').forEach(cb => {
-                topics.push(cb.parentElement.textContent.trim());
-            });
-
-            // Get selected days
-            const selectedDays = [];
-            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            document.querySelectorAll('#days .checkbox-item input:checked').forEach(cb => {
-                selectedDays.push(cb.parentElement.textContent.trim());
-            });
-
-            // Calculate study days
-            let studyDays = 0;
-            for (let i = 0; i < daysUntil; i++) {
-                const d = new Date(today);
-                d.setDate(d.getDate() + i);
-                const dayName = dayNames[d.getDay()];
-                if (selectedDays.includes(dayName)) studyDays++;
-            }
-
-            // Module data
-            const modulesByTopic = {
-                'Microbiology': ['S. aureus', 'E. coli', 'Pseudomonas', 'Candida', 'Aspergillus', 'HIV', 'TB', 'Malaria'],
-                'Pharmacology': ['Beta-lactams', 'Vancomycin', 'Aminoglycosides', 'Fluoroquinolones', 'Anti-TB drugs', 'Antifungals'],
-                'Cardiology': ['ACS', 'Heart Failure', 'Arrhythmias', 'Hypertension', 'Valvular Disease'],
-                'Renal': ['AKI', 'CKD', 'Electrolytes', 'Acid-Base', 'Glomerulonephritis'],
-                'Pulmonology': ['COPD', 'Asthma', 'Pneumonia', 'ARDS', 'Pulmonary Embolism'],
-                'Neurology': ['Stroke', 'Seizures', 'Meningitis', 'MS', 'Parkinson'],
-                'GI': ['GI Bleed', 'Liver Disease', 'Pancreatitis', 'IBD', 'Hepatitis'],
-                'Endocrine': ['Diabetes', 'Thyroid', 'Adrenal', 'Pituitary', 'Calcium Disorders']
-            };
-
-            let allModules = [];
-            topics.forEach(t => {
-                if (modulesByTopic[t]) allModules = allModules.concat(modulesByTopic[t]);
-            });
-
-            const modulesPerDay = Math.ceil(allModules.length / studyDays);
-            const totalHours = studyDays * dailyHours;
-
-            // Update summary
-            document.getElementById('days-until').textContent = daysUntil;
-            document.getElementById('total-hours').textContent = totalHours;
-            document.getElementById('modules-count').textContent = allModules.length;
-            document.getElementById('per-day').textContent = '~' + modulesPerDay;
-
-            // Generate schedule
-            const grid = document.getElementById('schedule-grid');
-            grid.innerHTML = '';
-            
-            let moduleIndex = 0;
-            for (let i = 0; i < Math.min(daysUntil, 14); i++) {
-                const d = new Date(today);
-                d.setDate(d.getDate() + i);
-                const dayName = dayNames[d.getDay()];
-                const isStudyDay = selectedDays.includes(dayName);
-                const isToday = i === 0;
-
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'schedule-day' + (isToday ? ' today-highlight' : '');
-                
-                const dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-                
-                let tasksHTML = '';
-                if (isStudyDay && moduleIndex < allModules.length) {
-                    const dayModules = allModules.slice(moduleIndex, moduleIndex + modulesPerDay);
-                    moduleIndex += modulesPerDay;
-                    
-                    dayModules.forEach((m, idx) => {
-                        tasksHTML += `
-                            <div class="schedule-task" data-task="${i}-${idx}">
-                                <div class="task-checkbox" onclick="toggleTask(${i}, ${idx})"></div>
-                                <div class="task-info">
-                                    <div class="task-title">${m}</div>
-                                    <div class="task-meta">Module + Quiz</div>
-                                </div>
-                                <div class="task-time">~${Math.round(dailyHours * 60 / modulesPerDay)} min</div>
-                            </div>
-                        `;
-                    });
-                    
-                    // Add review session
-                    tasksHTML += `
-                        <div class="schedule-task" data-task="${i}-review">
-                            <div class="task-checkbox" onclick="toggleTask(${i}, 'review')"></div>
-                            <div class="task-info">
-                                <div class="task-title">Flashcard Review</div>
-                                <div class="task-meta">Spaced repetition</div>
-                            </div>
-                            <div class="task-time">15 min</div>
-                        </div>
-                    `;
-                } else if (!isStudyDay) {
-                    tasksHTML = '<div style="padding: 8px 0; color: #6b7280; font-size: 14px;">Rest day 😴</div>';
-                }
-
-                dayDiv.innerHTML = `
-                    <div class="schedule-day-header">
-                        <span class="date">${dateStr}</span>
-                        ${isToday ? '<span class="badge">Today</span>' : ''}
-                    </div>
-                    <div class="schedule-tasks">${tasksHTML}</div>
-                `;
-                
-                grid.appendChild(dayDiv);
-            }
-
-            // Show schedule section
-            document.getElementById('setup-section').style.display = 'none';
-            document.getElementById('schedule-section').style.display = 'block';
-
-            // Persist the plan
-            DxStorage.save('planner', 'current-plan', {
-                examDate: examDate.toISOString(),
-                dailyHours: dailyHours,
-                topics: topics,
-                selectedDays: selectedDays,
-                completed: {}
-            });
-        }
-
-        // ═══════════════════════════════════════════════
-        // PERSISTENCE — toggle tasks and save state
-        // ═══════════════════════════════════════════════
-        function toggleTask(dayIdx, taskIdx) {
-            const plan = DxStorage.load('planner', 'current-plan');
-            if (!plan) return;
-            const key = dayIdx + '-' + taskIdx;
-            if (!plan.completed) plan.completed = {};
-            plan.completed[key] = !plan.completed[key];
-            DxStorage.save('planner', 'current-plan', plan);
-            
-            const el = document.querySelector('[data-task="' + key + '"] .task-checkbox');
-            if (el) el.classList.toggle('done', plan.completed[key]);
-            updateCompletionStats();
-        }
-
-        function updateCompletionStats() {
-            const plan = DxStorage.load('planner', 'current-plan');
-            if (!plan || !plan.completed) return;
-            const totalTasks = document.querySelectorAll('.task-checkbox').length;
-            const doneTasks = Object.values(plan.completed).filter(Boolean).length;
-            const pctEl = document.getElementById('completion-pct');
-            if (pctEl) pctEl.textContent = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) + '%' : '0%';
-        }
-
-        // ═══════════════════════════════════════════════
-        // RESTORE SAVED PLAN ON LOAD
-        // ═══════════════════════════════════════════════
-        (function restorePlan() {
-            const plan = DxStorage.load('planner', 'current-plan');
-            if (!plan || !plan.examDate) return;
-            
-            const examDate = new Date(plan.examDate);
-            const now = new Date();
-            // Only restore if exam hasn't passed
-            if (examDate < now) {
-                DxStorage.remove('planner', 'current-plan');
-                return;
-            }
-            
-            // Restore form values
-            document.getElementById('exam-date').value = plan.examDate.split('T')[0];
-            document.getElementById('daily-hours').value = plan.dailyHours;
-            
-            // Restore topic checkboxes
-            document.querySelectorAll('#topics .checkbox-item').forEach(item => {
-                const text = item.textContent.trim();
-                const cb = item.querySelector('input');
-                cb.checked = plan.topics.includes(text);
-                item.classList.toggle('checked', cb.checked);
-            });
-            
-            // Restore day checkboxes
-            document.querySelectorAll('#days .checkbox-item').forEach(item => {
-                const text = item.textContent.trim();
-                const cb = item.querySelector('input');
-                cb.checked = plan.selectedDays.includes(text);
-                item.classList.toggle('checked', cb.checked);
-            });
-            
-            // Regenerate the schedule
-            generateSchedule();
-            
-            // Restore completed states
-            if (plan.completed) {
-                Object.entries(plan.completed).forEach(([key, done]) => {
-                    if (done) {
-                        const el = document.querySelector('[data-task="' + key + '"] .task-checkbox');
-                        if (el) el.classList.add('done');
-                    }
-                });
-            }
-            updateCompletionStats();
-        })();
-    </script>
-<script src="../js/dx-progress.js"></script>
-<script src="../js/dx-recommendations.js"></script>
-<script src="study-planner-enhance.js"></script>
-<script src="../js/rdx-persist.js"></script>
-<script src="dx-tools-nav.js"></script>
+<noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
+<script src="../auth/auth-guard.js"></script>
+<div class="container">
+  <div class="icon">📅</div>
+  <span class="badge">Coming Soon</span>
+  <h1>Study <span>Planner</span></h1>
+  <p>Plan your study schedule with spaced repetition optimization.</p>
+  <a href="index.html" class="back">← Back to Tools</a>
+</div>
 <script src="../js/rdx-nav.js"></script>
-<script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('../sw.js').catch(()=>{})}
-</script>
 <script src="../js/rdx-help-widget.js"></script>
-
-<script src="../js/dx-feedback.js"></script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script>
 </body>
 </html>

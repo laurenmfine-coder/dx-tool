@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ReasonDx — ED Track Board</title>
+<title>ED Track Board | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary:#2874A6; --primary-dark:#1B4F72; --primary-light:#EBF5FB;
@@ -173,8 +182,25 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .rdx-load-text{font-family:"IBM Plex Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
 <script src="auth/auth-guard.js"></script>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Interactive ED track board with 8 patient rooms. Manage arrivals, review charts, and practice emergency medicine on ReasonDx.">
+<meta property="og:title" content="Emergency Department | ReasonDx">
+<meta property="og:description" content="8-room virtual ED with full patient encounters and real EMR data.">
+<meta property="og:url" content="https://reasondx.com/ed-3d.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://reasondx.com/ed-3d.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Emergency Department | ReasonDx">
+<meta name="twitter:description" content="8-room virtual ED with full patient encounters.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<div id="main-content" role="main"></div>
 
 
 <div class="code-alert" id="codeAlert"></div>
@@ -217,7 +243,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     </div>
   </div>
   <div class="filter-divider"></div>
-  <input type="text" class="filter-search" id="searchBox" placeholder="Search…" oninput="applyFilters()">
+  <input type="text" class="filter-search" id="searchBox" aria-label="Search…" placeholder="Search…" oninput="applyFilters()">
   <span class="filter-reset" onclick="clearFilters()">Clear all</span>
 </div>
 
@@ -248,6 +274,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 <script src="emr-data/manifest.js"></script>
 <script src="emr-data/case-specialty-map.js"></script>
+<script src="emr-data/patient-names.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -258,8 +285,9 @@ var board = [], nextBed = 1, simMinutes = 420, sortField = 'bed', sortAsc = true
 var filters = { esi: [], status: [], category: [], search: '' };
 var usedCases = new Set(), allCases = [];
 
-var NAMES_M=["James Wilson","Robert Chen","Michael Davis","William Turner","David Garcia","Charles Kim","Thomas Brown","Richard Patel","Joseph Carter","Daniel Wright","Christopher Lee","Andrew Mitchell","Benjamin Torres","Samuel Rodriguez","Patrick O'Brien","Marcus Johnson","Steven Nguyen","Gregory Hall","Timothy Clark","Nathan Phillips"];
-var NAMES_F=["Sarah Mitchell","Maria Santos","Jennifer Liu","Patricia Williams","Amanda Torres","Linda Martinez","Elizabeth Park","Margaret Harris","Dorothy Nguyen","Susan Anderson","Jessica Lee","Emily Carter","Ashley Rivera","Rachel Green","Katherine Baker","Megan Thompson","Lauren Scott","Nicole Adams","Stephanie White","Olivia Cooper"];
+var NAMES_M=["James Wilson","Robert Chen","Michael Davis","William Turner","David Garcia","Charles Kim","Thomas Brown","Richard Patel","Joseph Carter","Daniel Wright","Christopher Lee","Andrew Mitchell","Benjamin Torres","Samuel Rodriguez","Patrick O'Brien","Marcus Johnson","Steven Nguyen","Gregory Hall","Timothy Clark","Nathan Phillips","Rafael Guzmán","Kwame Asante","Dmitri Volkov","Rasheed Thompson","Hiroshi Tanaka","Omar Hassan","Mateo Reyes","Jamal Washington","Aiden McCarthy","Sanjay Mehta"];
+var NAMES_F=["Sarah Mitchell","Jennifer Liu","Patricia Williams","Amanda Torres","Linda Martinez","Elizabeth Park","Margaret Harris","Dorothy Nguyen","Susan Anderson","Jessica Lee","Emily Carter","Ashley Rivera","Rachel Green","Katherine Baker","Megan Thompson","Lauren Scott","Nicole Adams","Stephanie White","Olivia Cooper","Priya Sharma","Fatima Al-Rashid","Yuki Nakamura","Aaliyah Brooks","Mei-Ling Chang","Lucia Fernandez","Keiko Watanabe","Amara Okonkwo","Catalina Rojas","Sofia Petrov","Ngozi Okafor"];
+var usedNames = new Set();
 var ATTENDINGS=["Dr. Marsh","Dr. Carter","Dr. Santos","Dr. Liu","Dr. Park","Dr. Brennan","Dr. Kim","Dr. Torres"];
 var RESIDENTS=["Dr. Williams (PGY-3)","Dr. Chen (PGY-2)","Dr. Singh (PGY-3)","Dr. Lopez (PGY-2)","Dr. Patel (PGY-1)","Dr. Kim (PGY-2)"];
 
@@ -289,17 +317,21 @@ function initCases(){
 }
 
 function pickRandom(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function pickUniqueName(pool){var avail=pool.filter(function(n){return!usedNames.has(n)});if(!avail.length){usedNames.clear();avail=pool}var name=avail[Math.floor(Math.random()*avail.length)];usedNames.add(name);return name}
+function encCase(id){return btoa(id).replace(/=/g,'')}
 
 function generatePatient(){
   var c=null;
   for(var i=0;i<allCases.length;i++){if(!usedCases.has(allCases[i].id)){c=allCases[i];usedCases.add(c.id);break}}
   if(!c){usedCases.clear();c=pickRandom(allCases);usedCases.add(c.id)}
-  var male=Math.random()>.5;
+  var pn=window.PATIENT_NAMES&&PATIENT_NAMES[c.id];
+  var name=pn?pn.name:pickUniqueName(Math.random()>.5?NAMES_M:NAMES_F);
+  var sex=pn?(pn.sex==='Male'?'M':'F'):(Math.random()>.5?'M':'F');
   var bedPfx=c.acuity<=2?'T':(c.acuity>=4?'F':'R');
   return {
     id:'pt-'+Date.now()+'-'+Math.random().toString(36).substr(2,4),
-    caseId:c.id, name:pickRandom(male?NAMES_M:NAMES_F), age:18+Math.floor(Math.random()*62),
-    sex:male?'M':'F', bed:bedPfx+(nextBed++), cc:c.presentation, diagnosis:c.diagnosis,
+    caseId:c.id, name:name, age:pn&&pn.age?pn.age:(18+Math.floor(Math.random()*62)),
+    sex:sex, bed:bedPfx+(nextBed++), cc:c.presentation, diagnosis:c.diagnosis,
     category:c.category, esi:c.acuity, status:'waiting', arrivalTime:simMinutes,
     provider:pickRandom(ATTENDINGS), resident:pickRandom(RESIDENTS), isNew:true,
     vitals:genVitals(c.acuity)
@@ -396,7 +428,7 @@ function renderBoard(){
     h+='<td><span class="status-badge '+st.css+'"><span class="status-pulse"></span>'+st.label+'</span></td>';
     h+='<td class="hide-mobile"><span class="wait-time'+(wm>60?' long':'')+'">'+ws+'</span></td>';
     h+='<td class="hide-mobile provider-cell">'+esc(p.provider)+'</td>';
-    h+='<td><a class="action-link" href="virtual-emr.html?case='+esc(p.caseId)+'&setting=ed&specialty=em" onclick="event.stopPropagation()" title="Open chart">📋</a></td>';
+    h+='<td><a class="action-link" href="virtual-emr.html?cx='+encCase(p.caseId)+'&setting=ed&specialty=em" onclick="event.stopPropagation()" title="Open chart">📋</a></td>';
     h+='</tr>';
   });
   tbody.innerHTML=h;
@@ -492,7 +524,7 @@ function sortBy(field){
 }
 
 // ─── Navigation ───
-function openCase(caseId){window.location.href='virtual-emr.html?case='+caseId+'&setting=ed&specialty=em'}
+function openCase(caseId){window.location.href='virtual-emr.html?cx='+encCase(caseId)+'&setting=ed&specialty=em'}
 
 // ─── Utils ───
 function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
@@ -576,5 +608,9 @@ init();
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/rdx-nav.js"></script>
 </body>
 </html>

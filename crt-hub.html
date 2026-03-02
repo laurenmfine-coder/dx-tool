@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<!-- CRT Hub | build 2025-02-23c -->
 <html lang="en">
 <head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinical Reasoning Trainer | ReasonDx</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --brand: #2874A6; --brand-dark: #1B4F72; --brand-light: #D4E6F1;
@@ -107,8 +112,25 @@
     </style>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
 <script src="auth/auth-guard.js"></script>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Clinical Reasoning Trainer hub on ReasonDx. Step-by-step diagnostic reasoning cases with coaching prompts and progressive disclosure.">
+<meta property="og:title" content="Clinical Reasoning Trainer | ReasonDx">
+<meta property="og:description" content="Step-by-step clinical reasoning trainers across 79 scenarios.">
+<meta property="og:url" content="https://reasondx.com/crt-hub.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://reasondx.com/crt-hub.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clinical Reasoning Trainer | ReasonDx">
+<meta name="twitter:description" content="Step-by-step clinical reasoning trainers across 79 scenarios.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
     <!-- Loading skeleton shown before content renders -->
     <div id="loading-skeleton" class="loading-skeleton">
         <div class="skel-bar w80"></div>
@@ -118,7 +140,7 @@
         <div class="skel-card"></div><div class="skel-card"></div><div class="skel-card"></div>
     </div>
 
-    <div id="main-content" style="display:none">
+    <div id="main-content" role="main" style="display:none">
 
     <!-- Progress banner -->
     <div id="progress-banner" style="background:linear-gradient(90deg,#1B4F72,#2874A6);color:white;padding:10px 24px;font-size:13px;display:flex;align-items:center;gap:16px;justify-content:center">
@@ -219,12 +241,12 @@ let activeFormats = new Set();
 function initFilters() {
     const row = document.getElementById('filters');
     // All button
-    let h = `<button class="fbtn active" onclick="setFilter('all',this)">All <span class="cnt">${TOPICS.length}</span></button>`;
+    let h = `<button type="button" class="fbtn active" onclick="setFilter('all',this)">All <span class="cnt">${TOPICS.length}</span></button>`;
     for (const [key, label] of Object.entries(FILTER_LABELS)) {
         if (key === 'all') continue;
         const cnt = FILTER_COUNTS[key] || 0;
         if (cnt === 0) continue;
-        h += `<button class="fbtn" onclick="setFilter('${key}',this)">${label} <span class="cnt">${cnt}</span></button>`;
+        h += `<button type="button" class="fbtn" onclick="setFilter('${key}',this)">${label} <span class="cnt">${cnt}</span></button>`;
     }
     row.innerHTML = h;
 
@@ -232,7 +254,7 @@ function initFilters() {
     const frow = document.getElementById('formatFilters');
     let fh = '<label>Format:</label>';
     for (const [key, label] of Object.entries(FORMAT_LABELS)) {
-        fh += `<button class="fmt-btn" data-fmt="${key}" onclick="toggleFormat('${key}',this)">${label}</button>`;
+        fh += `<button type="button" class="fmt-btn" data-fmt="${key}" onclick="toggleFormat('${key}',this)">${label}</button>`;
     }
     frow.innerHTML = fh;
 }
@@ -379,8 +401,10 @@ render();
     </script>
     </div><!-- close main-content -->
 
-<script src="./rdx-nav.js"></script>
+<script src="./js/rdx-nav.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
 <script src="rdx-demo-tour.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
 </body>
 </html>

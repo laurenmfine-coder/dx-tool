@@ -56,10 +56,6 @@
           <span class="icon">🎮</span>
           <span>Cases & Adventures</span>
         </a>
-        <a href="${base}board-prep.html" class="rdx-help-link">
-          <span class="icon">📝</span>
-          <span>Board Prep</span>
-        </a>
         <a href="${base}training.html" class="rdx-help-link">
           <span class="icon">🏋️</span>
           <span>Training Hub</span>

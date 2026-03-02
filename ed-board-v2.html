@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReasonDx Virtual Hospital — ED Board</title>
+<title>ED Board | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --primary: #2874A6; --primary-dark: #1B4F72; --primary-light: #EBF5FB;
@@ -242,15 +248,33 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .admit-bridge-banner button{background:white;color:#2874A6;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer}
 </style>
 <script src="auth/auth-guard.js"></script>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Virtual ED board with real-time patient encounters and clinical reasoning practice on ReasonDx.">
+<meta property="og:title" content="ED Board | ReasonDx">
+<meta property="og:description" content="Virtual ED track board with real-time patient management simulation.">
+<meta property="og:url" content="https://reasondx.com/ed-board-v2.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://reasondx.com/ed-board-v2.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ED Board | ReasonDx">
+<meta name="twitter:description" content="Virtual ED track board simulation.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<div id="main-content" role="main"></div>
 <div class="topbar">
-  <div class="topbar-left"><a href="../index.html" class="topbar-home" title="Back to Home" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;margin-right:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Exit ED</a><div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div><div class="topbar-badge">Emergency Dept</div></div>
+  <div class="topbar-left"><a href="./index.html" class="topbar-home" title="Back to Home" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;margin-right:6px;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Exit ED</a><div class="topbar-logo">🏥 ReasonDx <span>Virtual Hospital</span></div><div class="topbar-badge">Emergency Dept</div></div>
   <div class="topbar-right"><div class="topbar-time" id="simTime">07:00 AM — Day 1</div><div class="topbar-user"><div class="topbar-avatar">MS</div><span>Medical Student</span></div></div>
 </div>
 <div class="board-header">
   <div class="board-title">ED Tracking Board <span class="count" id="patientCount">0</span></div>
-  <div class="board-controls"><button class="btn btn-primary" onclick="addNewPatient()">+ New Patient</button><button class="btn btn-outline" onclick="addNewPatient()">↻ Next Arrival</button><button class="btn btn-outline" onclick="resetBoard()">Reset Board</button><button class="btn btn-outline" id="resumeBtn" style="display:none" onclick="loadState()">📂 Resume Session</button></div>
+  <div class="board-controls"><button type="button" class="btn btn-primary" onclick="addNewPatient()">+ New Patient</button><button type="button" class="btn btn-outline" onclick="addNewPatient()">↻ Next Arrival</button><button type="button" class="btn btn-outline" onclick="resetBoard()">Reset Board</button><button type="button" class="btn btn-outline" id="resumeBtn" style="display:none" onclick="loadState()">📂 Resume Session</button></div>
 </div>
 <div class="stats-bar">
   <div class="stat-card"><div class="stat-label">Total Patients</div><div class="stat-value" id="statTotal">0</div></div>
@@ -263,21 +287,23 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <div class="board-table-wrap">
     <table class="board-table">
       <thead><tr><th>Bed</th><th>Patient</th><th>Chief Complaint</th><th>Acuity</th><th>Status</th><th class="hide-mobile">Wait</th><th class="hide-mobile">Provider</th></tr></thead>
-      <tbody id="boardBody"><tr><td colspan="7"><div class="empty-state"><h3>No patients on the board</h3><p>Click "New Patient" to begin your ED shift.</p><button class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button></div></td></tr></tbody>
+      <tbody id="boardBody"><tr><td colspan="7"><div class="empty-state"><h3>No patients on the board</h3><p>Click "New Patient" to begin your ED shift.</p><button type="button" class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button></div></td></tr></tbody>
     </table>
   </div>
 </div>
 <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
 <div class="detail-panel" id="detailPanel">
-  <div class="panel-header"><div class="panel-patient-info"><h2 id="panelName">—</h2><div class="panel-patient-meta"><span id="panelAge">—</span><span>MRN: <span id="panelMRN">—</span></span><span id="panelBed">—</span></div></div><button class="panel-close" onclick="closePanel()">✕</button></div>
+  <div class="panel-header"><div class="panel-patient-info"><h2 id="panelName">—</h2><div class="panel-patient-meta"><span id="panelAge">—</span><span>MRN: <span id="panelMRN">—</span></span><span id="panelBed">—</span></div></div><button type="button" class="panel-close" onclick="closePanel()">✕</button></div>
   <div class="emr-tabs" id="emrTabs"></div>
   <div class="emr-content" id="emrContent"></div>
   <div class="panel-footer" id="panelFooter"></div>
 </div>
-<div class="modal-overlay" id="dispoModal"><div class="modal"><div class="modal-header"><h3 id="dispoTitle">Disposition</h3></div><div class="modal-body" id="dispoBody"></div><div class="modal-footer"><button class="btn btn-outline" onclick="closeDispoModal()">Cancel</button><button class="btn btn-primary" onclick="confirmDisposition()">Confirm</button></div></div></div>
+<div class="modal-overlay" id="dispoModal"><div class="modal"><div class="modal-header"><h3 id="dispoTitle">Disposition</h3></div><div class="modal-body" id="dispoBody"></div><div class="modal-footer"><button type="button" class="btn btn-outline" onclick="closeDispoModal()">Cancel</button><button type="button" class="btn btn-primary" onclick="confirmDisposition()">Confirm</button></div></div></div>
 <div class="toast-container" id="toastContainer"></div>
 <div class="save-indicator" id="saveIndicator"></div>
 <script>
+function rdxEsc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
 const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
 const MODEL = 'claude-sonnet-4-20250514';
 
@@ -4202,7 +4228,7 @@ function generatePatient() {
 function renderBoard() {
   var body = document.getElementById('boardBody');
   if (patients.length === 0) {
-    body.innerHTML = '<tr><td colspan="7"><div class="empty-state"><h3>No patients on the board</h3><p>Click "New Patient" to begin your ED shift.</p><button class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button></div></td></tr>';
+    body.innerHTML = '<tr><td colspan="7"><div class="empty-state"><h3>No patients on the board</h3><p>Click "New Patient" to begin your ED shift.</p><button type="button" class="btn btn-primary" onclick="addNewPatient()">+ Add First Patient</button></div></td></tr>';
     document.getElementById('patientCount').textContent = '0';
     updateStats(); return;
   }
@@ -4276,16 +4302,16 @@ function renderTabs(p) {
   }
   tabs.push({id:'teaching',label:'Teaching'});
   document.getElementById('emrTabs').innerHTML = tabs.map(function(t) {
-    return '<button class="emr-tab ' + (currentTab===t.id?'active':'') + '" onclick="switchTab(\'' + t.id + '\')">' + t.label + (t.badge?'<span class="tab-badge">NEW</span>':'') + '</button>';
+    return '<button type="button" class="emr-tab ' + (currentTab===t.id?'active':'') + '" onclick="switchTab(\'' + t.id + '\')">' + t.label + (t.badge?'<span class="tab-badge">NEW</span>':'') + '</button>';
   }).join('');
 }
 
 function renderFooter(p) {
   var hasData = p.chatHistory.length > 0 || p.discovered.labsReady.length > 0 || p.discovered.examSystems.length > 0;
   document.getElementById('panelFooter').innerHTML =
-    '<button class="btn btn-success btn-sm" onclick="openDisposition(\'discharge\')" ' + (!hasData?'disabled title="Gather clinical data first"':'') + '>✓ Discharge</button>' +
-    '<button class="btn btn-warning btn-sm" onclick="openDisposition(\'admit\')" ' + (!hasData?'disabled title="Gather clinical data first"':'') + '>⬆ Admit</button>' +
-    '<button class="btn btn-outline btn-sm" onclick="openDisposition(\'transfer\')">↗ Transfer</button>';
+    '<button type="button" class="btn btn-success btn-sm" onclick="openDisposition(\'discharge\')" ' + (!hasData?'disabled title="Gather clinical data first"':'') + '>✓ Discharge</button>' +
+    '<button type="button" class="btn btn-warning btn-sm" onclick="openDisposition(\'admit\')" ' + (!hasData?'disabled title="Gather clinical data first"':'') + '>⬆ Admit</button>' +
+    '<button type="button" class="btn btn-outline btn-sm" onclick="openDisposition(\'transfer\')">↗ Transfer</button>';
 }
 
 function switchTab(tab) {
@@ -4363,7 +4389,7 @@ function renderHistoryChat(p) {
     '<div class="chat-messages" id="chatMessages">'+msgs+'</div>' +
     '<div class="chat-input-area">' +
     '<textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask the patient a question..." onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>' +
-    '<button class="chat-send" id="chatSendBtn" onclick="sendChat()">Send</button>' +
+    '<button type="button" class="chat-send" id="chatSendBtn" onclick="sendChat()">Send</button>' +
     '</div>' +
     '<div id="voiceStatus" class="voice-status" style="display:none;padding:4px 16px"></div>' +
     '</div>';
@@ -4470,7 +4496,7 @@ function renderExam(p) {
               '<input type="checkbox" '+(checked?'checked':'')+' style="pointer-events:none"> '+m+'</label>';
           }).join('') +
         '</div>' +
-        '<button onclick="performExam(\''+s.key+'\')" style="padding:10px;border-radius:8px;background:var(--primary);color:white;border:none;font-weight:600;font-size:13px;cursor:pointer;transition:all .15s" ' +
+        '<button type="button" onclick="performExam(\''+s.key+'\')" style="padding:10px;border-radius:8px;background:var(--primary);color:white;border:none;font-weight:600;font-size:13px;cursor:pointer;transition:all .15s" ' +
           (d._selectedManeuvers && d._selectedManeuvers.length>0 ? '' : 'disabled style="padding:10px;border-radius:8px;background:#cbd5e1;color:white;border:none;font-weight:600;font-size:13px;cursor:not-allowed"') +
         '>🩺 Perform Exam'+(d._selectedManeuvers && d._selectedManeuvers.length>0 ? ' ('+d._selectedManeuvers.length+' selected)' : ' — select at least one')+'</button>' +
       '</div>';
@@ -4552,7 +4578,7 @@ function renderLabs(p) {
     });
     html += '</div></div>';
   });
-  html += '<button class="btn btn-primary btn-sm submit-orders" onclick="submitLabOrders()">Submit Lab Orders</button></div>';
+  html += '<button type="button" class="btn btn-primary btn-sm submit-orders" onclick="submitLabOrders()">Submit Lab Orders</button></div>';
   return html;
 }
 
@@ -4609,7 +4635,7 @@ function renderImaging(p) {
     });
     html += '</div></div>';
   });
-  html += '<button class="btn btn-primary btn-sm submit-orders" onclick="submitImagingOrders()">Submit Imaging Orders</button></div>';
+  html += '<button type="button" class="btn btn-primary btn-sm submit-orders" onclick="submitImagingOrders()">Submit Imaging Orders</button></div>';
   return html;
 }
 
@@ -4891,7 +4917,7 @@ function renderTeaching(p) {
     html += '<div class="admit-bridge-banner">' +
       '<h4>🏥 Patient Admitted to '+(dispoLabels[p.dispoChoice]||'Inpatient')+'</h4>' +
       '<p>'+p.name+' has been transferred to your inpatient census. Continue following this patient during your overnight call simulation.</p>' +
-      '<button onclick="window.open(\'/night-float.html\',\'_blank\')">Open Night Float Simulator →</button></div>';
+      '<button type="button" onclick="window.open(\'/night-float.html\',\'_blank\')">Open Night Float Simulator →</button></div>';
   }
 
   return html;
@@ -4967,12 +4993,12 @@ function renderTreatment(p) {
     });
     html += '</div>';
   });
-  html += '<button class="btn btn-primary btn-sm submit-orders" onclick="submitTxOrders()" style="margin-top:12px">Submit Treatment Orders</button>';
+  html += '<button type="button" class="btn btn-primary btn-sm submit-orders" onclick="submitTxOrders()" style="margin-top:12px">Submit Treatment Orders</button>';
 
   // Reassess button
   var nextPhase = getNextPhase(p);
   if (nextPhase && d.txOrdered.length > 0) {
-    html += '<button class="btn btn-success btn-sm" onclick="reassessPatient()" style="margin-top:8px;margin-left:8px">🔄 Reassess Patient</button>';
+    html += '<button type="button" class="btn btn-success btn-sm" onclick="reassessPatient()" style="margin-top:8px;margin-left:8px">🔄 Reassess Patient</button>';
   }
   html += '</div>';
 
@@ -5363,7 +5389,7 @@ updateClock();
 <script>
 // Load rdx-nav.js — try multiple paths
 (function(){
-  var paths = ['../js/rdx-nav.js', '../ReasonDx/js/rdx-nav.js', '/js/rdx-nav.js', '/ReasonDx/js/rdx-nav.js'];
+  var paths = ['./js/rdx-nav.js', '../js/rdx-nav.js', '/js/rdx-nav.js'];
   var idx = 0;
   function tryNext() {
     if (idx >= paths.length) return;
@@ -5422,5 +5448,9 @@ function initVoiceForChat() {
 })();
 </script>
 <script src="rdx-demo-tour.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
 </body>
 </html>

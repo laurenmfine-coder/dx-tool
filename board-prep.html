@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#1f5f8b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="mobile.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
 // Auth Guard - Check both localStorage and allow Supabase to handle auth
@@ -57,10 +57,11 @@
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ReasonDx Board Prep</title>
+    <title>Board Prep | ReasonDx</title>
 <meta name="description" content="ReasonDx Board Prep: 615 USMLE Step 2 and COMLEX practice questions across 15+ specialties with detailed explanations and spaced repetition.">
 <meta property="og:title" content="ReasonDx Board Prep">
 <meta property="og:description" content="ReasonDx Board Prep: 615 USMLE Step 2 and COMLEX practice questions across 15+ specialties with detailed explanations and spaced repetition.">
+<meta property="og:url" content="https://reasondx.com/board-prep.html">
 <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -444,8 +445,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         <link rel="stylesheet" href="css/dx-case-nav.css">
 <link rel="stylesheet" href="./css/rdx-theme.css">
 <script src="auth/auth-guard.js"></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="canonical" href="https://reasondx.com/board-prep.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Board Prep | ReasonDx">
+<meta name="twitter:description" content="Shelf exam and board preparation practice.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 <!-- Mastery Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
   <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(40,116,166,0.08));border:1px solid rgba(124,58,237,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(124,58,237,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
@@ -460,14 +470,13 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
 
 <div style="position: static; display: inline-block; z-index: 9999; display: flex; gap: 6px; background: #f1f5f9; padding: 8px 12px; border-radius: 20px;">
-    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
-    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
-    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg,#0f172a); cursor: pointer;" title="High Contrast"></button>
-    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
+    <button type="button" onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg-card); cursor: pointer;" title="Dark"></button>
+    <button type="button" onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
+    <button type="button" onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background:var(--rdx-bg,#0f172a); cursor: pointer;" title="High Contrast"></button>
+    <button type="button" onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
 </div>
 
 
-    <!-- nav removed: unified via rdx-nav.js -->
 
     <div id="startScreen" class="start-screen">
         <div class="start-card">
@@ -495,7 +504,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="setting-row"><span class="setting-label">Difficulty</span><select class="setting-select" id="difficultySelect"><option value="all">All Difficulties</option><option value="foundational">Foundational</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div>
             </div>
             <div id="customCountSection" class="settings-group" style="display:none;">
-                <div class="setting-row"><span class="setting-label">Questions</span><div style="display:flex;align-items:center;gap:8px;"><input type="range" id="customCount" min="5" max="100" value="20" oninput="document.getElementById('customCountVal').textContent=this.value" style="flex:1;"><span id="customCountVal" style="font-weight:600;min-width:28px;text-align:center;">20</span></div></div>
+                <div class="setting-row"><span class="setting-label">Questions</span><div style="display:flex;align-items:center;gap:8px;"><input type="range" id="customCount" aria-label="Number of questions" min="5" max="100" value="20" oninput="document.getElementById('customCountVal').textContent=this.value" style="flex:1;"><span id="customCountVal" style="font-weight:600;min-width:28px;text-align:center;">20</span></div></div>
                 <div class="setting-row"><span class="setting-label">Timer</span><select class="setting-select" id="customTimer"><option value="none">No Timer</option><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select></div>
             </div>
             <div id="knowledgeGap" class="settings-group" style="margin-top:12px;">
@@ -503,7 +512,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div id="gapChart" style="display:grid;grid-template-columns:1fr;gap:4px;max-height:240px;overflow-y:auto;"></div>
                 <div id="gapEmpty" style="font-size:12px;color:var(--text-muted);padding:12px;text-align:center;">Complete a session to see your performance breakdown.</div>
             </div>
-            <button class="btn btn-primary btn-lg btn-start" onclick="startQuiz()" id="startBtn" disabled>Loading Questions...</button>
+            <button type="button" class="btn btn-primary btn-lg btn-start" onclick="startQuiz()" id="startBtn" disabled>Loading Questions...</button>
         </div>
     </div>
 
@@ -514,9 +523,9 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="timer" id="timer"><span id="timerDisplay">60:00</span></div>
                 <div class="progress-info"><span class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">40</span></span><div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 2.5%"></div></div></div>
             </div>
-            <div class="header-right"><button class="btn" onclick="endQuiz()">End Session</button></div>
+            <div class="header-right"><button type="button" class="btn" onclick="endQuiz()">End Session</button></div>
         </header>
-        <main class="main">
+        <main id="main-content" class="main">
             <aside class="sidebar">
                 <div class="sidebar-section"><div class="sidebar-label">Questions</div><div class="question-grid" id="questionGrid"></div></div>
                 <div class="sidebar-section"><div class="sidebar-label">Progress</div><div class="stats-list"><div class="stat-row"><span class="stat-label">Answered</span><span class="stat-value" id="answeredCount">0 / 40</span></div><div class="stat-row"><span class="stat-label">Correct</span><span class="stat-value correct" id="correctCount">—</span></div><div class="stat-row"><span class="stat-label">Flagged</span><span class="stat-value flagged" id="flaggedCount">0</span></div></div></div>
@@ -527,7 +536,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="question-stem" id="questionStem"></div>
                 <div class="options" id="optionsContainer"></div>
                 <div class="explanation" id="explanationPanel">
-                    <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div><button class="tutor-trigger" id="tutorTriggerBtn">🧠 Get Help From Tutor</button></div>
+                    <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div><button type="button" class="tutor-trigger" id="tutorTriggerBtn">🧠 Get Help From Tutor</button></div>
                     <!-- Unified Navigation -->
                     <div class="explanation-nav">
                         <div class="exp-tab active" data-tab="answer">Answer</div>
@@ -543,8 +552,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                     </div>
                 </div>
                 <div class="action-bar">
-                    <div class="action-left"><button class="btn btn-flag" id="flagBtn" onclick="toggleFlag()">Flag for Review</button></div>
-                    <div class="action-right"><button class="btn" onclick="prevQuestion()" id="prevBtn">← Previous</button><button class="btn btn-primary" onclick="submitOrNext()" id="submitBtn">Submit</button></div>
+                    <div class="action-left"><button type="button" class="btn btn-flag" id="flagBtn" onclick="toggleFlag()">Flag for Review</button></div>
+                    <div class="action-right"><button type="button" class="btn" onclick="prevQuestion()" id="prevBtn">← Previous</button><button type="button" class="btn btn-primary" onclick="submitOrNext()" id="submitBtn">Submit</button></div>
                 </div>
             </div>
         </main>
@@ -552,11 +561,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <div class="modal-overlay" id="resultsModal">
         <div class="modal">
-            <div class="modal-header"><h2 class="modal-title">Session Complete</h2><button class="modal-close" onclick="closeResults()">×</button></div>
+            <div class="modal-header"><h2 class="modal-title">Session Complete</h2><button type="button" class="modal-close" onclick="closeResults()">×</button></div>
             <div class="modal-body">
                 <div class="results-score"><div class="score-number" id="finalScore">78%</div><div class="score-label">Overall Score</div></div>
                 <div class="results-grid"><div class="result-card"><div class="result-value correct" id="totalCorrect">31</div><div class="result-label">Correct</div></div><div class="result-card"><div class="result-value incorrect" id="totalIncorrect">9</div><div class="result-label">Incorrect</div></div><div class="result-card"><div class="result-value" id="timeSpent">45:23</div><div class="result-label">Time</div></div></div>
-                <div class="modal-actions"><button class="btn" onclick="reviewQuestions()">Review Answers</button><button class="btn btn-primary" onclick="startNewBlock()">New Session</button></div>
+                <div class="modal-actions"><button type="button" class="btn" onclick="reviewQuestions()">Review Answers</button><button type="button" class="btn btn-primary" onclick="startNewBlock()">New Session</button></div>
             </div>
         </div>
     </div>
@@ -565,13 +574,13 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     <div class="tutor-panel" id="tutorPanel">
         <div class="tutor-header">
             <div class="tutor-title">🧠 Adaptive Tutor</div>
-            <button class="tutor-close" onclick="closeTutor()">×</button>
+            <button type="button" class="tutor-close" onclick="closeTutor()">×</button>
         </div>
         <div class="tutor-context" id="tutorContext"></div>
         <div class="tutor-messages" id="tutorMessages"></div>
         <div class="tutor-input-area">
             <textarea class="tutor-input" id="tutorInput" placeholder="Ask about this question..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendTutorMessage()}"></textarea>
-            <button class="tutor-send" id="tutorSendBtn" onclick="sendTutorMessage()">Send</button>
+            <button type="button" class="tutor-send" id="tutorSendBtn" onclick="sendTutorMessage()">Send</button>
         </div>
     </div>
 
@@ -1220,19 +1229,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 
 <script src="js/dx-feedback.js"></script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69967634724c7c1c373577ac/1jhprrfe7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+
 <script src="rdx-demo-tour.js"></script>
 </body>
 </html>

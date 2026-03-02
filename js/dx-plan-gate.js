@@ -1,11 +1,21 @@
-/** dx-plan-gate.js — Plan tier feature gating stub.
- *  Checks user subscription tier and gates premium features accordingly.
- *  Currently a no-op stub — all features unlocked. */
-(function(){
+/* dx-plan-gate.js — Plan/Subscription Gate
+ * Checks if user has access to Pro features.
+ */
+(function() {
   'use strict';
-  window.RDX_PLAN = window.RDX_PLAN || { tier: 'pro', gates: {} };
-  window.checkPlanAccess = function(feature){ return true; };
-  window.showUpgradeModal = function(feature){
-    console.log('[Plan Gate] Feature requires upgrade:', feature);
+  window.DxPlanGate = {
+    isPro: function() {
+      try {
+        var user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        return user.plan === 'pro';
+      } catch(e) { return false; }
+    },
+    gate: function(feature, callback) {
+      if (this.isPro()) { callback(); }
+      else { this.showUpgradePrompt(feature); }
+    },
+    showUpgradePrompt: function(feature) {
+      // Show upgrade modal
+    }
   };
 })();

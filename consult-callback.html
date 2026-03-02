@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<!-- Consultant Callback AI | build 2025-02-23 -->
 <html lang="en">
 <head>
+<meta name="theme-color" content="#1f5f8b">
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consultant Callback — Practice Consult Calls | ReasonDx</title>
+<title>Consult Callback | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
     --brand:#2874A6; --brand-dark:#1B4F72; --brand-light:#D4E6F1;
@@ -178,14 +186,31 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .rdx-loading.hide{opacity:0;pointer-events:none}
 .rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
 @keyframes rdxSpin{to{transform:rotate(360deg)}}
-.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
+.rdx-load-text{font-family:"IBM Plex Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
 </style>
 <script src="auth/auth-guard.js"></script>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Practice consultant callback communication skills with AI-scored scenarios on ReasonDx.">
+<meta property="og:title" content="Consult Callback | ReasonDx">
+<meta property="og:description" content="Practice calling consults with AI-powered specialty attendings.">
+<meta property="og:url" content="https://reasondx.com/consult-callback.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://reasondx.com/consult-callback.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Consult Callback | ReasonDx">
+<meta name="twitter:description" content="Practice calling consults with AI specialty attendings.">
 </head>
 <body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 
 
-<div class="app" id="app">
+<div class="app" id="main-content" role="main" id="app">
     <div class="page-header">
         <a href="training.html" class="back-link">← Back to CoachDx</a>
         <h1>📞 Consultant Callback</h1>
@@ -202,7 +227,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
             <div class="label">Choose a Scenario</div>
             <div class="case-grid" id="caseGrid"></div>
         </div>
-        <button class="start-btn" id="startBtn" disabled onclick="startConsult()">📞 Place the Consult</button>
+        <button type="button" class="start-btn" id="startBtn" disabled onclick="startConsult()">📞 Place the Consult</button>
     </div>
 
     <!-- Game -->
@@ -552,7 +577,7 @@ function startConsult() {
                 <div style="margin-top:10px;font-size:12px;color:#92400E;font-style:italic;">💡 ${currentScenario.idealPresentation}</div>
             </div>
         </div>
-        <button class="start-btn" onclick="ringPhone()">📱 Call ${spec.title}</button>
+        <button type="button" class="start-btn" onclick="ringPhone()">📱 Call ${spec.title}</button>
     `;
 }
 
@@ -567,7 +592,7 @@ function ringPhone() {
             <div class="ring-label">Calling back...</div>
             <div class="ring-name">${spec.name}</div>
             <div class="ring-dept">${spec.title}</div>
-            <button class="answer-btn" onclick="answerCall()">Answer Call</button>
+            <button type="button" class="answer-btn" onclick="answerCall()">Answer Call</button>
         </div>
     `;
     document.body.appendChild(overlay);
@@ -632,7 +657,7 @@ function showResponseInput(idx) {
         <div class="free-input-row">
             <textarea class="free-input" id="freeResponse" placeholder="Type your response..." rows="2" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendResponse()}"></textarea>
             <button type="button" id="voiceBtn" title="Click to speak" onclick="VoiceInput.toggle('freeResponse')" style="width:36px;height:36px;min-width:36px;border-radius:50%;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span id="voiceIcon">🎤</span></button>
-            <button class="send-btn" onclick="sendResponse()">Send</button>
+            <button type="button" class="send-btn" onclick="sendResponse()">Send</button>
         </div>
         <div id="voiceStatus" class="voice-status" style="display:none;font-size:11px;color:#6B7280;padding:4px 0"></div>
     `;
@@ -748,7 +773,7 @@ function endConsult() {
             </div>
 
             <div class="fb-actions">
-                <button class="fb-btn primary" onclick="resetConsult()">Try Another Consult</button>
+                <button type="button" class="fb-btn primary" onclick="resetConsult()">Try Another Consult</button>
                 <a href="training.html" class="fb-btn secondary" style="text-decoration:none">← Back to CoachDx</a>
             </div>
         </div>
@@ -821,5 +846,9 @@ renderSetup();
 </script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
 </body>
 </html>
