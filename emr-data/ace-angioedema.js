@@ -941,4 +941,22 @@ window.EMR_DATA = {
       "African American"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "ACE-AE-Byrd-2006",
+    "title": "ACE inhibitor-associated angioedema",
+    "authors": "Byrd JB, Adam A, Brown NJ.",
+    "journal": "Immunol Allergy Clin North Am",
+    "year": 2006,
+    "doi": "10.1016/j.iac.2006.08.001",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4039077/",
+    "openAccess": true,
+    "validates": [
+      "3-5x higher risk in African Americans",
+      "Late-onset possible years after starting",
+      "Bradykinin mechanism",
+      "ARB cross-reactivity 2-10%",
+      "Icatibant for ACE angioedema"
+    ]
+  }
+]};

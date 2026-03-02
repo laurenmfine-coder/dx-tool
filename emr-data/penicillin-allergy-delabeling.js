@@ -911,4 +911,38 @@ window.EMR_DATA = {
       "90%+ of labeled penicillin allergies are not true allergies"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "Drug-Allergy-PP-2022",
+    "title": "Drug allergy: A 2022 practice parameter update",
+    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2022,
+    "doi": "10.1016/j.jaci.2022.08.028",
+    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+    "openAccess": true,
+    "validates": [
+      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+      "Single-dose amoxicillin challenge for low-risk",
+      "Vancomycin RMS management",
+      "AERD aspirin desensitization protocol",
+      "Sulfonamide challenge protocols"
+    ]
+  },
+  {
+    "id": "PCN-NEJM-2019",
+    "title": "Penicillin allergy",
+    "authors": "Castells M, Khan DA, Phillips EJ.",
+    "journal": "N Engl J Med",
+    "year": 2019,
+    "doi": "10.1056/NEJMra1807761",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31826341/",
+    "openAccess": false,
+    "validates": [
+      ">90% with PCN label NOT truly allergic",
+      ">80% lose sensitivity after 10 years",
+      "Morbilliform rash in children = usually viral exanthem",
+      "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
+    ]
+  }
+]};

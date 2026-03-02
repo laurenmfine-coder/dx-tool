@@ -885,4 +885,37 @@ window.EMR_DATA = {
       "Slower infusion rate, premedication, vs desensitization protocol"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "Drug-Allergy-PP-2022",
+    "title": "Drug allergy: A 2022 practice parameter update",
+    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2022,
+    "doi": "10.1016/j.jaci.2022.08.028",
+    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+    "openAccess": true,
+    "validates": [
+      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+      "Single-dose amoxicillin challenge for low-risk",
+      "Vancomycin RMS management",
+      "AERD aspirin desensitization protocol",
+      "Sulfonamide challenge protocols"
+    ]
+  },
+  {
+    "id": "Vanc-RMS-2003",
+    "title": "Red man syndrome",
+    "authors": "Sivagnanam S, Deleu D.",
+    "journal": "Crit Care",
+    "year": 2003,
+    "doi": "10.1186/cc1871",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC270697/",
+    "openAccess": true,
+    "validates": [
+      "RMS = histamine release, NOT IgE",
+      "Slow infusion ≥2h + premedication",
+      "NOT a true allergy"
+    ]
+  }
+]};

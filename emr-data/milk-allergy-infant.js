@@ -950,4 +950,37 @@ window.EMR_DATA = {
       "Dropped from 50th to 15th percentile weight-for-age"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "NIAID-FA-2010",
+    "title": "Guidelines for diagnosis and management of food allergy in the US",
+    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2010,
+    "doi": "10.1016/j.jaci.2010.10.008",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+    "openAccess": true,
+    "validates": [
+      "IgE-mediated food allergy criteria",
+      "Component testing (Ara h 2)",
+      "OFC as gold standard"
+    ]
+  },
+  {
+    "id": "DRACMA-2010",
+    "title": "WAO DRACMA: cow's milk allergy diagnosis",
+    "authors": "Fiocchi A, Brozek J, Schunemann H, et al.",
+    "journal": "World Allergy Organ J",
+    "year": 2010,
+    "doi": "10.1097/WOX.0b013e3181defeb9",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3488907/",
+    "openAccess": true,
+    "validates": [
+      "CMP in breast milk",
+      "Maternal elimination counseling",
+      "Hydrolyzed vs amino acid formula",
+      "Baked milk ladder",
+      "75% tolerate baked milk by age 1"
+    ]
+  }
+]};

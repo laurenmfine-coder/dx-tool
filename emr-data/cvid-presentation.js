@@ -1134,4 +1134,38 @@ window.EMR_DATA = {
       "Meets diagnostic criteria for CVID — needs IVIG/SCIG"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "AAAAI-PID-PP-2015",
+    "title": "Practice parameter for the diagnosis and management of primary immunodeficiency",
+    "authors": "Bonilla FA, Barlan I, Chapel H, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2015,
+    "doi": "10.1016/j.jaci.2015.04.049",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4837186/",
+    "openAccess": true,
+    "validates": [
+      "CVID criteria: low IgG + low IgA/IgM + poor vaccine responses",
+      "IgA deficiency → CVID spectrum",
+      "IVIG/SCIG replacement",
+      "IgA-depleted products",
+      "Trough IgG >500"
+    ]
+  },
+  {
+    "id": "SCIG-Review-2008",
+    "title": "Subcutaneous immunoglobulin replacement: a new paradigm",
+    "authors": "Berger M.",
+    "journal": "Immunol Allergy Clin North Am",
+    "year": 2008,
+    "doi": "10.1016/j.iac.2008.07.002",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3576822/",
+    "openAccess": true,
+    "validates": [
+      "SCIG vs IVIG",
+      "Weekly home infusion",
+      "Stable IgG levels",
+      "Patient preference"
+    ]
+  }
+]};

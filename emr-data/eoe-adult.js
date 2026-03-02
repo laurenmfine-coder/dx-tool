@@ -1132,4 +1132,21 @@ window.EMR_DATA = {
       "Allergic rhinitis + asthma + EoE"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "EoE-AGA-2020",
+    "title": "AGA clinical practice update on dietary management of EoE",
+    "authors": "Hirano I, Chan ES, Rank MA, et al.",
+    "journal": "Gastroenterology",
+    "year": 2020,
+    "doi": "10.1053/j.gastro.2020.02.038",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
+    "openAccess": true,
+    "validates": [
+      "≥15 eos/HPF diagnostic threshold",
+      "1-food (milk) elimination first-line",
+      "Swallowed budesonide/fluticasone",
+      "Repeat EGD 8-12 weeks"
+    ]
+  }
+]};

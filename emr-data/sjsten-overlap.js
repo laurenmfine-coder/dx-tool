@@ -1020,4 +1020,20 @@ window.EMR_DATA = {
       "Lamotrigine started 3 weeks ago with too-rapid uptitration"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "SCORTEN-2000",
+    "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
+    "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
+    "journal": "J Invest Dermatol",
+    "year": 2000,
+    "doi": "10.1046/j.1523-1747.2000.00061.x",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
+    "openAccess": true,
+    "validates": [
+      "SCORTEN mortality prediction",
+      "7 clinical parameters",
+      "Score 3 = 12.1% mortality"
+    ]
+  }
+]};

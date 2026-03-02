@@ -1084,4 +1084,21 @@ window.EMR_DATA = {
       "Prior shield ulcer — needs steroid-sparing approach, consider dupilumab or cyclosporine ophthalmic"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "VKC-Leonardi-2007",
+    "title": "Vernal keratoconjunctivitis: severe allergic eye disease with remodeling",
+    "authors": "Leonardi A, De Dominicis C, Motterle L.",
+    "journal": "Pediatr Allergy Immunol",
+    "year": 2007,
+    "doi": "10.1111/j.1399-3038.2007.00658.x",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/18078420/",
+    "openAccess": false,
+    "validates": [
+      "Giant papillae, shield ulcers, Horner-Trantas dots",
+      "Young males, African American/Middle Eastern",
+      "Steroid-sparing: tacrolimus/cyclosporine",
+      "Shield ulcers → permanent corneal scarring"
+    ]
+  }
+]};

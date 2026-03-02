@@ -1159,4 +1159,22 @@ window.EMR_DATA = {
       "Failed medium-potency topicals, tacrolimus, and short course of cyclosporine"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "AAD-AD-2023",
+    "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
+    "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
+    "journal": "J Am Acad Dermatol",
+    "year": 2023,
+    "doi": "10.1016/j.jaad.2022.12.029",
+    "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
+    "openAccess": true,
+    "validates": [
+      "SCORAD scoring",
+      "TCS potency ladder",
+      "Wet wrap therapy",
+      "Simplified regimens",
+      "Eczema herpeticum as emergency"
+    ]
+  }
+]};

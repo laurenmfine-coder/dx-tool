@@ -974,4 +974,21 @@ window.EMR_DATA = {
       "Skin biopsy pending from dermatology"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "EAACI-Urticaria-2022",
+    "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
+    "authors": "Zuberbier T, Abdul Latiff AH, et al.",
+    "journal": "Allergy",
+    "year": 2022,
+    "doi": "10.1111/all.15090",
+    "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
+    "openAccess": true,
+    "validates": [
+      "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
+      "UAS7 scoring",
+      "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+      "Post-viral urticaria in children: no allergy testing needed"
+    ]
+  }
+]};

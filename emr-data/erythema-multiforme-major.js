@@ -1081,4 +1081,20 @@ window.EMR_DATA = {
       "Never"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "EM-HSV-Prevention",
+    "title": "Erythema multiforme: recognition, treatment, and prevention",
+    "authors": "Sokumbi O, Wetter DA.",
+    "journal": "Cleve Clin J Med",
+    "year": 2012,
+    "doi": "10.3949/ccjm.79a.11118",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22473726/",
+    "openAccess": true,
+    "validates": [
+      "HSV triggers >70% recurrent EM",
+      "Valacyclovir 500mg daily prevents recurrence",
+      "EM vs SJS = different diseases"
+    ]
+  }
+]};

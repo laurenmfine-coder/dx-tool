@@ -1163,4 +1163,36 @@ window.EMR_DATA = {
       "Rash started 3 days ago, fever for 5 days, facial swelling 2 days"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "RegiSCAR-2013",
+    "title": "DRESS: results from the prospective RegiSCAR study",
+    "authors": "Kardaun SH, Sekula P, Valeyrie-Allanore L, et al.",
+    "journal": "Br J Dermatol",
+    "year": 2013,
+    "doi": "10.1111/bjd.12501",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/23855313/",
+    "openAccess": false,
+    "validates": [
+      "RegiSCAR score ≥5 = definite DRESS",
+      "HHV-6 reactivation",
+      "Organ involvement patterns",
+      "Slow steroid taper 8-12 weeks"
+    ]
+  },
+  {
+    "id": "DRESS-Autoimmunity-2019",
+    "title": "DRESS syndrome and long-term risk of autoimmunity",
+    "authors": "Chen YC, Chang CY, Cho YT, et al.",
+    "journal": "J Allergy Clin Immunol Pract",
+    "year": 2019,
+    "doi": "10.1016/j.jaip.2018.08.004",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
+    "openAccess": false,
+    "validates": [
+      "Autoimmune thyroiditis ~40% post-DRESS",
+      "TSH monitoring at 3, 6, 12 months",
+      "Type 1 DM risk"
+    ]
+  }
+]};

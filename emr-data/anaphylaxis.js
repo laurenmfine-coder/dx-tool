@@ -1014,4 +1014,67 @@ window.EMR_DATA = {
       "Had EpiPen but expired 6 months ago"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "GA2LEN-2025",
+    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2025,
+    "doi": "10.1016/j.jaci.2025.01.021",
+    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+    "openAccess": true,
+    "validates": [
+      "Anaphylaxis diagnostic criteria",
+      "Epinephrine IM dosing",
+      "Biphasic reaction monitoring",
+      "Neffy nasal epinephrine"
+    ]
+  },
+  {
+    "id": "WAO-2020",
+    "title": "World Allergy Organization anaphylaxis guidance 2020",
+    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+    "journal": "World Allergy Organ J",
+    "year": 2020,
+    "doi": "10.1016/j.waojou.2020.100472",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+    "openAccess": true,
+    "validates": [
+      "WAO diagnostic criteria",
+      "Epinephrine positioning",
+      "Cofactors: exercise, beta-blockers, ACE inhibitors"
+    ]
+  },
+  {
+    "id": "JTFPP-Anaph-2023",
+    "title": "Anaphylaxis: A 2023 practice parameter update",
+    "authors": "Golden DBK, Wang J, Waserman S, et al.",
+    "journal": "Ann Allergy Asthma Immunol",
+    "year": 2023,
+    "doi": "10.1016/j.anai.2023.09.015",
+    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+    "openAccess": true,
+    "validates": [
+      "Glucagon for beta-blocker patients",
+      "Tryptase measurement timing",
+      "0.1/0.15mg epi for infants",
+      "MCAS screening after anaphylaxis"
+    ]
+  },
+  {
+    "id": "EAACI-Anaph-2021",
+    "title": "EAACI guidelines: Anaphylaxis (2021 update)",
+    "authors": "Muraro A, Worm M, Alviani C, et al.",
+    "journal": "Allergy",
+    "year": 2022,
+    "doi": "10.1111/all.15032",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+    "openAccess": true,
+    "validates": [
+      "Discharge planning with EpiPen",
+      "Patient action plans",
+      "Allergist referral 4-6 weeks"
+    ]
+  }
+]};

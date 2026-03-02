@@ -1170,4 +1170,39 @@ window.EMR_DATA = {
       "Asthma + nasal polyps + ASA sensitivity"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "Drug-Allergy-PP-2022",
+    "title": "Drug allergy: A 2022 practice parameter update",
+    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2022,
+    "doi": "10.1016/j.jaci.2022.08.028",
+    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+    "openAccess": true,
+    "validates": [
+      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+      "Single-dose amoxicillin challenge for low-risk",
+      "Vancomycin RMS management",
+      "AERD aspirin desensitization protocol",
+      "Sulfonamide challenge protocols"
+    ]
+  },
+  {
+    "id": "AERD-Review-2021",
+    "title": "Aspirin-exacerbated respiratory disease: comprehensive review",
+    "authors": "Laidlaw TM, Mullol J, Woessner KM, et al.",
+    "journal": "J Allergy Clin Immunol Pract",
+    "year": 2021,
+    "doi": "10.1016/j.jaip.2020.09.016",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855559/",
+    "openAccess": true,
+    "validates": [
+      "AERD triad",
+      "Aspirin desensitization 2-day protocol",
+      "Maintenance 650mg BID",
+      "Zileuton for AERD",
+      "Anosmia recovery 30-60%"
+    ]
+  }
+]};

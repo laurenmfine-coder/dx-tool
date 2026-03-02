@@ -953,4 +953,22 @@ window.EMR_DATA = {
       "Never"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "WAO-HAE-2022",
+    "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+    "authors": "Maurer M, Magerl M, Betschel S, et al.",
+    "journal": "Allergy",
+    "year": 2022,
+    "doi": "10.1111/all.15214",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
+    "openAccess": true,
+    "validates": [
+      "HAE diagnosis: C4 screening, C1-INH level/function",
+      "C1q distinguishes acquired from hereditary",
+      "On-demand icatibant",
+      "Lanadelumab prophylaxis",
+      "Estrogen triggers: OCPs contraindicated"
+    ]
+  }
+]};

@@ -915,4 +915,38 @@ window.EMR_DATA = {
       "Rituximab for B-cell lymphoma"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "WAO-HAE-2022",
+    "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+    "authors": "Maurer M, Magerl M, Betschel S, et al.",
+    "journal": "Allergy",
+    "year": 2022,
+    "doi": "10.1111/all.15214",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
+    "openAccess": true,
+    "validates": [
+      "HAE diagnosis: C4 screening, C1-INH level/function",
+      "C1q distinguishes acquired from hereditary",
+      "On-demand icatibant",
+      "Lanadelumab prophylaxis",
+      "Estrogen triggers: OCPs contraindicated"
+    ]
+  },
+  {
+    "id": "Acquired-C1INH-2010",
+    "title": "Acquired angioedema",
+    "authors": "Cicardi M, Zanichelli A.",
+    "journal": "Allergy Asthma Clin Immunol",
+    "year": 2010,
+    "doi": "10.1186/1710-1492-6-14",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2904712/",
+    "openAccess": true,
+    "validates": [
+      "C1q LOW in acquired, NORMAL in HAE",
+      "Anti-C1-INH antibodies",
+      "MGUS/lymphoproliferative association",
+      "Rituximab for refractory"
+    ]
+  }
+]};

@@ -1144,4 +1144,38 @@ window.EMR_DATA = {
       "KIT D816V mutation positive — diagnostic for systemic mastocytosis"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "MCAS-Consensus-2019",
+    "title": "Mast cell activation syndrome: clinicopathological approach",
+    "authors": "Weiler CR, Austen KF, Akin C, et al.",
+    "journal": "Ann Allergy Asthma Immunol",
+    "year": 2019,
+    "doi": "10.1016/j.anai.2019.09.025",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6920833/",
+    "openAccess": true,
+    "validates": [
+      "MCAS consensus criteria",
+      "Tryptase formula: acute ≥ (1.2 × baseline) + 2",
+      "24h urine mediators",
+      "KIT D816V for SM vs MCAS",
+      "Quadruple therapy"
+    ]
+  },
+  {
+    "id": "Valent-MCD-2012",
+    "title": "Definitions, criteria and classification of mast cell disorders",
+    "authors": "Valent P, Akin C, Arock M, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2012,
+    "doi": "10.1016/j.jaci.2012.09.002",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3742415/",
+    "openAccess": true,
+    "validates": [
+      "SM classification",
+      "WHO criteria",
+      "KIT D816V",
+      "Baseline tryptase >20 suggests SM"
+    ]
+  }
+]};

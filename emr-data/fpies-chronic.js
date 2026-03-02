@@ -900,4 +900,22 @@ window.EMR_DATA = {
       "IgE-negative, skin prick test to milk negative — this is non-IgE mediated"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "FPIES-Consensus-2017",
+    "title": "International consensus guidelines for FPIES: executive summary",
+    "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2017,
+    "doi": "10.1016/j.jaci.2016.12.966",
+    "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
+    "openAccess": true,
+    "validates": [
+      "FPIES criteria: major + minor",
+      "Ondansetron first-line (NOT epi)",
+      "Chronic FPIES: insidious FTT",
+      "Non-IgE, T-cell mediated",
+      "60% resolution by age 3-5"
+    ]
+  }
+]};

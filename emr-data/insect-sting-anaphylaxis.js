@@ -869,4 +869,37 @@ window.EMR_DATA = {
       "Needs venom testing in 4-6 weeks and VIT if positive"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "AIT-PP-2011",
+    "title": "Allergen immunotherapy: practice parameter 3rd update",
+    "authors": "Cox L, Nelson H, Lockey R, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2011,
+    "doi": "10.1016/j.jaci.2010.09.034",
+    "url": "https://www.jacionline.org/article/S0091-6749(10)01502-0/fulltext",
+    "openAccess": true,
+    "validates": [
+      "SCIT protocols",
+      "Cluster/rush protocols",
+      "ACE inhibitors increase VIT reactions",
+      "VIT ≥5 years"
+    ]
+  },
+  {
+    "id": "Insect-PP-2017",
+    "title": "Stinging insect hypersensitivity: practice parameter 2016",
+    "authors": "Golden DBK, Demain J, Freeman T, et al.",
+    "journal": "Ann Allergy Asthma Immunol",
+    "year": 2017,
+    "doi": "10.1016/j.anai.2016.10.031",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/28007086/",
+    "openAccess": true,
+    "validates": [
+      "60% recurrence without VIT",
+      "VIT reduces to <5%",
+      "Baseline tryptase screening",
+      "Cluster VIT protocol"
+    ]
+  }
+]};

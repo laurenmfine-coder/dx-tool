@@ -1012,4 +1012,21 @@ window.EMR_DATA = {
       "25th percentile height and weight, was 50th at age 5"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "EoE-AGA-2020",
+    "title": "AGA clinical practice update on dietary management of EoE",
+    "authors": "Hirano I, Chan ES, Rank MA, et al.",
+    "journal": "Gastroenterology",
+    "year": 2020,
+    "doi": "10.1053/j.gastro.2020.02.038",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
+    "openAccess": true,
+    "validates": [
+      "≥15 eos/HPF diagnostic threshold",
+      "1-food (milk) elimination first-line",
+      "Swallowed budesonide/fluticasone",
+      "Repeat EGD 8-12 weeks"
+    ]
+  }
+]};

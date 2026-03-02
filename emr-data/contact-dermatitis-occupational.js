@@ -896,4 +896,21 @@ window.EMR_DATA = {
       "Differentiate irritant vs allergic contact dermatitis, latex IgE-mediated vs Type IV to rubber accelerators"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "Patch-Testing-PP-2015",
+    "title": "Patch testing",
+    "authors": "Fonacier L, Bernstein DI, Borish L, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2015,
+    "doi": "10.1016/j.jaci.2015.02.033",
+    "url": "https://www.jacionline.org/article/S0091-6749(15)00322-9/fulltext",
+    "openAccess": true,
+    "validates": [
+      "Patch test interpretation",
+      "PPD as common occupational allergen",
+      "PPD-free alternatives for hairstylists",
+      "Nitrile vs latex gloves"
+    ]
+  }
+]};

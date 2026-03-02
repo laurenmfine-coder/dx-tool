@@ -901,4 +901,35 @@ window.EMR_DATA = {
       "Third grade, carries EpiPen at school"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "NIAID-FA-2010",
+    "title": "Guidelines for diagnosis and management of food allergy in the US",
+    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+    "journal": "J Allergy Clin Immunol",
+    "year": 2010,
+    "doi": "10.1016/j.jaci.2010.10.008",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+    "openAccess": true,
+    "validates": [
+      "IgE-mediated food allergy criteria",
+      "Component testing (Ara h 2)",
+      "OFC as gold standard"
+    ]
+  },
+  {
+    "id": "PALISADE-2018",
+    "title": "AR101 oral immunotherapy for peanut allergy",
+    "authors": "PALISADE Group.",
+    "journal": "N Engl J Med",
+    "year": 2018,
+    "doi": "10.1056/NEJMoa1812856",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643555/",
+    "openAccess": true,
+    "validates": [
+      "OIT efficacy",
+      "Exercise restriction 2h window",
+      "OIT = protection, not cure"
+    ]
+  }
+]};

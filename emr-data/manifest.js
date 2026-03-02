@@ -129,6 +129,47 @@ var EMR_MANIFEST = window.EMR_MANIFEST || [
   ]},
   { presentation:"Contact Dermatitis", cases:[
     {id:"contact-dermatitis-occupational",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"contact-dermatitis",allSettings:true}
+  ]},
+  {presentation:"Allergy Variations",cases:[
+    {id:"anaphylaxis-v2",diagnosis:"Anaphylaxis (Elderly + Beta-Blocker)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"72M on metoprolol, bee sting, blunted tachycardia, lives alone, Mandarin-speaking"},
+    {id:"anaphylaxis-v3",diagnosis:"Anaphylaxis (Latex, Occupational)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"32F uninsured house cleaner, latex exposure, expired EpiPen, Spanish-speaking"},
+    {id:"anaphylaxis-v4",diagnosis:"Anaphylaxis (Adolescent, Psychosocial)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"16F peanut, school event, EpiPen embarrassment, food allergy anxiety, social avoidance"},
+    {id:"anaphylaxis-v5",diagnosis:"Anaphylaxis (Pediatric, Cultural/Language)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"8F sesame, Syrian refugee family, Arabic-only parents, food bank exposure, cultural diet impact"},
+    {id:"chronic-spontaneous-urticaria-v2",diagnosis:"CSU (Refractory + Autoimmune)",category:"allergy",acuity:3,setting:"ed",allergySubtype:"urticaria",allSettings:true,variation:true,note:"55M construction worker, autoimmune thyroiditis, pressure urticaria, depression, divorce stress"},
+    {id:"penicillin-allergy-delabeling-v2",diagnosis:"PCN Delabeling (Pregnancy + GBS)",category:"allergy",acuity:3,setting:"consult",allergySubtype:"drug-allergy",allSettings:true,variation:true,note:"38F 34wk pregnant, GBS positive, unverified childhood allergy, urgent delabeling for intrapartum prophylaxis"},
+    {id:"atopic-dermatitis-severe-v2",diagnosis:"Severe AD (Pediatric, SDOH)",category:"allergy",acuity:3,setting:"ed",allergySubtype:"atopic-dermatitis",allSettings:true,variation:true,note:"4M MRSA superinfection, public housing cockroach/mold, single mother, adherence barriers, regimen simplification"},
+    {id:"peanut-allergy-anaphylaxis-v2",diagnosis:"Food Allergy (Misattributed Trigger)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"food-allergy",allSettings:true,variation:true,note:"3M first reaction, assumed peanut but actually CASHEW, importance of component testing"},
+    {id:"eoe-adult-v2",diagnosis:"EoE (Diagnostic Delay)",category:"allergy",acuity:3,setting:"ed",allergySubtype:"eoe",allSettings:true,variation:true,note:"29M 3-year GERD misdiagnosis, adaptive eating behaviors, social impact, food impaction"}
+  ]},
+  {presentation:"Allergy Variations — Batch 2-3",cases:[
+    {id:"ace-angioedema-v2",diagnosis:"ACE Angioedema (AA Female, CHF, Late-Onset)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true},
+    {id:"acquired-c1esterase-inhibitor-deficiency-v2",diagnosis:"Acquired C1-INH Deficiency (MGUS-Driven)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true},
+    {id:"acute-urticaria-v2",diagnosis:"Acute Urticaria (Post-Viral, Unnecessary Testing)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"urticaria",allSettings:true,variation:true},
+    {id:"allergic-angioedema-v2",diagnosis:"Allergic Angioedema (Obesity, Epi Dosing)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true},
+    {id:"allergic-conjunctivitis-severe-v2",diagnosis:"Vernal Keratoconjunctivitis (Shield Ulcer)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"conjunctivitis",allSettings:true,variation:true},
+    {id:"allergic-rhinitis-uncontrolled-v2",diagnosis:"Allergic Rhinitis (Vet Tech, Occupational SCIT)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"rhinitis",allSettings:true,variation:true},
+    {id:"contact-dermatitis-occupational-v2",diagnosis:"ACD (Hairstylist, PPD, Career Threat)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"contact-dermatitis",allSettings:true,variation:true},
+    {id:"cvid-presentation-v2",diagnosis:"CVID (Insurance Crisis, Diagnostic Delay)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,variation:true},
+    {id:"dress-syndrome-v2",diagnosis:"DRESS (Allopurinol, HLA-B*58:01, Korean)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true},
+    {id:"drug-allergy-vancomycin-rms-v2",diagnosis:"Vancomycin RMS (Elderly, False Allergy Cascade)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-allergy",allSettings:true,variation:true},
+    {id:"eczema-herpeticum-v2",diagnosis:"Eczema Herpeticum (Toddler, Cold Sore Exposure)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"atopic-dermatitis",allSettings:true,variation:true},
+    {id:"eoe-pediatric-v2",diagnosis:"EoE Pediatric (Picky Eater Misdiagnosis, 6yr Delay)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"eoe",allSettings:true,variation:true},
+    {id:"erythema-multiforme-major-v2",diagnosis:"EM Major (Recurrent HSV-Triggered)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true},
+    {id:"food-allergy-oit-reaction-v2",diagnosis:"OIT Reaction (Swimmer, Exercise Window)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"food-allergy",allSettings:true,variation:true},
+    {id:"fpies-acute-v2",diagnosis:"FPIES Acute (School Exposure, EpiPen Failure)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"fpies",allSettings:true,variation:true},
+    {id:"fpies-chronic-v2",diagnosis:"FPIES Chronic (Infant FTT, Reflux Misdiagnosis)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"fpies",allSettings:true,variation:true},
+    {id:"hereditary-angioedema-v2",diagnosis:"HAE (College Student, OCP Trigger, Diagnostic Odyssey)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true},
+    {id:"idiopathic-angioedema-v2",diagnosis:"Idiopathic Angioedema (Travel Anxiety, Omalizumab)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true},
+    {id:"insect-sting-anaphylaxis-v2",diagnosis:"Venom Anaphylaxis (Uninsured Landscape Worker)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"insect-allergy",allSettings:true,variation:true},
+    {id:"mastocytosis-v2",diagnosis:"MCAS (3yr Diagnostic Odyssey, Told Anxiety)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"mast-cell",allSettings:true,variation:true},
+    {id:"milk-allergy-infant-v2",diagnosis:"CMPA (Breastfed, Mother Misconception)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"food-allergy",allSettings:true,variation:true},
+    {id:"nsaid-hypersensitivity-v2",diagnosis:"AERD/Samter Triad (Chef with Anosmia)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-allergy",allSettings:true,variation:true},
+    {id:"severe-allergic-reaction-v2",diagnosis:"Contrast Reaction (Premedication Failure)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true},
+    {id:"severe-allergic-reaction-v3",diagnosis:"Amoxicillin Delabeling (College Athlete)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-allergy",allSettings:true,variation:true},
+    {id:"sjs-ten-v2",diagnosis:"SJS/TEN (Lamotrigine, HLA-B*15:13)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true},
+    {id:"sjsten-overlap-v2",diagnosis:"SJS/TEN Overlap (HIV + Bactrim)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true},
+    {id:"urticarial-vasculitis-v2",diagnosis:"Urticarial Vasculitis (Hypocomplementemic)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"urticaria",allSettings:true,variation:true},
+    {id:"venom-immunotherapy-reaction-v2",diagnosis:"VIT Reaction (ACE Inhibitor Amplification)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"insect-allergy",allSettings:true,variation:true}
   ]}
 ];
 var CASE_MANIFEST = window.CASE_MANIFEST || {};

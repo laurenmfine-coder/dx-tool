@@ -39,7 +39,7 @@
         di(R+'consult-callback.html','','Consult Callback','Practice consult calls')
       )+
       dd('Simulate', sec==='simulate',
-        di(R+'hospital-3d.html','','Virtual Hospital','3D walkthrough — all departments')+
+        di(R+'case-browser.html','','Virtual Hospital','3D walkthrough — all departments')+
         di(R+'ed-3d.html','','Emergency Department','8 patient rooms with full encounters')+
         di(R+'night-float.html','','Night Float','Overnight cross-cover with I-PASS')+
         di(R+'admissions.html','','Admissions','ED handoff, orders, H&P, presentation')+

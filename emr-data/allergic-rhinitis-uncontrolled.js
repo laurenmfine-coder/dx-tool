@@ -1268,4 +1268,21 @@ window.EMR_DATA = {
       "Candidate for SCIT or SLIT for dust mite/cat"
     ]
   ]
-};
+,"references":[
+  {
+    "id": "ARIA-2020",
+    "title": "ARIA guideline 2019: treatment of allergic rhinitis",
+    "authors": "Bousquet J, Schunemann HJ, Togias A, et al.",
+    "journal": "Allergy",
+    "year": 2020,
+    "doi": "10.1111/all.14049",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31473041/",
+    "openAccess": true,
+    "validates": [
+      "Step-up pharmacotherapy",
+      "INCS + antihistamine combo",
+      "SCIT/SLIT for refractory",
+      "United airway (rhinitis + asthma)"
+    ]
+  }
+]};

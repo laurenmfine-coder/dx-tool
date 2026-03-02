@@ -951,4 +951,22 @@ window.EMR_DATA = {
       "Skin prick testing negative, C4 normal x2"
     ]
   ]
+,
+  "references": [
+  {
+    "id": "REF-AE-004",
+    "citation": "Bernstein JA, Moellman J. Emerging concepts in the diagnosis and treatment of patients with undifferentiated angioedema. Int J Emerg Med. 2012;5:39.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3518246/",
+    "doi": "10.1186/1865-1380-5-39",
+    "pmid": "23131076",
+    "access": "Open Access (CC BY)",
+    "validates": [
+      "Differential diagnosis of angioedema: allergic vs bradykinin-mediated vs idiopathic",
+      "C4 screening to distinguish HAE from other causes",
+      "C1q levels distinguish acquired (low) from hereditary (normal) C1-INH deficiency",
+      "Acquired C1-INH deficiency association with lymphoproliferative disorders (MGUS, lymphoma)",
+      "Anti-C1-INH autoantibodies in acquired form"
+    ]
+  }
+]
 };
