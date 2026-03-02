@@ -17,14 +17,14 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0d12;--card:#0f1318;--border:rgba(255,255,255,.06);--text:#e0e0e0;--dim:rgba(255,255,255,.4);--accent:#7C3AED;--accent-bg:rgba(124,58,237,.1)}
+:root{--bg:#F0F4F8;--card:#ffffff;--border:#e2e8f0;--text:#1e293b;--dim:#64748b;--accent:#1B4F72;--accent-bg:rgba(27,79,114,.06);--night-header:#1B2A4A;--night-text:#e2e8f0}
 body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-ui,sans-serif;min-height:100vh}
 
 /* ═══ SETUP SCREEN ═══ */
 #setup{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
 #setup-inner{max-width:720px;width:100%;text-align:center}
-#setup h1{font-size:40px;font-weight:300;color:#fff;margin-bottom:4px}
-#setup h1 em{color:var(--accent);font-style:italic}
+#setup h1{font-size:40px;font-weight:300;color:var(--text);margin-bottom:4px}
+#setup h1 em{color:#2874A6;font-style:italic}
 #setup .setup-sub{color:var(--dim);font-size:14px;margin-bottom:32px;line-height:1.7}
 .setup-section{text-align:left;margin-bottom:28px}
 .setup-section h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:12px}
@@ -32,55 +32,55 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 /* Mode cards */
 .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .mode-card{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;text-align:left}
-.mode-card:hover{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
+.mode-card:hover{border-color:var(--dim);background:#f8fafc}
 .mode-card.selected{border-color:var(--accent);background:var(--accent-bg)}
 .mode-icon{font-size:22px;margin-bottom:6px}
-.mode-name{font-weight:700;font-size:14px;color:#fff;margin-bottom:3px}
+.mode-name{font-weight:700;font-size:14px;color:var(--text);margin-bottom:3px}
 .mode-desc{font-size:11px;color:var(--dim);line-height:1.5}
 
 /* Topic pills */
 .topic-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;display:none}
 .topic-pill{padding:6px 14px;border-radius:100px;border:1px solid var(--border);background:var(--card);font-size:12px;color:var(--dim);cursor:pointer;transition:all .15s;font-family:'IBM Plex Sans',sans-serif}
-.topic-pill:hover{border-color:rgba(255,255,255,.15);color:#fff}
-.topic-pill.selected{border-color:var(--accent);background:var(--accent-bg);color:#fff}
+.topic-pill:hover{border-color:#2874A6;color:#2874A6}
+.topic-pill.selected{border-color:#1B4F72;background:rgba(27,79,114,.1);color:#1B4F72}
 
 /* Practice mode pills */
 .practice-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
 .practice-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all .15s;text-align:center}
-.practice-card:hover{border-color:rgba(255,255,255,.12)}
+.practice-card:hover{border-color:var(--dim)}
 .practice-card.selected{border-color:var(--accent);background:var(--accent-bg)}
 .practice-card .pc-icon{font-size:20px;margin-bottom:4px}
-.practice-card .pc-name{font-size:12px;font-weight:600;color:#fff}
+.practice-card .pc-name{font-size:12px;font-weight:600;color:var(--text)}
 .practice-card .pc-desc{font-size:10px;color:var(--dim);margin-top:2px}
 
 /* Patient count slider */
 .count-row{display:flex;align-items:center;gap:12px;margin-top:10px}
-.count-row input[type="range"]{flex:1;accent-color:var(--accent)}
+.count-row input[type="range"]{flex:1;accent-color:#2874A6}
 .count-val{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--accent);min-width:40px;text-align:center}
 
 /* Start button */
-.start-btn{display:inline-block;background:var(--accent);color:#fff;font-size:15px;font-weight:600;padding:14px 40px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;margin-top:8px}
-.start-btn:hover{background:#6D28D9;transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.3)}
+.start-btn{display:inline-block;background:#2874A6;color:var(--text);font-size:15px;font-weight:600;padding:14px 40px;border-radius:12px;border:none;cursor:pointer;transition:all .2s;margin-top:8px}
+.start-btn:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 8px 24px rgba(40,116,166,.25)}
 
 /* ═══ MAIN DASHBOARD ═══ */
 #dashboard{display:none;min-height:100vh}
 
 /* Top bar */
-#topbar{display:flex;align-items:center;gap:12px;padding:10px 20px;background:rgba(15,19,24,.95);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:blur(10px)}
-#topbar .tb-logo{font-size:14px;font-weight:300;color:#fff}
+#topbar{display:flex;align-items:center;gap:12px;padding:10px 20px;background:var(--night-header);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:blur(10px)}
+#topbar .tb-logo{font-size:14px;font-weight:300;color:var(--night-text)}
 #topbar .tb-logo em{color:var(--accent);font-style:italic}
 #topbar .tb-time{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)}
-#topbar .tb-shift{font-size:11px;color:var(--dim);background:var(--accent-bg);padding:4px 10px;border-radius:100px;border:1px solid rgba(124,58,237,.2)}
+#topbar .tb-shift{font-size:11px;color:var(--dim);background:var(--accent-bg);padding:4px 10px;border-radius:100px;border:1px solid rgba(27,79,114,.2)}
 .tb-spacer{flex:1}
 #topbar .tb-back{color:var(--dim);font-size:12px;text-decoration:none;padding:4px 12px;border:1px solid var(--border);border-radius:6px}
-#topbar .tb-back:hover{color:#fff;border-color:rgba(255,255,255,.15)}
+#topbar .tb-back:hover{color:#fff;border-color:rgba(255,255,255,.25)}
 
 /* Dashboard grid */
 #dash-grid{display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 48px)}
 
 /* Left: patient list */
 #patient-list{padding:20px;overflow-y:auto}
-#patient-list h2{font-size:18px;font-weight:300;margin-bottom:4px;color:#fff}
+#patient-list h2{font-size:18px;font-weight:300;margin-bottom:4px;color:var(--text)}
 #patient-list h2 em{color:var(--accent);font-style:italic}
 #pl-subtitle{font-size:12px;color:var(--dim);margin-bottom:16px}
 
@@ -95,7 +95,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 .ipass-sev.acute{background:#EF4444;animation:pulse-dot 2s infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
 .ipass-info{flex:1;min-width:0}
-.ipass-name{font-weight:600;font-size:14px;color:#fff}
+.ipass-name{font-weight:600;font-size:14px;color:var(--text)}
 .ipass-meta{font-size:11px;color:var(--dim);margin-top:2px}
 .ipass-room{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:var(--accent-bg);padding:2px 8px;border-radius:5px}
 .ipass-expand{color:var(--dim);font-size:16px;transition:transform .2s}
@@ -103,20 +103,20 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 
 .ipass-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
 .ipass-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-top:12px;font-size:12px}
-.ipass-label{font-weight:700;color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
-.ipass-val{color:rgba(255,255,255,.65);line-height:1.6}
+.ipass-label{font-weight:700;color:#2874A6;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.ipass-val{color:var(--dim);line-height:1.6}
 
 .ipass-actions{display:flex;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
 .ipass-btn{padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.02);cursor:pointer;font-size:11px;font-weight:600;color:var(--dim);font-family:'IBM Plex Sans',sans-serif;transition:all .15s}
-.ipass-btn:hover{background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.12)}
-.ipass-btn.primary{background:var(--accent-bg);border-color:rgba(124,58,237,.2);color:var(--accent)}
-.ipass-btn.primary:hover{background:rgba(124,58,237,.2)}
+.ipass-btn:hover{background:rgba(27,79,114,.06);color:#1B4F72;border-color:#2874A6}
+.ipass-btn.primary{background:var(--accent-bg);border-color:rgba(27,79,114,.2);color:var(--accent)}
+.ipass-btn.primary:hover{background:rgba(27,79,114,.2)}
 
 /* Right sidebar: pages/activity */
 #sidebar{background:rgba(8,10,14,.95);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
 #sidebar-tabs{display:flex;border-bottom:1px solid var(--border)}
 .stab{flex:1;padding:10px;text-align:center;font-size:12px;font-weight:600;color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
-.stab:hover{color:#fff}
+.stab:hover{color:#1B4F72}
 .stab.active{color:var(--accent);border-bottom-color:var(--accent)}
 #sidebar-content{flex:1;overflow-y:auto;padding:12px}
 
@@ -126,27 +126,27 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 .page-card.unread{border-left:3px solid var(--accent)}
 .page-card.urgent{border-left:3px solid #EF4444}
 .page-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)}
-.page-from{font-weight:600;font-size:12px;color:#fff;margin:3px 0}
-.page-msg{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5}
+.page-from{font-weight:600;font-size:12px;color:var(--text);margin:3px 0}
+.page-msg{font-size:11px;color:var(--dim);line-height:1.5}
 .page-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;margin-left:6px}
 
 /* Page response panel */
-#page-response{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
+#page-response{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
 #page-response-inner{max-width:600px;margin:40px auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
 .pr-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .pr-close{background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer;margin-left:auto;padding:4px}
-.pr-close:hover{color:#fff}
-.pr-scenario{font-size:13px;line-height:1.7;color:rgba(255,255,255,.7);margin-bottom:16px;padding:14px;background:rgba(255,255,255,.02);border-radius:10px;border:1px solid var(--border)}
+.pr-close:hover{color:var(--text)}
+.pr-scenario{font-size:13px;line-height:1.7;color:var(--text);margin-bottom:16px;padding:14px;background:#f1f5f9;border-radius:10px;border:1px solid var(--border)}
 .pr-options{display:flex;flex-direction:column;gap:6px}
-.pr-opt{padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.7);transition:all .15s;font-family:'IBM Plex Sans',sans-serif;text-align:left}
-.pr-opt:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#fff}
+.pr-opt{padding:12px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);transition:all .15s;font-family:'IBM Plex Sans',sans-serif;text-align:left}
+.pr-opt:hover{background:rgba(27,79,114,.04);border-color:#2874A6;color:#1B4F72}
 .pr-opt.correct{border-color:#34D399;background:rgba(52,211,153,.08);color:#34D399}
 .pr-opt.incorrect{border-color:#EF4444;background:rgba(239,68,68,.05);color:#EF4444}
-.pr-explain{margin-top:14px;padding:14px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.12);border-radius:10px;font-size:12px;line-height:1.7;color:rgba(255,255,255,.65);display:none}
+.pr-explain{margin-top:14px;padding:14px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.12);border-radius:10px;font-size:12px;line-height:1.7;color:var(--dim);display:none}
 
 /* Notification toast */
 #page-toast{position:fixed;top:16px;right:16px;z-index:200;display:none}
-.toast-inner{background:rgba(124,58,237,.9);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.4);animation:slideIn .3s ease-out;cursor:pointer;backdrop-filter:blur(8px)}
+.toast-inner{background:rgba(27,79,114,.95);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.4);animation:slideIn .3s ease-out;cursor:pointer;backdrop-filter:blur(8px)}
 .toast-inner .toast-sub{font-size:11px;font-weight:400;opacity:.7;margin-top:2px}
 @keyframes slideIn{from{transform:translateX(100px);opacity:0}to{transform:translateX(0);opacity:1}}
 
@@ -159,13 +159,13 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 
 /* Shift timeline */
 #timeline{padding:8px 20px;background:rgba(8,10,14,.8);border-bottom:1px solid var(--border)}
-#timeline-bar{position:relative;height:24px;background:rgba(255,255,255,.03);border-radius:12px;overflow:hidden}
-#timeline-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--accent),rgba(124,58,237,.3));border-radius:12px;transition:width .5s}
+#timeline-bar{position:relative;height:24px;background:#f8fafc;border-radius:12px;overflow:hidden}
+#timeline-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--accent),rgba(27,79,114,.3));border-radius:12px;transition:width .5s}
 .tl-marker{position:absolute;top:-2px;width:8px;height:28px;border-radius:4px;z-index:2}
 .tl-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-top:4px}
 
 /* Task list */
-.task-item{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;margin-bottom:4px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;font-size:12px;color:rgba(255,255,255,.6)}
+.task-item{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;margin-bottom:4px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--dim)}
 .task-item.done{opacity:.4;text-decoration:line-through}
 .task-check{width:18px;height:18px;border:2px solid rgba(255,255,255,.15);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
 .task-check:hover{border-color:var(--accent)}
@@ -176,24 +176,24 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 .task-priority.low{background:rgba(52,211,153,.15);color:#34D399}
 
 /* Lifeline button */
-#lifeline-btn{position:fixed;bottom:16px;left:16px;z-index:60;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:var(--accent);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;display:none;transition:all .15s}
-#lifeline-btn:hover{background:rgba(124,58,237,.25);transform:translateY(-1px)}
+#lifeline-btn{position:fixed;bottom:16px;left:16px;z-index:60;background:rgba(27,79,114,.15);border:1px solid rgba(27,79,114,.3);color:var(--accent);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;display:none;transition:all .15s}
+#lifeline-btn:hover{background:rgba(27,79,114,.25);transform:translateY(-1px)}
 
 /* Handoff writing modal */
-#handoff-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:120;display:none;padding:20px;overflow-y:auto;backdrop-filter:blur(6px)}
+#handoff-modal{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:120;display:none;padding:20px;overflow-y:auto;backdrop-filter:blur(6px)}
 #handoff-inner{max-width:700px;margin:30px auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px}
 .ho-section{margin-bottom:16px}
 .ho-label{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
-.ho-textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:10px;color:#fff;font-family:'IBM Plex Sans',sans-serif;font-size:13px;resize:vertical;min-height:60px}
+.ho-textarea{width:100%;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:13px;resize:vertical;min-height:60px}
 .ho-textarea:focus{outline:none;border-color:var(--accent)}
 
 /* Shift summary */
-#summary-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:130;display:none;padding:20px;overflow-y:auto;backdrop-filter:blur(8px)}
+#summary-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:130;display:none;padding:20px;overflow-y:auto;backdrop-filter:blur(8px)}
 #summary-inner{max-width:600px;margin:30px auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center}
 .sum-grade{font-size:48px;font-weight:700;margin:12px 0}
 .sum-grade.A{color:#34D399}.sum-grade.B{color:#60A5FA}.sum-grade.C{color:#FBBF24}.sum-grade.D{color:#EF4444}
 .sum-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0}
-.sum-stat{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px}
+.sum-stat{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:14px}
 .sum-stat .ss-val{font-size:24px;font-weight:700;font-family:'JetBrains Mono',monospace}
 .sum-stat .ss-label{font-size:10px;color:var(--dim);margin-top:2px}
 /* RDX Loading */
@@ -300,7 +300,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
   </div>
   <div id="dash-grid">
     <div id="patient-list">
-      <div id="ed-crossover" style="display:none;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:10px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.7);align-items:center;gap:8px"></div>
+      <div id="ed-crossover" style="display:none;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:10px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:var(--text);align-items:center;gap:8px"></div>
       <h2>Your <em>patients</em> tonight</h2>
       <p id="pl-subtitle"></p>
       <div id="pl-cards"></div>
@@ -326,7 +326,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 <div id="page-response-inner">
   <div class="pr-header">
     <div>
-      <div style="font-weight:700;font-size:16px;color:#fff" id="pr-title"></div>
+      <div style="font-weight:700;font-size:16px;color:var(--text)" id="pr-title"></div>
       <div style="font-size:11px;color:var(--dim);margin-top:2px" id="pr-from"></div>
     </div>
     <button type="button" class="pr-close" onclick="closePageResponse()">✕</button>
@@ -370,6 +370,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 </div>
 
 <script src="emr-data/manifest.js"></script>
+<script src="emr-data/patient-names.js"></script>
 <script src="emr-data/handoff-data.js"></script>
 
 <script>
@@ -891,7 +892,7 @@ function firePage(pg) {
   const timeStr = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
   pageCard.innerHTML = `
     <div class="page-time">${timeStr}</div>
-    <div class="page-from">${pg.from} <span class="page-badge" style="background:${pg.urgency==='urgent'?'rgba(239,68,68,.15);color:#EF4444':'rgba(124,58,237,.15);color:#7C3AED'}">${pg.urgency}</span></div>
+    <div class="page-from">${pg.from} <span class="page-badge" style="background:${pg.urgency==='urgent'?'rgba(239,68,68,.15);color:#EF4444':'rgba(27,79,114,.15);color:#2874A6'}">${pg.urgency}</span></div>
     <div class="page-msg">${pg.msg}</div>`;
   pageCard.onclick = () => openScenario(pg.ptIdx, pg.pageIdx);
 
@@ -979,7 +980,7 @@ function renderChooseMode() {
         const card = document.createElement('div');
         card.className = 'page-card';
         card.innerHTML = `
-          <div class="page-from">${p.name} <span class="page-badge" style="background:rgba(124,58,237,.15);color:#7C3AED">${p.room}</span></div>
+          <div class="page-from">${p.name} <span class="page-badge" style="background:rgba(27,79,114,.15);color:#2874A6">${p.room}</span></div>
           <div class="page-msg">${pg.msg.substring(0,80)}...</div>`;
         card.onclick = () => openScenario(i,j);
         container.appendChild(card);
@@ -1204,18 +1205,18 @@ function showHandoffModal() {
     div.innerHTML = `
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <div>
-          <div style="font-weight:600;color:#fff;font-size:14px">${p.name}, ${p.age}${p.sex} — ${p.room}</div>
+          <div style="font-weight:600;color:var(--text);font-size:14px">${p.name}, ${p.age}${p.sex} — ${p.room}</div>
           <div style="font-size:11px;color:var(--dim);margin-top:2px">${p.dx} · Admit Day ${p.admitDay}${hasRef?' · <span style="color:var(--accent)">EMR Case</span>':''}</div>
         </div>
         ${hasRef?'<button type="button" class="ipass-btn" onclick="toggleRef('+i+')" style="font-size:10px;padding:4px 10px" id="ref-btn-'+i+'">Show Reference</button>':''}
       </div>
-      <div id="ref-panel-${i}" style="display:none;margin-bottom:12px;padding:10px 14px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.15);border-radius:8px;font-size:11px;line-height:1.6">
+      <div id="ref-panel-${i}" style="display:none;margin-bottom:12px;padding:10px 14px;background:rgba(27,79,114,.06);border:1px solid rgba(27,79,114,.15);border-radius:8px;font-size:11px;line-height:1.6">
         ${hasRef?`
           <div style="font-weight:700;color:var(--accent);margin-bottom:6px">📋 Reference I-PASS (from ED handoff)</div>
-          <div><span style="color:var(--accent);font-weight:600">I:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.i)}</span></div>
-          <div><span style="color:var(--accent);font-weight:600">P:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.p)}</span></div>
-          <div><span style="color:var(--accent);font-weight:600">A:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.a)}</span></div>
-          <div><span style="color:var(--accent);font-weight:600">S:</span> <span style="color:rgba(255,255,255,.6)">${esc(p.ipass.s)}</span></div>
+          <div><span style="color:var(--accent);font-weight:600">I:</span> <span style="color:var(--dim)">${esc(p.ipass.i)}</span></div>
+          <div><span style="color:var(--accent);font-weight:600">P:</span> <span style="color:var(--dim)">${esc(p.ipass.p)}</span></div>
+          <div><span style="color:var(--accent);font-weight:600">A:</span> <span style="color:var(--dim)">${esc(p.ipass.a)}</span></div>
+          <div><span style="color:var(--accent);font-weight:600">S:</span> <span style="color:var(--dim)">${esc(p.ipass.s)}</span></div>
           <div style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.35)">Dx: ${esc(p._handoffRef.workingDx||'')} · Allergies: ${esc(p._handoffRef.allergies||'NKDA')} · Code: ${esc(p._handoffRef.codeStatus||'Full code')}</div>
         `:''}
       </div>
@@ -1306,17 +1307,17 @@ function showSummary() {
     <div class="sum-stat"><div class="ss-val">${lifelinesUsed}</div><div class="ss-label">Lifelines Used</div></div>
   `;
 
-  let details = '<div style="font-size:12px;line-height:1.8;color:rgba(255,255,255,.5)">';
-  details += `<div><strong style="color:#fff">Page Management:</strong> ${shiftStats.pagesAnswered > 0 ? Math.round(shiftStats.pagesCorrect/shiftStats.pagesAnswered*100) : 0}% accuracy</div>`;
-  details += `<div><strong style="color:#fff">Task Completion:</strong> ${shiftStats.totalTasks > 0 ? Math.round(shiftStats.tasksCompleted/shiftStats.totalTasks*100) : 100}%</div>`;
+  let details = '<div style="font-size:12px;line-height:1.8;color:var(--dim)">';
+  details += `<div><strong style="color:var(--text)">Page Management:</strong> ${shiftStats.pagesAnswered > 0 ? Math.round(shiftStats.pagesCorrect/shiftStats.pagesAnswered*100) : 0}% accuracy</div>`;
+  details += `<div><strong style="color:var(--text)">Task Completion:</strong> ${shiftStats.totalTasks > 0 ? Math.round(shiftStats.tasksCompleted/shiftStats.totalTasks*100) : 100}%</div>`;
   if(shiftStats.decompTotal > 0) {
-    details += `<div><strong style="color:#fff">Decompensation Response:</strong> ${shiftStats.decompCaught}/${shiftStats.decompTotal} caught</div>`;
+    details += `<div><strong style="color:var(--text)">Decompensation Response:</strong> ${shiftStats.decompCaught}/${shiftStats.decompTotal} caught</div>`;
   }
-  details += `<div><strong style="color:#fff">Handoff Quality:</strong> ${shiftStats.handoffTotal > 0 ? Math.round(shiftStats.handoffScore/shiftStats.handoffTotal*100) : 0}% complete</div>`;
+  details += `<div><strong style="color:var(--text)">Handoff Quality:</strong> ${shiftStats.handoffTotal > 0 ? Math.round(shiftStats.handoffScore/shiftStats.handoffTotal*100) : 0}% complete</div>`;
   if(shiftStats.handoffFeedback && shiftStats.handoffFeedback.length > 0) {
     details += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><strong style="color:#FBBF24">Handoff Feedback:</strong></div>';
     shiftStats.handoffFeedback.slice(0,5).forEach(fb => {
-      details += `<div style="font-size:11px;padding:3px 0;color:rgba(255,255,255,.4)">• ${fb}</div>`;
+      details += `<div style="font-size:11px;padding:3px 0;color:var(--dim)">• ${fb}</div>`;
     });
     if(shiftStats.handoffFeedback.length > 5) {
       details += `<div style="font-size:10px;color:var(--dim)">...and ${shiftStats.handoffFeedback.length - 5} more items</div>`;
@@ -1640,7 +1641,7 @@ function loadEDPatients() {
       if(banner) {
         banner.style.display = 'flex';
         banner.innerHTML = `<span>🚑 ${edPts.length} patient(s) admitted from ED are available to add to your list.</span>
-          <button type="button" onclick="addEDPatients()" style="margin-left:auto;padding:6px 14px;background:var(--accent);border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:11px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;white-space:nowrap">+ Add to List</button>`;
+          <button type="button" onclick="addEDPatients()" style="margin-left:auto;padding:6px 14px;background:var(--accent);border:none;border-radius:6px;color:var(--text);cursor:pointer;font-size:11px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;white-space:nowrap">+ Add to List</button>`;
       }
     }
   } catch(e) {}

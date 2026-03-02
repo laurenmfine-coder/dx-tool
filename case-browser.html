@@ -36,6 +36,26 @@
    ═══════════════════════════════ */
 
 :root {
+
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --teal: #2874A6;
+    --teal-50: rgba(40, 116, 166, 0.06);
+    --teal-dark: #1B4F72;
+    --white: #ffffff;
+    --navy: #1e293b;
   --blue: #2874A6;
   --navy: #1A1A2E;
   --slate50: #f8fafc;
@@ -933,7 +953,7 @@ body {
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ReasonDx...</div></div>
 <!-- Dashboard CTA -->
 <div id="rdx-mastery-banner" style="max-width:900px;margin:20px auto;padding:0 16px;">
-  <a href="tools/learning-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(40,116,166,0.08),rgba(40,116,166,0.04));border:1px solid rgba(40,116,166,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(40,116,166,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+  <a href="analytics-dashboard.html" style="display:flex;align-items:center;gap:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(40,116,166,0.08),rgba(40,116,166,0.04));border:1px solid rgba(40,116,166,0.15);border-radius:12px;text-decoration:none;transition:box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(40,116,166,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
     <div style="font-size:28px;flex-shrink:0;">📊</div>
     <div style="flex:1;min-width:0;">
       <div style="font-weight:700;color:var(--rdx-teal-dark,#1f5f8b);font-size:15px;margin-bottom:2px;">Your Reasoning Dashboard & Fingerprint</div>
@@ -981,7 +1001,7 @@ body {
     <span class="path-count">Clinical Reasoning Trainer</span>
   </a>
   
-  <a href="tools/sbar-trainer.html" class="path-card">
+  <a href="training.html" class="path-card">
     <div class="path-icon tools">📋</div>
     <h3>Communicate</h3>
     <p>Practice structured SBAR handoffs and get AI-scored feedback on your presentations</p>
@@ -1002,7 +1022,7 @@ body {
     <span class="path-count">SimRoomDx</span>
   </a>
   
-  <a href="tools/learning-dashboard.html" class="path-card">
+  <a href="analytics-dashboard.html" class="path-card">
     <div class="path-icon test">📊</div>
     <h3>Dashboard</h3>
     <p>Track your progress, view your Reasoning Fingerprint, and see how you're growing</p>
@@ -1364,6 +1384,154 @@ body {
                         <p style="font-size: 11px; color: var(--slate400); margin-top: 3px;">Unlocks after Clinical Reasoning Foundations</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Night Float Simulator -->
+    <div class="ix-grid">
+        <div>
+            <div class="ix-section-tag" style="background: #EFF6FF; color: #1B4F72;">&#127769; Night Float Simulator</div>
+            <h3 class="ix-title">Survive a real overnight cross-cover shift</h3>
+            <p class="ix-desc">You're the intern covering 8 patients overnight. Nurses page you with urgent vitals, critical labs auto-alert, and the ED calls with new admissions. Triage, prioritize, and manage — just like a real night shift.</p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #EFF6FF; color: #1B4F72;">I-PASS Handoffs</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #FEF3C7; color: #92400E;">Live Nurse Pages</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #FEE2E2; color: #991B1B;">Critical Lab Alerts</span>
+            </div>
+        </div>
+        <div class="ix-mock">
+            <div class="ix-mock-sm" style="border-left: 3px solid #EF4444;">
+                <div class="ix-mock-label" style="color: #EF4444;">Incoming Page — 01:47 AM</div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--slate600); margin-bottom: 4px;">RN Martinez, Room 4A-01 · URGENT</div>
+                <p style="font-size: 12px; color: var(--slate500); line-height: 1.5;">Mr. Chen's K+ just came back at 6.2. HR is 54 and irregular. He's on the heparin drip for his PE. What do you want me to do?</p>
+            </div>
+            <div class="ix-mock-sm" style="border-left: 3px solid var(--blue);">
+                <div class="ix-mock-label" style="color: var(--blue);">Your Response Options</div>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <div style="padding: 6px 10px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; font-size: 11px; color: #065F46; font-weight: 600;">✓ STAT ECG, hold heparin, calcium gluconate, kayexalate</div>
+                    <div style="padding: 6px 10px; background: #fff; border: 1px solid var(--slate200); border-radius: 8px; font-size: 11px; color: var(--slate400);">Recheck K+ in 2 hours</div>
+                    <div style="padding: 6px 10px; background: #fff; border: 1px solid var(--slate200); border-radius: 8px; font-size: 11px; color: var(--slate400);">Increase IV fluids and monitor</div>
+                </div>
+            </div>
+            <div style="margin-top: 6px; display: flex; gap: 12px; font-size: 11px; color: var(--slate400);">
+                <span>Shift time: 01:47 / 07:00</span>
+                <span>Pages answered: 4/8</span>
+                <span style="color: #059669; font-weight: 600;">Accuracy: 75%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admissions Simulator -->
+    <div class="ix-grid">
+        <div class="ix-mock">
+            <div class="ix-mock-sm" style="border-left: 3px solid #7C3AED;">
+                <div class="ix-mock-label" style="color: #7C3AED;">ED Handoff — I-PASS Format</div>
+                <div style="font-size: 12px; color: var(--slate500); line-height: 1.6;">
+                    <div style="margin-bottom: 4px;"><span style="font-weight: 700; color: #7C3AED; font-size: 10px; padding: 1px 6px; background: #F5F3FF; border-radius: 4px;">I</span> <span style="font-weight: 600; color: var(--slate600);">Acute — NSTEMI, troponin rising</span></div>
+                    <div style="margin-bottom: 4px;"><span style="font-weight: 700; color: #7C3AED; font-size: 10px; padding: 1px 6px; background: #F5F3FF; border-radius: 4px;">P</span> <span style="color: var(--slate500);">67M, HTN, DM2, active smoker. Substernal CP x3h.</span></div>
+                    <div style="margin-bottom: 4px;"><span style="font-weight: 700; color: #7C3AED; font-size: 10px; padding: 1px 6px; background: #F5F3FF; border-radius: 4px;">A</span> <span style="color: var(--slate500);">Heparin drip, serial troponins q6h, cardiology consult</span></div>
+                    <div style="margin-bottom: 4px;"><span style="font-weight: 700; color: #7C3AED; font-size: 10px; padding: 1px 6px; background: #F5F3FF; border-radius: 4px;">S</span> <span style="color: var(--slate500);">If chest pain recurs → ECG, escalate to cath lab</span></div>
+                    <div><span style="font-weight: 700; color: #7C3AED; font-size: 10px; padding: 1px 6px; background: #F5F3FF; border-radius: 4px;">S</span> <span style="color: var(--slate500);">Admit to telemetry. Full code. Wife at bedside.</span></div>
+                </div>
+            </div>
+            <div class="ix-mock-sm" style="border-left: 3px solid var(--emerald);">
+                <div class="ix-mock-label" style="color: var(--emerald);">Your Admission H&P — Graded</div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span style="padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #ecfdf5; color: #059669;">HPI ✓</span>
+                    <span style="padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #ecfdf5; color: #059669;">PMH ✓</span>
+                    <span style="padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #FEF3C7; color: #92400E;">PE ○</span>
+                    <span style="padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #FEE2E2; color: #991B1B;">A&P ✗</span>
+                </div>
+                <p style="font-size: 11px; color: var(--slate500); margin-top: 6px; line-height: 1.5;">Score: 72/100. Missing: DDx discussion in assessment. Plan lacks anticoagulation bridging strategy.</p>
+            </div>
+        </div>
+        <div>
+            <div class="ix-section-tag" style="background: #F5F3FF; color: #7C3AED;">&#128203; Admissions Simulator</div>
+            <h3 class="ix-title">Write a real admission from an ED handoff</h3>
+            <p class="ix-desc">Receive an I-PASS structured handoff from the ED. Review the chart, write your admission H&P, enter orders, and present to the attending. Every component is scored against a clinical rubric — from HPI quality to plan specificity.</p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #F5F3FF; color: #7C3AED;">I-PASS Handoffs</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #ecfdf5; color: #059669;">H&P Scoring</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #EFF6FF; color: #1B4F72;">Order Entry</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Virtual EMR -->
+    <div class="ix-grid">
+        <div>
+            <div class="ix-section-tag" style="background: #ECFDF5; color: #065F46;">&#128421; Virtual EMR</div>
+            <h3 class="ix-title">A patient chart that teaches you to think</h3>
+            <p class="ix-desc">Open a full electronic medical record — demographics, vitals, labs, imaging, medications, allergies, problem list. Navigate the chart like you would in a real hospital, then write your note. The EMR doesn't tell you the diagnosis — you figure it out.</p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #ECFDF5; color: #065F46;">Full Patient Chart</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #F0F2F5; color: var(--blue);">Note Writing</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #FFF7ED; color: #9A3412;">AI Grading</span>
+            </div>
+        </div>
+        <div class="ix-mock">
+            <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+                <span style="padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; background: var(--blue); color: white;">Demographics</span>
+                <span style="padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #F0F2F5; color: var(--blue); border: 1px solid #bfdbfe;">Vitals</span>
+                <span style="padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #F0F2F5; color: var(--blue); border: 1px solid #bfdbfe;">Labs</span>
+                <span style="padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #F0F2F5; color: var(--blue); border: 1px solid #bfdbfe;">Imaging</span>
+                <span style="padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #F0F2F5; color: var(--blue); border: 1px solid #bfdbfe;">Meds</span>
+            </div>
+            <div class="ix-mock-sm">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 14px; font-weight: 700; color: var(--navy);">Maria Santos, 34F</div>
+                        <div style="font-size: 11px; color: var(--slate400);">MRN: 4827193 · Admitted 12/14 · Day 2</div>
+                    </div>
+                    <div style="padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #FEE2E2; color: #991B1B;">Acuity: ESI-2</div>
+                </div>
+            </div>
+            <div class="ix-mock-sm" style="border-left: 3px solid #EF4444;">
+                <div style="font-size: 10px; color: var(--slate400); margin-bottom: 3px;">VITALS — Trending</div>
+                <div style="display: flex; gap: 14px; font-size: 12px;">
+                    <span><span style="font-weight: 600; color: #EF4444;">HR 128</span></span>
+                    <span><span style="font-weight: 600; color: #EF4444;">BP 86/54</span></span>
+                    <span>RR 24</span>
+                    <span><span style="font-weight: 600; color: #F59E0B;">SpO2 91%</span></span>
+                    <span>Temp 39.1°C</span>
+                </div>
+            </div>
+            <div class="ix-mock-sm" style="margin-bottom: 0;">
+                <div style="font-size: 10px; color: var(--slate400); margin-bottom: 3px;">CRITICAL LAB</div>
+                <div style="font-size: 12px; color: var(--slate600);">Lactate <span style="color: #EF4444; font-weight: 700;">4.8 mmol/L</span> ↑↑ | WBC 18.4 | Procalcitonin 12.6</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ECG Trainer -->
+    <div class="ix-grid">
+        <div class="ix-mock">
+            <div class="ix-mock-sm" style="border-left: 3px solid #6366F1;">
+                <div class="ix-mock-label" style="color: #6366F1;">12-Lead ECG — Interpret</div>
+                <div style="font-family: monospace; font-size: 11px; color: var(--slate500); line-height: 1.8; background: #F8FAFC; padding: 8px 10px; border-radius: 8px;">
+                    Rate: <span style="font-weight: 700; color: var(--slate600);">142 bpm</span> · Rhythm: <span style="font-weight: 700; color: var(--slate600);">Irregular</span><br>
+                    Axis: <span style="font-weight: 700; color: var(--slate600);">Normal</span> · PR: <span style="font-weight: 700; color: #EF4444;">Absent P waves</span><br>
+                    QRS: <span style="font-weight: 700; color: var(--slate600);">Narrow</span> · ST: <span style="font-weight: 700; color: var(--slate600);">No elevation</span>
+                </div>
+            </div>
+            <div class="ix-mock-sm" style="border-left: 3px solid #059669; margin-bottom: 0;">
+                <div class="ix-mock-label" style="color: #059669;">Diagnosis</div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; background: #ecfdf5; color: #059669;">Atrial Fibrillation with RVR</span>
+                    <span style="font-size: 11px; color: var(--slate400);">You got it right!</span>
+                </div>
+                <p style="font-size: 11px; color: var(--slate500); margin-top: 6px; line-height: 1.5;">Key features: absent P waves, irregularly irregular rhythm, narrow QRS, rate &gt;100. Next step: rate control with IV diltiazem or metoprolol.</p>
+            </div>
+        </div>
+        <div>
+            <div class="ix-section-tag" style="background: #EEF2FF; color: #6366F1;">&#128147; ECG Trainer</div>
+            <h3 class="ix-title">Read 12-leads like a cardiologist</h3>
+            <p class="ix-desc">Practice systematic ECG interpretation with real tracings. Identify rate, rhythm, axis, intervals, and ST changes — then get instant feedback with annotated explanations of what you missed and what you nailed.</p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #EEF2FF; color: #6366F1;">Systematic Approach</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #ecfdf5; color: #059669;">Instant Feedback</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #FEF3C7; color: #92400E;">Clinical Next Steps</span>
             </div>
         </div>
     </div>
@@ -2989,9 +3157,7 @@ function doSearch() {
   if (q.length < 2) { searchResults.classList.remove('open'); return; }
   
   // CRT cases that are active (not in _legacy)
-  const CRT_CASES = [
-
-  ];
+  const CRT_CASES = TOPICS;
   
   const matches = CRT_CASES.filter(t => 
     t.t.toLowerCase().includes(q) || (t.tags && t.tags.toLowerCase().includes(q))
@@ -3435,6 +3601,9 @@ function closePopup() {
 }
 
 function showPopup() {
+  // Don't show if feedback panel is open
+  var fbOpen = document.getElementById('fbPanel');
+  if (fbOpen && fbOpen.classList.contains('open')) return;
   if (sessionStorage.getItem('rdx-popup-dismissed')) return;
   if (sessionStorage.getItem('rdx-popup-shown')) return;
   // Close PWA modal if open (mutual exclusion)
@@ -3534,12 +3703,12 @@ document.querySelector('.popup-form').addEventListener('submit', function(e) {
 <!-- ANONYMOUS FEEDBACK WIDGET                 -->
 <!-- ═══════════════════════════════════════════ -->
 <style>
-.fb-float { position: fixed; bottom: 24px; left: 24px; z-index: 9998; }
+.fb-float { position: fixed; bottom: 24px; left: 24px; z-index: 10100; }
 .fb-btn { display: flex; align-items: center; gap: 6px; padding: 10px 18px; background: linear-gradient(135deg, #2874A6, #1f5f8b); color: white; border: none; border-radius: 24px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(40,116,166,0.35); transition: all 0.25s; font-family: 'IBM Plex Sans', -apple-system, sans-serif; }
 .fb-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(40,116,166,0.45); }
 .fb-btn.minimized { padding: 10px 12px; border-radius: 50%; width: 44px; height: 44px; justify-content: center; }
 .fb-btn.minimized span { display: none; }
-.fb-panel { position: fixed; bottom: 80px; left: 24px; z-index: 9999; width: 360px; max-width: calc(100vw - 48px); background: white; border-radius: 20px; box-shadow: 0 12px 48px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; display: none; animation: fbSlideUp 0.25s ease; }
+.fb-panel { position: fixed; bottom: 80px; left: 24px; z-index: 10100; width: 360px; max-width: calc(100vw - 48px); background: white; border-radius: 20px; box-shadow: 0 12px 48px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; display: none; animation: fbSlideUp 0.25s ease; }
 .fb-panel.open { display: block; }
 @keyframes fbSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 .fb-panel-header { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: start; }
@@ -3611,6 +3780,11 @@ function toggleFeedback() {
     if (isOpen) {
         closeFeedbackPanel();
     } else {
+        // Dismiss other overlays that might block
+        var ep = document.getElementById('emailPopup');
+        if (ep) ep.classList.remove('active');
+        var pwa = document.getElementById('pwa-modal');
+        if (pwa) pwa.style.display = 'none';
         panel.classList.add('open');
         btn.style.display = 'none';
     }
@@ -3631,10 +3805,9 @@ function submitFeedback() {
     var isSignedIn = false;
     try { var u = localStorage.getItem('reasondx-user'); if (u) { var j = JSON.parse(u); isSignedIn = !!(j && j.email); } } catch(e) {}
     var payload = { action: 'feedback', category: fbCategory || 'none', message: text, page: location.pathname, signedIn: isSignedIn, timestamp: new Date().toISOString() };
-    if (FB_SHEETS_URL !== 'https://script.google.com/macros/s/AKfycbyORFuj2oOgXPlBe1jYHfqIwQ6v7R9ZbXBwR6aVeL9wBeAvRvgHGC9XvQuZt4Ce7-eqfg/exec') {
+    if (FB_SHEETS_URL && FB_SHEETS_URL.indexOf('script.google.com') !== -1) {
         try { fetch(FB_SHEETS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); } catch(e) {}
     }
-    void(0););
     document.getElementById('fbForm').style.display = 'none';
     document.getElementById('fbSuccess').style.display = 'block';
     btn.disabled = false;

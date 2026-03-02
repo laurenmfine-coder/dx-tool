@@ -1,21 +1,22 @@
 /* dx-plan-gate.js — Plan/Subscription Gate
- * Checks if user has access to Pro features.
+ * Controls access to Pro features.
+ * NOTE: All features unlocked during free launch period.
+ * To re-enable gating, change isPro() to check localStorage plan field.
  */
 (function() {
   'use strict';
   window.DxPlanGate = {
     isPro: function() {
-      try {
-        var user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
-        return user.plan === 'pro';
-      } catch(e) { return false; }
+      // Free launch: all features unlocked
+      return true;
     },
     gate: function(feature, callback) {
-      if (this.isPro()) { callback(); }
-      else { this.showUpgradePrompt(feature); }
+      callback();
     },
-    showUpgradePrompt: function(feature) {
-      // Show upgrade modal
+    showUpgradePrompt: function(feature) {},
+    showUpgradeModal: function(opts) {},
+    getSimRoomFeatures: function() {
+      return { plan: 'pro', maxCharacters: 6, allowedCharacters: ['patient','attending','nurse','family','consultant','pharmacist'], multiplayer: false, voice: true, freeCases: [], allCases: true };
     }
   };
 })();
