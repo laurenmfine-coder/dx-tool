@@ -1,190 +1,290 @@
-// Virtual EMR Case: Severe Hyperkalemia with Cardiac Toxicity
-// Variant: hyperkalemia-cardiac | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/hyperkalemia-cardiac.js — Auto-generated EMR case data for Hyperkalemia with Cardiac Changes */
 window.EMR_DATA = {
   "patient": {
     "name": "Ahmed Hassan",
-    "dob": "07/20/1955",
-    "age": 70,
+    "dob": "08/21/1962",
+    "age": "64",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Medicare",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-359486",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "ahmed@email.com",
+    "race": "Asian",
+    "phone": "(618) 667-7638",
+    "email": "ahmed.hassan@email.com",
+    "address": "5326 Elm Ave, Weston, FL 33363",
+    "insurance": "Oscar Health",
+    "pcp": "Dr. James Wu, MD",
+    "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Teresa Hassan",
+      "phone": "(255) 693-1936",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-95797"
+    "chiefComplaint": "Weakness and palpitations — missed dialysis",
+    "diagnosis": "Hyperkalemia with Cardiac Changes"
   },
   "problems": [
     {
-      "problem": "Severe Hyperkalemia with Cardiac Toxicity",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "ESRD on hemodialysis (MWF)",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Diabetes",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Hypertension",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-4",
+      "description": "AV Fistula left arm",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Sevelamer",
+      "dose": "800mg",
+      "route": "PO",
+      "frequency": "TID with meals",
+      "status": "Active",
+      "prescriber": "Dr. Michelle Foster, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Insulin Glargine",
+      "dose": "18 units",
+      "route": "SC",
+      "frequency": "Nightly",
+      "status": "Active",
+      "prescriber": "Dr. Robert Hughes, DO"
+    },
+    {
+      "id": "med-3",
+      "name": "Amlodipine",
+      "dose": "10mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Raj Patel, MD"
+    },
+    {
+      "id": "med-4",
+      "name": "Epoetin alfa",
+      "dose": "",
+      "route": "SC",
+      "frequency": "Per dialysis",
+      "status": "Active",
+      "prescriber": "Dr. Elena Rodriguez, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "172/98",
+      "hr": "52",
+      "rr": "18",
+      "temp": "36.6°C",
+      "spo2": "96%",
+      "pain": "3/10",
+      "bmi": "36",
+      "weight": "87 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Severe Hyperkalemia with Cardiac Toxicity",
-      "hpi": "70M ESRD on HD (missed last 2 sessions) presenting with weakness and palpitations. K+ 7.8. ECG: tall peaked T waves, widened QRS (148ms), loss of P waves \u2014 pre-arrest rhythm. CALCIUM GLUCONATE 2g IV (membrane stabilization). Insulin 10U + D50. Kayexalate. EMERGENT hemodialysis.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Severe Hyperkalemia with Cardiac Toxicity \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Weakness and palpitations — missed dialysis",
+      "hpi": "Ahmed Hassan is a 64-year-old male presenting with weakness and palpitations — missed dialysis. Past medical history includes ESRD on hemodialysis (MWF), Diabetes, Hypertension, AV Fistula left arm. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Hyperkalemia with Cardiac Changes — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-840656",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
             {
               "test": "Potassium",
               "value": "7.8",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
               "flag": "H"
             },
             {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "16",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": "L"
+            },
+            {
               "test": "BUN",
-              "value": "98",
+              "value": "82",
               "unit": "mg/dL",
               "range": "7-20",
               "flag": "H"
             },
             {
               "test": "Creatinine",
-              "value": "12.4",
+              "value": "8.4",
               "unit": "mg/dL",
-              "range": "0.7-1.3",
+              "range": "0.6-1.2",
               "flag": "H"
             },
             {
-              "test": "Bicarbonate",
-              "value": "14",
-              "unit": "mEq/L",
-              "range": "22-29",
-              "flag": "L"
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
             },
             {
-              "test": "Phosphorus",
-              "value": "8.2",
+              "test": "Calcium",
+              "value": "9.4",
               "unit": "mg/dL",
-              "range": "2.5-4.5",
-              "flag": "H"
+              "range": "8.5-10.5",
+              "flag": ""
             }
           ]
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-608536",
+      "clinical": "Weakness and palpitations — missed dialysis",
+      "technique": "Standard protocol",
+      "findings": "Peaked T waves, widened QRS (140ms), loss of P waves, sine wave pattern developing. Heart rate 48.",
+      "impression": "Critical hyperkalemia with ECG changes. Emergent treatment required.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Non-contributory"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Dialysis",
+      "Missed last 2 sessions — car broke down"
+    ],
+    [
+      "Diet",
+      "Ate bananas, oranges, and potatoes yesterday"
     ]
-  ],
-  "meta": {
-    "caseId": "hyperkalemia-cardiac",
-    "diagnosis": "Severe Hyperkalemia with Cardiac Toxicity",
-    "acuity": 1,
-    "presentation": "Renal / Electrolyte Emergency",
-    "category": "renal"
-  }
+  ]
 };

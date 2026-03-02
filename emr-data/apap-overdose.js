@@ -1,125 +1,249 @@
-// Virtual EMR Case: Acetaminophen Overdose (Intentional)
-// Variant: apap-overdose | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/apap-overdose.js — Auto-generated EMR case data for Acetaminophen Overdose */
 window.EMR_DATA = {
   "patient": {
     "name": "Megan Fisher",
-    "dob": "12/14/2001",
-    "age": 24,
+    "dob": "01/04/1999",
+    "age": "27",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "BCBS PPO",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-786949",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "megan@email.com",
+    "race": "Asian",
+    "phone": "(544) 613-1097",
+    "email": "megan.fisher@email.com",
+    "address": "9358 Cedar St, Davie, FL 33315",
+    "insurance": "Oscar Health",
+    "pcp": "Dr. Michelle Foster, MD",
+    "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Reginald Fisher",
+      "phone": "(466) 789-7875",
+      "relationship": "Partner"
     },
-    "mrn": "RDX-2025-23009"
+    "chiefComplaint": "Intentional ingestion of approximately 30g of acetaminophen 8 hours ago",
+    "diagnosis": "Acetaminophen Overdose"
   },
   "problems": [
     {
-      "problem": "Acetaminophen Overdose (Intentional)",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Depression",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Anxiety",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Recent breakup",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Sertraline",
+      "dose": "100mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Raj Patel, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Alprazolam",
+      "dose": "0.5mg",
+      "route": "PO",
+      "frequency": "PRN",
+      "status": "Active",
+      "prescriber": "Dr. Michelle Foster, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "112/68",
+      "hr": "88",
+      "rr": "16",
+      "temp": "36.8°C",
+      "spo2": "99%",
+      "pain": "3/10",
+      "bmi": "24",
+      "weight": "72 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Acetaminophen Overdose (Intentional)",
-      "hpi": "24F brought by roommate after admitting to ingesting ~30 extra-strength Tylenol (15g) 6 hours ago in suicide attempt. Initially asymptomatic but nauseous. APAP level 280 mcg/mL at 6hr (well above treatment line). AST/ALT rising (88/102). START NAC protocol immediately (150mg/kg loading). Psychiatry consult. 1:1 sitter.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Acetaminophen Overdose (Intentional) \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Intentional ingestion of approximately 30g of acetaminophen 8 hours ago",
+      "hpi": "Megan Fisher is a 27-year-old female presenting with intentional ingestion of approximately 30g of acetaminophen 8 hours ago. Past medical history includes Depression, Anxiety, Recent breakup. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Acetaminophen Overdose — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-378771",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
-              "test": "APAP Level",
-              "value": "280",
-              "unit": "mcg/mL",
-              "range": "<10",
-              "flag": "H"
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
             },
             {
-              "test": "AST",
-              "value": "88",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
             },
             {
-              "test": "ALT",
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
               "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Alt",
+              "value": "42",
               "unit": "U/L",
               "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "Ast",
+              "value": "38",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Inr",
+              "value": "1.1",
+              "unit": "",
+              "range": "0.9-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Apap Level",
+              "value": "185",
+              "unit": "mcg/mL",
+              "range": "10-30 therapeutic",
               "flag": "H"
             },
             {
-              "test": "INR",
-              "value": "1.2",
+              "test": "Ph",
+              "value": "7.38",
               "unit": "",
-              "range": "0.9-1.1",
-              "flag": "H"
+              "range": "7.35-7.45",
+              "flag": ""
             }
           ]
         }
@@ -129,41 +253,39 @@ window.EMR_DATA = {
   "imaging": [],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Family hx depression"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Suicide attempt",
+      "Intentional overdose after argument with boyfriend"
+    ],
+    [
+      "Alcohol",
+      "Had 3 glasses of wine"
+    ],
+    [
+      "Safety",
+      "Denies other co-ingestants, no SI currently"
     ]
-  ],
-  "meta": {
-    "caseId": "apap-overdose",
-    "diagnosis": "Acetaminophen Overdose (Intentional)",
-    "acuity": 2,
-    "presentation": "Toxicologic Emergency",
-    "category": "toxicology"
-  }
+  ]
 };

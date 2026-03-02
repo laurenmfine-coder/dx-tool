@@ -1,97 +1,178 @@
-// Virtual EMR Case: Severe Hyponatremia with Seizure (SIADH)
-// Variant: severe-hyponatremia | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/severe-hyponatremia.js — Auto-generated EMR case data for Severe Hyponatremia */
 window.EMR_DATA = {
   "patient": {
     "name": "Linda Petrowski",
-    "dob": "09/28/1965",
-    "age": 60,
+    "dob": "03/18/1956",
+    "age": "70",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "BCBS PPO",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-125847",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "linda@email.com",
+    "race": "Hispanic/Latino",
+    "phone": "(360) 499-7846",
+    "email": "linda.petrowski@email.com",
+    "address": "8360 Palm Ave, Plantation, FL 33322",
+    "insurance": "UnitedHealthcare",
+    "pcp": "Dr. Robert Hughes, DO",
+    "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Thomas Petrowski",
+      "phone": "(854) 823-6867",
+      "relationship": "Partner"
     },
-    "mrn": "RDX-2025-95851"
+    "chiefComplaint": "Confusion, nausea, and unsteady gait",
+    "diagnosis": "Severe Hyponatremia"
   },
   "problems": [
     {
-      "problem": "Severe Hyponatremia with Seizure (SIADH)",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Depression",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Hypothyroidism",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Hypertension",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-4",
+      "description": "SIADH suspected",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "SSRI (Escitalopram)",
+      "dose": "20mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Raj Patel, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Levothyroxine",
+      "dose": "75mcg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wu, MD"
+    },
+    {
+      "id": "med-3",
+      "name": "HCTZ",
+      "dose": "25mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Michelle Foster, MD"
+    },
+    {
+      "id": "med-4",
+      "name": "Lisinopril",
+      "dose": "10mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Raj Patel, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "138/78",
+      "hr": "72",
+      "rr": "16",
+      "temp": "36.6°C",
+      "spo2": "98%",
+      "pain": "2/10",
+      "bmi": "35",
+      "weight": "75 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Severe Hyponatremia with Seizure (SIADH)",
-      "hpi": "60F on sertraline + HCTZ presenting with confusion and witnessed GTC seizure. Na+ 112 mEq/L. Drug-induced SIADH (sertraline) compounded by thiazide. STAT 3% hypertonic saline 100mL bolus over 10min \u2014 goal raise Na 4-6 mEq/L in first 6hr, max 8 mEq/L in 24hr (osmotic demyelination risk). STOP sertraline and HCTZ.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Severe Hyponatremia with Seizure (SIADH) \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Confusion, nausea, and unsteady gait",
+      "hpi": "Linda Petrowski is a 70-year-old female presenting with confusion, nausea, and unsteady gait. Past medical history includes Depression, Hypothyroidism, Hypertension, SIADH suspected. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Severe Hyponatremia — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-590634",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
+          "results": [
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
               "test": "Sodium",
@@ -101,24 +182,78 @@ window.EMR_DATA = {
               "flag": "L"
             },
             {
-              "test": "Serum Osmolality",
-              "value": "238",
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Osmolality",
+              "value": "235",
               "unit": "mOsm/kg",
               "range": "275-295",
               "flag": "L"
             },
             {
-              "test": "Urine Osmolality",
-              "value": "580",
-              "unit": "mOsm/kg",
-              "range": "300-900",
-              "flag": ""
-            },
-            {
-              "test": "Urine Sodium",
+              "test": "Urine Na",
               "value": "68",
               "unit": "mEq/L",
-              "range": "<20",
+              "range": "<40",
+              "flag": "H"
+            },
+            {
+              "test": "Urine Osm",
+              "value": "520",
+              "unit": "mOsm/kg",
+              "range": "300-900",
               "flag": "H"
             }
           ]
@@ -126,51 +261,64 @@ window.EMR_DATA = {
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CT Head without Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-550908",
+      "clinical": "Confusion, nausea, and unsteady gait",
+      "technique": "Standard protocol",
+      "findings": "Mild cerebral edema. No focal lesion.",
+      "impression": "Cerebral edema likely secondary to severe hyponatremia.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Non-contributory"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "None"
+    ],
+    [
+      "Water intake",
+      "Drinks excessive water — 4-5 liters daily"
+    ],
+    [
+      "Living",
+      "Assisted living facility"
     ]
-  ],
-  "meta": {
-    "caseId": "severe-hyponatremia",
-    "diagnosis": "Severe Hyponatremia with Seizure (SIADH)",
-    "acuity": 1,
-    "presentation": "Renal / Electrolyte Emergency",
-    "category": "renal"
-  }
+  ]
 };

@@ -160,6 +160,7 @@ a{color:var(--accent);text-decoration:none}
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Admissions | ReasonDx">
 <meta name="twitter:description" content="Practice ED handoffs, admission orders, and H&P presentations.">
+<script src="js/rdx-difficulty.js"></script>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
@@ -168,7 +169,7 @@ a{color:var(--accent);text-decoration:none}
 <div class="topbar">
   <div class="topbar-logo"><span>Reason</span><span style="color:var(--accent)">Dx</span> <em>Admissions</em></div>
   <div class="topbar-nav">
-    <a href="hospital-3d.html">Hospital</a>
+    <a href="case-browser.html">Platform Hub</a>
     <a href="ed-3d.html">ED</a>
     <a href="night-float.html">Night Float</a>
     <a href="index.html">Home</a>
@@ -282,10 +283,22 @@ let scores = {orders:0, note:0, presentation:0};
 function renderCaseGrid(cases) {
   const grid = document.getElementById('case-grid');
   grid.innerHTML = '';
+  
+  // Spoiler toggle button
+  let toggleEl = document.getElementById('dx-spoiler-toggle');
+  if (!toggleEl) {
+    toggleEl = document.createElement('div');
+    toggleEl.id = 'dx-spoiler-toggle';
+    toggleEl.style.cssText = 'text-align:center;margin-bottom:16px';
+    grid.parentElement.insertBefore(toggleEl, grid);
+  }
+  toggleEl.innerHTML = '<button type="button" onclick="window._hideDxAdm=!window._hideDxAdm;renderCaseGrid(window._filteredCases?window._filteredCases.slice(0,window._displayCount):window._allCases.slice(0,window._displayCount))" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .15s;min-height:44px;border:1px solid '+(window._hideDxAdm?'#2874A6':'rgba(255,255,255,.15)')+';background:'+(window._hideDxAdm?'rgba(40,116,166,.15)':'rgba(255,255,255,.04)')+';color:'+(window._hideDxAdm?'#5ba3cc':'rgba(255,255,255,.5)')+'\">'+(window._hideDxAdm ? '\u{1F648} Diagnoses Hidden \u2014 Click to Reveal' : '\u{1F441}\uFE0F Hide Diagnoses (Spoiler-Free Mode)')+'</button>';
+
   cases.forEach(c => {
     const card = document.createElement('div');
     card.className = 'case-card' + (selectedCaseId===c.id?' selected':'');
-    card.innerHTML = `<div class="cc-name">${c.name}</div><div class="cc-dx">${c.dx}</div><span class="cc-esi esi-${c.acuity}">ESI ${c.acuity}</span>`;
+    const dxText = window._hideDxAdm ? (c.presentation || c.category || 'Case') + ' \u2014 ESI ' + c.acuity : c.dx;
+    card.innerHTML = `<div class="cc-name">${c.name}</div><div class="cc-dx">${dxText}</div><span class="cc-esi esi-${c.acuity}">ESI ${c.acuity}</span>`;
     card.onclick = () => selectCase(c.id, card);
     grid.appendChild(card);
   });
@@ -321,6 +334,15 @@ function startSim() {
     document.getElementById('sim').style.display = 'block';
     initSidebar();
     goToStep(0);
+  };
+  script.onerror = () => {
+    document.getElementById('start-btn').disabled = false;
+    document.getElementById('start-btn').textContent = 'Case Not Available — Try Another';
+    document.getElementById('start-btn').style.background = '#DC2626';
+    setTimeout(() => {
+      document.getElementById('start-btn').textContent = 'Begin Admission';
+      document.getElementById('start-btn').style.background = '';
+    }, 3000);
   };
   document.head.appendChild(script);
 }
@@ -821,7 +843,7 @@ function showFinalScore() {
   html += '<li>Structure oral presentations: one-liner → HPI → exam → data → A&P</li>';
   html += '</ul></div>';
 
-  html += '<div class="btn-row"><button type="button" class="btn-primary" onclick="location.reload()">Admit Another Patient</button><button type="button" class="btn-secondary" onclick="location.href=\'hospital-3d.html\'">Back to Hospital</button></div>';
+  html += '<div class="btn-row"><button type="button" class="btn-primary" onclick="location.reload()">Admit Another Patient</button><button type="button" class="btn-secondary" onclick="location.href=\'case-browser.html\'">Back to Platform Hub</button></div>';
   el.innerHTML = html;
 }
 </script>

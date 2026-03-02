@@ -1,249 +1,246 @@
-// Virtual EMR Case: Non-ST Elevation Myocardial Infarction (NSTEMI)
-// Variant: nstemi-v1 | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/nstemi-v1.js — Auto-generated EMR case data for NSTEMI */
 window.EMR_DATA = {
   "patient": {
-    "name": "Frank DeLuca",
-    "dob": "06/08/1958",
-    "age": 67,
-    "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Medicare Part B + Medigap",
-    "pcp": "Dr. Andrew Park, MD",
-    "pharmacy": "Publix \u2014 Fort Lauderdale, FL",
+    "name": "Giovanna DeLuca",
+    "dob": "03/06/1963",
+    "age": "63",
+    "sex": "Female",
+    "pronouns": "she/her",
+    "mrn": "MRN-370242",
     "language": "English",
-    "race": "White (Italian)",
-    "address": "4815 NE 22nd Ave, Fort Lauderdale, FL",
-    "phone": "(954) 555-3388",
-    "email": "f.deluca58@email.com",
+    "race": "Black/African American",
+    "phone": "(458) 572-8693",
+    "email": "giovanna.deluca@email.com",
+    "address": "2756 Maple Ln, Sunrise, FL 33302",
+    "insurance": "Medicaid",
+    "pcp": "Dr. Raj Patel, MD",
+    "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
-      "name": "Maria DeLuca (Wife)",
-      "phone": "(954) 555-3404"
+      "name": "Kevin DeLuca",
+      "phone": "(895) 919-7710",
+      "relationship": "Partner"
     },
-    "mrn": "RDX-2025-91926"
+    "chiefComplaint": "Intermittent chest pressure for 6 hours",
+    "diagnosis": "NSTEMI"
   },
   "problems": [
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2002",
+      "id": "prob-1",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "On metoprolol, lisinopril"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2005",
+      "id": "prob-2",
+      "description": "Chronic Kidney Disease Stage 3",
       "status": "Active",
-      "notes": "On atorvastatin; LDL last 118"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Type 2 Diabetes",
-      "icd": "E11.9",
-      "onset": "2012",
+      "id": "prob-3",
+      "description": "Type 2 Diabetes",
       "status": "Active",
-      "notes": "A1C 8.2; on metformin/glipizide"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Obesity",
-      "icd": "E66.01",
-      "onset": "2008",
+      "id": "prob-4",
+      "description": "Prior TIA",
       "status": "Active",
-      "notes": "BMI 33"
-    },
-    {
-      "problem": "Former Smoker",
-      "icd": "Z87.891",
-      "onset": "1975",
-      "status": "Active",
-      "notes": "20 pack-year; quit 2010"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Metoprolol Succinate 100mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Park",
-      "start": "03/2010",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Amlodipine",
+      "dose": "10mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. David Kim, MD"
     },
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Park",
-      "start": "06/2005",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Metoprolol Succinate",
+      "dose": "50mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, DO"
     },
     {
-      "name": "Atorvastatin 40mg QHS",
-      "sig": "PO at bedtime",
-      "prescriber": "Dr. Park",
-      "start": "01/2006",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-3",
+      "name": "Clopidogrel",
+      "dose": "75mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, DO"
     },
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "PO BID",
-      "prescriber": "Dr. Park",
-      "start": "04/2012",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Park",
-      "start": "01/2010",
-      "refills": 11,
-      "status": "Active"
+      "id": "med-4",
+      "name": "Insulin Glargine",
+      "dose": "20 units",
+      "route": "SC",
+      "frequency": "Nightly",
+      "status": "Active",
+      "prescriber": "Dr. Raj Patel, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Penicillin",
+      "reaction": "Anaphylaxis",
+      "severity": "Severe",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "162/94",
-      "hr": 88,
-      "rr": 18,
-      "temp": "98.4\u00b0F",
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "148/88",
+      "hr": "86",
+      "rr": "18",
+      "temp": "36.8°C",
       "spo2": "97%",
-      "wt": "228 lbs",
-      "ht": "5'10\"",
-      "bmi": 32.7,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "148/86",
-      "hr": 78,
-      "rr": 16,
-      "temp": "98.4\u00b0F",
-      "spo2": "98%",
-      "wt": "228 lbs",
-      "ht": "5'10\"",
-      "bmi": 32.7,
-      "setting": "ED \u2014 Post-NTG/Heparin"
+      "pain": "6/10",
+      "bmi": "36",
+      "weight": "72 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Substernal chest pressure x 3 hours",
-      "hpi": "67M with multiple cardiac risk factors presents with 3 hours of substernal chest pressure radiating to left arm and jaw. Began at rest while watching TV. Describes as 'elephant sitting on chest,' 7/10 intensity. Associated with diaphoresis and mild nausea. Took 3 baby aspirin at home. Pain partially relieved by sublingual NTG in ED (6/10 \u2192 3/10). No prior cardiac catheterization. No recent cocaine use.",
-      "exam": "Diaphoretic, anxious. CV: RRR, no murmurs, no S3/S4. JVP normal. Lungs: CTAB. Abdomen benign. Extremities: Warm, no edema. Peripheral pulses intact.",
-      "assessment": "1. NSTEMI \u2014 chest pain with dynamic ECG changes and rising troponin\n2. TIMI Score 5 (age >65, >3 CAD risk factors, known CAD risk, ST deviation, elevated troponin) \u2014 intermediate-high risk\n3. Plan for urgent cardiac catheterization",
-      "plan": "1. Aspirin 325mg (already took 243mg), clopidogrel 600mg loading\n2. Heparin drip per ACS protocol\n3. Atorvastatin increased to 80mg\n4. Continue metoprolol (hold if hypotensive)\n5. NTG drip titrate to pain\n6. Serial troponins q3h\n7. Cardiology consult for catheterization within 24h\n8. Telemetry; CCU admission\n9. Strict I/O, NPO for cath"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Intermittent chest pressure for 6 hours",
+      "hpi": "Giovanna DeLuca is a 63-year-old female presenting with intermittent chest pressure for 6 hours. Past medical history includes Hypertension, Chronic Kidney Disease Stage 3, Type 2 Diabetes, Prior TIA. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "NSTEMI — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260310",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-804278",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "10.2",
-              "unit": "K/uL",
+              "value": "7.2",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "14.0",
+              "value": "13.8",
               "unit": "g/dL",
-              "range": "13.5-17.5",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
               "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "228",
-              "unit": "K/uL",
+              "value": "245",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
           ]
         },
         {
-          "name": "CARDIAC MARKERS \u2014 SERIAL",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "Troponin I (Initial)",
-              "value": "0.42",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
             },
             {
-              "test": "Troponin I (3hr)",
-              "value": "2.18",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
             },
             {
-              "test": "BNP",
-              "value": "342",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
             },
             {
-              "test": "CK-MB",
-              "value": "18.4",
-              "unit": "ng/mL",
-              "range": "<5.0",
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
               "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "BMP",
-          "results": [
+            },
             {
               "test": "Glucose",
-              "value": "218",
+              "value": "210",
               "unit": "mg/dL",
               "range": "70-100",
               "flag": "H"
             },
             {
-              "test": "Creatinine",
-              "value": "1.2",
+              "test": "Calcium",
+              "value": "9.4",
               "unit": "mg/dL",
-              "range": "0.7-1.3",
+              "range": "8.5-10.5",
               "flag": ""
-            },
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
             {
-              "test": "Potassium",
-              "value": "4.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": ""
+              "test": "Troponin",
+              "value": "0.82",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": "H"
             }
           ]
         }
@@ -252,95 +249,80 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "12-LEAD ECG",
-      "accession": "ECG-2026-260310",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. James Carter, MD",
-      "facility": "ReasonDx Memorial — ED",
-      "priority": "STAT",
-      "clinical": "Chest pressure, diaphoresis \u2014 ACS evaluation",
-      "technique": "Standard 12-lead ECG.",
-      "findings": "NSR at 88 bpm. ST depression 1.5mm in leads V3-V6 and II, aVF. T-wave inversion in V4-V6. No ST elevation. Normal intervals. No pathologic Q waves.",
-      "impression": "1. ST depression and T-wave inversions in lateral leads \u2014 ischemic changes consistent with NSTEMI.\n2. No STEMI criteria.",
-      "dictated": "02/26/2026 14:15",
-      "verified": "02/26/2026 14:20"
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-838031",
+      "clinical": "Intermittent chest pressure for 6 hours",
+      "technique": "Standard protocol",
+      "findings": "Cardiomegaly. No acute pulmonary disease.",
+      "impression": "Cardiomegaly without acute process.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/01/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-819303",
+      "clinical": "Intermittent chest pressure for 6 hours",
+      "technique": "Standard protocol",
+      "findings": "Normal sinus rhythm. ST depression V4-V6 and I, aVL. T-wave inversions in lateral leads.",
+      "impression": "Ischemic changes consistent with NSTEMI.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: MI at 52, deceased at 68",
-    "Mother: HTN, T2DM, alive at 88",
-    "Brother: CABG at 62, alive at 70"
+    "Mother: MI at age 65",
+    "Father: Stroke at age 70"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Retired restaurant owner"
-    ],
-    [
-      "Marital",
-      "Married 40 years"
-    ],
-    [
       "Tobacco",
-      "Former \u2014 1 PPD x 20 yrs, quit 2010"
+      "Never"
     ],
     [
       "Alcohol",
-      "1-2 glasses wine with dinner"
+      "Rare"
     ],
     [
-      "Exercise",
-      "Sedentary \u2014 limited by knee OA and obesity"
+      "Occupation",
+      "Retired teacher"
     ],
     [
-      "Advance Directive",
-      "Full code; DPOA wife Maria"
+      "Living",
+      "Lives alone, independent ADLs"
     ]
-  ],
-  "meta": {
-    "caseId": "nstemi-v1",
-    "diagnosis": "Non-ST Elevation Myocardial Infarction (NSTEMI)",
-    "acuity": 2,
-    "presentation": "Chest Pain",
-    "category": "cardiovascular"
-  }
+  ]
 };

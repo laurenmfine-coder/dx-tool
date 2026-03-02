@@ -38,8 +38,8 @@
     .rdx-fab-help{background:var(--rdx-blue,#2874A6);color:#fff;font-weight:800;font-size:18px}
     @media(max-width:640px){.rdx-help-panel{left:12px;right:12px;width:auto;bottom:68px}.rdx-fab-label{display:none}}
     @media print{.rdx-fab-container,.rdx-help-panel{display:none!important}}
-    [data-theme="dark"] .rdx-help-panel{background:var(--rdx-bg-card,#1e293b);border-color:var(--rdx-border,#334155)}
-    [data-theme="dark"] .rdx-fab-label{background:#1e293b;border-color:#334155;color:#94a3b8}
+    
+    
   `;
   document.head.appendChild(style);
 

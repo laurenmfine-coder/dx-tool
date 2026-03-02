@@ -1,173 +1,218 @@
-// Virtual EMR Case: Diabetic Ketoacidosis (DKA)
-// Variant: dka-v1 | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/dka-v1.js — Auto-generated EMR case data for Diabetic Ketoacidosis */
 window.EMR_DATA = {
   "patient": {
-    "name": "Marcus Rivera",
-    "dob": "09/10/1996",
-    "age": 29,
+    "name": "Alejandro Gutierrez",
+    "dob": "08/01/1998",
+    "age": "28",
     "sex": "Male",
-    "pronouns": "He/Him",
+    "pronouns": "he/him",
+    "mrn": "MRN-909133",
+    "language": "English",
+    "race": "Hispanic/Latino",
+    "phone": "(695) 933-1553",
+    "email": "alejandro.gutierrez@email.com",
+    "address": "9974 Palm St, Sunrise, FL 33395",
     "insurance": "Medicaid",
-    "pcp": "None \u2014 uses urgent care",
-    "pharmacy": "CVS \u2014 Hollywood, FL",
-    "language": "English/Spanish",
-    "race": "Hispanic",
-    "address": "3120 Johnson St, Hollywood, FL",
-    "phone": "(954) 555-8844",
-    "email": "m.rivera96@email.com",
+    "pcp": "Dr. James Wu, MD",
+    "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
-      "name": "Elena Rivera (Mother)",
-      "phone": "(954) 555-8860"
+      "name": "Cynthia Gutierrez",
+      "phone": "(513) 678-2465",
+      "relationship": "Adult Child"
     },
-    "mrn": "RDX-2025-31919"
+    "chiefComplaint": "Found confused and vomiting by family",
+    "diagnosis": "Diabetic Ketoacidosis"
   },
   "problems": [
     {
-      "problem": "Type 1 Diabetes Mellitus",
-      "icd": "E10.10",
-      "onset": "2010",
+      "id": "prob-1",
+      "description": "Type 1 Diabetes",
       "status": "Active",
-      "notes": "Poorly controlled; A1C 11.2; multiple DKA admissions; insulin non-adherence; no endocrinologist"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Depression",
-      "icd": "F32.9",
-      "onset": "2022",
+      "id": "prob-2",
+      "description": "Depression",
       "status": "Active",
-      "notes": "Untreated; declined medication"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Non-adherence to insulin",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Insulin Glargine 28 units QHS",
-      "sig": "SubQ at bedtime",
-      "prescriber": "Urgent Care MD",
-      "start": "06/2024",
-      "refills": 0,
-      "status": "Active \u2014 often runs out"
+      "id": "med-1",
+      "name": "Insulin Glargine",
+      "dose": "22 units",
+      "route": "SC",
+      "frequency": "Nightly",
+      "status": "Active",
+      "prescriber": "Dr. Robert Hughes, DO"
     },
     {
-      "name": "Insulin Lispro sliding scale",
-      "sig": "SubQ before meals",
-      "prescriber": "Urgent Care MD",
-      "start": "06/2024",
-      "refills": 0,
-      "status": "Active \u2014 uses inconsistently"
+      "id": "med-2",
+      "name": "Insulin Lispro",
+      "dose": "Sliding scale",
+      "route": "SC",
+      "frequency": "AC",
+      "status": "Active",
+      "prescriber": "Dr. James Wu, MD"
+    },
+    {
+      "id": "med-3",
+      "name": "Sertraline",
+      "dose": "100mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. David Kim, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "102/64",
-      "hr": 118,
-      "rr": 32,
-      "temp": "99.8\u00b0F",
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "98/62",
+      "hr": "128",
+      "rr": "32",
+      "temp": "36.4°C",
       "spo2": "99%",
-      "wt": "155 lbs",
-      "ht": "5'9\"",
-      "bmi": 22.9,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "108/68",
-      "hr": 108,
-      "rr": 28,
-      "temp": "99.2\u00b0F",
-      "spo2": "99%",
-      "wt": "155 lbs",
-      "ht": "5'9\"",
-      "bmi": 22.9,
-      "setting": "ED \u2014 2hr"
+      "pain": "6/10",
+      "bmi": "29",
+      "weight": "60 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Nausea, vomiting, abdominal pain, confusion",
-      "hpi": "29M T1DM with poor compliance. Ran out of insulin 3 days ago (couldn't afford refill). Progressive polyuria, polydipsia, then nausea, vomiting x 12 hours, diffuse abdominal pain. Roommate found him confused and lethargic this AM, called 911. Fruity breath noted by EMS. BG per EMS: 'HIGH' (>500). Kussmaul respirations.",
-      "exam": "Lethargic but arousable, oriented to self only. Dehydrated \u2014 dry mucous membranes, poor skin turgor, sunken eyes. Fruity breath odor. Kussmaul breathing. Abdomen diffusely tender but soft, no rebound. Tachycardic.",
-      "assessment": "1. DKA \u2014 insulin non-adherence, glucose >500, Kussmaul respirations, fruity breath\n2. Severe dehydration\n3. AMS \u2014 likely from acidosis and dehydration\n4. Social work referral for insulin access",
-      "plan": "1. IV NS 1L bolus x 2 then 250-500 mL/hr\n2. Insulin drip: 0.1 units/kg/hr after K+ confirmed >3.3\n3. Q1h BMP and BG monitoring\n4. KCl 20-40 mEq in each liter (K+ will drop with insulin)\n5. Transition to subQ insulin when gap closes and tolerating PO\n6. Social work for medication assistance programs\n7. Endocrinology consult for chronic management\n8. A1C level"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Found confused and vomiting by family",
+      "hpi": "Alejandro Gutierrez is a 28-year-old male presenting with found confused and vomiting by family. Past medical history includes Type 1 Diabetes, Depression, Non-adherence to insulin. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Diabetic Ketoacidosis — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
+      "date": "03/01/2026",
       "time": "08:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 08:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02260800",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-315101",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
+        {
+          "name": "CBC WITH DIFFERENTIAL",
+          "results": [
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
             {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "5.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "8",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": "L"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
               "test": "Glucose",
-              "value": "528",
+              "value": "542",
               "unit": "mg/dL",
               "range": "70-100",
               "flag": "H"
             },
             {
-              "test": "BUN",
-              "value": "38",
+              "test": "Calcium",
+              "value": "9.4",
               "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "Sodium",
-              "value": "132",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "5.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "96",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": "L"
-            },
-            {
-              "test": "CO2",
-              "value": "12",
-              "unit": "mEq/L",
-              "range": "22-29",
-              "flag": "L"
+              "range": "8.5-10.5",
+              "flag": ""
             },
             {
               "test": "Anion Gap",
@@ -175,99 +220,24 @@ window.EMR_DATA = {
               "unit": "mEq/L",
               "range": "8-12",
               "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "8.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": "L"
             }
           ]
         },
         {
-          "name": "COMPLETE BLOOD COUNT",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
-              "test": "WBC",
-              "value": "14.2",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "16.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "50.4",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "288",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
-        },
-        {
-          "name": "DKA LABS",
-          "results": [
-            {
-              "test": "pH (VBG)",
-              "value": "7.12",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "L"
-            },
-            {
-              "test": "pCO2",
-              "value": "18",
-              "unit": "mmHg",
-              "range": "35-45",
-              "flag": "L"
-            },
-            {
-              "test": "HCO3",
-              "value": "8",
-              "unit": "mEq/L",
-              "range": "22-26",
-              "flag": "L"
-            },
-            {
-              "test": "Beta-Hydroxybutyrate",
-              "value": "8.4",
+              "test": "Beta Hydroxybutyrate",
+              "value": "6.8",
               "unit": "mmol/L",
               "range": "<0.6",
               "flag": "H"
             },
             {
-              "test": "Lactate",
-              "value": "2.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "A1C",
-              "value": "11.2",
-              "unit": "%",
-              "range": "<5.7",
-              "flag": "H"
-            },
-            {
-              "test": "Phosphorus",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "2.5-4.5",
+              "test": "Ph",
+              "value": "7.12",
+              "unit": "",
+              "range": "7.35-7.45",
               "flag": "L"
             }
           ]
@@ -275,70 +245,65 @@ window.EMR_DATA = {
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "Chest X-Ray",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-619080",
+      "clinical": "Found confused and vomiting by family",
+      "technique": "Standard protocol",
+      "findings": "Clear lungs. Normal heart size.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster (Pfizer)",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: T2DM, alive at 54",
-    "Father: Unknown \u2014 no contact",
-    "Grandmother: T2DM, deceased at 68"
+    "Mother: Type 2 Diabetes",
+    "Father: Hypertension"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Delivery driver \u2014 gig work"
-    ],
-    [
-      "Marital",
-      "Single; lives with roommate"
-    ],
-    [
       "Tobacco",
-      "1/2 PPD x 5 years"
+      "Never"
     ],
     [
       "Alcohol",
-      "Occasional"
+      "Binge drinking on weekends"
     ],
     [
-      "Drugs",
-      "Marijuana \u2014 weekly"
+      "Insulin",
+      "Admits to not taking insulin for 4 days — ran out and couldn't afford refill"
     ],
     [
-      "Insurance",
-      "Medicaid; difficulty affording insulin copays"
-    ],
-    [
-      "Advance Directive",
-      "None"
+      "Occupation",
+      "Works two part-time jobs, no insurance"
     ]
-  ],
-  "meta": {
-    "caseId": "dka-v1",
-    "diagnosis": "Diabetic Ketoacidosis (DKA)",
-    "acuity": 2,
-    "presentation": "Altered Mental Status",
-    "category": "neurologic"
-  }
+  ]
 };

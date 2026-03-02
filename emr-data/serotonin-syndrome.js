@@ -1,110 +1,213 @@
-// Virtual EMR Case: Serotonin Syndrome
-// Variant: serotonin-syndrome | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/serotonin-syndrome.js — Auto-generated EMR case data for Serotonin Syndrome */
 window.EMR_DATA = {
   "patient": {
-    "name": "Amanda Chen",
-    "dob": "02/28/1992",
-    "age": 33,
-    "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "BCBS PPO",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "name": "Andrew Chen",
+    "dob": "08/10/1986",
+    "age": "40",
+    "sex": "Male",
+    "pronouns": "he/him",
+    "mrn": "MRN-776119",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "amanda@email.com",
+    "race": "Asian",
+    "phone": "(343) 544-9945",
+    "email": "andrew.chen@email.com",
+    "address": "2697 Maple Blvd, Sunrise, FL 33387",
+    "insurance": "Cigna PPO",
+    "pcp": "Dr. Raj Patel, MD",
+    "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Mei Chen",
+      "phone": "(719) 329-2518",
+      "relationship": "Spouse"
     },
-    "mrn": "RDX-2025-48978"
+    "chiefComplaint": "Agitation, diaphoresis, tremor, clonus — recently started new antidepressant",
+    "diagnosis": "Serotonin Syndrome"
   },
   "problems": [
     {
-      "problem": "Serotonin Syndrome",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Depression",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Started MAOI (phenelzine) 1 week ago while still on sertraline",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Sertraline",
+      "dose": "200mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wu, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Phenelzine",
+      "dose": "15mg",
+      "route": "PO",
+      "frequency": "TID (started 7 days ago)",
+      "status": "Active",
+      "prescriber": "Dr. Raj Patel, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "168/102",
+      "hr": "128",
+      "rr": "24",
+      "temp": "39.8°C",
+      "spo2": "96%",
+      "pain": "5/10",
+      "bmi": "25",
+      "weight": "102 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Serotonin Syndrome",
-      "hpi": "33F on sertraline + tramadol (new Rx for back pain), now presenting with agitation, diaphoresis, diarrhea, myoclonus (bilateral lower extremity), tremor, and hyperreflexia. Temp 102.8\u00b0F. Ocular clonus present. Hunter criteria met. STOP serotonergic agents. Cyproheptadine 12mg PO loading. Benzodiazepines for agitation.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Serotonin Syndrome \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Agitation, diaphoresis, tremor, clonus — recently started new antidepressant",
+      "hpi": "Andrew Chen is a 40-year-old male presenting with agitation, diaphoresis, tremor, clonus — recently started new antidepressant. Past medical history includes Depression, Started MAOI (phenelzine) 1 week ago while still on sertraline. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Serotonin Syndrome — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-759360",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
-              "test": "CK",
-              "value": "842",
-              "unit": "U/L",
-              "range": "22-198",
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
               "flag": "H"
             },
             {
-              "test": "WBC",
-              "value": "11.8",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Ck",
+              "value": "1800",
+              "unit": "U/L",
+              "range": "22-198",
               "flag": "H"
             }
           ]
@@ -112,44 +215,56 @@ window.EMR_DATA = {
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CT Head without Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-307093",
+      "clinical": "Agitation, diaphoresis, tremor, clonus — recently started new antidepressant",
+      "technique": "Standard protocol",
+      "findings": "No acute intracranial abnormality.",
+      "impression": "Normal.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Non-contributory"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Medication error",
+      "New psychiatrist started MAOI without washout from SSRI"
+    ],
+    [
+      "Tobacco",
+      "Never"
     ]
-  ],
-  "meta": {
-    "caseId": "serotonin-syndrome",
-    "diagnosis": "Serotonin Syndrome",
-    "acuity": 2,
-    "presentation": "Psychiatric Emergency",
-    "category": "psychiatric"
-  }
+  ]
 };

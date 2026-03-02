@@ -15,7 +15,7 @@
     'study-mode.html': { label: 'Study Mode', section: 'Learn' },
     'crt-hub.html': { label: 'Clinical Reasoning Trainer', section: 'Practice' },
     'consult-callback.html': { label: 'Consult Callback', section: 'Practice' },
-    'hospital-3d.html': { label: 'Virtual Hospital', section: 'Simulate' },
+    'case-browser.html': { label: 'Virtual Hospital', section: 'Simulate' },
     'ed-3d.html': { label: 'Emergency Department', section: 'Simulate' },
     'ed-board-v2.html': { label: 'ED Board', section: 'Simulate' },
     'night-float.html': { label: 'Night Float', section: 'Simulate' },
@@ -57,8 +57,8 @@
     '#rdx-breadcrumb a:hover{text-decoration:underline}' +
     '#rdx-breadcrumb span{margin:0 2px}' +
     '#rdx-breadcrumb .current{font-weight:600;color:var(--rdx-text,#1e293b)}' +
-    '[data-theme="dark"] #rdx-breadcrumb{background:var(--rdx-bg,#0f172a);border-color:var(--rdx-border,#334155)}' +
-    '[data-theme="dark"] #rdx-breadcrumb .current{color:var(--rdx-text,#e2e8f0)}' +
+    '' +
+    '' +
     '@media print{#rdx-breadcrumb{display:none}}';
   document.head.appendChild(style);
 

@@ -236,6 +236,31 @@ a { color: inherit; text-decoration: none; }
 }
 .mechanism-link:hover { background:rgba(124,58,237,0.15); border-color:rgba(124,58,237,0.3); }
 
+/* ═══ DIFFICULTY PANEL ═══ */
+.difficulty-panel {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:20px 24px;
+  margin-bottom:24px; animation:fadeUp 0.4s ease 0.05s both;
+}
+.difficulty-header h3 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:2px; }
+.difficulty-header p { font-size:13px; color:var(--text-muted); margin-bottom:14px; }
+.difficulty-options { display:flex; gap:10px; flex-wrap:wrap; }
+.diff-option {
+  flex:1; min-width:180px; padding:14px 16px;
+  border:2px solid var(--border); border-radius:var(--radius-sm);
+  cursor:pointer; transition:all 0.2s; background:var(--surface);
+}
+.diff-option:hover { border-color:var(--border-hover); transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.diff-option.selected { box-shadow:var(--shadow-md); }
+.diff-option.selected[data-diff="guided"] { border-color:var(--green); background:#ECFDF5; }
+.diff-option.selected[data-diff="standard"] { border-color:var(--blue); background:#EBF5FB; }
+.diff-option.selected[data-diff="advanced"] { border-color:var(--red); background:#FEF2F2; }
+.diff-option-header { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.diff-icon { font-size:20px; }
+.diff-label { font-size:14px; font-weight:700; color:var(--text); }
+.diff-tagline { font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:4px; }
+.diff-desc { font-size:12px; color:var(--text-secondary); line-height:1.5; }
+
 /* ═══ QUICK-LAUNCH STRIP ═══ */
 .quick-launch {
   background:var(--surface); border:1px solid var(--border);
@@ -331,8 +356,28 @@ a { color: inherit; text-decoration: none; }
 
   <div class="settings-grid" id="settingsGrid"></div>
 
+  <!-- Specialty Pathways -->
+  <div style="margin-top:16px;padding:16px 20px;background:linear-gradient(135deg,#1B4F72 0%,#2874A6 100%);border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div style="color:#fff">
+      <div style="font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px">🧬 Specialty Pathways <span style="font-size:11px;padding:2px 8px;background:rgba(255,255,255,.2);border-radius:10px;font-weight:500">NEW</span></div>
+      <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Filter all cases by specialty — across every clinical setting</div>
+    </div>
+    <a href="allergy-pathway.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#fff;color:#1B4F72;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.15)" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.2)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.15)'">🧬 Allergy & Immunology <span style="font-size:11px;opacity:.5">→</span></a>
+  </div>
+
   <!-- Tools Panel (hidden until setting is selected) -->
   <div class="tools-panel" id="toolsPanel">
+
+    <!-- Difficulty Toggle -->
+    <div class="difficulty-panel" id="difficultyPanel">
+      <div class="difficulty-header">
+        <h3>Training Difficulty</h3>
+        <p>Adjusts coaching style, information scaffolding, and complexity across all tools.</p>
+      </div>
+      <div class="difficulty-options" id="difficultyOptions">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
 
     <!-- Quick-Launch Strip -->
     <div class="quick-launch" id="quickLaunch">
@@ -558,12 +603,23 @@ function renderTools(settingId) {
   const grid = document.getElementById('toolsGrid');
   const title = document.getElementById('toolsTitle');
 
+  // Render difficulty options
+  renderDifficulty();
+
   title.textContent = `Training Tools — ${setting.icon} ${setting.title}`;
+
+  const diff = window.RDX_DIFFICULTY || 'standard';
+  function appendParams(url) {
+    let u = url;
+    u += (u.includes('?')?'&':'?') + 'setting='+settingId;
+    if (diff !== 'standard') u += '&difficulty=' + diff;
+    return u;
+  }
 
   // Quick Launch
   const qlRow = document.getElementById('quickLaunchRow');
   qlRow.innerHTML = setting.quickLaunch.map(ql=>
-    `<a class="ql-btn" href="${ql.url}"><span class="ql-icon">${ql.icon}</span> ${ql.label}</a>`
+    `<a class="ql-btn" href="${appendParams(ql.url)}"><span class="ql-icon">${ql.icon}</span> ${ql.label}</a>`
   ).join('');
 
   // MechanismDx links
@@ -576,8 +632,7 @@ function renderTools(settingId) {
   grid.innerHTML = setting.tools.map((toolId,i)=>{
     const tool = TOOLS[toolId];
     if (!tool) return '';
-    let url = tool.url;
-    url += (url.includes('?')?'&':'?') + 'setting='+settingId;
+    let url = appendParams(tool.url);
     return `
       <a class="tool-card" data-tool="${toolId}" href="${url}" style="animation-delay:${i*50}ms">
         <span class="launch-arrow">→</span>
@@ -592,9 +647,47 @@ function renderTools(settingId) {
         <div class="tool-features">${tool.features.map(f=>`<span class="tool-feature">${f}</span>`).join('')}</div>
       </a>`;
   }).join('');
+  }).join('');
 
   panel.classList.add('visible');
   setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DIFFICULTY
+// ═══════════════════════════════════════════════════════════════
+
+function renderDifficulty() {
+  const cfg = window.RDX_DIFF_CONFIG || {};
+  const current = window.RDX_DIFFICULTY || 'standard';
+  const container = document.getElementById('difficultyOptions');
+  container.innerHTML = ['guided','standard','advanced'].map(key => {
+    const d = cfg[key];
+    if (!d) return '';
+    return `<div class="diff-option ${current===key?'selected':''}" data-diff="${key}" onclick="setDifficulty('${key}')">
+      <div class="diff-option-header">
+        <span class="diff-icon">${d.icon}</span>
+        <span class="diff-label">${d.label}</span>
+      </div>
+      <div class="diff-tagline">${d.tagline}</div>
+      <div class="diff-desc">${d.description}</div>
+    </div>`;
+  }).join('');
+}
+
+function setDifficulty(level) {
+  window.RDX_DIFFICULTY = level;
+  try { sessionStorage.setItem('rdx-difficulty', level); } catch(e) {}
+  window.RDX_DIFF = (window.RDX_DIFF_CONFIG || {})[level] || {};
+  renderDifficulty();
+  // Re-render tools to update URLs
+  if (selectedSetting) renderTools(selectedSetting);
+}
+
+function addParams(url, settingId) {
+  var diff = window.RDX_DIFFICULTY || 'standard';
+  var sep = url.includes('?') ? '&' : '?';
+  return url + sep + 'setting=' + settingId + '&difficulty=' + diff;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -650,6 +743,7 @@ const params=new URLSearchParams(window.location.search);
 if(params.get('setting')){const s=params.get('setting');if(SETTINGS.find(x=>x.id===s))selectSetting(s)}
 </script>
 
+<script src="js/rdx-difficulty.js"></script>
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="js/rdx-nav.js"></script>
 <script src="js/rdx-help-widget.js"></script>

@@ -1,124 +1,123 @@
-// Virtual EMR Case: Thrombotic Thrombocytopenic Purpura (TTP)
-// Variant: ttp | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/ttp.js — Auto-generated EMR case data for TTP */
 window.EMR_DATA = {
   "patient": {
     "name": "Amanda Lewis",
-    "dob": "08/28/1988",
-    "age": 37,
+    "dob": "01/09/1993",
+    "age": "33",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Aetna PPO",
-    "pcp": "Dr. Laura Chen, MD",
-    "pharmacy": "CVS \u2014 Plantation, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-574996",
     "language": "English",
-    "race": "Black",
-    "address": "521 NW 65th Ave, Plantation, FL",
-    "phone": "(954) 555-7788",
-    "email": "a.lewis88@email.com",
+    "race": "Black/African American",
+    "phone": "(424) 238-5217",
+    "email": "amanda.lewis@email.com",
+    "address": "6563 Palm Dr, Weston, FL 33338",
+    "insurance": "Cigna PPO",
+    "pcp": "Dr. David Kim, MD",
+    "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
-      "name": "Robert Lewis (Father)",
-      "phone": "(954) 555-7804"
+      "name": "Nathan Lewis",
+      "phone": "(298) 924-8586",
+      "relationship": "Spouse"
     },
-    "mrn": "RDX-2025-24305"
+    "chiefComplaint": "Confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia",
+    "diagnosis": "TTP"
   },
   "problems": [
     {
-      "problem": "SLE (Systemic Lupus Erythematosus)",
-      "icd": "M32.9",
-      "onset": "2018",
+      "id": "prob-1",
+      "description": "Previously healthy",
       "status": "Active",
-      "notes": "Mild disease \u2014 arthritis, rash, positive ANA/dsDNA; on hydroxychloroquine"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Hydroxychloroquine 200mg BID",
-      "sig": "PO BID",
-      "prescriber": "Rheumatology",
-      "start": "06/2018",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Vitamin D3 2000IU daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Chen",
-      "start": "01/2020",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Combined OCP",
+      "dose": "",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Elena Rodriguez, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "142/88",
-      "hr": 108,
-      "rr": 18,
-      "temp": "101.2\u00b0F",
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "128/82",
+      "hr": "108",
+      "rr": "20",
+      "temp": "38.6°C",
       "spo2": "98%",
-      "wt": "155 lbs",
-      "ht": "5'7\"",
-      "bmi": 24.3,
-      "setting": "ED"
+      "pain": "4/10",
+      "bmi": "21",
+      "weight": "93 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Fatigue, bruising, confusion, dark urine x 5 days",
-      "hpi": "37F with SLE presents with 5 days of progressive fatigue, easy bruising, petechiae on legs, confusion (difficulty with word-finding, got lost driving home), dark tea-colored urine, and low-grade fevers. Co-worker noted she 'seemed off' and her eyes looked yellow. No bleeding (no epistaxis, melena, hematuria). No recent medication changes. Pentad concern: thrombocytopenia, hemolytic anemia, renal dysfunction, neurologic symptoms, fever \u2014 classic TTP.",
-      "exam": "Jaundiced sclera. Petechiae on bilateral lower extremities and trunk. Ecchymoses on arms. Confused \u2014 oriented x 2 (not to date). Word-finding difficulty. No focal neurologic deficits. Spleen not palpable. No lymphadenopathy. Skin: Discoid lupus rash on face (chronic).",
-      "assessment": "1. TTP \u2014 thrombotic thrombocytopenic purpura. PLASMIC score: 7 (high probability). Classic pentad present.\n2. MEDICAL EMERGENCY \u2014 mortality >90% untreated; <20% with plasma exchange\n3. Likely autoimmune TTP (SLE association with ADAMTS13 inhibitor)\n4. DO NOT TRANSFUSE PLATELETS \u2014 may worsen thrombotic microangiopathy",
-      "plan": "1. STAT ADAMTS13 activity and inhibitor level (send BEFORE treatment but do NOT delay treatment)\n2. Emergent plasma exchange (TPE) \u2014 call blood bank and apheresis team\n3. Methylprednisolone 1g IV daily x 3 days (pulse steroids)\n4. Caplacizumab \u2014 anti-vWF nanobody if available (reduces time to remission)\n5. CBC, reticulocyte count, LDH, haptoglobin, direct Coombs, peripheral smear\n6. Renal panel, UA\n7. DO NOT TRANSFUSE PLATELETS unless life-threatening hemorrhage\n8. Hematology STAT consult\n9. ICU admission\n10. Daily ADAMTS13 and platelet count to monitor response"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia",
+      "hpi": "Amanda Lewis is a 33-year-old female presenting with confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia. Past medical history includes Previously healthy. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "TTP — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "12:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 12:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260471",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-213658",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "10.8",
-              "unit": "K/uL",
+              "value": "7.2",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "7.2",
+              "value": "7.8",
               "unit": "g/dL",
               "range": "12.0-16.0",
               "flag": "L"
             },
             {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
               "test": "Platelets",
               "value": "12",
-              "unit": "K/uL",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": "L"
             },
@@ -128,17 +127,92 @@ window.EMR_DATA = {
               "unit": "%",
               "range": "0.5-2.5",
               "flag": "H"
+            },
+            {
+              "test": "Schistocytes",
+              "value": "4+",
+              "unit": "per HPF",
+              "range": "<1",
+              "flag": "H"
             }
           ]
         },
         {
-          "name": "HEMOLYSIS PANEL",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "LDH",
-              "value": "1,842",
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Total Bili",
+              "value": "4.2",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Ldh",
+              "value": "1450",
               "unit": "U/L",
-              "range": "140-280",
+              "range": "120-246",
               "flag": "H"
             },
             {
@@ -147,134 +221,62 @@ window.EMR_DATA = {
               "unit": "mg/dL",
               "range": "30-200",
               "flag": "L"
-            },
-            {
-              "test": "Indirect Bilirubin",
-              "value": "4.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.0",
-              "flag": "H"
-            },
-            {
-              "test": "Direct Coombs",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
-              "flag": ""
-            },
-            {
-              "test": "Peripheral Smear",
-              "value": "Schistocytes 4+ per HPF",
-              "unit": "",
-              "range": "0",
-              "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "RENAL",
-          "results": [
-            {
-              "test": "Creatinine",
-              "value": "1.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "UA Protein",
-              "value": "2+",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "TTP SPECIFIC",
-          "results": [
-            {
-              "test": "ADAMTS13 Activity",
-              "value": "<5",
-              "unit": "%",
-              "range": ">67",
-              "flag": "L"
-            },
-            {
-              "test": "ADAMTS13 Inhibitor",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
             }
           ]
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CT Head without Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-396445",
+      "clinical": "Confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia",
+      "technique": "Standard protocol",
+      "findings": "No acute intracranial abnormality.",
+      "impression": "Normal.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: SLE, alive at 62",
-    "Father: HTN, alive at 64",
-    "Sister: Raynaud phenomenon, alive at 34"
+    "Non-contributory"
   ],
   "socialHistory": [
-    [
-      "Occupation",
-      "Paralegal"
-    ],
-    [
-      "Marital",
-      "Single"
-    ],
     [
       "Tobacco",
       "Never"
     ],
     [
-      "Alcohol",
-      "Rare"
-    ],
-    [
-      "Exercise",
-      "Yoga 2x/week"
+      "Recent illness",
+      "Had a viral URI 2 weeks ago"
     ]
-  ],
-  "meta": {
-    "caseId": "ttp",
-    "diagnosis": "Thrombotic Thrombocytopenic Purpura (TTP)",
-    "acuity": 2,
-    "presentation": "Hematologic Emergency",
-    "category": "hematologic"
-  }
+  ]
 };

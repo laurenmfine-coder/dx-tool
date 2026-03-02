@@ -1,212 +1,252 @@
-// Virtual EMR Case: Perforated Peptic Ulcer
-// Variant: perforated-peptic-ulcer | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/perforated-peptic-ulcer.js — Auto-generated EMR case data for Perforated Peptic Ulcer */
 window.EMR_DATA = {
   "patient": {
     "name": "Vincent Morales",
-    "dob": "02/10/1960",
-    "age": 64,
+    "dob": "06/23/1980",
+    "age": "46",
     "sex": "Male",
-    "mrn": "RDX-2025-16508",
-    "pronouns": "He/Him",
-    "insurance": "Medicare Part A/B",
-    "pcp": "Dr. Susan Kim, MD",
-    "pharmacy": "CVS Pharmacy — 3451 N State Rd 7, Lauderdale Lakes, FL",
-    "language": "English, Spanish",
-    "race": "Hispanic/Latino",
-    "address": "5125 NW 31st Ave, Fort Lauderdale, FL 33309",
-    "phone": "(954) 555-1682",
-    "email": "v.morales60@email.com",
+    "pronouns": "he/him",
+    "mrn": "MRN-499704",
+    "language": "English",
+    "race": "Black/African American",
+    "phone": "(459) 386-2785",
+    "email": "vincent.morales@email.com",
+    "address": "6100 Elm St, Hollywood, FL 33300",
+    "insurance": "Humana Gold Plus",
+    "pcp": "Dr. David Kim, MD",
+    "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
-      "name": "Carmen Morales (Wife)",
-      "phone": "(954) 555-1700"
-    }
+      "name": "Mei Morales",
+      "phone": "(664) 649-8354",
+      "relationship": "Sibling"
+    },
+    "chiefComplaint": "Sudden severe epigastric pain, rigid abdomen",
+    "diagnosis": "Perforated Peptic Ulcer"
   },
   "problems": [
     {
-      "problem": "Peptic Ulcer Disease",
-      "icd": "K27.9",
-      "onset": "2019",
+      "id": "prob-1",
+      "description": "NSAID use (chronic)",
       "status": "Active",
-      "notes": "H. pylori positive (treated 2019); duodenal ulcer on EGD; recurrent symptoms; poor PPI compliance"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Osteoarthritis, Bilateral Knees",
-      "icd": "M17.0",
-      "onset": "2016",
+      "id": "prob-2",
+      "description": "H. pylori (prior positive, not treated)",
       "status": "Active",
-      "notes": "Chronic NSAID use for pain management — risk factor for PUD"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2010",
+      "id": "prob-3",
+      "description": "GERD",
       "status": "Active",
-      "notes": "On lisinopril; well controlled"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Tobacco Use Disorder",
-      "icd": "F17.210",
-      "onset": "1980",
+      "id": "prob-4",
+      "description": "Alcohol use disorder",
       "status": "Active",
-      "notes": "1 PPD x 44 years; risk factor for PUD"
-    },
-    {
-      "problem": "Coronary Artery Disease",
-      "icd": "I25.10",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "Non-obstructive CAD on cath 2018; on aspirin — additional ulcerogenic risk"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Omeprazole 20mg daily",
-      "sig": "Take 1 capsule by mouth once daily 30 minutes before breakfast",
-      "prescriber": "Dr. Kim",
-      "start": "04/2019",
-      "refills": 3,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Ibuprofen",
+      "dose": "800mg",
+      "route": "PO",
+      "frequency": "TID",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
     },
     {
-      "name": "Naproxen 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with food",
-      "prescriber": "Dr. Kim",
-      "start": "01/2020",
-      "refills": 2,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Omeprazole",
+      "dose": "20mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
     },
     {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Kim",
-      "start": "06/2018",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 10mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Kim",
-      "start": "03/2011",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 20mg daily",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Kim",
-      "start": "06/2018",
-      "refills": 3,
-      "status": "Active"
+      "id": "med-3",
+      "name": "Gabapentin",
+      "dose": "300mg",
+      "route": "PO",
+      "frequency": "TID",
+      "status": "Active",
+      "prescriber": "Dr. Michelle Foster, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "Tramadol",
-      "type": "Drug",
-      "reaction": "Seizure",
-      "severity": "Severe",
-      "verified": "Yes"
+      "allergen": "NKDA",
+      "reaction": "",
+      "severity": "",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "12/02/2024",
-      "bp": "128/78",
-      "hr": 76,
-      "rr": 14,
-      "temp": "98.6°F",
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "92/58",
+      "hr": "122",
+      "rr": "26",
+      "temp": "38.2°C",
       "spo2": "96%",
-      "wt": "176 lbs",
-      "ht": "5'8\"",
-      "bmi": 26.8,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "06/10/2024",
-      "bp": "130/80",
-      "hr": 72,
-      "rr": 14,
-      "temp": "98.4°F",
-      "spo2": "97%",
-      "wt": "178 lbs",
-      "ht": "5'8\"",
-      "bmi": 27.1,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "12/15/2023",
-      "bp": "126/76",
-      "hr": 74,
-      "rr": 14,
-      "temp": "98.6°F",
-      "spo2": "97%",
-      "wt": "180 lbs",
-      "ht": "5'8\"",
-      "bmi": 27.4,
-      "setting": "PCP Office"
+      "pain": "10/10",
+      "bmi": "32",
+      "weight": "66 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "12/02/2024",
-      "type": "Primary Care",
-      "provider": "Dr. Susan Kim, MD",
-      "cc": "Knee pain worsening; refills; dyspepsia returning",
-      "hpi": "64-year-old male with PUD history, OA bilateral knees, and CAD presenting with worsening knee pain and recurrent epigastric burning. Bilateral knee pain limits walking — requests continued NSAID use. Also reports epigastric burning and early satiety returning over past month. Admits to inconsistent PPI use ('I forget sometimes'). Smoking 1 PPD. On both naproxen BID and aspirin daily — dual antiplatelet/NSAID risk. Counseled extensively on NSAID risks with PUD history.",
-      "exam": "General: NAD. MSK: Bilateral knee crepitus, mild effusions, limited ROM. Abdomen: Mild epigastric tenderness, no rebound, no guarding. No melena on rectal exam (guaiac negative).",
-      "assessment": "1. Recurrent dyspepsia — concerning with PUD history, dual NSAID/ASA use, smoking, and poor PPI compliance\n2. OA bilateral knees — worsening\n3. HIGH RISK for GI complications: concurrent naproxen + aspirin + active smoking + PUD history + inconsistent PPI use",
-      "plan": "1. STRONGLY counseled to stop naproxen — switch to acetaminophen 1000mg TID and topical diclofenac gel\n2. Patient REFUSES to stop naproxen — states 'it's the only thing that works'\n3. Increase omeprazole 20mg → 40mg daily; SET ALARM reminder for daily use\n4. H. pylori stool antigen ordered (reinfection possible)\n5. GI referral for repeat EGD if symptoms persist >4 weeks\n6. Smoking cessation counseling — patient declines\n7. WARNED: combination of naproxen + aspirin + smoking + PUD = high perforation risk"
-    },
-    {
-      "id": "V002",
-      "date": "06/10/2024",
-      "type": "Primary Care",
-      "provider": "Dr. Susan Kim, MD",
-      "cc": "Routine follow-up; medication refills",
-      "hpi": "64-year-old male for routine follow-up. Reports knee pain manageable on naproxen. No GI symptoms currently. Taking omeprazole 'most days.' Smoking unchanged. No chest pain.",
-      "exam": "Abdomen: Soft, NT. MSK: Bilateral knee crepitus, stable.",
-      "assessment": "1. OA — stable on current regimen\n2. PUD — asymptomatic; continued NSAID use\n3. CAD — stable",
-      "plan": "1. Continue current medications\n2. Reinforce PPI compliance\n3. RTC 6 months"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Sudden severe epigastric pain, rigid abdomen",
+      "hpi": "Vincent Morales is a 46-year-old male presenting with sudden severe epigastric pain, rigid abdomen. Past medical history includes NSAID use (chronic), H. pylori (prior positive, not treated), GERD, Alcohol use disorder. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Perforated Peptic Ulcer — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "12/02/2024",
-      "time": "09:30",
-      "orderedBy": "Dr. Susan Kim, MD",
-      "collected": "12/02/2024 09:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-165080",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA), Stool",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-520602",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.4", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "MCV", "value": "78", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "274", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "17.6",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
-          "name": "IRON STUDIES",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
-            { "test": "Iron", "value": "42", "unit": "µg/dL", "range": "60-170", "flag": "L" },
-            { "test": "TIBC", "value": "380", "unit": "µg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Ferritin", "value": "18", "unit": "ng/mL", "range": "30-400", "flag": "L" }
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
-          "name": "H. PYLORI",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
-            { "test": "H. pylori Stool Antigen", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "3.8",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            },
+            {
+              "test": "Lipase",
+              "value": "45",
+              "unit": "U/L",
+              "range": "0-160",
+              "flag": ""
+            },
+            {
+              "test": "Amylase",
+              "value": "62",
+              "unit": "U/L",
+              "range": "30-110",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -214,74 +254,58 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "04/2019",
-      "study": "EGD (ESOPHAGOGASTRODUODENOSCOPY)",
-      "accession": "IMG-2019-16508",
-      "status": "FINAL",
-      "orderedBy": "Dr. Patricia Lopez, MD (Gastroenterology)",
-      "readBy": "Dr. Patricia Lopez, MD (Gastroenterology)",
-      "facility": "ReasonDx Medical Center Endoscopy Suite",
-      "priority": "Urgent",
-      "clinical": "59M with epigastric pain, dyspepsia, positive H. pylori. R/O peptic ulcer disease.",
-      "technique": "Upper endoscopy with sedation (midazolam/fentanyl). Scope advanced to second portion of duodenum.",
-      "findings": "Esophagus: Normal mucosa. No varices, stricture, or Barrett's.\\n\\nStomach: Erythematous mucosa in antrum. No ulcer. No mass.\\n\\nDuodenum: 1.5 cm clean-based ulcer on anterior wall of duodenal bulb. No active bleeding. No visible vessel. Forrest class III. Surrounding mucosa with erythema and edema.\\n\\nBiopsies: Antral biopsies obtained for H. pylori CLO test (positive).",
-      "impression": "1. Duodenal ulcer — 1.5 cm, anterior wall, Forrest III (clean-based, no recent hemorrhage).\\n2. H. pylori positive — antral biopsies.\\n3. Antral erythema — mild gastritis.",
-      "dictated": "04/22/2019 14:00",
-      "verified": "04/22/2019 16:00"
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CT Abdomen/Pelvis with Oral Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-853824",
+      "clinical": "Sudden severe epigastric pain, rigid abdomen",
+      "technique": "Standard protocol",
+      "findings": "Large amount of free intraperitoneal air. Extraluminal oral contrast adjacent to the anterior duodenal wall. Moderate free fluid in pelvis.",
+      "impression": "Perforated viscus — likely anterior duodenal ulcer. Emergent surgical consultation.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (High-Dose Quadrivalent)",
-      "date": "10/15/2024",
-      "site": "Left deltoid IM",
-      "lot": "FL2024-HD318",
-      "mfr": "Sanofi Pasteur"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 (Pfizer 2024-25)",
-      "date": "11/01/2024",
-      "site": "Right deltoid IM",
-      "lot": "CV2024-820",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
-      "date": "2024",
-      "site": "Left deltoid IM",
-      "lot": "—",
-      "mfr": "Pfizer"
-    },
-    {
-      "vaccine": "Tdap (Adacel)",
-      "date": "2019",
-      "site": "Left deltoid IM",
-      "lot": "—",
-      "mfr": "Sanofi Pasteur"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Gastric cancer, deceased at 68",
-    "Father: Hypertension, T2DM, deceased at 75 (MI)",
-    "Brother: PUD (H. pylori), alive at 62",
-    "Sister: Healthy, age 58"
+    "Father: peptic ulcer disease"
   ],
   "socialHistory": [
-    ["Occupation", "Retired auto mechanic"],
-    ["Marital", "Married — 38 years"],
-    ["Tobacco", "Current smoker — 1 PPD x 44 years (44 pack-years); declined cessation"],
-    ["Alcohol", "2-3 beers daily"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited by knee pain; walks to corner store"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Wears seatbelt; no fall history"],
-    ["Advance Directive", "None — discussed; patient deferred"]
-  ],
-  "meta": {
-    "caseId": "perforated-peptic-ulcer",
-    "diagnosis": "Perforated Peptic Ulcer",
-    "acuity": 1,
-    "presentation": "GI Emergency",
-    "category": "gastrointestinal"
-  }
+    [
+      "Alcohol",
+      "1 pint vodka daily"
+    ],
+    [
+      "NSAID use",
+      "Takes ibuprofen 800 TID for chronic back pain for 3 years"
+    ],
+    [
+      "Tobacco",
+      "Current, 20 pack-years"
+    ]
+  ]
 };

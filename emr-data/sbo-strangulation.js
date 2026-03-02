@@ -1,207 +1,208 @@
-// Virtual EMR Case: Small Bowel Obstruction with Strangulation
-// Variant: sbo-strangulation | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/sbo-strangulation.js — Auto-generated EMR case data for SBO with Strangulation */
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Kowalski",
-    "dob": "08/18/1955",
-    "age": 70,
+    "dob": "07/13/1948",
+    "age": "78",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Medicare Part B",
-    "pcp": "Dr. James O'Brien, MD",
-    "pharmacy": "Publix \u2014 Coconut Creek, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-478097",
     "language": "English",
-    "race": "White (Polish)",
-    "address": "4520 NW 36th St, Coconut Creek, FL",
-    "phone": "(954) 555-8822",
-    "email": "r.kowalski55@email.com",
+    "race": "Multiracial",
+    "phone": "(308) 596-6858",
+    "email": "richard.kowalski@email.com",
+    "address": "6390 Oak Dr, Weston, FL 33396",
+    "insurance": "Aetna HMO",
+    "pcp": "Dr. Elena Rodriguez, MD",
+    "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
-      "name": "Susan Kowalski (Wife)",
-      "phone": "(954) 555-8838"
+      "name": "Maria Kowalski",
+      "phone": "(845) 924-1964",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-65129"
+    "chiefComplaint": "Colicky abdominal pain, distension, vomiting, no BM for 2 days",
+    "diagnosis": "SBO with Strangulation"
   },
   "problems": [
     {
-      "problem": "Prior Appendectomy",
-      "icd": "Z87.09",
-      "onset": "1988",
-      "status": "Resolved",
-      "notes": "Open appendectomy 1988"
-    },
-    {
-      "problem": "Prior Cholecystectomy",
-      "icd": "Z87.09",
-      "onset": "2015",
-      "status": "Resolved",
-      "notes": "Laparoscopic 2015"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2005",
+      "id": "prob-1",
+      "description": "Prior abdominal surgery (appendectomy, cholecystectomy)",
       "status": "Active",
-      "notes": "On lisinopril"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Prior SBO \u2014 Adhesive",
-      "icd": "K56.5",
-      "onset": "2020",
-      "status": "Resolved",
-      "notes": "Managed conservatively with NGT decompression in 2020"
+      "id": "prob-2",
+      "description": "Incisional hernia (known)",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. O'Brien",
-      "start": "06/2008",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Lisinopril",
+      "dose": "10mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. David Kim, MD"
     },
     {
-      "name": "Omeprazole 20mg daily",
-      "sig": "PO daily before breakfast",
-      "prescriber": "Dr. O'Brien",
-      "start": "01/2016",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Aspirin",
+      "dose": "81mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "108/68",
-      "hr": 108,
-      "rr": 22,
-      "temp": "101.2\u00b0F",
-      "spo2": "97%",
-      "wt": "190 lbs",
-      "ht": "5'10\"",
-      "bmi": 27.3,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "96/58",
-      "hr": 118,
-      "rr": 24,
-      "temp": "101.8\u00b0F",
-      "spo2": "95%",
-      "wt": "190 lbs",
-      "ht": "5'10\"",
-      "bmi": 27.3,
-      "setting": "ED \u2014 3hr Reassess"
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "98/62",
+      "hr": "118",
+      "rr": "24",
+      "temp": "38.4°C",
+      "spo2": "96%",
+      "pain": "10/10",
+      "bmi": "35",
+      "weight": "93 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Severe abdominal pain, vomiting, no BM/flatus x 36 hours",
-      "hpi": "70M with prior abdominal surgeries and history of adhesive SBO presents with 36 hours of progressive crampy abdominal pain now becoming constant and severe (9/10). Bilious vomiting x 8 episodes. Complete obstipation \u2014 no BM or flatus x 36 hours. Prior SBO in 2020 resolved with NGT. This episode feels 'different and worse' \u2014 pain is constant rather than colicky, and he is febrile. Abdomen increasingly distended and tender.",
-      "exam": "Ill-appearing, tachycardic. Abdomen: Markedly distended. Diffusely tender with involuntary guarding \u2014 worst in RLQ and periumbilical. Localized peritoneal signs RLQ. High-pitched tinkling bowel sounds alternating with absent sounds. Midline and RLQ surgical scars. Mild erythema overlying distended abdomen. No hernia.",
-      "assessment": "1. Small bowel obstruction with signs of STRANGULATION \u2014 fever, peritoneal signs, constant pain, tachycardia, leukocytosis with bandemia\n2. Likely adhesive etiology given surgical history\n3. SURGICAL EMERGENCY \u2014 conservative management contraindicated with strangulation signs",
-      "plan": "1. EMERGENT surgical consult \u2014 likely exploratory laparotomy\n2. NGT to low intermittent suction\n3. IV NS bolus 2L then 200 mL/hr\n4. NPO strictly\n5. CT abdomen/pelvis with IV contrast\n6. Piperacillin-tazobactam 4.5g IV (empiric for possible perforation)\n7. CBC, CMP, lactate, type & screen\n8. Foley for I/O\n9. Pain: fentanyl 50mcg IV (avoid morphine \u2014 histamine release)"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Colicky abdominal pain, distension, vomiting, no BM for 2 days",
+      "hpi": "Richard Kowalski is a 78-year-old male presenting with colicky abdominal pain, distension, vomiting, no bm for 2 days. Past medical history includes Prior abdominal surgery (appendectomy, cholecystectomy), Incisional hernia (known). See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "SBO with Strangulation — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "10:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 10:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260411",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-913306",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "19.8",
-              "unit": "K/uL",
+              "value": "18.4",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
             {
               "test": "Hemoglobin",
-              "value": "16.2",
+              "value": "13.8",
               "unit": "g/dL",
-              "range": "13.5-17.5",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
               "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "342",
-              "unit": "K/uL",
+              "value": "245",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
-            },
-            {
-              "test": "Bands",
-              "value": "12",
-              "unit": "%",
-              "range": "0-5",
-              "flag": "H"
             }
           ]
         },
         {
-          "name": "METABOLIC",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "BUN",
-              "value": "32",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
             },
             {
               "test": "Potassium",
-              "value": "3.2",
+              "value": "4.2",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": "L"
+              "range": "3.5-5.0",
+              "flag": ""
             },
             {
               "test": "Chloride",
-              "value": "88",
+              "value": "102",
               "unit": "mEq/L",
               "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "18",
+              "unit": "mEq/L",
+              "range": "22-28",
               "flag": "L"
             },
             {
-              "test": "CO2",
-              "value": "30",
-              "unit": "mEq/L",
-              "range": "22-29",
-              "flag": "H"
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
             },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
             {
               "test": "Lactate",
               "value": "4.8",
@@ -216,90 +217,50 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "CT ABDOMEN AND PELVIS WITH IV CONTRAST",
-      "accession": "IMG-2026-260411",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — Radiology",
-      "priority": "STAT",
-      "clinical": "SBO with signs of strangulation",
-      "technique": "CT abdomen/pelvis with IV contrast.",
-      "findings": "Dilated small bowel loops (up to 5.2 cm) with air-fluid levels. Transition point in RLQ with adhesive band identified. Closed-loop configuration of distal ileum with mesenteric swirl ('whirl sign'). Involved bowel segment shows decreased wall enhancement and mesenteric congestion \u2014 concerning for ischemia. Small amount of free fluid in pelvis. No pneumoperitoneum.",
-      "impression": "1. Adhesive small bowel obstruction with closed-loop and signs of STRANGULATION.\n2. Decreased bowel wall enhancement at transition point \u2014 ischemia likely.\n3. No perforation currently.\n4. EMERGENT surgical intervention recommended.",
-      "dictated": "02/26/2026 10:40",
-      "verified": "02/26/2026 10:55"
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CT Abdomen/Pelvis with Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-853040",
+      "clinical": "Colicky abdominal pain, distension, vomiting, no BM for 2 days",
+      "technique": "Standard protocol",
+      "findings": "Dilated small bowel loops up to 4.5cm with decompressed distal bowel (transition point in RLQ). Closed-loop configuration with mesenteric swirl sign. Decreased bowel wall enhancement concerning for ischemia. Moderate free fluid.",
+      "impression": "Small bowel obstruction with closed-loop configuration and signs of strangulation. Emergent surgical consultation.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: Colon cancer at 72, deceased at 78",
-    "Mother: Gallstones, alive at 92"
+    "Non-contributory"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Retired electrician"
-    ],
-    [
-      "Marital",
-      "Married 45 years"
-    ],
-    [
-      "Tobacco",
-      "Former \u2014 1/2 PPD x 15 yrs, quit 2000"
-    ],
-    [
-      "Alcohol",
-      "1-2 beers/week"
-    ],
-    [
-      "Advance Directive",
-      "Full code; DPOA wife Susan"
+      "Surgical history",
+      "Appendectomy age 25, cholecystectomy age 52"
     ]
-  ],
-  "meta": {
-    "caseId": "sbo-strangulation",
-    "diagnosis": "Small Bowel Obstruction with Strangulation",
-    "acuity": 2,
-    "presentation": "GI Emergency",
-    "category": "gastrointestinal"
-  }
+  ]
 };

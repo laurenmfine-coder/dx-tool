@@ -1,171 +1,113 @@
-// Virtual EMR Case: Acute Appendicitis
-// Variant: appendicitis-v1 | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
-
+/* emr-data/appendicitis-v1.js — Auto-generated EMR case data for Acute Appendicitis */
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Nguyen",
-    "dob": "03/22/2000",
-    "age": 25,
+    "dob": "06/12/2007",
+    "age": "19",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "BCBS PPO",
-    "pcp": "Dr. Maria Gonzalez, DO",
-    "pharmacy": "Walgreens \u2014 Fort Lauderdale, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-638121",
     "language": "English",
-    "race": "Asian",
-    "address": "1840 SE 4th Ave, Fort Lauderdale, FL",
-    "phone": "(954) 555-6012",
-    "email": "t.nguyen00@email.com",
+    "race": "Hispanic/Latino",
+    "phone": "(755) 373-4084",
+    "email": "tyler.nguyen@email.com",
+    "address": "5197 Maple Ln, Pembroke Pines, FL 33356",
+    "insurance": "Humana Gold Plus",
+    "pcp": "Dr. Robert Hughes, DO",
+    "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
-      "name": "Linda Nguyen (Mother)",
-      "phone": "(954) 555-6028"
+      "name": "Maria Nguyen",
+      "phone": "(236) 971-9518",
+      "relationship": "Spouse"
     },
-    "mrn": "RDX-2025-40249"
+    "chiefComplaint": "RLQ pain migrated from periumbilical area, nausea",
+    "diagnosis": "Acute Appendicitis"
   },
-  "problems": [
-    {
-      "problem": "No Significant PMH",
-      "icd": "Z87.89",
-      "onset": "",
-      "status": "Active",
-      "notes": "Healthy young adult"
-    }
-  ],
-  "medications": [
-    {
-      "name": "None",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
-    }
-  ],
+  "problems": [],
+  "medications": [],
   "allergies": [
     {
-      "allergen": "Sulfa drugs",
-      "type": "Drug",
-      "reaction": "Rash",
-      "severity": "Moderate",
-      "verified": "Yes"
+      "allergen": "NKDA",
+      "reaction": "",
+      "severity": "",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
+      "date": "03/01/2026",
+      "time": "07:45",
       "bp": "128/78",
-      "hr": 98,
-      "rr": 18,
-      "temp": "100.8\u00b0F",
+      "hr": "96",
+      "rr": "18",
+      "temp": "38.4°C",
       "spo2": "99%",
-      "wt": "168 lbs",
-      "ht": "5'10\"",
-      "bmi": 24.1,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "130/82",
-      "hr": 102,
-      "rr": 20,
-      "temp": "101.2\u00b0F",
-      "spo2": "98%",
-      "wt": "168 lbs",
-      "ht": "5'10\"",
-      "bmi": 24.1,
-      "setting": "ED \u2014 4hr"
+      "pain": "8/10",
+      "bmi": "37",
+      "weight": "72 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "RLQ abdominal pain x 18 hours",
-      "hpi": "25M with 18hr progressive abdominal pain. Began periumbilically, migrated to RLQ over 8hrs. Now 8/10, sharp, worse with movement. Associated anorexia, nausea, one non-bloody emesis, subjective fever. No diarrhea or dysuria. No prior abdominal surgeries.",
-      "exam": "Soft, voluntary guarding RLQ. McBurney point tenderness. (+) Rovsing sign. (+) Psoas sign. Mild rebound RLQ. Hypoactive BS.",
-      "assessment": "1. Acute appendicitis \u2014 classic migration, peritoneal signs\n2. Low-grade fever with leukocytosis\n3. Mild dehydration",
-      "plan": "1. NPO; IV NS bolus\n2. CT abdomen/pelvis with IV contrast\n3. CBC, CMP, lipase, UA\n4. Morphine 4mg IV + ondansetron 4mg IV\n5. Surgical consult\n6. If confirmed: cefoxitin 2g IV, laparoscopic appendectomy"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "RLQ pain migrated from periumbilical area, nausea",
+      "hpi": "Tyler Nguyen is a 19-year-old male presenting with rlq pain migrated from periumbilical area, nausea. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Acute Appendicitis — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:30",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:30",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261430",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-621969",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "COMPLETE BLOOD COUNT",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "14.8",
-              "unit": "K/uL",
+              "value": "15.8",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
             {
               "test": "Hemoglobin",
-              "value": "15.2",
+              "value": "13.8",
               "unit": "g/dL",
-              "range": "13.5-17.5",
+              "range": "12.0-16.0",
               "flag": ""
             },
             {
               "test": "Hematocrit",
-              "value": "45.1",
+              "value": "41.2",
               "unit": "%",
-              "range": "38.3-48.6",
+              "range": "36-46",
               "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "268",
-              "unit": "K/uL",
+              "value": "245",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
-            },
-            {
-              "test": "Neutrophils",
-              "value": "82",
-              "unit": "%",
-              "range": "40-70",
-              "flag": "H"
             }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
             {
               "test": "Sodium",
               "value": "139",
@@ -175,9 +117,9 @@ window.EMR_DATA = {
             },
             {
               "test": "Potassium",
-              "value": "4.0",
+              "value": "4.2",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
               "flag": ""
             },
             {
@@ -188,11 +130,51 @@ window.EMR_DATA = {
               "flag": ""
             },
             {
-              "test": "CO2",
+              "test": "CO2/Bicarb",
               "value": "24",
               "unit": "mEq/L",
-              "range": "22-29",
+              "range": "22-28",
               "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Crp",
+              "value": "5.2",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": "H"
             }
           ]
         }
@@ -201,72 +183,54 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "CT ABDOMEN AND PELVIS WITH IV CONTRAST",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — Radiology",
-      "priority": "STAT",
-      "clinical": "RLQ pain, fever, leukocytosis",
-      "technique": "Helical CT abdomen/pelvis with IV contrast.",
-      "findings": "Appendix dilated to 12 mm. Wall thickening and enhancement. Appendicolith in proximal lumen. Periappendiceal fat stranding and mild free fluid. No extraluminal gas or abscess.",
-      "impression": "1. Acute uncomplicated appendicitis with appendicolith.\n2. No perforation or abscess.\n3. Surgical consultation recommended.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CT Abdomen/Pelvis with Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-985472",
+      "clinical": "RLQ pain migrated from periumbilical area, nausea",
+      "technique": "Standard protocol",
+      "findings": "Dilated, fluid-filled appendix measuring 12mm in diameter with periappendiceal fat stranding and an appendicolith. No free air. Small amount of free fluid in pelvis.",
+      "impression": "Acute uncomplicated appendicitis.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster (Pfizer)",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: HTN, alive at 55",
-    "Mother: Healthy, alive at 52"
+    "Non-contributory"
   ],
   "socialHistory": [
-    [
-      "Occupation",
-      "Graduate student \u2014 biomedical engineering"
-    ],
     [
       "Tobacco",
       "Never"
     ],
     [
-      "Alcohol",
-      "Social \u2014 2-3 drinks/weekend"
-    ],
-    [
-      "Exercise",
-      "Running 3x/week"
+      "Occupation",
+      "College student"
     ]
-  ],
-  "meta": {
-    "caseId": "appendicitis-v1",
-    "diagnosis": "Acute Appendicitis",
-    "acuity": 3,
-    "presentation": "Abdominal Pain",
-    "category": "gastrointestinal"
-  }
+  ]
 };

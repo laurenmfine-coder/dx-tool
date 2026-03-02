@@ -1,160 +1,192 @@
-// Virtual EMR Case: Thyroid Storm
-// Variant: thyroid-storm | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/thyroid-storm.js — Auto-generated EMR case data for Thyroid Storm */
 window.EMR_DATA = {
   "patient": {
-    "name": "Jasmine Williams",
-    "dob": "03/08/1990",
-    "age": 35,
+    "name": "Keandra Williams",
+    "dob": "10/24/1983",
+    "age": "43",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Aetna HMO",
-    "pcp": "Dr. Rebecca Stone, MD",
-    "pharmacy": "CVS \u2014 Plantation, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-887351",
     "language": "English",
-    "race": "Black",
-    "address": "801 NW 72nd Ave, Plantation, FL",
-    "phone": "(954) 555-5544",
-    "email": "j.williams90@email.com",
+    "race": "Asian",
+    "phone": "(541) 295-8579",
+    "email": "keandra.williams@email.com",
+    "address": "4510 Willow Ln, Hollywood, FL 33395",
+    "insurance": "Medicaid",
+    "pcp": "Dr. Elena Rodriguez, MD",
+    "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
-      "name": "Anthony Williams (Husband)",
-      "phone": "(954) 555-5560"
+      "name": "Anthony Williams",
+      "phone": "(232) 279-2393",
+      "relationship": "Spouse"
     },
-    "mrn": "RDX-2025-94420"
+    "chiefComplaint": "High fever, tachycardia, agitation, tremor — known Graves' disease",
+    "diagnosis": "Thyroid Storm"
   },
   "problems": [
     {
-      "problem": "Graves Disease",
-      "icd": "E05.00",
-      "onset": "2022",
+      "id": "prob-1",
+      "description": "Graves' disease (non-adherent to methimazole)",
       "status": "Active",
-      "notes": "Diagnosed 2022; on methimazole but self-discontinued 2 months ago because 'felt fine'"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Graves Ophthalmopathy \u2014 Mild",
-      "icd": "H06.21",
-      "onset": "2022",
+      "id": "prob-2",
+      "description": "Atrial fibrillation (new)",
       "status": "Active",
-      "notes": "Mild proptosis; on lubricant drops"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Methimazole 20mg daily",
-      "sig": "PO daily",
-      "prescriber": "Endocrinology",
-      "start": "06/2022",
-      "refills": 3,
-      "status": "DISCONTINUED by patient 2 months ago"
+      "id": "med-1",
+      "name": "Methimazole",
+      "dose": "20mg",
+      "route": "PO",
+      "frequency": "TID (not taking)",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Propranolol",
+      "dose": "20mg",
+      "route": "PO",
+      "frequency": "TID (not taking)",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, DO"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "PTU",
+      "reaction": "Hepatotoxicity",
+      "severity": "Severe",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
+      "date": "03/01/2026",
+      "time": "07:45",
       "bp": "168/62",
-      "hr": 158,
-      "rr": 26,
-      "temp": "104.2\u00b0F",
-      "spo2": "98%",
-      "wt": "118 lbs",
-      "ht": "5'6\"",
-      "bmi": 19.0,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "152/58",
-      "hr": 132,
-      "rr": 22,
-      "temp": "102.8\u00b0F",
-      "spo2": "99%",
-      "wt": "118 lbs",
-      "ht": "5'6\"",
-      "bmi": 19.0,
-      "setting": "ED \u2014 2hr post-treatment"
+      "hr": "158",
+      "rr": "28",
+      "temp": "40.2°C",
+      "spo2": "96%",
+      "pain": "5/10",
+      "bmi": "31",
+      "weight": "64 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Palpitations, fever, agitation, tremors",
-      "hpi": "35F with Graves disease (off methimazole x 2 months) presents with 2 days of palpitations, tremors, diarrhea (6 episodes today), and progressive agitation. Husband reports she has been 'manic' \u2014 not sleeping, talking rapidly, increasingly confused today. Temp 104.2\u00b0F at home. Recent URI may have triggered decompensation. Burch-Wartofsky Score: >45 (highly suggestive of thyroid storm).",
-      "exam": "Agitated, diaphoretic, tremulous. Exophthalmos bilateral. Lid lag present. Thyroid diffusely enlarged, non-tender, no nodules. CV: Tachycardic, irregularly irregular (new AFib). Widened pulse pressure. Hyperactive DTRs throughout. Fine tremor in outstretched hands. Skin warm and moist.",
-      "assessment": "1. THYROID STORM \u2014 Burch-Wartofsky >45. Graves off treatment + precipitant (URI)\n2. New atrial fibrillation with rapid ventricular response\n3. Dehydration from diarrhea and insensible losses",
-      "plan": "1. PTU 200mg PO/PR (blocks synthesis AND peripheral conversion)\n2. Wait 1 hour then \u2192 SSKI 5 drops PO q6h (Wolff-Chaikoff)\n3. Propranolol 60mg PO q6h (beta-blockade + blocks T4\u2192T3)\n4. Hydrocortisone 100mg IV q8h (blocks T4\u2192T3, prevents adrenal crisis)\n5. Acetaminophen for fever (NO aspirin \u2014 displaces T4 from TBG)\n6. External cooling\n7. IV NS 1L bolus then 200 mL/hr\n8. Endocrinology and Cardiology consult\n9. ICU admission"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "High fever, tachycardia, agitation, tremor — known Graves' disease",
+      "hpi": "Keandra Williams is a 43-year-old female presenting with high fever, tachycardia, agitation, tremor — known graves' disease. Past medical history includes Graves' disease (non-adherent to methimazole), Atrial fibrillation (new). See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Thyroid Storm — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "11:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 11:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260340",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-779036",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "THYROID",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
-              "test": "TSH",
-              "value": "<0.01",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": "L"
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
             },
             {
-              "test": "Free T4",
-              "value": "7.8",
-              "unit": "ng/dL",
-              "range": "0.9-1.7",
-              "flag": "H"
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
             },
             {
-              "test": "Free T3",
-              "value": "18.4",
-              "unit": "pg/mL",
-              "range": "2.0-4.4",
-              "flag": "H"
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
             },
             {
-              "test": "TSI",
-              "value": "4.8",
-              "unit": "IU/L",
-              "range": "<1.3",
-              "flag": "H"
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
             }
           ]
         },
         {
-          "name": "CBC/METABOLIC",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "WBC",
-              "value": "12.8",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": "H"
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
             },
             {
               "test": "Glucose",
-              "value": "188",
+              "value": "198",
               "unit": "mg/dL",
               "range": "70-100",
               "flag": "H"
@@ -165,19 +197,38 @@ window.EMR_DATA = {
               "unit": "mg/dL",
               "range": "8.5-10.5",
               "flag": "H"
-            },
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
             {
-              "test": "AST",
-              "value": "88",
+              "test": "Alt",
+              "value": "82",
               "unit": "U/L",
-              "range": "10-40",
+              "range": "7-56",
               "flag": "H"
             },
             {
-              "test": "ALT",
-              "value": "72",
-              "unit": "U/L",
-              "range": "7-56",
+              "test": "Tsh",
+              "value": "<0.01",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": "L"
+            },
+            {
+              "test": "Free T4",
+              "value": "7.8",
+              "unit": "ng/dL",
+              "range": "0.8-1.8",
+              "flag": "H"
+            },
+            {
+              "test": "Free T3",
+              "value": "18.4",
+              "unit": "pg/mL",
+              "range": "2.3-4.2",
               "flag": "H"
             }
           ]
@@ -185,62 +236,56 @@ window.EMR_DATA = {
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-294951",
+      "clinical": "High fever, tachycardia, agitation, tremor — known Graves' disease",
+      "technique": "Standard protocol",
+      "findings": "Atrial fibrillation with rapid ventricular response, rate 158. No ST changes.",
+      "impression": "New-onset atrial fibrillation — likely thyrotoxicosis.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Graves disease, alive at 62",
-    "Aunt: Hashimoto thyroiditis",
-    "Father: HTN, alive at 65"
+    "Mother: Hashimoto's thyroiditis"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Marketing manager"
+      "Medication adherence",
+      "Stopped all thyroid meds 3 weeks ago — felt well"
     ],
     [
-      "Marital",
-      "Married 5 years"
-    ],
-    [
-      "Tobacco",
-      "Never"
-    ],
-    [
-      "Alcohol",
-      "Social \u2014 1-2/week"
-    ],
-    [
-      "Exercise",
-      "Previously ran; too fatigued recently"
+      "Trigger",
+      "Had dental extraction yesterday (infection risk)"
     ]
-  ],
-  "meta": {
-    "caseId": "thyroid-storm",
-    "diagnosis": "Thyroid Storm",
-    "acuity": 1,
-    "presentation": "Endocrine Emergency",
-    "category": "endocrine"
-  }
+  ]
 };

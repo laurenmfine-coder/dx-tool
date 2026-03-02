@@ -1,176 +1,285 @@
-// Virtual EMR Case: Status Epilepticus
-// Variant: status-epilepticus | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/status-epilepticus.js — Auto-generated EMR case data for Status Epilepticus */
 window.EMR_DATA = {
   "patient": {
     "name": "Michael Chang",
-    "dob": "11/02/1990",
-    "age": 35,
+    "dob": "11/22/1993",
+    "age": "33",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "BCBS PPO",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-135247",
     "language": "English",
     "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "michael@email.com",
+    "phone": "(645) 468-7338",
+    "email": "michael.chang@email.com",
+    "address": "9290 Elm Dr, Hollywood, FL 33367",
+    "insurance": "BlueCross BlueShield PPO",
+    "pcp": "Dr. Elena Rodriguez, MD",
+    "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Emily Chang",
+      "phone": "(429) 718-4747",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-49203"
+    "chiefComplaint": "Witnessed generalized seizure for >5 minutes, not returning to baseline",
+    "diagnosis": "Status Epilepticus"
   },
   "problems": [
     {
-      "problem": "Status Epilepticus",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Epilepsy (poorly controlled)",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "History of non-adherence",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Levetiracetam",
+      "dose": "1000mg",
+      "route": "PO",
+      "frequency": "BID",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, DO"
+    },
+    {
+      "id": "med-2",
+      "name": "Lacosamide",
+      "dose": "200mg",
+      "route": "PO",
+      "frequency": "BID",
+      "status": "Active",
+      "prescriber": "Dr. David Kim, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Phenytoin",
+      "reaction": "Stevens-Johnson Syndrome",
+      "severity": "Severe",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "168/102",
+      "hr": "128",
+      "rr": "8",
+      "temp": "38.6°C",
+      "spo2": "88%",
+      "pain": "N/A",
+      "bmi": "36",
+      "weight": "91 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Status Epilepticus",
-      "hpi": "35M known epilepsy (on levetiracetam \u2014 ran out 3 days ago) presenting with continuous GTC seizure activity x 12 min per EMS. Benzodiazepine protocol: lorazepam 4mg IV x2. Seizure persists \u2192 levetiracetam 60mg/kg IV loading. If refractory \u2192 fosphenytoin 20mg PE/kg. If still refractory \u2192 midazolam/propofol drip, RSI, EEG monitoring.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Status Epilepticus \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Witnessed generalized seizure for >5 minutes, not returning to baseline",
+      "hpi": "Michael Chang is a 33-year-old male presenting with witnessed generalized seizure for >5 minutes, not returning to baseline. Past medical history includes Epilepsy (poorly controlled), History of non-adherence. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Status Epilepticus — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-987761",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
-              "test": "Levetiracetam Level",
-              "value": "<2",
-              "unit": "mcg/mL",
-              "range": "12-46",
-              "flag": "L"
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
             },
             {
               "test": "Glucose",
-              "value": "188",
+              "value": "42",
               "unit": "mg/dL",
               "range": "70-100",
-              "flag": "H"
+              "flag": "L"
             },
             {
-              "test": "CK",
-              "value": "2840",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            },
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
             {
               "test": "Lactate",
-              "value": "8.8",
+              "value": "6.2",
               "unit": "mmol/L",
               "range": "0.5-2.0",
               "flag": "H"
             },
             {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
+              "test": "Ck",
+              "value": "2400",
+              "unit": "U/L",
+              "range": "22-198",
+              "flag": "H"
             }
           ]
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CT Head without Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-509113",
+      "clinical": "Witnessed generalized seizure for >5 minutes, not returning to baseline",
+      "technique": "Standard protocol",
+      "findings": "No acute hemorrhage or mass. No midline shift.",
+      "impression": "No acute structural etiology for seizures.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Brother: epilepsy"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Tobacco",
+      "Current smoker"
+    ],
+    [
+      "Alcohol",
+      "6-pack beer daily"
+    ],
+    [
+      "Medication adherence",
+      "Stopped taking seizure meds 2 weeks ago — felt fine"
+    ],
+    [
+      "Occupation",
+      "Construction worker"
     ]
-  ],
-  "meta": {
-    "caseId": "status-epilepticus",
-    "diagnosis": "Status Epilepticus",
-    "acuity": 1,
-    "presentation": "Seizure",
-    "category": "neurologic"
-  }
+  ]
 };

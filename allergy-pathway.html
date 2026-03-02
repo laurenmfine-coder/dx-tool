@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allergy & Immunology Pathway | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Comprehensive allergy and immunology clinical reasoning curriculum. Filter cases by condition, setting, and acuity.">
+<script src="js/rdx-difficulty.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#F5F7FA;--surface:#FFF;--blue:#2874A6;--blue-light:#EBF5FB;--blue-dark:#1B4F72;
+  --navy:#1A1A2E;--text:#1E293B;--text-secondary:#64748B;--text-muted:#94A3B8;
+  --border:#E2E8F0;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 25px rgba(0,0,0,.12);
+  /* Allergy category colors */
+  --c-anaphylaxis:#DC2626;--c-angioedema:#9333EA;--c-urticaria:#DB2777;
+  --c-food:#F59E0B;--c-fpies:#EA580C;--c-eoe:#D97706;
+  --c-eczema:#059669;--c-rhinitis:#0891B2;--c-insect:#854D0E;
+  --c-conjunctivitis:#2563EB;--c-drug:#7C3AED;--c-drugRx:#6D28D9;
+  --c-mast:#BE123C;--c-immuno:#0D9488;--c-contact:#65A30D;
+  --c-sjs:#B91C1C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.hero{background:linear-gradient(135deg,#1A1A2E 0%,#1B4F72 50%,#2874A6 100%);color:#fff;padding:48px 24px 40px;text-align:center}
+.hero h1{font-size:28px;font-weight:700;margin-bottom:6px;letter-spacing:-0.5px}
+.hero .sub{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:20px}
+.hero .stats{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.hero .stat{text-align:center}
+.hero .stat-num{font-size:28px;font-weight:700;color:#fff}
+.hero .stat-label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:0.5px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;margin-bottom:16px;transition:color .2s}
+.back-link:hover{color:#fff}
+
+.container{max-width:1100px;margin:0 auto;padding:24px}
+
+/* ── Filter Bar ── */
+.filter-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px;box-shadow:var(--shadow)}
+.filter-bar h3{font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--text-secondary);font-family:inherit;white-space:nowrap}
+.filter-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.filter-btn.active{border-color:var(--blue);background:var(--blue);color:#fff}
+.filter-btn .count{font-size:11px;opacity:.6;margin-left:4px}
+.filter-section{margin-bottom:10px}
+.filter-label{font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+
+/* ── Setting Tabs ── */
+.setting-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.setting-tab{padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text-secondary);font-family:inherit}
+.setting-tab:hover{border-color:var(--blue);transform:translateY(-1px)}
+.setting-tab.active{border-color:var(--blue);background:var(--blue);color:#fff;box-shadow:var(--shadow-md)}
+.setting-tab .emoji{margin-right:4px}
+
+/* ── Case Grid ── */
+.results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.results-count{font-size:14px;color:var(--text-secondary)}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.case-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;cursor:pointer;transition:all .2s;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.case-card:hover{border-color:var(--blue);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.case-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:2px 0 0 2px}
+.case-card[data-acuity="1"]::before{background:var(--c-anaphylaxis)}
+.case-card[data-acuity="2"]::before{background:#F59E0B}
+.case-card[data-acuity="3"]::before{background:#3B82F6}
+.case-card[data-acuity="4"]::before{background:#10B981}
+.case-dx{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
+.case-cc{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.case-meta{display:flex;gap:6px;flex-wrap:wrap}
+.case-tag{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
+.tag-setting{background:#EBF5FB;color:var(--blue)}
+.tag-acuity-1{background:#FEE2E2;color:#991B1B}
+.tag-acuity-2{background:#FEF3C7;color:#92400E}
+.tag-acuity-3{background:#DBEAFE;color:#1E40AF}
+.tag-acuity-4{background:#D1FAE5;color:#065F46}
+.tag-subtype{border:1px solid var(--border);color:var(--text-muted)}
+
+/* ── Category Pills ── */
+.subtype-btn{padding:6px 14px;border-radius:20px;border:2px solid transparent;background:#F1F5F9;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text-secondary);font-family:inherit;white-space:nowrap}
+.subtype-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.subtype-btn.active{color:#fff}
+.subtype-btn[data-sub="anaphylaxis"].active{background:var(--c-anaphylaxis);border-color:var(--c-anaphylaxis)}
+.subtype-btn[data-sub="angioedema"].active{background:var(--c-angioedema);border-color:var(--c-angioedema)}
+.subtype-btn[data-sub="urticaria"].active{background:var(--c-urticaria);border-color:var(--c-urticaria)}
+.subtype-btn[data-sub="food-allergy"].active{background:var(--c-food);border-color:var(--c-food)}
+.subtype-btn[data-sub="fpies"].active{background:var(--c-fpies);border-color:var(--c-fpies)}
+.subtype-btn[data-sub="eoe"].active{background:var(--c-eoe);border-color:var(--c-eoe)}
+.subtype-btn[data-sub="eczema"].active{background:var(--c-eczema);border-color:var(--c-eczema)}
+.subtype-btn[data-sub="allergic-rhinitis"].active{background:var(--c-rhinitis);border-color:var(--c-rhinitis)}
+.subtype-btn[data-sub="insect-allergy"].active{background:var(--c-insect);border-color:var(--c-insect)}
+.subtype-btn[data-sub="allergic-conjunctivitis"].active{background:var(--c-conjunctivitis);border-color:var(--c-conjunctivitis)}
+.subtype-btn[data-sub="drug-allergy"].active{background:var(--c-drug);border-color:var(--c-drug)}
+.subtype-btn[data-sub="drug-reaction"].active{background:var(--c-sjs);border-color:var(--c-sjs)}
+.subtype-btn[data-sub="mast-cell"].active{background:var(--c-mast);border-color:var(--c-mast)}
+.subtype-btn[data-sub="immunodeficiency"].active{background:var(--c-immuno);border-color:var(--c-immuno)}
+.subtype-btn[data-sub="contact-dermatitis"].active{background:var(--c-contact);border-color:var(--c-contact)}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state .emoji{font-size:48px;margin-bottom:12px}
+
+@media(max-width:640px){
+  .hero{padding:32px 16px 28px}
+  .hero h1{font-size:22px}
+  .container{padding:16px}
+  .case-grid{grid-template-columns:1fr}
+  .filter-row{gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="back-link" href="case-browser.html">← Platform Hub</a>
+  <h1>🧬 Allergy & Immunology Pathway</h1>
+  <p class="sub">Comprehensive A/I curriculum — from ED emergencies to outpatient clinic management</p>
+  <div class="stats" id="heroStats"></div>
+</div>
+
+<div class="container">
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <!-- Setting Filter -->
+    <div class="filter-section">
+      <div class="filter-label">Clinical Setting</div>
+      <div class="setting-tabs" id="settingTabs">
+        <button class="setting-tab active" data-setting="all" onclick="filterSetting('all')"><span class="emoji">🏥</span> All Settings</button>
+        <button class="setting-tab" data-setting="ed" onclick="filterSetting('ed')"><span class="emoji">🚨</span> Emergency</button>
+        <button class="setting-tab" data-setting="inpatient" onclick="filterSetting('inpatient')"><span class="emoji">🏨</span> Inpatient</button>
+        <button class="setting-tab" data-setting="consult" onclick="filterSetting('consult')"><span class="emoji">📋</span> Consult</button>
+        <button class="setting-tab" data-setting="clinic" onclick="filterSetting('clinic')"><span class="emoji">🩺</span> Clinic</button>
+      </div>
+    </div>
+
+    <!-- Condition Filter -->
+    <div class="filter-section">
+      <div class="filter-label">Condition</div>
+      <div class="filter-row" id="subtypeFilters"></div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results-header">
+    <span class="results-count" id="resultsCount"></span>
+  </div>
+  <div class="case-grid" id="caseGrid"></div>
+  <div class="empty-state" id="emptyState" style="display:none">
+    <div class="emoji">🔍</div>
+    <p>No cases match your filters. Try broadening your selection.</p>
+  </div>
+</div>
+
+<script src="js/rdx-nav.js"></script>
+<script>
+// ═══ CASE DATA — All allergy cases from manifest + new curriculum ═══
+const ALLERGY_CASES = [];
+
+// Parse from manifest
+if (window.EMR_MANIFEST) {
+  EMR_MANIFEST.forEach(function(group) {
+    group.cases.forEach(function(c) {
+      if (c.category === 'allergy') {
+        ALLERGY_CASES.push({
+          id: c.id,
+          dx: c.diagnosis,
+          acuity: c.acuity,
+          presentation: group.presentation,
+          setting: c.setting || 'ed',
+          allergySubtype: c.allergySubtype || guessSubtype(c.id, group.presentation),
+          cc: getCCForCase(c.id)
+        });
+      }
+    });
+  });
+}
+
+function guessSubtype(id, pres) {
+  if (/anaphylaxis|severe-allergic/.test(id)) return 'anaphylaxis';
+  if (/angioedema|hae|ace-/.test(id)) return 'angioedema';
+  if (/sjs|sjsten|dress|erythema-multiforme/.test(id)) return 'drug-reaction';
+  if (/urticaria/.test(id)) return 'urticaria';
+  if (pres === 'Allergic/Immunologic' && /angioedema/.test(id)) return 'angioedema';
+  if (pres === 'Allergic/Immunologic') return 'anaphylaxis';
+  if (pres === 'Skin/Drug Reactions') return 'drug-reaction';
+  return 'other';
+}
+
+function getCCForCase(id) {
+  const ccMap = {
+    'anaphylaxis':'Lip/tongue swelling, diffuse hives, throat tightness after shellfish',
+    'severe-allergic-reaction':'Diffuse urticaria, facial swelling after new antibiotic',
+    'ace-angioedema':'Lip and tongue swelling without urticaria or itching',
+    'hereditary-angioedema':'Recurrent facial and abdominal swelling since adolescence',
+    'allergic-angioedema':'Lip swelling and hives after taking ibuprofen',
+    'idiopathic-angioedema':'Third episode of lip/facial swelling — no trigger identified',
+    'acquired-c1esterase-inhibitor-deficiency':'New-onset angioedema with B-cell lymphoma',
+    'sjs-ten':'Progressive painful rash with skin sloughing after allopurinol',
+    'sjsten-overlap':'Widespread blistering rash with mucosal involvement',
+    'dress-syndrome':'Diffuse rash, fever, facial edema, lymphadenopathy after phenytoin',
+    'erythema-multiforme-major':'Target lesions on hands with oral mucosal erosions',
+    'asthma-exacerbation':'Acute wheezing and dyspnea, unable to complete sentences'
+  };
+  return ccMap[id] || '';
+}
+
+// Subtype definitions with display names
+const SUBTYPES = [
+  {id:'anaphylaxis',label:'Anaphylaxis',emoji:'⚠️'},
+  {id:'angioedema',label:'Angioedema',emoji:'💊'},
+  {id:'urticaria',label:'Urticaria',emoji:'🔴'},
+  {id:'food-allergy',label:'Food Allergy',emoji:'🥜'},
+  {id:'fpies',label:'FPIES',emoji:'👶'},
+  {id:'eoe',label:'EoE',emoji:'🫁'},
+  {id:'eczema',label:'Eczema/AD',emoji:'🧴'},
+  {id:'allergic-rhinitis',label:'Rhinitis',emoji:'🤧'},
+  {id:'insect-allergy',label:'Insect Allergy',emoji:'🐝'},
+  {id:'allergic-conjunctivitis',label:'Conjunctivitis',emoji:'👁️'},
+  {id:'drug-allergy',label:'Drug Allergy',emoji:'💉'},
+  {id:'drug-reaction',label:'Drug Reactions',emoji:'🩹'},
+  {id:'mast-cell',label:'Mast Cell',emoji:'🔬'},
+  {id:'immunodeficiency',label:'Immunodeficiency',emoji:'🛡️'},
+  {id:'contact-dermatitis',label:'Contact Derm',emoji:'✋'},
+];
+
+// ═══ STATE ═══
+let activeSetting = 'all';
+let activeSubtypes = new Set();
+
+// ═══ RENDER ═══
+function render() {
+  // Count by subtype for pills
+  const subtypeCounts = {};
+  ALLERGY_CASES.forEach(c => { subtypeCounts[c.allergySubtype] = (subtypeCounts[c.allergySubtype]||0)+1; });
+
+  // Render subtype filter pills
+  const sf = document.getElementById('subtypeFilters');
+  sf.innerHTML = SUBTYPES.filter(s => subtypeCounts[s.id]).map(s =>
+    `<button class="subtype-btn ${activeSubtypes.has(s.id)?'active':''}" data-sub="${s.id}" onclick="toggleSubtype('${s.id}')">${s.emoji} ${s.label} <span class="count">(${subtypeCounts[s.id]||0})</span></button>`
+  ).join('');
+
+  // Filter cases
+  const filtered = ALLERGY_CASES.filter(c => {
+    if (activeSetting !== 'all' && c.setting !== activeSetting) return false;
+    if (activeSubtypes.size > 0 && !activeSubtypes.has(c.allergySubtype)) return false;
+    return true;
+  });
+
+  // Sort: acuity 1 first, then alphabetical
+  filtered.sort((a,b) => a.acuity - b.acuity || a.dx.localeCompare(b.dx));
+
+  // Render case cards
+  const grid = document.getElementById('caseGrid');
+  const empty = document.getElementById('emptyState');
+  document.getElementById('resultsCount').textContent = filtered.length + ' case' + (filtered.length!==1?'s':'') + ' found';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  const settingLabels = {ed:'🚨 ED',inpatient:'🏨 Inpatient',consult:'📋 Consult',clinic:'🩺 Clinic'};
+  const acuityLabels = {1:'ESI-1 Critical',2:'ESI-2 Emergent',3:'ESI-3 Urgent',4:'ESI-4 Non-urgent'};
+  const diff = window.RDX_DIFFICULTY || 'standard';
+  
+  grid.innerHTML = filtered.map(c => {
+    const url = 'virtual-emr.html?case=' + c.id + '&setting=' + (c.setting||'ed') + (diff!=='standard'?'&difficulty='+diff:'');
+    const sub = SUBTYPES.find(s=>s.id===c.allergySubtype);
+    return `<a class="case-card" href="${url}" data-acuity="${c.acuity}">
+      <div class="case-dx">${c.dx}</div>
+      <div class="case-cc">${c.cc || c.presentation}</div>
+      <div class="case-meta">
+        <span class="case-tag tag-setting">${settingLabels[c.setting]||c.setting}</span>
+        <span class="case-tag tag-acuity-${c.acuity}">${acuityLabels[c.acuity]||'ESI-'+c.acuity}</span>
+        ${sub?`<span class="case-tag tag-subtype">${sub.emoji} ${sub.label}</span>`:''}
+      </div>
+    </a>`;
+  }).join('');
+
+  // Hero stats
+  const settings = {};
+  ALLERGY_CASES.forEach(c => { settings[c.setting] = (settings[c.setting]||0)+1; });
+  document.getElementById('heroStats').innerHTML = `
+    <div class="stat"><div class="stat-num">${ALLERGY_CASES.length}</div><div class="stat-label">A/I Cases</div></div>
+    <div class="stat"><div class="stat-num">${Object.keys(subtypeCounts).length}</div><div class="stat-label">Conditions</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Settings</div></div>
+    <div class="stat"><div class="stat-num">28</div><div class="stat-label">CRT Topics</div></div>
+  `;
+}
+
+function filterSetting(setting) {
+  activeSetting = setting;
+  document.querySelectorAll('.setting-tab').forEach(t => t.classList.toggle('active', t.dataset.setting === setting));
+  render();
+}
+
+function toggleSubtype(sub) {
+  if (activeSubtypes.has(sub)) activeSubtypes.delete(sub);
+  else activeSubtypes.add(sub);
+  render();
+}
+
+// Load manifest and render
+(function(){
+  if (!window.EMR_MANIFEST) {
+    var s = document.createElement('script');
+    s.src = 'emr-data/manifest.js';
+    s.onload = function() {
+      // Re-parse after manifest loads
+      EMR_MANIFEST.forEach(function(group) {
+        group.cases.forEach(function(c) {
+          if (c.category === 'allergy' && !ALLERGY_CASES.find(a=>a.id===c.id)) {
+            ALLERGY_CASES.push({
+              id:c.id, dx:c.diagnosis, acuity:c.acuity, presentation:group.presentation,
+              setting:c.setting||'ed', allergySubtype:c.allergySubtype||guessSubtype(c.id,group.presentation),
+              cc:getCCForCase(c.id)
+            });
+          }
+        });
+      });
+      render();
+    };
+    document.head.appendChild(s);
+  } else {
+    render();
+  }
+})();
+</script>
+</body>
+</html>

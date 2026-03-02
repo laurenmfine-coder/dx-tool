@@ -1,183 +1,300 @@
-// Virtual EMR Case: Acute Mesenteric Ischemia (SMA Embolism)
-// Variant: mesenteric-ischemia | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/mesenteric-ischemia.js — Auto-generated EMR case data for Mesenteric Ischemia */
 window.EMR_DATA = {
   "patient": {
-    "name": "Howard Goldstein",
-    "dob": "02/14/1948",
-    "age": 78,
-    "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Medicare",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "name": "Helen Goldstein",
+    "dob": "12/10/1956",
+    "age": "70",
+    "sex": "Female",
+    "pronouns": "she/her",
+    "mrn": "MRN-385606",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "howard@email.com",
+    "race": "Black/African American",
+    "phone": "(604) 271-7971",
+    "email": "helen.goldstein@email.com",
+    "address": "6768 Oak Ln, Plantation, FL 33345",
+    "insurance": "Humana Gold Plus",
+    "pcp": "Dr. Sarah Mitchell, DO",
+    "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Alejandro Goldstein",
+      "phone": "(449) 257-6329",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-23574"
+    "chiefComplaint": "Severe abdominal pain out of proportion to exam",
+    "diagnosis": "Mesenteric Ischemia"
   },
   "problems": [
     {
-      "problem": "Acute Mesenteric Ischemia (SMA Embolism)",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Atrial Fibrillation",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Heart Failure",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Peripheral Vascular Disease",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-4",
+      "description": "History of CVA",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Warfarin",
+      "dose": "5mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, DO"
+    },
+    {
+      "id": "med-2",
+      "name": "Digoxin",
+      "dose": "0.125mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Robert Hughes, DO"
+    },
+    {
+      "id": "med-3",
+      "name": "Furosemide",
+      "dose": "40mg",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. David Kim, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Sulfa",
+      "reaction": "Anaphylaxis",
+      "severity": "Severe",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/01/2026",
+      "time": "07:45",
+      "bp": "108/58",
+      "hr": "118",
+      "rr": "26",
+      "temp": "37.8°C",
+      "spo2": "94%",
+      "pain": "10/10",
+      "bmi": "31",
+      "weight": "82 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Acute Mesenteric Ischemia (SMA Embolism)",
-      "hpi": "78M with AFib and CHF presenting with sudden severe periumbilical pain 'out of proportion to exam' \u2014 writhing in pain but abdomen initially soft and benign. Classic 'pain out of proportion.' Progressed over 4 hours to peritoneal signs. Lactate 6.8. CT angio: SMA occlusion with bowel wall thickening and pneumatosis of small bowel. EMERGENT surgery for embolectomy \u00b1 bowel resection. Heparin drip. Broad-spectrum antibiotics.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Acute Mesenteric Ischemia (SMA Embolism) \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Severe abdominal pain out of proportion to exam",
+      "hpi": "Helen Goldstein is a 70-year-old female presenting with severe abdominal pain out of proportion to exam. Past medical history includes Atrial Fibrillation, Heart Failure, Peripheral Vascular Disease, History of CVA. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Mesenteric Ischemia — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-747741",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
+          "results": [
+            {
+              "test": "WBC",
+              "value": "22.6",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "14",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": "L"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
               "test": "Lactate",
-              "value": "6.8",
+              "value": "7.2",
               "unit": "mmol/L",
               "range": "0.5-2.0",
               "flag": "H"
             },
             {
-              "test": "WBC",
-              "value": "22.4",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "LDH",
-              "value": "482",
-              "unit": "U/L",
-              "range": "140-280",
-              "flag": "H"
-            },
-            {
-              "test": "D-Dimer",
-              "value": "4200",
-              "unit": "ng/mL",
-              "range": "<500",
-              "flag": "H"
+              "test": "Inr",
+              "value": "1.4",
+              "unit": "",
+              "range": "2.0-3.0 (therapeutic)",
+              "flag": ""
             }
           ]
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/01/2026",
+      "study": "CTA Abdomen",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-882044",
+      "clinical": "Severe abdominal pain out of proportion to exam",
+      "technique": "Standard protocol",
+      "findings": "Acute thrombus in superior mesenteric artery (SMA) with decreased enhancement of jejunal and ileal loops. Pneumatosis intestinalis in several jejunal loops. Portal venous gas.",
+      "impression": "Acute SMA occlusion with bowel ischemia/necrosis. Emergent vascular surgery.",
+      "dictated": "03/01/2026 08:30",
+      "verified": "03/01/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Non-contributory"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Warfarin compliance",
+      "Subtherapeutic INR — missed several doses"
+    ],
+    [
+      "Living",
+      "Nursing home resident"
     ]
-  ],
-  "meta": {
-    "caseId": "mesenteric-ischemia",
-    "diagnosis": "Acute Mesenteric Ischemia (SMA Embolism)",
-    "acuity": 1,
-    "presentation": "Vascular Emergency",
-    "category": "vascular"
-  }
+  ]
 };

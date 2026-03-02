@@ -12,9 +12,8 @@
   else if (/\/cases\/|training|adventure|consult-callback|\/CoachDx\//i.test(path)) sec = 'practice';
   else if (/hospital-3d|ed-3d|night-float|admissions|simroomdx|virtual-hospital/i.test(path)) sec = 'simulate';
   else if (/\/tools\/|\/ecg\//i.test(path)) sec = 'tools';
-  var saved = localStorage.getItem('rdx-theme') || 'light';
-  if (saved !== 'light' && saved !== 'dark') saved = 'light';
-  document.documentElement.setAttribute('data-theme', saved);
+  var saved = 'light';
+  document.documentElement.setAttribute('data-theme', 'light');
 
   function di(href, icon, title, desc) {
     return '<a href="'+href+'" class="rdx-dd-item"><span class="rdx-dd-icon">'+icon+'</span><div><strong>'+title+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</div></a>';
@@ -28,12 +27,13 @@
     '<button id="rdx-hamburger" aria-label="Menu">\u2630</button>'+
     '<div id="rdx-nav-menu">'+
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
+      '<a href="'+R+'case-browser.html" class="rdx-nav-top rdx-hub-link'+((/case-browser/i.test(path))?' active':'')+'">Platform Hub</a>'+
       dd('Learn', sec==='learn'||sec==='raddx'||sec==='premed',
         di(R+'study-mode.html','','Study Mode','316 clinical topics across all specialties')+
-                        di(R+'pathway.html?id=allergy-immunology','','A/I Pathway','Allergy & Immunology curriculum')
+                        di(R+'allergy-pathway.html','','A/I Pathway','Allergy & Immunology — all cases & settings')
       )+
       dd('Practice', sec==='practice',
-        di(R+'case-browser.html','','Case Library','256 interactive cases')+
+        di(R+'case-browser.html','','Platform Hub','Choose setting, pick your tool')+
         di(R+'crt-hub.html','','Clinical Reasoning Trainer','Step-by-step CRTs')+
         di(R+'CoachDx/index.html','','CoachDx','AI clinical coaching')+
         di(R+'consult-callback.html','','Consult Callback','Practice consult calls')
@@ -60,34 +60,35 @@
   var style = document.createElement('style');
   style.textContent =
     '#rdx-unified-nav{background:var(--rdx-bg-nav,#fff);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;position:sticky;top:0;z-index:9000;font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.04)}'+
-    '[data-theme="dark"] #rdx-unified-nav{background:var(--rdx-bg-nav,#1e293b);border-color:var(--rdx-border,#334155);box-shadow:0 1px 3px rgba(0,0,0,.3)}'+
+    ''+
     '.rdx-logo-link{text-decoration:none;flex-shrink:0;margin-right:24px}'+
     '.rdx-logo-text{font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:22px;font-weight:700;color:#2f3640;letter-spacing:-.5px}'+
     '.rdx-logo-dx{border-bottom:2.5px solid #2874a6;padding-bottom:1px}'+
-    '[data-theme="dark"] .rdx-logo-text{color:#e2e8f0}[data-theme="dark"] .rdx-logo-dx{border-color:#5ba3cc}'+
+    ''+
     '#rdx-nav-menu{display:flex;align-items:center;gap:2px;margin-left:auto}'+
     '.rdx-nav-top{background:none;border:none;font-family:inherit;font-size:14px;font-weight:500;color:var(--rdx-text-muted,#64748b);padding:8px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .15s;display:inline-flex;align-items:center}'+
     '.rdx-nav-top:hover{color:#1f5f8b;background:#f0f7fc}.rdx-nav-top.active{color:#1f5f8b;font-weight:600;background:#f0f7fc}'+
+    '.rdx-hub-link{color:#2874a6;font-weight:600}.rdx-hub-link:hover{background:#ebf5fb}'+
     'a.rdx-nav-top{text-decoration:none}'+
-    '[data-theme="dark"] .rdx-nav-top:hover,[data-theme="dark"] .rdx-nav-top.active{color:#7cb8d9;background:rgba(40,116,166,.12)}'+
+    ''+
     '.rdx-dd{position:relative}'+
     '.rdx-dd-panel{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.1);padding:8px;min-width:265px;z-index:9100;animation:rdxDdIn .15s ease}'+
     '.rdx-dd:hover .rdx-dd-panel,.rdx-dd-panel:hover{display:block}'+
-    '[data-theme="dark"] .rdx-dd-panel{background:var(--rdx-bg-card,#1e293b);border-color:var(--rdx-border,#334155);box-shadow:0 8px 24px rgba(0,0,0,.4)}'+
+    ''+
     '@keyframes rdxDdIn{from{opacity:0;transform:translateX(-50%) translateY(-4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}'+
     '.rdx-dd-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);transition:background .12s}'+
-    '.rdx-dd-item:hover{background:#f0f7fc}[data-theme="dark"] .rdx-dd-item:hover{background:rgba(40,116,166,.1)}'+
+    '.rdx-dd-item:hover{background:#f0f7fc}'+
     '.rdx-dd-icon:empty{display:none}.rdx-dd-icon{font-size:18px;line-height:1;flex-shrink:0;margin-top:2px}'+
     '.rdx-dd-item strong{font-size:13px;font-weight:600;display:block;color:var(--rdx-text,#1e293b)}'+
     '.rdx-dd-item small{font-size:11px;color:var(--rdx-text-muted,#64748b);display:block;margin-top:1px}'+
-    '[data-theme="dark"] .rdx-dd-item strong{color:var(--rdx-text,#e2e8f0)}'+
+    ''+
     '.rdx-nav-right{display:flex;align-items:center;gap:6px;margin-left:12px;padding-left:12px;border-left:1px solid var(--rdx-border,#e2e8f0)}'+
     '.rdx-nav-btn{background:none;border:none;border-radius:8px;padding:6px 8px;cursor:pointer;font-size:15px;line-height:1;color:var(--rdx-text-muted,#64748b);transition:all .15s}'+
     '.rdx-nav-btn:hover{background:#f0f7fc}'+
     '.rdx-logout{font-size:12px;font-family:inherit;padding:6px 12px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px}'+
     '.rdx-logout:hover{border-color:#2874a6;color:#1f5f8b}'+
-    '[data-theme="dark"] .rdx-nav-btn:hover{background:rgba(255,255,255,.08)}'+
-    '[data-theme="dark"] .rdx-nav-right{border-color:var(--rdx-border,#334155)}'+
+    ''+
+    ''+
     '#rdx-hamburger{display:none;background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:var(--rdx-text-muted,#475569);margin-left:auto}'+
     '#rdx-about-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}'+
     '#rdx-about-overlay.open{display:flex}'+
@@ -142,10 +143,10 @@
         btn.addEventListener('click', function(e){ e.preventDefault(); var p=this.parentElement; p.classList.toggle('open'); this.setAttribute('aria-expanded',p.classList.contains('open')?'true':'false'); });
       });
     }
-    document.getElementById('rdx-theme-toggle').addEventListener('click', function(){
-      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('rdx-theme', next);
+
+
+
+
       this.textContent = next === 'dark' ? '' : '';
     });
     document.getElementById('rdx-logout-btn').addEventListener('click', function(){
@@ -154,7 +155,7 @@
     });
     // About modal
     var ov = document.createElement('div'); ov.id = 'rdx-about-overlay';
-    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">316</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">256</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">79</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">28</div><div class="lbl">Specialties</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 Pathophysiology modules<br><strong>CoachDx</strong> \u2014 AI clinical coaching<br><strong>RadDx</strong> \u2014 Imaging reasoning<br><strong>Clerkship Hub</strong> \u2014 ED Board, Night Float, SimRoomDx</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A Premed</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Shelf Exams</span><span class="rdx-about-pill">\uD83C\uDFAF Step 2 / COMLEX</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:lfine@nova.edu" style="color:#2874a6">lfine@nova.edu</a></p></div></div>';
+    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">316</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">256</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">79</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">28</div><div class="lbl">Specialties</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 Pathophysiology modules<br><strong>CoachDx</strong> \u2014 AI clinical coaching<br><strong>RadDx</strong> \u2014 Imaging reasoning<br><strong>Clerkship Hub</strong> \u2014 ED Board, Night Float, SimRoomDx</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A Premed</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Shelf Exams</span><span class="rdx-about-pill">\uD83C\uDFAF Step 2 / COMLEX</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:reasondx@laurenmfine.com" style="color:#2874a6">reasondx@laurenmfine.com</a></p></div></div>';
     document.body.appendChild(ov);
     ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('open'); });
     document.getElementById('rdx-about-x').addEventListener('click', function(){ ov.classList.remove('open'); });
