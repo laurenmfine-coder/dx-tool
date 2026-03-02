@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta name="theme-color" content="#1f5f8b">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading Pathway... | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="Specialty clinical reasoning pathway on ReasonDx.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<style>
+:root {
+  --pw-color: #7C3AED;
+  --pw-dark: #5B21B6;
+  --pw-light: #F5F3FF;
+  --pw-bg: var(--rdx-bg, #f0f4f8);
+  --pw-card: var(--rdx-bg-card, #fff);
+  --pw-text: var(--rdx-text, #1e293b);
+  --pw-muted: var(--rdx-text-muted, #64748b);
+  --pw-border: var(--rdx-border, #e2e8f0);
+  --font: 'IBM Plex Sans', -apple-system, sans-serif;
+}
+[data-theme="dark"] {
+  --pw-light: rgba(124,58,237,.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--pw-bg); color: var(--pw-text); min-height: 100vh; }
+
+/* ─── Hero ─── */
+.pw-hero {
+  background: linear-gradient(135deg, var(--pw-dark), var(--pw-color));
+  padding: 80px 24px 48px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.pw-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255,255,255,.08) 0%, transparent 60%);
+}
+.pw-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+.pw-hero-icon { font-size: 48px; margin-bottom: 12px; }
+.pw-hero h1 { font-size: 36px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 8px; line-height: 1.2; }
+.pw-hero-sub { font-size: 16px; opacity: .85; line-height: 1.6; max-width: 600px; margin-bottom: 24px; }
+
+/* ─── Progress Bar (hero) ─── */
+.pw-progress-wrap { display: flex; align-items: center; gap: 12px; }
+.pw-progress-bar { flex: 1; height: 8px; background: rgba(255,255,255,.2); border-radius: 4px; overflow: hidden; max-width: 300px; }
+.pw-progress-fill { height: 100%; background: #fff; border-radius: 4px; transition: width .5s ease; }
+.pw-progress-text { font-size: 13px; font-weight: 700; opacity: .9; }
+
+/* ─── Stats strip ─── */
+.pw-stats { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+.pw-stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 10px; padding: 10px 16px; text-align: center; min-width: 100px; }
+.pw-stat-num { font-size: 22px; font-weight: 800; }
+.pw-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; margin-top: 2px; }
+
+/* ─── Level filter ─── */
+.pw-filter {
+  max-width: 900px; margin: -20px auto 0; padding: 0 24px; position: relative; z-index: 2;
+}
+.pw-filter-bar {
+  background: var(--pw-card); border: 1px solid var(--pw-border); border-radius: 14px;
+  padding: 12px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.pw-filter-label { font-size: 12px; font-weight: 700; color: var(--pw-muted); text-transform: uppercase; letter-spacing: .08em; margin-right: 4px; }
+.pw-filter-btn {
+  padding: 6px 14px; border-radius: 8px; border: 1px solid var(--pw-border);
+  font-size: 12px; font-weight: 600; font-family: var(--font); cursor: pointer;
+  background: transparent; color: var(--pw-text); transition: all .15s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.pw-filter-btn:hover { border-color: var(--pw-color); color: var(--pw-color); }
+.pw-filter-btn.active { background: var(--pw-light); border-color: var(--pw-color); color: var(--pw-color); }
+.pw-filter-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.pw-reset-btn {
+  padding: 6px 12px; border-radius: 8px; border: 1px solid transparent;
+  font-size: 11px; font-weight: 600; font-family: var(--font); cursor: pointer;
+  background: transparent; color: var(--pw-muted); transition: all .15s;
+}
+.pw-reset-btn:hover { color: #DC2626; border-color: #FCA5A5; background: #FEF2F2; }
+
+/* ─── Modules ─── */
+.pw-content { max-width: 900px; margin: 32px auto; padding: 0 24px 80px; }
+
+.pw-module {
+  margin-bottom: 32px;
+  border: 1px solid var(--pw-border);
+  border-radius: 16px;
+  background: var(--pw-card);
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.pw-module:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+
+.pw-module-header {
+  padding: 20px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  user-select: none;
+}
+.pw-module-icon { font-size: 28px; flex-shrink: 0; }
+.pw-module-info { flex: 1; }
+.pw-module-title { font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+.pw-module-sub { font-size: 13px; color: var(--pw-muted); }
+.pw-module-progress {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+.pw-module-ring {
+  width: 36px; height: 36px; position: relative;
+}
+.pw-module-ring svg { transform: rotate(-90deg); }
+.pw-module-ring-text {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--pw-color);
+}
+.pw-module-chevron {
+  font-size: 18px; color: var(--pw-muted); transition: transform .2s; flex-shrink: 0;
+}
+.pw-module.open .pw-module-chevron { transform: rotate(90deg); }
+
+/* ─── Activities ─── */
+.pw-activities {
+  max-height: 0; overflow: hidden; transition: max-height .4s ease;
+  border-top: 1px solid var(--pw-border);
+}
+.pw-module.open .pw-activities { max-height: 3000px; }
+
+.pw-module-desc {
+  padding: 16px 24px;
+  font-size: 13px; color: var(--pw-muted); line-height: 1.7;
+  border-bottom: 1px solid var(--pw-border);
+  background: var(--pw-light);
+}
+
+.pw-activity {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--pw-border);
+  transition: background .15s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.pw-activity:last-child { border-bottom: none; }
+.pw-activity:hover { background: var(--pw-light); }
+.pw-activity.completed { opacity: .7; }
+
+.pw-check {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--pw-border);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; transition: all .2s;
+}
+.pw-activity.completed .pw-check {
+  background: var(--pw-color); border-color: var(--pw-color); color: #fff;
+}
+.pw-activity-info { flex: 1; min-width: 0; }
+.pw-activity-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.pw-activity-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.pw-activity-type {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  padding: 2px 8px; border-radius: 4px; background: var(--pw-light); color: var(--pw-color);
+}
+.pw-activity-type[data-type="case"] { background: #FDEDEC; color: #DC2626; }
+.pw-activity-type[data-type="crt"] { background: #EBF5FB; color: #2874A6; }
+.pw-activity-type[data-type="ai-trainer"] { background: #FCE7F3; color: #EC4899; }
+.pw-activity-type[data-type="simulation"] { background: #F5F3FF; color: #7C3AED; }
+.pw-activity-type[data-type="interactive"] { background: #FEF9E7; color: #D97706; }
+
+.pw-activity-level {
+  font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+}
+.pw-activity-level[data-level="student"] { background: #E8F8F0; color: #059669; }
+.pw-activity-level[data-level="resident"] { background: #EBF5FB; color: #2874A6; }
+.pw-activity-level[data-level="fellow"] { background: #F5F3FF; color: #7C3AED; }
+
+.pw-activity-duration { font-size: 11px; color: var(--pw-muted); }
+.pw-activity-desc { font-size: 12px; color: var(--pw-muted); margin-top: 4px; line-height: 1.5; }
+
+.pw-activity-patient {
+  font-size: 11px; color: var(--pw-color); font-weight: 600; margin-top: 2px;
+}
+
+.pw-activity-arrow { font-size: 16px; color: var(--pw-muted); flex-shrink: 0; }
+
+/* ─── Empty state ─── */
+.pw-empty { text-align: center; padding: 60px 24px; color: var(--pw-muted); }
+.pw-empty-icon { font-size: 48px; margin-bottom: 12px; }
+.pw-empty h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--pw-text); }
+
+/* ─── Loading ─── */
+.pw-loading { text-align: center; padding: 100px 24px; color: var(--pw-muted); }
+.pw-loading-spinner { width: 40px; height: 40px; border: 3px solid var(--pw-border); border-top-color: var(--pw-color); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .pw-hero h1 { font-size: 28px; }
+  .pw-stats { gap: 12px; }
+  .pw-stat { min-width: 80px; padding: 8px 12px; }
+  .pw-filter-bar { flex-direction: column; align-items: flex-start; }
+  .pw-filter-right { margin-left: 0; margin-top: 8px; }
+  .pw-module-header { padding: 16px; gap: 12px; }
+  .pw-activity { padding: 12px 16px; }
+  .pw-activity-desc { display: none; }
+}
+
+/* ─── Print ─── */
+@media print {
+  .pw-hero { background: #fff !important; color: #000 !important; padding: 20px 0; }
+  .pw-filter { display: none; }
+  .pw-module { break-inside: avoid; }
+  .pw-activities { max-height: none !important; }
+  .pw-check { border-color: #000; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<script src="auth/auth-guard.js"></script>
+
+<div id="app">
+  <div class="pw-loading">
+    <div class="pw-loading-spinner"></div>
+    <p>Loading pathway...</p>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── Parse pathway ID from URL ───
+  var params = new URLSearchParams(window.location.search);
+  var pathwayId = params.get('id') || 'allergy-immunology';
+  var jsonUrl = 'pathways/' + pathwayId + '.json';
+
+  // ─── State ───
+  var data = null;
+  var completed = {};
+  var activeLevel = 'all'; // all | student | resident | fellow
+  var storageKey = 'rdx-pathway-' + pathwayId;
+
+  function loadProgress() {
+    try { completed = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch(e) { completed = {}; }
+  }
+  function saveProgress() {
+    try { localStorage.setItem(storageKey, JSON.stringify(completed)); } catch(e) {}
+  }
+  function toggleComplete(activityId) {
+    if (completed[activityId]) delete completed[activityId];
+    else completed[activityId] = Date.now();
+    saveProgress();
+    render();
+  }
+  function resetProgress() {
+    if (!confirm('Reset all progress for this pathway? This cannot be undone.')) return;
+    completed = {};
+    saveProgress();
+    render();
+  }
+
+  // ─── Filtering ───
+  function getVisibleActivities(module) {
+    return module.activities.filter(function(a) {
+      return activeLevel === 'all' || a.level === activeLevel;
+    });
+  }
+
+  // ─── Stats ───
+  function getStats() {
+    var total = 0, done = 0, totalMin = 0, doneMin = 0;
+    data.modules.forEach(function(m) {
+      m.activities.forEach(function(a) {
+        total++;
+        totalMin += a.duration || 0;
+        if (completed[a.id]) { done++; doneMin += a.duration || 0; }
+      });
+    });
+    return { total: total, done: done, totalMin: totalMin, doneMin: doneMin, pct: total ? Math.round(done / total * 100) : 0 };
+  }
+
+  function getModuleStats(module) {
+    var vis = getVisibleActivities(module);
+    var done = vis.filter(function(a) { return completed[a.id]; }).length;
+    return { total: vis.length, done: done, pct: vis.length ? Math.round(done / vis.length * 100) : 0 };
+  }
+
+  // ─── Ring SVG ───
+  function ring(pct) {
+    var r = 14, c = 2 * Math.PI * r, off = c - (pct / 100) * c;
+    return '<svg width="36" height="36" viewBox="0 0 36 36">' +
+      '<circle cx="18" cy="18" r="' + r + '" fill="none" stroke="var(--pw-border)" stroke-width="3"/>' +
+      '<circle cx="18" cy="18" r="' + r + '" fill="none" stroke="var(--pw-color)" stroke-width="3" stroke-dasharray="' + c + '" stroke-dashoffset="' + off + '" stroke-linecap="round"/>' +
+      '</svg>';
+  }
+
+  // ─── Render ───
+  function render() {
+    if (!data) return;
+    var s = getStats();
+    var levelInfo = data.levels || {};
+
+    var html = '';
+
+    // Hero
+    html += '<div class="pw-hero" style="background:linear-gradient(135deg,' + (data.colorDark || '#5B21B6') + ',' + (data.color || '#7C3AED') + ')">';
+    html += '<div class="pw-hero-inner">';
+    html += '<div class="pw-hero-icon">' + (data.icon || '📚') + '</div>';
+    html += '<h1>' + esc(data.title) + ' Pathway</h1>';
+    html += '<p class="pw-hero-sub">' + esc(data.subtitle || data.description) + '</p>';
+    html += '<div class="pw-progress-wrap">';
+    html += '<div class="pw-progress-bar"><div class="pw-progress-fill" style="width:' + s.pct + '%"></div></div>';
+    html += '<div class="pw-progress-text">' + s.pct + '% Complete (' + s.done + '/' + s.total + ')</div>';
+    html += '</div>';
+    html += '<div class="pw-stats">';
+    html += '<div class="pw-stat"><div class="pw-stat-num">' + data.modules.length + '</div><div class="pw-stat-label">Modules</div></div>';
+    html += '<div class="pw-stat"><div class="pw-stat-num">' + s.total + '</div><div class="pw-stat-label">Activities</div></div>';
+    html += '<div class="pw-stat"><div class="pw-stat-num">~' + Math.round(s.totalMin / 60) + 'h</div><div class="pw-stat-label">Total Time</div></div>';
+    html += '<div class="pw-stat"><div class="pw-stat-num">' + s.done + '</div><div class="pw-stat-label">Completed</div></div>';
+    html += '</div>';
+    html += '</div></div>';
+
+    // Filter bar
+    html += '<div class="pw-filter"><div class="pw-filter-bar">';
+    html += '<span class="pw-filter-label">Level</span>';
+    html += '<button class="pw-filter-btn' + (activeLevel === 'all' ? ' active' : '') + '" onclick="PW.setLevel(\'all\')">All Levels</button>';
+    Object.keys(levelInfo).forEach(function(k) {
+      var l = levelInfo[k];
+      html += '<button class="pw-filter-btn' + (activeLevel === k ? ' active' : '') + '" onclick="PW.setLevel(\'' + k + '\')">' + (l.icon || '') + ' ' + esc(l.label) + '</button>';
+    });
+    html += '<div class="pw-filter-right">';
+    html += '<button class="pw-reset-btn" onclick="PW.reset()">↺ Reset Progress</button>';
+    html += '</div></div></div>';
+
+    // Modules
+    html += '<div class="pw-content" id="main-content">';
+
+    data.modules.forEach(function(m, mi) {
+      var vis = getVisibleActivities(m);
+      if (vis.length === 0) return;
+      var ms = getModuleStats(m);
+
+      html += '<div class="pw-module' + (mi === 0 ? ' open' : '') + '" id="mod-' + m.id + '">';
+      html += '<div class="pw-module-header" onclick="PW.toggle(this)">';
+      html += '<div class="pw-module-icon">' + (m.icon || '📖') + '</div>';
+      html += '<div class="pw-module-info">';
+      html += '<div class="pw-module-title">' + esc(m.title) + '</div>';
+      html += '<div class="pw-module-sub">' + vis.length + ' activities · ' + ms.done + ' completed</div>';
+      html += '</div>';
+      html += '<div class="pw-module-progress"><div class="pw-module-ring">' + ring(ms.pct) + '<div class="pw-module-ring-text">' + ms.pct + '%</div></div></div>';
+      html += '<div class="pw-module-chevron">›</div>';
+      html += '</div>';
+
+      html += '<div class="pw-activities">';
+      html += '<div class="pw-module-desc">' + esc(m.description || '') + '</div>';
+
+      vis.forEach(function(a) {
+        var isDone = !!completed[a.id];
+        html += '<a class="pw-activity' + (isDone ? ' completed' : '') + '" href="' + esc(a.url) + '" onclick="PW.markAndGo(event,\'' + a.id + '\',this.href)">';
+        html += '<div class="pw-check" onclick="event.preventDefault();event.stopPropagation();PW.toggle_complete(\'' + a.id + '\')">' + (isDone ? '✓' : '') + '</div>';
+        html += '<div class="pw-activity-info">';
+        html += '<div class="pw-activity-title">' + esc(a.title) + '</div>';
+        html += '<div class="pw-activity-meta">';
+        html += '<span class="pw-activity-type" data-type="' + a.type + '">' + a.type.replace('-', ' ') + '</span>';
+        html += '<span class="pw-activity-level" data-level="' + a.level + '">' + (levelInfo[a.level] ? levelInfo[a.level].icon + ' ' + levelInfo[a.level].label : a.level) + '</span>';
+        if (a.duration) html += '<span class="pw-activity-duration">⏱ ' + a.duration + ' min</span>';
+        html += '</div>';
+        if (a.description) html += '<div class="pw-activity-desc">' + esc(a.description) + '</div>';
+        if (a.patient) html += '<div class="pw-activity-patient">🏥 ' + esc(a.patient) + '</div>';
+        html += '</div>';
+        html += '<div class="pw-activity-arrow">→</div>';
+        html += '</a>';
+      });
+
+      html += '</div></div>';
+    });
+
+    html += '</div>';
+
+    document.getElementById('app').innerHTML = html;
+    document.title = data.title + ' Pathway | ReasonDx';
+
+    // Set CSS color from pathway
+    document.documentElement.style.setProperty('--pw-color', data.color || '#7C3AED');
+    document.documentElement.style.setProperty('--pw-dark', data.colorDark || '#5B21B6');
+    document.documentElement.style.setProperty('--pw-light', data.colorLight || '#F5F3FF');
+  }
+
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  // ─── Public API ───
+  window.PW = {
+    toggle: function(el) { el.parentElement.classList.toggle('open'); },
+    setLevel: function(l) { activeLevel = l; render(); },
+    toggle_complete: function(id) { toggleComplete(id); },
+    markAndGo: function(e, id, url) {
+      if (!completed[id]) { completed[id] = Date.now(); saveProgress(); }
+      // Let the link navigate naturally
+    },
+    reset: resetProgress
+  };
+
+  // ─── Load ───
+  loadProgress();
+  fetch(jsonUrl)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Pathway not found');
+      return r.json();
+    })
+    .then(function(d) {
+      data = d;
+      render();
+    })
+    .catch(function(err) {
+      document.getElementById('app').innerHTML = '<div class="pw-empty"><div class="pw-empty-icon">📁</div><h3>Pathway Not Found</h3><p>Could not load "' + esc(pathwayId) + '". Check the URL and try again.</p><p style="margin-top:16px"><a href="index.html" style="color:var(--pw-color);font-weight:600">← Back to ReasonDx</a></p></div>';
+    });
+
+})();
+</script>
+
+<script src="js/rdx-nav.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});</script>
+</body>
+</html>
