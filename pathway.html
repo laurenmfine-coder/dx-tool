@@ -322,7 +322,7 @@ body { font-family: var(--font); background: var(--pw-bg); color: var(--pw-text)
     // Hero
     html += '<div class="pw-hero" style="background:linear-gradient(135deg,' + (data.colorDark || '#5B21B6') + ',' + (data.color || '#7C3AED') + ')">';
     html += '<div class="pw-hero-inner">';
-    html += '<div class="pw-hero-icon">' + (data.icon || '📚') + '</div>';
+    var heroIcon = data.icon ? '<div class="pw-hero-icon">' + esc(data.icon) + '</div>' : ''; html += heroIcon;
     html += '<h1>' + esc(data.title) + ' Pathway</h1>';
     html += '<p class="pw-hero-sub">' + esc(data.subtitle || data.description) + '</p>';
     html += '<div class="pw-progress-wrap">';
@@ -359,7 +359,7 @@ body { font-family: var(--font); background: var(--pw-bg); color: var(--pw-text)
 
       html += '<div class="pw-module' + (mi === 0 ? ' open' : '') + '" id="mod-' + m.id + '">';
       html += '<div class="pw-module-header" onclick="PW.toggle(this)">';
-      html += '<div class="pw-module-icon">' + (m.icon || '📖') + '</div>';
+      var mIcon = m.icon ? '<div class="pw-module-icon">' + esc(m.icon) + '</div>' : ''; html += mIcon;
       html += '<div class="pw-module-info">';
       html += '<div class="pw-module-title">' + esc(m.title) + '</div>';
       html += '<div class="pw-module-sub">' + vis.length + ' activities · ' + ms.done + ' completed</div>';
@@ -379,11 +379,11 @@ body { font-family: var(--font); background: var(--pw-bg); color: var(--pw-text)
         html += '<div class="pw-activity-title">' + esc(a.title) + '</div>';
         html += '<div class="pw-activity-meta">';
         html += '<span class="pw-activity-type" data-type="' + a.type + '">' + a.type.replace('-', ' ') + '</span>';
-        html += '<span class="pw-activity-level" data-level="' + a.level + '">' + (levelInfo[a.level] ? levelInfo[a.level].icon + ' ' + levelInfo[a.level].label : a.level) + '</span>';
-        if (a.duration) html += '<span class="pw-activity-duration">⏱ ' + a.duration + ' min</span>';
+        html += '<span class="pw-activity-level" data-level="' + a.level + '">' + (levelInfo[a.level] ? esc(levelInfo[a.level].label) : a.level) + '</span>';
+        if (a.duration) html += '<span class="pw-activity-duration">' + a.duration + ' min</span>';
         html += '</div>';
         if (a.description) html += '<div class="pw-activity-desc">' + esc(a.description) + '</div>';
-        if (a.patient) html += '<div class="pw-activity-patient">🏥 ' + esc(a.patient) + '</div>';
+        if (a.patient) html += '<div class="pw-activity-patient">' + esc(a.patient) + '</div>';
         html += '</div>';
         html += '<div class="pw-activity-arrow">→</div>';
         html += '</a>';
@@ -429,7 +429,7 @@ body { font-family: var(--font); background: var(--pw-bg); color: var(--pw-text)
       render();
     })
     .catch(function(err) {
-      document.getElementById('app').innerHTML = '<div class="pw-empty"><div class="pw-empty-icon">📁</div><h3>Pathway Not Found</h3><p>Could not load "' + esc(pathwayId) + '". Check the URL and try again.</p><p style="margin-top:16px"><a href="index.html" style="color:var(--pw-color);font-weight:600">← Back to ReasonDx</a></p></div>';
+      document.getElementById('app').innerHTML = '<div class="pw-empty"><div class="pw-empty-icon"></div><h3>Pathway Not Found</h3><p>Could not load "' + esc(pathwayId) + '". Check the URL and try again.</p><p style="margin-top:16px"><a href="index.html" style="color:var(--pw-color);font-weight:600">← Back to ReasonDx</a></p></div>';
     });
 
 })();

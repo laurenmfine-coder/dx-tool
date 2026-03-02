@@ -30,7 +30,7 @@
   };
 
   // Subdirectory pages
-  if (path.includes('/topics/')) MAP[filename] = { label: 'Topics Library', section: 'Learn' };
+  if (path.includes('/topics/')) MAP[filename] = { label: 'Study Mode', section: 'Learn' };
   if (path.includes('/tools/')) MAP[filename] = { label: document.title.split('|')[0].trim(), section: 'Tools' };
   if (path.includes('/CoachDx/')) MAP[filename] = { label: document.title.split('|')[0].split('—')[0].trim(), section: 'Practice' };
   if (path.includes('/ecg/')) MAP[filename] = { label: 'ECG Practice', section: 'Tools' };

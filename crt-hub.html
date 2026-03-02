@@ -64,7 +64,7 @@
         .search-bar { position: relative; margin-bottom: 10px; }
         .search-bar input { width: 100%; padding: 10px 16px 10px 38px; border-radius: 10px; border: 2px solid var(--border); font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s; }
         .search-bar input:focus { border-color: var(--brand); }
-        .search-bar::before { content: "🔍"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; }
+        .search-bar::before { content: ""; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; }
         .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
         .fbtn { padding: 5px 12px; border: 1.5px solid var(--border); border-radius: 16px; background: white; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 500; transition: all 0.15s; white-space: nowrap; }
         .fbtn:hover { border-color: var(--brand); }
@@ -153,7 +153,7 @@
     </header>
 
     <div class="hero">
-        <h1>🧠 Clinical Reasoning Trainer</h1>
+        <h1>Clinical Reasoning Trainer</h1>
         <p>Explore 262 clinical topics across 25 specialties — modules, expanded cases, interactive adventures, and CRT simulations.</p>
         <div class="stats">
             <span class="stat">262 Topics</span>
@@ -171,27 +171,27 @@
             <div class="featured-label">✨ Immersive Simulations</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                 <a href="simroomdx.html" class="featured-card" style="flex-direction:column;text-align:center;padding:20px;">
-                    <div class="featured-icon">🎭</div>
+                    <div class="featured-icon"></div>
                     <div class="featured-info">
                         <div class="featured-title"><span class="dx-brand"><span class="dx-pre">SimRoom</span><span class="dx-suf">Dx</span></span></div>
                         <div class="featured-desc">AI-powered multi-character sim room. Talk to patients, nurses, attendings, and consultants. Voice-enabled, Socratic coaching.</div>
                         <div class="featured-tags" style="justify-content:center;">
-                            <span class="featured-tag">🎙️ Voice</span>
-                            <span class="featured-tag">👥 6 Characters</span>
-                            <span class="featured-tag">🧠 Socratic</span>
+                            <span class="featured-tag"> Voice</span>
+                            <span class="featured-tag"> 6 Characters</span>
+                            <span class="featured-tag">Socratic</span>
                         </div>
                     </div>
                     <span class="featured-arrow">→</span>
                 </a>
                 <a href="case-browser.html" onclick="localStorage.setItem('osceOnboardingComplete','true');localStorage.setItem('rdx-tutorial-complete','true');" class="featured-card" style="flex-direction:column;text-align:center;padding:20px;background:linear-gradient(135deg, #2D3748 0%, #4A5568 60%, #718096 100%);">
-                    <div class="featured-icon">🧠</div>
+                    <div class="featured-icon"></div>
                     <div class="featured-info">
                         <div class="featured-title">Full CRT Trainer</div>
                         <div class="featured-desc">30 complete clinical reasoning cases with differential building, history, physical exam, workup, and must-not-miss diagnoses.</div>
                         <div class="featured-tags" style="justify-content:center;">
-                            <span class="featured-tag">📚 Differential</span>
-                            <span class="featured-tag">🩺 History & PE</span>
-                            <span class="featured-tag">🔬 Workup</span>
+                            <span class="featured-tag"> Differential</span>
+                            <span class="featured-tag">History & PE</span>
+                            <span class="featured-tag">Workup</span>
                         </div>
                     </div>
                     <span class="featured-arrow">→</span>
@@ -232,8 +232,8 @@ const FILTER_LABELS = {
 const FORMAT_LABELS = {module:'Module', expanded:'Expanded', adventure:'Adventure', crt:'CRT', standalone:'Overview'};
 const FORMAT_CSS = {module:'link-module', expanded:'link-expanded', adventure:'link-adventure',
     'expanded-adventure':'link-adventure', 'expanded-dual-adventure':'link-adventure', crt:'link-crt', standalone:'link-standalone'};
-const FORMAT_SHORT = {module:'📘 Module', expanded:'📗 Expanded', adventure:'🗺️ Adventure',
-    'expanded-adventure':'🗺️ Expanded Adv', 'expanded-dual-adventure':'🗺️ Dual Adv', crt:'🧠 CRT', standalone:'📄 Overview'};
+const FORMAT_SHORT = {module:' Module', expanded:' Expanded', adventure:' Adventure',
+    'expanded-adventure':'Expanded Adv', 'expanded-dual-adventure':'Dual Adv', crt:'CRT', standalone:'Overview'};
 
 let activeFilter = 'all';
 let activeFormats = new Set();
@@ -312,7 +312,7 @@ function render() {
     let html = '';
     for (const spec of SPEC_ORDER) {
         if (!groups[spec] || groups[spec].length === 0) continue;
-        const cfg = SPEC_CONFIG[spec] || {icon:'📄', color:'#F1F5F9'};
+        const cfg = SPEC_CONFIG[spec] || {icon:'', color:'#F1F5F9'};
         const topics = groups[spec].sort((a,b) => a.name.localeCompare(b.name));
 
         html += `<div class="sec-head"><span>${cfg.icon} ${spec}</span><span class="cnt">${topics.length}</span></div>`;

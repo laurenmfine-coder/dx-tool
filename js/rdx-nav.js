@@ -29,30 +29,30 @@
     '<div id="rdx-nav-menu">'+
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
       dd('Learn', sec==='learn'||sec==='raddx'||sec==='premed',
-        di(R+'topics/index.html','\uD83D\uDCDA','Topics Library','316 clinical topics')+
-                        di(R+'study-mode.html','\uD83D\uDCD6','Study Guides','Topic-based study')
+        di(R+'study-mode.html','','Study Mode','316 clinical topics across all specialties')+
+                        di(R+'pathway.html?id=allergy-immunology','','A/I Pathway','Allergy & Immunology curriculum')
       )+
       dd('Practice', sec==='practice',
-        di(R+'case-browser.html','\uD83D\uDDFA\uFE0F','Case Library','256 interactive cases')+
-        di(R+'crt-hub.html','\uD83E\uDDE9','Clinical Reasoning Trainer','Step-by-step CRTs')+
-        di(R+'CoachDx/index.html','\uD83E\uDD16','CoachDx','AI clinical coaching')+
-        di(R+'consult-callback.html','\uD83D\uDCDE','Consult Callback','Practice consult calls')
+        di(R+'case-browser.html','','Case Library','256 interactive cases')+
+        di(R+'crt-hub.html','','Clinical Reasoning Trainer','Step-by-step CRTs')+
+        di(R+'CoachDx/index.html','','CoachDx','AI clinical coaching')+
+        di(R+'consult-callback.html','','Consult Callback','Practice consult calls')
       )+
       dd('Simulate', sec==='simulate',
-        di(R+'hospital-3d.html','\uD83C\uDFE5','Virtual Hospital','3D walkthrough — all departments')+
-        di(R+'ed-3d.html','\uD83D\uDE91','Emergency Department','8 patient rooms with full encounters')+
-        di(R+'night-float.html','\uD83C\uDF19','Night Float','Overnight cross-cover with I-PASS')+
-        di(R+'admissions.html','\uD83D\uDCCB','Admissions','ED handoff, orders, H&P, presentation')+
-        di(R+'simroomdx.html','\uD83E\uDE7A','SimRoomDx','Morning rounds — 6 AI characters')
+        di(R+'hospital-3d.html','','Virtual Hospital','3D walkthrough — all departments')+
+        di(R+'ed-3d.html','','Emergency Department','8 patient rooms with full encounters')+
+        di(R+'night-float.html','','Night Float','Overnight cross-cover with I-PASS')+
+        di(R+'admissions.html','','Admissions','ED handoff, orders, H&P, presentation')+
+        di(R+'simroomdx.html','','SimRoomDx','Morning rounds — 6 AI characters')
       )+
       dd('Tools', sec==='tools',
-        di(R+'tools/index.html','\uD83D\uDD27','All Tools','Calculators & references')+
-        di(R+'ecg/ecg-generator.html','\uD83D\uDC93','ECG Practice','Rhythm interpretation')+
-        di(R+'analytics-dashboard.html','\uD83D\uDCCA','Dashboard','Track your progress')
+        di(R+'tools/index.html','','All Tools','Calculators & references')+
+        di(R+'ecg/ecg-generator.html','','ECG Practice','Rhythm interpretation')+
+        di(R+'analytics-dashboard.html','','Dashboard','Track your progress')
       )+
       '<div class="rdx-nav-right">'+
         '<button id="rdx-info-btn" class="rdx-nav-btn" title="About">\u2139\uFE0F</button>'+
-        '<button id="rdx-theme-toggle" class="rdx-nav-btn">'+(saved==='dark'?'\u2600\uFE0F':'\uD83C\uDF19')+'</button>'+
+        '<button id="rdx-theme-toggle" class="rdx-nav-btn">'+(saved==='dark'?'':'')+'</button>'+
         '<button id="rdx-logout-btn" class="rdx-nav-btn rdx-logout">Log out</button>'+
       '</div>'+
     '</div>';
@@ -62,7 +62,7 @@
     '#rdx-unified-nav{background:var(--rdx-bg-nav,#fff);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;position:sticky;top:0;z-index:9000;font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.04)}'+
     '[data-theme="dark"] #rdx-unified-nav{background:var(--rdx-bg-nav,#1e293b);border-color:var(--rdx-border,#334155);box-shadow:0 1px 3px rgba(0,0,0,.3)}'+
     '.rdx-logo-link{text-decoration:none;flex-shrink:0;margin-right:24px}'+
-    '.rdx-logo-text{font-family:Georgia,"Times New Roman",serif;font-size:22px;font-weight:700;color:#2f3640;letter-spacing:-.5px}'+
+    '.rdx-logo-text{font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:22px;font-weight:700;color:#2f3640;letter-spacing:-.5px}'+
     '.rdx-logo-dx{border-bottom:2.5px solid #2874a6;padding-bottom:1px}'+
     '[data-theme="dark"] .rdx-logo-text{color:#e2e8f0}[data-theme="dark"] .rdx-logo-dx{border-color:#5ba3cc}'+
     '#rdx-nav-menu{display:flex;align-items:center;gap:2px;margin-left:auto}'+
@@ -77,7 +77,7 @@
     '@keyframes rdxDdIn{from{opacity:0;transform:translateX(-50%) translateY(-4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}'+
     '.rdx-dd-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);transition:background .12s}'+
     '.rdx-dd-item:hover{background:#f0f7fc}[data-theme="dark"] .rdx-dd-item:hover{background:rgba(40,116,166,.1)}'+
-    '.rdx-dd-icon{font-size:18px;line-height:1;flex-shrink:0;margin-top:2px}'+
+    '.rdx-dd-icon:empty{display:none}.rdx-dd-icon{font-size:18px;line-height:1;flex-shrink:0;margin-top:2px}'+
     '.rdx-dd-item strong{font-size:13px;font-weight:600;display:block;color:var(--rdx-text,#1e293b)}'+
     '.rdx-dd-item small{font-size:11px;color:var(--rdx-text-muted,#64748b);display:block;margin-top:1px}'+
     '[data-theme="dark"] .rdx-dd-item strong{color:var(--rdx-text,#e2e8f0)}'+
@@ -146,7 +146,7 @@
       var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('rdx-theme', next);
-      this.textContent = next === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+      this.textContent = next === 'dark' ? '' : '';
     });
     document.getElementById('rdx-logout-btn').addEventListener('click', function(){
       localStorage.removeItem('reasondx-user');localStorage.removeItem('reasondx_student_code');localStorage.removeItem('rdx-progress');sessionStorage.clear();
