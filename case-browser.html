@@ -165,13 +165,26 @@ a { color: inherit; text-decoration: none; }
 .setting-card[data-setting="icu"]::before{background:var(--rose)} .setting-card[data-setting="icu"] .card-icon{background:var(--rose-bg)} .setting-card[data-setting="icu"] .card-tag{background:var(--rose-bg);color:var(--rose)}
 .setting-card[data-setting="consult"]::before{background:var(--teal)} .setting-card[data-setting="consult"] .card-icon{background:var(--teal-bg)} .setting-card[data-setting="consult"] .card-tag{background:var(--teal-bg);color:var(--teal)}
 
-/* ═══ COLLAPSED STATE ═══ */
-.settings-grid.collapsed .setting-card:not(.selected) { display:none; }
-.settings-grid.collapsed { grid-template-columns:1fr; max-width:420px; }
-.settings-grid.collapsed .setting-card.selected { cursor:default; }
-.settings-grid.collapsed .setting-card.selected:hover { transform:none; }
+/* ═══ SELECTED STATE — all cards stay visible ═══ */
+.settings-grid .setting-card:not(.selected) { opacity:0.55; }
+.settings-grid .setting-card:not(.selected):hover { opacity:0.85; }
+.settings-grid.has-selection .setting-card.selected { border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-glow), var(--shadow-lg); transform:translateY(-4px); }
 
-.toggle-settings-btn {
+/* Go button */
+.go-btn-wrap { text-align:center; margin:24px 0 16px; display:none; animation:fadeUp 0.3s ease both; }
+.go-btn-wrap.visible { display:block; }
+.go-btn {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:14px 40px; font-size:16px; font-weight:700;
+  background:linear-gradient(135deg, #1B4F72, #2874A6); color:#fff;
+  border:none; border-radius:12px; cursor:pointer;
+  box-shadow:0 4px 16px rgba(40,116,166,0.35);
+  transition:all 0.25s;
+}
+.go-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(40,116,166,0.45); }
+.go-btn .go-setting-name { opacity:0.85; font-weight:400; }
+
+.toggle-settings-btn { display:none !important; }
   display:none; align-items:center; gap:6px; background:none;
   border:1px solid var(--border); border-radius:100px; padding:5px 14px;
   font-size:12px; font-weight:600; color:var(--text-secondary);
@@ -349,12 +362,17 @@ a { color: inherit; text-decoration: none; }
   <div class="section-header" id="settingsHeader">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
       <h2>Choose Your Clinical Setting</h2>
-      <button class="toggle-settings-btn" id="toggleSettingsBtn" onclick="toggleSettingsView()">← Change Setting</button>
     </div>
     <p>Each setting shapes what you practice, what documentation you write, and how you're coached.</p>
   </div>
 
   <div class="settings-grid" id="settingsGrid"></div>
+
+  <div class="go-btn-wrap" id="goBtnWrap">
+    <button class="go-btn" id="goBtn" onclick="launchSetting()">
+      Let's Go <span style="font-size:20px">→</span>
+    </button>
+  </div>
 
   <!-- Specialty Pathways -->
   <div style="margin-top:16px;padding:16px 20px;background:linear-gradient(135deg,#1B4F72 0%,#2874A6 100%);border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
@@ -695,17 +713,27 @@ function addParams(url, settingId) {
 
 function selectSetting(id) {
   selectedSetting = id;
-  document.querySelectorAll('.setting-card').forEach(c=>c.classList.toggle('selected',c.dataset.setting===id));
-  document.getElementById('settingsGrid').classList.add('collapsed');
-  document.getElementById('toggleSettingsBtn').classList.add('visible');
-  renderTools(id);
+  const grid = document.getElementById('settingsGrid');
+  grid.classList.add('has-selection');
+  grid.querySelectorAll('.setting-card').forEach(c=>c.classList.toggle('selected',c.dataset.setting===id));
+  // Show Go button
+  const wrap = document.getElementById('goBtnWrap');
+  wrap.classList.add('visible');
+  const setting = SETTINGS.find(s=>s.id===id);
+  document.getElementById('goBtn').innerHTML = `${setting.icon} Let's Go — ${setting.title} <span style="font-size:20px">→</span>`;
   try{sessionStorage.setItem('rdx-hub-setting',id)}catch(e){}
 }
 
+function launchSetting() {
+  if (!selectedSetting) return;
+  renderTools(selectedSetting);
+  document.getElementById('toolsPanel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
 function toggleSettingsView() {
-  document.getElementById('settingsGrid').classList.remove('collapsed');
+  document.getElementById('settingsGrid').classList.remove('has-selection');
   document.getElementById('toolsPanel').classList.remove('visible');
-  document.getElementById('toggleSettingsBtn').classList.remove('visible');
+  document.getElementById('goBtnWrap').classList.remove('visible');
   selectedSetting = null;
   renderSettings();
   window.scrollTo({top:0,behavior:'smooth'});
