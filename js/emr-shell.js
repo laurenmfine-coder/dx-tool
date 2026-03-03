@@ -1,8 +1,6 @@
 /* js/emr-shell.js — EMR Shell with Collapsible Left Sidebar
  * Wraps the entire EMR in an Epic-style activity menu.
- * Shows when ?setting or ?case is present (not on landing page).
- * Sidebar items: Department selector, Patient List, tools (CRT, MechanismDx, etc.)
- * Collapses to icon-only when in a patient chart.
+ * Sidebar items navigate to real pages (no iframes for tools).
  */
 (function() {
   'use strict';
@@ -19,16 +17,16 @@
     'post-discharge': { label: 'Post-Discharge', short: 'Post-DC', icon: '\uD83D\uDD04', color: '#00838F' }
   };
 
-  // Tools available in sidebar
+  // Sidebar tools — only items with working URLs
   var TOOLS = [
-    { id: 'patients', label: 'Patient List', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', section: 'clinical', color: '#2874A6' },
-    { id: 'crt', label: 'Clinical Reasoning', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>', section: 'tools', url: 'crt-hub.html', color: '#6A1B9A' },
-    { id: 'mechanism', label: 'MechanismDx', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>', section: 'tools', url: 'pathway.html', color: '#00838F' },
-    { id: 'coach', label: 'CoachDx', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>', section: 'tools', url: 'CoachDx/index.html', color: '#AD1457' },
-    { id: 'sbar', label: 'SBAR Practice', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>', section: 'tools', url: 'training.html', color: '#D97706' },
-    { id: 'boardprep', label: 'Board Prep', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>', section: 'tools', url: 'board-prep.html', color: '#1565C0' },
-    { id: 'studyhub', label: 'Study Hub', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>', section: 'tools', url: 'study-mode.html', color: '#E65100' },
-    { id: 'ecg', label: 'ECG Trainer', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>', section: 'tools', url: 'ecg/index.html', color: '#2E7D32' }
+    { id: 'patients', label: 'Patient List', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', section: 'clinical' },
+    { id: 'crt', label: 'Clinical Reasoning', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>', section: 'tools', url: 'crt-hub.html' },
+    { id: 'mechanism', label: 'MechanismDx', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>', section: 'tools', url: 'pathway.html' },
+    { id: 'coach', label: 'CoachDx', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>', section: 'tools', url: 'CoachDx/index.html' },
+    { id: 'sbar', label: 'SBAR Practice', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>', section: 'tools', url: 'training.html' },
+    { id: 'boardprep', label: 'Board Prep', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>', section: 'tools', url: 'board-prep.html' },
+    { id: 'studyhub', label: 'Study Hub', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>', section: 'tools', url: 'study-mode.html' },
+    { id: 'ecg', label: 'ECG Trainer', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>', section: 'tools', url: 'ecg/index.html' }
   ];
 
   function _getSetting() {
@@ -43,7 +41,6 @@
 
   window.EMRShell = {
 
-    // Inject the shell around #app if not already done
     inject: function() {
       if (SHELL_RENDERED) return;
       var app = document.getElementById('app');
@@ -51,31 +48,26 @@
 
       var setting = _getSetting();
       var caseId = _getCaseId();
-      if (!setting && !caseId) return; // Landing page, no shell needed
+      if (!setting && !caseId) return;
 
-      SIDEBAR_COLLAPSED = !!caseId; // Collapse when in a chart
+      SIDEBAR_COLLAPSED = !!caseId;
 
-      // Create shell wrapper
       var shell = document.createElement('div');
       shell.id = 'emr-shell';
       shell.style.cssText = 'display:flex;min-height:100vh;font-family:"IBM Plex Sans",-apple-system,sans-serif;background:#F0F2F5';
 
-      // Create sidebar
       var sidebar = document.createElement('div');
       sidebar.id = 'emr-sidebar';
       sidebar.innerHTML = EMRShell._renderSidebar(setting, caseId);
 
-      // Create main area wrapper
       var main = document.createElement('div');
       main.id = 'emr-main';
       main.style.cssText = 'flex:1;min-width:0;display:flex;flex-direction:column';
 
-      // Create top bar
       var topbar = document.createElement('div');
       topbar.id = 'emr-topbar';
       topbar.innerHTML = EMRShell._renderTopbar(setting, caseId);
 
-      // Move app inside main
       var appParent = app.parentNode;
       main.appendChild(topbar);
       appParent.replaceChild(shell, app);
@@ -83,15 +75,13 @@
       shell.appendChild(sidebar);
       shell.appendChild(main);
 
-      // Add shell styles
       EMRShell._injectStyles();
       SHELL_RENDERED = true;
     },
 
     _renderSidebar: function(setting, caseId) {
-      var collapsed = !!caseId;
+      var collapsed = SIDEBAR_COLLAPSED;
       var w = collapsed ? '52px' : '200px';
-      var dept = setting ? (DEPTS[setting] || DEPTS.inpatient) : null;
       var html = '';
 
       html += '<div style="width:' + w + ';background:#1A2332;color:#94A3B8;display:flex;flex-direction:column;height:100vh;position:sticky;top:0;transition:width .2s;overflow:hidden;flex-shrink:0;z-index:50">';
@@ -119,8 +109,8 @@
       }
 
       // Navigation items
-      var sections = { clinical: 'CLINICAL', tools: 'LEARNING TOOLS' };
       var currentSection = '';
+      var sections = { clinical: 'CLINICAL', tools: 'LEARNING TOOLS' };
 
       TOOLS.forEach(function(t) {
         if (t.section !== currentSection) {
@@ -148,7 +138,7 @@
         }
       });
 
-      // Bottom: overview link + collapse toggle
+      // Bottom: overview link
       html += '<div style="margin-top:auto;border-top:1px solid rgba(255,255,255,.06);padding:8px ' + (collapsed ? '0' : '10px') + '">';
       if (collapsed) {
         html += '<div onclick="window.location.href=\'virtual-emr.html\'" style="display:flex;align-items:center;justify-content:center;padding:8px 0;cursor:pointer;color:#64748B;font-size:16px" title="Overview">\uD83C\uDFE0</div>';
@@ -168,7 +158,6 @@
       var html = '';
       html += '<div style="height:40px;background:#fff;border-bottom:1px solid #DFE1E6;padding:0 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;flex-shrink:0">';
 
-      // Left: breadcrumb
       html += '<div style="display:flex;align-items:center;gap:8px">';
       html += '<a href="virtual-emr.html" style="color:#8C92A4;text-decoration:none;font-weight:500">ReasonDx</a>';
       if (dept) {
@@ -181,7 +170,6 @@
       }
       html += '</div>';
 
-      // Right: user info (since we hide the chart header)
       html += '<div style="display:flex;align-items:center;gap:8px">';
       if (window.S && S.currentUser) {
         html += '<span style="color:#64748B;font-size:11px">\uD83C\uDF93 ' + (S.currentUser.displayName || '') + '</span>';
@@ -230,21 +218,15 @@
       if (!tool) return;
 
       if (toolId === 'patients') {
-        // Go to patient list
         var setting = _getSetting() || 'inpatient';
         window.location.href = 'virtual-emr.html?setting=' + setting;
         return;
       }
 
+      // Navigate directly to the tool page instead of using iframes
       if (tool.url) {
-        // Open tool in the main content area
-        var app = document.getElementById('app');
-        if (app) {
-          app.innerHTML = '<iframe src="' + tool.url + '" style="width:100%;height:calc(100vh - 36px);border:none;background:#fff"></iframe>';
-        }
+        window.location.href = tool.url;
       }
     }
   };
-
-  // Call EMRShell.inject() explicitly before bootstrapApp() runs
 })();
