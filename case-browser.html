@@ -372,6 +372,9 @@ a { color: inherit; text-decoration: none; }
     <button class="go-btn" id="goBtn" onclick="launchSetting()">
       Let's Go <span style="font-size:20px">→</span>
     </button>
+    <div style="text-align:center;margin-top:8px">
+      <button type="button" onclick="if(selectedSetting){renderTools(selectedSetting);document.getElementById('toolsPanel').scrollIntoView({behavior:'smooth',block:'start'})}" style="background:none;border:none;color:var(--blue);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);text-decoration:underline;padding:4px 8px">or browse training tools ↓</button>
+    </div>
   </div>
 
   <!-- Specialty Pathways -->
@@ -634,9 +637,11 @@ function renderTools(settingId) {
     return u;
   }
 
-  // Quick Launch
+  // Quick Launch — add Patient List as the hero action
   const qlRow = document.getElementById('quickLaunchRow');
-  qlRow.innerHTML = setting.quickLaunch.map(ql=>
+  var patientListUrl = appendParams('virtual-emr.html');
+  var heroBtn = `<a class="ql-btn" href="${patientListUrl}" style="background:var(--blue);color:#fff;border-color:var(--blue);font-weight:700;padding:12px 24px;font-size:14px"><span class="ql-icon">\uD83D\uDCCB</span> Open Patient List</a>`;
+  qlRow.innerHTML = heroBtn + setting.quickLaunch.filter(ql=>!ql.label.includes('Pick a Case')).map(ql=>
     `<a class="ql-btn" href="${appendParams(ql.url)}"><span class="ql-icon">${ql.icon}</span> ${ql.label}</a>`
   ).join('');
 
@@ -720,14 +725,17 @@ function selectSetting(id) {
   const wrap = document.getElementById('goBtnWrap');
   wrap.classList.add('visible');
   const setting = SETTINGS.find(s=>s.id===id);
-  document.getElementById('goBtn').innerHTML = `${setting.icon} Let's Go — ${setting.title} <span style="font-size:20px">→</span>`;
+  document.getElementById('goBtn').innerHTML = `${setting.icon} Open Patient List — ${setting.title} <span style="font-size:20px">→</span>`;
   try{sessionStorage.setItem('rdx-hub-setting',id)}catch(e){}
 }
 
 function launchSetting() {
   if (!selectedSetting) return;
-  renderTools(selectedSetting);
-  document.getElementById('toolsPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  // Primary action: go directly to the patient list
+  var diff = window.RDX_DIFFICULTY || 'standard';
+  var url = 'virtual-emr.html?setting=' + selectedSetting;
+  if (diff !== 'standard') url += '&difficulty=' + diff;
+  window.location.href = url;
 }
 
 function toggleSettingsView() {
