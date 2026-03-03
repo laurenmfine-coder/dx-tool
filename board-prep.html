@@ -24,7 +24,7 @@
         var d = (location.pathname.match(/\//g) || []).length - 1;
         var p = "";
         for (var i = 0; i < d; i++) p += "../";
-        return p + "training.html";
+        return p + "virtual-emr.html?setting=ed";
     }
     
     function isAuth() {
@@ -518,7 +518,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
 
     <div id="quizScreen" style="display: none;">
         <header class="header">
-            <div class="header-left"><a href="index.html" class="logo"><div class="logo-mark">Dx</div><span>Board Prep</span></a></div>
+            <div class="header-left"><a href="virtual-emr.html" class="logo"><div class="logo-mark">Dx</div><span>Board Prep</span></a></div>
             <div class="header-center">
                 <div class="timer" id="timer"><span id="timerDisplay">60:00</span></div>
                 <div class="progress-info"><span class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">40</span></span><div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 2.5%"></div></div></div>
@@ -997,7 +997,7 @@ initializeUI();
             const relatedCrts = mcqToCrt[q.id] || [];
             if (relatedCrts.length > 0) {
                 const crtHTML = `<div class="resources-section" style="margin-top:12px;"><div class="resources-title">🧬 Related Embryology CRTs</div><div style="display:flex;flex-wrap:wrap;gap:4px;">${relatedCrts.map(c => 
-                    `<a href="../topics/${c.file}.html" class="crt-cross-link">🧬 ${c.title}</a>`
+                    `<a href="case-browser.html?q=${encodeURIComponent(c.title)}" class="crt-cross-link">🧬 ${c.title}</a>`
                 ).join('')}</div></div>`;
                 document.getElementById('panelResources').innerHTML += crtHTML;
             }
@@ -1211,7 +1211,7 @@ initializeUI();
     </script>
 
     <script src="js/dx-case-nav.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "training.html", parentName: "Training", platformRoot: "../" }); });</script>
+    <script>document.addEventListener("DOMContentLoaded", function() { DxCaseNav.init({ parentPage: "virtual-emr.html?setting=ed", parentName: "Virtual EMR", platformRoot: "../" }); });</script>
 
     
     <div data-dx-adaptive-tutor

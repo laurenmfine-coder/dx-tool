@@ -8,7 +8,7 @@
   const path = window.location.pathname;
   const isSubdir = path.includes('/cases/') || path.includes('/modules/') || 
                    path.includes('/topics/') || path.includes('/tools/') || 
-                   path.includes('/ecg/') || path.includes('/CoachDx/') ||
+                   path.includes('/ecg/') || false ||
                    path.includes('/auth/') || path.includes('/data/');
   const base = isSubdir ? '../' : '';
 
@@ -68,15 +68,15 @@
           <span class="icon">T</span>
           <span>Study Mode</span>
         </a>
-        <a href="${base}case-browser.html" class="rdx-help-link">
+        <a href="${base}virtual-emr.html" class="rdx-help-link">
           <span class="icon">M</span>
           <span>Modules</span>
         </a>
-        <a href="${base}case-browser.html" class="rdx-help-link">
+        <a href="${base}virtual-emr.html" class="rdx-help-link">
           <span class="icon">C</span>
           <span>Cases & Adventures</span>
         </a>
-        <a href="${base}training.html" class="rdx-help-link">
+        <a href="${base}virtual-emr.html?setting=ed" class="rdx-help-link">
           <span class="icon">Tr</span>
           <span>Training Hub</span>
         </a>

@@ -74,7 +74,7 @@
         { val: stats.cases + '+', label: 'Patient Cases' },
         { val: stats.settings, label: 'Clinical Settings' },
         { val: stats.tools + '+', label: 'Integrated Tools' },
-        { val: '262', label: 'CRT Topics' }
+        { val: stats.categories, label: 'Specialties' }
       ];
       heroStats.forEach(function(s) {
         html += '<div style="text-align:center"><div style="font-size:28px;font-weight:800;color:#fff;letter-spacing:-1px">' + s.val + '</div>';
@@ -131,9 +131,9 @@
           color: '#AD1457'
         },
         {
-          icon: '\uD83D\uDCDE', title: 'SBAR Communication',
-          desc: 'Practice structured handoffs and nurse callbacks. Learn to communicate clearly under pressure.',
-          tags: ['SBAR Format', 'Handoffs', 'Callbacks'],
+          icon: '\uD83D\uDCDE', title: 'Consult & Communication',
+          desc: 'Practice consult callbacks, structured handoffs, and clinical presentations. Learn to communicate clearly under pressure.',
+          tags: ['Consult Calls', 'SBAR Format', 'Handoffs'],
           color: '#D97706'
         },
         {
@@ -222,7 +222,7 @@
       // Go to EMR with default setting (floor) or last used
       var last = null;
       try { last = sessionStorage.getItem('rdx-last-setting'); } catch(e) {}
-      var setting = last || 'inpatient';
+      var setting = last || 'ed';
       window.location.href = 'virtual-emr.html?setting=' + setting;
     },
 

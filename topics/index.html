@@ -419,7 +419,7 @@ function render() {
   letters.forEach(function(letter) {
     html += '<div class="letter-header">' + letter + '</div>';
     groups[letter].sort(function(a,b) { return a.t.localeCompare(b.t); }).forEach(function(tp) {
-      html += '<a class="topic-card" href="' + tp.i + '.html">' + tp.t + '</a>';
+      html += '<a class="topic-card" href="../case-browser.html?q=' + encodeURIComponent(tp.t) + '">' + tp.t + '</a>';
     });
   });
   grid.innerHTML = html;

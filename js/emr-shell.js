@@ -1,6 +1,6 @@
 /* js/emr-shell.js — EMR Shell with Collapsible Left Sidebar
- * Wraps the entire EMR in an Epic-style activity menu.
- * Sidebar items navigate to real pages (no iframes for tools).
+ * Streamlined: only links to functional pages, no duplicates.
+ * Sections: Clinical, Simulations, Learning Tools.
  */
 (function() {
   'use strict';
@@ -17,26 +17,46 @@
     'post-discharge': { label: 'Post-Discharge', short: 'Post-DC', icon: '\uD83D\uDD04', color: '#00838F' }
   };
 
-  // Sidebar tools — only items with working URLs
+  var ICO = {
+    patients: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    edBoard: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>',
+    nightFloat: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+    simRoom: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>',
+    consult: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+    crt: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    mechanism: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    boardPrep: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    studyHub: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+    ecg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'
+  };
+
   var TOOLS = [
-    { id: 'patients', label: 'Patient List', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', section: 'clinical' },
-    { id: 'crt', label: 'Clinical Reasoning', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>', section: 'tools', url: 'crt-hub.html' },
-    { id: 'mechanism', label: 'MechanismDx', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>', section: 'tools', url: 'pathway.html' },
-    { id: 'coach', label: 'CoachDx', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>', section: 'tools', url: 'CoachDx/index.html' },
-    { id: 'sbar', label: 'SBAR Practice', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>', section: 'tools', url: 'training.html' },
-    { id: 'boardprep', label: 'Board Prep', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>', section: 'tools', url: 'board-prep.html' },
-    { id: 'studyhub', label: 'Study Hub', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>', section: 'tools', url: 'study-mode.html' },
-    { id: 'ecg', label: 'ECG Trainer', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>', section: 'tools', url: 'ecg/index.html' }
+    { id: 'patients', label: 'Patient List', icon: ICO.patients, section: 'clinical' },
+    { id: 'ed-board', label: 'ED Track Board', icon: ICO.edBoard, section: 'simulations', url: 'ed-board-v2.html' },
+    { id: 'night-float', label: 'Night Float', icon: ICO.nightFloat, section: 'simulations', url: 'night-float.html' },
+    { id: 'simroomdx', label: 'SimRoomDx', icon: ICO.simRoom, section: 'simulations', url: 'simroomdx.html' },
+    { id: 'consult', label: 'Consult Callback', icon: ICO.consult, section: 'simulations', url: 'consult-callback.html' },
+    { id: 'crt', label: 'Clinical Reasoning', icon: ICO.crt, section: 'learning', url: 'crt-hub.html' },
+    { id: 'mechanism', label: 'MechanismDx', icon: ICO.mechanism, section: 'learning', url: 'pathway.html' },
+    { id: 'boardprep', label: 'Board Prep', icon: ICO.boardPrep, section: 'learning', url: 'board-prep.html' },
+    { id: 'studyhub', label: 'Study Hub', icon: ICO.studyHub, section: 'learning', url: 'study-mode.html' },
+    { id: 'ecg', label: 'ECG Trainer', icon: ICO.ecg, section: 'learning', url: 'ecg/index.html' }
   ];
 
+  var SECTIONS = { clinical: 'CLINICAL', simulations: 'SIMULATIONS', learning: 'LEARNING TOOLS' };
+
   function _getSetting() {
-    var params = new URLSearchParams(window.location.search);
-    return params.get('setting') || ((window.S && S.clinicalSetting) ? S.clinicalSetting : null);
+    try {
+      var params = new URLSearchParams(window.location.search);
+      return params.get('setting') || ((window.S && S.clinicalSetting) ? S.clinicalSetting : null);
+    } catch(e) { return null; }
   }
 
   function _getCaseId() {
-    var params = new URLSearchParams(window.location.search);
-    return params.get('case') || null;
+    try {
+      var params = new URLSearchParams(window.location.search);
+      return params.get('case') || null;
+    } catch(e) { return null; }
   }
 
   window.EMRShell = {
@@ -108,15 +128,13 @@
         html += '</div>';
       }
 
-      // Navigation items
+      // Nav items
       var currentSection = '';
-      var sections = { clinical: 'CLINICAL', tools: 'LEARNING TOOLS' };
-
       TOOLS.forEach(function(t) {
         if (t.section !== currentSection) {
           currentSection = t.section;
           if (!collapsed) {
-            html += '<div style="padding:16px 14px 4px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#4A6274">' + sections[t.section] + '</div>';
+            html += '<div style="padding:16px 14px 4px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#4A6274">' + SECTIONS[t.section] + '</div>';
           } else {
             html += '<div style="height:1px;background:rgba(255,255,255,.06);margin:8px 6px"></div>';
           }
@@ -138,13 +156,13 @@
         }
       });
 
-      // Bottom: overview link
+      // Bottom home
       html += '<div style="margin-top:auto;border-top:1px solid rgba(255,255,255,.06);padding:8px ' + (collapsed ? '0' : '10px') + '">';
       if (collapsed) {
-        html += '<div onclick="window.location.href=\'virtual-emr.html\'" style="display:flex;align-items:center;justify-content:center;padding:8px 0;cursor:pointer;color:#64748B;font-size:16px" title="Overview">\uD83C\uDFE0</div>';
+        html += '<div onclick="window.location.href=\'virtual-emr.html\'" style="display:flex;align-items:center;justify-content:center;padding:8px 0;cursor:pointer;color:#64748B;font-size:16px" title="Home">\uD83C\uDFE0</div>';
       } else {
         html += '<div onclick="window.location.href=\'virtual-emr.html\'" style="display:flex;align-items:center;gap:8px;padding:6px 4px;cursor:pointer;font-size:11px;color:#64748B;transition:color .15s" onmouseover="this.style.color=\'#94A3B8\'" onmouseout="this.style.color=\'#64748B\'">';
-        html += '<span>\uD83C\uDFE0</span><span>Overview</span>';
+        html += '<span>\uD83C\uDFE0</span><span>Home</span>';
         html += '</div>';
       }
       html += '</div>';
@@ -176,7 +194,6 @@
         html += '<button type="button" onclick="doSignOut()" style="padding:3px 8px;border-radius:4px;border:1px solid #DFE1E6;background:#fff;color:#64748B;font-size:10px;cursor:pointer;font-family:inherit">Sign Out</button>';
       }
       html += '</div>';
-
       html += '</div>';
       return html;
     },
@@ -207,6 +224,7 @@
     },
 
     changeDept: function(id) {
+      try { sessionStorage.setItem('rdx-last-setting', id); } catch(e) {}
       var params = new URLSearchParams(window.location.search);
       params.set('setting', id);
       params.delete('case');
@@ -218,12 +236,11 @@
       if (!tool) return;
 
       if (toolId === 'patients') {
-        var setting = _getSetting() || 'inpatient';
+        var setting = _getSetting() || 'ed';
         window.location.href = 'virtual-emr.html?setting=' + setting;
         return;
       }
 
-      // Navigate directly to the tool page instead of using iframes
       if (tool.url) {
         window.location.href = tool.url;
       }

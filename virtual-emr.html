@@ -1217,6 +1217,8 @@ function selectSpecialty(id) {
 }
 
 function launchWithSetting() {
+  // Remember choice for next visit
+  try { sessionStorage.setItem('rdx-last-setting', S.clinicalSetting); } catch(e) {}
   // Navigate to case picker with setting+specialty in URL
   var params = new URLSearchParams(window.location.search);
   params.set('setting', S.clinicalSetting);
@@ -1440,7 +1442,13 @@ const S={
 };
 
 // Apply URL parameters to state (must be after S declaration)
-if (URL_SETTING) S.clinicalSetting = URL_SETTING;
+if (URL_SETTING) {
+  S.clinicalSetting = URL_SETTING;
+  try { sessionStorage.setItem('rdx-last-setting', URL_SETTING); } catch(e) {}
+} else if (!CASE_ID) {
+  // Returning user: restore last setting so they skip the landing page
+  try { var _lastSetting = sessionStorage.getItem('rdx-last-setting'); if (_lastSetting) { S.clinicalSetting = _lastSetting; } } catch(e) {}
+}
 if (URL_SPECIALTY) S.specialty = URL_SPECIALTY;
 if (CASE_ID && !S.clinicalSetting) { S.clinicalSetting = 'ed'; S.specialty = 'em'; }
 
@@ -1718,7 +1726,7 @@ function render(){
 
   var casesUrl='virtual-emr.html';if(S.clinicalSetting){casesUrl+='?setting='+S.clinicalSetting;if(S.specialty)casesUrl+='&specialty='+S.specialty}
   var settingBadge=getSettingLabel()?'<span class="setting-context-badge">'+getSettingLabel()+'</span>':'';
-  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px;-webkit-tap-highlight-color:transparent">\u2190 Cases</a><a href="index.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+dayBarHtml+'<div class="content-layout"><div class="sidebar">'+sb+'</div><div class="main-content">'+ct+'</div></div></div>';
+  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px;-webkit-tap-highlight-color:transparent">\u2190 Cases</a><a href="virtual-emr.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+dayBarHtml+'<div class="content-layout"><div class="sidebar">'+sb+'</div><div class="main-content">'+ct+'</div></div></div>';
 }
 
 // ═══ DIFFICULTY POST-RENDER HOOK ═══
@@ -2149,7 +2157,11 @@ async function bootstrapApp() {
   if(window.MissionControl&&S.currentUser.role==="student"&&CASE_ID){
     MissionControl.init(S.clinicalSetting,CASE_ID,S.currentUser.role);
   }
-  render();
+  try { render(); } catch(renderErr) {
+    console.error('render() error:', renderErr);
+    var _app = document.getElementById('app');
+    if (_app) _app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Rendering Error</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (renderErr.message || 'Unknown error') + '</p><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Reload</a></div>';
+  }
   document.addEventListener("mousedown",e=>{const p=document.getElementById("annotationPopover");if(p&&p.classList.contains("visible")&&!p.contains(e.target))hideAnnotationPopover()});
   window.addEventListener("beforeunload",function(){if(window.ChartTracker){ChartTracker.stop()}});
 }
@@ -3814,7 +3826,7 @@ render = function(){
   var tipHtml = (window.MissionControl && role==='student') ? MissionControl.renderTipBar(S.activeTab) : '';
   var casesUrl='virtual-emr.html';if(S.clinicalSetting){casesUrl+='?setting='+S.clinicalSetting;if(S.specialty)casesUrl+='&specialty='+S.specialty}
   var settingBadge=getSettingLabel()?'<span class="setting-context-badge">'+getSettingLabel()+'</span>':'';
-  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px">\u2190 Cases</a><a href="index.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div><div class="content-layout"><div class="sidebar">'+sb+moreBtn+'</div><div class="main-content">'+tipHtml+ct+'</div></div>'+overflowHtml+'</div>'+mcPanel;
+  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px">\u2190 Cases</a><a href="virtual-emr.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a><span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button></div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div><div class="content-layout"><div class="sidebar">'+sb+moreBtn+'</div><div class="main-content">'+tipHtml+ct+'</div></div>'+overflowHtml+'</div>'+mcPanel;
 };
 
 // Mobile "More" tab overflow menu
@@ -3921,7 +3933,13 @@ submitDoc = function(){
       });
     }
     else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
-    else { loadCaseData(function() { bootstrapApp(); }); }
+    else { loadCaseData(function() { bootstrapApp().catch(function(err) {
+      console.error('bootstrapApp error on case load:', err);
+      var app = document.getElementById('app');
+      if (app && !app.innerHTML.trim()) {
+        app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Error Loading Case</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (err.message || 'An unexpected error occurred.') + '</p><div style="display:flex;gap:10px;justify-content:center"><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">Reload</a><a href="virtual-emr.html' + (S.clinicalSetting ? '?setting=' + S.clinicalSetting : '') + '" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div>';
+      }
+    }); }); }
   } catch(e) {
     console.error('Routing error:', e);
     var app = document.getElementById('app');

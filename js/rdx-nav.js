@@ -27,26 +27,26 @@
     '<button id="rdx-hamburger" aria-label="Menu">\u2630</button>'+
     '<div id="rdx-nav-menu">'+
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
-      '<a href="'+R+'case-browser.html" class="rdx-nav-top rdx-hub-link'+((/case-browser/i.test(path))?' active':'')+'">Platform Hub</a>'+
+      '<a href="'+R+'virtual-emr.html" class="rdx-nav-top rdx-hub-link'+((/case-browser/i.test(path))?' active':'')+'">Platform Hub</a>'+
       dd('Learn', sec==='learn'||sec==='raddx'||sec==='premed',
         di(R+'study-mode.html','','Study Mode','316 clinical topics across all specialties')+
                         di(R+'allergy-pathway.html','','A/I Pathway','Allergy & Immunology — all cases & settings')
       )+
       dd('Practice', sec==='practice',
-        di(R+'case-browser.html','','Platform Hub','Choose setting, pick your tool')+
+        di(R+'virtual-emr.html','','Platform Hub','Choose setting, pick your tool')+
         di(R+'crt-hub.html','','Clinical Reasoning Trainer','Step-by-step CRTs')+
-        di(R+'CoachDx/index.html','','CoachDx','AI clinical coaching')+
+        di(R+'virtual-emr.html?setting=ed','','CoachDx','AI coaching (inside patient charts)')+
         di(R+'consult-callback.html','','Consult Callback','Practice consult calls')
       )+
       dd('Simulate', sec==='simulate',
-        di(R+'case-browser.html','','Virtual Hospital','3D walkthrough — all departments')+
+        di(R+'virtual-emr.html','','Virtual Hospital','3D walkthrough — all departments')+
         di(R+'ed-3d.html','','Emergency Department','8 patient rooms with full encounters')+
         di(R+'night-float.html','','Night Float','Overnight cross-cover with I-PASS')+
         di(R+'admissions.html','','Admissions','ED handoff, orders, H&P, presentation')+
         di(R+'simroomdx.html','','SimRoomDx','Morning rounds — 6 AI characters')
       )+
       dd('Tools', sec==='tools',
-        di(R+'tools/index.html','','All Tools','Calculators & references')+
+        di(R+'pathway.html','','MechanismDx','Pathophysiology modules')+
         di(R+'ecg/ecg-generator.html','','ECG Practice','Rhythm interpretation')+
         di(R+'analytics-dashboard.html','','Dashboard','Track your progress')
       )+

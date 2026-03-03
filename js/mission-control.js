@@ -70,12 +70,15 @@
   // INLINE TIPS (shown once per tab, first case only)
   // ═══════════════════════════════════════════════════════════
   var TIPS = {
+    demographics: '\uD83D\uDCA1 Start here \u2014 review the patient\u2019s age, chief complaint, and history. Then use the tabs on the left to explore their vitals, labs, and medications.',
+    vitals: '\uD83D\uDCA1 Look for trends, not just the latest values. Abnormal vitals are flagged. Think about what the pattern tells you.',
     labs: '\uD83D\uDCA1 Tip: Click any lab panel to expand it. Red values are above the reference range; blue values are below.',
     documentation: '\uD83D\uDCA1 Tip: Each section auto-saves as you type. Write as if this were a real patient encounter note.',
     orders: '\uD83D\uDCA1 Tip: Think about what additional information you need before ordering. Your order patterns are part of the learning assessment.',
-    coach: '\uD83D\uDCA1 Tip: Your attending won\u2019t give you the answer directly. Present your thinking and they\u2019ll help you refine it.',
+    coach: '\uD83D\uDCA1 This is your AI attending. Present your thinking \u2014 your differential, your reasoning, your plan \u2014 and they\u2019ll help you refine it through Socratic questioning.',
     medications: '\uD83D\uDCA1 Tip: Review each medication and mark it as verified, held, or discontinued for medication reconciliation.',
-    ddx: '\uD83D\uDCA1 Tip: Rank your differential by likelihood. Add supporting and refuting evidence for each diagnosis.'
+    ddx: '\uD83D\uDCA1 Tip: Rank your differential by likelihood. Add supporting and refuting evidence for each diagnosis.',
+    studyhub: '\uD83D\uDCA1 The Study Hub turns your cases into flashcards. Click "Harvest Learning Gaps" to auto-generate cards from this patient\u2019s key teaching points.'
   };
 
   // ═══════════════════════════════════════════════════════════

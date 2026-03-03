@@ -22,10 +22,10 @@
     'admissions.html': { label: 'Admissions', section: 'Simulate' },
     'simroomdx.html': { label: 'SimRoomDx', section: 'Simulate' },
     'virtual-emr.html': { label: 'Virtual EMR', section: 'Practice' },
-    'training.html': { label: 'Training Hub', section: 'Practice' },
+    'virtual-emr.html': { label: 'Virtual EMR', section: 'Practice' },
     'board-prep.html': { label: 'Board Prep', section: 'Learn' },
     'analytics-dashboard.html': { label: 'Analytics', section: 'Tools' },
-    'setting-selector.html': { label: 'Settings', section: 'Practice' },
+    'virtual-emr.html': { label: 'Virtual EMR', section: 'Practice' },
     'ai-trainer-anaphylaxis-food.html': { label: 'AI Trainer: Anaphylaxis', section: 'Practice' },
   };
 

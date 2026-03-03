@@ -1,5 +1,5 @@
 /* sw.js — ReasonDx Service Worker */
-const CACHE_NAME = 'rdx-v1';
+const CACHE_NAME = 'rdx-v2';
 const PRECACHE = ['/index.html', '/css/rdx-theme.css', '/mobile.css'];
 
 self.addEventListener('install', e => {
