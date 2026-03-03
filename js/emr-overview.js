@@ -50,9 +50,22 @@
       var currentSetting = (window.S && S.clinicalSetting) || null;
       var currentDept = currentSetting ? (DEPTS[currentSetting] || DEPTS.ed) : null;
       var stats = _getCaseStats(currentSetting);
+      var insideShell = !!document.getElementById('emr-shell');
       var html = '';
 
-      // ═══ EMR CHROME ═══
+      if (insideShell) {
+        // Inside shell: just render dashboard content, no chrome
+        html += '<div style="padding:20px;font-family:\'IBM Plex Sans\',-apple-system,sans-serif;background:#F0F2F5;min-height:100%">';
+        if (currentSetting && currentDept) {
+          html += EMROverview._renderDashboard(currentSetting, currentDept, stats);
+        } else {
+          html += '<p style="color:#8C92A4">Select a department from the sidebar.</p>';
+        }
+        html += '</div>';
+        return html;
+      }
+
+      // ═══ Standalone mode (no shell) — full EMR CHROME ═══
       html += '<div style="min-height:100vh;background:#F0F2F5;font-family:\'IBM Plex Sans\',-apple-system,sans-serif">';
 
       // ─── Top Bar (EMR header) ───
@@ -72,7 +85,7 @@
         html += '<option value="' + id + '"' + (currentSetting === id ? ' selected' : '') + '>' + d.icon + ' ' + d.label + '</option>';
       });
       html += '</select>';
-      html += '<a href="case-browser.html" style="color:#85929E;font-size:11px;text-decoration:none;padding:4px 8px;border-radius:4px;border:1px solid #4A6274">\u2190 Hub</a>';
+      html += '<a href="virtual-emr.html" style="color:#85929E;font-size:11px;text-decoration:none;padding:4px 8px;border-radius:4px;border:1px solid #4A6274">\u2190 Overview</a>';
       html += '</div>';
       html += '</div>';
 
@@ -179,6 +192,7 @@
       // ─── Quick actions ───
       html += '<div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">';
       var actions = [];
+      // Quick actions specific to this setting (tools are in sidebar)
       if (setting === 'ed') {
         actions.push({ label: 'ED Track Board', url: 'ed-board-v2.html', icon: '\uD83D\uDCCB' });
         actions.push({ label: 'Enter the ED', url: 'ed-3d.html', icon: '\uD83D\uDEA8' });
@@ -190,8 +204,6 @@
       if (setting === 'consult') {
         actions.push({ label: 'Take a Consult', url: 'consult-callback.html', icon: '\uD83D\uDCDE' });
       }
-      actions.push({ label: 'Clinical Reasoning Trainer', url: 'crt-hub.html', icon: '\uD83C\uDFAF' });
-      actions.push({ label: 'MechanismDx', url: 'pathway.html', icon: '\uD83E\uDDEC' });
 
       actions.forEach(function(a) {
         html += '<a href="' + a.url + '" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1px solid #DFE1E6;background:#fff;color:#1A1A2E;font-size:12px;font-weight:500;text-decoration:none;transition:all .15s" onmouseover="this.style.borderColor=\'#2874A6\';this.style.background=\'#EBF5FB\'" onmouseout="this.style.borderColor=\'#DFE1E6\';this.style.background=\'#fff\'">' + a.icon + ' ' + a.label + '</a>';

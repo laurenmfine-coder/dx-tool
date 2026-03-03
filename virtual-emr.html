@@ -1315,6 +1315,13 @@ function _loadSpecMapThenRender() {
 }
 
 function _renderCasePicker() {
+    // If EMR Shell is active, render the overview dashboard in the app area
+    if (window.EMRShell && document.getElementById('emr-shell')) {
+      if (window.EMROverview) {
+        document.getElementById('app').innerHTML = EMROverview.render();
+        return;
+      }
+    }
     // Use EMR Overview (which embeds PatientList) if available
     if (window.EMROverview) {
       document.getElementById('app').innerHTML = EMROverview.render();
@@ -2147,6 +2154,8 @@ async function bootstrapApp() {
   window.addEventListener("beforeunload",function(){if(window.ChartTracker){ChartTracker.stop()}});
 }
 // Route: no case + no setting = show setting selector; otherwise load case data
+// Inject EMR shell (sidebar) for setting/case pages before any rendering
+if (window.EMRShell && (CASE_ID || S.clinicalSetting)) { EMRShell.inject(); }
 if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
 else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
 else { loadCaseData(function() { bootstrapApp(); }); }
@@ -3896,6 +3905,7 @@ submitDoc = function(){
 <script src="js/patient-list.js"></script>
 <script src="js/emr-overview.js"></script>
 <script src="js/emr-landing.js"></script>
+<script src="js/emr-shell.js"></script>
 <script src="js/mission-control.js"></script>
 <script src="js/ddx-builder.js"></script>
 <script src="rdx-demo-tour.js"></script>

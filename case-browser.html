@@ -6,6 +6,16 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Redirect to Virtual EMR (consolidated entry point)
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var setting = params.get('setting');
+  var dest = 'virtual-emr.html';
+  if (setting) dest += '?setting=' + encodeURIComponent(setting);
+  window.location.replace(dest);
+})();
+</script>
 <meta name="theme-color" content="#1f5f8b">
 <title>Platform Hub | ReasonDx</title>
 <meta name="description" content="ReasonDx Platform Hub — Choose your clinical setting, pick your training tool, and start practicing. ED, Floor, Night Float, Clinic, and more.">

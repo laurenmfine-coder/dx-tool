@@ -34,7 +34,7 @@
       html += '<span style="font-size:12px;color:#94A3B8;font-weight:500;letter-spacing:.5px;text-transform:uppercase">Virtual EMR</span>';
       html += '</div>';
       html += '<div style="display:flex;gap:6px">';
-      html += '<a href="case-browser.html" style="padding:6px 14px;border-radius:6px;font-size:12px;color:#94A3B8;text-decoration:none;font-weight:500">Platform Hub</a>';
+      html += '<a href="index.html" style="padding:6px 14px;border-radius:6px;font-size:12px;color:#94A3B8;text-decoration:none;font-weight:500">Home</a>';
       html += '<a href="crt-hub.html" style="padding:6px 14px;border-radius:6px;font-size:12px;color:#94A3B8;text-decoration:none;font-weight:500">CRT</a>';
       html += '</div>';
       html += '</nav>';
