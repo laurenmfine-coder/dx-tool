@@ -1,135 +1,155 @@
-// Virtual EMR Case: Exertional Heat Stroke
-// Variant: heat-stroke | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/heat-stroke.js — EMR case data for Exertional Heat Stroke */
 window.EMR_DATA = {
   "patient": {
-    "name": "DeShawn Harris",
-    "dob": "08/02/2003",
-    "age": 22,
+    "name": "Dylan Morales",
+    "dob": "06/15/2004",
+    "age": "22",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "University health plan",
-    "pcp": "Student Health Center",
-    "pharmacy": "CVS \u2014 Riverside, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-350390",
     "language": "English",
-    "race": "Black",
-    "address": "University Student Housing, 3200 College Ave, Riverside, FL",
-    "phone": "(954) 555-4412",
-    "email": "d.harris03@email.com",
+    "race": "Asian",
+    "phone": "(791) 259-7032",
+    "email": "dylan.morales@email.com",
+    "address": "3791 Oak St, Fort Lauderdale, FL 33301",
+    "insurance": "Tricare",
+    "pcp": "Dr. Michael Torres, DO",
+    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
-      "name": "Angela Harris (Mother)",
-      "phone": "(404) 555-8822"
+      "name": "David Carter",
+      "phone": "(765) 353-2668",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-95737"
+    "chiefComplaint": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+    "diagnosis": "Exertional Heat Stroke"
   },
   "problems": [
     {
-      "problem": "No Prior Medical History",
-      "icd": "Z87.89",
-      "onset": "",
+      "id": "prob-1",
+      "description": "None \u2014 previously healthy and fit athlete",
       "status": "Active",
-      "notes": "Healthy college athlete; cleared for sports"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Prior marathon completions",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "None",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "None routine",
+      "dose": "",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Ibuprofen",
+      "dose": "600mg taken before race (impairs renal prostaglandins)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
+    },
+    {
+      "id": "med-3",
+      "name": "Caffeine pills",
+      "dose": "200mg x2 taken during race (thermogenic)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
+      "date": "03/03/2026",
+      "time": "06:31",
       "bp": "92/58",
-      "hr": 142,
-      "rr": 28,
-      "temp": "106.8\u00b0F (rectal)",
-      "spo2": "96%",
-      "wt": "205 lbs",
-      "ht": "6'1\"",
-      "bmi": 27.1,
-      "setting": "ED \u2014 Resus"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "108/68",
-      "hr": 112,
-      "rr": 20,
-      "temp": "102.4\u00b0F (rectal)",
-      "spo2": "98%",
-      "wt": "205 lbs",
-      "ht": "6'1\"",
-      "bmi": 27.1,
-      "setting": "ED \u2014 Post-Cooling 30min"
+      "hr": "142",
+      "rr": "32",
+      "temp": "107.2\u00b0F (41.8\u00b0C) rectal",
+      "spo2": "93%",
+      "pain": "/10",
+      "bmi": "32",
+      "weight": "68 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. Sarah Mitchell, MD",
-      "cc": "Collapse during outdoor football practice, altered mental status, T 106.8\u00b0F",
-      "hpi": "22M college football player collapsed during outdoor conditioning drill in South Florida heat (heat index 105\u00b0F). Teammates noted he was stumbling and confused before collapsing. ATC on scene: GCS 10 (E2V3M5), rectal temp 106.8\u00b0F. Cold water immersion initiated on field. EMS called. No seizure activity witnessed. Was wearing full pads. Had been drinking water but may not have been adequate. No performance-enhancing drug use per teammates.",
-      "exam": "Obtunded, GCS 12 (improved from 10). Hot, dry skin (anhidrosis \u2014 severe sign). Flushed. Tachycardic, hypotensive. Pupils equal and reactive. No nuchal rigidity. No focal neurologic deficits. Muscle tone slightly increased. No rhabdomyolysis-dark urine yet.",
-      "assessment": "1. EXERTIONAL HEAT STROKE \u2014 core temp >104\u00b0F with AMS during exertion\n2. Hemodynamic instability \u2014 likely distributive shock from vasodilation\n3. Risk of rhabdomyolysis, DIC, hepatic failure, renal failure\n4. Goal: core temp <102\u00b0F within 30 minutes",
-      "plan": "1. AGGRESSIVE COOLING: cold water immersion continued \u2192 ice packs to axillae/groin/neck \u2192 cold IV NS\n2. Rectal temperature monitoring continuous\n3. IV NS 2L bolus then 500 mL/hr\n4. Labs: CBC, CMP, CPK, coags, LFTs, lactate, UA\n5. Foley \u2014 monitor UOP (target >0.5 mL/kg/hr)\n6. Watch for rhabdomyolysis (CPK), DIC (coags), hepatic failure (LFTs)\n7. ICU admission\n8. NO antipyretics (acetaminophen/NSAIDs ineffective in heat stroke)\n9. Benzodiazepines if shivering impedes cooling"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+      "hpi": "Dylan Morales is a 22-year-old male presenting with friend: 'he collapsed during the marathon and won't wake up properly' no specific pain \u2014 global altered mental status. Past medical history includes None \u2014 previously healthy and fit athlete, Prior marathon completions. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Exertional Heat Stroke \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. Mitchell",
-      "collected": "02/26/2026 14:05",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260360",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-570502",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "18.8",
-              "unit": "K/uL",
+              "value": "7.4",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
-              "flag": "H"
+              "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "16.8",
+              "value": "15",
               "unit": "g/dL",
-              "range": "13.5-17.5",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39",
+              "unit": "%",
+              "range": "36-46",
               "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "128",
-              "unit": "K/uL",
+              "value": "157",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
-              "flag": "L"
+              "flag": ""
             }
           ]
         },
         {
-          "name": "METABOLIC",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
               "test": "Sodium",
@@ -140,84 +160,105 @@ window.EMR_DATA = {
             },
             {
               "test": "Potassium",
-              "value": "5.4",
+              "value": "5.6",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
               "flag": "H"
             },
             {
-              "test": "Creatinine",
-              "value": "2.2",
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "10",
               "unit": "mg/dL",
-              "range": "0.7-1.3",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
               "flag": "H"
             },
             {
               "test": "Glucose",
-              "value": "62",
+              "value": "90",
               "unit": "mg/dL",
               "range": "70-100",
-              "flag": "L"
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Core Temperature",
+              "value": "107.2\u00b0F (41.8\u00b0C)",
+              "unit": "",
+              "range": "97-99\u00b0F",
+              "flag": "H"
+            },
+            {
+              "test": "CK Total",
+              "value": "32,000",
+              "unit": "U/L",
+              "range": "22-198",
+              "flag": "H"
             },
             {
               "test": "AST",
-              "value": "248",
+              "value": "680",
               "unit": "U/L",
               "range": "10-40",
               "flag": "H"
             },
             {
               "test": "ALT",
-              "value": "182",
+              "value": "420",
               "unit": "U/L",
               "range": "7-56",
               "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "CRITICAL",
-          "results": [
-            {
-              "test": "CPK",
-              "value": "12,400",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
             },
             {
-              "test": "Lactate",
-              "value": "8.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "PT",
-              "value": "16.2",
-              "unit": "sec",
-              "range": "11.0-13.5",
-              "flag": "H"
-            },
-            {
-              "test": "INR",
-              "value": "1.4",
+              "test": "PT/INR",
+              "value": "1.6",
               "unit": "",
               "range": "0.9-1.1",
               "flag": "H"
             },
             {
-              "test": "Fibrinogen",
-              "value": "148",
-              "unit": "mg/dL",
-              "range": "200-400",
-              "flag": "L"
+              "test": "Lactate",
+              "value": "8.4",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
             },
             {
-              "test": "UA \u2014 Myoglobin",
-              "value": "Positive",
+              "test": "ABG pH",
+              "value": "7.18",
               "unit": "",
-              "range": "Negative",
+              "range": "7.35-7.45",
               "flag": "H"
             }
           ]
@@ -225,66 +266,103 @@ window.EMR_DATA = {
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "CT Head without Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-895220",
+      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+      "technique": "Standard protocol",
+      "findings": "No acute intracranial pathology. No hemorrhage. No edema.",
+      "impression": "Normal \u2014 AMS from thermal injury to CNS, not structural cause",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "Chest X-ray",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-971682",
+      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+      "technique": "Standard protocol",
+      "findings": "Clear lungs. Normal cardiac silhouette.",
+      "impression": "No acute pulmonary pathology",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-218126",
+      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 142 bpm. Diffuse ST depression (demand ischemia). QTc prolonged at 490ms",
+      "impression": "Sinus tachycardia with demand ischemia. Prolonged QTc from hyperthermia \u2014 arrhythmia risk.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: HTN, alive at 50",
-    "Mother: Healthy, alive at 48",
-    "No family history of malignant hyperthermia or exertional illness"
+    "No malignant hyperthermia history",
+    "No cardiac history"
   ],
   "socialHistory": [
-    [
-      "Occupation",
-      "College senior \u2014 pre-med; scholarship football player (defensive end)"
-    ],
     [
       "Tobacco",
       "Never"
     ],
     [
       "Alcohol",
-      "Social on weekends during off-season"
+      "Social \u2014 had beers at pre-race dinner last night"
     ],
     [
       "Drugs",
-      "Denies PEDs; denies stimulants"
+      "Denies"
     ],
     [
-      "Supplements",
-      "Creatine, protein powder, pre-workout (contains caffeine)"
+      "Occupation",
+      "Software developer, recreational athlete"
     ],
     [
-      "Exercise",
-      "Football practice 5-6 days/week + conditioning"
+      "Living",
+      "Fit 32-year-old male, well-trained"
     ]
-  ],
-  "meta": {
-    "caseId": "heat-stroke",
-    "diagnosis": "Exertional Heat Stroke",
-    "acuity": 1,
-    "presentation": "Environmental Emergency",
-    "category": "environmental"
-  }
+  ]
 };

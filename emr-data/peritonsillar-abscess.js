@@ -1,169 +1,213 @@
-// Virtual EMR Case: Peritonsillar Abscess (Quinsy)
-// Variant: peritonsillar-abscess | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
-
+/* emr-data/peritonsillar-abscess.js — EMR case data for Peritonsillar Abscess (Quinsy) */
 window.EMR_DATA = {
   "patient": {
-    "name": "Sophia Martinez",
-    "dob": "04/20/2001",
-    "age": 24,
-    "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Parent plan \u2014 Aetna PPO",
-    "pcp": "Dr. Rachel Kim, DO",
-    "pharmacy": "Walgreens \u2014 Riverside, FL",
-    "language": "English/Spanish",
-    "race": "Hispanic",
-    "address": "2840 SW 42nd St, Riverside, FL",
-    "phone": "(954) 555-1144",
-    "email": "s.martinez01@email.com",
+    "name": "Jameson Ortiz",
+    "dob": "02/09/1976",
+    "age": "50",
+    "sex": "Male",
+    "pronouns": "he/him",
+    "mrn": "MRN-505748",
+    "language": "English",
+    "race": "American Indian",
+    "phone": "(618) 618-3650",
+    "email": "jameson.ortiz@email.com",
+    "address": "8493 Pine Rd, Davie, FL 33314",
+    "insurance": "Humana Gold Plus",
+    "pcp": "Dr. Karen Liu, DO",
+    "pharmacy": "Rite Aid — Sunrise Blvd",
     "emergencyContact": {
-      "name": "Isabel Martinez (Mother)",
-      "phone": "(954) 555-1160"
+      "name": "Charles Roberts",
+      "phone": "(443) 312-8785",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-71863"
+    "chiefComplaint": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
+    "diagnosis": "Peritonsillar Abscess (Quinsy)"
   },
   "problems": [
     {
-      "problem": "Recurrent Streptococcal Pharyngitis",
-      "icd": "J02.0",
-      "onset": "2023",
+      "id": "prob-1",
+      "description": "Recurrent tonsillitis",
       "status": "Active",
-      "notes": "3 episodes in past 18 months; tonsillectomy discussed but deferred"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Tobacco use",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "None",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Amoxicillin",
+      "dose": "500mg TID (started 4 days ago — failing treatment)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Ibuprofen",
+      "dose": "600mg TID PRN",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Robert Hughes, DO"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Clindamycin",
+      "reaction": "C. difficile colitis",
+      "severity": "Moderate",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "128/78",
-      "hr": 98,
-      "rr": 16,
-      "temp": "102.4\u00b0F",
-      "spo2": "99%",
-      "wt": "140 lbs",
-      "ht": "5'5\"",
-      "bmi": 23.3,
-      "setting": "ED"
+      "date": "03/03/2026",
+      "time": "07:26",
+      "bp": "138/82",
+      "hr": "102",
+      "rr": "18",
+      "temp": "38.8°C",
+      "spo2": "97%",
+      "pain": "9/10",
+      "bmi": "29",
+      "weight": "88 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Severe sore throat x 5 days, can't swallow, 'hot potato' voice",
-      "hpi": "24F with recurrent strep throat presents with 5 days of severe L-sided sore throat worsening despite 3 days of amoxicillin (prescribed at urgent care). Now unable to swallow solids or liquids. Trismus \u2014 can barely open mouth. Voice is muffled. Fevers to 103\u00b0F at home. Drooling. No respiratory distress but very uncomfortable.",
-      "exam": "Febrile, drooling, muffled voice. Trismus (inter-incisal opening ~15mm). Oropharynx (limited view): L tonsillar fullness with fluctuance. Uvula deviated to the RIGHT. L anterior pillar bulging. Tender L submandibular lymphadenopathy (3 cm). No stridor. Neck supple but tender L side.",
-      "assessment": "1. Left peritonsillar abscess \u2014 trismus, uvula deviation, fluctuance, failure of outpatient antibiotics\n2. Dehydration from poor oral intake\n3. Will require I&D",
-      "plan": "1. IV clindamycin 900mg + dexamethasone 10mg IV\n2. IV NS 1L bolus\n3. ENT consult for needle aspiration or I&D\n4. CT neck with contrast if diagnosis uncertain (clinical diagnosis here is clear)\n5. Pain: acetaminophen/ibuprofen + viscous lidocaine gargle\n6. Admit for IV antibiotics and hydration\n7. Discuss interval tonsillectomy after resolution"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
+      "hpi": "Jameson Ortiz is a 50-year-old male presenting with worst sore throat of my life — all on the left side left-sided throat/pharyngeal pain — unilateral. Past medical history includes Recurrent tonsillitis, Tobacco use. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Peritonsillar Abscess (Quinsy) — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "15:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 15:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260320",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-870443",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "18.4",
-              "unit": "K/uL",
+              "value": "16.2",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
             {
               "test": "Hemoglobin",
-              "value": "13.2",
+              "value": "14.8",
               "unit": "g/dL",
               "range": "12.0-16.0",
               "flag": ""
             },
             {
+              "test": "Hematocrit",
+              "value": "48",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
               "test": "Platelets",
-              "value": "342",
-              "unit": "K/uL",
+              "value": "235",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
           ]
         },
         {
-          "name": "BMP",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "Glucose",
-              "value": "102",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "22",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
               "flag": ""
             },
             {
               "test": "Potassium",
-              "value": "3.8",
+              "value": "3.9",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "23",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "81",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.1",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
               "flag": ""
             }
           ]
         },
         {
-          "name": "OTHER",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
-              "test": "Rapid Strep",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            },
-            {
-              "test": "Monospot",
-              "value": "Negative",
-              "unit": "",
-              "range": "Negative",
+              "test": "Lactate",
+              "value": "1.4",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
               "flag": ""
             }
           ]
@@ -173,72 +217,100 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "CT NECK WITH IV CONTRAST",
-      "accession": "IMG-2026-260320",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-915664",
+      "clinical": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "CT Neck with Contrast",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "L peritonsillar abscess \u2014 extent evaluation",
-      "technique": "CT neck with IV contrast.",
-      "findings": "Well-defined rim-enhancing fluid collection in the left peritonsillar space measuring 3.2 x 2.8 x 2.4 cm. Displacement of the left palatine tonsil medially. Mild narrowing of the oropharyngeal airway. Left submandibular lymphadenopathy (largest 2.8 cm). No retropharyngeal extension. No vascular involvement.",
-      "impression": "1. Left peritonsillar abscess (3.2 cm) \u2014 amenable to I&D.\n2. No deep space extension.\n3. Mild airway narrowing \u2014 not critical.",
-      "dictated": "02/26/2026 15:30",
-      "verified": "02/26/2026 15:45"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-835629",
+      "clinical": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
+      "technique": "Standard protocol",
+      "findings": "LEFT PERITONSILLAR ABSCESS — rim-enhancing fluid collection measuring 3.2 x 2.8cm in the left peritonsillar space. Left tonsil displaced medially. Mild left parapharyngeal fat stranding. No retropharyngeal extension. No vascular involvement (internal jugular vein patent — no Lemierre syndrome). Airway patent but mildly narrowed at oropharyngeal level. RIGHT side: normal.",
+      "impression": "LEFT PERITONSILLAR ABSCESS, 3.2cm. No deep space extension. No vascular thrombosis. Requires drainage.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-988181",
+      "clinical": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 102 bpm. Normal intervals",
+      "impression": "Sinus tachycardia — infection and pain",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: Healthy, alive at 52",
-    "Mother: Healthy, alive at 48"
+    "Non-contributory"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Dental hygiene student"
-    ],
-    [
       "Tobacco",
-      "Never"
+      "Current, 10 pack-years"
     ],
     [
       "Alcohol",
-      "Social"
+      "Social, 3-4 drinks weekends"
     ],
     [
       "Drugs",
-      "Denies"
+      "Marijuana occasionally"
+    ],
+    [
+      "Occupation",
+      "Bartender"
+    ],
+    [
+      "Living",
+      "Lives with roommate"
     ]
-  ],
-  "meta": {
-    "caseId": "peritonsillar-abscess",
-    "diagnosis": "Peritonsillar Abscess (Quinsy)",
-    "acuity": 3,
-    "presentation": "ENT / Airway Emergency",
-    "category": "ent"
-  }
+  ]
 };

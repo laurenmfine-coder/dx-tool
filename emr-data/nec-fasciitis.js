@@ -1,176 +1,353 @@
-// Virtual EMR Case: Necrotizing Fasciitis (GAS)
-// Variant: nec-fasciitis | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/nec-fasciitis.js — EMR case data for Necrotizing Fasciitis (Group A Streptococcus — Extremity) */
 window.EMR_DATA = {
   "patient": {
-    "name": "Robert Patterson",
-    "dob": "09/14/1968",
-    "age": 57,
+    "name": "Deshawn Lewis",
+    "dob": "08/01/1963",
+    "age": "63",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "BCBS PPO",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-565984",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "robert@email.com",
+    "race": "Pacific Islander",
+    "phone": "(834) 363-5754",
+    "email": "deshawn.lewis@email.com",
+    "address": "8101 Elm Blvd, Davie, FL 33314",
+    "insurance": "Cigna",
+    "pcp": "Dr. Amy Patel, MD",
+    "pharmacy": "Publix Pharmacy — Sunrise Blvd",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Christopher Carter",
+      "phone": "(664) 598-9920",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-21537"
+    "chiefComplaint": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
+    "diagnosis": "Necrotizing Fasciitis (Group A Streptococcus — Extremity)"
   },
   "problems": [
     {
-      "problem": "Necrotizing Fasciitis (GAS)",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Type 2 Diabetes",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Peripheral neuropathy",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Obesity",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Metformin",
+      "dose": "1000mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
+    },
+    {
+      "id": "med-2",
+      "name": "Gabapentin",
+      "dose": "300mg TID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Michael Torres, DO"
+    },
+    {
+      "id": "med-3",
+      "name": "Lisinopril",
+      "dose": "20mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/03/2026",
+      "time": "10:35",
+      "bp": "96/62",
+      "hr": "122",
+      "rr": "24",
+      "temp": "40.0°C",
+      "spo2": "95%",
+      "pain": "10/10",
+      "bmi": "34",
+      "weight": "81 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Necrotizing Fasciitis (GAS)",
-      "hpi": "57M diabetic with 2 days of rapidly progressive R lower extremity pain/swelling after minor skin laceration. Now with hemorrhagic bullae, crepitus, severe pain out of proportion to exam, hemodynamically unstable. CT: gas tracking through fascial planes. LRINEC score 9. EMERGENT surgical debridement + vanc/pip-tazo/clinda.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Necrotizing Fasciitis (GAS) \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
+      "hpi": "Deshawn Lewis is a 63-year-old male presenting with my leg pain is unbearable right lower leg — started at small shin laceration, now involves entire calf and extending above knee. Past medical history includes Type 2 Diabetes, Peripheral neuropathy, Obesity. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Necrotizing Fasciitis (Group A Streptococcus — Extremity) — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-464426",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "24.8",
-              "unit": "K/uL",
+              "value": "28.2",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
             {
-              "test": "CRP",
-              "value": "32",
-              "unit": "mg/dL",
-              "range": "<1.0",
-              "flag": "H"
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
             },
             {
+              "test": "Hematocrit",
+              "value": "42",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "194",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
               "test": "Sodium",
-              "value": "132",
+              "value": "131",
               "unit": "mEq/L",
               "range": "136-145",
               "flag": "L"
             },
             {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "105",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "28",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "10",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.4",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "312",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "Calcium",
+              "value": "10.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "CRP",
+              "value": "28.6",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": "H"
+            },
+            {
               "test": "Lactate",
-              "value": "6.4",
+              "value": "5.2",
               "unit": "mmol/L",
               "range": "0.5-2.0",
               "flag": "H"
+            },
+            {
+              "test": "CK Total",
+              "value": "1,840",
+              "unit": "U/L",
+              "range": "22-198",
+              "flag": "H"
+            },
+            {
+              "test": "Blood Cultures",
+              "value": "Pending",
+              "unit": "",
+              "range": "No growth",
+              "flag": ""
             }
           ]
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-617523",
+      "clinical": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "CT Abdomen/Pelvis with Contrast",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-451396",
+      "clinical": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
+      "technique": "Standard protocol",
+      "findings": "Right lower extremity: extensive subcutaneous edema and fascial thickening from mid-tibia to distal thigh. Fat stranding. Small pockets of fluid tracking along fascial planes. No discrete abscess. No subcutaneous gas. Muscle compartments enhancing but edematous.",
+      "impression": "Findings consistent with necrotizing soft tissue infection of right lower extremity — EMERGENT SURGICAL EXPLORATION AND DEBRIDEMENT.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-995470",
+      "clinical": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 122 bpm. No ST changes",
+      "impression": "Sinus tachycardia — sepsis",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Diabetes in multiple family members"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Tobacco",
+      "Current, 15 pack-years"
+    ],
+    [
+      "Alcohol",
+      "Occasional"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Occupation",
+      "Landscaper"
+    ],
+    [
+      "Living",
+      "Lives with wife"
     ]
-  ],
-  "meta": {
-    "caseId": "nec-fasciitis",
-    "diagnosis": "Necrotizing Fasciitis (GAS)",
-    "acuity": 1,
-    "presentation": "Skin / Soft Tissue Emergency",
-    "category": "dermatologic"
-  }
+  ]
 };

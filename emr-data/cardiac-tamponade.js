@@ -1,175 +1,166 @@
-// Virtual EMR Case: Cardiac Tamponade (Malignant Pericardial Effusion)
-// Variant: cardiac-tamponade | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/cardiac-tamponade.js — EMR case data for Cardiac Tamponade (Malignant Pericardial Effusion) */
 window.EMR_DATA = {
   "patient": {
-    "name": "Evelyn Brooks",
-    "dob": "05/28/1955",
-    "age": 70,
+    "name": "Patricia Moreno",
+    "dob": "06/15/1962",
+    "age": "64",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Medicare + BCBS Medigap",
-    "pcp": "Dr. Nancy Oliver, MD",
-    "pharmacy": "Walgreens \u2014 Pembroke Pines, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-567122",
     "language": "English",
-    "race": "White",
-    "address": "1210 NW 104th Ave, Pembroke Pines, FL",
-    "phone": "(954) 555-7712",
-    "email": "e.brooks55@email.com",
+    "race": "Black/African American",
+    "phone": "(482) 892-2668",
+    "email": "patricia.moreno@email.com",
+    "address": "7628 Oak St, Weston, FL 33391",
+    "insurance": "Medicare",
+    "pcp": "Dr. Robert Hughes, DO",
+    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
-      "name": "David Brooks (Son)",
-      "phone": "(954) 555-7728"
+      "name": "James Morris",
+      "phone": "(792) 652-2625",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-78456"
+    "chiefComplaint": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+    "diagnosis": "Cardiac Tamponade (Malignant Pericardial Effusion)"
   },
   "problems": [
     {
-      "problem": "Metastatic Breast Cancer",
-      "icd": "C79.89",
-      "onset": "2023",
+      "id": "prob-1",
+      "description": "Non-small cell lung cancer",
       "status": "Active",
-      "notes": "Stage IV ER+/PR+/HER2-; mets to bone and lung; on letrozole + palbociclib; known small pericardial effusion on last imaging"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Known Pericardial Effusion",
-      "icd": "I31.3",
-      "onset": "2025",
+      "id": "prob-2",
+      "description": "Completed 4 cycles of carboplatin/pemetrexed 2 months ago \u2014 disease progression",
       "status": "Active",
-      "notes": "1.2 cm on echo 12/2025; asymptomatic at that time; malignant etiology suspected"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2010",
+      "id": "prob-3",
+      "description": "Brain metastases",
       "status": "Active",
-      "notes": "On lisinopril"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Letrozole 2.5mg daily",
-      "sig": "PO daily",
-      "prescriber": "Oncology",
-      "start": "06/2023",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Dexamethasone",
+      "dose": "4mg BID (for brain mets edema)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     },
     {
-      "name": "Palbociclib 125mg daily x 21 days/28-day cycle",
-      "sig": "PO daily",
-      "prescriber": "Oncology",
-      "start": "06/2023",
-      "refills": 2,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Levetiracetam",
+      "dose": "500mg BID (seizure prophylaxis)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     },
     {
-      "name": "Lisinopril 10mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Oliver",
-      "start": "03/2010",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-3",
+      "name": "Ondansetron",
+      "dose": "8mg PRN nausea",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
     },
     {
-      "name": "Calcium + Vitamin D",
-      "sig": "PO daily",
-      "prescriber": "Dr. Oliver",
-      "start": "01/2024",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-4",
+      "name": "Oxycodone",
+      "dose": "5mg PRN pain",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "86/68",
-      "hr": 118,
-      "rr": 24,
-      "temp": "98.2\u00b0F",
-      "spo2": "94%",
-      "wt": "148 lbs",
-      "ht": "5'6\"",
-      "bmi": 23.9,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "78/62",
-      "hr": 124,
-      "rr": 28,
-      "temp": "98.0\u00b0F",
+      "date": "03/03/2026",
+      "time": "09:43",
+      "bp": "94/78 (NARROW PULSE PRESSURE \u2014 16mmHg; normal >25-30mmHg)",
+      "hr": "118",
+      "rr": "26",
+      "temp": "36.8\u00b0C",
       "spo2": "92%",
-      "wt": "148 lbs",
-      "ht": "5'6\"",
-      "bmi": 23.9,
-      "setting": "ED \u2014 30min"
+      "pain": "34/10",
+      "bmi": "31",
+      "weight": "89 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Progressive dyspnea, lightheadedness x 3 days, now near-syncope",
-      "hpi": "70F with metastatic breast cancer and known pericardial effusion presents with 3 days of worsening dyspnea, lightheadedness on standing, and muffled chest discomfort. Today had near-syncope walking to bathroom. Felt 'heart racing.' Husband notes increased neck vein distension. Orthopnea x 2 days. Last oncology visit 3 weeks ago.",
-      "exam": "Ill-appearing, tachycardic, hypotensive. JVP markedly elevated. Heart sounds distant and muffled. Pulsus paradoxus 22 mmHg (>10 mmHg = significant). Lungs: Clear (distinguishes from CHF). Extremities: Cool, mottled. Peripheral edema mild bilateral.",
-      "assessment": "1. CARDIAC TAMPONADE \u2014 malignant pericardial effusion with hemodynamic compromise (Beck triad: hypotension, JVD, muffled heart sounds + pulsus paradoxus)\n2. Obstructive shock physiology\n3. EMERGENT pericardiocentesis indicated",
-      "plan": "1. Bedside echo \u2014 CONFIRMED: Large circumferential pericardial effusion with RV diastolic collapse and IVC plethora\n2. EMERGENT pericardiocentesis \u2014 subxiphoid approach, echo-guided\n3. IV NS 500mL bolus (preload augmentation)\n4. Avoid vasodilators/diuretics\n5. Cardiology + Oncology consult\n6. Pericardial fluid: cytology, culture, AFB, LDH, glucose, protein\n7. Consider pericardial window if reaccumulates\n8. ICU admission post-procedure"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "hpi": "Patricia Moreno is a 64-year-old female presenting with i can't breathe chest \u2014 pressure/fullness sensation, diffuse. Past medical history includes Non-small cell lung cancer, Completed 4 cycles of carboplatin/pemetrexed 2 months ago \u2014 disease progression, Brain metastases. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Cardiac Tamponade (Malignant Pericardial Effusion) \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-656017",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "COMPLETE BLOOD COUNT",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "6.2",
-              "unit": "K/uL",
+              "value": "8.4",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "10.8",
+              "value": "10.2",
               "unit": "g/dL",
-              "range": "13.5-17.5",
+              "range": "12.0-16.0",
               "flag": "L"
             },
             {
               "test": "Hematocrit",
-              "value": "32.4",
+              "value": "44",
               "unit": "%",
-              "range": "38.3-48.6",
-              "flag": "L"
+              "range": "36-46",
+              "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "118",
-              "unit": "K/uL",
+              "value": "290",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
-              "flag": "L"
+              "flag": ""
             }
           ]
         },
@@ -177,62 +168,83 @@ window.EMR_DATA = {
           "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
               "test": "Sodium",
-              "value": "136",
+              "value": "141",
               "unit": "mEq/L",
               "range": "136-145",
               "flag": ""
             },
             {
               "test": "Potassium",
-              "value": "4.8",
+              "value": "4.1",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "17",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "8.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
               "flag": ""
             }
           ]
         },
         {
-          "name": "CARDIAC/CRITICAL",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
               "test": "Troponin I",
-              "value": "0.12",
+              "value": "0.02",
               "unit": "ng/mL",
               "range": "<0.04",
-              "flag": "H"
+              "flag": ""
             },
             {
               "test": "BNP",
-              "value": "892",
+              "value": "620",
               "unit": "pg/mL",
               "range": "<100",
               "flag": "H"
             },
             {
               "test": "Lactate",
-              "value": "4.2",
+              "value": "3.6",
               "unit": "mmol/L",
               "range": "0.5-2.0",
               "flag": "H"
@@ -244,95 +256,100 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "BEDSIDE ECHOCARDIOGRAM",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. Carter",
-      "readBy": "Dr. Carter, MD",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 Cardiac",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Suspected tamponade \u2014 hypotension, JVD, muffled sounds",
-      "technique": "Bedside focused echocardiography.",
-      "findings": "Large circumferential pericardial effusion \u2014 maximum width 3.2 cm posteriorly, 2.8 cm anteriorly. Right ventricular diastolic collapse present (>1/3 of diastole). Right atrial systolic inversion. IVC dilated (2.6 cm) with <50% respiratory variation. Swinging heart motion. LV function grossly normal.\n\nNo obvious pericardial masses but cannot exclude given effusion volume.",
-      "impression": "1. Large pericardial effusion with echocardiographic evidence of tamponade.\n2. RV diastolic collapse and RA inversion \u2014 hemodynamically significant.\n3. EMERGENT pericardiocentesis recommended.\n4. Malignant etiology likely given cancer history.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-937131",
+      "clinical": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "technique": "Standard protocol",
+      "findings": "LARGE CIRCUMFERENTIAL PERICARDIAL EFFUSION (>2cm). RIGHT ATRIAL COLLAPSE in diastole (earliest sign of tamponade \u2014 RA has lowest intracardiac pressure). RIGHT VENTRICULAR DIASTOLIC COLLAPSE (confirms hemodynamic significance). IVC plethoric (>2.1cm) with <50% respirophasic variation (elevated RA pressure). SWINGING HEART within effusion (corresponds to electrical alternans). No left-sided collapse. LV function appears hyperdynamic (small, underfilled ventricle contracting vigorously).",
+      "impression": "LARGE PERICARDIAL EFFUSION WITH TAMPONADE PHYSIOLOGY \u2014 RA and RV diastolic collapse, plethoric IVC. EMERGENT PERICARDIOCENTESIS REQUIRED.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "Chest X-ray",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-527314",
+      "clinical": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "technique": "Standard protocol",
+      "findings": "ENLARGED CARDIAC SILHOUETTE with 'water-bottle' configuration. Bilateral small pleural effusions. Left hilar mass (known primary lung cancer). No pneumothorax.",
+      "impression": "Massive pericardial effusion with enlarged silhouette. Known lung cancer.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-174726",
+      "clinical": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 118 bpm. LOW VOLTAGE throughout (QRS amplitude <5mm in limb leads \u2014 pericardial fluid attenuates signal). ELECTRICAL ALTERNANS (QRS amplitude alternates beat-to-beat \u2014 swinging heart within fluid). No ST changes",
+      "impression": "Classic ECG triad: tachycardia + low voltage + electrical alternans = PERICARDIAL EFFUSION WITH TAMPONADE PHYSIOLOGY",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster (Pfizer)",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Breast cancer (diagnosed age 62, survived)",
-    "Father: CAD, deceased at 72",
-    "Sister: Healthy, alive at 67"
+    "Father: lung cancer (smoker)"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Retired school teacher"
-    ],
-    [
-      "Marital",
-      "Married 45 years"
-    ],
-    [
       "Tobacco",
-      "Never"
+      "30 pack-years, quit at diagnosis 1 year ago"
     ],
     [
       "Alcohol",
-      "Rare"
+      "None since diagnosis"
     ],
     [
-      "Exercise",
-      "Walking limited by dyspnea recently"
+      "Drugs",
+      "Denies"
     ],
     [
-      "Advance Directive",
-      "DNR/DNI discussed \u2014 patient chose FULL CODE for now; DPOA son David"
+      "Occupation",
+      "On disability \u2014 former construction supervisor"
+    ],
+    [
+      "Living",
+      "Lives with wife and adult daughter"
     ]
-  ],
-  "meta": {
-    "caseId": "cardiac-tamponade",
-    "diagnosis": "Cardiac Tamponade (Malignant Pericardial Effusion)",
-    "acuity": 1,
-    "presentation": "Cardiac Emergency",
-    "category": "cardiac"
-  }
+  ]
 };

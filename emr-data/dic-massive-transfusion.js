@@ -1,202 +1,246 @@
-// Virtual EMR Case: Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage
-// Variant: dic-massive-transfusion | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/dic-massive-transfusion.js — EMR case data for Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage */
 window.EMR_DATA = {
   "patient": {
-    "name": "Thomas Brown",
-    "dob": "12/05/1975",
-    "age": 50,
-    "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Workers Comp + Cigna",
-    "pcp": "Dr. Mark Peterson, MD",
-    "pharmacy": "Walgreens \u2014 Riverside, FL",
+    "name": "Esperanza Ruiz",
+    "dob": "11/16/1966",
+    "age": "60",
+    "sex": "Female",
+    "pronouns": "she/her",
+    "mrn": "MRN-531656",
     "language": "English",
     "race": "White",
-    "address": "2240 SW 64th Ave, Riverside, FL",
-    "phone": "(954) 555-1122",
-    "email": "t.brown75@email.com",
+    "phone": "(334) 331-2971",
+    "email": "esperanza.ruiz@email.com",
+    "address": "9642 Maple Ave, Boca Raton, FL 33431",
+    "insurance": "Humana Gold Plus",
+    "pcp": "Dr. Lisa Chang, MD",
+    "pharmacy": "Walmart Pharmacy — Federal Hwy",
     "emergencyContact": {
-      "name": "Jennifer Brown (Wife)",
-      "phone": "(954) 555-1138"
+      "name": "Richard Walker",
+      "phone": "(901) 530-3252",
+      "relationship": "Partner"
     },
-    "mrn": "RDX-2025-27013"
+    "chiefComplaint": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
+    "diagnosis": "Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage"
   },
   "problems": [
     {
-      "problem": "No Significant PMH",
-      "icd": "Z87.89",
-      "onset": "",
+      "id": "prob-1",
+      "description": "Delayed splenic rupture",
       "status": "Active",
-      "notes": "Previously healthy"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Otherwise healthy 38-year-old",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "None",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "None routine",
+      "dose": "",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "72/40",
-      "hr": 138,
-      "rr": 30,
-      "temp": "95.8\u00b0F",
-      "spo2": "88%",
-      "wt": "200 lbs",
-      "ht": "6'0\"",
-      "bmi": 27.1,
-      "setting": "ED \u2014 Trauma Bay"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "88/52",
-      "hr": 122,
-      "rr": 24,
-      "temp": "96.4\u00b0F",
-      "spo2": "92%",
-      "wt": "200 lbs",
-      "ht": "6'0\"",
-      "bmi": 27.1,
-      "setting": "ED \u2014 Post-MTP 30min"
+      "date": "03/03/2026",
+      "time": "08:48",
+      "bp": "72/48",
+      "hr": "138",
+      "rr": "28",
+      "temp": "35.3°C",
+      "spo2": "91%",
+      "pain": "2500/10",
+      "bmi": "22",
+      "weight": "81 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED \u2014 Trauma Activation Level 1",
-      "provider": "Dr. Sarah Mitchell, MD",
-      "cc": "Multi-vehicle MVC, unrestrained driver, prolonged extrication",
-      "hpi": "50M previously healthy, unrestrained driver in high-speed MVC (T-bone collision, estimated 50 mph). Prolonged extrication (~25 min). EMS: GCS 10, BP 78/42, HR 132. Left chest wall deformity. Open left femur fracture. Large scalp laceration with brisk bleeding. Estimated 1.5L blood loss at scene. 2 units O-neg pRBC and 2L NS given en route. Massive transfusion protocol activated.",
-      "exam": "Intubated (RSI in field). GCS 6T. Scalp: 12 cm laceration with active hemorrhage \u2014 packed. Chest: Decreased breath sounds left (? hemothorax). Pelvic instability on compression. Left thigh: Open femur fracture with active arterial bleeding \u2014 tourniquet applied. Abdomen: Distended. Oozing from IV sites and scalp laceration (DIC concern). Cold, mottled extremities.",
-      "assessment": "1. Multi-system trauma with hemorrhagic shock Class IV\n2. Likely injuries: Left hemothorax, splenic/hepatic laceration (distended abdomen), open femur fracture, scalp laceration, possible pelvic fracture\n3. Developing DIC \u2014 diffuse oozing from wounds and IV sites, coagulopathy on labs\n4. Lethal triad present: hypothermia (95.8\u00b0F), acidosis (pH 7.08), coagulopathy (INR 2.4)",
-      "plan": "1. Massive transfusion protocol: 1:1:1 ratio (pRBC:FFP:Platelets)\n2. TXA 1g IV bolus \u2192 1g over 8hr (if <3hr from injury)\n3. Left chest tube (32F) \u2014 800 mL immediate return (hemothorax confirmed)\n4. FAST exam \u2192 positive in Morison pouch and left paracolic gutter\n5. Cryoprecipitate 10 units (fibrinogen <100)\n6. Calcium replacement (citrate toxicity from transfusion) \u2014 CaCl 1g IV q30min\n7. Damage control surgery: OR for exploratory laparotomy \u2192 splenectomy + packing\n8. Femur: External fixation in OR\n9. Serial coags, fibrinogen, TEG/ROTEM\n10. Hypothermia protocol: Bair Hugger, warm fluids, warm OR"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
+      "hpi": "Esperanza Ruiz is a 60-year-old female presenting with surgical team: 'patient is oozing from everywhere — wound, iv sites, ng tube. blood isn't clotting.' diffuse — bleeding from surgical wound, peripheral iv insertion sites, nasogastric tube, foley catheter (hematuria). Past medical history includes Delayed splenic rupture, Otherwise healthy 38-year-old. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "15:00",
-      "orderedBy": "Dr. Mitchell",
-      "collected": "02/26/2026 15:05",
-      "facility": "ReasonDx Memorial — Trauma Lab",
-      "accession": "LAB-2026-260481",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-296007",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "22.4",
-              "unit": "K/uL",
+              "value": "10.4",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
-              "flag": "H"
+              "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "6.8",
+              "value": "5.8",
               "unit": "g/dL",
-              "range": "13.5-17.5",
+              "range": "12.0-16.0",
               "flag": "L"
             },
             {
+              "test": "Hematocrit",
+              "value": "42",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
               "test": "Platelets",
-              "value": "48",
-              "unit": "K/uL",
+              "value": "28",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": "L"
             }
           ]
         },
         {
-          "name": "COAGULATION \u2014 DIC",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "PT",
-              "value": "24.8",
-              "unit": "sec",
-              "range": "11.0-13.5",
-              "flag": "H"
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
             },
             {
-              "test": "INR",
-              "value": "2.4",
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "20",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.6",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "77",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "PT/INR",
+              "value": "2.8",
               "unit": "",
               "range": "0.9-1.1",
               "flag": "H"
             },
             {
               "test": "PTT",
-              "value": "58",
+              "value": "68",
               "unit": "sec",
               "range": "25-35",
               "flag": "H"
             },
             {
               "test": "Fibrinogen",
-              "value": "68",
+              "value": "62",
               "unit": "mg/dL",
               "range": "200-400",
-              "flag": "L"
-            },
-            {
-              "test": "D-Dimer",
-              "value": ">20,000",
-              "unit": "ng/mL",
-              "range": "<500",
               "flag": "H"
             },
             {
-              "test": "FDP",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
+              "test": "D-dimer",
+              "value": ">20",
+              "unit": "mcg/mL",
+              "range": "<0.5",
               "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "CRITICAL",
-          "results": [
-            {
-              "test": "pH (ABG)",
-              "value": "7.08",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "L"
             },
             {
-              "test": "Base Deficit",
-              "value": "-14",
-              "unit": "mEq/L",
-              "range": "-2 to +2",
-              "flag": "L"
+              "test": "Peripheral Smear",
+              "value": "Schistocytes present (fewer than in TTP). Decreased platelets on smear.",
+              "unit": "",
+              "range": "Normal",
+              "flag": "H"
             },
             {
               "test": "Lactate",
-              "value": "9.8",
+              "value": "9.2",
               "unit": "mmol/L",
               "range": "0.5-2.0",
+              "flag": "H"
+            },
+            {
+              "test": "ABG pH",
+              "value": "7.12",
+              "unit": "",
+              "range": "7.35-7.45",
               "flag": "H"
             },
             {
@@ -204,13 +248,6 @@ window.EMR_DATA = {
               "value": "0.82",
               "unit": "mmol/L",
               "range": "1.12-1.32",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "5.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
               "flag": "H"
             }
           ]
@@ -220,87 +257,101 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "CHEST X-RAY PORTABLE",
-      "accession": "CXR-2026-260481",
-      "status": "FINAL",
-      "orderedBy": "Dr. Mitchell",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — ED",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-153647",
+      "clinical": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "POCUS – FAST Exam",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Trauma \u2014 decreased L breath sounds",
-      "technique": "Portable AP chest radiograph.",
-      "findings": "Left hemothorax \u2014 large pleural effusion with meniscus sign. Multiple left rib fractures (ribs 4-8 laterally) \u2014 flail segment. Left lung partially collapsed. Right lung clear. Heart size normal. ETT in appropriate position. Left subclavian line tip in SVC.",
-      "impression": "1. Left hemothorax with flail chest (ribs 4-8).\n2. Left lung collapse.\n3. ETT and lines in appropriate position.",
-      "dictated": "02/26/2026 15:10",
-      "verified": "02/26/2026 15:15"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-215395",
+      "clinical": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
+      "technique": "Standard protocol",
+      "findings": "Small amount of free fluid in Morrison pouch and pelvis (post-surgical). IVC flat (collapsing completely — severe hypovolemia). No pericardial effusion.",
+      "impression": "Hypovolemic — aggressive resuscitation needed. Post-operative fluid expected but monitor for expanding hemoperitoneum.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-192951",
+      "clinical": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 138 bpm. Low voltage (hypovolemia). No ST elevation",
+      "impression": "Sinus tachycardia — hemorrhagic shock",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: HTN, alive at 78",
-    "Mother: Healthy, alive at 76"
+    "No bleeding disorders",
+    "No clotting disorders"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Construction foreman"
-    ],
-    [
-      "Marital",
-      "Married 22 years; 3 children"
-    ],
-    [
       "Tobacco",
-      "Never"
+      "Social"
     ],
     [
       "Alcohol",
-      "Social \u2014 2-3 beers on weekends"
+      "Occasional"
     ],
     [
       "Drugs",
       "Denies"
     ],
     [
-      "Advance Directive",
-      "None \u2014 wife to make decisions if incapacitated"
+      "Occupation",
+      "Construction worker"
+    ],
+    [
+      "Living",
+      "Lives with girlfriend"
     ]
-  ],
-  "meta": {
-    "caseId": "dic-massive-transfusion",
-    "diagnosis": "Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage",
-    "acuity": 1,
-    "presentation": "Hematologic Emergency",
-    "category": "hematologic"
-  }
+  ]
 };

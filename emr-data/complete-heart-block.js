@@ -1,180 +1,171 @@
-// Virtual EMR Case: Complete (Third-Degree) Heart Block
-// Variant: complete-heart-block | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/complete-heart-block.js — EMR case data for Complete (Third-Degree) Heart Block */
 window.EMR_DATA = {
   "patient": {
-    "name": "Walter Thompson",
-    "dob": "01/15/1943",
-    "age": 83,
+    "name": "Raymond Brooks",
+    "dob": "06/15/1952",
+    "age": "74",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Medicare",
-    "pcp": "Dr. Helen Russo, MD",
-    "pharmacy": "CVS \u2014 Deerfield Beach, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-530586",
     "language": "English",
-    "race": "White",
-    "address": "220 SE 10th St, Deerfield Beach, FL",
-    "phone": "(954) 555-2244",
-    "email": "w.thompson43@email.com",
+    "race": "Hispanic/Latino",
+    "phone": "(306) 208-5257",
+    "email": "raymond.brooks@email.com",
+    "address": "8850 Elm Blvd, Fort Lauderdale, FL 33301",
+    "insurance": "Aetna HMO",
+    "pcp": "Dr. Lisa Chang, MD",
+    "pharmacy": "CVS Pharmacy \u2014 University Dr",
     "emergencyContact": {
-      "name": "Barbara Thompson (Wife)",
-      "phone": "(954) 555-2260"
+      "name": "Gloria Stewart",
+      "phone": "(299) 852-7645",
+      "relationship": "Parent"
     },
-    "mrn": "RDX-2025-87940"
+    "chiefComplaint": "I keep nearly passing out No specific chest pain \u2014 generalized weakness and lightheadedness",
+    "diagnosis": "Complete (Third-Degree) Heart Block"
   },
   "problems": [
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "1995",
+      "id": "prob-1",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "On metoprolol and lisinopril"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Aortic Stenosis \u2014 Moderate",
-      "icd": "I35.0",
-      "onset": "2022",
+      "id": "prob-2",
+      "description": "Calcific aortic stenosis",
       "status": "Active",
-      "notes": "AVA 1.2 cm\u00b2; being monitored; calcific/degenerative"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "CKD Stage 3b",
-      "icd": "N18.32",
-      "onset": "2020",
+      "id": "prob-3",
+      "description": "Lyme disease",
       "status": "Active",
-      "notes": "eGFR 38; hypertensive nephrosclerosis"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "BPH",
-      "icd": "N40.0",
-      "onset": "2015",
+      "id": "prob-4",
+      "description": "Type 2 Diabetes",
       "status": "Active",
-      "notes": "On tamsulosin; nocturia x 2-3"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Metoprolol Tartrate 50mg BID",
-      "sig": "PO BID",
-      "prescriber": "Dr. Russo",
-      "start": "06/2005",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Metoprolol",
+      "dose": "100mg BID (rate-controlling agent \u2014 potential contributor)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
     },
     {
-      "name": "Lisinopril 10mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Russo",
-      "start": "01/2000",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Diltiazem",
+      "dose": "180mg ER daily (calcium channel blocker \u2014 potential contributor)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     },
     {
-      "name": "Tamsulosin 0.4mg QHS",
-      "sig": "PO at bedtime",
-      "prescriber": "Dr. Russo",
-      "start": "03/2015",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-3",
+      "name": "Lisinopril",
+      "dose": "20mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     },
     {
-      "name": "Aspirin 81mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Russo",
-      "start": "01/2010",
-      "refills": 11,
-      "status": "Active"
+      "id": "med-4",
+      "name": "Metformin",
+      "dose": "1000mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Sulfa drugs",
+      "reaction": "Rash",
+      "severity": "Moderate",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "92/54",
-      "hr": 34,
-      "rr": 18,
-      "temp": "97.8\u00b0F",
-      "spo2": "93%",
-      "wt": "172 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.4,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "108/68",
-      "hr": 62,
-      "rr": 16,
-      "temp": "98.0\u00b0F",
-      "spo2": "97%",
-      "wt": "172 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.4,
-      "setting": "ED \u2014 Post-TCP"
+      "date": "03/03/2026",
+      "time": "10:06",
+      "bp": "96/64",
+      "hr": "34 (SEVERE BRADYCARDIA)",
+      "rr": "18",
+      "temp": "36.9\u00b0C",
+      "spo2": "94%",
+      "pain": "3/10",
+      "bmi": "27",
+      "weight": "56 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Dizziness, near-syncope, feeling faint x 2 days",
-      "hpi": "83M presents via EMS after wife found him sitting on floor, unable to stand due to dizziness. Reports 2 days of progressive lightheadedness, fatigue, and one episode of near-syncope yesterday. Denies chest pain or dyspnea at rest but feels short of breath with minimal exertion. EMS ECG showed complete heart block with ventricular rate 32 bpm.",
-      "exam": "Lethargic but oriented x 3. Pale. JVP mildly elevated. CV: Bradycardic, regular but slow. Cannon A waves in JVP. Soft systolic murmur at RUSB. Variable S1 intensity. Lungs: Bibasilar crackles. Extremities: Cool, trace edema.",
-      "assessment": "1. Complete (third-degree) heart block with hemodynamic compromise\n2. Likely idiopathic degenerative conduction disease (Lev/Lenegre) given age\n3. Metoprolol may be contributing \u2014 HOLD\n4. Needs emergent transcutaneous pacing \u2192 permanent pacemaker",
-      "plan": "1. HOLD metoprolol\n2. Atropine 1mg IV push (may not work in infranodal block)\n3. Transcutaneous pacing \u2014 capture at 70 mA, rate 60\n4. If TCP fails: transvenous pacing\n5. Cardiology STAT consult for permanent pacemaker\n6. CBC, CMP, TSH, troponin, digoxin level\n7. ICU admission\n8. Pre-pacer workup: echo, chest X-ray"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "I keep nearly passing out No specific chest pain \u2014 generalized weakness and lightheadedness",
+      "hpi": "Raymond Brooks is a 74-year-old male presenting with i keep nearly passing out no specific chest pain \u2014 generalized weakness and lightheadedness. Past medical history includes Hypertension, Calcific aortic stenosis, Lyme disease, Type 2 Diabetes. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Complete (Third-Degree) Heart Block \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "09:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 09:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02260900",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-302357",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "COMPLETE BLOOD COUNT",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "7.8",
-              "unit": "K/uL",
+              "value": "10.2",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "12.2",
+              "value": "12.1",
               "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
+              "range": "12.0-16.0",
+              "flag": ""
             },
             {
               "test": "Hematocrit",
-              "value": "36.8",
+              "value": "36",
               "unit": "%",
-              "range": "38.3-48.6",
-              "flag": "L"
+              "range": "36-46",
+              "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "198",
-              "unit": "K/uL",
+              "value": "286",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
             }
@@ -184,44 +175,65 @@ window.EMR_DATA = {
           "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "42",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.1",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
               "test": "Sodium",
-              "value": "139",
+              "value": "136",
               "unit": "mEq/L",
               "range": "136-145",
               "flag": ""
             },
             {
               "test": "Potassium",
-              "value": "5.0",
+              "value": "5.1",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "11",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "80",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
               "flag": ""
             }
           ]
         },
         {
-          "name": "CARDIAC",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
               "test": "Troponin I",
@@ -232,31 +244,31 @@ window.EMR_DATA = {
             },
             {
               "test": "BNP",
-              "value": "682",
+              "value": "480",
               "unit": "pg/mL",
               "range": "<100",
               "flag": "H"
             },
             {
               "test": "TSH",
-              "value": "3.8",
+              "value": "2.8",
               "unit": "mIU/L",
               "range": "0.4-4.0",
               "flag": ""
             },
             {
-              "test": "Magnesium",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "1.7-2.2",
-              "flag": "L"
+              "test": "Digoxin Level",
+              "value": "Not on digoxin",
+              "unit": "",
+              "range": "0.5-2.0",
+              "flag": ""
             },
             {
-              "test": "Digoxin Level",
-              "value": "<0.2",
-              "unit": "ng/mL",
-              "range": "0.8-2.0",
-              "flag": ""
+              "test": "Lyme Antibody",
+              "value": "Positive IgG (prior infection \u2014 treated 15 years ago)",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
             }
           ]
         }
@@ -265,95 +277,101 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "12-LEAD ELECTROCARDIOGRAM",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. James Carter, MD",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 Cardiac",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-268064",
+      "clinical": "I keep nearly passing out No specific chest pain \u2014 generalized weakness and lightheadedness",
+      "technique": "Standard protocol",
+      "findings": "Moderate LV hypertrophy (from aortic stenosis). Calcified aortic valve with restricted opening. LV function appears preserved but heart rate is severely low (34 bpm). No pericardial effusion. IVC mildly dilated.",
+      "impression": "Aortic stenosis with preserved LV function. Severe bradycardia limits cardiac output. No tamponade.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "Chest X-ray",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-121509",
+      "clinical": "I keep nearly passing out No specific chest pain \u2014 generalized weakness and lightheadedness",
+      "technique": "Standard protocol",
+      "findings": "Mild cardiomegaly. Mild pulmonary vascular congestion. No focal consolidation. No pleural effusion.",
+      "impression": "Mild heart failure from low-output state",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Bradycardia, near-syncope",
-      "technique": "Standard 12-lead ECG.",
-      "findings": "Rate: 32 bpm. Complete AV dissociation \u2014 P waves at ~72 bpm, QRS complexes at 32 bpm with no consistent PR relationship. Escape rhythm: Wide QRS (148 ms) \u2014 ventricular escape. Left axis deviation. ST-T changes consistent with rate-related repolarization abnormality.\n\nNo acute ST elevation or depression.",
-      "impression": "1. Complete (third-degree) AV block with slow ventricular escape rhythm at 32 bpm.\n2. Wide QRS escape \u2014 infranodal block (His-Purkinje disease).\n3. Hemodynamically significant \u2014 pacing required.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-174780",
+      "clinical": "I keep nearly passing out No specific chest pain \u2014 generalized weakness and lightheadedness",
+      "technique": "Standard 12-lead",
+      "findings": "COMPLETE (THIRD-DEGREE) AV BLOCK \u2014 P waves at regular rate (~80/min) with NO relationship to QRS complexes. Ventricular escape rhythm at 34 bpm with WIDE QRS (0.14sec) \u2014 infranodal (His-Purkinje) escape. P waves 'march through' QRS complexes independently. No conducted beats.. PR interval: not applicable (no consistent PR). QRS width: 0.14 sec (wide \u2014 suggests His-Purkinje disease, not junctional)",
+      "impression": "COMPLETE HEART BLOCK with wide-complex ventricular escape at 34 bpm. Infranodal block (wide QRS) has high risk of asystole. EMERGENT MANAGEMENT REQUIRED \u2014 transcutaneous pacing, atropine (may not work for infranodal block), and transvenous pacing.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster (Pfizer)",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: Pacemaker at age 78, deceased at 88",
-    "Mother: CHF, deceased at 82",
-    "Brother: Atrial fibrillation, alive at 80"
+    "Father: pacemaker placement at age 70",
+    "No sudden cardiac death history"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Retired postal supervisor"
-    ],
-    [
-      "Marital",
-      "Married 58 years"
-    ],
-    [
       "Tobacco",
-      "Never"
+      "Quit 20 years ago"
     ],
     [
       "Alcohol",
       "Rare"
     ],
     [
-      "Exercise",
-      "Previously walked daily; limited by symptoms x 2 days"
+      "Drugs",
+      "Denies"
     ],
     [
-      "Advance Directive",
-      "Full code; DPOA wife Barbara"
+      "Occupation",
+      "Retired postal worker"
+    ],
+    [
+      "Living",
+      "Lives with wife"
     ]
-  ],
-  "meta": {
-    "caseId": "complete-heart-block",
-    "diagnosis": "Complete (Third-Degree) Heart Block",
-    "acuity": 2,
-    "presentation": "Cardiac Emergency",
-    "category": "cardiac"
-  }
+  ]
 };

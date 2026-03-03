@@ -170,6 +170,71 @@ var EMR_MANIFEST = window.EMR_MANIFEST || [
     {id:"sjsten-overlap-v2",diagnosis:"SJS/TEN Overlap (HIV + Bactrim)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true},
     {id:"urticarial-vasculitis-v2",diagnosis:"Urticarial Vasculitis (Hypocomplementemic)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"urticaria",allSettings:true,variation:true},
     {id:"venom-immunotherapy-reaction-v2",diagnosis:"VIT Reaction (ACE Inhibitor Amplification)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"insect-allergy",allSettings:true,variation:true}
+  ]},
+  // ═══ CRT Board-Only Cases (32 additional cases from ed-board-v2 CRT engine) ═══
+  { presentation:"Trauma", cases:[
+    {id:"tension-ptx",diagnosis:"Tension Pneumothorax",category:"trauma",acuity:1},
+    {id:"epidural-hematoma",diagnosis:"Epidural Hematoma",category:"trauma",acuity:1}
+  ]},
+  { presentation:"Cardiac Emergency", cases:[
+    {id:"cardiac-tamponade",diagnosis:"Cardiac Tamponade",category:"cardiac",acuity:1},
+    {id:"complete-heart-block",diagnosis:"Complete Heart Block",category:"cardiac",acuity:2},
+    {id:"vt-syncope",diagnosis:"Ventricular Tachycardia with Syncope",category:"cardiology",acuity:2},
+    {id:"chf-v1",diagnosis:"Acute Decompensated Heart Failure",category:"cardiology",acuity:2}
+  ]},
+  { presentation:"Vascular Emergency", cases:[
+    {id:"aaa-v1",diagnosis:"Ruptured Abdominal Aortic Aneurysm",category:"vascular",acuity:1},
+    {id:"acute-limb-ischemia",diagnosis:"Acute Limb Ischemia",category:"vascular",acuity:2}
+  ]},
+  { presentation:"GI Emergency", cases:[
+    {id:"gi-bleed-syncope",diagnosis:"Upper GI Hemorrhage with Syncope",category:"gi",acuity:2},
+    {id:"severe-pancreatitis",diagnosis:"Acute Necrotizing Pancreatitis",category:"gi",acuity:2}
+  ]},
+  { presentation:"Obstetric Emergency", cases:[
+    {id:"ectopic-pregnancy",diagnosis:"Ruptured Ectopic Pregnancy",category:"obstetric",acuity:1},
+    {id:"eclampsia",diagnosis:"Eclampsia",category:"obstetric",acuity:1}
+  ]},
+  { presentation:"Pediatric Emergency", cases:[
+    {id:"epiglottitis",diagnosis:"Acute Epiglottitis",category:"pediatric",acuity:1},
+    {id:"intussusception",diagnosis:"Ileocolic Intussusception",category:"pediatric",acuity:2}
+  ]},
+  { presentation:"Neurologic Emergency", cases:[
+    {id:"new-seizure-mass",diagnosis:"New-Onset Seizure (Brain Mass)",category:"neurology",acuity:2},
+    {id:"cauda-equina",diagnosis:"Cauda Equina Syndrome",category:"neurology",acuity:2}
+  ]},
+  { presentation:"Psychiatric Emergency", cases:[
+    {id:"nms",diagnosis:"Neuroleptic Malignant Syndrome",category:"psychiatric",acuity:2}
+  ]},
+  { presentation:"Infectious Emergency", cases:[
+    {id:"septic-shock-urosepsis",diagnosis:"Septic Shock (Urosepsis)",category:"infectious",acuity:1},
+    {id:"nec-fasciitis",diagnosis:"Necrotizing Fasciitis",category:"infectious",acuity:1},
+    {id:"fournier-gangrene",diagnosis:"Fournier Gangrene",category:"infectious",acuity:1}
+  ]},
+  { presentation:"Eye Emergency", cases:[
+    {id:"angle-closure-glaucoma",diagnosis:"Acute Angle-Closure Glaucoma",category:"ophthalmology",acuity:2},
+    {id:"crao",diagnosis:"Central Retinal Artery Occlusion",category:"ophthalmology",acuity:2}
+  ]},
+  { presentation:"Urologic Emergency", cases:[
+    {id:"testicular-torsion",diagnosis:"Testicular Torsion",category:"urology",acuity:2}
+  ]},
+  { presentation:"ENT / Airway Emergency", cases:[
+    {id:"peritonsillar-abscess",diagnosis:"Peritonsillar Abscess",category:"ent",acuity:3},
+    {id:"ludwigs-angina",diagnosis:"Ludwig Angina",category:"ent",acuity:1}
+  ]},
+  { presentation:"Geriatric Emergency", cases:[
+    {id:"hip-fracture-anticoag",diagnosis:"Hip Fracture on Anticoagulation",category:"geriatric",acuity:3},
+    {id:"subdural-hematoma",diagnosis:"Acute-on-Chronic Subdural Hematoma",category:"geriatric",acuity:2}
+  ]},
+  { presentation:"Environmental Emergency", cases:[
+    {id:"heat-stroke",diagnosis:"Exertional Heat Stroke",category:"environmental",acuity:1},
+    {id:"severe-hypothermia",diagnosis:"Severe Accidental Hypothermia",category:"environmental",acuity:1}
+  ]},
+  { presentation:"Hematologic Emergency", cases:[
+    {id:"dic-massive-transfusion",diagnosis:"DIC with Massive Hemorrhage",category:"hematology",acuity:1}
+  ]},
+  { presentation:"Musculoskeletal Emergency", cases:[
+    {id:"septic-arthritis",diagnosis:"Septic Arthritis",category:"musculoskeletal",acuity:3},
+    {id:"compartment-syndrome",diagnosis:"Acute Compartment Syndrome",category:"musculoskeletal",acuity:2}
   ]}
 ];
 var CASE_MANIFEST = window.CASE_MANIFEST || {};

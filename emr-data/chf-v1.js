@@ -1,200 +1,195 @@
-// Virtual EMR Case: Acute Decompensated Heart Failure
-// Variant: chf-v1 | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/chf-v1.js — EMR case data for Acute Decompensated Heart Failure */
 window.EMR_DATA = {
   "patient": {
-    "name": "Willie Jackson",
-    "dob": "03/04/1950",
-    "age": 75,
+    "name": "William Turner",
+    "dob": "06/15/1958",
+    "age": "68",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Medicare",
-    "pcp": "Dr. Paul Martinez, MD",
-    "pharmacy": "Publix \u2014 Fort Lauderdale, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-763589",
     "language": "English",
-    "race": "Black",
-    "address": "1920 NW 9th Ave, Fort Lauderdale, FL",
-    "phone": "(954) 555-3440",
-    "email": "w.jackson50@email.com",
+    "race": "Asian",
+    "phone": "(205) 412-2252",
+    "email": "william.turner@email.com",
+    "address": "9856 Oak St, Hollywood, FL 33020",
+    "insurance": "BlueCross BlueShield PPO",
+    "pcp": "Dr. Michael Torres, DO",
+    "pharmacy": "CVS Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
-      "name": "Donna Jackson (Daughter)",
-      "phone": "(954) 555-3456"
+      "name": "Michael Cook",
+      "phone": "(691) 177-7917",
+      "relationship": "Spouse"
     },
-    "mrn": "RDX-2025-40121"
+    "chiefComplaint": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+    "diagnosis": "Acute Decompensated Heart Failure"
   },
   "problems": [
     {
-      "problem": "Heart Failure with Reduced EF (HFrEF)",
-      "icd": "I50.20",
-      "onset": "2018",
+      "id": "prob-1",
+      "description": "Heart failure with reduced EF",
       "status": "Active",
-      "notes": "EF 30%; ischemic cardiomyopathy; on GDMT"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "CAD \u2014 s/p CABG",
-      "icd": "I25.10",
-      "onset": "2015",
+      "id": "prob-2",
+      "description": "Atrial fibrillation",
       "status": "Active",
-      "notes": "3-vessel CABG 2015 (LIMA-LAD, SVG-OM1, SVG-RCA)"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Atrial Fibrillation",
-      "icd": "I48.91",
-      "onset": "2019",
+      "id": "prob-3",
+      "description": "Type 2 Diabetes",
       "status": "Active",
-      "notes": "Rate-controlled; on apixaban"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "CKD Stage 3b",
-      "icd": "N18.32",
-      "onset": "2020",
+      "id": "prob-4",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "eGFR 36; cardiorenal"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Type 2 Diabetes",
-      "icd": "E11.9",
-      "onset": "2005",
+      "id": "prob-5",
+      "description": "Prior MI 5 years ago",
       "status": "Active",
-      "notes": "A1C 7.6"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Sacubitril/Valsartan 49/51mg BID",
-      "sig": "PO BID",
-      "prescriber": "Cardiology",
-      "start": "06/2020",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Furosemide",
+      "dose": "40mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Michael Torres, DO"
     },
     {
-      "name": "Carvedilol 25mg BID",
-      "sig": "PO BID",
-      "prescriber": "Cardiology",
-      "start": "03/2019",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Lisinopril",
+      "dose": "10mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
     },
     {
-      "name": "Furosemide 40mg BID",
-      "sig": "PO BID",
-      "prescriber": "Cardiology",
-      "start": "01/2019",
-      "refills": 5,
-      "status": "Active \u2014 ran out 4 days ago"
+      "id": "med-3",
+      "name": "Carvedilol",
+      "dose": "12.5mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Robert Hughes, DO"
     },
     {
-      "name": "Spironolactone 25mg daily",
-      "sig": "PO daily",
-      "prescriber": "Cardiology",
-      "start": "06/2020",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-4",
+      "name": "Apixaban",
+      "dose": "5mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Robert Hughes, DO"
     },
     {
-      "name": "Apixaban 5mg BID",
-      "sig": "PO BID",
-      "prescriber": "Cardiology",
-      "start": "10/2019",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Empagliflozin 10mg daily",
-      "sig": "PO daily",
-      "prescriber": "Cardiology",
-      "start": "01/2023",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 500mg BID",
-      "sig": "PO BID",
-      "prescriber": "Dr. Martinez",
-      "start": "04/2005",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-5",
+      "name": "Metformin",
+      "dose": "1000mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "ACE inhibitors",
+      "reaction": "Angioedema \u2014 switched from enalapril to lisinopril without issue but reports this",
+      "severity": "Moderate",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "168/102",
-      "hr": 108,
-      "rr": 28,
-      "temp": "98.2\u00b0F",
+      "date": "03/03/2026",
+      "time": "08:26",
+      "bp": "168/98",
+      "hr": "110 (irregularly irregular)",
+      "rr": "28",
+      "temp": "36.8\u00b0C",
       "spo2": "88%",
-      "wt": "228 lbs",
-      "ht": "5'10\"",
-      "bmi": 32.7,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "138/82",
-      "hr": 92,
-      "rr": 20,
-      "temp": "98.2\u00b0F",
-      "spo2": "95%",
-      "wt": "228 lbs",
-      "ht": "5'10\"",
-      "bmi": 32.7,
-      "setting": "ED \u2014 Post-BiPAP/Lasix 2hr"
+      "pain": "9/10",
+      "bmi": "32",
+      "weight": "79 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Worsening dyspnea x 4 days, can't lie flat, leg swelling",
-      "hpi": "75M with HFrEF (EF 30%) presents with 4-day worsening dyspnea, orthopnea (4 pillows), PND, and bilateral leg swelling. Ran out of furosemide 4 days ago (pharmacy issue) and has been eating high-sodium foods. Weight up 14 lbs from dry weight (214\u2192228). Unable to walk across room today. No chest pain. No fever.",
-      "exam": "Tripoding, severe respiratory distress. JVP to angle of jaw. Lungs: Diffuse bilateral crackles to apices. CV: Irregularly irregular (AFib), S3 gallop, 2/6 MR murmur. Abdomen: Hepatomegaly, positive hepatojugular reflux. Extremities: 3+ pitting edema bilaterally to thighs.",
-      "assessment": "1. Acute decompensated HFrEF \u2014 medication non-adherence (diuretic), dietary indiscretion\n2. Volume overload with pulmonary edema\n3. Acute on chronic kidney injury likely",
-      "plan": "1. BiPAP 12/5 cmH2O with FiO2 60%\n2. Furosemide 80mg IV (double home dose)\n3. NTG drip if SBP remains >140 after diuresis\n4. Strict I&O, daily weights, fluid restriction 1.5L\n5. Telemetry \u2014 rate control AFib\n6. Restart home GDMT once hemodynamically stable\n7. Social work for medication access\n8. Cardiology consult \u2014 may need IV diuretic drip"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "hpi": "William Turner is a 68-year-old male presenting with can't breathe when i lay down no specific spot \u2014 just can't breathe. Past medical history includes Heart failure with reduced EF, Atrial fibrillation, Type 2 Diabetes, Hypertension, Prior MI 5 years ago. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Acute Decompensated Heart Failure \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-703715",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "BMP",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
-              "test": "BUN",
-              "value": "48",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
+              "test": "WBC",
+              "value": "7.1",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "4.5-11.0",
+              "flag": ""
             },
             {
-              "test": "Creatinine",
-              "value": "2.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
             },
+            {
+              "test": "Hematocrit",
+              "value": "36",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "229",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
             {
               "test": "Sodium",
               "value": "131",
@@ -204,26 +199,61 @@ window.EMR_DATA = {
             },
             {
               "test": "Potassium",
-              "value": "5.0",
+              "value": "4.8",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
               "flag": ""
             },
             {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "13",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
               "test": "Glucose",
-              "value": "168",
+              "value": "89",
               "unit": "mg/dL",
               "range": "70-100",
-              "flag": "H"
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "8.7",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
             }
           ]
         },
         {
-          "name": "CARDIAC",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
               "test": "BNP",
-              "value": "2840",
+              "value": "2,840",
               "unit": "pg/mL",
               "range": "<100",
               "flag": "H"
@@ -236,37 +266,18 @@ window.EMR_DATA = {
               "flag": "H"
             },
             {
-              "test": "Lactate",
-              "value": "2.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
+              "test": "TSH",
+              "value": "2.1",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Hepatic Panel ALT",
+              "value": "68",
+              "unit": "U/L",
+              "range": "7-56",
               "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "CBC",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.4",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.8",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": "L"
-            },
-            {
-              "test": "Platelets",
-              "value": "178",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": ""
             }
           ]
         }
@@ -275,95 +286,118 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "CHEST X-RAY PA AND LATERAL",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "Chest X-ray",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Dyspnea, volume overload",
-      "technique": "PA and lateral chest radiograph.",
-      "findings": "Cardiomegaly (cardiothoracic ratio 0.62). Bilateral pleural effusions, moderate right > small left. Bilateral perihilar vascular congestion with cephalization. Bilateral alveolar opacities consistent with pulmonary edema. Sternotomy wires intact. No pneumothorax.",
-      "impression": "1. Acute pulmonary edema with bilateral pleural effusions.\n2. Cardiomegaly.\n3. Findings consistent with acute decompensated heart failure.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-186165",
+      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "technique": "Standard protocol",
+      "findings": "Cardiomegaly. Bilateral pleural effusions (right > left). Cephalization of pulmonary vasculature. Kerley B lines. Bilateral alveolar infiltrates in butterfly pattern.",
+      "impression": "Pulmonary edema with bilateral pleural effusions \u2014 acute decompensated heart failure",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 Cardiac",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-978996",
+      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "technique": "Standard protocol",
+      "findings": "Severely reduced LV systolic function (EF ~20%). Dilated LV. Moderate mitral regurgitation. Small pericardial effusion. Dilated IVC without respiratory variation.",
+      "impression": "Severely reduced EF with volume overload",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 Lung",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-750659",
+      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "technique": "Standard protocol",
+      "findings": "Bilateral B-lines in >3 lung zones (>3 B-lines per intercostal space). Small bilateral pleural effusions.",
+      "impression": "Pulmonary edema confirmed by lung ultrasound",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-4",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-163338",
+      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "technique": "Standard 12-lead",
+      "findings": "Atrial fibrillation with rapid ventricular response at 110 bpm. Left ventricular hypertrophy. Old Q waves in V1-V3 (prior anterior MI). No acute ST changes",
+      "impression": "AFib with RVR, LVH, old anterior MI \u2014 no new acute ischemia",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: CAD, CHF, deceased at 68",
-    "Mother: HTN, T2DM, alive at 92",
-    "Sister: CHF, alive at 72"
+    "Mother died of heart failure at 72",
+    "Father had MI at 60"
   ],
   "socialHistory": [
+    [
+      "Tobacco",
+      "Quit 5 years ago, 20 pack-years"
+    ],
+    [
+      "Alcohol",
+      "Stopped drinking 3 years ago at diagnosis"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
     [
       "Occupation",
       "Retired bus driver"
     ],
     [
-      "Marital",
-      "Widowed; daughter helps with medications"
-    ],
-    [
-      "Tobacco",
-      "Former \u2014 1 PPD x 30 years, quit 2015"
-    ],
-    [
-      "Alcohol",
-      "Denies"
-    ],
-    [
-      "Diet",
-      "Admits high-sodium diet \u2014 fast food, canned foods"
-    ],
-    [
-      "Advance Directive",
-      "Full code; DPOA daughter Donna"
+      "Living",
+      "Lives with adult daughter"
     ]
-  ],
-  "meta": {
-    "caseId": "chf-v1",
-    "diagnosis": "Acute Decompensated Heart Failure",
-    "acuity": 2,
-    "presentation": "Shortness of Breath",
-    "category": "pulmonary"
-  }
+  ]
 };

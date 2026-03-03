@@ -644,6 +644,101 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
   *{animation-duration:0.01ms !important;transition-duration:0.01ms !important}
 }
 
+/* ═══ CRT — Clinical Reasoning Trainer ═══ */
+.crt-acuity-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.3px}
+.crt-acuity-1{background:#fef2f2;color:#DC2626;border:1px solid #fecaca}
+.crt-acuity-2{background:#fef2f2;color:#EF4444;border:1px solid #fecaca}
+.crt-acuity-3{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
+.crt-acuity-4{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.crt-acuity-5{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+
+.crt-phase-timeline{display:flex;align-items:center;padding:16px;gap:4px;overflow-x:auto;border-bottom:1px solid var(--border,#dce3eb)}
+.crt-phase-step{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:600;color:var(--text-muted,#64748b);background:#f7f8fa;white-space:nowrap;flex-shrink:0}
+.crt-phase-step.active{background:var(--primary-light,#EBF5FB);color:var(--primary,#2874A6);border:1px solid var(--primary,#2874A6)}
+.crt-phase-step.completed{background:#E8F8F0;color:#15803d}
+.crt-phase-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700}
+.crt-phase-step .crt-phase-dot{background:#e2e8f0;color:#64748b}
+.crt-phase-step.active .crt-phase-dot{background:var(--primary,#2874A6);color:white}
+.crt-phase-step.completed .crt-phase-dot{background:#27AE60;color:white}
+.crt-phase-label{max-width:140px;overflow:hidden;text-overflow:ellipsis}
+
+.crt-pitfall-card{margin:12px 16px;padding:14px;border:2px solid #EF4444;border-radius:8px;background:linear-gradient(135deg,#FEF2F2,#FEFEFE)}
+.crt-pitfall-header{font-size:14px;font-weight:700;color:#DC2626}
+.crt-pitfall-vitals{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.crt-vital-chip{padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace}
+.crt-vital-chip.danger{background:#fef2f2;color:#DC2626;border:1px solid #fecaca}
+
+.crt-reassess-card{margin:12px 16px;padding:16px;border:1px solid var(--border,#dce3eb);border-radius:8px;background:linear-gradient(135deg,#f0f9ff,#f8f9fa)}
+.crt-reassess-header{font-size:14px;font-weight:700;color:var(--primary,#2874A6);margin-bottom:12px}
+.crt-subsection-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted,#64748b);margin:10px 0 4px}
+.crt-data-box{font-size:12px;padding:8px;background:white;border-radius:6px;border:1px solid var(--border,#dce3eb);line-height:1.6}
+
+.crt-vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:6px;margin-top:4px}
+.crt-vital-card{background:white;border:1px solid var(--border,#dce3eb);border-radius:6px;padding:6px 8px;text-align:center}
+.crt-vital-label{font-size:9px;font-weight:700;text-transform:uppercase;color:var(--text-muted,#64748b);letter-spacing:.5px}
+.crt-vital-value{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:var(--text,#1a1a2e)}
+.crt-vital-value.abnormal{color:#DC2626}
+.crt-vital-delta{font-size:10px;font-weight:600}
+.crt-vital-delta.improved{color:#27AE60}
+.crt-vital-delta.worsened{color:#DC2626}
+
+.crt-patient-voice{margin:10px 0;padding:10px;background:#F0F9FF;border-radius:8px;border-left:3px solid var(--primary,#2874A6);font-size:12px;font-style:italic;color:#1a1a2e;line-height:1.6}
+.crt-teaching-box{margin-top:8px;padding:10px;background:#f0fdf4;border-radius:6px;font-size:12px;color:#166534;line-height:1.5}
+
+.crt-order-section{padding:16px}
+.crt-order-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.crt-order-counter{font-size:11px;font-weight:600;color:var(--primary,#2874A6);background:var(--primary-light,#EBF5FB);padding:3px 10px;border-radius:12px}
+.crt-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted,#64748b);margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid #f0f2f5}
+.crt-order-grid{display:flex;flex-direction:column;gap:4px}
+.crt-order-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border,#dce3eb);border-radius:6px;cursor:pointer;transition:all .15s;font-size:13px;background:white}
+.crt-order-item:hover{border-color:var(--primary,#2874A6);background:var(--primary-light,#EBF5FB)}
+.crt-order-item.correct{border-color:#27AE60;background:#E8F8F0}
+.crt-order-item.incorrect{border-color:#EF4444;background:#FEF2F2}
+.crt-order-item.critical{border-left:3px solid #F59E0B}
+.crt-order-item.critical.correct{border-left-color:#27AE60}
+.crt-order-item.critical.incorrect{border-left-color:#EF4444}
+.crt-order-item input[type="checkbox"]{accent-color:var(--primary,#2874A6);flex-shrink:0}
+.crt-order-name{flex:1}
+.crt-critical-badge{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;padding:2px 6px;border-radius:4px;background:#FEF9E7;color:#b45309;border:1px solid #fde68a}
+
+.crt-order-feedback{padding:8px 12px;margin:-2px 0 4px 28px;border-radius:0 0 6px 6px;font-size:12px;line-height:1.5}
+.crt-order-feedback.correct{background:#f0fdf4;border:1px solid #bbf7d0;border-top:0}
+.crt-order-feedback.incorrect{background:#fef2f2;border:1px solid #fecaca;border-top:0}
+.crt-order-verdict{font-weight:700;display:block;margin-bottom:4px}
+.crt-order-teaching{color:#374151}
+.crt-order-refs{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.crt-ref-link{font-size:10px;color:var(--primary,#2874A6);text-decoration:none;padding:2px 6px;background:var(--primary-light,#EBF5FB);border-radius:4px;white-space:nowrap}
+.crt-ref-link:hover{text-decoration:underline}
+
+.crt-action-bar{display:flex;gap:8px;margin-top:14px}
+.crt-btn{font-family:inherit;font-size:13px;font-weight:600;padding:8px 16px;border-radius:8px;cursor:pointer;border:1px solid transparent;white-space:nowrap;transition:all .15s}
+.crt-btn-primary{background:var(--primary,#2874A6);color:white;border-color:var(--primary,#2874A6)}.crt-btn-primary:hover{filter:brightness(1.1)}
+.crt-btn-success{background:#27AE60;color:white}.crt-btn-success:hover{filter:brightness(1.1)}
+.crt-btn-sm{font-size:11px;padding:5px 10px;border-radius:6px}
+.crt-btn-outline{background:white;color:var(--text,#1a1a2e);border:1px solid var(--border,#dce3eb)}.crt-btn-outline:hover{border-color:var(--primary,#2874A6);color:var(--primary,#2874A6)}
+
+.crt-log-section{border-top:1px solid var(--border,#dce3eb)}
+.crt-log-entry{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid #f3f4f6;font-size:12px;align-items:flex-start}
+.crt-log-entry.incorrect{color:#9B1C1C}
+.crt-log-icon{flex-shrink:0;font-size:14px;margin-top:1px}
+.crt-log-teaching{font-size:11px;color:var(--text-muted,#64748b);margin-top:2px;line-height:1.5}
+
+.crt-completion-card{margin:12px 16px;padding:16px;border:2px solid #27AE60;border-radius:8px;background:linear-gradient(135deg,#E8F8F0,#f8f9fa)}
+.crt-completion-header{font-size:16px;font-weight:700;color:#15803d;text-align:center;margin-bottom:12px}
+.crt-score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.crt-score-item{text-align:center;padding:8px;background:white;border-radius:6px;border:1px solid var(--border,#dce3eb)}
+.crt-score-value{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:700;color:#1a1a2e}
+.crt-score-value.danger{color:#DC2626}
+.crt-score-value.grade-A{color:#15803d}.crt-score-value.grade-B{color:#2874A6}.crt-score-value.grade-C{color:#b45309}.crt-score-value.grade-D{color:#EF4444}.crt-score-value.grade-F{color:#DC2626}
+.crt-score-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted,#64748b);margin-top:2px}
+.crt-missed-critical{margin-top:12px;padding:10px;background:#fef2f2;border-radius:6px;border:1px solid #fecaca}
+
+.crt-learning-section{margin:12px 16px;padding:12px;border:1px solid var(--border,#dce3eb);border-radius:8px;background:#f8f9fa}
+.crt-learning-header{padding:4px 0}
+.crt-learning-point{font-size:12px;padding:6px 8px;margin:4px 0;background:white;border-radius:4px;border-left:3px solid var(--primary,#2874A6);line-height:1.5}
+.crt-learning-point.danger{border-left-color:#DC2626}
+.crt-learning-point.warning{border-left-color:#F59E0B}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="emr-supabase.js"></script>
@@ -3757,7 +3852,7 @@ render = function(){
   if(role==="student"){
     tabs.push({id:'_divider_actions',label:'',icon:'',divider:true,groupLabel:'Actions'});
     tabs.push({id:"orders",label:"Orders & CDS",icon:I.send});
-    tabs.push({id:"ddx",label:"DDx Builder",icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>'});
+    tabs.push({id:"crt",label:"Clinical Reasoning",icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'});
     tabs.push({id:"documentation",label:"Documentation",icon:I.fileText});
     tabs.push({id:"oral",label:"Oral Presentation",icon:I.activity});
     tabs.push({id:'_divider_support',label:'',icon:'',divider:true,groupLabel:'Support'});
@@ -3786,7 +3881,7 @@ render = function(){
   fn.handoff = renderHandoff;
   fn.coach = renderCoachDx;
   fn.studyhub = renderStudyHub;
-  fn.ddx = function(){ return (window.DdxBuilder && DdxBuilder.renderTab) ? DdxBuilder.renderTab() : '<p>DDx Builder loading...</p>'; };
+  fn.crt = function(){ return (window.CRTChart && CRTChart.renderTab) ? CRTChart.renderTab() : '<p>Clinical Reasoning Trainer loading...</p>'; };
   
   if(role==="student"){
     fn.problems = renderProblemsInteractive;
@@ -3948,6 +4043,8 @@ submitDoc = function(){
 })();
 </script>
 <script src="js/mission-control.js"></script>
+<script src="emr-data/crt-data.js"></script>
+<script src="js/crt-chart.js"></script>
 <script src="js/ddx-builder.js"></script>
 <script src="rdx-demo-tour.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
@@ -3955,5 +4052,6 @@ submitDoc = function(){
 <script src="js/dx-user-bar.js"></script>
 <script src="js/rdx-nav.js"></script>
 <script src="js/rdx-help-widget.js"></script>
+<script src="js/nav-global.js"></script>
 </body>
 </html>

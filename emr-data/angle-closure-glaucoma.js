@@ -1,120 +1,205 @@
-// Virtual EMR Case: Acute Angle-Closure Glaucoma
-// Variant: angle-closure-glaucoma | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/angle-closure-glaucoma.js — EMR case data for Acute Angle-Closure Glaucoma */
 window.EMR_DATA = {
   "patient": {
-    "name": "Patricia Stein",
-    "dob": "12/04/1953",
-    "age": 72,
+    "name": "Dolores Eriksen",
+    "dob": "09/22/1974",
+    "age": "52",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Medicare + BCBS Medigap",
-    "pcp": "Dr. Karen Hughes, MD",
-    "pharmacy": "Publix \u2014 Boca Raton, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-651241",
     "language": "English",
-    "race": "White",
-    "address": "9800 Glades Rd, Boca Raton, FL",
-    "phone": "(561) 555-2288",
-    "email": "p.stein53@email.com",
+    "race": "Asian",
+    "phone": "(398) 608-4308",
+    "email": "dolores.eriksen@email.com",
+    "address": "259 Elm Blvd, Weston, FL 33391",
+    "insurance": "Cigna",
+    "pcp": "Dr. Amy Patel, MD",
+    "pharmacy": "Rite Aid — Federal Hwy",
     "emergencyContact": {
-      "name": "Michael Stein (Husband)",
-      "phone": "(561) 555-2304"
+      "name": "Daniel Scott",
+      "phone": "(439) 229-7019",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-82592"
+    "chiefComplaint": "My right eye is killing me Right eye — deep, severe pain",
+    "diagnosis": "Acute Angle-Closure Glaucoma"
   },
   "problems": [
     {
-      "problem": "Hyperopia (Farsightedness)",
-      "icd": "H52.0",
-      "onset": "",
+      "id": "prob-1",
+      "description": "Hyperopia",
       "status": "Active",
-      "notes": "Long-standing; wears corrective lenses"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2008",
+      "id": "prob-2",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "On amlodipine; well-controlled"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Migraine without Aura",
-      "icd": "G43.009",
-      "onset": "1985",
+      "id": "prob-3",
+      "description": "GERD",
       "status": "Active",
-      "notes": "Infrequent; sumatriptan PRN"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Amlodipine 5mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Hughes",
-      "start": "06/2010",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Amlodipine",
+      "dose": "5mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Robert Hughes, DO"
     },
     {
-      "name": "Sumatriptan 50mg PRN",
-      "sig": "PO PRN for migraine",
-      "prescriber": "Dr. Hughes",
-      "start": "01/2000",
-      "refills": 3,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Omeprazole",
+      "dose": "20mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
+    },
+    {
+      "id": "med-3",
+      "name": "Diphenhydramine",
+      "dose": "25mg PRN sleep (anticholinergic — could have contributed to attack)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "168/92",
-      "hr": 88,
-      "rr": 16,
-      "temp": "98.4\u00b0F",
+      "date": "03/03/2026",
+      "time": "09:24",
+      "bp": "162/94",
+      "hr": "88",
+      "rr": "16",
+      "temp": "36.9°C",
       "spo2": "99%",
-      "wt": "148 lbs",
-      "ht": "5'4\"",
-      "bmi": 25.4,
-      "setting": "ED"
+      "pain": "9/10",
+      "bmi": "22",
+      "weight": "88 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Severe right eye pain, blurred vision, halos around lights, nausea x 4 hours",
-      "hpi": "72F hyperopic presents with 4 hours of sudden severe R eye pain (9/10), blurred vision, seeing rainbow halos around lights, and nausea with one episode of vomiting. Onset was while sitting in dark movie theater. No trauma. No prior similar episodes. Denies flashes, floaters, or visual field loss in left eye.",
-      "exam": "R eye: Conjunctival injection (ciliary flush). Cornea hazy/steamy. Pupil mid-dilated (5mm) and fixed \u2014 non-reactive to light. Anterior chamber shallow by penlight test. IOP by Tono-Pen: R 58 mmHg (normal <21), L 16 mmHg. Visual acuity R: 20/200 (baseline 20/30 corrected), L: 20/25. Fundoscopy R: Disc edematous, difficult to visualize through haze. L eye: Normal.",
-      "assessment": "1. ACUTE ANGLE-CLOSURE GLAUCOMA \u2014 right eye. Fixed mid-dilated pupil, IOP 58, shallow anterior chamber, steamy cornea\n2. Likely precipitated by pupil dilation in dark theater in anatomically predisposed (hyperopic) patient\n3. OPHTHALMOLOGIC EMERGENCY \u2014 risk of permanent vision loss",
-      "plan": "1. Timolol 0.5% 1 drop R eye\n2. Brimonidine 0.2% 1 drop R eye\n3. Pilocarpine 2% 1 drop R eye q15min x 3 doses (constrict pupil)\n4. Acetazolamide 500mg IV\n5. Mannitol 1-2 g/kg IV if IOP doesn't respond\n6. Ondansetron 4mg IV for nausea\n7. STAT ophthalmology consult for laser peripheral iridotomy\n8. Recheck IOP in 30-60 minutes\n9. Prophylactic laser iridotomy to LEFT eye once acute attack resolved"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "My right eye is killing me Right eye — deep, severe pain",
+      "hpi": "Dolores Eriksen is a 52-year-old female presenting with my right eye is killing me right eye — deep, severe pain. Past medical history includes Hyperopia, Hypertension, GERD. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Acute Angle-Closure Glaucoma — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "16:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 16:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260380",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-718497",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "BMP",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
+            {
+              "test": "WBC",
+              "value": "5.3",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.3",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "152",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "8",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
             {
               "test": "Glucose",
               "value": "98",
@@ -123,24 +208,10 @@ window.EMR_DATA = {
               "flag": ""
             },
             {
-              "test": "Creatinine",
-              "value": "0.9",
+              "test": "Calcium",
+              "value": "10.3",
               "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-29",
+              "range": "8.5-10.5",
               "flag": ""
             }
           ]
@@ -148,76 +219,103 @@ window.EMR_DATA = {
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-980547",
+      "clinical": "My right eye is killing me Right eye — deep, severe pain",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "CT Head without Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-413131",
+      "clinical": "My right eye is killing me Right eye — deep, severe pain",
+      "technique": "Standard protocol",
+      "findings": "No acute intracranial pathology. No mass, no hemorrhage. Orbits normal on bone windows.",
+      "impression": "Normal — headache and eye pain not from intracranial cause",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-829206",
+      "clinical": "My right eye is killing me Right eye — deep, severe pain",
+      "technique": "Standard 12-lead",
+      "findings": "Normal sinus rhythm at 88 bpm. Normal intervals",
+      "impression": "Normal ECG",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Glaucoma (open-angle, diagnosed age 68)",
-    "Father: Cataracts, deceased at 82",
-    "Sister: Hyperopia, no glaucoma"
+    "Sister: glaucoma (type unknown)",
+    "Mother: cataracts"
   ],
   "socialHistory": [
-    [
-      "Occupation",
-      "Retired librarian"
-    ],
-    [
-      "Marital",
-      "Married 48 years"
-    ],
     [
       "Tobacco",
       "Never"
     ],
     [
       "Alcohol",
-      "Glass of wine with dinner"
+      "Social"
     ],
     [
-      "Exercise",
-      "Walking, water aerobics 2x/week"
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Occupation",
+      "Retired secretary"
+    ],
+    [
+      "Living",
+      "Lives with husband"
     ]
-  ],
-  "meta": {
-    "caseId": "angle-closure-glaucoma",
-    "diagnosis": "Acute Angle-Closure Glaucoma",
-    "acuity": 2,
-    "presentation": "Eye Emergency",
-    "category": "ophthalmologic"
-  }
+  ]
 };

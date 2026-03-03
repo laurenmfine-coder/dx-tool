@@ -1,131 +1,215 @@
-// Virtual EMR Case: Ileocolic Intussusception
-// Variant: intussusception | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/intussusception.js — EMR case data for Ileocolic Intussusception */
 window.EMR_DATA = {
   "patient": {
-    "name": "Noah Williams",
-    "dob": "11/28/2024",
-    "age": 14,
+    "name": "Baby Liam Chen",
+    "dob": "06/15/2025",
+    "age": "1",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Cigna (parent plan)",
-    "pcp": "Dr. Linda Park, MD (Pediatrics)",
-    "pharmacy": "Publix \u2014 Weston, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-915392",
     "language": "English",
-    "race": "Black",
-    "address": "1680 Bonaventure Blvd, Weston, FL",
-    "phone": "(954) 555-4422",
-    "email": "williams.family@email.com",
+    "race": "Hispanic/Latino",
+    "phone": "(851) 312-3255",
+    "email": "baby.liam.chen@email.com",
+    "address": "8458 Cedar Ln, Coral Springs, FL 33065",
+    "insurance": "UnitedHealthcare",
+    "pcp": "Dr. Robert Hughes, DO",
+    "pharmacy": "Rite Aid \u2014 University Dr",
     "emergencyContact": {
-      "name": "Andrea Williams (Mother)",
-      "phone": "(954) 555-4438"
+      "name": "Jennifer Morgan",
+      "phone": "(367) 765-9115",
+      "relationship": "Partner"
     },
-    "mrn": "RDX-2025-39565"
+    "chiefComplaint": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
+    "diagnosis": "Ileocolic Intussusception"
   },
   "problems": [
     {
-      "problem": "Recent Rotavirus Gastroenteritis",
-      "icd": "A08.0",
-      "onset": "02/2026",
-      "status": "Resolved",
-      "notes": "Viral gastroenteritis 10 days ago; self-limited"
-    }
-  ],
-  "medications": [
+      "id": "prob-1",
+      "description": "Recent viral URI",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
     {
-      "name": "None",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "prob-2",
+      "description": "No prior surgeries",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Up to date on vaccinations",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-4",
+      "description": "History of rotavirus gastroenteritis",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
+  "medications": [],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "78/48",
-      "hr": 162,
-      "rr": 38,
-      "temp": "100.8\u00b0F",
-      "spo2": "98%",
-      "wt": "22 lbs",
-      "ht": "30 in",
-      "bmi": "",
-      "setting": "ED Peds"
+      "date": "03/03/2026",
+      "time": "08:15",
+      "bp": "88/56",
+      "hr": "148",
+      "rr": "30",
+      "temp": "37.4\u00b0C",
+      "spo2": "99%",
+      "pain": "/10",
+      "bmi": "27",
+      "weight": "56 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED \u2014 Pediatric",
-      "provider": "Dr. Sarah Mitchell, MD",
-      "cc": "Intermittent crying episodes, bloody stool, lethargy \u2014 14-month-old male",
-      "hpi": "14-month-old male brought by mother for episodic inconsolable crying x 12 hours. Episodes occur every 15-20 minutes \u2014 child draws knees to chest, screams for 2-3 minutes, then becomes quiet and lethargic between episodes. 2 episodes of vomiting (initially non-bilious, now bilious). Mother noted 'currant jelly' stool in diaper 2 hours ago. History of rotavirus gastroenteritis 10 days ago. Previously healthy, up to date on vaccines.",
-      "exam": "Lethargic between episodes, then inconsolable with drawn-up knees during episode witnessed in ED. Abdomen: Distended, RUQ sausage-shaped mass palpable. Empty RLQ (Dance sign). Guarding on palpation. Rectal: Grossly bloody mucoid stool.",
-      "assessment": "1. ILEOCOLIC INTUSSUSCEPTION \u2014 classic triad: colicky abdominal pain, bloody mucoid stools, palpable abdominal mass\n2. Dehydrated \u2014 tachycardic, delayed capillary refill\n3. Post-viral intussusception (recent rotavirus \u2014 Peyer patch hyperplasia as lead point)",
-      "plan": "1. IV NS 20 mL/kg bolus\n2. STAT abdominal ultrasound \u2014 target sign expected\n3. Pediatric surgery consult\n4. Air enema reduction (first-line if no perforation signs)\n5. NG tube for bilious vomiting\n6. Type & screen\n7. If air enema fails or signs of perforation \u2192 OR for surgical reduction"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
+      "hpi": "Baby Liam Chen is a 1-year-old male presenting with screaming and drawing knees up to chest belly \u2014 child grabs at stomach and pulls knees up during episodes. Past medical history includes Recent viral URI, No prior surgeries, Up to date on vaccinations, History of rotavirus gastroenteritis. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Ileocolic Intussusception \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "16:00",
-      "orderedBy": "Dr. Mitchell",
-      "collected": "02/26/2026 16:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261600",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-920390",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "PEDIATRIC LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "18.2",
-              "unit": "K/uL",
-              "range": "6.0-17.5",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.2",
-              "unit": "g/dL",
-              "range": "10.5-14.0",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "134",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "3.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.6",
+              "value": "14.6",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "4.5-11.0",
               "flag": ""
             },
             {
-              "test": "Lactate",
+              "test": "Hemoglobin",
+              "value": "10.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "298",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
               "value": "3.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.4",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "72",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.5",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Lactate",
+              "value": "3.1",
               "unit": "mmol/L",
               "range": "0.5-2.0",
+              "flag": "H"
+            },
+            {
+              "test": "CRP",
+              "value": "3.2",
+              "unit": "mg/dL",
+              "range": "<0.5",
               "flag": "H"
             }
           ]
@@ -135,64 +219,118 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "ABDOMINAL ULTRASOUND",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Patel, MD",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-984156",
+      "clinical": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "Abdominal X-ray",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-342460",
+      "clinical": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
+      "technique": "Standard protocol",
+      "findings": "Paucity of gas in the right lower quadrant. Soft tissue density in the right upper quadrant. Mild small bowel dilation. No free air.",
+      "impression": "Findings suggestive of intussusception \u2014 recommend confirmatory ultrasound",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 FAST Exam",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Suspected intussusception \u2014 colicky pain, bloody stools, abdominal mass",
-      "technique": "Focused abdominal ultrasound.",
-      "findings": "Classic 'target sign' (donut sign) in RUQ \u2014 concentric rings representing ileocolic intussusception. Intussusceptum length approximately 6 cm. No free fluid. No evidence of perforation. Small bowel proximal to intussusception mildly dilated.",
-      "impression": "1. Ileocolic intussusception confirmed \u2014 target sign.\n2. No perforation.\n3. Air or contrast enema reduction recommended.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-708294",
+      "clinical": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
+      "technique": "Standard protocol",
+      "findings": "TARGET SIGN (donut sign) visualized in the right upper quadrant \u2014 concentric rings of bowel wall representing telescoped bowel within bowel. Approximately 3.5cm diameter. Small amount of trapped fluid within intussusceptum. No free peritoneal fluid.",
+      "impression": "ILEOCOLIC INTUSSUSCEPTION confirmed \u2014 target/donut sign. Pediatric surgery consult for air-contrast enema reduction vs operative intervention.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-604068",
+      "clinical": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 148 bpm. Normal pediatric morphology",
+      "impression": "Sinus tachycardia \u2014 pain and dehydration",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Healthy",
-    "Father: Healthy"
+    "No GI diseases",
+    "No prior intussusception in family"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Unknown"
+      "Tobacco",
+      "N/A"
     ],
     [
-      "Tobacco",
-      "Denies"
+      "Alcohol",
+      "N/A"
+    ],
+    [
+      "Drugs",
+      "N/A"
+    ],
+    [
+      "Occupation",
+      "N/A \u2014 toddler"
+    ],
+    [
+      "Living",
+      "Lives with parents. Attends daycare."
     ]
-  ],
-  "meta": {
-    "caseId": "intussusception",
-    "diagnosis": "Ileocolic Intussusception",
-    "acuity": 1,
-    "presentation": "Pediatric Emergency",
-    "category": "pediatric"
-  }
+  ]
 };

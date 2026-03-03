@@ -1,280 +1,281 @@
-// Virtual EMR Case: Acute Necrotizing Pancreatitis (Gallstone-Induced)
-// Variant: severe-pancreatitis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/severe-pancreatitis.js — EMR case data for Acute Necrotizing Pancreatitis (Gallstone-Induced) */
 window.EMR_DATA = {
   "patient": {
-    "name": "Louise Anderson",
-    "dob": "01/22/1968",
-    "age": 58,
-    "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Cigna PPO",
-    "pcp": "Dr. Michael Torres, MD",
-    "pharmacy": "Walgreens \u2014 Coral Springs, FL",
+    "name": "Sergio Moreno",
+    "dob": "06/20/1966",
+    "age": "60",
+    "sex": "Male",
+    "pronouns": "he/him",
+    "mrn": "MRN-822543",
     "language": "English",
-    "race": "White",
-    "address": "3840 NW 84th Ave, Coral Springs, FL",
-    "phone": "(954) 555-6644",
-    "email": "l.anderson68@email.com",
+    "race": "Black/African American",
+    "phone": "(775) 922-4584",
+    "email": "sergio.moreno@email.com",
+    "address": "6996 Cedar Ln, Davie, FL 33314",
+    "insurance": "Aetna HMO",
+    "pcp": "Dr. Michael Torres, DO",
+    "pharmacy": "Walgreens — Pines Blvd",
     "emergencyContact": {
-      "name": "Brian Anderson (Husband)",
-      "phone": "(954) 555-6660"
+      "name": "Brenda Stewart",
+      "phone": "(271) 299-3354",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-66258"
+    "chiefComplaint": "Worst stomach pain of my life Epigastric — boring through to the back",
+    "diagnosis": "Acute Necrotizing Pancreatitis (Gallstone-Induced)"
   },
   "problems": [
     {
-      "problem": "Cholelithiasis \u2014 Known",
-      "icd": "K80.20",
-      "onset": "2024",
+      "id": "prob-1",
+      "description": "Gallstones",
       "status": "Active",
-      "notes": "Multiple gallstones on US 2024; declined elective cholecystectomy"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Obesity",
-      "icd": "E66.01",
-      "onset": "2010",
+      "id": "prob-2",
+      "description": "Obesity",
       "status": "Active",
-      "notes": "BMI 38"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Type 2 Diabetes",
-      "icd": "E11.9",
-      "onset": "2015",
+      "id": "prob-3",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "A1C 8.0; on metformin + empagliflozin"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Hypertriglyceridemia",
-      "icd": "E78.1",
-      "onset": "2018",
+      "id": "prob-4",
+      "description": "Type 2 Diabetes",
       "status": "Active",
-      "notes": "TG 280 last check; on fenofibrate"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "PO BID",
-      "prescriber": "Dr. Torres",
-      "start": "06/2015",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Metformin",
+      "dose": "1000mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
     },
     {
-      "name": "Empagliflozin 25mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Torres",
-      "start": "01/2023",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Fenofibrate 160mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Torres",
-      "start": "06/2018",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 20mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Torres",
-      "start": "06/2016",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Amlodipine",
+      "dose": "10mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "98/62",
-      "hr": 112,
-      "rr": 24,
-      "temp": "101.4\u00b0F",
-      "spo2": "93%",
-      "wt": "240 lbs",
-      "ht": "5'6\"",
-      "bmi": 38.7,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "88/54",
-      "hr": 118,
-      "rr": 26,
-      "temp": "101.8\u00b0F",
-      "spo2": "91%",
-      "wt": "240 lbs",
-      "ht": "5'6\"",
-      "bmi": 38.7,
-      "setting": "ED \u2014 4hr"
+      "date": "03/03/2026",
+      "time": "06:40",
+      "bp": "142/88",
+      "hr": "112",
+      "rr": "22",
+      "temp": "38.0°C",
+      "spo2": "94%",
+      "pain": "10/10",
+      "bmi": "25",
+      "weight": "95 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Severe epigastric pain radiating to back x 12 hours",
-      "hpi": "58F with known gallstones (declined surgery) presents with 12 hours of severe epigastric pain radiating straight to back, 10/10, constant. Onset after fatty meal last evening. Persistent nausea with bilious vomiting x 6 episodes. Unable to find comfortable position. Progressive dyspnea over past 4 hours. Prior episode of 'gallbladder attack' resolved spontaneously; this is much worse. BISAP score: 3 (BUN >25, impaired mentation, SIRS present) \u2014 predicted severe pancreatitis.",
-      "exam": "Ill-appearing, diaphoretic, tachypneic. Abdomen: Severe epigastric tenderness with guarding. Distended. Diminished bowel sounds. Cullen sign absent. Grey Turner sign absent (early). Lungs: Decreased breath sounds at bilateral bases (worse left) with dullness to percussion (pleural effusions). Moderate respiratory distress requiring supplemental O2.",
-      "assessment": "1. Acute necrotizing pancreatitis \u2014 gallstone-induced. BISAP 3 (severe)\n2. Respiratory failure developing \u2014 bilateral pleural effusions, likely third-spacing\n3. Organ dysfunction: renal (Cr rising), respiratory (hypoxia), hemodynamic (hypotension)\n4. Ranson criteria at admission: 4 (age >55, WBC >16K, glucose >200, LDH >350)",
-      "plan": "1. AGGRESSIVE IV fluid resuscitation: LR 250-500 mL/hr (goal UOP >0.5 mL/kg/hr)\n2. NPO; NGT if intractable vomiting\n3. Pain: hydromorphone 0.5mg IV q3h PRN (superior to morphine in pancreatitis)\n4. STAT labs: lipase, CBC, CMP, calcium, LDH, triglycerides, lactate, ABG\n5. CT abdomen with IV contrast \u2014 staging\n6. If gallstone impacted: ERCP consult\n7. ICU admission \u2014 risk of organ failure\n8. Surgical consult for cholecystectomy after recovery\n9. Monitor for complications: infected necrosis, pseudocyst, ARDS"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Worst stomach pain of my life Epigastric — boring through to the back",
+      "hpi": "Sergio Moreno is a 60-year-old male presenting with worst stomach pain of my life epigastric — boring through to the back. Past medical history includes Gallstones, Obesity, Hypertension, Type 2 Diabetes. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Acute Necrotizing Pancreatitis (Gallstone-Induced) — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "07:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 07:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260421",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-145167",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "PANCREATIC",
-          "results": [
-            {
-              "test": "Lipase",
-              "value": "4,820",
-              "unit": "U/L",
-              "range": "0-160",
-              "flag": "H"
-            },
-            {
-              "test": "Amylase",
-              "value": "1,242",
-              "unit": "U/L",
-              "range": "30-110",
-              "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "18.8",
-              "unit": "K/uL",
+              "value": "16.8",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
             {
               "test": "Hemoglobin",
-              "value": "14.8",
+              "value": "15",
               "unit": "g/dL",
               "range": "12.0-16.0",
               "flag": ""
             },
             {
               "test": "Hematocrit",
-              "value": "48.2",
+              "value": "34",
               "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "H"
+              "range": "36-46",
+              "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "188",
-              "unit": "K/uL",
+              "value": "165",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
           ]
         },
         {
-          "name": "METABOLIC",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "Glucose",
-              "value": "242",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "98",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "28",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
             },
             {
               "test": "BUN",
-              "value": "34",
+              "value": "28",
               "unit": "mg/dL",
               "range": "7-20",
               "flag": "H"
             },
             {
               "test": "Creatinine",
-              "value": "1.8",
+              "value": "0.8",
               "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": "H"
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "71",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
             },
             {
               "test": "Calcium",
-              "value": "7.2",
+              "value": "10.4",
               "unit": "mg/dL",
               "range": "8.5-10.5",
-              "flag": "L"
-            },
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
             {
-              "test": "LDH",
-              "value": "488",
+              "test": "Lipase",
+              "value": "4,200",
               "unit": "U/L",
-              "range": "140-280",
+              "range": "10-140",
               "flag": "H"
             },
             {
-              "test": "Triglycerides",
-              "value": "312",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            },
-            {
-              "test": "AST",
-              "value": "188",
+              "test": "Amylase",
+              "value": "1,800",
               "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "ALT",
-              "value": "224",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "Alk Phos",
-              "value": "268",
-              "unit": "U/L",
-              "range": "44-147",
+              "range": "30-110",
               "flag": "H"
             },
             {
               "test": "Total Bilirubin",
-              "value": "3.8",
+              "value": "4.8",
               "unit": "mg/dL",
               "range": "0.1-1.2",
               "flag": "H"
             },
             {
+              "test": "Direct Bilirubin",
+              "value": "3.6",
+              "unit": "mg/dL",
+              "range": "0.0-0.3",
+              "flag": "H"
+            },
+            {
+              "test": "ALT",
+              "value": "320",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": "H"
+            },
+            {
+              "test": "AST",
+              "value": "280",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "348",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "180",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            },
+            {
               "test": "Lactate",
-              "value": "3.4",
+              "value": "2.4",
               "unit": "mmol/L",
               "range": "0.5-2.0",
               "flag": "H"
@@ -286,88 +287,101 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "CT ABDOMEN AND PELVIS WITH IV CONTRAST",
-      "accession": "IMG-2026-260421",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-262954",
+      "clinical": "Worst stomach pain of my life Epigastric — boring through to the back",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "CT Abdomen/Pelvis with Contrast",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Severe pancreatitis \u2014 staging, complications",
-      "technique": "CT abdomen/pelvis with IV contrast.",
-      "findings": "Pancreas: Diffusely enlarged and edematous. Areas of non-enhancement involving >30% of pancreatic body and tail \u2014 consistent with necrosis (CT Severity Index: 8/10). Extensive peripancreatic fat stranding and fluid collections tracking along bilateral paracolic gutters. No gas within collections (no infected necrosis currently).\n\nGallbladder: Distended with multiple gallstones. CBD dilated to 10 mm with possible distal CBD stone. Bilateral moderate pleural effusions (L > R).",
-      "impression": "1. Acute necrotizing pancreatitis \u2014 >30% necrosis (CTSI 8/10).\n2. CBD dilation with possible impacted stone \u2014 ERCP consideration.\n3. Bilateral pleural effusions.\n4. High risk for complications \u2014 ICU recommended.",
-      "dictated": "02/26/2026 08:00",
-      "verified": "02/26/2026 08:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-419827",
+      "clinical": "Worst stomach pain of my life Epigastric — boring through to the back",
+      "technique": "Standard protocol",
+      "findings": "ACUTE PANCREATITIS with extensive PERIPANCREATIC FAT STRANDING and FLUID COLLECTIONS. Pancreatic body and tail show AREAS OF NON-ENHANCEMENT consistent with NECROSIS (>30% of gland — necrotizing pancreatitis). Gallbladder distended with multiple gallstones. Common bile duct dilated to 12mm (normal <6mm) with possible distal CBD stone. Left pleural effusion (small). No pseudocyst. No portal vein thrombosis.",
+      "impression": "ACUTE NECROTIZING GALLSTONE PANCREATITIS with >30% glandular necrosis. CBD dilation with probable choledocholithiasis. GI/surgical consultation for ERCP to relieve biliary obstruction. ICU admission recommended given necrotizing disease.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-895191",
+      "clinical": "Worst stomach pain of my life Epigastric — boring through to the back",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 112 bpm. No ST changes",
+      "impression": "Sinus tachycardia — pain and volume depletion",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: Gallstones, pancreatitis at 62; alive at 84",
-    "Mother: T2DM, alive at 82",
-    "Sister: Cholelithiasis, s/p cholecystectomy; alive at 55"
+    "Mother: gallstones and cholecystectomy",
+    "Father: pancreatitis (alcohol-related)"
   ],
   "socialHistory": [
-    [
-      "Occupation",
-      "Office manager"
-    ],
-    [
-      "Marital",
-      "Married 30 years"
-    ],
     [
       "Tobacco",
       "Never"
     ],
     [
       "Alcohol",
-      "Social \u2014 1-2 glasses wine/week"
+      "Social — 1-2 drinks per week (not a heavy drinker)"
     ],
     [
-      "Exercise",
-      "Limited by obesity"
+      "Drugs",
+      "Denies"
     ],
     [
-      "Advance Directive",
-      "Full code; DPOA husband Brian"
+      "Occupation",
+      "Bank teller"
+    ],
+    [
+      "Living",
+      "Lives with family"
     ]
-  ],
-  "meta": {
-    "caseId": "severe-pancreatitis",
-    "diagnosis": "Acute Necrotizing Pancreatitis (Gallstone-Induced)",
-    "acuity": 2,
-    "presentation": "GI Emergency",
-    "category": "gastrointestinal"
-  }
+  ]
 };

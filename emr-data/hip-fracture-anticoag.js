@@ -1,203 +1,195 @@
-// Virtual EMR Case: Hip Fracture on Anticoagulation
-// Variant: hip-fracture-anticoag | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
-
+/* emr-data/hip-fracture-anticoag.js — EMR case data for Hip Fracture on Anticoagulation */
 window.EMR_DATA = {
   "patient": {
-    "name": "Eleanor Fitzgerald",
-    "dob": "09/12/1936",
-    "age": 89,
+    "name": "Margaret Sullivan",
+    "dob": "06/15/1944",
+    "age": "82",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Medicare + Medigap",
-    "pcp": "Dr. Joan Murphy, MD",
-    "pharmacy": "CVS \u2014 Boca Raton, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-628815",
     "language": "English",
-    "race": "White (Irish)",
-    "address": "5200 Town Center Circle, Boca Raton, FL",
-    "phone": "(561) 555-4488",
-    "email": "e.fitzgerald36@email.com",
+    "race": "Black/African American",
+    "phone": "(649) 609-3584",
+    "email": "margaret.sullivan@email.com",
+    "address": "864 Oak St, Boca Raton, FL 33431",
+    "insurance": "BlueCross BlueShield PPO",
+    "pcp": "Dr. Robert Hughes, DO",
+    "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
     "emergencyContact": {
-      "name": "Patrick Fitzgerald (Son)",
-      "phone": "(561) 555-4504"
+      "name": "Henry Sanchez",
+      "phone": "(548) 940-6605",
+      "relationship": "Partner"
     },
-    "mrn": "RDX-2025-29996"
+    "chiefComplaint": "I fell and I can't get up Right hip and groin",
+    "diagnosis": "Hip Fracture on Anticoagulation"
   },
   "problems": [
     {
-      "problem": "Atrial Fibrillation \u2014 Permanent",
-      "icd": "I48.21",
-      "onset": "2018",
+      "id": "prob-1",
+      "description": "Atrial fibrillation",
       "status": "Active",
-      "notes": "On warfarin; INR target 2-3; last INR 2.8 (1 week ago)"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Osteoporosis \u2014 Severe",
-      "icd": "M81.0",
-      "onset": "2010",
+      "id": "prob-2",
+      "description": "Osteoporosis",
       "status": "Active",
-      "notes": "T-score -3.2 lumbar spine; on denosumab; prior vertebral compression fracture T12"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2000",
+      "id": "prob-3",
+      "description": "Mild dementia",
       "status": "Active",
-      "notes": "On amlodipine"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Mild Cognitive Impairment",
-      "icd": "G31.84",
-      "onset": "2023",
+      "id": "prob-4",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "MoCA 22/30; independent in IADLs with some assistance"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-5",
+      "description": "Chronic kidney disease stage 3",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Warfarin 3mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Murphy",
-      "start": "06/2018",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Warfarin",
+      "dose": "4mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
     },
     {
-      "name": "Amlodipine 5mg daily",
-      "sig": "PO daily",
-      "prescriber": "Dr. Murphy",
-      "start": "03/2005",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Alendronate",
+      "dose": "70mg weekly",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     },
     {
-      "name": "Denosumab 60mg subQ q6months",
-      "sig": "SubQ injection every 6 months",
-      "prescriber": "Dr. Murphy",
-      "start": "01/2020",
-      "refills": 2,
-      "status": "Active"
+      "id": "med-3",
+      "name": "Donepezil",
+      "dose": "10mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     },
     {
-      "name": "Calcium 600mg + Vitamin D 800IU BID",
-      "sig": "PO BID",
-      "prescriber": "Dr. Murphy",
-      "start": "01/2011",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-4",
+      "name": "Amlodipine",
+      "dose": "5mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
     },
     {
-      "name": "Metoprolol Tartrate 25mg BID",
-      "sig": "PO BID",
-      "prescriber": "Dr. Murphy",
-      "start": "06/2018",
-      "refills": 5,
-      "status": "Active"
+      "id": "med-5",
+      "name": "Metoprolol",
+      "dose": "25mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Codeine",
+      "reaction": "Nausea",
+      "severity": "Moderate",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "148/82",
-      "hr": 82,
-      "rr": 16,
-      "temp": "98.0\u00b0F",
-      "spo2": "96%",
-      "wt": "118 lbs",
-      "ht": "5'3\"",
-      "bmi": 20.9,
-      "setting": "ED"
+      "date": "03/03/2026",
+      "time": "10:05",
+      "bp": "108/62",
+      "hr": "92",
+      "rr": "18",
+      "temp": "36.2\u00b0C",
+      "spo2": "94%",
+      "pain": "/10",
+      "bmi": "25",
+      "weight": "100 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Fall with left hip pain, unable to bear weight",
-      "hpi": "89F on warfarin fell at home \u2014 tripped on rug, fell onto left side. Unable to stand since. Left hip pain 8/10. No head strike, no LOC. No chest pain or palpitations prior to fall. No preceding dizziness (mechanical fall). Son found her on floor 30 minutes later. Severe osteoporosis history. Last INR 2.8 one week ago.",
-      "exam": "Alert, uncomfortable. Left lower extremity: Shortened and externally rotated. Tender over greater trochanter. Unable to perform SLR due to pain. Distal pulses intact. Sensation intact. No open wound. No ecchymosis over scalp. GCS 15. Cervical spine non-tender. No other injuries on secondary survey.",
-      "assessment": "1. Left hip fracture \u2014 likely intertrochanteric given mechanism and osteoporosis\n2. On warfarin \u2014 need INR stat for reversal planning before OR\n3. Fall risk: osteoporosis, MCI, AFib on anticoagulation, living alone\n4. Perioperative management complex \u2014 balance fracture repair timing with anticoagulation reversal",
-      "plan": "1. X-ray left hip AP and lateral\n2. STAT INR \u2014 if supratherapeutic, vitamin K 2.5mg IV + 4-factor PCC for urgent reversal\n3. Hold warfarin\n4. Type & screen\n5. Orthopedic surgery consult for fixation\n6. Pain: femoral nerve block + acetaminophen 1g IV (avoid excessive opioids given age/cognition)\n7. Pre-op: CBC, CMP, ECG, chest X-ray\n8. DVT prophylaxis discussion (bridge anticoagulation post-op)\n9. Social work: home safety assessment, fall prevention, possible rehab placement\n10. Geri consult for perioperative optimization"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "I fell and I can't get up Right hip and groin",
+      "hpi": "Margaret Sullivan is a 82-year-old female presenting with i fell and i can't get up right hip and groin. Past medical history includes Atrial fibrillation, Osteoporosis, Mild dementia, Hypertension, Chronic kidney disease stage 3. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Hip Fracture on Anticoagulation \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:10",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-260431",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-474026",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "COAGULATION",
-          "results": [
-            {
-              "test": "INR",
-              "value": "3.2",
-              "unit": "",
-              "range": "0.9-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "PT",
-              "value": "34.8",
-              "unit": "sec",
-              "range": "11.0-13.5",
-              "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "CBC",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "9.2",
-              "unit": "K/uL",
+              "value": "7",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "11.0",
+              "value": "10.2",
               "unit": "g/dL",
               "range": "12.0-16.0",
               "flag": "L"
             },
             {
+              "test": "Hematocrit",
+              "value": "43",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
               "test": "Platelets",
-              "value": "178",
-              "unit": "K/uL",
+              "value": "272",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
             }
           ]
         },
         {
-          "name": "BMP",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            },
             {
               "test": "Sodium",
               "value": "138",
@@ -207,10 +199,92 @@ window.EMR_DATA = {
             },
             {
               "test": "Potassium",
-              "value": "4.2",
+              "value": "5.2",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
               "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "28",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "10",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.1",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "INR",
+              "value": "3.2",
+              "unit": "",
+              "range": "2.0-3.0",
+              "flag": "H"
+            },
+            {
+              "test": "CK Total",
+              "value": "2,400",
+              "unit": "U/L",
+              "range": "22-198",
+              "flag": "H"
+            },
+            {
+              "test": "Lactate",
+              "value": "2.4",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            },
+            {
+              "test": "Troponin I",
+              "value": "0.06",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": "H"
+            },
+            {
+              "test": "Urinalysis",
+              "value": "Dark amber, specific gravity 1.035, trace blood, trace protein",
+              "unit": "",
+              "range": "Normal",
+              "flag": "H"
             }
           ]
         }
@@ -219,95 +293,118 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "X-RAY LEFT HIP AP AND LATERAL",
-      "accession": "IMG-2026-260431",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-312683",
+      "clinical": "I fell and I can't get up Right hip and groin",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "X-ray Hip",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Fall, hip pain, on anticoagulation",
-      "technique": "AP and lateral radiographs of the left hip.",
-      "findings": "Comminuted intertrochanteric fracture of the left femur. Fracture extends from greater trochanter to lesser trochanter with varus angulation. No subtrochanteric extension. Diffuse osteopenia. Prior T12 vertebral compression fracture noted (old). Right hip prosthesis (prior right THA, not previously documented).",
-      "impression": "1. Comminuted left intertrochanteric femur fracture.\n2. Severe osteopenia.\n3. Orthopedic surgery consultation for fixation (ORIF vs cephalomedullary nail).\n4. Warfarin reversal needed pre-operatively.",
-      "dictated": "02/26/2026 14:20",
-      "verified": "02/26/2026 14:30"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-757447",
+      "clinical": "I fell and I can't get up Right hip and groin",
+      "technique": "Standard protocol",
+      "findings": "DISPLACED LEFT FEMORAL NECK FRACTURE (Garden type III/IV). Femoral head displaced posteriorly with significant angulation. No pathologic bone lesion. Severe osteopenia. Degenerative changes in hip joint.",
+      "impression": "Displaced femoral neck fracture \u2014 orthopedic surgery consultation for surgical repair (likely hemiarthroplasty or total hip arthroplasty given displacement and patient age).",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "CT Head without Contrast",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-542904",
+      "clinical": "I fell and I can't get up Right hip and groin",
+      "technique": "Standard protocol",
+      "findings": "No acute intracranial hemorrhage. Mild chronic small vessel ischemic changes. Generalized volume loss consistent with age and known dementia. No skull fracture.",
+      "impression": "No acute intracranial pathology \u2014 delirium is from pain, dehydration, and immobility, not head injury",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-983839",
+      "clinical": "I fell and I can't get up Right hip and groin",
+      "technique": "Standard 12-lead",
+      "findings": "Atrial fibrillation at 92 bpm. No ST changes. Normal intervals",
+      "impression": "Chronic AFib \u2014 need to manage anticoagulation perioperatively",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Osteoporosis, hip fracture at 82, deceased at 90",
-    "Father: CAD, deceased at 74",
-    "Sister: Osteoporosis, alive at 86"
+    "Mother: hip fracture at 80",
+    "Sister: osteoporosis"
   ],
   "socialHistory": [
-    [
-      "Occupation",
-      "Retired elementary school teacher"
-    ],
-    [
-      "Marital",
-      "Widowed 2020; lives alone in condo"
-    ],
     [
       "Tobacco",
       "Never"
     ],
     [
       "Alcohol",
-      "None"
+      "Glass of wine with dinner occasionally"
     ],
     [
-      "Exercise",
-      "Walking with cane; chair yoga 1x/week"
+      "Drugs",
+      "Denies"
     ],
     [
-      "Advance Directive",
-      "Full code; DPOA son Patrick; living will on file"
+      "Occupation",
+      "Retired school principal"
+    ],
+    [
+      "Living",
+      "Lives alone with home aide 4 hours daily. Independent with ADLs at baseline. No fall in past year."
     ]
-  ],
-  "meta": {
-    "caseId": "hip-fracture-anticoag",
-    "diagnosis": "Hip Fracture on Anticoagulation",
-    "acuity": 3,
-    "presentation": "Geriatric Emergency",
-    "category": "geriatric"
-  }
+  ]
 };

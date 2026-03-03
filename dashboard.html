@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#060a10">
+<title>Hospital Dashboard | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060a10;--surface:#0c1118;--surface-hover:#111822;
+  --border:rgba(255,255,255,.06);--border-hover:rgba(255,255,255,.12);
+  --text:#e0e0e0;--dim:rgba(255,255,255,.4);
+  --blue:#2874A6;--blue-light:#3498DB;--blue-bg:rgba(40,116,166,.08);--blue-border:rgba(40,116,166,.18);
+  --red:#DC2626;--green:#059669;--amber:#D97706;--purple:#7C3AED;--pink:#EC4899;
+  --font:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* Global nav placeholder - nav-global.js injects here */
+#global-nav{height:56px}
+
+.dash{max-width:1120px;margin:0 auto;padding:32px 24px 80px}
+.dash-header{text-align:center;margin-bottom:48px}
+.dash-greeting{font-size:14px;font-weight:500;color:var(--dim);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
+.dash-title{font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;letter-spacing:-.8px;line-height:1.1;margin-bottom:12px}
+.dash-title span{background:linear-gradient(135deg,var(--blue-light),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.dash-sub{font-size:15px;color:var(--dim);max-width:520px;margin:0 auto;line-height:1.6}
+
+/* Stats bar */
+.stats{display:flex;justify-content:center;gap:32px;margin-bottom:48px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.stat-label{font-size:11px;font-weight:600;color:var(--dim);letter-spacing:.6px;text-transform:uppercase;margin-top:2px}
+
+/* Grid */
+.locations{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:40px}
+.loc-section{margin-bottom:32px}
+.loc-section-title{font-size:11px;font-weight:700;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;padding-left:4px}
+
+.loc-card{
+  display:flex;align-items:flex-start;gap:16px;padding:20px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  cursor:pointer;transition:all .2s;text-decoration:none;color:inherit;position:relative;overflow:hidden
+}
+.loc-card:hover{
+  border-color:var(--border-hover);background:var(--surface-hover);
+  transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)
+}
+.loc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  opacity:0;transition:opacity .2s
+}
+.loc-card:hover::before{opacity:1}
+
+.loc-icon{
+  width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0
+}
+.loc-body{flex:1;min-width:0}
+.loc-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+.loc-desc{font-size:13px;color:var(--dim);line-height:1.5}
+.loc-badge{
+  display:inline-flex;align-items:center;gap:4px;margin-top:8px;
+  font-size:11px;font-weight:600;letter-spacing:.3px;padding:3px 10px;
+  border-radius:6px;background:var(--blue-bg);color:var(--blue-light);border:1px solid var(--blue-border)
+}
+.loc-badge.green{background:rgba(5,150,105,.08);color:#34D399;border-color:rgba(5,150,105,.18)}
+.loc-badge.amber{background:rgba(217,119,6,.08);color:#FBBF24;border-color:rgba(217,119,6,.18)}
+.loc-badge.purple{background:rgba(124,58,237,.08);color:#A78BFA;border-color:rgba(124,58,237,.18)}
+.loc-badge.pink{background:rgba(236,72,153,.08);color:#F472B6;border-color:rgba(236,72,153,.18)}
+
+/* Color accents for cards */
+.loc-card.ed::before{background:linear-gradient(90deg,var(--red),transparent)}
+.loc-card.ed .loc-icon{background:rgba(220,38,38,.1);color:#F87171}
+.loc-card.sim::before{background:linear-gradient(90deg,var(--purple),transparent)}
+.loc-card.sim .loc-icon{background:rgba(124,58,237,.1);color:#A78BFA}
+.loc-card.night::before{background:linear-gradient(90deg,#1e40af,transparent)}
+.loc-card.night .loc-icon{background:rgba(30,64,175,.1);color:#93C5FD}
+.loc-card.admit::before{background:linear-gradient(90deg,var(--amber),transparent)}
+.loc-card.admit .loc-icon{background:rgba(217,119,6,.1);color:#FBBF24}
+.loc-card.consult::before{background:linear-gradient(90deg,var(--green),transparent)}
+.loc-card.consult .loc-icon{background:rgba(5,150,105,.1);color:#34D399}
+.loc-card.emr::before{background:linear-gradient(90deg,var(--blue),transparent)}
+.loc-card.emr .loc-icon{background:var(--blue-bg);color:var(--blue-light)}
+.loc-card.board::before{background:linear-gradient(90deg,var(--pink),transparent)}
+.loc-card.board .loc-icon{background:rgba(236,72,153,.1);color:#F472B6}
+.loc-card.study::before{background:linear-gradient(90deg,#059669,transparent)}
+.loc-card.study .loc-icon{background:rgba(5,150,105,.1);color:#6EE7B7}
+.loc-card.progress::before{background:linear-gradient(90deg,var(--blue-light),transparent)}
+.loc-card.progress .loc-icon{background:var(--blue-bg);color:var(--blue-light)}
+
+/* Footer */
+.dash-footer{text-align:center;padding-top:24px;border-top:1px solid var(--border)}
+.dash-footer p{font-size:12px;color:var(--dim)}
+.dash-footer a{color:var(--blue-light);text-decoration:none}
+
+@media(max-width:700px){
+  .locations{grid-template-columns:1fr}
+  .stats{gap:20px}
+  .stat-num{font-size:22px}
+  .dash{padding:20px 16px 60px}
+}
+
+/* Entry animation */
+.loc-card{opacity:0;transform:translateY(12px);animation:cardIn .4s ease forwards}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.loc-card:nth-child(1){animation-delay:.05s}
+.loc-card:nth-child(2){animation-delay:.1s}
+.loc-card:nth-child(3){animation-delay:.15s}
+.loc-card:nth-child(4){animation-delay:.2s}
+.loc-card:nth-child(5){animation-delay:.25s}
+.loc-card:nth-child(6){animation-delay:.3s}
+</style>
+</head>
+<body>
+
+<div id="global-nav"></div>
+
+<div class="dash">
+  <div class="dash-header">
+    <div class="dash-greeting">Welcome to</div>
+    <h1 class="dash-title">The Virtual <span>Teaching Hospital</span></h1>
+    <p class="dash-sub">Choose where to go. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">See how everything works</a> Each location offers a different way to build your clinical reasoning skills.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">145</div><div class="stat-label">Clinical Cases</div></div>
+    <div class="stat"><div class="stat-num">615</div><div class="stat-label">Board Questions</div></div>
+    <div class="stat"><div class="stat-num">9</div><div class="stat-label">Learning Modes</div></div>
+  </div>
+
+  <!-- Clinical Practice -->
+  <div class="loc-section">
+    <div class="loc-section-title">Clinical Practice</div>
+    <div class="locations">
+
+      <a href="ed-board-v2.html" class="loc-card ed">
+        <div class="loc-icon">🏥</div>
+        <div class="loc-body">
+          <div class="loc-name">Emergency Department</div>
+          <div class="loc-desc">Pick up patients from the ED track board. Work through clinical reasoning trainers with real-time decision making, orders, and evolving patient conditions.</div>
+          <div class="loc-badge">145 cases</div>
+        </div>
+      </a>
+
+      <a href="simroomdx.html" class="loc-card sim">
+        <div class="loc-icon">🩺</div>
+        <div class="loc-body">
+          <div class="loc-name">Simulation Lab</div>
+          <div class="loc-desc">Standardized patient encounters. Practice history-taking, physical exam, and clinical communication in a simulated environment.</div>
+          <div class="loc-badge purple">Interactive SP</div>
+        </div>
+      </a>
+
+      <a href="night-float.html" class="loc-card night">
+        <div class="loc-icon">🌙</div>
+        <div class="loc-body">
+          <div class="loc-name">Night Float</div>
+          <div class="loc-desc">Overnight call simulation. Triage pages, manage cross-cover patients, and make time-critical decisions under pressure.</div>
+          <div class="loc-badge" style="background:rgba(30,64,175,.08);color:#93C5FD;border-color:rgba(30,64,175,.18)">On-call scenarios</div>
+        </div>
+      </a>
+
+      <a href="admissions.html" class="loc-card admit">
+        <div class="loc-icon">📋</div>
+        <div class="loc-body">
+          <div class="loc-name">Admissions</div>
+          <div class="loc-desc">Practice the admissions workflow — from ED presentation through assessment, plan, and admission orders.</div>
+          <div class="loc-badge amber">Workflow sim</div>
+        </div>
+      </a>
+
+      <a href="consult-callback.html" class="loc-card consult">
+        <div class="loc-icon">📞</div>
+        <div class="loc-body">
+          <div class="loc-name">Consult Service</div>
+          <div class="loc-desc">Receive and return consult pages. Practice structured communication, clinical reasoning for consult questions, and callback management.</div>
+          <div class="loc-badge green">SBAR practice</div>
+        </div>
+      </a>
+
+      <a href="virtual-emr.html" class="loc-card emr">
+        <div class="loc-icon">💻</div>
+        <div class="loc-body">
+          <div class="loc-name">Electronic Medical Record</div>
+          <div class="loc-desc">Full virtual EMR with patient charts, labs, imaging, medications, and clinical notes. Review cases in a realistic charting environment.</div>
+          <div class="loc-badge">Full charts</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Study & Review -->
+  <div class="loc-section">
+    <div class="loc-section-title">Study & Review</div>
+    <div class="locations">
+
+      <a href="board-prep.html" class="loc-card board">
+        <div class="loc-icon">📝</div>
+        <div class="loc-body">
+          <div class="loc-name">Board Review</div>
+          <div class="loc-desc">USMLE-style multiple choice questions with detailed explanations, illness scripts, and cognitive bias analysis.</div>
+          <div class="loc-badge pink">615 questions</div>
+        </div>
+      </a>
+
+      <a href="study-mode.html" class="loc-card study">
+        <div class="loc-icon">📖</div>
+        <div class="loc-body">
+          <div class="loc-name">Study Room</div>
+          <div class="loc-desc">Flashcards, clinical pathways, and review materials. Study at your own pace with spaced repetition.</div>
+          <div class="loc-badge green">Self-paced</div>
+        </div>
+      </a>
+
+      <a href="analytics-dashboard.html" class="loc-card progress">
+        <div class="loc-icon">📊</div>
+        <div class="loc-body">
+          <div class="loc-name">My Progress</div>
+          <div class="loc-desc">Track your learning analytics — cases completed, accuracy trends, reasoning patterns, and areas for improvement.</div>
+          <div class="loc-badge">Dashboard</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="dash-footer">
+    <p>ReasonDx — Clinical Reasoning Education Platform &nbsp;·&nbsp; <a href="index.html">About</a> &nbsp;·&nbsp; <a href="auth/account.html">Account</a></p>
+  </div>
+</div>
+
+<script src="js/nav-global.js"></script>
+</body>
+</html>

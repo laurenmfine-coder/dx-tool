@@ -1,176 +1,379 @@
-// Virtual EMR Case: Acute Limb Ischemia (Embolic)
-// Variant: acute-limb-ischemia | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/acute-limb-ischemia.js — EMR case data for Acute Limb Ischemia (Embolic) */
 window.EMR_DATA = {
   "patient": {
-    "name": "Virginia O'Brien",
-    "dob": "08/20/1952",
-    "age": 73,
-    "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Medicare",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "name": "Harold Jennings",
+    "dob": "12/18/1951",
+    "age": "75",
+    "sex": "Male",
+    "pronouns": "he/him",
+    "mrn": "MRN-811307",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "virginia@email.com",
+    "race": "American Indian",
+    "phone": "(947) 888-4276",
+    "email": "harold.jennings@email.com",
+    "address": "7982 Maple Ave, Hollywood, FL 33020",
+    "insurance": "Cigna",
+    "pcp": "Dr. Robert Hughes, DO",
+    "pharmacy": "Publix Pharmacy — Pines Blvd",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Sarah Bailey",
+      "phone": "(590) 465-3785",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-62506"
+    "chiefComplaint": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
+    "diagnosis": "Acute Limb Ischemia (Embolic)"
   },
   "problems": [
     {
-      "problem": "Acute Limb Ischemia (Embolic)",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Atrial fibrillation",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Congestive heart failure",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Prior stroke",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-4",
+      "description": "Hypertension",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-5",
+      "description": "Type 2 Diabetes",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Warfarin",
+      "dose": "5mg daily (INR has been subtherapeutic — last check 1.6 two weeks ago)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Metoprolol",
+      "dose": "50mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
+    },
+    {
+      "id": "med-3",
+      "name": "Furosemide",
+      "dose": "40mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
+    },
+    {
+      "id": "med-4",
+      "name": "Lisinopril",
+      "dose": "20mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
+    },
+    {
+      "id": "med-5",
+      "name": "Metformin",
+      "dose": "500mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Heparin",
+      "reaction": "Thrombocytopenia (HIT) — CRITICAL: cannot use unfractionated heparin",
+      "severity": "Moderate",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
+      "date": "03/03/2026",
+      "time": "08:30",
+      "bp": "148/88",
+      "hr": "82 (irregularly irregular)",
+      "rr": "16",
+      "temp": "36.8°C",
       "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "pain": "8/10",
+      "bmi": "28",
+      "weight": "84 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Acute Limb Ischemia (Embolic)",
-      "hpi": "73F with AFib (not on anticoagulation \u2014 patient preference) presenting with sudden onset L leg pain, pallor, and numbness 3 hours ago. 6 Ps: Pain, Pallor, Pulselessness (absent popliteal/pedal pulses L), Paresthesia, Poikilothermia (L foot cold), Paralysis (early \u2014 decreased dorsiflexion). CTA: occlusion of L popliteal artery. EMERGENT vascular surgery for thrombectomy within 6hr window. Heparin bolus + drip.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Acute Limb Ischemia (Embolic) \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
+      "hpi": "Harold Jennings is a 75-year-old male presenting with my right leg went cold and painful suddenly right lower leg and foot — sudden onset. Past medical history includes Atrial fibrillation, Congestive heart failure, Prior stroke, Hypertension, Type 2 Diabetes. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Acute Limb Ischemia (Embolic) — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-411339",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
+              "test": "WBC",
+              "value": "8.9",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "168",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "15",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "73",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "INR",
+              "value": "1.4",
+              "unit": "",
+              "range": "2.0-3.0 (therapeutic for AFib)",
+              "flag": "H"
+            },
+            {
               "test": "Lactate",
-              "value": "3.8",
+              "value": "3.4",
               "unit": "mmol/L",
               "range": "0.5-2.0",
               "flag": "H"
             },
             {
-              "test": "CK",
-              "value": "482",
+              "test": "CK Total",
+              "value": "480",
               "unit": "U/L",
               "range": "22-198",
               "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
             }
           ]
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-417544",
+      "clinical": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "CTA Lower Extremity",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-961178",
+      "clinical": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
+      "technique": "Standard protocol",
+      "findings": "COMPLETE OCCLUSION of the right popliteal artery at the level of the knee joint. Abrupt cutoff with 'meniscus sign' (convex proximal thrombus margin — classic for embolism). No significant atherosclerotic disease proximal to occlusion. Reconstitution of flow distally via collaterals with poor opacification of anterior tibial, posterior tibial, and peroneal arteries. Left lower extremity: patent vasculature with mild atherosclerotic changes.",
+      "impression": "ACUTE EMBOLIC OCCLUSION of right popliteal artery — Rutherford class IIa (marginally threatened limb with sensory loss, no motor deficit initially, now developing). EMERGENT vascular surgery consultation for thrombectomy or catheter-directed thrombolysis.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-209998",
+      "clinical": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",
+      "technique": "Standard 12-lead",
+      "findings": "Atrial fibrillation at 82 bpm. Old Q waves in V1-V3 (prior anterior wall infarct). No acute ST changes",
+      "impression": "Chronic atrial fibrillation — embolic source. Prior anterior MI noted.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Father: peripheral artery disease",
+    "Brother: MI at 62"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Tobacco",
+      "40 pack-years, quit 10 years ago"
+    ],
+    [
+      "Alcohol",
+      "Rare"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Occupation",
+      "Retired truck driver"
+    ],
+    [
+      "Living",
+      "Lives with wife"
     ]
-  ],
-  "meta": {
-    "caseId": "acute-limb-ischemia",
-    "diagnosis": "Acute Limb Ischemia (Embolic)",
-    "acuity": 2,
-    "presentation": "Vascular Emergency",
-    "category": "vascular"
-  }
+  ]
 };

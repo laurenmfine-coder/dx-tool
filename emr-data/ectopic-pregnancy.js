@@ -1,158 +1,233 @@
-// Virtual EMR Case: Ruptured ectopic pregnancy
-// Variant: ectopic-pregnancy | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/ectopic-pregnancy.js — EMR case data for Ruptured Ectopic Pregnancy */
 window.EMR_DATA = {
   "patient": {
-    "name": "Jessica Taylor",
-    "dob": "04/12/1994",
-    "age": 31,
+    "name": "Aisha Mohammed",
+    "dob": "06/15/1997",
+    "age": "29",
     "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "United Healthcare",
-    "pcp": "Dr. Karen White, DO",
-    "pharmacy": "Walgreens \u2014 Sunrise, FL",
+    "pronouns": "she/her",
+    "mrn": "MRN-155904",
     "language": "English",
-    "race": "White",
-    "address": "4820 NW 44th St, Sunrise, FL",
-    "phone": "(954) 555-1822",
-    "email": "j.taylor94@email.com",
+    "race": "American Indian",
+    "phone": "(568) 855-7586",
+    "email": "aisha.mohammed@email.com",
+    "address": "4126 Oak St, Coral Springs, FL 33065",
+    "insurance": "Humana Gold Plus",
+    "pcp": "Dr. Michael Torres, DO",
+    "pharmacy": "Walmart Pharmacy \u2014 University Dr",
     "emergencyContact": {
-      "name": "Ryan Taylor (Husband)",
-      "phone": "(954) 555-1838"
+      "name": "William Hill",
+      "phone": "(887) 149-1564",
+      "relationship": "Parent"
     },
-    "mrn": "RDX-2025-10899"
+    "chiefComplaint": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+    "diagnosis": "Ruptured Ectopic Pregnancy"
   },
   "problems": [
     {
-      "problem": "Prior Ectopic Pregnancy",
-      "icd": "Z87.59",
-      "onset": "2022",
+      "id": "prob-1",
+      "description": "Chlamydia infection",
       "status": "Active",
-      "notes": "Right-sided ectopic treated with methotrexate 2022"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "PID History",
-      "icd": "N73.0",
-      "onset": "2019",
+      "id": "prob-2",
+      "description": "No prior pregnancies",
       "status": "Active",
-      "notes": "Treated chlamydial PID 2019; increased ectopic risk"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Endometriosis",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "None",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Norethindrone",
+      "dose": "0.35mg daily (progestin-only pill \u2014 started 4 months ago)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "82/48",
-      "hr": 128,
-      "rr": 24,
-      "temp": "98.0\u00b0F",
+      "date": "03/03/2026",
+      "time": "09:56",
+      "bp": "92/58",
+      "hr": "124",
+      "rr": "22",
+      "temp": "36.8\u00b0C",
       "spo2": "98%",
-      "wt": "138 lbs",
-      "ht": "5'5\"",
-      "bmi": 23.0,
-      "setting": "ED"
-    },
-    {
-      "date": "02/26/2026",
-      "bp": "72/40",
-      "hr": 136,
-      "rr": 28,
-      "temp": "97.8\u00b0F",
-      "spo2": "97%",
-      "wt": "138 lbs",
-      "ht": "5'5\"",
-      "bmi": 23.0,
-      "setting": "ED \u2014 15min"
+      "pain": "9/10",
+      "bmi": "33",
+      "weight": "70 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Sudden severe lower abdominal pain, vaginal bleeding, dizziness",
-      "hpi": "31F with prior ectopic and PID history. LMP 7 weeks ago. Home pregnancy test positive 1 week ago, not yet seen OB. Sudden onset severe L lower quadrant pain 90 min ago, now diffuse with vaginal spotting. Feels lightheaded and nearly fainted. Significant risk factors for ectopic: prior ectopic, PID history.",
-      "exam": "Pale, diaphoretic, tachycardic. Abdomen: Rigid, diffuse tenderness worst in LLQ. Rebound and guarding. Pelvic: Scant dark blood in vault, cervical motion tenderness, left adnexal mass/fullness with severe tenderness.",
-      "assessment": "1. RUPTURED ECTOPIC PREGNANCY \u2014 hemorrhagic shock. Prior ectopic + PID + 7wk amenorrhea + acute abdomen + hemodynamic instability\n2. Hemoperitoneum likely\n3. SURGICAL EMERGENCY",
-      "plan": "1. Activate massive transfusion protocol \u2014 2U O-neg pRBC NOW\n2. Two large-bore IVs, NS wide open\n3. STAT bedside US \u2014 free fluid confirmed\n4. STAT quantitative \u03b2-hCG, type & screen, CBC, CMP\n5. EMERGENT OB/GYN consult for laparotomy vs laparoscopy\n6. NPO, consent for surgery\n7. Rh status \u2014 RhoGAM if Rh-negative"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "hpi": "Aisha Mohammed is a 29-year-old female presenting with really bad pain in my lower belly right lower abdomen and pelvis \u2014 sudden onset. Past medical history includes Chlamydia infection, No prior pregnancies, Endometriosis. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Ruptured Ectopic Pregnancy \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "15:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 15:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261500",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-632165",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "ECTOPIC LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
-              "test": "\u03b2-hCG (Quantitative)",
-              "value": "4820",
-              "unit": "mIU/mL",
-              "range": "Varies by GA",
-              "flag": ""
+              "test": "WBC",
+              "value": "13.4",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "4.5-11.0",
+              "flag": "H"
             },
             {
               "test": "Hemoglobin",
-              "value": "7.8",
+              "value": "8.2",
               "unit": "g/dL",
               "range": "12.0-16.0",
               "flag": "L"
             },
             {
               "test": "Hematocrit",
-              "value": "23.4",
+              "value": "48",
               "unit": "%",
               "range": "36-46",
-              "flag": "L"
+              "flag": ""
             },
             {
               "test": "Platelets",
               "value": "198",
-              "unit": "K/uL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
               "flag": ""
             },
             {
-              "test": "Blood Type",
-              "value": "O-Negative",
+              "test": "Potassium",
+              "value": "4.5",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "27",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "13",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "85",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "8.9",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "\u03b2-hCG",
+              "value": "4,200",
+              "unit": "mIU/mL",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Type and Crossmatch",
+              "value": "O negative, 2 units pRBC crossmatched",
               "unit": "",
               "range": "",
               "flag": ""
             },
             {
               "test": "Lactate",
-              "value": "4.8",
+              "value": "4.1",
               "unit": "mmol/L",
               "range": "0.5-2.0",
               "flag": "H"
+            },
+            {
+              "test": "PT/INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.9-1.1",
+              "flag": ""
             }
           ]
         }
@@ -161,64 +236,118 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "BEDSIDE PELVIC ULTRASOUND",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Carter, MD",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-728537",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 FAST Exam",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Suspected ectopic \u2014 7wk amenorrhea, acute abdomen, hemodynamic instability",
-      "technique": "Bedside transvaginal ultrasound.",
-      "findings": "Empty uterus \u2014 no intrauterine pregnancy visualized. Endometrial stripe 12mm. Left adnexa: Complex mass 3.8 x 2.4 cm with ring-of-fire Doppler pattern \u2014 ectopic pregnancy. Large amount of free fluid in pelvis and Morison pouch \u2014 hemoperitoneum.",
-      "impression": "1. Left ectopic pregnancy with rupture.\n2. Hemoperitoneum.\n3. EMERGENT surgical intervention.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-926737",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "technique": "Standard protocol",
+      "findings": "POSITIVE FREE FLUID in Morrison pouch and pelvis. Moderate amount of free fluid in pelvis (cul-de-sac). No intrauterine pregnancy visible in uterus. EMPTY UTERUS with endometrial stripe.",
+      "impression": "FREE INTRAPERITONEAL FLUID + positive \u03b2-hCG + empty uterus = RUPTURED ECTOPIC PREGNANCY. OB/GYN to OR emergently.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 Cardiac",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-148980",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "technique": "Standard protocol",
+      "findings": "Hyperdynamic LV function. Small, underfilled chambers (hypovolemia). No pericardial effusion.",
+      "impression": "Hyperdynamic and volume-depleted \u2014 consistent with hemorrhagic shock",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-317314",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 124 bpm. No ST changes",
+      "impression": "Sinus tachycardia \u2014 hemorrhagic shock",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Healthy",
-    "Father: Healthy"
+    "Mother: ectopic pregnancy (age 26)",
+    "No other relevant history"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Unknown"
+      "Tobacco",
+      "Social smoker, 2-3 cigarettes/day"
     ],
     [
-      "Tobacco",
+      "Alcohol",
+      "Social"
+    ],
+    [
+      "Drugs",
       "Denies"
+    ],
+    [
+      "Occupation",
+      "Restaurant server"
+    ],
+    [
+      "Living",
+      "Lives with partner, sexually active, not using barrier contraception"
     ]
-  ],
-  "meta": {
-    "caseId": "ectopic-pregnancy",
-    "diagnosis": "Ruptured ectopic pregnancy",
-    "acuity": 1,
-    "presentation": "Obstetric Emergency",
-    "category": "obstetric"
-  }
+  ]
 };

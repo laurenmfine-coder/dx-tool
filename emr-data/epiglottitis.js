@@ -1,137 +1,226 @@
-// Virtual EMR Case: Acute epiglottitis in under-immunized child
-// Variant: epiglottitis | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
-
+/* emr-data/epiglottitis.js — EMR case data for Acute Epiglottitis */
 window.EMR_DATA = {
   "patient": {
-    "name": "Sophia Martinez",
-    "dob": "09/05/2020",
-    "age": 5,
-    "sex": "Female",
-    "pronouns": "She/Her",
-    "insurance": "Medicaid",
-    "pcp": "Dr. Linda Park, MD (Pediatrics)",
-    "pharmacy": "CVS \u2014 Miramar, FL",
-    "language": "Spanish/English",
-    "race": "Hispanic",
-    "address": "3280 SW 68th Ave, Miramar, FL",
-    "phone": "(954) 555-9012",
-    "email": "martinez.family@email.com",
+    "name": "Mason Williams",
+    "dob": "06/15/2022",
+    "age": "4",
+    "sex": "Male",
+    "pronouns": "he/him",
+    "mrn": "MRN-339415",
+    "language": "English",
+    "race": "Hispanic/Latino",
+    "phone": "(437) 777-7829",
+    "email": "mason.williams@email.com",
+    "address": "1115 Willow Ct, Boca Raton, FL 33431",
+    "insurance": "Cigna",
+    "pcp": "Dr. James Wilson, MD",
+    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
-      "name": "Rosa Martinez (Mother)",
-      "phone": "(954) 555-9028"
+      "name": "Kenneth Parker",
+      "phone": "(420) 467-2334",
+      "relationship": "Adult Child"
     },
-    "mrn": "RDX-2025-44634"
+    "chiefComplaint": "My child can't breathe right Throat/neck",
+    "diagnosis": "Acute Epiglottitis"
   },
   "problems": [
     {
-      "problem": "Incomplete Immunizations",
-      "icd": "Z28.39",
-      "onset": "2020",
+      "id": "prob-1",
+      "description": "Up to date on vaccinations",
       "status": "Active",
-      "notes": "Behind on Hib series \u2014 only received 1 of 4 doses; family relocated, records incomplete"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "No prior hospitalizations",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "No immune deficiency",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "None",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Acetaminophen",
+      "dose": "Given at home for fever",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "92/58",
-      "hr": 148,
-      "rr": 36,
-      "temp": "103.8\u00b0F",
+      "date": "03/03/2026",
+      "time": "06:08",
+      "bp": "90/60",
+      "hr": "156",
+      "rr": "32",
+      "temp": "40.1\u00b0C",
       "spo2": "92%",
-      "wt": "42 lbs",
-      "ht": "3'6\"",
-      "bmi": 16.8,
-      "setting": "ED Resus"
+      "pain": "/10",
+      "bmi": "32",
+      "weight": "58 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED \u2014 Pediatric Resus",
-      "provider": "Dr. Sarah Mitchell, MD",
-      "cc": "High fever, drooling, refusing to swallow, noisy breathing x 8 hours",
-      "hpi": "5F with incomplete Hib immunization presenting with acute onset high fever (103.8\u00b0F), drooling, dysphagia (refusing to swallow), muffled voice, and inspiratory stridor. Onset 8 hours ago \u2014 rapidly progressive. Child sitting in tripod position, leaning forward with chin thrust. No cough (important \u2014 not croup). No preceding URI symptoms. Mother reports child was in her usual health yesterday.",
-      "exam": "Toxic-appearing, sitting upright in tripod position. Drooling copiously. Inspiratory stridor at rest. Muffled 'hot potato' voice. No barking cough. Mild intercostal retractions. Lungs: Stridor, otherwise clear air entry. No wheezing. Skin: Flushed, no rash.",
-      "assessment": "1. ACUTE EPIGLOTTITIS \u2014 classic presentation (drooling, dysphagia, distress, stridor without cough) in under-immunized child\n2. AIRWAY EMERGENCY \u2014 do NOT examine throat, do NOT lay child flat\n3. Likely H. influenzae type b given incomplete Hib vaccination",
-      "plan": "1. DO NOT examine oropharynx \u2014 risk of complete obstruction\n2. Keep child calm, upright, with parent\n3. STAT call to anesthesia + ENT \u2014 controlled intubation in OR\n4. Prepare tracheostomy tray at bedside\n5. Heliox if available while awaiting OR\n6. Blood culture, CBC (draw AFTER airway secured)\n7. IV ceftriaxone 50mg/kg AFTER airway secured (do not distress child)\n8. Lateral neck X-ray ONLY if stable \u2014 thumbprint sign expected\n9. Contact isolation \u2014 Hib prophylaxis for close contacts"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "My child can't breathe right Throat/neck",
+      "hpi": "Mason Williams is a 4-year-old male presenting with my child can't breathe right throat/neck. Past medical history includes Up to date on vaccinations, No prior hospitalizations, No immune deficiency. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Acute Epiglottitis \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "17:00",
-      "orderedBy": "Dr. Mitchell",
-      "collected": "02/26/2026 17:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261700",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-952482",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "CBC (POST-INTUBATION)",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
               "value": "22.4",
-              "unit": "K/uL",
-              "range": "5.0-15.0",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "4.5-11.0",
               "flag": "H"
             },
             {
               "test": "Hemoglobin",
-              "value": "12.8",
+              "value": "12.2",
               "unit": "g/dL",
-              "range": "11.5-14.5",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34",
+              "unit": "%",
+              "range": "36-46",
               "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "342",
-              "unit": "K/uL",
+              "value": "314",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
-            },
-            {
-              "test": "Bands",
-              "value": "18",
-              "unit": "%",
-              "range": "0-5",
-              "flag": "H"
             }
           ]
         },
         {
-          "name": "BLOOD CULTURE",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "Blood Culture x2",
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.9",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "28",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "9",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.9",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "CRP",
+              "value": "14.8",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": "H"
+            },
+            {
+              "test": "Blood Cultures",
               "value": "Pending",
               "unit": "",
               "range": "No growth",
               "flag": ""
+            },
+            {
+              "test": "Lactate",
+              "value": "2.4",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
             }
           ]
         }
@@ -140,64 +229,101 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "LATERAL NECK RADIOGRAPH",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. Mitchell",
-      "readBy": "Dr. Anika Patel, MD (Radiology)",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "Cervical Spine X-ray",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Suspected epiglottitis \u2014 drooling, stridor, tripod positioning",
-      "technique": "Lateral soft tissue neck radiograph, upright.",
-      "findings": "Markedly swollen epiglottis \u2014 classic 'thumbprint sign.' Thickened aryepiglottic folds. Hypopharyngeal overdistension. Subglottic airway patent. Prevertebral soft tissues normal.",
-      "impression": "1. Acute epiglottitis \u2014 thumbprint sign.\n2. Aryepiglottic fold thickening.\n3. Airway management is priority.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-964734",
+      "clinical": "My child can't breathe right Throat/neck",
+      "technique": "Standard protocol",
+      "findings": "THUMBPRINT SIGN \u2014 enlarged, rounded epiglottis visible on lateral soft tissue neck view. Thickened aryepiglottic folds. Narrowed vallecular space. Subglottic region normal (not croup).",
+      "impression": "EPIGLOTTITIS \u2014 thumbprint sign confirms swollen epiglottis. Prepare for emergent airway management.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "Chest X-ray",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-595216",
+      "clinical": "My child can't breathe right Throat/neck",
+      "technique": "Standard protocol",
+      "findings": "Clear lung fields. No focal consolidation. No foreign body.",
+      "impression": "No pulmonary complication",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-508373",
+      "clinical": "My child can't breathe right Throat/neck",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus tachycardia at 156 bpm. Normal pediatric morphology. No arrhythmia",
+      "impression": "Sinus tachycardia \u2014 age-appropriate for fever and distress",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: Healthy",
-    "Father: Healthy"
+    "No immune deficiency",
+    "No recurrent infections"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Unknown"
+      "Tobacco",
+      "N/A \u2014 no household smokers"
     ],
     [
-      "Tobacco",
-      "Denies"
+      "Alcohol",
+      "N/A"
+    ],
+    [
+      "Drugs",
+      "N/A"
+    ],
+    [
+      "Occupation",
+      "N/A \u2014 preschool student"
+    ],
+    [
+      "Living",
+      "Lives with both parents and older sibling. Attends daycare."
     ]
-  ],
-  "meta": {
-    "caseId": "epiglottitis",
-    "diagnosis": "Acute epiglottitis in under-immunized child",
-    "acuity": 1,
-    "presentation": "Pediatric Emergency",
-    "category": "pediatric"
-  }
+  ]
 };

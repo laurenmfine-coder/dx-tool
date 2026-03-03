@@ -1,138 +1,155 @@
-// Virtual EMR Case: Cauda Equina Syndrome
-// Variant: cauda-equina | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/cauda-equina.js — EMR case data for Cauda Equina Syndrome */
 window.EMR_DATA = {
   "patient": {
-    "name": "James Morrison",
-    "dob": "08/30/1972",
-    "age": 53,
-    "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "United Healthcare PPO",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Weston, FL",
+    "name": "Frances Yamamoto",
+    "dob": "05/17/1964",
+    "age": "62",
+    "sex": "Female",
+    "pronouns": "she/her",
+    "mrn": "MRN-690238",
     "language": "English",
-    "race": "White",
-    "address": "1680 Bonaventure Blvd, Weston, FL",
-    "phone": "(954) 555-9012",
-    "email": "j.morrison72@email.com",
+    "race": "Hispanic/Latino",
+    "phone": "(851) 684-2475",
+    "email": "frances.yamamoto@email.com",
+    "address": "3991 Elm Blvd, Hollywood, FL 33020",
+    "insurance": "BlueCross BlueShield PPO",
+    "pcp": "Dr. Michael Torres, DO",
+    "pharmacy": "Walgreens — Pines Blvd",
     "emergencyContact": {
-      "name": "Karen Morrison (Wife)",
-      "phone": "(954) 555-9028"
+      "name": "Charles Lewis",
+      "phone": "(487) 635-4033",
+      "relationship": "Sibling"
     },
-    "mrn": "RDX-2025-51727"
+    "chiefComplaint": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
+    "diagnosis": "Cauda Equina Syndrome"
   },
   "problems": [
     {
-      "problem": "Lumbar Disc Herniation L4-L5",
-      "icd": "M51.16",
-      "onset": "2024",
+      "id": "prob-1",
+      "description": "Lumbar disc herniation",
       "status": "Active",
-      "notes": "MRI 06/2024 showed moderate L4-5 disc herniation; managed conservatively with PT"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Chronic Low Back Pain",
-      "icd": "M54.5",
-      "onset": "2019",
+      "id": "prob-2",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "Intermittent; worse with heavy lifting; managed with PT and occasional NSAIDs"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Obesity",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Naproxen 500mg BID PRN",
-      "sig": "PO BID as needed for pain",
-      "prescriber": "Dr. Walsh",
-      "start": "06/2024",
-      "refills": 3,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Ibuprofen",
+      "dose": "800mg TID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
     },
     {
-      "name": "Cyclobenzaprine 10mg QHS PRN",
-      "sig": "PO at bedtime as needed",
-      "prescriber": "Dr. Walsh",
-      "start": "06/2024",
-      "refills": 2,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Cyclobenzaprine",
+      "dose": "10mg TID PRN",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
+    },
+    {
+      "id": "med-3",
+      "name": "Hydrochlorothiazide",
+      "dose": "25mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Michael Torres, DO"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
-      "severity": "",
-      "verified": "Yes"
+      "allergen": "Morphine",
+      "reaction": "Itching",
+      "severity": "Moderate",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "148/88",
-      "hr": 92,
-      "rr": 16,
-      "temp": "98.4\u00b0F",
-      "spo2": "99%",
-      "wt": "210 lbs",
-      "ht": "6'0\"",
-      "bmi": 28.5,
-      "setting": "ED"
+      "date": "03/03/2026",
+      "time": "06:12",
+      "bp": "152/92",
+      "hr": "94",
+      "rr": "18",
+      "temp": "37.0°C",
+      "spo2": "98%",
+      "pain": "9/10",
+      "bmi": "33",
+      "weight": "76 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Severe back pain, leg weakness, urinary retention x 12 hours",
-      "hpi": "53M with known L4-5 herniation presents with acute worsening of back pain since yesterday after lifting heavy box. Pain radiates bilaterally down both legs (worse on left). Over past 12 hours developed bilateral leg weakness (difficulty walking, legs 'buckling'), saddle-area numbness, and inability to urinate despite urge. Has not had a BM in 24 hours. Tried naproxen and cyclobenzaprine without relief. Denies fever, trauma beyond the lift, IV drug use, cancer history.",
-      "exam": "In significant distress. Spine: Tenderness L4-S1. Neuro: Bilateral lower extremity weakness \u2014 hip flexion 3/5 bilaterally, knee extension 4/5, ankle dorsiflexion 2/5 L > R. Diminished sensation in S2-S5 dermatomes (saddle distribution). Diminished rectal tone. Absent bilateral ankle reflexes. SLR positive bilaterally at 30 degrees. Bladder scan: 850 mL post-void residual.",
-      "assessment": "1. CAUDA EQUINA SYNDROME \u2014 saddle anesthesia, bilateral leg weakness, urinary retention, decreased rectal tone\n2. Likely massive disc herniation at L4-5 with acute progression\n3. SURGICAL EMERGENCY \u2014 decompression within 24-48 hours for best outcomes",
-      "plan": "1. STAT MRI lumbar spine without contrast\n2. EMERGENT neurosurgery/spine surgery consult\n3. Foley catheter (PVR 850 mL)\n4. Dexamethasone 10mg IV\n5. Morphine 4mg IV for pain\n6. Strict log-roll precautions\n7. NPO for likely emergent surgery"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
+      "hpi": "Frances Yamamoto is a 62-year-old female presenting with back pain shooting down both legs low back, radiating down both legs — back of thighs and into calves. Past medical history includes Lumbar disc herniation, Hypertension, Obesity. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Cauda Equina Syndrome — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "12:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 12:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261200",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-590860",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "COMPLETE BLOOD COUNT",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
               "test": "WBC",
-              "value": "8.8",
-              "unit": "K/uL",
+              "value": "8.2",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
             {
               "test": "Hemoglobin",
-              "value": "15.0",
+              "value": "14.8",
               "unit": "g/dL",
-              "range": "13.5-17.5",
+              "range": "12.0-16.0",
               "flag": ""
             },
             {
               "test": "Hematocrit",
-              "value": "44.8",
+              "value": "37",
               "unit": "%",
-              "range": "38.3-48.6",
+              "range": "36-46",
               "flag": ""
             },
             {
               "test": "Platelets",
-              "value": "242",
-              "unit": "K/uL",
+              "value": "316",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -142,57 +159,85 @@ window.EMR_DATA = {
           "name": "BASIC METABOLIC PANEL",
           "results": [
             {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
               "test": "Sodium",
-              "value": "141",
+              "value": "142",
               "unit": "mEq/L",
               "range": "136-145",
               "flag": ""
             },
             {
               "test": "Potassium",
-              "value": "4.2",
+              "value": "5",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "99",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "27",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "102",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
               "flag": ""
             }
           ]
         },
         {
-          "name": "INFLAMMATORY",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
               "test": "ESR",
               "value": "12",
               "unit": "mm/hr",
-              "range": "0-20",
+              "range": "<20",
               "flag": ""
             },
             {
               "test": "CRP",
               "value": "0.8",
               "unit": "mg/dL",
-              "range": "<1.0",
+              "range": "<0.5",
+              "flag": "H"
+            },
+            {
+              "test": "Urinalysis",
+              "value": "Normal",
+              "unit": "",
+              "range": "Normal",
               "flag": ""
             }
           ]
@@ -202,83 +247,118 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "02/26/2026",
-      "study": "MRI LUMBAR SPINE WITHOUT CONTRAST",
-      "accession": "IMG-2026-022601",
-      "status": "FINAL",
-      "orderedBy": "Dr. James Carter, MD",
-      "readBy": "Dr. Thomas Lee, MD (Neuroradiology)",
-      "facility": "ReasonDx Memorial — Radiology",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-763573",
+      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "MRI Brain",
+      "status": "Final",
       "priority": "STAT",
-      "clinical": "Acute bilateral leg weakness, saddle anesthesia, urinary retention \u2014 r/o cauda equina",
-      "technique": "MRI lumbar spine without contrast, sagittal and axial sequences.",
-      "findings": "Large central disc extrusion at L4-L5, measuring approximately 18 mm AP x 22 mm transverse. Severe central canal stenosis with near-complete effacement of the thecal sac. Compression of the cauda equina nerve roots. Additional moderate disc bulging at L5-S1.\n\nConus medullaris terminates normally at L1-L2. No enhancing lesion. No epidural collection.",
-      "impression": "1. Large central L4-L5 disc extrusion with cauda equina compression \u2014 SURGICAL EMERGENCY.\n2. Near-complete thecal sac effacement.\n3. Emergent surgical decompression recommended.",
-      "dictated": "02/26/2026 15:00",
-      "verified": "02/26/2026 15:20"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-403965",
+      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
+      "technique": "Standard protocol",
+      "findings": "LARGE CENTRAL DISC HERNIATION at L4-L5 with caudal migration. Disc fragment compresses the cauda equina nerve roots significantly. Effacement of the thecal sac. Bilateral L5 and S1 nerve root compression. No epidural abscess. No spinal cord signal abnormality above the conus.",
+      "impression": "CAUDA EQUINA SYNDROME — large L4-L5 disc herniation with cauda equina compression. EMERGENT NEUROSURGICAL DECOMPRESSION REQUIRED within 24-48 hours for best outcomes.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "Abdominal X-ray",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-490085",
+      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
+      "technique": "Standard protocol",
+      "findings": "Distended bladder occupying lower pelvis. Stool burden in colon. No free air. Lumbar degenerative changes.",
+      "impression": "Distended bladder consistent with urinary retention. Constipation noted.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-272055",
+      "clinical": "Back pain shooting down both legs Low back, radiating down both legs — back of thighs and into calves",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus rhythm at 94 bpm. No ST changes. Normal intervals",
+      "impression": "Normal ECG",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster (Pfizer)",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: Degenerative disc disease, alive at 82",
-    "Mother: Osteoporosis, alive at 80"
+    "Father: degenerative disc disease",
+    "No cancer history"
   ],
   "socialHistory": [
     [
-      "Occupation",
-      "Warehouse manager"
-    ],
-    [
-      "Marital",
-      "Married 25 years"
-    ],
-    [
       "Tobacco",
-      "Former \u2014 quit 2018"
+      "Current smoker, 15 pack-years"
     ],
     [
       "Alcohol",
-      "2-3 beers/week"
+      "2-3 beers daily"
     ],
     [
-      "Exercise",
-      "Previously active; limited by back pain x 2 years"
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Occupation",
+      "Warehouse supervisor — on modified duty for back pain"
+    ],
+    [
+      "Living",
+      "Lives with spouse"
     ]
-  ],
-  "meta": {
-    "caseId": "cauda-equina",
-    "diagnosis": "Cauda Equina Syndrome",
-    "acuity": 2,
-    "presentation": "Back Pain",
-    "category": "musculoskeletal"
-  }
+  ]
 };

@@ -1,176 +1,388 @@
-// Virtual EMR Case: Ventricular Tachycardia with Syncope
-// Variant: vt-syncope | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/vt-syncope.js — EMR case data for Ventricular Tachycardia with Syncope */
 window.EMR_DATA = {
   "patient": {
-    "name": "Frank Rossi",
-    "dob": "01/30/1958",
-    "age": 68,
+    "name": "Dennis Crawford",
+    "dob": "06/15/1964",
+    "age": "62",
     "sex": "Male",
-    "pronouns": "He/Him",
-    "insurance": "Medicare",
-    "pcp": "Dr. Steven Walsh, DO",
-    "pharmacy": "CVS \u2014 Fort Lauderdale, FL",
+    "pronouns": "he/him",
+    "mrn": "MRN-384673",
     "language": "English",
-    "race": "White",
-    "address": "Fort Lauderdale, FL",
-    "phone": "(954) 555-0000",
-    "email": "frank@email.com",
+    "race": "Asian",
+    "phone": "(857) 832-2007",
+    "email": "dennis.crawford@email.com",
+    "address": "6535 Cedar Ln, Davie, FL 33314",
+    "insurance": "BlueCross BlueShield PPO",
+    "pcp": "Dr. Michael Torres, DO",
+    "pharmacy": "Rite Aid \u2014 Pines Blvd",
     "emergencyContact": {
-      "name": "Family Member",
-      "phone": "(954) 555-0001"
+      "name": "Gloria Carter",
+      "phone": "(999) 796-3580",
+      "relationship": "Adult Child"
     },
-    "mrn": "RDX-2025-70024"
+    "chiefComplaint": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+    "diagnosis": "Ventricular Tachycardia with Syncope"
   },
   "problems": [
     {
-      "problem": "Ventricular Tachycardia with Syncope",
-      "icd": "R69",
-      "onset": "2026",
+      "id": "prob-1",
+      "description": "Myocardial infarction 3 years ago",
       "status": "Active",
-      "notes": "Presenting condition"
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-2",
+      "description": "Heart failure",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-3",
+      "description": "Hypertension",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
+    },
+    {
+      "id": "prob-4",
+      "description": "Hyperlipidemia",
+      "status": "Active",
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "See clinical summary",
-      "sig": "",
-      "prescriber": "",
-      "start": "",
-      "refills": 0,
-      "status": ""
+      "id": "med-1",
+      "name": "Carvedilol",
+      "dose": "25mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
+    },
+    {
+      "id": "med-2",
+      "name": "Lisinopril",
+      "dose": "20mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
+    },
+    {
+      "id": "med-3",
+      "name": "Furosemide",
+      "dose": "40mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
+    },
+    {
+      "id": "med-4",
+      "name": "Atorvastatin",
+      "dose": "80mg QHS",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
+    },
+    {
+      "id": "med-5",
+      "name": "Aspirin",
+      "dose": "81mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
+    },
+    {
+      "id": "med-6",
+      "name": "Clopidogrel",
+      "dose": "75mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. James Wilson, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "No Known Drug Allergies",
       "severity": "",
-      "verified": "Yes"
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "02/26/2026",
-      "bp": "120/80",
-      "hr": 90,
-      "rr": 18,
-      "temp": "98.6\u00b0F",
-      "spo2": "97%",
-      "wt": "170 lbs",
-      "ht": "5'9\"",
-      "bmi": 25.1,
-      "setting": "ED"
+      "date": "03/03/2026",
+      "time": "07:25",
+      "bp": "108/72",
+      "hr": "78",
+      "rr": "16",
+      "temp": "36.9\u00b0C",
+      "spo2": "96%",
+      "pain": "/10",
+      "bmi": "33",
+      "weight": "65 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "02/26/2026",
-      "type": "ED",
-      "provider": "Dr. James Carter, MD",
-      "cc": "Ventricular Tachycardia with Syncope",
-      "hpi": "68M with prior MI and EF 35% presents after witnessed syncope. ECG: wide-complex tachycardia at 188 bpm, AV dissociation, NW axis. Hemodynamically unstable \u2014 BP 78/50. Synchronized cardioversion 150J \u2192 NSR restored. Amiodarone 150mg IV loading. Electrophysiology consult for ICD evaluation.",
-      "exam": "See clinical summary for pertinent findings.",
-      "assessment": "1. Ventricular Tachycardia with Syncope \u2014 see clinical summary\n2. Acute management initiated",
-      "plan": "See clinical summary for management details."
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "hpi": "Dennis Crawford is a 62-year-old male presenting with passed out no specific pain location \u2014 felt palpitations in chest before passing out. Past medical history includes Myocardial infarction 3 years ago, Heart failure, Hypertension, Hyperlipidemia. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Ventricular Tachycardia with Syncope \u2014 clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "02/26/2026",
-      "time": "14:00",
-      "orderedBy": "Dr. James Carter, MD",
-      "collected": "02/26/2026 14:00",
-      "facility": "ReasonDx Memorial — ED Lab",
-      "accession": "LAB-2026-02261400",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-497596",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "KEY LABS",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
             {
-              "test": "Troponin I",
-              "value": "0.28",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
+              "test": "WBC",
+              "value": "8.8",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "267",
+              "unit": "x10\u00b3/\u00b5L",
+              "range": "150-400",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "BASIC METABOLIC PANEL",
+          "results": [
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
             },
             {
               "test": "Potassium",
-              "value": "3.2",
+              "value": "3.3",
               "unit": "mEq/L",
-              "range": "3.5-5.1",
+              "range": "3.5-5.0",
               "flag": "L"
             },
             {
-              "test": "Magnesium",
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "28",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
               "value": "1.4",
               "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "108",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Troponin I",
+              "value": "0.03",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": ""
+            },
+            {
+              "test": "BNP",
+              "value": "680",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            },
+            {
+              "test": "Magnesium",
+              "value": "1.5",
+              "unit": "mg/dL",
               "range": "1.7-2.2",
-              "flag": "L"
+              "flag": "H"
+            },
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
             }
           ]
         }
       ]
     }
   ],
-  "imaging": [],
+  "imaging": [
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "Chest X-ray",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-263501",
+      "clinical": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "technique": "Standard protocol",
+      "findings": "Cardiomegaly. Mild bilateral pleural effusions. Cephalization of pulmonary vasculature. No focal consolidation.",
+      "impression": "Cardiomegaly with mild CHF changes",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "POCUS \u2013 Cardiac",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-605713",
+      "clinical": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "technique": "Standard protocol",
+      "findings": "Severely reduced LV systolic function. Dilated LV. Anterior wall akinesis. Mild pericardial effusion. No RV dilation.",
+      "impression": "Severe LV dysfunction consistent with known cardiomyopathy",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-3",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-981448",
+      "clinical": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "technique": "Standard 12-lead",
+      "findings": "Normal sinus rhythm at 78 bpm currently. Old Q waves in V1-V4 (prior anterior MI). Prolonged QTc at 510ms. Frequent PVCs (3 seen on rhythm strip). Non-sustained VT run captured: 8-beat wide complex tachycardia at 180 bpm",
+      "impression": "NSR with prior anterior MI changes, prolonged QTc, frequent PVCs with NSVT \u2014 HIGH RISK for sustained VT/cardiac arrest",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    }
+  ],
   "immunizations": [
     {
-      "vaccine": "Influenza (2025-2026)",
-      "date": "10/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL25-8001",
-      "mfr": "Sanofi"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 Booster",
-      "date": "09/2025",
-      "site": "Right deltoid IM",
-      "lot": "CV25-2101",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Tdap",
-      "date": "03/2021",
-      "site": "Left deltoid IM",
-      "lot": "TD21-502",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (complete)",
-      "date": "2023",
-      "site": "Left deltoid IM",
-      "lot": "SX23-412",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Prevnar 20",
-      "date": "03/2024",
-      "site": "Left deltoid IM",
-      "lot": "PV20-900",
-      "mfr": "Pfizer"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Family history non-contributory"
+    "Father: sudden cardiac death at age 52",
+    "Brother: heart failure"
   ],
   "socialHistory": [
     [
-      "See clinical notes",
-      ""
+      "Tobacco",
+      "Quit after MI (20 pack-year history)"
+    ],
+    [
+      "Alcohol",
+      "Rare"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Occupation",
+      "Retired bus driver"
+    ],
+    [
+      "Living",
+      "Lives with wife"
     ]
-  ],
-  "meta": {
-    "caseId": "vt-syncope",
-    "diagnosis": "Ventricular Tachycardia with Syncope",
-    "acuity": 2,
-    "presentation": "Syncope",
-    "category": "cardiovascular"
-  }
+  ]
 };
