@@ -143,7 +143,7 @@
   // ═══════════════════════════════════════════════════════
   window.PatientList = {
 
-    render: function(setting, specialty) {
+    render: function(setting, specialty, embedded) {
       var manifest = window.EMR_MANIFEST || [];
       var cases = _flattenManifest(manifest, setting, specialty);
       var uniqueCats = _getUniqueCategories(cases);
@@ -175,9 +175,15 @@
 
       var html = '';
 
-      // ─── Header ───
-      html += '<div style="max-width:1200px;margin:0 auto;padding:24px 16px;font-family:\'IBM Plex Sans\',-apple-system,sans-serif">';
+      if (embedded) {
+        // Embedded mode: just filters + table, no outer wrapper/nav/title
+        html += '<div style="padding:16px 20px;font-family:\'IBM Plex Sans\',-apple-system,sans-serif">';
+      } else {
+        // ─── Header ───
+        html += '<div style="max-width:1200px;margin:0 auto;padding:24px 16px;font-family:\'IBM Plex Sans\',-apple-system,sans-serif">';
+      }
       
+      if (!embedded) {
       // Top nav
       html += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">';
       html += '<a href="index.html" style="color:#64748b;font-size:12px;text-decoration:none">\u2190 ReasonDx</a>';
@@ -204,6 +210,15 @@
       html += _filter.hideDx ? '\uD83D\uDE48 Diagnoses Hidden \u2014 Tap to Reveal' : '\uD83D\uDC41\uFE0F Hide Diagnoses (Spoiler-Free Mode)';
       html += '</button>';
       html += '</div>';
+      } else {
+        // Embedded: compact header with count + spoiler toggle
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">';
+        html += '<span style="font-size:13px;color:#5A6178">' + filtered.length + ' of ' + cases.length + ' patients</span>';
+        html += '<button type="button" onclick="PatientList._toggleSpoiler()" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;border:1px solid ' + (_filter.hideDx ? '#2874A6' : '#DFE1E6') + ';background:' + (_filter.hideDx ? '#EBF5FB' : '#fff') + ';color:' + (_filter.hideDx ? '#2874A6' : '#8C92A4') + '">';
+        html += _filter.hideDx ? '\uD83D\uDE48 Hidden' : '\uD83D\uDC41\uFE0F Hide Dx';
+        html += '</button>';
+        html += '</div>';
+      }
 
       // ─── Filter Bar ───
       html += '<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">';
@@ -368,13 +383,21 @@
         var setting = params.get('setting') || ((window.S && S.clinicalSetting) ? S.clinicalSetting : null);
         var specialty = params.get('specialty') || ((window.S && S.specialty) ? S.specialty : null);
         var app = document.getElementById('app');
-        if (app && window.EMR_MANIFEST) {
+        if (!app || !window.EMR_MANIFEST) return;
+
+        // If inside the EMR Overview, re-render the embedded patient list portion
+        var plInner = document.getElementById('patientListInner');
+        if (plInner) {
+          plInner.innerHTML = PatientList.render(setting, specialty, true);
+        } else {
+          // Standalone mode
           app.innerHTML = PatientList.render(setting, specialty);
-          var searchEl = document.getElementById('plSearch');
-          if (searchEl && _filter.search) {
-            searchEl.focus();
-            searchEl.setSelectionRange(_filter.search.length, _filter.search.length);
-          }
+        }
+        // Restore focus to search
+        var searchEl = document.getElementById('plSearch');
+        if (searchEl && _filter.search) {
+          searchEl.focus();
+          searchEl.setSelectionRange(_filter.search.length, _filter.search.length);
         }
       } catch(e) {
         console.error('PatientList._rerender error:', e);

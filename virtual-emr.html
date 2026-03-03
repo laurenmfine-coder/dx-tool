@@ -1167,6 +1167,30 @@ function getActiveNoteTemplate() {
 }
 
 function renderSettingSelector() {
+  // Use EMR Overview if available (replaces card-based selector)
+  if (window.EMROverview) {
+    // Load manifest for stats if not loaded
+    if (!window.EMR_MANIFEST) {
+      var ms = document.createElement('script');
+      ms.src = 'emr-data/manifest.js';
+      ms.onload = function() {
+        if (!window.PATIENT_NAMES) {
+          var pn = document.createElement('script');
+          pn.src = 'emr-data/patient-names.js';
+          pn.onload = function() { document.getElementById('app').innerHTML = EMROverview.render(); };
+          pn.onerror = function() { document.getElementById('app').innerHTML = EMROverview.render(); };
+          document.head.appendChild(pn);
+        } else {
+          document.getElementById('app').innerHTML = EMROverview.render();
+        }
+      };
+      document.head.appendChild(ms);
+      return '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F0F2F5"><p style="color:#8C92A4;font-size:13px">Loading\u2026</p></div>';
+    }
+    return EMROverview.render();
+  }
+
+  // Fallback: original card-based selector
   var pillarBar = '<div class="pillar-bar"><div class="pillar-item pillar-reason"><span class="dx-brand"><span class="dx-pre">Reason</span><span class="dx-suf">Dx</span></span> \u2014 Reasoning</div><div class="pillar-item pillar-mechanism"><span class="dx-brand"><span class="dx-pre">Mechanism</span><span class="dx-suf">Dx</span></span> \u2014 Pathophysiology</div><div class="pillar-item pillar-coach"><span class="dx-brand"><span class="dx-pre">Coach</span><span class="dx-suf">Dx</span></span> \u2014 Coaching</div></div>';
 
   if (S.settingStep === 1) {
@@ -1299,13 +1323,18 @@ function _loadSpecMapThenRender() {
 }
 
 function _renderCasePicker() {
+    // Use EMR Overview (which embeds PatientList) if available
+    if (window.EMROverview) {
+      document.getElementById('app').innerHTML = EMROverview.render();
+      return;
+    }
     // Use the unified PatientList if available
     if (window.PatientList) {
       document.getElementById('app').innerHTML = PatientList.render(S.clinicalSetting, S.specialty);
       return;
     }
-    // Fallback: simple list
-    var html = '<div style="max-width:1100px;margin:0 auto;padding:24px 16px"><h1>Patient List</h1><p>Loading patient list...</p></div>';
+    // Fallback: basic case list
+    var html = '<div style="max-width:1100px;margin:0 auto;padding:24px 16px"><h1 style="font-size:24px;font-weight:700;color:#1A1A2E">Patient List</h1><p style="color:#5A6178">Loading...</p></div>';
     document.getElementById('app').innerHTML = html;
 }
 
@@ -2126,21 +2155,9 @@ async function bootstrapApp() {
   window.addEventListener("beforeunload",function(){if(window.ChartTracker){ChartTracker.stop()}});
 }
 // Route: no case + no setting = show setting selector; otherwise load case data
-// Pre-load: show loading spinner for case URLs so user sees immediate feedback
-(function(){
-  if (CASE_ID) {
-    document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#F0F2F5)"><div style="text-align:center"><div style="width:48px;height:48px;border:4px solid var(--border,#ddd);border-top-color:var(--primary,#2874A6);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px"></div><p style="font-size:14px;color:var(--text-secondary,#666)">Loading patient chart\u2026</p></div></div>';
-    if (!document.getElementById('rdx-spin-style')) {
-      var ss = document.createElement('style');
-      ss.id = 'rdx-spin-style';
-      ss.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
-      document.head.appendChild(ss);
-    }
-  }
-  if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
-  else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
-  else { loadCaseData(function() { bootstrapApp(); }); }
-})();
+if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
+else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
+else { loadCaseData(function() { bootstrapApp(); }); }
 
 // ═══════════════════════════════════════════════════════════════
 // INTERACTIVE UI RENDERERS (student clinical actions)
@@ -3885,6 +3902,7 @@ submitDoc = function(){
 
 </script>
 <script src="js/patient-list.js"></script>
+<script src="js/emr-overview.js"></script>
 <script src="js/mission-control.js"></script>
 <script src="js/ddx-builder.js"></script>
 <script src="rdx-demo-tour.js"></script>
