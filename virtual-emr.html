@@ -1263,6 +1263,11 @@ function renderHandoff() {
 }
 
 function showCasePicker() {
+  // If manifest is already loaded, render immediately without re-loading scripts
+  if (window.EMR_MANIFEST && window.EMR_MANIFEST.length > 0) {
+    _renderCasePicker();
+    return;
+  }
   var s = document.createElement('script');
   s.src = 'emr-data/manifest.js';
   s.onload = function() {
@@ -1309,9 +1314,15 @@ function loadCaseData(cb) {
   if (!CASE_ID) { showCasePicker(); return; }
   var s = document.createElement('script');
   s.src = 'emr-data/' + CASE_ID + '.js';
+  s.onerror = function() {
+    document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#F0F2F5)"><div style="text-align:center;max-width:420px;padding:32px"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:var(--text,#1A1A2E);margin-bottom:8px">Case Not Found</h2><p style="color:var(--text-secondary,#666);font-size:13px;margin-bottom:16px;line-height:1.5">Could not load data for case: <strong>' + CASE_ID + '</strong>. This case may not have EMR data yet.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="javascript:history.back()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">\u2190 Go Back</a><a href="virtual-emr.html" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div></div>';
+  };
   s.onload = function() {
     var d = window.EMR_DATA;
-    if (!d) { alert('Case data not found: ' + CASE_ID); return; }
+    if (!d) {
+      document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#F0F2F5)"><div style="text-align:center;max-width:420px;padding:32px"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;margin-bottom:8px">Case Data Empty</h2><p style="color:#666;font-size:13px;margin-bottom:16px">Case file loaded but contained no patient data: <strong>' + CASE_ID + '</strong></p><div style="display:flex;gap:10px;justify-content:center"><a href="javascript:history.back()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">\u2190 Go Back</a><a href="virtual-emr.html" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div></div>';
+      return;
+    }
     // ── Multi-encounter support ──
     // If case has encounters keyed by setting, merge selected encounter over base
     if (d.encounters && S.clinicalSetting && d.encounters[S.clinicalSetting]) {
@@ -1642,6 +1653,8 @@ function render(){
   if(!S.currentUser){app.innerHTML=renderAuth();return}
   // If no setting chosen yet and no case loaded, show setting selector
   if(!S.clinicalSetting && !CASE_ID){app.innerHTML=renderSettingSelector();return}
+  // If setting chosen but no case loaded, show case picker
+  if(S.clinicalSetting && !CASE_ID){showCasePicker();return}
   const role=S.currentUser.role;
   const tabs=[
     {id:"demographics",label:"Patient Info",icon:I.user},
@@ -2115,27 +2128,26 @@ async function bootstrapApp() {
   window.addEventListener("beforeunload",function(){if(window.ChartTracker){ChartTracker.stop()}});
 }
 // Route: no case + no setting = show setting selector; otherwise load case data
-// Pre-auth check: show loading state or login prompt BEFORE loading case data
+// Pre-load: show loading state immediately so user never sees a white screen
 (function(){
   if (CASE_ID) {
-    // Show loading state immediately so user never sees a white screen
-    document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)"><div style="text-align:center"><div style="width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px"></div><p style="font-size:14px;color:var(--text-secondary)">Loading patient chart\u2026</p></div></div>';
-    // Add spin keyframe if not present
+    document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)"><div style="text-align:center"><div style="width:48px;height:48px;border:4px solid var(--border,#ddd);border-top-color:var(--primary,#2874A6);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px"></div><p style="font-size:14px;color:var(--text-secondary,#666)">Loading patient chart\u2026</p></div></div>';
     if (!document.getElementById('rdx-spin-style')) {
       var ss = document.createElement('style');
       ss.id = 'rdx-spin-style';
       ss.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
       document.head.appendChild(ss);
     }
-    // Pre-check auth before loading case data
-    var preUser = getSupabaseUser();
-    if (!preUser) {
-      document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)"><div style="text-align:center;max-width:400px;padding:32px"><div style="font-size:40px;margin-bottom:16px">\uD83D\uDD12</div><h2 style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px">Sign In Required</h2><p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px">You need to sign in to access patient charts.</p><a href="auth/register.html" style="display:inline-block;padding:12px 24px;background:var(--primary);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px">Sign In</a></div></div>';
-      sessionStorage.setItem("reasondx-redirect", location.href);
-      return;
-    }
+    // Timeout fallback: if chart doesn't load in 12 seconds, show recovery options
+    setTimeout(function(){
+      var app = document.getElementById('app');
+      if (app && app.innerHTML.indexOf('Loading patient chart') >= 0) {
+        app.innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#F0F2F5)"><div style="text-align:center;max-width:420px;padding:32px"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:var(--text,#1A1A2E);margin-bottom:8px">Chart didn\u2019t load</h2><p style="color:var(--text-secondary,#666);font-size:13px;margin-bottom:16px;line-height:1.5">This case may not have data yet, or there was a connection issue.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="javascript:history.back()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">\u2190 Go Back</a><a href="virtual-emr.html" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div></div>';
+      }
+    }, 12000);
   }
   if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
+  else if (!CASE_ID && S.clinicalSetting) { bootstrapApp(); } // setting chosen but no case yet — show case picker
   else { loadCaseData(function() { bootstrapApp(); }); }
 })();
 
@@ -3706,6 +3718,7 @@ render = function(){
   const app=document.getElementById("app");
   if(!S.currentUser){app.innerHTML=renderAuth();return}
   if(!S.clinicalSetting && !CASE_ID){app.innerHTML=renderSettingSelector();return}
+  if(S.clinicalSetting && !CASE_ID){showCasePicker();return}
   const role=S.currentUser.role;
   
   const tabs=[

@@ -201,7 +201,7 @@
       
       // Spoiler toggle
       html += '<button type="button" onclick="PatientList._toggleSpoiler()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .15s;min-height:40px;border:1px solid ' + (_filter.hideDx ? '#2874A6' : '#DFE1E6') + ';background:' + (_filter.hideDx ? '#EBF5FB' : '#fff') + ';color:' + (_filter.hideDx ? '#2874A6' : '#5A6178') + '">';
-      html += _filter.hideDx ? '\uD83D\uDE48 Diagnoses Hidden' : '\uD83D\uDC41\uFE0F Hide Diagnoses';
+      html += _filter.hideDx ? '\uD83D\uDE48 Diagnoses Hidden \u2014 Tap to Reveal' : '\uD83D\uDC41\uFE0F Hide Diagnoses (Spoiler-Free Mode)';
       html += '</button>';
       html += '</div>';
 
@@ -215,7 +215,7 @@
       html += '</div>';
 
       // Category filter
-      html += '<select onchange="PatientList._setFilter(\'category\',this.value)" style="padding:10px 12px;border:1px solid #DFE1E6;border-radius:8px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;min-height:42px;color:#1A1A2E">';
+      html += '<select onchange="PatientList._setFilter(this.dataset.fk,this.value)" data-fk="category" style="padding:10px 12px;border:1px solid #DFE1E6;border-radius:8px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;min-height:42px;color:#1A1A2E">';
       html += '<option value="all"' + (_filter.category === 'all' ? ' selected' : '') + '>All Systems</option>';
       uniqueCats.forEach(function(cat) {
         var info = CATEGORIES[cat] || { label: cat, emoji: '\uD83D\uDCCB' };
@@ -224,7 +224,7 @@
       html += '</select>';
 
       // Acuity filter
-      html += '<select onchange="PatientList._setFilter(\'acuity\',this.value)" style="padding:10px 12px;border:1px solid #DFE1E6;border-radius:8px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;min-height:42px;color:#1A1A2E">';
+      html += '<select onchange="PatientList._setFilter(this.dataset.fk,this.value)" data-fk="acuity" style="padding:10px 12px;border:1px solid #DFE1E6;border-radius:8px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;min-height:42px;color:#1A1A2E">';
       html += '<option value="all"' + (_filter.acuity === 'all' ? ' selected' : '') + '>All Acuities</option>';
       [1, 2, 3, 4].forEach(function(a) {
         var info = ACUITY[a];
@@ -233,7 +233,7 @@
       html += '</select>';
 
       // Status filter
-      html += '<select onchange="PatientList._setFilter(\'status\',this.value)" style="padding:10px 12px;border:1px solid #DFE1E6;border-radius:8px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;min-height:42px;color:#1A1A2E">';
+      html += '<select onchange="PatientList._setFilter(this.dataset.fk,this.value)" data-fk="status" style="padding:10px 12px;border:1px solid #DFE1E6;border-radius:8px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;min-height:42px;color:#1A1A2E">';
       html += '<option value="all"' + (_filter.status === 'all' ? ' selected' : '') + '>All Status</option>';
       html += '<option value="new"' + (_filter.status === 'new' ? ' selected' : '') + '>\u{1F195} New</option>';
       html += '<option value="started"' + (_filter.status === 'started' ? ' selected' : '') + '>\u23F3 In Progress</option>';
@@ -336,22 +336,22 @@
     },
 
     // ═══════════════════════════════════════════════════════
-    // FILTER ACTIONS
+    // FILTER ACTIONS (called from inline handlers)
     // ═══════════════════════════════════════════════════════
     _search: function(val) {
       _filter.search = val;
-      this._rerender();
+      PatientList._rerender();
     },
 
     _setFilter: function(key, val) {
       _filter[key] = val;
-      this._rerender();
+      PatientList._rerender();
     },
 
     _toggleSpoiler: function() {
       _filter.hideDx = !_filter.hideDx;
       try { localStorage.setItem('rdx-pl-filter', JSON.stringify({ hideDx: _filter.hideDx })); } catch(e) {}
-      this._rerender();
+      PatientList._rerender();
     },
 
     _clearFilters: function() {
@@ -359,20 +359,37 @@
       _filter.category = 'all';
       _filter.acuity = 'all';
       _filter.status = 'all';
-      this._rerender();
+      PatientList._rerender();
     },
 
     _rerender: function() {
-      // Re-render the patient list using current S state
-      if (window.S) {
+      try {
+        var setting = null;
+        var specialty = null;
+        // Get setting from S if available, otherwise from URL
+        if (window.S) {
+          setting = S.clinicalSetting || null;
+          specialty = S.specialty || null;
+        }
+        if (!setting) {
+          var params = new URLSearchParams(window.location.search);
+          setting = params.get('setting') || null;
+          specialty = params.get('specialty') || null;
+        }
         var app = document.getElementById('app');
-        if (app) app.innerHTML = PatientList.render(S.clinicalSetting, S.specialty);
+        if (app) {
+          app.innerHTML = PatientList.render(setting, specialty);
+        }
         // Restore focus to search
         var searchEl = document.getElementById('plSearch');
         if (searchEl && _filter.search) {
           searchEl.focus();
           searchEl.setSelectionRange(_filter.search.length, _filter.search.length);
         }
+      } catch(e) {
+        console.error('PatientList._rerender error:', e);
+        // Fallback: try the original case picker
+        if (window._renderCasePicker) { try { _renderCasePicker(); } catch(e2){} }
       }
     }
   };
