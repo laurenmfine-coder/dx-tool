@@ -247,7 +247,7 @@ body { font-family: var(--font); background: var(--pw-bg); color: var(--pw-text)
 
   // ─── Parse pathway ID from URL ───
   var params = new URLSearchParams(window.location.search);
-  var pathwayId = params.get('id') || 'allergy-immunology';
+  var pathwayId = params.get('id') || params.get('system') || 'allergy-immunology';
   var jsonUrl = 'pathways/' + pathwayId + '.json';
 
   // ─── State ───

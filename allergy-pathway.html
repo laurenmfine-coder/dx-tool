@@ -140,8 +140,9 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--tex
   </div>
 
   <!-- Results -->
-  <div class="results-header">
+  <div class="results-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
     <span class="results-count" id="resultsCount"></span>
+    <button type="button" id="spoilerToggle" onclick="window._allergyHideDx=!window._allergyHideDx;render();document.getElementById('spoilerToggle').textContent=window._allergyHideDx?'\uD83D\uDE48 Diagnoses Hidden \u2014 Click to Reveal':'\uD83D\uDC41\uFE0F Hide Diagnoses (Spoiler-Free)'" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .15s;min-height:40px;border:1px solid #2874A6;background:#EBF5FB;color:#2874A6">\uD83D\uDC41\uFE0F Hide Diagnoses (Spoiler-Free)</button>
   </div>
   <div class="case-grid" id="caseGrid"></div>
   <div class="empty-state" id="emptyState" style="display:none">
@@ -264,16 +265,19 @@ function render() {
   const acuityLabels = {1:'ESI-1 Critical',2:'ESI-2 Emergent',3:'ESI-3 Urgent',4:'ESI-4 Non-urgent'};
   const diff = window.RDX_DIFFICULTY || 'standard';
   
-  grid.innerHTML = filtered.map(c => {
+  const hideDx = window._allergyHideDx || false;
+  grid.innerHTML = filtered.map((c, idx) => {
     const url = 'virtual-emr.html?case=' + c.id + '&setting=' + (c.setting||'ed') + (diff!=='standard'?'&difficulty='+diff:'');
     const sub = SUBTYPES.find(s=>s.id===c.allergySubtype);
+    const displayDx = hideDx ? (c.presentation || 'A/I Case') + ' \u2014 Case ' + (idx+1) : c.dx;
+    const displayCc = hideDx ? 'Click to begin' : (c.cc || c.presentation);
     return `<a class="case-card" href="${url}" data-acuity="${c.acuity}">
-      <div class="case-dx">${c.dx}</div>
-      <div class="case-cc">${c.cc || c.presentation}</div>
+      <div class="case-dx">${displayDx}</div>
+      <div class="case-cc">${displayCc}</div>
       <div class="case-meta">
         <span class="case-tag tag-setting">${settingLabels[c.setting]||c.setting}</span>
         <span class="case-tag tag-acuity-${c.acuity}">${acuityLabels[c.acuity]||'ESI-'+c.acuity}</span>
-        ${sub?`<span class="case-tag tag-subtype">${sub.emoji} ${sub.label}</span>`:''}
+        ${sub&&!hideDx?`<span class="case-tag tag-subtype">${sub.emoji} ${sub.label}</span>`:''}
       </div>
     </a>`;
   }).join('');
