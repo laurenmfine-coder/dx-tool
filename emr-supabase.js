@@ -64,4 +64,18 @@
   };
 
   window.EMRCloud = EMRCloud;
+
+  // Defensive wrapper: any call to an undefined EMRCloud method
+  // (e.g. syncUser, syncSubmission, syncRole, etc.) becomes a no-op
+  // instead of throwing "is not a function" and crashing the chart.
+  window.EMRCloud = new Proxy(EMRCloud, {
+    get: function(target, prop) {
+      if (prop in target) return target[prop];
+      // Return a no-op function for any missing method
+      return function() {
+        console.debug('EMRCloud.' + String(prop) + ' not implemented (no-op)');
+      };
+    }
+  });
+
 })();

@@ -2146,8 +2146,8 @@ async function bootstrapApp() {
 
   S.currentUser=buildCurrentUser(supaUser);
 
-  // Sync this user to cloud registry
-  if(window.EMRCloud){
+  // Sync this user to cloud registry (if method available)
+  if(window.EMRCloud && typeof EMRCloud.syncUser === 'function'){
     EMRCloud.syncUser({email:S.currentUser.username,displayName:S.currentUser.displayName,role:S.currentUser.role,tier:supaUser.tier||'free'});
   }
 
