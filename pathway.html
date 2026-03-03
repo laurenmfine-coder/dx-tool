@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-<meta name="theme-color" content="#7C3AED">
+<meta name="theme-color" content="#2874A6">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="description" content="AI-powered Socratic pathophysiology tutor. 9 systems, 54 topics. Learn mechanisms through guided questioning.">
+<meta name="description" content="AI-powered Socratic pathophysiology tutor. 80 systems, 480 topics across all medical specialties. Learn mechanisms through guided questioning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,21 +18,21 @@
 <link rel="stylesheet" href="mobile.css">
 <style>
 :root {
-  --mx-purple: #7C3AED;
-  --mx-purple-dark: #5B21B6;
-  --mx-purple-light: #A78BFA;
-  --mx-purple-glow: rgba(124,58,237,.15);
-  --mx-purple-border: rgba(124,58,237,.25);
-  --mx-bg: #0B0F1A;
-  --mx-bg-card: #141929;
-  --mx-bg-elevated: #1C2236;
-  --mx-text: #E2E8F0;
-  --mx-text-secondary: #94A3B8;
-  --mx-text-muted: #64748B;
-  --mx-border: #1E293B;
-  --mx-success: #34D399;
-  --mx-danger: #F87171;
-  --mx-blue: #60A5FA;
+  --mx-purple: #2874A6;
+  --mx-purple-dark: #1B4F72;
+  --mx-purple-light: #2874A6;
+  --mx-purple-glow: rgba(40,116,166,.08);
+  --mx-purple-border: rgba(40,116,166,.2);
+  --mx-bg: #f0f4f8;
+  --mx-bg-card: #ffffff;
+  --mx-bg-elevated: #f8fafc;
+  --mx-text: #1e293b;
+  --mx-text-secondary: #475569;
+  --mx-text-muted: #64748b;
+  --mx-border: #e2e8f0;
+  --mx-success: #059669;
+  --mx-danger: #DC2626;
+  --mx-blue: #2563EB;
   --mx-font: 'IBM Plex Sans', -apple-system, sans-serif;
   --mx-mono: 'IBM Plex Mono', monospace;
 }
@@ -41,10 +41,10 @@ html{scroll-behavior:smooth}
 body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
 .mx-hero{padding:80px 20px 40px;text-align:center;position:relative;overflow:hidden}
-.mx-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 50% 0%,rgba(124,58,237,.12) 0%,transparent 70%),radial-gradient(ellipse 300px 300px at 80% 60%,rgba(96,165,250,.06) 0%,transparent 60%);pointer-events:none}
+.mx-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 50% 0%,rgba(40,116,166,.08) 0%,transparent 70%),radial-gradient(ellipse 300px 300px at 80% 60%,rgba(40,116,166,.04) 0%,transparent 60%);pointer-events:none}
 .mx-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
 .mx-hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:var(--mx-purple-glow);border:1px solid var(--mx-purple-border);font-size:12px;font-weight:600;color:var(--mx-purple-light);letter-spacing:.03em;margin-bottom:16px}
-.mx-hero h1{font-size:38px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:12px;background:linear-gradient(135deg,#E2E8F0 30%,var(--mx-purple-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mx-hero h1{font-size:38px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:12px;color:var(--mx-text)}
 .mx-hero-sub{font-size:15px;color:var(--mx-text-secondary);line-height:1.6;max-width:520px;margin:0 auto 28px}
 .mx-hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
 .mx-hero-stat{text-align:center}
@@ -56,7 +56,7 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 .mx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;max-width:1100px;margin:0 auto}
 .mx-system-card{background:var(--mx-bg-card);border:1px solid var(--mx-border);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
 .mx-system-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--mx-purple);opacity:0;transition:opacity .2s}
-.mx-system-card:hover{border-color:var(--mx-purple-border);background:var(--mx-bg-elevated);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.mx-system-card:hover{border-color:var(--mx-purple-border);background:var(--mx-bg-elevated);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
 .mx-system-card:hover::before{opacity:1}
 .mx-system-icon{font-size:28px;margin-bottom:8px}
 .mx-system-name{font-size:14px;font-weight:700;margin-bottom:4px}
@@ -71,6 +71,10 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 .mx-back-btn:hover{border-color:var(--mx-purple-border);color:var(--mx-purple-light)}
 .mx-topic-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
 .mx-topic-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:10px;background:var(--mx-bg-card);border:1px solid var(--mx-border);cursor:pointer;transition:all .15s}
+.mx-topic-card.in-progress{border-color:rgba(37,99,235,.25)}
+.mx-topic-card.proficient{border-color:rgba(40,116,166,.25)}
+.mx-topic-card.mastered{border-color:rgba(5,150,105,.3);background:rgba(5,150,105,.04)}
+.mx-topic-tier{width:24px;text-align:center;flex-shrink:0}
 .mx-topic-card:hover{border-color:var(--mx-purple-border);background:var(--mx-bg-elevated)}
 .mx-topic-card.done .mx-topic-check{background:var(--mx-success);border-color:var(--mx-success);color:#fff}
 .mx-topic-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--mx-border);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
@@ -87,7 +91,7 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 
 .mx-phases{display:flex;gap:4px;margin-bottom:24px;background:var(--mx-bg-card);border-radius:10px;padding:6px;border:1px solid var(--mx-border)}
 .mx-phase{flex:1;padding:10px 8px;border-radius:7px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mx-text-muted);cursor:default;transition:all .3s}
-.mx-phase.active{background:var(--mx-purple);color:#fff;box-shadow:0 2px 12px rgba(124,58,237,.3)}
+.mx-phase.active{background:var(--mx-purple);color:#fff;box-shadow:0 2px 12px rgba(40,116,166,.25)}
 .mx-phase.complete{background:rgba(52,211,153,.12);color:var(--mx-success)}
 .mx-phase-icon{font-size:14px;display:block;margin-bottom:2px}
 
@@ -95,7 +99,7 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 .mx-msg{display:flex;gap:12px;margin-bottom:16px;animation:fadeUp .3s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .mx-avatar{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
-.mx-msg.tutor .mx-avatar{background:linear-gradient(135deg,var(--mx-purple-dark),var(--mx-purple));color:#fff}
+.mx-msg.tutor .mx-avatar{background:linear-gradient(135deg,#1B4F72,#2874A6);color:#fff}
 .mx-msg.student .mx-avatar{background:var(--mx-bg-elevated);border:1px solid var(--mx-border);color:var(--mx-blue)}
 .mx-bubble{flex:1;min-width:0;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.7}
 .mx-msg.tutor .mx-bubble{background:var(--mx-bg-card);border:1px solid var(--mx-border)}
@@ -113,9 +117,9 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 .mx-typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.3}30%{transform:translateY(-6px);opacity:1}}
 
-.mx-input-area{position:sticky;bottom:0;z-index:10;background:linear-gradient(to top,var(--mx-bg) 70%,transparent);padding:16px 0 20px}
+.mx-input-area{position:sticky;bottom:0;z-index:10;background:linear-gradient(to top,var(--mx-bg) 60%,transparent);padding:16px 0 20px}
 .mx-input-wrap{display:flex;gap:8px;align-items:flex-end;background:var(--mx-bg-card);border:1px solid var(--mx-border);border-radius:14px;padding:8px;transition:border-color .2s}
-.mx-input-wrap:focus-within{border-color:var(--mx-purple);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+.mx-input-wrap:focus-within{border-color:var(--mx-purple);box-shadow:0 0 0 3px rgba(40,116,166,.15)}
 .mx-input{flex:1;background:transparent;border:none;color:var(--mx-text);font-family:var(--mx-font);font-size:14px;line-height:1.5;padding:8px 12px;resize:none;min-height:24px;max-height:120px;outline:none}
 .mx-input::placeholder{color:var(--mx-text-muted)}
 .mx-send{width:40px;height:40px;border-radius:10px;background:var(--mx-purple);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
@@ -164,77 +168,645 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 'use strict';
 
 var SYSTEMS = [
-  { id:'cardiac', name:'Cardiovascular', icon:'\u2764\uFE0F', topics:[
-    {id:'acs',name:'Acute Coronary Syndrome',sub:'Plaque rupture, thrombosis, STEMI vs NSTEMI'},
-    {id:'heart-failure',name:'Heart Failure',sub:'HFrEF vs HFpEF, neurohormonal activation'},
-    {id:'arrhythmias',name:'Arrhythmias & Conduction',sub:'Re-entry circuits, channelopathies, heart block'},
-    {id:'valvular',name:'Valvular Heart Disease',sub:'Stenosis vs regurgitation, hemodynamic consequences'},
-    {id:'shock',name:'Shock Physiology',sub:'Distributive, cardiogenic, hypovolemic, obstructive'},
-    {id:'vascular',name:'Vascular Emergencies',sub:'Aortic dissection, PE pathophysiology, DVT'}
+  { id:'cardiac-foundations', name:'Cardiac Foundations', icon:'❤️', topics:[
+    {id:'cardiac-anatomy',name:'Cardiac Anatomy & Cycle',sub:'Chambers, valves, coronary circulation, pressure-volume loops'},
+    {id:'hemodynamics',name:'Hemodynamics',sub:'Preload, afterload, contractility, Frank-Starling, CO/SVR'},
+    {id:'ecg-interpret',name:'ECG Interpretation',sub:'Rate, rhythm, axis, intervals, ST changes, bundle branch blocks'},
+    {id:'cardiac-biomarkers',name:'Cardiac Biomarkers',sub:'Troponin, BNP/NT-proBNP, CK-MB, D-dimer, lactate'},
+    {id:'cardiac-imaging',name:'Cardiac Imaging',sub:'Echo (TTE/TEE), stress testing, cardiac MRI, coronary CTA, cath'},
+    {id:'cardiac-pharm',name:'Cardiac Pharmacology',sub:'Beta-blockers, CCBs, ACEi/ARBs, antiarrhythmics, antiplatelet, statins'}
   ]},
-  { id:'pulmonary', name:'Pulmonary', icon:'\uD83E\uDEC1', topics:[
-    {id:'asthma',name:'Asthma & Airway Reactivity',sub:'Bronchoconstriction, inflammation, remodeling'},
-    {id:'copd',name:'COPD & Obstructive Disease',sub:'Emphysema vs bronchitis, gas trapping'},
-    {id:'pneumonia',name:'Pneumonia & Lung Infection',sub:'CAP vs HAP, pathogen-host interaction'},
-    {id:'pe',name:'Pulmonary Embolism',sub:'Virchow triad, V/Q mismatch, RV strain'},
-    {id:'ards',name:'ARDS & Respiratory Failure',sub:'Diffuse alveolar damage, surfactant dysfunction'},
-    {id:'pleural',name:'Pleural Disease',sub:'Effusions, pneumothorax, Light criteria'}
+  { id:'acs-vascular', name:'ACS & Vascular Emergency', icon:'🚨', topics:[
+    {id:'stemi',name:'STEMI',sub:'Door-to-balloon, culprit vessel, primary PCI, fibrinolysis, complications'},
+    {id:'nstemi-ua',name:'NSTEMI & Unstable Angina',sub:'TIMI/GRACE score, antiplatelet, timing of cath, medical Rx'},
+    {id:'aortic-dissection',name:'Aortic Dissection',sub:'Stanford/DeBakey, CTA, BP control, surgical vs medical, Marfan'},
+    {id:'aortic-aneurysm',name:'Aortic Aneurysm',sub:'AAA screening, rupture risk, endovascular repair, surveillance'},
+    {id:'peripheral-arterial',name:'Peripheral Arterial Disease',sub:'ABI, claudication, critical limb ischemia, revascularization'},
+    {id:'mesenteric-ischemia',name:'Mesenteric Ischemia',sub:'Acute vs chronic, SMA embolism/thrombosis, NOMI, venous'}
   ]},
-  { id:'gi', name:'Gastrointestinal', icon:'\uD83D\uDD2C', topics:[
-    {id:'gi-bleed',name:'GI Bleeding',sub:'Upper vs lower, variceal vs non-variceal'},
-    {id:'acute-abdomen',name:'Acute Abdomen',sub:'Peritonitis, obstruction, perforation'},
-    {id:'liver',name:'Hepatic Disease',sub:'Cirrhosis, portal hypertension, hepatorenal'},
-    {id:'pancreatitis',name:'Pancreatitis',sub:'Gallstone vs alcoholic, autodigestion cascade'},
-    {id:'ibd',name:'Inflammatory Bowel Disease',sub:'Crohn vs UC, mucosal immunity'},
-    {id:'biliary',name:'Biliary Pathology',sub:'Cholecystitis, choledocholithiasis, cholangitis'}
+  { id:'heart-failure-cmp', name:'Heart Failure & Cardiomyopathy', icon:'🫀', topics:[
+    {id:'hfref',name:'HFrEF',sub:'GDMT (ARNI/BB/MRA/SGLT2i), four pillars, titration, prognosis'},
+    {id:'hfpef',name:'HFpEF',sub:'Diastolic dysfunction, H2FPEF score, diuretics, SGLT2i, comorbidities'},
+    {id:'dcm-hcm',name:'Dilated & Hypertrophic CMP',sub:'DCM workup, HCM LVOT obstruction, SCD risk, myectomy/ASA'},
+    {id:'restrictive-cmp',name:'Restrictive & Infiltrative CMP',sub:'Amyloidosis (AL/ATTR), sarcoid, hemochromatosis, Fabry'},
+    {id:'myocarditis',name:'Myocarditis',sub:'Viral, giant cell, checkpoint-induced, endomyocardial biopsy'},
+    {id:'advanced-hf',name:'Advanced HF & MCS',sub:'LVAD, transplant evaluation, inotropes, palliative, cardiogenic shock'}
   ]},
-  { id:'neuro', name:'Neurology', icon:'\uD83E\uDDE0', topics:[
-    {id:'stroke',name:'Stroke & Cerebrovascular',sub:'Ischemic vs hemorrhagic, penumbra concept'},
-    {id:'seizure',name:'Seizures & Epilepsy',sub:'Excitatory/inhibitory imbalance, status epilepticus'},
-    {id:'meningitis',name:'Meningitis & Encephalitis',sub:'BBB penetration, CSF findings, pathogen patterns'},
-    {id:'tbi',name:'Traumatic Brain Injury',sub:'Primary vs secondary injury, herniation syndromes'},
-    {id:'neuro-degen',name:'Neurodegenerative Disease',sub:'Protein aggregation, neuronal loss patterns'},
-    {id:'neuro-musc',name:'Neuromuscular Disorders',sub:'NMJ, myopathy vs neuropathy'}
+  { id:'arrhythmia-conduction', name:'Arrhythmias & Conduction', icon:'⚡', topics:[
+    {id:'atrial-fib',name:'Atrial Fibrillation',sub:'Rate vs rhythm control, CHA2DS2-VASc, anticoagulation, ablation'},
+    {id:'svt',name:'SVT & Accessory Pathways',sub:'AVNRT, AVRT, WPW, adenosine, ablation'},
+    {id:'vtach-vfib',name:'VT & Ventricular Fibrillation',sub:'Monomorphic/polymorphic, ACLS, ICD indications, storm'},
+    {id:'channelopathies',name:'Channelopathies',sub:'Long QT, Brugada, CPVT, ARVC, genetic testing'},
+    {id:'bradycardia',name:'Bradycardia & Heart Block',sub:'Sinus node dysfunction, AV block degrees, pacemaker indications'},
+    {id:'scd',name:'Sudden Cardiac Death',sub:'Risk stratification, primary/secondary prevention, screening athletes'}
   ]},
-  { id:'renal', name:'Renal', icon:'\uD83E\uDEB6', topics:[
-    {id:'aki',name:'Acute Kidney Injury',sub:'Prerenal, intrinsic, postrenal, ATN'},
-    {id:'ckd',name:'Chronic Kidney Disease',sub:'Nephron loss, GFR decline, uremia'},
-    {id:'electrolytes',name:'Electrolyte Disorders',sub:'Na, K, Ca, Mg \u2014 mechanisms and consequences'},
-    {id:'acid-base',name:'Acid-Base Physiology',sub:'Henderson-Hasselbalch, compensation, anion gap'},
-    {id:'glomerular',name:'Glomerular Disease',sub:'Nephrotic vs nephritic, complement pathways'},
-    {id:'fluid',name:'Fluid Homeostasis',sub:'Starling forces, ADH, RAAS, volume assessment'}
+  { id:'valvular-structural', name:'Valvular & Structural', icon:'🩺', topics:[
+    {id:'aortic-stenosis',name:'Aortic Stenosis',sub:'Severe AS criteria, low-flow/low-gradient, TAVR vs SAVR'},
+    {id:'mitral-regurg',name:'Mitral Regurgitation',sub:'Primary vs secondary, MitraClip, surgical timing, echo grading'},
+    {id:'endocarditis',name:'Infective Endocarditis',sub:'Duke criteria, empiric Rx, surgical indications, prosthetic valve'},
+    {id:'pericardial',name:'Pericardial Disease',sub:'Pericarditis, tamponade, constrictive, pericardiocentesis'},
+    {id:'prosthetic-valves',name:'Prosthetic Valves',sub:'Mechanical vs bioprosthetic, anticoagulation, paravalvular leak'},
+    {id:'congenital-adult',name:'Adult Congenital Heart Disease',sub:'ASD, VSD, PDA, coarctation, Eisenmenger, Fontan'}
   ]},
-  { id:'msk', name:'Musculoskeletal', icon:'\uD83E\uDDB4', topics:[
-    {id:'fractures',name:'Fracture Pathophysiology',sub:'Bone healing, compartment syndrome'},
-    {id:'arthritis',name:'Inflammatory Arthritis',sub:'RA, gout, pseudogout, crystal deposition'},
-    {id:'septic-joint',name:'Septic Arthritis',sub:'Hematogenous spread, joint destruction'},
-    {id:'back-pain',name:'Spinal Pathology',sub:'Disc herniation, cauda equina, spinal stenosis'},
-    {id:'soft-tissue',name:'Soft Tissue Injuries',sub:'Tendinopathy, ligament tears, repair mechanisms'},
-    {id:'bone-metab',name:'Bone Metabolism',sub:'Osteoporosis, Paget, PTH/vitamin D axis'}
+  { id:'pulm-foundations', name:'Pulmonary Foundations', icon:'🫁', topics:[
+    {id:'lung-mechanics',name:'Lung Mechanics & Physiology',sub:'Compliance, resistance, work of breathing, surfactant'},
+    {id:'gas-exchange',name:'Gas Exchange',sub:'V/Q matching, diffusion capacity, shunt vs dead space, A-a gradient'},
+    {id:'pfts',name:'PFTs & Flow-Volume Loops',sub:'Spirometry, lung volumes, DLCO, obstructive vs restrictive'},
+    {id:'abg-interpret',name:'ABG Interpretation',sub:'Oxygenation, ventilation, acid-base, compensation rules'},
+    {id:'chest-imaging',name:'Chest Imaging',sub:'CXR systematic approach, CT patterns (GGO, honeycombing, tree-in-bud)'},
+    {id:'pulm-pharm',name:'Pulmonary Pharmacology',sub:'Bronchodilators, ICS, LABA/LAMA, PDE4i, mucolytics, O2 therapy'}
   ]},
-  { id:'endocrine', name:'Endocrine', icon:'\u2697\uFE0F', topics:[
-    {id:'dka',name:'DKA & Hyperglycemic Crises',sub:'Insulin deficiency, ketogenesis, HHS'},
-    {id:'thyroid',name:'Thyroid Disorders',sub:'Storm, myxedema, Graves, Hashimoto'},
-    {id:'adrenal',name:'Adrenal Pathology',sub:'Crisis, Cushing, Addison, pheochromocytoma'},
-    {id:'pituitary',name:'Pituitary Disorders',sub:'Anterior/posterior, adenomas, apoplexy'},
-    {id:'calcium',name:'Calcium & Parathyroid',sub:'Hyper/hypocalcemia, PTH feedback loops'},
-    {id:'diabetes-chronic',name:'Diabetes Complications',sub:'Microvascular, macrovascular, neuropathy'}
+  { id:'obstructive-lung', name:'Obstructive Lung Disease', icon:'💨', topics:[
+    {id:'copd-emphysema',name:'COPD & Emphysema',sub:'GOLD staging, phenotypes, exacerbation management, triple therapy'},
+    {id:'bronchiectasis',name:'Bronchiectasis',sub:'Etiology, HRCT findings, airway clearance, antimicrobials'},
+    {id:'cystic-fibrosis',name:'Cystic Fibrosis',sub:'CFTR mutations, pancreatic/pulmonary, elexacaftor/tezacaftor/ivacaftor'},
+    {id:'alpha1-antitrypsin',name:'Alpha-1 Antitrypsin Deficiency',sub:'PiZZ phenotype, liver/lung, augmentation therapy'},
+    {id:'copd-acute',name:'Acute COPD Exacerbation',sub:'Triggers, ABx indications, NIV, systemic steroids, discharge'},
+    {id:'small-airway',name:'Small Airway Disease',sub:'Air trapping, RV/TLC, bronchiolitis obliterans, constrictive'}
   ]},
-  { id:'heme', name:'Hematology', icon:'\uD83E\uDE78', topics:[
-    {id:'anemia',name:'Anemia',sub:'Iron deficiency, B12, hemolytic, aplastic'},
-    {id:'coagulopathy',name:'Coagulation Disorders',sub:'DIC, TTP/HUS, factor deficiencies'},
-    {id:'thrombosis',name:'Thrombotic Disease',sub:'Hypercoagulable states, anticoagulation'},
-    {id:'transfusion',name:'Transfusion Medicine',sub:'Reactions, massive transfusion, compatibility'},
-    {id:'leukemia',name:'Hematologic Malignancies',sub:'Leukemia, lymphoma, blast crisis'},
-    {id:'sickle-cell',name:'Hemoglobinopathies',sub:'Sickle cell, thalassemia, vaso-occlusion'}
+  { id:'restrictive-ild', name:'Restrictive & ILD', icon:'🔬', topics:[
+    {id:'ipf',name:'Idiopathic Pulmonary Fibrosis',sub:'UIP pattern, antifibrotics (pirfenidone/nintedanib), prognosis'},
+    {id:'sarcoidosis',name:'Sarcoidosis',sub:'Non-caseating granulomas, staging, extrapulmonary, Lofgren'},
+    {id:'ctd-ild',name:'CTD-Associated ILD',sub:'RA-ILD, SSc-ILD, anti-MDA5, NSIP vs UIP, myositis-associated'},
+    {id:'pneumoconioses',name:'Pneumoconioses',sub:'Asbestosis, silicosis, coal worker, berylliosis, mesothelioma'},
+    {id:'drug-induced-ild',name:'Drug-Induced ILD',sub:'Amiodarone, methotrexate, bleomycin, checkpoint inhibitors'},
+    {id:'eosinophilic-lung',name:'Eosinophilic Lung Disease',sub:'AEP/CEP, EGPA, Loeffler, parasitic, drug-induced'}
   ]},
-  { id:'allergy', name:'Allergy & Immunology', icon:'\uD83D\uDEE1\uFE0F', topics:[
-    {id:'anaphylaxis',name:'Anaphylaxis',sub:'IgE-mediated, biphasic reactions, epinephrine'},
-    {id:'drug-allergy',name:'Drug Hypersensitivity',sub:'Type I\u2013IV reactions, DRESS, SJS/TEN'},
-    {id:'food-allergy',name:'Food Allergy',sub:'IgE vs non-IgE, FPIES, OIT mechanisms'},
-    {id:'asthma-allergy',name:'Allergic Asthma & Rhinitis',sub:'Th2 inflammation, allergen sensitization'},
-    {id:'immunodeficiency',name:'Immunodeficiency',sub:'Primary vs secondary, CVID, complement'},
-    {id:'autoimmunity',name:'Autoimmune Disease',sub:'Tolerance breakdown, molecular mimicry, SLE'}
+  { id:'pulm-vascular', name:'Pulmonary Vascular', icon:'❤️', topics:[
+    {id:'pe-acute',name:'Pulmonary Embolism',sub:'Wells/Geneva, CTPA, submassive/massive, anticoagulation, lysis'},
+    {id:'pulm-htn',name:'Pulmonary Hypertension',sub:'WHO groups 1-5, RHC hemodynamics, PAH therapies, prostacyclins'},
+    {id:'cor-pulmonale',name:'Cor Pulmonale',sub:'RV failure from lung disease, pathophysiology, management'},
+    {id:'pulm-vasculitis',name:'Pulmonary Vasculitis',sub:'GPA, EGPA, MPA, DAH, capillaritis'},
+    {id:'cteph',name:'Chronic Thromboembolic PH',sub:'CTEPH, V/Q scan, pulmonary endarterectomy, BPA, riociguat'},
+    {id:'pulm-avm',name:'Pulmonary AVM & HHT',sub:'Hereditary hemorrhagic telangiectasia, paradoxical embolism'}
+  ]},
+  { id:'critical-pulm', name:'Critical Care Pulmonary', icon:'⚡', topics:[
+    {id:'ards',name:'ARDS',sub:'Berlin criteria, lung-protective ventilation, prone positioning, ECMO'},
+    {id:'mech-vent',name:'Mechanical Ventilation',sub:'AC vs SIMV vs PSV, PEEP titration, driving pressure, VILI'},
+    {id:'vent-weaning',name:'Ventilator Weaning',sub:'SBT, rapid shallow breathing index, extubation, tracheostomy'},
+    {id:'pneumothorax',name:'Pneumothorax',sub:'Spontaneous vs traumatic vs tension, chest tube, pleurodesis'},
+    {id:'pleural-disease',name:'Pleural Effusions',sub:'Light criteria, exudative vs transudative, thoracentesis, empyema'},
+    {id:'hemoptysis',name:'Hemoptysis',sub:'Massive vs non-massive, bronchial artery embolization, DAH'}
+  ]},
+  { id:'gi-foundations', name:'GI Foundations', icon:'🔬', topics:[
+    {id:'gi-motility',name:'GI Motility & Physiology',sub:'Peristalsis, LES, gastric emptying, migrating motor complex'},
+    {id:'gi-secretion',name:'GI Secretion & Absorption',sub:'Acid secretion, bile, pancreatic enzymes, nutrient absorption'},
+    {id:'microbiome',name:'Gut Microbiome',sub:'Commensal flora, dysbiosis, C. diff, FMT, probiotics'},
+    {id:'gi-imaging',name:'GI Imaging',sub:'CT abdomen, MRCP, ultrasound, contrast studies, capsule endoscopy'},
+    {id:'endoscopy',name:'Endoscopy & Procedures',sub:'EGD, colonoscopy, ERCP, EUS, hemostasis techniques'},
+    {id:'gi-pharm',name:'GI Pharmacology',sub:'PPIs, H2RAs, prokinetics, antiemetics, laxatives, antidiarrheals'}
+  ]},
+  { id:'upper-gi', name:'Upper GI', icon:'💥', topics:[
+    {id:'gerd',name:'GERD',sub:'Pathophysiology, PPI therapy, refractory, Barrett esophagus, fundoplication'},
+    {id:'pud',name:'Peptic Ulcer Disease',sub:'H. pylori, NSAIDs, complications (perforation/bleeding), eradication'},
+    {id:'upper-gi-bleed',name:'Upper GI Bleeding',sub:'Variceal vs non-variceal, Glasgow-Blatchford, endoscopic Rx, TIPS'},
+    {id:'esophageal-disorders',name:'Esophageal Disorders',sub:'Achalasia, eosinophilic esophagitis, strictures, Mallory-Weiss'},
+    {id:'gastric-cancer',name:'Gastric Cancer',sub:'Intestinal vs diffuse, H. pylori link, staging, hereditary (CDH1)'},
+    {id:'gastroparesis',name:'Gastroparesis',sub:'Diabetic, post-surgical, idiopathic, gastric emptying study, Rx'}
+  ]},
+  { id:'lower-gi', name:'Lower GI', icon:'🧬', topics:[
+    {id:'ibd-crohns',name:'Crohn Disease',sub:'Skip lesions, transmural, fistulae, biologics, surgical indications'},
+    {id:'ibd-uc',name:'Ulcerative Colitis',sub:'Continuous, mucosal, toxic megacolon, colectomy, surveillance'},
+    {id:'lower-gi-bleed',name:'Lower GI Bleeding',sub:'Diverticular, AVM, ischemic colitis, workup, colonoscopy timing'},
+    {id:'ibs',name:'Irritable Bowel Syndrome',sub:'Rome IV, visceral hypersensitivity, low-FODMAP, gut-brain axis'},
+    {id:'colorectal-cancer',name:'Colorectal Cancer',sub:'Screening guidelines, Lynch/FAP, staging, adjuvant, microsatellite'},
+    {id:'diverticular',name:'Diverticular Disease',sub:'Diverticulitis (complicated/uncomplicated), abscess, surgery, bleeding'}
+  ]},
+  { id:'hepatology', name:'Hepatology', icon:'🫁', topics:[
+    {id:'cirrhosis',name:'Cirrhosis & Portal HTN',sub:'Child-Pugh, MELD, varices, ascites, SBP, hepatic encephalopathy'},
+    {id:'hepatitis-viral',name:'Viral Hepatitis',sub:'HBV (phases, Rx), HCV (DAAs, cure), HAV, HDV, HEV'},
+    {id:'nafld-nash',name:'NAFLD/MASH',sub:'Metabolic syndrome, FIB-4, elastography, resmetirom, lifestyle'},
+    {id:'acute-liver-failure',name:'Acute Liver Failure',sub:'Acetaminophen, viral, autoimmune, Kings College, transplant criteria'},
+    {id:'autoimmune-liver',name:'Autoimmune Liver Disease',sub:'AIH, PBC (AMA), PSC (p-ANCA), overlap syndromes'},
+    {id:'liver-transplant',name:'Liver Transplantation',sub:'MELD allocation, indications/contraindications, post-transplant'}
+  ]},
+  { id:'biliary-pancreas', name:'Biliary & Pancreas', icon:'🟢', topics:[
+    {id:'cholelithiasis',name:'Cholelithiasis & Cholecystitis',sub:'Biliary colic, acute cholecystitis, Murphy sign, cholecystectomy'},
+    {id:'choledocholithiasis',name:'Choledocholithiasis & Cholangitis',sub:'CBD stones, ERCP, Tokyo guidelines, ascending cholangitis'},
+    {id:'acute-pancreatitis',name:'Acute Pancreatitis',sub:'Gallstone vs alcoholic, Ranson/BISAP, necrosis, nutrition, ERCP'},
+    {id:'chronic-pancreatitis',name:'Chronic Pancreatitis',sub:'Calcifications, exocrine insufficiency, PERT, pain management'},
+    {id:'pancreatic-cancer',name:'Pancreatic Cancer',sub:'Painless jaundice, CA 19-9, Whipple, borderline resectable'},
+    {id:'psc-pbc',name:'PSC & Biliary Strictures',sub:'IBD association, MRCP, cholangiocarcinoma risk, ursodiol'}
+  ]},
+  { id:'gi-ai-crossover', name:'GI & A/I Crossover', icon:'🤝', topics:[
+    {id:'eoe-gi',name:'Eosinophilic Esophagitis (GI)',sub:'Rings/furrows, biopsy (>15 eos/hpf), PPI/elimination/dupilumab'},
+    {id:'celiac',name:'Celiac Disease',sub:'TTG-IgA, villous atrophy, gluten-free diet, refractory, dermatitis herpetiformis'},
+    {id:'fpies-gi',name:'FPIES (GI Perspective)',sub:'Profuse emesis, ondansetron, food triggers, OFC protocol'},
+    {id:'food-intolerance',name:'Food Intolerance & NCGS',sub:'Lactose, fructose, histamine, non-celiac gluten sensitivity'},
+    {id:'gi-immune',name:'GI Manifestations of Systemic Disease',sub:'Scleroderma, vasculitis, amyloid, sarcoid, GVHD'},
+    {id:'microscopic-colitis',name:'Microscopic Colitis',sub:'Collagenous vs lymphocytic, watery diarrhea, budesonide, drug-induced'}
+  ]},
+  { id:'neuro-foundations', name:'Neuro Foundations', icon:'🧠', topics:[
+    {id:'neuroanatomy',name:'Neuroanatomy & Localization',sub:'Cortex, brainstem, spinal cord, dermatomes, vascular territories'},
+    {id:'neuro-exam',name:'Neurologic Examination',sub:'Mental status, cranial nerves, motor/sensory, reflexes, cerebellar'},
+    {id:'csf-analysis',name:'CSF Analysis',sub:'LP technique, cell count, protein, glucose, OCBs, cytology'},
+    {id:'eeg-basics',name:'EEG & Neurophysiology',sub:'Normal rhythms, epileptiform, status, continuous EEG monitoring'},
+    {id:'neuroimaging',name:'Neuroimaging',sub:'CT vs MRI, DWI, FLAIR, MRA, CTA, angiography indications'},
+    {id:'neuro-pharm',name:'Neuropharmacology',sub:'AEDs, tPA, antispasmodics, cholinesterase inhibitors, dopaminergics'}
+  ]},
+  { id:'cerebrovascular', name:'Cerebrovascular Disease', icon:'🚨', topics:[
+    {id:'ischemic-stroke',name:'Ischemic Stroke Syndromes',sub:'MCA/ACA/PCA, lacunar, NIHSS, tPA window, thrombectomy'},
+    {id:'hemorrhagic-stroke',name:'Hemorrhagic Stroke',sub:'ICH, hypertensive, amyloid angiopathy, reversal, surgical evacuation'},
+    {id:'sah',name:'Subarachnoid Hemorrhage',sub:'Aneurysmal, Hunt-Hess, Fisher, vasospasm, nimodipine, coiling vs clipping'},
+    {id:'tia',name:'TIA & Secondary Prevention',sub:'ABCD2, dual antiplatelet, carotid stenosis, PFO closure'},
+    {id:'cerebral-venous',name:'Cerebral Venous Thrombosis',sub:'Risk factors, empty delta sign, anticoagulation, hemorrhagic conversion'},
+    {id:'cns-vasculitis',name:'CNS Vasculitis',sub:'Primary angiitis, reversible vasoconstriction (RCVS), workup'}
+  ]},
+  { id:'seizure-epilepsy', name:'Seizures & Epilepsy', icon:'⚡', topics:[
+    {id:'seizure-classify',name:'Seizure Classification',sub:'Focal vs generalized, aware vs impaired, ILAE 2017'},
+    {id:'status-epilepticus',name:'Status Epilepticus',sub:'Convulsive/non-convulsive, benzodiazepines, second-line, refractory'},
+    {id:'aed-selection',name:'AED Selection & Pharmacology',sub:'Broad vs narrow spectrum, levels, interactions, teratogenicity'},
+    {id:'surgical-epilepsy',name:'Surgical Epilepsy',sub:'Drug-resistant, presurgical evaluation, temporal lobectomy, VNS, RNS'},
+    {id:'pnes',name:'PNES & Non-Epileptic Events',sub:'Psychogenic, video-EEG, semiologic clues, management approach'},
+    {id:'special-epilepsy',name:'Special Populations',sub:'Pregnancy, elderly, SUDEP risk, driving restrictions, withdrawal'}
+  ]},
+  { id:'neuro-infection-inflam', name:'Neuroinfection & Inflammation', icon:'🦠', topics:[
+    {id:'bacterial-meningitis',name:'Bacterial Meningitis',sub:'Empiric Rx, dexamethasone, CSF patterns, Waterhouse-Friderichsen'},
+    {id:'viral-encephalitis',name:'Viral Encephalitis',sub:'HSV (temporal lobe), West Nile, arboviral, acyclovir'},
+    {id:'ms',name:'Multiple Sclerosis',sub:'McDonald criteria, DMTs, relapse management, progressive forms'},
+    {id:'nmo',name:'NMO Spectrum Disorder',sub:'AQP4 antibody, MOG, longitudinal myelitis, eculizumab'},
+    {id:'autoimmune-encephalitis',name:'Autoimmune Encephalitis',sub:'Anti-NMDAR, LGI1, CASPR2, paraneoplastic, immunotherapy'},
+    {id:'neuro-infections-other',name:'Other CNS Infections',sub:'Brain abscess, TB meningitis, fungal, neurocysticercosis, PML'}
+  ]},
+  { id:'neurodegen-movement', name:'Neurodegeneration & Movement', icon:'🧬', topics:[
+    {id:'alzheimers',name:'Alzheimer & Dementia',sub:'Amyloid/tau, biomarkers, cholinesterase inhibitors, lecanemab'},
+    {id:'parkinsons',name:'Parkinson Disease',sub:'Dopamine depletion, levodopa, DBS, dyskinesia, non-motor symptoms'},
+    {id:'als',name:'ALS',sub:'UMN + LMN, riluzole, edaravone, respiratory support, prognosis'},
+    {id:'huntington',name:'Huntington Disease',sub:'CAG repeats, genetic testing, chorea management, anticipation'},
+    {id:'ataxias',name:'Cerebellar Ataxias',sub:'Friedreich, SCA, paraneoplastic, alcoholic, vitamin deficiency'},
+    {id:'prion',name:'Prion Disease',sub:'CJD (sporadic/variant/familial), 14-3-3, RT-QuIC, rapidly progressive'}
+  ]},
+  { id:'neuromuscular-tbi', name:'Neuromuscular & Trauma', icon:'💪', topics:[
+    {id:'myasthenia',name:'Myasthenia Gravis',sub:'AChR/MuSK antibodies, edrophonium, crisis, thymectomy, rituximab'},
+    {id:'gbs',name:'Guillain-Barre Syndrome',sub:'AIDP/AMAN, albuminocytologic dissociation, IVIG/PLEX, 20/30/40 rule'},
+    {id:'myopathies',name:'Myopathies',sub:'Inflammatory (dermatomyositis/PM/IBM), metabolic, toxic, statin'},
+    {id:'neuropathies',name:'Peripheral Neuropathies',sub:'Diabetic, CIDP, B12, hereditary (CMT), EMG/NCS interpretation'},
+    {id:'tbi',name:'Traumatic Brain Injury',sub:'Primary/secondary injury, herniation, ICP management, GCS'},
+    {id:'spinal-cord',name:'Spinal Cord Injury & Myelopathy',sub:'Complete/incomplete, cord syndromes, autonomic dysreflexia, compression'}
+  ]},
+  { id:'renal-foundations', name:'Renal Foundations', icon:'🪶', topics:[
+    {id:'nephron-physiology',name:'Nephron Physiology',sub:'Glomerular filtration, tubular reabsorption/secretion, countercurrent'},
+    {id:'gfr-estimation',name:'GFR Estimation & Staging',sub:'CKD-EPI, cystatin C, creatinine clearance, limitations'},
+    {id:'urinalysis',name:'Urinalysis & Urine Studies',sub:'Dipstick, microscopy, casts, proteinuria quantification, FENa'},
+    {id:'renal-imaging',name:'Renal Imaging',sub:'Ultrasound, CT, MRA, nuclear renogram, biopsy indications'},
+    {id:'raas',name:'RAAS & Volume Regulation',sub:'Renin-angiotensin-aldosterone, ADH, natriuretic peptides, Starling'},
+    {id:'renal-pharm',name:'Renal Pharmacology',sub:'ACEi/ARBs, diuretics (loop/thiazide/K-sparing), SGLT2i, finerenone'}
+  ]},
+  { id:'aki-sys', name:'Acute Kidney Injury', icon:'⚠️', topics:[
+    {id:'aki-prerenal',name:'Prerenal AKI',sub:'Volume depletion, cardiorenal, hepatorenal, FENa interpretation'},
+    {id:'atn',name:'Acute Tubular Necrosis',sub:'Ischemic vs nephrotoxic, muddy brown casts, recovery phases'},
+    {id:'ain',name:'Acute Interstitial Nephritis',sub:'Drug-induced (NSAIDs, PPIs, ABx), eosinophiluria, WBC casts'},
+    {id:'contrast-nephropathy',name:'Contrast Nephropathy',sub:'Risk factors, prevention, volume expansion, NAC controversy'},
+    {id:'rhabdo-aki',name:'Rhabdomyolysis & Crystal AKI',sub:'CK, myoglobinuria, tumor lysis syndrome, ethylene glycol'},
+    {id:'aki-obstruct',name:'Obstructive AKI',sub:'BPH, stones, retroperitoneal fibrosis, bilateral obstruction'}
+  ]},
+  { id:'ckd-sys', name:'Chronic Kidney Disease', icon:'📉', topics:[
+    {id:'ckd-progression',name:'CKD Progression & Prevention',sub:'KDIGO staging, proteinuria reduction, SGLT2i, BP targets'},
+    {id:'ckd-mbd',name:'CKD-Mineral Bone Disease',sub:'Secondary hyperPTH, phosphorus, FGF23, vitamin D, calcimimetics'},
+    {id:'ckd-anemia',name:'Anemia of CKD',sub:'EPO deficiency, ESA therapy, iron supplementation, HIF-PHI'},
+    {id:'dialysis',name:'Dialysis Principles',sub:'Hemodialysis vs peritoneal, vascular access, adequacy, complications'},
+    {id:'renal-transplant',name:'Renal Transplantation',sub:'Evaluation, immunosuppression, rejection types, BK virus'},
+    {id:'uremia',name:'Uremic Syndrome',sub:'Uremic toxins, encephalopathy, pericarditis, platelet dysfunction'}
+  ]},
+  { id:'glomerular-sys', name:'Glomerular Disease', icon:'🔬', topics:[
+    {id:'nephrotic',name:'Nephrotic Syndrome',sub:'MCD, FSGS, membranous, diabetic, amyloid, thrombotic risk'},
+    {id:'nephritic',name:'Nephritic Syndrome',sub:'IgA, post-infectious GN, RPGN, crescentic, anti-GBM'},
+    {id:'lupus-nephritis',name:'Lupus Nephritis',sub:'ISN/RPS classification, Class III/IV/V, induction, maintenance'},
+    {id:'anca-renal',name:'ANCA Vasculitis (Renal)',sub:'GPA, MPA, pauci-immune crescentic GN, avacopan, rituximab'},
+    {id:'diabetic-nephropathy',name:'Diabetic Nephropathy',sub:'Kimmelstiel-Wilson, hyperfiltration, SGLT2i, finerenone'},
+    {id:'tma-renal',name:'Thrombotic Microangiopathies',sub:'TTP, aHUS, complement-mediated, HELLP, eculizumab'}
+  ]},
+  { id:'electrolytes-acidbase', name:'Electrolytes & Acid-Base', icon:'⚖️', topics:[
+    {id:'hyponatremia',name:'Hyponatremia',sub:'Hypotonic/isotonic/hypertonic, SIADH, cerebral salt wasting'},
+    {id:'hypernatremia',name:'Hypernatremia',sub:'Free water deficit, DI (central vs nephrogenic), insensible losses'},
+    {id:'potassium',name:'Potassium Disorders',sub:'Hypo/hyperkalemia, ECG changes, transcellular shifts, RTA'},
+    {id:'metabolic-acidosis',name:'Metabolic Acidosis',sub:'Anion gap (MUDPILES), non-AG (RTA types), delta-delta'},
+    {id:'metabolic-alkalosis',name:'Metabolic Alkalosis',sub:'Saline-responsive vs resistant, contraction, Bartter, Gitelman'},
+    {id:'calcium-phos-mag',name:'Calcium, Phosphorus & Magnesium',sub:'Hypo/hypercalcemia, phosphorus, hypomagnesemia, PTH axis'}
+  ]},
+  { id:'msk-foundations', name:'MSK Foundations', icon:'🦴', topics:[
+    {id:'bone-biology',name:'Bone Biology',sub:'Osteoblasts/osteoclasts, remodeling, RANK/RANKL, peak bone mass'},
+    {id:'joint-anatomy',name:'Joint Anatomy & Biomechanics',sub:'Synovial joints, cartilage, menisci, ligaments, tendons'},
+    {id:'msk-imaging',name:'MSK Imaging',sub:'X-ray, MRI, ultrasound, bone scan, CT arthrography'},
+    {id:'rheum-labs',name:'Rheumatologic Labs',sub:'RF, anti-CCP, ANA, ENA panel, HLA-B27, complement, ESR/CRP'},
+    {id:'msk-exam',name:'MSK Physical Examination',sub:'Joint assessment, gait, special tests (Lachman, McMurray, Phalen)'},
+    {id:'msk-pharm',name:'MSK Pharmacology',sub:'NSAIDs, DMARDs, biologics, colchicine, bisphosphonates, denosumab'}
+  ]},
+  { id:'inflammatory-arthritis', name:'Inflammatory Arthritis', icon:'🔥', topics:[
+    {id:'rheumatoid',name:'Rheumatoid Arthritis',sub:'Anti-CCP, symmetric polyarthritis, DMARDs, treat-to-target, erosions'},
+    {id:'gout',name:'Gout & Pseudogout',sub:'MSU crystals, negatively birefringent, ULT (allopurinol/febuxostat), flare Rx'},
+    {id:'psoriatic',name:'Psoriatic Arthritis',sub:'DIP, dactylitis, enthesitis, CASPAR criteria, IL-17/IL-23 inhibitors'},
+    {id:'ank-spondylitis',name:'Axial Spondyloarthritis',sub:'HLA-B27, sacroiliitis, bamboo spine, TNFi, IL-17i, exercise'},
+    {id:'reactive-arthritis',name:'Reactive Arthritis',sub:'Post-infectious, conjunctivitis, urethritis, HLA-B27, self-limited'},
+    {id:'jia',name:'Juvenile Idiopathic Arthritis',sub:'Oligoarticular, polyarticular, systemic (Still), uveitis screening'}
+  ]},
+  { id:'ctd-vasculitis-msk', name:'CTD & Vasculitis', icon:'🔬', topics:[
+    {id:'sle-msk',name:'SLE (Rheumatology)',sub:'Jaccoud arthropathy, nephritis, serositis, hydroxychloroquine, belimumab'},
+    {id:'scleroderma',name:'Scleroderma',sub:'Limited (CREST) vs diffuse, Scl-70, anti-centromere, ILD, renal crisis'},
+    {id:'myositis',name:'Inflammatory Myopathies',sub:'DM/PM/IBM/IMNM, CK, anti-Jo-1, anti-MDA5, cancer screening'},
+    {id:'sjogrens',name:'Sjogren Syndrome',sub:'Sicca, anti-Ro/La, parotid, lymphoma risk, rituximab'},
+    {id:'vasculitis-msk',name:'Vasculitis Syndromes',sub:'GCA/PMR, Takayasu, PAN, GPA, EGPA, large/medium/small vessel'},
+    {id:'overlap-mctd',name:'Overlap & MCTD',sub:'Anti-U1 RNP, mixed features, undifferentiated CTD'}
+  ]},
+  { id:'mechanical-structural', name:'Mechanical & Structural', icon:'🦵', topics:[
+    {id:'osteoarthritis',name:'Osteoarthritis',sub:'Weight-bearing joints, Heberden/Bouchard, total joint replacement'},
+    {id:'fracture-mgmt',name:'Fracture Management',sub:'Open vs closed, Salter-Harris, hip fracture, pathologic, healing'},
+    {id:'compartment-syndrome',name:'Compartment Syndrome',sub:'Pressure measurement, 5 Ps, fasciotomy, crush injury'},
+    {id:'back-pain',name:'Low Back Pain & Disc Disease',sub:'Red flags, herniation, radiculopathy, cauda equina, stenosis'},
+    {id:'osteomyelitis',name:'Osteomyelitis',sub:'Hematogenous vs contiguous, Staph aureus, MRI, long-term ABx'},
+    {id:'septic-joint',name:'Septic Arthritis',sub:'Synovial fluid analysis, WBC >50K, Kocher criteria, drainage'}
+  ]},
+  { id:'metabolic-bone', name:'Metabolic Bone & Soft Tissue', icon:'💊', topics:[
+    {id:'osteoporosis',name:'Osteoporosis',sub:'DEXA, FRAX, bisphosphonates, denosumab, teriparatide, romosozumab'},
+    {id:'pagets',name:'Paget Disease',sub:'Elevated ALP, mosaic bone, bisphosphonates, complications'},
+    {id:'osteomalacia',name:'Osteomalacia & Rickets',sub:'Vitamin D deficiency, phosphorus, oncogenic, pseudofractures'},
+    {id:'tendinopathy',name:'Tendinopathy & Bursitis',sub:'Rotator cuff, lateral epicondylitis, Achilles, trochanteric, injection'},
+    {id:'fibromyalgia',name:'Fibromyalgia',sub:'Central sensitization, widespread pain, tender points, duloxetine'},
+    {id:'crystal-arthropathy',name:'Crystal Arthropathies',sub:'CPPD, Milwaukee shoulder, hydroxyapatite, chondrocalcinosis'}
+  ]},
+  { id:'endo-foundations', name:'Endocrine Foundations', icon:'⚗️', topics:[
+    {id:'hpa-axis',name:'HPA Axis & Feedback Loops',sub:'Hypothalamic-pituitary regulation, negative feedback, dynamic testing'},
+    {id:'hormone-assays',name:'Hormone Assays & Interpretation',sub:'Free vs total, binding proteins, stimulation/suppression tests'},
+    {id:'endo-imaging',name:'Endocrine Imaging',sub:'Thyroid US, adrenal CT, pituitary MRI, nuclear (I-123, MIBG)'},
+    {id:'men-syndromes',name:'MEN Syndromes',sub:'MEN1, MEN2A, MEN2B, genetic testing, screening protocols'},
+    {id:'endo-emergency',name:'Endocrine Emergencies',sub:'DKA, thyroid storm, myxedema, adrenal crisis, hypercalcemic crisis'},
+    {id:'endo-pharm',name:'Endocrine Pharmacology',sub:'Insulin types, sulfonylureas, GLP-1 RAs, SGLT2i, levothyroxine, steroids'}
+  ]},
+  { id:'diabetes-metabolic', name:'Diabetes & Metabolic', icon:'📈', topics:[
+    {id:'dka-hhs',name:'DKA & HHS',sub:'Anion gap, insulin drip, fluid resuscitation, K+ monitoring, transition'},
+    {id:'t1dm',name:'Type 1 Diabetes',sub:'Autoimmune destruction, C-peptide, insulin regimens, CGM, pump therapy'},
+    {id:'t2dm-management',name:'Type 2 Diabetes Management',sub:'Metformin, GLP-1 RA, SGLT2i, A1c targets, cardiorenal benefit'},
+    {id:'insulin-pharm',name:'Insulin Pharmacology',sub:'Basal/bolus, correction factor, carb ratio, sliding scale, hypoglycemia'},
+    {id:'dm-complications',name:'Chronic DM Complications',sub:'Retinopathy, nephropathy, neuropathy, macrovascular, foot care'},
+    {id:'hypoglycemia',name:'Hypoglycemia',sub:'Whipple triad, insulinoma, sulfonylurea, factitious, evaluation'}
+  ]},
+  { id:'thyroid-sys', name:'Thyroid', icon:'🦋', topics:[
+    {id:'graves',name:'Graves Disease',sub:'TSI/TRAb, diffuse goiter, ophthalmopathy, ATDs, RAI, surgery'},
+    {id:'hashimotos',name:'Hashimoto Thyroiditis',sub:'Anti-TPO, hypothyroidism, levothyroxine dosing, myxedema'},
+    {id:'thyroid-storm',name:'Thyroid Storm & Myxedema Coma',sub:'Burch-Wartofsky, PTU, iodine, beta-blockade, IV levothyroxine'},
+    {id:'thyroid-nodules',name:'Thyroid Nodules & Cancer',sub:'Bethesda, FNA, molecular testing, papillary/follicular/medullary/anaplastic'},
+    {id:'thyroiditis',name:'Thyroiditis',sub:'Subacute (de Quervain), painless, postpartum, suppurative, Riedel'},
+    {id:'sick-euthyroid',name:'Non-Thyroidal Illness',sub:'Low T3 syndrome, ICU thyroid tests, when to treat, recovery'}
+  ]},
+  { id:'adrenal-pituitary', name:'Adrenal & Pituitary', icon:'🧠', topics:[
+    {id:'cushings',name:'Cushing Syndrome',sub:'24h UFC, dexamethasone suppression, ACTH-dependent vs independent, IPSS'},
+    {id:'addisons',name:'Addison Disease & Adrenal Crisis',sub:'Primary adrenal insufficiency, cortisol, stress dosing, 21-hydroxylase'},
+    {id:'pheo',name:'Pheochromocytoma',sub:'Catecholamine excess, metanephrines, alpha before beta, paraganglioma'},
+    {id:'primary-aldo',name:'Primary Aldosteronism',sub:'ARR, salt loading, adrenal vein sampling, Conn syndrome, spironolactone'},
+    {id:'pituitary-adenoma',name:'Pituitary Adenomas',sub:'Prolactinoma, acromegaly, Cushing disease, non-functioning, apoplexy'},
+    {id:'di-siadh',name:'DI & SIADH',sub:'Central vs nephrogenic DI, desmopressin, SIADH (euvolemic hypoNa), fluid restriction'}
+  ]},
+  { id:'calcium-repro', name:'Calcium & Reproductive Endo', icon:'⚖️', topics:[
+    {id:'hyperparathyroid',name:'Hyperparathyroidism',sub:'Primary (adenoma), secondary (CKD), tertiary, hypercalcemic crisis'},
+    {id:'hypoparathyroid',name:'Hypoparathyroidism',sub:'Post-surgical, autoimmune, DiGeorge, calcium/calcitriol replacement'},
+    {id:'vitamin-d',name:'Vitamin D Disorders',sub:'Deficiency, insufficiency, 25-OH vs 1,25-OH, granulomatous disease'},
+    {id:'pcos',name:'PCOS',sub:'Rotterdam criteria, hyperandrogenism, insulin resistance, metformin, OCP'},
+    {id:'hypogonadism',name:'Hypogonadism',sub:'Primary vs secondary, testosterone replacement, Klinefelter, Kallmann'},
+    {id:'adrenal-incidentaloma',name:'Adrenal Incidentaloma',sub:'Subclinical Cushing, pheochromocytoma screening, Washout CT, follow-up'}
+  ]},
+  { id:'heme-foundations', name:'Hematology Foundations', icon:'🩸', topics:[
+    {id:'hematopoiesis',name:'Hematopoiesis',sub:'Stem cells, lineage commitment, growth factors, bone marrow niche'},
+    {id:'cbc-interpret',name:'CBC Interpretation',sub:'Indices (MCV/MCH/RDW), reticulocyte count, pancytopenia workup'},
+    {id:'peripheral-smear',name:'Peripheral Smear',sub:'Schistocytes, spherocytes, target cells, Howell-Jolly, rouleaux'},
+    {id:'coag-cascade',name:'Coagulation Cascade',sub:'Intrinsic/extrinsic/common, PT/INR, aPTT, mixing studies, fibrinogen'},
+    {id:'bone-marrow-bx',name:'Bone Marrow Biopsy',sub:'Indications, cellularity, blast count, fibrosis, flow cytometry'},
+    {id:'heme-pharm',name:'Hematology Pharmacology',sub:'Anticoagulants (DOACs, heparin, warfarin), antiplatelets, reversal agents'}
+  ]},
+  { id:'anemia-rbc', name:'Anemia & RBC Disorders', icon:'🔴', topics:[
+    {id:'iron-deficiency',name:'Iron Deficiency Anemia',sub:'Ferritin, TIBC, iron studies, oral vs IV iron, GI workup'},
+    {id:'b12-folate',name:'B12 & Folate Deficiency',sub:'Megaloblastic, neurologic features, methylmalonic acid, pernicious'},
+    {id:'hemolytic-anemia',name:'Hemolytic Anemia',sub:'Intravascular vs extravascular, DAT, LDH, haptoglobin, spherocytosis'},
+    {id:'sickle-cell',name:'Sickle Cell Disease',sub:'Vaso-occlusion, ACS, stroke, hydroxyurea, voxelotor, L-glutamine'},
+    {id:'thalassemia',name:'Thalassemia',sub:'Alpha vs beta, trait vs major, Hb electrophoresis, iron overload'},
+    {id:'aplastic-anemia',name:'Aplastic Anemia',sub:'Pancytopenia, bone marrow failure, ATG/CsA, transplant, PNH overlap'}
+  ]},
+  { id:'coag-thrombosis', name:'Coagulation & Thrombosis', icon:'🟣', topics:[
+    {id:'dic',name:'DIC',sub:'Consumptive coagulopathy, sepsis/obstetric, fibrin degradation, Rx'},
+    {id:'ttp-hus',name:'TTP & HUS',sub:'ADAMTS13, pentad, plasmapheresis, aHUS, eculizumab, Shiga toxin'},
+    {id:'vte-hypercoag',name:'VTE & Hypercoagulable States',sub:'Factor V Leiden, prothrombin, antiphospholipid, protein C/S'},
+    {id:'anticoag-management',name:'Anticoagulation Management',sub:'DOAC selection, heparin (UFH/LMWH), warfarin, bridging, perioperative'},
+    {id:'heparin-hit',name:'HIT',sub:'4Ts score, PF4 antibodies, argatroban, fondaparinux, HITT'},
+    {id:'bleeding-disorders',name:'Bleeding Disorders',sub:'Hemophilia A/B, von Willebrand, factor deficiency, acquired inhibitors'}
+  ]},
+  { id:'wbc-lymphoprolif', name:'WBC & Lymphoproliferative', icon:'🔬', topics:[
+    {id:'acute-leukemia',name:'Acute Leukemia',sub:'AML vs ALL, classification, induction/consolidation, FLT3, Ph+'},
+    {id:'chronic-leukemia',name:'Chronic Leukemia',sub:'CML (BCR-ABL, TKIs), CLL (Rai/Binet, BTKi, venetoclax)'},
+    {id:'lymphoma',name:'Lymphoma',sub:'Hodgkin (Reed-Sternberg), DLBCL, follicular, mantle cell, staging'},
+    {id:'myeloma',name:'Multiple Myeloma',sub:'CRAB criteria, M-spike, light chains, VRd, ASCT, CAR-T'},
+    {id:'mds',name:'Myelodysplastic Syndromes',sub:'Cytopenias, dysplasia, IPSS-R, lenalidomide, azacitidine, transplant'},
+    {id:'mpn',name:'Myeloproliferative Neoplasms',sub:'PV, ET, myelofibrosis, JAK2/CALR/MPL, ruxolitinib'}
+  ]},
+  { id:'transfusion-special', name:'Transfusion & Special Topics', icon:'💉', topics:[
+    {id:'transfusion-rx',name:'Transfusion Reactions',sub:'Acute hemolytic, TRALI, TACO, febrile, allergic, delayed'},
+    {id:'blood-banking',name:'Blood Banking',sub:'ABO/Rh, crossmatch, antibody screen, massive transfusion protocol'},
+    {id:'sickle-crises',name:'Sickle Cell Crises',sub:'Pain crisis, ACS, aplastic, sequestration, exchange transfusion'},
+    {id:'platelet-disorders',name:'Platelet Disorders',sub:'ITP, TTP, drug-induced, gestational, neonatal alloimmune'},
+    {id:'coag-in-liver',name:'Coagulopathy of Liver Disease',sub:'Factor synthesis, portal HTN, thrombocytopenia, TEG/ROTEM'},
+    {id:'anticoag-reversal',name:'Anticoagulant Reversal',sub:'Idarucizumab, andexanet, 4F-PCC, vitamin K, protamine, strategies'}
+  ]},
+    { id:'ai-foundations', name:'A/I Foundations', icon:'\uD83D\uDEE1\uFE0F', topics:[
+    {id:'gell-coombs',name:'Gell-Coombs Classification',sub:'Type I\u2013IV hypersensitivity, key mediators'},
+    {id:'innate-adaptive',name:'Innate vs Adaptive Immunity',sub:'Complement, PRRs, T/B cell activation, MHC'},
+    {id:'ige-pathway',name:'IgE-Mediated Pathway',sub:'Allergen sensitization, mast cell degranulation, early/late phase'},
+    {id:'allergy-testing',name:'Allergy Testing & Interpretation',sub:'Skin prick, intradermal, sIgE, component testing, BAT'},
+    {id:'immune-tolerance',name:'Immune Tolerance',sub:'Central/peripheral tolerance, Tregs, oral tolerance'},
+    {id:'mucosal-immunology',name:'Mucosal Immunology',sub:'GALT, BALT, NALT, IgA, epithelial barrier function'}
+  ]},
+  { id:'anaphylaxis-acute', name:'Anaphylaxis & Acute', icon:'\u26A1', topics:[
+    {id:'anaphylaxis',name:'Anaphylaxis',sub:'Diagnostic criteria, biphasic reactions, refractory management'},
+    {id:'epinephrine-pharm',name:'Epinephrine Pharmacology',sub:'Alpha/beta effects, auto-injectors, dosing, barriers'},
+    {id:'periop-anaphylaxis',name:'Perioperative Anaphylaxis',sub:'NMBAs, latex, chlorhexidine, tryptase timing'},
+    {id:'exercise-anaphylaxis',name:'Exercise-Induced Anaphylaxis',sub:'FDEIA, cofactors, wheat-dependent'},
+    {id:'idiopathic-anaphylaxis',name:'Idiopathic Anaphylaxis',sub:'Diagnosis of exclusion, mast cell evaluation'},
+    {id:'acute-urticaria',name:'Acute Urticaria & Angioedema',sub:'IgE vs non-IgE triggers, serum sickness-like'}
+  ]},
+  { id:'drug-hypersensitivity', name:'Drug Hypersensitivity', icon:'\uD83D\uDC8A', topics:[
+    {id:'drug-classify',name:'Drug Allergy Classification',sub:'Immediate vs delayed, Type I\u2013IV, timeline patterns'},
+    {id:'penicillin-delabel',name:'Penicillin Allergy De-labeling',sub:'Skin testing, oral challenge, cross-reactivity'},
+    {id:'nsaid-reactions',name:'NSAID Hypersensitivity & AERD',sub:'Samter triad, COX-1 shunting, aspirin desensitization'},
+    {id:'sjs-ten-dress',name:'SJS/TEN & DRESS Syndrome',sub:'HLA associations, SCORTEN, management'},
+    {id:'drug-desensitization',name:'Drug Desensitization Protocols',sub:'Rapid desensitization for chemo, antibiotics, biologics'},
+    {id:'contrast-vaccine',name:'Contrast & Vaccine Reactions',sub:'Radiocontrast, PEG allergy, vaccine excipients'}
+  ]},
+  { id:'food-allergy-sys', name:'Food Allergy', icon:'\uD83C\uDF3E', topics:[
+    {id:'food-ige',name:'IgE-Mediated Food Allergy',sub:'Peanut, tree nut, milk, egg, shellfish, component testing'},
+    {id:'fpies',name:'FPIES',sub:'Acute vs chronic, pathophysiology, OFC protocols, natural history'},
+    {id:'eoe',name:'Eosinophilic Esophagitis',sub:'Th2-driven, elimination diets, PPI-REE, dupilumab'},
+    {id:'eosinophilic-gi',name:'Eosinophilic GI Disorders',sub:'EoG, EoN, EoC, beyond esophagus, biopsy patterns'},
+    {id:'food-allergy-tx',name:'Food Allergy Therapeutics',sub:'OIT, SLIT, epicutaneous, omalizumab adjunct'},
+    {id:'oral-allergy',name:'OAS & Cross-Reactivity',sub:'Pollen-food, profilin, LTP, PR-10, component panels'}
+  ]},
+  { id:'rhinitis-sinusitis', name:'Rhinitis & Sinusitis', icon:'\uD83D\uDCA8', topics:[
+    {id:'allergic-rhinitis',name:'Allergic Rhinitis',sub:'ARIA classification, INCS, antihistamines, stepwise Rx'},
+    {id:'nonallergic-rhinitis',name:'Non-Allergic Rhinitis',sub:'VMR, NARES, gustatory, medicamentosa, atrophic'},
+    {id:'crs-polyps',name:'CRS with Nasal Polyps',sub:'Type 2 inflammation, endoscopy, biologics, surgery'},
+    {id:'crs-no-polyps',name:'CRS without Polyps',sub:'Biofilm, culture-directed Rx, FESS indications'},
+    {id:'aerd',name:'AERD (Samter Triad)',sub:'COX-1 shunting, leukotriene overproduction, aspirin desensitization'},
+    {id:'allergen-immunotherapy',name:'Allergen Immunotherapy',sub:'SCIT vs SLIT, mechanism, dosing, VIT'}
+  ]},
+  { id:'asthma-lower', name:'Asthma & Lower Airway', icon:'\uD83E\uDEC1', topics:[
+    {id:'asthma-phenotypes',name:'Asthma Phenotyping',sub:'T2-high vs T2-low, eosinophilic, neutrophilic, biomarkers'},
+    {id:'asthma-biologics',name:'Asthma Biologics Selection',sub:'Anti-IgE, anti-IL5/5R, anti-IL4R, anti-TSLP'},
+    {id:'severe-asthma',name:'Severe/Refractory Asthma',sub:'Phenotype-guided Rx, COPD overlap, VCD'},
+    {id:'occupational-asthma',name:'Occupational Asthma',sub:'Sensitizer vs irritant, diisocyanates, serial PEF'},
+    {id:'abpa',name:'ABPA',sub:'Aspergillus sensitization, central bronchiectasis, staging'},
+    {id:'hp',name:'Hypersensitivity Pneumonitis',sub:'Type III/IV, bird fancier, farmer lung'}
+  ]},
+  { id:'urticaria-angioedema', name:'Urticaria & Angioedema', icon:'\uD83D\uDFE3', topics:[
+    {id:'chronic-urticaria',name:'Chronic Spontaneous Urticaria',sub:'Autoimmune IgE/IgG, antihistamine escalation, omalizumab'},
+    {id:'inducible-urticaria',name:'Inducible Urticarias',sub:'Dermatographic, cholinergic, cold, solar, pressure'},
+    {id:'hae',name:'Hereditary Angioedema',sub:'C1-INH deficiency, C4 screening, icatibant, lanadelumab'},
+    {id:'ace-angioedema',name:'ACEi-Induced Angioedema',sub:'Bradykinin accumulation, timeline, ARB safety'},
+    {id:'urticarial-vasculitis',name:'Urticarial Vasculitis',sub:'Normo- vs hypocomplementemic, biopsy, SLE overlap'},
+    {id:'mast-cell-disorders',name:'Mast Cell Disorders',sub:'Mastocytosis, MCAS, tryptase, KIT D816V'}
+  ]},
+  { id:'immunodeficiency-sys', name:'Immunodeficiency', icon:'\uD83E\uDDA0', topics:[
+    {id:'pid-overview',name:'Primary Immunodeficiency Overview',sub:'Warning signs, antibody vs cellular vs combined'},
+    {id:'cvid',name:'CVID & Antibody Deficiencies',sub:'IVIG/SCIG, granulomatous disease, autoimmune cytopenias'},
+    {id:'scid',name:'SCID & Combined Immunodeficiency',sub:'Newborn screening, TREC, gene therapy, transplant'},
+    {id:'complement-deficiency',name:'Complement Deficiencies',sub:'Classical vs alternative vs lectin, infection patterns'},
+    {id:'secondary-immunodef',name:'Secondary Immunodeficiency',sub:'HIV, biologics, rituximab, hypogammaglobulinemia'},
+    {id:'phagocyte-defects',name:'Phagocyte & Innate Defects',sub:'CGD, LAD, Chediak-Higashi, DHR, NBT'}
+  ]},
+  { id:'autoimmune-sys', name:'Autoimmunity & Systemic', icon:'\uD83D\uDD25', topics:[
+    {id:'autoimmune-mech',name:'Autoimmune Mechanisms',sub:'Molecular mimicry, epitope spreading, bystander activation'},
+    {id:'sle-immuno',name:'SLE Immunology',sub:'Anti-dsDNA, complement consumption, lupus nephritis'},
+    {id:'vasculitis-ai',name:'Vasculitis (A/I Perspective)',sub:'EGPA, ANCA, cryoglobulinemia, immune complex'},
+    {id:'autoimmune-cytopenias',name:'Autoimmune Cytopenias',sub:'AIHA, ITP, Evans syndrome, DAT, warm vs cold'},
+    {id:'autoinflammatory',name:'Autoinflammatory Syndromes',sub:'FMF, CAPS, TRAPS, inflammasome, IL-1 blockade'},
+    {id:'transplant-immuno',name:'Transplant Immunology',sub:'HLA matching, rejection types, GVHD, immunosuppression'}
+  ]},
+  { id:'derm-ai', name:'Dermatology & A/I', icon:'\uD83E\uDE7A', topics:[
+    {id:'atopic-dermatitis',name:'Atopic Dermatitis',sub:'Filaggrin, Th2, atopic march, dupilumab, JAK inhibitors'},
+    {id:'contact-dermatitis',name:'Contact Dermatitis',sub:'Allergic vs irritant, patch testing, T.R.U.E. test'},
+    {id:'drug-eruptions',name:'Drug Eruptions',sub:'Morbilliform, fixed drug, AGEP, DRESS, SJS-TEN'},
+    {id:'erythema-multiforme',name:'Erythema Multiforme',sub:'EM minor/major, HSV trigger, target lesions vs SJS'},
+    {id:'cutaneous-mastocytosis',name:'Cutaneous Mastocytosis',sub:'UP, TMEP, DCM, Darier sign, peds vs adult'},
+    {id:'immune-skin',name:'Immune-Mediated Skin Disease',sub:'Psoriasis immunology, pemphigus, bullous pemphigoid'}
+  ]},
+  { id:'heme-ai', name:'Heme/Onc & A/I', icon:'\uD83E\uDE78', topics:[
+    {id:'eosinophilia',name:'Eosinophilia Workup',sub:'NAACP mnemonic, HES, FIP1L1-PDGFRA, organ damage'},
+    {id:'chemo-hypersensitivity',name:'Chemo/Biologic Hypersensitivity',sub:'Platinum, taxane, rituximab, desensitization'},
+    {id:'transfusion-immune',name:'Transfusion Reactions',sub:'Acute hemolytic, TRALI, anaphylactic (IgA def)'},
+    {id:'systemic-mastocytosis',name:'Systemic Mastocytosis',sub:'WHO classification, ISM/SSM/ASM, KIT D816V'},
+    {id:'checkpoint-toxicity',name:'Immune Checkpoint Toxicities',sub:'irAEs, anti-PD1/CTLA4, colitis, pneumonitis'},
+    {id:'car-t-toxicity',name:'CAR-T Toxicities',sub:'CRS, ICANS, grading, tocilizumab, management'}
+  ]},
+  { id:'id-ai', name:'Infectious Disease & A/I', icon:'\uD83E\uDDA0', topics:[
+    {id:'hiv-immunology',name:'HIV Immunology',sub:'CD4 depletion, immune reconstitution, IRIS'},
+    {id:'vaccine-immunology',name:'Vaccine Immunology',sub:'Adjuvants, mRNA, live vs inactivated, immunocompromised'},
+    {id:'abx-stewardship',name:'Antibiotic Allergy Stewardship',sub:'De-labeling, penicillin testing, cross-reactivity'},
+    {id:'fungal-allergy',name:'Fungal Allergy & Disease',sub:'ABPA, SAFS, allergic fungal sinusitis'},
+    {id:'parasites-eosinophilia',name:'Parasites & Eosinophilia',sub:'Strongyloides, toxocara, eosinophilic meningitis'},
+    {id:'sepsis-immune',name:'Sepsis Immunology',sub:'SIRS, immunoparalysis, trained immunity, cytokine storm'}
+  ]},
+  { id:'peds-ai', name:'Pediatric A/I', icon:'\uD83D\uDC76', topics:[
+    {id:'atopic-march',name:'Atopic March',sub:'AD to rhinitis to asthma, early intervention, prevention'},
+    {id:'milk-allergy-infant',name:'Milk Allergy in Infants',sub:'IgE vs non-IgE, FPIES, formula selection, baked milk'},
+    {id:'peds-immunodeficiency',name:'Pediatric Immunodeficiency',sub:'SCID screening, recurrent infections, TREC'},
+    {id:'early-allergen-intro',name:'Early Allergen Introduction',sub:'LEAP/EAT trials, peanut guidelines, high-risk'},
+    {id:'peds-asthma-ai',name:'Pediatric Asthma (A/I)',sub:'Viral wheezing vs atopic, API, preschool Rx'},
+    {id:'peds-drug-allergy',name:'Pediatric Drug Allergy',sub:'Amoxicillin rash vs allergy, viral exanthem, challenge'}
+  ]},
+  { id:'em-foundations', name:'EM Foundations', icon:'🚨', topics:[
+    {id:'triage-acuity',name:'Triage & Acuity',sub:'ESI levels, mass casualty, overtriage vs undertriage'},
+    {id:'abcde',name:'ABCDE Approach',sub:'Primary/secondary survey, trauma activation, ATLS'},
+    {id:'resuscitation',name:'Resuscitation Principles',sub:'ACLS/BLS/PALS, team dynamics, post-arrest care, TTM'},
+    {id:'em-procedures',name:'EM Procedures',sub:'Central lines, intubation, chest tubes, IO access, procedural sedation'},
+    {id:'pocus',name:'Point-of-Care Ultrasound',sub:'FAST, cardiac, lung, aorta, DVT, RUSH protocol'},
+    {id:'em-disposition',name:'Disposition & Risk Stratification',sub:'Admission criteria, observation, shared decision-making, bounce-backs'}
+  ]},
+  { id:'em-cardiovascular', name:'EM Cardiovascular', icon:'❤️', topics:[
+    {id:'chest-pain-ed',name:'Chest Pain Evaluation',sub:'HEART score, troponin pathways, ACS rule-out, risk stratification'},
+    {id:'cardiac-arrest',name:'Cardiac Arrest Management',sub:'ACLS algorithms, PEA/asystole, shockable rhythms, ROSC, ECPR'},
+    {id:'acute-hf-ed',name:'Acute Heart Failure in ED',sub:'Flash pulmonary edema, NIV, vasodilators, diuretics, cardiogenic shock'},
+    {id:'afib-ed',name:'AFib in the ED',sub:'Rate control, cardioversion, anticoagulation decision, hemodynamic instability'},
+    {id:'hypertensive-emergency',name:'Hypertensive Emergency',sub:'End-organ damage, nicardipine, clevidipine, aortic dissection, stroke'},
+    {id:'syncope-ed',name:'Syncope Evaluation',sub:'San Francisco rule, Canadian Syncope Risk Score, cardiac vs reflex'}
+  ]},
+  { id:'em-trauma', name:'EM Trauma', icon:'💥', topics:[
+    {id:'polytrauma',name:'Polytrauma Management',sub:'ATLS, damage control, massive transfusion, permissive hypotension'},
+    {id:'head-trauma-ed',name:'Head Trauma',sub:'GCS, Canadian CT Head, epidural/subdural, concussion, herniation'},
+    {id:'chest-trauma',name:'Chest Trauma',sub:'Tension pneumothorax, hemothorax, flail chest, cardiac tamponade, aortic injury'},
+    {id:'abdominal-trauma',name:'Abdominal Trauma',sub:'FAST exam, solid organ injury, hollow viscus, DPL, operative indications'},
+    {id:'orthopedic-trauma',name:'Orthopedic Emergencies',sub:'Open fractures, dislocations, neurovascular compromise, splinting'},
+    {id:'burns',name:'Burns & Environmental',sub:'Parkland formula, inhalation injury, hypothermia, drowning, electrical'}
+  ]},
+  { id:'em-toxicology', name:'EM Toxicology', icon:'☠️', topics:[
+    {id:'toxidromes',name:'Toxidromes',sub:'Sympathomimetic, anticholinergic, cholinergic, opioid, sedative-hypnotic'},
+    {id:'acetaminophen-tox',name:'Acetaminophen Toxicity',sub:'Rumack-Matthew nomogram, NAC protocol, ALF, King College'},
+    {id:'toxic-alcohols',name:'Toxic Alcohols',sub:'Methanol, ethylene glycol, osmolar gap, fomepizole, dialysis'},
+    {id:'drug-overdose',name:'Drug Overdose Management',sub:'TCA, digoxin, beta-blocker, CCB, salicylate, lithium'},
+    {id:'substance-withdrawal',name:'Substance Withdrawal',sub:'Alcohol (CIWA, benzodiazepines), opioid (COWS), benzodiazepine'},
+    {id:'envenomation',name:'Envenomation & Bites',sub:'Snake (CroFab), spider, scorpion, marine, rabies PEP'}
+  ]},
+  { id:'em-critical', name:'EM Critical Care', icon:'⚡', topics:[
+    {id:'sepsis-ed',name:'Sepsis & Septic Shock',sub:'qSOFA, hour-1 bundle, lactate, vasopressors, source control'},
+    {id:'airway-ed',name:'Airway Management',sub:'RSI, difficult airway, cricothyrotomy, video laryngoscopy, post-intubation'},
+    {id:'shock-ed',name:'Shock in the ED',sub:'Distributive, cardiogenic, obstructive, hypovolemic, RUSH protocol'},
+    {id:'anaphylaxis-ed',name:'Anaphylaxis in ED',sub:'Epinephrine dosing, refractory, biphasic, observation period'},
+    {id:'dka-ed',name:'DKA in the ED',sub:'Fluid resuscitation, insulin drip, K+ replacement, transition, HHS'},
+    {id:'status-ed',name:'Status Epilepticus in ED',sub:'Benzodiazepines, second-line, intubation, continuous EEG'}
+  ]},
+  { id:'psych-foundations', name:'Psychiatry Foundations', icon:'🧠', topics:[
+    {id:'psych-interview',name:'Psychiatric Interview & MSE',sub:'Rapport, mental status exam, risk assessment, formulation'},
+    {id:'neurotransmitters',name:'Neurotransmitter Systems',sub:'Serotonin, dopamine, norepinephrine, GABA, glutamate, receptor pharmacology'},
+    {id:'psychopharm-principles',name:'Psychopharmacology Principles',sub:'Mechanism of action, titration, side effects, drug interactions, monitoring'},
+    {id:'diagnostic-framework',name:'Diagnostic Frameworks',sub:'DSM-5-TR, dimensional vs categorical, differential diagnosis approach'},
+    {id:'capacity-ethics',name:'Capacity & Psychiatric Ethics',sub:'Informed consent, involuntary commitment, competency, duty to warn'},
+    {id:'cultural-psych',name:'Cultural Psychiatry',sub:'Cultural formulation, health disparities, interpreter use, stigma'}
+  ]},
+  { id:'mood-anxiety', name:'Mood & Anxiety Disorders', icon:'💧', topics:[
+    {id:'mdd',name:'Major Depressive Disorder',sub:'PHQ-9, SSRIs/SNRIs, augmentation, ECT, TMS, ketamine/esketamine'},
+    {id:'bipolar',name:'Bipolar Disorder',sub:'Mania/hypomania, lithium, valproate, atypical antipsychotics, maintenance'},
+    {id:'gad',name:'Generalized Anxiety Disorder',sub:'GAD-7, SSRIs, buspirone, CBT, benzodiazepine risks'},
+    {id:'panic-disorder',name:'Panic Disorder',sub:'Panic attacks, agoraphobia, SSRI, exposure therapy, safety behaviors'},
+    {id:'ptsd',name:'PTSD & Trauma',sub:'Criteria, prolonged exposure, CPT, EMDR, prazosin, comorbidity'},
+    {id:'ocd',name:'OCD & Related Disorders',sub:'Y-BOCS, SRI therapy, ERP, body dysmorphic, trichotillomania, hoarding'}
+  ]},
+  { id:'psychosis-thought', name:'Psychotic & Thought Disorders', icon:'🔮', topics:[
+    {id:'schizophrenia',name:'Schizophrenia',sub:'Positive/negative symptoms, first-episode, antipsychotics, clozapine'},
+    {id:'schizoaffective',name:'Schizoaffective & Brief Psychotic',sub:'Differentiating mood vs psychotic, duration criteria, treatment'},
+    {id:'delusional',name:'Delusional Disorder',sub:'Types (persecutory, erotomanic, grandiose, somatic), intact functioning'},
+    {id:'psychosis-medical',name:'Secondary Psychosis',sub:'Substance-induced, medical causes, autoimmune, delirium vs psychosis'},
+    {id:'antipsychotic-pharm',name:'Antipsychotic Pharmacology',sub:'D2 blockade, FGA vs SGA, metabolic syndrome, EPS, NMS, TD'},
+    {id:'first-episode',name:'First-Episode Psychosis',sub:'Duration of untreated psychosis, early intervention, prodrome, staging'}
+  ]},
+  { id:'substance-use', name:'Substance Use Disorders', icon:'💊', topics:[
+    {id:'alcohol-use',name:'Alcohol Use Disorder',sub:'CAGE/AUDIT, withdrawal (CIWA), naltrexone, acamprosate, disulfiram'},
+    {id:'opioid-use',name:'Opioid Use Disorder',sub:'Buprenorphine, methadone, naltrexone, naloxone, harm reduction'},
+    {id:'stimulant-use',name:'Stimulant Use Disorder',sub:'Cocaine, methamphetamine, no FDA-approved meds, contingency management'},
+    {id:'cannabis',name:'Cannabis & Emerging Substances',sub:'CUD, CHS, synthetic cannabinoids, kratom, novel psychoactives'},
+    {id:'tobacco',name:'Tobacco Cessation',sub:'Varenicline, bupropion, NRT, motivational interviewing, e-cigarettes'},
+    {id:'polysubstance',name:'Polysubstance & Co-occurring',sub:'Dual diagnosis, integrated treatment, serotonin syndrome, drug interactions'}
+  ]},
+  { id:'psych-special', name:'Psychiatry Special Topics', icon:'🤝', topics:[
+    {id:'personality-disorders',name:'Personality Disorders',sub:'Cluster A/B/C, borderline (DBT), antisocial, narcissistic'},
+    {id:'eating-disorders',name:'Eating Disorders',sub:'AN, BN, BED, refeeding syndrome, medical complications, FBT'},
+    {id:'somatic-symptom',name:'Somatic Symptom Disorders',sub:'SSD, conversion (FND), illness anxiety, factitious, malingering'},
+    {id:'child-psych',name:'Child & Adolescent Psychiatry',sub:'ADHD, autism, conduct disorder, separation anxiety, medication in youth'},
+    {id:'geriatric-psych',name:'Geriatric Psychiatry',sub:'Late-onset depression, dementia behavioral symptoms, delirium, polypharmacy'},
+    {id:'psych-emergency',name:'Psychiatric Emergencies',sub:'Suicidal risk assessment, agitation management, NMS, serotonin syndrome'}
+  ]},
+  { id:'surg-foundations', name:'Surgical Foundations', icon:'🩺', topics:[
+    {id:'preop-eval',name:'Preoperative Evaluation',sub:'Cardiac risk (RCRI), pulmonary risk, medication management, NPO'},
+    {id:'wound-healing',name:'Wound Healing & Closure',sub:'Phases (inflammatory/proliferative/remodeling), suture types, dehiscence'},
+    {id:'surgical-nutrition',name:'Surgical Nutrition',sub:'TPN vs enteral, refeeding, albumin/prealbumin, nitrogen balance'},
+    {id:'fluid-electrolyte-surg',name:'Fluid & Electrolytes (Surgical)',sub:'Maintenance fluids, third-spacing, resuscitation, acid-base'},
+    {id:'ssi-prevention',name:'SSI Prevention',sub:'Prophylactic antibiotics, wound classification, bundles, SCIP measures'},
+    {id:'postop-complications',name:'Postoperative Complications',sub:'Atelectasis, DVT/PE, ileus, anastomotic leak, surgical fever'}
+  ]},
+  { id:'acute-abdomen', name:'Acute Abdomen', icon:'💥', topics:[
+    {id:'appendicitis',name:'Appendicitis',sub:'Alvarado score, CT, antibiotics vs surgery, complicated, pediatric'},
+    {id:'bowel-obstruction',name:'Bowel Obstruction',sub:'SBO vs LBO, adhesive, volvulus, hernia, conservative vs operative'},
+    {id:'peritonitis',name:'Peritonitis',sub:'Primary (SBP), secondary (perforation), tertiary, source control'},
+    {id:'mesenteric-ischemia-surg',name:'Mesenteric Ischemia (Surgical)',sub:'Acute vs chronic, SMA embolism, venous, NOMI, second-look'},
+    {id:'hernia',name:'Hernias',sub:'Inguinal (direct/indirect), femoral, incisional, incarcerated, strangulated'},
+    {id:'gi-perforation',name:'GI Perforation',sub:'Peptic ulcer, diverticular, foreign body, pneumoperitoneum, Boerhaave'}
+  ]},
+  { id:'hepatobiliary-surg', name:'Hepatobiliary Surgery', icon:'🟢', topics:[
+    {id:'cholecystectomy',name:'Cholecystectomy',sub:'Laparoscopic, critical view of safety, bile duct injury, conversion'},
+    {id:'biliary-surg',name:'Biliary Surgery',sub:'CBD exploration, choledochotomy, biliary-enteric anastomosis, Mirizzi'},
+    {id:'liver-resection',name:'Liver Resection',sub:'Hepatic anatomy (Couinaud), FLR, portal vein embolization, ALPPS'},
+    {id:'pancreatic-surg',name:'Pancreatic Surgery',sub:'Whipple, distal pancreatectomy, necrosectomy, drain management'},
+    {id:'splenectomy',name:'Splenectomy',sub:'Indications (ITP, spherocytosis, trauma), vaccines, OPSI risk'},
+    {id:'bariatric',name:'Bariatric Surgery',sub:'RYGB, sleeve, band, metabolic outcomes, nutritional deficiencies'}
+  ]},
+  { id:'vascular-surg', name:'Vascular Surgery', icon:'❤️', topics:[
+    {id:'aaa-repair',name:'AAA Repair',sub:'EVAR vs open, screening, rupture management, endoleak types'},
+    {id:'carotid-disease',name:'Carotid Disease',sub:'CEA vs CAS, symptomatic vs asymptomatic, NASCET criteria'},
+    {id:'lower-extremity-pad',name:'Lower Extremity PAD',sub:'Fontaine/Rutherford, bypass, angioplasty/stent, amputation'},
+    {id:'venous-disease',name:'Venous Disease',sub:'DVT, chronic venous insufficiency, varicose veins, IVC filter'},
+    {id:'dialysis-access',name:'Dialysis Access',sub:'AVF vs AVG, catheter, steal syndrome, maturation, thrombosis'},
+    {id:'acute-limb-ischemia',name:'Acute Limb Ischemia',sub:'6 Ps, embolectomy, thrombolysis, fasciotomy, reperfusion injury'}
+  ]},
+  { id:'surgical-specialties', name:'Surgical Specialties', icon:'🔬', topics:[
+    {id:'breast-surg',name:'Breast Surgery',sub:'Lumpectomy vs mastectomy, sentinel node, reconstruction, oncoplastic'},
+    {id:'thyroid-surg',name:'Thyroid/Parathyroid Surgery',sub:'Lobectomy, total thyroidectomy, recurrent laryngeal nerve, parathyroidectomy'},
+    {id:'colorectal-surg',name:'Colorectal Surgery',sub:'Colectomy, LAR/APR, ostomy, ERAS, enhanced recovery'},
+    {id:'thoracic-surg',name:'Thoracic Surgery',sub:'Lobectomy, VATS, mediastinal masses, esophagectomy, lung transplant'},
+    {id:'trauma-surg',name:'Trauma Surgery Principles',sub:'Damage control, abbreviated laparotomy, packing, staged procedures'},
+    {id:'surgical-oncology',name:'Surgical Oncology Principles',sub:'Margins, sentinel node, staging laparoscopy, cytoreduction, HIPEC'}
+  ]},
+  { id:'obgyn-foundations', name:'OB/GYN Foundations', icon:'🤰', topics:[
+    {id:'repro-anatomy',name:'Reproductive Anatomy',sub:'Uterus, ovaries, fallopian tubes, pelvic floor, blood supply'},
+    {id:'menstrual-cycle',name:'Menstrual Cycle Physiology',sub:'Follicular/luteal, HPO axis, estrogen/progesterone, ovulation'},
+    {id:'contraception',name:'Contraception',sub:'OCP, IUD, implant, DMPA, barrier, sterilization, emergency'},
+    {id:'infertility',name:'Infertility Evaluation',sub:'Ovulatory, tubal, male factor, AMH, HSG, IVF, IUI'},
+    {id:'gyn-imaging',name:'Gynecologic Imaging',sub:'Transvaginal US, saline infusion, MRI pelvis, CT'},
+    {id:'gyn-procedures',name:'Gynecologic Procedures',sub:'Colposcopy, LEEP, hysteroscopy, laparoscopy, D&C'}
+  ]},
+  { id:'obstetrics', name:'Obstetrics', icon:'👶', topics:[
+    {id:'prenatal-care',name:'Prenatal Care',sub:'Dating, screening labs, genetic screening, anatomy scan, GBS'},
+    {id:'hypertensive-pregnancy',name:'Hypertensive Disorders',sub:'Gestational HTN, preeclampsia, eclampsia, HELLP, magnesium'},
+    {id:'gestational-dm',name:'Gestational Diabetes',sub:'Screening (1h/3h GTT), diet, insulin, fetal surveillance, delivery timing'},
+    {id:'labor-delivery',name:'Labor & Delivery',sub:'Stages of labor, induction, augmentation, monitoring, cesarean indications'},
+    {id:'obstetric-hemorrhage',name:'Obstetric Hemorrhage',sub:'Placenta previa, abruption, uterine atony, DIC, massive transfusion'},
+    {id:'high-risk-ob',name:'High-Risk Obstetrics',sub:'Preterm labor, PPROM, multiple gestation, Rh isoimmunization, IUGR'}
+  ]},
+  { id:'gynecology', name:'Gynecology', icon:'🌺', topics:[
+    {id:'abnormal-bleeding',name:'Abnormal Uterine Bleeding',sub:'PALM-COEIN, endometrial biopsy, hormonal Rx, ablation, myomectomy'},
+    {id:'fibroids',name:'Uterine Fibroids',sub:'Classification, GnRH agonists, UAE, myomectomy, hysterectomy'},
+    {id:'endometriosis',name:'Endometriosis',sub:'Chocolate cysts, pain management, laparoscopy, hormonal suppression'},
+    {id:'ovarian-masses',name:'Ovarian Masses',sub:'Functional vs neoplastic, RMI, tumor markers, torsion, surgery'},
+    {id:'pelvic-floor',name:'Pelvic Floor Disorders',sub:'Prolapse (POP-Q), urinary incontinence (stress/urge/mixed), pessary'},
+    {id:'vulvar-cervical',name:'Vulvar & Cervical Disease',sub:'Cervical cancer screening, CIN, HPV, vulvar dystrophy, lichen'}
+  ]},
+  { id:'gyn-oncology', name:'Gynecologic Oncology', icon:'🔬', topics:[
+    {id:'cervical-cancer',name:'Cervical Cancer',sub:'HPV, staging (FIGO), chemoradiation, radical hysterectomy, screening'},
+    {id:'endometrial-cancer',name:'Endometrial Cancer',sub:'Type I vs II, staging, hysterectomy, adjuvant Rx, Lynch syndrome'},
+    {id:'ovarian-cancer',name:'Ovarian Cancer',sub:'Epithelial, germ cell, sex cord, debulking, platinum/taxane, BRCA'},
+    {id:'gtn',name:'Gestational Trophoblastic Disease',sub:'Molar pregnancy, GTN, hCG monitoring, methotrexate, EMA-CO'},
+    {id:'hereditary-gyn-cancer',name:'Hereditary Cancer Syndromes',sub:'BRCA1/2, Lynch, risk-reducing surgery, genetic counseling'},
+    {id:'gyn-onc-principles',name:'Gyn Oncology Principles',sub:'Surgical staging, sentinel node, HIPEC, targeted therapy, immunotherapy'}
+  ]},
+  { id:'id-foundations', name:'ID Foundations', icon:'🦠', topics:[
+    {id:'micro-principles',name:'Microbiology Principles',sub:'Gram stain, culture, sensitivity, MIC, biofilm, resistance mechanisms'},
+    {id:'abx-principles',name:'Antibiotic Principles',sub:'Empiric vs targeted, bactericidal vs static, PK/PD, de-escalation'},
+    {id:'abx-classes',name:'Antibiotic Classes',sub:'Beta-lactams, fluoroquinolones, macrolides, aminoglycosides, vancomycin'},
+    {id:'stewardship',name:'Antimicrobial Stewardship',sub:'Antibiograms, IV-to-PO, duration optimization, C. diff prevention'},
+    {id:'infection-control',name:'Infection Control',sub:'Contact/droplet/airborne precautions, MDRO, hand hygiene, outbreak'},
+    {id:'fever-workup',name:'Fever Workup',sub:'FUO, neutropenic fever, post-surgical, drug fever, factitious'}
+  ]},
+  { id:'bacterial-infections', name:'Bacterial Infections', icon:'🧫', topics:[
+    {id:'pneumonia-id',name:'Pneumonia (ID)',sub:'CAP, HAP, VAP, atypical, aspiration, CURB-65, empiric Rx'},
+    {id:'uti-id',name:'Urinary Tract Infections',sub:'Uncomplicated, complicated, catheter-associated, pyelonephritis'},
+    {id:'skin-soft-tissue',name:'Skin & Soft Tissue Infections',sub:'Cellulitis, abscess, necrotizing fasciitis, osteomyelitis, MRSA'},
+    {id:'bacteremia-endocarditis',name:'Bacteremia & Endocarditis',sub:'Line-related, Staph aureus, Duke criteria, empiric, duration'},
+    {id:'intraabdominal-id',name:'Intra-abdominal Infections',sub:'SBP, secondary peritonitis, abscess, biliary, C. diff'},
+    {id:'cns-infections',name:'CNS Infections (ID)',sub:'Meningitis (bacterial/viral/fungal/TB), brain abscess, shunt infections'}
+  ]},
+  { id:'special-id', name:'Special ID Topics', icon:'🌍', topics:[
+    {id:'hiv-management',name:'HIV Management',sub:'ART regimens, resistance testing, OI prophylaxis, PrEP/PEP, IRIS'},
+    {id:'fungal-infections',name:'Fungal Infections',sub:'Candida, Aspergillus, Crypto, Histo, Cocci, Blasto, antifungals'},
+    {id:'tb',name:'Tuberculosis',sub:'Latent vs active, RIPE, MDR-TB, IGRA vs TST, contact tracing'},
+    {id:'travel-tropical',name:'Travel & Tropical Medicine',sub:'Malaria, dengue, typhoid, traveler diarrhea, pre-travel counseling'},
+    {id:'transplant-id',name:'Transplant Infections',sub:'Timeline, CMV, BK, PJP, Aspergillus, prophylaxis strategies'},
+    {id:'emerging-id',name:'Emerging Infections',sub:'COVID-19, mpox, avian influenza, antimicrobial resistance, pandemic preparedness'}
+  ]},
+  { id:'geriatrics', name:'Geriatrics', icon:'🧓', topics:[
+    {id:'geriatric-assessment',name:'Comprehensive Geriatric Assessment',sub:'ADLs/IADLs, cognition, fall risk, nutrition, polypharmacy'},
+    {id:'falls-frailty',name:'Falls & Frailty',sub:'Fall risk assessment, Fried criteria, sarcopenia, exercise, prevention'},
+    {id:'delirium',name:'Delirium',sub:'CAM, hypoactive/hyperactive, precipitants, non-pharmacologic, prevention'},
+    {id:'dementia-geri',name:'Dementia Care',sub:'Behavioral symptoms, caregiver support, advance directives, driving'},
+    {id:'polypharmacy',name:'Polypharmacy & Deprescribing',sub:'Beers criteria, STOPP/START, medication reconciliation, cascades'},
+    {id:'elder-transitions',name:'Transitions of Care',sub:'Hospital to home, skilled nursing, hospice eligibility, goals of care'}
+  ]},
+  { id:'palliative', name:'Palliative & End of Life', icon:'🕊️', topics:[
+    {id:'pain-management',name:'Pain Management',sub:'WHO ladder, opioid conversion, neuropathic, adjuvants, PCA'},
+    {id:'symptom-management',name:'Symptom Management',sub:'Dyspnea, nausea, constipation, fatigue, secretions, terminal'},
+    {id:'goals-of-care',name:'Goals of Care Conversations',sub:'SPIKES, prognosis communication, code status, POLST'},
+    {id:'hospice',name:'Hospice & Comfort Care',sub:'Eligibility, services, location, family support, bereavement'},
+    {id:'ethical-eol',name:'Ethical Issues at End of Life',sub:'Withdrawal of care, futility, surrogate decision-making, organ donation'},
+    {id:'prognostication',name:'Prognostication',sub:'PPI, PPS, surprise question, trajectory of illness, uncertainty'}
+  ]},
+  { id:'radiology', name:'Radiology & Diagnostics', icon:'🩻', topics:[
+    {id:'cxr-systematic',name:'Chest X-Ray Systematic Review',sub:'ABCDE approach, silhouette sign, air bronchograms, common patterns'},
+    {id:'ct-principles',name:'CT Imaging Principles',sub:'Contrast phases, Hounsfield units, common findings, radiation'},
+    {id:'mri-basics',name:'MRI Basics',sub:'T1/T2/FLAIR/DWI, contrast, indications, contraindications'},
+    {id:'abdominal-imaging',name:'Abdominal Imaging',sub:'Acute abdomen CT, hepatic lesions, renal masses, pancreatic protocol'},
+    {id:'neuro-imaging-rad',name:'Neuroimaging Patterns',sub:'Stroke (DWI), hemorrhage, MS plaques, tumor, hydrocephalus'},
+    {id:'incidental-findings',name:'Incidental Findings',sub:'Pulmonary nodules (Fleischner), adrenal, renal, thyroid, liver'}
   ]}
 ];
 
@@ -246,11 +818,46 @@ var PHASES = [
   {id:'retest',   label:'Retest',   icon:'\uD83C\uDFAF',desc:'Confirm mastery of weak areas'}
 ];
 
+// ═══════════════════════════════════════
+//  MASTERY ACHIEVEMENT SYSTEM
+// ═══════════════════════════════════════
+var MASTERY_TIERS = {
+  untouched:   {label:'Not Started',  icon:'\u25CB', color:'var(--mx-text-muted)',    min:null, desc:'Topic not yet attempted'},
+  attempted:   {label:'Attempted',    icon:'\u25D4', color:'var(--mx-blue)',           min:0,    desc:'Completed Explore + Probe phases'},
+  practiced:   {label:'Practiced',    icon:'\u25D1', color:'#D97706',                 min:0,    desc:'Completed through Assess phase'},
+  proficient:  {label:'Proficient',   icon:'\u25D5', color:'var(--mx-purple-light)',   min:60,   desc:'Completed all 5 phases, score 60-79'},
+  mastered:    {label:'Mastered',     icon:'\u25CF', color:'var(--mx-success)',         min:80,   desc:'Completed all 5 phases, score 80+'}
+};
+
+// Credit criteria - what earns each tier
+var ACHIEVEMENT_CRITERIA = {
+  attempted: {
+    label: 'Participation Credit',
+    requires: 'Complete Explore and Probe phases (minimum 3 student messages)',
+    earns: 'Demonstrates engagement with the topic and willingness to explore'
+  },
+  practiced: {
+    label: 'Practice Credit',
+    requires: 'Complete through Assess phase (answer at least 2 clinical vignettes)',
+    earns: 'Demonstrates effort to apply knowledge to clinical scenarios'
+  },
+  proficient: {
+    label: 'Proficiency Achievement',
+    requires: 'Complete all 5 phases with Retest mastery score of 60-79',
+    earns: 'Demonstrates solid foundational understanding with identified areas for growth'
+  },
+  mastered: {
+    label: 'Mastery Achievement',
+    requires: 'Complete all 5 phases with Retest mastery score of 80+',
+    earns: 'Demonstrates deep mechanistic understanding and clinical application'
+  }
+};
+
 var WORKER = 'https://coachdx-attending.laurenmfine.workers.dev';
 var STORE_KEY = 'mx-tutor-progress';
 
 var state = {
-  view: 'systems',
+  view: 'systems',  // systems | topics | session | summary | dashboard
   activeSystem: null,
   activeTopic: null,
   currentPhase: 0,
@@ -258,21 +865,85 @@ var state = {
   messages: [],
   isLoading: false,
   sessionScore: null,
-  progress: {}
+  progress: {},       // {topicId: {tier, score, maxPhase, attempts, sessions[], concepts{}}}
+  conceptProfile: {}  // {topicId: {conceptName: {signal, count, lastSeen, resources[]}}}
 };
 
 function loadProgress() {
   try { state.progress = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) { state.progress = {}; }
+  try { state.conceptProfile = JSON.parse(localStorage.getItem(STORE_KEY + '-concepts') || '{}'); } catch(e) { state.conceptProfile = {}; }
 }
 function saveProgress() {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state.progress)); } catch(e) {}
+  try { localStorage.setItem(STORE_KEY + '-concepts', JSON.stringify(state.conceptProfile)); } catch(e) {}
 }
 function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
+function getTopicTier(topicId) {
+  var p = state.progress[topicId];
+  if (!p || !p.maxPhase) return 'untouched';
+  if (p.maxPhase >= 4 && p.score >= 80) return 'mastered';
+  if (p.maxPhase >= 4 && p.score >= 60) return 'proficient';
+  if (p.maxPhase >= 2) return 'practiced';
+  if (p.maxPhase >= 1 && p.studentMsgCount >= 3) return 'attempted';
+  if (p.maxPhase >= 0) return 'attempted';
+  return 'untouched';
+}
+
 function getSysProgress(sys) {
-  var done = 0;
-  sys.topics.forEach(function(t) { if (state.progress[t.id] && state.progress[t.id].completed) done++; });
-  return { done: done, total: sys.topics.length, pct: Math.round(done / sys.topics.length * 100) };
+  var counts = {untouched:0, attempted:0, practiced:0, proficient:0, mastered:0};
+  sys.topics.forEach(function(t) {
+    counts[getTopicTier(t.id)]++;
+  });
+  var done = counts.proficient + counts.mastered;
+  var inProgress = counts.attempted + counts.practiced;
+  return {
+    done: done, inProgress: inProgress, total: sys.topics.length,
+    counts: counts,
+    pct: Math.round((done / sys.topics.length) * 100),
+    engagePct: Math.round(((done + inProgress) / sys.topics.length) * 100)
+  };
+}
+
+function extractConceptSignals(aiText, topicId) {
+  // Parse structured concept signals from AI responses
+  // AI is instructed to emit <!--CONCEPT:name:signal--> markers
+  var signals = [];
+  var re = /<!--CONCEPT:([^:]+):(strong|gap|improving)-->/g;
+  var match;
+  while ((match = re.exec(aiText)) !== null) {
+    signals.push({concept: match[1], signal: match[2]});
+  }
+  // Also detect natural language patterns
+  var strongPatterns = /(?:excellent|strong|correct|great) understanding of \*\*([^*]+)\*\*/gi;
+  while ((match = strongPatterns.exec(aiText)) !== null) {
+    signals.push({concept: match[1].toLowerCase(), signal: 'strong'});
+  }
+  var gapPatterns = /(?:difficulty|struggled|gap|confusion|tricky|review) (?:with |in )?\*\*([^*]+)\*\*/gi;
+  while ((match = gapPatterns.exec(aiText)) !== null) {
+    signals.push({concept: match[1].toLowerCase(), signal: 'gap'});
+  }
+  // Persist signals
+  if (signals.length > 0 && topicId) {
+    if (!state.conceptProfile[topicId]) state.conceptProfile[topicId] = {};
+    signals.forEach(function(s) {
+      var existing = state.conceptProfile[topicId][s.concept];
+      if (!existing) {
+        state.conceptProfile[topicId][s.concept] = {
+          signal: s.signal, count: 1, lastSeen: Date.now(), phase: state.currentPhase
+        };
+      } else {
+        existing.count++;
+        existing.lastSeen = Date.now();
+        existing.phase = state.currentPhase;
+        // Upgrade gap to improving if was gap and now strong
+        if (existing.signal === 'gap' && s.signal === 'strong') existing.signal = 'improving';
+        else existing.signal = s.signal;
+      }
+    });
+    saveProgress();
+  }
+  return signals;
 }
 
 function formatAI(text) {
@@ -296,30 +967,129 @@ function scrollToBottom() {
 // ═══════════════════════════════════════
 //  SYSTEM PROMPT BUILDER
 // ═══════════════════════════════════════
+// Curated open-access reference library for A/I and cross-specialty topics
+var AI_REFERENCES = {
+  guidelines: {
+    anaphylaxis: 'AAAAI/ACAAI 2023 Anaphylaxis Practice Parameter (Annals); WAO Anaphylaxis Guidance 2020',
+    'drug-allergy': 'AAAAI/ACAAI Drug Allergy Practice Parameter 2022; Penicillin de-labeling consensus 2019',
+    'food-allergy': 'NIAID Food Allergy Guidelines 2010 (PMC6604772); AAAAI/ACAAI Food Allergy Parameter 2024',
+    rhinitis: 'ARIA 2020 Update (open access); AAAAI/ACAAI Rhinitis Practice Parameter 2020',
+    sinusitis: 'EPOS 2020 European Position Paper on Rhinosinusitis (open access)',
+    asthma: 'GINA 2024 (ginasthma.org free); NAEPP Expert Panel Report 4; ERS/ATS Severe Asthma 2020',
+    urticaria: 'EAACI/GA2LEN 2022 Urticaria Guideline (open access); AAAAI Urticaria Parameter',
+    angioedema: 'WAO/EAACI HAE Guidelines 2021 (open access)',
+    immunodeficiency: 'ESID Diagnostic Criteria (esid.org); AAAAI PID Practice Parameter 2015',
+    'atopic-dermatitis': 'AAAAI/ACAAI JTF Atopic Dermatitis Guideline 2023',
+    immunotherapy: 'AAAAI/ACAAI AIT Practice Parameter 2011 Update; EAACI AIT Guidelines 2022',
+    biologics: 'GINA Severe Asthma Guide (free); ERS/ATS Severe Asthma (open access)',
+    eosinophilia: 'ASH/WHO Eosinophilic Disorders Classification',
+    mastocytosis: 'WHO 2022 Mast Cell Neoplasms; ECNM/AIM Mastocytosis Consensus',
+    eoe: 'AGA/JTF EoE Guidelines 2022; AGREE EoE Guidelines',
+    vasculitis: 'ACR/VF Vasculitis Guidelines 2021 (open access)',
+    'sjs-ten': 'UK SJS/TEN Management Guidelines (PMC open access)',
+    transplant: 'AST/ISHLT Guidelines',
+    vaccine: 'CDC ACIP Recommendations (cdc.gov/vaccines free)',
+    sepsis: 'Surviving Sepsis Campaign 2021 (open access)',
+    autoimmunity: 'ACR SLE Guidelines 2020; EULAR Recommendations',
+    hiv: 'NIH HIV Treatment Guidelines (aidsinfo.nih.gov free)',
+    general: 'Janeway Immunobiology selected chapters (NCBI Bookshelf free)'
+  },
+  statpearls: {
+    anaphylaxis:'NBK482124, NBK532917', 'drug-allergy':'NBK532272, NBK459320, NBK459322',
+    'food-allergy':'NBK482187, NBK459158, NBK557643', rhinitis:'NBK538186, NBK547704',
+    sinusitis:'NBK441934, NBK532769', asthma:'NBK430901, NBK542191, NBK482165',
+    urticaria:'NBK538195, NBK535383, NBK537579', angioedema:'NBK538489, NBK482267',
+    immunodeficiency:'NBK549800, NBK539891, NBK459217, NBK507850',
+    'atopic-dermatitis':'NBK448071, NBK532866', immunotherapy:'NBK535367, NBK518978',
+    biologics:'NBK459329, NBK557592', eosinophilia:'NBK560882, NBK557608',
+    mastocytosis:'NBK536985, NBK559128', autoimmunity:'NBK459437, NBK535403',
+    transplant:'NBK532532, NBK459424', hiv:'NBK534827, NBK557382',
+    'sjs-ten':'NBK459323, NBK499866', eoe:'NBK557643', vasculitis:'NBK459259',
+    sepsis:'NBK537054', vaccine:'NBK236597', general:'NBK545237, NBK482212'
+  }
+};
+var TOPIC_REF_MAP = {
+  'gell-coombs':'general','innate-adaptive':'general','ige-pathway':'general',
+  'allergy-testing':'general','immune-tolerance':'general','mucosal-immunology':'general',
+  'anaphylaxis':'anaphylaxis','epinephrine-pharm':'anaphylaxis','periop-anaphylaxis':'anaphylaxis',
+  'exercise-anaphylaxis':'anaphylaxis','idiopathic-anaphylaxis':'anaphylaxis','acute-urticaria':'urticaria',
+  'drug-classify':'drug-allergy','penicillin-delabel':'drug-allergy','nsaid-reactions':'drug-allergy',
+  'sjs-ten-dress':'sjs-ten','drug-desensitization':'drug-allergy','contrast-vaccine':'drug-allergy',
+  'food-ige':'food-allergy','fpies':'food-allergy','eoe':'eoe','eosinophilic-gi':'eoe',
+  'food-allergy-tx':'food-allergy','oral-allergy':'food-allergy',
+  'allergic-rhinitis':'rhinitis','nonallergic-rhinitis':'rhinitis','crs-polyps':'sinusitis',
+  'crs-no-polyps':'sinusitis','aerd':'drug-allergy','allergen-immunotherapy':'immunotherapy',
+  'asthma-phenotypes':'asthma','asthma-biologics':'biologics','severe-asthma':'asthma',
+  'occupational-asthma':'asthma','abpa':'asthma','hp':'asthma',
+  'chronic-urticaria':'urticaria','inducible-urticaria':'urticaria','hae':'angioedema',
+  'ace-angioedema':'angioedema','urticarial-vasculitis':'vasculitis','mast-cell-disorders':'mastocytosis',
+  'pid-overview':'immunodeficiency','cvid':'immunodeficiency','scid':'immunodeficiency',
+  'complement-deficiency':'immunodeficiency','secondary-immunodef':'immunodeficiency','phagocyte-defects':'immunodeficiency',
+  'autoimmune-mech':'autoimmunity','sle-immuno':'autoimmunity','vasculitis-ai':'vasculitis',
+  'autoimmune-cytopenias':'autoimmunity','autoinflammatory':'autoimmunity','transplant-immuno':'transplant',
+  'atopic-dermatitis':'atopic-dermatitis','contact-dermatitis':'atopic-dermatitis','drug-eruptions':'sjs-ten',
+  'erythema-multiforme':'sjs-ten','cutaneous-mastocytosis':'mastocytosis','immune-skin':'autoimmunity',
+  'eosinophilia':'eosinophilia','chemo-hypersensitivity':'drug-allergy','transfusion-immune':'general',
+  'systemic-mastocytosis':'mastocytosis','checkpoint-toxicity':'autoimmunity','car-t-toxicity':'autoimmunity',
+  'hiv-immunology':'hiv','vaccine-immunology':'vaccine','abx-stewardship':'drug-allergy',
+  'fungal-allergy':'asthma','parasites-eosinophilia':'eosinophilia','sepsis-immune':'sepsis',
+  'atopic-march':'atopic-dermatitis','milk-allergy-infant':'food-allergy','peds-immunodeficiency':'immunodeficiency',
+  'early-allergen-intro':'food-allergy','peds-asthma-ai':'asthma','peds-drug-allergy':'drug-allergy',
+  'acs':'general','heart-failure':'general','arrhythmias':'general','valvular':'general',
+  'shock':'general','vascular':'general','copd':'asthma','pneumonia':'general',
+  'pe':'general','ards':'general','pleural':'general','gi-bleed':'general',
+  'acute-abdomen':'general','liver':'general','pancreatitis':'general','ibd':'general',
+  'biliary':'general','stroke':'general','seizure':'general','meningitis':'general',
+  'tbi':'general','neuro-degen':'general','neuro-musc':'general','aki':'general',
+  'ckd':'general','electrolytes':'general','acid-base':'general','glomerular':'general',
+  'fluid':'general','fractures':'general','arthritis':'general','septic-joint':'general',
+  'back-pain':'general','soft-tissue':'general','bone-metab':'general','dka':'general',
+  'thyroid':'general','adrenal':'general','pituitary':'general','calcium':'general',
+  'diabetes-chronic':'general','anemia':'general','coagulopathy':'general','thrombosis':'general',
+  'transfusion':'general','leukemia':'general','sickle-cell':'general'
+};
+function getTopicRefs(tid) {
+  var SYS_REF = {'cardiac-foundations':'acs','acs-vascular':'acs','heart-failure-cmp':'heart-failure','arrhythmia-conduction':'arrhythmia','valvular-structural':'valvular','pulm-foundations':'copd','obstructive-lung':'copd','restrictive-ild':'ild','pulm-vascular':'pe','critical-pulm':'ards','gi-foundations':'gerd','upper-gi':'gerd','lower-gi':'ibd','hepatology':'liver','biliary-pancreas':'pancreatitis','gi-ai-crossover':'eoe','neuro-foundations':'stroke','cerebrovascular':'stroke','seizure-epilepsy':'epilepsy','neuro-infection-inflam':'meningitis','neurodegen-movement':'dementia','neuromuscular-tbi':'dementia','renal-foundations':'ckd','aki-sys':'aki','ckd-sys':'ckd','glomerular-sys':'gn','electrolytes-acidbase':'electrolyte','msk-foundations':'ra','inflammatory-arthritis':'ra','ctd-vasculitis-msk':'sle','mechanical-structural':'osteoporosis','metabolic-bone':'osteoporosis','endo-foundations':'diabetes','diabetes-metabolic':'diabetes','thyroid-sys':'thyroid','adrenal-pituitary':'adrenal','calcium-repro':'calcium','heme-foundations':'anemia','anemia-rbc':'anemia','coag-thrombosis':'vte','wbc-lymphoprolif':'lymphoma','transfusion-special':'anemia','em-foundations':'acls','em-cardiovascular':'acs','em-trauma':'trauma','em-toxicology':'toxicology','em-critical':'sepsis','psych-foundations':'depression','mood-anxiety':'depression','psychosis-thought':'psychosis','substance-use':'substance','psych-special':'depression','surg-foundations':'preop','acute-abdomen':'acute_abdomen','hepatobiliary-surg':'pancreatitis','vascular-surg':'pad','surgical-specialties':'gyn_onc','obgyn-foundations':'contraception','obstetrics':'prenatal','gynecology':'gyn_onc','gyn-oncology':'gyn_onc','id-foundations':'pneumonia_id','bacterial-infections':'pneumonia_id','special-id':'hiv','geriatrics':'geriatrics','palliative':'palliative','radiology':'radiology','ai-foundations':'general','anaphylaxis-acute':'anaphylaxis','drug-hypersensitivity':'drug-allergy','food-allergy-sys':'food-allergy','rhinitis-sinusitis':'rhinitis','asthma-lower':'asthma','urticaria-angioedema':'urticaria','immunodeficiency-sys':'immunodeficiency','autoimmune-sys':'autoimmunity','derm-ai':'atopic-dermatitis','heme-ai':'eosinophilia','id-ai':'hiv','peds-ai':'food-allergy'};
+  var cat = TOPIC_REF_MAP[tid];
+  if (!cat) { SYSTEMS.forEach(function(sys){sys.topics.forEach(function(t){if(t.id===tid&&SYS_REF[sys.id])cat=SYS_REF[sys.id];});}); }
+  cat = cat || 'general';
+  var r = '';
+  if (AI_REFERENCES.guidelines[cat]) r += 'GUIDELINES: ' + AI_REFERENCES.guidelines[cat] + '\n';
+  if (AI_REFERENCES.statpearls[cat]) r += 'STATPEARLS (NCBI Bookshelf, free): ' + AI_REFERENCES.statpearls[cat] + '\n';
+  r += 'OPEN-ACCESS JOURNALS: JACI:Global, WAO Journal, Frontiers in Immunology, AACI (BMC), Cureus, PMC free full-text\n';
+  r += 'EDUCATIONAL: Khan Academy Medicine, OpenStax A&P, Pathoma YouTube, Osmosis (free videos), Ninja Nerd lectures';
+  return r;
+}
+
 function buildSystemPrompt(system, topic, phase) {
   var instructions = {
-    explore: 'You are in the EXPLORE phase. Start by asking the student what they already know about this topic. Ask 1-2 open-ended questions to gauge baseline understanding. Be warm and encouraging. Do NOT lecture—only ask questions. If they know nothing, gently scaffold with a leading question about the most fundamental concept.',
-    probe: 'You are in the PROBE phase. Based on what the student shared, dig deeper into the underlying mechanisms. Ask about pathophysiology, cellular/molecular mechanisms, upstream causes, and downstream consequences. Use Socratic questioning—ask "why" and "how" questions. Challenge assumptions. If the student is wrong, do not correct directly; ask a question that reveals the gap. Keep questions focused on ONE concept at a time.',
-    assess: 'You are in the ASSESS phase. Present 2-3 clinical vignette-style questions one at a time that test mechanistic understanding (not just recall). After the student answers, evaluate their reasoning. Be specific about what they got right and what needs work. Track which sub-concepts are strong vs weak. At the end, provide a brief summary of strengths and gaps.',
-    resources: 'You are in the RESOURCES phase. Based on the gaps identified, recommend 3-5 specific resources from ONLY these open-access sources: StatPearls (NCBI Bookshelf), PubMed Central (free full-text articles), Khan Academy Medicine, OpenStax Anatomy & Physiology, and Pathoma (YouTube free lectures). For each resource, provide the specific article/chapter title and explain exactly what section to focus on and why.',
-    retest: 'You are in the RETEST phase. Present 1-2 targeted questions that specifically address the WEAK AREAS identified in the Assess phase. These should be different scenarios testing the same concepts. After the student answers, evaluate and provide a final mastery score (0-100). If the student scores well, congratulate them. If gaps remain, note specific areas for future review. End with encouragement.'
-  };
+    explore: 'You are in the EXPLORE phase. Start by asking what the student already knows about this topic. Ask 1-2 open-ended questions. Be warm and encouraging. Do NOT lecture. If they know nothing, scaffold with a leading question about the most fundamental concept. If the student seems very new, gently mention ONE specific resource: "If you want a head start, [specific StatPearls article or guideline] has a clear overview. But let us keep exploring together first."',
+    probe: 'You are in the PROBE phase. Dig deeper into mechanisms using Socratic questioning. Ask about pathophysiology, cellular/molecular mechanisms, upstream causes, downstream consequences. ONE concept at a time. RESOURCE COACHING: When you identify a specific knowledge gap, weave in a targeted resource naturally: "That is a really common point of confusion. There is an excellent free resource that explains this beautifully - [specific article with NBK number or guideline name and year]. The section on [specific heading or table] is especially clear. Take a look when you get a chance, and we can dig into it together when you come back." Then CONTINUE the Socratic dialogue. Offer ONE resource at the moment of need - do NOT dump a list.',
+    assess: 'You are in the ASSESS phase. Present 2-3 clinical vignette-style questions ONE at a time, testing mechanistic understanding. Use board-style scenarios grounded in current practice parameters. Evaluate reasoning carefully. Track which sub-concepts are STRONG vs WEAK. After each vignette, if the student struggles, note a targeted resource: "This connects to [specific guideline section or StatPearls article] - worth reviewing." After all vignettes, summarize strengths and specific gaps to set up the Resources phase.',
+    resources: 'You are in the RESOURCES phase. This is your most important coaching moment. Create a PERSONALIZED STUDY PLAN based on gaps from Assess. For EACH gap: (1) Name it clearly: "You had some difficulty with [specific concept]." (2) Assign ONE specific resource with precise location: "Read [exact title] on StatPearls (ncbi.nlm.nih.gov/books/NBK######), specifically the section on [exact heading]." OR "Review the [exact guideline name and year], the section on [specific recommendation]." OR "Watch [specific Khan Academy or Pathoma video] - it walks through this mechanism visually." (3) Give a STUDY PROMPT - a question to think about while reading: "While you review, think about: Why does [mechanism] lead to [clinical finding]?" (4) End with a RETURN HOOK: "Take your time with these - deep understanding beats speed. When you are ready, advance to Retest and I will have new clinical scenarios ready to test whether these concepts clicked. You have got this!" Prioritize: practice parameters for clinical gaps, StatPearls for mechanism gaps, Khan Academy/Pathoma for foundational gaps.',
+    retest: 'You are in the RETEST phase. Start warmly: "Welcome back! Let us see how your understanding has deepened." Present 1-2 targeted questions addressing WEAK AREAS from earlier. Use DIFFERENT clinical scenarios but testing the SAME mechanisms. If improved, celebrate: "Your understanding of [concept] is much stronger - that resource clearly helped!" If gaps persist, redirect gently: "This is still tricky. The [specific section] of [resource] has a great table for this. No rush - come back anytime." Provide mastery score (0-100). For >80: "Excellent - you own this topic. Consider [related advanced topic] next." For 60-80: "Solid foundation. Revisit [weak area] with [resource]." For <60: "Building blocks are forming. Start with [foundational resource] and take your time."'
+  }
+  var topicRefs = getTopicRefs(topic.id);
+  // Inject prior session context if returning learner
+  var priorContext = '';
+  var topicProgress = state.progress[topic.id];
+  if (topicProgress && topicProgress.attempts > 0) {
+    priorContext = '\n\nRETURNING LEARNER CONTEXT:\n- Previous attempts: ' + (topicProgress.attempts || 0) + '\n- Best score: ' + (topicProgress.score || 'none') + '/100\n- Highest phase reached: ' + PHASES[Math.min(topicProgress.maxPhase || 0, 4)].label;
+    if (topicProgress.concepts && Object.keys(topicProgress.concepts).length > 0) {
+      var gaps = []; var strengths = [];
+      Object.keys(topicProgress.concepts).forEach(function(k) {
+        if (topicProgress.concepts[k].signal === 'gap') gaps.push(k);
+        else if (topicProgress.concepts[k].signal === 'strong') strengths.push(k);
+      });
+      if (gaps.length) priorContext += '\n- Known gaps from prior session: ' + gaps.join(', ');
+      if (strengths.length) priorContext += '\n- Prior strengths: ' + strengths.join(', ');
+      priorContext += '\nAdjust your approach: skip concepts they have mastered, focus on known gaps.';
+    }
+  }
 
-  return 'You are MechanismDx, an AI pathophysiology tutor created by Dr. Lauren Fine for the ReasonDx clinical reasoning platform.\n\n' +
-    'CURRENT SESSION:\n- System: ' + system.name + '\n- Topic: ' + topic.name + ' (' + topic.sub + ')\n- Phase: ' + PHASES[phase].label + '\n\n' +
-    'PHASE INSTRUCTIONS:\n' + instructions[PHASES[phase].id] + '\n\n' +
-    'CORE RULES:\n' +
-    '1. NEVER lecture unprompted. Always use Socratic questioning.\n' +
-    '2. Ask ONE question at a time. Wait for the student to respond.\n' +
-    '3. If the student says "I don\'t know," provide a scaffolding hint, NOT the answer.\n' +
-    '4. Connect mechanisms to clinical presentations when possible.\n' +
-    '5. Use precise medical terminology but explain jargon when first introduced.\n' +
-    '6. Keep responses concise (under 150 words unless explaining assessment results).\n' +
-    '7. Only recommend open-access sources: StatPearls, PubMed Central, Khan Academy Medicine, OpenStax, Pathoma YouTube.\n' +
-    '8. Use **bold** for key terms and bullet points for lists.\n' +
-    '9. Be encouraging and supportive.\n' +
-    '10. If the student asks for answers directly, redirect them to think mechanistically.';
+  return 'You are MechanismDx, an AI pathophysiology tutor by Dr. Lauren Fine for ReasonDx.\n\nSESSION:\n- System: ' + system.name + '\n- Topic: ' + topic.name + ' (' + topic.sub + ')\n- Phase: ' + PHASES[phase].label + '\n\nCURATED REFERENCES:\n' + topicRefs + '\n\nPHASE INSTRUCTIONS:\n' + instructions[PHASES[phase].id] + '\n\nCORE RULES:\n1. NEVER lecture unprompted. Socratic questioning only.\n2. ONE question at a time.\n3. Scaffold hints, not answers.\n4. Connect mechanisms to clinical presentations per practice parameters.\n5. Precise terminology, explain jargon.\n6. Concise (<150 words unless assessment or resource coaching).\n7. When citing resources, ALWAYS give specifics: exact StatPearls NBK number, exact guideline name + year, exact section/table. Never just say 'check StatPearls' - say 'read StatPearls Anaphylaxis (NBK482124), the Pathophysiology section.'\n8. **Bold** key terms.\n9. Encouraging and supportive - frame gaps as learning opportunities.\n10. Redirect answer-seekers to think mechanistically.\n11. Emphasize the WHY chain: mechanism -> symptom -> test -> treatment.\n12. Realistic vignettes per current guidelines.\n13. RESOURCE COACHING: Recommend open-access resources at the moment of need. Frame as: 'Here is a great resource for this - [specific]. Review it and come back, I will have a new question ready.'\n14. All resources MUST be genuinely open-access (free). StatPearls, PMC, KDIGO, GINA, GOLD, AHA open-access, WHO, CDC, NCCN (free registration).\n15. CONCEPT TRACKING: After your visible response, append hidden concept markers for any concept you identified as strong or weak. Use this exact format on its own line: <!--CONCEPT:concept-name:signal--> where signal is strong, gap, or improving. Example: <!--CONCEPT:ige-crosslinking:gap--> <!--CONCEPT:mast-cell-degranulation:strong-->. This data is used to track the learner mastery profile. Always emit at least one marker per Probe/Assess/Retest response.' + priorContext;
 }
+
 
 // ═══════════════════════════════════════
 //  AI COMMUNICATION
@@ -351,7 +1121,11 @@ async function sendToAI(userMessage) {
       aiText = aiText.content.map(function(b) { return b.text || ''; }).join('\n');
     }
     state.convHistory.push({ role: 'assistant', content: aiText });
-    state.messages.push({ role: 'tutor', content: aiText });
+    // Extract concept mastery signals from AI response
+    extractConceptSignals(aiText, state.activeTopic);
+    // Strip hidden concept markers before displaying
+    var displayText = aiText.replace(/<!--CONCEPT:[^>]+-->/g, '');
+    state.messages.push({ role: 'tutor', content: displayText });
   } catch (err) {
     console.error('AI error:', err);
     state.messages.push({
@@ -397,9 +1171,17 @@ function renderSystems() {
   h += '<p class="mx-hero-sub">Master disease mechanisms through Socratic AI tutoring. Choose a system, pick a topic, and learn through 5 structured phases.</p>';
   h += '<div class="mx-hero-stats">';
   h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">' + SYSTEMS.length + '</div><div class="mx-hero-stat-label">Systems</div></div>';
+  var masteredT = 0; var proficientT = 0; var inProgressT = 0;
+  SYSTEMS.forEach(function(sys) {
+    var p = getSysProgress(sys);
+    masteredT += p.counts.mastered;
+    proficientT += p.counts.proficient;
+    inProgressT += p.counts.attempted + p.counts.practiced;
+  });
   h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">' + totalT + '</div><div class="mx-hero-stat-label">Topics</div></div>';
-  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">' + doneT + '</div><div class="mx-hero-stat-label">Completed</div></div>';
-  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">5</div><div class="mx-hero-stat-label">Phases</div></div>';
+  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num" style="color:var(--mx-success)">' + masteredT + '</div><div class="mx-hero-stat-label">Mastered</div></div>';
+  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num" style="color:var(--mx-purple-light)">' + proficientT + '</div><div class="mx-hero-stat-label">Proficient</div></div>';
+  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num" style="color:var(--mx-blue)">' + inProgressT + '</div><div class="mx-hero-stat-label">In Progress</div></div>';
   h += '</div></div></div>';
   h += '<div class="mx-systems"><div style="max-width:1100px;margin:0 auto">';
   h += '<div class="mx-systems-title">Choose a Body System</div><div class="mx-grid">';
@@ -408,8 +1190,18 @@ function renderSystems() {
     h += '<div class="mx-system-card" onclick="MX.selectSystem(\'' + sys.id + '\')">';
     h += '<div class="mx-system-icon">' + esc(sys.icon) + '</div>';
     h += '<div class="mx-system-name">' + esc(sys.name) + '</div>';
-    h += '<div class="mx-system-count">' + sys.topics.length + ' topics &middot; ' + p.done + ' complete</div>';
-    h += '<div class="mx-system-progress"><div class="mx-system-progress-fill" style="width:' + p.pct + '%"></div></div></div>';
+    var tierLabel = p.done > 0 ? p.done + ' achieved' : (p.inProgress > 0 ? p.inProgress + ' in progress' : 'Not started');
+    h += '<div class="mx-system-count">' + sys.topics.length + ' topics \u00B7 ' + tierLabel + '</div>';
+    h += '<div class="mx-system-progress" style="display:flex;height:3px;background:var(--mx-border);border-radius:2px;overflow:hidden">';
+    var mPct = Math.round(p.counts.mastered / sys.topics.length * 100);
+    var pPct = Math.round(p.counts.proficient / sys.topics.length * 100);
+    var prPct = Math.round(p.counts.practiced / sys.topics.length * 100);
+    var aPct = Math.round(p.counts.attempted / sys.topics.length * 100);
+    if (mPct) h += '<div style="width:' + mPct + '%;background:var(--mx-success)"></div>';
+    if (pPct) h += '<div style="width:' + pPct + '%;background:var(--mx-purple-light)"></div>';
+    if (prPct) h += '<div style="width:' + prPct + '%;background:#D97706"></div>';
+    if (aPct) h += '<div style="width:' + aPct + '%;background:var(--mx-blue)"></div>';
+    h += '</div></div>';
   });
   h += '</div></div></div>';
   return h;
@@ -425,14 +1217,37 @@ function renderTopics() {
   h += '<div class="mx-topics-panel"><div class="mx-topics-header">';
   h += '<h2>' + esc(sys.icon) + ' ' + esc(sys.name) + '</h2>';
   h += '<button class="mx-back-btn" onclick="MX.backToSystems()">&larr; All Systems</button></div>';
+  // Achievement criteria legend
+  h += '<div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 16px;padding:10px 14px;background:var(--mx-bg-card);border:1px solid var(--mx-border);border-radius:8px;font-size:11px">';
+  Object.keys(MASTERY_TIERS).forEach(function(k) {
+    var t = MASTERY_TIERS[k];
+    h += '<div style="display:flex;align-items:center;gap:4px" title="' + t.desc + '">';
+    h += '<span style="color:' + t.color + '">' + t.icon + '</span>';
+    h += '<span style="color:var(--mx-text-muted)">' + t.label + '</span></div>';
+  });
+  h += '</div>';
   h += '<div class="mx-topic-list">';
   sys.topics.forEach(function(t) {
-    var pr = state.progress[t.id]; var isDone = pr && pr.completed;
-    h += '<div class="mx-topic-card' + (isDone ? ' done' : '') + '" onclick="MX.startSession(\'' + t.id + '\')">';
-    h += '<div class="mx-topic-check">' + (isDone ? '\u2713' : '') + '</div>';
+    var tier = getTopicTier(t.id);
+    var tierDef = MASTERY_TIERS[tier];
+    var pr = state.progress[t.id];
+    var tierClass = tier === 'mastered' ? ' mastered' : (tier === 'proficient' ? ' proficient' : (tier !== 'untouched' ? ' in-progress' : ''));
+    h += '<div class="mx-topic-card' + tierClass + '" onclick="MX.startSession(\'' + t.id + '\')">';
+    h += '<div class="mx-topic-tier" style="color:' + tierDef.color + ';font-size:16px" title="' + tierDef.label + ': ' + tierDef.desc + '">' + tierDef.icon + '</div>';
     h += '<div class="mx-topic-info"><div class="mx-topic-name">' + esc(t.name) + '</div>';
     h += '<div class="mx-topic-meta">' + esc(t.sub) + '</div>';
-    if (pr && pr.score !== undefined) h += '<div class="mx-topic-meta" style="color:var(--mx-purple-light);margin-top:2px">Score: ' + pr.score + '/100</div>';
+    if (tier !== 'untouched') {
+      h += '<div class="mx-topic-status" style="margin-top:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">';
+      h += '<span class="mx-tier-badge" style="background:' + tierDef.color + '22;color:' + tierDef.color + ';padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600">' + tierDef.label + '</span>';
+      if (pr && pr.score) h += '<span style="color:var(--mx-text-muted);font-size:11px">Best: ' + pr.score + '/100</span>';
+      if (pr && pr.attempts > 1) h += '<span style="color:var(--mx-text-muted);font-size:11px">' + pr.attempts + ' sessions</span>';
+      // Show concept gap count if any
+      if (pr && pr.concepts) {
+        var gapCount = Object.keys(pr.concepts).filter(function(k) { return pr.concepts[k].signal === 'gap'; }).length;
+        if (gapCount > 0) h += '<span style="color:var(--mx-danger);font-size:11px">' + gapCount + ' gap' + (gapCount > 1 ? 's' : '') + '</span>';
+      }
+      h += '</div>';
+    }
     h += '</div><div style="color:var(--mx-text-muted);font-size:14px">&rarr;</div></div>';
   });
   h += '</div></div>';
@@ -472,7 +1287,7 @@ function renderSession() {
   });
   if (state.isLoading) {
     h += '<div class="mx-typing">';
-    h += '<div class="mx-avatar" style="background:linear-gradient(135deg,var(--mx-purple-dark),var(--mx-purple));color:#fff;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">Mx</div>';
+    h += '<div class="mx-avatar" style="background:linear-gradient(135deg,#1B4F72,#2874A6);color:#fff;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">Mx</div>';
     h += '<div class="mx-typing-dots"><div class="mx-typing-dot"></div><div class="mx-typing-dot"></div><div class="mx-typing-dot"></div></div></div>';
   }
   h += '</div>';
@@ -504,12 +1319,76 @@ function renderSummary() {
   var topic = null;
   if (sys) sys.topics.forEach(function(t) { if (t.id === state.activeTopic) topic = t; });
   var score = state.sessionScore || 75;
+  var tier = getTopicTier(state.activeTopic);
+  var tierDef = MASTERY_TIERS[tier];
+  var pr = state.progress[state.activeTopic] || {};
+  var criteria = ACHIEVEMENT_CRITERIA[tier];
 
   var h = '<div class="mx-session" id="main-content"><div class="mx-summary">';
-  h += '<div class="mx-summary-icon">\uD83C\uDFAF</div>';
+  h += '<div class="mx-summary-icon" style="font-size:48px">' + tierDef.icon + '</div>';
   h += '<h3>Session Complete</h3>';
-  h += '<div class="mx-summary-score">' + score + '</div>';
+  h += '<div class="mx-summary-score" style="color:' + tierDef.color + '">' + score + '</div>';
   h += '<div class="mx-summary-detail">You completed <strong>' + esc(topic ? topic.name : 'this topic') + '</strong> in ' + esc(sys ? sys.name : '') + '.</div>';
+
+  // Achievement tier earned
+  h += '<div style="margin:20px auto;max-width:420px;padding:16px 20px;background:var(--mx-bg-card);border:1px solid ' + tierDef.color + '44;border-radius:12px">';
+  h += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+  h += '<span style="font-size:24px;color:' + tierDef.color + '">' + tierDef.icon + '</span>';
+  h += '<span style="font-size:16px;font-weight:700;color:' + tierDef.color + '">' + tierDef.label + '</span>';
+  if (criteria) h += '<span style="font-size:11px;color:var(--mx-text-muted);margin-left:auto">' + esc(criteria.label) + '</span>';
+  h += '</div>';
+  if (criteria) h += '<div style="font-size:12px;color:var(--mx-text-secondary);line-height:1.5">' + esc(criteria.earns) + '</div>';
+  h += '</div>';
+
+  // Concept breakdown if available
+  if (pr.concepts && Object.keys(pr.concepts).length > 0) {
+    var strengths = []; var gaps = []; var improving = [];
+    Object.keys(pr.concepts).forEach(function(k) {
+      if (pr.concepts[k].signal === 'strong') strengths.push(k);
+      else if (pr.concepts[k].signal === 'gap') gaps.push(k);
+      else if (pr.concepts[k].signal === 'improving') improving.push(k);
+    });
+    h += '<div style="margin:16px auto;max-width:420px;text-align:left">';
+    if (strengths.length) {
+      h += '<div style="margin-bottom:8px"><span style="color:var(--mx-success);font-weight:600;font-size:12px">\u2713 Strong:</span> ';
+      h += '<span style="font-size:12px;color:var(--mx-text-secondary)">' + strengths.map(esc).join(', ') + '</span></div>';
+    }
+    if (improving.length) {
+      h += '<div style="margin-bottom:8px"><span style="color:#D97706;font-weight:600;font-size:12px">\u2191 Improving:</span> ';
+      h += '<span style="font-size:12px;color:var(--mx-text-secondary)">' + improving.map(esc).join(', ') + '</span></div>';
+    }
+    if (gaps.length) {
+      h += '<div style="margin-bottom:8px"><span style="color:var(--mx-danger);font-weight:600;font-size:12px">\u25CB Needs work:</span> ';
+      h += '<span style="font-size:12px;color:var(--mx-text-secondary)">' + gaps.map(esc).join(', ') + '</span></div>';
+    }
+    h += '</div>';
+  }
+
+  // Next tier guidance
+  var nextTierMsg = '';
+  if (tier === 'attempted') nextTierMsg = 'Complete the Assess phase to earn <strong>Practiced</strong> credit.';
+  else if (tier === 'practiced') nextTierMsg = 'Complete all 5 phases and score 60+ to earn <strong>Proficient</strong>.';
+  else if (tier === 'proficient') nextTierMsg = 'Score 80+ on Retest to earn <strong>Mastery</strong>.';
+  else if (tier === 'mastered') nextTierMsg = 'Topic mastered! Consider exploring related advanced topics.';
+  if (nextTierMsg) {
+    h += '<div style="margin:12px auto;max-width:420px;padding:10px 16px;background:var(--mx-bg-elevated);border-radius:8px;font-size:12px;color:var(--mx-text-secondary);text-align:center">' + nextTierMsg + '</div>';
+  }
+
+  // Session history
+  if (pr.sessions && pr.sessions.length > 1) {
+    h += '<div style="margin:16px auto;max-width:420px;text-align:left">';
+    h += '<div style="font-size:12px;font-weight:600;color:var(--mx-text-muted);margin-bottom:6px">SESSION HISTORY</div>';
+    pr.sessions.slice(-5).forEach(function(s) {
+      var d = new Date(s.date);
+      var phaseName = PHASES[Math.min(s.phase, 4)].label;
+      h += '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mx-text-secondary);padding:3px 0">';
+      h += '<span>' + d.toLocaleDateString() + '</span>';
+      h += '<span>' + phaseName + ' phase</span>';
+      h += '<span>' + s.score + '/100</span></div>';
+    });
+    h += '</div>';
+  }
+
   h += '<div class="mx-summary-actions">';
   h += '<button class="mx-btn mx-btn-primary" onclick="MX.backToTopics()">&larr; More ' + esc(sys ? sys.name : '') + ' Topics</button>';
   h += '<button class="mx-btn mx-btn-ghost" onclick="MX.retrySession()">\u21BA Retry</button>';
@@ -616,6 +1495,17 @@ window.MX = {
   advancePhase: function() {
     if (state.currentPhase >= PHASES.length - 1) return;
     state.currentPhase++;
+    // Save phase progress immediately (for partial credit)
+    var prev = state.progress[state.activeTopic] || {};
+    var studentMsgCount = state.messages.filter(function(m) { return m.role === 'student'; }).length;
+    state.progress[state.activeTopic] = Object.assign({}, prev, {
+      maxPhase: Math.max(state.currentPhase, prev.maxPhase || 0),
+      studentMsgCount: Math.max(studentMsgCount, prev.studentMsgCount || 0),
+      timestamp: Date.now(),
+      firstAttempt: prev.firstAttempt || Date.now(),
+      concepts: state.conceptProfile[state.activeTopic] || prev.concepts || {}
+    });
+    saveProgress();
     state.messages.push({
       role: 'tutor',
       content: '**' + PHASES[state.currentPhase].icon + ' ' + PHASES[state.currentPhase].label + ' Phase** \u2014 ' + PHASES[state.currentPhase].desc
@@ -645,11 +1535,27 @@ window.MX = {
     var score = scoreMatch ? parseInt(scoreMatch[1] || scoreMatch[2] || scoreMatch[3]) : 75;
     score = Math.min(100, Math.max(0, score));
 
+    var studentMsgCount = state.messages.filter(function(m) { return m.role === 'student'; }).length;
+    var prev = state.progress[state.activeTopic] || {};
+    var bestScore = Math.max(score, prev.score || 0);
+
     state.sessionScore = score;
     state.progress[state.activeTopic] = {
-      completed: score >= 50,
-      score: score,
-      timestamp: Date.now()
+      completed: bestScore >= 50,
+      score: bestScore,
+      latestScore: score,
+      maxPhase: Math.max(state.currentPhase, prev.maxPhase || 0),
+      studentMsgCount: Math.max(studentMsgCount, prev.studentMsgCount || 0),
+      attempts: (prev.attempts || 0) + 1,
+      timestamp: Date.now(),
+      firstAttempt: prev.firstAttempt || Date.now(),
+      sessions: (prev.sessions || []).concat([{
+        date: Date.now(),
+        score: score,
+        phase: state.currentPhase,
+        messages: studentMsgCount
+      }]).slice(-10), // Keep last 10 sessions
+      concepts: state.conceptProfile[state.activeTopic] || prev.concepts || {}
     };
     saveProgress();
     state.view = 'summary';
@@ -662,9 +1568,28 @@ window.MX = {
   },
 
   exitSession: function() {
-    if (state.messages.length > 2) {
-      if (!confirm('End this tutoring session? Progress will not be saved.')) return;
+    // Save partial progress before exiting
+    var prev = state.progress[state.activeTopic] || {};
+    var studentMsgCount = state.messages.filter(function(m) { return m.role === 'student'; }).length;
+    if (studentMsgCount > 0) {
+      state.progress[state.activeTopic] = Object.assign({}, prev, {
+        maxPhase: Math.max(state.currentPhase, prev.maxPhase || 0),
+        studentMsgCount: Math.max(studentMsgCount, prev.studentMsgCount || 0),
+        timestamp: Date.now(),
+        firstAttempt: prev.firstAttempt || Date.now(),
+        attempts: (prev.attempts || 0) + 1,
+        concepts: state.conceptProfile[state.activeTopic] || prev.concepts || {}
+      });
+      saveProgress();
     }
+    state.view = 'topics';
+    state.activeTopic = null;
+    state.messages = [];
+    state.convHistory = [];
+    state.currentPhase = 0;
+    render();
+    window.scrollTo(0, 0);
+  }
     MX.backToTopics();
   }
 };
@@ -698,6 +1623,5 @@ if (urlSystem && urlTopic) {
 <script src="js/rdx-nav.js"></script>
 <script src="js/rdx-help-widget.js"></script>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){})</script>
-<script src="js/nav-global.js"></script>
 </body>
 </html>

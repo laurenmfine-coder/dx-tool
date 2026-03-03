@@ -1,4 +1,6 @@
 (function(){
+  // If the unified nav is already loaded, don't render the legacy nav
+  if (document.getElementById('rdx-unified-nav')) return;
   var NAV=[
     {l:'Dashboard',h:'dashboard.html',i:'\u{1F3E0}'},
     {l:'ED',h:'ed-board-v2.html',i:'\u{1F3E5}'},
