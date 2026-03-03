@@ -755,7 +755,27 @@ function handleSearch(val) {
   const res = document.getElementById('searchResults');
   val = (val||'').trim().toLowerCase();
   if (!val||val.length<2){res.classList.remove('active');return}
-  const m = SEARCH_INDEX.filter(x=>x.name.toLowerCase().includes(val)||x.desc.toLowerCase().includes(val)||x.cat.toLowerCase().includes(val)).slice(0,8);
+  
+  // Search curated tools/simulations
+  var m = SEARCH_INDEX.filter(x=>x.name.toLowerCase().includes(val)||x.desc.toLowerCase().includes(val)||x.cat.toLowerCase().includes(val)).slice(0,4);
+  
+  // Also search the full case manifest if loaded
+  if (window.EMR_MANIFEST) {
+    var catColors = {cardiology:'#C62828',pulmonary:'#1565C0',neurology:'#6A1B9A',gi:'#E65100',infectious:'#2E7D32',endocrine:'#00838F',renal:'#4527A0',hematology:'#AD1457',allergy:'#EF6C00',toxicology:'#37474F',surgery:'#283593'};
+    EMR_MANIFEST.forEach(function(group) {
+      group.cases.forEach(function(c) {
+        var searchable = (c.diagnosis + ' ' + group.presentation + ' ' + c.category + ' ' + c.id).toLowerCase();
+        if (searchable.includes(val)) {
+          m.push({name:c.diagnosis, desc:group.presentation + ' \u00B7 ESI-' + c.acuity, cat:'Patient Case', color:catColors[c.category]||'#607D8B', url:'virtual-emr.html?case=' + c.id});
+        }
+      });
+    });
+  }
+  
+  // Deduplicate by URL and limit to 10
+  var seen = {};
+  m = m.filter(function(x) { if (seen[x.url]) return false; seen[x.url] = true; return true; }).slice(0, 10);
+  
   if(!m.length){res.innerHTML='<div style="padding:14px 16px;font-size:13px;color:#94A3B8">No results found.</div>';res.classList.add('active');return}
   res.innerHTML=m.map(x=>`<a class="sr-item" href="${x.url}"><div class="sr-dot" style="background:${x.color}"></div><div><div class="sr-name">${x.name}</div><div class="sr-desc">${x.desc}</div></div><div class="sr-category">${x.cat}</div></a>`).join('');
   res.classList.add('active');
@@ -765,6 +785,13 @@ function handleSearch(val) {
 // INIT
 // ═══════════════════════════════════════════════════════════════
 renderSettings();
+
+// Pre-load manifest for search to access all cases
+if (!window.EMR_MANIFEST) {
+  var ms = document.createElement('script');
+  ms.src = 'emr-data/manifest.js';
+  document.head.appendChild(ms);
+}
 
 const searchInput = document.getElementById('globalSearch');
 searchInput.addEventListener('input',function(){handleSearch(this.value)});

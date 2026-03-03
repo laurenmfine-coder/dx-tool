@@ -2126,26 +2126,19 @@ async function bootstrapApp() {
   window.addEventListener("beforeunload",function(){if(window.ChartTracker){ChartTracker.stop()}});
 }
 // Route: no case + no setting = show setting selector; otherwise load case data
-// Pre-load: show loading state immediately so user never sees a white screen
+// Pre-load: show loading spinner for case URLs so user sees immediate feedback
 (function(){
   if (CASE_ID) {
-    document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)"><div style="text-align:center"><div style="width:48px;height:48px;border:4px solid var(--border,#ddd);border-top-color:var(--primary,#2874A6);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px"></div><p style="font-size:14px;color:var(--text-secondary,#666)">Loading patient chart\u2026</p></div></div>';
+    document.getElementById('app').innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#F0F2F5)"><div style="text-align:center"><div style="width:48px;height:48px;border:4px solid var(--border,#ddd);border-top-color:var(--primary,#2874A6);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px"></div><p style="font-size:14px;color:var(--text-secondary,#666)">Loading patient chart\u2026</p></div></div>';
     if (!document.getElementById('rdx-spin-style')) {
       var ss = document.createElement('style');
       ss.id = 'rdx-spin-style';
       ss.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
       document.head.appendChild(ss);
     }
-    // Timeout fallback: if chart doesn't load in 30 seconds, show recovery options
-    setTimeout(function(){
-      var app = document.getElementById('app');
-      if (app && app.innerHTML.indexOf('Loading patient chart') >= 0) {
-        app.innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg,#F0F2F5)"><div style="text-align:center;max-width:420px;padding:32px"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:var(--text,#1A1A2E);margin-bottom:8px">Chart didn\u2019t load</h2><p style="color:var(--text-secondary,#666);font-size:13px;margin-bottom:16px;line-height:1.5">This case may not have data yet, or there was a connection issue.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">\u21BB Retry</a><a href="javascript:history.back()" style="padding:10px 20px;border-radius:8px;border:1px solid #DFE1E6;color:#5A6178;font-weight:600;font-size:13px;text-decoration:none">\u2190 Go Back</a><a href="virtual-emr.html" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div></div>';
-      }
-    }, 30000);
   }
   if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
-  else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); } // setting chosen, no case — go straight to patient list
+  else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
   else { loadCaseData(function() { bootstrapApp(); }); }
 })();
 
