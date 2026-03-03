@@ -1653,8 +1653,6 @@ function render(){
   if(!S.currentUser){app.innerHTML=renderAuth();return}
   // If no setting chosen yet and no case loaded, show setting selector
   if(!S.clinicalSetting && !CASE_ID){app.innerHTML=renderSettingSelector();return}
-  // If setting chosen but no case loaded, show case picker
-  if(S.clinicalSetting && !CASE_ID){showCasePicker();return}
   const role=S.currentUser.role;
   const tabs=[
     {id:"demographics",label:"Patient Info",icon:I.user},
@@ -2147,7 +2145,7 @@ async function bootstrapApp() {
     }, 12000);
   }
   if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
-  else if (!CASE_ID && S.clinicalSetting) { bootstrapApp(); } // setting chosen but no case yet — show case picker
+  else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); } // setting chosen, no case — go straight to patient list
   else { loadCaseData(function() { bootstrapApp(); }); }
 })();
 
@@ -3718,7 +3716,6 @@ render = function(){
   const app=document.getElementById("app");
   if(!S.currentUser){app.innerHTML=renderAuth();return}
   if(!S.clinicalSetting && !CASE_ID){app.innerHTML=renderSettingSelector();return}
-  if(S.clinicalSetting && !CASE_ID){showCasePicker();return}
   const role=S.currentUser.role;
   
   const tabs=[

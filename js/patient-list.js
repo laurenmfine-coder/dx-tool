@@ -364,32 +364,20 @@
 
     _rerender: function() {
       try {
-        var setting = null;
-        var specialty = null;
-        // Get setting from S if available, otherwise from URL
-        if (window.S) {
-          setting = S.clinicalSetting || null;
-          specialty = S.specialty || null;
-        }
-        if (!setting) {
-          var params = new URLSearchParams(window.location.search);
-          setting = params.get('setting') || null;
-          specialty = params.get('specialty') || null;
-        }
+        var params = new URLSearchParams(window.location.search);
+        var setting = params.get('setting') || ((window.S && S.clinicalSetting) ? S.clinicalSetting : null);
+        var specialty = params.get('specialty') || ((window.S && S.specialty) ? S.specialty : null);
         var app = document.getElementById('app');
-        if (app) {
+        if (app && window.EMR_MANIFEST) {
           app.innerHTML = PatientList.render(setting, specialty);
-        }
-        // Restore focus to search
-        var searchEl = document.getElementById('plSearch');
-        if (searchEl && _filter.search) {
-          searchEl.focus();
-          searchEl.setSelectionRange(_filter.search.length, _filter.search.length);
+          var searchEl = document.getElementById('plSearch');
+          if (searchEl && _filter.search) {
+            searchEl.focus();
+            searchEl.setSelectionRange(_filter.search.length, _filter.search.length);
+          }
         }
       } catch(e) {
         console.error('PatientList._rerender error:', e);
-        // Fallback: try the original case picker
-        if (window._renderCasePicker) { try { _renderCasePicker(); } catch(e2){} }
       }
     }
   };
