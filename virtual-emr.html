@@ -1167,27 +1167,19 @@ function getActiveNoteTemplate() {
 }
 
 function renderSettingSelector() {
-  // Use EMR Overview if available (replaces card-based selector)
-  if (window.EMROverview) {
-    // Load manifest for stats if not loaded
+  // Use EMR Landing page (rich overview) if available
+  if (window.EMRLanding) {
+    // Pre-load manifest for stats
     if (!window.EMR_MANIFEST) {
       var ms = document.createElement('script');
       ms.src = 'emr-data/manifest.js';
       ms.onload = function() {
-        if (!window.PATIENT_NAMES) {
-          var pn = document.createElement('script');
-          pn.src = 'emr-data/patient-names.js';
-          pn.onload = function() { document.getElementById('app').innerHTML = EMROverview.render(); };
-          pn.onerror = function() { document.getElementById('app').innerHTML = EMROverview.render(); };
-          document.head.appendChild(pn);
-        } else {
-          document.getElementById('app').innerHTML = EMROverview.render();
-        }
+        document.getElementById('app').innerHTML = EMRLanding.render();
       };
       document.head.appendChild(ms);
-      return '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F0F2F5"><p style="color:#8C92A4;font-size:13px">Loading\u2026</p></div>';
+      return EMRLanding.render(); // render with 0 stats initially, re-render when manifest loads
     }
-    return EMROverview.render();
+    return EMRLanding.render();
   }
 
   // Fallback: original card-based selector
@@ -3903,6 +3895,7 @@ submitDoc = function(){
 </script>
 <script src="js/patient-list.js"></script>
 <script src="js/emr-overview.js"></script>
+<script src="js/emr-landing.js"></script>
 <script src="js/mission-control.js"></script>
 <script src="js/ddx-builder.js"></script>
 <script src="rdx-demo-tour.js"></script>
