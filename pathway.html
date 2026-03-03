@@ -1,442 +1,703 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
-<meta name="theme-color" content="#1f5f8b">
+<meta name="theme-color" content="#7C3AED">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loading Pathway... | ReasonDx</title>
+<title>MechanismDx AI Tutor | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="description" content="Specialty clinical reasoning pathway on ReasonDx.">
-<meta name="robots" content="index, follow">
+<meta name="description" content="AI-powered Socratic pathophysiology tutor. 9 systems, 54 topics. Learn mechanisms through guided questioning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/rdx-theme.css">
 <link rel="stylesheet" href="mobile.css">
 <style>
 :root {
-  --pw-color: #7C3AED;
-  --pw-dark: #5B21B6;
-  --pw-light: #F5F3FF;
-  --pw-bg: var(--rdx-bg, #f0f4f8);
-  --pw-card: var(--rdx-bg-card, #fff);
-  --pw-text: var(--rdx-text, #1e293b);
-  --pw-muted: var(--rdx-text-muted, #64748b);
-  --pw-border: var(--rdx-border, #e2e8f0);
-  --font: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mx-purple: #7C3AED;
+  --mx-purple-dark: #5B21B6;
+  --mx-purple-light: #A78BFA;
+  --mx-purple-glow: rgba(124,58,237,.15);
+  --mx-purple-border: rgba(124,58,237,.25);
+  --mx-bg: #0B0F1A;
+  --mx-bg-card: #141929;
+  --mx-bg-elevated: #1C2236;
+  --mx-text: #E2E8F0;
+  --mx-text-secondary: #94A3B8;
+  --mx-text-muted: #64748B;
+  --mx-border: #1E293B;
+  --mx-success: #34D399;
+  --mx-danger: #F87171;
+  --mx-blue: #60A5FA;
+  --mx-font: 'IBM Plex Sans', -apple-system, sans-serif;
+  --mx-mono: 'IBM Plex Mono', monospace;
 }
-  --pw-light: rgba(124,58,237,.1);
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: var(--font); background: var(--pw-bg); color: var(--pw-text); min-height: 100vh; }
+.mx-hero{padding:80px 20px 40px;text-align:center;position:relative;overflow:hidden}
+.mx-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 50% 0%,rgba(124,58,237,.12) 0%,transparent 70%),radial-gradient(ellipse 300px 300px at 80% 60%,rgba(96,165,250,.06) 0%,transparent 60%);pointer-events:none}
+.mx-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.mx-hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:var(--mx-purple-glow);border:1px solid var(--mx-purple-border);font-size:12px;font-weight:600;color:var(--mx-purple-light);letter-spacing:.03em;margin-bottom:16px}
+.mx-hero h1{font-size:38px;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:12px;background:linear-gradient(135deg,#E2E8F0 30%,var(--mx-purple-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mx-hero-sub{font-size:15px;color:var(--mx-text-secondary);line-height:1.6;max-width:520px;margin:0 auto 28px}
+.mx-hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.mx-hero-stat{text-align:center}
+.mx-hero-stat-num{font-size:24px;font-weight:800;color:var(--mx-purple-light);font-family:var(--mx-mono)}
+.mx-hero-stat-label{font-size:11px;color:var(--mx-text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
 
-/* ─── Hero ─── */
-.pw-hero {
-  background: linear-gradient(135deg, var(--pw-dark), var(--pw-color));
-  padding: 80px 24px 48px;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-}
-.pw-hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(255,255,255,.08) 0%, transparent 60%);
-}
-.pw-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-.pw-hero-icon { font-size: 48px; margin-bottom: 12px; }
-.pw-hero h1 { font-size: 36px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 8px; line-height: 1.2; }
-.pw-hero-sub { font-size: 16px; opacity: .85; line-height: 1.6; max-width: 600px; margin-bottom: 24px; }
+.mx-systems{padding:0 20px 24px}
+.mx-systems-title{font-size:13px;font-weight:700;color:var(--mx-text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;text-align:center}
+.mx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;max-width:1100px;margin:0 auto}
+.mx-system-card{background:var(--mx-bg-card);border:1px solid var(--mx-border);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.mx-system-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--mx-purple);opacity:0;transition:opacity .2s}
+.mx-system-card:hover{border-color:var(--mx-purple-border);background:var(--mx-bg-elevated);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.mx-system-card:hover::before{opacity:1}
+.mx-system-icon{font-size:28px;margin-bottom:8px}
+.mx-system-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.mx-system-count{font-size:11px;color:var(--mx-text-muted)}
+.mx-system-progress{margin-top:10px;height:3px;background:var(--mx-border);border-radius:2px;overflow:hidden}
+.mx-system-progress-fill{height:100%;background:var(--mx-purple);border-radius:2px;transition:width .5s}
 
-/* ─── Progress Bar (hero) ─── */
-.pw-progress-wrap { display: flex; align-items: center; gap: 12px; }
-.pw-progress-bar { flex: 1; height: 8px; background: rgba(255,255,255,.2); border-radius: 4px; overflow: hidden; max-width: 300px; }
-.pw-progress-fill { height: 100%; background: #fff; border-radius: 4px; transition: width .5s ease; }
-.pw-progress-text { font-size: 13px; font-weight: 700; opacity: .9; }
+.mx-topics-panel{max-width:1100px;margin:0 auto;padding:0 20px 24px}
+.mx-topics-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.mx-topics-header h2{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
+.mx-back-btn{padding:6px 14px;border-radius:8px;background:transparent;border:1px solid var(--mx-border);color:var(--mx-text-secondary);font-family:var(--mx-font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.mx-back-btn:hover{border-color:var(--mx-purple-border);color:var(--mx-purple-light)}
+.mx-topic-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.mx-topic-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:10px;background:var(--mx-bg-card);border:1px solid var(--mx-border);cursor:pointer;transition:all .15s}
+.mx-topic-card:hover{border-color:var(--mx-purple-border);background:var(--mx-bg-elevated)}
+.mx-topic-card.done .mx-topic-check{background:var(--mx-success);border-color:var(--mx-success);color:#fff}
+.mx-topic-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--mx-border);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.mx-topic-info{flex:1;min-width:0}
+.mx-topic-name{font-size:13px;font-weight:600}
+.mx-topic-meta{font-size:11px;color:var(--mx-text-muted);margin-top:2px}
 
-/* ─── Stats strip ─── */
-.pw-stats { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
-.pw-stat { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 10px; padding: 10px 16px; text-align: center; min-width: 100px; }
-.pw-stat-num { font-size: 22px; font-weight: 800; }
-.pw-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; margin-top: 2px; }
+.mx-session{max-width:800px;margin:0 auto;padding:0 20px 100px}
+.mx-session-header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--mx-border);margin-bottom:20px}
+.mx-session-title{font-size:16px;font-weight:700}
+.mx-session-crumb{font-size:12px;color:var(--mx-text-muted);margin-top:2px}
+.mx-exit-btn{padding:6px 14px;border-radius:8px;background:transparent;border:1px solid var(--mx-border);color:var(--mx-text-secondary);font-family:var(--mx-font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.mx-exit-btn:hover{border-color:var(--mx-danger);color:var(--mx-danger)}
 
-/* ─── Level filter ─── */
-.pw-filter {
-  max-width: 900px; margin: -20px auto 0; padding: 0 24px; position: relative; z-index: 2;
-}
-.pw-filter-bar {
-  background: var(--pw-card); border: 1px solid var(--pw-border); border-radius: 14px;
-  padding: 12px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  box-shadow: 0 4px 20px rgba(0,0,0,.06);
-}
-.pw-filter-label { font-size: 12px; font-weight: 700; color: var(--pw-muted); text-transform: uppercase; letter-spacing: .08em; margin-right: 4px; }
-.pw-filter-btn {
-  padding: 6px 14px; border-radius: 8px; border: 1px solid var(--pw-border);
-  font-size: 12px; font-weight: 600; font-family: var(--font); cursor: pointer;
-  background: transparent; color: var(--pw-text); transition: all .15s;
-  display: inline-flex; align-items: center; gap: 6px;
-}
-.pw-filter-btn:hover { border-color: var(--pw-color); color: var(--pw-color); }
-.pw-filter-btn.active { background: var(--pw-light); border-color: var(--pw-color); color: var(--pw-color); }
-.pw-filter-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-.pw-reset-btn {
-  padding: 6px 12px; border-radius: 8px; border: 1px solid transparent;
-  font-size: 11px; font-weight: 600; font-family: var(--font); cursor: pointer;
-  background: transparent; color: var(--pw-muted); transition: all .15s;
-}
-.pw-reset-btn:hover { color: #DC2626; border-color: #FCA5A5; background: #FEF2F2; }
+.mx-phases{display:flex;gap:4px;margin-bottom:24px;background:var(--mx-bg-card);border-radius:10px;padding:6px;border:1px solid var(--mx-border)}
+.mx-phase{flex:1;padding:10px 8px;border-radius:7px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mx-text-muted);cursor:default;transition:all .3s}
+.mx-phase.active{background:var(--mx-purple);color:#fff;box-shadow:0 2px 12px rgba(124,58,237,.3)}
+.mx-phase.complete{background:rgba(52,211,153,.12);color:var(--mx-success)}
+.mx-phase-icon{font-size:14px;display:block;margin-bottom:2px}
 
-/* ─── Modules ─── */
-.pw-content { max-width: 900px; margin: 32px auto; padding: 0 24px 80px; }
+.mx-chat{min-height:300px;margin-bottom:20px}
+.mx-msg{display:flex;gap:12px;margin-bottom:16px;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.mx-avatar{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700}
+.mx-msg.tutor .mx-avatar{background:linear-gradient(135deg,var(--mx-purple-dark),var(--mx-purple));color:#fff}
+.mx-msg.student .mx-avatar{background:var(--mx-bg-elevated);border:1px solid var(--mx-border);color:var(--mx-blue)}
+.mx-bubble{flex:1;min-width:0;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.7}
+.mx-msg.tutor .mx-bubble{background:var(--mx-bg-card);border:1px solid var(--mx-border)}
+.mx-msg.student .mx-bubble{background:var(--mx-purple-glow);border:1px solid var(--mx-purple-border)}
+.mx-bubble p{margin-bottom:10px}
+.mx-bubble p:last-child{margin-bottom:0}
+.mx-bubble strong{color:var(--mx-purple-light);font-weight:700}
+.mx-bubble em{color:var(--mx-text-secondary)}
+.mx-bubble code{font-family:var(--mx-mono);background:rgba(124,58,237,.1);padding:2px 6px;border-radius:4px;font-size:13px;color:var(--mx-purple-light)}
 
-.pw-module {
-  margin-bottom: 32px;
-  border: 1px solid var(--pw-border);
-  border-radius: 16px;
-  background: var(--pw-card);
-  overflow: hidden;
-  transition: box-shadow .2s;
-}
-.pw-module:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+.mx-typing{display:flex;gap:12px;margin-bottom:16px;animation:fadeUp .3s}
+.mx-typing-dots{display:flex;gap:4px;padding:14px 18px;background:var(--mx-bg-card);border:1px solid var(--mx-border);border-radius:12px}
+.mx-typing-dot{width:8px;height:8px;border-radius:50%;background:var(--mx-purple-light);animation:bounce 1.2s infinite}
+.mx-typing-dot:nth-child(2){animation-delay:.2s}
+.mx-typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.3}30%{transform:translateY(-6px);opacity:1}}
 
-.pw-module-header {
-  padding: 20px 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  user-select: none;
-}
-.pw-module-icon { font-size: 28px; flex-shrink: 0; }
-.pw-module-info { flex: 1; }
-.pw-module-title { font-size: 17px; font-weight: 700; margin-bottom: 2px; }
-.pw-module-sub { font-size: 13px; color: var(--pw-muted); }
-.pw-module-progress {
-  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-}
-.pw-module-ring {
-  width: 36px; height: 36px; position: relative;
-}
-.pw-module-ring svg { transform: rotate(-90deg); }
-.pw-module-ring-text {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; color: var(--pw-color);
-}
-.pw-module-chevron {
-  font-size: 18px; color: var(--pw-muted); transition: transform .2s; flex-shrink: 0;
-}
-.pw-module.open .pw-module-chevron { transform: rotate(90deg); }
+.mx-input-area{position:sticky;bottom:0;z-index:10;background:linear-gradient(to top,var(--mx-bg) 70%,transparent);padding:16px 0 20px}
+.mx-input-wrap{display:flex;gap:8px;align-items:flex-end;background:var(--mx-bg-card);border:1px solid var(--mx-border);border-radius:14px;padding:8px;transition:border-color .2s}
+.mx-input-wrap:focus-within{border-color:var(--mx-purple);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+.mx-input{flex:1;background:transparent;border:none;color:var(--mx-text);font-family:var(--mx-font);font-size:14px;line-height:1.5;padding:8px 12px;resize:none;min-height:24px;max-height:120px;outline:none}
+.mx-input::placeholder{color:var(--mx-text-muted)}
+.mx-send{width:40px;height:40px;border-radius:10px;background:var(--mx-purple);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.mx-send:hover{background:var(--mx-purple-dark);transform:scale(1.05)}
+.mx-send:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.mx-input-hint{text-align:center;font-size:11px;color:var(--mx-text-muted);margin-top:8px}
 
-/* ─── Activities ─── */
-.pw-activities {
-  max-height: 0; overflow: hidden; transition: max-height .4s ease;
-  border-top: 1px solid var(--pw-border);
-}
-.pw-module.open .pw-activities { max-height: 3000px; }
+.mx-summary{background:var(--mx-bg-card);border:1px solid var(--mx-border);border-radius:16px;padding:28px;margin-top:80px;text-align:center}
+.mx-summary-icon{font-size:48px;margin-bottom:12px}
+.mx-summary h3{font-size:22px;font-weight:800;margin-bottom:8px}
+.mx-summary-score{font-size:56px;font-weight:800;font-family:var(--mx-mono);color:var(--mx-purple-light);margin:16px 0}
+.mx-summary-detail{font-size:14px;color:var(--mx-text-secondary);line-height:1.7;margin-bottom:20px}
+.mx-summary-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mx-btn{padding:10px 20px;border-radius:10px;font-family:var(--mx-font);font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.mx-btn-primary{background:var(--mx-purple);color:#fff}
+.mx-btn-primary:hover{background:var(--mx-purple-dark)}
+.mx-btn-ghost{background:var(--mx-bg-elevated);color:var(--mx-text);border:1px solid var(--mx-border)}
+.mx-btn-ghost:hover{border-color:var(--mx-purple-border);color:var(--mx-purple-light)}
 
-.pw-module-desc {
-  padding: 16px 24px;
-  font-size: 13px; color: var(--pw-muted); line-height: 1.7;
-  border-bottom: 1px solid var(--pw-border);
-  background: var(--pw-light);
-}
+.mx-loading{text-align:center;padding:100px 24px;color:var(--mx-text-muted)}
+.mx-spinner{width:36px;height:36px;border:3px solid var(--mx-border);border-top-color:var(--mx-purple);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.pw-activity {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 24px;
-  border-bottom: 1px solid var(--pw-border);
-  transition: background .15s;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
-.pw-activity:last-child { border-bottom: none; }
-.pw-activity:hover { background: var(--pw-light); }
-.pw-activity.completed { opacity: .7; }
-
-.pw-check {
-  width: 22px; height: 22px; border-radius: 50%;
-  border: 2px solid var(--pw-border);
-  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; transition: all .2s;
-}
-.pw-activity.completed .pw-check {
-  background: var(--pw-color); border-color: var(--pw-color); color: #fff;
-}
-.pw-activity-info { flex: 1; min-width: 0; }
-.pw-activity-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
-.pw-activity-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.pw-activity-type {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-  padding: 2px 8px; border-radius: 4px; background: var(--pw-light); color: var(--pw-color);
-}
-.pw-activity-type[data-type="case"] { background: #FDEDEC; color: #DC2626; }
-.pw-activity-type[data-type="crt"] { background: #EBF5FB; color: #2874A6; }
-.pw-activity-type[data-type="ai-trainer"] { background: #FCE7F3; color: #EC4899; }
-.pw-activity-type[data-type="simulation"] { background: #F5F3FF; color: #7C3AED; }
-.pw-activity-type[data-type="interactive"] { background: #FEF9E7; color: #D97706; }
-
-.pw-activity-level {
-  font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
-}
-.pw-activity-level[data-level="student"] { background: #E8F8F0; color: #059669; }
-.pw-activity-level[data-level="resident"] { background: #EBF5FB; color: #2874A6; }
-.pw-activity-level[data-level="fellow"] { background: #F5F3FF; color: #7C3AED; }
-
-.pw-activity-duration { font-size: 11px; color: var(--pw-muted); }
-.pw-activity-desc { font-size: 12px; color: var(--pw-muted); margin-top: 4px; line-height: 1.5; }
-
-.pw-activity-patient {
-  font-size: 11px; color: var(--pw-color); font-weight: 600; margin-top: 2px;
-}
-
-.pw-activity-arrow { font-size: 16px; color: var(--pw-muted); flex-shrink: 0; }
-
-/* ─── Empty state ─── */
-.pw-empty { text-align: center; padding: 60px 24px; color: var(--pw-muted); }
-.pw-empty-icon { font-size: 48px; margin-bottom: 12px; }
-.pw-empty h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--pw-text); }
-
-/* ─── Loading ─── */
-.pw-loading { text-align: center; padding: 100px 24px; color: var(--pw-muted); }
-.pw-loading-spinner { width: 40px; height: 40px; border: 3px solid var(--pw-border); border-top-color: var(--pw-color); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 16px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ─── Responsive ─── */
-@media (max-width: 640px) {
-  .pw-hero h1 { font-size: 28px; }
-  .pw-stats { gap: 12px; }
-  .pw-stat { min-width: 80px; padding: 8px 12px; }
-  .pw-filter-bar { flex-direction: column; align-items: flex-start; }
-  .pw-filter-right { margin-left: 0; margin-top: 8px; }
-  .pw-module-header { padding: 16px; gap: 12px; }
-  .pw-activity { padding: 12px 16px; }
-  .pw-activity-desc { display: none; }
-}
-
-/* ─── Print ─── */
-@media print {
-  .pw-hero { background: #fff !important; color: #000 !important; padding: 20px 0; }
-  .pw-filter { display: none; }
-  .pw-module { break-inside: avoid; }
-  .pw-activities { max-height: none !important; }
-  .pw-check { border-color: #000; }
+@media(max-width:640px){
+  .mx-hero h1{font-size:28px}
+  .mx-hero{padding:72px 16px 32px}
+  .mx-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+  .mx-system-card{padding:12px}
+  .mx-system-icon{font-size:22px;margin-bottom:4px}
+  .mx-system-name{font-size:12px}
+  .mx-phases{flex-wrap:wrap}
+  .mx-phase{font-size:10px;padding:8px 6px}
+  .mx-bubble{padding:12px 14px;font-size:13px}
+  .mx-session-header{flex-direction:column;gap:8px;align-items:flex-start}
+  .mx-topic-list{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
-<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">MechanismDx requires JavaScript. Please enable JavaScript in your browser.</div></noscript>
 <script src="auth/auth-guard.js"></script>
-
-<div id="app">
-  <div class="pw-loading">
-    <div class="pw-loading-spinner"></div>
-    <p>Loading pathway...</p>
-  </div>
-</div>
-
+<div id="app"><div class="mx-loading"><div class="mx-spinner"></div><p>Loading MechanismDx...</p></div></div>
 <script>
 (function() {
-  'use strict';
+'use strict';
 
-  // ─── Parse pathway ID from URL ───
-  var params = new URLSearchParams(window.location.search);
-  var pathwayId = params.get('id') || params.get('system') || 'allergy-immunology';
-  var jsonUrl = 'pathways/' + pathwayId + '.json';
+var SYSTEMS = [
+  { id:'cardiac', name:'Cardiovascular', icon:'\u2764\uFE0F', topics:[
+    {id:'acs',name:'Acute Coronary Syndrome',sub:'Plaque rupture, thrombosis, STEMI vs NSTEMI'},
+    {id:'heart-failure',name:'Heart Failure',sub:'HFrEF vs HFpEF, neurohormonal activation'},
+    {id:'arrhythmias',name:'Arrhythmias & Conduction',sub:'Re-entry circuits, channelopathies, heart block'},
+    {id:'valvular',name:'Valvular Heart Disease',sub:'Stenosis vs regurgitation, hemodynamic consequences'},
+    {id:'shock',name:'Shock Physiology',sub:'Distributive, cardiogenic, hypovolemic, obstructive'},
+    {id:'vascular',name:'Vascular Emergencies',sub:'Aortic dissection, PE pathophysiology, DVT'}
+  ]},
+  { id:'pulmonary', name:'Pulmonary', icon:'\uD83E\uDEC1', topics:[
+    {id:'asthma',name:'Asthma & Airway Reactivity',sub:'Bronchoconstriction, inflammation, remodeling'},
+    {id:'copd',name:'COPD & Obstructive Disease',sub:'Emphysema vs bronchitis, gas trapping'},
+    {id:'pneumonia',name:'Pneumonia & Lung Infection',sub:'CAP vs HAP, pathogen-host interaction'},
+    {id:'pe',name:'Pulmonary Embolism',sub:'Virchow triad, V/Q mismatch, RV strain'},
+    {id:'ards',name:'ARDS & Respiratory Failure',sub:'Diffuse alveolar damage, surfactant dysfunction'},
+    {id:'pleural',name:'Pleural Disease',sub:'Effusions, pneumothorax, Light criteria'}
+  ]},
+  { id:'gi', name:'Gastrointestinal', icon:'\uD83D\uDD2C', topics:[
+    {id:'gi-bleed',name:'GI Bleeding',sub:'Upper vs lower, variceal vs non-variceal'},
+    {id:'acute-abdomen',name:'Acute Abdomen',sub:'Peritonitis, obstruction, perforation'},
+    {id:'liver',name:'Hepatic Disease',sub:'Cirrhosis, portal hypertension, hepatorenal'},
+    {id:'pancreatitis',name:'Pancreatitis',sub:'Gallstone vs alcoholic, autodigestion cascade'},
+    {id:'ibd',name:'Inflammatory Bowel Disease',sub:'Crohn vs UC, mucosal immunity'},
+    {id:'biliary',name:'Biliary Pathology',sub:'Cholecystitis, choledocholithiasis, cholangitis'}
+  ]},
+  { id:'neuro', name:'Neurology', icon:'\uD83E\uDDE0', topics:[
+    {id:'stroke',name:'Stroke & Cerebrovascular',sub:'Ischemic vs hemorrhagic, penumbra concept'},
+    {id:'seizure',name:'Seizures & Epilepsy',sub:'Excitatory/inhibitory imbalance, status epilepticus'},
+    {id:'meningitis',name:'Meningitis & Encephalitis',sub:'BBB penetration, CSF findings, pathogen patterns'},
+    {id:'tbi',name:'Traumatic Brain Injury',sub:'Primary vs secondary injury, herniation syndromes'},
+    {id:'neuro-degen',name:'Neurodegenerative Disease',sub:'Protein aggregation, neuronal loss patterns'},
+    {id:'neuro-musc',name:'Neuromuscular Disorders',sub:'NMJ, myopathy vs neuropathy'}
+  ]},
+  { id:'renal', name:'Renal', icon:'\uD83E\uDEB6', topics:[
+    {id:'aki',name:'Acute Kidney Injury',sub:'Prerenal, intrinsic, postrenal, ATN'},
+    {id:'ckd',name:'Chronic Kidney Disease',sub:'Nephron loss, GFR decline, uremia'},
+    {id:'electrolytes',name:'Electrolyte Disorders',sub:'Na, K, Ca, Mg \u2014 mechanisms and consequences'},
+    {id:'acid-base',name:'Acid-Base Physiology',sub:'Henderson-Hasselbalch, compensation, anion gap'},
+    {id:'glomerular',name:'Glomerular Disease',sub:'Nephrotic vs nephritic, complement pathways'},
+    {id:'fluid',name:'Fluid Homeostasis',sub:'Starling forces, ADH, RAAS, volume assessment'}
+  ]},
+  { id:'msk', name:'Musculoskeletal', icon:'\uD83E\uDDB4', topics:[
+    {id:'fractures',name:'Fracture Pathophysiology',sub:'Bone healing, compartment syndrome'},
+    {id:'arthritis',name:'Inflammatory Arthritis',sub:'RA, gout, pseudogout, crystal deposition'},
+    {id:'septic-joint',name:'Septic Arthritis',sub:'Hematogenous spread, joint destruction'},
+    {id:'back-pain',name:'Spinal Pathology',sub:'Disc herniation, cauda equina, spinal stenosis'},
+    {id:'soft-tissue',name:'Soft Tissue Injuries',sub:'Tendinopathy, ligament tears, repair mechanisms'},
+    {id:'bone-metab',name:'Bone Metabolism',sub:'Osteoporosis, Paget, PTH/vitamin D axis'}
+  ]},
+  { id:'endocrine', name:'Endocrine', icon:'\u2697\uFE0F', topics:[
+    {id:'dka',name:'DKA & Hyperglycemic Crises',sub:'Insulin deficiency, ketogenesis, HHS'},
+    {id:'thyroid',name:'Thyroid Disorders',sub:'Storm, myxedema, Graves, Hashimoto'},
+    {id:'adrenal',name:'Adrenal Pathology',sub:'Crisis, Cushing, Addison, pheochromocytoma'},
+    {id:'pituitary',name:'Pituitary Disorders',sub:'Anterior/posterior, adenomas, apoplexy'},
+    {id:'calcium',name:'Calcium & Parathyroid',sub:'Hyper/hypocalcemia, PTH feedback loops'},
+    {id:'diabetes-chronic',name:'Diabetes Complications',sub:'Microvascular, macrovascular, neuropathy'}
+  ]},
+  { id:'heme', name:'Hematology', icon:'\uD83E\uDE78', topics:[
+    {id:'anemia',name:'Anemia',sub:'Iron deficiency, B12, hemolytic, aplastic'},
+    {id:'coagulopathy',name:'Coagulation Disorders',sub:'DIC, TTP/HUS, factor deficiencies'},
+    {id:'thrombosis',name:'Thrombotic Disease',sub:'Hypercoagulable states, anticoagulation'},
+    {id:'transfusion',name:'Transfusion Medicine',sub:'Reactions, massive transfusion, compatibility'},
+    {id:'leukemia',name:'Hematologic Malignancies',sub:'Leukemia, lymphoma, blast crisis'},
+    {id:'sickle-cell',name:'Hemoglobinopathies',sub:'Sickle cell, thalassemia, vaso-occlusion'}
+  ]},
+  { id:'allergy', name:'Allergy & Immunology', icon:'\uD83D\uDEE1\uFE0F', topics:[
+    {id:'anaphylaxis',name:'Anaphylaxis',sub:'IgE-mediated, biphasic reactions, epinephrine'},
+    {id:'drug-allergy',name:'Drug Hypersensitivity',sub:'Type I\u2013IV reactions, DRESS, SJS/TEN'},
+    {id:'food-allergy',name:'Food Allergy',sub:'IgE vs non-IgE, FPIES, OIT mechanisms'},
+    {id:'asthma-allergy',name:'Allergic Asthma & Rhinitis',sub:'Th2 inflammation, allergen sensitization'},
+    {id:'immunodeficiency',name:'Immunodeficiency',sub:'Primary vs secondary, CVID, complement'},
+    {id:'autoimmunity',name:'Autoimmune Disease',sub:'Tolerance breakdown, molecular mimicry, SLE'}
+  ]}
+];
 
-  // ─── State ───
-  var data = null;
-  var completed = {};
-  var activeLevel = 'all'; // all | student | resident | fellow
-  var storageKey = 'rdx-pathway-' + pathwayId;
+var PHASES = [
+  {id:'explore',  label:'Explore',  icon:'\uD83D\uDD0D',desc:'What do you already know?'},
+  {id:'probe',    label:'Probe',    icon:'\uD83E\uDDEA',desc:'Dig deeper into mechanisms'},
+  {id:'assess',   label:'Assess',   icon:'\uD83D\uDCCA',desc:'Testing your understanding'},
+  {id:'resources',label:'Resources',icon:'\uD83D\uDCDA',desc:'Targeted study materials'},
+  {id:'retest',   label:'Retest',   icon:'\uD83C\uDFAF',desc:'Confirm mastery of weak areas'}
+];
 
-  function loadProgress() {
-    try { completed = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch(e) { completed = {}; }
-  }
-  function saveProgress() {
-    try { localStorage.setItem(storageKey, JSON.stringify(completed)); } catch(e) {}
-  }
-  function toggleComplete(activityId) {
-    if (completed[activityId]) delete completed[activityId];
-    else completed[activityId] = Date.now();
-    saveProgress();
-    render();
-  }
-  function resetProgress() {
-    if (!confirm('Reset all progress for this pathway? This cannot be undone.')) return;
-    completed = {};
-    saveProgress();
-    render();
-  }
+var WORKER = 'https://coachdx-attending.laurenmfine.workers.dev';
+var STORE_KEY = 'mx-tutor-progress';
 
-  // ─── Filtering ───
-  function getVisibleActivities(module) {
-    return module.activities.filter(function(a) {
-      return activeLevel === 'all' || a.level === activeLevel;
-    });
-  }
+var state = {
+  view: 'systems',
+  activeSystem: null,
+  activeTopic: null,
+  currentPhase: 0,
+  convHistory: [],
+  messages: [],
+  isLoading: false,
+  sessionScore: null,
+  progress: {}
+};
 
-  // ─── Stats ───
-  function getStats() {
-    var total = 0, done = 0, totalMin = 0, doneMin = 0;
-    data.modules.forEach(function(m) {
-      m.activities.forEach(function(a) {
-        total++;
-        totalMin += a.duration || 0;
-        if (completed[a.id]) { done++; doneMin += a.duration || 0; }
-      });
-    });
-    return { total: total, done: done, totalMin: totalMin, doneMin: doneMin, pct: total ? Math.round(done / total * 100) : 0 };
-  }
+function loadProgress() {
+  try { state.progress = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) { state.progress = {}; }
+}
+function saveProgress() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state.progress)); } catch(e) {}
+}
+function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
-  function getModuleStats(module) {
-    var vis = getVisibleActivities(module);
-    var done = vis.filter(function(a) { return completed[a.id]; }).length;
-    return { total: vis.length, done: done, pct: vis.length ? Math.round(done / vis.length * 100) : 0 };
-  }
+function getSysProgress(sys) {
+  var done = 0;
+  sys.topics.forEach(function(t) { if (state.progress[t.id] && state.progress[t.id].completed) done++; });
+  return { done: done, total: sys.topics.length, pct: Math.round(done / sys.topics.length * 100) };
+}
 
-  // ─── Ring SVG ───
-  function ring(pct) {
-    var r = 14, c = 2 * Math.PI * r, off = c - (pct / 100) * c;
-    return '<svg width="36" height="36" viewBox="0 0 36 36">' +
-      '<circle cx="18" cy="18" r="' + r + '" fill="none" stroke="var(--pw-border)" stroke-width="3"/>' +
-      '<circle cx="18" cy="18" r="' + r + '" fill="none" stroke="var(--pw-color)" stroke-width="3" stroke-dasharray="' + c + '" stroke-dashoffset="' + off + '" stroke-linecap="round"/>' +
-      '</svg>';
-  }
+function formatAI(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/\n- /g, '\n\u2022 ')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p>').replace(/$/, '</p>');
+}
 
-  // ─── Render ───
-  function render() {
-    if (!data) return;
-    var s = getStats();
-    var levelInfo = data.levels || {};
+function scrollToBottom() {
+  setTimeout(function() {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }, 100);
+}
 
-    var html = '';
 
-    // Hero
-    html += '<div class="pw-hero" style="background:linear-gradient(135deg,' + (data.colorDark || '#5B21B6') + ',' + (data.color || '#7C3AED') + ')">';
-    html += '<div class="pw-hero-inner">';
-    var heroIcon = data.icon ? '<div class="pw-hero-icon">' + esc(data.icon) + '</div>' : ''; html += heroIcon;
-    html += '<h1>' + esc(data.title) + ' Pathway</h1>';
-    html += '<p class="pw-hero-sub">' + esc(data.subtitle || data.description) + '</p>';
-    html += '<div class="pw-progress-wrap">';
-    html += '<div class="pw-progress-bar"><div class="pw-progress-fill" style="width:' + s.pct + '%"></div></div>';
-    html += '<div class="pw-progress-text">' + s.pct + '% Complete (' + s.done + '/' + s.total + ')</div>';
-    html += '</div>';
-    html += '<div class="pw-stats">';
-    html += '<div class="pw-stat"><div class="pw-stat-num">' + data.modules.length + '</div><div class="pw-stat-label">Modules</div></div>';
-    html += '<div class="pw-stat"><div class="pw-stat-num">' + s.total + '</div><div class="pw-stat-label">Activities</div></div>';
-    html += '<div class="pw-stat"><div class="pw-stat-num">~' + Math.round(s.totalMin / 60) + 'h</div><div class="pw-stat-label">Total Time</div></div>';
-    html += '<div class="pw-stat"><div class="pw-stat-num">' + s.done + '</div><div class="pw-stat-label">Completed</div></div>';
-    html += '</div>';
-    html += '</div></div>';
-
-    // Filter bar
-    html += '<div class="pw-filter"><div class="pw-filter-bar">';
-    html += '<span class="pw-filter-label">Level</span>';
-    html += '<button class="pw-filter-btn' + (activeLevel === 'all' ? ' active' : '') + '" onclick="PW.setLevel(\'all\')">All Levels</button>';
-    Object.keys(levelInfo).forEach(function(k) {
-      var l = levelInfo[k];
-      html += '<button class="pw-filter-btn' + (activeLevel === k ? ' active' : '') + '" onclick="PW.setLevel(\'' + k + '\')">' + (l.icon || '') + ' ' + esc(l.label) + '</button>';
-    });
-    html += '<div class="pw-filter-right">';
-    html += '<button class="pw-reset-btn" onclick="PW.reset()">↺ Reset Progress</button>';
-    html += '</div></div></div>';
-
-    // Modules
-    html += '<div class="pw-content" id="main-content">';
-
-    data.modules.forEach(function(m, mi) {
-      var vis = getVisibleActivities(m);
-      if (vis.length === 0) return;
-      var ms = getModuleStats(m);
-
-      html += '<div class="pw-module' + (mi === 0 ? ' open' : '') + '" id="mod-' + m.id + '">';
-      html += '<div class="pw-module-header" onclick="PW.toggle(this)">';
-      var mIcon = m.icon ? '<div class="pw-module-icon">' + esc(m.icon) + '</div>' : ''; html += mIcon;
-      html += '<div class="pw-module-info">';
-      html += '<div class="pw-module-title">' + esc(m.title) + '</div>';
-      html += '<div class="pw-module-sub">' + vis.length + ' activities · ' + ms.done + ' completed</div>';
-      html += '</div>';
-      html += '<div class="pw-module-progress"><div class="pw-module-ring">' + ring(ms.pct) + '<div class="pw-module-ring-text">' + ms.pct + '%</div></div></div>';
-      html += '<div class="pw-module-chevron">›</div>';
-      html += '</div>';
-
-      html += '<div class="pw-activities">';
-      html += '<div class="pw-module-desc">' + esc(m.description || '') + '</div>';
-
-      vis.forEach(function(a) {
-        var isDone = !!completed[a.id];
-        html += '<a class="pw-activity' + (isDone ? ' completed' : '') + '" href="' + esc(a.url) + '" onclick="PW.markAndGo(event,\'' + a.id + '\',this.href)">';
-        html += '<div class="pw-check" onclick="event.preventDefault();event.stopPropagation();PW.toggle_complete(\'' + a.id + '\')">' + (isDone ? '✓' : '') + '</div>';
-        html += '<div class="pw-activity-info">';
-        html += '<div class="pw-activity-title">' + esc(a.title) + '</div>';
-        html += '<div class="pw-activity-meta">';
-        html += '<span class="pw-activity-type" data-type="' + a.type + '">' + a.type.replace('-', ' ') + '</span>';
-        html += '<span class="pw-activity-level" data-level="' + a.level + '">' + (levelInfo[a.level] ? esc(levelInfo[a.level].label) : a.level) + '</span>';
-        if (a.duration) html += '<span class="pw-activity-duration">' + a.duration + ' min</span>';
-        html += '</div>';
-        if (a.description) html += '<div class="pw-activity-desc">' + esc(a.description) + '</div>';
-        if (a.patient) html += '<div class="pw-activity-patient">' + esc(a.patient) + '</div>';
-        html += '</div>';
-        html += '<div class="pw-activity-arrow">→</div>';
-        html += '</a>';
-      });
-
-      html += '</div></div>';
-    });
-
-    html += '</div>';
-
-    document.getElementById('app').innerHTML = html;
-    document.title = data.title + ' Pathway | ReasonDx';
-
-    // Set CSS color from pathway
-    document.documentElement.style.setProperty('--pw-color', data.color || '#7C3AED');
-    document.documentElement.style.setProperty('--pw-dark', data.colorDark || '#5B21B6');
-    document.documentElement.style.setProperty('--pw-light', data.colorLight || '#F5F3FF');
-  }
-
-  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-
-  // ─── Public API ───
-  window.PW = {
-    toggle: function(el) { el.parentElement.classList.toggle('open'); },
-    setLevel: function(l) { activeLevel = l; render(); },
-    toggle_complete: function(id) { toggleComplete(id); },
-    markAndGo: function(e, id, url) {
-      if (!completed[id]) { completed[id] = Date.now(); saveProgress(); }
-      // Let the link navigate naturally
-    },
-    reset: resetProgress
+// ═══════════════════════════════════════
+//  SYSTEM PROMPT BUILDER
+// ═══════════════════════════════════════
+function buildSystemPrompt(system, topic, phase) {
+  var instructions = {
+    explore: 'You are in the EXPLORE phase. Start by asking the student what they already know about this topic. Ask 1-2 open-ended questions to gauge baseline understanding. Be warm and encouraging. Do NOT lecture—only ask questions. If they know nothing, gently scaffold with a leading question about the most fundamental concept.',
+    probe: 'You are in the PROBE phase. Based on what the student shared, dig deeper into the underlying mechanisms. Ask about pathophysiology, cellular/molecular mechanisms, upstream causes, and downstream consequences. Use Socratic questioning—ask "why" and "how" questions. Challenge assumptions. If the student is wrong, do not correct directly; ask a question that reveals the gap. Keep questions focused on ONE concept at a time.',
+    assess: 'You are in the ASSESS phase. Present 2-3 clinical vignette-style questions one at a time that test mechanistic understanding (not just recall). After the student answers, evaluate their reasoning. Be specific about what they got right and what needs work. Track which sub-concepts are strong vs weak. At the end, provide a brief summary of strengths and gaps.',
+    resources: 'You are in the RESOURCES phase. Based on the gaps identified, recommend 3-5 specific resources from ONLY these open-access sources: StatPearls (NCBI Bookshelf), PubMed Central (free full-text articles), Khan Academy Medicine, OpenStax Anatomy & Physiology, and Pathoma (YouTube free lectures). For each resource, provide the specific article/chapter title and explain exactly what section to focus on and why.',
+    retest: 'You are in the RETEST phase. Present 1-2 targeted questions that specifically address the WEAK AREAS identified in the Assess phase. These should be different scenarios testing the same concepts. After the student answers, evaluate and provide a final mastery score (0-100). If the student scores well, congratulate them. If gaps remain, note specific areas for future review. End with encouragement.'
   };
 
-  // ─── Load ───
-  loadProgress();
-  fetch(jsonUrl)
-    .then(function(r) {
-      if (!r.ok) throw new Error('Pathway not found');
-      return r.json();
+  return 'You are MechanismDx, an AI pathophysiology tutor created by Dr. Lauren Fine for the ReasonDx clinical reasoning platform.\n\n' +
+    'CURRENT SESSION:\n- System: ' + system.name + '\n- Topic: ' + topic.name + ' (' + topic.sub + ')\n- Phase: ' + PHASES[phase].label + '\n\n' +
+    'PHASE INSTRUCTIONS:\n' + instructions[PHASES[phase].id] + '\n\n' +
+    'CORE RULES:\n' +
+    '1. NEVER lecture unprompted. Always use Socratic questioning.\n' +
+    '2. Ask ONE question at a time. Wait for the student to respond.\n' +
+    '3. If the student says "I don\'t know," provide a scaffolding hint, NOT the answer.\n' +
+    '4. Connect mechanisms to clinical presentations when possible.\n' +
+    '5. Use precise medical terminology but explain jargon when first introduced.\n' +
+    '6. Keep responses concise (under 150 words unless explaining assessment results).\n' +
+    '7. Only recommend open-access sources: StatPearls, PubMed Central, Khan Academy Medicine, OpenStax, Pathoma YouTube.\n' +
+    '8. Use **bold** for key terms and bullet points for lists.\n' +
+    '9. Be encouraging and supportive.\n' +
+    '10. If the student asks for answers directly, redirect them to think mechanistically.';
+}
+
+// ═══════════════════════════════════════
+//  AI COMMUNICATION
+// ═══════════════════════════════════════
+async function sendToAI(userMessage) {
+  state.isLoading = true;
+  render();
+
+  var sys = SYSTEMS.find(function(s) { return s.id === state.activeSystem; });
+  var topic = null;
+  sys.topics.forEach(function(t) { if (t.id === state.activeTopic) topic = t; });
+  state.convHistory.push({ role: 'user', content: userMessage });
+
+  try {
+    var resp = await fetch(WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'adaptive-tutor',
+        message: userMessage,
+        conversationHistory: state.convHistory.slice(0, -1),
+        systemPrompt: buildSystemPrompt(sys, topic, state.currentPhase)
+      })
+    });
+    if (!resp.ok) throw new Error('API error: ' + resp.status);
+    var data = await resp.json();
+    var aiText = data.response || data.content || '';
+    if (typeof aiText === 'object' && aiText.content) {
+      aiText = aiText.content.map(function(b) { return b.text || ''; }).join('\n');
+    }
+    state.convHistory.push({ role: 'assistant', content: aiText });
+    state.messages.push({ role: 'tutor', content: aiText });
+  } catch (err) {
+    console.error('AI error:', err);
+    state.messages.push({
+      role: 'tutor',
+      content: '**Connection issue.** I had trouble connecting to the AI service. Please try again or refresh the page.'
+    });
+  }
+
+  state.isLoading = false;
+  render();
+  scrollToBottom();
+}
+
+
+// =======================================
+//  RENDER FUNCTIONS
+// =======================================
+function render() {
+  var html = '';
+  if (state.view === 'systems') html = renderSystems();
+  else if (state.view === 'topics') html = renderTopics();
+  else if (state.view === 'session') html = renderSession();
+  else if (state.view === 'summary') html = renderSummary();
+  document.getElementById('app').innerHTML = html;
+  if (state.view === 'session') {
+    var ta = document.getElementById('mxInput');
+    if (ta) {
+      ta.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+      });
+      ta.focus();
+    }
+  }
+}
+
+function renderSystems() {
+  var totalT = 0, doneT = 0;
+  SYSTEMS.forEach(function(s) { var p = getSysProgress(s); totalT += p.total; doneT += p.done; });
+  var h = '<div class="mx-hero"><div class="mx-hero-inner">';
+  h += '<div class="mx-hero-badge">\uD83E\uDDEC AI-Powered Pathophysiology Tutor</div>';
+  h += '<h1>MechanismDx</h1>';
+  h += '<p class="mx-hero-sub">Master disease mechanisms through Socratic AI tutoring. Choose a system, pick a topic, and learn through 5 structured phases.</p>';
+  h += '<div class="mx-hero-stats">';
+  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">' + SYSTEMS.length + '</div><div class="mx-hero-stat-label">Systems</div></div>';
+  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">' + totalT + '</div><div class="mx-hero-stat-label">Topics</div></div>';
+  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">' + doneT + '</div><div class="mx-hero-stat-label">Completed</div></div>';
+  h += '<div class="mx-hero-stat"><div class="mx-hero-stat-num">5</div><div class="mx-hero-stat-label">Phases</div></div>';
+  h += '</div></div></div>';
+  h += '<div class="mx-systems"><div style="max-width:1100px;margin:0 auto">';
+  h += '<div class="mx-systems-title">Choose a Body System</div><div class="mx-grid">';
+  SYSTEMS.forEach(function(sys) {
+    var p = getSysProgress(sys);
+    h += '<div class="mx-system-card" onclick="MX.selectSystem(\'' + sys.id + '\')">';
+    h += '<div class="mx-system-icon">' + esc(sys.icon) + '</div>';
+    h += '<div class="mx-system-name">' + esc(sys.name) + '</div>';
+    h += '<div class="mx-system-count">' + sys.topics.length + ' topics &middot; ' + p.done + ' complete</div>';
+    h += '<div class="mx-system-progress"><div class="mx-system-progress-fill" style="width:' + p.pct + '%"></div></div></div>';
+  });
+  h += '</div></div></div>';
+  return h;
+}
+
+function renderTopics() {
+  var sys = SYSTEMS.find(function(s) { return s.id === state.activeSystem; });
+  if (!sys) return renderSystems();
+  var h = '<div class="mx-hero" style="padding-bottom:24px"><div class="mx-hero-inner">';
+  h += '<div class="mx-hero-badge">' + esc(sys.icon) + ' ' + esc(sys.name) + '</div>';
+  h += '<h1 style="font-size:28px">' + esc(sys.name) + ' Topics</h1>';
+  h += '<p class="mx-hero-sub">Select a topic to begin your AI tutoring session.</p></div></div>';
+  h += '<div class="mx-topics-panel"><div class="mx-topics-header">';
+  h += '<h2>' + esc(sys.icon) + ' ' + esc(sys.name) + '</h2>';
+  h += '<button class="mx-back-btn" onclick="MX.backToSystems()">&larr; All Systems</button></div>';
+  h += '<div class="mx-topic-list">';
+  sys.topics.forEach(function(t) {
+    var pr = state.progress[t.id]; var isDone = pr && pr.completed;
+    h += '<div class="mx-topic-card' + (isDone ? ' done' : '') + '" onclick="MX.startSession(\'' + t.id + '\')">';
+    h += '<div class="mx-topic-check">' + (isDone ? '\u2713' : '') + '</div>';
+    h += '<div class="mx-topic-info"><div class="mx-topic-name">' + esc(t.name) + '</div>';
+    h += '<div class="mx-topic-meta">' + esc(t.sub) + '</div>';
+    if (pr && pr.score !== undefined) h += '<div class="mx-topic-meta" style="color:var(--mx-purple-light);margin-top:2px">Score: ' + pr.score + '/100</div>';
+    h += '</div><div style="color:var(--mx-text-muted);font-size:14px">&rarr;</div></div>';
+  });
+  h += '</div></div>';
+  return h;
+}
+
+function renderSession() {
+  var sys = SYSTEMS.find(function(s) { return s.id === state.activeSystem; });
+  var topic = null;
+  if (sys) sys.topics.forEach(function(t) { if (t.id === state.activeTopic) topic = t; });
+  if (!sys || !topic) return renderSystems();
+
+  var h = '<div class="mx-session" id="main-content">';
+  h += '<div class="mx-session-header"><div>';
+  h += '<div class="mx-session-title">' + esc(topic.name) + '</div>';
+  h += '<div class="mx-session-crumb">' + esc(sys.icon) + ' ' + esc(sys.name) + ' \u2192 ' + esc(topic.name) + '</div>';
+  h += '</div>';
+  h += '<button class="mx-exit-btn" onclick="MX.exitSession()">\u2715 End Session</button></div>';
+
+  // Phase bar
+  h += '<div class="mx-phases">';
+  PHASES.forEach(function(p, i) {
+    var cls = (i === state.currentPhase) ? 'active' : (i < state.currentPhase ? 'complete' : '');
+    var click = (i <= state.currentPhase) ? ' onclick="MX.goPhase(' + i + ')" style="cursor:pointer"' : '';
+    h += '<div class="mx-phase ' + cls + '"' + click + '>';
+    h += '<span class="mx-phase-icon">' + esc(p.icon) + '</span>' + esc(p.label) + '</div>';
+  });
+  h += '</div>';
+
+  // Chat messages
+  h += '<div class="mx-chat" id="mxChat">';
+  state.messages.forEach(function(m) {
+    var isTutor = m.role === 'tutor';
+    h += '<div class="mx-msg ' + (isTutor ? 'tutor' : 'student') + '">';
+    h += '<div class="mx-avatar">' + (isTutor ? 'Mx' : 'You') + '</div>';
+    h += '<div class="mx-bubble">' + (isTutor ? formatAI(m.content) : '<p>' + esc(m.content) + '</p>') + '</div></div>';
+  });
+  if (state.isLoading) {
+    h += '<div class="mx-typing">';
+    h += '<div class="mx-avatar" style="background:linear-gradient(135deg,var(--mx-purple-dark),var(--mx-purple));color:#fff;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">Mx</div>';
+    h += '<div class="mx-typing-dots"><div class="mx-typing-dot"></div><div class="mx-typing-dot"></div><div class="mx-typing-dot"></div></div></div>';
+  }
+  h += '</div>';
+
+  // Phase advance / finish buttons
+  var studentCount = state.messages.filter(function(m) { return m.role === 'student'; }).length;
+  if (studentCount >= 2 && !state.isLoading) {
+    if (state.currentPhase < PHASES.length - 1) {
+      h += '<div style="text-align:center;margin-bottom:16px">';
+      h += '<button class="mx-btn mx-btn-ghost" onclick="MX.advancePhase()">\u2192 Move to ' + esc(PHASES[state.currentPhase + 1].label) + ' Phase</button></div>';
+    } else {
+      h += '<div style="text-align:center;margin-bottom:16px">';
+      h += '<button class="mx-btn mx-btn-primary" onclick="MX.finishSession()">\u2713 Complete Session</button></div>';
+    }
+  }
+
+  // Input
+  h += '<div class="mx-input-area"><div class="mx-input-wrap">';
+  h += '<textarea class="mx-input" id="mxInput" placeholder="Type your response..." rows="1" onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();MX.send()}"' + (state.isLoading ? ' disabled' : '') + '></textarea>';
+  h += '<button class="mx-send" onclick="MX.send()"' + (state.isLoading ? ' disabled' : '') + '>\u2191</button>';
+  h += '</div>';
+  h += '<div class="mx-input-hint">Phase ' + (state.currentPhase + 1) + ' of 5: ' + esc(PHASES[state.currentPhase].desc) + '</div></div>';
+  h += '</div>';
+  return h;
+}
+
+function renderSummary() {
+  var sys = SYSTEMS.find(function(s) { return s.id === state.activeSystem; });
+  var topic = null;
+  if (sys) sys.topics.forEach(function(t) { if (t.id === state.activeTopic) topic = t; });
+  var score = state.sessionScore || 75;
+
+  var h = '<div class="mx-session" id="main-content"><div class="mx-summary">';
+  h += '<div class="mx-summary-icon">\uD83C\uDFAF</div>';
+  h += '<h3>Session Complete</h3>';
+  h += '<div class="mx-summary-score">' + score + '</div>';
+  h += '<div class="mx-summary-detail">You completed <strong>' + esc(topic ? topic.name : 'this topic') + '</strong> in ' + esc(sys ? sys.name : '') + '.</div>';
+  h += '<div class="mx-summary-actions">';
+  h += '<button class="mx-btn mx-btn-primary" onclick="MX.backToTopics()">&larr; More ' + esc(sys ? sys.name : '') + ' Topics</button>';
+  h += '<button class="mx-btn mx-btn-ghost" onclick="MX.retrySession()">\u21BA Retry</button>';
+  h += '<button class="mx-btn mx-btn-ghost" onclick="MX.backToSystems()">\uD83C\uDFE0 All Systems</button>';
+  h += '</div></div></div>';
+  return h;
+}
+
+// =======================================
+//  PUBLIC API
+// =======================================
+window.MX = {
+  selectSystem: function(id) {
+    state.activeSystem = id;
+    state.view = 'topics';
+    render();
+    window.scrollTo(0, 0);
+  },
+
+  backToSystems: function() {
+    state.view = 'systems';
+    state.activeSystem = null;
+    state.activeTopic = null;
+    render();
+    window.scrollTo(0, 0);
+  },
+
+  backToTopics: function() {
+    state.view = 'topics';
+    state.activeTopic = null;
+    state.messages = [];
+    state.convHistory = [];
+    state.currentPhase = 0;
+    render();
+    window.scrollTo(0, 0);
+  },
+
+  startSession: function(topicId) {
+    state.activeTopic = topicId;
+    state.view = 'session';
+    state.currentPhase = 0;
+    state.messages = [];
+    state.convHistory = [];
+    state.sessionScore = null;
+    render();
+    window.scrollTo(0, 0);
+
+    var sys = SYSTEMS.find(function(s) { return s.id === state.activeSystem; });
+    var topic = null;
+    if (sys) sys.topics.forEach(function(t) { if (t.id === topicId) topic = t; });
+
+    var initMsg = 'I want to learn about ' + (topic ? topic.name : topicId) + '. Start the Explore phase.';
+    state.convHistory.push({ role: 'user', content: initMsg });
+    state.isLoading = true;
+    render();
+
+    fetch(WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'adaptive-tutor',
+        message: initMsg,
+        conversationHistory: [],
+        systemPrompt: buildSystemPrompt(sys, topic, 0)
+      })
     })
-    .then(function(d) {
-      data = d;
+    .then(function(r) { if (!r.ok) throw new Error('API ' + r.status); return r.json(); })
+    .then(function(data) {
+      var aiText = data.response || data.content || '';
+      if (typeof aiText === 'object' && aiText.content) {
+        aiText = aiText.content.map(function(b) { return b.text || ''; }).join('\n');
+      }
+      state.convHistory.push({ role: 'assistant', content: aiText });
+      state.messages.push({ role: 'tutor', content: aiText });
+      state.isLoading = false;
       render();
+      scrollToBottom();
     })
     .catch(function(err) {
-      document.getElementById('app').innerHTML = '<div class="pw-empty"><div class="pw-empty-icon"></div><h3>Pathway Not Found</h3><p>Could not load "' + esc(pathwayId) + '". Check the URL and try again.</p><p style="margin-top:16px"><a href="virtual-emr.html" style="color:var(--pw-color);font-weight:600">← Back to Virtual EMR</a></p></div>';
+      console.error(err);
+      state.messages.push({
+        role: 'tutor',
+        content: '**Welcome!** Let\u2019s explore **' + (topic ? topic.name : 'this topic') + '** together.\n\n**What do you already know about this topic?** Even a rough idea is a great starting point.'
+      });
+      state.isLoading = false;
+      render();
+      scrollToBottom();
     });
+  },
+
+  send: function() {
+    var input = document.getElementById('mxInput');
+    if (!input) return;
+    var msg = input.value.trim();
+    if (!msg || state.isLoading) return;
+    state.messages.push({ role: 'student', content: msg });
+    input.value = '';
+    input.style.height = 'auto';
+    render();
+    scrollToBottom();
+    sendToAI(msg);
+  },
+
+  advancePhase: function() {
+    if (state.currentPhase >= PHASES.length - 1) return;
+    state.currentPhase++;
+    state.messages.push({
+      role: 'tutor',
+      content: '**' + PHASES[state.currentPhase].icon + ' ' + PHASES[state.currentPhase].label + ' Phase** \u2014 ' + PHASES[state.currentPhase].desc
+    });
+    render();
+    scrollToBottom();
+    sendToAI('Moving to the ' + PHASES[state.currentPhase].label + ' phase now.');
+  },
+
+  goPhase: function(idx) {
+    if (idx >= state.currentPhase) return;
+    state.currentPhase = idx;
+    state.messages.push({
+      role: 'tutor',
+      content: '**' + PHASES[idx].icon + ' Returning to ' + PHASES[idx].label + ' Phase**'
+    });
+    render();
+    scrollToBottom();
+  },
+
+  finishSession: function() {
+    var lastTutor = '';
+    for (var i = state.messages.length - 1; i >= 0; i--) {
+      if (state.messages[i].role === 'tutor') { lastTutor = state.messages[i].content; break; }
+    }
+    var scoreMatch = lastTutor.match(/(\d{1,3})\s*\/\s*100|score[:\s]*(\d{1,3})|mastery[:\s]*(\d{1,3})/i);
+    var score = scoreMatch ? parseInt(scoreMatch[1] || scoreMatch[2] || scoreMatch[3]) : 75;
+    score = Math.min(100, Math.max(0, score));
+
+    state.sessionScore = score;
+    state.progress[state.activeTopic] = {
+      completed: score >= 50,
+      score: score,
+      timestamp: Date.now()
+    };
+    saveProgress();
+    state.view = 'summary';
+    render();
+    window.scrollTo(0, 0);
+  },
+
+  retrySession: function() {
+    MX.startSession(state.activeTopic);
+  },
+
+  exitSession: function() {
+    if (state.messages.length > 2) {
+      if (!confirm('End this tutoring session? Progress will not be saved.')) return;
+    }
+    MX.backToTopics();
+  }
+};
+
+// =======================================
+//  URL PARAMS & INIT
+// =======================================
+var params = new URLSearchParams(window.location.search);
+var urlSystem = params.get('system') || params.get('id');
+var urlTopic = params.get('topic');
+
+loadProgress();
+
+if (urlSystem && urlTopic) {
+  var vs = SYSTEMS.find(function(s) { return s.id === urlSystem; });
+  if (vs) {
+    var vt = vs.topics.find(function(t) { return t.id === urlTopic; });
+    if (vt) { state.activeSystem = urlSystem; MX.startSession(urlTopic); }
+    else { state.activeSystem = urlSystem; state.view = 'topics'; render(); }
+  } else { render(); }
+} else if (urlSystem) {
+  var vs2 = SYSTEMS.find(function(s) { return s.id === urlSystem; });
+  if (vs2) { state.activeSystem = urlSystem; state.view = 'topics'; }
+  render();
+} else {
+  render();
+}
 
 })();
 </script>
-
 <script src="js/rdx-nav.js"></script>
 <script src="js/rdx-help-widget.js"></script>
-<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});</script>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){})</script>
 <script src="js/nav-global.js"></script>
 </body>
 </html>
