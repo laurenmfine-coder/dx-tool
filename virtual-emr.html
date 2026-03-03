@@ -3904,10 +3904,29 @@ submitDoc = function(){
 <script>
 // ═══ ROUTING — runs after all modules are loaded ═══
 (function(){
-  if (window.EMRShell && (CASE_ID || S.clinicalSetting)) { EMRShell.inject(); }
-  if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
-  else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
-  else { loadCaseData(function() { bootstrapApp(); }); }
+  try {
+    if (window.EMRShell && (CASE_ID || S.clinicalSetting)) { EMRShell.inject(); }
+    if (!CASE_ID && !S.clinicalSetting) {
+      bootstrapApp().catch(function(e) {
+        console.error('bootstrapApp error:', e);
+        var app = document.getElementById('app');
+        if (app && !app.innerHTML.trim()) {
+          // bootstrapApp failed silently — render landing directly
+          if (window.EMRLanding) {
+            app.innerHTML = EMRLanding.render();
+          } else {
+            app.innerHTML = '<div style="padding:40px;text-align:center"><h2>Error loading Virtual EMR</h2><p>' + e.message + '</p></div>';
+          }
+        }
+      });
+    }
+    else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
+    else { loadCaseData(function() { bootstrapApp(); }); }
+  } catch(e) {
+    console.error('Routing error:', e);
+    var app = document.getElementById('app');
+    if (app) app.innerHTML = '<div style="padding:40px;text-align:center"><h2>Error</h2><p>' + e.message + '</p></div>';
+  }
 })();
 </script>
 <script src="js/mission-control.js"></script>

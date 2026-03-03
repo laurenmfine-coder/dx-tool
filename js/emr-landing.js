@@ -197,14 +197,22 @@
       html += '<p style="font-size:12px;color:#475569;margin:0"><span style="font-weight:700;color:#5DADE2">Reason</span><span style="font-style:italic;color:#85C1E9">Dx</span> \u00B7 Clinical Education Platform \u00B7 NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>';
       html += '</footer>';
 
-      // ─── ANIMATIONS ───
+      // ─── FONT + ANIMATIONS ───
       html += '<style>';
-      html += '@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");';
       html += '@keyframes fadeInDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}';
       html += '@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}';
       html += '@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}';
       html += 'html{scroll-behavior:smooth}';
       html += '</style>';
+
+      // Inject Google Fonts link if not already present
+      if (!document.getElementById('rdx-dm-sans-font')) {
+        var link = document.createElement('link');
+        link.id = 'rdx-dm-sans-font';
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap';
+        document.head.appendChild(link);
+      }
 
       html += '</div>';
       return html;
