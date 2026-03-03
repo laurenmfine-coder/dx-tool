@@ -2153,12 +2153,7 @@ async function bootstrapApp() {
   document.addEventListener("mousedown",e=>{const p=document.getElementById("annotationPopover");if(p&&p.classList.contains("visible")&&!p.contains(e.target))hideAnnotationPopover()});
   window.addEventListener("beforeunload",function(){if(window.ChartTracker){ChartTracker.stop()}});
 }
-// Route: no case + no setting = show setting selector; otherwise load case data
-// Inject EMR shell (sidebar) for setting/case pages before any rendering
-if (window.EMRShell && (CASE_ID || S.clinicalSetting)) { EMRShell.inject(); }
-if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
-else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
-else { loadCaseData(function() { bootstrapApp(); }); }
+// Route is in a separate script block after external scripts load
 
 // ═══════════════════════════════════════════════════════════════
 // INTERACTIVE UI RENDERERS (student clinical actions)
@@ -3906,6 +3901,15 @@ submitDoc = function(){
 <script src="js/emr-overview.js"></script>
 <script src="js/emr-landing.js"></script>
 <script src="js/emr-shell.js"></script>
+<script>
+// ═══ ROUTING — runs after all modules are loaded ═══
+(function(){
+  if (window.EMRShell && (CASE_ID || S.clinicalSetting)) { EMRShell.inject(); }
+  if (!CASE_ID && !S.clinicalSetting) { bootstrapApp(); }
+  else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
+  else { loadCaseData(function() { bootstrapApp(); }); }
+})();
+</script>
 <script src="js/mission-control.js"></script>
 <script src="js/ddx-builder.js"></script>
 <script src="rdx-demo-tour.js"></script>
