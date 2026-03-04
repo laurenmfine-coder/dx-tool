@@ -936,8 +936,8 @@ window.EMR_DATA = {
     "journal": "N Engl J Med",
     "year": 2019,
     "doi": "10.1056/NEJMra1807761",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/31826341/",
-    "openAccess": false,
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
+    "openAccess": true,
     "validates": [
       ">90% with PCN label NOT truly allergic",
       ">80% lose sensitivity after 10 years",
@@ -945,4 +945,23 @@ window.EMR_DATA = {
       "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "10% of patients are labeled penicillin-allergic but >95% can tolerate penicillin on formal evaluation. IgE to penicillin wanes over time: 80% lose SPT reactivity within 5 years, 98% within 10 years. The most common reason for false labels: viral rash misattributed to amoxicillin (especially EBV + amoxicillin — maculopapular rash in 80–100% of EBV/amoxicillin patients is NOT IgE).",
+      "AAAAI 2022 risk stratification: low-risk patients (vague/non-specific symptoms, >10 years ago, no systemic features) → graded amoxicillin challenge directly, NO skin testing required. This approach safely de-labels most patients without need for SPT.",
+      "Cross-reactivity between penicillins and cephalosporins is determined by R1 side chain identity, NOT the shared beta-lactam ring. True immunologic cross-reactivity <2%. Amoxicillin/ampicillin share R1 with cephalexin/cefadroxil/cefprozil — higher cross-reactivity risk with these specific pairs."
+    ],
+    "boardPearls": [
+      "Penicillin IgE wanes: 80% at 5 years, 98% at 10 years. Most labels are outdated.",
+      "EBV + amoxicillin rash: 80–100% maculopapular rash. NOT IgE. NOT penicillin allergy. Do not label.",
+      "PPL (Pre-Pen): major penicillin determinant — detects 95% of penicillin-specific IgE. Required for skin test.",
+      "Low risk → graded amoxicillin challenge directly (AAAAI 2022). No skin testing needed.",
+      "Moderate risk → skin test first (PPL + pen G). Negative → graded challenge.",
+      "Cross-reactivity: determined by R1 side chain, NOT beta-lactam ring. True cross-reactivity <2%.",
+      "Amoxicillin shares R1 with: cephalexin, cefadroxil, cefprozil, cefaclor (higher risk). NOT with ceftriaxone, cefepime, cefuroxime (different R1, safe).",
+      "Penicillin allergy impact: 60% more vancomycin use, higher MRSA/CDiff risk, longer hospitalizations."
+    ]
+  }
+};

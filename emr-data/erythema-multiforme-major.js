@@ -1097,4 +1097,22 @@ window.EMR_DATA = {
       "EM vs SJS = different diseases"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "EM major is caused by infections (HSV #1 in adults, Mycoplasma pneumoniae #1 in children), NOT drugs. This distinguishes it from SJS/TEN which is drug-caused. Classic target lesions (3 zones: pale dusky center, dark edematous ring, red periphery) are the hallmark — present in acral distribution (palms, soles, dorsal hands, face).",
+      "EM major vs SJS: EM has typical 3-zone target lesions + acral distribution + usually 1 mucosal site + self-limiting. SJS has ill-defined atypical targets/purpuric macules + extensive trunk distribution + all mucosal sites + drug-caused + Nikolsky positive.",
+      "Recurrent EM (from HSV): daily suppressive acyclovir/valacyclovir reduces recurrence by 50–75%. This is a common clinical scenario — patient with recurrent EM should be on HSV suppression."
+    ],
+    "boardPearls": [
+      "EM cause: infections (HSV #1 adults, Mycoplasma #1 children). NOT drugs (drugs → SJS/TEN).",
+      "Classic target lesion: 3 zones — pale/dusky center + dark edematous inner ring + red outer ring. Acral distribution (palms, soles, dorsal hands, face).",
+      "EM major vs SJS: EM = infection, 3-zone targets, acral, limited mucosal (1 site, usually oral), Nikolsky NEGATIVE, self-limiting. SJS = drug, ill-defined targets, trunk-dominant, all mucosal sites, Nikolsky POSITIVE.",
+      "Nikolsky sign: NEGATIVE in EM major. Positive in TEN, pemphigus vulgaris, SSSS.",
+      "Natural history: EM major resolves in 2–6 weeks. Recurs with each HSV episode.",
+      "Recurrent EM treatment: suppress HSV — valacyclovir 500 mg BID daily (or acyclovir 400 mg BID) × 6–12 months.",
+      "EM minor: same lesions, NO/minimal mucosal involvement. Also HSV-triggered."
+    ]
+  }
+};

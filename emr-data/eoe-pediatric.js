@@ -1029,4 +1029,21 @@ window.EMR_DATA = {
       "Repeat EGD 8-12 weeks"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Pediatric EoE presentation differs from adults: infants/toddlers — feeding refusal, vomiting, poor weight gain. School-age children — vomiting, abdominal pain, food refusal. Adolescents/adults — dysphagia, food impaction (adult pattern).",
+      "Elemental (amino acid-based) formula achieves histologic remission in >90% of pediatric EoE — but is expensive, poorly palatable, and impractical long-term. Used to confirm food-triggered EoE and identify triggers before food reintroduction.",
+      "Swallowed topical budesonide (orodispersible tablet, Jorveza) and fluticasone (sprayed into mouth, swallowed) are standard pharmacotherapy in children — same mechanism as inhaled steroids for asthma but targeted to esophagus."
+    ],
+    "boardPearls": [
+      "Pediatric EoE: same histologic threshold (≥15 eos/hpf) and treatment approach as adults.",
+      "Top trigger foods: cow's milk (#1), wheat, egg, soy. Single food elimination (milk only) achieves remission in ~40% — start here before 6FED.",
+      "Elemental formula: >90% histologic remission — gold standard to confirm food-driven EoE. Step-down to identify trigger foods.",
+      "Growth and nutrition: monitor height, weight, iron, zinc in children on elimination diets. Dietitian essential.",
+      "Dupilumab: FDA approved for EoE ages ≥1 year weighing ≥15 kg (2022). Appropriate when dietary/topical therapy insufficient.",
+      "Natural history: EoE does not spontaneously remit — chronic disease requiring ongoing treatment."
+    ]
+  }
+};

@@ -1178,4 +1178,24 @@ window.EMR_DATA = {
       "Baseline tryptase >20 suggests SM"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Systemic mastocytosis diagnosis requires the WHO criteria: ≥1 major + ≥1 minor criterion, or ≥3 minor criteria. Major criterion: multifocal mast cell aggregates ≥15 cells/focus on BM biopsy.",
+      "Serum tryptase >20 ng/mL is a minor diagnostic criterion for SM AND a clinical marker of anaphylaxis severity. All patients with unexplained anaphylaxis should have a baseline tryptase checked.",
+      "Anaphylaxis in mastocytosis is uniquely refractory — standard epinephrine may be inadequate. Prescribe EpiPen × 2 (some centers × 4). Medical alert ID required.",
+      "Venom hypersensitivity + unexplained severe anaphylaxis → always check serum tryptase. SM is frequently first diagnosed after a disproportionate venom anaphylaxis episode.",
+      "Indolent SM (ISM): near-normal life expectancy. Focus on anaphylaxis prevention and trigger avoidance. Advanced SM (ASM, MCL): cytoreductive therapy with midostaurin or avapritinib.",
+      "Venom immunotherapy (VIT) is INDICATED in mastocytosis patients with venom-triggered anaphylaxis — and should be continued lifelong (do not stop at the standard 5-year mark)."
+    ],
+    "boardPearls": [
+      "SM major criterion: >15 mast cells in compact aggregates on BM biopsy.",
+      "SM minor criteria (need 3 of 4, or 1 major + 1 minor): spindle-shaped MCs >25%; KIT D816V; CD25 or CD2 co-expression; tryptase >20 ng/mL.",
+      "Darier's sign: urtication of a pigmented macule on stroking = urticaria pigmentosa (cutaneous mastocytosis).",
+      "Triggers: NSAIDs, opioids, radiocontrast, alcohol, temperature extremes, Hymenoptera stings.",
+      "Midostaurin and avapritinib: KIT inhibitors FDA-approved for advanced SM.",
+      "Venom IT in mastocytosis: indicate AND continue lifelong — unlike standard 5-year VIT course."
+    ]
+  }
+};

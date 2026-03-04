@@ -780,4 +780,21 @@ window.EMR_DATA = {
       "60% resolution by age 3-5"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "FPIES is non-IgE mediated — SPT and sIgE are negative. Misdiagnosis as viral gastroenteritis or sepsis is common because the presentation (profuse vomiting, lethargy, pallor) is dramatic and occurs without urticaria.",
+      "IV ondansetron (5-HT3 antagonist) is first-line treatment for acute FPIES — 0.15 mg/kg IV, max 4 mg. Prescribed as home ODT for mild episodes. NOT epinephrine (no IgE mechanism).",
+      "FPIES diagnostic criteria: vomiting 1–4h post-ingestion (no urticaria/wheeze) + ≥3 of: lethargy, pallor, profuse vomiting, hypotension, hypothermia, diarrhea at 5–10h, neutrophilia +3,500 at 6h."
+    ],
+    "boardPearls": [
+      "FPIES timing: vomiting 1–4h after ingestion. Distinguish from IgE anaphylaxis (5–30 min) and food poisoning (1–6h but usually multiple people affected).",
+      "Top triggers by age: infants — cow's milk, soy. Toddlers — rice, oat, sweet potato. Adults — shellfish (oyster, crab, shrimp).",
+      "Acute management: IV ondansetron 0.15 mg/kg (max 4 mg). IV NS 20 mL/kg if hypotension. NOT epinephrine.",
+      "Natural history: milk/soy FPIES resolves ~50% by age 3. Grain FPIES resolves by 3–5. Shellfish may persist into adulthood.",
+      "Atypical FPIES: 10–20% develop IgE sensitization to trigger → prescribe EpiPen in these patients.",
+      "Confirm resolution: supervised OFC in allergist office — never at home."
+    ]
+  }
+};

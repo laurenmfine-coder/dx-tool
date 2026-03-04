@@ -1149,4 +1149,21 @@ window.EMR_DATA = {
       "Repeat EGD 8-12 weeks"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "EoE is diagnosed by ≥15 eosinophils/hpf on esophageal biopsy (≥6 biopsies from proximal + distal esophagus) after 8-week PPI trial. PPI trial first excludes PPI-responsive esophageal eosinophilia (GERD-related), which is not true EoE.",
+      "Most common trigger food: cow's milk (55–65%). 6-food elimination diet (milk, wheat, egg, soy, nuts, seafood) achieves histologic remission in 70–80%. Reintroduce one food at a time with repeat endoscopy to identify specific trigger.",
+      "Dupilumab (FDA 2022) is the first biologic approved for EoE — targets IL-4Rα, blocking IL-4/IL-13, which drives eotaxin-3 production in esophageal epithelium. Dupilumab-associated EoE: new EoE can develop in patients on dupilumab for asthma/AD."
+    ],
+    "boardPearls": [
+      "EoE diagnostic threshold: ≥15 eos/hpf after 8-week PPI trial. PPI-responsive eosinophilia: normalizes on PPI → NOT true EoE.",
+      "Endoscopic findings: rings (trachealization), longitudinal furrows, white exudates, edema, stricture. EREFS score used in trials.",
+      "Most common adult EoE presentation: dysphagia + food impaction. Most common pediatric: feeding refusal, vomiting, abdominal pain.",
+      "Treatment options: 6FED (70–80% remission); swallowed topical budesonide/fluticasone (50–70%); dupilumab (59% remission, TREX trial); PPI (30–40%).",
+      "Dilation: for symptomatic strictures. Improves dysphagia but does NOT treat underlying eosinophilic inflammation — must combine with anti-inflammatory therapy.",
+      "Dupilumab-associated EoE: recognized adverse effect — eosinophils redirected to esophagus. Screen with symptom questionnaire."
+    ]
+  }
+};

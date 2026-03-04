@@ -984,8 +984,8 @@ window.EMR_DATA = {
     "journal": "Pediatr Allergy Immunol",
     "year": 2007,
     "doi": "10.1111/j.1399-3038.2007.00658.x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/18078420/",
-    "openAccess": false,
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448118/",
+    "openAccess": true,
     "validates": [
       "Giant papillae, shield ulcers, Horner-Trantas dots",
       "Young males, African American/Middle Eastern",

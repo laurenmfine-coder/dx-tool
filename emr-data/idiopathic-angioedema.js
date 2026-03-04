@@ -969,4 +969,21 @@ window.EMR_DATA = {
     ]
   }
 ]
+,
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Idiopathic angioedema (histaminergic vs non-histaminergic subtypes): histaminergic type responds to antihistamines and often has concurrent urticaria. Non-histaminergic idiopathic angioedema resembles HAE clinically but has normal complement — may be bradykinin-mediated.",
+      "Workup for recurrent angioedema without urticaria: C4, C3, C1-INH level + function, C1q, FXII mutation (Type III HAE), review all medications (especially ACEi, ARBs, NSAIDs, estrogens).",
+      "Omalizumab has shown benefit in refractory histaminergic idiopathic angioedema — mechanism: reduces free IgE → mast cell desensitization."
+    ],
+    "boardPearls": [
+      "Recurrent angioedema without urticaria workup: C4 (if low → HAE), C1-INH level + function, C1q (if low → acquired C1INH deficiency), FXII mutation, medication review.",
+      "C4 low between attacks: HAE. C4 normal: ACEi, acquired, idiopathic, allergic.",
+      "C1q low: acquired C1-INH deficiency (associated with lymphoma, B-cell malignancy, SLE).",
+      "Idiopathic histaminergic angioedema: responds to antihistamines. Treat like CSU.",
+      "Idiopathic non-histaminergic angioedema: does not respond to antihistamines. Consider icatibant trial (bradykinin-mediated?).",
+      "Omalizumab: effective for refractory histaminergic idiopathic angioedema — same mechanism as CSU treatment."
+    ]
+  }
 };

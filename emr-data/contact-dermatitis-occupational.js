@@ -913,4 +913,25 @@ window.EMR_DATA = {
       "Nitrile vs latex gloves"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Allergic contact dermatitis (ACD) is Type IV (T-cell mediated, delayed hypersensitivity) — NOT IgE-mediated. SPT will be negative. Patch testing is the diagnostic gold standard.",
+      "Patch testing protocol: Finn chambers applied to upper back × 48h → removed at 48h (read 1) → re-read at 96h (read 2). BOTH readings required — late reactions (96h only) would be missed without second read.",
+      "Occupational ACD most common sensitizers: nickel (#1 overall), fragrance mix, balsam of Peru, rubber accelerators (thiurams, carbamates — latex gloves), epoxy resin (construction workers), paraphenylenediamine (PPD — hair dye, black henna).",
+      "Nickel ACD: elicited by nickel in costume jewelry, belt buckles, jeans buttons, cell phones, watchbands. Treatment: strict nickel avoidance. Dimethylglyoxime test can detect nickel in metal objects.",
+      "Irritant contact dermatitis (ICD) vs ACD: ICD is non-immunologic (direct chemical damage). No sensitization needed. Occurs in anyone with sufficient exposure. Patch test NEGATIVE. ICD: hairdressers (detergents), healthcare workers (hand washing), food handlers.",
+      "Systemic contact dermatitis: after sensitization to a topical allergen, systemic exposure to the same chemical (oral, IV) can trigger widespread ACD — baboon syndrome (perianal + flexural erythema) with systemic nickel or balsam of Peru ingestion."
+    ],
+    "boardPearls": [
+      "ACD = Type IVa (Th1 / CD4+ contact hypersensitivity). Patch test positive at 48–96h.",
+      "Patch test interpretation: erythema only = negative/irritant. Erythema + papules = 1+. Erythema + papules + vesicles = 2+. Confluent vesicles, spreading, bullae = 3+ (strong positive).",
+      "Most common patch test positives: nickel, fragrance mix, balsam of Peru, thimerosal, cobalt, rubber mix, neomycin, quaternium-15.",
+      "Neomycin ACD: topical antibiotic in wound care products. Classic: eczematous reaction to antibiotic ointment (Neosporin) used on wound.",
+      "PPD (paraphenylenediamine): hair dye + black henna tattoos. Sensitization → permanent hair dye allergy. Cross-reacts with azo dyes, sulfonamides, benzocaine.",
+      "Rubber accelerators (thiurams, carbamates): latex gloves → ACD on dorsal hands. Separate from latex protein (Type I IgE) anaphylaxis.",
+      "Treatment: identify and avoid allergen + potent TCS for acute flares. Long-term: barrier protection, allergen-free gloves/products."
+    ]
+  }
+};

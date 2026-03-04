@@ -1250,4 +1250,22 @@ window.EMR_DATA = {
       "Score 3 = 12.1% mortality"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "SJS/TEN mechanism: Type IVc — CD8+ cytotoxic T lymphocytes recognize drug/metabolite on MHC-I on keratinocytes → granulysin (principal cytotoxin) + perforin/granzyme B → keratinocyte apoptosis → epidermal detachment. Granulysin levels in blister fluid correlate with severity.",
+      "Nikolsky sign: lateral shearing pressure on normal-appearing skin adjacent to blister → epidermis slides off. POSITIVE in TEN (and pemphigus vulgaris, SSSS). NEGATIVE in SJS, EM major.",
+      "SCORTEN: 7 variables (age >40, HR >120, malignancy, BSA >10%, BUN >28, glucose >252, bicarbonate <20) each 1 point. Score ≥5 = >90% mortality. Calculate at admission AND day 3."
+    ],
+    "boardPearls": [
+      "SJS <10% BSA; Overlap 10–30%; TEN >30% BSA. Mortality: SJS 1–5%, TEN 20–30%.",
+      "Principal cytotoxin: granulysin (from CD8+ CTL and NK cells). Not histamine. Not IgE.",
+      "Nikolsky sign: positive = TEN (and pemphigus, SSSS). Negative = SJS, EM major.",
+      "SJS vs EM major: SJS = drug-caused, ill-defined atypical targets, extensive mucosal (all sites), Nikolsky+. EM = HSV/infection, classic 3-zone targets (pale/dark/red), acral, limited mucosal, Nikolsky-.",
+      "High-risk HLA associations: carbamazepine + HLA-B*15:02 (Southeast Asian); allopurinol + HLA-B*58:01 (Han Chinese/Thai); abacavir + HLA-B*57:01 (all populations).",
+      "Management: burn unit care, fluid/electrolyte resuscitation, wound care, IVIG or cyclosporine (evidence limited). Stop culprit drug immediately.",
+      "SCORTEN ≥5 = >90% mortality — ICU/burn unit mandatory."
+    ]
+  }
+};

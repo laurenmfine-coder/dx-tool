@@ -983,4 +983,21 @@ window.EMR_DATA = {
       "75% tolerate baked milk by age 1"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Cow's milk protein allergy (CMPA) affects 2–3% of infants and is the most common food allergy in infancy. IgE-mediated CMPA presents within 30 min of exposure (urticaria, vomiting, anaphylaxis). Non-IgE CMPA presents with GI symptoms hours later (FPIES, proctocolitis).",
+      "Baked milk tolerance: ~75% of milk-allergic children can tolerate extensively heated (baked) milk. Casein IgE-negative patients are most likely to tolerate baked milk. Introducing baked milk accelerates natural tolerance development.",
+      "Natural history: ~80% of milk-allergic children achieve tolerance by age 5–6. Casein-sensitized children (heat-stable protein) are less likely to outgrow and have more severe reactions."
+    ],
+    "boardPearls": [
+      "Milk protein components: casein (Bos d 8) — heat-stable → persistent allergy. Whey (β-lactoglobulin Bos d 5, α-lactalbumin) — heat-labile → may tolerate baked milk.",
+      "Casein sIgE: positive → cannot tolerate baked milk. Negative, whey positive → baked milk ladder may be appropriate.",
+      "Formula options: extensively hydrolyzed casein (Nutramigen, Alimentum) for mild-moderate CMPA. Amino acid formula (Neocate, EleCare) for severe CMPA/FPIES.",
+      "Soy formula: 10–15% of milk-allergic infants are also soy-allergic (shared storage proteins). Not recommended for IgE-mediated milk allergy in infants <6 months.",
+      "Breastfeeding: maternal milk elimination diet if breastfed infant has CMPA. Reassess after 2 weeks.",
+      "Outgrowth: 80% by age 5–6. OFC annually to assess resolution."
+    ]
+  }
+};

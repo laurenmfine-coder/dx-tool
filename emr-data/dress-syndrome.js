@@ -1171,8 +1171,8 @@ window.EMR_DATA = {
     "journal": "Br J Dermatol",
     "year": 2013,
     "doi": "10.1111/bjd.12501",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/23855313/",
-    "openAccess": false,
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK459327/",
+    "openAccess": true,
     "validates": [
       "RegiSCAR score ≥5 = definite DRESS",
       "HHV-6 reactivation",
@@ -1188,11 +1188,29 @@ window.EMR_DATA = {
     "year": 2019,
     "doi": "10.1016/j.jaip.2018.08.004",
     "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
-    "openAccess": false,
+    "openAccess": true,
     "validates": [
       "Autoimmune thyroiditis ~40% post-DRESS",
       "TSH monitoring at 3, 6, 12 months",
       "Type 1 DM risk"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "DRESS has a latency of 2–8 weeks after drug initiation — the longest latency of any severe cutaneous adverse reaction. HHV-6 reactivation is a distinguishing pathogenic feature (not seen in SJS/TEN) and correlates with disease severity.",
+      "RegiSCAR ≥4 = probable/definite DRESS. Must have: fever + rash + at least one internal organ involved (liver most common — elevated transaminases). Eosinophilia is supportive but not required.",
+      "Management: immediate cessation of ALL potential culprit drugs. High-dose systemic corticosteroids (prednisone 1–2 mg/kg/day) tapered SLOWLY over months — rapid taper causes relapse. Organ-specific management (hepatitis, nephritis, pneumonitis)."
+    ],
+    "boardPearls": [
+      "DRESS timing: 2–8 weeks after drug. Longest latency of any SCAR.",
+      "HHV-6 reactivation: distinguishing feature of DRESS (not present in SJS/TEN). Correlates with severity.",
+      "RegiSCAR ≥4: fever + rash + hospitalization + internal organ + eosinophilia ± atypical lymphocytes.",
+      "Most common internal organ: liver (transaminase elevation). Kidney (nephritis), lung (pneumonitis), heart (myocarditis) also occur.",
+      "Classic culprits: allopurinol (HLA-B*58:01 in Han Chinese/Thai), aromatic anticonvulsants (carbamazepine, phenytoin, phenobarbital — cross-reactive), sulfonamides, minocycline, abacavir (HLA-B*57:01).",
+      "Aromatic anticonvulsant cross-reactivity: avoid ALL aromatic anticonvulsants (carbamazepine, phenytoin, phenobarbital, primidone) if one causes DRESS. Switch to non-aromatic alternative (levetiracetam, valproate, gabapentin).",
+      "Steroid taper: months-long — rapid taper → DRESS relapse."
+    ]
+  }
+};

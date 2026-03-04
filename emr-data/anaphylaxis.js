@@ -1077,4 +1077,24 @@ window.EMR_DATA = {
       "Allergist referral 4-6 weeks"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Anaphylaxis is a severe, life-threatening generalized hypersensitivity reaction requiring rapid recognition. Diagnosis is clinical — epinephrine should not be delayed for lab confirmation.",
+      "Epinephrine is the ONLY first-line treatment for anaphylaxis. It simultaneously reverses vasodilation (alpha-1), bronchospasm (beta-2), and mediator release (beta-2 stabilizes mast cells). Antihistamines and steroids are adjuncts only — they do not treat the acute hemodynamic crisis.",
+      "Biphasic anaphylaxis occurs in 5–20% of cases: initial reaction resolves, then recurs 1–72 hours later (typically 8–10 hours) without re-exposure. Cannot be predicted by severity of first reaction. All anaphylaxis patients require observation for minimum 4–6 hours.",
+      "The World Allergy Organization (WAO) and AAAAI recommend 2 auto-injectors prescribed at discharge. First injection may not be sufficient (especially in obese patients) or may malfunction.",
+      "Anaphylaxis without urticaria occurs in ~20% of cases — absence of skin findings does NOT exclude anaphylaxis. Cardiovascular-dominant anaphylaxis (hypotension only) is particularly dangerous and commonly missed."
+    ],
+    "boardPearls": [
+      "Anaphylaxis diagnostic criteria: acute onset + either (1) skin/mucosal + respiratory OR hypotension; or (2) ≥2 of: skin/mucosal, respiratory, hypotension, GI after allergen exposure.",
+      "Epinephrine dose: 0.3–0.5 mg IM (1:1000) in anterolateral mid-thigh. Repeat every 5–15 min. IV only if IM fails or cardiac arrest.",
+      "Position: supine with legs elevated for hypotension. NOT upright — sudden positional change in anaphylaxis → fatal cardiovascular collapse ('empty heart syndrome').",
+      "Biphasic anaphylaxis: occurs 1–72h later without re-exposure. Minimum observation: 4–6h mild/moderate; 24h if severe or prior biphasic history.",
+      "Tryptase peaks 60–90 min after anaphylaxis onset, returns to baseline at 6h. Baseline tryptase >11.4 suggests mastocytosis as comorbidity.",
+      "Protracted anaphylaxis: unresponsive to epinephrine → IV glucagon 1–5 mg (for patients on beta-blockers who are epinephrine-refractory).",
+      "Discharge: EpiPen × 2, anaphylaxis action plan, allergist referral, medical alert ID."
+    ]
+  }
+};

@@ -742,4 +742,20 @@ window.EMR_DATA = {
       "MCAS screening after anaphylaxis"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Drug-induced anaphylaxis: IgE-mediated (requires prior sensitization — not first exposure) vs non-IgE pseudo-allergic (direct mast cell activation — can occur on first exposure, e.g., vancomycin RMS, radiocontrast, NSAIDs).",
+      "Kounis syndrome: anaphylaxis-associated acute coronary syndrome. Mast cell mediators (histamine, prostaglandins, leukotrienes) → coronary vasospasm or plaque rupture → MI during anaphylaxis. ECG changes during anaphylaxis = Kounis until proven otherwise.",
+      "Drug allergy evaluation after reaction: skin testing (where validated), graded challenge, or de-labeling based on risk stratification. Most drug 'allergies' are not IgE-mediated and can be safely re-evaluated."
+    ],
+    "boardPearls": [
+      "Drug anaphylaxis most common causes: beta-lactam antibiotics (#1), NSAIDs, chemotherapy (platinum agents after multiple cycles), biologic agents.",
+      "Kounis syndrome: anaphylaxis + ECG ischemic changes → treat anaphylaxis first (epinephrine), then cardiology evaluation. Avoid vasospastic agents.",
+      "Perioperative anaphylaxis: neuromuscular blocking agents (NMBAs) most common cause (#1 in OR). Chlorhexidine, latex, antibiotics also common.",
+      "Management: epinephrine IM first. IV fluids for hypotension. Glucagon if beta-blocker therapy (reverses epinephrine resistance).",
+      "After drug anaphylaxis: avoid culprit AND cross-reactive drugs until formal evaluation. Allergist referral mandatory."
+    ]
+  }
+};

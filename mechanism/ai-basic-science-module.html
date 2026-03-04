@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>MechanismDx — Allergy & Immunology Basic Science</title>
+<meta name="description" content="Mechanism-based allergy and immunology basic science. IgE sensitization, Gell-Coombs hypersensitivity, cytokines, complement, mast cells, ILC2s, and Tregs — mapped to the ABAI board exam blueprint.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F0F2F5;--surface:#FFF;
+  --blue:#2874A6;--blue-dk:#1B4F72;--blue-lt:#EBF5FB;
+  --teal:#0E8C7A;--teal-lt:#E0F5F2;
+  --amber:#D97706;--amber-lt:#FEF9E7;
+  --red:#C0392B;--red-lt:#FDEDEC;
+  --purple:#7C3AED;--purple-lt:#F5F3FF;
+  --green:#1E8449;--green-lt:#EAFAF1;
+  --text:#1E293B;--text-s:#64748B;--text-m:#94A3B8;
+  --border:#E2E8F0;--border-l:#F1F5F9;
+  --radius:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'IBM Plex Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* ── Page ── */
+.page{max-width:980px;margin:0 auto;padding:24px 16px 80px}
+
+/* ── Hero ── */
+.hero{background:linear-gradient(135deg,#1A1A2E 0%,var(--blue-dk) 55%,var(--blue) 100%);color:#fff;border-radius:14px;padding:32px 28px 28px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::before{content:'⚗️';position:absolute;right:24px;top:18px;font-size:72px;opacity:.12}
+.hero-bc{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px}
+.hero-bc a{color:rgba(255,255,255,.6);font-weight:600}
+.hero-bc a:hover{color:#fff}
+.hero h1{font-size:24px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
+.hero p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;max-width:620px;margin-bottom:18px}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap}
+.hero-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);letter-spacing:.04em}
+
+/* ── Section label ── */
+.section-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-m);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+.section-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── Card grid ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:12px;margin-bottom:8px}
+.mod-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .18s;display:block}
+.mod-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.09);border-color:rgba(40,116,166,.3)}
+.mod-card-bar{height:4px}
+.mod-card-body{padding:18px 18px 14px}
+.mod-card-icon{font-size:28px;margin-bottom:8px;display:block}
+.mod-card-title{font-size:15px;font-weight:700;margin-bottom:4px;line-height:1.3}
+.mod-card-desc{font-size:12px;color:var(--text-s);line-height:1.55}
+.mod-card-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px}
+.tag{padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;background:var(--blue-lt);color:var(--blue)}
+.tag-abai{background:#FEF9E7;color:#92400E}
+
+/* ── Detail panel ── */
+#detail-wrap{margin-bottom:28px}
+.detail-panel{background:var(--surface);border:2px solid var(--border);border-radius:14px;overflow:hidden;animation:slideIn .2s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.detail-hdr{padding:22px 24px 18px;border-bottom:1px solid var(--border-l)}
+.detail-hdr-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.detail-title-row{display:flex;align-items:center;gap:10px}
+.detail-icon{font-size:30px}
+.detail-title{font-size:19px;font-weight:800;letter-spacing:-.3px}
+.detail-close{background:none;border:1.5px solid var(--border);border-radius:7px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--text-s);cursor:pointer;font-family:inherit;flex-shrink:0}
+.detail-close:hover{background:var(--bg);color:var(--text)}
+.detail-abai{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.abai-chip{font-size:11px;font-weight:600;padding:2px 9px;border-radius:4px;background:var(--amber-lt);color:var(--amber)}
+
+.detail-body{padding:22px 24px 28px}
+
+/* Content sections */
+.content-section{margin-bottom:22px}
+.content-section-hdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-m);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.content-section-hdr::after{content:'';flex:1;height:1px;background:var(--border-l)}
+.content-section p{font-size:13px;line-height:1.75;color:var(--text)}
+
+/* Mechanism box */
+.mech-box{background:linear-gradient(135deg,var(--blue-lt) 0%,#F0F9FF 100%);border:1px solid rgba(40,116,166,.18);border-radius:var(--radius);padding:16px 18px;margin:10px 0}
+.mech-box-hdr{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.mech-box p{font-size:13px;line-height:1.75;color:var(--text)}
+
+/* Pearl box */
+.pearl-box{background:var(--amber-lt);border-left:3px solid var(--amber);border-radius:0 var(--radius) var(--radius) 0;padding:14px 16px;margin:10px 0}
+.pearl-box-hdr{font-size:11px;font-weight:700;color:var(--amber);margin-bottom:6px}
+.pearl-box p{font-size:13px;line-height:1.7;color:var(--text)}
+
+/* Board relevance box */
+.board-box{background:var(--purple-lt);border:1px solid rgba(124,58,237,.18);border-radius:var(--radius);padding:14px 16px;margin:10px 0}
+.board-box-hdr{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--purple);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.board-box ul{padding-left:18px}
+.board-box li{font-size:12px;line-height:1.7;color:var(--text);margin-bottom:3px}
+
+/* Clinical application */
+.app-box{background:var(--green-lt);border:1px solid rgba(30,132,73,.18);border-radius:var(--radius);padding:14px 16px;margin:10px 0}
+.app-box-hdr{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green);margin-bottom:8px}
+.app-box p{font-size:13px;line-height:1.7;color:var(--text)}
+
+@media(max-width:600px){
+  .hero{padding:24px 18px 20px}
+  .hero h1{font-size:20px}
+  .detail-body{padding:16px 16px 22px}
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/rdx-supabase.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div></div>
+
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bc"><a href="../index.html">ReasonDx</a> → <a href="#">MechanismDx</a> → A/I Basic Science</div>
+    <h1>⚗️ Allergy/Immunology — Basic Science</h1>
+    <p>The mechanistic foundation of clinical allergy. IgE sensitization, hypersensitivity types, cytokine targets, complement, mast cells, innate lymphoid cells, and tolerance — mapped to the ABAI board exam content outline.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">ABAI Domain 1 — ~10% of exam</span>
+      <span class="hero-badge">9 modules</span>
+      <span class="hero-badge">Foundation for biologic rationale</span>
+    </div>
+  </div>
+
+  <!-- Detail panel anchor -->
+  <div id="detail-wrap"></div>
+
+  <!-- Section 1: IgE & Hypersensitivity -->
+  <div class="section-lbl">IgE Biology &amp; Hypersensitivity Classification</div>
+  <div class="card-grid" id="grid-ige"></div>
+
+  <!-- Section 2: Effector Cells & Mediators -->
+  <div class="section-lbl">Effector Cells &amp; Inflammatory Mediators</div>
+  <div class="card-grid" id="grid-cells"></div>
+
+  <!-- Section 3: Regulation, Tolerance & Cytokines -->
+  <div class="section-lbl">Cytokines, Innate Immunity &amp; Tolerance</div>
+  <div class="card-grid" id="grid-cytokines"></div>
+
+</div>
+
+<script>
+var MODULES = {
+
+  ige: [
+
+    {
+      id: 'ige-sensitization',
+      title: 'IgE Sensitization — The Two-Hit Model',
+      icon: '🔑',
+      color: '#C0392B',
+      desc: 'How does a person become allergic? The path from first allergen exposure to mast cell arm — and why the second exposure causes anaphylaxis.',
+      tags: ['IgE Biology', 'Sensitization', 'ABAI High-Yield'],
+      abai: ['IgE-mediated sensitization and effector mechanisms', 'Genetic basis of atopy'],
+      content: {
+        overview: 'Allergic sensitization is a two-phase process. Phase 1 (sensitization): first allergen exposure generates allergen-specific IgE without symptoms. Phase 2 (effector/elicitation): re-exposure crosslinks mast cell-bound IgE → immediate hypersensitivity reaction. Understanding this explains why a person can eat peanuts their whole life, then develop anaphylaxis — they were silently sensitizing during prior exposures.',
+        mechanism: `<strong>Step 1 — Antigen processing:</strong> Dendritic cells (DCs) capture allergen at mucosal surfaces or skin. Pattern recognition receptors (TLRs, CLRs) on DCs sense the danger context. In an atopic environment, DCs receive "alarmin" signals from the epithelium (TSLP, IL-33, IL-25) that promote Th2 polarization over Th1.<br><br>
+<strong>Step 2 — Th2 differentiation:</strong> DCs present peptides to naive CD4+ T cells in lymph nodes. IL-4 in the local environment (often from ILC2s) drives differentiation into Th2 cells that produce IL-4, IL-5, IL-13, and IL-21.<br><br>
+<strong>Step 3 — IgE class switching:</strong> IL-4 and IL-13 provide the "switch signal" to B cells via STAT6 activation, inducing ε-germline transcription and class-switch recombination from IgM to IgE. B cells differentiate into IgE-secreting plasma cells. IL-21 from Tfh cells promotes affinity maturation.<br><br>
+<strong>Step 4 — Mast cell arming:</strong> Allergen-specific IgE circulates and binds with high affinity to FcεRI receptors on mast cells and basophils (K<sub>D</sub> ~10⁻⁹ M — among the highest-affinity receptor-ligand interactions in biology). The mast cell is now "armed."<br><br>
+<strong>Step 5 — Elicitation:</strong> Re-exposure to allergen crosslinks two or more adjacent FcεRI-IgE complexes → receptor aggregation → activation of Lyn and Syk kinases → rapid degranulation (preformed mediators: histamine, tryptase, heparin, chymase) + arachidonic acid cascade (prostaglandins, leukotrienes) + cytokine synthesis (TNF-α, IL-4, IL-5, IL-13).`,
+        pearl: 'The LEAP trial (Learning Early About Peanut Allergy) proved that early oral allergen exposure (starting at 4–11 months) in high-risk infants reduces peanut allergy by 80% by promoting tolerogenic (Treg-mediated) rather than sensitizing responses. The route of exposure matters: skin exposure (disrupted barrier) promotes sensitization; oral exposure promotes tolerance. This mechanism explains the dual-allergen exposure hypothesis.',
+        board: [
+          'The molecular switch from IgM to IgE is driven by IL-4/IL-13 via STAT6 — this is why dupilumab (anti-IL-4Rα) blocks both IgE production and Th2 inflammation',
+          'FcεRI affinity for IgE is 10⁹ M⁻¹ — IgE stays bound to mast cells for weeks without any allergen present',
+          'Atopic individuals have higher baseline IgE levels, more FcεRI per mast cell, and lower activation thresholds',
+          'Sensitization ≠ allergy: ~30% of atopic individuals have positive SPT/sIgE without clinical reactivity',
+        ],
+        application: 'This mechanism explains the entire rational basis for allergen immunotherapy: high-dose allergen exposure over time shifts the immune response from Th2/IgE-dominant to Treg/IgG4-dominant — essentially rewiring the system at Step 2. It also explains why omalizumab works: by binding free IgE and downregulating FcεRI on mast cells, it raises the threshold for degranulation at Step 5 without eliminating allergen-specific responses.',
+      }
+    },
+
+    {
+      id: 'gell-coombs',
+      title: 'Gell-Coombs Classification — Types I–IV',
+      icon: '🧬',
+      color: '#7C3AED',
+      desc: 'The four hypersensitivity types with clinical examples for each. Essential for distinguishing drug reactions, contact dermatitis, and autoimmune disease.',
+      tags: ['Hypersensitivity', 'Classification', 'Drug Reactions', 'ABAI High-Yield'],
+      abai: ['Non-IgE immunologic mechanisms (IgG, complement, T-cell)', 'IgE-mediated sensitization'],
+      content: {
+        overview: 'The Gell-Coombs classification organizes immune-mediated hypersensitivity into four mechanistic types based on the effector arm involved. Drug reactions, transfusion reactions, autoimmune cytopenias, contact dermatitis, and organ transplant rejection all map onto this framework. ABAI tests this extensively in the drug allergy and immunodeficiency domains.',
+        mechanism: `<strong>Type I — IgE-mediated (immediate, minutes):</strong> Allergen crosslinks IgE on mast cells/basophils → degranulation. Examples: anaphylaxis, allergic rhinitis, food allergy, acute urticaria, bee sting anaphylaxis. Timeframe: seconds to 2 hours.<br><br>
+<strong>Type II — Cytotoxic (IgG/IgM against cell-surface antigens):</strong> Antibody binds to cell-surface antigen → complement activation (CDC) OR ADCC via NK cells → cell destruction. Examples: hemolytic transfusion reaction, warm AIHA, heparin-induced thrombocytopenia (HIT), pemphigus vulgaris, Graves' disease (TSI stimulating TSH receptor). Timeframe: hours to days.<br><br>
+<strong>Type III — Immune complex (IgG against soluble antigens → complement activation):</strong> Antigen-antibody complexes deposit in vessel walls, glomeruli, or joints → complement activation → neutrophil recruitment → tissue destruction. Examples: serum sickness, hypersensitivity pneumonitis (extrinsic allergic alveolitis), SLE nephritis, post-streptococcal GN. Timeframe: 1–3 weeks after antigen exposure.<br><br>
+<strong>Type IV — Delayed/T-cell-mediated (no antibody involved):</strong> Antigen-specific T cells (Th1 or CTL) mediate tissue damage. Timeframe: 48–96 hours. Two subtypes:<br>
+— <em>Type IVa (Th1, IFN-γ)</em>: contact dermatitis, tuberculin reaction, sarcoidosis granulomas<br>
+— <em>Type IVb (Th2)</em>: maculopapular exanthem from drugs (T-cell, not IgE), DRESS<br>
+— <em>Type IVc (cytotoxic CD8+)</em>: SJS/TEN (keratinocyte apoptosis by CD8+ CTLs via perforin/granzyme)<br>
+— <em>Type IVd (neutrophilic, IL-8/GM-CSF)</em>: AGEP, pustular drug reactions`,
+        pearl: 'SJS/TEN is Type IVc — cytotoxic T-cell mediated, NOT IgE-mediated. This is why epinephrine is ineffective and antihistamines don\'t help. The treatment is immunosuppression (systemic steroids are controversial — cyclosporine, IVIG, or etanercept depending on the center). Confusing SJS/TEN with anaphylaxis is a dangerous clinical error — the mechanism dictates the treatment.',
+        board: [
+          'Type I = IgE; Type II = IgG/IgM + cell surface; Type III = IgG + soluble antigen → complexes; Type IV = T-cells (no antibody)',
+          'Serum sickness (Type III): rash + fever + arthralgias 1–3 weeks after antigen. Occurs with snake antivenom, biologics, some antibiotics',
+          'DRESS is Type IVb (Th2-driven). SJS/TEN is Type IVc (CD8+ cytotoxic). AGEP is Type IVd (neutrophilic). These are mechanistically distinct despite all being "drug rashes"',
+          'Penicillin allergy: most IgE-mediated reactions are Type I. Morbilliform rashes are usually Type IVb. Cross-reactivity is R1 side-chain dependent, not class-dependent',
+        ],
+        application: 'When evaluating a drug reaction, the Gell-Coombs type determines your workup and management. Type I → skin testing, sIgE, drug challenge. Type II → Coombs test, CBC for cytopenia. Type III → complement levels (C3/C4), immune complexes, UA for nephritis. Type IVa → patch testing. Type IVc → SCORTEN score, wound care, ICU. Never prescribe epinephrine for a Type IV reaction and never prescribe steroids as primary treatment for Type I anaphylaxis.',
+      }
+    },
+
+    {
+      id: 'ige-structure',
+      title: 'IgE Structure, Receptors & Regulation',
+      icon: '🔬',
+      color: '#0E8C7A',
+      desc: 'FcεRI vs FcεRII (CD23), free vs bound IgE, omalizumab mechanism. Why serum IgE level is a poor diagnostic test.',
+      tags: ['IgE Biology', 'Receptors', 'Omalizumab', 'ABAI High-Yield'],
+      abai: ['IgE-mediated sensitization and effector mechanisms', 'Mast cell and basophil biology'],
+      content: {
+        overview: 'IgE is the least abundant immunoglobulin in serum (~0.05 mg/dL vs ~1200 mg/dL for IgG) but the most potent mediator of immediate hypersensitivity. Its low serum concentration reflects the fact that nearly all IgE is bound to high-affinity receptors on mast cells and basophils — serum IgE is the spill-over, not the active pool.',
+        mechanism: `<strong>FcεRI (high-affinity receptor, K<sub>D</sub> ~10⁻⁹ M):</strong><br>
+Expressed on: mast cells (constitutively), basophils, dendritic cells, Langerhans cells, monocytes.<br>
+Structure: tetrameric (αβγ₂). The α chain binds IgE Fc. β and γ chains contain ITAMs for signal transduction.<br>
+Function: crosslinking by multivalent allergen → Lyn/Syk kinase cascade → degranulation + arachidonic acid → leukotriene/prostaglandin synthesis + cytokine transcription.<br>
+Key regulation: free IgE levels regulate FcεRI expression on mast cells. Higher free IgE → upregulation of FcεRI → lower activation threshold. Omalizumab reduces free IgE → FcεRI downregulation → higher activation threshold. This is why omalizumab takes 12–16 weeks for full effect — time for FcεRI to downregulate.<br><br>
+<strong>FcεRII (CD23, low-affinity receptor, K<sub>D</sub> ~10⁻⁶ M):</strong><br>
+Expressed on: B cells (constitutively), monocytes, eosinophils, platelets (inducible).<br>
+Function: regulates IgE synthesis (feedback inhibition when IgE is high). Also mediates allergen presentation by B cells when IgE is allergen-specific.<br><br>
+<strong>Why total IgE is a poor diagnostic test:</strong> Total IgE correlates with atopy at a population level but is not useful for individual diagnosis. IgE can be: (1) elevated in non-atopic conditions (parasitic infection, ABPA, Wiskott-Aldrich, Omenn syndrome, Job syndrome/HIES); (2) normal in allergic individuals with narrow sensitization; (3) markedly elevated without clinical allergy.`,
+        pearl: 'Omalizumab (anti-IgE) works by binding free IgE at the Fc region — the same site that binds FcεRI — forming small, non-precipitating complexes that are cleared by the reticuloendothelial system. Because omalizumab is bound to free IgE (not the IgE already on mast cells), it does NOT directly strip IgE off mast cells. Instead, reduced free IgE levels cause mast cells to downregulate their FcεRI expression over weeks. This explains the delayed onset and why anaphylaxis risk during the first dose of omalizumab is low but not zero.',
+        board: [
+          'FcεRI: high-affinity, on mast cells/basophils — mediates degranulation. FcεRII (CD23): low-affinity, on B cells — regulates IgE synthesis',
+          'Omalizumab: binds free IgE Fc → reduces FcεRI expression → raises activation threshold. Not immediate — full effect at 12–16 weeks',
+          'Elevated IgE in non-atopic disease: parasites (hookworm), ABPA, HIES (Job syndrome — IgE >2000 IU/mL), Wiskott-Aldrich, Omenn syndrome, Netherton syndrome',
+          'Omalizumab dosing is based on weight AND baseline IgE level — both matter for the free IgE calculation',
+        ],
+        application: 'Component-resolved diagnostics (CRD) measure allergen-specific IgE to individual protein components — this is clinically superior to extract-based testing because it reveals which proteins drive the reaction. Ara h 2 (peanut storage protein) predicts systemic reactions. Ara h 8 (PR-10 protein) predicts oral allergy syndrome only. Total IgE above 30 IU/mL is required for omalizumab efficacy — below this level, there is not enough IgE to generate meaningful FcεRI expression.',
+      }
+    },
+  ],
+
+  cells: [
+
+    {
+      id: 'mast-cell-basophil',
+      title: 'Mast Cells & Basophils — Degranulation Biology',
+      icon: '💥',
+      color: '#C0392B',
+      desc: 'Preformed vs newly synthesized mediators. Biphasic reactions. How histamine, tryptase, leukotrienes and prostaglandins produce anaphylaxis symptoms.',
+      tags: ['Mast Cells', 'Mediators', 'Anaphylaxis', 'ABAI High-Yield'],
+      abai: ['Mast cell and basophil biology', 'IgE-mediated sensitization and effector mechanisms'],
+      content: {
+        overview: 'Mast cells are the primary effector cells of immediate hypersensitivity. They reside in tissues (skin, mucosa, lungs, gut wall) — not in blood — and live for months to years. Basophils are their circulating counterparts (≤1% of peripheral blood leukocytes) with similar but not identical mediator profiles. Both express FcεRI and degranulate in response to IgE crosslinking.',
+        mechanism: `<strong>Mast cell activation triggers:</strong><br>
+IgE-dependent: allergen crosslinking FcεRI (the canonical allergic mechanism).<br>
+IgE-independent: complement fragments (C3a, C5a — "anaphylatoxins"), substance P, opioids (direct degranulation — explains morphine-induced pruritus), cold/pressure (physical urticaria), MRGPRX2 receptor (mediates some "pseudoallergic" reactions — vancomycin RMS, fluoroquinolones, aspirin).<br><br>
+<strong>Phase 1 — Preformed mediators (released within seconds to minutes):</strong><br>
+• <em>Histamine</em>: H1 receptors → vasodilation, increased vascular permeability, smooth muscle contraction, pruritus. H2 receptors → gastric acid, vasodilation. H1+H2 block → ~75% of histamine effects.<br>
+• <em>Tryptase</em>: serine protease. Peak at 60–90 minutes post-anaphylaxis, half-life ~2 hours. Elevates in anaphylaxis from IgE-mediated or non-IgE-mediated mast cell activation. Also elevated at baseline in systemic mastocytosis and hereditary alpha-tryptasemia (HAT).<br>
+• <em>Chymase</em>: mainly in connective tissue mast cells (MCT-C subtype). Converts angiotensin I → angiotensin II — contributes to vasopressor resistance in anaphylaxis.<br>
+• <em>Heparin</em>: anticoagulant, binds inflammatory mediators.<br><br>
+<strong>Phase 2 — Newly synthesized mediators (minutes to hours):</strong><br>
+• <em>Leukotrienes (LTC4, LTD4, LTE4 — "cysteinyl leukotrienes"):</em> via 5-lipoxygenase pathway from arachidonic acid. 1000× more potent than histamine for bronchoconstriction. Slow-reacting substances of anaphylaxis (SRS-A). Montelukast blocks CysLT1 receptor.<br>
+• <em>Prostaglandin D2 (PGD2)</em>: via COX pathway. Vasodilation, platelet aggregation inhibition, bronchoconstriction. CRTH2 receptor (expressed on Th2 cells, eosinophils, ILC2) → amplifies type 2 inflammation.<br>
+• <em>Platelet activating factor (PAF)</em>: potent bronchoconstrictor and vasodilator. Serum PAF-acetylhydrolase deficiency associated with severe anaphylaxis.<br>
+• <em>Cytokines (TNF-α, IL-4, IL-5, IL-13)</em>: sustain late-phase inflammation.`,
+        pearl: 'Biphasic anaphylaxis (recurrence 1–72 hours after the initial reaction, without re-exposure) affects ~5–20% of anaphylaxis patients. The second phase is driven by the late-phase mediators — leukotrienes, PAF, and cytokines synthesized de novo after the initial degranulation. Biphasic reactions can be more severe than the initial reaction. This is why observation periods matter: 4–6 hours minimum after epinephrine, extended to 12–24 hours for severe, refractory, or poorly-controlled initial reactions.',
+        board: [
+          'Tryptase peaks at 60–90 min post-anaphylaxis, half-life ~2 hours. Draw at 0, 1, and 3 hours. Baseline (non-reaction) tryptase >11.4 µg/L suggests systemic mastocytosis or HAT',
+          'Leukotrienes: bronchoconstriction; prostaglandins: vasodilation + bronchospasm; histamine: urticaria, angioedema, vasodilation',
+          'Epinephrine works against ALL mediators: α1 → vasoconstriction (counters histamine/PGD2); β2 → bronchodilation (counters leukotrienes); β1 → increases cardiac output; β2 → inhibits further mast cell degranulation',
+          'MRGPRX2 mediates "pseudoallergic" direct mast cell activation (not IgE). Vancomycin, fluoroquinolones, opioids, rocuronium. No prior sensitization needed — can occur on first exposure',
+        ],
+        application: 'Tryptase elevation confirms mast cell activation (anaphylaxis vs vasovagal). If tryptase is elevated, check a baseline tryptase level 24 hours after reaction or on a separate visit. Persistently elevated baseline tryptase (>11.4 µg/L) warrants evaluation for systemic mastocytosis (bone marrow biopsy if clinical criteria met) or hereditary alpha-tryptasemia (TPSAB1 copy number). This evaluation is especially important in patients with severe/refractory anaphylaxis and venom hypersensitivity.',
+      }
+    },
+
+    {
+      id: 'eosinophil-biology',
+      title: 'Eosinophil Biology & the Eosinophilic Diseases',
+      icon: '🔴',
+      color: '#D97706',
+      desc: 'IL-5 axis, eosinophil effector functions, and the spectrum from tissue eosinophilia to HES. The rational basis for anti-IL-5 biologics.',
+      tags: ['Eosinophils', 'IL-5', 'Biologics', 'ABAI High-Yield'],
+      abai: ['Eosinophil biology and function', 'Cytokines and chemokines'],
+      content: {
+        overview: 'Eosinophils are granulocytes produced in the bone marrow under the control of IL-5, IL-3, and GM-CSF. They migrate to tissues (gut, lung, skin) where they serve as effector cells in type 2 inflammation, helminth defense, and — when dysregulated — drive end-organ damage in asthma, EoE, eosinophilic pneumonia, EGPA, and hypereosinophilic syndrome (HES).',
+        mechanism: `<strong>Development (IL-5 axis):</strong><br>
+IL-5 (produced by Th2 cells and ILC2s) is the dominant eosinophilopoietin — it stimulates bone marrow eosinophil production, promotes release into blood, enhances survival, and activates effector function. IL-3 and GM-CSF contribute but are less specific.<br><br>
+<strong>Recruitment to tissues:</strong><br>
+Eotaxin-1 (CCL11) and eotaxin-3 (CCL26) bind CCR3 on eosinophils → directed migration into inflamed tissue. VCAM-1/VLA-4 adhesion. Eotaxin is particularly important in EoE and AD.<br><br>
+<strong>Effector functions:</strong><br>
+• Degranulation: major basic protein (MBP) and eosinophil cationic protein (ECP) → epithelial damage, smooth muscle dysfunction. ECP is directly toxic to helminths.<br>
+• Eosinophil extracellular traps (EETs): mitochondrial DNA + proteins → extracellular killing<br>
+• Cytokine production: IL-4, IL-5, IL-13, TGF-β → amplify and perpetuate type 2 inflammation<br>
+• Antigen presentation: express MHC class II, can present allergens to T cells<br><br>
+<strong>Normal vs elevated:</strong><br>
+Normal peripheral eosinophils: <500/µL. Mild: 500–1500/µL. Moderate: 1500–5000/µL. Severe/HES: >5000/µL with organ involvement.<br>
+Tissue eosinophilia matters more than blood levels in EoE (≥15 eosinophils per high-power field in esophageal biopsy) and eosinophilic pneumonia.`,
+        pearl: 'IL-5 biologics (mepolizumab, reslizumab — anti-IL-5; benralizumab — anti-IL-5Rα) work by different mechanisms but achieve the same goal — eosinophil depletion. Benralizumab binds the IL-5 receptor α subunit and recruits NK cells via ADCC to directly kill eosinophils and basophils. This results in near-complete eosinophil depletion within days (vs. ~50–70% reduction with mepolizumab/reslizumab). Benralizumab can be dosed Q8 weeks after three monthly loading doses — patient convenience advantage.',
+        board: [
+          'IL-5 is the master eosinophil growth and survival factor — produced by Th2 cells and ILC2s',
+          'Anti-IL-5 biologics: mepolizumab and reslizumab (bind IL-5). Benralizumab (binds IL-5Rα → ADCC → direct eosinophil killing)',
+          'Indication for anti-IL-5: severe eosinophilic asthma (eosinophils ≥150–300/µL). Also FDA-approved: EGPA (mepolizumab), HES (mepolizumab)',
+          'Eosinophilia differential: allergic disease, parasites (especially tissue-invasive), drug reactions, EGPA, HES, malignancy (lymphoma), adrenal insufficiency, IBD',
+          'EoE diagnosis: ≥15 eosinophils/HPF in esophageal biopsy AFTER PPI trial (to exclude GERD-eosinophilia)',
+        ],
+        application: 'When evaluating eosinophilia, think in tiers: (1) First exclude common causes — allergic disease, drug reaction, parasites (especially consider in immigrants/travelers). (2) If eosinophils >1500/µL persistent, check for organ involvement (troponin, PFTs, skin biopsy, echo for endomyocardial fibrosis). (3) If eosinophils >5000/µL — this is HES territory — rule out FIP1L1-PDGFRA fusion (imatinib-sensitive) and lymphocyte variant HES (T-cell clone producing IL-5). The distinction matters enormously: FIP1L1-PDGFRA+ HES requires imatinib, not steroids.',
+      }
+    },
+
+    {
+      id: 'complement',
+      title: 'Complement System — Clinical Applications',
+      icon: '🛡️',
+      color: '#1B4F72',
+      desc: 'Classical, alternative, and lectin pathways. C3a/C5a anaphylatoxins. Complement deficiencies and their clinical phenotypes.',
+      tags: ['Complement', 'Immunodeficiency', 'Angioedema', 'ABAI High-Yield'],
+      abai: ['Complement system (classical, alternative, lectin)', 'Non-IgE immunologic mechanisms'],
+      content: {
+        overview: 'The complement system is a cascade of ~30 serum and membrane proteins that bridge innate and adaptive immunity. Three activation pathways converge on C3 cleavage → C3a + C3b → C5 cleavage → C5a + C5b → membrane attack complex (C5b-9). Complement deficiencies cause distinct clinical phenotypes based on which pathway is blocked.',
+        mechanism: `<strong>Classical pathway (antibody-activated):</strong><br>
+C1q binds IgG or IgM on antigen → C1r/C1s activation → C4/C2 cleavage → C3 convertase (C4b2a). C1q also binds apoptotic cell debris, activating non-immune clearance. C1q deficiency → SLE-like syndrome (failure to clear apoptotic debris → autoantigen exposure).<br><br>
+<strong>Lectin pathway (pattern recognition):</strong><br>
+MBL (mannose-binding lectin) binds carbohydrate patterns on pathogens → MASP-1/MASP-2 activation → C4/C2 cleavage → same C3 convertase. MBL deficiency → recurrent infections in early childhood (before adaptive immunity matures).<br><br>
+<strong>Alternative pathway (spontaneous, amplification):</strong><br>
+Spontaneous C3 hydrolysis → C3b deposits on surfaces → Factor B + Factor D → C3 convertase (C3bBb) → amplification loop. Normally suppressed on host cells by Factor H, Factor I, CD46, CD55, CD59. Pathogen surfaces lack these regulators → complement proceeds. Paroxysmal nocturnal hemoglobinuria (PNH): loss of CD55/CD59 → unregulated alternative pathway on RBCs → hemolysis.<br><br>
+<strong>Terminal complement (C5–C9):</strong><br>
+C5b + C6-C9 → MAC (membrane attack complex). Lysis of Gram-negative bacteria. C5–C9 deficiency → recurrent Neisseria meningitidis and Neisseria gonorrhoeae infections.<br><br>
+<strong>Anaphylatoxins:</strong><br>
+C3a and C5a bind receptors on mast cells, basophils, neutrophils → degranulation (IgE-independent). C5a also: neutrophil chemotaxis, respiratory burst, cytokine production. C5a is 100× more potent than C3a.`,
+        pearl: 'Hereditary angioedema (HAE) is caused by C1-inhibitor (C1-INH) deficiency or dysfunction, NOT complement deficiency in the classical sense. C1-INH regulates the classical pathway AND the contact/kinin pathway. Without C1-INH, unchecked Factor XIIa activates prekallikrein → kallikrein → cleaves high-molecular-weight kininogen (HMWK) → bradykinin. Bradykinin binds B2 receptors on endothelium → vasodilation + vascular permeability → angioedema. This is why antihistamines and epinephrine are INEFFECTIVE in HAE — it is bradykinin-mediated, not histamine-mediated. Icatibant (bradykinin B2 receptor antagonist) and C1-INH concentrate are the correct treatments.',
+        board: [
+          'C1q deficiency → SLE-like (apoptotic debris not cleared). C3 deficiency → severe recurrent encapsulated bacterial infections. C5-C9 deficiency → Neisseria',
+          'HAE: C1-INH deficiency → bradykinin excess (NOT histamine). Antihistamines ineffective. Treat with icatibant, C1-INH, or ecallantide',
+          'C4 is consumed in SLE — low C3 + low C4 = classical pathway activation. Low C3 + normal C4 = alternative pathway',
+          'Anaphylatoxins C3a and C5a cause mast cell degranulation without IgE — explains "complement activation-related pseudoallergy" (CARPA) with liposomal drugs, RCM',
+        ],
+        application: 'When evaluating angioedema, the complement profile distinguishes HAE from allergic angioedema: HAE Type I → low C4 (always, even between attacks), low C1-INH level. HAE Type II → low C4, normal C1-INH level but dysfunctional (low C1-INH functional assay). Acquired C1-INH deficiency (AAE) → low C1q (consumed by underlying B-cell malignancy or autoantibody). Allergic angioedema → all complement levels normal. C4 is the single best screening test for HAE — it is consumed even when the patient is between attacks.',
+      }
+    },
+  ],
+
+  cytokines: [
+
+    {
+      id: 'type2-cytokines',
+      title: 'Type 2 Cytokines — IL-4, IL-5, IL-13, TSLP, IL-33',
+      icon: '📡',
+      color: '#2874A6',
+      desc: 'The molecular language of allergic inflammation. Which cytokine does what — and which biologic blocks which target. The rational basis for dupilumab, tezepelumab, and beyond.',
+      tags: ['Cytokines', 'Biologics', 'Type 2 Inflammation', 'ABAI High-Yield'],
+      abai: ['Cytokines and chemokines (IL-4, IL-5, IL-13, IL-33, TSLP)', 'Innate lymphoid cells (ILC2)'],
+      content: {
+        overview: 'Type 2 cytokines orchestrate allergic inflammation across asthma, atopic dermatitis, eosinophilic esophagitis, allergic rhinitis, and chronic urticaria. Understanding the specific function of each cytokine explains why a biologic works in one condition and not another — and why dupilumab is unusually broad-spectrum.',
+        mechanism: `<strong>Epithelial alarmins — upstream gatekeepers:</strong><br>
+TSLP (thymic stromal lymphopoietin): produced by keratinocytes, airway epithelium in response to physical barrier damage, allergen protease activity, pollutants, viral infection. Acts on DCs → promotes Th2 polarization. Also directly activates ILC2s and mast cells. The "master switch" of allergic sensitization.<br>
+IL-33: released from necrotic epithelial cells (damage-associated, not secreted). Binds ST2 receptor. Activates ILC2s, mast cells, Th2 cells → IL-5 and IL-13 production. Drives eosinophilic inflammation.<br>
+IL-25 (IL-17E): mucosal epithelium. Activates ILC2s → amplifies type 2 responses.<br><br>
+<strong>Th2 cell and ILC2 effectors:</strong><br>
+IL-4: produced by Th2 cells and ILC2s.<br>
+— B cell class switching: IgM → IgE (via STAT6 on B cells)<br>
+— Th2 differentiation: amplifies Th2 at the expense of Th1 and Th17<br>
+— Upregulates FcεRI on mast cells<br>
+— Receptor: IL-4Rα/γc (Type I, on T cells) or IL-4Rα/IL-13Rα1 (Type II, on non-hematopoietic cells)<br><br>
+IL-13: produced by Th2 cells, ILC2s, mast cells, eosinophils.<br>
+— Airway smooth muscle hyperresponsiveness (AHR)<br>
+— Goblet cell metaplasia → mucus hypersecretion<br>
+— Subepithelial fibrosis<br>
+— Epithelial barrier disruption (↓ filaggrin, claudin)<br>
+— Uses IL-4Rα/IL-13Rα1 (Type II receptor, same as IL-4 on non-hematopoietic cells)<br><br>
+IL-5: produced by Th2, ILC2, mast cells.<br>
+— Eosinophil differentiation, survival, activation<br>
+— Basophil activation<br><br>
+<strong>Why dupilumab is broad-spectrum:</strong><br>
+Dupilumab blocks IL-4Rα — the shared receptor component for BOTH IL-4 (Type I and II) and IL-13 (Type II). By blocking this single subunit, dupilumab simultaneously inhibits both cytokines → reduces IgE production, Th2 differentiation, goblet cell metaplasia, AHR, and barrier disruption. Approved for: AD, asthma, CRSwNP, EoE, prurigo nodularis, alopecia areata (pending), COPD type 2 (2024).<br><br>
+<strong>Tezepelumab — upstream blockade:</strong><br>
+Anti-TSLP. Works upstream of IL-4/IL-5/IL-13, IgE, and even ILC2 activation. Broad efficacy across both T2-high and T2-low asthma — only biologic that reduces severe exacerbations in patients with low eosinophils AND low IgE. FDA-approved for severe asthma.`,
+        pearl: 'The type 2 cytokine network explains the atopic march — why eczema in infancy predicts asthma later, and why treating eczema early may prevent asthma. IL-13 drives epithelial barrier dysfunction in both AD and the airway. The damaged epithelium releases TSLP → ILC2 activation → IL-5 production → eosinophil recruitment → airway inflammation. Early dupilumab in AD may interrupt this cascade before it reaches the airway — this is the mechanistic hypothesis behind the adolescent AD → asthma prevention trials.',
+        board: [
+          'IL-4: IgE class switch + Th2 differentiation. IL-13: mucus + bronchoconstriction + fibrosis + barrier disruption. IL-5: eosinophil survival. TSLP: upstream master switch',
+          'Dupilumab: anti-IL-4Rα → blocks both IL-4 and IL-13 (Type II receptor). Broadest approved biologic across atopic disease',
+          'Tezepelumab: anti-TSLP → works in T2-low asthma (low eosinophil, low IgE). Only biologic effective across all phenotypes',
+          'Biologic target matching: eosinophilic asthma → anti-IL-5 (mepolizumab, reslizumab, benralizumab). Allergic asthma + high IgE → omalizumab. T2-high broad → dupilumab. Any phenotype severe asthma → tezepelumab',
+        ],
+        application: 'Biologic selection in severe asthma requires knowing which biomarker each drug is matched to: eosinophil count (anti-IL-5 drugs), IgE + sensitization (omalizumab), FeNO/eosinophils/IgE broadly (dupilumab — T2-high), or no biomarker required (tezepelumab — works regardless). This is why tezepelumab is preferred for difficult-to-phenotype severe asthma. For atopic dermatitis, dupilumab blocks both IL-4 and IL-13, which is why it addresses itch (IL-31 pathway indirectly), barrier dysfunction, and inflammation simultaneously.',
+      }
+    },
+
+    {
+      id: 'ilc2-innate',
+      title: 'ILC2s & Innate Immunity in Allergy',
+      icon: '🦠',
+      color: '#059669',
+      desc: 'Innate lymphoid cells type 2 (ILC2): the rapid amplifiers of allergic inflammation that don\'t need prior sensitization. Pattern recognition and danger signals in allergy.',
+      tags: ['ILC2', 'Innate Immunity', 'TSLP', 'ABAI High-Yield'],
+      abai: ['Innate lymphoid cells (ILC2)', 'Cytokines and chemokines'],
+      content: {
+        overview: 'ILC2s are innate immune cells that produce IL-4, IL-5, and IL-13 without allergen sensitization — they respond to tissue damage signals (TSLP, IL-33, IL-25) within hours. They are the critical link between epithelial barrier injury and type 2 inflammation, explaining why allergic reactions can occur rapidly on first-ever allergen exposure in some patients and why helminth infection drives eosinophilia before any adaptive response develops.',
+        mechanism: `<strong>ILC2 identity:</strong><br>
+Lineage-negative (not T, B, NK, myeloid). Express GATA3 (master transcription factor, same as Th2 cells). Tissue-resident: especially abundant in lung, skin, gut, and nasal mucosa. Don't express antigen receptors — respond to cytokine alarmins, not allergen directly.<br><br>
+<strong>ILC2 activation signals:</strong><br>
+TSLP, IL-33 (via ST2), and IL-25 (via IL-17RB) are the three canonical ILC2 activators — all produced by damaged epithelium. ILC2s also respond to prostaglandin D2 (via CRTH2), lipoxins, cysteinyl leukotrienes, and neuropeptides (substance P, VIP).<br><br>
+<strong>ILC2 effector outputs:</strong><br>
+Rapid IL-4, IL-5, IL-13 production → mast cell activation, eosinophil recruitment, B cell IgE class switching, goblet cell metaplasia. Amphiregulin → tissue repair. ILC2s can also present antigen via MHC class II → activate Th2 cells, amplifying adaptive immunity.<br><br>
+<strong>ILC2 in clinical allergy:</strong><br>
+Asthma: ILC2s in airway submucosa are activated by viral infection → explains virus-induced wheeze before sensitization in young children (the "pre-allergic" exacerbation).<br>
+Atopic dermatitis: skin ILC2s respond to Staphylococcal toxins (which activate TSLP/IL-33 release) and mechanical scratching → explains how S. aureus colonization drives AD flares.<br>
+Nasal polyps: ILC2s are enriched in polyp tissue → anti-TSLP (tezepelumab) and anti-IL-4Rα (dupilumab) reduce polyp volume.<br>
+Food allergy: gut ILC2s respond to helminth-derived molecules → same pathway that drives food sensitization through a damaged gut barrier.`,
+        pearl: 'The "hygiene hypothesis" and the newer "old friends hypothesis" both implicate ILC2s. In early childhood, microbial diversity suppresses ILC2 activation through IL-10 and Treg pathways. Reduced microbial exposure → unchecked ILC2 activation → type 2 immune dominance → atopy. This is why antibiotic exposure in the first year of life, C-section delivery (reduced microbial inoculum), and urban environments correlate with increased atopy risk — all reduce the microbial signals that tonically suppress ILC2 activity.',
+        board: [
+          'ILC2s: no antigen receptor, no prior sensitization needed. Respond to TSLP/IL-33/IL-25. Produce IL-4, IL-5, IL-13 rapidly',
+          'ILC2s explain allergic inflammation without prior sensitization — virus-induced wheeze in toddlers, first-exposure reactions in some patients',
+          'CRTH2 receptor on ILC2s: activated by PGD2 — this is why anti-CRTH2 (fevipiprant) is an investigational asthma target',
+          'Tezepelumab (anti-TSLP) blocks ILC2 activation upstream — effective even in non-sensitized asthma patients',
+        ],
+        application: 'Understanding ILC2s explains the rationale for targeting upstream cytokines (TSLP, IL-33) rather than just downstream effectors (IL-5, IL-13) in severe atopic disease. Anti-IL-33 (itepekimab, tezepelumab does not block IL-33 directly) and anti-ST2 biologics are in development. Dupilumab\'s efficacy in non-sensitized eosinophilic patients (T2-high, low IgE) is partially explained by ILC2 IL-13 blockade — not all type 2 inflammation is IgE-dependent.',
+      }
+    },
+
+    {
+      id: 'tregs-tolerance',
+      title: 'Regulatory T Cells & Immunologic Tolerance',
+      icon: '⚖️',
+      color: '#7C3AED',
+      desc: 'How allergen tolerance works at the molecular level. FoxP3+ Tregs, IL-10, TGF-β, and the mechanism of allergen immunotherapy.',
+      tags: ['Tolerance', 'Tregs', 'Immunotherapy Mechanism', 'ABAI High-Yield'],
+      abai: ['Regulatory T cells and tolerance', 'Genetic basis of atopy'],
+      content: {
+        overview: 'Immunologic tolerance to allergens is actively maintained by regulatory T cells (Tregs). Loss of tolerance → allergic sensitization. Restoration of tolerance → the goal of allergen immunotherapy. Understanding the molecular basis of tolerance explains why AIT works, why early allergen introduction prevents allergy (LEAP), and why certain patients fail immunotherapy.',
+        mechanism: `<strong>FoxP3+ Tregs (nTregs and pTregs):</strong><br>
+Natural Tregs (nTregs): develop in the thymus via high-affinity TCR-self-antigen interactions + IL-2 signaling → FoxP3 expression. Constitutively express CD25 (IL-2Rα), CTLA-4, and FOXP3.<br>
+Peripheral Tregs (pTregs): induced in the periphery from naive CD4+ T cells under tolerogenic conditions (TGF-β + IL-2 + low inflammation). High allergen doses promote pTreg induction — this is the mechanism of oral allergen tolerance.<br><br>
+<strong>Treg effector mechanisms:</strong><br>
+1. IL-10 secretion → suppresses Th2 cells, B cells, mast cells; induces IgG4 production (blocking antibody)<br>
+2. TGF-β secretion → suppresses effector T cells; promotes IgA class switching<br>
+3. CTLA-4 on Treg surface → competes with CD28 on effector T cells for CD80/86 on APCs → blocks costimulation<br>
+4. IL-35 secretion → suppresses Th1, Th2, Th17<br>
+5. Metabolic disruption: consumption of IL-2 (Tregs are "IL-2 sinks") → effector T cell starvation<br><br>
+<strong>In allergic disease:</strong><br>
+Atopic individuals have reduced allergen-specific Tregs relative to Teff cells. FOXP3 mutations → IPEX syndrome (immune dysregulation, polyendocrinopathy, enteropathy, X-linked) → severe multi-organ autoimmunity + atopy, demonstrating that FoxP3+ Tregs are essential for systemic tolerance.<br><br>
+<strong>Immunotherapy mechanism:</strong><br>
+Phase 1 (desensitization, early): dose escalation desensitizes mast cells and basophils → less immediate reaction to same allergen dose. Mechanism: mast cell unresponsiveness (SHIP-1 activation, reduced FcεRI signaling).<br>
+Phase 2 (immune modulation, weeks): Tregs expand in response to repeated high-dose antigen → IL-10 ↑ → IgE ↓, IgG4 ↑ (blocking antibody). Th2/Th1 balance shifts.<br>
+Phase 3 (sustained tolerance, months-years): persistent Treg dominance → maintained even after discontinuing therapy (achieved in minority of AIT patients — "disease-modifying" effect).`,
+        pearl: 'IgG4 is the "blocking antibody" produced during successful immunotherapy — it competes with IgE for allergen binding without activating mast cells (IgG4 binds FcγRIIb, an inhibitory receptor). High allergen-specific IgG4:IgE ratios correlate with clinical tolerance. However, serum IgG4 alone is an imperfect surrogate — some patients develop high IgG4 during AIT without clinical tolerance, and tolerance can occur without detectable IgG4. The Treg and IL-10 response is more mechanistically central than IgG4 alone.',
+        board: [
+          'FoxP3+CD25+CD4+ Tregs: suppress allergic inflammation via IL-10 (IgG4 induction), TGF-β, CTLA-4-mediated costimulation blockade',
+          'IPEX syndrome: FOXP3 mutation → no functional Tregs → polyendocrinopathy + enteropathy + severe atopic dermatitis',
+          'AIT mechanism: early = mast cell desensitization; intermediate = Treg expansion + IL-10 + IgG4; sustained = maintained Treg dominance (true tolerance)',
+          'IL-10: produced by Tregs and tolerogenic DCs. Key immunosuppressive cytokine — inhibits Th2, reduces IgE, promotes IgG4. Also produced by B regulatory cells (Bregs)',
+        ],
+        application: 'Understanding tolerance explains the LEAP trial result (early oral peanut exposure → tolerance in high-risk infants) and the EPIT/SLIT data. It also explains why stopping AIT before 3–5 years increases relapse risk — sustained tolerance requires sufficient time for Treg expansion and IgG4/IgE ratio shift. Patients who fail AIT often have underlying mast cell or basophil unresponsiveness to the tolerogenic signal — baseline tryptase and FcεRI density may predict AIT outcomes.',
+      }
+    },
+
+    {
+      id: 'genetics-atopy',
+      title: 'Genetics of Atopy & Epithelial Barrier',
+      icon: '🧬',
+      color: '#D97706',
+      desc: 'Filaggrin mutations, the atopic march, and why barrier dysfunction is the upstream driver of allergic sensitization across AD, food allergy, and asthma.',
+      tags: ['Genetics', 'Filaggrin', 'Atopic March', 'ABAI High-Yield'],
+      abai: ['Genetic basis of atopy and allergy', 'Regulatory T cells and tolerance'],
+      content: {
+        overview: 'Atopy is a complex polygenic trait. The strongest monogenic risk factor — filaggrin (FLG) loss-of-function mutations — demonstrates a causal link between skin barrier disruption and the entire allergic march. Understanding the genetics of atopy bridges clinical phenotypes (why does eczema precede food allergy?) with molecular biology (why does a skin protein mutation cause peanut allergy?).',
+        mechanism: `<strong>Filaggrin (FLG) — the gatekeeper protein:</strong><br>
+FLG mutations: present in ~10% of European populations; heterozygous mutations (R501X, 2282del4 are most common in Europeans) confer 3–5× increased AD risk. Homozygous → severe ichthyosis vulgaris.<br>
+FLG function: profilaggrin is processed to filaggrin in the granular layer → aggregates keratin filaments → dense protein matrix of cornified envelope → maintains stratum corneum integrity, water retention, and acid pH (antimicrobial). Also broken down into natural moisturizing factors (NMF): urocanic acid (UV absorber) + pyrrolidone carboxylic acid (humectant).<br><br>
+<strong>FLG loss → "inside-outside-inside" sensitization model:</strong><br>
+FLG deficiency → impaired skin barrier → transepidermal water loss (TEWL) ↑ → dry skin → allergen penetration → dendritic cell uptake of intact peanut/dust mite/cat allergen protein through the disrupted barrier → IL-33/TSLP release from stressed keratinocytes → ILC2 activation → Th2 response → IgE sensitization.<br><br>
+This explains: why peanut-allergic children who were sensitized through the skin have more severe reactions than those sensitized orally; why atopic eczema precedes food allergy in >75% of cases; and why early emollient therapy in FLG-mutation-positive infants (BEEP trial — mixed results) and early allergen introduction reduce sensitization.<br><br>
+<strong>Other atopy genes:</strong><br>
+SPINK5 (serine protease inhibitor): mutations → Netherton syndrome (ichthyosis + atopy + very high IgE). SPINK5 inhibits kallikrein → barrier proteases. Loss → hyperactive barrier proteases → more barrier damage.<br>
+IL-4Rα gain-of-function: atopy GWAS hits in IL4RA gene. Explains why IL-4Rα polymorphisms associate with asthma and AD susceptibility.<br>
+HLA-DQ2/DQ8: not atopy per se, but celiac disease — relevant to EoE and food intolerance differential.`,
+        pearl: 'The "dual allergen exposure hypothesis" (Lack, 2008) emerged directly from FLG biology: skin exposure to peanut (through a disrupted barrier) → sensitization; oral exposure (via gut with intact barrier and Treg-permissive environment) → tolerance. This explains both the LEAP trial (early oral introduction prevents allergy) and the paradox of why Jewish children in Israel who ate Bamba (peanut snack) from infancy had 10-fold lower peanut allergy rates than UK Jewish children who avoided peanut. It also explains why patients with AD should not be advised to avoid peanut exposure — the avoidance strategy was based on the wrong mechanistic model.',
+        board: [
+          'Filaggrin (FLG) loss-of-function mutations: strongest genetic risk factor for AD and atopic march. ~10% of Europeans carry heterozygous mutations',
+          'FLG deficiency → barrier disruption → transepidermal water loss → epicutaneous allergen sensitization via TSLP/ILC2/Th2 pathway',
+          'Dual allergen exposure hypothesis: skin sensitization → allergy; oral exposure → tolerance. Basis for LEAP trial and early peanut introduction guidelines',
+          'SPINK5 mutations → Netherton syndrome: ichthyosis + atopic disease + extremely elevated IgE',
+          'GWAS hits in atopy: FLG, IL4RA, IL13, TSLP, ORMDL3 (asthma), HLA loci',
+        ],
+        application: 'Clinically, the FLG genetics data supports: (1) proactive emollient therapy in all AD patients to restore barrier; (2) NOT advising food avoidance in infants with eczema — the opposite is true; (3) early allergen introduction discussions in infants with severe eczema (LEAP protocol). In practice, genetic testing for FLG is not routinely done for clinical management — but understanding the mechanism helps explain to families why their child\'s eczema preceded their peanut allergy and what this means for younger siblings.',
+      }
+    },
+
+  ],
+};
+
+// ── Render ──────────────────────────────────────────────────────────────────
+
+function renderGrid(containerId, modules) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = modules.map(function(m) {
+    return '<div class="mod-card" onclick="showDetail(\'' + m.id + '\')" role="button" tabindex="0" aria-label="Open ' + m.title + '">' +
+      '<div class="mod-card-bar" style="background:' + m.color + '"></div>' +
+      '<div class="mod-card-body">' +
+      '<span class="mod-card-icon">' + m.icon + '</span>' +
+      '<div class="mod-card-title">' + m.title + '</div>' +
+      '<div class="mod-card-desc">' + m.desc + '</div>' +
+      '<div class="mod-card-tags">' +
+        m.tags.map(function(t){ return '<span class="tag' + (t.includes('ABAI') ? ' tag-abai' : '') + '">' + t + '</span>'; }).join('') +
+      '</div>' +
+      '</div></div>';
+  }).join('');
+  // keyboard nav
+  el.querySelectorAll('.mod-card').forEach(function(card) {
+    card.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') card.click(); });
+  });
+}
+
+function findModule(id) {
+  var all = MODULES.ige.concat(MODULES.cells).concat(MODULES.cytokines);
+  return all.find(function(m){ return m.id === id; }) || null;
+}
+
+function showDetail(id) {
+  var m = findModule(id);
+  if (!m) return;
+  var c = m.content;
+
+  var abaiChips = (m.abai || []).map(function(a){
+    return '<span class="abai-chip">📋 ' + a + '</span>';
+  }).join('');
+
+  var html = '<div class="detail-panel">' +
+    '<div class="detail-hdr">' +
+      '<div class="detail-hdr-top">' +
+        '<div class="detail-title-row">' +
+          '<span class="detail-icon">' + m.icon + '</span>' +
+          '<span class="detail-title">' + m.title + '</span>' +
+        '</div>' +
+        '<button class="detail-close" onclick="hideDetail()">✕ Close</button>' +
+      '</div>' +
+      (abaiChips ? '<div class="detail-abai">' + abaiChips + '</div>' : '') +
+    '</div>' +
+    '<div class="detail-body">' +
+
+      '<div class="content-section">' +
+        '<div class="content-section-hdr">Overview</div>' +
+        '<p>' + c.overview + '</p>' +
+      '</div>' +
+
+      '<div class="mech-box">' +
+        '<div class="mech-box-hdr">⚗️ Mechanism</div>' +
+        '<p>' + c.mechanism + '</p>' +
+      '</div>' +
+
+      '<div class="pearl-box">' +
+        '<div class="pearl-box-hdr">💡 Clinical Pearl</div>' +
+        '<p>' + c.pearl + '</p>' +
+      '</div>' +
+
+      '<div class="board-box">' +
+        '<div class="board-box-hdr">📋 ABAI Board High-Yield Points</div>' +
+        '<ul>' + (c.board || []).map(function(b){ return '<li>' + b + '</li>'; }).join('') + '</ul>' +
+      '</div>' +
+
+      '<div class="app-box">' +
+        '<div class="app-box-hdr">🩺 Clinical Application</div>' +
+        '<p>' + c.application + '</p>' +
+      '</div>' +
+
+    '</div></div>';
+
+  var wrap = document.getElementById('detail-wrap');
+  wrap.innerHTML = html;
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function hideDetail() {
+  document.getElementById('detail-wrap').innerHTML = '';
+}
+
+// Init
+renderGrid('grid-ige',       MODULES.ige);
+renderGrid('grid-cells',     MODULES.cells);
+renderGrid('grid-cytokines', MODULES.cytokines);
+
+setTimeout(function(){
+  var l = document.getElementById('rdx-loader');
+  if (l){ l.classList.add('hide'); setTimeout(function(){ l.remove(); }, 300); }
+}, 300);
+</script>
+
+<script src="../js/dx-feedback.js"></script>
+<script src="../js/dx-user-bar.js"></script>
+<script src="../js/rdx-nav.js"></script>
+<script src="../js/rdx-analytics-tracker.js"></script>
+
+<div class="rdx-references" style="max-width:1020px;margin:40px auto 0;padding:28px 24px;border-top:2px solid var(--bd)">
+  <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tm);margin-bottom:16px">Open-Access References</h3>
+  <p style="font-size:12px;color:var(--ts);margin-bottom:14px">All sources are freely accessible via PubMed Central (PMC) or NCBI Bookshelf (StatPearls). No paywall or institutional access required.</p>
+  <ol style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px">
+    <li style="font-size:12.5px;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:var(--bl);font-weight:700">1.</span>
+      <strong>Justiz Vaillant AA, Muganlinskaya N. Hypersensitivity Reactions (Type I, II, III, IV).</strong> <em>StatPearls</em> [Internet]. NCBI Bookshelf. 2024.
+      <a href="https://www.ncbi.nlm.nih.gov/books/NBK500021/" target="_blank" rel="noopener" style="color:var(--bl);display:block;font-size:11px;margin-top:2px">https://www.ncbi.nlm.nih.gov/books/NBK500021/</a>
+      <span style="font-size:11px;color:var(--ts)">Validates: Gell-Coombs Type I–IV classification and mechanisms</span>
+    </li>
+    <li style="font-size:12.5px;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:var(--bl);font-weight:700">2.</span>
+      <strong>Du Toit G, Roberts G, Sayre PH, et al. Randomized Trial of Peanut Consumption in Infants at Risk for Peanut Allergy (LEAP).</strong> <em>N Engl J Med</em>. 2015;372:803–813. PMC4416404.
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4416404/" target="_blank" rel="noopener" style="color:var(--bl);display:block;font-size:11px;margin-top:2px">https://pmc.ncbi.nlm.nih.gov/articles/PMC4416404/</a>
+      <span style="font-size:11px;color:var(--ts)">Validates: IgE sensitization, tolerance induction, early allergen exposure</span>
+    </li>
+    <li style="font-size:12.5px;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:var(--bl);font-weight:700">3.</span>
+      <strong>Bhatt SP. Omalizumab.</strong> <em>StatPearls</em> [Internet]. NCBI Bookshelf. 2024.
+      <a href="https://www.ncbi.nlm.nih.gov/books/NBK534203/" target="_blank" rel="noopener" style="color:var(--bl);display:block;font-size:11px;margin-top:2px">https://www.ncbi.nlm.nih.gov/books/NBK534203/</a>
+      <span style="font-size:11px;color:var(--ts)">Validates: IgE structure, FcεRI, FcεRII, omalizumab mechanism of action</span>
+    </li>
+    <li style="font-size:12.5px;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:var(--bl);font-weight:700">4.</span>
+      <strong>StatPearls. Eosinophilic Disorders.</strong> NCBI Bookshelf. 2024.
+      <a href="https://www.ncbi.nlm.nih.gov/books/NBK536929/" target="_blank" rel="noopener" style="color:var(--bl);display:block;font-size:11px;margin-top:2px">https://www.ncbi.nlm.nih.gov/books/NBK536929/</a>
+      <span style="font-size:11px;color:var(--ts)">Validates: Eosinophil biology, IL-5 axis, mepolizumab and benralizumab mechanisms</span>
+    </li>
+    <li style="font-size:12.5px;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:var(--bl);font-weight:700">5.</span>
+      <strong>Bernstein JA. Hereditary Angioedema.</strong> <em>StatPearls</em> [Internet]. NCBI Bookshelf. 2024.
+      <a href="https://www.ncbi.nlm.nih.gov/books/NBK482420/" target="_blank" rel="noopener" style="color:var(--bl);display:block;font-size:11px;margin-top:2px">https://www.ncbi.nlm.nih.gov/books/NBK482420/</a>
+      <span style="font-size:11px;color:var(--ts)">Validates: C1-INH deficiency, complement pathway, bradykinin-mediated angioedema</span>
+    </li>
+    <li style="font-size:12.5px;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:var(--bl);font-weight:700">6.</span>
+      <strong>Kolb L, Ferrer-Bruker SJ. Atopic Dermatitis.</strong> <em>StatPearls</em> [Internet]. NCBI Bookshelf. 2024.
+      <a href="https://www.ncbi.nlm.nih.gov/books/NBK448071/" target="_blank" rel="noopener" style="color:var(--bl);display:block;font-size:11px;margin-top:2px">https://www.ncbi.nlm.nih.gov/books/NBK448071/</a>
+      <span style="font-size:11px;color:var(--ts)">Validates: Filaggrin mutations, skin barrier dysfunction, atopic march, Type 2 immune response</span>
+    </li>
+    <li style="font-size:12.5px;line-height:1.6;padding-left:20px;position:relative"><span style="position:absolute;left:0;color:var(--bl);font-weight:700">7.</span>
+      <strong>Nelson HS. Allergen Immunotherapy.</strong> <em>StatPearls</em> [Internet]. NCBI Bookshelf. 2024.
+      <a href="https://www.ncbi.nlm.nih.gov/books/NBK507719/" target="_blank" rel="noopener" style="color:var(--bl);display:block;font-size:11px;margin-top:2px">https://www.ncbi.nlm.nih.gov/books/NBK507719/</a>
+      <span style="font-size:11px;color:var(--ts)">Validates: Regulatory T cell induction, tolerance mechanisms, SCIT/SLIT protocols</span>
+    </li>
+  </ol>
+</div>
+</body>
+</html>

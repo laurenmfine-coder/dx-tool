@@ -949,4 +949,21 @@ window.EMR_DATA = {
       "Rituximab for refractory"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Acquired C1-INH deficiency (AAE) presents identically to hereditary HAE but occurs in adults >40 years with no family history. Mechanism: consumption of C1-INH by autoantibodies (anti-C1-INH IgG) OR consumption by malignant B-cell clones expressing C1-INH substrate.",
+      "Key complement pattern distinguishing AAE from HAE: C1q is LOW in AAE (complement activation extends to C1q level) but NORMAL in HAE (C4 is the primary complement consumed in HAE). This is the most testable differentiator.",
+      "Associated conditions: B-cell lymphoma, MGUS, multiple myeloma, SLE. ALL patients with new-onset AAE require lymphoma/B-cell malignancy workup."
+    ],
+    "boardPearls": [
+      "AAE vs HAE: AAE — adult onset, no family history, C1q LOW, malignancy association. HAE — younger onset, positive family history, C1q NORMAL.",
+      "Complement in AAE: C4 low + C3 low/normal + C1-INH low + C1q LOW.",
+      "Complement in HAE Type I: C4 low + C3 normal + C1-INH low + C1q NORMAL.",
+      "AAE workup: SPEP, UPEP, flow cytometry for B-cell clone, CT chest/abdomen/pelvis for lymphadenopathy, bone marrow biopsy if indicated.",
+      "AAE treatment: same acute agents as HAE (C1-INH concentrate, icatibant). Treat underlying malignancy if identified — may resolve AAE.",
+      "Anti-C1-INH antibodies: present in ~60% of AAE. Rituximab effective in autoimmune AAE."
+    ]
+  }
+};

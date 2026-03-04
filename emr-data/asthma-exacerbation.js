@@ -291,4 +291,56 @@ window.EMR_DATA = {
       "Has not been using controller inhaler regularly"
     ]
   ]
+,
+
+  "references": [
+    {
+      "id": "GINA-2024",
+      "title": "Global Strategy for Asthma Management and Prevention",
+      "authors": "Global Initiative for Asthma",
+      "journal": "GINA Report",
+      "year": 2024,
+      "url": "https://ginasthma.org/gina-reports/",
+      "openAccess": true,
+      "validates": ["GINA step therapy", "Acute exacerbation management", "Discharge criteria"]
+    },
+    {
+      "id": "NAEPP-EPR4",
+      "title": "Asthma Management Guidelines: Focused Updates 2020",
+      "authors": "NHLBI NAEPP Expert Panel",
+      "journal": "NHLBI",
+      "year": 2020,
+      "url": "https://www.nhlbi.nih.gov/health-topics/asthma-management-guidelines",
+      "openAccess": true,
+      "validates": ["Acute severity classification", "SABA + ipratropium + steroids protocol", "IV magnesium (FEV1 <40%)", "Admission criteria"]
+    },
+    {
+      "id": "StatPearls-Asthma-NBK430901",
+      "title": "Asthma",
+      "authors": "StatPearls Publishing",
+      "journal": "StatPearls [Internet]",
+      "year": 2024,
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK430901/",
+      "openAccess": true,
+      "validates": ["Type 2 inflammation pathophysiology", "AHR and airway remodeling", "Trigger identification", "Peak flow monitoring"]
+    }
+  ]
+,
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Asthma exacerbation severity guides management: mild (speaks in sentences, PEFR >70%) → SABA + reassess. Moderate (speaks in phrases, PEFR 40–70%) → SABA + ipratropium + systemic steroids. Severe (speaks in words, PEFR <40%) → same + consider IV Mg²⁺, heliox. Life-threatening (altered consciousness, silent chest, PEFR <25%) → intubation preparation, ICU.",
+      "IV magnesium sulfate (2g IV over 20 min) is indicated for severe exacerbations not responding to initial bronchodilator + steroid therapy. Mechanism: Mg²⁺ blocks calcium channels in bronchial smooth muscle → bronchodilation. GINA recommends in severe/life-threatening acute asthma.",
+      "Systemic corticosteroids (oral or IV) are equally effective in acute asthma — oral preferred when patient can swallow. Early steroid use (within 1 hour of ED presentation) reduces hospitalization and relapse rates."
+    ],
+    "boardPearls": [
+      "PEFR thresholds: >70% = mild; 40–70% = moderate; <40% = severe; <25% = life-threatening.",
+      "SABA + ipratropium: combination superior to SABA alone in severe ED asthma (reduces hospitalization ~25%).",
+      "IV Mg²⁺: 2g IV over 20 min for severe exacerbation non-responsive to bronchodilators. Bronchodilation via calcium channel blockade in smooth muscle.",
+      "Oral vs IV steroids in acute asthma: equivalent efficacy. Oral preferred (less invasive, equal bioavailability for prednisone).",
+      "Heliox: helium-oxygen mixture (70:30 or 80:20) — reduces turbulent airflow → lower airway resistance → improved bronchodilator delivery. For life-threatening asthma or impending intubation.",
+      "Discharge criteria: PEFR >70%, sustained for 60 min after last treatment, adequate home support, systemic steroid course (prednisone 40–60 mg × 5 days).",
+      "Avoid beta-blockers, NSAIDs, aspirin (unless AERD desensitized) in asthma — trigger bronchospasm."
+    ]
+  }
 };

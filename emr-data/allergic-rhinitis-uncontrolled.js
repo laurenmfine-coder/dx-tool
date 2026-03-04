@@ -1285,4 +1285,21 @@ window.EMR_DATA = {
       "United airway (rhinitis + asthma)"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Intranasal corticosteroids (INCS) are first-line therapy for allergic rhinitis — superior to oral antihistamines for nasal congestion (which antihistamines do not treat well). INCS + antihistamine combination most effective for all symptoms.",
+      "Allergen immunotherapy (SCIT or SLIT) is the only disease-modifying treatment for allergic rhinitis — it induces tolerance through Treg and IgG4 blocking antibody mechanisms, reducing symptoms for years after completion.",
+      "The unified airway concept: allergic rhinitis and asthma are manifestations of the same Type 2 airway inflammation. Treating rhinitis reduces asthma exacerbations; asthma in AR patients warrants nasal evaluation."
+    ],
+    "boardPearls": [
+      "INCS: first-line for AR. Onset: 1–2 weeks. Must use daily for full effect (not PRN). Fluticasone, mometasone — minimal systemic absorption, safe for long-term use.",
+      "Antihistamines: second-generation (cetirizine, fexofenadine, loratadine) preferred — less sedating. Effective for sneezing, itching, rhinorrhea. NOT effective for nasal congestion.",
+      "Nasal decongestants (oxymetazoline): max 3 days — rhinitis medicamentosa (rebound congestion) with prolonged use.",
+      "Allergen immunotherapy indications: inadequate symptom control with medications, desire for disease modification, allergen avoidance not feasible, multiple season involvement.",
+      "SCIT vs SLIT: SCIT — office-administered, broader evidence. SLIT tablets (grass, dust mite, ragweed) — home administration, FDA-approved. SLIT drops: off-label in US.",
+      "AR-asthma link: unified airway. Treat both — AR treatment reduces asthma exacerbation risk."
+    ]
+  }
+};

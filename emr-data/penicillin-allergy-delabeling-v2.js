@@ -853,8 +853,8 @@ window.EMR_DATA = {
     "journal": "N Engl J Med",
     "year": 2019,
     "doi": "10.1056/NEJMra1807761",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/31826341/",
-    "openAccess": false,
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
+    "openAccess": true,
     "validates": [
       ">90% with PCN label NOT truly allergic",
       ">80% lose sensitivity after 10 years",

@@ -1037,4 +1037,21 @@ window.EMR_DATA = {
       "Post-viral urticaria in children: no allergy testing needed"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "CSU is defined by urticaria (wheals and/or angioedema) present for >6 weeks without identifiable external trigger. In ~35–40% of cases, an autoimmune mechanism is identified: IgG autoantibodies against IgE (Type IIb) or FcεRIα (the high-affinity IgE receptor, Type IIb) — causing direct mast cell activation.",
+      "Omalizumab (anti-IgE, Xolair) is FDA-approved for CSU refractory to antihistamines. Mechanism: binds free IgE → reduces FcεRI expression on mast cells → mast cell quiescence. Response typically within 1–4 weeks. 300 mg Q4W standard dose.",
+      "H1 antihistamines (up to 4× standard dose) are first-line before stepping up to omalizumab. H2 antihistamines and montelukast add minimal additional benefit beyond high-dose H1 antihistamines."
+    ],
+    "boardPearls": [
+      "CSU definition: urticaria >6 weeks duration without identifiable trigger. Distinguish from inducible urticaria (physical triggers: cold, pressure, exercise).",
+      "Autoimmune CSU markers: positive autologous serum skin test (ASST), anti-FcεRIα IgG, anti-IgE IgG. Basophil activation test (BAT) best validated.",
+      "Treatment stepwise: H1 antihistamine (standard dose) → H1 antihistamine (2–4× dose) → omalizumab 300 mg Q4W → cyclosporine.",
+      "Omalizumab for CSU: 300 mg Q4W. Rapid responders (1–4 wks): IgE-mediated mechanism. Slow responders (8–12 wks): autoimmune mechanism.",
+      "Lab workup: CBC (eosinophilia?), TSH/anti-TPO (thyroid autoimmunity in 15–20% of CSU), ANA (SLE-associated urticaria), CRP/ESR (urticarial vasculitis if elevated + wheals lasting >24h).",
+      "Wheals lasting >24h + residual bruising → biopsy → urticarial vasculitis."
+    ]
+  }
+};

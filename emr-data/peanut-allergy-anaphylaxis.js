@@ -932,4 +932,21 @@ window.EMR_DATA = {
       "OIT = protection, not cure"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Peanut allergy is the leading cause of fatal food anaphylaxis. Ara h 2 (2S albumin storage protein) is the most clinically relevant component — heat-stable, resistant to digestion, strongly predicts systemic reactions.",
+      "Early peanut introduction (LEAP trial 2015): peanut consumption starting at 4–11 months in high-risk infants (severe eczema or egg allergy) reduces peanut allergy by 80% at age 5. NIAID 2017 guidelines recommend early introduction.",
+      "Palforzia (AR101): FDA-approved peanut OIT for ages 4–17. Goal: desensitization to accidental exposure (maintenance 300 mg/day). NOT a cure — must dose daily. ~5% develop EoE on peanut OIT — screen at every visit."
+    ],
+    "boardPearls": [
+      "Ara h 2 sIgE ≥0.35 kUA/L: >95% PPV for clinical peanut allergy — can avoid OFC at this threshold.",
+      "Ara h 8 (PR-10, birch cross-reactive): oral allergy syndrome only — no systemic risk, no EpiPen needed.",
+      "LEAP trial: early peanut at 4–11 months → 80% reduction in peanut allergy. NIAID 2017: recommend for high-risk infants.",
+      "Peanut is a legume — NOT a tree nut. Peanut allergy and tree nut allergy are independent (cross-reactivity via storage proteins, not botanical relationship).",
+      "Palforzia: 100 mg/day up-dosing → 300 mg/day maintenance. Hold for illness, fever, exercise, menses (lower reaction threshold).",
+      "Fatal food anaphylaxis risk factors: asthma (highest risk), prior severe reaction, delayed epinephrine, age 10–25, peanut or tree nut allergen."
+    ]
+  }
+};

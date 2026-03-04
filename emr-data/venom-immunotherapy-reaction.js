@@ -869,4 +869,22 @@ window.EMR_DATA = {
       "Cluster VIT protocol"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Systemic reactions occur in ~0.5–2% of VIT injections, most commonly during build-up phase. Management: epinephrine IM immediately, observe 30+ min, reduce subsequent dose 50% and build back up.",
+      "Pre-medication with antihistamines (diphenhydramine or fexofenadine) before VIT injections reduces local and systemic reaction rates. Omalizumab pre-treatment enables VIT in high-risk patients (e.g., mastocytosis, prior severe VIT reaction).",
+      "Rush VIT protocols compress the build-up phase to days/weeks vs months for conventional — useful for patients needing rapid protection (outdoor workers, beekeepers). Higher systemic reaction rate with rush protocols."
+    ],
+    "boardPearls": [
+      "VIT systemic reaction management: epinephrine IM → reduce next dose 50% → titrate back up at slower pace.",
+      "VIT efficacy: 95–97% protection against future systemic anaphylaxis. Most effective allergy immunotherapy available.",
+      "VIT duration: standard 3–5 years. Lifelong: prior anaphylaxis during VIT, prior very severe anaphylaxis, mastocytosis, elevated baseline tryptase.",
+      "Baseline tryptase >11.4: predicts higher risk for VIT reactions AND future sting anaphylaxis. Mastocytosis workup warranted.",
+      "Omalizumab + VIT: enables safer VIT in mastocytosis and high-risk patients. Reduces VIT systemic reaction rate.",
+      "Rush VIT: build-up in 1–3 days (vs months conventional). Higher systemic reaction rate. Epinephrine immediately available required.",
+      "VIT in pregnancy: CONTINUE maintenance VIT (do not start new VIT during pregnancy). Epinephrine auto-injector essential throughout pregnancy."
+    ]
+  }
+};

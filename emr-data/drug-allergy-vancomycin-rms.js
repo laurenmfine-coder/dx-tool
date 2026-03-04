@@ -918,4 +918,22 @@ window.EMR_DATA = {
       "NOT a true allergy"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Red Man Syndrome (RMS) is a non-IgE, non-immune pharmacologic mast cell activation via MRGPRX2 receptor by vancomycin. Flushing, pruritus, erythema of face/neck/upper torso occur during or within 4–10 minutes of infusion. NOT an allergic reaction — NOT a contraindication to future vancomycin use.",
+      "Prevention: infuse vancomycin over ≥60 min (≥90 min for doses >1g). Pre-treat with H1 antihistamine (diphenhydramine 25–50 mg IV/PO) 30–60 min before infusion.",
+      "Distinguish RMS from true vancomycin anaphylaxis: RMS — flushing + pruritis during infusion, no hypotension/bronchospasm, resolves with infusion pause + antihistamine. True anaphylaxis — hypotension + bronchospasm = requires epinephrine, NOT just rate adjustment."
+    ],
+    "boardPearls": [
+      "RMS mechanism: MRGPRX2 direct mast cell activation → histamine → flushing, pruritus, erythema. NOT IgE-mediated.",
+      "Distribution: face, neck, upper torso (high mast cell density in these areas).",
+      "RMS management: pause/slow infusion + diphenhydramine 25–50 mg IV. Restart at slower rate. NOT contraindication to vancomycin.",
+      "Prevention: infuse over ≥60 min (≥90 min for >1g). Pre-medicate with H1 antihistamine.",
+      "True vancomycin IgE anaphylaxis: rare. Hypotension + bronchospasm → epinephrine. Requires formal allergy evaluation.",
+      "Other MRGPRX2 activators: opioids (morphine, codeine), fluoroquinolones, neuromuscular blockers, radiocontrast — same mechanism, not IgE.",
+      "If patient needs vancomycin with history of RMS: pre-medicate + slow rate. If true anaphylaxis history: allergy testing + desensitization if no alternative."
+    ]
+  }
+};

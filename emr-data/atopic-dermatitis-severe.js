@@ -1177,4 +1177,21 @@ window.EMR_DATA = {
       "Eczema herpeticum as emergency"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Severe AD (SCORAD >50 or IGA 3–4) failing topical therapy warrants systemic treatment. Dupilumab (anti-IL-4Rα) is first-line systemic biologic — approved for ages ≥6 months, excellent long-term safety profile.",
+      "The filaggrin-IL-4/IL-13 vicious cycle: FLG LOF mutations → leaky skin barrier → TSLP/IL-33 alarmins → Th2 priming → IL-4/IL-13 → directly suppress FLG transcription → worsens barrier further. Dupilumab breaks this cycle.",
+      "Dupilumab-associated conjunctivitis: 10–15% incidence in AD patients (higher than in asthma patients). Manage with artificial tears → topical steroids → cyclosporine eye drops. Do NOT discontinue dupilumab — refer to ophthalmology."
+    ],
+    "boardPearls": [
+      "AD severity: mild SCORAD <25, moderate 25–50, severe >50. IGA 0/1 = treatment success in trials.",
+      "Proactive TCS therapy: apply 2×/week to previously affected sites during remission → reduces flare frequency 50%.",
+      "Dupilumab: IL-4Rα blockade. Approved ≥6 months. Also approved: asthma, CRSwNP, EoE, PNP.",
+      "JAK inhibitors (abrocitinib, upadacitinib): FDA black box (serious infection, malignancy, MACE, VTE). Faster itch relief than dupilumab (24–48h via IL-31/JAK1 pathway).",
+      "Atopic march: severe early AD → food allergy → asthma → AR. FLG mutations accelerate march.",
+      "Bleach baths: 0.005% sodium hypochlorite (½ tsp/full tub) × 2–3/week → reduces S. aureus colonization → reduces AD flares. Evidence-based."
+    ]
+  }
+};

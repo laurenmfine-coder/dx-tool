@@ -1168,4 +1168,21 @@ window.EMR_DATA = {
       "Patient preference"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "CVID is the most common symptomatic primary antibody deficiency in adults — median diagnosis age 30s. Diagnostic criteria: low IgG (<2 SD below mean for age) + low IgA and/or IgM + poor vaccine responses + exclusion of other causes. B cells present (differentiate from XLA where B cells are absent).",
+      "CVID complications beyond infections: granulomatous disease (GLILD — granulomatous-lymphocytic ILD), autoimmune cytopenias (ITP, AIHA), GI disease (inflammatory bowel-like, CVID enteropathy, Giardia), splenomegaly, lymphoproliferative disease, and increased cancer risk (gastric, lymphoma).",
+      "Treatment: IgG replacement therapy (IVIG every 3–4 weeks or SCIG weekly/biweekly) to maintain IgG trough >700–800 mg/dL. Dose adjusted based on infection breakthrough, not just IgG level."
+    ],
+    "boardPearls": [
+      "CVID: low IgG + low IgA and/or IgM + poor vaccine responses. B cells PRESENT (unlike XLA).",
+      "Most common symptomatic PAD in adults. Median age at diagnosis: 30s (often 5–10 year delay).",
+      "Characteristic infections: encapsulated bacteria (S. pneumoniae, H. influenzae) → recurrent sinopulmonary. Giardia lamblia → chronic diarrhea/malabsorption. Enteroviruses → chronic meningoencephalitis.",
+      "CVID non-infectious complications: GLILD (granulomatous-lymphocytic ILD), autoimmune cytopenias (ITP, AIHA), CVID enteropathy, splenomegaly, lymphoproliferative disease.",
+      "Live vaccines: contraindicated in CVID (and all PAD). IPV (injectable) → safe. MMR, varicella, yellow fever → CONTRAINDICATED.",
+      "Treatment: IVIG Q3–4W or SCIG. IgG trough target: >700–800 mg/dL. Adjust dose for breakthrough infections."
+    ]
+  }
+};

@@ -991,4 +991,21 @@ window.EMR_DATA = {
       "Post-viral urticaria in children: no allergy testing needed"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Urticarial vasculitis (UV) mimics CSU but is a distinct small-vessel vasculitis. Key distinguishing features: wheals lasting >24 hours, residual bruising/hyperpigmentation after resolution, burning > pruritus, elevated ESR/CRP.",
+      "Hypocomplementemic urticarial vasculitis syndrome (HUVS): C1q antibodies + low C3/C4 + systemic involvement (nephritis, obstructive lung disease, uveitis, arthritis). Associated with SLE and other CTD.",
+      "Skin biopsy is required for diagnosis: leukocytoclastic vasculitis with neutrophilic infiltrate, fibrin deposition in vessel walls, RBC extravasation. This differentiates UV from CSU (which shows mast cell-predominant infiltrate without vasculitis)."
+    ],
+    "boardPearls": [
+      "UV vs CSU: UV wheals last >24h, leave bruising, burn more than itch. CSU wheals <24h, fully resolve, pruritic.",
+      "Normcomplementemic UV: usually idiopathic, milder, no systemic involvement. Antihistamines ± dapsone/colchicine.",
+      "Hypocomplementemic UV (HUVS): C1q antibodies, low C3/C4, systemic complications. Associated with SLE, Sjögren's. Hydroxychloroquine ± immunosuppression.",
+      "Biopsy: leukocytoclastic vasculitis with fibrinoid necrosis = UV. Mast cell infiltrate = CSU.",
+      "Workup: CBC, CMP, ESR/CRP, C3, C4, C1q, ANA, anti-dsDNA, ANCA, hepatitis B/C serology.",
+      "Treatment: antihistamines (limited effect). Dapsone, colchicine, hydroxychloroquine for normcomplementemic. Systemic steroids + immunosuppression for HUVS."
+    ]
+  }
+};

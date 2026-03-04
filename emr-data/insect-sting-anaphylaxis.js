@@ -902,4 +902,21 @@ window.EMR_DATA = {
       "Cluster VIT protocol"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Hymenoptera venom allergy affects 0.5–3% of adults. Large local reactions (>10 cm, >24h) do NOT predict future systemic anaphylaxis — systemic reaction risk after large local reaction is only ~5–10%.",
+      "Venom immunotherapy (VIT) is 95%+ effective at preventing future systemic reactions and is indicated for: adults with any systemic reaction (even urticaria-only), children with moderate-severe systemic reactions (not urticaria-only). Standard duration 3–5 years.",
+      "Mastocytosis patients with venom anaphylaxis: VIT indicated AND continued lifelong (do not stop at 5 years). Baseline tryptase should be checked in all venom anaphylaxis patients — elevated tryptase predicts VIT non-response and future fatal reactions."
+    ],
+    "boardPearls": [
+      "Hymenoptera order: honeybee (Apis mellifera), yellow jacket, yellow hornet, white-faced hornet, paper wasp. Fire ant (Solenopsis) in southeast US.",
+      "Venom cross-reactivity: yellow jacket/hornet/wasp share Antigen 5. Honeybee venom distinct — separate testing needed.",
+      "VIT indications: adults — any systemic reaction (including urticaria-only). Children — moderate-severe systemic reaction (anaphylaxis). NOT for large local reactions.",
+      "VIT duration: standard 3–5 years. Mastocytosis or severe reactions: lifelong.",
+      "Tryptase screening: all venom anaphylaxis patients. Baseline >11.4 → mastocytosis workup. Elevated tryptase = risk for more severe future reactions.",
+      "Field treatment: remove bee stinger immediately (any method — scrape or pull equally effective). Epinephrine IM. Call 911."
+    ]
+  }
+};

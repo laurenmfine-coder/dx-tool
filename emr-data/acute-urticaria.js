@@ -746,4 +746,20 @@ window.EMR_DATA = {
       "Post-viral urticaria in children: no allergy testing needed"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Acute urticaria (<6 weeks) is most commonly triggered by: viral infection (most common cause in children), food (IgE-mediated), drugs (NSAIDs, antibiotics), or is idiopathic. In adults, underlying infection workup is rarely needed for acute urticaria.",
+      "Management: identify and remove trigger. Oral H1 antihistamine (cetirizine, loratadine) for symptom control. Add short-course oral steroids (prednisone 40 mg × 5 days) for severe cases. Epinephrine only if anaphylaxis features (hypotension, bronchospasm).",
+      "Distinguishing urticaria from angioedema: urticaria — superficial dermis, pruritic, blanches, resolves <24h. Angioedema — deep dermis/submucosa, burning/pain, non-pruritic, lasts 24–72h. Both can coexist."
+    ],
+    "boardPearls": [
+      "Acute urticaria most common cause: viral URI (especially in children). Food allergy, NSAIDs, antibiotics in adults.",
+      "Urticaria characteristics: raised erythematous wheals, pruritic, blanching on pressure, individual lesions resolve <24h (wheals lasting >24h → suspect urticarial vasculitis).",
+      "Treatment: H1 antihistamine (cetirizine 10 mg BID or loratadine 10 mg daily). Prednisone 40 mg × 5 days for refractory/severe acute urticaria.",
+      "No extensive workup needed for first episode of acute urticaria — only if recurring or systemic symptoms suggest underlying disease.",
+      "Dermatographism: most common physical urticaria. Stroking skin → wheal-and-flare within 5 min. H1 antihistamine effective."
+    ]
+  }
+};

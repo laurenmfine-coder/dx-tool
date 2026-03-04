@@ -17,7 +17,8 @@ var EMR_MANIFEST = window.EMR_MANIFEST || [
     {id:"copd-v1",diagnosis:"COPD Exacerbation",category:"pulmonary",acuity:2,cc:"Worsening dyspnea and productive cough \u00D7 3 days"},
     {id:"asthma-exacerbation",diagnosis:"Asthma Exacerbation",category:"pulmonary",acuity:2,cc:"Wheezing and difficulty breathing, inhaler not helping"},
     {id:"pneumonia",diagnosis:"Community-Acquired Pneumonia",category:"infectious",acuity:3,cc:"Fever, cough with yellow sputum, shortness of breath \u00D7 4 days"},
-    {id:"massive-pe-with-rv-failure",diagnosis:"Massive PE with RV Failure",category:"pulmonary",acuity:1,cc:"Sudden severe dyspnea, near-syncope, cannot catch breath"}
+    {id:"massive-pe-with-rv-failure",diagnosis:"Massive PE with RV Failure",category:"pulmonary",acuity:1,cc:"Sudden severe dyspnea, near-syncope, cannot catch breath"},
+    {id:"vocal-cord-dysfunction",diagnosis:"Vocal Cord Dysfunction (PVFM)",category:"pulmonary",acuity:3,cc:"Episodic inspiratory stridor and throat tightness — misdiagnosed as asthma for 2 years"}
   ]},
   { presentation:"Altered Mental Status", cases:[
     {id:"dka-v1",diagnosis:"Diabetic Ketoacidosis",category:"endocrine",acuity:1,cc:"Nausea, vomiting, abdominal pain, increasingly confused \u00D7 2 days"},
@@ -41,7 +42,15 @@ var EMR_MANIFEST = window.EMR_MANIFEST || [
     {id:"hereditary-angioedema",diagnosis:"Hereditary Angioedema",category:"allergy",acuity:2,cc:"Recurrent facial swelling and severe abdominal pain, family history of similar episodes"},
     {id:"allergic-angioedema",diagnosis:"Allergic Angioedema",category:"allergy",acuity:2,cc:"Acute facial and lip swelling after new medication"},
     {id:"idiopathic-angioedema",diagnosis:"Idiopathic Angioedema",category:"allergy",acuity:3,cc:"Recurrent episodes of hand and facial swelling, no clear trigger"},
-    {id:"acquired-c1esterase-inhibitor-deficiency",diagnosis:"Acquired C1-INH Deficiency",category:"allergy",acuity:2,cc:"Recurrent facial swelling and abdominal pain, not responding to antihistamines"}
+    {id:"acquired-c1esterase-inhibitor-deficiency",diagnosis:"Acquired C1-INH Deficiency",category:"allergy",acuity:2,cc:"Recurrent facial swelling and abdominal pain, not responding to antihistamines"},
+    {id:"abpa-aspergillus",diagnosis:"ABPA (Allergic Bronchopulmonary Aspergillosis)",category:"allergy",acuity:3,cc:"Refractory asthma with recurrent pulmonary infiltrates and peripheral eosinophilia"},
+    {id:"severe-asthma-biologics",diagnosis:"Severe Eosinophilic Asthma — Biologic Selection",category:"allergy",acuity:3,cc:"4th asthma exacerbation in 12 months despite Step 4 therapy — AERD + CRSwNP + eosinophilia"},
+    {id:"occupational-asthma-isocyanate",diagnosis:"Isocyanate Occupational Asthma",category:"allergy",acuity:2,cc:"Work-related wheeze and dyspnea improving on weekends — automotive spray painter"},
+    {id:"inducible-urticaria",diagnosis:"Cold-Induced Urticaria",category:"allergy",acuity:3,cc:"Hives and swelling triggered by cold water exposure — nearly drowned"},
+    {id:"crswNP-biologics",diagnosis:"Severe CRSwNP + AERD — Dupilumab",category:"allergy",acuity:3,cc:"Complete anosmia × 2 years, FESS × 2 failures, severe nasal polyposis with NSAID hypersensitivity"},
+    {id:"allergic-rhinitis-immunotherapy",diagnosis:"Allergic Rhinitis — Allergen Immunotherapy (SCIT)",category:"allergy",acuity:4,cc:"Perennial nasal congestion, sneezing, itchy eyes — dust mite + grass + mold sensitized, SCIT initiation with systemic reaction management"},
+    {id:"hypersensitivity-pneumonitis",diagnosis:"Chronic Fibrotic Hypersensitivity Pneumonitis",category:"allergy",acuity:3,cc:"Progressive dyspnea 14 months, dry cough, weight loss — lifelong bird breeder × 25 years"},
+    {id:"hypereosinophilic-syndrome",diagnosis:"Hypereosinophilic Syndrome — FIP1L1-PDGFRA Myeloproliferative",category:"allergy",acuity:2,cc:"Persistent eosinophilia 4,800 cells/µL on routine CBC — fatigue, borderline troponin elevation"}
   ]},
   { presentation:"Skin/Drug Reactions", cases:[
     {id:"sjs-ten",diagnosis:"SJS/TEN",category:"allergy",acuity:1,cc:"Widespread skin blistering, painful rash, fever after starting new medication"},
@@ -122,10 +131,16 @@ var EMR_MANIFEST = window.EMR_MANIFEST || [
     {id:"drug-allergy-vancomycin-rms",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"consult",allergySubtype:"drug-allergy",allSettings:true,cc:"Red flushing of face and chest during vancomycin infusion"}
   ]},
   { presentation:"Mast Cell Disease", cases:[
-    {id:"mastocytosis",diagnosis:"Acute Urticaria",category:"allergy",acuity:2,setting:"consult",allergySubtype:"mast-cell",allSettings:true,cc:"Flushing episodes, hives with skin stroking, recurrent anaphylaxis"}
+    {id:"mastocytosis",diagnosis:"Acute Urticaria",category:"allergy",acuity:2,setting:"consult",allergySubtype:"mast-cell",allSettings:true,cc:"Flushing episodes, hives with skin stroking, recurrent anaphylaxis"},
+    {id:"mcas-mast-cell",diagnosis:"Mast Cell Activation Syndrome (MCAS)",category:"allergy",acuity:3,cc:"Recurrent multisystem flushing, urticaria, GI cramping and near-syncope — tryptase elevated during attacks"},
+    {id:"alpha-gal-syndrome",diagnosis:"Alpha-Gal Syndrome",category:"allergy",acuity:3,cc:"Delayed urticaria and anaphylaxis 3–4 hours after red meat — recent Lone Star tick bite history"}
   ]},
   { presentation:"Immunodeficiency", cases:[
-    {id:"cvid-presentation",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"immunodeficiency",allSettings:true,cc:"Recurrent sinus and lung infections, 4 courses of antibiotics this year"}
+    {id:"cvid-presentation",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"immunodeficiency",allSettings:true,cc:"Recurrent sinus and lung infections, 4 courses of antibiotics this year"},
+    {id:"xla-brutons",diagnosis:"X-Linked Agammaglobulinemia (XLA)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"2-year-old male with 4th serious bacterial infection — septic arthritis, recurrent encapsulated bacteria since 6 months"},
+    {id:"scid-ada",diagnosis:"Severe Combined Immunodeficiency (ADA-SCID)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"6-week-old referred urgently — absent TRECs on newborn screening, no symptoms yet"},
+    {id:"digeorge-22q11",diagnosis:"DiGeorge Syndrome (22q11.2 Deletion)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"Newborn with truncus arteriosus, hypocalcemia seizure, and cleft palate — 22q11.2 evaluation"},
+    {id:"cgd-xlinked",diagnosis:"Chronic Granulomatous Disease (X-linked CGD)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"5-year-old with 3rd suppurative lymphadenitis, prior S. aureus liver abscess and Aspergillus pneumonia"}
   ]},
   { presentation:"Contact Dermatitis", cases:[
     {id:"contact-dermatitis-occupational",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"contact-dermatitis",allSettings:true,cc:"Itchy, blistering rash on hands, worse at work"}

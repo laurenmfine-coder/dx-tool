@@ -1205,4 +1205,22 @@ window.EMR_DATA = {
       "Anosmia recovery 30-60%"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "AERD (Aspirin-Exacerbated Respiratory Disease / Samter's Triad): asthma + CRSwNP + NSAID hypersensitivity via COX-1 inhibition → reduced PGE₂ (which normally inhibits mast cells) → mast cell activation → LTC4/LTD4 release → bronchospasm + nasal edema. Urinary LTE₄ is constitutively elevated in AERD — even without NSAID exposure.",
+      "NSAID-ERD crosses with ALL COX-1 inhibitors (aspirin, ibuprofen, naproxen, ketorolac, diclofenac) because the mechanism is pharmacologic (COX-1 inhibition), NOT immunologic. COX-2 selective agents (celecoxib) are safe in NSAID-ERD.",
+      "Aspirin desensitization in AERD: 2-day in-office protocol (40 mg → 325 mg → 650 mg) followed by daily maintenance aspirin 650 mg BID indefinitely. Benefits: 50% reduction in polyp recurrence, further LTE₄ normalization. Must maintain aspirin — stopping >3 days → resensitization."
+    ],
+    "boardPearls": [
+      "NSAID-ERD: COX-1 → ↓PGE₂ → mast cell activation → ↑LTE₄ → bronchospasm + nasal edema. Cross-reacts ALL NSAIDs. COX-2 safe.",
+      "NSAID-EURD: COX-1 → urticaria/angioedema in patients with CSU. Cross-reacts ALL NSAIDs. COX-2 safe.",
+      "SNIUAA (Selective NSAID-induced Urticaria/Angioedema/Anaphylaxis): TRUE IgE to specific NSAID. Drug-specific — other NSAIDs safe.",
+      "SNIDR (Selective NSAID-induced delayed reaction): T-cell delayed. Drug-specific.",
+      "Urinary LTE₄ in AERD: markedly elevated at BASELINE (no NSAID exposure needed) — constitutive COX-1/mast cell overproduction.",
+      "Aspirin desensitization eligibility: FEV₁ ≥50%, no recent exacerbation, polyp burden not prohibitive. Maintenance: 650 mg BID indefinitely.",
+      "Safe analgesics in NSAID-ERD: acetaminophen (safe at <1000 mg single dose), celecoxib (COX-2 selective)."
+    ]
+  }
+};

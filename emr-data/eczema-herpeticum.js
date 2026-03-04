@@ -869,4 +869,22 @@ window.EMR_DATA = {
       "Eczema herpeticum as emergency"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Eczema herpeticum (EH) is a potentially life-threatening disseminated HSV infection in patients with AD or other skin barrier defects. Deficient cathelicidin (LL-37) and β-defensin production in AD skin → impaired innate antiviral defense → HSV spreads beyond initial inoculation site.",
+      "Clinical recognition: punched-out vesicles/erosions (often umbilicated) clustered in AD-affected areas, fever, systemic illness. Diagnosis: Tzanck smear (multinucleated giant cells), HSV PCR from lesion.",
+      "Treatment: systemic acyclovir (IV for severe/disseminated; oral valacyclovir for mild). Must treat promptly — can progress to encephalitis, keratoconjunctivitis, viremia. Topical steroids: HOLD during acute EH (may worsen spread); resume after EH resolves."
+    ],
+    "boardPearls": [
+      "EH: HSV dissemination in AD skin. Deficient LL-37 (cathelicidin) in AD → impaired antiviral defense.",
+      "Clinical: punched-out umbilicated erosions in eczematous skin + fever + lymphadenopathy.",
+      "Diagnosis: Tzanck smear (multinucleated giant cells), HSV PCR (most sensitive), DFA.",
+      "Treatment: acyclovir IV for severe. Oral valacyclovir for mild. Duration: 10–14 days minimum.",
+      "Hold topical steroids during active EH — resume after resolution.",
+      "Recurrent EH: daily suppressive valacyclovir. Assess immune status (HIV, PID).",
+      "EH vs impetigo: EH = punched-out umbilicated lesions, fever, systemic. Impetigo = honey-crusted, no systemic illness, no umbilication."
+    ]
+  }
+};

@@ -998,4 +998,20 @@ window.EMR_DATA = {
       "OIT = protection, not cure"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "OIT reactions most commonly occur during up-dosing or with cofactors (exercise, illness, fever, menses, alcohol, NSAIDs). Cofactors lower the threshold for mast cell activation — patients must hold OIT dose during any cofactor state.",
+      "EoE is a recognized complication of OIT in ~5% of patients. Screen with symptom questionnaire at every OIT visit (dysphagia, odynophagia, chest pain, food impaction). Low threshold to refer for endoscopy.",
+      "OIT emergency protocol: mild reaction (isolated oral pruritus) — continue current dose, antihistamine. Moderate (urticaria, GI) — hold up-dose, stay at current level. Severe (anaphylaxis) — epinephrine, hold OIT, reassess with allergist before resuming."
+    ],
+    "boardPearls": [
+      "OIT mechanism: mast cell anergy + basophil desensitization + Treg induction + IgG4 production (blocking antibody) + IgE/IgG4 ratio decrease.",
+      "Desensitization vs sustained unresponsiveness (SU): desensitization = tolerance maintained only while dosing daily. SU = tolerance persists weeks after stopping. ~70% achieve desensitization; ~30% achieve SU.",
+      "OIT cofactor protocol: hold dose if fever >38°C, active illness, exercise within 2h, menses Day 1–2, alcohol.",
+      "EoE complication of OIT: ~5% incidence. Symptom-based screening at each visit. Discontinue or reduce OIT dose if EoE confirmed.",
+      "Palforzia (peanut): ages 4–17. Xolair (omalizumab) pre-treatment: reduces OIT reactions, allows faster up-dosing in high-risk patients (MultiPALS trial)."
+    ]
+  }
+};

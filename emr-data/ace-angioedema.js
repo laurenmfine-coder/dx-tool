@@ -959,4 +959,21 @@ window.EMR_DATA = {
       "Icatibant for ACE angioedema"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "ACE inhibitor angioedema occurs in 0.1–0.7% of patients on ACEi, more common in Black patients (3-4× higher risk), and can occur years after starting the medication. Mechanism: ACEi inhibits bradykinin degradation → bradykinin accumulates → B2 receptor activation → angioedema.",
+      "ACEi angioedema is bradykinin-mediated, NOT histamine. Antihistamines and epinephrine have limited efficacy — icatibant (bradykinin B2 antagonist) or C1-INH concentrate can be used for severe attacks.",
+      "All ACE inhibitors are absolutely contraindicated after ACEi angioedema. ARBs carry a small cross-reactivity risk (~3–10%) — use with caution and monitoring. ARNI (sacubitril/valsartan) — contraindicated (neprilysin inhibition raises bradykinin levels further)."
+    ],
+    "boardPearls": [
+      "ACEi angioedema mechanism: bradykinin accumulation (NOT IgE/histamine). Responds poorly to epinephrine/antihistamines.",
+      "Epidemiology: 0.1–0.7% ACEi users. Black patients: 3–4× higher risk. Can occur after years on the drug.",
+      "Treatment: stop ACEi immediately. Airway management first. Icatibant or C1-INH for severe/refractory attacks.",
+      "Contraindications after ACEi angioedema: ALL ACE inhibitors. ARBs: cautiously permissible (3–10% risk). ARNI (sacubitril/valsartan): contraindicated.",
+      "Complement testing: normal C4, C3, C1-INH — distinguishes from HAE and acquired C1-INH deficiency.",
+      "Resolution: after ACEi discontinuation, angioedema typically resolves within 48–72h but may rarely persist weeks."
+    ]
+  }
+};

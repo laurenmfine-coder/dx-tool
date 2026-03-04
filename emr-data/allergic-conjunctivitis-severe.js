@@ -1092,8 +1092,8 @@ window.EMR_DATA = {
     "journal": "Pediatr Allergy Immunol",
     "year": 2007,
     "doi": "10.1111/j.1399-3038.2007.00658.x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/18078420/",
-    "openAccess": false,
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448118/",
+    "openAccess": true,
     "validates": [
       "Giant papillae, shield ulcers, Horner-Trantas dots",
       "Young males, African American/Middle Eastern",
@@ -1101,4 +1101,21 @@ window.EMR_DATA = {
       "Shield ulcers → permanent corneal scarring"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Vernal keratoconjunctivitis (VKC) is the most severe form of allergic conjunctivitis — predominantly in young males, perennial, can cause corneal scarring and vision loss if untreated. Giant papillae ('cobblestone') on tarsal conjunctiva are pathognomonic.",
+      "VKC is primarily T-cell and eosinophil-driven (Th2). Treatment escalation: topical antihistamines/mast cell stabilizers → topical cyclosporine → topical tacrolimus → systemic immunosuppression for severe/refractory disease.",
+      "Shield ulcers: a serious VKC complication — eosinophilic debris deposits on cornea → sterile ulceration at 10–2 o'clock position. Requires urgent ophthalmology evaluation and aggressive anti-inflammatory treatment."
+    ],
+    "boardPearls": [
+      "AC spectrum: seasonal AC (SAC, mildest) → perennial AC (PAC) → atopic keratoconjunctivitis (AKC, adults with AD) → vernal keratoconjunctivitis (VKC, young males, most severe).",
+      "VKC: giant papillae (>1 mm) on tarsal conjunctiva = cobblestone appearance. Eosinophil-driven. Young males. Perennial.",
+      "VKC treatment: topical olopatadine (H1 + mast cell stabilizer) → topical cyclosporine → tacrolimus → systemic steroids for severe flares.",
+      "Shield ulcer: VKC complication. Eosinophil granule deposits on cornea. Urgent ophthalmology. Risk of corneal scarring/visual loss.",
+      "Topical steroids: effective for AC/VKC but risk of IOP elevation and cataract with prolonged use — limit duration, ophthalmology co-management.",
+      "Dupilumab-associated conjunctivitis: distinct from VKC. Eosinophilic mechanism. Manage with topical steroids — do NOT stop dupilumab."
+    ]
+  }
+};

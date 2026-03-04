@@ -918,4 +918,20 @@ window.EMR_DATA = {
       "60% resolution by age 3-5"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "Chronic FPIES (daily exposure to trigger food) presents differently from acute FPIES: intermittent vomiting, diarrhea, poor weight gain, irritability — mimicking GERD, formula intolerance, or failure to thrive. No single dramatic episode.",
+      "In breastfed infants, chronic FPIES can be triggered by maternal dietary proteins passing through breast milk — most commonly cow's milk proteins. Maternal elimination diet is diagnostic and therapeutic.",
+      "Diagnosis of chronic FPIES is confirmed by: resolution of symptoms with trigger elimination + symptom recurrence on supervised food challenge."
+    ],
+    "boardPearls": [
+      "Chronic FPIES: daily exposure → gradual symptoms (vomiting, diarrhea, FTT). Contrast with acute FPIES: episodic exposure → dramatic acute vomiting.",
+      "Breastfed infant with chronic FPIES: maternal cow's milk elimination diet → assess symptom resolution over 2 weeks.",
+      "Formula options for milk/soy FPIES: amino acid-based formula (Neocate, EleCare) — extensively hydrolyzed formulas may still trigger in some FPIES infants.",
+      "Chronic FPIES misdiagnosis: GERD (similar GI symptoms), pyloric stenosis (projectile vomiting), FTT workup.",
+      "Resolution monitoring: trial food reintroduction at 12–18 months in allergist office after symptom-free period."
+    ]
+  }
+};

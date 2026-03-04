@@ -971,4 +971,21 @@ window.EMR_DATA = {
       "Estrogen triggers: OCPs contraindicated"
     ]
   }
-]};
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "HAE is caused by C1-inhibitor deficiency (Type I — low C1-INH level; Type II — dysfunctional C1-INH) or FXII mutation (Type III, estrogen-dependent, normal complement). Bradykinin accumulation (NOT histamine) drives edema — this is why antihistamines and epinephrine do NOT treat HAE attacks.",
+      "HAE acute treatment: C1-INH concentrate (Berinert, Cinryze), icatibant (bradykinin B2 receptor antagonist), or ecallantide (kallikrein inhibitor). ALL attacks above the waist require treatment — laryngeal attacks are potentially fatal.",
+      "HAE prophylaxis options: lanadelumab (anti-kallikrein, Q2–4W SC), subcutaneous C1-INH (Haegarda), oral berotralstat (plasma kallikrein inhibitor). Danazol (attenuated androgen, increases C1-INH synthesis) — largely replaced by newer agents due to side effects."
+    ],
+    "boardPearls": [
+      "HAE Types: I (low C1-INH level, most common, 85%); II (normal level, dysfunctional C1-INH); III (FXII mutation, estrogen-triggered, normal complement levels).",
+      "Complement pattern in HAE: C4 LOW (chronically depleted, even between attacks). C3 NORMAL. C1-INH low (Type I) or dysfunctional (Type II). C1q NORMAL (distinguishes from acquired C1-INH deficiency where C1q is LOW).",
+      "HAE mechanism: bradykinin (NOT histamine) → B2 receptors on postcapillary venules → vascular permeability → angioedema. Epinephrine and antihistamines: NOT effective for HAE.",
+      "Laryngeal HAE: 25–40% of patients have laryngeal attacks. ALL should carry 2 doses of on-demand treatment. Fatal without treatment.",
+      "Triggers: trauma/surgery, estrogens (OCPs, HRT, pregnancy), ACE inhibitors, infections, stress.",
+      "ACE inhibitors absolutely contraindicated in HAE — block bradykinin degradation → precipitate attacks."
+    ]
+  }
+};

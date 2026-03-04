@@ -303,4 +303,22 @@ window.EMR_DATA = {
     "presentation": "Allergic Reaction",
     "category": "pulmonary"
   }
+,
+
+  "teachingPoints": {
+    "keyLearning": [
+      "VCD/PVFM (paradoxical vocal fold motion) causes inspiratory stridor and dyspnea from paradoxical adduction of vocal folds during inspiration. It is frequently misdiagnosed as asthma — patients are often on unnecessary high-dose inhaled corticosteroids and bronchodilators.",
+      "Key distinguishing features from asthma: stridor is predominantly INSPIRATORY (vs expiratory wheeze in asthma); truncated inspiratory loop on spirometry (vs scooped expiratory loop in asthma); bronchodilators have NO effect; attacks are often sudden-onset and terminate abruptly.",
+      "Gold standard diagnosis: laryngoscopy during a symptomatic episode — shows paradoxical adduction of vocal folds with posterior glottic chinking. Flow-volume loops show flattened/truncated inspiratory loop (variable extrathoracic obstruction)."
+    ],
+    "boardPearls": [
+      "VCD stridor: INSPIRATORY. Asthma wheeze: EXPIRATORY. Key clinical distinguisher.",
+      "Spirometry in VCD: truncated inspiratory loop (variable extrathoracic obstruction). Asthma: scooped expiratory loop + reduced FEV₁/FVC.",
+      "Triggers: exercise, strong odors, GERD, psychological stress, post-nasal drip, irritants.",
+      "Diagnosis: laryngoscopy during episode (gold standard) OR provocation + laryngoscopy.",
+      "Treatment: speech therapy (breathing techniques, laryngeal control exercises) = mainstay. Treat GERD/post-nasal drip triggers. Heliox for acute severe attacks.",
+      "VCD + asthma: 30–50% of VCD patients also have asthma (comorbid, not alternative diagnosis). Treat both.",
+      "Do NOT use epinephrine for VCD — it has no mechanism to work and delays correct treatment."
+    ]
+  }
 };

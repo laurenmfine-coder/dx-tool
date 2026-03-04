@@ -1185,8 +1185,8 @@ window.EMR_DATA = {
     "journal": "Br J Dermatol",
     "year": 2013,
     "doi": "10.1111/bjd.12501",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/23855313/",
-    "openAccess": false,
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK459327/",
+    "openAccess": true,
     "validates": [
       "RegiSCAR score ≥5 = definite DRESS",
       "HHV-6 reactivation",
@@ -1215,7 +1215,7 @@ window.EMR_DATA = {
     "year": 2019,
     "doi": "10.1016/j.jaip.2018.08.004",
     "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
-    "openAccess": false,
+    "openAccess": true,
     "validates": [
       "Autoimmune thyroiditis ~40% post-DRESS",
       "TSH monitoring at 3, 6, 12 months",

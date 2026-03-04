@@ -916,4 +916,20 @@ window.EMR_DATA = {
     ]
   }
 ]
+,
+
+  "teachingPoints": {
+    "keyLearning": [
+      "IgE-mediated (allergic) angioedema is histamine-driven and occurs within 30 minutes of allergen exposure. It commonly accompanies urticaria (combined urticaria + angioedema in ~50% of anaphylaxis cases).",
+      "Angioedema without urticaria should prompt evaluation for bradykinin-mediated causes (HAE, ACEi angioedema) — these do NOT respond to antihistamines/epinephrine. The clinical key: allergic angioedema has urticaria + rapid onset; bradykinin angioedema has NO urticaria + slower onset.",
+      "If anaphylaxis features are present with angioedema (hypotension, bronchospasm, loss of consciousness) — epinephrine IM is the primary treatment, not antihistamines."
+    ],
+    "boardPearls": [
+      "Allergic angioedema: IgE + mast cell → histamine → Type I (immediate, <30 min). WITH urticaria in most cases.",
+      "Bradykinin angioedema (HAE, ACEi): NO urticaria, slower onset (hours), longer duration (24–72h), does NOT respond to epinephrine/antihistamines.",
+      "Angioedema differential: allergic (IgE, histamine) vs bradykinin (HAE, ACEi, acquired C1INH) vs idiopathic.",
+      "Treatment allergic angioedema: epinephrine if anaphylaxis. H1 antihistamine (diphenhydramine, cetirizine). H2 blocker (famotidine) adjunct. Short OCS course.",
+      "Airway angioedema: tongue/uvular/laryngeal — epinephrine IM first, prepare for intubation, ENT/anesthesia early involvement."
+    ]
+  }
 };
