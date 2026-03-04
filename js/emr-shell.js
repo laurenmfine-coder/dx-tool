@@ -247,6 +247,18 @@
       }
 
       if (tool.url) {
+        // Pass case + setting context to consult callback
+        if (toolId === 'consult') {
+          var caseId = _getCaseId();
+          var setting = _getSetting();
+          var url = tool.url;
+          var params = [];
+          if (caseId) params.push('case=' + caseId);
+          if (setting) params.push('setting=' + setting);
+          if (params.length) url += '?' + params.join('&');
+          window.location.href = url;
+          return;
+        }
         window.location.href = tool.url;
       }
     }
