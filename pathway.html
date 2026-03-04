@@ -10,7 +10,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="description" content="AI-powered Socratic pathophysiology tutor. 80 systems, 480 topics across all medical specialties. Learn mechanisms through guided questioning.">
+<meta name="description" content="AI-powered Socratic pathophysiology tutor. 93 systems, 560 topics across all medical specialties. Learn mechanisms through guided questioning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -807,6 +807,113 @@ var SYSTEMS = [
     {id:'abdominal-imaging',name:'Abdominal Imaging',sub:'Acute abdomen CT, hepatic lesions, renal masses, pancreatic protocol'},
     {id:'neuro-imaging-rad',name:'Neuroimaging Patterns',sub:'Stroke (DWI), hemorrhage, MS plaques, tumor, hydrocephalus'},
     {id:'incidental-findings',name:'Incidental Findings',sub:'Pulmonary nodules (Fleischner), adrenal, renal, thyroid, liver'}
+  ]},
+  { id:'embryo-gi', name:'GI Embryology → Clinical', icon:'🧬', topics:[
+    {id:'foregut-dev',name:'Foregut Development',sub:'Esophagus, stomach, duodenum (proximal), liver, gallbladder, pancreas. TEF/EA, pyloric stenosis, biliary atresia'},
+    {id:'midgut-rotation',name:'Midgut Rotation & Herniation',sub:'Physiologic herniation (wk 6-10), 270° counterclockwise rotation, malrotation, volvulus, Ladd bands, omphalocele vs gastroschisis'},
+    {id:'hindgut-dev',name:'Hindgut & Anorectal',sub:'Distal colon, rectum, upper anal canal. Hirschsprung (neural crest failure), imperforate anus, VACTERL association'},
+    {id:'liver-pancreas-embryo',name:'Hepatobiliary & Pancreatic',sub:'Hepatic diverticulum, ventral/dorsal pancreatic buds, annular pancreas, choledochal cysts, biliary atresia pathogenesis'},
+    {id:'gi-lumen-dev',name:'GI Lumen & Recanalization',sub:'Solid cord → recanalization, atresias (duodenal "double bubble," jejunal/ileal apple-peel), Meckel diverticulum (vitelline duct remnant)'},
+    {id:'gi-clinical-correlates',name:'Clinical Correlations',sub:'Connecting embryology to imaging: double bubble sign, microcolon, corkscrew sign, transition zones'}
+  ]},
+  { id:'embryo-neuro', name:'Neuro Embryology → Clinical', icon:'🧠', topics:[
+    {id:'neural-tube-dev',name:'Neural Tube Formation',sub:'Neurulation (wk 3-4), neural plate → tube, rostral/caudal neuropores, anencephaly, spina bifida, folate prevention'},
+    {id:'brain-vesicles',name:'Brain Vesicles & Flexures',sub:'Prosencephalon → telencephalon/diencephalon, mesencephalon, rhombencephalon → metencephalon/myelencephalon. Holoprosencephaly, Dandy-Walker'},
+    {id:'neural-crest',name:'Neural Crest Cell Migration',sub:'Cranial NC → face, pharyngeal arches, melanocytes, enteric ganglia. DiGeorge (22q11.2), Hirschsprung, neurocristopathies'},
+    {id:'cortical-dev',name:'Cortical Development',sub:'Neuronal proliferation, migration, lissencephaly, polymicrogyria, heterotopia, schizencephaly. MRI correlation'},
+    {id:'ventricular-csf',name:'Ventricular System & CSF',sub:'Choroid plexus development, aqueduct formation, hydrocephalus (communicating vs obstructive), Chiari malformations'},
+    {id:'neuro-clinical-correlates',name:'Clinical Correlations',sub:'Connecting embryology to pediatric neuro presentations: seizures, developmental delay, microcephaly, macrocephaly, imaging patterns'}
+  ]},
+  { id:'embryo-resp', name:'Respiratory Embryology → Clinical', icon:'🌬️', topics:[
+    {id:'lung-bud-dev',name:'Lung Bud & Branching',sub:'Laryngotracheal groove (wk 4), tracheoesophageal septum, TEF types (H-type, proximal/distal), dichotomous branching (16-23 generations)'},
+    {id:'lung-maturation',name:'Lung Maturation Stages',sub:'Pseudoglandular (5-17 wk), canalicular (16-25), saccular (24-36), alveolar (36 wk-8 yr). Surfactant production, type II pneumocytes'},
+    {id:'surfactant-rds',name:'Surfactant & RDS',sub:'Lecithin/sphingomyelin ratio, lamellar bodies, RDS pathophysiology, antenatal steroids (betamethasone), exogenous surfactant'},
+    {id:'congenital-lung',name:'Congenital Lung Malformations',sub:'CPAM (types 0-4), bronchopulmonary sequestration (intralobar vs extralobar), congenital lobar emphysema, bronchogenic cyst'},
+    {id:'diaphragm-dev',name:'Diaphragm Development',sub:'Septum transversum, pleuroperitoneal folds, body wall, esophageal mesentery. CDH (Bochdalek > Morgagni), phrenic nerve (C3-5)'},
+    {id:'resp-clinical-correlates',name:'Clinical Correlations',sub:'Prenatal ultrasound findings, postnatal respiratory distress, chest imaging patterns, surgical timing'}
+  ]},
+  { id:'embryo-msk', name:'MSK Embryology → Clinical', icon:'🦿', topics:[
+    {id:'somite-dev',name:'Somite Differentiation',sub:'Paraxial mesoderm → somites (42-44 pairs), sclerotome (vertebrae), myotome (skeletal muscle), dermatome (dermis). Segmental innervation'},
+    {id:'limb-dev',name:'Limb Development',sub:'Limb bud (wk 4-8), AER (proximal-distal), ZPA (anterior-posterior, Sonic hedgehog), progress zone. Phocomelia, polydactyly, syndactyly'},
+    {id:'vertebral-dev',name:'Vertebral Column',sub:'Sclerotome resegmentation, notochord remnants (nucleus pulposus), vertebral anomalies: hemivertebra, butterfly, Klippel-Feil, sacral agenesis'},
+    {id:'bone-formation',name:'Ossification Patterns',sub:'Intramembranous (flat bones, skull) vs endochondral (long bones, vertebrae). Growth plates, achondroplasia (FGFR3), osteogenesis imperfecta'},
+    {id:'muscle-dev',name:'Muscle & Connective Tissue',sub:'Myotome → skeletal muscle, lateral plate mesoderm → limb connective tissue. Muscular dystrophies, arthrogryposis, congenital torticollis'},
+    {id:'msk-clinical-correlates',name:'Clinical Correlations',sub:'Connecting embryology to orthopedic/genetic presentations: hip dysplasia, clubfoot, scoliosis, limb deficiencies, imaging findings'}
+  ]},
+  // ═══ A/I CROSS-SPECIALTY SYSTEMS ═══
+  { id:'drug-hypersensitivity', name:'Drug Hypersensitivity', icon:'💊', topics:[
+    {id:'gell-coombs',name:'Gell-Coombs Classification',sub:'Type I (IgE-mediated, immediate), Type II (cytotoxic), Type III (immune complex), Type IV (delayed/T-cell). Clinical examples of each'},
+    {id:'drug-allergy-evaluation',name:'Drug Allergy Evaluation',sub:'History risk stratification, skin testing (penicillin, local anesthetics), drug provocation testing, graded challenges vs desensitization'},
+    {id:'sjs-ten-mechanism',name:'SJS/TEN Pathophysiology',sub:'Cytotoxic T-cell and NK-cell mediated keratinocyte apoptosis. Granulysin, FasL, perforin/granzyme. HLA associations (B*5801, B*1502)'},
+    {id:'dress-mechanism',name:'DRESS Syndrome',sub:'Drug reaction with eosinophilia and systemic symptoms. Viral reactivation (HHV-6), 2-8 week latency, organ involvement, HLA associations'},
+    {id:'penicillin-cross-react',name:'Beta-Lactam Cross-Reactivity',sub:'Penicillin, cephalosporin, carbapenem cross-reactivity rates. Side chain similarity. De-labeling strategies and impact on antibiotic stewardship'},
+    {id:'desensitization-mech',name:'Desensitization Mechanisms',sub:'Rapid drug desensitization for IgE-mediated allergy. Mast cell hyporesponsiveness, dose-escalation protocols, indications (chemo, antibiotics, aspirin)'}
+  ]},
+  { id:'mast-cell-biology', name:'Mast Cell Biology & Disease', icon:'🔴', topics:[
+    {id:'mast-cell-dev',name:'Mast Cell Development',sub:'Bone marrow progenitors, SCF/c-KIT signaling, tissue maturation (mucosal vs connective tissue mast cells), FcεRI expression'},
+    {id:'mast-cell-activation',name:'Mast Cell Activation Pathways',sub:'IgE-dependent (FcεRI crosslinking) vs IgE-independent (complement, neuropeptides, physical stimuli). Degranulation, de novo mediator synthesis'},
+    {id:'mast-cell-mediators',name:'Mediators & Clinical Effects',sub:'Histamine, tryptase, prostaglandins, leukotrienes, PAF, cytokines. Mapping mediators to symptoms (urticaria, bronchospasm, hypotension, GI)'},
+    {id:'mastocytosis',name:'Mastocytosis',sub:'Cutaneous (urticaria pigmentosa) vs systemic. KIT D816V mutation. Tryptase as biomarker. WHO classification, treatment ladder, anaphylaxis risk'},
+    {id:'mcas',name:'Mast Cell Activation Syndrome',sub:'MCAS diagnostic criteria (symptoms, mediator elevation, response to anti-mediator therapy). Differentiating from idiopathic anaphylaxis, primary mastocytosis'},
+    {id:'anaphylaxis-mech',name:'Anaphylaxis Mechanisms',sub:'IgE-mediated vs non-IgE (complement, direct mast cell activation). Biphasic reactions, cofactors (exercise, alcohol, NSAIDs), tryptase kinetics'}
+  ]},
+  { id:'t2-inflammation', name:'Type 2 Inflammation', icon:'🧪', topics:[
+    {id:'t2-overview',name:'T2 Immune Axis',sub:'IL-4, IL-5, IL-13 signaling. Th2 cells, ILC2s, eosinophils, mast cells, basophils. Epithelial alarmins (TSLP, IL-25, IL-33)'},
+    {id:'ige-biology',name:'IgE Biology',sub:'Class switch recombination, IL-4/IL-13 dependent. FcεRI on mast cells/basophils, FcεRII (CD23) on B cells. IgE half-life, omalizumab mechanism'},
+    {id:'eosinophil-biology',name:'Eosinophil Biology',sub:'Development (IL-5), trafficking (eotaxins/CCR3), activation, tissue damage (MBP, ECP, EDN, EPO). Anti-IL-5 biologic targets'},
+    {id:'asthma-phenotypes',name:'Asthma Phenotyping',sub:'T2-high (allergic, eosinophilic, overlap) vs T2-low (neutrophilic, paucigranulocytic). Biomarkers: FeNO, eosinophils, IgE, periostin'},
+    {id:'biologics-moa',name:'Biologic Mechanisms',sub:'Omalizumab (anti-IgE), dupilumab (anti-IL-4Rα), mepolizumab (anti-IL-5), benralizumab (anti-IL-5Rα), tezepelumab (anti-TSLP). Target, mechanism, indications'},
+    {id:'atopic-march',name:'Atopic March',sub:'AD → food allergy → asthma → allergic rhinitis. Epithelial barrier hypothesis, epicutaneous sensitization, TSLP in systemic T2 priming. Prevention strategies'}
+  ]},
+  { id:'mucosal-immunology', name:'Mucosal Immunology', icon:'🫧', topics:[
+    {id:'gut-immune',name:'Gut-Associated Lymphoid Tissue',sub:'Peyer patches, M cells, IgA class switching, oral tolerance mechanisms, microbiome-immune crosstalk, FPIES/EoE pathogenesis'},
+    {id:'airway-immune',name:'Airway Immune Defense',sub:'Mucociliary clearance, airway epithelial barrier, IgA/IgG transport, alveolar macrophages, dendritic cell sampling, ABPA pathogenesis'},
+    {id:'oral-tolerance',name:'Oral Tolerance & Food Allergy',sub:'Regulatory T cells, TGF-β, retinoic acid, timing of food introduction. LEAP/EAT studies. Early introduction as prevention strategy'},
+    {id:'eoe-mechanism',name:'EoE Pathophysiology',sub:'Food and aeroallergen-driven T2 inflammation in esophagus. IL-13 → eotaxin-3, periostin, epithelial barrier dysfunction. Fibrosis and remodeling'},
+    {id:'ige-food-allergy',name:'IgE-Mediated Food Allergy',sub:'Sensitization (epicutaneous vs GI), effector phase (mast cell degranulation), cofactors, component-resolved diagnostics (Ara h 2, Gal d 1, omega-5 gliadin)'},
+    {id:'oit-mechanism',name:'Oral Immunotherapy',sub:'Desensitization vs sustained unresponsiveness. Dose escalation, immune mechanisms (blocking IgG4, Treg induction), Palforzia (peanut OIT), safety profile'}
+  ]},
+  { id:'complement-system', name:'Complement & Angioedema', icon:'🛡️', topics:[
+    {id:'complement-pathways',name:'Complement Pathways',sub:'Classical (C1q-immune complex), lectin (MBL), alternative (spontaneous C3 tickover). Terminal pathway (MAC C5b-9). Regulation (C1-INH, Factor H, DAF)'},
+    {id:'complement-deficiency',name:'Complement Deficiency Syndromes',sub:'C1q/C2/C4 → SLE-like. C3 → recurrent pyogenic infections. C5-C9 → Neisseria. Properdin/Factor D → Neisseria. Screening: CH50, AH50'},
+    {id:'hae-pathophys',name:'HAE Pathophysiology',sub:'C1-INH deficiency → unregulated kallikrein → excess bradykinin → vascular permeability. Types 1 (low level), 2 (dysfunctional), 3 (FXII/other mutations)'},
+    {id:'bradykinin-pathway',name:'Bradykinin vs Histamine',sub:'Bradykinin: B2 receptor, vascular permeability, pain. Histamine: H1 receptor, urticaria, pruritus, bronchospasm. Why this distinction determines treatment'},
+    {id:'acquired-angioedema',name:'Acquired Angioedema',sub:'AAE Type I (lymphoproliferative), Type II (autoantibody). Low C1q distinguishes from HAE. ACE inhibitor angioedema: mechanism, management, cross-reactivity with ARBs'},
+    {id:'angioedema-workup',name:'Angioedema Differential',sub:'Algorithm: ± urticaria → histaminergic vs bradykinin-mediated. C4 screening, C1-INH level/function, C1q. Emergency management: when to use what'}
+  ]},
+  { id:'autoimmunity-ai', name:'Autoimmunity × A/I Interface', icon:'⚔️', topics:[
+    {id:'autoinflammatory-vs-autoimmune',name:'Autoinflammatory vs Autoimmune',sub:'Innate (inflammasomes, IL-1β) vs adaptive (autoantibodies, autoreactive T cells). CAPS, FMF, TRAPS vs SLE, RA, T1DM'},
+    {id:'immune-dysregulation',name:'Immune Dysregulation Syndromes',sub:'ALPS (FAS/FASL), IPEX (FOXP3), APECED/APS-1, CTLA-4 haploinsufficiency, LRBA deficiency. Autoimmunity as primary immunodeficiency'},
+    {id:'cvid-autoimmunity',name:'CVID & Autoimmune Complications',sub:'ITP, AIHA, granulomatous disease (GLILD), enteropathy. Mechanism: B-cell dysregulation, loss of tolerance, reduced Tregs'},
+    {id:'biologic-hypersensitivity',name:'Biologic Drug Reactions',sub:'Infusion reactions (cytokine release vs IgE-mediated), immunogenicity (anti-drug antibodies), rituximab/infliximab reactions, desensitization protocols'},
+    {id:'immunodeficiency-autoimmunity',name:'Immunodeficiency-Autoimmunity Overlap',sub:'Why immune deficiency → autoimmunity: defective clearance, lymphopenia-driven proliferation, regulatory T cell deficiency. Clinical examples'},
+    {id:'vaccine-immunology',name:'Vaccine Immunology in PID',sub:'Live vs inactivated vaccines by immune defect. Antibody response assessment. BCG complications in SCID. Household contact vaccination strategies'}
+  ]},
+  { id:'immunodeficiency-ai', name:'Primary Immunodeficiency', icon:'🧬', topics:[
+    {id:'pid-classification',name:'PID Classification',sub:'IUIS categories: combined, antibody, phagocyte, complement, innate, autoinflammatory, immune dysregulation, phenocopies. 10 warning signs'},
+    {id:'scid',name:'SCID',sub:'Severe combined immunodeficiency. X-linked (IL2RG), ADA, RAG1/2, IL-7Rα. Newborn screening (TREC), presentation, HSCT, gene therapy'},
+    {id:'antibody-deficiencies',name:'Antibody Deficiency Spectrum',sub:'XLA (Bruton), CVID, IgA deficiency, specific antibody deficiency, transient hypogamma of infancy. IgG subclass interpretation'},
+    {id:'phagocyte-defects',name:'Phagocyte Defects',sub:'CGD (oxidative burst, DHR flow cytometry), LAD (CD18), Chediak-Higashi, cyclic neutropenia. Infection patterns: catalase-positive organisms, Aspergillus'},
+    {id:'immune-eval-workup',name:'Immunodeficiency Workup',sub:'Tier 1 (CBC, Ig levels, vaccine titers) → Tier 2 (lymphocyte subsets, DHR, complement) → Tier 3 (genetic testing, functional assays). Algorithm-based approach'},
+    {id:'igg-replacement',name:'IgG Replacement Therapy',sub:'IVIG vs SCIG: dosing, frequency, trough targets, side effects (headache, aseptic meningitis, thrombosis, hemolysis). Dose adjustment, brand switching, home infusion'}
+  ]},
+  { id:'occupational-env-ai', name:'Occupational & Environmental A/I', icon:'🏭', topics:[
+    {id:'occupational-asthma',name:'Occupational Asthma',sub:'Sensitizer-induced (isocyanates, flour, latex) vs irritant-induced (RADS). Diagnosis: serial PEF, specific inhalation challenge. Medicolegal implications'},
+    {id:'hypersensitivity-pneumonitis',name:'Hypersensitivity Pneumonitis',sub:'Bird fancier, farmer lung, hot tub lung. Acute vs chronic. HRCT: ground-glass, mosaic attenuation, fibrosis. BAL lymphocytosis. Antigen avoidance vs immunosuppression'},
+    {id:'contact-dermatitis',name:'Contact Dermatitis',sub:'Type IV delayed hypersensitivity. Patch testing: TRUE test, expanded panel. Common allergens: nickel, fragrance mix, preservatives, PPD. Relevance determination'},
+    {id:'latex-allergy',name:'Latex Allergy',sub:'IgE-mediated (Hev b proteins) vs Type IV (chemical accelerators). Cross-reactivity (banana, avocado, kiwi, chestnut). Healthcare worker risk, latex-free protocols'},
+    {id:'stinging-insect',name:'Venom Allergy',sub:'Hymenoptera: honeybee, wasp, yellow jacket, hornet, fire ant. Testing, VIT protocol (buildup → maintenance × 5 years), duration, stopping criteria, risk factors for severe reactions'},
+    {id:'environmental-controls',name:'Environmental Controls',sub:'Dust mite mitigation (encasements, humidity), mold remediation, pet dander strategies, pollen avoidance. Evidence-based vs unproven interventions'}
+  ]},
+  { id:'ai-pharmacology', name:'A/I Pharmacology', icon:'💊', topics:[
+    {id:'antihistamines',name:'Antihistamines',sub:'H1 inverse agonists: first-gen (diphenhydramine, hydroxyzine — sedating, anticholinergic) vs second-gen (cetirizine, loratadine, fexofenadine — non-sedating). H2 blockers. Updosing in urticaria, pregnancy safety'},
+    {id:'corticosteroids-moa',name:'Corticosteroid Mechanisms',sub:'Genomic (NF-κB suppression) vs non-genomic. Topical potency classes (I-VII), vehicle selection, tachyphylaxis, HPA axis suppression, steroid-sparing strategies'},
+    {id:'leukotriene-modifiers',name:'Leukotriene Modifiers',sub:'Montelukast (CysLT1 antagonist), zileuton (5-LOX inhibitor). FDA black box on montelukast neuropsychiatric effects. AERD rationale for leukotriene pathway targeting'},
+    {id:'immunotherapy-moa',name:'Immunotherapy Mechanisms',sub:'SCIT/SLIT: IgE→IgG4 class switching, Treg induction, T-cell anergy, mast cell desensitization. Dose-response, duration of disease modification'},
+    {id:'biologics-comprehensive',name:'Biologics Complete Guide',sub:'Omalizumab, dupilumab, mepolizumab, benralizumab, tezepelumab. Targets, mechanisms, indications across asthma/AD/CRSwNP/EoE/EGPA/HES/CSU. Dosing and monitoring'},
+    {id:'immunosuppressants-ai',name:'Immunosuppressants in A/I',sub:'Cyclosporine (urticaria, AD), azathioprine, methotrexate, mycophenolate, cyclophosphamide. Indications, monitoring, toxicity, pregnancy categories'},
+    {id:'epinephrine-pharmacology',name:'Epinephrine Pharmacology',sub:'Alpha-1/beta-1/beta-2 receptor effects. IM vs IV dosing in anaphylaxis. Auto-injector devices, stability, storage, patient education'},
+    {id:'jak-inhibitors',name:'JAK Inhibitors in A/I',sub:'JAK1/2/3 and TYK2 signal transduction. Abrocitinib, upadacitinib (AD), ruxolitinib (topical). Oral vs topical, monitoring (CBC, lipids, VTE), comparison to biologics'}
   ]}
 ];
 

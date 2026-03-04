@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<title>CCC Report Generator | ReasonDx</title>
+<meta name="description" content="Generate ACGME-ready Clinical Competency Committee reports for A/I fellowship milestone assessment.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F0F2F5;--surface:#fff;--surface-alt:#F8FAFC;
+  --border:#E2E8F0;--border-light:#F1F5F9;
+  --text:#1E293B;--text-secondary:#64748B;--text-muted:#94A3B8;
+  --blue:#2874A6;--blue-light:#EBF5FB;--blue-border:rgba(40,116,166,.18);
+  --green:#059669;--green-bg:#ECFDF5;--green-border:rgba(5,150,105,.2);
+  --amber:#D97706;--amber-bg:#FFFBEB;--amber-border:rgba(217,119,6,.2);
+  --red:#DC2626;--red-bg:#FEF2F2;
+  --purple:#7C3AED;--purple-bg:#F5F3FF;
+  --font:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font);cursor:pointer}
+
+.page{max-width:1000px;margin:0 auto;padding:24px 20px 80px}
+.breadcrumb{font-size:12px;color:var(--text-muted);margin-bottom:12px}
+.breadcrumb a{color:var(--blue);font-weight:600}
+.page-header{margin-bottom:28px}
+.page-header h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.page-header p{font-size:14px;color:var(--text-secondary);line-height:1.6}
+
+/* Config panel */
+.config-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:24px}
+.config-row{display:flex;gap:16px;flex-wrap:wrap;align-items:end}
+.config-field{display:flex;flex-direction:column;gap:4px}
+.config-field label{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+.config-field select,.config-field input{padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--font);background:var(--surface);color:var(--text);min-width:180px}
+.btn-generate{padding:10px 24px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;transition:all .15s}
+.btn-generate:hover{background:#1B4F72;transform:translateY(-1px)}
+
+/* Report */
+.report{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.report-toolbar{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--border);background:var(--surface-alt)}
+.report-toolbar h2{font-size:16px;font-weight:700}
+.toolbar-actions{display:flex;gap:8px}
+.btn-sm{padding:7px 14px;border-radius:6px;font-size:11px;font-weight:700;border:1px solid var(--border);background:var(--surface);color:var(--text-secondary);transition:all .15s}
+.btn-sm:hover{border-color:var(--blue);color:var(--blue)}
+.btn-sm.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-sm.primary:hover{background:#1B4F72}
+
+.report-body{padding:32px 40px}
+@media print{.report-body{padding:20px}}
+
+/* Report styling */
+.rpt-header{text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--blue)}
+.rpt-logo{font-size:20px;font-weight:800;color:var(--blue);letter-spacing:-.5px;margin-bottom:4px}
+.rpt-logo span{font-style:italic}
+.rpt-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px}
+.rpt-sub{font-size:13px;color:var(--text-secondary)}
+.rpt-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;text-align:left}
+.rpt-meta-item{font-size:12px;color:var(--text-secondary)}
+.rpt-meta-item strong{color:var(--text);font-weight:700}
+
+.rpt-section{margin-bottom:28px}
+.rpt-section-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.rpt-section-title .domain-dot{width:10px;height:10px;border-radius:3px}
+
+.rpt-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.rpt-summary-card{text-align:center;padding:16px;background:var(--surface-alt);border-radius:10px;border:1px solid var(--border-light)}
+.rpt-summary-num{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1}
+.rpt-summary-label{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-top:4px}
+
+/* Milestone row in report */
+.rpt-milestone{padding:12px 0;border-bottom:1px solid var(--border-light)}
+.rpt-milestone:last-child{border-bottom:none}
+.rpt-ms-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.rpt-ms-code{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--blue);min-width:48px}
+.rpt-ms-name{font-size:13px;font-weight:700;color:var(--text)}
+.rpt-ms-level{margin-left:auto;display:flex;align-items:center;gap:6px}
+.rpt-ms-dots{display:flex;gap:3px}
+.rpt-ms-dot{width:12px;height:12px;border-radius:3px;border:1px solid var(--border)}
+.rpt-ms-dot.filled{border-color:transparent}
+.rpt-ms-narrative{font-size:12px;color:var(--text-secondary);line-height:1.65;margin-top:4px;padding-left:58px}
+.rpt-ms-evidence{font-size:11px;color:var(--text-muted);margin-top:4px;padding-left:58px;font-style:italic}
+
+/* Gap callout */
+.rpt-gap{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:10px;padding:16px;margin-top:20px}
+.rpt-gap-title{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px}
+.rpt-gap-item{font-size:12px;color:var(--text-secondary);line-height:1.6;padding:4px 0}
+
+/* Strength callout */
+.rpt-strength{background:var(--green-bg);border:1px solid var(--green-border);border-radius:10px;padding:16px;margin-top:20px}
+.rpt-strength-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
+.rpt-strength-item{font-size:12px;color:var(--text-secondary);line-height:1.6;padding:4px 0}
+
+/* Print */
+@media print{
+  body{background:#fff}
+  .config-panel,.report-toolbar,.breadcrumb,.page-header{display:none}
+  .report{border:none;border-radius:0}
+  .report-body{padding:0}
+  .rpt-milestone{break-inside:avoid}
+}
+
+@media(max-width:640px){
+  .report-body{padding:20px 16px}
+  .rpt-summary-grid{grid-template-columns:1fr 1fr}
+  .config-row{flex-direction:column}
+  .config-field select,.config-field input{min-width:100%}
+}
+</style>
+<script src="auth/auth-guard.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Report Generator...</div></div>
+
+<div class="page">
+  <div class="breadcrumb"><a href="index.html">ReasonDx</a> → <a href="milestone-tracker.html">Milestones</a> → CCC Report</div>
+  <div class="page-header">
+    <h1>CCC Report Generator</h1>
+    <p>Generate Clinical Competency Committee reports with milestone-level assessments, narrative scaffolding, and gap analysis. Ready for semi-annual CCC review.</p>
+  </div>
+
+  <div class="config-panel">
+    <div class="config-row">
+      <div class="config-field">
+        <label>Fellow</label>
+        <select id="fellowSelect">
+          <option value="0">Fellow A — Dr. Sarah Chen (PGY-6, Year 1)</option>
+          <option value="1">Fellow B — Dr. James Okafor (PGY-7, Year 2)</option>
+        </select>
+      </div>
+      <div class="config-field">
+        <label>Reporting Period</label>
+        <select id="periodSelect">
+          <option value="2025-H2">July–December 2025</option>
+          <option value="2026-H1" selected>January–June 2026</option>
+        </select>
+      </div>
+      <div class="config-field">
+        <label>Program</label>
+        <input type="text" id="programName" value="Example University A/I Fellowship" placeholder="Fellowship program name">
+      </div>
+      <button class="btn-generate" onclick="generateReport()">Generate Report</button>
+    </div>
+  </div>
+
+  <div id="reportContainer"></div>
+</div>
+
+<script src="js/milestone-data.js"></script>
+<script src="emr-data/patient-names.js"></script>
+<script>
+(function(){
+'use strict';
+
+var MD = window.MILESTONE_DATA;
+var stats = MD.stats();
+
+// ─── Mock Fellow Data ───
+// In production, this comes from actual platform usage analytics
+var FELLOWS = [
+  {
+    name: 'Dr. Sarah Chen',
+    pgy: 'PGY-6 (Year 1)',
+    startDate: 'July 2025',
+    level: {
+      PC1:3, PC2:2, PC3:2, PC4:3, MK1:3, MK2:3, MK3:2,
+      SBP1:2, SBP2:2, SBP3:2, SBP4:1,
+      PBLI1:3, PBLI2:2,
+      PROF1:3, PROF2:3, PROF3:2,
+      ICS1:3, ICS2:2, ICS3:3
+    },
+    priorLevel: {
+      PC1:2, PC2:1, PC3:1, PC4:2, MK1:2, MK2:2, MK3:1,
+      SBP1:1, SBP2:1, SBP3:1, SBP4:1,
+      PBLI1:2, PBLI2:1,
+      PROF1:2, PROF2:2, PROF3:1,
+      ICS1:2, ICS2:1, ICS3:2
+    },
+    casesCompleted: 24,
+    crtSessions: 18,
+    coachDxSessions: 12,
+    mechanismDxMastery: 42,
+    procedureLog: { skinTests:35, oralChallenges:3, spirometry:28, drugChallenges:1 },
+    completedCaseIds: ['anaphylaxis','acute-urticaria','allergic-rhinitis-uncontrolled','penicillin-allergy-delabeling','drug-allergy-vancomycin-rms','milk-allergy-infant','eoe-adult','atopic-dermatitis-severe','contact-dermatitis-occupational','allergic-angioedema','ace-angioedema','severe-allergic-reaction','severe-allergic-reaction-v3','insect-sting-anaphylaxis','peanut-allergy-anaphylaxis','eoe-pediatric','erythema-multiforme-major','allergic-conjunctivitis-severe','acute-urticaria-v2','allergic-rhinitis-uncontrolled-v2','anaphylaxis-v3','fpies-acute','hereditary-angioedema','dress-syndrome']
+  },
+  {
+    name: 'Dr. James Okafor',
+    pgy: 'PGY-7 (Year 2)',
+    startDate: 'July 2024',
+    level: {
+      PC1:4, PC2:3, PC3:4, PC4:4, MK1:4, MK2:4, MK3:3,
+      SBP1:3, SBP2:3, SBP3:3, SBP4:2,
+      PBLI1:4, PBLI2:3,
+      PROF1:4, PROF2:4, PROF3:3,
+      ICS1:4, ICS2:3, ICS3:4
+    },
+    priorLevel: {
+      PC1:3, PC2:2, PC3:3, PC4:3, MK1:3, MK2:3, MK3:2,
+      SBP1:2, SBP2:2, SBP3:2, SBP4:1,
+      PBLI1:3, PBLI2:2,
+      PROF1:3, PROF2:3, PROF3:2,
+      ICS1:3, ICS2:2, ICS3:3
+    },
+    casesCompleted: 52,
+    crtSessions: 41,
+    coachDxSessions: 28,
+    mechanismDxMastery: 78,
+    procedureLog: { skinTests:120, oralChallenges:12, spirometry:85, drugChallenges:6 },
+    completedCaseIds: Object.keys(MD.cases).slice(0,52)
+  }
+];
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+function levelColor(l){
+  if(l>=4) return '#059669';
+  if(l>=3) return '#2874A6';
+  if(l>=2) return '#D97706';
+  return '#DC2626';
+}
+
+function levelWord(l){
+  return ['','Not Yet Assessable','Early Learner','Advancing','Ready for Unsupervised Practice','Aspirational'][l]||'';
+}
+
+function trendArrow(cur,prior){
+  if(cur>prior) return '<span style="color:#059669;font-weight:700">↑ +'+(cur-prior)+'</span>';
+  if(cur===prior) return '<span style="color:var(--text-muted)">→ 0</span>';
+  return '<span style="color:#DC2626;font-weight:700">↓ '+(cur-prior)+'</span>';
+}
+
+// ─── Narrative Generation ───
+function generateNarrative(code, f){
+  var sc = MD.subcompetencies[code];
+  var lvl = f.level[code];
+  var prior = f.priorLevel[code];
+  var casesForSub = MD.bySub(code);
+  var completedForSub = casesForSub.filter(function(id){ return f.completedCaseIds.indexOf(id)>=0; });
+  var tierBreakdown = {1:0,2:0,3:0,4:0,5:0};
+  completedForSub.forEach(function(id){ tierBreakdown[MD.cases[id].tier]++; });
+
+  var n = '';
+
+  // PC1/PC2: History & Physical
+  if(code==='PC1' || code==='PC2'){
+    var pop = code==='PC1' ? 'adult' : 'pediatric';
+    if(lvl>=4){
+      n = 'Fellow demonstrates efficient, focused history-taking and physical examination across '+pop+' A/I patients with both common and complex conditions. '+completedForSub.length+' relevant cases completed';
+      if(tierBreakdown[4]>0) n += ', including '+tierBreakdown[4]+' at independent-practice complexity';
+      n += '. Presentations are well-organized and appropriately prioritized.';
+    } else if(lvl>=3){
+      n = 'Fellow obtains complete histories and performs focused examinations for '+pop+' patients with complex A/I conditions ('+completedForSub.length+' cases completed). Extracts relevant elements for presentation. Progressing toward efficiency and independence with more advanced cases.';
+    } else {
+      n = 'Fellow demonstrates competence in history-taking for '+pop+' patients with common A/I conditions. '+completedForSub.length+' cases completed, primarily at foundational complexity. Recommend increased exposure to complex presentations.';
+    }
+  }
+
+  // PC3: Diagnostic Tests
+  else if(code==='PC3'){
+    n = 'Fellow has completed '+completedForSub.length+' cases involving diagnostic test selection and interpretation.';
+    if(f.procedureLog){
+      var pl = f.procedureLog;
+      n += ' Procedure log: '+pl.skinTests+' skin test sessions, '+pl.oralChallenges+' oral food challenges, '+pl.drugChallenges+' drug challenges, '+pl.spirometry+' spirometry interpretations.';
+    }
+    if(lvl>=4){
+      n += ' Independently develops cost-effective testing strategies and interprets complex results in clinical context.';
+    } else if(lvl>=3){
+      n += ' Selects tests for complex conditions with understanding of limitations. Interprets complex results with minimal supervision.';
+    } else {
+      n += ' Selects tests for common conditions per evidence-based guidelines. Performing common procedures with increasing independence.';
+    }
+  }
+
+  // PC4: Management Plans
+  else if(code==='PC4'){
+    if(lvl>=4){
+      n = 'Fellow independently selects and implements cost-effective, evidence-based treatments. Monitors outcomes and adjusts management independently. Demonstrated across '+completedForSub.length+' cases including '+tierBreakdown[3]+' complex and '+tierBreakdown[4]+' independent-level cases.';
+    } else if(lvl>=3){
+      n = 'Fellow formulates evidence-based management plans with minimal supervision for common and some complex conditions ('+completedForSub.length+' cases). Monitors patient outcomes and adjusts treatment with guidance when needed.';
+    } else {
+      n = 'Fellow recognizes standard treatments and selects evidence-based management with supervision. '+completedForSub.length+' cases completed. Recommend exposure to more complex management scenarios including biologic selection and desensitization protocols.';
+    }
+  }
+
+  // MK1: Basic Science
+  else if(code==='MK1'){
+    n = 'MechanismDx pathophysiology mastery: '+f.mechanismDxMastery+'% of A/I topics completed.';
+    if(lvl>=4){
+      n += ' Fellow applies immunology knowledge to understanding pathophysiology of complex allergic and immunologic diseases, integrating basic science into diagnostic and therapeutic reasoning.';
+    } else if(lvl>=3){
+      n += ' Fellow applies knowledge of basic immunology to understanding pathophysiology of common A/I conditions. Demonstrates growing integration of basic and clinical science.';
+    } else {
+      n += ' Fellow demonstrates foundational knowledge of immune system components. Recommend deeper engagement with pathophysiology modules, particularly innate/adaptive immunity, IgE-mediated pathways, and tolerance mechanisms.';
+    }
+  }
+
+  // MK2: Clinical Science
+  else if(code==='MK2'){
+    n = completedForSub.length+' clinical cases completed; '+f.crtSessions+' Clinical Reasoning Trainer sessions; '+f.coachDxSessions+' CoachDx coaching sessions.';
+    if(lvl>=4){
+      n += ' Fellow independently synthesizes literature and clinical experience to diagnose and treat patients with complex and emerging A/I conditions.';
+    } else if(lvl>=3){
+      n += ' Fellow demonstrates sufficient clinical knowledge for diagnosis and treatment of complex A/I conditions. Progressing toward independent synthesis of literature for novel presentations.';
+    } else {
+      n += ' Fellow demonstrates knowledge of clinical presentations for common A/I conditions. Recommend additional CRT and case exposure across all A/I categories.';
+    }
+  }
+
+  // MK3: Research
+  else if(code==='MK3'){
+    if(lvl>=3) n = 'Fellow is designing and conducting a scholarly activity with appropriate supervision. Research project on track.';
+    else if(lvl>=2) n = 'Fellow has developed a research hypothesis and identified necessary resources. Scholarly project in early stages.';
+    else n = 'Fellow demonstrates understanding of research principles and responsible conduct of research. Recommend formalizing scholarly activity plan.';
+  }
+
+  // SBP1: Safety & QI
+  else if(code==='SBP1'){
+    if(lvl>=3) n = 'Fellow participates in analysis of patient safety events and demonstrates ability to develop QI projects. '+completedForSub.length+' cases with safety/QI learning objectives completed.';
+    else n = 'Fellow identifies system factors in patient safety events and reports appropriately. Participates in local QI initiatives. '+completedForSub.length+' relevant cases completed.';
+  }
+
+  // SBP2: Care Coordination
+  else if(code==='SBP2'){
+    if(lvl>=3) n = 'Fellow coordinates care in complex clinical situations using interprofessional teams effectively. Performs safe transitions of care. Evidence from '+completedForSub.length+' cases plus Consult Callback and Night Float simulation performance.';
+    else n = 'Fellow coordinates care in routine situations and identifies key elements for safe transitions. '+completedForSub.length+' relevant cases completed. Recommend additional Consult Callback and Night Float scenarios.';
+  }
+
+  // SBP3: HC Systems
+  else if(code==='SBP3'){
+    if(lvl>=3) n = 'Fellow engages in shared decision-making considering patient payment models and uses health care system components for efficient care. '+completedForSub.length+' relevant cases completed.';
+    else n = 'Fellow demonstrates awareness of health payment systems and their impact on patient care. Developing ability to advocate within system constraints.';
+  }
+
+  // SBP4: Population Health
+  else if(code==='SBP4'){
+    if(lvl>=2) n = 'Fellow identifies population health needs and accesses local resources. '+completedForSub.length+' cases with population health elements completed.';
+    else n = 'Fellow demonstrates knowledge of community health needs. Limited platform-based evidence; recommend community-based learning experiences.';
+  }
+
+  // PBLI1: Evidence-Based Practice
+  else if(code==='PBLI1'){
+    if(lvl>=4) n = 'Fellow critically appraises and applies evidence even in uncertainty. '+f.crtSessions+' CRT sessions demonstrate systematic evidence integration. MechanismDx mastery at '+f.mechanismDxMastery+'%.';
+    else if(lvl>=3) n = 'Fellow locates and applies best available evidence for complex patients. '+f.crtSessions+' CRT sessions; '+completedForSub.length+' cases with EBM learning objectives.';
+    else n = 'Fellow articulates clinical questions and accesses evidence to guide care. Developing evidence appraisal skills. Recommend additional Board Prep and CRT engagement.';
+  }
+
+  // PBLI2: Reflective Practice
+  else if(code==='PBLI2'){
+    if(lvl>=3) n = 'Fellow institutes behavioral changes based on performance data. Learning plan in place with measurable goals. Analytics dashboard shows consistent engagement.';
+    else n = 'Fellow identifies performance gaps and designs learning plans with guidance. Recommend formalizing ILP with specific milestone targets.';
+  }
+
+  // PROF1-3
+  else if(code==='PROF1'){
+    if(lvl>=3) n = 'Fellow acts professionally in complex situations and recognizes ethical dilemmas. Limited platform-based assessment; based primarily on faculty direct observation.';
+    else n = 'Fellow demonstrates professional behavior and applies ethical principles. Faculty observation primary assessment method.';
+  }
+  else if(code==='PROF2'){
+    if(lvl>=3) n = 'Fellow performs professional duties reliably in complex situations without reminders. Consistent attendance and timely documentation.';
+    else n = 'Fellow performs duties in routine situations. Developing consistency in complex or stressful contexts.';
+  }
+  else if(code==='PROF3'){
+    if(lvl>=3) n = 'Fellow independently recognizes personal well-being status and knowledge limits. Develops plans for self-improvement.';
+    else n = 'Fellow recognizes well-being and knowledge limitations with assistance. Developing self-directed improvement strategies.';
+  }
+
+  // ICS1: Patient Communication
+  else if(code==='ICS1'){
+    if(lvl>=4) n = 'Fellow independently maintains therapeutic relationships in challenging encounters. '+f.coachDxSessions+' CoachDx counseling sessions demonstrate shared decision-making and empathic communication.';
+    else if(lvl>=3) n = 'Fellow establishes therapeutic relationships using shared decision-making. '+f.coachDxSessions+' CoachDx sessions show improvement in communication complexity. Developing skills in challenging encounters.';
+    else n = 'Fellow uses respectful language and identifies communication barriers. Recommend CoachDx patient counseling scenarios for practice with difficult conversations.';
+  }
+
+  // ICS2: Team Communication
+  else if(code==='ICS2'){
+    if(lvl>=3) n = 'Fellow communicates consultation recommendations clearly. Solicits and provides feedback effectively. Evidence from Consult Callback simulation performance.';
+    else n = 'Fellow responds to consultations in timely manner. Developing clarity and confidence in interprofessional communication. Recommend additional Consult Callback scenarios.';
+  }
+
+  // ICS3: System Communication
+  else if(code==='ICS3'){
+    if(lvl>=4) n = 'Fellow produces clear, organized documentation for complex encounters. Selects appropriate communication modalities independently. Virtual EMR documentation scores consistently high.';
+    else if(lvl>=3) n = 'Fellow documents routine encounters clearly with organized reasoning. Developing written communication for complex cases.';
+    else n = 'Fellow records information accurately. Developing organizational structure in clinical documentation.';
+  }
+
+  return n;
+}
+
+// ─── Generate Full Report ───
+window.generateReport = function(){
+  var fi = parseInt(document.getElementById('fellowSelect').value);
+  var period = document.getElementById('periodSelect').value;
+  var program = document.getElementById('programName').value;
+  var f = FELLOWS[fi];
+
+  var periodLabel = period === '2025-H2' ? 'July–December 2025' : 'January–June 2026';
+
+  // Compute summary stats
+  var avgLevel = 0, cnt = 0, atTarget = 0, improved = 0, gaps = [], strengths = [];
+  for(var code in f.level){
+    avgLevel += f.level[code]; cnt++;
+    if(f.level[code] >= 4) { atTarget++; strengths.push(code); }
+    else if(f.level[code] <= 2) gaps.push(code);
+    if(f.level[code] > f.priorLevel[code]) improved++;
+  }
+  avgLevel = (avgLevel/cnt).toFixed(1);
+
+  var html = '<div class="report">';
+
+  // Toolbar
+  html += '<div class="report-toolbar"><h2>CCC Semi-Annual Report</h2>';
+  html += '<div class="toolbar-actions">';
+  html += '<button class="btn-sm" onclick="window.print()">Print / PDF</button>';
+  html += '<button class="btn-sm primary" onclick="exportText()">Copy as Text</button>';
+  html += '</div></div>';
+
+  html += '<div class="report-body" id="reportBody">';
+
+  // Header
+  html += '<div class="rpt-header">';
+  html += '<div class="rpt-logo">Reason<span>Dx</span></div>';
+  html += '<div class="rpt-title">Clinical Competency Committee Report</div>';
+  html += '<div class="rpt-sub">Allergy & Immunology Fellowship — ACGME Milestone Assessment</div>';
+  html += '<div class="rpt-meta">';
+  html += '<div class="rpt-meta-item"><strong>Fellow:</strong> '+esc(f.name)+' ('+esc(f.pgy)+')</div>';
+  html += '<div class="rpt-meta-item"><strong>Program:</strong> '+esc(program)+'</div>';
+  html += '<div class="rpt-meta-item"><strong>Reporting Period:</strong> '+esc(periodLabel)+'</div>';
+  html += '<div class="rpt-meta-item"><strong>Generated:</strong> '+new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})+'</div>';
+  html += '</div></div>';
+
+  // Summary cards
+  html += '<div class="rpt-summary-grid">';
+  html += '<div class="rpt-summary-card"><div class="rpt-summary-num" style="color:var(--blue)">'+f.casesCompleted+'</div><div class="rpt-summary-label">A/I Cases</div></div>';
+  html += '<div class="rpt-summary-card"><div class="rpt-summary-num" style="color:'+levelColor(parseFloat(avgLevel))+'">'+avgLevel+'</div><div class="rpt-summary-label">Avg Level</div></div>';
+  html += '<div class="rpt-summary-card"><div class="rpt-summary-num" style="color:var(--green)">'+atTarget+'</div><div class="rpt-summary-label">At Target (≥L4)</div></div>';
+  html += '<div class="rpt-summary-card"><div class="rpt-summary-num" style="color:var(--green)">'+improved+'</div><div class="rpt-summary-label">Improved</div></div>';
+  html += '</div>';
+
+  // Activity summary
+  html += '<div class="rpt-section">';
+  html += '<div class="rpt-section-title">Platform Activity Summary</div>';
+  html += '<div style="font-size:13px;color:var(--text-secondary);line-height:1.8">';
+  html += '<strong>Cases completed:</strong> '+f.casesCompleted+' of '+stats.total+' A/I cases ('+Math.round(f.casesCompleted/stats.total*100)+'%)<br>';
+  html += '<strong>Clinical Reasoning Trainer:</strong> '+f.crtSessions+' sessions<br>';
+  html += '<strong>CoachDx AI coaching:</strong> '+f.coachDxSessions+' sessions<br>';
+  html += '<strong>MechanismDx mastery:</strong> '+f.mechanismDxMastery+'% of A/I pathophysiology topics<br>';
+  if(f.procedureLog){
+    var pl = f.procedureLog;
+    html += '<strong>Procedure log:</strong> '+pl.skinTests+' skin test sessions, '+pl.oralChallenges+' OFCs, '+pl.drugChallenges+' drug challenges, '+pl.spirometry+' spirometry interpretations<br>';
+  }
+  html += '</div></div>';
+
+  // Milestone assessments by domain
+  var domains = {};
+  var domainColors = {'Patient Care':'#DC2626','Medical Knowledge':'#2874A6','Systems-Based Practice':'#D97706','Practice-Based Learning':'#059669','Professionalism':'#7C3AED','Interpersonal & Communication':'#EC4899'};
+  for(var code in MD.subcompetencies){
+    var sc = MD.subcompetencies[code];
+    if(!domains[sc.domain]) domains[sc.domain] = [];
+    domains[sc.domain].push(code);
+  }
+
+  for(var domain in domains){
+    html += '<div class="rpt-section">';
+    html += '<div class="rpt-section-title"><span class="domain-dot" style="background:'+(domainColors[domain]||'#94A3B8')+'"></span>'+esc(domain)+'</div>';
+
+    domains[domain].forEach(function(code){
+      var sc = MD.subcompetencies[code];
+      var lvl = f.level[code];
+      var prior = f.priorLevel[code];
+      var narrative = generateNarrative(code, f);
+
+      html += '<div class="rpt-milestone">';
+      html += '<div class="rpt-ms-header">';
+      html += '<span class="rpt-ms-code">'+code+'</span>';
+      html += '<span class="rpt-ms-name">'+esc(sc.name)+'</span>';
+      html += '<span class="rpt-ms-level">';
+      html += '<span class="rpt-ms-dots">';
+      for(var i=1;i<=5;i++){
+        var col = i<=lvl ? levelColor(lvl) : '';
+        html += '<span class="rpt-ms-dot'+(i<=lvl?' filled':'')+'" style="'+(i<=lvl?'background:'+col:'')+'"></span>';
+      }
+      html += '</span>';
+      html += '<span style="font-family:var(--mono);font-size:13px;font-weight:700;color:'+levelColor(lvl)+';min-width:20px">L'+lvl+'</span>';
+      html += ' '+trendArrow(lvl,prior);
+      html += '</span></div>';
+      html += '<div class="rpt-ms-narrative">'+esc(narrative)+'</div>';
+      html += '</div>';
+    });
+
+    html += '</div>';
+  }
+
+  // Gap Analysis
+  if(gaps.length > 0){
+    html += '<div class="rpt-gap">';
+    html += '<div class="rpt-gap-title">⚠ Growth Areas (Below Level 3)</div>';
+    gaps.forEach(function(code){
+      var sc = MD.subcompetencies[code];
+      var recCases = MD.bySub(code).filter(function(id){
+        return f.completedCaseIds.indexOf(id)<0 && MD.cases[id].tier >= 3;
+      }).slice(0,3);
+      html += '<div class="rpt-gap-item"><strong>'+code+' — '+esc(sc.short)+' (Level '+f.level[code]+'):</strong> ';
+      if(recCases.length > 0){
+        html += 'Recommended cases: '+recCases.map(function(id){
+          return esc(id.replace(/-/g,' ').replace(/\b\w/g,function(l){return l.toUpperCase()}))+' (Tier '+MD.cases[id].tier+')';
+        }).join(', ');
+      } else {
+        html += 'Recommend focused clinical experiences and direct observation';
+      }
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Strengths
+  if(strengths.length > 0){
+    html += '<div class="rpt-strength">';
+    html += '<div class="rpt-strength-title">✓ Areas of Strength (Level 4+)</div>';
+    strengths.forEach(function(code){
+      var sc = MD.subcompetencies[code];
+      html += '<div class="rpt-strength-item"><strong>'+code+' — '+esc(sc.short)+':</strong> Fellow meets graduation target for this subcompetency.</div>';
+    });
+    html += '</div>';
+  }
+
+  // CCC Use disclaimer
+  html += '<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);line-height:1.7">';
+  html += '<strong>Note:</strong> This report is generated from ReasonDx platform data and is intended as one input into the CCC\'s milestone assessment process. Platform-suggested levels should be considered alongside direct observation, faculty evaluations, procedure logs, multisource feedback, and other program-specific assessment tools. The CCC retains full authority to determine final milestone levels.';
+  html += '</div>';
+
+  html += '</div></div>';
+
+  document.getElementById('reportContainer').innerHTML = html;
+};
+
+// ─── Copy as plain text ───
+window.exportText = function(){
+  var body = document.getElementById('reportBody');
+  if(!body) return;
+  var text = body.innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.querySelector('.btn-sm.primary');
+    btn.textContent = '✓ Copied!';
+    setTimeout(function(){ btn.textContent = 'Copy as Text'; }, 2000);
+  });
+};
+
+// Auto-generate on load
+generateReport();
+setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classList.add('hide');setTimeout(function(){l.remove()},300)}},400);
+
+})();
+</script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-nav.js"></script>
+</body>
+</html>

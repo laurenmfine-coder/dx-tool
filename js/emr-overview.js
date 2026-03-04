@@ -165,7 +165,7 @@
       html += '</a>';
 
       // ReasonDx / Clinical Reasoning
-      html += '<a href="crt-hub.html" style="display:block;background:linear-gradient(135deg,#2A1B3D,#44295E);border-radius:12px;padding:16px;color:#fff;text-decoration:none;position:relative;overflow:hidden;transition:transform .15s" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'\'">';
+      html += '<a href="consult-callback.html" style="display:block;background:linear-gradient(135deg,#2A1B3D,#44295E);border-radius:12px;padding:16px;color:#fff;text-decoration:none;position:relative;overflow:hidden;transition:transform .15s" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'\'">';
       html += '<div style="position:absolute;top:-16px;right:-16px;font-size:60px;opacity:.06">\uD83E\uDDE0</div>';
       html += '<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:#C084FC;margin-bottom:4px">Guided Reasoning</div>';
       html += '<div style="font-size:16px;font-weight:700;margin-bottom:4px">Reason<span style="color:#C084FC">Dx</span></div>';

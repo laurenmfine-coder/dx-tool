@@ -1,4 +1,4 @@
-/* rdx-nav.js — Unified ReasonDx Navigation v4 — Clean structure */
+/* rdx-nav.js — Unified ReasonDx Navigation v5 — Clean structure */
 (function() {
   'use strict';
   if (document.getElementById('rdx-unified-nav')) return;
@@ -6,12 +6,11 @@
   var inSubdir = /\/(topics|modules|cases|tools|ecg|CoachDx|auth|data|mechanism|ReasonDx)\//i.test(path);
   var R = inSubdir ? '../' : './';
   var sec = 'home';
-  if (/\/modules\/premed-|premed-hub/i.test(path)) sec = 'premed';
-  else if (/\/modules\/raddx-|raddx-hub/i.test(path)) sec = 'raddx';
-  else if (/\/modules\/|\/topics\/|\/mechanism\/|pathway|study-mode|allergy-pathway/i.test(path)) sec = 'learn';
-  else if (/\/cases\/|training|adventure|consult-callback|crt-hub|\/CoachDx\//i.test(path)) sec = 'practice';
-  else if (/hospital-3d|ed-3d|night-float|admissions|simroomdx|virtual-hospital|virtual-emr/i.test(path)) sec = 'simulate';
-  else if (/\/tools\/|\/ecg\/|analytics-dashboard|board-prep/i.test(path)) sec = 'tools';
+  if (/pathway|study-mode|allergy-pathway|\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
+  else if (/consult-callback|procedure-lab|counseling-scenarios/i.test(path)) sec = 'practice';
+  else if (/hospital-3d|ed-3d|night-float|admissions|simroomdx|virtual-hospital|virtual-emr|training/i.test(path)) sec = 'simulate';
+  else if (/milestone-tracker|milestone-report|ilp|faculty-assess|cohort-analytics/i.test(path)) sec = 'fellowship';
+  else if (/learning-analytics|analytics-dashboard/i.test(path)) sec = 'analytics';
   document.documentElement.setAttribute('data-theme', 'light');
 
   function di(href, icon, title, desc) {
@@ -26,15 +25,15 @@
     '<button id="rdx-hamburger" aria-label="Menu">\u2630</button>'+
     '<div id="rdx-nav-menu">'+
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
-      dd('Learn', sec==='learn'||sec==='raddx'||sec==='premed',
-        di(R+'pathway.html','','MechanismDx','AI pathophysiology tutor \u2014 480 topics')+
-        di(R+'study-mode.html','','Study Mode','Clinical topic guides across all specialties')+
+      dd('Learn', sec==='learn',
+        di(R+'pathway.html','','MechanismDx','Pathophysiology tutor \u2014 560 topics')+
+        di(R+'study-mode.html','','Study Mode','Clinical topic guides across specialties')+
         di(R+'allergy-pathway.html','','A/I Pathway','Allergy & Immunology curriculum')
       )+
       dd('Practice', sec==='practice',
-        di(R+'crt-hub.html','','Clinical Reasoning Trainer','Step-by-step diagnostic cases')+
-        di(R+'virtual-emr.html?setting=ed','','CoachDx','AI coaching inside patient charts')+
-        di(R+'consult-callback.html','','Consult Callback','Practice consult calls')
+        di(R+'consult-callback.html','','Clinical Reasoning','Consult callbacks & diagnostic cases')+
+        di(R+'procedure-lab.html','','Procedure Lab','Skin testing, OFC, spirometry, desensitization')+
+        di(R+'counseling-scenarios.html','','Patient Counseling','Communication practice scenarios')
       )+
       dd('Simulate', sec==='simulate',
         di(R+'virtual-emr.html','','Virtual Hospital','Choose a setting, pick your tool')+
@@ -43,10 +42,16 @@
         di(R+'admissions.html','','Admissions','ED handoff, orders, H&P, presentation')+
         di(R+'simroomdx.html','','SimRoomDx','Morning rounds \u2014 6 AI characters')
       )+
-      dd('Tools', sec==='tools',
-        di(R+'board-prep.html','','Board Review','USMLE & COMLEX question bank')+
-        di(R+'ecg/ecg-generator.html','','ECG Practice','Rhythm interpretation')+
-        di(R+'analytics-dashboard.html','','Dashboard','Track your progress')
+      dd('Fellowship', sec==='fellowship',
+        di(R+'milestone-tracker.html','','Milestone Tracker','ACGME A/I milestones')+
+        di(R+'milestone-report.html','','CCC Report','Semi-annual milestone report')+
+        di(R+'ilp.html','','Learning Plan','Individualized learning goals')+
+        di(R+'faculty-assess.html','','Faculty Quick-Score','Observation-based assessment')+
+        di(R+'cohort-analytics.html','','Cohort Analytics','Program-level fellow comparison')
+      )+
+      dd('Analytics', sec==='analytics',
+        di(R+'learning-analytics.html','','Learning Analytics','Cross-tool performance & RPFS')+
+        di(R+'cohort-analytics.html','','Cohort Overview','Program-level data')
       )+
       '<div class="rdx-nav-right">'+
         '<button id="rdx-info-btn" class="rdx-nav-btn" title="About">\u2139\uFE0F</button>'+
@@ -138,7 +143,7 @@
     });
 
     var ov = document.createElement('div'); ov.id = 'rdx-about-overlay';
-    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">480</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">256</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">79</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">28</div><div class="lbl">Specialties</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 AI pathophysiology tutor (480 topics)<br><strong>CoachDx</strong> \u2014 AI clinical coaching<br><strong>RadDx</strong> \u2014 Imaging reasoning<br><strong>Clerkship Hub</strong> \u2014 ED Board, Night Float, SimRoomDx</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A Premed</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Shelf Exams</span><span class="rdx-about-pill">\uD83C\uDFAF Step 2 / COMLEX</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:reasondx@laurenmfine.com" style="color:#2874a6">reasondx@laurenmfine.com</a></p></div></div>';
+    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">560</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">145</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">30</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">93</div><div class="lbl">Systems</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 AI pathophysiology tutor (93 systems, 560 topics)<br><strong>Consult Callback</strong> \u2014 23 specialist consult simulations<br><strong>Procedure Lab</strong> \u2014 Skin testing, OFC, desensitization<br><strong>Fellowship Tools</strong> \u2014 Milestones, CCC, ILP, Analytics</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A A/I Fellowship</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Clinical Reasoning</span><span class="rdx-about-pill">\uD83C\uDFAF Board Review</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:reasondx@laurenmfine.com" style="color:#2874a6">reasondx@laurenmfine.com</a></p></div></div>';
     document.body.appendChild(ov);
     ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('open'); });
     document.getElementById('rdx-about-x').addEventListener('click', function(){ ov.classList.remove('open'); });

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<meta name="description" content="Program-level analytics for fellowship directors — cohort milestone distribution, engagement, and CCC preparation.">
+<title>Cohort Analytics | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F0F2F5;--sf:#fff;--sf2:#F8FAFC;--bd:#E2E8F0;--bdl:#F1F5F9;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--blb:#EBF5FB;--gn:#059669;--gnb:#ECFDF5;--am:#D97706;--amb:#FFFBEB;--rd:#DC2626;--rdb:#FEF2F2;--pp:#7C3AED;--ft:'IBM Plex Sans',-apple-system,sans-serif;--mn:'IBM Plex Mono',monospace}
+body{background:var(--bg);color:var(--tx);font-family:var(--ft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer}
+.page{max-width:1100px;margin:0 auto;padding:24px 20px 80px}
+.bc{font-size:12px;color:var(--tm);margin-bottom:12px}.bc a{color:var(--bl);font-weight:600}
+.ph{margin-bottom:24px}.ph h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}.ph p{font-size:14px;color:var(--ts)}
+
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.card-h{padding:14px 20px;border-bottom:1px solid var(--bd);background:var(--sf2);display:flex;align-items:center;justify-content:space-between}
+.card-h h2{font-size:15px;font-weight:700}.card-b{padding:20px}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat-card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-size:28px;font-weight:800;letter-spacing:-1px}.stat-label{font-size:10px;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;margin-top:4px}
+
+/* Fellow comparison table */
+.ftable{width:100%;border-collapse:collapse;font-size:12px}
+.ftable th{text-align:left;padding:10px 12px;font-size:10px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;border-bottom:2px solid var(--bd);background:var(--sf2)}
+.ftable td{padding:10px 12px;border-bottom:1px solid var(--bdl)}
+.ftable tr:hover td{background:var(--sf2)}
+.f-name{font-weight:700;color:var(--tx)}.f-pgy{font-size:10px;color:var(--tm);font-weight:500}
+.f-bar{width:60px;height:8px;background:var(--bdl);border-radius:4px;display:inline-block;overflow:hidden;vertical-align:middle;margin-right:6px}
+.f-fill{height:100%;border-radius:4px}
+.f-badge{display:inline-flex;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase}
+
+/* Milestone distribution */
+.ms-dist{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.ms-dist-card{padding:12px;background:var(--sf2);border:1px solid var(--bdl);border-radius:8px}
+.ms-dist-code{font-family:var(--mn);font-size:11px;font-weight:700;color:var(--bl)}
+.ms-dist-name{font-size:10px;color:var(--ts);margin-bottom:6px}
+.ms-dist-dots{display:flex;gap:3px}
+.ms-dot{width:16px;height:16px;border-radius:3px;font-size:8px;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center}
+
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:13px;font-weight:700;transition:all .15s}
+.bp{background:var(--bl);color:#fff}.bp:hover{background:#1B4F72}
+.bo{background:var(--sf);color:var(--ts);border:1px solid var(--bd)}.bo:hover{border-color:var(--bl);color:var(--bl)}
+.bs{padding:7px 14px;font-size:11px}
+
+@media(max-width:768px){.stat-row{grid-template-columns:1fr 1fr}.ftable{font-size:11px}}
+@media print{.bc,.ph-actions,.card-h .btn{display:none}.card{break-inside:avoid}}
+</style>
+<script src="auth/auth-guard.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Cohort Analytics...</div></div>
+
+<div class="page">
+<div class="bc"><a href="index.html">ReasonDx</a> → <a href="milestone-tracker.html">Milestones</a> → Cohort Analytics</div>
+<div class="ph">
+  <h1>Cohort Analytics</h1>
+  <p>Program-level view for fellowship directors. Compare fellows, identify curriculum gaps, and prepare for CCC.</p>
+</div>
+
+<div id="out"></div>
+</div>
+
+<script src="js/milestone-data.js"></script>
+<script>
+(function(){
+'use strict';
+var MD=window.MILESTONE_DATA;
+
+// Mock cohort data
+var FELLOWS=[
+  {name:'Dr. Sarah Chen',pgy:'PGY-6',year:1,cases:24,hours:28.5,crt:18,board:148,accuracy:74,
+    levels:{PC1:3,PC2:2,PC3:2,PC4:3,MK1:3,MK2:3,MK3:2,SBP1:2,SBP2:2,SBP3:2,SBP4:1,PBLI1:3,PBLI2:2,PROF1:3,PROF2:3,PROF3:2,ICS1:3,ICS2:2,ICS3:3},
+    engagement:{emr:85,crt:72,board:68,mechanism:55,coach:40,consult:30,procedure:20,counseling:15}},
+  {name:'Dr. James Okafor',pgy:'PGY-7',year:2,cases:52,hours:62.1,crt:41,board:312,accuracy:82,
+    levels:{PC1:4,PC2:3,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:3,SBP3:3,SBP4:2,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:3,ICS1:4,ICS2:3,ICS3:4},
+    engagement:{emr:92,crt:88,board:85,mechanism:78,coach:65,consult:58,procedure:45,counseling:35}},
+  {name:'Dr. Priya Sharma',pgy:'PGY-6',year:1,cases:19,hours:22.3,crt:14,board:96,accuracy:71,
+    levels:{PC1:2,PC2:2,PC3:2,PC4:2,MK1:3,MK2:2,MK3:1,SBP1:2,SBP2:1,SBP3:1,SBP4:1,PBLI1:2,PBLI2:1,PROF1:2,PROF2:2,PROF3:2,ICS1:2,ICS2:2,ICS3:2},
+    engagement:{emr:70,crt:55,board:45,mechanism:42,coach:25,consult:18,procedure:10,counseling:8}},
+  {name:'Dr. Marcus Webb',pgy:'PGY-7',year:2,cases:48,hours:55.8,crt:38,board:280,accuracy:79,
+    levels:{PC1:4,PC2:3,PC3:3,PC4:4,MK1:4,MK2:3,MK3:3,SBP1:3,SBP2:3,SBP3:2,SBP4:2,PBLI1:3,PBLI2:3,PROF1:4,PROF2:3,PROF3:3,ICS1:3,ICS2:3,ICS3:3},
+    engagement:{emr:88,crt:82,board:78,mechanism:72,coach:55,consult:48,procedure:38,counseling:28}}
+];
+
+function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function lc(l){return l>=4?'#059669':l>=3?'#2874A6':l>=2?'#D97706':'#DC2626'}
+
+// Compute cohort stats
+var totalCases=0,totalHours=0,avgAcc=0,atTarget=0,totalSubs=0;
+FELLOWS.forEach(function(f){
+  totalCases+=f.cases;totalHours+=f.hours;avgAcc+=f.accuracy;
+  for(var k in f.levels){totalSubs++;if(f.levels[k]>=4)atTarget++}
+});
+avgAcc=Math.round(avgAcc/FELLOWS.length);
+
+var h='';
+
+// Summary stats
+h+='<div class="stat-row">';
+h+='<div class="stat-card"><div class="stat-num" style="color:var(--bl)">'+FELLOWS.length+'</div><div class="stat-label">Active Fellows</div></div>';
+h+='<div class="stat-card"><div class="stat-num" style="color:var(--pp)">'+totalCases+'</div><div class="stat-label">Total Cases</div></div>';
+h+='<div class="stat-card"><div class="stat-num" style="color:var(--gn)">'+avgAcc+'%</div><div class="stat-label">Avg Accuracy</div></div>';
+h+='<div class="stat-card"><div class="stat-num" style="color:var(--am)">'+Math.round(atTarget/totalSubs*100)+'%</div><div class="stat-label">Subs at Target</div></div>';
+h+='</div>';
+
+// Fellow comparison table
+h+='<div class="card"><div class="card-h"><h2>Fellow Comparison</h2><button class="btn bs bo" onclick="window.print()">Export</button></div><div class="card-b">';
+h+='<table class="ftable"><thead><tr><th>Fellow</th><th>Cases</th><th>Hours</th><th>CRT</th><th>Board Qs</th><th>Accuracy</th><th>Avg Level</th><th>At Target</th></tr></thead><tbody>';
+FELLOWS.forEach(function(f){
+  var sum=0,cnt=0,targ=0;for(var k in f.levels){sum+=f.levels[k];cnt++;if(f.levels[k]>=4)targ++}
+  var avg=(sum/cnt).toFixed(1);
+  h+='<tr>';
+  h+='<td><span class="f-name">'+e(f.name)+'</span><br><span class="f-pgy">'+f.pgy+' (Year '+f.year+')</span></td>';
+  h+='<td>'+f.cases+'</td>';
+  h+='<td>'+f.hours.toFixed(1)+'h</td>';
+  h+='<td>'+f.crt+'</td>';
+  h+='<td>'+f.board+'</td>';
+  h+='<td><span class="f-bar"><span class="f-fill" style="width:'+f.accuracy+'%;background:'+(f.accuracy>=75?'var(--gn)':f.accuracy>=65?'var(--bl)':'var(--am)')+'"></span></span>'+f.accuracy+'%</td>';
+  h+='<td style="font-family:var(--mn);font-weight:700;color:'+lc(parseFloat(avg))+'">'+avg+'</td>';
+  h+='<td>'+targ+'/'+cnt+'</td>';
+  h+='</tr>';
+});
+h+='</tbody></table>';
+h+='</div></div>';
+
+// Tool engagement
+h+='<div class="card"><div class="card-h"><h2>Tool Engagement by Fellow</h2><span style="font-size:11px;color:var(--tm)">% of available content completed</span></div><div class="card-b">';
+var tools=['emr','crt','board','mechanism','coach','consult','procedure','counseling'];
+var toolLabels={'emr':'Virtual EMR','crt':'CRT','board':'Board Prep','mechanism':'MechanismDx','coach':'CoachDx','consult':'Consult CB','procedure':'Proc Lab','counseling':'Counseling'};
+h+='<table class="ftable"><thead><tr><th>Fellow</th>';
+tools.forEach(function(t){h+='<th>'+toolLabels[t]+'</th>'});
+h+='</tr></thead><tbody>';
+FELLOWS.forEach(function(f){
+  h+='<tr><td class="f-name">'+e(f.name.split(' ').pop())+'</td>';
+  tools.forEach(function(t){
+    var v=f.engagement[t]||0;
+    var col=v>=70?'var(--gn)':v>=40?'var(--bl)':v>=20?'var(--am)':'var(--rd)';
+    h+='<td><span class="f-bar"><span class="f-fill" style="width:'+v+'%;background:'+col+'"></span></span><span style="font-family:var(--mn);font-size:10px;font-weight:700;color:'+col+'">'+v+'%</span></td>';
+  });
+  h+='</tr>';
+});
+h+='</tbody></table>';
+h+='</div></div>';
+
+// Milestone distribution
+h+='<div class="card"><div class="card-h"><h2>Cohort Milestone Distribution</h2><span style="font-size:11px;color:var(--tm)">Each dot = one fellow at that level</span></div><div class="card-b">';
+h+='<div class="ms-dist">';
+var codes=Object.keys(MD.subcompetencies);
+codes.forEach(function(code){
+  var sc=MD.subcompetencies[code];
+  // Count fellows at each level
+  var dist={1:0,2:0,3:0,4:0,5:0};
+  FELLOWS.forEach(function(f){var l=f.levels[code]||1;dist[l]++});
+  
+  h+='<div class="ms-dist-card">';
+  h+='<div class="ms-dist-code">'+code+'</div>';
+  h+='<div class="ms-dist-name">'+e(sc.short)+'</div>';
+  h+='<div class="ms-dist-dots">';
+  for(var l=1;l<=5;l++){
+    for(var n=0;n<dist[l];n++){
+      h+='<div class="ms-dot" style="background:'+lc(l)+'" title="Level '+l+'">'+l+'</div>';
+    }
+  }
+  h+='</div></div>';
+});
+h+='</div>';
+h+='<div style="margin-top:12px;display:flex;gap:12px;font-size:10px;color:var(--tm)">';
+h+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#DC2626;vertical-align:middle"></span> L1</span>';
+h+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#D97706;vertical-align:middle"></span> L2</span>';
+h+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#2874A6;vertical-align:middle"></span> L3</span>';
+h+='<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#059669;vertical-align:middle"></span> L4+</span>';
+h+='</div>';
+h+='</div></div>';
+
+// Curriculum gaps
+h+='<div class="card"><div class="card-h"><h2>Curriculum Gap Alerts</h2></div><div class="card-b">';
+var gaps=[];
+codes.forEach(function(code){
+  var below=0;FELLOWS.forEach(function(f){
+    var expected=f.year===1?2:3;
+    if((f.levels[code]||1)<expected) below++;
+  });
+  if(below>=2) gaps.push({code:code,count:below});
+});
+gaps.sort(function(a,b){return b.count-a.count});
+
+if(gaps.length>0){
+  gaps.forEach(function(g){
+    var sc=MD.subcompetencies[g.code];
+    h+='<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdl)">';
+    h+='<div style="font-family:var(--mn);font-size:12px;font-weight:700;color:var(--bl);min-width:48px">'+g.code+'</div>';
+    h+='<div style="flex:1;font-size:13px">'+e(sc.name)+'</div>';
+    h+='<div style="font-size:12px;font-weight:700;color:var(--rd)">'+g.count+'/'+FELLOWS.length+' below target</div>';
+    h+='</div>';
+  });
+} else {
+  h+='<p style="font-size:13px;color:var(--gn)">No systemic curriculum gaps detected. All fellows meeting minimum expected levels.</p>';
+}
+h+='</div></div>';
+
+document.getElementById('out').innerHTML=h;
+setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classList.add('hide');setTimeout(function(){l.remove()},300)}},400);
+})();
+</script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-nav.js"></script>
+</body>
+</html>

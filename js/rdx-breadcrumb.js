@@ -13,7 +13,7 @@
   var MAP = {
     'case-browser.html': { label: 'Case Library', section: 'Learn' },
     'study-mode.html': { label: 'Study Mode', section: 'Learn' },
-    'crt-hub.html': { label: 'Clinical Reasoning Trainer', section: 'Practice' },
+    'consult-callback.html': { label: 'Clinical Reasoning Trainer', section: 'Practice' },
     'consult-callback.html': { label: 'Consult Callback', section: 'Practice' },
     'case-browser.html': { label: 'Virtual Hospital', section: 'Simulate' },
     'ed-3d.html': { label: 'Emergency Department', section: 'Simulate' },

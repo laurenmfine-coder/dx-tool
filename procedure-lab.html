@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<title>A/I Procedure Lab | ReasonDx</title>
+<meta name="description" content="Practice allergy skin testing, oral food challenges, and drug desensitization protocols.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F0F2F5;--sf:#fff;--sf2:#F8FAFC;--bd:#E2E8F0;--bdl:#F1F5F9;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--blb:#EBF5FB;--gn:#059669;--gnb:#ECFDF5;--am:#D97706;--amb:#FFFBEB;--rd:#DC2626;--rdb:#FEF2F2;--ft:'IBM Plex Sans',-apple-system,sans-serif;--mn:'IBM Plex Mono',monospace}
+body{background:var(--bg);color:var(--tx);font-family:var(--ft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer}
+.page{max-width:1100px;margin:0 auto;padding:24px 20px 80px}
+.bc{font-size:12px;color:var(--tm);margin-bottom:12px}.bc a{color:var(--bl);font-weight:600}
+.ph{margin-bottom:28px}.ph h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px;display:flex;align-items:center;gap:10px}.ph p{font-size:14px;color:var(--ts);line-height:1.6}
+.badge{display:inline-flex;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:6px;background:var(--blb);color:var(--bl)}
+
+/* Modules */
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.mc{background:var(--sf);border:2px solid var(--bd);border-radius:14px;padding:24px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
+.mc:hover{border-color:rgba(40,116,166,.18);transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.06)}
+.mc:hover::before{opacity:1}
+.mc.on{border-color:var(--bl);background:var(--blb)}.mc.on::before{opacity:1;background:var(--bl)}
+.mc .ico{font-size:32px;margin-bottom:10px}.mc .tt{font-size:16px;font-weight:700;margin-bottom:4px}.mc .ds{font-size:12px;color:var(--ts);line-height:1.5}
+.mc .lb{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+
+/* Sim */
+.sim{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden}
+.sim-h{padding:16px 24px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;background:var(--sf2)}
+.sim-h h2{font-size:16px;font-weight:700}
+.sim-b{padding:24px}
+
+/* Patient */
+.ptb{display:flex;gap:16px;padding:16px;background:var(--sf2);border:1px solid var(--bd);border-radius:10px;margin-bottom:20px;align-items:center}
+.pta{width:48px;height:48px;border-radius:50%;background:var(--blb);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--bl);flex-shrink:0}
+.ptn{font-size:15px;font-weight:700}.ptd{font-size:12px;color:var(--ts);line-height:1.6}
+
+/* Allergen grid */
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px}
+.al{padding:10px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;cursor:pointer;text-align:center;transition:all .15s;font-size:12px;font-weight:600}
+.al:hover{border-color:var(--bl)}.al.sel{background:var(--blb);border-color:var(--bl);color:var(--bl)}
+.al.pos{background:var(--rdb);border-color:var(--rd);color:var(--rd)}.al.neg{background:var(--gnb);border-color:var(--gn);color:var(--gn)}
+
+/* Protocol steps */
+.ps{counter-reset:s}.psi{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--bdl);counter-increment:s}
+.psi:last-child{border-bottom:none}
+.psn{width:28px;height:28px;border-radius:50%;background:var(--blb);color:var(--bl);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.psc{flex:1}.pst{font-size:13px;font-weight:700;margin-bottom:2px}.psd{font-size:12px;color:var(--ts);line-height:1.5}
+.psi select,.psi input[type=text]{padding:6px 10px;border:1px solid var(--bd);border-radius:6px;font-size:12px;font-family:var(--ft);background:var(--sf);margin-top:6px}
+
+/* Score */
+.sc{background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:20px;margin-top:20px}
+.sc h3{font-size:15px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bdl);font-size:13px}
+.sr:last-child{border-bottom:none}.srl{color:var(--ts)}.srv{font-family:var(--mn);font-weight:700}
+.srv.ok{color:var(--gn)}.srv.mid{color:var(--am)}.srv.no{color:var(--rd)}
+.sfb{margin-top:12px;padding:12px;background:var(--blb);border-radius:8px;font-size:12px;color:var(--ts);line-height:1.7}.sfb strong{color:var(--tx)}
+
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:13px;font-weight:700;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.bp{background:var(--bl);color:#fff}.bp:hover{background:#1B4F72}
+.bo{background:var(--sf);color:var(--ts);border:1px solid var(--bd)}.bo:hover{border-color:var(--bl);color:var(--bl)}
+.bs{padding:7px 14px;font-size:11px}
+
+@media(max-width:768px){.mg{grid-template-columns:1fr}.ag{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script src="auth/auth-guard.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Procedure Lab...</div></div>
+
+<div class="page">
+<div class="bc"><a href="index.html">ReasonDx</a> → <a href="milestone-tracker.html">Milestones</a> → Procedure Lab</div>
+<div class="ph"><h1>A/I Procedure Lab <span class="badge">PC3 · Diagnostic Tests</span></h1><p>Practice skin testing, oral food challenges, and drug desensitization. Each module assesses ACGME PC3 milestone progression.</p></div>
+
+<div class="mg">
+  <div class="mc on" id="m-skin" onclick="selMod('skin')"><span class="lb" style="background:var(--gnb);color:var(--gn)">Most Common</span><div class="ico">💉</div><div class="tt">Skin Testing Simulator</div><div class="ds">Select allergens, interpret wheal/flare, handle indeterminate results.</div></div>
+  <div class="mc" id="m-ofc" onclick="selMod('ofc')"><span class="lb" style="background:var(--amb);color:var(--am)">High Stakes</span><div class="ico">🥜</div><div class="tt">OFC Protocol Builder</div><div class="ds">Design graded oral food challenge: dosing, intervals, stopping criteria.</div></div>
+  <div class="mc" id="m-desens" onclick="selMod('desens')"><span class="lb" style="background:var(--rdb);color:var(--rd)">Advanced</span><div class="ico">💊</div><div class="tt">Desensitization Planner</div><div class="ds">Aspirin desensitization, penicillin challenge, biologic re-challenge.</div></div>
+</div>
+
+<div id="out"></div>
+</div>
+
+<script src="js/procedure-sim-data.js"></script>
+<script>
+(function(){
+'use strict';
+var D=window.PROC_DATA, mod='skin', skinIdx=0, skinPh='select', selAll=[], ofcSubmitted=false, desIdx=0, desSubmitted=false;
+function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function lab(a){return a.replace(/-/g,' ').replace(/\b\w/g,function(l){return l.toUpperCase()})}
+
+window.selMod=function(m){mod=m;skinPh='select';selAll=[];ofcSubmitted=false;desSubmitted=false;
+  document.querySelectorAll('.mc').forEach(function(c){c.classList.remove('on')});
+  document.getElementById('m-'+m).classList.add('on');render()};
+window.setSkin=function(i){skinIdx=i;skinPh='select';selAll=[];render()};
+window.togAll=function(a){var i=selAll.indexOf(a);if(i>=0)selAll.splice(i,1);else selAll.push(a);render()};
+window.runSkin=function(){if(selAll.length<2){alert('Select at least controls and some allergens');return}skinPh='results';render()};
+window.scoreSkin=function(){skinPh='score';render()};
+window.resetSkin=function(){skinPh='select';selAll=[];render()};
+window.submitOFC=function(){ofcSubmitted=true;render()};
+window.resetOFC=function(){ofcSubmitted=false;render()};
+window.setDes=function(i){desIdx=i;desSubmitted=false;render()};
+window.submitDes=function(){desSubmitted=true;render()};
+window.resetDes=function(){desSubmitted=false;render()};
+
+function render(){
+  var h='';
+  if(mod==='skin') h=rSkin();
+  else if(mod==='ofc') h=rOFC();
+  else if(mod==='desens') h=rDesens();
+  document.getElementById('out').innerHTML=h;
+}
+
+// ═══ SKIN TESTING ═══
+function rSkin(){
+  var sc=D.skin[skinIdx],h='';
+  h+='<div class="sim"><div class="sim-h"><h2>Skin Testing Simulator</h2><div style="display:flex;gap:6px">';
+  D.skin.forEach(function(s,i){h+='<button class="btn bs '+(i===skinIdx?'bp':'bo')+'" onclick="setSkin('+i+')">Case '+(i+1)+'</button>'});
+  h+='</div></div><div class="sim-b">';
+  h+='<div class="ptb"><div class="pta">'+e(sc.patient.name[0])+'</div><div><div class="ptn">'+e(sc.patient.name)+' ('+e(sc.patient.age)+')</div><div class="ptd"><strong>CC:</strong> '+e(sc.patient.cc)+'<br><strong>Hx:</strong> '+e(sc.history)+'</div></div></div>';
+
+  if(skinPh==='select'){
+    h+='<h3 style="font-size:15px;font-weight:700;margin-bottom:4px">Select Your Testing Panel</h3>';
+    h+='<p style="font-size:12px;color:var(--ts);margin-bottom:12px">Choose allergens for skin prick testing. Include controls.</p>';
+    for(var cat in D.allergenCats){
+      h+='<div style="font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 6px">'+cat+'</div><div class="ag">';
+      D.allergenCats[cat].forEach(function(a){h+='<div class="al'+(selAll.indexOf(a)>=0?' sel':'')+'" onclick="togAll(\''+a+'\')">'+lab(a)+'</div>'});
+      h+='</div>';
+    }
+    h+='<div style="margin-top:16px;display:flex;gap:8px;align-items:center"><button class="btn bp" onclick="runSkin()">Run Panel ('+selAll.length+')</button><span style="font-size:12px;color:var(--tm)">'+selAll.length+' selected</span></div>';
+  }
+  else if(skinPh==='results'){
+    h+='<h3 style="font-size:15px;font-weight:700;margin-bottom:4px">Results — Read at 15 Minutes</h3>';
+    h+='<p style="font-size:12px;color:var(--ts);margin-bottom:12px">Wheal ≥3mm above negative control = positive.</p>';
+    var neg=sc.results['saline']?sc.results['saline'].w:0;
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px">';
+    selAll.forEach(function(a){
+      var r=sc.results[a]||{w:0,f:0};var ip=r.w>=(neg+3);var cls=r.ctrl?'':(ip?' pos':' neg');
+      h+='<div class="al'+cls+'" style="cursor:default;text-align:left;padding:10px 12px">';
+      h+='<div style="font-weight:700;margin-bottom:4px">'+lab(a)+'</div>';
+      h+='<div style="font-family:var(--mn);font-size:11px">'+r.w+'×'+r.w+'mm wheal · '+r.f+'mm flare</div>';
+      if(r.ctrl) h+='<div style="font-size:9px;font-weight:700;color:var(--bl);margin-top:2px">CONTROL</div>';
+      else h+='<div style="font-size:10px;font-weight:700;color:'+(ip?'var(--rd)':'var(--gn)')+';margin-top:2px">'+(ip?'POSITIVE':'NEGATIVE')+'</div>';
+      h+='</div>';
+    });
+    h+='</div><div style="margin-top:16px"><button class="btn bp" onclick="scoreSkin()">Submit Interpretation</button></div>';
+  }
+  else if(skinPh==='score'){
+    var hasH=selAll.indexOf('histamine')>=0,hasS=selAll.indexOf('saline')>=0;
+    var cc=0;sc.correctPanel.forEach(function(a){if(selAll.indexOf(a)>=0)cc++});
+    var ec=0;selAll.forEach(function(a){if(sc.correctPanel.indexOf(a)<0)ec++});
+    var ps=0;if(hasH&&hasS)ps+=30;else if(hasH||hasS)ps+=15;
+    ps+=Math.round((cc/sc.correctPanel.length)*50);if(ec>3)ps-=10;ps=Math.max(0,Math.min(100,ps+20));
+    var cls=ps>=80?'ok':ps>=60?'mid':'no';
+    h+='<div class="sc"><h3>📊 Performance Assessment</h3>';
+    h+='<div class="sr"><span class="srl">Controls included</span><span class="srv '+(hasH&&hasS?'ok':'no')+'">'+(hasH&&hasS?'Both ✓':(hasH?'Histamine only':'Missing'))+'</span></div>';
+    h+='<div class="sr"><span class="srl">Appropriate allergens</span><span class="srv">'+cc+'/'+sc.correctPanel.length+'</span></div>';
+    h+='<div class="sr"><span class="srl">Unnecessary allergens</span><span class="srv '+(ec>3?'no':ec>0?'mid':'ok')+'">'+ec+'</span></div>';
+    h+='<div class="sr"><span class="srl">Overall Score</span><span class="srv '+cls+'">'+ps+'%</span></div>';
+    h+='<div class="sfb"><strong>Teaching:</strong> '+e(sc.teaching)+'</div></div>';
+    h+='<div style="margin-top:16px;display:flex;gap:8px"><button class="btn bp" onclick="resetSkin()">Try Again</button>';
+    h+='<button class="btn bo" onclick="setSkin('+(skinIdx+1<D.skin.length?skinIdx+1:0)+')">Next Case</button></div>';
+  }
+  h+='</div></div>';return h;
+}
+
+// ═══ OFC PROTOCOL ═══
+function rOFC(){
+  var sc=D.ofc[0],h='';
+  h+='<div class="sim"><div class="sim-h"><h2>Oral Food Challenge Protocol Builder</h2></div><div class="sim-b">';
+  h+='<div class="ptb"><div class="pta">J</div><div><div class="ptn">'+e(sc.patient.name)+' ('+e(sc.patient.age)+')</div><div class="ptd"><strong>CC:</strong> '+e(sc.patient.cc)+'</div></div></div>';
+  h+='<h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Design Your OFC Protocol</h3>';
+  h+='<div class="ps">';
+
+  h+='<div class="psi"><div class="psn">1</div><div class="psc"><div class="pst">Challenge Food & Vehicle</div><div class="psd">Select the food form.</div>';
+  h+='<select id="ofc-food"><option value="">Select...</option><option value="peanut-butter">Peanut butter</option><option value="peanut-flour">Defatted peanut flour in vehicle ✓</option><option value="whole-peanut">Whole peanut</option><option value="peanut-powder">Commercial peanut powder</option></select></div></div>';
+
+  h+='<div class="psi"><div class="psn">2</div><div class="psc"><div class="pst">Dosing Protocol</div><div class="psd">Number of doses and increments.</div>';
+  h+='<select id="ofc-protocol"><option value="">Select...</option><option value="7-log">7-dose log increment (1mg→3g) — Standard ✓</option><option value="5-dose">5-dose (100mg→4g) — Abbreviated</option><option value="2-dose">2-dose cumulative — Low-risk only</option></select></div></div>';
+
+  h+='<div class="psi"><div class="psn">3</div><div class="psc"><div class="pst">Dosing Interval</div><div class="psd">Time between each dose.</div>';
+  h+='<select id="ofc-interval"><option value="">Select...</option><option value="15">15 minutes</option><option value="20">20 minutes (standard) ✓</option><option value="30">30 minutes</option></select></div></div>';
+
+  h+='<div class="psi"><div class="psn">4</div><div class="psc"><div class="pst">Post-Challenge Monitoring</div><div class="psd">Observation time after final dose.</div>';
+  h+='<select id="ofc-monitor"><option value="">Select...</option><option value="60">60 minutes</option><option value="120">120 minutes (standard) ✓</option><option value="180">180 minutes</option></select></div></div>';
+
+  h+='<div class="psi"><div class="psn">5</div><div class="psc"><div class="pst">Pre-Challenge Checklist</div><div class="psd">Select all that apply.</div>';
+  h+='<div style="margin-top:6px;display:flex;flex-direction:column;gap:4px">';
+  var checks=[['iv','IV access established'],['epi','Epinephrine drawn up (weight-based)'],['antihist','Antihistamines held 5–7 days'],['consent','Informed consent documented'],['asthma','Asthma controlled / baseline FEV1'],['exercise','No exercise instructions given']];
+  checks.forEach(function(c){h+='<label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="ofc-'+c[0]+'" value="1"> '+c[1]+'</label>'});
+  h+='</div></div></div>';
+
+  h+='</div>';
+
+  if(!ofcSubmitted){
+    h+='<div style="margin-top:16px"><button class="btn bp" onclick="submitOFC()">Submit Protocol</button></div>';
+  } else {
+    // Score
+    var food=document.getElementById('ofc-food'),prot=document.getElementById('ofc-protocol'),
+        intv=document.getElementById('ofc-interval'),mntr=document.getElementById('ofc-monitor');
+    // Read values fresh since DOM exists
+    h+='<div class="sc"><h3>📊 Protocol Assessment</h3>';
+    var score=0,items=[];
+    // We'll compute score via inline script after render
+    h+='<div id="ofc-score-inner"></div>';
+    h+='<div class="sfb"><strong>Teaching:</strong> '+e(sc.teaching)+'</div></div>';
+    h+='<div style="margin-top:16px"><button class="btn bp" onclick="resetOFC()">Try Again</button></div>';
+  }
+  h+='</div></div>';return h;
+}
+
+// ═══ DESENSITIZATION ═══
+function rDesens(){
+  var sc=D.desens[desIdx],h='';
+  h+='<div class="sim"><div class="sim-h"><h2>Desensitization / Challenge Planner</h2><div style="display:flex;gap:6px">';
+  D.desens.forEach(function(s,i){h+='<button class="btn bs '+(i===desIdx?'bp':'bo')+'" onclick="setDes('+i+')">'+(i===0?'Aspirin Desens':'Penicillin De-label')+'</button>'});
+  h+='</div></div><div class="sim-b">';
+  h+='<div class="ptb"><div class="pta">'+e(sc.patient.name[0])+'</div><div><div class="ptn">'+e(sc.patient.name)+' ('+e(sc.patient.age)+')</div><div class="ptd"><strong>CC:</strong> '+e(sc.patient.cc)+'<br><strong>Hx:</strong> '+e(sc.history)+'</div></div></div>';
+
+  if(desIdx===0){
+    // Aspirin desensitization
+    h+='<h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Build Aspirin Desensitization Protocol</h3>';
+    h+='<div class="ps">';
+    h+='<div class="psi"><div class="psn">1</div><div class="psc"><div class="pst">Setting</div><div class="psd">Where should this be performed?</div>';
+    h+='<select id="des-setting"><option value="">Select...</option><option value="outpatient">Outpatient clinic</option><option value="monitored">Monitored clinic/hospital ✓</option><option value="home">Home-based</option></select></div></div>';
+
+    h+='<div class="psi"><div class="psn">2</div><div class="psc"><div class="pst">Pre-Requirements</div><div class="psd">Check all met before proceeding.</div>';
+    h+='<div style="margin-top:6px;display:flex;flex-direction:column;gap:4px">';
+    var pre=[['fev1','FEV1 ≥70% predicted'],['noexac','No exacerbation in past 4 weeks'],['nobeta','No beta-blocker use'],['montel','Montelukast continued'],['baseline','Baseline FEV1 documented']];
+    pre.forEach(function(c){h+='<label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="des-'+c[0]+'" value="1"> '+c[1]+'</label>'});
+    h+='</div></div></div>';
+
+    h+='<div class="psi"><div class="psn">3</div><div class="psc"><div class="pst">Day 1 Dosing</div><div class="psd">Select starting dose sequence.</div>';
+    h+='<select id="des-day1"><option value="">Select...</option><option value="20-40-81-162">20.25mg → 40.5mg → 81mg → 162.5mg ✓</option><option value="81-162-325">81mg → 162.5mg → 325mg (abbreviated)</option><option value="325">325mg single dose (NOT safe)</option></select></div></div>';
+
+    h+='<div class="psi"><div class="psn">4</div><div class="psc"><div class="pst">Dosing Interval</div>';
+    h+='<select id="des-interval"><option value="">Select...</option><option value="60">60 minutes</option><option value="90">90 minutes (standard) ✓</option><option value="120">120 minutes</option></select></div></div>';
+
+    h+='<div class="psi"><div class="psn">5</div><div class="psc"><div class="pst">Monitoring Between Doses</div><div class="psd">What do you check before each dose?</div>';
+    h+='<div style="margin-top:6px;display:flex;flex-direction:column;gap:4px">';
+    var mon=[['fev1chk','FEV1 before each dose'],['vitals','Vitals q30min'],['nasal','Nasal/ocular symptom check'],['lower','Lower respiratory symptom check']];
+    mon.forEach(function(c){h+='<label style="font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="des-mon-'+c[0]+'" value="1"> '+c[1]+'</label>'});
+    h+='</div></div></div>';
+
+    h+='<div class="psi"><div class="psn">6</div><div class="psc"><div class="pst">Day 2 & Maintenance</div>';
+    h+='<select id="des-maint"><option value="">Select...</option><option value="325bid">325mg → then 325mg BID maintenance ✓</option><option value="650">650mg single daily</option><option value="81">81mg daily (sub-therapeutic)</option></select></div></div>';
+    h+='</div>';
+  } else {
+    // Penicillin de-labeling
+    h+='<h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Penicillin De-Labeling Protocol</h3>';
+    h+='<div class="ps">';
+    h+='<div class="psi"><div class="psn">1</div><div class="psc"><div class="pst">Step 1: Skin Testing</div><div class="psd">What reagents do you use?</div>';
+    h+='<select id="pen-skin"><option value="">Select...</option><option value="prepen-peng">Pre-Pen (penicilloyl) + Penicillin G (minor determinant) ✓</option><option value="peng-only">Penicillin G only</option><option value="amox-only">Amoxicillin prick only</option><option value="skip">Skip skin testing, go direct to challenge</option></select></div></div>';
+
+    h+='<div class="psi"><div class="psn">2</div><div class="psc"><div class="pst">Step 2: If Skin Test Negative</div>';
+    h+='<select id="pen-neg"><option value="">Select...</option><option value="amox250">Oral amoxicillin 250mg, observe 60min ✓</option><option value="amox500">Oral amoxicillin 500mg, observe 30min</option><option value="pcn-iv">IV penicillin graded dose</option><option value="clear">Clear directly without oral challenge</option></select></div></div>';
+
+    h+='<div class="psi"><div class="psn">3</div><div class="psc"><div class="pst">Step 3: If Challenge Negative</div>';
+    h+='<select id="pen-clear"><option value="">Select...</option><option value="delabel">De-label allergy in EMR, clear for cefazolin ✓</option><option value="avoid">Still recommend avoiding penicillins</option><option value="ceph-only">Clear for cephalosporins only, not penicillins</option></select></div></div>';
+
+    h+='<div class="psi"><div class="psn">4</div><div class="psc"><div class="pst">Key Clinical Consideration</div><div class="psd">This patient already tolerated cephalexin. What does this tell you?</div>';
+    h+='<select id="pen-key"><option value="">Select...</option><option value="low-risk">Cross-reactivity &lt;2% — low risk, supports de-labeling ✓</option><option value="no-info">Cephalosporin tolerance has no bearing on penicillin allergy</option><option value="high-risk">Cephalosporin tolerance increases penicillin allergy risk</option></select></div></div>';
+    h+='</div>';
+  }
+
+  if(!desSubmitted){
+    h+='<div style="margin-top:16px"><button class="btn bp" onclick="submitDes()">Submit Protocol</button></div>';
+  } else {
+    h+='<div class="sc"><h3>📊 Protocol Assessment</h3>';
+    h+='<div id="des-score-inner"></div>';
+    h+='<div class="sfb"><strong>Teaching:</strong> '+e(sc.teaching)+'</div></div>';
+    h+='<div style="margin-top:16px;display:flex;gap:8px"><button class="btn bp" onclick="resetDes()">Try Again</button>';
+    if(D.desens.length>1) h+='<button class="btn bo" onclick="setDes('+(desIdx===0?1:0)+')">Next Scenario</button>';
+    h+='</div>';
+  }
+  h+='</div></div>';return h;
+}
+
+// Score OFC after render
+var _origRender=render;
+function render(){
+  _origRender();
+  // Score OFC
+  if(mod==='ofc'&&ofcSubmitted){
+    var sc=D.ofc[0].correct,score=0,items=[];
+    var food=document.getElementById('ofc-food'),prot=document.getElementById('ofc-protocol'),
+        intv=document.getElementById('ofc-interval'),mntr=document.getElementById('ofc-monitor');
+    if(food&&food.value===sc.food){score+=20;items.push(['Food form','Correct','ok'])}else items.push(['Food form','Peanut flour preferred','no']);
+    if(prot&&prot.value===sc.protocol){score+=20;items.push(['Dosing protocol','Correct','ok'])}else items.push(['Dosing protocol','7-dose log standard','mid']);
+    if(intv&&intv.value===sc.interval){score+=15;items.push(['Interval','Correct','ok'])}else items.push(['Interval','20 min standard','mid']);
+    if(mntr&&mntr.value===sc.monitoring){score+=15;items.push(['Monitoring','Correct','ok'])}else items.push(['Monitoring','≥120 min needed','mid']);
+    var chks=['iv','epi','antihist','consent','asthma','exercise'],chkCnt=0;
+    chks.forEach(function(c){if(document.getElementById('ofc-'+c)&&document.getElementById('ofc-'+c).checked)chkCnt++});
+    score+=Math.round((chkCnt/chks.length)*30);items.push(['Checklist',''+chkCnt+'/'+chks.length+' items',chkCnt>=5?'ok':chkCnt>=3?'mid':'no']);
+    var el=document.getElementById('ofc-score-inner');
+    if(el){var ih='';items.forEach(function(i){ih+='<div class="sr"><span class="srl">'+i[0]+'</span><span class="srv '+i[2]+'">'+i[1]+'</span></div>'});
+    ih+='<div class="sr" style="font-weight:700"><span class="srl">Overall</span><span class="srv '+(score>=80?'ok':score>=50?'mid':'no')+'">'+score+'%</span></div>';el.innerHTML=ih}
+  }
+  // Score Desensitization
+  if(mod==='desens'&&desSubmitted){
+    var el2=document.getElementById('des-score-inner');if(!el2)return;
+    var items2=[],score2=0;
+    if(desIdx===0){
+      var s=document.getElementById('des-setting'),d1=document.getElementById('des-day1'),
+          di=document.getElementById('des-interval'),dm=document.getElementById('des-maint');
+      if(s&&s.value==='monitored'){score2+=20;items2.push(['Setting','Monitored ✓','ok'])}else items2.push(['Setting','Must be monitored','no']);
+      if(d1&&d1.value==='20-40-81-162'){score2+=20;items2.push(['Day 1 doses','Correct ✓','ok'])}else items2.push(['Day 1 doses','Standard 4-step needed','no']);
+      if(di&&di.value==='90'){score2+=15;items2.push(['Interval','90 min ✓','ok'])}else items2.push(['Interval','90 min standard','mid']);
+      if(dm&&dm.value==='325bid'){score2+=15;items2.push(['Maintenance','325mg BID ✓','ok'])}else items2.push(['Maintenance','325mg BID required','no']);
+      var pChks=['fev1','noexac','nobeta','montel','baseline'],pCnt=0;
+      pChks.forEach(function(c){if(document.getElementById('des-'+c)&&document.getElementById('des-'+c).checked)pCnt++});
+      score2+=Math.round((pCnt/pChks.length)*15);items2.push(['Pre-reqs',''+pCnt+'/'+pChks.length,'mid']);
+      var mChks=['fev1chk','vitals','nasal','lower'],mCnt=0;
+      mChks.forEach(function(c){if(document.getElementById('des-mon-'+c)&&document.getElementById('des-mon-'+c).checked)mCnt++});
+      score2+=Math.round((mCnt/mChks.length)*15);items2.push(['Monitoring',''+mCnt+'/'+mChks.length,'mid']);
+    } else {
+      var sk=document.getElementById('pen-skin'),ng=document.getElementById('pen-neg'),
+          cl=document.getElementById('pen-clear'),ky=document.getElementById('pen-key');
+      if(sk&&sk.value==='prepen-peng'){score2+=25;items2.push(['Skin test reagents','Pre-Pen + Pen G ✓','ok'])}else items2.push(['Skin test reagents','Need both major & minor','no']);
+      if(ng&&ng.value==='amox250'){score2+=25;items2.push(['If negative','Amox 250mg challenge ✓','ok'])}else items2.push(['If negative','Standard: amox 250mg, 60min obs','mid']);
+      if(cl&&cl.value==='delabel'){score2+=25;items2.push(['If challenge neg','De-label + clear ✓','ok'])}else items2.push(['If challenge neg','Should de-label in EMR','no']);
+      if(ky&&ky.value==='low-risk'){score2+=25;items2.push(['Clinical insight','Low cross-reactivity ✓','ok'])}else items2.push(['Clinical insight','Ceph tolerance = low risk','mid']);
+    }
+    var ih2='';items2.forEach(function(i){ih2+='<div class="sr"><span class="srl">'+i[0]+'</span><span class="srv '+i[2]+'">'+i[1]+'</span></div>'});
+    ih2+='<div class="sr" style="font-weight:700"><span class="srl">Overall</span><span class="srv '+(score2>=80?'ok':score2>=50?'mid':'no')+'">'+score2+'%</span></div>';
+    el2.innerHTML=ih2;
+  }
+}
+
+render();
+setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classList.add('hide');setTimeout(function(){l.remove()},300)}},400);
+})();
+</script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-nav.js"></script>
+</body>
+</html>

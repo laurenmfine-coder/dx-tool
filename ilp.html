@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<title>Individualized Learning Plan | ReasonDx</title>
+<meta name="description" content="Create and track ACGME-aligned individualized learning plans for A/I fellowship milestone progression.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F0F2F5;--sf:#fff;--sf2:#F8FAFC;--bd:#E2E8F0;--bdl:#F1F5F9;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--blb:#EBF5FB;--gn:#059669;--gnb:#ECFDF5;--am:#D97706;--amb:#FFFBEB;--rd:#DC2626;--rdb:#FEF2F2;--ft:'IBM Plex Sans',-apple-system,sans-serif;--mn:'IBM Plex Mono',monospace}
+body{background:var(--bg);color:var(--tx);font-family:var(--ft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer}
+.page{max-width:900px;margin:0 auto;padding:24px 20px 80px}
+.bc{font-size:12px;color:var(--tm);margin-bottom:12px}.bc a{color:var(--bl);font-weight:600}
+.ph{margin-bottom:28px}.ph h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}.ph p{font-size:14px;color:var(--ts);line-height:1.6}
+.badge{display:inline-flex;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:6px;background:var(--blb);color:var(--bl)}
+
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.card-h{padding:16px 20px;border-bottom:1px solid var(--bd);background:var(--sf2);display:flex;align-items:center;justify-content:space-between}
+.card-h h2{font-size:15px;font-weight:700}.card-b{padding:20px}
+
+.form-row{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.form-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:200px}
+.form-field label{font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px}
+.form-field select,.form-field input,.form-field textarea{padding:10px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:var(--ft);background:var(--sf);color:var(--tx);resize:vertical}
+.form-field textarea{min-height:60px}
+
+/* Goal cards */
+.goal{background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:12px;position:relative}
+.goal-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.goal-num{width:28px;height:28px;border-radius:50%;background:var(--bl);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.goal-sub{font-family:var(--mn);font-size:12px;font-weight:700;color:var(--bl)}
+.goal-name{font-size:13px;font-weight:600;color:var(--tx)}
+.goal-target{font-size:12px;color:var(--ts);margin-bottom:8px;padding-left:38px}
+.goal-activities{padding-left:38px}
+.goal-activity{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;color:var(--ts)}
+.goal-activity input[type=checkbox]{accent-color:var(--bl)}
+.goal-activity.done{text-decoration:line-through;color:var(--tm)}
+.goal-progress{margin-top:8px;padding-left:38px;display:flex;align-items:center;gap:8px}
+.goal-bar{flex:1;height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden}
+.goal-fill{height:100%;border-radius:3px;transition:width .3s}
+.goal-pct{font-family:var(--mn);font-size:11px;font-weight:700;min-width:32px}
+.goal-remove{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--tm);font-size:14px;cursor:pointer}
+.goal-remove:hover{color:var(--rd)}
+
+/* Timeline */
+.timeline{position:relative;padding-left:20px;margin-top:12px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--bd)}
+.tl-item{position:relative;padding:8px 0 16px 20px}
+.tl-item::before{content:'';position:absolute;left:-16px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--bl);border:2px solid var(--sf)}
+.tl-item.future::before{background:var(--bd)}
+.tl-date{font-size:10px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px}
+.tl-text{font-size:13px;color:var(--tx);margin-top:2px}
+
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:13px;font-weight:700;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.bp{background:var(--bl);color:#fff}.bp:hover{background:#1B4F72}
+.bo{background:var(--sf);color:var(--ts);border:1px solid var(--bd)}.bo:hover{border-color:var(--bl);color:var(--bl)}
+
+@media(max-width:640px){.form-row{flex-direction:column}.form-field{min-width:100%}}
+@media print{.card-h .btn,.goal-remove,.bc,.ph{display:none}.card{break-inside:avoid}}
+</style>
+<script src="auth/auth-guard.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading ILP...</div></div>
+
+<div class="page">
+<div class="bc"><a href="index.html">ReasonDx</a> → <a href="milestone-tracker.html">Milestones</a> → Learning Plan</div>
+<div class="ph">
+  <h1>Individualized Learning Plan <span class="badge">PBLI2</span></h1>
+  <p>Collaborative goal-setting between fellow and program director. Identify 2–3 target subcompetencies, assign specific activities, set measurable goals, and track progress. Updated each semi-annual review cycle.</p>
+</div>
+
+<!-- Fellow Info -->
+<div class="card">
+  <div class="card-h"><h2>Fellow & Period</h2></div>
+  <div class="card-b">
+    <div class="form-row">
+      <div class="form-field"><label>Fellow</label><select id="ilpFellow"><option>Dr. Sarah Chen — PGY-6, Year 1</option><option>Dr. James Okafor — PGY-7, Year 2</option></select></div>
+      <div class="form-field"><label>Review Period</label><select id="ilpPeriod"><option>January–June 2026</option><option>July–December 2025</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>PD / Faculty Advisor</label><input type="text" id="ilpAdvisor" value="Dr. Lauren Fine" placeholder="Faculty name"></div>
+      <div class="form-field"><label>Date Created</label><input type="date" id="ilpDate" value="2026-01-15"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Self-Assessment -->
+<div class="card">
+  <div class="card-h"><h2>Fellow Self-Assessment</h2></div>
+  <div class="card-b">
+    <div class="form-field" style="margin-bottom:12px"><label>Strengths — What am I doing well?</label><textarea id="ilpStrengths" placeholder="Describe areas of strength identified in your last CCC review or self-reflection...">Strong clinical knowledge base in common A/I conditions. Comfortable with skin testing procedures and basic immunology concepts. Good rapport with patients and families.</textarea></div>
+    <div class="form-field"><label>Growth Areas — Where do I want to improve?</label><textarea id="ilpGrowth" placeholder="Identify 2-3 areas you want to focus on this period...">Need more experience with complex immunodeficiency workups (PC3 for advanced diagnostics). Want to improve consultation communication — sometimes struggle to organize thoughts under time pressure (ICS2). Limited exposure to research methodology (MK3).</textarea></div>
+  </div>
+</div>
+
+<!-- Goals -->
+<div class="card">
+  <div class="card-h"><h2>Learning Goals</h2><button class="btn bo" style="padding:6px 12px;font-size:11px" onclick="addGoal()">+ Add Goal</button></div>
+  <div class="card-b" id="goalsContainer"></div>
+</div>
+
+<!-- Timeline -->
+<div class="card">
+  <div class="card-h"><h2>Milestone Timeline</h2></div>
+  <div class="card-b">
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">Jan 15, 2026</div><div class="tl-text">ILP created after semi-annual CCC review. Goals identified collaboratively.</div></div>
+      <div class="tl-item"><div class="tl-date">Feb 28, 2026</div><div class="tl-text">Mid-period check-in: Review progress on activities, adjust if needed.</div></div>
+      <div class="tl-item future"><div class="tl-date">Apr 15, 2026</div><div class="tl-text">Second check-in: Assess milestone progression, prepare for CCC.</div></div>
+      <div class="tl-item future"><div class="tl-date">Jun 30, 2026</div><div class="tl-text">Period ends. CCC review incorporates ILP progress. New ILP for next period.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Actions -->
+<div style="display:flex;gap:10px;margin-top:8px">
+  <button class="btn bp" onclick="window.print()">Print / Export PDF</button>
+  <button class="btn bo" onclick="alert('In production: saved to fellow\'s milestone record.')">Save ILP</button>
+</div>
+</div>
+
+<script src="js/milestone-data.js"></script>
+<script>
+(function(){
+'use strict';
+var MD=window.MILESTONE_DATA;
+
+// Default goals
+var goals=[
+  {
+    sub:'PC3', targetLevel:3,
+    text:'Advance diagnostic test selection and interpretation to Level 3',
+    activities:[
+      {text:'Complete 5 immunodeficiency cases (CVID, SCID tier) on Virtual EMR',done:true},
+      {text:'Complete Procedure Lab: skin testing simulator — both cases',done:true},
+      {text:'Complete Procedure Lab: OFC protocol builder',done:false},
+      {text:'Complete Procedure Lab: desensitization planner — both scenarios',done:false},
+      {text:'Perform 10 supervised skin test sessions with procedure log',done:false},
+      {text:'Observe 3 oral food challenges and document learning points',done:false}
+    ]
+  },
+  {
+    sub:'ICS2', targetLevel:3,
+    text:'Improve interprofessional consultation communication to Level 3',
+    activities:[
+      {text:'Complete all 4 A/I Consult Callback scenarios (vanc, periop, peds ID, triage)',done:true},
+      {text:'Complete 2 non-A/I Consult Callback scenarios for breadth',done:false},
+      {text:'Record and self-review 3 real consult callbacks with SBAR rubric',done:false},
+      {text:'Faculty direct observation of 2 consult callbacks with feedback',done:false}
+    ]
+  },
+  {
+    sub:'MK3', targetLevel:2,
+    text:'Initiate scholarly activity with defined hypothesis and methods',
+    activities:[
+      {text:'Identify research question with faculty mentor',done:true},
+      {text:'Complete literature review (minimum 15 articles)',done:false},
+      {text:'Draft IRB protocol or QI project charter',done:false},
+      {text:'Present proposal at department research meeting',done:false}
+    ]
+  }
+];
+
+function levelColor(l){return l>=4?'#059669':l>=3?'#2874A6':l>=2?'#D97706':'#DC2626'}
+
+function renderGoals(){
+  var c=document.getElementById('goalsContainer');
+  if(!goals.length){c.innerHTML='<p style="font-size:13px;color:var(--tm);text-align:center;padding:20px">No goals yet. Click "+ Add Goal" to create your first learning goal.</p>';return}
+  
+  var h='';
+  goals.forEach(function(g,gi){
+    var sc=MD.subcompetencies[g.sub]||{short:g.sub,name:g.sub};
+    var done=0; g.activities.forEach(function(a){if(a.done)done++});
+    var pct=g.activities.length?Math.round((done/g.activities.length)*100):0;
+    
+    h+='<div class="goal">';
+    h+='<button class="goal-remove" onclick="removeGoal('+gi+')" title="Remove goal">✕</button>';
+    h+='<div class="goal-header"><div class="goal-num">'+(gi+1)+'</div><div><span class="goal-sub">'+g.sub+' — '+sc.short+'</span><br><span class="goal-name">'+g.text+'</span></div></div>';
+    h+='<div class="goal-target">Target: Level '+g.targetLevel+' by end of period</div>';
+    h+='<div class="goal-activities">';
+    g.activities.forEach(function(a,ai){
+      h+='<div class="goal-activity'+(a.done?' done':'')+'"><input type="checkbox" '+(a.done?'checked':'')+' onchange="toggleActivity('+gi+','+ai+')"> '+a.text+'</div>';
+    });
+    h+='<div style="margin-top:6px"><button style="font-size:11px;color:var(--bl);background:none;border:none;cursor:pointer;font-weight:600;padding:2px 0" onclick="addActivity('+gi+')">+ Add activity</button></div>';
+    h+='</div>';
+    h+='<div class="goal-progress"><div class="goal-bar"><div class="goal-fill" style="width:'+pct+'%;background:'+levelColor(g.targetLevel)+'"></div></div><div class="goal-pct" style="color:'+levelColor(g.targetLevel)+'">'+pct+'%</div></div>';
+    h+='</div>';
+  });
+  c.innerHTML=h;
+}
+
+window.toggleActivity=function(gi,ai){goals[gi].activities[ai].done=!goals[gi].activities[ai].done;renderGoals()};
+window.removeGoal=function(gi){if(confirm('Remove this goal?')){goals.splice(gi,1);renderGoals()}};
+window.addActivity=function(gi){
+  var text=prompt('Describe the learning activity:');
+  if(text){goals[gi].activities.push({text:text,done:false});renderGoals()}
+};
+window.addGoal=function(){
+  var codes=Object.keys(MD.subcompetencies);
+  var sub=prompt('Subcompetency code (e.g., PC1, MK2, ICS1):\n\nAvailable: '+codes.join(', '));
+  if(!sub||!MD.subcompetencies[sub.toUpperCase()]){alert('Invalid subcompetency code.');return}
+  sub=sub.toUpperCase();
+  var lvl=parseInt(prompt('Target level (1-5):'));
+  if(isNaN(lvl)||lvl<1||lvl>5){alert('Level must be 1-5.');return}
+  var text=prompt('Goal description:');
+  if(!text) return;
+  goals.push({sub:sub,targetLevel:lvl,text:text,activities:[]});
+  renderGoals();
+};
+
+renderGoals();
+setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classList.add('hide');setTimeout(function(){l.remove()},300)}},400);
+})();
+</script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-nav.js"></script>
+</body>
+</html>

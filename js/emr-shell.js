@@ -36,11 +36,16 @@
     { id: 'night-float', label: 'Night Float', icon: ICO.nightFloat, section: 'simulations', url: 'night-float.html' },
     { id: 'simroomdx', label: 'SimRoomDx', icon: ICO.simRoom, section: 'simulations', url: 'simroomdx.html' },
     { id: 'consult', label: 'Consult Callback', icon: ICO.consult, section: 'simulations', url: 'consult-callback.html' },
-    { id: 'crt', label: 'Clinical Reasoning', icon: ICO.crt, section: 'learning', url: 'crt-hub.html' },
+    { id: 'crt', label: 'Clinical Reasoning', icon: ICO.crt, section: 'learning', url: 'consult-callback.html' },
     { id: 'mechanism', label: 'MechanismDx', icon: ICO.mechanism, section: 'learning', url: 'pathway.html' },
     { id: 'boardprep', label: 'Board Prep', icon: ICO.boardPrep, section: 'learning', url: 'board-prep.html' },
-    { id: 'studyhub', label: 'Study Hub', icon: ICO.studyHub, section: 'learning', url: 'study-mode.html' },
-    { id: 'ecg', label: 'ECG Trainer', icon: ICO.ecg, section: 'learning', url: 'ecg/index.html' }
+    { id: 'studyhub', label: 'Study Mode', icon: ICO.studyHub, section: 'learning', url: 'study-mode.html' },
+    { id: 'ecg', label: 'ECG Trainer', icon: ICO.ecg, section: 'learning', url: 'ecg/index.html' },
+    { id: 'milestones', label: 'Milestones', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>', section: 'learning', url: 'milestone-tracker.html' },
+    { id: 'procedure-lab', label: 'Procedure Lab', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>', section: 'learning', url: 'procedure-lab.html' },
+    { id: 'counseling', label: 'Counseling', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>', section: 'learning', url: 'counseling-scenarios.html' },
+    { id: 'ilp', label: 'Learning Plan', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>', section: 'learning', url: 'ilp.html' },
+    { id: 'faculty-assess', label: 'Faculty Score', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>', section: 'learning', url: 'faculty-assess.html' }
   ];
 
   var SECTIONS = { clinical: 'CLINICAL', simulations: 'SIMULATIONS', learning: 'LEARNING TOOLS' };

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<!-- Google Analytics (ReasonDx) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<title>ACGME Milestone Tracker | ReasonDx</title>
+<meta name="description" content="Track A/I fellowship milestone progression with ACGME-aligned case assessment across 19 subcompetencies.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F0F2F5;--surface:#fff;--surface-alt:#F8FAFC;
+  --border:#E2E8F0;--border-light:#F1F5F9;
+  --text:#1E293B;--text-secondary:#64748B;--text-muted:#94A3B8;
+  --blue:#2874A6;--blue-light:#EBF5FB;--blue-border:rgba(40,116,166,.18);
+  --green:#059669;--green-bg:#ECFDF5;
+  --amber:#D97706;--amber-bg:#FFFBEB;
+  --red:#DC2626;--red-bg:#FEF2F2;
+  --purple:#7C3AED;--purple-bg:#F5F3FF;
+  --font:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font)}
+
+/* ─── Layout ─── */
+.page{max-width:1200px;margin:0 auto;padding:24px 20px 80px}
+.page-header{margin-bottom:32px}
+.page-header h1{font-size:28px;font-weight:800;color:var(--text);letter-spacing:-.5px;margin-bottom:4px}
+.page-header p{font-size:14px;color:var(--text-secondary);line-height:1.6}
+.breadcrumb{font-size:12px;color:var(--text-muted);margin-bottom:12px}
+.breadcrumb a{color:var(--blue);font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:6px}
+.badge-blue{background:var(--blue-light);color:var(--blue)}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+.badge-purple{background:var(--purple-bg);color:var(--purple)}
+
+/* ─── Overview Cards ─── */
+.overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.overview-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all .15s}
+.overview-card:hover{border-color:var(--blue-border);box-shadow:0 4px 12px rgba(0,0,0,.04)}
+.ov-label{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.ov-value{font-size:32px;font-weight:800;color:var(--text);letter-spacing:-1px;line-height:1}
+.ov-detail{font-size:12px;color:var(--text-secondary);margin-top:4px}
+
+/* ─── Tabs ─── */
+.tab-bar{display:flex;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:24px;overflow-x:auto}
+.tab-btn{padding:10px 18px;border:none;border-radius:8px;font-size:13px;font-weight:600;color:var(--text-secondary);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab-btn:hover{background:var(--surface-alt);color:var(--text)}
+.tab-btn.active{background:var(--blue);color:#fff}
+
+/* ─── Milestone Grid ─── */
+.milestone-table{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.mt-header{display:grid;grid-template-columns:200px 1fr 100px 100px 100px;gap:0;padding:12px 18px;background:var(--surface-alt);border-bottom:1px solid var(--border);font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+.mt-row{display:grid;grid-template-columns:200px 1fr 100px 100px 100px;gap:0;padding:14px 18px;border-bottom:1px solid var(--border-light);transition:background .1s;cursor:pointer}
+.mt-row:last-child{border-bottom:none}
+.mt-row:hover{background:var(--blue-light)}
+.mt-sub-code{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--blue)}
+.mt-sub-name{font-size:13px;font-weight:600;color:var(--text);margin-top:2px}
+.mt-domain{font-size:10px;color:var(--text-muted);margin-top:1px}
+.mt-bar{display:flex;align-items:center;gap:6px;padding-right:16px}
+.mt-level-track{flex:1;height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden;position:relative}
+.mt-level-fill{height:100%;border-radius:4px;transition:width .4s ease-out}
+.mt-level-num{font-family:var(--mono);font-size:14px;font-weight:700;min-width:20px;text-align:right}
+.mt-cases{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text-secondary);text-align:center}
+.mt-evidence{font-size:11px;color:var(--text-muted);text-align:center}
+.mt-trend{text-align:center;font-size:14px}
+
+/* ─── Tier Distribution ─── */
+.tier-section{margin-bottom:28px}
+.tier-section h2{font-size:18px;font-weight:700;margin-bottom:14px}
+.tier-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tier-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;transition:all .15s;cursor:pointer;position:relative;overflow:hidden}
+.tier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.tier-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.06)}
+.tier-count{font-size:28px;font-weight:800;letter-spacing:-1px}
+.tier-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.tier-desc{font-size:10px;color:var(--text-muted);margin-top:4px}
+.t1::before{background:#059669}.t1 .tier-count{color:#059669}
+.t2::before{background:#2874A6}.t2 .tier-count{color:#2874A6}
+.t3::before{background:#D97706}.t3 .tier-count{color:#D97706}
+.t4::before{background:#DC2626}.t4 .tier-count{color:#DC2626}
+.t5::before{background:#7C3AED}.t5 .tier-count{color:#7C3AED}
+
+/* ─── Case Library ─── */
+.case-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.case-filters select,.case-filters input{padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:var(--font);background:var(--surface);color:var(--text)}
+.case-filters input{flex:1;min-width:180px}
+.case-list{display:flex;flex-direction:column;gap:6px}
+.case-row{display:grid;grid-template-columns:1fr 140px 80px 200px 60px;gap:12px;align-items:center;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.case-row:hover{border-color:var(--blue-border);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.case-dx{font-size:13px;font-weight:600;color:var(--text)}
+.case-patient{font-size:11px;color:var(--text-muted);margin-top:1px}
+.case-category{font-size:11px;color:var(--text-secondary)}
+.case-tier{font-family:var(--mono);font-size:12px;font-weight:700;text-align:center}
+.case-subs{display:flex;gap:3px;flex-wrap:wrap}
+.case-sub-tag{font-family:var(--mono);font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;background:var(--surface-alt);color:var(--text-muted);border:1px solid var(--border-light)}
+.case-open{font-size:11px;font-weight:600;color:var(--blue);text-align:right}
+
+/* ─── Category Coverage ─── */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;transition:all .15s}
+.cat-card:hover{border-color:var(--blue-border)}
+.cat-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.cat-count{font-size:12px;color:var(--text-secondary)}
+.cat-tiers{display:flex;gap:3px;margin-top:8px}
+.cat-tier-dot{width:8px;height:8px;border-radius:2px}
+
+/* ─── Responsive ─── */
+@media(max-width:900px){
+  .overview-grid{grid-template-columns:repeat(2,1fr)}
+  .tier-grid{grid-template-columns:repeat(3,1fr)}
+  .mt-header,.mt-row{grid-template-columns:160px 1fr 80px 80px}
+  .mt-evidence{display:none}
+  .case-row{grid-template-columns:1fr 100px 60px 60px}
+  .case-subs{display:none}
+}
+@media(max-width:640px){
+  .overview-grid{grid-template-columns:1fr 1fr}
+  .tier-grid{grid-template-columns:1fr 1fr}
+  .tab-bar{flex-wrap:nowrap;overflow-x:auto}
+  .case-row{grid-template-columns:1fr 60px}
+  .case-category,.case-open{display:none}
+}
+</style>
+<script src="auth/auth-guard.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Milestone Tracker...</div></div>
+
+<div class="page">
+  <div class="breadcrumb"><a href="index.html">ReasonDx</a> → <a href="analytics-dashboard.html">Dashboard</a> → Milestone Tracker</div>
+  <div class="page-header">
+    <h1>ACGME Milestone Tracker <span class="badge badge-blue" style="font-size:10px;vertical-align:middle;margin-left:8px">A/I Fellowship</span></h1>
+    <p>Track fellow progression across 19 ACGME subcompetencies using milestone-aligned A/I cases. Built for CCC reporting.</p>
+  </div>
+
+  <div class="tab-bar" id="tabBar">
+    <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="switchTab('milestones')">Milestone Grid</button>
+    <button class="tab-btn" onclick="switchTab('cases')">Case Library</button>
+    <button class="tab-btn" onclick="switchTab('coverage')">Coverage Map</button>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script src="js/milestone-data.js"></script>
+<script>
+(function(){
+'use strict';
+var MD = window.MILESTONE_DATA;
+var stats = MD.stats();
+var activeTab = 'overview';
+
+// ─── Helpers ───
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+function tierBadge(t){
+  var colors = {1:'green',2:'blue',3:'amber',4:'red',5:'purple'};
+  var labels = {1:'L1-2',2:'L2',3:'L3',4:'L4',5:'L5'};
+  return '<span class="badge badge-'+colors[t]+'">Tier '+t+' · '+labels[t]+'</span>';
+}
+
+function levelColor(lvl){
+  if(lvl>=4) return '#059669';
+  if(lvl>=3) return '#2874A6';
+  if(lvl>=2) return '#D97706';
+  return '#DC2626';
+}
+
+// Mock fellow data — in production this comes from user progress
+var FELLOWS = [
+  { name:'Fellow A (PGY-6)', level:{PC1:3,PC2:2,PC3:2,PC4:3,MK1:3,MK2:3,MK3:2,SBP1:2,SBP2:2,SBP3:2,SBP4:1,PBLI1:3,PBLI2:2,PROF1:3,PROF2:3,PROF3:2,ICS1:3,ICS2:2,ICS3:3}, casesCompleted:24 },
+  { name:'Fellow B (PGY-7)', level:{PC1:4,PC2:3,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:3,SBP3:3,SBP4:2,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:3,ICS1:4,ICS2:3,ICS3:4}, casesCompleted:52 }
+];
+var activeFellow = 0;
+
+// ─── Tab: Overview ───
+function renderOverview(){
+  var f = FELLOWS[activeFellow];
+  var avgLevel = 0, count = 0;
+  for(var k in f.level){ avgLevel += f.level[k]; count++; }
+  avgLevel = (avgLevel/count).toFixed(1);
+  
+  // Count subs at each level
+  var atTarget = 0, below = 0;
+  for(var k in f.level){ if(f.level[k]>=4) atTarget++; else below++; }
+
+  var html = '';
+  
+  // Fellow selector
+  html += '<div style="display:flex;gap:8px;margin-bottom:20px;align-items:center">';
+  html += '<span style="font-size:12px;font-weight:600;color:var(--text-muted)">FELLOW:</span>';
+  FELLOWS.forEach(function(fw,i){
+    html += '<button onclick="setFellow('+i+')" style="padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid '+(i===activeFellow?'var(--blue)':'var(--border)')+';background:'+(i===activeFellow?'var(--blue-light)':'var(--surface)')+';color:'+(i===activeFellow?'var(--blue)':'var(--text-secondary)')+';cursor:pointer;font-family:var(--font)">'+esc(fw.name)+'</button>';
+  });
+  html += '</div>';
+
+  // Overview cards
+  html += '<div class="overview-grid">';
+  html += '<div class="overview-card"><div class="ov-label">Cases Completed</div><div class="ov-value">'+f.casesCompleted+'</div><div class="ov-detail">of '+stats.total+' A/I cases</div></div>';
+  html += '<div class="overview-card"><div class="ov-label">Average Level</div><div class="ov-value" style="color:'+levelColor(parseFloat(avgLevel))+'">'+avgLevel+'</div><div class="ov-detail">across 19 subcompetencies</div></div>';
+  html += '<div class="overview-card"><div class="ov-label">At Target (≥L4)</div><div class="ov-value" style="color:var(--green)">'+atTarget+'</div><div class="ov-detail">of 19 subcompetencies</div></div>';
+  html += '<div class="overview-card"><div class="ov-label">Growth Areas</div><div class="ov-value" style="color:var(--amber)">'+below+'</div><div class="ov-detail">below graduation target</div></div>';
+  html += '</div>';
+
+  // Tier distribution
+  html += '<div class="tier-section"><h2>Case Complexity Distribution</h2><div class="tier-grid">';
+  for(var t=1;t<=5;t++){
+    var tier = MD.tiers[t];
+    html += '<div class="tier-card t'+t+'">';
+    html += '<div class="tier-count">'+stats.byTier[t]+'</div>';
+    html += '<div class="tier-label">Tier '+t+'</div>';
+    html += '<div class="tier-desc">'+esc(tier.desc)+'</div>';
+    html += '</div>';
+  }
+  html += '</div></div>';
+
+  // Domain summary — mini milestone bars
+  html += '<div style="margin-top:8px"><h2 style="font-size:18px;font-weight:700;margin-bottom:14px">Milestone Progress by Domain</h2>';
+  var domains = {};
+  for(var code in MD.subcompetencies){
+    var sc = MD.subcompetencies[code];
+    if(!domains[sc.domain]) domains[sc.domain] = [];
+    domains[sc.domain].push(code);
+  }
+  for(var domain in domains){
+    html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px">';
+    html += '<div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px">'+esc(domain)+'</div>';
+    domains[domain].forEach(function(code){
+      var sc = MD.subcompetencies[code];
+      var lvl = f.level[code] || 0;
+      var pct = (lvl/5)*100;
+      html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">';
+      html += '<span style="font-family:var(--mono);font-size:11px;font-weight:600;color:var(--blue);min-width:42px">'+code+'</span>';
+      html += '<span style="font-size:11px;color:var(--text-secondary);min-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(sc.short)+'</span>';
+      html += '<div style="flex:1;height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+levelColor(lvl)+';border-radius:3px;transition:width .4s"></div></div>';
+      html += '<span style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+levelColor(lvl)+';min-width:20px;text-align:right">'+lvl+'</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+
+  return html;
+}
+
+// ─── Tab: Milestone Grid ───
+function renderMilestones(){
+  var f = FELLOWS[activeFellow];
+  var html = '';
+
+  // Fellow selector
+  html += '<div style="display:flex;gap:8px;margin-bottom:20px;align-items:center">';
+  html += '<span style="font-size:12px;font-weight:600;color:var(--text-muted)">FELLOW:</span>';
+  FELLOWS.forEach(function(fw,i){
+    html += '<button onclick="setFellow('+i+')" style="padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1px solid '+(i===activeFellow?'var(--blue)':'var(--border)')+';background:'+(i===activeFellow?'var(--blue-light)':'var(--surface)')+';color:'+(i===activeFellow?'var(--blue)':'var(--text-secondary)')+';cursor:pointer;font-family:var(--font)">'+esc(fw.name)+'</button>';
+  });
+  html += '</div>';
+
+  html += '<div class="milestone-table">';
+  html += '<div class="mt-header"><span>Subcompetency</span><span>Level Progress</span><span style="text-align:center">Cases</span><span style="text-align:center">Trend</span><span style="text-align:center">Evidence</span></div>';
+
+  var codes = Object.keys(MD.subcompetencies);
+  codes.forEach(function(code){
+    var sc = MD.subcompetencies[code];
+    var lvl = f.level[code] || 0;
+    var pct = (lvl/5)*100;
+    var caseCnt = MD.bySub(code).length;
+    var toolCnt = (MD.tools[code]||[]).length;
+    var trend = lvl >= 4 ? '✅' : lvl >= 3 ? '📈' : lvl >= 2 ? '➡️' : '🔻';
+
+    html += '<div class="mt-row" onclick="showSubDetail(\''+code+'\')">';
+    html += '<div><div class="mt-sub-code">'+code+'</div><div class="mt-sub-name">'+esc(sc.short)+'</div><div class="mt-domain">'+esc(sc.domain)+'</div></div>';
+    html += '<div class="mt-bar"><div class="mt-level-track"><div class="mt-level-fill" style="width:'+pct+'%;background:'+levelColor(lvl)+'"></div></div><div class="mt-level-num" style="color:'+levelColor(lvl)+'">'+lvl+'</div></div>';
+    html += '<div class="mt-cases">'+caseCnt+'</div>';
+    html += '<div class="mt-trend">'+trend+'</div>';
+    html += '<div class="mt-evidence">'+toolCnt+' tool'+(toolCnt!==1?'s':'')+'</div>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// ─── Tab: Case Library ───
+function renderCases(){
+  var html = '';
+
+  // Filters
+  html += '<div class="case-filters">';
+  html += '<input type="text" id="caseSearch" placeholder="Search cases..." oninput="filterCases()">';
+  html += '<select id="tierFilter" onchange="filterCases()"><option value="all">All Tiers</option><option value="1">Tier 1 — Foundational</option><option value="2">Tier 2 — Developing</option><option value="3">Tier 3 — Proficient</option><option value="4">Tier 4 — Independent</option><option value="5">Tier 5 — Expert</option></select>';
+  html += '<select id="catFilter" onchange="filterCases()"><option value="all">All Categories</option>';
+  MD.categories().forEach(function(c){ html += '<option value="'+esc(c)+'">'+esc(c)+'</option>'; });
+  html += '</select>';
+  html += '<select id="popFilter" onchange="filterCases()"><option value="all">All Patients</option><option value="adult">Adult Only</option><option value="peds">Pediatric Only</option></select>';
+  html += '</div>';
+
+  // Case list header
+  html += '<div style="display:grid;grid-template-columns:1fr 140px 80px 200px 60px;gap:12px;padding:8px 16px;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">';
+  html += '<span>Diagnosis</span><span>Category</span><span style="text-align:center">Tier</span><span>Milestones</span><span></span></div>';
+
+  html += '<div class="case-list" id="caseList">';
+  var names = window.PATIENT_NAMES || {};
+  var ids = Object.keys(MD.cases).sort(function(a,b){ return MD.cases[a].tier - MD.cases[b].tier || a.localeCompare(b); });
+  
+  ids.forEach(function(id){
+    var c = MD.cases[id];
+    var pn = names[id] || {};
+    var dx = id.replace(/-v\d+$/,'').replace(/-/g,' ').replace(/\b\w/g,function(l){return l.toUpperCase()});
+    
+    html += '<div class="case-row" data-id="'+id+'" data-tier="'+c.tier+'" data-cat="'+esc(c.category)+'" data-pop="'+c.pop+'">';
+    html += '<div><div class="case-dx">'+esc(pn.name||dx)+'</div><div class="case-patient">'+esc(dx)+(c.note?' · '+esc(c.note):'')+'</div></div>';
+    html += '<div class="case-category">'+esc(c.category)+'</div>';
+    html += '<div class="case-tier" style="color:'+MD.tiers[c.tier].color+'">T'+c.tier+'</div>';
+    html += '<div class="case-subs">'+c.sub.map(function(s){return '<span class="case-sub-tag">'+s+'</span>'}).join('')+'</div>';
+    html += '<div class="case-open"><a href="virtual-emr.html?case='+id+'&setting=ed" style="color:var(--blue)">Open →</a></div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+// ─── Tab: Coverage Map ───
+function renderCoverage(){
+  var html = '';
+  
+  html += '<h2 style="font-size:18px;font-weight:700;margin-bottom:6px">Category Coverage</h2>';
+  html += '<p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">Distribution of A/I cases by clinical category and complexity tier.</p>';
+  
+  html += '<div class="cat-grid">';
+  MD.categories().forEach(function(cat){
+    var cases = MD.byCategory(cat);
+    var tiers = {1:0,2:0,3:0,4:0,5:0};
+    cases.forEach(function(id){ tiers[MD.cases[id].tier]++; });
+    
+    html += '<div class="cat-card">';
+    html += '<div class="cat-name">'+esc(cat)+'</div>';
+    html += '<div class="cat-count">'+cases.length+' cases</div>';
+    html += '<div class="cat-tiers">';
+    for(var t=1;t<=5;t++){
+      for(var i=0;i<tiers[t];i++){
+        html += '<div class="cat-tier-dot" style="background:'+MD.tiers[t].color+'"></div>';
+      }
+    }
+    html += '</div></div>';
+  });
+  html += '</div>';
+
+  // Subcompetency coverage heatmap
+  html += '<h2 style="font-size:18px;font-weight:700;margin-bottom:6px;margin-top:20px">Subcompetency × Category Heatmap</h2>';
+  html += '<p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">Number of cases that assess each subcompetency, broken out by clinical category.</p>';
+  
+  html += '<div style="overflow-x:auto">';
+  html += '<table style="border-collapse:collapse;font-size:11px;width:100%">';
+  var cats = MD.categories();
+  html += '<tr><th style="padding:8px;text-align:left;font-weight:700;border-bottom:2px solid var(--border);position:sticky;left:0;background:var(--surface)">Sub</th>';
+  cats.forEach(function(c){ html += '<th style="padding:8px 6px;text-align:center;font-weight:600;border-bottom:2px solid var(--border);white-space:nowrap;font-size:9px;writing-mode:vertical-rl;height:100px">'+esc(c)+'</th>'; });
+  html += '<th style="padding:8px;text-align:center;font-weight:700;border-bottom:2px solid var(--border)">Total</th></tr>';
+  
+  var pcSubs = ['PC1','PC2','PC3','PC4','MK1','MK2','PBLI1','SBP1','SBP2','SBP3','SBP4','ICS1','ICS2','ICS3'];
+  pcSubs.forEach(function(code){
+    html += '<tr>';
+    html += '<td style="padding:6px 8px;font-family:var(--mono);font-weight:600;color:var(--blue);border-bottom:1px solid var(--border-light);position:sticky;left:0;background:var(--surface)">'+code+'</td>';
+    var total = 0;
+    cats.forEach(function(cat){
+      var cnt = 0;
+      MD.byCategory(cat).forEach(function(id){ if(MD.cases[id].sub.indexOf(code)>=0) cnt++; });
+      total += cnt;
+      var bg = cnt===0?'transparent':cnt<=2?'rgba(40,116,166,.08)':cnt<=4?'rgba(40,116,166,.18)':'rgba(40,116,166,.35)';
+      html += '<td style="padding:6px;text-align:center;border-bottom:1px solid var(--border-light);background:'+bg+';font-weight:'+(cnt>0?'600':'400')+';color:'+(cnt>0?'var(--text)':'var(--text-muted)')+'">'+cnt+'</td>';
+    });
+    html += '<td style="padding:6px;text-align:center;border-bottom:1px solid var(--border-light);font-weight:700;color:var(--blue)">'+total+'</td>';
+    html += '</tr>';
+  });
+  html += '</table></div>';
+
+  return html;
+}
+
+// ─── Tab Switching ───
+window.switchTab = function(tab){
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ if(b.textContent.toLowerCase().indexOf(tab)>=0 || (tab==='overview' && b.textContent==='Overview') || (tab==='milestones' && b.textContent==='Milestone Grid') || (tab==='cases' && b.textContent==='Case Library') || (tab==='coverage' && b.textContent==='Coverage Map')) b.classList.add('active'); });
+  render();
+};
+
+window.setFellow = function(i){ activeFellow = i; render(); };
+
+window.filterCases = function(){
+  var search = (document.getElementById('caseSearch').value||'').toLowerCase();
+  var tier = document.getElementById('tierFilter').value;
+  var cat = document.getElementById('catFilter').value;
+  var pop = document.getElementById('popFilter').value;
+  
+  document.querySelectorAll('.case-row').forEach(function(row){
+    var id = row.dataset.id;
+    var show = true;
+    if(tier!=='all' && row.dataset.tier !== tier) show = false;
+    if(cat!=='all' && row.dataset.cat !== cat) show = false;
+    if(pop!=='all' && row.dataset.pop !== pop) show = false;
+    if(search && row.textContent.toLowerCase().indexOf(search)<0) show = false;
+    row.style.display = show ? '' : 'none';
+  });
+};
+
+window.showSubDetail = function(code){
+  // For now, switch to cases tab filtered by this subcompetency
+  switchTab('cases');
+};
+
+function render(){
+  var html = '';
+  if(activeTab==='overview') html = renderOverview();
+  else if(activeTab==='milestones') html = renderMilestones();
+  else if(activeTab==='cases') html = renderCases();
+  else if(activeTab==='coverage') html = renderCoverage();
+  document.getElementById('content').innerHTML = html;
+}
+
+// ─── Init ───
+render();
+setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classList.add('hide');setTimeout(function(){l.remove()},300)}},400);
+})();
+</script>
+<script src="emr-data/patient-names.js"></script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-nav.js"></script>
+</body>
+</html>

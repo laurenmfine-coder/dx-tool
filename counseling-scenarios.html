@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<title>A/I Counseling Scenarios | ReasonDx</title>
+<meta name="description" content="Practice patient counseling for anaphylaxis action plans, immunotherapy consent, immunodeficiency diagnosis, and evidence-based communication.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F0F2F5;--sf:#fff;--sf2:#F8FAFC;--bd:#E2E8F0;--bdl:#F1F5F9;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--blb:#EBF5FB;--gn:#059669;--gnb:#ECFDF5;--am:#D97706;--amb:#FFFBEB;--rd:#DC2626;--rdb:#FEF2F2;--pk:#EC4899;--ft:'IBM Plex Sans',-apple-system,sans-serif;--mn:'IBM Plex Mono',monospace}
+body{background:var(--bg);color:var(--tx);font-family:var(--ft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer}
+.page{max-width:900px;margin:0 auto;padding:24px 20px 80px}
+.bc{font-size:12px;color:var(--tm);margin-bottom:12px}.bc a{color:var(--bl);font-weight:600}
+.ph{margin-bottom:28px}.ph h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px;display:flex;align-items:center;gap:10px}.ph p{font-size:14px;color:var(--ts);line-height:1.6}
+.badge{display:inline-flex;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:6px;background:rgba(236,72,153,.08);color:var(--pk)}
+
+/* Scenario selector */
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
+.sc-card{background:var(--sf);border:2px solid var(--bd);border-radius:12px;padding:18px;cursor:pointer;transition:all .2s}
+.sc-card:hover{border-color:var(--bl);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.sc-card.on{border-color:var(--bl);background:var(--blb)}
+.sc-card .ico{font-size:24px;margin-bottom:6px}.sc-card .tt{font-size:14px;font-weight:700;margin-bottom:2px}.sc-card .ds{font-size:11px;color:var(--ts);line-height:1.4}
+.sc-card .tg{margin-top:6px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--pk)}
+
+/* Conversation */
+.conv{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden}
+.conv-h{padding:16px 24px;border-bottom:1px solid var(--bd);background:var(--sf2);display:flex;align-items:center;justify-content:space-between}
+.conv-h h2{font-size:16px;font-weight:700}
+.conv-b{padding:24px}
+
+.ptb{display:flex;gap:16px;padding:16px;background:var(--sf2);border:1px solid var(--bd);border-radius:10px;margin-bottom:20px;align-items:center}
+.pta{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0}
+.ptn{font-size:15px;font-weight:700}.ptd{font-size:12px;color:var(--ts);line-height:1.6}
+
+/* Chat bubbles */
+.chat{max-height:400px;overflow-y:auto;margin-bottom:16px;padding:4px}
+.msg{margin-bottom:12px;display:flex;gap:10px}
+.msg-pt{flex-direction:row}
+.msg-fellow{flex-direction:row-reverse}
+.msg-avatar{width:32px;height:32px;border-radius:50%;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg-pt .msg-avatar{background:var(--rdb);color:var(--rd)}
+.msg-fellow .msg-avatar{background:var(--blb);color:var(--bl)}
+.msg-bubble{max-width:75%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6}
+.msg-pt .msg-bubble{background:var(--sf2);border:1px solid var(--bd);border-bottom-left-radius:4px}
+.msg-fellow .msg-bubble{background:var(--blb);border:1px solid rgba(40,116,166,.12);border-bottom-right-radius:4px}
+.msg-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.msg-pt .msg-label{color:var(--rd)}.msg-fellow .msg-label{color:var(--bl)}
+
+/* Response options */
+.resp-opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.resp-opt{padding:10px 14px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;cursor:pointer;font-size:12px;line-height:1.5;transition:all .15s;text-align:left}
+.resp-opt:hover{border-color:var(--bl);background:var(--blb)}
+.resp-opt.chosen{border-color:var(--bl);background:var(--blb)}
+.resp-opt.correct{border-color:var(--gn);background:var(--gnb)}
+.resp-opt.incorrect{border-color:var(--rd);background:var(--rdb);opacity:.6}
+.resp-label{font-size:9px;font-weight:700;margin-top:4px}
+.resp-label.good{color:var(--gn)}.resp-label.ok{color:var(--am)}.resp-label.poor{color:var(--rd)}
+
+/* Score */
+.score-panel{background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:20px;margin-top:16px}
+.score-panel h3{font-size:15px;font-weight:800;margin-bottom:12px}
+.score-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bdl);font-size:13px}
+.score-row:last-child{border-bottom:none}
+.sc-fb{margin-top:12px;padding:12px;background:var(--blb);border-radius:8px;font-size:12px;color:var(--ts);line-height:1.7}
+.sc-fb strong{color:var(--tx)}
+
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:13px;font-weight:700;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.bp{background:var(--bl);color:#fff}.bp:hover{background:#1B4F72}
+.bo{background:var(--sf);color:var(--ts);border:1px solid var(--bd)}.bo:hover{border-color:var(--bl);color:var(--bl)}
+
+@media(max-width:640px){.sg{grid-template-columns:1fr}.msg-bubble{max-width:85%}}
+</style>
+<script src="auth/auth-guard.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Counseling Scenarios...</div></div>
+
+<div class="page">
+<div class="bc"><a href="index.html">ReasonDx</a> → <a href="milestone-tracker.html">Milestones</a> → Counseling</div>
+<div class="ph"><h1>Patient Counseling Scenarios <span class="badge">ICS1 · Patient Communication</span></h1><p>Practice the challenging conversations A/I fellows face: action plans, informed consent, new diagnoses, and navigating disagreements. Each scenario assesses empathy, clarity, shared decision-making, and evidence-based communication.</p></div>
+
+<div class="sg" id="scenarioGrid"></div>
+<div id="out"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+
+var SCENARIOS = [
+  {
+    id:'anaphylaxis-plan', icon:'💉', title:'Anaphylaxis Action Plan',
+    tag:'Empathy · Teach-Back · Cultural Sensitivity',
+    desc:'Explain EpiPen use to an anxious parent. Address needle phobia and ensure understanding.',
+    patient:{name:'Maria Santos',age:'Mother of Amira (8F)',avatar:'M',avatarBg:'#FECDD3',avatarColor:'#DC2626',
+      context:'Amira was just diagnosed with peanut allergy after her first anaphylactic reaction. Maria is visibly anxious and mentions that in her culture, carrying medication implies the child is "sick." She also expresses fear of needles.'},
+    exchanges:[
+      {
+        speaker:'patient', text:'Doctor, I understand she has this allergy, but... do we really need to carry that needle everywhere? She\'s so young. And honestly, I\'m terrified of needles myself. What if I freeze and can\'t use it?',
+        options:[
+          {text:'I understand your concern about the needle — many parents feel the same way. Let me show you exactly what the EpiPen looks like. It\'s designed so you actually never see the needle. Can I walk you through it step by step?', quality:'best', feedback:'Validates emotion, normalizes the fear, addresses the specific concern (visibility of needle), and offers concrete demonstration.'},
+          {text:'You need to carry it. Anaphylaxis can be fatal within minutes. If you don\'t use the EpiPen, your daughter could die.', quality:'poor', feedback:'While factually true, this is fear-based communication that increases anxiety rather than building confidence. Does not address the parent\'s specific barriers.'},
+          {text:'The EpiPen is very important for Amira\'s safety. I\'ll prescribe it and you can watch some videos online about how to use it.', quality:'partial', feedback:'Prescribes correctly but misses the opportunity to address the specific fear and cultural concern. Delegating education to YouTube is insufficient.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'Okay... but in our family, carrying medicine means the child is sick. My mother-in-law will say I\'m making Amira feel different from other kids. How do I explain this?',
+        options:[
+          {text:'I hear you — that cultural perspective is really important, and you\'re right to think about how this affects Amira and your family. Would it help to think of the EpiPen like a seatbelt? No one thinks a child is "sick" for wearing a seatbelt — it\'s just being prepared. And many kids with food allergies carry EpiPens. She\'s not alone in this.', quality:'best', feedback:'Acknowledges the cultural concern without dismissing it, reframes the medication as a safety tool (not illness), and normalizes the experience.'},
+          {text:'Your mother-in-law needs to understand that this is a medical necessity. The allergy is real and dangerous regardless of cultural beliefs.', quality:'poor', feedback:'Dismisses cultural values and creates conflict rather than alliance. Does not help the parent navigate the family dynamic.'},
+          {text:'I understand family opinions can be difficult. The most important thing is Amira\'s safety.', quality:'partial', feedback:'Acknowledges the difficulty but doesn\'t offer a practical reframe or tools to navigate the family conversation.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'Alright, I\'m willing to try. But can you show me how to use it? I want to make sure I won\'t mess it up when I\'m panicking.',
+        options:[
+          {text:'Absolutely — let\'s practice together right now with a trainer device. I want you to feel completely confident. The steps are: blue to the sky, orange to the thigh, hold for 10 seconds. Let\'s do it three times until it feels automatic. Then I\'d like you to teach it back to me, so we both know you\'ve got it.', quality:'best', feedback:'Provides hands-on practice, uses the standard mnemonic, employs teach-back method (gold standard for health literacy), and builds the parent\'s confidence.'},
+          {text:'Sure, here\'s a trainer. Just pull off the blue cap and push it into her thigh. It\'s pretty simple.', quality:'partial', feedback:'Demonstrates but doesn\'t use teach-back, doesn\'t address the "panicking" concern, and minimizes the parent\'s anxiety by calling it "simple."'},
+          {text:'I\'ll give you a handout with instructions and a link to a training video. Practice at home when you\'re calm.', quality:'poor', feedback:'No hands-on practice, no teach-back, and delays skill acquisition. Parent leaves without confidence.'}
+        ]
+      }
+    ],
+    scoring:{empathy:'Acknowledged parental anxiety and needle phobia?',clarity:'Used clear language (blue to sky, orange to thigh)?',sharedDecision:'Incorporated cultural concerns into the plan?',teachBack:'Used teach-back method to confirm understanding?'},
+    teaching:'Anaphylaxis action plan counseling: (1) Validate emotions first — anxiety is expected and normal. (2) Address specific barriers (needle phobia, cultural concerns) directly and respectfully. (3) Reframe the EpiPen as safety equipment, not illness marker. (4) Hands-on practice with trainer is essential — verbal instruction alone is insufficient. (5) Teach-back method: have the parent demonstrate back to you. This is the gold standard for confirming understanding and is required by many health literacy guidelines. (6) Written action plan goes home, but the conversation and practice are what save lives.'
+  },
+  {
+    id:'immunotherapy-consent', icon:'💬', title:'Immunotherapy Informed Consent',
+    tag:'Shared Decision-Making · Risk Disclosure · Adherence',
+    desc:'Explain SCIT vs SLIT options. Patient wants to weigh risks, benefits, and lifestyle fit.',
+    patient:{name:'Derek Patel',age:'32M',avatar:'D',avatarBg:'#DBEAFE',avatarColor:'#2563EB',
+      context:'Derek has severe allergic rhinitis uncontrolled on pharmacotherapy. Skin testing confirmed dust mite, cat, tree, grass, and ragweed sensitization. He\'s interested in immunotherapy but works long hours and travels frequently for business.'},
+    exchanges:[
+      {
+        speaker:'patient', text:'So the allergy pills aren\'t working well enough. You mentioned immunotherapy — what are my options? I need something that works but I travel a lot for work.',
+        options:[
+          {text:'There are two main approaches: allergy shots (subcutaneous immunotherapy, SCIT) and sublingual tablets or drops (SLIT). Shots are given in-office weekly during buildup, then monthly for 3-5 years — very effective, but require office visits. Sublingual is a daily tablet you take at home after the first dose is supervised here. Given your travel schedule, let me walk you through the pros and cons of each so we can figure out what fits your life.', quality:'best', feedback:'Presents both options clearly, acknowledges the lifestyle constraint upfront, and sets up shared decision-making.'},
+          {text:'Allergy shots are the gold standard. You\'d come in weekly at first, then monthly. It\'s a 3-5 year commitment but it really works. Let\'s get you started.', quality:'poor', feedback:'Only presents one option, doesn\'t consider patient preferences or lifestyle, and decides for the patient.'},
+          {text:'You have options — shots or tablets. Shots are more proven but tablets are more convenient. What sounds better to you?', quality:'partial', feedback:'Offers choice but without sufficient information for informed decision-making. Patient needs more detail to choose.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'What are the risks? I\'ve heard allergy shots can cause bad reactions. And how effective are they really — like, will my symptoms actually go away?',
+        options:[
+          {text:'Great questions. For shots: the main risk is an allergic reaction at the injection site (very common, usually just local swelling) or a systemic reaction (about 1-2% of injections). Anaphylaxis is rare — about 1 in a million injections — and that\'s why we observe you for 30 minutes after each shot. For effectiveness: about 85% of patients see significant improvement, and many can reduce or stop their allergy medications. The benefit often persists years after stopping. For sublingual: the systemic reaction risk is lower, but local side effects (mouth itching, throat irritation) are very common in the first few weeks. Effectiveness is similar for the specific allergens available as tablets. Want me to go through the numbers for your specific allergens?', quality:'best', feedback:'Provides specific risk numbers, distinguishes local from systemic reactions, explains the observation requirement, gives effectiveness data, and offers to personalize further.'},
+          {text:'There\'s a small risk of allergic reactions but we monitor you closely. The shots are very effective — most patients do really well.', quality:'partial', feedback:'Vague risk disclosure. Patients deserve specific numbers to make informed decisions. "Very effective" and "really well" are not quantifiable.'},
+          {text:'The main risk is anaphylaxis, which can be life-threatening. But it\'s very rare and we have epinephrine available.', quality:'poor', feedback:'Leads with the worst-case scenario without context or frequency, which increases anxiety without informing the decision.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'If I go with the tablets, can I take them while traveling? And what happens if I miss a few days on a trip?',
+        options:[
+          {text:'Yes, that\'s one of the biggest advantages of sublingual — you take it daily wherever you are, no office visit needed. If you miss a day or two, you just resume. If you miss more than about a week, we may need to have you restart at a lower dose or come back for a supervised dose, depending on the specific product. For your allergen profile, dust mite sublingual tablets are available and well-studied. We don\'t have sublingual tablets for all your allergens yet, so we\'d want to discuss whether treating the dust mite component alone gives you enough relief, or whether shots covering everything might be worth the office visit trade-off.', quality:'best', feedback:'Addresses the specific question, explains the missed-dose protocol, and brings up the important limitation (not all allergens available sublingually), setting up a genuine shared decision.'},
+          {text:'You can take them anywhere. Missing a day is fine, just don\'t miss too many in a row.', quality:'partial', feedback:'Correct but incomplete. Doesn\'t address the allergen coverage limitation, which is critical for this patient.'},
+          {text:'I\'d recommend shots over tablets for you since you have multiple allergens. Tablets only cover one or two allergens.', quality:'poor', feedback:'Makes the decision for the patient rather than presenting the trade-off. The patient should weigh convenience vs. coverage.'}
+        ]
+      }
+    ],
+    scoring:{empathy:'Acknowledged lifestyle constraints?',clarity:'Provided specific risk numbers and effectiveness data?',sharedDecision:'Presented options and let patient participate in the decision?',teachBack:'Checked understanding of the chosen treatment plan?'},
+    teaching:'Immunotherapy informed consent: (1) Present ALL options (SCIT and SLIT) with honest pros/cons. (2) Quantify risks: systemic reactions ~1-2% of SCIT injections, anaphylaxis ~1 in a million. (3) Quantify benefits: ~85% significant improvement, medication reduction, disease modification. (4) Address lifestyle fit — adherence depends on matching treatment to patient\'s life. (5) For SLIT: note allergen limitations (FDA-approved tablets for grass, ragweed, dust mite, not all allergens). (6) Shared decision-making means the patient weighs the trade-offs with your guidance, not that you choose for them.'
+  },
+  {
+    id:'cvid-diagnosis', icon:'🩺', title:'Delivering Immunodeficiency Diagnosis',
+    tag:'Compassion · Health Literacy · Prognosis',
+    desc:'Explain CVID to a newly diagnosed patient. Lifelong IVIG, infection prevention, monitoring.',
+    patient:{name:'Marcus Okafor',age:'28M',avatar:'M',avatarBg:'#E0E7FF',avatarColor:'#4F46E5',
+      context:'Marcus was just diagnosed with CVID after workup for recurrent sinopulmonary infections. He\'s a graduate student, otherwise healthy-appearing. His immunoglobulin levels are severely low. He has no prior knowledge of immunodeficiency and looks worried.'},
+    exchanges:[
+      {
+        speaker:'patient', text:'So the blood tests came back... you said something about my immune system? I don\'t really understand. Am I going to be okay?',
+        options:[
+          {text:'I know this is a lot to take in, and I want you to know — yes, this is very treatable, and people with this condition live full, active lives. Let me explain what we found. Your blood tests show that your body isn\'t making enough of the proteins — called immunoglobulins — that fight off infections. That\'s why you\'ve been getting so many sinus and lung infections. The condition is called Common Variable Immunodeficiency, or CVID. The good news is we can replace those proteins through an infusion, and once we do, you should see a big improvement in how often you get sick.', quality:'best', feedback:'Opens with reassurance, uses plain language, explains the mechanism simply, names the condition, and immediately pivots to the treatment and hope.'},
+          {text:'Your immunoglobulin levels — IgG, IgA, and IgM — are significantly below normal. This is consistent with CVID. You\'ll need immunoglobulin replacement therapy, likely IVIG or SCIG. We should also check for granulomatous disease and autoimmune cytopenias.', quality:'poor', feedback:'Technically accurate but uses medical jargon without explanation, doesn\'t address the patient\'s emotional state, and doesn\'t answer "am I going to be okay?"'},
+          {text:'You have an immune deficiency. It\'s not as bad as it sounds — many people have it and do fine with treatment.', quality:'partial', feedback:'Reassuring but vague. Doesn\'t explain what the condition actually is or what treatment involves.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'An infusion? Like... at a hospital? How often? I\'m in the middle of my PhD — I can\'t be missing school all the time.',
+        options:[
+          {text:'I hear you — your PhD is important and we\'re going to make this work with your schedule. There are actually two options. The first is an IV infusion, usually once every 3-4 weeks, which takes about 3-4 hours. Many patients do it at an infusion center, but some infusion centers have evening or weekend hours. The second option is something you can do yourself at home — a subcutaneous infusion, once a week, that takes about an hour. Many of my patients who are students or have busy work schedules prefer the home option because it\'s on their time. Which sounds like it might work better for you?', quality:'best', feedback:'Validates the concern, presents both IVIG and SCIG, highlights the home option proactively given his schedule, and asks for his preference.'},
+          {text:'Yes, at an infusion center. It\'s monthly, about 3-4 hours each time. You\'ll need to work it into your schedule — it\'s lifelong treatment.', quality:'partial', feedback:'Only presents one option. The "lifelong" framing without cushioning is anxiety-provoking. Doesn\'t explore the home option.'},
+          {text:'Don\'t worry about the logistics right now. Let\'s get you started on treatment and we can figure out the details.', quality:'poor', feedback:'Dismisses a valid practical concern. Patients need to understand the treatment logistics to prepare and commit.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'Wait — you said lifelong? This doesn\'t go away? I thought maybe once my immune system gets a boost, it would recover...',
+        options:[
+          {text:'I know that\'s hard to hear. You\'re right that it\'s something you\'ll manage long-term — CVID doesn\'t go away on its own. But I want to be really clear about what "managing" looks like: for most of my patients, once they\'re on regular infusions, they feel better than they have in years. They stop getting those constant infections. They have energy again. It becomes a routine part of life, like any other health maintenance. And we\'ll be monitoring you regularly — I\'ll be your partner in this for the long haul.', quality:'best', feedback:'Honest about the prognosis, reframes "lifelong" as "manageable routine," shares positive outcomes from other patients, and commits to ongoing partnership.'},
+          {text:'Unfortunately, no — CVID is a lifelong condition. Your body can\'t produce immunoglobulins and that won\'t change. But the infusions replace what you\'re missing.', quality:'partial', feedback:'Honest but delivered without emotional softening. "Unfortunately, no" is blunt. Misses the opportunity to normalize and reframe.'},
+          {text:'Let\'s take it one step at a time. We don\'t know for sure what the long-term course will be for you specifically.', quality:'poor', feedback:'Avoids honesty to reduce discomfort. CVID IS lifelong — being evasive undermines trust when the patient eventually learns this.'}
+        ]
+      }
+    ],
+    scoring:{empathy:'Addressed emotional impact of new diagnosis?',clarity:'Explained CVID in plain language?',sharedDecision:'Offered IVIG vs SCIG choice?',teachBack:'Checked patient\'s understanding of condition and treatment?'},
+    teaching:'Delivering a new immunodeficiency diagnosis: (1) Lead with reassurance — "this is treatable" — before the medical explanation. (2) Use plain language: "proteins that fight infection" not "immunoglobulins." (3) Address "am I going to be okay?" directly and honestly. (4) Present treatment options (IVIG vs SCIG) with lifestyle integration in mind. (5) Be honest about lifelong nature but reframe as manageable routine, not burden. (6) Commit to partnership — "I\'ll be your partner in this." (7) Allow processing time — don\'t try to cover everything in one visit. Schedule follow-up.'
+  },
+  {
+    id:'igg-disagreement', icon:'🤝', title:'Navigating Disagreement',
+    tag:'Evidence · Rapport · Redirection',
+    desc:'Parent insists on IgG food sensitivity testing. Maintain rapport while redirecting to evidence.',
+    patient:{name:'Karen Lindquist',age:'Mother of Emma (6F)',avatar:'K',avatarBg:'#FEF3C7',avatarColor:'#D97706',
+      context:'Karen brings Emma for evaluation of "food sensitivities." Emma has no history of anaphylaxis, urticaria, or clear IgE-mediated reactions. Karen has a report from a naturopathic practice showing IgG levels to 96 foods — many flagged as "reactive." She has already eliminated 15 foods from Emma\'s diet based on these results and wants you to confirm the findings.'},
+    exchanges:[
+      {
+        speaker:'patient', text:'Thank you for seeing us. Emma\'s naturopath ran this IgG food panel and it showed she\'s reactive to dairy, wheat, eggs, soy, corn, and about 10 other foods. We\'ve eliminated all of them and I think she\'s doing a little better. Can you help us figure out which ones to reintroduce first?',
+        options:[
+          {text:'Thank you for bringing Emma in and for sharing this report — I can see you\'re really committed to figuring out what\'s best for her. I want to be completely honest with you about these IgG food tests, because I think you deserve to have the full picture before we make any more dietary changes for Emma. Can I walk you through what the science actually says about this type of testing?', quality:'best', feedback:'Validates the parent\'s motivation, signals honesty rather than dismissal, and asks permission to educate — preserving autonomy and rapport.'},
+          {text:'IgG food testing is not evidence-based and is not recommended by any allergy organization. These results don\'t mean Emma is allergic to these foods. You should stop the elimination diet.', quality:'poor', feedback:'Factually correct but delivered as a lecture. Dismisses the parent\'s experience and the investment she\'s already made. Damages rapport.'},
+          {text:'Let me take a look at this report. Hmm, some of these levels do seem elevated. Let me order some real allergy tests to compare.', quality:'poor', feedback:'Validates the IgG test by engaging with its results. Ordering "real tests" implies the IgG test was a "test" worth comparing against. This is medically inappropriate.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'Well... she\'s been less gassy since we cut out dairy. Are you saying those tests were wrong? We spent $400 on that panel.',
+        options:[
+          {text:'I understand the frustration — $400 is a real investment and you did it because you wanted answers for Emma. Here\'s what the science tells us: IgG antibodies to food are actually a normal immune response. Everyone who eats dairy makes IgG to dairy proteins. A high IgG level to a food means you\'ve been exposed to it, not that you\'re allergic or sensitive to it. It\'s like saying your fingerprints were found at your own house — of course they were. The fact that Emma felt better off dairy could be a coincidence, a placebo effect, or it could be that she has something specific like lactose intolerance — which we can actually test for with a proper evaluation. Would you be open to working together to figure out what\'s really going on?', quality:'best', feedback:'Acknowledges the financial and emotional investment, uses a relatable analogy (fingerprints at your own house), explains the science clearly, offers an alternative explanation for the improvement, and proposes a constructive path forward.'},
+          {text:'The improvement with dairy might be real — she could have lactose intolerance, which is common. But the IgG test wasn\'t the right test to find that.', quality:'partial', feedback:'Acknowledges the symptom improvement and offers an alternative, but doesn\'t fully explain WHY the IgG test is invalid. Parent may still trust the other IgG results.'},
+          {text:'I\'m sorry, but those tests have been debunked by every major allergy organization. The AAAAI, EAACI, and CSACI all recommend against IgG food testing. I wouldn\'t use those results for any clinical decisions.', quality:'poor', feedback:'Cites authorities correctly but comes across as lecturing. "Debunked" is dismissive language. Doesn\'t address the parent\'s emotional investment or the dairy improvement.'}
+        ]
+      },
+      {
+        speaker:'patient', text:'Okay, I think I understand about the IgG test. But I\'m worried — we\'ve had Emma off all these foods for 3 months now. Is that a problem? And what should we actually do to figure out what\'s going on with her stomach?',
+        options:[
+          {text:'That\'s a really important question and I\'m glad you\'re asking. At Emma\'s age, she\'s still growing, and eliminating 15 foods including dairy, eggs, and wheat means she\'s missing significant sources of calcium, protein, and other nutrients. I\'d like to work with you on a plan to reintroduce these foods safely — starting with the ones she\'s least worried about and adding them back one at a time over a few weeks. For her GI symptoms, let\'s do a proper evaluation: we\'ll check for lactose intolerance, celiac disease, and I\'d like to do a focused food allergy workup with skin testing or specific IgE to the foods where you\'ve noticed actual symptoms. That way we\'re testing based on Emma\'s real history, not a panel. Does that plan sound reasonable?', quality:'best', feedback:'Addresses nutritional concern without alarming, proposes structured reintroduction, offers evidence-based evaluation, and checks for agreement.'},
+          {text:'Three months of unnecessary restriction in a 6-year-old is concerning. You need to reintroduce everything and see a pediatric gastroenterologist.', quality:'poor', feedback:'Creates guilt ("unnecessary restriction") and doesn\'t offer a collaborative plan. Refers out without working through the problem.'},
+          {text:'We can start adding foods back. I\'ll order some blood work to check for real allergies.', quality:'partial', feedback:'Right direction but too vague. Doesn\'t address the nutritional urgency, the reintroduction strategy, or what specific tests will be done and why.'}
+        ]
+      }
+    ],
+    scoring:{empathy:'Validated parent\'s motivation without validating the IgG test?',clarity:'Explained why IgG testing is not valid in plain language?',sharedDecision:'Proposed a collaborative evidence-based plan?',teachBack:'Parent understood the difference between IgG and true allergy testing?'},
+    teaching:'Navigating IgG food panel disagreement: (1) NEVER dismiss the parent — they spent money and emotional energy trying to help their child. (2) Ask permission to share the science. (3) Explain IgG = normal exposure response, NOT allergy. The fingerprint analogy works well. (4) Acknowledge any real symptom improvement and offer evidence-based alternatives (lactose intolerance, celiac). (5) Address nutritional harm of unnecessary elimination, especially in growing children. (6) Propose evidence-based testing (skin prick, specific IgE) guided by actual symptom history. (7) Position statements: AAAAI, EAACI, and CSACI all recommend against IgG food panels for diagnosing food allergy or intolerance.'
+  }
+];
+
+var scIdx=0, exchIdx=0, choices=[], phase='play'; // play → score
+
+function render(){
+  // Scenario grid
+  var gh='';
+  SCENARIOS.forEach(function(s,i){
+    gh+='<div class="sc-card'+(i===scIdx?' on':'')+'" onclick="pickSc('+i+')">';
+    gh+='<div class="ico">'+s.icon+'</div><div class="tt">'+e(s.title)+'</div><div class="ds">'+e(s.desc)+'</div>';
+    gh+='<div class="tg">'+e(s.tag)+'</div></div>';
+  });
+  document.getElementById('scenarioGrid').innerHTML=gh;
+
+  var sc=SCENARIOS[scIdx];
+  var h='<div class="conv"><div class="conv-h"><h2>'+e(sc.title)+'</h2></div><div class="conv-b">';
+
+  // Patient banner
+  h+='<div class="ptb"><div class="pta" style="background:'+sc.patient.avatarBg+';color:'+sc.patient.avatarColor+'">'+e(sc.patient.avatar)+'</div><div><div class="ptn">'+e(sc.patient.name)+' ('+e(sc.patient.age)+')</div><div class="ptd">'+e(sc.patient.context)+'</div></div></div>';
+
+  if(phase==='play'){
+    h+='<div class="chat" id="chatArea">';
+    // Show past exchanges
+    for(var i=0;i<=Math.min(exchIdx,sc.exchanges.length-1);i++){
+      var ex=sc.exchanges[i];
+      h+='<div class="msg msg-pt"><div class="msg-avatar" style="background:'+sc.patient.avatarBg+';color:'+sc.patient.avatarColor+'">'+e(sc.patient.avatar)+'</div><div class="msg-bubble"><div class="msg-label">Patient</div>'+e(ex.text)+'</div></div>';
+
+      if(i<exchIdx && choices[i]!==undefined){
+        var opt=ex.options[choices[i]];
+        h+='<div class="msg msg-fellow"><div class="msg-avatar">You</div><div class="msg-bubble"><div class="msg-label">Fellow</div>'+e(opt.text)+'</div></div>';
+      }
+    }
+
+    // Show current options
+    if(exchIdx<sc.exchanges.length && choices[exchIdx]===undefined){
+      var ex=sc.exchanges[exchIdx];
+      h+='<div class="resp-opts">';
+      ex.options.forEach(function(opt,oi){
+        h+='<button class="resp-opt" onclick="chooseResp('+oi+')">'+e(opt.text)+'</button>';
+      });
+      h+='</div>';
+    }
+    h+='</div>';
+
+    if(exchIdx>=sc.exchanges.length){
+      h+='<div style="margin-top:12px"><button class="btn bp" onclick="showScore()">View Assessment</button></div>';
+    }
+  } else {
+    // Score
+    var total=0,max=sc.exchanges.length*2;
+    choices.forEach(function(ci,i){
+      var q=sc.exchanges[i].options[ci].quality;
+      if(q==='best') total+=2; else if(q==='partial') total+=1;
+    });
+    var pct=Math.round((total/max)*100);
+    h+='<div class="score-panel"><h3>📊 Counseling Assessment — '+pct+'%</h3>';
+    sc.exchanges.forEach(function(ex,i){
+      var ci=choices[i]; if(ci===undefined) return;
+      var opt=ex.options[ci];
+      var cls=opt.quality==='best'?'good':opt.quality==='partial'?'ok':'poor';
+      var lbl=opt.quality==='best'?'Excellent':opt.quality==='partial'?'Adequate':'Needs Improvement';
+      h+='<div style="padding:10px 0;border-bottom:1px solid var(--bdl)">';
+      h+='<div style="font-size:11px;font-weight:600;color:var(--tm)">Exchange '+(i+1)+'</div>';
+      h+='<div style="font-size:12px;margin-top:2px">'+e(opt.text.substring(0,80))+'...</div>';
+      h+='<div class="resp-label '+cls+'">'+lbl+': '+e(opt.feedback)+'</div>';
+      h+='</div>';
+    });
+    var sk=sc.scoring;
+    h+='<div style="margin-top:12px;font-size:12px;color:var(--ts);line-height:1.7"><strong>Assessment Criteria:</strong><br>';
+    for(var k in sk) h+='• <strong>'+e(k.charAt(0).toUpperCase()+k.slice(1))+':</strong> '+e(sk[k])+'<br>';
+    h+='</div>';
+    h+='<div class="sc-fb"><strong>Teaching:</strong> '+e(sc.teaching)+'</div></div>';
+    h+='<div style="margin-top:16px;display:flex;gap:8px"><button class="btn bp" onclick="resetSc()">Try Again</button>';
+    if(scIdx<SCENARIOS.length-1) h+='<button class="btn bo" onclick="pickSc('+(scIdx+1)+')">Next Scenario</button>';
+    h+='</div>';
+  }
+
+  h+='</div></div>';
+  document.getElementById('out').innerHTML=h;
+  var chat=document.getElementById('chatArea');
+  if(chat) chat.scrollTop=chat.scrollHeight;
+}
+
+window.pickSc=function(i){scIdx=i;exchIdx=0;choices=[];phase='play';render()};
+window.chooseResp=function(oi){
+  choices[exchIdx]=oi;exchIdx++;
+  if(exchIdx>=SCENARIOS[scIdx].exchanges.length){
+    // Auto-show score button
+  }
+  render();
+};
+window.showScore=function(){phase='score';render()};
+window.resetSc=function(){exchIdx=0;choices=[];phase='play';render()};
+
+render();
+setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classList.add('hide');setTimeout(function(){l.remove()},300)}},400);
+})();
+</script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-nav.js"></script>
+</body>
+</html>

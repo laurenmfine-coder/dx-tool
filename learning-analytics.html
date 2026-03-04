@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<meta name="description" content="Cross-tool learning analytics — activity heatmap, reasoning patterns, accuracy trends, and personalized recommendations.">
+<meta property="og:title" content="Learning Analytics | ReasonDx">
+<title>Learning Analytics | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F0F2F5;--sf:#fff;--sf2:#F8FAFC;--bd:#E2E8F0;--bdl:#F1F5F9;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--blb:#EBF5FB;--gn:#059669;--gnb:#ECFDF5;--am:#D97706;--amb:#FFFBEB;--rd:#DC2626;--rdb:#FEF2F2;--pp:#7C3AED;--ppb:#F5F3FF;--pk:#EC4899;--ft:'IBM Plex Sans',-apple-system,sans-serif;--mn:'IBM Plex Mono',monospace}
+body{background:var(--bg);color:var(--tx);font-family:var(--ft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer}
+.page{max-width:1100px;margin:0 auto;padding:24px 20px 80px}
+.bc{font-size:12px;color:var(--tm);margin-bottom:12px}.bc a{color:var(--bl);font-weight:600}
+.ph{margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px}
+.ph h1{font-size:28px;font-weight:800;letter-spacing:-.5px}.ph p{font-size:14px;color:var(--ts)}
+.ph-actions{display:flex;gap:8px}
+
+/* Tabs */
+.tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--bd);padding-bottom:0}
+.tab{padding:10px 18px;font-size:13px;font-weight:600;color:var(--ts);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tab:hover{color:var(--tx)}.tab.on{color:var(--bl);border-bottom-color:var(--bl)}
+
+/* Stat cards */
+.stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1}.stat-label{font-size:10px;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;margin-top:4px}
+.stat-delta{font-size:10px;font-weight:700;margin-top:2px}
+.stat-delta.up{color:var(--gn)}.stat-delta.down{color:var(--rd)}.stat-delta.flat{color:var(--tm)}
+
+/* Cards */
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.card-h{padding:14px 20px;border-bottom:1px solid var(--bd);background:var(--sf2);display:flex;align-items:center;justify-content:space-between}
+.card-h h2{font-size:15px;font-weight:700}.card-b{padding:20px}
+
+/* Heatmap */
+.heatmap{display:grid;gap:2px}
+.hm-row{display:flex;gap:2px;align-items:center}
+.hm-label{width:80px;font-size:10px;font-weight:600;color:var(--ts);text-align:right;padding-right:6px;flex-shrink:0}
+.hm-cell{width:14px;height:14px;border-radius:3px;transition:all .15s;cursor:default}
+.hm-cell:hover{transform:scale(1.3);z-index:1}
+.hm-legend{display:flex;align-items:center;gap:4px;margin-top:8px;justify-content:flex-end;font-size:10px;color:var(--tm)}
+.hm-legend-cell{width:12px;height:12px;border-radius:2px}
+
+/* Chart area (simple CSS charts) */
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:140px;padding-top:10px}
+.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px}
+.bar{width:100%;border-radius:4px 4px 0 0;transition:height .4s ease;min-height:2px}
+.bar-label{font-size:9px;font-weight:600;color:var(--tm);writing-mode:vertical-lr;transform:rotate(180deg);max-height:60px;overflow:hidden}
+.bar-val{font-family:var(--mn);font-size:10px;font-weight:700;color:var(--ts)}
+
+/* Radar / RPFS */
+.rpfs-container{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.rpfs-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;min-width:280px}
+.rpfs-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--sf2);border-radius:8px;border:1px solid var(--bdl)}
+.rpfs-item-label{font-size:11px;font-weight:600;color:var(--ts);min-width:100px}
+.rpfs-bar{flex:1;height:8px;background:var(--bdl);border-radius:4px;overflow:hidden}
+.rpfs-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.rpfs-val{font-family:var(--mn);font-size:11px;font-weight:700;min-width:30px;text-align:right}
+
+/* Weakness cards */
+.weak-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.weak-card{padding:14px;background:var(--sf2);border:1px solid var(--bd);border-radius:10px}
+.weak-cat{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.weak-pct{font-family:var(--mn);font-size:22px;font-weight:800;margin-bottom:4px}
+.weak-rec{font-size:11px;color:var(--ts);line-height:1.5}
+.weak-link{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--bl);margin-top:6px;cursor:pointer}
+
+/* Trend line (CSS only) */
+.trend-row{display:flex;gap:16px;margin-bottom:16px}
+.trend-card{flex:1;padding:16px;background:var(--sf2);border:1px solid var(--bdl);border-radius:10px}
+.trend-title{font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.trend-bars{display:flex;align-items:flex-end;gap:3px;height:60px}
+.trend-bar{flex:1;border-radius:3px 3px 0 0;transition:height .3s;min-height:2px}
+.trend-labels{display:flex;justify-content:space-between;margin-top:4px}
+.trend-labels span{font-size:8px;color:var(--tm)}
+
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:13px;font-weight:700;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.bp{background:var(--bl);color:#fff}.bp:hover{background:#1B4F72}
+.bo{background:var(--sf);color:var(--ts);border:1px solid var(--bd)}.bo:hover{border-color:var(--bl);color:var(--bl)}
+.bs{padding:7px 14px;font-size:11px}
+
+@media(max-width:768px){.stat-row{grid-template-columns:repeat(3,1fr)}.rpfs-grid{grid-template-columns:1fr}.trend-row{flex-direction:column}}
+@media(max-width:480px){.stat-row{grid-template-columns:1fr 1fr}.tabs{overflow-x:auto;flex-wrap:nowrap}.tab{white-space:nowrap}}
+</style>
+<script src="auth/auth-guard.js"></script>
+</head>
+<body>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Analytics...</div></div>
+
+<div class="page">
+<div class="bc"><a href="index.html">ReasonDx</a> → <a href="dashboard.html">Hospital</a> → Analytics</div>
+<div class="ph">
+  <div><h1>Learning Analytics</h1><p>Cross-tool performance tracking and personalized recommendations</p></div>
+  <div class="ph-actions">
+    <button class="btn bo bs" onclick="window.print()">Export PDF</button>
+    <select id="periodSel" onchange="render()" style="padding:7px 12px;border:1px solid var(--bd);border-radius:6px;font-size:11px;font-weight:600;font-family:var(--ft)">
+      <option value="30">Last 30 Days</option>
+      <option value="90" selected>Last 90 Days</option>
+      <option value="180">Last 6 Months</option>
+      <option value="365">All Time</option>
+    </select>
+  </div>
+</div>
+
+<div class="tabs" id="tabBar"></div>
+<div id="out"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var activeTab='overview';
+var TABS=[
+  {id:'overview',label:'Overview'},
+  {id:'activity',label:'Activity Heatmap'},
+  {id:'rpfs',label:'Reasoning Patterns'},
+  {id:'accuracy',label:'Accuracy & Trends'},
+  {id:'recommendations',label:'Recommendations'}
+];
+
+// ═══ MOCK DATA ═══
+// In production this comes from platform usage analytics
+var DATA={
+  summary:{
+    casesCompleted:37, caseDelta:'+8',
+    crtSessions:22, crtDelta:'+5',
+    boardQuestions:148, boardDelta:'+32',
+    avgAccuracy:74, accDelta:'+3%',
+    hoursLogged:28.5, hoursDelta:'+6.2'
+  },
+  toolUsage:{
+    'Virtual EMR':{sessions:37,hours:12.4,color:'#2874A6'},
+    'Board Prep':{sessions:22,hours:5.1,color:'#7C3AED'},
+    'MechanismDx':{sessions:18,hours:3.8,color:'#059669'},
+    'CoachDx':{sessions:12,hours:2.9,color:'#EC4899'},
+    'CRT':{sessions:22,hours:4.2,color:'#D97706'},
+    'Consult Callback':{sessions:8,hours:1.6,color:'#DC2626'},
+    'Night Float':{sessions:4,hours:1.8,color:'#0891B2'},
+    'Procedure Lab':{sessions:6,hours:0.9,color:'#16A34A'},
+    'Counseling':{sessions:4,hours:0.7,color:'#6366F1'},
+    'Study Mode':{sessions:15,hours:2.1,color:'#94A3B8'}
+  },
+  // Weekly activity heatmap (7 weeks × 7 days × value 0-4)
+  heatmap:(function(){
+    var w=[];for(var i=0;i<12;i++){var wk=[];for(var j=0;j<7;j++){
+      wk.push(Math.floor(Math.random()*5));
+    }w.push(wk)}return w;
+  })(),
+  // RPFS dimensions
+  rpfs:{
+    'Data Gathering':{score:78,prior:72},
+    'Hypothesis Generation':{score:71,prior:65},
+    'Problem Representation':{score:82,prior:78},
+    'Diagnostic Verification':{score:65,prior:58},
+    'Bayesian Updating':{score:58,prior:52},
+    'Cognitive Flexibility':{score:73,prior:69},
+    'Illness Script Matching':{score:80,prior:76},
+    'Metacognition':{score:62,prior:55}
+  },
+  // Accuracy by category (last 90 days)
+  categoryAccuracy:{
+    'Cardiovascular':{correct:18,total:22,pct:82},
+    'Pulmonary':{correct:14,total:18,pct:78},
+    'GI/Hepatology':{correct:11,total:16,pct:69},
+    'Neurology':{correct:9,total:14,pct:64},
+    'Infectious Disease':{correct:12,total:15,pct:80},
+    'Endocrine':{correct:8,total:14,pct:57},
+    'Renal':{correct:7,total:12,pct:58},
+    'Hematology':{correct:10,total:13,pct:77},
+    'Rheumatology':{correct:5,total:10,pct:50},
+    'Allergy/Immunology':{correct:14,total:16,pct:88}
+  },
+  // Weekly accuracy trend (12 weeks)
+  weeklyAccuracy:[62,65,68,71,69,74,72,78,75,80,77,74],
+  weeklyVolume:[8,10,12,14,11,16,14,18,15,20,17,15],
+  // Weaknesses
+  weaknesses:[
+    {cat:'Rheumatology',pct:50,gap:'Autoimmune overlap syndromes, serology interpretation',rec:'Complete SLE and vasculitis CRT cases; review MechanismDx autoimmunity module',link:'virtual-emr.html?setting=ed'},
+    {cat:'Endocrine',pct:57,gap:'Thyroid storm vs myxedema, adrenal insufficiency workup',rec:'Complete DKA, thyroid, and adrenal CRT trainers; 3 endocrine board prep sets',link:'board-prep.html'},
+    {cat:'Renal',pct:58,gap:'AKI vs CKD differentiation, acid-base interpretation',rec:'Complete AKI workup CRT; review MechanismDx renal physiology',link:'virtual-emr.html?setting=ed'}
+  ]
+};
+
+function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+
+function renderTabs(){
+  var h='';TABS.forEach(function(t){
+    h+='<div class="tab'+(t.id===activeTab?' on':'')+'" onclick="setTab(\''+t.id+'\')">'+t.label+'</div>';
+  });document.getElementById('tabBar').innerHTML=h;
+}
+
+window.setTab=function(id){activeTab=id;renderTabs();render()};
+
+window.render=function(){
+  var h='';
+  if(activeTab==='overview') h=rOverview();
+  else if(activeTab==='activity') h=rActivity();
+  else if(activeTab==='rpfs') h=rRPFS();
+  else if(activeTab==='accuracy') h=rAccuracy();
+  else if(activeTab==='recommendations') h=rRecs();
+  document.getElementById('out').innerHTML=h;
+};
+
+// ═══ OVERVIEW ═══
+function rOverview(){
+  var s=DATA.summary,h='';
+  h+='<div class="stat-row">';
+  h+='<div class="stat-card"><div class="stat-num" style="color:var(--bl)">'+s.casesCompleted+'</div><div class="stat-label">Cases</div><div class="stat-delta up">'+s.caseDelta+' this period</div></div>';
+  h+='<div class="stat-card"><div class="stat-num" style="color:var(--pp)">'+s.crtSessions+'</div><div class="stat-label">CRT Sessions</div><div class="stat-delta up">'+s.crtDelta+'</div></div>';
+  h+='<div class="stat-card"><div class="stat-num" style="color:var(--am)">'+s.boardQuestions+'</div><div class="stat-label">Board Qs</div><div class="stat-delta up">'+s.boardDelta+'</div></div>';
+  h+='<div class="stat-card"><div class="stat-num" style="color:var(--gn)">'+s.avgAccuracy+'%</div><div class="stat-label">Avg Accuracy</div><div class="stat-delta up">'+s.accDelta+'</div></div>';
+  h+='<div class="stat-card"><div class="stat-num" style="color:var(--tx)">'+s.hoursLogged+'</div><div class="stat-label">Hours</div><div class="stat-delta up">'+s.hoursDelta+'h</div></div>';
+  h+='</div>';
+
+  // Tool usage bar chart
+  h+='<div class="card"><div class="card-h"><h2>Tool Engagement</h2></div><div class="card-b">';
+  h+='<div class="bar-chart">';
+  var maxSess=0;for(var t in DATA.toolUsage){if(DATA.toolUsage[t].sessions>maxSess)maxSess=DATA.toolUsage[t].sessions}
+  for(var t in DATA.toolUsage){
+    var d=DATA.toolUsage[t],pct=Math.round(d.sessions/maxSess*100);
+    h+='<div class="bar-col"><div class="bar-val">'+d.sessions+'</div><div class="bar" style="height:'+pct+'%;background:'+d.color+'"></div><div class="bar-label">'+t+'</div></div>';
+  }
+  h+='</div></div></div>';
+
+  // Trend sparklines
+  h+='<div class="trend-row">';
+  h+='<div class="trend-card"><div class="trend-title">Weekly Accuracy</div><div class="trend-bars">';
+  var maxAcc=Math.max.apply(null,DATA.weeklyAccuracy);
+  DATA.weeklyAccuracy.forEach(function(v){
+    var pct=Math.round(v/maxAcc*100);
+    h+='<div class="trend-bar" style="height:'+pct+'%;background:'+(v>=70?'var(--gn)':v>=60?'var(--am)':'var(--rd)')+'"></div>';
+  });
+  h+='</div><div class="trend-labels"><span>12w ago</span><span>This week</span></div></div>';
+
+  h+='<div class="trend-card"><div class="trend-title">Weekly Volume</div><div class="trend-bars">';
+  var maxVol=Math.max.apply(null,DATA.weeklyVolume);
+  DATA.weeklyVolume.forEach(function(v){
+    var pct=Math.round(v/maxVol*100);
+    h+='<div class="trend-bar" style="height:'+pct+'%;background:var(--bl)"></div>';
+  });
+  h+='</div><div class="trend-labels"><span>12w ago</span><span>This week</span></div></div>';
+  h+='</div>';
+
+  // Top 3 weaknesses
+  h+='<div class="card"><div class="card-h"><h2>Areas for Improvement</h2><button class="btn bs bo" onclick="setTab(\'recommendations\')">View All →</button></div><div class="card-b"><div class="weak-grid">';
+  DATA.weaknesses.forEach(function(w){
+    h+='<div class="weak-card"><div class="weak-cat" style="color:var(--rd)">'+e(w.cat)+'</div><div class="weak-pct" style="color:var(--rd)">'+w.pct+'%</div><div class="weak-rec">'+e(w.gap)+'</div></div>';
+  });
+  h+='</div></div></div>';
+  return h;
+}
+
+// ═══ ACTIVITY HEATMAP ═══
+function rActivity(){
+  var h='<div class="card"><div class="card-h"><h2>Activity Heatmap</h2><span style="font-size:11px;color:var(--tm)">Sessions per day over the last 12 weeks</span></div><div class="card-b">';
+  var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  var colors=['#F1F5F9','#DBEAFE','#93C5FD','#3B82F6','#1D4ED8'];
+  
+  for(var d=0;d<7;d++){
+    h+='<div class="hm-row"><div class="hm-label">'+days[d]+'</div>';
+    for(var w=0;w<DATA.heatmap.length;w++){
+      var v=DATA.heatmap[w][d];
+      h+='<div class="hm-cell" style="background:'+colors[v]+'" title="Week '+(w+1)+', '+days[d]+': '+v+' sessions"></div>';
+    }
+    h+='</div>';
+  }
+  h+='<div class="hm-legend"><span>Less</span>';
+  colors.forEach(function(c){h+='<div class="hm-legend-cell" style="background:'+c+'"></div>'});
+  h+='<span>More</span></div>';
+
+  // Tool breakdown
+  h+='<div style="margin-top:24px"><h3 style="font-size:14px;font-weight:700;margin-bottom:12px">Time by Tool</h3>';
+  var totalH=0;for(var t in DATA.toolUsage)totalH+=DATA.toolUsage[t].hours;
+  for(var t in DATA.toolUsage){
+    var d=DATA.toolUsage[t],pct=Math.round(d.hours/totalH*100);
+    h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">';
+    h+='<div style="width:100px;font-size:11px;font-weight:600;color:var(--ts);text-align:right">'+t+'</div>';
+    h+='<div style="flex:1;height:10px;background:var(--bdl);border-radius:5px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+d.color+';border-radius:5px"></div></div>';
+    h+='<div style="font-family:var(--mn);font-size:11px;font-weight:700;min-width:50px">'+d.hours.toFixed(1)+'h</div>';
+    h+='</div>';
+  }
+  h+='</div>';
+  h+='</div></div>';
+  return h;
+}
+
+// ═══ RPFS (Reasoning Pattern Fingerprint) ═══
+function rRPFS(){
+  var h='<div class="card"><div class="card-h"><h2>Reasoning Pathway Fingerprint (RPFS)</h2><span style="font-size:11px;color:var(--tm)">Your diagnostic reasoning profile across 8 dimensions</span></div><div class="card-b">';
+  h+='<div class="rpfs-container">';
+  h+='<div class="rpfs-grid">';
+  for(var dim in DATA.rpfs){
+    var d=DATA.rpfs[dim];
+    var col=d.score>=75?'var(--gn)':d.score>=60?'var(--bl)':d.score>=45?'var(--am)':'var(--rd)';
+    var delta=d.score-d.prior;
+    h+='<div class="rpfs-item">';
+    h+='<div class="rpfs-item-label">'+e(dim)+'</div>';
+    h+='<div class="rpfs-bar"><div class="rpfs-fill" style="width:'+d.score+'%;background:'+col+'"></div></div>';
+    h+='<div class="rpfs-val" style="color:'+col+'">'+d.score+'</div>';
+    h+='</div>';
+  }
+  h+='</div></div>';
+
+  // Change from prior period
+  h+='<div style="margin-top:20px"><h3 style="font-size:14px;font-weight:700;margin-bottom:8px">Growth Since Last Period</h3>';
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">';
+  for(var dim in DATA.rpfs){
+    var d=DATA.rpfs[dim],delta=d.score-d.prior;
+    h+='<div style="text-align:center;padding:10px;background:var(--sf2);border-radius:8px;border:1px solid var(--bdl)">';
+    h+='<div style="font-size:10px;color:var(--tm);font-weight:600;margin-bottom:2px">'+e(dim.split(' ')[0])+'</div>';
+    h+='<div style="font-family:var(--mn);font-size:16px;font-weight:800;color:'+(delta>0?'var(--gn)':'var(--am)')+'">+'+(delta)+'</div>';
+    h+='</div>';
+  }
+  h+='</div></div>';
+
+  h+='<div style="margin-top:16px;padding:14px;background:var(--blb);border-radius:10px;font-size:12px;color:var(--ts);line-height:1.7">';
+  h+='<strong style="color:var(--tx)">About RPFS:</strong> The Reasoning Pathway Fingerprint System tracks how you approach diagnostic problems across 8 cognitive dimensions. Unlike accuracy alone, RPFS reveals <em>how</em> you think — identifying strengths in pattern recognition and gaps in metacognition or Bayesian reasoning that may not show up in simple right/wrong metrics. Your fingerprint is unique and evolves with practice.';
+  h+='</div>';
+  h+='</div></div>';
+  return h;
+}
+
+// ═══ ACCURACY & TRENDS ═══
+function rAccuracy(){
+  var h='';
+  // Category accuracy
+  h+='<div class="card"><div class="card-h"><h2>Accuracy by Category</h2></div><div class="card-b">';
+  var sorted=Object.keys(DATA.categoryAccuracy).sort(function(a,b){return DATA.categoryAccuracy[a].pct-DATA.categoryAccuracy[b].pct});
+  sorted.forEach(function(cat){
+    var d=DATA.categoryAccuracy[cat];
+    var col=d.pct>=80?'var(--gn)':d.pct>=65?'var(--bl)':d.pct>=50?'var(--am)':'var(--rd)';
+    h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+    h+='<div style="width:120px;font-size:12px;font-weight:600;color:var(--ts);text-align:right">'+e(cat)+'</div>';
+    h+='<div style="flex:1;height:14px;background:var(--bdl);border-radius:7px;overflow:hidden"><div style="width:'+d.pct+'%;height:100%;background:'+col+';border-radius:7px;transition:width .5s"></div></div>';
+    h+='<div style="font-family:var(--mn);font-size:12px;font-weight:700;color:'+col+';min-width:40px">'+d.pct+'%</div>';
+    h+='<div style="font-size:10px;color:var(--tm);min-width:40px">'+d.correct+'/'+d.total+'</div>';
+    h+='</div>';
+  });
+  h+='</div></div>';
+
+  // Weekly trend detail
+  h+='<div class="card"><div class="card-h"><h2>12-Week Accuracy Trend</h2></div><div class="card-b">';
+  h+='<div class="bar-chart" style="height:160px">';
+  var maxA=Math.max.apply(null,DATA.weeklyAccuracy);
+  DATA.weeklyAccuracy.forEach(function(v,i){
+    var pct=Math.round(v/100*160);
+    var col=v>=75?'var(--gn)':v>=65?'var(--bl)':v>=55?'var(--am)':'var(--rd)';
+    h+='<div class="bar-col"><div class="bar-val">'+v+'%</div><div class="bar" style="height:'+pct+'px;background:'+col+'"></div><div class="bar-label" style="writing-mode:horizontal-tb;transform:none;font-size:9px">W'+(i+1)+'</div></div>';
+  });
+  h+='</div>';
+  h+='</div></div>';
+  return h;
+}
+
+// ═══ RECOMMENDATIONS ═══
+function rRecs(){
+  var h='';
+  h+='<div class="card"><div class="card-h"><h2>Personalized Recommendations</h2><span style="font-size:11px;color:var(--tm)">Based on your performance patterns</span></div><div class="card-b">';
+
+  // Weaknesses with actionable links
+  h+='<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--rd)">Priority Practice Areas</h3>';
+  h+='<div class="weak-grid" style="margin-bottom:24px">';
+  DATA.weaknesses.forEach(function(w,i){
+    h+='<div class="weak-card" style="border-left:3px solid var(--rd)">';
+    h+='<div class="weak-cat" style="color:var(--rd)">#'+(i+1)+' '+e(w.cat)+' — '+w.pct+'%</div>';
+    h+='<div class="weak-rec" style="margin-bottom:4px"><strong>Gap:</strong> '+e(w.gap)+'</div>';
+    h+='<div class="weak-rec"><strong>Action:</strong> '+e(w.rec)+'</div>';
+    h+='<a href="'+w.link+'" class="weak-link">Start Practice →</a>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  // RPFS-based recommendations
+  var rpfsWeak=[];
+  for(var dim in DATA.rpfs){if(DATA.rpfs[dim].score<65)rpfsWeak.push({dim:dim,score:DATA.rpfs[dim].score})}
+  rpfsWeak.sort(function(a,b){return a.score-b.score});
+
+  if(rpfsWeak.length>0){
+    h+='<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--am)">Reasoning Skills to Develop</h3>';
+    var rpfsRecs={
+      'Bayesian Updating':'Practice with cases where pre-test probability matters. Focus on likelihood ratios in Board Prep. Complete CRT cases with evolving presentations.',
+      'Metacognition':'After each case, review your reasoning path in CoachDx. Identify where you anchored, premature closure, or availability bias occurred.',
+      'Diagnostic Verification':'Practice the "pause and verify" technique: before committing to a diagnosis, actively seek disconfirming evidence. Use CRT trainers with deliberate practice.',
+      'Hypothesis Generation':'Expand your differential early. Use MechanismDx to build stronger illness scripts for conditions you encounter less frequently.',
+      'Cognitive Flexibility':'Practice with cases that have unexpected pivots. Night Float simulator forces rapid reprioritization. Consult Callback challenges your assumptions.'
+    };
+    rpfsWeak.forEach(function(w){
+      var rec=rpfsRecs[w.dim]||'Continue practice across all reasoning tools to develop this dimension.';
+      h+='<div style="padding:12px;background:var(--amb);border:1px solid rgba(217,119,6,.2);border-radius:10px;margin-bottom:8px">';
+      h+='<div style="font-size:12px;font-weight:700;color:var(--am)">'+e(w.dim)+' — Score: '+w.score+'</div>';
+      h+='<div style="font-size:12px;color:var(--ts);margin-top:4px;line-height:1.6">'+e(rec)+'</div>';
+      h+='</div>';
+    });
+  }
+
+  // Strengths
+  h+='<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--gn);margin-top:20px">Strengths to Leverage</h3>';
+  var catStrong=Object.keys(DATA.categoryAccuracy).filter(function(k){return DATA.categoryAccuracy[k].pct>=80}).sort(function(a,b){return DATA.categoryAccuracy[b].pct-DATA.categoryAccuracy[a].pct});
+  if(catStrong.length>0){
+    h+='<div style="display:flex;flex-wrap:wrap;gap:8px">';
+    catStrong.forEach(function(cat){
+      h+='<div style="padding:8px 14px;background:var(--gnb);border:1px solid rgba(5,150,105,.2);border-radius:8px;font-size:12px;font-weight:600;color:var(--gn)">'+e(cat)+' '+DATA.categoryAccuracy[cat].pct+'%</div>';
+    });
+    h+='</div>';
+  }
+
+  h+='</div></div>';
+  return h;
+}
+
+renderTabs();
+render();
+setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classList.add('hide');setTimeout(function(){l.remove()},300)}},400);
+})();
+</script>
+<script src="js/dx-feedback.js"></script>
+<script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-help-widget.js"></script>
+<script src="js/rdx-nav.js"></script>
+</body>
+</html>

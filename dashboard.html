@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#060a10">
+<meta name="theme-color" content="#2874A6">
+<meta name="description" content="The Virtual Teaching Hospital — choose your clinical setting and start building reasoning skills.">
 <title>Hospital Dashboard | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="manifest" href="manifest.json">
@@ -11,9 +14,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#060a10;--surface:#0c1118;--surface-hover:#111822;
-  --border:rgba(255,255,255,.06);--border-hover:rgba(255,255,255,.12);
-  --text:#e0e0e0;--dim:rgba(255,255,255,.4);
+  --bg:#F0F2F5;--surface:#FFFFFF;--surface-hover:#F8FAFC;
+  --border:#E2E8F0;--border-hover:#CBD5E1;
+  --text:#1E293B;--dim:#64748B;
   --blue:#2874A6;--blue-light:#3498DB;--blue-bg:rgba(40,116,166,.08);--blue-border:rgba(40,116,166,.18);
   --red:#DC2626;--green:#059669;--amber:#D97706;--purple:#7C3AED;--pink:#EC4899;
   --font:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
@@ -21,20 +24,19 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-/* Global nav placeholder - nav-global.js injects here */
-#global-nav{height:56px}
+/* Nav managed by rdx-nav.js */
 
 .dash{max-width:1120px;margin:0 auto;padding:32px 24px 80px}
 .dash-header{text-align:center;margin-bottom:48px}
 .dash-greeting{font-size:14px;font-weight:500;color:var(--dim);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
-.dash-title{font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;letter-spacing:-.8px;line-height:1.1;margin-bottom:12px}
-.dash-title span{background:linear-gradient(135deg,var(--blue-light),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.dash-title{font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);letter-spacing:-.8px;line-height:1.1;margin-bottom:12px}
+.dash-title span{background:linear-gradient(135deg,var(--blue-light),var(--blue));color:var(--blue)}
 .dash-sub{font-size:15px;color:var(--dim);max-width:520px;margin:0 auto;line-height:1.6}
 
 /* Stats bar */
 .stats{display:flex;justify-content:center;gap:32px;margin-bottom:48px;flex-wrap:wrap}
 .stat{text-align:center}
-.stat-num{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px}
+.stat-num{font-size:28px;font-weight:800;color:var(--text);letter-spacing:-.5px}
 .stat-label{font-size:11px;font-weight:600;color:var(--dim);letter-spacing:.6px;text-transform:uppercase;margin-top:2px}
 
 /* Grid */
@@ -62,7 +64,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   font-size:22px;flex-shrink:0
 }
 .loc-body{flex:1;min-width:0}
-.loc-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+.loc-name{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
 .loc-desc{font-size:13px;color:var(--dim);line-height:1.5}
 .loc-badge{
   display:inline-flex;align-items:center;gap:4px;margin-top:8px;
@@ -116,10 +118,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .loc-card:nth-child(5){animation-delay:.25s}
 .loc-card:nth-child(6){animation-delay:.3s}
 </style>
+<link rel="stylesheet" href="mobile.css">
+<meta property="og:title" content="Hospital Dashboard | ReasonDx">
+<meta property="og:description" content="The Virtual Teaching Hospital — choose your clinical setting and start building reasoning skills.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="icons/apple-touch-icon.png">
 </head>
 <body>
-
-<div id="global-nav"></div>
 
 <div class="dash">
   <div class="dash-header">
@@ -131,7 +136,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <div class="stats">
     <div class="stat"><div class="stat-num">145</div><div class="stat-label">Clinical Cases</div></div>
     <div class="stat"><div class="stat-num">615</div><div class="stat-label">Board Questions</div></div>
-    <div class="stat"><div class="stat-num">9</div><div class="stat-label">Learning Modes</div></div>
+    <div class="stat"><div class="stat-num">15</div><div class="stat-label">Learning Tools</div></div>
   </div>
 
   <!-- Clinical Practice -->
@@ -219,7 +224,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         </div>
       </a>
 
-      <a href="analytics-dashboard.html" class="loc-card progress">
+      <a href="learning-analytics.html" class="loc-card progress">
         <div class="loc-icon">📊</div>
         <div class="loc-body">
           <div class="loc-name">My Progress</div>
@@ -231,11 +236,73 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </div>
   </div>
 
+  <!-- Fellowship & Assessment -->
+  <div class="loc-section">
+    <div class="loc-section-title">Fellowship & Assessment</div>
+    <div class="locations">
+
+      <a href="milestone-tracker.html" class="loc-card milestone">
+        <div class="loc-icon">✅</div>
+        <div class="loc-body">
+          <div class="loc-name">Milestone Tracker</div>
+          <div class="loc-desc">ACGME A/I fellowship milestone dashboard. Track 19 subcompetencies, tier progression, and coverage gaps across 68 tagged cases.</div>
+          <div class="loc-badge green">PD dashboard</div>
+        </div>
+      </a>
+
+      <a href="procedure-lab.html" class="loc-card proclab">
+        <div class="loc-icon">💉</div>
+        <div class="loc-body">
+          <div class="loc-name">Procedure Lab</div>
+          <div class="loc-desc">Practice skin testing, oral food challenges, and drug desensitization protocols with scored simulations.</div>
+          <div class="loc-badge amber">PC3 assessment</div>
+        </div>
+      </a>
+
+      <a href="counseling-scenarios.html" class="loc-card counsel">
+        <div class="loc-icon">💬</div>
+        <div class="loc-body">
+          <div class="loc-name">Patient Counseling</div>
+          <div class="loc-desc">Practice anaphylaxis plans, immunotherapy consent, CVID diagnosis disclosure, and navigating evidence disagreements.</div>
+          <div class="loc-badge pink">ICS1 assessment</div>
+        </div>
+      </a>
+
+      <a href="ilp.html" class="loc-card ilp">
+        <div class="loc-icon">🎯</div>
+        <div class="loc-body">
+          <div class="loc-name">Learning Plan</div>
+          <div class="loc-desc">Individualized Learning Plans with collaborative goal-setting, activity tracking, and milestone target alignment.</div>
+          <div class="loc-badge">PBLI2</div>
+        </div>
+      </a>
+
+      <a href="faculty-assess.html" class="loc-card faculty">
+        <div class="loc-icon">📋</div>
+        <div class="loc-body">
+          <div class="loc-name">Faculty Quick-Score</div>
+          <div class="loc-desc">30-second observation-based assessment cards. Select context, score milestones, and feed data to the CCC report.</div>
+          <div class="loc-badge">Faculty tool</div>
+        </div>
+      </a>
+
+      <a href="milestone-report.html" class="loc-card ccc">
+        <div class="loc-icon">📄</div>
+        <div class="loc-body">
+          <div class="loc-name">CCC Report Generator</div>
+          <div class="loc-desc">Semi-annual milestone reports with auto-generated narratives, gap analysis, and strengths summary. Print-ready for CCC.</div>
+          <div class="loc-badge green">CCC-ready</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
   <div class="dash-footer">
     <p>ReasonDx — Clinical Reasoning Education Platform &nbsp;·&nbsp; <a href="index.html">About</a> &nbsp;·&nbsp; <a href="auth/account.html">Account</a></p>
   </div>
 </div>
 
-<script src="js/nav-global.js"></script>
+<script src="js/rdx-nav.js"></script>
 </body>
 </html>
