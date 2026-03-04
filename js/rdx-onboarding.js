@@ -16,7 +16,7 @@ overlay.innerHTML=`
 <div class="ob-backdrop"></div>
 <div class="ob-modal">
   <div class="ob-header">
-    <div class="ob-logo">Reason<span>Dx</span></div>
+    <div class="ob-logo"><img src="icons/logo-transparent.png" alt="ReasonDx" style="height:28px;width:auto"></div>
     <div class="ob-tagline">The Virtual Teaching Hospital</div>
   </div>
   <div class="ob-body" id="obBody">

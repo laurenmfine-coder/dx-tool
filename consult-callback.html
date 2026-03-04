@@ -1,1236 +1,578 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta name="theme-color" content="#1f5f8b">
-<!-- Google Analytics (ReasonDx) -->
+<meta name="theme-color" content="#2874A6">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clinical Reasoning Trainer | ReasonDx</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Consult Callback | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-    --brand:#2874A6; --brand-dark:#1B4F72; --brand-light:#D4E6F1;
-    --bg:#F8FAFC; --bg-card:#FFFFFF; --text:#1E293B;
-    --text-muted:#64748B; --text-dim:#94A3B8; --border:#E2E8F0;
-    --red:#EF4444; --amber:#F59E0B; --green:#10B981; --purple:#7C3AED;
-    --font: 'IBM Plex Sans', -apple-system, sans-serif;
-    --mono:'JetBrains Mono',monospace;
-    --serif: 'IBM Plex Sans',Georgia,serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
-
-.app{max-width:780px;margin:0 auto;padding:24px;padding-bottom:100px}
-
-/* Header */
-.page-header{margin-bottom:28px}
-.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--brand);text-decoration:none;font-size:13px;font-weight:500;margin-bottom:12px}
-.page-header h1{font-family:var(--serif);font-size:26px;font-weight:700;margin-bottom:6px}
-.page-header p{color:var(--text-muted);font-size:14px;line-height:1.5}
-
-/* Specialist Grid */
-.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
-.spec-card{
-    background:var(--bg-card);border:2px solid var(--border);border-radius:14px;
-    padding:14px 10px;cursor:pointer;transition:all .2s;text-align:center;
-}
-.spec-card:hover{border-color:var(--brand);transform:translateY(-2px)}
-.spec-card.selected{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand),0 4px 16px rgba(40,116,166,.12)}
-.spec-icon{font-size:32px;margin-bottom:6px}
-.spec-name{font-weight:700;font-size:12px;margin-bottom:2px}
-.spec-sub{font-size:10px;color:var(--text-dim)}
-
-/* Case selection */
-.case-section{margin-bottom:24px}
-.case-section .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);margin-bottom:8px}
-.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.case-opt{
-    background:var(--bg-card);border:1.5px solid var(--border);border-radius:10px;
-    padding:12px;cursor:pointer;transition:all .15s;
-}
-.case-opt:hover{border-color:var(--brand)}
-.case-opt.selected{border-color:var(--brand);background:rgba(40,116,166,.04)}
-.case-opt .co-title{font-weight:600;font-size:13px;margin-bottom:2px}
-.case-opt .co-meta{font-size:11px;color:var(--text-muted)}
-
-.start-btn{
-    background:var(--brand);color:white;border:none;border-radius:10px;
-    padding:14px 36px;font-family:var(--font);font-size:15px;font-weight:600;
-    cursor:pointer;transition:all .2s;width:100%;margin-top:16px;
-}
-.start-btn:hover{filter:brightness(1.1)}
-.start-btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* Phone ring */
-.ring-overlay{
-    position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);
-    display:flex;align-items:center;justify-content:center;z-index:200;
-    animation:fadeIn .2s;
-}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.ring-card{
-    background:var(--bg-card);border-radius:24px;padding:36px;text-align:center;
-    min-width:320px;box-shadow:0 20px 60px rgba(0,0,0,.2);
-    animation:ringShake .35s ease-in-out infinite;
-}
-@keyframes ringShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-1.5deg)}75%{transform:rotate(1.5deg)}}
-.ring-card .ring-icon{font-size:48px;margin-bottom:12px}
-.ring-card .ring-label{font-size:12px;color:var(--text-muted);margin-bottom:4px}
-.ring-card .ring-name{font-size:20px;font-weight:700;margin-bottom:4px}
-.ring-card .ring-dept{font-size:13px;color:var(--text-muted);margin-bottom:20px}
-.answer-btn{
-    background:var(--green);color:white;border:none;border-radius:12px;
-    padding:12px 36px;font-family:var(--font);font-size:15px;font-weight:600;
-    cursor:pointer;transition:all .2s;
-}
-.answer-btn:hover{filter:brightness(1.1)}
-
-/* Chat interface */
-.chat-panel{
-    background:var(--bg-card);border:1.5px solid var(--border);border-radius:16px;
-    overflow:hidden;margin-bottom:16px;
-}
-.chat-header{
-    padding:14px 18px;border-bottom:1px solid var(--border);
-    display:flex;align-items:center;gap:12px;
-}
-.chat-avatar{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.chat-header-info .ch-name{font-weight:700;font-size:14px}
-.chat-header-info .ch-dept{font-size:11px;color:var(--text-muted)}
-.chat-header .ch-status{margin-left:auto;font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px}
-.status-active{background:#DCFCE7;color:#166534}
-.status-ended{background:var(--border);color:var(--text-dim)}
-
-.chat-body{padding:18px;min-height:200px;max-height:420px;overflow-y:auto}
-.msg{margin-bottom:14px;max-width:85%;animation:msgIn .25s ease-out}
-@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.msg.consultant{margin-right:auto}
-.msg.student{margin-left:auto}
-.msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
-.msg.consultant .msg-bubble{background:#F1F5F9;color:var(--text);border-bottom-left-radius:4px}
-.msg.student .msg-bubble{background:var(--brand);color:white;border-bottom-right-radius:4px}
-.msg-sender{font-size:10px;font-weight:600;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
-.typing-indicator{display:flex;gap:4px;padding:10px 14px}
-.typing-dot{width:7px;height:7px;border-radius:50%;background:var(--text-dim);animation:typeBounce .6s infinite alternate}
-.typing-dot:nth-child(2){animation-delay:.15s}
-.typing-dot:nth-child(3){animation-delay:.3s}
-@keyframes typeBounce{from{opacity:.3;transform:translateY(0)}to{opacity:1;transform:translateY(-4px)}}
-
-/* Response options */
-.resp-area{padding:14px 18px;border-top:1px solid var(--border);background:#FAFBFC}
-.resp-label{font-size:11px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
-.resp-options{display:flex;flex-direction:column;gap:6px}
-.resp-btn{
-    background:white;border:1.5px solid var(--border);border-radius:10px;
-    padding:10px 14px;text-align:left;cursor:pointer;font-family:var(--font);
-    font-size:13px;color:var(--text);transition:all .15s;line-height:1.4;
-}
-.resp-btn:hover{border-color:var(--brand);background:rgba(40,116,166,.03)}
-.resp-btn.selected{border-color:var(--brand);background:var(--brand-light)}
-.resp-btn:disabled{opacity:.5;cursor:not-allowed}
-
-/* Free text input */
-.free-input-row{display:flex;gap:8px;margin-top:8px}
-.free-input{
-    flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;
-    font-family:var(--font);font-size:13px;outline:none;resize:none;min-height:42px;
-}
-.free-input:focus{border-color:var(--brand)}
-.send-btn{
-    background:var(--brand);color:white;border:none;border-radius:10px;
-    padding:10px 16px;font-family:var(--font);font-size:13px;font-weight:600;
-    cursor:pointer;flex-shrink:0;
-}
-.send-btn:hover{filter:brightness(1.1)}
-.send-btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* Feedback */
-.feedback-card{
-    background:var(--bg-card);border:1.5px solid var(--border);border-radius:16px;
-    padding:24px;margin-top:20px;
-}
-.feedback-card h3{font-family:var(--serif);font-size:20px;margin-bottom:16px}
-.fb-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.fb-label{font-size:12px;color:var(--text-muted);width:160px}
-.fb-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-.fb-fill{height:100%;border-radius:3px;transition:width .8s}
-.fb-val{font-family:var(--mono);font-size:12px;font-weight:600;width:36px;text-align:right}
-.fb-text{font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
-.fb-actions{display:flex;gap:10px;margin-top:16px}
-.fb-btn{padding:10px 20px;border-radius:10px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
-.fb-btn.primary{background:var(--brand);color:white}
-.fb-btn.secondary{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
-
-/* Disposition badge */
-.disposition{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;margin:12px 0}
-.disp-accepted{background:#DCFCE7;color:#166534}
-.disp-deferred{background:#FEF3C7;color:#92400E}
-.disp-redirected{background:#FEE2E2;color:#B91C1C}
-.disp-pending{background:#E0F2FE;color:#0369A1}
-
-@media(max-width:640px){
-    .spec-grid{grid-template-columns:repeat(2,1fr)}
-    .case-grid{grid-template-columns:1fr}
-    .app{padding:16px}
-}
-/* RDX Loading */
-.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
-.rdx-loading.hide{opacity:0;pointer-events:none}
-.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
-@keyframes rdxSpin{to{transform:rotate(360deg)}}
-.rdx-load-text{font-family:"IBM Plex Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
-</style>
-<script src="auth/auth-guard.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="css/rdx-theme.css">
 <link rel="stylesheet" href="mobile.css">
-<meta name="description" content="Clinical reasoning trainer with consult callbacks, diagnostic cases, and AI-scored scenarios on ReasonDx.">
+<meta name="description" content="AI-powered consult callback trainer with dynamic specialist responses and real-time clinical reasoning feedback.">
 <meta property="og:title" content="Consult Callback | ReasonDx">
 <meta property="og:description" content="Practice clinical reasoning with AI-powered consult callbacks and diagnostic cases.">
 <meta property="og:url" content="https://reasondx.com/consult-callback.html">
 <meta property="og:type" content="website">
-
 <link rel="canonical" href="https://reasondx.com/consult-callback.html">
-<meta name="robots" content="index, follow">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Consult Callback | ReasonDx">
-<meta name="twitter:description" content="Practice clinical reasoning with consult callbacks and diagnostic cases.">
-<script src="js/rdx-difficulty.js"></script>
+<style>
+:root {
+  --brand:#2874A6;--brand-dark:#1B4F72;--brand-light:#D4E6F1;--brand-bg:rgba(40,116,166,.05);
+  --bg:#F0F4F8;--bg-card:#FFFFFF;--bg-warm:#FAFBFD;
+  --text:#1E293B;--text-sec:#475569;--text-muted:#64748B;--text-dim:#94A3B8;
+  --border:#E2E8F0;--border-light:#F1F5F9;
+  --red:#EF4444;--amber:#F59E0B;--green:#10B981;--purple:#7C3AED;--pink:#EC4899;
+  --font:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono','Menlo',monospace;
+  --serif:Georgia,'Times New Roman',serif;
+  --radius:12px;--radius-lg:16px;--radius-xl:20px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.05);--shadow-md:0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.12);--shadow-xl:0 20px 60px rgba(0,0,0,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--font);cursor:pointer}
+
+.page{max-width:900px;margin:0 auto;padding:24px 20px 120px}
+.page-header{margin-bottom:32px}
+.page-header h1{font-family:var(--serif);font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.page-header p{color:var(--text-muted);font-size:14px;line-height:1.6;max-width:640px}
+
+/* Stats Bar */
+.stats-bar{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.stat-pill{display:flex;align-items:center;gap:6px;padding:6px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text-sec)}
+.stat-pill .num{font-family:var(--mono);font-weight:700;color:var(--text)}
+
+/* Section Label */
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Specialist Grid */
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:28px}
+.spec-card{background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius);padding:16px 12px 14px;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);text-align:center;position:relative;overflow:hidden}
+.spec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--spec-color,var(--brand));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.spec-card:hover{border-color:var(--spec-color,var(--brand));transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.spec-card:hover::before,.spec-card.selected::before{transform:scaleX(1)}
+.spec-card.selected{border-color:var(--spec-color,var(--brand));box-shadow:0 0 0 1px var(--spec-color,var(--brand)),0 4px 16px rgba(40,116,166,.12)}
+.spec-card.no-cases{opacity:.45;cursor:default}
+.spec-card.no-cases:hover{transform:none;box-shadow:none;border-color:var(--border)}
+.spec-card.no-cases::before{display:none}
+.spec-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px;transition:transform .2s}
+.spec-card:hover .spec-icon{transform:scale(1.08)}
+.spec-name{font-weight:700;font-size:13px;margin-bottom:2px}
+.spec-sub{font-size:10px;color:var(--text-dim);line-height:1.3}
+.spec-cases{display:inline-flex;font-size:9px;font-weight:700;color:var(--text-dim);background:var(--border-light);border-radius:10px;padding:2px 8px;margin-top:6px}
+
+/* Case Selection */
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.case-card{background:var(--bg-card);border:2px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:all .2s;position:relative}
+.case-card:hover{border-color:var(--brand);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.case-card.selected{border-color:var(--brand);background:rgba(40,116,166,.03)}
+.case-card .cc-title{font-weight:700;font-size:14px;margin-bottom:4px;padding-right:70px}
+.case-card .cc-meta{font-size:12px;color:var(--text-muted);line-height:1.4}
+.case-card .cc-diff{position:absolute;top:10px;right:10px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:6px}
+.diff-beginner{background:#ECFDF5;color:#059669}.diff-intermediate{background:#FEF3C7;color:#92400E}.diff-advanced{background:#FEE2E2;color:#B91C1C}
+
+/* Start Button */
+.start-btn{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:white;border:none;border-radius:var(--radius);padding:14px 36px;font-size:15px;font-weight:700;cursor:pointer;transition:all .25s;width:100%;box-shadow:0 4px 16px rgba(40,116,166,.25)}
+.start-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(40,116,166,.35)}
+.start-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Patient Brief */
+.brief-card{background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px}
+.brief-header{padding:16px 20px;background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-bottom:1px solid #FDE68A;display:flex;align-items:flex-start;gap:12px}
+.brief-label{font-size:11px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.06em}
+.brief-body{padding:20px;font-size:14px;line-height:1.7;color:#78350F}
+.brief-tip{padding:14px 20px;background:#FEF9E7;border-top:1px solid #FDE68A;font-size:12px;color:#92400E;font-style:italic;display:flex;gap:8px}
+
+/* Phone Ring Overlay */
+.ring-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(8px);animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.ring-card{background:var(--bg-card);border-radius:24px;padding:40px 36px;text-align:center;min-width:320px;box-shadow:var(--shadow-xl);animation:ringPulse 1.5s ease-in-out infinite}
+@keyframes ringPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+.ring-phone-icon{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px;animation:ringShake .35s ease-in-out infinite}
+@keyframes ringShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.ring-label{font-size:12px;color:var(--text-dim);margin-bottom:4px}
+.ring-name{font-size:22px;font-weight:800;margin-bottom:2px;letter-spacing:-.3px}
+.ring-dept{font-size:13px;color:var(--text-muted);margin-bottom:24px}
+.answer-btn{background:var(--green);color:white;border:none;border-radius:14px;padding:14px 40px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(16,185,129,.3)}
+.answer-btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.decline-btn{background:none;border:none;color:var(--text-dim);font-size:12px;margin-top:12px;cursor:pointer;display:block;margin-left:auto;margin-right:auto}
+
+/* Chat Panel */
+.chat-panel{background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow-sm)}
+.chat-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--bg-warm)}
+.chat-avatar{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.chat-header-info .ch-name{font-weight:700;font-size:14px}
+.chat-header-info .ch-dept{font-size:11px;color:var(--text-muted)}
+.ch-status{margin-left:auto;font-size:11px;font-weight:700;padding:4px 12px;border-radius:8px;display:flex;align-items:center;gap:5px}
+.status-active{background:#DCFCE7;color:#166534}
+.status-active::before{content:'';width:6px;height:6px;border-radius:50%;background:#22C55E;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 4px rgba(34,197,94,0)}}
+.status-ended{background:var(--border-light);color:var(--text-dim)}
+
+.chat-body{padding:20px;min-height:240px;max-height:480px;overflow-y:auto;scroll-behavior:smooth}
+.msg{margin-bottom:16px;max-width:82%;animation:msgIn .3s ease-out}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.msg.consultant{margin-right:auto}.msg.student{margin-left:auto}
+.msg-bubble{padding:12px 16px;border-radius:14px;font-size:13.5px;line-height:1.6}
+.msg.consultant .msg-bubble{background:#F1F5F9;color:var(--text);border-bottom-left-radius:4px}
+.msg.student .msg-bubble{background:var(--brand);color:white;border-bottom-right-radius:4px}
+.msg-sender{font-size:10px;font-weight:700;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.typing-indicator{display:flex;gap:5px;padding:12px 16px;background:#F1F5F9;border-radius:14px;border-bottom-left-radius:4px;width:fit-content}
+.typing-dot{width:7px;height:7px;border-radius:50%;background:var(--text-dim);animation:typeBounce .6s infinite alternate}
+.typing-dot:nth-child(2){animation-delay:.15s}.typing-dot:nth-child(3){animation-delay:.3s}
+@keyframes typeBounce{from{opacity:.3;transform:translateY(0)}to{opacity:1;transform:translateY(-5px)}}
+
+/* Response Input */
+.resp-area{padding:16px 20px;border-top:1px solid var(--border);background:#FAFBFC}
+.resp-hint{font-size:12px;color:var(--amber);background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:8px 12px;margin-bottom:10px;display:flex;align-items:flex-start;gap:6px}
+.free-input-row{display:flex;gap:8px;align-items:flex-end}
+.free-input{flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:14px;outline:none;resize:none;min-height:48px;max-height:120px;line-height:1.5;transition:border-color .15s}
+.free-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
+.send-btn{background:var(--brand);color:white;border:none;border-radius:var(--radius);padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .15s;display:flex;align-items:center;gap:6px}
+.send-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.send-btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.send-btn svg{width:16px;height:16px}
+
+/* Exchange Counter */
+.exchange-counter{display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--border-light);border-top:1px solid var(--border);font-size:11px;color:var(--text-dim)}
+.exchange-dots{display:flex;gap:4px}
+.ex-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .2s}
+.ex-dot.done{background:var(--green)}.ex-dot.current{background:var(--brand);box-shadow:0 0 0 3px rgba(40,116,166,.2)}
+
+/* AI Thinking */
+.ai-thinking{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:12px;color:var(--text-muted);background:rgba(40,116,166,.04);border-radius:8px;margin:8px 0}
+.ai-spinner{width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Feedback Card */
+.feedback-card{background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;margin-top:24px;box-shadow:var(--shadow-md)}
+.fb-header{padding:20px 24px;background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:white}
+.fb-header h3{font-family:var(--serif);font-size:22px;margin-bottom:4px}.fb-header p{font-size:13px;opacity:.85}
+.fb-body{padding:24px}
+.fb-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.fb-label{font-size:12px;font-weight:600;color:var(--text-sec);width:170px;flex-shrink:0}
+.fb-bar{flex:1;height:8px;background:var(--border-light);border-radius:4px;overflow:hidden}
+.fb-fill{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.fb-val{font-family:var(--mono);font-size:13px;font-weight:700;width:40px;text-align:right}
+.fb-overall{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:2px solid var(--border);margin-top:4px}
+.fb-overall .fb-label{font-weight:800;color:var(--text);font-size:14px}
+.fb-overall .fb-val{font-size:16px}
+
+.disposition-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:var(--radius);font-size:14px;font-weight:700;margin:16px 0}
+.disp-accepted{background:#DCFCE7;color:#166534}.disp-deferred{background:#FEF3C7;color:#92400E}.disp-redirected{background:#FEE2E2;color:#B91C1C}
+
+.ai-commentary{margin-top:20px;padding:20px;background:#F8FAFC;border:1px solid var(--border);border-radius:var(--radius)}
+.ai-commentary h4{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ai-commentary p{font-size:13px;line-height:1.7;color:var(--text-sec)}
+
+.teaching-card{margin-top:16px;padding:20px;background:linear-gradient(135deg,#EBF5FB,#D4E6F1);border:1px solid var(--brand-light);border-radius:var(--radius)}
+.teaching-card h4{font-size:14px;font-weight:700;color:var(--brand-dark);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.teaching-card p{font-size:13px;line-height:1.7;color:var(--brand-dark)}
+
+.rpfs-card{margin-top:16px;padding:16px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)}
+.rpfs-card h4{font-size:13px;font-weight:700;margin-bottom:12px}
+.rpfs-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.rpfs-dim{font-size:11px;color:var(--text-muted);width:120px;flex-shrink:0}
+.rpfs-bar{flex:1;height:6px;background:var(--border-light);border-radius:3px;overflow:hidden}
+.rpfs-fill{height:100%;border-radius:3px;transition:width .8s}
+.rpfs-score{font-family:var(--mono);font-size:11px;font-weight:700;width:28px;text-align:right}
+
+.fb-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.fb-btn{padding:12px 24px;border-radius:var(--radius);font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.fb-btn.primary{background:var(--brand);color:white;box-shadow:0 2px 8px rgba(40,116,166,.2)}
+.fb-btn.primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(40,116,166,.3)}
+.fb-btn.secondary{background:var(--bg);color:var(--text-muted);border:1px solid var(--border)}
+.fb-btn.secondary:hover{border-color:var(--brand);color:var(--brand)}
+
+.rdx-loading{position:fixed;inset:0;z-index:8000;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
+.rdx-loading.hide{opacity:0;pointer-events:none}
+.rdx-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:spin .8s linear infinite}
+.rdx-load-text{font-size:14px;color:var(--text-muted);font-weight:500}
+.rdx-skip-link{position:absolute;top:-40px;left:0;background:var(--brand);color:#fff;padding:8px 16px;z-index:10000;font-size:13px;border-radius:0 0 8px 0;transition:top .2s}
+.rdx-skip-link:focus{top:0}
+
+@media(max-width:768px){.spec-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}.case-grid{grid-template-columns:1fr}.page{padding:16px 16px 100px}.chat-body{max-height:360px}.fb-row{flex-wrap:wrap}.fb-label{width:100%}}
+@media(max-width:480px){.spec-grid{grid-template-columns:repeat(2,1fr)}.free-input-row{flex-direction:column}.send-btn{width:100%;justify-content:center}}
+</style>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
-<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript. Please enable it in your browser.</div></noscript>
+<div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Consult Callback...</div></div>
 
+<div class="page" id="main-content" role="main">
+  <div class="page-header">
+    <h1><span style="font-size:24px">📞</span> Consult Callback</h1>
+    <p>You placed a consult. The specialist is calling back — and they have questions. Present your case, justify the consult, and handle pushback. AI-powered responses adapt to your clinical reasoning in real time.</p>
+  </div>
 
-<div class="app" id="main-content" role="main" id="app">
-    <div class="page-header">
-        <a href="virtual-emr.html?setting=ed" class="back-link">← Back to Virtual EMR</a>
-        <h1>🧠 Clinical Reasoning Trainer</h1>
-        <p>You placed a consult. Now the specialist is calling back — and they have questions. Present your case, justify the consult, and handle pushback.</p>
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-pill"><span class="num" id="statSessions">0</span> sessions</div>
+    <div class="stat-pill"><span class="num" id="statAvg">—</span> avg score</div>
+    <div class="stat-pill"><span class="num" id="statStreak">0</span> streak</div>
+  </div>
+
+  <div id="setupPanel">
+    <div class="section-label">Choose a Specialist</div>
+    <div class="spec-grid" id="specGrid"></div>
+    <div id="caseSection" style="display:none">
+      <div class="section-label">Choose a Scenario</div>
+      <div class="case-grid" id="caseGrid"></div>
     </div>
+    <button type="button" class="start-btn" id="startBtn" disabled>📞 Place the Consult</button>
+  </div>
 
-    <!-- Setup -->
-    <div id="setupPanel">
-        <div class="case-section">
-            <div class="label">Choose a Specialist</div>
-            <div class="spec-grid" id="specGrid"></div>
-        </div>
-        <div class="case-section">
-            <div class="label">Choose a Scenario</div>
-            <div class="case-grid" id="caseGrid"></div>
-        </div>
-        <button type="button" class="start-btn" id="startBtn" disabled onclick="startConsult()">📞 Place the Consult</button>
-    </div>
-
-    <!-- Game -->
-    <div id="gameArea" style="display:none"></div>
+  <div id="gameArea" style="display:none"></div>
 </div>
 
 <script>
-// ════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // SPECIALISTS
-// ════════════════════════════════════════════════════════════
-const SPECIALISTS = {
-    cardiology: {
-        name:'Dr. Vasquez', title:'Cardiology Fellow',
-        icon:'❤️', color:'#EF4444', bgColor:'#FEE2E2',
-        style:'direct', personality:'Efficient and focused. Wants the bottom line fast. Gets impatient with disorganized presentations but respects trainees who know their stuff.',
-        commonQs:['What does the ECG show?','What\'s the troponin trend?','Is there hemodynamic instability?','What\'s their EF?']
-    },
-    pulmonology: {
-        name:'Dr. Okafor', title:'Pulmonary/Critical Care',
-        icon:'🫁', color:'#3B82F6', bgColor:'#DBEAFE',
-        style:'thorough', personality:'Teaching-oriented. Asks a lot of questions not to challenge you, but because they want you to learn. Will push you to think through the physiology.',
-        commonQs:['What\'s the ABG?','What does the chest X-ray show?','What\'s their work of breathing?','Are they on any supplemental O2?']
-    },
-    neurology: {
-        name:'Dr. Kim', title:'Neurology Attending',
-        icon:'🧠', color:'#8B5CF6', bgColor:'#EDE9FE',
-        style:'precise', personality:'Extremely detail-oriented. Wants a thorough neuro exam before they come see the patient. Will ask about specific deficits and timing.',
-        commonQs:['When was symptom onset?','What\'s the NIH stroke scale?','Any focal deficits?','CT or MRI results?']
-    },
-    surgery: {
-        name:'Dr. Nguyen', title:'Surgery Chief Resident',
-        icon:'🔪', color:'#059669', bgColor:'#D1FAE5',
-        style:'blunt', personality:'Busy and direct. Wants to know: does this patient need an operation? If yes, when? If no, why are you calling? Not rude, just efficient.',
-        commonQs:['Is there peritonitis?','When did symptoms start?','Have they had CT?','Are they hemodynamically stable?']
-    },
-    gi: {
-        name:'Dr. Patel', title:'GI Fellow',
-        icon:'🫁', color:'#D97706', bgColor:'#FEF3C7',
-        style:'collegial', personality:'Friendly and approachable but thorough. Wants to know if endoscopy is needed and how urgently. Appreciates when you\'ve thought through the GI workup.',
-        commonQs:['Any hematemesis or melena?','What\'s the hemoglobin trend?','Are they on anticoagulation?','Have they had a GI bleed before?']
-    },
-    nephrology: {
-        name:'Dr. Santos', title:'Nephrology Attending',
-        icon:'🫘', color:'#0891B2', bgColor:'#CFFAFE',
-        style:'academic', personality:'Loves to teach. Will ask you about the pathophysiology and make sure you understand the mechanism before making a plan. Speaks deliberately.',
-        commonQs:['What\'s the urine output?','Did you check a UA with microscopy?','What\'s the FENa?','Is this AKI or CKD?']
-    },
-    id: {
-        name:'Dr. Washington', title:'Infectious Disease',
-        icon:'🦠', color:'#16A34A', bgColor:'#DCFCE7',
-        style:'methodical', personality:'Systematic and evidence-based. Will ask about cultures, sensitivities, and antibiotic history. Wants you to narrow, not broaden.',
-        commonQs:['What cultures have been sent?','How long on current antibiotics?','Any recent hospitalizations?','What\'s the source?']
-    },
-    psych: {
-        name:'Dr. Rivera', title:'Psychiatry Attending',
-        icon:'💭', color:'#EC4899', bgColor:'#FCE7F3',
-        style:'empathetic', personality:'Calm and thoughtful. Asks about the whole picture — psychosocial, safety, capacity. Will ask whether medical causes have been ruled out first.',
-        commonQs:['Is the patient currently suicidal?','Has medical delirium been ruled out?','Are they willing to engage voluntarily?','What\'s their baseline function?']
-    },
-    allergy: {
-        name:'Dr. Fine', title:'Allergy/Immunology Attending',
-        icon:'🧪', color:'#2874A6', bgColor:'#EBF5FB',
-        style:'systematic', personality:'Patient and methodical. Wants a detailed drug/reaction history with timeline and symptoms. Will ask about prior allergist evaluations and what testing has been done. Teaching-oriented — will explain the reasoning behind the plan.',
-        commonQs:['What exactly happened during the reaction?','How long after drug administration?','Has the patient seen an allergist before?','What alternatives do you need?']
-    },
-    endocrine: {
-        name:'Dr. Blackwell', title:'Endocrinology Fellow',
-        icon:'🦋', color:'#7C3AED', bgColor:'#F5F3FF',
-        style:'analytical', personality:'Loves numbers and trends. Will ask about lab values, trajectories, and previous A1Cs. Expects you to know the insulin regimen details. Patient but precise.',
-        commonQs:['What\'s the anion gap?','What insulin are they on at home?','When was the last A1C?','Is there a precipitant?']
-    },
-    heme: {
-        name:'Dr. Adeyemi', title:'Hematology Attending',
-        icon:'🩸', color:'#DC2626', bgColor:'#FEF2F2',
-        style:'thorough', personality:'Systematic and evidence-based. Asks about labs in detail, timing, and anticoagulation history. Wants to know your clinical question before the full story.',
-        commonQs:['What anticoagulant are they on?','When was the last dose?','Is there active bleeding?','What\'s the platelet count and INR?']
-    },
-    rheum: {
-        name:'Dr. Castellano', title:'Rheumatology Attending',
-        icon:'🦴', color:'#D97706', bgColor:'#FFFBEB',
-        style:'academic', personality:'Loves pathophysiology. Will ask about serologies, complement levels, and extra-renal manifestations. Teaching-oriented — will walk you through the reasoning.',
-        commonQs:['What serologies have you sent?','Any extra-renal manifestations?','What\'s the creatinine trend?','Has the patient had a kidney biopsy?']
-    },
-    obgyn: {
-        name:'Dr. Nakamura', title:'OB/GYN Attending',
-        icon:'🤰', color:'#EC4899', bgColor:'#FCE7F3',
-        style:'urgent', personality:'Focused on maternal and fetal safety. Wants gestational age, blood pressures, and symptoms immediately. Will ask about fetal status and delivery planning.',
-        commonQs:['What\'s the gestational age?','Blood pressure trend?','Any headache, visual changes, or RUQ pain?','Fetal heart rate pattern?']
-    },
-    palliative: {
-        name:'Dr. Worthington', title:'Palliative Medicine',
-        icon:'🕊️', color:'#059669', bgColor:'#ECFDF5',
-        style:'empathetic', personality:'Calm, unhurried, deeply attentive. Asks about the patient as a person, not just the disease. Wants to understand values, fears, and what matters most.',
-        commonQs:['What does the patient understand about their illness?','What matters most to them?','Who is their decision-maker?','What are the family\'s expectations?']
-    },
-    tox: {
-        name:'Dr. Reeves', title:'Toxicology Fellow',
-        icon:'☠️', color:'#16A34A', bgColor:'#DCFCE7',
-        style:'rapid', personality:'Fast-paced, protocol-driven. Wants the ingestion details immediately: what, when, how much. Expects you to have activated the poison control protocol.',
-        commonQs:['What was ingested?','When?','How much?','What\'s the acetaminophen level and the time since ingestion?']
-    },
-    allergy_derm: {
-        name:'Dr. Chandra', title:'A/I Fellow (Derm Rotation)',
-        icon:'🧴', color:'#D97706', bgColor:'#FFFBEB',
-        style:'methodical', personality:'Focused on morphology and timeline. Wants to know exactly what the rash looks like, when it started relative to the drug, and what systemic features are present. Will teach you the difference between SJS, DRESS, and AGEP.',
-        commonQs:['When did the drug start relative to the rash?','Describe the morphology — macules, papules, vesicles, pustules?','Any mucosal involvement?','What are the eosinophils and liver enzymes?']
-    },
-    allergy_pulm: {
-        name:'Dr. Fine', title:'A/I Attending (Asthma Clinic)',
-        icon:'🫁', color:'#2874A6', bgColor:'#EBF5FB',
-        style:'systematic', personality:'Phenotype-driven. Wants biomarkers before discussing treatment. Will ask about eosinophils, FeNO, IgE, and comorbidities. Teaching-oriented — will walk through biologic selection rationale.',
-        commonQs:['What are the eosinophils and FeNO?','How many exacerbations in the past year?','Any nasal polyps or aspirin sensitivity?','Has adherence been verified?']
-    },
-    allergy_ed: {
-        name:'Dr. Khoury', title:'A/I On-Call Fellow',
-        icon:'🚨', color:'#DC2626', bgColor:'#FEF2F2',
-        style:'rapid', personality:'Urgent and focused. Needs to know immediately: is this mast cell or bradykinin? Urticaria present or absent? What has been given and did it work? Will guide emergency treatment in real time.',
-        commonQs:['Is there urticaria?','Did epi help?','Any family history of angioedema?','Is she on an ACE inhibitor?']
-    },
-    allergy_heme: {
-        name:'Dr. Vasquez', title:'A/I Attending (Mast Cell Clinic)',
-        icon:'🔬', color:'#7C3AED', bgColor:'#F5F3FF',
-        style:'investigative', personality:'Detective-like. Wants every detail of every episode — trigger, timing, symptoms, response to treatment. Will ask about tryptase levels obsessively. Connects clinical patterns to underlying mast cell pathology.',
-        commonQs:['What was the baseline tryptase?','Describe each episode in detail — trigger, timeline, symptoms.','Any skin findings between episodes?','Has anyone checked KIT D816V?']
-    }
+// ══════════════════════════════════════════════════════
+const SPECIALISTS={cardiology:{name:'Dr. Vasquez',title:'Cardiology Fellow',icon:'\u2764\uFE0F',color:'#EF4444',bgColor:'#FEE2E2',style:'direct',personality:'Efficient and focused. Wants the bottom line fast. Gets impatient with disorganized presentations but respects trainees who know their stuff.',commonQs:['What does the ECG show?','Troponin trend?','Hemodynamic instability?','EF?']},pulmonology:{name:'Dr. Okafor',title:'Pulmonary/Critical Care',icon:'\uD83E\uDEC1',color:'#3B82F6',bgColor:'#DBEAFE',style:'thorough',personality:'Teaching-oriented. Asks questions because they want you to learn. Will push you to think through physiology.',commonQs:['ABG?','CXR findings?','Work of breathing?','Supplemental O2?']},neurology:{name:'Dr. Kim',title:'Neurology Attending',icon:'\uD83E\uDDE0',color:'#8B5CF6',bgColor:'#EDE9FE',style:'precise',personality:'Extremely detail-oriented. Wants a thorough neuro exam before coming to see the patient.',commonQs:['Symptom onset?','NIH stroke scale?','Focal deficits?','CT/MRI?']},surgery:{name:'Dr. Nguyen',title:'Surgery Chief Resident',icon:'\uD83D\uDD2A',color:'#059669',bgColor:'#D1FAE5',style:'blunt',personality:'Busy and direct. Does this patient need an operation? If yes, when? If no, why are you calling?',commonQs:['Peritonitis?','Symptom duration?','CT done?','Hemodynamically stable?']},gi:{name:'Dr. Patel',title:'GI Fellow',icon:'\uD83D\uDD2C',color:'#D97706',bgColor:'#FEF3C7',style:'collegial',personality:'Friendly but thorough. Wants to know if endoscopy is needed and how urgently.',commonQs:['Hematemesis or melena?','Hemoglobin trend?','Anticoagulation?','Prior GI bleed?']},nephrology:{name:'Dr. Santos',title:'Nephrology Attending',icon:'\uD83E\uDED8',color:'#0891B2',bgColor:'#CFFAFE',style:'academic',personality:'Loves to teach. Will make sure you understand the mechanism before making a plan.',commonQs:['Urine output?','UA with microscopy?','FENa?','AKI or CKD?']},id:{name:'Dr. Washington',title:'Infectious Disease',icon:'\uD83E\uDDA0',color:'#16A34A',bgColor:'#DCFCE7',style:'methodical',personality:'Systematic and evidence-based. Wants you to narrow, not broaden.',commonQs:['Cultures sent?','How long on antibiotics?','Recent hospitalizations?','Source?']},psych:{name:'Dr. Rivera',title:'Psychiatry Attending',icon:'\uD83D\uDCAD',color:'#EC4899',bgColor:'#FCE7F3',style:'empathetic',personality:'Calm and thoughtful. Asks about the whole picture. Will ask whether medical causes have been ruled out first.',commonQs:['Currently suicidal?','Delirium ruled out?','Engaging voluntarily?','Baseline function?']},allergy:{name:'Dr. Fine',title:'Allergy/Immunology Attending',icon:'\uD83E\uDDEA',color:'#2874A6',bgColor:'#EBF5FB',style:'systematic',personality:'Patient and methodical. Wants a detailed drug/reaction history with timeline. Teaching-oriented.',commonQs:['What happened during the reaction?','How long after drug administration?','Prior allergist evaluation?','What alternatives do you need?']},endocrine:{name:'Dr. Blackwell',title:'Endocrinology Fellow',icon:'\uD83E\uDD8B',color:'#7C3AED',bgColor:'#F5F3FF',style:'analytical',personality:'Loves numbers and trends. Expects you to know the insulin regimen details.',commonQs:['Anion gap?','Home insulin?','Last A1C?','Precipitant?']},heme:{name:'Dr. Adeyemi',title:'Hematology Attending',icon:'\uD83E\uDE78',color:'#DC2626',bgColor:'#FEF2F2',style:'thorough',personality:'Systematic. Asks about labs in detail. Wants to know your clinical question before the full story.',commonQs:['Anticoagulant?','Last dose?','Active bleeding?','Platelet count and INR?']},rheum:{name:'Dr. Castellano',title:'Rheumatology Attending',icon:'\uD83E\uDDB4',color:'#D97706',bgColor:'#FFFBEB',style:'academic',personality:'Loves pathophysiology. Will walk you through the reasoning.',commonQs:['Serologies sent?','Extra-renal manifestations?','Creatinine trend?','Kidney biopsy?']},obgyn:{name:'Dr. Nakamura',title:'OB/GYN Attending',icon:'\uD83E\uDD30',color:'#EC4899',bgColor:'#FCE7F3',style:'urgent',personality:'Focused on maternal and fetal safety. Wants gestational age and blood pressures immediately.',commonQs:['Gestational age?','BP trend?','Headache, visual changes, RUQ pain?','Fetal heart rate?']},palliative:{name:'Dr. Worthington',title:'Palliative Medicine',icon:'\uD83D\uDD4A\uFE0F',color:'#059669',bgColor:'#ECFDF5',style:'empathetic',personality:'Calm, unhurried. Asks about the patient as a person, not just the disease.',commonQs:['What does the patient understand?','What matters most?','Decision-maker?','Family expectations?']},tox:{name:'Dr. Reeves',title:'Toxicology Fellow',icon:'\u2620\uFE0F',color:'#16A34A',bgColor:'#DCFCE7',style:'rapid',personality:'Fast-paced, protocol-driven. Wants ingestion details immediately.',commonQs:['What was ingested?','When?','How much?','Acetaminophen level?']},allergy_derm:{name:'Dr. Chandra',title:'A/I Fellow (Derm Rotation)',icon:'\uD83E\uDDF4',color:'#D97706',bgColor:'#FFFBEB',style:'methodical',personality:'Focused on morphology and timeline. Wants to know exactly what the rash looks like.',commonQs:['Drug vs rash timing?','Morphology?','Mucosal involvement?','Eosinophils and LFTs?']},allergy_pulm:{name:'Dr. Fine',title:'A/I Attending (Asthma Clinic)',icon:'\uD83E\uDEC1',color:'#2874A6',bgColor:'#EBF5FB',style:'systematic',personality:'Phenotype-driven. Wants biomarkers before discussing treatment.',commonQs:['Eosinophils and FeNO?','Exacerbations per year?','Nasal polyps or aspirin sensitivity?','Adherence verified?']},allergy_ed:{name:'Dr. Khoury',title:'A/I On-Call Fellow',icon:'\uD83D\uDEA8',color:'#DC2626',bgColor:'#FEF2F2',style:'rapid',personality:'Urgent and focused. Mast cell or bradykinin? Urticaria present or absent?',commonQs:['Urticaria?','Did epi help?','Family history of angioedema?','ACE inhibitor?']},allergy_heme:{name:'Dr. Vasquez',title:'A/I Attending (Mast Cell Clinic)',icon:'\uD83D\uDD2C',color:'#7C3AED',bgColor:'#F5F3FF',style:'investigative',personality:'Detective-like. Wants every detail of every episode. Will ask about tryptase obsessively.',commonQs:['Baseline tryptase?','Describe each episode.','Skin findings between episodes?','KIT D816V checked?']}};
+
+// ══════════════════════════════════════════════════════
+// SCENARIOS — abbreviated for space, full data inline
+// ══════════════════════════════════════════════════════
+const SCENARIOS={
+cardiology:[
+{id:'nstemi-consult',title:'Chest Pain \u2014 NSTEMI?',difficulty:'intermediate',meta:'68F, troponin trending up, ST depressions V4-V6',patient:'68-year-old woman with substernal chest pain \u00D7 3 hours. Hx of HTN, DM2, former smoker. Troponin 0.28 \u2192 0.52. ECG: ST depressions V4-V6. On heparin drip and aspirin. Hemodynamically stable.',idealPresentation:'Organized SBAR: who the patient is, why you\'re consulting (trending troponins with ECG changes), what you\'ve done, and what you need.',keyTopics:['troponin trend','ECG findings by lead','hemodynamic status','P2Y12 loading','cath timing'],teaching:'When consulting cardiology for ACS: always have the troponin TREND, describe ECG changes by lead, state hemodynamic status, list what you\'ve started (ASA, anticoagulation, statin, beta-blocker), and ask a specific question.',scoring:{organization:'Structured format (SBAR or similar)?',clinicalData:'Troponin trend, ECG findings, vitals, risk factors?',question:'Clearly stated what you needed from cardiology?',anticipation:'Had answers ready for follow-up questions?'}},
+{id:'afib-rvr',title:'New AFib with RVR',difficulty:'intermediate',meta:'72M, HR 148, post-op day 1',patient:'72-year-old male POD1 from right hemicolectomy. New onset AFib with HR 148. BP 110/68. Asymptomatic except palpitations. No prior cardiac history. TSH normal. K+ 3.4. Mg 1.6.',idealPresentation:'New onset vs. known AFib, hemodynamic status, precipitants, what you\'ve tried.',keyTopics:['new vs known AFib','electrolytes','rate control attempts','anticoagulation timing','surgical bleeding risk'],teaching:'Post-op AFib: replete K+ >4.0 and Mg >2.0. Rate control with IV metoprolol or diltiazem. Anticoagulation timing depends on surgical bleeding risk.',scoring:{organization:'Structured with clear question?',clinicalData:'Hemodynamics, electrolytes, surgical timing?',question:'Rate control AND anticoagulation timing?',anticipation:'Electrolyte values and medication trials ready?'}}
+],
+pulmonology:[
+{id:'copd-nippv',title:'COPD \u2014 Failing BiPAP',difficulty:'advanced',meta:'62M, CO\u2082 rising on NIPPV, somnolent',patient:'62-year-old male with severe COPD (FEV1 28%). On BiPAP 14/6 for 8 hours. Initial ABG pH 7.28/pCO2 72. Repeat ABG pH 7.24/pCO2 82. Increasingly somnolent. On steroids, nebs, antibiotics.',idealPresentation:'Lead with urgency: deteriorating on NIPPV, CO2 rising, mental status declining.',keyTopics:['ABG trend','NIPPV settings','mental status','airway protection','code status','goals of care'],teaching:'NIPPV failure: worsening ABG after 1-2h, declining mental status, inability to protect airway. Always know code status before calling.',scoring:{organization:'Led with urgency and trend?',clinicalData:'Both ABGs, NIPPV settings, mental status?',question:'Specific question about intubation criteria?',anticipation:'Knew code status?'}}
+],
+neurology:[
+{id:'acute-stroke',title:'Acute Onset Weakness',difficulty:'advanced',meta:'58F, left-sided weakness 90 min ago, NIHSS 12',patient:'58-year-old woman with sudden left-sided weakness and facial droop 90 minutes ago. PMH: HTN, AFib (not anticoagulated). NIHSS 12. CT head negative for hemorrhage. BP 178/96.',idealPresentation:'Time is brain. Lead with last known well time, NIHSS, CT result.',keyTopics:['last known well time','NIHSS','CT result','tPA contraindications','BP management','large-bore IVs'],teaching:'Stroke consult: LAST KNOWN WELL, NIHSS, CT result, contraindications, current BP. tPA window is 4.5h from last known well.',scoring:{organization:'Led with onset time and NIHSS?',clinicalData:'CT result, contraindications, BP?',question:'tPA eligibility?',anticipation:'Contraindication screening and BP plan?'}}
+],
+surgery:[
+{id:'appy-consult',title:'RLQ Pain \u2014 Appendicitis?',difficulty:'beginner',meta:'28M, WBC 16, RLQ tenderness, CT diagnostic',patient:'28-year-old male with 18h of periumbilical pain migrating to RLQ. Anorexia, vomiting. WBC 16.2. Temp 100.8\u00B0F. CT: 9mm appendix with fat stranding, no abscess, no perforation.',idealPresentation:'CT findings and clinical picture upfront. Surgery wants: diagnostic CT? Septic? OR candidate?',keyTopics:['CT findings','appendiceal diameter','perforation','peritoneal signs','NPO status','antibiotics'],teaching:'Acute abdomen consult: have the CT read, describe peritoneal signs, hemodynamic status, antibiotic timing, NPO status.',scoring:{organization:'Concise with CT findings upfront?',clinicalData:'CT details, duration, exam, vitals, WBC?',question:'Clear surgical evaluation ask?',anticipation:'NPO, allergies, antibiotic timing ready?'}}
+],
+gi:[
+{id:'ugib-consult',title:'Upper GI Bleed',difficulty:'intermediate',meta:'55M, hematemesis, Hgb dropping',patient:'55-year-old male with 3 episodes of hematemesis and melena. Alcohol history, no known liver disease. HR 108, BP 96/62. Hgb 10.2 \u2192 8.1. On PPI drip. 2 large-bore IVs, being transfused.',idealPresentation:'Lead with active bleed and hemodynamic instability.',keyTopics:['Hgb trend','hemodynamics','transfusion status','liver history','medication history','EGD timing'],teaching:'GI bleed: Hgb TREND matters more than single value. State hemodynamic status, resuscitation given, active vs. stabilized.',scoring:{organization:'Led with hemorrhage and hemodynamics?',clinicalData:'Hgb trend, vitals, transfusion, med history?',question:'EGD timing and disposition?',anticipation:'Access, transfusion, NPO status ready?'}}
+],
+nephrology:[
+{id:'aki-consult',title:'Acute Kidney Injury',difficulty:'intermediate',meta:'65F, Cr 1.0 \u2192 4.2, on vanc + pip-tazo',patient:'65-year-old female admitted for pneumonia. Baseline Cr 1.0, now 4.2 over 48h. UOP 150mL/12h. On vancomycin (trough 28) and pip-tazo. BUN 58. K+ 5.4. UA: muddy brown casts.',idealPresentation:'Pre-renal vs intrinsic vs post-renal framework. Highlight nephrotoxic meds.',keyTopics:['AKI framework','baseline Cr','urine microscopy','nephrotoxins','vanc+pip-tazo','hyperkalemia','dialysis indications'],teaching:'AKI: present with framework. Vanc + pip-tazo is synergistically nephrotoxic. Dialysis indications: AEIOU.',scoring:{organization:'AKI framework used?',clinicalData:'Baseline Cr, trend, UOP, UA, nephrotoxins?',question:'Etiology AND dialysis threshold?',anticipation:'Identified vanc + pip-tazo as culprit?'}}
+],
+id:[
+{id:'persistent-fever',title:'Persistent Fever on Abx',difficulty:'advanced',meta:'45M, MSSA bacteremia, febrile day 5 on vancomycin',patient:'45-year-old male with MSSA bacteremia. On vancomycin 5 days. Still febrile 101.4\u00B0F daily. Repeat cultures pending. TTE: no vegetations. Central line in place \u00D7 7 days. WBC trending down at 14.2.',idealPresentation:'Original infection, current antibiotics, what\'s not improving, workup done.',keyTopics:['MSSA on vancomycin','beta-lactam superiority','line removal','TEE vs TTE','repeat cultures','source control'],teaching:'For MSSA, beta-lactams are superior to vancomycin. Persistent S. aureus bacteremia >72h requires TEE, repeat cultures, source control.',scoring:{organization:'Culture data and timeline clear?',clinicalData:'Organism, sensitivities, regimen, line status, imaging?',question:'Antibiotic optimization and source control?',anticipation:'Recognized vancomycin is suboptimal for MSSA?'}}
+],
+psych:[
+{id:'capacity-eval',title:'Capacity Evaluation',difficulty:'advanced',meta:'82F, refusing surgery for hip fracture',patient:'82-year-old female with hip fracture. Ortho says she needs surgery. Patient refusing: "I\'d rather die than go through surgery." Lives alone, mild cognitive impairment (MMSE 22/30). No psych history. Daughter demanding surgery.',idealPresentation:'Capacity evaluation request. Specific decision, patient reasoning, cognitive baseline.',keyTopics:['decision-specific capacity','cognitive baseline','patient reasoning','informed consent','family dynamics'],teaching:'Capacity is decision-SPECIFIC. Four components: Understanding, Appreciation, Reasoning, Expressing a choice. Mild cognitive impairment does not equal incapacity.',scoring:{organization:'Specified the exact decision?',clinicalData:'Cognitive baseline, what was explained, patient reasoning?',question:'Capacity evaluation (not "clearance")?',anticipation:'Decision-specific, not global assessment?'}}
+],
+allergy:[
+{id:'vancomycin-rms',title:'Vancomycin Reaction \u2014 RMS vs Allergy',difficulty:'intermediate',meta:'58M, flushing during vancomycin infusion',patient:'58-year-old male on vancomycin for MRSA bacteremia. Third dose: flushing, pruritus, HR 108. No hypotension (BP 132/78), no wheezing, no angioedema. Infused over 60 min (prior doses: 90 min, no issues). Tryptase not drawn.',idealPresentation:'Distinguish RMS from IgE-mediated allergy. Key: timeline, symptoms, infusion rate change.',keyTopics:['RMS vs anaphylaxis','infusion rate','urticaria vs flushing','tryptase','hemodynamics','alternatives'],teaching:'Red Man Syndrome = direct mast cell degranulation from rapid vancomycin infusion. Not IgE-mediated. Slow the rate, premedicate.',scoring:{organization:'Reaction timeline relative to infusion rate?',clinicalData:'Flushing vs urticaria, vitals, rate, tryptase?',question:'Continue with modifications vs switch?',anticipation:'Knew rate changed, had alternatives ready?'}},
+{id:'periop-allergy',title:'Perioperative Allergy Clearance',difficulty:'advanced',meta:'34F, "allergic to everything," needs emergent surgery',patient:'34-year-old with acute cholecystitis, needs cholecystectomy within 12h. Allergy list: penicillin ("rash as child"), latex ("itchy hands"), iodine ("told I\'m allergic"), sulfa ("hives"), propofol ("got sick"). No allergist evaluation.',idealPresentation:'Risk-stratify each allergy. Most are likely not true allergies.',keyTopics:['penicillin de-labeling','latex Type I vs IV','iodine myth','propofol','sulfa cross-reactivity','periop planning'],teaching:'>90% with penicillin allergy tolerate it. Iodine allergy is a myth. Latex contact dermatitis is not surgical risk.',scoring:{organization:'Each allergy with history and risk assessment?',clinicalData:'IgE-mediated vs non-immune for each?',question:'Which are real surgical risks?',anticipation:'Knew iodine myth and penicillin stats?'}},
+{id:'peds-immunodeficiency',title:'Pediatric Immunodeficiency Workup',difficulty:'advanced',meta:'2yo with 8 ear infections in 12 months',patient:'Pediatrician calls about 2-year-old boy: 8 AOM episodes/12 months, 2 pneumonias (1 hospitalized), oral thrush \u00D7 3 weeks. Growth: 15th percentile (was 50th at 6 months). Lymphocytes 1,800 (low for age).',idealPresentation:'Exceeds Jeffrey Modell warning signs. Recurrent infections + thrush + FTT + lymphopenia = concern for combined immunodeficiency.',keyTopics:['Jeffrey Modell signs','lymphocyte norms by age','growth trajectory','immunoglobulins','lymphocyte subsets','TREC'],teaching:'Lymphocyte 1,800 is LOW for age 2 (normal >3,000). Initial workup: quantitative Igs, lymphocyte subsets, vaccine titers.',scoring:{organization:'Infection history systematic?',clinicalData:'Growth, lymphocytes with age-appropriate interpretation?',question:'Urgency and initial workup?',anticipation:'Knew adult lymphocyte norms don\'t apply?'}},
+{id:'allergy-triage',title:'Outpatient Referral Triage',difficulty:'intermediate',meta:'4 new referrals \u2014 which is urgent?',patient:'4 referrals: (A) 45yo, recurrent angioedema on ACE inhibitor \u2014 still on med. (B) 8yo, parent wants allergy testing. (C) 22yo, anaphylaxis to unknown trigger 2 weeks ago. (D) 55yo, annual allergy shot eval.',idealPresentation:'Prioritize by urgency. C (anaphylaxis) = urgent, A (ACE angioedema still on drug) = prompt.',keyTopics:['triage','anaphylaxis urgency','ACE angioedema','baseline tryptase','vague referrals'],teaching:'Urgent: anaphylaxis to unknown trigger, ACE angioedema if still on drug. Routine: stable immunotherapy.',scoring:{organization:'All 4 with triage ranking?',clinicalData:'Anaphylaxis as highest urgency?',question:'Scheduling priorities and pre-visit workup?',anticipation:'ACE medication should be STOPPED?'}}
+],
+endocrine:[
+{id:'dka-management',title:'DKA \u2014 Insulin Drip Not Closing Gap',difficulty:'advanced',meta:'32M, T1DM, pH 7.12, AG 28, glucose dropping but gap persists',patient:'32-year-old male with T1DM in DKA. Glucose 480, pH 7.12, bicarb 8, AG 28. Insulin drip \u00D7 4h. Glucose now 220 but AG still 24, pH 7.18. K+ 4.8 \u2192 3.6.',idealPresentation:'Gap not closing despite glucose dropping. Need dextrose + continued insulin. K+ dropping dangerously.',keyTopics:['anion gap vs glucose','dextrose','potassium monitoring','delta-delta','precipitant'],teaching:'Close the ANION GAP, not just glucose. At glucose 200-250, ADD dextrose and CONTINUE insulin. Monitor K+ q2h.',scoring:{organization:'Glucose, gap, pH, K+ trends together?',clinicalData:'Delta-delta, gap not closing?',question:'Adding dextrose?',anticipation:'K+ drops with insulin?'}}
+],
+heme:[
+{id:'dvt-on-anticoag',title:'New DVT on Therapeutic Anticoagulation',difficulty:'advanced',meta:'64F, PE 3 months ago on rivaroxaban, now new DVT',patient:'64-year-old woman, unprovoked PE 3 months ago on rivaroxaban 20mg daily. New left leg swelling, US confirms acute proximal DVT. Takes rivaroxaban with dinner. BMI 32.',idealPresentation:'Breakthrough VTE on DOAC. Check adherence, absorption, anti-Xa level, malignancy.',keyTopics:['rivaroxaban with food','anti-Xa levels','obesity dosing','malignancy screening','LMWH switch'],teaching:'Rivaroxaban 20mg MUST be with food (bioavailability drops ~40% without). Check anti-Xa in obesity.',scoring:{organization:'Timeline: original VTE, anticoagulation, new event?',clinicalData:'Adherence, absorption, dosing, BMI?',question:'Anti-Xa levels and malignancy workup?',anticipation:'Rivaroxaban with food requirement?'}}
+],
+rheum:[
+{id:'lupus-nephritis',title:'New Lupus Nephritis',difficulty:'advanced',meta:'28F, SLE, Cr rising, 28 weeks pregnant',patient:'28-year-old woman with SLE. Fatigue, periorbital edema, foamy urine. Cr 1.8 (baseline 0.8). UA: 3+ protein, RBC casts. Protein/Cr 3.8. C3 low, C4 low, anti-dsDNA 1:640. 28 weeks pregnant.',idealPresentation:'Active lupus nephritis with nephrotic proteinuria and active sediment. Pregnancy complicates treatment.',keyTopics:['lupus nephritis classification','pregnancy-safe immunosuppression','complement consumption','renal biopsy timing','preeclampsia vs lupus'],teaching:'Pregnancy-SAFE: azathioprine, tacrolimus, hydroxychloroquine, steroids. CONTRAINDICATED: mycophenolate, cyclophosphamide.',scoring:{organization:'Serologies, UA, renal function together?',clinicalData:'Complements, dsDNA, pregnancy?',question:'Biopsy classification and pregnancy-safe treatment?',anticipation:'Which immunosuppressants safe in pregnancy?'}}
+],
+obgyn:[
+{id:'preeclampsia',title:'Preeclampsia \u2014 When to Deliver',difficulty:'advanced',meta:'31F, 34 weeks, BP 165/105, headache, visual changes',patient:'31-year-old G2P1 at 34+2 weeks. BP 165/105. Protein/Cr 0.45. New headache, visual sparkles. Platelets 128 (were 210). AST 68, ALT 72. Fetal heart tracing Category I. Betamethasone given 24h ago.',idealPresentation:'Preeclampsia with severe features at 34 weeks. Multiple severe features present.',keyTopics:['severe features','magnesium','HELLP evolution','ACOG delivery criteria','fetal status'],teaching:'At \u226534 weeks with severe features, ACOG recommends delivery. START magnesium first. Falling platelets + rising LFTs = evolving HELLP.',scoring:{organization:'Severe features enumerated?',clinicalData:'BP, symptoms, platelets, LFTs, proteinuria, fetal status?',question:'Delivery timing and magnesium?',anticipation:'ACOG delivery at \u226534 weeks with severe features?'}}
+],
+palliative:[
+{id:'goals-of-care',title:'Goals of Care \u2014 Family Disagreement',difficulty:'advanced',meta:'78M, metastatic pancreatic cancer, family wants "everything"',patient:'78-year-old male with metastatic pancreatic cancer, declining 3 months. ECOG 3-4. On vasopressors and antibiotics for sepsis. Told PCP he "wouldn\'t want machines." No advance directive. Wife/son want full code. Daughter says "Dad wouldn\'t want this."',idealPresentation:'Goals-of-care crisis: terminal illness, no advance directive, family discord.',keyTopics:['patient values','prognostic awareness','family dynamics','meaning of everything','structured family meeting'],teaching:'Never call it "withdrawal of care." Start by asking what family understands. "Everything" usually means "don\'t abandon him."',scoring:{organization:'Patient as a person, not just diagnosis?',clinicalData:'Prognosis, functional status, prior wishes, family views?',question:'Palliative care to mediate?',anticipation:'"Everything" = "don\'t give up"?'}}
+],
+tox:[
+{id:'apap-overdose',title:'Acetaminophen Overdose \u2014 NAC Protocol',difficulty:'intermediate',meta:'22F, empty Tylenol bottle, 6h post-ingestion',patient:'22-year-old female, empty 500-count Extra Strength Tylenol bottle. "Took a lot" ~6h ago. APAP level 180 mcg/mL at 6h. AST 45, ALT 38. INR 1.0. Tearful: "didn\'t really want to die."',idealPresentation:'Significant ingestion. 180 at 6h is above Rumack-Matthew treatment line. Start NAC immediately.',keyTopics:['Rumack-Matthew nomogram','NAC timing','hepatotoxicity timeline','single vs staggered','psychiatric consult'],teaching:'NAC most effective within 8h. Normal LFTs at 6h are EXPECTED \u2014 hepatotoxicity manifests at 24-72h.',scoring:{organization:'Level with time, referenced nomogram?',clinicalData:'Level, time, LFTs, INR, ingestion details?',question:'NAC protocol and timing?',anticipation:'Normal LFTs at 6h do NOT rule out hepatotoxicity?'}}
+],
+allergy_derm:[
+{id:'dress-eval',title:'DRESS Syndrome Evaluation',difficulty:'advanced',meta:'45M, rash + eosinophilia + hepatitis, day 21 of TMP-SMX',patient:'45-year-old on TMP-SMX \u00D7 21 days. Diffuse morbilliform rash, facial edema, fever 39.5\u00B0C. Eosinophils 2,400, AST 188, ALT 212. Lymphadenopathy. Team calling it "drug rash."',idealPresentation:'DRESS syndrome, not a simple drug rash. Meets RegiSCAR criteria.',keyTopics:['DRESS vs simple eruption','RegiSCAR criteria','HHV-6','systemic steroids','late organ flares'],teaching:'DRESS latency 2-8 weeks. HHV-6 reactivation >60%. Hepatitis = leading cause of DRESS mortality. Slow steroid taper.',scoring:{organization:'Timeline, systemic features, labs together?',clinicalData:'Eosinophils, LFTs, lymphadenopathy, rash morphology?',question:'Recognized as DRESS?',anticipation:'Late organ flares?'}}
+],
+allergy_pulm:[
+{id:'severe-asthma-biologic',title:'Severe Asthma \u2014 Which Biologic?',difficulty:'advanced',meta:'52F, uncontrolled on Step 5, eos 850, polyps, possible AERD',patient:'52-year-old, adult-onset asthma, CRSwNP, possible aspirin sensitivity. High-dose ICS/LABA + LAMA + montelukast. 4 exacerbations/year. FEV1 58%. Eosinophils 850, IgE 450, FeNO 72.',idealPresentation:'T2-high severe asthma with eos, FeNO, comorbid polyps. Likely AERD.',keyTopics:['T2 biomarkers','phenotyping','dupilumab rationale','AERD','adherence','insurance'],teaching:'Dupilumab (anti-IL-4R\u03B1) uniquely positioned for asthma + polyps + eosinophilia \u2014 FDA-approved for all three.',scoring:{organization:'Biomarker panel systematic?',clinicalData:'FEV1, exacerbations, current therapy, comorbidities?',question:'Specific biologic with phenotype rationale?',anticipation:'Insurance, adherence, AERD management?'}}
+],
+allergy_ed:[
+{id:'hae-vs-anaphylaxis',title:'HAE vs Anaphylaxis \u2014 ED Angioedema',difficulty:'advanced',meta:'22F, lip/tongue swelling, no urticaria, epi not working',patient:'22-year-old female, progressive lip/tongue swelling \u00D7 3h. No urticaria. IM epi \u00D7 2, IV diphenhydramine, IV methylprednisolone \u2014 NO improvement. Drooling, difficulty speaking. Father "has same thing, takes injection at home." Not on ACE inhibitor.',idealPresentation:'NOT allergic angioedema. Epi failure + no urticaria + family hx = HAE. Needs C1-INH or icatibant.',keyTopics:['bradykinin vs histamine','HAE diagnosis','C1-INH concentrate','icatibant','airway management','C4 screening','family screening'],teaching:'No urticaria + epi failure = bradykinin-mediated. HAE: C1-INH concentrate or icatibant. Autosomal dominant, ~75% family history.',scoring:{organization:'Key negatives to build HAE case?',clinicalData:'Bradykinin vs histamine distinction?',question:'HAE-specific treatment?',anticipation:'Diagnostic labs AND family screening?'}}
+],
+allergy_heme:[
+{id:'mast-cell-anaphylaxis',title:'Recurrent Anaphylaxis \u2014 Mast Cell Workup',difficulty:'advanced',meta:'38M, 3 anaphylaxis episodes, baseline tryptase 18',patient:'38-year-old male, 3rd anaphylaxis in 18 months. Ep 1: bee sting. Ep 2: unprovoked at dinner. Ep 3: during exercise. All responded to epi. Baseline tryptase 18.2 (normal <11.4). No skin lesions.',idealPresentation:'Elevated baseline tryptase + recurrent anaphylaxis = red flag for clonal mast cell disease.',keyTopics:['baseline vs acute tryptase','WHO criteria','KIT D816V','bone marrow biopsy','lifelong VIT','mast cell stabilizers'],teaching:'Elevated baseline tryptase + recurrent anaphylaxis: investigate systemic mastocytosis. Venom immunotherapy is LIFELONG.',scoring:{organization:'Connected tryptase to anaphylaxis pattern?',clinicalData:'Baseline vs acute tryptase, all episodes, no skin findings?',question:'Bone marrow biopsy and KIT mutation?',anticipation:'VIT in mastocytosis is lifelong?'}}
+]
 };
 
-// ════════════════════════════════════════════════════════════
-// SCENARIOS (per specialty)
-// ════════════════════════════════════════════════════════════
-const SCENARIOS = {
-    cardiology: [
-        {
-            id:'nstemi-consult', title:'Chest Pain — NSTEMI?',
-            meta:'68F, troponin trending up',
-            patient:'68-year-old woman with substernal chest pain x 3 hours. Hx of HTN, DM2, former smoker. Troponin 0.28 → 0.52. ECG: ST depressions V4-V6. On heparin drip and aspirin. Hemodynamically stable.',
-            idealPresentation:'Organized SBAR: who the patient is, why you\'re consulting (trending troponins with ECG changes), what you\'ve done so far, and what you need (timing of cath, risk stratification).',
-            consultQuestion:'Should she go to cath urgently vs. next-day? GRACE/TIMI score implications.',
-            exchanges:[
-                {consultant:'Hey, I got your page. What do you have for me?', type:'open', hint:'Present your case — who is the patient, what\'s the clinical picture, and what\'s your question?'},
-                {consultant:'What\'s the troponin trend? Just one value or serial?', type:'detail', key:'troponin-trend'},
-                {consultant:'ECG — can you describe the changes specifically? Which leads?', type:'detail', key:'ecg-findings'},
-                {consultant:'Is she having active chest pain right now? Any hemodynamic instability?', type:'urgency', key:'current-status'},
-                {consultant:'Sounds like she needs a cath. Has she gotten her loading doses? P2Y12 inhibitor?', type:'management', key:'meds-given'}
-            ],
-            scoring:{
-                organization:'Did you present in a structured format (SBAR or similar)?',
-                clinicalData:'Did you include troponin trend, ECG findings, vitals, and risk factors?',
-                question:'Did you clearly state what you needed from cardiology?',
-                anticipation:'Did you have answers ready when asked follow-up questions?'
-            },
-            teaching:'When consulting cardiology for ACS: always have the troponin TREND (not just one value), describe ECG changes by lead, state hemodynamic status, list what you\'ve already started (ASA, anticoagulation, statin, beta-blocker), and ask a specific question (urgent vs. next-day cath, risk stratification guidance).'
-        },
-        {
-            id:'afib-rvr', title:'New AFib with RVR',
-            meta:'72M, HR 148, post-op',
-            patient:'72-year-old male POD1 from right hemicolectomy. New onset atrial fibrillation with HR 148. BP 110/68. Asymptomatic except palpitations. No prior cardiac history. TSH normal. K+ 3.4. Mg 1.6.',
-            idealPresentation:'Focused on: new onset vs. known AFib, hemodynamic status, precipitants (post-op, electrolytes, pain), what you\'ve tried so far.',
-            consultQuestion:'Rate control strategy in post-op patient. Anticoagulation timing with recent surgery.',
-            exchanges:[
-                {consultant:'What do you need?', type:'open', hint:'Present the case briefly — new AFib in a post-op patient.'},
-                {consultant:'Is this new-onset or does he have a history of AFib?', type:'detail', key:'afib-history'},
-                {consultant:'What are his electrolytes? Specifically potassium and magnesium.', type:'detail', key:'lytes'},
-                {consultant:'Have you tried anything for rate control yet?', type:'management', key:'rate-control'},
-                {consultant:'He just had surgery yesterday — anticoagulation is tricky here. What are you thinking?', type:'critical-thinking', key:'anticoag-timing'}
-            ],
-            scoring:{
-                organization:'Structured presentation with clear question?',
-                clinicalData:'Included hemodynamics, electrolytes, surgical timing, and precipitants?',
-                question:'Asked about rate control strategy AND anticoagulation timing?',
-                anticipation:'Had electrolyte values and medication trials ready?'
-            },
-            teaching:'Post-operative AFib: check and replete K+ >4.0 and Mg >2.0. Rate control with IV metoprolol (avoid in hypotension) or diltiazem. Anticoagulation timing depends on surgical bleeding risk — typically hold 24-48h post-op then reassess. CHA2DS2-VASc guides long-term anticoagulation need.'
-        }
-    ],
-    pulmonology: [
-        {
-            id:'copd-nippv', title:'COPD — Failing BiPAP',
-            meta:'62M, CO2 rising on NIPPV',
-            patient:'62-year-old male with severe COPD (FEV1 28% predicted), admitted for exacerbation. On BiPAP 14/6 for 8 hours. Initial ABG pH 7.28/pCO2 72. Repeat ABG now pH 7.24/pCO2 82. Increasingly somnolent. Getting steroids, nebs, antibiotics.',
-            idealPresentation:'Convey urgency: patient deteriorating on NIPPV, CO2 rising, mental status declining. Ask about intubation criteria vs. NIPPV adjustments.',
-            consultQuestion:'Is it time to intubate? Or can we adjust NIPPV settings?',
-            exchanges:[
-                {consultant:'I saw your page. Tell me about the patient.', type:'open', hint:'Lead with the urgency — this patient is worsening.'},
-                {consultant:'What are the NIPPV settings right now? And what were the two ABGs?', type:'detail', key:'nippv-abg'},
-                {consultant:'Is he following commands? Can he protect his airway?', type:'urgency', key:'mental-status'},
-                {consultant:'Has he been compliant with the BiPAP? Any mask leak issues?', type:'detail', key:'compliance'},
-                {consultant:'What\'s his code status? Have we had a goals-of-care conversation?', type:'critical-thinking', key:'goals-of-care'}
-            ],
-            scoring:{
-                organization:'Led with the urgency and trend, not the backstory?',
-                clinicalData:'Included both ABGs, NIPPV settings, mental status, and treatment given?',
-                question:'Asked a specific question about intubation criteria?',
-                anticipation:'Knew code status and had considered goals-of-care?'
-            },
-            teaching:'NIPPV failure criteria: worsening ABG after 1-2 hours of adequate NIPPV, declining mental status, inability to protect airway, hemodynamic instability. Always know the code status before calling. If the patient is full code, have the intubation discussion early — don\'t wait until they arrest.'
-        }
-    ],
-    neurology: [
-        {
-            id:'acute-stroke', title:'Acute Onset Weakness',
-            meta:'58F, left-sided weakness 90 min ago',
-            patient:'58-year-old woman with sudden onset left-sided weakness and facial droop 90 minutes ago. PMH: HTN, AFib (not on anticoagulation — patient declined). NIHSS 12. CT head negative for hemorrhage. BP 178/96.',
-            idealPresentation:'Time is brain. Lead with: last known well time, NIHSS, CT result. Ask about tPA eligibility and window.',
-            consultQuestion:'Is she a tPA candidate? Time-sensitive decision.',
-            exchanges:[
-                {consultant:'You paged stroke? What\'s the time of onset?', type:'open', hint:'LAST KNOWN WELL TIME is the first thing they want to hear.'},
-                {consultant:'NIHSS score? And has the CT been done?', type:'detail', key:'nihss-ct'},
-                {consultant:'Any contraindications to tPA? Recent surgery, bleeding, anticoagulation?', type:'detail', key:'tpa-contraindications'},
-                {consultant:'She\'s in AFib and NOT anticoagulated — do you know why?', type:'critical-thinking', key:'afib-context'},
-                {consultant:'I\'m coming down. Make sure you have two large-bore IVs, the tPA order set ready, and keep her BP below 185/110.', type:'management', key:'preparation'}
-            ],
-            scoring:{
-                organization:'Led with time of onset and NIHSS immediately?',
-                clinicalData:'Included CT result, contraindications screen, and current BP?',
-                question:'Asked specifically about tPA eligibility within the window?',
-                anticipation:'Had contraindication screening done and BP plan in place?'
-            },
-            teaching:'Stroke consult essentials: LAST KNOWN WELL (not "when did symptoms start"), NIHSS score, CT result (bleed or no bleed), contraindications to thrombolytics, current BP. For tPA: window is 4.5 hours from last known well. Keep BP <185/110 before and <180/105 after tPA. Two large-bore IVs required.'
-        }
-    ],
-    surgery: [
-        {
-            id:'appy-consult', title:'RLQ Pain — Appendicitis?',
-            meta:'28M, WBC 16, RLQ tenderness',
-            patient:'28-year-old male with 18 hours of periumbilical pain migrating to RLQ. Anorexia, one episode of vomiting. WBC 16.2. Temp 100.8°F. CT: 9mm appendix with periappendiceal fat stranding, no abscess, no perforation.',
-            idealPresentation:'Surgery wants: Is the CT diagnostic? Is the patient septic? How long has it been going on? Can he go to the OR?',
-            consultQuestion:'Surgical candidate for appendectomy.',
-            exchanges:[
-                {consultant:'What do you have?', type:'open', hint:'Brief and direct — Surgery wants the CT findings and clinical picture.'},
-                {consultant:'CT findings — what\'s the appendiceal diameter and is there perforation?', type:'detail', key:'ct-findings'},
-                {consultant:'How long has the pain been going on? And is he peritoneal?', type:'detail', key:'exam-duration'},
-                {consultant:'Has he gotten antibiotics yet? Any allergies?', type:'management', key:'abx-allergies'},
-                {consultant:'He sounds straightforward. We\'ll take him. NPO, consents, and make sure the OR knows.', type:'disposition', key:'prep'}
-            ],
-            scoring:{
-                organization:'Concise presentation with CT findings upfront?',
-                clinicalData:'Included CT details, duration, exam findings, vitals, and WBC?',
-                question:'Clear ask: surgical evaluation for appendectomy?',
-                anticipation:'Had NPO status, allergies, and antibiotic timing ready?'
-            },
-            teaching:'Consulting surgery for acute abdomen: have the CT read (or at least your read), describe peritoneal signs, state hemodynamic status, note antibiotic timing, and confirm NPO status. Surgeons want to know: does this need an operation, and how urgently? Don\'t bury the CT findings in a long HPI.'
-        }
-    ],
-    gi: [
-        {
-            id:'ugib-consult', title:'Upper GI Bleed',
-            meta:'55M, hematemesis, Hgb dropping',
-            patient:'55-year-old male with 3 episodes of hematemesis and melena. History of alcohol use, no known liver disease. HR 108, BP 96/62. Hgb on arrival 10.2, repeat now 8.1. On PPI drip. 2 large-bore IVs, being transfused. No prior EGD.',
-            idealPresentation:'Convey acuity: active bleed with hemodynamic changes and dropping Hgb. Ask about EGD timing and ICU vs. floor.',
-            consultQuestion:'Urgent vs. emergent EGD? Need for ICU admission?',
-            exchanges:[
-                {consultant:'Hey, I got your consult. What\'s going on?', type:'open', hint:'Lead with the active bleed and hemodynamic instability.'},
-                {consultant:'How many units have you given? Is he still actively bleeding?', type:'urgency', key:'transfusion-status'},
-                {consultant:'Any history of liver disease, varices, or prior bleeds?', type:'detail', key:'liver-history'},
-                {consultant:'Is he on any anticoagulants or NSAIDs?', type:'detail', key:'meds'},
-                {consultant:'I think we need to scope him within the next 12 hours. Can you get him to the ICU for monitoring?', type:'disposition', key:'icu-timing'}
-            ],
-            scoring:{
-                organization:'Led with the active hemorrhage and hemodynamic status?',
-                clinicalData:'Included Hgb trend, vitals, transfusion status, and medication history?',
-                question:'Asked about EGD timing and disposition?',
-                anticipation:'Had access, transfusion, and NPO status ready?'
-            },
-            teaching:'GI bleed consult: Hgb TREND matters more than single value. State hemodynamic status, volume resuscitation given, active bleeding vs. stabilized. Always mention anticoagulant/NSAID use and liver disease history. GI wants to know: can this wait for elective EGD, or does it need urgent/emergent scope?'
-        }
-    ],
-    nephrology: [
-        {
-            id:'aki-consult', title:'Acute Kidney Injury',
-            meta:'65F, Cr 1.0 → 4.2 over 48 hours',
-            patient:'65-year-old female admitted for pneumonia. Baseline Cr 1.0. Now 4.2 over 48 hours. Urine output 150mL in last 12 hours. On vancomycin (trough was 28) and piperacillin-tazobactam. BUN 58. K+ 5.4. UA shows muddy brown casts.',
-            idealPresentation:'Pre-renal vs. intrinsic vs. post-renal framework. Mention the nephrotoxic medications and high vanco trough.',
-            consultQuestion:'Etiology of AKI and whether dialysis is indicated.',
-            exchanges:[
-                {consultant:'Tell me about this kidney injury.', type:'open', hint:'Frame it: baseline, timeline, trajectory, and what you think is causing it.'},
-                {consultant:'What\'s the urine microscopy show? Did you get a FENa?', type:'detail', key:'urine-studies'},
-                {consultant:'She\'s on vancomycin with a trough of 28 AND pip-tazo — that\'s a well-known nephrotoxic combination. Have you adjusted?', type:'critical-thinking', key:'nephrotoxins'},
-                {consultant:'What\'s the potassium? Any ECG changes?', type:'urgency', key:'hyperkalemia'},
-                {consultant:'Let\'s talk about whether she needs emergent dialysis. What are the indications?', type:'teaching', key:'dialysis-indications'}
-            ],
-            scoring:{
-                organization:'Presented with AKI framework (pre/intrinsic/post)?',
-                clinicalData:'Included baseline Cr, trend, urine output, UA findings, and nephrotoxins?',
-                question:'Asked about etiology AND dialysis threshold?',
-                anticipation:'Identified vancomycin + pip-tazo as the likely culprit?'
-            },
-            teaching:'AKI consult: always present with the framework (pre-renal, intrinsic, post-renal). Include baseline Cr, trajectory, urine output, UA with microscopy (muddy brown casts = ATN), and ALL nephrotoxic medications. Vancomycin + piperacillin-tazobactam is a known synergistic nephrotoxic combination. Dialysis indications: Acidosis (refractory), Electrolytes (refractory hyperkalemia), Ingestion, Overload (fluid), Uremia symptoms (AEIOU).'
-        }
-    ],
-    id: [
-        {
-            id:'persistent-fever', title:'Persistent Fever on Abx',
-            meta:'45M, febrile day 5 on vanc/zosyn',
-            patient:'45-year-old male admitted with bacteremia (MSSA from blood cultures). On vancomycin for 5 days. Still febrile to 101.4°F daily. Repeat cultures pending. TTE showed no vegetations. Central line in place x 7 days. WBC trending down but still 14.2.',
-            idealPresentation:'Structured: original infection, current antibiotics, what\'s not improving, and what you\'ve done to find the source.',
-            consultQuestion:'Antibiotic optimization, line removal, further workup for persistent bacteremia.',
-            exchanges:[
-                {consultant:'I\'m returning your page about the persistent fever. Walk me through it.', type:'open', hint:'Present the original culture data, current regimen, and what\'s not resolving.'},
-                {consultant:'You said MSSA but he\'s on vancomycin. Why not nafcillin or cefazolin?', type:'critical-thinking', key:'abx-choice'},
-                {consultant:'Is the central line still in? When were repeat cultures drawn?', type:'detail', key:'line-cultures'},
-                {consultant:'TTE was negative — but has a TEE been done? MSSA bacteremia with persistent fever needs TEE.', type:'management', key:'tee'},
-                {consultant:'Let\'s narrow his regimen. For MSSA, the evidence strongly favors cefazolin over vancomycin. Pull the line today.', type:'disposition', key:'plan'}
-            ],
-            scoring:{
-                organization:'Presented culture data, antibiotic history, and timeline clearly?',
-                clinicalData:'Included organism, sensitivities, current regimen, line status, and imaging?',
-                question:'Asked about antibiotic optimization and source control?',
-                anticipation:'Recognized that vancomycin is suboptimal for MSSA?'
-            },
-            teaching:'ID consult for persistent bacteremia: ALWAYS know the organism and sensitivities. For MSSA, beta-lactams (nafcillin, oxacillin, or cefazolin) are superior to vancomycin — don\'t just default to vanc. Persistent S. aureus bacteremia (>72h) requires: repeat blood cultures, TEE (not just TTE), source control (remove lines, drain abscesses), and ID consultation. Every day of inappropriate antibiotics matters.'
-        }
-    ],
-    psych: [
-        {
-            id:'capacity-eval', title:'Capacity Evaluation',
-            meta:'82F, refusing surgery for hip fracture',
-            patient:'82-year-old female with hip fracture from a fall. Ortho says she needs surgery. Patient is refusing, stating "I\'d rather die than go through surgery." She lives alone, has mild cognitive impairment (MMSE 22/30 last year). No psychiatric history. Daughter is upset and demanding surgery.',
-            idealPresentation:'Clear request: capacity evaluation. Include the specific decision, the patient\'s stated reasoning, cognitive baseline, and what medical team has explained.',
-            consultQuestion:'Does this patient have capacity to refuse surgery?',
-            exchanges:[
-                {consultant:'I got your capacity consult. What\'s the specific decision she\'s making?', type:'open', hint:'State the exact decision: refusing surgical repair of hip fracture.'},
-                {consultant:'Tell me about her baseline cognition. Any dementia diagnosis?', type:'detail', key:'cognitive-baseline'},
-                {consultant:'Has the surgical team explained the risks of NOT having surgery? What does she understand?', type:'detail', key:'informed-consent'},
-                {consultant:'What is her reasoning for refusing? Not just "she doesn\'t want it" — what are her actual reasons?', type:'critical-thinking', key:'patient-reasoning'},
-                {consultant:'Is the family pressuring you to override her decision? Remember — capacity is about the patient, not the family\'s wishes.', type:'teaching', key:'family-dynamics'}
-            ],
-            scoring:{
-                organization:'Specified the exact decision being evaluated?',
-                clinicalData:'Included cognitive baseline, what was explained, and patient\'s reasoning?',
-                question:'Asked specifically for capacity evaluation, not "clearance"?',
-                anticipation:'Understood that capacity is decision-specific and not a global assessment?'
-            },
-            teaching:'Capacity consult: capacity is decision-SPECIFIC — a patient can have capacity for one decision and not another. Four components: (1) Understanding — can they state what\'s wrong and what\'s proposed? (2) Appreciation — do they understand how it applies to them? (3) Reasoning — can they explain their rationale? (4) Expressing a choice — are they consistent? A patient with mild cognitive impairment can absolutely have capacity. Family disagreement ≠ lack of capacity.'
-        }
-    ],
-    allergy: [
-        {
-            id:'vancomycin-rms-vs-allergy', title:'Vancomycin Reaction — RMS vs True Allergy',
-            meta:'58M, flushing and pruritus during vancomycin infusion',
-            patient:'58-year-old male receiving vancomycin for MRSA bacteremia. During his third dose, nursing reports flushing of the face and trunk, pruritus, and mild tachycardia (HR 108). No hypotension (BP 132/78), no wheezing, no angioedema. Vancomycin was infused over 60 minutes. Prior doses were infused over 90 minutes without issue. Tryptase not yet drawn. Nurse stopped the infusion and gave diphenhydramine 25mg IV. Surgery is asking: can he continue vancomycin or does he need an alternative?',
-            idealPresentation:'Distinguish infusion-related (Red Man Syndrome) from IgE-mediated allergy. Key: timeline relative to infusion, symptoms (flushing/pruritus vs. urticaria/bronchospasm/hypotension), and infusion rate change. Tryptase level helps but isn\'t required for RMS.',
-            consultQuestion:'Is this Red Man Syndrome or true vancomycin allergy? Can we continue vancomycin with modifications, or should we switch antibiotics?',
-            exchanges:[
-                {consultant:'I got the consult. Tell me about the reaction — what exactly happened and when?', type:'open', hint:'Describe the specific symptoms, their timing relative to the infusion, and the infusion rate.'},
-                {consultant:'Was the infusion rate different this time compared to previous doses?', type:'detail', key:'infusion-rate'},
-                {consultant:'Any urticaria — actual hives — or was it just flushing? And any wheezing, lip swelling, or hypotension?', type:'detail', key:'symptom-distinction'},
-                {consultant:'Has he ever had a reaction to vancomycin before? Any history of antibiotic allergies?', type:'detail', key:'allergy-history'},
-                {consultant:'Good. Here\'s what I\'m thinking — did anyone draw a tryptase before giving the diphenhydramine?', type:'critical-thinking', key:'tryptase'}
-            ],
-            scoring:{
-                organization:'Did you present the reaction timeline clearly relative to infusion rate?',
-                clinicalData:'Did you distinguish flushing from urticaria, include vital signs and infusion rate, and mention tryptase?',
-                question:'Did you ask whether vancomycin can be continued with modifications vs. needing a switch?',
-                anticipation:'Did you know the infusion rate changed and had alternative antibiotic options ready?'
-            },
-            teaching:'Red Man Syndrome is a direct mast cell degranulation reaction (NOT IgE-mediated) caused by rapid vancomycin infusion. Key features: flushing and pruritus on the upper body, no urticaria/angioedema/hypotension, onset during or shortly after infusion, and rate-dependent. Management: slow the infusion rate (minimum 60 min per gram, ideally 90-120 min), premedicate with diphenhydramine and/or acetaminophen. Tryptase is typically normal in RMS but elevated in anaphylaxis. True vancomycin allergy is rare — features include urticaria, bronchospasm, hypotension, and occurs regardless of infusion rate.'
-        },
-        {
-            id:'periop-allergy-clearance', title:'Perioperative Allergy Clearance',
-            meta:'34F, "allergic to everything" — needs emergent surgery',
-            patient:'34-year-old female with acute cholecystitis needs cholecystectomy within 12 hours. Allergy list: penicillin ("rash as a child"), latex ("itchy hands with gloves"), iodine ("someone told me I\'m allergic"), sulfa ("hives"), and propofol ("got sick last time"). No prior allergist evaluation. No anaphylaxis history. She is anxious and insisting she "can\'t have anesthesia."',
-            idealPresentation:'Risk-stratify each listed allergy. Many are likely not true allergies. Penicillin childhood rash: >90% are not truly allergic. Latex contact dermatitis ≠ IgE-mediated allergy. Iodine allergy is a myth (shellfish/iodine cross-reactivity is disproven). Sulfa hives need more history. Propofol "got sick" could be anything.',
-            consultQuestion:'Which of these allergies are real risks for surgery, and what precautions do we need? Can she safely undergo anesthesia?',
-            exchanges:[
-                {consultant:'Okay, I see the allergy list. Let\'s go through these one by one. Tell me about the penicillin reaction.', type:'open', hint:'Describe what you know: childhood rash, no details, no prior testing.'},
-                {consultant:'And the latex — is this contact dermatitis from gloves, or did she have a systemic reaction?', type:'detail', key:'latex-type'},
-                {consultant:'The iodine allergy — do you know the basis for this? Is it related to shellfish or contrast?', type:'critical-thinking', key:'iodine-myth'},
-                {consultant:'What about the propofol — what do you mean by "got sick"? Nausea? Hypotension? Rash?', type:'detail', key:'propofol-detail'},
-                {consultant:'Here\'s what I\'d recommend for the OR setup. The biggest real question is whether she needs penicillin skin testing before surgery, and that depends on what antibiotics she\'ll need post-op.', type:'management', key:'periop-plan'}
-            ],
-            scoring:{
-                organization:'Did you present each allergy with its specific history and your risk assessment?',
-                clinicalData:'Did you distinguish IgE-mediated from non-immune reactions for each allergen?',
-                question:'Did you ask which allergies are clinically significant for surgery and what precautions are needed?',
-                anticipation:'Did you know that iodine allergy is a myth and that most childhood penicillin "allergies" are not true allergies?'
-            },
-            teaching:'Perioperative allergy assessment: (1) Penicillin: childhood rash is NOT a contraindication. >90% with reported penicillin allergy tolerate it. Skin testing can de-label if time allows. Cephalosporins have <2% cross-reactivity. (2) Latex: contact dermatitis (Type IV) is NOT a surgical risk — only Type I (IgE-mediated) requires latex-free OR. Ask about systemic symptoms with latex. (3) Iodine: There is NO cross-reactivity between shellfish allergy and iodinated contrast or povidone-iodine. This is a myth. (4) Propofol: egg/soy allergy is NOT a contraindication (the allergenic proteins aren\'t present in propofol). Clarify the actual reaction. (5) Sulfa: hives = possible IgE-mediated. Avoid sulfonamide antibiotics but sulfa cross-reactivity between drug classes is minimal.'
-        },
-        {
-            id:'peds-immunodeficiency-referral', title:'Pediatric Immunodeficiency Workup',
-            meta:'2yo with 8 ear infections in 12 months',
-            patient:'A pediatrician calls about a 2-year-old boy with 8 episodes of acute otitis media in 12 months, 2 episodes of pneumonia (one requiring hospitalization), and one episode of oral thrush lasting 3 weeks. He is growing along the 15th percentile (was 50th at 6 months). He\'s in daycare. No family history of immunodeficiency. Vaccines are up to date. CBC from last month: WBC 9.2, lymphocytes 1,800 (low for age), normal neutrophils.',
-            idealPresentation:'This exceeds the Jeffrey Modell Foundation warning signs. The combination of recurrent sinopulmonary infections, persistent thrush, failure to thrive, and lymphopenia in a toddler raises concern for combined immunodeficiency or antibody deficiency. Needs urgent evaluation.',
-            consultQuestion:'What initial workup should the PCP send, and how urgently should this child be seen?',
-            exchanges:[
-                {consultant:'Hi, tell me about the child. How many infections and what types?', type:'open', hint:'Present the infection history systematically: types, frequency, severity, and any unusual features like the prolonged thrush.'},
-                {consultant:'What\'s his growth curve look like? Is he thriving?', type:'detail', key:'growth'},
-                {consultant:'Any family history — consanguinity, early childhood deaths, recurrent infections in siblings?', type:'detail', key:'family-hx'},
-                {consultant:'Good question about the lymphocyte count. At age 2, what should that number be?', type:'critical-thinking', key:'lymphocyte-norms'},
-                {consultant:'I want to see this child this week. Here\'s what I\'d like you to send ahead of the visit — and there\'s one test that can\'t wait.', type:'management', key:'initial-workup'}
-            ],
-            scoring:{
-                organization:'Did you present the infection history systematically with types, frequency, and severity?',
-                clinicalData:'Did you include growth trajectory, lymphocyte count with age-appropriate interpretation, and thrush as a red flag?',
-                question:'Did you ask about urgency of evaluation and initial workup?',
-                anticipation:'Did you know that normal adult lymphocyte ranges don\'t apply to a 2-year-old (should be >3,000)?'
-            },
-            teaching:'Pediatric immunodeficiency red flags (Jeffrey Modell Foundation): ≥4 ear infections/year, ≥2 serious sinus infections/year, ≥2 pneumonias/year, recurrent deep abscesses, persistent thrush after age 1, family history of immunodeficiency, failure to thrive. This child has multiple. Key: lymphocyte count of 1,800 is LOW for a 2-year-old (normal >3,000 — adult ranges don\'t apply to children). Initial workup: quantitative immunoglobulins (IgG, IgA, IgM, IgE), lymphocyte subsets (CD3/CD4/CD8/CD19/CD16+56), vaccine titers (tetanus, pneumococcal), and CBC with differential. If lymphocytes are truly low, TREC assay should be considered urgently. This child needs to be seen within days, not weeks.'
-        },
-        {
-            id:'allergy-triage-urgency', title:'Outpatient Referral Triage',
-            meta:'4 new referrals — which is urgent?',
-            patient:'You are the fellow running the allergy clinic. You have 4 new referral requests that came in over the weekend and need to triage them for scheduling: (A) 45-year-old with recurrent angioedema on ACE inhibitor — still on the medication. (B) 8-year-old whose parent wants allergy testing because child "seems allergic." (C) 22-year-old with history of anaphylaxis to unknown trigger 2 weeks ago — discharged from ED with EpiPen but no follow-up. (D) 55-year-old requesting annual allergy shot evaluation — stable on maintenance immunotherapy.',
-            idealPresentation:'Prioritize by clinical urgency. Patient C (recent anaphylaxis to unknown trigger) needs urgent evaluation within 1-2 weeks for tryptase, component testing, and trigger identification. Patient A needs prompt evaluation (2-4 weeks) — still on the causative medication. Patient D is routine (4-8 weeks). Patient B is non-urgent and may benefit from a pre-visit phone screen.',
-            consultQuestion:'In what order should these patients be scheduled, and is any of them urgent enough to add to this week\'s clinic?',
-            exchanges:[
-                {consultant:'Good morning. I see we have new referrals. Walk me through them and tell me your triage plan.', type:'open', hint:'Present all 4 patients briefly and propose a scheduling priority.'},
-                {consultant:'The anaphylaxis patient — what do you know about the event? Is there any indication of the trigger?', type:'detail', key:'anaphylaxis-details'},
-                {consultant:'The ACE inhibitor angioedema — is the patient still on the ACE inhibitor? That\'s the key question.', type:'urgency', key:'ace-still-on'},
-                {consultant:'For the child — do we know what the parent means by "seems allergic"? Any specific symptoms?', type:'detail', key:'peds-vague'},
-                {consultant:'You\'re right about the urgency ranking. What labs would you order for patient C before they come in?', type:'management', key:'pre-visit-labs'}
-            ],
-            scoring:{
-                organization:'Did you present all 4 patients clearly with a proposed triage ranking?',
-                clinicalData:'Did you identify the anaphylaxis patient as highest urgency and the ACE angioedema as needing prompt attention?',
-                question:'Did you ask about scheduling priorities and pre-visit workup?',
-                anticipation:'Did you know that recent anaphylaxis to unknown trigger needs urgent allergist follow-up, and that tryptase should be drawn 24+ hours post-event?'
-            },
-            teaching:'Allergy outpatient triage: URGENT (1-2 weeks): anaphylaxis to unknown trigger (risk of recurrence), angioedema on ACE inhibitor (if still on drug — risk of airway compromise), suspected SCID or immunodeficiency in infants. PROMPT (2-4 weeks): drug allergy evaluation when drug is needed, venom allergy after sting reaction, recurrent angioedema workup. ROUTINE (4-8 weeks): stable immunotherapy patients, chronic urticaria, environmental allergy testing. For the anaphylaxis patient: baseline tryptase (drawn >24h after event), specific IgE based on suspected triggers, and ensure EpiPen training. For ACE angioedema: the medication should be STOPPED immediately — bradykinin-mediated angioedema can worsen and is not responsive to epinephrine/antihistamines.'
-        }
-    ],
-    endocrine: [
-        {
-            id:'dka-management', title:'DKA — Insulin Drip Not Closing Gap',
-            meta:'32M, Type 1 DM, pH 7.12, AG 28, glucose 480',
-            patient:'32-year-old male with Type 1 DM presenting with DKA. Glucose 480, pH 7.12, bicarb 8, anion gap 28, beta-hydroxybutyrate 6.2. Started on insulin drip at 0.14 units/kg/hr 4 hours ago. Glucose now 220 but gap still 24 and pH 7.18. Potassium 4.8 on admission, now 3.6. He ran out of insulin 3 days ago.',
-            idealPresentation:'Gap not closing despite glucose dropping — need to add dextrose and continue insulin. Potassium is dropping — needs aggressive repletion. Identify the precipitant.',
-            consultQuestion:'Gap is not closing despite 4 hours of insulin. Glucose is falling but bicarb isn\'t improving. What am I missing?',
-            exchanges:[
-                {consultant:'Tell me where you are with the DKA protocol.', type:'open', hint:'Present glucose trend, gap trend, pH trend, potassium trend, and current insulin rate.'},
-                {consultant:'The glucose dropped from 480 to 220. Did you add dextrose to the fluids?', type:'critical-thinking', key:'dextrose'},
-                {consultant:'What\'s the potassium doing? That\'s the number that kills people in DKA, not the glucose.', type:'urgency', key:'potassium'},
-                {consultant:'Has the gap actually narrowed? Calculate the delta-delta for me.', type:'detail', key:'delta-delta'},
-                {consultant:'What made him stop taking his insulin? That matters for discharge planning.', type:'management', key:'precipitant'}
-            ],
-            scoring:{
-                organization:'Did you present glucose, gap, pH, and potassium trends together?',
-                clinicalData:'Did you calculate the delta-delta and recognize the gap isn\'t closing?',
-                question:'Did you ask about adding dextrose to allow continued insulin therapy?',
-                anticipation:'Did you know that potassium drops rapidly with insulin and needs aggressive monitoring/repletion?'
-            },
-            teaching:'DKA management pearls: The goal is to close the ANION GAP, not just lower glucose. Once glucose reaches 200-250, ADD dextrose (D5 or D10) to the fluids and CONTINUE the insulin drip. Stopping insulin because glucose is "better" is a common error that delays gap closure. Monitor potassium q2h — insulin drives K+ intracellularly. Replace aggressively: if K+ <4.0, give 20-40 mEq/h. Do not give insulin if K+ <3.3. The delta-delta ratio (change in AG ÷ change in bicarb) helps identify mixed disorders. Always identify and treat the precipitant (infection, medication non-adherence, new-onset DM).'
-        }
-    ],
-    heme: [
-        {
-            id:'dvt-on-anticoag', title:'New DVT on Therapeutic Anticoagulation',
-            meta:'64F, PE 3 months ago, on rivaroxaban, now new DVT',
-            patient:'64-year-old woman with unprovoked PE 3 months ago on rivaroxaban 20mg daily. Presents with new left leg swelling. Ultrasound confirms acute proximal DVT (femoral vein). INR not applicable (DOAC). She reports taking rivaroxaban reliably with dinner. No missed doses. No new medications. No known malignancy. BMI 32.',
-            idealPresentation:'New VTE on therapeutic anticoagulation is a treatment failure. Need to determine: is she truly adherent? Is the dose correct for her weight? Should we check anti-Xa levels? Does she need a malignancy workup?',
-            consultQuestion:'She developed a new DVT while on therapeutic rivaroxaban. What should we do differently?',
-            exchanges:[
-                {consultant:'Breakthrough VTE on a DOAC — that\'s concerning. Walk me through the situation.', type:'open', hint:'Present the original VTE, current anticoagulation, adherence, and the new event.'},
-                {consultant:'Is she actually absorbing the rivaroxaban? Does she take it with food? Any drug interactions?', type:'detail', key:'absorption'},
-                {consultant:'At her BMI, do we know the DOAC level? Have you checked an anti-Xa?', type:'critical-thinking', key:'anti-xa'},
-                {consultant:'Has she had age-appropriate cancer screening? Breakthrough VTE raises the malignancy question.', type:'management', key:'malignancy'},
-                {consultant:'Should we switch to LMWH or another DOAC? What\'s your thinking?', type:'management', key:'switch'}
-            ],
-            scoring:{
-                organization:'Did you present the timeline clearly — original VTE, anticoagulation, and new event?',
-                clinicalData:'Did you address adherence, absorption, dosing, drug interactions, and BMI?',
-                question:'Did you ask about checking anti-Xa levels and malignancy workup?',
-                anticipation:'Did you know that rivaroxaban must be taken WITH food for proper absorption, and that obesity affects DOAC levels?'
-            },
-            teaching:'Breakthrough VTE on anticoagulation: (1) Confirm true adherence — ask specifically about timing and food (rivaroxaban 20mg MUST be taken with food for adequate absorption; without food, bioavailability drops ~40%). (2) Check anti-Xa level (rivaroxaban-calibrated) to confirm therapeutic drug levels, especially in obesity (BMI >35-40 may need level-guided dosing). (3) Malignancy screening — unprovoked VTE with treatment failure has ~10% occult cancer rate. Age-appropriate screening plus CT abdomen/pelvis. (4) Consider switching to weight-based LMWH (enoxaparin 1mg/kg BID) which is more reliable in obesity, or dose-adjusted DOAC based on anti-Xa. (5) Consider IVC filter only if contraindication to anticoagulation, not routinely for treatment failure.'
-        }
-    ],
-    rheum: [
-        {
-            id:'lupus-nephritis', title:'New Lupus Nephritis',
-            meta:'28F, known SLE, now creatinine rising with proteinuria',
-            patient:'28-year-old woman with known SLE (diagnosed age 22, on hydroxychloroquine and low-dose prednisone). Presents with fatigue, periorbital edema, and foamy urine x 2 weeks. Cr 1.8 (baseline 0.8), UA shows 3+ protein, 15-20 RBCs with dysmorphic forms, RBC casts. Spot urine protein/creatinine ratio 3.8. C3 low (45), C4 low (8), anti-dsDNA elevated (1:640). She is 28 weeks pregnant.',
-            idealPresentation:'Active lupus nephritis with nephrotic-range proteinuria, active sediment, and complement consumption. Pregnancy complicates both diagnosis and treatment. Need urgent renal biopsy to classify (Class III-V) for treatment planning.',
-            consultQuestion:'Her creatinine doubled with nephrotic proteinuria and active sediment. She\'s 28 weeks pregnant. What class nephritis is this and what can we use for treatment?',
-            exchanges:[
-                {consultant:'Sounds like active nephritis. Give me the serologies and urine findings.', type:'open', hint:'Present creatinine trend, UA with sediment, proteinuria quantification, complements, and anti-dsDNA.'},
-                {consultant:'RBC casts and dysmorphic RBCs — that\'s glomerular. Has she had a kidney biopsy?', type:'detail', key:'biopsy'},
-                {consultant:'She\'s 28 weeks — that changes everything about treatment. What can we use and what can\'t we use?', type:'critical-thinking', key:'pregnancy-safe'},
-                {consultant:'What about the complement levels? What do low C3 and C4 tell us about disease activity?', type:'detail', key:'complements'},
-                {consultant:'We need to coordinate with MFM. What\'s the plan for monitoring the pregnancy?', type:'management', key:'mfm'}
-            ],
-            scoring:{
-                organization:'Did you present serologies, urinalysis, and renal function together?',
-                clinicalData:'Did you include complement levels, anti-dsDNA, and the pregnancy?',
-                question:'Did you ask about biopsy classification and pregnancy-safe treatment?',
-                anticipation:'Did you know which immunosuppressants are safe in pregnancy (azathioprine, tacrolimus) vs contraindicated (cyclophosphamide, mycophenolate)?'
-            },
-            teaching:'Lupus nephritis in pregnancy: (1) Biopsy is generally safe up to ~32 weeks and is needed to classify (treatment differs for Class III/IV vs V). (2) Pregnancy-SAFE immunosuppressants: azathioprine, tacrolimus, hydroxychloroquine (continue!), and corticosteroids. (3) CONTRAINDICATED in pregnancy: mycophenolate (teratogenic), cyclophosphamide (teratogenic), rituximab. (4) Low C3/C4 + elevated dsDNA = active SLE with complement consumption — but in pregnancy, also must distinguish from preeclampsia/HELLP. sFlt-1/PlGF ratio can help differentiate. (5) Coordinate with MFM for fetal monitoring, delivery timing, and thromboprophylaxis (SLE increases VTE risk, especially with nephrotic syndrome).'
-        }
-    ],
-    obgyn: [
-        {
-            id:'preeclampsia', title:'Preeclampsia — When to Deliver',
-            meta:'31F, 34 weeks, BP 165/105, proteinuria, headache',
-            patient:'31-year-old G2P1 at 34+2 weeks. BP 165/105 (confirmed on repeat 15 min later). Urine protein/creatinine 0.45. Reports new-onset headache and visual "sparkles." Platelets 128 (were 210 last week). AST 68, ALT 72. Cr 0.9. Fetal heart tracing is Category I (reassuring). She received betamethasone 24 hours ago. No prior history of preeclampsia.',
-            idealPresentation:'Preeclampsia with severe features at 34 weeks: severe-range BPs, headache with visual symptoms, thrombocytopenia, and transaminitis. Key question: does she meet delivery criteria now?',
-            consultQuestion:'She\'s 34 weeks with severe features. Steroids were given 24 hours ago. Should we deliver now or can we wait for the second dose?',
-            exchanges:[
-                {consultant:'What are the severe features you\'re seeing?', type:'open', hint:'List: severe BPs, headache, visual symptoms, falling platelets, rising LFTs.'},
-                {consultant:'Has she gotten magnesium? That\'s the priority before anything else.', type:'urgency', key:'magnesium'},
-                {consultant:'Platelets dropped from 210 to 128 in a week. Is this evolving into HELLP?', type:'critical-thinking', key:'hellp'},
-                {consultant:'At 34 weeks with severe features — what does ACOG say about timing of delivery?', type:'management', key:'delivery-timing'},
-                {consultant:'What\'s the fetal status? Is baby tolerating this?', type:'detail', key:'fetal-status'}
-            ],
-            scoring:{
-                organization:'Did you enumerate the severe features clearly?',
-                clinicalData:'Did you include BP, symptoms, platelets, LFTs, proteinuria, and fetal status?',
-                question:'Did you ask about delivery timing and magnesium?',
-                anticipation:'Did you know that at ≥34 weeks with severe features, ACOG recommends delivery after stabilization rather than expectant management?'
-            },
-            teaching:'Preeclampsia with severe features at ≥34 weeks: (1) START magnesium sulfate for seizure prophylaxis — this is the FIRST step, before delivery planning. (2) ACOG recommends delivery at ≥34 weeks with severe features. Do NOT delay for steroids if the clinical situation is deteriorating. (3) Severe features include: BP ≥160/110 on 2 occasions, thrombocytopenia <100k, transaminases >2x normal, creatinine >1.1, pulmonary edema, cerebral/visual symptoms. This patient has multiple. (4) Falling platelets + rising LFTs = evolving HELLP — delivery is definitive treatment. (5) Route: if no contraindication, induction of labor is preferred over cesarean. (6) Magnesium continues 24h postpartum. Monitor for postpartum complications.'
-        }
-    ],
-    palliative: [
-        {
-            id:'goals-of-care', title:'Goals of Care — Family Disagreement',
-            meta:'78M, metastatic pancreatic cancer, family wants "everything done"',
-            patient:'78-year-old male with metastatic pancreatic cancer, declining over 3 months. ECOG 3-4. Lost 40 lbs. Now admitted with biliary obstruction and sepsis. On vasopressors and broad-spectrum antibiotics. Oncology has told the family there are no further cancer-directed treatment options. The patient told his PCP 6 months ago he "wouldn\'t want to be kept alive on machines," but has no formal advance directive. His wife and adult son are insisting on "full code, everything possible." His daughter says "Dad wouldn\'t want this."',
-            idealPresentation:'This is a goals-of-care crisis: terminal illness with acute complication, no formal advance directive, family discord, and a patient who expressed prior wishes informally. Palliative care consult to help clarify values, mediate family, and align care with what the patient would want.',
-            consultQuestion:'Family is split on code status and aggressiveness of care. The patient can\'t communicate. His informal prior wishes conflict with what the wife wants. Can you help us navigate this?',
-            exchanges:[
-                {consultant:'Tell me about the patient as a person first — before the medical details.', type:'open', hint:'Share what you know about him, his values, relationships, and prior expressed wishes.'},
-                {consultant:'What does the family understand about where the cancer is and what the trajectory looks like?', type:'detail', key:'prognostic-awareness'},
-                {consultant:'The wife and son want everything. The daughter says he wouldn\'t want this. Have they been in the same room for this conversation?', type:'critical-thinking', key:'family-dynamics'},
-                {consultant:'What did he actually say to his PCP? And has anyone asked what "everything" means to the wife?', type:'management', key:'values-exploration'},
-                {consultant:'Let me come see the family this afternoon. Here\'s how I\'d like to structure the conversation.', type:'management', key:'family-meeting'}
-            ],
-            scoring:{
-                organization:'Did you present the patient as a person, not just a diagnosis?',
-                clinicalData:'Did you include prognosis, functional status, prior wishes, and family perspectives?',
-                question:'Did you ask palliative care to help mediate the family disagreement?',
-                anticipation:'Did you understand that "everything" often means "don\'t give up on him" rather than literal full resuscitation?'
-            },
-            teaching:'Goals-of-care family meeting: (1) NEVER call it a "withdrawal of care" conversation — reframe as "what would [patient] want." (2) Start by asking what the family understands about the illness. Often "full code" comes from hope, fear, or guilt — not informed decision-making. (3) Explore what "everything" means to them. Usually it means "don\'t abandon my father" — which you can honor regardless of code status. (4) If prior expressed wishes exist (even informal), they carry moral weight. Share them gently: "His doctor shared that 6 months ago, he said..." (5) The daughter may be expressing what she genuinely heard from her father. Don\'t dismiss her. (6) Have one structured family meeting with all parties present. Separate conversations breed mistrust. (7) Your job is not to "get" a DNR — it\'s to help the family make a decision the patient would recognize as his own.'
-        }
-    ],
-    tox: [
-        {
-            id:'apap-overdose', title:'Acetaminophen Overdose — NAC Protocol',
-            meta:'22F, found with empty Tylenol bottle, 6 hours post-ingestion',
-            patient:'22-year-old female brought to ED by roommate who found an empty 500-count bottle of Extra Strength Tylenol (500mg each). Patient initially alert but now drowsy. Reports taking "a lot" approximately 6 hours ago in a suicide attempt. Acetaminophen level: 180 mcg/mL at 6 hours. AST 45, ALT 38 (normal). INR 1.0. Creatinine 0.7. No co-ingestants reported. She is tearful and states she "didn\'t really want to die, I just wanted the pain to stop."',
-            idealPresentation:'This is a significant acetaminophen ingestion. At 6 hours, 180 mcg/mL is well above the treatment line on the Rumack-Matthew nomogram. NAC should be started IMMEDIATELY. Liver enzymes are normal now but hepatotoxicity typically manifests at 24-72 hours.',
-            consultQuestion:'Level is 180 at 6 hours. LFTs normal now. Should I start NAC? And which protocol — IV or oral?',
-            exchanges:[
-                {consultant:'What\'s the level and the time since ingestion? And have you plotted it on the nomogram?', type:'open', hint:'Present the level, time, and where it falls on Rumack-Matthew.'},
-                {consultant:'At 6 hours, 180 is significantly above the treatment line. Have you started NAC yet?', type:'urgency', key:'nac-timing'},
-                {consultant:'LFTs are normal at 6 hours — that\'s expected. When does hepatotoxicity actually manifest?', type:'critical-thinking', key:'timeline'},
-                {consultant:'Is this a single acute ingestion or could there have been staggered dosing over time?', type:'detail', key:'ingestion-pattern'},
-                {consultant:'She said she didn\'t want to die. Has psychiatry been consulted? This is a suicide attempt.', type:'management', key:'psych'}
-            ],
-            scoring:{
-                organization:'Did you present the level with the time and reference the nomogram?',
-                clinicalData:'Did you include level, time, LFTs, INR, and ingestion details?',
-                question:'Did you ask about NAC protocol and timing?',
-                anticipation:'Did you know that normal LFTs at 6 hours do NOT rule out hepatotoxicity, and that NAC is most effective within 8 hours?'
-            },
-            teaching:'Acetaminophen overdose: (1) Plot level on Rumack-Matthew nomogram (4-24 hours post-ingestion). This patient at 180 at 6 hours is ABOVE treatment line — start NAC immediately. (2) NAC is most effective if started within 8 hours of ingestion but should be given even late. IV protocol (Prescott): 150 mg/kg over 60 min, then 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours. Oral (Rumack): 140 mg/kg loading then 70 mg/kg q4h x 17 doses. (3) Normal LFTs at 6 hours are EXPECTED — stage 1 (0-24h) has minimal symptoms. Stage 2 (24-72h) is when AST/ALT rise. Stage 3 (72-96h) is peak hepatotoxicity. (4) The toxic dose is >150 mg/kg or >7.5g total. An entire 500-count bottle of 500mg = 250g — this is a massive ingestion. (5) Always check for co-ingestants (aspirin, diphenhydramine common in mixed OD). (6) Psychiatric consultation is MANDATORY for intentional overdose. Safety plan before discharge.'
-        }
-    ],
-    // ═══ A/I CROSS-SPECIALTY CONSULTS ═══
-    allergy_derm: [
-        {
-            id:'dress-evaluation', title:'DRESS Syndrome — Inpatient Allergy Consult',
-            meta:'45M, antibiotic rash with eosinophilia and liver involvement, day 21 of TMP-SMX',
-            patient:'45-year-old male started on TMP-SMX for UTI prophylaxis 21 days ago. Presents with diffuse morbilliform rash, facial edema, fever 39.5°C, and malaise. Labs: eosinophils 2,400, AST 188, ALT 212, Cr 1.1 (baseline 0.9). Lymph nodes palpable in cervical and axillary regions. The primary team is calling it a "drug rash" and asking if they should just switch antibiotics.',
-            idealPresentation:'This is NOT a simple drug rash — this is DRESS syndrome (Drug Reaction with Eosinophilia and Systemic Symptoms). Meets RegiSCAR criteria: rash + fever + eosinophilia + lymphadenopathy + organ involvement (liver). Need to stop TMP-SMX immediately, check HHV-6 reactivation, and initiate systemic steroids.',
-            consultQuestion:'We have a patient with a rash from TMP-SMX. Can we just switch to another antibiotic? Also his liver enzymes are up — is that related?',
-            exchanges:[
-                {consultant:'Tell me more about this rash — when did it start relative to the drug, and what does it look like?', type:'open', hint:'Present the timeline (21 days = classic DRESS latency 2-8 weeks), morphology, and systemic features.'},
-                {consultant:'Eosinophils 2,400 with liver involvement and lymphadenopathy — this is more than a drug rash. Have you heard of DRESS?', type:'critical-thinking', key:'dress-recognition'},
-                {consultant:'The liver enzymes concern me most. How high are they, and have you checked HHV-6 titers?', type:'detail', key:'hhv6-monitoring'},
-                {consultant:'This needs systemic steroids, not just drug withdrawal. What\'s your plan for monitoring after stopping the drug?', type:'management', key:'steroid-plan'},
-                {consultant:'DRESS can have late organ flares weeks after the drug is stopped. What follow-up do you need?', type:'anticipation', key:'late-flares'}
-            ],
-            scoring:{
-                organization:'Did you present timeline, systemic features, and labs together to paint the DRESS picture?',
-                clinicalData:'Did you include eosinophils, liver function, lymphadenopathy, and rash morphology?',
-                question:'Did you recognize this as DRESS rather than simple drug eruption?',
-                anticipation:'Did you know that DRESS can have late organ flares (thyroiditis, hepatitis, nephritis) weeks to months after the acute episode?'
-            },
-            teaching:'DRESS syndrome: (1) Latency 2-8 weeks (longer than SJS/TEN which is 1-3 weeks). (2) RegiSCAR scoring system for diagnosis. (3) HHV-6 reactivation occurs in >60% of DRESS — check PCR and titers. (4) Sulfonamides, anticonvulsants (phenytoin, carbamazepine, lamotrigine), and allopurinol are the most common causes. (5) Hepatitis is the most common organ involvement and the leading cause of DRESS mortality. (6) Treatment: stop drug, systemic corticosteroids (prednisone 1mg/kg), slow taper over 3-6 months. (7) LATE FLARES: thyroiditis (months later), hepatitis, type 1 DM — monitor for 12+ months after acute episode.'
-        }
-    ],
-    allergy_pulm: [
-        {
-            id:'severe-asthma-biologic-consult', title:'Severe Asthma — Which Biologic?',
-            meta:'52F, asthma uncontrolled on Step 5, 4 exacerbations/year, eosinophils 850, nasal polyps',
-            patient:'52-year-old female with adult-onset asthma, chronic rhinosinusitis with nasal polyposis (CRSwNP), and possible aspirin sensitivity (avoids NSAIDs due to "breathing problems" years ago). On high-dose ICS/LABA + LAMA + montelukast. Four exacerbations requiring systemic steroids in past 12 months. FEV1 58%. Blood eosinophils 850, total IgE 450, FeNO 72 ppb. Pulmonology is asking A/I to help select a biologic.',
-            idealPresentation:'T2-high severe asthma with eosinophilia, elevated FeNO, and comorbid CRSwNP. Likely AERD (aspirin triad). Need to phenotype fully and select the biologic that addresses ALL comorbidities — dupilumab is the strongest candidate given polyps + eosinophilia + elevated FeNO.',
-            consultQuestion:'Pulmonology here — our patient failed Step 5 therapy. Eosinophils are high, she has polyps, and maybe AERD. Which biologic should we start?',
-            exchanges:[
-                {consultant:'Let me get the full biomarker picture. What are the eosinophils, IgE, FeNO, and has she had an aspirin challenge?', type:'open', hint:'Present all T2 biomarkers and the AERD suspicion.'},
-                {consultant:'With polyps, eosinophilia, AND elevated FeNO, I\'m thinking dupilumab covers the most ground. Do you agree?', type:'critical-thinking', key:'biologic-rationale'},
-                {consultant:'If we confirm AERD, she\'d benefit from aspirin desensitization too — but let\'s get the asthma controlled first. How do we approach that?', type:'management', key:'aerd-desens'},
-                {consultant:'What about insurance? Most payers want documentation of Step 5 failure and specific biomarker thresholds.', type:'management', key:'prior-auth'},
-                {consultant:'Let\'s also make sure her inhaler technique is actually good and she\'s actually adherent before we add a $3,000/month biologic.', type:'detail', key:'adherence-check'}
-            ],
-            scoring:{
-                organization:'Did you present the biomarker panel systematically — eosinophils, IgE, FeNO, and the polyps?',
-                clinicalData:'Did you include FEV1, exacerbation frequency, current therapy, and comorbidities?',
-                question:'Did you recommend a specific biologic with rationale tied to her phenotype?',
-                anticipation:'Did you address the practical barriers — insurance, adherence verification, and AERD management sequencing?'
-            },
-            teaching:'Biologic selection for severe asthma: (1) Phenotype FIRST — biomarkers determine the target. (2) Dupilumab (anti-IL-4Rα) is uniquely positioned for patients with asthma + polyps + eosinophilia because it is FDA-approved for all three conditions. (3) In AERD: dupilumab + aspirin desensitization is the most comprehensive approach. (4) Confirm adherence before adding biologics — electronic monitoring or pharmacy refill records. (5) Insurance requires documentation: Step 5 failure, eosinophils ≥150 (most payers want ≥300), specific IgE sensitization (for omalizumab), prior authorization with supporting literature.'
-        }
-    ],
-    allergy_ed: [
-        {
-            id:'hae-vs-anaphylaxis', title:'HAE vs Anaphylaxis — ED Angioedema',
-            meta:'22F, severe lip/tongue swelling, no urticaria, epi not working',
-            patient:'22-year-old female brought to ED with rapidly progressive lip and tongue swelling × 3 hours. No urticaria anywhere. No pruritis. Given IM epinephrine 0.3mg × 2, IV diphenhydramine, IV methylprednisolone — NO improvement. She is drooling, has difficulty speaking. She mentions her father "has the same thing and takes some kind of injection at home." Not on ACE inhibitor. No known food or drug exposure.',
-            idealPresentation:'This is NOT allergic angioedema — epinephrine failure + no urticaria + family history = hereditary angioedema (HAE). Bradykinin-mediated. Needs C1-INH concentrate or icatibant immediately. Airway emergency.',
-            consultQuestion:'A/I, we have a 22-year-old with angioedema not responding to epi or steroids. Tongue is swelling. What are we missing?',
-            exchanges:[
-                {consultant:'Not responding to epi — that tells me this isn\'t mast cell-mediated. Any urticaria at all?', type:'open', hint:'Emphasize the absence of urticaria and the failure of standard allergic angioedema treatment.'},
-                {consultant:'Family history of the same thing? This is HAE. Does your pharmacy stock C1-inhibitor concentrate or icatibant?', type:'urgency', key:'hae-treatment'},
-                {consultant:'Her airway is at risk. Can you get anesthesia or ENT to stand by while we get the medication? How are you managing the airway?', type:'urgency', key:'airway-plan'},
-                {consultant:'After we stabilize her, she needs C4, C1-INH level and function, and C1q drawn BEFORE starting replacement — ideally now.', type:'detail', key:'diagnostic-labs'},
-                {consultant:'She\'ll need outpatient follow-up with us for long-term management and prophylaxis. And we need to test her family.', type:'management', key:'followup-plan'}
-            ],
-            scoring:{
-                organization:'Did you present the key negative findings (no urticaria, epi failure, family history) to build the HAE case?',
-                clinicalData:'Did you recognize the bradykinin vs histamine distinction?',
-                question:'Did you request the correct HAE-specific treatment (C1-INH or icatibant)?',
-                anticipation:'Did you plan diagnostic labs AND arrange outpatient follow-up and family screening?'
-            },
-            teaching:'ED angioedema algorithm: (1) Urticaria present → histaminergic (treat with epi, antihistamines, steroids). (2) NO urticaria + epi failure → consider bradykinin-mediated: HAE, acquired angioedema, or ACE inhibitor angioedema. (3) HAE treatment: C1-INH concentrate (Berinert 20 IU/kg IV) or icatibant (30mg SC) or ecallantide (30mg SC). These work in 30-60 min. (4) C4 is the screening test — low even between attacks. (5) Airway involvement in HAE = 30% mortality if untreated. Secure airway early, don\'t wait. (6) Family history in ~75% of cases (autosomal dominant). Screen all first-degree relatives.'
-        }
-    ],
-    allergy_heme: [
-        {
-            id:'mast-cell-anaphylaxis', title:'Recurrent Anaphylaxis — Mast Cell Disorder Workup',
-            meta:'38M, 3 episodes of anaphylaxis, 2 without identifiable trigger, baseline tryptase 18',
-            patient:'38-year-old male referred after 3rd episode of anaphylaxis in 18 months. Episode 1: bee sting → anaphylaxis. Episode 2: unprovoked — eating dinner at home, sudden flushing, hypotension, lost consciousness. Episode 3: during exercise, no food or drug exposure. All episodes responded to epinephrine. Baseline serum tryptase (drawn between episodes): 18.2 ng/mL (normal <11.4). CBC normal, no skin lesions. Previous allergist diagnosed "idiopathic anaphylaxis" and prescribed EpiPen.',
-            idealPresentation:'Recurrent anaphylaxis with elevated baseline tryptase >20% + 2 ng/mL of normal is a red flag for clonal mast cell disease (systemic mastocytosis). Need bone marrow biopsy, KIT D816V mutation testing. This is NOT simply idiopathic anaphylaxis.',
-            consultQuestion:'This patient keeps having anaphylaxis. One was from a bee sting but two were idiopathic. His tryptase is elevated at baseline. Is this mastocytosis?',
-            exchanges:[
-                {consultant:'A baseline tryptase of 18 with recurrent anaphylaxis — that\'s a red flag. Has anyone ordered a bone marrow biopsy?', type:'open', hint:'Present the tryptase value and its significance in the context of recurrent anaphylaxis.'},
-                {consultant:'The WHO minor criteria for systemic mastocytosis include baseline tryptase >20. His is 18 — close. But we also use the formula: tryptase >20% above baseline + 2. What was his acute tryptase during an episode?', type:'detail', key:'tryptase-formula'},
-                {consultant:'Even if tryptase is borderline, with recurrent anaphylaxis we should check KIT D816V on peripheral blood. If positive, that clinches it. If negative, we still may need marrow.', type:'critical-thinking', key:'kit-mutation'},
-                {consultant:'Regardless of mastocytosis diagnosis — he had venom anaphylaxis. He needs venom skin testing and likely venom immunotherapy for LIFE if mastocytosis is confirmed.', type:'management', key:'venom-vit'},
-                {consultant:'If the marrow confirms mastocytosis, what changes about his long-term management beyond just carrying an EpiPen?', type:'management', key:'masto-management'}
-            ],
-            scoring:{
-                organization:'Did you connect the elevated tryptase to the recurrent anaphylaxis pattern to build the mastocytosis case?',
-                clinicalData:'Did you include baseline vs acute tryptase, all three episodes with triggers, and the absence of skin findings?',
-                question:'Did you recommend bone marrow biopsy and KIT mutation testing?',
-                anticipation:'Did you know that venom immunotherapy in mastocytosis patients should be lifelong (not the usual 5 years)?'
-            },
-            teaching:'Mast cell disorder workup for recurrent anaphylaxis: (1) ALWAYS check baseline tryptase (drawn between episodes, not during). Elevated baseline (>11.4 or >20% + 2 of the individual\'s own baseline) suggests clonal mast cell disease. (2) WHO minor criteria for systemic mastocytosis: tryptase >20, KIT D816V mutation, aberrant CD25+ mast cells on marrow, spindle-shaped morphology. Need 1 major + 1 minor OR 3 minor criteria. (3) Indolent systemic mastocytosis with anaphylaxis: VIT is LIFELONG (stopping after 5 years → 50%+ relapse rate). (4) Bone marrow biopsy: gold standard. Request mast cell tryptase staining, flow cytometry for CD25/CD2, and KIT D816V. (5) Management: EpiPen always, avoid known triggers, consider mast cell stabilizers (cromolyn), avoidance of mast cell degranulators (opioids, contrast, certain anesthetics).'
-        }
-    ]
-};
-
-// ════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // STATE
-// ════════════════════════════════════════════════════════════
-let selectedSpec = null;
-let selectedCase = null;
-let currentScenario = null;
-let exchangeIndex = 0;
-let studentResponses = [];
+// ══════════════════════════════════════════════════════
+let selectedSpec=null,selectedCase=null,currentScenario=null,chatHistory=[],exchangeCount=0,maxExchanges=6,isAiThinking=false,sessionStartTime=null;
 
-// ════════════════════════════════════════════════════════════
-// SETUP UI
-// ════════════════════════════════════════════════════════════
-function renderSetup() {
-    const grid = document.getElementById('specGrid');
-    grid.innerHTML = Object.entries(SPECIALISTS).map(([key, s]) => `
-        <div class="spec-card" id="spec-${key}" onclick="selectSpec('${key}')">
-            <div class="spec-icon">${s.icon}</div>
-            <div class="spec-name">${s.name}</div>
-            <div class="spec-sub">${s.title}</div>
-        </div>
-    `).join('');
+// ══════════════════════════════════════════════════════
+// PERSISTENCE + ANALYTICS INTEGRATION
+// ══════════════════════════════════════════════════════
+const STORAGE_KEY='rdx-consult-callback';
+function loadProgress(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{sessions:[],totalSessions:0,streak:0,lastDate:null}}catch(e){return{sessions:[],totalSessions:0,streak:0,lastDate:null}}}
+function saveProgress(d){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}catch(e){}}
+function updateStats(){var p=loadProgress();document.getElementById('statSessions').textContent=p.totalSessions;var scores=p.sessions.map(function(s){return s.overall}).filter(Boolean);document.getElementById('statAvg').textContent=scores.length?Math.round(scores.reduce(function(a,b){return a+b},0)/scores.length)+'%':'\u2014';document.getElementById('statStreak').textContent=p.streak}
+
+function emitRPFSData(scores,scenario){
+  var rpfsEvent={tool:'Consult Callback',timestamp:new Date().toISOString(),specialist:selectedSpec,scenario:scenario.id,
+    dimensions:{'Data Gathering':scores.clinicalData,'Problem Representation':scores.organization,'Hypothesis Generation':Math.round((scores.clinicalData+scores.anticipation)/2),'Diagnostic Verification':scores.anticipation,'Bayesian Updating':Math.round((scores.question+scores.anticipation)/2),'Cognitive Flexibility':scores.question,'Illness Script Matching':Math.round((scores.clinicalData+scores.organization)/2),'Metacognition':scores.anticipation},
+    overall:scores.overall};
+  try{var h=JSON.parse(localStorage.getItem('rdx-rpfs-events')||'[]');h.push(rpfsEvent);if(h.length>200)h.splice(0,h.length-200);localStorage.setItem('rdx-rpfs-events',JSON.stringify(h))}catch(e){}
+  window.dispatchEvent(new CustomEvent('rdx-rpfs-update',{detail:rpfsEvent}));
 }
 
-function selectSpec(key) {
-    selectedSpec = key;
-    selectedCase = null;
-    document.querySelectorAll('.spec-card').forEach(c => c.classList.remove('selected'));
-    document.getElementById('spec-'+key)?.classList.add('selected');
-    renderCases();
-    updateStartBtn();
+// ══════════════════════════════════════════════════════
+// RENDER SETUP
+// ══════════════════════════════════════════════════════
+function renderSetup(){
+  var grid=document.getElementById('specGrid');
+  grid.innerHTML=Object.entries(SPECIALISTS).map(function(entry){
+    var key=entry[0],s=entry[1],cc=(SCENARIOS[key]||[]).length,noCases=cc===0;
+    return '<div class="spec-card'+(noCases?' no-cases':'')+'" id="spec-'+key+'" onclick="selectSpec(\''+key+'\')" style="--spec-color:'+s.color+';--spec-bg:'+s.bgColor+'"><div class="spec-icon" style="background:'+s.bgColor+'">'+s.icon+'</div><div class="spec-name">'+s.name+'</div><div class="spec-sub">'+s.title+'</div><div class="spec-cases"'+(noCases?' style="opacity:.4"':'')+'>'+(cc?cc+' case'+(cc>1?'s':''):'coming soon')+'</div></div>';
+  }).join('');
+  updateStats();
 }
 
-function renderCases() {
-    const grid = document.getElementById('caseGrid');
-    const cases = SCENARIOS[selectedSpec] || [];
-    grid.innerHTML = cases.map(c => `
-        <div class="case-opt" id="case-${c.id}" onclick="selectCase('${c.id}')">
-            <div class="co-title">${c.title}</div>
-            <div class="co-meta">${c.meta}</div>
-        </div>
-    `).join('');
+function selectSpec(key){
+  if(!(SCENARIOS[key]||[]).length)return;
+  selectedSpec=key;selectedCase=null;
+  document.querySelectorAll('.spec-card').forEach(function(c){c.classList.remove('selected')});
+  document.getElementById('spec-'+key).classList.add('selected');
+  renderCases();
+  document.getElementById('caseSection').style.display='block';
+  updateStartBtn();
 }
 
-function selectCase(id) {
-    selectedCase = id;
-    document.querySelectorAll('.case-opt').forEach(c => c.classList.remove('selected'));
-    document.getElementById('case-'+id)?.classList.add('selected');
-    updateStartBtn();
+function renderCases(){
+  var grid=document.getElementById('caseGrid'),cases=SCENARIOS[selectedSpec]||[];
+  grid.innerHTML=cases.map(function(c){
+    var dc=c.difficulty==='beginner'?'diff-beginner':c.difficulty==='intermediate'?'diff-intermediate':'diff-advanced';
+    var dl=c.difficulty.charAt(0).toUpperCase()+c.difficulty.slice(1);
+    return '<div class="case-card" id="case-'+c.id+'" onclick="selectCase(\''+c.id+'\')"><div class="cc-diff '+dc+'">'+dl+'</div><div class="cc-title">'+c.title+'</div><div class="cc-meta">'+c.meta+'</div></div>';
+  }).join('');
 }
 
-function updateStartBtn() {
-    document.getElementById('startBtn').disabled = !(selectedSpec && selectedCase);
+function selectCase(id){
+  selectedCase=id;
+  document.querySelectorAll('.case-card').forEach(function(c){c.classList.remove('selected')});
+  document.getElementById('case-'+id).classList.add('selected');
+  updateStartBtn();
 }
 
-// ════════════════════════════════════════════════════════════
+function updateStartBtn(){document.getElementById('startBtn').disabled=!(selectedSpec&&selectedCase)}
+
+// ══════════════════════════════════════════════════════
 // GAME FLOW
-// ════════════════════════════════════════════════════════════
-function startConsult() {
-    const cases = SCENARIOS[selectedSpec] || [];
-    currentScenario = cases.find(c => c.id === selectedCase);
-    if (!currentScenario) return;
-    exchangeIndex = 0;
-    studentResponses = [];
+// ══════════════════════════════════════════════════════
+document.getElementById('startBtn').addEventListener('click',startConsult);
 
-    document.getElementById('setupPanel').style.display = 'none';
-    document.getElementById('gameArea').style.display = 'block';
-
-    // Show patient brief
-    const spec = SPECIALISTS[selectedSpec];
-    document.getElementById('gameArea').innerHTML = `
-        <div class="chat-panel" style="margin-bottom:16px;">
-            <div style="padding:18px;background:#FFFBEB;border-bottom:1px solid #FDE68A;">
-                <div style="font-size:11px;font-weight:700;color:#92400E;text-transform:uppercase;margin-bottom:6px;">📋 Patient Brief — Review Before the Call</div>
-                <div style="font-size:13px;line-height:1.6;color:#78350F;">${currentScenario.patient}</div>
-                <div style="margin-top:10px;font-size:12px;color:#92400E;font-style:italic;">💡 ${currentScenario.idealPresentation}</div>
-            </div>
-        </div>
-        <button type="button" class="start-btn" onclick="ringPhone()">📱 Call ${spec.title}</button>
-    `;
+function startConsult(){
+  var cases=SCENARIOS[selectedSpec]||[];
+  currentScenario=cases.find(function(c){return c.id===selectedCase});
+  if(!currentScenario)return;
+  exchangeCount=0;chatHistory=[];sessionStartTime=Date.now();
+  document.getElementById('setupPanel').style.display='none';
+  document.getElementById('gameArea').style.display='block';
+  var spec=SPECIALISTS[selectedSpec];
+  document.getElementById('gameArea').innerHTML='<div class="brief-card"><div class="brief-header"><div style="font-size:20px">📋</div><div><div class="brief-label">Patient Brief \u2014 Review Before the Call</div></div></div><div class="brief-body">'+currentScenario.patient+'</div><div class="brief-tip"><span>💡</span><span>'+currentScenario.idealPresentation+'</span></div></div><button type="button" class="start-btn" onclick="ringPhone()" style="margin-top:0">📱 Call '+spec.title+'</button>';
 }
 
-function ringPhone() {
-    const spec = SPECIALISTS[selectedSpec];
-    const overlay = document.createElement('div');
-    overlay.className = 'ring-overlay';
-    overlay.id = 'ringOverlay';
-    overlay.innerHTML = `
-        <div class="ring-card">
-            <div class="ring-icon">${spec.icon}</div>
-            <div class="ring-label">Calling back...</div>
-            <div class="ring-name">${spec.name}</div>
-            <div class="ring-dept">${spec.title}</div>
-            <button type="button" class="answer-btn" onclick="answerCall()">Answer Call</button>
-        </div>
-    `;
-    document.body.appendChild(overlay);
+function ringPhone(){
+  var spec=SPECIALISTS[selectedSpec];
+  var ov=document.createElement('div');ov.className='ring-overlay';ov.id='ringOverlay';
+  ov.innerHTML='<div class="ring-card"><div class="ring-phone-icon" style="background:'+spec.bgColor+'">📞</div><div class="ring-label">Incoming call from...</div><div class="ring-name">'+spec.name+'</div><div class="ring-dept">'+spec.title+'</div><button type="button" class="answer-btn" onclick="answerCall()">Answer Call</button><button type="button" class="decline-btn" onclick="document.getElementById(\'ringOverlay\').remove()">Decline</button></div>';
+  document.body.appendChild(ov);
 }
 
-function answerCall() {
-    document.getElementById('ringOverlay')?.remove();
-    const spec = SPECIALISTS[selectedSpec];
-
-    document.getElementById('gameArea').innerHTML = `
-        <div class="chat-panel" id="chatPanel">
-            <div class="chat-header">
-                <div class="chat-avatar" style="background:${spec.bgColor}">${spec.icon}</div>
-                <div class="chat-header-info">
-                    <div class="ch-name">${spec.name}</div>
-                    <div class="ch-dept">${spec.title}</div>
-                </div>
-                <div class="ch-status status-active">On Call</div>
-            </div>
-            <div class="chat-body" id="chatBody"></div>
-            <div class="resp-area" id="respArea"></div>
-        </div>
-    `;
-
-    // First consultant message
-    setTimeout(() => showConsultantMessage(0), 800);
+function answerCall(){
+  document.getElementById('ringOverlay').remove();
+  var spec=SPECIALISTS[selectedSpec];
+  document.getElementById('gameArea').innerHTML='<div class="chat-panel" id="chatPanel"><div class="chat-header"><div class="chat-avatar" style="background:'+spec.bgColor+'">'+spec.icon+'</div><div class="chat-header-info"><div class="ch-name">'+spec.name+'</div><div class="ch-dept">'+spec.title+'</div></div><div class="ch-status status-active">On Call</div></div><div class="chat-body" id="chatBody"></div><div class="exchange-counter" id="exchangeCounter"><div class="exchange-dots" id="exchangeDots"></div><span>Exchange <span id="exNum">1</span> of '+maxExchanges+'</span></div><div class="resp-area" id="respArea"></div></div>';
+  updateExchangeDots();
+  setTimeout(function(){sendAiMessage(true)},800);
 }
 
-function showConsultantMessage(idx) {
-    if (idx >= currentScenario.exchanges.length) {
-        endConsult();
-        return;
-    }
-    exchangeIndex = idx;
-    const exchange = currentScenario.exchanges[idx];
-    const spec = SPECIALISTS[selectedSpec];
-    const body = document.getElementById('chatBody');
-
-    // Typing indicator
-    body.innerHTML += `<div class="msg consultant" id="typing"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
-    body.scrollTop = body.scrollHeight;
-
-    setTimeout(() => {
-        document.getElementById('typing')?.remove();
-        body.innerHTML += `
-            <div class="msg consultant">
-                <div class="msg-sender">${spec.name}</div>
-                <div class="msg-bubble">${exchange.consultant}</div>
-            </div>
-        `;
-        body.scrollTop = body.scrollHeight;
-        showResponseInput(idx);
-    }, 1200 + Math.random() * 800);
+function updateExchangeDots(){
+  var dots=document.getElementById('exchangeDots');if(!dots)return;
+  var h='';for(var i=0;i<maxExchanges;i++){var cls=i<exchangeCount?'done':i===exchangeCount?'current':'';h+='<div class="ex-dot '+cls+'"></div>'}
+  dots.innerHTML=h;
+  var en=document.getElementById('exNum');if(en)en.textContent=Math.min(exchangeCount+1,maxExchanges);
 }
 
-function showResponseInput(idx) {
-    const exchange = currentScenario.exchanges[idx];
-    const area = document.getElementById('respArea');
-
-    area.innerHTML = `
-        <div class="resp-label">${exchange.hint || 'Your response'}</div>
-        <div class="free-input-row">
-            <textarea class="free-input" id="freeResponse" placeholder="Type your response..." rows="2" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendResponse()}"></textarea>
-            <button type="button" id="voiceBtn" title="Click to speak" onclick="VoiceInput.toggle('freeResponse')" style="width:36px;height:36px;min-width:36px;border-radius:50%;border:1.5px solid #E2E8F0;background:#fff;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span id="voiceIcon">🎤</span></button>
-            <button type="button" class="send-btn" onclick="sendResponse()">Send</button>
-        </div>
-        <div id="voiceStatus" class="voice-status" style="display:none;font-size:11px;color:#6B7280;padding:4px 0"></div>
-    `;
-    document.getElementById('freeResponse')?.focus();
+// ══════════════════════════════════════════════════════
+// AI ENGINE — Claude API for dynamic responses
+// ══════════════════════════════════════════════════════
+async function callClaude(messages,systemPrompt){
+  try{
+    var resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5-20250514',max_tokens:1000,system:systemPrompt,messages:messages})});
+    var data=await resp.json();
+    return data.content?data.content.map(function(c){return c.text||''}).join(''):'';
+  }catch(err){console.error('AI error:',err);return null}
 }
 
-function sendResponse() {
-    const input = document.getElementById('freeResponse');
-    const text = input?.value.trim();
-    if (!text) return;
-
-    studentResponses.push({ exchange: exchangeIndex, response: text });
-
-    const body = document.getElementById('chatBody');
-    body.innerHTML += `
-        <div class="msg student">
-            <div class="msg-sender">You</div>
-            <div class="msg-bubble">${text}</div>
-        </div>
-    `;
-    body.scrollTop = body.scrollHeight;
-
-    document.getElementById('respArea').innerHTML = '<div style="padding:8px;font-size:12px;color:var(--text-dim);text-align:center;">Waiting for response...</div>';
-
-    setTimeout(() => showConsultantMessage(exchangeIndex + 1), 600);
+function buildSystemPrompt(){
+  var spec=SPECIALISTS[selectedSpec],sc=currentScenario;
+  return 'You are '+spec.name+', a '+spec.title+' at a teaching hospital. You are on a phone call with a medical trainee who placed a consult.\n\nCHARACTER:\n- Personality: '+spec.personality+'\n- Style: '+spec.style+'\n- Respond in character with natural medical dialogue. Keep responses to 1-3 sentences.\n- Be encouraging when the trainee does well, redirect when they miss key points.\n\nSCENARIO:\nPatient: '+sc.patient+'\nKey topics to probe: '+sc.keyTopics.join(', ')+'\nIdeal approach: '+sc.idealPresentation+'\n\nCONVERSATION:\n- Exchange '+Math.min(exchangeCount+1,maxExchanges)+' of '+maxExchanges+'.\n- If exchange 1: greet briefly and ask them to present.\n- Ask follow-up questions probing their clinical reasoning.\n- If they miss key info, ask about it specifically.\n- In later exchanges, push on decision-making and anticipatory guidance.\n- If last exchange: wrap up with brief disposition.\n- Never break character. Do NOT use markdown, asterisks, or bullet points.';
 }
 
-// ════════════════════════════════════════════════════════════
-// END & SCORING
-// ════════════════════════════════════════════════════════════
-function endConsult() {
-    const spec = SPECIALISTS[selectedSpec];
-    const sc = currentScenario;
+async function sendAiMessage(isOpening){
+  var body=document.getElementById('chatBody'),spec=SPECIALISTS[selectedSpec];
+  body.innerHTML+='<div class="msg consultant" id="typing"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
+  body.scrollTop=body.scrollHeight;
 
-    // Update status
-    document.querySelector('.ch-status')?.classList.replace('status-active','status-ended');
-    if (document.querySelector('.ch-status')) document.querySelector('.ch-status').textContent = 'Call Ended';
+  var text;
+  if(isOpening){
+    text=await callClaude([{role:'user',content:'The trainee just answered your callback. Give your opening line. Be brief, in character.'}],buildSystemPrompt());
+  }else{
+    text=await callClaude(chatHistory,buildSystemPrompt());
+  }
 
-    // Score based on response content
-    const allText = studentResponses.map(r => r.response).join(' ').toLowerCase();
-    const scores = {};
-    let total = 0;
+  if(!text){
+    var fb=['Hey, I got your page. What do you have for me?','Tell me about this patient.','What\'s the clinical question?','Walk me through what\'s going on.','Anything else I should know before I come see the patient?','Alright, let me tell you what I think.'];
+    text=fb[Math.min(exchangeCount,fb.length-1)];
+  }
 
-    // Organization — did they structure their initial response?
-    const firstResp = (studentResponses[0]?.response || '').toLowerCase();
-    const hasStructure = firstResp.length > 80 && (firstResp.includes('year') || firstResp.includes('patient') || firstResp.includes('presenting'));
-    scores.organization = hasStructure ? 85 : (firstResp.length > 40 ? 60 : 35);
+  var el=document.getElementById('typing');if(el)el.remove();
+  body.innerHTML+='<div class="msg consultant"><div class="msg-sender">'+spec.name+'</div><div class="msg-bubble">'+text+'</div></div>';
+  body.scrollTop=body.scrollHeight;
 
-    // Clinical data — did they include key details?
-    let dataHits = 0;
-    const dataTerms = ['troponin','ecg','vital','bp','heart rate','hr ','temp','wbc','ct ','mri','xray','x-ray','culture','creatinine','potassium','hemoglobin','hgb','lactate','abg'];
-    dataTerms.forEach(t => { if (allText.includes(t)) dataHits++; });
-    scores.clinicalData = Math.min(100, 30 + dataHits * 12);
+  if(isOpening){chatHistory.push({role:'assistant',content:text})}
 
-    // Clear question — did they ask something specific?
-    const hasQuestion = allText.includes('?') || allText.includes('would you recommend') || allText.includes('should we') || allText.includes('do you think') || allText.includes('wondering');
-    scores.question = hasQuestion ? 80 : 40;
-
-    // Anticipation — response length and detail in follow-ups
-    const followUpResponses = studentResponses.slice(1);
-    const avgLen = followUpResponses.length > 0 ? followUpResponses.reduce((s, r) => s + r.response.length, 0) / followUpResponses.length : 0;
-    scores.anticipation = avgLen > 60 ? 85 : (avgLen > 30 ? 65 : 40);
-
-    const overall = Math.round((scores.organization + scores.clinicalData + scores.question + scores.anticipation) / 4);
-    const color = s => s >= 75 ? 'var(--green)' : s >= 50 ? 'var(--amber)' : 'var(--red)';
-
-    // Disposition
-    const dispType = overall >= 70 ? 'accepted' : (overall >= 45 ? 'deferred' : 'redirected');
-    const dispText = { accepted:'Consult Accepted ✅', deferred:'Deferred — Call Back with More Info 🔄', redirected:'Needs Improvement ❌' };
-    const dispClass = { accepted:'disp-accepted', deferred:'disp-deferred', redirected:'disp-redirected' };
-
-    document.getElementById('respArea').innerHTML = '';
-    document.getElementById('gameArea').innerHTML += `
-        <div class="disposition ${dispClass[dispType]}">${dispText[dispType]}</div>
-        <div class="feedback-card">
-            <h3>📊 Consult Performance</h3>
-            <div class="fb-row">
-                <div class="fb-label">Organization</div>
-                <div class="fb-bar"><div class="fb-fill" style="width:${scores.organization}%;background:${color(scores.organization)}"></div></div>
-                <div class="fb-val" style="color:${color(scores.organization)}">${scores.organization}%</div>
-            </div>
-            <div class="fb-row">
-                <div class="fb-label">Clinical Data</div>
-                <div class="fb-bar"><div class="fb-fill" style="width:${scores.clinicalData}%;background:${color(scores.clinicalData)}"></div></div>
-                <div class="fb-val" style="color:${color(scores.clinicalData)}">${scores.clinicalData}%</div>
-            </div>
-            <div class="fb-row">
-                <div class="fb-label">Clear Question</div>
-                <div class="fb-bar"><div class="fb-fill" style="width:${scores.question}%;background:${color(scores.question)}"></div></div>
-                <div class="fb-val" style="color:${color(scores.question)}">${scores.question}%</div>
-            </div>
-            <div class="fb-row">
-                <div class="fb-label">Anticipation</div>
-                <div class="fb-bar"><div class="fb-fill" style="width:${scores.anticipation}%;background:${color(scores.anticipation)}"></div></div>
-                <div class="fb-val" style="color:${color(scores.anticipation)}">${scores.anticipation}%</div>
-            </div>
-            <div class="fb-row" style="padding-top:10px;border-top:1px solid var(--border);margin-top:6px;">
-                <div class="fb-label" style="font-weight:700;color:var(--text)">Overall</div>
-                <div class="fb-bar"><div class="fb-fill" style="width:${overall}%;background:${color(overall)}"></div></div>
-                <div class="fb-val" style="color:${color(overall)};font-size:14px">${overall}%</div>
-            </div>
-
-            <div class="fb-text">
-                <strong>Scoring Criteria:</strong><br>
-                • <strong>Organization:</strong> ${sc.scoring.organization}<br>
-                • <strong>Clinical Data:</strong> ${sc.scoring.clinicalData}<br>
-                • <strong>Clear Question:</strong> ${sc.scoring.question}<br>
-                • <strong>Anticipation:</strong> ${sc.scoring.anticipation}
-            </div>
-
-            <div class="fb-text" style="border-top:1px solid var(--border);padding-top:14px;margin-top:14px;">
-                <strong>💡 Key Teaching Point:</strong><br>${sc.teaching}
-            </div>
-
-            <div class="fb-actions">
-                <button type="button" class="fb-btn primary" onclick="resetConsult()">Try Another Consult</button>
-                <a href="virtual-emr.html?setting=ed" class="fb-btn secondary" style="text-decoration:none">← Back to Virtual EMR</a>
-            </div>
-        </div>
-    `;
-    window.scrollTo({ top: document.body.scrollHeight, behavior:'smooth' });
+  if(exchangeCount<maxExchanges){showInput()}else{endConsult()}
 }
 
-function resetConsult() {
-    selectedSpec = null;
-    selectedCase = null;
-    currentScenario = null;
-    exchangeIndex = 0;
-    studentResponses = [];
-    document.getElementById('setupPanel').style.display = 'block';
-    document.getElementById('gameArea').style.display = 'none';
-    document.getElementById('gameArea').innerHTML = '';
-    document.querySelectorAll('.spec-card,.case-opt').forEach(c => c.classList.remove('selected'));
-    document.getElementById('caseGrid').innerHTML = '';
-    updateStartBtn();
-    window.scrollTo({ top: 0, behavior:'smooth' });
+function showInput(){
+  var area=document.getElementById('respArea');
+  var hints=['Present your case \u2014 who is the patient, clinical picture, and your question?','Provide the details they\'re asking about. Include specific data points.','Think about management, anticipatory guidance, and what you need from the specialist.','Address their concerns and demonstrate your clinical reasoning.','Wrap up: confirm the plan and ask any final questions.','Final exchange \u2014 make it count.'];
+  var hint=hints[Math.min(exchangeCount,hints.length-1)];
+  area.innerHTML='<div class="resp-hint"><span>💡</span><span>'+hint+'</span></div><div class="free-input-row"><textarea class="free-input" id="freeResponse" placeholder="Type your response..." rows="2" onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();sendResponse()}" oninput="this.style.height=\'auto\';this.style.height=Math.min(this.scrollHeight,120)+\'px\'"></textarea><button type="button" class="send-btn" id="sendBtn" onclick="sendResponse()">Send <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>';
+  document.getElementById('freeResponse').focus();
 }
+
+function escapeHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+async function sendResponse(){
+  var input=document.getElementById('freeResponse'),text=input?input.value.trim():'';
+  if(!text||isAiThinking)return;
+  isAiThinking=true;
+  var btn=document.getElementById('sendBtn');
+  if(btn){btn.disabled=true;btn.innerHTML='<div class="ai-spinner" style="width:14px;height:14px;border-width:2px"></div> Thinking...'}
+
+  var body=document.getElementById('chatBody');
+  body.innerHTML+='<div class="msg student"><div class="msg-sender">You</div><div class="msg-bubble">'+escapeHtml(text)+'</div></div>';
+  body.scrollTop=body.scrollHeight;
+
+  chatHistory.push({role:'user',content:text});
+  exchangeCount++;updateExchangeDots();
+
+  document.getElementById('respArea').innerHTML='<div class="ai-thinking"><div class="ai-spinner"></div> '+SPECIALISTS[selectedSpec].name+' is responding...</div>';
+
+  if(exchangeCount>=maxExchanges){
+    await sendAiMessage(false);
+  }else{
+    await sendAiMessage(false);
+  }
+  isAiThinking=false;
+}
+
+// ══════════════════════════════════════════════════════
+// AI SCORING
+// ══════════════════════════════════════════════════════
+async function getAiScoring(){
+  var spec=SPECIALISTS[selectedSpec],sc=currentScenario;
+  var sp='You are a medical education expert evaluating a trainee\'s consult callback performance. Respond ONLY with a JSON object. No markdown, no backticks, no preamble.\n\nScenario: '+sc.patient+'\n\nScoring criteria:\n1. Organization (0-100): '+sc.scoring.organization+'\n2. Clinical Data (0-100): '+sc.scoring.clinicalData+'\n3. Clear Question (0-100): '+sc.scoring.question+'\n4. Anticipation (0-100): '+sc.scoring.anticipation+'\n\nKey topics: '+sc.keyTopics.join(', ')+'\n\nJSON format: {"organization":N,"clinicalData":N,"question":N,"anticipation":N,"commentary":"2-3 sentences of specific constructive feedback.","disposition":"accepted|deferred|redirected"}';
+  var msgs=[{role:'user',content:'Full transcript:\n\n'+chatHistory.map(function(m){return(m.role==='user'?'TRAINEE':'CONSULTANT')+': '+m.content}).join('\n\n')+'\n\nEvaluate and return ONLY the JSON.'}];
+  try{
+    var resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-5-20250514',max_tokens:1000,system:sp,messages:msgs})});
+    var data=await resp.json();var t=data.content?data.content.map(function(c){return c.text||''}).join(''):'';
+    return JSON.parse(t.replace(/```json|```/g,'').trim());
+  }catch(err){console.error('Scoring error:',err);return null}
+}
+
+function getLocalScoring(){
+  var all=chatHistory.filter(function(m){return m.role==='user'}).map(function(m){return m.content}).join(' ').toLowerCase();
+  var first=(chatHistory.find(function(m){return m.role==='user'})||{content:''}).content.toLowerCase();
+  var hasStruct=first.length>80&&(first.includes('year')||first.includes('patient')||first.includes('presenting'));
+  var org=hasStruct?78:first.length>40?58:35;
+  var hits=0;['troponin','ecg','vital','bp','heart rate','temp','wbc','ct ','mri','culture','creatinine','potassium','hemoglobin','hgb','lactate','abg','tryptase','eosinophil','complement','urine','platelet','inr','ast','alt'].forEach(function(t){if(all.includes(t))hits++});
+  var cd=Math.min(100,30+hits*10);
+  var hasQ=all.includes('?')||all.includes('recommend')||all.includes('should we')||all.includes('what do you think');
+  var q=hasQ?75:40;
+  var fu=chatHistory.filter(function(m){return m.role==='user'}).slice(1);
+  var avg=fu.length>0?fu.reduce(function(s,m){return s+m.content.length},0)/fu.length:0;
+  var ant=avg>60?80:avg>30?60:38;
+  var ov=Math.round((org+cd+q+ant)/4);
+  return{organization:org,clinicalData:cd,question:q,anticipation:ant,commentary:'AI scoring was unavailable. Scores based on keyword analysis and response structure.',disposition:ov>=70?'accepted':ov>=45?'deferred':'redirected'};
+}
+
+// ══════════════════════════════════════════════════════
+// END CONSULT — Results Display
+// ══════════════════════════════════════════════════════
+async function endConsult(){
+  var spec=SPECIALISTS[selectedSpec],sc=currentScenario;
+  var st=document.querySelector('.ch-status');if(st){st.className='ch-status status-ended';st.textContent='Call Ended'}
+  document.getElementById('respArea').innerHTML='<div class="ai-thinking"><div class="ai-spinner"></div> Evaluating your performance...</div>';
+
+  var scores=await getAiScoring();
+  if(!scores)scores=getLocalScoring();
+  var overall=Math.round((scores.organization+scores.clinicalData+scores.question+scores.anticipation)/4);
+  scores.overall=overall;
+
+  function color(s){return s>=75?'var(--green)':s>=50?'var(--amber)':'var(--red)'}
+  var disp=scores.disposition||(overall>=70?'accepted':overall>=45?'deferred':'redirected');
+  var dispCls={accepted:'disp-accepted',deferred:'disp-deferred',redirected:'disp-redirected'};
+  var dispTxt={accepted:'Consult Accepted \u2705',deferred:'Needs More Info \u2014 Call Back \uD83D\uDD04',redirected:'Needs Improvement \u274C'};
+
+  // Save progress
+  var prog=loadProgress();
+  prog.sessions.push({date:new Date().toISOString(),specialist:selectedSpec,scenario:sc.id,overall:overall,scores:{organization:scores.organization,clinicalData:scores.clinicalData,question:scores.question,anticipation:scores.anticipation},disposition:disp,duration:Math.round((Date.now()-sessionStartTime)/1000)});
+  prog.totalSessions++;
+  var today=new Date().toDateString();
+  if(prog.lastDate===new Date(Date.now()-86400000).toDateString())prog.streak++;
+  else if(prog.lastDate!==today)prog.streak=1;
+  prog.lastDate=today;
+  saveProgress(prog);
+  emitRPFSData(scores,sc);
+
+  document.getElementById('respArea').innerHTML='';
+
+  // RPFS mini display
+  var dims=[{n:'Data Gathering',s:scores.clinicalData},{n:'Problem Rep.',s:scores.organization},{n:'Hypothesis Gen.',s:Math.round((scores.clinicalData+scores.anticipation)/2)},{n:'Dx Verification',s:scores.anticipation},{n:'Bayesian Update',s:Math.round((scores.question+scores.anticipation)/2)},{n:'Cog. Flexibility',s:scores.question},{n:'Illness Scripts',s:Math.round((scores.clinicalData+scores.organization)/2)},{n:'Metacognition',s:scores.anticipation}];
+  var rpfsHtml=dims.map(function(d){return '<div class="rpfs-row"><div class="rpfs-dim">'+d.n+'</div><div class="rpfs-bar"><div class="rpfs-fill" style="width:'+d.s+'%;background:'+color(d.s)+'"></div></div><div class="rpfs-score" style="color:'+color(d.s)+'">'+d.s+'</div></div>'}).join('');
+
+  document.getElementById('gameArea').innerHTML+='<div class="disposition-badge '+dispCls[disp]+'">'+dispTxt[disp]+'</div><div class="feedback-card"><div class="fb-header"><h3>Performance Review</h3><p>'+spec.name+' \u2022 '+sc.title+'</p></div><div class="fb-body"><div class="fb-row"><div class="fb-label">Organization</div><div class="fb-bar"><div class="fb-fill" style="width:'+scores.organization+'%;background:'+color(scores.organization)+'"></div></div><div class="fb-val" style="color:'+color(scores.organization)+'">'+scores.organization+'%</div></div><div class="fb-row"><div class="fb-label">Clinical Data</div><div class="fb-bar"><div class="fb-fill" style="width:'+scores.clinicalData+'%;background:'+color(scores.clinicalData)+'"></div></div><div class="fb-val" style="color:'+color(scores.clinicalData)+'">'+scores.clinicalData+'%</div></div><div class="fb-row"><div class="fb-label">Clear Question</div><div class="fb-bar"><div class="fb-fill" style="width:'+scores.question+'%;background:'+color(scores.question)+'"></div></div><div class="fb-val" style="color:'+color(scores.question)+'">'+scores.question+'%</div></div><div class="fb-row"><div class="fb-label">Anticipation</div><div class="fb-bar"><div class="fb-fill" style="width:'+scores.anticipation+'%;background:'+color(scores.anticipation)+'"></div></div><div class="fb-val" style="color:'+color(scores.anticipation)+'">'+scores.anticipation+'%</div></div><div class="fb-overall"><div class="fb-label">Overall</div><div class="fb-bar"><div class="fb-fill" style="width:'+overall+'%;background:'+color(overall)+'"></div></div><div class="fb-val" style="color:'+color(overall)+'">'+overall+'%</div></div>'+(scores.commentary?'<div class="ai-commentary"><h4>\uD83E\uDD16 AI Feedback</h4><p>'+scores.commentary+'</p></div>':'')+'<div class="teaching-card"><h4>\uD83D\uDCDA Key Teaching Point</h4><p>'+sc.teaching+'</p></div><div class="rpfs-card"><h4>\uD83E\uDDEC Reasoning Fingerprint Impact</h4>'+rpfsHtml+'</div><div class="fb-actions"><button type="button" class="fb-btn primary" onclick="resetConsult()">Try Another Consult</button><button type="button" class="fb-btn secondary" onclick="replayCase()">Replay This Case</button><a href="learning-analytics.html" class="fb-btn secondary" style="text-decoration:none">\uD83D\uDCCA View Analytics</a></div></div></div>';
+
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════════════════
+// RESET / REPLAY
+// ══════════════════════════════════════════════════════
+function resetConsult(){
+  selectedSpec=null;selectedCase=null;currentScenario=null;chatHistory=[];exchangeCount=0;isAiThinking=false;
+  document.getElementById('setupPanel').style.display='block';
+  document.getElementById('gameArea').style.display='none';
+  document.getElementById('gameArea').innerHTML='';
+  document.querySelectorAll('.spec-card,.case-card').forEach(function(c){c.classList.remove('selected')});
+  document.getElementById('caseSection').style.display='none';
+  document.getElementById('caseGrid').innerHTML='';
+  updateStartBtn();updateStats();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function replayCase(){chatHistory=[];exchangeCount=0;isAiThinking=false;document.getElementById('gameArea').innerHTML='';startConsult()}
 
 // Init
 renderSetup();
 </script>
 
-<script src="js/rdx-persist.js"></script>
 <script src="js/rdx-nav.js"></script>
-<script src="js/rdx-gate.js"></script>
-<script src="voice-input.js"></script>
-<script src="js/dx-bias-assessment.js"></script>
-<script>
-// Bias hooks for Consultant Callback
-(function() {
-  var origSend = window.sendResponse;
-  if (origSend) {
-    window.sendResponse = function() {
-      var input = document.getElementById('freeResponse');
-      var text = input ? input.value.trim() : '';
-      if (text) {
-        BiasAssessment.logExchange('student', text, { stage:'ConsultCallback', specialist: window.selectedSpec || '' });
-        BiasAssessment.setContext('Consultant Callback — ' + (window.selectedSpec || 'Specialist') + ' consult');
-      }
-      origSend.apply(this, arguments);
-    };
-  }
-  // Also log consultant messages
-  var origShowConsultant = window.showConsultantMessage;
-  if (origShowConsultant) {
-    window.showConsultantMessage = function(idx) {
-      origShowConsultant.apply(this, arguments);
-      // Log the consultant message after it renders
-      setTimeout(function() {
-        var msgs = document.querySelectorAll('.msg.consultant .msg-bubble');
-        if (msgs.length > 0) {
-          var lastMsg = msgs[msgs.length - 1];
-          BiasAssessment.logExchange('consultant', lastMsg.textContent || '', { characterName: window.selectedSpec || 'Specialist', stage:'ConsultCallback' });
-        }
-      }, 800);
-    };
-  }
-  // Hide voice if unsupported
-  if (typeof VoiceInput !== 'undefined' && !VoiceInput.isSupported()) {
-    document.addEventListener('DOMContentLoaded', function() {
-      var vb = document.getElementById('voiceBtn');
-      if (vb) vb.style.display = 'none';
-    });
-  }
-})();
-</script>
-<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
-<script src="rdx-demo-tour.js"></script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
-<script src="js/rdx-help-widget.js"></script>
-<script src="js/dx-feedback.js"></script>
-<script src="js/dx-user-bar.js"></script>
+<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},600)</script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}</script>
 </body>
 </html>

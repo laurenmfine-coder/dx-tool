@@ -21,7 +21,7 @@
   }
 
   var html =
-    '<a href="'+R+'index.html" class="rdx-logo-link"><span class="rdx-logo-text">Reason<span class="rdx-logo-dx">Dx</span></span></a>'+
+    '<a href="'+R+'index.html" class="rdx-logo-link"><img src="'+R+'icons/logo-transparent.png" alt="ReasonDx" class="rdx-logo-img"></a>'+
     '<button id="rdx-hamburger" aria-label="Menu">\u2630</button>'+
     '<div id="rdx-nav-menu">'+
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
@@ -62,9 +62,8 @@
   var style = document.createElement('style');
   style.textContent =
     '#rdx-unified-nav{background:var(--rdx-bg-nav,#fff);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;position:sticky;top:0;z-index:9000;font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.04)}'+
-    '.rdx-logo-link{text-decoration:none;flex-shrink:0;margin-right:24px}'+
-    ".rdx-logo-text{font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:22px;font-weight:700;color:#2f3640;letter-spacing:-.5px}"+
-    '.rdx-logo-dx{border-bottom:2.5px solid #2874a6;padding-bottom:1px}'+
+    '.rdx-logo-link{text-decoration:none;flex-shrink:0;margin-right:24px;display:flex;align-items:center}'+
+    '.rdx-logo-img{height:28px;width:auto;display:block}'+
     '#rdx-nav-menu{display:flex;align-items:center;gap:2px;margin-left:auto}'+
     '.rdx-nav-top{background:none;border:none;font-family:inherit;font-size:14px;font-weight:500;color:var(--rdx-text-muted,#64748b);padding:8px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .15s;display:inline-flex;align-items:center}'+
     '.rdx-nav-top:hover{color:#1f5f8b;background:#f0f7fc}.rdx-nav-top.active{color:#1f5f8b;font-weight:600;background:#f0f7fc}'+
@@ -143,7 +142,7 @@
     });
 
     var ov = document.createElement('div'); ov.id = 'rdx-about-overlay';
-    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">560</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">145</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">30</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">93</div><div class="lbl">Systems</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 AI pathophysiology tutor (93 systems, 560 topics)<br><strong>Consult Callback</strong> \u2014 23 specialist consult simulations<br><strong>Procedure Lab</strong> \u2014 Skin testing, OFC, desensitization<br><strong>Fellowship Tools</strong> \u2014 Milestones, CCC, ILP, Analytics</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A A/I Fellowship</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Clinical Reasoning</span><span class="rdx-about-pill">\uD83C\uDFAF Board Review</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:reasondx@laurenmfine.com" style="color:#2874a6">reasondx@laurenmfine.com</a></p></div></div>';
+    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><img src="'+R+'icons/logo-transparent.png" alt="ReasonDx" style="height:32px;width:auto;filter:brightness(0) invert(1);margin-bottom:8px"><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">560</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">145</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">30</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">93</div><div class="lbl">Systems</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 AI pathophysiology tutor (93 systems, 560 topics)<br><strong>Consult Callback</strong> \u2014 23 specialist consult simulations<br><strong>Procedure Lab</strong> \u2014 Skin testing, OFC, desensitization<br><strong>Fellowship Tools</strong> \u2014 Milestones, CCC, ILP, Analytics</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A A/I Fellowship</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Clinical Reasoning</span><span class="rdx-about-pill">\uD83C\uDFAF Board Review</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:reasondx@laurenmfine.com" style="color:#2874a6">reasondx@laurenmfine.com</a></p></div></div>';
     document.body.appendChild(ov);
     ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('open'); });
     document.getElementById('rdx-about-x').addEventListener('click', function(){ ov.classList.remove('open'); });
