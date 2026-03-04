@@ -1,7 +1,8 @@
 // EMR Case Manifest — merged from original + Batches 1-17, 22-28
-// Generated: February 2026
-// Total cases: 256
+// Generated: February 2026 | Updated: March 2026
+// Total cases: 261 (added 5 Phase 1 Cardiology Expansion cases March 2026)
 // Batches 18-21 merged February 2026
+// Phase 1 Cardiology (March 2026): afib-with-rvr, atrial-flutter, hypertensive-emergency-v2, unstable-angina-v2, adhf-new-diagnosis
 // 4 Syncope cases pending file generation (cardiac-arrhythmias, mallory-weiss-tear, upper-gi-hemorrhage, variceal-bleeding)
 
 window.EMR_MANIFEST = [
@@ -302,6 +303,24 @@ window.EMR_MANIFEST = [
         "diagnosis": "Superior Vena Cava Syndrome (NSCLC-Related Extrinsic Compression)",
         "acuity": 2,
         "category": "oncologic"
+      },
+      {
+        "id": "afib-with-rvr",
+        "diagnosis": "Atrial Fibrillation with Rapid Ventricular Response (New Onset)",
+        "acuity": 2,
+        "category": "cardiovascular"
+      },
+      {
+        "id": "atrial-flutter",
+        "diagnosis": "New-Onset Atrial Flutter with 2:1 AV Block",
+        "acuity": 2,
+        "category": "cardiovascular"
+      },
+      {
+        "id": "hypertensive-emergency-v2",
+        "diagnosis": "Hypertensive Emergency with Multi-Organ Involvement (PRES, Hypertensive Nephropathy, Demand Ischemia)",
+        "acuity": 2,
+        "category": "cardiovascular"
       }
     ]
   },
@@ -359,6 +378,12 @@ window.EMR_MANIFEST = [
       {
         "id": "unstable-angina",
         "diagnosis": "Unstable Angina",
+        "acuity": 2,
+        "category": "cardiovascular"
+      },
+      {
+        "id": "unstable-angina-v2",
+        "diagnosis": "Unstable Angina (High-Risk ACS — Rest Angina with Dynamic ECG Changes, Negative Initial Troponin)",
         "acuity": 2,
         "category": "cardiovascular"
       }
@@ -1143,6 +1168,12 @@ window.EMR_MANIFEST = [
         "diagnosis": "Community-Acquired Pneumonia on Severe COPD (Variant B)",
         "acuity": 3,
         "category": "pulmonary"
+      },
+      {
+        "id": "adhf-new-diagnosis",
+        "diagnosis": "Acute Decompensated Heart Failure — New Diagnosis (Suspected HFrEF, EF Pending Echo)",
+        "acuity": 2,
+        "category": "cardiovascular"
       }
     ]
   },

@@ -540,6 +540,16 @@ async function flushOfflineQueue() {
 // ═══════════════════════════════════════
 var initialized = init();
 
+// Support async loading of Supabase CDN script:
+// If the CDN script loads after rdx-supabase.js, it can call RDXSupabaseInit()
+// to retry initialization. Pages using <script async> set onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"
+window.RDXSupabaseInit = function() {
+  if (!initialized) {
+    initialized = init();
+    if (window.RDX) window.RDX.ready = initialized;
+  }
+};
+
 window.RDX = {
   // State
   ready: initialized,

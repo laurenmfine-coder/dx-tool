@@ -161,7 +161,7 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">MechanismDx requires JavaScript. Please enable JavaScript in your browser.</div></noscript>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
 <div id="app"><div class="mx-loading"><div class="mx-spinner"></div><p>Loading MechanismDx...</p></div></div>
 <script>
@@ -506,14 +506,20 @@ var SYSTEMS = [
     {id:'anticoag-reversal',name:'Anticoagulant Reversal',sub:'Idarucizumab, andexanet, 4F-PCC, vitamin K, protamine, strategies'}
   ]},
     { id:'ai-foundations', name:'A/I Foundations', icon:'\uD83D\uDEE1\uFE0F', topics:[
+    {id:'ai-basic-science',name:'A/I Basic Science',sub:'IgE sensitization, Gell-Coombs, cytokines, complement, ILC2, Tregs, filaggrin — ABAI Domain 1', badge:'NEW', refSheet:'mechanism/ai-basic-science-module.html'},
     {id:'gell-coombs',name:'Gell-Coombs Classification',sub:'Type I\u2013IV hypersensitivity, key mediators'},
     {id:'innate-adaptive',name:'Innate vs Adaptive Immunity',sub:'Complement, PRRs, T/B cell activation, MHC'},
     {id:'ige-pathway',name:'IgE-Mediated Pathway',sub:'Allergen sensitization, mast cell degranulation, early/late phase'},
+    {id:'pid-mechanism',name:'PID Mechanisms',sub:'XLA vs CVID, SCID/TREC, DiGeorge/22q11.2, CGD/DHR, complement deficiencies — ABAI Domain 3', badge:'NEW', refSheet:'mechanism/pid-module.html'},
+    {id:'ai-diagnostic-methods',name:'A/I Diagnostic Methods',sub:'SPT/IDT technique, CRD, OFC, drug challenge, tryptase, methacholine, BAT, Ig titers — ABAI Domain 2', badge:'NEW', refSheet:'mechanism/ai-diagnostic-methods-module.html'},
+    {id:'asthma-mechanism',name:'Asthma Mechanisms',sub:'Type 2 endotypes, airway remodeling, GINA phenotyping, biologic selection, occupational asthma, ABPA, EIB/VCD — ABAI Domain 7', badge:'NEW', refSheet:'mechanism/asthma-module.html'},
+    {id:'eosinophilia-hp',name:'Eosinophilic Disorders & Hypersensitivity Pneumonitis',sub:'Eosinophilia differential, HES (M-HES/L-HES), FIP1L1-PDGFRA, Löffler endocarditis, EGPA, HP classification, BAL CD4:CD8, fibrotic HP vs IPF', badge:'NEW', refSheet:'mechanism/eosinophilia-hp-module.html'},
     {id:'allergy-testing',name:'Allergy Testing & Interpretation',sub:'Skin prick, intradermal, sIgE, component testing, BAT'},
     {id:'immune-tolerance',name:'Immune Tolerance',sub:'Central/peripheral tolerance, Tregs, oral tolerance'},
     {id:'mucosal-immunology',name:'Mucosal Immunology',sub:'GALT, BALT, NALT, IgA, epithelial barrier function'}
   ]},
   { id:'anaphylaxis-acute', name:'Anaphylaxis & Acute', icon:'\u26A1', topics:[
+    {id:'anaphylaxis-mechanism',name:'Anaphylaxis Mechanisms & Management',sub:'IgE cascade, PAF, epinephrine pharmacology, biphasic reactions, FDEIA, VIT, mastocytosis \u2014 ABAI Domain 5', badge:'NEW', refSheet:'mechanism/anaphylaxis-module.html'},
     {id:'anaphylaxis',name:'Anaphylaxis',sub:'Diagnostic criteria, biphasic reactions, refractory management'},
     {id:'epinephrine-pharm',name:'Epinephrine Pharmacology',sub:'Alpha/beta effects, auto-injectors, dosing, barriers'},
     {id:'periop-anaphylaxis',name:'Perioperative Anaphylaxis',sub:'NMBAs, latex, chlorhexidine, tryptase timing'},
@@ -522,6 +528,7 @@ var SYSTEMS = [
     {id:'acute-urticaria',name:'Acute Urticaria & Angioedema',sub:'IgE vs non-IgE triggers, serum sickness-like'}
   ]},
   { id:'drug-hypersensitivity', name:'Drug Hypersensitivity', icon:'\uD83D\uDC8A', topics:[
+    {id:'drug-allergy-mechanism',name:'Drug Allergy & Hypersensitivity Mechanisms',sub:'Gell-Coombs, hapten, penicillin de-labeling, SCAR, NSAID classification, desensitization \u2014 ABAI Domain 4', badge:'NEW', refSheet:'mechanism/drug-allergy-module.html'},
     {id:'drug-classify',name:'Drug Allergy Classification',sub:'Immediate vs delayed, Type I\u2013IV, timeline patterns'},
     {id:'penicillin-delabel',name:'Penicillin Allergy De-labeling',sub:'Skin testing, oral challenge, cross-reactivity'},
     {id:'nsaid-reactions',name:'NSAID Hypersensitivity & AERD',sub:'Samter triad, COX-1 shunting, aspirin desensitization'},
@@ -530,6 +537,7 @@ var SYSTEMS = [
     {id:'contrast-vaccine',name:'Contrast & Vaccine Reactions',sub:'Radiocontrast, PEG allergy, vaccine excipients'}
   ]},
   { id:'food-allergy-sys', name:'Food Allergy', icon:'\uD83C\uDF3E', topics:[
+    {id:'food-allergy-mechanism',name:'Food Allergy Mechanisms',sub:'IgE-mediated vs non-IgE, OFC procedure, OIT, FPIES, EoE, alpha-gal \u2014 ABAI Domain 5', badge:'NEW', refSheet:'mechanism/food-allergy-module.html'},
     {id:'food-ige',name:'IgE-Mediated Food Allergy',sub:'Peanut, tree nut, milk, egg, shellfish, component testing'},
     {id:'fpies',name:'FPIES',sub:'Acute vs chronic, pathophysiology, OFC protocols, natural history'},
     {id:'eoe',name:'Eosinophilic Esophagitis',sub:'Th2-driven, elimination diets, PPI-REE, dupilumab'},
@@ -538,6 +546,7 @@ var SYSTEMS = [
     {id:'oral-allergy',name:'OAS & Cross-Reactivity',sub:'Pollen-food, profilin, LTP, PR-10, component panels'}
   ]},
   { id:'rhinitis-sinusitis', name:'Rhinitis & Sinusitis', icon:'\uD83D\uDCA8', topics:[
+    {id:'rhinitis-mechanism',name:'Rhinitis & CRSwNP Mechanisms',sub:'AR pathophysiology, NARES, CRSwNP Type 2, AERD, united airway, INCS, AIT — ABAI Domain 6', badge:'NEW', refSheet:'mechanism/rhinitis-module.html'},
     {id:'allergic-rhinitis',name:'Allergic Rhinitis',sub:'ARIA classification, INCS, antihistamines, stepwise Rx'},
     {id:'nonallergic-rhinitis',name:'Non-Allergic Rhinitis',sub:'VMR, NARES, gustatory, medicamentosa, atrophic'},
     {id:'crs-polyps',name:'CRS with Nasal Polyps',sub:'Type 2 inflammation, endoscopy, biologics, surgery'},
@@ -554,6 +563,8 @@ var SYSTEMS = [
     {id:'hp',name:'Hypersensitivity Pneumonitis',sub:'Type III/IV, bird fancier, farmer lung'}
   ]},
   { id:'urticaria-angioedema', name:'Urticaria & Angioedema', icon:'\uD83D\uDFE3', topics:[
+    {id:'mastocytosis-mcas',name:'Mastocytosis & MCAS',sub:'KIT D816V, WHO classification, tryptase 20%+2 rule, MCAS criteria, avapritinib, VIT + mast cell disease \u2014 ABAI Domain 8', badge:'NEW', refSheet:'mechanism/mastocytosis-mcas-module.html'},
+    {id:'urticaria-mechanism',name:'Urticaria & Angioedema Mechanisms',sub:'CSU autoimmune (Type IIb/IgG vs Type I/IgE), HAE bradykinin, ACEi angioedema, omalizumab, lanadelumab \u2014 ABAI Domain 8', badge:'NEW', refSheet:'mechanism/urticaria-module.html'},
     {id:'chronic-urticaria',name:'Chronic Spontaneous Urticaria',sub:'Autoimmune IgE/IgG, antihistamine escalation, omalizumab'},
     {id:'inducible-urticaria',name:'Inducible Urticarias',sub:'Dermatographic, cholinergic, cold, solar, pressure'},
     {id:'hae',name:'Hereditary Angioedema',sub:'C1-INH deficiency, C4 screening, icatibant, lanadelumab'},
@@ -578,6 +589,7 @@ var SYSTEMS = [
     {id:'transplant-immuno',name:'Transplant Immunology',sub:'HLA matching, rejection types, GVHD, immunosuppression'}
   ]},
   { id:'derm-ai', name:'Dermatology & A/I', icon:'\uD83E\uDE7A', topics:[
+    {id:'atopic-derm-mechanism',name:'Atopic Dermatitis Mechanisms',sub:'Filaggrin barrier defect, Th2/Th22/ILC2, dupilumab/tralokinumab, SCORAD, infection triggers \u2014 ABAI Domain 9', badge:'NEW', refSheet:'mechanism/atopic-derm-module.html'},
     {id:'atopic-dermatitis',name:'Atopic Dermatitis',sub:'Filaggrin, Th2, atopic march, dupilumab, JAK inhibitors'},
     {id:'contact-dermatitis',name:'Contact Dermatitis',sub:'Allergic vs irritant, patch testing, T.R.U.E. test'},
     {id:'drug-eruptions',name:'Drug Eruptions',sub:'Morbilliform, fixed drug, AGEP, DRESS, SJS-TEN'},
@@ -586,6 +598,7 @@ var SYSTEMS = [
     {id:'immune-skin',name:'Immune-Mediated Skin Disease',sub:'Psoriasis immunology, pemphigus, bullous pemphigoid'}
   ]},
   { id:'heme-ai', name:'Heme/Onc & A/I', icon:'\uD83E\uDE78', topics:[
+    
     {id:'eosinophilia',name:'Eosinophilia Workup',sub:'NAACP mnemonic, HES, FIP1L1-PDGFRA, organ damage'},
     {id:'chemo-hypersensitivity',name:'Chemo/Biologic Hypersensitivity',sub:'Platinum, taxane, rituximab, desensitization'},
     {id:'transfusion-immune',name:'Transfusion Reactions',sub:'Acute hemolytic, TRALI, anaphylactic (IgA def)'},
@@ -1083,7 +1096,7 @@ var AI_REFERENCES = {
     'food-allergy': 'NIAID Food Allergy Guidelines 2010 (PMC6604772); AAAAI/ACAAI Food Allergy Parameter 2024',
     rhinitis: 'ARIA 2020 Update (open access); AAAAI/ACAAI Rhinitis Practice Parameter 2020',
     sinusitis: 'EPOS 2020 European Position Paper on Rhinosinusitis (open access)',
-    asthma: 'GINA 2024 (ginasthma.org free); NAEPP Expert Panel Report 4; ERS/ATS Severe Asthma 2020',
+    asthma: 'GINA 2024 (ginasthma.org/gina-reports/ — free PDF); NAEPP EPR-4 (nhlbi.nih.gov/health-topics/asthma-management-guidelines — free); ERS Methacholine Standard 2017 (PMID 28461290); ABPA: PMC3468979',
     urticaria: 'EAACI/GA2LEN 2022 Urticaria Guideline (open access); AAAAI Urticaria Parameter',
     angioedema: 'WAO/EAACI HAE Guidelines 2021 (open access)',
     immunodeficiency: 'ESID Diagnostic Criteria (esid.org); AAAAI PID Practice Parameter 2015',
@@ -1105,7 +1118,7 @@ var AI_REFERENCES = {
   statpearls: {
     anaphylaxis:'NBK482124, NBK532917', 'drug-allergy':'NBK532272, NBK459320, NBK459322',
     'food-allergy':'NBK482187, NBK459158, NBK557643', rhinitis:'NBK538186, NBK547704',
-    sinusitis:'NBK441934, NBK532769', asthma:'NBK430901, NBK542191, NBK482165',
+    sinusitis:'NBK441934, NBK532769', asthma:'NBK430901 (Asthma), NBK541076 (Occupational Asthma), NBK482419 (Exercise-Induced), NBK459327 (DRESS - related), NBK542191, NBK482165',
     urticaria:'NBK538195, NBK535383, NBK537579', angioedema:'NBK538489, NBK482267',
     immunodeficiency:'NBK549800, NBK539891, NBK459217, NBK507850',
     'atopic-dermatitis':'NBK448071, NBK532866', immunotherapy:'NBK535367, NBK518978',
@@ -1195,7 +1208,8 @@ function buildSystemPrompt(system, topic, phase) {
     }
   }
 
-  return 'You are MechanismDx, an AI pathophysiology tutor by Dr. Lauren Fine for ReasonDx.\n\nSESSION:\n- System: ' + system.name + '\n- Topic: ' + topic.name + ' (' + topic.sub + ')\n- Phase: ' + PHASES[phase].label + '\n\nCURATED REFERENCES:\n' + topicRefs + '\n\nPHASE INSTRUCTIONS:\n' + instructions[PHASES[phase].id] + '\n\nCORE RULES:\n1. NEVER lecture unprompted. Socratic questioning only.\n2. ONE question at a time.\n3. Scaffold hints, not answers.\n4. Connect mechanisms to clinical presentations per practice parameters.\n5. Precise terminology, explain jargon.\n6. Concise (<150 words unless assessment or resource coaching).\n7. When citing resources, ALWAYS give specifics: exact StatPearls NBK number, exact guideline name + year, exact section/table. Never just say 'check StatPearls' - say 'read StatPearls Anaphylaxis (NBK482124), the Pathophysiology section.'\n8. **Bold** key terms.\n9. Encouraging and supportive - frame gaps as learning opportunities.\n10. Redirect answer-seekers to think mechanistically.\n11. Emphasize the WHY chain: mechanism -> symptom -> test -> treatment.\n12. Realistic vignettes per current guidelines.\n13. RESOURCE COACHING: Recommend open-access resources at the moment of need. Frame as: 'Here is a great resource for this - [specific]. Review it and come back, I will have a new question ready.'\n14. All resources MUST be genuinely open-access (free). StatPearls, PMC, KDIGO, GINA, GOLD, AHA open-access, WHO, CDC, NCCN (free registration).\n15. CONCEPT TRACKING: After your visible response, append hidden concept markers for any concept you identified as strong or weak. Use this exact format on its own line: <!--CONCEPT:concept-name:signal--> where signal is strong, gap, or improving. Example: <!--CONCEPT:ige-crosslinking:gap--> <!--CONCEPT:mast-cell-degranulation:strong-->. This data is used to track the learner mastery profile. Always emit at least one marker per Probe/Assess/Retest response.' + priorContext;
+  var refSheetNote = topic.refSheet ? '\\n\\nCURATED CONTENT REFERENCE: This topic has a curated mechanism reference sheet (open-access sources only). Your Socratic questions should probe the mechanisms, clinical pearls, and board-yield distinctions in that content. In the RESOURCES phase, share this link with the learner: ' + topic.refSheet + '. For mechanism-level gaps, point to the specific StatPearls or PMC article covering that concept.' : '';
+  return 'You are MechanismDx, an AI pathophysiology tutor by Dr. Lauren Fine for ReasonDx.\n\nSESSION:\n- System: ' + system.name + '\n- Topic: ' + topic.name + ' (' + topic.sub + ')\n- Phase: ' + PHASES[phase].label + refSheetNote + '\n\nCURATED REFERENCES:\n' + topicRefs + '\n\nPHASE INSTRUCTIONS:\n' + instructions[PHASES[phase].id] + '\n\nCORE RULES:\n1. NEVER lecture unprompted. Socratic questioning only.\n2. ONE question at a time.\n3. Scaffold hints, not answers.\n4. Connect mechanisms to clinical presentations per practice parameters.\n5. Precise terminology, explain jargon.\n6. Concise (<150 words unless assessment or resource coaching).\n7. When citing resources, ALWAYS give specifics: exact StatPearls NBK number, exact guideline name + year, exact section/table. Never just say 'check StatPearls' - say 'read StatPearls Anaphylaxis (NBK482124), the Pathophysiology section.'\n8. **Bold** key terms.\n9. Encouraging and supportive - frame gaps as learning opportunities.\n10. Redirect answer-seekers to think mechanistically.\n11. Emphasize the WHY chain: mechanism -> symptom -> test -> treatment.\n12. Realistic vignettes per current guidelines.\n13. RESOURCE COACHING: Recommend open-access resources at the moment of need. Frame as: 'Here is a great resource for this - [specific]. Review it and come back, I will have a new question ready.'\n14. All resources MUST be genuinely open-access (free). StatPearls, PMC, KDIGO, GINA, GOLD, AHA open-access, WHO, CDC, NCCN (free registration).\n15. CONCEPT TRACKING: After your visible response, append hidden concept markers for any concept you identified as strong or weak. Use this exact format on its own line: <!--CONCEPT:concept-name:signal--> where signal is strong, gap, or improving. Example: <!--CONCEPT:ige-crosslinking:gap--> <!--CONCEPT:mast-cell-degranulation:strong-->. This data is used to track the learner mastery profile. Always emit at least one marker per Probe/Assess/Retest response.' + priorContext;
 }
 
 
@@ -1342,7 +1356,7 @@ function renderTopics() {
     var tierClass = tier === 'mastered' ? ' mastered' : (tier === 'proficient' ? ' proficient' : (tier !== 'untouched' ? ' in-progress' : ''));
     h += '<div class="mx-topic-card' + tierClass + '" onclick="MX.startSession(\'' + t.id + '\')">';
     h += '<div class="mx-topic-tier" style="color:' + tierDef.color + ';font-size:16px" title="' + tierDef.label + ': ' + tierDef.desc + '">' + tierDef.icon + '</div>';
-    h += '<div class="mx-topic-info"><div class="mx-topic-name">' + esc(t.name) + '</div>';
+    h += '<div class="mx-topic-info"><div class="mx-topic-name">' + esc(t.name) + (t.badge ? ' <span style="background:#2874A6;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:5px">' + t.badge + '</span>' : '') + (t.refSheet ? ' <span style="background:#7C3AED;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:4px">📚 Curated</span>' : '') + '</div>';
     h += '<div class="mx-topic-meta">' + esc(t.sub) + '</div>';
     if (tier !== 'untouched') {
       h += '<div class="mx-topic-status" style="margin-top:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">';
@@ -1384,6 +1398,19 @@ function renderSession() {
     h += '<span class="mx-phase-icon">' + esc(p.icon) + '</span>' + esc(p.label) + '</div>';
   });
   h += '</div>';
+
+  // Reference sheet panel for curated topics
+  if (topic.refSheet) {
+    h += '<div style="margin-bottom:14px;padding:12px 16px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1px solid #DDD6FE;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">';
+    h += '<div style="display:flex;align-items:center;gap:10px">';
+    h += '<span style="font-size:22px">📚</span>';
+    h += '<div>';
+    h += '<div style="font-size:13px;font-weight:700;color:#5B21B6">Curated Reference Sheet Available</div>';
+    h += '<div style="font-size:12px;color:#6D28D9;opacity:.85">Open-access sources powering this topic. Review before or after your session — the AI will reference the same material.</div>';
+    h += '</div></div>';
+    h += '<a href="' + topic.refSheet + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:#7C3AED;color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap">View References →</a>';
+    h += '</div>';
+  }
 
   // Chat messages
   h += '<div class="mx-chat" id="mxChat">';
@@ -1535,6 +1562,10 @@ window.MX = {
   },
 
   startSession: function(topicId) {
+    // directUrl removed — all topics launch AI chat. refSheet is for reference only.
+    var sys = SYSTEMS.find(function(s) { return s.id === state.activeSystem; });
+    var topic = null;
+    if (sys) sys.topics.forEach(function(t) { if (t.id === topicId) topic = t; });
     state.activeTopic = topicId;
     state.view = 'session';
     state.currentPhase = 0;
