@@ -226,6 +226,7 @@ a{color:inherit;text-decoration:none}button{font-family:var(--font);cursor:point
   <div id="gameArea" style="display:none"></div>
 </div>
 
+<script src="js/rdx-spoiler-free.js"></script>
 <script>
 // ══════════════════════════════════════════════════════
 // SPECIALISTS — all 19 available for any patient
@@ -360,7 +361,7 @@ function renderChartBanner(){
     }
     var initials=(activePatient.name||'?').split(' ').map(function(w){return w[0]}).join('').slice(0,2).toUpperCase();
     var bgCol=activePatient.category==='allergy'?'#2874A6':activePatient.setting==='ED'?'#C62828':'#1565C0';
-    el.innerHTML='<div class="chart-banner"><div class="chart-avatar" style="background:'+bgCol+'">'+initials+'</div><div class="chart-info"><div class="chart-name">'+escapeHtml(activePatient.name)+'</div><div class="chart-details"><span class="chart-detail">'+escapeHtml(activePatient.age)+'</span>'+(activePatient.setting?'<span class="chart-detail">\u00B7 '+escapeHtml(activePatient.setting)+'</span>':'')+(activePatient.diagnosis?'<span class="chart-detail">\u00B7 '+escapeHtml(activePatient.diagnosis)+'</span>':'')+'</div>'+(activePatient.cc?'<div class="chart-cc">'+escapeHtml(activePatient.cc)+'</div>':'')+vitalsHtml+'</div></div>';
+    el.innerHTML='<div class="chart-banner"><div class="chart-avatar" style="background:'+bgCol+'">'+initials+'</div><div class="chart-info"><div class="chart-name">'+escapeHtml(activePatient.name)+'</div><div class="chart-details"><span class="chart-detail">'+escapeHtml(activePatient.age)+'</span>'+(activePatient.setting?'<span class="chart-detail">\u00B7 '+escapeHtml(activePatient.setting)+'</span>':'')+'</div>'+(activePatient.cc?'<div class="chart-cc">'+escapeHtml(activePatient.cc)+'</div>':'')+vitalsHtml+'</div></div>';
     selEl.style.display='none';
   } else {
     // No chart context — show patient selector dropdown
@@ -368,7 +369,7 @@ function renderChartBanner(){
     if(pts.length>0){
       el.innerHTML='<div class="chart-banner no-chart"><h3>No Active Chart</h3><p>Select a patient below, or open a chart in the Virtual EMR first and click Consult Callback from the sidebar.</p></div>';
       var opts='<select class="pt-select" id="ptSelect" onchange="onPatientSelect(this.value)"><option value="">Choose a patient\u2026</option>';
-      pts.forEach(function(p){opts+='<option value="'+p.id+'">'+escapeHtml(p.name)+' ('+escapeHtml(p.age)+') \u2014 '+escapeHtml(p.cc||p.diagnosis)+'</option>'});
+      pts.forEach(function(p){opts+='<option value="'+p.id+'">'+escapeHtml(p.name)+' ('+escapeHtml(p.age)+') \u2014 '+escapeHtml(p.cc||'Clinical Case')+'</option>'});
       opts+='</select>';
       selEl.innerHTML=opts;
       selEl.style.display='block';
@@ -465,7 +466,6 @@ function buildPatientContext(){
   var p=activePatient;if(!p)return 'No patient data available.';
   var ctx='PATIENT: '+p.name+', '+p.age+'\n';
   if(p.cc)ctx+='Chief Complaint: '+p.cc+'\n';
-  if(p.diagnosis)ctx+='Working Diagnosis: '+p.diagnosis+'\n';
   if(p.setting)ctx+='Setting: '+p.setting+'\n';
   if(p.vitals){
     var v=p.vitals;
@@ -483,7 +483,7 @@ function buildPatientContext(){
 
 function buildSystemPrompt(){
   var spec=SPECIALISTS[selectedSpec];
-  return 'You are '+spec.name+', a '+spec.title+' at a teaching hospital. A medical trainee has paged you about a patient and you are calling them back.\n\nYOUR CHARACTER:\n- Personality: '+spec.personality+'\n- Communication style: '+spec.style+'\n- Your typical questions: '+spec.commonQs.join(', ')+'\n- Respond in character with natural medical dialogue. Keep responses to 1-3 sentences.\n- Be encouraging when the trainee does well, redirect when they miss key points.\n- Push back if the consult doesn\'t seem appropriate for your specialty — but be professional.\n\nPATIENT CHART DATA (the trainee has access to this, but YOU are hearing it for the first time via phone):\n'+buildPatientContext()+'\nIMPORTANT RULES:\n- Exchange '+Math.min(exchangeCount+1,maxExchanges)+' of '+maxExchanges+'.\n- If exchange 1: greet briefly, state your name and specialty, and ask them to present the case.\n- Ask follow-up questions probing their clinical reasoning and knowledge of THIS specific patient.\n- If they miss key data points from the chart, ask about them specifically.\n- Challenge their reasoning — why are they consulting YOU specifically? What is their clinical question?\n- In later exchanges, push on decision-making and anticipatory guidance.\n- If last exchange: wrap up with brief disposition (accepting, deferring, or redirecting).\n- Never break character. Do NOT use markdown, asterisks, or bullet points.\n- Keep it conversational — this is a phone call, not a written note.';
+  return 'You are '+spec.name+', a '+spec.title+' at a teaching hospital. A medical trainee has paged you about a patient and you are calling them back.\n\nYOUR CHARACTER:\n- Personality: '+spec.personality+'\n- Communication style: '+spec.style+'\n- Your typical questions: '+spec.commonQs.join(', ')+'\n- Respond in character with natural medical dialogue. Keep responses to 1-3 sentences.\n- Be encouraging when the trainee does well, redirect when they miss key points.\n- Push back if the consult doesn\'t seem appropriate for your specialty — but be professional.\n\nPATIENT CHART DATA (the trainee has access to this, but YOU are hearing it for the first time via phone):\n'+buildPatientContext()+'\n'+(activePatient.diagnosis?'ACTUAL DIAGNOSIS (hidden from trainee — use this to evaluate their reasoning, do NOT reveal it):\n'+activePatient.diagnosis+'\n':'')+'\nIMPORTANT RULES:\n- Exchange '+Math.min(exchangeCount+1,maxExchanges)+' of '+maxExchanges+'.\n- If exchange 1: greet briefly, state your name and specialty, and ask them to present the case.\n- Ask follow-up questions probing their clinical reasoning and knowledge of THIS specific patient.\n- If they miss key data points from the chart, ask about them specifically.\n- Challenge their reasoning — why are they consulting YOU specifically? What is their clinical question?\n- In later exchanges, push on decision-making and anticipatory guidance.\n- If last exchange: wrap up with brief disposition (accepting, deferring, or redirecting).\n- Never break character. Do NOT use markdown, asterisks, or bullet points.\n- Keep it conversational — this is a phone call, not a written note.';
 }
 
 async function callClaude(messages,systemPrompt){

@@ -8,6 +8,7 @@
 <title>Allergy & Immunology Pathway | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="description" content="Comprehensive allergy and immunology clinical reasoning curriculum. Filter cases by condition, setting, and acuity.">
+<script src="js/rdx-spoiler-free.js"></script>
 <script src="js/rdx-difficulty.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -269,7 +270,7 @@ function render() {
   const acuityLabels = {1:'ESI-1 Critical',2:'ESI-2 Emergent',3:'ESI-3 Urgent',4:'ESI-4 Non-urgent'};
   const diff = window.RDX_DIFFICULTY || 'standard';
   
-  const hideDx = window._allergyHideDx || false;
+  const hideDx = (window.SpoilerFree && SpoilerFree.isHidden()) || window._allergyHideDx || false;
   grid.innerHTML = filtered.map((c, idx) => {
     const url = 'virtual-emr.html?case=' + c.id + '&setting=' + (c.setting||'ed') + (diff!=='standard'?'&difficulty='+diff:'');
     const sub = SUBTYPES.find(s=>s.id===c.allergySubtype);

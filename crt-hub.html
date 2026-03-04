@@ -105,8 +105,9 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
   </div>
 
   <!-- Search & Filter -->
-  <div class="search-wrap">
-    <input type="text" id="crtSearch" placeholder="Search patient cases..." oninput="filterCases()">
+  <div class="search-wrap" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <input type="text" id="crtSearch" placeholder="Search patient cases..." oninput="filterCases()" style="flex:1;min-width:200px">
+    <span id="sfToggleWrap"></span>
   </div>
   <div class="filter-row" id="filterRow"></div>
 
@@ -115,6 +116,7 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
   <div id="empty" class="empty" style="display:none">No cases match your search.</div>
 </div>
 
+<script src="js/rdx-spoiler-free.js"></script>
 <script>
 // Load case manifest and build the CRT from actual available cases
 var CASES = [];
@@ -137,6 +139,8 @@ var SPEC_ICONS = {
 var ACUITY_LABELS = { 1: 'ESI-1 Critical', 2: 'ESI-2 Emergent', 3: 'ESI-3 Urgent', 4: 'ESI-4 Less Urgent' };
 
 function loadManifest() {
+  // Register spoiler-free toggle to re-render
+  if (window.SpoilerFree) SpoilerFree.onToggle(renderCases);
   var s = document.createElement('script');
   s.src = 'emr-data/manifest.js';
   s.onload = function() {
@@ -203,6 +207,10 @@ function renderCases() {
     return true;
   });
 
+  // Render toggle button
+  var tw = document.getElementById('sfToggleWrap');
+  if (tw && window.SpoilerFree) tw.innerHTML = SpoilerFree.renderToggle();
+
   if (!filtered.length) {
     document.getElementById('caseList').innerHTML = '';
     document.getElementById('empty').style.display = 'block';
@@ -227,10 +235,13 @@ function renderCases() {
     cases.forEach(function(c) {
       var info = SPEC_ICONS[c.category] || { icon: '\uD83D\uDCCB', color: '#F1F5F9', label: c.category };
       var acuityLabel = ACUITY_LABELS[c.acuity] || '';
+      // Spoiler-free: mask diagnosis, show patient name + presentation as fallback
+      var SF = window.SpoilerFree;
+      var displayName = SF ? SF.mask(c.diagnosis, c.name + ' \u2014 ' + pres, c.id) : c.diagnosis;
       html += '<a href="virtual-emr.html?case=' + c.id + '&setting=ed" class="case-card">';
       html += '<div class="case-icon" style="background:' + info.color + '">' + info.icon + '</div>';
       html += '<div class="case-info">';
-      html += '<div class="case-name">' + c.diagnosis + '</div>';
+      html += '<div class="case-name">' + displayName + '</div>';
       html += '<div class="case-meta">' + c.name + ' \u00B7 ' + c.age + (c.sex === 'Female' ? 'F' : c.sex === 'Male' ? 'M' : '') + (acuityLabel ? ' \u00B7 ' + acuityLabel : '') + '</div>';
       html += '</div>';
       html += '<div class="case-action">Open Case \u2192</div>';

@@ -25,14 +25,33 @@
     } catch(e) { return null; }
   }
 
-  // Load ED Track Board module on demand
+  // Load supporting modules on demand
   (function() {
     var setting = _getSetting();
-    if (setting === 'ed' && !window.EDTrackBoard) {
-      var s = document.createElement('script');
-      s.src = 'js/ed-trackboard.js';
-      document.head.appendChild(s);
+    // Always load date engine and continuity for any EMR setting
+    ['js/rdx-date-engine.js','js/rdx-patient-continuity.js','js/rdx-orientation.js'].forEach(function(src) {
+      if (!document.querySelector('script[src="' + src + '"]')) {
+        var s = document.createElement('script');
+        s.src = src;
+        document.head.appendChild(s);
+      }
+    });
+    if (setting === 'ed') {
+      if (!window.PATIENT_NAMES) {
+        var pn = document.createElement('script');
+        pn.src = 'emr-data/patient-names.js';
+        document.head.appendChild(pn);
+      }
+      if (!window.EDTrackBoard) {
+        var s = document.createElement('script');
+        s.src = 'js/ed-trackboard.js';
+        document.head.appendChild(s);
+      }
     }
+    // Show orientation after page renders
+    setTimeout(function() {
+      if (window.ClinicalOrientation) ClinicalOrientation.show();
+    }, 800);
   })();
 
   function _isFirstVisit() {

@@ -17,7 +17,7 @@
     'consult-callback.html': { label: 'Consult Callback', section: 'Practice' },
     'case-browser.html': { label: 'Virtual Hospital', section: 'Simulate' },
     'ed-3d.html': { label: 'Emergency Department', section: 'Simulate' },
-    'ed-board-v2.html': { label: 'ED Board', section: 'Simulate' },
+    
     'night-float.html': { label: 'Night Float', section: 'Simulate' },
     'admissions.html': { label: 'Admissions', section: 'Simulate' },
     'simroomdx.html': { label: 'SimRoomDx', section: 'Simulate' },

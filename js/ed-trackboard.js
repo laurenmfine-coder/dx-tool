@@ -75,12 +75,12 @@
   // plus supplement from CRT_EXPANSION
   // ═══════════════════════════════════════════════════════
   var BUILT_IN = [
-    {id:'chest-pain-nstemi',name:'Robert Chen',age:'58M',cc:'Chest pain radiating to left arm \u00D7 2hrs',dx:'NSTEMI',category:'Cardiovascular',esi:2,vitals:{HR:98,BP:'168/94',RR:20,SpO2:96,Temp:'37.0\u00B0C'}},
+    {id:'chest-pain-nstemi',name:'David Chen',age:'58M',cc:'Chest pain radiating to left arm \u00D7 2hrs',dx:'NSTEMI',category:'Cardiovascular',esi:2,vitals:{HR:98,BP:'168/94',RR:20,SpO2:96,Temp:'37.0\u00B0C'}},
     {id:'copd-exacerbation',name:'Dorothy Williams',age:'71F',cc:'Worsening dyspnea and productive cough \u00D7 3 days',dx:'COPD Exacerbation',category:'Pulmonary',esi:2,vitals:{HR:108,BP:'142/88',RR:28,SpO2:88,Temp:'38.2\u00B0C'}},
     {id:'acute-stroke',name:'James Okafor',age:'67M',cc:'Left-sided weakness and slurred speech \u00D7 45min',dx:'Acute Ischemic Stroke',category:'Neurology',esi:1,vitals:{HR:88,BP:'192/104',RR:16,SpO2:97,Temp:'36.8\u00B0C'}},
     {id:'appendicitis',name:'Maria Gonzalez',age:'24F',cc:'RLQ abdominal pain, nausea, low-grade fever \u00D7 18hrs',dx:'Acute Appendicitis',category:'Surgery',esi:3,vitals:{HR:92,BP:'118/74',RR:18,SpO2:99,Temp:'38.4\u00B0C'}},
     {id:'upper-gi-bleed',name:'Harold Thompson',age:'63M',cc:'Hematemesis \u00D7 2 episodes, melena, lightheaded',dx:'Upper GI Bleed',category:'GI',esi:2,vitals:{HR:116,BP:'94/62',RR:22,SpO2:97,Temp:'36.9\u00B0C'}},
-    {id:'aki-on-ckd',name:'Priya Sharma',age:'74F',cc:'Decreased urine output, confusion \u00D7 1 day',dx:'AKI on CKD',category:'Renal',esi:2,vitals:{HR:96,BP:'158/92',RR:22,SpO2:94,Temp:'37.1\u00B0C'}},
+    {id:'aki-on-ckd',name:'Sunita Sharma',age:'74F',cc:'Decreased urine output, confusion \u00D7 1 day',dx:'AKI on CKD',category:'Renal',esi:2,vitals:{HR:96,BP:'158/92',RR:22,SpO2:94,Temp:'37.1\u00B0C'}},
     {id:'sepsis-uti',name:'Eleanor Davis',age:'82F',cc:'Confusion, fever, found on floor by neighbor',dx:'Urosepsis',category:'Infectious Disease',esi:2,vitals:{HR:112,BP:'82/48',RR:24,SpO2:94,Temp:'38.9\u00B0C'}},
     {id:'dka-presentation',name:'Marcus Johnson',age:'28M',cc:'Nausea, vomiting, abdominal pain, polyuria \u00D7 2 days',dx:'DKA',category:'Endocrine',esi:2,vitals:{HR:118,BP:'108/68',RR:32,SpO2:99,Temp:'37.3\u00B0C'}},
     {id:'dvt-pe',name:'Sandra Mitchell',age:'45F',cc:'Acute onset pleuritic chest pain, dyspnea after long flight',dx:'Pulmonary Embolism',category:'Cardiovascular',esi:2,vitals:{HR:110,BP:'128/84',RR:26,SpO2:91,Temp:'37.4\u00B0C'}},
@@ -90,14 +90,14 @@
     {id:'ankle-sprain',name:'Kevin O\'Brien',age:'22M',cc:'Twisted ankle playing basketball, swelling',dx:'Ankle Sprain',category:'MSK',esi:4,vitals:{HR:78,BP:'122/76',RR:14,SpO2:99,Temp:'36.8\u00B0C'}},
     {id:'uti-uncomplicated',name:'Rachel Kim',age:'31F',cc:'Dysuria, frequency, urgency \u00D7 3 days',dx:'Uncomplicated UTI',category:'GU',esi:5,vitals:{HR:82,BP:'118/72',RR:14,SpO2:99,Temp:'37.8\u00B0C'}},
     {id:'migraine-refractory',name:'Lisa Patel',age:'35F',cc:'Severe headache with aura, nausea, photophobia \u00D7 6hrs',dx:'Status Migrainosus',category:'Neurology',esi:3,vitals:{HR:76,BP:'132/78',RR:14,SpO2:99,Temp:'37.0\u00B0C'}},
-    {id:'laceration-hand',name:'Carlos Mendez',age:'42M',cc:'Deep laceration right hand from kitchen knife',dx:'Hand Laceration',category:'Trauma',esi:4,vitals:{HR:84,BP:'128/78',RR:14,SpO2:99,Temp:'36.9\u00B0C'}},
+    {id:'laceration-hand',name:'Rafael Mendez',age:'42M',cc:'Deep laceration right hand from kitchen knife',dx:'Hand Laceration',category:'Trauma',esi:4,vitals:{HR:84,BP:'128/78',RR:14,SpO2:99,Temp:'36.9\u00B0C'}},
     {id:'asthma-peds',name:'Aiden Okafor',age:'6M',cc:'Wheezing and difficulty breathing \u00D7 12hrs',dx:'Asthma Exacerbation',category:'Pediatrics',esi:2,vitals:{HR:128,BP:'90/58',RR:36,SpO2:89,Temp:'37.8\u00B0C'}},
     {id:'syncope-workup',name:'Patricia Lang',age:'68F',cc:'Witnessed syncope at grocery store, brief LOC',dx:'Syncope',category:'Cardiovascular',esi:3,vitals:{HR:54,BP:'108/62',RR:16,SpO2:97,Temp:'36.7\u00B0C'}},
-    {id:'renal-colic',name:'Ahmed Hassan',age:'38M',cc:'Severe left flank pain, hematuria, cannot sit still',dx:'Renal Colic',category:'GU',esi:3,vitals:{HR:102,BP:'158/94',RR:20,SpO2:99,Temp:'37.1\u00B0C'}},
+    {id:'renal-colic',name:'Omar Hassan',age:'38M',cc:'Severe left flank pain, hematuria, cannot sit still',dx:'Renal Colic',category:'GU',esi:3,vitals:{HR:102,BP:'158/94',RR:20,SpO2:99,Temp:'37.1\u00B0C'}},
     {id:'cellulitis-leg',name:'Denise Walker',age:'56F',cc:'Red, swollen, warm left lower leg \u00D7 2 days, spreading',dx:'Cellulitis',category:'Infectious Disease',esi:3,vitals:{HR:92,BP:'138/82',RR:16,SpO2:98,Temp:'38.6\u00B0C'}},
     {id:'sbo',name:'William Chen',age:'77M',cc:'Abdominal distension, vomiting, no BM \u00D7 3 days',dx:'Small Bowel Obstruction',category:'Surgery',esi:3,vitals:{HR:96,BP:'132/78',RR:18,SpO2:97,Temp:'37.4\u00B0C'}},
     {id:'etoh-withdrawal',name:'Daniel Roberts',age:'52M',cc:'Tremor, agitation, diaphoresis, last drink 36hrs ago',dx:'Alcohol Withdrawal',category:'Toxicology',esi:2,vitals:{HR:118,BP:'162/98',RR:22,SpO2:98,Temp:'38.1\u00B0C'}},
-    {id:'chest-pain-low-risk',name:'Jennifer Wu',age:'29F',cc:'Sharp chest pain worse with inspiration \u00D7 1 day',dx:'Costochondritis',category:'MSK',esi:4,vitals:{HR:78,BP:'116/72',RR:14,SpO2:99,Temp:'36.9\u00B0C'}},
+    {id:'chest-pain-low-risk',name:'Michelle Wu',age:'29F',cc:'Sharp chest pain worse with inspiration \u00D7 1 day',dx:'Costochondritis',category:'MSK',esi:4,vitals:{HR:78,BP:'116/72',RR:14,SpO2:99,Temp:'36.9\u00B0C'}},
     {id:'hyperkalemia',name:'Earl Washington',age:'69M',cc:'Generalized weakness, missed dialysis \u00D7 2 sessions',dx:'Hyperkalemia',category:'Renal',esi:1,vitals:{HR:52,BP:'142/88',RR:18,SpO2:96,Temp:'36.8\u00B0C'}}
   ];
 
@@ -143,18 +143,29 @@
   // ═══════════════════════════════════════════════════════
   function _gatherEdCases() {
     var cases = [];
+    var names = window.PATIENT_NAMES || {};
 
-    // From EMR_MANIFEST
+    // From EMR_MANIFEST — only cases explicitly tagged as ED
     if (window.EMR_MANIFEST) {
       EMR_MANIFEST.forEach(function(g) {
         g.cases.forEach(function(c) {
-          if (c.setting === 'ed' || c.setting === 'ED' || !c.setting) {
+          if (c.setting === 'ed' || c.setting === 'ED') {
+            var nameData = names[c.id] || {};
+            var ptName = c.name || nameData.name || g.patient || '';
+            var ptAge = c.age || (nameData.age !== undefined ? nameData.age + (nameData.sex === 'Male' ? 'M' : 'F') : '') || g.age || '';
+            // Use c.cc first; fall back to g.presentation ONLY if it looks like a real CC
+            // (not a batch label like "Allergy Variations — Batch 2-3")
+            var cc = c.cc || '';
+            if (!cc && g.presentation && g.presentation.indexOf('Batch') === -1 && g.presentation.indexOf('Variations') === -1) {
+              cc = g.presentation;
+            }
+            if (!cc) cc = _ccFromId(c.id); // derive from case ID as last resort
             cases.push({
               id: c.id,
-              name: c.name || g.patient || c.id.replace(/-/g, ' '),
-              age: c.age || g.age || '',
-              cc: c.cc || g.presentation || '',
-              dx: c.diagnosis || '',
+              name: ptName,
+              age: ptAge,
+              cc: cc,
+              dx: c.diagnosis || '',  // stored but never shown on board
               category: c.category || '',
               esi: c.acuity === 'emergent' ? 1 : c.acuity === 'urgent' ? 2 : 3,
               vitals: c.vitals || g.vitals || null
@@ -168,11 +179,12 @@
     if (window.CRT_EXPANSION) {
       CRT_EXPANSION.forEach(function(crt) {
         if (crt.setting === 'ED' && !cases.find(function(c) { return c.id === crt.id; })) {
+          var nameData = names[crt.id] || {};
           cases.push({
             id: crt.id,
-            name: crt.patient.name,
-            age: crt.patient.age,
-            cc: crt.patient.cc,
+            name: crt.patient.name || nameData.name || '',
+            age: crt.patient.age || (nameData.age !== undefined ? nameData.age + (nameData.sex === 'Male' ? 'M' : 'F') : '') || '',
+            cc: crt.patient.cc || _ccFromId(crt.id),
             dx: crt.title,
             category: crt.category,
             esi: crt.acuity === 'emergent' ? 1 : crt.acuity === 'urgent' ? 2 : 3,
@@ -194,52 +206,110 @@
     return cases;
   }
 
+  // Generate a plausible chief complaint from a case ID (last resort)
+  // Maps common diagnosis keywords to what a patient would actually say
+  function _ccFromId(id) {
+    var map = {
+      'chest-pain':'Chest pain','dyspnea':'Shortness of breath','sob':'Shortness of breath',
+      'headache':'Headache','seizure':'Seizure','syncope':'Passed out',
+      'abdominal-pain':'Abdominal pain','abd-pain':'Abdominal pain',
+      'fever':'Fever','rash':'Rash','swelling':'Swelling',
+      'weakness':'Weakness','dizziness':'Dizziness','confusion':'Confusion',
+      'cough':'Cough','vomiting':'Nausea and vomiting','nausea':'Nausea',
+      'bleeding':'Bleeding','pain':'Pain','fall':'Fall','injury':'Injury',
+      'allergic':'Allergic reaction','anaphylaxis':'Allergic reaction with difficulty breathing',
+      'urticaria':'Hives','angioedema':'Swelling of face/lips',
+      'asthma':'Difficulty breathing, wheezing','copd':'Worsening shortness of breath',
+      'stroke':'Sudden weakness, slurred speech','mi':'Chest pain',
+      'nstemi':'Chest pain','stemi':'Crushing chest pain',
+      'pe':'Chest pain and shortness of breath','dvt':'Leg swelling and pain',
+      'pneumonia':'Fever, cough, shortness of breath',
+      'sepsis':'Fever and feeling very ill','dka':'Nausea, vomiting, abdominal pain',
+      'gi-bleed':'Vomiting blood','sbo':'Abdominal pain and vomiting',
+      'fracture':'Pain after injury','laceration':'Cut/wound',
+      'overdose':'Ingestion/overdose','withdrawal':'Tremor and agitation',
+      'meningitis':'Headache, neck stiffness, fever',
+      'epiglottitis':'Sore throat, difficulty swallowing, drooling',
+      'pancreatitis':'Severe abdominal pain radiating to back',
+      'appendicitis':'Right lower abdominal pain',
+      'cellulitis':'Red, swollen, warm skin',
+      'eczema':'Worsening skin rash','dermatitis':'Skin rash',
+      'eoe':'Difficulty swallowing, food getting stuck',
+      'fpies':'Vomiting and lethargy after feeding',
+      'mastocytosis':'Flushing episodes, hives',
+      'drug-allergy':'Reaction after taking medication',
+      'sjs':'Skin blistering and rash after medication',
+      'dress':'Fever and rash after starting new medication',
+      'insect-sting':'Reaction after insect sting',
+      'food-allergy':'Reaction after eating',
+      'peanut':'Reaction after eating peanut',
+      'milk-allergy':'Feeding intolerance, bloody stools'
+    };
+    var lower = (id || '').toLowerCase();
+    for (var key in map) {
+      if (lower.indexOf(key) !== -1) return map[key];
+    }
+    // Generic fallback — don't show the case ID
+    return 'Presenting complaint';
+  }
+
   function _buildBoard() {
     var allCases = _gatherEdCases();
     _usedBeds = [];
     _board = [];
     _arrivalQueue = [];
 
+    // Load learner progress from localStorage
+    var progress = {};
+    try { progress = JSON.parse(localStorage.getItem('rdx-ed-progress') || '{}'); } catch(e) {}
+
     // Shuffle for variety
     allCases.sort(function() { return Math.random() - 0.5; });
 
     // Initial board: ~12-16 patients already here
     var initialCount = Math.min(allCases.length, 12 + Math.floor(Math.random() * 5));
-    var statusOptions = ['active','active','active','workup','workup','results','results','waiting','triage','dispo','admit'];
 
     for (var i = 0; i < allCases.length; i++) {
       var c = allCases[i];
+      var prog = progress[c.id] || {};
       var boardEntry = {
         id: c.id,
         name: c.name,
         age: c.age,
         cc: c.cc,
-        dx: c.dx,
+        dx: c.dx,           // stored internally but NOT shown on board
         category: c.category,
         esi: c.esi || 3,
         vitals: c.vitals,
         bed: null,
-        status: 'waiting',
+        status: 'waiting',  // default — overridden by learner progress below
         arrivalTime: null,
-        seen: false
+        seen: false,
+        dxConfirmed: prog.dxConfirmed || false,
+        dispoSet: prog.dispoSet || false,
+        dispoLabel: prog.dispoLabel || ''
       };
 
+      // Derive status from learner progress only
+      if (prog.dispoSet) {
+        boardEntry.status = prog.dispoLabel === 'Admit' ? 'admit' : 'discharged';
+        boardEntry.seen = true;
+      } else if (prog.dxConfirmed) {
+        boardEntry.status = 'results';
+        boardEntry.seen = true;
+      } else if (prog.opened) {
+        boardEntry.status = 'active';
+        boardEntry.seen = true;
+      }
+      // else stays 'waiting'
+
       if (i < initialCount) {
-        // Already on the board
         boardEntry.bed = _assignBed(boardEntry.esi, _usedBeds);
-        boardEntry.status = statusOptions[Math.floor(Math.random() * statusOptions.length)];
         // Stagger arrival times over past 0-4 hours
         var minsAgo = Math.floor(Math.random() * 240);
         boardEntry.arrivalTime = new Date(Date.now() - minsAgo * 60000);
-        boardEntry.seen = boardEntry.status !== 'waiting' && boardEntry.status !== 'triage';
-        // ESI 1 patients are always active or workup
-        if (boardEntry.esi === 1) {
-          boardEntry.status = Math.random() > 0.5 ? 'active' : 'workup';
-          boardEntry.seen = true;
-        }
         _board.push(boardEntry);
       } else {
-        // Queue for simulated arrival
         _arrivalQueue.push(boardEntry);
       }
     }
@@ -365,7 +435,7 @@
     } else {
       patients.forEach(function(p, idx) {
         var esi = ESI[p.esi] || ESI[3];
-        var status = STATUS[p.status] || STATUS.active;
+        var status = STATUS[p.status] || STATUS.waiting;
         var wait = p.arrivalTime ? _waitTime(_minutesAgo(p.arrivalTime)) : '\u2014';
         var isNew = p.arrivalTime && _minutesAgo(p.arrivalTime) < 5;
 
@@ -388,24 +458,31 @@
         // Bed
         html += '<td class="ed-cell-bed"><span class="ed-bed">' + _esc(p.bed || '\u2014') + '</span></td>';
 
-        // Patient
+        // Patient name + age (never show dx or case ID)
         html += '<td class="ed-cell-patient"><div class="ed-pt-name">' + _esc(p.name) + '</div><div class="ed-pt-age">' + _esc(p.age) + '</div></td>';
 
-        // Chief Complaint
-        html += '<td class="ed-cell-cc"><div class="ed-cc-text">' + _esc(p.cc) + '</div>' +
-          (p.category ? '<span class="ed-cat-tag">' + _esc(p.category) + '</span>' : '') + '</td>';
+        // Chief Complaint only — no category tag, no diagnosis hints
+        html += '<td class="ed-cell-cc"><div class="ed-cc-text">' + _esc(p.cc) + '</div></td>';
 
         // Vitals
         html += '<td class="ed-cell-vitals"><span class="ed-vitals-text">' + _esc(vStr) + '</span></td>';
 
-        // Status
-        html += '<td class="ed-cell-status"><span class="ed-status-badge" style="background:' + status.bg + ';color:' + status.color + '">' + status.icon + ' ' + status.label + '</span></td>';
+        // Status — learner-driven only
+        // If dxConfirmed, show a green checkmark next to status
+        var statusHtml = status.icon + ' ' + status.label;
+        if (p.dxConfirmed && !p.dispoSet) {
+          statusHtml = '\uD83D\uDCCB Dx Confirmed';
+        }
+        if (p.dispoSet) {
+          statusHtml = (p.dispoLabel === 'Admit' ? '\uD83C\uDFE5' : '\u2192') + ' ' + _esc(p.dispoLabel);
+        }
+        html += '<td class="ed-cell-status"><span class="ed-status-badge" style="background:' + status.bg + ';color:' + status.color + '">' + statusHtml + '</span></td>';
 
         // Wait time
         html += '<td class="ed-cell-wait"><span data-arrival="' + (p.arrivalTime ? p.arrivalTime.getTime() : '') + '">' + wait + '</span></td>';
 
         // Action
-        html += '<td class="ed-cell-action"><button type="button" class="ed-open-btn" onclick="event.stopPropagation();EDTrackBoard.openChart(\'' + p.id + '\')">Open Chart</button></td>';
+        html += '<td class="ed-cell-action"><button type="button" class="ed-open-btn" onclick="event.stopPropagation();EDTrackBoard.openChart(\'' + p.id + '\')">' + (p.seen ? 'Resume' : 'Open Chart') + '</button></td>';
 
         html += '</tr>';
       });
@@ -565,7 +642,9 @@
     },
 
     openChart: function(caseId) {
-      // Mark as seen
+      // Mark as opened in localStorage
+      _saveProgress(caseId, { opened: true });
+      // Update local board state
       var pt = _board.find(function(p) { return p.id === caseId; });
       if (pt && !pt.seen) {
         pt.seen = true;
@@ -575,9 +654,51 @@
       window.location.href = 'virtual-emr.html?setting=ed&case=' + caseId;
     },
 
+    // Called by the EMR when learner confirms a diagnosis
+    confirmDx: function(caseId) {
+      _saveProgress(caseId, { dxConfirmed: true });
+      var pt = _board.find(function(p) { return p.id === caseId; });
+      if (pt) {
+        pt.dxConfirmed = true;
+        pt.status = 'results';
+        _renderBoardContent();
+      }
+    },
+
+    // Called by the EMR when learner sets disposition
+    setDispo: function(caseId, dispoLabel) {
+      _saveProgress(caseId, { dispoSet: true, dispoLabel: dispoLabel || 'Discharge' });
+      var pt = _board.find(function(p) { return p.id === caseId; });
+      if (pt) {
+        pt.dispoSet = true;
+        pt.dispoLabel = dispoLabel || 'Discharge';
+        pt.status = dispoLabel === 'Admit' ? 'admit' : 'discharged';
+        _renderBoardContent();
+      }
+    },
+
+    // Reset all learner progress (for new shift)
+    resetShift: function() {
+      try { localStorage.removeItem('rdx-ed-progress'); } catch(e) {}
+      _buildBoard();
+      _renderBoardContent();
+    },
+
     getBoard: function() {
       return _board;
     }
   };
+
+  // ═══════════════════════════════════════════════════════
+  // PROGRESS PERSISTENCE
+  // ═══════════════════════════════════════════════════════
+  function _saveProgress(caseId, updates) {
+    try {
+      var progress = JSON.parse(localStorage.getItem('rdx-ed-progress') || '{}');
+      if (!progress[caseId]) progress[caseId] = {};
+      Object.keys(updates).forEach(function(k) { progress[caseId][k] = updates[k]; });
+      localStorage.setItem('rdx-ed-progress', JSON.stringify(progress));
+    } catch(e) {}
+  }
 
 })();

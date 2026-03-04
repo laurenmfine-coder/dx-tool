@@ -160,6 +160,7 @@ a{color:var(--accent);text-decoration:none}
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Admissions | ReasonDx">
 <meta name="twitter:description" content="Practice ED handoffs, admission orders, and H&P presentations.">
+<script src="js/rdx-spoiler-free.js"></script>
 <script src="js/rdx-difficulty.js"></script>
 </head>
 <body>
@@ -297,7 +298,7 @@ function renderCaseGrid(cases) {
   cases.forEach(c => {
     const card = document.createElement('div');
     card.className = 'case-card' + (selectedCaseId===c.id?' selected':'');
-    const dxText = window._hideDxAdm ? (c.presentation || c.category || 'Case') + ' \u2014 ESI ' + c.acuity : c.dx;
+    const dxText = (window.SpoilerFree && SpoilerFree.isHidden()) ? (c.presentation || c.category || 'Case') + ' \u2014 ESI ' + c.acuity : c.dx;
     card.innerHTML = `<div class="cc-name">${c.name}</div><div class="cc-dx">${dxText}</div><span class="cc-esi esi-${c.acuity}">ESI ${c.acuity}</span>`;
     card.onclick = () => selectCase(c.id, card);
     grid.appendChild(card);
@@ -352,7 +353,7 @@ function initSidebar() {
   const p = caseData.patient;
   document.getElementById('sb-name').textContent = p.name + ' (' + p.age + p.sex.charAt(0) + ')';
   const ho = handoffData;
-  document.getElementById('sb-oneliner').textContent = ho ? ho.oneLiner : (caseData.diagnosis || '');
+  document.getElementById('sb-oneliner').textContent = ho ? ho.oneLiner : (caseData.presentation || 'Review chart to formulate assessment');
 
   // Vitals
   const vBox = document.getElementById('sb-vitals');
