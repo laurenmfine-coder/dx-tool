@@ -12,7 +12,6 @@
 
   var MAP = {
     'case-browser.html': { label: 'Case Library', section: 'Learn' },
-    'study-mode.html': { label: 'Study Mode', section: 'Learn' },
     'consult-callback.html': { label: 'Clinical Reasoning Trainer', section: 'Practice' },
     'consult-callback.html': { label: 'Consult Callback', section: 'Practice' },
     'case-browser.html': { label: 'Virtual Hospital', section: 'Simulate' },
@@ -23,7 +22,6 @@
     'simroomdx.html': { label: 'SimRoomDx', section: 'Simulate' },
     'virtual-emr.html': { label: 'Virtual EMR', section: 'Practice' },
     'virtual-emr.html': { label: 'Virtual EMR', section: 'Practice' },
-    'board-prep.html': { label: 'Board Prep', section: 'Learn' },
     'analytics-dashboard.html': { label: 'Analytics', section: 'Tools' },
     'virtual-emr.html': { label: 'Virtual EMR', section: 'Practice' },
     'ai-trainer-anaphylaxis-food.html': { label: 'AI Trainer: Anaphylaxis', section: 'Practice' },

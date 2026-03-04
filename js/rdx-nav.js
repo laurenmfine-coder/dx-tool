@@ -7,10 +7,10 @@
   var R = inSubdir ? '../' : './';
   window.R = R; // expose globally for other modules
   var sec = 'home';
-  if (/pathway|study-mode|allergy-pathway|\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
+  if (/pathway|allergy-pathway|\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
   else if (/consult-callback|procedure-lab|counseling-scenarios/i.test(path)) sec = 'practice';
   else if (/hospital-3d|ed-3d|night-float|admissions|simroomdx|virtual-hospital|virtual-emr|training/i.test(path)) sec = 'simulate';
-  else if (/milestone-tracker|milestone-report|ilp|faculty-assess|cohort-analytics/i.test(path)) sec = 'fellowship';
+  else if (/milestone-tracker|cohort-analytics/i.test(path)) sec = 'fellowship';
   else if (/learning-analytics|analytics-dashboard/i.test(path)) sec = 'analytics';
   document.documentElement.setAttribute('data-theme', 'light');
 
@@ -28,7 +28,6 @@
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
       dd('Learn', sec==='learn',
         di(R+'pathway.html','','MechanismDx','Pathophysiology tutor \u2014 560 topics')+
-        di(R+'study-mode.html','','Study Mode','Clinical topic guides across specialties')+
         di(R+'allergy-pathway.html','','A/I Pathway','Allergy & Immunology curriculum')
       )+
       dd('Practice', sec==='practice',
@@ -45,9 +44,6 @@
       )+
       dd('Fellowship', sec==='fellowship',
         di(R+'milestone-tracker.html','','Milestone Tracker','ACGME A/I milestones')+
-        di(R+'milestone-report.html','','CCC Report','Semi-annual milestone report')+
-        di(R+'ilp.html','','Learning Plan','Individualized learning goals')+
-        di(R+'faculty-assess.html','','Faculty Quick-Score','Observation-based assessment')+
         di(R+'cohort-analytics.html','','Cohort Analytics','Program-level fellow comparison')
       )+
       dd('Analytics', sec==='analytics',

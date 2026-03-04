@@ -24,13 +24,11 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-/* Nav managed by rdx-nav.js */
-
 .dash{max-width:1120px;margin:0 auto;padding:32px 24px 80px}
 .dash-header{text-align:center;margin-bottom:48px}
 .dash-greeting{font-size:14px;font-weight:500;color:var(--dim);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
 .dash-title{font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);letter-spacing:-.8px;line-height:1.1;margin-bottom:12px}
-.dash-title span{background:linear-gradient(135deg,var(--blue-light),var(--blue));color:var(--blue)}
+.dash-title span{background:linear-gradient(135deg,var(--blue-light),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .dash-sub{font-size:15px;color:var(--dim);max-width:520px;margin:0 auto;line-height:1.6}
 
 /* Stats bar */
@@ -89,12 +87,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .loc-card.consult .loc-icon{background:rgba(5,150,105,.1);color:#34D399}
 .loc-card.emr::before{background:linear-gradient(90deg,var(--blue),transparent)}
 .loc-card.emr .loc-icon{background:var(--blue-bg);color:var(--blue-light)}
-.loc-card.board::before{background:linear-gradient(90deg,var(--pink),transparent)}
-.loc-card.board .loc-icon{background:rgba(236,72,153,.1);color:#F472B6}
-.loc-card.study::before{background:linear-gradient(90deg,#059669,transparent)}
-.loc-card.study .loc-icon{background:rgba(5,150,105,.1);color:#6EE7B7}
 .loc-card.progress::before{background:linear-gradient(90deg,var(--blue-light),transparent)}
 .loc-card.progress .loc-icon{background:var(--blue-bg);color:var(--blue-light)}
+.loc-card.milestone::before{background:linear-gradient(90deg,var(--green),transparent)}
+.loc-card.milestone .loc-icon{background:rgba(5,150,105,.1);color:#34D399}
+.loc-card.proclab::before{background:linear-gradient(90deg,var(--amber),transparent)}
+.loc-card.proclab .loc-icon{background:rgba(217,119,6,.1);color:#FBBF24}
+.loc-card.counsel::before{background:linear-gradient(90deg,var(--pink),transparent)}
+.loc-card.counsel .loc-icon{background:rgba(236,72,153,.1);color:#F472B6}
 
 /* Footer */
 .dash-footer{text-align:center;padding-top:24px;border-top:1px solid var(--border)}
@@ -134,9 +134,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 
   <div class="stats">
-    <div class="stat"><div class="stat-num">145</div><div class="stat-label">Clinical Cases</div></div>
-    <div class="stat"><div class="stat-num">615</div><div class="stat-label">Board Questions</div></div>
-    <div class="stat"><div class="stat-num">15</div><div class="stat-label">Learning Tools</div></div>
+    <div class="stat"><div class="stat-num" data-rdx-stat="cases">&ndash;</div><div class="stat-label">Clinical Cases</div></div>
+    <div class="stat"><div class="stat-num" data-rdx-stat="specialties">&ndash;</div><div class="stat-label">Specialties</div></div>
+    <div class="stat"><div class="stat-num" data-rdx-stat="tools">&ndash;</div><div class="stat-label">Learning Tools</div></div>
+    <div class="stat"><div class="stat-num" data-rdx-stat="settings">&ndash;</div><div class="stat-label">Clinical Settings</div></div>
   </div>
 
   <!-- Clinical Practice -->
@@ -149,7 +150,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="loc-body">
           <div class="loc-name">Emergency Department</div>
           <div class="loc-desc">Pick up patients from the ED track board. Work through clinical reasoning trainers with real-time decision making, orders, and evolving patient conditions.</div>
-          <div class="loc-badge">145 cases</div>
+          <div class="loc-badge"><span data-rdx-stat="cases">&ndash;</span> cases</div>
         </div>
       </a>
 
@@ -157,7 +158,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="loc-icon">🩺</div>
         <div class="loc-body">
           <div class="loc-name">Simulation Lab</div>
-          <div class="loc-desc">Standardized patient encounters. Practice history-taking, physical exam, and clinical communication in a simulated environment.</div>
+          <div class="loc-desc">Standardized patient encounters. Practice history-taking, physical exam, orders, and clinical communication with AI-powered nurses, consultants, and pharmacists.</div>
           <div class="loc-badge purple">Interactive SP</div>
         </div>
       </a>
@@ -189,7 +190,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         </div>
       </a>
 
-      <a href="virtual-emr.html" class="loc-card emr">
+      <a href="virtual-emr.html?setting=ed" class="loc-card emr">
         <div class="loc-icon">💻</div>
         <div class="loc-body">
           <div class="loc-name">Electronic Medical Record</div>
@@ -205,24 +206,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <div class="loc-section">
     <div class="loc-section-title">Study & Review</div>
     <div class="locations">
-
-      <a href="board-prep.html" class="loc-card board">
-        <div class="loc-icon">📝</div>
-        <div class="loc-body">
-          <div class="loc-name">Board Review</div>
-          <div class="loc-desc">USMLE-style multiple choice questions with detailed explanations, illness scripts, and cognitive bias analysis.</div>
-          <div class="loc-badge pink">615 questions</div>
-        </div>
-      </a>
-
-      <a href="study-mode.html" class="loc-card study">
-        <div class="loc-icon">📖</div>
-        <div class="loc-body">
-          <div class="loc-name">Study Room</div>
-          <div class="loc-desc">Flashcards, clinical pathways, and review materials. Study at your own pace with spaced repetition.</div>
-          <div class="loc-badge green">Self-paced</div>
-        </div>
-      </a>
 
       <a href="learning-analytics.html" class="loc-card progress">
         <div class="loc-icon">📊</div>
@@ -245,17 +228,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="loc-icon">✅</div>
         <div class="loc-body">
           <div class="loc-name">Milestone Tracker</div>
-          <div class="loc-desc">ACGME A/I fellowship milestone dashboard. Track 19 subcompetencies, tier progression, and coverage gaps across 68 tagged cases.</div>
+          <div class="loc-desc">ACGME A/I fellowship milestone dashboard. Track 19 subcompetencies, tier progression, and coverage gaps across tagged cases.</div>
           <div class="loc-badge green">PD dashboard</div>
-        </div>
-      </a>
-
-      <a href="pd-analytics.html" class="loc-card progress">
-        <div class="loc-icon">📊</div>
-        <div class="loc-body">
-          <div class="loc-name">Program Analytics</div>
-          <div class="loc-desc">Cohort-level analytics for program directors. Fellow progress comparison, milestone heatmap, knowledge gap analysis, and CCC-ready reporting.</div>
-          <div class="loc-badge blue">Program License</div>
         </div>
       </a>
 
@@ -277,33 +251,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         </div>
       </a>
 
-      <a href="ilp.html" class="loc-card ilp">
-        <div class="loc-icon">🎯</div>
-        <div class="loc-body">
-          <div class="loc-name">Learning Plan</div>
-          <div class="loc-desc">Individualized Learning Plans with collaborative goal-setting, activity tracking, and milestone target alignment.</div>
-          <div class="loc-badge">PBLI2</div>
-        </div>
-      </a>
-
-      <a href="faculty-assess.html" class="loc-card faculty">
-        <div class="loc-icon">📋</div>
-        <div class="loc-body">
-          <div class="loc-name">Faculty Quick-Score</div>
-          <div class="loc-desc">30-second observation-based assessment cards. Select context, score milestones, and feed data to the CCC report.</div>
-          <div class="loc-badge">Faculty tool</div>
-        </div>
-      </a>
-
-      <a href="milestone-report.html" class="loc-card ccc">
-        <div class="loc-icon">📄</div>
-        <div class="loc-body">
-          <div class="loc-name">CCC Report Generator</div>
-          <div class="loc-desc">Semi-annual milestone reports with auto-generated narratives, gap analysis, and strengths summary. Print-ready for CCC.</div>
-          <div class="loc-badge green">CCC-ready</div>
-        </div>
-      </a>
-
     </div>
   </div>
 
@@ -313,6 +260,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 </div>
 
 <script src="js/rdx-nav.js"></script>
+<script src="emr-data/manifest.js"></script>
+<script src="js/rdx-stats.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/rdx-supabase.js"></script>
 <script src="js/rdx-analytics-tracker.js"></script>

@@ -236,8 +236,6 @@ a { color: inherit; text-decoration: none; }
 .tool-card[data-tool="cases"] .tool-icon{background:var(--red-bg);color:var(--red)}
 .tool-card[data-tool="admissions"] .tool-icon{background:var(--navy-floor-bg);color:var(--navy-floor)}
 .tool-card[data-tool="oral-pres"] .tool-icon{background:var(--purple-bg);color:var(--purple)}
-.tool-card[data-tool="board-prep"] .tool-icon{background:#FFF7ED;color:#EA580C}
-.tool-card[data-tool="study-mode"] .tool-icon{background:#F0F9FF;color:#0369A1}
 
 /* ═══ MECHANISM DX CALLOUT ═══ */
 .mechanism-callout {
@@ -450,7 +448,7 @@ const SETTINGS = [
     role:'ED physician / M3-M4 student',
     desc:'Patients arrive on the track board. You triage, stabilize, diagnose, and dispo. Time-pressured reasoning with incomplete data — just like the real ED.',
     tags:['Live Track Board','Acute Presentations','Rapid DDx'],
-    tools:['cases','crt','coachdx','simdx','sbar','emr','oral-pres','board-prep','study-mode'],
+    tools:['cases','crt','coachdx','simdx','sbar','emr','oral-pres'],
     mechanismModules:['Cardiac','Pulmonary','Neurology','GI','Renal','Allergy/Immunology'],
     launchUrl:'ed-3d.html',
     quickLaunch:[
@@ -464,7 +462,7 @@ const SETTINGS = [
     role:'Admitting resident / Sub-I',
     desc:'Inherit the ED workup. Refine the diagnosis. Write admission orders, build a problem-based A&P, and anticipate what happens overnight.',
     tags:['Admissions','Progress Notes','Daily Rounding'],
-    tools:['admissions','cases','crt','coachdx','sbar','emr','oral-pres','study-mode'],
+    tools:['admissions','cases','crt','coachdx','sbar','emr','oral-pres'],
     mechanismModules:['Cardiac','Renal','Pulmonary','Endocrine','GI','Hematology'],
     launchUrl:'admissions.html',
     quickLaunch:[
@@ -478,7 +476,7 @@ const SETTINGS = [
     role:'Cross-cover intern',
     desc:"It's 1 AM. You're covering 8 patients. Nurses page you with critical labs, urgent vitals, and new admissions from the ED. Triage, prioritize, manage — hand off at dawn.",
     tags:['Cross-Cover','I-PASS Handoffs','Critical Labs'],
-    tools:['cases','crt','coachdx','sbar','emr','study-mode'],
+    tools:['cases','crt','coachdx','sbar','emr'],
     mechanismModules:['Cardiac','Renal','Endocrine','Pulmonary'],
     launchUrl:'night-float.html',
     quickLaunch:[
@@ -492,7 +490,7 @@ const SETTINGS = [
     role:'PCP / Clinic student',
     desc:'Longitudinal patient management. Chronic disease follow-up, preventive care, medication adjustments, and care coordination across providers.',
     tags:['Chronic Disease','Preventive Care','Transitions'],
-    tools:['cases','crt','coachdx','emr','study-mode'],
+    tools:['cases','crt','coachdx','emr'],
     mechanismModules:['Endocrine','Cardiac','Renal','MSK','Respiratory'],
     launchUrl:'setting-selector.html?setting=clinic',
     quickLaunch:[
@@ -505,7 +503,7 @@ const SETTINGS = [
     role:'ICU resident / Sub-I',
     desc:'Organ-system-based monitoring. Ventilator management. Vasopressors. Goals-of-care conversations. Hour-by-hour decision-making at the highest acuity.',
     tags:['Multi-Organ','Ventilators','Escalation'],
-    tools:['cases','crt','coachdx','sbar','emr','study-mode'],
+    tools:['cases','crt','coachdx','sbar','emr'],
     mechanismModules:['Cardiac','Pulmonary','Renal','Neurology','Hematology'],
     launchUrl:'setting-selector.html?setting=icu',
     quickLaunch:[
@@ -518,7 +516,7 @@ const SETTINGS = [
     role:'Consulting specialist',
     desc:'Answer the clinical question. Review the chart with a specialist lens, perform a focused assessment, and write targeted recommendations.',
     tags:['Focused Assessment','Specialty Lens','Recs'],
-    tools:['cases','crt','coachdx','emr','study-mode'],
+    tools:['cases','crt','coachdx','emr'],
     mechanismModules:['Allergy/Immunology','Cardiac','GI','Neurology','Pulmonary'],
     launchUrl:'consult-callback.html',
     quickLaunch:[
@@ -553,12 +551,6 @@ const TOOLS = {
   'oral-pres':{name:'Oral Presentation Trainer',icon:'🎤',subtitle:'Present to the Attending',
                desc:'Practice your morning rounds oral presentation. SimRoomDx scores your structure, prioritization, and ability to defend your reasoning under questioning.',
                features:['Scored Rubric','Attending Q&A','Pro Feature'],url:'simroomdx.html'},
-  'board-prep':{name:'Board Prep Mode',icon:'📝',subtitle:'USMLE / COMLEX Aligned',
-               desc:'Cases mapped to Step 2 / Level 2 frameworks. Practice with exam-style reasoning while still getting the full clinical simulation.',
-               features:['Step 2 Mapping','High-Yield Cases','Analytics'],url:'board-prep.html'},
-  'study-mode':{name:'Study Hub',icon:'📚',subtitle:'Spaced Repetition & Review',
-               desc:'Patient-anchored flashcards generated from your cases. Spaced repetition ensures you remember what you missed. Track mastery over time.',
-               features:['SM-2 Algorithm','Auto-Generated','Adaptive'],url:'study-mode.html'}
 };
 
 const MECHANISM_MODULES = {
@@ -593,8 +585,6 @@ const SEARCH_INDEX = [
   {name:'Clinical Reasoning Trainer',desc:'Guided diagnostic thinking',cat:'Tool',color:'#2874A6',url:'crt-hub.html'},
   {name:'SBAR Trainer',desc:'Structured communication',cat:'Tool',color:'#D97706',url:'consult-callback.html'},
   {name:'Virtual EMR',desc:'Chart review and order entry',cat:'Tool',color:'#0D9488',url:'virtual-emr.html'},
-  {name:'Board Prep',desc:'USMLE / COMLEX aligned',cat:'Tool',color:'#EA580C',url:'board-prep.html'},
-  {name:'Study Hub',desc:'Spaced repetition flashcards',cat:'Tool',color:'#0369A1',url:'study-mode.html'},
   {name:'ECG Trainer',desc:'12-lead interpretation',cat:'Tool',color:'#6366F1',url:'ecg/index.html'},
   {name:'MechanismDx',desc:'Pathophysiology modules',cat:'Learning',color:'#7C3AED',url:'pathway.html'},
   {name:'ABG Analyzer',desc:'Arterial blood gas interpretation',cat:'Tool',color:'#6366F1',url:'tools/index.html'},

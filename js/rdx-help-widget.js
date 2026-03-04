@@ -64,9 +64,9 @@
           <span class="icon">H</span>
           <span>Home</span>
         </a>
-        <a href="${base}study-mode.html" class="rdx-help-link">
+        <a href="${base}learning-analytics.html" class="rdx-help-link">
           <span class="icon">T</span>
-          <span>Study Mode</span>
+          <span>My Progress</span>
         </a>
         <a href="${base}virtual-emr.html" class="rdx-help-link">
           <span class="icon">M</span>

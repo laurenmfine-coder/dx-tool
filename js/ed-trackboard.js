@@ -111,6 +111,8 @@
   var _clockTimer = null;
   var _filter = 'all';         // all | esi-1 | esi-2 | etc | waiting | active | dispo
   var _sort = 'esi';           // esi | bed | time | name
+  var _searchTerm = '';        // free-text search
+  var _categoryFilter = 'all'; // organ system filter
   var _simRunning = false;
   var _shiftStart = null;
   var _boardEl = null;
@@ -263,14 +265,53 @@
     var progress = {};
     try { progress = JSON.parse(localStorage.getItem('rdx-ed-progress') || '{}'); } catch(e) {}
 
-    // Shuffle for variety
-    allCases.sort(function() { return Math.random() - 0.5; });
+    // Shuffle for variety — but balance categories so no single system dominates
+    // Step 1: Group by category
+    var catGroups = {};
+    allCases.forEach(function(c) {
+      var cat = c.category || 'other';
+      if (!catGroups[cat]) catGroups[cat] = [];
+      catGroups[cat].push(c);
+    });
+    // Shuffle within each category
+    Object.keys(catGroups).forEach(function(cat) {
+      catGroups[cat].sort(function() { return Math.random() - 0.5; });
+    });
 
-    // Initial board: ~12-16 patients already here
+    // Step 2: Round-robin pick from categories to build a balanced board
     var initialCount = Math.min(allCases.length, 12 + Math.floor(Math.random() * 5));
+    var maxPerCat = 3; // Cap any single category at 3 patients on initial board
+    var catKeys = Object.keys(catGroups).sort(function() { return Math.random() - 0.5; });
+    var picked = [];
+    var catUsed = {};
+    var round = 0;
+    while (picked.length < initialCount && round < 10) {
+      var addedThisRound = false;
+      for (var ci = 0; ci < catKeys.length && picked.length < initialCount; ci++) {
+        var cat = catKeys[ci];
+        catUsed[cat] = catUsed[cat] || 0;
+        if (catUsed[cat] < maxPerCat && catGroups[cat].length > 0) {
+          picked.push(catGroups[cat].shift());
+          catUsed[cat]++;
+          addedThisRound = true;
+        }
+      }
+      if (!addedThisRound) {
+        // All categories at max — increase cap and continue
+        maxPerCat++;
+      }
+      round++;
+    }
 
-    for (var i = 0; i < allCases.length; i++) {
-      var c = allCases[i];
+    // Step 3: Remaining cases go to arrival queue
+    var remaining = [];
+    Object.keys(catGroups).forEach(function(cat) {
+      remaining = remaining.concat(catGroups[cat]);
+    });
+    remaining.sort(function() { return Math.random() - 0.5; });
+
+    for (var i = 0; i < picked.length; i++) {
+      var c = picked[i];
       var prog = progress[c.id] || {};
       var boardEntry = {
         id: c.id,
@@ -303,15 +344,34 @@
       }
       // else stays 'waiting'
 
-      if (i < initialCount) {
-        boardEntry.bed = _assignBed(boardEntry.esi, _usedBeds);
-        // Stagger arrival times over past 0-4 hours
-        var minsAgo = Math.floor(Math.random() * 240);
-        boardEntry.arrivalTime = new Date(Date.now() - minsAgo * 60000);
-        _board.push(boardEntry);
-      } else {
-        _arrivalQueue.push(boardEntry);
-      }
+      boardEntry.bed = _assignBed(boardEntry.esi, _usedBeds);
+      // Stagger arrival times over past 0-4 hours
+      var minsAgo = Math.floor(Math.random() * 240);
+      boardEntry.arrivalTime = new Date(Date.now() - minsAgo * 60000);
+      _board.push(boardEntry);
+    }
+
+    // Build arrival queue from remaining cases
+    for (var j = 0; j < remaining.length; j++) {
+      var c2 = remaining[j];
+      var prog2 = progress[c2.id] || {};
+      _arrivalQueue.push({
+        id: c2.id,
+        name: c2.name,
+        age: c2.age,
+        cc: c2.cc,
+        dx: c2.dx,
+        category: c2.category,
+        esi: c2.esi || 3,
+        vitals: c2.vitals,
+        bed: null,
+        status: 'waiting',
+        arrivalTime: null,
+        seen: false,
+        dxConfirmed: prog2.dxConfirmed || false,
+        dispoSet: prog2.dispoSet || false,
+        dispoLabel: prog2.dispoLabel || ''
+      });
     }
 
     // Sort board
@@ -331,9 +391,21 @@
 
   function _filteredBoard() {
     return _board.filter(function(p) {
-      if (_filter === 'all') return true;
-      if (_filter.indexOf('esi-') === 0) return p.esi === parseInt(_filter.split('-')[1]);
-      return p.status === _filter;
+      // ESI / status filter
+      if (_filter !== 'all') {
+        if (_filter.indexOf('esi-') === 0) { if (p.esi !== parseInt(_filter.split('-')[1])) return false; }
+        else if (_filter === 'dispo') { if (p.status !== 'dispo' && p.status !== 'admit' && p.status !== 'discharged') return false; }
+        else { if (p.status !== _filter) return false; }
+      }
+      // Category filter
+      if (_categoryFilter !== 'all' && (p.category || '').toLowerCase() !== _categoryFilter.toLowerCase()) return false;
+      // Search
+      if (_searchTerm) {
+        var q = _searchTerm.toLowerCase();
+        var hay = (p.name + ' ' + p.cc + ' ' + p.category + ' ' + p.age).toLowerCase();
+        if (hay.indexOf(q) < 0) return false;
+      }
+      return true;
     });
   }
 
@@ -467,7 +539,7 @@
         // Vitals
         html += '<td class="ed-cell-vitals"><span class="ed-vitals-text">' + _esc(vStr) + '</span></td>';
 
-        // Status — learner-driven only
+        // Status — learner-driven only + dispo dropdown
         // If dxConfirmed, show a green checkmark next to status
         var statusHtml = status.icon + ' ' + status.label;
         if (p.dxConfirmed && !p.dispoSet) {
@@ -476,7 +548,20 @@
         if (p.dispoSet) {
           statusHtml = (p.dispoLabel === 'Admit' ? '\uD83C\uDFE5' : '\u2192') + ' ' + _esc(p.dispoLabel);
         }
-        html += '<td class="ed-cell-status"><span class="ed-status-badge" style="background:' + status.bg + ';color:' + status.color + '">' + statusHtml + '</span></td>';
+        html += '<td class="ed-cell-status"><div style="display:flex;flex-direction:column;gap:4px"><span class="ed-status-badge" style="background:' + status.bg + ';color:' + status.color + '">' + statusHtml + '</span>';
+        // Dispo dropdown — show once chart has been opened (seen)
+        if (p.seen && p.status !== 'discharged') {
+          var curDispo = p.dispoLabel || '';
+          html += '<select class="ed-dispo-select" onclick="event.stopPropagation()" onchange="EDTrackBoard.setDispo(\'' + p.id + '\',this.value);event.stopPropagation()" style="padding:2px 4px;border-radius:4px;border:1px solid #334155;background:#1E293B;color:#94A3B8;font-size:10px;font-family:inherit;cursor:pointer;width:100%">';
+          html += '<option value=""' + (!curDispo ? ' selected' : '') + '>Set dispo\u2026</option>';
+          html += '<option value="Admit"' + (curDispo === 'Admit' ? ' selected' : '') + '>\uD83C\uDFE5 Admit</option>';
+          html += '<option value="Discharge"' + (curDispo === 'Discharge' ? ' selected' : '') + '>\u2192 Discharge</option>';
+          html += '<option value="Observe"' + (curDispo === 'Observe' ? ' selected' : '') + '>\u23F3 Observe</option>';
+          html += '<option value="Transfer"' + (curDispo === 'Transfer' ? ' selected' : '') + '>\uD83D\uDE91 Transfer</option>';
+          html += '<option value="AMA"' + (curDispo === 'AMA' ? ' selected' : '') + '>\u26A0 AMA</option>';
+          html += '</select>';
+        }
+        html += '</div></td>';
 
         // Wait time
         html += '<td class="ed-cell-wait"><span data-arrival="' + (p.arrivalTime ? p.arrivalTime.getTime() : '') + '">' + wait + '</span></td>';
@@ -532,6 +617,17 @@
       html += '<button type="button" class="ed-filter-btn" data-f="dispo" onclick="EDTrackBoard.filter(\'dispo\',this)">\u2705 Dispo</button>';
       html += '</div>';
       html += '<div class="ed-sort">';
+      // Search bar
+      html += '<input type="text" id="ed-search" placeholder="\uD83D\uDD0D Search\u2026" oninput="EDTrackBoard.search(this.value)" style="padding:4px 8px;border-radius:6px;border:1px solid #334155;background:#1E293B;color:#E2E8F0;font-size:11px;font-family:inherit;width:120px;outline:none">';
+      // Category filter
+      html += '<select id="ed-cat-filter" onchange="EDTrackBoard.filterCategory(this.value)" style="padding:4px 8px;border-radius:6px;border:1px solid #334155;background:#1E293B;color:#E2E8F0;font-size:11px;font-family:inherit;cursor:pointer">';
+      html += '<option value="all">All Systems</option>';
+      var cats = {};
+      _board.forEach(function(p) { if (p.category) cats[p.category] = true; });
+      Object.keys(cats).sort().forEach(function(c) {
+        html += '<option value="' + c + '">' + _esc(c.charAt(0).toUpperCase() + c.slice(1)) + '</option>';
+      });
+      html += '</select>';
       html += '<label class="ed-sort-label">Sort:</label>';
       html += '<select class="ed-sort-select" onchange="EDTrackBoard.sort(this.value)">';
       html += '<option value="esi">Acuity</option><option value="bed">Bed</option><option value="time">Arrival</option><option value="name">Name</option>';
@@ -548,7 +644,7 @@
       html += '<th class="ed-th" style="width:140px">Patient</th>';
       html += '<th class="ed-th">Chief Complaint</th>';
       html += '<th class="ed-th" style="width:180px">Vitals</th>';
-      html += '<th class="ed-th" style="width:120px">Status</th>';
+      html += '<th class="ed-th" style="width:140px">Status / Dispo</th>';
       html += '<th class="ed-th" style="width:60px">Wait</th>';
       html += '<th class="ed-th" style="width:80px"></th>';
       html += '</tr></thead>';
@@ -610,6 +706,8 @@
       html += '.ed-cell-wait{font-family:"IBM Plex Mono",monospace;font-size:12px;color:#64748B;text-align:center}';
       html += '.ed-open-btn{padding:5px 12px;border-radius:6px;border:1px solid #334155;background:transparent;color:#5DADE2;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap}';
       html += '.ed-open-btn:hover{background:rgba(40,116,166,.15);border-color:#2874A6}';
+      html += '.ed-dispo-select{appearance:auto;-webkit-appearance:auto}';
+      html += '.ed-dispo-select:focus{border-color:#5DADE2;outline:none}';
       html += '@media(max-width:900px){.ed-cell-vitals,.ed-cell-wait,.ed-cell-action{display:none}.ed-header{padding:12px 14px}.ed-controls{padding:8px 14px}.ed-row td{padding:8px 10px}}';
       html += '@media(max-width:600px){.ed-cell-status{display:none}.ed-stats{gap:2px}.ed-stat{min-width:38px;padding:3px 6px}.ed-stat-val{font-size:14px}}';
       html += '</style>';
@@ -632,6 +730,16 @@
       _filter = f;
       document.querySelectorAll('.ed-filter-btn').forEach(function(b) { b.classList.remove('ed-filter-active'); });
       if (btn) btn.classList.add('ed-filter-active');
+      _renderBoardContent();
+    },
+
+    search: function(term) {
+      _searchTerm = (term || '').trim();
+      _renderBoardContent();
+    },
+
+    filterCategory: function(cat) {
+      _categoryFilter = cat || 'all';
       _renderBoardContent();
     },
 
@@ -665,14 +773,26 @@
       }
     },
 
-    // Called by the EMR when learner sets disposition
+    // Called by the EMR or the dispo dropdown when learner sets disposition
     setDispo: function(caseId, dispoLabel) {
-      _saveProgress(caseId, { dispoSet: true, dispoLabel: dispoLabel || 'Discharge' });
+      if (!dispoLabel) {
+        // Reset dispo
+        _saveProgress(caseId, { dispoSet: false, dispoLabel: '' });
+        var pt0 = _board.find(function(p) { return p.id === caseId; });
+        if (pt0) {
+          pt0.dispoSet = false;
+          pt0.dispoLabel = '';
+          pt0.status = pt0.dxConfirmed ? 'results' : 'active';
+          _renderBoardContent();
+        }
+        return;
+      }
+      _saveProgress(caseId, { dispoSet: true, dispoLabel: dispoLabel });
       var pt = _board.find(function(p) { return p.id === caseId; });
       if (pt) {
         pt.dispoSet = true;
-        pt.dispoLabel = dispoLabel || 'Discharge';
-        pt.status = dispoLabel === 'Admit' ? 'admit' : 'discharged';
+        pt.dispoLabel = dispoLabel;
+        pt.status = dispoLabel === 'Admit' ? 'admit' : dispoLabel === 'Observe' ? 'workup' : 'discharged';
         _renderBoardContent();
       }
     },

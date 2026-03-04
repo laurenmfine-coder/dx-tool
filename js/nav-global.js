@@ -7,7 +7,6 @@
     {l:'Sim Lab',h:'simroomdx.html',i:'\u{1FA7A}'},
     {l:'Night Float',h:'night-float.html',i:'\u{1F319}'},
     {l:'EMR',h:'virtual-emr.html',i:'\u{1F4BB}'},
-    {l:'Board Review',h:'board-prep.html',i:'\u{1F4DD}'},
     {l:'Progress',h:'analytics-dashboard.html',i:'\u{1F4CA}'}
   ];
   var p=window.location.pathname;
@@ -17,12 +16,10 @@
     'virtual-emr.html':'virtual-emr.html',
     'simroomdx.html':'simroomdx.html',
     'night-float.html':'night-float.html',
-    'board-prep.html':'board-prep.html',
     'analytics-dashboard.html':'analytics-dashboard.html',
     'dashboard.html':'dashboard.html',
     'admissions.html':'dashboard.html',
     'consult-callback.html':'dashboard.html',
-    'study-mode.html':'dashboard.html',
     'index.html':'dashboard.html'
   };
   var active=MAP[cf]||'';
