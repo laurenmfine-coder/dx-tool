@@ -5,6 +5,7 @@
   var path = window.location.pathname;
   var inSubdir = /\/(topics|modules|cases|tools|ecg|CoachDx|auth|data|mechanism|ReasonDx)\//i.test(path);
   var R = inSubdir ? '../' : './';
+  window.R = R; // expose globally for other modules
   var sec = 'home';
   if (/pathway|study-mode|allergy-pathway|\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
   else if (/consult-callback|procedure-lab|counseling-scenarios/i.test(path)) sec = 'practice';

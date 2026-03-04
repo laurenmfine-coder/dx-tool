@@ -4,6 +4,7 @@
  */
 (function() {
   'use strict';
+  if (typeof R === 'undefined') window.R = './';
 
   var SHELL_RENDERED = false;
   var SIDEBAR_COLLAPSED = false;
@@ -115,7 +116,7 @@
       if (collapsed) {
         html += '<span style="font-size:14px;font-weight:800;color:#5DADE2;cursor:pointer" onclick="EMRShell.toggleSidebar()" title="Expand menu">R</span>';
       } else {
-        html += '<img src="'+R+'icons/logo-white.png" alt="ReasonDx" style="height:20px;width:auto">';
+        html += '<img src="icons/logo-white.png" alt="ReasonDx" style="height:20px;width:auto">';
         html += '<span style="margin-left:auto;cursor:pointer;font-size:14px;opacity:.5;padding:4px" onclick="EMRShell.toggleSidebar()" title="Collapse">\u276E</span>';
       }
       html += '</div>';

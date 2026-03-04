@@ -4,6 +4,7 @@
  */
 (function() {
   'use strict';
+  if (typeof R === 'undefined') window.R = './';
 
   var DEPTS = {
     ed:               { label: 'Emergency Department', short: 'ED', icon: '\uD83D\uDEA8', color: '#C62828' },
