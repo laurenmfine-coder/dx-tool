@@ -24,6 +24,16 @@
     } catch(e) { return null; }
   }
 
+  // Load ED Track Board module on demand
+  (function() {
+    var setting = _getSetting();
+    if (setting === 'ed' && !window.EDTrackBoard) {
+      var s = document.createElement('script');
+      s.src = 'js/ed-trackboard.js';
+      document.head.appendChild(s);
+    }
+  })();
+
   function _isFirstVisit() {
     try { return !localStorage.getItem('rdx-overview-seen'); } catch(e) { return true; }
   }
@@ -54,7 +64,7 @@
       // Standalone (no shell)
       html += '<div style="min-height:100vh;background:#F0F2F5;font-family:\'IBM Plex Sans\',-apple-system,sans-serif">';
       html += '<div style="background:linear-gradient(135deg,#1A2332,#2C3E50);padding:0 20px;height:48px;display:flex;align-items:center;justify-content:space-between">';
-      html += '<span style="color:#fff;font-size:15px;font-weight:700"><span style="color:#5DADE2">Reason</span><span style="font-style:italic;color:#85C1E9">Dx</span></span>';
+      html += '<img src="icons/logo-white.png" alt="ReasonDx" style="height:18px;width:auto">';
       html += '<select id="deptSelect" onchange="EMROverview._changeDept(this.value)" style="padding:6px 10px;border:1px solid #4A6274;border-radius:6px;background:#2C3E50;color:#ECF0F1;font-size:12px;font-weight:600;font-family:inherit;cursor:pointer">';
       html += '<option value="">Select Department\u2026</option>';
       Object.keys(DEPTS).forEach(function(id) {
@@ -126,7 +136,7 @@
         html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#5DADE2;margin-bottom:8px">\u2190 Sidebar Tools</div>';
         var sidebarHints = [
           { icon: '\uD83D\uDCCB', label: 'Patient List', desc: 'Your cases' },
-          { icon: '\uD83D\uDEA8', label: 'Simulations', desc: 'ED Board, Night Float, Rounds' },
+          { icon: '\uD83D\uDEA8', label: 'Simulations', desc: 'Night Float, SimRoomDx, Consult' },
           { icon: '\uD83E\uDDE0', label: 'Learning', desc: 'CRT, Board Prep, ECG' }
         ];
         sidebarHints.forEach(function(h) {
@@ -174,24 +184,47 @@
 
       html += '</div>';
 
-      // ── PATIENT LIST ────────────────────────────────────────
-      html += '<div style="background:#fff;border:1px solid #ECEEF2;border-radius:12px;overflow:hidden">';
-      html += '<div style="padding:12px 20px;border-bottom:1px solid #ECEEF2;display:flex;align-items:center;justify-content:space-between">';
-      html += '<div style="display:flex;align-items:center;gap:8px">';
-      html += '<span style="font-size:16px">' + dept.icon + '</span>';
-      html += '<h2 style="font-size:15px;font-weight:700;color:#1A1A2E;margin:0">' + _esc(dept.label) + ' \u2014 Patient List</h2>';
-      html += '</div>';
-      // Inline help hint (always visible, not intrusive)
-      html += '<span style="font-size:11px;color:#94A3B8">Click a patient to open their chart</span>';
-      html += '</div>';
-
-      if (window.PatientList && window.EMR_MANIFEST && EMR_MANIFEST.length > 0) {
-        html += '<div id="patientListInner">' + PatientList.render(setting, (window.S && S.specialty) || null, true) + '</div>';
+      // ── PATIENT LIST / ED TRACK BOARD ──────────────────────
+      if (setting === 'ed' && window.EDTrackBoard) {
+        // Immersive ED Track Board
+        html += EDTrackBoard.render();
+        // Start simulation after render
+        setTimeout(function() { EDTrackBoard.startSimulation(); }, 100);
+      } else if (setting === 'ed' && !window.EDTrackBoard) {
+        // ED board script still loading — placeholder that will re-render
+        html += '<div id="ed-board-placeholder" style="background:#0F172A;border-radius:14px;padding:60px 20px;text-align:center;border:1px solid #1E293B"><div style="width:32px;height:32px;border:3px solid #334155;border-top-color:#5DADE2;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px"></div><div style="font-size:14px;color:#94A3B8">Loading ED Track Board\u2026</div><style>@keyframes spin{to{transform:rotate(360deg)}}</style></div>';
+        // Retry when script loads
+        var _edRetry = setInterval(function() {
+          if (window.EDTrackBoard) {
+            clearInterval(_edRetry);
+            var ph = document.getElementById('ed-board-placeholder');
+            if (ph) {
+              var wrapper = document.createElement('div');
+              wrapper.innerHTML = EDTrackBoard.render();
+              ph.parentNode.replaceChild(wrapper.firstChild || wrapper, ph);
+              setTimeout(function() { EDTrackBoard.startSimulation(); }, 100);
+            }
+          }
+        }, 200);
       } else {
-        html += '<div id="patientListInner" style="text-align:center;padding:40px;color:#8C92A4"><p>Loading patient list\u2026</p></div>';
-        EMROverview._schedulePatientListRetry(setting);
+        // Generic patient list for non-ED settings
+        html += '<div style="background:#fff;border:1px solid #ECEEF2;border-radius:12px;overflow:hidden">';
+        html += '<div style="padding:12px 20px;border-bottom:1px solid #ECEEF2;display:flex;align-items:center;justify-content:space-between">';
+        html += '<div style="display:flex;align-items:center;gap:8px">';
+        html += '<span style="font-size:16px">' + dept.icon + '</span>';
+        html += '<h2 style="font-size:15px;font-weight:700;color:#1A1A2E;margin:0">' + _esc(dept.label) + ' \u2014 Patient List</h2>';
+        html += '</div>';
+        html += '<span style="font-size:11px;color:#94A3B8">Click a patient to open their chart</span>';
+        html += '</div>';
+
+        if (window.PatientList && window.EMR_MANIFEST && EMR_MANIFEST.length > 0) {
+          html += '<div id="patientListInner">' + PatientList.render(setting, (window.S && S.specialty) || null, true) + '</div>';
+        } else {
+          html += '<div id="patientListInner" style="text-align:center;padding:40px;color:#8C92A4"><p>Loading patient list\u2026</p></div>';
+          EMROverview._schedulePatientListRetry(setting);
+        }
+        html += '</div>';
       }
-      html += '</div>';
 
       return html;
     },

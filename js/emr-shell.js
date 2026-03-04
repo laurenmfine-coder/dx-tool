@@ -32,7 +32,6 @@
 
   var TOOLS = [
     { id: 'patients', label: 'Patient List', icon: ICO.patients, section: 'clinical' },
-    { id: 'ed-board', label: 'ED Track Board', icon: ICO.edBoard, section: 'simulations', url: 'ed-board-v2.html' },
     { id: 'night-float', label: 'Night Float', icon: ICO.nightFloat, section: 'simulations', url: 'night-float.html' },
     { id: 'simroomdx', label: 'SimRoomDx', icon: ICO.simRoom, section: 'simulations', url: 'simroomdx.html' },
     { id: 'consult', label: 'Consult Callback', icon: ICO.consult, section: 'simulations', url: 'consult-callback.html' },
@@ -116,7 +115,7 @@
       if (collapsed) {
         html += '<span style="font-size:14px;font-weight:800;color:#5DADE2;cursor:pointer" onclick="EMRShell.toggleSidebar()" title="Expand menu">R</span>';
       } else {
-        html += '<span style="font-size:15px;font-weight:700;letter-spacing:-.3px"><span style="color:#5DADE2">Reason</span><span style="color:#85C1E9;font-style:italic">Dx</span></span>';
+        html += '<img src="'+R+'icons/logo-white.png" alt="ReasonDx" style="height:20px;width:auto">';
         html += '<span style="margin-left:auto;cursor:pointer;font-size:14px;opacity:.5;padding:4px" onclick="EMRShell.toggleSidebar()" title="Collapse">\u276E</span>';
       }
       html += '</div>';

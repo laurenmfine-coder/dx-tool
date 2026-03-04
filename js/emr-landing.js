@@ -29,7 +29,7 @@
       // ─── Slim nav bar ───
       html += '<nav style="position:sticky;top:0;z-index:100;background:rgba(11,17,32,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between">';
       html += '<div style="display:flex;align-items:center;gap:12px">';
-      html += '<span style="font-size:18px;font-weight:700;letter-spacing:-.5px"><span style="color:#5DADE2">Reason</span><span style="color:#85C1E9;font-style:italic">Dx</span></span>';
+      html += '<img src="icons/logo-white.png" alt="ReasonDx" style="height:20px;width:auto">';
       html += '<span style="width:1px;height:20px;background:rgba(255,255,255,.12)"></span>';
       html += '<span style="font-size:12px;color:#94A3B8;font-weight:500;letter-spacing:.5px;text-transform:uppercase">Virtual EMR</span>';
       html += '</div>';
@@ -194,7 +194,7 @@
 
       // ─── FOOTER ───
       html += '<footer style="padding:24px;text-align:center;background:#0B1120;border-top:1px solid rgba(255,255,255,.04)">';
-      html += '<p style="font-size:12px;color:#475569;margin:0"><span style="font-weight:700;color:#5DADE2">Reason</span><span style="font-style:italic;color:#85C1E9">Dx</span> \u00B7 Clinical Education Platform \u00B7 NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>';
+      html += '<p style="font-size:12px;color:#475569;margin:0"><img src="icons/logo-white.png" alt="ReasonDx" style="height:14px;width:auto;vertical-align:middle;margin-right:4px"> \u00B7 Clinical Education Platform \u00B7 NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>';
       html += '</footer>';
 
       // ─── FONT + ANIMATIONS ───

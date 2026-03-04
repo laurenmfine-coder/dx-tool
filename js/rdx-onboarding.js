@@ -95,7 +95,7 @@ var PATHS={
     title:'Your Learning Path',
     desc:'Here\'s the fastest way to build clinical reasoning skills:',
     steps:[
-      {text:'<strong>Start a case</strong> — Pick a patient from the ED Track Board or browse by specialty in Study Mode.'},
+      {text:'<strong>Start a case</strong> \u2014 Select the Emergency Department to see the track board, or browse by specialty in Study Mode.'},
       {text:'<strong>Work the EMR</strong> — Review the chart, order labs and imaging, build your differential.'},
       {text:'<strong>Get coached</strong> — CoachDx (Pro) gives real-time Socratic feedback on your reasoning.'},
       {text:'<strong>Learn the why</strong> — MechanismDx teaches pathophysiology behind every diagnosis.'}
