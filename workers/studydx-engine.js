@@ -151,13 +151,36 @@ async function callAI(apiKey, systemPrompt, userMessage, maxTokens = 2000) {
   const data = await resp.json();
   const text = data.content.map(b => b.text || '').join('\n').trim();
 
-  // Strip markdown fences if present
-  const cleaned = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+  // Robust JSON extraction — handle markdown fences, preamble text, etc.
+  let cleaned = text;
+  
+  // Strip markdown fences
+  cleaned = cleaned.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+  
+  // If there's preamble text before the JSON, find the first { or [
+  const firstBrace = cleaned.indexOf('{');
+  const firstBracket = cleaned.indexOf('[');
+  let jsonStart = -1;
+  if (firstBrace >= 0 && (firstBracket < 0 || firstBrace < firstBracket)) jsonStart = firstBrace;
+  else if (firstBracket >= 0) jsonStart = firstBracket;
+  
+  if (jsonStart > 0) {
+    cleaned = cleaned.substring(jsonStart);
+  }
+  
+  // Find the matching closing brace/bracket
+  if (cleaned.startsWith('{')) {
+    const lastBrace = cleaned.lastIndexOf('}');
+    if (lastBrace > 0) cleaned = cleaned.substring(0, lastBrace + 1);
+  } else if (cleaned.startsWith('[')) {
+    const lastBracket = cleaned.lastIndexOf(']');
+    if (lastBracket > 0) cleaned = cleaned.substring(0, lastBracket + 1);
+  }
 
   try {
     return JSON.parse(cleaned);
   } catch (e) {
-    throw new Error(`JSON parse failed: ${e.message}\nRaw: ${cleaned.substring(0, 500)}`);
+    throw new Error(`JSON parse failed: ${e.message}\nRaw (first 500): ${text.substring(0, 500)}`);
   }
 }
 
@@ -174,6 +197,7 @@ async function generateMCQ(apiKey, sourceContent, options = {}) {
     let audit = null;
     let tags = null;
     let attempts = 0;
+    let lastError = null;
 
     while (attempts < MAX_RETRIES) {
       attempts++;
@@ -184,6 +208,7 @@ async function generateMCQ(apiKey, sourceContent, options = {}) {
       try {
         question = await callAI(apiKey, PASS1_GENERATE, genPrompt);
       } catch (e) {
+        lastError = 'Pass 1: ' + e.message;
         console.error(`Pass 1 attempt ${attempts} failed:`, e.message);
         continue;
       }
@@ -191,6 +216,7 @@ async function generateMCQ(apiKey, sourceContent, options = {}) {
       // Validate basic structure
       if (!question.stem || !question.options || question.options.length !== 5 ||
           question.correct_index === undefined || !question.explanation) {
+        lastError = 'Pass 1: Invalid structure - missing stem/options/explanation. Got keys: ' + Object.keys(question || {}).join(',');
         console.warn(`Pass 1 attempt ${attempts}: invalid structure`);
         continue;
       }
@@ -201,6 +227,7 @@ async function generateMCQ(apiKey, sourceContent, options = {}) {
       try {
         audit = await callAI(apiKey, PASS2_AUDIT, auditPrompt, 1500);
       } catch (e) {
+        lastError = 'Pass 2: ' + e.message;
         console.error(`Pass 2 attempt ${attempts} failed:`, e.message);
         continue;
       }
@@ -219,7 +246,7 @@ async function generateMCQ(apiKey, sourceContent, options = {}) {
     if (!question || !audit) {
       results.push({
         success: false,
-        error: 'Failed quality gate after ' + MAX_RETRIES + ' attempts',
+        error: 'Failed after ' + attempts + ' attempts. Last error: ' + (lastError || 'unknown'),
         audit_notes: audit ? audit.rejection_reasons : ['Generation failed'],
       });
       continue;
