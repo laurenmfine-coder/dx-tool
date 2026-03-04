@@ -1,65 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
-<meta name="theme-color" content="#1f5f8b">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sign In | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-<link rel="manifest" href="../manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../mobile.css">
-<title>Log In | ReasonDx</title>
-<meta name="description" content="Log in to your ReasonDx account.">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--blue:#2874A6;--dark:#1B4F72;--font:'IBM Plex Sans',-apple-system,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--font);background:#f0f4f8;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-.card{background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,.08);max-width:400px;width:100%;padding:40px}
-.logo{font-family:Georgia,serif;font-size:28px;font-weight:700;color:#2f3640;text-align:center;margin-bottom:8px}
-.logo span{border-bottom:3px solid var(--blue);padding-bottom:2px}
-h1{font-size:24px;font-weight:700;color:#1e293b;margin-bottom:4px;text-align:center;margin-top:12px}
-label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;margin-top:16px}
-input{width:100%;padding:12px 14px;border:1px solid #d1d5db;border-radius:10px;font-size:14px;font-family:inherit}
-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
-.btn{display:block;width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:24px}
-.btn:hover{background:var(--dark)}
-.switch{text-align:center;margin-top:16px;font-size:13px;color:#64748b}
-.switch a{color:var(--blue);font-weight:600;text-decoration:none}
-
-/* Dark mode */
-[data-theme="dark"] body{background:var(--rdx-bg,#0f172a);color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] .card,[data-theme="dark"] .container{background:var(--rdx-bg-card,#1e293b);color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] input,[data-theme="dark"] select{background:#1e293b;color:#e2e8f0;border-color:#334155}
-[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3{color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] p{color:var(--rdx-text-secondary,#94a3b8)}
-[data-theme="dark"] .subtitle,[data-theme="dark"] .plan-price,[data-theme="dark"] .switch{color:var(--rdx-text-muted,#64748b)}
-[data-theme="dark"] label{color:#94a3b8}
-[data-theme="dark"] .plan{border-color:#334155;background:#1e293b}
-[data-theme="dark"] .plan.active,[data-theme="dark"] .plan:hover{background:rgba(40,116,166,.15);border-color:#5ba3cc}
-[data-theme="dark"] .legal{color:#475569}
-[data-theme="dark"] .badge{background:rgba(217,119,6,.15)}
-[data-theme="dark"] .back{color:#5ba3cc}
+:root{--bl:#2874A6;--bld:#1B4F72;--tx:#1E293B;--ts:#64748B;--bd:#E2E8F0;--bg:#F0F2F5;--sf:#fff;--ft:'IBM Plex Sans',-apple-system,sans-serif}
+body{background:var(--bg);font-family:var(--ft);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.06);width:100%;max-width:420px;padding:40px}
+.logo{text-align:center;margin-bottom:32px}
+.logo img{height:36px;margin-bottom:8px}
+.logo h1{font-size:20px;font-weight:800;color:var(--tx)}
+.logo p{font-size:13px;color:var(--ts);margin-top:4px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--ts);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.form-group input{width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:8px;font-size:14px;font-family:var(--ft);outline:none;transition:border-color .15s}
+.form-group input:focus{border-color:var(--bl);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.btn-primary{width:100%;padding:12px;background:var(--bl);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--ft);cursor:pointer;transition:background .15s}
+.btn-primary:hover{background:var(--bld)}.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-magic{width:100%;padding:10px;background:var(--sf);color:var(--bl);border:1px solid var(--bd);border-radius:8px;font-size:13px;font-weight:600;font-family:var(--ft);cursor:pointer;margin-top:8px;transition:all .15s}
+.btn-magic:hover{border-color:var(--bl);background:#EBF5FB}
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--ts);font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--bd)}
+.links{text-align:center;margin-top:20px;font-size:13px;color:var(--ts)}
+.links a{color:var(--bl);font-weight:600;text-decoration:none}
+.links a:hover{text-decoration:underline}
+.error-msg{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+.success-msg{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
 </style>
-<meta name="robots" content="noindex, nofollow">
 </head>
 <body>
-<noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
-<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
-<div id="main-content"></div>
-<div class="card">
-  <div class="logo">Reason<span>Dx</span></div>
-  <h1>Welcome Back</h1>
-  <label>Email</label><input type="email" placeholder="you@school.edu" id="login-email">
-  <label>Password</label><input type="password" placeholder="Your password" id="login-pass">
-  <button class="btn" onclick="localStorage.setItem('reasondx-user',JSON.stringify({email:document.getElementById('login-email').value}));window.location.href='../index.html'">Log In</button>
-  <p class="switch">New here? <a href="register.html">Create an account</a></p>
+<div class="auth-card">
+  <div class="logo">
+    <img src="../icons/logo.png" alt="ReasonDx" onerror="this.style.display='none'">
+    <h1>Sign In to ReasonDx</h1>
+    <p>Clinical Reasoning Education Platform</p>
+  </div>
+
+  <div id="error" class="error-msg"></div>
+  <div id="success" class="success-msg"></div>
+
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" required placeholder="you@institution.edu" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" required placeholder="Your password" autocomplete="current-password">
+    </div>
+    <button type="submit" class="btn-primary" id="loginBtn">Sign In</button>
+  </form>
+
+  <div class="divider">or</div>
+
+  <button class="btn-magic" onclick="handleMagicLink()">✉️ Sign in with Magic Link</button>
+
+  <div class="links">
+    <p>Don't have an account? <a href="register.html">Create one</a></p>
+    <p style="margin-top:8px"><a href="../index.html">← Back to ReasonDx</a></p>
+  </div>
 </div>
-<script src="../js/rdx-help-widget.js"></script>
-<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{})</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/rdx-supabase.js"></script>
+<script>
+function showError(msg) {
+  var el = document.getElementById('error');
+  el.textContent = msg; el.style.display = 'block';
+  document.getElementById('success').style.display = 'none';
+}
+function showSuccess(msg) {
+  var el = document.getElementById('success');
+  el.textContent = msg; el.style.display = 'block';
+  document.getElementById('error').style.display = 'none';
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+  var btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.textContent = 'Signing in...';
+
+  var result = await RDX.auth.signIn(email, password);
+  if (result.error) {
+    showError(result.error.message);
+    btn.disabled = false; btn.textContent = 'Sign In';
+  } else {
+    showSuccess('Signed in! Redirecting...');
+    setTimeout(function() {
+      window.location.href = '../dashboard.html';
+    }, 500);
+  }
+}
+
+async function handleMagicLink() {
+  var email = document.getElementById('email').value;
+  if (!email) { showError('Enter your email address first.'); return; }
+
+  var result = await RDX.auth.signInWithMagicLink(email);
+  if (result.error) {
+    showError(result.error.message);
+  } else {
+    showSuccess('Check your email! We sent you a sign-in link.');
+  }
+}
+
+// If already logged in, redirect
+(async function() {
+  var session = await RDX.auth.getSession();
+  if (session) window.location.href = '../dashboard.html';
+})();
+</script>
 </body>
 </html>

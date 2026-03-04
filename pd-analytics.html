@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3")</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<meta name="description" content="Program Director cohort analytics — fellow progress, milestone tracking, knowledge gaps, and CCC-ready reporting.">
+<title>Program Analytics | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F0F2F5;--sf:#fff;--sf2:#F8FAFC;--bd:#E2E8F0;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--blb:#EBF5FB;--gn:#059669;--gnb:#ECFDF5;--am:#D97706;--amb:#FFFBEB;--rd:#DC2626;--rdb:#FEF2F2;--pp:#7C3AED;--ppb:#F5F3FF;--ft:'IBM Plex Sans',-apple-system,sans-serif;--mn:'IBM Plex Mono',monospace}
+body{background:var(--bg);color:var(--tx);font-family:var(--ft);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer}
+
+.page{max-width:1200px;margin:0 auto;padding:24px 20px 80px}
+.bc{font-size:12px;color:var(--tm);margin-bottom:12px}.bc a{color:var(--bl);font-weight:600}
+
+/* Header */
+.pd-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:24px}
+.pd-header h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.pd-header p{font-size:14px;color:var(--ts);margin-top:2px}
+.pd-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1B4F72,#2874A6);color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.02em}
+.pd-actions{display:flex;gap:8px}
+.btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;border:none;transition:all .15s}
+.btn-fill{background:var(--bl);color:#fff}.btn-fill:hover{background:#1B4F72}
+.btn-outline{background:var(--sf);border:1px solid var(--bd);color:var(--ts)}.btn-outline:hover{border-color:var(--bl);color:var(--bl)}
+
+/* Stat row */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.stat-card.blue::before{background:var(--bl)}.stat-card.green::before{background:var(--gn)}
+.stat-card.amber::before{background:var(--am)}.stat-card.red::before{background:var(--rd)}
+.stat-card.purple::before{background:var(--pp)}.stat-card.teal::before{background:#0891B2}
+.stat-num{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1}
+.stat-label{font-size:10px;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.04em;margin-top:4px}
+
+/* Cards */
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.card-h{padding:14px 20px;border-bottom:1px solid var(--bd);background:var(--sf2);display:flex;align-items:center;justify-content:space-between}
+.card-h h2{font-size:15px;font-weight:700}.card-b{padding:20px}
+
+/* Grid layouts */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+/* Fellow table */
+.fellow-table{width:100%;border-collapse:collapse;font-size:13px}
+.fellow-table th{text-align:left;padding:10px 12px;font-size:10px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--bd)}
+.fellow-table td{padding:12px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.fellow-table tr:last-child td{border-bottom:none}
+.fellow-table tr:hover{background:var(--sf2)}
+
+.fellow-name{font-weight:700;color:var(--tx)}
+.fellow-pgy{font-size:11px;color:var(--tm);font-weight:500}
+.fellow-bar{height:6px;border-radius:3px;background:#E2E8F0;overflow:hidden;width:100px}
+.fellow-bar-fill{height:100%;border-radius:3px;transition:width .4s}
+.fellow-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700}
+.badge-green{background:var(--gnb);color:var(--gn)}.badge-amber{background:var(--amb);color:var(--am)}.badge-red{background:var(--rdb);color:var(--rd)}.badge-blue{background:var(--blb);color:var(--bl)}
+
+/* Milestone heatmap */
+.ms-grid{display:grid;gap:2px;font-size:11px}
+.ms-header{font-weight:700;color:var(--tm);font-size:9px;text-align:center;padding:4px 2px}
+.ms-cell{text-align:center;padding:6px 4px;border-radius:4px;font-weight:700;font-family:var(--mn);font-size:12px;cursor:default;transition:transform .1s}
+.ms-cell:hover{transform:scale(1.1);z-index:1}
+.ms-name{font-weight:600;color:var(--tx);text-align:left;padding:6px 8px;font-size:12px;white-space:nowrap}
+.ms-l1{background:#FEF2F2;color:#991B1B}.ms-l2{background:#FFFBEB;color:#92400E}.ms-l3{background:#F0FDF4;color:#166534}.ms-l4{background:#EFF6FF;color:#1E40AF}.ms-l5{background:#F5F3FF;color:#5B21B6}
+
+/* Gap analysis */
+.gap-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--bd)}
+.gap-item:last-child{border-bottom:none}
+.gap-bar{flex:1;height:8px;border-radius:4px;background:#E2E8F0;overflow:hidden}
+.gap-fill{height:100%;border-radius:4px}
+.gap-label{min-width:100px;font-size:12px;font-weight:600}
+.gap-pct{min-width:40px;font-size:12px;font-weight:700;font-family:var(--mn);text-align:right}
+
+/* Activity sparklines */
+.sparkline{display:flex;align-items:flex-end;gap:2px;height:32px}
+.spark-bar{width:4px;border-radius:2px;background:var(--bl);opacity:.7;transition:height .3s}
+
+/* Print */
+@media print{body{background:#fff}.page{max-width:100%;padding:10px}}
+@media(max-width:768px){.stat-row{grid-template-columns:repeat(3,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<script src="js/rdx-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/rdx-supabase.js"></script>
+<script src="js/rdx-analytics-tracker.js"></script>
+<div class="page">
+<div class="bc"><a href="index.html">ReasonDx</a> → <a href="dashboard.html">Hospital</a> → Program Analytics</div>
+
+<div class="pd-header">
+  <div>
+    <h1>Program Director Dashboard</h1>
+    <p>A/I Fellowship Program — Cohort Analytics & Milestone Tracking</p>
+  </div>
+  <div class="pd-actions">
+    <span class="pd-badge">🔒 Program License</span>
+    <button class="btn btn-outline" onclick="window.print()">📄 Export Report</button>
+    <button class="btn btn-fill" onclick="generateCCCReport()">📊 Generate CCC Report</button>
+  </div>
+</div>
+
+<div id="app"></div>
+</div>
+
+<script src="js/milestone-data.js"></script>
+<script>
+(function(){
+'use strict';
+
+// ═══════════════════════════════════════
+// DATA LAYER — Live Supabase queries with demo fallback
+// ═══════════════════════════════════════
+var PROGRAM = {
+  name: 'Allergy & Immunology Fellowship',
+  institution: 'University of Cincinnati',
+  academicYear: '2025–2026',
+  totalCases: 70,
+  totalCRTs: 42
+};
+
+// Demo fellows — used as fallback when Supabase has no data
+var DEMO_FELLOWS = [
+  {
+    name: 'Sarah Chen, MD', pgy: 'PGY-5 (Fellow 1)', avatar: '👩🏻‍⚕️',
+    casesCompleted: 42, crtCompleted: 28, consultCalls: 18, procedureLabs: 8,
+    avgAccuracy: 82, hoursLogged: 48.5, lastActive: '2 hours ago',
+    weeklyActivity: [3,5,4,6,5,7,4,6,5,8,6,7],
+    milestones: {PC1:3,PC2:3,PC3:3,PC4:3,MK1:3,MK2:3,MK3:2,SBP1:2,SBP2:3,SBP3:2,SBP4:2,PBLI1:3,PBLI2:2,PROF1:3,PROF2:3,PROF3:2,ICS1:3,ICS2:3,ICS3:3},
+    strengths: ['Anaphylaxis management', 'Drug allergy workup', 'Patient communication'],
+    gaps: ['Immunodeficiency evaluation', 'Research methodology'],
+    status: 'on-track'
+  },
+  {
+    name: 'James Okafor, MD', pgy: 'PGY-5 (Fellow 1)', avatar: '👨🏿‍⚕️',
+    casesCompleted: 38, crtCompleted: 24, consultCalls: 14, procedureLabs: 6,
+    avgAccuracy: 76, hoursLogged: 41.2, lastActive: '1 day ago',
+    weeklyActivity: [2,4,3,5,4,6,3,5,4,7,5,6],
+    milestones: {PC1:3,PC2:2,PC3:2,PC4:3,MK1:2,MK2:3,MK3:2,SBP1:2,SBP2:2,SBP3:2,SBP4:1,PBLI1:2,PBLI2:2,PROF1:3,PROF2:3,PROF3:3,ICS1:3,ICS2:2,ICS3:2},
+    strengths: ['Asthma phenotyping', 'Professionalism', 'Wellness advocacy'],
+    gaps: ['Pediatric allergy', 'Diagnostic procedures', 'Population health'],
+    status: 'on-track'
+  },
+  {
+    name: 'Priya Patel, MD', pgy: 'PGY-6 (Fellow 2)', avatar: '👩🏽‍⚕️',
+    casesCompleted: 58, crtCompleted: 36, consultCalls: 24, procedureLabs: 12,
+    avgAccuracy: 88, hoursLogged: 72.4, lastActive: '4 hours ago',
+    weeklyActivity: [5,6,5,7,6,8,5,7,6,9,7,8],
+    milestones: {PC1:4,PC2:4,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:3,SBP3:3,SBP4:3,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:3,ICS1:4,ICS2:3,ICS3:4},
+    strengths: ['Immunodeficiency workup', 'EBM application', 'CRD interpretation'],
+    gaps: ['Research/scholarly activity', 'QI methodology'],
+    status: 'exceeding'
+  },
+  {
+    name: 'Marcus Rivera, MD', pgy: 'PGY-6 (Fellow 2)', avatar: '👨🏻‍⚕️',
+    casesCompleted: 51, crtCompleted: 32, consultCalls: 20, procedureLabs: 10,
+    avgAccuracy: 84, hoursLogged: 62.8, lastActive: '6 hours ago',
+    weeklyActivity: [4,5,4,6,5,7,4,6,5,8,6,7],
+    milestones: {PC1:4,PC2:3,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:3,SBP3:3,SBP4:2,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:3,ICS1:4,ICS2:3,ICS3:3},
+    strengths: ['Procedural skills', 'Skin testing', 'Desensitization protocols'],
+    gaps: ['Community/population health', 'System communication'],
+    status: 'on-track'
+  },
+  {
+    name: 'Emily Nakamura, MD', pgy: 'PGY-5 (Fellow 1)', avatar: '👩🏻‍⚕️',
+    casesCompleted: 31, crtCompleted: 18, consultCalls: 10, procedureLabs: 4,
+    avgAccuracy: 71, hoursLogged: 34.1, lastActive: '3 days ago',
+    weeklyActivity: [2,3,2,4,3,4,2,3,2,5,3,4],
+    milestones: {PC1:2,PC2:2,PC3:2,PC4:2,MK1:2,MK2:2,MK3:1,SBP1:2,SBP2:2,SBP3:1,SBP4:1,PBLI1:2,PBLI2:2,PROF1:3,PROF2:2,PROF3:2,ICS1:2,ICS2:2,ICS3:2},
+    strengths: ['Professional behavior', 'Patient rapport'],
+    gaps: ['Case volume behind peers', 'Clinical science depth', 'Diagnostic testing breadth'],
+    status: 'needs-attention'
+  },
+  {
+    name: 'David Washington, MD', pgy: 'PGY-6 (Fellow 2)', avatar: '👨🏿‍⚕️',
+    casesCompleted: 54, crtCompleted: 34, consultCalls: 22, procedureLabs: 11,
+    avgAccuracy: 86, hoursLogged: 66.3, lastActive: '1 hour ago',
+    weeklyActivity: [4,5,5,6,5,7,5,6,6,8,7,7],
+    milestones: {PC1:4,PC2:3,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:4,SBP3:3,SBP4:3,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:4,ICS1:4,ICS2:4,ICS3:4},
+    strengths: ['Interpersonal communication', 'Care coordination', 'Self-directed learning'],
+    gaps: ['Pediatric procedures', 'Rare conditions depth'],
+    status: 'exceeding'
+  }
+];
+
+var SUBS = window.MILESTONE_DATA ? window.MILESTONE_DATA.subcompetencies : {};
+var SUB_ORDER = ['PC1','PC2','PC3','PC4','MK1','MK2','MK3','SBP1','SBP2','SBP3','SBP4','PBLI1','PBLI2','PROF1','PROF2','PROF3','ICS1','ICS2','ICS3'];
+
+// Active data — starts as demo, replaced by live data if available
+var FELLOWS = DEMO_FELLOWS;
+var DATA_SOURCE = 'demo';
+
+// Try loading live data from Supabase
+async function loadLiveData() {
+  if (typeof RDX === 'undefined' || !RDX.ready) return;
+  try {
+    var profile = RDX.getProfile();
+    if (!profile || !profile.program_id) return;
+
+    // Load program info
+    var client = RDX.getClient();
+    var prog = await client.from('programs').select('name, academic_year')
+      .eq('id', profile.program_id).single();
+    if (prog.data) {
+      PROGRAM.name = prog.data.name || PROGRAM.name;
+      PROGRAM.academicYear = prog.data.academic_year || PROGRAM.academicYear;
+    }
+
+    // Load institution
+    if (profile.institution_id) {
+      var inst = await client.from('institutions').select('name')
+        .eq('id', profile.institution_id).single();
+      if (inst.data) PROGRAM.institution = inst.data.name;
+    }
+
+    // Load cohort summary
+    var cohort = await client.from('program_cohort_summary').select('*')
+      .eq('program_id', profile.program_id);
+
+    if (cohort.data && cohort.data.length > 0) {
+      // Load milestone snapshots
+      var milestones = await client.from('milestone_snapshot').select('*')
+        .eq('program_id', profile.program_id);
+      var msMap = {};
+      (milestones.data || []).forEach(function(m) { msMap[m.user_id] = m; });
+
+      // Load consult counts per user
+      var consults = await client.from('consult_attempts').select('user_id')
+        .in('user_id', cohort.data.map(function(f) { return f.user_id; }));
+      var consultCounts = {};
+      (consults.data || []).forEach(function(c) {
+        consultCounts[c.user_id] = (consultCounts[c.user_id] || 0) + 1;
+      });
+
+      // Load procedure counts per user
+      var procs = await client.from('procedure_attempts').select('user_id')
+        .in('user_id', cohort.data.map(function(f) { return f.user_id; }));
+      var procCounts = {};
+      (procs.data || []).forEach(function(p) {
+        procCounts[p.user_id] = (procCounts[p.user_id] || 0) + 1;
+      });
+
+      // Build live FELLOWS array
+      FELLOWS = cohort.data.map(function(f) {
+        var ms = msMap[f.user_id];
+        var milestoneObj = {};
+        if (ms && ms.levels) {
+          try { milestoneObj = typeof ms.levels === 'string' ? JSON.parse(ms.levels) : ms.levels; }
+          catch(e) {}
+        }
+        var avgLevel = ms ? parseFloat(ms.avg_level || 0) : 0;
+        var status = 'on-track';
+        if (avgLevel >= 3.5) status = 'exceeding';
+        else if (f.cases_completed < 10 || f.accuracy_pct < 65) status = 'needs-attention';
+
+        var lastActiveStr = 'unknown';
+        if (f.last_active) {
+          var diff = Date.now() - new Date(f.last_active).getTime();
+          var hours = Math.floor(diff / 3600000);
+          if (hours < 1) lastActiveStr = 'just now';
+          else if (hours < 24) lastActiveStr = hours + ' hours ago';
+          else lastActiveStr = Math.floor(hours / 24) + ' days ago';
+        }
+
+        return {
+          name: f.display_name || 'Fellow',
+          pgy: f.pgy_level ? 'PGY-' + f.pgy_level : '',
+          avatar: '👨‍⚕️',
+          casesCompleted: f.cases_completed || 0,
+          crtCompleted: 0, // TODO: filter by tool='crt'
+          consultCalls: consultCounts[f.user_id] || 0,
+          procedureLabs: procCounts[f.user_id] || 0,
+          avgAccuracy: f.accuracy_pct || 0,
+          hoursLogged: parseFloat(f.hours_logged || 0).toFixed(1),
+          lastActive: lastActiveStr,
+          weeklyActivity: [0,0,0,0,0,0,0,0,0,0,0,0], // TODO: compute from events
+          milestones: milestoneObj,
+          strengths: [],
+          gaps: [],
+          status: status
+        };
+      });
+
+      DATA_SOURCE = 'live';
+    }
+  } catch(e) {
+    console.warn('[PD Analytics] Live data load failed, using demo:', e);
+  }
+  render();
+}
+
+// Load live data when auth resolves
+document.addEventListener('rdx:auth', function(e) {
+  if (e.detail.user) { setTimeout(loadLiveData, 500); }
+});
+// Also try after a delay
+setTimeout(function() { if (typeof RDX !== 'undefined' && RDX.getProfile()) loadLiveData(); }, 2000);
+
+// ═══ HELPER FUNCTIONS ═══
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+function statusBadge(s){
+  if(s==='exceeding') return '<span class="fellow-badge badge-green">✓ Exceeding</span>';
+  if(s==='on-track') return '<span class="fellow-badge badge-blue">● On Track</span>';
+  if(s==='needs-attention') return '<span class="fellow-badge badge-amber">⚠ Needs Attention</span>';
+  return '<span class="fellow-badge badge-red">✗ Behind</span>';
+}
+
+function levelClass(l){ return 'ms-l'+(l||1); }
+
+function sparkline(data){
+  var max = Math.max.apply(null, data);
+  var h = '';
+  data.forEach(function(v){
+    var pct = max > 0 ? (v/max*100) : 0;
+    h += '<div class="spark-bar" style="height:'+pct+'%"></div>';
+  });
+  return '<div class="sparkline">'+h+'</div>';
+}
+
+function progressBar(val, max, color){
+  var pct = max > 0 ? Math.round(val/max*100) : 0;
+  return '<div class="fellow-bar"><div class="fellow-bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div>';
+}
+
+// ═══ RENDER ═══
+function render(){
+  var h = '';
+  
+  // — Stat Cards —
+  var totalCases = FELLOWS.reduce(function(s,f){return s+f.casesCompleted},0);
+  var totalCRTs = FELLOWS.reduce(function(s,f){return s+f.crtCompleted},0);
+  var totalHours = FELLOWS.reduce(function(s,f){return s+f.hoursLogged},0);
+  var avgAcc = Math.round(FELLOWS.reduce(function(s,f){return s+f.avgAccuracy},0)/FELLOWS.length);
+  var totalConsults = FELLOWS.reduce(function(s,f){return s+f.consultCalls},0);
+  var totalProcs = FELLOWS.reduce(function(s,f){return s+f.procedureLabs},0);
+
+  h += '<div class="stat-row">';
+  h += '<div class="stat-card blue"><div class="stat-num" style="color:var(--bl)">'+FELLOWS.length+'</div><div class="stat-label">Active Fellows</div></div>';
+  h += '<div class="stat-card green"><div class="stat-num" style="color:var(--gn)">'+totalCases+'</div><div class="stat-label">Cases Completed</div></div>';
+  h += '<div class="stat-card purple"><div class="stat-num" style="color:var(--pp)">'+totalCRTs+'</div><div class="stat-label">CRT Sessions</div></div>';
+  h += '<div class="stat-card amber"><div class="stat-num" style="color:var(--am)">'+avgAcc+'%</div><div class="stat-label">Avg Accuracy</div></div>';
+  h += '<div class="stat-card teal"><div class="stat-num" style="color:#0891B2">'+totalConsults+'</div><div class="stat-label">Consult Calls</div></div>';
+  h += '<div class="stat-card red"><div class="stat-num" style="color:var(--rd)">'+totalHours.toFixed(0)+'h</div><div class="stat-label">Total Hours</div></div>';
+  h += '</div>';
+
+  // — Fellow Progress Table —
+  h += '<div class="card"><div class="card-h"><h2>👥 Fellow Progress Overview</h2><span style="font-size:11px;color:var(--tm)">Academic Year '+esc(PROGRAM.academicYear)+'</span></div><div class="card-b" style="padding:0;overflow-x:auto">';
+  h += '<table class="fellow-table">';
+  h += '<tr><th>Fellow</th><th>Cases</th><th>CRTs</th><th>Consults</th><th>Accuracy</th><th>Activity (12wk)</th><th>Last Active</th><th>Status</th></tr>';
+  
+  FELLOWS.forEach(function(f){
+    h += '<tr>';
+    h += '<td><span class="fellow-name">'+esc(f.avatar)+' '+esc(f.name)+'</span><br><span class="fellow-pgy">'+esc(f.pgy)+'</span></td>';
+    h += '<td>'+f.casesCompleted+'/'+PROGRAM.totalCases+' '+progressBar(f.casesCompleted, PROGRAM.totalCases, 'var(--bl)')+'</td>';
+    h += '<td>'+f.crtCompleted+'/'+PROGRAM.totalCRTs+' '+progressBar(f.crtCompleted, PROGRAM.totalCRTs, 'var(--pp)')+'</td>';
+    h += '<td>'+f.consultCalls+'</td>';
+    h += '<td><span style="font-weight:700;color:'+(f.avgAccuracy>=80?'var(--gn)':f.avgAccuracy>=70?'var(--am)':'var(--rd)')+'">'+f.avgAccuracy+'%</span></td>';
+    h += '<td>'+sparkline(f.weeklyActivity)+'</td>';
+    h += '<td style="font-size:12px;color:var(--ts)">'+esc(f.lastActive)+'</td>';
+    h += '<td>'+statusBadge(f.status)+'</td>';
+    h += '</tr>';
+  });
+  
+  h += '</table></div></div>';
+
+  // — Milestone Heatmap —
+  h += '<div class="card"><div class="card-h"><h2>📊 Milestone Heatmap — All Fellows</h2><span style="font-size:11px;color:var(--tm)">Level 1–5 across 19 ACGME subcompetencies</span></div><div class="card-b" style="overflow-x:auto">';
+  
+  h += '<div class="ms-grid" style="grid-template-columns:160px repeat('+SUB_ORDER.length+',1fr)">';
+  // Header row
+  h += '<div class="ms-header"></div>';
+  SUB_ORDER.forEach(function(s){
+    var sc = SUBS[s] || {short:s};
+    h += '<div class="ms-header" title="'+esc(sc.name||s)+'">'+esc(s)+'</div>';
+  });
+  
+  // Fellow rows
+  FELLOWS.forEach(function(f){
+    h += '<div class="ms-name">'+esc(f.avatar)+' '+esc(f.name.split(',')[0])+'</div>';
+    SUB_ORDER.forEach(function(s){
+      var lvl = f.milestones[s] || 1;
+      h += '<div class="ms-cell '+levelClass(lvl)+'" title="'+esc(f.name.split(',')[0])+' — '+s+': Level '+lvl+'">'+lvl+'</div>';
+    });
+  });
+  
+  // Cohort average row
+  h += '<div class="ms-name" style="font-weight:800;color:var(--bl)">📈 Cohort Avg</div>';
+  SUB_ORDER.forEach(function(s){
+    var sum = FELLOWS.reduce(function(a,f){return a+(f.milestones[s]||1)},0);
+    var avg = (sum/FELLOWS.length).toFixed(1);
+    var lvl = Math.round(sum/FELLOWS.length);
+    h += '<div class="ms-cell '+levelClass(lvl)+'" title="Cohort average: '+avg+'">'+avg+'</div>';
+  });
+  
+  h += '</div>';
+  
+  // Legend
+  h += '<div style="display:flex;gap:12px;margin-top:12px;justify-content:flex-end;font-size:10px;color:var(--tm)">';
+  h += '<span><span class="ms-cell ms-l1" style="display:inline-block;width:18px;text-align:center;font-size:9px">1</span> Novice</span>';
+  h += '<span><span class="ms-cell ms-l2" style="display:inline-block;width:18px;text-align:center;font-size:9px">2</span> Developing</span>';
+  h += '<span><span class="ms-cell ms-l3" style="display:inline-block;width:18px;text-align:center;font-size:9px">3</span> Competent</span>';
+  h += '<span><span class="ms-cell ms-l4" style="display:inline-block;width:18px;text-align:center;font-size:9px">4</span> Proficient</span>';
+  h += '<span><span class="ms-cell ms-l5" style="display:inline-block;width:18px;text-align:center;font-size:9px">5</span> Expert</span>';
+  h += '</div>';
+  h += '</div></div>';
+
+  // — Two Column: Knowledge Gaps + Engagement —
+  h += '<div class="grid-2">';
+  
+  // Knowledge Gap Analysis
+  h += '<div class="card"><div class="card-h"><h2>🔍 Cohort Knowledge Gaps</h2></div><div class="card-b">';
+  var gapData = [
+    {label:'Immunodeficiency',pct:62,color:'var(--rd)'},
+    {label:'Mast Cell Disorders',pct:65,color:'var(--rd)'},
+    {label:'Research Methods',pct:68,color:'var(--am)'},
+    {label:'Population Health',pct:70,color:'var(--am)'},
+    {label:'FPIES/EoE',pct:72,color:'var(--am)'},
+    {label:'Contact Dermatitis',pct:75,color:'var(--am)'},
+    {label:'Drug Hypersensitivity',pct:80,color:'var(--gn)'},
+    {label:'Angioedema',pct:82,color:'var(--gn)'},
+    {label:'Anaphylaxis',pct:88,color:'var(--gn)'},
+    {label:'Urticaria',pct:90,color:'var(--gn)'}
+  ];
+  gapData.forEach(function(g){
+    h += '<div class="gap-item">';
+    h += '<div class="gap-label">'+esc(g.label)+'</div>';
+    h += '<div class="gap-bar"><div class="gap-fill" style="width:'+g.pct+'%;background:'+g.color+'"></div></div>';
+    h += '<div class="gap-pct" style="color:'+g.color+'">'+g.pct+'%</div>';
+    h += '</div>';
+  });
+  h += '</div></div>';
+
+  // Engagement & Recommendations
+  h += '<div class="card"><div class="card-h"><h2>💡 Actionable Insights</h2></div><div class="card-b">';
+  
+  var insights = [
+    {icon:'⚠️',color:'var(--am)',title:'Emily Nakamura — Low Engagement',text:'Case volume 26% below cohort average. Last active 3 days ago. Consider check-in to identify barriers.'},
+    {icon:'🌟',color:'var(--gn)',title:'Priya Patel & David Washington — Exceeding',text:'Both PGY-6 fellows meeting Level 4 across most competencies. Ready for increased autonomy and teaching roles.'},
+    {icon:'📉',color:'var(--rd)',title:'Cohort Gap: Immunodeficiency',text:'Average accuracy 62% — lowest across all subtypes. Recommend assigning CVID and SCID CRT cases next rotation.'},
+    {icon:'📋',color:'var(--bl)',title:'CCC Prep: Mid-Year Review Due',text:'Semi-annual milestone review approaching. 4 of 6 fellows have sufficient case evidence for Level 3+ assessment.'},
+    {icon:'🔬',color:'var(--pp)',title:'Research Milestone (MK3) Lagging',text:'Cohort average 2.2 — lowest milestone. Platform cannot fully assess this; supplement with faculty observation of scholarly activity.'},
+    {icon:'✅',color:'var(--gn)',title:'Procedural Skills Strong',text:'All PGY-6 fellows completed 10+ procedure lab sessions. Skin testing and OFC protocol competency on track.'}
+  ];
+  
+  insights.forEach(function(ins){
+    h += '<div style="padding:10px 0;border-bottom:1px solid var(--bd)">';
+    h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
+    h += '<span>'+ins.icon+'</span>';
+    h += '<span style="font-size:13px;font-weight:700;color:'+ins.color+'">'+esc(ins.title)+'</span>';
+    h += '</div>';
+    h += '<div style="font-size:12px;color:var(--ts);line-height:1.5;padding-left:28px">'+esc(ins.text)+'</div>';
+    h += '</div>';
+  });
+  
+  h += '</div></div>';
+  h += '</div>'; // grid-2
+
+  // — Footer note —
+  h += '<div style="text-align:center;margin-top:24px;padding:16px;background:var(--sf);border:1px solid var(--bd);border-radius:10px">';
+  if (DATA_SOURCE === 'live') {
+    h += '<div style="font-size:12px;color:var(--gn);font-weight:600">🟢 Live Data — Supabase connected</div>';
+  } else {
+    h += '<div style="font-size:12px;color:var(--am);font-weight:600">🟡 Demo Data — No live fellow activity yet. Data will appear as fellows use the platform.</div>';
+  }
+  h += '<div style="font-size:11px;color:var(--tm);margin-top:4px">Program License includes cohort analytics, CCC-ready reports, and 20 hours/year of custom content development.</div>';
+  h += '</div>';
+
+  document.getElementById('app').innerHTML = h;
+}
+
+// ═══ CCC REPORT EXPORT ═══
+window.generateCCCReport = function() {
+  var lines = [];
+  var date = new Date().toLocaleDateString();
+  lines.push('CCC Milestone Report — ' + PROGRAM.name);
+  lines.push('Institution: ' + PROGRAM.institution);
+  lines.push('Academic Year: ' + PROGRAM.academicYear);
+  lines.push('Generated: ' + date);
+  lines.push('Data Source: ' + DATA_SOURCE);
+  lines.push('');
+  var cols = ['Fellow','Cases Completed','Accuracy %','Hours Logged','Avg Milestone Level'];
+  SUB_ORDER.forEach(function(s) { cols.push(s); });
+  lines.push(cols.join(','));
+  FELLOWS.forEach(function(f) {
+    var row = ['"' + (f.name || '').replace(/"/g, "'") + '"', f.casesCompleted||0, f.avgAccuracy||0, f.hoursLogged||0];
+    var sum=0,cnt=0;
+    SUB_ORDER.forEach(function(s){ var l=(f.milestones&&f.milestones[s])||1; sum+=l; cnt++; });
+    row.push((sum/Math.max(cnt,1)).toFixed(1));
+    SUB_ORDER.forEach(function(s){ row.push((f.milestones&&f.milestones[s])||1); });
+    lines.push(row.join(','));
+  });
+  lines.push('');
+  var avgRow=['"COHORT AVERAGE"','','','',''];
+  SUB_ORDER.forEach(function(s){
+    var sm=FELLOWS.reduce(function(a,f){return a+((f.milestones&&f.milestones[s])||1);},0);
+    avgRow.push((sm/Math.max(FELLOWS.length,1)).toFixed(1));
+  });
+  lines.push(avgRow.join(','));
+  var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url; a.download='CCC_Milestone_Report_'+date.replace(/\//g,'-')+'.csv';
+  a.click(); URL.revokeObjectURL(url);
+};
+
+render();
+})();
+</script>
+</body>
+</html>

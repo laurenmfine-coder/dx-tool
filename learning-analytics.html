@@ -126,9 +126,8 @@ var TABS=[
   {id:'recommendations',label:'Recommendations'}
 ];
 
-// ═══ MOCK DATA ═══
-// In production this comes from platform usage analytics
-var DATA={
+// ═══ DATA LAYER — Live Supabase with demo fallback ═══
+var DEMO_DATA={
   summary:{
     casesCompleted:37, caseDelta:'+8',
     crtSessions:22, crtDelta:'+5',
@@ -148,13 +147,11 @@ var DATA={
     'Counseling':{sessions:4,hours:0.7,color:'#6366F1'},
     'Study Mode':{sessions:15,hours:2.1,color:'#94A3B8'}
   },
-  // Weekly activity heatmap (7 weeks × 7 days × value 0-4)
-  heatmap:(function(){
-    var w=[];for(var i=0;i<12;i++){var wk=[];for(var j=0;j<7;j++){
-      wk.push(Math.floor(Math.random()*5));
-    }w.push(wk)}return w;
-  })(),
-  // RPFS dimensions
+  heatmap:[
+    [0,2,3,2,3,1,0],[0,3,2,3,4,2,0],[1,2,4,3,3,2,0],[0,3,3,4,3,1,0],
+    [0,2,3,3,4,2,1],[0,4,3,4,3,2,0],[0,3,2,3,4,3,0],[1,3,4,3,4,2,0],
+    [0,3,3,4,3,2,0],[0,4,3,4,4,3,1],[0,3,4,3,4,2,0],[0,4,3,4,3,2,0]
+  ],
   rpfs:{
     'Data Gathering':{score:78,prior:72},
     'Hypothesis Generation':{score:71,prior:65},
@@ -165,7 +162,6 @@ var DATA={
     'Illness Script Matching':{score:80,prior:76},
     'Metacognition':{score:62,prior:55}
   },
-  // Accuracy by category (last 90 days)
   categoryAccuracy:{
     'Cardiovascular':{correct:18,total:22,pct:82},
     'Pulmonary':{correct:14,total:18,pct:78},
@@ -178,16 +174,36 @@ var DATA={
     'Rheumatology':{correct:5,total:10,pct:50},
     'Allergy/Immunology':{correct:14,total:16,pct:88}
   },
-  // Weekly accuracy trend (12 weeks)
   weeklyAccuracy:[62,65,68,71,69,74,72,78,75,80,77,74],
   weeklyVolume:[8,10,12,14,11,16,14,18,15,20,17,15],
-  // Weaknesses
   weaknesses:[
     {cat:'Rheumatology',pct:50,gap:'Autoimmune overlap syndromes, serology interpretation',rec:'Complete SLE and vasculitis CRT cases; review MechanismDx autoimmunity module',link:'virtual-emr.html?setting=ed'},
     {cat:'Endocrine',pct:57,gap:'Thyroid storm vs myxedema, adrenal insufficiency workup',rec:'Complete DKA, thyroid, and adrenal CRT trainers; 3 endocrine board prep sets',link:'board-prep.html'},
     {cat:'Renal',pct:58,gap:'AKI vs CKD differentiation, acid-base interpretation',rec:'Complete AKI workup CRT; review MechanismDx renal physiology',link:'virtual-emr.html?setting=ed'}
   ]
 };
+var DATA = DEMO_DATA;
+
+// Try loading live individual analytics
+async function loadMyAnalytics() {
+  if (typeof RDX === 'undefined' || !RDX.ready) return;
+  try {
+    var stats = await RDX.analytics.myStats();
+    if (stats && stats.casesCompleted > 0) {
+      DATA.summary.casesCompleted = stats.casesCompleted;
+      DATA.summary.avgAccuracy = stats.accuracy;
+      DATA.summary.hoursLogged = parseFloat(stats.hoursLogged);
+      DATA.summary.crtSessions = stats.recentCases.filter(function(c){ return c.tool === 'crt'; }).length;
+      // Heatmap from live data
+      var heatmap = await RDX.analytics.myWeeklyActivity(12);
+      if (heatmap && heatmap.length > 0) DATA.heatmap = heatmap;
+      render();
+    }
+  } catch(e) { console.warn('[Analytics] Live load failed:', e); }
+}
+document.addEventListener('rdx:auth', function(e) {
+  if (e.detail.user) setTimeout(loadMyAnalytics, 500);
+});
 
 function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}
 
@@ -425,5 +441,8 @@ setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classL
 <script src="js/dx-user-bar.js"></script>
 <script src="js/rdx-help-widget.js"></script>
 <script src="js/rdx-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/rdx-supabase.js"></script>
+<script src="js/rdx-analytics-tracker.js"></script>
 </body>
 </html>

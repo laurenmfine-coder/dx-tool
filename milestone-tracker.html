@@ -183,12 +183,55 @@ function levelColor(lvl){
   return '#DC2626';
 }
 
-// Mock fellow data — in production this comes from user progress
-var FELLOWS = [
-  { name:'Fellow A (PGY-6)', level:{PC1:3,PC2:2,PC3:2,PC4:3,MK1:3,MK2:3,MK3:2,SBP1:2,SBP2:2,SBP3:2,SBP4:1,PBLI1:3,PBLI2:2,PROF1:3,PROF2:3,PROF3:2,ICS1:3,ICS2:2,ICS3:3}, casesCompleted:24 },
-  { name:'Fellow B (PGY-7)', level:{PC1:4,PC2:3,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:3,SBP3:3,SBP4:2,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:3,ICS1:4,ICS2:3,ICS3:4}, casesCompleted:52 }
+// Demo fellow data — fallback when Supabase has no data
+var DEMO_FELLOWS = [
+  { name:'Sarah Chen, MD (PGY-5)', level:{PC1:3,PC2:3,PC3:3,PC4:3,MK1:3,MK2:3,MK3:2,SBP1:2,SBP2:3,SBP3:2,SBP4:2,PBLI1:3,PBLI2:2,PROF1:3,PROF2:3,PROF3:2,ICS1:3,ICS2:3,ICS3:3}, casesCompleted:42 },
+  { name:'James Okafor, MD (PGY-5)', level:{PC1:3,PC2:2,PC3:2,PC4:3,MK1:2,MK2:3,MK3:2,SBP1:2,SBP2:2,SBP3:2,SBP4:1,PBLI1:2,PBLI2:2,PROF1:3,PROF2:3,PROF3:3,ICS1:3,ICS2:2,ICS3:2}, casesCompleted:38 },
+  { name:'Priya Patel, MD (PGY-6)', level:{PC1:4,PC2:4,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:3,SBP3:3,SBP4:3,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:3,ICS1:4,ICS2:3,ICS3:4}, casesCompleted:58 },
+  { name:'Marcus Rivera, MD (PGY-6)', level:{PC1:4,PC2:3,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:3,SBP3:3,SBP4:2,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:3,ICS1:4,ICS2:3,ICS3:3}, casesCompleted:51 },
+  { name:'Emily Nakamura, MD (PGY-5)', level:{PC1:2,PC2:2,PC3:2,PC4:2,MK1:2,MK2:2,MK3:1,SBP1:2,SBP2:2,SBP3:1,SBP4:1,PBLI1:2,PBLI2:2,PROF1:3,PROF2:2,PROF3:2,ICS1:2,ICS2:2,ICS3:2}, casesCompleted:31 },
+  { name:'David Washington, MD (PGY-6)', level:{PC1:4,PC2:3,PC3:4,PC4:4,MK1:4,MK2:4,MK3:3,SBP1:3,SBP2:4,SBP3:3,SBP4:3,PBLI1:4,PBLI2:3,PROF1:4,PROF2:4,PROF3:4,ICS1:4,ICS2:4,ICS3:4}, casesCompleted:54 }
 ];
+var FELLOWS = DEMO_FELLOWS;
 var activeFellow = 0;
+
+// Load live milestone data from Supabase
+async function loadLiveMilestones() {
+  if (typeof RDX === 'undefined' || !RDX.ready) return;
+  try {
+    var profile = RDX.getProfile();
+    if (!profile || !profile.program_id) return;
+    var client = RDX.getClient();
+
+    // Get milestone snapshots for all fellows in program
+    var snapshots = await client.from('milestone_snapshot').select('*')
+      .eq('program_id', profile.program_id);
+    // Get cohort summary for case counts
+    var cohort = await client.from('program_cohort_summary').select('user_id, display_name, cases_completed, pgy_level')
+      .eq('program_id', profile.program_id);
+
+    if (snapshots.data && snapshots.data.length > 0 && cohort.data) {
+      var cohortMap = {};
+      cohort.data.forEach(function(c) { cohortMap[c.user_id] = c; });
+
+      FELLOWS = snapshots.data.map(function(s) {
+        var c = cohortMap[s.user_id] || {};
+        var levels = typeof s.levels === 'string' ? JSON.parse(s.levels) : (s.levels || {});
+        var pgy = c.pgy_level ? ' (PGY-' + c.pgy_level + ')' : '';
+        return {
+          name: (s.display_name || 'Fellow') + pgy,
+          level: levels,
+          casesCompleted: c.cases_completed || 0
+        };
+      });
+      activeFellow = 0;
+      render();
+    }
+  } catch(e) { console.warn('[Milestones] Live load failed:', e); }
+}
+document.addEventListener('rdx:auth', function(e) {
+  if (e.detail.user) setTimeout(loadLiveMilestones, 500);
+});
 
 // ─── Tab: Overview ───
 function renderOverview(){
@@ -445,5 +488,8 @@ setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classL
 <script src="js/dx-user-bar.js"></script>
 <script src="js/rdx-help-widget.js"></script>
 <script src="js/rdx-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/rdx-supabase.js"></script>
+<script src="js/rdx-analytics-tracker.js"></script>
 </body>
 </html>
