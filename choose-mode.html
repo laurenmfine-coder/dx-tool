@@ -31,6 +31,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .exp-toggle.veteran .dot{background:var(--blue)}
 .demo-link{font-size:12px;font-weight:600;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--blue);transition:all .15s}
 .demo-link:hover{background:var(--blue);color:#fff}
+.fac-link{font-size:12px;font-weight:600;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--green);transition:all .15s}
+.fac-link:hover{background:var(--green);color:#fff}
 
 /* ── MAIN ── */
 .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px}
@@ -195,6 +197,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <span class="dot"></span>
       <span id="expLabel">Beginner Mode</span>
     </button>
+    <a href="faculty-dashboard.html" class="fac-link" id="facLink" style="display:none">
+      📊 Faculty Dashboard
+    </a>
     <a href="demo.html" class="demo-link">
       ▶ Interactive Demo
     </a>
@@ -416,6 +421,36 @@ var selectedCase = null;
 // ── Experience level ────────────────────────────────────────────────────────
 var expLevel = localStorage.getItem('rdx-exp-level') || 'beginner';
 applyExpLevel();
+
+// ── Faculty link — show if user is faculty/admin ─────────────────────────
+(function() {
+  function showFacLinkIfEligible() {
+    try {
+      // Check Supabase session key first
+      var supaRaw = localStorage.getItem('reasondx-user');
+      var supaUser = supaRaw ? JSON.parse(supaRaw) : null;
+      if (supaUser && (supaUser.tier === 'admin' || supaUser.tier === 'faculty')) {
+        document.getElementById('facLink').style.display = 'flex';
+        return;
+      }
+      // Check emr-current-user (set by demo data)
+      var localRaw = localStorage.getItem('emr-current-user');
+      var localUser = localRaw ? JSON.parse(localRaw) : null;
+      if (localUser && (localUser.role === 'admin' || localUser.role === 'faculty' || localUser.tier === 'admin')) {
+        document.getElementById('facLink').style.display = 'flex';
+        return;
+      }
+      // Check emr-roles
+      var rolesRaw = localStorage.getItem('emr-roles');
+      var roles = rolesRaw ? JSON.parse(rolesRaw) : {};
+      var hasFaculty = Object.values(roles).some(function(r) { return r === 'faculty' || r === 'admin'; });
+      if (hasFaculty) {
+        document.getElementById('facLink').style.display = 'flex';
+      }
+    } catch(e) {}
+  }
+  showFacLinkIfEligible();
+})();
 
 function applyExpLevel() {
   var toggle = document.getElementById('expToggle');
