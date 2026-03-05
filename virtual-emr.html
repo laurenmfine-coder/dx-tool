@@ -1701,8 +1701,9 @@ function loadUserData(){
       const firstSub=S.allSubmissions[0];
       S.feedback=db('feedback-'+asUid+'-'+(firstSub.week||''))||null;
       S.annotations=db('annotations-'+asUid+'-'+(firstSub.week||''))||[];
+      S.selectedSubmission=0; // auto-select first submission so grading panel opens immediately
     }
-    if(S.activeTab==='demographics') S.activeTab='grading';
+    S.activeTab='grading'; // always force grading tab for ?as= sessions
     return;
   }
 
@@ -2728,7 +2729,9 @@ async function bootstrapApp() {
   // Suppress legacy orientation modal — handled by rdx-onboarding-unified.js
   try { localStorage.setItem('rdx-orientation-seen','true'); } catch(e) {}
   // Default to handoff tab for non-ED settings (student sees sign-out first)
-  if(S.clinicalSetting && S.clinicalSetting!=="ed" && S.clinicalSetting!=="clinic" && S.activeTab==="demographics"){
+  // But NOT when ?as= admin impersonation is active — grading tab takes priority
+  var _asParam = new URLSearchParams(location.search).get('as');
+  if(!_asParam && S.clinicalSetting && S.clinicalSetting!=="ed" && S.clinicalSetting!=="clinic" && S.activeTab==="demographics"){
     S.activeTab="handoff";
   }
   // Auth: read from Supabase session
