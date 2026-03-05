@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2874A6">
+<title>CaseForge — Custom Case Builder | ReasonDx</title>
+<meta name="description" content="Build custom EMR cases for your fellowship program. AI-assisted case authoring with full Virtual EMR integration.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.page{max-width:960px;margin:0 auto;padding:72px 16px 100px}
+.hero{background:linear-gradient(140deg,#1B4F72 0%,#2874A6 50%,#0d7377 100%);color:#fff;border-radius:16px;padding:32px 28px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::after{content:'🏗️';position:absolute;right:20px;top:12px;font-size:72px;opacity:.08;pointer-events:none}
+.hero h1{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.hero p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;max-width:600px}
+.hero-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.pill{font-size:10px;font-weight:700;padding:3px 10px;border-radius:5px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
+.card{background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:24px;margin-bottom:16px;box-shadow:var(--rdx-shadow-sm)}
+.card h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:700;color:var(--rdx-text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+textarea,input[type="text"],input[type="number"],select{width:100%;padding:10px 14px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);font-family:var(--rdx-font);font-size:13px;color:var(--rdx-text);background:var(--rdx-bg-card);transition:border-color .15s;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--rdx-blue);box-shadow:0 0 0 3px var(--rdx-blue-bg)}
+textarea{min-height:100px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rdx-radius-sm);font-family:var(--rdx-font);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;border:none}
+.btn-primary{background:var(--rdx-blue);color:#fff}.btn-primary:hover{background:var(--rdx-blue-dark);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-outline{background:var(--rdx-bg-card);color:var(--rdx-text);border:1.5px solid var(--rdx-border)}.btn-outline:hover{border-color:var(--rdx-blue);color:var(--rdx-blue)}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-success{background:var(--rdx-success);color:#fff}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row > *{flex:1;min-width:200px}
+.steps{display:flex;gap:4px;margin-bottom:24px;overflow-x:auto}
+.step{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--rdx-radius-sm);font-size:12px;font-weight:600;color:var(--rdx-text-muted);cursor:pointer;white-space:nowrap;transition:all .15s;background:var(--rdx-bg-card);border:1px solid var(--rdx-border)}
+.step:hover{border-color:var(--rdx-blue-border)}
+.step.active{background:var(--rdx-blue);color:#fff;border-color:var(--rdx-blue)}
+.step.done{background:var(--rdx-success-bg);color:var(--rdx-success);border-color:var(--rdx-success)}
+.step-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:var(--rdx-bg);border:1.5px solid var(--rdx-border)}
+.step.active .step-num{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4);color:#fff}
+.step.done .step-num{background:var(--rdx-success);color:#fff;border-color:var(--rdx-success)}
+.mode-card{padding:24px;border:2px solid var(--rdx-border);border-radius:var(--rdx-radius-md);cursor:pointer;text-align:center;transition:all .15s;background:var(--rdx-bg-card)}
+.mode-card:hover{border-color:var(--rdx-blue);transform:translateY(-2px);box-shadow:var(--rdx-shadow-md)}
+.mode-card.selected{border-color:var(--rdx-blue);background:var(--rdx-blue-bg)}
+.mode-card .icon{font-size:36px;margin-bottom:8px}
+.mode-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.mode-card p{font-size:12px;color:var(--rdx-text-muted);line-height:1.5}
+.spinner{width:20px;height:20px;border:2.5px solid var(--rdx-border);border-top-color:var(--rdx-blue);border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.section-hdr{font-size:11px;font-weight:700;color:var(--rdx-text-muted);text-transform:uppercase;letter-spacing:.06em;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.section-hdr::after{content:'';flex:1;height:1px;background:var(--rdx-border)}
+.preview-emr{border:2px solid var(--rdx-border);border-radius:var(--rdx-radius-md);overflow:hidden;background:var(--rdx-bg-card)}
+.preview-emr-header{background:var(--rdx-blue-dark);color:#fff;padding:12px 16px;font-size:13px;font-weight:700}
+.preview-emr-body{padding:16px;font-size:12px;line-height:1.65;max-height:500px;overflow-y:auto}
+.preview-emr-body table{width:100%;border-collapse:collapse;margin:8px 0}
+.preview-emr-body th,.preview-emr-body td{padding:6px 10px;border:1px solid var(--rdx-border);text-align:left;font-size:11px}
+.preview-emr-body th{background:var(--rdx-bg);font-weight:700}
+.saved-case{padding:14px 16px;border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);margin-bottom:8px;background:var(--rdx-bg-card);display:flex;justify-content:space-between;align-items:center;transition:all .15s}
+.saved-case:hover{border-color:var(--rdx-blue-border);box-shadow:var(--rdx-shadow-sm)}
+.badge{display:inline-flex;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+.badge-blue{background:var(--rdx-blue-bg);color:var(--rdx-blue);border:1px solid var(--rdx-blue-border)}
+.badge-green{background:var(--rdx-success-bg);color:var(--rdx-success)}
+.badge-amber{background:var(--rdx-warning-bg);color:var(--rdx-warning)}
+.validation-item{padding:8px 12px;border-radius:var(--rdx-radius-sm);margin-bottom:6px;font-size:12px;display:flex;align-items:flex-start;gap:8px}
+.validation-item.error{background:var(--rdx-danger-bg);color:var(--rdx-danger)}
+.validation-item.warning{background:var(--rdx-warning-bg);color:var(--rdx-warning)}
+.validation-item.suggestion{background:var(--rdx-blue-bg);color:var(--rdx-blue)}
+@media(max-width:600px){.row{flex-direction:column}.steps{flex-wrap:nowrap}.hero{padding:24px 20px}}
+</style>
+</head>
+<body>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
+<script src="js/rdx-supabase.js"></script>
+
+<div class="page">
+  <div class="hero">
+    <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px"><a href="index.html" style="color:rgba(255,255,255,.6)">ReasonDx</a> → CaseForge</div>
+    <h1>CaseForge — Custom Case Builder</h1>
+    <p>Create custom EMR cases for your fellowship program. Build from scratch with the structured editor, or paste clinical notes and let AI do the heavy lifting.</p>
+    <div class="hero-pills">
+      <span class="pill">Program-Scoped</span>
+      <span class="pill">AI-Assisted Parsing</span>
+      <span class="pill">Full EMR Integration</span>
+      <span class="pill">ACGME Milestone Mapping</span>
+    </div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var WORKER = 'https://caseforge-builder.laurenmfine.workers.dev';
+
+// ─── STATE ───
+var S = {
+  view: 'home',          // home, mode-select, builder, ai-parse, preview, my-cases
+  mode: null,             // 'structured' or 'ai-assist'
+  step: 0,
+  parsing: false,
+  validating: false,
+  attested: false,
+  phiFlags: [],
+  validationResult: null,
+  myCases: [],
+  caseData: {
+    patient: { name:'', dob:'', age:'', sex:'Male', pronouns:'he/him', mrn:'RDX-2026-'+Math.floor(10000+Math.random()*90000), language:'English', race:'', phone:'', email:'', address:'', insurance:'', pcp:'', pharmacy:'', emergencyContact:{name:'',phone:'',relationship:''}, chiefComplaint:'', diagnosis:'' },
+    allergies: [],
+    problems: [],
+    medications: [],
+    vitals: { rows: [{ time:'Triage', bp:'', hr:'', rr:'', temp:'', spo2:'', weight:'', pain:'' }] },
+    hpi: '',
+    physicalExam: { general:'', heent:'', neck:'', cardiovascular:'', pulmonary:'', abdomen:'', extremities:'', skin:'', neurologic:'' },
+    labs: {},
+    imaging: [],
+    assessment: '',
+    plan: '',
+    teachingPoints: { keyLearning: [], boardPearls: [] },
+    references: []
+  },
+  meta: { title:'', specialty:'allergy_immunology', difficulty:3, abai_domains:[], acgme_milestones:[], learning_objectives:[] }
+};
+
+try {
+  var saved = JSON.parse(localStorage.getItem('caseforge-cases') || '[]');
+  S.myCases = saved;
+} catch(e){}
+
+function save(){ localStorage.setItem('caseforge-cases', JSON.stringify(S.myCases)); }
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ─── PHI SCREENING SCANNER ───
+// Scans text for potential PHI patterns per HIPAA Safe Harbor 18 identifiers
+function scanForPHI(text) {
+  if (!text) return [];
+  var flags = [];
+  var t = String(text);
+
+  // SSN patterns (XXX-XX-XXXX or XXXXXXXXX)
+  var ssn = t.match(/\b\d{3}[-\s]?\d{2}[-\s]?\d{4}\b/g);
+  if (ssn) ssn.forEach(function(m){
+    // Exclude dates, MRNs starting with RDX, phone numbers
+    if (!/^(0[1-9]|1[0-2])/.test(m) && !/^RDX/.test(m))
+      flags.push({type:'SSN',value:m,severity:'critical',message:'Possible Social Security Number detected: "'+m+'". Remove before proceeding.'});
+  });
+
+  // Real MRN patterns (not RDX- format)
+  var mrn = t.match(/\b(MRN|mrn|Medical Record)[:\s#]*[A-Z]?\d{6,12}\b/gi);
+  if (mrn) mrn.forEach(function(m){
+    if (!/RDX-|MRN-\d{6}$/.test(m)) // Allow our fictional format
+      flags.push({type:'MRN',value:m,severity:'critical',message:'Possible real medical record number: "'+m+'". Use RDX-20XX-XXXXX format instead.'});
+  });
+
+  // Email addresses (flag non-fictional patterns)
+  var emails = t.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b/gi);
+  if (emails) emails.forEach(function(m){
+    if (!/email\.com|example\.com|test\.com|reasondx/.test(m))
+      flags.push({type:'Email',value:m,severity:'warning',message:'Email address detected: "'+m+'". Ensure this is fictional — use @email.com for fake addresses.'});
+  });
+
+  // Phone numbers with real area codes (not 555)
+  var phones = t.match(/\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/g);
+  if (phones) phones.forEach(function(m){
+    var digits = m.replace(/\D/g,'');
+    if (digits.length >= 10 && !/555/.test(m) && !/^(800|888|877|866|900)/.test(digits))
+      flags.push({type:'Phone',value:m,severity:'warning',message:'Phone number without 555 exchange: "'+m+'". Consider using (XXX) 555-XXXX pattern for fictional patients.'});
+  });
+
+  // Date of birth with year before 2000 (could be real DOB)
+  var dobs = t.match(/\b(DOB|Date of Birth|Born)[:\s]*([\d]{1,2}[\/\-][\d]{1,2}[\/\-][\d]{2,4})/gi);
+  if (dobs) dobs.forEach(function(m){
+    flags.push({type:'DOB',value:m,severity:'info',message:'Date of birth found: "'+m+'". Verify this is fictional and not a real patient DOB.'});
+  });
+
+  // Specific street addresses with real zip codes
+  var zips = t.match(/\b\d{5}(-\d{4})?\b/g);
+  if (zips) zips.forEach(function(m){
+    // Only flag if preceded by address-like text
+    var idx = t.indexOf(m);
+    var before = t.substring(Math.max(0, idx-80), idx).toLowerCase();
+    if (/\b(street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln|way|apt|suite)\b/.test(before))
+      flags.push({type:'Address',value:m,severity:'info',message:'Real zip code "'+m+'" in what appears to be an address. Verify the address is fictional.'});
+  });
+
+  // Insurance member/group IDs (long alphanumeric)
+  var insIds = t.match(/\b(Member|Group|Policy|ID)[:\s#]*[A-Z]{1,3}\d{8,14}\b/gi);
+  if (insIds) insIds.forEach(function(m){
+    flags.push({type:'InsuranceID',value:m,severity:'warning',message:'Possible insurance ID: "'+m+'". Replace with fictional values.'});
+  });
+
+  // Known hospital/clinic names (common patterns suggesting real facilities)
+  var hospitals = t.match(/\b(Memorial|Regional|University|Medical Center|General Hospital|Children's Hospital|Veterans|VA Medical)\s+\w+/gi);
+  if (hospitals) hospitals.forEach(function(m){
+    if (!/ReasonDx|Fictional|Practice/i.test(m))
+      flags.push({type:'Facility',value:m,severity:'info',message:'Possible real facility name: "'+m+'". Verify this is fictional or generic.'});
+  });
+
+  return flags;
+}
+
+function runPHIScan() {
+  // Scan all text fields in the case
+  var allText = JSON.stringify(S.caseData);
+  S.phiFlags = scanForPHI(allText);
+  return S.phiFlags;
+}
+
+var STEPS = [
+  {id:'patient', label:'Patient', icon:'👤'},
+  {id:'history', label:'History', icon:'📋'},
+  {id:'encounter', label:'Encounter', icon:'🩺'},
+  {id:'labs', label:'Labs & Imaging', icon:'🧪'},
+  {id:'assessment', label:'Assessment', icon:'📝'},
+  {id:'teaching', label:'Teaching', icon:'🎓'},
+  {id:'review', label:'Review', icon:'✅'}
+];
+
+// ─── RENDER ───
+function render() {
+  var h = '';
+  if (S.view === 'home') h = renderHome();
+  else if (S.view === 'mode-select') h = renderModeSelect();
+  else if (S.view === 'ai-parse') h = renderAIParse();
+  else if (S.view === 'builder') h = renderBuilder();
+  else if (S.view === 'my-cases') h = renderMyCases();
+  document.getElementById('app').innerHTML = h;
+}
+
+function renderHome() {
+  var h = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">';
+  h += '<div class="mode-card" onclick="CF.startNew()"><div class="icon">✨</div><h4>Create New Case</h4><p>Build a custom EMR case from scratch or with AI assistance.</p></div>';
+  h += '<div class="mode-card" onclick="CF.showMyCases()"><div class="icon">📂</div><h4>My Cases (' + S.myCases.length + ')</h4><p>View, edit, and manage your custom cases.</p></div>';
+  h += '</div>';
+
+  if (S.myCases.length > 0) {
+    h += '<div class="section-hdr">Recent Cases</div>';
+    S.myCases.slice(-3).reverse().forEach(function(c, idx){
+      h += '<div class="saved-case"><div>';
+      h += '<div style="font-size:14px;font-weight:700">' + esc(c.meta.title || c.caseData.patient.diagnosis || 'Untitled Case') + '</div>';
+      h += '<div style="font-size:12px;color:var(--rdx-text-muted)">' + esc(c.caseData.patient.chiefComplaint || '').substring(0,80) + '</div>';
+      h += '</div><span class="badge badge-' + (c.status === 'published' ? 'green' : 'amber') + '">' + (c.status || 'draft') + '</span></div>';
+    });
+  }
+  return h;
+}
+
+function renderModeSelect() {
+  var h = '<div style="margin-bottom:16px"><button class="btn btn-outline btn-sm" onclick="CF.goHome()">← Back</button></div>';
+  h += '<h3 style="font-size:18px;font-weight:700;margin-bottom:16px">Choose Authoring Mode</h3>';
+  h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">';
+  h += '<div class="mode-card' + (S.mode === 'structured' ? ' selected' : '') + '" onclick="CF.selectMode(\'structured\')"><div class="icon">📝</div><h4>Structured Builder</h4><p>Fill in each EMR section step by step. Best when you have specific data to enter.</p></div>';
+  h += '<div class="mode-card' + (S.mode === 'ai-assist' ? ' selected' : '') + '" onclick="CF.selectMode(\'ai-assist\')"><div class="icon">🤖</div><h4>AI-Assisted</h4><p>Paste clinical notes, an H&P, or a case description. AI converts it to a structured EMR case.</p></div>';
+  h += '</div>';
+  if (S.mode) {
+    h += '<div style="margin-top:16px;text-align:center"><button class="btn btn-primary" onclick="CF.startBuilder()">Continue with ' + (S.mode === 'ai-assist' ? 'AI-Assisted' : 'Structured') + ' Builder →</button></div>';
+  }
+  return h;
+}
+
+function renderAIParse() {
+  var h = '<div style="margin-bottom:16px"><button class="btn btn-outline btn-sm" onclick="CF.goHome()">← Back</button></div>';
+  h += '<div class="card"><h3>🤖 AI-Assisted Case Builder</h3>';
+  h += '<p>Paste clinical information below — an H&P, discharge summary, case description, or even rough notes. The AI will convert it into a structured EMR case.</p></div>';
+  h += '<div class="card">';
+  h += '<div class="form-group"><label>Clinical Information</label>';
+  h += '<textarea id="aiInput" style="min-height:200px" placeholder="Paste your clinical information here...&#10;&#10;Example:&#10;34-year-old woman presents with generalized urticaria and throat tightness 20 minutes after eating shrimp at a restaurant. History of shellfish allergy diagnosed at age 12. She self-administered expired EpiPen in the parking lot with minimal improvement..."></textarea></div>';
+  h += '<div class="row">';
+  h += '<div class="form-group"><label>Diagnosis (optional)</label><input type="text" id="aiDx" placeholder="e.g., Food-Induced Anaphylaxis"></div>';
+  h += '<div class="form-group"><label>Specialty</label><select id="aiSpec"><option value="allergy_immunology">Allergy & Immunology</option><option value="emergency">Emergency Medicine</option><option value="internal">Internal Medicine</option><option value="pulmonary">Pulmonary</option><option value="cardiology">Cardiology</option><option value="other">Other</option></select></div>';
+  h += '</div>';
+  h += '<div style="margin-top:16px;margin-bottom:14px;padding:14px 16px;background:var(--rdx-warning-bg);border:1.5px solid rgba(217,119,6,.25);border-radius:var(--rdx-radius-sm)">';
+  h += '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;line-height:1.6;color:var(--rdx-text)">';
+  h += '<input type="checkbox" id="phiAttest" onchange="CF.setAttest(this.checked)" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:var(--rdx-blue)"' + (S.attested ? ' checked' : '') + '>';
+  h += '<span><strong>De-Identification Attestation:</strong> I confirm that all clinical information submitted here has been fully de-identified and contains no Protected Health Information (PHI), personally identifiable information (PII), or any data that could be used to identify a real patient. This includes names, dates, locations, medical record numbers, and any other HIPAA-defined identifiers. I understand that ReasonDx does not store, process, or transmit PHI and that I am solely responsible for ensuring compliance with HIPAA and my institution\u2019s data governance policies.</span>';
+  h += '</label></div>';
+  h += '<button class="btn btn-primary" onclick="CF.aiParse()" ' + (S.parsing || !S.attested ? 'disabled' : '') + '>' +
+    (S.parsing ? '<span class="spinner"></span> Parsing... (15-30 sec)' : '🤖 Generate EMR Case') + '</button>';
+  if (!S.attested && !S.parsing) h += '<div style="font-size:11px;color:var(--rdx-warning);margin-top:6px">You must confirm the de-identification attestation above before proceeding.</div>';
+  h += '</div>';
+  return h;
+}
+
+function renderBuilder() {
+  var h = '<div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">';
+  h += '<button class="btn btn-outline btn-sm" onclick="CF.goHome()">← Back</button>';
+  h += '<button class="btn btn-success btn-sm" onclick="CF.saveCase()"' + (S.attested ? '' : ' disabled title="Complete the de-identification attestation on the Patient step first"') + '>💾 Save Case</button>';
+  h += '</div>';
+
+  // Steps
+  h += '<div class="steps">';
+  STEPS.forEach(function(s, i){
+    var cls = i === S.step ? 'active' : (i < S.step ? 'done' : '');
+    h += '<div class="step ' + cls + '" onclick="CF.goStep(' + i + ')"><span class="step-num">' + (i < S.step ? '✓' : (i+1)) + '</span>' + s.label + '</div>';
+  });
+  h += '</div>';
+
+  // Step content
+  var step = STEPS[S.step];
+  h += '<div class="card">';
+
+  if (step.id === 'patient') {
+    h += '<h3>👤 Patient Demographics</h3>';
+    h += '<div class="row">';
+    h += '<div class="form-group"><label>Full Name</label><input type="text" id="f-name" value="'+esc(S.caseData.patient.name)+'" onchange="CF.set(\'patient.name\',this.value)"></div>';
+    h += '<div class="form-group"><label>Age</label><input type="text" id="f-age" value="'+esc(S.caseData.patient.age)+'" onchange="CF.set(\'patient.age\',this.value)"></div>';
+    h += '<div class="form-group"><label>Sex</label><select id="f-sex" onchange="CF.set(\'patient.sex\',this.value)"><option'+(S.caseData.patient.sex==='Male'?' selected':'')+'>Male</option><option'+(S.caseData.patient.sex==='Female'?' selected':'')+'>Female</option></select></div>';
+    h += '</div>';
+    h += '<div class="form-group"><label>Chief Complaint</label><textarea id="f-cc" rows="2" onchange="CF.set(\'patient.chiefComplaint\',this.value)">'+esc(S.caseData.patient.chiefComplaint)+'</textarea></div>';
+    h += '<div class="form-group"><label>Diagnosis</label><input type="text" id="f-dx" value="'+esc(S.caseData.patient.diagnosis)+'" onchange="CF.set(\'patient.diagnosis\',this.value)"></div>';
+    h += '<div class="form-group"><label>Case Title</label><input type="text" id="f-title" value="'+esc(S.meta.title)+'" onchange="CF.setMeta(\'title\',this.value)" placeholder="e.g., Anaphylaxis — Shrimp Exposure in Restaurant"></div>';
+    h += '<div style="margin-top:8px;padding:14px 16px;background:var(--rdx-warning-bg);border:1.5px solid rgba(217,119,6,.25);border-radius:var(--rdx-radius-sm)">';
+    h += '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;line-height:1.6;color:var(--rdx-text)">';
+    h += '<input type="checkbox" id="phiAttestBuilder" onchange="CF.setAttest(this.checked)" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:var(--rdx-blue)"' + (S.attested ? ' checked' : '') + '>';
+    h += '<span><strong>De-Identification Attestation:</strong> I confirm that all clinical information entered in this case has been fully de-identified and contains no Protected Health Information (PHI), personally identifiable information (PII), or any data that could be used to identify a real patient. This includes names, dates, locations, medical record numbers, and any other HIPAA-defined identifiers. I understand that ReasonDx does not store, process, or transmit PHI and that I am solely responsible for ensuring compliance with HIPAA and my institution\u2019s data governance policies.</span>';
+    h += '</label></div>';
+  }
+  else if (step.id === 'history') {
+    h += '<h3>📋 Clinical History</h3>';
+    h += '<div class="form-group"><label>HPI (History of Present Illness)</label><textarea id="f-hpi" style="min-height:150px" onchange="CF.set(\'hpi\',this.value)">'+esc(S.caseData.hpi)+'</textarea></div>';
+    h += '<div class="form-group"><label>Problems (one per line: Problem | ICD | Status)</label><textarea id="f-problems" rows="4" onchange="CF.parseProblems(this.value)">'+S.caseData.problems.map(function(p){return p.problem+' | '+p.icd+' | '+p.status}).join('\n')+'</textarea></div>';
+    h += '<div class="form-group"><label>Medications (one per line: Name | Dose | Route)</label><textarea id="f-meds" rows="4" onchange="CF.parseMeds(this.value)">'+S.caseData.medications.map(function(m){return m.name+' | '+(m.dose||'')+' | '+(m.route||'')}).join('\n')+'</textarea></div>';
+  }
+  else if (step.id === 'encounter') {
+    h += '<h3>🩺 Physical Exam</h3>';
+    var examFields = ['general','heent','cardiovascular','pulmonary','abdomen','skin','extremities','neurologic'];
+    examFields.forEach(function(f){
+      h += '<div class="form-group"><label>' + f.charAt(0).toUpperCase() + f.slice(1) + '</label>';
+      h += '<textarea rows="2" onchange="CF.setExam(\''+f+'\',this.value)">'+esc(S.caseData.physicalExam[f])+'</textarea></div>';
+    });
+  }
+  else if (step.id === 'labs') {
+    h += '<h3>🧪 Labs & Imaging</h3>';
+    h += '<div class="form-group"><label>Lab Results (paste or type — AI will structure these when you save)</label>';
+    h += '<textarea id="f-labs" style="min-height:150px" placeholder="CBC: WBC 14.2 (H), Hgb 13.1, Plt 245&#10;BMP: Na 138, K 4.1, Cr 0.9, Glucose 142 (H)&#10;Tryptase: 34.2 (H, ref <11.4)">'+esc(S.caseData._rawLabs||'')+'</textarea></div>';
+    h += '<div class="form-group"><label>Imaging</label>';
+    h += '<textarea id="f-imaging" rows="4" placeholder="CXR PA/Lat: Clear lungs, no consolidation...">'+S.caseData.imaging.map(function(i){return i.type+': '+i.findings}).join('\n')+'</textarea></div>';
+  }
+  else if (step.id === 'assessment') {
+    h += '<h3>📝 Assessment & Plan</h3>';
+    h += '<div class="form-group"><label>Assessment</label><textarea id="f-assess" style="min-height:120px" onchange="CF.set(\'assessment\',this.value)">'+esc(S.caseData.assessment)+'</textarea></div>';
+    h += '<div class="form-group"><label>Plan</label><textarea id="f-plan" style="min-height:120px" onchange="CF.set(\'plan\',this.value)">'+esc(S.caseData.plan)+'</textarea></div>';
+  }
+  else if (step.id === 'teaching') {
+    h += '<h3>🎓 Teaching Points & References</h3>';
+    h += '<div class="form-group"><label>Key Learning Points (one per line)</label><textarea rows="5" onchange="CF.setTeaching(\'keyLearning\',this.value)">'+S.caseData.teachingPoints.keyLearning.join('\n')+'</textarea></div>';
+    h += '<div class="form-group"><label>Board Pearls (one per line)</label><textarea rows="5" onchange="CF.setTeaching(\'boardPearls\',this.value)">'+S.caseData.teachingPoints.boardPearls.join('\n')+'</textarea></div>';
+    h += '<div class="form-group"><label>ABAI Domain</label><select onchange="CF.setMeta(\'abai_domains\',[this.value])"><option value="">Select...</option>';
+    for(var d=1;d<=15;d++) h += '<option value="'+d+'"'+(S.meta.abai_domains[0]==d?' selected':'')+'>Domain '+d+'</option>';
+    h += '</select></div>';
+    h += '<div style="margin-top:12px"><button class="btn btn-outline btn-sm" onclick="CF.suggestRefs()">🔍 Suggest Open-Access References</button></div>';
+  }
+  else if (step.id === 'review') {
+    h += '<h3>✅ Review & Save</h3>';
+    h += renderPreview();
+
+    // Auto-run PHI scan
+    var phiFlags = runPHIScan();
+    var criticalFlags = phiFlags.filter(function(f){ return f.severity === 'critical'; });
+    var warningFlags = phiFlags.filter(function(f){ return f.severity === 'warning'; });
+    var infoFlags = phiFlags.filter(function(f){ return f.severity === 'info'; });
+
+    h += '<div class="section-hdr">🔒 PHI Screening Results</div>';
+    if (phiFlags.length === 0) {
+      h += '<div class="validation-item suggestion" style="background:var(--rdx-success-bg);color:var(--rdx-success)">✓ No potential PHI detected. Case appears to be properly de-identified.</div>';
+    } else {
+      if (criticalFlags.length) {
+        h += '<div style="padding:12px 16px;background:var(--rdx-danger-bg);border:1.5px solid rgba(220,38,38,.3);border-radius:var(--rdx-radius-sm);margin-bottom:12px">';
+        h += '<div style="font-weight:700;color:var(--rdx-danger);margin-bottom:6px">🚨 Critical — Must Resolve Before Saving (' + criticalFlags.length + ')</div>';
+        criticalFlags.forEach(function(f){ h += '<div class="validation-item error" style="margin-bottom:4px">• <strong>' + esc(f.type) + ':</strong> ' + esc(f.message) + '</div>'; });
+        h += '</div>';
+      }
+      if (warningFlags.length) {
+        h += '<div style="padding:12px 16px;background:var(--rdx-warning-bg);border:1.5px solid rgba(217,119,6,.25);border-radius:var(--rdx-radius-sm);margin-bottom:12px">';
+        h += '<div style="font-weight:700;color:var(--rdx-warning);margin-bottom:6px">⚠ Warnings — Review Recommended (' + warningFlags.length + ')</div>';
+        warningFlags.forEach(function(f){ h += '<div class="validation-item warning" style="margin-bottom:4px">• <strong>' + esc(f.type) + ':</strong> ' + esc(f.message) + '</div>'; });
+        h += '</div>';
+      }
+      if (infoFlags.length) {
+        h += '<div style="padding:12px 16px;background:var(--rdx-blue-bg);border:1.5px solid var(--rdx-blue-border);border-radius:var(--rdx-radius-sm);margin-bottom:12px">';
+        h += '<div style="font-weight:700;color:var(--rdx-blue);margin-bottom:6px">ℹ Info — Verify These Items (' + infoFlags.length + ')</div>';
+        infoFlags.forEach(function(f){ h += '<div class="validation-item suggestion" style="margin-bottom:4px">• <strong>' + esc(f.type) + ':</strong> ' + esc(f.message) + '</div>'; });
+        h += '</div>';
+      }
+    }
+
+    if (S.validationResult) {
+      h += '<div class="section-hdr">Clinical Validation Results</div>';
+      if (S.validationResult.issues) {
+        S.validationResult.issues.forEach(function(i){
+          h += '<div class="validation-item '+i.severity+'"><strong>'+esc(i.section)+':</strong> '+esc(i.message)+'</div>';
+        });
+      }
+      if (S.validationResult.valid) {
+        h += '<div class="validation-item suggestion" style="background:var(--rdx-success-bg);color:var(--rdx-success)">✓ Case passed clinical validation (score: '+(S.validationResult.score*100).toFixed(0)+'%)</div>';
+      }
+    }
+    h += '<div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">';
+    h += '<button class="btn btn-outline" onclick="CF.validate()" '+(S.validating?'disabled':'')+'>'+
+      (S.validating?'<span class="spinner"></span> Validating...':'🔍 Validate Clinical Accuracy')+'</button>';
+    var canSave = S.attested && criticalFlags.length === 0;
+    h += '<button class="btn btn-success" onclick="CF.saveCase()"' + (canSave ? '' : ' disabled') + '>💾 Save Case</button>';
+    if (!canSave) {
+      if (criticalFlags.length > 0) h += '<div style="font-size:11px;color:var(--rdx-danger);margin-top:6px">Resolve all critical PHI flags above before saving.</div>';
+      else if (!S.attested) h += '<div style="font-size:11px;color:var(--rdx-warning);margin-top:6px">Return to the Patient step and complete the de-identification attestation.</div>';
+    }
+    h += '</div>';
+  }
+
+  h += '</div>'; // end card
+
+  // Navigation
+  h += '<div style="display:flex;justify-content:space-between;margin-top:16px">';
+  h += S.step > 0 ? '<button class="btn btn-outline" onclick="CF.prevStep()">← Previous</button>' : '<div></div>';
+  h += S.step < STEPS.length - 1 ? '<button class="btn btn-primary" onclick="CF.nextStep()">Next →</button>' : '';
+  h += '</div>';
+
+  return h;
+}
+
+function renderPreview() {
+  var p = S.caseData.patient;
+  var h = '<div class="preview-emr">';
+  h += '<div class="preview-emr-header">📋 EMR Preview — ' + esc(p.name || 'Patient') + ' (' + esc(p.age) + esc(p.sex ? p.sex.charAt(0) : '') + ')</div>';
+  h += '<div class="preview-emr-body">';
+  h += '<strong>Chief Complaint:</strong> ' + esc(p.chiefComplaint) + '<br>';
+  h += '<strong>Diagnosis:</strong> ' + esc(p.diagnosis) + '<br><br>';
+  if (S.caseData.hpi) h += '<strong>HPI:</strong> ' + esc(S.caseData.hpi).substring(0, 300) + (S.caseData.hpi.length > 300 ? '...' : '') + '<br><br>';
+  if (S.caseData.problems.length) {
+    h += '<strong>Problems:</strong><br>';
+    S.caseData.problems.forEach(function(pr){ h += '• ' + esc(pr.problem) + ' (' + esc(pr.icd) + ') — ' + esc(pr.status) + '<br>'; });
+    h += '<br>';
+  }
+  if (S.caseData.assessment) h += '<strong>Assessment:</strong> ' + esc(S.caseData.assessment).substring(0, 200) + '<br><br>';
+  if (S.caseData.teachingPoints.keyLearning.length) {
+    h += '<strong>Teaching Points:</strong> ' + S.caseData.teachingPoints.keyLearning.length + ' key learning, ' + S.caseData.teachingPoints.boardPearls.length + ' board pearls<br>';
+  }
+  h += '</div></div>';
+  return h;
+}
+
+function renderMyCases() {
+  var h = '<div style="margin-bottom:16px"><button class="btn btn-outline btn-sm" onclick="CF.goHome()">← Back</button></div>';
+  h += '<h3 style="font-size:18px;font-weight:700;margin-bottom:16px">My Custom Cases (' + S.myCases.length + ')</h3>';
+  if (S.myCases.length === 0) {
+    h += '<div style="text-align:center;padding:48px;color:var(--rdx-text-muted)"><div style="font-size:48px;margin-bottom:12px">📂</div><p>No custom cases yet. Create one to get started!</p></div>';
+  }
+  S.myCases.forEach(function(c, idx){
+    h += '<div class="saved-case"><div>';
+    h += '<div style="font-size:14px;font-weight:700">' + esc(c.meta.title || c.caseData.patient.diagnosis || 'Untitled') + '</div>';
+    h += '<div style="font-size:12px;color:var(--rdx-text-muted)">' + esc(c.caseData.patient.name) + ' — ' + esc(c.caseData.patient.chiefComplaint||'').substring(0,60) + '</div>';
+    h += '</div><div style="display:flex;gap:6px">';
+    h += '<button class="btn btn-outline btn-sm" onclick="CF.editCase('+idx+')">Edit</button>';
+    h += '<button class="btn btn-outline btn-sm" onclick="CF.launchCase('+idx+')" style="color:var(--rdx-success);border-color:var(--rdx-success)">▶ Launch in EMR</button>';
+    h += '<button class="btn btn-outline btn-sm" onclick="CF.deleteCase('+idx+')" style="color:var(--rdx-danger);border-color:var(--rdx-danger)">✕</button>';
+    h += '</div></div>';
+  });
+  return h;
+}
+
+// ─── ACTIONS ───
+window.CF = {
+  goHome: function(){ S.view='home'; render(); },
+  startNew: function(){ S.view='mode-select'; S.mode=null; render(); },
+  showMyCases: function(){ S.view='my-cases'; render(); },
+  selectMode: function(m){ S.mode=m; render(); },
+  setAttest: function(v){ S.attested=v; render(); },
+  startBuilder: function(){
+    if(S.mode==='ai-assist'){ S.view='ai-parse'; }
+    else { S.view='builder'; S.step=0; }
+    render();
+  },
+  goStep: function(i){ S.step=i; render(); },
+  nextStep: function(){ if(S.step<STEPS.length-1){S.step++;render();} },
+  prevStep: function(){ if(S.step>0){S.step--;render();} },
+
+  set: function(path, val){
+    var parts=path.split('.'), obj=S.caseData;
+    for(var i=0;i<parts.length-1;i++) obj=obj[parts[i]];
+    obj[parts[parts.length-1]]=val;
+  },
+  setMeta: function(k,v){ S.meta[k]=v; },
+  setExam: function(f,v){ S.caseData.physicalExam[f]=v; },
+  setTeaching: function(k,v){ S.caseData.teachingPoints[k]=v.split('\n').filter(function(l){return l.trim();}); },
+  parseProblems: function(v){
+    S.caseData.problems = v.split('\n').filter(function(l){return l.trim();}).map(function(l){
+      var p=l.split('|').map(function(s){return s.trim();});
+      return {problem:p[0]||'',icd:p[1]||'',onset:'',status:p[2]||'Active',notes:''};
+    });
+  },
+  parseMeds: function(v){
+    S.caseData.medications = v.split('\n').filter(function(l){return l.trim();}).map(function(l){
+      var p=l.split('|').map(function(s){return s.trim();});
+      return {name:p[0]||'',dose:p[1]||'',route:p[2]||'Oral',frequency:'',indication:''};
+    });
+  },
+
+  aiParse: async function(){
+    if (!S.attested) { alert('You must complete the de-identification attestation before generating a case.'); return; }
+    var text=document.getElementById('aiInput').value.trim();
+    if(!text){alert('Please paste clinical information.');return;}
+    // Pre-screen for PHI before sending to AI
+    var inputFlags = scanForPHI(text);
+    var criticals = inputFlags.filter(function(f){ return f.severity === 'critical'; });
+    if (criticals.length > 0) {
+      var msg = 'Potential PHI detected in your input — please resolve before submitting:\n\n';
+      criticals.forEach(function(f){ msg += '• ' + f.type + ': ' + f.message + '\n'; });
+      msg += '\nRemove or replace the flagged items and try again.';
+      alert(msg);
+      return;
+    }
+    var warnings = inputFlags.filter(function(f){ return f.severity === 'warning'; });
+    if (warnings.length > 0) {
+      var wmsg = 'Possible PHI detected — please review:\n\n';
+      warnings.forEach(function(f){ wmsg += '• ' + f.type + ': ' + f.message + '\n'; });
+      wmsg += '\nDo you want to proceed? (You can fix these later in the builder.)';
+      if (!confirm(wmsg)) return;
+    }
+    var dx=document.getElementById('aiDx').value.trim();
+    var spec=document.getElementById('aiSpec').value;
+    S.parsing=true; render();
+    try{
+      var resp=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({type:'parse',text:text,diagnosis:dx||undefined,specialty:spec})});
+      var data=await resp.json();
+      if(data.success && data.data){
+        S.caseData=Object.assign(S.caseData, data.data);
+        if(dx) S.meta.title=dx;
+        S.view='builder'; S.step=0;
+      } else { alert('AI parsing failed: '+(data.error||'Unknown error')); }
+    }catch(e){ alert('Network error: '+e.message); }
+    S.parsing=false; render();
+  },
+
+  validate: async function(){
+    S.validating=true; S.validationResult=null; render();
+    try{
+      var resp=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({type:'validate',caseData:S.caseData})});
+      var data=await resp.json();
+      if(data.success) S.validationResult=data.data;
+      else S.validationResult={valid:false,score:0,issues:[{section:'System',severity:'error',message:data.error}]};
+    }catch(e){ S.validationResult={valid:false,score:0,issues:[{section:'Network',severity:'error',message:e.message}]}; }
+    S.validating=false; render();
+  },
+
+  suggestRefs: async function(){
+    var dx=S.caseData.patient.diagnosis;
+    if(!dx){alert('Enter a diagnosis first.');return;}
+    try{
+      var resp=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({type:'suggest-references',diagnosis:dx,specialty:S.meta.specialty})});
+      var data=await resp.json();
+      if(data.success && Array.isArray(data.data)){
+        S.caseData.references=data.data;
+        alert('Added '+data.data.length+' suggested references. Review them in the teaching step.');
+        render();
+      }
+    }catch(e){ alert('Error: '+e.message); }
+  },
+
+  saveCase: function(){
+    if (!S.attested) { alert('You must complete the de-identification attestation before saving a case.'); return; }
+    var phiCheck = runPHIScan();
+    var criticals = phiCheck.filter(function(f){ return f.severity === 'critical'; });
+    if (criticals.length > 0) {
+      alert('Cannot save: ' + criticals.length + ' critical PHI flag(s) detected. Go to the Review step to see details and resolve them.');
+      return;
+    }
+    var c={id:'case-'+Date.now(),caseData:JSON.parse(JSON.stringify(S.caseData)),meta:JSON.parse(JSON.stringify(S.meta)),status:'draft',savedAt:new Date().toISOString()};
+    S.myCases.push(c); save();
+    alert('Case saved!');
+    S.view='my-cases'; render();
+  },
+
+  editCase: function(idx){
+    var c=S.myCases[idx];
+    S.caseData=JSON.parse(JSON.stringify(c.caseData));
+    S.meta=JSON.parse(JSON.stringify(c.meta));
+    S.view='builder'; S.step=0;
+    S.myCases.splice(idx,1); save(); // remove old, will re-save
+    render();
+  },
+
+  launchCase: function(idx){
+    var c=S.myCases[idx];
+    // Store in sessionStorage for Virtual EMR to pick up
+    sessionStorage.setItem('caseforge-preview', JSON.stringify(c.caseData));
+    window.open('virtual-emr.html?custom=preview','_blank');
+  },
+
+  deleteCase: function(idx){
+    if(confirm('Delete this case?')){ S.myCases.splice(idx,1); save(); render(); }
+  }
+};
+
+render();
+})();
+</script>
+
+<script src="js/rdx-nav.js"></script>
+<script src="js/rdx-analytics-tracker.js"></script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2874A6">
+<title>StudyDx — MCQ Engine | ReasonDx</title>
+<meta name="description" content="Generate, study, and share high-quality MCQs mapped to ABAI domains and ACGME milestones. AI-powered question generation with quality audit.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.page{max-width:960px;margin:0 auto;padding:72px 16px 100px}
+.hero{background:linear-gradient(140deg,#1B4F72 0%,#2874A6 50%,#3498DB 100%);color:#fff;border-radius:16px;padding:32px 28px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::after{content:'📝';position:absolute;right:20px;top:12px;font-size:72px;opacity:.08;pointer-events:none}
+.hero h1{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.hero p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;max-width:600px}
+.hero-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.pill{font-size:10px;font-weight:700;padding:3px 10px;border-radius:5px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
+.tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--rdx-border);padding-bottom:0}
+.tab{padding:10px 18px;font-size:13px;font-weight:600;color:var(--rdx-text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;border-radius:8px 8px 0 0;background:none;border-left:none;border-right:none;border-top:none;font-family:var(--rdx-font)}
+.tab:hover{color:var(--rdx-text);background:var(--rdx-bg-hover)}
+.tab.on{color:var(--rdx-blue);border-bottom-color:var(--rdx-blue);background:var(--rdx-blue-bg)}
+.card{background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:24px;margin-bottom:16px;box-shadow:var(--rdx-shadow-sm)}
+.card h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.card p{font-size:13px;color:var(--rdx-text-secondary);line-height:1.6}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:700;color:var(--rdx-text-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+textarea,input[type="text"],input[type="number"],select{width:100%;padding:10px 14px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);font-family:var(--rdx-font);font-size:13px;color:var(--rdx-text);background:var(--rdx-bg-card);transition:border-color .15s;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--rdx-blue);box-shadow:0 0 0 3px var(--rdx-blue-bg)}
+textarea{min-height:120px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rdx-radius-sm);font-family:var(--rdx-font);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;border:none}
+.btn-primary{background:var(--rdx-blue);color:#fff}.btn-primary:hover{background:var(--rdx-blue-dark);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-outline{background:var(--rdx-bg-card);color:var(--rdx-text);border:1.5px solid var(--rdx-border)}.btn-outline:hover{border-color:var(--rdx-blue);color:var(--rdx-blue)}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-danger{background:var(--rdx-danger);color:#fff}.btn-danger:hover{opacity:.9}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row > *{flex:1;min-width:200px}
+.badge{display:inline-flex;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+.badge-blue{background:var(--rdx-blue-bg);color:var(--rdx-blue);border:1px solid var(--rdx-blue-border)}
+.badge-green{background:var(--rdx-success-bg);color:var(--rdx-success)}
+.badge-amber{background:var(--rdx-warning-bg);color:var(--rdx-warning)}
+.badge-red{background:var(--rdx-danger-bg);color:var(--rdx-danger)}
+.mcq-card{background:var(--rdx-bg-card);border:2px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:20px;margin-bottom:16px;transition:all .15s}
+.mcq-stem{font-size:14px;line-height:1.7;margin-bottom:16px;color:var(--rdx-text)}
+.mcq-option{padding:10px 14px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);margin-bottom:6px;font-size:13px;cursor:pointer;transition:all .12s;display:flex;align-items:flex-start;gap:10px}
+.mcq-option:hover{border-color:var(--rdx-blue);background:var(--rdx-blue-bg)}
+.mcq-option.selected{border-color:var(--rdx-blue);background:var(--rdx-blue-bg);font-weight:600}
+.mcq-option.correct{border-color:var(--rdx-success);background:var(--rdx-success-bg)}
+.mcq-option.incorrect{border-color:var(--rdx-danger);background:var(--rdx-danger-bg)}
+.mcq-option .letter{width:24px;height:24px;border-radius:50%;background:var(--rdx-bg);border:1.5px solid var(--rdx-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--rdx-text-muted)}
+.mcq-option.selected .letter{background:var(--rdx-blue);color:#fff;border-color:var(--rdx-blue)}
+.mcq-option.correct .letter{background:var(--rdx-success);color:#fff;border-color:var(--rdx-success)}
+.mcq-option.incorrect .letter{background:var(--rdx-danger);color:#fff;border-color:var(--rdx-danger)}
+.mcq-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.mcq-explain{margin-top:14px;padding:14px;background:var(--rdx-blue-bg);border-radius:var(--rdx-radius-sm);border-left:3px solid var(--rdx-blue);font-size:12.5px;line-height:1.65;color:var(--rdx-text-secondary)}
+.quality-bar{display:flex;align-items:center;gap:8px;margin-top:8px}
+.quality-fill{height:6px;border-radius:3px;flex:1;background:var(--rdx-border)}
+.quality-fill-inner{height:100%;border-radius:3px;transition:width .3s}
+.spinner{width:20px;height:20px;border:2.5px solid var(--rdx-border);border-top-color:var(--rdx-blue);border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-msg{display:flex;align-items:center;gap:10px;padding:20px;color:var(--rdx-text-muted);font-size:13px}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat-box{text-align:center;padding:14px;background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-sm)}
+.stat-num{font-size:24px;font-weight:800;color:var(--rdx-blue)}
+.stat-label{font-size:10px;font-weight:600;color:var(--rdx-text-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.empty-state{text-align:center;padding:48px 24px;color:var(--rdx-text-muted)}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+.coll-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);margin-bottom:8px;background:var(--rdx-bg-card);cursor:pointer;transition:all .15s}
+.coll-item:hover{border-color:var(--rdx-blue-border);transform:translateY(-1px);box-shadow:var(--rdx-shadow-sm)}
+@media(max-width:600px){.stat-row{grid-template-columns:repeat(2,1fr)}.row{flex-direction:column}.hero{padding:24px 20px}}
+</style>
+</head>
+<body>
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
+<script src="js/rdx-supabase.js"></script>
+
+<div class="page">
+  <div class="hero">
+    <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px"><a href="index.html" style="color:rgba(255,255,255,.6)">ReasonDx</a> → StudyDx</div>
+    <h1>StudyDx — MCQ Engine</h1>
+    <p>Generate high-quality board-style MCQs from platform content or your own resources. Every question is AI-audited for quality and mapped to ABAI domains and ACGME milestones.</p>
+    <div class="hero-pills">
+      <span class="pill">3-Pass Quality Pipeline</span>
+      <span class="pill">ABAI Domain Mapping</span>
+      <span class="pill">ACGME Milestones</span>
+      <span class="pill">Spaced Repetition</span>
+      <span class="pill">Share with Program</span>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="app"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var WORKER = 'https://studydx-engine.laurenmfine.workers.dev';
+
+// ─── STATE ───
+var S = {
+  tab: 'generate',
+  generating: false,
+  generated: [],        // questions from current generation
+  myQuestions: [],       // saved to account (localStorage for now, Supabase later)
+  collections: [],
+  activeCollection: null,
+  studyMode: false,
+  studyIndex: 0,
+  studyAnswered: false,
+  studySelected: -1,
+  stats: { total: 0, correct: 0, streak: 0, byDomain: {} }
+};
+
+// Load from localStorage
+try {
+  var saved = JSON.parse(localStorage.getItem('studydx-questions') || '[]');
+  S.myQuestions = saved;
+  var savedColl = JSON.parse(localStorage.getItem('studydx-collections') || '[]');
+  S.collections = savedColl;
+  var savedStats = JSON.parse(localStorage.getItem('studydx-stats'));
+  if (savedStats) S.stats = savedStats;
+} catch(e){}
+
+function save() {
+  localStorage.setItem('studydx-questions', JSON.stringify(S.myQuestions));
+  localStorage.setItem('studydx-collections', JSON.stringify(S.collections));
+  localStorage.setItem('studydx-stats', JSON.stringify(S.stats));
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ─── TABS ───
+function renderTabs() {
+  var tabs = [
+    {id:'generate', label:'✨ Generate', icon:''},
+    {id:'library', label:'📚 My Questions (' + S.myQuestions.length + ')'},
+    {id:'study', label:'🎯 Study Mode'},
+    {id:'collections', label:'📁 Collections'}
+  ];
+  document.getElementById('tabs').innerHTML = tabs.map(function(t){
+    return '<button class="tab'+(S.tab===t.id?' on':'')+'" onclick="SDX.setTab(\''+t.id+'\')">'+t.label+'</button>';
+  }).join('');
+}
+
+// ─── GENERATE TAB ───
+function renderGenerate() {
+  var h = '<div class="card"><h3>Generate MCQs</h3><p>Paste clinical content, teaching points, or reference material. The AI will generate board-quality questions with a 3-pass quality audit.</p></div>';
+
+  h += '<div class="card">';
+  h += '<div class="form-group"><label>Source Content</label>';
+  h += '<textarea id="genContent" placeholder="Paste clinical content, teaching points, board pearls, or reference material here...&#10;&#10;Example: Anaphylaxis is a severe allergic reaction involving IgE-mediated mast cell degranulation. The NIAID/FAAN criteria require involvement of 2 or more organ systems..."></textarea></div>';
+
+  h += '<div class="row">';
+  h += '<div class="form-group"><label>Topic Focus (optional)</label><input type="text" id="genTopic" placeholder="e.g., Anaphylaxis, Drug Allergy"></div>';
+  h += '<div class="form-group"><label>Difficulty (1-5)</label><select id="genDiff"><option value="">Auto</option><option value="1">1 — Recall</option><option value="2">2 — Basic Application</option><option value="3">3 — Clinical Reasoning</option><option value="4">4 — Complex Analysis</option><option value="5">5 — Expert Synthesis</option></select></div>';
+  h += '<div class="form-group"><label>Number of Questions</label><select id="genCount"><option value="1">1 question</option><option value="2">2 questions</option><option value="3">3 questions</option><option value="5">5 questions</option></select></div>';
+  h += '</div>';
+
+  h += '<div style="display:flex;gap:10px;align-items:center">';
+  h += '<button class="btn btn-primary" onclick="SDX.generate()" '+(S.generating?'disabled':'')+'>'+
+    (S.generating?'<span class="spinner"></span> Generating...':'✨ Generate MCQs')+'</button>';
+  if (S.generating) h += '<span style="font-size:12px;color:var(--rdx-text-muted)">Running 3-pass pipeline (generate → audit → tag)... this takes 15-30 seconds per question.</span>';
+  h += '</div></div>';
+
+  // Generated results
+  if (S.generated.length > 0) {
+    h += '<div style="margin-top:20px"><h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Generated Questions (' + S.generated.length + ')</h3>';
+    S.generated.forEach(function(r, idx) {
+      if (!r.success) {
+        h += '<div class="mcq-card" style="border-color:var(--rdx-danger);background:var(--rdx-danger-bg)">';
+        h += '<p style="color:var(--rdx-danger);font-weight:600">❌ Generation failed: ' + esc(r.error) + '</p>';
+        h += '</div>';
+        return;
+      }
+      var q = r.question, t = r.tags, qu = r.quality;
+      h += '<div class="mcq-card">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">';
+      h += '<div class="mcq-tags">';
+      if (t.abai_domain) h += '<span class="badge badge-blue">' + esc(t.abai_domain) + '</span>';
+      if (t.acgme_competency) h += '<span class="badge badge-green">ACGME ' + esc(t.acgme_competency) + (t.acgme_milestone_level ? ' L' + t.acgme_milestone_level : '') + '</span>';
+      if (t.blooms) h += '<span class="badge badge-amber">' + esc(t.blooms) + '</span>';
+      if (t.difficulty) h += '<span class="badge" style="background:var(--rdx-bg);color:var(--rdx-text-muted);border:1px solid var(--rdx-border)">Diff ' + t.difficulty + '/5</span>';
+      h += '</div>';
+      h += '<div class="quality-bar" style="width:120px" title="Quality: ' + (qu.score*100).toFixed(0) + '%"><div class="quality-fill"><div class="quality-fill-inner" style="width:' + (qu.score*100) + '%;background:' + (qu.score >= 0.85 ? 'var(--rdx-success)' : qu.score >= 0.75 ? 'var(--rdx-warning)' : 'var(--rdx-danger)') + '"></div></div><span style="font-size:10px;font-weight:700;color:var(--rdx-text-muted)">' + (qu.score*100).toFixed(0) + '%</span></div>';
+      h += '</div>';
+
+      h += '<div class="mcq-stem">' + esc(q.stem) + '</div>';
+      q.options.forEach(function(o, oi) {
+        var cls = oi === q.correct_index ? 'correct' : '';
+        h += '<div class="mcq-option ' + cls + '"><span class="letter">' + String.fromCharCode(65+oi) + '</span><div><span>' + esc(o.text) + '</span>';
+        if (o.explanation) h += '<div style="font-size:11px;color:var(--rdx-text-muted);margin-top:4px">' + esc(o.explanation) + '</div>';
+        h += '</div></div>';
+      });
+      h += '<div class="mcq-explain"><strong>Explanation:</strong> ' + esc(q.explanation) + '</div>';
+
+      h += '<div style="margin-top:14px;display:flex;gap:8px">';
+      h += '<button class="btn btn-primary btn-sm" onclick="SDX.saveQuestion('+idx+')">💾 Save to Library</button>';
+      h += '</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  return h;
+}
+
+// ─── LIBRARY TAB ───
+function renderLibrary() {
+  if (S.myQuestions.length === 0) {
+    return '<div class="empty-state"><div class="icon">📚</div><h3>No saved questions yet</h3><p>Generate MCQs in the Generate tab and save them to your library.</p></div>';
+  }
+
+  var h = '<div class="stat-row">';
+  h += '<div class="stat-box"><div class="stat-num">' + S.myQuestions.length + '</div><div class="stat-label">Questions</div></div>';
+  var domains = {};
+  S.myQuestions.forEach(function(q){ if(q.tags && q.tags.abai_domain_number) domains[q.tags.abai_domain_number] = true; });
+  h += '<div class="stat-box"><div class="stat-num">' + Object.keys(domains).length + '</div><div class="stat-label">ABAI Domains</div></div>';
+  h += '<div class="stat-box"><div class="stat-num">' + S.stats.correct + '</div><div class="stat-label">Correct</div></div>';
+  h += '<div class="stat-box"><div class="stat-num">' + (S.stats.total > 0 ? Math.round(S.stats.correct/S.stats.total*100) : 0) + '%</div><div class="stat-label">Accuracy</div></div>';
+  h += '</div>';
+
+  S.myQuestions.forEach(function(q, idx){
+    h += '<div class="mcq-card" style="padding:14px 16px">';
+    h += '<div style="display:flex;justify-content:space-between;align-items:center">';
+    h += '<div style="flex:1;min-width:0">';
+    h += '<div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(q.question.stem.substring(0, 120)) + '...</div>';
+    h += '<div class="mcq-tags" style="margin-top:6px">';
+    if (q.tags && q.tags.abai_domain) h += '<span class="badge badge-blue" style="font-size:9px">' + esc(q.tags.abai_domain) + '</span>';
+    if (q.tags && q.tags.acgme_competency) h += '<span class="badge badge-green" style="font-size:9px">' + esc(q.tags.acgme_competency) + '</span>';
+    h += '</div></div>';
+    h += '<button class="btn btn-outline btn-sm" onclick="SDX.deleteQuestion('+idx+')" style="flex-shrink:0;margin-left:12px;color:var(--rdx-danger);border-color:var(--rdx-danger)">✕</button>';
+    h += '</div></div>';
+  });
+
+  return h;
+}
+
+// ─── STUDY MODE ───
+function renderStudy() {
+  if (S.myQuestions.length === 0) {
+    return '<div class="empty-state"><div class="icon">🎯</div><h3>No questions to study</h3><p>Save some MCQs to your library first.</p></div>';
+  }
+
+  if (!S.studyMode) {
+    var h = '<div class="card" style="text-align:center;padding:40px">';
+    h += '<div style="font-size:48px;margin-bottom:12px">🎯</div>';
+    h += '<h3 style="margin-bottom:8px">Study Mode</h3>';
+    h += '<p style="margin-bottom:20px">' + S.myQuestions.length + ' questions in your library. Answer them one by one with instant feedback.</p>';
+    h += '<button class="btn btn-primary" onclick="SDX.startStudy()">Start Studying</button>';
+    h += '</div>';
+    return h;
+  }
+
+  var q = S.myQuestions[S.studyIndex];
+  if (!q) { S.studyMode = false; return renderStudy(); }
+
+  var h = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">';
+  h += '<span style="font-size:12px;font-weight:600;color:var(--rdx-text-muted)">Question ' + (S.studyIndex+1) + ' / ' + S.myQuestions.length + '</span>';
+  h += '<button class="btn btn-outline btn-sm" onclick="SDX.endStudy()">End Session</button>';
+  h += '</div>';
+
+  h += '<div class="mcq-card">';
+  if (q.tags) {
+    h += '<div class="mcq-tags" style="margin-bottom:12px">';
+    if (q.tags.abai_domain) h += '<span class="badge badge-blue">' + esc(q.tags.abai_domain) + '</span>';
+    if (q.tags.acgme_competency) h += '<span class="badge badge-green">ACGME ' + esc(q.tags.acgme_competency) + '</span>';
+    h += '</div>';
+  }
+  h += '<div class="mcq-stem">' + esc(q.question.stem) + '</div>';
+
+  q.question.options.forEach(function(o, oi) {
+    var cls = '';
+    if (S.studyAnswered) {
+      if (oi === q.question.correct_index) cls = 'correct';
+      else if (oi === S.studySelected) cls = 'incorrect';
+    } else if (oi === S.studySelected) {
+      cls = 'selected';
+    }
+    h += '<div class="mcq-option ' + cls + '" onclick="SDX.selectOption('+oi+')">';
+    h += '<span class="letter">' + String.fromCharCode(65+oi) + '</span>';
+    h += '<span>' + esc(o.text) + '</span></div>';
+  });
+
+  if (!S.studyAnswered && S.studySelected >= 0) {
+    h += '<div style="margin-top:14px"><button class="btn btn-primary" onclick="SDX.submitAnswer()">Submit Answer</button></div>';
+  }
+
+  if (S.studyAnswered) {
+    var isCorrect = S.studySelected === q.question.correct_index;
+    h += '<div style="margin-top:14px;padding:12px;border-radius:var(--rdx-radius-sm);background:' + (isCorrect ? 'var(--rdx-success-bg)' : 'var(--rdx-danger-bg)') + ';border-left:3px solid ' + (isCorrect ? 'var(--rdx-success)' : 'var(--rdx-danger)') + '">';
+    h += '<div style="font-weight:700;font-size:14px;color:' + (isCorrect ? 'var(--rdx-success)' : 'var(--rdx-danger)') + '">' + (isCorrect ? '✓ Correct!' : '✗ Incorrect') + '</div>';
+    h += '</div>';
+    h += '<div class="mcq-explain"><strong>Explanation:</strong> ' + esc(q.question.explanation) + '</div>';
+    h += '<div style="margin-top:14px;display:flex;gap:8px">';
+    h += '<button class="btn btn-primary" onclick="SDX.nextQuestion()">Next Question →</button>';
+    h += '</div>';
+  }
+
+  h += '</div>';
+
+  // Stats bar
+  h += '<div style="display:flex;gap:16px;margin-top:12px;justify-content:center">';
+  h += '<span style="font-size:12px;color:var(--rdx-text-muted)">Session: <strong>' + S.stats.correct + '/' + S.stats.total + '</strong></span>';
+  h += '<span style="font-size:12px;color:var(--rdx-text-muted)">Streak: <strong>' + S.stats.streak + '</strong> 🔥</span>';
+  h += '</div>';
+
+  return h;
+}
+
+// ─── COLLECTIONS TAB ───
+function renderCollections() {
+  var h = '<div class="card"><h3>Question Collections</h3><p>Organize your questions into shareable sets for focused study or program-wide formative assessment.</p>';
+  h += '<div style="margin-top:12px"><button class="btn btn-primary btn-sm" onclick="SDX.createCollection()">+ New Collection</button></div></div>';
+
+  if (S.collections.length === 0) {
+    h += '<div class="empty-state"><div class="icon">📁</div><h3>No collections yet</h3><p>Create a collection to organize and share your MCQs.</p></div>';
+  } else {
+    S.collections.forEach(function(c, idx) {
+      h += '<div class="coll-item">';
+      h += '<div><div style="font-size:14px;font-weight:700">' + esc(c.title) + '</div>';
+      h += '<div style="font-size:12px;color:var(--rdx-text-muted)">' + (c.questionIds||[]).length + ' questions</div></div>';
+      h += '<div style="display:flex;gap:6px">';
+      h += '<span class="badge badge-blue">' + (c.visibility || 'private') + '</span>';
+      h += '<button class="btn btn-outline btn-sm" onclick="SDX.deleteCollection('+idx+')">✕</button>';
+      h += '</div></div>';
+    });
+  }
+
+  return h;
+}
+
+// ─── RENDER ───
+function render() {
+  renderTabs();
+  var h = '';
+  if (S.tab === 'generate') h = renderGenerate();
+  else if (S.tab === 'library') h = renderLibrary();
+  else if (S.tab === 'study') h = renderStudy();
+  else if (S.tab === 'collections') h = renderCollections();
+  document.getElementById('app').innerHTML = h;
+}
+
+// ─── ACTIONS ───
+window.SDX = {
+  setTab: function(t) { S.tab = t; S.studyMode = false; render(); },
+
+  generate: async function() {
+    var content = document.getElementById('genContent').value.trim();
+    if (!content) { alert('Please enter some source content.'); return; }
+    var topic = document.getElementById('genTopic').value.trim();
+    var diff = document.getElementById('genDiff').value;
+    var count = parseInt(document.getElementById('genCount').value) || 1;
+
+    S.generating = true;
+    S.generated = [];
+    render();
+
+    try {
+      var resp = await fetch(WORKER, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'generate',
+          content: content,
+          topic: topic || undefined,
+          difficulty: diff ? parseInt(diff) : undefined,
+          count: count
+        })
+      });
+      var data = await resp.json();
+      if (data.success) {
+        S.generated = data.data;
+      } else {
+        S.generated = [{ success: false, error: data.error || 'Unknown error' }];
+      }
+    } catch(e) {
+      S.generated = [{ success: false, error: 'Network error: ' + e.message }];
+    }
+
+    S.generating = false;
+    render();
+  },
+
+  saveQuestion: function(idx) {
+    var r = S.generated[idx];
+    if (!r || !r.success) return;
+    S.myQuestions.push({
+      id: 'mcq-' + Date.now() + '-' + Math.random().toString(36).substr(2,6),
+      question: r.question,
+      tags: r.tags,
+      quality: r.quality,
+      savedAt: new Date().toISOString()
+    });
+    save();
+    S.generated.splice(idx, 1);
+    render();
+  },
+
+  deleteQuestion: function(idx) {
+    if (confirm('Delete this question?')) {
+      S.myQuestions.splice(idx, 1);
+      save();
+      render();
+    }
+  },
+
+  startStudy: function() {
+    S.studyMode = true;
+    S.studyIndex = 0;
+    S.studyAnswered = false;
+    S.studySelected = -1;
+    // Shuffle
+    S.myQuestions.sort(function() { return Math.random() - 0.5; });
+    render();
+  },
+
+  endStudy: function() {
+    S.studyMode = false;
+    render();
+  },
+
+  selectOption: function(idx) {
+    if (S.studyAnswered) return;
+    S.studySelected = idx;
+    render();
+  },
+
+  submitAnswer: function() {
+    if (S.studySelected < 0) return;
+    S.studyAnswered = true;
+    var q = S.myQuestions[S.studyIndex];
+    var isCorrect = S.studySelected === q.question.correct_index;
+    S.stats.total++;
+    if (isCorrect) { S.stats.correct++; S.stats.streak++; }
+    else { S.stats.streak = 0; }
+    // Track by domain
+    if (q.tags && q.tags.abai_domain_number) {
+      var dn = q.tags.abai_domain_number;
+      if (!S.stats.byDomain[dn]) S.stats.byDomain[dn] = {total:0, correct:0};
+      S.stats.byDomain[dn].total++;
+      if (isCorrect) S.stats.byDomain[dn].correct++;
+    }
+    save();
+    render();
+  },
+
+  nextQuestion: function() {
+    S.studyIndex++;
+    if (S.studyIndex >= S.myQuestions.length) S.studyIndex = 0;
+    S.studyAnswered = false;
+    S.studySelected = -1;
+    render();
+  },
+
+  createCollection: function() {
+    var title = prompt('Collection name:');
+    if (!title) return;
+    S.collections.push({
+      id: 'coll-' + Date.now(),
+      title: title,
+      questionIds: [],
+      visibility: 'private',
+      createdAt: new Date().toISOString()
+    });
+    save();
+    render();
+  },
+
+  deleteCollection: function(idx) {
+    if (confirm('Delete this collection?')) {
+      S.collections.splice(idx, 1);
+      save();
+      render();
+    }
+  }
+};
+
+render();
+})();
+</script>
+
+<script src="js/rdx-nav.js"></script>
+<script src="js/rdx-analytics-tracker.js"></script>
+</body>
+</html>

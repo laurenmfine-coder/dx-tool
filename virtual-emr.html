@@ -2085,6 +2085,23 @@ function sendCoachMessage(){
     caseContext+="CC: "+(PATIENT.chiefComplaint||"See chart")+". ";
     if(PATIENT.diagnosis)caseContext+="Diagnosis: "+PATIENT.diagnosis+". ";
   }
+  // Enrich context with clinical data so CoachDx can coach on the actual case
+  if(typeof PROBLEMS!=="undefined"&&PROBLEMS&&PROBLEMS.length){
+    var probList=PROBLEMS.slice(0,8).map(function(p){return typeof p==="string"?p:(p.problem||p.description||"")}).filter(Boolean);
+    if(probList.length) caseContext+="\nProblem List: "+probList.join("; ")+". ";
+  }
+  if(typeof MEDICATIONS!=="undefined"&&MEDICATIONS&&MEDICATIONS.length){
+    var medList=MEDICATIONS.slice(0,8).map(function(m){return m.name||""}).filter(Boolean);
+    if(medList.length) caseContext+="\nMedications: "+medList.join(", ")+". ";
+  }
+  if(typeof ALLERGIES!=="undefined"&&ALLERGIES&&ALLERGIES.length){
+    var allergyList=ALLERGIES.map(function(a){return(a.allergen||"")+(a.reaction?" ("+a.reaction+")":"")}).filter(Boolean);
+    if(allergyList.length) caseContext+="\nAllergies: "+allergyList.join(", ")+". ";
+  }
+  if(typeof VITALS!=="undefined"&&VITALS){
+    var vRows=Array.isArray(VITALS)?VITALS:(VITALS.rows||[]);
+    if(vRows.length){var v=vRows[0];caseContext+="\nVitals: "+(v.bp?"BP "+v.bp+" ":"")+(v.hr?"HR "+v.hr+" ":"")+(v.rr?"RR "+v.rr+" ":"")+(v.spo2?"SpO2 "+v.spo2+" ":"")+(v.temp?"Temp "+v.temp:"")+".";}
+  }
   
   // Get handoff data if available
   var handoff=null;

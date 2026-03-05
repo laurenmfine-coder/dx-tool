@@ -16,7 +16,7 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-const MODEL = 'claude-sonnet-4-5-20250514';
+const MODEL = 'claude-sonnet-4-20250514';
 const MAX_RETRIES = 3;
 
 // ═══════════════════════════════════════

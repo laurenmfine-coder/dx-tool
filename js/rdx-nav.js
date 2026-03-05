@@ -28,7 +28,8 @@
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
       dd('Learn', sec==='learn',
         di(R+'pathway.html','','MechanismDx','Pathophysiology tutor \u2014 560 topics')+
-        di(R+'allergy-pathway.html','','A/I Pathway','Allergy & Immunology curriculum')
+        di(R+'allergy-pathway.html','','A/I Pathway','Allergy & Immunology curriculum')+
+        di(R+'studydx.html','','StudyDx','AI-generated MCQs \u2014 board quality')
       )+
       dd('Practice', sec==='practice',
         di(R+'consult-callback.html','','Clinical Reasoning','Consult callbacks & diagnostic cases')+
@@ -44,7 +45,8 @@
       )+
       dd('Fellowship', sec==='fellowship',
         di(R+'milestone-tracker.html','','Milestone Tracker','ACGME A/I milestones')+
-        di(R+'cohort-analytics.html','','Cohort Analytics','Program-level fellow comparison')
+        di(R+'cohort-analytics.html','','Cohort Analytics','Program-level fellow comparison')+
+        di(R+'caseforge.html','','CaseForge','Custom case builder for programs')
       )+
       dd('Analytics', sec==='analytics',
         di(R+'learning-analytics.html','','Learning Analytics','Cross-tool performance & RPFS')+
