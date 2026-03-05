@@ -1151,6 +1151,14 @@ function getSupabaseUser(){
 }
 
 function initDB(){
+  // Auto-clear stale cache if localStorage is near quota
+  try{var _t='rdx-quota-test';localStorage.setItem(_t,'1');localStorage.removeItem(_t);}
+  catch(e){
+    ['rdx-emr-','vemr-tracking-','rdx-case-','coach-'].forEach(function(p){
+      Object.keys(localStorage).filter(function(k){return k.startsWith(p);}).forEach(function(k){try{localStorage.removeItem(k);}catch(e2){}});
+    });
+    console.warn('localStorage quota: cleared stale cache');
+  }
   if(!db("assignments"))dbSet("assignments",{});
   if(!db("emr-roles"))dbSet("emr-roles",{});
   if(!db("emr-users"))dbSet("emr-users",{});
@@ -1695,7 +1703,10 @@ function loadUserData(){
   var _urlP=new URLSearchParams(location.search);
   var asUid=_urlP.get('as');
   if(asUid && (S.currentUser.role==='admin'||S.currentUser.role==='faculty')){
-    const studentSubs=db('subs-'+asUid)||[];
+    // Read directly from localStorage as fallback (quota errors can cause db() to return null)
+    var _rawSubs=null;
+    try{_rawSubs=JSON.parse(localStorage.getItem('subs-'+asUid));}catch(e){}
+    const studentSubs=_rawSubs||db('subs-'+asUid)||[];
     S.allSubmissions=studentSubs.map(function(s){return Object.assign({},s,{studentName:asUid});});
     if(S.allSubmissions.length){
       const firstSub=S.allSubmissions[0];
