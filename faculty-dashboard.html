@@ -215,6 +215,9 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
     <button class="fac-sidebar-btn" onclick="showView('analytics')" id="sb-analytics">
       📈 Class Analytics
     </button>
+    <button class="fac-sidebar-btn" onclick="showView('studentview')" id="sb-studentview" style="border-left:3px solid #7C3AED">
+      👁️ Student View
+    </button>
     <div class="fac-sidebar-section" style="margin-top:12px">Quick Actions</div>
     <button class="fac-sidebar-btn" onclick="window.location.href='virtual-emr.html'">
       🏥 Enter EMR
@@ -439,6 +442,7 @@ function showView(view) {
     case 'roster':      main.innerHTML = renderRoster();      break;
     case 'assignments': main.innerHTML = renderAssignments(); break;
     case 'analytics':   main.innerHTML = renderAnalytics();   break;
+    case 'studentview': main.innerHTML = renderStudentView(); break;
     default:            main.innerHTML = renderOverview();
   }
 }
@@ -874,8 +878,221 @@ function renderAnalytics() {
   return html;
 }
 
+
+// ── STUDENT VIEW (Admin-only: inspect any student's full session) ──────────────
+function renderStudentView() {
+  var isAdmin = FAC.currentUser && (FAC.currentUser.role === 'admin' || FAC.currentUser.tier === 'admin');
+  if (!isAdmin) {
+    return '<div class="fac-empty"><div class="fac-empty-icon">🔒</div><div class="fac-empty-title">Admin Only</div><div class="fac-empty-desc">Student View is only available to course administrators. Contact your admin if you need to retrieve a student submission.</div></div>';
+  }
+
+  var allStudents = FAC.allStudents.length > 0 ? FAC.allStudents : Object.values(getUsers()).filter(function(u){ return getEMRRole(u.username) === 'student'; });
+  var selectedUid = FAC._svSelectedStudent || null;
+  var selectedSub = FAC._svSelectedSub || null;
+
+  var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">👁️ Student View — Admin Access</div>';
+  html += '<div class="fac-section-sub">Inspect any student&#8217;s documentation, EMR activity, annotations, and feedback</div></div>';
+  // Demo data button
+  html += '<button onclick="loadDemoData()" style="padding:8px 16px;background:#7C3AED;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">⚡ Load Demo Data</button>';
+  html += '</div>';
+
+  // ── Student selector ─────────────────────────────────────────────────────
+  html += '<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px">';
+  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:12px">Select Student to Inspect</div>';
+
+  if (allStudents.length === 0) {
+    html += '<div style="font-size:13px;color:var(--text-muted);font-style:italic">No students found. Click "Load Demo Data" to populate sample students and submissions.</div></div>';
+    return html;
+  }
+
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">';
+  allStudents.forEach(function(s) {
+    var subs = getSubmissionsForStudent(s.username);
+    var hasFB = subs.some(function(sub){ return hasFeedback(s.username, sub.week); });
+    var isSelected = selectedUid === s.username;
+    var assignments = getAssignments();
+    var assignedTo = Object.keys(assignments).find(function(f){ return (assignments[f]||[]).indexOf(s.username)>=0; });
+    var assignedLabel = assignedTo ? (getUsers()[assignedTo] ? getUsers()[assignedTo].displayName : assignedTo) : '—';
+    html += '<div data-svuid="' + esc(s.username) + '" onclick="svSelectStudent(this.dataset.svuid)" style="padding:14px;border:2px solid ' + (isSelected ? 'var(--primary)' : 'var(--border)') + ';border-radius:10px;cursor:pointer;background:' + (isSelected ? 'var(--primary-light)' : '#fff') + ';transition:all .15s">';
+    html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+    html += '<div style="width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">' + esc(initials(s.displayName)) + '</div>';
+    html += '<div><div style="font-size:13px;font-weight:700">' + esc(s.displayName) + '</div><div style="font-size:11px;color:var(--text-muted)">' + esc(s.username) + '</div></div>';
+    html += '</div>';
+    html += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+    html += '<span style="font-size:10px;padding:2px 7px;border-radius:8px;background:var(--bg);color:var(--text-muted);border:1px solid var(--border)">' + subs.length + ' submission' + (subs.length!==1?'s':'') + '</span>';
+    if (hasFB) html += '<span style="font-size:10px;padding:2px 7px;border-radius:8px;background:var(--accent-light);color:var(--accent);border:1px solid #A7F3D0">✓ Graded</span>';
+    html += '<span style="font-size:10px;padding:2px 7px;border-radius:8px;background:#F5F3FF;color:#7C3AED;border:1px solid #DDD6FE">→ ' + esc(assignedLabel.split(' ').slice(-1)[0]) + '</span>';
+    html += '</div></div>';
+  });
+  html += '</div></div>';
+
+  // ── Selected student detail ──────────────────────────────────────────────
+  if (selectedUid) {
+    var student = allStudents.find(function(s){ return s.username === selectedUid; }) || { username: selectedUid, displayName: selectedUid };
+    var subs = getSubmissionsForStudent(selectedUid);
+
+    html += '<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px">';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">';
+    html += '<div style="display:flex;align-items:center;gap:12px">';
+    html += '<div style="width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">' + esc(initials(student.displayName)) + '</div>';
+    html += '<div><div style="font-size:17px;font-weight:700">' + esc(student.displayName) + '</div><div style="font-size:12px;color:var(--text-muted)">' + esc(student.username) + ' · ' + subs.length + ' submission(s)</div></div>';
+    html += '</div>';
+    html += '<a href="virtual-emr.html?as=' + encodeURIComponent(selectedUid) + '" target="_blank" style="padding:8px 16px;background:var(--primary);color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:6px">🔗 Open Student EMR Session →</a>';
+    html += '</div>';
+
+    if (subs.length === 0) {
+      html += '<div style="font-size:13px;color:var(--text-muted);font-style:italic;padding:20px 0">No submissions found for this student.</div>';
+    } else {
+      // Submission tabs
+      html += '<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">';
+      subs.forEach(function(sub, i) {
+        var isActiveSub = selectedSub ? (selectedSub.timestamp === sub.timestamp) : (i === 0);
+        if (i === 0 && !selectedSub) FAC._svSelectedSub = sub;
+        html += '<button data-svidx="' + i + '" onclick="svSelectSub(' + JSON.stringify(selectedUid) + ',this.dataset.svidx)' + i + ')" style="padding:7px 14px;border-radius:8px;border:1px solid ' + (isActiveSub ? 'var(--primary)' : 'var(--border)') + ';background:' + (isActiveSub ? 'var(--primary-light)' : '#fff') + ';color:' + (isActiveSub ? 'var(--primary)' : 'var(--text-muted)') + ';font-size:11px;font-weight:600;cursor:pointer;font-family:inherit">' + esc(sub.week || 'Submission ' + (i+1)) + '</button>';
+      });
+      html += '</div>';
+
+      // Show selected submission
+      var dispSub = selectedSub || subs[0];
+      if (dispSub) {
+        html += renderStudentDoc(selectedUid, dispSub);
+      }
+    }
+    html += '</div>';
+  }
+
+  return html;
+}
+
+function renderStudentDoc(uid, sub) {
+  var week = sub.week || '';
+  var fb = db('feedback-' + uid + '-' + week);
+  var annotations = db('annotations-' + uid + '-' + week) || [];
+  var noteFields = sub.fields || {};
+  var html = '';
+
+  // ── Split view: note left, feedback right ────────────────────────────────
+  html += '<div style="display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start">';
+
+  // Left: student note
+  html += '<div>';
+  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:10px">📄 Student Documentation — ' + esc(week) + '</div>';
+
+  var sections = [
+    { id:'hpi', label:'History of Present Illness', color:'#2874A6' },
+    { id:'assessment', label:'Assessment & Differential', color:'#1B5E3B' },
+    { id:'plan', label:'Management Plan', color:'#D97706' },
+    { id:'communication', label:'Communication & Organization', color:'#7C3AED' },
+  ];
+
+  sections.forEach(function(sec) {
+    var text = noteFields[sec.id] || (sub.text ? sub.text.split('\n\n')[0] : '');
+    if (!text && !noteFields[sec.id]) return;
+    var secAnnotations = annotations.filter(function(a){ return text && text.indexOf(a.selectedText) >= 0; });
+    html += '<div style="margin-bottom:16px;border:1px solid var(--border);border-radius:10px;overflow:hidden">';
+    html += '<div style="padding:10px 14px;background:' + sec.color + '18;border-bottom:1px solid ' + sec.color + '30;display:flex;align-items:center;justify-content:space-between">';
+    html += '<span style="font-size:12px;font-weight:700;color:' + sec.color + '">' + sec.label + '</span>';
+    if (secAnnotations.length) html += '<span style="font-size:10px;background:' + sec.color + ';color:#fff;padding:2px 8px;border-radius:8px">' + secAnnotations.length + ' annotation' + (secAnnotations.length!==1?'s':'') + '</span>';
+    html += '</div>';
+    // Render text with annotation highlights
+    var displayText = esc(noteFields[sec.id] || '');
+    secAnnotations.forEach(function(a) {
+      displayText = displayText.replace(esc(a.selectedText), '<mark style="background:' + (a.color||'#FEF9C3') + '30;border-bottom:2px solid ' + (a.color||'#EAB308') + ';cursor:help" title="' + esc(a.comment) + '">' + esc(a.selectedText) + '</mark>');
+    });
+    html += '<pre style="padding:14px;font-family:monospace;font-size:11.5px;line-height:1.7;white-space:pre-wrap;color:var(--text);margin:0;background:#FAFBFC">' + displayText + '</pre>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Right: feedback + annotations panel
+  html += '<div>';
+
+  // Annotations panel
+  if (annotations.length > 0) {
+    html += '<div style="border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden">';
+    html += '<div style="padding:10px 14px;background:#F0F9FF;border-bottom:1px solid #BAE6FD;font-size:12px;font-weight:700;color:#0369A1">💬 Annotations (' + annotations.length + ')</div>';
+    annotations.forEach(function(a, i) {
+      html += '<div style="padding:12px 14px' + (i < annotations.length-1 ? ';border-bottom:1px solid var(--border)' : '') + '">';
+      html += '<div style="font-size:11px;font-family:monospace;background:' + (a.color||'#2874A6') + '15;border-left:3px solid ' + (a.color||'#2874A6') + ';padding:6px 10px;border-radius:0 6px 6px 0;margin-bottom:6px;color:var(--text)">"' + esc((a.selectedText||'').substring(0, 80)) + (a.selectedText && a.selectedText.length > 80 ? '…' : '') + '"</div>';
+      html += '<div style="font-size:12px;color:var(--text-secondary);line-height:1.5">' + esc(a.comment) + '</div>';
+      html += '<div style="font-size:10px;color:var(--text-muted);margin-top:4px">— ' + esc(a.grader) + ' · ' + relTime(a.timestamp) + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Rubric scores
+  if (fb) {
+    var pct = fb.maxScore > 0 ? Math.round((fb.totalScore/fb.maxScore)*100) : 0;
+    var gradeColor = pct >= 90 ? '#059669' : pct >= 75 ? '#D97706' : '#DC2626';
+    html += '<div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">';
+    html += '<div style="padding:10px 14px;background:var(--accent-light);border-bottom:1px solid #A7F3D0;display:flex;align-items:center;justify-content:space-between">';
+    html += '<span style="font-size:12px;font-weight:700;color:var(--accent)">✅ Graded Feedback</span>';
+    html += '<span style="font-size:18px;font-weight:800;color:' + gradeColor + '">' + fb.totalScore + '<span style="font-size:13px;color:var(--text-muted)">/' + fb.maxScore + '</span></span>';
+    html += '</div>';
+    RUBRIC.forEach(function(r) {
+      var score = parseInt(fb.scores && fb.scores[r.id]) || 0;
+      var comment = fb.comments && fb.comments[r.id];
+      var pctR = Math.round((score/r.max)*100);
+      html += '<div style="padding:10px 14px;border-bottom:1px solid var(--border)">';
+      html += '<div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:600">' + esc(r.label) + '</span><span style="font-size:12px;font-weight:700;color:var(--primary)">' + score + '/' + r.max + '</span></div>';
+      html += '<div style="height:5px;background:var(--bg);border-radius:3px;margin-bottom:5px"><div style="height:5px;border-radius:3px;background:' + (pctR>=80?'#059669':pctR>=60?'#D97706':'#DC2626') + ';width:' + pctR + '%"></div></div>';
+      if (comment) html += '<div style="font-size:11px;color:var(--text-secondary);font-style:italic">' + esc(comment) + '</div>';
+      html += '</div>';
+    });
+    if (fb.overallComment) {
+      html += '<div style="padding:12px 14px;background:#FAFBFC">';
+      html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:6px">Overall Feedback</div>';
+      html += '<div style="font-size:12px;color:var(--text);line-height:1.6">' + esc(fb.overallComment) + '</div>';
+      html += '<div style="font-size:10px;color:var(--text-muted);margin-top:6px">— ' + esc(fb.grader) + ' · ' + relTime(fb.timestamp) + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  } else {
+    html += '<div style="border:1px solid #FDE68A;border-radius:10px;padding:16px;background:#FFFBEB">';
+    html += '<div style="font-size:12px;font-weight:700;color:#92400E;margin-bottom:6px">⏳ Not Yet Graded</div>';
+    html += '<div style="font-size:12px;color:#92400E">This submission has not received faculty feedback yet.</div>';
+    html += '<button onclick="svOpenGrade()" style="margin-top:10px;padding:7px 14px;background:var(--primary);color:#fff;border:none;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">Grade Now →</button>';
+    html += '</div>';
+  }
+  html += '</div>';
+  html += '</div>';
+  return html;
+}
+
+window.svSelectStudent = function(uid) {
+  FAC._svSelectedStudent = uid;
+  FAC._svSelectedSub = null;
+  showView('studentview');
+};
+window.svSelectSub = function(uid, idx) {
+  FAC._svSelectedStudent = uid;
+  var subs = getSubmissionsForStudent(uid);
+  FAC._svSelectedSub = subs[idx] || null;
+  showView('studentview');
+};
+window.svOpenGrade = function() {
+  if (!FAC._svSelectedSub || !FAC._svSelectedStudent) return;
+  var sub = Object.assign({ studentName: FAC._svSelectedStudent, studentDisplay: (getUsers()[FAC._svSelectedStudent]||{}).displayName || FAC._svSelectedStudent }, FAC._svSelectedSub);
+  var idx = FAC.submissions.findIndex(function(s){ return s.studentName === FAC._svSelectedStudent && s.timestamp === FAC._svSelectedSub.timestamp; });
+  if (idx >= 0) {
+    window.openGrade(idx);
+  } else {
+    FAC.submissions.push(sub);
+    window.openGrade(FAC.submissions.length - 1);
+  }
+};
+window.loadDemoData = function() {
+  if (window.RDXDemoData) {
+    RDXDemoData.inject();
+  } else {
+    toast('Demo data module not loaded. Add ?demo=1 to URL.');
+  }
+};
+
 // ── Init ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', init);
 </script>
+<script src="js/rdx-demo-data.js"></script>
 </body>
 </html>
