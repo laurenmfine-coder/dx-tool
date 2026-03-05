@@ -220,10 +220,22 @@
             clearInterval(_edRetry);
             var ph = document.getElementById('ed-board-placeholder');
             if (ph) {
-              var wrapper = document.createElement('div');
-              wrapper.innerHTML = EDTrackBoard.render();
-              ph.parentNode.replaceChild(wrapper.firstChild || wrapper, ph);
-              setTimeout(function() { EDTrackBoard.startSimulation(); }, 100);
+              // Create a temporary container to parse the HTML properly
+              // so <style> tags are NOT stripped by replaceChild
+              var tempDiv = document.createElement('div');
+              tempDiv.innerHTML = EDTrackBoard.render();
+              // Move all children (board div + any other nodes) to replace placeholder
+              var parent = ph.parentNode;
+              while (tempDiv.firstChild) {
+                parent.insertBefore(tempDiv.firstChild, ph);
+              }
+              parent.removeChild(ph);
+              // Use double rAF to ensure paint before populating rows
+              requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                  EDTrackBoard.startSimulation();
+                });
+              });
             }
           }
         }, 200);

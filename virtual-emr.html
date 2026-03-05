@@ -1334,15 +1334,30 @@ function getActiveNoteTemplate() {
 function renderSettingSelector() {
   // Use EMR Landing page (rich overview) if available
   if (window.EMRLanding) {
-    // Pre-load manifest for stats
-    if (!window.EMR_MANIFEST) {
+    // Pre-load manifest for stats — inject script, then patch stats in-place
+    if (!window.EMR_MANIFEST || !EMR_MANIFEST.length) {
       var ms = document.createElement('script');
       ms.src = 'emr-data/manifest.js';
       ms.onload = function() {
-        document.getElementById('app').innerHTML = EMRLanding.render();
+        // Patch only the stats elements in place instead of full re-render
+        // This avoids re-triggering EMRShell.inject() which causes the shell double-render
+        var app = document.getElementById('app');
+        if (!app) return;
+        var hasBoard = document.getElementById('ed-trackboard') || document.getElementById('ed-board-placeholder');
+        if (!hasBoard) {
+          // Full re-render needed (landing page, not ED board)
+          app.innerHTML = EMRLanding.render();
+        }
+        // If ED board is already showing, _scheduleManifestRebuild inside EDTrackBoard handles it
       };
+      ms.onerror = function() { console.warn('manifest.js failed to load'); };
       document.head.appendChild(ms);
-      return EMRLanding.render(); // render with 0 stats initially, re-render when manifest loads
+      // Also ensure patient-names.js loads for the ED board
+      if (!window.PATIENT_NAMES) {
+        var pn = document.createElement('script');
+        pn.src = 'emr-data/patient-names.js';
+        document.head.appendChild(pn);
+      }
     }
     return EMRLanding.render();
   }
@@ -1499,8 +1514,16 @@ function _renderCasePicker() {
       document.getElementById('app').innerHTML = PatientList.render(S.clinicalSetting, S.specialty);
       return;
     }
-    // Fallback: basic case list
-    var html = '<div style="max-width:1100px;margin:0 auto;padding:24px 16px"><h1 style="font-size:24px;font-weight:700;color:#1A1A2E">Patient List</h1><p style="color:#5A6178">Loading...</p></div>';
+    // Fallback: skeleton loading state while scripts finish
+    var html = '<div style="max-width:1100px;margin:0 auto;padding:24px 16px">'
+      + '<div style="height:180px;background:linear-gradient(135deg,#0F172A,#1E293B);border-radius:14px;margin-bottom:16px;display:flex;align-items:center;justify-content:center">'
+      + '<div style="text-align:center;color:#94A3B8"><div style="font-size:24px;margin-bottom:8px">🏥</div><div style="font-size:14px">Loading Emergency Department...</div></div>'
+      + '</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">'
+      + '<div style="height:100px;background:linear-gradient(90deg,#1E293B 25%,#2C3E50 50%,#1E293B 75%);background-size:800px 100%;border-radius:12px;animation:rdxShimmer 1.4s ease-in-out infinite"></div>'
+      + '<div style="height:100px;background:linear-gradient(90deg,#1E293B 25%,#2C3E50 50%,#1E293B 75%);background-size:800px 100%;border-radius:12px;animation:rdxShimmer 1.4s ease-in-out infinite;animation-delay:.1s"></div>'
+      + '<div style="height:100px;background:linear-gradient(90deg,#1E293B 25%,#2C3E50 50%,#1E293B 75%);background-size:800px 100%;border-radius:12px;animation:rdxShimmer 1.4s ease-in-out infinite;animation-delay:.2s"></div>'
+      + '</div></div>';
     document.getElementById('app').innerHTML = html;
 }
 
