@@ -77,6 +77,7 @@ textarea{min-height:120px}
 .coll-item:hover{border-color:var(--rdx-blue-border);transform:translateY(-1px);box-shadow:var(--rdx-shadow-sm)}
 @media(max-width:600px){.stat-row{grid-template-columns:repeat(2,1fr)}.row{flex-direction:column}.hero{padding:24px 20px}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
 <script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
@@ -145,6 +146,7 @@ function renderTabs() {
   var tabs = [
     {id:'generate', label:'✨ Generate', icon:''},
     {id:'library', label:'📚 My Questions (' + S.myQuestions.length + ')'},
+    {id:'publiclibrary', label:'🌐 Public Library (' + getPublicMCQs().length + ')'},
     {id:'study', label:'🎯 Study Mode'},
     {id:'collections', label:'📁 Collections'}
   ];
@@ -160,6 +162,13 @@ function renderGenerate() {
   h += '<div class="card">';
   h += '<div class="form-group"><label>Source Content</label>';
   h += '<textarea id="genContent" placeholder="Paste clinical content, teaching points, board pearls, or reference material here...&#10;&#10;Example: Anaphylaxis is a severe allergic reaction involving IgE-mediated mast cell degranulation. The NIAID/FAAN criteria require involvement of 2 or more organ systems..."></textarea></div>';
+  h += '<div class="form-group" style="margin-top:-8px"><label style="font-size:12px;color:var(--rdx-text-muted)">Or upload a PDF (practice parameters, guidelines, reference texts)</label>';
+  h += '<div style="display:flex;align-items:center;gap:10px">';
+  h += '<label class="btn" style="cursor:pointer;font-size:12px;padding:7px 14px;background:var(--rdx-bg-hover);border:1px dashed var(--rdx-border);color:var(--rdx-text)">';
+  h += '📄 Upload PDF<input type="file" id="pdfUpload" accept=".pdf" style="display:none" onchange="SDX.loadPDF(this)">';
+  h += '</label>';
+  h += '<span id="pdfStatus" style="font-size:12px;color:var(--rdx-text-muted)"></span>';
+  h += '</div></div>';
 
   h += '<div class="row">';
   h += '<div class="form-group"><label>Topic Focus (optional)</label><input type="text" id="genTopic" placeholder="e.g., Anaphylaxis, Drug Allergy"></div>';
@@ -204,9 +213,13 @@ function renderGenerate() {
       });
       h += '<div class="mcq-explain"><strong>Explanation:</strong> ' + esc(q.explanation) + '</div>';
 
-      h += '<div style="margin-top:14px;display:flex;gap:8px">';
-      h += '<button class="btn btn-primary btn-sm" onclick="SDX.saveQuestion('+idx+')">💾 Save to Library</button>';
-      h += '</div>';
+      h += '<div style="margin-top:14px">';
+      h += '<div class="form-group" style="margin-bottom:10px"><label style="font-size:11px">Source / Citation (required to submit to Public Library)</label>';
+      h += '<input type="text" id="src-'+idx+'" placeholder="e.g. DOI: 10.1016/j.jaci.2023.01.001  |  URL: https://...  |  Textbook: Up to Date — Anaphylaxis" style="font-size:12px"></div>';
+      h += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+      h += '<button class="btn btn-primary btn-sm" onclick="SDX.saveQuestion('+idx+')">💾 Save to My Library</button>';
+      h += '<button class="btn btn-sm" style="background:#f0fdf4;color:#16a34a;border:1.5px solid #86efac" onclick="SDX.submitToLibrary('+idx+')">🌐 Save + Submit to Public Library</button>';
+      h += '</div></div>';
       h += '</div>';
     });
     h += '</div>';
@@ -348,12 +361,110 @@ function render() {
   else if (S.tab === 'library') h = renderLibrary();
   else if (S.tab === 'study') h = renderStudy();
   else if (S.tab === 'collections') h = renderCollections();
+  else if (S.tab === 'publiclibrary') h = renderPublicLibrary();
   document.getElementById('app').innerHTML = h;
 }
 
 // ─── ACTIONS ───
+// ── PUBLIC LIBRARY SHARED STORAGE ──
+function getPublicMCQs() {
+  try { return JSON.parse(localStorage.getItem('rdx-public-mcqs') || '[]'); } catch(e) { return []; }
+}
+function savePublicSubmission(entry) {
+  var items = getPublicMCQs();
+  items.push(entry);
+  localStorage.setItem('rdx-public-mcqs', JSON.stringify(items));
+}
+
+// ── PUBLIC LIBRARY RENDERER ──
+function renderPublicLibrary() {
+  var items = getPublicMCQs();
+  var approved = items.filter(function(q){ return q.status === 'approved'; });
+  var pending = items.filter(function(q){ return q.status === 'pending_review'; });
+
+  var h = '<div class="card">';
+  h += '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">';
+  h += '<div><h3 style="margin:0">🌐 Public MCQ Library</h3>';
+  h += '<p style="margin:4px 0 0;font-size:13px;color:var(--rdx-text-muted)">Community-contributed, peer-reviewed board-quality questions.</p></div>';
+  h += '</div>';
+  h += '<div class="stat-row" style="margin-top:16px">';
+  h += '<div class="stat-box"><div class="stat-num">' + approved.length + '</div><div class="stat-label">Approved</div></div>';
+  h += '<div class="stat-box"><div class="stat-num">' + pending.length + '</div><div class="stat-label">Pending Review</div></div>';
+  h += '</div></div>';
+
+  if (approved.length === 0 && pending.length === 0) {
+    h += '<div class="empty-state"><div class="icon">🌐</div><h3>No public questions yet</h3><p>Generate MCQs and use "Save + Submit to Public Library" to contribute. Questions are reviewed before appearing here.</p></div>';
+    return h;
+  }
+
+  if (pending.length > 0) {
+    h += '<div style="background:var(--rdx-warning-bg);border:1px solid var(--rdx-warning);border-radius:var(--rdx-radius-md);padding:14px 18px;margin-bottom:16px">';
+    h += '<strong style="color:var(--rdx-warning);font-size:13px">⏳ ' + pending.length + ' question(s) pending editorial review</strong>';
+    h += '<p style="font-size:12px;color:var(--rdx-text-muted);margin:4px 0 0">These will appear here once approved. <a href="content-library.html" style="color:var(--rdx-blue)">Open Content Library</a> to review.</p>';
+    h += '</div>';
+  }
+
+  approved.forEach(function(q) {
+    h += '<div class="mcq-card">';
+    h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
+    h += '<div class="mcq-tags">';
+    if (q.tags && q.tags.abai_domain) h += '<span class="badge badge-blue">' + esc(q.tags.abai_domain) + '</span>';
+    if (q.tags && q.tags.acgme_competency) h += '<span class="badge badge-green">ACGME ' + esc(q.tags.acgme_competency) + '</span>';
+    if (q.tags && q.tags.blooms) h += '<span class="badge badge-amber">' + esc(q.tags.blooms) + '</span>';
+    h += '</div>';
+    h += '<span class="badge badge-green" style="flex-shrink:0">✓ Approved</span>';
+    h += '</div>';
+    h += '<div class="mcq-stem">' + esc(q.question.stem) + '</div>';
+    q.question.options.forEach(function(o, oi) {
+      var cls = oi === q.question.correct_index ? "correct" : "";
+      h += "<div class=\"mcq-option " + cls + "\"><span class=\"letter\">" + String.fromCharCode(65+oi) + "</span><span>" + esc(o.text) + "</span></div>";
+    });
+    h += '<div class="mcq-explain"><strong>Explanation:</strong> ' + esc(q.question.explanation) + '</div>';
+    if (q.source) h += '<div style="margin-top:10px;font-size:11px;color:var(--rdx-text-muted);padding:8px 12px;background:var(--rdx-bg);border-radius:var(--rdx-radius-sm)">📎 Source: ' + esc(q.source) + '</div>';
+    if (q.auditResult && q.auditResult.notes) h += '<div style="margin-top:6px;font-size:11px;color:var(--rdx-text-muted);padding:8px 12px;background:var(--rdx-blue-bg);border-radius:var(--rdx-radius-sm)">🔍 Editorial note: ' + esc(q.auditResult.notes) + '</div>';
+    h += '<div style="margin-top:12px"><button class="btn btn-outline btn-sm" onclick="SDX.addToMyLib(this)">+ Add to My Library</button></div>';
+    h += '</div>';
+  });
+
+  return h;
+}
+
 window.SDX = {
   setTab: function(t) { S.tab = t; S.studyMode = false; render(); },
+
+  loadPDF: async function(input) {
+    var file = input.files[0];
+    if (!file) return;
+    document.getElementById('pdfStatus').textContent = 'Extracting text…';
+    try {
+      var arrayBuffer = await file.arrayBuffer();
+      var typedArray = new Uint8Array(arrayBuffer);
+      // Use pdf.js to extract text
+      if (!window.pdfjsLib) {
+        document.getElementById('pdfStatus').textContent = 'PDF library not loaded — paste text manually.';
+        return;
+      }
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      var pdf = await pdfjsLib.getDocument({data: typedArray}).promise;
+      var text = '';
+      var maxPages = Math.min(pdf.numPages, 40); // cap at 40 pages
+      for (var i = 1; i <= maxPages; i++) {
+        var page = await pdf.getPage(i);
+        var tc = await page.getTextContent();
+        text += tc.items.map(function(s){return s.str}).join(' ') + '\n';
+      }
+      text = text.replace(/\s+/g, ' ').trim();
+      if (text.length > 12000) text = text.slice(0, 12000); // stay within token limit
+      document.getElementById('genContent').value = text;
+      document.getElementById('pdfStatus').textContent = '✓ Extracted ' + pdf.numPages + ' pages' + (pdf.numPages > 40 ? ' (first 40 used)' : '') + ' — review and click Generate.';
+      // Auto-populate topic from filename
+      if (!document.getElementById('genTopic').value) {
+        document.getElementById('genTopic').value = file.name.replace(/\.pdf$/i,'').replace(/[-_]/g,' ');
+      }
+    } catch(e) {
+      document.getElementById('pdfStatus').textContent = '⚠ Could not extract text: ' + e.message;
+    }
+  },
 
   generate: async function() {
     var content = document.getElementById('genContent').value.trim();
@@ -395,15 +506,46 @@ window.SDX = {
   saveQuestion: function(idx) {
     var r = S.generated[idx];
     if (!r || !r.success) return;
+    var srcEl = document.getElementById('src-'+idx);
     S.myQuestions.push({
       id: 'mcq-' + Date.now() + '-' + Math.random().toString(36).substr(2,6),
       question: r.question,
       tags: r.tags,
       quality: r.quality,
+      source: srcEl ? srcEl.value.trim() : '',
       savedAt: new Date().toISOString()
     });
     save();
     S.generated.splice(idx, 1);
+    render();
+  },
+
+  submitToLibrary: function(idx) {
+    var r = S.generated[idx];
+    if (!r || !r.success) return;
+    var srcEl = document.getElementById('src-'+idx);
+    var source = srcEl ? srcEl.value.trim() : '';
+    if (!source) { alert('Please add a source citation or DOI before submitting to the Public Library.'); return; }
+    var entry = {
+      id: 'pub-mcq-' + Date.now() + '-' + Math.random().toString(36).substr(2,6),
+      type: 'mcq',
+      question: r.question,
+      tags: r.tags,
+      quality: r.quality,
+      source: source,
+      status: 'pending_review',
+      submittedAt: new Date().toISOString(),
+      auditResult: null
+    };
+    // Save to personal library too
+    var personal = JSON.parse(JSON.stringify(entry));
+    personal.id = 'mcq-' + Date.now() + '-' + Math.random().toString(36).substr(2,6);
+    S.myQuestions.push(personal);
+    // Save to shared pending queue
+    savePublicSubmission(entry);
+    save();
+    S.generated.splice(idx, 1);
+    alert('Submitted! Your question will appear in the Public Library after editorial review.');
     render();
   },
 
@@ -483,6 +625,16 @@ window.SDX = {
       save();
       render();
     }
+  },
+
+  addToMyLibrary: function(q) {
+    var copy = typeof q === 'string' ? JSON.parse(q) : JSON.parse(JSON.stringify(q));
+    copy.id = 'mcq-' + Date.now() + '-' + Math.random().toString(36).substr(2,6);
+    copy.savedAt = new Date().toISOString();
+    S.myQuestions.push(copy);
+    save();
+    alert('Added to your library!');
+    render();
   }
 };
 
@@ -492,5 +644,6 @@ render();
 
 <script src="js/rdx-nav.js"></script>
 <script src="js/rdx-analytics-tracker.js"></script>
+<script src="rdx-mcq-library.js"></script>
 </body>
 </html>

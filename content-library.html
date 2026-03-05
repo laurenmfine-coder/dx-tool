@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2874A6">
+<title>Content Library — ReasonDx</title>
+<meta name="description" content="Browse and contribute peer-reviewed MCQs and clinical cases to the ReasonDx community library.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<style>
+body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.page{max-width:960px;margin:0 auto;padding:24px 16px}
+.card{background:var(--rdx-bg-card);border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:24px;margin-bottom:16px;box-shadow:var(--rdx-shadow-sm)}
+.card h3{margin:0 0 6px;font-size:16px;font-weight:700}
+.card p{font-size:13px;color:var(--rdx-text-secondary);line-height:1.6;margin:0}
+.tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--rdx-border);padding-bottom:0}
+.tab{padding:10px 18px;font-size:13px;font-weight:600;color:var(--rdx-text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;border-radius:8px 8px 0 0;background:none;border-left:none;border-right:none;border-top:none;font-family:var(--rdx-font)}
+.tab:hover{color:var(--rdx-text);background:var(--rdx-bg-hover)}
+.tab.on{color:var(--rdx-blue);border-bottom-color:var(--rdx-blue);background:var(--rdx-blue-bg)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rdx-radius-sm);font-family:var(--rdx-font);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;border:none}
+.btn-primary{background:var(--rdx-blue);color:#fff}.btn-primary:hover{background:var(--rdx-blue-dark)}
+.btn-outline{background:var(--rdx-bg-card);color:var(--rdx-text);border:1.5px solid var(--rdx-border)}.btn-outline:hover{border-color:var(--rdx-blue);color:var(--rdx-blue)}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-approve{background:#f0fdf4;color:#16a34a;border:1.5px solid #86efac}.btn-approve:hover{background:#dcfce7}
+.btn-reject{background:var(--rdx-danger-bg);color:var(--rdx-danger);border:1.5px solid var(--rdx-danger)}.btn-reject:hover{opacity:.85}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.02em}
+.badge-blue{background:var(--rdx-blue-bg);color:var(--rdx-blue);border:1px solid var(--rdx-blue-border)}
+.badge-green{background:#f0fdf4;color:#16a34a;border:1px solid #86efac}
+.badge-amber{background:var(--rdx-warning-bg);color:var(--rdx-warning);border:1px solid var(--rdx-warning)}
+.badge-red{background:var(--rdx-danger-bg);color:var(--rdx-danger);border:1px solid var(--rdx-danger)}
+.item-card{background:var(--rdx-bg-card);border:2px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:20px;margin-bottom:16px;transition:border-color .15s}
+.item-card:hover{border-color:var(--rdx-blue)}
+.item-card.pending{border-left:4px solid var(--rdx-warning)}
+.item-card.approved{border-left:4px solid #16a34a}
+.item-card.rejected{border-left:4px solid var(--rdx-danger);opacity:.75}
+.source-box{margin-top:12px;padding:10px 14px;background:var(--rdx-bg);border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);font-size:12px;color:var(--rdx-text-secondary);line-height:1.6}
+.source-box a{color:var(--rdx-blue);text-decoration:none}.source-box a:hover{text-decoration:underline}
+.audit-box{margin-top:12px;padding:14px;background:var(--rdx-blue-bg);border:1px solid var(--rdx-blue-border);border-radius:var(--rdx-radius-sm);font-size:12.5px;line-height:1.7;color:var(--rdx-text-secondary)}
+.audit-box.fail{background:var(--rdx-danger-bg);border-color:var(--rdx-danger)}
+.audit-box.pass{background:#f0fdf4;border-color:#86efac}
+.mcq-stem{font-size:14px;line-height:1.7;margin:12px 0;color:var(--rdx-text)}
+.mcq-option{padding:8px 12px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);margin-bottom:5px;font-size:13px;display:flex;align-items:flex-start;gap:10px}
+.mcq-option.correct{border-color:#16a34a;background:#f0fdf4}
+.mcq-option .letter{width:22px;height:22px;border-radius:50%;background:var(--rdx-bg);border:1.5px solid var(--rdx-border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;color:var(--rdx-text-muted)}
+.mcq-option.correct .letter{background:#16a34a;color:#fff;border-color:#16a34a}
+.spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-state{text-align:center;padding:60px 24px;color:var(--rdx-text-muted)}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+.empty-state h3{font-size:16px;font-weight:700;margin:0 0 8px;color:var(--rdx-text)}
+.empty-state p{font-size:13px;max-width:420px;margin:0 auto;line-height:1.6}
+.filter-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.filter-bar select,.filter-bar input{padding:7px 12px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);font-size:13px;font-family:var(--rdx-font);background:var(--rdx-bg-card);color:var(--rdx-text);min-width:140px}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.stat-box{flex:1;min-width:80px;background:var(--rdx-bg);border:1px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);padding:14px;text-align:center}
+.stat-num{font-size:24px;font-weight:800;color:var(--rdx-blue)}
+.stat-label{font-size:11px;color:var(--rdx-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.case-preview{font-size:12px;line-height:1.65;color:var(--rdx-text-secondary);margin-top:10px;padding:12px;background:var(--rdx-bg);border-radius:var(--rdx-radius-sm)}
+.feedback-input{width:100%;padding:10px 14px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);font-family:var(--rdx-font);font-size:13px;color:var(--rdx-text);background:var(--rdx-bg-card);resize:vertical;min-height:72px;margin-top:8px;box-sizing:border-box}
+.feedback-input:focus{outline:none;border-color:var(--rdx-blue)}
+</style>
+</head>
+<body>
+<div id="top-nav-placeholder"></div>
+
+<div class="page" id="app">
+  <div style="text-align:center;padding:60px;color:var(--rdx-text-muted)">Loading...</div>
+</div>
+
+<script>(function(){var d=(location.pathname.match(/\//g)||[]).length-1,p="";for(var i=0;i<d;i++)p+="../";var s=document.createElement("script");s.src=p+"dx-user-bar.js";document.head.appendChild(s)})();</script>
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
+<script src="js/rdx-supabase.js"></script>
+
+<script>
+(function() {
+'use strict';
+
+// ── STATE ──
+var S = {
+  tab: 'browse',        // browse | pending | admin
+  contentType: 'all',   // all | mcq | case
+  filterDomain: '',
+  filterSearch: '',
+  auditingId: null,
+  auditResults: {},     // id → {loading, result}
+  feedbackDraft: {}     // id → string
+};
+
+// ── STORAGE HELPERS ──
+function getMCQs()   { try { return JSON.parse(localStorage.getItem('rdx-public-mcqs')   || '[]'); } catch(e) { return []; } }
+function getCases()  { try { return JSON.parse(localStorage.getItem('rdx-public-cases')  || '[]'); } catch(e) { return []; } }
+function saveMCQs(d) { localStorage.setItem('rdx-public-mcqs',  JSON.stringify(d)); }
+function saveCases(d){ localStorage.setItem('rdx-public-cases', JSON.stringify(d)); }
+
+function getAllItems() {
+  var mcqs  = getMCQs().map(function(q){ return Object.assign({}, q, {_type:'mcq'}); });
+  var cases = getCases().map(function(c){ return Object.assign({}, c, {_type:'case'}); });
+  return mcqs.concat(cases).sort(function(a,b){ return (b.submittedAt||'').localeCompare(a.submittedAt||''); });
+}
+
+function updateItem(item) {
+  if (item._type === 'mcq') {
+    var list = getMCQs();
+    var idx = list.findIndex(function(q){ return q.id === item.id; });
+    var clean = JSON.parse(JSON.stringify(item)); delete clean._type;
+    if (idx >= 0) list[idx] = clean; else list.push(clean);
+    saveMCQs(list);
+  } else {
+    var list = getCases();
+    var idx = list.findIndex(function(c){ return c.id === item.id; });
+    var clean = JSON.parse(JSON.stringify(item)); delete clean._type;
+    if (idx >= 0) list[idx] = clean; else list.push(clean);
+    saveCases(list);
+  }
+}
+
+// ── RENDER ──
+function esc(s) { if(!s) return ''; var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+function render() {
+  var all = getAllItems();
+  var approved = all.filter(function(i){ return i.status === 'approved'; });
+  var pending  = all.filter(function(i){ return i.status === 'pending_review'; });
+  var rejected = all.filter(function(i){ return i.status === 'rejected'; });
+
+  var h = '';
+
+  // Header
+  h += '<div class="card">';
+  h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">';
+  h += '<div><h3 style="font-size:20px;margin:0">📖 ReasonDx Content Library</h3>';
+  h += '<p style="margin:6px 0 0">Peer-reviewed MCQs and clinical cases contributed by the ReasonDx community. All content is source-verified before publication.</p></div>';
+  h += '<div style="display:flex;gap:8px;flex-wrap:wrap">';
+  h += '<a href="studydx.html" class="btn btn-outline btn-sm">✨ Contribute MCQ</a>';
+  h += '<a href="caseforge.html" class="btn btn-outline btn-sm">🏗️ Contribute Case</a>';
+  h += '</div></div>';
+  h += '<div class="stat-row">';
+  h += '<div class="stat-box"><div class="stat-num">' + approved.length + '</div><div class="stat-label">Published</div></div>';
+  h += '<div class="stat-box"><div class="stat-num">' + approved.filter(function(i){return i._type==='mcq'}).length + '</div><div class="stat-label">MCQs</div></div>';
+  h += '<div class="stat-box"><div class="stat-num">' + approved.filter(function(i){return i._type==='case'}).length + '</div><div class="stat-label">Cases</div></div>';
+  h += '<div class="stat-box"><div class="stat-num">' + pending.length + '</div><div class="stat-label">In Review</div></div>';
+  h += '</div></div>';
+
+  // Tabs
+  h += '<div class="tabs">';
+  h += '<button class="tab'+(S.tab==='browse'?' on':'')+'" onclick="LIB.setTab(\'browse\')">📚 Browse Library (' + approved.length + ')</button>';
+  h += '<button class="tab'+(S.tab==='pending'?' on':'')+'" onclick="LIB.setTab(\'pending\')">⏳ Pending Review (' + pending.length + ')</button>';
+  h += '<button class="tab'+(S.tab==='admin'?' on':'')+'" onclick="LIB.setTab(\'admin\')" style="margin-left:auto;color:var(--rdx-text-muted)">🔑 Admin</button>';
+  h += '</div>';
+
+  if (S.tab === 'browse')  h += renderBrowse(approved);
+  if (S.tab === 'pending') h += renderPending(pending);
+  if (S.tab === 'admin')   h += renderAdmin(all, approved, pending, rejected);
+
+  document.getElementById('app').innerHTML = h;
+}
+
+// ── BROWSE TAB ──
+function renderBrowse(items) {
+  var h = '';
+
+  // Filters
+  h += '<div class="filter-bar">';
+  h += '<select onchange="LIB.setFilter(\'contentType\',this.value)">';
+  h += '<option value="all"'+(S.contentType==='all'?' selected':'')+'>All Content</option>';
+  h += '<option value="mcq"'+(S.contentType==='mcq'?' selected':'')+'>MCQs Only</option>';
+  h += '<option value="case"'+(S.contentType==='case'?' selected':'')+'>Cases Only</option>';
+  h += '</select>';
+  h += '<input type="text" placeholder="Search..." value="'+esc(S.filterSearch)+'" oninput="LIB.setFilter(\'filterSearch\',this.value)" style="min-width:200px">';
+  h += '</div>';
+
+  var filtered = items.filter(function(i){
+    if (S.contentType !== 'all' && i._type !== S.contentType) return false;
+    if (S.filterSearch) {
+      var q = S.filterSearch.toLowerCase();
+      var text = (i._type === 'mcq' ? (i.question && i.question.stem || '') : (i.meta && i.meta.title || '') + ' ' + (i.caseData && i.caseData.patient && i.caseData.patient.chiefComplaint || '')).toLowerCase();
+      if (!text.includes(q)) return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    return h + '<div class="empty-state"><div class="icon">📚</div><h3>No content yet</h3><p>Be the first to contribute! Generate MCQs in StudyDx or build a case in CaseForge, then submit to the library.</p></div>';
+  }
+
+  filtered.forEach(function(item) {
+    h += renderItemCard(item, false);
+  });
+  return h;
+}
+
+// ── PENDING TAB ──
+function renderPending(items) {
+  if (items.length === 0) {
+    return '<div class="empty-state"><div class="icon">✅</div><h3>Nothing pending review</h3><p>All submitted content has been reviewed. Check back after contributors submit new items from StudyDx or CaseForge.</p></div>';
+  }
+  var h = '<div class="card" style="background:var(--rdx-warning-bg);border-color:var(--rdx-warning)">';
+  h += '<p style="font-size:13px;color:var(--rdx-warning)"><strong>⏳ ' + items.length + ' item(s) awaiting review.</strong> Use the Admin tab to run AI audit and approve or reject submissions.</p></div>';
+  items.forEach(function(item) {
+    h += renderItemCard(item, false);
+  });
+  return h;
+}
+
+// ── ADMIN TAB ──
+function renderAdmin(all, approved, pending, rejected) {
+  var h = '<div class="card" style="border-color:var(--rdx-blue)">';
+  h += '<h3>🔑 Editorial Review Panel</h3>';
+  h += '<p>Run the AI audit pass on pending submissions, then approve or reject with feedback. Approved items become publicly visible immediately.</p>';
+  h += '<div class="stat-row">';
+  h += '<div class="stat-box"><div class="stat-num" style="color:#16a34a">' + approved.length + '</div><div class="stat-label">Approved</div></div>';
+  h += '<div class="stat-box"><div class="stat-num" style="color:var(--rdx-warning)">' + pending.length + '</div><div class="stat-label">Pending</div></div>';
+  h += '<div class="stat-box"><div class="stat-num" style="color:var(--rdx-danger)">' + rejected.length + '</div><div class="stat-label">Rejected</div></div>';
+  h += '</div></div>';
+
+  if (pending.length === 0 && approved.length === 0 && rejected.length === 0) {
+    return h + '<div class="empty-state"><div class="icon">🔑</div><h3>No submissions yet</h3><p>When contributors submit MCQs or cases for review, they will appear here for audit.</p></div>';
+  }
+
+  // Pending first, then approved, then rejected
+  var ordered = pending.concat(approved).concat(rejected);
+  ordered.forEach(function(item) {
+    h += renderItemCard(item, true);
+  });
+  return h;
+}
+
+// ── ITEM CARD ──
+function renderItemCard(item, isAdmin) {
+  var id = item.id;
+  var isPending  = item.status === 'pending_review';
+  var isApproved = item.status === 'approved';
+  var isRejected = item.status === 'rejected';
+  var statusClass = isPending ? 'pending' : isApproved ? 'approved' : isRejected ? 'rejected' : '';
+  var ar = S.auditResults[id] || null;
+
+  var h = '<div class="item-card ' + statusClass + '" id="card-' + esc(id) + '">';
+
+  // Header row
+  h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px">';
+  h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+  h += '<span class="badge ' + (item._type==='mcq' ? 'badge-blue' : 'badge-amber') + '">' + (item._type==='mcq' ? '📝 MCQ' : '🏥 Case') + '</span>';
+  if (item.tags && item.tags.abai_domain) h += '<span class="badge badge-blue" style="font-size:10px">' + esc(item.tags.abai_domain) + '</span>';
+  if (item.tags && item.tags.blooms)      h += '<span class="badge badge-amber" style="font-size:10px">' + esc(item.tags.blooms) + '</span>';
+  if (item.meta && item.meta.specialty)   h += '<span class="badge badge-blue" style="font-size:10px">' + esc(item.meta.specialty) + '</span>';
+  if (item.submittedAt) h += '<span style="font-size:11px;color:var(--rdx-text-muted)">' + new Date(item.submittedAt).toLocaleDateString() + '</span>';
+  h += '</div>';
+  var stLabel = isApproved ? '✓ Approved' : isPending ? '⏳ Pending' : isRejected ? '✗ Rejected' : item.status;
+  var stColor = isApproved ? 'badge-green' : isPending ? 'badge-amber' : 'badge-red';
+  h += '<span class="badge ' + stColor + '">' + stLabel + '</span>';
+  h += '</div>';
+
+  // Content
+  if (item._type === 'mcq') {
+    h += '<div class="mcq-stem">' + esc(item.question && item.question.stem) + '</div>';
+    if (item.question && item.question.options) {
+      item.question.options.forEach(function(o, oi) {
+        var cls = oi === item.question.correct_index ? 'correct' : '';
+        h += '<div class="mcq-option ' + cls + '"><span class="letter">' + String.fromCharCode(65+oi) + '</span><span>' + esc(o.text) + '</span></div>';
+      });
+    }
+    if (item.question && item.question.explanation) {
+      h += '<div style="margin-top:10px;padding:10px 14px;background:var(--rdx-blue-bg);border-left:3px solid var(--rdx-blue);border-radius:var(--rdx-radius-sm);font-size:12.5px;line-height:1.65;color:var(--rdx-text-secondary)">';
+      h += '<strong>Explanation:</strong> ' + esc(item.question.explanation) + '</div>';
+    }
+  } else {
+    // Case summary
+    var p = item.caseData && item.caseData.patient || {};
+    var title = (item.meta && item.meta.title) || p.diagnosis || 'Untitled Case';
+    h += '<div style="font-size:16px;font-weight:700;margin-bottom:6px">' + esc(title) + '</div>';
+    h += '<div class="case-preview">';
+    if (p.name) h += '<strong>Patient:</strong> ' + esc(p.name) + (p.age ? ', ' + esc(p.age) + 'yo ' : '') + (p.sex ? esc(p.sex) : '') + '<br>';
+    if (p.chiefComplaint) h += '<strong>CC:</strong> ' + esc(p.chiefComplaint) + '<br>';
+    if (p.diagnosis) h += '<strong>Diagnosis:</strong> ' + esc(p.diagnosis) + '<br>';
+    if (item.meta && item.meta.learning_objectives && item.meta.learning_objectives.length) {
+      h += '<strong>Learning Objectives:</strong> ' + item.meta.learning_objectives.slice(0,2).map(esc).join('; ');
+    }
+    h += '</div>';
+  }
+
+  // Source box
+  if (item.source) {
+    h += '<div class="source-box">📎 <strong>Source:</strong> ';
+    var src = item.source;
+    if (src.match(/^https?:\/\//)) h += '<a href="' + esc(src) + '" target="_blank" rel="noopener">' + esc(src) + '</a>';
+    else if (src.match(/^10\.\d{4,}/)) h += '<a href="https://doi.org/' + esc(src.replace(/^doi:\s*/i,'')) + '" target="_blank" rel="noopener">DOI: ' + esc(src) + '</a>';
+    else h += esc(src);
+    h += '</div>';
+  } else if (isAdmin) {
+    h += '<div class="source-box" style="border-color:var(--rdx-warning);color:var(--rdx-warning)">⚠ No source citation provided — require one before approving.</div>';
+  }
+
+  // Audit result
+  if (ar) {
+    if (ar.loading) {
+      h += '<div class="audit-box"><span class="spinner"></span> Running AI audit…</div>';
+    } else if (ar.result) {
+      var pass = ar.result.recommendation === 'approve';
+      h += '<div class="audit-box ' + (pass ? 'pass' : 'fail') + '">';
+      h += '<div style="font-weight:700;font-size:13px;margin-bottom:8px">' + (pass ? '✅' : '⚠️') + ' AI Audit: ' + esc(ar.result.recommendation === 'approve' ? 'Recommended for Approval' : ar.result.recommendation === 'needs_revision' ? 'Needs Revision' : 'Recommend Rejection') + '</div>';
+      if (ar.result.source_assessment) h += '<div><strong>Source:</strong> ' + esc(ar.result.source_assessment) + '</div>';
+      if (ar.result.accuracy_notes)    h += '<div><strong>Accuracy:</strong> ' + esc(ar.result.accuracy_notes) + '</div>';
+      if (ar.result.quality_notes)     h += '<div><strong>Quality:</strong> ' + esc(ar.result.quality_notes) + '</div>';
+      if (ar.result.revision_required) h += '<div style="margin-top:6px;color:var(--rdx-danger)"><strong>Revision needed:</strong> ' + esc(ar.result.revision_required) + '</div>';
+      h += '</div>';
+    }
+  } else if (item.auditResult) {
+    var pass = item.auditResult.recommendation === 'approve';
+    h += '<div class="audit-box ' + (pass ? 'pass' : 'fail') + '" style="font-size:12px">';
+    h += '<strong>Prior AI Audit:</strong> ' + esc(item.auditResult.source_assessment || '') + ' ' + esc(item.auditResult.accuracy_notes || '');
+    h += '</div>';
+  }
+
+  // Rejection feedback
+  if (isRejected && item.auditFeedback) {
+    h += '<div style="margin-top:10px;padding:10px 14px;background:var(--rdx-danger-bg);border-left:3px solid var(--rdx-danger);border-radius:var(--rdx-radius-sm);font-size:12px;color:var(--rdx-danger)">';
+    h += '<strong>Editorial feedback:</strong> ' + esc(item.auditFeedback);
+    h += '</div>';
+  }
+
+  // Admin actions
+  if (isAdmin && (isPending || isRejected)) {
+    h += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--rdx-border)">';
+    h += '<div style="font-size:12px;font-weight:700;color:var(--rdx-text-muted);margin-bottom:6px">EDITORIAL FEEDBACK (shown to contributor if rejected)</div>';
+    h += '<textarea class="feedback-input" id="fb-' + esc(id) + '" placeholder="Optional: explain what needs to change for approval...">' + esc(S.feedbackDraft[id] || item.auditFeedback || '') + '</textarea>';
+    h += '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">';
+    if (!ar || !ar.result) {
+      h += '<button class="btn btn-sm" style="background:var(--rdx-blue-bg);color:var(--rdx-blue);border:1.5px solid var(--rdx-blue-border)" onclick="LIB.runAudit(\'' + esc(id) + '\')">🔍 Run AI Audit</button>';
+    }
+    h += '<button class="btn btn-approve btn-sm" onclick="LIB.approve(\'' + esc(id) + '\')">✓ Approve</button>';
+    h += '<button class="btn btn-reject btn-sm" onclick="LIB.reject(\'' + esc(id) + '\')">✗ Reject</button>';
+    h += '</div></div>';
+  }
+  if (isAdmin && isApproved) {
+    h += '<div style="margin-top:12px;display:flex;gap:8px">';
+    h += '<button class="btn btn-outline btn-sm" onclick="LIB.unapprove(\'' + esc(id) + '\')">↩ Move back to Pending</button>';
+    h += '</div>';
+  }
+
+  h += '</div>';
+  return h;
+}
+
+// ── ACTIONS ──
+window.LIB = {
+  setTab: function(t) { S.tab = t; render(); },
+  setFilter: function(key, val) { S[key] = val; render(); },
+
+  runAudit: async function(id) {
+    var all = getAllItems();
+    var item = all.find(function(i){ return i.id === id; });
+    if (!item) return;
+
+    S.auditResults[id] = { loading: true };
+    render();
+
+    // Build audit prompt
+    var content = '';
+    if (item._type === 'mcq' && item.question) {
+      content = 'MCQ STEM: ' + item.question.stem + '\n\nOPTIONS:\n';
+      item.question.options.forEach(function(o, oi) {
+        content += String.fromCharCode(65+oi) + '. ' + o.text + (oi === item.question.correct_index ? ' [CORRECT]' : '') + '\n';
+      });
+      content += '\nEXPLANATION: ' + (item.question.explanation || '') + '\n';
+    } else if (item._type === 'case') {
+      var p = item.caseData && item.caseData.patient || {};
+      content = 'CASE: ' + (item.meta && item.meta.title || p.diagnosis || 'Untitled') + '\n';
+      content += 'Patient: ' + p.name + ', ' + p.age + 'yo ' + p.sex + '\n';
+      content += 'CC: ' + p.chiefComplaint + '\n';
+      content += 'Diagnosis: ' + p.diagnosis + '\n';
+      if (item.caseData && item.caseData.hpi) content += 'HPI: ' + item.caseData.hpi.slice(0, 600) + '\n';
+      if (item.meta && item.meta.learning_objectives) content += 'Learning Objectives: ' + item.meta.learning_objectives.join('; ') + '\n';
+    }
+    content += '\nSOURCE/CITATION PROVIDED: ' + (item.source || 'None');
+
+    try {
+      var resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: `You are a medical education editorial reviewer for ReasonDx, a clinical reasoning platform. Your job is to audit submitted MCQs and clinical cases for:
+1. SOURCE VALIDITY: Is the cited source a legitimate, open-access, peer-reviewed reference (AAAAI practice parameters, NIAID guidelines, ACAAI guidelines, CDC, UpToDate, PubMed/DOI, textbooks)? Flag if no source is provided or the source cannot be verified.
+2. CLINICAL ACCURACY: Is the clinical content factually correct based on current evidence and guidelines?
+3. EDUCATIONAL QUALITY: Is the question/case educationally sound, unambiguous, and appropriately challenging?
+
+Respond ONLY with a JSON object (no markdown, no backticks):
+{
+  "recommendation": "approve" | "needs_revision" | "reject",
+  "source_assessment": "one sentence about whether the source is valid/verifiable",
+  "accuracy_notes": "one sentence about clinical accuracy",
+  "quality_notes": "one sentence about educational quality",
+  "revision_required": "specific change needed, or null if approving"
+}`,
+          messages: [{ role: 'user', content: 'Please audit this submission:\n\n' + content }]
+        })
+      });
+      var data = await resp.json();
+      var text = data.content && data.content.map(function(c){ return c.text || ''; }).join('');
+      var result = JSON.parse(text.replace(/```json|```/g, '').trim());
+      S.auditResults[id] = { loading: false, result: result };
+      // Save audit result to item
+      updateItem(Object.assign({}, item, { auditResult: result }));
+    } catch(e) {
+      S.auditResults[id] = { loading: false, result: { recommendation: 'needs_revision', source_assessment: 'Audit failed — ' + e.message, accuracy_notes: 'Manual review required.', quality_notes: '', revision_required: null } };
+    }
+    render();
+  },
+
+  approve: function(id) {
+    var all = getAllItems();
+    var item = all.find(function(i){ return i.id === id; });
+    if (!item) return;
+    if (!item.source) { alert('Cannot approve without a source citation. Edit the item and add one first.'); return; }
+    var fbEl = document.getElementById('fb-' + id);
+    var updated = Object.assign({}, item, {
+      status: 'approved',
+      approvedAt: new Date().toISOString(),
+      auditFeedback: fbEl ? fbEl.value.trim() : null
+    });
+    updateItem(updated);
+    render();
+  },
+
+  reject: function(id) {
+    var all = getAllItems();
+    var item = all.find(function(i){ return i.id === id; });
+    if (!item) return;
+    var fbEl = document.getElementById('fb-' + id);
+    var feedback = fbEl ? fbEl.value.trim() : '';
+    if (!feedback) { alert('Please add editorial feedback before rejecting so the contributor knows what to fix.'); return; }
+    var updated = Object.assign({}, item, {
+      status: 'rejected',
+      rejectedAt: new Date().toISOString(),
+      auditFeedback: feedback
+    });
+    updateItem(updated);
+    render();
+  },
+
+  unapprove: function(id) {
+    if (!confirm('Move this item back to Pending Review?')) return;
+    var all = getAllItems();
+    var item = all.find(function(i){ return i.id === id; });
+    if (!item) return;
+    updateItem(Object.assign({}, item, { status: 'pending_review' }));
+    render();
+  }
+};
+
+// Track feedback drafts on input
+document.addEventListener('input', function(e) {
+  if (e.target && e.target.classList.contains('feedback-input')) {
+    var id = e.target.id.replace('fb-', '');
+    S.feedbackDraft[id] = e.target.value;
+  }
+});
+
+render();
+})();
+</script>
+
+<script src="js/rdx-nav.js"></script>
+<script src="rdx-mcq-library.js"></script>
+</body>
+</html>
