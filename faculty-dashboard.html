@@ -368,28 +368,39 @@ function hasFeedback(studentName, week) {
 }
 
 // ── Bootstrap ────────────────────────────────────────────────────────────────
-function init() {
-  // Try to get current user from Supabase or localStorage fallback
-  var supaUser = null;
+async function init() {
+  var main = document.getElementById('mainContent');
+  if (main) main.innerHTML = '<div style="padding:60px;text-align:center;color:var(--text-muted)"><div style="font-size:28px;margin-bottom:12px">⏳</div><div style="font-weight:600">Loading dashboard…</div><div style="font-size:12px;margin-top:6px">Pulling latest data from cloud</div></div>';
+
+  var uid = null;
   if (window.EMRSupabase) {
-    EMRSupabase.getSession().then(function(session) {
+    try {
+      var session = await EMRSupabase.getSession();
       if (session && session.user) {
-        var uid = session.user.email || session.user.id;
-        FAC.currentUser = { username: uid, displayName: (session.user.user_metadata&&session.user.user_metadata.name)||uid.split('@')[0], role: getEMRRole(uid) };
-        if (session.user.user_metadata && session.user.user_metadata.tier === 'admin') FAC.currentUser.role = 'admin';
-        if (FAC.currentUser.role === 'student') {
-          // Redirect students back
-          window.location.href = 'virtual-emr.html';
-          return;
-        }
-        loadData();
-      } else {
-        window.location.href = 'auth/login.html';
+        uid = session.user.email || session.user.id;
+        var meta = session.user.user_metadata || {};
+        FAC.currentUser = {
+          username: uid,
+          displayName: meta.name || uid.split('@')[0],
+          role: meta.tier === 'admin' ? 'admin' : getEMRRole(uid)
+        };
       }
-    }).catch(function() { loadFromLocal(); });
-  } else {
-    loadFromLocal();
+    } catch(e) { console.warn('Session fetch failed:', e); }
   }
+
+  if (!uid) { loadFromLocal(); return; }
+
+  if (FAC.currentUser.role === 'student') {
+    window.location.href = 'virtual-emr.html';
+    return;
+  }
+
+  // Pull all cloud data into localStorage first, then render
+  if (window.EMRCloud) {
+    try { await EMRCloud.init(uid); }
+    catch(e) { console.warn('EMRCloud pull failed, using cached data:', e.message); }
+  }
+  loadData();
 }
 
 function loadFromLocal() {
@@ -1128,7 +1139,7 @@ function renderStudentView() {
     html += '<div style="width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">' + esc(initials(student.displayName)) + '</div>';
     html += '<div><div style="font-size:17px;font-weight:700">' + esc(student.displayName) + '</div><div style="font-size:12px;color:var(--text-muted)">' + esc(student.username) + ' · ' + subs.length + ' submission(s)</div></div>';
     html += '</div>';
-    html += '<a href="virtual-emr.html?as=' + encodeURIComponent(selectedUid) + '" target="_blank" style="padding:8px 16px;background:var(--primary);color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:6px">🔗 Open Student EMR Session →</a>';
+    html += '<a href="admin-review.html?as=' + encodeURIComponent(selectedUid) + '" target="_blank" style="padding:8px 16px;background:var(--primary);color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:6px">🔗 Open Student EMR Session →</a>';
     html += '</div>';
 
     if (subs.length === 0) {
