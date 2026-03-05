@@ -846,6 +846,16 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
+<div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1B4F72,#2874A6);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:13px;gap:12px">
+  <div style="display:flex;align-items:center;gap:10px">
+    <span style="background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.05em">DEMO MODE</span>
+    <span style="opacity:.9">You're previewing the <strong>Anaphylaxis</strong> case — full EMR, real chart data. CoachDx AI coaching is available after sign-up.</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+    <a href="auth/register.html" style="background:#fff;color:#1B4F72;font-weight:700;font-size:12px;padding:7px 16px;border-radius:8px;text-decoration:none;white-space:nowrap">Create Free Account →</a>
+    <button onclick="document.getElementById('demo-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:18px;padding:0 4px;line-height:1" aria-label="Dismiss">×</button>
+  </div>
+</div>
 <div id="app" id="main-content" role="main"></div>
 <div id="toast" class="toast"></div>
 <div id="annotationPopover" class="annotation-popover"></div>
@@ -1283,6 +1293,20 @@ var CASE_ID = _cxRaw ? (function(){try{var s=_cxRaw;while(s.length%4)s+='=';retu
 var URL_SETTING = _urlParams.get('setting') || '';
 var URL_SPECIALTY = _urlParams.get('specialty') || '';
 // URL params applied to S after state is declared (see below)
+
+// ── Demo banner activation ──────────────────────────────────────
+(function(){
+  if(_urlParams.get('demo')==='1'){
+    var banner=document.getElementById('demo-banner');
+    if(banner){
+      banner.style.display='flex';
+      // Push body down so banner doesn't overlap content
+      document.body.style.paddingTop='46px';
+    }
+  }
+})();
+
+
 
 // ═══════════════════════════════════════════════════════════════
 // MULTI-SETTING SELECTOR — Data & Renderers
@@ -2190,6 +2214,21 @@ function getCoachPersonaTitle(){
 }
 
 function renderCoachDx(){
+  // Demo gate — show upgrade prompt instead of full coach
+  if(S.currentUser && S.currentUser._demo){
+    return '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center;min-height:400px">'
+      +'<div style="font-size:48px;margin-bottom:20px">💬</div>'
+      +'<h2 style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:10px">CoachDx — AI Attending</h2>'
+      +'<p style="font-size:14px;color:var(--text-secondary);line-height:1.7;max-width:420px;margin-bottom:8px">CoachDx is a Socratic AI coach that questions your reasoning in real time. <em>"Why did you anchor on PE before calculating the Wells score?"</em></p>'
+      +'<p style="font-size:13px;color:var(--text-muted);max-width:400px;margin-bottom:28px">Available on free and Pro accounts. Create a free account to unlock CoachDx, spaced repetition, and your progress dashboard.</p>'
+      +'<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">'
+      +'<a href="auth/register.html" style="display:inline-flex;align-items:center;gap:8px;background:#2874A6;color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none">Create Free Account →</a>'
+      +'<a href="auth/login.html" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);font-weight:600;font-size:14px;padding:13px 24px;border-radius:10px;border:1px solid var(--border);text-decoration:none">Sign In</a>'
+      +'</div>'
+      +'<p style="font-size:11px;color:var(--text-muted);margin-top:20px">Free forever · No credit card required</p>'
+      +'</div>';
+  }
+
   var settingLabel=getCoachSettingLabel();
   var personaTitle=getCoachPersonaTitle();
   

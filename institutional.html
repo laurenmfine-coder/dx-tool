@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2874A6">
+<title>ReasonDx for Institutions — Medical School & Residency Licensing</title>
+<meta name="description" content="Deploy ReasonDx across your medical school or residency program. Faculty dashboards, cohort analytics, LMS integration, and custom case authoring. Built for LCME, ACGME, and ARC-PA standards.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F8FAFC;--card:#fff;--border:#E2E8F0;--border-hover:#CBD5E1;
+  --text:#1E293B;--dim:#64748B;--dim2:#94A3B8;
+  --blue:#2874A6;--blue-d:#1B4F72;--blue-light:#3498DB;
+  --blue-bg:rgba(40,116,166,.06);--blue-border:rgba(40,116,166,.15);
+  --green:#059669;--amber:#D97706;--purple:#7C3AED;
+  --font:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --serif:'IBM Plex Serif',Georgia,serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;padding:0 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-.5px}
+.nav-logo img{height:28px;width:auto}
+.nav-links{display:flex;align-items:center;gap:20px}
+.nav-links a{font-size:13px;color:var(--dim);font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--blue);color:#fff!important;padding:8px 18px;border-radius:8px;font-weight:700;font-size:12px}
+.nav-cta:hover{background:var(--blue-d)!important}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:96px 24px 72px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 80% 60% at 50% -10%, rgba(40,116,166,.07) 0%, transparent 70%),
+  radial-gradient(ellipse 40% 30% at 80% 80%, rgba(5,150,105,.04) 0%, transparent 60%);
+  pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);background:var(--blue-bg);padding:6px 16px;border-radius:100px;border:1px solid var(--blue-border);margin-bottom:28px}
+.hero h1{font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.08;letter-spacing:-1.5px;margin-bottom:20px;max-width:820px}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--dim);line-height:1.75;max-width:580px;margin-bottom:12px}
+.hero-sub2{font-size:13px;color:var(--dim2);margin-bottom:36px;font-style:italic}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:52px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:12px;transition:all .2s;border:none;cursor:pointer;font-family:var(--font)}
+.btn-primary:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 12px 40px rgba(40,116,166,.25)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);font-size:14px;font-weight:600;padding:14px 28px;border-radius:12px;border:1px solid var(--border);transition:all .2s}
+.btn-ghost:hover{background:#F0F7FF;border-color:var(--blue-border)}
+.trust-bar{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;font-size:12px;color:var(--dim2)}
+.trust-item{display:flex;align-items:center;gap:6px}
+.trust-item strong{color:var(--dim);font-weight:600}
+
+/* ── SECTION COMMONS ── */
+.section{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+.section-badge{display:inline-flex;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);background:var(--blue-bg);padding:5px 14px;border-radius:6px;border:1px solid var(--blue-border);margin-bottom:12px}
+.section-title{font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.8px;margin-bottom:8px;line-height:1.15}
+.section-sub{font-size:15px;color:var(--dim);line-height:1.7;max-width:560px;margin-bottom:40px}
+
+/* ── STATS STRIP ── */
+.stats-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:44px 24px;margin-bottom:0}
+.stats-inner{max-width:900px;margin:0 auto;display:flex;justify-content:center;gap:56px;flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-num{font-size:38px;font-weight:800;color:var(--blue);letter-spacing:-1px;line-height:1}
+.stat-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-top:5px}
+
+/* ── PROBLEM STATEMENT ── */
+.problem-section{background:linear-gradient(165deg,#1E293B,#0F172A);color:#fff;padding:72px 24px}
+.problem-inner{max-width:900px;margin:0 auto}
+.problem-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#93C5FD;margin-bottom:20px}
+.problem-title{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-.8px;line-height:1.2;margin-bottom:16px}
+.problem-title em{font-style:italic;color:#60A5FA}
+.problem-body{font-size:15px;color:rgba(255,255,255,.7);line-height:1.8;max-width:680px;margin-bottom:32px}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.problem-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:24px;backdrop-filter:blur(8px)}
+.problem-card-num{font-size:32px;font-weight:800;color:#60A5FA;margin-bottom:8px}
+.problem-card-label{font-size:13px;color:rgba(255,255,255,.6);line-height:1.5}
+.problem-card-label strong{color:#fff;display:block;font-size:14px;margin-bottom:4px}
+
+/* ── FEATURE CARDS ── */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feature-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;transition:all .25s;box-shadow:0 1px 3px rgba(0,0,0,.04);position:relative;overflow:hidden}
+.feature-card:hover{border-color:var(--border-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent-color,var(--blue));opacity:0;transition:opacity .25s}
+.feature-card:hover::before{opacity:1}
+.f-icon{font-size:28px;margin-bottom:14px;display:block}
+.f-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.f-desc{font-size:13px;color:var(--dim);line-height:1.65}
+.f-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:4px;margin-top:10px;background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+
+/* ── HOW IT WORKS ── */
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.how-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);z-index:0}
+.how-step{text-align:center;padding:0 16px;position:relative;z-index:1}
+.how-step-num{width:56px;height:56px;border-radius:50%;background:var(--blue);color:#fff;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:3px solid #fff;box-shadow:0 0 0 1px var(--blue-border)}
+.how-step-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.how-step-desc{font-size:12px;color:var(--dim);line-height:1.6}
+
+/* ── LMS SECTION ── */
+.lms-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.lms-text .section-title{margin-bottom:16px}
+.lms-badge-row{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.lms-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:6px 14px;border-radius:8px;background:#fff;border:1px solid var(--border);color:var(--text)}
+.lms-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
+.lms-visual{background:linear-gradient(165deg,rgba(40,116,166,.04),#fff);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.lms-screen-header{display:flex;align-items:center;gap:8px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.lms-screen-dot{width:10px;height:10px;border-radius:50%}
+.lms-table{width:100%;border-collapse:collapse;font-size:12px}
+.lms-table th{text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);padding:6px 8px;border-bottom:1px solid var(--border)}
+.lms-table td{padding:8px 8px;border-bottom:1px solid #F1F5F9;color:var(--text)}
+.lms-table tr:last-child td{border-bottom:none}
+.badge-sm{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px}
+.badge-green{background:rgba(5,150,105,.1);color:var(--green)}
+.badge-amber{background:rgba(217,119,6,.1);color:var(--amber)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.trend-up{color:var(--green);font-weight:700}
+.trend-down{color:#DC2626;font-weight:700}
+
+/* ── ACCREDITATION ── */
+.accred-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.accred-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.accred-icon{font-size:32px;margin-bottom:12px}
+.accred-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.accred-desc{font-size:12px;color:var(--dim);line-height:1.6}
+.accred-tags{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:10px}
+.accred-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--blue-bg);color:var(--blue)}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:900px;margin:0 auto}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 24px;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.price-card.featured{border-color:var(--blue-border);background:linear-gradient(165deg,rgba(40,116,166,.04),var(--card));position:relative}
+.price-card.featured::before{content:'RECOMMENDED';position:absolute;top:-10px;right:20px;font-size:9px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--blue);padding:4px 12px;border-radius:6px}
+.price-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:8px}
+.price-amount{font-size:32px;font-weight:800;letter-spacing:-1px;margin-bottom:4px}
+.price-amount span{font-size:14px;font-weight:500;color:var(--dim)}
+.price-period{font-size:12px;color:var(--dim);margin-bottom:20px}
+.price-features{list-style:none;margin-bottom:24px}
+.price-features li{font-size:13px;padding:5px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.price-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+.price-features li.na::before{content:'—';color:var(--dim2)}
+.price-features li.na{color:var(--dim2)}
+.price-btn{display:block;width:100%;text-align:center;padding:12px;border-radius:10px;font-size:13px;font-weight:700;transition:all .15s;cursor:pointer;border:none;font-family:var(--font)}
+.price-btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}
+.price-btn-outline:hover{background:#F0F7FF;border-color:var(--blue-border)}
+.price-btn-fill{background:var(--blue);color:#fff}
+.price-btn-fill:hover{background:var(--blue-d)}
+
+/* ── TESTIMONIALS ── */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.testimonial-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.testimonial-quote{font-size:20px;color:var(--blue);margin-bottom:10px}
+.testimonial-text{font-size:13.5px;color:var(--text);line-height:1.7;margin-bottom:14px;font-style:italic}
+.testimonial-author{font-size:12px;color:var(--dim);font-weight:600}
+.testimonial-role{font-size:11px;color:var(--dim2);margin-top:2px}
+
+/* ── FAQ ── */
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);background:none;border:none;width:100%;text-align:left;font-family:inherit;transition:color .15s}
+.faq-q:hover{color:var(--blue)}
+.faq-q::after{content:'+';font-size:20px;color:var(--dim);transition:transform .2s;flex-shrink:0;margin-left:16px}
+.faq-item.open .faq-q::after{transform:rotate(45deg);color:var(--blue)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-item.open .faq-a{max-height:400px;padding:0 0 20px}
+.faq-a p{font-size:14px;color:var(--dim);line-height:1.7}
+
+/* ── CTA BAND ── */
+.cta-band{background:linear-gradient(135deg,var(--blue-d),var(--blue));padding:72px 24px;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(255,255,255,.06) 0%,transparent 70%)}
+.cta-band h2{font-size:clamp(26px,4vw,42px);font-weight:800;color:#fff;letter-spacing:-.8px;margin-bottom:12px;position:relative}
+.cta-band p{font-size:16px;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto 32px;line-height:1.7;position:relative}
+.cta-band-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-white{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--blue-d);font-weight:700;font-size:15px;padding:15px 32px;border-radius:12px;transition:all .2s}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.2)}
+.btn-outline-white{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;font-weight:600;font-size:14px;padding:14px 28px;border-radius:12px;border:1.5px solid rgba(255,255,255,.4);transition:all .2s}
+.btn-outline-white:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7)}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid var(--border);padding:48px 24px;max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.footer-brand p{font-size:12px;color:var(--dim);line-height:1.7;margin-top:8px;max-width:260px}
+.footer-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim2);margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:var(--dim);padding:3px 0;transition:color .15s}
+.footer-col a:hover{color:var(--blue)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border)}
+.footer-copy{font-size:11px;color:var(--dim2)}
+.footer-social{display:flex;gap:12px}
+.footer-social a{font-size:11px;color:var(--dim);padding:4px 8px;border:1px solid var(--border);border-radius:6px;transition:all .15s}
+.footer-social a:hover{color:var(--blue);border-color:var(--blue-border)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .feature-grid,.how-steps,.accred-grid,.pricing-grid,.testimonials-grid{grid-template-columns:1fr 1fr}
+  .lms-grid{grid-template-columns:1fr}
+  .problem-grid{grid-template-columns:1fr}
+  .how-steps::before{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .feature-grid,.accred-grid,.pricing-grid,.testimonials-grid{grid-template-columns:1fr}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .nav-links a:not(.nav-cta){display:none}
+  .nav{padding:0 16px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
+  .cta-band-btns{flex-direction:column;align-items:center}
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero > *{animation:fadeUp .6s ease both}
+.hero > *:nth-child(1){animation-delay:.1s}
+.hero > *:nth-child(2){animation-delay:.2s}
+.hero > *:nth-child(3){animation-delay:.3s}
+.hero > *:nth-child(4){animation-delay:.4s}
+.hero > *:nth-child(5){animation-delay:.5s}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" style="display:flex;align-items:center;gap:10px">
+    <img src="icons/logo-transparent.png" alt="ReasonDx" style="height:28px;width:auto">
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#accreditation">Accreditation</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="index.html">For Students</a>
+    <a class="nav-cta" href="mailto:hello@reasondx.com">Request Demo</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">For Medical Schools, PA Programs & Residencies</div>
+  <h1>Clinical reasoning education<br>that scales across your <em>entire curriculum</em></h1>
+  <p class="hero-sub">Deploy ReasonDx across pre-clerkship, clerkship, and GME in a single institutional license. Track every student's reasoning patterns before they reach the wards.</p>
+  <p class="hero-sub2">Built by Lauren Fine, MD, FAAAAI · NSU Assistant Dean, Clinical Skills Education · Harvard Macy Institute Faculty</p>
+  <div class="hero-ctas">
+    <a class="btn-primary" href="mailto:hello@reasondx.com?subject=Institutional Demo Request">Request a Demo →</a>
+    <a class="btn-ghost" href="#features">See What's Included</a>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-item">✓ <strong>LCME</strong> standards aligned</div>
+    <div class="trust-item">✓ <strong>ACGME</strong> milestone mapping</div>
+    <div class="trust-item">✓ <strong>ARC-PA</strong> competency framework</div>
+    <div class="trust-item">✓ <strong>Canvas / Blackboard / Moodle</strong> LMS integration</div>
+    <div class="trust-item">✓ <strong>FERPA</strong> compliant</div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">145</div><div class="stat-label">Clinical Cases</div></div>
+    <div class="stat-item"><div class="stat-num">23</div><div class="stat-label">Specialties</div></div>
+    <div class="stat-item"><div class="stat-num">560</div><div class="stat-label">Pathophysiology Topics</div></div>
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Clinical Settings</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Open-Access Evidence Base</div></div>
+  </div>
+</div>
+
+<!-- ── PROBLEM STATEMENT ── -->
+<div class="problem-section">
+  <div class="problem-inner">
+    <div class="problem-eyebrow">The Problem We're Solving</div>
+    <h2 class="problem-title">Your students arrive on the wards<br>before their reasoning is <em>ready</em></h2>
+    <p class="problem-body">Clinical reasoning is the most consequential skill in medicine — and the hardest to teach at scale. Students memorize facts but can't synthesize them under pressure. Clerkship directors see it. Residency programs feel it. LCME and ACGME are measuring it. ReasonDx gives you the infrastructure to develop and document it.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-card-num">46%</div>
+        <div class="problem-card-label"><strong>of diagnostic errors</strong> involve cognitive failures in clinical reasoning — not knowledge gaps (AHRQ, 2022)</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-num">LCME ED-6</div>
+        <div class="problem-card-label"><strong>requires documentation</strong> of clinical reasoning skill development and formative assessment across the curriculum</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-num">EPA 1</div>
+        <div class="problem-card-label"><strong>"Gather a history and perform physical exam"</strong> — the first EPA assumes reasoning readiness most programs can't verify</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── INSTITUTIONAL FEATURES ── -->
+<section class="section" id="features" style="padding-top:72px">
+  <div class="section-badge">Institutional Features</div>
+  <div class="section-title">Everything your curriculum committee needs</div>
+  <p class="section-sub">ReasonDx is built for deployment at scale — not just individual student access.</p>
+  <div class="feature-grid">
+    <div class="feature-card" style="--accent-color:#2874A6">
+      <span class="f-icon">📊</span>
+      <div class="f-title">Faculty Analytics Dashboard</div>
+      <div class="f-desc">Real-time view of every student's reasoning patterns, cognitive trap frequency, case completion rates, and differential accuracy. Identify at-risk students before they hit the wards.</div>
+      <span class="f-tag">Formative Assessment</span>
+    </div>
+    <div class="feature-card" style="--accent-color:#059669">
+      <span class="f-icon">👥</span>
+      <div class="f-title">Cohort Analytics</div>
+      <div class="f-desc">Track reasoning development across your entire cohort. See which diagnostic categories trip students up most, compare cohort-to-cohort trends, and export data for LCME reporting.</div>
+      <span class="f-tag">Program Evaluation</span>
+    </div>
+    <div class="feature-card" style="--accent-color:#7C3AED">
+      <span class="f-icon">🔗</span>
+      <div class="f-title">LMS Integration</div>
+      <div class="f-desc">Canvas, Blackboard, Moodle, and D2L supported. Embed ReasonDx case assignments directly into your course modules. SSO via institutional credentials.</div>
+      <span class="f-tag">Canvas · Blackboard · Moodle</span>
+    </div>
+    <div class="feature-card" style="--accent-color:#D97706">
+      <span class="f-icon">🏗️</span>
+      <div class="f-title">Custom Case Authoring</div>
+      <div class="f-desc">Build cases specific to your patient population, your curriculum sequence, or your specialty. CaseForge provides a structured authoring environment with clinical accuracy validation.</div>
+      <span class="f-tag">CaseForge Tool</span>
+    </div>
+    <div class="feature-card" style="--accent-color:#0891B2">
+      <span class="f-icon">🎯</span>
+      <div class="f-title">ACGME Milestone Tracking</div>
+      <div class="f-desc">Every case maps to ACGME milestones and EPAs. Track individual resident milestone progress automatically. Export milestone data in ACGME-compatible formats for CCC review.</div>
+      <span class="f-tag">GME Ready</span>
+    </div>
+    <div class="feature-card" style="--accent-color:#EC4899">
+      <span class="f-icon">💬</span>
+      <div class="f-title">CoachDx for Educators</div>
+      <div class="f-desc">Faculty can review every student's CoachDx conversation — see exactly how a student reasoned through a case, where they anchored, and what questions the AI had to push on.</div>
+      <span class="f-tag">Reasoning Transparency</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section" id="how-it-works">
+  <div class="section-badge">Implementation</div>
+  <div class="section-title">Live in your curriculum in days, not months</div>
+  <p class="section-sub">We handle the setup. You focus on the teaching.</p>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-step-num">1</div>
+      <div class="how-step-title">Scoping Call</div>
+      <div class="how-step-desc">30-minute call to understand your curriculum, accreditation needs, and integration requirements. We map cases to your course sequence.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">2</div>
+      <div class="how-step-title">Admin Setup</div>
+      <div class="how-step-desc">Your IT or us — SSO configuration, LMS embedding, faculty account provisioning, and student roster import. Typically 1–3 business days.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">3</div>
+      <div class="how-step-title">Faculty Onboarding</div>
+      <div class="how-step-desc">Live training session for faculty on the dashboard, case assignment, and how to interpret reasoning analytics for advising.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">4</div>
+      <div class="how-step-title">Launch + Support</div>
+      <div class="how-step-desc">Dedicated contact for your institution throughout the year. Quarterly analytics reviews and ongoing case library updates included.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DASHBOARD MOCKUP ── -->
+<section class="section" style="padding-top:0">
+  <div class="lms-grid">
+    <div class="lms-text">
+      <div class="section-badge">Faculty Dashboard</div>
+      <div class="section-title">See which students are struggling before they fail</div>
+      <p style="font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:20px">The ReasonDx faculty dashboard shows you each student's reasoning trajectory — not just their scores. Identify premature closure patterns, see which diagnostic categories are repeatedly missed, and flag students for advising before small gaps become big problems.</p>
+      <div class="lms-badge-row">
+        <div class="lms-badge"><span class="dot"></span> Real-time data</div>
+        <div class="lms-badge"><span class="dot"></span> Cohort comparisons</div>
+        <div class="lms-badge"><span class="dot"></span> Export to CSV / PDF</div>
+        <div class="lms-badge"><span class="dot"></span> LCME report-ready</div>
+      </div>
+      <a class="btn-primary" href="mailto:hello@reasondx.com?subject=Dashboard Demo Request" style="display:inline-flex;margin-top:8px">See a Live Demo →</a>
+    </div>
+    <div class="lms-visual">
+      <div class="lms-screen-header">
+        <div class="lms-screen-dot" style="background:#FF5F57"></div>
+        <div class="lms-screen-dot" style="background:#FEBC2E"></div>
+        <div class="lms-screen-dot" style="background:#28C840"></div>
+        <span style="font-size:11px;color:var(--dim2);margin-left:8px">Faculty Dashboard — Cohort View</span>
+      </div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:12px">M3 Cohort · Clinical Reasoning Metrics · March 2026</div>
+      <table class="lms-table">
+        <thead>
+          <tr><th>Student</th><th>Cases</th><th>Avg Score</th><th>Cognitive Traps</th><th>Trend</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chen, M.</td>
+            <td>14</td>
+            <td><span class="badge-sm badge-green">87%</span></td>
+            <td>Anchoring ×2</td>
+            <td class="trend-up">↑ +12%</td>
+          </tr>
+          <tr>
+            <td>Johnson, K.</td>
+            <td>11</td>
+            <td><span class="badge-sm badge-amber">71%</span></td>
+            <td>Premature closure ×5</td>
+            <td class="trend-down">↓ –3%</td>
+          </tr>
+          <tr>
+            <td>Okonkwo, T.</td>
+            <td>16</td>
+            <td><span class="badge-sm badge-green">91%</span></td>
+            <td>None flagged</td>
+            <td class="trend-up">↑ +8%</td>
+          </tr>
+          <tr>
+            <td>Patel, R.</td>
+            <td>9</td>
+            <td><span class="badge-sm badge-amber">68%</span></td>
+            <td>Framing ×3, Anchoring ×4</td>
+            <td style="color:var(--dim)">→ Stable</td>
+          </tr>
+          <tr>
+            <td>Williams, A.</td>
+            <td>13</td>
+            <td><span class="badge-sm badge-blue">79%</span></td>
+            <td>Search satisficing ×2</td>
+            <td class="trend-up">↑ +6%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--dim2)">
+        <span>⚠️ 2 students flagged for advising</span>
+        <span>Last updated: 4 min ago</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ACCREDITATION ── -->
+<section class="section" id="accreditation">
+  <div class="section-badge">Accreditation Alignment</div>
+  <div class="section-title">Built for your compliance requirements</div>
+  <p class="section-sub">ReasonDx maps directly to the standards your accreditors are measuring.</p>
+  <div class="accred-grid">
+    <div class="accred-card">
+      <div class="accred-icon">🏛️</div>
+      <div class="accred-title">LCME Standards</div>
+      <div class="accred-desc">Directly addresses ED-6 (clinical reasoning development), ED-8 (formative assessment), and ED-9 (curricular renewal) with exportable documentation.</div>
+      <div class="accred-tags">
+        <span class="accred-tag">ED-6</span>
+        <span class="accred-tag">ED-8</span>
+        <span class="accred-tag">ED-9</span>
+      </div>
+    </div>
+    <div class="accred-card">
+      <div class="accred-icon">🩺</div>
+      <div class="accred-title">ACGME Milestones</div>
+      <div class="accred-desc">All cases and CoachDx sessions map to ACGME milestones (MK1, PC1–PC5, SBP3). CCC-ready exports in ACGME-compatible format for milestone assessment.</div>
+      <div class="accred-tags">
+        <span class="accred-tag">MK1</span>
+        <span class="accred-tag">PC1–PC5</span>
+        <span class="accred-tag">SBP3</span>
+      </div>
+    </div>
+    <div class="accred-card">
+      <div class="accred-icon">📋</div>
+      <div class="accred-title">ARC-PA & AANP</div>
+      <div class="accred-desc">PA and NP program alignment built in. All cases include scope-of-practice appropriate decision points. Competency mapping to ARC-PA Standards and AANP domains.</div>
+      <div class="accred-tags">
+        <span class="accred-tag">ARC-PA</span>
+        <span class="accred-tag">AANP</span>
+        <span class="accred-tag">EPAs</span>
+      </div>
+    </div>
+    <div class="accred-card">
+      <div class="accred-icon">📝</div>
+      <div class="accred-title">USMLE / COMLEX Alignment</div>
+      <div class="accred-desc">Cases mapped to Step 1, Step 2 CK, and COMLEX Level 1–2 frameworks. Students using ReasonDx prep for boards while developing clinical reasoning skills simultaneously.</div>
+      <div class="accred-tags">
+        <span class="accred-tag">Step 1</span>
+        <span class="accred-tag">Step 2 CK</span>
+        <span class="accred-tag">COMLEX</span>
+      </div>
+    </div>
+    <div class="accred-card">
+      <div class="accred-icon">🔒</div>
+      <div class="accred-title">FERPA Compliance</div>
+      <div class="accred-desc">Student data is institution-scoped and never shared across institutions. All analytics are role-based — faculty see only their students. FERPA release documentation available on request.</div>
+      <div class="accred-tags">
+        <span class="accred-tag">FERPA</span>
+        <span class="accred-tag">Role-Based</span>
+        <span class="accred-tag">Auditable</span>
+      </div>
+    </div>
+    <div class="accred-card">
+      <div class="accred-icon">📖</div>
+      <div class="accred-title">Evidence-Based Content</div>
+      <div class="accred-desc">100% open-access guideline sources (AHA, IDSA, ACS, StatPearls). Reviewed by board-certified physicians. Annual content audit against guideline updates. No paywall sources.</div>
+      <div class="accred-tags">
+        <span class="accred-tag">AHA</span>
+        <span class="accred-tag">IDSA</span>
+        <span class="accred-tag">StatPearls</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="section">
+  <div class="section-badge">From Educators</div>
+  <div class="section-title">What faculty are saying</div>
+  <p class="section-sub">Early feedback from medical educators and program directors.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">❝</div>
+      <div class="testimonial-text">The faculty dashboard finally gives me something I can bring to a curriculum committee meeting. It's not just "students completed cases" — it's "here are the specific reasoning errors your cohort makes repeatedly."</div>
+      <div class="testimonial-author">Clerkship Director, Internal Medicine</div>
+      <div class="testimonial-role">Allopathic Medical School</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">❝</div>
+      <div class="testimonial-text">I assigned the CHF exacerbation case before my small group session and the conversation was completely different. Students came in having already worked through the differential — we could go straight to the reasoning.</div>
+      <div class="testimonial-author">Assistant Professor, Medical Education</div>
+      <div class="testimonial-role">PA Program, Graduate Health Sciences</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">❝</div>
+      <div class="testimonial-text">The ACGME milestone export alone would have saved our CCC dozens of hours last year. When the data is already mapped, the conversation shifts from "what did they complete" to "what does their reasoning trajectory tell us."</div>
+      <div class="testimonial-author">Program Director, Emergency Medicine</div>
+      <div class="testimonial-role">Residency Program, Academic Medical Center</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="section" id="pricing">
+  <div class="section-badge">Institutional Pricing</div>
+  <div class="section-title">Flexible licensing for programs of every size</div>
+  <p class="section-sub" style="margin-bottom:32px">All institutional plans include faculty analytics, cohort tracking, and dedicated support. Contact us for exact pricing — we structure around your enrollment and budget cycle.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Small Program</div>
+      <div class="price-amount">Custom<span> pricing</span></div>
+      <div class="price-period">Up to 100 learners / year</div>
+      <ul class="price-features">
+        <li>Full case library access</li>
+        <li>Faculty analytics dashboard</li>
+        <li>Cohort tracking & reporting</li>
+        <li>LMS integration (1 system)</li>
+        <li>Email support</li>
+        <li class="na">Custom case authoring</li>
+        <li class="na">SSO / institutional login</li>
+        <li class="na">Dedicated account manager</li>
+      </ul>
+      <a class="price-btn price-btn-outline" href="mailto:hello@reasondx.com?subject=Small Program Inquiry">Contact Us</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-name">Medical School</div>
+      <div class="price-amount">Custom<span> pricing</span></div>
+      <div class="price-period">100–500 learners / year</div>
+      <ul class="price-features">
+        <li>Full case library access</li>
+        <li>Faculty analytics dashboard</li>
+        <li>Cohort tracking & LCME exports</li>
+        <li>LMS integration (all systems)</li>
+        <li>SSO / institutional login</li>
+        <li>Custom case authoring (CaseForge)</li>
+        <li>ACGME milestone tracking</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a class="price-btn price-btn-fill" href="mailto:hello@reasondx.com?subject=Medical School Licensing Inquiry">Request Proposal</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Health System / GME</div>
+      <div class="price-amount">Custom<span> pricing</span></div>
+      <div class="price-period">500+ learners / year</div>
+      <ul class="price-features">
+        <li>Everything in Medical School</li>
+        <li>Multi-program deployment</li>
+        <li>Residency & fellowship tracking</li>
+        <li>CCC milestone export tools</li>
+        <li>API access for data integration</li>
+        <li>Co-development opportunities</li>
+        <li>Priority feature requests</li>
+        <li>Quarterly strategy reviews</li>
+      </ul>
+      <a class="price-btn price-btn-outline" href="mailto:hello@reasondx.com?subject=Health System Licensing Inquiry">Contact Us</a>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:12px;color:var(--dim2);margin-top:24px">All plans include a 30-day pilot period. Budget cycle flexibility available — ask about annual, semester, or grant-funded arrangements.</p>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section" id="faq">
+  <div class="section-badge">FAQ</div>
+  <h2 class="section-title">Questions from program directors</h2>
+  <div class="faq-list" style="margin-top:32px">
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How quickly can we deploy ReasonDx institution-wide?</button>
+      <div class="faq-a"><p>Most programs are fully deployed within 5–10 business days of contract signing. This includes LMS integration, SSO setup, faculty account provisioning, and roster import. We handle the technical setup — your IT team just needs to provide SSO credentials and an LMS API key.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does it integrate with Canvas / Blackboard / Moodle?</button>
+      <div class="faq-a"><p>Yes. ReasonDx supports LTI 1.3 integration with Canvas, Blackboard, Moodle, and D2L/Brightspace. Assignments, completion data, and grades can flow back to your gradebook automatically. We also support deep linking so faculty can embed specific cases directly into course modules.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does ReasonDx handle FERPA and student data privacy?</button>
+      <div class="faq-a"><p>All student data is institution-scoped — meaning only faculty and administrators at your institution can see your students' data. We never share or aggregate student-identifiable data across institutions. Data processing agreements (DPAs) are available for institutions that require them. We do not sell or use student data for advertising or model training.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can we build our own cases specific to our curriculum?</button>
+      <div class="faq-a"><p>Yes — CaseForge, our institutional case authoring tool, lets faculty build cases scoped to your program. Cases can be built from scratch or by adapting existing ReasonDx cases. All custom cases go through clinical accuracy validation before deployment. Authoring access is included in Medical School and Health System plans.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is there a pilot option before committing to a full license?</button>
+      <div class="faq-a"><p>Yes. We offer a structured 30-day pilot for interested programs. The pilot includes a defined cohort (typically one course or clerkship), full faculty dashboard access, a mid-pilot check-in, and a data summary report at the end. There is no obligation to continue. Contact us to discuss pilot structure and timing.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does ReasonDx fit into a curriculum that already uses Aquifer, Amboss, or UWorld?</button>
+      <div class="faq-a"><p>ReasonDx is complementary, not competitive, to question banks and traditional case libraries. Question banks build knowledge recall; ReasonDx builds reasoning process. Programs typically position ReasonDx for small-group preparation, clinical reasoning instruction blocks, pre-clerkship bridging, and remediation — while keeping question banks for board prep. We can share a curriculum mapping guide on request.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Who built ReasonDx and what is their academic background?</button>
+      <div class="faq-a"><p>ReasonDx was designed and built by Lauren Fine, MD, FAAAAI — a board-certified allergist/immunologist and Assistant Dean of Clinical Skills Education at Nova Southeastern University's Dr. Kiran C. Patel College of Allopathic Medicine. Dr. Fine is faculty at the Harvard Macy Institute and has delivered a TEDx talk on inquiry-based learning in medical education. The platform is built on her direct curriculum design experience and reflects best practices in health professions education.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ── -->
+<div class="cta-band">
+  <h2>Ready to see it in action?</h2>
+  <p>Schedule a 30-minute demo — we'll walk through the faculty dashboard, a live case, and answer your curriculum committee's questions.</p>
+  <div class="cta-band-btns">
+    <a class="btn-white" href="mailto:hello@reasondx.com?subject=Institutional Demo Request">Request a Demo →</a>
+    <a class="btn-outline-white" href="index.html">Explore the Platform</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="icons/logo-transparent.png" alt="ReasonDx" style="height:26px;width:auto;margin-bottom:8px">
+      <p>AI-powered clinical reasoning education. Built by medical educators, for learners and programs across the health professions.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Institutional</h4>
+      <a href="#features">Features</a>
+      <a href="#accreditation">Accreditation</a>
+      <a href="#pricing">Pricing</a>
+      <a href="mailto:hello@reasondx.com">Request Demo</a>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="virtual-emr.html">Virtual EMR</a>
+      <a href="pathway.html">MechanismDx</a>
+      <a href="ed-3d.html">ED Track Board</a>
+      <a href="night-float.html">Night Float</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="index.html">For Students</a>
+      <a href="auth/privacy.html">Privacy Policy</a>
+      <a href="auth/terms.html">Terms of Use</a>
+      <a href="mailto:hello@reasondx.com">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025–2026 ReasonDx · Clinical Reasoning Education Platform</div>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/laurenmfine/">LinkedIn</a>
+      <a href="https://laurenmfine.substack.com/">Substack</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+
+// Nav background on scroll
+window.addEventListener('scroll',function(){
+  document.querySelector('.nav').style.background = window.scrollY>50
+    ? 'rgba(255,255,255,.98)' : 'rgba(255,255,255,.94)';
+});
+</script>
+</body>
+</html>
