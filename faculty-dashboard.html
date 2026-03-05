@@ -549,6 +549,11 @@ var _gradingSub = null;
 var _gradingIdx = 0;
 
 function renderSubmissions() {
+  // If a submission is open for grading, show the grading panel as the full view
+  if (_gradingSub) {
+    return renderGradePanel();
+  }
+
   var pending = FAC.submissions.filter(function(s){ return !hasFeedback(s.studentName, s.week); });
   var graded  = FAC.submissions.filter(function(s){ return  hasFeedback(s.studentName, s.week); });
 
@@ -557,7 +562,6 @@ function renderSubmissions() {
   html += '<div id="subsList">';
   html += renderSubsList(pending);
   html += '</div>';
-  if (_gradingSub) html += renderGradePanel();
   return html;
 }
 
