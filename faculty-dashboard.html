@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faculty Dashboard — ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2874A6;
+  --primary-dark: #1B4F72;
+  --primary-light: #EBF4FB;
+  --accent: #1B5E3B;
+  --accent-light: #ECFDF5;
+  --danger: #DC2626;
+  --danger-light: #FEF2F2;
+  --warning: #D97706;
+  --warning-light: #FFFBEB;
+  --surface: #fff;
+  --bg: #F1F5F9;
+  --border: #E2E8F0;
+  --text: #1E293B;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* ── Header ── */
+.fac-header { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 12px rgba(0,0,0,.15); position: sticky; top: 0; z-index: 100; }
+.fac-header-logo { display: flex; align-items: center; gap: 12px; }
+.fac-header-logo img { height: 28px; }
+.fac-header-title { color: rgba(255,255,255,.9); font-size: 15px; font-weight: 700; }
+.fac-header-sub { color: rgba(255,255,255,.5); font-size: 11px; margin-left: 8px; }
+.fac-header-nav { display: flex; align-items: center; gap: 16px; }
+.fac-nav-link { color: rgba(255,255,255,.7); font-size: 13px; font-weight: 500; text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: all .15s; }
+.fac-nav-link:hover { color: #fff; background: rgba(255,255,255,.1); }
+.fac-nav-link.active { color: #fff; background: rgba(255,255,255,.15); }
+.fac-signout { padding: 6px 14px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: #fff; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .15s; }
+.fac-signout:hover { background: rgba(255,255,255,.22); }
+
+/* ── Layout ── */
+.fac-layout { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 56px); }
+.fac-sidebar { background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
+.fac-main { padding: 28px 32px; overflow-y: auto; }
+
+/* ── Sidebar ── */
+.fac-user-card { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+.fac-user-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
+.fac-user-name { font-size: 14px; font-weight: 700; }
+.fac-user-role { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; margin-top: 2px; }
+.fac-sidebar-section { padding: 6px 12px 4px; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .6px; }
+.fac-sidebar-btn { display: flex; align-items: center; gap: 10px; padding: 9px 20px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border: none; background: none; width: 100%; text-align: left; font-family: inherit; transition: all .15s; border-left: 3px solid transparent; }
+.fac-sidebar-btn:hover { background: var(--primary-light); color: var(--primary); }
+.fac-sidebar-btn.active { background: var(--primary-light); color: var(--primary); font-weight: 700; border-left-color: var(--primary); }
+.fac-sidebar-btn .fac-sb-badge { margin-left: auto; background: var(--danger); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; }
+.fac-sidebar-btn .fac-sb-badge.green { background: var(--accent); }
+
+/* ── Stats row ── */
+.fac-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.fac-stat { background: var(--surface); border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--border); }
+.fac-stat-val { font-size: 28px; font-weight: 800; color: var(--primary); font-family: 'IBM Plex Mono', monospace; }
+.fac-stat-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .4px; margin-top: 4px; }
+.fac-stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.fac-stat.red .fac-stat-val { color: var(--danger); }
+.fac-stat.green .fac-stat-val { color: var(--accent); }
+.fac-stat.amber .fac-stat-val { color: var(--warning); }
+
+/* ── Section headers ── */
+.fac-section-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.fac-section-title { font-size: 15px; font-weight: 800; color: var(--text); }
+.fac-section-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.fac-btn { padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; border: none; transition: all .15s; }
+.fac-btn-primary { background: var(--primary); color: #fff; }
+.fac-btn-primary:hover { background: var(--primary-dark); }
+.fac-btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-secondary); }
+.fac-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+.fac-btn-sm { padding: 5px 12px; font-size: 11px; }
+
+/* ── Student roster ── */
+.fac-roster { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 28px; }
+.fac-roster-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 120px; padding: 10px 20px; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
+.fac-roster-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 120px; padding: 14px 20px; border-bottom: 1px solid var(--border); align-items: center; transition: background .1s; }
+.fac-roster-row:last-child { border-bottom: none; }
+.fac-roster-row:hover { background: #FAFBFC; }
+.fac-student-name { font-size: 13px; font-weight: 600; }
+.fac-student-email { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.fac-roster-cell { font-size: 12px; color: var(--text-secondary); }
+.fac-status-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; }
+.fac-status-pill.submitted { background: #DCFCE7; color: #15803D; }
+.fac-status-pill.pending { background: #FEF9C3; color: #854D0E; }
+.fac-status-pill.not-started { background: #F1F5F9; color: var(--text-muted); }
+.fac-status-pill.graded { background: var(--primary-light); color: var(--primary); }
+.fac-grade-input-sm { width: 48px; padding: 4px 6px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 12px; font-family: 'IBM Plex Mono', monospace; text-align: center; }
+.fac-grade-input-sm:focus { outline: none; border-color: var(--primary); }
+
+/* ── Quick-grade panel ── */
+.fac-grade-panel { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 28px; }
+.fac-grade-panel-hdr { padding: 16px 20px; background: linear-gradient(135deg, var(--primary-light), #F0F9FF); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.fac-grade-panel-title { font-size: 14px; font-weight: 800; color: var(--primary-dark); }
+.fac-grade-panel-body { padding: 20px; }
+.fac-note-preview { background: var(--bg); border-radius: 10px; padding: 14px; font-size: 12px; line-height: 1.7; color: var(--text-secondary); max-height: 180px; overflow-y: auto; font-family: 'IBM Plex Mono', monospace; white-space: pre-wrap; border: 1px solid var(--border); margin-bottom: 16px; }
+.fac-rubric-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.fac-rubric-row:last-child { border-bottom: none; }
+.fac-rubric-label { flex: 1; font-size: 13px; font-weight: 600; }
+.fac-rubric-max { font-size: 11px; color: var(--text-muted); width: 40px; text-align: right; }
+.fac-score-input { width: 56px; padding: 6px 8px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; text-align: center; transition: border-color .15s; }
+.fac-score-input:focus { outline: none; border-color: var(--primary); }
+.fac-comment-input { flex: 2; padding: 6px 10px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 12px; font-family: inherit; transition: border-color .15s; }
+.fac-comment-input:focus { outline: none; border-color: var(--primary); }
+.fac-grade-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; margin-top: 8px; border-top: 1px solid var(--border); }
+.fac-total-score { font-size: 22px; font-weight: 800; color: var(--primary); font-family: 'IBM Plex Mono', monospace; }
+.fac-prev-next { display: flex; gap: 8px; }
+
+/* ── Submission queue ── */
+.fac-queue { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.fac-queue-item { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .1s; }
+.fac-queue-item:last-child { border-bottom: none; }
+.fac-queue-item:hover { background: var(--primary-light); }
+.fac-queue-item.selected { background: var(--primary-light); border-left: 3px solid var(--primary); }
+.fac-queue-item.needs-grading { border-left: 3px solid var(--danger); }
+.fac-queue-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.fac-queue-name { font-size: 13px; font-weight: 600; }
+.fac-queue-meta { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.fac-queue-right { margin-left: auto; text-align: right; }
+.fac-queue-time { font-size: 11px; color: var(--text-muted); }
+
+/* ── Assignment panel ── */
+.fac-assign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.fac-assign-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; }
+.fac-assign-card-title { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 12px; }
+.fac-student-chip { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: var(--bg); border-radius: 8px; margin-bottom: 6px; font-size: 12px; font-weight: 500; }
+.fac-chip-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; padding: 0 4px; line-height: 1; }
+.fac-chip-remove:hover { color: var(--danger); }
+.fac-add-student { display: flex; gap: 8px; margin-top: 10px; }
+.fac-add-input { flex: 1; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 12px; font-family: inherit; }
+.fac-add-input:focus { outline: none; border-color: var(--primary); }
+
+/* ── Analytics ── */
+.fac-analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.fac-chart-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 18px 20px; }
+.fac-chart-title { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 14px; }
+.fac-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.fac-bar-label { font-size: 11px; color: var(--text-secondary); width: 120px; flex-shrink: 0; }
+.fac-bar-track { flex: 1; background: var(--bg); border-radius: 4px; height: 8px; overflow: hidden; }
+.fac-bar-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+.fac-bar-val { font-size: 11px; font-weight: 600; color: var(--text-secondary); font-family: 'IBM Plex Mono', monospace; width: 32px; text-align: right; }
+
+/* ── Empty states ── */
+.fac-empty { text-align: center; padding: 48px 24px; color: var(--text-muted); }
+.fac-empty-icon { font-size: 36px; margin-bottom: 12px; }
+.fac-empty-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.fac-empty-desc { font-size: 13px; line-height: 1.6; }
+
+/* ── Tabs ── */
+.fac-tabs { display: flex; gap: 2px; background: var(--bg); border-radius: 10px; padding: 3px; margin-bottom: 24px; width: fit-content; }
+.fac-tab { padding: 7px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: none; font-family: inherit; color: var(--text-secondary); transition: all .15s; }
+.fac-tab.active { background: var(--surface); color: var(--primary); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+
+/* ── Toast ── */
+.fac-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1E293B; color: #fff; padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; opacity: 0; transition: all .25s; z-index: 9999; pointer-events: none; }
+.fac-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .fac-layout { grid-template-columns: 1fr; }
+  .fac-sidebar { display: none; }
+  .fac-stats { grid-template-columns: 1fr 1fr; }
+  .fac-roster-header, .fac-roster-row { grid-template-columns: 2fr 1fr 1fr 100px; }
+  .fac-analytics-grid, .fac-assign-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="fac-header">
+  <div class="fac-header-logo">
+    <img src="icons/logo-transparent.png" alt="ReasonDx" onerror="this.style.display='none'">
+    <span class="fac-header-title">ReasonDx</span>
+    <span class="fac-header-sub">Faculty Dashboard</span>
+  </div>
+  <div class="fac-header-nav">
+    <a href="virtual-emr.html" class="fac-nav-link">← Virtual EMR</a>
+    <a href="analytics-dashboard.html" class="fac-nav-link">Analytics</a>
+    <a href="cohort-analytics.html" class="fac-nav-link">Cohort</a>
+    <button class="fac-signout" id="signoutBtn" onclick="facSignOut()">Sign Out</button>
+  </div>
+</div>
+
+<div class="fac-layout">
+  <!-- Sidebar -->
+  <div class="fac-sidebar">
+    <div class="fac-user-card">
+      <div class="fac-user-avatar" id="facAvatar">👨‍⚕️</div>
+      <div class="fac-user-name" id="facUserName">Loading...</div>
+      <div class="fac-user-role" id="facUserRole">Faculty</div>
+    </div>
+    <div class="fac-sidebar-section">Views</div>
+    <button class="fac-sidebar-btn active" onclick="showView('overview')" id="sb-overview">
+      📊 Overview
+    </button>
+    <button class="fac-sidebar-btn" onclick="showView('submissions')" id="sb-submissions">
+      📝 Submissions
+      <span class="fac-sb-badge" id="sb-badge-submissions">0</span>
+    </button>
+    <button class="fac-sidebar-btn" onclick="showView('roster')" id="sb-roster">
+      👥 Student Roster
+    </button>
+    <button class="fac-sidebar-btn" onclick="showView('assignments')" id="sb-assignments">
+      🔗 Assignments
+    </button>
+    <button class="fac-sidebar-btn" onclick="showView('analytics')" id="sb-analytics">
+      📈 Class Analytics
+    </button>
+    <div class="fac-sidebar-section" style="margin-top:12px">Quick Actions</div>
+    <button class="fac-sidebar-btn" onclick="window.location.href='virtual-emr.html'">
+      🏥 Enter EMR
+    </button>
+    <button class="fac-sidebar-btn" onclick="window.location.href='cohort-analytics.html'">
+      🎓 Cohort View
+    </button>
+  </div>
+
+  <!-- Main -->
+  <div class="fac-main" id="facMain">
+    <div class="fac-empty">
+      <div class="fac-empty-icon">🔐</div>
+      <div class="fac-empty-title">Sign in required</div>
+      <div class="fac-empty-desc">Loading your dashboard...</div>
+    </div>
+  </div>
+</div>
+
+<div class="fac-toast" id="facToast"></div>
+
+<script src="emr-supabase.js"></script>
+<script>
+// ── Utilities ───────────────────────────────────────────────────────────────
+function esc(s) {
+  if (!s) return '';
+  var d = document.createElement('div');
+  d.textContent = String(s);
+  return d.innerHTML;
+}
+
+function db(k) { try { var r=localStorage.getItem(k); return r?JSON.parse(r):null; } catch(e){return null;} }
+function dbSet(k,v) { try { localStorage.setItem(k,JSON.stringify(v)); } catch(e){} }
+
+function toast(msg, dur) {
+  var el = document.getElementById('facToast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function(){ el.classList.remove('show'); }, dur || 2500);
+}
+
+function relTime(ts) {
+  var d = Date.now() - new Date(ts).getTime();
+  var m = Math.floor(d/60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return m + 'm ago';
+  var h = Math.floor(m/60);
+  if (h < 24) return h + 'h ago';
+  return Math.floor(h/24) + 'd ago';
+}
+
+function initials(name) {
+  return (name||'?').split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase();
+}
+
+// ── State ───────────────────────────────────────────────────────────────────
+var FAC = {
+  currentUser: null,
+  students: [],        // assigned students
+  allStudents: [],     // all students in system
+  submissions: [],     // all submissions from assigned students
+  selectedSub: null,
+  scores: {},
+  comments: {},
+  overallComment: '',
+  currentView: 'overview',
+  pendingCount: 0,
+};
+
+var RUBRIC = [
+  { id:'hpi',        label:'History of Present Illness', max:30 },
+  { id:'assessment', label:'Assessment & Differential',  max:25 },
+  { id:'plan',       label:'Management Plan',            max:25 },
+  { id:'communication', label:'Communication & Organization', max:20 },
+];
+
+// ── Auth ────────────────────────────────────────────────────────────────────
+function facSignOut() {
+  if (window.EMRSupabase) EMRSupabase.signOut().then(function(){ window.location.href='auth/login.html'; });
+  else window.location.href = 'auth/login.html';
+}
+
+function getUsers() { return db('emr-users') || {}; }
+function getEMRRole(uid) {
+  var roles = db('emr-roles') || {};
+  return roles[uid] || 'student';
+}
+function getAssignments() { return db('emr-assignments') || {}; }
+function getFacultyStudents(fuid) {
+  var a = getAssignments();
+  return a[fuid] || [];
+}
+function getSubmissionsForStudent(studentName) {
+  var all = [];
+  // Scan all localStorage keys for this student's submissions
+  for (var i = 0; i < localStorage.length; i++) {
+    var k = localStorage.key(i);
+    if (k && k.startsWith('subs-')) {
+      try {
+        var subs = JSON.parse(localStorage.getItem(k));
+        if (Array.isArray(subs)) {
+          subs.forEach(function(s) {
+            if (s.studentName === studentName || k === 'subs-' + studentName) {
+              all.push(s);
+            }
+          });
+        }
+      } catch(e) {}
+    }
+  }
+  // Also check the direct key
+  var direct = db('subs-' + studentName);
+  if (Array.isArray(direct)) {
+    direct.forEach(function(s) {
+      if (!all.find(function(x){ return x.timestamp === s.timestamp; })) {
+        all.push(Object.assign({ studentName: studentName }, s));
+      }
+    });
+  }
+  return all;
+}
+
+function hasFeedback(studentName, week) {
+  return !!db('feedback-' + studentName + '-' + week);
+}
+
+// ── Bootstrap ────────────────────────────────────────────────────────────────
+function init() {
+  // Try to get current user from Supabase or localStorage fallback
+  var supaUser = null;
+  if (window.EMRSupabase) {
+    EMRSupabase.getSession().then(function(session) {
+      if (session && session.user) {
+        var uid = session.user.email || session.user.id;
+        FAC.currentUser = { username: uid, displayName: (session.user.user_metadata&&session.user.user_metadata.name)||uid.split('@')[0], role: getEMRRole(uid) };
+        if (session.user.user_metadata && session.user.user_metadata.tier === 'admin') FAC.currentUser.role = 'admin';
+        if (FAC.currentUser.role === 'student') {
+          // Redirect students back
+          window.location.href = 'virtual-emr.html';
+          return;
+        }
+        loadData();
+      } else {
+        window.location.href = 'auth/login.html';
+      }
+    }).catch(function() { loadFromLocal(); });
+  } else {
+    loadFromLocal();
+  }
+}
+
+function loadFromLocal() {
+  // Fallback: look for any faculty/admin in localStorage
+  var users = getUsers();
+  var found = Object.values(users).find(function(u) {
+    var r = getEMRRole(u.username);
+    return r === 'faculty' || r === 'admin' || u.tier === 'admin';
+  });
+  if (found) {
+    FAC.currentUser = { username: found.username, displayName: found.displayName, role: getEMRRole(found.username)||'faculty' };
+    loadData();
+  } else {
+    // Dev mode — create a demo faculty session
+    FAC.currentUser = { username: 'faculty@demo.com', displayName: 'Dr. Demo Faculty', role: 'faculty' };
+    loadData();
+  }
+}
+
+function loadData() {
+  var u = FAC.currentUser;
+  var users = getUsers();
+
+  // Update header
+  document.getElementById('facUserName').textContent = u.displayName;
+  document.getElementById('facUserRole').textContent = u.role === 'admin' ? 'Administrator' : 'Faculty';
+  document.getElementById('facAvatar').textContent = u.role === 'admin' ? '🔑' : '👨‍⚕️';
+
+  // Load students
+  FAC.allStudents = Object.values(users).filter(function(u2) { return getEMRRole(u2.username) === 'student'; });
+  if (u.role === 'admin') {
+    FAC.students = FAC.allStudents;
+  } else {
+    var assigned = getFacultyStudents(u.username);
+    FAC.students = FAC.allStudents.filter(function(s) { return assigned.indexOf(s.username) >= 0; });
+  }
+
+  // Load all submissions
+  FAC.submissions = [];
+  FAC.students.forEach(function(s) {
+    var subs = getSubmissionsForStudent(s.username);
+    subs.forEach(function(sub) {
+      FAC.submissions.push(Object.assign({ studentName: s.username, studentDisplay: s.displayName }, sub));
+    });
+  });
+
+  // Sort by timestamp desc
+  FAC.submissions.sort(function(a,b){ return new Date(b.timestamp) - new Date(a.timestamp); });
+
+  // Count ungraded
+  FAC.pendingCount = FAC.submissions.filter(function(s) {
+    return !hasFeedback(s.studentName, s.week);
+  }).length;
+  document.getElementById('sb-badge-submissions').textContent = FAC.pendingCount;
+  if (FAC.pendingCount === 0) document.getElementById('sb-badge-submissions').style.display = 'none';
+
+  showView('overview');
+}
+
+// ── Views ────────────────────────────────────────────────────────────────────
+var _currentView = 'overview';
+
+function showView(view) {
+  _currentView = view;
+  document.querySelectorAll('.fac-sidebar-btn').forEach(function(b) { b.classList.remove('active'); });
+  var sb = document.getElementById('sb-' + view);
+  if (sb) sb.classList.add('active');
+
+  var main = document.getElementById('facMain');
+  switch(view) {
+    case 'overview':    main.innerHTML = renderOverview();    break;
+    case 'submissions': main.innerHTML = renderSubmissions(); break;
+    case 'roster':      main.innerHTML = renderRoster();      break;
+    case 'assignments': main.innerHTML = renderAssignments(); break;
+    case 'analytics':   main.innerHTML = renderAnalytics();   break;
+    default:            main.innerHTML = renderOverview();
+  }
+}
+
+// ── OVERVIEW ─────────────────────────────────────────────────────────────────
+function renderOverview() {
+  var submitted = FAC.submissions.length;
+  var graded = FAC.submissions.filter(function(s){ return hasFeedback(s.studentName, s.week); }).length;
+  var ungraded = submitted - graded;
+  var pct = submitted > 0 ? Math.round((graded/submitted)*100) : 0;
+
+  var html = '';
+
+  // Welcome banner
+  html += '<div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));border-radius:16px;padding:24px 28px;color:#fff;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">';
+  html += '<div>';
+  html += '<div style="font-size:11px;font-weight:600;opacity:.7;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Welcome back</div>';
+  html += '<div style="font-size:22px;font-weight:800;letter-spacing:-.3px">' + esc(FAC.currentUser.displayName) + '</div>';
+  html += '<div style="font-size:13px;opacity:.8;margin-top:4px">' + FAC.students.length + ' assigned students · ' + ungraded + ' submissions need grading</div>';
+  html += '</div>';
+  if (ungraded > 0) {
+    html += '<button onclick="showView(\'submissions\')" style="background:#fff;color:var(--primary);border:none;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Grade Now →</button>';
+  }
+  html += '</div>';
+
+  // Stats
+  html += '<div class="fac-stats">';
+  html += '<div class="fac-stat"><div class="fac-stat-val">' + FAC.students.length + '</div><div class="fac-stat-label">Students</div><div class="fac-stat-sub">assigned to you</div></div>';
+  html += '<div class="fac-stat ' + (ungraded > 0 ? 'red' : 'green') + '"><div class="fac-stat-val">' + ungraded + '</div><div class="fac-stat-label">Need Grading</div><div class="fac-stat-sub">' + graded + ' already graded</div></div>';
+  html += '<div class="fac-stat"><div class="fac-stat-val">' + submitted + '</div><div class="fac-stat-label">Total Submissions</div><div class="fac-stat-sub">across all cases</div></div>';
+  html += '<div class="fac-stat ' + (pct >= 80 ? 'green' : 'amber') + '"><div class="fac-stat-val">' + pct + '%</div><div class="fac-stat-label">Graded</div><div class="fac-stat-sub">completion rate</div></div>';
+  html += '</div>';
+
+  // Recent submissions needing grading
+  var pending = FAC.submissions.filter(function(s){ return !hasFeedback(s.studentName, s.week); }).slice(0, 6);
+
+  html += '<div class="fac-section-hdr"><div><div class="fac-section-title">⚠️ Needs Grading</div><div class="fac-section-sub">Submissions awaiting your review</div></div><button class="fac-btn fac-btn-outline" onclick="showView(\'submissions\')">View All</button></div>';
+
+  if (pending.length === 0) {
+    html += '<div class="fac-roster" style="padding:32px;text-align:center;color:var(--text-muted)"><div style="font-size:24px;margin-bottom:8px">✅</div><div style="font-weight:700">All caught up!</div><div style="font-size:12px;margin-top:4px">No submissions waiting for review</div></div>';
+  } else {
+    html += '<div class="fac-queue" style="margin-bottom:28px">';
+    pending.forEach(function(sub, i) {
+      var initials2 = initials(sub.studentDisplay || sub.studentName);
+      html += '<div class="fac-queue-item needs-grading" onclick="openGrade(' + JSON.stringify(i) + ')">';
+      html += '<div class="fac-queue-avatar">' + esc(initials2) + '</div>';
+      html += '<div><div class="fac-queue-name">' + esc(sub.studentDisplay || sub.studentName) + '</div>';
+      html += '<div class="fac-queue-meta">' + esc(sub.week || 'Case Submission') + ' · ' + (sub.caseId||'Unknown case') + '</div></div>';
+      html += '<div class="fac-queue-right"><span class="fac-status-pill pending">⏳ Needs grading</span><div class="fac-queue-time">' + relTime(sub.timestamp) + '</div></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Recently graded
+  var recent = FAC.submissions.filter(function(s){ return hasFeedback(s.studentName, s.week); }).slice(0, 4);
+  if (recent.length > 0) {
+    html += '<div class="fac-section-hdr"><div><div class="fac-section-title">✅ Recently Graded</div></div></div>';
+    html += '<div class="fac-queue">';
+    recent.forEach(function(sub) {
+      var fb = db('feedback-' + sub.studentName + '-' + sub.week);
+      var score = fb ? fb.totalScore : null;
+      var max = fb ? fb.maxScore : 100;
+      html += '<div class="fac-queue-item">';
+      html += '<div class="fac-queue-avatar">' + esc(initials(sub.studentDisplay||sub.studentName)) + '</div>';
+      html += '<div><div class="fac-queue-name">' + esc(sub.studentDisplay || sub.studentName) + '</div>';
+      html += '<div class="fac-queue-meta">' + esc(sub.week||'') + '</div></div>';
+      html += '<div class="fac-queue-right">';
+      if (score !== null) html += '<span style="font-size:14px;font-weight:800;color:var(--primary);font-family:\'IBM Plex Mono\',monospace">' + score + '/' + max + '</span>';
+      html += '<span class="fac-status-pill graded" style="margin-top:4px;display:flex">✓ Graded</span></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  return html;
+}
+
+// ── SUBMISSIONS (batch grading) ───────────────────────────────────────────────
+var _gradingSub = null;
+var _gradingIdx = 0;
+
+function renderSubmissions() {
+  var pending = FAC.submissions.filter(function(s){ return !hasFeedback(s.studentName, s.week); });
+  var graded  = FAC.submissions.filter(function(s){ return  hasFeedback(s.studentName, s.week); });
+
+  var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">📝 Submission Queue</div><div class="fac-section-sub">' + pending.length + ' pending · ' + graded.length + ' graded</div></div></div>';
+  html += '<div class="fac-tabs"><button class="fac-tab active" onclick="filterSubs(\'pending\',this)">Needs Grading (' + pending.length + ')</button><button class="fac-tab" onclick="filterSubs(\'graded\',this)">Graded (' + graded.length + ')</button><button class="fac-tab" onclick="filterSubs(\'all\',this)">All (' + FAC.submissions.length + ')</button></div>';
+  html += '<div id="subsList">';
+  html += renderSubsList(pending);
+  html += '</div>';
+  if (_gradingSub) html += renderGradePanel();
+  return html;
+}
+
+function renderSubsList(subs) {
+  if (subs.length === 0) return '<div class="fac-empty"><div class="fac-empty-icon">✅</div><div class="fac-empty-title">Nothing here</div><div class="fac-empty-desc">All submissions in this category have been handled.</div></div>';
+  var html = '<div class="fac-queue" style="margin-bottom:24px">';
+  subs.forEach(function(sub, i) {
+    var graded = hasFeedback(sub.studentName, sub.week);
+    html += '<div class="fac-queue-item ' + (graded?'':'needs-grading') + '" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')">';
+    html += '<div class="fac-queue-avatar">' + esc(initials(sub.studentDisplay||sub.studentName)) + '</div>';
+    html += '<div style="flex:1"><div class="fac-queue-name">' + esc(sub.studentDisplay||sub.studentName) + '</div>';
+    html += '<div class="fac-queue-meta">' + esc(sub.week||'Submission') + ' · submitted ' + relTime(sub.timestamp) + '</div></div>';
+    html += '<div class="fac-queue-right">' + (graded ? '<span class="fac-status-pill graded">✓ Graded</span>' : '<span class="fac-status-pill pending">Grade →</span>') + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+window.filterSubs = function(filter, btn) {
+  document.querySelectorAll('.fac-tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var subs = filter === 'pending' ? FAC.submissions.filter(function(s){ return !hasFeedback(s.studentName, s.week); }) :
+             filter === 'graded'  ? FAC.submissions.filter(function(s){ return  hasFeedback(s.studentName, s.week); }) :
+             FAC.submissions;
+  document.getElementById('subsList').innerHTML = renderSubsList(subs);
+};
+
+window.openGrade = function(idx) {
+  _gradingSub = FAC.submissions[idx];
+  _gradingIdx = idx;
+  loadExistingFeedback(_gradingSub);
+  showView('submissions');
+  setTimeout(function(){ var gp=document.getElementById('gradePanel'); if(gp)gp.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+};
+
+window.openGradeById = function(sName, week) {
+  var idx = FAC.submissions.findIndex(function(s){ return s.studentName===sName && (s.week||'')===(week||''); });
+  if (idx >= 0) window.openGrade(idx);
+};
+
+function loadExistingFeedback(sub) {
+  var existing = db('feedback-' + sub.studentName + '-' + (sub.week||''));
+  FAC.scores = existing ? Object.assign({}, existing.scores) : {};
+  FAC.comments = existing ? Object.assign({}, existing.comments) : {};
+  FAC.overallComment = existing ? (existing.overallComment||'') : '';
+}
+
+function renderGradePanel() {
+  if (!_gradingSub) return '';
+  var sub = _gradingSub;
+  var noteText = sub.fields ? Object.values(sub.fields).filter(Boolean).join('\n\n') : (sub.text || '');
+  var total = RUBRIC.reduce(function(a,r){ return a + (parseInt(FAC.scores[r.id])||0); }, 0);
+  var maxTotal = RUBRIC.reduce(function(a,r){ return a + r.max; }, 0);
+
+  // Prev/Next in submissions list
+  var prevIdx = _gradingIdx > 0 ? _gradingIdx - 1 : null;
+  var nextIdx = _gradingIdx < FAC.submissions.length - 1 ? _gradingIdx + 1 : null;
+
+  var html = '<div class="fac-grade-panel" id="gradePanel">';
+  html += '<div class="fac-grade-panel-hdr">';
+  html += '<div><div class="fac-grade-panel-title">📋 Grading: ' + esc(sub.studentDisplay||sub.studentName) + ' — ' + esc(sub.week||'') + '</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);margin-top:3px">Submitted ' + relTime(sub.timestamp) + '</div></div>';
+  html += '<div style="display:flex;gap:8px">';
+  html += prevIdx !== null ? '<button class="fac-btn fac-btn-outline fac-btn-sm" onclick="openGrade(' + prevIdx + ')">← Prev</button>' : '';
+  html += nextIdx !== null ? '<button class="fac-btn fac-btn-outline fac-btn-sm" onclick="openGrade(' + nextIdx + ')">Next →</button>' : '';
+  html += '</div></div>';
+
+  html += '<div class="fac-grade-panel-body">';
+
+  // Note preview
+  if (noteText) {
+    html += '<div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">Student Note</div>';
+    html += '<div class="fac-note-preview">' + esc(noteText.substring(0, 1200)) + (noteText.length > 1200 ? '\n...[truncated]' : '') + '</div>';
+  }
+
+  // Rubric
+  html += '<div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Rubric</div>';
+  RUBRIC.forEach(function(r) {
+    html += '<div class="fac-rubric-row">';
+    html += '<div class="fac-rubric-label">' + esc(r.label) + '</div>';
+    html += '<div class="fac-rubric-max">/' + r.max + '</div>';
+    html += '<input type="number" class="fac-score-input" min="0" max="' + r.max + '" value="' + (FAC.scores[r.id]||'') + '" placeholder="—" oninput="setScore(\'' + r.id + '\',this.value)" onchange="setScore(\'' + r.id + '\',this.value)">';
+    html += '<input type="text" class="fac-comment-input" value="' + esc(FAC.comments[r.id]||'') + '" placeholder="Comment (optional)..." oninput="setComment(\'' + r.id + '\',this.value)">';
+    html += '</div>';
+  });
+
+  // Overall comment
+  html += '<div style="margin-top:16px"><div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">Overall Feedback</div>';
+  html += '<textarea style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;resize:vertical;min-height:80px" placeholder="Narrative feedback for the student..." oninput="FAC.overallComment=this.value">' + esc(FAC.overallComment) + '</textarea></div>';
+
+  // Footer
+  html += '<div class="fac-grade-footer">';
+  html += '<div><span style="font-size:11px;color:var(--text-muted)">Total: </span><span class="fac-total-score" id="gradeTotal">' + total + '</span><span style="font-size:14px;color:var(--text-muted)">/' + maxTotal + '</span></div>';
+  html += '<div style="display:flex;gap:8px">';
+  html += '<button class="fac-btn fac-btn-outline" onclick="closeGrade()">Cancel</button>';
+  html += '<button class="fac-btn fac-btn-primary" onclick="saveGrade()">✓ Save & Share Feedback</button>';
+  html += '</div></div>';
+  html += '</div></div>';
+  return html;
+}
+
+window.setScore = function(id, val) {
+  FAC.scores[id] = val;
+  var total = RUBRIC.reduce(function(a,r){ return a+(parseInt(FAC.scores[r.id])||0); }, 0);
+  var el = document.getElementById('gradeTotal');
+  if (el) el.textContent = total;
+};
+window.setComment = function(id, val) { FAC.comments[id] = val; };
+window.closeGrade = function() { _gradingSub = null; showView('submissions'); };
+window.saveGrade = function() {
+  if (!_gradingSub) return;
+  var sub = _gradingSub;
+  var total = RUBRIC.reduce(function(a,r){ return a+(parseInt(FAC.scores[r.id])||0); }, 0);
+  var max = RUBRIC.reduce(function(a,r){ return a+r.max; }, 0);
+  var fb = { scores:Object.assign({},FAC.scores), comments:Object.assign({},FAC.comments), overallComment:FAC.overallComment, grader:FAC.currentUser.displayName, timestamp:new Date().toISOString(), totalScore:total, maxScore:max };
+  dbSet('feedback-' + sub.studentName + '-' + (sub.week||''), fb);
+  if (window.EMRCloud) EMRCloud.syncFeedback(sub.studentName, sub.week||'', '', fb);
+  toast('✓ Feedback saved for ' + (sub.studentDisplay||sub.studentName));
+  // Move to next ungraded
+  var nextUngraded = FAC.submissions.findIndex(function(s,i){ return i > _gradingIdx && !hasFeedback(s.studentName, s.week); });
+  if (nextUngraded >= 0) {
+    _gradingSub = FAC.submissions[nextUngraded];
+    _gradingIdx = nextUngraded;
+    loadExistingFeedback(_gradingSub);
+    showView('submissions');
+  } else {
+    _gradingSub = null;
+    showView('overview');
+    toast('🎉 All submissions graded!', 3000);
+  }
+};
+
+// ── ROSTER ───────────────────────────────────────────────────────────────────
+function renderRoster() {
+  var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">👥 Student Roster</div><div class="fac-section-sub">' + FAC.students.length + ' students assigned to you</div></div></div>';
+
+  if (FAC.students.length === 0) {
+    return html + '<div class="fac-empty"><div class="fac-empty-icon">👥</div><div class="fac-empty-title">No students assigned</div><div class="fac-empty-desc">Ask your administrator to assign students to your account, or use the Assignments tab if you have admin access.</div></div>';
+  }
+
+  html += '<div class="fac-roster">';
+  html += '<div class="fac-roster-header"><span>Student</span><span>Submissions</span><span>Graded</span><span>Last Active</span><span>Status</span><span>Action</span></div>';
+
+  FAC.students.forEach(function(s) {
+    var subs = FAC.submissions.filter(function(sub){ return sub.studentName === s.username; });
+    var gradedCount = subs.filter(function(sub){ return hasFeedback(sub.studentName, sub.week); }).length;
+    var lastSub = subs.length > 0 ? subs[0] : null;
+    var status = subs.length === 0 ? 'not-started' : gradedCount === subs.length ? 'graded' : 'pending';
+    var statusLabel = status === 'not-started' ? '○ Not started' : status === 'graded' ? '✓ All graded' : '⏳ Needs grading';
+
+    html += '<div class="fac-roster-row">';
+    html += '<div><div class="fac-student-name">' + esc(s.displayName) + '</div><div class="fac-student-email">' + esc(s.username) + '</div></div>';
+    html += '<div class="fac-roster-cell">' + subs.length + '</div>';
+    html += '<div class="fac-roster-cell">' + gradedCount + '/' + subs.length + '</div>';
+    html += '<div class="fac-roster-cell">' + (lastSub ? relTime(lastSub.timestamp) : '—') + '</div>';
+    html += '<div><span class="fac-status-pill ' + status + '">' + statusLabel + '</span></div>';
+    html += '<div>';
+    if (subs.length > 0 && status !== 'not-started') {
+      html += '<button class="fac-btn fac-btn-outline fac-btn-sm" onclick="openGradeById(\'' + esc(s.username) + '\',\'' + esc((subs[0]&&subs[0].week)||'') + '\')">Grade →</button>';
+    } else {
+      html += '<span style="font-size:11px;color:var(--text-muted)">—</span>';
+    }
+    html += '</div>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// ── ASSIGNMENTS ───────────────────────────────────────────────────────────────
+function renderAssignments() {
+  var isFacultyRole = FAC.currentUser.role === 'faculty' || FAC.currentUser.role === 'admin';
+  if (!isFacultyRole) return '<div class="fac-empty"><div class="fac-empty-icon">🔒</div><div class="fac-empty-title">Admin only</div></div>';
+
+  var assignments = getAssignments();
+  var allFaculty = Object.values(getUsers()).filter(function(u){ var r=getEMRRole(u.username); return r==='faculty'||r==='admin'; });
+  var unassigned = FAC.allStudents.filter(function(s){
+    return !Object.values(assignments).some(function(arr){ return arr.indexOf(s.username)>=0; });
+  });
+
+  var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">🔗 Student Assignments</div><div class="fac-section-sub">Assign students to faculty members for grading</div></div></div>';
+
+  // Unassigned alert
+  if (unassigned.length > 0) {
+    html += '<div style="background:var(--warning-light);border:1px solid #FDE68A;border-radius:10px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:10px">';
+    html += '<span style="font-size:16px">⚠️</span><span style="font-size:13px;color:#92400E"><strong>' + unassigned.length + ' student' + (unassigned.length>1?'s':'')+' not assigned</strong> to any faculty. They won\'t receive feedback until assigned.</span>';
+    html += '</div>';
+  }
+
+  html += '<div class="fac-assign-grid">';
+
+  // Faculty assignment cards
+  allFaculty.forEach(function(f) {
+    var assigned = (assignments[f.username]||[]);
+    var assignedStudents = FAC.allStudents.filter(function(s){ return assigned.indexOf(s.username)>=0; });
+
+    html += '<div class="fac-assign-card">';
+    html += '<div class="fac-assign-card-title">👨‍⚕️ ' + esc(f.displayName) + ' (' + esc(f.username) + ')</div>';
+
+    if (assignedStudents.length === 0) {
+      html += '<div style="font-size:12px;color:var(--text-muted);font-style:italic;padding:8px 0">No students assigned yet</div>';
+    } else {
+      assignedStudents.forEach(function(s) {
+        html += '<div class="fac-student-chip"><span>' + esc(s.displayName) + '</span>';
+        html += '<button class="fac-chip-remove" onclick="unassignStudent(\'' + esc(s.username) + '\',\'' + esc(f.username) + '\')">×</button></div>';
+      });
+    }
+
+    // Add student dropdown
+    var available = FAC.allStudents.filter(function(s){ return assigned.indexOf(s.username)<0; });
+    if (available.length > 0) {
+      html += '<div class="fac-add-student">';
+      html += '<select class="fac-add-input" id="add-select-' + esc(f.username.replace('@','_')) + '"><option value="">Add student...</option>';
+      available.forEach(function(s){ html += '<option value="' + esc(s.username) + '">' + esc(s.displayName) + '</option>'; });
+      html += '</select>';
+      html += '<button class="fac-btn fac-btn-primary fac-btn-sm" onclick="assignStudent(\'' + esc(f.username) + '\')">Add</button>';
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+
+  html += '</div>';
+
+  // Unassigned students
+  if (unassigned.length > 0) {
+    html += '<div class="fac-assign-card" style="border-color:var(--warning)">';
+    html += '<div class="fac-assign-card-title" style="color:var(--warning)">⚠️ Unassigned Students</div>';
+    unassigned.forEach(function(s) {
+      html += '<div class="fac-student-chip" style="background:var(--warning-light)">' + esc(s.displayName) + '<span style="font-size:11px;color:var(--text-muted);margin-left:4px">(' + esc(s.username) + ')</span></div>';
+    });
+    html += '</div>';
+  }
+
+  return html;
+}
+
+window.assignStudent = function(facultyUsername) {
+  var safeKey = facultyUsername.replace('@','_');
+  var sel = document.getElementById('add-select-' + safeKey);
+  if (!sel || !sel.value) return;
+  var studentUsername = sel.value;
+  var a = getAssignments();
+  if (!a[facultyUsername]) a[facultyUsername] = [];
+  if (a[facultyUsername].indexOf(studentUsername) < 0) {
+    a[facultyUsername].push(studentUsername);
+    dbSet('emr-assignments', a);
+    toast('✓ Student assigned');
+    loadData();
+    showView('assignments');
+  }
+};
+
+window.unassignStudent = function(studentUsername, facultyUsername) {
+  var a = getAssignments();
+  if (a[facultyUsername]) {
+    a[facultyUsername] = a[facultyUsername].filter(function(s){ return s !== studentUsername; });
+    dbSet('emr-assignments', a);
+    toast('Student removed from assignment');
+    loadData();
+    showView('assignments');
+  }
+};
+
+// ── ANALYTICS ─────────────────────────────────────────────────────────────────
+function renderAnalytics() {
+  var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">📈 Class Analytics</div><div class="fac-section-sub">Performance across your assigned students</div></div></div>';
+
+  if (FAC.submissions.length === 0) {
+    return html + '<div class="fac-empty"><div class="fac-empty-icon">📊</div><div class="fac-empty-title">No data yet</div><div class="fac-empty-desc">Analytics will appear once students submit their documentation.</div></div>';
+  }
+
+  // Calc rubric averages
+  var rubricTotals = {};
+  var rubricCounts = {};
+  var gradedSubs = FAC.submissions.filter(function(s){ return hasFeedback(s.studentName, s.week); });
+
+  RUBRIC.forEach(function(r){ rubricTotals[r.id]=0; rubricCounts[r.id]=0; });
+  gradedSubs.forEach(function(sub) {
+    var fb = db('feedback-' + sub.studentName + '-' + (sub.week||''));
+    if (fb && fb.scores) {
+      RUBRIC.forEach(function(r) {
+        var v = parseInt(fb.scores[r.id]);
+        if (!isNaN(v)) { rubricTotals[r.id] += v; rubricCounts[r.id]++; }
+      });
+    }
+  });
+
+  var colors = ['#2874A6','#1B5E3B','#D97706','#DC2626'];
+
+  html += '<div class="fac-analytics-grid">';
+
+  // Rubric breakdown
+  html += '<div class="fac-chart-card">';
+  html += '<div class="fac-chart-title">Average Score by Criterion (' + gradedSubs.length + ' graded submissions)</div>';
+  RUBRIC.forEach(function(r, i) {
+    var avg = rubricCounts[r.id] > 0 ? Math.round(rubricTotals[r.id] / rubricCounts[r.id]) : 0;
+    var pct = Math.round((avg / r.max) * 100);
+    html += '<div class="fac-bar"><span class="fac-bar-label">' + esc(r.label.substring(0,22)) + '</span>';
+    html += '<div class="fac-bar-track"><div class="fac-bar-fill" style="width:' + pct + '%;background:' + colors[i] + '"></div></div>';
+    html += '<span class="fac-bar-val">' + avg + '/' + r.max + '</span></div>';
+  });
+  html += '</div>';
+
+  // Submission timeline
+  html += '<div class="fac-chart-card">';
+  html += '<div class="fac-chart-title">Student Submission Status</div>';
+  FAC.students.forEach(function(s) {
+    var subs = FAC.submissions.filter(function(sub){ return sub.studentName === s.username; });
+    var graded = subs.filter(function(sub){ return hasFeedback(sub.studentName, sub.week); }).length;
+    var pct = subs.length > 0 ? Math.round((subs.length / Math.max(FAC.submissions.length / FAC.students.length, 1)) * 100) : 0;
+    pct = Math.min(pct, 100);
+    html += '<div class="fac-bar"><span class="fac-bar-label">' + esc((s.displayName||s.username).substring(0,18)) + '</span>';
+    html += '<div class="fac-bar-track"><div class="fac-bar-fill" style="width:' + pct + '%;background:' + (graded===subs.length&&subs.length>0?'#1B5E3B':'#2874A6') + '"></div></div>';
+    html += '<span class="fac-bar-val">' + subs.length + ' sub</span></div>';
+  });
+  if (FAC.students.length === 0) html += '<div style="font-size:13px;color:var(--text-muted);text-align:center;padding:20px">No students assigned</div>';
+  html += '</div>';
+
+  html += '</div>';
+
+  // Summary stats
+  if (gradedSubs.length > 0) {
+    var allScores = gradedSubs.map(function(sub) {
+      var fb = db('feedback-' + sub.studentName + '-' + (sub.week||''));
+      return fb ? Math.round((fb.totalScore / fb.maxScore) * 100) : null;
+    }).filter(function(s){ return s !== null; });
+    var avg = allScores.length > 0 ? Math.round(allScores.reduce(function(a,b){return a+b;},0) / allScores.length) : 0;
+    var high = Math.max.apply(null, allScores);
+    var low  = Math.min.apply(null, allScores);
+
+    html += '<div class="fac-stats" style="margin-top:0">';
+    html += '<div class="fac-stat"><div class="fac-stat-val">' + avg + '%</div><div class="fac-stat-label">Class Average</div></div>';
+    html += '<div class="fac-stat green"><div class="fac-stat-val">' + high + '%</div><div class="fac-stat-label">Highest Score</div></div>';
+    html += '<div class="fac-stat ' + (low < 60 ? 'red' : 'amber') + '"><div class="fac-stat-val">' + low + '%</div><div class="fac-stat-label">Lowest Score</div></div>';
+    html += '<div class="fac-stat"><div class="fac-stat-val">' + gradedSubs.length + '</div><div class="fac-stat-label">Graded</div></div>';
+    html += '</div>';
+  }
+
+  return html;
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
