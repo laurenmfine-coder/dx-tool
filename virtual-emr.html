@@ -1818,6 +1818,15 @@ function renderDocumentation(){
 function buildAnnotatedHTML(text,anns){if(!anns||!anns.length)return esc(text);const sorted=[...anns].map((a,i)=>({...a,idx:i}));sorted.sort((a,b)=>text.indexOf(a.selectedText)-text.indexOf(b.selectedText));let result="",last=0;sorted.forEach(a=>{const p=text.indexOf(a.selectedText,last);if(p===-1)return;const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];result+=esc(text.substring(last,p));result+='<span class="annotation-highlight '+col.css+'" title="'+esc(a.comment)+'">'+esc(a.selectedText)+'<span class="annotation-marker">'+(a.idx+1)+'</span></span>';last=p+a.selectedText.length});result+=esc(text.substring(last));return result}
 
 function renderFeedback(){
+  // For ?as= admin viewing, load feedback+annotations directly from the viewed student
+  var _asUid=new URLSearchParams(location.search).get('as');
+  if(_asUid && S.currentUser.role==='admin'){
+    var _sub=S.allSubmissions&&S.allSubmissions[0];
+    var _week=_sub?_sub.week:S.encounterWeek;
+    if(!S.feedback){try{var _fb=localStorage.getItem('feedback-'+_asUid+'-'+_week);if(_fb)S.feedback=JSON.parse(_fb);}catch(e){}}
+    if(!S.annotations||!S.annotations.length){try{var _an=localStorage.getItem('annotations-'+_asUid+'-'+_week);if(_an)S.annotations=JSON.parse(_an);}catch(e){}}
+    if(_sub&&!S.noteFields.hpi&&_sub.fields){S.noteFields=_sub.fields;S.submitted=true;S.encounterWeek=_week;}
+  }
   if(!S.submitted)return sectionCard("Feedback — "+S.encounterWeek,I.star,'<div class="empty-state">'+I.fileText+'<p>Submit your documentation first.</p></div>');
   if(!S.feedback&&S.annotations.length===0)return sectionCard("Feedback — "+S.encounterWeek,I.star,'<div class="empty-state">'+I.calendar+'<p>Submitted. Feedback appears here once faculty reviews.</p></div>');
   let h="";
