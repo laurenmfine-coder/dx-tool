@@ -1,0 +1,875 @@
+/* rdx-workspace.js — ReasonDx Workspace Configurator
+   Handles: first-run wizard, gear panel (all pages), EMR tab filtering
+   All preferences stored in localStorage under 'rdx-workspace-prefs'
+   ------------------------------------------------------------------ */
+(function() {
+'use strict';
+
+// ── Default prefs ─────────────────────────────────────────────────────────
+var DEFAULTS = {
+  configured: false,
+  role: 'student',          // student | fellow | faculty
+  level: 'beginner',        // beginner | intermediate | veteran
+
+  // AI Tools
+  show_reasondx:   true,
+  show_coachdx:    true,
+  show_mechanismdx:true,
+
+  // EMR Chart tabs
+  emr_demographics: true,
+  emr_problems:     true,
+  emr_visits:       false,
+  emr_medications:  true,
+  emr_allergies:    true,
+  emr_labs:         true,
+  emr_imaging:      true,
+  emr_vitals:       true,
+  emr_immunizations:false,
+  emr_history:      false,
+  emr_orders:       true,
+  emr_documentation:true,
+  emr_crt:          true,
+  emr_oral:         false,
+  emr_coach:        true,
+  emr_studyhub:     true,
+  emr_autofeedback: false,
+  emr_feedback:     true,
+
+  // Pinned tabs (shown always, regardless of primary/secondary)
+  emr_pinned: ['demographics','labs','medications'],
+
+  // Feature groups
+  show_dashboard:   true,
+  show_analytics:   false,
+  show_studydx:     true,
+  show_spacedrep:   false,
+  show_boardprep:   true,
+  show_ed:          true,
+  show_nightfloat:  false,
+  show_simroom:     false,
+  show_milestones:  false,
+  show_cohort:      false,
+  show_ilp:         false,
+  show_ccc:         false,
+};
+
+// ── Preset profiles ───────────────────────────────────────────────────────
+var PROFILES = {
+  beginner: {
+    label: 'Beginner', desc: 'Core tools only — uncluttered, focused',
+    icon: '🌱',
+    overrides: {
+      level:'beginner',
+      show_mechanismdx:true, show_reasondx:true, show_coachdx:true,
+      emr_visits:false, emr_immunizations:false, emr_history:false,
+      emr_oral:false, emr_autofeedback:false, emr_orders:false,
+      show_analytics:false, show_spacedrep:false, show_nightfloat:false,
+      show_simroom:false, show_milestones:false, show_cohort:false, show_ilp:false, show_ccc:false,
+    }
+  },
+  intermediate: {
+    label: 'Intermediate', desc: 'Full clinical tools, study features on',
+    icon: '📈',
+    overrides: {
+      level:'intermediate',
+      emr_visits:true, emr_immunizations:true, emr_history:true,
+      emr_oral:true, emr_autofeedback:true, emr_orders:true,
+      show_analytics:true, show_spacedrep:true, show_nightfloat:true,
+      show_milestones:false, show_cohort:false,
+    }
+  },
+  veteran: {
+    label: 'Veteran', desc: 'Everything unlocked, maximum control',
+    icon: '⚡',
+    overrides: {
+      level:'veteran',
+      emr_visits:true, emr_immunizations:true, emr_history:true,
+      emr_oral:true, emr_autofeedback:true, emr_orders:true,
+      show_analytics:true, show_spacedrep:true, show_nightfloat:true,
+      show_simroom:true, show_milestones:true, show_cohort:true, show_ilp:true, show_ccc:true,
+    }
+  },
+  fellow: {
+    label: 'Fellow / Resident', desc: 'Fellowship tools + full clinical suite',
+    icon: '🩺',
+    overrides: {
+      level:'veteran', role:'fellow',
+      emr_visits:true, emr_immunizations:true, emr_history:true,
+      emr_oral:true, emr_autofeedback:true, emr_orders:true,
+      show_analytics:true, show_spacedrep:true,
+      show_milestones:true, show_cohort:true, show_ilp:true, show_ccc:true,
+    }
+  }
+};
+
+// ── Feature catalogue ─────────────────────────────────────────────────────
+var FEATURE_GROUPS = [
+  {
+    id: 'ai_tools', label: '🤖 AI Tools', desc: 'Coaching & reasoning assistants',
+    features: [
+      { key:'show_reasondx',    label:'ReasonDx',    desc:'AI-guided case reasoning',         alwaysOn:true },
+      { key:'show_coachdx',     label:'CoachDx',     desc:'Socratic coaching dialogue' },
+      { key:'show_mechanismdx', label:'MechanismDx', desc:'Pathophysiology tutor' },
+    ]
+  },
+  {
+    id: 'emr_chart', label: '📋 EMR — Chart Tabs', desc: 'Visible sections inside a case',
+    features: [
+      { key:'emr_demographics', label:'Patient Info',    desc:'Demographics & chief complaint', alwaysOn:true },
+      { key:'emr_problems',     label:'Problem List',    desc:'Active & chronic problems' },
+      { key:'emr_labs',         label:'Labs',            desc:'Lab orders & results' },
+      { key:'emr_medications',  label:'Medications',     desc:'Active meds & reconciliation' },
+      { key:'emr_allergies',    label:'Allergies',       desc:'Allergy & adverse reactions' },
+      { key:'emr_vitals',       label:'Vitals',          desc:'Trending vital signs' },
+      { key:'emr_imaging',      label:'Imaging',         desc:'Radiology orders & reports' },
+      { key:'emr_visits',       label:'Visit History',   desc:'Prior encounters' },
+      { key:'emr_immunizations',label:'Immunizations',   desc:'Vaccine history' },
+      { key:'emr_history',      label:'FH / SH',         desc:'Family & social history' },
+    ]
+  },
+  {
+    id: 'emr_actions', label: '⚡ EMR — Actions & Coaching', desc: 'Tools inside the case encounter',
+    features: [
+      { key:'emr_orders',       label:'Orders & CDS',    desc:'Order entry & decision support' },
+      { key:'emr_crt',          label:'Clinical Reasoning Trainer', desc:'Structured reasoning scaffold' },
+      { key:'emr_documentation',label:'Documentation',   desc:'H&P, SOAP note, A/P' },
+      { key:'emr_oral',         label:'Oral Presentation',desc:'Presentation feedback' },
+      { key:'emr_coach',        label:'CoachDx Chat',    desc:'AI coaching inside case' },
+      { key:'emr_studyhub',     label:'Study Hub',       desc:'MCQs & spaced rep inside case' },
+      { key:'emr_autofeedback', label:'Doc Assessment',  desc:'AI feedback on your note' },
+      { key:'emr_feedback',     label:'Faculty Feedback', desc:'Instructor annotations' },
+    ]
+  },
+  {
+    id: 'study', label: '📚 Study Tools', desc: 'MCQs, spaced repetition, board prep',
+    features: [
+      { key:'show_studydx',  label:'StudyDx MCQs',   desc:'AI-generated board questions' },
+      { key:'show_spacedrep',label:'Spaced Rep',      desc:'Flashcard review system' },
+      { key:'show_boardprep',label:'Board Prep',      desc:'Exam-focused review mode' },
+    ]
+  },
+  {
+    id: 'simulate', label: '🏥 Simulation Environments', desc: 'Virtual hospital settings',
+    features: [
+      { key:'show_ed',        label:'Emergency Dept', desc:'8-room ED simulation' },
+      { key:'show_nightfloat',label:'Night Float',    desc:'Overnight cross-cover' },
+      { key:'show_simroom',   label:'SimRoomDx',      desc:'Morning rounds, 6 characters' },
+    ]
+  },
+  {
+    id: 'fellowship', label: '🎓 Fellowship Tools', desc: 'Program & milestone tracking',
+    features: [
+      { key:'show_dashboard',  label:'Dashboard',     desc:'Personal progress overview' },
+      { key:'show_analytics',  label:'Analytics',     desc:'Deep dive learning data' },
+      { key:'show_milestones', label:'Milestones',    desc:'ACGME milestone tracker' },
+      { key:'show_cohort',     label:'Cohort Analytics',desc:'Program-level comparison' },
+      { key:'show_ilp',        label:'ILP',           desc:'Individual learning plan' },
+      { key:'show_ccc',        label:'CCC Prep',      desc:'Clinical competency committee' },
+    ]
+  },
+];
+
+// ── Storage helpers ───────────────────────────────────────────────────────
+function load() {
+  try {
+    var raw = localStorage.getItem('rdx-workspace-prefs');
+    return raw ? Object.assign({}, DEFAULTS, JSON.parse(raw)) : Object.assign({}, DEFAULTS);
+  } catch(e) { return Object.assign({}, DEFAULTS); }
+}
+function save(prefs) {
+  try { localStorage.setItem('rdx-workspace-prefs', JSON.stringify(prefs)); } catch(e){}
+}
+function applyProfile(profileKey) {
+  var prefs = load();
+  var profile = PROFILES[profileKey];
+  if (!profile) return;
+  Object.assign(prefs, profile.overrides);
+  prefs.configured = true;
+  save(prefs);
+  return prefs;
+}
+
+// ── Public API ────────────────────────────────────────────────────────────
+window.RDXWorkspace = {
+  load: load,
+  save: save,
+  applyProfile: applyProfile,
+  PROFILES: PROFILES,
+  FEATURE_GROUPS: FEATURE_GROUPS,
+  DEFAULTS: DEFAULTS,
+
+  // Is a specific feature enabled?
+  isOn: function(key) {
+    return load()[key] !== false;
+  },
+
+  // Filter EMR tab array using current prefs
+  filterTabs: function(tabs) {
+    var prefs = load();
+    return tabs.filter(function(t) {
+      if (t.divider) return true;
+      var key = 'emr_' + t.id;
+      // Always show tabs with no pref key, or where pref is explicitly true
+      if (!(key in prefs)) return true;
+      return prefs[key] !== false;
+    });
+  },
+
+  // Get primary tab IDs (pinned + defaults for current level)
+  getPrimaryTabIds: function() {
+    var prefs = load();
+    var pinned = prefs.emr_pinned || ['demographics','labs','medications'];
+    // Level-based defaults
+    if (prefs.level === 'beginner') {
+      return ['demographics','labs','medications','vitals'].concat(
+        pinned.filter(function(id){ return ['demographics','labs','medications','vitals'].indexOf(id) < 0; })
+      );
+    }
+    return ['demographics','labs','medications','vitals','imaging'].concat(
+      pinned.filter(function(id){ return ['demographics','labs','medications','vitals','imaging'].indexOf(id) < 0; })
+    );
+  },
+
+  // Should we show the first-run wizard?
+  needsWizard: function() {
+    return !load().configured;
+  },
+
+  // Mark configured (skip wizard next time)
+  markConfigured: function() {
+    var prefs = load();
+    prefs.configured = true;
+    save(prefs);
+  },
+
+  // Show the gear panel
+  openPanel: function() {
+    showGearPanel();
+  },
+
+  // Show the first-run wizard
+  openWizard: function() {
+    showWizard();
+  }
+};
+
+// ── CSS injection ─────────────────────────────────────────────────────────
+function injectCSS() {
+  if (document.getElementById('rdx-ws-styles')) return;
+  var s = document.createElement('style');
+  s.id = 'rdx-ws-styles';
+  s.textContent = `
+/* ── Gear button in nav ── */
+#rdx-gear-btn {
+  position:fixed; bottom:20px; right:20px; z-index:9000;
+  width:44px; height:44px; border-radius:50%;
+  background:#2874A6; color:#fff; border:none; cursor:pointer;
+  font-size:18px; box-shadow:0 4px 16px rgba(40,116,166,.35);
+  transition:all .2s; display:flex; align-items:center; justify-content:center;
+}
+#rdx-gear-btn:hover { transform:scale(1.1) rotate(30deg); background:#1B5272; }
+
+/* ── Overlay backdrop ── */
+.rdx-ws-backdrop {
+  position:fixed; inset:0; background:rgba(15,23,42,.55);
+  backdrop-filter:blur(4px); z-index:9001;
+  animation:rdxFadeIn .2s ease;
+}
+@keyframes rdxFadeIn { from{opacity:0} to{opacity:1} }
+@keyframes rdxSlideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes rdxSlideIn { from{opacity:0;transform:translateX(100%)} to{opacity:1;transform:translateX(0)} }
+
+/* ── Gear panel (slide-in drawer) ── */
+.rdx-ws-panel {
+  position:fixed; top:0; right:0; bottom:0; width:440px; max-width:100vw;
+  background:#fff; z-index:9002; overflow-y:auto;
+  box-shadow:-8px 0 40px rgba(0,0,0,.15);
+  animation:rdxSlideIn .25s ease;
+  font-family:'IBM Plex Sans',-apple-system,sans-serif;
+}
+.rdx-ws-panel-hdr {
+  position:sticky; top:0; background:#fff; z-index:1;
+  padding:20px 24px; border-bottom:1px solid #E2E8F0;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.rdx-ws-panel-title { font-size:16px; font-weight:800; color:#0F172A; letter-spacing:-.3px; }
+.rdx-ws-panel-sub   { font-size:12px; color:#64748B; margin-top:2px; }
+.rdx-ws-close {
+  width:32px; height:32px; border-radius:8px; border:1px solid #E2E8F0;
+  background:transparent; cursor:pointer; font-size:16px; color:#64748B;
+  display:flex; align-items:center; justify-content:center; transition:all .15s;
+}
+.rdx-ws-close:hover { background:#F1F5F9; color:#0F172A; }
+
+/* ── Panel body ── */
+.rdx-ws-body { padding:16px 24px 32px; }
+
+/* ── Profile presets ── */
+.rdx-profile-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:24px; }
+.rdx-profile-card {
+  padding:12px 14px; border-radius:12px; border:2px solid #E2E8F0;
+  cursor:pointer; transition:all .2s; background:#F8FAFC;
+}
+.rdx-profile-card:hover { border-color:#2874A6; background:#EBF4FB; }
+.rdx-profile-card.active { border-color:#2874A6; background:#EBF4FB; }
+.rdx-profile-icon { font-size:20px; margin-bottom:4px; }
+.rdx-profile-name { font-size:13px; font-weight:700; color:#0F172A; }
+.rdx-profile-desc { font-size:11px; color:#64748B; margin-top:2px; line-height:1.4; }
+
+/* ── Section headers ── */
+.rdx-ws-section { margin-bottom:20px; }
+.rdx-ws-section-hdr {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 0; margin-bottom:8px;
+  border-bottom:1px solid #F1F5F9; cursor:pointer;
+}
+.rdx-ws-section-title { font-size:13px; font-weight:700; color:#0F172A; }
+.rdx-ws-section-desc  { font-size:11px; color:#94A3B8; margin-top:1px; }
+.rdx-ws-chevron { font-size:10px; color:#94A3B8; transition:transform .2s; }
+.rdx-ws-section.collapsed .rdx-ws-chevron { transform:rotate(-90deg); }
+.rdx-ws-section.collapsed .rdx-ws-feature-list { display:none; }
+
+/* ── Feature toggles ── */
+.rdx-ws-feature-list { display:flex; flex-direction:column; gap:2px; }
+.rdx-ws-feature {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 10px; border-radius:8px; transition:background .15s; gap:12px;
+}
+.rdx-ws-feature:hover { background:#F8FAFC; }
+.rdx-ws-feature-info { flex:1; min-width:0; }
+.rdx-ws-feature-label { font-size:13px; font-weight:500; color:#1E293B; }
+.rdx-ws-feature-desc  { font-size:11px; color:#94A3B8; margin-top:1px; }
+.rdx-ws-feature.disabled .rdx-ws-feature-label { color:#94A3B8; }
+
+/* ── Toggle switch ── */
+.rdx-toggle {
+  position:relative; width:36px; height:20px; flex-shrink:0;
+}
+.rdx-toggle input { opacity:0; width:0; height:0; position:absolute; }
+.rdx-toggle-track {
+  position:absolute; inset:0; border-radius:10px; background:#CBD5E1;
+  cursor:pointer; transition:background .2s;
+}
+.rdx-toggle input:checked + .rdx-toggle-track { background:#2874A6; }
+.rdx-toggle input:disabled + .rdx-toggle-track { background:#E2E8F0; cursor:not-allowed; opacity:.6; }
+.rdx-toggle-thumb {
+  position:absolute; top:2px; left:2px; width:16px; height:16px;
+  border-radius:50%; background:#fff; transition:transform .2s;
+  box-shadow:0 1px 3px rgba(0,0,0,.2); pointer-events:none;
+}
+.rdx-toggle input:checked ~ .rdx-toggle-thumb { transform:translateX(16px); }
+
+/* ── Pin chip row ── */
+.rdx-pin-row {
+  display:flex; flex-wrap:wrap; gap:6px; padding:10px 0;
+}
+.rdx-pin-chip {
+  padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600;
+  border:1px solid #E2E8F0; background:#F8FAFC; color:#64748B;
+  cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:4px;
+}
+.rdx-pin-chip.pinned { border-color:#2874A6; background:#EBF4FB; color:#2874A6; }
+.rdx-pin-chip:hover { border-color:#2874A6; }
+
+/* ── Save bar ── */
+.rdx-ws-save-bar {
+  position:sticky; bottom:0; background:#fff; padding:16px 24px;
+  border-top:1px solid #E2E8F0; display:flex; gap:10px;
+}
+.rdx-ws-save {
+  flex:1; padding:11px; border-radius:10px; border:none;
+  background:#2874A6; color:#fff; font-size:14px; font-weight:700;
+  cursor:pointer; font-family:inherit; transition:all .15s;
+}
+.rdx-ws-save:hover { background:#1B5272; }
+.rdx-ws-reset {
+  padding:11px 16px; border-radius:10px; border:1px solid #E2E8F0;
+  background:transparent; color:#64748B; font-size:13px; font-weight:600;
+  cursor:pointer; font-family:inherit; transition:all .15s;
+}
+.rdx-ws-reset:hover { border-color:#94A3B8; color:#0F172A; }
+
+/* ── Wizard modal ── */
+.rdx-wizard-modal {
+  position:fixed; inset:0; z-index:9003;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  font-family:'IBM Plex Sans',-apple-system,sans-serif;
+}
+.rdx-wizard-card {
+  background:#fff; border-radius:20px; width:100%; max-width:560px;
+  box-shadow:0 25px 60px rgba(0,0,0,.2);
+  animation:rdxSlideUp .3s ease; overflow:hidden;
+}
+.rdx-wizard-hdr {
+  background:linear-gradient(135deg,#1B5272,#2874A6);
+  padding:28px 32px; color:#fff;
+}
+.rdx-wizard-step-pills {
+  display:flex; gap:6px; margin-bottom:20px;
+}
+.rdx-wstep-pill {
+  height:4px; border-radius:2px; background:rgba(255,255,255,.25);
+  flex:1; transition:background .3s;
+}
+.rdx-wstep-pill.done   { background:rgba(255,255,255,.9); }
+.rdx-wstep-pill.active { background:rgba(255,255,255,.6); }
+.rdx-wizard-icon  { font-size:40px; margin-bottom:12px; }
+.rdx-wizard-title { font-size:22px; font-weight:800; letter-spacing:-.4px; margin-bottom:6px; }
+.rdx-wizard-desc  { font-size:14px; opacity:.85; line-height:1.6; }
+.rdx-wizard-body  { padding:28px 32px; }
+.rdx-wizard-footer{
+  padding:16px 32px 24px; display:flex; align-items:center;
+  justify-content:space-between; border-top:1px solid #F1F5F9;
+}
+.rdx-wizard-skip { font-size:12px; color:#94A3B8; cursor:pointer; text-decoration:underline; background:none; border:none; font-family:inherit; }
+.rdx-wizard-skip:hover { color:#64748B; }
+.rdx-wizard-next {
+  padding:11px 28px; border-radius:10px; border:none;
+  background:#2874A6; color:#fff; font-size:14px; font-weight:700;
+  cursor:pointer; font-family:inherit; transition:all .2s;
+  display:flex; align-items:center; gap:8px;
+}
+.rdx-wizard-next:hover { background:#1B5272; transform:translateX(2px); }
+
+/* Profile cards in wizard */
+.rdx-wiz-profile-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.rdx-wiz-profile-card {
+  padding:16px; border-radius:14px; border:2px solid #E2E8F0;
+  cursor:pointer; transition:all .2s; text-align:center;
+}
+.rdx-wiz-profile-card:hover  { border-color:#2874A6; transform:translateY(-2px); }
+.rdx-wiz-profile-card.active { border-color:#2874A6; background:#EBF4FB; }
+.rdx-wiz-picon { font-size:28px; margin-bottom:8px; }
+.rdx-wiz-pname { font-size:14px; font-weight:700; color:#0F172A; }
+.rdx-wiz-pdesc { font-size:11px; color:#64748B; margin-top:3px; line-height:1.4; }
+
+/* Toggle list in wizard */
+.rdx-wiz-toggles { display:flex; flex-direction:column; gap:4px; }
+.rdx-wiz-toggle-row {
+  display:flex; align-items:center; gap:12px;
+  padding:10px 12px; border-radius:10px; background:#F8FAFC;
+  border:1px solid #F1F5F9;
+}
+.rdx-wiz-toggle-row .rdx-ws-feature-label { font-size:13px; font-weight:600; }
+.rdx-wiz-toggle-row .rdx-ws-feature-desc  { font-size:11px; color:#94A3B8; }
+
+/* Confirmation step */
+.rdx-wiz-confirm { text-align:center; padding:8px 0; }
+.rdx-wiz-confirm-icon { font-size:52px; margin-bottom:16px; }
+.rdx-wiz-confirm-title { font-size:20px; font-weight:800; color:#0F172A; margin-bottom:8px; }
+.rdx-wiz-confirm-desc  { font-size:14px; color:#64748B; line-height:1.65; }
+.rdx-wiz-summary {
+  display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+  margin-top:16px;
+}
+.rdx-wiz-tag {
+  padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600;
+  background:#EBF4FB; color:#2874A6; border:1px solid rgba(40,116,166,.2);
+}
+`;
+  document.head.appendChild(s);
+}
+
+// ── Gear button ───────────────────────────────────────────────────────────
+function injectGearButton() {
+  if (document.getElementById('rdx-gear-btn')) return;
+  var btn = document.createElement('button');
+  btn.id = 'rdx-gear-btn';
+  btn.title = 'Customize your workspace';
+  btn.textContent = '⚙';
+  btn.addEventListener('click', showGearPanel);
+  document.body.appendChild(btn);
+}
+
+// ── Toggle helper ─────────────────────────────────────────────────────────
+function makeToggle(key, disabled, onChange) {
+  var prefs = load();
+  var checked = prefs[key] !== false;
+  var id = 'rdx-tog-' + key;
+  var d = disabled ? 'disabled' : '';
+  var html = '<label class="rdx-toggle">'
+    + '<input type="checkbox" id="'+id+'" '+(checked?'checked':'')+' '+d+' onchange="RDXWorkspace._onToggle(\''+key+'\',this.checked)">'
+    + '<span class="rdx-toggle-track"></span>'
+    + '<span class="rdx-toggle-thumb"></span>'
+    + '</label>';
+  return html;
+}
+window.RDXWorkspace._onToggle = function(key, val) {
+  var prefs = load();
+  prefs[key] = val;
+  save(prefs);
+};
+window.RDXWorkspace._onPin = function(tabId) {
+  var prefs = load();
+  var pins = prefs.emr_pinned || [];
+  var idx = pins.indexOf(tabId);
+  if (idx >= 0) pins.splice(idx,1); else pins.push(tabId);
+  prefs.emr_pinned = pins;
+  save(prefs);
+  // Re-render pin row
+  var row = document.getElementById('rdx-pin-row');
+  if (row) row.innerHTML = buildPinRow(prefs);
+};
+
+// ── Pin row ───────────────────────────────────────────────────────────────
+var PIN_CANDIDATES = [
+  {id:'demographics',label:'Patient Info'},{id:'problems',label:'Problems'},
+  {id:'labs',label:'Labs'},{id:'medications',label:'Meds'},
+  {id:'allergies',label:'Allergies'},{id:'vitals',label:'Vitals'},
+  {id:'imaging',label:'Imaging'},{id:'orders',label:'Orders'},
+  {id:'coach',label:'CoachDx'},{id:'studyhub',label:'Study Hub'},
+  {id:'documentation',label:'Documentation'},{id:'crt',label:'CRT'},
+];
+function buildPinRow(prefs) {
+  var pins = prefs.emr_pinned || [];
+  return PIN_CANDIDATES.map(function(c) {
+    var pinned = pins.indexOf(c.id) >= 0;
+    return '<span class="rdx-pin-chip'+(pinned?' pinned':'')+'" onclick="RDXWorkspace._onPin(\''+c.id+'\')">'
+      + (pinned?'📌 ':'')+c.label+'</span>';
+  }).join('');
+}
+
+// ── Gear panel ────────────────────────────────────────────────────────────
+function showGearPanel() {
+  if (document.getElementById('rdx-ws-panel')) return;
+  var prefs = load();
+
+  var profileHtml = Object.keys(PROFILES).map(function(k) {
+    var p = PROFILES[k];
+    var active = prefs.level === p.overrides.level ? ' active':'';
+    return '<div class="rdx-profile-card'+active+'" onclick="RDXWorkspace._applyProfileUI(\''+k+'\')" id="rdxprofile-'+k+'">'
+      +'<div class="rdx-profile-icon">'+p.icon+'</div>'
+      +'<div class="rdx-profile-name">'+p.label+'</div>'
+      +'<div class="rdx-profile-desc">'+p.desc+'</div>'
+      +'</div>';
+  }).join('');
+
+  var groupsHtml = FEATURE_GROUPS.map(function(g) {
+    var featsHtml = g.features.map(function(f) {
+      var disabled = f.alwaysOn ? 'disabled' : '';
+      var dimClass = disabled ? ' disabled':'';
+      return '<div class="rdx-ws-feature'+dimClass+'">'
+        + '<div class="rdx-ws-feature-info">'
+        +   '<div class="rdx-ws-feature-label">'+f.label+(f.alwaysOn?' <span style="font-size:10px;color:#94A3B8">(always on)</span>':'')+'</div>'
+        +   '<div class="rdx-ws-feature-desc">'+f.desc+'</div>'
+        + '</div>'
+        + makeToggle(f.key, !!f.alwaysOn)
+        + '</div>';
+    }).join('');
+
+    // Pin row inside EMR chart section
+    var pinExtra = g.id === 'emr_chart' ? '<div style="margin-top:10px"><div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">📌 Always-visible tabs</div><div id="rdx-pin-row" class="rdx-pin-row">'+buildPinRow(prefs)+'</div></div>' : '';
+
+    return '<div class="rdx-ws-section" id="rdx-ws-sec-'+g.id+'">'
+      +'<div class="rdx-ws-section-hdr" onclick="RDXWorkspace._toggleSection(\''+g.id+'\')">'
+      +  '<div><div class="rdx-ws-section-title">'+g.label+'</div><div class="rdx-ws-section-desc">'+g.desc+'</div></div>'
+      +  '<span class="rdx-ws-chevron">▾</span>'
+      +'</div>'
+      +'<div class="rdx-ws-feature-list">'+featsHtml+pinExtra+'</div>'
+      +'</div>';
+  }).join('');
+
+  var backdrop = document.createElement('div');
+  backdrop.className = 'rdx-ws-backdrop';
+  backdrop.id = 'rdx-ws-backdrop';
+  backdrop.onclick = closeGearPanel;
+
+  var panel = document.createElement('div');
+  panel.className = 'rdx-ws-panel';
+  panel.id = 'rdx-ws-panel';
+  panel.innerHTML = '<div class="rdx-ws-panel-hdr">'
+    + '<div><div class="rdx-ws-panel-title">⚙ Workspace Settings</div>'
+    + '<div class="rdx-ws-panel-sub">Customize which tools and tabs are visible</div></div>'
+    + '<button class="rdx-ws-close" onclick="RDXWorkspace._closePanel()">✕</button>'
+    + '</div>'
+    + '<div class="rdx-ws-body">'
+    + '<div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Quick Profiles</div>'
+    + '<div class="rdx-profile-grid">'+profileHtml+'</div>'
+    + '<div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">Individual Features</div>'
+    + groupsHtml
+    + '</div>'
+    + '<div class="rdx-ws-save-bar">'
+    + '<button class="rdx-ws-reset" onclick="RDXWorkspace._resetToDefaults()">Reset to defaults</button>'
+    + '<button class="rdx-ws-save" onclick="RDXWorkspace._saveAndClose()">Save &amp; Apply ✓</button>'
+    + '</div>';
+
+  document.body.appendChild(backdrop);
+  document.body.appendChild(panel);
+}
+
+function closeGearPanel() {
+  var bd = document.getElementById('rdx-ws-backdrop');
+  var pn = document.getElementById('rdx-ws-panel');
+  if (bd) bd.remove();
+  if (pn) pn.remove();
+}
+
+window.RDXWorkspace._closePanel       = closeGearPanel;
+window.RDXWorkspace._applyProfileUI   = function(key) {
+  applyProfile(key);
+  // Update profile card highlights
+  Object.keys(PROFILES).forEach(function(k) {
+    var el = document.getElementById('rdxprofile-'+k);
+    if (el) el.classList.toggle('active', k === key);
+  });
+  // Re-render all toggles
+  var prefs = load();
+  FEATURE_GROUPS.forEach(function(g) {
+    g.features.forEach(function(f) {
+      var el = document.getElementById('rdx-tog-'+f.key);
+      if (el) el.checked = prefs[f.key] !== false;
+    });
+  });
+};
+window.RDXWorkspace._toggleSection = function(id) {
+  var sec = document.getElementById('rdx-ws-sec-'+id);
+  if (sec) sec.classList.toggle('collapsed');
+};
+window.RDXWorkspace._resetToDefaults = function() {
+  if (!confirm('Reset all workspace settings to defaults?')) return;
+  save(Object.assign({}, DEFAULTS, {configured:true}));
+  closeGearPanel();
+  setTimeout(function(){ showGearPanel(); }, 100);
+};
+window.RDXWorkspace._saveAndClose = function() {
+  var prefs = load();
+  prefs.configured = true;
+  save(prefs);
+  closeGearPanel();
+  // Refresh page to apply EMR tab changes
+  if (window.location.href.indexOf('virtual-emr') >= 0 || window.location.href.indexOf('admissions') >= 0) {
+    if (typeof render === 'function') render();
+  }
+  // Show brief toast
+  showToast('Workspace saved ✓');
+};
+
+// ── Toast ─────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  var t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:80px;right:20px;background:#1E293B;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;animation:rdxFadeIn .2s ease;font-family:IBM Plex Sans,-apple-system,sans-serif';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.remove(); }, 2500);
+}
+
+// ── First-run wizard ──────────────────────────────────────────────────────
+var wizardStep = 0;
+var wizardProfile = 'beginner';
+
+var WIZARD_STEPS = [
+  {
+    icon:'👋', title:'Welcome to ReasonDx', desc:'Let\'s set up your workspace in 60 seconds. You can always change these settings later from the ⚙ button.',
+    render: renderWizardWelcome
+  },
+  {
+    icon:'🎯', title:'What\'s your role?', desc:'This sets your default tools. You\'ll be able to fine-tune everything after.',
+    render: renderWizardProfile
+  },
+  {
+    icon:'🤖', title:'Which AI tools do you want?', desc:'All three work together — but you might want to start with fewer.',
+    render: renderWizardAITools
+  },
+  {
+    icon:'📋', title:'Which EMR tabs matter to you?', desc:'These will be visible by default. You can always show more inside a case.',
+    render: renderWizardEMRTabs
+  },
+  {
+    icon:'🚀', title:'You\'re all set!', desc:'',
+    render: renderWizardConfirm
+  }
+];
+
+function showWizard() {
+  if (document.getElementById('rdx-wizard')) return;
+  wizardStep = 0;
+  wizardProfile = 'beginner';
+
+  var modal = document.createElement('div');
+  modal.id = 'rdx-wizard';
+  modal.className = 'rdx-wizard-modal';
+  modal.innerHTML = '<div class="rdx-wizard-card" id="rdx-wizard-card"></div>';
+
+  var backdrop = document.createElement('div');
+  backdrop.className = 'rdx-ws-backdrop';
+  backdrop.style.zIndex = '9002';
+  backdrop.id = 'rdx-wizard-bd';
+
+  document.body.appendChild(backdrop);
+  document.body.appendChild(modal);
+  renderWizardStep();
+}
+
+function renderWizardStep() {
+  var card = document.getElementById('rdx-wizard-card');
+  if (!card) return;
+  var step = WIZARD_STEPS[wizardStep];
+  var totalSteps = WIZARD_STEPS.length;
+  var isLast = wizardStep === totalSteps - 1;
+
+  var pillsHtml = WIZARD_STEPS.map(function(_,i) {
+    var cls = i < wizardStep ? 'done' : i === wizardStep ? 'active' : '';
+    return '<div class="rdx-wstep-pill '+cls+'"></div>';
+  }).join('');
+
+  card.innerHTML = '<div class="rdx-wizard-hdr">'
+    + '<div class="rdx-wizard-step-pills">'+pillsHtml+'</div>'
+    + '<div class="rdx-wizard-icon">'+step.icon+'</div>'
+    + '<div class="rdx-wizard-title">'+step.title+'</div>'
+    + '<div class="rdx-wizard-desc">'+step.desc+'</div>'
+    + '</div>'
+    + '<div class="rdx-wizard-body" id="rdx-wizard-body">'+step.render()+'</div>'
+    + '<div class="rdx-wizard-footer">'
+    + '<button class="rdx-wizard-skip" onclick="RDXWorkspace._skipWizard()">Skip setup</button>'
+    + '<button class="rdx-wizard-next" id="rdx-wizard-next" onclick="RDXWorkspace._wizardNext()">'
+    +   (isLast ? 'Start using ReasonDx →' : 'Next →')
+    + '</button>'
+    + '</div>';
+}
+
+function renderWizardWelcome() {
+  return '<div style="text-align:center;padding:8px 0">'
+    + '<div style="display:flex;justify-content:center;gap:16px;margin:16px 0">'
+    + ['🔍 ReasonDx','🧑‍🏫 CoachDx','🧬 MechanismDx'].map(function(t){
+        return '<div style="padding:10px 16px;background:#EBF4FB;border-radius:10px;font-size:13px;font-weight:600;color:#2874A6">'+t+'</div>';
+      }).join('')
+    + '</div>'
+    + '<p style="font-size:14px;color:#475569;line-height:1.7">You\'ll pick which tools to show, customize your EMR layout, and set your experience level. Takes about 60 seconds.</p>'
+    + '</div>';
+}
+
+function renderWizardProfile() {
+  return '<div class="rdx-wiz-profile-grid">'
+    + Object.keys(PROFILES).map(function(k) {
+        var p = PROFILES[k];
+        var active = wizardProfile === k ? ' active' : '';
+        return '<div class="rdx-wiz-profile-card'+active+'" id="rdxwiz-prof-'+k+'" onclick="RDXWorkspace._setWizardProfile(\''+k+'\')">'
+          + '<div class="rdx-wiz-picon">'+p.icon+'</div>'
+          + '<div class="rdx-wiz-pname">'+p.label+'</div>'
+          + '<div class="rdx-wiz-pdesc">'+p.desc+'</div>'
+          + '</div>';
+      }).join('')
+    + '</div>';
+}
+
+function renderWizardAITools() {
+  var prefs = load();
+  var tools = [
+    {key:'show_reasondx',    label:'ReasonDx',    desc:'Reason through clinical cases with AI guidance', icon:'🔍'},
+    {key:'show_coachdx',     label:'CoachDx',     desc:'Socratic coaching — asks you questions, identifies gaps', icon:'🧑‍🏫'},
+    {key:'show_mechanismdx', label:'MechanismDx', desc:'Pathophysiology deep dives — 560 topics', icon:'🧬'},
+  ];
+  return '<div class="rdx-wiz-toggles">'
+    + tools.map(function(t) {
+        var checked = prefs[t.key] !== false;
+        return '<div class="rdx-wiz-toggle-row">'
+          + '<span style="font-size:20px">'+t.icon+'</span>'
+          + '<div class="rdx-ws-feature-info">'
+          +   '<div class="rdx-ws-feature-label">'+t.label+'</div>'
+          +   '<div class="rdx-ws-feature-desc">'+t.desc+'</div>'
+          + '</div>'
+          + '<label class="rdx-toggle"><input type="checkbox" '+(checked?'checked':'')+' onchange="RDXWorkspace._onToggle(\''+t.key+'\',this.checked)"><span class="rdx-toggle-track"></span><span class="rdx-toggle-thumb"></span></label>'
+          + '</div>';
+      }).join('')
+    + '</div>';
+}
+
+function renderWizardEMRTabs() {
+  var prefs = load();
+  var tabs = [
+    {key:'emr_labs',         label:'Labs',          desc:'Lab orders & results',        icon:'🧪', recommended:true},
+    {key:'emr_medications',  label:'Medications',   desc:'Active meds',                 icon:'💊', recommended:true},
+    {key:'emr_vitals',       label:'Vitals',        desc:'Vital sign trends',            icon:'📊', recommended:true},
+    {key:'emr_imaging',      label:'Imaging',       desc:'Radiology orders & reports',  icon:'🩻'},
+    {key:'emr_orders',       label:'Orders & CDS',  desc:'Order entry & decision support',icon:'📤'},
+    {key:'emr_visits',       label:'Visit History', desc:'Prior encounters',            icon:'📅'},
+    {key:'emr_immunizations',label:'Immunizations', desc:'Vaccine history',             icon:'💉'},
+    {key:'emr_history',      label:'FH / SH',       desc:'Family & social history',     icon:'🏡'},
+  ];
+  return '<div class="rdx-wiz-toggles">'
+    + tabs.map(function(t) {
+        var checked = prefs[t.key] !== false;
+        return '<div class="rdx-wiz-toggle-row">'
+          + '<span style="font-size:18px">'+t.icon+'</span>'
+          + '<div class="rdx-ws-feature-info">'
+          +   '<div class="rdx-ws-feature-label">'+t.label+(t.recommended?' <span style="font-size:10px;background:#ECFDF5;color:#059669;padding:2px 6px;border-radius:4px;font-weight:600">Recommended</span>':'')+'</div>'
+          +   '<div class="rdx-ws-feature-desc">'+t.desc+'</div>'
+          + '</div>'
+          + '<label class="rdx-toggle"><input type="checkbox" '+(checked?'checked':'')+' onchange="RDXWorkspace._onToggle(\''+t.key+'\',this.checked)"><span class="rdx-toggle-track"></span><span class="rdx-toggle-thumb"></span></label>'
+          + '</div>';
+      }).join('')
+    + '</div>';
+}
+
+function renderWizardConfirm() {
+  var prefs = load();
+  var onFeatures = FEATURE_GROUPS.reduce(function(arr, g) {
+    g.features.forEach(function(f) {
+      if (!f.alwaysOn && prefs[f.key] !== false) arr.push(f.label);
+    });
+    return arr;
+  }, []).slice(0,8);
+
+  return '<div class="rdx-wiz-confirm">'
+    + '<div class="rdx-wiz-confirm-icon">✅</div>'
+    + '<div class="rdx-wiz-confirm-title">Your workspace is ready</div>'
+    + '<div class="rdx-wiz-confirm-desc">These features are enabled. You can fine-tune everything anytime from the <strong>⚙</strong> button.</div>'
+    + '<div class="rdx-wiz-summary">'
+    + onFeatures.map(function(f){ return '<span class="rdx-wiz-tag">'+f+'</span>'; }).join('')
+    + '</div>'
+    + '</div>';
+}
+
+window.RDXWorkspace._setWizardProfile = function(key) {
+  wizardProfile = key;
+  applyProfile(key);
+  document.querySelectorAll('[id^="rdxwiz-prof-"]').forEach(function(el){ el.classList.remove('active'); });
+  var el = document.getElementById('rdxwiz-prof-'+key);
+  if (el) el.classList.add('active');
+};
+window.RDXWorkspace._wizardNext = function() {
+  if (wizardStep === WIZARD_STEPS.length - 1) {
+    // Done
+    RDXWorkspace.markConfigured();
+    var wiz = document.getElementById('rdx-wizard');
+    var bd  = document.getElementById('rdx-wizard-bd');
+    if (wiz) wiz.remove();
+    if (bd)  bd.remove();
+    showToast('Workspace configured ✓');
+    if (typeof render === 'function') render();
+    return;
+  }
+  wizardStep++;
+  // Refresh confirm step with current prefs
+  if (wizardStep === WIZARD_STEPS.length - 1) {
+    var prefs = load(); prefs.configured = true; save(prefs);
+  }
+  renderWizardStep();
+};
+window.RDXWorkspace._skipWizard = function() {
+  RDXWorkspace.markConfigured();
+  applyProfile('beginner');
+  var wiz = document.getElementById('rdx-wizard');
+  var bd  = document.getElementById('rdx-wizard-bd');
+  if (wiz) wiz.remove();
+  if (bd)  bd.remove();
+};
+
+// ── Auto-init ─────────────────────────────────────────────────────────────
+function init() {
+  injectCSS();
+  injectGearButton();
+  // Fire wizard on first visit only
+  if (RDXWorkspace.needsWizard()) {
+    setTimeout(showWizard, 600);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
+})();

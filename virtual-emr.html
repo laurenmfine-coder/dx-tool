@@ -52,6 +52,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .sidebar-btn{width:100%;padding:10px 16px;border:none;text-align:left;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:400;font-family:'IBM Plex Sans',sans-serif;color:var(--text-secondary);background:transparent;border-left:3px solid transparent;transition:all .15s}
 .sidebar-btn:hover{background:var(--surface-alt)}
 .sidebar-btn.active{background:var(--primary-light);color:var(--primary);font-weight:600;border-left-color:var(--primary)}
+.sidebar-btn.pinned::after{content:"📌";font-size:8px;margin-left:auto;opacity:.4}
 .sidebar-btn svg{flex-shrink:0}
 .sidebar-more-btn{display:none}
 .sidebar-overflow,.sidebar-overflow-backdrop{display:none}
@@ -3918,11 +3919,35 @@ render = function(){
     fn.imaging = renderImaging;
   }
 
-  var PRIMARY_TAB_IDS=['demographics','labs','medications','vitals','imaging'];
+  // ── Workspace: filter tabs & get primary IDs ──────────────────────────
+  if (window.RDX_WORKSPACE) {
+    var wsResult = RDX_WORKSPACE.applyToEMR(tabs, ['demographics','labs','medications','vitals','imaging']);
+    tabs = wsResult.tabs;
+    var PRIMARY_TAB_IDS = wsResult.primaryTabIds;
+  } else if (window.RDXWorkspace) {
+    tabs = RDXWorkspace.filterTabs(tabs);
+    var PRIMARY_TAB_IDS = RDXWorkspace.getPrimaryTabIds();
+  } else {
+    var PRIMARY_TAB_IDS = ['demographics','labs','medications','vitals','imaging'];
+  }
+  // Add sidebar section label for AI tools vs chart
+  var sbWithLabels = tabs.map(function(t){
+    if(t.divider && t.groupLabel === 'Actions'){
+      return '<div style="border-top:1px solid var(--border-light);margin:6px 12px;padding-top:6px"><span style="font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;padding:0 4px">Chart Actions</span></div>';
+    }
+    if(t.divider && t.groupLabel === 'Support'){
+      return '<div style="border-top:1px solid var(--border-light);margin:6px 12px;padding-top:6px"><span style="font-size:9px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:.8px;padding:0 4px">🤖 AI Tools</span></div>';
+    }
+    if(t.divider){return '<div style="border-top:1px solid var(--border-light);margin:6px 12px;padding-top:6px"><span style="font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;padding:0 4px">'+(t.groupLabel||'')+'</span></div>';}
+    var pri=PRIMARY_TAB_IDS.indexOf(t.id)>=0?'primary':'secondary';
+    var pinned=(window.RDXWorkspace&&(RDXWorkspace.load().emr_pinned||[]).indexOf(t.id)>=0)?'pinned':'';
+    return '<button type="button" class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+pinned+'" data-priority="'+pri+'" onclick="switchTab(''+t.id+'')">'+t.icon+'<span>'+t.label+'</span></button>';
+  }).join('');
   var sb=tabs.map(function(t){
     if(t.divider){return '<div style="border-top:1px solid var(--border-light);margin:6px 12px;padding-top:6px"><span style="font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;padding:0 4px">'+(t.groupLabel||'')+'</span></div>';}
     var pri=PRIMARY_TAB_IDS.indexOf(t.id)>=0?'primary':'secondary';return'<button type="button" class="sidebar-btn '+(S.activeTab===t.id?'active':'')+'" data-priority="'+pri+'" onclick="switchTab(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'
   }).join('');
+  var sb = sbWithLabels; // workspace-filtered sidebar
   var secTabs=tabs.filter(function(t){return !t.divider&&PRIMARY_TAB_IDS.indexOf(t.id)<0});
   var isSecActive=secTabs.some(function(t){return t.id===S.activeTab});
   var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
@@ -4066,6 +4091,7 @@ submitDoc = function(){
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
 <script src="js/dx-feedback.js"></script>
 <script src="js/dx-user-bar.js"></script>
+<script src="js/rdx-workspace.js"></script>
 <script src="js/rdx-nav.js"></script>
 <script src="js/rdx-help-widget.js"></script>
 <script src="js/nav-global.js"></script>

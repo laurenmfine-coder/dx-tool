@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Mode | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#2874A6;--blue-dark:#1B5272;--blue-light:#EBF4FB;
+  --green:#0E9F6E;--green-light:#ECFDF5;
+  --purple:#7C3AED;--purple-light:#F5F3FF;
+  --amber:#D97706;--amber-light:#FFFBEB;
+  --text:#0F172A;--dim:#475569;--dim2:#94A3B8;
+  --bg:#F1F5F9;--card:#FFFFFF;--border:#E2E8F0;
+  --font:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.header{padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.logo{font-size:16px;font-weight:800;letter-spacing:-.4px;color:var(--text);text-decoration:none}
+.logo em{color:var(--blue);font-style:italic}
+.header-right{display:flex;align-items:center;gap:16px}
+.exp-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;transition:all .15s}
+.exp-toggle:hover{border-color:var(--blue);color:var(--blue)}
+.exp-toggle .dot{width:8px;height:8px;border-radius:50%;background:var(--green);transition:background .2s}
+.exp-toggle.veteran .dot{background:var(--blue)}
+.demo-link{font-size:12px;font-weight:600;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--blue);transition:all .15s}
+.demo-link:hover{background:var(--blue);color:#fff}
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px}
+
+.page-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.page-eyebrow::before,.page-eyebrow::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
+
+.page-title{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.8px;color:var(--text);text-align:center;margin-bottom:8px;line-height:1.1}
+.page-sub{font-size:15px;color:var(--dim);text-align:center;margin-bottom:48px;max-width:500px;line-height:1.6}
+
+/* ── MODE CARDS ── */
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;width:100%;margin-bottom:40px}
+
+.mode-card{background:var(--card);border:2px solid var(--border);border-radius:20px;padding:32px 28px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.mode-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transition:opacity .25s}
+.mode-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.1)}
+.mode-card.selected{border-width:2px}
+
+.mode-card.reason::before{background:linear-gradient(90deg,var(--blue),#38BDF8)}
+.mode-card.reason:hover,.mode-card.reason.selected{border-color:var(--blue);background:linear-gradient(160deg,var(--blue-light),var(--card))}
+.mode-card.coach::before{background:linear-gradient(90deg,var(--green),#34D399)}
+.mode-card.coach:hover,.mode-card.coach.selected{border-color:var(--green);background:linear-gradient(160deg,var(--green-light),var(--card))}
+.mode-card.mechanism::before{background:linear-gradient(90deg,var(--purple),#A78BFA)}
+.mode-card.mechanism:hover,.mode-card.mechanism.selected{border-color:var(--purple);background:linear-gradient(160deg,var(--purple-light),var(--card))}
+
+.mode-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;flex-shrink:0}
+.reason .mode-icon{background:var(--blue-light)}
+.coach .mode-icon{background:var(--green-light)}
+.mechanism .mode-icon{background:var(--purple-light)}
+
+.mode-badge{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 10px;border-radius:20px;margin-bottom:12px;display:inline-block;width:fit-content}
+.reason .mode-badge{background:var(--blue-light);color:var(--blue)}
+.coach .mode-badge{background:var(--green-light);color:var(--green)}
+.mechanism .mode-badge{background:var(--purple-light);color:var(--purple)}
+
+.mode-name{font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:8px}
+.reason .mode-name{color:var(--blue)}
+.coach .mode-name{color:var(--green)}
+.mechanism .mode-name{color:var(--purple)}
+
+.mode-desc{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:20px;flex:1}
+
+.mode-features{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:24px}
+.mode-features li{font-size:12px;color:var(--dim);display:flex;align-items:flex-start;gap:8px;line-height:1.4}
+.mode-features li::before{content:'→';font-weight:700;flex-shrink:0;font-family:var(--mono)}
+.reason .mode-features li::before{color:var(--blue)}
+.coach .mode-features li::before{color:var(--green)}
+.mechanism .mode-features li::before{color:var(--purple)}
+
+.mode-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);transition:all .2s;width:100%}
+.reason .mode-btn{background:var(--blue);color:#fff}
+.reason .mode-btn:hover{background:var(--blue-dark)}
+.coach .mode-btn{background:var(--green);color:#fff}
+.coach .mode-btn:hover{background:#0B7A56}
+.mechanism .mode-btn{background:var(--purple);color:#fff}
+.mechanism .mode-btn:hover{background:#5B21B6}
+
+.selected-check{position:absolute;top:16px;right:16px;width:22px;height:22px;border-radius:50%;background:var(--green);display:none;align-items:center;justify-content:center}
+.selected-check svg{width:12px;height:12px;stroke:#fff;stroke-width:2.5;fill:none}
+.mode-card.selected .selected-check{display:flex}
+
+/* ── CASE SELECTOR (shown after mode pick) ── */
+.case-section{max-width:960px;width:100%;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:24px}
+.case-chip{padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:500;color:var(--dim);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px;text-decoration:none}
+.case-chip:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.case-chip .case-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+.launch-bar{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:var(--card);border:1px solid var(--border);border-radius:16px;gap:16px}
+.launch-info{font-size:13px;color:var(--dim)}
+.launch-info strong{color:var(--text);display:block;font-size:15px;margin-bottom:2px}
+.launch-btn{display:flex;align-items:center;gap:10px;padding:13px 28px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);background:var(--blue);color:#fff;transition:all .2s;white-space:nowrap}
+.launch-btn:hover{background:var(--blue-dark);transform:translateX(2px)}
+.launch-btn svg{width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none}
+
+/* ── EXPERIENCE LEVEL BANNER (beginner hint) ── */
+.hint-banner{max-width:960px;width:100%;padding:14px 20px;background:#FFF7ED;border:1px solid #FED7AA;border-radius:12px;margin-bottom:32px;display:flex;align-items:center;gap:12px;font-size:13px;color:#92400E;display:none}
+.hint-banner.show{display:flex}
+.hint-banner strong{font-weight:700}
+.hint-banner a{color:var(--blue);font-weight:600;text-decoration:none}
+.hint-banner a:hover{text-decoration:underline}
+
+/* ── FOOTER ── */
+.footer{padding:20px 32px;border-top:1px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--dim2)}
+.footer a{color:var(--dim);text-decoration:none}
+.footer a:hover{color:var(--blue)}
+
+@media(max-width:768px){
+  .mode-grid{grid-template-columns:1fr}
+  .header{padding:0 16px}
+  .main{padding:32px 16px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">Reason<em>Dx</em></a>
+  <div class="header-right">
+    <button class="exp-toggle" id="expToggle" onclick="toggleExperience()" title="Switch experience level">
+      <span class="dot"></span>
+      <span id="expLabel">Beginner Mode</span>
+    </button>
+    <a href="demo.html" class="demo-link">
+      ▶ Interactive Demo
+    </a>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Beginner hint -->
+  <div class="hint-banner" id="hintBanner">
+    <span style="font-size:18px">👋</span>
+    <div><strong>First time?</strong> Start with the <a href="demo.html">interactive demo</a> to see how each mode works — it takes about 3 minutes and uses a real case.</div>
+  </div>
+
+  <div class="page-eyebrow">Choose your learning mode</div>
+  <h1 class="page-title">What would you like to work on?</h1>
+  <p class="page-sub">Pick a mode to focus your session. You can switch anytime once you're inside a case.</p>
+
+  <div class="mode-grid">
+
+    <!-- ReasonDx -->
+    <div class="mode-card reason" id="card-reason" onclick="selectMode('reason')">
+      <div class="selected-check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>
+      <div class="mode-icon">🔍</div>
+      <span class="mode-badge">Clinical Reasoning</span>
+      <div class="mode-name">ReasonDx</div>
+      <p class="mode-desc">Work through a clinical case from chief complaint to diagnosis. Build your differential, order tests, and reason through findings with AI guidance.</p>
+      <ul class="mode-features">
+        <li>Illness script construction</li>
+        <li>Diagnostic reasoning coaching</li>
+        <li>Real EMR simulation</li>
+        <li>Feedback on your reasoning process</li>
+      </ul>
+      <button class="mode-btn" onclick="event.stopPropagation();launchMode('reason')">
+        Start ReasonDx →
+      </button>
+    </div>
+
+    <!-- CoachDx -->
+    <div class="mode-card coach" id="card-coach" onclick="selectMode('coach')">
+      <div class="selected-check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>
+      <div class="mode-icon">🧑‍🏫</div>
+      <span class="mode-badge">AI Coaching</span>
+      <div class="mode-name">CoachDx</div>
+      <p class="mode-desc">Get a personalized coaching session. CoachDx asks you questions, identifies gaps in your reasoning, and teaches through Socratic dialogue.</p>
+      <ul class="mode-features">
+        <li>Socratic questioning style</li>
+        <li>Identifies your reasoning gaps</li>
+        <li>Personalized to your level</li>
+        <li>Progress tracked over sessions</li>
+      </ul>
+      <button class="mode-btn" onclick="event.stopPropagation();launchMode('coach')">
+        Start CoachDx →
+      </button>
+    </div>
+
+    <!-- MechanismDx -->
+    <div class="mode-card mechanism" id="card-mechanism" onclick="selectMode('mechanism')">
+      <div class="selected-check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div>
+      <div class="mode-icon">🧬</div>
+      <span class="mode-badge">Pathophysiology</span>
+      <div class="mode-name">MechanismDx</div>
+      <p class="mode-desc">Deep dive into the underlying mechanisms of disease. Understand why patients present the way they do through visual pathophysiology modules.</p>
+      <ul class="mode-features">
+        <li>560 pathophysiology topics</li>
+        <li>Visual mechanism maps</li>
+        <li>Links mechanism → clinical findings</li>
+        <li>Board-relevant deep dives</li>
+      </ul>
+      <button class="mode-btn" onclick="event.stopPropagation();launchMode('mechanism')">
+        Start MechanismDx →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Case selector — shown after mode is picked -->
+  <div class="case-section" id="caseSection" style="display:none">
+    <div class="section-label">Now choose a case</div>
+    <div class="case-grid" id="caseGrid"></div>
+    <div class="launch-bar">
+      <div class="launch-info">
+        <strong id="launchCaseName">Select a case above</strong>
+        <span id="launchModeLabel">—</span>
+      </div>
+      <button class="launch-btn" id="launchBtn" onclick="launch()" disabled style="opacity:.4;cursor:not-allowed">
+        Enter Case
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span>ReasonDx — Clinical Reasoning Education Platform</span>
+  <div style="display:flex;gap:20px">
+    <a href="how-it-works.html">How it works</a>
+    <a href="demo.html">Demo</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</footer>
+
+<script>
+// ── Cases list (representative A/I cases) ──────────────────────────────────
+var CASES = [
+  {id:'anaphylaxis',          label:'Anaphylaxis',                 cat:'Emergency'},
+  {id:'asthma-exacerbation',  label:'Asthma Exacerbation',         cat:'Pulmonary'},
+  {id:'peanut-allergy-anaphylaxis', label:'Peanut Anaphylaxis',    cat:'Food Allergy'},
+  {id:'hereditary-angioedema',label:'Hereditary Angioedema',       cat:'Angioedema'},
+  {id:'cvid-presentation',    label:'CVID',                        cat:'Immunodeficiency'},
+  {id:'scid-ada',             label:'ADA-SCID',                    cat:'Immunodeficiency'},
+  {id:'chronic-spontaneous-urticaria', label:'CSU',                cat:'Urticaria'},
+  {id:'atopic-dermatitis-severe', label:'Severe Atopic Dermatitis',cat:'Skin'},
+  {id:'penicillin-allergy-delabeling', label:'Penicillin De-labeling', cat:'Drug Allergy'},
+  {id:'severe-asthma-biologics', label:'Severe Asthma — Biologics',cat:'Asthma'},
+  {id:'eoe-adult',            label:'Eosinophilic Esophagitis',    cat:'EoE'},
+  {id:'mastocytosis',         label:'Systemic Mastocytosis',       cat:'Mast Cell'},
+  {id:'alpha-gal-syndrome',   label:'Alpha-gal Syndrome',          cat:'Food Allergy'},
+  {id:'drug-allergy-vancomycin-rms', label:'Vancomycin RMS',       cat:'Drug Allergy'},
+  {id:'dress-syndrome',       label:'DRESS Syndrome',              cat:'Drug Reaction'},
+  {id:'sjs-ten',              label:'SJS/TEN',                     cat:'Drug Reaction'},
+  {id:'contact-dermatitis-occupational', label:'Occupational Contact Dermatitis', cat:'Skin'},
+  {id:'hypersensitivity-pneumonitis', label:'Hypersensitivity Pneumonitis', cat:'Pulmonary'},
+  {id:'abpa-aspergillus',     label:'ABPA',                        cat:'Pulmonary'},
+  {id:'insect-sting-anaphylaxis', label:'Insect Sting Anaphylaxis', cat:'Venom'},
+];
+
+var CAT_COLORS = {
+  'Emergency':'#DC2626','Pulmonary':'#2874A6','Food Allergy':'#D97706',
+  'Angioedema':'#0891B2','Immunodeficiency':'#7C3AED','Urticaria':'#EC4899',
+  'Skin':'#059669','Drug Allergy':'#B45309','Asthma':'#1D4ED8',
+  'EoE':'#BE185D','Mast Cell':'#92400E','Drug Reaction':'#C2410C','Venom':'#15803D',
+};
+
+// Mode → destination URL map
+var MODE_URLS = {
+  reason:    'virtual-emr.html',
+  coach:     'virtual-emr.html',
+  mechanism: 'pathway.html',
+};
+
+var selectedMode = null;
+var selectedCase = null;
+
+// ── Experience level ────────────────────────────────────────────────────────
+var expLevel = localStorage.getItem('rdx-exp-level') || 'beginner';
+applyExpLevel();
+
+function applyExpLevel() {
+  var toggle = document.getElementById('expToggle');
+  var label  = document.getElementById('expLabel');
+  var hint   = document.getElementById('hintBanner');
+  if (expLevel === 'beginner') {
+    toggle.classList.remove('veteran');
+    label.textContent = 'Beginner Mode';
+    if (hint) hint.classList.add('show');
+  } else {
+    toggle.classList.add('veteran');
+    label.textContent = 'Veteran Mode';
+    if (hint) hint.classList.remove('show');
+  }
+  localStorage.setItem('rdx-exp-level', expLevel);
+  // Expose globally for other pages
+  window.RDX_EXP_LEVEL = expLevel;
+}
+
+function toggleExperience() {
+  expLevel = expLevel === 'beginner' ? 'veteran' : 'beginner';
+  applyExpLevel();
+}
+
+// ── Mode selection ───────────────────────────────────────────────────────────
+function selectMode(mode) {
+  selectedMode = mode;
+  selectedCase = null;
+  ['reason','coach','mechanism'].forEach(function(m) {
+    document.getElementById('card-'+m).classList.toggle('selected', m === mode);
+  });
+  renderCases();
+  document.getElementById('caseSection').style.display = 'block';
+  document.getElementById('launchModeLabel').textContent = 'Mode: ' + modeName(mode);
+  document.getElementById('launchCaseName').textContent = 'Select a case above';
+  resetLaunchBtn();
+  // Store mode for the EMR to pick up
+  localStorage.setItem('rdx-active-mode', mode);
+  setTimeout(function(){
+    document.getElementById('caseSection').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }, 100);
+}
+
+function launchMode(mode) {
+  selectMode(mode);
+}
+
+function modeName(m) {
+  return {reason:'ReasonDx',coach:'CoachDx',mechanism:'MechanismDx'}[m] || m;
+}
+
+// ── Case grid ────────────────────────────────────────────────────────────────
+function renderCases() {
+  var grid = document.getElementById('caseGrid');
+  grid.innerHTML = CASES.map(function(c) {
+    var color = CAT_COLORS[c.cat] || '#64748B';
+    return '<div class="case-chip" id="chip-'+c.id+'" onclick="pickCase(\''+c.id+'\',\''+c.label+'\')">'
+      + '<span class="case-dot" style="background:'+color+'"></span>'
+      + '<span>'+c.label+'</span>'
+      + '</div>';
+  }).join('');
+}
+
+function pickCase(id, label) {
+  selectedCase = id;
+  // Clear all
+  document.querySelectorAll('.case-chip').forEach(function(el){ el.style.borderColor='';el.style.background='';el.style.color=''; });
+  // Highlight
+  var chip = document.getElementById('chip-'+id);
+  if(chip){ chip.style.borderColor='var(--blue)';chip.style.background='var(--blue-light)';chip.style.color='var(--blue)'; }
+  document.getElementById('launchCaseName').textContent = label;
+  enableLaunchBtn();
+  localStorage.setItem('rdx-selected-case', id);
+}
+
+function resetLaunchBtn() {
+  var btn = document.getElementById('launchBtn');
+  btn.disabled = true; btn.style.opacity='.4'; btn.style.cursor='not-allowed';
+}
+function enableLaunchBtn() {
+  var btn = document.getElementById('launchBtn');
+  btn.disabled = false; btn.style.opacity='1'; btn.style.cursor='pointer';
+}
+
+function launch() {
+  if (!selectedMode || !selectedCase) return;
+  var url = MODE_URLS[selectedMode] || 'virtual-emr.html';
+  // Pass mode + case via URL params
+  window.location.href = url + '?mode=' + selectedMode + '&case=' + selectedCase;
+}
+
+// ── Init ────────────────────────────────────────────────────────────────────
+// Restore last session if returning user
+var lastMode = localStorage.getItem('rdx-active-mode');
+if (lastMode && expLevel === 'veteran') {
+  // Veterans skip the chooser, drop straight into last mode
+  selectMode(lastMode);
+}
+</script>
+<script src="js/rdx-workspace.js"></script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Demo | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#2874A6;--blue-dark:#1B5272;--blue-light:#EBF4FB;--blue-border:rgba(40,116,166,.2);
+  --green:#0E9F6E;--green-light:#ECFDF5;
+  --purple:#7C3AED;--purple-light:#F5F3FF;
+  --amber:#D97706;--amber-light:#FFFBEB;
+  --text:#0F172A;--dim:#475569;--dim2:#94A3B8;
+  --bg:#F1F5F9;--card:#FFFFFF;--border:#E2E8F0;
+  --font:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+.header{padding:0 32px;height:52px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.logo{font-size:16px;font-weight:800;letter-spacing:-.4px;color:var(--text);text-decoration:none}
+.logo em{color:var(--blue);font-style:italic}
+.back-link{font-size:13px;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:6px}
+.back-link:hover{color:var(--blue)}
+
+/* ── DEMO TYPE PICKER ── */
+.demo-picker{max-width:860px;margin:48px auto 0;padding:0 24px}
+.picker-title{font-size:28px;font-weight:800;letter-spacing:-.6px;margin-bottom:6px}
+.picker-sub{font-size:14px;color:var(--dim);margin-bottom:32px;line-height:1.6}
+.picker-tabs{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+.ptab{padding:10px 20px;border-radius:10px;border:2px solid var(--border);background:var(--card);font-size:13px;font-weight:600;color:var(--dim);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px;font-family:var(--font)}
+.ptab:hover{border-color:var(--blue);color:var(--blue)}
+.ptab.active{border-color:var(--blue);background:var(--blue);color:#fff}
+.ptab .ptab-icon{font-size:16px}
+
+/* ── DEMO PANELS ── */
+.demo-panel{display:none;animation:fadeUp .3s ease}
+.demo-panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─────────────────────────────────────────────
+   PANEL 1: GUIDED WALKTHROUGH (tooltip overlay)
+───────────────────────────────────────────────*/
+.walkthrough-wrap{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);box-shadow:0 4px 24px rgba(0,0,0,.06)}
+
+/* Fake EMR shell */
+.fake-emr{display:flex;height:500px;flex-direction:column}
+.fake-header{background:#1B5272;height:44px;display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0}
+.fake-header-title{color:#fff;font-size:14px;font-weight:700}
+.fake-header-sub{color:rgba(255,255,255,.5);font-size:12px}
+.fake-mode-pill{margin-left:auto;background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;display:flex;align-items:center;gap:6px}
+.fake-mode-dot{width:6px;height:6px;border-radius:50%;background:#34D399}
+
+.fake-body{display:flex;flex:1;min-height:0}
+.fake-sidebar{width:160px;background:#F8FAFC;border-right:1px solid var(--border);padding:8px 0;flex-shrink:0}
+.fake-sidebar-item{padding:9px 16px;font-size:12px;color:var(--dim);cursor:default;display:flex;align-items:center;gap:8px;border-left:3px solid transparent}
+.fake-sidebar-item.active{background:var(--blue-light);color:var(--blue);border-left-color:var(--blue);font-weight:600}
+.fake-sidebar-item span{font-size:14px}
+
+.fake-main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.fake-chat{flex:1;padding:20px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;background:#FAFBFC}
+.msg{max-width:75%;padding:12px 16px;border-radius:12px;font-size:13px;line-height:1.6}
+.msg-ai{background:#fff;border:1px solid var(--border);color:var(--text);align-self:flex-start;border-radius:4px 12px 12px 12px}
+.msg-user{background:var(--blue);color:#fff;align-self:flex-end;border-radius:12px 4px 12px 12px}
+.msg-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;opacity:.6}
+.msg-typing{display:flex;gap:4px;align-items:center;padding:4px 0}
+.msg-typing span{width:6px;height:6px;border-radius:50%;background:var(--dim2);animation:bounce .8s infinite}
+.msg-typing span:nth-child(2){animation-delay:.15s}
+.msg-typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+.fake-input-bar{border-top:1px solid var(--border);padding:12px 16px;display:flex;gap:8px;background:#fff;flex-shrink:0}
+.fake-input{flex:1;padding:9px 14px;border-radius:8px;border:1px solid var(--border);font-size:13px;font-family:var(--font);color:var(--text);background:#FAFBFC}
+.fake-input:focus{outline:none;border-color:var(--blue)}
+.fake-send{padding:9px 18px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s}
+.fake-send:hover{background:var(--blue-dark)}
+
+/* Tooltip overlay */
+.tip-overlay{position:absolute;inset:0;pointer-events:none;z-index:10}
+.tip-box{position:absolute;background:#1E293B;color:#fff;border-radius:12px;padding:16px 18px;font-size:13px;line-height:1.55;max-width:240px;box-shadow:0 8px 32px rgba(0,0,0,.25);pointer-events:all;transition:all .4s}
+.tip-box::before{content:'';position:absolute;width:0;height:0;border-style:solid}
+.tip-num{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:6px}
+.tip-title{font-weight:700;font-size:14px;margin-bottom:4px}
+.tip-nav{display:flex;gap:8px;margin-top:12px;justify-content:flex-end}
+.tip-btn{padding:5px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:var(--font)}
+.tip-btn.prev{background:rgba(255,255,255,.15);color:#fff}
+.tip-btn.next{background:var(--blue);color:#fff}
+.tip-skip{font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;margin-top:8px;text-align:center;text-decoration:underline}
+
+.tip-highlight{position:absolute;border-radius:6px;box-shadow:0 0 0 3px rgba(40,116,166,.6),0 0 0 9999px rgba(0,0,0,.35);transition:all .4s;pointer-events:none}
+
+/* ─────────────────────────────────────────────
+   PANEL 2: SIMULATED CHAT WALKTHROUGH
+───────────────────────────────────────────────*/
+.chat-demo-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.chat-demo-header{background:#1B5272;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.cdh-avatar{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px}
+.cdh-info{color:#fff}
+.cdh-name{font-size:14px;font-weight:700}
+.cdh-case{font-size:12px;color:rgba(255,255,255,.6)}
+.cdh-mode{margin-left:auto;background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
+
+.chat-demo-body{height:420px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;background:#FAFBFC}
+.demo-msg{display:flex;flex-direction:column;max-width:80%;animation:fadeUp .3s ease}
+.demo-msg.ai{align-self:flex-start}
+.demo-msg.user{align-self:flex-end}
+.demo-msg .bubble{padding:12px 16px;border-radius:12px;font-size:13px;line-height:1.65}
+.demo-msg.ai .bubble{background:#fff;border:1px solid var(--border);border-radius:4px 12px 12px 12px;color:var(--text)}
+.demo-msg.user .bubble{background:var(--blue);color:#fff;border-radius:12px 4px 12px 12px}
+.demo-msg .sender{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim2);margin-bottom:4px}
+.demo-msg.user .sender{text-align:right}
+
+.prompt-bar{border-top:1px solid var(--border);padding:14px 16px;background:#fff;display:flex;flex-direction:column;gap:10px}
+.prompt-hint{font-size:12px;color:var(--dim);background:var(--amber-light);border:1px solid #FED7AA;border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px}
+.prompt-hint strong{color:var(--amber)}
+.prompt-suggestions{display:flex;gap:8px;flex-wrap:wrap}
+.prompt-chip{padding:7px 14px;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:20px;font-size:12px;color:var(--blue);cursor:pointer;transition:all .15s;font-weight:500}
+.prompt-chip:hover{background:var(--blue);color:#fff}
+.prompt-row{display:flex;gap:8px}
+.prompt-input{flex:1;padding:9px 14px;border-radius:8px;border:1px solid var(--border);font-size:13px;font-family:var(--font)}
+.prompt-input:focus{outline:none;border-color:var(--blue)}
+.prompt-send{padding:9px 18px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s}
+.prompt-send:hover{background:var(--blue-dark)}
+
+/* ─────────────────────────────────────────────
+   PANEL 3: VIDEO-STYLE ANIMATED INTRO
+───────────────────────────────────────────────*/
+.video-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#0F172A;position:relative;min-height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.video-slide{display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 40px;text-align:center;animation:fadeUp .5s ease;max-width:600px}
+.video-slide.active{display:flex}
+.vs-step{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.3);margin-bottom:24px}
+.vs-icon{font-size:56px;margin-bottom:20px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.3))}
+.vs-title{font-size:28px;font-weight:800;letter-spacing:-.5px;color:#fff;margin-bottom:12px;line-height:1.2}
+.vs-title em{color:#38BDF8;font-style:normal}
+.vs-body{font-size:15px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:32px;max-width:460px}
+.vs-highlight{display:inline-block;background:rgba(40,116,166,.3);border:1px solid rgba(56,189,248,.3);border-radius:8px;padding:10px 16px;font-size:13px;color:#BAE6FD;font-family:var(--mono);margin-bottom:32px}
+.vs-next{padding:13px 32px;background:var(--blue);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s}
+.vs-next:hover{background:#3498DB;transform:translateY(-2px)}
+
+.video-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,.1)}
+.video-bar{height:100%;background:var(--blue);transition:width .5s ease}
+.video-dots{position:absolute;bottom:20px;display:flex;gap:8px}
+.vdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s}
+.vdot.active{background:var(--blue);transform:scale(1.3)}
+
+/* ── CTA ── */
+.demo-cta{max-width:860px;margin:32px auto 48px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px;gap:16px}
+.cta-text strong{font-size:16px;font-weight:700;display:block;margin-bottom:4px}
+.cta-text p{font-size:13px;color:var(--dim)}
+.cta-btn{display:flex;align-items:center;gap:8px;padding:13px 28px;background:var(--blue);color:#fff;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;white-space:nowrap}
+.cta-btn:hover{background:var(--blue-dark);transform:translateX(2px)}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">Reason<em>Dx</em></a>
+  <a href="choose-mode.html" class="back-link">← Back to Mode Selector</a>
+</header>
+
+<div class="demo-picker">
+  <h1 class="picker-title">See ReasonDx in action</h1>
+  <p class="picker-sub">Choose how you'd like to explore the platform — a guided tour, an interactive case walkthrough, or a quick visual overview.</p>
+
+  <div class="picker-tabs">
+    <button class="ptab active" onclick="showPanel('tooltip')" id="tab-tooltip">
+      <span class="ptab-icon">🎯</span> Guided Tour
+    </button>
+    <button class="ptab" onclick="showPanel('chat')" id="tab-chat">
+      <span class="ptab-icon">💬</span> Try It Live
+    </button>
+    <button class="ptab" onclick="showPanel('video')" id="tab-video">
+      <span class="ptab-icon">▶</span> Quick Overview
+    </button>
+  </div>
+
+  <!-- ── PANEL 1: TOOLTIP TOUR ── -->
+  <div class="demo-panel active" id="panel-tooltip">
+    <div class="walkthrough-wrap" id="wtWrap">
+
+      <!-- Fake EMR -->
+      <div class="fake-emr">
+        <div class="fake-header">
+          <div>
+            <div class="fake-header-title">ReasonDx — Virtual EMR</div>
+            <div class="fake-header-sub">Dr. L. Fine · Anaphylaxis Case</div>
+          </div>
+          <div class="fake-mode-pill"><span class="fake-mode-dot"></span> ReasonDx Mode</div>
+        </div>
+        <div class="fake-body">
+          <div class="fake-sidebar" id="fakeSidebar">
+            <div class="fake-sidebar-item active" id="fs-reason"><span>🔍</span> ReasonDx</div>
+            <div class="fake-sidebar-item" id="fs-coach"><span>🧑‍🏫</span> CoachDx</div>
+            <div class="fake-sidebar-item" id="fs-mechanism"><span>🧬</span> MechanismDx</div>
+            <div style="height:1px;background:var(--border);margin:8px 16px"></div>
+            <div class="fake-sidebar-item"><span>📋</span> Chart</div>
+            <div class="fake-sidebar-item"><span>🧪</span> Labs</div>
+            <div class="fake-sidebar-item"><span>💊</span> Meds</div>
+            <div class="fake-sidebar-item"><span>📊</span> Dashboard</div>
+          </div>
+          <div class="fake-main">
+            <div class="fake-chat" id="fakeChat">
+              <div class="msg msg-ai">
+                <div class="msg-label">ReasonDx AI</div>
+                A 24-year-old woman presents to the ED 15 minutes after eating at a restaurant. She has hives, lip swelling, and difficulty breathing. BP 88/54, HR 118. What is your leading diagnosis?
+              </div>
+              <div class="msg msg-user">
+                <div class="msg-label">You</div>
+                Anaphylaxis — likely IgE-mediated food reaction
+              </div>
+              <div class="msg msg-ai">
+                <div class="msg-label">ReasonDx AI</div>
+                Correct. You've identified the pattern quickly. What is your first priority intervention, and why epinephrine over antihistamines?
+              </div>
+            </div>
+            <div class="fake-input-bar">
+              <input class="fake-input" placeholder="Type your reasoning here..." readonly>
+              <button class="fake-send">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tooltip overlay -->
+      <div class="tip-overlay" id="tipOverlay">
+        <div class="tip-highlight" id="tipHL" style="display:none"></div>
+        <div class="tip-box" id="tipBox" style="left:20px;top:60px">
+          <div class="tip-num" id="tipNum">Step 1 of 5</div>
+          <div class="tip-title" id="tipTitle">Welcome to the Virtual EMR</div>
+          <div id="tipBody">This is where clinical reasoning happens. You see a real patient presentation and reason through it with AI guidance — just like a real clinical encounter.</div>
+          <div class="tip-nav">
+            <button class="tip-btn prev" onclick="tipPrev()" id="tipPrevBtn" style="display:none">← Back</button>
+            <button class="tip-btn next" onclick="tipNext()" id="tipNextBtn">Next →</button>
+          </div>
+          <div class="tip-skip" onclick="skipTour()">Skip tour</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;align-items:center;gap:12px;justify-content:center">
+      <div style="font-size:12px;color:var(--dim)" id="tourProgress">Step 1 of 5</div>
+      <button onclick="restartTour()" style="font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;text-decoration:underline">Restart tour</button>
+    </div>
+  </div>
+
+  <!-- ── PANEL 2: LIVE CHAT DEMO ── -->
+  <div class="demo-panel" id="panel-chat">
+    <div class="chat-demo-wrap">
+      <div class="chat-demo-header">
+        <div class="cdh-avatar">🩺</div>
+        <div class="cdh-info">
+          <div class="cdh-name">Demo Case: Anaphylaxis</div>
+          <div class="cdh-case">24F · Emergency Department · Hives + Hypotension</div>
+        </div>
+        <div class="cdh-mode">CoachDx</div>
+      </div>
+      <div class="chat-demo-body" id="chatBody">
+        <div class="demo-msg ai">
+          <div class="sender">CoachDx</div>
+          <div class="bubble">You're seeing a 24-year-old woman who was eating at a Thai restaurant when she developed hives, lip swelling, and difficulty breathing. Vitals: BP 88/54, HR 118, SpO₂ 94%. What's going through your mind first?</div>
+        </div>
+      </div>
+      <div class="prompt-bar">
+        <div class="prompt-hint">
+          <span>💡</span>
+          <div><strong>Try typing a response</strong> — or pick a suggestion below to see how CoachDx responds</div>
+        </div>
+        <div class="prompt-suggestions" id="promptSuggestions">
+          <div class="prompt-chip" onclick="sendDemo('This looks like anaphylaxis — I want to give epinephrine immediately')">Anaphylaxis → epinephrine</div>
+          <div class="prompt-chip" onclick="sendDemo('I\'m thinking allergic reaction, maybe to a food allergen')">Food allergic reaction</div>
+          <div class="prompt-chip" onclick="sendDemo('Could be anaphylaxis or severe asthma — need to differentiate')">Anaphylaxis vs asthma</div>
+        </div>
+        <div class="prompt-row">
+          <input class="prompt-input" id="demoInput" placeholder="Type your response..." onkeydown="if(event.key==='Enter')sendDemo()">
+          <button class="prompt-send" onclick="sendDemo()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 3: VIDEO SLIDES ── -->
+  <div class="demo-panel" id="panel-video">
+    <div class="video-wrap">
+      <div class="video-slide active" id="vs-0">
+        <div class="vs-step">Overview · 1 of 6</div>
+        <div class="vs-icon">🏥</div>
+        <h2 class="vs-title">A virtual teaching <em>hospital</em></h2>
+        <p class="vs-body">ReasonDx simulates real clinical encounters — the EMR, the patient, the reasoning challenge — so you build diagnostic expertise through doing, not just reading.</p>
+        <button class="vs-next" onclick="vsNext()">See how it works →</button>
+      </div>
+
+      <div class="video-slide" id="vs-1">
+        <div class="vs-step">Overview · 2 of 6</div>
+        <div class="vs-icon">🔍</div>
+        <h2 class="vs-title"><em>ReasonDx</em> — reason through cases</h2>
+        <p class="vs-body">Work up a patient from chief complaint to diagnosis. Build your differential, interpret labs, and get AI feedback on your reasoning — not just your answer.</p>
+        <div class="vs-highlight">You → "Anaphylaxis — IgE-mediated food reaction"<br>AI → "Correct. Why epinephrine over antihistamines?"</div>
+        <button class="vs-next" onclick="vsNext()">Next →</button>
+      </div>
+
+      <div class="video-slide" id="vs-2">
+        <div class="vs-step">Overview · 3 of 6</div>
+        <div class="vs-icon">🧑‍🏫</div>
+        <h2 class="vs-title"><em>CoachDx</em> — Socratic coaching</h2>
+        <p class="vs-body">CoachDx never just gives you the answer. It asks questions, identifies gaps in your reasoning, and teaches through dialogue — adapting to your level in real time.</p>
+        <button class="vs-next" onclick="vsNext()">Next →</button>
+      </div>
+
+      <div class="video-slide" id="vs-3">
+        <div class="vs-step">Overview · 4 of 6</div>
+        <div class="vs-icon">🧬</div>
+        <h2 class="vs-title"><em>MechanismDx</em> — understand the why</h2>
+        <p class="vs-body">560 pathophysiology topics that connect mechanism to clinical presentation. When you understand why, diagnosis becomes pattern recognition instead of memorization.</p>
+        <button class="vs-next" onclick="vsNext()">Next →</button>
+      </div>
+
+      <div class="video-slide" id="vs-4">
+        <div class="vs-step">Overview · 5 of 6</div>
+        <div class="vs-icon">🎯</div>
+        <h2 class="vs-title">Built for <em>your level</em></h2>
+        <p class="vs-body">Beginner mode simplifies the interface to the essentials. Veteran mode unlocks the full dashboard, analytics, and all advanced features. Switch anytime.</p>
+        <button class="vs-next" onclick="vsNext()">Next →</button>
+      </div>
+
+      <div class="video-slide" id="vs-5">
+        <div class="vs-step">Overview · 6 of 6</div>
+        <div class="vs-icon">🚀</div>
+        <h2 class="vs-title">Ready to start?</h2>
+        <p class="vs-body">Choose a mode and pick a case. The full platform — 145 cases, AI coaching, interactive simulations — is waiting.</p>
+        <button class="vs-next" onclick="window.location.href='choose-mode.html'">Choose your mode →</button>
+      </div>
+
+      <div class="video-progress"><div class="video-bar" id="videoBar" style="width:16.6%"></div></div>
+      <div class="video-dots" id="videoDots"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="demo-cta">
+  <div class="cta-text">
+    <strong>Ready to try a real case?</strong>
+    <p>Choose your mode and dive into one of 145 clinical cases.</p>
+  </div>
+  <a href="choose-mode.html" class="cta-btn">
+    Choose Your Mode →
+  </a>
+</div>
+
+<script>
+// ── Panel switcher ──────────────────────────────────────────────────────────
+function showPanel(id) {
+  document.querySelectorAll('.demo-panel').forEach(function(p){ p.classList.remove('active') });
+  document.querySelectorAll('.ptab').forEach(function(t){ t.classList.remove('active') });
+  document.getElementById('panel-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+// ── TOOLTIP TOUR ────────────────────────────────────────────────────────────
+var TIPS = [
+  {
+    title:'Welcome to the Virtual EMR',
+    body:'This is where clinical reasoning happens. You see a real patient presentation and reason through it — just like a real clinical encounter.',
+    hl:{top:55,left:0,width:'100%',height:45},
+    boxPos:{left:'20px',top:'110px'},
+  },
+  {
+    title:'Pick your mode — anytime',
+    body:'ReasonDx, CoachDx, and MechanismDx all live here. Switch between them freely during a case — no need to restart.',
+    hl:{top:100,left:0,width:160,height:120},
+    boxPos:{left:'175px',top:'110px'},
+  },
+  {
+    title:'ReasonDx reasons with you',
+    body:'Type your differential, your plan, your reasoning — the AI responds as a clinical educator, pushing your thinking forward.',
+    hl:{top:100,left:160,width:'calc(100% - 160px)',height:280},
+    boxPos:{left:'20px',top:'250px'},
+  },
+  {
+    title:'The input is your reasoning',
+    body:'You\'re not clicking through menus — you\'re typing clinical reasoning. This is what builds durable diagnostic skills.',
+    hl:{top:380,left:160,width:'calc(100% - 160px)',height:60},
+    boxPos:{left:'20px',top:'300px'},
+  },
+  {
+    title:'That\'s the core loop',
+    body:'Patient presents → you reason → AI challenges → you go deeper. Do this across 145 cases and your clinical reasoning transforms.',
+    hl:null,
+    boxPos:{left:'50%',top:'50%',transform:'translate(-50%,-50%)'},
+    last:true,
+  },
+];
+
+var currentTip = 0;
+
+function renderTip() {
+  var t = TIPS[currentTip];
+  var box = document.getElementById('tipBox');
+  var hl  = document.getElementById('tipHL');
+
+  document.getElementById('tipNum').textContent   = 'Step '+(currentTip+1)+' of '+TIPS.length;
+  document.getElementById('tipTitle').textContent = t.title;
+  document.getElementById('tipBody').textContent  = t.body;
+  document.getElementById('tourProgress').textContent = 'Step '+(currentTip+1)+' of '+TIPS.length;
+
+  // Position box
+  box.style.left      = t.boxPos.left || 'auto';
+  box.style.top       = t.boxPos.top  || 'auto';
+  box.style.transform = t.boxPos.transform || '';
+
+  // Highlight
+  if (t.hl) {
+    hl.style.display = 'block';
+    hl.style.top    = t.hl.top+'px';
+    hl.style.left   = typeof t.hl.left==='number' ? t.hl.left+'px' : t.hl.left;
+    hl.style.width  = typeof t.hl.width==='number' ? t.hl.width+'px' : t.hl.width;
+    hl.style.height = t.hl.height+'px';
+  } else {
+    hl.style.display = 'none';
+  }
+
+  document.getElementById('tipPrevBtn').style.display = currentTip > 0 ? 'block' : 'none';
+  document.getElementById('tipNextBtn').textContent = t.last ? 'Done ✓' : 'Next →';
+}
+
+function tipNext() {
+  if (currentTip < TIPS.length - 1) { currentTip++; renderTip(); }
+  else skipTour();
+}
+function tipPrev() { if (currentTip > 0) { currentTip--; renderTip(); } }
+function skipTour() {
+  document.getElementById('tipOverlay').style.display = 'none';
+  document.getElementById('tourProgress').textContent = 'Tour complete ✓';
+}
+function restartTour() {
+  currentTip = 0;
+  document.getElementById('tipOverlay').style.display = 'block';
+  renderTip();
+}
+renderTip();
+
+// ── CHAT DEMO ───────────────────────────────────────────────────────────────
+var DEMO_RESPONSES = {
+  default: [
+    "Good thinking. Now — what's the mechanism that makes epinephrine the first-line treatment here, rather than diphenhydramine?",
+    "Exactly right. Can you walk me through the NIAID/FAAN criteria? Does this patient meet them, and how confident are you?",
+    "You're reasoning well. One more push: what's the risk of a biphasic reaction here, and how does that change your disposition plan?",
+  ],
+  'anaphylaxis': "Right — this is anaphylaxis. Classic presentation: urticaria + angioedema + cardiovascular compromise after allergen exposure. Now tell me: epinephrine IM to the lateral thigh is first line. What's your reasoning for choosing it over IV push here?",
+  'food': "Good — food-induced anaphylaxis is the leading cause of fatal anaphylaxis in the US. In this case, Thai cuisine with likely peanut exposure. Walk me through the LEAP trial implications and how that's changed our counseling approach.",
+  'asthma': "Interesting differential. Let's separate them: anaphylaxis vs severe asthma. What findings here point you toward anaphylaxis? Remember: urticaria is virtually never seen in isolated asthma.",
+};
+
+var demoTurnCount = 0;
+
+function sendDemo(text) {
+  var input = document.getElementById('demoInput');
+  var msg   = text || input.value.trim();
+  if (!msg) return;
+  input.value = '';
+
+  var body = document.getElementById('chatBody');
+
+  // Add user message
+  body.innerHTML += '<div class="demo-msg user"><div class="sender">You</div><div class="bubble">'+escHtml(msg)+'</div></div>';
+
+  // Typing indicator
+  var typingId = 'typing-'+Date.now();
+  body.innerHTML += '<div class="demo-msg ai" id="'+typingId+'"><div class="sender">CoachDx</div><div class="bubble"><div class="msg-typing"><span></span><span></span><span></span></div></div></div>';
+  body.scrollTop = body.scrollHeight;
+
+  // Hide suggestions after first real input
+  document.getElementById('promptSuggestions').style.display = 'none';
+
+  // Determine response
+  var msgLower = msg.toLowerCase();
+  var response;
+  if (demoTurnCount === 0) {
+    if (msgLower.includes('anaphylaxis') || msgLower.includes('epi')) response = DEMO_RESPONSES['anaphylaxis'];
+    else if (msgLower.includes('food') || msgLower.includes('allerg')) response = DEMO_RESPONSES['food'];
+    else if (msgLower.includes('asthma')) response = DEMO_RESPONSES['asthma'];
+    else response = DEMO_RESPONSES.default[0];
+  } else {
+    response = DEMO_RESPONSES.default[Math.min(demoTurnCount, DEMO_RESPONSES.default.length-1)];
+  }
+  demoTurnCount++;
+
+  setTimeout(function() {
+    var typing = document.getElementById(typingId);
+    if (typing) typing.remove();
+    body.innerHTML += '<div class="demo-msg ai"><div class="sender">CoachDx</div><div class="bubble">'+escHtml(response)+'</div></div>';
+    if (demoTurnCount >= 3) {
+      body.innerHTML += '<div class="demo-msg ai"><div class="sender">CoachDx</div><div class="bubble" style="background:var(--green-light);border-color:#A7F3D0;color:#065F46"><strong>🎓 Great session!</strong> This is exactly how CoachDx works on every case — pushing your reasoning deeper at each step. Ready to try a real case?<br><br><a href="choose-mode.html" style="color:var(--green);font-weight:700">→ Choose your mode and start</a></div></div>';
+    }
+    body.scrollTop = body.scrollHeight;
+  }, 1400);
+
+  body.scrollTop = body.scrollHeight;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── VIDEO SLIDES ─────────────────────────────────────────────────────────────
+var vsIndex = 0;
+var VS_TOTAL = 6;
+
+// Build dots
+var dotsHtml = '';
+for (var i=0;i<VS_TOTAL;i++) dotsHtml += '<div class="vdot'+(i===0?' active':'')+'" onclick="vsGo('+i+')" id="vdot-'+i+'"></div>';
+document.getElementById('videoDots').innerHTML = dotsHtml;
+
+function vsNext() {
+  if (vsIndex < VS_TOTAL-1) vsGo(vsIndex+1);
+}
+function vsGo(idx) {
+  document.getElementById('vs-'+vsIndex).classList.remove('active');
+  document.getElementById('vdot-'+vsIndex).classList.remove('active');
+  vsIndex = idx;
+  document.getElementById('vs-'+vsIndex).classList.add('active');
+  document.getElementById('vdot-'+vsIndex).classList.add('active');
+  document.getElementById('videoBar').style.width = ((vsIndex+1)/VS_TOTAL*100)+'%';
+}
+</script>
+<script src="js/rdx-workspace.js"></script>
+</body>
+</html>

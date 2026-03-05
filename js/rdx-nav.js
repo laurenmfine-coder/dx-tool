@@ -53,6 +53,9 @@
         di(R+'cohort-analytics.html','','Cohort Overview','Program-level data')
       )+
       '<div class="rdx-nav-right">'+
+        '<a href="'+R+'demo.html" class="rdx-nav-btn rdx-demo-btn" title="Interactive Demo" style="font-size:12px;font-weight:600;color:#2874a6;text-decoration:none;padding:5px 10px;border:1px solid #2874a6;border-radius:8px;display:flex;align-items:center;gap:5px">▶ Demo</a>'+
+        '<button id="rdx-exp-toggle" class="rdx-nav-btn rdx-exp-btn" title="Switch experience level" onclick="window.rdxToggleExp && window.rdxToggleExp()" style="font-size:11px;font-weight:600;padding:5px 10px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;display:flex;align-items:center;gap:5px;color:var(--rdx-text-muted,#64748b)"><span id="rdx-exp-dot" style="width:7px;height:7px;border-radius:50%;background:#0E9F6E;display:inline-block"></span><span id="rdx-exp-label">Beginner</span></button>'+
+        '<a href="'+R+'choose-mode.html" class="rdx-nav-btn" title="Switch Mode" style="font-size:11px;font-weight:600;color:var(--rdx-text-muted,#64748b);text-decoration:none;padding:5px 10px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;display:flex;align-items:center;gap:5px" id="rdx-mode-indicator">⬡ <span id="rdx-mode-label">Choose Mode</span></a>'+
         '<button id="rdx-info-btn" class="rdx-nav-btn" title="About">\u2139\uFE0F</button>'+
         '<button id="rdx-logout-btn" class="rdx-nav-btn rdx-logout">Log out</button>'+
       '</div>'+
@@ -139,6 +142,27 @@
       localStorage.removeItem('reasondx-user');localStorage.removeItem('reasondx_student_code');localStorage.removeItem('rdx-progress');sessionStorage.clear();
       window.location.href = R + 'auth/register.html';
     });
+
+    // -- Experience level toggle --
+    var MODE_NAMES = {reason:'ReasonDx',coach:'CoachDx',mechanism:'MechanismDx'};
+    function rdxApplyExp() {
+      var lvl = localStorage.getItem('rdx-exp-level') || 'beginner';
+      var dot = document.getElementById('rdx-exp-dot');
+      var lbl = document.getElementById('rdx-exp-label');
+      if (dot) dot.style.background = lvl==='veteran' ? '#2874A6' : '#0E9F6E';
+      if (lbl) lbl.textContent = lvl==='veteran' ? 'Veteran' : 'Beginner';
+      document.querySelectorAll('[data-rdx-level="advanced"]').forEach(function(el){ el.style.display = lvl==='veteran' ? '' : 'none'; });
+      window.RDX_EXP_LEVEL = lvl;
+    }
+    window.rdxToggleExp = function() {
+      var cur = localStorage.getItem('rdx-exp-level') || 'beginner';
+      localStorage.setItem('rdx-exp-level', cur==='beginner' ? 'veteran' : 'beginner');
+      rdxApplyExp();
+    };
+    rdxApplyExp();
+    var activeMode = localStorage.getItem('rdx-active-mode');
+    var modeLabel = document.getElementById('rdx-mode-label');
+    if (modeLabel && activeMode && MODE_NAMES[activeMode]) modeLabel.textContent = MODE_NAMES[activeMode];
 
     var ov = document.createElement('div'); ov.id = 'rdx-about-overlay';
     ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><img src="'+R+'icons/logo-white.png" alt="ReasonDx" style="height:32px;width:auto;margin-bottom:8px"><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">560</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">315</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">46</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">93</div><div class="lbl">Systems</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 AI pathophysiology tutor (93 systems, 560 topics)<br><strong>Consult Callback</strong> \u2014 26 specialist consult simulations<br><strong>Procedure Lab</strong> \u2014 Skin testing, OFC, desensitization<br><strong>Fellowship Tools</strong> \u2014 Milestones, CCC, ILP, Analytics</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A A/I Fellowship</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Clinical Reasoning</span><span class="rdx-about-pill">\uD83C\uDFAF Board Review</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:reasondx@laurenmfine.com" style="color:#2874a6">reasondx@laurenmfine.com</a></p></div></div>';
