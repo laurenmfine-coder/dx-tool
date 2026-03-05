@@ -18,7 +18,7 @@
     return '<a href="'+href+'" class="rdx-dd-item"><span class="rdx-dd-icon">'+icon+'</span><div><strong>'+title+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</div></a>';
   }
   function dd(label, active, items) {
-    return '<div class="rdx-dd"><button class="rdx-nav-top'+(active?' active':'')+'" aria-haspopup="true">'+label+' <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button><div class="rdx-dd-panel">'+items+'</div></div>';
+    return '<div class="rdx-dd"><button class="rdx-nav-top'+(active?' active':'')+'" aria-haspopup="true">'+label+' <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button><div class="rdx-dd-panel"><div class="rdx-dd-panel-inner">'+items+'</div></div></div>';
   }
 
   var html =
@@ -71,7 +71,8 @@
     '.rdx-nav-top:hover{color:#1f5f8b;background:#f0f7fc}.rdx-nav-top.active{color:#1f5f8b;font-weight:600;background:#f0f7fc}'+
     'a.rdx-nav-top{text-decoration:none}'+
     '.rdx-dd{position:relative}'+
-    '.rdx-dd-panel{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.1);padding:8px;min-width:265px;z-index:9100;animation:rdxDdIn .15s ease}'+
+    '.rdx-dd-panel{display:none;position:absolute;top:100%;padding-top:8px;left:50%;transform:translateX(-50%);min-width:265px;z-index:9100}'+
+    '.rdx-dd-panel-inner{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.1);padding:8px;animation:rdxDdIn .15s ease}'+
     '.rdx-dd:hover .rdx-dd-panel,.rdx-dd-panel:hover{display:block}'+
     '@keyframes rdxDdIn{from{opacity:0;transform:translateX(-50%) translateY(-4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}'+
     '.rdx-dd-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);transition:background .12s}'+

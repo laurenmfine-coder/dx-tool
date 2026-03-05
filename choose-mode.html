@@ -374,8 +374,15 @@ function enableLaunchBtn() {
 function launch() {
   if (!selectedMode || !selectedCase) return;
   var url = MODE_URLS[selectedMode] || 'virtual-emr.html';
-  // Pass mode + case via URL params
-  window.location.href = url + '?mode=' + selectedMode + '&case=' + selectedCase;
+  // Store active mode so EMR and nav can read it
+  localStorage.setItem('rdx-active-mode', selectedMode);
+  // Build URL — EMR needs ?case= and ?setting= to load correctly
+  if (selectedMode === 'mechanism') {
+    window.location.href = url + '?topic=' + selectedCase;
+  } else {
+    // Pass setting=ed as default clinical context so EMR routes correctly
+    window.location.href = url + '?case=' + selectedCase + '&setting=ed&mode=' + selectedMode;
+  }
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────
