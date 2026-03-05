@@ -198,8 +198,13 @@
         }
       });
 
-      // 7. Set current user as Dr. Fine (admin)
-      dbSet('emr-current-user', { username: 'lfine@nsu.edu', displayName: 'Dr. Lauren Fine', role: 'admin', tier: 'admin' });
+      // 7. Set current user as Dr. Fine (admin) — write BOTH keys so all code paths work
+      var adminUser = { username: 'lfine@nsu.edu', displayName: 'Dr. Lauren Fine', role: 'admin', tier: 'admin', _demo: true };
+      dbSet('emr-current-user', adminUser);
+      // Also write reasondx-user (the Supabase session key) so virtual-emr.html auth bridge accepts it
+      dbSet('reasondx-user', { email: 'lfine@nsu.edu', name: 'Dr. Lauren Fine', tier: 'admin', supabaseId: 'lfine@nsu.edu', _demo: true });
+      // Write a student session too for the EMR student-simulation tab
+      // (stored separately so each tab can have its own user context via URL ?as= param)
 
       console.log('[RDXDemoData] ✅ Demo data injected. Reloading faculty dashboard...');
       setTimeout(function(){ window.location.reload(); }, 400);
@@ -210,7 +215,7 @@
       for (var i = 0; i < localStorage.length; i++) {
         var k = localStorage.key(i);
         if (k && (k.startsWith('subs-') || k.startsWith('feedback-') || k.startsWith('annotations-') ||
-            k === 'emr-users' || k === 'emr-roles' || k === 'emr-assignments' || k === 'emr-current-user')) {
+            k === 'emr-users' || k === 'emr-roles' || k === 'emr-assignments' || k === 'emr-current-user' || k === 'reasondx-user')) {
           keys.push(k);
         }
       }

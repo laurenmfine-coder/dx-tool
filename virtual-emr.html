@@ -1197,13 +1197,46 @@ function buildCurrentUser(supaUser){
 
 // Redirect to auth if no session
 function requireAuth(){
+  // 1. Check real Supabase session first
   var supaUser=getSupabaseUser();
-  if(!supaUser){
-    sessionStorage.setItem("reasondx-redirect",location.href);
-    location.replace("auth/register.html");
-    return null;
+  if(supaUser) return supaUser;
+
+  // 2. ?as=uid admin impersonation (from Student View link)
+  var urlParams=new URLSearchParams(location.search);
+  var asUid=urlParams.get('as');
+  if(asUid){
+    var asUser=db('emr-users')||{};
+    var asEntry=asUser[asUid]||{username:asUid,displayName:asUid.split('@')[0],tier:'student'};
+    return{email:asUid,name:asEntry.displayName,tier:asEntry.tier||'student',supabaseId:asUid,_impersonated:true};
   }
-  return supaUser;
+
+  // 3. Demo / local fallback — use emr-current-user if set (from rdx-demo-data.js)
+  var localUser=db('emr-current-user');
+  if(localUser && localUser.username){
+    return{email:localUser.username,name:localUser.displayName||localUser.username,tier:localUser.tier||localUser.role||'student',supabaseId:localUser.username,_local:true};
+  }
+
+  // 4. ?demo=1 or ?bypass=1 URL flag — create a guest session so testing works
+  if(urlParams.get('demo')==='1'||urlParams.get('bypass')==='1'){
+    var guestUser={email:'demo@reasondx.local',name:'Demo User',tier:'student',supabaseId:'demo@reasondx.local',_demo:true};
+    try{localStorage.setItem('emr-current-user',JSON.stringify({username:guestUser.email,displayName:guestUser.name,role:'student',tier:'student'}));}catch(e){}
+    return guestUser;
+  }
+
+  // 5. If demo data is present (emr-users populated) — allow access as first available user
+  var allUsers=db('emr-users')||{};
+  var demoStudent=Object.values(allUsers).find(function(u){
+    var r=db('emr-roles')||{};
+    return (r[u.username]||'student')==='student';
+  });
+  if(demoStudent){
+    return{email:demoStudent.username,name:demoStudent.displayName||demoStudent.username,tier:demoStudent.tier||'student',supabaseId:demoStudent.username,_local:true};
+  }
+
+  // 6. No session — redirect to auth
+  sessionStorage.setItem("reasondx-redirect",location.href);
+  location.replace("auth/register.html");
+  return null;
 }
 
 // Assignment helpers
@@ -1684,8 +1717,15 @@ function doSignOut(){
   if(window.ChartTracker){ChartTracker.stop()}
   S.currentUser=null;S.activeTab="demographics";S.submitted=false;S.noteFields={};S.feedback=null;S.coachMessages=[];S.coachLoading=false;S.coachError=null;S.coachConcepts=[];
   S.selectedSubmission=null;S.gradeScores={};S.gradeComments={};S.overallComment="";S.annotations=[];S.expanded={};
+  // Only remove the Supabase session key — preserve emr-current-user so demo data stays loaded
+  var localUser=db('emr-current-user');
   localStorage.removeItem("reasondx-user");
-  location.replace("auth/register.html");
+  if(localUser && localUser._demo){
+    // Demo session: don't wipe, just go to choose-mode instead of auth
+    location.replace("choose-mode.html");
+  } else {
+    location.replace("auth/register.html");
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
