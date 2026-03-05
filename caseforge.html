@@ -455,22 +455,12 @@ function renderMyCases() {
     h += '<div style="text-align:center;padding:48px;color:var(--rdx-text-muted)"><div style="font-size:48px;margin-bottom:12px">📂</div><p>No custom cases yet. Create one to get started!</p></div>';
   }
   S.myCases.forEach(function(c, idx){
-    var statusLabel = c.status === 'approved' ? '✓ Approved' : c.status === 'pending_review' ? '⏳ In Review' : c.status === 'rejected' ? '✗ Needs Revision' : 'Draft';
-    var statusColor = c.status === 'approved' ? 'green' : c.status === 'pending_review' ? 'amber' : c.status === 'rejected' ? 'red' : 'amber';
-    h += '<div class="saved-case" style="flex-direction:column;align-items:flex-start;gap:10px">';
-    h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;width:100%">';
-    h += '<div><div style="font-size:14px;font-weight:700">' + esc(c.meta.title || c.caseData.patient.diagnosis || 'Untitled') + '</div>';
+    h += '<div class="saved-case"><div>';
+    h += '<div style="font-size:14px;font-weight:700">' + esc(c.meta.title || c.caseData.patient.diagnosis || 'Untitled') + '</div>';
     h += '<div style="font-size:12px;color:var(--rdx-text-muted)">' + esc(c.caseData.patient.name) + ' — ' + esc(c.caseData.patient.chiefComplaint||'').substring(0,60) + '</div>';
-    if (c.source) h += '<div style="font-size:11px;color:var(--rdx-text-muted);margin-top:4px">📎 ' + esc(c.source) + '</div>';
-    if (c.status === 'rejected' && c.auditFeedback) h += '<div style="font-size:11px;color:var(--rdx-danger);margin-top:6px;padding:6px 10px;background:var(--rdx-danger-bg);border-radius:4px">Reviewer note: ' + esc(c.auditFeedback) + '</div>';
-    h += '</div>';
-    h += '<span class="badge badge-' + statusColor + '">' + statusLabel + '</span></div>';
-    h += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+    h += '</div><div style="display:flex;gap:6px">';
     h += '<button class="btn btn-outline btn-sm" onclick="CF.editCase('+idx+')">Edit</button>';
     h += '<button class="btn btn-outline btn-sm" onclick="CF.launchCase('+idx+')" style="color:var(--rdx-success);border-color:var(--rdx-success)">▶ Launch in EMR</button>';
-    if (c.status === 'draft' || c.status === 'rejected') {
-      h += '<button class="btn btn-sm" style="background:#f0fdf4;color:#16a34a;border:1.5px solid #86efac" onclick="CF.showSubmitDialog('+idx+')">🌐 Submit to Library</button>';
-    }
     h += '<button class="btn btn-outline btn-sm" onclick="CF.deleteCase('+idx+')" style="color:var(--rdx-danger);border-color:var(--rdx-danger)">✕</button>';
     h += '</div></div>';
   });
@@ -610,31 +600,6 @@ window.CF = {
 
   deleteCase: function(idx){
     if(confirm('Delete this case?')){ S.myCases.splice(idx,1); save(); render(); }
-  },
-
-  showSubmitDialog: function(idx) {
-    var c = S.myCases[idx];
-    var current = c.source || '';
-    var source = prompt('Add a source citation, DOI, or reference link for this case.\n(Required for public library submission)\n\nExample: DOI: 10.1016/j.jaci.2023.01.001  or  https://www.aaaai.org/...\n\nCurrent: ' + (current || 'None'), current);
-    if (source === null) return; // cancelled
-    if (!source.trim()) { alert('A source citation is required to submit to the public library.'); return; }
-    c.source = source.trim();
-    c.status = 'pending_review';
-    c.submittedAt = new Date().toISOString();
-    c.auditResult = null;
-    c.auditFeedback = null;
-    // Save to shared public submissions
-    try {
-      var submissions = JSON.parse(localStorage.getItem('rdx-public-cases') || '[]');
-      var existing = submissions.findIndex(function(s){ return s.id === c.id; });
-      var entry = JSON.parse(JSON.stringify(c));
-      if (existing >= 0) submissions[existing] = entry;
-      else submissions.push(entry);
-      localStorage.setItem('rdx-public-cases', JSON.stringify(submissions));
-    } catch(e) {}
-    save();
-    alert('Submitted for review! Your case will appear in the Public Library once approved.');
-    render();
   }
 };
 

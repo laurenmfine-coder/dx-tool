@@ -211,7 +211,7 @@ REASONING LENS: Risk stratification and disposition. ABCs before diagnosis. Wors
 
   // Add case context if provided
   if (caseContext) {
-    prompt += `CASE CONTEXT — YOU HAVE READ THE CHART. You know this patient's data below. Use it to ask informed, specific Socratic questions (e.g., "You have a BP of 88/60 and HR 128 — what does that pattern tell you?"). NEVER state the diagnosis or give away the answer. NEVER say "I don't know the patient" or ask the learner to describe the patient to you — you already have the chart.\n${caseContext}\n\n`;
+    prompt += `CASE CONTEXT (use this to guide your questions — NEVER reveal this information directly to the learner):\n${caseContext}\n\n`;
   }
 
   // Add handoff context for non-ED settings
@@ -230,13 +230,13 @@ REASONING LENS: Risk stratification and disposition. ABCs before diagnosis. Wors
 
   // Add interaction instructions
   prompt += `INTERACTION STYLE:
-- You have read the chart. The welcome message has already oriented the learner with the patient name and CC. Do NOT re-introduce yourself or re-describe the patient — dive straight into coaching.
-- Build on what the learner says — reference specific chart findings when probing (e.g. "Given the vitals I'm seeing..." or "You've got a patient on X medication — how does that change your thinking?").
+- Start each conversation by asking what the learner thinks is going on and what their plan is.
+- If this is an inpatient setting and the learner just received the handoff, ask them to present their admission assessment.
+- If this is a clinic setting, ask what they noticed during chart review.
+- Build on what they say — don't ignore their reasoning to pursue your own agenda.
 - When they're right, say so clearly and move to the next challenge.
-- When they're wrong or incomplete, ask a targeted question about the specific gap — don't lecture.
-- If a learner asks you to describe the patient or tell them the history: redirect. "You have the chart — what did you find when you looked at the problem list / vitals / labs?"
-- End EVERY response with exactly one focused question. Never a list.
-- Keep responses concise: 2-4 sentences of coaching + 1 question. You're on rounds.`;
+- When they're wrong or incomplete, ask a targeted question about the specific gap.
+- End each response with a single focused question — never a list of questions.`;
 
   return prompt;
 }

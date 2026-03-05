@@ -1167,43 +1167,6 @@ var _cxRaw = _urlParams.get('cx') || '';
 var CASE_ID = _cxRaw ? (function(){try{var s=_cxRaw;while(s.length%4)s+='=';return atob(s)}catch(e){return _cxRaw}})() : (_urlParams.get('case') || '');
 var URL_SETTING = _urlParams.get('setting') || '';
 var URL_SPECIALTY = _urlParams.get('specialty') || '';
-var IS_CASEFORGE_PREVIEW = _urlParams.get('custom') === 'preview';
-
-// CaseForge Preview: inject sessionStorage case data as window.EMR_DATA before normal load
-if (IS_CASEFORGE_PREVIEW) {
-  try {
-    var _cfRaw = sessionStorage.getItem('caseforge-preview');
-    if (_cfRaw) {
-      var _cfData = JSON.parse(_cfRaw);
-      // Normalize to EMR_DATA shape
-      window.EMR_DATA = {
-        base: {
-          patient: _cfData.patient || {},
-          allergies: _cfData.allergies || [],
-          medications: _cfData.medications || [],
-          problems: _cfData.problems || [],
-          vitals: _cfData.vitals || [],
-          labs: _cfData.labs || [],
-          imaging: _cfData.imaging || [],
-          familyHistory: _cfData.familyHistory || [],
-          socialHistory: _cfData.socialHistory || [],
-          immunizations: _cfData.immunizations || [],
-          visits: _cfData.visits || []
-        },
-        encounters: { ed: _cfData.edEncounter || {} }
-      };
-      // Set a synthetic CASE_ID so CoachDx and other modules work
-      if (!CASE_ID) CASE_ID = 'caseforge-preview';
-      // Banner to indicate preview mode
-      document.addEventListener('DOMContentLoaded', function() {
-        var banner = document.createElement('div');
-        banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#f59e0b;color:#1c1917;font-size:12px;font-weight:600;text-align:center;padding:4px 8px;letter-spacing:.02em';
-        banner.textContent = '⚠ CaseForge Preview — This case has not been saved to the platform';
-        document.body.insertBefore(banner, document.body.firstChild);
-      });
-    }
-  } catch(e) { console.warn('CaseForge preview load failed:', e); }
-}
 // URL params applied to S after state is declared (see below)
 
 // ═══════════════════════════════════════════════════════════════
@@ -1473,25 +1436,6 @@ function _renderCasePicker() {
 
 function loadCaseData(cb) {
   if (!CASE_ID) { showCasePicker(); return; }
-  // CaseForge preview: EMR_DATA already injected — skip script load
-  if (IS_CASEFORGE_PREVIEW && window.EMR_DATA) {
-    var d = window.EMR_DATA;
-    var enc = d.encounters && (d.encounters[URL_SETTING||'ed'] || d.encounters.ed || d.encounters[Object.keys(d.encounters)[0]]) || {};
-    var base = d.base || {};
-    PATIENT = Object.assign({}, base.patient||{}, enc.patient||{});
-    PROBLEMS = enc.problems || base.problems || [];
-    MEDICATIONS = enc.medications || base.medications || [];
-    ALLERGIES = enc.allergies || base.allergies || [];
-    VITALS = enc.vitals || base.vitals || [];
-    VISITS = enc.visits || base.visits || [];
-    LABS = enc.labs || base.labs || [];
-    IMAGING = enc.imaging || base.imaging || [];
-    IMMUNIZATIONS = enc.immunizations || base.immunizations || [];
-    FAMILY_HISTORY = base.familyHistory || [];
-    SOCIAL_HISTORY = base.socialHistory || [];
-    if (cb) cb();
-    return;
-  }
   var s = document.createElement('script');
   s.src = 'emr-data/' + CASE_ID + '.js';
   s.onerror = function() {
@@ -2057,18 +2001,14 @@ function renderCoachDx(){
   // Build messages HTML
   var msgsHtml="";
   if(S.coachMessages.length===0){
-    // Welcome message — attending already knows the chart, greets by patient name + CC
-    var ptName=(typeof PATIENT!=="undefined"&&PATIENT&&PATIENT.name)?PATIENT.name:"the patient";
-    var ptCC=(typeof PATIENT!=="undefined"&&PATIENT&&PATIENT.chiefComplaint)?PATIENT.chiefComplaint:"chief complaint on chart";
-    var ptAge=(typeof PATIENT!=="undefined"&&PATIENT&&PATIENT.age)?PATIENT.age+"yo ":"";
-    var ptSex=(typeof PATIENT!=="undefined"&&PATIENT&&PATIENT.sex)?PATIENT.sex+" ":"";
+    // Welcome message based on setting
     var welcomes={
-      ed:"I've got the chart on "+ptName+" — "+ptAge+ptSex+"presenting with "+ptCC+". You're up. What’s your initial read — what’s at the top of your differential and what’s your first move?",
-      inpatient:"I've reviewed the admission on "+ptName+". Before we round — give me your problem list and walk me through your plan for today.",
-      consult:"The primary team has asked us to see "+ptName+" for "+ptCC+". Before we go in — what’s the specific clinical question being asked, and what’s your approach?",
-      icu:"Let’s round on "+ptName+". I’ve got the overnight data — now walk me through each organ system. Where are we, and what’s the trajectory?",
-      clinic:"I pulled the chart on "+ptName+" before you go in. What stood out to you from your pre-visit review, and what’s on the agenda today?",
-      "post-discharge":""+ptName+" is back after discharge. I’ve got the discharge summary — walk me through what happened during the hospitalization and what you’re watching for today."
+      ed:"You\u2019re in the ED with this patient. I\u2019m here when you need to think through your differential, talk through a workup, or sanity-check your plan. What\u2019s your read on this patient?",
+      inpatient:"You just received the handoff on this patient. Before we go further \u2014 tell me your admission assessment. What\u2019s your problem list and plan?",
+      consult:"The primary team has asked for our input on this patient. First things first: what is the specific clinical question they\u2019re asking us to answer?",
+      icu:"Let\u2019s round on this patient. Walk me through each organ system \u2014 where are we, and what\u2019s the trajectory?",
+      clinic:"You\u2019ve reviewed the chart before this patient walks in. What did you notice? What\u2019s on the agenda today?",
+      "post-discharge":"This patient was recently discharged. Before we see them \u2014 tell me what happened during the hospitalization and what you\u2019re watching for today."
     };
     var welcome=welcomes[S.clinicalSetting]||welcomes.ed;
     msgsHtml+='<div class="coach-msg coach-msg-assistant">'+esc(welcome)+'</div>';
@@ -2139,62 +2079,31 @@ function sendCoachMessage(){
   setTimeout(function(){var el=document.getElementById("coachMessages");if(el)el.scrollTop=el.scrollHeight},50);
   
   // Build case context for the worker
-  // ── BUILD COACHDX CASE CONTEXT ──
-  // Attending chart knowledge — rich enough to coach Socratically. Never revealed directly to learner.
   var caseContext="";
   if(typeof PATIENT!=="undefined"&&PATIENT){
     caseContext="Patient: "+PATIENT.name+", "+PATIENT.age+"yo "+PATIENT.sex+". ";
     caseContext+="CC: "+(PATIENT.chiefComplaint||"See chart")+". ";
-    if(PATIENT.diagnosis)caseContext+="Working Dx (coach only — do NOT reveal): "+PATIENT.diagnosis+". ";
+    if(PATIENT.diagnosis)caseContext+="Diagnosis: "+PATIENT.diagnosis+". ";
   }
+  // Enrich context with clinical data so CoachDx can coach on the actual case
   if(typeof PROBLEMS!=="undefined"&&PROBLEMS&&PROBLEMS.length){
     var probList=PROBLEMS.slice(0,8).map(function(p){return typeof p==="string"?p:(p.problem||p.description||"")}).filter(Boolean);
-    if(probList.length) caseContext+="\nProblem List: "+probList.join("; ")+".";
+    if(probList.length) caseContext+="\nProblem List: "+probList.join("; ")+". ";
   }
   if(typeof MEDICATIONS!=="undefined"&&MEDICATIONS&&MEDICATIONS.length){
-    var medList=MEDICATIONS.slice(0,10).map(function(m){return m.name+(m.dose?" "+m.dose:"")+(m.frequency?" "+m.frequency:"")}).filter(Boolean);
-    if(medList.length) caseContext+="\nMedications: "+medList.join("; ")+".";
+    var medList=MEDICATIONS.slice(0,8).map(function(m){return m.name||""}).filter(Boolean);
+    if(medList.length) caseContext+="\nMedications: "+medList.join(", ")+". ";
   }
   if(typeof ALLERGIES!=="undefined"&&ALLERGIES&&ALLERGIES.length){
     var allergyList=ALLERGIES.map(function(a){return(a.allergen||"")+(a.reaction?" ("+a.reaction+")":"")}).filter(Boolean);
-    if(allergyList.length) caseContext+="\nAllergies: "+allergyList.join(", ")+".";
+    if(allergyList.length) caseContext+="\nAllergies: "+allergyList.join(", ")+". ";
   }
   if(typeof VITALS!=="undefined"&&VITALS){
     var vRows=Array.isArray(VITALS)?VITALS:(VITALS.rows||[]);
-    if(vRows.length){var v=vRows[0];caseContext+="\nVitals: "+(v.bp?"BP "+v.bp+" ":"")+(v.hr?"HR "+v.hr+" ":"")+(v.rr?"RR "+v.rr+" ":"")+(v.spo2?"SpO2 "+v.spo2+" ":"")+(v.temp?"Temp "+v.temp:"")+(v.pain?" Pain "+v.pain:"")+"."}
+    if(vRows.length){var v=vRows[0];caseContext+="\nVitals: "+(v.bp?"BP "+v.bp+" ":"")+(v.hr?"HR "+v.hr+" ":"")+(v.rr?"RR "+v.rr+" ":"")+(v.spo2?"SpO2 "+v.spo2+" ":"")+(v.temp?"Temp "+v.temp:"")+".";}
   }
-  if(typeof LABS!=="undefined"&&LABS&&LABS.length){
-    var labSummary=LABS.slice(0,3).map(function(panel){
-      if(!panel)return"";
-      var pname=panel.name||panel.panel||"Labs";
-      var rows=panel.rows||panel.results||[];
-      var items=rows.slice(0,12).map(function(r){
-        var val=(r.value||r.result||"");var flag=(r.flag||r.status||"");
-        return(r.name||r.test||"")+(val?" "+val:"")+(flag&&flag!=="normal"?" ["+flag+"]":"");
-      }).filter(Boolean);
-      return pname+(items.length?": "+items.join(", "):"");
-    }).filter(Boolean);
-    if(labSummary.length) caseContext+="\nLabs: "+labSummary.join(" | ")+".";
-  }
-  if(typeof IMAGING!=="undefined"&&IMAGING&&IMAGING.length){
-    var imgSummary=IMAGING.slice(0,4).map(function(img){
-      return(img.type||img.study||"Imaging")+(img.result||img.impression||img.findings?": "+(img.result||img.impression||img.findings):"");
-    }).filter(Boolean);
-    if(imgSummary.length) caseContext+="\nImaging: "+imgSummary.join("; ")+".";
-  }
-  if(typeof FAMILY_HISTORY!=="undefined"&&FAMILY_HISTORY&&FAMILY_HISTORY.length){
-    var fhxList=FAMILY_HISTORY.slice(0,4).map(function(f){return typeof f==="string"?f:(f.condition||"")}).filter(Boolean);
-    if(fhxList.length) caseContext+="\nFamily History: "+fhxList.join("; ")+".";
-  }
-  if(typeof SOCIAL_HISTORY!=="undefined"&&SOCIAL_HISTORY&&SOCIAL_HISTORY.length){
-    var shxList=SOCIAL_HISTORY.slice(0,6).map(function(s){return Array.isArray(s)?s[0]+": "+s[1]:(typeof s==="string"?s:"")}).filter(Boolean);
-    if(shxList.length) caseContext+="\nSocial History: "+shxList.join("; ")+".";
-  }
-  if(typeof VISITS!=="undefined"&&VISITS&&VISITS.length){
-    var rv=VISITS[0];var hpi=rv&&(rv.hpi||rv.note||rv.narrative||"");
-    if(hpi) caseContext+="\nHPI: "+hpi.slice(0,600)+(hpi.length>600?"…":"")+".";
-  }
-    // Get handoff data if available
+  
+  // Get handoff data if available
   var handoff=null;
   if(typeof HANDOFF_DATA!=="undefined"&&HANDOFF_DATA&&typeof CASE_ID!=="undefined"){
     handoff=HANDOFF_DATA[CASE_ID]||null;
@@ -2205,12 +2114,12 @@ function sendCoachMessage(){
   if(S.coachMessages.length===1){
     // First user message — include the welcome as context
     var welcomes={
-      ed:"I've got the chart on "+ptName+" — "+ptAge+ptSex+"presenting with "+ptCC+". You're up. What’s your initial read — what’s at the top of your differential and what’s your first move?",
-      inpatient:"I've reviewed the admission on "+ptName+". Before we round — give me your problem list and walk me through your plan for today.",
-      consult:"The primary team has asked us to see "+ptName+" for "+ptCC+". Before we go in — what’s the specific clinical question being asked, and what’s your approach?",
-      icu:"Let’s round on "+ptName+". I’ve got the overnight data — now walk me through each organ system. Where are we, and what’s the trajectory?",
-      clinic:"I pulled the chart on "+ptName+" before you go in. What stood out to you from your pre-visit review, and what’s on the agenda today?",
-      "post-discharge":""+ptName+" is back after discharge. I’ve got the discharge summary — walk me through what happened during the hospitalization and what you’re watching for today."
+      ed:"You\u2019re in the ED with this patient. I\u2019m here when you need to think through your differential, talk through a workup, or sanity-check your plan. What\u2019s your read on this patient?",
+      inpatient:"You just received the handoff on this patient. Before we go further \u2014 tell me your admission assessment. What\u2019s your problem list and plan?",
+      consult:"The primary team has asked for our input on this patient. First things first: what is the specific clinical question they\u2019re asking us to answer?",
+      icu:"Let\u2019s round on this patient. Walk me through each organ system \u2014 where are we, and what\u2019s the trajectory?",
+      clinic:"You\u2019ve reviewed the chart before this patient walks in. What did you notice? What\u2019s on the agenda today?",
+      "post-discharge":"This patient was recently discharged. Before we see them \u2014 tell me what happened during the hospitalization and what you\u2019re watching for today."
     };
     apiMessages.push({role:"assistant",content:welcomes[S.clinicalSetting]||welcomes.ed});
   }
