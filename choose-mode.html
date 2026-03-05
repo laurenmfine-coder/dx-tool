@@ -31,7 +31,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .exp-toggle.veteran .dot{background:var(--blue)}
 .demo-link{font-size:12px;font-weight:600;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--blue);transition:all .15s}
 .demo-link:hover{background:var(--blue);color:#fff}
-.fac-link{font-size:12px;font-weight:600;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--green);transition:all .15s}
+.fac-link{font-size:12px;font-weight:600;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;border:1px solid var(--green);background:none;cursor:pointer;font-family:var(--font);transition:all .15s}
 .fac-link:hover{background:var(--green);color:#fff}
 
 /* ── MAIN ── */
@@ -197,9 +197,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <span class="dot"></span>
       <span id="expLabel">Beginner Mode</span>
     </button>
-    <a href="faculty-dashboard.html" class="fac-link" id="facLink" style="display:none">
+    <button class="fac-link" id="facLink" onclick="goFaculty()" title="Open Faculty Dashboard">
       📊 Faculty Dashboard
-    </a>
+    </button>
     <a href="demo.html" class="demo-link">
       ▶ Interactive Demo
     </a>
@@ -422,34 +422,47 @@ var selectedCase = null;
 var expLevel = localStorage.getItem('rdx-exp-level') || 'beginner';
 applyExpLevel();
 
-// ── Faculty link — show if user is faculty/admin ─────────────────────────
-(function() {
-  function showFacLinkIfEligible() {
-    try {
-      // Check Supabase session key first
-      var supaRaw = localStorage.getItem('reasondx-user');
-      var supaUser = supaRaw ? JSON.parse(supaRaw) : null;
-      if (supaUser && (supaUser.tier === 'admin' || supaUser.tier === 'faculty')) {
-        document.getElementById('facLink').style.display = 'flex';
-        return;
-      }
-      // Check emr-current-user (set by demo data)
-      var localRaw = localStorage.getItem('emr-current-user');
-      var localUser = localRaw ? JSON.parse(localRaw) : null;
-      if (localUser && (localUser.role === 'admin' || localUser.role === 'faculty' || localUser.tier === 'admin')) {
-        document.getElementById('facLink').style.display = 'flex';
-        return;
-      }
-      // Check emr-roles
-      var rolesRaw = localStorage.getItem('emr-roles');
-      var roles = rolesRaw ? JSON.parse(rolesRaw) : {};
-      var hasFaculty = Object.values(roles).some(function(r) { return r === 'faculty' || r === 'admin'; });
-      if (hasFaculty) {
-        document.getElementById('facLink').style.display = 'flex';
-      }
-    } catch(e) {}
+// ── Faculty Dashboard button ─────────────────────────────────────────────
+function goFaculty() {
+  // If demo data already loaded, go straight there
+  var users = localStorage.getItem('emr-users');
+  if (users && Object.keys(JSON.parse(users)).length > 0) {
+    window.location.href = 'faculty-dashboard.html';
+    return;
   }
-  showFacLinkIfEligible();
+  // No demo data yet — load it via the script, then redirect
+  var script = document.createElement('script');
+  script.src = 'js/rdx-demo-data.js';
+  script.onload = function() {
+    if (window.RDXDemoData) {
+      // Override the inject() reload to redirect to dashboard instead
+      var origInject = RDXDemoData.inject;
+      RDXDemoData.inject = function() {
+        origInject.call(RDXDemoData);
+        // inject() reloads the page — we intercept with sessionStorage flag
+      };
+      sessionStorage.setItem('rdx-after-demo-load', 'faculty-dashboard.html');
+      RDXDemoData.inject();
+    } else {
+      window.location.href = 'faculty-dashboard.html';
+    }
+  };
+  script.onerror = function() {
+    window.location.href = 'faculty-dashboard.html';
+  };
+  document.head.appendChild(script);
+}
+
+// Check if we should redirect after demo load
+(function() {
+  var dest = sessionStorage.getItem('rdx-after-demo-load');
+  if (dest) {
+    sessionStorage.removeItem('rdx-after-demo-load');
+    var users = localStorage.getItem('emr-users');
+    if (users && Object.keys(JSON.parse(users)).length > 0) {
+      window.location.href = dest;
+    }
+  }
 })();
 
 function applyExpLevel() {
