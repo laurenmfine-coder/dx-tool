@@ -74,9 +74,14 @@
   // ─── STORAGE ──────────────────────────────────────────────────────────────
   var STORE_KEY = 'rdx-workspace-prefs';
 
+  function getUserKey() {
+    try { var u = window.S && S.currentUser && S.currentUser.username; if (u) return STORE_KEY + '-' + u; } catch(e){}
+    return STORE_KEY;
+  }
+
   function load() {
     try {
-      var raw = localStorage.getItem(STORE_KEY);
+      var raw = localStorage.getItem(getUserKey()) || localStorage.getItem(STORE_KEY);
       if (!raw) return JSON.parse(JSON.stringify(DEFAULTS));
       var saved = JSON.parse(raw);
       var merged = JSON.parse(JSON.stringify(DEFAULTS));
@@ -90,7 +95,7 @@
   }
 
   function save(p) {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(p)); } catch(e) {}
+    try { localStorage.setItem(getUserKey(), JSON.stringify(p)); localStorage.setItem(STORE_KEY, JSON.stringify(p)); } catch(e) {}
     localStorage.setItem('rdx-exp-level', p.experienceLevel);
     window.RDX_EXP_LEVEL = p.experienceLevel;
     if (window.rdxApplyExp) window.rdxApplyExp();
@@ -530,11 +535,8 @@
       document.body.appendChild(bd);
     }
 
-    if (!load().setupDone && !document.getElementById('rdx-ws-wizard')) {
-      var wiz = document.createElement('div'); wiz.id = 'rdx-ws-wizard';
-      wiz.innerHTML = buildWizardHTML();
-      document.body.appendChild(wiz);
-    }
+    // Wizard auto-init suppressed on page load — fired by EMR post-login hook
+    // (ensures user identity is known so per-user prefs work correctly)
   }
 
   // ─── PUBLIC API ────────────────────────────────────────────────────────────
@@ -543,6 +545,7 @@
     applyToEMR: applyToEMR,
     isTabEnabled: isTabEnabled,
     openPanel: function(){ rdxWsOpen(); },
+    openWizard: function(){ if (!document.getElementById('rdx-ws-wizard')) { var wiz = document.createElement('div'); wiz.id = 'rdx-ws-wizard'; wiz.innerHTML = buildWizardHTML(); document.body.appendChild(wiz); } },
   };
 
   if (document.body) mount();

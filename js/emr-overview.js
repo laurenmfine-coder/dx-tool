@@ -178,13 +178,14 @@
       // ── BRANDED CONCEPT CARDS ──────────────────────────────
       html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px">';
 
-      // CoachDx
-      html += '<div style="background:linear-gradient(135deg,#1B2838,#2C3E50);border-radius:12px;padding:16px;color:#fff;position:relative;overflow:hidden">';
+      // CoachDx — clickable, goes to choose-mode with coach pre-selected
+      html += '<a href="choose-mode.html" onclick="localStorage.setItem(\'rdx-active-mode\',\'coach\')" style="display:block;background:linear-gradient(135deg,#1B2838,#2C3E50);border-radius:12px;padding:16px;color:#fff;text-decoration:none;position:relative;overflow:hidden;transition:transform .15s;cursor:pointer" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'\'">';
       html += '<div style="position:absolute;top:-16px;right:-16px;font-size:60px;opacity:.06">\uD83D\uDCAC</div>';
       html += '<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:#5DADE2;margin-bottom:4px">AI Coaching</div>';
       html += '<div style="font-size:16px;font-weight:700;margin-bottom:4px">Coach<span style="color:#5DADE2">Dx</span></div>';
       html += '<p style="font-size:11px;color:#94A3B8;line-height:1.5;margin:0">Socratic AI attending in every patient chart. Open a case \u2192 CoachDx tab.</p>';
-      html += '</div>';
+      html += '<div style="margin-top:10px;font-size:11px;color:#5DADE2;font-weight:600">Choose a case →</div>';
+      html += '</a>';
 
       // MechanismDx
       html += '<a href="pathway.html" style="display:block;background:linear-gradient(135deg,#1B3A2D,#2D4F3E);border-radius:12px;padding:16px;color:#fff;text-decoration:none;position:relative;overflow:hidden;transition:transform .15s" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'\'">';

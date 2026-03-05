@@ -2258,6 +2258,22 @@ async function bootstrapApp() {
 
   S.currentUser=buildCurrentUser(supaUser);
 
+  // ── Workspace wizard: show for this user if they haven't configured yet ──
+  if (window.RDXWorkspace && S.currentUser.role === 'student') {
+    var _wsKey = 'rdx-workspace-prefs-' + (S.currentUser.username || 'default');
+    var _wsRaw = localStorage.getItem(_wsKey) || localStorage.getItem('rdx-workspace-prefs');
+    var _wsPrefs = null;
+    try { _wsPrefs = _wsRaw ? JSON.parse(_wsRaw) : null; } catch(e){}
+    if (!_wsPrefs || !_wsPrefs.configured) {
+      // Delay slightly so page renders first
+      setTimeout(function() {
+        if (window.RDXWorkspace && !document.getElementById('rdx-wizard')) {
+          RDXWorkspace.openWizard();
+        }
+      }, 800);
+    }
+  }
+
   // Sync this user to cloud registry (if method available)
   if(window.EMRCloud && typeof EMRCloud.syncUser === 'function'){
     EMRCloud.syncUser({email:S.currentUser.username,displayName:S.currentUser.displayName,role:S.currentUser.role,tier:supaUser.tier||'free'});
