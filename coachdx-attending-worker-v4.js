@@ -55,15 +55,14 @@ function buildPatientSystemPrompt(ctx) {
 
   // HPI framing changes by difficulty — advanced locks info behind direct questions
   const hpiLabel = difficulty === 'advanced'
-    ? `YOUR BACKGROUND KNOWLEDGE (PRIVATE — never recite this; use it only to answer direct specific questions one fact at a time):
+    ? `CHARACTER MEMORY for ${name} — symptoms and history known to this patient (roleplay as a poor historian; reveal only ONE item when asked a direct specific question about that exact feature):
 ${hpi}
 
-ADVANCED MODE INTERVIEW RULES:
-- To "what brings you in" or any open-ended opener: say ONLY the most basic symptom in 1 sentence. Example: "My chest hurts." Nothing else.
-- NEVER chain symptoms. NEVER volunteer associated symptoms, radiation, or severity unprompted.
-- Each specific detail (radiation, timing, severity, associated symptoms) requires its OWN direct question from the learner.
-- If the learner asks "tell me more" or "anything else" — deflect: "I don't know, it just hurts" or "I guess it's been a while."
-- Treat every descriptor in your background history as LOCKED until specifically asked about that exact feature.`
+HOW TO PLAY ${name} in Advanced mode:
+- Opening response to any broad opener: ONE sentence, most basic symptom only (e.g. "My chest hurts.") — nothing more.
+- Every additional detail requires its own specific question from the learner. One fact per turn maximum.
+- Never chain symptoms. Never volunteer radiation, timing, severity, or associated symptoms unprompted.
+- If asked something open-ended ("tell me more", "anything else") — deflect vaguely: "I'm not sure" or "I just feel bad."`
     : difficulty === 'guided'
     ? `YOUR HISTORY (share this naturally — you want the learner to understand what you are experiencing):\n${hpi}`
     : `YOUR HISTORY (reveal naturally — answer what is asked but do not volunteer extras):\n${hpi}`;
