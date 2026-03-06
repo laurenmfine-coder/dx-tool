@@ -2536,21 +2536,34 @@ function sendPatientMessage(){
 function setPtDifficulty(level) {
   window.RDX_DIFFICULTY = level;
   try { sessionStorage.setItem('rdx-difficulty', level); } catch(e) {}
-  // Re-render the documentation tab to update pill states
-  var docEl = document.getElementById('docContent');
-  if (docEl && typeof renderDocumentation === 'function') {
-    docEl.innerHTML = renderDocumentation();
-    // Scroll back to patient interview
-    var ptChat = document.getElementById('ptChatMessages');
-    if (ptChat) ptChat.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-  // Also show a brief toast so user knows it changed
-  var toast = document.createElement('div');
+  
+  // Update pill styles directly without re-rendering (preserves chat messages + scroll)
+  var configs = {
+    guided:   { bg: '#fff', color: '#059669' },
+    standard: { bg: '#fff', color: '#2874A6' },
+    advanced: { bg: '#fff', color: '#DC2626' }
+  };
+  ['guided','standard','advanced'].forEach(function(d) {
+    var btn = document.getElementById('ptDiff-' + d);
+    if (!btn) return;
+    if (d === level) {
+      btn.style.background = configs[d].bg;
+      btn.style.color      = configs[d].color;
+      btn.style.fontWeight = '800';
+    } else {
+      btn.style.background = 'transparent';
+      btn.style.color      = 'rgba(255,255,255,.65)';
+      btn.style.fontWeight = '700';
+    }
+  });
+
+  // Toast confirmation
   var labels = { guided: '🌱 Guided — patient gives detailed answers', standard: '🎯 Standard — realistic historian', advanced: '🔥 Advanced — vague, requires precise questions' };
+  var toast = document.createElement('div');
   toast.textContent = labels[level] || level;
-  toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:99999;pointer-events:none;transition:opacity .3s';
+  toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:99999;pointer-events:none;opacity:1;transition:opacity .4s';
   document.body.appendChild(toast);
-  setTimeout(function() { toast.style.opacity = '0'; setTimeout(function() { toast.remove(); }, 300); }, 2000);
+  setTimeout(function() { toast.style.opacity = '0'; setTimeout(function() { toast.remove(); }, 400); }, 2200);
 }
 
 function sendCoachMessage(){

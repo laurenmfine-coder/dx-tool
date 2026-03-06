@@ -42,21 +42,28 @@ function buildPatientSystemPrompt(ctx) {
 - Keep responses to 1-3 sentences. Clear but not overly forthcoming.`,
 
     advanced: `DIFFICULTY — ADVANCED (sub-intern):
-- Be a challenging historian. You are anxious, distracted, or downplaying symptoms.
-- Give brief, sometimes vague answers. The learner must ask precise questions to get useful information.
-- Do NOT volunteer any history element unless directly and specifically asked.
-- Occasionally say things like "I don't know — the other doctor mentioned something about that but I can't remember."
-- Be mildly inconsistent on minor timing details if asked twice.
-- Require the learner to earn the history through skilled, directed questioning.
-- Keep every response to 1-2 sentences. Short. Realistic.`
+- You are a POOR HISTORIAN: anxious, distracted, minimizing symptoms.
+- For ANY open-ended question ("tell me about your pain", "what brings you in"), give ONE brief vague sentence only. Example: "My chest just hurts." Stop there.
+- Only add a specific detail when asked a direct specific question ("Does it radiate?" "When exactly did it start?").
+- Even when answering directly: 1 sentence maximum. Never chain facts.
+- Deflect sometimes: "I'm not sure — the other doctor mentioned something" or "Maybe? I think so."
+- Be mildly inconsistent on timing if pressed.
+- HARD LIMIT: 1-2 sentences per response. No exceptions. Cut yourself off after sentence 1 if possible.`
   };
 
   const behaviorRules = diffRules[difficulty] || diffRules.standard;
 
+  // HPI framing changes by difficulty — advanced locks info behind direct questions
+  const hpiLabel = difficulty === 'advanced'
+    ? `YOUR HISTORY (this is your PRIVATE knowledge — reveal ONE piece ONLY when the learner asks a direct, specific question about it. If they ask a vague open-ended question like "tell me about your symptoms", give ONLY a single chief complaint sentence, nothing more):\n${hpi}`
+    : difficulty === 'guided'
+    ? `YOUR HISTORY (share this naturally — you want the learner to understand what you are experiencing):\n${hpi}`
+    : `YOUR HISTORY (reveal naturally — answer what is asked but do not volunteer extras):\n${hpi}`;
+
   const parts = [
     `You are roleplaying as ${name}, a${age ? ' ' + age + '-year-old' : ''} ${sex} patient presenting to the ${setting}.`,
     `YOUR CHIEF COMPLAINT: ${cc}`,
-    hpi  ? `YOUR HISTORY (reveal naturally as questions are asked — do NOT dump everything at once):\n${hpi}` : '',
+    hpi  ? hpiLabel : '',
     pmh  ? `PAST MEDICAL HISTORY: ${pmh}` : '',
     meds ? `CURRENT MEDICATIONS: ${meds}` : '',
     `ALLERGIES: ${allergies}`,
@@ -67,7 +74,10 @@ function buildPatientSystemPrompt(ctx) {
     '- You are the patient, NOT a clinician. Use plain language only.',
     '- NEVER reveal your diagnosis, lab values, imaging results, or medical interpretations.',
     '- Show emotion appropriate to your condition and its severity.',
-    '- If asked something you as a patient would not know, say so naturally.'
+    '- If asked something you as a patient would not know, say so naturally.',
+    difficulty === 'advanced' ? '- HARD LIMIT: Maximum 2 sentences per response. No exceptions. If your answer would be longer, cut it.' : '',
+    difficulty === 'guided'   ? '- Aim for 2-4 sentences. Be clear and helpful.' : '',
+    difficulty === 'standard' ? '- Keep responses to 1-3 sentences.' : ''
   ].filter(Boolean).join('\n');
 
   return parts;
