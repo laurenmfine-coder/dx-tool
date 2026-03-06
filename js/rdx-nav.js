@@ -1,184 +1,165 @@
-/* rdx-nav.js — Unified ReasonDx Navigation v5 — Clean structure */
+/* rdx-nav.js — ReasonDx Navigation v6 — 3-Pillar Architecture */
 (function() {
   'use strict';
   if (document.getElementById('rdx-unified-nav')) return;
   var path = window.location.pathname;
   var inSubdir = /\/(topics|modules|cases|tools|ecg|CoachDx|auth|data|mechanism|ReasonDx)\//i.test(path);
   var R = inSubdir ? '../' : './';
-  window.R = R; // expose globally for other modules
-  var sec = 'home';
-  if (/pathway|allergy-pathway|\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
-  else if (/consult-callback|procedure-lab|counseling-scenarios/i.test(path)) sec = 'practice';
-  else if (/hospital-3d|ed-3d|night-float|admissions|simroomdx|virtual-hospital|virtual-emr|training/i.test(path)) sec = 'simulate';
-  else if (/milestone-tracker|cohort-analytics/i.test(path)) sec = 'fellowship';
-  else if (/learning-analytics|analytics-dashboard/i.test(path)) sec = 'analytics';
-  document.documentElement.setAttribute('data-theme', 'light');
+  window.R = R;
 
-  function di(href, icon, title, desc) {
-    return '<a href="'+href+'" class="rdx-dd-item"><span class="rdx-dd-icon">'+icon+'</span><div><strong>'+title+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</div></a>';
-  }
-  function dd(label, active, items) {
-    return '<div class="rdx-dd"><button class="rdx-nav-top'+(active?' active':'')+'" aria-haspopup="true">'+label+' <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button><div class="rdx-dd-panel"><div class="rdx-dd-panel-inner">'+items+'</div></div></div>';
-  }
+  var sec = 'home';
+  if (/casedx|case-browser|virtual-emr|ed-3d|ed-trackboard|night-float|admissions|simroomdx|hospital-3d|training|setting-selector|choose-mode|crt-hub|consult-callback|counseling-scenarios|procedure-lab|board-prep/i.test(path)) sec = 'casedx';
+  else if (/CoachDx|coachdx|mentor-chat|ai-trainer/i.test(path)) sec = 'coachdx';
+  else if (/pathway|allergy-pathway|\/modules\/|\/topics\/|\/mechanism\/|study-mode/i.test(path)) sec = 'mechanismdx';
+  else if (/dashboard|analytics|milestone|cohort|learning-analytics|ilp/i.test(path)) sec = 'analytics';
+
+  document.documentElement.setAttribute('data-theme','light');
+
+  function di(href,icon,title,desc){return '<a href="'+href+'" class="rdx-dd-item"><span class="rdx-dd-icon">'+icon+'</span><div><strong>'+title+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</div></a>';}
+  function dd(label,active,color,items){return '<div class="rdx-dd"><button class="rdx-nav-top rdx-pillar-btn'+(active?' active':'')+'" style="'+(active?'color:'+color+';background:'+color+'18':'')+'" aria-haspopup="true">'+label+' <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button><div class="rdx-dd-panel"><div class="rdx-dd-panel-inner">'+items+'</div></div></div>';}
+  function sl(t){return '<div class="rdx-dd-sl">'+t+'</div>';}
+  function hr(){return '<div class="rdx-dd-hr"></div>';}
 
   var html =
-    '<a href="'+R+'index.html" class="rdx-logo-link"><img src="'+R+'icons/logo-transparent.png" alt="ReasonDx" class="rdx-logo-img"></a>'+
-    '<button id="rdx-hamburger" aria-label="Menu">\u2630</button>'+
+    '<a href="'+R+'index.html" class="rdx-logo-link"><img src="'+R+'icons/logo-transparent.png" alt="ReasonDx" class="rdx-logo-img" onerror="this.style.display=\'none\'"></a>'+
+    '<button id="rdx-hamburger" aria-label="Menu">&#9776;</button>'+
     '<div id="rdx-nav-menu">'+
-      '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
-      dd('Learn', sec==='learn',
-        di(R+'pathway.html','','MechanismDx','Pathophysiology tutor \u2014 560 topics')+
-        di(R+'allergy-pathway.html','','A/I Pathway','Allergy & Immunology curriculum')+
-        di(R+'studydx.html','','StudyDx','AI-generated MCQs \u2014 board quality')
-      )+
-      dd('Practice', sec==='practice',
-        di(R+'consult-callback.html','','Clinical Reasoning','Consult callbacks & diagnostic cases')+
-        di(R+'procedure-lab.html','','Procedure Lab','Skin testing, OFC, spirometry, desensitization')+
-        di(R+'counseling-scenarios.html','','Patient Counseling','Communication practice scenarios')
-      )+
-      dd('Simulate', sec==='simulate',
-        di(R+'virtual-emr.html','','Virtual Hospital','Choose a setting, pick your tool')+
-        di(R+'ed-3d.html','','Emergency Department','8 patient rooms with full encounters')+
-        di(R+'night-float.html','','Night Float','Overnight cross-cover with I-PASS')+
-        di(R+'admissions.html','','Admissions','ED handoff, orders, H&P, presentation')+
-        di(R+'simroomdx.html','','SimRoomDx','Morning rounds \u2014 6 AI characters')
-      )+
-      dd('Fellowship', sec==='fellowship',
-        di(R+'milestone-tracker.html','','Milestone Tracker','ACGME A/I milestones')+
-        di(R+'cohort-analytics.html','','Cohort Analytics','Program-level fellow comparison')+
-        di(R+'caseforge.html','','CaseForge','Custom case builder for programs')
-      )+
-      dd('Analytics', sec==='analytics',
-        di(R+'learning-analytics.html','','Learning Analytics','Cross-tool performance & RPFS')+
-        di(R+'cohort-analytics.html','','Cohort Overview','Program-level data')
-      )+
-      '<div class="rdx-nav-right">'+
-        '<a href="'+R+'demo.html" class="rdx-nav-btn rdx-demo-btn" title="Interactive Demo" style="font-size:12px;font-weight:600;color:#2874a6;text-decoration:none;padding:5px 10px;border:1px solid #2874a6;border-radius:8px;display:flex;align-items:center;gap:5px">▶ Demo</a>'+
-        '<button id="rdx-exp-toggle" class="rdx-nav-btn rdx-exp-btn" title="Switch experience level" onclick="window.rdxToggleExp && window.rdxToggleExp()" style="font-size:11px;font-weight:600;padding:5px 10px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;display:flex;align-items:center;gap:5px;color:var(--rdx-text-muted,#64748b)"><span id="rdx-exp-dot" style="width:7px;height:7px;border-radius:50%;background:#0E9F6E;display:inline-block"></span><span id="rdx-exp-label">Beginner</span></button>'+
-        '<a href="'+R+'choose-mode.html" class="rdx-nav-btn" title="Switch Mode" style="font-size:11px;font-weight:600;color:var(--rdx-text-muted,#64748b);text-decoration:none;padding:5px 10px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;display:flex;align-items:center;gap:5px" id="rdx-mode-indicator">⬡ <span id="rdx-mode-label">Choose Mode</span></a>'+
-        '<button id="rdx-info-btn" class="rdx-nav-btn" title="About">\u2139\uFE0F</button>'+
-        '<button id="rdx-logout-btn" class="rdx-nav-btn rdx-logout">Log out</button>'+
-      '</div>'+
+    dd('🩺 CaseDx',sec==='casedx','#C0392B',
+      sl('Case Library')+
+      di(R+'casedx.html','📋','Browse All Cases','145 cases · 23 specialties')+
+      di(R+'virtual-emr.html?setting=ed','🚨','Emergency Dept','Full EMR + AI coaching')+
+      di(R+'virtual-emr.html?setting=inpatient','🏥','Inpatient','Rounds, cross-cover, admissions')+
+      di(R+'virtual-emr.html?setting=clinic','🩺','Outpatient Clinic','Primary care & specialty visits')+
+      hr()+sl('Immersive Simulations')+
+      di(R+'ed-3d.html','⚡','ED Track Board','8-room board with real-time arrivals')+
+      di(R+'night-float.html','🌙','Night Float','Overnight cross-cover with I-PASS')+
+      di(R+'simroomdx.html','🎤','Morning Rounds','Present to the AI attending')+
+      hr()+sl('Clinical Skills')+
+      di(R+'crt-hub.html','🧩','Reasoning Trainers','Step-by-step CRTs')+
+      di(R+'procedure-lab.html','🔬','Procedure Lab','Skin testing, OFC, spirometry')+
+      di(R+'counseling-scenarios.html','💬','Patient Counseling','Communication practice')
+    )+
+    dd('🧑‍⚕️ CoachDx',sec==='coachdx','#6D28D9',
+      sl('Start a Session')+
+      di(R+'CoachDx/index.html','✨','Open CoachDx','Free-form AI coaching — any topic')+
+      di(R+'CoachDx/mentor-chat.html','💬','Mentor Chat','Ongoing coaching conversation')+
+      di(R+'demo-coachdx.html','▶','Watch Demo','See CoachDx in action — no login')+
+      hr()+sl('Specialty Coaching')+
+      di(R+'ai-trainer-anaphylaxis-food.html','🤖','A/I Reasoning Trainer','Anaphylaxis & food allergy')+
+      di(R+'consult-callback.html','📞','Consult Coaching','Specialist callback simulation')
+    )+
+    dd('🧬 MechanismDx',sec==='mechanismdx','#0E7490',
+      sl('Explore')+
+      di(R+'pathway.html','🧬','Pathophysiology Hub','560 topics · 93 systems')+
+      di(R+'allergy-pathway.html','🌿','A/I Pathway','Allergy & Immunology curriculum')+
+      di(R+'study-mode.html','📖','Study Mode','Guided pathophysiology review')+
+      hr()+sl('Deep Dives')+
+      di(R+'mechanism/anaphylaxis-module.html','⚡','Anaphylaxis','Full mechanism module')+
+      di(R+'mechanism/asthma-module.html','💨','Asthma','Pathophysiology + clinical links')+
+      di(R+'tools/flashcard-studio.html','🗂️','Flashcard Studio','Spaced repetition review')
+    )+
+    '<div class="rdx-dd">'+
+      '<button class="rdx-nav-top" aria-haspopup="true" style="font-size:12px">Tools <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button>'+
+      '<div class="rdx-dd-panel"><div class="rdx-dd-panel-inner">'+
+        di(R+'tools/calculator-hub.html','🔢','Calculators','GCS, Wells, CURB-65, CHADS-VASc')+
+        di(R+'ecg/index.html','❤️','ECG Trainer','12-lead interpretation')+
+        di(R+'tools/abg-analyzer.html','🫁','ABG Analyzer','Blood gas interpretation')+
+        di(R+'tools/sbar-trainer.html','📋','SBAR Trainer','Structured handoff practice')+
+        di(R+'tools/ddx-builder.html','🔍','DDx Builder','Differential diagnosis tool')+
+      '</div></div>'+
+    '</div>'+
+    '<div class="rdx-nav-right">'+
+      '<button id="rdx-exp-toggle" class="rdx-nav-btn" onclick="window.rdxToggleExp&&window.rdxToggleExp()" style="font-size:11px;font-weight:600;padding:5px 10px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;display:flex;align-items:center;gap:5px;color:#64748b;font-family:inherit"><span id="rdx-exp-dot" style="width:7px;height:7px;border-radius:50%;background:#0E9F6E;display:inline-block"></span><span id="rdx-exp-label">Beginner</span></button>'+
+      '<button id="rdx-info-btn" class="rdx-nav-btn" title="About">&#9432;&#xFE0F;</button>'+
+      '<button id="rdx-logout-btn" class="rdx-nav-btn rdx-logout">Log out</button>'+
+    '</div>'+
     '</div>';
 
-  var style = document.createElement('style');
-  style.textContent =
-    '#rdx-unified-nav{background:var(--rdx-bg-nav,#fff);border-bottom:1px solid var(--rdx-border,#e2e8f0);padding:0 20px;height:56px;display:flex;align-items:center;position:sticky;top:0;z-index:9000;font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.04)}'+
-    '.rdx-logo-link{text-decoration:none;flex-shrink:0;margin-right:24px;display:flex;align-items:center}'+
+  var style=document.createElement('style');
+  style.textContent=
+    '#rdx-unified-nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:0 20px;height:56px;display:flex;align-items:center;position:sticky;top:0;z-index:9000;font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.04)}'+
+    '.rdx-logo-link{text-decoration:none;flex-shrink:0;margin-right:16px;display:flex;align-items:center}'+
     '.rdx-logo-img{height:28px;width:auto;display:block}'+
-    '#rdx-nav-menu{display:flex;align-items:center;gap:2px;margin-left:auto}'+
-    '.rdx-nav-top{background:none;border:none;font-family:inherit;font-size:14px;font-weight:500;color:var(--rdx-text-muted,#64748b);padding:8px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .15s;display:inline-flex;align-items:center}'+
-    '.rdx-nav-top:hover{color:#1f5f8b;background:#f0f7fc}.rdx-nav-top.active{color:#1f5f8b;font-weight:600;background:#f0f7fc}'+
-    'a.rdx-nav-top{text-decoration:none}'+
+    '#rdx-nav-menu{display:flex;align-items:center;gap:2px;flex:1}'+
+    '.rdx-nav-top{background:none;border:none;font-family:inherit;font-size:13px;font-weight:600;color:#64748b;padding:7px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all .15s;display:inline-flex;align-items:center}'+
+    '.rdx-nav-top:hover{color:#1e293b;background:#f1f5f9}a.rdx-nav-top{text-decoration:none}'+
     '.rdx-dd{position:relative}'+
-    '.rdx-dd-panel{display:none;position:absolute;top:100%;padding-top:8px;left:50%;transform:translateX(-50%);min-width:265px;z-index:9100}'+
-    '.rdx-dd-panel-inner{background:var(--rdx-bg-card,#fff);border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.1);padding:8px;animation:rdxDdIn .15s ease}'+
+    '.rdx-dd-panel{display:none;position:absolute;top:100%;padding-top:8px;left:50%;transform:translateX(-50%);min-width:280px;z-index:9100}'+
+    '.rdx-dd-panel-inner{background:#fff;border:1px solid #e2e8f0;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:8px;animation:rdxDdIn .15s ease}'+
     '.rdx-dd:hover .rdx-dd-panel,.rdx-dd-panel:hover{display:block}'+
     '@keyframes rdxDdIn{from{opacity:0;transform:translateX(-50%) translateY(-4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}'+
-    '.rdx-dd-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:8px;text-decoration:none;color:var(--rdx-text,#1e293b);transition:background .12s}'+
-    '.rdx-dd-item:hover{background:#f0f7fc}'+
-    '.rdx-dd-icon:empty{display:none}.rdx-dd-icon{font-size:18px;line-height:1;flex-shrink:0;margin-top:2px}'+
-    '.rdx-dd-item strong{font-size:13px;font-weight:600;display:block;color:var(--rdx-text,#1e293b)}'+
-    '.rdx-dd-item small{font-size:11px;color:var(--rdx-text-muted,#64748b);display:block;margin-top:1px}'+
-    '.rdx-nav-right{display:flex;align-items:center;gap:6px;margin-left:12px;padding-left:12px;border-left:1px solid var(--rdx-border,#e2e8f0)}'+
-    '.rdx-nav-btn{background:none;border:none;border-radius:8px;padding:6px 8px;cursor:pointer;font-size:15px;line-height:1;color:var(--rdx-text-muted,#64748b);transition:all .15s}'+
-    '.rdx-nav-btn:hover{background:#f0f7fc}'+
-    '.rdx-logout{font-size:12px;font-family:inherit;padding:6px 12px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px}'+
-    '.rdx-logout:hover{border-color:#2874a6;color:#1f5f8b}'+
-    '#rdx-hamburger{display:none;background:none;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:var(--rdx-text-muted,#475569);margin-left:auto}'+
+    '.rdx-dd-item{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .12s}'+
+    '.rdx-dd-item:hover{background:#f8fafc}'+
+    '.rdx-dd-icon{font-size:15px;line-height:1;flex-shrink:0;margin-top:2px;width:18px;text-align:center}'+
+    '.rdx-dd-item strong{font-size:13px;font-weight:600;display:block}'+
+    '.rdx-dd-item small{font-size:11px;color:#64748b;display:block;margin-top:1px}'+
+    '.rdx-dd-sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;padding:8px 12px 3px}'+
+    '.rdx-dd-sl:first-child{padding-top:4px}'+
+    '.rdx-dd-hr{height:1px;background:#e2e8f0;margin:4px 8px}'+
+    '.rdx-nav-right{display:flex;align-items:center;gap:6px;margin-left:auto;padding-left:12px;border-left:1px solid #e2e8f0}'+
+    '.rdx-nav-btn{background:none;border:none;border-radius:8px;padding:6px 8px;cursor:pointer;font-size:15px;line-height:1;color:#64748b;transition:all .15s;font-family:inherit}'+
+    '.rdx-nav-btn:hover{background:#f1f5f9}'+
+    '.rdx-logout{font-size:12px;padding:6px 12px;border:1px solid #e2e8f0!important;border-radius:8px}'+
+    '.rdx-logout:hover{border-color:#2874a6!important;color:#1f5f8b}'+
+    '#rdx-hamburger{display:none;background:none;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;cursor:pointer;font-size:18px;color:#475569;margin-left:auto}'+
     '#rdx-about-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}'+
     '#rdx-about-overlay.open{display:flex}'+
-    '#rdx-about-modal{background:var(--rdx-bg-card,#fff);border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,.3);animation:rdxModalIn .2s ease}'+
+    '#rdx-about-modal{background:#fff;border-radius:20px;max-width:540px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,.3);animation:rdxModalIn .2s ease}'+
     '@keyframes rdxModalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}'+
     '.rdx-about-hdr{background:linear-gradient(135deg,#1f5f8b,#2874a6);padding:28px;border-radius:20px 20px 0 0;color:#fff;position:relative}'+
-    '.rdx-about-hdr h2{margin:0 0 6px;font-size:22px;font-weight:700;font-family:Georgia,serif}.rdx-about-hdr p{margin:0;opacity:.9;font-size:14px}'+
-    '.rdx-about-body{padding:24px 28px 28px;font-size:14px;line-height:1.7;color:var(--rdx-text-secondary,#475569)}'+
-    '.rdx-about-body h3{font-size:15px;font-weight:700;color:var(--rdx-text,#1e293b);margin:20px 0 8px}.rdx-about-body h3:first-child{margin-top:0}'+
-    '.rdx-about-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}'+
-    '.rdx-about-stat{background:#f0f7fc;border:1px solid var(--rdx-border,#e2e8f0);border-radius:12px;padding:12px;text-align:center}'+
-    '.rdx-about-stat .num{font-size:22px;font-weight:700;color:#1f5f8b}.rdx-about-stat .lbl{font-size:12px;color:var(--rdx-text-muted,#64748b)}'+
-    '.rdx-about-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.2);border:none;border-radius:8px;width:32px;height:32px;font-size:18px;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center}'+
-    '.rdx-about-tracks{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}'+
-    '.rdx-about-pill{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--rdx-border,#e2e8f0);background:var(--rdx-bg-card,#fff);color:var(--rdx-text-secondary,#475569)}'+
-    '@media(max-width:768px){'+
+    '.rdx-about-hdr h2{margin:0 0 4px;font-size:21px;font-weight:700;font-family:inherit}.rdx-about-hdr p{margin:0;opacity:.85;font-size:13px}'+
+    '.rdx-about-body{padding:24px 28px 28px;font-size:14px;line-height:1.7;color:#475569}'+
+    '.rdx-about-body h3{font-size:14px;font-weight:700;color:#1e293b;margin:18px 0 8px}.rdx-about-body h3:first-child{margin-top:0}'+
+    '.rdx-about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}'+
+    '.rdx-about-stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px 10px;text-align:center}'+
+    '.rdx-about-stat .num{font-size:18px;font-weight:700;margin-bottom:4px}.rdx-about-stat .lbl{font-size:11px;color:#64748b;line-height:1.4}'+
+    '.rdx-about-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.2);border:none;border-radius:8px;width:30px;height:30px;font-size:18px;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center}'+
+    '@media(max-width:900px){'+
       '#rdx-hamburger{display:block!important}'+
-      '#rdx-nav-menu{display:none!important;flex-direction:column;width:100%;gap:0;padding:8px 0 12px;border-top:1px solid var(--rdx-border,#e2e8f0)}'+
+      '#rdx-nav-menu{display:none!important;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:#fff;border-bottom:1px solid #e2e8f0;padding:8px 0 12px;z-index:8999;box-shadow:0 8px 24px rgba(0,0,0,.1)}'+
       '#rdx-nav-menu.open{display:flex!important}'+
-      '#rdx-unified-nav{flex-wrap:wrap;height:auto;min-height:52px;padding:0 16px}'+
-      '.rdx-dd{width:100%}.rdx-nav-top{width:100%;justify-content:space-between;padding:12px 16px;border-radius:12px;font-size:15px}'+
-      'a.rdx-nav-top{display:flex;width:100%;padding:12px 16px;border-radius:12px;font-size:15px}'+
-      '.rdx-dd-panel{position:static;transform:none;box-shadow:none;border:none;padding:0 0 0 16px;min-width:auto;display:none;animation:none}'+
+      '#rdx-unified-nav{flex-wrap:nowrap}'+
+      '.rdx-dd{width:100%}.rdx-nav-top{width:100%;justify-content:space-between;padding:12px 20px;border-radius:0;font-size:15px}'+
+      'a.rdx-nav-top{display:flex;width:100%;padding:12px 20px;font-size:15px}'+
+      '.rdx-dd-panel{position:static;transform:none;box-shadow:none;border:none;padding:0 0 0 20px;min-width:auto;display:none;animation:none}'+
       '.rdx-dd.open .rdx-dd-panel{display:block}'+
-      '.rdx-nav-right{width:100%;justify-content:flex-end;margin-left:0;padding-left:0;padding-top:8px;border-left:none;border-top:1px solid var(--rdx-border,#e2e8f0)}'+
+      '.rdx-nav-right{display:none}'+
     '}';
   document.head.appendChild(style);
 
-  var nav = document.createElement('nav');
-  nav.id = 'rdx-unified-nav';
+  var nav=document.createElement('nav');
+  nav.id='rdx-unified-nav';
   nav.setAttribute('role','navigation');
-  nav.innerHTML = html;
+  nav.setAttribute('aria-label','Main navigation');
+  nav.innerHTML=html;
 
-  function removeOldNavs() {
-    ['nav.nav:not(#rdx-unified-nav)','nav.dx-nav','nav.rdx-nav:not(#rdx-unified-nav)','.dx-universal-nav','#rdx-nav','#global-nav'].forEach(function(s){
-      document.querySelectorAll(s).forEach(function(el){el.remove()});
-    });
-  }
+  function removeOldNavs(){['nav.nav:not(#rdx-unified-nav)','nav.dx-nav','nav.rdx-nav:not(#rdx-unified-nav)','.dx-universal-nav','#rdx-nav','#global-nav'].forEach(function(s){document.querySelectorAll(s).forEach(function(el){el.remove();});});}
 
-  function insert() {
+  function insert(){
     removeOldNavs();
-    if (document.body.firstChild) document.body.insertBefore(nav, document.body.firstChild);
+    if(document.body.firstChild) document.body.insertBefore(nav,document.body.firstChild);
     else document.body.appendChild(nav);
 
-    document.getElementById('rdx-hamburger').addEventListener('click', function(){
-      document.getElementById('rdx-nav-menu').classList.toggle('open');
-    });
-    if (window.innerWidth <= 768) {
-      nav.querySelectorAll('.rdx-dd > .rdx-nav-top').forEach(function(btn){
-        btn.setAttribute('aria-expanded','false');
-        btn.addEventListener('click', function(e){ e.preventDefault(); var p=this.parentElement; p.classList.toggle('open'); this.setAttribute('aria-expanded',p.classList.contains('open')?'true':'false'); });
-      });
-    }
+    document.getElementById('rdx-hamburger').addEventListener('click',function(){document.getElementById('rdx-nav-menu').classList.toggle('open');});
+    if(window.innerWidth<=900){nav.querySelectorAll('.rdx-dd>.rdx-nav-top').forEach(function(btn){btn.setAttribute('aria-expanded','false');btn.addEventListener('click',function(e){e.preventDefault();var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open')?'true':'false');});});}
 
-    document.getElementById('rdx-logout-btn').addEventListener('click', function(){
-      localStorage.removeItem('reasondx-user');localStorage.removeItem('reasondx_student_code');localStorage.removeItem('rdx-progress');sessionStorage.clear();
-      window.location.href = R + 'auth/register.html';
-    });
+    document.getElementById('rdx-logout-btn').addEventListener('click',function(){localStorage.removeItem('reasondx-user');localStorage.removeItem('reasondx_student_code');localStorage.removeItem('rdx-progress');sessionStorage.clear();window.location.href=R+'auth/register.html';});
 
-    // -- Experience level toggle --
-    var MODE_NAMES = {reason:'ReasonDx',coach:'CoachDx',mechanism:'MechanismDx'};
-    function rdxApplyExp() {
-      var lvl = localStorage.getItem('rdx-exp-level') || 'beginner';
-      var dot = document.getElementById('rdx-exp-dot');
-      var lbl = document.getElementById('rdx-exp-label');
-      if (dot) dot.style.background = lvl==='veteran' ? '#2874A6' : '#0E9F6E';
-      if (lbl) lbl.textContent = lvl==='veteran' ? 'Veteran' : 'Beginner';
-      document.querySelectorAll('[data-rdx-level="advanced"]').forEach(function(el){ el.style.display = lvl==='veteran' ? '' : 'none'; });
-      window.RDX_EXP_LEVEL = lvl;
-    }
-    window.rdxToggleExp = function() {
-      var cur = localStorage.getItem('rdx-exp-level') || 'beginner';
-      localStorage.setItem('rdx-exp-level', cur==='beginner' ? 'veteran' : 'beginner');
-      rdxApplyExp();
-    };
+    function rdxApplyExp(){var lvl=localStorage.getItem('rdx-exp-level')||'beginner';var dot=document.getElementById('rdx-exp-dot'),lbl=document.getElementById('rdx-exp-label');if(dot)dot.style.background=lvl==='veteran'?'#2874A6':'#0E9F6E';if(lbl)lbl.textContent=lvl==='veteran'?'Veteran':'Beginner';document.querySelectorAll('[data-rdx-level="advanced"]').forEach(function(el){el.style.display=lvl==='veteran'?'':'none';});window.RDX_EXP_LEVEL=lvl;}
+    window.rdxToggleExp=function(){var cur=localStorage.getItem('rdx-exp-level')||'beginner';localStorage.setItem('rdx-exp-level',cur==='beginner'?'veteran':'beginner');rdxApplyExp();};
     rdxApplyExp();
-    var activeMode = localStorage.getItem('rdx-active-mode');
-    var modeLabel = document.getElementById('rdx-mode-label');
-    if (modeLabel && activeMode && MODE_NAMES[activeMode]) modeLabel.textContent = MODE_NAMES[activeMode];
 
-    var ov = document.createElement('div'); ov.id = 'rdx-about-overlay';
-    ov.innerHTML = '<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">\u00D7</button><img src="'+R+'icons/logo-white.png" alt="ReasonDx" style="height:32px;width:auto;margin-bottom:8px"><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>What is ReasonDx?</h3><p>A case-based clinical reasoning platform with interactive cases, pathophysiology modules, and AI coaching to build systematic diagnostic thinking.</p><div class="rdx-about-grid"><div class="rdx-about-stat"><div class="num">560</div><div class="lbl">Topics</div></div><div class="rdx-about-stat"><div class="num">315</div><div class="lbl">Cases</div></div><div class="rdx-about-stat"><div class="num">46</div><div class="lbl">CRTs</div></div><div class="rdx-about-stat"><div class="num">93</div><div class="lbl">Systems</div></div></div><h3>Platform</h3><p><strong>MechanismDx</strong> \u2014 AI pathophysiology tutor (93 systems, 560 topics)<br><strong>Consult Callback</strong> \u2014 26 specialist consult simulations<br><strong>Procedure Lab</strong> \u2014 Skin testing, OFC, desensitization<br><strong>Fellowship Tools</strong> \u2014 Milestones, CCC, ILP, Analytics</p><h3>Tracks</h3><div class="rdx-about-tracks"><span class="rdx-about-pill">\uD83E\uDE7A A/I Fellowship</span><span class="rdx-about-pill">\uD83D\uDCDA Pathophysiology</span><span class="rdx-about-pill">\uD83D\uDCDD Clinical Reasoning</span><span class="rdx-about-pill">\uD83C\uDFAF Board Review</span></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rdx-border,#e2e8f0);font-size:12px;color:var(--rdx-text-muted,#94a3b8);text-align:center">\u00A9 2025\u20132026 ReasonDx \u00B7 <a href="mailto:reasondx@laurenmfine.com" style="color:#2874a6">reasondx@laurenmfine.com</a></p></div></div>';
+    var ov=document.createElement('div');ov.id='rdx-about-overlay';
+    ov.innerHTML='<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">&times;</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>Three ways to build clinical reasoning</h3><div class="rdx-about-grid"><div class="rdx-about-stat" style="border-top:3px solid #C0392B"><div class="num" style="color:#C0392B">🩺</div><div class="lbl"><strong style="color:#C0392B;display:block">CaseDx</strong>Work clinical cases in the Virtual EMR</div></div><div class="rdx-about-stat" style="border-top:3px solid #6D28D9"><div class="num" style="color:#6D28D9">🧑‍⚕️</div><div class="lbl"><strong style="color:#6D28D9;display:block">CoachDx</strong>Socratic AI coaching on any topic</div></div><div class="rdx-about-stat" style="border-top:3px solid #0E7490"><div class="num" style="color:#0E7490">🧬</div><div class="lbl"><strong style="color:#0E7490;display:block">MechanismDx</strong>Pathophysiology explorer · 560 topics</div></div></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:12px;color:#94a3b8;text-align:center">&copy; 2025&ndash;2026 ReasonDx &middot; <a href="mailto:hello@reasondx.com" style="color:#2874a6">hello@reasondx.com</a></p></div></div>';
     document.body.appendChild(ov);
-    ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('open'); });
-    document.getElementById('rdx-about-x').addEventListener('click', function(){ ov.classList.remove('open'); });
-    document.getElementById('rdx-info-btn').addEventListener('click', function(){ ov.classList.toggle('open'); });
+    ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('open');});
+    document.getElementById('rdx-about-x').addEventListener('click',function(){ov.classList.remove('open');});
+    document.getElementById('rdx-info-btn').addEventListener('click',function(){ov.classList.toggle('open');});
 
-    var bcSrc = document.querySelector('script[src*="rdx-nav"]');
-    if (bcSrc) {
-      var bcPath = bcSrc.src.replace('rdx-nav', 'rdx-breadcrumb');
-      var bc = document.createElement('script'); bc.src = bcPath; document.head.appendChild(bc);
-    }
+    var bcSrc=document.querySelector('script[src*="rdx-nav"]');
+    if(bcSrc){var bcPath=bcSrc.src.replace('rdx-nav','rdx-breadcrumb');var bc=document.createElement('script');bc.src=bcPath;document.head.appendChild(bc);}
   }
 
-  if (document.body) insert();
-  else document.addEventListener('DOMContentLoaded', insert);
+  if(document.body) insert();
+  else document.addEventListener('DOMContentLoaded',insert);
 })();

@@ -2,18 +2,268 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1f5f8b">
-<title>CoachDx | ReasonDx</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CoachDx — AI Clinical Coaching | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<meta http-equiv="refresh" content="0;url=../virtual-emr.html?setting=ed">
-<style>body{font-family:'IBM Plex Sans',sans-serif;background:#f0f4f8;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}a{color:#2874A6;font-weight:600;text-decoration:none}.card{background:#fff;border-radius:16px;padding:40px;max-width:400px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.08)}h2{font-size:20px;margin:0 0 8px}p{color:#64748b;font-size:14px;line-height:1.6;margin:0 0 16px}</style>
+<meta name="description" content="CoachDx: Socratic AI coaching for clinical reasoning. Start from any topic, case, or concept — your AI attending asks the questions you need to answer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/rdx-theme.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F8FAFC;--card:#fff;--bd:#E2E8F0;--txt:#1E293B;--dim:#64748B;--dim2:#94A3B8;--purple:#6D28D9;--purple-bg:rgba(109,40,217,.06);--purple-bd:rgba(109,40,217,.2);--f:"IBM Plex Sans",-apple-system,sans-serif;}
+body{background:var(--bg);color:var(--txt);font-family:var(--f);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#3B0764,#6D28D9);color:#fff;padding:44px 24px 40px;text-align:center}
+.hdr-inner{max-width:680px;margin:0 auto}
+.pillar-pill{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:5px 16px;margin-bottom:14px}
+.hdr h1{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:10px}
+.hdr-tagline{font-size:clamp(14px,1.8vw,18px);opacity:.85;line-height:1.6;max-width:520px;margin:0 auto 28px}
+.hdr-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:#fff;color:var(--purple);font-size:15px;font-weight:700;padding:13px 28px;border-radius:12px;border:none;cursor:pointer;font-family:var(--f);transition:all .15s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:#F3F0FF;transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:600;padding:12px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.25);cursor:pointer;font-family:var(--f);transition:all .15s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{background:rgba(255,255,255,.2)}
+/* START OPTIONS */
+.start-section{max-width:1000px;margin:0 auto;padding:40px 20px 0}
+.section-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim2);margin-bottom:12px}
+.sec-title{font-size:clamp(20px,2.5vw,26px);font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.sec-sub{font-size:14px;color:var(--dim);margin-bottom:24px}
+.start-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.start-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:22px 20px;cursor:pointer;transition:all .2s;text-decoration:none;display:block;position:relative;overflow:hidden}
+.start-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--purple);opacity:0;transition:opacity .2s}
+.start-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(109,40,217,.1);border-color:var(--purple-bd)}
+.start-card:hover::before{opacity:1}
+.sc-icon{font-size:28px;margin-bottom:12px;display:block}
+.sc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--purple);margin-bottom:4px}
+.sc-title{font-size:15px;font-weight:700;margin-bottom:5px}
+.sc-desc{font-size:12px;color:var(--dim);line-height:1.6}
+.sc-arrow{position:absolute;bottom:16px;right:16px;font-size:14px;color:var(--dim2);opacity:0;transition:opacity .2s}
+.start-card:hover .sc-arrow{opacity:1}
+/* FREE-FORM LAUNCHER */
+.launcher-section{max-width:1000px;margin:0 auto;padding:40px 20px}
+.launcher-card{background:linear-gradient(135deg,var(--purple-bg),rgba(109,40,217,.02));border:1px solid var(--purple-bd);border-radius:20px;padding:32px;position:relative;overflow:hidden}
+.launcher-card::before{content:"";position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(109,40,217,.08),transparent);border-radius:50%;pointer-events:none}
+.launcher-title{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px}
+.launcher-sub{font-size:14px;color:var(--dim);margin-bottom:20px}
+.prompt-row{display:flex;gap:10px}
+.prompt-input{flex:1;background:#fff;border:1px solid var(--bd);border-radius:12px;padding:13px 16px;font-size:15px;font-family:var(--f);color:var(--txt);outline:none;transition:border .15s}
+.prompt-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,40,217,.08)}
+.prompt-input::placeholder{color:var(--dim2)}
+.prompt-btn{background:var(--purple);color:#fff;font-size:14px;font-weight:700;padding:13px 22px;border-radius:12px;border:none;cursor:pointer;font-family:var(--f);transition:background .15s;white-space:nowrap}
+.prompt-btn:hover{background:#5B21B6}
+.prompt-examples{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.pex{font-size:12px;font-weight:500;padding:5px 12px;border-radius:8px;background:#fff;border:1px solid var(--bd);color:var(--dim);cursor:pointer;transition:all .15s}
+.pex:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-bg)}
+/* HOW IT WORKS */
+.how-section{background:var(--card);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:44px 20px}
+.how-inner{max-width:1000px;margin:0 auto}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.how-step{padding:20px}
+.how-num{width:32px;height:32px;border-radius:10px;background:var(--purple-bg);border:1px solid var(--purple-bd);color:var(--purple);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.how-title{font-size:14px;font-weight:700;margin-bottom:5px}
+.how-desc{font-size:13px;color:var(--dim);line-height:1.65}
+/* TOPICS */
+.topics-section{max-width:1000px;margin:0 auto;padding:40px 20px}
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-top:16px}
+.topic-chip{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 16px;cursor:pointer;transition:all .15s;text-decoration:none;display:block}
+.topic-chip:hover{border-color:var(--purple-bd);background:var(--purple-bg);color:var(--purple)}
+.tc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim2);margin-bottom:3px}
+.tc-title{font-size:13px;font-weight:600}
+/* WHAT COACHDX ISN'T */
+.compare-section{background:linear-gradient(135deg,#3B0764,#6D28D9);color:#fff;padding:44px 20px}
+.compare-inner{max-width:1000px;margin:0 auto}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.cmp-card{border-radius:14px;padding:22px 20px}
+.cmp-no{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+.cmp-yes{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2)}
+.cmp-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:12px}
+.cmp-item{font-size:13px;line-height:1.7;opacity:.9;padding:4px 0 4px 18px;position:relative}
+.cmp-item::before{position:absolute;left:0;top:4px}
+.cmp-no .cmp-item::before{content:"✗";opacity:.5}
+.cmp-yes .cmp-item::before{content:"✓"}
+/* DEMO LINK */
+.demo-strip{background:#F3F0FF;border-top:1px solid #DDD6FE;padding:28px 20px;text-align:center}
+.demo-strip p{font-size:15px;color:var(--txt);margin-bottom:14px}
+.demo-strip p strong{color:var(--purple)}
+@media(max-width:768px){.how-grid{grid-template-columns:1fr}.compare-grid{grid-template-columns:1fr}.prompt-row{flex-direction:column}}
+</style>
 </head>
 <body>
-<div class="card">
-<h2>CoachDx</h2>
-<p>CoachDx is now integrated directly into the Virtual EMR. Open any patient case and click the CoachDx tab for AI coaching.</p>
-<p>Redirecting to <a href="../virtual-emr.html?setting=ed">Virtual EMR</a>...</p>
+<script src="../js/rdx-supabase.js"></script>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="pillar-pill">🧑‍⚕️ CoachDx</div>
+    <h1>Your AI Attending</h1>
+    <p class="hdr-tagline">CoachDx doesn't give you answers. It asks the questions that force you to find them — just like the best attendings do.</p>
+    <div class="hdr-ctas">
+      <a href="mentor-chat.html" class="btn-primary">Start Coaching Session →</a>
+      <a href="../demo-coachdx.html" class="btn-ghost">▶ Watch Demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- Free-form launcher -->
+<div class="launcher-section">
+  <div class="launcher-card">
+    <div class="launcher-title">Start from anything</div>
+    <div class="launcher-sub">Type a diagnosis, a case presentation, a concept you're struggling with, or a question you got wrong on rounds. CoachDx adapts to you.</div>
+    <div class="prompt-row">
+      <input class="prompt-input" id="promptInput" type="text" placeholder="e.g. 'chest pain in a 50-year-old' or 'I keep missing PE on my differential'…" autocomplete="off">
+      <button class="prompt-btn" onclick="launchCoach()">Coach me →</button>
+    </div>
+    <div class="prompt-examples">
+      <span class="pex" onclick="fillPrompt(this)">Anaphylaxis workup</span>
+      <span class="pex" onclick="fillPrompt(this)">When to use TPA in stroke</span>
+      <span class="pex" onclick="fillPrompt(this)">Chest pain DDx in young woman</span>
+      <span class="pex" onclick="fillPrompt(this)">DKA vs HHS</span>
+      <span class="pex" onclick="fillPrompt(this)">I keep forgetting sepsis criteria</span>
+      <span class="pex" onclick="fillPrompt(this)">Atrial fibrillation management</span>
+      <span class="pex" onclick="fillPrompt(this)">Post-op fever causes</span>
+    </div>
+  </div>
 </div>
+
+<!-- Start options -->
+<div class="start-section">
+  <div class="section-eyebrow">Ways to Start</div>
+  <div class="sec-title">Coaching that adapts to what you need</div>
+  <div class="sec-sub">CoachDx isn't constrained to a case. Start from wherever you are.</div>
+  <div class="start-grid">
+    <a href="mentor-chat.html?mode=topic" class="start-card">
+      <span class="sc-icon">💡</span>
+      <div class="sc-label">Topic</div>
+      <div class="sc-title">Any Clinical Topic</div>
+      <div class="sc-desc">Name a diagnosis, drug, or concept. CoachDx builds a Socratic session around it.</div>
+      <span class="sc-arrow">→</span>
+    </a>
+    <a href="mentor-chat.html?mode=case" class="start-card">
+      <span class="sc-icon">📋</span>
+      <div class="sc-label">Case Review</div>
+      <div class="sc-title">Case You Worked</div>
+      <div class="sc-desc">Describe a case from CaseDx or real life. CoachDx coaches you on your reasoning.</div>
+      <span class="sc-arrow">→</span>
+    </a>
+    <a href="mentor-chat.html?mode=gap" class="start-card">
+      <span class="sc-icon">🎯</span>
+      <div class="sc-label">Knowledge Gap</div>
+      <div class="sc-title">Something You're Struggling With</div>
+      <div class="sc-desc">Tell CoachDx what trips you up. It builds targeted questions around your weak spots.</div>
+      <span class="sc-arrow">→</span>
+    </a>
+    <a href="mentor-chat.html?mode=ddx" class="start-card">
+      <span class="sc-icon">🔍</span>
+      <div class="sc-label">DDx Challenge</div>
+      <div class="sc-title">Present a Chief Complaint</div>
+      <div class="sc-desc">Give a presentation, build your differential live, CoachDx probes each choice.</div>
+      <span class="sc-arrow">→</span>
+    </a>
+    <a href="../consult-callback.html" class="start-card">
+      <span class="sc-icon">📞</span>
+      <div class="sc-label">Consult Coaching</div>
+      <div class="sc-title">Specialist Callback</div>
+      <div class="sc-desc">Practice presenting to cardiology, neurology, surgery — 26 specialist scenarios.</div>
+      <span class="sc-arrow">→</span>
+    </a>
+    <a href="../ai-trainer-anaphylaxis-food.html" class="start-card">
+      <span class="sc-icon">🤖</span>
+      <div class="sc-label">Specialty Trainer</div>
+      <div class="sc-title">A/I Reasoning Trainer</div>
+      <div class="sc-desc">Dedicated coaching for anaphylaxis and food allergy — full diagnostic reasoning arc.</div>
+      <span class="sc-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- How it works -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="section-eyebrow">How CoachDx Works</div>
+    <div class="sec-title">Socratic coaching, not spoon-feeding</div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div class="how-title">You tell CoachDx what you want to work on</div>
+        <div class="how-desc">A topic, a case, a concept, a question you got wrong. Free text — no templates required.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div class="how-title">CoachDx asks questions instead of giving answers</div>
+        <div class="how-desc">It probes your reasoning, pushes back on vague answers, and asks follow-up questions until you can fully defend your thinking.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div class="how-title">You leave with stronger reasoning, not just the right answer</div>
+        <div class="how-desc">Sessions are tracked. CoachDx identifies your reasoning patterns and adjusts future sessions to your gaps.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick topic starters -->
+<div class="topics-section">
+  <div class="section-eyebrow">Quick Start — Common Topics</div>
+  <div class="sec-title" style="margin-bottom:6px">Jump into a coaching session</div>
+  <div class="topics-grid">
+    <a class="topic-chip" onclick="launchTopic('Chest pain differential diagnosis')"><div class="tc-label">Cardiology</div><div class="tc-title">Chest Pain DDx</div></a>
+    <a class="topic-chip" onclick="launchTopic('Anaphylaxis recognition and management')"><div class="tc-label">Allergy/Immunology</div><div class="tc-title">Anaphylaxis</div></a>
+    <a class="topic-chip" onclick="launchTopic('Acute dyspnea evaluation')"><div class="tc-label">Pulmonary</div><div class="tc-title">Acute Dyspnea</div></a>
+    <a class="topic-chip" onclick="launchTopic('Sepsis recognition and early management')"><div class="tc-label">Critical Care</div><div class="tc-title">Sepsis</div></a>
+    <a class="topic-chip" onclick="launchTopic('DKA versus HHS')"><div class="tc-label">Endocrinology</div><div class="tc-title">DKA vs HHS</div></a>
+    <a class="topic-chip" onclick="launchTopic('Acute stroke workup and tPA criteria')"><div class="tc-label">Neurology</div><div class="tc-title">Acute Stroke</div></a>
+    <a class="topic-chip" onclick="launchTopic('Pulmonary embolism risk stratification')"><div class="tc-label">Pulmonary</div><div class="tc-title">PE Workup</div></a>
+    <a class="topic-chip" onclick="launchTopic('Acute abdominal pain differential')"><div class="tc-label">Surgery/GI</div><div class="tc-title">Acute Abdomen</div></a>
+    <a class="topic-chip" onclick="launchTopic('Altered mental status evaluation')"><div class="tc-label">Neurology</div><div class="tc-title">AMS Evaluation</div></a>
+    <a class="topic-chip" onclick="launchTopic('Atrial fibrillation management')"><div class="tc-label">Cardiology</div><div class="tc-title">Atrial Fibrillation</div></a>
+    <a class="topic-chip" onclick="launchTopic('Acid-base interpretation')"><div class="tc-label">Renal/Critical Care</div><div class="tc-title">Acid-Base</div></a>
+    <a class="topic-chip" onclick="launchTopic('Approach to hyponatremia')"><div class="tc-label">Renal</div><div class="tc-title">Hyponatremia</div></a>
+  </div>
+</div>
+
+<!-- What CoachDx is / isn't -->
+<div class="compare-section">
+  <div class="compare-inner">
+    <div class="section-eyebrow" style="color:rgba(255,255,255,.6)">Designed Differently</div>
+    <div class="sec-title" style="margin-bottom:20px">CoachDx is not a search engine</div>
+    <div class="compare-grid">
+      <div class="cmp-card cmp-no">
+        <div class="cmp-label">CoachDx does NOT</div>
+        <div class="cmp-item">Give you the answer right away</div>
+        <div class="cmp-item">Summarize a topic like a textbook</div>
+        <div class="cmp-item">Accept vague answers without pushback</div>
+        <div class="cmp-item">Let you skip the reasoning</div>
+        <div class="cmp-item">Reward memorization over understanding</div>
+      </div>
+      <div class="cmp-card cmp-yes">
+        <div class="cmp-label">CoachDx DOES</div>
+        <div class="cmp-item">Ask you why before telling you anything</div>
+        <div class="cmp-item">Follow up until your reasoning holds up</div>
+        <div class="cmp-item">Adapt to your level and gaps in real time</div>
+        <div class="cmp-item">Build sessions around what you get wrong</div>
+        <div class="cmp-item">Track your reasoning patterns over time</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Demo link -->
+<div class="demo-strip">
+  <p>Not sure what to expect? <strong>Watch a 3-minute demo</strong> — a real CoachDx session on anaphylaxis. No login required.</p>
+  <a href="../demo-coachdx.html" class="btn-primary" style="background:var(--purple);color:#fff;display:inline-block">▶ Watch CoachDx Demo</a>
+</div>
+
+<script src="../js/rdx-nav.js"></script>
+<script>
+function launchCoach(){
+  var q=document.getElementById('promptInput').value.trim();
+  if(!q)return;
+  window.location.href='mentor-chat.html?q='+encodeURIComponent(q);
+}
+document.getElementById('promptInput').addEventListener('keydown',function(e){if(e.key==='Enter')launchCoach();});
+function fillPrompt(el){document.getElementById('promptInput').value=el.textContent;document.getElementById('promptInput').focus();}
+function launchTopic(t){window.location.href='mentor-chat.html?q='+encodeURIComponent(t);}
+</script>
 </body>
 </html>

@@ -10,361 +10,384 @@
 <title>ReasonDx — Clinical Reasoning Education Platform</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="manifest" href="manifest.json">
-<meta name="description" content="The virtual teaching hospital that builds diagnostic expertise. 145 clinical cases, AI coaching, and interactive simulations — built by medical educators for learners across the health professions.">
-<meta property="og:title" content="ReasonDx — AI-Powered Clinical Reasoning Platform">
-<meta property="og:description" content="A virtual teaching hospital for clinical reasoning education. 145 cases, AI coaching, real EMR simulation.">
+<meta name="description" content="ReasonDx: Three ways to build clinical reasoning — CaseDx (145 cases in the Virtual EMR), CoachDx (Socratic AI coaching), and MechanismDx (pathophysiology explorer). Built by medical educators.">
+<meta property="og:title" content="ReasonDx — Clinical Reasoning Education Platform">
+<meta property="og:description" content="CaseDx · CoachDx · MechanismDx — three tools for building clinical reasoning. 145 cases, AI coaching, and pathophysiology explorer.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://reasondx.com">
+<link rel="canonical" href="https://reasondx.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
- --bg:#F8FAFC;--card:#FFFFFF;--card-hover:#F0F7FF;
- --border:#E2E8F0;--border-hover:#CBD5E1;
- --text:#1E293B;--dim:#64748B;--dim2:#94A3B8;
- --blue:#2874A6;--blue-light:#3498DB;--blue-bg:rgba(40,116,166,.06);--blue-border:rgba(40,116,166,.15);
- --red:#DC2626;--green:#059669;--amber:#D97706;--pink:#EC4899;
- --font:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --bg:#F8FAFC;--card:#fff;--bd:#E2E8F0;--bdh:#CBD5E1;
+  --txt:#1E293B;--dim:#64748B;--dim2:#94A3B8;
+  --blue:#2874A6;--dark:#1B3A5C;
+  --red:#C0392B;--red-bg:rgba(192,57,43,.06);--red-bd:rgba(192,57,43,.18);
+  --purple:#6D28D9;--purple-bg:rgba(109,40,217,.06);--purple-bd:rgba(109,40,217,.18);
+  --teal:#0E7490;--teal-bg:rgba(14,116,144,.06);--teal-bd:rgba(14,116,144,.18);
+  --f:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;
 }
-body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--txt);font-family:var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background .3s}
-.nav-logo{font-size:17px;font-weight:800;letter-spacing:-.5px;color:var(--text)}
-.nav-logo span{color:var(--blue);font-style:italic}
-.nav-links{display:flex;align-items:center;gap:24px}
-.nav-links a{font-size:13px;color:var(--dim);font-weight:500;transition:color .15s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--blue);color:#fff!important;padding:7px 18px;border-radius:8px;font-weight:600;font-size:12px;transition:all .15s}
-.nav-cta:hover{background:#1B4F72;transform:translateY(-1px)}
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:140%;height:80%;background:radial-gradient(ellipse at center,rgba(40,116,166,.05) 0%,transparent 60%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg),transparent);pointer-events:none}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);background:var(--blue-bg);padding:6px 16px;border-radius:100px;border:1px solid var(--blue-border);margin-bottom:28px}
-.hero-eyebrow .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(5,150,105,.4)}50%{opacity:.8;box-shadow:0 0 0 6px rgba(5,150,105,0)}}
-.hero h1{font-size:clamp(38px,5.5vw,68px);font-weight:800;color:var(--text);line-height:1.08;margin-bottom:20px;letter-spacing:-1.5px;max-width:800px}
-.hero h1 em{font-style:italic;color:var(--blue);font-weight:700}
-.hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--dim);max-width:580px;line-height:1.75;margin-bottom:36px}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;padding:15px 32px;border-radius:12px;transition:all .2s;border:none;cursor:pointer;font-family:var(--font)}
-.btn-primary:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 12px 40px rgba(40,116,166,.2)}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);font-size:14px;font-weight:600;padding:14px 28px;border-radius:12px;border:1px solid var(--border);transition:all .2s;cursor:pointer;font-family:var(--font)}
-.btn-ghost:hover{background:#F0F7FF;border-color:var(--blue-border);transform:translateY(-1px)}
-.cred-bar{display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;padding:0 24px;margin-bottom:20px}
-.cred-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim2);font-weight:500}
-.cred-item strong{color:var(--dim);font-weight:700}
-.stats-strip{display:flex;justify-content:center;gap:48px;padding:48px 24px 56px;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:900px;margin:0 auto 72px}
-.stat-item{text-align:center}
-.stat-num{font-size:36px;font-weight:800;color:var(--blue);letter-spacing:-1px;line-height:1}
-.stat-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-top:4px}
-.section{max-width:1100px;margin:0 auto;padding:0 24px 80px}
-.section-badge{display:inline-flex;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);background:var(--blue-bg);padding:5px 14px;border-radius:6px;border:1px solid var(--blue-border);margin-bottom:12px}
-.section-title{font-size:clamp(28px,3.5vw,40px);font-weight:800;color:var(--text);letter-spacing:-.8px;margin-bottom:8px;line-height:1.15}
-.section-sub{font-size:15px;color:var(--dim);line-height:1.7;max-width:560px;margin-bottom:40px}
-.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.feature-card{padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:16px;transition:all .25s;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.feature-card:hover{border-color:var(--border-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.08);background:var(--card-hover)}
-.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .25s}
-.feature-card:hover::before{opacity:1}
-.f-icon{font-size:28px;margin-bottom:14px;display:block}
-.f-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px}
-.f-desc{font-size:13px;color:var(--dim);line-height:1.65}
-.f-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:4px;margin-top:10px}
-.fc-red::before{background:var(--red)}.fc-red .f-tag{background:rgba(220,38,38,.08);color:var(--red)}
-.fc-blue::before{background:var(--blue)}.fc-blue .f-tag{background:var(--blue-bg);color:var(--blue)}
-.fc-green::before{background:var(--green)}.fc-green .f-tag{background:rgba(5,150,105,.08);color:var(--green)}
-.fc-amber::before{background:var(--amber)}.fc-amber .f-tag{background:rgba(217,119,6,.08);color:var(--amber)}
-.fc-pink::before{background:var(--pink)}.fc-pink .f-tag{background:rgba(236,72,153,.08);color:var(--pink)}
-.fc-teal::before{background:#0891B2}.fc-teal .f-tag{background:rgba(8,145,178,.08);color:#0891B2}
-.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:step}
-.how-card{padding:24px 20px;background:var(--card);border:1px solid var(--border);border-radius:14px;position:relative;counter-increment:step;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.how-card::before{content:counter(step);font-size:42px;font-weight:800;color:rgba(40,116,166,.1);line-height:1;margin-bottom:8px;display:block}
-.how-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
-.how-desc{font-size:12px;color:var(--dim);line-height:1.65}
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:700px;margin:0 auto}
-.price-card{padding:32px 28px;background:var(--card);border:1px solid var(--border);border-radius:18px;position:relative;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.price-card:hover{border-color:var(--border-hover);box-shadow:0 8px 30px rgba(0,0,0,.06)}
-.price-card.featured{border-color:var(--blue-border);background:linear-gradient(165deg,rgba(40,116,166,.03),var(--card))}
-.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-10px;right:20px;font-size:9px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--blue);padding:4px 12px;border-radius:6px}
-.price-name{font-size:14px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.price-amount{font-size:40px;font-weight:800;color:var(--text);letter-spacing:-1px;margin-bottom:4px}
-.price-amount span{font-size:14px;font-weight:500;color:var(--dim)}
-.price-period{font-size:12px;color:var(--dim);margin-bottom:20px}
-.price-features{list-style:none;margin-bottom:24px}
-.price-features li{font-size:13px;color:var(--text);padding:6px 0;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-.price-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
-.price-features li.locked::before{content:'—';color:var(--dim2)}
-.price-features li.locked{color:var(--dim2)}
-.price-btn{display:block;width:100%;text-align:center;padding:12px;border-radius:10px;font-size:14px;font-weight:700;transition:all .15s;cursor:pointer;border:none;font-family:var(--font)}
-.price-btn.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border)}
-.price-btn.btn-outline:hover{background:#F0F7FF;border-color:var(--blue-border)}
-.price-btn.btn-fill{background:var(--blue);color:#fff}
-.price-btn.btn-fill:hover{background:#1B4F72}
-.inst-card{background:linear-gradient(165deg,rgba(40,116,166,.04),var(--card));border:1px solid var(--blue-border);border-radius:18px;padding:48px 40px;display:flex;align-items:center;gap:40px;max-width:900px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.inst-text{flex:1}
-.inst-title{font-size:28px;font-weight:800;color:var(--text);letter-spacing:-.5px;margin-bottom:8px}
-.inst-desc{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:20px}
-.inst-features{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-.inst-feat{font-size:11px;font-weight:600;padding:4px 12px;border-radius:6px;background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)}
-.inst-cta{display:inline-flex;align-items:center;gap:8px}
-.search-section{max-width:600px;margin:0 auto 40px;padding:0 24px}
-.search-wrap{position:relative}
-.search-input{width:100%;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 20px 14px 44px;color:var(--text);font-size:14px;font-family:var(--font);outline:none;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.search-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
-.search-input::placeholder{color:var(--dim2)}
-.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--dim2);font-size:16px;pointer-events:none}
-.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:12px;display:none;z-index:20;max-height:320px;overflow-y:auto;box-shadow:0 16px 40px rgba(0,0,0,.12)}
-.search-results.active{display:block}
-.sr-item{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border-bottom:1px solid #F1F5F9;transition:background .1s}
-.sr-item:last-child{border-bottom:none}
-.sr-item:hover{background:#F8FAFC}
-.sr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sr-name{font-weight:600;font-size:13px;color:var(--text)}.sr-desc{font-size:11px;color:var(--dim)}
-.sr-category{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-left:auto;white-space:nowrap}
-.search-hint{text-align:center;font-size:11px;color:var(--dim2);margin-top:6px}
-.footer{border-top:1px solid var(--border);padding:48px 24px;max-width:1100px;margin:0 auto}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
-.footer-brand p{font-size:12px;color:var(--dim);line-height:1.7;margin-top:8px;max-width:260px}
-.footer-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim2);margin-bottom:12px}
-.footer-col a{display:block;font-size:13px;color:var(--dim);padding:3px 0;transition:color .15s}
-.footer-col a:hover{color:var(--blue)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border)}
-.footer-copy{font-size:11px;color:var(--dim2)}
-.footer-social{display:flex;gap:12px}
-.footer-social a{font-size:11px;color:var(--dim);padding:4px 8px;border:1px solid var(--border);border-radius:6px;transition:all .15s}
-.footer-social a:hover{color:var(--blue);border-color:var(--blue-border)}
-.email-cta{text-align:center;padding:60px 24px;background:linear-gradient(165deg,rgba(40,116,166,.04),transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:0 auto;max-width:1200px}
-.email-cta h2{font-size:24px;font-weight:800;color:var(--text);margin-bottom:8px}
-.email-cta p{color:var(--dim);font-size:14px;margin-bottom:20px}
-.email-form{display:flex;gap:8px;max-width:400px;margin:0 auto}
-.email-form input{flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:#fff;color:var(--text)}
-.email-form input::placeholder{color:var(--dim2)}
-.email-form input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
-.email-form button{padding:12px 24px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .15s}
-.email-form button:hover{background:#1B4F72}
-.faq-list{max-width:700px;margin:0 auto}
-.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);transition:color .15s;background:none;border:none;width:100%;text-align:left;font-family:inherit}
-.faq-q:hover{color:var(--blue)}
-.faq-q::after{content:'+';font-size:20px;color:var(--dim);transition:transform .2s;flex-shrink:0;margin-left:16px}
-.faq-item.open .faq-q::after{transform:rotate(45deg);color:var(--blue)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;padding:0 0}
-.faq-item.open .faq-a{max-height:300px;padding:0 0 20px}
-.faq-a p{font-size:14px;color:var(--dim);line-height:1.7}
-@media(max-width:900px){.feature-grid{grid-template-columns:1fr 1fr}.how-grid{grid-template-columns:1fr 1fr}.inst-card{flex-direction:column;text-align:center;padding:32px 24px}.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.feature-grid,.how-grid,.pricing-grid{grid-template-columns:1fr}.hero-ctas{flex-direction:column;align-items:center}.cred-bar{gap:16px}.stats-strip{gap:24px}.nav-links a:not(.nav-cta){display:none}.nav{padding:0 16px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:12px;text-align:center}}
-.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
-.rdx-loading.hide{opacity:0;pointer-events:none}
-.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
-@keyframes rdxSpin{to{transform:rotate(360deg)}}
-.rdx-load-text{font-family:"IBM Plex Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(145deg,#0D1F33 0%,#1B3A5C 55%,#2874A6 100%);color:#fff;padding:72px 24px 68px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(40,116,166,.25),transparent 60%);pointer-events:none}
+.hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:5px 16px;margin-bottom:20px;color:rgba(255,255,255,.85)}
+.hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:18px}
+.hero h1 span{background:linear-gradient(90deg,#60B4FF,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);opacity:.82;line-height:1.65;max-width:560px;margin:0 auto 32px}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.btn-primary{background:#fff;color:var(--dark);font-size:15px;font-weight:700;padding:14px 28px;border-radius:12px;border:none;cursor:pointer;font-family:var(--f);transition:all .15s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:#F0F7FF;transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;font-size:14px;font-weight:600;padding:13px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.2);text-decoration:none;display:inline-block;transition:all .15s}
+.btn-ghost:hover{background:rgba(255,255,255,.18)}
+.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+.hstat{text-align:center}.hstat-n{font-size:22px;font-weight:800}.hstat-l{font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+/* ── CREDENTIAL STRIP ── */
+.cred-strip{background:#fff;border-bottom:1px solid var(--bd);padding:14px 24px;text-align:center;font-size:13px;color:var(--dim)}
+.cred-strip strong{color:var(--txt)}
+
+/* ── THREE PILLARS ── */
+.pillars{max-width:1100px;margin:0 auto;padding:60px 24px}
+.pillars-header{text-align:center;margin-bottom:36px}
+.sec-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim2);margin-bottom:8px}
+.sec-title{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.8px;margin-bottom:8px}
+.sec-sub{font-size:15px;color:var(--dim);max-width:540px;margin:0 auto}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pillar-card{border-radius:20px;padding:0;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:all .22s;border:1px solid var(--bd);background:var(--card)}
+.pillar-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1)}
+.pc-header{padding:28px 24px 22px}
+.pc-icon{font-size:32px;margin-bottom:12px;display:block}
+.pc-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:6px;margin-bottom:8px}
+.pc-title{font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.pc-desc{font-size:13px;line-height:1.65;color:var(--dim)}
+.pc-features{padding:0 24px;list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:20px}
+.pc-features li{font-size:12px;color:var(--dim);display:flex;align-items:flex-start;gap:7px;line-height:1.5}
+.pc-features li::before{font-weight:700;flex-shrink:0;margin-top:1px}
+.pc-cta{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;font-size:13px;font-weight:700;border-top:1px solid var(--bd)}
+/* CaseDx */
+.pc-case .pc-header{background:linear-gradient(135deg,rgba(192,57,43,.06),rgba(192,57,43,.02))}
+.pc-case .pc-pill{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+.pc-case .pc-title{color:var(--red)}
+.pc-case .pc-features li::before{content:"🩺";font-size:11px}
+.pc-case .pc-cta{color:var(--red)}
+.pc-case:hover{border-color:var(--red-bd);box-shadow:0 16px 40px rgba(192,57,43,.12)}
+/* CoachDx */
+.pc-coach .pc-header{background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(109,40,217,.02))}
+.pc-coach .pc-pill{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)}
+.pc-coach .pc-title{color:var(--purple)}
+.pc-coach .pc-features li::before{content:"🧑‍⚕️";font-size:11px}
+.pc-coach .pc-cta{color:var(--purple)}
+.pc-coach:hover{border-color:var(--purple-bd);box-shadow:0 16px 40px rgba(109,40,217,.12)}
+/* MechanismDx */
+.pc-mech .pc-header{background:linear-gradient(135deg,rgba(14,116,144,.06),rgba(14,116,144,.02))}
+.pc-mech .pc-pill{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-bd)}
+.pc-mech .pc-title{color:var(--teal)}
+.pc-mech .pc-features li::before{content:"🧬";font-size:11px}
+.pc-mech .pc-cta{color:var(--teal)}
+.pc-mech:hover{border-color:var(--teal-bd);box-shadow:0 16px 40px rgba(14,116,144,.12)}
+
+/* ── TESTIMONIALS ── */
+.testimonials{background:var(--card);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:52px 24px}
+.testimonials-inner{max-width:1000px;margin:0 auto}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.tcard{background:var(--bg);border:1px solid var(--bd);border-radius:16px;padding:22px 20px}
+.tquote{font-size:14px;line-height:1.7;color:var(--txt);margin-bottom:14px;font-style:italic}
+.tquote::before{content:"\201C";font-size:32px;color:var(--dim2);line-height:0;vertical-align:-.5em;margin-right:2px}
+.tattrib{font-size:12px;font-weight:600;color:var(--dim2)}
+
+/* ── HOW IT FITS TOGETHER ── */
+.arc-section{max-width:1000px;margin:0 auto;padding:56px 24px}
+.arc-flow{display:flex;align-items:flex-start;gap:0;margin-top:24px}
+.arc-node{flex:1;text-align:center;position:relative;padding:0 8px}
+.arc-node:not(:last-child)::after{content:"→";position:absolute;right:-8px;top:28px;font-size:20px;color:var(--dim2);font-weight:700}
+.arc-icon-wrap{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 10px;border:1px solid var(--bd)}
+.arc-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.arc-sub{font-size:11px;color:var(--dim);line-height:1.5}
+.arc-pillar-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:5px;display:inline-block;margin-bottom:6px}
+
+/* ── LEARNER PATHS ── */
+.paths-section{background:linear-gradient(180deg,var(--bg),#EFF6FF);border-top:1px solid var(--bd);padding:52px 24px}
+.paths-inner{max-width:1000px;margin:0 auto}
+.paths-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:24px}
+.path-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px 18px}
+.path-icon{font-size:22px;margin-bottom:8px;display:block}
+.path-who{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-bottom:4px}
+.path-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.path-desc{font-size:12px;color:var(--dim);line-height:1.6}
+
+/* ── FAQ ── */
+.faq-section{max-width:760px;margin:0 auto;padding:52px 24px}
+.faq-item{border-bottom:1px solid var(--bd);padding:18px 0}
+.faq-q{font-size:15px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;user-select:none}
+.faq-q .faq-toggle{font-size:20px;color:var(--dim2);flex-shrink:0;transition:transform .2s;margin-top:-1px}
+.faq-a{font-size:14px;color:var(--dim);line-height:1.7;margin-top:10px;display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-toggle{transform:rotate(45deg)}
+
+/* ── INSTITUTIONAL ── */
+.institutional{background:linear-gradient(135deg,var(--dark),#2874A6);color:#fff;padding:52px 24px;text-align:center}
+.institutional-inner{max-width:640px;margin:0 auto}
+.inst-title{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
+.inst-sub{font-size:15px;opacity:.85;line-height:1.65;margin-bottom:28px}
+
+/* ── FOOTER ── */
+.footer{background:var(--dark);color:rgba(255,255,255,.6);padding:32px 24px;text-align:center;font-size:13px}
+.footer a{color:rgba(255,255,255,.7)}.footer a:hover{color:#fff}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){.pillars-grid{grid-template-columns:1fr}.tgrid{grid-template-columns:1fr}}
+@media(max-width:640px){.arc-flow{flex-direction:column;gap:12px}.arc-node:not(:last-child)::after{display:none}.hero-stats{gap:18px}.paths-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.paths-grid{grid-template-columns:1fr}}
 </style>
-<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
-<script src="js/rdx-supabase.js"></script>
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="stylesheet" href="css/rdx-theme.css">
-<link rel="stylesheet" href="mobile.css">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"ReasonDx","description":"Clinical reasoning education platform with 145 clinical cases, AI coaching, and interactive simulations.","url":"https://reasondx.com","applicationCategory":"EducationalApplication","operatingSystem":"Web","offers":[{"@type":"Offer","price":"0","priceCurrency":"USD","name":"Free"},{"@type":"Offer","price":"14.99","priceCurrency":"USD","name":"Pro","billingIncrement":"P1M"}],"author":{"@type":"Person","name":"Lauren Fine, MD, FAAAAI","jobTitle":"Assistant Dean of Clinical Skills Education","affiliation":{"@type":"Organization","name":"Nova Southeastern University"}}}
-</script>
-<link rel="canonical" href="https://reasondx.com/">
-<meta name="robots" content="index, follow">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReasonDx — Clinical Reasoning Education Platform">
-<meta name="twitter:description" content="The virtual teaching hospital that builds diagnostic expertise. 145 clinical cases, AI coaching, and interactive simulations.">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is ReasonDx a question bank?","acceptedAnswer":{"@type":"Answer","text":"No. ReasonDx is a clinical simulation platform with full patient encounters, realistic EMR data, and AI feedback on clinical reasoning."}},{"@type":"Question","name":"Who is ReasonDx designed for?","acceptedAnswer":{"@type":"Answer","text":"Medical students, PA students, NP students, residents, and fellows. Educators can use it for clinical reasoning instruction."}},{"@type":"Question","name":"What's included in the free plan?","acceptedAnswer":{"@type":"Answer","text":"Select cases, clinical reasoning trainers, and all clinical tools. Pro unlocks the full case library across all settings, simulators, AI coaching, and analytics."}},{"@type":"Question","name":"Can I use ReasonDx on my phone?","acceptedAnswer":{"@type":"Answer","text":"Yes, ReasonDx is a progressive web app that works on any device with a modern browser."}},{"@type":"Question","name":"Is there institutional licensing?","acceptedAnswer":{"@type":"Answer","text":"Yes, with admin dashboards, cohort analytics, and LMS integration. Contact hello@reasondx.com."}}]}
-</script>
 </head>
 <body>
-<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
-<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 
-<nav class="nav">
- <a href="index.html" style="text-decoration:none"><img src="icons/logo-transparent.png" alt="ReasonDx" style="height:30px;width:auto"></a>
- <div class="nav-links">
- <a href="#features">Features</a>
- <a href="#how">How It Works</a>
- <a href="#pricing">Pricing</a>
- <a href="#faq">FAQ</a>
- <a href="virtual-emr.html">Virtual EMR</a>
- <a class="nav-cta" href="auth/register.html">Get Started Free</a>
- </div>
-</nav>
+<!-- ── NAV ── (injected by rdx-nav.js) -->
 
-<section class="hero" id="main-content" role="main">
- <div class="hero-eyebrow"><span class="pulse"></span> 145 clinical cases · 23 specialties · built by medical educators</div>
- <h1>The virtual teaching hospital that builds <em>diagnostic expertise</em></h1>
- <p class="hero-sub">Walk the ED. Review real charts. Order workups. Defend your reasoning to an AI attending. Built for medical students, PA students, NP students, and residents — where clinical reasoning meets deliberate practice.</p>
- <div class="hero-ctas">
- <a class="btn-primary" href="virtual-emr.html?case=anaphylaxis&amp;demo=1">Try a Demo Case — No Sign-Up →</a>
- <a class="btn-ghost" href="demo-coachdx.html">Watch CoachDx Demo</a>
- </div>
- <div class="cred-bar">
- <div class="cred-item">Built by <strong>medical educators</strong> for learners across medicine</div>
- <div class="cred-item">Designed by a <strong>board-certified physician</strong></div>
- <div class="cred-item">Evidence-based, <strong>open-access sources</strong> only</div>
- </div>
-</section>
-
-<div class="stats-strip">
- <div class="stat-item"><div class="stat-num" data-rdx-stat="cases">145</div><div class="stat-label">Clinical Cases</div></div>
- <div class="stat-item"><div class="stat-num" data-rdx-stat="specialties">23</div><div class="stat-label">Specialties</div></div>
- <div class="stat-item"><div class="stat-num">93</div><div class="stat-label">Mechanism Pathways</div></div>
- <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Clinical Settings</div></div>
-</div>
-
-<section class="section" id="social-proof" style="padding-bottom:0;padding-top:40px">
-  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px">
-    <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
-      <div style="font-size:20px;color:var(--blue);margin-bottom:10px">❝</div>
-      <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:14px">CoachDx doesn't let you off the hook. It asked me <em>why</em> I ordered a d-dimer before calculating the Wells score. That's the kind of feedback I never got in small group.</p>
-      <div style="font-size:12px;color:var(--dim);font-weight:600">M3 Student · Allopathic Medical School</div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">145 cases · 23 specialties · built by medical educators</div>
+    <h1>Three ways to build<br><span>clinical reasoning</span></h1>
+    <p class="hero-sub">Work real cases in the Virtual EMR. Get coached by an AI attending. Explore the pathophysiology behind every diagnosis. Medical students, residents, PA and NP students — pick your starting point.</p>
+    <div class="hero-ctas">
+      <a href="auth/register.html" class="btn-primary">Create Free Account →</a>
+      <a href="demo-coachdx.html" class="btn-ghost">▶ Watch CoachDx Demo</a>
     </div>
-    <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 28px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
-      <div style="font-size:20px;color:var(--blue);margin-bottom:10px">❝</div>
-      <p style="font-size:14px;color:var(--text);line-height:1.7;margin-bottom:14px">I used ReasonDx to prep for my clinical year. The EMR feels like what we actually use on rotation — not a textbook with multiple choice bolted on.</p>
-      <div style="font-size:12px;color:var(--dim);font-weight:600">PA Student · Graduate Medical Program</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">145</div><div class="hstat-l">Clinical Cases</div></div>
+      <div class="hstat"><div class="hstat-n">560</div><div class="hstat-l">Pathophysiology Topics</div></div>
+      <div class="hstat"><div class="hstat-n">23</div><div class="hstat-l">Specialties</div></div>
+      <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">to Start</div></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="features">
- <div class="section-badge">Platform</div>
- <div class="section-title">Not a question bank.<br>A clinical reasoning engine.</div>
- <p class="section-sub">Every feature is designed around one goal: building the pattern recognition and systematic thinking that separates strong clinicians from everyone else.</p>
- <div class="feature-grid">
- <div class="feature-card fc-red"><span class="f-icon">🚨</span><div class="f-title">Virtual Emergency Department</div><div class="f-desc">A live track board with patients arriving in real time. Filter by acuity, category, or status. Hover for vitals. Click to enter the full EMR and start your workup.</div><span class="f-tag">Live Simulation</span></div>
- <div class="feature-card fc-blue"><span class="f-icon">📋</span><div class="f-title">Simulated EMR</div><div class="f-desc">Chart review with real problem lists, medications, labs with flagged abnormals, imaging with findings, and visit notes. Exactly like the charts you'll use in residency.</div><span class="f-tag">145 Cases</span></div>
- <div class="feature-card fc-teal"><span class="f-icon">🧬</span><div class="f-title">MechanismDx — AI Tutor</div><div class="f-desc">560 pathophysiology topics across 93 organ systems. An AI tutor that coaches you through the "why" behind every diagnosis — with mastery tracking and spaced repetition.</div><span class="f-tag">560 Topics</span></div>
- <div class="feature-card fc-pink"><span class="f-icon">💬</span><div class="f-title">CoachDx — AI Attending</div><div class="f-desc">A Socratic AI coach that doesn't just grade you — it questions your reasoning. "Why did you anchor on PE before checking the Wells score?" Real attending energy.</div><span class="f-tag">AI-Powered</span></div>
- <div class="feature-card fc-green"><span class="f-icon">🌙</span><div class="f-title">Night Float Simulator</div><div class="f-desc">Accept admissions from the ED. Handle nurse pages at 3 AM. Manage cross-cover patients. Triage competing urgencies. Hand off at dawn with I-PASS.</div><span class="f-tag">Cross-Cover</span></div>
- <div class="feature-card fc-amber"><span class="f-icon">🎤</span><div class="f-title">Oral Presentation Trainer</div><div class="f-desc">Present to the attending in morning rounds. SimRoomDx evaluates your structure, prioritization, and clinical reasoning under real-time questioning.</div><span class="f-tag">Communication</span></div>
- </div>
-</section>
-
-<section class="section" id="how">
- <div class="section-badge">Workflow</div>
- <div class="section-title">Every learner has a path</div>
- <p class="section-sub">Whether you're an M1 building foundations or a resident preparing for boards, ReasonDx meets you where you are.</p>
- <div class="how-grid">
- <div class="how-card"><div class="how-title">ED Arrival</div><div class="how-desc">Patients arrive on the track board. You pick up a case, review the chart, interview the patient, perform your physical exam, and order workup.</div></div>
- <div class="how-card"><div class="how-title">Clinical Reasoning</div><div class="how-desc">Build your differential. Order the right labs and imaging. Interpret results. Avoid cognitive traps. CoachDx is watching your reasoning in real time.</div></div>
- <div class="how-card"><div class="how-title">Night Float</div><div class="how-desc">Accept handoffs. Manage cross-cover. Handle deteriorating patients overnight. Practice I-PASS sign-outs at dawn — scored on completeness.</div></div>
- <div class="how-card"><div class="how-title">Debrief & Growth</div><div class="how-desc">Get scored on chart review, clinical decisions, and reasoning quality. Missed concepts become flashcards. Track your growth over time.</div></div>
- </div>
-</section>
-
-<section class="search-section">
- <div class="search-wrap">
- <span class="search-icon">🔍</span>
- <input class="search-input" id="search" type="text" aria-label="Search cases, topics, and tools…" placeholder="Search cases, topics, and tools…" autocomplete="off" oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)" onblur="setTimeout(()=>document.getElementById('sr').classList.remove('active'),200)">
- <div class="search-results" id="sr"></div>
- </div>
- <div class="search-hint">Try: "chest pain", "ABG", "night float", "SBAR", "anaphylaxis"</div>
-</section>
-
-<section class="section" id="pricing">
- <div class="section-badge">Pricing</div>
- <div class="section-title">Start free. Upgrade when you're ready.</div>
- <p class="section-sub">Full access to cases, EMR, and clinical tools on the free tier. Pro unlocks CoachDx AI coaching, Night Float, spaced repetition, and advanced analytics.</p>
- <div class="pricing-grid">
- <div class="price-card"><div class="price-name">Free</div><div class="price-amount">$0</div><div class="price-period">Free forever</div><ul class="price-features"><li>145 clinical cases with full EMR</li><li>ED Track Board simulation</li><li>MechanismDx pathophysiology tutor</li><li>Clinical calculators & tools</li><li>ECG trainer & ABG analyzer</li><li class="locked">AI coaching (CoachDx)</li><li class="locked">Spaced repetition engine</li><li class="locked">Analytics dashboard</li></ul><a class="price-btn btn-outline" href="auth/register.html">Create Free Account</a></div>
- <div class="price-card featured"><div class="price-name">Pro</div><div class="price-amount">$14.99<span>/mo</span></div><div class="price-period">or $99/year (save 45%)</div><ul class="price-features"><li>Everything in Free</li><li>CoachDx AI attending feedback</li><li>Spaced repetition flashcards</li><li>Night Float simulator</li><li>Analytics & progress tracking</li><li>Oral presentation scoring</li><li>Concept maps & reasoning analysis</li><li>Priority support</li></ul><a class="price-btn btn-fill" href="auth/register.html">Start Pro Free Trial</a></div>
- </div>
-</section>
-
-<section class="section" id="institutions">
- <div class="inst-card">
- <div class="inst-text">
- <div class="section-badge">For Medical Schools & Fellowship Programs</div>
- <div class="inst-title">Deploy ReasonDx across your curriculum</div>
- <p class="inst-desc">Institutional licenses include faculty analytics, cohort tracking, LMS integration, and custom case authoring. See which students struggle with specific reasoning patterns before they reach the wards.</p>
- <div class="inst-features"><span class="inst-feat">Faculty Dashboard</span><span class="inst-feat">Cohort Analytics</span><span class="inst-feat">LMS Integration</span><span class="inst-feat">Custom Cases</span><span class="inst-feat">ACGME Milestones</span><span class="inst-feat">EPA Tracking</span></div>
- <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <a class="btn-primary inst-cta" href="institutional.html">See Institutional Features →</a>
-    <a href="mailto:hello@reasondx.com" style="font-size:13px;color:var(--dim)">or email hello@reasondx.com</a>
-    </div>
- </div>
- </div>
-</section>
-
-<section class="section" id="faq">
- <div class="section-badge">FAQ</div>
- <h2 class="section-title">Common Questions</h2>
- <div class="faq-list">
- <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is ReasonDx a question bank?</button><div class="faq-a"><p>No. ReasonDx is a clinical simulation platform. Instead of multiple-choice stems, you work through full patient encounters with realistic EMR data, order entry, and AI feedback on your reasoning process — the way real clinical thinking works.</p></div></div>
- <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Who is ReasonDx designed for?</button><div class="faq-a"><p>Medical students (M1–M4), PA students, NP students, residents, and fellows. Educators can also use ReasonDx as a teaching tool for clinical reasoning instruction. The content is mapped to USMLE Step 2 / COMLEX Level 2 frameworks, with ACGME milestone alignment for fellowship programs.</p></div></div>
- <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's included in the free plan?</button><div class="faq-a"><p>Free accounts get access to select cases, clinical reasoning trainers, and all clinical tools. Pro unlocks the full case library across all settings, Night Float simulator, AI coaching, SimRoomDx, and advanced analytics.</p></div></div>
- <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I use ReasonDx on my phone?</button><div class="faq-a"><p>Yes. ReasonDx is a progressive web app that works on any modern device. MechanismDx, clinical tools, and most cases work great on mobile. For the full Virtual ED Track Board and EMR experience, a laptop or tablet gives you the most screen real estate.</p></div></div>
- <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is there institutional licensing?</button><div class="faq-a"><p>Yes — we offer institutional partnerships with admin dashboards, cohort analytics, and LMS integration. Contact us at <a href="mailto:hello@reasondx.com" style="color:var(--blue)">hello@reasondx.com</a> for details.</p></div></div>
- <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What evidence base does ReasonDx use?</button><div class="faq-a"><p>All clinical content is mapped to current open-access guidelines (AHA, ACS, IDSA, ATSera, StatPearls, UpToDate) and reviewed by board-certified physicians. We maintain strict adherence to open-access, evidence-based sources.</p></div></div>
- </div>
-</section>
-
-<div class="email-cta" id="email-cta">
- <h2>Stay in the loop</h2>
- <p>Get updates on new cases, features, and clinical reasoning tips.</p>
- <div class="email-form">
- <input type="email" placeholder="your@email.com" id="cta-email" aria-label="Email address">
- <button onclick="var e=document.getElementById('cta-email');if(e.value){this.textContent='✓ Subscribed!';this.style.background='#059669';localStorage.setItem('rdx-subscribed',e.value)}">Subscribe</button>
- </div>
+<!-- ── CREDENTIAL STRIP ── -->
+<div class="cred-strip">
+  Built by <strong>Lauren Fine, MD, FAAAAI</strong> · NSU Assistant Dean, Clinical Skills Education · Faculty, <strong>Harvard Macy Institute</strong>
 </div>
 
+<!-- ── THREE PILLARS ── -->
+<section class="pillars">
+  <div class="pillars-header">
+    <div class="sec-eyebrow">The Platform</div>
+    <div class="sec-title">Pick your mode, start learning</div>
+    <p class="sec-sub">Three tools. One goal: building the clinical reasoning that makes you a better clinician.</p>
+  </div>
+  <div class="pillars-grid">
+
+    <!-- CaseDx -->
+    <a href="casedx.html" class="pillar-card pc-case">
+      <div class="pc-header">
+        <span class="pc-icon">🩺</span>
+        <div class="pc-pill">Clinical Cases</div>
+        <div class="pc-title">CaseDx</div>
+        <p class="pc-desc">Work through patient encounters in the Virtual EMR. Build your differential, order tests, and finish with a clinical note and SBAR handoff.</p>
+      </div>
+      <ul class="pc-features">
+        <li>145 cases across 23 specialties</li>
+        <li>Full EMR: chart, labs, imaging, orders</li>
+        <li>ED Board, Night Float, Morning Rounds</li>
+        <li>Note + SBAR after every case</li>
+      </ul>
+      <div class="pc-cta">Browse Cases <span>→</span></div>
+    </a>
+
+    <!-- CoachDx -->
+    <a href="CoachDx/index.html" class="pillar-card pc-coach">
+      <div class="pc-header">
+        <span class="pc-icon">🧑‍⚕️</span>
+        <div class="pc-pill">AI Coaching</div>
+        <div class="pc-title">CoachDx</div>
+        <p class="pc-desc">Your AI attending asks the questions you need to answer. Start from any topic, case, or concept. CoachDx pushes back until your reasoning holds up.</p>
+      </div>
+      <ul class="pc-features">
+        <li>Free-form — start from any topic or case</li>
+        <li>Socratic questioning, not spoon-feeding</li>
+        <li>Adapts to your level and reasoning gaps</li>
+        <li>Progress tracked across sessions</li>
+      </ul>
+      <div class="pc-cta">Start Coaching <span>→</span></div>
+    </a>
+
+    <!-- MechanismDx -->
+    <a href="pathway.html" class="pillar-card pc-mech">
+      <div class="pc-header">
+        <span class="pc-icon">🧬</span>
+        <div class="pc-pill">Pathophysiology</div>
+        <div class="pc-title">MechanismDx</div>
+        <p class="pc-desc">Follow the mechanism chain from molecular pathology to clinical presentation. Understand the <em>why</em> behind every diagnosis, not just the what.</p>
+      </div>
+      <ul class="pc-features">
+        <li>560 topics across 93 systems</li>
+        <li>AI tutor at every mechanism node</li>
+        <li>36 deep-dive specialty modules</li>
+        <li>Spaced repetition + mastery tracking</li>
+      </ul>
+      <div class="pc-cta">Explore Mechanisms <span>→</span></div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="sec-eyebrow" style="text-align:center">From Learners</div>
+    <div class="sec-title" style="text-align:center;font-size:clamp(20px,2.5vw,28px);margin-bottom:0">What students say</div>
+    <div class="tgrid">
+      <div class="tcard">
+        <div class="tquote">CoachDx doesn't let you off the hook. It asked me <em>why</em> I ordered a d-dimer before I'd even calculated the Wells score.</div>
+        <div class="tattrib">M3 Medical Student · Internal Medicine clerkship</div>
+      </div>
+      <div class="tcard">
+        <div class="tquote">The EMR feels like what we actually use on rotation. Not a textbook with multiple choice bolted on.</div>
+        <div class="tattrib">PA Student · Year 2</div>
+      </div>
+      <div class="tcard">
+        <div class="tquote">MechanismDx finally made the connection between the biochemistry I memorized in M1 and the cases I'm seeing in the hospital.</div>
+        <div class="tattrib">M3 Medical Student · Cardiology rotation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW THEY FIT TOGETHER ── -->
+<section class="arc-section">
+  <div class="sec-eyebrow">The Learning Arc</div>
+  <div class="sec-title">Three pillars, one complete approach</div>
+  <p style="font-size:14px;color:var(--dim);margin-top:6px;margin-bottom:28px">Use them independently or in sequence — the pillars reinforce each other.</p>
+  <div class="arc-flow">
+    <div class="arc-node">
+      <div class="arc-icon-wrap" style="background:var(--teal-bg);border-color:var(--teal-bd)">🧬</div>
+      <div class="arc-pillar-tag" style="background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-bd)">MechanismDx</div>
+      <div class="arc-title">Understand the mechanism</div>
+      <div class="arc-sub">Why does the pathology cause these symptoms?</div>
+    </div>
+    <div class="arc-node">
+      <div class="arc-icon-wrap" style="background:var(--red-bg);border-color:var(--red-bd)">🩺</div>
+      <div class="arc-pillar-tag" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)">CaseDx</div>
+      <div class="arc-title">Apply it to a patient</div>
+      <div class="arc-sub">Work the case, build DDx, document, hand off</div>
+    </div>
+    <div class="arc-node">
+      <div class="arc-icon-wrap" style="background:var(--purple-bg);border-color:var(--purple-bd)">🧑‍⚕️</div>
+      <div class="arc-pillar-tag" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)">CoachDx</div>
+      <div class="arc-title">Defend your reasoning</div>
+      <div class="arc-sub">AI attending challenges every assumption</div>
+    </div>
+    <div class="arc-node">
+      <div class="arc-icon-wrap" style="background:#F0FDF4;border-color:#BBF7D0">📈</div>
+      <div class="arc-pillar-tag" style="background:#F0FDF4;color:#059669;border:1px solid #BBF7D0">Progress</div>
+      <div class="arc-title">Build lasting expertise</div>
+      <div class="arc-sub">Tracked across sessions, spaced over time</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LEARNER PATHS ── -->
+<section class="paths-section">
+  <div class="paths-inner">
+    <div class="sec-eyebrow" style="text-align:center">Every Learner Has a Path</div>
+    <div class="sec-title" style="text-align:center;font-size:clamp(20px,2.5vw,28px)">Built for the full health professions continuum</div>
+    <div class="paths-grid">
+      <div class="path-card">
+        <span class="path-icon">📚</span>
+        <div class="path-who">M1 – M2</div>
+        <div class="path-title">Foundations</div>
+        <div class="path-desc">Start with MechanismDx — build the mechanistic vocabulary you'll need when you hit the wards.</div>
+      </div>
+      <div class="path-card">
+        <span class="path-icon">🩺</span>
+        <div class="path-who">M3 – M4</div>
+        <div class="path-title">Clerkships</div>
+        <div class="path-desc">CaseDx for case-based prep, CoachDx for rounds coaching, Night Float for overnight readiness.</div>
+      </div>
+      <div class="path-card">
+        <span class="path-icon">🏥</span>
+        <div class="path-who">Residents & Fellows</div>
+        <div class="path-title">Residency Prep</div>
+        <div class="path-desc">Night Float, Morning Rounds, I-PASS handoffs, ACGME milestone tracking — EPA-mapped throughout.</div>
+      </div>
+      <div class="path-card">
+        <span class="path-icon">⚕️</span>
+        <div class="path-who">PA & NP Students</div>
+        <div class="path-title">Advanced Practice</div>
+        <div class="path-desc">All 145 cases and all three pillars mapped for advanced practice scope. CoachDx adapts to your curriculum.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+  <div class="sec-eyebrow">Questions</div>
+  <div class="sec-title" style="margin-bottom:24px">Frequently asked</div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Is ReasonDx free? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">The free tier gives you full access to CaseDx cases, the Virtual EMR, and MechanismDx topics. CoachDx AI coaching, Night Float, spaced repetition, and advanced analytics unlock with Pro ($14.99/month or $99/year).</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Who built ReasonDx? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">ReasonDx was built by <strong>Lauren Fine, MD, FAAAAI</strong>, a board-certified allergist/immunologist and Assistant Dean of Clinical Skills Education at Nova Southeastern University's Dr. Kiran C. Patel College of Allopathic Medicine. Dr. Fine is also faculty at the Harvard Macy Institute and a recognized innovator in clinical reasoning curriculum design.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">How is CoachDx different from just using ChatGPT? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">ChatGPT gives you answers. CoachDx asks you questions. It's specifically designed for clinical reasoning education using Socratic questioning — it probes your thinking, pushes back on vague answers, and builds sessions around your documented gaps. It won't tell you the diagnosis; it will ask you to defend every step until your reasoning is airtight.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Is there evidence this approach works? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">ReasonDx is built on three approaches with robust empirical support in health professions education: deliberate practice (Ericsson), spaced repetition (Ebbinghaus), and Socratic coaching. These principles underpin the design of every case, coaching session, and mechanism module on the platform.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Can my institution use ReasonDx? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">Yes. ReasonDx offers institutional licensing with faculty dashboards, cohort analytics, LMS integration (Canvas/Blackboard), and ACGME milestone tracking. <a href="institutional.html" style="color:#2874A6">Learn more about institutional access</a> or email <a href="mailto:hello@reasondx.com" style="color:#2874A6">hello@reasondx.com</a>.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Does it work on mobile? <span class="faq-toggle">+</span></div>
+    <div class="faq-a">MechanismDx, CoachDx, and most CaseDx cases work well on mobile. For the full ED Track Board and split-screen EMR experience, a laptop or tablet gives you the most screen real estate.</div>
+  </div>
+</section>
+
+<!-- ── INSTITUTIONAL ── -->
+<section class="institutional">
+  <div class="institutional-inner">
+    <div class="inst-title">Using ReasonDx in your program?</div>
+    <p class="inst-sub">Faculty dashboards, cohort analytics, Canvas/Blackboard integration, and ACGME milestone mapping. Designed for medical schools, PA programs, NP programs, and residencies.</p>
+    <a href="institutional.html" class="btn-primary" style="background:#fff;color:#1B3A5C">Request Institutional Demo →</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
 <footer class="footer">
- <div class="footer-grid">
- <div class="footer-brand"><div style="margin-bottom:8px"><img src="icons/logo-transparent.png" alt="ReasonDx" style="height:26px;width:auto"></div><p>AI-powered clinical reasoning education. Built by medical educators, for learners across the health professions.</p></div>
- <div class="footer-col"><h4>Platform</h4><a href="virtual-emr.html">Virtual EMR</a><a href="ed-3d.html">Emergency Dept</a><a href="night-float.html">Night Float</a><a href="virtual-emr.html?setting=inpatient">Inpatient</a><a href="simroomdx.html">Morning Rounds</a></div>
- <div class="footer-col"><h4>Tools</h4><a href="pathway.html">MechanismDx</a><a href="ecg/index.html">ECG Trainer</a><a href="consult-callback.html">Clinical Reasoning</a><a href="procedure-lab.html">Procedure Lab</a><a href="counseling-scenarios.html">Patient Counseling</a></div>
- <div class="footer-col"><h4>Company</h4><a href="auth/register.html">Sign Up</a><a href="auth/login.html">Log In</a><a href="auth/privacy.html">Privacy</a><a href="auth/terms.html">Terms</a><a href="mailto:hello@reasondx.com">Contact</a></div>
- </div>
- <div class="footer-bottom"><div class="footer-copy">© 2025–2026 ReasonDx · Clinical Reasoning Education Platform</div><div class="footer-social"><a href="https://www.linkedin.com/in/laurenmfine/">LinkedIn</a><a href="https://laurenmfine.substack.com/">Substack</a></div></div>
+  <p>&copy; 2025–2026 ReasonDx &nbsp;·&nbsp; <a href="mailto:hello@reasondx.com">hello@reasondx.com</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; <a href="institutional.html">Institutions</a> &nbsp;·&nbsp; <a href="auth/register.html">Sign Up Free</a></p>
 </footer>
 
-<script>
-var SEARCH_INDEX=[
- {name:'Chest Pain — STEMI',desc:'Crushing substernal pressure, diaphoresis',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=stemi-v1'},
- {name:'Appendicitis',desc:'RLQ pain, migration from periumbilical',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=appendicitis-v1'},
- {name:'Subarachnoid Hemorrhage',desc:'Thunderclap headache, worst of life',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=sah-v1'},
- {name:'Pulmonary Embolism',desc:'Pleuritic chest pain, calf swelling, OCP use',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=pe-v1'},
- {name:'DKA',desc:'Altered mental status, Kussmaul breathing',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=dka-v1'},
- {name:'Acute Stroke',desc:'Sudden left-sided weakness, afib',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=stroke-v1'},
- {name:'Anaphylaxis',desc:'Severe allergic reaction, airway compromise',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=anaphylaxis'},
- {name:'Cardiac Tamponade',desc:'Muffled heart sounds, JVD, hypotension',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=cardiac-tamponade'},
- {name:'Night Float Simulator',desc:'Overnight cross-cover, nurse pages, handoffs',cat:'Simulation',color:'#7C3AED',url:'night-float.html'},
- {name:'SimRoomDx — Morning Rounds',desc:'Present to the attending, defend your reasoning',cat:'Simulation',color:'#059669',url:'simroomdx.html'},
- {name:'ED Track Board',desc:'Live patient board with real-time arrivals',cat:'Simulation',color:'#DC2626',url:'ed-3d.html'},
- {name:'CoachDx',desc:'AI Socratic coaching and reasoning debrief',cat:'AI',color:'#EC4899',url:'virtual-emr.html?setting=ed'},
- {name:'MechanismDx',desc:'560 pathophysiology topics with AI tutor',cat:'Learning',color:'#2874A6',url:'pathway.html'},
- {name:'ECG Trainer',desc:'12-lead ECG interpretation practice',cat:'Tool',color:'#6366F1',url:'ecg/index.html'},
- {name:'Clinical Calculators',desc:'GCS, Wells, CURB-65, CHADS-VASc, etc.',cat:'Tool',color:'#6366F1',url:'virtual-emr.html?setting=ed'},
- {name:'SBAR Trainer',desc:'Structured communication practice',cat:'Skills',color:'#D97706',url:'consult-callback.html'},
- {name:'Platform Hub',desc:'Choose your setting, pick your training tool',cat:'Navigation',color:'#2874A6',url:'virtual-emr.html'},
-];
-function handleSearch(val){
- var res=document.getElementById('sr');val=(val||'').trim().toLowerCase();
- if(!val||val.length<2){res.classList.remove('active');return}
- var m=SEARCH_INDEX.filter(function(i){return i.name.toLowerCase().indexOf(val)>=0||i.desc.toLowerCase().indexOf(val)>=0||i.cat.toLowerCase().indexOf(val)>=0}).slice(0,8);
- if(!m.length){res.innerHTML='<div style="padding:16px;font-size:13px;color:#94A3B8">No results. Try a different term.</div>';res.classList.add('active');return}
- res.innerHTML=m.map(function(i){return '<a class="sr-item" href="'+i.url+'"><div class="sr-dot" style="background:'+i.color+'"></div><div><div class="sr-name">'+i.name+'</div><div class="sr-desc">'+i.desc+'</div></div><div class="sr-category">'+i.cat+'</div></a>'}).join('');
- res.classList.add('active');
-}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('sr').classList.remove('active')});
-document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
-window.addEventListener('scroll',function(){document.querySelector('.nav').style.background=window.scrollY>50?'rgba(255,255,255,.97)':'rgba(255,255,255,.92)'});
-</script>
-<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
-<script src="rdx-demo-tour.js"></script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
-<script src="js/dx-feedback.js"></script>
-<script src="js/dx-user-bar.js"></script>
-<script src="js/rdx-help-widget.js"></script>
-<script src="js/rdx-onboarding.js"></script>
-<script src="emr-data/manifest.js"></script>
-<script src="js/rdx-stats.js"></script>
 <script src="js/rdx-nav.js"></script>
+<script>
+function toggleFaq(el){el.classList.toggle('open');}
+// Show sign-up nav if not logged in, log-out if logged in
+(function(){
+  var user = localStorage.getItem('reasondx-user');
+  // Homepage doesn't use the authenticated nav — rdx-nav.js is still injected
+  // but for the homepage we override the logout to be a sign-in button
+  document.addEventListener('DOMContentLoaded', function(){
+    var logoutBtn = document.getElementById('rdx-logout-btn');
+    if(logoutBtn && !user){
+      logoutBtn.textContent = 'Sign In';
+      logoutBtn.onclick = function(){ window.location.href = 'auth/register.html'; };
+    }
+  });
+})();
+</script>
 </body>
 </html>

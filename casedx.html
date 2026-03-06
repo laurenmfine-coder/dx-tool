@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CaseDx — Clinical Case Library | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="CaseDx: 145 clinical cases across 23 specialties. Work full patient encounters in the Virtual EMR, build differentials, and finish with a note and SBAR handoff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F8FAFC;--card:#fff;--bd:#E2E8F0;--bdh:#CBD5E1;
+  --txt:#1E293B;--dim:#64748B;--dim2:#94A3B8;
+  --red:#C0392B;--red-bg:rgba(192,57,43,.06);--red-bd:rgba(192,57,43,.2);
+  --blue:#2874A6;--blue-bg:rgba(40,116,166,.07);--blue-bd:rgba(40,116,166,.2);
+  --f:"IBM Plex Sans",-apple-system,sans-serif;
+}
+body{background:var(--bg);color:var(--txt);font-family:var(--f);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#1B3A5C,#2874A6);color:#fff;padding:40px 24px 36px;text-align:center}
+.hdr-inner{max-width:720px;margin:0 auto}
+.pillar-pill{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:5px 16px;margin-bottom:14px;color:rgba(255,255,255,.9)}
+.hdr h1{font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:8px}
+.hdr p{font-size:clamp(13px,1.6vw,16px);opacity:.85;line-height:1.6;max-width:500px;margin:0 auto 22px}
+.hdr-stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
+.hs{text-align:center}.hs-n{font-size:22px;font-weight:800}.hs-l{font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+/* TODAY HERO */
+.today-wrap{max-width:1080px;margin:0 auto;padding:28px 20px 0}
+.section-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim2);margin-bottom:10px}
+.today-card{background:var(--card);border:1px solid var(--red-bd);border-radius:16px;padding:22px 26px;display:flex;align-items:center;gap:22px;box-shadow:0 4px 16px rgba(192,57,43,.07);cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.today-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),#E74C3C)}
+.today-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(192,57,43,.14)}
+.today-icon{width:54px;height:54px;background:var(--red-bg);border:1px solid var(--red-bd);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.today-meta{flex:1;min-width:0}
+.today-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--red);margin-bottom:3px}
+.today-title{font-size:19px;font-weight:700;line-height:1.2;margin-bottom:3px}
+.today-sub{font-size:13px;color:var(--dim);line-height:1.5}
+.today-chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.tchip{font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px;background:#F1F5F9;color:var(--dim)}
+.tchip.red{background:var(--red-bg);color:var(--red)}
+.today-cta{background:var(--red);color:#fff;font-size:14px;font-weight:700;padding:11px 22px;border-radius:10px;white-space:nowrap;flex-shrink:0;border:none;cursor:pointer;font-family:var(--f);transition:background .15s}
+.today-cta:hover{background:#9B2335}
+.resume-bar{display:none;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:12px;padding:11px 18px;margin-top:10px;align-items:center;gap:10px}
+.resume-bar.show{display:flex}
+.resume-bar span{font-size:13px;color:var(--txt);flex:1}.resume-bar strong{color:var(--blue)}
+.resume-btn{background:var(--blue);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-family:var(--f);white-space:nowrap}
+/* FILTERS */
+.filters-wrap{max-width:1080px;margin:0 auto;padding:24px 20px 0}
+.frow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.flabel{font-size:11px;font-weight:700;color:var(--dim2);text-transform:uppercase;letter-spacing:.07em;flex-shrink:0;min-width:56px}
+.fchips{display:flex;gap:5px;flex-wrap:wrap;flex:1}
+.fc{font-size:12px;font-weight:600;padding:5px 13px;border-radius:8px;border:1px solid var(--bd);background:var(--card);color:var(--dim);cursor:pointer;transition:all .15s;white-space:nowrap;font-family:var(--f)}
+.fc:hover{border-color:var(--blue);color:var(--blue)}
+.fc.on{background:var(--red);border-color:var(--red);color:#fff}
+.search-wrap{position:relative;flex:1;min-width:180px;max-width:360px;margin-left:auto}
+.search-wrap span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--dim2);font-size:13px;pointer-events:none}
+.search-input{width:100%;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 12px 8px 32px;font-size:13px;font-family:var(--f);color:var(--txt);outline:none;transition:border .15s}
+.search-input:focus{border-color:var(--blue)}
+.search-input::placeholder{color:var(--dim2)}
+.fstats{font-size:12px;color:var(--dim2);margin-left:auto}
+/* CASE GRID */
+.cases-wrap{max-width:1080px;margin:0 auto;padding:14px 20px 48px}
+.pgroup{margin-bottom:24px}
+.phdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.pname{font-size:15px;font-weight:700}
+.pcnt{font-size:11px;font-weight:600;color:var(--dim2);background:#F1F5F9;padding:2px 8px;border-radius:6px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:9px}
+.ccard{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:15px 17px;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;gap:5px}
+.ccard:hover{border-color:var(--red-bd);box-shadow:0 4px 14px rgba(0,0,0,.07);transform:translateY(-1px)}
+.ccard:hover .cc-title{color:var(--red)}
+.cc-spec{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim2)}
+.cc-title{font-size:14px;font-weight:700;line-height:1.3;transition:color .15s}
+.cc-foot{display:flex;align-items:center;gap:5px;margin-top:3px}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.a1{background:#DC2626}.a2{background:#D97706}.a3{background:#059669}.a4{background:#6366F1}
+.cc-alabel{font-size:10px;font-weight:600;color:var(--dim2)}
+.cc-arr{margin-left:auto;font-size:13px;color:var(--dim2);opacity:0;transition:opacity .15s}
+.ccard:hover .cc-arr{opacity:1}
+.no-results{text-align:center;padding:60px 20px;color:var(--dim)}
+.no-results span{font-size:40px;display:block;margin-bottom:10px}
+/* ARC */
+.arc-wrap{max-width:1080px;margin:0 auto;padding:40px 20px}
+.sec-title{font-size:clamp(20px,2.5vw,26px);font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.sec-sub{font-size:14px;color:var(--dim);margin-bottom:22px}
+.arc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.arc-step{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px 14px;text-align:center;position:relative}
+.arc-step:not(:last-child)::after{content:"→";position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--dim2);font-weight:700;z-index:1}
+.arc-icon{font-size:22px;display:block;margin-bottom:7px}
+.arc-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.arc-sub{font-size:11px;color:var(--dim);line-height:1.5}
+/* IMMERSIVE */
+.immersive{background:linear-gradient(180deg,var(--bg),#EFF6FF);border-top:1px solid var(--bd);padding:44px 20px}
+.immersive-inner{max-width:1080px;margin:0 auto}
+.epill{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-bd);padding:3px 11px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.mcard{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:22px 18px;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden}
+.mcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
+.mcard:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:var(--bdh)}
+.mcard:hover::before{opacity:1}
+.mc-ed::before{background:#DC2626}.mc-nf::before{background:#7C3AED}.mc-mr::before{background:#0891B2}.mc-ad::before{background:#059669}
+.micon{font-size:26px;margin-bottom:10px;display:block}
+.mbadge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim2);margin-bottom:3px}
+.mtitle{font-size:15px;font-weight:700;margin-bottom:3px}
+.mdesc{font-size:12px;color:var(--dim);line-height:1.6}
+.adv{position:absolute;top:11px;right:11px;font-size:9px;font-weight:700;text-transform:uppercase;background:#F1F5F9;color:var(--dim2);padding:2px 7px;border-radius:4px}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .today-card{flex-direction:column;align-items:flex-start}.today-cta{width:100%;text-align:center}
+  .arc-grid{grid-template-columns:1fr 1fr}.arc-step:not(:last-child)::after{display:none}
+  .frow{flex-direction:column;align-items:flex-start}.search-wrap{max-width:100%;width:100%;margin-left:0}
+}
+@media(max-width:480px){.arc-grid{grid-template-columns:1fr}.mgrid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<script src="js/rdx-supabase.js"></script>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="pillar-pill">🩺 CaseDx</div>
+    <h1>Clinical Case Library</h1>
+    <p>Work patient encounters in the Virtual EMR. Build your differential, order tests, defend your reasoning — then document and hand off.</p>
+    <div class="hdr-stats">
+      <div class="hs"><div class="hs-n">145</div><div class="hs-l">Clinical Cases</div></div>
+      <div class="hs"><div class="hs-n">23</div><div class="hs-l">Specialties</div></div>
+      <div class="hs"><div class="hs-n">6</div><div class="hs-l">Settings</div></div>
+      <div class="hs"><div class="hs-n">4</div><div class="hs-l">Steps per Case</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="today-wrap">
+  <div class="section-eyebrow">Today's Featured Case</div>
+  <div class="today-card" id="todayCard" onclick="startToday()">
+    <div class="today-icon" id="todayIcon">🫀</div>
+    <div class="today-meta">
+      <div class="today-tag" id="todayTag">Loading…</div>
+      <div class="today-title" id="todayTitle">Featured Case</div>
+      <div class="today-sub" id="todaySub">A clinical case selected for today's practice</div>
+      <div class="today-chips" id="todayChips"></div>
+    </div>
+    <button class="today-cta">Start Case →</button>
+  </div>
+  <div class="resume-bar" id="resumeBar">
+    <span>Resume: <strong id="resumeName">—</strong></span>
+    <button class="resume-btn" id="resumeBtn">Resume →</button>
+  </div>
+</div>
+
+<div class="filters-wrap">
+  <div class="frow">
+    <span class="flabel">Setting</span>
+    <div class="fchips">
+      <button class="fc on" onclick="setF('setting','all',this)">All</button>
+      <button class="fc" onclick="setF('setting','ed',this)">🚨 ED</button>
+      <button class="fc" onclick="setF('setting','inpatient',this)">🏥 Inpatient</button>
+      <button class="fc" onclick="setF('setting','clinic',this)">🩺 Clinic</button>
+    </div>
+    <div class="search-wrap">
+      <span>🔍</span>
+      <input class="search-input" id="caseSearch" type="text" placeholder="Search diagnoses, presentations…" oninput="render()" autocomplete="off">
+    </div>
+  </div>
+  <div class="frow">
+    <span class="flabel">Specialty</span>
+    <div class="fchips">
+      <button class="fc on" onclick="setF('specialty','all',this)">All</button>
+      <button class="fc" onclick="setF('specialty','cardiology',this)">Cardiology</button>
+      <button class="fc" onclick="setF('specialty','pulmonary',this)">Pulmonary</button>
+      <button class="fc" onclick="setF('specialty','infectious',this)">Infectious Disease</button>
+      <button class="fc" onclick="setF('specialty','neurology',this)">Neurology</button>
+      <button class="fc" onclick="setF('specialty','gi',this)">GI</button>
+      <button class="fc" onclick="setF('specialty','renal',this)">Renal</button>
+      <button class="fc" onclick="setF('specialty','endocrine',this)">Endocrine</button>
+      <button class="fc" onclick="setF('specialty','allergy',this)">Allergy/Immunology</button>
+      <button class="fc" onclick="setF('specialty','hematology',this)">Hematology</button>
+      <button class="fc" onclick="setF('specialty','surgery',this)">Surgery</button>
+    </div>
+  </div>
+  <div class="frow">
+    <span class="flabel">Acuity</span>
+    <div class="fchips">
+      <button class="fc on" onclick="setF('acuity','all',this)">All</button>
+      <button class="fc" onclick="setF('acuity','1',this)"><span class="adot a1" style="display:inline-block;margin-right:4px;vertical-align:middle"></span>Critical</button>
+      <button class="fc" onclick="setF('acuity','2',this)"><span class="adot a2" style="display:inline-block;margin-right:4px;vertical-align:middle"></span>Urgent</button>
+      <button class="fc" onclick="setF('acuity','3',this)"><span class="adot a3" style="display:inline-block;margin-right:4px;vertical-align:middle"></span>Stable</button>
+    </div>
+    <span class="fstats" id="fstats"></span>
+  </div>
+</div>
+
+<div class="cases-wrap" id="casesWrap"></div>
+
+<div class="arc-wrap">
+  <div class="epill">Every Case</div>
+  <div class="sec-title">The complete clinical encounter</div>
+  <div class="sec-sub">CaseDx cases end with documentation and handoff — not just a diagnosis.</div>
+  <div class="arc-grid">
+    <div class="arc-step"><span class="arc-icon">📋</span><div class="arc-title">Work the Case</div><div class="arc-sub">Review chart, build DDx, order workup, interpret results</div></div>
+    <div class="arc-step"><span class="arc-icon">🔍</span><div class="arc-title">Defend Reasoning</div><div class="arc-sub">Scored on differential and clinical decision-making</div></div>
+    <div class="arc-step"><span class="arc-icon">📝</span><div class="arc-title">Write the Note</div><div class="arc-sub">HPI, assessment and plan — with feedback</div></div>
+    <div class="arc-step"><span class="arc-icon">🤝</span><div class="arc-title">SBAR Handoff</div><div class="arc-sub">Structured communication scored for EPA 10 readiness</div></div>
+  </div>
+</div>
+
+<div class="immersive">
+  <div class="immersive-inner">
+    <div class="epill">Advanced Simulation</div>
+    <div class="sec-title" style="margin-bottom:4px">Immersive clinical environments</div>
+    <div class="sec-sub">Ready for the full experience? Step inside the virtual hospital.</div>
+    <div class="mgrid">
+      <a href="ed-3d.html" class="mcard mc-ed"><span class="adv">Advanced</span><span class="micon">⚡</span><div class="mbadge">Emergency Medicine</div><div class="mtitle">ED Track Board</div><div class="mdesc">8-room virtual ED with real-time arrivals and full EMR access</div></a>
+      <a href="night-float.html" class="mcard mc-nf"><span class="adv">Advanced</span><span class="micon">🌙</span><div class="mbadge">Residency Prep</div><div class="mtitle">Night Float</div><div class="mdesc">Overnight cross-cover with nurse pages and I-PASS handoffs at dawn</div></a>
+      <a href="simroomdx.html" class="mcard mc-mr"><span class="adv">Advanced</span><span class="micon">🎤</span><div class="mbadge">Communication</div><div class="mtitle">Morning Rounds</div><div class="mdesc">Present your patient to the AI attending — get challenged on your plan</div></a>
+      <a href="admissions.html" class="mcard mc-ad"><span class="adv">Advanced</span><span class="micon">📝</span><div class="mbadge">Inpatient</div><div class="mtitle">Admissions</div><div class="mdesc">ED-to-floor handoffs, admission orders, H&amp;P documentation</div></a>
+    </div>
+  </div>
+</div>
+
+<script src="js/rdx-nav.js"></script>
+<script>
+var CASES=RY = [
+  {presentation:"Chest Pain",specialty:"Cardiology",cases:[{"id":"stemi-v1","diagnosis":"ST-Elevation MI","category":"cardiology","acuity":1},{"id":"nstemi-v1","diagnosis":"NSTEMI","category":"cardiology","acuity":2},{"id":"acute-coronary-syndrome","diagnosis":"Acute Coronary Syndrome","category":"cardiology","acuity":2},{"id":"pe-v1","diagnosis":"Pulmonary Embolism","category":"pulmonary","acuity":1},{"id":"pericarditis-v1","diagnosis":"Pericarditis","category":"cardiology","acuity":3},{"id":"aortic-dissection-back","diagnosis":"Aortic Dissection","category":"cardiology","acuity":1},{"id":"pneumothorax","diagnosis":"Pneumothorax","category":"pulmonary","acuity":2}]},
+  {presentation:"Dyspnea",specialty:"Cardiology",cases:[{"id":"chf-exacerbation","diagnosis":"CHF Exacerbation","category":"cardiology","acuity":2},{"id":"copd-v1","diagnosis":"COPD Exacerbation","category":"pulmonary","acuity":2},{"id":"asthma-exacerbation","diagnosis":"Asthma Exacerbation","category":"pulmonary","acuity":2},{"id":"pneumonia","diagnosis":"Community-Acquired Pneumonia","category":"infectious","acuity":3},{"id":"massive-pe-with-rv-failure","diagnosis":"Massive PE with RV Failure","category":"pulmonary","acuity":1},{"id":"vocal-cord-dysfunction","diagnosis":"Vocal Cord Dysfunction (PVFM)","category":"pulmonary","acuity":3}]},
+  {presentation:"Altered Mental Status",specialty:"Nephrology",cases:[{"id":"dka-v1","diagnosis":"Diabetic Ketoacidosis","category":"endocrine","acuity":1},{"id":"stroke-v1","diagnosis":"Acute Ischemic Stroke","category":"neurology","acuity":1},{"id":"meningitis-v1","diagnosis":"Bacterial Meningitis","category":"infectious","acuity":1},{"id":"status-epilepticus","diagnosis":"Status Epilepticus","category":"neurology","acuity":1},{"id":"severe-hyponatremia","diagnosis":"Severe Hyponatremia","category":"renal","acuity":2}]},
+  {presentation:"Abdominal Pain",specialty:"Surgery",cases:[{"id":"appendicitis-v1","diagnosis":"Acute Appendicitis","category":"surgery","acuity":2},{"id":"acute-pancreatitis","diagnosis":"Acute Pancreatitis","category":"gi","acuity":2},{"id":"acute-cholecystitis","diagnosis":"Acute Cholecystitis","category":"gi","acuity":3},{"id":"sbo-strangulation","diagnosis":"SBO with Strangulation","category":"surgery","acuity":1},{"id":"mesenteric-ischemia","diagnosis":"Mesenteric Ischemia","category":"surgery","acuity":1},{"id":"perforated-peptic-ulcer","diagnosis":"Perforated Peptic Ulcer","category":"surgery","acuity":1}]},
+  {presentation:"Allergic/Immunologic",specialty:"Allergy & Immunology",cases:[{"id":"anaphylaxis","diagnosis":"Anaphylaxis","category":"allergy","acuity":1},{"id":"severe-allergic-reaction","diagnosis":"Severe Allergic Reaction","category":"allergy","acuity":2},{"id":"ace-angioedema","diagnosis":"ACE Inhibitor Angioedema","category":"allergy","acuity":2},{"id":"hereditary-angioedema","diagnosis":"Hereditary Angioedema","category":"allergy","acuity":2},{"id":"allergic-angioedema","diagnosis":"Allergic Angioedema","category":"allergy","acuity":2},{"id":"idiopathic-angioedema","diagnosis":"Idiopathic Angioedema","category":"allergy","acuity":3},{"id":"acquired-c1esterase-inhibitor-deficiency","diagnosis":"Acquired C1-INH Deficiency","category":"allergy","acuity":2},{"id":"abpa-aspergillus","diagnosis":"ABPA (Allergic Bronchopulmonary Aspergillosis)","category":"allergy","acuity":3},{"id":"severe-asthma-biologics","diagnosis":"Severe Eosinophilic Asthma \u2014 Biologic Selection","category":"allergy","acuity":3},{"id":"occupational-asthma-isocyanate","diagnosis":"Isocyanate Occupational Asthma","category":"allergy","acuity":2},{"id":"inducible-urticaria","diagnosis":"Cold-Induced Urticaria","category":"allergy","acuity":3},{"id":"crswNP-biologics","diagnosis":"Severe CRSwNP + AERD \u2014 Dupilumab","category":"allergy","acuity":3},{"id":"allergic-rhinitis-immunotherapy","diagnosis":"Allergic Rhinitis \u2014 Allergen Immunotherapy (SCIT)","category":"allergy","acuity":4},{"id":"hypersensitivity-pneumonitis","diagnosis":"Chronic Fibrotic Hypersensitivity Pneumonitis","category":"allergy","acuity":3},{"id":"hypereosinophilic-syndrome","diagnosis":"Hypereosinophilic Syndrome \u2014 FIP1L1-PDGFRA Myeloproliferative","category":"allergy","acuity":2}]},
+  {presentation:"Skin/Drug Reactions",specialty:"Allergy & Immunology",cases:[{"id":"sjs-ten","diagnosis":"SJS/TEN","category":"allergy","acuity":1},{"id":"sjsten-overlap","diagnosis":"SJS/TEN Overlap","category":"allergy","acuity":1},{"id":"dress-syndrome","diagnosis":"DRESS Syndrome","category":"allergy","acuity":2},{"id":"erythema-multiforme-major","diagnosis":"Erythema Multiforme Major","category":"allergy","acuity":3}]},
+  {presentation:"Headache",specialty:"Neurology",cases:[{"id":"sah-v1","diagnosis":"Subarachnoid Hemorrhage","category":"neurology","acuity":1},{"id":"migraine","diagnosis":"Migraine","category":"neurology","acuity":4}]},
+  {presentation:"Fever",specialty:"Infectious Disease",cases:[{"id":"sepsisseptic-shock","diagnosis":"Sepsis/Septic Shock","category":"infectious","acuity":1},{"id":"neutropenic-fever","diagnosis":"Neutropenic Fever","category":"hematology","acuity":1},{"id":"infective-endocarditis","diagnosis":"Infective Endocarditis","category":"infectious","acuity":2},{"id":"pyelonephritis-urosepsis","diagnosis":"Pyelonephritis/Urosepsis","category":"infectious","acuity":2}]},
+  {presentation:"Syncope",specialty:"Cardiology",cases:[{"id":"cardiac-syncope","diagnosis":"Cardiac Syncope","category":"cardiology","acuity":2},{"id":"vasovagal-syncope","diagnosis":"Vasovagal Syncope","category":"cardiology","acuity":4},{"id":"pulmonary-embolism-syncope","diagnosis":"PE with Syncope","category":"pulmonary","acuity":1}]},
+  {presentation:"Toxicology",specialty:"Toxicology",cases:[{"id":"apap-overdose","diagnosis":"Acetaminophen Overdose","category":"toxicology","acuity":2},{"id":"serotonin-syndrome","diagnosis":"Serotonin Syndrome","category":"toxicology","acuity":2},{"id":"salicylate-toxicity","diagnosis":"Salicylate Toxicity","category":"toxicology","acuity":1}]},
+  {presentation:"Hematologic",specialty:"Hematology",cases:[{"id":"ttp","diagnosis":"TTP","category":"hematology","acuity":1},{"id":"sle-flare-with-cytopenias","diagnosis":"SLE Flare with Cytopenias","category":"hematology","acuity":2},{"id":"autoimmune-hemolytic-anemia","diagnosis":"Autoimmune Hemolytic Anemia","category":"hematology","acuity":2}]},
+  {presentation:"Renal/Electrolyte",specialty:"Nephrology",cases:[{"id":"hyperkalemia-cardiac","diagnosis":"Hyperkalemia with Cardiac Changes","category":"renal","acuity":1},{"id":"renal-colic","diagnosis":"Renal Colic","category":"renal","acuity":3}]},
+  {presentation:"Endocrine",specialty:"Endocrinology",cases:[{"id":"thyroid-storm","diagnosis":"Thyroid Storm","category":"endocrine","acuity":1},{"id":"adrenal-crisis","diagnosis":"Adrenal Crisis","category":"endocrine","acuity":1},{"id":"myxedema-coma","diagnosis":"Myxedema Coma","category":"endocrine","acuity":1}]},
+  {presentation:"Urticaria",specialty:"Allergy & Immunology",cases:[{"id":"acute-urticaria","diagnosis":"Acute Urticaria","category":"allergy","acuity":3},{"id":"chronic-spontaneous-urticaria","diagnosis":"Acute Urticaria","category":"allergy","acuity":4},{"id":"urticarial-vasculitis","diagnosis":"Acute Urticaria","category":"allergy","acuity":3}]},
+  {presentation:"Food Allergy",specialty:"Allergy & Immunology",cases:[{"id":"peanut-allergy-anaphylaxis","diagnosis":"Acute Urticaria","category":"allergy","acuity":1},{"id":"food-allergy-oit-reaction","diagnosis":"Acute Urticaria","category":"allergy","acuity":3},{"id":"milk-allergy-infant","diagnosis":"Acute Urticaria","category":"allergy","acuity":3}]},
+  {presentation:"FPIES",specialty:"Allergy & Immunology",cases:[{"id":"fpies-acute","diagnosis":"Acute Urticaria","category":"allergy","acuity":2},{"id":"fpies-chronic","diagnosis":"Acute Urticaria","category":"allergy","acuity":3}]},
+  {presentation:"EoE",specialty:"Allergy & Immunology",cases:[{"id":"eoe-adult","diagnosis":"Acute Urticaria","category":"allergy","acuity":3},{"id":"eoe-pediatric","diagnosis":"Acute Urticaria","category":"allergy","acuity":4}]},
+  {presentation:"Atopic Dermatitis",specialty:"Allergy & Immunology",cases:[{"id":"atopic-dermatitis-severe","diagnosis":"Acute Urticaria","category":"allergy","acuity":4},{"id":"eczema-herpeticum","diagnosis":"Acute Urticaria","category":"allergy","acuity":2}]},
+  {presentation:"Allergic Rhinitis",specialty:"Allergy & Immunology",cases:[{"id":"allergic-rhinitis-uncontrolled","diagnosis":"Acute Urticaria","category":"allergy","acuity":4}]},
+  {presentation:"Insect Allergy",specialty:"Allergy & Immunology",cases:[{"id":"insect-sting-anaphylaxis","diagnosis":"Acute Urticaria","category":"allergy","acuity":1},{"id":"venom-immunotherapy-reaction","diagnosis":"Acute Urticaria","category":"allergy","acuity":2}]},
+  {presentation:"Allergic Conjunctivitis",specialty:"Allergy & Immunology",cases:[{"id":"allergic-conjunctivitis-severe","diagnosis":"Acute Urticaria","category":"allergy","acuity":3}]},
+  {presentation:"Drug Allergy",specialty:"Allergy & Immunology",cases:[{"id":"penicillin-allergy-delabeling","diagnosis":"Acute Urticaria","category":"allergy","acuity":4},{"id":"nsaid-hypersensitivity","diagnosis":"Acute Urticaria","category":"allergy","acuity":2},{"id":"drug-allergy-vancomycin-rms","diagnosis":"Acute Urticaria","category":"allergy","acuity":3}]},
+  {presentation:"Mast Cell Disease",specialty:"Allergy & Immunology",cases:[{"id":"mastocytosis","diagnosis":"Acute Urticaria","category":"allergy","acuity":2},{"id":"mcas-mast-cell","diagnosis":"Mast Cell Activation Syndrome (MCAS)","category":"allergy","acuity":3},{"id":"alpha-gal-syndrome","diagnosis":"Alpha-Gal Syndrome","category":"allergy","acuity":3}]},
+  {presentation:"Immunodeficiency",specialty:"Allergy & Immunology",cases:[{"id":"cvid-presentation","diagnosis":"Acute Urticaria","category":"allergy","acuity":4},{"id":"xla-brutons","diagnosis":"X-Linked Agammaglobulinemia (XLA)","category":"allergy","acuity":2},{"id":"scid-ada","diagnosis":"Severe Combined Immunodeficiency (ADA-SCID)","category":"allergy","acuity":1},{"id":"digeorge-22q11","diagnosis":"DiGeorge Syndrome (22q11.2 Deletion)","category":"allergy","acuity":2},{"id":"cgd-xlinked","diagnosis":"Chronic Granulomatous Disease (X-linked CGD)","category":"allergy","acuity":2}]},
+  {presentation:"Contact Dermatitis",specialty:"Allergy & Immunology",cases:[{"id":"contact-dermatitis-occupational","diagnosis":"Acute Urticaria","category":"allergy","acuity":4}]},
+  {presentation:"Allergy Variations",specialty:"Allergy & Immunology",cases:[{"id":"anaphylaxis-v2","diagnosis":"Anaphylaxis (Elderly + Beta-Blocker)","category":"allergy","acuity":1},{"id":"anaphylaxis-v3","diagnosis":"Anaphylaxis (Latex, Occupational)","category":"allergy","acuity":1},{"id":"anaphylaxis-v4","diagnosis":"Anaphylaxis (Adolescent, Psychosocial)","category":"allergy","acuity":2},{"id":"anaphylaxis-v5","diagnosis":"Anaphylaxis (Pediatric, Cultural/Language)","category":"allergy","acuity":1},{"id":"chronic-spontaneous-urticaria-v2","diagnosis":"CSU (Refractory + Autoimmune)","category":"allergy","acuity":3},{"id":"penicillin-allergy-delabeling-v2","diagnosis":"PCN Delabeling (Pregnancy + GBS)","category":"allergy","acuity":3},{"id":"atopic-dermatitis-severe-v2","diagnosis":"Severe AD (Pediatric, SDOH)","category":"allergy","acuity":3},{"id":"peanut-allergy-anaphylaxis-v2","diagnosis":"Food Allergy (Misattributed Trigger)","category":"allergy","acuity":2},{"id":"eoe-adult-v2","diagnosis":"EoE (Diagnostic Delay)","category":"allergy","acuity":3}]},
+  {presentation:"Allergy Variations \u2014 Batch 2-3",specialty:"Allergy & Immunology",cases:[{"id":"ace-angioedema-v2","diagnosis":"ACE Angioedema (AA Female, CHF, Late-Onset)","category":"allergy","acuity":2},{"id":"acquired-c1esterase-inhibitor-deficiency-v2","diagnosis":"Acquired C1-INH Deficiency (MGUS-Driven)","category":"allergy","acuity":2},{"id":"acute-urticaria-v2","diagnosis":"Acute Urticaria (Post-Viral, Unnecessary Testing)","category":"allergy","acuity":2},{"id":"allergic-angioedema-v2","diagnosis":"Allergic Angioedema (Obesity, Epi Dosing)","category":"allergy","acuity":2},{"id":"allergic-conjunctivitis-severe-v2","diagnosis":"Vernal Keratoconjunctivitis (Shield Ulcer)","category":"allergy","acuity":2},{"id":"allergic-rhinitis-uncontrolled-v2","diagnosis":"Allergic Rhinitis (Vet Tech, Occupational SCIT)","category":"allergy","acuity":2},{"id":"contact-dermatitis-occupational-v2","diagnosis":"ACD (Hairstylist, PPD, Career Threat)","category":"allergy","acuity":2},{"id":"cvid-presentation-v2","diagnosis":"CVID (Insurance Crisis, Diagnostic Delay)","category":"allergy","acuity":2},{"id":"dress-syndrome-v2","diagnosis":"DRESS (Allopurinol, HLA-B*58:01, Korean)","category":"allergy","acuity":2},{"id":"drug-allergy-vancomycin-rms-v2","diagnosis":"Vancomycin RMS (Elderly, False Allergy Cascade)","category":"allergy","acuity":2},{"id":"eczema-herpeticum-v2","diagnosis":"Eczema Herpeticum (Toddler, Cold Sore Exposure)","category":"allergy","acuity":2},{"id":"eoe-pediatric-v2","diagnosis":"EoE Pediatric (Picky Eater Misdiagnosis, 6yr Delay)","category":"allergy","acuity":2},{"id":"erythema-multiforme-major-v2","diagnosis":"EM Major (Recurrent HSV-Triggered)","category":"allergy","acuity":2},{"id":"food-allergy-oit-reaction-v2","diagnosis":"OIT Reaction (Swimmer, Exercise Window)","category":"allergy","acuity":2},{"id":"fpies-acute-v2","diagnosis":"FPIES Acute (School Exposure, EpiPen Failure)","category":"allergy","acuity":2},{"id":"fpies-chronic-v2","diagnosis":"FPIES Chronic (Infant FTT, Reflux Misdiagnosis)","category":"allergy","acuity":2},{"id":"hereditary-angioedema-v2","diagnosis":"HAE (College Student, OCP Trigger, Diagnostic Odyssey)","category":"allergy","acuity":2},{"id":"idiopathic-angioedema-v2","diagnosis":"Idiopathic Angioedema (Travel Anxiety, Omalizumab)","category":"allergy","acuity":2},{"id":"insect-sting-anaphylaxis-v2","diagnosis":"Venom Anaphylaxis (Uninsured Landscape Worker)","category":"allergy","acuity":2},{"id":"mastocytosis-v2","diagnosis":"MCAS (3yr Diagnostic Odyssey, Told Anxiety)","category":"allergy","acuity":2},{"id":"milk-allergy-infant-v2","diagnosis":"CMPA (Breastfed, Mother Misconception)","category":"allergy","acuity":2},{"id":"nsaid-hypersensitivity-v2","diagnosis":"AERD/Samter Triad (Chef with Anosmia)","category":"allergy","acuity":2},{"id":"severe-allergic-reaction-v2","diagnosis":"Contrast Reaction (Premedication Failure)","category":"allergy","acuity":2},{"id":"severe-allergic-reaction-v3","diagnosis":"Amoxicillin Delabeling (College Athlete)","category":"allergy","acuity":2},{"id":"sjs-ten-v2","diagnosis":"SJS/TEN (Lamotrigine, HLA-B*15:13)","category":"allergy","acuity":2},{"id":"sjsten-overlap-v2","diagnosis":"SJS/TEN Overlap (HIV + Bactrim)","category":"allergy","acuity":2},{"id":"urticarial-vasculitis-v2","diagnosis":"Urticarial Vasculitis (Hypocomplementemic)","category":"allergy","acuity":2},{"id":"venom-immunotherapy-reaction-v2","diagnosis":"VIT Reaction (ACE Inhibitor Amplification)","category":"allergy","acuity":2}]},
+  {presentation:"Trauma",specialty:"Trauma & Emergency",cases:[{"id":"tension-ptx","diagnosis":"Tension Pneumothorax","category":"trauma","acuity":1},{"id":"epidural-hematoma","diagnosis":"Epidural Hematoma","category":"trauma","acuity":1}]},
+  {presentation:"Cardiac Emergency",specialty:"Cardiology",cases:[{"id":"cardiac-tamponade","diagnosis":"Cardiac Tamponade","category":"cardiac","acuity":1},{"id":"complete-heart-block","diagnosis":"Complete Heart Block","category":"cardiac","acuity":2},{"id":"vt-syncope","diagnosis":"Ventricular Tachycardia with Syncope","category":"cardiology","acuity":2},{"id":"chf-v1","diagnosis":"Acute Decompensated Heart Failure","category":"cardiology","acuity":2}]},
+  {presentation:"Vascular Emergency",specialty:"Trauma & Emergency",cases:[{"id":"aaa-v1","diagnosis":"Ruptured Abdominal Aortic Aneurysm","category":"vascular","acuity":1},{"id":"acute-limb-ischemia","diagnosis":"Acute Limb Ischemia","category":"vascular","acuity":2}]},
+  {presentation:"GI Emergency",specialty:"Gastroenterology",cases:[{"id":"gi-bleed-syncope","diagnosis":"Upper GI Hemorrhage with Syncope","category":"gi","acuity":2},{"id":"severe-pancreatitis","diagnosis":"Acute Necrotizing Pancreatitis","category":"gi","acuity":2}]},
+  {presentation:"Obstetric Emergency",specialty:"OB/Gyn & Pediatrics",cases:[{"id":"ectopic-pregnancy","diagnosis":"Ruptured Ectopic Pregnancy","category":"obstetric","acuity":1},{"id":"eclampsia","diagnosis":"Eclampsia","category":"obstetric","acuity":1}]},
+  {presentation:"Pediatric Emergency",specialty:"OB/Gyn & Pediatrics",cases:[{"id":"epiglottitis","diagnosis":"Acute Epiglottitis","category":"pediatric","acuity":1},{"id":"intussusception","diagnosis":"Ileocolic Intussusception","category":"pediatric","acuity":2}]},
+  {presentation:"Neurologic Emergency",specialty:"Neurology",cases:[{"id":"new-seizure-mass","diagnosis":"New-Onset Seizure (Brain Mass)","category":"neurology","acuity":2},{"id":"cauda-equina","diagnosis":"Cauda Equina Syndrome","category":"neurology","acuity":2}]},
+  {presentation:"Psychiatric Emergency",specialty:"Psychiatry",cases:[{"id":"nms","diagnosis":"Neuroleptic Malignant Syndrome","category":"psychiatric","acuity":2}]},
+  {presentation:"Infectious Emergency",specialty:"Infectious Disease",cases:[{"id":"septic-shock-urosepsis","diagnosis":"Septic Shock (Urosepsis)","category":"infectious","acuity":1},{"id":"nec-fasciitis","diagnosis":"Necrotizing Fasciitis","category":"infectious","acuity":1},{"id":"fournier-gangrene","diagnosis":"Fournier Gangrene","category":"infectious","acuity":1}]},
+  {presentation:"Eye Emergency",specialty:"Ophthalmology & ENT",cases:[{"id":"angle-closure-glaucoma","diagnosis":"Acute Angle-Closure Glaucoma","category":"ophthalmology","acuity":2},{"id":"crao","diagnosis":"Central Retinal Artery Occlusion","category":"ophthalmology","acuity":2}]},
+  {presentation:"Urologic Emergency",specialty:"Urology & Renal",cases:[{"id":"testicular-torsion","diagnosis":"Testicular Torsion","category":"urology","acuity":2}]},
+  {presentation:"ENT / Airway Emergency",specialty:"Ophthalmology & ENT",cases:[{"id":"peritonsillar-abscess","diagnosis":"Peritonsillar Abscess","category":"ent","acuity":3},{"id":"ludwigs-angina","diagnosis":"Ludwig Angina","category":"ent","acuity":1}]},
+  {presentation:"Geriatric Emergency",specialty:"Trauma & Emergency",cases:[{"id":"hip-fracture-anticoag","diagnosis":"Hip Fracture on Anticoagulation","category":"geriatric","acuity":3},{"id":"subdural-hematoma","diagnosis":"Acute-on-Chronic Subdural Hematoma","category":"geriatric","acuity":2}]},
+  {presentation:"Environmental Emergency",specialty:"Toxicology",cases:[{"id":"heat-stroke","diagnosis":"Exertional Heat Stroke","category":"environmental","acuity":1},{"id":"severe-hypothermia","diagnosis":"Severe Accidental Hypothermia","category":"environmental","acuity":1}]},
+  {presentation:"Hematologic Emergency",specialty:"Hematology",cases:[{"id":"dic-massive-transfusion","diagnosis":"DIC with Massive Hemorrhage","category":"hematology","acuity":1}]},
+  {presentation:"Musculoskeletal Emergency",specialty:"Musculoskeletal",cases:[{"id":"septic-arthritis","diagnosis":"Septic Arthritis","category":"musculoskeletal","acuity":3},{"id":"compartment-syndrome","diagnosis":"Acute Compartment Syndrome","category":"musculoskeletal","acuity":2}]},
+];;
+var FEATURED=[
+  {id:"anaphylaxis",title:"Anaphylaxis",spec:"Allergy & Immunology",sub:"32-year-old with acute allergic reaction — airway compromise",icon:"⚡",acuity:1,mins:25},
+  {id:"stemi-v1",title:"ST-Elevation MI",spec:"Cardiology",sub:"58-year-old with crushing substernal chest pressure and diaphoresis",icon:"🫀",acuity:1,mins:30},
+  {id:"dka-v1",title:"Diabetic Ketoacidosis",spec:"Endocrinology",sub:"24-year-old with AMS, Kussmaul breathing, glucose 520",icon:"🩸",acuity:1,mins:30},
+  {id:"pe-v1",title:"Pulmonary Embolism",spec:"Pulmonary",sub:"38-year-old on OCP with pleuritic chest pain and calf swelling",icon:"🫁",acuity:1,mins:25},
+  {id:"sah-v1",title:"Subarachnoid Hemorrhage",spec:"Neurology",sub:"46-year-old with thunderclap headache — worst of life",icon:"🧠",acuity:1,mins:28},
+  {id:"sepsisseptic-shock",title:"Septic Shock",spec:"Infectious Disease",sub:"71-year-old with fever, hypotension, and altered mental status",icon:"🦠",acuity:1,mins:35},
+  {id:"chf-exacerbation",title:"CHF Exacerbation",spec:"Cardiology",sub:"67-year-old with worsening dyspnea and bilateral leg swelling",icon:"💧",acuity:2,mins:25},
+  {id:"stroke-v1",title:"Acute Ischemic Stroke",spec:"Neurology",sub:"72-year-old with sudden left-sided weakness and atrial fibrillation",icon:"🧠",acuity:1,mins:30},
+];
+var AL={1:"Critical",2:"Urgent",3:"Stable",4:"Routine"};
+var CAT_SET={cardiology:"ed",pulmonary:"ed",infectious:"ed",neurology:"ed",gi:"ed",surgery:"ed",renal:"inpatient",endocrine:"ed",allergy:"ed",hematology:"inpatient",musculoskeletal:"ed",dermatology:"clinic",rheumatology:"clinic"};
+var F={setting:"all",specialty:"all",acuity:"all"};
+function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+// Today's case
+var ti=Math.floor(Date.now()/86400000)%FEATURED.length,td=FEATURED[ti];
+document.getElementById("todayIcon").textContent=td.icon;
+document.getElementById("todayTag").textContent=td.spec+" · Est. "+td.mins+" min";
+document.getElementById("todayTitle").textContent=td.title;
+document.getElementById("todaySub").textContent=td.sub;
+document.getElementById("todayChips").innerHTML='<span class="tchip red">'+AL[td.acuity]+'</span><span class="tchip">Virtual EMR</span><span class="tchip">Note + SBAR</span>';
+function startToday(){localStorage.setItem("rdx-last-case",JSON.stringify({id:td.id,title:td.title,ts:Date.now()}));window.location.href="virtual-emr.html?case="+td.id;}
+
+// Resume
+try{var lc=JSON.parse(localStorage.getItem("rdx-last-case")||"null");if(lc&&(Date.now()-lc.ts)<259200000){document.getElementById("resumeBar").classList.add("show");var h=Math.round((Date.now()-lc.ts)/3600000);document.getElementById("resumeName").textContent=lc.title+(h<1?" (just now)":" ("+h+"h ago)");document.getElementById("resumeBtn").onclick=function(){window.location.href="virtual-emr.html?case="+lc.id;};}}catch(e){}
+
+function setF(type,val,el){F[type]=val;el.closest(".fchips").querySelectorAll(".fc").forEach(function(b){b.classList.remove("on");});el.classList.add("on");render();}
+function render(){
+  var q=(document.getElementById("caseSearch").value||"").toLowerCase().trim();
+  var out="",total=0;
+  CASES.forEach(function(g){
+    var ms=g.cases.filter(function(c){
+      return (!q||(c.diagnosis||c.id).toLowerCase().includes(q)||(g.presentation||"").toLowerCase().includes(q))&&
+        (F.specialty==="all"||(c.category||"")===F.specialty)&&
+        (F.acuity==="all"||(c.acuity+"")===(F.acuity+""))&&
+        (F.setting==="all"||(CAT_SET[c.category||""]||"ed")===F.setting);
+    });
+    if(!ms.length)return;
+    total+=ms.length;
+    out+='<div class="pgroup"><div class="phdr"><span class="pname">'+esc(g.presentation||"")+'</span><span class="pcnt">'+ms.length+' case'+(ms.length!==1?"s":"")+'</span></div><div class="cgrid">';
+    ms.forEach(function(c){out+='<div class="ccard" onclick="openCase(\''+c.id+'\',\''+esc(c.diagnosis||c.id)+'\')"><div class="cc-spec">'+esc(g.presentation||"")+'</div><div class="cc-title">'+esc(c.diagnosis||c.id)+'</div><div class="cc-foot"><span class="adot a'+(c.acuity||3)+'"></span><span class="cc-alabel">'+AL[c.acuity||3]+'</span><span class="cc-arr">→</span></div></div>';});
+    out+='</div></div>';
+  });
+  document.getElementById("casesWrap").innerHTML=out||'<div class="no-results"><span>🔍</span><p>No cases match your filters. <a href="#" onclick="resetF();return false" style="color:#2874A6">Reset filters</a></p></div>';
+  document.getElementById("fstats").textContent=total+" case"+(total!==1?"s":"")+" shown";
+}
+function openCase(id,name){localStorage.setItem("rdx-last-case",JSON.stringify({id:id,title:name,ts:Date.now()}));window.location.href="virtual-emr.html?case="+id;}
+function resetF(){F={setting:"all",specialty:"all",acuity:"all"};document.querySelectorAll(".fc").forEach(function(b){b.classList.remove("on");});document.querySelectorAll(".fchips").forEach(function(c){var first=c.querySelector(".fc");if(first)first.classList.add("on");});document.getElementById("caseSearch").value="";render();}
+render();
+</script>
+</body>
+</html>
