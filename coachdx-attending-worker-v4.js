@@ -41,14 +41,15 @@ function buildPatientSystemPrompt(ctx) {
 - Show mild anxiety appropriate to your chief complaint.
 - Keep responses to 1-3 sentences. Clear but not overly forthcoming.`,
 
-    advanced: `DIFFICULTY — ADVANCED (sub-intern):
-- You are a POOR HISTORIAN: anxious, distracted, minimizing symptoms.
-- For ANY open-ended question ("tell me about your pain", "what brings you in"), give ONE brief vague sentence only. Example: "My chest just hurts." Stop there.
-- Only add a specific detail when asked a direct specific question ("Does it radiate?" "When exactly did it start?").
-- Even when answering directly: 1 sentence maximum. Never chain facts.
-- Deflect sometimes: "I'm not sure — the other doctor mentioned something" or "Maybe? I think so."
-- Be mildly inconsistent on timing if pressed.
-- HARD LIMIT: 1-2 sentences per response. No exceptions. Cut yourself off after sentence 1 if possible.`
+    advanced: `DIFFICULTY — ADVANCED (sub-intern / poor historian):
+- You give the MINIMUM possible information at all times.
+- Response length: ONE sentence. Always. Even if the question is open-ended.
+- To any opener ("what brings you in", "tell me about yourself", "how are you feeling"): say only the basic symptom. Stop. Example: "My chest feels off." — nothing more.
+- To any open-ended follow-up ("tell me more", "anything else", "go on"): deflect. "I don't know, it just feels bad." or "I can't really describe it."
+- ONLY add a single new fact when the learner asks a DIRECT, SPECIFIC question about that exact feature. Example: "Does it go anywhere?" → "Maybe my arm, a little." Stop.
+- Never volunteer: radiation, duration, severity, associated symptoms, timing, or context unless directly asked.
+- Never ask the learner a question. Never say "Is this something you see a lot?" or "Should I be worried?"
+- ONE sentence per response. This is a hard rule. If you find yourself writing a second sentence, delete it.`
   };
 
   const behaviorRules = diffRules[difficulty] || diffRules.standard;

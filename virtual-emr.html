@@ -2409,15 +2409,46 @@ function sendPatientMessage(){
 
   // Build message history for API
   var apiMessages = [];
-  // If this is the first message, seed conversation with patientHPI as the patient's opening statement.
-  // patientHPI is intentionally vague (no diagnosis, no classic descriptors) — generated to be safe as an opener.
-  // The learner must ask specific follow-up questions to unlock each additional detail.
-  if (S.ptMessages.length === 1 && ptHPI) {
-    // Use patientHPI directly — it was generated to be appropriately vague for the difficulty level
-    apiMessages.push({role:'assistant', content: ptHPI});
-  } else if (S.ptMessages.length === 1) {
-    // Fallback if no patientHPI
-    apiMessages.push({role:'assistant', content: "I'm not feeling well. I'm not really sure what's going on."});
+  // Seed the first assistant turn based on difficulty:
+  // Advanced = bare one-sentence opener (body region + "not feeling right"), full detail locked behind questions
+  // Standard = patientHPI as-is (vague but descriptive)
+  // Guided   = patientHPI as-is (descriptive, helpful)
+  if (S.ptMessages.length === 1) {
+    var diff = window.RDX_DIFFICULTY || 'standard';
+    var opener;
+    if (diff === 'advanced') {
+      // Strip to absolute minimum — one body-region sentence, nothing more
+      // Derived from CC so it doesn't leak HPI details
+      var ccLow = ptCC.toLowerCase();
+      if (ccLow.includes('chest') || ccLow.includes('pressure') || ccLow.includes('cardiac') || ccLow.includes('heart')) {
+        opener = "My chest feels off.";
+      } else if (ccLow.includes('breath') || ccLow.includes('dyspne') || ccLow.includes('shortness')) {
+        opener = "I'm having trouble breathing.";
+      } else if (ccLow.includes('head') || ccLow.includes('migraine')) {
+        opener = "I have a headache.";
+      } else if (ccLow.includes('abdomen') || ccLow.includes('stomach') || ccLow.includes('belly') || ccLow.includes('nausea') || ccLow.includes('epigastric')) {
+        opener = "My stomach hurts.";
+      } else if (ccLow.includes('leg') || ccLow.includes('arm') || ccLow.includes('limb') || ccLow.includes('extremit')) {
+        opener = "My leg is bothering me.";
+      } else if (ccLow.includes('dizz') || ccLow.includes('faint') || ccLow.includes('syncop') || ccLow.includes('pass')) {
+        opener = "I passed out.";
+      } else if (ccLow.includes('fever') || ccLow.includes('sick') || ccLow.includes('infect')) {
+        opener = "I've been feeling sick.";
+      } else if (ccLow.includes('rash') || ccLow.includes('skin') || ccLow.includes('itch') || ccLow.includes('hive')) {
+        opener = "I have something on my skin.";
+      } else if (ccLow.includes('eye') || ccLow.includes('vision') || ccLow.includes('sight')) {
+        opener = "Something's wrong with my eye.";
+      } else if (ccLow.includes('back') || ccLow.includes('spine')) {
+        opener = "My back hurts.";
+      } else {
+        opener = "I'm not feeling right.";
+      }
+    } else if (ptHPI) {
+      opener = ptHPI;
+    } else {
+      opener = "I'm not feeling well. I'm not really sure what's going on.";
+    }
+    apiMessages.push({role:'assistant', content: opener});
   }
   S.ptMessages.forEach(function(m){ apiMessages.push({role:m.role, content:m.content}); });
 
