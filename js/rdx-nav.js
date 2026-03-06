@@ -143,7 +143,7 @@
     document.getElementById('rdx-hamburger').addEventListener('click',function(){document.getElementById('rdx-nav-menu').classList.toggle('open');});
     if(window.innerWidth<=900){nav.querySelectorAll('.rdx-dd>.rdx-nav-top').forEach(function(btn){btn.setAttribute('aria-expanded','false');btn.addEventListener('click',function(e){e.preventDefault();var p=this.parentElement;p.classList.toggle('open');this.setAttribute('aria-expanded',p.classList.contains('open')?'true':'false');});});}
 
-    document.getElementById('rdx-logout-btn').addEventListener('click',function(){localStorage.removeItem('reasondx-user');localStorage.removeItem('reasondx_student_code');localStorage.removeItem('rdx-progress');sessionStorage.clear();window.location.href=R+'auth/register.html';});
+    document.getElementById('rdx-logout-btn').addEventListener('click',function(){localStorage.removeItem('reasondx-user');localStorage.removeItem('reasondx_student_code');localStorage.removeItem('rdx-progress');sessionStorage.clear();window.location.href=R+'auth/login.html';});
 
     function rdxApplyExp(){var lvl=localStorage.getItem('rdx-exp-level')||'beginner';var dot=document.getElementById('rdx-exp-dot'),lbl=document.getElementById('rdx-exp-label');if(dot)dot.style.background=lvl==='veteran'?'#2874A6':'#0E9F6E';if(lbl)lbl.textContent=lvl==='veteran'?'Veteran':'Beginner';document.querySelectorAll('[data-rdx-level="advanced"]').forEach(function(el){el.style.display=lvl==='veteran'?'':'none';});window.RDX_EXP_LEVEL=lvl;}
     window.rdxToggleExp=function(){var cur=localStorage.getItem('rdx-exp-level')||'beginner';localStorage.setItem('rdx-exp-level',cur==='beginner'?'veteran':'beginner');rdxApplyExp();};

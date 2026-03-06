@@ -15,9 +15,18 @@
 
 // Pages that don't require auth
 var PUBLIC_PAGES = [
-  'index.html', 'how-it-works.html', '',
+  // Root public pages
+  'index.html', '', 'how-it-works.html', 'terms.html',
+  'institutional.html', 'demo-coachdx.html', 'demo.html',
+  // New 3-pillar homes (all public entry points)
+  'casedx.html', 'pathway.html',
+  // Auth pages
   'auth/login.html', 'auth/register.html',
-  'auth/privacy.html', 'auth/terms.html'
+  'auth/privacy.html', 'auth/terms.html',
+  // Redirect stubs
+  'choose-mode.html', 'setting-selector.html', 'studydx.html',
+  // CoachDx public pages
+  'CoachDx/index.html'
 ];
 
 function getPagePath() {

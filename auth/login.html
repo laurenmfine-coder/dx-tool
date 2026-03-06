@@ -92,7 +92,17 @@ async function handleLogin(e) {
   } else {
     showSuccess('Signed in! Redirecting...');
     setTimeout(function() {
-      window.location.href = '../dashboard.html';
+      // Honour return URL stored by requireAuth() before redirect to login
+      var returnUrl = sessionStorage.getItem('reasondx-redirect')
+        || sessionStorage.getItem('reasondx-redirect-after-login')
+        || new URLSearchParams(window.location.search).get('return');
+      if (returnUrl) {
+        sessionStorage.removeItem('reasondx-redirect');
+        sessionStorage.removeItem('reasondx-redirect-after-login');
+        window.location.href = returnUrl;
+      } else {
+        window.location.href = '../dashboard.html';
+      }
     }, 500);
   }
 }

@@ -250,10 +250,20 @@
     // Standardized redirect key (auth-guard.js and inline guards both use this)
     var REDIRECT_KEY = 'reasondx-redirect';
 
-    function requireAuth(redirectUrl = window.location.href) {
+    function requireAuth(redirectUrl) {
+        redirectUrl = redirectUrl || window.location.href;
         if (!isLoggedIn()) {
+            // Store under both keys — login.html and auth-guard.js each check one
+            sessionStorage.setItem('reasondx-redirect', redirectUrl);
             sessionStorage.setItem('reasondx-redirect-after-login', redirectUrl);
-            window.location.href = '/auth/login.html';
+            // Relative path so this works on any deploy (subdomain or subdirectory)
+            var _p = window.location.pathname;
+            var _inAuth = _p.indexOf('/auth/') >= 0;
+            var _segs = _p.split('/').filter(Boolean);
+            // Remove trailing filename if present
+            if (_segs.length && _segs[_segs.length-1].indexOf('.') >= 0) _segs.pop();
+            var _prefix = (!_inAuth && _segs.length > 0) ? '../'.repeat(_segs.length) : '';
+            window.location.href = _prefix + 'auth/login.html';
             return false;
         }
         return true;
@@ -315,7 +325,12 @@
         }
         
         if (document.body.hasAttribute('data-require-auth')) {
-            window.location.href = '/auth/login.html';
+            // Use relative path to auth/login to work on any deploy path
+    var _depth = window.location.pathname.split('/').filter(Boolean).length;
+    var _prefix = _depth > 1 ? '../'.repeat(_depth - 1) : '';
+    // Check if we're already inside auth/
+    if (window.location.pathname.includes('/auth/')) { _prefix = ''; }
+    window.location.href = _prefix + 'auth/login.html';
         }
     }
 

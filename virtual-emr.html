@@ -1257,7 +1257,7 @@ function requireAuth(){
 
   // 6. No session — redirect to auth
   sessionStorage.setItem("reasondx-redirect",location.href);
-  location.replace("auth/register.html");
+  location.replace("auth/login.html");
   return null;
 }
 
@@ -1778,9 +1778,9 @@ function doSignOut(){
   localStorage.removeItem("reasondx-user");
   if(localUser && localUser._demo){
     // Demo session: don't wipe, just go to choose-mode instead of auth
-    location.replace("choose-mode.html");
+    location.replace("casedx.html");
   } else {
-    location.replace("auth/register.html");
+    location.replace("auth/login.html");
   }
 }
 
