@@ -585,6 +585,9 @@
       if (window.render) render();
     },
 
+    // DDx prompt — exposed so guide button can call it
+    showDDxPrompt:          showDDxPrompt,
+
     // Renderers exposed for EMR hooks
     renderVitalsSparkline:  renderVitalsSparkline,
     renderConceptSidebar:   renderConceptSidebar,
