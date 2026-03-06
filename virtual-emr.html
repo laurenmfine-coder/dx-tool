@@ -1827,17 +1827,22 @@ function renderDocumentation(){
   var _hasContent = Object.values(S.noteFields||{}).some(function(v){ return v && v.trim().length > 0; });
   var _interviewCallout = '';
   if (!_hasContent && !S.submitted) {
-    _interviewCallout = '<div style="display:flex;align-items:flex-start;gap:14px;background:linear-gradient(135deg,#EBF4FB,#F0F9F4);border:1.5px solid #2874A6;border-radius:14px;padding:16px 20px;margin-bottom:18px">'
-      + '<div style="font-size:28px;flex-shrink:0">🗣️</div>'
+    _interviewCallout = '<div style="background:linear-gradient(135deg,#1B4F72,#2874A6);border-radius:14px;padding:20px 24px;margin-bottom:18px;color:#fff">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">'
+      + '<div style="display:flex;align-items:center;gap:14px">'
+      + '<div style="font-size:32px;flex-shrink:0">🗣️</div>'
       + '<div>'
-      + '<div style="font-size:14px;font-weight:700;color:#1B5272;margin-bottom:4px">Start here — Interview your patient</div>'
-      + '<div style="font-size:13px;color:#2874A6;line-height:1.6">This is where you take the history. Imagine you\'ve just walked into the room. <strong>Ask the patient questions</strong> and document what you learn in the HPI section below.</div>'
-      + '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
-      + '<span style="padding:4px 10px;background:#2874A6;color:#fff;border-radius:6px;font-size:11px;font-weight:600">📋 OLDCARTS framework</span>'
-      + '<span style="padding:4px 10px;background:#2874A6;color:#fff;border-radius:6px;font-size:11px;font-weight:600">⏱️ Onset · Location · Duration</span>'
-      + '<span style="padding:4px 10px;background:#2874A6;color:#fff;border-radius:6px;font-size:11px;font-weight:600">🔄 Alleviating / Aggravating</span>'
+      + '<div style="font-size:15px;font-weight:800;margin-bottom:4px">Step 1 — Talk to your patient</div>'
+      + '<div style="font-size:13px;opacity:.9;line-height:1.5">Click <strong>Open Patient Chat</strong> to introduce yourself and take the history. Ask the patient what brings them in, then use OLDCARTS to guide your questions. Come back here to document what you learned.</div>'
       + '</div>'
-      + '<div style="margin-top:10px;font-size:12px;color:#475569">💡 After documenting HPI, use <strong>CoachDx</strong> (in the sidebar) to talk through your differential with your AI attending.</div>'
+      + '</div>'
+      + '<button onclick="switchTab(\'coach\')" style="flex-shrink:0;background:#fff;color:#1B4F72;font-weight:800;font-size:13px;padding:10px 22px;border:none;border-radius:8px;cursor:pointer;white-space:nowrap">Open Patient Chat →</button>'
+      + '</div>'
+      + '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">'
+      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">📋 OLDCARTS</span>'
+      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">⏱️ Onset · Location · Duration</span>'
+      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">🔄 Alleviating / Aggravating</span>'
+      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">💬 Then document it below</span>'
       + '</div>'
       + '</div>';
   }
