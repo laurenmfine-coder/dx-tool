@@ -850,7 +850,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
-<div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1B4F72,#2874A6);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:13px;gap:12px">
+<div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1B4F72,#2874A6);color:#fff;padding:10px 20px;align-items:center;justify-content:space-between;font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:13px;gap:12px">
   <div style="display:flex;align-items:center;gap:10px">
     <span style="background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.05em">DEMO MODE</span>
     <span style="opacity:.9">You're previewing the <strong><span data-case-name>Anaphylaxis</span></strong> case in <strong>CaseDx</strong>. Full EMR, real chart data. CoachDx AI coaching unlocks after sign-up.</span>
@@ -1893,7 +1893,7 @@ function renderDocumentation(){
       // Input
       + '<div style="padding:10px 14px;border-top:1px solid #E2E8F0;background:#fff;display:flex;gap:8px">'
       + '<button type="button" id="ptMicBtn" onclick="toggleVoice(\'ptInput\',\'ptMicBtn\')" class="mic-btn" title="Click to speak">🎤</button>'
-      + '<input id="ptInput" type="text" placeholder="'What brings you in today?' or 'Tell me about the chest pain…'" '
+      + '<input id="ptInput" type="text" placeholder="What brings you in today? or: Tell me about the chest pain…" '
       + 'style="flex:1;padding:9px 12px;border:1px solid #CBD5E1;border-radius:8px;font-size:13px;font-family:inherit;outline:none" '
       + 'onkeydown="if(event.key===\'Enter\' && !event.shiftKey){event.preventDefault();sendPatientMessage()}" />'
       + '<button onclick="sendPatientMessage()" style="padding:9px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap"'
@@ -2367,7 +2367,7 @@ function renderCoachDx(){
     '<div class="coach-messages" id="coachMessages">'+msgsHtml+'</div>'+_starters+
     conceptsHtml+
     '<div class="coach-input-row">'+
-      '<button type="button" id="coachMicBtn" onclick="toggleVoice('coachInput','coachMicBtn')" class="mic-btn" title="Click to speak">🎤</button>'+
+      '<button type="button" id="coachMicBtn" onclick="toggleVoice(\'coachInput\',\'coachMicBtn\')" class="mic-btn" title="Click to speak">🎤</button>'+
       '<textarea class="coach-input" id="coachInput" rows="2" placeholder="Share your reasoning, ask a question, or present your assessment\u2026" onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();sendCoachMessage()}"></textarea>'+
       '<button type="button" class="coach-send" onclick="sendCoachMessage()" '+(S.coachLoading?"disabled":"")+'>Send</button>'+
     '</div>'+
@@ -2406,11 +2406,11 @@ function sendPatientMessage(){
   // Opening patient statement if first message
   if (S.ptMessages.length === 1) {
     var openingByCC = ptCC.toLowerCase();
-    var opening = 'I've been having ' + ptCC.toLowerCase() + '. I'm not sure what's going on.';
-    if (openingByCC.includes('chest') || openingByCC.includes('pain')) opening = 'I've been having this chest pain and it's really scaring me.';
-    else if (openingByCC.includes('breath') || openingByCC.includes('dyspne')) opening = 'I can't catch my breath. It started a little while ago and it keeps getting worse.';
-    else if (openingByCC.includes('bleed') || openingByCC.includes('blood')) opening = 'I came in because of the bleeding. I wasn't sure if I needed to come in, but it wasn't stopping.';
-    else if (openingByCC.includes('fever') || openingByCC.includes('sick')) opening = 'I've been feeling really sick — I have a fever and I just feel terrible.';
+    var opening = "I've been having " + ptCC.toLowerCase() + ". I'm not sure what's going on.";
+    if (openingByCC.includes('chest') || openingByCC.includes('pain')) opening = "I've been having this chest pain and it's really scaring me.";
+    else if (openingByCC.includes('breath') || openingByCC.includes('dyspne')) opening = "I can't catch my breath. It started a little while ago and it keeps getting worse.";
+    else if (openingByCC.includes('bleed') || openingByCC.includes('blood')) opening = "I came in because of the bleeding. I wasn't sure if I needed to come in, but it wasn't stopping.";
+    else if (openingByCC.includes('fever') || openingByCC.includes('sick')) opening = "I've been feeling really sick — I have a fever and I just feel terrible.";
     apiMessages.push({role:'assistant', content:opening});
   }
   S.ptMessages.forEach(function(m){ apiMessages.push({role:m.role, content:m.content}); });
@@ -2437,14 +2437,14 @@ function sendPatientMessage(){
   })
   .then(function(r){return r.json();})
   .then(function(data){
-    var reply = (data.content&&data.content[0]&&data.content[0].text) ? data.content[0].text : 'I'm not sure how to answer that.';
+    var reply = (data.content&&data.content[0]&&data.content[0].text) ? data.content[0].text : "I'm not sure how to answer that.";
     S.ptMessages.push({role:'assistant', content:reply});
     S.ptLoading = false;
     render();
     setTimeout(function(){var el=document.getElementById('ptChatMessages');if(el)el.scrollTop=el.scrollHeight;},50);
   })
   .catch(function(){
-    S.ptMessages.push({role:'assistant', content:'Sorry, I couldn't respond. Please try again.'});
+    S.ptMessages.push({role:'assistant', content:"Sorry, I couldn't respond. Please try again."});
     S.ptLoading = false;
     render();
   });
