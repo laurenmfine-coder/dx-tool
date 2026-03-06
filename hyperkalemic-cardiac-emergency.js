@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Santana",
+  "patientHPI": "I've been feeling awful for about a week now - just completely exhausted, nauseous, and not wanting to eat anything. I had a stomach bug about ten days ago where I was throwing up, and ever since then I get really dizzy when I stand up and feel like I might pass out.",
     "dob": "11/22/1956",
     "age": 68,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3200 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "1845 NE 26th St, Fort Lauderdale, FL 33305",
+    "address": "1733 N Kedzie Blvd, Chicago, IL 60612",
     "phone": "(954) 555-1428",
     "email": "g.santana56@email.com",
     "emergencyContact": {

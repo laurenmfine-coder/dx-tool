@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Fontaine",
+  "patientHPI": "I've had this awful cough for about two weeks now that just keeps getting worse, and I'm bringing up thick yellow stuff that sometimes has streaks of blood in it. I get so winded now just walking to the mailbox, and I've been running low fevers and waking up soaked in sweat at night. What really worries me is I've lost 18 pounds in the last six months even though I'm eating normally.",
     "dob": "07/30/1955",
     "age": 69,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy \u2014 3080 Stirling Rd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "5612 SW 17th St, Fort Lauderdale, FL 33317",
+    "address": "2041 Jasmine Way, Albuquerque, NM 87111",
     "phone": "(954) 555-4738",
     "email": "r.fontaine55@email.com",
     "emergencyContact": {

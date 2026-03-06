@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Jean-Baptiste",
+  "patientHPI": "I've had this cold for about five days now - stuffy nose, scratchy throat, and this annoying dry cough that won't go away. I had a fever at home that got up to 100 degrees, and my whole body has been aching. I'm training for a half-marathon so I've been pushing through and still going on my runs, but I'm feeling pretty wiped out.",
     "dob": "11/04/1999",
     "age": 25,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3100 Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black/Haitian American",
-    "address": "2247 NW 6th St, Fort Lauderdale, FL 33311",
+    "address": "7529 Jasmine Way, Minneapolis, MN 55411",
     "phone": "(954) 555-3918",
     "email": "m.jeanbaptiste99@email.com",
     "emergencyContact": {

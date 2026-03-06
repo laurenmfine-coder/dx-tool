@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jessica Brennan",
+  "patientHPI": "For three days now, my left eye has been getting blurry - it's like looking through fog, and it hurts behind my eye especially when I look to the side. Colors don't look as bright in that eye anymore.",
     "dob": "07/14/1994",
     "age": 30,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5700 W Sunrise Blvd, Plantation, FL",
     "language": "English",
     "race": "White",
-    "address": "2280 NW 72nd Ave, Plantation, FL 33322",
+    "address": "6583 N Kedzie Blvd, Milwaukee, WI 53206",
     "phone": "(954) 555-8724",
     "email": "j.brennan94@email.com",
     "emergencyContact": {

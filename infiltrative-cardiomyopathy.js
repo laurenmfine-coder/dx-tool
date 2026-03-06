@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Lawrence Prescott",
+  "patientHPI": "I've been getting more short of breath lately, especially when I try to do simple things like walk up stairs or carry groceries. My legs have been swelling up more than usual, and I gained six pounds in just a few weeks even though I'm taking my water pill. I've been needing to sleep with more pillows to breathe better at night.",
     "dob": "09/03/1950",
     "age": 75,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2200 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black or African American",
-    "address": "1540 NE 10th Ave, Fort Lauderdale, FL 33304",
+    "address": "7471 Foxglove Dr, Minneapolis, MN 55403",
     "phone": "(954) 555-3891",
     "email": "l.prescott50@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Alyssa Chen",
+  "patientHPI": "I've been working with a speech therapist for the past few months learning breathing exercises after they found out what was causing my breathing problems when I kept going to the emergency room thinking I had asthma.",
     "dob": "10/22/2003",
     "age": 22,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 1501 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "Asian",
-    "address": "4205 NE 12th Terrace, Fort Lauderdale, FL 33334",
+    "address": "2975 Iris Blvd, Pittsburgh, PA 15210",
     "phone": "(954) 555-1394",
     "email": "alyssachen03@email.com",
     "emergencyContact": {
@@ -302,5 +303,23 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Allergic Reaction",
     "category": "pulmonary"
+  }
+,
+
+  "teachingPoints": {
+    "keyLearning": [
+      "VCD/PVFM (paradoxical vocal fold motion) causes inspiratory stridor and dyspnea from paradoxical adduction of vocal folds during inspiration. It is frequently misdiagnosed as asthma — patients are often on unnecessary high-dose inhaled corticosteroids and bronchodilators.",
+      "Key distinguishing features from asthma: stridor is predominantly INSPIRATORY (vs expiratory wheeze in asthma); truncated inspiratory loop on spirometry (vs scooped expiratory loop in asthma); bronchodilators have NO effect; attacks are often sudden-onset and terminate abruptly.",
+      "Gold standard diagnosis: laryngoscopy during a symptomatic episode — shows paradoxical adduction of vocal folds with posterior glottic chinking. Flow-volume loops show flattened/truncated inspiratory loop (variable extrathoracic obstruction)."
+    ],
+    "boardPearls": [
+      "VCD stridor: INSPIRATORY. Asthma wheeze: EXPIRATORY. Key clinical distinguisher.",
+      "Spirometry in VCD: truncated inspiratory loop (variable extrathoracic obstruction). Asthma: scooped expiratory loop + reduced FEV₁/FVC.",
+      "Triggers: exercise, strong odors, GERD, psychological stress, post-nasal drip, irritants.",
+      "Diagnosis: laryngoscopy during episode (gold standard) OR provocation + laryngoscopy.",
+      "Treatment: speech therapy (breathing techniques, laryngeal control exercises) = mainstay. Treat GERD/post-nasal drip triggers. Heliox for acute severe attacks.",
+      "VCD + asthma: 30–50% of VCD patients also have asthma (comorbid, not alternative diagnosis). Treat both.",
+      "Do NOT use epinephrine for VCD — it has no mechanism to work and delays correct treatment."
+    ]
   }
 };

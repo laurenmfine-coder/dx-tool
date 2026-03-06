@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jaylen Cooper",
+  "patientHPI": "I'm here for my football physical so I can play my senior year as starting wide receiver. I feel great and can keep up with all the drills, though I sometimes use my inhaler before practice for my asthma. I take medication for my ADHD that helps me focus in school and I've never had any problems with passing out or chest pain during sports.",
     "dob": "01/30/2007",
     "age": 18,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 6800 Stirling Rd, Riverside, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "5014 SW 39th Ave, Dania Beach, FL 33312",
+    "address": "4907 Sycamore Dr, Detroit, MI 48210",
     "phone": "(954) 555-8472",
     "email": "j.cooper07@email.com",
     "emergencyContact": {

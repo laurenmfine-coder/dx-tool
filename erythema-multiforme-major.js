@@ -1,169 +1,1048 @@
-// Virtual EMR Case: Erythema Multiforme Major
-// Variant: erythema-multiforme-major | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
-
+/* emr-data/erythema-multiforme-major.js — Multi-Setting Allergy Case: Erythema Multiforme Major */
 window.EMR_DATA = {
-  "patient": {
-    "name": "Tyler Brennan",
-    "dob": "03/11/2001",
-    "age": 24,
-    "sex": "Male",
-    "mrn": "RDX-2025-41348",
-    "pronouns": "He/Him",
-    "insurance": "United Healthcare (parent plan)",
-    "pcp": "Dr. James Weatherly, MD",
-    "pharmacy": "CVS Pharmacy — 4401 Sheridan St, Hollywood, FL",
-    "language": "English",
-    "race": "White",
-    "address": "7720 Pines Blvd, Pembroke Pines, FL 33024",
-    "phone": "(954) 555-9024",
-    "email": "t.brennan01@email.com",
-    "emergencyContact": {
-      "name": "Diane Brennan (Mother)",
-      "phone": "(954) 555-9040"
+  "base": {
+    "patient": {
+      "name": "Talia Brennan",
+  "patientHPI": "I have these strange circular rashes on my hands and arms that look like targets, and my mouth is full of painful sores that make it hard to eat or drink. I had a cold sore on my lip about ten days ago, and now this is happening again like it did before.",
+      "dob": "01/13/2007",
+      "age": "19",
+      "sex": "Female",
+      "pronouns": "she/her",
+      "mrn": "MRN-231416",
+      "language": "English",
+      "race": "Black/African American",
+      "phone": "(504) 555-4950",
+      "email": "talia.brennan@email.com",
+      "address": "5873 Hickory Rd, Minneapolis, MN 55409",
+      "insurance": "UnitedHealthcare",
+      "pcp": "Dr. Sarah Mitchell, DO",
+      "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+      "emergencyContact": {
+        "name": "Reginald Brennan",
+        "phone": "(720) 555-2698",
+        "relationship": "Spouse"
+      }
+    },
+    "allergies": [
+      {
+        "allergen": "NKDA",
+        "reaction": "",
+        "severity": "",
+        "type": "Drug"
+      }
+    ],
+    "immunizations": [
+      {
+        "name": "Influenza",
+        "date": "10/15/2025",
+        "lot": "FL-2025",
+        "site": "Left Deltoid"
+      },
+      {
+        "name": "COVID-19 (Updated)",
+        "date": "09/01/2025",
+        "lot": "CV-2025",
+        "site": "Right Deltoid"
+      },
+      {
+        "name": "Tdap",
+        "date": "03/2020",
+        "lot": "TD-2020",
+        "site": "Left Deltoid"
+      }
+    ],
+    "familyHistory": [
+      "Non-contributory"
+    ],
+    "socialHistory": [
+      [
+        "HSV history",
+        "3-4 outbreaks per year, last cold sore 10 days ago"
+      ],
+      [
+        "Tobacco",
+        "Never"
+      ]
+    ]
+  },
+  "encounters": {
+    "ed": {
+      "patient": {
+        "chiefComplaint": "Target lesions on hands, forearms with oral mucosal erosions",
+        "diagnosis": "Erythema Multiforme Major"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Recurrent herpes labialis",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        },
+        {
+          "id": "prob-2",
+          "description": "Recent cold sore 10 days ago",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "Valacyclovir",
+          "dose": "500mg",
+          "route": "PO",
+          "frequency": "PRN for outbreaks",
+          "status": "Active",
+          "prescriber": "Dr. Lisa Chang, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/01/2026",
+          "time": "07:45",
+          "bp": "118/72",
+          "hr": "88",
+          "rr": "16",
+          "temp": "37.8°C",
+          "spo2": "99%",
+          "pain": "6/10",
+          "bmi": "34",
+          "weight": "60 kg"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/01/2026",
+          "time": "08:00",
+          "status": "Final",
+          "orderedBy": "Dr. ED Attending",
+          "accession": "LAB-369532",
+          "collected": "03/01/2026 07:50",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.2",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.8",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "41.2",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "245",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "139",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.2",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2/Bicarb",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "16",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.9",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "98",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "CASE-SPECIFIC STUDIES",
+              "results": [
+                {
+                  "test": "Esr",
+                  "value": "32",
+                  "unit": "mm/hr",
+                  "range": "0-20",
+                  "flag": "H"
+                },
+                {
+                  "test": "Hsv",
+                  "value": "Positive",
+                  "unit": "",
+                  "range": "",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-ed",
+          "type": "Emergency Visit",
+          "date": "03/01/2026",
+          "provider": "Dr. ED Attending",
+          "cc": "Target lesions on hands, forearms with oral mucosal erosions",
+          "hpi": "Talia Brennan is a 19-year-old female presenting with target lesions on hands, forearms with oral mucosal erosions. Past medical history includes Recurrent herpes labialis, Recent cold sore 10 days ago. See chart for full details.",
+          "exam": "See physical examination documentation.",
+          "assessment": "Erythema Multiforme Major — clinical presentation and workup consistent with diagnosis.",
+          "plan": "See orders and management plan."
+        }
+      ]
+    },
+    "inpatient": {
+      "patient": {
+        "chiefComplaint": "Admitted for EM Major with oral mucosal involvement — unable to eat",
+        "diagnosis": "Erythema Multiforme Major"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Recurrent herpes labialis",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        },
+        {
+          "id": "prob-2",
+          "description": "Recent cold sore 10 days ago",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "Valacyclovir",
+          "dose": "500mg",
+          "route": "PO",
+          "frequency": "PRN for outbreaks",
+          "status": "Active",
+          "prescriber": "Dr. Lisa Chang, MD"
+        },
+        {
+          "id": "med-add-1",
+          "name": "Magic mouthwash",
+          "dose": "",
+          "route": "Swish/spit",
+          "frequency": "QID",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        },
+        {
+          "id": "med-add-2",
+          "name": "IV Fluids",
+          "dose": "D5 1/2NS",
+          "route": "IV",
+          "frequency": "100mL/hr",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/02/2026",
+          "time": "08:00",
+          "bp": "112/68",
+          "hr": "88",
+          "rr": "16",
+          "temp": "37.6°C",
+          "spo2": "98%",
+          "pain": "7/10"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/01/2026",
+          "time": "08:00",
+          "status": "Final",
+          "orderedBy": "Dr. ED Attending",
+          "accession": "LAB-369532",
+          "collected": "03/01/2026 07:50",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.2",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.8",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "41.2",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "245",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "139",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.2",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2/Bicarb",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "16",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.9",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "98",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "CASE-SPECIFIC STUDIES",
+              "results": [
+                {
+                  "test": "Esr",
+                  "value": "32",
+                  "unit": "mm/hr",
+                  "range": "0-20",
+                  "flag": "H"
+                },
+                {
+                  "test": "Hsv",
+                  "value": "Positive",
+                  "unit": "",
+                  "range": "",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-1",
+          "type": "Admission",
+          "date": "03/02/2026",
+          "provider": "Dr. Attending",
+          "cc": "Admitted for EM Major with oral mucosal involvement — unable to eat",
+          "hpi": "Talia Brennan — Admitted for EM Major with oral mucosal involvement — unable to eat",
+          "exam": "See documentation.",
+          "assessment": "See assessment.",
+          "plan": "See orders."
+        }
+      ]
+    },
+    "consult": {
+      "patient": {
+        "chiefComplaint": "A/I consult — differentiate EM Major from SJS, identify trigger (HSV vs drug)",
+        "diagnosis": "Erythema Multiforme Major"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Recurrent herpes labialis",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        },
+        {
+          "id": "prob-2",
+          "description": "Recent cold sore 10 days ago",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "Valacyclovir",
+          "dose": "500mg",
+          "route": "PO",
+          "frequency": "PRN for outbreaks",
+          "status": "Active",
+          "prescriber": "Dr. Lisa Chang, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/02/2026",
+          "time": "08:00",
+          "bp": "114/70",
+          "hr": "82",
+          "rr": "14",
+          "temp": "37.2°C",
+          "spo2": "99%",
+          "pain": "4/10"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/01/2026",
+          "time": "08:00",
+          "status": "Final",
+          "orderedBy": "Dr. ED Attending",
+          "accession": "LAB-369532",
+          "collected": "03/01/2026 07:50",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.2",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.8",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "41.2",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "245",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "139",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.2",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2/Bicarb",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "16",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.9",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "98",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "CASE-SPECIFIC STUDIES",
+              "results": [
+                {
+                  "test": "Esr",
+                  "value": "32",
+                  "unit": "mm/hr",
+                  "range": "0-20",
+                  "flag": "H"
+                },
+                {
+                  "test": "Hsv",
+                  "value": "Positive",
+                  "unit": "",
+                  "range": "",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-1",
+          "type": "Consultation",
+          "date": "03/02/2026",
+          "provider": "Dr. Allergist",
+          "cc": "A/I consult — differentiate EM Major from SJS, identify trigger (HSV vs drug)",
+          "hpi": "Talia Brennan — A/I consult — differentiate EM Major from SJS, identify trigger (HSV vs drug)",
+          "exam": "See documentation.",
+          "assessment": "See assessment.",
+          "plan": "See orders."
+        }
+      ]
+    },
+    "clinic": {
+      "patient": {
+        "chiefComplaint": "EM follow-up — recurrence prevention, HSV prophylaxis if HSV-triggered",
+        "diagnosis": "Erythema Multiforme Major"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Recurrent herpes labialis",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        },
+        {
+          "id": "prob-2",
+          "description": "Recent cold sore 10 days ago",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-add-1",
+          "name": "Valacyclovir",
+          "dose": "500mg",
+          "route": "PO",
+          "frequency": "Daily (suppressive if HSV-triggered)",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/02/2026",
+          "time": "08:00",
+          "bp": "112/68",
+          "hr": "72",
+          "rr": "14",
+          "temp": "36.8°C",
+          "spo2": "99%",
+          "pain": "0/10"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/01/2026",
+          "time": "08:00",
+          "status": "Final",
+          "orderedBy": "Dr. ED Attending",
+          "accession": "LAB-369532",
+          "collected": "03/01/2026 07:50",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.2",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.8",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "41.2",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "245",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "139",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.2",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2/Bicarb",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "16",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.9",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "98",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "CASE-SPECIFIC STUDIES",
+              "results": [
+                {
+                  "test": "Esr",
+                  "value": "32",
+                  "unit": "mm/hr",
+                  "range": "0-20",
+                  "flag": "H"
+                },
+                {
+                  "test": "Hsv",
+                  "value": "Positive",
+                  "unit": "",
+                  "range": "",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-1",
+          "type": "Office Visit",
+          "date": "03/02/2026",
+          "provider": "Dr. Attending",
+          "cc": "EM follow-up — recurrence prevention, HSV prophylaxis if HSV-triggered",
+          "hpi": "Talia Brennan — EM follow-up — recurrence prevention, HSV prophylaxis if HSV-triggered",
+          "exam": "See documentation.",
+          "assessment": "See assessment.",
+          "plan": "See orders."
+        }
+      ]
     }
+  },
+  "patient": {
+    "name": "Talia Brennan",
+    "dob": "01/13/2007",
+    "age": "19",
+    "sex": "Female",
+    "pronouns": "she/her",
+    "mrn": "MRN-231416",
+    "language": "English",
+    "race": "Black/African American",
+    "phone": "(803) 555-6447",
+    "email": "talia.brennan@email.com",
+    "address": "3087 Pine Ave, Minneapolis, MN 55401",
+    "insurance": "UnitedHealthcare",
+    "pcp": "Dr. Sarah Mitchell, DO",
+    "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+    "emergencyContact": {
+      "name": "Reginald Brennan",
+      "phone": "(317) 555-1726",
+      "relationship": "Spouse"
+    },
+    "chiefComplaint": "Target lesions on hands, forearms with oral mucosal erosions",
+    "diagnosis": "Erythema Multiforme Major"
   },
   "problems": [
     {
-      "problem": "Recurrent Herpes Labialis (HSV-1)",
-      "icd": "B00.1",
-      "onset": "2016",
+      "id": "prob-1",
+      "description": "Recurrent herpes labialis",
       "status": "Active",
-      "notes": "3-4 outbreaks per year; typically triggered by sun exposure and stress; uses valacyclovir episodically — not on suppressive therapy"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Allergic Rhinitis — Perennial",
-      "icd": "J30.89",
-      "onset": "2014",
+      "id": "prob-2",
+      "description": "Recent cold sore 10 days ago",
       "status": "Active",
-      "notes": "On loratadine PRN"
-    },
-    {
-      "problem": "Prior Episode of Erythema Multiforme Minor (2023)",
-      "icd": "L51.0",
-      "onset": "2023",
-      "status": "Resolved",
-      "notes": "Target lesions on hands/feet following HSV outbreak; self-resolved in 2 weeks; not evaluated by dermatology at that time"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Valacyclovir 1000mg BID x 3 days (episodic)",
-      "sig": "Take 1 tablet by mouth twice daily for 3 days at first sign of cold sore",
-      "prescriber": "Dr. Weatherly",
-      "start": "06/2020",
-      "refills": 5,
-      "status": "PRN"
-    },
-    {
-      "name": "Loratadine 10mg PRN",
-      "sig": "Take 1 tablet by mouth daily as needed for allergy symptoms",
-      "prescriber": "Dr. Weatherly",
-      "start": "04/2016",
-      "refills": 5,
-      "status": "PRN"
+      "id": "med-1",
+      "name": "Valacyclovir",
+      "dose": "500mg",
+      "route": "PO",
+      "frequency": "PRN for outbreaks",
+      "status": "Active",
+      "prescriber": "Dr. Lisa Chang, MD"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "type": "None",
-      "reaction": "None",
+      "reaction": "",
       "severity": "",
-      "verified": "Yes"
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/20/2026",
-      "bp": "124/78",
-      "hr": 92,
-      "rr": 18,
-      "temp": "100.6°F",
-      "spo2": "98%",
-      "wt": "172 lbs",
-      "ht": "5'10\"",
-      "bmi": 24.7,
-      "setting": "ED"
-    },
-    {
-      "date": "08/10/2025",
+      "date": "03/01/2026",
+      "time": "07:45",
       "bp": "118/72",
-      "hr": 68,
-      "rr": 16,
-      "temp": "98.4°F",
+      "hr": "88",
+      "rr": "16",
+      "temp": "37.8°C",
       "spo2": "99%",
-      "wt": "174 lbs",
-      "ht": "5'10\"",
-      "bmi": 25.0,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "02/14/2025",
-      "bp": "116/70",
-      "hr": 72,
-      "rr": 16,
-      "temp": "98.6°F",
-      "spo2": "99%",
-      "wt": "170 lbs",
-      "ht": "5'10\"",
-      "bmi": 24.4,
-      "setting": "PCP Office"
+      "pain": "6/10",
+      "bmi": "34",
+      "weight": "60 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "08/10/2025",
-      "type": "Primary Care",
-      "provider": "Dr. James Weatherly, MD",
-      "cc": "Cold sore outbreak, refill valacyclovir",
-      "hpi": "24M with recurrent HSV-1 presents with current cold sore outbreak x 2 days — typical prodrome of tingling then vesicles on lower lip. Reports 3 outbreaks so far this year, usually triggered by sun exposure (beach trip this past weekend). Uses episodic valacyclovir. No genital lesions. Denies rash elsewhere.",
-      "exam": "NAD. Oral: Cluster of vesicles on vermillion border of lower lip, left side, consistent with herpes labialis. No oral mucosal lesions. Skin: No target lesions, no rash.",
-      "assessment": "1. Herpes labialis — recurrent, HSV-1; 3 outbreaks in 2025\n2. Discussed suppressive therapy given frequency — patient deferred, prefers episodic",
-      "plan": "1. Valacyclovir 1g BID x 3 days\n2. Discussed suppressive therapy (500mg daily) — patient will consider\n3. Sun protection counseling — lip balm with SPF\n4. Return if lesions spread or systemic symptoms develop"
-    },
-    {
-      "id": "V002",
-      "date": "04/2023",
-      "type": "Urgent Care",
-      "provider": "Dr. Kevin Park, DO",
-      "cc": "Rash on hands and feet after cold sore",
-      "hpi": "22M presents with 3-day rash — red circles with target appearance on palms, soles, and dorsal hands. Had cold sore that started 10 days ago, now resolving. No oral lesions. No fevers. No joint pain. No new medications.",
-      "exam": "Skin: Classic target lesions (3-zone pattern) on bilateral palms, soles, dorsal hands/feet. ~20 lesions total. No mucosal involvement. No blisters.",
-      "assessment": "1. Erythema multiforme minor — HSV-associated",
-      "plan": "1. Supportive care\n2. Discussed link to HSV outbreaks\n3. Follow-up with PCP to discuss suppressive antiviral therapy\n4. Return if oral involvement or worsening"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/01/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "Target lesions on hands, forearms with oral mucosal erosions",
+      "hpi": "Talia Brennan is a 19-year-old female presenting with target lesions on hands, forearms with oral mucosal erosions. Past medical history includes Recurrent herpes labialis, Recent cold sore 10 days ago. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Erythema Multiforme Major — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "08/10/2025",
-      "time": "10:30",
-      "orderedBy": "Dr. Weatherly",
-      "collected": "08/10/2025 10:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-801040",
+      "date": "03/01/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "No",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-369532",
+      "collected": "03/01/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
-          "name": "COMPLETE BLOOD COUNT",
+          "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.6", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelets", "value": "242", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.2",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" }
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
+          ]
+        },
+        {
+          "name": "CASE-SPECIFIC STUDIES",
+          "results": [
+            {
+              "test": "Esr",
+              "value": "32",
+              "unit": "mm/hr",
+              "range": "0-20",
+              "flag": "H"
+            },
+            {
+              "test": "Hsv",
+              "value": "Positive",
+              "unit": "",
+              "range": "",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -171,34 +1050,70 @@ window.EMR_DATA = {
   ],
   "imaging": [],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "11/2025", "site": "Left deltoid IM", "lot": "FL25-9018", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-1910", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "08/2021", "site": "Left deltoid IM", "lot": "TD21-504", "mfr": "GSK" },
-    { "vaccine": "HPV (Gardasil 9) — Series Complete", "date": "2017", "site": "Left deltoid IM", "lot": "HP17-308", "mfr": "Merck" },
-    { "vaccine": "Meningococcal ACWY", "date": "2019", "site": "Right deltoid IM", "lot": "MN19-220", "mfr": "Sanofi" }
+    {
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
+    },
+    {
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
+    },
+    {
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
+    }
   ],
   "familyHistory": [
-    "Father: Psoriasis, hypertension, alive at 56",
-    "Mother: Healthy, alive at 54",
-    "Brother: Eczema, alive at 22",
-    "Maternal aunt: Autoimmune hepatitis"
+    "Non-contributory"
   ],
   "socialHistory": [
-    ["Occupation", "Graduate student (MPH program at State University); part-time research assistant"],
-    ["Marital", "Single; lives with 2 roommates"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 3-4 drinks on weekends"],
-    ["Drugs", "Occasional marijuana; denies other substances"],
-    ["Exercise", "Running 4x/week; recreational basketball"],
-    ["Housing", "Apartment in Pembroke Pines; shared with roommates"],
-    ["Safety", "Denies IPV; seatbelt; helmet when cycling; no firearms"],
-    ["Advance Directive", "None — not discussed (age 24)"]
-  ],
-  "meta": {
-    "caseId": "erythema-multiforme-major",
-    "diagnosis": "Erythema Multiforme Major (HSV-Associated with Mucosal Involvement — Oral Erosions, Target Lesions, Recurrent Episode in Patient with Frequent HSV-1 Outbreaks)",
-    "acuity": 3,
-    "presentation": "Skin / Soft Tissue Emergency",
-    "category": "dermatologic"
+    [
+      "HSV history",
+      "3-4 outbreaks per year, last cold sore 10 days ago"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ]
+  ]
+,"references":[
+  {
+    "id": "EM-HSV-Prevention",
+    "title": "Erythema multiforme: recognition, treatment, and prevention",
+    "authors": "Sokumbi O, Wetter DA.",
+    "journal": "Cleve Clin J Med",
+    "year": 2012,
+    "doi": "10.3949/ccjm.79a.11118",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22473726/",
+    "openAccess": true,
+    "validates": [
+      "HSV triggers >70% recurrent EM",
+      "Valacyclovir 500mg daily prevents recurrence",
+      "EM vs SJS = different diseases"
+    ]
+  }
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "EM major is caused by infections (HSV #1 in adults, Mycoplasma pneumoniae #1 in children), NOT drugs. This distinguishes it from SJS/TEN which is drug-caused. Classic target lesions (3 zones: pale dusky center, dark edematous ring, red periphery) are the hallmark — present in acral distribution (palms, soles, dorsal hands, face).",
+      "EM major vs SJS: EM has typical 3-zone target lesions + acral distribution + usually 1 mucosal site + self-limiting. SJS has ill-defined atypical targets/purpuric macules + extensive trunk distribution + all mucosal sites + drug-caused + Nikolsky positive.",
+      "Recurrent EM (from HSV): daily suppressive acyclovir/valacyclovir reduces recurrence by 50–75%. This is a common clinical scenario — patient with recurrent EM should be on HSV suppression."
+    ],
+    "boardPearls": [
+      "EM cause: infections (HSV #1 adults, Mycoplasma #1 children). NOT drugs (drugs → SJS/TEN).",
+      "Classic target lesion: 3 zones — pale/dusky center + dark edematous inner ring + red outer ring. Acral distribution (palms, soles, dorsal hands, face).",
+      "EM major vs SJS: EM = infection, 3-zone targets, acral, limited mucosal (1 site, usually oral), Nikolsky NEGATIVE, self-limiting. SJS = drug, ill-defined targets, trunk-dominant, all mucosal sites, Nikolsky POSITIVE.",
+      "Nikolsky sign: NEGATIVE in EM major. Positive in TEN, pemphigus vulgaris, SSSS.",
+      "Natural history: EM major resolves in 2–6 weeks. Recurs with each HSV episode.",
+      "Recurrent EM treatment: suppress HSV — valacyclovir 500 mg BID daily (or acyclovir 400 mg BID) × 6–12 months.",
+      "EM minor: same lesions, NO/minimal mucosal involvement. Also HSV-triggered."
+    ]
   }
 };

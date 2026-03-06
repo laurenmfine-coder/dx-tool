@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Angela Brooks",
+  "patientHPI": "My left leg has been getting more and more swollen over the past four days, even though I've been taking my blood thinner shots religiously like the doctor ordered. My left calf is noticeably bigger than my right one now, and there's some mild discomfort - I'm worried because this is the same leg that had the blood clot before.",
     "dob": "11/08/1971",
     "age": 53,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 9050 Weston Rd, Weston, FL",
     "language": "English",
     "race": "African American",
-    "address": "4215 Bonaventure Blvd, Weston, FL 33332",
+    "address": "3551 Ash St, Louisville, KY 40212",
     "phone": "(954) 555-8726",
     "email": "a.brooks71@email.com",
     "emergencyContact": {

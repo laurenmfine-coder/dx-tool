@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Robinson",
+  "patientHPI": "I was riding my motorcycle when an SUV hit me, and I remember flying through the air before everything went black for a moment. My right leg is in terrible pain and I could see bone sticking out with a lot of blood, but the paramedics put something tight around my leg to stop the bleeding. I'm scared about what this means for my leg and whether I'll be able to walk normally again.",
     "dob": "10/30/1982",
     "age": 42,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 5601 W Broward Blvd, Plantation, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "6340 SW 22nd St, Miramar, FL 33023",
+    "address": "3979 Oak Ave, Birmingham, AL 35210",
     "phone": "(954) 555-3190",
     "email": "d.robinson82@email.com",
     "emergencyContact": {

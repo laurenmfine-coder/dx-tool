@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ricardo Jimenez",
+  "patientHPI": "I started having this really bad headache about 10 days ago, right across my forehead and around my cheeks, and it just keeps getting worse. My doctor thought it was another sinus infection and gave me antibiotics 5 days ago, but honestly I don't feel any better. Now I'm getting nauseous and feel feverish, and I'm having trouble focusing at work - it's like my brain is in a fog.",
     "dob": "11/04/1978",
     "age": 46,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 5001 S University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "2714 SW 42nd Terrace, Fort Lauderdale, FL 33312",
+    "address": "1393 Hollyhock Rd, Albuquerque, NM 87104",
     "phone": "(954) 555-7312",
     "email": "r.jimenez78@email.com",
     "emergencyContact": {

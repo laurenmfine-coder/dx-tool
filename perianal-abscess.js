@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Rasheed Thompson",
+  "patientHPI": "I've been doing pretty well lately with my bowel issues - just going 2-3 times a day which is normal for me, and no cramping or urgency like I used to have. There's still that little opening near my bottom that's been there for months with some clear drainage, but it's not bothering me much and my weight has been steady.",
     "dob": "03/10/1985",
     "age": 39,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 5050 W Oakland Park Blvd, Lauderdale Lakes, FL",
     "language": "English",
     "race": "African American",
-    "address": "3340 NW 34th St, Lauderdale Lakes, FL 33309",
+    "address": "7815 Ash St, Kansas City, MO 64128",
     "phone": "(954) 555-7718",
     "email": "r.thompson85@email.com",
     "emergencyContact": {

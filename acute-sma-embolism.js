@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Chambers",
+  "patientHPI": "I'm worried about when I can start my blood thinner again after being in the hospital for bleeding in my stomach. The black stools stopped and my stomach feels better on these acid pills, but I'm nervous about my heart without the medication.",
     "dob": "12/28/1948",
     "age": 76,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4000 N State Road 7, Lauderdale Lakes, FL",
     "language": "English",
     "race": "African American",
-    "address": "4820 NW 29th Ct, Lauderdale Lakes, FL 33313",
+    "address": "8388 Daisy Ave, Memphis, TN 38107",
     "phone": "(954) 555-6042",
     "email": "d.chambers48@email.com",
     "emergencyContact": {

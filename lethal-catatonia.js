@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Thibodeaux",
+  "patientHPI": "I've been pretty good about taking my medications, though I'll admit I sometimes forget my mood pills on the weekends when my routine gets messed up. I'm here for my regular check-up and everything seems fine - sleeping okay, eating well, my blood sugars have been running a bit high but not terrible.",
     "dob": "01/20/1990",
     "age": 35,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3450 W Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "1812 NW 6th St, Fort Lauderdale, FL 33311",
+    "address": "4018 S Halsted St, Indianapolis, IN 46208",
     "phone": "(954) 555-6142",
     "email": "m.thibodeaux@email.com",
     "emergencyContact": {

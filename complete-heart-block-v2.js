@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Edith Marchetti",
+  "patientHPI": "I'm getting so winded just getting dressed or taking a shower now, and twice in the past couple months I've felt like I was going to faint when I stood up - everything went gray for a moment but then I was okay.",
     "dob": "04/22/1941",
     "age": 84,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1601 N Hiatus Rd, Pembroke Pines, FL",
     "language": "English",
     "race": "White",
-    "address": "8450 NW 8th St, Pembroke Pines, FL 33024",
+    "address": "5902 Cedar Blvd, Pittsburgh, PA 15201",
     "phone": "(954) 555-7423",
     "email": "e.marchetti41@email.com",
     "emergencyContact": {

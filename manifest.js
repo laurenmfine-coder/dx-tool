@@ -1,1590 +1,260 @@
-// EMR Case Manifest — merged from original + Batches 1-17, 22-28
-// Generated: February 2026 | Updated: March 2026
-// Total cases: 261 (added 5 Phase 1 Cardiology Expansion cases March 2026)
-// Batches 18-21 merged February 2026
-// Phase 1 Cardiology (March 2026): afib-with-rvr, atrial-flutter, hypertensive-emergency-v2, unstable-angina-v2, adhf-new-diagnosis
-// 4 Syncope cases pending file generation (cardiac-arrhythmias, mallory-weiss-tear, upper-gi-hemorrhage, variceal-bleeding)
-
-window.EMR_MANIFEST = [
-  {
-    "presentation": "Demo Patient",
-    "cases": [
-      {
-        "id": "maria-santos",
-        "diagnosis": "Maria Santos — Outpatient SP (HTN/DM2/Anxiety)",
-        "acuity": 0,
-        "category": "demo"
-      }
-    ]
-  },
-  {
-    "presentation": "Abdominal Pain",
-    "cases": [
-      {
-        "id": "appendicitis-v1",
-        "diagnosis": "Acute Appendicitis",
-        "acuity": 3,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "aaa-v1",
-        "diagnosis": "Ruptured Abdominal Aortic Aneurysm",
-        "acuity": 1,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "crohn-flare",
-        "diagnosis": "Crohn's Disease Flare",
-        "acuity": 3,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "mesenteric-lymphadenitis",
-        "diagnosis": "Mesenteric Lymphadenitis",
-        "acuity": 4,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "ovarian-pathology",
-        "diagnosis": "Ovarian Torsion",
-        "acuity": 3,
-        "category": "gynecologic"
-      },
-      {
-        "id": "renal-colic",
-        "diagnosis": "Renal Colic (Nephrolithiasis)",
-        "acuity": 3,
-        "category": "renal"
-      },
-      {
-        "id": "ruptured-aaa",
-        "diagnosis": "Ruptured Abdominal Aortic Aneurysm",
-        "acuity": 1,
-        "category": "vascular"
-      },
-      {
-        "id": "ureterolithiasis",
-        "diagnosis": "Ureterolithiasis (Ureteral Stone with Obstruction)",
-        "acuity": 3,
-        "category": "renal"
-      }
-    ]
-  },
-  {
-    "presentation": "Allergic Reaction",
-    "cases": [
-      {
-        "id": "anaphylaxis",
-        "diagnosis": "Anaphylaxis (Food-Triggered)",
-        "acuity": 1,
-        "category": "immunologic"
-      },
-      {
-        "id": "ace-angioedema",
-        "diagnosis": "ACE Inhibitor-Induced Angioedema",
-        "acuity": 2,
-        "category": "immunologic"
-      },
-      {
-        "id": "acquired-c1esterase-inhibitor-deficiency",
-        "diagnosis": "Acquired C1-Esterase Inhibitor Deficiency",
-        "acuity": 2,
-        "category": "immunologic"
-      },
-      {
-        "id": "allergic-angioedema",
-        "diagnosis": "Allergic (Mast Cell-Mediated) Angioedema",
-        "acuity": 2,
-        "category": "immunologic"
-      },
-      {
-        "id": "asthma-exacerbation",
-        "diagnosis": "Acute Severe Asthma Exacerbation",
-        "acuity": 2,
-        "category": "pulmonary"
-      },
-      {
-        "id": "hereditary-angioedema",
-        "diagnosis": "Hereditary Angioedema (Type I)",
-        "acuity": 2,
-        "category": "immunologic"
-      },
-      {
-        "id": "idiopathic-angioedema",
-        "diagnosis": "Idiopathic Angioedema (Mast Cell-Mediated, CSU-Associated)",
-        "acuity": 3,
-        "category": "immunologic"
-      },
-      {
-        "id": "severe-allergic-reaction",
-        "diagnosis": "Severe Allergic Reaction (Anaphylaxis — Hymenoptera Venom)",
-        "acuity": 1,
-        "category": "immunologic"
-      },
-      {
-        "id": "vocal-cord-dysfunction",
-        "diagnosis": "Vocal Cord Dysfunction (Paradoxical Vocal Fold Motion)",
-        "acuity": 3,
-        "category": "pulmonary"
-      }
-    ]
-  },
-  {
-    "presentation": "Altered Mental Status",
-    "cases": [
-      {
-        "id": "dka-v1",
-        "diagnosis": "Diabetic Ketoacidosis (DKA)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "stroke-v1",
-        "diagnosis": "Acute Ischemic Stroke (Left MCA)",
-        "acuity": 1,
-        "category": "neurologic"
-      },
-      {
-        "id": "acute-ischemic-stroke",
-        "diagnosis": "Acute Ischemic Stroke (Cardioembolic)",
-        "acuity": 1,
-        "category": "neurologic"
-      },
-      {
-        "id": "alcoholic-ketoacidosis",
-        "diagnosis": "Alcoholic Ketoacidosis",
-        "acuity": 2,
-        "category": "metabolic"
-      },
-      {
-        "id": "complex-migraine",
-        "diagnosis": "Complex Migraine (Sporadic Hemiplegic Migraine)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "hemorrhagic-stroke",
-        "diagnosis": "Hemorrhagic Stroke (Hypertensive Intracerebral Hemorrhage)",
-        "acuity": 1,
-        "category": "neurologic"
-      },
-      {
-        "id": "hypoglycemia",
-        "diagnosis": "Severe Hypoglycemia (Insulin-Induced, CKD-Related)",
-        "acuity": 2,
-        "category": "endocrine"
-      },
-      {
-        "id": "todd-paralysis",
-        "diagnosis": "Todd's Paralysis (Postictal Paresis)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "toxic-ingestion",
-        "diagnosis": "Toxic Ingestion (Acute Acetaminophen Overdose)",
-        "acuity": 2,
-        "category": "toxicologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Back Pain",
-    "cases": [
-      {
-        "id": "cauda-equina",
-        "diagnosis": "Cauda Equina Syndrome",
-        "acuity": 2,
-        "category": "musculoskeletal"
-      },
-      {
-        "id": "aortic-dissection-back",
-        "diagnosis": "Acute Aortic Dissection (Type B — Descending)",
-        "acuity": 1,
-        "category": "musculoskeletal"
-      },
-      {
-        "id": "acute-aortic-dissection",
-        "diagnosis": "Acute Aortic Dissection (Stanford Type A)",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "aortic-aneurysm",
-        "diagnosis": "Symptomatic Abdominal Aortic Aneurysm",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "bilateral-lumbar-radiculopathy",
-        "diagnosis": "Bilateral Lumbar Radiculopathy (L5, with Progressive Left Foot Drop)",
-        "acuity": 3,
-        "category": "neurologic"
-      },
-      {
-        "id": "conus-medullaris-syndrome",
-        "diagnosis": "Conus Medullaris Syndrome (Metastatic Epidural Spinal Cord Compression)",
-        "acuity": 2,
-        "category": "oncologic"
-      },
-      {
-        "id": "epidural-abscess",
-        "diagnosis": "Spinal Epidural Abscess (Post-ESI, MSSA)",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "musculoskeletal-back-pain",
-        "diagnosis": "Acute Lumbosacral Muscle Strain (Mechanical)",
-        "acuity": 4,
-        "category": "musculoskeletal"
-      },
-      {
-        "id": "spinal-metastasis",
-        "diagnosis": "Spinal Metastasis with Pathologic Fracture (ER+ Breast Cancer)",
-        "acuity": 2,
-        "category": "oncologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Cardiac Emergency",
-    "cases": [
-      {
-        "id": "cardiac-tamponade",
-        "diagnosis": "Cardiac Tamponade (Malignant Pericardial Effusion)",
-        "acuity": 1,
-        "category": "cardiac"
-      },
-      {
-        "id": "complete-heart-block",
-        "diagnosis": "Complete (Third-Degree) Heart Block",
-        "acuity": 2,
-        "category": "cardiac"
-      },
-      {
-        "id": "acute-mi-with-av-block",
-        "diagnosis": "Acute Inferior MI with Second-Degree AV Block (Mobitz Type I)",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "complete-heart-block-v2",
-        "diagnosis": "Complete (Third-Degree) Heart Block",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "druginduced-av-block",
-        "diagnosis": "Drug-Induced AV Block (Beta-Blocker/CCB Toxicity)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "infiltrative-cardiomyopathy",
-        "diagnosis": "Infiltrative Cardiomyopathy (Wild-Type ATTR Cardiac Amyloidosis)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "lyme-carditis",
-        "diagnosis": "Lyme Carditis with High-Grade AV Block",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "massive-pe-with-rv-failure",
-        "diagnosis": "Massive Pulmonary Embolism with Acute Right Ventricular Failure",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "superior-vena-cava-syndrome",
-        "diagnosis": "Superior Vena Cava Syndrome (NSCLC-Related Extrinsic Compression)",
-        "acuity": 2,
-        "category": "oncologic"
-      },
-      {
-        "id": "afib-with-rvr",
-        "diagnosis": "Atrial Fibrillation with Rapid Ventricular Response (New Onset)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "atrial-flutter",
-        "diagnosis": "New-Onset Atrial Flutter with 2:1 AV Block",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "hypertensive-emergency-v2",
-        "diagnosis": "Hypertensive Emergency with Multi-Organ Involvement (PRES, Hypertensive Nephropathy, Demand Ischemia)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      }
-    ]
-  },
-  {
-    "presentation": "Chest Pain",
-    "cases": [
-      {
-        "id": "stemi-v1",
-        "diagnosis": "ST-Elevation Myocardial Infarction (STEMI)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "pericarditis-v1",
-        "diagnosis": "Acute Pericarditis",
-        "acuity": 3,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "nstemi-v1",
-        "diagnosis": "Non-ST Elevation Myocardial Infarction (NSTEMI)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "musculoskeletal",
-        "diagnosis": "Musculoskeletal Chest Pain (Costochondritis)",
-        "acuity": 4,
-        "category": "musculoskeletal"
-      },
-      {
-        "id": "myocarditis",
-        "diagnosis": "Acute Myocarditis",
-        "acuity": 3,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "nstemiunstable-angina",
-        "diagnosis": "NSTEMI / Unstable Angina (In-Stent Restenosis)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "takotsubo-cardiomyopathy",
-        "diagnosis": "Takotsubo Cardiomyopathy (Stress Cardiomyopathy)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "type-2-mi",
-        "diagnosis": "Type 2 Myocardial Infarction (Demand Ischemia — Severe Anemia with AFib/RVR)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "unstable-angina",
-        "diagnosis": "Unstable Angina",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "unstable-angina-v2",
-        "diagnosis": "Unstable Angina (High-Risk ACS — Rest Angina with Dynamic ECG Changes, Negative Initial Troponin)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      }
-    ]
-  },
-  {
-    "presentation": "ENT / Airway Emergency",
-    "cases": [
-      {
-        "id": "peritonsillar-abscess",
-        "diagnosis": "Peritonsillar Abscess (Quinsy)",
-        "acuity": 3,
-        "category": "ent"
-      },
-      {
-        "id": "ludwigs-angina",
-        "diagnosis": "Ludwig Angina (Submandibular Space Infection)",
-        "acuity": 1,
-        "category": "ent"
-      },
-      {
-        "id": "infectious-mononucleosis-with-tonsillar-hypertrophy",
-        "diagnosis": "Infectious Mononucleosis with Tonsillar Hypertrophy",
-        "acuity": 3,
-        "category": "infectious"
-      },
-      {
-        "id": "necrotizing-fasciitis-of-neck",
-        "diagnosis": "Cervical Necrotizing Fasciitis (Odontogenic Source)",
-        "acuity": 1,
-        "category": "infectious"
-      },
-      {
-        "id": "peritonsillar-abscess-v2",
-        "diagnosis": "Peritonsillar Abscess",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "peritonsillar-cellulitis",
-        "diagnosis": "Peritonsillar Cellulitis",
-        "acuity": 3,
-        "category": "infectious"
-      },
-      {
-        "id": "submandibular-sialolithiasis-with-secondary-infection",
-        "diagnosis": "Submandibular Sialolithiasis with Secondary Sialadenitis",
-        "acuity": 3,
-        "category": "infectious"
-      },
-      {
-        "id": "tonsillar-malignancy",
-        "diagnosis": "Tonsillar Malignancy (Oropharyngeal Squamous Cell Carcinoma)",
-        "acuity": 3,
-        "category": "oncologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Endocrine Emergency",
-    "cases": [
-      {
-        "id": "thyroid-storm",
-        "diagnosis": "Thyroid Storm",
-        "acuity": 1,
-        "category": "endocrine"
-      },
-      {
-        "id": "adrenal-crisis",
-        "diagnosis": "Adrenal Crisis (Acute Adrenal Insufficiency)",
-        "acuity": 1,
-        "category": "endocrine"
-      },
-      {
-        "id": "hyperkalemic-cardiac-emergency",
-        "diagnosis": "Hyperkalemic Cardiac Emergency (Adrenal Crisis with AKI)",
-        "acuity": 1,
-        "category": "endocrine"
-      },
-      {
-        "id": "hypovolemic-shock-from-gastroenteritis",
-        "diagnosis": "Hypovolemic Shock from Acute Gastroenteritis (Norovirus in Elderly Diabetic with CKD/HFpEF)",
-        "acuity": 1,
-        "category": "endocrine"
-      },
-      {
-        "id": "myxedema-coma",
-        "diagnosis": "Myxedema Coma",
-        "acuity": 1,
-        "category": "endocrine"
-      },
-      {
-        "id": "pheochromocytoma",
-        "diagnosis": "Pheochromocytoma",
-        "acuity": 2,
-        "category": "endocrine"
-      },
-      {
-        "id": "sepsisseptic-shock",
-        "diagnosis": "Sepsis / Septic Shock (Urinary Source in Uncontrolled Diabetic with BPH/CKD)",
-        "acuity": 1,
-        "category": "infectious"
-      }
-    ]
-  },
-  {
-    "presentation": "Environmental Emergency",
-    "cases": [
-      {
-        "id": "heat-stroke",
-        "diagnosis": "Exertional Heat Stroke",
-        "acuity": 1,
-        "category": "environmental"
-      },
-      {
-        "id": "severe-hypothermia",
-        "diagnosis": "Severe Accidental Hypothermia",
-        "acuity": 1,
-        "category": "environmental"
-      },
-      {
-        "id": "coral-snake-envenomation",
-        "diagnosis": "Eastern Coral Snake Envenomation",
-        "acuity": 2,
-        "category": "toxicologic"
-      },
-      {
-        "id": "exertional-heat-stroke",
-        "diagnosis": "Exertional Heat Stroke (with Sickle Cell Trait and Stimulant Medication as Risk Factors)",
-        "acuity": 1,
-        "category": "environmental"
-      },
-      {
-        "id": "hyperthermia-nms",
-        "diagnosis": "Neuroleptic Malignant Syndrome",
-        "acuity": 1,
-        "category": "toxicologic"
-      },
-      {
-        "id": "lightning-strike-injury",
-        "diagnosis": "Lightning Strike Injury",
-        "acuity": 1,
-        "category": "environmental"
-      },
-      {
-        "id": "submersion-injury",
-        "diagnosis": "Submersion Injury (Freshwater Near-Drowning, Pediatric)",
-        "acuity": 1,
-        "category": "environmental"
-      }
-    ]
-  },
-  {
-    "presentation": "Eye Emergency",
-    "cases": [
-      {
-        "id": "angle-closure-glaucoma",
-        "diagnosis": "Acute Angle-Closure Glaucoma",
-        "acuity": 2,
-        "category": "ophthalmologic"
-      },
-      {
-        "id": "crao",
-        "diagnosis": "Central Retinal Artery Occlusion (CRAO)",
-        "acuity": 2,
-        "category": "ophthalmologic"
-      },
-      {
-        "id": "acute-anterior-uveitis",
-        "diagnosis": "Acute Anterior Uveitis (HLA-B27-Associated, Recurrent, in Ankylosing Spondylitis)",
-        "acuity": 3,
-        "category": "ophthalmologic"
-      },
-      {
-        "id": "corneal-abrasionkeratitis",
-        "diagnosis": "Contact Lens-Related Bacterial Keratitis (Pseudomonas Suspected)",
-        "acuity": 3,
-        "category": "ophthalmologic"
-      },
-      {
-        "id": "giant-cell-arteritis-with-ophthalmic",
-        "diagnosis": "Giant Cell Arteritis with Anterior Ischemic Optic Neuropathy (Evolving from PMR)",
-        "acuity": 2,
-        "category": "ophthalmologic"
-      },
-      {
-        "id": "migraine-with-aura",
-        "diagnosis": "Migraine with Prolonged Visual Aura and Sensory Extension (PFO-Associated)",
-        "acuity": 3,
-        "category": "neurologic"
-      },
-      {
-        "id": "optic-neuritis",
-        "diagnosis": "Optic Neuritis (Clinically Isolated Syndrome, Possible MS)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "retinal-detachment",
-        "diagnosis": "Rhegmatogenous Retinal Detachment (Post-PVD in High Myopia)",
-        "acuity": 2,
-        "category": "ophthalmologic"
-      },
-      {
-        "id": "temporal-arteritis",
-        "diagnosis": "Giant Cell (Temporal) Arteritis with Concurrent PMR — Vision Threatened",
-        "acuity": 2,
-        "category": "ophthalmologic"
-      },
-      {
-        "id": "vitreous-hemorrhage",
-        "diagnosis": "Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy",
-        "acuity": 2,
-        "category": "ophthalmologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Fever / Sepsis",
-    "cases": [
-      {
-        "id": "septic-shock-urosepsis",
-        "diagnosis": "Septic Shock Secondary to Urosepsis",
-        "acuity": 1,
-        "category": "infectious"
-      },
-      {
-        "id": "neutropenic-fever",
-        "diagnosis": "Neutropenic Fever (Chemotherapy-Induced)",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "bacterial-meningitis",
-        "diagnosis": "Acute Bacterial Meningitis (Neisseria meningitidis Serogroup B)",
-        "acuity": 1,
-        "category": "infectious"
-      },
-      {
-        "id": "cap-with-sepsis",
-        "diagnosis": "Community-Acquired Pneumonia with Sepsis (S. pneumoniae, CURB-65 Score 3)",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "infective-endocarditis",
-        "diagnosis": "Infective Endocarditis — Subacute (Streptococcus viridans, Mitral Valve with MVP)",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "necrotizing-fasciitis",
-        "diagnosis": "Necrotizing Fasciitis Type I (Polymicrobial, Left Lower Extremity)",
-        "acuity": 1,
-        "category": "infectious"
-      },
-      {
-        "id": "pyelonephritis-urosepsis",
-        "diagnosis": "Acute Pyelonephritis with Urosepsis (E. coli, Neurogenic Bladder)",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "spontaneous-bacterial-peritonitis",
-        "diagnosis": "Spontaneous Bacterial Peritonitis (E. coli, Decompensated Cirrhosis)",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "tick-borne-illness",
-        "diagnosis": "Ehrlichiosis (Human Monocytic Ehrlichiosis)",
-        "acuity": 3,
-        "category": "infectious"
-      }
-    ]
-  },
-  {
-    "presentation": "GI Emergency",
-    "cases": [
-      {
-        "id": "sbo-strangulation",
-        "diagnosis": "Small Bowel Obstruction with Strangulation",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "severe-pancreatitis",
-        "diagnosis": "Acute Necrotizing Pancreatitis (Gallstone-Induced)",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "acute-cholecystitis",
-        "diagnosis": "Acute Cholecystitis",
-        "acuity": 3,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "acute-necrotizing-gallstone-pancreatitis",
-        "diagnosis": "Acute Necrotizing Gallstone Pancreatitis",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "alcoholrelated-pancreatitis",
-        "diagnosis": "Alcohol-Related Pancreatitis",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "incarcerated-incisional-hernia",
-        "diagnosis": "Incarcerated Incisional Hernia",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "perforated-peptic-ulcer",
-        "diagnosis": "Perforated Peptic Ulcer",
-        "acuity": 1,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "sbo-with-strangulation",
-        "diagnosis": "Small Bowel Obstruction with Strangulation",
-        "acuity": 1,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "simple-sbo",
-        "diagnosis": "Simple Small Bowel Obstruction",
-        "acuity": 3,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "small-bowel-volvulus",
-        "diagnosis": "Small Bowel Volvulus",
-        "acuity": 1,
-        "category": "gastrointestinal"
-      }
-    ]
-  },
-  {
-    "presentation": "Geriatric Emergency",
-    "cases": [
-      {
-        "id": "hip-fracture-anticoag",
-        "diagnosis": "Hip Fracture on Anticoagulation",
-        "acuity": 3,
-        "category": "geriatric"
-      },
-      {
-        "id": "subdural-hematoma",
-        "diagnosis": "Acute-on-Chronic Subdural Hematoma",
-        "acuity": 2,
-        "category": "geriatric"
-      },
-      {
-        "id": "brain-masstumor",
-        "diagnosis": "Brain Mass/Tumor (Metastatic, Presenting as Cognitive Decline)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "dementia-with-acute-delirium",
-        "diagnosis": "Dementia with Acute Delirium (UTI-Triggered)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "displaced-femoral-neck-fracture",
-        "diagnosis": "Displaced Femoral Neck Fracture",
-        "acuity": 2,
-        "category": "orthopedic"
-      },
-      {
-        "id": "hip-dislocation",
-        "diagnosis": "Hip Dislocation (Posterior, Post-THA)",
-        "acuity": 2,
-        "category": "orthopedic"
-      },
-      {
-        "id": "intertrochanteric-fracture",
-        "diagnosis": "Intertrochanteric Fracture",
-        "acuity": 2,
-        "category": "orthopedic"
-      },
-      {
-        "id": "normal-pressure-hydrocephalus",
-        "diagnosis": "Normal Pressure Hydrocephalus",
-        "acuity": 3,
-        "category": "neurologic"
-      },
-      {
-        "id": "pathologic-fracture",
-        "diagnosis": "Pathologic Fracture (Metastatic Bone Disease)",
-        "acuity": 2,
-        "category": "oncologic"
-      },
-      {
-        "id": "pubic-ramus-fracture",
-        "diagnosis": "Pubic Ramus Fracture",
-        "acuity": 3,
-        "category": "orthopedic"
-      }
-    ]
-  },
-  {
-    "presentation": "Headache",
-    "cases": [
-      {
-        "id": "sah-v1",
-        "diagnosis": "Subarachnoid Hemorrhage",
-        "acuity": 1,
-        "category": "neurologic"
-      },
-      {
-        "id": "meningitis-v1",
-        "diagnosis": "Bacterial Meningitis",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "brain-abscess",
-        "diagnosis": "Brain Abscess (Secondary to Sinusitis with Contiguous Spread)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "cervical-artery-dissection",
-        "diagnosis": "Internal Carotid Artery Dissection (Post-Chiropractic Manipulation in Ehlers-Danlos Syndrome)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "encephalitis",
-        "diagnosis": "Arboviral Encephalitis (Suspected Eastern Equine Encephalitis)",
-        "acuity": 2,
-        "category": "neurologic"
-      },
-      {
-        "id": "hypertensive-emergency",
-        "diagnosis": "Hypertensive Emergency with End-Organ Damage",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "migraine",
-        "diagnosis": "Chronic Migraine with Aura and Medication Overuse Headache",
-        "acuity": 3,
-        "category": "neurologic"
-      },
-      {
-        "id": "viral-meningitis",
-        "diagnosis": "Viral (Enteroviral) Meningitis",
-        "acuity": 3,
-        "category": "neurologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Hematologic Emergency",
-    "cases": [
-      {
-        "id": "ttp",
-        "diagnosis": "Thrombotic Thrombocytopenic Purpura (TTP)",
-        "acuity": 2,
-        "category": "hematologic"
-      },
-      {
-        "id": "dic-massive-transfusion",
-        "diagnosis": "Disseminated Intravascular Coagulation (DIC) with Massive Hemorrhage",
-        "acuity": 1,
-        "category": "hematologic"
-      },
-      {
-        "id": "acute-hemolytic-transfusion-reaction",
-        "diagnosis": "Acute Hemolytic Transfusion Reaction (ABO Incompatibility)",
-        "acuity": 1,
-        "category": "hematologic"
-      },
-      {
-        "id": "atypical-hus",
-        "diagnosis": "Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA in SLE)",
-        "acuity": 2,
-        "category": "hematologic"
-      },
-      {
-        "id": "autoimmune-hemolytic-anemia",
-        "diagnosis": "Warm Autoimmune Hemolytic Anemia (CLL-Associated)",
-        "acuity": 2,
-        "category": "hematologic"
-      },
-      {
-        "id": "dic-from-traumasurgery-with-hemorrhagic",
-        "diagnosis": "DIC (Trauma-Induced with Hemorrhagic Complications)",
-        "acuity": 1,
-        "category": "hematologic"
-      },
-      {
-        "id": "dilutional-coagulopathy",
-        "diagnosis": "Dilutional Coagulopathy (Massive Transfusion During EVAR)",
-        "acuity": 1,
-        "category": "hematologic"
-      },
-      {
-        "id": "inherited-coagulopathy",
-        "diagnosis": "Hemophilia A with Acute Hemorrhagic Episode",
-        "acuity": 2,
-        "category": "hematologic"
-      },
-      {
-        "id": "sle-flare-with-cytopenias",
-        "diagnosis": "SLE Flare with Evans Syndrome",
-        "acuity": 2,
-        "category": "hematologic"
-      },
-      {
-        "id": "surgical-bleeding",
-        "diagnosis": "Post-Operative Surgical Bleeding (Post-THA with Anticoagulation Complication)",
-        "acuity": 2,
-        "category": "hematologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Musculoskeletal Emergency",
-    "cases": [
-      {
-        "id": "septic-arthritis",
-        "diagnosis": "Septic Arthritis (Knee)",
-        "acuity": 3,
-        "category": "musculoskeletal"
-      },
-      {
-        "id": "compartment-syndrome",
-        "diagnosis": "Acute Compartment Syndrome (Tibial Fracture)",
-        "acuity": 2,
-        "category": "musculoskeletal"
-      },
-      {
-        "id": "acute-compartment-syndrome",
-        "diagnosis": "Acute Compartment Syndrome — Anterior Compartment, Right Leg (Post-Tibial Fracture)",
-        "acuity": 1,
-        "category": "orthopedic"
-      },
-      {
-        "id": "deep-vein-thrombosis",
-        "diagnosis": "Acute Proximal DVT — Left Femoral Vein (OCP + Obesity + Prolonged Travel)",
-        "acuity": 3,
-        "category": "vascular"
-      },
-      {
-        "id": "fracture-pain",
-        "diagnosis": "Distal Radius Fracture (Colles') — Osteoporotic Fragility Fracture After Fall",
-        "acuity": 3,
-        "category": "orthopedic"
-      },
-      {
-        "id": "gonococcal-arthritis",
-        "diagnosis": "Disseminated Gonococcal Infection with Septic Arthritis — Right Knee",
-        "acuity": 3,
-        "category": "infectious"
-      },
-      {
-        "id": "gout-flare",
-        "diagnosis": "Acute Gouty Arthritis — Right First MTP (Podagra), Non-Adherent to ULT",
-        "acuity": 4,
-        "category": "rheumatologic"
-      },
-      {
-        "id": "pseudogout",
-        "diagnosis": "Acute CPPD Crystal Arthropathy (Pseudogout) — Right Knee, with Hyperparathyroidism",
-        "acuity": 3,
-        "category": "rheumatologic"
-      },
-      {
-        "id": "reactive-arthritis",
-        "diagnosis": "Reactive Arthritis (Post-Campylobacter, HLA-B27-Associated)",
-        "acuity": 3,
-        "category": "rheumatologic"
-      },
-      {
-        "id": "septic-arthritis-v2",
-        "diagnosis": "Prosthetic Joint Infection — Left TKA (S. aureus, Hematogenous Seeding)",
-        "acuity": 2,
-        "category": "infectious"
-      },
-      {
-        "id": "vascular-injury-with-limb-ischemia",
-        "diagnosis": "Popliteal Artery Injury with Acute Limb Ischemia (Post-Supracondylar Femur Fracture)",
-        "acuity": 1,
-        "category": "vascular"
-      }
-    ]
-  },
-  {
-    "presentation": "Obstetric Emergency",
-    "cases": [
-      {
-        "id": "ectopic-pregnancy",
-        "diagnosis": "Ruptured Ectopic Pregnancy",
-        "acuity": 1,
-        "category": "obstetric"
-      },
-      {
-        "id": "eclampsia",
-        "diagnosis": "Eclampsia",
-        "acuity": 1,
-        "category": "obstetric"
-      }
-    ]
-  },
-  {
-    "presentation": "Pediatric Emergency",
-    "cases": [
-      {
-        "id": "epiglottitis",
-        "diagnosis": "Acute Epiglottitis",
-        "acuity": 1,
-        "category": "pediatric"
-      },
-      {
-        "id": "intussusception",
-        "diagnosis": "Ileocolic Intussusception",
-        "acuity": 2,
-        "category": "pediatric"
-      }
-    ]
-  },
-  {
-    "presentation": "Psychiatric Emergency",
-    "cases": [
-      {
-        "id": "nms",
-        "diagnosis": "Neuroleptic Malignant Syndrome (NMS)",
-        "acuity": 2,
-        "category": "psychiatric"
-      },
-      {
-        "id": "serotonin-syndrome",
-        "diagnosis": "Serotonin Syndrome",
-        "acuity": 2,
-        "category": "psychiatric"
-      }
-    ]
-  },
-  {
-    "presentation": "Renal / Electrolyte Emergency",
-    "cases": [
-      {
-        "id": "hyperkalemia-cardiac",
-        "diagnosis": "Severe Hyperkalemia with Cardiac Toxicity",
-        "acuity": 1,
-        "category": "renal"
-      },
-      {
-        "id": "severe-hyponatremia",
-        "diagnosis": "Severe Hyponatremia with Seizure (SIADH from SSRI)",
-        "acuity": 1,
-        "category": "renal"
-      }
-    ]
-  },
-  {
-    "presentation": "Seizure",
-    "cases": [
-      {
-        "id": "status-epilepticus",
-        "diagnosis": "Status Epilepticus",
-        "acuity": 1,
-        "category": "neurologic"
-      },
-      {
-        "id": "new-seizure-mass",
-        "diagnosis": "New-Onset Seizure Secondary to Brain Mass (Glioblastoma)",
-        "acuity": 2,
-        "category": "neurologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Shortness of Breath",
-    "cases": [
-      {
-        "id": "pe-v1",
-        "diagnosis": "Acute Pulmonary Embolism",
-        "acuity": 2,
-        "category": "pulmonary"
-      },
-      {
-        "id": "chf-v1",
-        "diagnosis": "Acute Decompensated Heart Failure",
-        "acuity": 2,
-        "category": "pulmonary"
-      },
-      {
-        "id": "copd-v1",
-        "diagnosis": "Acute COPD Exacerbation",
-        "acuity": 3,
-        "category": "pulmonary"
-      },
-      {
-        "id": "acute-coronary-syndrome",
-        "diagnosis": "Acute Coronary Syndrome (NSTEMI Presenting as Dyspnea — Anginal Equivalent in Diabetic Patient)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "acute-mi",
-        "diagnosis": "Acute Myocardial Infarction (STEMI with Acute Pulmonary Edema — Presenting as Sudden-Onset Dyspnea in Known HFrEF)",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "anxietypanic-attack",
-        "diagnosis": "Acute Panic Attack with Hyperventilation Syndrome (Presenting as Dyspnea, Tachycardia, and Paresthesias)",
-        "acuity": 3,
-        "category": "psychiatric"
-      },
-      {
-        "id": "chf-exacerbation",
-        "diagnosis": "Acute Decompensated Heart Failure (HFrEF NYHA IV — Volume Overload with Diuretic Resistance and Cardiorenal Syndrome)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "lung-cancer-with-postobstructive-process",
-        "diagnosis": "Lung Cancer (Suspected Squamous Cell Carcinoma, RUL) with Post-Obstructive Pneumonia and Hypercalcemia of Malignancy",
-        "acuity": 3,
-        "category": "pulmonary"
-      },
-      {
-        "id": "pneumonia",
-        "diagnosis": "Community-Acquired Pneumonia (RLL Lobar Consolidation, Likely Streptococcus pneumoniae) in Asthmatic Patient with Penicillin Allergy",
-        "acuity": 3,
-        "category": "pulmonary"
-      },
-      {
-        "id": "pneumonia-on-copd",
-        "diagnosis": "Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV (Acute Hypercapnic Respiratory Failure with Sepsis)",
-        "acuity": 2,
-        "category": "pulmonary"
-      },
-      {
-        "id": "pneumothorax",
-        "diagnosis": "Primary Spontaneous Pneumothorax",
-        "acuity": 2,
-        "category": "pulmonary"
-      },
-      {
-        "id": "anxiety-panic-attack",
-        "diagnosis": "Panic Attack with Hyperventilation",
-        "acuity": 4,
-        "category": "psychiatric"
-      },
-      {
-        "id": "acute-mi-dyspnea",
-        "diagnosis": "Acute Myocardial Infarction (Dyspnea-Predominant Presentation)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "lung-cancer-post-obstructive",
-        "diagnosis": "Lung Cancer with Post-Obstructive Pneumonia",
-        "acuity": 3,
-        "category": "pulmonary"
-      },
-      {
-        "id": "chf-exacerbation-v2",
-        "diagnosis": "Acute Decompensated Heart Failure — HFrEF Exacerbation (Variant B)",
-        "acuity": 3,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "pneumonia-v2",
-        "diagnosis": "Community-Acquired Pneumonia (Variant B)",
-        "acuity": 3,
-        "category": "pulmonary"
-      },
-      {
-        "id": "pneumonia-on-copd-v2",
-        "diagnosis": "Community-Acquired Pneumonia on Severe COPD (Variant B)",
-        "acuity": 3,
-        "category": "pulmonary"
-      },
-      {
-        "id": "adhf-new-diagnosis",
-        "diagnosis": "Acute Decompensated Heart Failure — New Diagnosis (Suspected HFrEF, EF Pending Echo)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      }
-    ]
-  },
-  {
-    "presentation": "Skin / Soft Tissue Emergency",
-    "cases": [
-      {
-        "id": "nec-fasciitis",
-        "diagnosis": "Necrotizing Fasciitis (Group A Streptococcus — Extremity)",
-        "acuity": 1,
-        "category": "dermatologic"
-      },
-      {
-        "id": "sjs-ten",
-        "diagnosis": "Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis (SJS/TEN)",
-        "acuity": 2,
-        "category": "dermatologic"
-      },
-      {
-        "id": "autoimmune-blistering-disease",
-        "diagnosis": "Bullous Pemphigoid (Generalized Tense Bullae with Prodromal Pruritus and Peripheral Eosinophilia in Elderly Female on Anticoagulation)",
-        "acuity": 3,
-        "category": "dermatologic"
-      },
-      {
-        "id": "dress-syndrome",
-        "diagnosis": "DRESS Syndrome (Carbamazepine-Induced Drug Reaction with Eosinophilia and Systemic Symptoms — Hepatitis, Lymphadenopathy, and Diffuse Morbilliform Eruption)",
-        "acuity": 2,
-        "category": "dermatologic"
-      },
-      {
-        "id": "dvt-with-phlegmasia",
-        "diagnosis": "Phlegmasia Cerulea Dolens — Massive Iliofemoral DVT (Left Leg) in Trousseau Syndrome (Pancreatic Cancer-Associated VTE)",
-        "acuity": 1,
-        "category": "vascular"
-      },
-      {
-        "id": "erythema-multiforme-major",
-        "diagnosis": "Erythema Multiforme Major (HSV-Associated with Mucosal Involvement — Recurrent Episode)",
-        "acuity": 3,
-        "category": "dermatologic"
-      },
-      {
-        "id": "gas-gangrene",
-        "diagnosis": "Gas Gangrene (Clostridial Myonecrosis — Right Lower Extremity from Diabetic Foot Ulcer with PAD)",
-        "acuity": 1,
-        "category": "infectious"
-      },
-      {
-        "id": "sjsten-overlap",
-        "diagnosis": "SJS-TEN Overlap Syndrome (Allopurinol-Induced — 15-20% BSA Epidermal Detachment with Mucosal Involvement)",
-        "acuity": 1,
-        "category": "dermatologic"
-      },
-      {
-        "id": "severe-cellulitis",
-        "diagnosis": "Severe Cellulitis with Abscess Formation (Suspected MRSA — Right Lower Extremity in HIV-Positive Patient with Prior MRSA SSTI)",
-        "acuity": 3,
-        "category": "infectious"
-      },
-      {
-        "id": "staphylococcal-scalded-skin-syndrome",
-        "diagnosis": "Staphylococcal Scalded Skin Syndrome (SSSS — Generalized Exfoliation in 2-Year-Old with Eczema)",
-        "acuity": 2,
-        "category": "dermatologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Syncope",
-    "cases": [
-      {
-        "id": "vt-syncope",
-        "diagnosis": "Ventricular Tachycardia with Syncope",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "gi-bleed-syncope",
-        "diagnosis": "Upper GI Hemorrhage with Syncope",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "cardiac-syncope",
-        "diagnosis": "Cardiac Syncope (Exertional Syncope Secondary to Severe Aortic Stenosis — Bicuspid Valve, AVA 0.8 cm², Pending TAVR)",
-        "acuity": 2,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "gastric-malignancy",
-        "diagnosis": "Gastric Adenocarcinoma (Syncope from Chronic Occult GI Hemorrhage — Iron-Refractory IDA, H. pylori Atrophic Gastritis with Intestinal Metaplasia)",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "hcm",
-        "diagnosis": "Hypertrophic Obstructive Cardiomyopathy (HOCM — Exertional Syncope in Young Athlete with Family History of Sudden Cardiac Death)",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "long-qt-syndrome",
-        "diagnosis": "Drug-Induced Long QT Syndrome with Torsades de Pointes (Citalopram + Azithromycin + Hypokalemia — Synergistic QT Prolongation)",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "orthostatic-hypotension",
-        "diagnosis": "Orthostatic Syncope (Multifactorial — Dopamine Agonist + Alpha-Blocker + CCB + Parkinson Autonomic Dysfunction, with Osteoporosis Fall Risk)",
-        "acuity": 3,
-        "category": "neurologic"
-      },
-      {
-        "id": "pulmonary-embolism-syncope",
-        "diagnosis": "Massive Pulmonary Embolism with Syncope (Post-Orthopedic Surgery DVT — Non-Adherence to VTE Prophylaxis, OCP, Obesity)",
-        "acuity": 1,
-        "category": "cardiovascular"
-      },
-      {
-        "id": "vasovagal-syncope",
-        "diagnosis": "Vasovagal Syncope (Situational — Classic Neurocardiogenic with Documented Tilt Table, Iron Deficiency Anemia Baseline)",
-        "acuity": 3,
-        "category": "neurologic"
-      },
-      {
-        "id": "wpw-syndrome",
-        "diagnosis": "WPW Syndrome (Pre-Excited SVT Causing Exertional Syncope — Left-Sided Accessory Pathway, Orthodromic AVRT)",
-        "acuity": 1,
-        "category": "cardiovascular"
-      }
-    ]
-  },
-  {
-    "presentation": "Toxicologic Emergency",
-    "cases": [
-      {
-        "id": "apap-overdose",
-        "diagnosis": "Acetaminophen Overdose (Intentional)",
-        "acuity": 2,
-        "category": "toxicology"
-      },
-      {
-        "id": "salicylate-toxicity",
-        "diagnosis": "Salicylate Toxicity (Chronic)",
-        "acuity": 2,
-        "category": "toxicology"
-      },
-      {
-        "id": "acute-viral-hepatitis",
-        "diagnosis": "Acute Hepatitis A (Foodborne — Occupational Shellfish Exposure in Unvaccinated Patient with Baseline NAFLD)",
-        "acuity": 3,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "alcoholic-hepatitis",
-        "diagnosis": "Severe Alcoholic Hepatitis (Maddrey DF >32, AST:ALT >2:1, Coagulopathy — Prednisolone Candidate)",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "cholelithiasis-cholecystitis",
-        "diagnosis": "Acute Calculous Cholecystitis with Choledocholithiasis (Deferred Elective Cholecystectomy, Sickle Cell Trait with Pigmented Stones)",
-        "acuity": 2,
-        "category": "gastrointestinal"
-      },
-      {
-        "id": "chronic-salicylate-toxicity",
-        "diagnosis": "Chronic Salicylate Toxicity (Occult OTC Aspirin Self-Medication in Elderly with CKD 3b and Apixaban)",
-        "acuity": 2,
-        "category": "toxicologic"
-      },
-      {
-        "id": "mixed-overdose",
-        "diagnosis": "Intentional Mixed Overdose (Acetaminophen + Diphenhydramine + Alcohol in Patient with MDD, BPD, Prior SA)",
-        "acuity": 1,
-        "category": "toxicologic"
-      },
-      {
-        "id": "uremic-encephalopathy",
-        "diagnosis": "Uremic Encephalopathy (Missed Dialysis in Non-Adherent ESRD Patient with Transportation Barriers)",
-        "acuity": 2,
-        "category": "renal"
-      }
-    ]
-  },
-  {
-    "presentation": "Trauma",
-    "cases": [
-      {
-        "id": "tension-ptx",
-        "diagnosis": "Tension Pneumothorax",
-        "acuity": 1,
-        "category": "trauma"
-      },
-      {
-        "id": "epidural-hematoma",
-        "diagnosis": "Epidural Hematoma",
-        "acuity": 1,
-        "category": "trauma"
-      },
-      {
-        "id": "aortic-injury",
-        "diagnosis": "Blunt Traumatic Aortic Injury",
-        "acuity": 1,
-        "category": "trauma"
-      },
-      {
-        "id": "cerebral-contusion",
-        "diagnosis": "Cerebral Contusion",
-        "acuity": 2,
-        "category": "trauma"
-      },
-      {
-        "id": "diffuse-axonal-injury",
-        "diagnosis": "Diffuse Axonal Injury",
-        "acuity": 1,
-        "category": "trauma"
-      },
-      {
-        "id": "flail-chest",
-        "diagnosis": "Flail Chest",
-        "acuity": 1,
-        "category": "trauma"
-      },
-      {
-        "id": "massive-hemothorax",
-        "diagnosis": "Massive Hemothorax",
-        "acuity": 1,
-        "category": "trauma"
-      },
-      {
-        "id": "postconcussion-with-intracranial-hypertension",
-        "diagnosis": "Post-Concussion Syndrome with Intracranial Hypertension",
-        "acuity": 2,
-        "category": "trauma"
-      }
-    ]
-  },
-  {
-    "presentation": "Urologic Emergency",
-    "cases": [
-      {
-        "id": "testicular-torsion",
-        "diagnosis": "Testicular Torsion",
-        "acuity": 2,
-        "category": "urologic"
-      },
-      {
-        "id": "fournier-gangrene",
-        "diagnosis": "Fournier Gangrene (Necrotizing Perineal Fasciitis)",
-        "acuity": 1,
-        "category": "urologic"
-      },
-      {
-        "id": "cellulitis",
-        "diagnosis": "Scrotal Cellulitis",
-        "acuity": 3,
-        "category": "urologic"
-      },
-      {
-        "id": "epididymitis",
-        "diagnosis": "Acute Epididymitis",
-        "acuity": 3,
-        "category": "urologic"
-      },
-      {
-        "id": "epididymoorchitis",
-        "diagnosis": "Epididymo-orchitis",
-        "acuity": 3,
-        "category": "urologic"
-      },
-      {
-        "id": "incarcerated-hernia-with-strangulation",
-        "diagnosis": "Incarcerated Inguinal Hernia with Strangulation",
-        "acuity": 2,
-        "category": "urologic"
-      },
-      {
-        "id": "perianal-abscess",
-        "diagnosis": "Perianal Abscess",
-        "acuity": 3,
-        "category": "urologic"
-      },
-      {
-        "id": "testicular-traumarupture",
-        "diagnosis": "Testicular Trauma with Rupture",
-        "acuity": 2,
-        "category": "urologic"
-      },
-      {
-        "id": "torsion-of-appendix-testis",
-        "diagnosis": "Torsion of Appendix Testis",
-        "acuity": 3,
-        "category": "urologic"
-      }
-    ]
-  },
-  {
-    "presentation": "Vascular Emergency",
-    "cases": [
-      {
-        "id": "acute-limb-ischemia",
-        "diagnosis": "Acute Limb Ischemia (Embolic)",
-        "acuity": 2,
-        "category": "vascular"
-      },
-      {
-        "id": "mesenteric-ischemia",
-        "diagnosis": "Acute Mesenteric Ischemia (Superior Mesenteric Artery Embolism)",
-        "acuity": 1,
-        "category": "vascular"
-      },
-      {
-        "id": "acute-embolic-limb-ischemia",
-        "diagnosis": "Acute Embolic Limb Ischemia",
-        "acuity": 2,
-        "category": "vascular"
-      },
-      {
-        "id": "acute-pancreatitis",
-        "diagnosis": "Acute Pancreatitis (Vascular Complication)",
-        "acuity": 2,
-        "category": "vascular"
-      },
-      {
-        "id": "acute-sma-embolism",
-        "diagnosis": "Acute Superior Mesenteric Artery Embolism",
-        "acuity": 1,
-        "category": "vascular"
-      },
-      {
-        "id": "acute-sma-thrombosis",
-        "diagnosis": "Acute Superior Mesenteric Artery Thrombosis",
-        "acuity": 1,
-        "category": "vascular"
-      },
-      {
-        "id": "acute-thrombotic-occlusion",
-        "diagnosis": "Acute Thrombotic Arterial Occlusion",
-        "acuity": 2,
-        "category": "vascular"
-      },
-      {
-        "id": "aortic-saddle-embolus",
-        "diagnosis": "Aortic Saddle Embolus",
-        "acuity": 1,
-        "category": "vascular"
-      },
-      {
-        "id": "nonocclusive-mesenteric-ischemia",
-        "diagnosis": "Nonocclusive Mesenteric Ischemia (NOMI)",
-        "acuity": 1,
-        "category": "vascular"
-      },
-      {
-        "id": "phlegmasia-cerulea-dolens",
-        "diagnosis": "Phlegmasia Cerulea Dolens",
-        "acuity": 1,
-        "category": "vascular"
-      }
-    ]
-  },
-  {
-    "presentation": "Pediatric Emergency",
-    "cases": [
-      { "id": "bacterial-tracheitis", "diagnosis": "Bacterial Tracheitis (Membranous Croup) — Post-Viral Staphylococcus aureus Superinfection", "acuity": 2, "category": "infectious" },
-      { "id": "gastroenteritis", "diagnosis": "Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis", "acuity": 3, "category": "infectious" },
-      { "id": "incarcerated-inguinal-hernia", "diagnosis": "Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant", "acuity": 2, "category": "surgical" },
-      { "id": "meckel-diverticulum", "diagnosis": "Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage", "acuity": 2, "category": "surgical" },
-      { "id": "midgut-volvulus", "diagnosis": "Intestinal Malrotation with Midgut Volvulus — Acute Presentation with Metabolic Acidosis", "acuity": 1, "category": "surgical" },
-      { "id": "retropharyngeal-abscess", "diagnosis": "Retropharyngeal Abscess (C2-C4) with Airway Compromise — Complication of AOM/URI", "acuity": 2, "category": "infectious" },
-      { "id": "severe-croup", "diagnosis": "Severe Viral Croup (Laryngotracheobronchitis) — Westley Score 8, Requiring Nebulized Epinephrine", "acuity": 2, "category": "respiratory" }
-    ]
-  },
-  {
-    "presentation": "Psychiatric Emergency",
-    "cases": [
-      { "id": "anticholinergic-toxicity", "diagnosis": "Anticholinergic Toxidrome — Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine)", "acuity": 2, "category": "toxicologic" },
-      { "id": "lethal-catatonia", "diagnosis": "Lethal (Malignant) Catatonia with Autonomic Instability, Rhabdomyolysis, and Concurrent Lithium Toxicity", "acuity": 1, "category": "psychiatric" },
-      { "id": "malignant-hyperthermia", "diagnosis": "Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy", "acuity": 1, "category": "anesthetic" },
-      { "id": "sepsis-with-rigidity", "diagnosis": "Urosepsis with Parkinson-Akinetic Crisis (Dopaminergic Withdrawal) — Confounding Presentation Mimicking NMS", "acuity": 2, "category": "neurologic" },
-      { "id": "sympathomimetic-toxicity", "diagnosis": "Sympathomimetic Toxidrome — Prescription Amphetamine Excess + Caffeine with Demand Ischemia", "acuity": 2, "category": "toxicologic" }
-    ]
-  },
-  {
-    "presentation": "Renal / Electrolyte Emergency",
-    "cases": [
-      { "id": "adrenal-insufficiency", "diagnosis": "Acute Adrenal Crisis with Hyperkalemia, Hyponatremia, and Hypoglycemia — Triggered by Missed Hydrocortisone Doses During Viral Illness", "acuity": 2, "category": "endocrine" },
-      { "id": "cerebral-salt-wasting", "diagnosis": "Cerebral Salt Wasting Syndrome (Post-SAH) with Severe Hyponatremia and Volume Depletion", "acuity": 2, "category": "neurologic" },
-      { "id": "hyperkalemia-with-concurrent-acs", "diagnosis": "Hyperkalemia (K+ 7.1) with Concurrent NSTEMI — Dual Emergency Requiring Simultaneous Cardiac and Electrolyte Management", "acuity": 1, "category": "cardiac" },
-      { "id": "hypothyroidismrelated-hyponatremia", "diagnosis": "Severe Hypothyroidism-Related Hyponatremia (Na 119) — Undiagnosed Myxedema with Hyponatremic Encephalopathy", "acuity": 2, "category": "endocrine" },
-      { "id": "medication-overdose", "diagnosis": "Medication Overdose (ACE-I/Spironolactone) — Iatrogenic Hyperkalemia with AKI and ECG Changes", "acuity": 2, "category": "pharmacologic" },
-      { "id": "psychogenic-polydipsia", "diagnosis": "Psychogenic Polydipsia with Acute Water Intoxication and Hyponatremic Seizure", "acuity": 2, "category": "psychiatric" },
-      { "id": "rhabdomyolysisinduced-hyperkalemia", "diagnosis": "Rhabdomyolysis-Induced Hyperkalemia (K+ 6.8) — Exertional Rhabdomyolysis with AKI and Myoglobinuria", "acuity": 2, "category": "renal" },
-      { "id": "siadh", "diagnosis": "SIADH (Drug-Induced — Sertraline + HCTZ) with Chronic Hyponatremia and Acute Decompensation", "acuity": 3, "category": "endocrine" },
-      { "id": "severe-hyperkalemia-from-missed-dialysis", "diagnosis": "Severe Hyperkalemia (K+ 7.8) with ECG Changes from Missed Hemodialysis — ESRD with Volume Overload and Metabolic Acidosis", "acuity": 1, "category": "renal" },
-      { "id": "thiazideinduced-hyponatremia", "diagnosis": "Thiazide-Induced Hyponatremia (Na 118) — 6 Weeks After HCTZ Initiation in Elderly Female with Symptomatic Hyponatremic Encephalopathy", "acuity": 3, "category": "pharmacologic" }
-    ]
-  },
-  {
-    "presentation": "Seizure",
-    "cases": [
-      { "id": "alcohol-withdrawal-seizures", "diagnosis": "Alcohol Withdrawal Seizure (GTC) — 48 Hours Post-Cessation with High Risk for Delirium Tremens", "acuity": 2, "category": "toxicologic" },
-      { "id": "brain-metastasis", "diagnosis": "Brain Metastases (3 Lesions) from NSCLC with New-Onset Seizure — Left Frontal Dominant Lesion", "acuity": 2, "category": "oncologic" },
-      { "id": "cns-infection", "diagnosis": "CNS Toxoplasmosis with New-Onset Seizure in AIDS — Multiple Ring-Enhancing Lesions", "acuity": 2, "category": "infectious" },
-      { "id": "cns-lymphoma", "diagnosis": "Primary CNS Lymphoma (Suspected) — Periventricular Butterfly Lesion in Immunosuppressed Patient", "acuity": 2, "category": "oncologic" },
-      { "id": "meningioma", "diagnosis": "Right Parasagittal Meningioma (4.8 cm) with New-Onset Seizure and Midline Shift", "acuity": 3, "category": "oncologic" },
-      { "id": "metabolic", "diagnosis": "Metabolic Seizure — Dual Etiology: Severe Hypoglycemia (BG 28) and Hyponatremia (Na 124)", "acuity": 2, "category": "metabolic" },
-      { "id": "primary-brain-tumor", "diagnosis": "Glioblastoma Multiforme (GBM, WHO Grade IV) — Left Frontotemporal with New-Onset Seizure", "acuity": 2, "category": "oncologic" },
-      { "id": "structural-lesion", "diagnosis": "Cerebral Cavernous Malformation (Left Mesial Temporal) with Acute Hemorrhage and Seizure", "acuity": 3, "category": "vascular" }
-    ]
-  }
+/* emr-data/manifest.js — EMR Case Manifest
+ * Provides window.EMR_MANIFEST used by admissions, ed-3d, night-float, virtual-emr.
+ * Each entry is a batch grouped by presentation.
+ */
+var EMR_MANIFEST = window.EMR_MANIFEST || [
+  { presentation:"Chest Pain", cases:[
+    {id:"stemi-v1",diagnosis:"ST-Elevation MI",category:"cardiology",acuity:1,cc:"Crushing chest pain radiating to left arm \u00D7 1hr"},
+    {id:"nstemi-v1",diagnosis:"NSTEMI",category:"cardiology",acuity:2,cc:"Chest pressure and shortness of breath \u00D7 3hrs"},
+    {id:"acute-coronary-syndrome",diagnosis:"Acute Coronary Syndrome",category:"cardiology",acuity:2,cc:"Substernal chest tightness with exertion, worse today"},
+    {id:"pe-v1",diagnosis:"Pulmonary Embolism",category:"pulmonary",acuity:1,cc:"Sudden onset pleuritic chest pain and dyspnea"},
+    {id:"pericarditis-v1",diagnosis:"Pericarditis",category:"cardiology",acuity:3,cc:"Sharp chest pain worse when lying flat, better leaning forward"},
+    {id:"aortic-dissection-back",diagnosis:"Aortic Dissection",category:"cardiology",acuity:1,cc:"Sudden tearing chest pain radiating to back"},
+    {id:"pneumothorax",diagnosis:"Pneumothorax",category:"pulmonary",acuity:2,cc:"Acute onset right-sided chest pain and difficulty breathing"}
+  ]},
+  { presentation:"Dyspnea", cases:[
+    {id:"chf-exacerbation",diagnosis:"CHF Exacerbation",category:"cardiology",acuity:2,cc:"Worsening shortness of breath, can't lie flat, leg swelling \u00D7 3 days"},
+    {id:"copd-v1",diagnosis:"COPD Exacerbation",category:"pulmonary",acuity:2,cc:"Worsening dyspnea and productive cough \u00D7 3 days"},
+    {id:"asthma-exacerbation",diagnosis:"Asthma Exacerbation",category:"pulmonary",acuity:2,cc:"Wheezing and difficulty breathing, inhaler not helping"},
+    {id:"pneumonia",diagnosis:"Community-Acquired Pneumonia",category:"infectious",acuity:3,cc:"Fever, cough with yellow sputum, shortness of breath \u00D7 4 days"},
+    {id:"massive-pe-with-rv-failure",diagnosis:"Massive PE with RV Failure",category:"pulmonary",acuity:1,cc:"Sudden severe dyspnea, near-syncope, cannot catch breath"},
+    {id:"vocal-cord-dysfunction",diagnosis:"Vocal Cord Dysfunction (PVFM)",category:"pulmonary",acuity:3,cc:"Episodic inspiratory stridor and throat tightness — misdiagnosed as asthma for 2 years"}
+  ]},
+  { presentation:"Altered Mental Status", cases:[
+    {id:"dka-v1",diagnosis:"Diabetic Ketoacidosis",category:"endocrine",acuity:1,cc:"Nausea, vomiting, abdominal pain, increasingly confused \u00D7 2 days"},
+    {id:"stroke-v1",diagnosis:"Acute Ischemic Stroke",category:"neurology",acuity:1,cc:"Sudden left-sided weakness and slurred speech \u00D7 45min"},
+    {id:"meningitis-v1",diagnosis:"Bacterial Meningitis",category:"infectious",acuity:1,cc:"Severe headache, neck stiffness, fever, photophobia"},
+    {id:"status-epilepticus",diagnosis:"Status Epilepticus",category:"neurology",acuity:1,cc:"Witnessed seizure, not stopping, ongoing convulsions"},
+    {id:"severe-hyponatremia",diagnosis:"Severe Hyponatremia",category:"renal",acuity:2,cc:"Confusion, lethargy, found acting strange by family"}
+  ]},
+  { presentation:"Abdominal Pain", cases:[
+    {id:"appendicitis-v1",diagnosis:"Acute Appendicitis",category:"surgery",acuity:2,cc:"RLQ abdominal pain, nausea, low-grade fever \u00D7 18hrs"},
+    {id:"acute-pancreatitis",diagnosis:"Acute Pancreatitis",category:"gi",acuity:2,cc:"Severe epigastric pain radiating to back after drinking"},
+    {id:"acute-cholecystitis",diagnosis:"Acute Cholecystitis",category:"gi",acuity:3,cc:"RUQ pain after eating, worse with fatty food, nausea"},
+    {id:"sbo-strangulation",diagnosis:"SBO with Strangulation",category:"surgery",acuity:1,cc:"Abdominal distension, bilious vomiting, severe crampy pain"},
+    {id:"mesenteric-ischemia",diagnosis:"Mesenteric Ischemia",category:"surgery",acuity:1,cc:"Severe abdominal pain out of proportion to exam, bloody stool"},
+    {id:"perforated-peptic-ulcer",diagnosis:"Perforated Peptic Ulcer",category:"surgery",acuity:1,cc:"Sudden onset severe epigastric pain, rigid abdomen"}
+  ]},
+  { presentation:"Allergic/Immunologic", cases:[
+    {id:"anaphylaxis",diagnosis:"Anaphylaxis",category:"allergy",acuity:1,cc:"Lip swelling, hives, throat tightness after eating"},
+    {id:"severe-allergic-reaction",diagnosis:"Severe Allergic Reaction",category:"allergy",acuity:2,cc:"Widespread hives, facial swelling after taking medication"},
+    {id:"ace-angioedema",diagnosis:"ACE Inhibitor Angioedema",category:"allergy",acuity:2,cc:"Tongue and lip swelling, difficulty swallowing, on lisinopril"},
+    {id:"hereditary-angioedema",diagnosis:"Hereditary Angioedema",category:"allergy",acuity:2,cc:"Recurrent facial swelling and severe abdominal pain, family history of similar episodes"},
+    {id:"allergic-angioedema",diagnosis:"Allergic Angioedema",category:"allergy",acuity:2,cc:"Acute facial and lip swelling after new medication"},
+    {id:"idiopathic-angioedema",diagnosis:"Idiopathic Angioedema",category:"allergy",acuity:3,cc:"Recurrent episodes of hand and facial swelling, no clear trigger"},
+    {id:"acquired-c1esterase-inhibitor-deficiency",diagnosis:"Acquired C1-INH Deficiency",category:"allergy",acuity:2,cc:"Recurrent facial swelling and abdominal pain, not responding to antihistamines"},
+    {id:"abpa-aspergillus",diagnosis:"ABPA (Allergic Bronchopulmonary Aspergillosis)",category:"allergy",acuity:3,cc:"Refractory asthma with recurrent pulmonary infiltrates and peripheral eosinophilia"},
+    {id:"severe-asthma-biologics",diagnosis:"Severe Eosinophilic Asthma — Biologic Selection",category:"allergy",acuity:3,cc:"4th asthma exacerbation in 12 months despite Step 4 therapy — AERD + CRSwNP + eosinophilia"},
+    {id:"occupational-asthma-isocyanate",diagnosis:"Isocyanate Occupational Asthma",category:"allergy",acuity:2,cc:"Work-related wheeze and dyspnea improving on weekends — automotive spray painter"},
+    {id:"inducible-urticaria",diagnosis:"Cold-Induced Urticaria",category:"allergy",acuity:3,cc:"Hives and swelling triggered by cold water exposure — nearly drowned"},
+    {id:"crswNP-biologics",diagnosis:"Severe CRSwNP + AERD — Dupilumab",category:"allergy",acuity:3,cc:"Complete anosmia × 2 years, FESS × 2 failures, severe nasal polyposis with NSAID hypersensitivity"},
+    {id:"allergic-rhinitis-immunotherapy",diagnosis:"Allergic Rhinitis — Allergen Immunotherapy (SCIT)",category:"allergy",acuity:4,cc:"Perennial nasal congestion, sneezing, itchy eyes — dust mite + grass + mold sensitized, SCIT initiation with systemic reaction management"},
+    {id:"hypersensitivity-pneumonitis",diagnosis:"Chronic Fibrotic Hypersensitivity Pneumonitis",category:"allergy",acuity:3,cc:"Progressive dyspnea 14 months, dry cough, weight loss — lifelong bird breeder × 25 years"},
+    {id:"hypereosinophilic-syndrome",diagnosis:"Hypereosinophilic Syndrome — FIP1L1-PDGFRA Myeloproliferative",category:"allergy",acuity:2,cc:"Persistent eosinophilia 4,800 cells/µL on routine CBC — fatigue, borderline troponin elevation"}
+  ]},
+  { presentation:"Skin/Drug Reactions", cases:[
+    {id:"sjs-ten",diagnosis:"SJS/TEN",category:"allergy",acuity:1,cc:"Widespread skin blistering, painful rash, fever after starting new medication"},
+    {id:"sjsten-overlap",diagnosis:"SJS/TEN Overlap",category:"allergy",acuity:1,cc:"Mucosal erosions, skin sloughing, high fever after antibiotic"},
+    {id:"dress-syndrome",diagnosis:"DRESS Syndrome",category:"allergy",acuity:2,cc:"Fever, diffuse rash, facial swelling 3 weeks after starting new medication"},
+    {id:"erythema-multiforme-major",diagnosis:"Erythema Multiforme Major",category:"allergy",acuity:3,cc:"Target-shaped skin lesions, mouth sores, painful rash"}
+  ]},
+  { presentation:"Headache", cases:[
+    {id:"sah-v1",diagnosis:"Subarachnoid Hemorrhage",category:"neurology",acuity:1,cc:"Sudden worst headache of my life, neck stiffness"},
+    {id:"migraine",diagnosis:"Migraine",category:"neurology",acuity:4,cc:"Severe throbbing headache with aura, nausea, photophobia \u00D7 6hrs"}
+  ]},
+  { presentation:"Fever", cases:[
+    {id:"sepsisseptic-shock",diagnosis:"Sepsis/Septic Shock",category:"infectious",acuity:1,cc:"High fever, chills, confusion, feeling very ill \u00D7 1 day"},
+    {id:"neutropenic-fever",diagnosis:"Neutropenic Fever",category:"hematology",acuity:1,cc:"Fever and chills on chemotherapy, feeling weak"},
+    {id:"infective-endocarditis",diagnosis:"Infective Endocarditis",category:"infectious",acuity:2,cc:"Persistent low-grade fever, night sweats, new heart murmur noted"},
+    {id:"pyelonephritis-urosepsis",diagnosis:"Pyelonephritis/Urosepsis",category:"infectious",acuity:2,cc:"Flank pain, fever, burning with urination, rigors"}
+  ]},
+  { presentation:"Syncope", cases:[
+    {id:"cardiac-syncope",diagnosis:"Cardiac Syncope",category:"cardiology",acuity:2,cc:"Passed out without warning while sitting, palpitations before"},
+    {id:"vasovagal-syncope",diagnosis:"Vasovagal Syncope",category:"cardiology",acuity:4,cc:"Felt lightheaded then passed out briefly, came right back"},
+    {id:"pulmonary-embolism-syncope",diagnosis:"PE with Syncope",category:"pulmonary",acuity:1,cc:"Sudden collapse, brief LOC, now short of breath and chest pain"}
+  ]},
+  { presentation:"Toxicology", cases:[
+    {id:"apap-overdose",diagnosis:"Acetaminophen Overdose",category:"toxicology",acuity:2,cc:"Took a bottle of Tylenol, nausea, RUQ pain"},
+    {id:"serotonin-syndrome",diagnosis:"Serotonin Syndrome",category:"toxicology",acuity:2,cc:"Agitation, tremor, diaphoresis, recently started new antidepressant"},
+    {id:"salicylate-toxicity",diagnosis:"Salicylate Toxicity",category:"toxicology",acuity:1,cc:"Tinnitus, rapid breathing, confusion after taking many aspirin"}
+  ]},
+  { presentation:"Hematologic", cases:[
+    {id:"ttp",diagnosis:"TTP",category:"hematology",acuity:1,cc:"Easy bruising, confusion, petechiae, dark urine"},
+    {id:"sle-flare-with-cytopenias",diagnosis:"SLE Flare with Cytopenias",category:"hematology",acuity:2,cc:"Joint pain, fatigue, rash, low blood counts found on labs"},
+    {id:"autoimmune-hemolytic-anemia",diagnosis:"Autoimmune Hemolytic Anemia",category:"hematology",acuity:2,cc:"Fatigue, jaundice, dark urine, feeling lightheaded"}
+  ]},
+  { presentation:"Renal/Electrolyte", cases:[
+    {id:"hyperkalemia-cardiac",diagnosis:"Hyperkalemia with Cardiac Changes",category:"renal",acuity:1,cc:"Generalized weakness, missed dialysis \u00D7 2 sessions, palpitations"},
+    {id:"renal-colic",diagnosis:"Renal Colic",category:"renal",acuity:3,cc:"Severe left flank pain, hematuria, cannot sit still"}
+  ]},
+  { presentation:"Endocrine", cases:[
+    {id:"thyroid-storm",diagnosis:"Thyroid Storm",category:"endocrine",acuity:1,cc:"High fever, racing heart, agitation, tremor, known thyroid disease"},
+    {id:"adrenal-crisis",diagnosis:"Adrenal Crisis",category:"endocrine",acuity:1,cc:"Severe weakness, hypotension, abdominal pain, on chronic steroids that were stopped"},
+    {id:"myxedema-coma",diagnosis:"Myxedema Coma",category:"endocrine",acuity:1,cc:"Found lethargic, hypothermic, bradycardic, known hypothyroidism"}
+  ]},
+  // ── Allergy Curriculum Expansion ──
+  { presentation:"Urticaria", cases:[
+    {id:"acute-urticaria",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"ed",allergySubtype:"urticaria",allSettings:true,cc:"Sudden onset hives all over body, itching \u00D7 4hrs"},
+    {id:"chronic-spontaneous-urticaria",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"urticaria",allSettings:true,cc:"Daily hives for over 6 weeks, no clear trigger"},
+    {id:"urticarial-vasculitis",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"consult",allergySubtype:"urticaria",allSettings:true,cc:"Painful hives that last >24hrs and leave bruise-like marks"}
+  ]},
+  { presentation:"Food Allergy", cases:[
+    {id:"peanut-allergy-anaphylaxis",diagnosis:"Acute Urticaria",category:"allergy",acuity:1,setting:"ed",allergySubtype:"food-allergy",allSettings:true,cc:"Throat tightness, hives, vomiting after eating peanut at party"},
+    {id:"food-allergy-oit-reaction",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"clinic",allergySubtype:"food-allergy",allSettings:true,cc:"Hives and stomach pain during oral immunotherapy dose"},
+    {id:"milk-allergy-infant",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"consult",allergySubtype:"food-allergy",allSettings:true,cc:"Infant with bloody stools, fussiness, poor feeding on formula"}
+  ]},
+  { presentation:"FPIES", cases:[
+    {id:"fpies-acute",diagnosis:"Acute Urticaria",category:"allergy",acuity:2,setting:"ed",allergySubtype:"fpies",allSettings:true,cc:"Infant with profuse vomiting and lethargy 2hrs after feeding"},
+    {id:"fpies-chronic",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"consult",allergySubtype:"fpies",allSettings:true,cc:"Infant with chronic diarrhea, poor weight gain, irritability with feeds"}
+  ]},
+  { presentation:"EoE", cases:[
+    {id:"eoe-adult",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"ed",allergySubtype:"eoe",allSettings:true,cc:"Food stuck in throat, difficulty swallowing solids \u00D7 months"},
+    {id:"eoe-pediatric",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"consult",allergySubtype:"eoe",allSettings:true,cc:"Child with difficulty swallowing, food refusal, chronic heartburn"}
+  ]},
+  { presentation:"Atopic Dermatitis", cases:[
+    {id:"atopic-dermatitis-severe",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"eczema",allSettings:true,cc:"Severe itchy rash flare, not sleeping, eczema all over"},
+    {id:"eczema-herpeticum",diagnosis:"Acute Urticaria",category:"allergy",acuity:2,setting:"ed",allergySubtype:"eczema",allSettings:true,cc:"Painful vesicular rash on face, fever, worsening eczema with punched-out lesions"}
+  ]},
+  { presentation:"Allergic Rhinitis", cases:[
+    {id:"allergic-rhinitis-uncontrolled",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"allergic-rhinitis",allSettings:true,cc:"Constant nasal congestion, sneezing, itchy eyes, not controlled with over-the-counter meds"}
+  ]},
+  { presentation:"Insect Allergy", cases:[
+    {id:"insect-sting-anaphylaxis",diagnosis:"Acute Urticaria",category:"allergy",acuity:1,setting:"ed",allergySubtype:"insect-allergy",allSettings:true,cc:"Bee sting 20min ago, now dizzy, hives, feeling faint"},
+    {id:"venom-immunotherapy-reaction",diagnosis:"Acute Urticaria",category:"allergy",acuity:2,setting:"clinic",allergySubtype:"insect-allergy",allSettings:true,cc:"Hives and wheezing after venom immunotherapy injection"}
+  ]},
+  { presentation:"Allergic Conjunctivitis", cases:[
+    {id:"allergic-conjunctivitis-severe",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"consult",allergySubtype:"allergic-conjunctivitis",allSettings:true,cc:"Severe bilateral eye itching, tearing, swollen lids, blurred vision"}
+  ]},
+  { presentation:"Drug Allergy", cases:[
+    {id:"penicillin-allergy-delabeling",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"consult",allergySubtype:"drug-allergy",allSettings:true,cc:"Reported penicillin allergy as a child, needs antibiotic for surgery"},
+    {id:"nsaid-hypersensitivity",diagnosis:"Acute Urticaria",category:"allergy",acuity:2,setting:"inpatient",allergySubtype:"drug-allergy",allSettings:true,cc:"Facial swelling and wheezing after taking ibuprofen, nasal polyps"},
+    {id:"drug-allergy-vancomycin-rms",diagnosis:"Acute Urticaria",category:"allergy",acuity:3,setting:"consult",allergySubtype:"drug-allergy",allSettings:true,cc:"Red flushing of face and chest during vancomycin infusion"}
+  ]},
+  { presentation:"Mast Cell Disease", cases:[
+    {id:"mastocytosis",diagnosis:"Acute Urticaria",category:"allergy",acuity:2,setting:"consult",allergySubtype:"mast-cell",allSettings:true,cc:"Flushing episodes, hives with skin stroking, recurrent anaphylaxis"},
+    {id:"mcas-mast-cell",diagnosis:"Mast Cell Activation Syndrome (MCAS)",category:"allergy",acuity:3,cc:"Recurrent multisystem flushing, urticaria, GI cramping and near-syncope — tryptase elevated during attacks"},
+    {id:"alpha-gal-syndrome",diagnosis:"Alpha-Gal Syndrome",category:"allergy",acuity:3,cc:"Delayed urticaria and anaphylaxis 3–4 hours after red meat — recent Lone Star tick bite history"}
+  ]},
+  { presentation:"Immunodeficiency", cases:[
+    {id:"cvid-presentation",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"immunodeficiency",allSettings:true,cc:"Recurrent sinus and lung infections, 4 courses of antibiotics this year"},
+    {id:"xla-brutons",diagnosis:"X-Linked Agammaglobulinemia (XLA)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"2-year-old male with 4th serious bacterial infection — septic arthritis, recurrent encapsulated bacteria since 6 months"},
+    {id:"scid-ada",diagnosis:"Severe Combined Immunodeficiency (ADA-SCID)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"6-week-old referred urgently — absent TRECs on newborn screening, no symptoms yet"},
+    {id:"digeorge-22q11",diagnosis:"DiGeorge Syndrome (22q11.2 Deletion)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"Newborn with truncus arteriosus, hypocalcemia seizure, and cleft palate — 22q11.2 evaluation"},
+    {id:"cgd-xlinked",diagnosis:"Chronic Granulomatous Disease (X-linked CGD)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,cc:"5-year-old with 3rd suppurative lymphadenitis, prior S. aureus liver abscess and Aspergillus pneumonia"}
+  ]},
+  { presentation:"Contact Dermatitis", cases:[
+    {id:"contact-dermatitis-occupational",diagnosis:"Acute Urticaria",category:"allergy",acuity:4,setting:"clinic",allergySubtype:"contact-dermatitis",allSettings:true,cc:"Itchy, blistering rash on hands, worse at work"}
+  ]},
+  {presentation:"Allergy Variations",cases:[
+    {id:"anaphylaxis-v2",diagnosis:"Anaphylaxis (Elderly + Beta-Blocker)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"72M on metoprolol, bee sting, blunted tachycardia, lives alone, Mandarin-speaking",cc:"Bee sting, feeling dizzy and weak, swelling at sting site spreading"},
+    {id:"anaphylaxis-v3",diagnosis:"Anaphylaxis (Latex, Occupational)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"32F uninsured house cleaner, latex exposure, expired EpiPen, Spanish-speaking",cc:"Difficulty breathing, hives on hands and arms after cleaning with gloves"},
+    {id:"anaphylaxis-v4",diagnosis:"Anaphylaxis (Adolescent, Psychosocial)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"16F peanut, school event, EpiPen embarrassment, food allergy anxiety, social avoidance",cc:"Ate something at school event, throat feels tight, scared to use EpiPen"},
+    {id:"anaphylaxis-v5",diagnosis:"Anaphylaxis (Pediatric, Cultural/Language)",category:"allergy",acuity:1,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,note:"8F sesame, Syrian refugee family, Arabic-only parents, food bank exposure, cultural diet impact",cc:"Child with hives, vomiting, wheezing after eating food from food bank"},
+    {id:"chronic-spontaneous-urticaria-v2",diagnosis:"CSU (Refractory + Autoimmune)",category:"allergy",acuity:3,setting:"ed",allergySubtype:"urticaria",allSettings:true,variation:true,note:"55M construction worker, autoimmune thyroiditis, pressure urticaria, depression, divorce stress",cc:"Daily hives for months, worse with pressure from tool belt, nothing is working"},
+    {id:"penicillin-allergy-delabeling-v2",diagnosis:"PCN Delabeling (Pregnancy + GBS)",category:"allergy",acuity:3,setting:"consult",allergySubtype:"drug-allergy",allSettings:true,variation:true,note:"38F 34wk pregnant, GBS positive, unverified childhood allergy, urgent delabeling for intrapartum prophylaxis",cc:"Pregnant, GBS positive, told I'm allergic to penicillin as a child, need antibiotics for delivery"},
+    {id:"atopic-dermatitis-severe-v2",diagnosis:"Severe AD (Pediatric, SDOH)",category:"allergy",acuity:3,setting:"ed",allergySubtype:"atopic-dermatitis",allSettings:true,variation:true,note:"4M MRSA superinfection, public housing cockroach/mold, single mother, adherence barriers, regimen simplification",cc:"Child's eczema much worse, oozing and crusting, fever, not improving with creams"},
+    {id:"peanut-allergy-anaphylaxis-v2",diagnosis:"Food Allergy (Misattributed Trigger)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"food-allergy",allSettings:true,variation:true,note:"3M first reaction, assumed peanut but actually CASHEW, importance of component testing",cc:"Toddler with hives and vomiting after eating trail mix for first time"},
+    {id:"eoe-adult-v2",diagnosis:"EoE (Diagnostic Delay)",category:"allergy",acuity:3,setting:"ed",allergySubtype:"eoe",allSettings:true,variation:true,note:"29M 3-year GERD misdiagnosis, adaptive eating behaviors, social impact, food impaction",cc:"Food stuck in chest, can't swallow, been having trouble eating solids for years"}
+  ]},
+  {presentation:"Allergy Variations — Batch 2-3",cases:[
+    {id:"ace-angioedema-v2",diagnosis:"ACE Angioedema (AA Female, CHF, Late-Onset)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true,cc:"Tongue and lip swelling, been on blood pressure medication for years"},
+    {id:"acquired-c1esterase-inhibitor-deficiency-v2",diagnosis:"Acquired C1-INH Deficiency (MGUS-Driven)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true,cc:"Recurrent facial swelling episodes, antihistamines not helping"},
+    {id:"acute-urticaria-v2",diagnosis:"Acute Urticaria (Post-Viral, Unnecessary Testing)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"urticaria",allSettings:true,variation:true,cc:"Hives started after a cold, now all over body × 5 days"},
+    {id:"allergic-angioedema-v2",diagnosis:"Allergic Angioedema (Obesity, Epi Dosing)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true,cc:"Lip and face swelling, used EpiPen but symptoms not fully resolving"},
+    {id:"allergic-conjunctivitis-severe-v2",diagnosis:"Vernal Keratoconjunctivitis (Shield Ulcer)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"conjunctivitis",allSettings:true,variation:true,cc:"Severe eye pain, tearing, photophobia, thick stringy discharge from both eyes"},
+    {id:"allergic-rhinitis-uncontrolled-v2",diagnosis:"Allergic Rhinitis (Vet Tech, Occupational SCIT)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"rhinitis",allSettings:true,variation:true,cc:"Constant runny nose, sneezing, congestion worse at work with animals"},
+    {id:"contact-dermatitis-occupational-v2",diagnosis:"ACD (Hairstylist, PPD, Career Threat)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"contact-dermatitis",allSettings:true,variation:true,cc:"Blistering rash on hands from hair dye, can’t work"},
+    {id:"cvid-presentation-v2",diagnosis:"CVID (Insurance Crisis, Diagnostic Delay)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"immunodeficiency",allSettings:true,variation:true,cc:"Recurrent pneumonia, chronic sinusitis, lost insurance and missed infusions"},
+    {id:"dress-syndrome-v2",diagnosis:"DRESS (Allopurinol, HLA-B*58:01, Korean)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true,cc:"Fever, widespread rash, facial swelling 4 weeks after starting gout medication"},
+    {id:"drug-allergy-vancomycin-rms-v2",diagnosis:"Vancomycin RMS (Elderly, False Allergy Cascade)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-allergy",allSettings:true,variation:true,cc:"Red flushing of neck and chest during antibiotic infusion, itching"},
+    {id:"eczema-herpeticum-v2",diagnosis:"Eczema Herpeticum (Toddler, Cold Sore Exposure)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"atopic-dermatitis",allSettings:true,variation:true,cc:"Toddler with worsening eczema, painful blisters on face after grandparent visit"},
+    {id:"eoe-pediatric-v2",diagnosis:"EoE Pediatric (Picky Eater Misdiagnosis, 6yr Delay)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"eoe",allSettings:true,variation:true,cc:"Child with food refusal, gagging, only eats soft foods, called a picky eater"},
+    {id:"erythema-multiforme-major-v2",diagnosis:"EM Major (Recurrent HSV-Triggered)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true,cc:"Target-shaped rash on hands and face, mouth sores, had cold sore last week"},
+    {id:"food-allergy-oit-reaction-v2",diagnosis:"OIT Reaction (Swimmer, Exercise Window)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"food-allergy",allSettings:true,variation:true,cc:"Hives and throat tightness after swimming, took OIT dose before practice"},
+    {id:"fpies-acute-v2",diagnosis:"FPIES Acute (School Exposure, EpiPen Failure)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"fpies",allSettings:true,variation:true,cc:"Child vomiting profusely and pale after eating at school, EpiPen given with no improvement"},
+    {id:"fpies-chronic-v2",diagnosis:"FPIES Chronic (Infant FTT, Reflux Misdiagnosis)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"fpies",allSettings:true,variation:true,cc:"Infant with chronic vomiting, not gaining weight, treated for reflux with no improvement"},
+    {id:"hereditary-angioedema-v2",diagnosis:"HAE (College Student, OCP Trigger, Diagnostic Odyssey)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true,cc:"Recurrent abdominal pain and facial swelling, started after going on birth control"},
+    {id:"idiopathic-angioedema-v2",diagnosis:"Idiopathic Angioedema (Travel Anxiety, Omalizumab)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"angioedema",allSettings:true,variation:true,cc:"Lip and eyelid swelling episodes, afraid to travel, no clear trigger"},
+    {id:"insect-sting-anaphylaxis-v2",diagnosis:"Venom Anaphylaxis (Uninsured Landscape Worker)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"insect-allergy",allSettings:true,variation:true,cc:"Wasp sting while working, hives spreading, feeling dizzy, no insurance"},
+    {id:"mastocytosis-v2",diagnosis:"MCAS (3yr Diagnostic Odyssey, Told Anxiety)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"mast-cell",allSettings:true,variation:true,cc:"Flushing, racing heart, abdominal pain, told it’s anxiety for 3 years"},
+    {id:"milk-allergy-infant-v2",diagnosis:"CMPA (Breastfed, Mother Misconception)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"food-allergy",allSettings:true,variation:true,cc:"Breastfed infant with bloody stools, eczema, fussy after feeds"},
+    {id:"nsaid-hypersensitivity-v2",diagnosis:"AERD/Samter Triad (Chef with Anosmia)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-allergy",allSettings:true,variation:true,cc:"Asthma attack after taking aspirin, nasal polyps, can’t smell anymore"},
+    {id:"severe-allergic-reaction-v2",diagnosis:"Contrast Reaction (Premedication Failure)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"anaphylaxis",allSettings:true,variation:true,cc:"Hives, throat tightness after CT contrast despite taking premedication"},
+    {id:"severe-allergic-reaction-v3",diagnosis:"Amoxicillin Delabeling (College Athlete)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-allergy",allSettings:true,variation:true,cc:"Rash as a child with amoxicillin, now needs antibiotic before dental work"},
+    {id:"sjs-ten-v2",diagnosis:"SJS/TEN (Lamotrigine, HLA-B*15:13)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true,cc:"Painful skin peeling, blisters, high fever 2 weeks after starting seizure medication"},
+    {id:"sjsten-overlap-v2",diagnosis:"SJS/TEN Overlap (HIV + Bactrim)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"drug-reactions",allSettings:true,variation:true,cc:"Widespread skin sloughing, mouth sores, high fever after starting antibiotic"},
+    {id:"urticarial-vasculitis-v2",diagnosis:"Urticarial Vasculitis (Hypocomplementemic)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"urticaria",allSettings:true,variation:true,cc:"Painful hives that burn rather than itch, leaving dark marks, joint pain"},
+    {id:"venom-immunotherapy-reaction-v2",diagnosis:"VIT Reaction (ACE Inhibitor Amplification)",category:"allergy",acuity:2,setting:"ed",allergySubtype:"insect-allergy",allSettings:true,variation:true,cc:"Lightheaded, flushing, wheezing after allergy shot, on blood pressure medication"}
+  ]},
+  // ═══ CRT Board-Only Cases (32 additional cases from ed-board-v2 CRT engine) ═══
+  { presentation:"Trauma", cases:[
+    {id:"tension-ptx",diagnosis:"Tension Pneumothorax",category:"trauma",acuity:1,cc:"Chest trauma, severe difficulty breathing, neck veins distended"},
+    {id:"epidural-hematoma",diagnosis:"Epidural Hematoma",category:"trauma",acuity:1,cc:"Head injury, brief LOC then lucid, now rapidly declining"}
+  ]},
+  { presentation:"Cardiac Emergency", cases:[
+    {id:"cardiac-tamponade",diagnosis:"Cardiac Tamponade",category:"cardiac",acuity:1,cc:"Chest pain, shortness of breath, muffled heart sounds, hypotension"},
+    {id:"complete-heart-block",diagnosis:"Complete Heart Block",category:"cardiac",acuity:2,cc:"Dizzy spells, near-syncope, heart rate in the 30s"},
+    {id:"vt-syncope",diagnosis:"Ventricular Tachycardia with Syncope",category:"cardiology",acuity:2,cc:"Passed out at home, palpitations, chest discomfort"},
+    {id:"chf-v1",diagnosis:"Acute Decompensated Heart Failure",category:"cardiology",acuity:2,cc:"Can't breathe lying down, legs very swollen, gained 15 lbs in a week"}
+  ]},
+  { presentation:"Vascular Emergency", cases:[
+    {id:"aaa-v1",diagnosis:"Ruptured Abdominal Aortic Aneurysm",category:"vascular",acuity:1,cc:"Sudden severe abdominal and back pain, feeling faint"},
+    {id:"acute-limb-ischemia",diagnosis:"Acute Limb Ischemia",category:"vascular",acuity:2,cc:"Sudden painful cold left leg, can’t feel foot"}
+  ]},
+  { presentation:"GI Emergency", cases:[
+    {id:"gi-bleed-syncope",diagnosis:"Upper GI Hemorrhage with Syncope",category:"gi",acuity:2,cc:"Vomiting blood, black stools, passed out at home"},
+    {id:"severe-pancreatitis",diagnosis:"Acute Necrotizing Pancreatitis",category:"gi",acuity:2,cc:"Severe epigastric pain radiating to back, vomiting, fever"}
+  ]},
+  { presentation:"Obstetric Emergency", cases:[
+    {id:"ectopic-pregnancy",diagnosis:"Ruptured Ectopic Pregnancy",category:"obstetric",acuity:1,cc:"Sudden severe lower abdominal pain, vaginal spotting, dizzy"},
+    {id:"eclampsia",diagnosis:"Eclampsia",category:"obstetric",acuity:1,cc:"Pregnant, severe headache, seizure, high blood pressure"}
+  ]},
+  { presentation:"Pediatric Emergency", cases:[
+    {id:"epiglottitis",diagnosis:"Acute Epiglottitis",category:"pediatric",acuity:1,cc:"Child with sore throat, drooling, difficulty swallowing, stridor"},
+    {id:"intussusception",diagnosis:"Ileocolic Intussusception",category:"pediatric",acuity:2,cc:"Infant with intermittent crying episodes, currant jelly stools, vomiting"}
+  ]},
+  { presentation:"Neurologic Emergency", cases:[
+    {id:"new-seizure-mass",diagnosis:"New-Onset Seizure (Brain Mass)",category:"neurology",acuity:2,cc:"New-onset seizure, no prior history, persistent headache"},
+    {id:"cauda-equina",diagnosis:"Cauda Equina Syndrome",category:"neurology",acuity:2,cc:"Severe low back pain, bilateral leg weakness, trouble urinating"}
+  ]},
+  { presentation:"Psychiatric Emergency", cases:[
+    {id:"nms",diagnosis:"Neuroleptic Malignant Syndrome",category:"psychiatric",acuity:2,cc:"High fever, severe muscle rigidity, confusion, on antipsychotic"}
+  ]},
+  { presentation:"Infectious Emergency", cases:[
+    {id:"septic-shock-urosepsis",diagnosis:"Septic Shock (Urosepsis)",category:"infectious",acuity:1,cc:"High fever, confusion, low blood pressure, urinary symptoms"},
+    {id:"nec-fasciitis",diagnosis:"Necrotizing Fasciitis",category:"infectious",acuity:1,cc:"Rapidly spreading painful red skin, blistering, high fever, toxic-appearing"},
+    {id:"fournier-gangrene",diagnosis:"Fournier Gangrene",category:"infectious",acuity:1,cc:"Severe perineal pain, swelling, fever, foul-smelling drainage"}
+  ]},
+  { presentation:"Eye Emergency", cases:[
+    {id:"angle-closure-glaucoma",diagnosis:"Acute Angle-Closure Glaucoma",category:"ophthalmology",acuity:2,cc:"Sudden severe eye pain, blurred vision, halos around lights, nausea"},
+    {id:"crao",diagnosis:"Central Retinal Artery Occlusion",category:"ophthalmology",acuity:2,cc:"Sudden painless vision loss in one eye, like a curtain coming down"}
+  ]},
+  { presentation:"Urologic Emergency", cases:[
+    {id:"testicular-torsion",diagnosis:"Testicular Torsion",category:"urology",acuity:2,cc:"Sudden severe testicular pain, nausea, swelling"}
+  ]},
+  { presentation:"ENT / Airway Emergency", cases:[
+    {id:"peritonsillar-abscess",diagnosis:"Peritonsillar Abscess",category:"ent",acuity:3,cc:"Severe sore throat, can’t swallow, muffled voice, trismus"},
+    {id:"ludwigs-angina",diagnosis:"Ludwig Angina",category:"ent",acuity:1,cc:"Floor of mouth swelling, difficulty swallowing and breathing, recent dental pain"}
+  ]},
+  { presentation:"Geriatric Emergency", cases:[
+    {id:"hip-fracture-anticoag",diagnosis:"Hip Fracture on Anticoagulation",category:"geriatric",acuity:3,cc:"Fall, unable to bear weight, on blood thinner"},
+    {id:"subdural-hematoma",diagnosis:"Acute-on-Chronic Subdural Hematoma",category:"geriatric",acuity:2,cc:"Elderly, progressive confusion, headache, history of falls, on anticoagulation"}
+  ]},
+  { presentation:"Environmental Emergency", cases:[
+    {id:"heat-stroke",diagnosis:"Exertional Heat Stroke",category:"environmental",acuity:1,cc:"Collapsed during exercise in heat, very hot, confused, not sweating"},
+    {id:"severe-hypothermia",diagnosis:"Severe Accidental Hypothermia",category:"environmental",acuity:1,cc:"Found outdoors in cold, unresponsive, very low body temperature"}
+  ]},
+  { presentation:"Hematologic Emergency", cases:[
+    {id:"dic-massive-transfusion",diagnosis:"DIC with Massive Hemorrhage",category:"hematology",acuity:1,cc:"Bleeding from multiple sites, oozing from IV sites, recent surgery"}
+  ]},
+  { presentation:"Musculoskeletal Emergency", cases:[
+    {id:"septic-arthritis",diagnosis:"Septic Arthritis",category:"musculoskeletal",acuity:3,cc:"Acutely hot, swollen, painful knee, fever, can’t bend it"},
+    {id:"compartment-syndrome",diagnosis:"Acute Compartment Syndrome",category:"musculoskeletal",acuity:2,cc:"Severe leg pain after injury, pain with passive stretch, tense swelling"}
+  ]}
 ];
+var CASE_MANIFEST = window.CASE_MANIFEST || {};
+CASE_MANIFEST.cases = [];
+EMR_MANIFEST.forEach(function(g){g.cases.forEach(function(c){CASE_MANIFEST.cases.push(c)})});
+CASE_MANIFEST.batches = EMR_MANIFEST;
+CASE_MANIFEST.version = '1.0.0';
+CASE_MANIFEST.totalCases = CASE_MANIFEST.cases.length;

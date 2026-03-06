@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "George Alton Mitchell",
+  "patientHPI": "I'm here with my daughter because she's worried about me - I've been more confused lately and forgetting things more than usual. She has to help me with a lot of things now like getting dressed and taking my medicines, and sometimes I don't remember where I am or what day it is, which is scary for both of us.",
     "dob": "03/28/1940",
     "age": 84,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 7260 W Commercial Blvd, Lauderhill, FL",
     "language": "English",
     "race": "White",
-    "address": "7500 NW 47th Ct, Lauderhill, FL 33319",
+    "address": "8041 Dogwood Ln, Columbus, OH 43205",
     "phone": "(954) 555-4701",
     "email": "Family contact: s.mitchell.caregiver@email.com",
     "emergencyContact": {

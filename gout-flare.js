@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Robert Nguyen",
+  "patientHPI": "I stopped taking my gout medication about four months ago because I was feeling great and didn't think I needed it anymore, but since then I've had two really painful flare-ups in my toe and ankle, and I've been drinking more beer and eating rich foods lately.",
     "dob": "02/18/1972",
     "age": 52,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5200 S University Dr, Riverside, FL",
     "language": "English, Vietnamese",
     "race": "Asian (Vietnamese)",
-    "address": "4310 SW 64th Ave, Riverside, FL 33100",
+    "address": "1969 Sycamore Dr, Birmingham, AL 35207",
     "phone": "(954) 555-8472",
     "email": "r.nguyen72@email.com",
     "emergencyContact": {

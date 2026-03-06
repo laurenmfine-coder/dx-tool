@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Gutierrez",
+  "patientHPI": "The shooting pain down both my legs has been getting much worse over the past month and a half, especially the left side. It goes down the outside of my calves into my feet, and now I'm getting numbness too. The pain gets worse when I walk, especially for longer distances.",
     "dob": "08/30/1969",
     "age": 56,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3501 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "3240 SW 52nd Ave, Hollywood, FL 33023",
+    "address": "6325 Clover St, Minneapolis, MN 55407",
     "phone": "(954) 555-4783",
     "email": "p.gutierrez69@email.com",
     "emergencyContact": {

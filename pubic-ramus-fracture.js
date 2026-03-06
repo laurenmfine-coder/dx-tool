@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mildred Anne Kowalski",
+  "patientHPI": "My back pain has been about the same as usual, nothing new there, but I've been having this ache in my hip area for the past few weeks that's gotten worse. It hurts when I get up from sitting and when I walk, especially going up stairs - my son Joseph has noticed I'm moving more carefully.",
     "dob": "02/17/1939",
     "age": 85,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1451 S Powerline Rd, Pompano Beach, FL",
     "language": "English",
     "race": "White",
-    "address": "4520 NE 18th Ave, Pompano Beach, FL 33064",
+    "address": "8924 Clover St, San Antonio, TX 78211",
     "phone": "(954) 555-9583",
     "email": "Family contact: j.kowalski.son@email.com",
     "emergencyContact": {

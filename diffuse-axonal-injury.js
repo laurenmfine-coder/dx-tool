@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Nguyen",
+  "patientHPI": "I've been taking my ADHD medication for a while now and it's been working great for school - I can focus in class and my grades are good. I play soccer with friends and feel pretty healthy overall, though I did hit my head pretty hard during a game last week and felt a bit foggy afterward.",
     "dob": "06/08/2003",
     "age": 21,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 801 S University Dr, Plantation, FL",
     "language": "English",
     "race": "Asian",
-    "address": "6540 SW 39th St, Riverside, FL 33100",
+    "address": "841 Sycamore Dr, Birmingham, AL 35210",
     "phone": "(954) 555-2218",
     "email": "t.nguyen03@email.com",
     "emergencyContact": {

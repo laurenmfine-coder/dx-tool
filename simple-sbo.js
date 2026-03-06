@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ricardo Fernandez",
+  "patientHPI": "I've been having some stomach cramps around my belly button after I eat big meals - they come on about 15-30 minutes after eating and feel kind of crampy, but they go away on their own after a while and I don't throw up or anything.",
     "dob": "04/25/1970",
     "age": 54,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5790 S Flamingo Rd, Cooper City, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "9210 SW 48th St, Cooper City, FL 33328",
+    "address": "5709 Cottonwood Ave, Albuquerque, NM 87108",
     "phone": "(954) 555-6429",
     "email": "r.fernandez70@email.com",
     "emergencyContact": {

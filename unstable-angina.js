@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Anthony Rizzo",
+  "patientHPI": "Over the past week, I've had this heavy pressure in my chest a few times when I was working in my garden or going up the stairs. It feels like someone's sitting on my chest, and it goes down into my left arm. It's scary, but when I sit down and rest for about five or ten minutes, it goes away completely.",
     "dob": "12/03/1958",
     "age": 66,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2700 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "812 NE 18th Ct, Fort Lauderdale, FL 33305",
+    "address": "5185 Cedar Blvd, Detroit, MI 48210",
     "phone": "(954) 555-5193",
     "email": "a.rizzo58@email.com",
     "emergencyContact": {

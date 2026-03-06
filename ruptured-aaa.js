@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Robert Kowalski",
+  "patientHPI": "I came in because I've been having this terrible tearing pain in my back and belly that started suddenly about an hour ago - it's the worst pain I've ever felt. I'm feeling dizzy and nauseous, and I'm really scared something is seriously wrong.",
     "dob": "04/12/1953",
     "age": 72,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 6310 Stirling Rd, Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "5412 SW 68th Ave, Riverside, FL 33100",
+    "address": "1453 Walnut Dr, Pittsburgh, PA 15212",
     "phone": "(954) 555-1073",
     "email": "rkowalski53@email.com",
     "emergencyContact": {

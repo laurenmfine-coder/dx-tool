@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mateo Rivera",
+  "patientHPI": "My parents brought me in for my regular checkup - I've been eating well and they say I'm pretty active for my age, though I did spit up once yesterday which worried them a little.",
     "dob": "12/05/2024",
     "age": 0,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4550 N State Rd 7, Lauderdale Lakes, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "1635 NW 46th Ave, Lauderhill, FL 33313",
+    "address": "7039 Elm St, Baltimore, MD 21201",
     "phone": "(954) 555-4291",
     "email": "c.rivera.family@email.com",
     "emergencyContact": {

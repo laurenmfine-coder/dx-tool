@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Virginia Obregon",
+  "patientHPI": "My mid-back pain has been getting so much worse lately - it's about an 8 out of 10 now and really hurts when I move or try to do anything, which is concerning since I'm being treated for my breast cancer that spread to my bones.",
     "dob": "02/28/1963",
     "age": 63,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 7050 Pines Blvd, Pembroke Pines, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "2180 SW 160th Ave, Pembroke Pines, FL 33027",
+    "address": "8056 Iris Blvd, Detroit, MI 48204",
     "phone": "(954) 555-4156",
     "email": "v.obregon63@email.com",
     "emergencyContact": {

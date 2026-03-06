@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Rivera",
+  "patientHPI": "I was riding my bike home from work when I hit this huge pothole and went down - wasn't going very fast, maybe 25 miles per hour. My right leg is killing me and looks all twisted, but what's really scaring me is that it feels like it's going to burst. The pain keeps getting worse and my foot feels all tingly and numb.",
     "dob": "06/14/1998",
     "age": 26,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2600 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "1920 SW 4th Ave, Fort Lauderdale, FL 33315",
+    "address": "6831 Dogwood Ln, Minneapolis, MN 55411",
     "phone": "(954) 555-2841",
     "email": "m.rivera98@email.com",
     "emergencyContact": {

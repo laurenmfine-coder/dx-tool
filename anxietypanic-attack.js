@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Daniela Restrepo",
+  "patientHPI": "I've been doing pretty well with my anxiety medication, but last month I had this really scary episode at work when we had a big deadline coming up. My heart started racing out of nowhere, I felt like I couldn't catch my breath, and I got really dizzy and sweaty. I thought something was seriously wrong with me, but I used the breathing techniques my therapist taught me and it went away after about twenty minutes.",
     "dob": "07/19/1998",
     "age": 27,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3201 N University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic (Colombian American)",
-    "address": "5544 SW 39th St, Riverside, FL 33100",
+    "address": "3317 Mulberry St, Milwaukee, WI 53206",
     "phone": "(954) 555-2198",
     "email": "d.restrepo98@email.com",
     "emergencyContact": {

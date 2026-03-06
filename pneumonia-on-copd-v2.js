@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Briggs",
+  "patientHPI": "I've been coughing up thick green stuff for about four days now, and it's getting harder to breathe even when I'm just sitting around. I've been running a little fever and using my inhaler way more than usual - maybe six or eight times a day instead of once or twice. I even turned up my oxygen tank but it's not helping much, and my wife says I seem more mixed up than normal.",
     "dob": "12/09/1951",
     "age": 73,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy \u2014 2200 N Federal Hwy, Hollywood, FL",
     "language": "English",
     "race": "White",
-    "address": "4510 Johnson St, Hollywood, FL 33021",
+    "address": "7273 Poplar Ave, Birmingham, AL 35207",
     "phone": "(954) 555-6104",
     "email": "w.briggs51@email.com",
     "emergencyContact": {

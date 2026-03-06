@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Liam O'Brien",
+  "patientHPI": "My son is doing great - he's so full of energy and eating everything in sight! We're here for his regular checkup before he starts school in January, and honestly we don't have any concerns right now.",
     "dob": "07/22/2020",
     "age": 4,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 6001 W Sunrise Blvd, Plantation, FL",
     "language": "English",
     "race": "White/Caucasian (Irish descent)",
-    "address": "5128 NW 4th Ct, Plantation, FL 33317",
+    "address": "5353 Willow Way, Phoenix, AZ 85006",
     "phone": "(954) 555-7126",
     "email": "k.obrien.parent@email.com",
     "emergencyContact": {

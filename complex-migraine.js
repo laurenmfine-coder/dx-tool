@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gabriela Herrera",
+  "patientHPI": "Three months ago I had the scariest experience of my life - I was making breakfast when suddenly my right arm and leg went completely weak and I couldn't speak properly, plus I was seeing these weird flashing lights. It lasted about an hour and a half, then I got this terrible headache on the left side that was so bad my husband rushed me to the emergency room. They did a brain scan but said it looked normal, which was confusing because I felt so terrible.",
     "dob": "04/15/1992",
     "age": 33,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1800 N Pine Island Rd, Plantation, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "7610 NW 5th Ct, Plantation, FL 33317",
+    "address": "8039 Hollyhock Rd, San Antonio, TX 78211",
     "phone": "(954) 555-8476",
     "email": "gherrera92@email.com",
     "emergencyContact": {

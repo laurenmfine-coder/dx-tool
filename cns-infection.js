@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Omar Hassan",
+  "patientHPI": "I've been pretty good about taking my HIV medication, though I'll admit I forget maybe once or twice a week. Everything's been going well with my treatment, but lately I've had a couple episodes where I just blank out for a few seconds and my wife says I was shaking.",
     "dob": "06/30/1991",
     "age": 33,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4100 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English, Arabic",
     "race": "Middle Eastern (Egyptian)",
-    "address": "3512 NE 12th Ter, Fort Lauderdale, FL 33334",
+    "address": "997 Juniper Dr, Indianapolis, IN 46203",
     "phone": "(954) 555-8412",
     "email": "o.hassan91@email.com",
     "emergencyContact": {

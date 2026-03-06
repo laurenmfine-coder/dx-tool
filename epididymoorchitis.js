@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frank Petrov",
+  "patientHPI": "I'm here for my regular checkup about my prostate issues. Even with the medications I'm taking, I'm still getting up three or four times every night to urinate, and the stream is still pretty weak. I had a bladder infection a couple months ago that we treated with antibiotics.",
     "dob": "12/05/1958",
     "age": 66,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1801 N Pine Island Rd, Plantation, FL",
     "language": "English",
     "race": "White",
-    "address": "8950 W Broward Blvd, Plantation, FL 33324",
+    "address": "1184 Larkspur Ln, Indianapolis, IN 46219",
     "phone": "(954) 555-5589",
     "email": "f.petrov58@email.com",
     "emergencyContact": {

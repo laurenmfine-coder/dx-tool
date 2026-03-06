@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Robert Edward Brennan",
+  "patientHPI": "My wife says I walk like my feet are stuck to the floor - I take these tiny shuffling steps and sometimes I just can't get started walking at all. I've fallen twice in the past few months, and now I'm having accidents with my bladder that never happened before.",
     "dob": "10/08/1944",
     "age": 80,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 9501 W Sample Rd, Coral Springs, FL",
     "language": "English",
     "race": "White",
-    "address": "3850 NW 100th Way, Coral Springs, FL 33065",
+    "address": "4839 Larkspur Ln, Memphis, TN 38127",
     "phone": "(954) 555-6170",
     "email": "r.brennan44@email.com",
     "emergencyContact": {

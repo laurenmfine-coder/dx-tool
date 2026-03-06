@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Terrence Jackson",
+  "patientHPI": "I'm still drinking heavily - about a pint of vodka and six beers a day - and I keep getting this terrible stomach pain that goes right through to my back, especially after I eat. Even with those enzyme pills you gave me, I'm still having problems with loose, fatty stools.",
     "dob": "06/14/1978",
     "age": 46,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 5801 Johnson St, Hollywood, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "1845 N 26th Ave, Hollywood, FL 33020",
+    "address": "6769 Chestnut Rd, Pittsburgh, PA 15206",
     "phone": "(954) 555-8163",
     "email": "t.jackson78@email.com",
     "emergencyContact": {

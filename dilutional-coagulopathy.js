@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Nguyen",
+  "patientHPI": "I'm scheduled for surgery next week to fix the large bulge in my artery that keeps growing, and my doctors want to make sure everything is ready. I've had some heart problems before and my legs get tired when I walk more than a couple blocks, but overall I'm feeling prepared for the procedure.",
     "dob": "05/09/1955",
     "age": 69,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 7110 Pines Blvd, Pembroke Pines, FL",
     "language": "English, Vietnamese",
     "race": "Asian",
-    "address": "1520 NW 107th Ave, Pembroke Pines, FL 33026",
+    "address": "7555 Foxglove Dr, Pittsburgh, PA 15210",
     "phone": "(954) 555-5214",
     "email": "h.nguyen55@email.com",
     "emergencyContact": {

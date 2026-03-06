@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Danielle Pierre-Louis",
+  "patientHPI": "About a week ago I went to my chiropractor for my usual neck adjustment, and a few days later I started getting this dull ache on the right side of my neck that goes up behind my ear. It's not terrible pain, just this constant nagging feeling that wasn't there before.",
     "dob": "06/18/1986",
     "age": 38,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4800 S Pine Island Rd, Riverside, FL",
     "language": "English, Haitian Creole",
     "race": "Black/African American",
-    "address": "1425 NW 6th Ave, Fort Lauderdale, FL 33311",
+    "address": "9601 E Roosevelt Rd, Milwaukee, WI 53209",
     "phone": "(954) 555-2198",
     "email": "d.pierrelouis86@email.com",
     "emergencyContact": {

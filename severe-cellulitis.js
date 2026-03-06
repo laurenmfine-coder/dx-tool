@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Darnell Washington",
+  "patientHPI": "I've been doing really well with my medications and keeping up with all my appointments, but yesterday I noticed this red, swollen area on my leg that's getting bigger and more painful. It feels hot to the touch and I'm starting to feel feverish and tired.",
     "dob": "11/08/1985",
     "age": 40,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3100 Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black (African American)",
-    "address": "640 NW 3rd Ave, Fort Lauderdale, FL 33311",
+    "address": "8104 Elm St, Memphis, TN 38112",
     "phone": "(954) 555-2044",
     "email": "d.washington85@email.com",
     "emergencyContact": {

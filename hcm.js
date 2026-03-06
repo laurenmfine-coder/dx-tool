@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jordan Mitchell",
+  "patientHPI": "I'm here for my sports physical for basketball - I feel great overall, but I have to admit I've gotten lightheaded a few times during really intense practices this past year, and once everything went kind of gray for a second before I sat down.",
     "dob": "06/03/2004",
     "age": 21,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4401 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "Black (African American)",
-    "address": "6245 SW 20th St, Miramar, FL 33023",
+    "address": "1619 Daisy Ave, Birmingham, AL 35211",
     "phone": "(954) 555-3890",
     "email": "j.mitchell04@email.com",
     "emergencyContact": {

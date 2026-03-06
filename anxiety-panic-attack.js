@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sofia Delgado",
+  "patientHPI": "These panic episodes are getting worse and happening way more often now, like three or four times a week, where suddenly my chest gets tight, I can't get enough air, my hands and mouth get tingly, my heart races, and I feel like something terrible is about to happen.",
     "dob": "11/03/1996",
     "age": 28,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens \u2014 3100 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic or Latino",
-    "address": "742 NE 8th Ave, Fort Lauderdale, FL 33304",
+    "address": "2354 S Halsted St, Milwaukee, WI 53209",
     "phone": "(954) 555-8472",
     "email": "s.delgado96@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eugene Washington",
+  "patientHPI": "My wife says I was acting strange this morning - I couldn't get the words out right and kept dropping things with my left hand. I feel confused and frustrated because I know what I want to say but it comes out all jumbled. My left arm and leg feel heavy and clumsy.",
     "dob": "11/03/1958",
     "age": 67,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3401 W Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black or African American",
-    "address": "1450 NW 6th St, Fort Lauderdale, FL 33311",
+    "address": "1319 Mulberry St, San Antonio, TX 78212",
     "phone": "(954) 555-2047",
     "email": "e.washington58@email.com",
     "emergencyContact": {

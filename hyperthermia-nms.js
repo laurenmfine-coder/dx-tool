@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andres Villareal",
+  "patientHPI": "I got my monthly shot at the psychiatry clinic two weeks ago, and they increased the dose because I was hearing voices again, but now I'm feeling really strange and different than usual.",
     "dob": "04/06/1988",
     "age": 36,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2400 N State Rd 7, Margate, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "6540 NW 24th Ct, Margate, FL 33063",
+    "address": "2526 Cedar Blvd, Richmond, VA 23224",
     "phone": "(954) 555-4918",
     "email": "a.villareal88@email.com",
     "emergencyContact": {

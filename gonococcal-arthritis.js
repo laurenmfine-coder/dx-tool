@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jasmine Williams",
+  "patientHPI": "I'm here for my yearly checkup and to get tested - I've been with a new partner for a few months and we haven't always been careful, but I feel totally fine with no burning, discharge, or anything unusual down there.",
     "dob": "11/08/1999",
     "age": 25,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3800 Hollywood Blvd, Hollywood, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "1550 N 28th Ave, Hollywood, FL 33020",
+    "address": "2985 Mulberry St, Albuquerque, NM 87110",
     "phone": "(954) 555-4328",
     "email": "j.williams99@email.com",
     "emergencyContact": {

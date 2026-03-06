@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Camille Baptiste",
+  "patientHPI": "Three days ago I was lifting a heavy box at work and felt something in my lower back - now I have this constant aching pain that gets worse when I bend or sit too long.",
     "dob": "10/04/1990",
     "age": 35,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1601 N Hiatus Rd, Pembroke Pines, FL",
     "language": "English, French",
     "race": "Black or African American",
-    "address": "9240 NW 1st St, Pembroke Pines, FL 33024",
+    "address": "4286 Birch Ln, Chicago, IL 60636",
     "phone": "(954) 555-6472",
     "email": "c.baptiste90@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Carmen Delgado-Ruiz",
+  "patientHPI": "My left leg has been getting more and more swollen and painful over the past few days, and now it's turned this scary dark blue color. The pain is unbearable and my whole leg feels tight and heavy - I can barely move it.",
     "dob": "05/22/1966",
     "age": 59,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2701 Stirling Rd, Hollywood, FL",
     "language": "English, Spanish",
     "race": "Hispanic (Puerto Rican)",
-    "address": "1820 N 46th Ave, Hollywood, FL 33021",
+    "address": "5453 Hickory Rd, Indianapolis, IN 46203",
     "phone": "(954) 555-4412",
     "email": "c.delgado66@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "James Brennan",
+  "patientHPI": "I've been sober for about six weeks now after I relapsed back in October, and I'm going to AA meetings three times a week. My appetite is coming back and I'm slowly gaining some weight back, plus I'm taking those vitamins you prescribed again.",
     "dob": "06/28/1979",
     "age": 46,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2800 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "918 NE 2nd Ave, Fort Lauderdale, FL 33304",
+    "address": "9505 S Halsted St, Minneapolis, MN 55407",
     "phone": "(954) 555-6192",
     "email": "j.brennan79@email.com",
     "emergencyContact": {

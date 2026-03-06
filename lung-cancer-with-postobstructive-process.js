@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frank DeLuca",
+  "patientHPI": "My cough has really changed over the past couple weeks - now I'm coughing up blood-streaked stuff, which is new for me even with my breathing problems from smoking. I'm getting short of breath just walking across the room now, and I've dropped 18 pounds in four months without trying to lose weight.",
     "dob": "01/14/1957",
     "age": 69,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 2200 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White (Italian American)",
-    "address": "3825 NE 22nd Ave, Fort Lauderdale, FL 33308",
+    "address": "8913 Magnolia Blvd, Richmond, VA 23221",
     "phone": "(954) 555-6147",
     "email": "f.deluca57@email.com",
     "emergencyContact": {

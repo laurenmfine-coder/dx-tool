@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "William Okafor",
+  "patientHPI": "For the past three weeks, I get this tightness in my chest whenever I walk uphill or carry heavy groceries, but it goes away when I sit down and rest for a few minutes.",
     "dob": "06/14/1961",
     "age": 63,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4500 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "3380 N 46th Ave, Hollywood, FL 33021",
+    "address": "6280 Larkspur Ln, Indianapolis, IN 46204",
     "phone": "(954) 555-6102",
     "email": "w.okafor61@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ethan Goldberg",
+  "patientHPI": "I was playing basketball yesterday when I landed wrong and felt something pop in my knee. Now it's really swollen and painful, much worse than my usual joint aches, and I'm worried because I know I have to be careful about bleeding. The pain is different this time and the swelling came on really fast.",
     "dob": "01/20/2005",
     "age": 20,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2400 N University Dr, Sunrise, FL",
     "language": "English",
     "race": "White",
-    "address": "8455 NW 44th St, Coral Springs, FL 33065",
+    "address": "3685 N Kedzie Blvd, Detroit, MI 48219",
     "phone": "(954) 555-6831",
     "email": "e.goldberg05@email.com",
     "emergencyContact": {

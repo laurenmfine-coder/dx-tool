@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Trevor Washington",
+  "patientHPI": "I went camping last weekend and started feeling really tired and achy about four days ago, like I was getting the flu. Then two days ago I got this terrible headache that just keeps getting worse no matter what I take for it, and I've been running a high fever. My mom says I've been acting confused and not making sense when I talk, which really scared her into bringing me here.",
     "dob": "02/28/1992",
     "age": 32,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 801 S University Dr, Plantation, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "3350 Broward Blvd, Fort Lauderdale, FL 33312",
+    "address": "2169 Clover St, Baltimore, MD 21214",
     "phone": "(954) 555-8463",
     "email": "t.washington92@email.com",
     "emergencyContact": {

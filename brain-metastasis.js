@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Lawson",
+  "patientHPI": "I've been coming in regularly for my cancer treatments and generally feeling pretty good. I still have that cough from my lung condition, but it's nothing new. My appetite could be better, but my weight has stayed the same, and I'm not having any trouble breathing or pain anywhere.",
     "dob": "09/08/1962",
     "age": 62,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2700 E Oakland Park Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "2815 NE 25th St, Fort Lauderdale, FL 33305",
+    "address": "4047 Walnut Dr, Memphis, TN 38114",
     "phone": "(954) 555-4817",
     "email": "p.lawson62@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "James Edward Porter",
+  "patientHPI": "I've been having more trouble getting dressed and buttoning my shirts lately, and my right hand has this shaking that's gotten worse over the past few months. My walking has gotten slower too - I feel like I'm shuffling instead of taking normal steps, and it takes me forever to get anywhere.",
     "dob": "12/06/1943",
     "age": 81,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 7130 Pine Island Rd, Tamarac, FL",
     "language": "English",
     "race": "White",
-    "address": "6215 NW 77th St, Tamarac, FL 33321",
+    "address": "4973 Walnut Dr, Milwaukee, WI 53207",
     "phone": "(954) 555-3854",
     "email": "j.porter43@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Hyun-Soo Kim",
+  "patientHPI": "I'm here for my regular visit to check on my blood pressure and diabetes - I know my pressure readings at home have been really high even though I'm on three medications, but I'll be honest, I skip my afternoon water pill a lot because it makes me have to go to the bathroom too much at work.",
     "dob": "09/08/1960",
     "age": 65,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 901 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English, Korean",
     "race": "Asian",
-    "address": "3205 NE 32nd Ave, Fort Lauderdale, FL 33308",
+    "address": "8229 Foxglove Dr, Phoenix, AZ 85007",
     "phone": "(954) 555-3756",
     "email": "hskim60@email.com",
     "emergencyContact": {

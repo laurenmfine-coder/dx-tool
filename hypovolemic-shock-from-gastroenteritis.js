@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Yvette Pierre-Louis",
+  "patientHPI": "There's been a stomach bug going around my senior center this week with people getting sick and throwing up, and even though I feel okay right now, I'm worried I might catch it too.",
     "dob": "03/14/1948",
     "age": 76,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1500 N State Rd 7, Lauderhill, FL",
     "language": "English, Haitian Creole",
     "race": "Black/Haitian American",
-    "address": "4120 NW 44th St, Lauderdale Lakes, FL 33319",
+    "address": "6885 N Western Ave, Baltimore, MD 21211",
     "phone": "(954) 555-7621",
     "email": "y.pierrelouis48@email.com",
     "emergencyContact": {

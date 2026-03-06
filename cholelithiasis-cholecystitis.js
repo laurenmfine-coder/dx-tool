@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Natasha Pierre-Louis",
+  "patientHPI": "I keep getting these awful pains in my upper right side, especially after I eat anything greasy or fatty. It usually lasts about an hour and shoots around to my back, and I feel really nauseous when it happens. This has happened three times in the past few months.",
     "dob": "08/06/1982",
     "age": 43,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 2200 S University Dr, Riverside, FL",
     "language": "English, Haitian Creole",
     "race": "Black (Haitian American)",
-    "address": "3640 N 29th Ter, Hollywood, FL 33020",
+    "address": "689 Dogwood Ln, Richmond, VA 23222",
     "phone": "(954) 555-8214",
     "email": "n.pierrelouis82@email.com",
     "emergencyContact": {

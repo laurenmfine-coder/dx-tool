@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jordan Mitchell",
+  "patientHPI": "I'm here for my regular checkup - I feel great and stay really active with CrossFit and running. Yesterday after my workout I felt more sore than usual, and this morning my urine looked really dark, almost like cola, which freaked me out a bit.",
     "dob": "04/19/1995",
     "age": 29,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3601 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "4218 NE 12th Ter, Fort Lauderdale, FL 33334",
+    "address": "8067 Spruce St, Milwaukee, WI 53203",
     "phone": "(954) 555-5412",
     "email": "j.mitchell95@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Brianna Thompson",
+  "patientHPI": "My throat started hurting four days ago, mainly on the left side, and it's gotten so much worse - yesterday I could barely swallow my food, and now even drinking water is painful. I had a fever of over 102 at home, and people are telling me my voice sounds funny and muffled.",
     "dob": "08/28/1997",
     "age": 27,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 2240 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "4510 SW 64th Ave, Riverside, FL 33100",
+    "address": "109 E Roosevelt Rd, Chicago, IL 60607",
     "phone": "(954) 555-4203",
     "email": "b.thompson97@email.com",
     "emergencyContact": {

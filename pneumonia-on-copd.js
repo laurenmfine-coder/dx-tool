@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eugene Whitfield",
+  "patientHPI": "I was in the hospital about a month ago because my breathing got really bad - they had to put me on that breathing machine for a few days. I'm supposed to be back to my usual self now after finishing those steroid pills, but I still get short of breath pretty easily when I try to do things around the house.",
     "dob": "04/02/1953",
     "age": 72,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3100 Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "1045 SW 2nd Ct, Fort Lauderdale, FL 33312",
+    "address": "9325 Pine Ave, San Antonio, TX 78204",
     "phone": "(954) 555-3297",
     "email": "e.whitfield53@email.com",
     "emergencyContact": {

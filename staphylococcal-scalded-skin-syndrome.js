@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mateo Fernandez",
+  "patientHPI": "My little boy has been really cranky for two days now and keeps pulling at his right ear. He had a fever yesterday that got up to 102, and he's barely eating anything which isn't like him at all - I'm worried because he's had ear problems before.",
     "dob": "08/30/2023",
     "age": 2,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4895 Sheridan St, Hollywood, FL",
     "language": "English, Spanish (parents bilingual)",
     "race": "Hispanic (Honduran American)",
-    "address": "2214 Johnson St, Hollywood, FL 33020",
+    "address": "3251 Mulberry St, San Antonio, TX 78205",
     "phone": "(954) 555-5618",
     "email": "a.fernandez_parent@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Nguyen Thi Pham",
+  "patientHPI": "I've been having some crampy belly discomfort on and off, but today the pain got much worse and more constant. I feel bloated and haven't had a bowel movement since yesterday, which isn't normal for me.",
     "dob": "09/18/1948",
     "age": 76,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4900 S University Dr, Riverside, FL",
     "language": "English, Vietnamese",
     "race": "Asian/Vietnamese American",
-    "address": "2340 SW 64th Terrace, Riverside, FL 33100",
+    "address": "9424 Maple St, Richmond, VA 23223",
     "phone": "(954) 555-2478",
     "email": "n.pham48@email.com",
     "emergencyContact": {

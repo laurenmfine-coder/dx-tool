@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ryan Kowalski",
+  "patientHPI": "The pain started around my belly button yesterday and then moved down to my lower right side and keeps getting worse. I've been throwing up and have no appetite at all, plus I had a fever of 101 at home last night.",
     "dob": "11/08/1996",
     "age": 28,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 7001 Pines Blvd, Pembroke Pines, FL",
     "language": "English",
     "race": "White/Caucasian (Polish descent)",
-    "address": "9218 NW 9th Ct, Pembroke Pines, FL 33024",
+    "address": "7125 Elm St, Albuquerque, NM 87102",
     "phone": "(954) 555-1847",
     "email": "r.kowalski96@email.com",
     "emergencyContact": {

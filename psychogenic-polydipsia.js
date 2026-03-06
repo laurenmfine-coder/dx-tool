@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Travis Dunn",
+  "patientHPI": "I've been really thirsty lately and can't stop drinking water - I mean like all day long, probably way more than I should. The staff at my group home keeps telling me to slow down but I just feel like I need it constantly, so sometimes I sneak extra from the bathroom sink when they're not looking.",
     "dob": "10/30/1988",
     "age": 36,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4100 Broward Blvd, Riverside, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "2614 NW 14th Ct, Fort Lauderdale, FL 33311",
+    "address": "7449 Walnut Dr, Chicago, IL 60623",
     "phone": "(954) 555-4821",
     "email": "t.dunn88@email.com",
     "emergencyContact": {

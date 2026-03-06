@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Hanson",
+  "patientHPI": "I haven't been able to have a bowel movement in four days even though I'm taking the stool softeners, and I've been taking a lot of those pink sleep pills at night because I can't sleep - maybe three of them most nights.",
     "dob": "05/14/1998",
     "age": 26,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3100 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "4821 SW 32nd Ave, Fort Lauderdale, FL 33312",
+    "address": "5881 Peachtree Rd, Denver, CO 80212",
     "phone": "(954) 555-9281",
     "email": "d.hanson98@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Simmons",
+  "patientHPI": "For the past two weeks, I've had this terrible burning headache on both sides of my temples that just won't go away, and it's worse on the right side. When I try to chew tough foods like steak, my jaw starts hurting so bad I have to stop eating, and even putting on my favorite hat makes my scalp feel sore and tender.",
     "dob": "06/30/1952",
     "age": 72,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4950 W Atlantic Blvd, Margate, FL",
     "language": "English",
     "race": "White",
-    "address": "6720 NW 19th St, Margate, FL 33063",
+    "address": "6216 Oak Ave, Birmingham, AL 35203",
     "phone": "(954) 555-2438",
     "email": "d.simmons52@email.com",
     "emergencyContact": {

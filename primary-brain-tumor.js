@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Thomas Keane",
+  "patientHPI": "Over the past month and a half, I've been getting these headaches that are different from anything I've had before - they're across my forehead and really bad in the mornings, sometimes even wake me up at night. My wife says I've been more cranky and forgetful lately, and I've lost about six pounds without trying.",
     "dob": "02/28/1966",
     "age": 59,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5200 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White/Caucasian (Irish-American)",
-    "address": "2418 NE 34th St, Fort Lauderdale, FL 33306",
+    "address": "1007 Willow Way, Richmond, VA 23221",
     "phone": "(954) 555-9182",
     "email": "t.keane66@email.com",
     "emergencyContact": {

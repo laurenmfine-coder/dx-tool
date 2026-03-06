@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Vasquez",
+  "patientHPI": "I can still walk about a block before I get winded, which is my usual. I sleep with two pillows like I always have, and I'm not waking up short of breath or anything like that. Overall I feel about the same as my last visit.",
     "dob": "11/04/1952",
     "age": 73,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4895 Sheridan St, Hollywood, FL",
     "language": "English, Spanish",
     "race": "Hispanic (Cuban American)",
-    "address": "2714 Taft St, Hollywood, FL 33020",
+    "address": "575 Iris Blvd, Columbus, OH 43211",
     "phone": "(954) 555-7814",
     "email": "g.vasquez52@email.com",
     "emergencyContact": {

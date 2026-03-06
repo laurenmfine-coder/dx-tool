@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andre Beaumont",
+  "patientHPI": "I had another one of my seizures last month, and my wife said it looked like the usual kind where I shake all over for a couple minutes. But this time was different - after I came to, my right arm and leg felt really weak and heavy, like they weren't working right. My wife was worried because I couldn't move them normally for several hours, and even though the weakness is mostly better now, I'm still concerned about what happened.",
     "dob": "12/05/1988",
     "age": 37,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5200 S University Dr, Riverside, FL",
     "language": "English, Haitian Creole",
     "race": "Black or African American",
-    "address": "6320 SW 40th St, Riverside, FL 33100",
+    "address": "1069 Walnut Dr, Memphis, TN 38107",
     "phone": "(954) 555-5247",
     "email": "a.beaumont88@email.com",
     "emergencyContact": {

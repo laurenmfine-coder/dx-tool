@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jerome Carter",
+  "patientHPI": "I know my diabetes hasn't been well controlled lately and I've been skipping my insulin sometimes and not eating right, plus I've missed my eye doctor appointments because I've been busy at work.",
     "dob": "02/14/1960",
     "age": 64,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 8000 Pines Blvd, Pembroke Pines, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "10320 Taft St, Pembroke Pines, FL 33026",
+    "address": "3671 Cottonwood Ave, Birmingham, AL 35204",
     "phone": "(954) 555-9382",
     "email": "j.carter60@email.com",
     "emergencyContact": {

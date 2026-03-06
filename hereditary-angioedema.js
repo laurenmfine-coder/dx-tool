@@ -1,323 +1,992 @@
-// Virtual EMR Case: Hereditary Angioedema
-// Variant: hereditary-angioedema | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/hereditary-angioedema.js — Multi-Setting Allergy Case: Hereditary Angioedema */
 window.EMR_DATA = {
+  "base": {
+    "patient": {
+      "name": "Nicole Dubois",
+  "patientHPI": "My throat started swelling up this morning and I can barely swallow, plus I'm having these terrible stomach cramps that feel like someone is stabbing me from the inside. I've dealt with these attacks before so I know what's happening, but this one feels worse than usual and I'm really scared.",
+      "dob": "05/06/2002",
+      "age": "24",
+      "sex": "Female",
+      "pronouns": "she/her",
+      "mrn": "MRN-432524",
+      "language": "English",
+      "race": "White",
+      "phone": "(704) 555-8218",
+      "email": "nicole.dubois@email.com",
+      "address": "6959 Sycamore Dr, Albuquerque, NM 87103",
+      "insurance": "BlueCross BlueShield PPO",
+      "pcp": "Dr. James Wu, MD",
+      "pharmacy": "Walgreens — University Blvd",
+      "emergencyContact": {
+        "name": "Michael Dubois",
+        "phone": "(614) 555-5616",
+        "relationship": "Spouse"
+      }
+    },
+    "allergies": [
+      {
+        "allergen": "NKDA",
+        "reaction": "",
+        "severity": "",
+        "type": "Drug"
+      }
+    ],
+    "immunizations": [
+      {
+        "name": "Influenza",
+        "date": "10/2025",
+        "lot": "FL-25",
+        "site": "Left Deltoid"
+      }
+    ],
+    "familyHistory": [
+      "Mother: similar episodes",
+      "Maternal uncle: died from laryngeal edema"
+    ],
+    "socialHistory": [
+      [
+        "Tobacco",
+        "Never"
+      ]
+    ]
+  },
+  "encounters": {
+    "ed": {
+      "patient": {
+        "chiefComplaint": "Acute laryngeal swelling and severe abdominal pain — known HAE",
+        "diagnosis": "Hereditary Angioedema"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Hereditary Angioedema",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "C1-INH concentrate",
+          "dose": "20 IU/kg",
+          "route": "IV",
+          "frequency": "STAT",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        },
+        {
+          "id": "med-2",
+          "name": "Icatibant",
+          "dose": "30mg",
+          "route": "SC",
+          "frequency": "If C1-INH unavailable",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/02/2026",
+          "time": "08:00",
+          "bp": "108/68",
+          "hr": "102",
+          "rr": "22",
+          "temp": "36.8°C",
+          "spo2": "96%",
+          "pain": "9/10"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/02/2026",
+          "time": "08:15",
+          "status": "Final",
+          "orderedBy": "Dr. Attending",
+          "accession": "LAB-400009",
+          "collected": "03/02/2026 08:10",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.4",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.6",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "40.8",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "242",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "140",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.1",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "14",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.8",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "94",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-1",
+          "type": "Emergency Visit",
+          "date": "03/02/2026",
+          "provider": "Dr. Attending",
+          "cc": "Acute laryngeal swelling and severe abdominal pain — known HAE",
+          "hpi": "Nicole Dubois presents with acute laryngeal swelling and severe abdominal pain — known hae.",
+          "exam": "See documentation.",
+          "assessment": "See assessment.",
+          "plan": "See orders."
+        }
+      ]
+    },
+    "inpatient": {
+      "patient": {
+        "chiefComplaint": "Admitted after HAE attack requiring C1-INH — monitor for rebound",
+        "diagnosis": "Hereditary Angioedema"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Hereditary Angioedema",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "C1-INH concentrate",
+          "dose": "given in ED",
+          "route": "IV",
+          "frequency": "PRN",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        },
+        {
+          "id": "med-2",
+          "name": "Danazol",
+          "dose": "200mg",
+          "route": "PO",
+          "frequency": "Daily (home med)",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/02/2026",
+          "time": "08:00",
+          "bp": "112/70",
+          "hr": "82",
+          "rr": "16",
+          "temp": "36.8°C",
+          "spo2": "99%",
+          "pain": "3/10"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/02/2026",
+          "time": "08:15",
+          "status": "Final",
+          "orderedBy": "Dr. Attending",
+          "accession": "LAB-421679",
+          "collected": "03/02/2026 08:10",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.4",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.6",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "40.8",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "242",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "140",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.1",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "14",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.8",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "94",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-1",
+          "type": "Admission",
+          "date": "03/02/2026",
+          "provider": "Dr. Attending",
+          "cc": "Admitted after HAE attack requiring C1-INH — monitor for rebound",
+          "hpi": "Nicole Dubois presents with admitted after hae attack requiring c1-inh — monitor for rebound.",
+          "exam": "See documentation.",
+          "assessment": "See assessment.",
+          "plan": "See orders."
+        }
+      ]
+    },
+    "consult": {
+      "patient": {
+        "chiefComplaint": "A/I consult — optimize HAE prophylaxis, frequent attacks despite danazol",
+        "diagnosis": "Hereditary Angioedema"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Hereditary Angioedema",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "Lanadelumab",
+          "dose": "300mg",
+          "route": "SC",
+          "frequency": "Q2 weeks (recommended)",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        },
+        {
+          "id": "med-2",
+          "name": "Danazol",
+          "dose": "200mg",
+          "route": "PO",
+          "frequency": "Daily (to discontinue)",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/02/2026",
+          "time": "08:00",
+          "bp": "110/68",
+          "hr": "76",
+          "rr": "14",
+          "temp": "36.8°C",
+          "spo2": "99%",
+          "pain": "1/10"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/02/2026",
+          "time": "08:15",
+          "status": "Final",
+          "orderedBy": "Dr. Attending",
+          "accession": "LAB-767745",
+          "collected": "03/02/2026 08:10",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.4",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.6",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "40.8",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "242",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "140",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.1",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "14",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.8",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "94",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-1",
+          "type": "Consultation",
+          "date": "03/02/2026",
+          "provider": "Dr. Allergist",
+          "cc": "A/I consult — optimize HAE prophylaxis, frequent attacks despite danazol",
+          "hpi": "Nicole Dubois presents with a/i consult — optimize hae prophylaxis, frequent attacks despite danazol.",
+          "exam": "See documentation.",
+          "assessment": "See assessment.",
+          "plan": "See orders."
+        }
+      ]
+    },
+    "clinic": {
+      "patient": {
+        "chiefComplaint": "HAE follow-up — 3 months on lanadelumab, attack frequency assessment",
+        "diagnosis": "Hereditary Angioedema"
+      },
+      "problems": [
+        {
+          "id": "prob-1",
+          "description": "Hereditary Angioedema",
+          "status": "Active",
+          "onset": "Chronic",
+          "icd10": ""
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "Lanadelumab",
+          "dose": "300mg",
+          "route": "SC",
+          "frequency": "Q2 weeks",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        },
+        {
+          "id": "med-2",
+          "name": "C1-INH concentrate",
+          "dose": "20 IU/kg",
+          "route": "IV",
+          "frequency": "On-demand at home",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        },
+        {
+          "id": "med-3",
+          "name": "Icatibant",
+          "dose": "30mg",
+          "route": "SC",
+          "frequency": "Backup rescue",
+          "status": "Active",
+          "prescriber": "Dr. Elena Rodriguez, MD"
+        }
+      ],
+      "vitals": [
+        {
+          "date": "03/02/2026",
+          "time": "08:00",
+          "bp": "108/66",
+          "hr": "72",
+          "rr": "14",
+          "temp": "36.8°C",
+          "spo2": "99%",
+          "pain": "0/10"
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/02/2026",
+          "time": "08:15",
+          "status": "Final",
+          "orderedBy": "Dr. Attending",
+          "accession": "LAB-935384",
+          "collected": "03/02/2026 08:10",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                {
+                  "test": "WBC",
+                  "value": "7.4",
+                  "unit": "x10³/µL",
+                  "range": "4.5-11.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hemoglobin",
+                  "value": "13.6",
+                  "unit": "g/dL",
+                  "range": "12.0-16.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Hematocrit",
+                  "value": "40.8",
+                  "unit": "%",
+                  "range": "36-46",
+                  "flag": ""
+                },
+                {
+                  "test": "Platelets",
+                  "value": "242",
+                  "unit": "x10³/µL",
+                  "range": "150-400",
+                  "flag": ""
+                }
+              ]
+            },
+            {
+              "name": "BASIC METABOLIC PANEL",
+              "results": [
+                {
+                  "test": "Sodium",
+                  "value": "140",
+                  "unit": "mEq/L",
+                  "range": "136-145",
+                  "flag": ""
+                },
+                {
+                  "test": "Potassium",
+                  "value": "4.1",
+                  "unit": "mEq/L",
+                  "range": "3.5-5.0",
+                  "flag": ""
+                },
+                {
+                  "test": "Chloride",
+                  "value": "102",
+                  "unit": "mEq/L",
+                  "range": "98-106",
+                  "flag": ""
+                },
+                {
+                  "test": "CO2",
+                  "value": "24",
+                  "unit": "mEq/L",
+                  "range": "22-28",
+                  "flag": ""
+                },
+                {
+                  "test": "BUN",
+                  "value": "14",
+                  "unit": "mg/dL",
+                  "range": "7-20",
+                  "flag": ""
+                },
+                {
+                  "test": "Creatinine",
+                  "value": "0.8",
+                  "unit": "mg/dL",
+                  "range": "0.6-1.2",
+                  "flag": ""
+                },
+                {
+                  "test": "Glucose",
+                  "value": "94",
+                  "unit": "mg/dL",
+                  "range": "70-100",
+                  "flag": ""
+                },
+                {
+                  "test": "Calcium",
+                  "value": "9.4",
+                  "unit": "mg/dL",
+                  "range": "8.5-10.5",
+                  "flag": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "imaging": [],
+      "visits": [
+        {
+          "id": "visit-1",
+          "type": "Office Visit",
+          "date": "03/02/2026",
+          "provider": "Dr. Attending",
+          "cc": "HAE follow-up — 3 months on lanadelumab, attack frequency assessment",
+          "hpi": "Nicole Dubois presents with hae follow-up — 3 months on lanadelumab, attack frequency assessment.",
+          "exam": "See documentation.",
+          "assessment": "See assessment.",
+          "plan": "See orders."
+        }
+      ]
+    }
+  },
   "patient": {
     "name": "Nicole Dubois",
-    "dob": "08/14/1994",
-    "age": 31,
+    "dob": "05/06/2002",
+    "age": "24",
     "sex": "Female",
-    "mrn": "RDX-2025-38461",
-    "pronouns": "She/Her",
-    "insurance": "Cigna PPO",
-    "pcp": "Dr. Rachel Toussaint, MD",
-    "pharmacy": "CVS Pharmacy — 700 N Flamingo Rd, Pembroke Pines, FL",
-    "language": "English, French",
-    "race": "Multiracial",
-    "address": "14920 Pines Blvd, Pembroke Pines, FL 33027",
-    "phone": "(954) 555-9174",
-    "email": "nicole.dubois94@email.com",
+    "pronouns": "she/her",
+    "mrn": "MRN-432524",
+    "language": "English",
+    "race": "White",
+    "phone": "(803) 555-7256",
+    "email": "nicole.dubois@email.com",
+    "address": "4196 S Halsted St, Birmingham, AL 35210",
+    "insurance": "BlueCross BlueShield PPO",
+    "pcp": "Dr. James Wu, MD",
+    "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
-      "name": "Marc Dubois (Father)",
-      "phone": "(954) 555-9188"
-    }
+      "name": "Michael Dubois",
+      "phone": "(617) 555-9641",
+      "relationship": "Spouse"
+    },
+    "chiefComplaint": "Acute laryngeal swelling and severe abdominal pain — known HAE",
+    "diagnosis": "Hereditary Angioedema"
   },
   "problems": [
     {
-      "problem": "Hereditary Angioedema, Type I",
-      "icd": "D84.1",
-      "onset": "2016",
+      "id": "prob-1",
+      "description": "Hereditary Angioedema",
       "status": "Active",
-      "notes": "Diagnosed age 22 after recurrent episodes; confirmed low C1-INH level and function, low C4; father and paternal aunt affected; on long-term prophylaxis"
-    },
-    {
-      "problem": "Recurrent Abdominal Attacks (HAE-Related)",
-      "icd": "D84.1",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "Abdominal attacks 2-3x/year despite prophylaxis; often mistaken for surgical abdomen"
-    },
-    {
-      "problem": "Generalized Anxiety Disorder",
-      "icd": "F41.1",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "Related to unpredictability of HAE attacks"
-    },
-    {
-      "problem": "Iron Deficiency Anemia",
-      "icd": "D50.9",
-      "onset": "2024",
-      "status": "Active",
-      "notes": "Heavy menstrual bleeding"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Lanadelumab 300mg SubQ every 2 weeks",
-      "sig": "Inject 300 mg subcutaneously every 14 days for HAE prophylaxis",
-      "prescriber": "Dr. Stern",
-      "start": "06/2022",
-      "refills": 3,
-      "status": "Active"
+      "id": "med-1",
+      "name": "C1-INH concentrate",
+      "dose": "20 IU/kg",
+      "route": "IV",
+      "frequency": "STAT",
+      "status": "Active",
+      "prescriber": "Dr. Elena Rodriguez, MD"
     },
     {
-      "name": "Icatibant 30mg SubQ PRN",
-      "sig": "Inject 30 mg subcutaneously at onset of HAE attack; may repeat once after 6 hours",
-      "prescriber": "Dr. Stern",
-      "start": "01/2017",
-      "refills": 2,
-      "status": "PRN"
-    },
-    {
-      "name": "C1-Esterase Inhibitor Concentrate (Berinert) 20 IU/kg IV PRN",
-      "sig": "Administer IV at weight-based dosing for severe or laryngeal HAE attacks",
-      "prescriber": "Dr. Stern",
-      "start": "03/2018",
-      "refills": 1,
-      "status": "PRN"
-    },
-    {
-      "name": "Sertraline 75mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Toussaint",
-      "start": "04/2019",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Ferrous Sulfate 325mg daily",
-      "sig": "Take 1 tablet by mouth daily on empty stomach with orange juice",
-      "prescriber": "Dr. Toussaint",
-      "start": "03/2024",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Norethindrone 0.35mg daily",
-      "sig": "Take 1 tablet by mouth daily at the same time each day",
-      "prescriber": "Dr. Toussaint",
-      "start": "04/2024",
-      "refills": 3,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Icatibant",
+      "dose": "30mg",
+      "route": "SC",
+      "frequency": "If C1-INH unavailable",
+      "status": "Active",
+      "prescriber": "Dr. Elena Rodriguez, MD"
     }
   ],
   "allergies": [
     {
-      "allergen": "Estrogen-Containing Contraceptives",
-      "type": "Drug",
-      "reaction": "Triggers HAE attacks — contraindicated in HAE",
-      "severity": "Severe",
-      "verified": "Yes"
-    },
-    {
-      "allergen": "ACE Inhibitors",
-      "type": "Drug",
-      "reaction": "Contraindicated — can precipitate bradykinin-mediated angioedema in HAE",
-      "severity": "Severe",
-      "verified": "Yes"
+      "allergen": "NKDA",
+      "reaction": "",
+      "severity": "",
+      "type": "Drug"
     }
   ],
   "vitals": [
     {
-      "date": "02/18/2026",
-      "bp": "108/66",
-      "hr": 96,
-      "rr": 18,
-      "temp": "98.8°F",
-      "spo2": "99%",
-      "wt": "140 lbs",
-      "ht": "5'7\"",
-      "bmi": 21.9,
-      "setting": "ED"
-    },
-    {
-      "date": "12/02/2025",
-      "bp": "112/70",
-      "hr": 72,
-      "rr": 14,
-      "temp": "98.4°F",
-      "spo2": "99%",
-      "wt": "142 lbs",
-      "ht": "5'7\"",
-      "bmi": 22.2,
-      "setting": "Specialist"
-    },
-    {
-      "date": "08/14/2025",
-      "bp": "110/68",
-      "hr": 74,
-      "rr": 14,
-      "temp": "98.6°F",
-      "spo2": "99%",
-      "wt": "141 lbs",
-      "ht": "5'7\"",
-      "bmi": 22.1,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "02/10/2025",
-      "bp": "106/64",
-      "hr": 68,
-      "rr": 14,
-      "temp": "98.2°F",
-      "spo2": "99%",
-      "wt": "138 lbs",
-      "ht": "5'7\"",
-      "bmi": 21.6,
-      "setting": "PCP Office"
+      "date": "03/02/2026",
+      "time": "08:00",
+      "bp": "108/68",
+      "hr": "102",
+      "rr": "22",
+      "temp": "36.8°C",
+      "spo2": "96%",
+      "pain": "9/10"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "12/02/2025",
-      "type": "Specialist",
-      "provider": "Dr. Alicia Stern, MD (Allergy/Immunology)",
-      "cc": "HAE follow-up; prophylaxis assessment",
-      "hpi": "31-year-old female with HAE Type I on lanadelumab prophylaxis. Reports significant reduction in attacks since starting lanadelumab — from ~8 attacks/year to 2-3/year. Most recent attack 3 weeks ago: abdominal (severe cramping, nausea, vomiting x 12 hours), self-treated with icatibant with resolution in 4 hours. Has not had a laryngeal attack in 2+ years. Denies peripheral attacks recently. Carries icatibant and Berinert at all times. C4 level remains low at baseline (expected in HAE).",
-      "exam": "General: Well-appearing, NAD. HEENT: No facial or lip edema. Oropharynx clear, no laryngeal symptoms. Neck: Supple, no LAD. Lungs: CTAB. Abdomen: Soft, NT/ND. Skin: No peripheral edema, no rash. SubQ injection sites: No induration or bruising.",
-      "assessment": "1. HAE Type I — on lanadelumab prophylaxis; breakthrough abdominal attacks 2-3x/year\n2. GAD — stable on sertraline\n3. Iron deficiency anemia — improving on supplementation",
-      "plan": "1. Continue lanadelumab 300mg SubQ q2wk\n2. Continue on-demand icatibant and Berinert\n3. Discussed adding danazol for refractory attacks — patient declines due to side effect profile\n4. Review C4, C1-INH levels\n5. Ensure emergency action plan is current and shared with ED\n6. RTC 3 months"
-    },
-    {
-      "id": "V002",
-      "date": "08/14/2025",
-      "type": "Primary Care",
-      "provider": "Dr. Rachel Toussaint, MD",
-      "cc": "Annual wellness; iron deficiency follow-up",
-      "hpi": "31-year-old female for annual exam. HAE managed by allergy/immunology. Reports stable mood on sertraline. Heavy menstrual bleeding improved since starting norethindrone. Iron supplementation ongoing. Reports good energy level. No new complaints.",
-      "exam": "General: NAD. HEENT: Conjunctivae pink. CV: RRR. Lungs: CTAB. Abdomen: Soft, NT/ND. Pelvic: Deferred (GYN follow-up). Skin: No rashes or edema.",
-      "assessment": "1. Annual wellness\n2. HAE — managed by specialist\n3. Iron deficiency anemia — improving\n4. Menorrhagia — improved on norethindrone",
-      "plan": "1. Repeat CBC, ferritin, iron studies\n2. Continue norethindrone; GYN referral if bleeding recurs\n3. Continue sertraline 75mg daily\n4. RTC 6 months or PRN"
-    },
-    {
-      "id": "V003",
-      "date": "06/08/2025",
-      "type": "ED",
-      "provider": "Dr. Karen Moy, MD (Emergency Medicine)",
-      "cc": "Severe abdominal pain, nausea, vomiting — known HAE",
-      "hpi": "31-year-old female with known HAE Type I presenting with acute-onset severe diffuse abdominal pain, nausea, and multiple episodes of vomiting for 6 hours. Self-administered icatibant 30mg SubQ at home 2 hours ago with partial improvement. Reports this is consistent with her typical abdominal HAE attack pattern. No diarrhea, no fever. LMP 2 weeks ago. Denies triggers; menses-related attacks are her most common pattern.",
-      "exam": "General: In moderate distress, diaphoretic. Abdomen: Diffuse tenderness, no rebound, no guarding. Distended with hypoactive BS. No peritoneal signs. HEENT: No facial or lip swelling. Lungs: CTAB.",
-      "assessment": "1. HAE abdominal attack — classic presentation; partial response to icatibant\n2. No surgical abdomen",
-      "plan": "1. C1-INH concentrate (Berinert) 20 IU/kg IV — significant improvement in 30 minutes\n2. IV ondansetron 4mg, IV normal saline 1L\n3. CT abdomen deferred given known HAE pattern and clinical improvement\n4. Monitored 3 hours — pain resolved, tolerating oral fluids\n5. Discharged with allergy/immunology follow-up\n6. Reminded to pre-treat before dental procedures"
+      "id": "visit-1",
+      "type": "Emergency Visit",
+      "date": "03/02/2026",
+      "provider": "Dr. Attending",
+      "cc": "Acute laryngeal swelling and severe abdominal pain — known HAE",
+      "hpi": "Nicole Dubois presents with acute laryngeal swelling and severe abdominal pain — known hae.",
+      "exam": "See documentation.",
+      "assessment": "See assessment.",
+      "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "12/02/2025",
-      "time": "10:30",
-      "orderedBy": "Dr. Alicia Stern, MD",
-      "collected": "12/02/2025 10:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-120228",
+      "date": "03/02/2026",
+      "time": "08:15",
       "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
+      "orderedBy": "Dr. Attending",
+      "accession": "LAB-400009",
+      "collected": "03/02/2026 08:10",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
-        {
-          "name": "COMPLEMENT PANEL",
-          "results": [
-            { "test": "C4", "value": "6", "unit": "mg/dL", "range": "14-40", "flag": "L" },
-            { "test": "C3", "value": "112", "unit": "mg/dL", "range": "90-180", "flag": "" },
-            { "test": "C1-INH Level (Antigenic)", "value": "8", "unit": "mg/dL", "range": "21-39", "flag": "L" },
-            { "test": "C1-INH Functional Assay", "value": "22", "unit": "%", "range": "70-130", "flag": "L" },
-            { "test": "C1q", "value": "16.4", "unit": "mg/dL", "range": "11.8-23.8", "flag": "" }
-          ]
-        },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "82.1", "unit": "fL", "range": "80-100", "flag": "" },
-            { "test": "Platelet Count", "value": "268", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.6",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.8",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "242",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
-          "name": "IRON STUDIES",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
-            { "test": "Ferritin", "value": "18", "unit": "ng/mL", "range": "12-150", "flag": "" },
-            { "test": "Iron", "value": "48", "unit": "µg/dL", "range": "37-145", "flag": "" },
-            { "test": "TIBC", "value": "380", "unit": "µg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Transferrin Saturation", "value": "13", "unit": "%", "range": "20-50", "flag": "L" }
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.1",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "06/08/2025",
-      "study": "ABDOMINAL XR (KUB)",
-      "accession": "IMG-2025-06083",
-      "status": "FINAL",
-      "orderedBy": "Dr. Karen Moy, MD (ED)",
-      "readBy": "Dr. Elena Suarez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "31F with HAE presenting with acute abdominal pain. R/O obstruction.",
-      "technique": "Single supine AP view of the abdomen.",
-      "findings": "Bowel: Mildly dilated loops of small bowel centrally. Air-fluid levels not well assessed on supine film. No free air. No calcified masses.\\n\\nOther: No radiopaque calculi. Osseous structures unremarkable.",
-      "impression": "1. Mild small bowel dilation — may represent ileus versus early HAE-related bowel wall edema.\\n2. No free air or obstruction.\\n3. Clinical correlation recommended.",
-      "dictated": "06/08/2025 22:18",
-      "verified": "06/08/2025 23:05"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
-      "vaccine": "Influenza (Quadrivalent)",
-      "date": "10/05/2025",
-      "site": "Left deltoid IM",
-      "lot": "FL2025-308",
-      "mfr": "Sanofi Pasteur"
-    },
-    {
-      "vaccine": "COVID-19 (Moderna 2025-26)",
-      "date": "10/25/2025",
-      "site": "Right deltoid IM",
-      "lot": "CM2025-658",
-      "mfr": "Moderna"
-    },
-    {
-      "vaccine": "Tdap (Boostrix)",
-      "date": "2019",
-      "site": "Left deltoid IM",
-      "lot": "—",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "HPV (Gardasil 9) (3/3)",
-      "date": "2015",
-      "site": "Left deltoid IM",
-      "lot": "—",
-      "mfr": "Merck"
+      "name": "Influenza",
+      "date": "10/2025",
+      "lot": "FL-25",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Father: Hereditary Angioedema Type I (diagnosed age 30), alive at 58",
-    "Paternal aunt: Hereditary Angioedema Type I, died from laryngeal attack at age 42",
-    "Mother: Hypertension, alive at 57",
-    "Brother: Unaffected (tested negative for HAE), alive at 28"
+    "Mother: similar episodes",
+    "Maternal uncle: died from laryngeal edema"
   ],
   "socialHistory": [
-    ["Occupation", "Marketing coordinator (advertising agency)"],
-    ["Marital", "Single, in a relationship"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 2-3 drinks/week; alcohol can trigger mild attacks"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Pilates 3x/week; swimming 2x/week"],
-    ["Housing", "Apartment, lives alone; icatibant and Berinert stored in home refrigerator"],
-    ["Safety", "Denies IPV; seatbelt always; wears medical alert bracelet"],
-    ["Advance Directive", "None on file; medical alert bracelet states HAE diagnosis and emergency treatment"]
-  ],
-  "meta": {
-    "caseId": "hereditary-angioedema",
-    "diagnosis": "Hereditary Angioedema (Type I)",
-    "acuity": 2,
-    "presentation": "Allergic Reaction",
-    "category": "immunologic"
+    [
+      "Tobacco",
+      "Never"
+    ]
+  ]
+,"references":[
+  {
+    "id": "WAO-HAE-2022",
+    "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+    "authors": "Maurer M, Magerl M, Betschel S, et al.",
+    "journal": "Allergy",
+    "year": 2022,
+    "doi": "10.1111/all.15214",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
+    "openAccess": true,
+    "validates": [
+      "HAE diagnosis: C4 screening, C1-INH level/function",
+      "C1q distinguishes acquired from hereditary",
+      "On-demand icatibant",
+      "Lanadelumab prophylaxis",
+      "Estrogen triggers: OCPs contraindicated"
+    ]
+  }
+],
+
+  "teachingPoints": {
+    "keyLearning": [
+      "HAE is caused by C1-inhibitor deficiency (Type I — low C1-INH level; Type II — dysfunctional C1-INH) or FXII mutation (Type III, estrogen-dependent, normal complement). Bradykinin accumulation (NOT histamine) drives edema — this is why antihistamines and epinephrine do NOT treat HAE attacks.",
+      "HAE acute treatment: C1-INH concentrate (Berinert, Cinryze), icatibant (bradykinin B2 receptor antagonist), or ecallantide (kallikrein inhibitor). ALL attacks above the waist require treatment — laryngeal attacks are potentially fatal.",
+      "HAE prophylaxis options: lanadelumab (anti-kallikrein, Q2–4W SC), subcutaneous C1-INH (Haegarda), oral berotralstat (plasma kallikrein inhibitor). Danazol (attenuated androgen, increases C1-INH synthesis) — largely replaced by newer agents due to side effects."
+    ],
+    "boardPearls": [
+      "HAE Types: I (low C1-INH level, most common, 85%); II (normal level, dysfunctional C1-INH); III (FXII mutation, estrogen-triggered, normal complement levels).",
+      "Complement pattern in HAE: C4 LOW (chronically depleted, even between attacks). C3 NORMAL. C1-INH low (Type I) or dysfunctional (Type II). C1q NORMAL (distinguishes from acquired C1-INH deficiency where C1q is LOW).",
+      "HAE mechanism: bradykinin (NOT histamine) → B2 receptors on postcapillary venules → vascular permeability → angioedema. Epinephrine and antihistamines: NOT effective for HAE.",
+      "Laryngeal HAE: 25–40% of patients have laryngeal attacks. ALL should carry 2 doses of on-demand treatment. Fatal without treatment.",
+      "Triggers: trauma/surgery, estrogens (OCPs, HRT, pregnancy), ACE inhibitors, infections, stress.",
+      "ACE inhibitors absolutely contraindicated in HAE — block bradykinin degradation → precipitate attacks."
+    ]
   }
 };

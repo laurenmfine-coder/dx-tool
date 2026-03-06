@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Simmons",
+  "patientHPI": "Every time I eat, about 20 or 30 minutes later I get terrible cramping pain around my belly button that lasts for hours. It's gotten so bad that I'm afraid to eat normal meals - I've been sticking to tiny portions and I've lost quite a bit of weight.",
     "dob": "01/06/1955",
     "age": 70,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 7821 Pines Blvd, Pembroke Pines, FL",
     "language": "English",
     "race": "White",
-    "address": "1560 NW 115th Way, Pembroke Pines, FL 33026",
+    "address": "2585 Juniper Dr, Memphis, TN 38107",
     "phone": "(954) 555-3589",
     "email": "w.simmons55@email.com",
     "emergencyContact": {

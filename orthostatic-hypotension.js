@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Reginald Holloway",
+  "patientHPI": "I was sitting in my recliner watching TV when the doorbell rang, so I got up to answer it and suddenly felt really dizzy and lightheaded. Next thing I knew, I was on the floor - thankfully it was just carpet so I didn't get hurt. This has happened a couple times before when I stand up too fast, and it's starting to worry me.",
     "dob": "01/24/1940",
     "age": 86,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 1500 E Hallandale Beach Blvd, Hallandale Beach, FL",
     "language": "English",
     "race": "Black (African American)",
-    "address": "901 S Ocean Dr, Hallandale Beach, FL 33009",
+    "address": "619 Hollyhock Rd, Cleveland, OH 44110",
     "phone": "(954) 555-6128",
     "email": "r.holloway40@email.com",
     "emergencyContact": {

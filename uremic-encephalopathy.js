@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Jenkins",
+  "patientHPI": "My car broke down two weeks ago and I can't afford to fix it, so I've missed some of my kidney treatments. I know I shouldn't skip them, but sometimes I just forget what day it is. Lately I've been feeling really short of breath and my legs are getting swollen again.",
     "dob": "11/14/1960",
     "age": 65,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 1620 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black (African American)",
-    "address": "1418 NW 3rd Ave, Fort Lauderdale, FL 33311",
+    "address": "3121 Cottonwood Ave, Denver, CO 80203",
     "phone": "(954) 555-4578",
     "email": "",
     "emergencyContact": {

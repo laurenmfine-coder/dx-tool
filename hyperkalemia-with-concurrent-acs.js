@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Washington",
+  "patientHPI": "I've been getting more and more tired over the past few weeks, and now I get short of breath just walking up one flight of stairs. I've gained about four pounds and my heart feels like it's skipping beats sometimes - I know I haven't been good about watching what I eat lately.",
     "dob": "12/04/1955",
     "age": 69,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 5601 Stirling Rd, Hollywood, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "3418 Johnson St, Hollywood, FL 33021",
+    "address": "7223 Maple St, Louisville, KY 40212",
     "phone": "(954) 555-6182",
     "email": "h.washington55@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gerald Moreau",
+  "patientHPI": "My belly has been getting bigger and bigger over the past couple weeks, even though I've been taking my water pills and watching my salt like the doctor said. I've gained 7 pounds and my pants don't fit anymore - it's really uncomfortable and I'm worried something's wrong.",
     "dob": "04/22/1967",
     "age": 57,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2800 W Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "1145 SW 6th St, Fort Lauderdale, FL 33312",
+    "address": "5247 Iris Blvd, Milwaukee, WI 53206",
     "phone": "(954) 555-3712",
     "email": "g.moreau67@email.com",
     "emergencyContact": {

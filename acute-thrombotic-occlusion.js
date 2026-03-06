@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Hawkins",
+  "patientHPI": "My right leg is getting worse again - the muscle cramps up after just half a block of walking, and sometimes my right foot feels colder than the left one. I thought the procedure last year would help more than this.",
     "dob": "06/15/1960",
     "age": 64,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 801 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "2915 SE 7th St, Fort Lauderdale, FL 33316",
+    "address": "3358 Poplar Ave, San Antonio, TX 78211",
     "phone": "(954) 555-7283",
     "email": "r.hawkins60@email.com",
     "emergencyContact": {

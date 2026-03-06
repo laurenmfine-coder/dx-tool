@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marie-Claire Jean-Baptiste",
+  "patientHPI": "I've been having this dull, crampy pain on my right side that comes and goes - it seems to get worse around my period. It's not terrible pain, but it's been bothering me for a while now, so my doctor sent me for an ultrasound to see what might be causing it.",
     "dob": "11/08/1993",
     "age": 32,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 801 S University Dr, Plantation, FL",
     "language": "English, Haitian Creole",
     "race": "Black or African American",
-    "address": "3415 NW 21st Terrace, Fort Lauderdale, FL 33309",
+    "address": "6697 Chestnut Rd, Kansas City, MO 64110",
     "phone": "(954) 555-2941",
     "email": "mcjeanbaptiste@email.com",
     "emergencyContact": {

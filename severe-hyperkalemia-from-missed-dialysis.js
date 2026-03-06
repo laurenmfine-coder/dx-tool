@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Jenkins",
+  "patientHPI": "I know I'm supposed to go to dialysis three times a week, but sometimes I just feel too tired or can't get a ride, so I've been missing some sessions lately. My legs are more swollen than usual and I've been feeling really weak and my heart feels like it's racing.",
     "dob": "08/19/1959",
     "age": 65,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3900 W Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "1824 NW 6th St, Fort Lauderdale, FL 33311",
+    "address": "6316 Magnolia Blvd, New Orleans, LA 70112",
     "phone": "(954) 555-1842",
     "email": "h.jenkins59@email.com",
     "emergencyContact": {

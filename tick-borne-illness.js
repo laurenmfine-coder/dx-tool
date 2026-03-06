@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Daniel Marsh",
+  "patientHPI": "I just got back from an amazing week-long hiking trip on the Appalachian Trail in North Carolina last month, but now I'm feeling pretty run down. During the trip I found several ticks on me and pulled them off, which I thought was no big deal since that's pretty normal when you're camping. But over the past week or so I've been getting these weird headaches, feeling really tired, and just not myself - almost like I'm coming down with the flu or something.",
     "dob": "10/05/1978",
     "age": 46,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5100 W Hillsboro Blvd, Coconut Creek, FL",
     "language": "English",
     "race": "White",
-    "address": "4825 NW 45th Ct, Coconut Creek, FL 33073",
+    "address": "4395 Foxglove Dr, Baltimore, MD 21206",
     "phone": "(954) 555-6349",
     "email": "d.marsh78@email.com",
     "emergencyContact": {

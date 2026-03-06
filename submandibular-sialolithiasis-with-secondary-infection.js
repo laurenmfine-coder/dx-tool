@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frank Castellano",
+  "patientHPI": "For the past two days I've had this awful pain and swelling under my jaw on the right side that gets much worse when I eat. Every time I take a bite of food, I get this sharp pain and my face swells up, then it goes down a little between meals - yesterday I started running a fever too.",
     "dob": "01/18/1966",
     "age": 59,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 5700 Stirling Rd, Hollywood, FL",
     "language": "English",
     "race": "White",
-    "address": "3840 SW 52nd Ave, Hollywood, FL 33023",
+    "address": "6009 Maple St, Richmond, VA 23226",
     "phone": "(954) 555-9412",
     "email": "f.castellano66@email.com",
     "emergencyContact": {

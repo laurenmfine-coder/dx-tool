@@ -1,216 +1,283 @@
-// Virtual EMR Case: Septic Arthritis
-// Variant: septic-arthritis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/septic-arthritis.js — EMR case data for Septic Arthritis (Knee) */
 window.EMR_DATA = {
   "patient": {
-    "name": "Charles Baptiste",
-    "dob": "05/10/1956",
-    "age": 68,
-    "sex": "Male",
-    "mrn": "RDX-2025-48193",
-    "pronouns": "He/Him",
-    "insurance": "Medicare Part B with Humana Supplemental",
-    "pcp": "Dr. Jennifer Owens, MD",
-    "pharmacy": "CVS Pharmacy — 4250 N State Rd 7, Lauderdale Lakes, FL",
-    "language": "English, Haitian Creole",
+    "name": "Natasha Volkov",
+  "patientHPI": "My right knee started getting really hot and puffy yesterday out of nowhere - it's so swollen I can barely bend it and it feels like it's on fire when I touch it.",
+    "dob": "10/10/1956",
+    "age": "70",
+    "sex": "Female",
+    "pronouns": "she/her",
+    "mrn": "MRN-461025",
+    "language": "English",
     "race": "Black/African American",
-    "address": "3215 NW 36th Ave, Lauderdale Lakes, FL 33311",
-    "phone": "(954) 555-5827",
-    "email": "c.baptiste56@email.com",
+    "phone": "(412) 555-9786",
+    "email": "natasha.volkov@email.com",
+    "address": "7012 N Kedzie Blvd, Kansas City, MO 64108",
+    "insurance": "Humana Gold Plus",
+    "pcp": "Dr. Amy Patel, MD",
+    "pharmacy": "Walmart Pharmacy — Federal Hwy",
     "emergencyContact": {
-      "name": "Marie Baptiste (Wife)",
-      "phone": "(954) 555-5840"
-    }
+      "name": "Sarah Williams",
+      "phone": "(614) 555-3296",
+      "relationship": "Partner"
+    },
+    "chiefComplaint": "My knee is hot and swollen Right knee — acute monoarticular",
+    "diagnosis": "Septic Arthritis (Knee)"
   },
   "problems": [
     {
-      "problem": "Gout — Chronic Tophaceous",
-      "icd": "M1A.9",
-      "onset": "2010",
+      "id": "prob-1",
+      "description": "Gout",
       "status": "Active",
-      "notes": "Chronic tophaceous gout; tophi bilateral hands and left ear; target uric acid <6 on allopurinol; recurrent flares 2-3x/year; colchicine prophylaxis"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Chronic Kidney Disease, Stage 3b",
-      "icd": "N18.32",
-      "onset": "2019",
+      "id": "prob-2",
+      "description": "Type 2 Diabetes",
       "status": "Active",
-      "notes": "eGFR 42; multifactorial (HTN, gout nephropathy); nephrology following"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2004",
+      "id": "prob-3",
+      "description": "Skin abscess right shin",
       "status": "Active",
-      "notes": "On losartan and amlodipine; avoid HCTZ due to gout"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.9",
-      "onset": "2014",
+      "id": "prob-4",
+      "description": "Hypertension",
       "status": "Active",
-      "notes": "A1c 7.4%; on metformin (dose-reduced for CKD)"
+      "onset": "Chronic",
+      "icd10": ""
     },
     {
-      "problem": "Left Knee Total Arthroplasty — History",
-      "icd": "Z96.652",
-      "onset": "2021",
-      "status": "Resolved",
-      "notes": "Left TKA for OA 2021; uncomplicated recovery; prosthetist — no current issues at last ortho visit 2023"
-    },
-    {
-      "problem": "Right Knee Osteoarthritis — Moderate-Severe",
-      "icd": "M17.11",
-      "onset": "2015",
+      "id": "prob-5",
+      "description": "Obesity",
       "status": "Active",
-      "notes": "Moderate-severe; considering TKA right side; last intra-articular corticosteroid injection 09/2024 with temporary relief"
+      "onset": "Chronic",
+      "icd10": ""
     }
   ],
   "medications": [
     {
-      "name": "Allopurinol 200mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Owens",
-      "start": "06/2015",
-      "refills": 4,
-      "status": "Active"
+      "id": "med-1",
+      "name": "Allopurinol",
+      "dose": "300mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Amy Patel, MD"
     },
     {
-      "name": "Colchicine 0.6mg daily",
-      "sig": "Take 1 tablet by mouth daily for gout flare prophylaxis",
-      "prescriber": "Dr. Owens",
-      "start": "06/2015",
-      "refills": 3,
-      "status": "Active"
+      "id": "med-2",
+      "name": "Metformin",
+      "dose": "1000mg BID",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Sarah Mitchell, MD"
     },
     {
-      "name": "Losartan 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Owens",
-      "start": "01/2008",
-      "refills": 4,
-      "status": "Active"
+      "id": "med-3",
+      "name": "Losartan",
+      "dose": "50mg daily",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     },
     {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Owens",
-      "start": "06/2012",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals (dose-reduced for CKD)",
-      "prescriber": "Dr. Owens",
-      "start": "06/2015",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Acetaminophen 500mg TID PRN",
-      "sig": "Take 1-2 tablets by mouth three times daily as needed for pain; max 3000mg/day",
-      "prescriber": "Dr. Owens",
-      "start": "01/2016",
-      "refills": 3,
-      "status": "PRN"
+      "id": "med-4",
+      "name": "Colchicine",
+      "dose": "0.6mg PRN (tried for this episode — no improvement)",
+      "route": "PO",
+      "frequency": "Daily",
+      "status": "Active",
+      "prescriber": "Dr. Karen Liu, DO"
     }
   ],
   "allergies": [
     {
-      "allergen": "NSAIDs (Indomethacin, Naproxen)",
-      "type": "Drug",
-      "reaction": "Acute kidney injury — Cr rose to 2.4 on indomethacin in 2018",
-      "severity": "Severe",
-      "verified": "Yes"
+      "allergen": "NKDA",
+      "reaction": "No Known Drug Allergies",
+      "severity": "",
+      "type": ""
     }
   ],
   "vitals": [
     {
-      "date": "10/28/2024",
-      "bp": "138/84",
-      "hr": 74,
-      "rr": 14,
-      "temp": "98.6°F",
-      "spo2": "97%",
-      "wt": "205 lbs",
-      "ht": "5'8\"",
-      "bmi": 31.2,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "09/10/2024",
-      "bp": "142/86",
-      "hr": 78,
-      "rr": 14,
-      "temp": "98.4°F",
-      "spo2": "97%",
-      "wt": "207 lbs",
-      "ht": "5'8\"",
-      "bmi": 31.5,
-      "setting": "Orthopedics"
+      "date": "03/03/2026",
+      "time": "07:29",
+      "bp": "146/88",
+      "hr": "98",
+      "rr": "16",
+      "temp": "38.7°C",
+      "spo2": "98%",
+      "pain": "8/10",
+      "bmi": "22",
+      "weight": "97 kg"
     }
   ],
   "visits": [
     {
-      "id": "V001",
-      "date": "10/28/2024",
-      "type": "Primary Care",
-      "provider": "Dr. Jennifer Owens, MD",
-      "cc": "Follow-up: gout, DM2, CKD, right knee pain",
-      "hpi": "68-year-old male with chronic tophaceous gout, CKD 3b, DM2, and OA for follow-up. Reports right knee injection in 09/2024 — improved for 3 weeks then pain returned. Has had 1 gout flare since last visit (first MTP joint bilateral, treated with colchicine intensification and prednisone burst). Uric acid 5.8 — at goal. CKD stable. A1c 7.4%. Left TKA — no issues. Considering right TKA — ortho appointment pending.",
-      "exam": "General: Obese male, NAD. Hands: Tophi visible bilateral 2nd and 3rd DIP joints. Left ear: Small tophus helix. CV: RRR. Lungs: CTAB. MSK: Left knee — TKA, well-aligned, no effusion. Right knee — moderate effusion, crepitus, limited flexion to 100°, mild warmth. Feet: No acute inflammation of MTP joints.",
-      "assessment": "1. Gout — tophaceous; uric acid at goal on allopurinol\n2. Right knee OA — worsening; right knee effusion; considering TKA\n3. CKD 3b — stable\n4. DM2 — stable\n5. HTN — borderline controlled",
-      "plan": "1. Continue allopurinol and colchicine\n2. Right knee: orthopedic follow-up for TKA discussion\n3. Labs: uric acid, CMP, CBC, A1c\n4. If right knee develops acute hot swollen joint with fever: ED IMMEDIATELY — septic arthritis must be ruled out (native joint with effusion, immunocompromised with DM/CKD, prior steroid injection)\n5. RTC 3 months"
-    },
-    {
-      "id": "V002",
-      "date": "09/10/2024",
-      "type": "Orthopedics",
-      "provider": "Dr. Thomas Grant, MD (Orthopedics)",
-      "cc": "Right knee pain — OA management, injection",
-      "hpi": "68-year-old male with right knee OA, chronic tophaceous gout. Pain worsening despite acetaminophen. Unable to use NSAIDs (CKD). Prior left TKA 2021. Considering right TKA. Today for corticosteroid injection.",
-      "exam": "Right knee: Moderate varus, moderate effusion, crepitus, flexion 105°. Left TKA — stable.",
-      "assessment": "1. Right knee OA — moderate-severe; candidate for TKA",
-      "plan": "1. Right knee intra-articular injection: triamcinolone 40mg with lidocaine — performed\n2. Pre-operative planning if injection fails\n3. Follow-up 6 weeks"
+      "id": "visit-ed",
+      "type": "Emergency Visit",
+      "date": "03/03/2026",
+      "provider": "Dr. ED Attending",
+      "cc": "My knee is hot and swollen Right knee — acute monoarticular",
+      "hpi": "Natasha Volkov is a 70-year-old female presenting with my knee is hot and swollen right knee — acute monoarticular. Past medical history includes Gout, Type 2 Diabetes, Skin abscess right shin, Hypertension, Obesity. See chart for full details.",
+      "exam": "See physical examination documentation.",
+      "assessment": "Septic Arthritis (Knee) — clinical presentation and workup consistent with diagnosis.",
+      "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "10/28/2024",
-      "time": "09:00",
-      "orderedBy": "Dr. Jennifer Owens, MD",
-      "collected": "10/28/2024 08:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-102815",
+      "date": "03/03/2026",
+      "time": "08:00",
       "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
+      "orderedBy": "Dr. ED Attending",
+      "accession": "LAB-374011",
+      "collected": "03/03/2026 07:50",
+      "fasting": "Not fasting",
+      "facility": "ReasonDx Medical Center",
+      "specimenType": "Blood",
       "groups": [
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.2", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "252", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "15.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "47",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "258",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
-          "name": "METABOLIC AND RENAL",
+          "name": "BASIC METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "122", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.6", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "42", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Uric Acid", "value": "5.8", "unit": "mg/dL", "range": "3.0-7.0", "flag": "" }
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2/Bicarb",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "22-28",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Glucose",
+              "value": "268",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "Calcium",
+              "value": "10.5",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
-          "name": "HEMOGLOBIN A1c",
+          "name": "CASE-SPECIFIC STUDIES",
           "results": [
-            { "test": "HbA1c", "value": "7.4", "unit": "%", "range": "<5.7 normal", "flag": "H" }
+            {
+              "test": "ESR",
+              "value": "78",
+              "unit": "mm/hr",
+              "range": "<20",
+              "flag": "H"
+            },
+            {
+              "test": "CRP",
+              "value": "14.2",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": "H"
+            },
+            {
+              "test": "Uric Acid",
+              "value": "7.8",
+              "unit": "mg/dL",
+              "range": "3.5-7.2",
+              "flag": "H"
+            },
+            {
+              "test": "Blood Cultures",
+              "value": "Pending — 2 sets drawn",
+              "unit": "",
+              "range": "No growth",
+              "flag": ""
+            },
+            {
+              "test": "SYNOVIAL FLUID ANALYSIS",
+              "value": "WBC 84,000/mm³ (>90% PMNs). Gram stain: Gram-positive cocci in clusters. Crystal analysis: NO crystals seen. Culture: pending.",
+              "unit": "",
+              "range": "Normal: <200 WBC, no organisms",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -218,81 +285,101 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "date": "09/10/2024",
-      "study": "X-RAY RIGHT KNEE — STANDING AP, LATERAL, SUNRISE",
-      "accession": "IMG-2024-09101",
-      "status": "FINAL",
-      "orderedBy": "Dr. Thomas Grant, MD (Orthopedics)",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
+      "id": "img-cxr",
+      "date": "03/03/2026",
+      "study": "Chest X-Ray PA/Lateral",
+      "status": "Final",
       "priority": "Routine",
-      "clinical": "68M right knee OA, chronic gout — pre-injection imaging.",
-      "technique": "Standing AP, lateral, and sunrise views.",
-      "findings": "Right knee: Moderate-severe medial compartment joint space narrowing with subchondral sclerosis and osteophyte formation. Moderate varus alignment. Lateral compartment — mild narrowing. Patellofemoral — moderate narrowing with osteophytes. Periarticular soft tissue density consistent with tophaceous deposits at medial joint line. Moderate suprapatellar effusion.\\n\\nNo fracture or destructive lesion.",
-      "impression": "1. Moderate-severe tricompartmental osteoarthritis, right knee — medial compartment predominant.\\n2. Periarticular tophaceous deposits.\\n3. Suprapatellar effusion.",
-      "dictated": "09/10/2024 11:00",
-      "verified": "09/10/2024 13:30"
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-821477",
+      "clinical": "My knee is hot and swollen Right knee — acute monoarticular",
+      "technique": "Standard protocol",
+      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
+      "impression": "No acute cardiopulmonary process.",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-1",
+      "date": "03/03/2026",
+      "study": "X-ray Knee",
+      "status": "Final",
+      "priority": "Routine",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Radiologist",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-284815",
+      "clinical": "My knee is hot and swollen Right knee — acute monoarticular",
+      "technique": "Standard protocol",
+      "findings": "Large joint effusion with displacement of fat pads. No fracture. Mild degenerative changes. No chondrocalcinite (pseudogout). No osteomyelitis changes (early infection won't show bone changes for 10-14 days).",
+      "impression": "Large effusion — nonspecific. No bony destruction yet (would take 10-14 days to appear on X-ray).",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
+    },
+    {
+      "id": "img-2",
+      "date": "03/03/2026",
+      "study": "12-Lead ECG",
+      "status": "Final",
+      "priority": "STAT",
+      "orderedBy": "Dr. ED Physician",
+      "readBy": "Dr. Cardiology",
+      "facility": "ReasonDx Medical Center",
+      "accession": "IMG-101989",
+      "clinical": "My knee is hot and swollen Right knee — acute monoarticular",
+      "technique": "Standard 12-lead",
+      "findings": "Sinus rhythm at 98 bpm. Normal intervals",
+      "impression": "Normal",
+      "dictated": "03/03/2026 08:30",
+      "verified": "03/03/2026 09:15"
     }
   ],
   "immunizations": [
     {
-      "vaccine": "Influenza (Quadrivalent, High-Dose)",
-      "date": "10/12/2024",
-      "site": "Left deltoid IM",
-      "lot": "FL2024-HD106",
-      "mfr": "Sanofi Pasteur"
+      "name": "Influenza",
+      "date": "10/15/2025",
+      "lot": "FL-2025",
+      "site": "Left Deltoid"
     },
     {
-      "vaccine": "COVID-19 (Pfizer 2024-25)",
-      "date": "10/28/2024",
-      "site": "Right deltoid IM",
-      "lot": "CV2024-702",
-      "mfr": "Pfizer"
+      "name": "COVID-19 (Updated)",
+      "date": "09/01/2025",
+      "lot": "CV-2025",
+      "site": "Right Deltoid"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
-      "date": "06/2022",
-      "site": "Left deltoid IM",
-      "lot": "PV22-210",
-      "mfr": "Pfizer"
-    },
-    {
-      "vaccine": "Shingrix (2/2)",
-      "date": "09/2021",
-      "site": "Left deltoid IM",
-      "lot": "SX21-340",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Tdap (Boostrix)",
-      "date": "2016",
-      "site": "Left deltoid IM",
-      "lot": "—",
-      "mfr": "GSK"
+      "name": "Tdap",
+      "date": "03/2020",
+      "lot": "TD-2020",
+      "site": "Left Deltoid"
     }
   ],
   "familyHistory": [
-    "Mother: HTN, gout, alive at 90",
-    "Father: T2DM, CKD (on dialysis), deceased at 72",
-    "Brother: Gout, HTN, alive at 65",
-    "Sister: T2DM, alive at 62"
+    "Father: gout",
+    "No autoimmune disease"
   ],
   "socialHistory": [
-    ["Occupation", "Retired bus driver (Broward County Transit)"],
-    ["Marital", "Married, 2 adult children"],
-    ["Tobacco", "Former smoker — 5 pack-years; quit 2000"],
-    ["Alcohol", "Social, 1-2 beers on weekends; reduces during gout flares"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking daily when pain allows; limited by knee OA"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "No firearms; handrails on stairs"],
-    ["Advance Directive", "Health care proxy: wife Marie Baptiste; Full code"]
-  ],
-  "meta": {
-    "caseId": "septic-arthritis",
-    "diagnosis": "Septic Arthritis — Right Knee (Staphylococcus aureus, Post-Steroid Injection in Immunocompromised Host)",
-    "acuity": 2,
-    "presentation": "Fever/Sepsis",
-    "category": "infectious"
-  }
+    [
+      "Tobacco",
+      "Former, quit 5 years ago"
+    ],
+    [
+      "Alcohol",
+      "2-3 beers daily"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Occupation",
+      "Long-haul truck driver (sedentary, limited healthcare access)"
+    ],
+    [
+      "Living",
+      "Lives with wife"
+    ]
+  ]
 };

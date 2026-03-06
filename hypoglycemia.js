@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Campbell",
+  "patientHPI": "My daughter found me confused and sweaty last month, and they said my blood sugar was dangerously low - this is the third time it's happened in six months. I just haven't had much of an appetite lately and I'm only eating small meals once or twice a day.",
     "dob": "02/14/1946",
     "age": 80,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 3100 Stirling Rd, Hollywood, FL",
     "language": "English",
     "race": "White",
-    "address": "4510 SW 64th Ave, Riverside, FL 33100",
+    "address": "8223 Sycamore Dr, Minneapolis, MN 55403",
     "phone": "(954) 555-1842",
     "email": "d.campbell46@email.com",
     "emergencyContact": {

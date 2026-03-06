@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret Finley",
+  "patientHPI": "I've been feeling really down and tired lately, sleeping way more than usual, and I've gained about 4 pounds. My hair seems thinner and I'm more constipated than normal - oh, and I ran out of my thyroid medication a few weeks ago and haven't gotten it refilled yet.",
     "dob": "02/14/1952",
     "age": 73,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 7201 Taft St, Pembroke Pines, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "8412 NW 8th St, Pembroke Pines, FL 33024",
+    "address": "1233 Spruce St, Milwaukee, WI 53209",
     "phone": "(954) 555-8142",
     "email": "m.finley52@email.com",
     "emergencyContact": {

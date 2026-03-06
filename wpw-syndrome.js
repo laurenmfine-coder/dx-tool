@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Alejandro Vega",
+  "patientHPI": "I've been having these episodes where my heart suddenly starts racing really fast, especially when I'm exercising, and they had me wear a heart monitor for a few days to see what's happening.",
     "dob": "09/26/1998",
     "age": 27,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 3100 Stirling Rd, Hollywood, FL",
     "language": "English, Spanish",
     "race": "Hispanic (Venezuelan American)",
-    "address": "3612 N 46th Ave, Hollywood, FL 33021",
+    "address": "7827 Elm St, Milwaukee, WI 53210",
     "phone": "(954) 555-8842",
     "email": "a.vega98@email.com",
     "emergencyContact": {

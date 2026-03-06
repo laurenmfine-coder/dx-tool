@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Linda Vasquez-Torres",
+  "patientHPI": "My headaches have been different lately - I still get my usual ones, but now I have this constant pain on the left side of my head that won't go away no matter what I take. It's been getting worse in the mornings over the past few months.",
     "dob": "04/16/1968",
     "age": 56,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 5800 S University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino (Puerto Rican)",
-    "address": "7814 SW 8th St, Riverside, FL 33324",
+    "address": "7810 Maple St, Baltimore, MD 21213",
     "phone": "(954) 555-6724",
     "email": "l.vasqueztorres@email.com",
     "emergencyContact": {

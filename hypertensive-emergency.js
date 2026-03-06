@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Claudette Baptiste",
+  "patientHPI": "My blood pressure pills aren't working like they should, and I'll be honest - I forget to take the afternoon one pretty often. I've been getting these headaches at the back of my head for the past couple months, especially when I'm stressed, but my vision seems fine.",
     "dob": "09/12/1961",
     "age": 63,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3500 Broward Blvd, Riverside, FL",
     "language": "English, Haitian Creole",
     "race": "Black/African American",
-    "address": "5120 NW 18th Court, Lauderhill, FL 33313",
+    "address": "4734 Clover St, Albuquerque, NM 87101",
     "phone": "(954) 555-6041",
     "email": "c.baptiste61@email.com",
     "emergencyContact": {

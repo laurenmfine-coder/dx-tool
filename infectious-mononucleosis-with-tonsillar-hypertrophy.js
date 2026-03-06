@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ethan Morales",
+  "patientHPI": "I've had this awful sore throat for five days now that keeps getting worse, and I'm so exhausted I can barely get out of bed. I've been running a low fever and noticed some swelling in my neck, plus it hurts to swallow anything solid. I've been sleeping almost all day and had to miss my classes this week.",
     "dob": "04/15/2005",
     "age": 19,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3501 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Hispanic/Latino",
-    "address": "1920 SW 38th Ave, Fort Lauderdale, FL 33317",
+    "address": "7148 Birch Ln, San Antonio, TX 78204",
     "phone": "(954) 555-2091",
     "email": "e.morales05@email.com",
     "emergencyContact": {

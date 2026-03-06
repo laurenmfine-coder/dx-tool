@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Rachel Dominguez",
+  "patientHPI": "About three weeks ago I had the strangest experience - I suddenly felt like I'd lived that exact moment before, and then I smelled something like burning rubber that wasn't really there. It only lasted about 30 seconds but it was really weird and unlike anything I've ever experienced.",
     "dob": "11/20/1989",
     "age": 35,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3260 S University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino (Cuban-American)",
-    "address": "4512 SW 42nd Ct, Riverside, FL 33100",
+    "address": "3853 Larkspur Ln, Cleveland, OH 44106",
     "phone": "(954) 555-4812",
     "email": "r.dominguez89@email.com",
     "emergencyContact": {

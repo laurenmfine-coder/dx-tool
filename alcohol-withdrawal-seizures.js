@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Michael Brennan",
+  "patientHPI": "I've been drinking about 12 to 18 beers every day and I haven't been taking those vitamins you recommended in months. I know I need to stop but it's been really hard since my last attempt at getting sober a couple years ago.",
     "dob": "01/22/1978",
     "age": 47,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2901 Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "1142 NW 3rd Ave, Fort Lauderdale, FL 33311",
+    "address": "7621 Magnolia Blvd, Richmond, VA 23220",
     "phone": "(954) 555-7291",
     "email": "m.brennan78@email.com",
     "emergencyContact": {

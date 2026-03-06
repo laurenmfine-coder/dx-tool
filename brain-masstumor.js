@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eleanor Whitfield",
+  "patientHPI": "For the past three months, I've been waking up every morning with these terrible headaches that feel like pressure all over my head. They're worst when I first get up, and I often feel sick to my stomach too. I've never had headaches like this before - they're really wearing me down.",
     "dob": "05/12/1947",
     "age": 77,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1500 N Pine Island Rd, Plantation, FL",
     "language": "English",
     "race": "White",
-    "address": "3280 NW 2nd Ave, Plantation, FL 33317",
+    "address": "7445 N Western Ave, Memphis, TN 38104",
     "phone": "(954) 555-2094",
     "email": "e.whitfield47@email.com",
     "emergencyContact": {

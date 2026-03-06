@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Mae Sinclair",
+  "patientHPI": "I've been having some dizzy spells and my son says I seem more confused lately, especially since my blood sugar numbers have been getting better. I had to go to the emergency room twice recently because I felt really weak and shaky.",
     "dob": "07/14/1943",
     "age": 81,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2200 E Commercial Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "1428 NW 4th Ave, Fort Lauderdale, FL 33311",
+    "address": "2543 Foxglove Dr, Memphis, TN 38122",
     "phone": "(954) 555-2148",
     "email": "d.sinclair.family@email.com",
     "emergencyContact": {

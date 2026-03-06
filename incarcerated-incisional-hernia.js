@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Washington",
+  "patientHPI": "I'm here because this bulge in my belly where I had surgery a few years ago has gotten much bigger over the past few months. My wife noticed it sticks out more now, and it's been hurting when I cough, which happens a lot because of my lung problems. Usually I can push it back in, but today it feels different and won't go back.",
     "dob": "08/20/1955",
     "age": 69,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 800 S State Rd 7, Plantation, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "620 NW 68th Ave, Plantation, FL 33317",
+    "address": "3505 Cottonwood Ave, Memphis, TN 38106",
     "phone": "(954) 555-5042",
     "email": "h.washington55@email.com",
     "emergencyContact": {

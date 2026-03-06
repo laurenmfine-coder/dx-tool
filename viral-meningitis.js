@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Aiden Kowalski",
+  "patientHPI": "I'm here for my regular check-up before the fall semester starts - I've been doing really well in school and my ADHD medication is working great with no problems or side effects.",
     "dob": "08/15/2003",
     "age": 21,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 2001 N University Dr, Sunrise, FL",
     "language": "English",
     "race": "White",
-    "address": "7834 NW 40th St, Coral Springs, FL 33065",
+    "address": "1135 N Kedzie Blvd, Richmond, VA 23225",
     "phone": "(954) 555-1294",
     "email": "a.kowalski03@email.com",
     "emergencyContact": {

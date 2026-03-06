@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Rafael Guzmán",
+  "patientHPI": "I'm here for my regular checkup - I've been working hard on eating better and getting to the gym more often, and I'm down four pounds since my last visit. The medication you gave me for my blood sugar isn't bothering my stomach anymore, which is great.",
     "dob": "04/18/1990",
     "age": 35,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3201 N University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic (Mexican American)",
-    "address": "1840 N 30th Rd, Hollywood, FL 33021",
+    "address": "7951 N Western Ave, Pittsburgh, PA 15210",
     "phone": "(954) 555-3318",
     "email": "r.guzman90@email.com",
     "emergencyContact": {

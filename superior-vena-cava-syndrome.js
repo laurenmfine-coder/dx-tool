@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Vincent Moreau",
+  "patientHPI": "I've been having this weird swelling in my face and neck that's gotten worse over the past few weeks, and my voice sounds hoarse even though I don't have a cold. My face looks puffy in the mirror, especially around my eyes, and my shirts feel tight around my neck. I've also been more short of breath when I walk up stairs, which isn't normal for me.",
     "dob": "07/22/1958",
     "age": 67,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 1400 E Commercial Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "2810 NE 32nd St, Fort Lauderdale, FL 33306",
+    "address": "9022 Willow Way, Louisville, KY 40204",
     "phone": "(954) 555-6503",
     "email": "v.moreau58@email.com",
     "emergencyContact": {

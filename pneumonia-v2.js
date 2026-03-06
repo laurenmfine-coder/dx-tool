@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Williams",
+  "patientHPI": "I'm here for my regular diabetes check-up and everything's been going pretty well with my medications. I do get up a couple times at night to use the bathroom, and I know I should quit smoking but it's been tough - still going through about a pack a day.",
     "dob": "03/22/1958",
     "age": 67,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy \u2014 2501 University Dr, Riverside, FL",
     "language": "English",
     "race": "Black or African American",
-    "address": "1847 SW 62nd Ave, Riverside, FL 33100",
+    "address": "7687 Jasmine Way, Pittsburgh, PA 15210",
     "phone": "(954) 555-7293",
     "email": "m.williams58@email.com",
     "emergencyContact": {

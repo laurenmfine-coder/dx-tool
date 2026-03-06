@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gladys Marie Johnson",
+  "patientHPI": "I've been having more trouble with my balance lately, and my daughter is worried because I fell again a few weeks ago - I caught my foot on the little step between my kitchen and living room and went down pretty hard. My hip has been aching ever since, especially when I try to get up from my chair or walk to the bathroom.",
     "dob": "07/22/1936",
     "age": 88,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3001 N University Dr, Coral Springs, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "2540 NW 95th Ave, Coral Springs, FL 33065",
+    "address": "5674 Ash St, New Orleans, LA 70113",
     "phone": "(954) 555-1247",
     "email": "Family contact: k.johnson.daughter@email.com",
     "emergencyContact": {

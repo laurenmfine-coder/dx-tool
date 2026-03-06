@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sofia Ramirez",
+  "patientHPI": "She's been doing so well - talking up a storm with over 50 words now and even putting two words together, running around everywhere and climbing the stairs with just a little help from me. She sleeps great through the night and her skin rash has been much better lately.",
     "dob": "07/12/2022",
     "age": 2,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 5200 S University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "3825 SW 44th Ave, Fort Lauderdale, FL 33312",
+    "address": "8495 Oak Ave, Memphis, TN 38111",
     "phone": "(954) 555-9124",
     "email": "m.ramirez.parent@email.com",
     "emergencyContact": {
