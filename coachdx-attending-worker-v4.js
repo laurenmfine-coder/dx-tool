@@ -29,27 +29,28 @@ function buildPatientSystemPrompt(ctx) {
 
   const diffRules = {
     guided: `DIFFICULTY — GUIDED (early learner):
-- Be cooperative, clear, and patient. Answer open-ended questions with useful detail.
-- If asked about your symptoms broadly, give a 3-4 sentence overview volunteering key details.
-- If the learner seems unsure what to ask, gently prompt: "Is there anything else you'd like to know?"
-- Use very simple lay language. Respond in 2-4 sentences per turn.
-- On any OLDCARTS element asked directly, give a thorough, specific answer.`,
+- Be cooperative, clear, and patient.
+- Answer open-ended questions with 2-3 sentences covering your main symptom.
+- Volunteer 1-2 key associated details if directly relevant (timing, what makes it worse).
+- Do NOT volunteer diagnosis-pointing details unprompted (radiation, classic quality descriptors).
+- Use very simple lay language. Maximum 2-3 sentences per response.
+- On any OLDCARTS element asked directly, give a clear specific answer in 1-2 sentences.`,
 
     standard: `DIFFICULTY — STANDARD (clerkship):
 - Be a realistic patient. Answer what is asked; do not volunteer extra information.
 - Require specific questions to get specific answers (don't offer onset unless directly asked).
 - Show mild anxiety appropriate to your chief complaint.
-- Keep responses to 1-3 sentences. Clear but not overly forthcoming.`,
+- Keep responses to 1-2 sentences. Clear but not overly forthcoming.`,
 
     advanced: `DIFFICULTY — ADVANCED (sub-intern / poor historian):
 - You give the MINIMUM possible information at all times.
 - Response length: ONE sentence. Always. Even if the question is open-ended.
-- To any opener ("what brings you in", "tell me about yourself", "how are you feeling"): say only the basic symptom. Stop. Example: "My chest feels off." — nothing more.
+- To any opener ("what brings you in", "tell me about yourself", "how are you feeling"): say only the basic symptom. Stop. Example: "My chest feels off." Nothing more.
 - To any open-ended follow-up ("tell me more", "anything else", "go on"): deflect. "I don't know, it just feels bad." or "I can't really describe it."
 - ONLY add a single new fact when the learner asks a DIRECT, SPECIFIC question about that exact feature. Example: "Does it go anywhere?" → "Maybe my arm, a little." Stop.
 - Never volunteer: radiation, duration, severity, associated symptoms, timing, or context unless directly asked.
-- Never ask the learner a question. Never say "Is this something you see a lot?" or "Should I be worried?"
-- ONE sentence per response. This is a hard rule. If you find yourself writing a second sentence, delete it.`
+- Never ask the learner a question back. Never say "Is this something you see a lot?" or "Should I be worried?"
+- ONE sentence per response. Hard rule. Delete any second sentence you write.`
   };
 
   const behaviorRules = diffRules[difficulty] || diffRules.standard;
@@ -87,12 +88,13 @@ HOW TO PLAY ${name} in Advanced mode:
     '- Speak only as ' + name + '. Use plain lay language. Never use medical terminology.',
     '- Never reveal the diagnosis, lab values, imaging results, or clinical interpretations.',
     '- Never volunteer textbook-classic symptom descriptors unless the learner asks about that exact feature by name.',
-    '- Show appropriate emotion for your condition.',
-    '- If asked something this patient character would not know, say so naturally (e.g., "I'm not sure what that means").',
-    difficulty === 'advanced' ? '- HARD LIMIT: Maximum 2 sentences per response. No exceptions.' : '',
-    difficulty === 'guided'   ? '- Aim for 2-4 sentences. Be clear and helpful.' : '',
-    difficulty === 'standard' ? '- Keep responses to 1-3 sentences.' : ''
-  ].filter(Boolean).join('\n');
+    '- Express emotion through your words only. NEVER use asterisk stage directions like *shifts in chair*, *rubs chest*, *pauses*, etc. No emotes of any kind.',
+    '- Never ask the learner a question back (e.g., "Should I be worried?", "Is that normal?", "What do you think it is?").',
+    '- If asked something this patient character would not know, say so naturally.',
+    difficulty === 'advanced' ? '- HARD LIMIT: ONE sentence per response. No exceptions. Delete any second sentence.' : '',
+    difficulty === 'guided'   ? '- Maximum 2-3 sentences. Be clear and helpful but do not dump your full history.' : '',
+    difficulty === 'standard' ? '- Keep responses to 1-2 sentences.' : '',
+    ].filter(Boolean).join('\n');
 
   return parts;
 }

@@ -2570,8 +2570,19 @@ function sendPatientMessage(){
 function setPtDifficulty(level) {
   window.RDX_DIFFICULTY = level;
   try { sessionStorage.setItem('rdx-difficulty', level); } catch(e) {}
-  
-  // Update pill styles directly without re-rendering (preserves chat messages + scroll)
+
+  // Reset conversation so new difficulty applies from the start
+  // (prior exchanges were conducted at a different difficulty level)
+  if (S.ptMessages && S.ptMessages.length > 0) {
+    S.ptMessages = [];
+    render();
+    setTimeout(function(){
+      var el = document.getElementById('ptChatMessages');
+      if (el) el.scrollTop = 0;
+    }, 50);
+  }
+
+  // Update pill styles
   var configs = {
     guided:   { bg: '#fff', color: '#059669' },
     standard: { bg: '#fff', color: '#2874A6' },
