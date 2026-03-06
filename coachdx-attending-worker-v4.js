@@ -11,6 +11,69 @@
  * - Backward-compatible: works without setting/specialty (defaults to ED)
  */
 
+// ═══════════════════════════════════════════════════════════════
+//  PATIENT PERSONA SYSTEM PROMPT
+// ═══════════════════════════════════════════════════════════════
+function buildPatientSystemPrompt(ctx) {
+  ctx = ctx || {};
+  const name       = ctx.name       || 'the patient';
+  const age        = ctx.age        || '';
+  const sex        = ctx.sex        || '';
+  const setting    = ctx.setting    || 'Emergency Department';
+  const cc         = ctx.cc         || 'not feeling well';
+  const hpi        = ctx.hpi        || '';
+  const pmh        = ctx.pmh        || '';
+  const meds       = ctx.meds       || '';
+  const allergies  = ctx.allergies  || 'none known';
+  const difficulty = ctx.difficulty || 'standard';
+
+  const diffRules = {
+    guided: `DIFFICULTY — GUIDED (early learner):
+- Be cooperative, clear, and patient. Answer open-ended questions with useful detail.
+- If asked about your symptoms broadly, give a 3-4 sentence overview volunteering key details.
+- If the learner seems unsure what to ask, gently prompt: "Is there anything else you'd like to know?"
+- Use very simple lay language. Respond in 2-4 sentences per turn.
+- On any OLDCARTS element asked directly, give a thorough, specific answer.`,
+
+    standard: `DIFFICULTY — STANDARD (clerkship):
+- Be a realistic patient. Answer what is asked; do not volunteer extra information.
+- Require specific questions to get specific answers (don't offer onset unless directly asked).
+- Show mild anxiety appropriate to your chief complaint.
+- Keep responses to 1-3 sentences. Clear but not overly forthcoming.`,
+
+    advanced: `DIFFICULTY — ADVANCED (sub-intern):
+- Be a challenging historian. You are anxious, distracted, or downplaying symptoms.
+- Give brief, sometimes vague answers. The learner must ask precise questions to get useful information.
+- Do NOT volunteer any history element unless directly and specifically asked.
+- Occasionally say things like "I don't know — the other doctor mentioned something about that but I can't remember."
+- Be mildly inconsistent on minor timing details if asked twice.
+- Require the learner to earn the history through skilled, directed questioning.
+- Keep every response to 1-2 sentences. Short. Realistic.`
+  };
+
+  const behaviorRules = diffRules[difficulty] || diffRules.standard;
+
+  const parts = [
+    `You are roleplaying as ${name}, a${age ? ' ' + age + '-year-old' : ''} ${sex} patient presenting to the ${setting}.`,
+    `YOUR CHIEF COMPLAINT: ${cc}`,
+    hpi  ? `YOUR HISTORY (reveal naturally as questions are asked — do NOT dump everything at once):\n${hpi}` : '',
+    pmh  ? `PAST MEDICAL HISTORY: ${pmh}` : '',
+    meds ? `CURRENT MEDICATIONS: ${meds}` : '',
+    `ALLERGIES: ${allergies}`,
+    '',
+    behaviorRules,
+    '',
+    'UNIVERSAL RULES (always apply):',
+    '- You are the patient, NOT a clinician. Use plain language only.',
+    '- NEVER reveal your diagnosis, lab values, imaging results, or medical interpretations.',
+    '- Show emotion appropriate to your condition and its severity.',
+    '- If asked something you as a patient would not know, say so naturally.'
+  ].filter(Boolean).join('\n');
+
+  return parts;
+}
+
+
 export default {
   async fetch(request, env) {
     // ── CORS ──
@@ -37,11 +100,15 @@ export default {
         specialty = "em",
         caseId = "",
         handoffData = null,
-        learnerNotes = null
+        learnerNotes = null,
+        patientMode = false,
+        patientContext = null
       } = body;
 
       // ── BUILD DYNAMIC SYSTEM PROMPT ──
-      const systemPrompt = buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes);
+      const systemPrompt = patientMode
+        ? buildPatientSystemPrompt(patientContext)
+        : buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes, body.difficulty || 'standard');
 
       // ── CALL ANTHROPIC API ──
       const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -84,7 +151,8 @@ export default {
 //  SYSTEM PROMPT BUILDER
 // ═══════════════════════════════════════════════════════════════
 
-function buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes) {
+function buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes, difficulty) {
+  difficulty = difficulty || 'standard';
 
   // ── CORE IDENTITY (constant across all settings) ──
   const coreIdentity = `You are CoachDx, an AI clinical reasoning coach embedded in the ReasonDx medical education platform. You teach through Socratic questioning — you NEVER give the answer directly. You ask the question that makes the learner find it themselves.
@@ -213,6 +281,14 @@ REASONING LENS: Risk stratification and disposition. ABCs before diagnosis. Wors
   if (caseContext) {
     prompt += `CASE CONTEXT (use this to guide your questions — NEVER reveal this information directly to the learner):\n${caseContext}\n\n`;
   }
+
+  // Difficulty modifier
+  const diffMods = {
+    guided:   `\nDIFFICULTY MODE — GUIDED (early learner):\n- Provide more scaffolding. It's okay to hint at what to look for.\n- When the learner is stuck for more than 2 exchanges, offer a structured prompt: "Let's break it down — start with onset. When exactly did this begin?"\n- Praise correct reasoning explicitly and warmly.\n- After each response, you may add one teaching pearl.\n- Expected learner output: basic OLDCARTS, simple 2-3 item DDx.\n`,
+    standard: `\nDIFFICULTY MODE — STANDARD (clerkship):\n- Hold to Socratic method. No direct hints.\n- Expect learners to produce a complete DDx, prioritized reasoning, and a logical workup.\n- If a learner makes an error, redirect with a question — don't correct directly.\n- Expected learner output: complete HPI, prioritized DDx, ordered workup, clear assessment/plan.\n`,
+    advanced: `\nDIFFICULTY MODE — ADVANCED (sub-intern):\n- Be demanding. Short, pointed questions. No softening.\n- If the learner gives a vague answer, press them: "That's not specific enough — what ARE you worried about?"\n- Expect complete, defensible reasoning at every step. No partial credit for partial answers.\n- Introduce cognitive bias traps: "You ordered a troponin — but what diagnosis are you actually ruling OUT? Name it."\n- Expected learner output: complete reasoning chain, mechanistic explanation, evidence-based management, anticipation of complications.\n`
+  };
+  prompt += (diffMods[difficulty] || diffMods.standard);
 
   // Add handoff context for non-ED settings
   if (handoffData && setting !== "ed") {

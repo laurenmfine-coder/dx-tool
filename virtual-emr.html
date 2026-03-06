@@ -810,6 +810,10 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 .crt-learning-point.danger{border-left-color:#DC2626}
 .crt-learning-point.warning{border-left-color:#F59E0B}
 
+
+.mic-btn{background:transparent;border:1.5px solid #CBD5E1;border-radius:50%;width:34px;height:34px;font-size:15px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;padding:0}
+.mic-btn:hover{background:#EBF5FB;border-color:#2874A6}
+@keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}
 </style>
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="emr-supabase.js"></script>
@@ -849,7 +853,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1B4F72,#2874A6);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;font-family:'IBM Plex Sans',-apple-system,sans-serif;font-size:13px;gap:12px">
   <div style="display:flex;align-items:center;gap:10px">
     <span style="background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.05em">DEMO MODE</span>
-    <span style="opacity:.9">You're previewing the <strong>Anaphylaxis</strong> case in <strong>CaseDx</strong>. Full EMR, real chart data. CoachDx AI coaching unlocks after sign-up.</span>
+    <span style="opacity:.9">You're previewing the <strong><span data-case-name>Anaphylaxis</span></strong> case in <strong>CaseDx</strong>. Full EMR, real chart data. CoachDx AI coaching unlocks after sign-up.</span>
   </div>
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
     <a href="demo-coachdx.html" style="background:rgba(255,255,255,.15);color:#fff;font-weight:600;font-size:12px;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;border:1px solid rgba(255,255,255,.2)">Watch CoachDx Demo</a>
@@ -1319,8 +1323,30 @@ var URL_SPECIALTY = _urlParams.get('specialty') || '';
 // ── Demo banner activation ──────────────────────────────────────
 (function(){
   if(_urlParams.get('demo')==='1'){
+    // Only show for unauthenticated / demo users — hide for real accounts
+    var realUser = null;
+    try { var _ru = localStorage.getItem('reasondx-user'); if(_ru) realUser = JSON.parse(_ru); } catch(e){}
+    // Check Supabase native session too
+    try {
+      var _sbRaw = localStorage.getItem('sb-lpwbiqpojisqgezycupw-auth-token') || sessionStorage.getItem('sb-lpwbiqpojisqgezycupw-auth-token');
+      if(_sbRaw){ var _sbD = JSON.parse(_sbRaw); if(_sbD && _sbD.user && _sbD.user.email) realUser = _sbD.user; }
+    } catch(e){}
+    
+    if(realUser && realUser.email && !realUser.email.includes('demo@reasondx')) {
+      // Logged-in real user — don't show demo banner, redirect to clean URL
+      var cleanUrl = 'virtual-emr.html' + (CASE_ID ? '?case=' + CASE_ID : '');
+      window.history.replaceState(null,'',cleanUrl);
+      return;
+    }
+    
     var banner=document.getElementById('demo-banner');
     if(banner){
+      // Update banner text to reflect the actual case being previewed
+      var caseNameEl = banner.querySelector('[data-case-name]');
+      if(caseNameEl && CASE_ID) {
+        var niceName = CASE_ID.replace(/-v\d+$/,'').replace(/-/g,' ').replace(/\w/g,function(c){return c.toUpperCase();});
+        caseNameEl.textContent = niceName;
+      }
       banner.style.display='flex';
       // Push body down so banner doesn't overlap content
       document.body.style.paddingTop='46px';
@@ -1717,6 +1743,9 @@ const S={
   coachLoading:false,
   coachError:null,
   coachConcepts:[],      // concepts explored during session
+  // Patient Interview state
+  ptMessages:[],         // {role:"user"|"assistant", content:string}
+  ptLoading:false,
 };
 
 // Apply URL parameters to state (must be after S declaration)
@@ -1792,7 +1821,7 @@ function renderAuth(){
 
 function doSignOut(){
   if(window.ChartTracker){ChartTracker.stop()}
-  S.currentUser=null;S.activeTab="demographics";S.submitted=false;S.noteFields={};S.feedback=null;S.coachMessages=[];S.coachLoading=false;S.coachError=null;S.coachConcepts=[];
+  S.currentUser=null;S.activeTab="demographics";S.submitted=false;S.noteFields={};S.feedback=null;S.coachMessages=[];S.coachLoading=false;S.coachError=null;S.coachConcepts=[];S.ptMessages=[];S.ptLoading=false;
   S.selectedSubmission=null;S.gradeScores={};S.gradeComments={};S.overallComment="";S.annotations=[];S.expanded={};
   // Only remove the Supabase session key — preserve emr-current-user so demo data stays loaded
   var localUser=db('emr-current-user');
@@ -1826,23 +1855,49 @@ function renderDocumentation(){
   // ── Interview / HPI entry callout (only show when note is empty) ─────────
   var _hasContent = Object.values(S.noteFields||{}).some(function(v){ return v && v.trim().length > 0; });
   var _interviewCallout = '';
-  if (!_hasContent && !S.submitted) {
-    _interviewCallout = '<div style="background:linear-gradient(135deg,#1B4F72,#2874A6);border-radius:14px;padding:20px 24px;margin-bottom:18px;color:#fff">'
-      + '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">'
-      + '<div style="display:flex;align-items:center;gap:14px">'
-      + '<div style="font-size:32px;flex-shrink:0">🗣️</div>'
-      + '<div>'
-      + '<div style="font-size:15px;font-weight:800;margin-bottom:4px">Step 1 — Talk to your patient</div>'
-      + '<div style="font-size:13px;opacity:.9;line-height:1.5">Click <strong>Open Patient Chat</strong> to introduce yourself and take the history. Ask the patient what brings them in, then use OLDCARTS to guide your questions. Come back here to document what you learned.</div>'
+  if (!S.submitted) {
+    // ── Patient Interview Chat UI ────────────────────────────────────────
+    var _ptMsgs = S.ptMessages || [];
+    var _ptName = (typeof PATIENT !== 'undefined' && PATIENT) ? PATIENT.name.split(' ')[0] : 'Patient';
+    var _ptMsgsHtml = '';
+    if (_ptMsgs.length === 0) {
+      _ptMsgsHtml = '<div style="text-align:center;padding:20px 0;color:#94a3b8;font-size:13px">Start by introducing yourself — ask ' + _ptName + ' what brings them in today.</div>';
+    } else {
+      _ptMsgsHtml = _ptMsgs.map(function(m) {
+        var isUser = m.role === 'user';
+        return '<div style="display:flex;gap:8px;margin-bottom:10px;' + (isUser ? 'flex-direction:row-reverse' : '') + '">'
+          + '<div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:' + (isUser ? '#2874A6' : '#1B4F72') + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">'
+          + (isUser ? '👨‍⚕️' : '🤒') + '</div>'
+          + '<div style="max-width:80%;padding:10px 14px;border-radius:12px;background:' + (isUser ? '#EBF5FB' : '#fff') + ';border:1px solid ' + (isUser ? '#BFD9EE' : '#E2E8F0') + ';font-size:13px;line-height:1.6;color:#1E293B">'
+          + esc(m.content) + '</div></div>';
+      }).join('');
+    }
+    var _ptLoadingHtml = S.ptLoading ? '<div style="display:flex;gap:8px;margin-bottom:10px"><div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#1B4F72;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px">🤒</div><div style="padding:10px 14px;border-radius:12px;background:#fff;border:1px solid #E2E8F0;font-size:13px;color:#94a3b8">typing…</div></div>' : '';
+
+    _interviewCallout = '<div style="background:#fff;border:1.5px solid #CBD5E1;border-radius:14px;margin-bottom:18px;overflow:hidden">'
+      // Header
+      + '<div style="background:linear-gradient(135deg,#1B4F72,#2874A6);padding:12px 18px;display:flex;align-items:center;justify-content:space-between">'
+      + '<div style="display:flex;align-items:center;gap:10px">'
+      + '<span style="font-size:20px">🗣️</span>'
+      + '<div><div style="font-size:13px;font-weight:800;color:#fff">Patient Interview — ' + _ptName + '</div>'
+      + '<div style="font-size:11px;color:rgba(255,255,255,.75)">Ask questions to take the history. Document what you learn below.</div></div>'
       + '</div>'
+      + '<div style="display:flex;gap:6px">'
+      + '<span style="padding:3px 8px;background:rgba(255,255,255,.15);color:#fff;border-radius:12px;font-size:10px;font-weight:700">OLDCARTS</span>'
+      + '<span style="padding:3px 8px;background:rgba(255,255,255,.15);color:#fff;border-radius:12px;font-size:10px;font-weight:700">ROS</span>'
+      + '</div></div>'
+      // Messages
+      + '<div id="ptChatMessages" style="padding:14px 16px;max-height:280px;overflow-y:auto;background:#F8FAFC">'
+      + _ptMsgsHtml + _ptLoadingHtml
       + '</div>'
-      + '<button onclick="switchTab(\'coach\')" style="flex-shrink:0;background:#fff;color:#1B4F72;font-weight:800;font-size:13px;padding:10px 22px;border:none;border-radius:8px;cursor:pointer;white-space:nowrap">Open Patient Chat →</button>'
-      + '</div>'
-      + '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">'
-      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">📋 OLDCARTS</span>'
-      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">⏱️ Onset · Location · Duration</span>'
-      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">🔄 Alleviating / Aggravating</span>'
-      + '<span style="padding:4px 10px;background:rgba(255,255,255,.18);color:#fff;border-radius:6px;font-size:11px;font-weight:600">💬 Then document it below</span>'
+      // Input
+      + '<div style="padding:10px 14px;border-top:1px solid #E2E8F0;background:#fff;display:flex;gap:8px">'
+      + '<button type="button" id="ptMicBtn" onclick="toggleVoice(\'ptInput\',\'ptMicBtn\')" class="mic-btn" title="Click to speak">🎤</button>'
+      + '<input id="ptInput" type="text" placeholder="'What brings you in today?' or 'Tell me about the chest pain…'" '
+      + 'style="flex:1;padding:9px 12px;border:1px solid #CBD5E1;border-radius:8px;font-size:13px;font-family:inherit;outline:none" '
+      + 'onkeydown="if(event.key===\'Enter\' && !event.shiftKey){event.preventDefault();sendPatientMessage()}" />'
+      + '<button onclick="sendPatientMessage()" style="padding:9px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap"'
+      + (S.ptLoading ? ' disabled' : '') + '>Ask →</button>'
       + '</div>'
       + '</div>';
   }
@@ -2312,12 +2367,164 @@ function renderCoachDx(){
     '<div class="coach-messages" id="coachMessages">'+msgsHtml+'</div>'+_starters+
     conceptsHtml+
     '<div class="coach-input-row">'+
+      '<button type="button" id="coachMicBtn" onclick="toggleVoice('coachInput','coachMicBtn')" class="mic-btn" title="Click to speak">🎤</button>'+
       '<textarea class="coach-input" id="coachInput" rows="2" placeholder="Share your reasoning, ask a question, or present your assessment\u2026" onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();sendCoachMessage()}"></textarea>'+
       '<button type="button" class="coach-send" onclick="sendCoachMessage()" '+(S.coachLoading?"disabled":"")+'>Send</button>'+
     '</div>'+
     conceptMapHtml+
   '</div>'+_concepts;
 }
+
+// ═══════════════════════════════════════════════════════════════
+// PATIENT INTERVIEW — AI patient chat for H&HPI
+// ═══════════════════════════════════════════════════════════════
+function sendPatientMessage(){
+  var input = document.getElementById('ptInput');
+  if (!input) return;
+  var msg = input.value.trim();
+  if (!msg || S.ptLoading) return;
+  input.value = '';
+
+  if (!S.ptMessages) S.ptMessages = [];
+  S.ptMessages.push({role:'user', content:msg});
+  S.ptLoading = true;
+  render();
+  setTimeout(function(){var el=document.getElementById('ptChatMessages');if(el)el.scrollTop=el.scrollHeight;},50);
+
+  // Build patient persona from case data
+  var ptName = (typeof PATIENT!=='undefined'&&PATIENT) ? PATIENT.name : 'Patient';
+  var ptAge  = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.age||'') : '';
+  var ptSex  = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.sex||'') : '';
+  var ptCC   = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.chiefComplaint||PATIENT.cc||'feeling unwell') : 'feeling unwell';
+  var ptHPI  = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.hpi||PATIENT.history||'') : '';
+  var ptPmh  = (typeof PROBLEMS!=='undefined'&&PROBLEMS) ? PROBLEMS.slice(0,6).map(function(p){return typeof p==='string'?p:(p.problem||p.description||'');}).filter(Boolean).join(', ') : '';
+  var ptMeds = (typeof MEDICATIONS!=='undefined'&&MEDICATIONS) ? MEDICATIONS.slice(0,6).map(function(m){return m.name||'';}).filter(Boolean).join(', ') : '';
+  var ptAllergies = (typeof ALLERGIES!=='undefined'&&ALLERGIES) ? ALLERGIES.filter(function(a){return a.allergen!=='NKDA';}).map(function(a){return a.allergen;}).filter(Boolean).join(', ')||'none' : 'none';
+
+  // Build message history for API
+  var apiMessages = [];
+  // Opening patient statement if first message
+  if (S.ptMessages.length === 1) {
+    var openingByCC = ptCC.toLowerCase();
+    var opening = 'I've been having ' + ptCC.toLowerCase() + '. I'm not sure what's going on.';
+    if (openingByCC.includes('chest') || openingByCC.includes('pain')) opening = 'I've been having this chest pain and it's really scaring me.';
+    else if (openingByCC.includes('breath') || openingByCC.includes('dyspne')) opening = 'I can't catch my breath. It started a little while ago and it keeps getting worse.';
+    else if (openingByCC.includes('bleed') || openingByCC.includes('blood')) opening = 'I came in because of the bleeding. I wasn't sure if I needed to come in, but it wasn't stopping.';
+    else if (openingByCC.includes('fever') || openingByCC.includes('sick')) opening = 'I've been feeling really sick — I have a fever and I just feel terrible.';
+    apiMessages.push({role:'assistant', content:opening});
+  }
+  S.ptMessages.forEach(function(m){ apiMessages.push({role:m.role, content:m.content}); });
+
+  fetch(COACHDX_WORKER_URL, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      messages: apiMessages,
+      patientMode: true,
+      patientContext: {
+        name: (typeof PATIENT!=='undefined'&&PATIENT) ? PATIENT.name : 'Patient',
+        age:  ptAge,
+        sex:  ptSex,
+        setting: S.clinicalSetting||'ed',
+        cc:   ptCC,
+        hpi:  ptHPI,
+        pmh:  ptPmh,
+        meds: ptMeds,
+        allergies: ptAllergies,
+        difficulty: window.RDX_DIFFICULTY||'standard'
+      }
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var reply = (data.content&&data.content[0]&&data.content[0].text) ? data.content[0].text : 'I'm not sure how to answer that.';
+    S.ptMessages.push({role:'assistant', content:reply});
+    S.ptLoading = false;
+    render();
+    setTimeout(function(){var el=document.getElementById('ptChatMessages');if(el)el.scrollTop=el.scrollHeight;},50);
+  })
+  .catch(function(){
+    S.ptMessages.push({role:'assistant', content:'Sorry, I couldn't respond. Please try again.'});
+    S.ptLoading = false;
+    render();
+  });
+}
+
+
+// ================================================================
+// VOICE INPUT — Web Speech API (same engine as iOS/Android dictation)
+// ================================================================
+(function(){
+  var _recognition = null;
+  var _activeInputId = null;
+  var _activeBtnId = null;
+  var _listening = false;
+  var _existingText = '';
+
+  window.toggleVoice = function(inputId, btnId) {
+    var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      alert('Voice input requires Chrome or Edge. Try updating your browser.');
+      return;
+    }
+    if (_listening) {
+      if (_recognition) try { _recognition.stop(); } catch(e) {}
+      return;
+    }
+
+    var inputEl = document.getElementById(inputId);
+    var btnEl   = document.getElementById(btnId);
+    if (!inputEl) return;
+
+    _activeInputId = inputId;
+    _activeBtnId   = btnId;
+    _existingText  = inputEl.value;
+
+    _recognition = new SpeechRec();
+    _recognition.lang = 'en-US';
+    _recognition.interimResults = true;
+    _recognition.maxAlternatives = 1;
+    _recognition.continuous = false;
+
+    _recognition.onstart = function() {
+      _listening = true;
+      var b = document.getElementById(_activeBtnId);
+      if (b) { b.textContent = '🔴'; b.style.animation = 'micPulse 1s infinite'; b.title = 'Listening\u2026 click to stop'; }
+    };
+
+    _recognition.onresult = function(e) {
+      var el = document.getElementById(_activeInputId);
+      if (!el) return;
+      var interim = '', finalTxt = '';
+      for (var i = e.resultIndex; i < e.results.length; i++) {
+        if (e.results[i].isFinal) finalTxt += e.results[i][0].transcript;
+        else interim += e.results[i][0].transcript;
+      }
+      var sep = (_existingText && (finalTxt || interim)) ? ' ' : '';
+      el.value = _existingText + sep + finalTxt + interim;
+      if (finalTxt) {
+        _existingText = (_existingText + sep + finalTxt).trim();
+      }
+    };
+
+    _recognition.onerror = function(e) {
+      if (e.error === 'not-allowed') alert('Microphone access denied. Allow microphone in browser settings and reload.');
+      else if (e.error !== 'aborted' && e.error !== 'no-speech') console.warn('Voice error:', e.error);
+      _stopVoice();
+    };
+
+    _recognition.onend = function() { _stopVoice(); };
+
+    try { _recognition.start(); } catch(e) { _stopVoice(); }
+  };
+
+  function _stopVoice() {
+    _listening = false;
+    var b = document.getElementById(_activeBtnId || '');
+    if (b) { b.textContent = '🎤'; b.style.animation = ''; b.title = 'Click to speak'; }
+    _activeInputId = null; _activeBtnId = null;
+  }
+})();
 
 function sendCoachMessage(){
   var input=document.getElementById("coachInput");

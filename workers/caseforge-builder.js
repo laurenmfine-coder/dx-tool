@@ -236,7 +236,7 @@ ONLY suggest references from these open-access sources:
 - AHA open-access (heart.org)
 - GINA (ginasthma.org)
 - GOLD (goldcopd.org)
-- NCCN (nccn.org — free registration)
+- NCCN guidelines: cite PMC open-access versions only (search PMC for guideline title). Full NCCN guidelines require institutional access — do NOT direct learners to nccn.org
 
 Output ONLY valid JSON array:
 [{"title":"...","authors":"...","journal":"...","year":NNNN,"url":"...","openAccess":true,"validates":["what this validates"]}]`;
