@@ -1156,9 +1156,30 @@ function caseDbSet(key,val){localStorage.setItem("vemr-c-"+(CASE_ID||"default")+
 // ═══════════════════════════════════════════════════════════════
 function getSupabaseUser(){
   try{
+    // Primary: check reasondx-user (set by rdx-supabase.js onAuthStateChange)
     var raw=localStorage.getItem("reasondx-user");
-    return raw?JSON.parse(raw):null;
-  }catch(e){return null}
+    if(raw){var u=JSON.parse(raw);if(u&&u.email)return u;}
+  }catch(e){}
+  try{
+    // Fallback: check Supabase's native session key directly
+    // Handles race where onAuthStateChange hasn't fired yet at page load
+    var sbKey='sb-lpwbiqpojisqgezycupw-auth-token';
+    var sbRaw=localStorage.getItem(sbKey);
+    if(!sbRaw){
+      // Also check sessionStorage (Supabase may store there)
+      sbRaw=sessionStorage.getItem(sbKey);
+    }
+    if(sbRaw){
+      var sbData=JSON.parse(sbRaw);
+      var sbUser=sbData&&(sbData.user||(sbData.access_token&&{email:sbData.user&&sbData.user.email}));
+      if(sbUser&&sbUser.email){
+        // Bridge it into reasondx-user so next call is fast
+        try{localStorage.setItem("reasondx-user",JSON.stringify({email:sbUser.email,name:sbUser.email.split('@')[0],supabaseId:sbUser.id||'',lastLogin:new Date().toISOString()}));}catch(e2){}
+        return{email:sbUser.email,name:sbUser.email.split('@')[0],supabaseId:sbUser.id||'',_fromSbSession:true};
+      }
+    }
+  }catch(e){}
+  return null;
 }
 
 function initDB(){

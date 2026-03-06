@@ -40,10 +40,25 @@ function init() {
     if (session && session.user) {
       currentUser = session.user;
       loadProfile(session.user.id);
+      // Bridge Supabase session → reasondx-user localStorage so inline guards work
+      try {
+        var existing = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        localStorage.setItem('reasondx-user', JSON.stringify({
+          ...existing,
+          email: session.user.email,
+          name: existing.name || session.user.email.split('@')[0],
+          supabaseId: session.user.id,
+          lastLogin: new Date().toISOString()
+        }));
+      } catch(e) {}
       document.dispatchEvent(new CustomEvent('rdx:auth', { detail: { user: session.user, event: event } }));
     } else {
       currentUser = null;
       currentProfile = null;
+      // Only clear reasondx-user on explicit sign-out, not on session-not-found
+      if (event === 'SIGNED_OUT') {
+        try { localStorage.removeItem('reasondx-user'); } catch(e) {}
+      }
       document.dispatchEvent(new CustomEvent('rdx:auth', { detail: { user: null, event: event } }));
     }
   });
