@@ -2464,7 +2464,9 @@ function sendPatientMessage(){
         sex:  ptSex,
         setting: S.clinicalSetting||'ed',
         cc:   ptCC,
-        hpi:  ptHPI,
+        // Advanced mode: withhold full HPI from system prompt — prevents model from using it as a script.
+        // Worker only receives CC; each symptom detail must be earned through direct questioning.
+        hpi:  (window.RDX_DIFFICULTY === 'advanced') ? '' : ptHPI,
         pmh:  ptPmh,
         meds: ptMeds,
         allergies: ptAllergies,

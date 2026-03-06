@@ -135,15 +135,15 @@ export default {
         : buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes, body.difficulty || 'standard');
 
       // ── CALL ANTHROPIC API ──
-      // For patient mode: prepend a priming assistant turn so the model is already "in character"
-      // before the first learner message arrives. This prevents safety override / character breaks.
+      // For patient mode: if messages already start with an assistant turn (the seeded opener
+      // from virtual-emr.html), pass as-is. Otherwise prepend a minimal in-character primer
+      // to prevent the model from breaking character on the very first user message.
       let finalMessages = messages;
       if (patientMode && patientContext) {
-        const primerName = (patientContext.name || 'the patient').split(' ')[0];
-        const primer = `*stays in character as ${primerName}*`;
-        // Only add primer if messages don't already start with an assistant turn
-        if (messages.length === 0 || messages[0].role !== 'assistant') {
-          finalMessages = [{ role: 'assistant', content: primer }, ...messages];
+        const alreadyHasAssistantOpener = messages.length > 0 && messages[0].role === 'assistant';
+        if (!alreadyHasAssistantOpener) {
+          const primerName = (patientContext.name || 'Patient').split(' ')[0];
+          finalMessages = [{ role: 'assistant', content: `*in character as ${primerName}*` }, ...messages];
         }
       }
 
