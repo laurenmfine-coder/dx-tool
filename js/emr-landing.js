@@ -194,7 +194,7 @@
 
       // ─── FOOTER ───
       html += '<footer style="padding:24px;text-align:center;background:#0B1120;border-top:1px solid rgba(255,255,255,.04)">';
-      html += '<p style="font-size:12px;color:#475569;margin:0"><img src="icons/logo-white.png" alt="ReasonDx" style="height:14px;width:auto;vertical-align:middle;margin-right:4px"> \u00B7 Clinical Education Platform \u00B7 NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>';
+      html += '<p style="font-size:12px;color:#475569;margin:0"><img src="icons/logo-white.png" alt="ReasonDx" style="height:14px;width:auto;vertical-align:middle;margin-right:4px"> \u00B7 Clinical Education Platform \u00B7 Clinical Reasoning Education Platform</p>';
       html += '</footer>';
 
       // ─── FONT + ANIMATIONS ───
