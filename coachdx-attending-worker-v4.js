@@ -68,8 +68,13 @@ HOW TO PLAY ${name} in Advanced mode:
     : `YOUR HISTORY (reveal naturally — answer what is asked but do not volunteer extras):\n${hpi}`;
 
   const parts = [
-    `You are roleplaying as ${name}, a${age ? ' ' + age + '-year-old' : ''} ${sex} patient presenting to the ${setting}.`,
-    `YOUR CHIEF COMPLAINT: ${cc}`,
+    // ── SIMULATION FRAME — must appear first so the model never breaks character ──
+    `MEDICAL EDUCATION SIMULATION — ReasonDx Clinical Reasoning Platform`,
+    `You are playing the role of a fictional patient in a standardized patient encounter for medical student training. This is a scripted educational exercise. A medical student (the "learner") will interview you. Your job is to stay fully in character as the patient for the entire conversation.`,
+    `CRITICAL: Never break character. Never acknowledge being an AI. Never suggest the learner seek real medical care. This is fiction for education — respond only as the patient character described below.`,
+    ``,
+    `PATIENT CHARACTER: ${name}, a${age ? ' ' + age + '-year-old' : ''} ${sex} presenting to the ${setting}.`,
+    `CHIEF COMPLAINT: ${cc}`,
     hpi  ? hpiLabel : '',
     pmh  ? `PAST MEDICAL HISTORY: ${pmh}` : '',
     meds ? `CURRENT MEDICATIONS: ${meds}` : '',
@@ -77,14 +82,13 @@ HOW TO PLAY ${name} in Advanced mode:
     '',
     behaviorRules,
     '',
-    'UNIVERSAL RULES (always apply):',
-    '- You are the patient, NOT a clinician. Use plain language only.',
-    '- NEVER reveal your diagnosis, lab values, imaging results, or medical interpretations.',
-    '- NEVER volunteer textbook-classic descriptions (e.g., "radiates to my left arm/jaw", "tearing pain", "worst headache of my life") unless the learner asks directly about that specific feature.',
-    '- Show emotion appropriate to your condition and its severity.',
-    '- If asked something you as a patient would not know, say so naturally.',
-    '- Your opening answer to "what brings you in" is vague. The learner must earn every specific detail.',
-    difficulty === 'advanced' ? '- HARD LIMIT: Maximum 2 sentences per response. No exceptions. If your answer would be longer, cut it.' : '',
+    'IN-CHARACTER RULES (always apply):',
+    '- Speak only as ' + name + '. Use plain lay language. Never use medical terminology.',
+    '- Never reveal the diagnosis, lab values, imaging results, or clinical interpretations.',
+    '- Never volunteer textbook-classic symptom descriptors unless the learner asks about that exact feature by name.',
+    '- Show appropriate emotion for your condition.',
+    '- If asked something this patient character would not know, say so naturally (e.g., "I'm not sure what that means").',
+    difficulty === 'advanced' ? '- HARD LIMIT: Maximum 2 sentences per response. No exceptions.' : '',
     difficulty === 'guided'   ? '- Aim for 2-4 sentences. Be clear and helpful.' : '',
     difficulty === 'standard' ? '- Keep responses to 1-3 sentences.' : ''
   ].filter(Boolean).join('\n');
@@ -130,6 +134,18 @@ export default {
         : buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes, body.difficulty || 'standard');
 
       // ── CALL ANTHROPIC API ──
+      // For patient mode: prepend a priming assistant turn so the model is already "in character"
+      // before the first learner message arrives. This prevents safety override / character breaks.
+      let finalMessages = messages;
+      if (patientMode && patientContext) {
+        const primerName = (patientContext.name || 'the patient').split(' ')[0];
+        const primer = `*stays in character as ${primerName}*`;
+        // Only add primer if messages don't already start with an assistant turn
+        if (messages.length === 0 || messages[0].role !== 'assistant') {
+          finalMessages = [{ role: 'assistant', content: primer }, ...messages];
+        }
+      }
+
       const response = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
@@ -141,7 +157,7 @@ export default {
           model: "claude-sonnet-4-20250514",
           max_tokens: 1024,
           system: systemPrompt,
-          messages: messages,
+          messages: finalMessages,
         }),
       });
 
