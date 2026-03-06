@@ -1882,7 +1882,12 @@ function renderDocumentation(){
       + '<div><div style="font-size:13px;font-weight:800;color:#fff">Patient Interview — ' + _ptName + '</div>'
       + '<div style="font-size:11px;color:rgba(255,255,255,.75)">Ask questions to take the history. Document what you learn below.</div></div>'
       + '</div>'
-      + '<div style="display:flex;gap:6px">'
+      + '<div style="display:flex;align-items:center;gap:8px">'
+      + '<div style="display:flex;gap:3px;background:rgba(0,0,0,.2);border-radius:10px;padding:2px">'
+      + '<button onclick="setPtDifficulty(\'guided\')" id="ptDiff-guided" style="padding:3px 9px;border:none;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='guided'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='guided'?'#059669':'rgba(255,255,255,.75)') + '">🌱 Guided</button>'
+      + '<button onclick="setPtDifficulty(\'standard\')" id="ptDiff-standard" style="padding:3px 9px;border:none;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='standard'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='standard'?'#2874A6':'rgba(255,255,255,.75)') + '">🎯 Standard</button>'
+      + '<button onclick="setPtDifficulty(\'advanced\')" id="ptDiff-advanced" style="padding:3px 9px;border:none;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='advanced'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='advanced'?'#DC2626':'rgba(255,255,255,.75)') + '">🔥 Advanced</button>'
+      + '</div>'
       + '<span style="padding:3px 8px;background:rgba(255,255,255,.15);color:#fff;border-radius:12px;font-size:10px;font-weight:700">OLDCARTS</span>'
       + '<span style="padding:3px 8px;background:rgba(255,255,255,.15);color:#fff;border-radius:12px;font-size:10px;font-weight:700">ROS</span>'
       + '</div></div>'
@@ -2525,6 +2530,28 @@ function sendPatientMessage(){
     _activeInputId = null; _activeBtnId = null;
   }
 })();
+
+
+// ── Patient Interview Difficulty Toggle ──────────────────────────
+function setPtDifficulty(level) {
+  window.RDX_DIFFICULTY = level;
+  try { sessionStorage.setItem('rdx-difficulty', level); } catch(e) {}
+  // Re-render the documentation tab to update pill states
+  var docEl = document.getElementById('docContent');
+  if (docEl && typeof renderDocumentation === 'function') {
+    docEl.innerHTML = renderDocumentation();
+    // Scroll back to patient interview
+    var ptChat = document.getElementById('ptChatMessages');
+    if (ptChat) ptChat.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // Also show a brief toast so user knows it changed
+  var toast = document.createElement('div');
+  var labels = { guided: '🌱 Guided — patient gives detailed answers', standard: '🎯 Standard — realistic historian', advanced: '🔥 Advanced — vague, requires precise questions' };
+  toast.textContent = labels[level] || level;
+  toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:99999;pointer-events:none;transition:opacity .3s';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.style.opacity = '0'; setTimeout(function() { toast.remove(); }, 300); }, 2000);
+}
 
 function sendCoachMessage(){
   var input=document.getElementById("coachInput");
