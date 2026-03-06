@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Duval",
+  "patientHPI": "I've been feeling fine and my blood pressure is under control, but I'm a bit nervous about this upcoming trip to Jamaica. I'm still on my birth control pills because they really help with my heavy periods, and even though my doctor mentioned some risks because of my weight, I want to keep taking them since they work so well for me.",
     "dob": "03/22/1980",
     "age": 44,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1800 N Pine Island Rd, Plantation, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "6420 W Sunrise Blvd, Plantation, FL 33313",
+    "address": "4683 Birch Ln, Milwaukee, WI 53203",
     "phone": "(954) 555-9142",
     "email": "p.duval80@email.com",
     "emergencyContact": {

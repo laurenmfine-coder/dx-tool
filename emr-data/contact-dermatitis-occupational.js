@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Danielle Rivera",
+  "patientHPI": "I work in healthcare and yesterday my hands suddenly puffed up like balloons right after I put on my gloves at work. They're swollen, red, and itchy, and this has never happened to me before. I'm really concerned because I need my hands to do my job properly.",
       "dob": "10/05/1991",
       "age": "35",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-756545",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(927) 355-4758",
+      "phone": "(504) 555-6105",
       "email": "danielle.rivera@email.com",
-      "address": "374 Oak St, Weston, FL 33330",
+      "address": "2679 Elm St, Memphis, TN 38108",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Rivera",
-        "phone": "(950) 283-8826",
+        "phone": "(720) 555-6314",
         "relationship": "Spouse"
       }
     },
@@ -701,15 +702,15 @@ window.EMR_DATA = {
     "mrn": "MRN-756545",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(927) 355-4758",
+    "phone": "(803) 555-2391",
     "email": "danielle.rivera@email.com",
-    "address": "374 Oak St, Weston, FL 33330",
+    "address": "7359 E Roosevelt Rd, Albuquerque, NM 87108",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Rivera",
-      "phone": "(950) 283-8826",
+      "phone": "(312) 555-3549",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Healthcare worker with chronic hand eczema worsening despite glove changes",

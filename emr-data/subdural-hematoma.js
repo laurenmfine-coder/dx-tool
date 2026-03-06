@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Pemberton",
+  "patientHPI": "My wife says I haven't been myself for about two weeks now - I've been confused and clumsy, and today it's gotten much worse. I've had this dull headache on both sides of my head, and I know I've been falling more lately which worries her.",
     "dob": "06/15/1948",
     "age": "78",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-152921",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(439) 172-8104",
+    "phone": "(415) 555-1722",
     "email": "walter.pemberton@email.com",
-    "address": "8492 Oak St, Pembroke Pines, FL 33024",
+    "address": "2243 Cottonwood Ave, Columbus, OH 43211",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wilson, MD",
     "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Thomas Mitchell",
-      "phone": "(332) 824-2713",
+      "phone": "(212) 555-6464",
       "relationship": "Parent"
     },
     "chiefComplaint": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",

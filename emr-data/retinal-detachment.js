@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Kenneth Douglas",
+  "patientHPI": "I've been seeing these little floating spots in my right eye for a while now, and today I noticed what looks like a dark shadow or curtain coming down from the top of my vision. It's gotten bigger throughout the day and I'm worried something's really wrong.",
     "dob": "12/08/1964",
     "age": 60,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3900 W Hillsboro Blvd, Deerfield Beach, FL",
     "language": "English",
     "race": "White",
-    "address": "4120 NE 2nd Ave, Deerfield Beach, FL 33064",
+    "address": "5181 S Halsted St, Louisville, KY 40202",
     "phone": "(954) 555-1834",
     "email": "k.douglas64@email.com",
     "emergencyContact": {

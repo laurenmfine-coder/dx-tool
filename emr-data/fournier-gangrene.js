@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Jefferson",
+  "patientHPI": "I've been having this terrible pain down there in my private area that started a few days ago and it's getting so much worse - it's spreading up to my belly and into my groin on both sides, and I'm really scared because it feels like it's burning and the pain is just unbearable.",
     "dob": "06/15/1968",
     "age": "58",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-543859",
     "language": "English",
     "race": "Pacific Islander",
-    "phone": "(896) 771-3265",
+    "phone": "(312) 555-6138",
     "email": "marcus.jefferson@email.com",
-    "address": "6259 Pine Rd, Weston, FL 33391",
+    "address": "9671 Poplar Ave, Detroit, MI 48219",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. James Wilson, MD",
     "pharmacy": "Walgreens \u2014 University Dr",
     "emergencyContact": {
       "name": "Gerald Phillips",
-      "phone": "(417) 315-3787",
+      "phone": "(312) 555-1821",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Pain down there that's getting worse fast Perineum, scrotum, extending to bilateral inguinal creases and lower abdominal wall",

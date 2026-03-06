@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ahmed Hassan",
+  "patientHPI": "I missed my dialysis appointment yesterday and now I'm feeling really weak and my heart is beating funny - like it's skipping or racing. I know I'm supposed to go three times a week but I just couldn't make it in, and now I'm worried something bad is happening.",
     "dob": "08/21/1962",
     "age": "64",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-359486",
     "language": "English",
     "race": "Asian",
-    "phone": "(618) 667-7638",
+    "phone": "(630) 555-6218",
     "email": "ahmed.hassan@email.com",
-    "address": "5326 Elm Ave, Weston, FL 33363",
+    "address": "5003 N Western Ave, Phoenix, AZ 85013",
     "insurance": "Oscar Health",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Teresa Hassan",
-      "phone": "(255) 693-1936",
+      "phone": "(404) 555-7438",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Weakness and palpitations — missed dialysis",

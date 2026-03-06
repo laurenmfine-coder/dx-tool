@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ryan O'Brien",
+  "patientHPI": "I was just sitting in class when I suddenly couldn't catch my breath and got this sharp, stabbing pain on the left side of my chest that shoots around to my back. It feels like someone is squeezing my chest really tight, and the pain gets much worse when I try to take a deep breath.",
     "dob": "06/15/1998",
     "age": "28",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-778413",
     "language": "English",
     "race": "American Indian",
-    "phone": "(550) 100-5524",
+    "phone": "(412) 555-6325",
     "email": "ryan.o'brien@email.com",
-    "address": "2955 Willow Ct, Fort Lauderdale, FL 33301",
+    "address": "8709 Hickory Rd, Minneapolis, MN 55410",
     "insurance": "Medicaid",
     "pcp": "Dr. Amy Patel, MD",
     "pharmacy": "Walmart Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Charles Nelson",
-      "phone": "(388) 120-9330",
+      "phone": "(704) 555-8837",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Can't breathe Left chest and back, worse on the left side",

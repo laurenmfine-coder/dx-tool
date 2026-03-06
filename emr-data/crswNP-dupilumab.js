@@ -9,6 +9,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Yolanda Baptiste",
+  "patientHPI": "I can't breathe through my nose at all anymore, and the worst part is I completely lost my sense of smell - I can't even smell my own children, which breaks my heart. My face feels like there's constant pressure, like someone's squeezing it, and it's been going on for so long now that I'm desperate for help.",
       "dob": "03/08/1980",
       "age": "44",
       "sex": "Female",
@@ -16,13 +17,13 @@ window.EMR_DATA = {
       "mrn": "RDX-2025-95448",
       "language": "English / Haitian Creole",
       "race": "Black or African American",
-      "phone": "(954) 662-7731",
+      "phone": "(414) 555-6383",
       "email": "ybaptiste@email.com",
-      "address": "4812 NW 19th Ave, Miami, FL 33142",
+      "address": "9864 Willow Way, Milwaukee, WI 53210",
       "insurance": "United Healthcare PPO",
       "pcp": "Dr. Marie Celestin, MD",
       "pharmacy": "Walgreens — NW 7th Ave",
-      "emergencyContact": { "name": "Jean-Pierre Baptiste", "phone": "(954) 662-8800", "relationship": "Husband" },
+      "emergencyContact": { "name": "Jean-Pierre Baptiste", "phone": "(803) 555-3417", "relationship": "Husband" },
       "chiefComplaint": "Complete nasal obstruction, anosmia, chronic facial pressure — 'I cannot smell my children anymore'",
       "diagnosis": "Severe CRSwNP with AERD (Samter's Triad) + comorbid asthma — united airway disease"
     },

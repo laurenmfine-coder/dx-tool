@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret Sullivan",
+  "patientHPI": "I fell down at home this morning and now I can't get up because my right hip and groin area hurt so badly. I was just walking to the kitchen when I lost my balance, and now every time I try to move that leg the pain shoots through me.",
     "dob": "06/15/1944",
     "age": "82",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-628815",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(649) 609-3584",
+    "phone": "(317) 555-2789",
     "email": "margaret.sullivan@email.com",
-    "address": "864 Oak St, Boca Raton, FL 33431",
+    "address": "4072 Magnolia Blvd, Kansas City, MO 64101",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Henry Sanchez",
-      "phone": "(548) 940-6605",
+      "phone": "(630) 555-4920",
       "relationship": "Partner"
     },
     "chiefComplaint": "I fell and I can't get up Right hip and groin",

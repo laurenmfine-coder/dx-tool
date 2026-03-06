@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Daniel Castillo-Perez",
+  "patientHPI": "This is the third time in two months that my face has swollen up like this, and I have no idea what's triggering it or making it happen.",
       "dob": "01/07/1986",
       "age": "40",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-380797",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(361) 277-8511",
+      "phone": "(704) 555-2936",
       "email": "daniel.castilloperez@email.com",
-      "address": "4234 Elm St, Weston, FL 33346",
+      "address": "5195 Peachtree Rd, Birmingham, AL 35211",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Lisa Chang, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Jennifer Castillo-Perez",
-        "phone": "(966) 256-6624",
+        "phone": "(614) 555-6026",
         "relationship": "Spouse"
       }
     },
@@ -748,15 +749,15 @@ window.EMR_DATA = {
     "mrn": "MRN-380797",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(361) 277-8511",
+    "phone": "(404) 555-7642",
     "email": "daniel.castilloperez@email.com",
-    "address": "4234 Elm St, Weston, FL 33346",
+    "address": "3718 Spruce St, Denver, CO 80204",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Jennifer Castillo-Perez",
-      "phone": "(966) 256-6624",
+      "phone": "(704) 555-9233",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Third episode facial swelling in 2 months — no trigger identified",

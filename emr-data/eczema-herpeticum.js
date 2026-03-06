@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Noah Sullivan",
+  "patientHPI": "My son's skin rash suddenly got much worse with these painful open sores and blisters appearing everywhere, and now he has a fever and seems really unwell.",
       "dob": "11/07/2023",
       "age": "3",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-604181",
       "language": "English",
       "race": "Asian",
-      "phone": "(952) 743-4041",
+      "phone": "(414) 555-3847",
       "email": "noah.sullivan@email.com",
-      "address": "3890 Oak St, Weston, FL 33394",
+      "address": "9829 Cedar Blvd, Kansas City, MO 64111",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Lisa Chang, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Jennifer Sullivan",
-        "phone": "(907) 695-6140",
+        "phone": "(619) 555-2229",
         "relationship": "Parent"
       }
     },
@@ -665,15 +666,15 @@ window.EMR_DATA = {
     "mrn": "MRN-604181",
     "language": "English",
     "race": "Asian",
-    "phone": "(952) 743-4041",
+    "phone": "(404) 555-1043",
     "email": "noah.sullivan@email.com",
-    "address": "3890 Oak St, Weston, FL 33394",
+    "address": "4733 N Kedzie Blvd, Memphis, TN 38107",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Jennifer Sullivan",
-      "phone": "(907) 695-6140",
+      "phone": "(513) 555-8381",
       "relationship": "Parent"
     },
     "chiefComplaint": "Acute worsening of eczema with punched-out erosions, vesicles, and fever",

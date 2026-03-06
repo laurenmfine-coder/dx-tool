@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Margaret Thornton",
+  "patientHPI": "For the past four months, I keep getting these raised, itchy bumps all over my skin that burn and sting. They come and go, but lately I've also been running fevers and my joints ache all over, especially my hands and knees.",
       "dob": "11/19/1974",
       "age": "52",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-630053",
       "language": "English",
       "race": "White",
-      "phone": "(330) 828-7619",
+      "phone": "(617) 555-3196",
       "email": "margaret.x@email.com",
-      "address": "3182 Oak St, Weston, FL 33326",
+      "address": "7469 Walnut Dr, San Antonio, TX 78204",
       "insurance": "Cigna PPO",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(538) 855-9421",
+        "phone": "(505) 555-4978",
         "relationship": "Spouse"
       }
     },
@@ -805,15 +806,15 @@ window.EMR_DATA = {
     "mrn": "MRN-630053",
     "language": "English",
     "race": "White",
-    "phone": "(330) 828-7619",
+    "phone": "(415) 555-4331",
     "email": "margaret.x@email.com",
-    "address": "3182 Oak St, Weston, FL 33326",
+    "address": "944 Cedar Blvd, Memphis, TN 38107",
     "insurance": "Cigna PPO",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(538) 855-9421",
+      "phone": "(503) 555-2295",
       "relationship": "Spouse"
     },
     "chiefComplaint": "52yo with painful \"hives\" that last >24 hours and leave bruises — not responding to antihistamines",

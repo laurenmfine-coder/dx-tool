@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Hansen",
+  "patientHPI": "I was in the bathroom this morning and the next thing I knew I was on the floor - I've been feeling really dizzy and lightheaded lately, and this isn't the first time I've passed out like this.",
     "dob": "09/27/1960",
     "age": "66",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-362425",
     "language": "English",
     "race": "American Indian",
-    "phone": "(341) 152-3763",
+    "phone": "(504) 555-5669",
     "email": "dorothy.hansen@email.com",
-    "address": "5294 Cedar Ln, Boca Raton, FL 33431",
+    "address": "9001 Maple St, San Antonio, TX 78205",
     "insurance": "Medicaid",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Publix Pharmacy — University Dr",
     "emergencyContact": {
       "name": "Edward Murphy",
-      "phone": "(857) 468-6928",
+      "phone": "(404) 555-8179",
       "relationship": "Parent"
     },
     "chiefComplaint": "Passed out in the bathroom No pain location — main issue is dizziness and passing out",

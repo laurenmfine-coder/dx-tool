@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Liam Foster",
+  "patientHPI": "My 6-month-old has been having bloody stools and seems dehydrated even though he's been drinking his formula.",
       "dob": "07/14/2026",
       "age": "0",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-791118",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(442) 307-6333",
+      "phone": "(502) 555-4727",
       "email": "liam.foster@email.com",
-      "address": "2854 Oak St, Weston, FL 33364",
+      "address": "2173 Elm St, San Antonio, TX 78205",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Lisa Chang, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Jennifer Foster",
-        "phone": "(300) 825-1619",
+        "phone": "(504) 555-3939",
         "relationship": "Parent"
       }
     },
@@ -746,15 +747,15 @@ window.EMR_DATA = {
     "mrn": "MRN-791118",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(442) 307-6333",
+    "phone": "(502) 555-1231",
     "email": "liam.foster@email.com",
-    "address": "2854 Oak St, Weston, FL 33364",
+    "address": "2169 E Roosevelt Rd, Baltimore, MD 21201",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Jennifer Foster",
-      "phone": "(300) 825-1619",
+      "phone": "(713) 555-9751",
       "relationship": "Parent"
     },
     "chiefComplaint": "6-month-old with bloody stools, eczema, and poor weight gain after formula switch",

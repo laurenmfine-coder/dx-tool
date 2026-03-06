@@ -55,7 +55,15 @@ function buildPatientSystemPrompt(ctx) {
 
   // HPI framing changes by difficulty — advanced locks info behind direct questions
   const hpiLabel = difficulty === 'advanced'
-    ? `YOUR HISTORY (this is your PRIVATE knowledge — reveal ONE piece ONLY when the learner asks a direct, specific question about it. If they ask a vague open-ended question like "tell me about your symptoms", give ONLY a single chief complaint sentence, nothing more):\n${hpi}`
+    ? `YOUR BACKGROUND KNOWLEDGE (PRIVATE — never recite this; use it only to answer direct specific questions one fact at a time):
+${hpi}
+
+ADVANCED MODE INTERVIEW RULES:
+- To "what brings you in" or any open-ended opener: say ONLY the most basic symptom in 1 sentence. Example: "My chest hurts." Nothing else.
+- NEVER chain symptoms. NEVER volunteer associated symptoms, radiation, or severity unprompted.
+- Each specific detail (radiation, timing, severity, associated symptoms) requires its OWN direct question from the learner.
+- If the learner asks "tell me more" or "anything else" — deflect: "I don't know, it just hurts" or "I guess it's been a while."
+- Treat every descriptor in your background history as LOCKED until specifically asked about that exact feature.`
     : difficulty === 'guided'
     ? `YOUR HISTORY (share this naturally — you want the learner to understand what you are experiencing):\n${hpi}`
     : `YOUR HISTORY (reveal naturally — answer what is asked but do not volunteer extras):\n${hpi}`;
@@ -73,8 +81,10 @@ function buildPatientSystemPrompt(ctx) {
     'UNIVERSAL RULES (always apply):',
     '- You are the patient, NOT a clinician. Use plain language only.',
     '- NEVER reveal your diagnosis, lab values, imaging results, or medical interpretations.',
+    '- NEVER volunteer textbook-classic descriptions (e.g., "radiates to my left arm/jaw", "tearing pain", "worst headache of my life") unless the learner asks directly about that specific feature.',
     '- Show emotion appropriate to your condition and its severity.',
     '- If asked something you as a patient would not know, say so naturally.',
+    '- Your opening answer to "what brings you in" is vague. The learner must earn every specific detail.',
     difficulty === 'advanced' ? '- HARD LIMIT: Maximum 2 sentences per response. No exceptions. If your answer would be longer, cut it.' : '',
     difficulty === 'guided'   ? '- Aim for 2-4 sentences. Be clear and helpful.' : '',
     difficulty === 'standard' ? '- Keep responses to 1-3 sentences.' : ''

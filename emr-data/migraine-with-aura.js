@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Samantha Torres",
+  "patientHPI": "Three days ago I had one of my usual visual episodes with the zigzag lights, but this time it went on for almost an hour instead of the usual 15-30 minutes, and then my left hand got all tingly for about 10 minutes before my headache started.",
     "dob": "01/25/1991",
     "age": 33,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2901 Stirling Rd, Hollywood, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "5420 Hollywood Blvd, Hollywood, FL 33021",
+    "address": "9139 Maple St, Baltimore, MD 21202",
     "phone": "(954) 555-7156",
     "email": "s.torres91@email.com",
     "emergencyContact": {

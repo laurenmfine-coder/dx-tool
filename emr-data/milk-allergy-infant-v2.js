@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Grace Okafor",
+  "patientHPI": "My baby has been having bloody bowel movements and isn't gaining weight like she should - she used to be doing so well but now she's really fallen behind on the growth charts.",
       "dob": "08/04/2025.5",
       "age": "0.5",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-107431",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(712) 960-7163",
+      "phone": "(803) 555-8921",
       "email": "grace.okafor@email.com",
-      "address": "4029 Oak St, Weston, FL 33326",
+      "address": "1519 W Haddon Ave, Kansas City, MO 64123",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Okafor",
-        "phone": "(893) 765-7087",
+        "phone": "(614) 555-8136",
         "relationship": "Parent"
       }
     },
@@ -832,15 +833,15 @@ window.EMR_DATA = {
     "mrn": "MRN-107431",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(712) 960-7163",
+    "phone": "(720) 555-5397",
     "email": "grace.okafor@email.com",
-    "address": "4029 Oak St, Weston, FL 33326",
+    "address": "9437 Hollyhock Rd, New Orleans, LA 70112",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Okafor",
-      "phone": "(893) 765-7087",
+      "phone": "(503) 555-5022",
       "relationship": "Parent"
     },
     "chiefComplaint": "6-month-old with bloody stools, poor weight gain, and irritability — breastfed but mother eating dairy",

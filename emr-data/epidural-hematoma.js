@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Reeves",
+  "patientHPI": "I fell and hit the left side of my head pretty hard. It happened earlier today and now I'm starting to feel really drowsy and confused, which is getting worse. My head is pounding and I feel like I might throw up.",
     "dob": "06/15/2004",
     "age": "22",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-748899",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(484) 954-9063",
+    "phone": "(317) 555-9751",
     "email": "tyler.reeves@email.com",
-    "address": "3191 Maple Ave, Davie, FL 33314",
+    "address": "9797 Oak Ave, Memphis, TN 38112",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Sarah Mitchell, MD",
     "pharmacy": "Walmart Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Michael Walker",
-      "phone": "(879) 628-5692",
+      "phone": "(212) 555-7455",
       "relationship": "Partner"
     },
     "chiefComplaint": "Fell and hit my head Left side of my head where I hit it",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "William Henry Davenport",
+  "patientHPI": "The pain in my right thigh has been getting much worse lately - it used to only hurt when I walked, but now it aches even when I'm sitting still. When I try to put weight on it, I get this sharp, shooting pain that makes me need to use my cane more often.",
     "dob": "08/30/1948",
     "age": 76,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5200 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "2180 NE 36th St, Fort Lauderdale, FL 33308",
+    "address": "3633 Lavender St, Baltimore, MD 21210",
     "phone": "(954) 555-7284",
     "email": "w.davenport48@email.com",
     "emergencyContact": {

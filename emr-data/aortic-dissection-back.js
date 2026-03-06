@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Raymond Foster",
+  "patientHPI": "I was just sitting at home watching TV when suddenly I felt this horrible ripping pain in my chest that shot straight through to my back. It was the worst pain I've ever felt in my life - like someone was tearing me apart from the inside. I've never experienced anything like this before and I knew something was terribly wrong.",
     "dob": "02/18/1959",
     "age": "67",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-575883",
     "language": "English",
     "race": "White",
-    "phone": "(441) 268-3224",
+    "phone": "(615) 555-1919",
     "email": "raymond.foster@email.com",
-    "address": "6382 Willow Dr, Plantation, FL 33333",
+    "address": "2907 Lavender St, New Orleans, LA 70124",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Rachel Foster",
-      "phone": "(408) 896-5811",
+      "phone": "(702) 555-1154",
       "relationship": "Parent"
     },
     "chiefComplaint": "Sudden tearing chest pain radiating to back",

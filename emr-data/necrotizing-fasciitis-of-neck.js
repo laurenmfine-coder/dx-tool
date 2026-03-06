@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Williams",
+  "patientHPI": "I came in for my regular diabetes check-up, and I know my blood sugar numbers aren't good - I haven't been great about taking my medications or watching what I eat. For the past couple weeks, I've also had this really bad pain on the right side of my jaw, especially when I drink something hot or cold. I can see there's a bad tooth back there, but I haven't been to the dentist in years.",
     "dob": "07/20/1963",
     "age": 61,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 1901 N Pine Island Rd, Plantation, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "2740 NW 15th St, Fort Lauderdale, FL 33311",
+    "address": "4435 Sycamore Dr, Pittsburgh, PA 15202",
     "phone": "(954) 555-6738",
     "email": "h.williams63@email.com",
     "emergencyContact": {

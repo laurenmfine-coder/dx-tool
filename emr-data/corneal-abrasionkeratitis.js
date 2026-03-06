@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Priya Mehta",
+  "patientHPI": "I'm here for my yearly visit and everything's been going well. I wear contacts every day and sometimes fall asleep in them even though I know I shouldn't - my eye doctor always tells me not to do that. My seasonal allergies bother my eyes sometimes but the drops I buy at the pharmacy help with that.",
     "dob": "09/02/1996",
     "age": 28,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2600 Weston Rd, Weston, FL",
     "language": "English, Hindi",
     "race": "Asian (South Asian)",
-    "address": "3450 Bonaventure Blvd, Weston, FL 33332",
+    "address": "331 Peachtree Rd, Memphis, TN 38107",
     "phone": "(954) 555-4519",
     "email": "p.mehta96@email.com",
     "emergencyContact": {

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Hannah Rodriguez",
+  "patientHPI": "I started taking an antibiotic about two weeks ago after being diagnosed with HIV, and now I have this horrible rash with red target-like spots that's gotten much worse - my skin is peeling off and I have painful sores in my mouth.",
       "dob": "09/05/2002",
       "age": "24",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-824017",
       "language": "English",
       "race": "Hispanic/Latina",
-      "phone": "(497) 431-9150",
+      "phone": "(702) 555-2824",
       "email": "hannah.x@email.com",
-      "address": "650 Oak St, Weston, FL 33326",
+      "address": "9035 Lavender St, Detroit, MI 48201",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(294) 919-9345",
+        "phone": "(212) 555-5506",
         "relationship": "Spouse"
       }
     },
@@ -848,15 +849,15 @@ window.EMR_DATA = {
     "mrn": "MRN-824017",
     "language": "English",
     "race": "Hispanic/Latina",
-    "phone": "(497) 431-9150",
+    "phone": "(414) 555-4657",
     "email": "hannah.x@email.com",
-    "address": "650 Oak St, Weston, FL 33326",
+    "address": "1635 N Western Ave, Albuquerque, NM 87101",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(294) 919-9345",
+      "phone": "(317) 555-2679",
       "relationship": "Spouse"
     },
     "chiefComplaint": "24yo HIV+ female with SJS/TEN overlap (15% BSA) 14 days after starting TMP-SMX prophylaxis",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Claudette Jean-Pierre",
+  "patientHPI": "I had a dental cleaning about three weeks ago, and now my left knee where I had the replacement surgery two years ago is starting to feel warm and a bit achy, which is weird because it's been fine since the surgery.",
     "dob": "05/30/1958",
     "age": 66,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 3000 NW 9th Ave, Fort Lauderdale, FL",
     "language": "English, Haitian Creole",
     "race": "Black/African American",
-    "address": "2740 NW 15th St, Fort Lauderdale, FL 33311",
+    "address": "6325 Willow Way, Cleveland, OH 44107",
     "phone": "(954) 555-2194",
     "email": "c.jeanpierre58@email.com",
     "emergencyContact": {

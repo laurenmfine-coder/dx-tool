@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Giselle Laurent",
+  "patientHPI": "I've had this sinus infection that just won't quit - thick green stuff coming out of my nose for over a week now, my face feels all heavy and pressured, and I've had this low fever that comes and goes. I haven't felt like eating much lately, just no appetite for anything.",
     "dob": "11/28/1968",
     "age": 57,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4895 Sheridan St, Hollywood, FL",
     "language": "English, Haitian Creole",
     "race": "Black (Haitian American)",
-    "address": "1928 N 56th Ave, Hollywood, FL 33021",
+    "address": "6047 Juniper Dr, Kansas City, MO 64101",
     "phone": "(954) 555-4466",
     "email": "g.laurent68@email.com",
     "emergencyContact": {

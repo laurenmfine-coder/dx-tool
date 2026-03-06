@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Steinberg",
+  "patientHPI": "My right knee arthritis has been acting up more lately and it's keeping me off the golf course, plus I've had a couple episodes this year where my knee got all hot, red, and swollen up like a balloon - really painful when that happens.",
     "dob": "01/12/1947",
     "age": 77,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 7800 Pines Blvd, Pembroke Pines, FL",
     "language": "English",
     "race": "White",
-    "address": "1245 NW 107th Ave, Pembroke Pines, FL 33026",
+    "address": "1797 Spruce St, Louisville, KY 40203",
     "phone": "(954) 555-3518",
     "email": "h.steinberg47@email.com",
     "emergencyContact": {

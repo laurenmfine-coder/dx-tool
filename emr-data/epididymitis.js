@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Kevin Morales",
+  "patientHPI": "I'm here for my yearly checkup and feeling fine overall. I've been seeing someone new for a few months and we don't always use protection, but I haven't noticed any problems or anything unusual down there.",
     "dob": "09/18/1995",
     "age": 29,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2101 N University Dr, Coral Springs, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "4410 NW 88th Ave, Coral Springs, FL 33065",
+    "address": "2581 Ash St, Pittsburgh, PA 15210",
     "phone": "(954) 555-6371",
     "email": "k.morales95@email.com",
     "emergencyContact": {

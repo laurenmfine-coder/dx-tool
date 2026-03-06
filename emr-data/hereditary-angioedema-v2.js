@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Tiffany Brooks",
+  "patientHPI": "I keep having these scary episodes where my face and throat swell up really bad - it's happened five times in two years and I always end up in the ER because I can't breathe properly. The weird thing is nothing they give me there ever seems to help, and I never get any rashes or hives like they expect. It's been getting so much worse since I started birth control pills two months ago - now it happens almost every week and I'm terrified something really bad is going to happen to me.",
       "dob": "09/03/2007",
       "age": "19",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-160730",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(341) 465-6988",
+      "phone": "(704) 555-3041",
       "email": "tiffany.brooks@email.com",
-      "address": "6524 Oak St, Weston, FL 33326",
+      "address": "5444 Peachtree Rd, San Antonio, TX 78203",
       "insurance": "Medicaid",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Brooks",
-        "phone": "(650) 755-8015",
+        "phone": "(720) 555-5920",
         "relationship": "Spouse"
       }
     },
@@ -855,15 +856,15 @@ window.EMR_DATA = {
     "mrn": "MRN-160730",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(341) 465-6988",
+    "phone": "(617) 555-6067",
     "email": "tiffany.brooks@email.com",
-    "address": "6524 Oak St, Weston, FL 33326",
+    "address": "3243 Hollyhock Rd, Columbus, OH 43215",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Brooks",
-      "phone": "(650) 755-8015",
+      "phone": "(704) 555-7691",
       "relationship": "Spouse"
     },
     "chiefComplaint": "19yo with severe abdominal pain and facial swelling — 5th ER visit, epi/steroids never help, no one has checked C4",

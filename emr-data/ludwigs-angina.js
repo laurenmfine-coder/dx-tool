@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Omar Hassan",
+  "patientHPI": "I can barely breathe or swallow - the whole area under my jaw and the floor of my mouth is swollen up really bad, and it's spreading down into my neck. I know my teeth aren't in good shape and I haven't been taking care of my diabetes like I should, but this swelling came on fast and it's getting scary.",
     "dob": "03/26/1970",
     "age": "56",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-190325",
     "language": "English",
     "race": "White",
-    "phone": "(427) 851-8567",
+    "phone": "(414) 555-5876",
     "email": "omar.hassan@email.com",
-    "address": "3806 Maple Ave, Pembroke Pines, FL 33024",
+    "address": "3497 E Roosevelt Rd, New Orleans, LA 70119",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Rite Aid — Federal Hwy",
     "emergencyContact": {
       "name": "Susan Garcia",
-      "phone": "(380) 811-2175",
+      "phone": "(803) 555-5735",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Can barely breathe Bilateral submandibular/sublingual — floor of mouth and anterior neck",

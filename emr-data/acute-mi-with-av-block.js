@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Raymond Brooks",
+  "patientHPI": "I've been having trouble catching my breath when I climb stairs or walk more than a couple blocks these past few weeks. Sometimes my jaw feels tight and heavy when I'm walking, but it goes away when I sit down and rest. I'm worried because this is new for me.",
     "dob": "09/14/1958",
     "age": 67,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2901 Stirling Rd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black or African American",
-    "address": "3410 NW 19th St, Fort Lauderdale, FL 33311",
+    "address": "3462 Ash St, Memphis, TN 38107",
     "phone": "(954) 555-1842",
     "email": "r.brooks58@email.com",
     "emergencyContact": {

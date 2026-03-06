@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Kowalski",
+  "patientHPI": "I've been having terrible cramping belly pain that comes in waves, and I haven't been able to have a bowel movement for two days now. My stomach feels bloated and tight, and I keep throwing up everything I try to eat or drink.",
     "dob": "07/13/1948",
     "age": "78",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-478097",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(308) 596-6858",
+    "phone": "(803) 555-4033",
     "email": "richard.kowalski@email.com",
-    "address": "6390 Oak Dr, Weston, FL 33396",
+    "address": "8033 Peachtree Rd, Baltimore, MD 21206",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Maria Kowalski",
-      "phone": "(845) 924-1964",
+      "phone": "(412) 555-4545",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Colicky abdominal pain, distension, vomiting, no BM for 2 days",

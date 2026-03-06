@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Sullivan",
+  "patientHPI": "I'm here for my regular checkup and feeling great overall. I work outside doing landscaping here in South Florida every day, so I get plenty of exercise and fresh air. No complaints really - I take something over the counter for my allergies during pollen season and that keeps me comfortable.",
     "dob": "06/28/1985",
     "age": 39,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3900 SW 136th Ave, Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "12480 SW 28th Ct, Riverside, FL 33330",
+    "address": "9727 Ash St, Denver, CO 80205",
     "phone": "(954) 555-6247",
     "email": "d.sullivan85@email.com",
     "emergencyContact": {

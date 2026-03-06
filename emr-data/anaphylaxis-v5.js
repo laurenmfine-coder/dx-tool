@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Amira Hassan",
+  "patientHPI": "My parents got some dip from the food bank and gave it to me, but they couldn't read the label since it was only in English, and now my face is swelling and I can't breathe right. We didn't know it had sesame in it, which I'm not supposed to have.",
       "dob": "02/23/2018",
       "age": "8",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-225792",
       "language": "Arabic",
       "race": "Middle Eastern",
-      "phone": "(738) 544-6385",
+      "phone": "(620) 555-7286",
       "email": "amira.hassan@email.com",
-      "address": "838 Oak St, Weston, FL 33326",
+      "address": "9191 Peachtree Rd, Milwaukee, WI 53204",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Michael Hassan",
-        "phone": "(766) 852-2623",
+        "phone": "(513) 555-4043",
         "relationship": "Parent"
       }
     },
@@ -894,15 +895,15 @@ window.EMR_DATA = {
     "mrn": "MRN-225792",
     "language": "Arabic",
     "race": "Middle Eastern",
-    "phone": "(738) 544-6385",
+    "phone": "(615) 555-9804",
     "email": "amira.hassan@email.com",
-    "address": "838 Oak St, Weston, FL 33326",
+    "address": "5255 Elm St, Birmingham, AL 35201",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Michael Hassan",
-      "phone": "(766) 852-2623",
+      "phone": "(713) 555-3838",
       "relationship": "Parent"
     },
     "chiefComplaint": "8yo with known sesame allergy — accidental exposure from food bank hummus, progressive facial swelling and wheezing",

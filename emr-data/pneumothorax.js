@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Reeves",
+  "patientHPI": "I was just sitting there when suddenly I got this really sharp pain in my chest and couldn't catch my breath - it came out of nowhere and scared the hell out of me.",
     "dob": "05/01/1996",
     "age": "30",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-115368",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(869) 233-6055",
+    "phone": "(704) 555-9920",
     "email": "tyler.reeves@email.com",
-    "address": "7291 Willow Dr, Pembroke Pines, FL 33315",
+    "address": "6315 Dogwood Ln, Minneapolis, MN 55407",
     "insurance": "Tricare Standard",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Ashley Reeves",
-      "phone": "(574) 613-3395",
+      "phone": "(513) 555-9715",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Sudden sharp chest pain and difficulty breathing",

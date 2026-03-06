@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Thomas Rivera",
+  "patientHPI": "About an hour after taking my first dose of antibiotic for my sinus infection, I started getting itchy bumps everywhere and my lips and around my eyes started puffing up.",
       "dob": "11/04/1984",
       "age": "42",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-713069",
       "language": "English",
       "race": "Asian",
-      "phone": "(329) 536-7257",
+      "phone": "(513) 555-7708",
       "email": "thomas.rivera@email.com",
-      "address": "6771 Oak St, Weston, FL 33355",
+      "address": "7472 Daisy Ave, Milwaukee, WI 53210",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Jennifer Rivera",
-        "phone": "(900) 503-3697",
+        "phone": "(620) 555-2208",
         "relationship": "Spouse"
       },
       "chiefComplaint": "Diffuse urticaria, facial swelling 1 hour after first dose of amoxicillin-clavulanate",
@@ -480,15 +481,15 @@ window.EMR_DATA = {
     "mrn": "MRN-713069",
     "language": "English",
     "race": "Asian",
-    "phone": "(329) 536-7257",
+    "phone": "(317) 555-6194",
     "email": "thomas.rivera@email.com",
-    "address": "6771 Oak St, Weston, FL 33355",
+    "address": "9730 Spruce St, Pittsburgh, PA 15210",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Jennifer Rivera",
-      "phone": "(900) 503-3697",
+      "phone": "(702) 555-2215",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Diffuse urticaria, facial swelling 1 hour after first dose of amoxicillin-clavulanate",

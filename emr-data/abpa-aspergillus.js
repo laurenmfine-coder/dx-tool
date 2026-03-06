@@ -9,6 +9,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Fatima Al-Rashid",
+  "patientHPI": "My breathing has been getting worse over the past few weeks even with my inhaler, and now I've got this fever that won't break - when I went to urgent care yesterday they did a chest X-ray and said there's some kind of spot on my lung that wasn't there before.",
       "dob": "03/18/1990",
       "age": "34",
       "sex": "Female",
@@ -16,13 +17,13 @@ window.EMR_DATA = {
       "mrn": "RDX-2025-95341",
       "language": "English/Arabic (bilingual)",
       "race": "Middle Eastern or North African",
-      "phone": "(954) 771-0293",
+      "phone": "(702) 555-7999",
       "email": "falrashid@email.com",
-      "address": "5512 Cypress Creek Pkwy, Fort Lauderdale, FL 33309",
+      "address": "869 Hollyhock Rd, Phoenix, AZ 85008",
       "insurance": "Aetna PPO",
       "pcp": "Dr. Rania Khalil, MD",
       "pharmacy": "Walgreens — Oakland Park Blvd",
-      "emergencyContact": {"name": "Tariq Al-Rashid", "phone": "(954) 771-0447", "relationship": "Husband"},
+      "emergencyContact": {"name": "Tariq Al-Rashid", "phone": "(619) 555-9120", "relationship": "Husband"},
       "chiefComplaint": "Worsening asthma, fever, and new 'spot on the lung' found on chest X-ray at urgent care",
       "diagnosis": "Allergic bronchopulmonary aspergillosis (ABPA) — Stage I (ABPA-S, pre-bronchiectasis)"
     },

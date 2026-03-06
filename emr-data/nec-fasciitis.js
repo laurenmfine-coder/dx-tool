@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Deshawn Lewis",
+  "patientHPI": "This pain in my right leg is absolutely killing me - I can't even describe how bad it hurts. It started a few days ago when I got a small cut on my shin, but now my whole calf is involved and it's spreading up past my knee. The skin looks really angry and red, and it feels hot to touch.",
     "dob": "08/01/1963",
     "age": "63",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-565984",
     "language": "English",
     "race": "Pacific Islander",
-    "phone": "(834) 363-5754",
+    "phone": "(803) 555-2234",
     "email": "deshawn.lewis@email.com",
-    "address": "8101 Elm Blvd, Davie, FL 33314",
+    "address": "7701 W Haddon Ave, Memphis, TN 38127",
     "insurance": "Cigna",
     "pcp": "Dr. Amy Patel, MD",
     "pharmacy": "Publix Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Christopher Carter",
-      "phone": "(664) 598-9920",
+      "phone": "(404) 555-9095",
       "relationship": "Sibling"
     },
     "chiefComplaint": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",

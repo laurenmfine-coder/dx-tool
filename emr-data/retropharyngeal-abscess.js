@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Aaliyah Baptiste",
+  "patientHPI": "My little girl has had a runny nose for about four days, but yesterday she started pulling at her right ear and crying a lot more than usual. She's had a fever up to almost 102 and isn't eating much, though she's still drinking her milk okay.",
     "dob": "06/14/2022",
     "age": 2,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 8201 W Sunrise Blvd, Plantation, FL",
     "language": "English, Haitian Creole",
     "race": "Black/Haitian",
-    "address": "2418 NW 13th Ct, Fort Lauderdale, FL 33311",
+    "address": "5690 Jasmine Way, Denver, CO 80203",
     "phone": "(954) 555-8217",
     "email": "j.baptiste.parent@email.com",
     "emergencyContact": {

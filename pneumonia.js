@@ -1,239 +1,229 @@
-/* emr-data/pneumonia.js — Auto-generated EMR case data for Community-Acquired Pneumonia */
+// Virtual EMR Case: Community-Acquired Pneumonia
+// Variant: pneumonia | Acuity: ESI-3
+// Auto-generated from ED Board clinical data
+
 window.EMR_DATA = {
   "patient": {
-    "name": "Genevieve Toussaint",
-  "patientHPI": "I've been coughing up thick yellow stuff for five days now and running a fever, plus I get this sharp pain in my side when I breathe in or cough. It's really been wearing me down and I just don't feel right.",
-    "dob": "06/26/1971",
-    "age": "55",
+    "name": "Nadine Toussaint",
+    "dob": "09/28/1980",
+    "age": 45,
     "sex": "Female",
-    "pronouns": "she/her",
-    "mrn": "MRN-251601",
-    "language": "English",
-    "race": "Asian",
-    "phone": "(313) 555-7937",
-    "email": "genevieve.toussaint@email.com",
-    "address": "398 Hickory Rd, Indianapolis, IN 46208",
-    "insurance": "BlueCross BlueShield PPO",
-    "pcp": "Dr. David Kim, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "mrn": "RDX-2025-40751",
+    "pronouns": "She/Her",
+    "insurance": "Aetna PPO",
+    "pcp": "Dr. Patricia Morales, MD",
+    "pharmacy": "CVS Pharmacy — 4401 Sheridan St, Hollywood, FL",
+    "language": "English, Haitian Creole, French",
+    "race": "Black (Haitian American)",
+    "address": "6312 Washington St, Hollywood, FL 33023",
+    "phone": "(954) 555-8834",
+    "email": "n.toussaint80@email.com",
     "emergencyContact": {
-      "name": "William Toussaint",
-      "phone": "(617) 555-6928",
-      "relationship": "Adult Child"
-    },
-    "chiefComplaint": "5 days productive cough, fever, pleuritic pain",
-    "diagnosis": "Community-Acquired Pneumonia"
+      "name": "Jean-Pierre Toussaint (Husband)",
+      "phone": "(954) 555-8850"
+    }
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "COPD",
+      "problem": "Asthma — Moderate Persistent",
+      "icd": "J45.40",
+      "onset": "1998",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Well-controlled on ICS/LABA; 1 exacerbation in past year requiring oral steroids; no intubations"
     },
     {
-      "id": "prob-2",
-      "description": "Type 2 Diabetes",
+      "problem": "Type 2 Diabetes Mellitus",
+      "icd": "E11.65",
+      "onset": "2020",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "On metformin; A1c 7.2; dietary management"
     },
     {
-      "id": "prob-3",
-      "description": "Former smoker",
+      "problem": "Obesity, BMI 32.1",
+      "icd": "E66.01",
+      "onset": "2016",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Dietary counseling ongoing; previous attempt with phentermine (discontinued 2022 — palpitations)"
+    },
+    {
+      "problem": "Gastroesophageal Reflux Disease",
+      "icd": "K21.0",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "On pantoprazole; contributing to recurrent aspiration risk"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Metformin",
-      "dose": "1000mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Fluticasone/Salmeterol (Advair Diskus) 250/50 1 puff BID",
+      "sig": "Inhale 1 puff twice daily; rinse mouth after use",
+      "prescriber": "Dr. Morales",
+      "start": "06/2018",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Tiotropium",
-      "dose": "18mcg",
-      "route": "INH",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Albuterol HFA 90mcg 2 puffs PRN",
+      "sig": "Inhale 2 puffs every 4-6 hours as needed for shortness of breath or wheezing",
+      "prescriber": "Dr. Morales",
+      "start": "04/1998",
+      "refills": 5,
+      "status": "PRN"
     },
     {
-      "id": "med-3",
-      "name": "Albuterol",
-      "dose": "90mcg",
-      "route": "INH",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "Metformin 1000mg BID",
+      "sig": "Take 1 tablet by mouth twice daily with meals",
+      "prescriber": "Dr. Morales",
+      "start": "09/2020",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Pantoprazole 40mg daily",
+      "sig": "Take 1 tablet by mouth once daily before breakfast",
+      "prescriber": "Dr. Morales",
+      "start": "03/2019",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Montelukast 10mg QHS",
+      "sig": "Take 1 tablet by mouth at bedtime",
+      "prescriber": "Dr. Morales",
+      "start": "01/2020",
+      "refills": 5,
+      "status": "Active"
     }
   ],
   "allergies": [
     {
-      "allergen": "Erythromycin",
-      "reaction": "GI upset",
-      "severity": "Mild",
-      "type": "Drug"
+      "allergen": "Penicillin",
+      "type": "Drug",
+      "reaction": "Anaphylaxis — throat swelling, hives, hypotension (age 12)",
+      "severity": "Severe",
+      "verified": "Yes"
+    },
+    {
+      "allergen": "Dust Mites",
+      "type": "Environmental",
+      "reaction": "Rhinitis, asthma exacerbation",
+      "severity": "Moderate",
+      "verified": "Yes"
     }
   ],
   "vitals": [
     {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "118/72",
-      "hr": "102",
-      "rr": "24",
-      "temp": "39.3°C",
-      "spo2": "89%",
-      "pain": "5/10",
-      "bmi": "34",
-      "weight": "58 kg"
+      "date": "02/24/2026",
+      "bp": "128/82",
+      "hr": 108,
+      "rr": 24,
+      "temp": "102.4°F",
+      "spo2": "91%",
+      "wt": "194 lbs",
+      "ht": "5'6\"",
+      "bmi": 31.3,
+      "setting": "ED"
+    },
+    {
+      "date": "11/12/2025",
+      "bp": "122/78",
+      "hr": 76,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "97%",
+      "wt": "198 lbs",
+      "ht": "5'6\"",
+      "bmi": 32.0,
+      "setting": "PCP Office"
+    },
+    {
+      "date": "07/22/2025",
+      "bp": "118/74",
+      "hr": 72,
+      "rr": 16,
+      "temp": "98.2°F",
+      "spo2": "98%",
+      "wt": "196 lbs",
+      "ht": "5'6\"",
+      "bmi": 31.6,
+      "setting": "PCP Office"
+    },
+    {
+      "date": "03/18/2025",
+      "bp": "124/80",
+      "hr": 74,
+      "rr": 18,
+      "temp": "98.6°F",
+      "spo2": "97%",
+      "wt": "200 lbs",
+      "ht": "5'6\"",
+      "bmi": 32.3,
+      "setting": "PCP Office"
     }
   ],
   "visits": [
     {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "5 days productive cough, fever, pleuritic pain",
-      "hpi": "Genevieve Toussaint is a 55-year-old female presenting with 5 days productive cough, fever, pleuritic pain. Past medical history includes COPD, Type 2 Diabetes, Former smoker. See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "Community-Acquired Pneumonia — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
+      "id": "V001",
+      "date": "11/12/2025",
+      "type": "Primary Care",
+      "provider": "Dr. Patricia Morales, MD",
+      "cc": "Diabetes management, asthma follow-up",
+      "hpi": "45F with moderate persistent asthma, T2DM presents for routine follow-up. Asthma well-controlled; using rescue inhaler 1-2x/week. A1c down to 7.2 from 7.6. Reports adherence to metformin and dietary modifications. Menses regular. Denies cough, fevers, chest pain.",
+      "exam": "NAD. CV: RRR, no murmurs. Lungs: CTAB, no wheezing, good air movement. Abdomen: Obese, soft, NT. Ext: No edema.",
+      "assessment": "1. T2DM — improving, A1c 7.2\n2. Moderate persistent asthma — well controlled\n3. Obesity — stable",
+      "plan": "1. Continue metformin 1000mg BID\n2. Continue Advair + montelukast\n3. Flu and COVID vaccines administered today\n4. Return 6 months"
+    },
+    {
+      "id": "V002",
+      "date": "01/05/2025",
+      "type": "Urgent Care",
+      "provider": "Dr. Kevin Park, DO",
+      "cc": "Cough, wheezing, chest tightness x 5 days",
+      "hpi": "44F with asthma presents with 5-day history of productive cough (yellow sputum), wheezing, and chest tightness. Reports URI symptoms preceding onset. Using rescue inhaler every 3-4 hours with incomplete relief. Denies fever or chills. No sick contacts at home but works in daycare setting.",
+      "exam": "Mild respiratory distress. Lungs: Diffuse expiratory wheezing bilat. SpO2 94% on RA. No accessory muscle use.",
+      "assessment": "1. Asthma exacerbation — likely viral-triggered",
+      "plan": "1. Prednisone 40mg daily x 5 days\n2. Continue ICS/LABA\n3. Rescue inhaler with spacer q4h PRN\n4. Follow-up with PCP in 1 week\n5. Discussed sick-day management plan"
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
+      "date": "11/12/2025",
+      "time": "09:00",
+      "orderedBy": "Dr. Morales",
+      "collected": "11/12/2025 09:15",
+      "facility": "ReasonDx Medical Center Lab",
+      "accession": "LAB-2025-861128",
       "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-258574",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
+      "specimenType": "Venous Blood",
+      "fasting": "Yes (10 hrs)",
       "groups": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
+          "name": "HEMOGLOBIN A1C",
           "results": [
-            {
-              "test": "WBC",
-              "value": "16.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
+            { "test": "HbA1c", "value": "7.2", "unit": "%", "range": "<5.7", "flag": "H" },
+            { "test": "Estimated Average Glucose", "value": "160", "unit": "mg/dL", "range": "", "flag": "" }
           ]
         },
         {
-          "name": "BASIC METABOLIC PANEL",
+          "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
+            { "test": "Glucose", "value": "128", "unit": "mg/dL", "range": "70-100", "flag": "H" },
+            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
+            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
+            { "test": "eGFR", "value": ">90", "unit": "mL/min/1.73m²", "range": ">60", "flag": "" },
+            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
+            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" },
+            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
+            { "test": "CO2", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" }
           ]
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
+          "name": "COMPLETE BLOOD COUNT",
           "results": [
-            {
-              "test": "Lactate",
-              "value": "2.4",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Procalcitonin",
-              "value": "3.8",
-              "unit": "ng/mL",
-              "range": "<0.1",
-              "flag": "H"
-            }
+            { "test": "WBC", "value": "7.4", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
+            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
+            { "test": "Hematocrit", "value": "40.2", "unit": "%", "range": "36.0-46.0", "flag": "" },
+            { "test": "Platelets", "value": "244", "unit": "K/uL", "range": "150-400", "flag": "" }
           ]
         }
       ]
@@ -241,62 +231,50 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "Chest X-Ray",
-      "status": "Final",
+      "date": "01/05/2025",
+      "study": "CHEST X-RAY PA AND LATERAL",
+      "accession": "IMG-2025-01052",
+      "status": "FINAL",
+      "orderedBy": "Dr. Park (Urgent Care)",
+      "readBy": "Dr. Alan Wu, MD (Radiology)",
+      "facility": "ReasonDx Medical Center Imaging",
       "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-381193",
-      "clinical": "5 days productive cough, fever, pleuritic pain",
-      "technique": "Standard protocol",
-      "findings": "Right lower lobe consolidation with air bronchograms. Small right pleural effusion. No pneumothorax.",
-      "impression": "Right lower lobe pneumonia. CURB-65 score = 2.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "clinical": "Asthma exacerbation, cough with sputum production — rule out pneumonia",
+      "technique": "PA and lateral views of the chest obtained.",
+      "findings": "Heart: Normal size and configuration.\n\nLungs: Hyperinflated bilaterally. No focal consolidation or infiltrate. No pleural effusion. No pneumothorax.\n\nMediastinum: Unremarkable.\n\nBony structures: Intact.",
+      "impression": "1. Hyperinflated lungs consistent with air trapping/bronchospasm.\n2. No evidence of pneumonia.",
+      "dictated": "01/05/2025 14:50",
+      "verified": "01/05/2025 16:20"
     }
   ],
   "immunizations": [
-    {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
-    },
-    {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
-    },
-    {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
-    }
+    { "vaccine": "Influenza (2025-2026)", "date": "11/2025", "site": "Left deltoid IM", "lot": "FL25-8912", "mfr": "Sanofi" },
+    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "11/2025", "site": "Right deltoid IM", "lot": "CV25-2108", "mfr": "Pfizer" },
+    { "vaccine": "Tdap", "date": "08/2022", "site": "Left deltoid IM", "lot": "TD22-508", "mfr": "GSK" },
+    { "vaccine": "Hepatitis B Series", "date": "1998", "site": "Right deltoid IM", "lot": "HB98-112", "mfr": "Merck" }
   ],
   "familyHistory": [
-    "Non-contributory"
+    "Mother: Asthma, T2DM, HTN, alive at 72",
+    "Father: Hypertension, prostate cancer at age 65, alive at 74",
+    "Sister: Asthma, sickle cell trait, alive at 48",
+    "Maternal grandmother: T2DM, deceased at 78 (stroke)"
   ],
   "socialHistory": [
-    [
-      "Tobacco",
-      "Former, 25 pack-years"
-    ],
-    [
-      "Alcohol",
-      "None"
-    ],
-    [
-      "Occupation",
-      "Retired school secretary"
-    ],
-    [
-      "Living",
-      "Lives with daughter"
-    ]
-  ]
+    ["Occupation", "Daycare center director — frequent exposure to childhood respiratory infections"],
+    ["Marital", "Married 18 years; 3 children (ages 8, 12, 15)"],
+    ["Tobacco", "Never smoker; no secondhand exposure at home"],
+    ["Alcohol", "Occasional — glass of wine at dinner 1-2x/week"],
+    ["Drugs", "Denies"],
+    ["Exercise", "Walking 3x/week (30 min); limited by knee pain on longer walks"],
+    ["Housing", "Single-family home with husband and 3 children; carpeted bedrooms; HEPA filter in bedroom for dust mite allergy"],
+    ["Safety", "Denies IPV; seatbelt; children in car seats/boosters appropriate for age"],
+    ["Advance Directive", "None — not discussed"]
+  ],
+  "meta": {
+    "caseId": "pneumonia",
+    "diagnosis": "Community-Acquired Pneumonia (RLL Lobar Consolidation, Likely Streptococcus pneumoniae) in Asthmatic Patient with Penicillin Allergy",
+    "acuity": 3,
+    "presentation": "Shortness of Breath",
+    "category": "pulmonary"
+  }
 };

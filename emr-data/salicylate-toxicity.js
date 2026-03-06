@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eleanor Dunn",
+  "patientHPI": "I've been taking aspirin every day for my joint pain, but lately I've been hearing this constant ringing in my ears that won't stop. This morning I started throwing up and I feel like I can't catch my breath properly.",
     "dob": "02/21/1957",
     "age": "69",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-135434",
     "language": "English",
     "race": "Asian",
-    "phone": "(742) 664-3088",
+    "phone": "(614) 555-2604",
     "email": "eleanor.dunn@email.com",
-    "address": "2010 Pine Blvd, Plantation, FL 33340",
+    "address": "341 Dogwood Ln, Columbus, OH 43210",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Reginald Dunn",
-      "phone": "(930) 202-6504",
+      "phone": "(312) 555-9856",
       "relationship": "Parent"
     },
     "chiefComplaint": "Tinnitus, vomiting, tachypnea — chronic aspirin use for arthritis",

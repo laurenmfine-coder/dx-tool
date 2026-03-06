@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dylan Morales",
+  "patientHPI": "My friend brought me here - he says I collapsed during the marathon today and I'm not thinking clearly, but I don't really remember what happened.",
     "dob": "06/15/2004",
     "age": "22",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-350390",
     "language": "English",
     "race": "Asian",
-    "phone": "(791) 259-7032",
+    "phone": "(312) 555-8575",
     "email": "dylan.morales@email.com",
-    "address": "3791 Oak St, Fort Lauderdale, FL 33301",
+    "address": "456 Maple St, Indianapolis, IN 46222",
     "insurance": "Tricare",
     "pcp": "Dr. Michael Torres, DO",
     "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "David Carter",
-      "phone": "(765) 353-2668",
+      "phone": "(704) 555-6049",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",

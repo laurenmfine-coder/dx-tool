@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Christina Park",
+  "patientHPI": "I was just sitting at work when suddenly I got this sharp, stabbing pain in my chest that got worse when I took deep breaths. I also felt short of breath and couldn't seem to get enough air, which really scared me since I just got back from a long flight overseas.",
     "dob": "08/19/1984",
     "age": "42",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-965042",
     "language": "English",
     "race": "Asian",
-    "phone": "(315) 276-1987",
+    "phone": "(630) 555-9625",
     "email": "christina.park@email.com",
-    "address": "7235 Cedar St, Sunrise, FL 33300",
+    "address": "4479 Walnut Dr, Birmingham, AL 35208",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Brian Park",
-      "phone": "(979) 207-5936",
+      "phone": "(415) 555-6807",
       "relationship": "Parent"
     },
     "chiefComplaint": "Sudden-onset pleuritic chest pain and dyspnea",

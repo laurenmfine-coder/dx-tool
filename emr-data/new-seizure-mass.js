@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Nina Patel",
+  "patientHPI": "I woke up this morning with the worst headache of my life on the left side - it's pounding and throbbing, and I don't understand what happened because I've never had headaches like this before. My roommate says I was acting strange before I went to bed, but I don't really remember much from last night.",
     "dob": "07/15/2000",
     "age": "26",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-509012",
     "language": "English",
     "race": "Pacific Islander",
-    "phone": "(846) 853-2425",
+    "phone": "(713) 555-4519",
     "email": "nina.patel@email.com",
-    "address": "4026 Cedar Ln, Fort Lauderdale, FL 33301",
+    "address": "1125 Hickory Rd, Birmingham, AL 35207",
     "insurance": "Tricare",
     "pcp": "Dr. Amy Patel, MD",
     "pharmacy": "Rite Aid — Federal Hwy",
     "emergencyContact": {
       "name": "Christopher Morgan",
-      "phone": "(936) 258-7047",
+      "phone": "(412) 555-5560",
       "relationship": "Partner"
     },
     "chiefComplaint": "I don't know what happened Headache is left-sided, throbbing",

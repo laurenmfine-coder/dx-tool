@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jameson Ortiz",
+  "patientHPI": "This is hands down the worst sore throat I've ever had in my life - it's all concentrated on the left side and the pain is absolutely unbearable. I've had throat problems before, but nothing like this intense burning and stabbing pain that makes it hard to even swallow my own spit.",
     "dob": "02/09/1976",
     "age": "50",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-505748",
     "language": "English",
     "race": "American Indian",
-    "phone": "(618) 618-3650",
+    "phone": "(713) 555-4350",
     "email": "jameson.ortiz@email.com",
-    "address": "8493 Pine Rd, Davie, FL 33314",
+    "address": "9145 Peachtree Rd, Cleveland, OH 44109",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Karen Liu, DO",
     "pharmacy": "Rite Aid — Sunrise Blvd",
     "emergencyContact": {
       "name": "Charles Roberts",
-      "phone": "(443) 312-8785",
+      "phone": "(505) 555-4921",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",

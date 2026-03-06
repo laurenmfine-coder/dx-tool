@@ -9,6 +9,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Tomás Reyes-Guzmán",
+  "patientHPI": "I can't breathe through my nose anymore and I'm constantly sneezing and my eyes are so itchy and watery — it's making it really hard to concentrate during my college lectures and when I'm trying to study.",
       "dob": "07/19/1996",
       "age": "28",
       "sex": "Male",
@@ -16,13 +17,13 @@ window.EMR_DATA = {
       "mrn": "RDX-2025-95621",
       "language": "English / Spanish (bilingual)",
       "race": "Hispanic or Latino",
-      "phone": "(305) 814-6629",
+      "phone": "(314) 555-4986",
       "email": "treyes@univ.edu",
       "address": "1204 SW 3rd Ave, Apt 6, Coral Gables, FL 33134",
       "insurance": "Student Health Plan (United Healthcare)",
       "pcp": "Student Health Center — Dr. Patricia Walsh, MD",
       "pharmacy": "University Pharmacy",
-      "emergencyContact": { "name": "Carmen Reyes", "phone": "(305) 814-7101", "relationship": "Mother" },
+      "emergencyContact": { "name": "Carmen Reyes", "phone": "(513) 555-7560", "relationship": "Mother" },
       "chiefComplaint": "Persistent nasal congestion, sneezing, and itchy eyes — 'affects my focus during lectures and studying year-round'",
       "diagnosis": "Moderate-severe perennial allergic rhinitis (dust mite + mold-sensitized) with seasonal exacerbation (grass + tree pollen). Allergen immunotherapy (SCIT) candidate."
     },

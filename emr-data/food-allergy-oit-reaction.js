@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Olivia Nguyen",
+  "patientHPI": "I was at my allergy doctor's office getting my usual peanut treatment when I started having a reaction, and even though they treated me there, I'm still not feeling right and my parents are worried.",
       "dob": "08/10/2014",
       "age": "12",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-966962",
       "language": "English",
       "race": "Asian",
-      "phone": "(655) 710-4224",
+      "phone": "(415) 555-6062",
       "email": "olivia.nguyen@email.com",
-      "address": "1467 Oak St, Weston, FL 33360",
+      "address": "1240 Oak Ave, Memphis, TN 38116",
       "insurance": "Cigna PPO",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "David Nguyen",
-        "phone": "(562) 533-9104",
+        "phone": "(503) 555-6751",
         "relationship": "Parent"
       }
     },
@@ -756,15 +757,15 @@ window.EMR_DATA = {
     "mrn": "MRN-966962",
     "language": "English",
     "race": "Asian",
-    "phone": "(655) 710-4224",
+    "phone": "(212) 555-3972",
     "email": "olivia.nguyen@email.com",
-    "address": "1467 Oak St, Weston, FL 33360",
+    "address": "3624 N Kedzie Blvd, New Orleans, LA 70114",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "David Nguyen",
-      "phone": "(562) 533-9104",
+      "phone": "(317) 555-7566",
       "relationship": "Parent"
     },
     "chiefComplaint": "Abdominal pain, hives during peanut oral immunotherapy updose visit",

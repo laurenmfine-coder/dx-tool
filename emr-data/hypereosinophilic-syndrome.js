@@ -9,12 +9,13 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Devon Okafor",
+  "patientHPI": "I've been feeling really tired for the past few months, like I just can't get enough energy no matter how much I sleep. My doctor found something unusual in my blood work during my routine checkup, but I feel fine otherwise except for being worn out all the time.",
       "dob": "03/14/1987",
       "age": "38",
       "sex": "Male",
       "pronouns": "he/him",
       "mrn": "RDX-2025-95512",
-      "phone": "(786) 204-9317",
+      "phone": "(720) 555-3869",
       "address": "8821 Brickell Ave #14B, Miami, FL 33130",
       "insurance": "Cigna PPO",
       "pcp": "Dr. Alicia Torres, MD",

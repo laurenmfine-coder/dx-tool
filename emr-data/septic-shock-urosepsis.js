@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Edna Fitzgerald",
+  "patientHPI": "My daughter found me this morning shaking and confused - I've been having this terrible burning pain in my lower back and belly that's been getting worse over the past couple days.",
     "dob": "02/01/1947",
     "age": "79",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-105988",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(609) 276-1871",
+    "phone": "(503) 555-5967",
     "email": "edna.fitzgerald@email.com",
-    "address": "4906 Willow Ct, Pembroke Pines, FL 33024",
+    "address": "3213 Birch Ln, Denver, CO 80205",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Amy Patel, MD",
     "pharmacy": "CVS Pharmacy — University Dr",
     "emergencyContact": {
       "name": "Linda Williams",
-      "phone": "(738) 415-9076",
+      "phone": "(212) 555-4470",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Daughter called EMS: 'found her confused and shaking' Low belly and back pain — flanks",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Camila Restrepo",
+  "patientHPI": "I've been feeling completely exhausted for the past few days, and my urine looks like dark cola, which really scared me. I'm not peeing as much as usual, and I have this dull headache with some nausea. I also noticed these weird bruises on my arms and legs that just appeared out of nowhere.",
     "dob": "03/14/1990",
     "age": 34,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4700 Coconut Creek Pkwy, Coconut Creek, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "4215 NW 30th Terrace, Coconut Creek, FL 33066",
+    "address": "5395 Larkspur Ln, Milwaukee, WI 53209",
     "phone": "(954) 555-9173",
     "email": "c.restrepo90@email.com",
     "emergencyContact": {

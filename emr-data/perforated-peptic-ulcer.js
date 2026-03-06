@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Vincent Morales",
+  "patientHPI": "I was just sitting at home watching TV when this terrible pain hit me right in the pit of my stomach - like someone stabbed me with a knife and it just won't stop. It came on so suddenly about an hour ago and now my whole belly feels like a rock, I can barely move without wanting to scream.",
     "dob": "06/23/1980",
     "age": "46",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-499704",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(459) 386-2785",
+    "phone": "(702) 555-8080",
     "email": "vincent.morales@email.com",
-    "address": "6100 Elm St, Hollywood, FL 33300",
+    "address": "3332 Lavender St, Cleveland, OH 44101",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. David Kim, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Mei Morales",
-      "phone": "(664) 649-8354",
+      "phone": "(505) 555-1478",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Sudden severe epigastric pain, rigid abdomen",

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Mateo Delgado",
+  "patientHPI": "I was eating and something got stuck in my throat and now I can't swallow anything, not even water. It feels like there's a big lump stuck in my chest and every time I try to drink something it just comes right back up.",
       "dob": "01/12/2016",
       "age": "10",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-939166",
       "language": "English",
       "race": "White",
-      "phone": "(322) 608-3668",
+      "phone": "(617) 555-2894",
       "email": "mateo.delgado@email.com",
-      "address": "8840 Oak St, Weston, FL 33357",
+      "address": "127 Sycamore Dr, Birmingham, AL 35208",
       "insurance": "Aetna HMO",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Jennifer Delgado",
-        "phone": "(310) 382-5317",
+        "phone": "(505) 555-4114",
         "relationship": "Parent"
       }
     },
@@ -792,15 +793,15 @@ window.EMR_DATA = {
     "mrn": "MRN-939166",
     "language": "English",
     "race": "White",
-    "phone": "(322) 608-3668",
+    "phone": "(415) 555-1727",
     "email": "mateo.delgado@email.com",
-    "address": "8840 Oak St, Weston, FL 33357",
+    "address": "1247 Clover St, Albuquerque, NM 87106",
     "insurance": "Aetna HMO",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Jennifer Delgado",
-      "phone": "(310) 382-5317",
+      "phone": "(713) 555-8144",
       "relationship": "Parent"
     },
     "chiefComplaint": "10-year-old with chronic abdominal pain, vomiting, and refusal to eat solid foods",

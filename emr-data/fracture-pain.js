@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Evelyn Chambers",
+  "patientHPI": "I fell on my outstretched hand when I tripped on the sidewalk yesterday, and now my wrist is really swollen and painful - I can barely move it without sharp shooting pains.",
     "dob": "07/30/1952",
     "age": 72,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4900 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "2840 SW 73rd Way, Riverside, FL 33100",
+    "address": "1873 Foxglove Dr, Baltimore, MD 21210",
     "phone": "(954) 555-7248",
     "email": "e.chambers52@email.com",
     "emergencyContact": {

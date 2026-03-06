@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Winston Carmichael",
+  "patientHPI": "Over the past five days, I've been getting more and more winded just walking around the house, and my legs have been swelling up something terrible. I can barely get my shoes on anymore because my feet and ankles are so puffy.",
     "dob": "02/27/1947",
     "age": "79",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-732479",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(661) 334-2830",
+    "phone": "(617) 555-2288",
     "email": "winston.carmichael@email.com",
-    "address": "2244 Maple Ln, Plantation, FL 33372",
+    "address": "5662 Poplar Ave, Memphis, TN 38116",
     "insurance": "Tricare Standard",
     "pcp": "Dr. David Kim, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Rosa Carmichael",
-      "phone": "(614) 278-4833",
+      "phone": "(505) 555-6083",
       "relationship": "Parent"
     },
     "chiefComplaint": "Progressive dyspnea and leg swelling over 5 days",

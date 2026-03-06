@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Genevieve Toussaint",
+  "patientHPI": "I've been coughing up thick yellow stuff for five days now and running a fever, plus I get this sharp pain in my side when I breathe in or cough. It's really been wearing me down and I just don't feel right.",
     "dob": "06/26/1971",
     "age": "55",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-251601",
     "language": "English",
     "race": "Asian",
-    "phone": "(626) 680-1819",
+    "phone": "(313) 555-7937",
     "email": "genevieve.toussaint@email.com",
-    "address": "4472 Oak St, Weston, FL 33366",
+    "address": "398 Hickory Rd, Indianapolis, IN 46208",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. David Kim, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "William Toussaint",
-      "phone": "(727) 475-6456",
+      "phone": "(617) 555-6928",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "5 days productive cough, fever, pleuritic pain",

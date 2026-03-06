@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Daniela Herrera",
+  "patientHPI": "For the past five days I've had this pain on the left side of my chest that gets worse when I take deep breaths or reach up high - I did start a new intense workout class recently with lots of upper body stuff.",
     "dob": "03/22/1992",
     "age": 32,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 2801 University Dr, Riverside, FL",
     "language": "English",
     "race": "Hispanic/Latino",
-    "address": "1148 SW 28th Ave, Fort Lauderdale, FL 33312",
+    "address": "1686 Hollyhock Rd, Albuquerque, NM 87107",
     "phone": "(954) 555-7321",
     "email": "d.herrera92@email.com",
     "emergencyContact": {

@@ -10,14 +10,15 @@ window.EMR_DATA = {
       "name": "Charles Whitmore", "dob": "02/28/1972", "age": "52",
       "sex": "Male", "pronouns": "he/him", "mrn": "RDX-2025-95644",
       "language": "English", "race": "White",
-      "phone": "(954) 881-5523", "email": "cwhitmore@landscaping.com",
-      "address": "784 Palmetto Park Rd, Boca Raton, FL 33432",
+      "phone": "(615) 555-5911", "email": "cwhitmore@landscaping.com",
+      "address": "6135 Birch Ln, Pittsburgh, PA 15212",
       "insurance": "Cigna PPO",
       "pcp": "Dr. James Ostrowski, MD",
       "pharmacy": "Walgreens — Glades Rd",
-      "emergencyContact": {"name": "Janet Whitmore", "phone": "(954) 881-7741", "relationship": "Wife"},
+      "emergencyContact": {"name": "Janet Whitmore", "phone": "(615) 555-1272", "relationship": "Wife"},
       "chiefComplaint": "Generalized hives, vomiting, and throat tightness beginning 3–4 hours after eating steak dinner",
       "diagnosis": "Alpha-gal syndrome — IgE-mediated allergy to galactose-alpha-1,3-galactose (mammalian red meat antigen)"
+      "patientHPI": "About three hours after dinner last night, I started breaking out in hives all over my body and threw up, then my throat started feeling tight and scratchy. We had steak for dinner but I eat beef all the time without any problems.",
     },
     "allergies": [{"allergen": "NKDA (prior to this visit)", "reaction": "None previously identified", "severity": "N/A", "type": "N/A"}],
     "immunizations": [

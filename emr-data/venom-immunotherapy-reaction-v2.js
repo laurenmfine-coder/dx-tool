@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Karen Lindquist",
+  "patientHPI": "I was getting my regular allergy shot today like I have been for over a year now, and about 20 minutes after the injection I started breaking out in hives all over my body and my throat felt like it was closing up. I got really dizzy and felt like I was going to pass out, so they gave me a shot right away in the office.",
       "dob": "02/07/1968",
       "age": "58",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-763428",
       "language": "English",
       "race": "White",
-      "phone": "(384) 456-2009",
+      "phone": "(702) 555-4919",
       "email": "karen.x@email.com",
-      "address": "5943 Oak St, Weston, FL 33326",
+      "address": "5602 Walnut Dr, Milwaukee, WI 53204",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(458) 809-2937",
+        "phone": "(415) 555-8206",
         "relationship": "Spouse"
       }
     },
@@ -763,15 +764,15 @@ window.EMR_DATA = {
     "mrn": "MRN-763428",
     "language": "English",
     "race": "White",
-    "phone": "(384) 456-2009",
+    "phone": "(313) 555-5681",
     "email": "karen.x@email.com",
-    "address": "5943 Oak St, Weston, FL 33326",
+    "address": "3888 Willow Way, Indianapolis, IN 46202",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(458) 809-2937",
+      "phone": "(414) 555-5451",
       "relationship": "Spouse"
     },
     "chiefComplaint": "58yo on VIT who had systemic reaction 20 min after maintenance injection — on ACE inhibitor which increases reaction risk",

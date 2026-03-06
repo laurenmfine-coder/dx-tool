@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Reginald Baptiste",
+  "patientHPI": "I don't really remember what happened - my daughter says the nurses found me in my room and I wouldn't wake up, and I was burning hot with fever and my blood pressure was really low.",
     "dob": "09/24/1950",
     "age": "76",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-350713",
     "language": "English",
     "race": "White",
-    "phone": "(738) 689-2083",
+    "phone": "(720) 555-9270",
     "email": "reginald.baptiste@email.com",
-    "address": "6363 Palm Blvd, Pembroke Pines, FL 33336",
+    "address": "7405 S Halsted St, Minneapolis, MN 55406",
     "insurance": "Medicaid",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Lisa Baptiste",
-      "phone": "(371) 383-3275",
+      "phone": "(513) 555-9976",
       "relationship": "Parent"
     },
     "chiefComplaint": "Fever, confusion, hypotension — found unresponsive at nursing home",

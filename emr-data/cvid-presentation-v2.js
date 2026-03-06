@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ryan Fitzgerald",
+  "patientHPI": "I keep getting these awful lung infections - this is my fourth one in just two years, and I'm only 26. The doctors finally did some blood work and found out my immune system isn't working right, which explains why I've been sick so much. Now I'm panicking because I'm about to lose my parents' insurance in two months and the treatment I need costs tens of thousands of dollars a year.",
       "dob": "09/26/2000",
       "age": "26",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-744880",
       "language": "English",
       "race": "White",
-      "phone": "(329) 898-1751",
+      "phone": "(513) 555-3531",
       "email": "ryan.x@email.com",
-      "address": "8624 Oak St, Weston, FL 33326",
+      "address": "6170 W Haddon Ave, Kansas City, MO 64112",
       "insurance": "Parents' plan (aging out at 26)",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(430) 540-8063",
+        "phone": "(513) 555-2622",
         "relationship": "Spouse"
       }
     },
@@ -824,15 +825,15 @@ window.EMR_DATA = {
     "mrn": "MRN-744880",
     "language": "English",
     "race": "White",
-    "phone": "(329) 898-1751",
+    "phone": "(615) 555-7686",
     "email": "ryan.x@email.com",
-    "address": "8624 Oak St, Weston, FL 33326",
+    "address": "1727 Foxglove Dr, San Antonio, TX 78207",
     "insurance": "Parents' plan (aging out at 26)",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(430) 540-8063",
+      "phone": "(415) 555-1536",
       "relationship": "Spouse"
     },
     "chiefComplaint": "26yo with 4th pneumonia in 2 years — bilateral, failing outpatient antibiotics. Immunoglobulins finally checked: IgG 142.",

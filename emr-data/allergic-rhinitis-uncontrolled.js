@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Derek Patel",
+  "patientHPI": "I've had a stuffy, runny nose for months now, but yesterday I started getting these really bad nosebleeds that won't stop — I've never had nosebleeds like this before.",
       "dob": "11/23/1994",
       "age": "32",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-925795",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(774) 324-4184",
+      "phone": "(804) 555-8381",
       "email": "derek.patel@email.com",
-      "address": "8032 Oak St, Weston, FL 33332",
+      "address": "9699 Walnut Dr, Albuquerque, NM 87105",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Lisa Patel",
-        "phone": "(621) 475-6494",
+        "phone": "(615) 555-4737",
         "relationship": "Spouse"
       }
     },
@@ -989,15 +990,15 @@ window.EMR_DATA = {
     "mrn": "MRN-925795",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(774) 324-4184",
+    "phone": "(504) 555-7150",
     "email": "derek.patel@email.com",
-    "address": "8032 Oak St, Weston, FL 33332",
+    "address": "4137 Walnut Dr, Louisville, KY 40204",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Lisa Patel",
-      "phone": "(621) 475-6494",
+      "phone": "(513) 555-4043",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Year-round nasal congestion, sneezing, post-nasal drip despite multiple medications",

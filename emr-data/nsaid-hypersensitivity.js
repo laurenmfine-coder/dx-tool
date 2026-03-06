@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Vanessa Takahashi",
+  "patientHPI": "I accidentally took aspirin and now I can barely breathe - my chest feels like it's in a vise and my airways are closing up.",
       "dob": "02/27/1988",
       "age": "38",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-359825",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(481) 596-7238",
+      "phone": "(412) 555-8043",
       "email": "vanessa.takahashi@email.com",
-      "address": "2641 Oak St, Weston, FL 33354",
+      "address": "8475 Poplar Ave, Memphis, TN 38108",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "David Takahashi",
-        "phone": "(932) 298-2958",
+        "phone": "(804) 555-6279",
         "relationship": "Spouse"
       }
     },
@@ -913,15 +914,15 @@ window.EMR_DATA = {
     "mrn": "MRN-359825",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(481) 596-7238",
+    "phone": "(614) 555-8238",
     "email": "vanessa.takahashi@email.com",
-    "address": "2641 Oak St, Weston, FL 33354",
+    "address": "8545 Clover St, Memphis, TN 38107",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "David Takahashi",
-      "phone": "(932) 298-2958",
+      "phone": "(614) 555-4501",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Nasal polyps, asthma, and severe bronchospasm after taking aspirin",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Olivia Desmond",
+  "patientHPI": "She's been making this weird barking sound when she coughs since yesterday, and her voice sounds hoarse and scratchy. She seems to be having trouble breathing, especially when she gets upset, and the sound gets louder when she cries.",
     "dob": "03/30/2022",
     "age": 2,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4001 SW 64th Ave, Riverside, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "6312 SW 19th St, Plantation, FL 33317",
+    "address": "287 Foxglove Dr, Kansas City, MO 64101",
     "phone": "(954) 555-5381",
     "email": "m.desmond.parent@email.com",
     "emergencyContact": {

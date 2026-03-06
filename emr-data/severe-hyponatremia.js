@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Linda Petrowski",
+  "patientHPI": "I've been feeling so confused and dizzy lately, and I keep feeling sick to my stomach. My family says I'm not making sense when I talk, and I feel unsteady when I try to walk around the house.",
     "dob": "03/18/1956",
     "age": "70",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-125847",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(360) 499-7846",
+    "phone": "(620) 555-7044",
     "email": "linda.petrowski@email.com",
-    "address": "8360 Palm Ave, Plantation, FL 33322",
+    "address": "1512 Iris Blvd, Denver, CO 80211",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Thomas Petrowski",
-      "phone": "(854) 823-6867",
+      "phone": "(614) 555-3126",
       "relationship": "Partner"
     },
     "chiefComplaint": "Confusion, nausea, and unsteady gait",

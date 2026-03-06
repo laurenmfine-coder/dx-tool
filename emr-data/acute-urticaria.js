@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Sofia Gutierrez",
+  "patientHPI": "I started this new antibiotic this morning and about three hours later I noticed these red bumpy patches all over my arms and chest. They're really itchy and seem to be spreading - I've never had anything like this before and I'm worried it might be from the medicine.",
       "dob": "06/14/1992",
       "age": "34",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-816285",
       "language": "English",
       "race": "Multiracial",
-      "phone": "(732) 302-5768",
+      "phone": "(804) 555-7916",
       "email": "sofia.gutierrez@email.com",
-      "address": "2871 Oak St, Weston, FL 33390",
+      "address": "8769 Maple St, Baltimore, MD 21216",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Thomas Gutierrez",
-        "phone": "(811) 903-3567",
+        "phone": "(630) 555-2040",
         "relationship": "Spouse"
       }
     },
@@ -566,15 +567,15 @@ window.EMR_DATA = {
     "mrn": "MRN-816285",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(732) 302-5768",
+    "phone": "(505) 555-7252",
     "email": "sofia.gutierrez@email.com",
-    "address": "2871 Oak St, Weston, FL 33390",
+    "address": "4471 Clover St, Baltimore, MD 21210",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Thomas Gutierrez",
-      "phone": "(811) 903-3567",
+      "phone": "(630) 555-8668",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Widespread hives for 3 hours after starting new antibiotic",

@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Maria Elena Gutierrez",
+  "patientHPI": "I was having dinner with my family last night - we had fried chicken and mashed potatoes - and about an hour later I got this terrible pain right under my ribs on the right side. It felt like someone was stabbing me, and I started feeling really hot and shaky. The pain got so bad I couldn't even stand up straight, and when my husband tried to touch where it hurt, I nearly jumped through the ceiling.",
     "dob": "05/28/1978",
     "age": "48",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-870928",
     "language": "English",
     "race": "Asian",
-    "phone": "(436) 466-1929",
+    "phone": "(615) 555-9782",
     "email": "maria.elena gutierrez@email.com",
-    "address": "2854 Maple Blvd, Hollywood, FL 33315",
+    "address": "9521 Willow Way, Richmond, VA 23225",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Luis Elena Gutierrez",
-      "phone": "(541) 745-4010",
+      "phone": "(212) 555-9443",
       "relationship": "Spouse"
     },
     "chiefComplaint": "RUQ pain after fatty meal, fever, Murphy's sign positive",

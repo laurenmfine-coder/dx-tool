@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Miriam Goldstein",
+  "patientHPI": "I've been managing my heart rhythm problems pretty well - I can still do my housework and walk a few blocks without too much trouble. Lately though, I've been feeling more tired than usual and sometimes dizzy, especially when I stand up quickly.",
     "dob": "06/30/1948",
     "age": 77,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5200 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "5520 N Ocean Blvd, Fort Lauderdale, FL 33308",
+    "address": "6553 Clover St, San Antonio, TX 78207",
     "phone": "(954) 555-6148",
     "email": "m.goldstein48@email.com",
     "emergencyContact": {

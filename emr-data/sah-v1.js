@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jennifer Wu",
+  "patientHPI": "I was just sitting at my desk when suddenly I got hit with the most excruciating headache of my entire life - it felt like someone struck me with a baseball bat. It came on instantly and I've never experienced anything like this before, I'm terrified.",
     "dob": "09/16/1984",
     "age": "42",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-510850",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(298) 731-4142",
+    "phone": "(502) 555-2657",
     "email": "jennifer.wu@email.com",
-    "address": "4190 Oak Blvd, Davie, FL 33394",
+    "address": "8726 Clover St, Albuquerque, NM 87103",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Michelle Foster, MD",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Joseph Wu",
-      "phone": "(261) 730-7886",
+      "phone": "(617) 555-9843",
       "relationship": "Parent"
     },
     "chiefComplaint": "Worst headache of my life — sudden onset thunderclap",

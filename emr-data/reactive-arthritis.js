@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Campbell",
+  "patientHPI": "I've been having terrible diarrhea for three days now, started watery but now there's blood in it, and my stomach is cramping so bad I can barely stand up. I think it might be from that chicken sandwich I got from a food truck last week - it didn't taste quite right and my coworker got sick too.",
     "dob": "08/25/1995",
     "age": 29,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 2500 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "820 NE 20th Ave, Fort Lauderdale, FL 33304",
+    "address": "9468 Jasmine Way, Detroit, MI 48210",
     "phone": "(954) 555-6712",
     "email": "d.campbell95@email.com",
     "emergencyContact": {

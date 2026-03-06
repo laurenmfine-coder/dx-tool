@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jordan Mitchell",
+  "patientHPI": "When I was five years old, I got a rash all over my body while taking medicine for an ear infection - my mom thinks it was from the antibiotic but I'm not sure.",
       "dob": "10/08/2004",
       "age": "22",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-525336",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(284) 333-6362",
+      "phone": "(502) 555-2257",
       "email": "jordan.mitchell@email.com",
-      "address": "2531 Oak St, Weston, FL 33326",
+      "address": "9609 Cedar Blvd, Minneapolis, MN 55411",
       "insurance": "University student plan",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah Mitchell",
-        "phone": "(486) 774-6436",
+        "phone": "(702) 555-2479",
         "relationship": "Spouse"
       }
     },
@@ -683,15 +684,15 @@ window.EMR_DATA = {
     "mrn": "MRN-525336",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(284) 333-6362",
+    "phone": "(630) 555-9307",
     "email": "jordan.mitchell@email.com",
-    "address": "2531 Oak St, Weston, FL 33326",
+    "address": "3184 S Halsted St, Phoenix, AZ 85004",
     "insurance": "University student plan",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah Mitchell",
-      "phone": "(486) 774-6436",
+      "phone": "(505) 555-8581",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Not an ED case — but illustrates how false allergy labels cause downstream problems",

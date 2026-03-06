@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret Chen",
+  "patientHPI": "I stopped taking my steroid medication five days ago because I was feeling better, but now I feel terrible - I'm dizzy, nauseous, and have this awful stomach pain that won't go away. I think I made a mistake stopping it so suddenly.",
     "dob": "02/18/1972",
     "age": "54",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-564292",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(431) 697-2060",
+    "phone": "(513) 555-2816",
     "email": "margaret.chen@email.com",
-    "address": "949 Elm St, Sunrise, FL 33305",
+    "address": "8733 Cedar Blvd, Kansas City, MO 64120",
     "insurance": "Oscar Health",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Alejandro Chen",
-      "phone": "(927) 658-7431",
+      "phone": "(502) 555-8972",
       "relationship": "Partner"
     },
     "chiefComplaint": "Hypotension, nausea, abdominal pain — recently stopped prednisone abruptly",

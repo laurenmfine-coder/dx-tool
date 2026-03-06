@@ -9,6 +9,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Webb",
+  "patientHPI": "I've been having these episodes where I just can't catch my breath, and they're getting worse and happening more often - this is the fourth time this year. I used my breathing machine at home like always, but it's not helping like it used to, and I'm really scared because I feel like I'm suffocating.",
       "dob": "05/14/1983",
       "age": "41",
       "sex": "Male",
@@ -16,15 +17,15 @@ window.EMR_DATA = {
       "mrn": "RDX-2025-94891",
       "language": "English",
       "race": "Black or African American",
-      "phone": "(954) 882-4417",
+      "phone": "(513) 555-4803",
       "email": "marcus.webb@email.com",
-      "address": "3341 Palmetto Ave, Fort Lauderdale, FL 33312",
+      "address": "9858 Larkspur Ln, Chicago, IL 60623",
       "insurance": "Blue Cross Blue Shield PPO",
       "pcp": "Dr. Angela Torres, MD",
       "pharmacy": "Walgreens — Oakland Park Blvd",
       "emergencyContact": {
         "name": "Denise Webb",
-        "phone": "(954) 882-6203",
+        "phone": "(313) 555-6580",
         "relationship": "Wife"
       },
       "chiefComplaint": "Severe asthma exacerbation — 4th in 12 months, not responding to home nebulizer",

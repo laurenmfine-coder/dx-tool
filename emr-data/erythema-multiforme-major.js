@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Talia Brennan",
+  "patientHPI": "I have these strange circular rashes on my hands and arms that look like targets, and my mouth is full of painful sores that make it hard to eat or drink. I had a cold sore on my lip about ten days ago, and now this is happening again like it did before.",
       "dob": "01/13/2007",
       "age": "19",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-231416",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(487) 343-4508",
+      "phone": "(504) 555-4950",
       "email": "talia.brennan@email.com",
-      "address": "924 Elm Ave, Plantation, FL 33389",
+      "address": "5873 Hickory Rd, Minneapolis, MN 55409",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
       "emergencyContact": {
         "name": "Reginald Brennan",
-        "phone": "(805) 245-7746",
+        "phone": "(720) 555-2698",
         "relationship": "Spouse"
       }
     },
@@ -843,15 +844,15 @@ window.EMR_DATA = {
     "mrn": "MRN-231416",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(487) 343-4508",
+    "phone": "(803) 555-6447",
     "email": "talia.brennan@email.com",
-    "address": "924 Elm Ave, Plantation, FL 33389",
+    "address": "3087 Pine Ave, Minneapolis, MN 55401",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Reginald Brennan",
-      "phone": "(805) 245-7746",
+      "phone": "(317) 555-1726",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Target lesions on hands, forearms with oral mucosal erosions",

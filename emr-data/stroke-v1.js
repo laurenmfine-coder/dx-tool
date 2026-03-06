@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Robert Chen",
+  "patientHPI": "I was just sitting at breakfast when suddenly the left side of my body went weak and my words started coming out all slurred. My wife called 911 right away because she remembered when I had that mini-stroke before - I'm really scared this is something serious.",
     "dob": "02/20/1948",
     "age": "78",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-388204",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(419) 910-4845",
+    "phone": "(313) 555-1742",
     "email": "robert.chen@email.com",
-    "address": "5427 Pine Ln, Davie, FL 33396",
+    "address": "1145 Elm St, Memphis, TN 38114",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Karen Chen",
-      "phone": "(473) 929-4860",
+      "phone": "(513) 555-6644",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Sudden left-sided weakness and slurred speech",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jason Ngo",
+  "patientHPI": "Three days ago I started getting this really bad sore throat on just the right side, and now it hurts so much to swallow that I'm avoiding solid food completely. I've had a low fever around 100 degrees and my right ear is aching too - this is the fourth time this year I've had throat problems like this.",
     "dob": "10/12/1990",
     "age": 34,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 8100 W Broward Blvd, Plantation, FL",
     "language": "English",
     "race": "Asian/Vietnamese American",
-    "address": "7823 NW 5th Ct, Plantation, FL 33324",
+    "address": "9874 Larkspur Ln, Pittsburgh, PA 15212",
     "phone": "(954) 555-8164",
     "email": "j.ngo90@email.com",
     "emergencyContact": {

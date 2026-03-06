@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Priscilla Moreno",
+  "patientHPI": "I was prepping shrimp at work yesterday when my lips started swelling up really bad and I broke out in hives all over — I know I'm allergic to shrimp but I work at a seafood restaurant so I can't really avoid it. I used my EpiPen but it didn't seem to help much, so I had to use a second one before coming here.",
       "dob": "09/27/1984",
       "age": "42",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-315791",
       "language": "Spanish",
       "race": "Hispanic/Latina",
-      "phone": "(589) 528-7746",
+      "phone": "(630) 555-3353",
       "email": "priscilla.x@email.com",
-      "address": "6110 Oak St, Weston, FL 33326",
+      "address": "6171 Chestnut Rd, New Orleans, LA 70115",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(678) 493-3654",
+        "phone": "(503) 555-6231",
         "relationship": "Spouse"
       }
     },
@@ -844,15 +845,15 @@ window.EMR_DATA = {
     "mrn": "MRN-315791",
     "language": "Spanish",
     "race": "Hispanic/Latina",
-    "phone": "(589) 528-7746",
+    "phone": "(720) 555-6658",
     "email": "priscilla.x@email.com",
-    "address": "6110 Oak St, Weston, FL 33326",
+    "address": "7742 W Haddon Ave, Kansas City, MO 64109",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(678) 493-3654",
+      "phone": "(505) 555-3142",
       "relationship": "Spouse"
     },
     "chiefComplaint": "42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep — obese, epi dosing question",

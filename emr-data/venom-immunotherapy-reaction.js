@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Catherine Brennan",
+  "patientHPI": "I was at my allergy doctor's office getting my regular shot when I started having a really bad reaction with hives and trouble breathing, and even after they gave me the emergency shot I wasn't getting better so they sent me here to the hospital.",
       "dob": "04/27/1981",
       "age": "45",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-566746",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(938) 765-7945",
+      "phone": "(803) 555-4131",
       "email": "catherine.brennan@email.com",
-      "address": "7256 Oak St, Weston, FL 33351",
+      "address": "4576 Foxglove Dr, Pittsburgh, PA 15207",
       "insurance": "Humana Gold Plus",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Michael Brennan",
-        "phone": "(953) 902-9725",
+        "phone": "(502) 555-6848",
         "relationship": "Spouse"
       }
     },
@@ -653,15 +654,15 @@ window.EMR_DATA = {
     "mrn": "MRN-566746",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(938) 765-7945",
+    "phone": "(803) 555-1783",
     "email": "catherine.brennan@email.com",
-    "address": "7256 Oak St, Weston, FL 33351",
+    "address": "7305 Hollyhock Rd, New Orleans, LA 70114",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Michael Brennan",
-      "phone": "(953) 902-9725",
+      "phone": "(702) 555-6438",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection",

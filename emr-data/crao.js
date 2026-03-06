@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dolores Eriksen",
+  "patientHPI": "I woke up this morning and I can't see anything out of my left eye - it's like someone just turned off the lights on that side. It happened suddenly and completely, and I'm terrified because I've never had anything like this happen before.",
     "dob": "07/10/1976",
     "age": "50",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-310304",
     "language": "English",
     "race": "American Indian",
-    "phone": "(980) 902-1122",
+    "phone": "(630) 555-7172",
     "email": "dolores.eriksen@email.com",
-    "address": "3011 Cedar Ln, Fort Lauderdale, FL 33301",
+    "address": "3063 Poplar Ave, Minneapolis, MN 55401",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Amy Patel, MD",
     "pharmacy": "Publix Pharmacy — Broward Blvd",
     "emergencyContact": {
       "name": "Priya Baker",
-      "phone": "(319) 159-6372",
+      "phone": "(317) 555-3658",
       "relationship": "Sibling"
     },
     "chiefComplaint": "I can't see out of my left eye Left eye — complete",

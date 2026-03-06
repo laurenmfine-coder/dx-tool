@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dennis Crawford",
+  "patientHPI": "I was just sitting at home when I felt my heart racing really fast and then I blacked out completely - when I came to my family was standing over me asking if I was okay.",
     "dob": "06/15/1964",
     "age": "62",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-384673",
     "language": "English",
     "race": "Asian",
-    "phone": "(857) 832-2007",
+    "phone": "(404) 555-2402",
     "email": "dennis.crawford@email.com",
-    "address": "6535 Cedar Ln, Davie, FL 33314",
+    "address": "1209 N Western Ave, Phoenix, AZ 85013",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
     "pharmacy": "Rite Aid \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Gloria Carter",
-      "phone": "(999) 796-3580",
+      "phone": "(617) 555-6908",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",

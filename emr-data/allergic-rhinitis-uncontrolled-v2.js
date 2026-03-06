@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Samantha O'Brien",
+  "patientHPI": "My nose has been completely stuffed up for months and I'm sneezing constantly with watery, itchy eyes that are affecting my daily activities.",
       "dob": "04/04/1995",
       "age": "31",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-162892",
       "language": "English",
       "race": "White",
-      "phone": "(516) 836-9050",
+      "phone": "(614) 555-7184",
       "email": "samantha.obrien@email.com",
-      "address": "1855 Oak St, Weston, FL 33326",
+      "address": "2043 Iris Blvd, Phoenix, AZ 85004",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael O'Brien",
-        "phone": "(698) 282-7107",
+        "phone": "(505) 555-2314",
         "relationship": "Spouse"
       }
     },
@@ -794,15 +795,15 @@ window.EMR_DATA = {
     "mrn": "MRN-162892",
     "language": "English",
     "race": "White",
-    "phone": "(516) 836-9050",
+    "phone": "(704) 555-9835",
     "email": "samantha.obrien@email.com",
-    "address": "1855 Oak St, Weston, FL 33326",
+    "address": "3749 Oak Ave, Richmond, VA 23226",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael O'Brien",
-      "phone": "(698) 282-7107",
+      "phone": "(317) 555-6697",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Not a typical ED presentation — included for completeness",

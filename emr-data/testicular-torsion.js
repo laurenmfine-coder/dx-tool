@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Justin Mercer",
+  "patientHPI": "I woke up this morning with the worst pain I've ever felt down there on my left side - it came on suddenly and it's so bad I feel sick to my stomach. The pain is sharp and constant, and I can barely walk because any movement makes it worse.",
     "dob": "06/15/2010",
     "age": "16",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-615645",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(378) 795-2155",
+    "phone": "(415) 555-1939",
     "email": "justin.mercer@email.com",
-    "address": "3182 Palm Way, Boca Raton, FL 33431",
+    "address": "6053 Poplar Ave, Chicago, IL 60612",
     "insurance": "Cigna",
     "pcp": "Dr. James Wilson, MD",
     "pharmacy": "CVS Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "Dorothy Mitchell",
-      "phone": "(724) 629-8637",
+      "phone": "(313) 555-7655",
       "relationship": "Partner"
     },
     "chiefComplaint": "My... down there hurts really bad Left testicle \u2014 sudden onset",

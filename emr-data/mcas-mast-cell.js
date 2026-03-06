@@ -10,14 +10,15 @@ window.EMR_DATA = {
       "name": "Sofia Reyes", "dob": "11/03/1989", "age": "35",
       "sex": "Female", "pronouns": "she/her", "mrn": "RDX-2025-95780",
       "language": "English/Spanish", "race": "Hispanic or Latino",
-      "phone": "(305) 774-2918", "email": "sofia.reyes@email.com",
-      "address": "2241 SW 8th St, Miami, FL 33135",
+      "phone": "(804) 555-4697", "email": "sofia.reyes@email.com",
+      "address": "6332 W Haddon Ave, Richmond, VA 23230",
       "insurance": "Florida Medicaid / Sunshine Health",
       "pcp": "Dr. Maria Delgado, MD",
       "pharmacy": "Sedano's Pharmacy — Calle Ocho",
-      "emergencyContact": {"name": "Carlos Reyes", "phone": "(305) 774-3301", "relationship": "Husband"},
+      "emergencyContact": {"name": "Carlos Reyes", "phone": "(803) 555-9561", "relationship": "Husband"},
       "chiefComplaint": "Recurrent episodes of flushing, hives, abdominal pain, and near-syncope — 5th episode in 8 months",
       "diagnosis": "Mast cell activation syndrome (MCAS) — confirmed by elevated acute tryptase and symptom criteria"
+      "patientHPI": "I keep having these really scary episodes where my whole body gets hot and flushed, I break out in itchy bumps all over, my stomach cramps up terribly, and I feel like I'm going to pass out. This is the fifth time it's happened in eight months and I'm getting really worried because they seem to be getting worse.",
     },
     "allergies": [
       {"allergen": "Aspirin/NSAIDs", "reaction": "Flushing and GI cramping (triggers episodes)", "severity": "Moderate", "type": "Drug — likely mast cell trigger"},

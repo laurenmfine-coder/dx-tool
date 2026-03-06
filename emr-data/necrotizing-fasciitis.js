@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Angela Simmons",
+  "patientHPI": "I scratched a mosquito bite on my left calf about five days ago, and now the whole area is red, swollen, and really painful. It started small but has been getting worse each day, and I've had a low fever at home. My leg with the swelling issue seems to get infected pretty easily, and this feels different - more serious somehow.",
     "dob": "02/16/1970",
     "age": 55,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4401 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "Black (African American)",
-    "address": "3218 N 29th Ave, Hollywood, FL 33020",
+    "address": "1580 Chestnut Rd, Baltimore, MD 21214",
     "phone": "(954) 555-7134",
     "email": "a.simmons70@email.com",
     "emergencyContact": {

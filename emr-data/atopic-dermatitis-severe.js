@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Zara Thompson",
+  "patientHPI": "My eczema has been terrible for months, and now the skin on my arm where I've been scratching is really hot, swollen, and spreading red streaks. It hurts to touch and feels warm, which is different from my usual itchy patches.",
       "dob": "09/18/2010",
       "age": "16",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-772729",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(589) 827-7610",
+      "phone": "(619) 555-2524",
       "email": "zara.thompson@email.com",
-      "address": "2788 Oak St, Weston, FL 33336",
+      "address": "6453 Dogwood Ln, Memphis, TN 38122",
       "insurance": "Humana Gold Plus",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Michael Thompson",
-        "phone": "(327) 597-3298",
+        "phone": "(630) 555-6315",
         "relationship": "Parent"
       }
     },
@@ -906,15 +907,15 @@ window.EMR_DATA = {
     "mrn": "MRN-772729",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(589) 827-7610",
+    "phone": "(505) 555-1202",
     "email": "zara.thompson@email.com",
-    "address": "2788 Oak St, Weston, FL 33336",
+    "address": "2879 Poplar Ave, Milwaukee, WI 53206",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Michael Thompson",
-      "phone": "(327) 597-3298",
+      "phone": "(502) 555-7779",
       "relationship": "Parent"
     },
     "chiefComplaint": "Widespread eczema refractory to topical steroids, affecting sleep and school performance",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Nadine Charles",
+  "patientHPI": "I've been feeling so exhausted lately, and even walking to get my mail makes me feel like I can't catch my breath. About a month ago I could still walk down to the corner store, but now I get winded just going from my bedroom to the kitchen. I've been trying to take those iron pills my doctor gave me, but they make my stomach hurt and I get all backed up, so I haven't been taking them regularly.",
     "dob": "09/30/1950",
     "age": 74,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 5780 Stirling Rd, Hollywood, FL",
     "language": "English, Haitian Creole",
     "race": "Black/Haitian American",
-    "address": "6312 Fillmore St, Hollywood, FL 33024",
+    "address": "5377 Pine Ave, Milwaukee, WI 53206",
     "phone": "(954) 555-8734",
     "email": "n.charles50@email.com",
     "emergencyContact": {

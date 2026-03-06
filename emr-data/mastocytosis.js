@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Renee Carmichael",
+  "patientHPI": "This is my third time having a severe allergic reaction in the last year and a half, but we still can't figure out what's causing it - there's no pattern or trigger we can identify.",
       "dob": "03/25/1981",
       "age": "45",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-589153",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(542) 825-8000",
+      "phone": "(504) 555-8801",
       "email": "renee.carmichael@email.com",
-      "address": "9015 Oak St, Weston, FL 33345",
+      "address": "5019 Birch Ln, Chicago, IL 60629",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "David Carmichael",
-        "phone": "(997) 571-6688",
+        "phone": "(314) 555-8178",
         "relationship": "Spouse"
       }
     },
@@ -903,15 +904,15 @@ window.EMR_DATA = {
     "mrn": "MRN-589153",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(542) 825-8000",
+    "phone": "(720) 555-8412",
     "email": "renee.carmichael@email.com",
-    "address": "9015 Oak St, Weston, FL 33345",
+    "address": "1891 Poplar Ave, Kansas City, MO 64124",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "David Carmichael",
-      "phone": "(997) 571-6688",
+      "phone": "(503) 555-2100",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Recurrent flushing, syncope, and anaphylaxis without identifiable trigger",

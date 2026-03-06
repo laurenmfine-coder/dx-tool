@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Desmond",
+  "patientHPI": "I've been getting this tight feeling in my chest whenever I walk upstairs or do yard work - it's like someone is squeezing me with a belt. It started about two weeks ago and seems to be getting worse. I have to stop and catch my breath, and sometimes my left arm feels heavy too.",
     "dob": "10/04/1962",
     "age": "64",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-557840",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(890) 567-3280",
+    "phone": "(630) 555-6119",
     "email": "harold.desmond@email.com",
-    "address": "6888 Elm Ave, Pembroke Pines, FL 33357",
+    "address": "9569 Willow Way, Denver, CO 80205",
     "insurance": "Tricare Standard",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Michelle Desmond",
-      "phone": "(621) 923-8086",
+      "phone": "(504) 555-2697",
       "relationship": "Partner"
     },
     "chiefComplaint": "Chest tightness with exertion, new onset",

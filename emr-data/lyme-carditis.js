@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Connor Walsh",
+  "patientHPI": "I've been feeling really tired and dizzy this past week, and there's this big red rash spreading on my right thigh. I went hiking in Connecticut about three weeks ago and got what I thought was just a bug bite, but now I'm wondering if it's connected to how lousy I've been feeling.",
     "dob": "04/08/1997",
     "age": 28,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4850 S Pine Island Rd, Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "3580 SW 62nd Ave, Riverside, FL 33100",
+    "address": "6647 Maple St, Baltimore, MD 21213",
     "phone": "(954) 555-7428",
     "email": "c.walsh97@email.com",
     "emergencyContact": {

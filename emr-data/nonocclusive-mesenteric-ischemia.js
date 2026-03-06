@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Edna Marshall",
+  "patientHPI": "My daughter brought me in because I've been so tired and confused this past week - I just can't seem to think straight. I haven't been eating much, maybe half of what I usually do, and I've lost seven pounds this month without trying. I just don't feel like myself.",
     "dob": "03/15/1944",
     "age": 80,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5601 W Sunrise Blvd, Plantation, FL",
     "language": "English",
     "race": "African American",
-    "address": "2140 NW 56th Ave, Lauderhill, FL 33313",
+    "address": "4769 W Haddon Ave, Kansas City, MO 64124",
     "phone": "(954) 555-1865",
     "email": "e.marshall.family@email.com",
     "emergencyContact": {

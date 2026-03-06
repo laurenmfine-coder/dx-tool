@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Elijah Crawford",
+  "patientHPI": "My son's skin has been really bad lately and now he has a fever too. His usual red, itchy patches are much worse and some spots are oozing this yellowish stuff, especially in his elbow creases and around his neck. I've been trying so hard to keep up with all his creams but nothing seems to be helping anymore.",
       "dob": "07/06/2022",
       "age": "4",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-534240",
       "language": "English",
       "race": "Multiracial",
-      "phone": "(963) 948-1688",
+      "phone": "(614) 555-5949",
       "email": "elijah.crawford@email.com",
-      "address": "8290 Oak St, Weston, FL 33326",
+      "address": "9470 Peachtree Rd, Richmond, VA 23219",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah Crawford",
-        "phone": "(766) 806-3973",
+        "phone": "(412) 555-7302",
         "relationship": "Parent"
       }
     },
@@ -1018,15 +1019,15 @@ window.EMR_DATA = {
     "mrn": "MRN-534240",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(963) 948-1688",
+    "phone": "(615) 555-2747",
     "email": "elijah.crawford@email.com",
-    "address": "8290 Oak St, Weston, FL 33326",
+    "address": "6584 Elm St, Albuquerque, NM 87108",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah Crawford",
-      "phone": "(766) 806-3973",
+      "phone": "(414) 555-7248",
       "relationship": "Parent"
     },
     "chiefComplaint": "4yo with eczema flare and fever — impetiginized eczema vs cellulitis",

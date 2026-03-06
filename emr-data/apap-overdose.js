@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Megan Fisher",
+  "patientHPI": "I took a whole bottle of Tylenol about eight hours ago because I was feeling really overwhelmed after my boyfriend and I broke up last week. I know it was a stupid thing to do, and now I'm worried about what it might do to me, so I decided to come in to get checked out.",
     "dob": "01/04/1999",
     "age": "27",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-786949",
     "language": "English",
     "race": "Asian",
-    "phone": "(544) 613-1097",
+    "phone": "(414) 555-5934",
     "email": "megan.fisher@email.com",
-    "address": "9358 Cedar St, Davie, FL 33315",
+    "address": "4006 N Kedzie Blvd, Memphis, TN 38104",
     "insurance": "Oscar Health",
     "pcp": "Dr. Michelle Foster, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Reginald Fisher",
-      "phone": "(466) 789-7875",
+      "phone": "(314) 555-1782",
       "relationship": "Partner"
     },
     "chiefComplaint": "Intentional ingestion of approximately 30g of acetaminophen 8 hours ago",

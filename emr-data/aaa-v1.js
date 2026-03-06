@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Jensen",
+  "patientHPI": "I was just sitting at home when this horrible tearing pain hit me right in my belly and shot straight through to my back - I've never felt anything like it, it's like someone is ripping me apart from the inside and I can barely stand it.",
     "dob": "06/15/1954",
     "age": "72",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-957460",
     "language": "English",
     "race": "White",
-    "phone": "(753) 161-1824",
+    "phone": "(513) 555-3529",
     "email": "harold.jensen@email.com",
-    "address": "5077 Elm Blvd, Fort Lauderdale, FL 33301",
+    "address": "4442 Iris Blvd, Memphis, TN 38111",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
     "pharmacy": "Walgreens \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Gloria Perez",
-      "phone": "(252) 893-6944",
+      "phone": "(313) 555-8692",
       "relationship": "Parent"
     },
     "chiefComplaint": "Tearing Belly and back, feels like it goes straight through",

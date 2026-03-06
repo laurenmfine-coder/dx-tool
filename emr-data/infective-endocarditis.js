@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ryan Kowalski",
+  "patientHPI": "I've been running a fever for three weeks now that won't go away, even after taking antibiotics my doctor gave me. I'm feeling weak and tired all the time, and sometimes I get these weird racing heartbeats. I know I haven't been taking the best care of myself lately, and I'm worried something serious is going on.",
     "dob": "09/05/1981",
     "age": "45",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-179740",
     "language": "English",
     "race": "Asian",
-    "phone": "(783) 490-8128",
+    "phone": "(804) 555-8692",
     "email": "ryan.kowalski@email.com",
-    "address": "9852 Willow Dr, Davie, FL 33338",
+    "address": "3428 Jasmine Way, Detroit, MI 48227",
     "insurance": "Medicaid",
     "pcp": "Dr. Michelle Foster, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Susan Kowalski",
-      "phone": "(642) 906-5736",
+      "phone": "(803) 555-6246",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Persistent fever for 3 weeks despite oral antibiotics, new murmur",

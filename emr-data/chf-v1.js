@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "William Turner",
+  "patientHPI": "I just can't breathe when I try to lay down flat anymore - it's not pain anywhere specific, I just feel like I'm suffocating. I have to prop myself up with a bunch of pillows just to get any rest at all.",
     "dob": "06/15/1958",
     "age": "68",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-763589",
     "language": "English",
     "race": "Asian",
-    "phone": "(205) 412-2252",
+    "phone": "(404) 555-6286",
     "email": "william.turner@email.com",
-    "address": "9856 Oak St, Hollywood, FL 33020",
+    "address": "5769 Peachtree Rd, Memphis, TN 38108",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
     "pharmacy": "CVS Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Michael Cook",
-      "phone": "(691) 177-7917",
+      "phone": "(713) 555-4694",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",

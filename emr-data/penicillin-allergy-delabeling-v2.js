@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Keisha Williams",
+  "patientHPI": "I'm pregnant and due in about six weeks, but I'm worried because I think I might be allergic to penicillin and my doctor wants to make sure before delivery in case I need antibiotics.",
       "dob": "03/12/1988",
       "age": "38",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-980607",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(587) 824-1939",
+      "phone": "(317) 555-4791",
       "email": "keisha.williams@email.com",
-      "address": "5141 Oak St, Weston, FL 33326",
+      "address": "6214 S Halsted St, Denver, CO 80201",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Michael Williams",
-        "phone": "(469) 827-5325",
+        "phone": "(313) 555-3474",
         "relationship": "Spouse"
       }
     },
@@ -618,15 +619,15 @@ window.EMR_DATA = {
     "mrn": "MRN-980607",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(587) 824-1939",
+    "phone": "(212) 555-4583",
     "email": "keisha.williams@email.com",
-    "address": "5141 Oak St, Weston, FL 33326",
+    "address": "209 Jasmine Way, Chicago, IL 60601",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Michael Williams",
-      "phone": "(469) 827-5325",
+      "phone": "(617) 555-8471",
       "relationship": "Spouse"
     },
     "chiefComplaint": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation — GBS positive",

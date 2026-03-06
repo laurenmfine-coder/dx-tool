@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Destiny Carter",
+  "patientHPI": "I'm having a really bad episode with my breathing today - I can barely get the words out without stopping to gasp for air, and there's this terrible wheezing sound when I try to breathe. My usual inhaler isn't helping at all, and I feel like I'm not getting enough oxygen no matter how hard I try to breathe.",
     "dob": "11/13/2006",
     "age": "20",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-170401",
     "language": "English",
     "race": "White",
-    "phone": "(897) 969-2159",
+    "phone": "(504) 555-5419",
     "email": "destiny.carter@email.com",
-    "address": "7272 Maple St, Weston, FL 33356",
+    "address": "1530 W Haddon Ave, San Antonio, TX 78211",
     "insurance": "Medicaid",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Richard Carter",
-      "phone": "(925) 620-3403",
+      "phone": "(314) 555-3170",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Acute wheezing and dyspnea, unable to complete sentences",

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Patricia Nguyen",
+  "patientHPI": "Within a few minutes of getting the dye for my CT scan, I broke out in hives all over my body and my face started swelling up - I was getting scared because it was hard to breathe.",
       "dob": "01/09/1961",
       "age": "65",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-851160",
       "language": "Vietnamese",
       "race": "Asian",
-      "phone": "(947) 863-6764",
+      "phone": "(404) 555-8292",
       "email": "patricia.nguyen@email.com",
-      "address": "9479 Oak St, Weston, FL 33326",
+      "address": "9111 Juniper Dr, Columbus, OH 43203",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Nguyen",
-        "phone": "(412) 514-3687",
+        "phone": "(313) 555-6236",
         "relationship": "Spouse"
       }
     },
@@ -809,15 +810,15 @@ window.EMR_DATA = {
     "mrn": "MRN-851160",
     "language": "Vietnamese",
     "race": "Asian",
-    "phone": "(947) 863-6764",
+    "phone": "(704) 555-6692",
     "email": "patricia.nguyen@email.com",
-    "address": "9479 Oak St, Weston, FL 33326",
+    "address": "6023 Birch Ln, Indianapolis, IN 46203",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Nguyen",
-      "phone": "(412) 514-3687",
+      "phone": "(713) 555-2063",
       "relationship": "Spouse"
     },
     "chiefComplaint": "65yo with anaphylactoid reaction to IV contrast during CT PE study — no premedication given despite documented prior reaction",

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Sophia Martinez-Lee",
+  "patientHPI": "I was at swim practice and about an hour and a half after taking my daily peanut treatment dose, I started feeling my throat get tight during warm-ups. Then I broke out in hives all over and got bad stomach cramps, so my coach called an ambulance and they gave me a shot.",
       "dob": "07/11/2012",
       "age": "14",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-388021",
       "language": "English",
       "race": "Multiracial",
-      "phone": "(880) 922-9120",
+      "phone": "(803) 555-6432",
       "email": "sophia.martinezlee@email.com",
-      "address": "6825 Oak St, Weston, FL 33326",
+      "address": "3737 Magnolia Blvd, Minneapolis, MN 55407",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Martinez-Lee",
-        "phone": "(519) 542-4157",
+        "phone": "(804) 555-8052",
         "relationship": "Parent"
       }
     },
@@ -769,15 +770,15 @@ window.EMR_DATA = {
     "mrn": "MRN-388021",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(880) 922-9120",
+    "phone": "(314) 555-1172",
     "email": "sophia.martinezlee@email.com",
-    "address": "6825 Oak St, Weston, FL 33326",
+    "address": "6508 N Western Ave, Milwaukee, WI 53207",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Martinez-Lee",
-      "phone": "(519) 542-4157",
+      "phone": "(314) 555-5239",
       "relationship": "Parent"
     },
     "chiefComplaint": "14yo on peanut OIT who exercised within 2h of dose — developed throat tightness, hives, abdominal pain",

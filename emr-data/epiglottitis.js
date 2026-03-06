@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mason Williams",
+  "patientHPI": "My little boy can't breathe right and keeps making scary sounds when he tries to swallow. He's been drooling a lot because it hurts too much to swallow, and he has a fever that started this morning. He won't lie down and just wants to sit up leaning forward.",
     "dob": "06/15/2022",
     "age": "4",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-339415",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(437) 777-7829",
+    "phone": "(720) 555-8749",
     "email": "mason.williams@email.com",
-    "address": "1115 Willow Ct, Boca Raton, FL 33431",
+    "address": "6425 Willow Way, Denver, CO 80201",
     "insurance": "Cigna",
     "pcp": "Dr. James Wilson, MD",
     "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "Kenneth Parker",
-      "phone": "(420) 467-2334",
+      "phone": "(713) 555-7246",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "My child can't breathe right Throat/neck",

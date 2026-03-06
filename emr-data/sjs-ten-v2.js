@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Aisha Okonkwo",
+  "patientHPI": "About three weeks ago I started taking this new seizure medicine, and now I have this terrible rash that started as red spots but is getting much worse - my skin is actually peeling off in sheets and my mouth is full of painful sores that are bleeding.",
       "dob": "09/14/1998",
       "age": "28",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-491251",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(428) 831-8483",
+      "phone": "(803) 555-3363",
       "email": "aisha.okonkwo@email.com",
-      "address": "6313 Oak St, Weston, FL 33326",
+      "address": "737 Clover St, Denver, CO 80211",
       "insurance": "Aetna HMO",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Okonkwo",
-        "phone": "(776) 434-9631",
+        "phone": "(412) 555-9341",
         "relationship": "Spouse"
       }
     },
@@ -907,15 +908,15 @@ window.EMR_DATA = {
     "mrn": "MRN-491251",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(428) 831-8483",
+    "phone": "(505) 555-9193",
     "email": "aisha.okonkwo@email.com",
-    "address": "6313 Oak St, Weston, FL 33326",
+    "address": "7587 N Western Ave, Milwaukee, WI 53207",
     "insurance": "Aetna HMO",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Okonkwo",
-      "phone": "(776) 434-9631",
+      "phone": "(312) 555-1742",
       "relationship": "Spouse"
     },
     "chiefComplaint": "28yo with 30% BSA skin detachment, oral erosions, and eye involvement — 3 weeks after starting lamotrigine (titrated too rapidly)",

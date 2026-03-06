@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "James O'Connell",
+  "patientHPI": "I keep breaking out in these huge welts all over my body almost every day for the past four months, and sometimes my lips swell up too. I've tried different allergy medicines but nothing seems to work, and I notice it gets worse when I'm wearing my work gear or when I'm stressed about these constant breakouts.",
       "dob": "01/28/1971",
       "age": "55",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-886266",
       "language": "English",
       "race": "White",
-      "phone": "(770) 310-7768",
+      "phone": "(702) 555-8245",
       "email": "james.oconnell@email.com",
-      "address": "4713 Oak St, Weston, FL 33326",
+      "address": "1594 Jasmine Way, New Orleans, LA 70117",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah O'Connell",
-        "phone": "(405) 666-9626",
+        "phone": "(415) 555-3973",
         "relationship": "Spouse"
       }
     },
@@ -909,15 +910,15 @@ window.EMR_DATA = {
     "mrn": "MRN-886266",
     "language": "English",
     "race": "White",
-    "phone": "(770) 310-7768",
+    "phone": "(620) 555-8141",
     "email": "james.oconnell@email.com",
-    "address": "4713 Oak St, Weston, FL 33326",
+    "address": "1813 Clover St, Pittsburgh, PA 15208",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah O'Connell",
-      "phone": "(405) 666-9626",
+      "phone": "(702) 555-9056",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Severe urticaria flare with angioedema — 3rd ED visit this month, feels like he's going crazy",

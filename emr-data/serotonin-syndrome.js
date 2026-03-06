@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andrew Chen",
+  "patientHPI": "I started this new medication for my depression about a week ago, and now I'm feeling really jittery and sweaty with muscle twitches, and I can't seem to sit still.",
     "dob": "08/10/1986",
     "age": "40",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-776119",
     "language": "English",
     "race": "Asian",
-    "phone": "(343) 544-9945",
+    "phone": "(720) 555-8055",
     "email": "andrew.chen@email.com",
-    "address": "2697 Maple Blvd, Sunrise, FL 33387",
+    "address": "6329 Magnolia Blvd, Phoenix, AZ 85013",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Mei Chen",
-      "phone": "(719) 329-2518",
+      "phone": "(404) 555-3116",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Agitation, diaphoresis, tremor, clonus — recently started new antidepressant",

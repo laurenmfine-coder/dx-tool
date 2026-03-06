@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ananya Patel",
+  "patientHPI": "Three weeks ago I started a new seizure medication and now I have this terrible blistering rash all over my body - my skin is peeling off in large areas and I have painful sores in my mouth that make it hard to eat or drink.",
       "dob": "05/11/2001",
       "age": "25",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-446725",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(570) 889-7421",
+      "phone": "(415) 555-2137",
       "email": "ananya.patel@email.com",
-      "address": "7992 Elm Ln, Pembroke Pines, FL 33306",
+      "address": "5525 Birch Ln, Louisville, KY 40204",
       "insurance": "Oscar Health",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Alejandro Patel",
-        "phone": "(965) 425-8894",
+        "phone": "(803) 555-5573",
         "relationship": "Parent"
       }
     },
@@ -791,15 +792,15 @@ window.EMR_DATA = {
     "mrn": "MRN-446725",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(570) 889-7421",
+    "phone": "(504) 555-9346",
     "email": "ananya.patel@email.com",
-    "address": "7992 Elm Ln, Pembroke Pines, FL 33306",
+    "address": "9613 Cottonwood Ave, Detroit, MI 48202",
     "insurance": "Oscar Health",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Alejandro Patel",
-      "phone": "(965) 425-8894",
+      "phone": "(505) 555-9785",
       "relationship": "Parent"
     },
     "chiefComplaint": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",

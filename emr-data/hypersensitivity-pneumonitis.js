@@ -9,13 +9,14 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Eleanor Vasquez",
+  "patientHPI": "I've been getting more and more short of breath when I walk upstairs or do things around the house, and it's been going on for over a year now. I also have this dry cough that won't go away, and I've lost about 12 pounds without trying. I love my birds - I have over 40 parakeets that I take care of every day, and they bring me so much joy.",
       "dob": "07/22/1957",
       "age": "67",
       "sex": "Female",
       "pronouns": "she/her",
       "mrn": "RDX-2025-95447",
-      "phone": "(352) 881-4402",
-      "address": "14 Aviary Lane, Ocala, FL 34471",
+      "phone": "(619) 555-1224",
+      "address": "9148 Magnolia Blvd, Baltimore, MD 21214",
       "insurance": "Medicare + AARP Supplement",
       "pcp": "Dr. Marcus Hill, MD",
       "chiefComplaint": "Progressive dyspnea on exertion × 14 months, dry cough, 12 lb weight loss. Owns 40+ birds (parakeets, cockatiels, African Greys) for 25 years.",

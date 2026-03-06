@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Natasha Volkov",
+  "patientHPI": "My right knee started getting really hot and puffy yesterday out of nowhere - it's so swollen I can barely bend it and it feels like it's on fire when I touch it.",
     "dob": "10/10/1956",
     "age": "70",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-461025",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(696) 297-6815",
+    "phone": "(412) 555-9786",
     "email": "natasha.volkov@email.com",
-    "address": "2486 Maple Ave, Hollywood, FL 33020",
+    "address": "7012 N Kedzie Blvd, Kansas City, MO 64108",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Amy Patel, MD",
     "pharmacy": "Walmart Pharmacy — Federal Hwy",
     "emergencyContact": {
       "name": "Sarah Williams",
-      "phone": "(626) 799-3921",
+      "phone": "(614) 555-3296",
       "relationship": "Partner"
     },
     "chiefComplaint": "My knee is hot and swollen Right knee — acute monoarticular",

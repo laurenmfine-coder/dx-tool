@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jordan Whitfield",
+  "patientHPI": "My son keeps getting these infections that other kids just don't seem to get. He had a really bad infection in his liver when he was two that needed surgery, then pneumonia that took forever to clear up, and he's had swollen lymph nodes multiple times that get infected and need antibiotics.",
       "dob": "05/22/2020",
       "age": "5",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-714039",
       "language": "English",
       "race": "Black or African American",
-      "phone": "(407) 556-8821",
+      "phone": "(720) 555-6531",
       "email": "whitfield.family@email.com",
-      "address": "3310 Holden Ave, Orlando, FL 32839",
+      "address": "564 Cottonwood Ave, Indianapolis, IN 46222",
       "insurance": "Medicaid",
       "pcp": "Dr. Terrence Hill, MD (Pediatrics)",
       "pharmacy": "Walmart Pharmacy — Holden Ave",
       "emergencyContact": {
         "name": "Denise Whitfield",
-        "phone": "(407) 556-8820",
+        "phone": "(620) 555-1674",
         "relationship": "Mother"
       }
     },

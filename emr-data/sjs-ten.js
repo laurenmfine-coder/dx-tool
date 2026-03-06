@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Brown",
+  "patientHPI": "Two weeks ago I started taking a new gout medication, and now I have this awful rash that's spreading and my skin is coming off in places - I also have a fever and feel really sick overall.",
       "dob": "09/12/1970",
       "age": "56",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-941221",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(957) 336-1533",
+      "phone": "(313) 555-4044",
       "email": "keisha.brown@email.com",
-      "address": "7422 Oak Dr, Pembroke Pines, FL 33360",
+      "address": "9433 Cedar Blvd, Albuquerque, NM 87102",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Michelle Foster, MD",
       "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
       "emergencyContact": {
         "name": "Donna Brown",
-        "phone": "(845) 698-5963",
+        "phone": "(313) 555-2113",
         "relationship": "Spouse"
       }
     },
@@ -969,15 +970,15 @@ window.EMR_DATA = {
     "mrn": "MRN-941221",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(957) 336-1533",
+    "phone": "(704) 555-4853",
     "email": "keisha.brown@email.com",
-    "address": "7422 Oak Dr, Pembroke Pines, FL 33360",
+    "address": "6969 Larkspur Ln, Louisville, KY 40205",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michelle Foster, MD",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Donna Brown",
-      "phone": "(845) 698-5963",
+      "phone": "(505) 555-2964",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Progressive painful rash, skin sloughing, fever — started allopurinol 2 weeks ago",

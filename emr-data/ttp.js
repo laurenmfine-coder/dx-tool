@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Amanda Lewis",
+  "patientHPI": "I've been feeling really confused and out of it for the past couple days, and this morning I noticed these little red spots all over my arms and legs. I also have a fever and when I went to the bathroom, my urine looked really dark, almost like tea. I was completely healthy before this started, so I'm really scared about what's happening to me.",
     "dob": "01/09/1993",
     "age": "33",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-574996",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(424) 238-5217",
+    "phone": "(704) 555-6085",
     "email": "amanda.lewis@email.com",
-    "address": "6563 Palm Dr, Weston, FL 33338",
+    "address": "2514 Dogwood Ln, Denver, CO 80212",
     "insurance": "Cigna PPO",
     "pcp": "Dr. David Kim, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Nathan Lewis",
-      "phone": "(298) 924-8586",
+      "phone": "(414) 555-4262",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Confusion, petechiae, fever, dark urine — found to have severe thrombocytopenia",

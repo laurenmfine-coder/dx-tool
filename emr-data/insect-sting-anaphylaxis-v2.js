@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Miguel Herrera-Santos",
+  "patientHPI": "I was trimming hedges at work yesterday when a wasp got me on my arm - I've been stung plenty of times before and it's never been a big deal, just some swelling where it happened. But this time was different - within minutes my whole body broke out in hives and my throat started feeling tight, like I couldn't swallow right. I got really dizzy and thought I might pass out, which has never happened before with bee stings.",
       "dob": "05/14/1981",
       "age": "45",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-522413",
       "language": "Spanish",
       "race": "Hispanic/Latino",
-      "phone": "(983) 885-9160",
+      "phone": "(415) 555-3858",
       "email": "miguel.x@email.com",
-      "address": "321 Oak St, Weston, FL 33326",
+      "address": "9747 Hickory Rd, Louisville, KY 40202",
       "insurance": "Uninsured — Self-Pay",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(355) 325-9397",
+        "phone": "(314) 555-1422",
         "relationship": "Spouse"
       }
     },
@@ -816,15 +817,15 @@ window.EMR_DATA = {
     "mrn": "MRN-522413",
     "language": "Spanish",
     "race": "Hispanic/Latino",
-    "phone": "(983) 885-9160",
+    "phone": "(317) 555-1243",
     "email": "miguel.x@email.com",
-    "address": "321 Oak St, Weston, FL 33326",
+    "address": "2177 Birch Ln, Memphis, TN 38114",
     "insurance": "Uninsured — Self-Pay",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(355) 325-9397",
+      "phone": "(504) 555-4898",
       "relationship": "Spouse"
     },
     "chiefComplaint": "45yo landscape worker — first systemic reaction to wasp sting, outdoor occupation makes avoidance impossible",

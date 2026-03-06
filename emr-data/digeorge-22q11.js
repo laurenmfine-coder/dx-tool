@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Sophia Reyes",
+  "patientHPI": "My baby has been having some trouble feeding and seems to have problems with her breathing sometimes. She also had what looked like a seizure episode yesterday which really frightened us, and I noticed her mouth looks a little different than other babies.",
       "dob": "02/01/2026",
       "age": "3 weeks",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-603921",
       "language": "Spanish / English",
       "race": "Hispanic or Latino",
-      "phone": "(305) 882-4419",
+      "phone": "(804) 555-6482",
       "email": "reyes.family@email.com",
-      "address": "1840 SW 8th Street, Miami, FL 33135",
+      "address": "1649 Hollyhock Rd, Richmond, VA 23223",
       "insurance": "Medicaid",
       "pcp": "Dr. Maria Gonzalez, MD (Pediatrics)",
       "pharmacy": "Sedano's Pharmacy — Calle Ocho",
       "emergencyContact": {
         "name": "Carlos Reyes",
-        "phone": "(305) 882-4418",
+        "phone": "(313) 555-6401",
         "relationship": "Father"
       }
     },

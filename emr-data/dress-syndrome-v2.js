@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Howard Kim",
+  "patientHPI": "About three weeks ago I started taking a new medication for my joint pain, and now I have this terrible rash all over my body with a fever. My face feels swollen, my neck glands are enlarged, and my skin has turned yellow - I'm really worried something is seriously wrong.",
       "dob": "06/13/1974",
       "age": "52",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-719936",
       "language": "English",
       "race": "Asian",
-      "phone": "(308) 306-7678",
+      "phone": "(314) 555-3522",
       "email": "howard.kim@email.com",
-      "address": "3573 Oak St, Weston, FL 33326",
+      "address": "7836 Willow Way, Cleveland, OH 44105",
       "insurance": "Cigna PPO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah Kim",
-        "phone": "(447) 566-5567",
+        "phone": "(615) 555-5781",
         "relationship": "Spouse"
       }
     },
@@ -883,15 +884,15 @@ window.EMR_DATA = {
     "mrn": "MRN-719936",
     "language": "English",
     "race": "Asian",
-    "phone": "(308) 306-7678",
+    "phone": "(617) 555-5479",
     "email": "howard.kim@email.com",
-    "address": "3573 Oak St, Weston, FL 33326",
+    "address": "8427 Spruce St, Memphis, TN 38108",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah Kim",
-      "phone": "(447) 566-5567",
+      "phone": "(513) 555-8905",
       "relationship": "Spouse"
     },
     "chiefComplaint": "52yo with fever, diffuse rash, facial edema, and jaundice 3 weeks after starting allopurinol",

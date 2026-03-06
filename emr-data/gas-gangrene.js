@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Howard Prescott",
+  "patientHPI": "This sore on the bottom of my foot has been there for months and it's getting bigger instead of healing - lately there's been more pus coming out of it and it smells funny.",
     "dob": "10/30/1956",
     "age": 69,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 1620 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "812 SE 3rd Ave, Fort Lauderdale, FL 33316",
+    "address": "9221 Mulberry St, Chicago, IL 60612",
     "phone": "(954) 555-2847",
     "email": "h.prescott56@email.com",
     "emergencyContact": {

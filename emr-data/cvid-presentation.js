@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Okafor",
+  "patientHPI": "I'm so frustrated because I keep getting these chest infections over and over - this is my fifth one just this year. I feel like something's really wrong with me because normal people don't get sick this much, and I'm worried about what's happening to my body.",
       "dob": "12/04/1998",
       "age": "28",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-373077",
       "language": "English",
       "race": "Multiracial",
-      "phone": "(647) 211-7184",
+      "phone": "(504) 555-5480",
       "email": "marcus.okafor@email.com",
-      "address": "2116 Oak St, Weston, FL 33324",
+      "address": "5755 Willow Way, Richmond, VA 23219",
       "insurance": "Medicaid",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah Okafor",
-        "phone": "(877) 960-1279",
+        "phone": "(502) 555-2996",
         "relationship": "Spouse"
       }
     },
@@ -895,15 +896,15 @@ window.EMR_DATA = {
     "mrn": "MRN-373077",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(647) 211-7184",
+    "phone": "(620) 555-9899",
     "email": "marcus.okafor@email.com",
-    "address": "2116 Oak St, Weston, FL 33324",
+    "address": "4813 Walnut Dr, Birmingham, AL 35209",
     "insurance": "Medicaid",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah Okafor",
-      "phone": "(877) 960-1279",
+      "phone": "(505) 555-7464",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Recurrent sinopulmonary infections, 4 courses of antibiotics in 6 months",

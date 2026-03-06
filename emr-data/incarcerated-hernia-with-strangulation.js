@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Bennett",
+  "patientHPI": "I came in for my regular checkup, but I've been having this terrible pain in my groin that started yesterday morning and keeps getting worse. It feels like something is stuck and won't go back in like it usually does, and now I'm feeling nauseous and can't seem to pass gas. The pain is so bad I can barely walk.",
     "dob": "07/22/1953",
     "age": 71,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2301 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "1240 NE 14th Ct, Fort Lauderdale, FL 33304",
+    "address": "125 Dogwood Ln, Memphis, TN 38116",
     "phone": "(954) 555-3310",
     "email": "h.bennett53@email.com",
     "emergencyContact": {

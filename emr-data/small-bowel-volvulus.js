@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Abiodun Okafor",
+  "patientHPI": "For the past few months, I've been getting these crampy stomach pains around my belly button about 30 minutes to an hour after I eat - they last for an hour or two and sometimes make me nauseous, but then they go away on their own.",
     "dob": "01/30/1988",
     "age": 37,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4001 N University Dr, Sunrise, FL",
     "language": "English",
     "race": "Black/African (Nigerian American)",
-    "address": "8430 NW 44th St, Sunrise, FL 33351",
+    "address": "2295 Foxglove Dr, Cleveland, OH 44107",
     "phone": "(954) 555-9317",
     "email": "a.okafor88@email.com",
     "emergencyContact": {

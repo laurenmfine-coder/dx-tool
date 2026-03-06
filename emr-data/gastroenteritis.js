@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sophia Petit-Frère",
+  "patientHPI": "My mom brought me in for my regular checkup - I've been doing really well lately, walking around everywhere and saying mama, dada, and a few other words that make everyone so excited, and I love eating the same food as everyone else at the table.",
     "dob": "09/03/2023",
     "age": 1,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3001 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Haitian Creole",
     "race": "Black/Haitian",
-    "address": "2745 NW 19th St, Fort Lauderdale, FL 33311",
+    "address": "5639 Magnolia Blvd, Memphis, TN 38107",
     "phone": "(954) 555-6738",
     "email": "m.petitfrere@email.com",
     "emergencyContact": {

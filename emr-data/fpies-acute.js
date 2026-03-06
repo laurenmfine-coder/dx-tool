@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Amara Williams",
+  "patientHPI": "We tried giving our baby rice cereal for the first time this morning, and about two hours later she started throwing up over and over again - now she's just lying there so sleepy and won't wake up much.",
       "dob": "06/09/2026",
       "age": "0",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-174434",
       "language": "English",
       "race": "Multiracial",
-      "phone": "(484) 706-9939",
+      "phone": "(317) 555-5040",
       "email": "amara.williams@email.com",
-      "address": "5279 Oak St, Weston, FL 33368",
+      "address": "6030 Spruce St, Phoenix, AZ 85012",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Thomas Williams",
-        "phone": "(884) 435-4346",
+        "phone": "(720) 555-9830",
         "relationship": "Parent"
       }
     },
@@ -594,15 +595,15 @@ window.EMR_DATA = {
     "mrn": "MRN-174434",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(484) 706-9939",
+    "phone": "(415) 555-8019",
     "email": "amara.williams@email.com",
-    "address": "5279 Oak St, Weston, FL 33368",
+    "address": "1589 Birch Ln, Milwaukee, WI 53204",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Thomas Williams",
-      "phone": "(884) 435-4346",
+      "phone": "(620) 555-7543",
       "relationship": "Parent"
     },
     "chiefComplaint": "4-month-old with repetitive vomiting 2 hours after first rice cereal feeding, progressing to lethargy",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Carlos Medina",
+  "patientHPI": "These episodes have been getting much worse over the past few months - they used to happen maybe once or twice a month, but now it's 3-4 times a week. When they hit, I get this crushing headache, I'm drenched in sweat, my heart pounds like crazy, my chest feels tight, and I feel like I'm going to die - each one lasts about 15 minutes and leaves me completely drained.",
     "dob": "08/09/1979",
     "age": 45,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 5200 S State Rd 7, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "3660 SW 68th Ter, Riverside, FL 33100",
+    "address": "6921 Juniper Dr, Cleveland, OH 44104",
     "phone": "(954) 555-5837",
     "email": "c.medina79@email.com",
     "emergencyContact": {

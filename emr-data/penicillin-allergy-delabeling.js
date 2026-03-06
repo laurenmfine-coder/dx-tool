@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Patricia O'Brien",
+  "patientHPI": "I'm supposed to have surgery next week, but I got really anxious thinking about whether I might be allergic to penicillin since I'm not really sure, and I ended up in the emergency room because I was so worried about it.",
       "dob": "04/24/1968",
       "age": "58",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-537466",
       "language": "English",
       "race": "White",
-      "phone": "(274) 738-5178",
+      "phone": "(313) 555-2527",
       "email": "patricia.obrien@email.com",
-      "address": "1154 Oak St, Weston, FL 33387",
+      "address": "9215 Clover St, Baltimore, MD 21213",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "David O'Brien",
-        "phone": "(578) 960-9587",
+        "phone": "(513) 555-2582",
         "relationship": "Spouse"
       }
     },
@@ -705,15 +706,15 @@ window.EMR_DATA = {
     "mrn": "MRN-537466",
     "language": "English",
     "race": "White",
-    "phone": "(274) 738-5178",
+    "phone": "(720) 555-7105",
     "email": "patricia.obrien@email.com",
-    "address": "1154 Oak St, Weston, FL 33387",
+    "address": "5893 Lavender St, Detroit, MI 48209",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "David O'Brien",
-      "phone": "(578) 960-9587",
+      "phone": "(804) 555-3131",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Pre-surgical evaluation — labeled penicillin allergy, needs cefazolin for prophylaxis",

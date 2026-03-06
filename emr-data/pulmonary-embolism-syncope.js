@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Carlos Reyes-Batista",
+  "patientHPI": "I was just walking to my car yesterday when I suddenly felt dizzy and everything went black - next thing I knew I was on the ground. Now I have this sharp pain in my chest that gets worse when I breathe deeply, and my heart feels like it's racing.",
     "dob": "09/05/1974",
     "age": "52",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-156203",
     "language": "English",
     "race": "Asian",
-    "phone": "(222) 719-8276",
+    "phone": "(702) 555-5201",
     "email": "carlos.reyes-batista@email.com",
-    "address": "8436 Palm St, Weston, FL 33379",
+    "address": "3605 Mulberry St, San Antonio, TX 78205",
     "insurance": "Oscar Health",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Maria Reyes-Batista",
-      "phone": "(788) 575-4976",
+      "phone": "(720) 555-8849",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Syncope with pleuritic chest pain and tachycardia on arrival",

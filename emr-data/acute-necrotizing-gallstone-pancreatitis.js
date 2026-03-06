@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Claudette Pierre",
+  "patientHPI": "I've been having some stomach trouble after I eat - it feels full and bloated up here under my ribs, especially when I have bigger meals. It's just uncomfortable indigestion, nothing too severe, but it's been happening more often lately.",
     "dob": "11/04/1962",
     "age": 62,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3100 N State Rd 7, Lauderdale Lakes, FL",
     "language": "English, Haitian Creole",
     "race": "Black/Caribbean American",
-    "address": "4715 NW 36th St, Lauderdale Lakes, FL 33319",
+    "address": "6875 Elm St, San Antonio, TX 78212",
     "phone": "(954) 555-7293",
     "email": "c.pierre62@email.com",
     "emergencyContact": {

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Evelyn Washington-Carter",
+  "patientHPI": "About six hours ago my tongue just started swelling up out of nowhere and now it's so big I can't even swallow my own spit properly - I sound funny when I try to talk and my tongue feels like it's taking up my whole mouth.",
       "dob": "06/27/1958",
       "age": "68",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-520707",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(319) 345-9474",
+      "phone": "(317) 555-5516",
       "email": "evelyn.washingtoncarter@email.com",
-      "address": "8045 Oak St, Weston, FL 33326",
+      "address": "4043 Chestnut Rd, Albuquerque, NM 87101",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Washington-Carter",
-        "phone": "(927) 262-3835",
+        "phone": "(412) 555-2848",
         "relationship": "Spouse"
       }
     },
@@ -875,15 +876,15 @@ window.EMR_DATA = {
     "mrn": "MRN-520707",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(319) 345-9474",
+    "phone": "(312) 555-7868",
     "email": "evelyn.washingtoncarter@email.com",
-    "address": "8045 Oak St, Weston, FL 33326",
+    "address": "7415 Elm St, Kansas City, MO 64101",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Washington-Carter",
-      "phone": "(927) 262-3835",
+      "phone": "(630) 555-1256",
       "relationship": "Spouse"
     },
     "chiefComplaint": "68yo with tongue swelling and difficulty speaking — on lisinopril x8 years, first episode of angioedema",

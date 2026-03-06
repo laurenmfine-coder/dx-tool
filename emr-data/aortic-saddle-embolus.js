@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Claudia Fernandez",
+  "patientHPI": "I had to stop taking my blood thinner three weeks ago because my insurance changed and now it costs $180 a month, which I just can't afford on my fixed income. I know it's important for my heart rhythm problem, but I don't know what else to do - that's more than I spend on groceries some weeks.",
     "dob": "08/20/1958",
     "age": 66,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 1901 N Pine Island Rd, Plantation, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "7110 NW 5th Ct, Plantation, FL 33317",
+    "address": "328 Birch Ln, Minneapolis, MN 55407",
     "phone": "(954) 555-4478",
     "email": "c.fernandez58@email.com",
     "emergencyContact": {

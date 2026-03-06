@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mateo Fernandez",
+  "patientHPI": "The pain in the front of my right shin is absolutely unbearable - it feels like someone is crushing my leg and it's getting worse by the hour.",
     "dob": "06/15/2002",
     "age": "24",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-917689",
     "language": "English",
     "race": "Pacific Islander",
-    "phone": "(891) 782-3020",
+    "phone": "(317) 555-8564",
     "email": "mateo.fernandez@email.com",
-    "address": "3891 Cedar Ln, Sunrise, FL 33323",
+    "address": "4362 Ash St, Minneapolis, MN 55407",
     "insurance": "Medicare",
     "pcp": "Dr. Michael Torres, DO",
     "pharmacy": "CVS Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Diana Bailey",
-      "phone": "(250) 670-7666",
+      "phone": "(404) 555-1823",
       "relationship": "Parent"
     },
     "chiefComplaint": "The pain in my shin is unbearable Right leg \u2014 anterior compartment (anterior shin)",

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Jefferson",
+  "patientHPI": "I started taking a new seizure medication about a month ago, and now I have this awful rash spreading all over my body along with a fever. My face feels puffy and swollen, and I can feel enlarged lumps in my neck - this all started after I began the new pills.",
       "dob": "12/14/1984",
       "age": "42",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-130141",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(845) 837-3556",
+      "phone": "(804) 555-1653",
       "email": "marcus.jefferson@email.com",
-      "address": "1956 Maple Ave, Pembroke Pines, FL 33308",
+      "address": "5895 Jasmine Way, Albuquerque, NM 87103",
       "insurance": "Tricare Standard",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Jessica Jefferson",
-        "phone": "(479) 586-4681",
+        "phone": "(504) 555-4441",
         "relationship": "Adult Child"
       }
     },
@@ -911,15 +912,15 @@ window.EMR_DATA = {
     "mrn": "MRN-130141",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(845) 837-3556",
+    "phone": "(704) 555-5088",
     "email": "marcus.jefferson@email.com",
-    "address": "1956 Maple Ave, Pembroke Pines, FL 33308",
+    "address": "3979 Hickory Rd, Pittsburgh, PA 15201",
     "insurance": "Tricare Standard",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Jessica Jefferson",
-      "phone": "(479) 586-4681",
+      "phone": "(704) 555-2684",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",

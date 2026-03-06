@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Hernandez",
+  "patientHPI": "I've been getting more and more tired over the past few months, and now I can barely walk to my mailbox without running out of breath. My ankles have been swelling up by evening, and I just don't feel like myself - everything seems like such an effort.",
     "dob": "06/28/1956",
     "age": 68,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy \u2014 5100 S State Rd 7, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic or Latino",
-    "address": "2201 SW 46th Terrace, Hollywood, FL 33023",
+    "address": "3039 Clover St, Pittsburgh, PA 15204",
     "phone": "(954) 555-3916",
     "email": "g.hernandez56@email.com",
     "emergencyContact": {

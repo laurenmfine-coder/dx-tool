@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Priya Sharma",
+  "patientHPI": "I was eating at a restaurant and accidentally got some shrimp in my food, and about twenty minutes later my lips started swelling, I broke out in hives all over, my throat feels tight, and I'm getting dizzy. I had an emergency pen but it expired, so the ambulance people had to give me a shot.",
       "dob": "08/03/1998",
       "age": "28",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-154379",
       "language": "English",
       "race": "Multiracial",
-      "phone": "(945) 526-1981",
+      "phone": "(614) 555-9254",
       "email": "priya.sharma@email.com",
-      "address": "1995 Oak St, Weston, FL 33381",
+      "address": "610 S Halsted St, Cleveland, OH 44108",
       "insurance": "Medicaid",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Sharma",
-        "phone": "(578) 662-5398",
+        "phone": "(414) 555-1710",
         "relationship": "Spouse"
       },
       "chiefComplaint": "Lip/tongue swelling, diffuse hives, throat tightness after eating shrimp",
@@ -742,15 +743,15 @@ window.EMR_DATA = {
     "mrn": "MRN-154379",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(945) 526-1981",
+    "phone": "(720) 555-9543",
     "email": "priya.sharma@email.com",
-    "address": "1995 Oak St, Weston, FL 33381",
+    "address": "1868 W Haddon Ave, Memphis, TN 38104",
     "insurance": "Medicaid",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Sharma",
-      "phone": "(578) 662-5398",
+      "phone": "(502) 555-8504",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Lip/tongue swelling, diffuse hives, throat tightness after eating shrimp",

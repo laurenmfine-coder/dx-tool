@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Diane Charpentier",
+  "patientHPI": "I've been doing well on my usual medications and my energy has been stable, but I realized I forgot to refill my emergency injection that you told me to always keep with me. Everything else seems to be going fine though.",
     "dob": "03/28/1968",
     "age": 56,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2801 S University Dr, Riverside, FL",
     "language": "English, French",
     "race": "White/Caucasian (French-Canadian descent)",
-    "address": "5841 SW 16th Ct, Plantation, FL 33317",
+    "address": "6033 Cedar Blvd, Albuquerque, NM 87103",
     "phone": "(954) 555-2418",
     "email": "d.charpentier@email.com",
     "emergencyContact": {

@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Angela Torres-Vega",
+  "patientHPI": "I suddenly couldn't breathe and almost passed out - it felt like I was suffocating and my heart was racing. I just had my hip replaced ten days ago and was doing fine until this happened out of nowhere.",
     "dob": "08/01/1962",
     "age": "64",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-649648",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(975) 836-4877",
+    "phone": "(704) 555-2983",
     "email": "angela.torres-vega@email.com",
-    "address": "2109 Willow Dr, Davie, FL 33370",
+    "address": "5789 Foxglove Dr, Memphis, TN 38116",
     "insurance": "Oscar Health",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Richard Torres-Vega",
-      "phone": "(975) 302-2597",
+      "phone": "(804) 555-1672",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Sudden collapse with severe dyspnea and near-syncope",

@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Esperanza Ruiz",
+  "patientHPI": "I just had surgery a few days ago, and now I'm bleeding from everywhere - my incision won't stop oozing, blood keeps coming from where they put my IV in, and even my catheter has blood in it. The nurses keep changing my bandages but nothing seems to be clotting like it should, and I'm really scared because this isn't normal.",
     "dob": "11/16/1966",
     "age": "60",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-531656",
     "language": "English",
     "race": "White",
-    "phone": "(334) 331-2971",
+    "phone": "(314) 555-3321",
     "email": "esperanza.ruiz@email.com",
-    "address": "9642 Maple Ave, Boca Raton, FL 33431",
+    "address": "5720 Ash St, Phoenix, AZ 85012",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Walmart Pharmacy — Federal Hwy",
     "emergencyContact": {
       "name": "Richard Walker",
-      "phone": "(901) 530-3252",
+      "phone": "(504) 555-6110",
       "relationship": "Partner"
     },
     "chiefComplaint": "Surgical team: 'Patient is oozing from everywhere — wound, IV sites, NG tube. Blood isn't clotting.' Diffuse — bleeding from surgical wound, peripheral IV insertion sites, nasogastric tube, Foley catheter (hematuria)",

@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Arthur Livingston",
+  "patientHPI": "I was just walking along when suddenly everything went black - I don't remember feeling dizzy or sick beforehand, I just collapsed. My family saw the whole thing happen and said I was only out for a few seconds.",
     "dob": "02/11/1948",
     "age": "78",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-397551",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(212) 913-3982",
+    "phone": "(502) 555-7561",
     "email": "arthur.livingston@email.com",
-    "address": "7020 Cedar Blvd, Davie, FL 33347",
+    "address": "7551 Cottonwood Ave, New Orleans, LA 70113",
     "insurance": "Tricare Standard",
     "pcp": "Dr. David Kim, MD",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Keisha Livingston",
-      "phone": "(626) 508-4989",
+      "phone": "(803) 555-1601",
       "relationship": "Partner"
     },
     "chiefComplaint": "Witnessed syncope while walking — no prodrome",

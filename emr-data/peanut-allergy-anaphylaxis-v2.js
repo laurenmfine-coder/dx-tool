@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Oliver Thompson",
+  "patientHPI": "My son was playing at his friend's house and ate some crackers with peanut butter, and within minutes his face started breaking out in red bumps around his mouth. He threw up twice and became really fussy and upset, so the other parent gave him some children's Benadryl before we rushed him here.",
       "dob": "08/08/2023",
       "age": "3",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-809710",
       "language": "English",
       "race": "White",
-      "phone": "(395) 711-7726",
+      "phone": "(414) 555-2654",
       "email": "oliver.thompson@email.com",
-      "address": "3932 Oak St, Weston, FL 33326",
+      "address": "5920 Mulberry St, Memphis, TN 38118",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Sarah Thompson",
-        "phone": "(230) 677-6855",
+        "phone": "(505) 555-5554",
         "relationship": "Parent"
       }
     },
@@ -854,15 +855,15 @@ window.EMR_DATA = {
     "mrn": "MRN-809710",
     "language": "English",
     "race": "White",
-    "phone": "(395) 711-7726",
+    "phone": "(614) 555-6977",
     "email": "oliver.thompson@email.com",
-    "address": "3932 Oak St, Weston, FL 33326",
+    "address": "2903 Dogwood Ln, Columbus, OH 43211",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Sarah Thompson",
-      "phone": "(230) 677-6855",
+      "phone": "(404) 555-7065",
       "relationship": "Parent"
     },
     "chiefComplaint": "3yo with first-ever allergic reaction — vomiting, hives, and fussiness after eating peanut butter crackers at friend's house",

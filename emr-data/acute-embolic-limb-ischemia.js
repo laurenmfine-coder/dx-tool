@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Menendez",
+  "patientHPI": "Doctor, I woke up this morning and my right leg felt completely different - it's ice cold and the pain is unbearable. I can barely feel my toes and the leg looks almost white compared to my other one. I've had leg pain before when I walk, but this came on suddenly while I was sleeping.",
     "dob": "09/14/1952",
     "age": 72,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3200 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "4580 SW 2nd St, Plantation, FL 33317",
+    "address": "1170 Pine Ave, Memphis, TN 38103",
     "phone": "(954) 555-8165",
     "email": "g.menendez52@email.com",
     "emergencyContact": {

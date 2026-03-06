@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Helen Goldstein",
+  "patientHPI": "I have this excruciating pain in my belly that came on suddenly and it's the worst pain I've ever felt in my life. The strange thing is that when the doctor presses on my stomach, it doesn't hurt nearly as much as the pain I'm feeling inside.",
     "dob": "12/10/1956",
     "age": "70",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-385606",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(604) 271-7971",
+    "phone": "(314) 555-3290",
     "email": "helen.goldstein@email.com",
-    "address": "6768 Oak Ln, Plantation, FL 33345",
+    "address": "5087 Birch Ln, Baltimore, MD 21206",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Alejandro Goldstein",
-      "phone": "(449) 257-6329",
+      "phone": "(312) 555-1609",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Severe abdominal pain out of proportion to exam",

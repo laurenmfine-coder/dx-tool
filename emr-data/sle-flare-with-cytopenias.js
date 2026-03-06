@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Aaliyah Jackson",
+  "patientHPI": "I've been so tired lately and my joints are aching all over, plus I have this rash across my cheeks and I've been running fevers - I know I haven't been great about taking my medications like I'm supposed to.",
     "dob": "11/21/2002",
     "age": "24",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-536758",
     "language": "English",
     "race": "Asian",
-    "phone": "(410) 326-5486",
+    "phone": "(312) 555-8381",
     "email": "aaliyah.jackson@email.com",
-    "address": "4389 Maple Ln, Plantation, FL 33319",
+    "address": "1481 Hickory Rd, Detroit, MI 48207",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "James Jackson",
-      "phone": "(963) 721-7468",
+      "phone": "(314) 555-6626",
       "relationship": "Partner"
     },
     "chiefComplaint": "Fatigue, joint pain, facial rash, fever",

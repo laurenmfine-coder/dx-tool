@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Maria Santos-Reyes",
+  "patientHPI": "I was cleaning a house today wearing my usual rubber gloves when my lips and face started swelling up, and then I couldn't breathe right and felt like I was going to pass out. I had an emergency pen in my purse but it was old, and it helped a little but I still feel awful - I've gotten rashes from those gloves before but nothing like this.",
       "dob": "08/25/1994",
       "age": "32",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-947187",
       "language": "Spanish",
       "race": "Hispanic/Latina",
-      "phone": "(628) 961-4853",
+      "phone": "(704) 555-1539",
       "email": "maria.santosreyes@email.com",
-      "address": "8920 Oak St, Weston, FL 33326",
+      "address": "6625 Juniper Dr, Columbus, OH 43215",
       "insurance": "Uninsured — Self-Pay",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Michael Santos-Reyes",
-        "phone": "(508) 796-5834",
+        "phone": "(404) 555-6152",
         "relationship": "Spouse"
       }
     },
@@ -919,15 +920,15 @@ window.EMR_DATA = {
     "mrn": "MRN-947187",
     "language": "Spanish",
     "race": "Hispanic/Latina",
-    "phone": "(628) 961-4853",
+    "phone": "(212) 555-4394",
     "email": "maria.santosreyes@email.com",
-    "address": "8920 Oak St, Weston, FL 33326",
+    "address": "4039 Hollyhock Rd, San Antonio, TX 78207",
     "insurance": "Uninsured — Self-Pay",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Michael Santos-Reyes",
-      "phone": "(508) 796-5834",
+      "phone": "(620) 555-3362",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Latex glove exposure at work → progressive lip swelling, wheezing, lightheadedness. Used expired EpiPen with partial response.",

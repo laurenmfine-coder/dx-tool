@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Kenneth Murray",
+  "patientHPI": "I was doing yard work when a yellow jacket stung me on my hand - at first I thought it would just be the usual local swelling, but then these red welts started appearing all over my body. My throat began feeling really tight and scratchy, and I got so lightheaded I had to sit down because I thought I was going to faint.",
       "dob": "06/09/1974",
       "age": "52",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-651277",
       "language": "English",
       "race": "White",
-      "phone": "(582) 292-6122",
+      "phone": "(720) 555-9037",
       "email": "kenneth.murray@email.com",
-      "address": "6018 Oak St, Weston, FL 33331",
+      "address": "9054 Elm St, Phoenix, AZ 85001",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Lisa Chang, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah Murray",
-        "phone": "(611) 799-7466",
+        "phone": "(614) 555-3756",
         "relationship": "Spouse"
       }
     },
@@ -677,15 +678,15 @@ window.EMR_DATA = {
     "mrn": "MRN-651277",
     "language": "English",
     "race": "White",
-    "phone": "(582) 292-6122",
+    "phone": "(720) 555-6770",
     "email": "kenneth.murray@email.com",
-    "address": "6018 Oak St, Weston, FL 33331",
+    "address": "1317 Elm St, Chicago, IL 60632",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah Murray",
-      "phone": "(611) 799-7466",
+      "phone": "(404) 555-3293",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Systemic reaction after yellow jacket sting — hives, throat tightness, near-syncope",

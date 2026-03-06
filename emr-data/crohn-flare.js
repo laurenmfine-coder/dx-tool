@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Isabella Reyes",
+  "patientHPI": "I've been having really bad stomach cramps for the past few weeks, especially around my belly button and on my right side, and it's been getting worse. I'm going to the bathroom way more often than usual, maybe 5 or 6 times a day, and sometimes I see blood which really scares me. I've been waking up at night drenched in sweat, and I think I've lost some weight because my clothes feel looser.",
     "dob": "06/15/1997",
     "age": 28,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2501 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Hispanic",
-    "address": "1842 SW 44th Ave, Fort Lauderdale, FL 33317",
+    "address": "1853 Willow Way, Louisville, KY 40206",
     "phone": "(954) 555-3182",
     "email": "isabella.reyes97@email.com",
     "emergencyContact": {

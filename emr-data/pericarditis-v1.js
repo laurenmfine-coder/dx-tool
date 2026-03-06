@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Daniel Okafor",
+  "patientHPI": "I started getting this sharp, stabbing pain in my chest yesterday that gets much worse when I take a deep breath or when I lie down flat. I had a really bad cold about two weeks ago, and now this chest pain is making me worry something's seriously wrong.",
     "dob": "08/02/2000",
     "age": "26",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-460047",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(572) 578-9566",
+    "phone": "(619) 555-6886",
     "email": "daniel.okafor@email.com",
-    "address": "5279 Elm Ave, Pembroke Pines, FL 33373",
+    "address": "5993 E Roosevelt Rd, Minneapolis, MN 55403",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Teresa Okafor",
-      "phone": "(669) 400-8465",
+      "phone": "(502) 555-5285",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Sharp chest pain worse with inspiration and lying flat",

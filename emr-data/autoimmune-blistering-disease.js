@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eloise Beaumont",
+  "patientHPI": "For the past three months, I've had this unbearable itching all over my body that keeps me awake at night, especially on my chest, arms, and thighs. Recently I've noticed red patches and a few small blisters on my forearms and stomach that seem to be getting worse.",
     "dob": "12/08/1943",
     "age": 82,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 2200 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White (French Canadian descent)",
-    "address": "2840 NE 30th St, Fort Lauderdale, FL 33306",
+    "address": "6870 Foxglove Dr, Albuquerque, NM 87108",
     "phone": "(954) 555-1248",
     "email": "e.beaumont43@email.com",
     "emergencyContact": {

@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Alejandro Gutierrez",
+  "patientHPI": "My family found me really confused and throwing up this morning, and I honestly don't remember much about what happened. I've been feeling more tired than usual lately and haven't been great about taking my insulin like I should.",
     "dob": "08/01/1998",
     "age": "28",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-909133",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(695) 933-1553",
+    "phone": "(630) 555-9984",
     "email": "alejandro.gutierrez@email.com",
-    "address": "9974 Palm St, Sunrise, FL 33395",
+    "address": "6341 Peachtree Rd, Minneapolis, MN 55410",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Cynthia Gutierrez",
-      "phone": "(513) 678-2465",
+      "phone": "(713) 555-6327",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Found confused and vomiting by family",

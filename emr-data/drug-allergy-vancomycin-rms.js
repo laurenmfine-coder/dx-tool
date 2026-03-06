@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Gerald Hagen",
+  "patientHPI": "About halfway through getting my IV antibiotic, my skin started turning red and I began itching all over my upper body. The itching was really intense and uncomfortable, so they called for the allergy team to come check on me.",
       "dob": "11/09/1961",
       "age": "65",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-786422",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(869) 629-8348",
+      "phone": "(702) 555-9109",
       "email": "gerald.hagen@email.com",
-      "address": "703 Oak St, Weston, FL 33341",
+      "address": "1455 Magnolia Blvd, Richmond, VA 23219",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Jennifer Hagen",
-        "phone": "(737) 938-3442",
+        "phone": "(513) 555-9056",
         "relationship": "Spouse"
       }
     },
@@ -692,15 +693,15 @@ window.EMR_DATA = {
     "mrn": "MRN-786422",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(869) 629-8348",
+    "phone": "(513) 555-8272",
     "email": "gerald.hagen@email.com",
-    "address": "703 Oak St, Weston, FL 33341",
+    "address": "4603 Peachtree Rd, Columbus, OH 43211",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Jennifer Hagen",
-      "phone": "(737) 938-3442",
+      "phone": "(615) 555-3740",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Flushing, pruritus, and rash during vancomycin infusion — consult to differentiate RMS from allergy",

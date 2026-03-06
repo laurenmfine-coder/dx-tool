@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Victor Ramírez",
+  "patientHPI": "I was working out at the gym when suddenly I got hit with the worst headache of my life - like someone took a baseball bat to my skull. I threw up right there and my wife said I passed out for a few seconds. The light hurts my eyes and my neck feels really stiff.",
     "dob": "09/15/1972",
     "age": 52,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 3200 Broward Blvd, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino (Dominican)",
-    "address": "2814 NW 54th St, Fort Lauderdale, FL 33309",
+    "address": "7203 N Kedzie Blvd, Milwaukee, WI 53208",
     "phone": "(954) 555-7291",
     "email": "v.ramirez72@email.com",
     "emergencyContact": {

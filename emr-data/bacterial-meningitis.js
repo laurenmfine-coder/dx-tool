@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Anthony Delgado",
+  "patientHPI": "I've had a sore throat and stuffy nose for about four days now, along with a mild cough and a low fever around 99 degrees. My roommate had something similar recently, so I figured I caught whatever he had.",
     "dob": "08/22/2004",
     "age": 20,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3050 University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "7810 SW 39th St, Riverside, FL 33328",
+    "address": "8271 E Roosevelt Rd, Chicago, IL 60607",
     "phone": "(954) 555-6148",
     "email": "a.delgado04@email.com",
     "emergencyContact": {

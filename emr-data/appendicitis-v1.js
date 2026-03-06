@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Nguyen",
+  "patientHPI": "This pain started around my belly button yesterday and was just annoying at first, but now it's moved down to my lower right side and it's getting really sharp and intense. I also feel nauseous and threw up once this morning, and now I'm worried something serious is going on.",
     "dob": "06/12/2007",
     "age": "19",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-638121",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(755) 373-4084",
+    "phone": "(414) 555-3616",
     "email": "tyler.nguyen@email.com",
-    "address": "5197 Maple Ln, Pembroke Pines, FL 33356",
+    "address": "3211 E Roosevelt Rd, Phoenix, AZ 85012",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Maria Nguyen",
-      "phone": "(236) 971-9518",
+      "phone": "(503) 555-6123",
       "relationship": "Spouse"
     },
     "chiefComplaint": "RLQ pain migrated from periumbilical area, nausea",

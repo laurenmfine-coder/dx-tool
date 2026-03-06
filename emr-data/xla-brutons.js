@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ethan Prescott",
+  "patientHPI": "My son has had a fever for two days and won't put any weight on his right leg, and his knee is really swollen - I'm worried because he's had so many infections already for a 2-year-old.",
       "dob": "08/14/2023",
       "age": "2",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-481203",
       "language": "English",
       "race": "White",
-      "phone": "(954) 338-7741",
+      "phone": "(630) 555-9740",
       "email": "prescott.family@email.com",
-      "address": "447 Maple Lane, Fort Lauderdale, FL 33309",
+      "address": "2863 Willow Way, Columbus, OH 43215",
       "insurance": "Blue Cross Blue Shield",
       "pcp": "Dr. Angela Simmons, MD (Pediatrics)",
       "pharmacy": "Walgreens — Sunrise Blvd",
       "emergencyContact": {
         "name": "David Prescott",
-        "phone": "(954) 338-7740",
+        "phone": "(313) 555-9234",
         "relationship": "Father"
       }
     },

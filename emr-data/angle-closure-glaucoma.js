@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dolores Eriksen",
+  "patientHPI": "My right eye is killing me with this deep, terrible pain that just came on suddenly, and I feel sick to my stomach and everything looks blurry.",
     "dob": "09/22/1974",
     "age": "52",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-651241",
     "language": "English",
     "race": "Asian",
-    "phone": "(398) 608-4308",
+    "phone": "(212) 555-3587",
     "email": "dolores.eriksen@email.com",
-    "address": "259 Elm Blvd, Weston, FL 33391",
+    "address": "7923 Peachtree Rd, New Orleans, LA 70116",
     "insurance": "Cigna",
     "pcp": "Dr. Amy Patel, MD",
     "pharmacy": "Rite Aid — Federal Hwy",
     "emergencyContact": {
       "name": "Daniel Scott",
-      "phone": "(439) 229-7019",
+      "phone": "(513) 555-8793",
       "relationship": "Sibling"
     },
     "chiefComplaint": "My right eye is killing me Right eye — deep, severe pain",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Langston",
+  "patientHPI": "My legs have been so swollen lately and I'm having trouble catching my breath when I walk upstairs. I've gained three pounds even though I'm taking my water pill every day like I'm supposed to.",
     "dob": "06/22/1950",
     "age": 74,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 5200 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "1928 SW 72nd Ave, Plantation, FL 33317",
+    "address": "6543 Dogwood Ln, Indianapolis, IN 46222",
     "phone": "(954) 555-3291",
     "email": "p.langston50@email.com",
     "emergencyContact": {

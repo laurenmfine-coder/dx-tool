@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Harold Jefferson",
+  "patientHPI": "My face has been swelling up lately, especially around my lips and eyes, and it's been happening more often since my cancer diagnosis - the swelling comes and goes but it's really bothersome.",
       "dob": "08/18/1962",
       "age": "64",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-794647",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(718) 270-8235",
+      "phone": "(504) 555-5232",
       "email": "harold.jefferson@email.com",
-      "address": "7421 Elm St, Weston, FL 33320",
+      "address": "8565 Walnut Dr, Kansas City, MO 64120",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Jennifer Jefferson",
-        "phone": "(888) 831-3828",
+        "phone": "(503) 555-5581",
         "relationship": "Spouse"
       }
     },
@@ -721,15 +722,15 @@ window.EMR_DATA = {
     "mrn": "MRN-794647",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(718) 270-8235",
+    "phone": "(630) 555-5526",
     "email": "harold.jefferson@email.com",
-    "address": "7421 Elm St, Weston, FL 33320",
+    "address": "8105 Dogwood Ln, Denver, CO 80210",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Jennifer Jefferson",
-      "phone": "(888) 831-3828",
+      "phone": "(619) 555-1166",
       "relationship": "Spouse"
     },
     "chiefComplaint": "New-onset angioedema in patient with B-cell lymphoma",

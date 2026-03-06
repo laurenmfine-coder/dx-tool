@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Jennings",
+  "patientHPI": "I was sitting in my chair watching TV when suddenly my right leg went ice cold and started hurting something fierce. It happened so fast - one minute I was fine, the next minute I couldn't feel my toes and my leg looked white as a sheet.",
     "dob": "12/18/1951",
     "age": "75",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-811307",
     "language": "English",
     "race": "American Indian",
-    "phone": "(947) 888-4276",
+    "phone": "(702) 555-8242",
     "email": "harold.jennings@email.com",
-    "address": "7982 Maple Ave, Hollywood, FL 33020",
+    "address": "3435 Spruce St, Richmond, VA 23226",
     "insurance": "Cigna",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Publix Pharmacy — Pines Blvd",
     "emergencyContact": {
       "name": "Sarah Bailey",
-      "phone": "(590) 465-3785",
+      "phone": "(803) 555-1845",
       "relationship": "Sibling"
     },
     "chiefComplaint": "My right leg went cold and painful suddenly Right lower leg and foot — sudden onset",

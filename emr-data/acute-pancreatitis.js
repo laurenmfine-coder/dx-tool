@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Natalia Petrov",
+  "patientHPI": "I woke up this morning with terrible pain right here in my stomach that goes straight through to my back - it's the worst pain I've ever felt. I've been throwing up and can't keep anything down, and the pain won't let up no matter what position I try.",
     "dob": "05/08/1986",
     "age": "40",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-211343",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(770) 881-1241",
+    "phone": "(313) 555-3306",
     "email": "natalia.petrov@email.com",
-    "address": "5817 Maple St, Plantation, FL 33325",
+    "address": "6611 Foxglove Dr, Memphis, TN 38112",
     "insurance": "Medicaid",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Samuel Petrov",
-      "phone": "(571) 653-4150",
+      "phone": "(803) 555-4696",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Severe epigastric pain radiating to back, nausea/vomiting",

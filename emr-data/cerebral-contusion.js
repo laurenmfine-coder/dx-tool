@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dwayne Jackson",
+  "patientHPI": "I've been having these headaches on and off, and I feel tired during the day even though I'm sleeping okay. My blood pressure medicine isn't working as well as it should be, and I'll admit I sometimes forget to take one of them. I know I should quit smoking but it's been really hard.",
     "dob": "11/14/1979",
     "age": 45,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4001 SW 64th Ave, Riverside, FL",
     "language": "English",
     "race": "African American",
-    "address": "2730 NW 19th St, Fort Lauderdale, FL 33311",
+    "address": "4451 Magnolia Blvd, Detroit, MI 48227",
     "phone": "(954) 555-3847",
     "email": "d.jackson79@email.com",
     "emergencyContact": {

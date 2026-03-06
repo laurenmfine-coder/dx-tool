@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Fernando Alvarez-Diaz",
+  "patientHPI": "I had my hip replacement surgery three days ago and everything seemed to be going well until this morning when I started feeling really dizzy and weak. My surgical site has been oozing more blood than the nurses expected, and I've been having trouble getting out of bed without feeling like I'm going to faint.",
     "dob": "08/25/1968",
     "age": 56,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1601 N Flamingo Rd, Pembroke Pines, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "9410 Taft St, Pembroke Pines, FL 33024",
+    "address": "433 S Halsted St, Detroit, MI 48213",
     "phone": "(954) 555-1562",
     "email": "f.alvarezdiaz@email.com",
     "emergencyContact": {

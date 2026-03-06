@@ -1,211 +1,161 @@
-/* emr-data/infective-endocarditis.js — Auto-generated EMR case data for Infective Endocarditis */
+// Virtual EMR Case: Infective Endocarditis
+// Variant: infective-endocarditis | Acuity: ESI-2
+// Auto-generated from ED Board clinical data
+
 window.EMR_DATA = {
   "patient": {
     "name": "Ryan Kowalski",
-  "patientHPI": "I've been running a fever for three weeks now that won't go away, even after taking antibiotics my doctor gave me. I'm feeling weak and tired all the time, and sometimes I get these weird racing heartbeats. I know I haven't been taking the best care of myself lately, and I'm worried something serious is going on.",
-    "dob": "09/05/1981",
-    "age": "45",
+    "dob": "03/15/1990",
+    "age": 34,
     "sex": "Male",
-    "pronouns": "he/him",
-    "mrn": "MRN-179740",
+    "mrn": "RDX-2025-52371",
+    "pronouns": "He/Him",
+    "insurance": "Florida Medicaid",
+    "pcp": "Dr. Patricia Hall, MD",
+    "pharmacy": "Walgreens — 1200 S State Rd 7, North Lauderdale, FL",
     "language": "English",
-    "race": "Asian",
-    "phone": "(804) 555-8692",
-    "email": "ryan.kowalski@email.com",
-    "address": "3428 Jasmine Way, Detroit, MI 48227",
-    "insurance": "Medicaid",
-    "pcp": "Dr. Michelle Foster, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "race": "White",
+    "address": "5830 Kimberly Blvd, North Lauderdale, FL 33068",
+    "phone": "(954) 555-4892",
+    "email": "r.kowalski90@email.com",
     "emergencyContact": {
-      "name": "Susan Kowalski",
-      "phone": "(803) 555-6246",
-      "relationship": "Sibling"
-    },
-    "chiefComplaint": "Persistent fever for 3 weeks despite oral antibiotics, new murmur",
-    "diagnosis": "Infective Endocarditis"
+      "name": "Karen Kowalski (Mother)",
+      "phone": "(954) 555-4910"
+    }
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "IV drug use",
+      "problem": "Opioid Use Disorder — In Sustained Remission on MAT",
+      "icd": "F11.21",
+      "onset": "2016",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "IVDU heroin 2016-2021; multiple ODs; on buprenorphine-naloxone since 2022; sustained remission; engaged in counseling"
     },
     {
-      "id": "prob-2",
-      "description": "Prior endocarditis 2 years ago",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "problem": "Hepatitis C — Treated, SVR",
+      "icd": "B18.2",
+      "onset": "2018",
+      "status": "Resolved",
+      "notes": "Genotype 1a; treated with sofosbuvir/velpatasvir 2022; SVR12 achieved; viral load undetectable"
     },
     {
-      "id": "prob-3",
-      "description": "Hepatitis C",
+      "problem": "Mitral Valve Prolapse with Mild Regurgitation",
+      "icd": "I34.1",
+      "onset": "2019",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Incidentally found on echo during addiction hospitalization; trivial-mild MR; no intervention needed"
+    },
+    {
+      "problem": "Major Depressive Disorder — Recurrent",
+      "icd": "F33.1",
+      "onset": "2017",
+      "status": "Active",
+      "notes": "On sertraline; in outpatient therapy"
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Buprenorphine-Naloxone (Suboxone) 16mg-4mg SL daily",
+      "sig": "Dissolve 1 film under the tongue daily",
+      "prescriber": "Dr. Patel (Addiction Medicine)",
+      "start": "03/2022",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Sertraline 100mg daily",
+      "sig": "Take 1 tablet by mouth daily in the morning",
+      "prescriber": "Dr. Hall",
+      "start": "06/2018",
+      "refills": 3,
+      "status": "Active"
+    }
+  ],
   "allergies": [
     {
-      "allergen": "Vancomycin",
-      "reaction": "Red man syndrome",
-      "severity": "Moderate",
-      "type": "Drug"
+      "allergen": "NKDA",
+      "type": "None",
+      "reaction": "None",
+      "severity": "",
+      "verified": "Yes"
     }
   ],
   "vitals": [
     {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "112/58",
-      "hr": "108",
-      "rr": "20",
-      "temp": "39.2°C",
-      "spo2": "94%",
-      "pain": "5/10",
-      "bmi": "24",
-      "weight": "91 kg"
+      "date": "10/08/2024",
+      "bp": "118/72",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "98%",
+      "wt": "165 lbs",
+      "ht": "5'11\"",
+      "bmi": 23.0,
+      "setting": "PCP Office"
+    },
+    {
+      "date": "04/10/2024",
+      "bp": "116/70",
+      "hr": 72,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "163 lbs",
+      "ht": "5'11\"",
+      "bmi": 22.7,
+      "setting": "PCP Office"
     }
   ],
   "visits": [
     {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "Persistent fever for 3 weeks despite oral antibiotics, new murmur",
-      "hpi": "Ryan Kowalski is a 45-year-old male presenting with persistent fever for 3 weeks despite oral antibiotics, new murmur. Past medical history includes IV drug use, Prior endocarditis 2 years ago, Hepatitis C. See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "Infective Endocarditis — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
+      "id": "V001",
+      "date": "10/08/2024",
+      "type": "Primary Care",
+      "provider": "Dr. Patricia Hall, MD",
+      "cc": "Follow-up: OUD, depression, general wellness",
+      "hpi": "34-year-old male with OUD in sustained remission on buprenorphine-naloxone for follow-up. Reports doing well — working full-time at a warehouse, attending weekly counseling. No cravings, no substance use. Depression improved. Denies any IV drug use since 2021. Had a dental issue 2 months ago — broken molar; seen by dentist who recommended extraction but patient has not followed through yet due to cost. No fever, chills, or other symptoms.",
+      "exam": "General: NAD, well-appearing. HEENT: Dental — right lower molar visibly broken with surrounding gingival erythema. Neck: No LAD. CV: RRR, I/VI systolic click and late systolic murmur at apex, consistent with known MVP. Lungs: CTAB. Skin: Old track marks bilateral antecubital fossae, well-healed. Extremities: No edema, no splinter hemorrhages. Neuro: A&O x3.",
+      "assessment": "1. OUD — sustained remission on MAT; excellent progress\n2. MDD — improved\n3. Dental caries with broken molar — needs extraction; risk factor for bacteremia given MVP\n4. MVP with mild MR — stable\n5. HCV — cured, SVR confirmed",
+      "plan": "1. Continue buprenorphine-naloxone and sertraline\n2. URGENT dental referral for extraction — explain bacteremia risk with underlying valve disease\n3. Discussed: AHA does NOT recommend antibiotic prophylaxis for MVP with mild MR for dental procedures, but extraction should not be delayed\n4. Urine drug screen — ordered\n5. Labs: CBC, CMP, LFTs\n6. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
+      "date": "10/08/2024",
+      "time": "10:15",
+      "orderedBy": "Dr. Patricia Hall, MD",
+      "collected": "10/08/2024 09:30",
+      "facility": "ReasonDx Medical Center Lab",
+      "accession": "LAB-2024-100815",
       "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-124482",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
+      "specimenType": "Serum, Urine",
+      "fasting": "No",
       "groups": [
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            {
-              "test": "WBC",
-              "value": "18.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
+            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
+            { "test": "Hemoglobin", "value": "14.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
+            { "test": "Hematocrit", "value": "43.6", "unit": "%", "range": "38.3-48.6", "flag": "" },
+            { "test": "Platelet Count", "value": "235", "unit": "x10³/µL", "range": "150-400", "flag": "" }
           ]
         },
         {
-          "name": "BASIC METABOLIC PANEL",
+          "name": "HEPATIC FUNCTION",
           "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
+            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
+            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" },
+            { "test": "HCV Viral Load", "value": "Not Detected", "unit": "IU/mL", "range": "Not Detected", "flag": "" }
           ]
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
+          "name": "URINE DRUG SCREEN",
           "results": [
-            {
-              "test": "Esr",
-              "value": "85",
-              "unit": "mm/hr",
-              "range": "0-20",
-              "flag": "H"
-            },
-            {
-              "test": "Crp",
-              "value": "12.4",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            }
+            { "test": "Buprenorphine", "value": "Positive", "unit": "—", "range": "—", "flag": "" },
+            { "test": "Opiates", "value": "Negative", "unit": "—", "range": "Negative", "flag": "" },
+            { "test": "Amphetamines", "value": "Negative", "unit": "—", "range": "Negative", "flag": "" },
+            { "test": "Cocaine", "value": "Negative", "unit": "—", "range": "Negative", "flag": "" },
+            { "test": "THC", "value": "Negative", "unit": "—", "range": "Negative", "flag": "" }
           ]
         }
       ]
@@ -213,75 +163,81 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "Transthoracic Echocardiogram",
-      "status": "Final",
+      "date": "06/2019",
+      "study": "TRANSTHORACIC ECHOCARDIOGRAM (TTE)",
+      "accession": "IMG-2019-06151",
+      "status": "FINAL",
+      "orderedBy": "Dr. Raj Gupta, MD (Hospitalist)",
+      "readBy": "Dr. Priya Shah, MD (Cardiology)",
+      "facility": "Broward Health — North Campus",
       "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-910236",
-      "clinical": "Persistent fever for 3 weeks despite oral antibiotics, new murmur",
-      "technique": "Standard protocol",
-      "findings": "1.5cm mobile vegetation on tricuspid valve with moderate tricuspid regurgitation. LVEF 55%.",
-      "impression": "Tricuspid valve endocarditis with large vegetation. Blood cultures pending.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/01/2026",
-      "study": "Chest X-Ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-480996",
-      "clinical": "Persistent fever for 3 weeks despite oral antibiotics, new murmur",
-      "technique": "Standard protocol",
-      "findings": "Multiple bilateral peripheral nodular opacities — several with cavitation.",
-      "impression": "Septic pulmonary emboli from right-sided endocarditis.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "clinical": "29M systolic murmur noted on admission for cellulitis.",
+      "technique": "Standard 2D, M-mode, and Doppler TTE.",
+      "findings": "Left ventricle: Normal size and function. LVEF 60%.\\n\\nMitral valve: Posterior leaflet prolapse (P2 segment). Mild mitral regurgitation. Jet area <4 cm². No anterior leaflet involvement.\\n\\nAortic, tricuspid, pulmonic valves: Normal.\\n\\nNo vegetations.\\n\\nPericardium: Normal.",
+      "impression": "1. Mitral valve prolapse (posterior leaflet) with mild MR.\\n2. Normal LV size and function.\\n3. No vegetations.",
+      "dictated": "06/15/2019 14:20",
+      "verified": "06/15/2019 16:00"
     }
   ],
   "immunizations": [
     {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
+      "vaccine": "Influenza (Quadrivalent)",
+      "date": "10/05/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL2024-264",
+      "mfr": "Sanofi Pasteur"
     },
     {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
+      "vaccine": "COVID-19 (Pfizer 2024-25)",
+      "date": "10/20/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV2024-694",
+      "mfr": "Pfizer"
     },
     {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
+      "vaccine": "Hepatitis A (2/2)",
+      "date": "2019",
+      "site": "Left deltoid IM",
+      "lot": "—",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Hepatitis B (3/3)",
+      "date": "2019",
+      "site": "Right deltoid IM",
+      "lot": "—",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap (Boostrix)",
+      "date": "2019",
+      "site": "Left deltoid IM",
+      "lot": "—",
+      "mfr": "GSK"
     }
   ],
   "familyHistory": [
-    "Non-contributory"
+    "Mother: Depression, HTN, alive at 60",
+    "Father: Alcohol use disorder, CAD, alive at 64",
+    "Brother: Substance use disorder (in recovery), age 31",
+    "No family history of valve disease or rheumatic fever"
   ],
   "socialHistory": [
-    [
-      "IV drug use",
-      "Active — heroin and fentanyl, daily use"
-    ],
-    [
-      "Housing",
-      "Homeless"
-    ],
-    [
-      "Prior endocarditis",
-      "Treated 2 years ago — same valve"
-    ]
-  ]
+    ["Occupation", "Warehouse associate — full-time"],
+    ["Marital", "Single, lives with mother"],
+    ["Tobacco", "Former smoker — 10 pack-years; quit 2022"],
+    ["Alcohol", "Denies — in recovery"],
+    ["Drugs", "History of IVDU heroin 2016-2021; in sustained remission on MAT; denies any current substance use"],
+    ["Exercise", "Walking; physical job provides activity"],
+    ["Housing", "Lives with mother in apartment"],
+    ["Safety", "Denies IPV; no firearms; Narcan kit at home"],
+    ["Advance Directive", "None on file"]
+  ],
+  "meta": {
+    "caseId": "infective-endocarditis",
+    "diagnosis": "Infective Endocarditis — Subacute (Streptococcus viridans, Mitral Valve with MVP)",
+    "acuity": 2,
+    "presentation": "Fever/Sepsis",
+    "category": "infectious"
+  }
 };

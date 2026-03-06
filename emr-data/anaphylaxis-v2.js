@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Robert Chen",
+  "patientHPI": "I was gardening this morning when a bee stung my right arm, and about thirty minutes later I started feeling really dizzy and flushed all over, and now I'm having trouble breathing. This happened to me before about five years ago with a bee sting and it was really scary, but my emergency pen expired and I haven't gotten a new one yet.",
       "dob": "12/10/1954",
       "age": "72",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-984612",
       "language": "Mandarin",
       "race": "Asian",
-      "phone": "(645) 949-5109",
+      "phone": "(505) 555-1035",
       "email": "robert.chen@email.com",
-      "address": "3335 Oak St, Weston, FL 33326",
+      "address": "9205 E Roosevelt Rd, Milwaukee, WI 53205",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah Chen",
-        "phone": "(408) 815-5231",
+        "phone": "(505) 555-5345",
         "relationship": "Spouse"
       }
     },
@@ -908,15 +909,15 @@ window.EMR_DATA = {
     "mrn": "MRN-984612",
     "language": "Mandarin",
     "race": "Asian",
-    "phone": "(645) 949-5109",
+    "phone": "(804) 555-8454",
     "email": "robert.chen@email.com",
-    "address": "3335 Oak St, Weston, FL 33326",
+    "address": "4961 Elm St, Memphis, TN 38122",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah Chen",
-      "phone": "(408) 815-5231",
+      "phone": "(502) 555-7930",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Bee sting 30 min ago — lightheaded, diffuse flushing, no hives, NOT tachycardic (on metoprolol)",

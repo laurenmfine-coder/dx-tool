@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Aaliyah Robinson",
+  "patientHPI": "I was at school and they gave me rice even though I'm not supposed to have it, and then I started throwing up really bad for like two hours straight - now I feel so weak and dizzy I can barely sit up.",
       "dob": "02/24/2019",
       "age": "7",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-672043",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(737) 637-6683",
+      "phone": "(614) 555-5773",
       "email": "aaliyah.x@email.com",
-      "address": "7121 Oak St, Weston, FL 33326",
+      "address": "2381 Dogwood Ln, Louisville, KY 40204",
       "insurance": "Medicaid",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(979) 460-3477",
+        "phone": "(713) 555-2133",
         "relationship": "Parent"
       }
     },
@@ -777,15 +778,15 @@ window.EMR_DATA = {
     "mrn": "MRN-672043",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(737) 637-6683",
+    "phone": "(804) 555-7703",
     "email": "aaliyah.x@email.com",
-    "address": "7121 Oak St, Weston, FL 33326",
+    "address": "7033 Pine Ave, Minneapolis, MN 55411",
     "insurance": "Medicaid",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(979) 460-3477",
+      "phone": "(704) 555-9180",
       "relationship": "Parent"
     },
     "chiefComplaint": "7yo with known FPIES — school exposure to rice, profuse vomiting, lethargy, hypotension. School nurse gave EpiPen (ineffective).",

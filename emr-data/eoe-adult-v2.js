@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Green",
+  "patientHPI": "I was having dinner with my team tonight and took a bite of steak that just got stuck in my throat and won't go down. It's been about six hours now and I can't swallow anything, not even water. This has actually happened to me a few times before over the years when I eat meat or bread, but it usually goes down on its own after a while.",
       "dob": "09/28/1997",
       "age": "29",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-589330",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(689) 654-3756",
+      "phone": "(513) 555-8398",
       "email": "marcus.green@email.com",
-      "address": "1889 Oak St, Weston, FL 33326",
+      "address": "1657 Larkspur Ln, Louisville, KY 40208",
       "insurance": "Cigna PPO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Sarah Green",
-        "phone": "(259) 491-6654",
+        "phone": "(414) 555-7779",
         "relationship": "Spouse"
       }
     },
@@ -893,15 +894,15 @@ window.EMR_DATA = {
     "mrn": "MRN-589330",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(689) 654-3756",
+    "phone": "(503) 555-8430",
     "email": "marcus.green@email.com",
-    "address": "1889 Oak St, Weston, FL 33326",
+    "address": "2601 S Halsted St, Memphis, TN 38104",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Sarah Green",
-      "phone": "(259) 491-6654",
+      "phone": "(505) 555-7815",
       "relationship": "Spouse"
     },
     "chiefComplaint": "29yo with 6-hour food impaction — steak bolus lodged in distal esophagus",

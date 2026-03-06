@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Megan Sullivan",
+  "patientHPI": "I've been struggling a lot over the past few months with feeling really down and unmotivated. I'm having trouble focusing at work, I wake up way too early and can't get back to sleep, and I've lost my appetite - I've actually lost about 5 pounds without trying. I used to enjoy going out with friends but lately I just want to stay home and isolate myself, which isn't like me at all.",
     "dob": "07/22/1998",
     "age": 27,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4900 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "2805 SW 70th Ave, Riverside, FL 33100",
+    "address": "4828 N Western Ave, Minneapolis, MN 55410",
     "phone": "(954) 555-8934",
     "email": "m.sullivan98@email.com",
     "emergencyContact": {

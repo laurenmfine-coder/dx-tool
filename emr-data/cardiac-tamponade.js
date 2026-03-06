@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Moreno",
+  "patientHPI": "I can't catch my breath and there's this heavy pressure feeling all across my chest. It's not sharp pain, just this awful fullness that makes it hard to breathe, and it seems to be getting worse.",
     "dob": "06/15/1962",
     "age": "64",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-567122",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(482) 892-2668",
+    "phone": "(713) 555-8311",
     "email": "patricia.moreno@email.com",
-    "address": "7628 Oak St, Weston, FL 33391",
+    "address": "8147 Spruce St, Memphis, TN 38114",
     "insurance": "Medicare",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
     "emergencyContact": {
       "name": "James Morris",
-      "phone": "(792) 652-2625",
+      "phone": "(412) 555-5678",
       "relationship": "Sibling"
     },
     "chiefComplaint": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",

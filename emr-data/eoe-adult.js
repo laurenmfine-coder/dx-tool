@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Brandon Kowalski",
+  "patientHPI": "I was eating dinner and a piece of food got stuck in my throat again and just won't go down. This keeps happening to me, especially with meat and bread - it feels like the food just sits there in my chest. Usually I can get it down eventually, but this time it's been stuck for hours and I'm starting to panic.",
       "dob": "02/09/1998",
       "age": "28",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-379365",
       "language": "English",
       "race": "Hispanic/Latino",
-      "phone": "(991) 846-1632",
+      "phone": "(630) 555-2876",
       "email": "brandon.kowalski@email.com",
-      "address": "6593 Oak St, Weston, FL 33375",
+      "address": "5211 Hollyhock Rd, Cleveland, OH 44105",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Lisa Kowalski",
-        "phone": "(986) 891-9988",
+        "phone": "(803) 555-3683",
         "relationship": "Spouse"
       }
     },
@@ -882,15 +883,15 @@ window.EMR_DATA = {
     "mrn": "MRN-379365",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(991) 846-1632",
+    "phone": "(502) 555-2771",
     "email": "brandon.kowalski@email.com",
-    "address": "6593 Oak St, Weston, FL 33375",
+    "address": "1345 Dogwood Ln, Baltimore, MD 21210",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Lisa Kowalski",
-      "phone": "(986) 891-9988",
+      "phone": "(620) 555-1420",
       "relationship": "Spouse"
     },
     "chiefComplaint": "28-year-old with recurrent dysphagia and food impaction at dinner",

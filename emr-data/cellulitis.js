@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "James Crawford",
+  "patientHPI": "I'm here for my regular check-up for my diabetes and blood pressure. My feet have been getting numb and burning lately, especially at night. I know my blood sugar hasn't been great - I've been struggling to stick to my diet and haven't been exercising much.",
     "dob": "01/30/1970",
     "age": 55,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4700 N Pine Island Rd, Sunrise, FL",
     "language": "English",
     "race": "White",
-    "address": "7220 NW 44th St, Sunrise, FL 33351",
+    "address": "8842 Larkspur Ln, Denver, CO 80211",
     "phone": "(954) 555-1127",
     "email": "j.crawford70@email.com",
     "emergencyContact": {

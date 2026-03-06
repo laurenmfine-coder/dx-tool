@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Liam O'Sullivan",
+  "patientHPI": "I was eating chicken nuggets and one got stuck in my throat and I can't swallow it down. I've been drooling because I can't even swallow my spit. My mom says this has been happening since I was little - food getting stuck when I eat, and she's always had to cut my food up really small or give me soft things to eat.",
       "dob": "08/14/2015",
       "age": "11",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-901731",
       "language": "English",
       "race": "White",
-      "phone": "(394) 545-8563",
+      "phone": "(313) 555-4637",
       "email": "liam.x@email.com",
-      "address": "2735 Oak St, Weston, FL 33326",
+      "address": "8324 Hollyhock Rd, Memphis, TN 38111",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(226) 847-2958",
+        "phone": "(614) 555-6727",
         "relationship": "Parent"
       }
     },
@@ -858,15 +859,15 @@ window.EMR_DATA = {
     "mrn": "MRN-901731",
     "language": "English",
     "race": "White",
-    "phone": "(394) 545-8563",
+    "phone": "(212) 555-7797",
     "email": "liam.x@email.com",
-    "address": "2735 Oak St, Weston, FL 33326",
+    "address": "3778 Chestnut Rd, New Orleans, LA 70114",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(226) 847-2958",
+      "phone": "(312) 555-7495",
       "relationship": "Parent"
     },
     "chiefComplaint": "11yo with food impaction (chicken nugget) — history of \"picky eating\" for 6 years actually represents undiagnosed EoE",

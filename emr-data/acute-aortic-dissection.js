@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Thornton",
+  "patientHPI": "I've been having this nagging ache between my shoulder blades on and off, figured I pulled something, but today it's really bothering me and feels different somehow - sharper and more intense than usual muscle pain.",
     "dob": "03/18/1961",
     "age": 64,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2901 Stirling Rd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "1820 NE 56th St, Fort Lauderdale, FL 33308",
+    "address": "1441 Foxglove Dr, Memphis, TN 38118",
     "phone": "(954) 555-7291",
     "email": "r.thornton61@email.com",
     "emergencyContact": {

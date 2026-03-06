@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Hazel Thompson",
+  "patientHPI": "I woke up three days ago with this terrible pain in my lower back and side that feels like someone's stabbing me, and I've had a fever and chills. It burns when I pee and I'm going to the bathroom constantly - this feels worse than my usual bladder infections.",
     "dob": "06/14/1995",
     "age": "31",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-984321",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(685) 699-5206",
+    "phone": "(312) 555-5703",
     "email": "hazel.thompson@email.com",
-    "address": "9518 Pine Dr, Sunrise, FL 33374",
+    "address": "2319 Jasmine Way, Birmingham, AL 35208",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "John Thompson",
-      "phone": "(817) 924-3604",
+      "phone": "(513) 555-3948",
       "relationship": "Partner"
     },
     "chiefComplaint": "Flank pain, fever, dysuria, rigors",

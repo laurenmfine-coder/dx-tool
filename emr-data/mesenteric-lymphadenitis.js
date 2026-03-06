@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jayden Williams",
+  "patientHPI": "I've had this sore throat and stuffy nose for about five days now, along with a dry cough that won't go away. I've been running a low fever at home and just feel pretty run down overall.",
     "dob": "03/22/2006",
     "age": 19,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4001 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Black or African American",
-    "address": "2210 NW 9th Ct, Fort Lauderdale, FL 33311",
+    "address": "2726 N Western Ave, Milwaukee, WI 53208",
     "phone": "(954) 555-7623",
     "email": "jwilliams2006@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Evelyn Carter",
+  "patientHPI": "This past week I've been getting more and more short of breath, and now I can barely walk to the bathroom without huffing and puffing. I've gained about 14 pounds in three weeks, my legs are swollen up to my knees, and I had to add another pillow because I can't breathe lying flat. I woke up gasping for air twice last night.",
     "dob": "04/15/1947",
     "age": 77,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens \u2014 4600 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "Black or African American",
-    "address": "3918 Thomas St, Hollywood, FL 33021",
+    "address": "1092 Sycamore Dr, Baltimore, MD 21214",
     "phone": "(954) 555-1247",
     "email": "e.carter47@email.com",
     "emergencyContact": {

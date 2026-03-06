@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Baby Ethan Kowalski",
+  "patientHPI": "My baby has been throwing up after almost every bottle for the past couple months, and now he's having bloody diarrhea too - he used to be a chunky baby but now he looks so skinny and weak.",
       "dob": "08/27/2025.6",
       "age": "0.4",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-131262",
       "language": "English",
       "race": "White",
-      "phone": "(235) 804-2152",
+      "phone": "(414) 555-3390",
       "email": "baby.x@email.com",
-      "address": "7915 Oak St, Weston, FL 33326",
+      "address": "3314 Hollyhock Rd, Memphis, TN 38107",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(909) 376-1099",
+        "phone": "(212) 555-5272",
         "relationship": "Parent"
       }
     },
@@ -824,15 +825,15 @@ window.EMR_DATA = {
     "mrn": "MRN-131262",
     "language": "English",
     "race": "White",
-    "phone": "(235) 804-2152",
+    "phone": "(619) 555-7841",
     "email": "baby.x@email.com",
-    "address": "7915 Oak St, Weston, FL 33326",
+    "address": "8281 Clover St, Louisville, KY 40211",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(909) 376-1099",
+      "phone": "(502) 555-3497",
       "relationship": "Parent"
     },
     "chiefComplaint": "4-month-old with chronic vomiting, bloody diarrhea, FTT — on cow milk formula, told it was reflux",

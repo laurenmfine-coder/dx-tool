@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Rivera",
+  "patientHPI": "I'm here for my yearly check-up and feeling great overall. I've been keeping up with my cycling and weight training routine, and I haven't had any health issues or injuries lately. No complaints at all - just want to make sure everything looks good.",
     "dob": "03/22/1991",
     "age": 33,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2201 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Hispanic",
-    "address": "1450 NW 3rd Ave, Fort Lauderdale, FL 33311",
+    "address": "1781 Birch Ln, Richmond, VA 23220",
     "phone": "(954) 555-6193",
     "email": "m.rivera91@email.com",
     "emergencyContact": {

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Destiny Johnson",
+  "patientHPI": "I was at a school event and ate a cookie without asking what was in it because I felt embarrassed to ask in front of everyone, but now my throat is closing up and I can't breathe. I've been told to avoid peanuts since I was little and I have an emergency pen, but I left it in my locker because I hate carrying it around.",
       "dob": "08/18/2010",
       "age": "16",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-385106",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(201) 591-9567",
+      "phone": "(619) 555-1611",
       "email": "destiny.johnson@email.com",
-      "address": "8277 Oak St, Weston, FL 33326",
+      "address": "3153 Peachtree Rd, Detroit, MI 48201",
       "insurance": "Medicaid",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Michael Johnson",
-        "phone": "(673) 313-6723",
+        "phone": "(404) 555-7846",
         "relationship": "Parent"
       }
     },
@@ -885,15 +886,15 @@ window.EMR_DATA = {
     "mrn": "MRN-385106",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(201) 591-9567",
+    "phone": "(404) 555-1595",
     "email": "destiny.johnson@email.com",
-    "address": "8277 Oak St, Weston, FL 33326",
+    "address": "4989 Chestnut Rd, New Orleans, LA 70116",
     "insurance": "Medicaid",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Michael Johnson",
-      "phone": "(673) 313-6723",
+      "phone": "(505) 555-9116",
       "relationship": "Parent"
     },
     "chiefComplaint": "16yo with known peanut allergy — ate cookie at school event, progressive throat tightness and hives, EpiPen was in locker",

@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Hawkins",
+  "patientHPI": "My daughter found me this morning and says I wasn't responding when she tried to wake me up. I've been feeling more tired than usual lately, and I know I haven't been great about taking my thyroid pills. Everything just feels so foggy and slow, and I've been so cold even when it's warm in the house.",
     "dob": "05/10/1951",
     "age": "75",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-342068",
     "language": "English",
     "race": "Asian",
-    "phone": "(525) 241-1855",
+    "phone": "(804) 555-9837",
     "email": "dorothy.hawkins@email.com",
-    "address": "4427 Palm Dr, Plantation, FL 33332",
+    "address": "8321 Poplar Ave, Louisville, KY 40211",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Thomas Hawkins",
-      "phone": "(745) 699-1464",
+      "phone": "(504) 555-9697",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Found obtunded with hypothermia — known hypothyroidism",

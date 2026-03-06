@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Nadine Toussaint",
+  "patientHPI": "I've been feeling more and more tired lately, and people keep telling me I look yellow, especially my eyes. My urine has also gotten much darker than normal, almost like tea, which is worrying me.",
     "dob": "09/23/1995",
     "age": "31",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-630555",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(921) 619-3869",
+    "phone": "(615) 555-3793",
     "email": "nadine.toussaint@email.com",
-    "address": "7661 Oak Blvd, Weston, FL 33362",
+    "address": "2521 Dogwood Ln, Detroit, MI 48227",
     "insurance": "Tricare Standard",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Samuel Toussaint",
-      "phone": "(315) 374-7045",
+      "phone": "(617) 555-7229",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Progressive fatigue, jaundice, dark urine",

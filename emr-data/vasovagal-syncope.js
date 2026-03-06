@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sophia Castellano",
+  "patientHPI": "I was standing in church this morning during the long service when I started feeling really lightheaded and hot, like I might throw up. The next thing I knew, I was waking up on the floor with everyone around me. This has happened to me a couple times before when I've been standing for a long time.",
     "dob": "11/05/2007",
     "age": "19",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-438133",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(705) 845-5867",
+    "phone": "(313) 555-4475",
     "email": "sophia.castellano@email.com",
-    "address": "3331 Maple Blvd, Davie, FL 33326",
+    "address": "929 Dogwood Ln, Milwaukee, WI 53212",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "John Castellano",
-      "phone": "(919) 826-7354",
+      "phone": "(702) 555-1349",
       "relationship": "Partner"
     },
     "chiefComplaint": "Syncope after prolonged standing at church — prodrome of lightheadedness, warmth, and nausea",

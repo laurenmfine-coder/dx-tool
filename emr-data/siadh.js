@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Beverly Coleman",
+  "patientHPI": "Ever since I retired a few months ago, I just can't shake this overwhelming sadness and I don't enjoy anything anymore. I barely want to leave my house or see anyone, and my daughter is worried because I'm not eating much and can't sleep through the night.",
     "dob": "11/03/1957",
     "age": 67,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4501 S University Dr, Riverside, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "5612 SW 38th Ct, Fort Lauderdale, FL 33314",
+    "address": "1269 Juniper Dr, Albuquerque, NM 87111",
     "phone": "(954) 555-7842",
     "email": "b.coleman57@email.com",
     "emergencyContact": {

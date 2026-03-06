@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ethan Ramirez",
+  "patientHPI": "My son has been doing great this year - he's active in soccer and swimming, his asthma is well controlled, and he only needs his inhaler maybe once a month. His skin condition flares up occasionally but nothing too bad. He's been complaining about some pain down there for the past day though, and as a mom I'm always worried when something seems off, so I wanted to have you take a look at him.",
     "dob": "05/16/2013",
     "age": 11,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 6901 Pines Blvd, Pembroke Pines, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "10250 Pines Blvd, Pembroke Pines, FL 33026",
+    "address": "1293 Sycamore Dr, Cleveland, OH 44109",
     "phone": "(954) 555-2294",
     "email": "c.ramirez.parent@email.com",
     "emergencyContact": {

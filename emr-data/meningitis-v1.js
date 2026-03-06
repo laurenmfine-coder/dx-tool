@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Emily Johnson",
+  "patientHPI": "I have the worst headache of my life, I'm burning up with fever, my neck is so stiff I can barely move it, and the lights are killing my eyes. I live in the dorms at college and I just feel absolutely terrible.",
     "dob": "04/06/1999",
     "age": "27",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-338691",
     "language": "English",
     "race": "Asian",
-    "phone": "(286) 371-2843",
+    "phone": "(404) 555-3623",
     "email": "kevin.johnson@email.com",
-    "address": "4382 Willow Ln, Sunrise, FL 33315",
+    "address": "7670 Iris Blvd, Columbus, OH 43203",
     "insurance": "Oscar Health",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "James Johnson",
-      "phone": "(440) 295-9904",
+      "phone": "(503) 555-7985",
       "relationship": "Parent"
     },
     "chiefComplaint": "Severe headache, fever, neck stiffness, photophobia",

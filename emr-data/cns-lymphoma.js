@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gerald Whitmore",
+  "patientHPI": "My wife keeps saying I'm more forgetful lately and sometimes I lose track of what day it is, but I think that's just normal aging. I have been getting these headaches in the front of my head on and off for the past month though.",
     "dob": "12/04/1954",
     "age": 70,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 1801 E Sunrise Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White/Caucasian",
-    "address": "4218 NE 21st Ave, Fort Lauderdale, FL 33308",
+    "address": "2031 Birch Ln, Columbus, OH 43206",
     "phone": "(954) 555-2918",
     "email": "g.whitmore54@email.com",
     "emergencyContact": {

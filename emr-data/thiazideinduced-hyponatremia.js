@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret Connolly",
+  "patientHPI": "I've been checking my blood pressure at home like you told me to, and it's still running high even though I'm taking my medicine every day. When we tried to increase that pill a few months ago, my ankles got so swollen I could barely get my shoes on, so we had to go back to the lower dose. I know you mentioned adding another medication, and honestly I'm worried about taking too many pills, but I understand my pressure needs to come down.",
     "dob": "03/28/1947",
     "age": 77,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1550 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White/Caucasian (Irish descent)",
-    "address": "720 SE 4th Ave, Fort Lauderdale, FL 33316",
+    "address": "5141 Oak Ave, Albuquerque, NM 87108",
     "phone": "(954) 555-3418",
     "email": "m.connolly47@email.com",
     "emergencyContact": {

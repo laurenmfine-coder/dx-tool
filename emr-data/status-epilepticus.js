@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Michael Chang",
+  "patientHPI": "I don't remember what happened, but my wife says I had a seizure that went on for several minutes and I'm still feeling really confused and out of it. I know I haven't been great about taking my seizure medicine lately, which was probably stupid of me.",
     "dob": "11/22/1993",
     "age": "33",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-135247",
     "language": "English",
     "race": "White",
-    "phone": "(645) 468-7338",
+    "phone": "(415) 555-2341",
     "email": "michael.chang@email.com",
-    "address": "9290 Elm Dr, Hollywood, FL 33367",
+    "address": "8937 Daisy Ave, Kansas City, MO 64108",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Emily Chang",
-      "phone": "(429) 718-4747",
+      "phone": "(615) 555-1317",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Witnessed generalized seizure for >5 minutes, not returning to baseline",

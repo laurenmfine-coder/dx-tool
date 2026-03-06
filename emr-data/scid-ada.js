@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Amara Osei",
+  "patientHPI": "The doctors called and said something came back abnormal on my baby's newborn screening test and we need to come in right away. She seems completely fine to me - she's eating well, gaining weight, and hasn't been sick at all, so I'm confused and worried about what this could mean.",
       "dob": "01/15/2026",
       "age": "6 weeks",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-592847",
       "language": "English",
       "race": "Black or African American",
-      "phone": "(786) 441-2930",
+      "phone": "(704) 555-9955",
       "email": "osei.family@email.com",
-      "address": "2801 Biscayne Blvd, Miami, FL 33137",
+      "address": "7337 Juniper Dr, Pittsburgh, PA 15205",
       "insurance": "Medicaid",
       "pcp": "Dr. Patricia Walker, MD (Neonatology → Pediatrics)",
       "pharmacy": "Jackson Memorial Pharmacy",
       "emergencyContact": {
         "name": "Kwame Osei",
-        "phone": "(786) 441-2929",
+        "phone": "(404) 555-2210",
         "relationship": "Father"
       }
     },

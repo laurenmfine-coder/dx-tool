@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dennis O'Brien",
+  "patientHPI": "I'm still drinking about a pint of liquor and some beers daily, and lately my stomach pain has been getting worse, especially right here under my ribs. I've lost my appetite and I'm only eating once a day - lost about four pounds recently.",
     "dob": "12/02/1969",
     "age": 56,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 1620 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "White (Irish American)",
-    "address": "520 NW 7th Ave, Fort Lauderdale, FL 33311",
+    "address": "7824 Larkspur Ln, Albuquerque, NM 87104",
     "phone": "(954) 555-1908",
     "email": "d.obrien69@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dylan Oconnor",
+  "patientHPI": "I was playing lacrosse during practice yesterday when I took a really hard hit from another player's stick right between my legs, and now I'm having severe pain and swelling down there. The pain is getting worse instead of better, and I'm worried something might be seriously wrong because it doesn't feel like a normal sports injury.",
     "dob": "10/28/2001",
     "age": 23,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3100 S University Dr, Riverside, FL",
     "language": "English",
     "race": "White",
-    "address": "2890 College Ave, Riverside, FL 33100",
+    "address": "2596 S Halsted St, Baltimore, MD 21218",
     "phone": "(954) 555-4156",
     "email": "d.oconnor01@email.com",
     "emergencyContact": {

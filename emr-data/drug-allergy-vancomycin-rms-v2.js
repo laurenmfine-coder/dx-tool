@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Dorothy Patterson",
+  "patientHPI": "I was getting my antibiotic through the IV when suddenly my face and chest turned bright red and I felt really dizzy and weak. The nurses said my blood pressure dropped and they had to stop the medicine right away. It all happened so fast during the first hour of getting the medication.",
       "dob": "10/02/1948",
       "age": "78",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-350241",
       "language": "English",
       "race": "White",
-      "phone": "(374) 250-4382",
+      "phone": "(502) 555-4770",
       "email": "dorothy.x@email.com",
-      "address": "1686 Oak St, Weston, FL 33326",
+      "address": "2341 Cedar Blvd, Richmond, VA 23226",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(955) 472-1448",
+        "phone": "(630) 555-6772",
         "relationship": "Spouse"
       }
     },
@@ -788,15 +789,15 @@ window.EMR_DATA = {
     "mrn": "MRN-350241",
     "language": "English",
     "race": "White",
-    "phone": "(374) 250-4382",
+    "phone": "(414) 555-4115",
     "email": "dorothy.x@email.com",
-    "address": "1686 Oak St, Weston, FL 33326",
+    "address": "647 Spruce St, Memphis, TN 38108",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(955) 472-1448",
+      "phone": "(630) 555-5106",
       "relationship": "Spouse"
     },
     "chiefComplaint": "78yo with MRSA prosthetic joint infection — vancomycin RMS mislabeled as allergy, limiting treatment options",

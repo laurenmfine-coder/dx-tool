@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Keandra Williams",
+  "patientHPI": "I've been feeling absolutely terrible for the past few days - I have this high fever that won't break, my heart feels like it's racing all the time, and I can't seem to sit still or calm down. My hands are shaking so bad I can barely hold a cup, and I feel completely agitated and anxious about everything. I'll be honest - I haven't been great about taking my thyroid medication regularly, and now I'm wondering if that's catching up with me.",
     "dob": "10/24/1983",
     "age": "43",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-887351",
     "language": "English",
     "race": "Asian",
-    "phone": "(541) 295-8579",
+    "phone": "(313) 555-8682",
     "email": "keandra.williams@email.com",
-    "address": "4510 Willow Ln, Hollywood, FL 33395",
+    "address": "4601 Daisy Ave, Phoenix, AZ 85003",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Anthony Williams",
-      "phone": "(232) 279-2393",
+      "phone": "(614) 555-5961",
       "relationship": "Spouse"
     },
     "chiefComplaint": "High fever, tachycardia, agitation, tremor — known Graves' disease",

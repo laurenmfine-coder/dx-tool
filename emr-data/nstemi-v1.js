@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Giovanna DeLuca",
+  "patientHPI": "I've been having this pressure in my chest on and off for about six hours now - it comes and goes but it's really bothering me and I've never felt anything quite like this before.",
     "dob": "03/06/1963",
     "age": "63",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-370242",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(458) 572-8693",
+    "phone": "(314) 555-9653",
     "email": "giovanna.deluca@email.com",
-    "address": "2756 Maple Ln, Sunrise, FL 33302",
+    "address": "3563 S Halsted St, Louisville, KY 40202",
     "insurance": "Medicaid",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Kevin DeLuca",
-      "phone": "(895) 919-7710",
+      "phone": "(312) 555-4764",
       "relationship": "Partner"
     },
     "chiefComplaint": "Intermittent chest pressure for 6 hours",

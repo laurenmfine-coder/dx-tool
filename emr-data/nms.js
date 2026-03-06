@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Bradley Chung",
+  "patientHPI": "The staff at my group home called the ambulance because they said I was burning up with fever and my whole body went stiff like a board. I take medications for my mental health condition, and I can't really move my muscles properly - everything feels locked up and rigid.",
     "dob": "06/15/1992",
     "age": "34",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-182526",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(321) 292-7676",
+    "phone": "(615) 555-3344",
     "email": "bradley.chung@email.com",
-    "address": "5949 Maple Ave, Boca Raton, FL 33431",
+    "address": "4261 Maple St, Minneapolis, MN 55406",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wilson, MD",
     "pharmacy": "CVS Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "William Phillips",
-      "phone": "(941) 532-8092",
+      "phone": "(414) 555-8555",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "Group home staff: 'He's burning up and stiff as a board' Whole body stiffness, no specific pain reported",

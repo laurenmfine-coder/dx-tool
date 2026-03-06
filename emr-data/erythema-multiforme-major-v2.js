@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Kevin Park",
+  "patientHPI": "I keep getting these weird rashes that look like bullseyes on my hands and arms, and my mouth gets really sore with painful sores. This is the third time in a year, and it always seems to happen about a week after I get a cold sore on my lip. The rash spreads and my eyes get red and irritated too.",
       "dob": "06/16/2006",
       "age": "20",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-239128",
       "language": "English",
       "race": "Asian",
-      "phone": "(803) 541-4851",
+      "phone": "(314) 555-2011",
       "email": "kevin.x@email.com",
-      "address": "8699 Oak St, Weston, FL 33326",
+      "address": "5475 W Haddon Ave, Baltimore, MD 21206",
       "insurance": "Parents' plan",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(410) 448-7878",
+        "phone": "(619) 555-9281",
         "relationship": "Spouse"
       }
     },
@@ -747,15 +748,15 @@ window.EMR_DATA = {
     "mrn": "MRN-239128",
     "language": "English",
     "race": "Asian",
-    "phone": "(803) 541-4851",
+    "phone": "(412) 555-9792",
     "email": "kevin.x@email.com",
-    "address": "8699 Oak St, Weston, FL 33326",
+    "address": "9654 N Western Ave, Minneapolis, MN 55401",
     "insurance": "Parents' plan",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(410) 448-7878",
+      "phone": "(317) 555-3695",
       "relationship": "Spouse"
     },
     "chiefComplaint": "20yo with targetoid rash and oral erosions — 3rd episode in 12 months, always preceded by cold sore",

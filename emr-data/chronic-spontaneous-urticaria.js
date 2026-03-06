@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Mariana Chen-Vasquez",
+  "patientHPI": "These hives just won't go away no matter what I take - they're covering my arms and body again and my face is starting to swell up even though I'm taking my allergy pills.",
       "dob": "03/11/1984",
       "age": "42",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-169705",
       "language": "English",
       "race": "Multiracial",
-      "phone": "(913) 646-1446",
+      "phone": "(415) 555-1711",
       "email": "mariana.chen-vasquez@email.com",
-      "address": "6114 Oak St, Weston, FL 33324",
+      "address": "9144 Foxglove Dr, Memphis, TN 38107",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "David Chen-Vasquez",
-        "phone": "(531) 220-5682",
+        "phone": "(720) 555-8527",
         "relationship": "Spouse"
       }
     },
@@ -802,15 +803,15 @@ window.EMR_DATA = {
     "mrn": "MRN-169705",
     "language": "English",
     "race": "Multiracial",
-    "phone": "(913) 646-1446",
+    "phone": "(619) 555-3045",
     "email": "mariana.chen-vasquez@email.com",
-    "address": "6114 Oak St, Weston, FL 33324",
+    "address": "1239 Magnolia Blvd, Richmond, VA 23220",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "David Chen-Vasquez",
-      "phone": "(531) 220-5682",
+      "phone": "(505) 555-2291",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Daily hives for 8 weeks with no identifiable trigger, refractory to H1 antihistamines",

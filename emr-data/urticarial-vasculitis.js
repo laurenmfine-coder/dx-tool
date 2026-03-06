@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Rosemary Baptiste",
+  "patientHPI": "I've been dealing with these painful, burning hives that keep appearing on my skin, and I've been running fevers off and on. My joints hurt so much, especially in the morning when I wake up - it's hard to even get out of bed some days.",
       "dob": "07/03/1978",
       "age": "48",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-198371",
       "language": "English",
       "race": "Asian",
-      "phone": "(278) 772-6325",
+      "phone": "(404) 555-5906",
       "email": "rosemary.baptiste@email.com",
-      "address": "6652 Oak St, Weston, FL 33383",
+      "address": "6241 Dogwood Ln, Phoenix, AZ 85009",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Baptiste",
-        "phone": "(956) 362-8162",
+        "phone": "(212) 555-1753",
         "relationship": "Spouse"
       }
     },
@@ -762,15 +763,15 @@ window.EMR_DATA = {
     "mrn": "MRN-198371",
     "language": "English",
     "race": "Asian",
-    "phone": "(278) 772-6325",
+    "phone": "(503) 555-1919",
     "email": "rosemary.baptiste@email.com",
-    "address": "6652 Oak St, Weston, FL 33383",
+    "address": "9373 Hickory Rd, Columbus, OH 43203",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Baptiste",
-      "phone": "(956) 362-8162",
+      "phone": "(502) 555-6873",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Painful, burning hives lasting >24 hours with residual bruising",

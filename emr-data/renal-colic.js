@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Brian Mitchell",
+  "patientHPI": "This morning I woke up with the worst pain I've ever felt in my left side, like someone's twisting a knife in my back, and it shoots down toward my groin. The pain comes in waves and makes me want to throw up - I've had kidney stones before and this feels exactly the same.",
     "dob": "07/21/1989",
     "age": "37",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-930530",
     "language": "English",
     "race": "White",
-    "phone": "(806) 315-8698",
+    "phone": "(414) 555-2988",
     "email": "brian.mitchell@email.com",
-    "address": "3151 Cedar Dr, Sunrise, FL 33340",
+    "address": "7713 Larkspur Ln, Minneapolis, MN 55411",
     "insurance": "Oscar Health",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Rite Aid — Palm Ave",
     "emergencyContact": {
       "name": "Priya Mitchell",
-      "phone": "(877) 916-1533",
+      "phone": "(614) 555-3184",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Acute-onset colicky left flank pain radiating to groin",

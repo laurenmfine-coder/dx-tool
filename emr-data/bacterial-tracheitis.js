@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ethan Morales",
+  "patientHPI": "My son is here for his regular checkup - he's been doing great in preschool and hitting all his milestones. No problems with eating, sleeping, or anything else that I can think of.",
     "dob": "04/12/2020",
     "age": 4,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2800 N University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
-    "address": "1847 SW 44th Ter, Fort Lauderdale, FL 33317",
+    "address": "7591 Pine Ave, Chicago, IL 60636",
     "phone": "(954) 555-3192",
     "email": "l.morales.parent@email.com",
     "emergencyContact": {

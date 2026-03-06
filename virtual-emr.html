@@ -2401,21 +2401,36 @@ function sendPatientMessage(){
   var ptAge  = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.age||'') : '';
   var ptSex  = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.sex||'') : '';
   var ptCC   = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.chiefComplaint||PATIENT.cc||'feeling unwell') : 'feeling unwell';
-  var ptHPI  = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.hpi||PATIENT.history||'') : '';
+  // Use patientHPI (symptom-level, no diagnosis) if available; fall back to clinical hpi only if no patientHPI exists
+  var ptHPI  = (typeof PATIENT!=='undefined'&&PATIENT) ? (PATIENT.patientHPI||PATIENT.patientHistory||'') : '';
   var ptPmh  = (typeof PROBLEMS!=='undefined'&&PROBLEMS) ? PROBLEMS.slice(0,6).map(function(p){return typeof p==='string'?p:(p.problem||p.description||'');}).filter(Boolean).join(', ') : '';
   var ptMeds = (typeof MEDICATIONS!=='undefined'&&MEDICATIONS) ? MEDICATIONS.slice(0,6).map(function(m){return m.name||'';}).filter(Boolean).join(', ') : '';
   var ptAllergies = (typeof ALLERGIES!=='undefined'&&ALLERGIES) ? ALLERGIES.filter(function(a){return a.allergen!=='NKDA';}).map(function(a){return a.allergen;}).filter(Boolean).join(', ')||'none' : 'none';
 
   // Build message history for API
   var apiMessages = [];
-  // Opening patient statement if first message
+  // Opening patient statement if first message — intentionally vague, symptom-level only
   if (S.ptMessages.length === 1) {
     var openingByCC = ptCC.toLowerCase();
-    var opening = "I've been having " + ptCC.toLowerCase() + ". I'm not sure what's going on.";
-    if (openingByCC.includes('chest') || openingByCC.includes('pain')) opening = "I've been having this chest pain and it's really scaring me.";
-    else if (openingByCC.includes('breath') || openingByCC.includes('dyspne')) opening = "I can't catch my breath. It started a little while ago and it keeps getting worse.";
-    else if (openingByCC.includes('bleed') || openingByCC.includes('blood')) opening = "I came in because of the bleeding. I wasn't sure if I needed to come in, but it wasn't stopping.";
-    else if (openingByCC.includes('fever') || openingByCC.includes('sick')) opening = "I've been feeling really sick — I have a fever and I just feel terrible.";
+    // Generic vague openings — do NOT reveal diagnosis, radiation, or specific quality
+    var opening = "I haven't been feeling right. I'm not really sure what's going on.";
+    if (openingByCC.includes('chest') || openingByCC.includes('pressure') || openingByCC.includes('pain')) {
+      opening = "I feel really off — something just doesn't feel right and I'm pretty scared.";
+    } else if (openingByCC.includes('breath') || openingByCC.includes('dyspne')) {
+      opening = "I'm having some trouble breathing. It's been going on for a bit and it's not getting better.";
+    } else if (openingByCC.includes('bleed') || openingByCC.includes('blood')) {
+      opening = "I came in because of some bleeding. I wasn't sure if I needed to, but it didn't stop on its own.";
+    } else if (openingByCC.includes('fever') || openingByCC.includes('sick')) {
+      opening = "I've been feeling really sick — not like myself at all.";
+    } else if (openingByCC.includes('dizz') || openingByCC.includes('faint') || openingByCC.includes('syncop')) {
+      opening = "I had an episode and someone told me I should get checked out.";
+    } else if (openingByCC.includes('rash') || openingByCC.includes('skin') || openingByCC.includes('itch')) {
+      opening = "I've got something going on with my skin that's been bothering me.";
+    } else if (openingByCC.includes('head')) {
+      opening = "I've had a really bad headache. It's not going away on its own.";
+    } else if (openingByCC.includes('abdomen') || openingByCC.includes('stomach') || openingByCC.includes('nausea') || openingByCC.includes('vomit')) {
+      opening = "My stomach has been really bothering me. I'm not sure what started it.";
+    }
     apiMessages.push({role:'assistant', content:opening});
   }
   S.ptMessages.forEach(function(m){ apiMessages.push({role:m.role, content:m.content}); });

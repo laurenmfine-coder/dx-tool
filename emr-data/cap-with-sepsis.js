@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Higgins",
+  "patientHPI": "I've been managing my breathing problems and other health issues pretty well lately. I can still get short of breath when I climb stairs, but that's been normal for me. My blood sugar seems stable, and I haven't had any chest pain or heart racing.",
     "dob": "11/03/1950",
     "age": 74,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1500 N University Dr, Coral Springs, FL",
     "language": "English",
     "race": "White",
-    "address": "8245 NW 38th St, Coral Springs, FL 33065",
+    "address": "502 Peachtree Rd, Pittsburgh, PA 15202",
     "phone": "(954) 555-3271",
     "email": "w.higgins50@email.com",
     "emergencyContact": {

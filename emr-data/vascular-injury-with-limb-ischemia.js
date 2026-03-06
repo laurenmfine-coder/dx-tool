@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andre Jackson",
+  "patientHPI": "I'm here for my yearly checkup and feeling great overall. I stay active playing basketball with friends and my asthma is well controlled - I barely need my inhaler anymore. Work's been going really well too since I got promoted to project manager last month.",
     "dob": "12/03/1988",
     "age": 36,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 1200 W Sunrise Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "3450 NW 19th St, Fort Lauderdale, FL 33311",
+    "address": "2417 Jasmine Way, Albuquerque, NM 87103",
     "phone": "(954) 555-5183",
     "email": "a.jackson88@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Whitfield",
+  "patientHPI": "I'm here for my yearly physical and work clearance - I spend all day outside maintaining the golf course, so I need to make sure everything's good for my job. I feel great, stay active coaching kids' sports on weekends, and my breathing has been fine with my usual inhaler.",
     "dob": "09/14/1992",
     "age": 32,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 4800 S Pine Island Rd, Riverside, FL",
     "language": "English",
     "race": "Black/African American",
-    "address": "2215 SW 73rd Way, Riverside, FL 33100",
+    "address": "8907 N Kedzie Blvd, Birmingham, AL 35210",
     "phone": "(954) 555-2738",
     "email": "m.whitfield92@email.com",
     "emergencyContact": {

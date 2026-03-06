@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Sandra Kim",
+  "patientHPI": "I'm a hairstylist and over the past two years my hands have gotten so bad that I can barely work anymore. They're cracked and bleeding, with deep cuts that won't heal, and now they're getting infected. I've seen several doctors who keep telling me it's just dry skin, but this is way beyond that - I'm in constant pain and worried I might lose my job.",
       "dob": "12/26/1984",
       "age": "42",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-608560",
       "language": "English",
       "race": "Asian",
-      "phone": "(292) 599-5086",
+      "phone": "(720) 555-3463",
       "email": "sandra.x@email.com",
-      "address": "7506 Oak St, Weston, FL 33326",
+      "address": "6521 Walnut Dr, Richmond, VA 23227",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(755) 475-4644",
+        "phone": "(503) 555-2335",
         "relationship": "Spouse"
       }
     },
@@ -789,15 +790,15 @@ window.EMR_DATA = {
     "mrn": "MRN-608560",
     "language": "English",
     "race": "Asian",
-    "phone": "(292) 599-5086",
+    "phone": "(620) 555-3317",
     "email": "sandra.x@email.com",
-    "address": "7506 Oak St, Weston, FL 33326",
+    "address": "6271 Clover St, Milwaukee, WI 53210",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(755) 475-4644",
+      "phone": "(504) 555-6082",
       "relationship": "Spouse"
     },
     "chiefComplaint": "42yo hairstylist with severe hand dermatitis and secondary infection — fissures bleeding through bandages",

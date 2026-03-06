@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Walter Brennan",
+  "patientHPI": "These swelling episodes started happening when I was around 68 and they keep coming back every few months - my face puffs up, especially around my eyes and lips, but nobody else in my family has ever had anything like this.",
       "dob": "05/14/1955",
       "age": "71",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-401586",
       "language": "English",
       "race": "White",
-      "phone": "(422) 633-3880",
+      "phone": "(415) 555-3608",
       "email": "walter.x@email.com",
-      "address": "8317 Oak St, Weston, FL 33326",
+      "address": "3369 N Kedzie Blvd, Birmingham, AL 35206",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(467) 332-5826",
+        "phone": "(804) 555-2771",
         "relationship": "Spouse"
       }
     },
@@ -833,15 +834,15 @@ window.EMR_DATA = {
     "mrn": "MRN-401586",
     "language": "English",
     "race": "White",
-    "phone": "(422) 633-3880",
+    "phone": "(505) 555-1634",
     "email": "walter.x@email.com",
-    "address": "8317 Oak St, Weston, FL 33326",
+    "address": "3828 Sycamore Dr, Cleveland, OH 44107",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(467) 332-5826",
+      "phone": "(615) 555-4644",
       "relationship": "Spouse"
     },
     "chiefComplaint": "71yo with new-onset recurrent angioedema starting age 68 — no family history, low C4 AND low C1q (not seen in HAE)",

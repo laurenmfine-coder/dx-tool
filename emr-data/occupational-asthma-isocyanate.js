@@ -9,6 +9,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ramon Delgado",
+  "patientHPI": "I notice my chest gets tight and I start wheezing when I'm at work, but it seems to get better on weekends when I'm home.",
       "dob": "09/22/1986",
       "age": "38",
       "sex": "Male",
@@ -16,13 +17,13 @@ window.EMR_DATA = {
       "mrn": "RDX-2025-95112",
       "language": "English/Spanish (bilingual)",
       "race": "Hispanic or Latino",
-      "phone": "(954) 731-8842",
+      "phone": "(614) 555-5470",
       "email": "rdelgado@email.com",
-      "address": "892 NW 44th St, Pompano Beach, FL 33064",
+      "address": "5517 N Kedzie Blvd, Louisville, KY 40204",
       "insurance": "Worker's Compensation / Aetna",
       "pcp": "Dr. Hector Fuentes, MD",
       "pharmacy": "CVS — Sample Rd",
-      "emergencyContact": { "name": "Elena Delgado", "phone": "(954) 731-9001", "relationship": "Wife" },
+      "emergencyContact": { "name": "Elena Delgado", "phone": "(412) 555-2845", "relationship": "Wife" },
       "chiefComplaint": "Chest tightness and wheezing that is worse at work and improves on weekends",
       "diagnosis": "Occupational asthma — isocyanate sensitization (TDI — toluene diisocyanate)"
     },

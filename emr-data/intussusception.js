@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Baby Liam Chen",
+  "patientHPI": "My baby has been having these terrible crying spells where he screams and pulls his little knees up to his belly - it comes in waves and he seems to be in so much pain. He was getting over a cold recently, but now he won't eat much and just seems miserable, especially during these episodes where he grabs at his tummy.",
     "dob": "06/15/2025",
     "age": "1",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-915392",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(851) 312-3255",
+    "phone": "(713) 555-8054",
     "email": "baby.liam.chen@email.com",
-    "address": "8458 Cedar Ln, Coral Springs, FL 33065",
+    "address": "1853 Willow Way, Kansas City, MO 64110",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Robert Hughes, DO",
     "pharmacy": "Rite Aid \u2014 University Dr",
     "emergencyContact": {
       "name": "Jennifer Morgan",
-      "phone": "(367) 765-9115",
+      "phone": "(804) 555-3937",
       "relationship": "Partner"
     },
     "chiefComplaint": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",

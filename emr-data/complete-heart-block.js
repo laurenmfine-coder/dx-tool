@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Raymond Brooks",
+  "patientHPI": "I keep feeling like I'm about to pass out and I'm just so weak and lightheaded all the time, though I don't have any chest pain or anything like that.",
     "dob": "06/15/1952",
     "age": "74",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-530586",
     "language": "English",
     "race": "Hispanic/Latino",
-    "phone": "(306) 208-5257",
+    "phone": "(505) 555-8191",
     "email": "raymond.brooks@email.com",
-    "address": "8850 Elm Blvd, Fort Lauderdale, FL 33301",
+    "address": "3659 Elm St, Milwaukee, WI 53210",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "CVS Pharmacy \u2014 University Dr",
     "emergencyContact": {
       "name": "Gloria Stewart",
-      "phone": "(299) 852-7645",
+      "phone": "(414) 555-9843",
       "relationship": "Parent"
     },
     "chiefComplaint": "I keep nearly passing out No specific chest pain \u2014 generalized weakness and lightheadedness",

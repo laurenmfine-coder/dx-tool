@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Fontaine",
+  "patientHPI": "I came in for my regular blood transfusion yesterday and felt fine during it, but about six hours later I started feeling awful - really hot and cold at the same time, my back was killing me, and I felt like I was going to throw up. My urine this morning looked like dark tea, which really scared me.",
     "dob": "12/05/1958",
     "age": 66,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3001 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English, Haitian Creole",
     "race": "Black/African American",
-    "address": "2840 NW 15th Ave, Fort Lauderdale, FL 33311",
+    "address": "8773 Peachtree Rd, Chicago, IL 60651",
     "phone": "(954) 555-4782",
     "email": "g.fontaine58@email.com",
     "emergencyContact": {

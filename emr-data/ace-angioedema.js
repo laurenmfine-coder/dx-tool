@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Darnell Washington",
+  "patientHPI": "My lips and tongue have been swelling up and I look like I got punched in the face, but there's no rash anywhere else on my body - it just came on suddenly and won't go down.",
       "dob": "04/01/1968",
       "age": "58",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-655281",
       "language": "English",
       "race": "Asian",
-      "phone": "(884) 842-7719",
+      "phone": "(513) 555-7678",
       "email": "darnell.washington@email.com",
-      "address": "1221 Elm St, Weston, FL 33362",
+      "address": "6983 Oak Ave, Memphis, TN 38116",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Lisa Chang, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Sarah Washington",
-        "phone": "(466) 912-9571",
+        "phone": "(503) 555-9890",
         "relationship": "Spouse"
       }
     },
@@ -734,15 +735,15 @@ window.EMR_DATA = {
     "mrn": "MRN-655281",
     "language": "English",
     "race": "Asian",
-    "phone": "(884) 842-7719",
+    "phone": "(614) 555-7812",
     "email": "darnell.washington@email.com",
-    "address": "1221 Elm St, Weston, FL 33362",
+    "address": "7914 Daisy Ave, Richmond, VA 23225",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Sarah Washington",
-      "phone": "(466) 912-9571",
+      "phone": "(312) 555-4388",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Lip/tongue swelling without urticaria",

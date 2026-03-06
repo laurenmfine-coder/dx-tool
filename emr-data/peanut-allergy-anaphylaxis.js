@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jayden Park",
+  "patientHPI": "My son was at a birthday party and after eating some cake, his face started swelling up and he began throwing up. Then he started having trouble breathing with wheezing sounds, which terrified me.",
       "dob": "03/18/2018",
       "age": "8",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-795383",
       "language": "English",
       "race": "White",
-      "phone": "(391) 885-3968",
+      "phone": "(502) 555-9044",
       "email": "jayden.park@email.com",
-      "address": "4982 Oak St, Weston, FL 33381",
+      "address": "6080 Sycamore Dr, Memphis, TN 38122",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Jennifer Park",
-        "phone": "(217) 689-8831",
+        "phone": "(620) 555-4971",
         "relationship": "Parent"
       }
     },
@@ -699,15 +700,15 @@ window.EMR_DATA = {
     "mrn": "MRN-795383",
     "language": "English",
     "race": "White",
-    "phone": "(391) 885-3968",
+    "phone": "(503) 555-7161",
     "email": "jayden.park@email.com",
-    "address": "4982 Oak St, Weston, FL 33381",
+    "address": "3047 Oak Ave, Minneapolis, MN 55405",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Jennifer Park",
-      "phone": "(217) 689-8831",
+      "phone": "(415) 555-7437",
       "relationship": "Parent"
     },
     "chiefComplaint": "8-year-old with facial swelling, vomiting, and wheezing after birthday party",

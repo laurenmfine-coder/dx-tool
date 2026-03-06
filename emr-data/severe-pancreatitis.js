@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sergio Moreno",
+  "patientHPI": "This pain in my stomach is the worst thing I've ever felt - it's like someone is stabbing me right through to my back and I can't find any position that makes it better. I've been throwing up and I'm scared something is really wrong.",
     "dob": "06/20/1966",
     "age": "60",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-822543",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(775) 922-4584",
+    "phone": "(415) 555-6023",
     "email": "sergio.moreno@email.com",
-    "address": "6996 Cedar Ln, Davie, FL 33314",
+    "address": "2077 Larkspur Ln, Baltimore, MD 21216",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Michael Torres, DO",
     "pharmacy": "Walgreens — Pines Blvd",
     "emergencyContact": {
       "name": "Brenda Stewart",
-      "phone": "(271) 299-3354",
+      "phone": "(415) 555-4777",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Worst stomach pain of my life Epigastric — boring through to the back",

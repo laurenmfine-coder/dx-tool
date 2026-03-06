@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Isabella Vargas-Chen",
+  "patientHPI": "I'm having another one of those terrible pounding headaches with the lights bothering my eyes so much, and I feel like I'm going to throw up - these have been happening way too often lately, maybe 8 or 10 times a month.",
     "dob": "12/10/2000",
     "age": "26",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-424259",
     "language": "English",
     "race": "White",
-    "phone": "(717) 652-7168",
+    "phone": "(513) 555-9818",
     "email": "isabella.vargas-chen@email.com",
-    "address": "887 Willow Ln, Weston, FL 33397",
+    "address": "3713 Mulberry St, Pittsburgh, PA 15208",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Lisa Chang, MD",
     "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
     "emergencyContact": {
       "name": "Charles Vargas-Chen",
-      "phone": "(567) 202-9054",
+      "phone": "(720) 555-9947",
       "relationship": "Parent"
     },
     "chiefComplaint": "Severe throbbing headache with aura, photophobia, nausea",

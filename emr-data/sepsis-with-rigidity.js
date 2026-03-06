@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Espinoza",
+  "patientHPI": "My movements have been getting much worse lately - about an hour after I take my pills, I start having these uncontrollable jerky movements in my head and body that last for hours. I've also been falling more often and yesterday I developed a fever and feel really weak and confused.",
     "dob": "08/22/1958",
     "age": 66,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 2400 N University Dr, Pembroke Pines, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latina (Colombian)",
-    "address": "7428 Pines Blvd, Pembroke Pines, FL 33024",
+    "address": "9295 Jasmine Way, Kansas City, MO 64123",
     "phone": "(954) 555-3891",
     "email": "g.espinoza58@email.com",
     "emergencyContact": {

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Carlos Mendez",
+  "patientHPI": "I've been so busy at work that I haven't been eating right or drinking enough water like I should. This morning I woke up with the worst pain in my side - it's like someone's stabbing me with a knife and it goes all the way down to my groin. The pain comes and goes in waves and I feel like I'm going to throw up.",
     "dob": "12/05/1987",
     "age": 38,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 1200 Medical Center Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "6721 Johnson St, Hollywood, FL 33024",
+    "address": "7545 E Roosevelt Rd, Milwaukee, WI 53210",
     "phone": "(954) 555-5467",
     "email": "carlos.mendez87@email.com",
     "emergencyContact": {

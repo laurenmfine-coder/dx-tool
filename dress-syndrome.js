@@ -1,1116 +1,186 @@
-/* emr-data/dress-syndrome.js — Multi-Setting Allergy Case: DRESS Syndrome */
+// Virtual EMR Case: DRESS Syndrome (Drug Reaction with Eosinophilia and Systemic Symptoms)
+// Variant: dress-syndrome | Acuity: ESI-2
+// Auto-generated from ED Board clinical data
+
 window.EMR_DATA = {
-  "base": {
-    "patient": {
-      "name": "Marcus Jefferson",
-  "patientHPI": "I started taking a new seizure medication about a month ago, and now I have this awful rash spreading all over my body along with a fever. My face feels puffy and swollen, and I can feel enlarged lumps in my neck - this all started after I began the new pills.",
-      "dob": "12/14/1984",
-      "age": "42",
-      "sex": "Male",
-      "pronouns": "he/him",
-      "mrn": "MRN-130141",
-      "language": "English",
-      "race": "Hispanic/Latino",
-      "phone": "(804) 555-1653",
-      "email": "marcus.jefferson@email.com",
-      "address": "5895 Jasmine Way, Albuquerque, NM 87103",
-      "insurance": "Tricare Standard",
-      "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "Publix Pharmacy — Weston Rd",
-      "emergencyContact": {
-        "name": "Jessica Jefferson",
-        "phone": "(504) 555-4441",
-        "relationship": "Adult Child"
-      }
-    },
-    "allergies": [
-      {
-        "allergen": "NKDA",
-        "reaction": "",
-        "severity": "",
-        "type": "Drug"
-      }
-    ],
-    "immunizations": [
-      {
-        "name": "Influenza",
-        "date": "10/15/2025",
-        "lot": "FL-2025",
-        "site": "Left Deltoid"
-      },
-      {
-        "name": "COVID-19 (Updated)",
-        "date": "09/01/2025",
-        "lot": "CV-2025",
-        "site": "Right Deltoid"
-      },
-      {
-        "name": "Tdap",
-        "date": "03/2020",
-        "lot": "TD-2020",
-        "site": "Left Deltoid"
-      }
-    ],
-    "familyHistory": [
-      "Non-contributory"
-    ],
-    "socialHistory": [
-      [
-        "Timeline",
-        "Rash started 3 days ago, fever for 5 days, facial swelling 2 days"
-      ]
-    ]
-  },
-  "encounters": {
-    "ed": {
-      "patient": {
-        "chiefComplaint": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-        "diagnosis": "DRESS Syndrome"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "New-onset seizures — started phenytoin 4 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [
-        {
-          "id": "med-1",
-          "name": "Phenytoin",
-          "dose": "300mg",
-          "route": "PO",
-          "frequency": "Daily (started 4 weeks ago)",
-          "status": "Active",
-          "prescriber": "Dr. Lisa Chang, MD"
-        }
-      ],
-      "vitals": [
-        {
-          "date": "03/01/2026",
-          "time": "07:45",
-          "bp": "118/72",
-          "hr": "102",
-          "rr": "18",
-          "temp": "39.0°C",
-          "spo2": "98%",
-          "pain": "6/10",
-          "bmi": "34",
-          "weight": "100 kg"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-244998",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "14.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "H"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                },
-                {
-                  "test": "Eosinophils",
-                  "value": "18",
-                  "unit": "%",
-                  "range": "1-4",
-                  "flag": "H"
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.6",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Alt",
-                  "value": "420",
-                  "unit": "U/L",
-                  "range": "7-56",
-                  "flag": "H"
-                },
-                {
-                  "test": "Ast",
-                  "value": "380",
-                  "unit": "U/L",
-                  "range": "10-40",
-                  "flag": "H"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [
-        {
-          "id": "img-1",
-          "date": "03/01/2026",
-          "study": "CT Neck/Chest",
-          "status": "Final",
-          "priority": "Routine",
-          "orderedBy": "Dr. ED Physician",
-          "readBy": "Dr. Radiologist",
-          "facility": "ReasonDx Medical Center",
-          "accession": "IMG-623310",
-          "clinical": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-          "technique": "Standard protocol",
-          "findings": "Bilateral cervical and axillary lymphadenopathy. No pulmonary infiltrates.",
-          "impression": "Lymphadenopathy consistent with systemic drug reaction.",
-          "dictated": "03/01/2026 08:30",
-          "verified": "03/01/2026 09:15"
-        }
-      ],
-      "visits": [
-        {
-          "id": "visit-ed",
-          "type": "Emergency Visit",
-          "date": "03/01/2026",
-          "provider": "Dr. ED Attending",
-          "cc": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-          "hpi": "Marcus Jefferson is a 42-year-old male presenting with diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago. Past medical history includes New-onset seizures — started phenytoin 4 weeks ago. See chart for full details.",
-          "exam": "See physical examination documentation.",
-          "assessment": "DRESS Syndrome — clinical presentation and workup consistent with diagnosis.",
-          "plan": "See orders and management plan."
-        }
-      ]
-    },
-    "inpatient": {
-      "patient": {
-        "chiefComplaint": "Admitted for DRESS — organ involvement monitoring (hepatitis, eosinophilia)",
-        "diagnosis": "DRESS Syndrome"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "New-onset seizures — started phenytoin 4 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [
-        {
-          "id": "med-1",
-          "name": "Phenytoin",
-          "dose": "300mg",
-          "route": "PO",
-          "frequency": "Daily (started 4 weeks ago)",
-          "status": "Active",
-          "prescriber": "Dr. Lisa Chang, MD"
-        },
-        {
-          "id": "med-add-1",
-          "name": "Prednisone",
-          "dose": "1mg/kg",
-          "route": "PO",
-          "frequency": "Daily with slow taper",
-          "status": "Active",
-          "prescriber": "Dr. Elena Rodriguez, MD"
-        },
-        {
-          "id": "med-add-2",
-          "name": "IV Fluids",
-          "dose": "NS",
-          "route": "IV",
-          "frequency": "100mL/hr",
-          "status": "Active",
-          "prescriber": "Dr. Elena Rodriguez, MD"
-        }
-      ],
-      "vitals": [
-        {
-          "date": "03/02/2026",
-          "time": "08:00",
-          "bp": "118/72",
-          "hr": "96",
-          "rr": "18",
-          "temp": "38.6°C",
-          "spo2": "97%",
-          "pain": "5/10"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-244998",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "14.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "H"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                },
-                {
-                  "test": "Eosinophils",
-                  "value": "18",
-                  "unit": "%",
-                  "range": "1-4",
-                  "flag": "H"
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.6",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Alt",
-                  "value": "420",
-                  "unit": "U/L",
-                  "range": "7-56",
-                  "flag": "H"
-                },
-                {
-                  "test": "Ast",
-                  "value": "380",
-                  "unit": "U/L",
-                  "range": "10-40",
-                  "flag": "H"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [
-        {
-          "id": "img-1",
-          "date": "03/01/2026",
-          "study": "CT Neck/Chest",
-          "status": "Final",
-          "priority": "Routine",
-          "orderedBy": "Dr. ED Physician",
-          "readBy": "Dr. Radiologist",
-          "facility": "ReasonDx Medical Center",
-          "accession": "IMG-623310",
-          "clinical": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-          "technique": "Standard protocol",
-          "findings": "Bilateral cervical and axillary lymphadenopathy. No pulmonary infiltrates.",
-          "impression": "Lymphadenopathy consistent with systemic drug reaction.",
-          "dictated": "03/01/2026 08:30",
-          "verified": "03/01/2026 09:15"
-        }
-      ],
-      "visits": [
-        {
-          "id": "visit-1",
-          "type": "Admission",
-          "date": "03/02/2026",
-          "provider": "Dr. Attending",
-          "cc": "Admitted for DRESS — organ involvement monitoring (hepatitis, eosinophilia)",
-          "hpi": "Marcus Jefferson — Admitted for DRESS — organ involvement monitoring (hepatitis, eosinophilia)",
-          "exam": "See documentation.",
-          "assessment": "See assessment.",
-          "plan": "See orders."
-        }
-      ]
-    },
-    "consult": {
-      "patient": {
-        "chiefComplaint": "A/I consult — confirm DRESS diagnosis, taper plan, monitor for autoimmune sequelae",
-        "diagnosis": "DRESS Syndrome"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "New-onset seizures — started phenytoin 4 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [
-        {
-          "id": "med-1",
-          "name": "Phenytoin",
-          "dose": "300mg",
-          "route": "PO",
-          "frequency": "Daily (started 4 weeks ago)",
-          "status": "Active",
-          "prescriber": "Dr. Lisa Chang, MD"
-        }
-      ],
-      "vitals": [
-        {
-          "date": "03/02/2026",
-          "time": "08:00",
-          "bp": "116/72",
-          "hr": "84",
-          "rr": "16",
-          "temp": "37.6°C",
-          "spo2": "98%",
-          "pain": "3/10"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-244998",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "14.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "H"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                },
-                {
-                  "test": "Eosinophils",
-                  "value": "18",
-                  "unit": "%",
-                  "range": "1-4",
-                  "flag": "H"
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.6",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Alt",
-                  "value": "420",
-                  "unit": "U/L",
-                  "range": "7-56",
-                  "flag": "H"
-                },
-                {
-                  "test": "Ast",
-                  "value": "380",
-                  "unit": "U/L",
-                  "range": "10-40",
-                  "flag": "H"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [
-        {
-          "id": "img-1",
-          "date": "03/01/2026",
-          "study": "CT Neck/Chest",
-          "status": "Final",
-          "priority": "Routine",
-          "orderedBy": "Dr. ED Physician",
-          "readBy": "Dr. Radiologist",
-          "facility": "ReasonDx Medical Center",
-          "accession": "IMG-623310",
-          "clinical": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-          "technique": "Standard protocol",
-          "findings": "Bilateral cervical and axillary lymphadenopathy. No pulmonary infiltrates.",
-          "impression": "Lymphadenopathy consistent with systemic drug reaction.",
-          "dictated": "03/01/2026 08:30",
-          "verified": "03/01/2026 09:15"
-        }
-      ],
-      "visits": [
-        {
-          "id": "visit-1",
-          "type": "Consultation",
-          "date": "03/02/2026",
-          "provider": "Dr. Allergist",
-          "cc": "A/I consult — confirm DRESS diagnosis, taper plan, monitor for autoimmune sequelae",
-          "hpi": "Marcus Jefferson — A/I consult — confirm DRESS diagnosis, taper plan, monitor for autoimmune sequelae",
-          "exam": "See documentation.",
-          "assessment": "See assessment.",
-          "plan": "See orders."
-        }
-      ]
-    },
-    "clinic": {
-      "patient": {
-        "chiefComplaint": "DRESS follow-up — 3 months, check thyroid function (late autoimmune complication)",
-        "diagnosis": "DRESS Syndrome"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "New-onset seizures — started phenytoin 4 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [
-        {
-          "id": "med-add-1",
-          "name": "Prednisone taper",
-          "dose": "5mg",
-          "route": "PO",
-          "frequency": "Daily (weaning)",
-          "status": "Active",
-          "prescriber": "Dr. Elena Rodriguez, MD"
-        }
-      ],
-      "vitals": [
-        {
-          "date": "03/02/2026",
-          "time": "08:00",
-          "bp": "112/68",
-          "hr": "72",
-          "rr": "14",
-          "temp": "36.8°C",
-          "spo2": "99%",
-          "pain": "0/10"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-244998",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "14.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "H"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                },
-                {
-                  "test": "Eosinophils",
-                  "value": "18",
-                  "unit": "%",
-                  "range": "1-4",
-                  "flag": "H"
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.6",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Alt",
-                  "value": "420",
-                  "unit": "U/L",
-                  "range": "7-56",
-                  "flag": "H"
-                },
-                {
-                  "test": "Ast",
-                  "value": "380",
-                  "unit": "U/L",
-                  "range": "10-40",
-                  "flag": "H"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [
-        {
-          "id": "img-1",
-          "date": "03/01/2026",
-          "study": "CT Neck/Chest",
-          "status": "Final",
-          "priority": "Routine",
-          "orderedBy": "Dr. ED Physician",
-          "readBy": "Dr. Radiologist",
-          "facility": "ReasonDx Medical Center",
-          "accession": "IMG-623310",
-          "clinical": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-          "technique": "Standard protocol",
-          "findings": "Bilateral cervical and axillary lymphadenopathy. No pulmonary infiltrates.",
-          "impression": "Lymphadenopathy consistent with systemic drug reaction.",
-          "dictated": "03/01/2026 08:30",
-          "verified": "03/01/2026 09:15"
-        }
-      ],
-      "visits": [
-        {
-          "id": "visit-1",
-          "type": "Office Visit",
-          "date": "03/02/2026",
-          "provider": "Dr. Attending",
-          "cc": "DRESS follow-up — 3 months, check thyroid function (late autoimmune complication)",
-          "hpi": "Marcus Jefferson — DRESS follow-up — 3 months, check thyroid function (late autoimmune complication)",
-          "exam": "See documentation.",
-          "assessment": "See assessment.",
-          "plan": "See orders."
-        }
-      ]
-    }
-  },
   "patient": {
     "name": "Marcus Jefferson",
-    "dob": "12/14/1984",
-    "age": "42",
+    "dob": "08/14/1988",
+    "age": 37,
     "sex": "Male",
-    "pronouns": "he/him",
-    "mrn": "MRN-130141",
+    "mrn": "RDX-2025-41128",
+    "pronouns": "He/Him",
+    "insurance": "BlueCross BlueShield HMO",
+    "pcp": "Dr. Sandra Ellis, MD",
+    "pharmacy": "CVS Pharmacy — 3201 N University Dr, Riverside, FL",
     "language": "English",
-    "race": "Hispanic/Latino",
-    "phone": "(704) 555-5088",
-    "email": "marcus.jefferson@email.com",
-    "address": "3979 Hickory Rd, Pittsburgh, PA 15201",
-    "insurance": "Tricare Standard",
-    "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "race": "Black (African American)",
+    "address": "4420 SW 52nd Ct, Riverside, FL 33100",
+    "phone": "(954) 555-6782",
+    "email": "m.jefferson88@email.com",
     "emergencyContact": {
-      "name": "Jessica Jefferson",
-      "phone": "(704) 555-2684",
-      "relationship": "Adult Child"
-    },
-    "chiefComplaint": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-    "diagnosis": "DRESS Syndrome"
+      "name": "Keisha Jefferson (Wife)",
+      "phone": "(954) 555-6798"
+    }
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "New-onset seizures — started phenytoin 4 weeks ago",
+      "problem": "Epilepsy — New Onset (Focal to Bilateral Tonic-Clonic)",
+      "icd": "G40.209",
+      "onset": "2025",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "First seizure 12/2025 — MRI brain normal; EEG showed left temporal sharp waves; started on carbamazepine 12/28/2025"
+    },
+    {
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "On lisinopril; well controlled"
+    },
+    {
+      "problem": "Seasonal Allergic Rhinitis",
+      "icd": "J30.2",
+      "onset": "2010",
+      "status": "Active",
+      "notes": "Uses cetirizine PRN during pollen season"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Phenytoin",
-      "dose": "300mg",
-      "route": "PO",
-      "frequency": "Daily (started 4 weeks ago)",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Carbamazepine 200mg BID",
+      "sig": "Take 1 tablet by mouth twice daily",
+      "prescriber": "Dr. Patel (Neurology)",
+      "start": "12/2025",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 10mg daily",
+      "sig": "Take 1 tablet by mouth once daily",
+      "prescriber": "Dr. Ellis",
+      "start": "06/2022",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Cetirizine 10mg PRN",
+      "sig": "Take 1 tablet by mouth daily as needed for allergy symptoms",
+      "prescriber": "Dr. Ellis",
+      "start": "03/2015",
+      "refills": 3,
+      "status": "PRN"
     }
   ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "reaction": "",
+      "type": "None",
+      "reaction": "None",
       "severity": "",
-      "type": "Drug"
+      "verified": "Yes"
     }
   ],
   "vitals": [
     {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "118/72",
-      "hr": "102",
-      "rr": "18",
-      "temp": "39.0°C",
-      "spo2": "98%",
-      "pain": "6/10",
-      "bmi": "34",
-      "weight": "100 kg"
+      "date": "02/18/2026",
+      "bp": "108/68",
+      "hr": 112,
+      "rr": 22,
+      "temp": "103.2°F",
+      "spo2": "96%",
+      "wt": "188 lbs",
+      "ht": "5'11\"",
+      "bmi": 26.2,
+      "setting": "ED"
+    },
+    {
+      "date": "12/28/2025",
+      "bp": "132/82",
+      "hr": 78,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "190 lbs",
+      "ht": "5'11\"",
+      "bmi": 26.5,
+      "setting": "Neurology Office"
+    },
+    {
+      "date": "09/15/2025",
+      "bp": "128/78",
+      "hr": 72,
+      "rr": 16,
+      "temp": "98.6°F",
+      "spo2": "99%",
+      "wt": "192 lbs",
+      "ht": "5'11\"",
+      "bmi": 26.8,
+      "setting": "PCP Office"
     }
   ],
   "visits": [
     {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-      "hpi": "Marcus Jefferson is a 42-year-old male presenting with diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago. Past medical history includes New-onset seizures — started phenytoin 4 weeks ago. See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "DRESS Syndrome — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
+      "id": "V001",
+      "date": "12/28/2025",
+      "type": "Specialist",
+      "provider": "Dr. Anil Patel, MD (Neurology)",
+      "cc": "New onset seizure — follow-up and medication initiation",
+      "hpi": "37M presents after witnessed seizure at work 12/15/2025. Coworkers report patient stared blankly for ~15 seconds, then had generalized tonic-clonic activity x 90 seconds with postictal confusion x 10 minutes. MRI brain normal. EEG shows left temporal sharp waves consistent with focal epilepsy. No prior seizure history. No family history of epilepsy. No recent head trauma, substance use, or sleep deprivation.",
+      "exam": "NAD, A&O x3. CN II-XII intact. Motor: 5/5 throughout. DTRs 2+ symmetric. Sensation intact. Gait normal. No skin rashes.",
+      "assessment": "1. New onset focal epilepsy with secondary generalization — left temporal focus",
+      "plan": "1. Start carbamazepine 200mg BID — titrate as needed\n2. Baseline labs: CBC, CMP, carbamazepine level in 2 weeks\n3. Driving restrictions discussed and documented\n4. Seizure precautions reviewed\n5. Return 1 month with labs"
+    },
+    {
+      "id": "V002",
+      "date": "09/15/2025",
+      "type": "Primary Care",
+      "provider": "Dr. Sandra Ellis, MD",
+      "cc": "Annual physical, HTN follow-up",
+      "hpi": "37M presents for annual wellness exam. HTN well-controlled on lisinopril. No complaints. Reports regular exercise, healthy diet. Denies headaches, vision changes, chest pain, or dyspnea.",
+      "exam": "NAD. CV: RRR, no murmurs. Lungs: CTAB. Skin: No lesions. Neuro: Intact.",
+      "assessment": "1. HTN — controlled\n2. Routine preventive care — up to date",
+      "plan": "1. Continue lisinopril 10mg\n2. Labs: Lipid panel, CMP, CBC\n3. Return 1 year"
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
+      "date": "01/12/2026",
+      "time": "09:00",
+      "orderedBy": "Dr. Patel (Neurology)",
+      "collected": "01/12/2026 09:15",
+      "facility": "ReasonDx Medical Center Lab",
+      "accession": "LAB-2026-011204",
       "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-244998",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
+      "specimenType": "Venous Blood",
+      "fasting": "No",
       "groups": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
+          "name": "COMPLETE BLOOD COUNT",
           "results": [
-            {
-              "test": "WBC",
-              "value": "14.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "18",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
+            { "test": "WBC", "value": "6.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
+            { "test": "Hemoglobin", "value": "14.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
+            { "test": "Hematocrit", "value": "44.2", "unit": "%", "range": "38.3-48.6", "flag": "" },
+            { "test": "Platelets", "value": "224", "unit": "K/uL", "range": "150-400", "flag": "" },
+            { "test": "Eosinophils (%)", "value": "3.2", "unit": "%", "range": "0-5", "flag": "" }
           ]
         },
         {
-          "name": "BASIC METABOLIC PANEL",
+          "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
+            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
+            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
+            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
+            { "test": "ALT", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
+            { "test": "AST", "value": "18", "unit": "U/L", "range": "10-40", "flag": "" },
+            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
+            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" }
           ]
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
+          "name": "CARBAMAZEPINE LEVEL",
           "results": [
-            {
-              "test": "Alt",
-              "value": "420",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "Ast",
-              "value": "380",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            }
+            { "test": "Carbamazepine", "value": "6.8", "unit": "mcg/mL", "range": "4.0-12.0", "flag": "" }
           ]
         }
       ]
@@ -1118,100 +188,50 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Neck/Chest",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-623310",
-      "clinical": "Diffuse morbilliform rash, fever, facial edema, lymphadenopathy — started phenytoin 4 weeks ago",
-      "technique": "Standard protocol",
-      "findings": "Bilateral cervical and axillary lymphadenopathy. No pulmonary infiltrates.",
-      "impression": "Lymphadenopathy consistent with systemic drug reaction.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "12/15/2025",
+      "study": "MRI BRAIN WITH AND WITHOUT CONTRAST",
+      "accession": "IMG-2025-121540",
+      "status": "FINAL",
+      "orderedBy": "Dr. Torres (ED)",
+      "readBy": "Dr. Robert Nguyen, MD (Neuroradiology)",
+      "facility": "Memorial Regional Hospital — Hollywood, FL",
+      "priority": "STAT",
+      "clinical": "New onset seizure, first event — rule out structural lesion",
+      "technique": "Multiplanar, multisequence MRI of the brain performed with and without gadolinium contrast.",
+      "findings": "Gray-white differentiation: Normal. No restricted diffusion on DWI.\n\nParenchyma: No mass, hemorrhage, or acute infarction. No cortical dysplasia. Hippocampal formations symmetric without mesial temporal sclerosis.\n\nVentricular system: Normal size and morphology.\n\nExtra-axial spaces: Unremarkable.\n\nPost-contrast: No pathologic enhancement.\n\nVascular: Normal flow voids.",
+      "impression": "1. Normal MRI brain.\n2. No structural epileptogenic lesion identified.",
+      "dictated": "12/15/2025 22:40",
+      "verified": "12/16/2025 08:00"
     }
   ],
   "immunizations": [
-    {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
-    },
-    {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
-    },
-    {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
-    }
+    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-8440", "mfr": "Sanofi" },
+    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-1780", "mfr": "Pfizer" },
+    { "vaccine": "Tdap", "date": "11/2022", "site": "Left deltoid IM", "lot": "TD22-712", "mfr": "GSK" },
+    { "vaccine": "Hepatitis B Series", "date": "2005", "site": "Right deltoid IM", "lot": "HB05-330", "mfr": "Merck" }
   ],
   "familyHistory": [
-    "Non-contributory"
+    "Mother: Hypertension, T2DM, alive at 64",
+    "Father: Hypertension, CAD — CABG at 58, alive at 66",
+    "Brother: Healthy, alive at 40",
+    "Maternal grandmother: Drug allergy (severe reaction to phenytoin — hospitalized)"
   ],
   "socialHistory": [
-    [
-      "Timeline",
-      "Rash started 3 days ago, fever for 5 days, facial swelling 2 days"
-    ]
-  ]
-,"references":[
-  {
-    "id": "RegiSCAR-2013",
-    "title": "DRESS: results from the prospective RegiSCAR study",
-    "authors": "Kardaun SH, Sekula P, Valeyrie-Allanore L, et al.",
-    "journal": "Br J Dermatol",
-    "year": 2013,
-    "doi": "10.1111/bjd.12501",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK459327/",
-    "openAccess": true,
-    "validates": [
-      "RegiSCAR score ≥5 = definite DRESS",
-      "HHV-6 reactivation",
-      "Organ involvement patterns",
-      "Slow steroid taper 8-12 weeks"
-    ]
-  },
-  {
-    "id": "DRESS-Autoimmunity-2019",
-    "title": "DRESS syndrome and long-term risk of autoimmunity",
-    "authors": "Chen YC, Chang CY, Cho YT, et al.",
-    "journal": "J Allergy Clin Immunol Pract",
-    "year": 2019,
-    "doi": "10.1016/j.jaip.2018.08.004",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
-    "openAccess": true,
-    "validates": [
-      "Autoimmune thyroiditis ~40% post-DRESS",
-      "TSH monitoring at 3, 6, 12 months",
-      "Type 1 DM risk"
-    ]
-  }
-],
-
-  "teachingPoints": {
-    "keyLearning": [
-      "DRESS has a latency of 2–8 weeks after drug initiation — the longest latency of any severe cutaneous adverse reaction. HHV-6 reactivation is a distinguishing pathogenic feature (not seen in SJS/TEN) and correlates with disease severity.",
-      "RegiSCAR ≥4 = probable/definite DRESS. Must have: fever + rash + at least one internal organ involved (liver most common — elevated transaminases). Eosinophilia is supportive but not required.",
-      "Management: immediate cessation of ALL potential culprit drugs. High-dose systemic corticosteroids (prednisone 1–2 mg/kg/day) tapered SLOWLY over months — rapid taper causes relapse. Organ-specific management (hepatitis, nephritis, pneumonitis)."
-    ],
-    "boardPearls": [
-      "DRESS timing: 2–8 weeks after drug. Longest latency of any SCAR.",
-      "HHV-6 reactivation: distinguishing feature of DRESS (not present in SJS/TEN). Correlates with severity.",
-      "RegiSCAR ≥4: fever + rash + hospitalization + internal organ + eosinophilia ± atypical lymphocytes.",
-      "Most common internal organ: liver (transaminase elevation). Kidney (nephritis), lung (pneumonitis), heart (myocarditis) also occur.",
-      "Classic culprits: allopurinol (HLA-B*58:01 in Han Chinese/Thai), aromatic anticonvulsants (carbamazepine, phenytoin, phenobarbital — cross-reactive), sulfonamides, minocycline, abacavir (HLA-B*57:01).",
-      "Aromatic anticonvulsant cross-reactivity: avoid ALL aromatic anticonvulsants (carbamazepine, phenytoin, phenobarbital, primidone) if one causes DRESS. Switch to non-aromatic alternative (levetiracetam, valproate, gabapentin).",
-      "Steroid taper: months-long — rapid taper → DRESS relapse."
-    ]
+    ["Occupation", "IT project manager at financial services firm"],
+    ["Marital", "Married 8 years; 2 children (ages 3 and 6)"],
+    ["Tobacco", "Never smoker"],
+    ["Alcohol", "Social — 2-3 beers per week; stopped since seizure diagnosis"],
+    ["Drugs", "Denies"],
+    ["Exercise", "Jogging 3x/week, weight training 2x/week — paused since seizure"],
+    ["Housing", "Single-family home with wife and children"],
+    ["Safety", "Driving restriction in effect; wife driving; seatbelt; no firearms"],
+    ["Advance Directive", "None — not discussed"]
+  ],
+  "meta": {
+    "caseId": "dress-syndrome",
+    "diagnosis": "DRESS Syndrome (Carbamazepine-Induced Drug Reaction with Eosinophilia and Systemic Symptoms — Hepatitis, Lymphadenopathy, and Diffuse Morbilliform Eruption)",
+    "acuity": 2,
+    "presentation": "Skin / Soft Tissue Emergency",
+    "category": "dermatologic"
   }
 };

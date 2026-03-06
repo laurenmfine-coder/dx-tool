@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Thomas Reeves",
+  "patientHPI": "My lips are swollen again today - this is the eighth time in two years that different parts of my body have puffed up like this, including my face, hands, feet, and once even my throat. Nobody can figure out what's causing it.",
       "dob": "06/01/1978",
       "age": "48",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-112849",
       "language": "English",
       "race": "White",
-      "phone": "(676) 883-3958",
+      "phone": "(620) 555-3255",
       "email": "thomas.x@email.com",
-      "address": "6286 Oak St, Weston, FL 33326",
+      "address": "4189 Oak Ave, Columbus, OH 43211",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Sarah Mitchell, DO",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(665) 919-8398",
+        "phone": "(617) 555-7012",
         "relationship": "Spouse"
       }
     },
@@ -804,15 +805,15 @@ window.EMR_DATA = {
     "mrn": "MRN-112849",
     "language": "English",
     "race": "White",
-    "phone": "(676) 883-3958",
+    "phone": "(505) 555-6150",
     "email": "thomas.x@email.com",
-    "address": "6286 Oak St, Weston, FL 33326",
+    "address": "8582 Birch Ln, Louisville, KY 40206",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Sarah Mitchell, DO",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(665) 919-8398",
+      "phone": "(702) 555-5566",
       "relationship": "Spouse"
     },
     "chiefComplaint": "48yo with recurrent idiopathic angioedema — 8th episode, lip swelling, no trigger identified, extensive workup negative",

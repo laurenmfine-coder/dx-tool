@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Lucia Fernandez",
+  "patientHPI": "I grabbed some pain medication from my coworker's bag for my headache without looking at the label, and within half an hour I couldn't breathe properly - my chest got so tight and my nose started running like crazy.",
       "dob": "08/20/1988",
       "age": "38",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-628725",
       "language": "Spanish",
       "race": "Hispanic/Latina",
-      "phone": "(490) 853-7091",
+      "phone": "(614) 555-2275",
       "email": "lucia.fernandez@email.com",
-      "address": "4768 Oak St, Weston, FL 33326",
+      "address": "4843 Oak Ave, New Orleans, LA 70114",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Michael Fernandez",
-        "phone": "(718) 770-9609",
+        "phone": "(503) 555-8033",
         "relationship": "Spouse"
       }
     },
@@ -900,15 +901,15 @@ window.EMR_DATA = {
     "mrn": "MRN-628725",
     "language": "Spanish",
     "race": "Hispanic/Latina",
-    "phone": "(490) 853-7091",
+    "phone": "(620) 555-7626",
     "email": "lucia.fernandez@email.com",
-    "address": "4768 Oak St, Weston, FL 33326",
+    "address": "7639 Foxglove Dr, Memphis, TN 38112",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Michael Fernandez",
-      "phone": "(718) 770-9609",
+      "phone": "(713) 555-7843",
       "relationship": "Spouse"
     },
     "chiefComplaint": "38yo with severe bronchospasm after accidentally taking ibuprofen for headache — known AERD",

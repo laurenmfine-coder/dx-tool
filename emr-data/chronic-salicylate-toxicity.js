@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Whitfield",
+  "patientHPI": "My knees and hands have been getting so much worse these past few months - I can barely open jars or get up from my chair without wincing. The Tylenol I've been taking doesn't even touch the pain anymore, so I've been using more of those aspirin I have at home along with the gel my doctor gave me.",
     "dob": "05/30/1938",
     "age": 87,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 4895 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "White",
-    "address": "2800 N Ocean Dr, Hollywood, FL 33019",
+    "address": "7279 Pine Ave, Kansas City, MO 64112",
     "phone": "(954) 555-2714",
     "email": "d.whitfield38@email.com",
     "emergencyContact": {

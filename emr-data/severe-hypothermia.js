@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jasmine Thompson",
+  "patientHPI": "I don't really remember what happened - someone said they found me outside and I was really cold. I feel confused and everything seems foggy, and I can't stop shivering even though they've been warming me up.",
     "dob": "06/06/1964",
     "age": "62",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-361889",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(440) 474-8245",
+    "phone": "(312) 555-6890",
     "email": "jasmine.thompson@email.com",
-    "address": "6555 Birch Dr, Davie, FL 33314",
+    "address": "9829 Walnut Dr, Baltimore, MD 21206",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Karen Liu, DO",
     "pharmacy": "Walmart Pharmacy — Pines Blvd",
     "emergencyContact": {
       "name": "Thomas Hill",
-      "phone": "(678) 871-6872",
+      "phone": "(713) 555-9796",
       "relationship": "Adult Child"
     },
     "chiefComplaint": "EMS report: 'Found unresponsive in alley, ambient temp 18°F. Appears homeless. Slow pulse.' No specific pain reported — global obtundation",

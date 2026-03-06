@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ethan Reyes",
+  "patientHPI": "My 7-month-old has had watery diarrhea for days now and he's so tired he won't even lift his head - I can tell he's getting dehydrated because his lips look dry.",
       "dob": "09/25/2026",
       "age": "0",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-195757",
       "language": "English",
       "race": "Asian",
-      "phone": "(463) 283-7073",
+      "phone": "(619) 555-3705",
       "email": "ethan.reyes@email.com",
-      "address": "1030 Oak St, Weston, FL 33371",
+      "address": "3395 Iris Blvd, Birmingham, AL 35209",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Sarah Reyes",
-        "phone": "(608) 407-8359",
+        "phone": "(415) 555-9645",
         "relationship": "Parent"
       }
     },
@@ -707,15 +708,15 @@ window.EMR_DATA = {
     "mrn": "MRN-195757",
     "language": "English",
     "race": "Asian",
-    "phone": "(463) 283-7073",
+    "phone": "(630) 555-7932",
     "email": "ethan.reyes@email.com",
-    "address": "1030 Oak St, Weston, FL 33371",
+    "address": "8579 Dogwood Ln, Kansas City, MO 64108",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Sarah Reyes",
-      "phone": "(608) 407-8359",
+      "phone": "(412) 555-9835",
       "relationship": "Parent"
     },
     "chiefComplaint": "7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula",

@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andre Williams",
+  "patientHPI": "I'm here for my usual follow-up - my blood pressure is doing better with the medication and diet changes, and my shoulder pain from that injury is much improved after physical therapy. My asthma has been great too, hardly needed my inhaler at all this month.",
     "dob": "08/25/1988",
     "age": 36,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 3000 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "African American",
-    "address": "820 NW 6th Ave, Fort Lauderdale, FL 33311",
+    "address": "9506 Lavender St, San Antonio, TX 78212",
     "phone": "(954) 555-4492",
     "email": "a.williams88@email.com",
     "emergencyContact": {

@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Linda Chen-Nakamura",
+  "patientHPI": "I've been getting chills and feeling feverish since yesterday, and I'm really worried because I just finished my cancer treatment ten days ago. The doctors told me to watch out for any signs of infection because my immune system would be weak, and I have this line in my arm for my treatments.",
     "dob": "09/27/1970",
     "age": "56",
     "sex": "Female",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-221028",
     "language": "English",
     "race": "White",
-    "phone": "(632) 566-8403",
+    "phone": "(505) 555-3292",
     "email": "linda.chen-nakamura@email.com",
-    "address": "7801 Elm Ave, Plantation, FL 33365",
+    "address": "8305 Daisy Ave, Detroit, MI 48202",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Alejandro Chen-Nakamura",
-      "phone": "(806) 456-1300",
+      "phone": "(804) 555-2284",
       "relationship": "Partner"
     },
     "chiefComplaint": "Fever and chills — currently on chemotherapy for AML",

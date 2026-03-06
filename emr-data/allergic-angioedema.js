@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Priya Nair",
+  "patientHPI": "About an hour after I took some ibuprofen for my headache, my lips started puffing up and I got these red bumps all over my arms and chest. I've never had anything like this happen with pain medication before.",
       "dob": "09/12/1991",
       "age": "35",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-234856",
       "language": "English",
       "race": "Asian",
-      "phone": "(342) 381-9042",
+      "phone": "(212) 555-2163",
       "email": "priya.nair@email.com",
-      "address": "6433 Elm St, Weston, FL 33368",
+      "address": "1261 Mulberry St, Denver, CO 80205",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "Publix Pharmacy — Weston Rd",
       "emergencyContact": {
         "name": "Michael Nair",
-        "phone": "(452) 907-8799",
+        "phone": "(713) 555-1964",
         "relationship": "Spouse"
       }
     },
@@ -708,15 +709,15 @@ window.EMR_DATA = {
     "mrn": "MRN-234856",
     "language": "English",
     "race": "Asian",
-    "phone": "(342) 381-9042",
+    "phone": "(414) 555-2104",
     "email": "priya.nair@email.com",
-    "address": "6433 Elm St, Weston, FL 33368",
+    "address": "8934 S Halsted St, Kansas City, MO 64123",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Michael Nair",
-      "phone": "(452) 907-8799",
+      "phone": "(312) 555-6413",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Lip swelling and hives after ibuprofen",

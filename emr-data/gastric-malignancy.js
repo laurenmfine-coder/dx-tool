@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Hideo Tanaka",
+  "patientHPI": "I've been losing weight without trying over the past few months and I just feel so tired all the time - I get full after just a few bites of food and my stomach feels uncomfortable.",
     "dob": "07/12/1951",
     "age": 74,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 3201 N University Dr, Riverside, FL",
     "language": "English, Japanese",
     "race": "Asian (Japanese American)",
-    "address": "3410 N Ocean Blvd, Fort Lauderdale, FL 33308",
+    "address": "8199 Hickory Rd, Denver, CO 80205",
     "phone": "(954) 555-8274",
     "email": "h.tanaka51@email.com",
     "emergencyContact": {

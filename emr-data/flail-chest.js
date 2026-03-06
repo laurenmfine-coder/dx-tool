@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Roberto Delgado",
+  "patientHPI": "I've been managing pretty well with my breathing problems and heart condition since I quit smoking a few years ago. I can walk about two blocks before I get short of breath, which is about the same as usual. I use my daily inhaler and the rescue one a few times a week when I need it.",
     "dob": "02/19/1962",
     "age": 62,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 6350 Stirling Rd, Hollywood, FL",
     "language": "English, Spanish",
     "race": "Hispanic",
-    "address": "3185 Johnson St, Hollywood, FL 33021",
+    "address": "4151 Mulberry St, Phoenix, AZ 85012",
     "phone": "(954) 555-7741",
     "email": "r.delgado62@email.com",
     "emergencyContact": {

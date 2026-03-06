@@ -2,6 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Bernard Collins",
+  "patientHPI": "My breathing has been getting worse over the past three days, and my cough is bringing up more junk than usual. I know I have lung problems from smoking, but this feels different - I'm more short of breath than normal even when I'm just sitting around the house.",
     "dob": "02/26/1955",
     "age": "71",
     "sex": "Male",
@@ -9,15 +10,15 @@ window.EMR_DATA = {
     "mrn": "MRN-121842",
     "language": "English",
     "race": "White",
-    "phone": "(339) 531-1458",
+    "phone": "(513) 555-3230",
     "email": "bernard.collins@email.com",
-    "address": "7557 Pine Ln, Sunrise, FL 33377",
+    "address": "3390 Hickory Rd, Cleveland, OH 44107",
     "insurance": "Cigna PPO",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Publix Pharmacy — Weston Rd",
     "emergencyContact": {
       "name": "Christina Collins",
-      "phone": "(522) 507-5259",
+      "phone": "(502) 555-6253",
       "relationship": "Sibling"
     },
     "chiefComplaint": "Worsening cough and dyspnea for 3 days",

@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jayden Thomas",
+  "patientHPI": "My eyes have been really bothering me for weeks now — there's this thick, stringy stuff coming out of them and the light hurts so much I have to cover my eyes when I walk around. They feel like there's sand in them and they're so itchy I can't stop rubbing them.",
       "dob": "02/04/2017",
       "age": "9",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-544948",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(375) 331-3398",
+      "phone": "(404) 555-9937",
       "email": "jayden.x@email.com",
-      "address": "4793 Oak St, Weston, FL 33326",
+      "address": "5121 Lavender St, Columbus, OH 43211",
       "insurance": "Medicaid",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(328) 574-8947",
+        "phone": "(502) 555-6262",
         "relationship": "Parent"
       }
     },
@@ -696,15 +697,15 @@ window.EMR_DATA = {
     "mrn": "MRN-544948",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(375) 331-3398",
+    "phone": "(314) 555-2311",
     "email": "jayden.x@email.com",
-    "address": "4793 Oak St, Weston, FL 33326",
+    "address": "5859 Daisy Ave, Albuquerque, NM 87107",
     "insurance": "Medicaid",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(328) 574-8947",
+      "phone": "(503) 555-5843",
       "relationship": "Parent"
     },
     "chiefComplaint": "9yo with severe eye swelling, thick mucoid discharge, photophobia — VKC flare with corneal involvement",

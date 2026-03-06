@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Noah Williams",
+  "patientHPI": "My little boy's skin condition got much worse after my sister visited and gave him kisses on his face. Now he has these awful sores and blisters all over his face and body, and he's running a high fever and seems really sick.",
       "dob": "01/18/2024",
       "age": "2",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-294708",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(507) 771-1682",
+      "phone": "(513) 555-1496",
       "email": "noah.x@email.com",
-      "address": "7887 Oak St, Weston, FL 33326",
+      "address": "6753 Pine Ave, Detroit, MI 48204",
       "insurance": "Medicaid",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(990) 544-7247",
+        "phone": "(615) 555-9938",
         "relationship": "Parent"
       }
     },
@@ -839,15 +840,15 @@ window.EMR_DATA = {
     "mrn": "MRN-294708",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(507) 771-1682",
+    "phone": "(502) 555-5949",
     "email": "noah.x@email.com",
-    "address": "7887 Oak St, Weston, FL 33326",
+    "address": "7302 N Kedzie Blvd, Indianapolis, IN 46208",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(990) 544-7247",
+      "phone": "(615) 555-5012",
       "relationship": "Parent"
     },
     "chiefComplaint": "2yo with severe eczema and new punched-out vesicles/erosions — febrile after exposure to adult with cold sore",

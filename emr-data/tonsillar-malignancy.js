@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Parsons",
+  "patientHPI": "I've had this stubborn sore throat on my right side for about two months now that just won't go away, even though my doctor gave me two different antibiotics. The pain sometimes shoots up to my right ear, and about a month ago I noticed a lump on the right side of my neck that seems to be getting bigger. My voice sounds a little different too, kind of hoarse, and people have been asking me if I have a cold.",
     "dob": "05/03/1960",
     "age": 64,
     "sex": "Male",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Walgreens — 4601 N University Dr, Lauderhill, FL",
     "language": "English",
     "race": "White",
-    "address": "5421 NW 33rd St, Lauderhill, FL 33319",
+    "address": "759 Dogwood Ln, Indianapolis, IN 46201",
     "phone": "(954) 555-3672",
     "email": "r.parsons60@email.com",
     "emergencyContact": {

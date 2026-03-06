@@ -1,991 +1,192 @@
-/* emr-data/sjsten-overlap.js — Multi-Setting Allergy Case: SJS/TEN Overlap */
+// Virtual EMR Case: SJS-TEN Overlap Syndrome
+// Variant: sjsten-overlap | Acuity: ESI-1
+// Auto-generated from ED Board clinical data
+
 window.EMR_DATA = {
-  "base": {
-    "patient": {
-      "name": "Ananya Patel",
-  "patientHPI": "Three weeks ago I started a new seizure medication and now I have this terrible blistering rash all over my body - my skin is peeling off in large areas and I have painful sores in my mouth that make it hard to eat or drink.",
-      "dob": "05/11/2001",
-      "age": "25",
-      "sex": "Female",
-      "pronouns": "she/her",
-      "mrn": "MRN-446725",
-      "language": "English",
-      "race": "Hispanic/Latino",
-      "phone": "(415) 555-2137",
-      "email": "ananya.patel@email.com",
-      "address": "5525 Birch Ln, Louisville, KY 40204",
-      "insurance": "Oscar Health",
-      "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "CVS Pharmacy — Main St",
-      "emergencyContact": {
-        "name": "Alejandro Patel",
-        "phone": "(803) 555-5573",
-        "relationship": "Parent"
-      }
-    },
-    "allergies": [
-      {
-        "allergen": "Penicillin",
-        "reaction": "Rash",
-        "severity": "Mild",
-        "type": "Drug"
-      }
-    ],
-    "immunizations": [
-      {
-        "name": "Influenza",
-        "date": "10/15/2025",
-        "lot": "FL-2025",
-        "site": "Left Deltoid"
-      },
-      {
-        "name": "COVID-19 (Updated)",
-        "date": "09/01/2025",
-        "lot": "CV-2025",
-        "site": "Right Deltoid"
-      },
-      {
-        "name": "Tdap",
-        "date": "03/2020",
-        "lot": "TD-2020",
-        "site": "Left Deltoid"
-      }
-    ],
-    "familyHistory": [
-      "Non-contributory"
-    ],
-    "socialHistory": [
-      [
-        "Medication timeline",
-        "Lamotrigine started 3 weeks ago with too-rapid uptitration"
-      ]
-    ]
-  },
-  "encounters": {
-    "ed": {
-      "patient": {
-        "chiefComplaint": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
-        "diagnosis": "SJS/TEN Overlap"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [
-        {
-          "id": "med-1",
-          "name": "Lamotrigine",
-          "dose": "50mg",
-          "route": "PO",
-          "frequency": "Daily (uptitrating)",
-          "status": "Active",
-          "prescriber": "Dr. Elena Rodriguez, MD"
-        },
-        {
-          "id": "med-2",
-          "name": "Levetiracetam",
-          "dose": "1000mg",
-          "route": "PO",
-          "frequency": "BID",
-          "status": "Active",
-          "prescriber": "Dr. Raj Patel, MD"
-        }
-      ],
-      "vitals": [
-        {
-          "date": "03/01/2026",
-          "time": "07:45",
-          "bp": "98/58",
-          "hr": "118",
-          "rr": "22",
-          "temp": "39.4°C",
-          "spo2": "95%",
-          "pain": "10/10",
-          "bmi": "33",
-          "weight": "60 kg"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-753551",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "2.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "L"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.4",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Albumin",
-                  "value": "2.4",
-                  "unit": "g/dL",
-                  "range": "3.5-5.5",
-                  "flag": "L"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [],
-      "visits": [
-        {
-          "id": "visit-ed",
-          "type": "Emergency Visit",
-          "date": "03/01/2026",
-          "provider": "Dr. ED Attending",
-          "cc": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
-          "hpi": "Ananya Patel is a 25-year-old female presenting with widespread blistering rash with mucosal involvement — 18% bsa detachment. Past medical history includes Seizure disorder — started lamotrigine 3 weeks ago. See chart for full details.",
-          "exam": "See physical examination documentation.",
-          "assessment": "SJS/TEN Overlap — clinical presentation and workup consistent with diagnosis.",
-          "plan": "See orders and management plan."
-        }
-      ]
-    },
-    "inpatient": {
-      "patient": {
-        "chiefComplaint": "Transfer to burn unit for SJS/TEN overlap — mucosal involvement",
-        "diagnosis": "SJS/TEN Overlap"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [
-        {
-          "id": "med-1",
-          "name": "Lamotrigine",
-          "dose": "50mg",
-          "route": "PO",
-          "frequency": "Daily (uptitrating)",
-          "status": "Active",
-          "prescriber": "Dr. Elena Rodriguez, MD"
-        },
-        {
-          "id": "med-2",
-          "name": "Levetiracetam",
-          "dose": "1000mg",
-          "route": "PO",
-          "frequency": "BID",
-          "status": "Active",
-          "prescriber": "Dr. Raj Patel, MD"
-        },
-        {
-          "id": "med-add-1",
-          "name": "IVIG",
-          "dose": "0.4g/kg/day",
-          "route": "IV",
-          "frequency": "Daily x3 days",
-          "status": "Active",
-          "prescriber": "Dr. Elena Rodriguez, MD"
-        }
-      ],
-      "vitals": [
-        {
-          "date": "03/02/2026",
-          "time": "08:00",
-          "bp": "102/64",
-          "hr": "108",
-          "rr": "20",
-          "temp": "38.4°C",
-          "spo2": "96%",
-          "pain": "8/10"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-753551",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "2.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "L"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.4",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Albumin",
-                  "value": "2.4",
-                  "unit": "g/dL",
-                  "range": "3.5-5.5",
-                  "flag": "L"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [],
-      "visits": [
-        {
-          "id": "visit-1",
-          "type": "Admission",
-          "date": "03/02/2026",
-          "provider": "Dr. Attending",
-          "cc": "Transfer to burn unit for SJS/TEN overlap — mucosal involvement",
-          "hpi": "Ananya Patel — Transfer to burn unit for SJS/TEN overlap — mucosal involvement",
-          "exam": "See documentation.",
-          "assessment": "See assessment.",
-          "plan": "See orders."
-        }
-      ]
-    },
-    "consult": {
-      "patient": {
-        "chiefComplaint": "A/I consult — culprit drug identification, HLA testing consideration",
-        "diagnosis": "SJS/TEN Overlap"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [
-        {
-          "id": "med-1",
-          "name": "Lamotrigine",
-          "dose": "50mg",
-          "route": "PO",
-          "frequency": "Daily (uptitrating)",
-          "status": "Active",
-          "prescriber": "Dr. Elena Rodriguez, MD"
-        },
-        {
-          "id": "med-2",
-          "name": "Levetiracetam",
-          "dose": "1000mg",
-          "route": "PO",
-          "frequency": "BID",
-          "status": "Active",
-          "prescriber": "Dr. Raj Patel, MD"
-        }
-      ],
-      "vitals": [
-        {
-          "date": "03/02/2026",
-          "time": "08:00",
-          "bp": "110/68",
-          "hr": "88",
-          "rr": "16",
-          "temp": "37.4°C",
-          "spo2": "98%",
-          "pain": "5/10"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-753551",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "2.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "L"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.4",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Albumin",
-                  "value": "2.4",
-                  "unit": "g/dL",
-                  "range": "3.5-5.5",
-                  "flag": "L"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [],
-      "visits": [
-        {
-          "id": "visit-1",
-          "type": "Consultation",
-          "date": "03/02/2026",
-          "provider": "Dr. Allergist",
-          "cc": "A/I consult — culprit drug identification, HLA testing consideration",
-          "hpi": "Ananya Patel — A/I consult — culprit drug identification, HLA testing consideration",
-          "exam": "See documentation.",
-          "assessment": "See assessment.",
-          "plan": "See orders."
-        }
-      ]
-    },
-    "clinic": {
-      "patient": {
-        "chiefComplaint": "Follow-up 6 weeks post-SJS/TEN — ophthalmology co-management, scar assessment",
-        "diagnosis": "SJS/TEN Overlap"
-      },
-      "problems": [
-        {
-          "id": "prob-1",
-          "description": "Seizure disorder — started lamotrigine 3 weeks ago",
-          "status": "Active",
-          "onset": "Chronic",
-          "icd10": ""
-        }
-      ],
-      "medications": [],
-      "vitals": [
-        {
-          "date": "03/02/2026",
-          "time": "08:00",
-          "bp": "116/72",
-          "hr": "74",
-          "rr": "14",
-          "temp": "36.8°C",
-          "spo2": "99%",
-          "pain": "0/10"
-        }
-      ],
-      "labs": [
-        {
-          "date": "03/01/2026",
-          "time": "08:00",
-          "status": "Final",
-          "orderedBy": "Dr. ED Attending",
-          "accession": "LAB-753551",
-          "collected": "03/01/2026 07:50",
-          "fasting": "Not fasting",
-          "facility": "ReasonDx Medical Center",
-          "specimenType": "Blood",
-          "groups": [
-            {
-              "name": "CBC WITH DIFFERENTIAL",
-              "results": [
-                {
-                  "test": "WBC",
-                  "value": "2.8",
-                  "unit": "x10³/µL",
-                  "range": "4.5-11.0",
-                  "flag": "L"
-                },
-                {
-                  "test": "Hemoglobin",
-                  "value": "13.8",
-                  "unit": "g/dL",
-                  "range": "12.0-16.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Hematocrit",
-                  "value": "41.2",
-                  "unit": "%",
-                  "range": "36-46",
-                  "flag": ""
-                },
-                {
-                  "test": "Platelets",
-                  "value": "245",
-                  "unit": "x10³/µL",
-                  "range": "150-400",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "BASIC METABOLIC PANEL",
-              "results": [
-                {
-                  "test": "Sodium",
-                  "value": "139",
-                  "unit": "mEq/L",
-                  "range": "136-145",
-                  "flag": ""
-                },
-                {
-                  "test": "Potassium",
-                  "value": "4.2",
-                  "unit": "mEq/L",
-                  "range": "3.5-5.0",
-                  "flag": ""
-                },
-                {
-                  "test": "Chloride",
-                  "value": "102",
-                  "unit": "mEq/L",
-                  "range": "98-106",
-                  "flag": ""
-                },
-                {
-                  "test": "CO2/Bicarb",
-                  "value": "24",
-                  "unit": "mEq/L",
-                  "range": "22-28",
-                  "flag": ""
-                },
-                {
-                  "test": "BUN",
-                  "value": "16",
-                  "unit": "mg/dL",
-                  "range": "7-20",
-                  "flag": ""
-                },
-                {
-                  "test": "Creatinine",
-                  "value": "1.4",
-                  "unit": "mg/dL",
-                  "range": "0.6-1.2",
-                  "flag": "H"
-                },
-                {
-                  "test": "Glucose",
-                  "value": "98",
-                  "unit": "mg/dL",
-                  "range": "70-100",
-                  "flag": ""
-                },
-                {
-                  "test": "Calcium",
-                  "value": "9.4",
-                  "unit": "mg/dL",
-                  "range": "8.5-10.5",
-                  "flag": ""
-                }
-              ]
-            },
-            {
-              "name": "CASE-SPECIFIC STUDIES",
-              "results": [
-                {
-                  "test": "Albumin",
-                  "value": "2.4",
-                  "unit": "g/dL",
-                  "range": "3.5-5.5",
-                  "flag": "L"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "imaging": [],
-      "visits": [
-        {
-          "id": "visit-1",
-          "type": "Office Visit",
-          "date": "03/02/2026",
-          "provider": "Dr. Attending",
-          "cc": "Follow-up 6 weeks post-SJS/TEN — ophthalmology co-management, scar assessment",
-          "hpi": "Ananya Patel — Follow-up 6 weeks post-SJS/TEN — ophthalmology co-management, scar assessment",
-          "exam": "See documentation.",
-          "assessment": "See assessment.",
-          "plan": "See orders."
-        }
-      ]
-    }
-  },
   "patient": {
-    "name": "Ananya Patel",
-    "dob": "05/11/2001",
-    "age": "25",
+    "name": "Priya Mehta",
+    "dob": "04/25/1992",
+    "age": 33,
     "sex": "Female",
-    "pronouns": "she/her",
-    "mrn": "MRN-446725",
-    "language": "English",
-    "race": "Hispanic/Latino",
-    "phone": "(504) 555-9346",
-    "email": "ananya.patel@email.com",
-    "address": "9613 Cottonwood Ave, Detroit, MI 48202",
-    "insurance": "Oscar Health",
-    "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "mrn": "RDX-2025-41688",
+    "pronouns": "She/Her",
+    "insurance": "Cigna PPO",
+    "pcp": "Dr. Renee Augustin, MD",
+    "pharmacy": "Walgreens — 5200 S University Dr, Riverside, FL",
+    "language": "English, Gujarati",
+    "race": "Asian (Indian American)",
+    "address": "4102 SW 68th Ter, Riverside, FL 33100",
+    "phone": "(954) 555-3562",
+    "email": "p.mehta92@email.com",
     "emergencyContact": {
-      "name": "Alejandro Patel",
-      "phone": "(505) 555-9785",
-      "relationship": "Parent"
-    },
-    "chiefComplaint": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
-    "diagnosis": "SJS/TEN Overlap"
+      "name": "Vikram Mehta (Husband)",
+      "phone": "(954) 555-3578"
+    }
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Seizure disorder — started lamotrigine 3 weeks ago",
+      "problem": "Gout — New Diagnosis",
+      "icd": "M10.9",
+      "onset": "2026",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "First flare 01/2026, right 1st MTP; uric acid 8.4; started allopurinol 01/22/2026 after acute flare resolved"
+    },
+    {
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "On hydrochlorothiazide — likely contributing to hyperuricemia; switch planned"
+    },
+    {
+      "problem": "Polycystic Ovary Syndrome",
+      "icd": "E28.2",
+      "onset": "2014",
+      "status": "Active",
+      "notes": "On metformin and OCP; irregular menses; mild hirsutism"
+    },
+    {
+      "problem": "Obesity, BMI 31.4",
+      "icd": "E66.01",
+      "onset": "2018",
+      "status": "Active",
+      "notes": "Weight management ongoing; dietary counseling"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Lamotrigine",
-      "dose": "50mg",
-      "route": "PO",
-      "frequency": "Daily (uptitrating)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Allopurinol 100mg daily",
+      "sig": "Take 1 tablet by mouth once daily",
+      "prescriber": "Dr. Augustin",
+      "start": "01/2026",
+      "refills": 2,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Levetiracetam",
-      "dose": "1000mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "Hydrochlorothiazide 25mg daily",
+      "sig": "Take 1 tablet by mouth once daily in the morning",
+      "prescriber": "Dr. Augustin",
+      "start": "08/2023",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Metformin 500mg BID",
+      "sig": "Take 1 tablet by mouth twice daily with meals",
+      "prescriber": "Dr. Augustin",
+      "start": "09/2015",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Norgestimate-Ethinyl Estradiol (Sprintec) daily",
+      "sig": "Take 1 tablet by mouth daily per pack directions",
+      "prescriber": "Dr. Augustin",
+      "start": "03/2016",
+      "refills": 11,
+      "status": "Active"
     }
   ],
   "allergies": [
     {
-      "allergen": "Penicillin",
-      "reaction": "Rash",
-      "severity": "Mild",
-      "type": "Drug"
+      "allergen": "NKDA",
+      "type": "None",
+      "reaction": "None",
+      "severity": "",
+      "verified": "Yes"
     }
   ],
   "vitals": [
     {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "98/58",
-      "hr": "118",
-      "rr": "22",
-      "temp": "39.4°C",
+      "date": "02/19/2026",
+      "bp": "102/62",
+      "hr": 118,
+      "rr": 24,
+      "temp": "102.8°F",
       "spo2": "95%",
-      "pain": "10/10",
-      "bmi": "33",
-      "weight": "60 kg"
+      "wt": "178 lbs",
+      "ht": "5'4\"",
+      "bmi": 30.5,
+      "setting": "ED"
+    },
+    {
+      "date": "01/22/2026",
+      "bp": "132/84",
+      "hr": 76,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "182 lbs",
+      "ht": "5'4\"",
+      "bmi": 31.2,
+      "setting": "PCP Office"
+    },
+    {
+      "date": "08/14/2025",
+      "bp": "128/82",
+      "hr": 72,
+      "rr": 16,
+      "temp": "98.6°F",
+      "spo2": "99%",
+      "wt": "184 lbs",
+      "ht": "5'4\"",
+      "bmi": 31.6,
+      "setting": "PCP Office"
     }
   ],
   "visits": [
     {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "Widespread blistering rash with mucosal involvement — 18% BSA detachment",
-      "hpi": "Ananya Patel is a 25-year-old female presenting with widespread blistering rash with mucosal involvement — 18% bsa detachment. Past medical history includes Seizure disorder — started lamotrigine 3 weeks ago. See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "SJS/TEN Overlap — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
+      "id": "V001",
+      "date": "01/22/2026",
+      "type": "Primary Care",
+      "provider": "Dr. Renee Augustin, MD",
+      "cc": "Gout follow-up, start urate-lowering therapy",
+      "hpi": "33F with first gout flare (01/2026) — resolved with colchicine and naproxen. Uric acid 8.4. HTN on HCTZ which is likely contributing to hyperuricemia. PCOS on metformin. Discussed starting allopurinol for urate-lowering therapy now that acute flare has fully resolved. Patient agrees. Also discussed switching HCTZ to losartan (uricosuric properties).",
+      "exam": "NAD. CV: RRR. Lungs: CTAB. MSK: No joint swelling/erythema. Skin: No rashes. Right 1st MTP: No residual swelling.",
+      "assessment": "1. Gout — first flare resolved; uric acid elevated\n2. HTN — HCTZ contributing to hyperuricemia",
+      "plan": "1. Start allopurinol 100mg daily — warn about hypersensitivity risk; educated on skin rash warning signs\n2. Continue colchicine 0.6mg daily x 3 months for flare prophylaxis during ULT initiation\n3. Plan to switch HCTZ to losartan at next visit\n4. Labs: CMP, uric acid in 4 weeks\n5. Return 4 weeks; call immediately if rash, fever, or mouth sores develop"
+    },
+    {
+      "id": "V002",
+      "date": "08/14/2025",
+      "type": "Primary Care",
+      "provider": "Dr. Renee Augustin, MD",
+      "cc": "Annual wellness, HTN follow-up",
+      "hpi": "33F presents for annual exam. HTN controlled on HCTZ. PCOS — menses regular on OCP. Weight stable. No complaints.",
+      "exam": "NAD. CV: RRR. Lungs: CTAB. Abdomen: Soft, obese, NT. Skin: Mild facial hirsutism.",
+      "assessment": "1. HTN — controlled\n2. PCOS — stable on current regimen\n3. Obesity — stable",
+      "plan": "1. Continue current medications\n2. Lipid panel, CMP, A1c ordered\n3. Return 6 months"
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
+      "date": "01/22/2026",
+      "time": "10:00",
+      "orderedBy": "Dr. Augustin",
+      "collected": "01/22/2026 10:15",
+      "facility": "ReasonDx Medical Center Lab",
+      "accession": "LAB-2026-012242",
       "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-753551",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
+      "specimenType": "Venous Blood",
+      "fasting": "No",
       "groups": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
+          "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            {
-              "test": "WBC",
-              "value": "2.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
+            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
+            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
+            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
+            { "test": "eGFR", "value": ">90", "unit": "mL/min/1.73m²", "range": ">60", "flag": "" },
+            { "test": "ALT", "value": "24", "unit": "U/L", "range": "7-56", "flag": "" },
+            { "test": "AST", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" },
+            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
+            { "test": "Potassium", "value": "3.8", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" }
           ]
         },
         {
-          "name": "BASIC METABOLIC PANEL",
+          "name": "URIC ACID",
           "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
-        },
-        {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Albumin",
-              "value": "2.4",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": "L"
-            }
+            { "test": "Uric Acid", "value": "8.4", "unit": "mg/dL", "range": "2.5-7.0", "flag": "H" }
           ]
         }
       ]
@@ -993,48 +194,33 @@ window.EMR_DATA = {
   ],
   "imaging": [],
   "immunizations": [
-    {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
-    },
-    {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
-    },
-    {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
-    }
+    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-9104", "mfr": "Sanofi" },
+    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-2044", "mfr": "Pfizer" },
+    { "vaccine": "Tdap", "date": "06/2022", "site": "Left deltoid IM", "lot": "TD22-472", "mfr": "GSK" },
+    { "vaccine": "HPV (Gardasil 9) — Series Complete", "date": "2018", "site": "Left deltoid IM", "lot": "HP18-404", "mfr": "Merck" }
   ],
   "familyHistory": [
-    "Non-contributory"
+    "Father: Gout, HTN, T2DM, alive at 64",
+    "Mother: Hypothyroidism, alive at 62",
+    "Brother: Healthy, alive at 30",
+    "Paternal uncle: Severe drug allergy requiring hospitalization (medication unknown)"
   ],
   "socialHistory": [
-    [
-      "Medication timeline",
-      "Lamotrigine started 3 weeks ago with too-rapid uptitration"
-    ]
-  ]
-,"references":[
-  {
-    "id": "SCORTEN-2000",
-    "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
-    "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
-    "journal": "J Invest Dermatol",
-    "year": 2000,
-    "doi": "10.1046/j.1523-1747.2000.00061.x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
-    "openAccess": true,
-    "validates": [
-      "SCORTEN mortality prediction",
-      "7 clinical parameters",
-      "Score 3 = 12.1% mortality"
-    ]
+    ["Occupation", "Pharmacist at hospital pharmacy — aware of allopurinol hypersensitivity risk"],
+    ["Marital", "Married 5 years; no children (trying to conceive — on hold due to new gout diagnosis and medication)"],
+    ["Tobacco", "Never smoker"],
+    ["Alcohol", "Social — 1-2 glasses wine per week; stopped during gout flare"],
+    ["Drugs", "Denies"],
+    ["Exercise", "Yoga 2x/week; walking 3x/week; reduced during gout flare"],
+    ["Housing", "Townhouse with husband"],
+    ["Safety", "Denies IPV; seatbelt; no firearms"],
+    ["Advance Directive", "None — not discussed (age 33)"]
+  ],
+  "meta": {
+    "caseId": "sjsten-overlap",
+    "diagnosis": "SJS-TEN Overlap Syndrome (Allopurinol-Induced — 15-20% BSA Epidermal Detachment with Mucosal Involvement, 4 Weeks After Drug Initiation)",
+    "acuity": 1,
+    "presentation": "Skin / Soft Tissue Emergency",
+    "category": "dermatologic"
   }
-]};
+};

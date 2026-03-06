@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret O'Brien",
+  "patientHPI": "I've had this terrible headache on the right side of my head for about a week now - it's this constant throbbing pain that gets so much worse at night, and now when I chew my food for too long my jaw starts hurting really bad, plus even brushing my hair hurts my scalp.",
     "dob": "04/12/1949",
     "age": 75,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "Publix Pharmacy — 6001 Coral Ridge Dr, Coral Springs, FL",
     "language": "English",
     "race": "White",
-    "address": "9120 NW 47th Ct, Coral Springs, FL 33067",
+    "address": "6723 Maple St, San Antonio, TX 78210",
     "phone": "(954) 555-3617",
     "email": "m.obrien49@email.com",
     "emergencyContact": {

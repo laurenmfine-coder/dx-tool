@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jasmine Cooper",
+  "patientHPI": "My daughter broke out in these bumpy red patches all over her body three days ago - they come and go and move around to different spots. She had a cold with a runny nose last week, but we haven't given her any new foods or medicines.",
       "dob": "10/24/2021",
       "age": "5",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-807598",
       "language": "English",
       "race": "Black/African American",
-      "phone": "(591) 501-8954",
+      "phone": "(503) 555-2421",
       "email": "jasmine.x@email.com",
-      "address": "3867 Oak St, Weston, FL 33326",
+      "address": "4164 Hollyhock Rd, Kansas City, MO 64123",
       "insurance": "Medicaid",
       "pcp": "Dr. Raj Patel, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(981) 757-3959",
+        "phone": "(505) 555-2562",
         "relationship": "Parent"
       }
     },
@@ -692,15 +693,15 @@ window.EMR_DATA = {
     "mrn": "MRN-807598",
     "language": "English",
     "race": "Black/African American",
-    "phone": "(591) 501-8954",
+    "phone": "(404) 555-3303",
     "email": "jasmine.x@email.com",
-    "address": "3867 Oak St, Weston, FL 33326",
+    "address": "4475 Juniper Dr, Memphis, TN 38127",
     "insurance": "Medicaid",
     "pcp": "Dr. Raj Patel, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(981) 757-3959",
+      "phone": "(615) 555-6301",
       "relationship": "Parent"
     },
     "chiefComplaint": "5yo with diffuse hives x3 days after viral URI — parents insist it's a food allergy, want \"full allergy panel\"",

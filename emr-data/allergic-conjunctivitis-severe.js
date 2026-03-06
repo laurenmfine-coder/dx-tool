@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Aiden Morales",
+  "patientHPI": "My eyes have been bothering me for a while, but today I woke up with really sharp pain in my left eye and it feels like something is scratching it every time I blink. The light makes it hurt even worse.",
       "dob": "02/04/2012",
       "age": "14",
       "sex": "Male",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-853805",
       "language": "English",
       "race": "Asian",
-      "phone": "(617) 968-5264",
+      "phone": "(630) 555-1653",
       "email": "aiden.morales@email.com",
-      "address": "5918 Oak St, Weston, FL 33372",
+      "address": "3851 Oak Ave, Louisville, KY 40213",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Lisa Morales",
-        "phone": "(350) 871-4076",
+        "phone": "(513) 555-6280",
         "relationship": "Parent"
       }
     },
@@ -846,15 +847,15 @@ window.EMR_DATA = {
     "mrn": "MRN-853805",
     "language": "English",
     "race": "Asian",
-    "phone": "(617) 968-5264",
+    "phone": "(630) 555-5102",
     "email": "aiden.morales@email.com",
-    "address": "5918 Oak St, Weston, FL 33372",
+    "address": "759 Hickory Rd, Denver, CO 80211",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Lisa Morales",
-      "phone": "(350) 871-4076",
+      "phone": "(212) 555-2496",
       "relationship": "Parent"
     },
     "chiefComplaint": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia — recurs every spring",

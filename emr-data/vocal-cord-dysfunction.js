@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Alyssa Chen",
+  "patientHPI": "I've been working with a speech therapist for the past few months learning breathing exercises after they found out what was causing my breathing problems when I kept going to the emergency room thinking I had asthma.",
     "dob": "10/22/2003",
     "age": 22,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 1501 S Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "Asian",
-    "address": "4205 NE 12th Terrace, Fort Lauderdale, FL 33334",
+    "address": "2975 Iris Blvd, Pittsburgh, PA 15210",
     "phone": "(954) 555-1394",
     "email": "alyssachen03@email.com",
     "emergencyContact": {

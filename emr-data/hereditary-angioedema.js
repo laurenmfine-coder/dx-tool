@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Nicole Dubois",
+  "patientHPI": "My throat started swelling up this morning and I can barely swallow, plus I'm having these terrible stomach cramps that feel like someone is stabbing me from the inside. I've dealt with these attacks before so I know what's happening, but this one feels worse than usual and I'm really scared.",
       "dob": "05/06/2002",
       "age": "24",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-432524",
       "language": "English",
       "race": "White",
-      "phone": "(290) 781-4272",
+      "phone": "(704) 555-8218",
       "email": "nicole.dubois@email.com",
-      "address": "7459 Elm St, Weston, FL 33364",
+      "address": "6959 Sycamore Dr, Albuquerque, NM 87103",
       "insurance": "BlueCross BlueShield PPO",
       "pcp": "Dr. James Wu, MD",
       "pharmacy": "Walgreens — University Blvd",
       "emergencyContact": {
         "name": "Michael Dubois",
-        "phone": "(960) 595-2222",
+        "phone": "(614) 555-5616",
         "relationship": "Spouse"
       }
     },
@@ -749,15 +750,15 @@ window.EMR_DATA = {
     "mrn": "MRN-432524",
     "language": "English",
     "race": "White",
-    "phone": "(290) 781-4272",
+    "phone": "(803) 555-7256",
     "email": "nicole.dubois@email.com",
-    "address": "7459 Elm St, Weston, FL 33364",
+    "address": "4196 S Halsted St, Birmingham, AL 35210",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. James Wu, MD",
     "pharmacy": "Walgreens — University Blvd",
     "emergencyContact": {
       "name": "Michael Dubois",
-      "phone": "(960) 595-2222",
+      "phone": "(617) 555-9641",
       "relationship": "Spouse"
     },
     "chiefComplaint": "Acute laryngeal swelling and severe abdominal pain — known HAE",

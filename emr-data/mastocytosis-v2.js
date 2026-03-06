@@ -3,6 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Chelsea Whitfield",
+  "patientHPI": "This keeps happening to me during exercise - my face gets all red and flushed, my heart starts racing over 140, I get terrible stomach cramps and feel like I'm going to pass out. I've seen eight different doctors in three years and they all say my tests are normal, but this is my twelfth episode.",
       "dob": "01/07/1992",
       "age": "34",
       "sex": "Female",
@@ -10,15 +11,15 @@ window.EMR_DATA = {
       "mrn": "MRN-658590",
       "language": "English",
       "race": "White",
-      "phone": "(956) 381-2919",
+      "phone": "(412) 555-8496",
       "email": "chelsea.x@email.com",
-      "address": "8800 Oak St, Weston, FL 33326",
+      "address": "9880 Iris Blvd, Memphis, TN 38104",
       "insurance": "Cigna PPO",
       "pcp": "Dr. Elena Rodriguez, MD",
       "pharmacy": "CVS Pharmacy — Main St",
       "emergencyContact": {
         "name": "Family Contact",
-        "phone": "(644) 911-9503",
+        "phone": "(314) 555-5298",
         "relationship": "Spouse"
       }
     },
@@ -849,15 +850,15 @@ window.EMR_DATA = {
     "mrn": "MRN-658590",
     "language": "English",
     "race": "White",
-    "phone": "(956) 381-2919",
+    "phone": "(704) 555-9019",
     "email": "chelsea.x@email.com",
-    "address": "8800 Oak St, Weston, FL 33326",
+    "address": "5800 N Kedzie Blvd, Albuquerque, NM 87103",
     "insurance": "Cigna PPO",
     "pcp": "Dr. Elena Rodriguez, MD",
     "pharmacy": "CVS Pharmacy — Main St",
     "emergencyContact": {
       "name": "Family Contact",
-      "phone": "(644) 911-9503",
+      "phone": "(617) 555-6134",
       "relationship": "Spouse"
     },
     "chiefComplaint": "34yo with episode of flushing, tachycardia 140, abdominal pain, near-syncope during exercise — 12th similar episode in 3 years, always told \"anxiety\"",

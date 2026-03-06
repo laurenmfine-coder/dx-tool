@@ -5,6 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Doris Jean Campbell",
+  "patientHPI": "I've been feeling really unsteady on my feet lately and almost fell twice last month - luckily I grabbed onto furniture both times. My hip has been aching more than usual, especially when I try to get up from sitting, and walking feels more difficult than it used to.",
     "dob": "11/14/1941",
     "age": 83,
     "sex": "Female",
@@ -15,7 +16,7 @@ window.EMR_DATA = {
     "pharmacy": "CVS Pharmacy — 2600 Broward Blvd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
-    "address": "1920 SE 4th St, Fort Lauderdale, FL 33301",
+    "address": "4561 E Roosevelt Rd, Minneapolis, MN 55403",
     "phone": "(954) 555-8726",
     "email": "d.campbell41@email.com",
     "emergencyContact": {
