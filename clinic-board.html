@@ -41,7 +41,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 /* ── Top bar ── */
 .topbar{background:linear-gradient(135deg,var(--primary-dark),var(--teal));color:white;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.15);position:sticky;top:56px;z-index:100}
 .topbar-left{display:flex;align-items:center;gap:12px}
-.topbar-logo{font-size:16px;font-weight:700}.topbar-logo span{font-weight:400;opacity:.85}
+.topbar-logo{font-size:16px;font-weight:700;color:#fff}.topbar-logo span{font-weight:400;color:rgba(255,255,255,.85)}
 .topbar-badge{background:rgba(255,255,255,.18);padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
 .topbar-right{display:flex;align-items:center;gap:16px}
 .topbar-time{font-family:var(--mono);font-size:13px;opacity:.9}
@@ -64,7 +64,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 /* ── Stats bar ── */
 .stats-bar{padding:0 24px 12px;display:flex;gap:12px;flex-wrap:wrap}
 .stat-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:8px 16px;min-width:100px}
-.stat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)}
+.stat-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)}
 .stat-value{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--text)}
 .stat-value.teal{color:var(--teal)}.stat-value.warn{color:var(--warning)}.stat-value.ok{color:var(--success)}
 
@@ -88,7 +88,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 /* ── Slot time cell ── */
 .slot-time{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--primary-dark);white-space:nowrap}
-.slot-time.past{color:var(--text-muted);opacity:.6}
+.slot-time.past{color:#9CA3AF}
 .slot-time.now{color:var(--teal);font-weight:800}
 .slot-room{font-size:11px;color:var(--text-muted);margin-top:2px}
 
@@ -188,7 +188,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 /* ── AI chat ── */
 .chat-wrap{display:flex;flex-direction:column;height:100%}
 .chat-tracker{background:#f7f9fc;border-bottom:1px solid var(--border);padding:10px 16px;flex-shrink:0}
-.tracker-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:6px}
+.tracker-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:6px}
 .tracker-grid{display:flex;gap:4px;flex-wrap:wrap}
 .tracker-pill{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;border:1px solid var(--border);background:white;color:var(--text-muted)}
 .tracker-pill.covered{background:var(--success-light);color:var(--success);border-color:#86efac}
@@ -249,7 +249,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 @keyframes toastIn{to{transform:translateY(0);opacity:1}}
 @keyframes toastOut{to{transform:translateY(20px);opacity:0}}
 .toast.success{background:var(--teal)}.toast.warning{background:var(--warning)}
-.save-indicator{position:fixed;bottom:8px;left:8px;font-size:10px;color:var(--text-muted);opacity:.6;z-index:100}
+.save-indicator{position:fixed;bottom:8px;left:8px;font-size:11px;color:var(--text-muted);opacity:.6;z-index:100}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:768px){
@@ -265,7 +265,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <div class="topbar">
   <div class="topbar-left">
     <a href="./index.html" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Exit Clinic</a>
-    <div class="topbar-logo">🩺 ReasonDx <span>Virtual Hospital</span></div>
+    <div class="topbar-logo">🩺 <span>Virtual Hospital</span></div>
     <div class="topbar-badge">Outpatient Clinic</div>
   </div>
   <div class="topbar-right">
@@ -345,6 +345,27 @@ function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/<
 
 const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
 
+// ── DYNAMIC HPI — replaces hardcoded age/gender with the generated patient's values ──
+// Each case HPI has a canonical age and gender written in. This function swaps them
+// for the actual generated patient so board and chart always match.
+function dynamicHpi(hpi, p) {
+  if (!hpi || !p) return hpi;
+  var genderStr = p.gender === 'M' ? 'man' : 'woman';
+  var genderPron = p.gender === 'M' ? 'his' : 'her';
+  // Replace age pattern: "NN-year-old" with actual age
+  var out = hpi.replace(/\d{2}-year-old/g, p.age + '-year-old');
+  // Replace standalone gender words that follow the age pattern
+  out = out.replace(/(\d{2}-year-old )(woman|man|female|male)/g, function(m, prefix, g) {
+    return prefix + genderStr;
+  });
+  // Replace possessive gender references in context
+  out = out.replace(/\b(his|her)\b/g, function(m) {
+    // Only swap if original gender word already matched, avoid double-replacing
+    return genderPron;
+  });
+  return out;
+}
+
 // ── CLINIC CASE POOL ─────────────────────────────────────────────────────────
 // All acuity 3-4, outpatient-appropriate cases
 const CLINIC_CASES = [
@@ -354,8 +375,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Diabetes follow-up — HbA1c check',
     boardCC:'HbA1c 8.8%, obesity, GLP-1 initiation',
     demographics:{ageRange:[45,70],genderDistribution:{male:.45},
-      nameOptions:{male:['Robert Chen','James Washington','Carlos Rivera','David Kim'],
-                   female:['Maria Santos','Patricia Jones','Linda Okonkwo','Susan Lee']}},
+      nameOptions:{male:['Robert Okafor','James Whitfield','Marcus Delgado','Bernard Kowalski','Devon Patterson'],
+                   female:['Patricia Williams','Denise Okonkwo','Linda Castellano','Brenda Petrov','Shirley Achebe']}},
     pmh:'T2DM (10yr), HTN, HLD, obesity (BMI 38)',
     medications:'Metformin 1000mg BID, lisinopril 10mg, atorvastatin 40mg',
     allergies:'NKDA',
@@ -391,8 +412,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Joint pain evaluation — possible RA',
     boardCC:'47F bilateral symmetric polyarthritis MCPs/wrists, morning stiffness >1h',
     demographics:{ageRange:[35,60],genderDistribution:{male:.2},
-      nameOptions:{male:['James Carter','Michael Brooks'],
-                   female:['Jennifer Walsh','Amanda Torres','Christine Park','Diane Nguyen']}},
+      nameOptions:{male:['James Oduya','Michael Brennan','Andre Johansson','Tariq Hassan','Raymond Clarke'],
+                   female:['Jennifer Walsh','Monique Dupont','Amara Osei','Gwendolyn Fischer','Priya Nair']}},
     pmh:'Hypothyroidism (on levothyroxine), seasonal allergies',
     medications:'Levothyroxine 75mcg daily, loratadine PRN',
     allergies:'Sulfa — rash',
@@ -429,8 +450,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Headache management — migraine follow-up',
     boardCC:'37F migraine with aura 3×/week, MIDAS 22, daily NSAIDs — OCP review',
     demographics:{ageRange:[25,50],genderDistribution:{male:.15},
-      nameOptions:{male:['Tyler Morgan'],
-                   female:['Rachel Kim','Amanda Flores','Lauren Chen','Stephanie Davis']}},
+      nameOptions:{male:['Tyler Ogundimu','Sean Ramirez','Marcus Lindqvist','Darius Mensah','Colin Nakamura'],
+                   female:['Rachel Owusu','Stephanie Brennan','Keisha Holloway','Natasha Volkov','Dana Reyes']}},
     pmh:'Migraine with aura (since age 19), takes OCP (ethinyl estradiol)',
     medications:'Sumatriptan 100mg PRN (using 10–12 days/month), ibuprofen 600mg PRN daily, Seasonique (combined OCP)',
     allergies:'Penicillin — hives (childhood)',
@@ -463,8 +484,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Acne follow-up — scarring concern',
     boardCC:'22F OTC failure, PIH on skin of color, early scarring',
     demographics:{ageRange:[16,28],genderDistribution:{male:.4},
-      nameOptions:{male:['Marcus Thompson','Jordan Lee'],
-                   female:['Aaliyah Johnson','Sofia Garcia','Maya Patel','Priya Singh']}},
+      nameOptions:{male:['Marcus Thompson','Deshawn Ellis','Alejandro Ruiz','Connor O\'Sullivan','Kwame Asante'],
+                   female:['Aaliyah Johnson','Yesenia Vargas','Fatima Al-Rashid','Brittney Okafor','Isabel Fontaine']}},
     pmh:'None',
     medications:'OTC benzoyl peroxide 2.5% wash, OTC adapalene 0.1% gel (started 6 weeks ago)',
     allergies:'NKDA',
@@ -493,8 +514,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Chronic abdominal pain and bowel changes',
     boardCC:'35F 14-month abdominal pain relieved by defecation, alternating bowel habits, normal colonoscopy',
     demographics:{ageRange:[20,50],genderDistribution:{male:.3},
-      nameOptions:{male:['Patrick O\'Brien','Jason Wu'],
-                   female:['Emily Rodriguez','Natalie Kim','Sarah Johnson','Melissa Grant']}},
+      nameOptions:{male:['Patrick O\'Brien','Darnell Crawford','Yusuf Obi','Stefan Nowak','Brandon Fletcher'],
+                   female:['Emily Johansson','Tamara Washington','Ingrid Okonkwo','Melissa Grant','Cynthia Delacroix']}},
     pmh:'Anxiety (on sertraline), history of childhood functional abdominal pain',
     medications:'Sertraline 50mg daily',
     allergies:'NKDA',
@@ -529,8 +550,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Fatigue and weight gain — thyroid evaluation',
     boardCC:'44F progressive fatigue, cold intolerance, weight gain 12 lbs over 8 months',
     demographics:{ageRange:[30,65],genderDistribution:{male:.15},
-      nameOptions:{male:['William Chen'],
-                   female:['Barbara Walsh','Nancy Kim','Dorothy Green','Carol Martinez']}},
+      nameOptions:{male:['William Oduya','Gerald Fischer','Terrence Baptiste','Sanjay Mehta','Douglas Freeman'],
+                   female:['Barbara Whitfield','Nancy Osei','Dorothy Kowalczyk','Loretta Mensah','Carol Johansson']}},
     pmh:'Family history of Hashimoto thyroiditis (mother), seasonal allergies',
     medications:'Cetirizine 10mg PRN',
     allergies:'NKDA',
@@ -565,8 +586,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Allergy follow-up — immunotherapy discussion',
     boardCC:'Perennial nasal congestion, sneezing, itchy eyes — dust mite + grass + mold sensitized',
     demographics:{ageRange:[18,50],genderDistribution:{male:.5},
-      nameOptions:{male:['Kevin Park','Daniel Morris','Alex Johnson'],
-                   female:['Olivia Chang','Hannah Brown','Claire Wilson']}},
+      nameOptions:{male:['Kevin Okafor','Daniel Brennan','Omar Abdullah','Stefan Petrov','Reginald Hayes'],
+                   female:['Olivia Achebe','Hannah Sullivan','Aisha Diallo','Claire Johansson','Vivian Osei']}},
     pmh:'Allergic rhinitis, mild intermittent asthma (well-controlled)',
     medications:'Cetirizine 10mg daily, fluticasone nasal spray, montelukast 10mg daily, albuterol PRN (rarely uses)',
     allergies:'NKDA',
@@ -600,8 +621,8 @@ const CLINIC_CASES = [
     reasonForVisit:'Low back pain — new complaint',
     boardCC:'52M 6-week LBP, worse at night, 18-lb weight loss, former smoker 30 pack-yr',
     demographics:{ageRange:[40,70],genderDistribution:{male:.65},
-      nameOptions:{male:['Richard Stone','Thomas Park','Frank Williams','George Baker'],
-                   female:['Linda Hernandez','Joan Mitchell']}},
+      nameOptions:{male:['Richard Oduya','Thomas Kowalski','Frank Delacroix','George Ikenna','Walter Johansson'],
+                   female:['Linda Pemberton','Joan Achebe','Dorothy Ramirez','Helen Osei','Margaret Fischer']}},
     pmh:'HTN, 30 pack-year smoking history (quit 2 years ago), GERD',
     medications:'Amlodipine 5mg, omeprazole 20mg',
     allergies:'Aspirin — GI upset',
@@ -628,6 +649,151 @@ const CLINIC_CASES = [
       {id:'ca-mgmt',label:'IV fluids for hypercalcemia (Ca 11.4) — contact hematology',correct:true,category:'Acute management',critical:true},
       {id:'pt',label:'Physical therapy referral for mechanical LBP',correct:false,category:'Wrong diagnosis',critical:true},
       {id:'nsaid',label:'Increase NSAIDs and reassure — common mechanical LBP',correct:false,category:'Dangerous',critical:true},
+    ]
+  },
+  {
+    id:'ethics-informed-consent', diagnosis:'Informed Consent / Capacity Assessment',
+    category:'ethics', acuity:3, visitType:'new',
+    reasonForVisit:'Capacity evaluation — surgical consent concern',
+    boardCC:'68M with early dementia, surgeon requests capacity assessment before hip replacement',
+    demographics:{ageRange:[55,80],genderDistribution:{male:.55},
+      nameOptions:{male:['Harold Oduya','Bernard Kowalski','Eugene Fontaine','Walter Achebe','Raymond Fischer'],
+                   female:['Dorothy Pemberton','Evelyn Osei','Gloria Watkins','Mildred Johansson','Ruth Delacroix']}},
+    pmh:'Early Alzheimer\'s dementia (mild, on donepezil), osteoarthritis bilateral hips, HTN, T2DM',
+    medications:'Donepezil 10mg QHS, amlodipine 5mg, metformin 500mg BID, acetaminophen PRN',
+    allergies:'Codeine — nausea',
+    vitals:{BP:'136/84',HR:'72',RR:'14',Temp:'98.4°F',BMI:'26.1',Wt:'172 lbs'},
+    hpi:'68-year-old man with mild Alzheimer\'s dementia referred by orthopedic surgery for capacity assessment prior to elective left total hip replacement. Patient has been having increasing left hip pain limiting ambulation. Surgeon is concerned about capacity given dementia diagnosis. Patient is accompanied by his adult daughter who disagrees with his decision to proceed. MMSE today: 22/30 (mild cognitive impairment).',
+    exam:'General: pleasant, cooperative, appropriate affect. Oriented x3 (person, place, year). Can state name of surgery, why it\'s being done, major risks (infection, blood clot, death), and alternatives (PT, pain management, wheelchair). Can describe what recovery involves. Reasoning intact for this decision. Daughter present — disagrees but patient able to articulate his own reasoning independently.',
+    labs:[
+      {name:'MMSE',val:'22/30 — mild cognitive impairment',flag:'H',ref:'≥24 = normal'},
+      {name:'MoCA',val:'19/30 — mild impairment',flag:'H',ref:'≥26 = normal'},
+      {name:'Brain MRI (prior)',val:'Cortical atrophy, hippocampal volume loss, no acute lesion',flag:'',ref:''},
+      {name:'BMP',val:'Normal',flag:'',ref:''},
+    ],
+    teaching:{
+      keyPoints:['Decision-specific capacity: a patient can lack capacity for complex decisions but retain it for simpler ones','4 elements of capacity: understand information, appreciate how it applies to them, reason about options, communicate a consistent choice','Mild dementia does NOT equal lack of capacity — assess the specific decision','Surrogate decision-making hierarchy: healthcare proxy → spouse → adult children → parents → siblings','Disagreement by family member does NOT override patient capacity — family has no veto if patient has capacity'],
+      pitfalls:['Equating dementia diagnosis with automatic lack of capacity','Allowing family pressure to override a capable patient\'s decision','Not documenting the four elements of capacity in the note','Confusing competency (legal) with capacity (clinical)'],
+      mustNotMiss:['Document all four capacity elements explicitly — omitting documentation is a medical-legal risk']
+    },
+    plan:[
+      {id:'assess-4',label:'Assess all 4 capacity elements: understand, appreciate, reason, communicate',correct:true,category:'Assessment',critical:true},
+      {id:'document',label:'Document capacity assessment in chart with explicit findings',correct:true,category:'Documentation',critical:true},
+      {id:'capacity-yes',label:'Determine: patient HAS capacity for this specific decision',correct:true,category:'Determination',critical:true},
+      {id:'family-counsel',label:'Counsel daughter: her disagreement does not override patient\'s capacity',correct:true,category:'Communication',critical:true},
+      {id:'psychiatry-ref',label:'Psychiatry consult only if capacity remains uncertain after evaluation',correct:true,category:'Referral',critical:false},
+      {id:'auto-no',label:'Document lack of capacity based on MMSE 22 alone',correct:false,category:'Error',critical:true},
+      {id:'family-decides',label:'Defer to daughter\'s wishes since patient has dementia',correct:false,category:'Error',critical:true},
+    ]
+  },
+  {
+    id:'ebm-biostats-screening', diagnosis:'Evidence-Based Medicine — Screening Test Interpretation',
+    category:'epi', acuity:4, visitType:'follow',
+    reasonForVisit:'Positive screening test — results discussion',
+    boardCC:'54F abnormal mammogram recall — discussing BI-RADS 4 result and next steps',
+    demographics:{ageRange:[45,65],genderDistribution:{male:.05},
+      nameOptions:{male:['David Okafor'],
+                   female:['Sandra Williams','Cheryl Osei','Deborah Kowalski','Patricia Achebe','Sharon Mensah']}},
+    pmh:'Annual mammography screening, no prior biopsies, family history of breast cancer in maternal aunt (age 67)',
+    medications:'Levothyroxine 50mcg, calcium + vitamin D',
+    allergies:'NKDA',
+    vitals:{BP:'124/78',HR:'70',RR:'14',Temp:'98.6°F',BMI:'25.4',Wt:'148 lbs'},
+    hpi:'54-year-old woman called back after routine screening mammogram showed a 1.2 cm irregular mass in the left upper outer quadrant, classified as BI-RADS 4B. She is here to discuss the result and next steps. She asks: "What does this mean? Does this mean I have cancer?" She also asks why she was screened if "most positives are false alarms."',
+    exam:'Breast: no palpable mass on clinical exam. No axillary lymphadenopathy. No skin changes or nipple discharge.',
+    labs:[
+      {name:'Mammogram',val:'BI-RADS 4B — 1.2 cm irregular mass LUQ, PPV ~15-30%',flag:'H',ref:'BI-RADS 1-2 = negative'},
+      {name:'Breast density',val:'Heterogeneously dense (Category C)',flag:'H',ref:''},
+      {name:'10-yr Breast Cancer Risk (Tyrer-Cuzick)',val:'12.4%',flag:'',ref:'>20% = high risk'},
+    ],
+    teaching:{
+      keyPoints:['Sensitivity = true positive rate (how well test finds disease). Specificity = true negative rate (how well test excludes disease)','PPV (positive predictive value) depends on prevalence — a test with 90% sensitivity in a low-prevalence population has low PPV','BI-RADS 4B PPV ~15–30%: most positives are NOT cancer, but ALL require tissue diagnosis','NNT (number needed to screen): screening mammography prevents ~1 death per 1000 women screened over 10 years','Absolute vs relative risk: presenting absolute risk (1 in 1000) vs relative risk (40% reduction) changes perception dramatically'],
+      pitfalls:['Failing to distinguish sensitivity from PPV — "the test is 90% accurate" does not mean 90% of positives have cancer','Not explaining the difference between BI-RADS 4 (suspicious) and BI-RADS 5 (highly suggestive of malignancy)','Causing unnecessary panic with relative risk framing without absolute context'],
+      mustNotMiss:['BI-RADS 4 requires tissue biopsy — do not reassure without pathology']
+    },
+    plan:[
+      {id:'explain-ppv',label:'Explain PPV: BI-RADS 4B = ~15-30% chance of malignancy — most are benign',correct:true,category:'Counseling',critical:true},
+      {id:'biopsy',label:'Refer for ultrasound-guided core needle biopsy (required for BI-RADS 4)',correct:true,category:'Next step',critical:true},
+      {id:'explain-sens-spec',label:'Explain sensitivity vs specificity vs PPV in plain language',correct:true,category:'Health literacy',critical:false},
+      {id:'absolute-risk',label:'Frame risk using absolute numbers, not just relative risk',correct:true,category:'Communication',critical:false},
+      {id:'breast-surg',label:'Breast surgery referral after biopsy result',correct:true,category:'Referral',critical:false},
+      {id:'reassure-benign',label:'Reassure patient this is almost certainly benign — no biopsy needed',correct:false,category:'Error',critical:true},
+      {id:'repeat-mammo',label:'Repeat mammogram in 6 months instead of biopsy',correct:false,category:'Error — delay',critical:true},
+    ]
+  },
+  {
+    id:'prenatal-care-visit', diagnosis:'Prenatal Care — First Trimester',
+    category:'ob', acuity:4, visitType:'new',
+    reasonForVisit:'First prenatal visit — 9 weeks gestation',
+    boardCC:'31F G1P0 at 9 weeks — initial prenatal visit, high BMI, no prenatal vitamins yet',
+    demographics:{ageRange:[22,38],genderDistribution:{male:0},
+      nameOptions:{male:[],
+                   female:['Jasmine Okafor','Brittany Coleman','Destiny Washington','Aaliyah Mensah','Tiffany Achebe']}},
+    pmh:'Obesity (BMI 32), mild intermittent asthma (well-controlled on albuterol PRN), no prior pregnancies',
+    medications:'Albuterol MDI PRN (uses rarely), no prenatal vitamins started yet',
+    allergies:'Penicillin — reported childhood rash (unverified)',
+    vitals:{BP:'126/78',HR:'84',RR:'14',Temp:'98.6°F',BMI:'32.4',Wt:'189 lbs'},
+    hpi:'31-year-old G1P0 presenting for first prenatal visit at 9 weeks by LMP (confirmed by 8-week ultrasound: single intrauterine pregnancy, fetal cardiac activity present). Patient is excited but anxious. Has not started prenatal vitamins. Reports mild nausea, no vomiting. BMI 32. No history of hypertension, diabetes, or thyroid disease. Uncomplicated family history. Partner supportive.',
+    exam:'General: obese, no distress. BP 126/78 both arms. Uterus: fundus at pubic symphysis consistent with 9 weeks. Fetal doppler: cardiac tones 162 bpm. Cervix closed on speculum. No adnexal masses.',
+    labs:[
+      {name:'Blood type',val:'A positive — no Rh isoimmunization risk',flag:'',ref:''},
+      {name:'CBC',val:'Hgb 11.6, MCV 82 — mild anemia',flag:'H',ref:'Hgb goal >11 in pregnancy'},
+      {name:'Rubella IgG',val:'Immune',flag:'',ref:''},
+      {name:'HIV',val:'Non-reactive',flag:'',ref:''},
+      {name:'HBsAg',val:'Negative',flag:'',ref:''},
+      {name:'RPR',val:'Non-reactive',flag:'',ref:''},
+      {name:'GC/Chlamydia',val:'Negative',flag:'',ref:''},
+      {name:'1st trimester screen (due at 11-13wk)',val:'Not yet performed',flag:'',ref:'Nuchal translucency + PAPP-A + hCG'},
+    ],
+    teaching:{
+      keyPoints:['Prenatal vitamin: folic acid 400-800mcg started ideally pre-conception, through at least 12 weeks (neural tube closure)','Obesity in pregnancy (BMI ≥30): increased risk GDM, preeclampsia, C-section, macrosomia — GDM screen at 24-28 wks','1st trimester screen: nuchal translucency + PAPP-A + free β-hCG at 11-13 weeks (trisomies 21, 18, 13)','Unverified penicillin allergy in pregnancy: important for GBS prophylaxis planning at 35-37 weeks','Iron supplementation indicated: Hgb 11.6 in first trimester = mild anemia — add iron to prenatal vitamin'],
+      pitfalls:['Not starting folic acid (or starting too late — already at 9 weeks, neural tube closed, but still needed)','Missing GDM screening because BMI-based risk not documented','Not addressing unverified PCN allergy — matters significantly for intrapartum GBS coverage'],
+      mustNotMiss:['Document PCN allergy verification plan — affects intrapartum antibiotic selection if GBS positive']
+    },
+    plan:[
+      {id:'prenatal-vit',label:'Start prenatal vitamins with folic acid 800mcg + iron 27mg daily',correct:true,category:'Supplementation',critical:true},
+      {id:'first-tri-screen',label:'Schedule 1st trimester screen: nuchal translucency + serum markers at 11-13 weeks',correct:true,category:'Screening',critical:true},
+      {id:'gdm-plan',label:'Document GDM screening plan: 1-hour GCT at 24-28 weeks (BMI ≥30)',correct:true,category:'Screening',critical:true},
+      {id:'pcn-allergy',label:'Verify PCN allergy history — critical for intrapartum GBS prophylaxis planning',correct:true,category:'Allergy assessment',critical:true},
+      {id:'iron',label:'Add iron supplementation — Hgb 11.6, mild anemia of pregnancy',correct:true,category:'Treatment',critical:false},
+      {id:'nausea',label:'Counsel: ginger, small frequent meals, vitamin B6 ± doxylamine for nausea',correct:true,category:'Counseling',critical:false},
+      {id:'no-folic',label:'Reassure — folic acid not needed since neural tube already closed at 9 weeks',correct:false,category:'Error',critical:true},
+    ]
+  },
+  {
+    id:'major-depressive-disorder', diagnosis:'Major Depressive Disorder — New Diagnosis',
+    category:'psychiatry', acuity:3, visitType:'new',
+    reasonForVisit:'Mood and energy concerns — possible depression',
+    boardCC:'38F 7-week low mood, anhedonia, poor sleep, weight gain — PHQ-9 score 16',
+    demographics:{ageRange:[25,55],genderDistribution:{male:.35},
+      nameOptions:{male:['Darnell Brooks','Antoine Osei','Marcus Sullivan','Jerome Petrov','Calvin Whitfield'],
+                   female:['Monique Jefferson','Keisha Brennan','Tamara Okafor','Vanessa Johansson','Simone Achebe']}},
+    pmh:'Hypothyroidism (on levothyroxine, TSH normal 3 months ago), no prior psychiatric history',
+    medications:'Levothyroxine 75mcg daily',
+    allergies:'NKDA',
+    vitals:{BP:'118/76',HR:'76',RR:'14',Temp:'98.6°F',BMI:'26.8',Wt:'154 lbs'},
+    hpi:'38-year-old woman with 7-week history of persistent low mood, loss of interest in activities she previously enjoyed (teaching, cooking), fatigue, hypersomnia (sleeping 10-11 hours but still tired), 8-lb weight gain, difficulty concentrating at work. PHQ-9 today: 16 (moderately severe). Denies suicidal ideation. No prior psychiatric history. No recent stressors. TSH normal 3 months ago. No substance use. No manic episodes.',
+    exam:'Mental status: alert, oriented. Appearance: appropriate. Speech: normal rate and tone, soft. Mood: "heavy." Affect: flat, tearful at times during interview. Thought process: linear. Thought content: no SI/HI, no delusions. Insight: good — "I think I\'m depressed." Judgment: intact.',
+    labs:[
+      {name:'PHQ-9',val:'16 — moderately severe depression',flag:'H',ref:'0-4 none; 5-9 mild; 10-14 mod; 15-19 mod-severe; 20-27 severe'},
+      {name:'TSH',val:'2.1 mIU/L (normal — hypothyroid excluded as cause)',flag:'',ref:'0.4–4.0'},
+      {name:'CBC',val:'Normal — anemia excluded',flag:'',ref:''},
+      {name:'CMP',val:'Normal',flag:'',ref:''},
+      {name:'B12/Folate',val:'Normal',flag:'',ref:''},
+    ],
+    teaching:{
+      keyPoints:['DSM-5 MDD: ≥5 symptoms for ≥2 weeks including depressed mood or anhedonia — this patient meets criteria','PHQ-9 guides severity and monitors response: goal is ≥50% reduction at 4-6 weeks, remission (<5) at 8-12 weeks','SSRI first-line: sertraline or escitalopram preferred (favorable side-effect profile, generic)','Combination therapy (SSRI + CBT) superior to either alone for moderate-severe MDD','Always screen for bipolar before starting antidepressant — manic switch risk; ask about prior hypomanic episodes'],
+      pitfalls:['Starting antidepressant without bipolar screen (prior manic/hypomanic episodes)','Not reassessing PHQ-9 at follow-up — cannot track treatment response without it','Missing medical causes: hypothyroidism, anemia, B12 deficiency — all checked here and normal'],
+      mustNotMiss:['Always assess suicidality explicitly — patient denies here, but document it']
+    },
+    plan:[
+      {id:'bipolar-screen',label:'Screen for prior manic/hypomanic episodes before starting antidepressant',correct:true,category:'Safety screen',critical:true},
+      {id:'si-screen',label:'Explicit suicidality screen — document patient denies SI',correct:true,category:'Safety',critical:true},
+      {id:'sertraline',label:'Start sertraline 50mg daily (titrate to 100-200mg at 2-4 weeks)',correct:true,category:'Medication',critical:true},
+      {id:'cbt',label:'Refer for CBT — combination therapy superior to medication alone',correct:true,category:'Therapy',critical:false},
+      {id:'phq9-fu',label:'Repeat PHQ-9 at 4-6 week follow-up to assess treatment response',correct:true,category:'Monitoring',critical:true},
+      {id:'sleep',label:'Sleep hygiene counseling (hypersomnia — avoid long naps, regular schedule)',correct:true,category:'Counseling',critical:false},
+      {id:'no-bipolar',label:'Start sertraline without bipolar screen',correct:false,category:'Error',critical:true},
+      {id:'benzo',label:'Prescribe lorazepam for mood and sleep',correct:false,category:'Contraindicated',critical:true},
     ]
   }
 ];
@@ -850,7 +1016,7 @@ function renderTab(id, p, tpl) {
     html += '<div class="emr-field"><span class="emr-field-label">Visit Type</span><span class="emr-field-value">' + ucfirst(tpl.visitType) + '</span></div></div>';
 
     html += '<div class="emr-section"><div class="emr-section-title">History of Present Illness</div>';
-    html += '<p style="font-size:13px;line-height:1.7">' + esc(tpl.hpi) + '</p></div>';
+    html += '<p style="font-size:13px;line-height:1.7">' + esc(dynamicHpi(tpl.hpi, p)) + '</p></div>';
 
     html += '<div class="emr-section"><div class="emr-section-title">Active Problem List & PMH</div>';
     html += '<div class="emr-field"><span class="emr-field-label">PMH</span><span class="emr-field-value">' + esc(tpl.pmh) + '</span></div>';
@@ -945,7 +1111,7 @@ async function sendChat(pid) {
     chatEl.innerHTML += '<div class="chat-msg msg-patient"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
     chatEl.scrollTop = chatEl.scrollHeight;
   }
-  var systemPrompt = 'You are a clinic patient named ' + p.name + ', age ' + p.age + p.gender + ', presenting for: ' + tpl.reasonForVisit + '. Your chief complaint context: ' + tpl.boardCC + '. HPI: ' + tpl.hpi + '. PMH: ' + tpl.pmh + '. Meds: ' + tpl.medications + '. Allergies: ' + tpl.allergies + '. Respond in character as the patient — brief, natural, realistic clinic patient answers. If asked about symptoms not described, say you have not noticed that. Do not offer diagnoses.';
+  var systemPrompt = 'You are a clinic patient named ' + p.name + ', age ' + p.age + p.gender + ', presenting for: ' + tpl.reasonForVisit + '. Your chief complaint context: ' + tpl.boardCC + '. HPI: ' + dynamicHpi(tpl.hpi, p) + '. PMH: ' + tpl.pmh + '. Meds: ' + tpl.medications + '. Allergies: ' + tpl.allergies + '. Respond in character as the patient — brief, natural, realistic clinic patient answers. If asked about symptoms not described, say you have not noticed that. Do not offer diagnoses.';
   try {
     var resp = await fetch(WORKER_URL, {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -1044,7 +1210,7 @@ function renderScore(p, tpl, container) {
   html += '</div>';
   html += '<div style="text-align:center;padding:12px;background:white;border-radius:10px;border:1px solid var(--border)">';
   html += '<div style="font-size:36px;font-weight:700;font-family:var(--mono);color:' + gradeColor + '">' + grade + '</div>';
-  html += '<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Overall: ' + overall + '%</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Overall: ' + overall + '%</div>';
   html += '</div></div>';
 
   if (tpl.teaching.mustNotMiss.length) {

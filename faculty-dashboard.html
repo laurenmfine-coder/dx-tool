@@ -22,7 +22,7 @@
   --border: #E2E8F0;
   --text: #1E293B;
   --text-secondary: #475569;
-  --text-muted: #94A3B8;
+  --text-muted: #64748B;
   --radius: 12px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,11 +32,11 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
 .fac-header { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 12px rgba(0,0,0,.15); position: sticky; top: 0; z-index: 100; }
 .fac-header-logo { display: flex; align-items: center; gap: 12px; }
 .fac-header-logo img { height: 28px; }
-.fac-header-title { color: rgba(255,255,255,.9); font-size: 15px; font-weight: 700; }
-.fac-header-sub { color: rgba(255,255,255,.5); font-size: 11px; margin-left: 8px; }
+.fac-header-title { color: #ffffff; font-size: 15px; font-weight: 700; }
+.fac-header-sub { color: rgba(255,255,255,.75); font-size: 11px; margin-left: 8px; }
 .fac-header-nav { display: flex; align-items: center; gap: 16px; }
-.fac-nav-link { color: rgba(255,255,255,.7); font-size: 13px; font-weight: 500; text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: all .15s; }
-.fac-nav-link:hover { color: #fff; background: rgba(255,255,255,.1); }
+.fac-nav-link { color: rgba(255,255,255,.85); font-size: 13px; font-weight: 500; text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: all .15s; }
+.fac-nav-link:hover { color: #fff; background: rgba(255,255,255,.15); }
 .fac-nav-link.active { color: #fff; background: rgba(255,255,255,.15); }
 .fac-signout { padding: 6px 14px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: #fff; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .15s; }
 .fac-signout:hover { background: rgba(255,255,255,.22); }
@@ -201,9 +201,8 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
 <!-- Header -->
 <div class="fac-header">
   <div class="fac-header-logo">
-    <img src="icons/logo-transparent.png" alt="ReasonDx" onerror="this.style.display='none'">
-    <span class="fac-header-title">ReasonDx</span>
-    <span class="fac-header-sub">Faculty Dashboard</span>
+    <div style="width:30px;height:30px;background:rgba(255,255,255,0.2);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;font-family:'Playfair Display',Georgia,serif;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.3)">Rx</div>
+    <span class="fac-header-title">Faculty Dashboard</span>
   </div>
   <div class="fac-header-nav">
     <a href="virtual-emr.html" class="fac-nav-link">← Virtual EMR</a>
@@ -1221,7 +1220,7 @@ function renderStudentDoc(uid, sub) {
       html += '<div style="padding:12px 14px' + (i < annotations.length-1 ? ';border-bottom:1px solid var(--border)' : '') + '">';
       html += '<div style="font-size:11px;font-family:monospace;background:' + (a.color||'#2874A6') + '15;border-left:3px solid ' + (a.color||'#2874A6') + ';padding:6px 10px;border-radius:0 6px 6px 0;margin-bottom:6px;color:var(--text)">"' + esc((a.selectedText||'').substring(0, 80)) + (a.selectedText && a.selectedText.length > 80 ? '…' : '') + '"</div>';
       html += '<div style="font-size:12px;color:var(--text-secondary);line-height:1.5">' + esc(a.comment) + '</div>';
-      html += '<div style="font-size:10px;color:var(--text-muted);margin-top:4px">— ' + esc(a.grader) + ' · ' + relTime(a.timestamp) + '</div>';
+      html += '<div style="font-size:11px;color:var(--text-muted);margin-top:4px">— ' + esc(a.grader) + ' · ' + relTime(a.timestamp) + '</div>';
       html += '</div>';
     });
     html += '</div>';
@@ -1248,9 +1247,9 @@ function renderStudentDoc(uid, sub) {
     });
     if (fb.overallComment) {
       html += '<div style="padding:12px 14px;background:#FAFBFC">';
-      html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:6px">Overall Feedback</div>';
+      html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:6px">Overall Feedback</div>';
       html += '<div style="font-size:12px;color:var(--text);line-height:1.6">' + esc(fb.overallComment) + '</div>';
-      html += '<div style="font-size:10px;color:var(--text-muted);margin-top:6px">— ' + esc(fb.grader) + ' · ' + relTime(fb.timestamp) + '</div>';
+      html += '<div style="font-size:11px;color:var(--text-muted);margin-top:6px">— ' + esc(fb.grader) + ' · ' + relTime(fb.timestamp) + '</div>';
       html += '</div>';
     }
     html += '</div>';
@@ -1311,7 +1310,7 @@ var USMLE_DOMAINS = [
 
 // Manifest baseline counts (static fallback — updated after domain tagging)
 var MANIFEST_DOMAINS = {
-  'IM':89,'EM':47,'PED':18,'SUR':16,'FAM':10,'OB':4,'PSY':3,'ETH':0,'EPI':0
+  'IM':89,'EM':47,'PED':18,'SUR':16,'FAM':10,'OB':5,'PSY':4,'ETH':1,'EPI':1
 };
 var MANIFEST_TOTAL = 187;
 
@@ -1540,7 +1539,7 @@ function renderCoverageLiveSection() {
   html += '<div style="padding:14px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">';
   html += '<div><div style="font-size:14px;font-weight:700">Live Student Usage vs Case Availability</div>';
   html += '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">Gray bar = cases available · Colored bar = actual student sessions · Pulled live from analytics_events</div></div>';
-  html += '<div style="font-size:10px;color:var(--text-muted);font-style:italic">Updated ' + (COV.lastUpdated ? COV.lastUpdated.toLocaleTimeString() : 'just now') + '</div></div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);font-style:italic">Updated ' + (COV.lastUpdated ? COV.lastUpdated.toLocaleTimeString() : 'just now') + '</div></div>';
 
   USMLE_DOMAINS.forEach(function(d, i) {
     var available = MANIFEST_DOMAINS[d.code] || 0;
@@ -1622,7 +1621,7 @@ function renderCoverage() {
   html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px">';
   html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border)"><div style="font-size:14px;font-weight:700">Blueprint Alignment — Case Availability</div>';
   html += '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">Gap = ReasonDx library % vs Step 2 CK target · Green ±3% · Amber ±4–7% · Red &gt;7%</div></div>';
-  html += '<div style="display:grid;grid-template-columns:220px 110px 100px 110px 1fr;padding:9px 20px;background:var(--bg);font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">';
+  html += '<div style="display:grid;grid-template-columns:220px 110px 100px 110px 1fr;padding:9px 20px;background:var(--bg);font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">';
   html += '<div>Discipline</div><div>Step 2 Target</div><div>Cases (n)</div><div>Library %</div><div>Coverage bar</div></div>';
 
   USMLE_DOMAINS.forEach(function(d, i) {
