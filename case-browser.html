@@ -1,817 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics (ReasonDx) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-// Redirect to Virtual EMR (consolidated entry point)
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var setting = params.get('setting');
-  var dest = 'virtual-emr.html';
-  if (setting) dest += '?setting=' + encodeURIComponent(setting);
-  window.location.replace(dest);
-})();
-</script>
-<meta name="theme-color" content="#1f5f8b">
-<title>Platform Hub | ReasonDx</title>
-<meta name="description" content="ReasonDx Platform Hub — Choose your clinical setting, pick your training tool, and start practicing. ED, Floor, Night Float, Clinic, and more.">
-<meta property="og:title" content="ReasonDx — Platform Hub">
-<meta property="og:description" content="Choose your clinical setting. Pick your tool. Start practicing clinical reasoning.">
-<meta property="og:url" content="https://reasondx.com/case-browser.html">
-<meta property="og:type" content="website">
+<title>Start a Session — ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="canonical" href="https://reasondx.com/case-browser.html">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/rdx-theme.css">
-<link rel="stylesheet" href="mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF9F7;--cream:#F4F2EE;--surface:#FFF;
+  --text:#1C1C1A;--dim:#706F6A;--dim2:#B0AFA8;
+  --border:#E6E4DF;--border-hi:#CCCAC3;
+  --blue:#2874A6;--blue-dk:#1B4F72;--blue-lt:rgba(40,116,166,.07);
+  --teal:#0D7A67;--violet:#6B28A6;
+  --f-serif:'Playfair Display',Georgia,serif;
+  --f-sans:'DM Sans',-apple-system,sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--f-sans);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
 
-:root {
-  --bg: #F5F7FA;
-  --surface: #FFFFFF;
-  --border: #E2E8F0;
-  --border-hover: #CBD5E1;
-  --text: #1A1A2E;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --blue: #2874A6;
-  --blue-dark: #1B4F72;
-  --blue-light: #EBF5FB;
-  --blue-glow: rgba(40, 116, 166, 0.12);
-  --red: #DC2626; --red-bg: #FEF2F2;
-  --navy-floor: #1565C0; --navy-floor-bg: #E3F2FD;
-  --purple: #7C3AED; --purple-bg: #F5F3FF;
-  --amber: #D97706; --amber-bg: #FFFBEB;
-  --green: #059669; --green-bg: #ECFDF5;
-  --rose: #BE185D; --rose-bg: #FDF2F8;
-  --teal: #0D9488; --teal-bg: #F0FDFA;
-  --radius: 16px; --radius-sm: 10px; --radius-xs: 6px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.03);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,0.10);
-  --font: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Menlo', monospace;
-  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-body {
-  font-family: var(--font); background: var(--bg); color: var(--text);
-  line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh;
-}
-a { color: inherit; text-decoration: none; }
+/* ── NAV ── */
+.nav{background:rgba(250,249,247,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 40px;gap:20px;position:sticky;top:0;z-index:90}
+.nav-logo{display:flex;align-items:center;gap:9px}
+.nav-logo-mark{width:28px;height:28px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--f-serif);font-size:12px;font-weight:500}
+.nav-logo-text{font-family:var(--f-serif);font-size:17px;font-weight:400;color:var(--text)}
+.nav-sep{color:var(--dim2)}
+.nav-page{font-size:13px;font-weight:500;color:var(--dim)}
+.nav-back{margin-left:auto;font-size:13px;color:var(--dim);display:flex;align-items:center;gap:5px;transition:color .15s}
+.nav-back:hover{color:var(--text)}
 
-@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes scaleIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
-@keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+/* ── PAGE ── */
+.page{max-width:880px;margin:0 auto;padding:56px 32px 80px}
 
-/* ═══ NAV ═══ */
-.nav {
-  position:sticky; top:0; z-index:100;
-  background:rgba(255,255,255,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border); padding:0 24px; height:56px;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.nav-brand { font-size:20px; font-weight:800; letter-spacing:-0.4px; color:var(--text); }
-.nav-brand span { color:var(--blue); font-style:italic; }
-.nav-links { display:flex; gap:6px; align-items:center; }
-.nav-links a { font-size:13px; font-weight:500; color:var(--text-secondary); padding:6px 14px; border-radius:8px; transition:all var(--transition); }
-.nav-links a:hover { background:#F0F2F5; color:var(--text); }
-.nav-links a.active { background:var(--blue-light); color:var(--blue); font-weight:600; }
-.nav-cta { background:var(--blue)!important; color:#fff!important; font-weight:600!important; font-size:12px!important; padding:7px 16px!important; border-radius:8px!important; transition:all var(--transition)!important; }
-.nav-cta:hover { background:var(--blue-dark)!important; transform:translateY(-1px); }
+.page-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--dim2);margin-bottom:14px;text-align:center}
+.page-title{font-family:var(--f-serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--text);text-align:center;letter-spacing:-.4px;margin-bottom:10px}
+.page-sub{font-size:14px;font-weight:300;color:var(--dim);text-align:center;line-height:1.7;margin-bottom:52px}
 
-/* ═══ HERO ═══ */
-.hub-hero {
-  padding:48px 24px 32px; text-align:center;
-  background:linear-gradient(180deg, #EBF5FB 0%, var(--bg) 100%);
-  animation:fadeIn 0.5s ease;
-}
-.hub-hero h1 { font-size:clamp(26px,4vw,36px); font-weight:800; letter-spacing:-0.5px; color:var(--text); line-height:1.2; margin-bottom:10px; }
-.hub-hero h1 em { font-style:italic; color:var(--blue); font-weight:700; }
-.hub-hero p { font-size:15px; color:var(--text-secondary); max-width:560px; margin:0 auto 24px; line-height:1.65; }
+/* ── STEP ── */
+.step{margin-bottom:48px}
+.step-hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.step-num{width:28px;height:28px;border-radius:7px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;font-family:var(--f-sans);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-num.done{background:var(--teal)}
+.step-label{font-size:16px;font-weight:600;color:var(--text)}
+.step-sub{font-size:13px;font-weight:300;color:var(--dim);margin-left:auto}
 
-/* ═══ SEARCH ═══ */
-.quick-search-wrap { max-width:520px; margin:0 auto 32px; position:relative; padding:0 24px; }
-.quick-search {
-  width:100%; padding:12px 18px 12px 42px; font-size:14px; font-family:var(--font);
-  border:1px solid var(--border); border-radius:var(--radius-sm);
-  background:var(--surface); color:var(--text); outline:none;
-  transition:all var(--transition); box-shadow:var(--shadow-sm);
-}
-.quick-search:focus { border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-glow), var(--shadow-sm); }
-.quick-search::placeholder { color:var(--text-muted); }
-.quick-search-icon { position:absolute; left:38px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:15px; pointer-events:none; }
-.search-results-dropdown {
-  position:absolute; top:calc(100% + 6px); left:24px; right:24px;
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm);
-  box-shadow:var(--shadow-xl); max-height:320px; overflow-y:auto; z-index:50;
-  display:none; animation:slideDown 0.15s ease;
-}
-.search-results-dropdown.active { display:block; }
-.sr-item { display:flex; align-items:center; gap:10px; padding:10px 16px; cursor:pointer; border-bottom:1px solid #F1F5F9; transition:background var(--transition); }
-.sr-item:last-child { border-bottom:none; }
-.sr-item:hover { background:#F8FAFC; }
-.sr-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-.sr-name { font-size:13px; font-weight:600; color:var(--text); }
-.sr-desc { font-size:11px; color:var(--text-muted); }
-.sr-category { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--text-muted); margin-left:auto; white-space:nowrap; }
+/* ── SETTING GRID ── */
+.setting-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.setting-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px 20px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.setting-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .18s}
+.setting-card:hover{border-color:var(--border-hi);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+.setting-card:hover::before,.setting-card.active::before{opacity:1}
+.setting-card.active{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.setting-card[data-color=red]::before{background:#DC2626}
+.setting-card[data-color=blue]::before{background:var(--blue)}
+.setting-card[data-color=violet]::before{background:var(--violet)}
+.setting-card[data-color=teal]::before{background:var(--teal)}
+.setting-card[data-color=amber]::before{background:#C27D0E}
+.setting-card[data-color=green]::before{background:#1A7A4A}
+.setting-card.active[data-color=red]{border-color:#DC2626;box-shadow:0 0 0 3px rgba(220,38,38,.1)}
+.setting-card.active[data-color=blue]{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.setting-card.active[data-color=violet]{border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,40,166,.1)}
+.setting-card.active[data-color=teal]{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,103,.1)}
+.setting-card.active[data-color=amber]{border-color:#C27D0E;box-shadow:0 0 0 3px rgba(194,125,14,.1)}
 
-/* ═══ MAIN ═══ */
-.hub-main { max-width:1200px; margin:0 auto; padding:0 24px 80px; }
+.s-icon{font-size:24px;margin-bottom:10px}
+.s-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.s-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.5}
+.s-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;display:none;align-items:center;justify-content:center}
+.setting-card.active .s-check{display:flex}
 
-.section-header { margin-bottom:20px; animation:fadeUp 0.4s ease both; }
-.section-header h2 { font-size:22px; font-weight:700; color:var(--text); letter-spacing:-0.3px; margin-bottom:4px; }
-.section-header p { font-size:14px; color:var(--text-secondary); line-height:1.6; }
+/* ── PILLAR GRID ── */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pillar-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:24px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden;opacity:.5;pointer-events:none}
+.pillar-card.enabled{opacity:1;pointer-events:all}
+.pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .18s}
+.pillar-card[data-c=blue]::before{background:var(--blue)}
+.pillar-card[data-c=teal]::before{background:var(--teal)}
+.pillar-card[data-c=violet]::before{background:var(--violet)}
+.pillar-card.enabled:hover{transform:translateY(-2px)}
+.pillar-card.enabled:hover::before,.pillar-card.active::before{opacity:1}
+.pillar-card.active{border-color:var(--blue)}
+.pillar-card[data-c=teal].active{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,103,.1)}
+.pillar-card[data-c=blue].active{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.pillar-card[data-c=violet].active{border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,40,166,.1)}
+.p-icon{font-size:24px;margin-bottom:12px}
+.p-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.pt-blue{color:var(--blue)}.pt-teal{color:var(--teal)}.pt-violet{color:var(--violet)}
+.p-name{font-family:var(--f-serif);font-size:18px;font-weight:400;color:var(--text);margin-bottom:6px;letter-spacing:-.2px}
+.p-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.6}
+.p-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;color:#fff;font-size:11px;display:none;align-items:center;justify-content:center}
+.pillar-card[data-c=blue] .p-check{background:var(--blue)}
+.pillar-card[data-c=teal] .p-check{background:var(--teal)}
+.pillar-card[data-c=violet] .p-check{background:var(--violet)}
+.pillar-card.active .p-check{display:flex}
+.pillar-lock{font-size:11px;color:var(--dim2);text-align:center;margin-top:10px;font-style:italic}
 
-/* ═══ SETTING CARDS ═══ */
-.settings-grid {
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
-  gap:16px; margin-bottom:48px; transition:all 0.3s ease;
-}
-.setting-card {
-  position:relative; overflow:hidden; background:var(--surface);
-  border:2px solid transparent; border-radius:var(--radius);
-  padding:28px 24px 24px; cursor:pointer;
-  transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:var(--shadow-sm); animation:fadeUp 0.4s ease both;
-}
-.setting-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:4px;
-  border-radius:var(--radius) var(--radius) 0 0; opacity:0; transition:opacity 0.25s;
-}
-.setting-card:hover { border-color:var(--border-hover); transform:translateY(-4px); box-shadow:var(--shadow-lg); }
-.setting-card:hover::before { opacity:1; }
-.setting-card.selected { border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-glow), var(--shadow-md); }
-.setting-card.selected::before { opacity:1; }
-.setting-card.selected::after {
-  content:'✓'; position:absolute; top:14px; right:14px;
-  width:28px; height:28px; border-radius:50%; background:var(--blue); color:#fff;
-  display:flex; align-items:center; justify-content:center;
-  font-size:13px; font-weight:700; animation:scaleIn 0.2s ease;
-}
-.card-icon { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; margin-bottom:16px; transition:transform 0.25s; }
-.setting-card:hover .card-icon { transform:scale(1.08); }
-.card-title { font-size:18px; font-weight:700; color:var(--text); margin-bottom:4px; letter-spacing:-0.2px; }
-.card-role { font-size:12px; font-weight:500; color:var(--text-muted); margin-bottom:10px; font-family:var(--font-mono); }
-.card-desc { font-size:13px; color:var(--text-secondary); line-height:1.55; }
-.card-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
-.card-tag { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; padding:3px 8px; border-radius:var(--radius-xs); }
+/* ── GO BUTTON ── */
+.go-section{text-align:center;margin-top:16px}
+.go-btn{display:inline-flex;align-items:center;gap:12px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;font-family:var(--f-sans);padding:16px 40px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;opacity:.4;pointer-events:none}
+.go-btn.ready{opacity:1;pointer-events:all}
+.go-btn.ready:hover{background:var(--blue-dk);transform:translateY(-1px);box-shadow:0 8px 24px rgba(40,116,166,.22)}
+.go-btn[data-c=teal].ready{background:var(--teal)}
+.go-btn[data-c=teal].ready:hover{background:#0A6055}
+.go-btn[data-c=violet].ready{background:var(--violet)}
+.go-btn[data-c=violet].ready:hover{background:#5B21B6}
+.go-hint{font-size:12px;font-weight:300;color:var(--dim2);margin-top:10px}
+.go-summary{font-size:13px;color:var(--dim);margin-top:6px}
+.go-summary strong{color:var(--text);font-weight:600}
 
-/* Color themes */
-.setting-card[data-setting="ed"]::before{background:var(--red)} .setting-card[data-setting="ed"] .card-icon{background:var(--red-bg)} .setting-card[data-setting="ed"] .card-tag{background:var(--red-bg);color:var(--red)}
-.setting-card[data-setting="floor"]::before{background:var(--navy-floor)} .setting-card[data-setting="floor"] .card-icon{background:var(--navy-floor-bg)} .setting-card[data-setting="floor"] .card-tag{background:var(--navy-floor-bg);color:var(--navy-floor)}
-.setting-card[data-setting="night-float"]::before{background:var(--purple)} .setting-card[data-setting="night-float"] .card-icon{background:var(--purple-bg)} .setting-card[data-setting="night-float"] .card-tag{background:var(--purple-bg);color:var(--purple)}
-.setting-card[data-setting="clinic"]::before{background:var(--green)} .setting-card[data-setting="clinic"] .card-icon{background:var(--green-bg)} .setting-card[data-setting="clinic"] .card-tag{background:var(--green-bg);color:var(--green)}
-.setting-card[data-setting="icu"]::before{background:var(--rose)} .setting-card[data-setting="icu"] .card-icon{background:var(--rose-bg)} .setting-card[data-setting="icu"] .card-tag{background:var(--rose-bg);color:var(--rose)}
-.setting-card[data-setting="consult"]::before{background:var(--teal)} .setting-card[data-setting="consult"] .card-icon{background:var(--teal-bg)} .setting-card[data-setting="consult"] .card-tag{background:var(--teal-bg);color:var(--teal)}
-
-/* ═══ SELECTED STATE — all cards stay visible ═══ */
-.settings-grid .setting-card:not(.selected) { opacity:0.55; }
-.settings-grid .setting-card:not(.selected):hover { opacity:0.85; }
-.settings-grid.has-selection .setting-card.selected { border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-glow), var(--shadow-lg); transform:translateY(-4px); }
-
-/* Go button */
-.go-btn-wrap { text-align:center; margin:24px 0 16px; display:none; animation:fadeUp 0.3s ease both; }
-.go-btn-wrap.visible { display:block; }
-.go-btn {
-  display:inline-flex; align-items:center; gap:10px;
-  padding:14px 40px; font-size:16px; font-weight:700;
-  background:linear-gradient(135deg, #1B4F72, #2874A6); color:#fff;
-  border:none; border-radius:12px; cursor:pointer;
-  box-shadow:0 4px 16px rgba(40,116,166,0.35);
-  transition:all 0.25s;
+@media(max-width:640px){
+  .nav{padding:0 20px}
+  .page{padding:36px 16px 60px}
+  .pillar-grid{grid-template-columns:1fr}
+  .setting-grid{grid-template-columns:1fr 1fr}
+  .go-btn{width:100%;justify-content:center}
 }
-.go-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(40,116,166,0.45); }
-.go-btn .go-setting-name { opacity:0.85; font-weight:400; }
-
-.toggle-settings-btn { display:none !important; }
-  display:none; align-items:center; gap:6px; background:none;
-  border:1px solid var(--border); border-radius:100px; padding:5px 14px;
-  font-size:12px; font-weight:600; color:var(--text-secondary);
-  cursor:pointer; transition:all var(--transition); font-family:var(--font);
-}
-.toggle-settings-btn:hover { border-color:var(--blue); color:var(--blue); }
-.toggle-settings-btn.visible { display:inline-flex; }
-
-/* ═══ TOOLS PANEL ═══ */
-.tools-panel { display:none; animation:fadeUp 0.4s ease both; }
-.tools-panel.visible { display:block; }
-.tools-panel-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
-.tools-panel-header h2 { font-size:22px; font-weight:700; letter-spacing:-0.3px; }
-
-.tools-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; margin-bottom:36px; }
-.tool-card {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:24px; transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor:pointer; position:relative; animation:fadeUp 0.35s ease both; display:block;
-}
-.tool-card:hover { border-color:var(--border-hover); transform:translateY(-3px); box-shadow:var(--shadow-lg); }
-.tool-card-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:12px; }
-.tool-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
-.tool-card-header-text { flex:1; }
-.tool-name { font-size:16px; font-weight:700; color:var(--text); margin-bottom:2px; }
-.tool-subtitle { font-size:11px; font-weight:500; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.04em; }
-.tool-desc { font-size:13px; color:var(--text-secondary); line-height:1.55; margin-bottom:14px; }
-.tool-features { display:flex; flex-wrap:wrap; gap:6px; }
-.tool-feature { font-size:10px; font-weight:600; padding:3px 8px; border-radius:var(--radius-xs); background:#F1F5F9; color:var(--text-secondary); }
-.tool-card .launch-arrow { position:absolute; top:24px; right:20px; font-size:16px; color:var(--text-muted); transition:all var(--transition); }
-.tool-card:hover .launch-arrow { color:var(--blue); transform:translateX(3px); }
-
-/* Tool accents */
-.tool-card[data-tool="coachdx"] .tool-icon{background:#ECFDF5;color:var(--green)}
-.tool-card[data-tool="simdx"] .tool-icon{background:#FDF2F8;color:var(--rose)}
-.tool-card[data-tool="crt"] .tool-icon{background:var(--blue-light);color:var(--blue)}
-.tool-card[data-tool="sbar"] .tool-icon{background:#FFFBEB;color:var(--amber)}
-.tool-card[data-tool="emr"] .tool-icon{background:#F0FDFA;color:var(--teal)}
-.tool-card[data-tool="cases"] .tool-icon{background:var(--red-bg);color:var(--red)}
-.tool-card[data-tool="admissions"] .tool-icon{background:var(--navy-floor-bg);color:var(--navy-floor)}
-.tool-card[data-tool="oral-pres"] .tool-icon{background:var(--purple-bg);color:var(--purple)}
-
-/* ═══ MECHANISM DX CALLOUT ═══ */
-.mechanism-callout {
-  background:linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 50%, #F3E8FF 100%);
-  border:1px solid #DDD6FE; border-radius:var(--radius); padding:28px;
-  margin-bottom:36px; display:flex; align-items:flex-start; gap:20px;
-  animation:fadeUp 0.4s ease 0.15s both; transition:all var(--transition);
-}
-.mechanism-callout:hover { box-shadow:var(--shadow-md); }
-.mechanism-icon { width:56px; height:56px; border-radius:14px; background:rgba(124,58,237,0.1); display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; }
-.mechanism-text h3 { font-size:17px; font-weight:700; color:#5B21B6; margin-bottom:6px; }
-.mechanism-text p { font-size:13px; color:#6D28D9; line-height:1.6; opacity:0.85; margin-bottom:12px; }
-.mechanism-links { display:flex; flex-wrap:wrap; gap:8px; }
-.mechanism-link {
-  display:inline-flex; align-items:center; gap:5px; padding:5px 12px;
-  border-radius:100px; font-size:12px; font-weight:600;
-  background:rgba(124,58,237,0.08); color:#7C3AED;
-  border:1px solid rgba(124,58,237,0.15); transition:all var(--transition);
-}
-.mechanism-link:hover { background:rgba(124,58,237,0.15); border-color:rgba(124,58,237,0.3); }
-
-/* ═══ DIFFICULTY PANEL ═══ */
-.difficulty-panel {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius); padding:20px 24px;
-  margin-bottom:24px; animation:fadeUp 0.4s ease 0.05s both;
-}
-.difficulty-header h3 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:2px; }
-.difficulty-header p { font-size:13px; color:var(--text-muted); margin-bottom:14px; }
-.difficulty-options { display:flex; gap:10px; flex-wrap:wrap; }
-.diff-option {
-  flex:1; min-width:180px; padding:14px 16px;
-  border:2px solid var(--border); border-radius:var(--radius-sm);
-  cursor:pointer; transition:all 0.2s; background:var(--surface);
-}
-.diff-option:hover { border-color:var(--border-hover); transform:translateY(-2px); box-shadow:var(--shadow-md); }
-.diff-option.selected { box-shadow:var(--shadow-md); }
-.diff-option.selected[data-diff="guided"] { border-color:var(--green); background:#ECFDF5; }
-.diff-option.selected[data-diff="standard"] { border-color:var(--blue); background:#EBF5FB; }
-.diff-option.selected[data-diff="advanced"] { border-color:var(--red); background:#FEF2F2; }
-.diff-option-header { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
-.diff-icon { font-size:20px; }
-.diff-label { font-size:14px; font-weight:700; color:var(--text); }
-.diff-tagline { font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:4px; }
-.diff-desc { font-size:12px; color:var(--text-secondary); line-height:1.5; }
-
-/* ═══ QUICK-LAUNCH STRIP ═══ */
-.quick-launch {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius); padding:20px 24px;
-  margin-bottom:36px; animation:fadeUp 0.4s ease 0.1s both;
-}
-.quick-launch-title {
-  font-size:13px; font-weight:700; text-transform:uppercase;
-  letter-spacing:0.06em; color:var(--text-muted); margin-bottom:12px;
-}
-.quick-launch-row { display:flex; flex-wrap:wrap; gap:8px; }
-.ql-btn {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:8px 16px; border-radius:var(--radius-sm);
-  font-size:13px; font-weight:600; color:var(--text);
-  background:#F8FAFC; border:1px solid var(--border);
-  transition:all var(--transition); cursor:pointer;
-}
-.ql-btn:hover { border-color:var(--blue); color:var(--blue); background:var(--blue-light); transform:translateY(-1px); }
-.ql-btn .ql-icon { font-size:16px; }
-
-/* ═══ FOOTER ═══ */
-.hub-footer { border-top:1px solid var(--border); padding:32px 24px; text-align:center; }
-.hub-footer p { font-size:12px; color:var(--text-muted); line-height:1.6; }
-.hub-footer a { color:var(--blue); }
-.hub-footer a:hover { text-decoration:underline; }
-
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:900px) {
-  .settings-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-  .tools-grid{grid-template-columns:1fr}
-  .mechanism-callout{flex-direction:column}
-}
-@media(max-width:640px) {
-  .settings-grid{grid-template-columns:1fr}
-  .hub-hero{padding:36px 16px 24px}
-  .hub-main{padding:0 16px 60px}
-  .nav-links a:not(.nav-cta){display:none}
-  .nav{padding:0 16px}
-  .tools-panel-header{flex-direction:column}
-  .quick-search-wrap{padding:0 16px}
-}
-
-/* RDX Loading */
-.rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
-.rdx-loading.hide{opacity:0;pointer-events:none}
-.rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
-@keyframes rdxSpin{to{transform:rotate(360deg)}}
-.rdx-load-text{font-family:var(--font);font-size:14px;color:#64748B;font-weight:500}
 </style>
 </head>
 <body>
-<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
-<noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 
-<!-- ═══ NAV ═══ -->
 <nav class="nav">
-  <a class="nav-brand" href="index.html">Reason<span>Dx</span></a>
-  <div class="nav-links">
-    <a href="case-browser.html" class="active">Platform Hub</a>
-    <a href="index.html">Home</a>
-    <a href="tools/index.html">Tools</a>
-    <a href="topics/index.html">Topics</a>
-    <a class="nav-cta" href="auth/register.html">Sign Up</a>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">Rx</div>
+    <span class="nav-logo-text">ReasonDx</span>
   </div>
+  <span class="nav-sep">/</span>
+  <span class="nav-page">Start a Session</span>
+  <a class="nav-back" href="index.html">← Home</a>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<header class="hub-hero" id="main-content" role="main">
-  <h1>Where are you <em>working</em> today?</h1>
-  <p>Pick your clinical setting, then choose your training tool. Every activity — from CoachDx feedback to documentation templates — adapts to the environment you're in.</p>
-</header>
+<div class="page">
+  <div class="page-eyebrow">Two Steps</div>
+  <div class="page-title">Where are you, and how do you want to learn?</div>
+  <p class="page-sub">Pick a clinical setting, then choose your mode. That's it.</p>
 
-<!-- ═══ SEARCH ═══ -->
-<div class="quick-search-wrap">
-  <span class="quick-search-icon">🔍</span>
-  <input class="quick-search" id="globalSearch" type="text" placeholder="Search cases, tools, topics…" autocomplete="off">
-  <div class="search-results-dropdown" id="searchResults"></div>
-</div>
-
-<!-- ═══ MAIN ═══ -->
-<div class="hub-main" id="hubApp">
-
-  <!-- Settings Header -->
-  <div class="section-header" id="settingsHeader">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <h2>Choose Your Clinical Setting</h2>
+  <!-- STEP 1: SETTING -->
+  <div class="step" id="step1">
+    <div class="step-hdr">
+      <div class="step-num" id="step1Num">1</div>
+      <div class="step-label">Where are you working today?</div>
     </div>
-    <p>Each setting shapes what you practice, what documentation you write, and how you're coached.</p>
+    <div class="setting-grid">
+      <div class="setting-card" data-color="red" data-id="ed" onclick="selectSetting(this)">
+        <div class="s-check">✓</div>
+        <div class="s-icon">🚨</div>
+        <div class="s-name">Emergency Department</div>
+        <div class="s-desc">High-acuity cases, ESI triage, time-sensitive decisions</div>
+      </div>
+      <div class="setting-card" data-color="blue" data-id="floor" onclick="selectSetting(this)">
+        <div class="s-check">✓</div>
+        <div class="s-icon">🏥</div>
+        <div class="s-name">Inpatient Floor</div>
+        <div class="s-desc">Admissions, daily rounds, problem-based management</div>
+      </div>
+      <div class="setting-card" data-color="teal" data-id="clinic" onclick="selectSetting(this)">
+        <div class="s-check">✓</div>
+        <div class="s-icon">🩺</div>
+        <div class="s-name">Outpatient Clinic</div>
+        <div class="s-desc">Allergy, primary care, chronic disease, prevention</div>
+      </div>
+      <div class="setting-card" data-color="violet" data-id="night-float" onclick="selectSetting(this)">
+        <div class="s-check">✓</div>
+        <div class="s-icon">🌙</div>
+        <div class="s-name">Night Float</div>
+        <div class="s-desc">Cross-cover, nurse pages, overnight decompensations</div>
+      </div>
+      <div class="setting-card" data-color="amber" data-id="icu" onclick="selectSetting(this)">
+        <div class="s-check">✓</div>
+        <div class="s-icon">💓</div>
+        <div class="s-name">ICU</div>
+        <div class="s-desc">Critical care, organ systems, hemodynamics, vents</div>
+      </div>
+      <div class="setting-card" data-color="green" data-id="any" onclick="selectSetting(this)">
+        <div class="s-check">✓</div>
+        <div class="s-icon">📚</div>
+        <div class="s-name">Any / Topic-Based</div>
+        <div class="s-desc">Just want to study a concept — no specific setting</div>
+      </div>
+    </div>
   </div>
 
-  <div class="settings-grid" id="settingsGrid"></div>
+  <!-- STEP 2: PILLAR -->
+  <div class="step" id="step2">
+    <div class="step-hdr">
+      <div class="step-num" id="step2Num">2</div>
+      <div class="step-label">How do you want to learn?</div>
+      <div class="step-sub" id="step2Sub">Select a setting first</div>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar-card" data-c="blue" data-pillar="coach" onclick="selectPillar(this)">
+        <div class="p-check">✓</div>
+        <div class="p-icon">🧑‍⚕️</div>
+        <div class="p-tag pt-blue">AI Coaching</div>
+        <div class="p-name">CoachDx</div>
+        <p class="p-desc">Your AI attending asks the questions. Socratic coaching on any topic — adapts to your reasoning gaps.</p>
+      </div>
+      <div class="pillar-card" data-c="teal" data-pillar="cases" onclick="selectPillar(this)">
+        <div class="p-check">✓</div>
+        <div class="p-icon">🩺</div>
+        <div class="p-tag pt-teal">Patient Cases</div>
+        <div class="p-name">ReasonDx Cases</div>
+        <p class="p-desc">Structured patient scenario with chart, labs, imaging, and reasoning checkpoints.</p>
+      </div>
+      <div class="pillar-card" data-c="violet" data-pillar="mechanism" onclick="selectPillar(this)">
+        <div class="p-check">✓</div>
+        <div class="p-icon">🔬</div>
+        <div class="p-tag pt-violet">Pathophysiology</div>
+        <div class="p-name">MechanismDx</div>
+        <p class="p-desc">Visual pathophysiology modules. Understand the mechanism — then apply it to a case.</p>
+      </div>
+    </div>
+    <div class="pillar-lock" id="pillarLock">← Pick a setting above to unlock</div>
+  </div>
 
-  <div class="go-btn-wrap" id="goBtnWrap">
-    <button class="go-btn" id="goBtn" onclick="launchSetting()">
-      Let's Go <span style="font-size:20px">→</span>
+  <!-- GO -->
+  <div class="go-section">
+    <button class="go-btn" id="goBtn" data-c="blue" onclick="go()">
+      <span id="goBtnIcon">▶</span>
+      <span id="goBtnText">Start Session</span>
     </button>
-    <div style="text-align:center;margin-top:8px">
-      <button type="button" onclick="if(selectedSetting){renderTools(selectedSetting);document.getElementById('toolsPanel').scrollIntoView({behavior:'smooth',block:'start'})}" style="background:none;border:none;color:var(--blue);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);text-decoration:underline;padding:4px 8px">or browse training tools ↓</button>
-    </div>
-  </div>
-
-  <!-- Specialty Pathways -->
-  <div style="margin-top:16px;padding:16px 20px;background:linear-gradient(135deg,#1B4F72 0%,#2874A6 100%);border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-    <div style="color:#fff">
-      <div style="font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px">🧬 Specialty Pathways <span style="font-size:11px;padding:2px 8px;background:rgba(255,255,255,.2);border-radius:10px;font-weight:500">NEW</span></div>
-      <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px">Filter all cases by specialty — across every clinical setting</div>
-    </div>
-    <a href="allergy-pathway.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#fff;color:#1B4F72;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.15)" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.2)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.15)'">🧬 Allergy & Immunology <span style="font-size:11px;opacity:.5">→</span></a>
-  </div>
-
-  <!-- Tools Panel (hidden until setting is selected) -->
-  <div class="tools-panel" id="toolsPanel">
-
-    <!-- Difficulty Toggle -->
-    <div class="difficulty-panel" id="difficultyPanel">
-      <div class="difficulty-header">
-        <h3>Training Difficulty</h3>
-        <p>Adjusts coaching style, information scaffolding, and complexity across all tools.</p>
-      </div>
-      <div class="difficulty-options" id="difficultyOptions">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-
-    <!-- Quick-Launch Strip -->
-    <div class="quick-launch" id="quickLaunch">
-      <div class="quick-launch-title">Quick Launch</div>
-      <div class="quick-launch-row" id="quickLaunchRow"></div>
-    </div>
-
-    <!-- MechanismDx Callout -->
-    <div class="mechanism-callout" id="mechanismCallout">
-      <div class="mechanism-icon">🧬</div>
-      <div class="mechanism-text">
-        <h3>MechanismDx — Pathophysiology On Demand</h3>
-        <p>Deep-dive into the "why" behind every diagnosis. MechanismDx modules are available alongside any tool — tap into pathophysiology while you're reviewing a case, building a differential, or debriefing with CoachDx.</p>
-        <div class="mechanism-links" id="mechanismLinks"></div>
-      </div>
-    </div>
-
-    <div class="tools-panel-header">
-      <h2 id="toolsTitle">Available Training Tools</h2>
-    </div>
-
-    <div class="tools-grid" id="toolsGrid"></div>
+    <div class="go-summary" id="goSummary"></div>
+    <div class="go-hint" id="goHint">Select a setting and a mode to continue</div>
   </div>
 
 </div>
-
-<!-- ═══ FOOTER ═══ -->
-<footer class="hub-footer">
-  <p>ReasonDx — Clinical Reasoning Education Platform · Built by <a href="https://www.linkedin.com/in/laurenmfine/">Lauren Fine, MD, FAAAAI</a> · <a href="auth/privacy.html">Privacy</a> · <a href="auth/terms.html">Terms</a></p>
-</footer>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════════════════════
-
-const SETTINGS = [
-  {
-    id:'ed', title:'Emergency Department', icon:'🚨',
-    role:'ED physician / M3-M4 student',
-    desc:'Patients arrive on the track board. You triage, stabilize, diagnose, and dispo. Time-pressured reasoning with incomplete data — just like the real ED.',
-    tags:['Live Track Board','Acute Presentations','Rapid DDx'],
-    tools:['cases','crt','coachdx','simdx','sbar','emr','oral-pres'],
-    mechanismModules:['Cardiac','Pulmonary','Neurology','GI','Renal','Allergy/Immunology'],
-    launchUrl:'ed-3d.html',
-    quickLaunch:[
-      {label:'Enter the ED',icon:'🚨',url:'ed-3d.html'},
-      {label:'ED Track Board',icon:'📋',url:'ed-board-v2.html'},
-      {label:'Pick a Case',icon:'📂',url:'virtual-emr.html?setting=ed'}
-    ]
-  },
-  {
-    id:'floor', title:'Inpatient Floor', icon:'🏥',
-    role:'Admitting resident / Sub-I',
-    desc:'Inherit the ED workup. Refine the diagnosis. Write admission orders, build a problem-based A&P, and anticipate what happens overnight.',
-    tags:['Admissions','Progress Notes','Daily Rounding'],
-    tools:['admissions','cases','crt','coachdx','sbar','emr','oral-pres'],
-    mechanismModules:['Cardiac','Renal','Pulmonary','Endocrine','GI','Hematology'],
-    launchUrl:'admissions.html',
-    quickLaunch:[
-      {label:'Start an Admission',icon:'📥',url:'admissions.html'},
-      {label:'Morning Rounds',icon:'🎤',url:'simroomdx.html?setting=floor'},
-      {label:'Pick a Case',icon:'📂',url:'virtual-emr.html?setting=floor'}
-    ]
-  },
-  {
-    id:'night-float', title:'Night Float', icon:'🌙',
-    role:'Cross-cover intern',
-    desc:"It's 1 AM. You're covering 8 patients. Nurses page you with critical labs, urgent vitals, and new admissions from the ED. Triage, prioritize, manage — hand off at dawn.",
-    tags:['Cross-Cover','I-PASS Handoffs','Critical Labs'],
-    tools:['cases','crt','coachdx','sbar','emr'],
-    mechanismModules:['Cardiac','Renal','Endocrine','Pulmonary'],
-    launchUrl:'night-float.html',
-    quickLaunch:[
-      {label:'Start Night Shift',icon:'🌙',url:'night-float.html'},
-      {label:'I-PASS Practice',icon:'📞',url:'consult-callback.html'},
-      {label:'Pick a Case',icon:'📂',url:'virtual-emr.html?setting=night-float'}
-    ]
-  },
-  {
-    id:'clinic', title:'Outpatient Clinic', icon:'🩺',
-    role:'PCP / Clinic student',
-    desc:'Longitudinal patient management. Chronic disease follow-up, preventive care, medication adjustments, and care coordination across providers.',
-    tags:['Chronic Disease','Preventive Care','Transitions'],
-    tools:['cases','crt','coachdx','emr'],
-    mechanismModules:['Endocrine','Cardiac','Renal','MSK','Respiratory'],
-    launchUrl:'setting-selector.html?setting=clinic',
-    quickLaunch:[
-      {label:'Enter the Clinic',icon:'🩺',url:'setting-selector.html?setting=clinic'},
-      {label:'Pick a Case',icon:'📂',url:'virtual-emr.html?setting=clinic'}
-    ]
-  },
-  {
-    id:'icu', title:'Intensive Care Unit', icon:'💓',
-    role:'ICU resident / Sub-I',
-    desc:'Organ-system-based monitoring. Ventilator management. Vasopressors. Goals-of-care conversations. Hour-by-hour decision-making at the highest acuity.',
-    tags:['Multi-Organ','Ventilators','Escalation'],
-    tools:['cases','crt','coachdx','sbar','emr'],
-    mechanismModules:['Cardiac','Pulmonary','Renal','Neurology','Hematology'],
-    launchUrl:'setting-selector.html?setting=icu',
-    quickLaunch:[
-      {label:'Enter the ICU',icon:'💓',url:'setting-selector.html?setting=icu'},
-      {label:'Pick a Case',icon:'📂',url:'virtual-emr.html?setting=icu'}
-    ]
-  },
-  {
-    id:'consult', title:'Inpatient Consult', icon:'📋',
-    role:'Consulting specialist',
-    desc:'Answer the clinical question. Review the chart with a specialist lens, perform a focused assessment, and write targeted recommendations.',
-    tags:['Focused Assessment','Specialty Lens','Recs'],
-    tools:['cases','crt','coachdx','emr'],
-    mechanismModules:['Allergy/Immunology','Cardiac','GI','Neurology','Pulmonary'],
-    launchUrl:'consult-callback.html',
-    quickLaunch:[
-      {label:'Take a Consult',icon:'📋',url:'consult-callback.html'},
-      {label:'Pick a Case',icon:'📂',url:'virtual-emr.html?setting=consult'}
-    ]
-  }
-];
-
-const TOOLS = {
-  cases:      {name:'Case Library',icon:'📂',subtitle:'Browse & Filter Cases',
-               desc:'Browse all patient cases filtered by this clinical setting. Pick a case by presentation, specialty, acuity, or diagnosis and launch into the full encounter.',
-               features:['256 Cases','29 Specialties','Acuity Filter'],url:'virtual-emr.html'},
-  crt:        {name:'Clinical Reasoning Trainer',icon:'🎯',subtitle:'Guided Diagnostic Thinking',
-               desc:'Work through structured clinical reasoning exercises. Build differentials, identify key features, avoid cognitive traps, and get scored on your diagnostic process.',
-               features:['Semantic Qualifiers','Problem Representation','Illness Scripts'],url:'crt-hub.html'},
-  coachdx:    {name:'CoachDx',icon:'🗣️',subtitle:'AI Attending Feedback',
-               desc:'Get real-time Socratic coaching from an AI attending adapted to your clinical setting. "Why did you anchor on PE before checking the Wells score?"',
-               features:['Socratic Method','Reasoning Debrief','Pro Feature'],url:'CoachDx/index.html'},
-  simdx:      {name:'SimDx — Live Simulation',icon:'🏨',subtitle:'Real-Time Patient Encounters',
-               desc:'Full patient encounters with real-time progression. Interview, examine, order workup, interpret results, and manage the patient through the full arc.',
-               features:['Dynamic Vitals','Real-Time Labs','Patient Actors'],url:'simroomdx.html'},
-  sbar:       {name:'SBAR Trainer',icon:'📞',subtitle:'Structured Communication',
-               desc:'Practice calling consults, giving nurse handoffs, and communicating urgently. Scored on clarity, completeness, and professionalism.',
-               features:['SBAR Framework','I-PASS Handoffs','Consult Calls'],url:'consult-callback.html'},
-  emr:        {name:'Virtual EMR',icon:'💻',subtitle:'Chart Review & Orders',
-               desc:'Navigate a realistic electronic medical record. Review labs, imaging, medications, problem lists, and visit notes. Place orders and write documentation.',
-               features:['Full Chart','Order Entry','Note Templates'],url:'virtual-emr.html'},
-  admissions: {name:'Admissions Simulator',icon:'📥',subtitle:'ED-to-Floor Handoff',
-               desc:'Receive an I-PASS handoff from the ED. Review the chart, write admission orders, compose an H&P, and present to your attending at morning rounds.',
-               features:['I-PASS Handoff','Admission Orders','H&P Writing'],url:'admissions.html'},
-  'oral-pres':{name:'Oral Presentation Trainer',icon:'🎤',subtitle:'Present to the Attending',
-               desc:'Practice your morning rounds oral presentation. SimRoomDx scores your structure, prioritization, and ability to defend your reasoning under questioning.',
-               features:['Scored Rubric','Attending Q&A','Pro Feature'],url:'simroomdx.html'},
-};
-
-const MECHANISM_MODULES = {
-  'Cardiac':{url:'pathway.html?system=cardiac',icon:'❤️'},
-  'Pulmonary':{url:'pathway.html?system=pulmonary',icon:'🫁'},
-  'Neurology':{url:'pathway.html?system=neuro',icon:'🧠'},
-  'GI':{url:'pathway.html?system=gi',icon:'🫄'},
-  'Renal':{url:'pathway.html?system=renal',icon:'🫘'},
-  'Endocrine':{url:'pathway.html?system=endo',icon:'🦋'},
-  'Hematology':{url:'pathway.html?system=heme',icon:'🩸'},
-  'Allergy/Immunology':{url:'pathway.html?system=allergy-immunology',icon:'🛡️'},
-  'MSK':{url:'pathway.html?system=msk',icon:'🦴'},
-  'Respiratory':{url:'pathway.html?system=respiratory',icon:'💨'}
-};
-
-const SEARCH_INDEX = [
-  {name:'Chest Pain — STEMI',desc:'Crushing substernal pressure',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=stemi-v1'},
-  {name:'Appendicitis',desc:'RLQ pain, migration from periumbilical',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=appendicitis-v1'},
-  {name:'Subarachnoid Hemorrhage',desc:'Thunderclap headache',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=sah-v1'},
-  {name:'Pulmonary Embolism',desc:'Pleuritic chest pain, calf swelling',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=pe-v1'},
-  {name:'DKA',desc:'Altered mental status, Kussmaul breathing',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=dka-v1'},
-  {name:'Acute Stroke',desc:'Sudden left-sided weakness',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=stroke-v1'},
-  {name:'Bacterial Meningitis',desc:'Fever, confusion, petechial rash',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=meningitis-v1'},
-  {name:'Anaphylaxis',desc:'Severe allergic reaction, airway',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=anaphylaxis'},
-  {name:'CHF Exacerbation',desc:'Dyspnea, orthopnea, BNP elevation',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=chf-exacerbation'},
-  {name:'Sepsis / Septic Shock',desc:'Fever, hypotension, tachycardia',cat:'ED Case',color:'#DC2626',url:'virtual-emr.html?case=sepsisseptic-shock'},
-  {name:'Night Float Simulator',desc:'Overnight cross-cover, nurse pages',cat:'Simulation',color:'#7C3AED',url:'night-float.html'},
-  {name:'Admissions Simulator',desc:'ED handoff, orders, H&P',cat:'Simulation',color:'#1565C0',url:'admissions.html'},
-  {name:'SimRoomDx — Morning Rounds',desc:'Present to the attending',cat:'Simulation',color:'#059669',url:'simroomdx.html'},
-  {name:'ED Track Board',desc:'Live patient board',cat:'Simulation',color:'#DC2626',url:'ed-3d.html'},
-  {name:'CoachDx',desc:'AI Socratic coaching',cat:'AI Tool',color:'#EC4899',url:'CoachDx/index.html'},
-  {name:'Clinical Reasoning Trainer',desc:'Guided diagnostic thinking',cat:'Tool',color:'#2874A6',url:'crt-hub.html'},
-  {name:'SBAR Trainer',desc:'Structured communication',cat:'Tool',color:'#D97706',url:'consult-callback.html'},
-  {name:'Virtual EMR',desc:'Chart review and order entry',cat:'Tool',color:'#0D9488',url:'virtual-emr.html'},
-  {name:'ECG Trainer',desc:'12-lead interpretation',cat:'Tool',color:'#6366F1',url:'ecg/index.html'},
-  {name:'MechanismDx',desc:'Pathophysiology modules',cat:'Learning',color:'#7C3AED',url:'pathway.html'},
-  {name:'ABG Analyzer',desc:'Arterial blood gas interpretation',cat:'Tool',color:'#6366F1',url:'tools/index.html'},
-  {name:'DDx Builder',desc:'Differential diagnosis generator',cat:'Tool',color:'#6366F1',url:'tools/index.html'},
-  {name:'CaseForge',desc:'Custom case builder for programs',cat:'Tool',color:'#0d7377',url:'caseforge.html'},
-];
-
-// ═══════════════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════════════
+/* ── STATE ── */
 let selectedSetting = null;
+let selectedPillar = null;
 
-// ═══════════════════════════════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════════════════════════════
-
-function renderSettings() {
-  const grid = document.getElementById('settingsGrid');
-  grid.innerHTML = SETTINGS.map((s, i) => `
-    <div class="setting-card ${selectedSetting===s.id?'selected':''}"
-         data-setting="${s.id}" onclick="selectSetting('${s.id}')"
-         style="animation-delay:${i*60}ms">
-      <div class="card-icon">${s.icon}</div>
-      <div class="card-title">${s.title}</div>
-      <div class="card-role">${s.role}</div>
-      <div class="card-desc">${s.desc}</div>
-      <div class="card-tags">${s.tags.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
-    </div>
-  `).join('');
-}
-
-function renderTools(settingId) {
-  const setting = SETTINGS.find(s=>s.id===settingId);
-  if (!setting) return;
-
-  const panel = document.getElementById('toolsPanel');
-  const grid = document.getElementById('toolsGrid');
-  const title = document.getElementById('toolsTitle');
-
-  // Render difficulty options
-  renderDifficulty();
-
-  title.textContent = `Training Tools — ${setting.icon} ${setting.title}`;
-
-  const diff = window.RDX_DIFFICULTY || 'standard';
-  function appendParams(url) {
-    let u = url;
-    u += (u.includes('?')?'&':'?') + 'setting='+settingId;
-    if (diff !== 'standard') u += '&difficulty=' + diff;
-    return u;
+/* ── ROUTING MAP ── */
+// setting → pillar → destination URL
+const ROUTES = {
+  ed: {
+    coach:     'CoachDx/mentor-chat.html?setting=ed',
+    cases:     'ed-board-v2.html',
+    mechanism: 'mechanism/anaphylaxis-module.html'
+  },
+  floor: {
+    coach:     'CoachDx/mentor-chat.html?setting=inpatient',
+    cases:     'admissions.html',
+    mechanism: 'mechanism/anaphylaxis-module.html'
+  },
+  clinic: {
+    coach:     'CoachDx/mentor-chat.html?setting=clinic',
+    cases:     'virtual-emr.html?setting=clinic',
+    mechanism: 'mechanism/anaphylaxis-module.html'
+  },
+  'night-float': {
+    coach:     'CoachDx/mentor-chat.html?setting=inpatient',
+    cases:     'night-float.html',
+    mechanism: 'mechanism/anaphylaxis-module.html'
+  },
+  icu: {
+    coach:     'CoachDx/mentor-chat.html?setting=icu',
+    cases:     'virtual-emr.html?setting=icu',
+    mechanism: 'mechanism/anaphylaxis-module.html'
+  },
+  any: {
+    coach:     'CoachDx/mentor-chat.html',
+    cases:     'virtual-emr.html',
+    mechanism: 'mechanism/anaphylaxis-module.html'
   }
+};
 
-  // Quick Launch — add Patient List as the hero action
-  const qlRow = document.getElementById('quickLaunchRow');
-  var patientListUrl = appendParams('virtual-emr.html');
-  var heroBtn = `<a class="ql-btn" href="${patientListUrl}" style="background:var(--blue);color:#fff;border-color:var(--blue);font-weight:700;padding:12px 24px;font-size:14px"><span class="ql-icon">\uD83D\uDCCB</span> Open Patient List</a>`;
-  qlRow.innerHTML = heroBtn + setting.quickLaunch.filter(ql=>!ql.label.includes('Pick a Case')).map(ql=>
-    `<a class="ql-btn" href="${appendParams(ql.url)}"><span class="ql-icon">${ql.icon}</span> ${ql.label}</a>`
-  ).join('');
+const PILLAR_COLORS = { coach:'blue', cases:'teal', mechanism:'violet' };
+const PILLAR_LABELS = {
+  coach: { icon:'🧑‍⚕️', text:'Start CoachDx' },
+  cases: { icon:'🩺',    text:'Open a Case' },
+  mechanism: { icon:'🔬', text:'Explore Mechanisms' }
+};
+const SETTING_LABELS = {
+  ed: 'Emergency Department', floor: 'Inpatient Floor',
+  clinic: 'Outpatient Clinic', 'night-float': 'Night Float',
+  icu: 'ICU', any: 'Any Setting'
+};
 
-  // MechanismDx links
-  document.getElementById('mechanismLinks').innerHTML = setting.mechanismModules.map(mod=>{
-    const m = MECHANISM_MODULES[mod];
-    return m ? `<a class="mechanism-link" href="${m.url}">${m.icon} ${mod}</a>` : '';
-  }).join('');
+/* ── SETTING SELECTION ── */
+function selectSetting(card) {
+  // Deselect all
+  document.querySelectorAll('.setting-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  selectedSetting = card.dataset.id;
 
-  // Tool cards
-  grid.innerHTML = setting.tools.map((toolId,i)=>{
-    const tool = TOOLS[toolId];
-    if (!tool) return '';
-    let url = appendParams(tool.url);
-    return `
-      <a class="tool-card" data-tool="${toolId}" href="${url}" style="animation-delay:${i*50}ms">
-        <span class="launch-arrow">→</span>
-        <div class="tool-card-header">
-          <div class="tool-icon">${tool.icon}</div>
-          <div class="tool-card-header-text">
-            <div class="tool-name">${tool.name}</div>
-            <div class="tool-subtitle">${tool.subtitle}</div>
-          </div>
-        </div>
-        <div class="tool-desc">${tool.desc}</div>
-        <div class="tool-features">${tool.features.map(f=>`<span class="tool-feature">${f}</span>`).join('')}</div>
-      </a>`;
-  }).join('');
+  // Mark step 1 done
+  document.getElementById('step1Num').classList.add('done');
 
-  panel.classList.add('visible');
-  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),100);
+  // Unlock pillars
+  document.querySelectorAll('.pillar-card').forEach(c => c.classList.add('enabled'));
+  document.getElementById('pillarLock').style.display = 'none';
+  document.getElementById('step2Sub').textContent = SETTING_LABELS[selectedSetting];
+
+  updateGoButton();
 }
 
-// ═══════════════════════════════════════════════════════════════
-// DIFFICULTY
-// ═══════════════════════════════════════════════════════════════
-
-function renderDifficulty() {
-  const cfg = window.RDX_DIFF_CONFIG || {};
-  const current = window.RDX_DIFFICULTY || 'standard';
-  const container = document.getElementById('difficultyOptions');
-  container.innerHTML = ['guided','standard','advanced'].map(key => {
-    const d = cfg[key];
-    if (!d) return '';
-    return `<div class="diff-option ${current===key?'selected':''}" data-diff="${key}" onclick="setDifficulty('${key}')">
-      <div class="diff-option-header">
-        <span class="diff-icon">${d.icon}</span>
-        <span class="diff-label">${d.label}</span>
-      </div>
-      <div class="diff-tagline">${d.tagline}</div>
-      <div class="diff-desc">${d.description}</div>
-    </div>`;
-  }).join('');
+/* ── PILLAR SELECTION ── */
+function selectPillar(card) {
+  if (!card.classList.contains('enabled')) return;
+  document.querySelectorAll('.pillar-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  selectedPillar = card.dataset.pillar;
+  document.getElementById('step2Num').classList.add('done');
+  updateGoButton();
 }
 
-function setDifficulty(level) {
-  window.RDX_DIFFICULTY = level;
-  try { sessionStorage.setItem('rdx-difficulty', level); } catch(e) {}
-  window.RDX_DIFF = (window.RDX_DIFF_CONFIG || {})[level] || {};
-  renderDifficulty();
-  // Re-render tools to update URLs
-  if (selectedSetting) renderTools(selectedSetting);
+/* ── UPDATE GO BUTTON ── */
+function updateGoButton() {
+  const btn = document.getElementById('goBtn');
+  const hint = document.getElementById('goHint');
+  const summary = document.getElementById('goSummary');
+
+  if (selectedSetting && selectedPillar) {
+    const color = PILLAR_COLORS[selectedPillar];
+    const label = PILLAR_LABELS[selectedPillar];
+    btn.className = `go-btn ready`;
+    btn.dataset.c = color;
+    btn.className = `go-btn ready`;
+    // Apply color via dataset
+    if (color === 'teal') btn.style.background = 'var(--teal)';
+    else if (color === 'violet') btn.style.background = 'var(--violet)';
+    else btn.style.background = 'var(--blue)';
+
+    document.getElementById('goBtnIcon').textContent = label.icon;
+    document.getElementById('goBtnText').textContent = label.text;
+    hint.style.display = 'none';
+    summary.innerHTML = `<strong>${SETTING_LABELS[selectedSetting]}</strong> · ${['CoachDx','ReasonDx Cases','MechanismDx'][['coach','cases','mechanism'].indexOf(selectedPillar)]}`;
+  } else if (selectedSetting) {
+    hint.textContent = 'Now choose how you want to learn';
+    hint.style.display = 'block';
+  }
 }
 
-function addParams(url, settingId) {
-  var diff = window.RDX_DIFFICULTY || 'standard';
-  var sep = url.includes('?') ? '&' : '?';
-  return url + sep + 'setting=' + settingId + '&difficulty=' + diff;
-}
+/* ── GO ── */
+function go() {
+  if (!selectedSetting || !selectedPillar) return;
+  const url = ROUTES[selectedSetting]?.[selectedPillar];
+  if (!url) return;
 
-// ═══════════════════════════════════════════════════════════════
-// ACTIONS
-// ═══════════════════════════════════════════════════════════════
+  // Track
+  try {
+    const queue = JSON.parse(localStorage.getItem('rdx-event-queue') || '[]');
+    queue.push({ type:'session_start', data:{ setting:selectedSetting, pillar:selectedPillar }, ts:new Date().toISOString() });
+    localStorage.setItem('rdx-event-queue', JSON.stringify(queue));
+  } catch(e) {}
 
-function selectSetting(id) {
-  selectedSetting = id;
-  const grid = document.getElementById('settingsGrid');
-  grid.classList.add('has-selection');
-  grid.querySelectorAll('.setting-card').forEach(c=>c.classList.toggle('selected',c.dataset.setting===id));
-  // Show Go button
-  const wrap = document.getElementById('goBtnWrap');
-  wrap.classList.add('visible');
-  const setting = SETTINGS.find(s=>s.id===id);
-  document.getElementById('goBtn').innerHTML = `${setting.icon} Open Patient List — ${setting.title} <span style="font-size:20px">→</span>`;
-  try{sessionStorage.setItem('rdx-hub-setting',id)}catch(e){}
-}
+  // Animate button
+  const btn = document.getElementById('goBtn');
+  document.getElementById('goBtnText').textContent = 'Loading…';
+  btn.style.opacity = '.7';
 
-function launchSetting() {
-  if (!selectedSetting) return;
-  // Primary action: go directly to the patient list
-  var diff = window.RDX_DIFFICULTY || 'standard';
-  var url = 'virtual-emr.html?setting=' + selectedSetting;
-  if (diff !== 'standard') url += '&difficulty=' + diff;
   window.location.href = url;
 }
 
-function toggleSettingsView() {
-  document.getElementById('settingsGrid').classList.remove('has-selection');
-  document.getElementById('toolsPanel').classList.remove('visible');
-  document.getElementById('goBtnWrap').classList.remove('visible');
-  selectedSetting = null;
-  renderSettings();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+/* ── URL PARAMS ── */
+// Support incoming ?setting=ed or ?topic=anaphylaxis
+window.addEventListener('load', () => {
+  const p = new URLSearchParams(window.location.search);
+  const s = p.get('setting');
+  const t = p.get('topic');
 
-// ═══════════════════════════════════════════════════════════════
-// SEARCH
-// ═══════════════════════════════════════════════════════════════
-
-function handleSearch(val) {
-  const res = document.getElementById('searchResults');
-  val = (val||'').trim().toLowerCase();
-  if (!val||val.length<2){res.classList.remove('active');return}
-  
-  // Search curated tools/simulations
-  var m = SEARCH_INDEX.filter(x=>x.name.toLowerCase().includes(val)||x.desc.toLowerCase().includes(val)||x.cat.toLowerCase().includes(val)).slice(0,4);
-  
-  // Also search the full case manifest if loaded
-  if (window.EMR_MANIFEST) {
-    var catColors = {cardiology:'#C62828',pulmonary:'#1565C0',neurology:'#6A1B9A',gi:'#E65100',infectious:'#2E7D32',endocrine:'#00838F',renal:'#4527A0',hematology:'#AD1457',allergy:'#EF6C00',toxicology:'#37474F',surgery:'#283593'};
-    EMR_MANIFEST.forEach(function(group) {
-      group.cases.forEach(function(c) {
-        var searchable = (c.diagnosis + ' ' + group.presentation + ' ' + c.category + ' ' + c.id).toLowerCase();
-        if (searchable.includes(val)) {
-          m.push({name:c.diagnosis, desc:group.presentation + ' \u00B7 ESI-' + c.acuity, cat:'Patient Case', color:catColors[c.category]||'#607D8B', url:'virtual-emr.html?case=' + c.id});
-        }
-      });
-    });
+  if (s) {
+    const card = document.querySelector(`.setting-card[data-id="${s}"]`);
+    if (card) selectSetting(card);
   }
-  
-  // Deduplicate by URL and limit to 10
-  var seen = {};
-  m = m.filter(function(x) { if (seen[x.url]) return false; seen[x.url] = true; return true; }).slice(0, 10);
-  
-  if(!m.length){res.innerHTML='<div style="padding:14px 16px;font-size:13px;color:#94A3B8">No results found.</div>';res.classList.add('active');return}
-  res.innerHTML=m.map(x=>`<a class="sr-item" href="${x.url}"><div class="sr-dot" style="background:${x.color}"></div><div><div class="sr-name">${x.name}</div><div class="sr-desc">${x.desc}</div></div><div class="sr-category">${x.cat}</div></a>`).join('');
-  res.classList.add('active');
-}
 
-// ═══════════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════════
-renderSettings();
-
-// Pre-load manifest for search to access all cases
-if (!window.EMR_MANIFEST) {
-  var ms = document.createElement('script');
-  ms.src = 'emr-data/manifest.js';
-  document.head.appendChild(ms);
-}
-
-const searchInput = document.getElementById('globalSearch');
-searchInput.addEventListener('input',function(){handleSearch(this.value)});
-searchInput.addEventListener('focus',function(){handleSearch(this.value)});
-document.addEventListener('click',function(e){if(!e.target.closest('.quick-search-wrap'))document.getElementById('searchResults').classList.remove('active')});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('searchResults').classList.remove('active')});
-
-// Restore from session or URL
-try{const s=sessionStorage.getItem('rdx-hub-setting');if(s&&SETTINGS.find(x=>x.id===s))selectSetting(s)}catch(e){}
-const params=new URLSearchParams(window.location.search);
-if(params.get('setting')){const s=params.get('setting');if(SETTINGS.find(x=>x.id===s))selectSetting(s)}
+  // If topic passed (from index search), pre-fill CoachDx
+  if (t) {
+    document.querySelectorAll('.p-desc')[0].textContent = `Coaching session on: ${t}`;
+    // Auto-select "Any" setting and CoachDx pillar if topic provided
+    if (!s) {
+      const anyCard = document.querySelector('.setting-card[data-id="any"]');
+      if (anyCard) selectSetting(anyCard);
+    }
+    const coachCard = document.querySelector('.pillar-card[data-pillar="coach"]');
+    if (coachCard && coachCard.classList.contains('enabled')) {
+      selectPillar(coachCard);
+      // Add topic to route
+      if (selectedSetting) {
+        const orig = ROUTES[selectedSetting].coach;
+        ROUTES[selectedSetting].coach = orig + (orig.includes('?') ? '&' : '?') + 'topic=' + encodeURIComponent(t);
+      }
+    }
+  }
+});
 </script>
-
-<script src="js/rdx-difficulty.js"></script>
-<script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
-<script src="js/rdx-nav.js"></script>
-<script src="js/rdx-help-widget.js"></script>
-<script src="js/dx-feedback.js"></script>
-<script src="js/dx-user-bar.js"></script>
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
-<script src="js/nav-global.js"></script>
 </body>
 </html>

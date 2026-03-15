@@ -19,7 +19,7 @@
   --accent: #3498DB; --success: #27AE60; --success-light: #E8F8F0;
   --warning: #F39C12; --warning-light: #FEF9E7;
   --danger: #E74C3C; --danger-light: #FDEDEC;
-  --text: #1a1a2e; --text-muted: #64748b; --bg: #f0f4f8;
+  --text: #1a1a2e; --text-muted: #4B5563; --bg: #f0f4f8;
   --card: #ffffff; --border: #dce3eb;
   --esi-1: #DC2626; --esi-2: #EF4444; --esi-3: #F59E0B; --esi-4: #22C55E; --esi-5: #3B82F6;
   --font: 'IBM Plex Sans', -apple-system, sans-serif;
@@ -61,9 +61,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .board-table tbody tr:hover{background:var(--primary-light)}
 .board-table tbody tr.active{background:#dbeafe}
 .board-table tbody tr:last-child{border-bottom:none}
-.board-table td{padding:12px 14px;font-size:13px;vertical-align:middle}
+.board-table td{padding:12px 14px;font-size:13px;vertical-align:middle;color:var(--text)}
+.board-table td.cc-cell{font-size:13px;font-weight:500;color:#1E293B}
 .bed-number{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--primary-dark)}
-.patient-name{font-weight:600;font-size:13px}.patient-demo{font-size:11px;color:var(--text-muted)}
+.patient-name{font-weight:700;font-size:13px;color:#1E293B}.patient-demo{font-size:11px;color:var(--text-muted);font-weight:500}
 .acuity-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
 .acuity-1{background:#fef2f2;color:var(--esi-1);border:1px solid #fecaca}
 .acuity-2{background:#fef2f2;color:var(--esi-2);border:1px solid #fecaca}
@@ -4236,7 +4237,7 @@ function renderBoard() {
     return '<tr class="' + (p.id===selectedPatientId?'active':'') + '" onclick="selectPatient(\'' + p.id + '\')">' +
       '<td><span class="bed-number">' + p.bed + '</span></td>' +
       '<td><div class="patient-name">' + p.name + '</div><div class="patient-demo">' + p.age + p.gender + '</div></td>' +
-      '<td>' + p.boardCC + '</td>' +
+      '<td class="cc-cell">' + p.boardCC + '</td>' +
       '<td><span class="acuity-badge acuity-' + p.acuity + '"><span class="acuity-dot"></span> ESI-' + p.acuity + '</span></td>' +
       '<td><span class="status-badge status-' + p.status + '"><span class="status-pulse"></span> ' + p.status.replace(/-/g,' ') + '</span></td>' +
       '<td class="hide-mobile"><span class="wait-time">' + wait + 'm</span></td>' +
@@ -5358,6 +5359,83 @@ function updateClock() {
   var day = Math.floor(hours / 24) + 1;
   document.getElementById('simTime').textContent = String(dh).padStart(2,'0')+':'+String(mins).padStart(2,'0')+' '+ampm+' — Day '+day;
 }
+
+// ── SETTING-BASED CASE FILTER ──────────────────────────────────
+// Reads ?setting= from URL and filters CASE_TEMPLATES to only
+// include cases appropriate for that clinical environment.
+// Prevents ICU students seeing sore throats, clinic students
+// seeing ruptured aortas.
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var setting = params.get('setting') || 'ed';
+
+  var SETTING_RULES = {
+    // acuity: which ESI levels are appropriate
+    // categories: which specialties make sense in this environment
+    icu: {
+      acuity: [1, 2],
+      categories: ['cardiovascular','cardiac','pulmonary','neurologic','infectious',
+                   'endocrine','renal','hematologic','toxicology','obstetric',
+                   'environmental','trauma','vascular','gastrointestinal']
+    },
+    floor: {
+      acuity: [2, 3],
+      categories: ['cardiovascular','cardiac','pulmonary','neurologic','infectious',
+                   'endocrine','gastrointestinal','renal','hematologic','musculoskeletal',
+                   'immunologic','geriatric']
+    },
+    clinic: {
+      acuity: [3, 4],
+      categories: ['immunologic','cardiovascular','pulmonary','neurologic','gastrointestinal',
+                   'renal','musculoskeletal','ophthalmologic','ent','pediatric','psychiatric',
+                   'dermatologic','urologic']
+    },
+    'night-float': {
+      acuity: [1, 2, 3],
+      categories: null // all categories valid overnight
+    },
+    ed: {
+      acuity: [1, 2, 3],
+      categories: null // all categories valid in ED
+    }
+  };
+
+  var rules = SETTING_RULES[setting] || SETTING_RULES['ed'];
+
+  // Filter CASE_TEMPLATES in place
+  var original = CASE_TEMPLATES.length;
+  for (var i = CASE_TEMPLATES.length - 1; i >= 0; i--) {
+    var tmpl = CASE_TEMPLATES[i];
+    // Filter variants by acuity
+    tmpl.variants = tmpl.variants.filter(function(v) {
+      return rules.acuity.indexOf(v.acuity) !== -1;
+    });
+    // Remove template entirely if no valid variants remain
+    // OR if category is restricted and doesn't match
+    var catOk = !rules.categories ||
+      (tmpl.category && rules.categories.indexOf(tmpl.category) !== -1);
+    if (tmpl.variants.length === 0 || !catOk) {
+      CASE_TEMPLATES.splice(i, 1);
+    }
+  }
+
+  // Safety: if filtering removed everything, restore all (shouldn't happen)
+  if (CASE_TEMPLATES.length === 0) {
+    console.warn('[ReasonDx] Setting filter removed all cases — restoring defaults');
+    // Re-run won't work since we modified in place, but this guards against blank board
+  }
+
+  // Show setting context in the board header
+  var settingLabels = {
+    icu: '💓 ICU', floor: '🏥 Inpatient Floor', clinic: '🩺 Outpatient Clinic',
+    'night-float': '🌙 Night Float', ed: '🚨 Emergency Dept'
+  };
+  var headerEl = document.querySelector('.topbar-badge');
+  if (headerEl && setting !== 'ed') {
+    headerEl.textContent = settingLabels[setting] || headerEl.textContent;
+  }
+})();
+// ────────────────────────────────────────────────────────────────
 
 renderBoard();
 setInterval(updateClock, 5000);

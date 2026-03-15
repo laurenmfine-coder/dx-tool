@@ -1,386 +1,261 @@
-// Virtual EMR Case: Hypertensive Emergency
-// Variant: hypertensive-emergency | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
-
+/* emr-data/hypertensive-emergency.js
+   Hypertensive Emergency with End-Organ Damage
+   Category: neurology | Acuity: ESI-2
+   Settings: ED, Floor, ICU
+   Priority 1 gap fill — neurology/cardiology overlap
+*/
 window.EMR_DATA = {
-  "patient": {
-    "name": "Claudette Baptiste",
-  "patientHPI": "My blood pressure pills aren't working like they should, and I'll be honest - I forget to take the afternoon one pretty often. I've been getting these headaches at the back of my head for the past couple months, especially when I'm stressed, but my vision seems fine.",
-    "dob": "09/12/1961",
-    "age": 63,
-    "sex": "Female",
-    "mrn": "RDX-2025-38572",
-    "pronouns": "She/Her",
-    "insurance": "Medicare Part B",
-    "pcp": "Dr. Carlos Mendez, MD",
-    "pharmacy": "Walgreens — 3500 Broward Blvd, Riverside, FL",
-    "language": "English, Haitian Creole",
-    "race": "Black/African American",
-    "address": "4734 Clover St, Albuquerque, NM 87101",
-    "phone": "(954) 555-6041",
-    "email": "c.baptiste61@email.com",
-    "emergencyContact": {
-      "name": "Marie-Claire Desrosiers (Daughter)",
-      "phone": "(954) 555-6078"
-    }
+  "base": {
+    "patient": {
+      "name": "Marcus Washington",
+      "patientHPI": "My head is pounding worse than it ever has before. I've had headaches before but this is different — it's at the back of my head and my vision is blurry. I took some Tylenol but nothing is helping.",
+      "dob": "09/14/1968",
+      "age": "57",
+      "sex": "Male",
+      "pronouns": "he/him",
+      "mrn": "MRN-338847",
+      "language": "English",
+      "race": "Black/African American",
+      "phone": "(312) 555-8847",
+      "email": "m.washington@email.com",
+      "address": "2847 S. Michigan Ave, Chicago, IL 60616",
+      "insurance": "Medicaid",
+      "pcp": "Dr. Yvonne Carter, MD",
+      "pharmacy": "Walgreens — 35th St",
+      "emergencyContact": {
+        "name": "Diane Washington",
+        "phone": "(312) 555-9012",
+        "relationship": "Spouse"
+      }
+    },
+    "allergies": [
+      { "allergen": "NKDA", "reaction": "", "severity": "", "type": "" }
+    ],
+    "immunizations": [
+      { "name": "Influenza", "date": "10/2025", "lot": "FL-25", "site": "Left Deltoid" }
+    ],
+    "familyHistory": [
+      "Father: died of stroke at 61",
+      "Mother: hypertension, CKD",
+      "Brother: hypertension"
+    ],
+    "socialHistory": [
+      ["Adherence", "Ran out of amlodipine 3 weeks ago — 'couldn't get to the pharmacy'"],
+      ["Diet", "High-sodium diet — works as a short-order cook"],
+      ["Smoking", "Former — 20 pack-year history, quit 5 years ago"],
+      ["Alcohol", "Occasional"],
+      ["Work", "Short-order cook — high-stress environment"]
+    ]
   },
-  "problems": [
-    {
-      "problem": "Hypertension, Essential — Poorly Controlled",
-      "icd": "I10",
-      "onset": "2008",
-      "status": "Active",
-      "notes": "Resistant HTN; on 3-drug regimen; multiple missed appointments; last BP at office 168/98"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "eGFR 52; hypertensive nephrosclerosis suspected; nephrology referral placed but not yet seen"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2012",
-      "status": "Active",
-      "notes": "A1c 7.8%; on metformin and glipizide"
-    },
-    {
-      "problem": "Left Ventricular Hypertrophy",
-      "icd": "I51.7",
-      "onset": "2022",
-      "status": "Active",
-      "notes": "Diagnosed on echocardiogram; concentric LVH consistent with chronic HTN"
-    },
-    {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2014",
-      "status": "Active",
-      "notes": "On atorvastatin; LDL at goal"
-    },
-    {
-      "problem": "Obesity, Class I",
-      "icd": "E66.01",
-      "onset": "2010",
-      "status": "Active",
-      "notes": "BMI 33"
-    }
-  ],
-  "medications": [
-    {
-      "name": "Amlodipine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Mendez",
-      "start": "06/2018",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 40mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Mendez",
-      "start": "03/2015",
-      "refills": 1,
-      "status": "Active"
-    },
-    {
-      "name": "Hydrochlorothiazide 25mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Mendez",
-      "start": "01/2020",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Mendez",
-      "start": "08/2013",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Glipizide 10mg BID",
-      "sig": "Take 1 tablet by mouth twice daily 30 minutes before meals",
-      "prescriber": "Dr. Mendez",
-      "start": "04/2020",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 40mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Mendez",
-      "start": "01/2015",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Mendez",
-      "start": "06/2015",
-      "refills": 5,
-      "status": "Active"
-    }
-  ],
-  "allergies": [
-    {
-      "allergen": "Lisinopril",
-      "type": "Drug",
-      "reaction": "Dry cough (tolerable per patient; declined switch)",
-      "severity": "Mild",
-      "verified": "Yes"
-    },
-    {
-      "allergen": "Shellfish",
-      "type": "Food",
-      "reaction": "Throat tightness, urticaria",
-      "severity": "Severe",
-      "verified": "Patient-reported"
-    }
-  ],
-  "vitals": [
-    {
-      "date": "11/18/2024",
-      "bp": "168/98",
-      "hr": 88,
-      "rr": 16,
-      "temp": "98.6°F",
-      "spo2": "96%",
-      "wt": "198 lbs",
-      "ht": "5'5\"",
-      "bmi": 32.9,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "07/10/2024",
-      "bp": "172/102",
-      "hr": 84,
-      "rr": 16,
-      "temp": "98.4°F",
-      "spo2": "97%",
-      "wt": "195 lbs",
-      "ht": "5'5\"",
-      "bmi": 32.4,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "01/15/2024",
-      "bp": "158/94",
-      "hr": 80,
-      "rr": 14,
-      "temp": "98.6°F",
-      "spo2": "97%",
-      "wt": "192 lbs",
-      "ht": "5'5\"",
-      "bmi": 31.9,
-      "setting": "PCP Office"
-    },
-    {
-      "date": "07/20/2023",
-      "bp": "162/96",
-      "hr": 82,
-      "rr": 16,
-      "temp": "98.2°F",
-      "spo2": "98%",
-      "wt": "190 lbs",
-      "ht": "5'5\"",
-      "bmi": 31.6,
-      "setting": "PCP Office"
-    }
-  ],
-  "visits": [
-    {
-      "id": "V001",
-      "date": "11/18/2024",
-      "type": "Primary Care",
-      "provider": "Dr. Carlos Mendez, MD",
-      "cc": "Follow-up: HTN, DM2, CKD",
-      "hpi": "63-year-old female presents for follow-up of chronic conditions. BP remains elevated despite 3-drug regimen. Admits to inconsistent medication adherence — frequently misses afternoon doses. Reports intermittent occipital headaches over past 2 months, attributed to stress. Denies vision changes, chest pain, SOB, or edema. Missed nephrology appointment due to transportation issues. Diet high in sodium per review.",
-      "exam": "General: Obese female, NAD. HEENT: PERRL, fundoscopic exam — AV nicking noted bilaterally, no papilledema, no hemorrhages or exudates. Neck: No bruits. CV: RRR, S4 gallop present, no murmurs. Lungs: CTAB. Abdomen: Soft, obese, NT. Extremities: Trace bilateral pedal edema. Neuro: A&O x3, no focal deficits.",
-      "assessment": "1. Resistant hypertension — uncontrolled on 3-drug regimen; medication non-adherence contributing\n2. CKD Stage 3a — stable creatinine; nephrology referral re-placed\n3. T2DM — A1c 7.8%, slightly above goal\n4. LVH — S4 present; chronic HTN effect\n5. Intermittent headaches — likely hypertension-related",
-      "plan": "1. Strongly counseled on medication adherence; discussed pill organizer and alarm reminders\n2. Consider adding spironolactone 25mg if non-adherence corrected and BP still uncontrolled at next visit\n3. Low-sodium diet counseling; DASH diet handout provided\n4. Nephrology referral re-placed; social work for transportation assistance\n5. Recheck labs including BMP in 4 weeks\n6. RTC 4-6 weeks; return immediately for severe headache, vision changes, chest pain, or SOB"
-    },
-    {
-      "id": "V002",
-      "date": "07/10/2024",
-      "type": "Primary Care",
-      "provider": "Dr. Carlos Mendez, MD",
-      "cc": "Follow-up: HTN, DM2",
-      "hpi": "63-year-old female for chronic disease follow-up. BP persistently elevated. A1c improved from 8.2% to 7.8%. Reports occasional headaches. Compliant with medications per patient report, though refill records suggest gaps. No new complaints.",
-      "exam": "General: NAD, obese. HEENT: AV nicking on fundoscopy, unchanged. CV: RRR, S4 gallop. Lungs: CTAB. Extremities: No edema today.",
-      "assessment": "1. HTN — persistent elevation; suspect non-adherence\n2. T2DM — improving A1c\n3. CKD 3a — stable",
-      "plan": "1. Continue current regimen; reinforce adherence\n2. Nephrology referral (patient has not yet been seen)\n3. Recheck A1c in 3 months\n4. RTC 3-4 months"
-    },
-    {
-      "id": "V003",
-      "date": "01/15/2024",
-      "type": "Primary Care",
-      "provider": "Dr. Carlos Mendez, MD",
-      "cc": "Annual wellness exam",
-      "hpi": "63-year-old female for annual wellness visit. Multiple chronic conditions. Reports general fatigue. BP elevated but improved from prior. Weight slowly trending up.",
-      "exam": "General: NAD. Vitals: As above. CV: S4 present. Lungs: CTAB. Abdomen: Soft. Extremities: No edema. Neuro: Intact.",
-      "assessment": "1. Annual wellness exam\n2. HTN — improved but not at goal\n3. T2DM — A1c 8.2%\n4. CKD 3a — new nephrology referral placed",
-      "plan": "1. Added HCTZ 25mg to regimen\n2. Increased glipizide to 10mg BID\n3. Nephrology referral\n4. Recheck labs 3 months\n5. RTC 3-6 months"
-    }
-  ],
-  "labs": [
-    {
-      "date": "11/18/2024",
-      "time": "08:50",
-      "orderedBy": "Dr. Carlos Mendez, MD",
-      "collected": "11/18/2024 08:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-111822",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA), Urine",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+  "encounters": {
+    "ed": {
+      "patient": {
+        "chiefComplaint": "57M with h/o HTN presenting with severe occipital headache, blurred vision, BP 226/138 — ran out of amlodipine 3 weeks ago",
+        "diagnosis": "Hypertensive Emergency — Hypertensive Encephalopathy + Hypertensive Retinopathy"
+      },
+      "problems": [
+        { "id": "prob-1", "description": "Hypertensive emergency — BP 226/138 with end-organ damage (neurologic + ophthalmic)", "status": "Active", "onset": "Acute", "icd10": "I16.1" },
+        { "id": "prob-2", "description": "Hypertensive encephalopathy — severe headache, confusion, blurred vision", "status": "Active", "onset": "Acute", "icd10": "I67.4" },
+        { "id": "prob-3", "description": "Hypertensive retinopathy — papilledema on fundoscopy", "status": "Active", "onset": "Acute", "icd10": "H35.039" },
+        { "id": "prob-4", "description": "Medication non-adherence — ran out of amlodipine 3 weeks ago", "status": "Active", "onset": "Chronic", "icd10": "Z91.19" },
+        { "id": "prob-5", "description": "Hypertension — poorly controlled, likely >10 year history", "status": "Chronic", "onset": "Chronic", "icd10": "I10" }
+      ],
+      "medications": [
+        { "id": "med-1", "name": "Amlodipine", "dose": "10mg", "route": "PO", "frequency": "Daily", "status": "Not taking — ran out", "prescriber": "Dr. Yvonne Carter, MD" },
+        { "id": "med-2", "name": "Lisinopril", "dose": "20mg", "route": "PO", "frequency": "Daily", "status": "Active", "prescriber": "Dr. Yvonne Carter, MD" }
+      ],
+      "vitals": [
+        { "date": "03/15/2026", "time": "14:22", "bp": "226/138", "hr": "96", "rr": "18", "temp": "37.1°C", "spo2": "98%", "pain": "9/10" }
+      ],
+      "visits": [
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            { "test": "Glucose", "value": "142", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" }
-          ]
-        },
+          "id": "visit-1",
+          "type": "Emergency Visit",
+          "date": "03/15/2026",
+          "provider": "Dr. Attending",
+          "cc": "Severe occipital headache with blurred vision — BP 226/138",
+          "hpi": "57-year-old Black male with known hypertension presents with 6-hour history of severe occipital headache (9/10), blurred vision bilaterally, and mild confusion. He ran out of amlodipine 3 weeks ago and has not been able to refill it. He has no prior episodes this severe. His wife noticed he seemed 'not himself' this morning — slow to respond, forgot her name briefly. He denies chest pain, shortness of breath, focal weakness, or slurred speech. ROS: nausea without vomiting, photophobia. No fever, no neck stiffness.",
+          "assessment": "Hypertensive emergency with neurologic and ophthalmologic end-organ damage. BP 226/138. Fundoscopy reveals bilateral papilledema with flame hemorrhages — Grade IV Keith-Wagener-Barker. Needs urgent but controlled BP reduction — MAP reduction of 10-20% in first hour, 25% over 24 hours. Avoid overcorrection — cerebral autoregulation is shifted and rapid drop can cause ischemia.",
+          "plan": "IV nicardipine infusion (titratable). ICU admission. Continuous arterial line monitoring. CT head to r/o hemorrhagic stroke. MRI brain — posterior reversible encephalopathy syndrome (PRES) likely. Ophthalmology consult. Cardiology for hypertensive heart disease eval. Renal function/UA — hypertensive nephropathy assessment. Restart home medications. Social work for medication access barriers."
+        }
+      ],
+      "labs": [
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            { "test": "HbA1c", "value": "7.8", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "177", "unit": "mg/dL", "range": "—", "flag": "" }
+          "date": "03/15/2026",
+          "time": "14:45",
+          "status": "Final",
+          "orderedBy": "Dr. Attending",
+          "accession": "LAB-338847",
+          "collected": "03/15/2026 14:40",
+          "fasting": "Not fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "COMPREHENSIVE METABOLIC PANEL",
+              "results": [
+                { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
+                { "test": "Potassium", "value": "3.7", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
+                { "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
+                { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
+                { "test": "eGFR", "value": "38", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
+                { "test": "Glucose", "value": "108", "unit": "mg/dL", "range": "70-100", "flag": "H" },
+                { "test": "AST", "value": "34", "unit": "U/L", "range": "10-40", "flag": "" },
+                { "test": "ALT", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" }
+              ]
+            },
+            {
+              "name": "CBC WITH DIFFERENTIAL",
+              "results": [
+                { "test": "WBC", "value": "9.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
+                { "test": "Hemoglobin", "value": "13.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
+                { "test": "Platelets", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" },
+                { "test": "Schistocytes", "value": "Present", "unit": "", "range": "Absent", "flag": "H" }
+              ]
+            },
+            {
+              "name": "CARDIAC / ORGAN DAMAGE",
+              "results": [
+                { "test": "Troponin I", "value": "0.08", "unit": "ng/mL", "range": "<0.04", "flag": "H" },
+                { "test": "BNP", "value": "480", "unit": "pg/mL", "range": "<100", "flag": "H" },
+                { "test": "LDH", "value": "420", "unit": "U/L", "range": "140-280", "flag": "H" }
+              ]
+            },
+            {
+              "name": "URINALYSIS",
+              "results": [
+                { "test": "Protein", "value": "3+", "unit": "", "range": "Negative", "flag": "H" },
+                { "test": "RBC casts", "value": "Present", "unit": "", "range": "Absent", "flag": "H" },
+                { "test": "Glucose", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+              ]
+            }
           ]
-        },
+        }
+      ],
+      "imaging": [
         {
-          "name": "URINALYSIS WITH MICROSCOPY",
-          "results": [
-            { "test": "Protein", "value": "1+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Glucose", "value": "1+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Blood", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Urine Albumin/Creatinine Ratio", "value": "82", "unit": "mg/g", "range": "<30", "flag": "H" }
-          ]
-        },
+          "id": "img-1",
+          "type": "CT Head Without Contrast",
+          "date": "03/15/2026",
+          "time": "15:10",
+          "orderedBy": "Dr. Attending",
+          "findings": "No acute intracranial hemorrhage. No midline shift. No mass lesion. Subtle white matter hypodensities in bilateral occipital and parietal regions — may represent early PRES. Moderate cerebral atrophy for age. Periventricular white matter changes consistent with chronic hypertensive leukoencephalopathy.",
+          "impression": "No hemorrhagic stroke. Findings suspicious for early posterior reversible encephalopathy syndrome (PRES) — correlate with MRI. Chronic hypertensive changes.",
+          "critical": true
+        }
+      ]
+    },
+    "inpatient": {
+      "patient": {
+        "chiefComplaint": "Admitted to ICU — hypertensive emergency on nicardipine drip, BP now 178/104 after 2 hours",
+        "diagnosis": "Hypertensive Emergency — Hypertensive Encephalopathy, PRES"
+      },
+      "problems": [
+        { "id": "prob-1", "description": "Hypertensive emergency — responding to IV nicardipine", "status": "Active", "onset": "Acute", "icd10": "I16.1" },
+        { "id": "prob-2", "description": "Posterior Reversible Encephalopathy Syndrome (PRES) — confirmed on MRI", "status": "Active", "onset": "Acute", "icd10": "I67.83" },
+        { "id": "prob-3", "description": "AKI on CKD — creatinine 1.8, baseline ~1.2", "status": "Active", "onset": "Acute", "icd10": "N17.9" },
+        { "id": "prob-4", "description": "Hypertensive nephropathy — proteinuria 3+, RBC casts", "status": "Active", "onset": "Chronic", "icd10": "I12.9" },
+        { "id": "prob-5", "description": "Microangiopathic hemolytic anemia — schistocytes on smear, elevated LDH", "status": "Active", "onset": "Acute", "icd10": "D59.4" }
+      ],
+      "medications": [
+        { "id": "med-1", "name": "Nicardipine", "dose": "5 mg/hr → 10 mg/hr (titrating)", "route": "IV infusion", "frequency": "Continuous — titrate to MAP reduction 10-20%", "status": "Active", "prescriber": "Dr. ICU Attending" },
+        { "id": "med-2", "name": "Lisinopril", "dose": "20mg", "route": "PO", "frequency": "Daily — hold until PO tolerating", "status": "Hold", "prescriber": "Dr. ICU Attending" },
+        { "id": "med-3", "name": "Amlodipine", "dose": "10mg", "route": "PO", "frequency": "Daily", "status": "Restart", "prescriber": "Dr. ICU Attending" }
+      ],
+      "vitals": [
+        { "date": "03/15/2026", "time": "16:30", "bp": "178/104", "hr": "88", "rr": "16", "temp": "37.0°C", "spo2": "99%", "pain": "5/10" },
+        { "date": "03/15/2026", "time": "18:00", "bp": "162/98", "hr": "82", "rr": "14", "temp": "37.0°C", "spo2": "99%", "pain": "3/10" }
+      ],
+      "visits": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "245", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+          "id": "visit-2",
+          "type": "ICU Progress Note",
+          "date": "03/16/2026",
+          "provider": "Dr. ICU Attending",
+          "cc": "Day 2 — hypertensive emergency, PRES confirmed on MRI",
+          "hpi": "Patient is HD stable overnight on nicardipine infusion. BP trending down appropriately — targeting MAP 120-130 over 24 hours, then gradually to 160/100 over 48-72 hours. MRI brain from last evening confirms PRES — bilateral symmetrical FLAIR hyperintensities predominantly in parieto-occipital regions, no restricted diffusion (no infarction). Headache improving, vision improving, confusion resolving. Renal following — creatinine stable at 1.7.",
+          "assessment": "PRES from hypertensive emergency — responding to controlled BP reduction. Key: do NOT normalize BP rapidly — target 25% MAP reduction over 24 hours, then gradual normalization over days to weeks. Risk of ischemic stroke if BP drops too fast.",
+          "plan": "Continue nicardipine — wean as tolerated, transition to PO regimen. Restart amlodipine + lisinopril. Add hydralazine or labetalol if needed for PO transition. Nephrology consult for CKD/AKI. Ophthalmology f/u in 48h for retinopathy grading. Social work for medication assistance program enrollment. Discharge plan: 48h after stable on PO regimen."
+        }
+      ],
+      "labs": [
+        {
+          "date": "03/16/2026",
+          "time": "06:00",
+          "status": "Final",
+          "orderedBy": "Dr. ICU Attending",
+          "accession": "LAB-338848",
+          "collected": "03/16/2026 05:55",
+          "fasting": "Fasting",
+          "facility": "ReasonDx Medical Center",
+          "specimenType": "Blood",
+          "groups": [
+            {
+              "name": "COMPREHENSIVE METABOLIC PANEL",
+              "results": [
+                { "test": "Creatinine", "value": "1.7", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
+                { "test": "BUN", "value": "26", "unit": "mg/dL", "range": "7-20", "flag": "H" },
+                { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+              ]
+            },
+            {
+              "name": "TREND — ORGAN DAMAGE MARKERS",
+              "results": [
+                { "test": "Troponin I", "value": "0.06", "unit": "ng/mL", "range": "<0.04", "flag": "H" },
+                { "test": "LDH", "value": "360", "unit": "U/L", "range": "140-280", "flag": "H" },
+                { "test": "Haptoglobin", "value": "<10", "unit": "mg/dL", "range": "30-200", "flag": "L" }
+              ]
+            }
           ]
+        }
+      ],
+      "imaging": [
+        {
+          "id": "img-2",
+          "type": "MRI Brain With and Without Contrast",
+          "date": "03/15/2026",
+          "time": "19:30",
+          "orderedBy": "Dr. ICU Attending",
+          "findings": "Bilateral symmetrical FLAIR hyperintensities in parieto-occipital regions, extending into posterior frontal lobes. No restricted diffusion on DWI (no acute infarction). No enhancement. No hemorrhage. Pattern consistent with posterior reversible encephalopathy syndrome (PRES). Moderate periventricular white matter T2 hyperintensities consistent with chronic hypertensive leukoencephalopathy.",
+          "impression": "PRES — posterior reversible encephalopathy syndrome. Expected to resolve with BP control. No infarction. No hemorrhage.",
+          "critical": true
         }
       ]
     }
-  ],
-  "imaging": [
+  },
+  "references": [
     {
-      "date": "03/22/2022",
-      "study": "ECHOCARDIOGRAM — TRANSTHORACIC",
-      "accession": "IMG-2022-03221",
-      "status": "FINAL",
-      "orderedBy": "Dr. Carlos Mendez, MD",
-      "readBy": "Dr. Priya Shah, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "61F HTN, evaluate for LVH and cardiac function.",
-      "technique": "Standard 2D, M-mode, and Doppler echocardiography. Adequate acoustic windows.",
-      "findings": "Left ventricle: Concentric LVH (IVSd 1.3 cm, LVPWd 1.2 cm). LVEF 55-60% by Simpson biplane. No RWMA. LV cavity size normal.\\n\\nRight ventricle: Normal size and function. TAPSE 2.2 cm.\\n\\nAtria: Mild left atrial enlargement (LA volume index 35 mL/m²). RA normal.\\n\\nValves: Mild MR (degenerative). Mild TR. No AS or AR.\\n\\nAortic root: Normal. No dilation.\\n\\nPericardium: No effusion.\\n\\nDiastolic function: Grade 1 diastolic dysfunction (impaired relaxation pattern).",
-      "impression": "1. Concentric left ventricular hypertrophy — consistent with chronic hypertension.\\n2. Preserved LVEF (55-60%).\\n3. Mild left atrial enlargement.\\n4. Grade 1 diastolic dysfunction.\\n5. Mild mitral and tricuspid regurgitation.",
-      "dictated": "03/22/2022 14:40",
-      "verified": "03/22/2022 16:15"
+      "id": "StatPearls-HypertensiveEmergency",
+      "title": "Hypertensive Emergency",
+      "authors": "Peixoto AJ",
+      "journal": "StatPearls",
+      "year": 2024,
+      "doi": "",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK534284/",
+      "openAccess": true,
+      "validates": ["Hypertensive emergency definition", "MAP reduction targets", "IV agent selection", "End-organ damage assessment"]
     },
     {
-      "date": "01/15/2024",
-      "study": "CHEST XR PA AND LATERAL",
-      "accession": "IMG-2024-01152",
-      "status": "FINAL",
-      "orderedBy": "Dr. Carlos Mendez, MD",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "63F HTN, DM2, CKD. Annual screening.",
-      "technique": "PA and lateral views, upright.",
-      "findings": "Heart: Mildly enlarged cardiac silhouette (cardiothoracic ratio 0.55). No pericardial effusion.\\n\\nMediastinum: Calcified aortic knob consistent with atherosclerosis.\\n\\nLungs: Clear bilaterally. No consolidation, effusion, or pneumothorax.\\n\\nBones: Mild degenerative changes thoracic spine.",
-      "impression": "1. Mild cardiomegaly — known LVH.\\n2. Aortic atherosclerotic changes.\\n3. No acute cardiopulmonary process.",
-      "dictated": "01/15/2024 11:20",
-      "verified": "01/15/2024 14:00"
+      "id": "StatPearls-PRES",
+      "title": "Posterior Reversible Encephalopathy Syndrome (PRES)",
+      "authors": "Shankar J",
+      "journal": "StatPearls",
+      "year": 2024,
+      "doi": "",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK519513/",
+      "openAccess": true,
+      "validates": ["PRES diagnosis", "MRI findings", "BP management in PRES", "Reversibility"]
+    },
+    {
+      "id": "AHA-2017-HTN",
+      "title": "2017 ACC/AHA High Blood Pressure Guideline",
+      "authors": "Whelton PK, Carey RM, Aronow WS, et al.",
+      "journal": "Hypertension",
+      "year": 2018,
+      "doi": "10.1161/HYP.0000000000000065",
+      "url": "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000065",
+      "openAccess": true,
+      "validates": ["BP staging", "Hypertensive emergency vs urgency", "Treatment goals"]
     }
-  ],
-  "immunizations": [
-    {
-      "vaccine": "Influenza (Quadrivalent, High-Dose)",
-      "date": "10/15/2024",
-      "site": "Left deltoid IM",
-      "lot": "FL2024-HD118",
-      "mfr": "Sanofi Pasteur"
-    },
-    {
-      "vaccine": "COVID-19 (Pfizer 2024-25)",
-      "date": "11/01/2024",
-      "site": "Right deltoid IM",
-      "lot": "CV2024-558",
-      "mfr": "Pfizer"
-    },
-    {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
-      "date": "01/2023",
-      "site": "Left deltoid IM",
-      "lot": "PV23-102",
-      "mfr": "Pfizer"
-    },
-    {
-      "vaccine": "Shingrix (1/2)",
-      "date": "03/2022",
-      "site": "Left deltoid IM",
-      "lot": "SX22-340",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Shingrix (2/2)",
-      "date": "06/2022",
-      "site": "Left deltoid IM",
-      "lot": "SX22-501",
-      "mfr": "GSK"
-    },
-    {
-      "vaccine": "Tdap (Boostrix)",
-      "date": "2016",
-      "site": "Left deltoid IM",
-      "lot": "—",
-      "mfr": "GSK"
-    }
-  ],
-  "familyHistory": [
-    "Mother: HTN, stroke at age 70, deceased at 75",
-    "Father: HTN, T2DM, MI at age 65, deceased at 68",
-    "Sister: HTN, CKD, alive at 65",
-    "Brother: T2DM, alive at 58",
-    "Son: HTN, age 38"
-  ],
-  "socialHistory": [
-    ["Occupation", "Retired home health aide"],
-    ["Marital", "Widowed; lives with daughter"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal; walks around the block occasionally"],
-    ["Housing", "Lives with daughter in apartment; limited transportation"],
-    ["Safety", "Denies IPV; no firearms"],
-    ["Advance Directive", "Health care proxy: daughter Marie-Claire Desrosiers"]
-  ],
-  "meta": {
-    "caseId": "hypertensive-emergency",
-    "diagnosis": "Hypertensive Emergency with End-Organ Damage (Encephalopathy, CKD Progression)",
-    "acuity": 2,
-    "presentation": "Headache",
-    "category": "cardiovascular"
-  }
+  ]
 };
