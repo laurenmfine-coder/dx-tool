@@ -5,404 +5,457 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReasonDx — Clinical Reasoning Platform</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#060a10;--card:#0c1118;--border:rgba(255,255,255,.06);--text:#e0e0e0;--dim:rgba(255,255,255,.4);
-  --blue:#2874A6;--blue-bg:rgba(40,116,166,.08);--blue-bd:rgba(40,116,166,.2);
-  --red:#DC2626;--purple:#7C3AED;--green:#059669;--amber:#D97706;--teal:#0E7F6A;--pink:#EC4899;
+  --bg:#FAF9F7;
+  --cream:#F4F2EE;
+  --surface:#FFFFFF;
+  --text:#1C1C1A;
+  --dim:#706F6A;
+  --dim2:#B0AFA8;
+  --border:#E6E4DF;
+  --border-hi:#CCCAC3;
+  --blue:#2874A6;
+  --blue-dk:#1B4F72;
+  --blue-lt:rgba(40,116,166,.07);
+  --blue-mid:#5BA8D0;
+  --teal:#0D7A67;
+  --violet:#6B28A6;
+  --f-serif:'Playfair Display',Georgia,serif;
+  --f-sans:'DM Sans',-apple-system,sans-serif;
 }
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--f-sans);font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
 
-/* ═══ SESSION BAR ═══ */
-.session-bar{display:none;background:rgba(40,116,166,.07);border-bottom:1px solid rgba(40,116,166,.18);padding:8px 24px}
-.session-bar.active{display:block}
-.session-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--dim);flex-wrap:wrap}
-.s-pill{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:100px}
-.sp-blue{background:rgba(40,116,166,.2);color:#5BA8D0;border:1px solid rgba(40,116,166,.3)}
-.sp-teal{background:rgba(14,127,106,.2);color:#2EC4A6;border:1px solid rgba(14,127,106,.3)}
-.sp-purple{background:rgba(124,77,255,.2);color:#A58EFF;border:1px solid rgba(124,77,255,.3)}
-.s-topic{font-weight:700;color:#fff}
-.s-resume{color:var(--blue);cursor:pointer;font-weight:600;text-decoration:underline;margin-left:4px}
-.s-resume:hover{color:#5BA8D0}
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:90;background:rgba(250,249,247,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 48px;gap:32px}
+.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo-mark{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--f-serif);font-size:14px;font-weight:500;flex-shrink:0}
+.nav-logo-text{font-family:var(--f-serif);font-size:19px;font-weight:400;color:var(--text);letter-spacing:-.1px}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1}
+.nav-link{font-size:13px;font-weight:400;color:var(--dim);padding:8px 14px;border-radius:7px;transition:all .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text);background:var(--cream)}
+.nav-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.nav-btn-ghost{font-family:var(--f-sans);font-size:13px;font-weight:500;color:var(--dim);padding:8px 16px;border-radius:7px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap}
+.nav-btn-ghost:hover{border-color:var(--border-hi);color:var(--text)}
+.nav-btn-primary{font-family:var(--f-sans);font-size:13px;font-weight:600;color:#fff;padding:9px 20px;border-radius:7px;border:none;background:var(--blue);cursor:pointer;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-block}
+.nav-btn-primary:hover{background:var(--blue-dk)}
+/* Auth state */
+.nav-user-name{font-size:13px;font-weight:600;color:var(--text)}
+.nav-signout{font-family:var(--f-sans);font-size:12px;color:var(--dim2);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:5px;transition:all .15s}
+.nav-signout:hover{color:var(--dim)}
 
-/* ═══ HERO ═══ */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(40,116,166,.06) 0%,transparent 70%);pointer-events:none}
-.hero-badge{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);background:var(--blue-bg);padding:6px 16px;border-radius:100px;border:1px solid rgba(40,116,166,.15);margin-bottom:24px}
-.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(40px,6vw,72px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:12px}
-.hero h1 span{color:var(--blue);font-style:italic}
-.hero .tagline{font-size:clamp(15px,2vw,18px);color:var(--dim);max-width:560px;line-height:1.7;margin-bottom:40px}
+/* ── HERO ── */
+.hero{padding:96px 48px 80px;text-align:center;position:relative;overflow:hidden;background:var(--bg)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 60%,rgba(40,116,166,.05) 0%,transparent 70%);pointer-events:none}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.15em;color:var(--blue);margin-bottom:32px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:28px;height:1px;background:var(--blue);opacity:.4}
+
+.hero h1{font-family:var(--f-serif);font-size:clamp(44px,7vw,86px);font-weight:400;color:var(--text);line-height:1.06;letter-spacing:-1px;margin-bottom:24px;max-width:860px;margin-left:auto;margin-right:auto}
+.hero h1 em{font-style:italic;color:var(--blue)}
+
+.hero-tagline{font-size:clamp(15px,1.8vw,18px);font-weight:300;color:var(--dim);line-height:1.8;max-width:500px;margin:0 auto 52px}
 
 /* CTAs */
-.cta-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
-.cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;padding:16px 32px;border-radius:12px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:inherit}
-.cta-primary:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 12px 32px rgba(40,116,166,.25)}
-.cta-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);color:#fff;font-size:14px;font-weight:600;padding:14px 28px;border-radius:12px;text-decoration:none;border:1px solid var(--border);transition:all .2s;cursor:pointer;font-family:inherit}
-.cta-secondary:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);transform:translateY(-1px)}
+.cta-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:52px}
+.cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:15px;font-weight:600;font-family:var(--f-sans);padding:15px 34px;border-radius:8px;border:none;cursor:pointer;transition:all .2s}
+.cta-primary:hover{background:var(--blue-dk);transform:translateY(-1px);box-shadow:0 8px 28px rgba(40,116,166,.22)}
+.cta-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text);font-size:14px;font-weight:500;font-family:var(--f-sans);padding:14px 28px;border-radius:8px;border:1.5px solid var(--border-hi);cursor:pointer;transition:all .2s}
+.cta-secondary:hover{border-color:var(--blue);color:var(--blue)}
 
 /* Search */
-.search-wrap{width:100%;max-width:520px;position:relative;margin-bottom:8px}
-.search-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 20px 14px 44px;color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:all .2s}
-.search-input:focus{border-color:rgba(40,116,166,.4);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
-.search-input::placeholder{color:rgba(255,255,255,.25)}
-.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:16px;pointer-events:none}
-.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;display:none;z-index:20;max-height:320px;overflow-y:auto;box-shadow:0 16px 40px rgba(0,0,0,.5)}
-.search-results.active{display:block}
-.sr-item{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s;text-decoration:none;color:var(--text)}
+.search-container{max-width:560px;margin:0 auto;position:relative}
+.search-box{display:flex;background:var(--surface);border:1.5px solid var(--border-hi);border-radius:10px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:all .2s}
+.search-box:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
+.search-icon-wrap{display:flex;align-items:center;padding:0 16px;color:var(--dim2);font-size:15px;flex-shrink:0}
+.search-input{flex:1;background:transparent;border:none;outline:none;padding:15px 0;font-size:14px;font-family:var(--f-sans);color:var(--text)}
+.search-input::placeholder{color:var(--dim2)}
+.search-hint{font-size:11px;color:var(--dim2);margin-top:10px;letter-spacing:.02em}
+
+/* Search dropdown */
+.search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;display:none;z-index:40;max-height:300px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.search-dropdown.open{display:block}
+.sr-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);transition:background .1s}
 .sr-item:last-child{border-bottom:none}
-.sr-item:hover{background:rgba(255,255,255,.04)}
-.sr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sr-item:hover{background:var(--cream)}
+.sr-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .sr-name{font-weight:600;font-size:13px}
 .sr-desc{font-size:11px;color:var(--dim)}
-.sr-category{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-left:auto;white-space:nowrap}
-.hero-hint{font-size:11px;color:rgba(255,255,255,.2);margin-top:4px}
+.sr-cat{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-left:auto;white-space:nowrap}
 
-/* ═══ SECTION ═══ */
-.wrap{padding:0 24px 64px;max-width:1100px;margin:0 auto}
-.sec-hdr{text-align:center;margin-bottom:32px}
-.sec-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.2);margin-bottom:10px}
-.sec-hdr h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,3vw,32px);font-weight:400;color:#fff;margin-bottom:8px}
-.sec-hdr p{font-size:13px;color:var(--dim);max-width:600px;margin:0 auto}
+/* ── DIVIDER ── */
+.rule{height:1px;background:var(--border);max-width:1140px;margin:0 auto}
 
-/* ═══ THREE PILLAR CARDS ═══ */
-.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+/* ── SECTION WRAPPER ── */
+.section{padding:80px 48px;max-width:1140px;margin:0 auto}
+.sec-eyebrow{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--dim2);margin-bottom:14px}
+.sec-title{font-family:var(--f-serif);font-size:clamp(26px,3.5vw,40px);font-weight:400;color:var(--text);letter-spacing:-.4px;line-height:1.15;margin-bottom:10px}
+.sec-sub{font-size:14px;font-weight:300;color:var(--dim);line-height:1.75;max-width:500px}
 
-.p-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;position:relative;transition:all .2s}
-.p-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
-.p-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.1)}
-.p-card:hover::after{opacity:1}
-.p-card[data-c=blue]::after{background:linear-gradient(90deg,#2874A6,#5BA8D0)}
-.p-card[data-c=blue]:hover{box-shadow:0 12px 40px rgba(40,116,166,.14)}
-.p-card[data-c=teal]::after{background:linear-gradient(90deg,#0E7F6A,#2EC4A6)}
-.p-card[data-c=teal]:hover{box-shadow:0 12px 40px rgba(14,127,106,.14)}
-.p-card[data-c=purple]::after{background:linear-gradient(90deg,#7C3AED,#A58EFF)}
-.p-card[data-c=purple]:hover{box-shadow:0 12px 40px rgba(124,77,255,.14)}
+/* ── THREE PILLAR CARDS ── */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:52px;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;background:var(--border)}
 
-.p-body{padding:26px 24px 20px;flex:1}
-.p-icon-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.p-icon{font-size:28px}
-.p-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.lc-blue{color:#5BA8D0}
-.lc-teal{color:#2EC4A6}
-.lc-purple{color:#A58EFF}
-.p-name{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:8px}
-.p-desc{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:18px}
-.p-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-.p-list li{font-size:12px;color:var(--dim);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-.p-list li span{flex-shrink:0;margin-top:1px;font-size:11px}
-.arr-blue li span{color:#5BA8D0}
-.arr-teal li span{color:#2EC4A6}
-.arr-purple li span{color:#A58EFF}
-.p-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px}
-.p-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;padding:10px 20px;border-radius:10px;border:none;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;color:#fff}
-.pb-blue{background:#2874A6}.pb-blue:hover{background:#1B4F72}
-.pb-teal{background:#0E7F6A}.pb-teal:hover{background:#0A6055}
-.pb-purple{background:#7C3AED}.pb-purple:hover{background:#5B21B6}
-.p-stat{font-size:10px;font-weight:600;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.05em}
+.p-card{background:var(--surface);padding:40px 36px;display:flex;flex-direction:column;position:relative;cursor:pointer;transition:background .18s}
+.p-card:hover{background:var(--cream)}
+.p-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
+.p-card[data-c=blue]::before{background:var(--blue)}
+.p-card[data-c=teal]::before{background:var(--teal)}
+.p-card[data-c=violet]::before{background:var(--violet)}
+.p-card:hover::before{opacity:1}
 
-/* ═══ BRIDGE CONNECTOR ═══ */
-.bridge-strip{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 26px;display:flex;align-items:flex-start;gap:18px}
-.bs-icon{font-size:24px;flex-shrink:0;margin-top:3px}
-.bs-text h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px}
-.bs-text p{font-size:13px;color:var(--dim);line-height:1.65}
-.bs-flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
-.bs-node{font-size:12px;font-weight:600;padding:5px 12px;border-radius:8px;border:1px solid var(--border)}
-.bn-blue{background:rgba(40,116,166,.1);border-color:rgba(40,116,166,.25);color:#5BA8D0}
-.bn-teal{background:rgba(14,127,106,.1);border-color:rgba(14,127,106,.25);color:#2EC4A6}
-.bn-purple{background:rgba(124,77,255,.1);border-color:rgba(124,77,255,.25);color:#A58EFF}
-.bs-arrow{color:rgba(255,255,255,.2);font-size:14px}
-.bs-fp{font-size:11px;color:rgba(255,255,255,.18);margin-top:10px;display:flex;align-items:center;gap:6px}
-.bs-fp-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.p-icon{font-size:28px;margin-bottom:22px}
+.p-tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+.pt-blue{color:var(--blue)}
+.pt-teal{color:var(--teal)}
+.pt-violet{color:var(--violet)}
+.p-name{font-family:var(--f-serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:12px;letter-spacing:-.2px;line-height:1.2}
+.p-desc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7;margin-bottom:20px;flex:1}
+.p-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
+.p-list li{font-size:12px;color:var(--dim);display:flex;gap:8px;line-height:1.5}
+.p-list li::before{content:'—';color:var(--dim2);flex-shrink:0;margin-top:0}
+.p-cta{font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:gap .15s}
+.p-card:hover .p-cta{gap:10px}
+.p-cta-blue{color:var(--blue)}
+.p-cta-teal{color:var(--teal)}
+.p-cta-violet{color:var(--violet)}
+.p-stat{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-top:8px}
 
-/* ═══ SUPPORT GRID (dept cards) ═══ */
-.support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.dept-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:var(--text);transition:all .2s;position:relative;overflow:hidden}
-.dept-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;opacity:.6}
-.dept-card:hover{border-color:rgba(255,255,255,.1);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.dept-icon{font-size:24px;flex-shrink:0;margin-top:2px}
-.dept-info h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:3px}
-.dept-info p{font-size:12px;color:var(--dim);line-height:1.5}
-.dept-stat{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
-.dept-card[data-c=red]::before{background:#DC2626}
-.dept-card[data-c=amber]::before{background:#D97706}
-.dept-card[data-c=blue]::before{background:#2874A6}
-.dept-card[data-c=green]::before{background:#059669}
-.dept-card[data-c=purple]::before{background:#7C3AED}
-.dept-card[data-c=indigo]::before{background:#6366F1}
-.dept-card[data-c=pink]::before{background:#EC4899}
+/* ── BRIDGE STRIP ── */
+.bridge{background:var(--cream);border:1.5px solid var(--border);border-radius:14px;padding:36px 40px;display:flex;gap:24px;align-items:flex-start;margin-top:16px}
+.bridge-icon{font-size:22px;flex-shrink:0;margin-top:3px}
+.bridge-title{font-family:var(--f-serif);font-size:19px;font-weight:400;color:var(--text);margin-bottom:8px;letter-spacing:-.2px}
+.bridge-desc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7}
+.bridge-flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.bf-node{font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;border:1.5px solid}
+.bn-blue{border-color:rgba(40,116,166,.3);color:var(--blue);background:rgba(40,116,166,.05)}
+.bn-teal{border-color:rgba(13,122,103,.3);color:var(--teal);background:rgba(13,122,103,.05)}
+.bn-violet{border-color:rgba(107,40,166,.3);color:var(--violet);background:rgba(107,40,166,.05)}
+.bf-arrow{color:var(--dim2);font-size:13px}
+.bridge-fp{font-size:11px;color:var(--dim2);margin-top:12px;display:flex;align-items:center;gap:7px}
+.bridge-fp::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
 
-/* ═══ HOW IT WORKS ═══ */
-.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.how-step{text-align:center;padding:24px 16px;background:var(--card);border:1px solid var(--border);border-radius:14px}
-.how-num{font-size:32px;font-weight:700;color:var(--blue);opacity:.3;font-family:'DM Serif Display',serif}
-.how-title{font-size:15px;font-weight:700;color:#fff;margin:8px 0 6px}
-.how-desc{font-size:12px;color:var(--dim);line-height:1.6}
+/* ── SUPPORT GRID ── */
+.support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:48px}
+.s-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:24px 26px;display:flex;gap:16px;align-items:flex-start;text-decoration:none;color:var(--text);transition:all .18s;position:relative;overflow:hidden}
+.s-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;opacity:.7}
+.s-card[data-c=blue]::after{background:var(--blue)}
+.s-card[data-c=amber]::after{background:#C27D0E}
+.s-card[data-c=green]::after{background:#1A7A4A}
+.s-card[data-c=purple]::after{background:#6B28A6}
+.s-card:hover{border-color:var(--border-hi);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.s-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.s-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.s-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.6}
+.s-stat{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-top:6px}
 
-/* ═══ FOOTER ═══ */
-.footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);max-width:900px;margin:0 auto}
-.footer-stats{display:flex;justify-content:center;gap:32px;margin-bottom:20px;flex-wrap:wrap}
-.footer-stat .fs-num{font-size:24px;font-weight:700;color:var(--blue);font-family:'DM Serif Display',serif}
-.footer-stat .fs-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
-.footer-links{display:flex;gap:16px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
-.footer-links a{font-size:12px;color:var(--dim);text-decoration:none}
-.footer-links a:hover{color:#fff}
-.footer-copy{font-size:11px;color:rgba(255,255,255,.15)}
-.save-prompt{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--blue);background:var(--blue-bg);padding:8px 16px;border-radius:8px;border:1px solid rgba(40,116,166,.15);text-decoration:none;margin-bottom:16px;transition:all .15s}
-.save-prompt:hover{background:rgba(40,116,166,.15);border-color:rgba(40,116,166,.3)}
+/* ── HOW IT WORKS ── */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:52px}
+.how-num{font-family:var(--f-serif);font-size:60px;font-weight:400;color:var(--blue);opacity:.12;line-height:1;margin-bottom:14px}
+.how-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px}
+.how-desc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.75}
 
-/* ═══ MODAL ═══ */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+/* ── FOOTER ── */
+.footer-wrap{background:var(--cream);border-top:1px solid var(--border)}
+.footer{max-width:1140px;margin:0 auto;padding:56px 48px 40px}
+.footer-stats{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;padding-bottom:36px;border-bottom:1px solid var(--border)}
+.f-stat-num{font-family:var(--f-serif);font-size:36px;font-weight:400;color:var(--blue);line-height:1}
+.f-stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--dim2);margin-top:4px}
+.save-prompt{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--blue);background:rgba(40,116,166,.07);padding:11px 20px;border-radius:8px;text-decoration:none;margin-bottom:28px;transition:all .15s;border:1.5px solid rgba(40,116,166,.15)}
+.save-prompt:hover{background:rgba(40,116,166,.12)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:12px;color:var(--dim2);transition:color .15s}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{font-size:12px;color:var(--dim2)}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(28,28,26,.45);backdrop-filter:blur(5px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:18px;max-width:520px;width:100%;overflow:hidden;transform:translateY(12px);transition:transform .25s}
+.modal{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;max-width:500px;width:100%;overflow:hidden;transform:translateY(10px);transition:transform .25s;box-shadow:0 20px 60px rgba(0,0,0,.12)}
 .modal-overlay.open .modal{transform:translateY(0)}
-.modal-hdr{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.mh-icon{font-size:24px;margin-right:6px}
-.mh-title{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:#fff;margin-bottom:3px}
-.mh-sub{font-size:13px;color:var(--dim)}
-.modal-x{background:transparent;border:1px solid var(--border);color:var(--dim);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-family:inherit}
-.modal-x:hover{border-color:rgba(255,255,255,.15);color:#fff}
-.modal-body{padding:20px 24px 24px}
-.modal-q{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:14px}
-.lo-list{display:flex;flex-direction:column;gap:10px}
-.lo{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.02)}
-.lo:hover{border-color:rgba(255,255,255,.1);transform:translateX(3px)}
-.lo[data-p=coach]:hover{border-color:rgba(40,116,166,.4);background:rgba(40,116,166,.06)}
-.lo[data-p=reason]:hover{border-color:rgba(14,127,106,.4);background:rgba(14,127,106,.06)}
-.lo[data-p=mechanism]:hover{border-color:rgba(124,77,255,.4);background:rgba(124,77,255,.06)}
-.lo-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.lic-coach{background:rgba(40,116,166,.15)}
-.lic-reason{background:rgba(14,127,106,.15)}
-.lic-mechanism{background:rgba(124,77,255,.15)}
-.lo-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
-.lo-desc{font-size:12px;color:var(--dim);line-height:1.45}
-.lo-arr{margin-left:auto;color:rgba(255,255,255,.2);font-size:14px;flex-shrink:0}
+.modal-hdr{padding:26px 28px 20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.m-title{font-family:var(--f-serif);font-size:20px;font-weight:400;color:var(--text);margin-bottom:3px;letter-spacing:-.2px}
+.m-sub{font-size:13px;font-weight:300;color:var(--dim)}
+.modal-x{background:transparent;border:1.5px solid var(--border);color:var(--dim);width:30px;height:30px;border-radius:7px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-family:var(--f-sans)}
+.modal-x:hover{border-color:var(--border-hi);color:var(--text)}
+.modal-body{padding:20px 28px 28px}
+.m-q{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.13em;color:var(--dim2);margin-bottom:14px}
+.lo-list{display:flex;flex-direction:column;gap:9px}
+.lo{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:10px;border:1.5px solid var(--border);cursor:pointer;transition:all .2s;background:transparent}
+.lo:hover{background:var(--cream);border-color:var(--border-hi);transform:translateX(3px)}
+.lo[data-p=coach]:hover{border-color:rgba(40,116,166,.3)}
+.lo[data-p=reason]:hover{border-color:rgba(13,122,103,.3)}
+.lo[data-p=mechanism]:hover{border-color:rgba(107,40,166,.3)}
+.lo-ic{width:38px;height:38px;border-radius:9px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.lo-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.lo-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.45}
+.lo-arr{margin-left:auto;color:var(--dim2);font-size:14px;flex-shrink:0}
 
-/* ═══ FLOATING BRIDGE BANNER ═══ */
-.bb{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);z-index:150;background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.7);max-width:500px;width:calc(100vw - 48px);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+/* ── BRIDGE BANNER ── */
+.bb{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);z-index:150;background:var(--surface);border:1.5px solid var(--border-hi);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 40px rgba(0,0,0,.1);max-width:500px;width:calc(100vw - 48px);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .bb.visible{transform:translateX(-50%) translateY(0)}
-.bb-icon{font-size:20px;flex-shrink:0}
-.bb-text{flex:1}
-.bb-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
-.bb-desc{font-size:11px;color:var(--dim)}
+.bb-icon{font-size:18px;flex-shrink:0}
+.bb-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:1px}
+.bb-desc{font-size:11px;font-weight:300;color:var(--dim)}
 .bb-btns{display:flex;gap:8px;flex-shrink:0}
-.bb-go{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer;border:none;color:#fff;transition:all .15s;white-space:nowrap}
-.bb-no{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;padding:7px 12px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--dim);transition:all .15s}
-.bb-no:hover{border-color:rgba(255,255,255,.15);color:#fff}
+.bb-go{font-family:var(--f-sans);font-size:12px;font-weight:600;padding:7px 14px;border-radius:7px;cursor:pointer;border:none;color:#fff;transition:all .15s;white-space:nowrap}
+.bb-no{font-family:var(--f-sans);font-size:12px;padding:7px 12px;border-radius:7px;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--dim);transition:all .15s}
+.bb-no:hover{border-color:var(--border-hi);color:var(--text)}
 
-@media(max-width:900px){.pillar-grid,.how-steps{grid-template-columns:1fr}}
-@media(max-width:640px){.support-grid{grid-template-columns:1fr}.cta-group{flex-direction:column;align-items:center}.bridge-strip{flex-direction:column}}
+/* ── SESSION BAR ── */
+.session-bar{display:none;background:var(--blue);color:#fff;padding:8px 48px;font-size:12px;font-family:var(--f-sans)}
+.session-bar.active{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.s-pill{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:2px 10px;border-radius:100px;background:rgba(255,255,255,.2)}
+.s-topic{font-weight:600}
+.s-resume{text-decoration:underline;cursor:pointer;opacity:.85;margin-left:4px}
+.s-resume:hover{opacity:1}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{animation:fadeUp .5s ease both}
+.hero h1{animation:fadeUp .5s .1s ease both}
+.hero-tagline{animation:fadeUp .5s .2s ease both}
+.cta-group{animation:fadeUp .5s .3s ease both}
+.search-container{animation:fadeUp .5s .35s ease both}
+
+@media(max-width:960px){.pillar-grid{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr;gap:32px}}
+@media(max-width:720px){.nav{padding:0 20px}.hero{padding:64px 20px 56px}.section{padding:56px 20px}.support-grid{grid-template-columns:1fr}.bridge{flex-direction:column;padding:24px}.footer{padding:40px 20px 32px}.cta-group{flex-direction:column;align-items:center}.session-bar{padding:8px 20px}}
 </style>
 </head>
 <body>
 
 <!-- SESSION BAR -->
 <div class="session-bar" id="sBar">
-  <div class="session-bar-inner">
-    <span class="s-pill sp-blue" id="sPill">● CoachDx</span>
-    <span>Session in progress:</span>
-    <span class="s-topic" id="sTopic">Anaphylaxis</span>
-    <span class="s-resume" onclick="resumeSession()">↩ Resume →</span>
-  </div>
+  <span class="s-pill" id="sPill">CoachDx</span>
+  <span>Session in progress:</span>
+  <span class="s-topic" id="sTopic"></span>
+  <span class="s-resume" onclick="resumeSession()">↩ Resume →</span>
 </div>
 
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">Rx</div>
+    <span class="nav-logo-text">ReasonDx</span>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="case-browser.html">Case Library</a>
+    <a class="nav-link" href="crt-hub.html">Trainers</a>
+    <a class="nav-link" href="analytics-dashboard.html">My Progress</a>
+  </div>
+  <div class="nav-right" id="navAuth">
+    <!-- Populated by dx-user-bar.js -->
+    <a class="nav-btn-primary" href="auth/login.html">Sign In</a>
+  </div>
+</nav>
+
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">Clinical Reasoning Platform</div>
-  <h1>Welcome to <span>ReasonDx</span></h1>
-  <p class="tagline">Three integrated modes for clinical reasoning mastery — coaching, cases, and mechanisms. Move between them freely. The system tracks where you are and brings you back.</p>
+<section>
+  <div style="max-width:1140px;margin:0 auto">
+    <div class="hero">
+      <div class="hero-eyebrow">Clinical Reasoning Platform</div>
+      <h1>Think like a clinician.<br><em>Reason like an expert.</em></h1>
+      <p class="hero-tagline">Three integrated modes — coaching, cases, and mechanisms. Move between them freely. The system tracks where you are and brings you back.</p>
 
-  <div class="cta-group">
-    <button class="cta-primary" onclick="openModal(null)">▶ Start a Session</button>
-    <a class="cta-secondary" href="case-browser.html">📚 Browse Topics &amp; Cases</a>
-  </div>
+      <div class="cta-group">
+        <button class="cta-primary" onclick="openModal(null)">▶ Start a Session</button>
+        <a class="cta-secondary" href="case-browser.html">Browse Cases & Topics →</a>
+      </div>
 
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input class="search-input" id="search" type="text"
-      placeholder="Search a topic, case, or concept…"
-      autocomplete="off"
-      oninput="doSearch(this.value)"
-      onfocus="doSearch(this.value)"
-      onblur="setTimeout(()=>document.getElementById('sr').classList.remove('active'),200)">
-    <div class="search-results" id="sr"></div>
+      <div class="search-container">
+        <div style="position:relative">
+          <div class="search-box">
+            <div class="search-icon-wrap">🔍</div>
+            <input class="search-input" id="search" type="text"
+              placeholder="Search a topic, case, or concept…"
+              autocomplete="off"
+              oninput="doSearch(this.value)"
+              onfocus="doSearch(this.value)"
+              onblur="setTimeout(()=>document.getElementById('srDrop').classList.remove('open'),200)"
+              onkeydown="if(event.key==='Enter'&&this.value.trim())openModal(this.value.trim())">
+          </div>
+          <div class="search-dropdown" id="srDrop"></div>
+        </div>
+        <div class="search-hint">Try: "anaphylaxis", "HAE", "drug allergy", "chest pain", "SBAR"</div>
+      </div>
+    </div>
   </div>
-  <div class="hero-hint">Try: "anaphylaxis", "HAE", "drug allergy", "chest pain", "SBAR"</div>
 </section>
 
-<!-- THREE CORE PILLARS -->
-<div class="wrap" id="core">
-  <div class="sec-hdr">
-    <div class="sec-eyebrow">Three Modes. One Learning Arc.</div>
-    <h2>The Core of ReasonDx</h2>
-    <p>Each mode is complete on its own — and more powerful when connected. Jump between them freely; your progress travels with you.</p>
-  </div>
+<div class="rule"></div>
+
+<!-- THREE PILLARS -->
+<div class="section" id="core">
+  <div class="sec-eyebrow">Three Modes. One Learning Arc.</div>
+  <div class="sec-title">The Core of ReasonDx</div>
+  <p class="sec-sub">Each mode is complete on its own — and more powerful when connected. Jump between them freely.</p>
 
   <div class="pillar-grid">
     <!-- CoachDx -->
-    <div class="p-card" data-c="blue">
-      <div class="p-body">
-        <div class="p-icon-row"><span class="p-icon">🧑‍⚕️</span><span class="p-label lc-blue">AI Coaching</span></div>
-        <div class="p-name">CoachDx</div>
-        <p class="p-desc">Your AI attending. CoachDx doesn't give you answers — it asks the questions that force you to find them, adapting to your gaps in real time.</p>
-        <ul class="p-list arr-blue">
-          <li><span>→</span>Socratic coaching on any topic or concept</li>
-          <li><span>→</span>Free-text case or question discussion</li>
-          <li><span>→</span>Knowledge gap targeting &amp; follow-up</li>
-          <li><span>→</span>DDx challenge from any chief complaint</li>
-        </ul>
-      </div>
-      <div class="p-foot">
-        <a class="p-btn pb-blue" href="CoachDx/index.html">Start Coaching →</a>
-        <span class="p-stat">200+ topics</span>
-      </div>
+    <div class="p-card" data-c="blue" onclick="openModal(null,'coach')">
+      <div class="p-icon">🧑‍⚕️</div>
+      <div class="p-tag pt-blue">AI Coaching</div>
+      <div class="p-name">CoachDx</div>
+      <p class="p-desc">Your AI attending. CoachDx doesn't give you answers — it asks the questions that force you to find them, adapting in real time to your reasoning gaps.</p>
+      <ul class="p-list">
+        <li>Socratic coaching on any topic or concept</li>
+        <li>Free-text case or question discussion</li>
+        <li>Knowledge gap targeting & follow-up</li>
+        <li>DDx challenge from any chief complaint</li>
+      </ul>
+      <div class="p-cta p-cta-blue">Start Coaching <span>→</span></div>
+      <div class="p-stat">200+ topics</div>
     </div>
 
     <!-- ReasonDx Cases -->
-    <div class="p-card" data-c="teal">
-      <div class="p-body">
-        <div class="p-icon-row"><span class="p-icon">🩺</span><span class="p-label lc-teal">Structured Cases</span></div>
-        <div class="p-name">ReasonDx Cases</div>
-        <p class="p-desc">Structured patient scenarios with branching reasoning pathways. Work history, exam, workup, and management — see where your thinking diverges from expert reasoning.</p>
-        <ul class="p-list arr-teal">
-          <li><span>→</span>Branching case narratives with checkpoints</li>
-          <li><span>→</span>Full EMR-style simulation environment</li>
-          <li><span>→</span>Reasoning pathway fingerprint tracking</li>
-          <li><span>→</span>Post-case debrief &amp; CoachDx reflection</li>
-        </ul>
-      </div>
-      <div class="p-foot">
-        <a class="p-btn pb-teal" href="case-browser.html">Open a Case →</a>
-        <span class="p-stat">80+ cases</span>
-      </div>
+    <div class="p-card" data-c="teal" onclick="openModal(null,'reason')">
+      <div class="p-icon">🩺</div>
+      <div class="p-tag pt-teal">Structured Cases</div>
+      <div class="p-name">ReasonDx Cases</div>
+      <p class="p-desc">Structured patient scenarios with branching reasoning pathways. Work history, exam, workup, and management — see where your thinking diverges from expert reasoning.</p>
+      <ul class="p-list">
+        <li>Branching case narratives with checkpoints</li>
+        <li>Full EMR-style simulation environment</li>
+        <li>Reasoning pathway fingerprint tracking</li>
+        <li>Post-case debrief & reflection</li>
+      </ul>
+      <div class="p-cta p-cta-teal">Open a Case <span>→</span></div>
+      <div class="p-stat">80+ cases</div>
     </div>
 
     <!-- MechanismDx -->
-    <div class="p-card" data-c="purple">
-      <div class="p-body">
-        <div class="p-icon-row"><span class="p-icon">🔬</span><span class="p-label lc-purple">Pathophysiology</span></div>
-        <div class="p-name">MechanismDx</div>
-        <p class="p-desc">Visual pathophysiology modules that connect basic science to bedside reasoning. When you understand the mechanism, the clinical picture stops being memorization.</p>
-        <ul class="p-list arr-purple">
-          <li><span>→</span>Interactive mechanism cards with spaced rep</li>
-          <li><span>→</span>Embryology &amp; development module suites</li>
-          <li><span>→</span>Guideline-anchored, open-access content</li>
-          <li><span>→</span>Return directly to your case or session</li>
-        </ul>
-      </div>
-      <div class="p-foot">
-        <a class="p-btn pb-purple" href="mechanism/anaphylaxis-module.html">Explore Mechanisms →</a>
-        <span class="p-stat">36 modules</span>
-      </div>
+    <div class="p-card" data-c="violet" onclick="openModal(null,'mechanism')">
+      <div class="p-icon">🔬</div>
+      <div class="p-tag pt-violet">Pathophysiology</div>
+      <div class="p-name">MechanismDx</div>
+      <p class="p-desc">Visual pathophysiology modules that connect basic science to bedside reasoning. When you understand the mechanism, the clinical picture stops being memorization.</p>
+      <ul class="p-list">
+        <li>Interactive mechanism cards with spaced rep</li>
+        <li>Embryology & development module suites</li>
+        <li>Guideline-anchored, open-access content</li>
+        <li>Return directly to your case or session</li>
+      </ul>
+      <div class="p-cta p-cta-violet">Explore Mechanisms <span>→</span></div>
+      <div class="p-stat">36 modules</div>
     </div>
   </div>
 
-  <!-- How they connect -->
-  <div class="bridge-strip">
-    <div class="bs-icon">🔁</div>
-    <div class="bs-text">
-      <h3>Move between modes without losing your place</h3>
-      <p>Struggling with a mechanism mid-coaching session? Jump to MechanismDx — your question stays open. Hit a pathophys wall mid-case? Same thing. Every transition is logged as a gap and surfaced again through spaced repetition.</p>
-      <div class="bs-flow">
-        <span class="bs-node bn-blue">🧑‍⚕️ CoachDx</span>
-        <span class="bs-arrow">⇄</span>
-        <span class="bs-node bn-purple">🔬 MechanismDx</span>
-        <span class="bs-arrow">⇄</span>
-        <span class="bs-node bn-teal">🩺 Cases</span>
+  <!-- Bridge connector -->
+  <div class="bridge">
+    <div class="bridge-icon">🔁</div>
+    <div>
+      <div class="bridge-title">Move between modes without losing your place</div>
+      <p class="bridge-desc">Struggling with a mechanism mid-coaching session? Jump to MechanismDx — your question stays open. Hit a pathophys wall mid-case? Same thing. Every transition is logged as a gap and surfaced through spaced repetition.</p>
+      <div class="bridge-flow">
+        <span class="bf-node bn-blue">🧑‍⚕️ CoachDx</span>
+        <span class="bf-arrow">⇄</span>
+        <span class="bf-node bn-violet">🔬 MechanismDx</span>
+        <span class="bf-arrow">⇄</span>
+        <span class="bf-node bn-teal">🩺 Cases</span>
       </div>
-      <div class="bs-fp"><div class="bs-fp-dot"></div>Every gap and bridge is logged to your Reasoning Fingerprint for spaced repetition review</div>
+      <div class="bridge-fp">Every gap and bridge is logged to your Reasoning Fingerprint for spaced repetition review</div>
     </div>
   </div>
 </div>
+
+<div class="rule"></div>
 
 <!-- SUPPORTING COMPONENTS -->
-<div class="wrap" id="components">
-  <div class="sec-hdr">
-    <div class="sec-eyebrow">Also in ReasonDx</div>
-    <h2>Supporting Components</h2>
-    <p>These components power the cases and coaching — access them directly or reach them naturally through a session. ED Simulation is available through the Case &amp; Topic Library.</p>
-  </div>
+<div class="section">
+  <div class="sec-eyebrow">Also in ReasonDx</div>
+  <div class="sec-title">Supporting Components</div>
+  <p class="sec-sub">These power the cases and coaching — access them directly or reach them naturally through a session.</p>
 
   <div class="support-grid">
-    <a class="dept-card" data-c="blue" href="case-browser.html">
-      <span class="dept-icon">📚</span>
-      <div class="dept-info">
-        <h3>Case &amp; Topic Library</h3>
-        <p>Browse all 325+ cases by specialty and clinical setting. Pick a topic and launch directly into CoachDx, a ReasonDx case, or MechanismDx from one place.</p>
-        <div class="dept-stat">325+ cases · 29 specialties · ED, Floor, Clinic, ICU &amp; more</div>
+    <a class="s-card" data-c="blue" href="case-browser.html">
+      <div class="s-icon">📚</div>
+      <div>
+        <div class="s-name">Case & Topic Library</div>
+        <p class="s-desc">Browse all 325+ cases by specialty and clinical setting. Pick a topic and launch into any of the three modes from one place.</p>
+        <div class="s-stat">325+ cases · 29 specialties · ED, Floor, Clinic, ICU</div>
       </div>
     </a>
-    <a class="dept-card" data-c="amber" href="crt-hub.html">
-      <span class="dept-icon">🧩</span>
-      <div class="dept-info">
-        <h3>Case Trainers &amp; Scenarios</h3>
-        <p>The structured reasoning scaffolds that power ReasonDx cases and CoachDx sessions — SBAR handoffs, consultant callbacks, ED transitions, and diagnostic frameworks.</p>
-        <div class="dept-stat">79 trainers · SBAR · Callbacks · Diagnostic frameworks</div>
+    <a class="s-card" data-c="amber" href="crt-hub.html">
+      <div class="s-icon">🧩</div>
+      <div>
+        <div class="s-name">Case Trainers & Scenarios</div>
+        <p class="s-desc">The structured reasoning scaffolds that power ReasonDx cases — SBAR handoffs, consultant callbacks, and diagnostic frameworks.</p>
+        <div class="s-stat">79 trainers · SBAR · Callbacks · Frameworks</div>
       </div>
     </a>
-    <a class="dept-card" data-c="green" href="simroomdx.html">
-      <span class="dept-icon">🎤</span>
-      <div class="dept-info">
-        <h3>Morning Rounds — SimRoomDx</h3>
-        <p>Present your patient to the attending. AI characters ask questions and push back on your reasoning in real time.</p>
-        <div class="dept-stat">23 scenarios · 6 AI characters</div>
+    <a class="s-card" data-c="green" href="simroomdx.html">
+      <div class="s-icon">🎤</div>
+      <div>
+        <div class="s-name">Morning Rounds — SimRoomDx</div>
+        <p class="s-desc">Present your patient to the attending. AI characters ask questions and push back on your reasoning in real time.</p>
+        <div class="s-stat">23 scenarios · 6 AI characters</div>
       </div>
     </a>
-    <a class="dept-card" data-c="purple" href="night-float.html">
-      <span class="dept-icon">🌙</span>
-      <div class="dept-info">
-        <h3>Night Float</h3>
-        <p>Cross-cover overnight call. Manage a patient list, respond to nurse pages, handle decompensations, and practice I-PASS handoff.</p>
-        <div class="dept-stat">Randomized or topic-based lists</div>
+    <a class="s-card" data-c="purple" href="night-float.html">
+      <div class="s-icon">🌙</div>
+      <div>
+        <div class="s-name">Night Float</div>
+        <p class="s-desc">Cross-cover overnight call. Manage a patient list, respond to nurse pages, handle decompensations, and practice I-PASS handoff.</p>
+        <div class="s-stat">Randomized or topic-based lists</div>
       </div>
     </a>
   </div>
 </div>
 
-<!-- HOW A SESSION FLOWS -->
-<div class="wrap">
-  <div class="sec-hdr">
-    <h2>How a Session Works</h2>
-    <p>Start anywhere. The system meets you there.</p>
+<div class="rule"></div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <div style="text-align:center">
+    <div class="sec-eyebrow">The Learning Arc</div>
+    <div class="sec-title" style="margin:0 auto">How a Session Works</div>
+    <p class="sec-sub" style="margin:10px auto 0;text-align:center">Start anywhere. The system meets you there.</p>
   </div>
-  <div class="how-steps">
-    <div class="how-step">
+  <div class="how-grid">
+    <div>
       <div class="how-num">1</div>
-      <div class="how-title">Pick a topic or let the system pick for you</div>
-      <div class="how-desc">Search for a diagnosis, browse the Case Browser, or ask CoachDx to target your weakest area. No rigid curriculum — you lead.</div>
+      <div class="how-title">Pick a topic or let the system choose</div>
+      <p class="how-desc">Search for a diagnosis, browse the Case Library, or ask CoachDx to target your weakest area. No rigid curriculum — you lead.</p>
     </div>
-    <div class="how-step">
+    <div>
       <div class="how-num">2</div>
       <div class="how-title">Work through it in one or all three modes</div>
-      <div class="how-desc">Coach → Case → Mechanism in any order. Hit a gap and the system surfaces a bridge. Your session context travels with you.</div>
+      <p class="how-desc">Coach → Case → Mechanism in any order. Hit a gap and the system surfaces a bridge. Your session context travels with you.</p>
     </div>
-    <div class="how-step">
+    <div>
       <div class="how-num">3</div>
       <div class="how-title">Your gaps become your next session</div>
-      <div class="how-desc">Every bridge taken, every hesitation logged — built into your Reasoning Fingerprint and returned through spaced repetition until mastered.</div>
+      <p class="how-desc">Every bridge taken, every hesitation logged — built into your Reasoning Fingerprint and returned through spaced repetition until mastered.</p>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-stats">
-    <div class="footer-stat"><div class="fs-num">325+</div><div class="fs-label">Clinical Cases</div></div>
-    <div class="footer-stat"><div class="fs-num">36</div><div class="fs-label">Mechanism Modules</div></div>
-    <div class="footer-stat"><div class="fs-num">200+</div><div class="fs-label">Coaching Topics</div></div>
-    <div class="footer-stat"><div class="fs-num">29</div><div class="fs-label">Specialties</div></div>
+<div class="footer-wrap">
+  <div class="footer">
+    <div class="footer-stats">
+      <div><div class="f-stat-num">325+</div><div class="f-stat-label">Clinical Cases</div></div>
+      <div><div class="f-stat-num">36</div><div class="f-stat-label">Mechanism Modules</div></div>
+      <div><div class="f-stat-num">200+</div><div class="f-stat-label">Coaching Topics</div></div>
+      <div><div class="f-stat-num">29</div><div class="f-stat-label">Specialties</div></div>
+    </div>
+    <a class="save-prompt" href="auth/login.html">💾 Sign in to save your Reasoning Fingerprint</a>
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="auth/login.html">Sign In</a>
+        <a href="CoachDx/index.html">CoachDx</a>
+        <a href="case-browser.html">Case Library</a>
+        <a href="crt-hub.html">Case Trainers</a>
+        <a href="analytics-dashboard.html">My Progress</a>
+      </div>
+      <div class="footer-copy">© 2025 ReasonDx · Clinical reasoning education · All content open-access</div>
+    </div>
   </div>
-  <a class="save-prompt" href="auth/register.html">💾 Create a free account to save your Reasoning Fingerprint</a>
-  <div class="footer-links">
-    <a href="auth/register.html">Sign Up</a>
-    <a href="CoachDx/index.html">CoachDx</a>
-    <a href="case-browser.html">Case &amp; Topic Library</a>
-    <a href="crt-hub.html">Case Trainers &amp; Scenarios</a>
-    <a href="tools/index.html">Tools</a>
-  </div>
-  <div class="footer-copy">© 2025 ReasonDx · Clinical reasoning education · All content open-access</div>
-</footer>
+</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeOut(event)">
@@ -410,37 +463,37 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
     <div class="modal-hdr">
       <div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span class="mh-icon" id="mIcon">▶</span>
-          <div class="mh-title" id="mTitle">Start a Session</div>
+          <span id="mIcon" style="font-size:20px">▶</span>
+          <div class="m-title" id="mTitle">Start a Session</div>
         </div>
-        <div class="mh-sub" id="mSub">Choose how you want to work on this topic</div>
+        <div class="m-sub" id="mSub">Choose how you want to work on this topic</div>
       </div>
       <button class="modal-x" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-q">How do you want to learn this?</div>
+      <div class="m-q">How do you want to learn this?</div>
       <div class="lo-list">
         <div class="lo" data-p="coach" onclick="launch('coach')">
-          <div class="lo-ic lic-coach">🧑‍⚕️</div>
+          <div class="lo-ic">🧑‍⚕️</div>
           <div>
             <div class="lo-name">CoachDx — Socratic Coaching</div>
-            <div class="lo-desc">Your AI attending asks the questions. Best for applying knowledge and testing your reasoning under pressure.</div>
+            <div class="lo-desc">Your AI attending asks the questions. Best for applying knowledge and testing your reasoning.</div>
           </div>
           <div class="lo-arr">→</div>
         </div>
         <div class="lo" data-p="reason" onclick="launch('reason')">
-          <div class="lo-ic lic-reason">🩺</div>
+          <div class="lo-ic">🩺</div>
           <div>
             <div class="lo-name">ReasonDx — Work a Case</div>
-            <div class="lo-desc">Structured patient scenario with diagnostic checkpoints. See how your reasoning compares to expert pathways.</div>
+            <div class="lo-desc">Structured patient scenario with diagnostic checkpoints and expert pathway comparison.</div>
           </div>
           <div class="lo-arr">→</div>
         </div>
         <div class="lo" data-p="mechanism" onclick="launch('mechanism')">
-          <div class="lo-ic lic-mechanism">🔬</div>
+          <div class="lo-ic">🔬</div>
           <div>
             <div class="lo-name">MechanismDx — Learn the Science First</div>
-            <div class="lo-desc">Visual pathophysiology. Build the mechanistic foundation, then return to apply it in coaching or a case.</div>
+            <div class="lo-desc">Visual pathophysiology. Build the mechanistic foundation, then return to apply it.</div>
           </div>
           <div class="lo-arr">→</div>
         </div>
@@ -452,7 +505,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
 <!-- BRIDGE BANNER -->
 <div class="bb" id="bb">
   <div class="bb-icon" id="bbIcon">🔬</div>
-  <div class="bb-text">
+  <div style="flex:1">
     <div class="bb-title" id="bbTitle">Need to review the mechanism?</div>
     <div class="bb-desc" id="bbDesc">Jump to MechanismDx — your session is saved here when you return.</div>
   </div>
@@ -462,14 +515,19 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
   </div>
 </div>
 
+<!-- Supabase + user bar -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/rdx-supabase.js"></script>
+<script src="js/dx-user-bar.js"></script>
+
 <script>
-/* ─── SEARCH ─── */
-const IDX = [
+/* ── SEARCH ── */
+const IDX=[
   {n:'Anaphylaxis',d:'IgE-mediated systemic reaction — coaching, cases, mechanisms',c:'A/I',col:'#DC2626',u:'CoachDx/mentor-chat.html?topic=anaphylaxis'},
   {n:'Asthma',d:'Airway hyperresponsiveness, biologics, asthma-COPD overlap',c:'A/I',col:'#2874A6',u:'mechanism/asthma-module.html'},
   {n:'Urticaria',d:'Chronic spontaneous, inducible, urticarial vasculitis',c:'A/I',col:'#2874A6',u:'mechanism/urticaria-module.html'},
   {n:'Drug Allergy',d:'IgE vs non-IgE, penicillin, vancomycin RMS',c:'A/I',col:'#7C3AED',u:'mechanism/drug-allergy-module.html'},
-  {n:'Food Allergy',d:'IgE-mediated, FPIES, OIT reactions, alpha-gal syndrome',c:'A/I',col:'#7C3AED',u:'mechanism/food-allergy-module.html'},
+  {n:'Food Allergy',d:'IgE-mediated, FPIES, OIT reactions, alpha-gal',c:'A/I',col:'#7C3AED',u:'mechanism/food-allergy-module.html'},
   {n:'Angioedema / HAE',d:'Hereditary angioedema, ACE-inhibitor, allergic',c:'A/I',col:'#7C3AED',u:'case-browser.html'},
   {n:'Contact Dermatitis',d:'Type IV delayed hypersensitivity, occupational',c:'A/I',col:'#059669',u:'mechanism/atopic-derm-module.html'},
   {n:'Atopic Dermatitis',d:'Eczema, dupilumab, eczema herpeticum',c:'A/I',col:'#059669',u:'mechanism/atopic-derm-module.html'},
@@ -480,58 +538,49 @@ const IDX = [
   {n:'SCID',d:'Severe combined immunodeficiency, ADA-SCID',c:'Immunology',col:'#7C3AED',u:'case-browser.html'},
   {n:'SJS / TEN',d:'Severe cutaneous drug reactions, DRESS syndrome',c:'A/I',col:'#DC2626',u:'case-browser.html'},
   {n:'Hypersensitivity Pneumonitis',d:'Bird fancier lung, organic antigen exposure',c:'A/I',col:'#2874A6',u:'mechanism/eosinophilia-hp-module.html'},
-  {n:'STEMI',d:'ST-elevation MI, door-to-balloon, cath lab activation',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'STEMI',d:'ST-elevation MI, door-to-balloon, cath lab',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
   {n:'Pulmonary Embolism',d:'Submassive PE, PESI, thrombolytics',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
   {n:'Stroke',d:'tPA window, NIHSS, LVO, thrombectomy',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
   {n:'DKA',d:'Diabetic ketoacidosis, HHS, insulin management',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
   {n:'Septic Shock',d:'Urosepsis, sepsis bundle, vasopressors',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'Aortic Dissection',d:'Type A vs B, CTA, surgical vs medical management',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'Peritonsillar Abscess',d:'Quinsy, I&D, needle aspiration technique',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'SBAR Handoff',d:'Structured communication, transition of care',c:'CRT',col:'#D97706',u:'crt-hub.html'},
-  {n:'Consultant Callback',d:'Calling cardiology, neurology, surgery',c:'CRT',col:'#D97706',u:'crt-hub.html'},
-  {n:'Case & Topic Library',d:'Browse all 325+ cases and modules by specialty and setting',c:'Library',col:'#2874A6',u:'case-browser.html'},
-  {n:'Case Trainers & Scenarios',d:'SBAR, callbacks, diagnostic frameworks — the scaffolds inside the cases',c:'Library',col:'#D97706',u:'crt-hub.html'},
+  {n:'Case & Topic Library',d:'Browse all 325+ cases and modules by specialty',c:'Library',col:'#2874A6',u:'case-browser.html'},
+  {n:'Case Trainers & Scenarios',d:'SBAR, callbacks, diagnostic frameworks',c:'Library',col:'#D97706',u:'crt-hub.html'},
   {n:'CoachDx',d:'AI Socratic coaching and reasoning sessions',c:'Mode',col:'#2874A6',u:'CoachDx/index.html'},
   {n:'MechanismDx',d:'Visual pathophysiology modules',c:'Mode',col:'#7C3AED',u:'mechanism/anaphylaxis-module.html'},
-  {n:'ECG Practice',d:'12-lead ECG interpretation trainer',c:'Tool',col:'#6366F1',u:'tools/index.html'},
-  {n:'ABG Analyzer',d:'Arterial blood gas interpretation',c:'Tool',col:'#6366F1',u:'tools/index.html'},
-  {n:'Clinical Calculators',d:'GCS, Wells, CURB-65, CHADS-VASc, PESI',c:'Tool',col:'#6366F1',u:'tools/index.html'},
-  {n:'Clinical Reasoning',d:'Frameworks, biases, diagnostic process',c:'Topic',col:'#2874A6',u:'case-browser.html'},
-  {n:'DDx Builder',d:'Differential diagnosis generator',c:'Tool',col:'#6366F1',u:'tools/index.html'},
+  {n:'SBAR Handoff',d:'Structured communication, transition of care',c:'CRT',col:'#D97706',u:'crt-hub.html'},
+  {n:'Clinical Calculators',d:'GCS, Wells, CURB-65, CHADS-VASc',c:'Tool',col:'#6366F1',u:'tools/index.html'},
 ];
 
 function doSearch(val){
-  const el=document.getElementById('sr');
+  const el=document.getElementById('srDrop');
   val=val.trim().toLowerCase();
-  if(!val||val.length<2){el.classList.remove('active');return;}
-  const hits=IDX.filter(x=>x.n.toLowerCase().includes(val)||x.d.toLowerCase().includes(val)||x.c.toLowerCase().includes(val)).slice(0,8);
-  if(!hits.length){el.innerHTML='<div style="padding:16px;font-size:13px;color:rgba(255,255,255,.3)">No results. Try a different term.</div>';el.classList.add('active');return;}
-  el.innerHTML=hits.map(m=>`<a class="sr-item" href="${m.u}"><div class="sr-dot" style="background:${m.col}"></div><div><div class="sr-name">${hl(m.n,val)}</div><div class="sr-desc">${m.d}</div></div><div class="sr-category">${m.c}</div></a>`).join('');
-  el.classList.add('active');
+  if(!val||val.length<2){el.classList.remove('open');return;}
+  const hits=IDX.filter(x=>x.n.toLowerCase().includes(val)||x.d.toLowerCase().includes(val)||x.c.toLowerCase().includes(val)).slice(0,7);
+  if(!hits.length){el.classList.remove('open');return;}
+  el.innerHTML=hits.map(m=>`<a class="sr-item" href="${m.u}"><div class="sr-dot" style="background:${m.col}"></div><div><div class="sr-name">${hl(m.n,val)}</div><div class="sr-desc">${m.d}</div></div><div class="sr-cat">${m.c}</div></a>`).join('');
+  el.classList.add('open');
 }
+function hl(t,q){const i=t.toLowerCase().indexOf(q);if(i===-1)return t;return t.slice(0,i)+'<strong>'+t.slice(i,i+q.length)+'</strong>'+t.slice(i+q.length);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('srDrop').classList.remove('open');closeModal();}});
 
-function hl(t,q){const i=t.toLowerCase().indexOf(q);if(i===-1)return t;return t.slice(0,i)+'<strong style="color:#fff">'+t.slice(i,i+q.length)+'</strong>'+t.slice(i+q.length);}
-
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sr').classList.remove('active');closeModal();}});
-
-/* ─── SESSION ─── */
+/* ── SESSION ── */
 let sess=null;
 function setSBar(topic,pillar){
   const bar=document.getElementById('sBar');
-  document.getElementById('sPill').textContent={coach:'● CoachDx',reason:'● ReasonDx Cases',mechanism:'● MechanismDx'}[pillar]||'● Session';
-  document.getElementById('sPill').className='s-pill '+({coach:'sp-blue',reason:'sp-teal',mechanism:'sp-purple'}[pillar]||'sp-blue');
+  document.getElementById('sPill').textContent={coach:'CoachDx',reason:'ReasonDx Cases',mechanism:'MechanismDx'}[pillar]||'Session';
   document.getElementById('sTopic').textContent=topic;
   bar.classList.add('active');
 }
-function resumeSession(){if(sess)alert('Resuming '+sess.pillar+' session: '+sess.topic);}
+function resumeSession(){if(sess)window.location.href=sess.url||'#';}
 
-/* ─── MODAL ─── */
+/* ── MODAL ── */
 let mTopic=null;
-function openModal(t){
+function openModal(t,forcePillar){
   mTopic=t;
   document.getElementById('mTitle').textContent=t||'Start a Session';
   document.getElementById('mIcon').textContent=t?'🩺':'▶';
   document.getElementById('mSub').textContent=t?'Choose how you want to work on '+t:'Pick a mode to begin';
+  if(forcePillar){launch(forcePillar);return;}
   document.getElementById('modal').classList.add('open');
 }
 function closeModal(){document.getElementById('modal').classList.remove('open');}
@@ -548,18 +597,14 @@ function launch(pillar){
     reason:'case-browser.html?topic='+encodeURIComponent(topic),
     mechanism:'mechanism/anaphylaxis-module.html'
   };
-  // Bridge demo
-  const bmap={coach:'mechanism',reason:'mechanism',mechanism:'reason'};
-  setTimeout(()=>showBridge(bmap[pillar],topic),700);
-  alert('→ Launching '+pillar+' for: '+topic+'\n\nURL: '+urls[pillar]+'\n\n(Uncomment window.location.href to activate navigation.)');
-  // window.location.href = urls[pillar];
+  window.location.href=urls[pillar];
 }
 
-/* ─── BRIDGE ─── */
+/* ── BRIDGE ── */
 function showBridge(target,topic){
   const cfg={
-    mechanism:{icon:'🔬',title:'Need to review the mechanism behind '+topic+'?',desc:'Jump to MechanismDx — your session is saved here when you return.',bg:'#7C3AED'},
-    reason:{icon:'🩺',title:'Ready to apply '+topic+' to a patient case?',desc:'Launch a ReasonDx case to test your understanding — return anytime.',bg:'#0E7F6A'},
+    mechanism:{icon:'🔬',title:'Need to review the mechanism behind '+topic+'?',desc:'Jump to MechanismDx — your session is saved here when you return.',bg:'#6B28A6'},
+    reason:{icon:'🩺',title:'Ready to apply '+topic+' to a patient case?',desc:'Launch a ReasonDx case to test your understanding.',bg:'#0D7A67'},
     coach:{icon:'🧑‍⚕️',title:'Want coaching on '+topic+'?',desc:'Jump to CoachDx — your current session is saved.',bg:'#2874A6'}
   };
   const c=cfg[target]||cfg.mechanism;
@@ -573,7 +618,7 @@ function showBridge(target,topic){
 function doBridge(){const t=document.getElementById('bb')._target;dismissBridge();if(sess)launch(t);}
 function dismissBridge(){document.getElementById('bb').classList.remove('visible');}
 
-/* ─── RESTORE ─── */
+/* ── RESTORE SESSION ── */
 try{const s=sessionStorage.getItem('rdx_session');if(s){const p=JSON.parse(s);sess=p;setSBar(p.topic,p.pillar);}}catch(e){}
 </script>
 </body>
