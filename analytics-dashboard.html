@@ -641,7 +641,41 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 <div class="stat-change">this month</div>
             </div>
         </div>
-        
+
+        <!-- Referral Card -->
+        <div id="rdx-referral-card" style="background:linear-gradient(135deg,#1B4F72,#2874A6);border-radius:14px;padding:24px 28px;margin-bottom:24px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
+          <div style="flex:1;min-width:220px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;opacity:.75;margin-bottom:6px">Your referral code</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div id="rdx-ref-code" style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:700;letter-spacing:1px;background:rgba(255,255,255,.15);padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25)">REF-——</div>
+              <button id="rdx-copy-btn" onclick="rdxCopyRef()" style="background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">Copy link</button>
+            </div>
+            <div style="font-size:13px;opacity:.9;line-height:1.5">Share your code — classmates get <strong>1 free month</strong> when they sign up. You earn rewards too.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;min-width:220px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.75;margin-bottom:2px">Reward tiers</div>
+            <div class="rdx-ref-tier" id="rdx-tier-1" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;border:1px solid rgba(255,255,255,.15)">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">1</div>
+              <div style="flex:1"><div style="font-size:12px;font-weight:600">1 referral</div><div style="font-size:11px;opacity:.75">1 free month for you</div></div>
+              <div id="rdx-t1-check" style="display:none;color:#4ADE80;font-size:16px;font-weight:700">✓</div>
+            </div>
+            <div class="rdx-ref-tier" id="rdx-tier-3" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;border:1px solid rgba(255,255,255,.15)">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">3</div>
+              <div style="flex:1"><div style="font-size:12px;font-weight:600">3 referrals</div><div style="font-size:11px;opacity:.75">4 free months (a semester)</div></div>
+              <div id="rdx-t3-check" style="display:none;color:#4ADE80;font-size:16px;font-weight:700">✓</div>
+            </div>
+            <div class="rdx-ref-tier" id="rdx-tier-5" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;border:1px solid rgba(255,255,255,.15)">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0">5</div>
+              <div style="flex:1"><div style="font-size:12px;font-weight:600">5 referrals</div><div style="font-size:11px;opacity:.75">12 free months (a full year)</div></div>
+              <div id="rdx-t5-check" style="display:none;color:#4ADE80;font-size:16px;font-weight:700">✓</div>
+            </div>
+          </div>
+          <div style="width:100%;border-top:1px solid rgba(255,255,255,.15);padding-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div style="font-size:13px;opacity:.85">Referrals so far: <strong id="rdx-ref-count">—</strong></div>
+            <div id="rdx-ref-next" style="font-size:12px;opacity:.75">Loading your progress…</div>
+          </div>
+        </div>
+
         <!-- Platform Progress -->
         <h2 class="section-title">
             <span class="icon" style="background: var(--gray-100);">🎯</span>
@@ -1734,5 +1768,151 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
 <script>setTimeout(function(){var l=document.getElementById("rdx-loader");if(l){l.classList.add("hide");setTimeout(function(){l.remove()},300)}},800);</script>
 <script src="rdx-demo-tour.js"></script>
 <script src="js/nav-global.js"></script>
+<script>
+// ── Referral card ─────────────────────────────────────────────────────────────
+(function() {
+  var SB_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+  function generateCode(name, uid) {
+    // REF-{2 initials from name or uid}{4 digits from uid hash}
+    var initials = 'XX';
+    if (name && name.trim().length >= 2) {
+      var parts = name.trim().split(/\s+/);
+      if (parts.length >= 2) {
+        initials = (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+      } else {
+        initials = (parts[0][0] + (parts[0][1] || 'X')).toUpperCase();
+      }
+    } else if (uid) {
+      initials = uid.replace(/-/g,'').substring(0,2).toUpperCase();
+    }
+    // 4 digits deterministic from uid
+    var digits = 1000;
+    if (uid) {
+      var h = 0;
+      for (var i = 0; i < uid.length; i++) { h = ((h << 5) - h + uid.charCodeAt(i)) | 0; }
+      digits = 1000 + (Math.abs(h) % 9000);
+    }
+    return 'REF-' + initials + digits;
+  }
+
+  async function loadReferralData() {
+    var codeEl = document.getElementById('rdx-ref-code');
+    var countEl = document.getElementById('rdx-ref-count');
+    var nextEl = document.getElementById('rdx-ref-next');
+    if (!codeEl) return;
+
+    // Get session
+    var session = null;
+    try {
+      var raw = localStorage.getItem('sb-lpwbiqpojisqgezycupw-auth-token');
+      if (raw) session = JSON.parse(raw);
+    } catch(e) {}
+
+    var user = session && session.user;
+    var uid = user && user.id;
+    var email = user && user.email;
+    var displayName = (user && user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || '';
+
+    // Also check reasondx-user localStorage
+    if (!uid) {
+      try {
+        var rdxUser = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        uid = rdxUser.supabaseId || null;
+        displayName = displayName || rdxUser.name || '';
+      } catch(e) {}
+    }
+
+    // Generate code
+    var code = generateCode(displayName, uid);
+
+    // Try to get/set code from Supabase profiles
+    if (uid && session && session.access_token) {
+      try {
+        var profResp = await fetch(
+          SB_URL + '/rest/v1/profiles?id=eq.' + uid + '&select=display_name,referral_code,referral_count',
+          { headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + session.access_token } }
+        );
+        if (profResp.ok) {
+          var prof = await profResp.json();
+          if (prof && prof[0]) {
+            if (prof[0].referral_code) code = prof[0].referral_code;
+            if (prof[0].display_name) displayName = displayName || prof[0].display_name;
+            var count = prof[0].referral_count || 0;
+            countEl.textContent = count;
+            updateTiers(count);
+            updateNextMessage(count, nextEl);
+          }
+        }
+      } catch(e) {}
+    } else {
+      // Not logged in — show demo state
+      countEl.textContent = '—';
+      nextEl.textContent = 'Sign in to track your referrals';
+    }
+
+    codeEl.textContent = code;
+    // Store code for copy function
+    codeEl.dataset.code = code;
+  }
+
+  function updateTiers(count) {
+    if (count >= 1) {
+      var t = document.getElementById('rdx-tier-1');
+      if (t) { t.style.background = 'rgba(74,222,128,.15)'; t.style.borderColor = 'rgba(74,222,128,.4)'; }
+      var c = document.getElementById('rdx-t1-check');
+      if (c) c.style.display = 'block';
+    }
+    if (count >= 3) {
+      var t3 = document.getElementById('rdx-tier-3');
+      if (t3) { t3.style.background = 'rgba(74,222,128,.15)'; t3.style.borderColor = 'rgba(74,222,128,.4)'; }
+      var c3 = document.getElementById('rdx-t3-check');
+      if (c3) c3.style.display = 'block';
+    }
+    if (count >= 5) {
+      var t5 = document.getElementById('rdx-tier-5');
+      if (t5) { t5.style.background = 'rgba(74,222,128,.15)'; t5.style.borderColor = 'rgba(74,222,128,.4)'; }
+      var c5 = document.getElementById('rdx-t5-check');
+      if (c5) c5.style.display = 'block';
+    }
+  }
+
+  function updateNextMessage(count, el) {
+    if (!el) return;
+    if (count === 0) el.textContent = 'Refer 1 friend → earn 1 free month';
+    else if (count === 1) el.textContent = '2 more referrals → earn a full semester free';
+    else if (count < 3) el.textContent = (3 - count) + ' more → earn 4 free months';
+    else if (count < 5) el.textContent = (5 - count) + ' more → earn a full year free';
+    else el.textContent = '🎉 Maximum tier reached — thank you!';
+  }
+
+  // Global copy function
+  window.rdxCopyRef = function() {
+    var codeEl = document.getElementById('rdx-ref-code');
+    var code = (codeEl && codeEl.dataset.code) || (codeEl && codeEl.textContent) || '';
+    var url = 'https://reasondx.com/auth/register.html?ref=' + encodeURIComponent(code);
+    var btn = document.getElementById('rdx-copy-btn');
+    navigator.clipboard.writeText(url).then(function() {
+      if (btn) { btn.textContent = 'Copied! ✓'; setTimeout(function() { btn.textContent = 'Copy link'; }, 2000); }
+    }).catch(function() {
+      // Fallback
+      var ta = document.createElement('textarea');
+      ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (btn) { btn.textContent = 'Copied! ✓'; setTimeout(function() { btn.textContent = 'Copy link'; }, 2000); }
+    });
+  };
+
+  // Load on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadReferralData);
+  } else {
+    loadReferralData();
+  }
+})();
+</script>
 </body>
 </html>
