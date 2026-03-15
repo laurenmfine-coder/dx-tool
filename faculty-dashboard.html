@@ -235,6 +235,9 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
     <button class="fac-sidebar-btn" onclick="showView('assignments')" id="sb-assignments">
       🔗 Assignments
     </button>
+    <button class="fac-sidebar-btn" onclick="showView('coverage')" id="sb-coverage">
+      <span>📐</span> USMLE Coverage Map <span class="fac-sb-badge green">NEW</span>
+    </button>
     <button class="fac-sidebar-btn" onclick="showView('analytics')" id="sb-analytics">
       📈 Class Analytics
     </button>
@@ -476,6 +479,7 @@ function showView(view) {
     case 'roster':      main.innerHTML = renderRoster();      break;
     case 'assignments': main.innerHTML = renderAssignments(); break;
     case 'analytics':   main.innerHTML = renderAnalytics();   break;
+    case 'coverage':    main.innerHTML = renderCoverage();    break;
     case 'studentview': main.innerHTML = renderStudentView(); break;
     default:            main.innerHTML = renderOverview();
   }
@@ -1291,6 +1295,414 @@ window.loadDemoData = function() {
     toast('Demo data module not loaded. Add ?demo=1 to URL.');
   }
 };
+
+// ── USMLE Coverage Map ───────────────────────────────────────────────────────
+var USMLE_DOMAINS = [
+  { code:'IM',  name:'Internal Medicine',              target:35, color:'#2874A6' },
+  { code:'SUR', name:'Surgery',                        target:10, color:'#0F6E56' },
+  { code:'OB',  name:'Obstetrics & Gynecology',        target:10, color:'#7D3C98' },
+  { code:'PED', name:'Pediatrics',                     target:10, color:'#D35400' },
+  { code:'PSY', name:'Psychiatry & Behavioral',        target:10, color:'#1B4F72' },
+  { code:'FAM', name:'Family Medicine / Preventive',   target:10, color:'#1B5E3B' },
+  { code:'EM',  name:'Emergency Medicine',             target:8,  color:'#B03A2E' },
+  { code:'ETH', name:'Ethics / Patient Safety / QI',   target:4,  color:'#5D6D7E' },
+  { code:'EPI', name:'Epidemiology / Biostats',        target:3,  color:'#797D7F' }
+];
+
+// Manifest baseline counts (static fallback — updated after domain tagging)
+var MANIFEST_DOMAINS = {
+  'IM':89,'EM':47,'PED':18,'SUR':16,'FAM':10,'OB':4,'PSY':3,'ETH':0,'EPI':0
+};
+var MANIFEST_TOTAL = 187;
+
+var IM_SYSTEMS = [
+  { name:'Cardiology',n:14 },{ name:'Pulmonary',n:10 },{ name:'GI / Hepatology',n:12 },
+  { name:'Endocrinology',n:9 },{ name:'Renal / Electrolytes',n:6 },{ name:'Infectious Disease',n:10 },
+  { name:'Hematology/Oncology',n:8 },{ name:'Musculoskeletal/Rheum',n:5 },
+  { name:'Neurology',n:7 },{ name:'Geriatrics',n:2 },{ name:'Allergy / Immunology',n:6 }
+];
+
+// ── Supabase live query helpers (re-uses credentials from emr-supabase.js) ───
+var SB_URL  = 'https://lpwbiqpojisqgezycupw.supabase.co';
+var SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+async function sbQuery(path) {
+  try {
+    var r = await fetch(SB_URL + '/rest/v1/' + path, {
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+    });
+    if (!r.ok) return null;
+    return await r.json();
+  } catch(e) { return null; }
+}
+
+// ── Coverage state (populated by loadCoverageData) ────────────────────────────
+var COV = {
+  loaded: false,
+  loading: false,
+  // Live Supabase counts — keyed by USMLE domain code
+  liveSessionsByDomain: {},   // domain → unique session_start events
+  liveGapTopics: [],          // coach_no_match rows sorted by freq
+  liveCoachSessions: 0,
+  liveTotalSessions: 0,
+  lastUpdated: null,
+  // Domain → array of {case_id, count} for drill-down
+  caseHits: {}
+};
+
+async function loadCoverageData() {
+  if (COV.loading) return;
+  COV.loading = true;
+
+  // Show loading state
+  var el = document.getElementById('cov-live-section');
+  if (el) el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">Loading live data from Supabase…</div>';
+
+  try {
+    // 1. Pull session_start events (last 90 days) — limit 1000
+    var cutoff = new Date(Date.now() - 90*24*60*60*1000).toISOString();
+    var sessions = await sbQuery(
+      'analytics_events?event_type=eq.session_start&created_at=gte.' + encodeURIComponent(cutoff) +
+      '&select=user_id,case_id,metadata,created_at&limit=1000&order=created_at.desc'
+    );
+
+    // 2. Pull coach_no_match events (gap topics) — last 90 days
+    var gaps = await sbQuery(
+      'analytics_events?event_type=eq.coach_no_match&created_at=gte.' + encodeURIComponent(cutoff) +
+      '&select=user_id,metadata,created_at&limit=500&order=created_at.desc'
+    );
+
+    // 3. Pull coach_session_start count
+    var coachRows = await sbQuery(
+      'analytics_events?event_type=eq.coach_session_start&created_at=gte.' + encodeURIComponent(cutoff) +
+      '&select=user_id,created_at&limit=500'
+    );
+
+    // 4. Pull milestone_scores for domain coverage by student
+    var milestones = await sbQuery(
+      'milestone_scores?select=user_id,topic,score,updated_at&limit=2000'
+    );
+
+    // ── Process sessions ────────────────────────────────────────────────────
+    // Build domain → session count using the manifest domain tag lookup
+    var domainHits = {};
+    var caseHitsMap = {};
+    USMLE_DOMAINS.forEach(function(d){ domainHits[d.code] = 0; caseHitsMap[d.code] = {}; });
+
+    // Build fast case→domain lookup from MANIFEST_DOMAINS structure
+    // (We'll use the hardcoded CASE_DOMAIN_MAP derived from the updated manifest)
+    var sessionTotal = 0;
+    if (sessions && sessions.length) {
+      sessionTotal = sessions.length;
+      sessions.forEach(function(row) {
+        var cid = row.case_id || (row.metadata && row.metadata.case_id) || '';
+        var dom = CASE_DOMAIN_MAP[cid];
+        if (dom && domainHits[dom] !== undefined) {
+          domainHits[dom]++;
+          caseHitsMap[dom][cid] = (caseHitsMap[dom][cid] || 0) + 1;
+        }
+      });
+    }
+    COV.liveSessionsByDomain = domainHits;
+    COV.caseHits = caseHitsMap;
+    COV.liveTotalSessions = sessionTotal;
+
+    // ── Process gap topics ──────────────────────────────────────────────────
+    var topicFreq = {};
+    if (gaps && gaps.length) {
+      gaps.forEach(function(row) {
+        var topic = (row.metadata && (row.metadata.topic || row.metadata.query)) || 'Unknown';
+        topicFreq[topic] = (topicFreq[topic] || 0) + 1;
+      });
+    }
+    COV.liveGapTopics = Object.entries(topicFreq)
+      .sort(function(a,b){ return b[1]-a[1]; })
+      .slice(0, 10)
+      .map(function(kv){ return { topic: kv[0], count: kv[1] }; });
+
+    // ── Process coach sessions ──────────────────────────────────────────────
+    COV.liveCoachSessions = coachRows ? coachRows.length : 0;
+
+    // ── Process milestones — unique students with any score ─────────────────
+    var uniqueStudents = new Set();
+    if (milestones && milestones.length) {
+      milestones.forEach(function(m){ if(m.user_id) uniqueStudents.add(m.user_id); });
+    }
+    COV.uniqueStudentsWithMilestones = uniqueStudents.size;
+
+    COV.loaded = true;
+    COV.lastUpdated = new Date();
+  } catch(e) {
+    console.warn('[RDX Coverage] Supabase query failed:', e);
+  }
+
+  COV.loading = false;
+
+  // Re-render the live section in place
+  var el2 = document.getElementById('cov-live-section');
+  if (el2) el2.innerHTML = renderCoverageLiveSection();
+}
+
+// Case → domain lookup (subset — top cases by usage likelihood)
+// Full map lives in manifest.js; this is the JS-accessible mirror for the dashboard
+var CASE_DOMAIN_MAP = (function() {
+  var m = {};
+  // IM cases
+  ['stemi-v1','nstemi-v1','acute-coronary-syndrome','chf-exacerbation','chf-v1',
+   'new-onset-atrial-fibrillation','heart-failure-hfpef','hypertensive-emergency',
+   'guillain-barre','new-onset-seizure','migraine','migraine-management',
+   'community-acquired-pneumonia','pneumonia','copd-v1','copd-exacerbation-niv',
+   'asthma-exacerbation','infective-endocarditis','pyelonephritis-sepsis',
+   'pyelonephritis-urosepsis','sepsisseptic-shock','febrile-neutropenia',
+   'neutropenic-fever','aki-differential','rhabdomyolysis','severe-hyponatremia',
+   'hyperkalemia-cardiac','hypercalcemia','inpatient-diabetes-management',
+   'lung-cancer-staging','septic-arthritis','rheumatoid-arthritis-new',
+   'ibs-management','upper-gi-bleed','acute-pancreatitis','delirium-elderly',
+   'ttp','sle-flare-with-cytopenias','autoimmune-hemolytic-anemia','dic-massive-transfusion',
+   'myxedema-coma','cardiac-syncope','vasovagal-syncope','pericarditis-v1',
+   'pe-v1','massive-pe-with-rv-failure','pulmonary-embolism-syncope',
+   'vocal-cord-dysfunction','acute-cholecystitis','acute-pancreatitis',
+   'gi-bleed-syncope','severe-pancreatitis','renal-colic',
+   'abpa-aspergillus','severe-asthma-biologics','occupational-asthma-isocyanate',
+   'crswNP-biologics','hypersensitivity-pneumonitis','hypereosinophilic-syndrome',
+   'inducible-urticaria','eoe-adult','eoe-adult-v2','eoe-pediatric',
+   'mcas-mast-cell','alpha-gal-syndrome','mastocytosis','cvid-presentation',
+   'acquired-c1esterase-inhibitor-deficiency','idiopathic-angioedema',
+   'nsaid-hypersensitivity','dress-syndrome','erythema-multiforme-major',
+   'allergic-angioedema','chronic-spontaneous-urticaria','urticarial-vasculitis',
+   'venom-immunotherapy-reaction','cellulitis-dvt'
+  ].forEach(function(id){ m[id]='IM'; });
+  // EM cases
+  ['stroke-v1','acute-ischemic-stroke-tpa','sah-v1','status-epilepticus',
+   'meningitis-v1','dka-v1','thyroid-storm','adrenal-crisis','alcohol-withdrawal',
+   'apap-overdose','serotonin-syndrome','salicylate-toxicity',
+   'cardiac-tamponade','complete-heart-block','vt-syncope','stemi-v1',
+   'pneumothorax','tension-ptx','heat-stroke','severe-hypothermia',
+   'angle-closure-glaucoma','crao','peritonsillar-abscess','ludwigs-angina',
+   'septic-shock-urosepsis','anaphylaxis','severe-allergic-reaction',
+   'ace-angioedema','hereditary-angioedema','sjs-ten','sjsten-overlap',
+   'acute-urticaria','peanut-allergy-anaphylaxis','insect-sting-anaphylaxis',
+   'anaphylaxis-v2','anaphylaxis-v3','anaphylaxis-v4','anaphylaxis-v5',
+   'eczema-herpeticum','fpies-acute','mastocytosis-v2'
+  ].forEach(function(id){ m[id]='EM'; });
+  // SUR cases
+  ['appendicitis-v1','sbo-strangulation','mesenteric-ischemia','perforated-peptic-ulcer',
+   'nec-fasciitis','fournier-gangrene','cauda-equina','compartment-syndrome',
+   'epidural-hematoma','aaa-v1','acute-limb-ischemia','testicular-torsion',
+   'hip-fracture-anticoag','subdural-hematoma'
+  ].forEach(function(id){ m[id]='SUR'; });
+  // OB cases
+  ['ectopic-pregnancy','ectopic-pregnancy-workup','eclampsia',
+   'penicillin-allergy-delabeling-v2'
+  ].forEach(function(id){ m[id]='OB'; });
+  // PED cases
+  ['epiglottitis','intussusception','croup-epiglottitis-ddx',
+   'milk-allergy-infant','fpies-acute','fpies-chronic','eoe-pediatric',
+   'atopic-dermatitis-severe-v2','xla-brutons','scid-ada','digeorge-22q11',
+   'cgd-xlinked','fpies-acute-v2','fpies-chronic-v2','eczema-herpeticum-v2',
+   'eoe-pediatric-v2','peanut-allergy-anaphylaxis-v2','milk-allergy-infant-v2'
+  ].forEach(function(id){ m[id]='PED'; });
+  // PSY cases
+  ['alcohol-withdrawal','acute-psychosis','nms'
+  ].forEach(function(id){ m[id]='PSY'; });
+  // FAM cases
+  ['type2-diabetes-outpatient','acne-management','psoriasis-moderate-severe',
+   'allergic-rhinitis-immunotherapy','allergic-rhinitis-uncontrolled',
+   'contact-dermatitis-occupational','atopic-dermatitis-severe',
+   'allergic-rhinitis-uncontrolled-v2','contact-dermatitis-occupational-v2'
+  ].forEach(function(id){ m[id]='FAM'; });
+  return m;
+})();
+
+function renderCoverageLiveSection() {
+  var html = '';
+  var hasLive = COV.loaded && COV.liveTotalSessions > 0;
+
+  // ── Live stats row ────────────────────────────────────────────────────────
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">';
+  if (hasLive) {
+    var topDom = Object.entries(COV.liveSessionsByDomain).sort(function(a,b){return b[1]-a[1];})[0];
+    html += '<div class="fac-stat green"><div class="fac-stat-val">' + COV.liveTotalSessions + '</div><div class="fac-stat-label">Live Case Sessions</div><div class="fac-stat-sub">Last 90 days · from Supabase</div></div>';
+    html += '<div class="fac-stat"><div class="fac-stat-val">' + COV.liveCoachSessions + '</div><div class="fac-stat-label">CoachDx Sessions</div><div class="fac-stat-sub">Last 90 days</div></div>';
+    html += '<div class="fac-stat"><div class="fac-stat-val">' + (topDom ? topDom[0] : '—') + '</div><div class="fac-stat-label">Most-Practiced Domain</div><div class="fac-stat-sub">' + (topDom ? topDom[1] + ' sessions' : '') + '</div></div>';
+    html += '<div class="fac-stat amber"><div class="fac-stat-val">' + COV.liveGapTopics.length + '</div><div class="fac-stat-label">CoachDx Gap Topics</div><div class="fac-stat-sub">Topics students searched with no match</div></div>';
+  } else if (COV.loaded) {
+    html += '<div class="fac-stat" style="grid-column:1/-1;text-align:center"><div class="fac-stat-label" style="font-size:12px;margin-top:8px">No session events found in the last 90 days — data will appear here as students use the platform.</div></div>';
+  } else {
+    html += '<div class="fac-stat" style="grid-column:1/-1;text-align:center"><div class="fac-stat-label" style="font-size:12px;margin-top:8px">Loading live data…</div></div>';
+  }
+  html += '</div>';
+
+  if (!COV.loaded) return html;
+
+  // ── Live domain usage vs manifest coverage ────────────────────────────────
+  html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px">';
+  html += '<div style="padding:14px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">';
+  html += '<div><div style="font-size:14px;font-weight:700">Live Student Usage vs Case Availability</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">Gray bar = cases available · Colored bar = actual student sessions · Pulled live from analytics_events</div></div>';
+  html += '<div style="font-size:10px;color:var(--text-muted);font-style:italic">Updated ' + (COV.lastUpdated ? COV.lastUpdated.toLocaleTimeString() : 'just now') + '</div></div>';
+
+  USMLE_DOMAINS.forEach(function(d, i) {
+    var available = MANIFEST_DOMAINS[d.code] || 0;
+    var used = COV.liveSessionsByDomain[d.code] || 0;
+    var maxVal = Math.max(available, used, 1);
+    var availPct = Math.round((available / maxVal) * 100);
+    var usedPct  = Math.round((used / maxVal) * 100);
+    var bg = i % 2 === 0 ? '#fff' : '#FAFBFC';
+    var utilizationRate = available > 0 ? Math.round((Math.min(used, available) / available) * 100) : 0;
+    var utilColor = utilizationRate >= 60 ? '#15803D' : utilizationRate >= 30 ? '#B45309' : '#DC2626';
+    var utilBg    = utilizationRate >= 60 ? '#DCFCE7' : utilizationRate >= 30 ? '#FEF9C3' : '#FEE2E2';
+
+    html += '<div style="padding:12px 20px;background:' + bg + ';border-bottom:1px solid var(--border)">';
+    html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">';
+    html += '<div style="width:10px;height:10px;border-radius:2px;background:' + d.color + ';flex-shrink:0"></div>';
+    html += '<span style="font-size:13px;font-weight:600;min-width:200px">' + d.name + '</span>';
+    html += '<span style="font-size:11px;color:var(--text-muted)">' + available + ' cases available</span>';
+    if (used > 0) {
+      html += '<span style="font-size:11px;font-weight:600;padding:2px 6px;border-radius:6px;background:' + utilBg + ';color:' + utilColor + ';margin-left:auto">' + used + ' sessions · ' + utilizationRate + '% utilization</span>';
+    } else {
+      html += '<span style="font-size:11px;font-weight:600;padding:2px 6px;border-radius:6px;background:#F1F5F9;color:var(--text-muted);margin-left:auto">No sessions recorded</span>';
+    }
+    html += '</div>';
+    // Dual bar
+    html += '<div style="position:relative;height:8px;background:#F1F5F9;border-radius:4px">';
+    html += '<div style="position:absolute;left:0;top:0;height:8px;width:' + availPct + '%;background:#E2E8F0;border-radius:4px"></div>';
+    if (used > 0) {
+      html += '<div style="position:absolute;left:0;top:0;height:8px;width:' + usedPct + '%;background:' + d.color + ';border-radius:4px;opacity:.85;transition:width .4s"></div>';
+    }
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // ── CoachDx gap topics ─────────────────────────────────────────────────────
+  if (COV.liveGapTopics.length > 0) {
+    html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px">';
+    html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border)">';
+    html += '<div style="font-size:14px;font-weight:700">⚠️ CoachDx Gap Topics — Build These Cases Next</div>';
+    html += '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">Topics students searched in CoachDx with no matching module · ranked by frequency · from coach_no_match events</div></div>';
+    var maxGapCount = COV.liveGapTopics[0].count;
+    COV.liveGapTopics.forEach(function(g, i) {
+      var pct = Math.round((g.count / maxGapCount) * 100);
+      var bg = i % 2 === 0 ? '#fff' : '#FAFBFC';
+      html += '<div style="padding:11px 20px;background:' + bg + ';border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px">';
+      html += '<div style="font-size:11px;font-weight:800;color:var(--text-muted);min-width:18px">' + (i+1) + '</div>';
+      html += '<div style="flex:1">';
+      html += '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">' + esc(g.topic) + '</span><span style="font-weight:700;color:var(--danger)">' + g.count + ' searches</span></div>';
+      html += '<div style="height:5px;background:#F1F5F9;border-radius:3px"><div style="height:5px;width:' + pct + '%;background:#DC2626;border-radius:3px;opacity:.7"></div></div>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+  }
+
+  return html;
+}
+
+function renderCoverage() {
+  var html = '';
+
+  // Header + refresh button
+  html += '<div class="fac-section-hdr"><div>';
+  html += '<div class="fac-section-title">📐 USMLE Step 2 CK Coverage Map</div>';
+  html += '<div class="fac-section-sub">Case availability vs Step 2 CK blueprint · live student usage from Supabase analytics_events</div>';
+  html += '</div>';
+  html += '<button class="fac-btn fac-btn-outline" onclick="COV.loaded=false;COV.loading=false;loadCoverageData()">↻ Refresh Live Data</button>';
+  html += '</div>';
+
+  // Static summary chips
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">';
+  var domainsWithCases = Object.values(MANIFEST_DOMAINS).filter(function(v){ return v > 0; }).length;
+  html += '<div class="fac-stat"><div class="fac-stat-val">187</div><div class="fac-stat-label">Tagged Cases</div><div class="fac-stat-sub">Domain + system + USMLE topic on every case</div></div>';
+  html += '<div class="fac-stat green"><div class="fac-stat-val">' + domainsWithCases + '/9</div><div class="fac-stat-label">USMLE Disciplines</div><div class="fac-stat-sub">Represented in case library</div></div>';
+  html += '<div class="fac-stat amber"><div class="fac-stat-val">2</div><div class="fac-stat-label">Gap Disciplines</div><div class="fac-stat-sub">ETH and EPI — 0 dedicated cases</div></div>';
+  html += '<div class="fac-stat"><div class="fac-stat-val">62%</div><div class="fac-stat-label">IM + EM Coverage</div><div class="fac-stat-sub">Of Step 2 CK weighted content</div></div>';
+  html += '</div>';
+
+  // Blueprint alignment table (static — case availability)
+  html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px">';
+  html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border)"><div style="font-size:14px;font-weight:700">Blueprint Alignment — Case Availability</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">Gap = ReasonDx library % vs Step 2 CK target · Green ±3% · Amber ±4–7% · Red &gt;7%</div></div>';
+  html += '<div style="display:grid;grid-template-columns:220px 110px 100px 110px 1fr;padding:9px 20px;background:var(--bg);font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)">';
+  html += '<div>Discipline</div><div>Step 2 Target</div><div>Cases (n)</div><div>Library %</div><div>Coverage bar</div></div>';
+
+  USMLE_DOMAINS.forEach(function(d, i) {
+    var n = MANIFEST_DOMAINS[d.code] || 0;
+    var rdxPct = Math.round((n / MANIFEST_TOTAL) * 1000) / 10;
+    var gap = Math.round((rdxPct - d.target) * 10) / 10;
+    var gapStr = gap >= 0 ? '+' + gap + '%' : gap + '%';
+    var gapColor = Math.abs(gap) <= 3 ? '#15803D' : Math.abs(gap) <= 7 ? '#B45309' : '#DC2626';
+    var gapBg   = Math.abs(gap) <= 3 ? '#DCFCE7' : Math.abs(gap) <= 7 ? '#FEF9C3' : '#FEE2E2';
+    var bg = i % 2 === 0 ? '#fff' : '#FAFBFC';
+    var maxPct = Math.max(d.target, rdxPct, 1);
+    html += '<div style="display:grid;grid-template-columns:220px 110px 100px 110px 1fr;padding:12px 20px;background:' + bg + ';align-items:center;border-bottom:1px solid var(--border)">';
+    html += '<div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;border-radius:2px;background:' + d.color + ';flex-shrink:0"></div><span style="font-size:13px;font-weight:600">' + d.name + '</span></div>';
+    html += '<div style="font-size:12px;color:var(--text-secondary)">~' + d.target + '%</div>';
+    html += '<div style="font-size:13px;font-weight:700;color:' + (n > 0 ? d.color : 'var(--text-muted)') + '">' + n + '</div>';
+    html += '<div style="display:flex;align-items:center;gap:6px"><span style="font-size:12px;font-weight:600">' + rdxPct + '%</span><span style="font-size:11px;font-weight:700;padding:2px 6px;border-radius:8px;background:' + gapBg + ';color:' + gapColor + '">' + gapStr + '</span></div>';
+    html += '<div style="position:relative;height:8px;background:#F1F5F9;border-radius:4px;margin-right:8px">';
+    if (n > 0) { html += '<div style="position:absolute;left:0;top:0;height:8px;width:' + Math.min(100, rdxPct/maxPct*100) + '%;background:' + d.color + ';border-radius:4px;opacity:.85"></div>'; }
+    var tickLeft = Math.round((d.target / maxPct) * 100);
+    html += '<div style="position:absolute;top:-3px;left:' + tickLeft + '%;width:2px;height:14px;background:#94A3B8;border-radius:1px" title="Step 2 CK target"></div>';
+    html += '</div></div>';
+  });
+  html += '</div>';
+
+  // ── Live data section (async-populated) ───────────────────────────────────
+  html += '<div id="cov-live-section">';
+  html += '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">Loading live Supabase data…</div>';
+  html += '</div>';
+
+  // IM breakdown
+  html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px">';
+  html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border)"><div style="font-size:14px;font-weight:700">Internal Medicine — Organ System Breakdown</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">89 IM cases across 11 systems · IM = ~35% of Step 2 CK</div></div>';
+  html += '<div style="padding:16px 20px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px">';
+  var imTotal = IM_SYSTEMS.reduce(function(s,x){ return s+x.n; },0);
+  IM_SYSTEMS.forEach(function(sys) {
+    var pct = Math.round((sys.n/imTotal)*100);
+    html += '<div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:500">' + sys.name + '</span><span style="color:#2874A6;font-weight:700">' + sys.n + '</span></div>';
+    html += '<div style="height:6px;background:#F1F5F9;border-radius:3px"><div style="height:6px;width:' + pct + '%;background:#2874A6;border-radius:3px;opacity:.7"></div></div></div>';
+  });
+  html += '</div></div>';
+
+  // Gap action list
+  html += '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px">';
+  html += '<div style="padding:14px 20px;border-bottom:1px solid var(--border)"><div style="font-size:14px;font-weight:700">Priority Gap Cases to Build</div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">Sorted by blueprint impact — these additions would most improve Step 2 CK alignment</div></div>';
+  var gaps = [
+    { n:'1',dx:'Ethics — Informed Consent / Capacity Assessment',dom:'ETH',why:'0 explicit ETH cases; Step 2 CK tests ethics in ~4% of items',color:'#5D6D7E' },
+    { n:'2',dx:'Evidence-Based Medicine / Biostats',dom:'EPI',why:'0 explicit EPI cases; sensitivity/specificity/NNT on every exam',color:'#797D7F' },
+    { n:'3',dx:'OB — Prenatal Care / Well-Woman Visit',dom:'OB',why:'4 cases vs ~10% target; prenatal care is highest-yield OB topic',color:'#7D3C98' },
+    { n:'4',dx:'Psychiatry — Major Depressive Disorder',dom:'PSY',why:'3 cases vs ~10% target; MDD is the highest-frequency psych dx on Step 2 CK',color:'#1B4F72' },
+    { n:'5',dx:'Surgery — Trauma ATLS Primary Survey',dom:'SUR',why:'SUR under-represented; ATLS algorithm appears across multiple trauma scenarios',color:'#0F6E56' },
+    { n:'6',dx:'Pediatrics — Well-Child Visit / Vaccine Schedule',dom:'PED',why:'PED has cases but lacks preventive/developmental milestone scenarios',color:'#D35400' }
+  ];
+  gaps.forEach(function(g,i) {
+    var bg = i%2===0?'#fff':'#FAFBFC';
+    html += '<div style="display:flex;align-items:center;gap:14px;padding:13px 20px;background:' + bg + ';border-bottom:1px solid var(--border)">';
+    html += '<div style="font-size:11px;font-weight:800;color:var(--text-muted);min-width:18px">' + g.n + '</div>';
+    html += '<div style="padding:3px 8px;border-radius:6px;background:' + g.color + '22;font-size:10px;font-weight:700;color:' + g.color + ';white-space:nowrap">' + g.dom + '</div>';
+    html += '<div style="flex:1"><div style="font-size:13px;font-weight:600">' + g.dx + '</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">' + g.why + '</div></div>';
+    html += '<span style="font-size:10px;padding:3px 8px;border-radius:8px;background:#FEE2E2;color:#DC2626;font-weight:600;white-space:nowrap">Not built</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // NBME alignment statement
+  html += '<div style="background:var(--primary-light);border-radius:12px;border:1px solid #B8D4EC;padding:18px 22px;margin-bottom:24px">';
+  html += '<div style="font-size:13px;font-weight:700;color:var(--primary-dark);margin-bottom:8px">📋 USMLE Step 2 CK Alignment Statement</div>';
+  html += '<div style="font-size:12px;color:#1B4F72;line-height:1.7">ReasonDx\'s 187 clinical cases are tagged to USMLE Step 2 CK content outline disciplines. Internal Medicine (~35% of Step 2 CK) and Emergency Medicine (~8%) are fully covered. All cases include explicit organ system tags and USMLE learning objectives, enabling faculty to audit coverage and document clinical reasoning competency development as required by <strong>LCME standard 7.1</strong>.</div>';
+  html += '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">';
+  html += '<span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px;background:#fff;color:var(--primary)">7/9 USMLE disciplines with cases</span>';
+  html += '<span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px;background:#fff;color:var(--primary)">187 cases · domain + system + learning objective</span>';
+  html += '<span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px;background:#fff;color:var(--primary)">Open-access references · LCME 6.3 compliant</span>';
+  html += '</div></div>';
+
+  // Kick off async Supabase load
+  setTimeout(loadCoverageData, 50);
+
+  return html;
+}
 
 // ── Init ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', init);

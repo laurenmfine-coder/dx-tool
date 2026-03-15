@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="theme-color" content="#1B4F72">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinic Board | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Virtual outpatient clinic board with scheduled appointment slots and clinical reasoning practice on ReasonDx.">
+<meta property="og:title" content="Clinic Board | ReasonDx">
+<meta property="og:url" content="https://reasondx.com/clinic-board.html">
+<style>
+:root {
+  --primary:#2874A6; --primary-dark:#1B4F72; --primary-light:#EBF5FB;
+  --teal:#0D7A67; --teal-light:#E8F8F5;
+  --success:#27AE60; --success-light:#E8F8F0;
+  --warning:#F39C12; --warning-light:#FEF9E7;
+  --danger:#E74C3C; --danger-light:#FDEDEC;
+  --purple:#7C3AED; --purple-light:#F5F3FF;
+  --text:#1a1a2e; --text-muted:#4B5563; --bg:#F0F4F8;
+  --card:#ffffff; --border:#DCE3EB;
+  /* Acuity palette — clinic uses 3 & 4 only */
+  --acuity-3:#F59E0B; --acuity-4:#22C55E;
+  --font:'IBM Plex Sans',-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 30px rgba(0,0,0,.12);
+  --radius:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+
+/* ── Top bar ── */
+.topbar{background:linear-gradient(135deg,var(--primary-dark),var(--teal));color:white;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.15);position:sticky;top:56px;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{font-size:16px;font-weight:700}.topbar-logo span{font-weight:400;opacity:.85}
+.topbar-badge{background:rgba(255,255,255,.18);padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-time{font-family:var(--mono);font-size:13px;opacity:.9}
+.topbar-user{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500}
+.topbar-avatar{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+
+/* ── Board header ── */
+.board-header{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.board-title{font-size:22px;font-weight:700;display:flex;align-items:center;gap:8px}
+.count{background:var(--teal);color:white;font-size:12px;padding:2px 8px;border-radius:10px;font-weight:700}
+.board-controls{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ── Buttons ── */
+.btn{font-family:var(--font);font-size:13px;font-weight:600;padding:8px 16px;border-radius:var(--radius);cursor:pointer;transition:all .15s;border:1px solid transparent;white-space:nowrap}
+.btn-primary{background:var(--teal);color:white;border-color:var(--teal)}.btn-primary:hover{filter:brightness(1.1)}
+.btn-outline{background:white;color:var(--text);border-color:var(--border)}.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── Stats bar ── */
+.stats-bar{padding:0 24px 12px;display:flex;gap:12px;flex-wrap:wrap}
+.stat-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:8px 16px;min-width:100px}
+.stat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)}
+.stat-value{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--text)}
+.stat-value.teal{color:var(--teal)}.stat-value.warn{color:var(--warning)}.stat-value.ok{color:var(--success)}
+
+/* ── Schedule grid (replaces bed table) ── */
+.board-container{padding:0 24px 24px}
+.schedule-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.schedule-title{font-size:14px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
+.date-nav{display:flex;align-items:center;gap:10px}
+.date-btn{background:white;border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:13px;color:var(--text);font-family:var(--font)}.date-btn:hover{border-color:var(--teal);color:var(--teal)}
+.date-label{font-family:var(--mono);font-size:13px;font-weight:600;min-width:160px;text-align:center}
+
+.board-table-wrap{background:white;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-md);overflow:hidden}
+.board-table{width:100%;border-collapse:collapse}
+.board-table thead th{background:#f7f9fc;border-bottom:2px solid var(--border);padding:10px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);white-space:nowrap}
+.board-table tbody tr{border-bottom:1px solid #f0f2f5;cursor:pointer;transition:background .12s}
+.board-table tbody tr:hover{background:var(--primary-light)}
+.board-table tbody tr.active{background:#dbeafe}
+.board-table tbody tr.empty-slot{cursor:default;background:#FAFBFC}
+.board-table tbody tr.empty-slot:hover{background:#FAFBFC}
+.board-table td{padding:12px 14px;font-size:13px;vertical-align:middle;color:var(--text)}
+
+/* ── Slot time cell ── */
+.slot-time{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--primary-dark);white-space:nowrap}
+.slot-time.past{color:var(--text-muted);opacity:.6}
+.slot-time.now{color:var(--teal);font-weight:800}
+.slot-room{font-size:11px;color:var(--text-muted);margin-top:2px}
+
+/* ── Patient cell ── */
+.patient-name{font-weight:700;font-size:13px;color:#1E293B}
+.patient-demo{font-size:11px;color:var(--text-muted);font-weight:500}
+.empty-name{font-size:13px;color:var(--text-muted);font-style:italic}
+
+/* ── Acuity badge ── */
+.acuity-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.acuity-3{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
+.acuity-4{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.acuity-dot{width:7px;height:7px;border-radius:50%}
+.acuity-3 .acuity-dot{background:var(--acuity-3)}
+.acuity-4 .acuity-dot{background:var(--acuity-4)}
+
+/* ── Visit status badge ── */
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.status-scheduled{background:#F1F5F9;color:var(--text-muted)}
+.status-checked-in{background:#FEF9E7;color:#b45309}
+.status-roomed{background:#EBF5FB;color:var(--primary)}
+.status-with-provider{background:var(--teal-light);color:var(--teal)}
+.status-pending-results{background:var(--purple-light);color:var(--purple)}
+.status-ready-pickup{background:var(--success-light);color:#15803d}
+.status-checked-out{background:#F1F5F9;color:var(--text-muted)}
+.status-pulse{width:6px;height:6px;border-radius:50%;animation:pulse 2s infinite}
+.status-roomed .status-pulse{background:var(--primary)}
+.status-checked-in .status-pulse{background:var(--warning)}
+.status-with-provider .status-pulse{background:var(--teal)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── Reason for visit tag ── */
+.visit-type{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.visit-new{background:#EDE9FE;color:#5B21B6}
+.visit-follow{background:#E0F2FE;color:#0369A1}
+.visit-annual{background:#ECFDF5;color:#065F46}
+.visit-urgent{background:#FEF2F2;color:#991B1B}
+
+/* ── Provider cell ── */
+.provider-cell{font-weight:500;font-size:12px;color:var(--text-muted)}
+.provider-you{color:var(--teal);font-weight:700}
+
+/* ── Empty state ── */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state h3{font-size:18px;color:var(--text);margin-bottom:8px}
+.empty-state p{font-size:14px;margin-bottom:20px}
+
+/* ── Detail panel (slide-in) ── */
+.panel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);z-index:200;opacity:0;pointer-events:none;transition:opacity .25s}
+.panel-overlay.open{opacity:1;pointer-events:all}
+.detail-panel{position:fixed;top:0;right:-640px;width:640px;max-width:90vw;height:100vh;background:white;z-index:300;box-shadow:-4px 0 30px rgba(0,0,0,.15);transition:right .3s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;overflow:hidden}
+.detail-panel.open{right:0}
+.panel-header{background:linear-gradient(135deg,var(--primary-dark),var(--teal));color:white;padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0}
+.panel-patient-info h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.panel-patient-meta{display:flex;gap:12px;font-size:12px;opacity:.85;flex-wrap:wrap}
+.panel-close{background:rgba(255,255,255,.15);border:none;color:white;width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.panel-close:hover{background:rgba(255,255,255,.25)}
+
+/* ── EMR tabs ── */
+.emr-tabs{display:flex;border-bottom:2px solid var(--border);background:#f7f9fc;flex-shrink:0;overflow-x:auto}
+.emr-tab{font-family:var(--font);padding:10px 16px;font-size:12px;font-weight:600;color:var(--text-muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s}
+.emr-tab:hover{color:var(--teal)}
+.emr-tab.active{color:var(--teal);border-bottom-color:var(--teal);background:white}
+.emr-content{flex:1;overflow-y:auto;padding:0;display:flex;flex-direction:column}
+.tab-body{padding:20px;flex:1;overflow-y:auto}
+
+/* ── Content sections ── */
+.emr-section{margin-bottom:20px}
+.emr-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.emr-field{display:flex;margin-bottom:6px;font-size:13px}
+.emr-field-label{font-weight:600;color:var(--text-muted);min-width:140px;flex-shrink:0}
+.emr-field-value{color:var(--text)}
+
+/* ── Vitals ── */
+.vitals-header{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px;padding:10px;background:linear-gradient(135deg,#f8fafc,#f0f4f8);border:1px solid var(--border);border-radius:10px}
+.vital-chip{text-align:center;padding:6px 4px;background:white;border-radius:6px;border:1px solid #e8ecf0}
+.vital-chip .vital-label{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600}
+.vital-chip .vital-value{font-size:14px;font-weight:700;font-family:var(--mono);color:var(--text);margin-top:2px}
+.vital-chip.abnormal .vital-value{color:var(--danger)}
+
+/* ── Labs ── */
+.lab-table{width:100%;border-collapse:collapse;font-size:12px}
+.lab-table th{text-align:left;padding:6px 8px;background:var(--bg);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--text-muted);border-bottom:1px solid var(--border)}
+.lab-table td{padding:6px 8px;border-bottom:1px solid #f0f2f5}
+.lab-table .abnormal{color:var(--danger);font-weight:600}
+.lab-flag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:10px;font-weight:700}
+.lab-flag.H{background:#fef2f2;color:var(--danger)}
+.lab-flag.L{background:#eff6ff;color:#1d4ed8}
+
+/* ── Teaching card ── */
+.teaching-card{background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:12px;margin-bottom:8px}
+.teaching-card h4{font-size:12px;font-weight:700;color:var(--primary);margin-bottom:6px}
+.teaching-item{font-size:13px;padding:3px 0;display:flex;gap:6px}
+.teaching-item::before{content:"💡";flex-shrink:0}
+.pitfall-item::before{content:"⚠️"}
+
+/* ── AI chat ── */
+.chat-wrap{display:flex;flex-direction:column;height:100%}
+.chat-tracker{background:#f7f9fc;border-bottom:1px solid var(--border);padding:10px 16px;flex-shrink:0}
+.tracker-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:6px}
+.tracker-grid{display:flex;gap:4px;flex-wrap:wrap}
+.tracker-pill{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;border:1px solid var(--border);background:white;color:var(--text-muted)}
+.tracker-pill.covered{background:var(--success-light);color:var(--success);border-color:#86efac}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px;min-height:200px}
+.chat-msg{max-width:85%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;animation:msgIn .2s ease-out}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg-patient{background:#f1f5f9;color:var(--text);border-bottom-left-radius:4px;align-self:flex-start}
+.msg-student{background:var(--teal);color:white;border-bottom-right-radius:4px;align-self:flex-end}
+.msg-system{background:#fffbeb;color:#92400e;font-size:11px;align-self:center;border-radius:8px;text-align:center;max-width:90%;border:1px solid #fde68a}
+.typing-indicator{display:flex;gap:4px;padding:4px 0}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--text-muted);animation:typeBounce .6s infinite alternate}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typeBounce{from{opacity:.3;transform:translateY(0)}to{opacity:1;transform:translateY(-4px)}}
+.chat-input-area{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border);background:white;flex-shrink:0}
+.chat-input{flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:13px;outline:none;resize:none}
+.chat-input:focus{border-color:var(--teal)}
+.chat-send{background:var(--teal);color:white;border:none;border-radius:8px;padding:8px 14px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer}
+.chat-send:hover{filter:brightness(1.1)}
+.chat-send:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── Plan / Mgmt ── */
+.plan-section{background:#f7f9fc;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+.plan-section h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:10px}
+.plan-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:12px;cursor:pointer;transition:all .15s;background:white;margin-bottom:6px;line-height:1.4}
+.plan-item:hover{border-color:var(--teal);background:var(--teal-light)}
+.plan-item.ordered{border-color:var(--success);background:#ECFDF5;opacity:.8;pointer-events:none}
+.plan-item input[type=checkbox]{accent-color:var(--teal);flex-shrink:0;margin-top:1px}
+.plan-label{flex:1}
+.plan-label strong{display:block;margin-bottom:2px}
+.plan-tag{font-size:10px;font-weight:600;padding:1px 6px;border-radius:6px;background:#E0E7FF;color:#3730A3;margin-left:6px}
+.plan-tag.critical{background:#FEF2F2;color:var(--danger)}
+.plan-tag.counseling{background:#FEF9E7;color:#92400e}
+
+/* ── Scorecard ── */
+.scorecard{background:linear-gradient(135deg,#f0f4f8,#e8eef4);border:2px solid var(--teal);border-radius:12px;padding:16px;margin-bottom:16px}
+.scorecard-title{font-size:14px;font-weight:700;color:var(--primary-dark);margin-bottom:12px}
+.scorecard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px}
+.score-metric{background:white;border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
+.score-metric .sm-label{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600}
+.score-metric .sm-value{font-size:22px;font-weight:700;font-family:var(--mono);margin:4px 0}
+.score-metric.excellent .sm-value{color:var(--success)}
+.score-metric.good .sm-value{color:var(--primary)}
+.score-metric.fair .sm-value{color:var(--warning)}
+.score-metric.poor .sm-value{color:var(--danger)}
+.score-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+.score-bar-label{width:110px;font-weight:600;color:var(--text);text-align:right}
+.score-bar-track{flex:1;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:4px;transition:width .6s}
+.score-bar-val{width:36px;font-family:var(--mono);font-weight:700;font-size:11px}
+
+/* ── Panel footer ── */
+.panel-footer{padding:12px 20px;border-top:1px solid var(--border);background:#f7f9fc;display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+
+/* ── Toast ── */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--text);color:white;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);transform:translateY(20px);opacity:0;animation:toastIn .3s forwards,toastOut .3s 2.7s forwards}
+@keyframes toastIn{to{transform:translateY(0);opacity:1}}
+@keyframes toastOut{to{transform:translateY(20px);opacity:0}}
+.toast.success{background:var(--teal)}.toast.warning{background:var(--warning)}
+.save-indicator{position:fixed;bottom:8px;left:8px;font-size:10px;color:var(--text-muted);opacity:.6;z-index:100}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:768px){
+  .board-header{padding:12px 16px}.stats-bar{padding:0 16px 12px}.board-container{padding:0 16px 16px}
+  .board-table td,.board-table th{padding:8px 10px}.detail-panel{width:100vw;max-width:100vw}.hide-mobile{display:none}
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
+<div id="main-content" role="main"></div>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="./index.html" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Exit Clinic</a>
+    <div class="topbar-logo">🩺 ReasonDx <span>Virtual Hospital</span></div>
+    <div class="topbar-badge">Outpatient Clinic</div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-time" id="simTime">8:00 AM</div>
+    <div class="topbar-user"><div class="topbar-avatar">MS</div><span>Medical Student</span></div>
+  </div>
+</div>
+
+<div class="board-header">
+  <div class="board-title">Clinic Schedule <span class="count" id="patientCount">0</span></div>
+  <div class="board-controls">
+    <button type="button" class="btn btn-primary" onclick="addWalkIn()">+ Walk-In</button>
+    <button type="button" class="btn btn-outline" onclick="advanceTime()">⏩ Next Slot</button>
+    <button type="button" class="btn btn-outline" onclick="resetBoard()">Reset Day</button>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-label">Scheduled</div><div class="stat-value teal" id="statTotal">0</div></div>
+  <div class="stat-card"><div class="stat-label">Checked In</div><div class="stat-value warn" id="statCheckedIn">0</div></div>
+  <div class="stat-card"><div class="stat-label">In Room</div><div class="stat-value teal" id="statRoomed">0</div></div>
+  <div class="stat-card"><div class="stat-label">Pending Results</div><div class="stat-value" id="statPending">0</div></div>
+  <div class="stat-card"><div class="stat-label">Checked Out</div><div class="stat-value ok" id="statDone">0</div></div>
+</div>
+
+<div class="board-container">
+  <div class="schedule-header">
+    <div class="schedule-title" id="scheduleTitle">Today's Schedule</div>
+    <div class="date-nav">
+      <button class="date-btn" onclick="prevDay()">←</button>
+      <div class="date-label" id="dateLabel">—</div>
+      <button class="date-btn" onclick="nextDay()">→</button>
+    </div>
+  </div>
+  <div class="board-table-wrap">
+    <table class="board-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Patient</th>
+          <th>Reason for Visit</th>
+          <th>Acuity</th>
+          <th>Visit Type</th>
+          <th>Status</th>
+          <th class="hide-mobile">Provider</th>
+        </tr>
+      </thead>
+      <tbody id="boardBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+<div class="detail-panel" id="detailPanel">
+  <div class="panel-header">
+    <div class="panel-patient-info">
+      <h2 id="panelName">—</h2>
+      <div class="panel-patient-meta">
+        <span id="panelAge">—</span>
+        <span>MRN: <span id="panelMRN">—</span></span>
+        <span id="panelAppt">—</span>
+        <span id="panelRoom">—</span>
+      </div>
+    </div>
+    <button type="button" class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="emr-tabs" id="emrTabs"></div>
+  <div class="emr-content" id="emrContent"></div>
+  <div class="panel-footer" id="panelFooter"></div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="save-indicator" id="saveIndicator"></div>
+
+<script>
+function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+
+// ── CLINIC CASE POOL ─────────────────────────────────────────────────────────
+// All acuity 3-4, outpatient-appropriate cases
+const CLINIC_CASES = [
+  {
+    id:'type2-diabetes-outpatient', diagnosis:'Type 2 Diabetes — Outpatient Optimization',
+    category:'endocrine', acuity:4, visitType:'follow',
+    reasonForVisit:'Diabetes follow-up — HbA1c check',
+    boardCC:'HbA1c 8.8%, obesity, GLP-1 initiation',
+    demographics:{ageRange:[45,70],genderDistribution:{male:.45},
+      nameOptions:{male:['Robert Chen','James Washington','Carlos Rivera','David Kim'],
+                   female:['Maria Santos','Patricia Jones','Linda Okonkwo','Susan Lee']}},
+    pmh:'T2DM (10yr), HTN, HLD, obesity (BMI 38)',
+    medications:'Metformin 1000mg BID, lisinopril 10mg, atorvastatin 40mg',
+    allergies:'NKDA',
+    vitals:{BP:'138/86',HR:'78',RR:'14',Temp:'98.4°F',BMI:'38.2',Wt:'224 lbs'},
+    hpi:'57-year-old with T2DM here for quarterly follow-up. HbA1c today 8.8% (was 8.2% last visit). Reports dietary adherence difficulty. ASCVD 10-yr risk 22%. No symptoms of hypoglycemia.',
+    exam:'General: obese, no acute distress. Neuro: intact monofilament sensation bilateral feet. Skin: no acanthosis nigricans change. Feet: no ulcers, pedal pulses 2+.',
+    labs:[
+      {name:'HbA1c',val:'8.8%',flag:'H',ref:'<7.0%'},
+      {name:'Fasting glucose',val:'182 mg/dL',flag:'H',ref:'70–99'},
+      {name:'LDL',val:'98 mg/dL',flag:'',ref:'<70 in DM'},
+      {name:'eGFR',val:'71 mL/min',flag:'',ref:'>60'},
+      {name:'Urine ACR',val:'42 mg/g',flag:'H',ref:'<30'},
+      {name:'TSH',val:'2.1 mIU/L',flag:'',ref:'0.4–4.0'}
+    ],
+    teaching:{
+      keyPoints:['SUSTAIN-6 trial: semaglutide reduces CV events in T2DM with ASCVD risk','GLP-1 agonist preferred over sulfonylurea in patient with high ASCVD risk and obesity','Microalbuminuria (ACR 42) indicates early nephropathy — optimize ACE inhibitor','LDL goal <70 mg/dL in T2DM + high ASCVD risk — consider intensifying statin'],
+      pitfalls:['Adding sulfonylurea when GLP-1 is the guideline-concordant next step','Missing ASCVD risk calculation before therapy selection','Not addressing LDL goal in diabetic patient'],
+      mustNotMiss:[]
+    },
+    plan:[
+      {id:'glp1',label:'Start semaglutide 0.5mg SQ weekly (GLP-1 agonist)',correct:true,category:'Medication',critical:true},
+      {id:'statin-up',label:'Intensify atorvastatin to 80mg (LDL 98, goal <70)',correct:true,category:'Medication',critical:true},
+      {id:'ace-up',label:'Increase lisinopril to 20mg (microalbuminuria)',correct:true,category:'Medication',critical:false},
+      {id:'counsel-diet',label:'Dietitian referral + structured diabetes education',correct:true,category:'Counseling',critical:false},
+      {id:'counsel-wt',label:'Weight management counseling (BMI 38)',correct:true,category:'Counseling',critical:false},
+      {id:'f-up',label:'Follow-up in 3 months with repeat HbA1c and weight',correct:true,category:'Follow-up',critical:false},
+      {id:'su',label:'Add glipizide (sulfonylurea)',correct:false,category:'Medication',critical:false},
+    ]
+  },
+  {
+    id:'rheumatoid-arthritis-new', diagnosis:'New-Onset Rheumatoid Arthritis',
+    category:'musculoskeletal', acuity:3, visitType:'new',
+    reasonForVisit:'Joint pain evaluation — possible RA',
+    boardCC:'47F bilateral symmetric polyarthritis MCPs/wrists, morning stiffness >1h',
+    demographics:{ageRange:[35,60],genderDistribution:{male:.2},
+      nameOptions:{male:['James Carter','Michael Brooks'],
+                   female:['Jennifer Walsh','Amanda Torres','Christine Park','Diane Nguyen']}},
+    pmh:'Hypothyroidism (on levothyroxine), seasonal allergies',
+    medications:'Levothyroxine 75mcg daily, loratadine PRN',
+    allergies:'Sulfa — rash',
+    vitals:{BP:'122/78',HR:'82',RR:'14',Temp:'99.1°F',BMI:'24.8',Wt:'138 lbs'},
+    hpi:'47-year-old woman with 3-month history of bilateral hand and wrist pain, worse in the morning with stiffness lasting >1 hour. Reports fatigue and occasional low-grade fevers. Symmetric involvement of MCP and PIP joints. No psoriasis, no GI symptoms.',
+    exam:'Hands: bilateral MCP2-4 and wrist synovitis, soft boggy swelling, tender to palpation. PIPs involved. No DIP involvement. No psoriatic plaques. No tophi. Grip strength reduced bilaterally.',
+    labs:[
+      {name:'RF',val:'148 IU/mL',flag:'H',ref:'<14'},
+      {name:'Anti-CCP',val:'182 U/mL',flag:'H',ref:'<17 (high positive)'},
+      {name:'CRP',val:'3.2 mg/dL',flag:'H',ref:'<1.0'},
+      {name:'ESR',val:'58 mm/hr',flag:'H',ref:'<20'},
+      {name:'CBC',val:'WBC 9.2, Hgb 10.8 (low), Plt 412 (high)',flag:'H',ref:''},
+      {name:'CMP',val:'Normal',flag:'',ref:''},
+      {name:'X-ray hands',val:'Periarticular osteopenia, early marginal erosions MCP3 R',flag:'H',ref:''}
+    ],
+    teaching:{
+      keyPoints:['2010 ACR/EULAR criteria: score ≥6 confirms RA — this patient scores 8','Anti-CCP high positive = strongest predictor of erosive disease','MTX dosed WEEKLY (not daily) — daily dosing is a dangerous prescribing error','Always co-prescribe folic acid 1mg daily with MTX to reduce mucositis','Treat-to-target: aim for low disease activity or remission at 3–6 months'],
+      pitfalls:['Prescribing MTX daily instead of weekly — causes severe toxicity','Starting biologic before csDMARD trial','Missing baseline PFTs and LFTs before MTX'],
+      mustNotMiss:['MTX weekly dosing — daily is a sentinel prescribing error']
+    },
+    plan:[
+      {id:'mtx',label:'Methotrexate 15mg PO WEEKLY (not daily) — escalate to 25mg',correct:true,category:'DMARD',critical:true},
+      {id:'folic',label:'Folic acid 1mg daily (MTX toxicity prevention)',correct:true,category:'Supplement',critical:true},
+      {id:'pred',label:'Prednisone 10mg daily bridge (taper over 4–6 weeks)',correct:true,category:'Bridge therapy',critical:false},
+      {id:'xray',label:'Bilateral hand/wrist X-rays + baseline chest X-ray (MTX)',correct:true,category:'Imaging',critical:false},
+      {id:'labs-base',label:'Baseline CBC, LFTs, Cr before MTX (required)',correct:true,category:'Labs',critical:true},
+      {id:'rheum',label:'Rheumatology referral — new diagnosis',correct:true,category:'Referral',critical:false},
+      {id:'mtx-daily',label:'Methotrexate 15mg PO daily',correct:false,category:'DMARD',critical:true},
+    ]
+  },
+  {
+    id:'migraine-management', diagnosis:'Migraine with Aura — Preventive Therapy',
+    category:'neurology', acuity:3, visitType:'follow',
+    reasonForVisit:'Headache management — migraine follow-up',
+    boardCC:'37F migraine with aura 3×/week, MIDAS 22, daily NSAIDs — OCP review',
+    demographics:{ageRange:[25,50],genderDistribution:{male:.15},
+      nameOptions:{male:['Tyler Morgan'],
+                   female:['Rachel Kim','Amanda Flores','Lauren Chen','Stephanie Davis']}},
+    pmh:'Migraine with aura (since age 19), takes OCP (ethinyl estradiol)',
+    medications:'Sumatriptan 100mg PRN (using 10–12 days/month), ibuprofen 600mg PRN daily, Seasonique (combined OCP)',
+    allergies:'Penicillin — hives (childhood)',
+    vitals:{BP:'128/82',HR:'74',RR:'14',Temp:'98.6°F',BMI:'22.4',Wt:'128 lbs'},
+    hpi:'37-year-old woman with migraines with visual aura, now occurring 3x/week. MIDAS score 22 (severe disability). Using sumatriptan 10–12 days/month and daily ibuprofen. Currently on combined OCP. Reports aura symptoms: zigzag lines, scotoma lasting 20–30 min before headache.',
+    exam:'Neuro: alert, cranial nerves intact, no papilledema. Visual fields full on confrontation. No focal deficits. BP repeated: 126/80.',
+    labs:[
+      {name:'MRI brain',val:'No acute intracranial pathology. No cortical lesions.',flag:'',ref:''},
+      {name:'Factor V Leiden',val:'Negative',flag:'',ref:''},
+      {name:'β-hCG',val:'Negative',flag:'',ref:''}
+    ],
+    teaching:{
+      keyPoints:['Combined OCP is CONTRAINDICATED in migraine with aura — increases stroke risk 8-fold (WHO category 4)','Medication overuse headache (MOH) diagnosis: >10 days/month triptans for >3 months','CGRP antagonists (ubrogepant) for acute; topiramate/valproate/propranolol for prevention','Preventive therapy indicated: ≥4 headache days/month or MIDAS ≥11','MIDAS 22 = severe grade — requires preventive agent'],
+      pitfalls:['Continuing combined OCP in migraine with aura','Not recognizing medication overuse headache from daily ibuprofen','Starting sumatriptan during aura phase (less effective)'],
+      mustNotMiss:['Discontinue combined OCP immediately — switch to progestin-only or non-hormonal']
+    },
+    plan:[
+      {id:'stop-ocp',label:'STOP combined OCP immediately — stroke risk with aura',correct:true,category:'Critical action',critical:true},
+      {id:'progestin',label:'Switch to progestin-only pill or non-hormonal contraception',correct:true,category:'Medication change',critical:true},
+      {id:'topiramate',label:'Start topiramate 25mg QHS, titrate to 50–100mg BID (preventive)',correct:true,category:'Preventive',critical:false},
+      {id:'limit-triptan',label:'Counsel: limit sumatriptan to ≤10 days/month to prevent MOH',correct:true,category:'Counseling',critical:false},
+      {id:'stop-ibu',label:'Discontinue daily ibuprofen — contributing to MOH',correct:true,category:'Medication stop',critical:true},
+      {id:'midas',label:'Repeat MIDAS in 3 months to assess preventive response',correct:true,category:'Follow-up',critical:false},
+      {id:'continue-ocp',label:'Continue combined OCP',correct:false,category:'Critical error',critical:true},
+    ]
+  },
+  {
+    id:'acne-management', diagnosis:'Moderate-Severe Acne — Combination Therapy',
+    category:'dermatology', acuity:4, visitType:'follow',
+    reasonForVisit:'Acne follow-up — scarring concern',
+    boardCC:'22F OTC failure, PIH on skin of color, early scarring',
+    demographics:{ageRange:[16,28],genderDistribution:{male:.4},
+      nameOptions:{male:['Marcus Thompson','Jordan Lee'],
+                   female:['Aaliyah Johnson','Sofia Garcia','Maya Patel','Priya Singh']}},
+    pmh:'None',
+    medications:'OTC benzoyl peroxide 2.5% wash, OTC adapalene 0.1% gel (started 6 weeks ago)',
+    allergies:'NKDA',
+    vitals:{BP:'112/70',HR:'68',RR:'14',Temp:'98.4°F',BMI:'21.2',Wt:'118 lbs'},
+    hpi:'22-year-old woman with moderate-severe acne vulgaris. Using OTC benzoyl peroxide and adapalene for 6 weeks with minimal improvement. Fitzpatrick Type V skin (darker skin of color). Developing post-inflammatory hyperpigmentation (PIH) and early scarring on cheeks and jawline. Not currently sexually active. No teratogenicity counseling needed at this time.',
+    exam:'Face: 15 inflammatory papules and pustules, 6 comedones. Cheeks and chin most affected. Several post-inflammatory hyperpigmented macules Fitzpatrick V. 2 early pitted scars left cheek. No nodules or cysts. No signs of hyperandrogenism.',
+    labs:[{name:'None indicated at this visit',val:'—',flag:'',ref:''}],
+    teaching:{
+      keyPoints:['Antibiotic stewardship: always pair topical antibiotics with benzoyl peroxide to prevent resistance','PIH is more severe in skin of color (Fitzpatrick IV-VI) — azelaic acid is preferred over hydroquinone','Isotretinoin referral indicated for nodulocystic acne or scarring despite combination therapy','Retinoids (tretinoin) cause initial purging — warn patients at 4–6 weeks','Doxycycline + topical retinoid + BP is guideline-concordant combination therapy'],
+      pitfalls:['Prescribing topical antibiotic (clindamycin) WITHOUT benzoyl peroxide — promotes resistance','Using hydroquinone in skin of color without considering azelaic acid first','Not warning about retinoid purging — leads to early discontinuation'],
+      mustNotMiss:[]
+    },
+    plan:[
+      {id:'doxy',label:'Doxycycline 100mg BID × 3 months (anti-inflammatory dose)',correct:true,category:'Antibiotic',critical:false},
+      {id:'bp',label:'Benzoyl peroxide 5% wash AM (pairs with doxy — antibiotic stewardship)',correct:true,category:'Topical',critical:true},
+      {id:'tretinoin',label:'Tretinoin 0.025% cream QHS (upgrade from OTC adapalene)',correct:true,category:'Topical retinoid',critical:false},
+      {id:'azelaic',label:'Azelaic acid 20% cream (PIH treatment — preferred in skin of color)',correct:true,category:'Topical',critical:false},
+      {id:'counsel-purge',label:'Counsel: expect purging weeks 4–8 with retinoid',correct:true,category:'Counseling',critical:false},
+      {id:'isotret-refer',label:'Discuss isotretinoin referral if inadequate response at 3 months',correct:true,category:'Planning',critical:false},
+      {id:'topical-abx-only',label:'Clindamycin 1% gel alone (no benzoyl peroxide)',correct:false,category:'Antibiotic resistance risk',critical:true},
+    ]
+  },
+  {
+    id:'ibs-management', diagnosis:'IBS — Mixed Type',
+    category:'gi', acuity:3, visitType:'new',
+    reasonForVisit:'Chronic abdominal pain and bowel changes',
+    boardCC:'35F 14-month abdominal pain relieved by defecation, alternating bowel habits, normal colonoscopy',
+    demographics:{ageRange:[20,50],genderDistribution:{male:.3},
+      nameOptions:{male:['Patrick O\'Brien','Jason Wu'],
+                   female:['Emily Rodriguez','Natalie Kim','Sarah Johnson','Melissa Grant']}},
+    pmh:'Anxiety (on sertraline), history of childhood functional abdominal pain',
+    medications:'Sertraline 50mg daily',
+    allergies:'NKDA',
+    vitals:{BP:'118/74',HR:'76',RR:'14',Temp:'98.6°F',BMI:'23.1',Wt:'132 lbs'},
+    hpi:'35-year-old woman with 14 months of recurrent lower abdominal cramping (5/10), relieved by defecation. Alternating diarrhea and constipation. Symptoms exacerbated by stress and meals. Colonoscopy 3 months ago: normal. CBC, CMP, TSH, celiac panel all normal. No rectal bleeding, no unintentional weight loss, no nocturnal symptoms, no family history of IBD or colorectal cancer.',
+    exam:'Abdomen: mild diffuse tenderness on deep palpation, greatest in LLQ. No guarding, rigidity, or rebound. No hepatosplenomegaly. Normal bowel sounds. Rectal: no masses, guaiac negative.',
+    labs:[
+      {name:'CBC',val:'Normal',flag:'',ref:''},
+      {name:'CRP',val:'0.4 mg/dL',flag:'',ref:'<1.0 (normal)'},
+      {name:'Fecal calprotectin',val:'28 μg/g',flag:'',ref:'<50 (normal — argues against IBD)'},
+      {name:'Celiac IgA tTG',val:'Negative',flag:'',ref:''},
+      {name:'TSH',val:'1.8 mIU/L',flag:'',ref:'Normal'}
+    ],
+    teaching:{
+      keyPoints:['Rome IV criteria: recurrent abdominal pain ≥1 day/week ×3 months, related to defecation — met here','Low FODMAP diet: evidence-based; 70% of IBS patients respond','Amitriptyline 10–25mg QHS: neuromodulator for IBS-M/D — not an antidepressant dose','No opioids in IBS — risk of narcotic bowel syndrome and worsening','Tricyclics (amitriptyline) reduce visceral hypersensitivity independently of antidepressant effect'],
+      pitfalls:['Prescribing opioids for IBS pain','Repeating normal workup instead of making diagnosis with Rome IV criteria','Not distinguishing IBS from IBD — calprotectin helps here'],
+      mustNotMiss:['Red flags that would change management: rectal bleeding, weight loss, nocturnal symptoms, age >45, family history IBD — none present here']
+    },
+    plan:[
+      {id:'rome',label:'Diagnose IBS-M using Rome IV criteria (criteria met)',correct:true,category:'Diagnosis',critical:false},
+      {id:'fodmap',label:'Low FODMAP diet — refer to dietitian',correct:true,category:'Diet',critical:false},
+      {id:'ami',label:'Amitriptyline 10mg QHS (neuromodulator for visceral pain)',correct:true,category:'Medication',critical:false},
+      {id:'soluble-fiber',label:'Soluble fiber supplementation (psyllium)',correct:true,category:'Supplement',critical:false},
+      {id:'counsel-stress',label:'Gut-directed psychotherapy/CBT referral (anxiety comorbidity)',correct:true,category:'Counseling',critical:false},
+      {id:'repeat-scope',label:'Repeat colonoscopy — Rome IV criteria met, no red flags',correct:false,category:'Unnecessary workup',critical:false},
+      {id:'opioid',label:'Low-dose tramadol for pain',correct:false,category:'Contraindicated',critical:true},
+    ]
+  },
+  {
+    id:'hypothyroidism-new-dx', diagnosis:'Hypothyroidism — New Diagnosis',
+    category:'endocrine', acuity:4, visitType:'new',
+    reasonForVisit:'Fatigue and weight gain — thyroid evaluation',
+    boardCC:'44F progressive fatigue, cold intolerance, weight gain 12 lbs over 8 months',
+    demographics:{ageRange:[30,65],genderDistribution:{male:.15},
+      nameOptions:{male:['William Chen'],
+                   female:['Barbara Walsh','Nancy Kim','Dorothy Green','Carol Martinez']}},
+    pmh:'Family history of Hashimoto thyroiditis (mother), seasonal allergies',
+    medications:'Cetirizine 10mg PRN',
+    allergies:'NKDA',
+    vitals:{BP:'124/78',HR:'58',RR:'14',Temp:'97.4°F',BMI:'27.3',Wt:'158 lbs'},
+    hpi:'44-year-old woman with 8-month history of progressive fatigue, cold intolerance, constipation, and 12-lb weight gain. Menstrual periods becoming heavier. Reports hair thinning and dry skin. Family history of Hashimoto thyroiditis in mother.',
+    exam:'General: mild periorbital puffiness. Skin: dry, cool. Hair: diffuse thinning. Thyroid: mildly enlarged, non-tender, no nodules palpated. Reflexes: delayed relaxation phase bilaterally. HR 58 regular.',
+    labs:[
+      {name:'TSH',val:'18.4 mIU/L',flag:'H',ref:'0.4–4.0'},
+      {name:'Free T4',val:'0.4 ng/dL',flag:'L',ref:'0.8–1.8'},
+      {name:'Anti-TPO Ab',val:'842 IU/mL',flag:'H',ref:'<35 — Hashimoto\'s'},
+      {name:'CBC',val:'Mild normocytic anemia: Hgb 11.2',flag:'H',ref:''},
+      {name:'CMP',val:'Cr 0.9, LFTs normal, glucose 92',flag:'',ref:''},
+      {name:'Lipid panel',val:'LDL 158 mg/dL (elevated — often secondary to hypothyroid)',flag:'H',ref:''}
+    ],
+    teaching:{
+      keyPoints:['Levothyroxine dose: 1.6 mcg/kg/day full replacement OR start low 25–50mcg and titrate (elderly/cardiac)','Recheck TSH in 6–8 weeks after starting or dose change — not sooner (T4 half-life 7 days)','Sick euthyroid syndrome: low T3/T4 with normal TSH in acute illness — do NOT treat','Anti-TPO antibodies confirm Hashimoto thyroiditis (autoimmune)','Secondary hyperlipidemia often resolves with euthyroid state — recheck lipids after 3 months of therapy'],
+      pitfalls:['Rechecking TSH too soon (<6 weeks) after dose change','Treating sick euthyroid syndrome','Missing secondary causes of normocytic anemia (iron, B12) in hypothyroid'],
+      mustNotMiss:['Do not start levothyroxine without checking cortisol if adrenal insufficiency suspected (e.g., pituitary disease)']
+    },
+    plan:[
+      {id:'levo',label:'Levothyroxine 75mcg PO daily (1.6mcg/kg × 47kg)',correct:true,category:'Medication',critical:true},
+      {id:'counsel-levo',label:'Counsel: take on empty stomach 30-60 min before food/meds',correct:true,category:'Counseling',critical:false},
+      {id:'recheck',label:'Repeat TSH + free T4 in 6–8 weeks',correct:true,category:'Follow-up labs',critical:true},
+      {id:'lipid-recheck',label:'Recheck lipid panel after 3 months of euthyroid state',correct:true,category:'Follow-up labs',critical:false},
+      {id:'statin-now',label:'Start statin now for LDL 158 (secondary hyperlipidemia)',correct:false,category:'Premature',critical:false},
+      {id:'recheck-4wk',label:'Repeat TSH in 4 weeks',correct:false,category:'Too soon',critical:false},
+    ]
+  },
+  {
+    id:'allergic-rhinitis-immunotherapy', diagnosis:'Allergic Rhinitis — SCIT Initiation',
+    category:'allergy', acuity:4, visitType:'follow',
+    reasonForVisit:'Allergy follow-up — immunotherapy discussion',
+    boardCC:'Perennial nasal congestion, sneezing, itchy eyes — dust mite + grass + mold sensitized',
+    demographics:{ageRange:[18,50],genderDistribution:{male:.5},
+      nameOptions:{male:['Kevin Park','Daniel Morris','Alex Johnson'],
+                   female:['Olivia Chang','Hannah Brown','Claire Wilson']}},
+    pmh:'Allergic rhinitis, mild intermittent asthma (well-controlled)',
+    medications:'Cetirizine 10mg daily, fluticasone nasal spray, montelukast 10mg daily, albuterol PRN (rarely uses)',
+    allergies:'NKDA',
+    vitals:{BP:'118/72',HR:'70',RR:'14',Temp:'98.4°F',BMI:'23.5',Wt:'156 lbs'},
+    hpi:'34-year-old with 8-year history of allergic rhinitis, poorly controlled despite Step 2 pharmacotherapy. Perennial symptoms (dust mite dominant), seasonal peaks (grass April-June, mold August-October). SPT confirms sensitization to D. farinae, grass mix, Alternaria. TNSS 22/24. Interested in allergen immunotherapy.',
+    exam:'ENT: bilateral nasal turbinate edema, pale mucosa, clear discharge, no polyps. Cobblestoning of posterior pharynx. Eyes: mild bilateral conjunctival injection. Lungs: clear, no wheeze.',
+    labs:[
+      {name:'Spirometry',val:'FEV1 94% predicted, FEV1/FVC 0.82 — normal',flag:'',ref:''},
+      {name:'Total IgE',val:'342 IU/mL',flag:'H',ref:'<100'},
+      {name:'D. farinae IgE',val:'8.4 kU/L',flag:'H',ref:'Class 3 — moderate'},
+      {name:'Grass mix IgE',val:'6.2 kU/L',flag:'H',ref:'Class 3'},
+      {name:'Alternaria IgE',val:'3.1 kU/L',flag:'H',ref:'Class 2'}
+    ],
+    teaching:{
+      keyPoints:['SCIT build-up: weekly injections for 6–12 months; maintenance: every 4 weeks for 3–5 years','SCIT is disease-modifying — reduces sensitization and risk of new allergies and asthma','Must observe patient 20–30 min post-injection for systemic reaction','Epinephrine must be immediately available in every allergy office giving SCIT','Contraindications to SCIT: severe/uncontrolled asthma (FEV1 <70% predicted), beta-blocker use (impairs epinephrine response)'],
+      pitfalls:['Giving SCIT shot without checking current symptoms/PEF first','Not observing 20–30 min after injection','Missing beta-blocker as relative contraindication (impairs epinephrine)'],
+      mustNotMiss:['Always check for systemic reaction signs during 20-30 min observation period']
+    },
+    plan:[
+      {id:'scit',label:'Initiate SCIT build-up: dust mite + grass + Alternaria mix',correct:true,category:'Immunotherapy',critical:false},
+      {id:'observe',label:'20–30 min observation post-injection (systemic reaction protocol)',correct:true,category:'Safety protocol',critical:true},
+      {id:'epi-rx',label:'Prescribe epinephrine auto-injector — carry to every appointment',correct:true,category:'Safety',critical:true},
+      {id:'continue-pharm',label:'Continue fluticasone + cetirizine during build-up phase',correct:true,category:'Adjunct therapy',critical:false},
+      {id:'asthma-monitor',label:'Monitor asthma control — spirometry at 6 months',correct:true,category:'Monitoring',critical:false},
+      {id:'no-observe',label:'Give shot and discharge immediately after — no observation needed',correct:false,category:'Safety error',critical:true},
+    ]
+  },
+  {
+    id:'low-back-pain', diagnosis:'Low Back Pain — Red Flag Workup',
+    category:'musculoskeletal', acuity:3, visitType:'new',
+    reasonForVisit:'Low back pain — new complaint',
+    boardCC:'52M 6-week LBP, worse at night, 18-lb weight loss, former smoker 30 pack-yr',
+    demographics:{ageRange:[40,70],genderDistribution:{male:.65},
+      nameOptions:{male:['Richard Stone','Thomas Park','Frank Williams','George Baker'],
+                   female:['Linda Hernandez','Joan Mitchell']}},
+    pmh:'HTN, 30 pack-year smoking history (quit 2 years ago), GERD',
+    medications:'Amlodipine 5mg, omeprazole 20mg',
+    allergies:'Aspirin — GI upset',
+    vitals:{BP:'142/88',HR:'86',RR:'16',Temp:'98.8°F',BMI:'24.1',Wt:'168 lbs'},
+    hpi:'52-year-old man with 6-week progressive low back pain. DOES NOT improve with NSAIDs. Pain is worse at night and at rest. Reports 18-lb unintentional weight loss over 3 months. 30 pack-year smoking history (quit 2 years ago). No trauma. No bowel/bladder dysfunction currently. No saddle anesthesia.',
+    exam:'Back: midline tenderness T12-L2, paraspinal muscle spasm. SLR negative bilaterally. Lower extremity: strength 5/5, sensation intact, reflexes 2+ symmetric. Rectal: normal tone, no masses.',
+    labs:[
+      {name:'PSA',val:'0.8 ng/mL',flag:'',ref:'Normal for age'},
+      {name:'CBC',val:'Hgb 10.2 (low), WBC 9.1, Plt 388',flag:'H',ref:''},
+      {name:'CMP',val:'Ca 11.4 mg/dL (high), Cr 1.1',flag:'H',ref:'Normal Ca 8.5-10.5'},
+      {name:'SPEP',val:'Monoclonal spike — M-protein 3.2 g/dL (IgG kappa)',flag:'H',ref:'ABNORMAL'},
+      {name:'Urine UPEP',val:'Bence-Jones proteinuria positive',flag:'H',ref:'ABNORMAL'},
+      {name:'X-ray LS spine',val:'Multiple lytic lesions T12, L2, L3',flag:'H',ref:'ABNORMAL — punched-out lesions'}
+    ],
+    teaching:{
+      keyPoints:['Low back pain red flags (SNOOP): Systemic symptoms, Neoplasm hx, Onset age >50, Osteoporosis, Neurologic deficits, worse at Night/rest','SPEP + UPEP should be ordered when multiple myeloma suspected (age >40, anemia, hypercalcemia, back pain)','CRAB criteria for myeloma: hyperCalcemia, Renal failure, Anemia, Bone lesions','Night pain and rest pain in back = malignancy until proven otherwise','This presentation is multiple myeloma — urgent hematology referral'],
+      pitfalls:['Treating as mechanical LBP and reassuring patient — missing malignancy','Not ordering SPEP in patient >50 with back pain, anemia, and weight loss','Delaying MRI when red flags present'],
+      mustNotMiss:['This is an emergency referral — do not send home without same-day/next-day hematology contact']
+    },
+    plan:[
+      {id:'mri',label:'MRI spine (whole spine) — evaluate extent of lytic lesions',correct:true,category:'Imaging',critical:true},
+      {id:'heme',label:'URGENT hematology referral — multiple myeloma suspected',correct:true,category:'Referral',critical:true},
+      {id:'bmb',label:'Bone marrow biopsy will be performed by hematology',correct:true,category:'Diagnosis',critical:false},
+      {id:'ca-mgmt',label:'IV fluids for hypercalcemia (Ca 11.4) — contact hematology',correct:true,category:'Acute management',critical:true},
+      {id:'pt',label:'Physical therapy referral for mechanical LBP',correct:false,category:'Wrong diagnosis',critical:true},
+      {id:'nsaid',label:'Increase NSAIDs and reassure — common mechanical LBP',correct:false,category:'Dangerous',critical:true},
+    ]
+  }
+];
+
+// ── SCHEDULE SLOTS ────────────────────────────────────────────────────────────
+const SLOT_TIMES = [
+  '8:00 AM','8:20 AM','8:40 AM','9:00 AM','9:20 AM','9:40 AM',
+  '10:00 AM','10:20 AM','10:40 AM','11:00 AM','11:20 AM','11:40 AM',
+  '1:00 PM','1:20 PM','1:40 PM','2:00 PM','2:20 PM','2:40 PM',
+  '3:00 PM','3:20 PM'
+];
+const ROOMS = ['Exam 1','Exam 2','Exam 3','Exam 4','Exam 5','Exam 6'];
+
+// ── APP STATE ─────────────────────────────────────────────────────────────────
+var slots = [];           // { time, room, patient|null }
+var selectedSlotId = null;
+var simMinutes = 8 * 60; // 8:00 AM
+var dayOffset = 0;
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+function init() {
+  updateDateLabel();
+  generateSchedule();
+  startClock();
+  updateStats();
+  // Check for saved state
+  try {
+    var saved = JSON.parse(localStorage.getItem('rdx-clinic-board'));
+    if (saved && saved.slots && saved.slots.length) {
+      document.getElementById('resumeBtn') && (document.getElementById('resumeBtn').style.display = 'inline-block');
+    }
+  } catch(e) {}
+}
+
+function generateSchedule() {
+  slots = [];
+  var pool = CLINIC_CASES.slice();
+  // Shuffle pool
+  for (var i = pool.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i+1));
+    var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+  }
+  var poolIdx = 0;
+  SLOT_TIMES.forEach(function(time, i) {
+    var hasPatient = Math.random() < 0.75; // 75% fill rate
+    var room = ROOMS[i % ROOMS.length];
+    if (hasPatient) {
+      var tpl = pool[poolIdx % pool.length];
+      poolIdx++;
+      var isMale = Math.random() < tpl.demographics.genderDistribution.male;
+      var names = isMale ? tpl.demographics.nameOptions.male : tpl.demographics.nameOptions.female;
+      var age = Math.floor(Math.random() * (tpl.demographics.ageRange[1] - tpl.demographics.ageRange[0])) + tpl.demographics.ageRange[0];
+      var name = names[Math.floor(Math.random() * names.length)];
+      // Determine slot status based on simTime
+      var slotMin = parseTimeToMinutes(time);
+      var status = 'scheduled';
+      if (slotMin < simMinutes - 40) status = 'checked-out';
+      else if (slotMin < simMinutes - 20) status = 'ready-pickup';
+      else if (slotMin < simMinutes) status = 'with-provider';
+      else if (slotMin < simMinutes + 20) status = 'checked-in';
+
+      slots.push({
+        id: 'slot-' + i + '-' + Date.now(),
+        time: time, room: room,
+        patient: {
+          id: 'pt-' + Date.now() + '-' + i,
+          name: name, age: age,
+          gender: isMale ? 'M' : 'F',
+          mrn: String(100000 + Math.floor(Math.random() * 900000)),
+          status: status,
+          provider: 'You',
+          template: tpl,
+          chatHistory: [],
+          planOrdered: [],
+          discovered: { labsReady: true, startedAt: Date.now() }
+        }
+      });
+    } else {
+      slots.push({ id: 'slot-' + i, time: time, room: room, patient: null });
+    }
+  });
+  renderBoard();
+}
+
+function parseTimeToMinutes(t) {
+  var parts = t.match(/(\d+):(\d+)\s+(AM|PM)/);
+  if (!parts) return 0;
+  var h = parseInt(parts[1]); var m = parseInt(parts[2]); var ampm = parts[3];
+  if (ampm === 'PM' && h !== 12) h += 12;
+  if (ampm === 'AM' && h === 12) h = 0;
+  return h * 60 + m;
+}
+
+// ── BOARD RENDER ──────────────────────────────────────────────────────────────
+function renderBoard() {
+  var body = document.getElementById('boardBody');
+  if (!slots.length) {
+    body.innerHTML = '<tr><td colspan="7"><div class="empty-state"><h3>No appointments scheduled</h3><p>Generate a new schedule to begin your clinic session.</p><button class="btn btn-primary" onclick="generateSchedule()">Generate Schedule</button></div></td></tr>';
+    document.getElementById('patientCount').textContent = '0';
+    updateStats(); return;
+  }
+  var currentMin = simMinutes;
+  body.innerHTML = slots.map(function(slot) {
+    var slotMin = parseTimeToMinutes(slot.time);
+    var isNow = Math.abs(slotMin - currentMin) < 20;
+    var isPast = slotMin < currentMin - 20;
+    var timeClass = isNow ? 'now' : isPast ? 'past' : '';
+    if (!slot.patient) {
+      return '<tr class="empty-slot">' +
+        '<td><span class="slot-time ' + timeClass + '">' + slot.time + '</span><div class="slot-room">' + slot.room + '</div></td>' +
+        '<td colspan="6"><span class="empty-name">— Open slot —</span></td>' +
+        '</tr>';
+    }
+    var p = slot.patient;
+    var tpl = p.template;
+    var isActive = p.id === selectedSlotId;
+    return '<tr class="' + (isActive ? 'active' : '') + '" onclick="selectPatient(\'' + p.id + '\')">' +
+      '<td><span class="slot-time ' + timeClass + '">' + slot.time + '</span><div class="slot-room">' + slot.room + '</div></td>' +
+      '<td><div class="patient-name">' + esc(p.name) + '</div><div class="patient-demo">' + p.age + p.gender + ' · MRN ' + p.mrn + '</div></td>' +
+      '<td>' + esc(tpl.boardCC) + '</td>' +
+      '<td><span class="acuity-badge acuity-' + tpl.acuity + '"><span class="acuity-dot"></span> ' + tpl.acuity + '</span></td>' +
+      '<td><span class="visit-type visit-' + tpl.visitType + '">' + ucfirst(tpl.visitType) + '</span></td>' +
+      '<td><span class="status-badge status-' + p.status + '"><span class="status-pulse"></span> ' + statusLabel(p.status) + '</span></td>' +
+      '<td class="hide-mobile"><span class="provider-cell provider-you">' + esc(p.provider) + '</span></td>' +
+      '</tr>';
+  }).join('');
+
+  var filledCount = slots.filter(function(s){return s.patient;}).length;
+  document.getElementById('patientCount').textContent = filledCount;
+  updateStats();
+}
+
+function statusLabel(s) {
+  return {
+    'scheduled':'Scheduled','checked-in':'Checked In','roomed':'Roomed',
+    'with-provider':'With Provider','pending-results':'Pending Results',
+    'ready-pickup':'Ready','checked-out':'Checked Out'
+  }[s] || s;
+}
+function ucfirst(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
+
+function updateStats() {
+  var pts = slots.map(function(s){return s.patient;}).filter(Boolean);
+  document.getElementById('statTotal').textContent = pts.length;
+  document.getElementById('statCheckedIn').textContent = pts.filter(function(p){return p.status==='checked-in'||p.status==='roomed';}).length;
+  document.getElementById('statRoomed').textContent = pts.filter(function(p){return p.status==='with-provider';}).length;
+  document.getElementById('statPending').textContent = pts.filter(function(p){return p.status==='pending-results';}).length;
+  document.getElementById('statDone').textContent = pts.filter(function(p){return p.status==='checked-out'||p.status==='ready-pickup';}).length;
+}
+
+// ── PATIENT SELECTION & PANEL ─────────────────────────────────────────────────
+function selectPatient(pid) {
+  var slot = slots.find(function(s){return s.patient && s.patient.id === pid;});
+  if (!slot) return;
+  var p = slot.patient;
+  selectedSlotId = p.id;
+  if (p.status === 'scheduled' || p.status === 'checked-in') {
+    p.status = 'with-provider';
+  }
+  renderBoard();
+  openPanel(p, slot);
+}
+
+function openPanel(p, slot) {
+  var tpl = p.template;
+  document.getElementById('panelName').textContent = p.name;
+  document.getElementById('panelAge').textContent = p.age + p.gender;
+  document.getElementById('panelMRN').textContent = p.mrn;
+  document.getElementById('panelAppt').textContent = slot.time;
+  document.getElementById('panelRoom').textContent = slot.room;
+
+  // Build tabs
+  var tabs = [
+    {id:'chart',label:'📋 Chart'},
+    {id:'vitals',label:'❤️ Vitals & Exam'},
+    {id:'labs',label:'🔬 Labs'},
+    {id:'consult',label:'💬 AI Patient'},
+    {id:'plan',label:'📝 Assessment & Plan'},
+    {id:'score',label:'📊 Score'}
+  ];
+  document.getElementById('emrTabs').innerHTML = tabs.map(function(t,i) {
+    return '<button class="emr-tab' + (i===0?' active':'') + '" onclick="switchTab(\'' + t.id + '\',this)">' + t.label + '</button>';
+  }).join('');
+
+  renderTab('chart', p, tpl);
+  document.getElementById('panelFooter').innerHTML =
+    '<button class="btn btn-primary btn-sm" onclick="advanceStatus(\"' + p.id + '\")">Advance Status</button>' +
+    '<button class="btn btn-outline btn-sm" onclick="openTab(\'plan\')">📝 Assessment & Plan</button>' +
+    '<button class="btn btn-outline btn-sm" onclick="openTab(\'consult\')">💬 AI Patient</button>' +
+    '<button class="btn btn-outline btn-sm" onclick="closePanel()">Close</button>';
+
+  document.getElementById('panelOverlay').classList.add('open');
+  document.getElementById('detailPanel').classList.add('open');
+}
+
+function openTab(id) {
+  var slot = slots.find(function(s){return s.patient && s.patient.id === selectedSlotId;});
+  if (!slot) return;
+  document.querySelectorAll('.emr-tab').forEach(function(b){b.classList.remove('active')});
+  var tabs = document.querySelectorAll('.emr-tab');
+  var idxMap = {chart:0,vitals:1,labs:2,consult:3,plan:4,score:5};
+  if (tabs[idxMap[id]]) tabs[idxMap[id]].classList.add('active');
+  renderTab(id, slot.patient, slot.patient.template);
+}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.emr-tab').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  var slot = slots.find(function(s){return s.patient && s.patient.id === selectedSlotId;});
+  if (!slot) return;
+  renderTab(id, slot.patient, slot.patient.template);
+}
+
+function renderTab(id, p, tpl) {
+  var content = document.getElementById('emrContent');
+  if (id === 'chart') {
+    var html = '<div class="tab-body">';
+    html += '<div class="emr-section"><div class="emr-section-title">Reason for Visit</div>';
+    html += '<div class="emr-field"><span class="emr-field-label">Chief Complaint</span><span class="emr-field-value">' + esc(tpl.reasonForVisit) + '</span></div>';
+    html += '<div class="emr-field"><span class="emr-field-label">Visit Type</span><span class="emr-field-value">' + ucfirst(tpl.visitType) + '</span></div></div>';
+
+    html += '<div class="emr-section"><div class="emr-section-title">History of Present Illness</div>';
+    html += '<p style="font-size:13px;line-height:1.7">' + esc(tpl.hpi) + '</p></div>';
+
+    html += '<div class="emr-section"><div class="emr-section-title">Active Problem List & PMH</div>';
+    html += '<div class="emr-field"><span class="emr-field-label">PMH</span><span class="emr-field-value">' + esc(tpl.pmh) + '</span></div>';
+    html += '<div class="emr-field"><span class="emr-field-label">Medications</span><span class="emr-field-value">' + esc(tpl.medications) + '</span></div>';
+    html += '<div class="emr-field"><span class="emr-field-label">Allergies</span><span class="emr-field-value">' + esc(tpl.allergies) + '</span></div></div>';
+
+    html += '<div class="teaching-card"><h4>📚 Key Teaching Points</h4>';
+    tpl.teaching.keyPoints.forEach(function(k){html += '<div class="teaching-item">' + esc(k) + '</div>';});
+    html += '</div>';
+    if (tpl.teaching.pitfalls.length) {
+      html += '<div class="teaching-card" style="background:#fff9f0;border-color:#fed7aa"><h4 style="color:#c2410c">⚠️ Common Pitfalls</h4>';
+      tpl.teaching.pitfalls.forEach(function(k){html += '<div class="pitfall-item teaching-item">' + esc(k) + '</div>';});
+      html += '</div>';
+    }
+    html += '</div>';
+    content.innerHTML = html;
+  }
+  else if (id === 'vitals') {
+    var html = '<div class="tab-body">';
+    var v = tpl.vitals;
+    html += '<div class="emr-section"><div class="emr-section-title">Vital Signs</div>';
+    html += '<div class="vitals-header">';
+    var vkeys = [{k:'BP',l:'BP'},{k:'HR',l:'Heart Rate'},{k:'RR',l:'Resp Rate'},{k:'Temp',l:'Temp'},{k:'BMI',l:'BMI'}];
+    vkeys.forEach(function(vk){
+      var val = v[vk.k] || '—';
+      var abn = (vk.k==='HR'&&parseInt(val)<60) || (vk.k==='BP'&&parseInt(val)>140);
+      html += '<div class="vital-chip' + (abn?' abnormal':'') + '"><div class="vital-label">' + vk.l + '</div><div class="vital-value">' + esc(val) + '</div></div>';
+    });
+    html += '</div></div>';
+    html += '<div class="emr-section"><div class="emr-section-title">Physical Examination</div>';
+    html += '<p style="font-size:13px;line-height:1.7">' + esc(tpl.exam) + '</p></div>';
+    html += '</div>';
+    content.innerHTML = html;
+  }
+  else if (id === 'labs') {
+    var html = '<div class="tab-body"><div class="emr-section"><div class="emr-section-title">Results</div>';
+    html += '<table class="lab-table"><thead><tr><th>Test</th><th>Result</th><th>Reference</th></tr></thead><tbody>';
+    tpl.labs.forEach(function(lab){
+      html += '<tr class="' + (lab.flag?'abnormal':'') + '"><td>' + esc(lab.name) + '</td><td>' + esc(lab.val) + (lab.flag?'<span class="lab-flag ' + lab.flag + '">' + lab.flag + '</span>':'') + '</td><td style="color:var(--text-muted)">' + esc(lab.ref) + '</td></tr>';
+    });
+    html += '</tbody></table></div></div>';
+    content.innerHTML = html;
+  }
+  else if (id === 'consult') {
+    renderAIChat(p, tpl, content);
+  }
+  else if (id === 'plan') {
+    renderPlan(p, tpl, content);
+  }
+  else if (id === 'score') {
+    renderScore(p, tpl, content);
+  }
+}
+
+// ── AI PATIENT CHAT ───────────────────────────────────────────────────────────
+function renderAIChat(p, tpl, container) {
+  var tracker = ['HPI','PMH','Medications','Allergies','Social Hx','Review of Systems'];
+  var covered = tracker.filter(function(t){ return p.chatHistory.some(function(m){return m.role==='user'&&m.content.length>5;}); });
+  var chatId = 'chat-' + p.id;
+  var html = '<div class="chat-wrap">';
+  html += '<div class="chat-tracker"><div class="tracker-title">History Checklist</div><div class="tracker-grid">';
+  tracker.forEach(function(t){ html += '<div class="tracker-pill' + (covered.indexOf(t)>=0?' covered':'') + '">' + t + '</div>'; });
+  html += '</div></div>';
+  html += '<div class="chat-messages" id="' + chatId + '">';
+  if (p.chatHistory.length === 0) {
+    html += '<div class="chat-msg msg-patient">Hello, I\'m ' + esc(p.name) + '. I\'m here for my ' + esc(tpl.visitType) + ' appointment regarding ' + esc(tpl.reasonForVisit.toLowerCase()) + '.</div>';
+  } else {
+    p.chatHistory.forEach(function(m){
+      html += '<div class="chat-msg ' + (m.role==='user'?'msg-student':'msg-patient') + '">' + esc(m.content) + '</div>';
+    });
+  }
+  html += '</div>';
+  html += '<div class="chat-input-area"><textarea class="chat-input" id="chatInput-' + p.id + '" rows="2" placeholder="Ask the patient a question…" onkeydown="handleChatKey(event,\'' + p.id + '\')"></textarea><button class="chat-send" onclick="sendChat(\'' + p.id + '\')">Send</button></div>';
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function handleChatKey(e, pid) { if (e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat(pid);} }
+
+async function sendChat(pid) {
+  var slot = slots.find(function(s){return s.patient&&s.patient.id===pid;});
+  if (!slot) return;
+  var p = slot.patient; var tpl = p.template;
+  var input = document.getElementById('chatInput-' + pid);
+  if (!input || !input.value.trim()) return;
+  var msg = input.value.trim();
+  input.value = '';
+  p.chatHistory.push({role:'user',content:msg});
+  var chatEl = document.getElementById('chat-' + pid);
+  if (chatEl) {
+    chatEl.innerHTML += '<div class="chat-msg msg-student">' + esc(msg) + '</div>';
+    chatEl.innerHTML += '<div class="chat-msg msg-patient"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+  var systemPrompt = 'You are a clinic patient named ' + p.name + ', age ' + p.age + p.gender + ', presenting for: ' + tpl.reasonForVisit + '. Your chief complaint context: ' + tpl.boardCC + '. HPI: ' + tpl.hpi + '. PMH: ' + tpl.pmh + '. Meds: ' + tpl.medications + '. Allergies: ' + tpl.allergies + '. Respond in character as the patient — brief, natural, realistic clinic patient answers. If asked about symptoms not described, say you have not noticed that. Do not offer diagnoses.';
+  try {
+    var resp = await fetch(WORKER_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        messages:[{role:'user',content:systemPrompt+'\n\nStudent says: '+msg}],
+        model:'claude-haiku-4-5-20251001', max_tokens:300
+      })
+    });
+    var data = await resp.json();
+    var reply = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : 'I\'m not sure how to answer that.';
+    p.chatHistory.push({role:'assistant',content:reply});
+    if (chatEl) {
+      var typing = chatEl.querySelectorAll('.typing-indicator');
+      if (typing.length) typing[typing.length-1].parentElement.remove();
+      chatEl.innerHTML += '<div class="chat-msg msg-patient">' + esc(reply) + '</div>';
+      chatEl.scrollTop = chatEl.scrollHeight;
+    }
+  } catch(e) {
+    p.chatHistory.push({role:'assistant',content:'Sorry, I\'m having trouble hearing you right now.'});
+    if (chatEl) {
+      var typing = chatEl.querySelectorAll('.typing-indicator');
+      if (typing.length) typing[typing.length-1].parentElement.remove();
+      chatEl.innerHTML += '<div class="chat-msg msg-patient">Sorry, I\'m having trouble hearing you right now.</div>';
+    }
+  }
+}
+
+// ── ASSESSMENT & PLAN ─────────────────────────────────────────────────────────
+function renderPlan(p, tpl, container) {
+  var ordered = p.planOrdered || [];
+  var categories = {};
+  tpl.plan.forEach(function(item){
+    if (!categories[item.category]) categories[item.category] = [];
+    categories[item.category].push(item);
+  });
+  var html = '<div class="tab-body">';
+  html += '<div style="margin-bottom:12px;font-size:12px;color:var(--text-muted)">Check off your management plan. Critical items are marked.</div>';
+  Object.entries(categories).forEach(function(kv) {
+    var cat = kv[0]; var items = kv[1];
+    html += '<div class="plan-section"><h4>' + esc(cat) + '</h4>';
+    items.forEach(function(item) {
+      var isDone = ordered.indexOf(item.id) >= 0;
+      var isWrong = !item.correct;
+      var borderStyle = isWrong ? 'border:1.5px solid #fca5a5;background:#fef2f2' : '';
+      html += '<div class="plan-item' + (isDone?' ordered':'') + '" style="' + borderStyle + '" onclick="togglePlan(\'' + p.id + '\',\'' + item.id + '\')">';
+      html += '<input type="checkbox"' + (isDone?' checked':'') + (isWrong?' style="accent-color:#ef4444"':'') + '>';
+      html += '<div class="plan-label"><strong>' + esc(item.label) + '</strong>';
+      if (item.critical) html += '<span class="plan-tag critical">Critical</span>';
+      if (isWrong) html += '<span class="plan-tag critical">⚠ Incorrect</span>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function togglePlan(pid, itemId) {
+  var slot = slots.find(function(s){return s.patient&&s.patient.id===pid;});
+  if (!slot) return;
+  var p = slot.patient;
+  p.planOrdered = p.planOrdered || [];
+  var idx = p.planOrdered.indexOf(itemId);
+  if (idx >= 0) p.planOrdered.splice(idx, 1);
+  else p.planOrdered.push(itemId);
+  renderTab('plan', p, p.template, document.getElementById('emrContent'));
+  renderTab('plan', p, p.template);
+}
+
+// ── SCORECARD ─────────────────────────────────────────────────────────────────
+function renderScore(p, tpl, container) {
+  var ordered = p.planOrdered || [];
+  var correct = tpl.plan.filter(function(i){return i.correct && ordered.indexOf(i.id)>=0;}).length;
+  var total = tpl.plan.filter(function(i){return i.correct;}).length;
+  var wrong = tpl.plan.filter(function(i){return !i.correct && ordered.indexOf(i.id)>=0;}).length;
+  var critCorrect = tpl.plan.filter(function(i){return i.correct&&i.critical&&ordered.indexOf(i.id)>=0;}).length;
+  var critTotal = tpl.plan.filter(function(i){return i.correct&&i.critical;}).length;
+  var historyScore = Math.min(100, p.chatHistory.filter(function(m){return m.role==='user';}).length * 15);
+  var planScore = total > 0 ? Math.round((correct/total)*100) : 0;
+  var safetyScore = wrong === 0 ? 100 : Math.max(0, 100 - wrong*25);
+  var critScore = critTotal > 0 ? Math.round((critCorrect/critTotal)*100) : 100;
+  var overall = Math.round((historyScore*0.25)+(planScore*0.35)+(safetyScore*0.2)+(critScore*0.2));
+  var grade = overall>=90?'A':overall>=80?'B':overall>=70?'C':overall>=60?'D':'F';
+  var gradeColor = overall>=80?'var(--success)':overall>=70?'var(--primary)':overall>=60?'var(--warning)':'var(--danger)';
+
+  var html = '<div class="tab-body"><div class="scorecard">';
+  html += '<div class="scorecard-title">📊 Visit Scorecard — ' + esc(tpl.diagnosis) + '</div>';
+  html += '<div class="scorecard-grid">';
+  [{label:'History',val:historyScore,q:(historyScore>=80?'excellent':historyScore>=60?'good':'fair')},
+   {label:'Plan',val:planScore,q:(planScore>=80?'excellent':planScore>=60?'good':'fair')},
+   {label:'Safety',val:safetyScore,q:(safetyScore>=80?'excellent':safetyScore>=60?'good':'fair')},
+   {label:'Critical Items',val:critScore,q:(critScore>=80?'excellent':critScore>=60?'good':'fair')}
+  ].forEach(function(m){
+    html += '<div class="score-metric ' + m.q + '"><div class="sm-label">' + m.label + '</div><div class="sm-value">' + m.val + '%</div></div>';
+  });
+  html += '</div>';
+  html += '<div style="text-align:center;padding:12px;background:white;border-radius:10px;border:1px solid var(--border)">';
+  html += '<div style="font-size:36px;font-weight:700;font-family:var(--mono);color:' + gradeColor + '">' + grade + '</div>';
+  html += '<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Overall: ' + overall + '%</div>';
+  html += '</div></div>';
+
+  if (tpl.teaching.mustNotMiss.length) {
+    html += '<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px;margin-bottom:12px">';
+    html += '<div style="font-size:12px;font-weight:700;color:var(--danger);margin-bottom:6px">🚨 Must-Not-Miss</div>';
+    tpl.teaching.mustNotMiss.forEach(function(m){ html += '<div style="font-size:12px;padding:3px 0">' + esc(m) + '</div>'; });
+    html += '</div>';
+  }
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ── STATUS ADVANCE ────────────────────────────────────────────────────────────
+function advanceStatus(pid) {
+  var slot = slots.find(function(s){return s.patient&&s.patient.id===pid;});
+  if (!slot) return;
+  var p = slot.patient;
+  var flow = ['scheduled','checked-in','roomed','with-provider','pending-results','ready-pickup','checked-out'];
+  var idx = flow.indexOf(p.status);
+  if (idx < flow.length-1) p.status = flow[idx+1];
+  renderBoard();
+  if (p.status === 'checked-out') {
+    closePanel();
+    showToast(p.name + ' — visit complete', 'success');
+  } else {
+    showToast('Status: ' + statusLabel(p.status), '');
+  }
+}
+
+function closePanel() {
+  document.getElementById('panelOverlay').classList.remove('open');
+  document.getElementById('detailPanel').classList.remove('open');
+  selectedSlotId = null;
+  renderBoard();
+}
+
+// ── BOARD ACTIONS ─────────────────────────────────────────────────────────────
+function addWalkIn() {
+  var pool = CLINIC_CASES.filter(function(c){return c.acuity >= 3;});
+  var tpl = pool[Math.floor(Math.random()*pool.length)];
+  var isMale = Math.random() < tpl.demographics.genderDistribution.male;
+  var names = isMale ? tpl.demographics.nameOptions.male : tpl.demographics.nameOptions.female;
+  var age = Math.floor(Math.random()*(tpl.demographics.ageRange[1]-tpl.demographics.ageRange[0]))+tpl.demographics.ageRange[0];
+  // Find first open slot or append
+  var openIdx = slots.findIndex(function(s){return !s.patient;});
+  var room = openIdx >= 0 ? slots[openIdx].room : ROOMS[slots.length % ROOMS.length];
+  var time = openIdx >= 0 ? slots[openIdx].time : formatTime(simMinutes + 20);
+  var patient = {
+    id:'pt-walkin-'+Date.now(),
+    name:names[Math.floor(Math.random()*names.length)],
+    age:age, gender:isMale?'M':'F',
+    mrn:String(100000+Math.floor(Math.random()*900000)),
+    status:'checked-in', provider:'You',
+    template:tpl, chatHistory:[], planOrdered:[],
+    discovered:{startedAt:Date.now()}
+  };
+  if (openIdx >= 0) { slots[openIdx].patient = patient; slots[openIdx].room = room; }
+  else { slots.push({id:'walkin-'+Date.now(),time:time,room:room,patient:patient}); }
+  renderBoard();
+  showToast('Walk-in: ' + patient.name + ' (' + patient.age + patient.gender + ') — ' + tpl.reasonForVisit, 'success');
+}
+
+function advanceTime() {
+  simMinutes += 20;
+  if (simMinutes >= 17*60) simMinutes = 8*60; // wrap around 5PM
+  updateClock();
+  // Update slot statuses
+  slots.forEach(function(slot){
+    if (!slot.patient) return;
+    var p = slot.patient;
+    var slotMin = parseTimeToMinutes(slot.time);
+    if (p.status === 'scheduled' && slotMin <= simMinutes + 10) p.status = 'checked-in';
+  });
+  renderBoard();
+  showToast('Time advanced to ' + formatTime(simMinutes));
+}
+
+function resetBoard() {
+  simMinutes = 8*60; slots = []; selectedSlotId = null;
+  updateClock(); generateSchedule();
+  showToast('Schedule reset for new clinic day');
+}
+
+function prevDay() { dayOffset--; updateDateLabel(); generateSchedule(); }
+function nextDay() { dayOffset++; updateDateLabel(); generateSchedule(); }
+
+function updateDateLabel() {
+  var d = new Date(); d.setDate(d.getDate() + dayOffset);
+  document.getElementById('dateLabel').textContent = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+
+function formatTime(min) {
+  var h = Math.floor(min/60); var m = min%60;
+  var ampm = h>=12?'PM':'AM'; if(h>12)h-=12; if(h===0)h=12;
+  return h+':'+(m<10?'0':'')+m+' '+ampm;
+}
+
+// ── CLOCK ─────────────────────────────────────────────────────────────────────
+function updateClock() {
+  document.getElementById('simTime').textContent = formatTime(simMinutes);
+}
+function startClock() {
+  updateClock(); updateDateLabel();
+  setInterval(function(){ simMinutes+=1; if(simMinutes>=17*60)simMinutes=8*60; updateClock(); }, 60000);
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function showToast(msg, type) {
+  var t = document.createElement('div');
+  t.className = 'toast' + (type?' '+type:'');
+  t.textContent = msg;
+  document.getElementById('toastContainer').appendChild(t);
+  setTimeout(function(){t.remove();}, 3200);
+}
+
+// ── START ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', init);
+</script>
+<script src="js/nav-global.js"></script>
+</body>
+</html>
