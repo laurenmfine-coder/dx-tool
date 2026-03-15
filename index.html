@@ -1,393 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#2874A6">
-<!-- Google Analytics (ReasonDx) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReasonDx — Clinical Reasoning Education Platform</title>
+<title>ReasonDx — Clinical Reasoning Platform</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="manifest" href="manifest.json">
-<meta name="description" content="ReasonDx: Three ways to build clinical reasoning — CaseDx (145 cases in the Virtual EMR), CoachDx (Socratic AI coaching), and MechanismDx (pathophysiology explorer). Built by medical educators.">
-<meta property="og:title" content="ReasonDx — Clinical Reasoning Education Platform">
-<meta property="og:description" content="CaseDx · CoachDx · MechanismDx — three tools for building clinical reasoning. 145 cases, AI coaching, and pathophysiology explorer.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://reasondx.com">
-<link rel="canonical" href="https://reasondx.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/rdx-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#F8FAFC;--card:#fff;--bd:#E2E8F0;--bdh:#CBD5E1;
-  --txt:#1E293B;--dim:#64748B;--dim2:#94A3B8;
-  --blue:#2874A6;--dark:#1B3A5C;
-  --red:#C0392B;--red-bg:rgba(192,57,43,.06);--red-bd:rgba(192,57,43,.18);
-  --purple:#6D28D9;--purple-bg:rgba(109,40,217,.06);--purple-bd:rgba(109,40,217,.18);
-  --teal:#0E7490;--teal-bg:rgba(14,116,144,.06);--teal-bd:rgba(14,116,144,.18);
-  --f:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+  --bg:#060a10;--card:#0c1118;--border:rgba(255,255,255,.06);--text:#e0e0e0;--dim:rgba(255,255,255,.4);
+  --blue:#2874A6;--blue-bg:rgba(40,116,166,.08);--blue-bd:rgba(40,116,166,.2);
+  --red:#DC2626;--purple:#7C3AED;--green:#059669;--amber:#D97706;--teal:#0E7F6A;--pink:#EC4899;
 }
-body{background:var(--bg);color:var(--txt);font-family:var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* ── HERO ── */
-.hero{background:linear-gradient(145deg,#0D1F33 0%,#1B3A5C 55%,#2874A6 100%);color:#fff;padding:72px 24px 68px;text-align:center;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(40,116,166,.25),transparent 60%);pointer-events:none}
-.hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:5px 16px;margin-bottom:20px;color:rgba(255,255,255,.85)}
-.hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:18px}
-.hero h1 span{background:linear-gradient(90deg,#60B4FF,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(15px,1.8vw,18px);opacity:.82;line-height:1.65;max-width:560px;margin:0 auto 32px}
-.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
-.btn-primary{background:#fff;color:var(--dark);font-size:15px;font-weight:700;padding:14px 28px;border-radius:12px;border:none;cursor:pointer;font-family:var(--f);transition:all .15s;text-decoration:none;display:inline-block}
-.btn-primary:hover{background:#F0F7FF;transform:translateY(-1px)}
-.btn-ghost{background:rgba(255,255,255,.1);color:#fff;font-size:14px;font-weight:600;padding:13px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.2);text-decoration:none;display:inline-block;transition:all .15s}
-.btn-ghost:hover{background:rgba(255,255,255,.18)}
-.hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
-.hstat{text-align:center}.hstat-n{font-size:22px;font-weight:800}.hstat-l{font-size:10px;opacity:.6;text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
-/* ── CREDENTIAL STRIP ── */
-.cred-strip{background:#fff;border-bottom:1px solid var(--bd);padding:14px 24px;text-align:center;font-size:13px;color:var(--dim)}
-.cred-strip strong{color:var(--txt)}
+/* ═══ SESSION BAR ═══ */
+.session-bar{display:none;background:rgba(40,116,166,.07);border-bottom:1px solid rgba(40,116,166,.18);padding:8px 24px}
+.session-bar.active{display:block}
+.session-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--dim);flex-wrap:wrap}
+.s-pill{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:100px}
+.sp-blue{background:rgba(40,116,166,.2);color:#5BA8D0;border:1px solid rgba(40,116,166,.3)}
+.sp-teal{background:rgba(14,127,106,.2);color:#2EC4A6;border:1px solid rgba(14,127,106,.3)}
+.sp-purple{background:rgba(124,77,255,.2);color:#A58EFF;border:1px solid rgba(124,77,255,.3)}
+.s-topic{font-weight:700;color:#fff}
+.s-resume{color:var(--blue);cursor:pointer;font-weight:600;text-decoration:underline;margin-left:4px}
+.s-resume:hover{color:#5BA8D0}
 
-/* ── THREE PILLARS ── */
-.pillars{max-width:1100px;margin:0 auto;padding:60px 24px}
-.pillars-header{text-align:center;margin-bottom:36px}
-.sec-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim2);margin-bottom:8px}
-.sec-title{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.8px;margin-bottom:8px}
-.sec-sub{font-size:15px;color:var(--dim);max-width:540px;margin:0 auto}
-.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.pillar-card{border-radius:20px;padding:0;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:all .22s;border:1px solid var(--bd);background:var(--card)}
-.pillar-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1)}
-.pc-header{padding:28px 24px 22px}
-.pc-icon{font-size:32px;margin-bottom:12px;display:block}
-.pc-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:6px;margin-bottom:8px}
-.pc-title{font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
-.pc-desc{font-size:13px;line-height:1.65;color:var(--dim)}
-.pc-features{padding:0 24px;list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:20px}
-.pc-features li{font-size:12px;color:var(--dim);display:flex;align-items:flex-start;gap:7px;line-height:1.5}
-.pc-features li::before{font-weight:700;flex-shrink:0;margin-top:1px}
-.pc-cta{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;font-size:13px;font-weight:700;border-top:1px solid var(--bd)}
-/* CaseDx */
-.pc-case .pc-header{background:linear-gradient(135deg,rgba(192,57,43,.06),rgba(192,57,43,.02))}
-.pc-case .pc-pill{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
-.pc-case .pc-title{color:var(--red)}
-.pc-case .pc-features li::before{content:"🩺";font-size:11px}
-.pc-case .pc-cta{color:var(--red)}
-.pc-case:hover{border-color:var(--red-bd);box-shadow:0 16px 40px rgba(192,57,43,.12)}
-/* CoachDx */
-.pc-coach .pc-header{background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(109,40,217,.02))}
-.pc-coach .pc-pill{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)}
-.pc-coach .pc-title{color:var(--purple)}
-.pc-coach .pc-features li::before{content:"🧑‍⚕️";font-size:11px}
-.pc-coach .pc-cta{color:var(--purple)}
-.pc-coach:hover{border-color:var(--purple-bd);box-shadow:0 16px 40px rgba(109,40,217,.12)}
-/* MechanismDx */
-.pc-mech .pc-header{background:linear-gradient(135deg,rgba(14,116,144,.06),rgba(14,116,144,.02))}
-.pc-mech .pc-pill{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-bd)}
-.pc-mech .pc-title{color:var(--teal)}
-.pc-mech .pc-features li::before{content:"🧬";font-size:11px}
-.pc-mech .pc-cta{color:var(--teal)}
-.pc-mech:hover{border-color:var(--teal-bd);box-shadow:0 16px 40px rgba(14,116,144,.12)}
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(40,116,166,.06) 0%,transparent 70%);pointer-events:none}
+.hero-badge{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);background:var(--blue-bg);padding:6px 16px;border-radius:100px;border:1px solid rgba(40,116,166,.15);margin-bottom:24px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(40px,6vw,72px);font-weight:400;color:#fff;line-height:1.1;margin-bottom:12px}
+.hero h1 span{color:var(--blue);font-style:italic}
+.hero .tagline{font-size:clamp(15px,2vw,18px);color:var(--dim);max-width:560px;line-height:1.7;margin-bottom:40px}
 
-/* ── TESTIMONIALS ── */
-.testimonials{background:var(--card);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:52px 24px}
-.testimonials-inner{max-width:1000px;margin:0 auto}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
-.tcard{background:var(--bg);border:1px solid var(--bd);border-radius:16px;padding:22px 20px}
-.tquote{font-size:14px;line-height:1.7;color:var(--txt);margin-bottom:14px;font-style:italic}
-.tquote::before{content:"\201C";font-size:32px;color:var(--dim2);line-height:0;vertical-align:-.5em;margin-right:2px}
-.tattrib{font-size:12px;font-weight:600;color:var(--dim2)}
+/* CTAs */
+.cta-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
+.cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;padding:16px 32px;border-radius:12px;text-decoration:none;transition:all .2s;border:none;cursor:pointer;font-family:inherit}
+.cta-primary:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 12px 32px rgba(40,116,166,.25)}
+.cta-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);color:#fff;font-size:14px;font-weight:600;padding:14px 28px;border-radius:12px;text-decoration:none;border:1px solid var(--border);transition:all .2s;cursor:pointer;font-family:inherit}
+.cta-secondary:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);transform:translateY(-1px)}
 
-/* ── HOW IT FITS TOGETHER ── */
-.arc-section{max-width:1000px;margin:0 auto;padding:56px 24px}
-.arc-flow{display:flex;align-items:flex-start;gap:0;margin-top:24px}
-.arc-node{flex:1;text-align:center;position:relative;padding:0 8px}
-.arc-node:not(:last-child)::after{content:"→";position:absolute;right:-8px;top:28px;font-size:20px;color:var(--dim2);font-weight:700}
-.arc-icon-wrap{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 10px;border:1px solid var(--bd)}
-.arc-title{font-size:13px;font-weight:700;margin-bottom:3px}
-.arc-sub{font-size:11px;color:var(--dim);line-height:1.5}
-.arc-pillar-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:5px;display:inline-block;margin-bottom:6px}
+/* Search */
+.search-wrap{width:100%;max-width:520px;position:relative;margin-bottom:8px}
+.search-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 20px 14px 44px;color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:all .2s}
+.search-input:focus{border-color:rgba(40,116,166,.4);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.search-input::placeholder{color:rgba(255,255,255,.25)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:16px;pointer-events:none}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;display:none;z-index:20;max-height:320px;overflow-y:auto;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.search-results.active{display:block}
+.sr-item{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s;text-decoration:none;color:var(--text)}
+.sr-item:last-child{border-bottom:none}
+.sr-item:hover{background:rgba(255,255,255,.04)}
+.sr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sr-name{font-weight:600;font-size:13px}
+.sr-desc{font-size:11px;color:var(--dim)}
+.sr-category{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin-left:auto;white-space:nowrap}
+.hero-hint{font-size:11px;color:rgba(255,255,255,.2);margin-top:4px}
 
-/* ── LEARNER PATHS ── */
-.paths-section{background:linear-gradient(180deg,var(--bg),#EFF6FF);border-top:1px solid var(--bd);padding:52px 24px}
-.paths-inner{max-width:1000px;margin:0 auto}
-.paths-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:24px}
-.path-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px 18px}
-.path-icon{font-size:22px;margin-bottom:8px;display:block}
-.path-who{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-bottom:4px}
-.path-title{font-size:14px;font-weight:700;margin-bottom:6px}
-.path-desc{font-size:12px;color:var(--dim);line-height:1.6}
+/* ═══ SECTION ═══ */
+.wrap{padding:0 24px 64px;max-width:1100px;margin:0 auto}
+.sec-hdr{text-align:center;margin-bottom:32px}
+.sec-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.2);margin-bottom:10px}
+.sec-hdr h2{font-family:'DM Serif Display',serif;font-size:clamp(24px,3vw,32px);font-weight:400;color:#fff;margin-bottom:8px}
+.sec-hdr p{font-size:13px;color:var(--dim);max-width:600px;margin:0 auto}
 
-/* ── FAQ ── */
-.faq-section{max-width:760px;margin:0 auto;padding:52px 24px}
-.faq-item{border-bottom:1px solid var(--bd);padding:18px 0}
-.faq-q{font-size:15px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;user-select:none}
-.faq-q .faq-toggle{font-size:20px;color:var(--dim2);flex-shrink:0;transition:transform .2s;margin-top:-1px}
-.faq-a{font-size:14px;color:var(--dim);line-height:1.7;margin-top:10px;display:none}
-.faq-item.open .faq-a{display:block}
-.faq-item.open .faq-toggle{transform:rotate(45deg)}
+/* ═══ THREE PILLAR CARDS ═══ */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
 
-/* ── INSTITUTIONAL ── */
-.institutional{background:linear-gradient(135deg,var(--dark),#2874A6);color:#fff;padding:52px 24px;text-align:center}
-.institutional-inner{max-width:640px;margin:0 auto}
-.inst-title{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
-.inst-sub{font-size:15px;opacity:.85;line-height:1.65;margin-bottom:28px}
+.p-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;position:relative;transition:all .2s}
+.p-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
+.p-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.1)}
+.p-card:hover::after{opacity:1}
+.p-card[data-c=blue]::after{background:linear-gradient(90deg,#2874A6,#5BA8D0)}
+.p-card[data-c=blue]:hover{box-shadow:0 12px 40px rgba(40,116,166,.14)}
+.p-card[data-c=teal]::after{background:linear-gradient(90deg,#0E7F6A,#2EC4A6)}
+.p-card[data-c=teal]:hover{box-shadow:0 12px 40px rgba(14,127,106,.14)}
+.p-card[data-c=purple]::after{background:linear-gradient(90deg,#7C3AED,#A58EFF)}
+.p-card[data-c=purple]:hover{box-shadow:0 12px 40px rgba(124,77,255,.14)}
 
-/* ── FOOTER ── */
-.footer{background:var(--dark);color:rgba(255,255,255,.6);padding:32px 24px;text-align:center;font-size:13px}
-.footer a{color:rgba(255,255,255,.7)}.footer a:hover{color:#fff}
+.p-body{padding:26px 24px 20px;flex:1}
+.p-icon-row{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.p-icon{font-size:28px}
+.p-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.lc-blue{color:#5BA8D0}
+.lc-teal{color:#2EC4A6}
+.lc-purple{color:#A58EFF}
+.p-name{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:8px}
+.p-desc{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:18px}
+.p-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.p-list li{font-size:12px;color:var(--dim);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.p-list li span{flex-shrink:0;margin-top:1px;font-size:11px}
+.arr-blue li span{color:#5BA8D0}
+.arr-teal li span{color:#2EC4A6}
+.arr-purple li span{color:#A58EFF}
+.p-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.p-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;padding:10px 20px;border-radius:10px;border:none;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;color:#fff}
+.pb-blue{background:#2874A6}.pb-blue:hover{background:#1B4F72}
+.pb-teal{background:#0E7F6A}.pb-teal:hover{background:#0A6055}
+.pb-purple{background:#7C3AED}.pb-purple:hover{background:#5B21B6}
+.p-stat{font-size:10px;font-weight:600;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.05em}
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){.pillars-grid{grid-template-columns:1fr}.tgrid{grid-template-columns:1fr}}
-@media(max-width:640px){.arc-flow{flex-direction:column;gap:12px}.arc-node:not(:last-child)::after{display:none}.hero-stats{gap:18px}.paths-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.paths-grid{grid-template-columns:1fr}}
+/* ═══ BRIDGE CONNECTOR ═══ */
+.bridge-strip{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 26px;display:flex;align-items:flex-start;gap:18px}
+.bs-icon{font-size:24px;flex-shrink:0;margin-top:3px}
+.bs-text h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px}
+.bs-text p{font-size:13px;color:var(--dim);line-height:1.65}
+.bs-flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.bs-node{font-size:12px;font-weight:600;padding:5px 12px;border-radius:8px;border:1px solid var(--border)}
+.bn-blue{background:rgba(40,116,166,.1);border-color:rgba(40,116,166,.25);color:#5BA8D0}
+.bn-teal{background:rgba(14,127,106,.1);border-color:rgba(14,127,106,.25);color:#2EC4A6}
+.bn-purple{background:rgba(124,77,255,.1);border-color:rgba(124,77,255,.25);color:#A58EFF}
+.bs-arrow{color:rgba(255,255,255,.2);font-size:14px}
+.bs-fp{font-size:11px;color:rgba(255,255,255,.18);margin-top:10px;display:flex;align-items:center;gap:6px}
+.bs-fp-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+/* ═══ SUPPORT GRID (dept cards) ═══ */
+.support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.dept-card{display:flex;align-items:flex-start;gap:14px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:var(--text);transition:all .2s;position:relative;overflow:hidden}
+.dept-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;opacity:.6}
+.dept-card:hover{border-color:rgba(255,255,255,.1);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.dept-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.dept-info h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:3px}
+.dept-info p{font-size:12px;color:var(--dim);line-height:1.5}
+.dept-stat{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+.dept-card[data-c=red]::before{background:#DC2626}
+.dept-card[data-c=amber]::before{background:#D97706}
+.dept-card[data-c=blue]::before{background:#2874A6}
+.dept-card[data-c=green]::before{background:#059669}
+.dept-card[data-c=purple]::before{background:#7C3AED}
+.dept-card[data-c=indigo]::before{background:#6366F1}
+.dept-card[data-c=pink]::before{background:#EC4899}
+
+/* ═══ HOW IT WORKS ═══ */
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.how-step{text-align:center;padding:24px 16px;background:var(--card);border:1px solid var(--border);border-radius:14px}
+.how-num{font-size:32px;font-weight:700;color:var(--blue);opacity:.3;font-family:'DM Serif Display',serif}
+.how-title{font-size:15px;font-weight:700;color:#fff;margin:8px 0 6px}
+.how-desc{font-size:12px;color:var(--dim);line-height:1.6}
+
+/* ═══ FOOTER ═══ */
+.footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);max-width:900px;margin:0 auto}
+.footer-stats{display:flex;justify-content:center;gap:32px;margin-bottom:20px;flex-wrap:wrap}
+.footer-stat .fs-num{font-size:24px;font-weight:700;color:var(--blue);font-family:'DM Serif Display',serif}
+.footer-stat .fs-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.footer-links{display:flex;gap:16px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.footer-links a{font-size:12px;color:var(--dim);text-decoration:none}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.15)}
+.save-prompt{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--blue);background:var(--blue-bg);padding:8px 16px;border-radius:8px;border:1px solid rgba(40,116,166,.15);text-decoration:none;margin-bottom:16px;transition:all .15s}
+.save-prompt:hover{background:rgba(40,116,166,.15);border-color:rgba(40,116,166,.3)}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:18px;max-width:520px;width:100%;overflow:hidden;transform:translateY(12px);transition:transform .25s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-hdr{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.mh-icon{font-size:24px;margin-right:6px}
+.mh-title{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:#fff;margin-bottom:3px}
+.mh-sub{font-size:13px;color:var(--dim)}
+.modal-x{background:transparent;border:1px solid var(--border);color:var(--dim);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-family:inherit}
+.modal-x:hover{border-color:rgba(255,255,255,.15);color:#fff}
+.modal-body{padding:20px 24px 24px}
+.modal-q{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:14px}
+.lo-list{display:flex;flex-direction:column;gap:10px}
+.lo{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:12px;border:1px solid var(--border);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.02)}
+.lo:hover{border-color:rgba(255,255,255,.1);transform:translateX(3px)}
+.lo[data-p=coach]:hover{border-color:rgba(40,116,166,.4);background:rgba(40,116,166,.06)}
+.lo[data-p=reason]:hover{border-color:rgba(14,127,106,.4);background:rgba(14,127,106,.06)}
+.lo[data-p=mechanism]:hover{border-color:rgba(124,77,255,.4);background:rgba(124,77,255,.06)}
+.lo-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.lic-coach{background:rgba(40,116,166,.15)}
+.lic-reason{background:rgba(14,127,106,.15)}
+.lic-mechanism{background:rgba(124,77,255,.15)}
+.lo-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.lo-desc{font-size:12px;color:var(--dim);line-height:1.45}
+.lo-arr{margin-left:auto;color:rgba(255,255,255,.2);font-size:14px;flex-shrink:0}
+
+/* ═══ FLOATING BRIDGE BANNER ═══ */
+.bb{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);z-index:150;background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.7);max-width:500px;width:calc(100vw - 48px);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.bb.visible{transform:translateX(-50%) translateY(0)}
+.bb-icon{font-size:20px;flex-shrink:0}
+.bb-text{flex:1}
+.bb-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.bb-desc{font-size:11px;color:var(--dim)}
+.bb-btns{display:flex;gap:8px;flex-shrink:0}
+.bb-go{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer;border:none;color:#fff;transition:all .15s;white-space:nowrap}
+.bb-no{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;padding:7px 12px;border-radius:8px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--dim);transition:all .15s}
+.bb-no:hover{border-color:rgba(255,255,255,.15);color:#fff}
+
+@media(max-width:900px){.pillar-grid,.how-steps{grid-template-columns:1fr}}
+@media(max-width:640px){.support-grid{grid-template-columns:1fr}.cta-group{flex-direction:column;align-items:center}.bridge-strip{flex-direction:column}}
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── (injected by rdx-nav.js) -->
-
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">145 cases · 23 specialties · built by medical educators</div>
-    <h1>Three ways to build<br><span>clinical reasoning</span></h1>
-    <p class="hero-sub">Work real cases in the Virtual EMR. Get coached by an AI attending. Explore the pathophysiology behind every diagnosis. Medical students, residents, PA and NP students — pick your starting point.</p>
-    <div class="hero-ctas">
-      <a href="auth/register.html" class="btn-primary">Create Free Account →</a>
-      <a href="demo-coachdx.html" class="btn-ghost">▶ Watch CoachDx Demo</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat"><div class="hstat-n">145</div><div class="hstat-l">Clinical Cases</div></div>
-      <div class="hstat"><div class="hstat-n">560</div><div class="hstat-l">Pathophysiology Topics</div></div>
-      <div class="hstat"><div class="hstat-n">23</div><div class="hstat-l">Specialties</div></div>
-      <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">to Start</div></div>
-    </div>
+<!-- SESSION BAR -->
+<div class="session-bar" id="sBar">
+  <div class="session-bar-inner">
+    <span class="s-pill sp-blue" id="sPill">● CoachDx</span>
+    <span>Session in progress:</span>
+    <span class="s-topic" id="sTopic">Anaphylaxis</span>
+    <span class="s-resume" onclick="resumeSession()">↩ Resume →</span>
   </div>
-</section>
-
-<!-- ── CREDENTIAL STRIP ── -->
-<div class="cred-strip">
-  Built by <strong>Lauren Fine, MD, FAAAAI</strong> · Board-Certified Allergist/Immunologist · Medical Educator
 </div>
 
-<!-- ── THREE PILLARS ── -->
-<section class="pillars">
-  <div class="pillars-header">
-    <div class="sec-eyebrow">The Platform</div>
-    <div class="sec-title">Pick your mode, start learning</div>
-    <p class="sec-sub">Three tools. One goal: building the clinical reasoning that makes you a better clinician.</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Clinical Reasoning Platform</div>
+  <h1>Welcome to <span>ReasonDx</span></h1>
+  <p class="tagline">Three integrated modes for clinical reasoning mastery — coaching, cases, and mechanisms. Move between them freely. The system tracks where you are and brings you back.</p>
+
+  <div class="cta-group">
+    <button class="cta-primary" onclick="openModal(null)">▶ Start a Session</button>
+    <a class="cta-secondary" href="case-browser.html">📚 Browse Topics &amp; Cases</a>
   </div>
-  <div class="pillars-grid">
 
-    <!-- CaseDx -->
-    <a href="casedx.html" class="pillar-card pc-case">
-      <div class="pc-header">
-        <span class="pc-icon">🩺</span>
-        <div class="pc-pill">Clinical Cases</div>
-        <div class="pc-title">CaseDx</div>
-        <p class="pc-desc">Work through patient encounters in the Virtual EMR. Build your differential, order tests, and finish with a clinical note and SBAR handoff.</p>
-      </div>
-      <ul class="pc-features">
-        <li>145 cases across 23 specialties</li>
-        <li>Full EMR: chart, labs, imaging, orders</li>
-        <li>ED Board, Night Float, Morning Rounds</li>
-        <li>Note + SBAR after every case</li>
-      </ul>
-      <div class="pc-cta">Browse Cases <span>→</span></div>
-    </a>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search" type="text"
+      placeholder="Search a topic, case, or concept…"
+      autocomplete="off"
+      oninput="doSearch(this.value)"
+      onfocus="doSearch(this.value)"
+      onblur="setTimeout(()=>document.getElementById('sr').classList.remove('active'),200)">
+    <div class="search-results" id="sr"></div>
+  </div>
+  <div class="hero-hint">Try: "anaphylaxis", "HAE", "drug allergy", "chest pain", "SBAR"</div>
+</section>
 
+<!-- THREE CORE PILLARS -->
+<div class="wrap" id="core">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow">Three Modes. One Learning Arc.</div>
+    <h2>The Core of ReasonDx</h2>
+    <p>Each mode is complete on its own — and more powerful when connected. Jump between them freely; your progress travels with you.</p>
+  </div>
+
+  <div class="pillar-grid">
     <!-- CoachDx -->
-    <a href="CoachDx/index.html" class="pillar-card pc-coach">
-      <div class="pc-header">
-        <span class="pc-icon">🧑‍⚕️</span>
-        <div class="pc-pill">AI Coaching</div>
-        <div class="pc-title">CoachDx</div>
-        <p class="pc-desc">Your AI attending asks the questions you need to answer. Start from any topic, case, or concept. CoachDx pushes back until your reasoning holds up.</p>
+    <div class="p-card" data-c="blue">
+      <div class="p-body">
+        <div class="p-icon-row"><span class="p-icon">🧑‍⚕️</span><span class="p-label lc-blue">AI Coaching</span></div>
+        <div class="p-name">CoachDx</div>
+        <p class="p-desc">Your AI attending. CoachDx doesn't give you answers — it asks the questions that force you to find them, adapting to your gaps in real time.</p>
+        <ul class="p-list arr-blue">
+          <li><span>→</span>Socratic coaching on any topic or concept</li>
+          <li><span>→</span>Free-text case or question discussion</li>
+          <li><span>→</span>Knowledge gap targeting &amp; follow-up</li>
+          <li><span>→</span>DDx challenge from any chief complaint</li>
+        </ul>
       </div>
-      <ul class="pc-features">
-        <li>Free-form — start from any topic or case</li>
-        <li>Socratic questioning, not spoon-feeding</li>
-        <li>Adapts to your level and reasoning gaps</li>
-        <li>Progress tracked across sessions</li>
-      </ul>
-      <div class="pc-cta">Start Coaching <span>→</span></div>
-    </a>
+      <div class="p-foot">
+        <a class="p-btn pb-blue" href="CoachDx/index.html">Start Coaching →</a>
+        <span class="p-stat">200+ topics</span>
+      </div>
+    </div>
+
+    <!-- ReasonDx Cases -->
+    <div class="p-card" data-c="teal">
+      <div class="p-body">
+        <div class="p-icon-row"><span class="p-icon">🩺</span><span class="p-label lc-teal">Structured Cases</span></div>
+        <div class="p-name">ReasonDx Cases</div>
+        <p class="p-desc">Structured patient scenarios with branching reasoning pathways. Work history, exam, workup, and management — see where your thinking diverges from expert reasoning.</p>
+        <ul class="p-list arr-teal">
+          <li><span>→</span>Branching case narratives with checkpoints</li>
+          <li><span>→</span>Full EMR-style simulation environment</li>
+          <li><span>→</span>Reasoning pathway fingerprint tracking</li>
+          <li><span>→</span>Post-case debrief &amp; CoachDx reflection</li>
+        </ul>
+      </div>
+      <div class="p-foot">
+        <a class="p-btn pb-teal" href="case-browser.html">Open a Case →</a>
+        <span class="p-stat">80+ cases</span>
+      </div>
+    </div>
 
     <!-- MechanismDx -->
-    <a href="pathway.html" class="pillar-card pc-mech">
-      <div class="pc-header">
-        <span class="pc-icon">🧬</span>
-        <div class="pc-pill">Pathophysiology</div>
-        <div class="pc-title">MechanismDx</div>
-        <p class="pc-desc">Follow the mechanism chain from molecular pathology to clinical presentation. Understand the <em>why</em> behind every diagnosis, not just the what.</p>
+    <div class="p-card" data-c="purple">
+      <div class="p-body">
+        <div class="p-icon-row"><span class="p-icon">🔬</span><span class="p-label lc-purple">Pathophysiology</span></div>
+        <div class="p-name">MechanismDx</div>
+        <p class="p-desc">Visual pathophysiology modules that connect basic science to bedside reasoning. When you understand the mechanism, the clinical picture stops being memorization.</p>
+        <ul class="p-list arr-purple">
+          <li><span>→</span>Interactive mechanism cards with spaced rep</li>
+          <li><span>→</span>Embryology &amp; development module suites</li>
+          <li><span>→</span>Guideline-anchored, open-access content</li>
+          <li><span>→</span>Return directly to your case or session</li>
+        </ul>
       </div>
-      <ul class="pc-features">
-        <li>560 topics across 93 systems</li>
-        <li>AI tutor at every mechanism node</li>
-        <li>36 deep-dive specialty modules</li>
-        <li>Spaced repetition + mastery tracking</li>
-      </ul>
-      <div class="pc-cta">Explore Mechanisms <span>→</span></div>
+      <div class="p-foot">
+        <a class="p-btn pb-purple" href="mechanism/anaphylaxis-module.html">Explore Mechanisms →</a>
+        <span class="p-stat">36 modules</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- How they connect -->
+  <div class="bridge-strip">
+    <div class="bs-icon">🔁</div>
+    <div class="bs-text">
+      <h3>Move between modes without losing your place</h3>
+      <p>Struggling with a mechanism mid-coaching session? Jump to MechanismDx — your question stays open. Hit a pathophys wall mid-case? Same thing. Every transition is logged as a gap and surfaced again through spaced repetition.</p>
+      <div class="bs-flow">
+        <span class="bs-node bn-blue">🧑‍⚕️ CoachDx</span>
+        <span class="bs-arrow">⇄</span>
+        <span class="bs-node bn-purple">🔬 MechanismDx</span>
+        <span class="bs-arrow">⇄</span>
+        <span class="bs-node bn-teal">🩺 Cases</span>
+      </div>
+      <div class="bs-fp"><div class="bs-fp-dot"></div>Every gap and bridge is logged to your Reasoning Fingerprint for spaced repetition review</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORTING COMPONENTS -->
+<div class="wrap" id="components">
+  <div class="sec-hdr">
+    <div class="sec-eyebrow">Also in ReasonDx</div>
+    <h2>Supporting Components</h2>
+    <p>These components power the cases and coaching — access them directly or reach them naturally through a session. ED Simulation is available through the Case &amp; Topic Library.</p>
+  </div>
+
+  <div class="support-grid">
+    <a class="dept-card" data-c="blue" href="case-browser.html">
+      <span class="dept-icon">📚</span>
+      <div class="dept-info">
+        <h3>Case &amp; Topic Library</h3>
+        <p>Browse all 325+ cases by specialty and clinical setting. Pick a topic and launch directly into CoachDx, a ReasonDx case, or MechanismDx from one place.</p>
+        <div class="dept-stat">325+ cases · 29 specialties · ED, Floor, Clinic, ICU &amp; more</div>
+      </div>
     </a>
-
+    <a class="dept-card" data-c="amber" href="crt-hub.html">
+      <span class="dept-icon">🧩</span>
+      <div class="dept-info">
+        <h3>Case Trainers &amp; Scenarios</h3>
+        <p>The structured reasoning scaffolds that power ReasonDx cases and CoachDx sessions — SBAR handoffs, consultant callbacks, ED transitions, and diagnostic frameworks.</p>
+        <div class="dept-stat">79 trainers · SBAR · Callbacks · Diagnostic frameworks</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="green" href="simroomdx.html">
+      <span class="dept-icon">🎤</span>
+      <div class="dept-info">
+        <h3>Morning Rounds — SimRoomDx</h3>
+        <p>Present your patient to the attending. AI characters ask questions and push back on your reasoning in real time.</p>
+        <div class="dept-stat">23 scenarios · 6 AI characters</div>
+      </div>
+    </a>
+    <a class="dept-card" data-c="purple" href="night-float.html">
+      <span class="dept-icon">🌙</span>
+      <div class="dept-info">
+        <h3>Night Float</h3>
+        <p>Cross-cover overnight call. Manage a patient list, respond to nurse pages, handle decompensations, and practice I-PASS handoff.</p>
+        <div class="dept-stat">Randomized or topic-based lists</div>
+      </div>
+    </a>
   </div>
-</section>
+</div>
 
-<!-- ── TESTIMONIALS ── -->
-<section class="testimonials">
-  <div class="testimonials-inner">
-    <div class="sec-eyebrow" style="text-align:center">From Learners</div>
-    <div class="sec-title" style="text-align:center;font-size:clamp(20px,2.5vw,28px);margin-bottom:0">What students say</div>
-    <div class="tgrid">
-      <div class="tcard">
-        <div class="tquote">CoachDx doesn't let you off the hook. It asked me <em>why</em> I ordered a d-dimer before I'd even calculated the Wells score.</div>
-        <div class="tattrib">M3 Medical Student · Internal Medicine clerkship</div>
-      </div>
-      <div class="tcard">
-        <div class="tquote">The EMR feels like what we actually use on rotation. Not a textbook with multiple choice bolted on.</div>
-        <div class="tattrib">PA Student · Year 2</div>
-      </div>
-      <div class="tcard">
-        <div class="tquote">MechanismDx finally made the connection between the biochemistry I memorized in M1 and the cases I'm seeing in the hospital.</div>
-        <div class="tattrib">M3 Medical Student · Cardiology rotation</div>
-      </div>
+<!-- HOW A SESSION FLOWS -->
+<div class="wrap">
+  <div class="sec-hdr">
+    <h2>How a Session Works</h2>
+    <p>Start anywhere. The system meets you there.</p>
+  </div>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-title">Pick a topic or let the system pick for you</div>
+      <div class="how-desc">Search for a diagnosis, browse the Case Browser, or ask CoachDx to target your weakest area. No rigid curriculum — you lead.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-title">Work through it in one or all three modes</div>
+      <div class="how-desc">Coach → Case → Mechanism in any order. Hit a gap and the system surfaces a bridge. Your session context travels with you.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-title">Your gaps become your next session</div>
+      <div class="how-desc">Every bridge taken, every hesitation logged — built into your Reasoning Fingerprint and returned through spaced repetition until mastered.</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ── HOW THEY FIT TOGETHER ── -->
-<section class="arc-section">
-  <div class="sec-eyebrow">The Learning Arc</div>
-  <div class="sec-title">Three pillars, one complete approach</div>
-  <p style="font-size:14px;color:var(--dim);margin-top:6px;margin-bottom:28px">Use them independently or in sequence — the pillars reinforce each other.</p>
-  <div class="arc-flow">
-    <div class="arc-node">
-      <div class="arc-icon-wrap" style="background:var(--teal-bg);border-color:var(--teal-bd)">🧬</div>
-      <div class="arc-pillar-tag" style="background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-bd)">MechanismDx</div>
-      <div class="arc-title">Understand the mechanism</div>
-      <div class="arc-sub">Why does the pathology cause these symptoms?</div>
-    </div>
-    <div class="arc-node">
-      <div class="arc-icon-wrap" style="background:var(--red-bg);border-color:var(--red-bd)">🩺</div>
-      <div class="arc-pillar-tag" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)">CaseDx</div>
-      <div class="arc-title">Apply it to a patient</div>
-      <div class="arc-sub">Work the case, build DDx, document, hand off</div>
-    </div>
-    <div class="arc-node">
-      <div class="arc-icon-wrap" style="background:var(--purple-bg);border-color:var(--purple-bd)">🧑‍⚕️</div>
-      <div class="arc-pillar-tag" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-bd)">CoachDx</div>
-      <div class="arc-title">Defend your reasoning</div>
-      <div class="arc-sub">AI attending challenges every assumption</div>
-    </div>
-    <div class="arc-node">
-      <div class="arc-icon-wrap" style="background:#F0FDF4;border-color:#BBF7D0">📈</div>
-      <div class="arc-pillar-tag" style="background:#F0FDF4;color:#059669;border:1px solid #BBF7D0">Progress</div>
-      <div class="arc-title">Build lasting expertise</div>
-      <div class="arc-sub">Tracked across sessions, spaced over time</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── LEARNER PATHS ── -->
-<section class="paths-section">
-  <div class="paths-inner">
-    <div class="sec-eyebrow" style="text-align:center">Every Learner Has a Path</div>
-    <div class="sec-title" style="text-align:center;font-size:clamp(20px,2.5vw,28px)">Built for the full health professions continuum</div>
-    <div class="paths-grid">
-      <div class="path-card">
-        <span class="path-icon">📚</span>
-        <div class="path-who">M1 – M2</div>
-        <div class="path-title">Foundations</div>
-        <div class="path-desc">Start with MechanismDx — build the mechanistic vocabulary you'll need when you hit the wards.</div>
-      </div>
-      <div class="path-card">
-        <span class="path-icon">🩺</span>
-        <div class="path-who">M3 – M4</div>
-        <div class="path-title">Clerkships</div>
-        <div class="path-desc">CaseDx for case-based prep, CoachDx for rounds coaching, Night Float for overnight readiness.</div>
-      </div>
-      <div class="path-card">
-        <span class="path-icon">🏥</span>
-        <div class="path-who">Residents & Fellows</div>
-        <div class="path-title">Residency Prep</div>
-        <div class="path-desc">Night Float, Morning Rounds, I-PASS handoffs, ACGME milestone tracking — EPA-mapped throughout.</div>
-      </div>
-      <div class="path-card">
-        <span class="path-icon">⚕️</span>
-        <div class="path-who">PA & NP Students</div>
-        <div class="path-title">Advanced Practice</div>
-        <div class="path-desc">All 145 cases and all three pillars mapped for advanced practice scope. CoachDx adapts to your curriculum.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FAQ ── -->
-<section class="faq-section">
-  <div class="sec-eyebrow">Questions</div>
-  <div class="sec-title" style="margin-bottom:24px">Frequently asked</div>
-
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Is ReasonDx free? <span class="faq-toggle">+</span></div>
-    <div class="faq-a">The free tier gives you full access to CaseDx cases, the Virtual EMR, and MechanismDx topics. CoachDx AI coaching, Night Float, spaced repetition, and advanced analytics unlock with Pro ($14.99/month or $99/year).</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Who built ReasonDx? <span class="faq-toggle">+</span></div>
-    <div class="faq-a">ReasonDx was built by <strong>Lauren Fine, MD, FAAAAI</strong>, a board-certified allergist/immunologist and medical educator with faculty appointments in clinical skills education. Dr. Fine is a recognized innovator in clinical reasoning curriculum design and health professions education.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">How is CoachDx different from just using ChatGPT? <span class="faq-toggle">+</span></div>
-    <div class="faq-a">ChatGPT gives you answers. CoachDx asks you questions. It's specifically designed for clinical reasoning education using Socratic questioning — it probes your thinking, pushes back on vague answers, and builds sessions around your documented gaps. It won't tell you the diagnosis; it will ask you to defend every step until your reasoning is airtight.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Is there evidence this approach works? <span class="faq-toggle">+</span></div>
-    <div class="faq-a">ReasonDx is built on three approaches with robust empirical support in health professions education: deliberate practice (Ericsson), spaced repetition (Ebbinghaus), and Socratic coaching. These principles underpin the design of every case, coaching session, and mechanism module on the platform.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Can my institution use ReasonDx? <span class="faq-toggle">+</span></div>
-    <div class="faq-a">Yes. ReasonDx offers institutional licensing with faculty dashboards, cohort analytics, LMS integration (Canvas/Blackboard), and ACGME milestone tracking. <a href="institutional.html" style="color:#2874A6">Learn more about institutional access</a> or email <a href="mailto:hello@reasondx.com" style="color:#2874A6">hello@reasondx.com</a>.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Does it work on mobile? <span class="faq-toggle">+</span></div>
-    <div class="faq-a">MechanismDx, CoachDx, and most CaseDx cases work well on mobile. For the full ED Track Board and split-screen EMR experience, a laptop or tablet gives you the most screen real estate.</div>
-  </div>
-</section>
-
-<!-- ── INSTITUTIONAL ── -->
-<section class="institutional">
-  <div class="institutional-inner">
-    <div class="inst-title">Using ReasonDx in your program?</div>
-    <p class="inst-sub">Faculty dashboards, cohort analytics, Canvas/Blackboard integration, and ACGME milestone mapping. Designed for medical schools, PA programs, NP programs, and residencies.</p>
-    <a href="institutional.html" class="btn-primary" style="background:#fff;color:#1B3A5C">Request Institutional Demo →</a>
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer class="footer">
-  <p>&copy; 2025–2026 ReasonDx &nbsp;·&nbsp; <a href="mailto:hello@reasondx.com">hello@reasondx.com</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; <a href="institutional.html">Institutions</a> &nbsp;·&nbsp; <a href="auth/register.html">Sign Up Free</a></p>
+  <div class="footer-stats">
+    <div class="footer-stat"><div class="fs-num">325+</div><div class="fs-label">Clinical Cases</div></div>
+    <div class="footer-stat"><div class="fs-num">36</div><div class="fs-label">Mechanism Modules</div></div>
+    <div class="footer-stat"><div class="fs-num">200+</div><div class="fs-label">Coaching Topics</div></div>
+    <div class="footer-stat"><div class="fs-num">29</div><div class="fs-label">Specialties</div></div>
+  </div>
+  <a class="save-prompt" href="auth/register.html">💾 Create a free account to save your Reasoning Fingerprint</a>
+  <div class="footer-links">
+    <a href="auth/register.html">Sign Up</a>
+    <a href="CoachDx/index.html">CoachDx</a>
+    <a href="case-browser.html">Case &amp; Topic Library</a>
+    <a href="crt-hub.html">Case Trainers &amp; Scenarios</a>
+    <a href="tools/index.html">Tools</a>
+  </div>
+  <div class="footer-copy">© 2025 ReasonDx · Clinical reasoning education · All content open-access</div>
 </footer>
 
-<script src="js/rdx-nav.js"></script>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeOut(event)">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span class="mh-icon" id="mIcon">▶</span>
+          <div class="mh-title" id="mTitle">Start a Session</div>
+        </div>
+        <div class="mh-sub" id="mSub">Choose how you want to work on this topic</div>
+      </div>
+      <button class="modal-x" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-q">How do you want to learn this?</div>
+      <div class="lo-list">
+        <div class="lo" data-p="coach" onclick="launch('coach')">
+          <div class="lo-ic lic-coach">🧑‍⚕️</div>
+          <div>
+            <div class="lo-name">CoachDx — Socratic Coaching</div>
+            <div class="lo-desc">Your AI attending asks the questions. Best for applying knowledge and testing your reasoning under pressure.</div>
+          </div>
+          <div class="lo-arr">→</div>
+        </div>
+        <div class="lo" data-p="reason" onclick="launch('reason')">
+          <div class="lo-ic lic-reason">🩺</div>
+          <div>
+            <div class="lo-name">ReasonDx — Work a Case</div>
+            <div class="lo-desc">Structured patient scenario with diagnostic checkpoints. See how your reasoning compares to expert pathways.</div>
+          </div>
+          <div class="lo-arr">→</div>
+        </div>
+        <div class="lo" data-p="mechanism" onclick="launch('mechanism')">
+          <div class="lo-ic lic-mechanism">🔬</div>
+          <div>
+            <div class="lo-name">MechanismDx — Learn the Science First</div>
+            <div class="lo-desc">Visual pathophysiology. Build the mechanistic foundation, then return to apply it in coaching or a case.</div>
+          </div>
+          <div class="lo-arr">→</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRIDGE BANNER -->
+<div class="bb" id="bb">
+  <div class="bb-icon" id="bbIcon">🔬</div>
+  <div class="bb-text">
+    <div class="bb-title" id="bbTitle">Need to review the mechanism?</div>
+    <div class="bb-desc" id="bbDesc">Jump to MechanismDx — your session is saved here when you return.</div>
+  </div>
+  <div class="bb-btns">
+    <button class="bb-go" id="bbGo" onclick="doBridge()">Go →</button>
+    <button class="bb-no" onclick="dismissBridge()">Not now</button>
+  </div>
+</div>
+
 <script>
-function toggleFaq(el){el.classList.toggle('open');}
-// Show sign-up nav if not logged in, log-out if logged in
-(function(){
-  var user = localStorage.getItem('reasondx-user');
-  // Homepage doesn't use the authenticated nav — rdx-nav.js is still injected
-  // but for the homepage we override the logout to be a sign-in button
-  document.addEventListener('DOMContentLoaded', function(){
-    var logoutBtn = document.getElementById('rdx-logout-btn');
-    if(logoutBtn && !user){
-      logoutBtn.textContent = 'Sign In';
-      logoutBtn.onclick = function(){ window.location.href = 'auth/login.html'; };
-    }
-  });
-})();
+/* ─── SEARCH ─── */
+const IDX = [
+  {n:'Anaphylaxis',d:'IgE-mediated systemic reaction — coaching, cases, mechanisms',c:'A/I',col:'#DC2626',u:'CoachDx/mentor-chat.html?topic=anaphylaxis'},
+  {n:'Asthma',d:'Airway hyperresponsiveness, biologics, asthma-COPD overlap',c:'A/I',col:'#2874A6',u:'mechanism/asthma-module.html'},
+  {n:'Urticaria',d:'Chronic spontaneous, inducible, urticarial vasculitis',c:'A/I',col:'#2874A6',u:'mechanism/urticaria-module.html'},
+  {n:'Drug Allergy',d:'IgE vs non-IgE, penicillin, vancomycin RMS',c:'A/I',col:'#7C3AED',u:'mechanism/drug-allergy-module.html'},
+  {n:'Food Allergy',d:'IgE-mediated, FPIES, OIT reactions, alpha-gal syndrome',c:'A/I',col:'#7C3AED',u:'mechanism/food-allergy-module.html'},
+  {n:'Angioedema / HAE',d:'Hereditary angioedema, ACE-inhibitor, allergic',c:'A/I',col:'#7C3AED',u:'case-browser.html'},
+  {n:'Contact Dermatitis',d:'Type IV delayed hypersensitivity, occupational',c:'A/I',col:'#059669',u:'mechanism/atopic-derm-module.html'},
+  {n:'Atopic Dermatitis',d:'Eczema, dupilumab, eczema herpeticum',c:'A/I',col:'#059669',u:'mechanism/atopic-derm-module.html'},
+  {n:'Allergic Rhinitis',d:'Seasonal, perennial, allergen immunotherapy',c:'A/I',col:'#2874A6',u:'mechanism/rhinitis-module.html'},
+  {n:'Mastocytosis / MCAS',d:'Mast cell disorders, clonal vs reactive',c:'A/I',col:'#D97706',u:'mechanism/mastocytosis-mcas-module.html'},
+  {n:'Eosinophilic Esophagitis',d:'EoE adult and pediatric, dupilumab',c:'A/I',col:'#EC4899',u:'case-browser.html'},
+  {n:'CVID',d:'Common variable immunodeficiency, antibody deficiency',c:'Immunology',col:'#7C3AED',u:'case-browser.html'},
+  {n:'SCID',d:'Severe combined immunodeficiency, ADA-SCID',c:'Immunology',col:'#7C3AED',u:'case-browser.html'},
+  {n:'SJS / TEN',d:'Severe cutaneous drug reactions, DRESS syndrome',c:'A/I',col:'#DC2626',u:'case-browser.html'},
+  {n:'Hypersensitivity Pneumonitis',d:'Bird fancier lung, organic antigen exposure',c:'A/I',col:'#2874A6',u:'mechanism/eosinophilia-hp-module.html'},
+  {n:'STEMI',d:'ST-elevation MI, door-to-balloon, cath lab activation',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'Pulmonary Embolism',d:'Submassive PE, PESI, thrombolytics',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'Stroke',d:'tPA window, NIHSS, LVO, thrombectomy',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'DKA',d:'Diabetic ketoacidosis, HHS, insulin management',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'Septic Shock',d:'Urosepsis, sepsis bundle, vasopressors',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'Aortic Dissection',d:'Type A vs B, CTA, surgical vs medical management',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'Peritonsillar Abscess',d:'Quinsy, I&D, needle aspiration technique',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
+  {n:'SBAR Handoff',d:'Structured communication, transition of care',c:'CRT',col:'#D97706',u:'crt-hub.html'},
+  {n:'Consultant Callback',d:'Calling cardiology, neurology, surgery',c:'CRT',col:'#D97706',u:'crt-hub.html'},
+  {n:'Case & Topic Library',d:'Browse all 325+ cases and modules by specialty and setting',c:'Library',col:'#2874A6',u:'case-browser.html'},
+  {n:'Case Trainers & Scenarios',d:'SBAR, callbacks, diagnostic frameworks — the scaffolds inside the cases',c:'Library',col:'#D97706',u:'crt-hub.html'},
+  {n:'CoachDx',d:'AI Socratic coaching and reasoning sessions',c:'Mode',col:'#2874A6',u:'CoachDx/index.html'},
+  {n:'MechanismDx',d:'Visual pathophysiology modules',c:'Mode',col:'#7C3AED',u:'mechanism/anaphylaxis-module.html'},
+  {n:'ECG Practice',d:'12-lead ECG interpretation trainer',c:'Tool',col:'#6366F1',u:'tools/index.html'},
+  {n:'ABG Analyzer',d:'Arterial blood gas interpretation',c:'Tool',col:'#6366F1',u:'tools/index.html'},
+  {n:'Clinical Calculators',d:'GCS, Wells, CURB-65, CHADS-VASc, PESI',c:'Tool',col:'#6366F1',u:'tools/index.html'},
+  {n:'Clinical Reasoning',d:'Frameworks, biases, diagnostic process',c:'Topic',col:'#2874A6',u:'case-browser.html'},
+  {n:'DDx Builder',d:'Differential diagnosis generator',c:'Tool',col:'#6366F1',u:'tools/index.html'},
+];
+
+function doSearch(val){
+  const el=document.getElementById('sr');
+  val=val.trim().toLowerCase();
+  if(!val||val.length<2){el.classList.remove('active');return;}
+  const hits=IDX.filter(x=>x.n.toLowerCase().includes(val)||x.d.toLowerCase().includes(val)||x.c.toLowerCase().includes(val)).slice(0,8);
+  if(!hits.length){el.innerHTML='<div style="padding:16px;font-size:13px;color:rgba(255,255,255,.3)">No results. Try a different term.</div>';el.classList.add('active');return;}
+  el.innerHTML=hits.map(m=>`<a class="sr-item" href="${m.u}"><div class="sr-dot" style="background:${m.col}"></div><div><div class="sr-name">${hl(m.n,val)}</div><div class="sr-desc">${m.d}</div></div><div class="sr-category">${m.c}</div></a>`).join('');
+  el.classList.add('active');
+}
+
+function hl(t,q){const i=t.toLowerCase().indexOf(q);if(i===-1)return t;return t.slice(0,i)+'<strong style="color:#fff">'+t.slice(i,i+q.length)+'</strong>'+t.slice(i+q.length);}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sr').classList.remove('active');closeModal();}});
+
+/* ─── SESSION ─── */
+let sess=null;
+function setSBar(topic,pillar){
+  const bar=document.getElementById('sBar');
+  document.getElementById('sPill').textContent={coach:'● CoachDx',reason:'● ReasonDx Cases',mechanism:'● MechanismDx'}[pillar]||'● Session';
+  document.getElementById('sPill').className='s-pill '+({coach:'sp-blue',reason:'sp-teal',mechanism:'sp-purple'}[pillar]||'sp-blue');
+  document.getElementById('sTopic').textContent=topic;
+  bar.classList.add('active');
+}
+function resumeSession(){if(sess)alert('Resuming '+sess.pillar+' session: '+sess.topic);}
+
+/* ─── MODAL ─── */
+let mTopic=null;
+function openModal(t){
+  mTopic=t;
+  document.getElementById('mTitle').textContent=t||'Start a Session';
+  document.getElementById('mIcon').textContent=t?'🩺':'▶';
+  document.getElementById('mSub').textContent=t?'Choose how you want to work on '+t:'Pick a mode to begin';
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+function closeOut(e){if(e.target.id==='modal')closeModal();}
+
+function launch(pillar){
+  const topic=mTopic||'Clinical Reasoning';
+  closeModal();
+  sess={topic,pillar};
+  setSBar(topic,pillar);
+  sessionStorage.setItem('rdx_session',JSON.stringify(sess));
+  const urls={
+    coach:'CoachDx/mentor-chat.html?topic='+encodeURIComponent(topic),
+    reason:'case-browser.html?topic='+encodeURIComponent(topic),
+    mechanism:'mechanism/anaphylaxis-module.html'
+  };
+  // Bridge demo
+  const bmap={coach:'mechanism',reason:'mechanism',mechanism:'reason'};
+  setTimeout(()=>showBridge(bmap[pillar],topic),700);
+  alert('→ Launching '+pillar+' for: '+topic+'\n\nURL: '+urls[pillar]+'\n\n(Uncomment window.location.href to activate navigation.)');
+  // window.location.href = urls[pillar];
+}
+
+/* ─── BRIDGE ─── */
+function showBridge(target,topic){
+  const cfg={
+    mechanism:{icon:'🔬',title:'Need to review the mechanism behind '+topic+'?',desc:'Jump to MechanismDx — your session is saved here when you return.',bg:'#7C3AED'},
+    reason:{icon:'🩺',title:'Ready to apply '+topic+' to a patient case?',desc:'Launch a ReasonDx case to test your understanding — return anytime.',bg:'#0E7F6A'},
+    coach:{icon:'🧑‍⚕️',title:'Want coaching on '+topic+'?',desc:'Jump to CoachDx — your current session is saved.',bg:'#2874A6'}
+  };
+  const c=cfg[target]||cfg.mechanism;
+  document.getElementById('bbIcon').textContent=c.icon;
+  document.getElementById('bbTitle').textContent=c.title;
+  document.getElementById('bbDesc').textContent=c.desc;
+  document.getElementById('bbGo').style.background=c.bg;
+  document.getElementById('bb')._target=target;
+  document.getElementById('bb').classList.add('visible');
+}
+function doBridge(){const t=document.getElementById('bb')._target;dismissBridge();if(sess)launch(t);}
+function dismissBridge(){document.getElementById('bb').classList.remove('visible');}
+
+/* ─── RESTORE ─── */
+try{const s=sessionStorage.getItem('rdx_session');if(s){const p=JSON.parse(s);sess=p;setSBar(p.topic,p.pillar);}}catch(e){}
 </script>
 </body>
 </html>
