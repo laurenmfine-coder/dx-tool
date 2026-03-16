@@ -1,496 +1,526 @@
-/* js/rdx-patient-continuity.js — Cross-Setting Patient Continuity
- * Defines patients who appear across multiple clinical settings
- * with chronological encounter history that accumulates.
+/*
+ * rdx-patient-continuity.js — Patient Continuity & Cross-Setting Encounter System
+ * ReasonDx · Lauren Fine, MD, FAAAAI
  *
- * When a learner opens a patient's chart, the system checks if that
- * patient has prior encounters in other settings and prepends them
- * as historical notes with dynamic dates.
+ * Provides prior encounter history for patients who appear across multiple clinical settings.
+ * Public API is consumed by clinic-board.html, virtual-emr.html, and emr-overview.js.
  *
  * Usage:
- *   PatientContinuity.getEncounterChain(caseId) → array of prior encounters
- *   PatientContinuity.hasHistory(caseId) → boolean
- *   PatientContinuity.renderPriorNotes(caseId) → HTML string of prior chart notes
- *   PatientContinuity.isSharedPatient(caseId) → boolean
- *   PatientContinuity.getRelatedCases(caseId) → array of related case IDs
- *   PatientContinuity.getAllChains() → all defined encounter chains
+ *   PatientContinuity.hasHistory(caseId)           // true if patient has prior encounters
+ *   PatientContinuity.renderPriorNotes(caseId)     // returns formatted HTML of prior chart notes
+ *   PatientContinuity.getEncounterChain(caseId)    // array of prior encounter objects
+ *   PatientContinuity.getRelatedCases(caseId)      // array of related case IDs in the chain
+ *   PatientContinuity.getChainForCase(caseId)      // full chain object for a case
  */
-(function() {
+
+(function(window) {
   'use strict';
 
-  // ═══════════════════════════════════════════════════════
-  // ENCOUNTER CHAINS
-  // Each chain represents ONE patient seen across settings.
-  // Encounters are ordered chronologically (earliest first).
-  // 'daysAgo' is relative to today's date.
-  // 'setting' matches the EMR setting values.
-  // ═══════════════════════════════════════════════════════
+  // ── ENCOUNTER CHAINS ──────────────────────────────────────────────────────
+  // Each chain is a patient arc across settings. Every case ID in the chain
+  // gets access to all PRIOR encounters (encounters with sequence < current).
+  // sequence: 1 = earliest, higher = later in the arc.
+
   var CHAINS = [
 
-    // ─── 1. CHF PROGRESSION ────────────────────────────
-    // Winston Carmichael: Clinic → ED → Inpatient
+    // ── Chain 1: STEMI Arc ────────────────────────────────────────────────
     {
-      patientName: 'Winston Carmichael',
-      patientId: 'winston-carmichael',
-      age: '65M',
-      pmh: 'HTN, HFrEF (EF 30%), T2DM, CKD Stage 3',
-      cases: ['chf-exacerbation'],
+      chainId: 'stemi-arc',
+      patientName: 'Marcus Delgado',
+      dob: '1968-04-12',
+      mrn: '204817',
+      cases: ['type2-diabetes-outpatient', 'stemi-v1', 'chf-v1', 'heart-failure-hfpef'],
       encounters: [
         {
-          daysAgo: 21,
-          setting: 'Clinic',
-          type: 'Outpatient Cardiology Follow-Up',
-          provider: 'Dr. Vasquez',
-          summary: 'Routine follow-up for HFrEF. Patient reports compliance with medications but admits to increased dietary sodium over holidays. Weight up 3 lbs from last visit. BNP mildly elevated at 480 (baseline 300). Increased furosemide from 40mg to 60mg daily. Reinforced low-sodium diet. Follow-up in 4 weeks.',
-          vitals: { HR: 78, BP: '128/76', RR: 16, SpO2: 96, Temp: '36.8°C', Wt: '198 lbs' },
-          assessment: 'Compensated HFrEF with early volume overload. Medication adjustment.',
-          orders: 'Increase furosemide to 60mg daily. BMP in 1 week. Dietary counseling referral.'
+          sequence: 1,
+          caseId: 'type2-diabetes-outpatient',
+          setting: 'Outpatient Clinic',
+          date: '6 weeks ago',
+          provider: 'Dr. A. Reyes, Internal Medicine',
+          summary: 'Annual diabetes follow-up. HbA1c 8.8%. ASCVD 10-yr risk 22%. Statin intensified to atorvastatin 80mg; GLP-1 (semaglutide) initiated. Lisinopril increased to 20mg for microalbuminuria. Patient counseled on dietary changes and weight management. Follow-up in 3 months.',
+          vitals: { BP: '138/86', HR: '78', RR: '14', Temp: '98.4°F', Wt: '224 lbs' },
+          assessment: 'T2DM poorly controlled (HbA1c 8.8%). High ASCVD risk. Early nephropathy (urine ACR 42). LDL 98, goal <70.',
+          plan: 'Started semaglutide 0.5mg SQ weekly. Atorvastatin 40→80mg. Lisinopril 10→20mg. Dietitian referral placed. Repeat HbA1c in 3 months.',
+          labs: [
+            { name: 'HbA1c', val: '8.8%', flag: 'H' },
+            { name: 'LDL', val: '98 mg/dL', flag: 'H' },
+            { name: 'eGFR', val: '71 mL/min', flag: '' },
+            { name: 'Urine ACR', val: '42 mg/g', flag: 'H' }
+          ]
         },
         {
-          daysAgo: 7,
-          setting: 'Clinic',
-          type: 'Urgent Nurse Visit',
-          provider: 'RN Tanya Brooks',
-          summary: 'Patient called reporting 5-lb weight gain over 4 days and new ankle swelling. Seen in clinic urgently. Orthopnea with 3-pillow requirement (new). BNP 890. Cr 1.8 (baseline 1.4). Furosemide increased to 80mg BID. Instructed to restrict fluids to 1.5L/day. Return in 2 days or go to ED if worsening.',
-          vitals: { HR: 88, BP: '142/88', RR: 20, SpO2: 93, Temp: '37.0°C', Wt: '205 lbs' },
-          assessment: 'Acute decompensated HFrEF. Volume overloaded.',
-          orders: 'Furosemide 80mg BID. Fluid restrict 1.5L. Daily weights. Return in 48h or ED if SOB worsens.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null, // Current encounter — learner is the provider
-          summary: null,  // Learner will generate this
-          vitals: { HR: 102, BP: '158/92', RR: 26, SpO2: 89, Temp: '37.1°C' },
-          cc: 'Acute worsening dyspnea, unable to lie flat, brought by wife'
+          sequence: 2,
+          caseId: 'stemi-v1',
+          setting: 'Emergency Department → Cath Lab',
+          date: '3 days ago',
+          provider: 'Dr. T. Osei, Cardiology / Interventional',
+          summary: 'Presented with crushing substernal chest pain ×1hr radiating to left arm. EKG: ST elevations V1-V4. Activated cath lab. Door-to-balloon 68 minutes. LAD 95% occlusion — drug-eluting stent placed. Post-procedure EF 40% on bedside echo. Started dual antiplatelet (aspirin + ticagrelor), beta-blocker, high-intensity statin. Transferred to CCU.',
+          vitals: { BP: '102/68', HR: '112', RR: '22', Temp: '98.6°F', Wt: '224 lbs' },
+          assessment: 'Anterior STEMI — LAD culprit. EF 40% post-PCI. Killip Class II (rales at bases).',
+          plan: 'Aspirin 81mg + ticagrelor 90mg BID (DAPT ×12 months). Metoprolol 25mg BID. Atorvastatin 80mg continued. Lisinopril held — BP 102/68. CCU monitoring. Echo in 48hr.',
+          labs: [
+            { name: 'Troponin I (peak)', val: '48.2 ng/mL', flag: 'H' },
+            { name: 'BNP', val: '620 pg/mL', flag: 'H' },
+            { name: 'Cr', val: '1.3 mg/dL', flag: 'H' },
+            { name: 'K+', val: '3.9 mEq/L', flag: '' }
+          ]
         }
       ]
     },
 
-    // ─── 2. COPD / PNEUMONIA ESCALATION ────────────────
-    // Barbara Collins: Clinic → ED → ICU
+    // ── Chain 2: Sepsis / Urosepsis Arc ──────────────────────────────────
     {
-      patientName: 'Barbara Collins',
-      patientId: 'barbara-collins',
-      age: '67F',
-      pmh: 'COPD (GOLD D), 40 pack-year smoking history (quit 5 years ago), HTN, Osteoporosis',
-      cases: ['copd-v1'],
+      chainId: 'sepsis-arc',
+      patientName: 'Brenda Petrov',
+      dob: '1951-09-03',
+      mrn: '318042',
+      cases: ['pyelonephritis-urosepsis', 'sepsisseptic-shock', 'septic-shock-urosepsis', 'pyelonephritis-sepsis'],
       encounters: [
         {
-          daysAgo: 30,
-          setting: 'Clinic',
-          type: 'Pulmonology Follow-Up',
-          provider: 'Dr. Okafor',
-          summary: 'Stable COPD on triple therapy (fluticasone/vilanterol + tiotropium). FEV1 42% predicted, stable from 6 months ago. Two exacerbations in past year. Vaccinations up to date. Discussed smoking cessation maintenance — patient doing well with 5 years abstinence. Pulmonary rehab ongoing.',
-          vitals: { HR: 76, BP: '132/78', RR: 18, SpO2: 93, Temp: '36.7°C' },
-          assessment: 'COPD GOLD D, stable on current regimen.',
-          orders: 'Continue current medications. PFTs in 6 months. Annual flu vaccine next visit.'
+          sequence: 1,
+          caseId: 'pyelonephritis-urosepsis',
+          setting: 'Emergency Department',
+          date: '8 days ago',
+          provider: 'Dr. R. Okafor, Emergency Medicine',
+          summary: 'Presented with 2-day fever, right flank pain, and dysuria. Vitals: T 39.1°C, HR 108, BP 96/62. UA showed >100 WBC, positive nitrites, bacteriuria. Blood cultures ×2 drawn. Started IV ceftriaxone empirically. Admitted to internal medicine for IV antibiotics and monitoring.',
+          vitals: { BP: '96/62', HR: '108', RR: '20', Temp: '39.1°C', Wt: '162 lbs' },
+          assessment: 'Urosepsis — pyelonephritis with hemodynamic instability. Sepsis-3 criteria met (SOFA +2). E. coli suspected.',
+          plan: 'Blood cultures ×2. IV ceftriaxone 2g q24h. IVF 30mL/kg bolus. Urology notified for possible obstruction. Repeat lactate in 2hr.',
+          labs: [
+            { name: 'WBC', val: '18.4 k/µL', flag: 'H' },
+            { name: 'Lactate', val: '3.1 mmol/L', flag: 'H' },
+            { name: 'Cr', val: '1.9 mg/dL', flag: 'H' },
+            { name: 'UA WBC', val: '>100/hpf', flag: 'H' }
+          ]
         },
         {
-          daysAgo: 5,
-          setting: 'Clinic',
-          type: 'Acute Visit — Respiratory Symptoms',
-          provider: 'Dr. Pham (PCP)',
-          summary: 'Patient presents with 3 days of increased sputum production (now yellow-green), worsening dyspnea beyond baseline, and low-grade fever. Lungs with scattered rhonchi and decreased breath sounds bilaterally. Started on azithromycin and prednisone burst (40mg × 5 days). Increased albuterol to q4h. Instructed to go to ED if worsening or SpO2 drops below 90%.',
-          vitals: { HR: 92, BP: '138/82', RR: 22, SpO2: 90, Temp: '37.9°C' },
-          assessment: 'Acute COPD exacerbation, likely infectious trigger.',
-          orders: 'Azithromycin 500mg day 1 then 250mg × 4 days. Prednisone 40mg daily × 5 days. Albuterol q4h.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 108, BP: '142/88', RR: 28, SpO2: 85, Temp: '38.6°C' },
-          cc: 'Worsening dyspnea despite antibiotics, cannot speak in full sentences'
+          sequence: 2,
+          caseId: 'sepsisseptic-shock',
+          setting: 'Medical ICU',
+          date: '7 days ago',
+          provider: 'Dr. S. Johansson, Critical Care',
+          summary: 'Transferred to MICU after BP dropped to 78/44 despite 2L IVF. Norepinephrine initiated. Blood cultures grew E. coli — pan-sensitive. Ceftriaxone continued. Vasopressin added. Septic shock with SOFA score 10. Intubated for airway protection and work of breathing. Hydrocortisone 200mg/day started (vasopressor-dependent shock).',
+          vitals: { BP: '78/44 → 108/68 (on pressors)', HR: '128', RR: 'intubated', Temp: '39.4°C', Wt: '162 lbs' },
+          assessment: 'Septic shock — urosepsis, E. coli bacteremia. SOFA 10. Vasopressor-dependent.',
+          plan: 'Norepinephrine 0.18 mcg/kg/min. Vasopressin 0.03 units/min added. Hydrocortisone 50mg q6h. Ceftriaxone continued (susceptibilities pending). Lung-protective ventilation. Daily SBT assessment.',
+          labs: [
+            { name: 'Blood culture', val: 'E. coli — pan-sensitive', flag: 'H' },
+            { name: 'Lactate (peak)', val: '6.2 mmol/L', flag: 'H' },
+            { name: 'Procalcitonin', val: '48.2 ng/mL', flag: 'H' },
+            { name: 'Cr (peak)', val: '3.4 mg/dL', flag: 'H' }
+          ]
         }
       ]
     },
 
-    // ─── 3. DIABETES → DKA ─────────────────────────────
-    // Alejandro Gutierrez: Clinic → ED
+    // ── Chain 3: Acute Ischemic Stroke Arc ───────────────────────────────
     {
-      patientName: 'Alejandro Gutierrez',
-      patientId: 'alejandro-gutierrez',
-      age: '29M',
-      pmh: 'T1DM (diagnosed age 12), Depression',
+      chainId: 'stroke-arc',
+      patientName: 'Gwendolyn Fischer',
+      dob: '1949-02-28',
+      mrn: '405629',
+      cases: ['stroke-v1', 'acute-ischemic-stroke-tpa', 'hypertensive-emergency'],
+      encounters: [
+        {
+          sequence: 1,
+          caseId: 'hypertensive-emergency',
+          setting: 'Emergency Department',
+          date: '6 months ago',
+          provider: 'Dr. C. Nakamura, Emergency Medicine',
+          summary: 'Presented with BP 226/138, severe headache, blurred vision. Papilledema on fundoscopy. MRI brain: PRES (posterior reversible encephalopathy syndrome). Started nicardipine drip — MAP reduced 20% in first hour. Admitted to ICU. Transitioned to oral amlodipine + lisinopril. Discharged on antihypertensive regimen with close follow-up.',
+          vitals: { BP: '226/138', HR: '96', RR: '18', Temp: '98.6°F', Wt: '178 lbs' },
+          assessment: 'Hypertensive emergency — PRES. No ischemic stroke on admission imaging.',
+          plan: 'Nicardipine drip. BP target: reduce MAP 20% over 1hr, then gradual correction. Amlodipine 10mg + lisinopril 20mg at discharge. Neurology follow-up 1 week.',
+          labs: [
+            { name: 'Cr', val: '1.4 mg/dL', flag: 'H' },
+            { name: 'BMP', val: 'Na 138, K 3.8, otherwise normal', flag: '' },
+            { name: 'UA', val: '2+ protein', flag: 'H' }
+          ]
+        },
+        {
+          sequence: 2,
+          caseId: 'stroke-v1',
+          setting: 'Emergency Department → Stroke Unit',
+          date: '2 days ago',
+          provider: 'Dr. Y. Vargas, Neurology',
+          summary: 'EMS brought in with sudden left-sided weakness and slurred speech ×45min. NIHSS 14 on arrival. Non-contrast CT head: no hemorrhage. CT angiography: MCA M2 occlusion right side. tPA administered at 58 minutes from symptom onset (BP 178/100 pre-tPA — labetalol given to achieve <185/110). Thrombectomy not attempted — M2 segment, NIHSS 14, within tPA window. Admitted to stroke unit. BP target <180/105 first 24hr post-tPA.',
+          vitals: { BP: '178/100 → 162/94 (post-labetalol)', HR: '84', RR: '16', Temp: '98.8°F', Wt: '178 lbs' },
+          assessment: 'Acute ischemic stroke — right MCA M2 territory. tPA administered. NIHSS 14. Known HTN, poorly controlled despite dual therapy.',
+          plan: 'tPA 0.9mg/kg (max 90mg). BP <180/105 ×24hr. NPO until swallow screen passed. DVT prophylaxis with sequential compression. Statin started. Cardioembolic workup: Echo + prolonged cardiac monitor. ASA held ×24hr post-tPA.',
+          labs: [
+            { name: 'INR', val: '1.1', flag: '' },
+            { name: 'Platelets', val: '214 k/µL', flag: '' },
+            { name: 'Glucose', val: '148 mg/dL', flag: 'H' },
+            { name: 'LDL', val: '122 mg/dL', flag: 'H' }
+          ]
+        }
+      ]
+    },
+
+    // ── Chain 4: DKA / Pediatric Diabetes Arc ────────────────────────────
+    {
+      chainId: 'dka-arc',
+      patientName: 'Devon Patterson',
+      dob: '2008-07-19',
+      mrn: '512384',
       cases: ['dka-v1'],
       encounters: [
         {
-          daysAgo: 45,
-          setting: 'Clinic',
-          type: 'Endocrinology Follow-Up',
-          provider: 'Dr. Blackwell',
-          summary: 'A1C 9.8% (up from 8.2%). Patient admits to insulin non-compliance over past 2 months after losing health insurance. Running out of long-acting insulin and rationing. Currently using only rapid-acting insulin at meals, no basal. Extensive counseling on DKA risk. Connected with patient assistance program for insulin. Restarted glargine 22 units nightly. Follow-up in 4 weeks.',
-          vitals: { HR: 82, BP: '118/72', RR: 14, SpO2: 99, Temp: '36.9°C' },
-          assessment: 'T1DM with worsening control due to insulin access barriers. DKA risk counseled.',
-          orders: 'Glargine 22 units QHS. Lispro per sliding scale. A1C recheck in 3 months. PAP enrollment.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 118, BP: '108/68', RR: 32, SpO2: 99, Temp: '37.3°C' },
-          cc: 'Nausea, vomiting × 2 days, abdominal pain, extreme thirst and urination'
+          sequence: 1,
+          caseId: 'dka-v1',
+          setting: 'Pediatric Endocrinology Clinic',
+          date: '3 weeks ago',
+          provider: 'Dr. B. Kowalski, Pediatric Endocrinology',
+          summary: 'New patient visit — referred by PCP for hyperglycemia found incidentally. Fasting glucose 312. HbA1c 11.8%. Anti-GAD antibodies strongly positive. Diagnosed with T1DM. Started on basal-bolus insulin regimen (glargine + lispro). Extensive diabetes education provided to patient and family. CGM prescribed. Follow-up in 2 weeks. Extensive counseling given regarding DKA warning signs — patient and mother verbalized understanding.',
+          vitals: { BP: '108/68', HR: '92', RR: '16', Temp: '98.6°F', Wt: '132 lbs' },
+          assessment: 'New-onset Type 1 Diabetes Mellitus. HbA1c 11.8%. Anti-GAD positive. No DKA at this time.',
+          plan: 'Glargine 16 units QHS. Lispro correction scale + meal coverage. CGM (Dexterity G7) prescribed. Sick day rules reviewed. Return precautions for DKA symptoms given in writing.',
+          labs: [
+            { name: 'HbA1c', val: '11.8%', flag: 'H' },
+            { name: 'Fasting glucose', val: '312 mg/dL', flag: 'H' },
+            { name: 'Anti-GAD Ab', val: 'Strongly positive', flag: 'H' },
+            { name: 'C-peptide', val: '0.4 ng/mL (low)', flag: 'L' }
+          ]
         }
       ]
     },
 
-    // ─── 4. STROKE — ED → ICU → INPATIENT → REHAB ─────
-    // Eugene Washington: ED → Neuro ICU → Step-Down
+    // ── Chain 5: PE / DVT Arc ────────────────────────────────────────────
     {
-      patientName: 'Eugene Washington',
-      patientId: 'eugene-washington',
-      age: '67M',
-      pmh: 'Afib (not on anticoagulation — patient declined), HTN, Hyperlipidemia, Prior TIA 2 years ago',
-      cases: ['acute-ischemic-stroke'],
+      chainId: 'pe-arc',
+      patientName: 'Rachel Owusu',
+      dob: '1987-11-14',
+      mrn: '623910',
+      cases: ['pe-v1', 'massive-pe-with-rv-failure', 'pulmonary-embolism-syncope'],
       encounters: [
         {
-          daysAgo: 730,
-          setting: 'Clinic',
-          type: 'Neurology Follow-Up After TIA',
-          provider: 'Dr. Kim',
-          summary: 'Follow-up 2 weeks post-TIA (transient left arm weakness, resolved within 1 hour). MRI brain showed no acute infarct. CTA with moderate intracranial atherosclerosis. Afib on telemetry during TIA admission. CHA2DS2-VASc score 5 — strongly recommended anticoagulation. Patient declined warfarin and DOACs due to fall concerns (walks with cane). Extensive risk-benefit counseling documented. Started aspirin 81mg as compromise. Atorvastatin increased to 80mg.',
-          vitals: { HR: 82, BP: '148/88', RR: 14, SpO2: 97, Temp: '36.8°C' },
-          assessment: 'Afib with high stroke risk. Patient-informed refusal of anticoagulation documented.',
-          orders: 'Aspirin 81mg daily. Atorvastatin 80mg. BP target <130/80. Follow-up 3 months.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 88, BP: '192/104', RR: 16, SpO2: 97, Temp: '36.8°C' },
-          cc: 'Acute left-sided weakness and slurred speech, onset 45 minutes ago per wife'
+          sequence: 1,
+          caseId: 'pe-v1',
+          setting: 'Outpatient Clinic',
+          date: '5 weeks ago',
+          provider: 'Dr. E. Johansson, Internal Medicine',
+          summary: 'Visit for OCP renewal (combined estrogen-progestin). Patient also noted left calf swelling and tenderness ×3 days. Wells DVT score 3 (high probability). Duplex ultrasound ordered same day — confirmed left femoral DVT. OCP discontinued. Anticoagulation started with apixaban 10mg BID ×7 days then 5mg BID. Hematology referral placed for hypercoagulability workup (age <35, unprovoked).',
+          vitals: { BP: '118/74', HR: '82', RR: '14', Temp: '98.4°F', Wt: '142 lbs' },
+          assessment: 'Acute proximal DVT — left femoral vein. OCP as likely provokant. Unprovoked element possible — workup pending.',
+          plan: 'Discontinue OCP. Apixaban 10mg BID ×7 days, then 5mg BID ×3 months minimum. Avoid NSAIDs. Hematology referral. Return precautions for PE symptoms given.',
+          labs: [
+            { name: 'Duplex US left leg', val: 'DVT — left femoral vein, non-occlusive', flag: 'H' },
+            { name: 'CBC', val: 'Normal', flag: '' },
+            { name: 'CMP', val: 'Normal', flag: '' },
+            { name: 'β-hCG', val: 'Negative', flag: '' }
+          ]
         }
       ]
     },
 
-    // ─── 5. ANAPHYLAXIS → ALLERGY CLINIC ───────────────
-    // Priya Sharma: ED → Allergy Clinic Follow-Up
+    // ── Chain 6: Anaphylaxis Arc ─────────────────────────────────────────
     {
-      patientName: 'Priya Sharma',
-      patientId: 'priya-sharma',
-      age: '27F',
-      pmh: 'Seasonal allergic rhinitis, Asthma (mild intermittent)',
-      cases: ['anaphylaxis'],
+      chainId: 'anaphylaxis-arc',
+      patientName: 'Aaliyah Johnson',
+      dob: '1995-03-22',
+      mrn: '731485',
+      cases: ['allergic-rhinitis-immunotherapy'],
       encounters: [
         {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 118, BP: '88/54', RR: 26, SpO2: 93, Temp: '37.0°C' },
-          cc: 'Lip swelling, diffuse hives, throat tightness and difficulty breathing after eating at restaurant'
-        },
-        {
-          daysAgo: -14, // Future follow-up
-          setting: 'Clinic',
-          type: 'Allergy/Immunology Follow-Up',
-          provider: 'Dr. Khoury',
-          plannedNote: 'Post-anaphylaxis evaluation. Review ED records, obtain tryptase trends, skin prick testing for suspected triggers, component testing, epinephrine auto-injector training, anaphylaxis action plan.'
+          sequence: 1,
+          caseId: 'allergic-rhinitis-immunotherapy',
+          setting: 'Emergency Department',
+          date: '4 months ago',
+          provider: 'Dr. K. Okafor, Emergency Medicine',
+          summary: 'Presented with acute onset urticaria, angioedema, and bronchospasm 20 minutes after eating at a restaurant (suspected tree nut exposure). BP 88/54 on arrival. Epinephrine 0.3mg IM administered — excellent response. IV diphenhydramine + methylprednisolone given. Observed ×6 hours — biphasic reaction did not occur. Discharged with EpiPen ×2 and referral to Allergy/Immunology.',
+          vitals: { BP: '88/54 → 118/76 (post-epi)', HR: '132 → 92', RR: '26 → 16', Temp: '98.6°F', Wt: '138 lbs' },
+          assessment: 'Grade III anaphylaxis — suspected tree nut (walnut/cashew). Hypotension, bronchospasm, urticaria.',
+          plan: 'Epinephrine 0.3mg IM ×1 (response excellent). IV diphenhydramine 50mg. Methylprednisolone 125mg IV. Discharged with 2× EpiPen auto-injectors. Strict avoidance of tree nuts and cross-contamination foods. Allergy/Immunology referral for SPT and OFC consideration.',
+          labs: [
+            { name: 'Serum tryptase', val: '42.8 ng/mL (peak)', flag: 'H' },
+            { name: 'ABG', val: 'pH 7.38, pO2 92 on 2L NC', flag: '' }
+          ]
         }
       ]
     },
 
-    // ─── 6. CKD → AKI → NEPHROLOGY ────────────────────
-    // Reginald Hawkins: Clinic → Missed dialysis → ED
+    // ── Chain 7: Bacterial Meningitis Arc ────────────────────────────────
     {
-      patientName: 'Reginald Hawkins',
-      patientId: 'reginald-hawkins',
-      age: '65M',
-      pmh: 'ESRD on HD (MWF), HTN, T2DM, Peripheral neuropathy, AV fistula left arm',
-      cases: ['severe-hyperkalemia-from-missed-dialysis'],
+      chainId: 'meningitis-arc',
+      patientName: 'Tariq Hassan',
+      dob: '2003-06-08',
+      mrn: '845203',
+      cases: ['meningitis-v1'],
       encounters: [
         {
-          daysAgo: 14,
-          setting: 'Clinic',
-          type: 'Nephrology Clinic',
-          provider: 'Dr. Santos',
-          summary: 'Routine dialysis adequacy check. Kt/V 1.3 (adequate). Dry weight 82kg. Phosphorus elevated at 6.8 — increased sevelamer. Patient reports occasional missed sessions due to transportation issues. Social work referral for transportation assistance. Interdialytic weight gains averaging 3.5kg — counseled on fluid restriction.',
-          vitals: { HR: 78, BP: '152/88', RR: 16, SpO2: 96, Temp: '36.8°C' },
-          assessment: 'ESRD on HD, adequate clearance but transportation barriers and volume management challenges.',
-          orders: 'Increase sevelamer to 1600mg TID with meals. Social work consult for transportation. Fluid goal <1L/day.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 52, BP: '168/98', RR: 20, SpO2: 95, Temp: '36.7°C' },
-          cc: 'Generalized weakness and lightheadedness, missed last 2 dialysis sessions'
+          sequence: 1,
+          caseId: 'meningitis-v1',
+          setting: 'University Health Services',
+          date: '3 days ago',
+          provider: 'NP D. Osei, University Health',
+          summary: 'Seen for 6-hour history of headache and neck stiffness. Thought to be tension headache. Ibuprofen 600mg dispensed. Advised to rest and return if worsening. Meningism not recognized — Kernig/Brudzinski not tested. Patient lives in dormitory. No note of petechiae on skin check.',
+          vitals: { BP: '122/78', HR: '96', RR: '16', Temp: '38.4°C', Wt: '168 lbs' },
+          assessment: 'Headache, presumed tension-type. Low-grade fever attributed to viral URI.',
+          plan: 'Ibuprofen 600mg q6h PRN. Hydration. Return if symptoms worsen or fever spikes.',
+          labs: []
         }
       ]
     },
 
-    // ─── 7. SEPSIS — PCP → ED → ICU ───────────────────
-    // Hazel Thompson: Clinic (UTI) → ED (urosepsis)
+    // ── Chain 8: CHF / HFpEF Arc ─────────────────────────────────────────
     {
-      patientName: 'Hazel Thompson',
-      patientId: 'hazel-thompson',
-      age: '79F',
-      pmh: 'Recurrent UTIs (3 in past year), T2DM, Dementia (mild), HTN, Atrial fibrillation on apixaban',
-      cases: ['pyelonephritis-urosepsis'],
+      chainId: 'hf-arc',
+      patientName: 'Shirley Achebe',
+      dob: '1947-01-30',
+      mrn: '956712',
+      cases: ['chf-exacerbation', 'chf-v1', 'heart-failure-hfpef'],
       encounters: [
         {
-          daysAgo: 10,
-          setting: 'Clinic',
-          type: 'PCP Visit — Dysuria',
-          provider: 'Dr. Martinez (PCP)',
-          summary: 'Patient brought by daughter for 2 days of dysuria and frequency. No fever, flank pain, or confusion. UA positive for nitrites, LE, WBCs. Started on nitrofurantoin 100mg BID × 5 days (culture pending). UCx returned E. coli sensitive to nitrofurantoin. Patient completed course per daughter.',
-          vitals: { HR: 80, BP: '138/78', RR: 16, SpO2: 97, Temp: '37.2°C' },
-          assessment: 'Uncomplicated UTI, E. coli. Treated with nitrofurantoin.',
-          orders: 'Nitrofurantoin 100mg BID × 5 days. Post-treatment UA if symptoms persist.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 112, BP: '82/48', RR: 24, SpO2: 93, Temp: '39.2°C' },
-          cc: 'Found confused and febrile by daughter, not eating × 2 days, incontinent'
+          sequence: 1,
+          caseId: 'chf-exacerbation',
+          setting: 'Outpatient Cardiology Clinic',
+          date: '10 days ago',
+          provider: 'Dr. G. Fontaine, Cardiology',
+          summary: 'Routine HFpEF follow-up. Echo EF 58%. BNP 420. Patient reports 2-week weight gain of 6 lbs, worsening dyspnea on exertion. Daily weights not being maintained. Furosemide dose increased from 40mg to 60mg daily. Empagliflozin 10mg initiated (EMPEROR-Preserved data). Sodium restriction counseling reinforced. Follow-up in 2 weeks.',
+          vitals: { BP: '148/92', HR: '78 (irregular — AF)', RR: '16', Temp: '98.4°F', Wt: '196 lbs' },
+          assessment: 'HFpEF, EF 58%. Mild decompensation — fluid overload. AF on apixaban. Subtherapeutic diuresis.',
+          plan: 'Furosemide 40→60mg daily. Empagliflozin 10mg started. Reinforce daily weights. 2g sodium diet. Return precautions for acute dyspnea.',
+          labs: [
+            { name: 'BNP', val: '420 pg/mL', flag: 'H' },
+            { name: 'Cr', val: '1.2 mg/dL', flag: '' },
+            { name: 'K+', val: '3.6 mEq/L', flag: '' },
+            { name: 'Echo EF', val: '58%', flag: '' }
+          ]
         }
       ]
     },
 
-    // ─── 8. POST-DISCHARGE READMISSION ─────────────────
-    // Giovanni DeLuca: Prior admit → Clinic → ED readmit
+    // ── Chain 9: Pneumonia / CAP Arc ─────────────────────────────────────
     {
-      patientName: 'Giovanni DeLuca',
-      patientId: 'giovanni-deluca',
-      age: '67M',
-      pmh: 'CAD (PCI × 2), HFpEF, T2DM, Gout, Obesity (BMI 34)',
-      cases: ['nstemi-v1'],
+      chainId: 'pneumonia-arc',
+      patientName: 'Bernard Kowalski',
+      dob: '1950-12-05',
+      mrn: '1047839',
+      cases: ['pneumonia', 'community-acquired-pneumonia'],
       encounters: [
         {
-          daysAgo: 60,
-          setting: 'Inpatient',
-          type: 'Discharge Summary — NSTEMI',
-          provider: 'Dr. Vasquez (Cardiology)',
-          summary: 'Admitted for NSTEMI. Troponin peaked at 2.8. Catheterization showed 90% LAD stenosis — DES placed. Started on dual antiplatelet therapy (aspirin + ticagrelor). Echo showed EF 55%, mild diastolic dysfunction, no wall motion abnormalities post-PCI. Cardiac rehab referral. Discharge on: aspirin 81mg, ticagrelor 90mg BID, metoprolol succinate 50mg, lisinopril 20mg, atorvastatin 80mg.',
-          vitals: { HR: 68, BP: '122/74', RR: 14, SpO2: 98, Temp: '36.8°C' },
-          assessment: 'NSTEMI, s/p LAD DES. Medical optimization. Good prognosis.',
-          orders: 'DAPT × 12 months. Cardiac rehab. Cardiology follow-up 2 weeks. PCP 1 week.'
-        },
-        {
-          daysAgo: 14,
-          setting: 'Clinic',
-          type: 'Cardiology Follow-Up',
-          provider: 'Dr. Vasquez',
-          summary: 'Post-PCI follow-up. Doing well in cardiac rehab. Tolerating medications. Groin access site healed. Denied chest pain, dyspnea, or palpitations. Continue current regimen. Discussed importance of DAPT compliance — absolutely no interruption for 12 months. Stress test in 3 months.',
-          vitals: { HR: 64, BP: '118/72', RR: 14, SpO2: 98, Temp: '36.8°C' },
-          assessment: 'Post-NSTEMI/PCI, doing well. Continue medical therapy.',
-          orders: 'Continue all medications. Stress test at 3 months post-PCI. Cardiac rehab ongoing.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 98, BP: '168/94', RR: 20, SpO2: 96, Temp: '37.0°C' },
-          cc: 'Recurrent chest pain × 2 hours, similar to prior heart attack, took aspirin at home'
+          sequence: 1,
+          caseId: 'pneumonia',
+          setting: 'Outpatient Clinic',
+          date: '5 days ago',
+          provider: 'Dr. W. Oduya, Internal Medicine',
+          summary: 'Seen for 3-day URI symptoms. Productive cough, low-grade fever. CXR not obtained. Prescribed azithromycin 250mg ×5 days for presumed atypical pneumonia. No CURB-65 score calculated. No SpO2 checked in office.',
+          vitals: { BP: '136/84', HR: '88', RR: '18', Temp: '38.2°C', Wt: '188 lbs' },
+          assessment: 'Upper respiratory infection vs early pneumonia. Empiric treatment given.',
+          plan: 'Azithromycin 250mg daily ×5 days. Rest, fluids. Return if worsening.',
+          labs: []
         }
       ]
     },
 
-    // ─── 9. ASTHMA — PCP → ED → ALLERGY/PULM ──────────
-    // Deshawn Carter: Clinic → ED
+    // ── Chain 10: Alcohol Withdrawal / Liver Arc ─────────────────────────
     {
-      patientName: 'Deshawn Carter',
-      patientId: 'deshawn-carter',
-      age: '24M',
-      pmh: 'Asthma (uncontrolled persistent), Allergic rhinitis, Eczema (childhood)',
-      cases: ['asthma-exacerbation'],
+      chainId: 'etoh-arc',
+      patientName: 'Colin Nakamura',
+      dob: '1970-08-17',
+      mrn: '1139204',
+      cases: ['alcohol-withdrawal'],
       encounters: [
         {
-          daysAgo: 90,
-          setting: 'Clinic',
-          type: 'PCP Visit',
-          provider: 'Dr. Owens (PCP)',
-          summary: 'Asthma review. Patient using rescue inhaler daily (should be ≤2×/week). Wakes 3× per week with cough. Not on any controller medication — previous prescriptions never filled. Prescribed fluticasone 110mcg 2 puffs BID and provided spacer. Discussed importance of daily controller use. Referral to allergist placed. Follow-up 1 month.',
-          vitals: { HR: 78, BP: '120/76', RR: 16, SpO2: 97, Temp: '36.9°C' },
-          assessment: 'Uncontrolled persistent asthma. Not on controller therapy. Step-up indicated.',
-          orders: 'Fluticasone 110mcg 2 puffs BID. Albuterol PRN. Allergist referral. RTC 4 weeks.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 112, BP: '128/78', RR: 28, SpO2: 90, Temp: '37.1°C' },
-          cc: 'Severe wheezing and chest tightness × 8 hours, albuterol not helping, never filled controller Rx'
-        }
-      ]
-    },
-
-    // ─── 10. CELLULITIS → SEPSIS ────────────────────────
-    // James Crawford: Clinic → ED
-    {
-      patientName: 'James Crawford',
-      patientId: 'james-crawford',
-      age: '55M',
-      pmh: 'T2DM (A1C 9.2%), Peripheral vascular disease, Obesity, Prior left leg cellulitis × 2',
-      cases: ['cellulitis'],
-      encounters: [
-        {
-          daysAgo: 5,
-          setting: 'Clinic',
-          type: 'Urgent Visit — Leg Redness',
-          provider: 'Dr. Pham (PCP)',
-          summary: 'Patient presents with 2-day history of left lower leg erythema and warmth after a small skin break from bumping his shin on furniture. No fever. Erythema margin marked with pen — approximately 8cm × 5cm area. No drainage, no crepitus. Pedal pulses 1+ bilaterally. Started on cephalexin 500mg QID. Wound care instructions. Return in 48 hours or ED if spreading beyond marks, fever, or streaking.',
-          vitals: { HR: 82, BP: '144/86', RR: 16, SpO2: 98, Temp: '37.2°C' },
-          assessment: 'Non-purulent cellulitis, left lower leg. Low risk for complications.',
-          orders: 'Cephalexin 500mg QID × 10 days. Leg elevation. Wound care. RTC 48h.'
-        },
-        {
-          daysAgo: 0,
-          setting: 'ED',
-          type: 'ED Presentation',
-          provider: null,
-          summary: null,
-          vitals: { HR: 104, BP: '98/62', RR: 22, SpO2: 96, Temp: '39.4°C' },
-          cc: 'Left leg much worse — redness spreading beyond pen marks, new blisters, fever and chills × 1 day'
+          sequence: 1,
+          caseId: 'alcohol-withdrawal',
+          setting: 'Primary Care Clinic',
+          date: '2 weeks ago',
+          provider: 'Dr. J. Walsh, Family Medicine',
+          summary: 'Annual physical. AUDIT-C score 10 — positive screen for severe AUD. Patient discloses daily fifth of vodka ×6 years. Discussed risks of abrupt cessation — seizure and DTs explained in detail. Patient declined inpatient detox referral. Agreed to gradual supervised taper with weekly check-ins. Thiamine 100mg daily prescribed. Naltrexone 50mg daily started. Next appointment scheduled in 1 week. Patient did not return for scheduled appointment.',
+          vitals: { BP: '148/94', HR: '94', RR: '16', Temp: '98.6°F', Wt: '174 lbs' },
+          assessment: 'Severe alcohol use disorder. High risk for withdrawal seizure/DTs given quantity and duration of use.',
+          plan: 'AUDIT-C 10 — counseling provided. Thiamine 100mg daily. Naltrexone 50mg daily. Referral to addiction medicine offered — declined. Weekly office visits for supervised taper monitoring. CAGE questionnaire documented.',
+          labs: [
+            { name: 'LFTs', val: 'AST 78, ALT 44, Alk Phos 112', flag: 'H' },
+            { name: 'GGT', val: '214 U/L', flag: 'H' },
+            { name: 'MCV', val: '102 fL (macrocytosis)', flag: 'H' },
+            { name: 'Platelets', val: '118 k/µL', flag: 'L' }
+          ]
         }
       ]
     }
-  ];
 
-  // ═══════════════════════════════════════════════════════
-  // INDEX — map caseId → chain
-  // ═══════════════════════════════════════════════════════
-  var _index = {};
-  CHAINS.forEach(function(chain) {
-    chain.cases.forEach(function(caseId) {
-      _index[caseId] = chain;
-    });
-  });
+  ]; // end CHAINS
 
-  // ═══════════════════════════════════════════════════════
-  // PUBLIC API
-  // ═══════════════════════════════════════════════════════
-  window.PatientContinuity = {
 
+  // ── PUBLIC API ────────────────────────────────────────────────────────────
+
+  var PatientContinuity = {
+
+    /**
+     * Returns true if the given caseId has prior encounter history.
+     * "Prior" means there is an encounter in the chain with sequence < current.
+     */
     hasHistory: function(caseId) {
-      var chain = _index[caseId];
+      var chain = this.getChainForCase(caseId);
       if (!chain) return false;
-      // Has prior encounters (not just the current one)
-      return chain.encounters.filter(function(e) { return e.daysAgo > 0; }).length > 0;
-    },
-
-    isSharedPatient: function(caseId) {
-      return !!_index[caseId];
-    },
-
-    getEncounterChain: function(caseId) {
-      var chain = _index[caseId];
-      if (!chain) return [];
-      return chain.encounters.filter(function(e) {
-        return e.daysAgo > 0 && e.summary; // Only past encounters with content
-      }).sort(function(a, b) {
-        return b.daysAgo - a.daysAgo; // Oldest first
+      var currentSeq = this._getCurrentSequence(chain, caseId);
+      return chain.encounters.some(function(e) {
+        return e.sequence < currentSeq;
       });
     },
 
-    getRelatedCases: function(caseId) {
-      var chain = _index[caseId];
-      if (!chain) return [];
-      return chain.cases.filter(function(id) { return id !== caseId; });
-    },
-
-    getPatientPMH: function(caseId) {
-      var chain = _index[caseId];
-      return chain ? chain.pmh : null;
-    },
-
-    // Render prior encounter notes as HTML for chart display
+    /**
+     * Returns fully formatted HTML of all prior chart notes for a case.
+     * Safe to inject via innerHTML.
+     */
     renderPriorNotes: function(caseId) {
-      var DE = window.DateEngine;
-      if (!DE) return '';
-      var chain = _index[caseId];
+      var chain = this.getChainForCase(caseId);
       if (!chain) return '';
+      var currentSeq = this._getCurrentSequence(chain, caseId);
+      var prior = chain.encounters.filter(function(e) {
+        return e.sequence < currentSeq;
+      }).sort(function(a, b) { return b.sequence - a.sequence; }); // most recent first
+      if (!prior.length) return '';
 
-      var priors = PatientContinuity.getEncounterChain(caseId);
-      if (priors.length === 0) return '';
+      var html = '<div class="continuity-banner">' +
+        '<div class="continuity-banner-header">' +
+          '<span class="continuity-icon">📋</span>' +
+          '<div>' +
+            '<div class="continuity-title">Prior Encounter History</div>' +
+            '<div class="continuity-subtitle">' + this._esc(chain.patientName) +
+              ' · MRN ' + this._esc(chain.mrn) +
+              ' · ' + prior.length + ' prior encounter' + (prior.length !== 1 ? 's' : '') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
 
-      var html = '<div class="prior-encounters">';
-      html += '<div class="prior-header">';
-      html += '<span class="prior-icon">\uD83D\uDCC1</span>';
-      html += '<span class="prior-title">Prior Encounters</span>';
-      html += '<span class="prior-count">' + priors.length + ' previous visit' + (priors.length > 1 ? 's' : '') + '</span>';
-      html += '</div>';
+      prior.forEach(function(enc) {
+        html += '<div class="prior-encounter-card">' +
+          '<div class="pec-header">' +
+            '<div class="pec-setting">' + PatientContinuity._esc(enc.setting) + '</div>' +
+            '<div class="pec-date">' + PatientContinuity._esc(enc.date) + '</div>' +
+          '</div>' +
+          '<div class="pec-provider">Provider: ' + PatientContinuity._esc(enc.provider) + '</div>' +
 
-      priors.forEach(function(enc) {
-        var date = DE.encounterDate(enc.daysAgo, 'long');
-        var relLabel = DE.relativeLabel(enc.daysAgo);
-        var vitalsStr = '';
-        if (enc.vitals) {
-          var parts = [];
-          if (enc.vitals.HR) parts.push('HR ' + enc.vitals.HR);
-          if (enc.vitals.BP) parts.push('BP ' + enc.vitals.BP);
-          if (enc.vitals.RR) parts.push('RR ' + enc.vitals.RR);
-          if (enc.vitals.SpO2) parts.push('SpO\u2082 ' + enc.vitals.SpO2 + '%');
-          if (enc.vitals.Temp) parts.push('T ' + enc.vitals.Temp);
-          vitalsStr = parts.join(' \u00B7 ');
-        }
+          '<div class="pec-section-label">Summary</div>' +
+          '<div class="pec-text">' + PatientContinuity._esc(enc.summary) + '</div>' +
 
-        html += '<div class="prior-note">';
-        html += '<div class="prior-note-header">';
-        html += '<div class="prior-note-date">' + date + ' <span class="prior-note-rel">(' + relLabel + ')</span></div>';
-        html += '<div class="prior-note-meta">' + enc.setting + ' \u2014 ' + enc.type + (enc.provider ? ' \u2014 ' + enc.provider : '') + '</div>';
+          '<div class="pec-section-label">Vital Signs</div>' +
+          '<div class="pec-vitals">';
+        Object.entries(enc.vitals).forEach(function(kv) {
+          html += '<div class="pec-vital-chip"><span class="pvc-label">' +
+            PatientContinuity._esc(kv[0]) + '</span><span class="pvc-val">' +
+            PatientContinuity._esc(kv[1]) + '</span></div>';
+        });
         html += '</div>';
-        if (vitalsStr) {
-          html += '<div class="prior-note-vitals">' + vitalsStr + '</div>';
-        }
-        html += '<div class="prior-note-body">' + enc.summary + '</div>';
-        if (enc.assessment) {
-          html += '<div class="prior-note-assessment"><strong>Assessment:</strong> ' + enc.assessment + '</div>';
-        }
-        if (enc.orders) {
-          html += '<div class="prior-note-orders"><strong>Plan:</strong> ' + enc.orders + '</div>';
-        }
-        html += '</div>';
+
+          if (enc.labs && enc.labs.length) {
+            html += '<div class="pec-section-label">Relevant Results</div>' +
+              '<div class="pec-labs">';
+            enc.labs.forEach(function(lab) {
+              html += '<div class="pec-lab-row' + (lab.flag ? ' pec-lab-abnormal' : '') + '">' +
+                '<span class="pec-lab-name">' + PatientContinuity._esc(lab.name) + '</span>' +
+                '<span class="pec-lab-val">' + PatientContinuity._esc(lab.val) + '</span>' +
+                '</div>';
+            });
+            html += '</div>';
+          }
+
+          html += '<div class="pec-section-label">Assessment</div>' +
+            '<div class="pec-text">' + PatientContinuity._esc(enc.assessment) + '</div>' +
+
+            '<div class="pec-section-label">Plan</div>' +
+            '<div class="pec-text">' + PatientContinuity._esc(enc.plan) + '</div>' +
+          '</div>';
       });
-
-      html += '</div>';
-
-      // Styles
-      html += '<style>';
-      html += '.prior-encounters{margin:16px 0;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;background:#FAFBFC}';
-      html += '.prior-header{display:flex;align-items:center;gap:8px;padding:12px 16px;background:linear-gradient(135deg,#EBF5FB,#D4E6F1);border-bottom:1px solid #D4E6F1}';
-      html += '.prior-icon{font-size:16px}';
-      html += '.prior-title{font-size:14px;font-weight:700;color:#1B4F72}';
-      html += '.prior-count{margin-left:auto;font-size:11px;color:#5DADE2;font-weight:600}';
-      html += '.prior-note{padding:14px 16px;border-bottom:1px solid #EEF0F4}';
-      html += '.prior-note:last-child{border-bottom:none}';
-      html += '.prior-note-header{margin-bottom:8px}';
-      html += '.prior-note-date{font-size:13px;font-weight:700;color:#1E293B}';
-      html += '.prior-note-rel{font-weight:400;color:#94A3B8;font-size:11px}';
-      html += '.prior-note-meta{font-size:11px;color:#64748B;margin-top:2px}';
-      html += '.prior-note-vitals{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#475569;padding:6px 10px;background:#F0F4F8;border-radius:6px;margin-bottom:8px;display:inline-block}';
-      html += '.prior-note-body{font-size:13px;color:#334155;line-height:1.6;margin-bottom:8px}';
-      html += '.prior-note-assessment{font-size:12px;color:#1E40AF;background:#EFF6FF;padding:6px 10px;border-radius:6px;margin-bottom:4px;line-height:1.5}';
-      html += '.prior-note-orders{font-size:12px;color:#166534;background:#F0FDF4;padding:6px 10px;border-radius:6px;line-height:1.5}';
-      html += '</style>';
 
       return html;
     },
 
-    getAllChains: function() {
-      return CHAINS;
+    /**
+     * Returns array of prior encounter objects for a case.
+     */
+    getEncounterChain: function(caseId) {
+      var chain = this.getChainForCase(caseId);
+      if (!chain) return [];
+      var currentSeq = this._getCurrentSequence(chain, caseId);
+      return chain.encounters.filter(function(e) {
+        return e.sequence < currentSeq;
+      });
     },
 
+    /**
+     * Returns all caseIds related to this case (same chain, excluding self).
+     */
+    getRelatedCases: function(caseId) {
+      var chain = this.getChainForCase(caseId);
+      if (!chain) return [];
+      return chain.cases.filter(function(id) { return id !== caseId; });
+    },
+
+    /**
+     * Returns the full chain object for a given caseId.
+     */
     getChainForCase: function(caseId) {
-      return _index[caseId] || null;
+      for (var i = 0; i < CHAINS.length; i++) {
+        if (CHAINS[i].cases.indexOf(caseId) >= 0) return CHAINS[i];
+      }
+      return null;
+    },
+
+    // ── CSS for injected prior-notes HTML ─────────────────────────────────
+    // Call once on page load to inject styles.
+    injectStyles: function() {
+      if (document.getElementById('rdx-continuity-styles')) return;
+      var style = document.createElement('style');
+      style.id = 'rdx-continuity-styles';
+      style.textContent = [
+        '.continuity-banner{background:linear-gradient(135deg,#1B4F72,#0D7A67);border-radius:10px;padding:14px 16px;margin-bottom:16px;color:white}',
+        '.continuity-banner-header{display:flex;align-items:flex-start;gap:12px}',
+        '.continuity-icon{font-size:24px;flex-shrink:0;margin-top:2px}',
+        '.continuity-title{font-size:15px;font-weight:700;margin-bottom:2px}',
+        '.continuity-subtitle{font-size:12px;opacity:.85}',
+        '.prior-encounter-card{border:1px solid #DCE3EB;border-radius:10px;padding:14px;margin-bottom:12px;background:white}',
+        '.prior-encounter-card:first-of-type{border-color:#2874A6;border-width:1.5px;background:#f0f7ff}',
+        '.pec-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}',
+        '.pec-setting{font-size:13px;font-weight:700;color:#1B4F72}',
+        '.pec-date{font-size:11px;font-weight:600;color:#64748B;background:#F1F5F9;padding:2px 8px;border-radius:10px;white-space:nowrap}',
+        '.pec-provider{font-size:11px;color:#64748B;margin-bottom:10px;font-style:italic}',
+        '.pec-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#64748B;margin:10px 0 4px;padding-bottom:3px;border-bottom:1px solid #f0f2f5}',
+        '.pec-text{font-size:12px;line-height:1.6;color:#1E293B}',
+        '.pec-vitals{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}',
+        '.pec-vital-chip{background:#f7f9fc;border:1px solid #DCE3EB;border-radius:6px;padding:4px 8px;display:flex;flex-direction:column;align-items:center;min-width:60px}',
+        '.pvc-label{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:#64748B;font-weight:600}',
+        '.pvc-val{font-size:12px;font-weight:700;font-family:\'IBM Plex Mono\',monospace;color:#1E293B}',
+        '.pec-labs{display:flex;flex-direction:column;gap:3px}',
+        '.pec-lab-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 6px;border-radius:4px;background:#f8fafc}',
+        '.pec-lab-abnormal{background:#fef2f2;color:#991B1B}',
+        '.pec-lab-name{font-weight:500}',
+        '.pec-lab-val{font-family:\'IBM Plex Mono\',monospace;font-weight:600}',
+        '.continuity-none{padding:20px;text-align:center;color:#94A3B8;font-size:13px;font-style:italic}',
+        // Continue button styles
+        '.continue-patient-btn{display:inline-flex;align-items:center;gap:6px;background:#0D7A67;color:white;border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;transition:filter .15s}',
+        '.continue-patient-btn:hover{filter:brightness(1.12)}',
+        '.continuity-badge{display:inline-flex;align-items:center;gap:4px;background:#E8F8F5;color:#0D7A67;border:1px solid #B2DFD8;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:700}'
+      ].join('\n');
+      document.head.appendChild(style);
+    },
+
+    // ── Internal helpers ──────────────────────────────────────────────────
+    _getCurrentSequence: function(chain, caseId) {
+      for (var i = 0; i < chain.encounters.length; i++) {
+        if (chain.encounters[i].caseId === caseId) return chain.encounters[i].sequence;
+      }
+      // caseId is in chain.cases but has no encounter entry = it is a future node
+      // Find the max existing sequence and treat this as sequence max+1
+      var maxSeq = 0;
+      chain.encounters.forEach(function(e) { if (e.sequence > maxSeq) maxSeq = e.sequence; });
+      return maxSeq + 1;
+    },
+
+    _esc: function(s) {
+      if (!s) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     }
   };
 
-})();
+  window.PatientContinuity = PatientContinuity;
+
+})(window);
