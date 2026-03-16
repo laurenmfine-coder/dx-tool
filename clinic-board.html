@@ -99,6 +99,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 /* ── Acuity badge ── */
 .acuity-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.continuity-badge{display:inline-flex;align-items:center;gap:4px;background:#E8F8F5;color:#0D7A67;border:1px solid #B2DFD8;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:700;cursor:default}
+.continue-patient-btn{display:inline-flex;align-items:center;gap:6px;background:#0D7A67;color:white;border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;transition:filter .15s}
+.continue-patient-btn:hover{filter:brightness(1.12)}
 .acuity-3{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
 .acuity-4{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
 .acuity-dot{width:7px;height:7px;border-radius:50%}
@@ -242,11 +245,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 /* ── Panel footer ── */
 .panel-footer{padding:12px 20px;border-top:1px solid var(--border);background:#f7f9fc;display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
-
-/* ── Continuity badge on board row ── */
-.continuity-badge{display:inline-flex;align-items:center;gap:4px;background:#E8F8F5;color:#0D7A67;border:1px solid #B2DFD8;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle}
-/* ── Prior notes tab ── */
-.prior-notes-wrap{padding:16px}
 
 /* ── Toast ── */
 .toast-container{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;gap:8px}
@@ -824,8 +822,6 @@ function init() {
   generateSchedule();
   startClock();
   updateStats();
-  // Inject patient continuity styles
-  if (window.PatientContinuity) PatientContinuity.injectStyles();
   // Check for saved state
   try {
     var saved = JSON.parse(localStorage.getItem('rdx-clinic-board'));
@@ -917,10 +913,12 @@ function renderBoard() {
     var p = slot.patient;
     var tpl = p.template;
     var isActive = p.id === selectedSlotId;
-    var hasContinuity = window.PatientContinuity && PatientContinuity.hasHistory(tpl.id);
+    var contBadge = (window.PatientContinuity && tpl.id && PatientContinuity.hasHistory(tpl.id))
+      ? ' <span class="continuity-badge" title="Prior chart available" style="vertical-align:middle">📋 Prior chart</span>'
+      : '';
     return '<tr class="' + (isActive ? 'active' : '') + '" onclick="selectPatient(\'' + p.id + '\')">' +
       '<td><span class="slot-time ' + timeClass + '">' + slot.time + '</span><div class="slot-room">' + slot.room + '</div></td>' +
-      '<td><div class="patient-name">' + esc(p.name) + (hasContinuity ? ' <span class="continuity-badge">📋 Prior Hx</span>' : '') + '</div><div class="patient-demo">' + p.age + p.gender + ' · MRN ' + p.mrn + '</div></td>' +
+      '<td><div class="patient-name">' + esc(p.name) + contBadge + '</div><div class="patient-demo">' + p.age + p.gender + ' · MRN ' + p.mrn + '</div></td>' +
       '<td>' + esc(tpl.boardCC) + '</td>' +
       '<td><span class="acuity-badge acuity-' + tpl.acuity + '"><span class="acuity-dot"></span> ' + tpl.acuity + '</span></td>' +
       '<td><span class="visit-type visit-' + tpl.visitType + '">' + ucfirst(tpl.visitType) + '</span></td>' +
@@ -973,8 +971,8 @@ function openPanel(p, slot) {
   document.getElementById('panelAppt').textContent = slot.time;
   document.getElementById('panelRoom').textContent = slot.room;
 
-  // Build tabs
-  var hasContinuity = window.PatientContinuity && PatientContinuity.hasHistory(tpl.id);
+  // Build tabs — inject Prior Chart tab if patient has continuity history
+  var hasPrior = window.PatientContinuity && tpl.id && PatientContinuity.hasHistory(tpl.id);
   var tabs = [
     {id:'chart',label:'📋 Chart'},
     {id:'vitals',label:'❤️ Vitals & Exam'},
@@ -983,11 +981,9 @@ function openPanel(p, slot) {
     {id:'plan',label:'📝 Assessment & Plan'},
     {id:'score',label:'📊 Score'}
   ];
-  if (hasContinuity) {
-    tabs.splice(1, 0, {id:'prior',label:'🗂 Prior Chart'});
-  }
+  if (hasPrior) tabs.splice(1, 0, {id:'prior',label:'🗂 Prior Chart'});
   document.getElementById('emrTabs').innerHTML = tabs.map(function(t,i) {
-    return '<button class="emr-tab' + (i===0?' active':'') + '" data-tab-id="' + t.id + '" onclick="switchTab(\'' + t.id + '\',this)">' + t.label + '</button>';
+    return '<button class="emr-tab' + (i===0?' active':'') + '" onclick="switchTab(\'' + t.id + '\',this)">' + t.label + '</button>';
   }).join('');
 
   renderTab('chart', p, tpl);
@@ -1004,15 +1000,12 @@ function openPanel(p, slot) {
 function openTab(id) {
   var slot = slots.find(function(s){return s.patient && s.patient.id === selectedSlotId;});
   if (!slot) return;
+  document.querySelectorAll('.emr-tab').forEach(function(b){b.classList.remove('active')});
   var tabs = document.querySelectorAll('.emr-tab');
-  tabs.forEach(function(b){b.classList.remove('active')});
-  // Find tab by data-tab-id attribute (set in openPanel)
-  tabs.forEach(function(b){ if (b.getAttribute('data-tab-id') === id) b.classList.add('active'); });
+  var idxMap = {chart:0,vitals:1,labs:2,consult:3,plan:4,score:5};
+  if (tabs[idxMap[id]]) tabs[idxMap[id]].classList.add('active');
   renderTab(id, slot.patient, slot.patient.template);
 }
-
-// Alias used by the "View Prior Chart →" button inside chart tab callout
-function switchTabById(id) { openTab(id); }
 
 function switchTab(id, btn) {
   document.querySelectorAll('.emr-tab').forEach(function(b){b.classList.remove('active')});
@@ -1026,22 +1019,6 @@ function renderTab(id, p, tpl) {
   var content = document.getElementById('emrContent');
   if (id === 'chart') {
     var html = '<div class="tab-body">';
-
-    // ── Patient Continuity callout ─────────────────────────────────────
-    if (window.PatientContinuity && PatientContinuity.hasHistory(tpl.id)) {
-      var priorCount = PatientContinuity.getEncounterChain(tpl.id).length;
-      html += '<div style="background:#E8F8F5;border:1.5px solid #0D7A67;border-radius:10px;padding:12px 14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">' +
-        '<div style="display:flex;align-items:center;gap:10px;">' +
-          '<span style="font-size:22px">📋</span>' +
-          '<div>' +
-            '<div style="font-size:13px;font-weight:700;color:#0D7A67">This patient has prior encounter history</div>' +
-            '<div style="font-size:12px;color:#065F46;margin-top:2px">' + priorCount + ' prior encounter' + (priorCount !== 1 ? 's' : '') + ' on record — review before this visit</div>' +
-          '</div>' +
-        '</div>' +
-        '<button onclick="switchTabById(\'prior\')" style="background:#0D7A67;color:white;border:none;border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">View Prior Chart →</button>' +
-      '</div>';
-    }
-
     html += '<div class="emr-section"><div class="emr-section-title">Reason for Visit</div>';
     html += '<div class="emr-field"><span class="emr-field-label">Chief Complaint</span><span class="emr-field-value">' + esc(tpl.reasonForVisit) + '</span></div>';
     html += '<div class="emr-field"><span class="emr-field-label">Visit Type</span><span class="emr-field-value">' + ucfirst(tpl.visitType) + '</span></div></div>';
@@ -1061,17 +1038,6 @@ function renderTab(id, p, tpl) {
       html += '<div class="teaching-card" style="background:#fff9f0;border-color:#fed7aa"><h4 style="color:#c2410c">⚠️ Common Pitfalls</h4>';
       tpl.teaching.pitfalls.forEach(function(k){html += '<div class="pitfall-item teaching-item">' + esc(k) + '</div>';});
       html += '</div>';
-    }
-    html += '</div>';
-    content.innerHTML = html;
-  }
-  else if (id === 'prior') {
-    // ── Prior Chart tab — calls PatientContinuity.renderPriorNotes() ─
-    var html = '<div class="prior-notes-wrap">';
-    if (window.PatientContinuity && PatientContinuity.hasHistory(tpl.id)) {
-      html += PatientContinuity.renderPriorNotes(tpl.id);
-    } else {
-      html += '<div class="continuity-none">No prior encounter history on record for this patient.</div>';
     }
     html += '</div>';
     content.innerHTML = html;
@@ -1104,6 +1070,22 @@ function renderTab(id, p, tpl) {
   }
   else if (id === 'consult') {
     renderAIChat(p, tpl, content);
+  }
+  else if (id === 'prior') {
+    // Prior Chart tab — render encounter history from continuity system
+    if (window.PatientContinuity && tpl.id && PatientContinuity.hasHistory(tpl.id)) {
+      PatientContinuity.injectStyles();
+      var chain = PatientContinuity.getChainForCase(tpl.id);
+      var priorHtml = PatientContinuity.renderPriorNotes(tpl.id);
+      var nextCases = PatientContinuity.getRelatedCases(tpl.id).filter(function(id) { return id !== tpl.id; });
+      var contBtn = '';
+      if (nextCases.length) {
+        contBtn = '<div style="margin-top:14px"><a href="virtual-emr.html?case=' + encodeURIComponent(nextCases[0]) + '" class="continue-patient-btn" style="text-decoration:none">→ Continue this patient in the ED</a></div>';
+      }
+      content.innerHTML = '<div class="tab-body">' + priorHtml + contBtn + '</div>';
+    } else {
+      content.innerHTML = '<div class="tab-body"><div class="continuity-none">No prior encounter history available for this patient.</div></div>';
+    }
   }
   else if (id === 'plan') {
     renderPlan(p, tpl, content);

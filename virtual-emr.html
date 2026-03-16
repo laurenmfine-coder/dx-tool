@@ -1530,6 +1530,94 @@ function getSettingLabel() {
   return '';
 }
 
+// ─── PATIENT CONTINUITY BADGE + BUTTON INJECTION ───
+// Scans the rendered patient list for case IDs that belong to continuity chains
+// and injects a "Prior chart available" badge plus a "Continue this patient →" button.
+function _injectContinuityBadges() {
+  if (!window.PatientContinuity) return;
+  // Patient cards rendered by patient-list.js use [data-case-id] attributes.
+  // We also support <a href="?case=ID"> anchors as a fallback.
+  requestAnimationFrame(function() {
+    // Strategy 1: data-case-id attribute on any element
+    var cards = document.querySelectorAll('[data-case-id]');
+    cards.forEach(function(card) {
+      var caseId = card.getAttribute('data-case-id');
+      _applyContBadge(card, caseId);
+    });
+
+    // Strategy 2: href links like ?case=stemi-v1
+    var links = document.querySelectorAll('a[href*="?case="], a[href*="&case="]');
+    links.forEach(function(a) {
+      var m = a.href.match(/[?&]case=([^&]+)/);
+      if (!m) return;
+      var caseId = decodeURIComponent(m[1]);
+      // Walk up to the card container
+      var container = a.closest('[class*="card"], [class*="row"], [class*="item"], li, tr') || a.parentElement;
+      _applyContBadge(container, caseId, a);
+    });
+
+    // Strategy 3: onclick="loadCase('stemi-v1')" or similar
+    var onclickEls = document.querySelectorAll('[onclick*="case"]');
+    onclickEls.forEach(function(el) {
+      var m = (el.getAttribute('onclick') || '').match(/['"]([\w-]+)['"]/);
+      if (!m) return;
+      var caseId = m[1];
+      if (PatientContinuity.hasHistory(caseId)) {
+        _applyContBadge(el, caseId);
+      }
+    });
+  });
+}
+
+function _applyContBadge(container, caseId, anchorEl) {
+  if (!container || !caseId) return;
+  if (!PatientContinuity.hasHistory(caseId)) return;
+  // Don't double-inject
+  if (container.querySelector('.continuity-badge')) return;
+
+  var chain = PatientContinuity.getChainForCase(caseId);
+  if (!chain) return;
+
+  // Find next case in chain to navigate to
+  var relatedCases = PatientContinuity.getRelatedCases(caseId);
+  var nextCaseId = relatedCases.length ? relatedCases[0] : null;
+
+  // Badge
+  var badge = document.createElement('span');
+  badge.className = 'continuity-badge';
+  badge.title = 'Prior chart available — ' + chain.patientName;
+  badge.innerHTML = '📋 Prior chart';
+  badge.style.cssText = 'margin-left:6px;vertical-align:middle;cursor:default;';
+
+  // Button
+  var btn = document.createElement('button');
+  btn.className = 'continue-patient-btn';
+  btn.style.cssText = 'margin-top:6px;display:flex;width:fit-content;';
+  btn.innerHTML = '→ Continue this patient';
+  btn.title = 'Open next encounter for ' + chain.patientName;
+  btn.onclick = function(e) {
+    e.stopPropagation();
+    var targetCase = nextCaseId || caseId;
+    window.location.href = 'virtual-emr.html?case=' + encodeURIComponent(targetCase);
+  };
+
+  // Insert: try to find a footer/action area in the card, otherwise append
+  var actionArea = container.querySelector('[class*="action"], [class*="footer"], [class*="btn-row"]');
+  if (actionArea) {
+    actionArea.appendChild(btn);
+  } else {
+    container.appendChild(btn);
+  }
+
+  // Badge goes on the first heading/name text found
+  var nameEl = container.querySelector('[class*="name"], [class*="title"], h2, h3, h4, strong');
+  if (nameEl) {
+    nameEl.appendChild(badge);
+  } else {
+    container.insertBefore(badge, container.firstChild);
+  }
+}
+
 // ─── HANDOFF RENDERER ───
 function renderHandoff() {
   if (!window.HANDOFF_DATA || !HANDOFF_DATA.hasHandoff(CASE_ID)) {
@@ -1617,17 +1705,24 @@ function _renderCasePicker() {
     if (window.EMRShell && document.getElementById('emr-shell')) {
       if (window.EMROverview) {
         document.getElementById('app').innerHTML = EMROverview.render();
+        if (window.PatientContinuity) { PatientContinuity.injectStyles(); _injectContinuityBadges(); }
         return;
       }
     }
     // Use EMR Overview (which embeds PatientList) if available
     if (window.EMROverview) {
       document.getElementById('app').innerHTML = EMROverview.render();
+      if (window.PatientContinuity) { PatientContinuity.injectStyles(); _injectContinuityBadges(); }
       return;
     }
     // Use the unified PatientList if available
     if (window.PatientList) {
       document.getElementById('app').innerHTML = PatientList.render(S.clinicalSetting, S.specialty);
+      // Inject continuity badges + buttons after render
+      if (window.PatientContinuity) {
+        PatientContinuity.injectStyles();
+        _injectContinuityBadges();
+      }
       return;
     }
     // Fallback: skeleton loading state while scripts finish
@@ -4919,6 +5014,7 @@ submitDoc = function(){
 };
 
 </script>
+<script src="js/rdx-patient-continuity.js"></script>
 <script src="js/patient-list.js"></script>
 <script src="js/emr-overview.js"></script>
 <script src="js/emr-landing.js"></script>
