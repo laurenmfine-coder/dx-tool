@@ -99,9 +99,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 /* ── Acuity badge ── */
 .acuity-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
-.continuity-badge{display:inline-flex;align-items:center;gap:4px;background:#E8F8F5;color:#0D7A67;border:1px solid #B2DFD8;border-radius:10px;padding:2px 7px;font-size:10px;font-weight:700;cursor:default}
-.continue-patient-btn{display:inline-flex;align-items:center;gap:6px;background:#0D7A67;color:white;border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;transition:filter .15s}
-.continue-patient-btn:hover{filter:brightness(1.12)}
 .acuity-3{background:#fffbeb;color:#b45309;border:1px solid #fde68a}
 .acuity-4{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
 .acuity-dot{width:7px;height:7px;border-radius:50%}
@@ -269,6 +266,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <div class="topbar-left">
     <a href="./index.html" style="text-decoration:none;color:#fff;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;transition:background .15s;font-size:13px;font-weight:600;background:rgba(255,255,255,0.12)" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">← Exit Clinic</a>
     <div class="topbar-logo">🩺 <span>Virtual Hospital</span></div>
+    <div id="focus-badge" style="display:none;background:rgba(255,255,255,.18);padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;color:#fff;align-items:center;gap:5px;">
+      <span id="focus-badge-text"></span>
+      <span onclick="if(window.RDXFocus){RDXFocus.clear();RDXFocus._refreshBanner();}" style="cursor:pointer;opacity:.7;font-size:10px">✕</span>
+    </div>
     <div class="topbar-badge">Outpatient Clinic</div>
   </div>
   <div class="topbar-right">
@@ -591,31 +592,47 @@ const CLINIC_CASES = [
     demographics:{ageRange:[18,50],genderDistribution:{male:.5},
       nameOptions:{male:['Kevin Okafor','Daniel Brennan','Omar Abdullah','Stefan Petrov','Reginald Hayes'],
                    female:['Olivia Achebe','Hannah Sullivan','Aisha Diallo','Claire Johansson','Vivian Osei']}},
-    pmh:'Allergic rhinitis, mild intermittent asthma (well-controlled)',
-    medications:'Cetirizine 10mg daily, fluticasone nasal spray, montelukast 10mg daily, albuterol PRN (rarely uses)',
+    pmh:'Allergic rhinitis, mild intermittent asthma (well-controlled), no prior anaphylaxis, no nasal polyps',
+    medications:'Cetirizine 10mg daily, fluticasone nasal spray 2 sprays/nostril daily, montelukast 10mg daily, albuterol MDI PRN (uses <2×/month)',
     allergies:'NKDA',
     vitals:{BP:'118/72',HR:'70',RR:'14',Temp:'98.4°F',BMI:'23.5',Wt:'156 lbs'},
-    hpi:'34-year-old with 8-year history of allergic rhinitis, poorly controlled despite Step 2 pharmacotherapy. Perennial symptoms (dust mite dominant), seasonal peaks (grass April-June, mold August-October). SPT confirms sensitization to D. farinae, grass mix, Alternaria. TNSS 22/24. Interested in allergen immunotherapy.',
-    exam:'ENT: bilateral nasal turbinate edema, pale mucosa, clear discharge, no polyps. Cobblestoning of posterior pharynx. Eyes: mild bilateral conjunctival injection. Lungs: clear, no wheeze.',
+    hpi:'38-year-old with 8-year history of poorly controlled allergic rhinitis despite Step 2 pharmacotherapy. Reports daily nasal congestion, anterior rhinorrhea, and sneezing — perennial, dust mite dominant, with seasonal peaks April–June (grass) and August–October (mold). Also reports bilateral eye pruritus, tearing, and injection during peak season. Occasional mild nocturnal cough but no wheezing, chest tightness, or dyspnea at rest. No exercise-induced symptoms. No prior episodes of anaphylaxis or severe systemic reactions. No current upper respiratory infection. TNSS 22/24 today. Skin prick testing today confirms sensitization to D. farinae (4+ wheal), grass mix (3+), Alternaria (2+). Not on beta-blocker. Interested in allergen immunotherapy for long-term disease modification.',
+    exam:'General: well-appearing, no acute distress, speaking in full sentences.\n\nHEENT:\n— Head: normocephalic, atraumatic\n— Eyes: bilateral conjunctival injection and mild periorbital edema; no discharge; Dennie-Morgan lines present bilaterally; no chemosis\n— Nose: bilateral nasal turbinate hypertrophy with pale, boggy mucosa; watery clear discharge; no mucopurulent secretions; no nasal polyps on anterior rhinoscopy; deviated nasal septum (mild, left); allergic crease present across nasal bridge\n— Ears: TMs intact bilaterally, landmarks visible, no effusion, no erythema\n— Throat/Oropharynx: cobblestoning of posterior pharynx consistent with chronic postnasal drip; no tonsillar hypertrophy; no exudate; no peritonsillar fullness\n— Neck: no cervical lymphadenopathy; no thyromegaly; trachea midline\n\nRespiratory/Pulmonary:\n— Inspection: no accessory muscle use; no intercostal retractions; chest wall symmetric\n— Auscultation: clear to auscultation bilaterally; no wheeze, no crackles, no rhonchi; good air movement throughout\n— Percussion: resonant throughout\n— No clubbing\n\nSkin/Dermatology:\n— No urticaria, angioedema, or active hives\n— No eczematous plaques or lichenification\n— No dermographism on forearm\n— SPT sites on back: D. farinae 4+ (8mm wheal, 18mm flare); grass mix 3+ (6mm wheal, 14mm flare); Alternaria 2+ (4mm wheal, 10mm flare); histamine control positive; saline control negative\n\nCardiovascular: regular rate and rhythm, no murmurs\nAbdomen: soft, non-tender, non-distended',
     labs:[
-      {name:'Spirometry',val:'FEV1 94% predicted, FEV1/FVC 0.82 — normal',flag:'',ref:''},
-      {name:'Total IgE',val:'342 IU/mL',flag:'H',ref:'<100'},
-      {name:'D. farinae IgE',val:'8.4 kU/L',flag:'H',ref:'Class 3 — moderate'},
-      {name:'Grass mix IgE',val:'6.2 kU/L',flag:'H',ref:'Class 3'},
-      {name:'Alternaria IgE',val:'3.1 kU/L',flag:'H',ref:'Class 2'}
+      {name:'Spirometry (pre-bronchodilator)',val:'FEV1 94% predicted, FVC 97% predicted, FEV1/FVC 0.82',flag:'',ref:'Normal — no obstruction'},
+      {name:'Spirometry (post-bronchodilator)',val:'FEV1 change +2% — not significant',flag:'',ref:'No bronchodilator response'},
+      {name:'Total IgE',val:'342 IU/mL',flag:'H',ref:'Normal <100 IU/mL'},
+      {name:'D. farinae specific IgE',val:'8.4 kU/L',flag:'H',ref:'Class 3 (moderate) — 3.5–17.5 kU/L'},
+      {name:'D. pteronyssinus specific IgE',val:'7.1 kU/L',flag:'H',ref:'Class 3 (moderate)'},
+      {name:'Grass mix specific IgE',val:'6.2 kU/L',flag:'H',ref:'Class 3 (moderate)'},
+      {name:'Alternaria specific IgE',val:'3.1 kU/L',flag:'H',ref:'Class 2 (low-moderate) — 0.7–3.5 kU/L'},
+      {name:'Cat dander specific IgE',val:'0.2 kU/L',flag:'',ref:'Class 0 — not sensitized'},
+      {name:'Cockroach specific IgE',val:'0.3 kU/L',flag:'',ref:'Class 0 — not sensitized'},
+      {name:'Baseline serum tryptase',val:'4.2 ng/mL',flag:'',ref:'Normal <11.4 ng/mL'},
+      {name:'CBC',val:'WBC 7.8, Hgb 14.2, Plt 244 — eosinophils 6% (abs 470)',flag:'',ref:'Mild eosinophilia — consistent with atopy'}
     ],
     teaching:{
-      keyPoints:['SCIT build-up: weekly injections for 6–12 months; maintenance: every 4 weeks for 3–5 years','SCIT is disease-modifying — reduces sensitization and risk of new allergies and asthma','Must observe patient 20–30 min post-injection for systemic reaction','Epinephrine must be immediately available in every allergy office giving SCIT','Contraindications to SCIT: severe/uncontrolled asthma (FEV1 <70% predicted), beta-blocker use (impairs epinephrine response)'],
-      pitfalls:['Giving SCIT shot without checking current symptoms/PEF first','Not observing 20–30 min after injection','Missing beta-blocker as relative contraindication (impairs epinephrine)'],
-      mustNotMiss:['Always check for systemic reaction signs during 20-30 min observation period']
+      keyPoints:['SCIT build-up: weekly injections for 6–12 months; maintenance: every 4 weeks for 3–5 years','SCIT is disease-modifying — reduces sensitization and risk of new allergies and asthma','Must observe patient 20–30 min post-injection for systemic reaction','Epinephrine must be immediately available in every allergy office giving SCIT','Contraindications to SCIT: severe/uncontrolled asthma (FEV1 <70% predicted), beta-blocker use (impairs epinephrine response)','Normal baseline tryptase (<11.4) makes systemic mastocytosis less likely — important pre-SCIT safety check'],
+      pitfalls:['Giving SCIT shot without checking current symptoms/PEF first','Not observing 20–30 min after injection','Missing beta-blocker as relative contraindication (impairs epinephrine response to systemic reaction)','Starting SCIT without confirming asthma is well-controlled (spirometry required)'],
+      mustNotMiss:['Always check for systemic reaction signs during 20-30 min observation period','Confirm FEV1 >70% predicted before initiating SCIT']
     },
     plan:[
-      {id:'scit',label:'Initiate SCIT build-up: dust mite + grass + Alternaria mix',correct:true,category:'Immunotherapy',critical:false},
-      {id:'observe',label:'20–30 min observation post-injection (systemic reaction protocol)',correct:true,category:'Safety protocol',critical:true},
-      {id:'epi-rx',label:'Prescribe epinephrine auto-injector — carry to every appointment',correct:true,category:'Safety',critical:true},
-      {id:'continue-pharm',label:'Continue fluticasone + cetirizine during build-up phase',correct:true,category:'Adjunct therapy',critical:false},
-      {id:'asthma-monitor',label:'Monitor asthma control — spirometry at 6 months',correct:true,category:'Monitoring',critical:false},
-      {id:'no-observe',label:'Give shot and discharge immediately after — no observation needed',correct:false,category:'Safety error',critical:true},
+      {id:'scit-initiate',label:'Initiate SCIT build-up: dust mite (D. farinae + D. pteronyssinus) + grass mix + Alternaria — 3-vial cluster protocol',correct:true,category:'Immunotherapy',critical:false},
+      {id:'scit-schedule',label:'Schedule weekly build-up injections — allergy nurse to review dose escalation protocol',correct:true,category:'Immunotherapy',critical:false},
+      {id:'observe',label:'20–30 min post-injection observation at every visit — systemic reaction protocol',correct:true,category:'Safety protocol',critical:true},
+      {id:'epi-rx',label:'Prescribe epinephrine auto-injector 0.3mg × 2 — carry to every injection appointment',correct:true,category:'Safety',critical:true},
+      {id:'epi-training',label:'Auto-injector training with nurse before first injection — demonstrate technique',correct:true,category:'Safety',critical:true},
+      {id:'continue-flonase',label:'Continue fluticasone nasal spray 2 sprays/nostril daily during build-up phase',correct:true,category:'Adjunct pharmacotherapy',critical:false},
+      {id:'continue-cetir',label:'Continue cetirizine 10mg daily — can pre-medicate 1hr before injection to reduce local reactions',correct:true,category:'Adjunct pharmacotherapy',critical:false},
+      {id:'dc-montelukast',label:'Discontinue montelukast — not needed once SCIT initiated and symptoms controlled',correct:false,category:'Premature discontinuation',critical:false},
+      {id:'asthma-spirometry',label:'Repeat spirometry at 6 months — monitor asthma control during build-up',correct:true,category:'Monitoring',critical:false},
+      {id:'tnss-followup',label:'Reassess TNSS at each build-up visit — document symptom improvement',correct:true,category:'Monitoring',critical:false},
+      {id:'avoid-bblocker',label:'Counsel: avoid starting beta-blocker while on SCIT — impairs epinephrine response',correct:true,category:'Counseling/Safety',critical:true},
+      {id:'trigger-avoidance',label:'Reinforce allergen avoidance: HEPA filter, dust mite encasements, dehumidifier <50% for mold',correct:true,category:'Environmental control',critical:false},
+      {id:'slit-instead',label:'Offer sublingual immunotherapy (SLIT) drops as alternative to injections',correct:false,category:'Incorrect — SLIT drops not FDA-approved in US; SLIT tablets available for dust mite/grass only',critical:false},
+      {id:'no-observe',label:'Give injection and discharge immediately — no observation needed for experienced SCIT patients',correct:false,category:'Safety error',critical:true},
+      {id:'stop-pharm',label:'Discontinue all pharmacotherapy now that SCIT is starting',correct:false,category:'Safety error — pharmacotherapy continues during build-up',critical:true},
+      {id:'skin-retest-1yr',label:'Repeat skin prick testing at 12 months to assess response to immunotherapy',correct:false,category:'Unnecessary — clinical response guides therapy, not repeat SPT during SCIT',critical:false},
     ]
   },
   {
@@ -819,6 +836,11 @@ var dayOffset = 0;
 // ── INIT ──────────────────────────────────────────────────────────────────────
 function init() {
   updateDateLabel();
+  // Apply focus mode banner + filter
+  if (window.RDXFocus) {
+    RDXFocus.injectBanner();
+    RDXFocus.applyToPage();
+  }
   generateSchedule();
   startClock();
   updateStats();
@@ -833,7 +855,13 @@ function init() {
 
 function generateSchedule() {
   slots = [];
-  var pool = CLINIC_CASES.slice();
+  // Apply focus mode specialty filter if set
+  var _focusSpecialty = (window.RDXFocus ? RDXFocus.get().specialty : null) || window._rdxFocusSpecialty || 'all';
+  var pool = _focusSpecialty !== 'all'
+    ? CLINIC_CASES.filter(function(c) { return c.category === _focusSpecialty; })
+    : CLINIC_CASES.slice();
+  // Fallback to full pool if filter returns nothing
+  if (pool.length === 0) pool = CLINIC_CASES.slice();
   // Shuffle pool
   for (var i = pool.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i+1));
@@ -913,12 +941,9 @@ function renderBoard() {
     var p = slot.patient;
     var tpl = p.template;
     var isActive = p.id === selectedSlotId;
-    var contBadge = (window.PatientContinuity && tpl.id && PatientContinuity.hasHistory(tpl.id))
-      ? ' <span class="continuity-badge" title="Prior chart available" style="vertical-align:middle">📋 Prior chart</span>'
-      : '';
     return '<tr class="' + (isActive ? 'active' : '') + '" onclick="selectPatient(\'' + p.id + '\')">' +
       '<td><span class="slot-time ' + timeClass + '">' + slot.time + '</span><div class="slot-room">' + slot.room + '</div></td>' +
-      '<td><div class="patient-name">' + esc(p.name) + contBadge + '</div><div class="patient-demo">' + p.age + p.gender + ' · MRN ' + p.mrn + '</div></td>' +
+      '<td><div class="patient-name">' + esc(p.name) + '</div><div class="patient-demo">' + p.age + p.gender + ' · MRN ' + p.mrn + '</div></td>' +
       '<td>' + esc(tpl.boardCC) + '</td>' +
       '<td><span class="acuity-badge acuity-' + tpl.acuity + '"><span class="acuity-dot"></span> ' + tpl.acuity + '</span></td>' +
       '<td><span class="visit-type visit-' + tpl.visitType + '">' + ucfirst(tpl.visitType) + '</span></td>' +
@@ -971,8 +996,7 @@ function openPanel(p, slot) {
   document.getElementById('panelAppt').textContent = slot.time;
   document.getElementById('panelRoom').textContent = slot.room;
 
-  // Build tabs — inject Prior Chart tab if patient has continuity history
-  var hasPrior = window.PatientContinuity && tpl.id && PatientContinuity.hasHistory(tpl.id);
+  // Build tabs
   var tabs = [
     {id:'chart',label:'📋 Chart'},
     {id:'vitals',label:'❤️ Vitals & Exam'},
@@ -981,7 +1005,6 @@ function openPanel(p, slot) {
     {id:'plan',label:'📝 Assessment & Plan'},
     {id:'score',label:'📊 Score'}
   ];
-  if (hasPrior) tabs.splice(1, 0, {id:'prior',label:'🗂 Prior Chart'});
   document.getElementById('emrTabs').innerHTML = tabs.map(function(t,i) {
     return '<button class="emr-tab' + (i===0?' active':'') + '" onclick="switchTab(\'' + t.id + '\',this)">' + t.label + '</button>';
   }).join('');
@@ -1031,11 +1054,12 @@ function renderTab(id, p, tpl) {
     html += '<div class="emr-field"><span class="emr-field-label">Medications</span><span class="emr-field-value">' + esc(tpl.medications) + '</span></div>';
     html += '<div class="emr-field"><span class="emr-field-label">Allergies</span><span class="emr-field-value">' + esc(tpl.allergies) + '</span></div></div>';
 
-    html += '<div class="teaching-card"><h4>📚 Key Teaching Points</h4>';
+    // Teaching points shown at bottom of chart — after all clinical data
+    html += '<div class="teaching-card" style="margin-top:16px"><h4>📚 Key Teaching Points</h4>';
     tpl.teaching.keyPoints.forEach(function(k){html += '<div class="teaching-item">' + esc(k) + '</div>';});
     html += '</div>';
-    if (tpl.teaching.pitfalls.length) {
-      html += '<div class="teaching-card" style="background:#fff9f0;border-color:#fed7aa"><h4 style="color:#c2410c">⚠️ Common Pitfalls</h4>';
+    if (tpl.teaching.pitfalls && tpl.teaching.pitfalls.length) {
+      html += '<div class="teaching-card" style="background:#fff9f0;border-color:#fed7aa;margin-top:8px"><h4 style="color:#c2410c">⚠️ Common Pitfalls</h4>';
       tpl.teaching.pitfalls.forEach(function(k){html += '<div class="pitfall-item teaching-item">' + esc(k) + '</div>';});
       html += '</div>';
     }
@@ -1055,7 +1079,7 @@ function renderTab(id, p, tpl) {
     });
     html += '</div></div>';
     html += '<div class="emr-section"><div class="emr-section-title">Physical Examination</div>';
-    html += '<p style="font-size:13px;line-height:1.7">' + esc(tpl.exam) + '</p></div>';
+    html += '<div style="font-size:13px;line-height:1.8">' + esc(tpl.exam).replace(/\n\n/g,'</p><p style="margin-top:10px">').replace(/\n/g,'<br>') + '</div></div>';
     html += '</div>';
     content.innerHTML = html;
   }
@@ -1070,22 +1094,6 @@ function renderTab(id, p, tpl) {
   }
   else if (id === 'consult') {
     renderAIChat(p, tpl, content);
-  }
-  else if (id === 'prior') {
-    // Prior Chart tab — render encounter history from continuity system
-    if (window.PatientContinuity && tpl.id && PatientContinuity.hasHistory(tpl.id)) {
-      PatientContinuity.injectStyles();
-      var chain = PatientContinuity.getChainForCase(tpl.id);
-      var priorHtml = PatientContinuity.renderPriorNotes(tpl.id);
-      var nextCases = PatientContinuity.getRelatedCases(tpl.id).filter(function(id) { return id !== tpl.id; });
-      var contBtn = '';
-      if (nextCases.length) {
-        contBtn = '<div style="margin-top:14px"><a href="virtual-emr.html?case=' + encodeURIComponent(nextCases[0]) + '" class="continue-patient-btn" style="text-decoration:none">→ Continue this patient in the ED</a></div>';
-      }
-      content.innerHTML = '<div class="tab-body">' + priorHtml + contBtn + '</div>';
-    } else {
-      content.innerHTML = '<div class="tab-body"><div class="continuity-none">No prior encounter history available for this patient.</div></div>';
-    }
   }
   else if (id === 'plan') {
     renderPlan(p, tpl, content);
@@ -1353,7 +1361,6 @@ function showToast(msg, type) {
 // ── START ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', init);
 </script>
-<script src="js/rdx-patient-continuity.js"></script>
 <script src="js/nav-global.js"></script>
 </body>
 </html>

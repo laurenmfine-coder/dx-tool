@@ -386,7 +386,6 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .concept-cat-pct{font-size:10px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace}
 
 /* ═══ SPACEDREP STUDY HUB ═══ */
-.spacedrep-hub{padding:0}
 .sr-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .sr-header h3{margin:0;font-size:16px;font-weight:700}
 .sr-stats{display:flex;gap:12px;flex-wrap:wrap}
@@ -396,8 +395,6 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .sr-stat.mastered strong{color:#2E7D32}
 .sr-categories{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
 .sr-cat-badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:12px;white-space:nowrap}
-.sr-queue{margin-top:12px}
-.sr-queue h4{font-size:13px;font-weight:600;margin:0 0 10px}
 .sr-card-preview{display:flex;align-items:flex-start;gap:10px;padding:10px;background:var(--surface);border:1px solid var(--border-light);border-radius:8px;margin-bottom:6px;cursor:pointer;transition:border-color .15s}
 .sr-card-preview:hover{border-color:var(--primary)}
 .sr-card-cat{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;font-size:14px;flex-shrink:0;color:#fff}
@@ -826,7 +823,6 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <script src="emr-data/day-progression.js"></script>
 <script src="emr-data/day-evolution.js"></script>
 <script src="emr-data/coachdx-analytics.js"></script>
-<script src="emr-data/spacedrep-generator.js"></script>
 <script src="caseframe-engine.js"></script>
 <script src="caseframe-integration.js"></script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -2202,12 +2198,12 @@ function render(){
     {id:"immunizations",label:"Immunizations",icon:I.syringe},
     {id:"history",label:"FH / SH",icon:I.home}
   );
-  if(role==="student"){tabs.push({id:"documentation",label:"Documentation",icon:I.fileText},{id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'},{id:"studyhub",label:"Study Hub",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>'},{id:"feedback",label:"Feedback",icon:I.star})}
+  if(role==="student"){tabs.push({id:"documentation",label:"Documentation",icon:I.fileText},{id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'},{id:"feedback",label:"Feedback",icon:I.star})}
   if(role==="faculty"||role==="admin"){tabs.push({id:"grading",label:"Grading",icon:I.check})}
   if(role==="admin"){tabs.push({id:"admin",label:"Admin Panel",icon:I.settings})}
 
   const sb=tabs.map(t=>{ var _badge=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):''; var _dim=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):''; var _b='<button type="button" '+(SIDEBAR_TOOLTIPS&&SIDEBAR_TOOLTIPS[t.id]?'data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'" ':'')+'class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+_dim+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge+'</button>'; return _b; }).join("")+(window.RDXGuide?RDXGuide.renderSidebarToggle():'');
-  const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,documentation:renderDocumentation,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx,studyhub:renderStudyHub};
+  const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,documentation:renderDocumentation,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx};
   // Wrap each render fn with error boundary
   if(window.RDXErrors){Object.keys(fn).forEach(function(k){fn[k]=RDXErrors.wrap(fn[k],{icon:'⚙️',desc:'This section couldn\'t load. Try switching tabs.',retry:'Try Again',retryFn:'render()'});});}
   const ct=(fn[S.activeTab]||renderDemographics)();
@@ -2316,26 +2312,19 @@ function setDayTrajectory(traj) {
   changeEncounterDay(S.encounterDay || 1);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// STUDY HUB — SpacedRep Flashcard Tab
+
 // ═══════════════════════════════════════════════════════════════
 function renderStudyHub() {
   var html = '<div class="section-card">';
-  html += '<div class="section-header"><span style="display:flex;align-items:center;gap:8px">📚 Study Hub</span></div>';
+
   html += '<div class="section-body" style="padding:16px;">';
 
   // Harvest button
   html += '<div style="margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">';
-  html += '<button type="button" class="btn-primary" onclick="harvestFlashcards()" style="font-size:13px;padding:8px 16px;border-radius:8px;border:none;background:var(--primary);color:#fff;cursor:pointer;font-weight:600">🔍 Harvest Learning Gaps</button>';
-  html += '<button type="button" class="btn-secondary" onclick="reviewNextCard()" style="font-size:13px;padding:8px 16px;border-radius:8px;border:1px solid var(--border-light);background:var(--surface);cursor:pointer;font-weight:600">📖 Review Due Cards</button>';
+
   html += '</div>';
 
-  // SpacedRep hub content
-  if (window.VEMR_SPACEDREP) {
-    html += VEMR_SPACEDREP.renderStudyHub();
-  } else {
-    html += '<p style="color:var(--text-muted);font-size:13px;">SpacedRep module loading…</p>';
-  }
+
 
   // Day evolution summary (if available)
   if (S.dayEvolution) {
@@ -2350,33 +2339,9 @@ function renderStudyHub() {
   return html;
 }
 
-function harvestFlashcards() {
-  if (!window.VEMR_SPACEDREP) return;
-  var pname = (window.EMR_DATA && EMR_DATA.patient) ? EMR_DATA.patient.name : "Unknown Patient";
-  var newCards = VEMR_SPACEDREP.harvestAndGenerate(CASE_ID, pname);
-  if (newCards.length > 0) {
-    alert("Generated " + newCards.length + " new flashcard" + (newCards.length > 1 ? "s" : "") + " from your learning gaps!");
-  } else {
-    alert("No new gaps detected. Continue working through the case to identify learning opportunities.");
-  }
-  render();
-}
 
-function reviewNextCard() {
-  if (!window.VEMR_SPACEDREP) return;
-  var due = VEMR_SPACEDREP.getDueCards(1);
-  if (due.length === 0) { alert("No cards due right now!"); return; }
-  var card = due[0];
-  var cat = VEMR_SPACEDREP.CATEGORIES[card.category] || { icon: "📝", label: "Card" };
-  var answer = prompt(cat.icon + " " + card.front + "\n\nType your answer (then you'll self-grade):");
-  if (answer === null) return;
-  alert("✅ Answer:\n\n" + card.back);
-  var quality = prompt("Self-grade (0-5):\n0=Blank, 1=Wrong, 2=Almost, 3=Hard but correct, 4=Correct, 5=Easy");
-  if (quality !== null) {
-    VEMR_SPACEDREP.reviewCard(card.id, parseInt(quality) || 3);
-  }
-  render();
-}
+
+
 
 // ═══════════════════════════════════════════════════════════════
 // COACHDX — SETTING-AWARE SOCRATIC AI COACH
@@ -2846,7 +2811,7 @@ var WORKFLOW_STEPS = [
   { id:'chart',      label:'Review Chart',  icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'], hint:'Read the chart: labs, meds, imaging, vitals' },
   { id:'interview',  label:'Interview / HPI', icon:'🗣️', tabs:['documentation'], hint:'Take the history — click Documentation to write your HPI' },
   { id:'reason',     label:'Reason & Plan', icon:'🔍', tabs:['crt','orders','oral'], hint:'Build your differential and order workup' },
-  { id:'coach',      label:'AI Coaching',   icon:'🤖', tabs:['coach','studyhub','autofeedback','feedback'], hint:'Talk through your reasoning with CoachDx' },
+  { id:'coach',      label:'AI Coaching',   icon:'🤖', tabs:['coach','autofeedback','feedback'], hint:'Talk through your reasoning with CoachDx' },
 ];
 
 function getActiveWorkflowStep(tabId) {
@@ -2879,7 +2844,6 @@ function renderWorkflowBar(activeTab) {
 var AI_TOOLS = [
   { id:'coach',       label:'CoachDx',       icon:'🧠', desc:'Socratic coach — reason it out' },
   { id:'crt',         label:'ReasonDx CRT',  icon:'🔍', desc:'Step-by-step reasoning trainer' },
-  { id:'studyhub',    label:'Study Hub',     icon:'📚', desc:'MCQs & spaced repetition' },
   { id:'autofeedback',label:'Doc Assessment',icon:'✍️',  desc:'AI feedback on your note' },
 ];
 
@@ -2900,13 +2864,12 @@ function renderAISwitcher(activeTab) {
 }
 
 // Patch: AI tabs prepend the switcher
-var _AI_TAB_IDS = ['coach','crt','studyhub','autofeedback','feedback'];
+var _AI_TAB_IDS = ['coach','crt','autofeedback','feedback'];
 
 // Sidebar tooltip text for AI tools
 var SIDEBAR_TOOLTIPS = {
   'coach':        'CoachDx — Socratic AI attending. Talk through your differential. Won\'t give answers, asks the right questions.',
   'crt':          'ReasonDx CRT — Step-by-step clinical reasoning trainer. Builds your diagnostic scaffold systematically.',
-  'studyhub':     'Study Hub — Case-linked MCQs and spaced repetition flashcards. Reinforce what you just reasoned through.',
   'autofeedback': 'Doc Assessment — AI reads your note and gives structured feedback on HPI quality, assessment & plan.',
   'feedback':     'Faculty Feedback — Awaits your attending\'s annotations and score on your submitted note.',
   'orders':       'Orders & CDS — Place lab, imaging, and medication orders. Clinical decision support fires automatically.',
@@ -2997,7 +2960,7 @@ function renderWorkflowBar(activeTab) {
     { id:'chart',    label:'Chart Review',       icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
     { id:'history',  label:'History & HPI',       icon:'🗣️', tabs:['documentation'] },
     { id:'reason',   label:'Orders & Reasoning',  icon:'⚡', tabs:['crt','orders','oral'] },
-    { id:'coaching', label:'Talk to Attending',   icon:'🧠', tabs:['coach','studyhub','autofeedback','feedback'] },
+    { id:'coaching', label:'Talk to Attending',   icon:'🧠', tabs:['coach','autofeedback','feedback'] },
   ];
   var activeStep = 0;
   steps.forEach(function(s, i){ if(s.tabs.indexOf(activeTab)>=0) activeStep=i; });
@@ -3177,7 +3140,7 @@ function submitDoc(){
   dbSet("subs-"+S.currentUser.username,S.submissions);
   // Cloud sync
   if(window.EMRCloud){EMRCloud.syncSubmission(S.currentUser.username,CASE_ID||'',sub)}
-  if(window.VEMR_SPACEDREP&&CASE_ID){var _pn=(window.EMR_DATA&&EMR_DATA.patient)?EMR_DATA.patient.name:"Patient";var _nc=VEMR_SPACEDREP.harvestAndGenerate(CASE_ID,_pn);if(_nc.length>0){showToast("📚 "+_nc.length+" flashcard"+(_nc.length>1?"s":"")+" added to Study Hub")}}
+  
   showToast("✓ Documentation submitted successfully");
   render();
 }
@@ -4853,7 +4816,6 @@ render = function(){
     tabs.push({id:'_divider_support',label:'',icon:'',divider:true,groupLabel:'Support'});
     tabs.push({id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'});
     tabs.push({id:"autofeedback",label:"Doc Assessment",icon:I.star});
-    tabs.push({id:"studyhub",label:"Study Hub",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>'});
     tabs.push({id:"feedback",label:"Faculty Feedback",icon:I.check});
   }
   if(role==="faculty"||role==="admin"){
@@ -4875,7 +4837,6 @@ render = function(){
   fn.autofeedback = renderAutoFeedback;
   fn.handoff = renderHandoff;
   fn.coach = renderCoachDx;
-  fn.studyhub = renderStudyHub;
   fn.crt = function(){ var _sw=(typeof renderAISwitcher==='function')?renderAISwitcher('crt'):''; return _sw + ((window.CRTChart && CRTChart.renderTab) ? CRTChart.renderTab() : '<p>Clinical Reasoning Trainer loading...</p>'); };
   
   if(role==="student"){

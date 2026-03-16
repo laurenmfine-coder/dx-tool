@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechanismDx — Pathophysiology Library | ReasonDx</title>
+<meta name="description" content="Visual pathophysiology modules across every organ system. Master the mechanism first, then apply it to cases.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F0F3F7;
+  --surface: #FFFFFF;
+  --surface2: #F7F9FC;
+  --border: #E2E8F0;
+  --border-light: #F1F5F9;
+  --text: #1E293B;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --blue: #2874A6;
+  --blue-dk: #1B4F72;
+  --blue-lt: #EBF5FB;
+  --teal: #0D7A67;
+  --teal-lt: #E8F8F5;
+  --violet: #7C3AED;
+  --violet-lt: #F5F3FF;
+  --amber: #D97706;
+  --amber-lt: #FFFBEB;
+  --red: #DC2626;
+  --red-lt: #FEF2F2;
+  --green: #059669;
+  --green-lt: #ECFDF5;
+  --slate: #475569;
+  --radius: 10px;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* ── TOP NAV ── */
+.topnav { background: rgba(255,255,255,.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); height: 56px; display: flex; align-items: center; padding: 0 28px; position: sticky; top: 0; z-index: 100; gap: 16px; }
+.topnav-logo { font-weight: 800; font-size: 15px; color: var(--blue-dk); letter-spacing: -.3px; }
+.topnav-sep { color: var(--text-muted); font-size: 14px; }
+.topnav-page { font-size: 13px; font-weight: 600; color: var(--violet); }
+.topnav-back { margin-left: auto; font-size: 12px; color: var(--text-secondary); font-weight: 500; padding: 5px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all .15s; }
+.topnav-back:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #1E1B4B 0%, #312E81 40%, #4C1D95 70%, #2D1B69 100%);
+  padding: 48px 28px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 400px at 80% 50%, rgba(124,58,237,.25), transparent),
+              radial-gradient(ellipse 400px 300px at 20% 80%, rgba(40,116,166,.2), transparent);
+  pointer-events: none;
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.5); margin-bottom: 12px; }
+.hero-title { font-size: clamp(26px, 4vw, 40px); font-weight: 800; color: #fff; letter-spacing: -.8px; line-height: 1.1; margin-bottom: 12px; }
+.hero-title span { color: #C4B5FD; }
+.hero-sub { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.75; max-width: 560px; margin-bottom: 24px; }
+.hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat-n { font-family: var(--mono); font-size: 24px; font-weight: 700; color: #C4B5FD; line-height: 1; }
+.hero-stat-l { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 3px; text-transform: uppercase; letter-spacing: .06em; }
+
+/* ── SEARCH ── */
+.search-bar { max-width: 1100px; margin: 0 auto; padding: 20px 28px 0; }
+.search-wrap { position: relative; }
+.search-input { width: 100%; padding: 12px 16px 12px 44px; font-family: var(--sans); font-size: 14px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; outline: none; color: var(--text); transition: border-color .15s; }
+.search-input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(124,58,237,.1); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; pointer-events: none; }
+.search-clear { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; display: none; }
+
+/* ── FILTER PILLS ── */
+.filters { max-width: 1100px; margin: 0 auto; padding: 16px 28px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-pill { font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: all .15s; white-space: nowrap; }
+.filter-pill:hover { border-color: var(--violet); color: var(--violet); }
+.filter-pill.active { background: var(--violet); border-color: var(--violet); color: #fff; }
+
+/* ── CONTENT ── */
+.content { max-width: 1100px; margin: 0 auto; padding: 28px 28px 80px; }
+
+/* ── SPECIALTY SECTION ── */
+.specialty-section { margin-bottom: 36px; }
+.specialty-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.specialty-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.specialty-name { font-size: 14px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .06em; }
+.specialty-count { font-size: 11px; color: var(--text-muted); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 2px 8px; font-family: var(--mono); }
+.specialty-line { flex: 1; height: 1px; background: var(--border); }
+
+/* ── MODULE GRID ── */
+.module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+
+/* ── MODULE CARD ── */
+.module-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .18s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.module-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
+.module-card.available:hover { border-color: var(--violet); }
+.module-card.coming-soon { opacity: .55; cursor: default; }
+.module-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--border); }
+
+.card-accent { height: 4px; flex-shrink: 0; }
+.card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+.card-icon { font-size: 26px; }
+.card-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+.badge-live { background: var(--green-lt); color: var(--green); }
+.badge-soon { background: var(--border-light); color: var(--text-muted); border: 1px solid var(--border); }
+.badge-new { background: var(--amber-lt); color: var(--amber); }
+
+.card-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 6px; }
+.card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; flex: 1; }
+.card-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 4px; }
+.card-tag { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; background: var(--violet-lt); color: var(--violet); }
+.card-tag.step2 { background: var(--amber-lt); color: #92400E; }
+.card-modules-count { font-size: 11px; color: var(--text-muted); font-family: var(--mono); margin-top: 8px; }
+
+/* ── EMPTY STATE ── */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.empty-state h3 { font-size: 18px; color: var(--text-secondary); margin-bottom: 8px; }
+
+/* ── PROGRESS BANNER ── */
+.progress-banner { background: linear-gradient(135deg, var(--violet-lt), rgba(124,58,237,.05)); border: 1.5px solid rgba(124,58,237,.2); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.progress-icon { font-size: 28px; flex-shrink: 0; }
+.progress-text h4 { font-size: 14px; font-weight: 700; color: var(--violet); margin-bottom: 2px; }
+.progress-text p { font-size: 12px; color: var(--text-secondary); }
+
+@media (max-width: 680px) {
+  .hero { padding: 32px 20px 28px; }
+  .search-bar, .filters, .content { padding-left: 16px; padding-right: 16px; }
+  .module-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="topnav-logo">ReasonDx</span>
+  <span class="topnav-sep">→</span>
+  <span class="topnav-page">🔬 MechanismDx</span>
+  <a class="topnav-back" href="../index.html">← Home</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Pathophysiology Library</div>
+    <h1 class="hero-title">MechanismDx<br><span>Understand before you memorize.</span></h1>
+    <p class="hero-sub">Visual pathophysiology modules across every organ system and specialty. Master the mechanism first — then clinical reasoning follows.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-n" id="statLive">6</div><div class="hero-stat-l">Live modules</div></div>
+      <div class="hero-stat"><div class="hero-stat-n" id="statSystems">12</div><div class="hero-stat-l">Organ systems</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">USMLE</div><div class="hero-stat-l">Step 2 CK aligned</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">Open</div><div class="hero-stat-l">Access only</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search modules, mechanisms, conditions… (e.g. 'sepsis', 'DKA', 'heart failure')" oninput="filterModules()">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+  </div>
+</div>
+
+<!-- FILTER PILLS -->
+<div class="filters" id="filterPills">
+  <button class="filter-pill active" onclick="setFilter('all', this)">All systems</button>
+  <button class="filter-pill" onclick="setFilter('cardiology', this)">❤️ Cardiology</button>
+  <button class="filter-pill" onclick="setFilter('pulmonary', this)">🫁 Pulmonary</button>
+  <button class="filter-pill" onclick="setFilter('infectious', this)">🦠 Infectious</button>
+  <button class="filter-pill" onclick="setFilter('endocrine', this)">⚗️ Endocrine</button>
+  <button class="filter-pill" onclick="setFilter('neurology', this)">🧠 Neurology</button>
+  <button class="filter-pill" onclick="setFilter('renal', this)">🫘 Renal</button>
+  <button class="filter-pill" onclick="setFilter('hematology', this)">🩸 Hematology</button>
+  <button class="filter-pill" onclick="setFilter('gi', this)">🫄 GI</button>
+  <button class="filter-pill" onclick="setFilter('allergy', this)">🌿 Allergy/Immunology</button>
+  <button class="filter-pill" onclick="setFilter('emergency', this)">🚨 Emergency</button>
+  <button class="filter-pill" onclick="setFilter('psychiatry', this)">🧩 Psychiatry</button>
+  <button class="filter-pill" onclick="setFilter('rheumatology', this)">🦴 Rheumatology</button>
+  <button class="filter-pill" onclick="setFilter('ob', this)">🤰 Obstetrics</button>
+</div>
+
+<!-- CONTENT -->
+<div class="content" id="mainContent">
+
+  <!-- PROGRESS NOTE -->
+  <div class="progress-banner">
+    <div class="progress-icon">🔬</div>
+    <div class="progress-text">
+      <h4>6 modules live · More being built</h4>
+      <p>Live modules open immediately. Modules marked "Coming soon" are in active development — check back each week.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── MODULE REGISTRY ──────────────────────────────────────────────────────────
+// Each module maps to its actual HTML file in the mechanism/ directory.
+// status: 'live' | 'soon'
+// accent: CSS color for the top card bar
+const MODULES = [
+
+  // ── INFECTIOUS / CRITICAL CARE ──
+  { id:'sepsis', specialty:'infectious', specialtyLabel:'Infectious Disease / Critical Care', specialtyIcon:'🦠', specialtyColor:'#059669',
+    icon:'⚠️', title:'Sepsis & Septic Shock', accent:'#059669',
+    desc:'Sepsis-3 definition, SOFA score, lactate kinetics, vasopressor pharmacology, hour-1 bundle, and source control.',
+    tags:['Sepsis-3','SOFA','Hour-1 Bundle','Vasopressors'], step2:true, modules:6, status:'live',
+    url:'sepsis-module.html' },
+
+  { id:'pneumonia', specialty:'pulmonary', specialtyLabel:'Pulmonary', specialtyIcon:'🫁', specialtyColor:'#2874A6',
+    icon:'🫁', title:'Pneumonia & Respiratory Infection', accent:'#2874A6',
+    desc:'CAP vs HAP vs aspiration, CURB-65, empiric antibiotic selection, and atypical pathogens.',
+    tags:['CAP','CURB-65','Atypical Pathogens'], step2:true, modules:4, status:'soon', url:null },
+
+  // ── CARDIOLOGY ──
+  { id:'heart-failure', specialty:'cardiology', specialtyLabel:'Cardiology', specialtyIcon:'❤️', specialtyColor:'#DC2626',
+    icon:'❤️', title:'Heart Failure — HFrEF & HFpEF', accent:'#DC2626',
+    desc:'Frank-Starling curve, neurohormonal activation, RAAS, cardiorenal syndrome, and guideline-directed medical therapy.',
+    tags:['HFrEF','HFpEF','GDMT','Frank-Starling'], step2:true, modules:5, status:'live',
+    url:'heart-failure-module.html' },
+
+  { id:'afib', specialty:'cardiology', specialtyLabel:'Cardiology', specialtyIcon:'❤️', specialtyColor:'#DC2626',
+    icon:'⚡', title:'Atrial Fibrillation — Mechanism to Management', accent:'#DC2626',
+    desc:'Pulmonary vein triggers, re-entry circuits, CHA₂DS₂-VASc, rate vs rhythm, cardioversion, and ablation. Attending conversation format.',
+    tags:['CHA₂DS₂-VASc','Rate vs Rhythm','EAST-AFNET 4','Ablation'], step2:true, modules:4, status:'live',
+    url:'afib-module.html' },
+
+  { id:'acs', specialty:'cardiology', specialtyLabel:'Cardiology', specialtyIcon:'❤️', specialtyColor:'#DC2626',
+    icon:'🫀', title:'Acute Coronary Syndromes — STEMI to NSTEMI', accent:'#DC2626',
+    desc:'Plaque rupture, thrombosis cascade, STEMI/ECG anatomy, troponin kinetics, antiplatelet pharmacology, and reperfusion injury. Attending conversation format.',
+    tags:['STEMI','Plaque Rupture','Troponin','Antiplatelet'], step2:true, modules:5, status:'live',
+    url:'acs-module.html' },
+
+  // ── PULMONARY ──
+  { id:'copd', specialty:'pulmonary', specialtyLabel:'Pulmonary', specialtyIcon:'🫁', specialtyColor:'#2874A6',
+    icon:'💨', title:'COPD — Pathophysiology & Exacerbation', accent:'#2874A6',
+    desc:'Emphysema vs chronic bronchitis, air trapping, Haldane effect, BiPAP physiology, and GOLD staging.',
+    tags:['GOLD Staging','Air Trapping','BiPAP','Haldane'], step2:true, modules:4, status:'live',
+    url:'copd-module.html' },
+
+  { id:'asthma', specialty:'pulmonary', specialtyLabel:'Pulmonary', specialtyIcon:'🫁', specialtyColor:'#2874A6',
+    icon:'🫁', title:'Pulmonary — PE, Asthma & ARDS', accent:'#0369A1',
+    desc:'PE hemodynamics (RV strain to thrombolysis decision), Type 2 asthma inflammation (alarmin cascade, biologic selection by biomarker), and ARDS (diffuse alveolar damage, baby lung concept, lung-protective ventilation, prone positioning). Attending conversation format.',
+    tags:['PE','Asthma Biologics','ARDS','Lung-Protective Ventilation'], step2:true, modules:3, status:'live',
+    url:'pulmonary-module.html' },
+
+  // ── ENDOCRINE ──
+  { id:'aki', specialty:'renal', specialtyLabel:'Renal', specialtyIcon:'🫘', specialtyColor:'#0D7A67',
+    icon:'🫘', title:'Acute Kidney Injury — Pre-Renal to Intrinsic', accent:'#0D7A67',
+    desc:'Tubular anatomy, pre-renal vs intrinsic vs post-renal, FENa, FeUrea, ATN progression, and contrast nephropathy.',
+    tags:['FENa','ATN','Pre-Renal','Contrast Nephropathy'], step2:true, modules:5, status:'live',
+    url:'aki-module.html' },
+
+  { id:'dka', specialty:'endocrine', specialtyLabel:'Endocrine', specialtyIcon:'⚗️', specialtyColor:'#D97706',
+    icon:'⚗️', title:'Endocrine Emergencies — DKA to Adrenal Crisis', accent:'#B45309',
+    desc:'DKA insulin-deficiency cascade and potassium trap, HHS vs DKA distinction, thyroid storm five-drug sequence (PTU vs methimazole), myxedema coma, and adrenal crisis with stress dosing. Attending conversation format.',
+    tags:['DKA','HHS','Thyroid Storm','Adrenal Crisis'], step2:true, modules:5, status:'live',
+    url:'endocrine-module.html' },
+
+  // ── NEUROLOGY ──
+  { id:'stroke', specialty:'neurology', specialtyLabel:'Neurology', specialtyIcon:'🧠', specialtyColor:'#7C3AED',
+    icon:'🧠', title:'Acute Ischemic Stroke — Pathophysiology to tPA', accent:'#7C3AED',
+    desc:'Ischemic penumbra, cerebral autoregulation, tPA mechanism, BP targets, and hemorrhagic transformation risk.',
+    tags:['Penumbra','Autoregulation','tPA','BP Management'], step2:true, modules:5, status:'live',
+    url:'stroke-module.html' },
+
+  { id:'seizure', specialty:'neurology', specialtyLabel:'Neurology', specialtyIcon:'🧠', specialtyColor:'#7C3AED',
+    icon:'⚡', title:'Seizures & Epilepsy — Mechanisms & Management', accent:'#7C3AED',
+    desc:'Focal vs generalized, Na⁺/K⁺ channel physiology, AED mechanisms, status epilepticus cascade, and EEG patterns.',
+    tags:['Na⁺/K⁺ Channels','AED Mechanisms','Status Epilepticus'], step2:true, modules:4, status:'soon', url:null },
+
+  { id:'cns-infections', specialty:'neurology', specialtyLabel:'Neurology', specialtyIcon:'🧠', specialtyColor:'#7C3AED',
+    icon:'🧠', title:'CNS Infections & GBS', accent:'#4338CA',
+    desc:'Bacterial meningitis pathophysiology, LP interpretation, empiric antibiotics, HSV encephalitis, and Guillain-Barré syndrome from molecular mimicry to the rule of 20s. Attending conversation format.',
+    tags:['Meningitis','HSV Encephalitis','GBS','Rule of 20s'], step2:true, modules:3, status:'live',
+    url:'cns-infections-gbs-module.html' },
+
+  // ── ALLERGY / IMMUNOLOGY ──
+  { id:'anaphylaxis', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#DC2626',
+    icon:'🚨', title:'Anaphylaxis — The IgE Spectrum', accent:'#DC2626',
+    desc:'FcεRI cross-linking, mast cell cascade, biphasic reactions, cofactors (FDEIA, NSAID, alcohol), and mastocytosis screening.',
+    tags:['IgE','Mast Cell','Biphasic','Epinephrine'], step2:false, modules:6, status:'live',
+    url:'anaphylaxis-module.html' },
+
+  { id:'urticaria', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#DC2626',
+    icon:'🌺', title:'Urticaria & Angioedema — IgE vs Bradykinin', accent:'#DC2626',
+    desc:'Mast cell degranulation, CSU pathophysiology, bradykinin vs histamine angioedema, HAE, and ACE inhibitor mechanism.',
+    tags:['CSU','HAE','Bradykinin','ACE Inhibitor'], step2:false, modules:4, status:'soon', url:null },
+
+  { id:'immunodeficiency', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#DC2626',
+    icon:'🛡️', title:'Primary Immunodeficiency — CVID to SCID', accent:'#DC2626',
+    desc:'B-cell vs T-cell vs combined deficiencies, agammaglobulinemia, SCID genetics, and diagnostic workup.',
+    tags:['CVID','SCID','Agammaglobulinemia','IgG Subclass'], step2:false, modules:4, status:'soon', url:null },
+
+  // ── HEMATOLOGY ──
+  { id:'coagulation', specialty:'hematology', specialtyLabel:'Hematology', specialtyIcon:'🩸', specialtyColor:'#B91C1C',
+    icon:'🩸', title:'Hematology — TTP/HUS, DIC & Anemia', accent:'#881337',
+    desc:'ADAMTS13 and TTP vs HUS differentiation, DIC consumption coagulopathy (fibrinogen key), anticoagulant mechanisms (UFH to DOACs, HIT, reversal agents), and MCV-based anemia framework with reticulocyte index. Attending conversation format.',
+    tags:['TTP','DIC','Anticoagulation','Anemia','ADAMTS13'], step2:true, modules:4, status:'live',
+    url:'hematology-module.html' },
+
+  // ── GI / HEPATOLOGY ──
+  { id:'liver', specialty:'gi', specialtyLabel:'GI / Hepatology', specialtyIcon:'🫄', specialtyColor:'#92400E',
+    icon:'🫄', title:'GI & Hepatology — Cirrhosis to Acute Liver Failure', accent:'#B45309',
+    desc:'Portal hypertension and the RAAS paradox, SBP and hepatorenal syndrome, upper GI bleeding (ulcers + varices), acetaminophen hepatotoxicity, and acute pancreatitis. Attending conversation format.',
+    tags:['Portal HTN','HRS','Variceal Bleed','NAPQI','Pancreatitis'], step2:true, modules:6, status:'live',
+    url:'gi-hepatology-module.html' },
+
+  // ── EMERGENCY / TOXICOLOGY ──
+  { id:'toxicology', specialty:'emergency', specialtyLabel:'Emergency / Toxicology', specialtyIcon:'🚨', specialtyColor:'#DC2626',
+    icon:'☠️', title:'Toxicology — TCA, Opioids, Organophosphates & Salicylates', accent:'#292524',
+    desc:'TCA sodium channel blockade and bicarb treatment, opioid toxidrome and naloxone titration, organophosphate cholinergic crisis (atropine endpoint, pralidoxime aging), and salicylate mixed acid-base with dialysis indications. Attending conversation format.',
+    tags:['TCA','Opioid Overdose','Organophosphate','Salicylate'], step2:true, modules:4, status:'live',
+    url:'toxicology-module.html' },
+
+  { id:'acid-base', specialty:'renal', specialtyLabel:'Renal', specialtyIcon:'🫘', specialtyColor:'#0D7A67',
+    icon:'⚖️', title:'Electrolytes & Acid-Base — Systematic Approach', accent:'#0369A1',
+    desc:'Hyperkalemia (membrane potential, EKG sequence, treatment hierarchy), hyponatremia (SIADH vs CSW algorithm), and 6-step acid-base with delta-delta. Attending conversation format.',
+    tags:['Hyperkalemia','SIADH','Anion Gap','Delta-Delta'], step2:true, modules:3, status:'live',
+    url:'electrolytes-acidbase-module.html' },
+
+  // ── OBSTETRICS ──
+  { id:'ob', specialty:'ob', specialtyLabel:'Obstetrics', specialtyIcon:'🤰', specialtyColor:'#BE185D',
+    icon:'🤰', title:'Obstetrics — Preeclampsia to Postpartum Hemorrhage', accent:'#9D174D',
+    desc:'Spiral artery remodeling and sFlt-1 in preeclampsia, HELLP syndrome, magnesium sulfate mechanism and toxicity, PPH uterotonic pharmacology (oxytocin to carboprost), eclampsia seizure mechanism, and delivery decision-making. Attending conversation format.',
+    tags:['Preeclampsia','HELLP','MgSO4','PPH','Uterotonics'], step2:true, modules:3, status:'live',
+    url:'ob-module.html' },
+
+
+  { id:'psychiatry', specialty:'psychiatry', specialtyLabel:'Psychiatry', specialtyIcon:'🧩', specialtyColor:'#7C3AED',
+    icon:'🧩', title:'Psychiatry — Neurotransmitters to Emergency Management', accent:'#7C3AED',
+    desc:'Alcohol withdrawal (GABA/NMDA), antipsychotic pharmacology and EPS, bipolar/mood disorders, serotonin syndrome vs NMS, and ICU delirium. Attending conversation format.',
+    tags:['Alcohol Withdrawal','Antipsychotics','Serotonin Syndrome','Delirium'], step2:true, modules:4, status:'live',
+    url:'psychiatry-module.html' },
+
+  // ── RHEUMATOLOGY ──
+  { id:'rheumatology', specialty:'rheumatology', specialtyLabel:'Rheumatology', specialtyIcon:'🦴', specialtyColor:'#0D7A67',
+    icon:'🦴', title:'Rheumatology — Autoimmunity & Crystal Arthropathy', accent:'#0D7A67',
+    desc:'RA immunopathology (Th17/TNF axis), SLE autoimmunity and complement consumption, crystal arthropathy (gout vs pseudogout), and biologic mechanisms. Attending conversation format.',
+    tags:['RA','SLE','Gout','Biologics'], step2:true, modules:3, status:'live',
+    url:'rheumatology-module.html' },
+
+];
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let activeFilter = 'all';
+let searchQuery = '';
+
+// ── FILTER + SEARCH ───────────────────────────────────────────────────────────
+function setFilter(filter, btn) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderModules();
+}
+
+function filterModules() {
+  searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+  document.getElementById('searchClear').style.display = searchQuery ? 'block' : 'none';
+  renderModules();
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  searchQuery = '';
+  document.getElementById('searchClear').style.display = 'none';
+  renderModules();
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function renderModules() {
+  const content = document.getElementById('mainContent');
+
+  // Filter modules
+  let filtered = MODULES.filter(m => {
+    const matchFilter = activeFilter === 'all' || m.specialty === activeFilter;
+    const matchSearch = !searchQuery ||
+      m.title.toLowerCase().includes(searchQuery) ||
+      m.desc.toLowerCase().includes(searchQuery) ||
+      m.tags.some(t => t.toLowerCase().includes(searchQuery)) ||
+      m.specialtyLabel.toLowerCase().includes(searchQuery);
+    return matchFilter && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        <h3>No modules found for "${searchQuery}"</h3>
+        <p>Try searching for a condition, mechanism, or organ system.</p>
+      </div>`;
+    return;
+  }
+
+  // Group by specialty
+  const bySpecialty = {};
+  filtered.forEach(m => {
+    if (!bySpecialty[m.specialtyLabel]) {
+      bySpecialty[m.specialtyLabel] = { icon: m.specialtyIcon, color: m.specialtyColor, items: [] };
+    }
+    bySpecialty[m.specialtyLabel].items.push(m);
+  });
+
+  // Build HTML
+  let html = `
+    <div class="progress-banner">
+      <div class="progress-icon">🔬</div>
+      <div class="progress-text">
+        <h4>${MODULES.filter(m=>m.status==='live').length} modules live · More being built every week</h4>
+        <p>Live modules open immediately. "Coming soon" modules are in active development.</p>
+      </div>
+    </div>`;
+
+  // Live modules first if showing all
+  if (activeFilter === 'all' && !searchQuery) {
+    const live = filtered.filter(m => m.status === 'live');
+    if (live.length) {
+      html += buildSection('🟢 Available Now', '#059669', '', live);
+    }
+    const soon = filtered.filter(m => m.status === 'soon');
+    if (soon.length) {
+      html += buildSection('🔜 Coming Soon', '#94A3B8', '', soon);
+    }
+  } else {
+    // By specialty
+    Object.entries(bySpecialty).forEach(([label, data]) => {
+      html += buildSection(label, data.color, data.icon, data.items);
+    });
+  }
+
+  content.innerHTML = html;
+
+  // Update stats
+  document.getElementById('statLive').textContent = MODULES.filter(m=>m.status==='live').length;
+  document.getElementById('statSystems').textContent = [...new Set(MODULES.map(m=>m.specialty))].length;
+}
+
+function buildSection(label, color, icon, items) {
+  const count = items.length;
+  return `
+    <div class="specialty-section">
+      <div class="specialty-header">
+        <div class="specialty-icon" style="background:${color}22">${icon || '📚'}</div>
+        <div class="specialty-name" style="color:${color}">${label}</div>
+        <div class="specialty-count">${count} module${count !== 1 ? 's' : ''}</div>
+        <div class="specialty-line"></div>
+      </div>
+      <div class="module-grid">
+        ${items.map(m => buildCard(m)).join('')}
+      </div>
+    </div>`;
+}
+
+function buildCard(m) {
+  const live = m.status === 'live';
+  const badgeHtml = live
+    ? `<span class="card-badge badge-live">✓ Live</span>`
+    : `<span class="card-badge badge-soon">Coming soon</span>`;
+
+  const tagsHtml = m.tags.map(t =>
+    `<span class="card-tag">${t}</span>`
+  ).join('') + (m.step2 ? `<span class="card-tag step2">Step 2 CK</span>` : '');
+
+  const clickAttr = live
+    ? `onclick="openModule('${m.url}', '${m.id}')" role="button" tabindex="0"`
+    : '';
+
+  return `
+    <div class="module-card ${live ? 'available' : 'coming-soon'}" ${clickAttr}>
+      <div class="card-accent" style="background:${m.accent}"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-icon">${m.icon}</span>
+          ${badgeHtml}
+        </div>
+        <div class="card-title">${m.title}</div>
+        <div class="card-desc">${m.desc}</div>
+        <div class="card-tags">${tagsHtml}</div>
+        <div class="card-modules-count">${m.modules} sub-module${m.modules !== 1 ? 's' : ''}</div>
+      </div>
+    </div>`;
+}
+
+function openModule(url, id) {
+  if (!url) return;
+  // Preserve any incoming ?back= param for the return button
+  const fullUrl = url + (window.location.search ? window.location.search : '');
+  window.location.href = fullUrl;
+}
+
+// ── KEYBOARD SUPPORT ──────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Check for ?specialty= param (from start.html setting context)
+  const params = new URLSearchParams(window.location.search);
+  const specialty = params.get('specialty');
+  if (specialty) {
+    const pill = document.querySelector(`.filter-pill[onclick*="${specialty}"]`);
+    if (pill) setFilter(specialty, pill);
+    else renderModules();
+  } else {
+    renderModules();
+  }
+});
+</script>
+<script src="../js/nav-global.js"></script>
+<script src="../js/rdx-focus-mode.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.RDXFocus) {
+    RDXFocus.injectBanner();
+    setTimeout(function() { RDXFocus.applyToPage(); }, 50);
+  }
+});
+</script>
+</body>
+</html>

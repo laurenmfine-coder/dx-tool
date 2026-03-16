@@ -349,5 +349,15 @@ function revealDx(el,cid){
 function resetF(){F={setting:"all",specialty:"all",acuity:"all"};document.querySelectorAll(".fc").forEach(function(b){b.classList.remove("on");});document.querySelectorAll(".fchips").forEach(function(c){var first=c.querySelector(".fc");if(first)first.classList.add("on");});document.getElementById("caseSearch").value="";render();}
 render();
 </script>
+<script src="js/rdx-focus-mode.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.RDXFocus) {
+    RDXFocus.injectBanner();
+    // Apply after a tick so filter chips are rendered
+    setTimeout(function() { RDXFocus.applyToPage(); }, 50);
+  }
+});
+</script>
 </body>
 </html>
