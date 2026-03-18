@@ -390,7 +390,11 @@
       return o && o.correct;
     }).length;
     var totalCorrect = tx.orders.filter(function(o){return o.correct}).length;
-    html += '<span class="crt-order-counter">' + correctCount + '/' + totalCorrect + ' correct</span>';
+    // Only show score counter AFTER student has placed at least one order
+    // Showing it upfront reveals how many correct answers exist
+    if (state.ordersPlaced.length > 0) {
+      html += '<span class="crt-order-counter">' + correctCount + '/' + totalCorrect + ' correct</span>';
+    }
     html += '</div>';
 
     Object.keys(groups).forEach(function(group) {
@@ -401,12 +405,14 @@
         var cls = 'crt-order-item';
         if (ordered && o.correct) cls += ' correct';
         else if (ordered && !o.correct) cls += ' incorrect';
-        if (o.critical) cls += ' critical';
+        // Only apply 'critical' class AFTER ordering — applying it before selection
+        // gives away which orders are highest priority via the amber left border
+        if (ordered && o.critical) cls += ' critical';
 
         html += '<label class="' + cls + '">';
         html += '<input type="checkbox" name="crt-order" value="' + esc(o.id) + '"' + (ordered ? ' disabled checked' : '') + '>';
         html += '<span class="crt-order-name">' + esc(o.name) + '</span>';
-        if (o.critical && !ordered) html += '<span class="crt-critical-badge">Critical</span>';
+        // Critical badge intentionally hidden before selection — shown in feedback after ordering
         html += '</label>';
 
         // Show teaching after ordering
