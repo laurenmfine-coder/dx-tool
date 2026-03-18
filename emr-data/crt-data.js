@@ -175,6 +175,37 @@ window.CRT_DATA = {
             }
           ]
         }
+      ,
+        {
+                "id": "thrombolytics-stemi",
+                "name": "tPA (Alteplase) 100mg IV \u2014 thrombolytics",
+                "group": "Definitive",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Thrombolytics are contraindicated when a cath lab is available within 120 minutes. PCI is superior to lysis for STEMI \u2014 lower mortality, less intracranial hemorrhage risk. Reserve tPA only for STEMI when cath lab access is >120 min away.",
+                "references": [
+                        {
+                                "source": "ACC/AHA STEMI Guidelines",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123",
+                                "detail": "PCI preferred over fibrinolysis when door-to-balloon <120 min"
+                        }
+                ]
+        },
+        {
+                "id": "calcium-channel-stemi",
+                "name": "Diltiazem 0.25mg/kg IV (calcium channel blocker)",
+                "group": "Anti-Ischemic",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Non-dihydropyridine calcium channel blockers (diltiazem, verapamil) are contraindicated in STEMI with reduced LV function \u2014 they cause negative inotropy and can precipitate cardiogenic shock. Beta-blockers are preferred when indicated, and even those require caution in acute STEMI.",
+                "references": [
+                        {
+                                "source": "ACC/AHA STEMI Guidelines",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123",
+                                "detail": "Non-DHP CCBs contraindicated in STEMI with LV dysfunction"
+                        }
+                ]
+        }
       ],
       "phases": [
         {
@@ -1369,158 +1400,188 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "heparin-pe",
-          "name": "Heparin 80u/kg bolus + 18u/kg/hr drip",
-          "group": "Anticoagulation",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Immediate full-dose anticoagulation. Do NOT wait for CTA if clinical suspicion high.",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Weight-based UFH for confirmed PE"
-            },
-            {
-              "source": "2019 ESC PE Guidelines Summary (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
-              "detail": "Anticoagulation is cornerstone of PE treatment"
-            }
-          ]
+                "id": "heparin-pe",
+                "name": "Heparin 80u/kg bolus + 18u/kg/hr drip",
+                "group": "Anticoagulation",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Immediate full-dose anticoagulation. Do NOT wait for CTA if clinical suspicion high.",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Weight-based UFH for confirmed PE"
+                        },
+                        {
+                                "source": "2019 ESC PE Guidelines Summary (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
+                                "detail": "Anticoagulation is cornerstone of PE treatment"
+                        }
+                ]
         },
         {
-          "id": "tpa-pe",
-          "name": "Alteplase 100mg IV (systemic thrombolysis)",
-          "group": "Thrombolysis",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "Reserved for MASSIVE PE with hemodynamic instability. This patient is submassive \u2014 consider if deteriorating.",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Systemic alteplase 100mg/2h for massive PE with shock"
-            },
-            {
-              "source": "2019 ESC PE Guidelines Summary (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
-              "detail": "Thrombolysis for massive PE (SBP<90 or shock)"
-            }
-          ]
+                "id": "tpa-pe",
+                "name": "Alteplase 100mg IV (systemic thrombolysis)",
+                "group": "Thrombolysis",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "Reserved for MASSIVE PE with hemodynamic instability. This patient is submassive \u2014 consider if deteriorating.",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Systemic alteplase 100mg/2h for massive PE with shock"
+                        },
+                        {
+                                "source": "2019 ESC PE Guidelines Summary (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
+                                "detail": "Thrombolysis for massive PE (SBP<90 or shock)"
+                        }
+                ]
         },
         {
-          "id": "ivf-small-pe",
-          "name": "Cautious IV fluid 500mL NS",
-          "group": "Resuscitation",
-          "critical": false,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Small volume challenge may help RV preload. STOP if no improvement \u2014 over-hydration worsens RV.",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Cautious fluids 250-500mL; aggressive fluids worsen RV dilation"
-            },
-            {
-              "source": "2019 ESC PE Guidelines Summary (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
-              "detail": "Fluid overload overdistends failing RV"
-            }
-          ]
+                "id": "ivf-small-pe",
+                "name": "Cautious IV fluid 500mL NS",
+                "group": "Resuscitation",
+                "critical": false,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Small volume challenge may help RV preload. STOP if no improvement \u2014 over-hydration worsens RV.",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Cautious fluids 250-500mL; aggressive fluids worsen RV dilation"
+                        },
+                        {
+                                "source": "2019 ESC PE Guidelines Summary (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
+                                "detail": "Fluid overload overdistends failing RV"
+                        }
+                ]
         },
         {
-          "id": "massive-fluid-pe",
-          "name": "Normal Saline 2L wide open",
-          "group": "Resuscitation",
-          "critical": false,
-          "correct": false,
-          "teaching": "\u26a0\ufe0f DANGEROUS: aggressive fluids worsen RV overload. RV is already failing \u2014 additional volume causes septal bowing.",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Aggressive crystalloid DANGEROUS \u2014 overdistends failing RV"
-            },
-            {
-              "source": "2019 ESC PE Guidelines Summary (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
-              "detail": "Volume loading worsens RV failure in massive PE"
-            }
-          ]
+                "id": "massive-fluid-pe",
+                "name": "Normal Saline 2L wide open",
+                "group": "Resuscitation",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f DANGEROUS: aggressive fluids worsen RV overload. RV is already failing \u2014 additional volume causes septal bowing.",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Aggressive crystalloid DANGEROUS \u2014 overdistends failing RV"
+                        },
+                        {
+                                "source": "2019 ESC PE Guidelines Summary (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
+                                "detail": "Volume loading worsens RV failure in massive PE"
+                        }
+                ]
         },
         {
-          "id": "norepi-pe",
-          "name": "Norepinephrine (if hypotensive)",
-          "group": "Vasopressors",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "First-line vasopressor for PE shock. Improves coronary perfusion to struggling RV.",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Norepinephrine for hemodynamic support in massive PE"
-            },
-            {
-              "source": "Norepinephrine \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537259/",
-              "detail": "First-line vasopressor for shock"
-            }
-          ]
+                "id": "norepi-pe",
+                "name": "Norepinephrine (if hypotensive)",
+                "group": "Vasopressors",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "First-line vasopressor for PE shock. Improves coronary perfusion to struggling RV.",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Norepinephrine for hemodynamic support in massive PE"
+                        },
+                        {
+                                "source": "Norepinephrine \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK537259/",
+                                "detail": "First-line vasopressor for shock"
+                        }
+                ]
         },
         {
-          "id": "hfnc-pe",
-          "name": "High-Flow Nasal Cannula O2",
-          "group": "Respiratory",
-          "critical": false,
-          "correct": true,
-          "phase": 1,
-          "teaching": "For hypoxemia from V/Q mismatch. Avoid intubation if possible (positive pressure worsens RV preload).",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Supplemental O2 to maintain SpO2 >94%"
-            }
-          ]
+                "id": "hfnc-pe",
+                "name": "High-Flow Nasal Cannula O2",
+                "group": "Respiratory",
+                "critical": false,
+                "correct": true,
+                "phase": 1,
+                "teaching": "For hypoxemia from V/Q mismatch. Avoid intubation if possible (positive pressure worsens RV preload).",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Supplemental O2 to maintain SpO2 >94%"
+                        }
+                ]
         },
         {
-          "id": "pert-pe",
-          "name": "PE Response Team consult",
-          "group": "Consultation",
-          "critical": false,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Coordinates catheter-directed therapy, surgical embolectomy, ECMO decisions.",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Multidisciplinary PE Response Team for risk-stratified management"
-            }
-          ]
+                "id": "pert-pe",
+                "name": "PE Response Team consult",
+                "group": "Consultation",
+                "critical": false,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Coordinates catheter-directed therapy, surgical embolectomy, ECMO decisions.",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Multidisciplinary PE Response Team for risk-stratified management"
+                        }
+                ]
         },
         {
-          "id": "monitor-pe",
-          "name": "Continuous monitoring + ICU admission",
-          "group": "Monitoring",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Submassive can deteriorate to massive rapidly. Serial troponin and echo.",
-          "references": [
-            {
-              "source": "Pulmonary Embolism \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
-              "detail": "Continuous monitoring + ICU for massive/submassive PE"
-            }
-          ]
+                "id": "monitor-pe",
+                "name": "Continuous monitoring + ICU admission",
+                "group": "Monitoring",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Submassive can deteriorate to massive rapidly. Serial troponin and echo.",
+                "references": [
+                        {
+                                "source": "Pulmonary Embolism \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+                                "detail": "Continuous monitoring + ICU for massive/submassive PE"
+                        }
+                ]
+        },
+        {
+                "id": "heparin-bolus-pe-hold",
+                "name": "Hold anticoagulation \u2014 bleeding risk too high",
+                "group": "Anticoagulation",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Withholding anticoagulation in PE is rarely correct. Unless there is active life-threatening hemorrhage, anticoagulation should be started immediately. The risk of recurrent PE and death far outweighs bleeding risk in most patients. Untreated PE has 30% mortality.",
+                "references": [
+                        {
+                                "source": "AHA/ACC VTE Guidelines",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000560",
+                                "detail": "Anticoagulation is the cornerstone of PE treatment; delay increases mortality"
+                        }
+                ]
+        },
+        {
+                "id": "aggressive-fluids-pe",
+                "name": "Normal Saline 2L IV wide open",
+                "group": "Resuscitation",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Already present as a distractor. Aggressive fluids in massive PE cause RV overdistension \u2014 the RV is already failing against the obstructed pulmonary vasculature. A fixed 500mL cautious bolus is the limit. More fluid worsens RV failure and can cause interventricular septal shift ('D-sign') compressing the LV.",
+                "references": [
+                        {
+                                "source": "AHA/ACC VTE Guidelines",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000560",
+                                "detail": "Aggressive fluid loading contraindicated in RV failure from PE"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
@@ -6223,163 +6284,193 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi-im",
-          "name": "Epinephrine 0.3mg IM (anterolateral thigh)",
-          "group": "First-Line",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "THE treatment. IM in lateral thigh \u2014 NOT subcutaneous, NOT IV push. Repeat q5-15min if no improvement. No contraindications in anaphylaxis.",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "IM epi 0.3-0.5mg (1:1000) anterolateral thigh \u2014 FIRST"
-            },
-            {
-              "source": "Epinephrine \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482160/",
-              "detail": "Alpha-1 + beta-2: reverses hypotension + bronchospasm"
-            },
-            {
-              "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
-              "detail": "WAO: IM epi first-line; no absolute CI"
-            }
-          ]
+                "id": "epi-im",
+                "name": "Epinephrine 0.3mg IM (anterolateral thigh)",
+                "group": "First-Line",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "THE treatment. IM in lateral thigh \u2014 NOT subcutaneous, NOT IV push. Repeat q5-15min if no improvement. No contraindications in anaphylaxis.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "IM epi 0.3-0.5mg (1:1000) anterolateral thigh \u2014 FIRST"
+                        },
+                        {
+                                "source": "Epinephrine \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482160/",
+                                "detail": "Alpha-1 + beta-2: reverses hypotension + bronchospasm"
+                        },
+                        {
+                                "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
+                                "detail": "WAO: IM epi first-line; no absolute CI"
+                        }
+                ]
         },
         {
-          "id": "epi-iv",
-          "name": "Epinephrine 1mg IV push (cardiac dose)",
-          "group": "First-Line",
-          "critical": false,
-          "correct": false,
-          "teaching": "\u26a0\ufe0f IV push epinephrine at cardiac arrest dose causes fatal arrhythmia/hypertensive crisis in a patient WITH a pulse. Only use IV epi drip if refractory to IM.",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "IV epi only for cardiac arrest/refractory shock; 0.1mg (1:10,000)"
-            },
-            {
-              "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
-              "detail": "IV epi for arrest/profound shock only; arrhythmia risk"
-            }
-          ]
+                "id": "epi-iv",
+                "name": "Epinephrine 1mg IV push (cardiac dose)",
+                "group": "First-Line",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f IV push epinephrine at cardiac arrest dose causes fatal arrhythmia/hypertensive crisis in a patient WITH a pulse. Only use IV epi drip if refractory to IM.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "IV epi only for cardiac arrest/refractory shock; 0.1mg (1:10,000)"
+                        },
+                        {
+                                "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
+                                "detail": "IV epi for arrest/profound shock only; arrhythmia risk"
+                        }
+                ]
         },
         {
-          "id": "ivf-anaph",
-          "name": "NS 1-2L IV bolus (rapid)",
-          "group": "Resuscitation",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Distributive shock \u2014 massive vasodilation and capillary leak. Aggressive volume resuscitation needed. May need 2-4L.",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "NS 1-2L bolus for distributive shock"
-            },
-            {
-              "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
-              "detail": "WAO: Rapid crystalloid expansion for hypotension"
-            }
-          ]
+                "id": "ivf-anaph",
+                "name": "NS 1-2L IV bolus (rapid)",
+                "group": "Resuscitation",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Distributive shock \u2014 massive vasodilation and capillary leak. Aggressive volume resuscitation needed. May need 2-4L.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "NS 1-2L bolus for distributive shock"
+                        },
+                        {
+                                "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
+                                "detail": "WAO: Rapid crystalloid expansion for hypotension"
+                        }
+                ]
         },
         {
-          "id": "albuterol-anaph",
-          "name": "Albuterol nebulizer for bronchospasm",
-          "group": "Respiratory",
-          "critical": false,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Adjunct for bronchospasm component. Does NOT replace epinephrine.",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Albuterol neb for bronchospasm not responsive to epi"
-            }
-          ]
+                "id": "albuterol-anaph",
+                "name": "Albuterol nebulizer for bronchospasm",
+                "group": "Respiratory",
+                "critical": false,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Adjunct for bronchospasm component. Does NOT replace epinephrine.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Albuterol neb for bronchospasm not responsive to epi"
+                        }
+                ]
         },
         {
-          "id": "diphenhydramine",
-          "name": "Diphenhydramine 50mg IV",
-          "group": "Adjunctive",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "H1 blocker \u2014 relieves urticaria/itching. Does NOT treat the life-threatening components (hypotension, airway edema). Adjunct only.",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "H1-blocker adjunct; not substitute for epinephrine"
-            },
-            {
-              "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
-              "detail": "Antihistamines are second-line"
-            }
-          ]
+                "id": "diphenhydramine",
+                "name": "Diphenhydramine 50mg IV",
+                "group": "Adjunctive",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "H1 blocker \u2014 relieves urticaria/itching. Does NOT treat the life-threatening components (hypotension, airway edema). Adjunct only.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "H1-blocker adjunct; not substitute for epinephrine"
+                        },
+                        {
+                                "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
+                                "detail": "Antihistamines are second-line"
+                        }
+                ]
         },
         {
-          "id": "famotidine-anaph",
-          "name": "Famotidine 20mg IV",
-          "group": "Adjunctive",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "H2 blocker \u2014 some evidence for additive benefit with H1 blocker in anaphylaxis.",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "H2-blocker may reduce flushing and GI symptoms"
-            }
-          ]
+                "id": "famotidine-anaph",
+                "name": "Famotidine 20mg IV",
+                "group": "Adjunctive",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "H2 blocker \u2014 some evidence for additive benefit with H1 blocker in anaphylaxis.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "H2-blocker may reduce flushing and GI symptoms"
+                        }
+                ]
         },
         {
-          "id": "methylpred-anaph",
-          "name": "Methylprednisolone 125mg IV",
-          "group": "Adjunctive",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "May prevent biphasic reaction (occurs in 5-20% at 4-12h). Does NOT help acute anaphylaxis. Takes hours for effect.",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Steroids for biphasic reaction prevention (6-12h delay)"
-            },
-            {
-              "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
-              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
-              "detail": "Steroids do not treat acute anaphylaxis"
-            }
-          ]
+                "id": "methylpred-anaph",
+                "name": "Methylprednisolone 125mg IV",
+                "group": "Adjunctive",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "May prevent biphasic reaction (occurs in 5-20% at 4-12h). Does NOT help acute anaphylaxis. Takes hours for effect.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Steroids for biphasic reaction prevention (6-12h delay)"
+                        },
+                        {
+                                "source": "WAO Anaphylaxis Guidelines 2020 (PMC OA)",
+                                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
+                                "detail": "Steroids do not treat acute anaphylaxis"
+                        }
+                ]
         },
         {
-          "id": "monitor-anaph",
-          "name": "Monitor 4-6h for biphasic reaction",
-          "group": "Monitoring",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "Biphasic anaphylaxis can recur hours later without re-exposure. Observe minimum 4h (some guidelines say 6-12h for severe reactions).",
-          "references": [
-            {
-              "source": "Anaphylaxis \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Monitor 4-6h minimum for biphasic reaction"
-            }
-          ]
+                "id": "monitor-anaph",
+                "name": "Monitor 4-6h for biphasic reaction",
+                "group": "Monitoring",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "Biphasic anaphylaxis can recur hours later without re-exposure. Observe minimum 4h (some guidelines say 6-12h for severe reactions).",
+                "references": [
+                        {
+                                "source": "Anaphylaxis \u2014 StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Monitor 4-6h minimum for biphasic reaction"
+                        }
+                ]
+        },
+        {
+                "id": "steroids-first-ana",
+                "name": "Hydrocortisone 200mg IV \u2014 first-line before epinephrine",
+                "group": "First-Line",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Corticosteroids have 4-6 hour onset \u2014 they have NO role in reversing acute anaphylaxis. A common instinct (especially from allergy patients who carry steroids) but incorrect as first-line. Epinephrine is the only treatment that reverses all mechanisms simultaneously.",
+                "references": [
+                        {
+                                "source": "WAO Anaphylaxis Guidelines",
+                                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3283018/",
+                                "detail": "Epinephrine is only first-line treatment; steroids are adjuncts with delayed onset"
+                        }
+                ]
+        },
+        {
+                "id": "benadryl-first-ana",
+                "name": "Diphenhydramine 50mg IV \u2014 instead of epinephrine for urticaria/hives",
+                "group": "First-Line",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Antihistamines treat only histamine-mediated symptoms (hives, itch). They do NOT reverse hypotension, angioedema, or bronchospasm. Using Benadryl instead of epinephrine for anaphylaxis is one of the most dangerous errors in emergency medicine.",
+                "references": [
+                        {
+                                "source": "NIAID/FAAN Anaphylaxis Guidelines",
+                                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3069257/",
+                                "detail": "H1 antihistamines do not treat cardiovascular or respiratory manifestations"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
@@ -16339,6 +16430,37 @@ window.CRT_DATA = {
               "detail": "Dopamine inferior"
             }
           ]
+        }
+      ,
+        {
+                "id": "abx-before-cultures",
+                "name": "Start broad-spectrum antibiotics BEFORE drawing blood cultures",
+                "group": "Antibiotics",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Blood cultures should be drawn BEFORE antibiotics \u2014 but do not delay >45 minutes waiting for cultures if access is difficult. Two sets from two sites takes <5 minutes. Antibiotics within 1 hour is the goal; cultures should not delay this. Order: cultures \u2192 abx in rapid sequence.",
+                "references": [
+                        {
+                                "source": "Surviving Sepsis Campaign Guidelines",
+                                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486643/",
+                                "detail": "Blood cultures before antibiotics; do not delay >45 min if cultures not obtainable"
+                        }
+                ]
+        },
+        {
+                "id": "vasopressin-first-sepsis",
+                "name": "Vasopressin 0.03u/min \u2014 start as first vasopressor",
+                "group": "Vasopressor",
+                "critical": false,
+                "correct": false,
+                "teaching": "\u26a0\ufe0f Norepinephrine is the first-line vasopressor in septic shock, not vasopressin. Vasopressin is added as a second agent (at 0.03u/min) to reduce norepinephrine dose requirements once it exceeds 0.25-0.5 mcg/kg/min. Starting vasopressin first is not guideline-supported.",
+                "references": [
+                        {
+                                "source": "Surviving Sepsis Campaign Guidelines",
+                                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486643/",
+                                "detail": "Norepinephrine first-line; vasopressin added as second agent"
+                        }
+                ]
         }
       ],
       "phases": [
