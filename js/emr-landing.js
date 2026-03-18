@@ -35,7 +35,6 @@
       html += '</div>';
       html += '<div style="display:flex;gap:6px">';
       html += '<a href="index.html" style="padding:6px 14px;border-radius:6px;font-size:12px;color:#94A3B8;text-decoration:none;font-weight:500">Home</a>';
-      html += '<a href="consult-callback.html" style="padding:6px 14px;border-radius:6px;font-size:12px;color:#94A3B8;text-decoration:none;font-weight:500">CRT</a>';
       html += '</div>';
       html += '</nav>';
 

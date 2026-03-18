@@ -378,8 +378,10 @@ function go() {
   if (!url) return;
 
   // Append topic param if passed from index search
+  // Never forward topic to MechanismDx — it would auto-open a specific module,
+  // bypassing the index landing page entirely.
   const incomingTopic = new URLSearchParams(window.location.search).get('topic');
-  if (incomingTopic) {
+  if (incomingTopic && pillar !== 'mechanism') {
     url += (url.includes('?') ? '&' : '?') + 'topic=' + encodeURIComponent(incomingTopic);
   }
 

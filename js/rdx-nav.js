@@ -46,7 +46,6 @@
       di(R+'demo-coachdx.html','▶','Watch Demo','See CoachDx in action — no login')+
       hr()+sl('Specialty Coaching')+
       di(R+'ai-trainer-anaphylaxis-food.html','🤖','A/I Reasoning Trainer','Anaphylaxis & food allergy')+
-      di(R+'consult-callback.html','📞','Consult Coaching','Specialist callback simulation')
     )+
     dd('🧬 MechanismDx',sec==='mechanismdx','#0E7490',
       sl('Explore')+
@@ -64,7 +63,6 @@
         di(R+'tools/calculator-hub.html','🔢','Calculators','GCS, Wells, CURB-65, CHADS-VASc')+
         di(R+'ecg/index.html','❤️','ECG Trainer','12-lead interpretation')+
         di(R+'tools/abg-analyzer.html','🫁','ABG Analyzer','Blood gas interpretation')+
-        di(R+'tools/sbar-trainer.html','📋','SBAR Trainer','Structured handoff practice')+
         di(R+'tools/ddx-builder.html','🔍','DDx Builder','Differential diagnosis tool')+
       '</div></div>'+
     '</div>'+

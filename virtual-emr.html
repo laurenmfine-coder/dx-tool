@@ -853,7 +853,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
   </div>
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
     <a href="demo-coachdx.html" style="background:rgba(255,255,255,.15);color:#fff;font-weight:600;font-size:12px;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;border:1px solid rgba(255,255,255,.2)">Watch CoachDx Demo</a>
-    <a href="auth/register.html" style="background:#fff;color:#1B4F72;font-weight:700;font-size:12px;padding:7px 16px;border-radius:8px;text-decoration:none;white-space:nowrap">Create Free Account →</a>
+    <a href="auth/login.html" style="background:#fff;color:#1B4F72;font-weight:700;font-size:12px;padding:7px 16px;border-radius:8px;text-decoration:none;white-space:nowrap">Sign In / Create Account →</a>
     <button onclick="document.getElementById('demo-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:18px;padding:0 4px;line-height:1" aria-label="Dismiss">×</button>
   </div>
 </div>
@@ -1742,7 +1742,11 @@ function _renderCasePicker() {
 
 
 function loadCaseData(cb) {
-  if (!CASE_ID) { showCasePicker(); return; }
+  if (!CASE_ID) {
+    // No active case — clear the gate so consult-callback redirects correctly
+    try { sessionStorage.removeItem('rdx-active-case'); } catch(e) {}
+    showCasePicker(); return;
+  }
   var s = document.createElement('script');
   s.src = 'emr-data/' + CASE_ID + '.js';
   s.onerror = function() {
@@ -1798,6 +1802,8 @@ function loadCaseData(cb) {
     FAMILY_HISTORY = d.familyHistory || [];
     SOCIAL_HISTORY = d.socialHistory || [];
     if(window.CaseFrame&&CASE_ID){CaseFrame.autoRegister(CASE_ID,d)}
+    // Write active case to sessionStorage so consult-callback.html can gate access
+    try { sessionStorage.setItem('rdx-active-case', CASE_ID); } catch(e) {}
     if (cb) cb();
   };
   s.onerror = function() {
@@ -2020,7 +2026,7 @@ function renderDocumentation(){
   const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">'+I.send+' Submit Documentation</button>';
   const wc=totalWords();
   var _debrief=(window.RDXIntegration)?RDXIntegration.renderPostSubmitDebrief():'';
-  var _sbarCta=S.submitted?'<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">📋 Next step: SBAR handoff</div><div style="font-size:12px;color:#475569;margin-bottom:12px">You\'ve documented your assessment — practice structured communication and get CoachDx feedback on this case.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="tools/sbar-trainer.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Practice SBAR →</a><a href="CoachDx/index.html" style="background:rgba(109,40,217,.08);color:#6D28D9;border:1px solid rgba(109,40,217,.2);font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>':'';
+  var _sbarCta=S.submitted?'<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">✅ Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>':'';
   return _interviewCallout + _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+'</div>')+sectionCard("Documentation Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
 }
 
@@ -2376,7 +2382,7 @@ function renderCoachDx(){
       +'<p style="font-size:14px;color:var(--text-secondary);line-height:1.7;max-width:420px;margin-bottom:8px">CoachDx is a Socratic AI coach that questions your reasoning in real time. <em>"Why did you anchor on PE before calculating the Wells score?"</em></p>'
       +'<p style="font-size:13px;color:var(--text-muted);max-width:400px;margin-bottom:28px">Available on free and Pro accounts. Create a free account to unlock CoachDx, spaced repetition, and your progress dashboard.</p>'
       +'<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">'
-      +'<a href="auth/register.html" style="display:inline-flex;align-items:center;gap:8px;background:#2874A6;color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none">Create Free Account →</a>'
+      +'<a href="auth/login.html" style="display:inline-flex;align-items:center;gap:8px;background:#2874A6;color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none">Sign In / Create Account →</a>'
       +'<a href="auth/login.html" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);font-weight:600;font-size:14px;padding:13px 24px;border-radius:10px;border:1px solid var(--border);text-decoration:none">Sign In</a>'
       +'</div>'
       +'<p style="font-size:11px;color:var(--text-muted);margin-top:20px">Free forever · No credit card required</p>'
