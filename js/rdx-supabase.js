@@ -12,6 +12,10 @@
 (function() {
 'use strict';
 
+// Guard against duplicate initialization (causes GoTrueClient warning)
+if (window.RDX && window.RDX.ready !== undefined) return;
+
+
 // ═══════════════════════════════════════
 // CONFIGURATION — UPDATE THESE VALUES
 // ═══════════════════════════════════════
@@ -115,16 +119,20 @@ async function getUser() {
 // ═══════════════════════════════════════
 async function loadProfile(userId) {
   if (!supabase) return null;
-  var result = await supabase
-    .from('profiles')
-    .select('*, programs(name, specialty, academic_year)')
-    .eq('id', userId)
-    .single();
-
-  if (result.data) {
-    currentProfile = result.data;
+  try {
+    var result = await supabase
+      .from('profiles')
+      .select('*')  // program and specialty are direct columns on profiles
+      .eq('id', userId)
+      .single();
+    if (result.data) {
+      currentProfile = result.data;
+    }
+    return result.data || null;
+  } catch(e) {
+    console.warn('[RDX] loadProfile failed:', e.message);
+    return null;
   }
-  return result.data;
 }
 
 async function updateProfile(updates) {
@@ -151,7 +159,7 @@ function isPD() {
 // CASE ATTEMPT TRACKING
 // ═══════════════════════════════════════
 async function startCaseAttempt(caseId, opts) {
-  if (!supabase || !currentUser) return fallbackStore('case_start', caseId, opts);
+  try {  if (!supabase || !currentUser) return fallbackStore('case_start', caseId, opts);
 
   var row = {
     user_id: currentUser.id,
@@ -169,6 +177,10 @@ async function startCaseAttempt(caseId, opts) {
     sessionStorage.setItem('rdx-current-attempt', result.data.id);
   }
   return result;
+  } catch(e) {
+    console.warn('[RDX] startCaseAttempt failed:', e.message);
+    return null;
+  }
 }
 
 async function completeCaseAttempt(attemptId, data) {
@@ -384,12 +396,12 @@ async function getMilestones(userId) {
 async function trackEvent(eventType, attemptId, eventData) {
   if (!supabase || !currentUser) return fallbackStore('event', eventType, eventData);
 
-  return await supabase.from('analytics_events').insert({
+  return await supabase.from('analytics_events').upsert({
     user_id: currentUser.id,
     attempt_id: attemptId || null,
     event_type: eventType,
     event_data: eventData || {}
-  });
+  }, { onConflict: 'user_id,attempt_id,event_type', ignoreDuplicates: true });
 }
 
 // ═══════════════════════════════════════

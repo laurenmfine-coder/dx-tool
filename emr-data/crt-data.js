@@ -1690,171 +1690,171 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "lasix-chf",
-          "name": "Furosemide 80mg IV (double home dose)",
-          "group": "Diuresis",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "First-line. Double PO dose for IV conversion. Onset 5-15 min. Monitor urine output.",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "IV furosemide at 1-2x home PO dose"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "Class I: IV loop diuretics for volume overload"
-            }
-          ]
+                "id": "lasix-chf",
+                "name": "Furosemide 80mg IV (double home dose)",
+                "group": "Diuresis",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "First-line. Double PO dose for IV conversion. Onset 5-15 min. Monitor urine output.",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "IV furosemide at 1-2x home PO dose"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "Class I: IV loop diuretics for volume overload"
+                        }
+                ]
         },
         {
-          "id": "ntg-drip-chf",
-          "name": "Nitroglycerin drip 10-200mcg/min",
-          "group": "Vasodilator",
-          "critical": false,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Reduces preload/afterload. Effective for flash pulmonary edema. Hold if SBP <100.",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "IV NTG 10-200mcg/min reduces preload/afterload"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "IV vasodilators for acute HF with SBP>90"
-            }
-          ]
+                "id": "ntg-drip-chf",
+                "name": "Nitroglycerin drip 10-200mcg/min",
+                "group": "Vasodilator",
+                "critical": false,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Reduces preload/afterload. Effective for flash pulmonary edema. Hold if SBP <100.",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "IV NTG 10-200mcg/min reduces preload/afterload"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "IV vasodilators for acute HF with SBP>90"
+                        }
+                ]
         },
         {
-          "id": "bipap-chf",
-          "name": "BiPAP 10/5 cmH2O",
-          "group": "Respiratory",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Reduces work of breathing AND preload. Avoids intubation in most patients. Start immediately.",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "NIV reduces WOB, preload, and intubation rates"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "NIV recommended for pulmonary edema (Class IIa)"
-            }
-          ]
+                "id": "bipap-chf-v1",
+                "name": "BiPAP 10/5 cmH2O",
+                "group": "Respiratory",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Reduces work of breathing AND preload. Avoids intubation in most patients. Start immediately.",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "NIV reduces WOB, preload, and intubation rates"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "NIV recommended for pulmonary edema (Class IIa)"
+                        }
+                ]
         },
         {
-          "id": "intubate-chf",
-          "name": "Endotracheal intubation",
-          "group": "Respiratory",
-          "critical": false,
-          "correct": false,
-          "teaching": "\u26a0\ufe0f Avoid \u2014 BiPAP works in most acute HF. Intubation causes hemodynamic collapse. Reserve for refractory hypoxia or AMS.",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "Intubation risks hemodynamic collapse in preload-dependent HF"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "Mechanical ventilation only for refractory hypoxia/AMS"
-            }
-          ]
+                "id": "intubate-chf",
+                "name": "Endotracheal intubation",
+                "group": "Respiratory",
+                "critical": false,
+                "correct": false,
+                "teaching": "⚠️ Avoid — BiPAP works in most acute HF. Intubation causes hemodynamic collapse. Reserve for refractory hypoxia or AMS.",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "Intubation risks hemodynamic collapse in preload-dependent HF"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "Mechanical ventilation only for refractory hypoxia/AMS"
+                        }
+                ]
         },
         {
-          "id": "ns-chf",
-          "name": "Normal Saline 1L IV",
-          "group": "Fluids",
-          "critical": false,
-          "correct": false,
-          "teaching": "\u26a0\ufe0f DANGEROUS: volume OVERLOADED. IV fluids worsen pulmonary edema. Need removal, not addition.",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "IV fluids dangerous in volume-overloaded HF"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "Fluid restriction, not administration, for congested HF"
-            }
-          ]
+                "id": "ns-chf",
+                "name": "Normal Saline 1L IV",
+                "group": "Fluids",
+                "critical": false,
+                "correct": false,
+                "teaching": "⚠️ DANGEROUS: volume OVERLOADED. IV fluids worsen pulmonary edema. Need removal, not addition.",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "IV fluids dangerous in volume-overloaded HF"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "Fluid restriction, not administration, for congested HF"
+                        }
+                ]
         },
         {
-          "id": "metoprolol-chf",
-          "name": "Metoprolol 5mg IV",
-          "group": "Rate Control",
-          "critical": false,
-          "correct": false,
-          "teaching": "\u26a0\ufe0f IV beta-blockers in acute decompensated HF \u2192 cardiogenic shock. Use digoxin or amiodarone for AFib rate control.",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "IV BB in acute decompensated HF precipitates cardiogenic shock"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "BB should not be initiated during decompensation"
-            }
-          ]
+                "id": "metoprolol-chf",
+                "name": "Metoprolol 5mg IV",
+                "group": "Rate Control",
+                "critical": false,
+                "correct": false,
+                "teaching": "⚠️ IV beta-blockers in acute decompensated HF → cardiogenic shock. Use digoxin or amiodarone for AFib rate control.",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "IV BB in acute decompensated HF precipitates cardiogenic shock"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "BB should not be initiated during decompensation"
+                        }
+                ]
         },
         {
-          "id": "digoxin-chf",
-          "name": "Digoxin 0.25mg IV",
-          "group": "Rate Control",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "Safe rate control for AFib/RVR in HF \u2014 positive inotrope (unlike beta-blockers).",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "Digoxin for AFib rate control in HF; positive inotropy"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "Digoxin for rate control of AFib in HF (Class IIb)"
-            }
-          ]
+                "id": "digoxin-chf-v1",
+                "name": "Digoxin 0.25mg IV",
+                "group": "Rate Control",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "Safe rate control for AFib/RVR in HF — positive inotrope (unlike beta-blockers).",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "Digoxin for AFib rate control in HF; positive inotropy"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "Digoxin for rate control of AFib in HF (Class IIb)"
+                        }
+                ]
         },
         {
-          "id": "cardiology-chf",
-          "name": "Cardiology consult",
-          "group": "Consultation",
-          "critical": false,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Identify precipitant: new AFib, dietary indiscretion, med noncompliance, ACS, infection.",
-          "references": [
-            {
-              "source": "Heart Failure \u2014 StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "Identify precipitant of decompensation"
-            },
-            {
-              "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
-              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
-              "detail": "Multidisciplinary approach for acute HF"
-            }
-          ]
+                "id": "cardiology-chf",
+                "name": "Cardiology consult",
+                "group": "Consultation",
+                "critical": false,
+                "correct": true,
+                "phase": 1,
+                "teaching": "Identify precipitant: new AFib, dietary indiscretion, med noncompliance, ACS, infection.",
+                "references": [
+                        {
+                                "source": "Heart Failure — StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "Identify precipitant of decompensation"
+                        },
+                        {
+                                "source": "2022 AHA/ACC/HFSA Heart Failure Guideline",
+                                "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
+                                "detail": "Multidisciplinary approach for acute HF"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
@@ -16140,102 +16140,102 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "furosemide",
-          "name": "Furosemide 40-80mg IV",
-          "group": "Diuresis",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "IV loop diuretic cornerstone. 1-2.5x home dose IV. UOP 0.5-1mL/kg/hr.",
-          "references": [
-            {
-              "source": "HF-StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "Furosemide"
-            }
-          ]
+                "id": "furosemide",
+                "name": "Furosemide 40-80mg IV",
+                "group": "Diuresis",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ IV furosemide is the cornerstone of acute decompensated HF treatment — give 1-2.5x the patient's home oral dose IV (minimum 40mg). Onset 15-30 minutes. Target urine output 0.5-1mL/kg/hr. Monitor potassium closely (loop diuretics cause hypokalemia). If inadequate response at 2 hours, double the dose or add a thiazide (metolazone 2.5-5mg PO). IV is more reliable than PO in acute pulmonary edema.",
+                "references": [
+                        {
+                                "source": "HF-StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "Furosemide"
+                        }
+                ]
         },
         {
-          "id": "ntg-chf",
-          "name": "Nitroglycerin drip 20-200mcg/min",
-          "group": "Vasodilator",
-          "critical": false,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Reduces preload+afterload. First-line if SBP>110.",
-          "references": [
-            {
-              "source": "HF-StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "NTG drip"
-            }
-          ]
+                "id": "ntg-chf",
+                "name": "Nitroglycerin drip 20-200mcg/min",
+                "group": "Vasodilator",
+                "critical": false,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ IV nitroglycerin reduces both preload (venodilation at low doses) and afterload (arterial dilation at higher doses), directly reducing pulmonary capillary wedge pressure and LV wall stress. Start at 10-20mcg/min, titrate by 10-20mcg/min every 5 minutes to symptom relief. Hold if SBP drops below 90mmHg. First-line agent in hypertensive acute HF (SBP >110).",
+                "references": [
+                        {
+                                "source": "HF-StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "NTG drip"
+                        }
+                ]
         },
         {
-          "id": "bipap-chf",
-          "name": "BiPAP 10/5",
-          "group": "Respiratory Support",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Reduces WOB and intubation rate.",
-          "references": [
-            {
-              "source": "HF-StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "BiPAP"
-            }
-          ]
+                "id": "bipap-chf-exac",
+                "name": "BiPAP 10/5",
+                "group": "Respiratory Support",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ BiPAP (10cmH2O inspiratory / 5cmH2O expiratory) reduces work of breathing, improves oxygenation, and decreases intubation rates by 50% in cardiogenic pulmonary edema. Start early — before the patient tires out. Does not worsen hemodynamics unlike intubation sedation.",
+                "references": [
+                        {
+                                "source": "HF-StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "BiPAP"
+                        }
+                ]
         },
         {
-          "id": "o2-chf",
-          "name": "Supplemental O2 SpO2>92%",
-          "group": "Supportive",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Titrate. Sit upright.",
-          "references": [
-            {
-              "source": "HF-StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "O2"
-            }
-          ]
+                "id": "o2-chf",
+                "name": "Supplemental O2 SpO2>92%",
+                "group": "Supportive",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Titrate oxygen to SpO2 92-96% — avoid hyperoxia (SpO2 >98%) which causes vasoconstriction and can reduce cardiac output in HF. Sit the patient fully upright with legs dependent to reduce preload by venous pooling. High-flow nasal cannula (up to 6L) or non-rebreather mask as first step; escalate to BiPAP if work of breathing increases or SpO2 doesn't improve.",
+                "references": [
+                        {
+                                "source": "HF-StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "O2"
+                        }
+                ]
         },
         {
-          "id": "nsaid-chf",
-          "name": "Ketorolac 30mg IV",
-          "group": "Pain",
-          "critical": false,
-          "correct": false,
-          "phase": 1,
-          "teaching": "NSAIDs CONTRAINDICATED-Na retention, worsen renal, counteract diuretics.",
-          "references": [
-            {
-              "source": "HF-StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "NSAIDs CI"
-            }
-          ]
+                "id": "nsaid-chf",
+                "name": "Ketorolac 30mg IV",
+                "group": "Pain",
+                "critical": false,
+                "correct": false,
+                "phase": 1,
+                "teaching": "⚠️ NSAIDs are absolutely contraindicated in acute heart failure. They cause sodium and water retention (worsening volume overload), reduce renal prostaglandin synthesis (worsening renal function), and directly counteract the benefit of ACE inhibitors and diuretics. Even one dose of ibuprofen can precipitate acute decompensation in a stable HF patient. This is a critical drug-disease interaction to recognize.",
+                "references": [
+                        {
+                                "source": "HF-StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "NSAIDs CI"
+                        }
+                ]
         },
         {
-          "id": "digoxin-chf",
-          "name": "Digoxin 0.25mg IV",
-          "group": "Inotrope",
-          "critical": false,
-          "correct": false,
-          "phase": 1,
-          "teaching": "NOT first-line acute HF. Narrow TI, toxicity.",
-          "references": [
-            {
-              "source": "HF-StatPearls",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
-              "detail": "Digoxin not 1st line"
-            }
-          ]
+                "id": "digoxin-chf-exac",
+                "name": "Digoxin 0.25mg IV",
+                "group": "Inotrope",
+                "critical": false,
+                "correct": false,
+                "phase": 1,
+                "teaching": "⚠️ Digoxin is NOT first-line for acute decompensated heart failure. It has a narrow therapeutic index — toxicity occurs at levels just above therapeutic (1.5-2.0 ng/mL). In acute HF, the priority is diuresis, vasodilation, and positive pressure ventilation. Reserve digoxin for rate control in HFrEF with persistent rapid AF after beta-blockers fail, or for symptom management in advanced HFrEF with EF <35%.",
+                "references": [
+                        {
+                                "source": "HF-StatPearls",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK430873/",
+                                "detail": "Digoxin not 1st line"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
@@ -16326,7 +16326,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "IMMEDIATE fluid resuscitation per SSC.",
+          "teaching": "✅ Surviving Sepsis Campaign mandates 30mL/kg IV crystalloid within the first 3 hours of sepsis recognition — this is a time-sensitive bundle element. Use lactated Ringer's (preferred) or normal saline. Reassess fluid responsiveness after each 500mL bolus using passive leg raise or pulse pressure variation. Continue only if the patient remains fluid-responsive. Do not withhold fluids due to concern for pulmonary edema in the first hour.",
           "references": [
             {
               "source": "Sepsis-StatPearls",
@@ -16342,7 +16342,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "Every hour delay=7-8% mortality increase.",
+          "teaching": "✅ Every 1-hour delay in sepsis antibiotics increases mortality by 7-8%. Broad-spectrum empiric coverage must be initiated within 1 hour of recognition — typically piperacillin-tazobactam or meropenem plus vancomycin for MRSA coverage depending on suspected source. De-escalate based on culture results at 48-72 hours. Do not wait for ID consultation or culture results before starting antibiotics.",
           "references": [
             {
               "source": "Sepsis-StatPearls",
@@ -16358,7 +16358,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "Lactate>2=hypoperfusion. Target>10% clearance.",
+          "teaching": "✅ Serum lactate is the key perfusion biomarker in sepsis. Lactate >2 mmol/L with sepsis = septic shock physiology even if BP is normal ('cryptic shock' — 20-30% mortality). Lactate >4 mmol/L = overt septic shock with 40%+ mortality. Repeat lactate at 2 hours after resuscitation — target >10% clearance confirms adequate tissue perfusion. Failure to clear indicates ongoing hypoperfusion requiring escalation.",
           "references": [
             {
               "source": "Sepsis-StatPearls",
@@ -16374,7 +16374,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "2 sets different sites. Do NOT delay abx.",
+          "teaching": "✅ Draw two sets of blood cultures from two different sites (one peripheral, one central if present) before starting antibiotics. This takes less than 5 minutes and should not delay treatment. If IV access is unobtainable within 45 minutes, start antibiotics and obtain cultures as soon as possible. Blood cultures are positive in only 30-40% of sepsis cases but guide de-escalation and are essential for stewardship.",
           "references": [
             {
               "source": "Sepsis-StatPearls",
@@ -16390,7 +16390,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 2,
-          "teaching": "First-line vasopressor. Target MAP>65.",
+          "teaching": "✅ Norepinephrine is the first-line vasopressor for septic shock — superior to dopamine with lower arrhythmia rates and better mortality outcomes (SOAP II trial). Start at 0.1-0.2 mcg/kg/min, titrate to MAP >65. Add vasopressin 0.03 units/min when norepinephrine >0.25 mcg/kg/min to reduce catecholamine requirement. Phenylephrine is second-line. Dopamine is not recommended as first-line.",
           "references": [
             {
               "source": "Sepsis-StatPearls",
@@ -16406,7 +16406,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": true,
           "phase": 2,
-          "teaching": "For refractory shock. Stress-dose 200mg/day.",
+          "teaching": "✅ Hydrocortisone 200mg/day IV (50mg q6h or continuous infusion) is indicated only for vasopressor-refractory septic shock — defined as MAP <65 despite adequate fluid resuscitation AND norepinephrine >0.25 mcg/kg/min for >1 hour. Reduces vasopressor duration and time to shock reversal. Do not use prophylactically. Taper over 3-4 days when vasopressors are weaning.",
           "references": [
             {
               "source": "Sepsis-StatPearls",
@@ -16422,7 +16422,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": false,
           "phase": 1,
-          "teaching": "NOT first-line. Higher mortality+arrhythmias vs norepi.",
+          "teaching": "⚠️ Dopamine is NOT recommended as first-line vasopressor in septic shock. The SOAP II trial (De Backer et al., NEJM 2010) showed dopamine associated with significantly higher arrhythmia rates (24% vs 12%) and higher mortality in cardiogenic shock subgroup vs norepinephrine. The only remaining potential role is in bradycardic septic shock where the chronotropic effect is desired.",
           "references": [
             {
               "source": "Sepsis-StatPearls",
@@ -22288,7 +22288,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "For hypotension.",
+          "teaching": "✅ Normal saline 20mL/kg IV bolus for pediatric anaphylaxis with hypotension. Children compensate effectively but decompensate rapidly — reassess BP and HR after each bolus. Maximum initial bolus is typically 60mL/kg. If no IV access, epinephrine IM remains the priority; IO access is appropriate in deteriorating pediatric patients.",
           "references": [
             {
               "source": "Anaphylaxis",
@@ -25753,7 +25753,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": true,
           "phase": 2,
-          "teaching": "Workers comp. Workplace accommodation.",
+          "teaching": "✅ Occupational health referral is mandatory for healthcare worker latex anaphylaxis. Required: formal latex-specific IgE testing and skin prick testing, written workplace accommodation for latex-free environment, workers compensation documentation, and prescription for two epinephrine auto-injectors. Follow up with allergist within 1 week.",
           "references": [
             {
               "source": "ACD",
@@ -26724,7 +26724,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": true,
           "phase": 2,
-          "teaching": "Workers comp.",
+          "teaching": "✅ Occupational health referral is mandatory for healthcare worker latex anaphylaxis. This is a workers' compensation case. Required: formal allergy testing (latex-specific IgE, epicutaneous skin testing in controlled setting after patient stabilizes), workplace accommodation for latex-free environment, documentation for HR and legal records, and prescription for two epinephrine auto-injectors. Follow up with allergist within 1 week.",
           "references": [
             {
               "source": "ACD",
@@ -27933,102 +27933,102 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
-          "name": "Epi 0.3mg IM",
-          "group": "First-line",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "IM epi FIRST. Beta-blocker blunts response - may need repeat.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Epi"
-            }
-          ]
+                "id": "epi-anaphylaxisv2",
+                "name": "Epi 0.3mg IM",
+                "group": "First-line",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Epinephrine 0.3mg IM anterolateral thigh is FIRST — always. In a beta-blocked patient, epinephrine's alpha-1 effects (vasoconstriction, blood pressure restoration) are preserved but beta-2 effects (bronchodilation, mast cell stabilization) are blunted. These patients often require repeated doses (every 5-15 min). Glucagon 1-5mg IV is the rescue agent for true epinephrine-refractory anaphylaxis in beta-blocker users.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Epi"
+                        }
+                ]
         },
         {
-          "id": "epi-repeat",
-          "name": "Repeat epi 5-15min",
-          "group": "First-line",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "BB patients often need 2-3 doses.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Repeat"
-            }
-          ]
+                "id": "epi-repeat",
+                "name": "Repeat epi 5-15min",
+                "group": "First-line",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Repeat epinephrine 0.3-0.5mg IM every 5-15 minutes if symptoms persist or return. Beta-blocker patients commonly need 2-3 doses due to blunted beta-2 response. Have the second auto-injector drawn up and ready before the first dose is even given. Never assume one dose is sufficient — biphasic reactions and epinephrine-refractory cases both require rapid repeat dosing.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Repeat"
+                        }
+                ]
         },
         {
-          "id": "glucagon",
-          "name": "Glucagon 1-5mg IV",
-          "group": "Adjunctive",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "CRITICAL for BB-refractory. Bypasses beta-receptor via cAMP.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Glucagon"
-            }
-          ]
+                "id": "glucagon",
+                "name": "Glucagon 1-5mg IV",
+                "group": "Adjunctive",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Glucagon 1-5mg IV (or IM if no IV access) bypasses the beta-adrenergic receptor via direct adenylyl cyclase activation — this is why it works when epinephrine fails in beta-blocked patients. It increases heart rate and cardiac output independent of beta receptors. Onset 1-2 minutes. Nausea and vomiting are common side effects. This is a critical rescue intervention in refractory anaphylaxis.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Glucagon"
+                        }
+                ]
         },
         {
-          "id": "ivf",
-          "name": "NS 1-2L IV",
-          "group": "Resuscitation",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Cautious in elderly.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "IVF"
-            }
-          ]
+                "id": "ivf-anaphylaxisv2",
+                "name": "NS 1-2L IV",
+                "group": "Resuscitation",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ IV fluid resuscitation 1-2L NS is critical for hypotensive anaphylaxis. Up to 35% of intravascular volume can shift to interstitium within minutes due to massive histamine-mediated capillary leak. In elderly or cardiac patients, use cautious boluses (250-500mL) and reassess frequently for volume overload.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "IVF"
+                        }
+                ]
         },
         {
-          "id": "benadryl-first",
-          "name": "Benadryl as primary",
-          "group": "First-line",
-          "critical": false,
-          "correct": false,
-          "phase": 1,
-          "teaching": "NEVER first-line. Epi is ONLY first-line.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Not first-line"
-            }
-          ]
+                "id": "benadryl-first",
+                "name": "Benadryl as primary",
+                "group": "First-line",
+                "critical": false,
+                "correct": false,
+                "phase": 1,
+                "teaching": "⚠️ Diphenhydramine (Benadryl) blocks only H1 histamine receptors — it treats urticaria and pruritus but has zero effect on hypotension, bronchospasm, or angioedema, which are the life-threatening components of anaphylaxis. Selecting antihistamines over epinephrine is one of the most common and dangerous errors in anaphylaxis management. Benadryl is an adjunct given after epinephrine, never instead of it.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Not first-line"
+                        }
+                ]
         },
         {
-          "id": "iv-push",
-          "name": "Epi 1mg IV push",
-          "group": "First-line",
-          "critical": false,
-          "correct": false,
-          "phase": 1,
-          "teaching": "CARDIAC ARREST dose. Fatal arrhythmia in elderly.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Wrong dose"
-            }
-          ]
+                "id": "iv-push",
+                "name": "Epi 1mg IV push",
+                "group": "First-line",
+                "critical": false,
+                "correct": false,
+                "phase": 1,
+                "teaching": "⚠️ Epinephrine 1mg IV push (the cardiac arrest dose, 1:10,000 concentration) in a conscious patient causes explosive hypertension, severe tachycardia, and potentially lethal ventricular arrhythmias. The anaphylaxis IM dose is 0.3mg of 1:1,000 concentration — fundamentally different drug concentration and route. IV epinephrine is reserved for refractory anaphylaxis with cardiovascular collapse only, and at much lower doses (0.1mg bolus titrated).",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Wrong dose"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
@@ -28109,86 +28109,101 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
-          "name": "Epi 0.3mg IM",
-          "group": "First-line",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "IM epi FIRST + remove latex simultaneously.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Epi"
-            }
-          ]
+                "id": "epi-anaphylaxisv3",
+                "name": "Epi 0.3mg IM",
+                "group": "First-line",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Epinephrine 0.3mg IM is first-line regardless of trigger. In latex anaphylaxis, simultaneously remove all latex sources — gloves, catheters, IV ports. Latex particles aerosolize and continue triggering mast cell degranulation. All equipment must be confirmed latex-free before continued patient contact.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Epi"
+                        }
+                ]
         },
         {
-          "id": "remove-latex",
-          "name": "Remove ALL latex sources",
-          "group": "Environmental",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Gloves, tourniquets, catheters. Switch to nitrile.",
-          "references": [
-            {
-              "source": "Latex",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK543191/",
-              "detail": "Remove latex"
-            }
-          ]
+                "id": "remove-latex",
+                "name": "Remove ALL latex sources",
+                "group": "Environmental",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Simultaneously with epinephrine: remove ALL latex-containing materials — gloves (switch to nitrile), blood pressure cuffs, IV tubing injection ports, urinary catheters, elastic bandages, anesthesia masks. Latex proteins aerosolize and continue triggering IgE-mediated mast cell degranulation even after the initial contact is removed. Creating a fully latex-free environment is as important as the pharmacological treatment.",
+                "references": [
+                        {
+                                "source": "Latex",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK543191/",
+                                "detail": "Remove latex"
+                        }
+                ]
         },
         {
-          "id": "ivf",
-          "name": "NS 1L IV non-latex tubing",
-          "group": "Resuscitation",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Ensure non-latex equipment.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "IVF"
-            }
-          ]
+                "id": "ivf-anaphylaxisv3",
+                "name": "NS 1L IV non-latex tubing",
+                "group": "Resuscitation",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ 1L NS IV through confirmed non-latex tubing. Check: standard IV tubing injection ports contain latex. Use latex-free tubing sets (clearly labeled). This distinction is critical — continued latex exposure through equipment will perpetuate the anaphylactic cascade despite epinephrine.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "IVF"
+                        }
+                ]
         },
         {
-          "id": "occ",
-          "name": "Occupational health referral",
-          "group": "Follow-up",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "Workers comp. Latex-free workplace.",
-          "references": [
-            {
-              "source": "Latex",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK543191/",
-              "detail": "Occ health"
-            }
-          ]
+                "id": "occ",
+                "name": "Occupational health referral",
+                "group": "Follow-up",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "✅ Occupational health referral is mandatory for healthcare worker latex anaphylaxis. Required: formal latex-specific IgE testing and skin prick testing in controlled setting, written workplace accommodation for latex-free environment, workers compensation documentation, and prescription for two epinephrine auto-injectors. Follow up with allergist within 1 week of discharge.",
+                "references": [
+                        {
+                                "source": "Latex",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK543191/",
+                                "detail": "Occ health"
+                        }
+                ]
         },
         {
-          "id": "continue-latex",
-          "name": "Continue with latex gloves",
-          "group": "Environmental",
-          "critical": false,
-          "correct": false,
-          "phase": 1,
-          "teaching": "NEVER continue exposure during anaphylaxis.",
-          "references": [
-            {
-              "source": "Latex",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK543191/",
-              "detail": "Stop"
-            }
-          ]
+                "id": "continue-latex",
+                "name": "Continue with latex gloves",
+                "group": "Environmental",
+                "critical": false,
+                "correct": false,
+                "phase": 1,
+                "teaching": "⚠️ Continuing latex exposure during active anaphylaxis would perpetuate ongoing allergen exposure, continuously triggering mast cell degranulation and preventing epinephrine from stabilizing the reaction. This is analogous to keeping a peanut in someone's mouth while treating peanut anaphylaxis. Immediate allergen removal is the non-pharmacological first step that must happen simultaneously with epinephrine.",
+                "references": [
+                        {
+                                "source": "Latex",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK543191/",
+                                "detail": "Stop"
+                        }
+                ]
+        },
+        {
+                "id": "epi-iv-cardiac-anaphylaxis-v3",
+                "name": "Epinephrine 1mg IV push (cardiac dose) instead of IM",
+                "group": "First-Line",
+                "critical": false,
+                "correct": false,
+                "teaching": "⚠️ The correct epinephrine dose for anaphylaxis is 0.3-0.5mg IM (1:1,000 concentration) in the anterolateral thigh — NOT IV push. IV epinephrine (1mg cardiac dose) causes dangerous hypertension, arrhythmias, and cardiovascular collapse. IV epinephrine is reserved for cardiac arrest only.",
+                "references": [
+                        {
+                                "source": "WAO Anaphylaxis Guidelines",
+                                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3283018/",
+                                "detail": "Epinephrine 0.3-0.5mg IM 1:1000; IV cardiac dose contraindicated in anaphylaxis"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
@@ -28266,86 +28281,101 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
-          "name": "Epi 0.3mg IM",
-          "group": "First-line",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "IM epi FIRST. Adolescents delay due to embarrassment.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Epi"
-            }
-          ]
+                "id": "epi-anaphylaxisv4",
+                "name": "Epi 0.3mg IM",
+                "group": "First-line",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Epinephrine 0.3mg IM anterolateral thigh — first and immediate. Adolescents with food allergy frequently delay epinephrine use due to embarrassment about injecting in front of peers, denial that the reaction is 'serious enough,' social pressure, or carrying expired auto-injectors. This delay is the most common modifiable cause of fatal food anaphylaxis in teenagers. Document counseling about this specifically.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Epi"
+                        }
+                ]
         },
         {
-          "id": "ivf",
-          "name": "NS 1L IV",
-          "group": "Resuscitation",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "For hypotension.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "IVF"
-            }
-          ]
+                "id": "ivf-anaphylaxisv4",
+                "name": "NS 1L IV",
+                "group": "Resuscitation",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Normal saline 20mL/kg IV bolus for pediatric anaphylaxis with hypotension. Children compensate effectively but decompensate rapidly — reassess BP and HR after each bolus. Repeat if still hypotensive. Maximum initial resuscitation is typically 60mL/kg. Prioritize epinephrine IM first; establish IV access simultaneously, not sequentially.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "IVF"
+                        }
+                ]
         },
         {
-          "id": "psych",
-          "name": "Assess psychosocial barriers to epi use",
-          "group": "Follow-up",
-          "critical": true,
-          "correct": true,
-          "phase": 2,
-          "teaching": "Embarrassment, denial, peer pressure, expired device.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Barriers"
-            }
-          ]
+                "id": "psych",
+                "name": "Assess psychosocial barriers to epi use",
+                "group": "Follow-up",
+                "critical": true,
+                "correct": true,
+                "phase": 2,
+                "teaching": "⚠️ Psychosocial barriers to epinephrine use in adolescents are well-documented and contribute to fatal outcomes. Specific barriers: embarrassment about self-injecting in school or social settings, minimizing severity ('it's not that bad'), peer pressure not to 'make a scene,' expired or forgotten auto-injectors, and fear of needles. Discharge counseling must address these explicitly, not just technique.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Barriers"
+                        }
+                ]
         },
         {
-          "id": "504",
-          "name": "School 504 plan + action plan",
-          "group": "Follow-up",
-          "critical": false,
-          "correct": true,
-          "phase": 2,
-          "teaching": "School accommodations.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "504 plan"
-            }
-          ]
+                "id": "504",
+                "name": "School 504 plan + action plan",
+                "group": "Follow-up",
+                "critical": false,
+                "correct": true,
+                "phase": 2,
+                "teaching": "✅ A federal 504 plan provides legally enforceable school accommodations: two epinephrine auto-injectors stored at school (one with nurse, one accessible to student), trained staff who can administer them without parental consent in emergency, written anaphylaxis emergency action plan, designated safe eating area if needed, and the right to carry personal auto-injector. Provide written action plan at discharge and instruct parents to initiate 504 process with the school nurse or principal.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "504 plan"
+                        }
+                ]
         },
         {
-          "id": "steroids-only",
-          "name": "Steroids as sole treatment",
-          "group": "First-line",
-          "critical": false,
-          "correct": false,
-          "phase": 1,
-          "teaching": "Steroids alone wont treat anaphylaxis. Epi is ONLY first-line.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Not sole tx"
-            }
-          ]
+                "id": "steroids-only",
+                "name": "Steroids as sole treatment",
+                "group": "First-line",
+                "critical": false,
+                "correct": false,
+                "phase": 1,
+                "teaching": "⚠️ Corticosteroids alone cannot treat anaphylaxis — their onset is 4-6 hours, far too slow for an acute IgE-mediated reaction. Methylprednisolone and prednisone are adjuncts that may reduce biphasic reaction risk, but this benefit is not strongly proven. Giving steroids instead of or before epinephrine is a potentially fatal error. Epinephrine is the ONLY first-line treatment that reverses all mechanisms of anaphylaxis simultaneously.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Not sole tx"
+                        }
+                ]
+        },
+        {
+                "id": "epi-iv-cardiac-anaphylaxis-v4",
+                "name": "Epinephrine 1mg IV push (cardiac dose) instead of IM",
+                "group": "First-Line",
+                "critical": false,
+                "correct": false,
+                "teaching": "⚠️ The correct epinephrine dose for anaphylaxis is 0.3-0.5mg IM (1:1,000 concentration) in the anterolateral thigh — NOT IV push. IV epinephrine (1mg cardiac dose) causes dangerous hypertension, arrhythmias, and cardiovascular collapse. IV epinephrine is reserved for cardiac arrest only.",
+                "references": [
+                        {
+                                "source": "WAO Anaphylaxis Guidelines",
+                                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3283018/",
+                                "detail": "Epinephrine 0.3-0.5mg IM 1:1000; IV cardiac dose contraindicated in anaphylaxis"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
@@ -28414,86 +28444,101 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
-          "name": "Epi 0.15mg IM (pediatric <30kg)",
-          "group": "First-line",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Weight-based: 0.01mg/kg. <30kg use 0.15mg.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Pediatric epi"
-            }
-          ]
+                "id": "epi-anaphylaxisv5",
+                "name": "Epi 0.15mg IM (pediatric <30kg)",
+                "group": "First-line",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Weight-based epinephrine dosing: 0.01mg/kg IM (1:1,000), maximum 0.5mg per dose. For a child under 30kg: use EpiPen Jr (0.15mg). For 30kg or more: use standard EpiPen (0.3mg). Inject in the anterolateral mid-thigh, through clothing if necessary. Repeat every 5-15 minutes if needed. Document the exact dose and time administered.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Pediatric epi"
+                        }
+                ]
         },
         {
-          "id": "ivf",
-          "name": "NS 20mL/kg IV",
-          "group": "Resuscitation",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "Weight-based.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "IVF"
-            }
-          ]
+                "id": "ivf-anaphylaxisv5",
+                "name": "NS 20mL/kg IV",
+                "group": "Resuscitation",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ Pediatric fluid resuscitation: 20mL/kg NS IV bolus. In a young child, epinephrine IM remains the priority even before IV access. Weight-based dosing is critical — the 0.15mg EpiPen Jr is appropriate for children 15-30kg. Reassess after each bolus for signs of fluid responsiveness (improving HR, BP, perfusion).",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "IVF"
+                        }
+                ]
         },
         {
-          "id": "interpreter",
-          "name": "Medical interpreter",
-          "group": "Communication",
-          "critical": true,
-          "correct": true,
-          "phase": 1,
-          "teaching": "CRITICAL for history and discharge education.",
-          "references": [
-            {
-              "source": "Health Literacy",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/",
-              "detail": "Interpreter"
-            }
-          ]
+                "id": "interpreter",
+                "name": "Medical interpreter",
+                "group": "Communication",
+                "critical": true,
+                "correct": true,
+                "phase": 1,
+                "teaching": "✅ A professional medical interpreter (not a family member) is legally required under Title VI of the Civil Rights Act for patients with limited English proficiency (LEP) receiving medical care. Family members may omit critical information, soften bad news, or lack medical vocabulary. Use the hospital's certified interpreter service or a HIPAA-compliant telephone interpretation service. Document interpreter name and service in the chart. This applies to informed consent, discharge instructions, and all clinical decision-making conversations.",
+                "references": [
+                        {
+                                "source": "Health Literacy",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/",
+                                "detail": "Interpreter"
+                        }
+                ]
         },
         {
-          "id": "teach-back",
-          "name": "Teach-back epi-pen training",
-          "group": "Follow-up",
-          "critical": true,
-          "correct": true,
-          "phase": 2,
-          "teaching": "Caregiver demonstrates back.",
-          "references": [
-            {
-              "source": "Health Literacy",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/",
-              "detail": "Teach-back"
-            }
-          ]
+                "id": "teach-back",
+                "name": "Teach-back epi-pen training",
+                "group": "Follow-up",
+                "critical": true,
+                "correct": true,
+                "phase": 2,
+                "teaching": "✅ Demonstrate-back technique: give the caregiver the EpiPen trainer and ask them to show you how they would use it on their child. Studies show demonstrate-back significantly outperforms verbal-only instruction for auto-injector technique retention. Cover: when to use (any sign of anaphylaxis — don't wait), where to inject (outer thigh, through clothing is fine), activate and hold 10 seconds, call 911 immediately after every epinephrine dose, go to ER even if feeling better (biphasic risk).",
+                "references": [
+                        {
+                                "source": "Health Literacy",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/",
+                                "detail": "Teach-back"
+                        }
+                ]
         },
         {
-          "id": "adult-epi",
-          "name": "Epi 0.3mg IM (adult dose)",
-          "group": "First-line",
-          "critical": false,
-          "correct": false,
-          "phase": 1,
-          "teaching": "WRONG dose for <30kg. Hypertension/arrhythmia risk.",
-          "references": [
-            {
-              "source": "Anaphylaxis",
-              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
-              "detail": "Wrong dose"
-            }
-          ]
+                "id": "adult-epi",
+                "name": "Epi 0.3mg IM (adult dose)",
+                "group": "First-line",
+                "critical": false,
+                "correct": false,
+                "phase": 1,
+                "teaching": "⚠️ Using the adult EpiPen (0.3mg) in a child under 15kg delivers an unsafe proportional overdose — causing severe hypertension, tachycardia, and cardiac arrhythmia risk. Weight-based dosing is mandatory in pediatric anaphylaxis. Under 15kg: 0.01mg/kg dose (may require drawing from ampule). 15-30kg: EpiPen Jr (0.15mg). Over 30kg: standard EpiPen (0.3mg). Never estimate — calculate from actual measured weight.",
+                "references": [
+                        {
+                                "source": "Anaphylaxis",
+                                "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+                                "detail": "Wrong dose"
+                        }
+                ]
+        },
+        {
+                "id": "epi-iv-cardiac-anaphylaxis-v5",
+                "name": "Epinephrine 1mg IV push (cardiac dose) instead of IM",
+                "group": "First-Line",
+                "critical": false,
+                "correct": false,
+                "teaching": "⚠️ The correct epinephrine dose for anaphylaxis is 0.3-0.5mg IM (1:1,000 concentration) in the anterolateral thigh — NOT IV push. IV epinephrine (1mg cardiac dose) causes dangerous hypertension, arrhythmias, and cardiovascular collapse. IV epinephrine is reserved for cardiac arrest only.",
+                "references": [
+                        {
+                                "source": "WAO Anaphylaxis Guidelines",
+                                "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3283018/",
+                                "detail": "Epinephrine 0.3-0.5mg IM 1:1000; IV cardiac dose contraindicated in anaphylaxis"
+                        }
+                ]
         }
-      ],
+],
       "phases": [
         {
           "id": "initial",
