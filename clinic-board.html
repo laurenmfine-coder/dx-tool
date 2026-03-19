@@ -165,7 +165,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 /* ── Vitals ── */
 .vitals-header{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px;padding:10px;background:linear-gradient(135deg,#f8fafc,#f0f4f8);border:1px solid var(--border);border-radius:10px}
 .vital-chip{text-align:center;padding:6px 4px;background:white;border-radius:6px;border:1px solid #e8ecf0}
-.vital-chip .vital-label{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600}
+.vital-chip .vital-label{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600}
 .vital-chip .vital-value{font-size:14px;font-weight:700;font-family:var(--mono);color:var(--text);margin-top:2px}
 .vital-chip.abnormal .vital-value{color:var(--danger)}
 
@@ -228,7 +228,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .scorecard-title{font-size:14px;font-weight:700;color:var(--primary-dark);margin-bottom:12px}
 .scorecard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px}
 .score-metric{background:white;border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
-.score-metric .sm-label{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600}
+.score-metric .sm-label{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:600}
 .score-metric .sm-value{font-size:22px;font-weight:700;font-family:var(--mono);margin:4px 0}
 .score-metric.excellent .sm-value{color:var(--success)}
 .score-metric.good .sm-value{color:var(--primary)}
@@ -259,6 +259,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 </style>
 </head>
 <body>
+<script>
+// AUTH GATE — redirect unauthenticated users to login
+(function() {
+  try {
+    var u = JSON.parse(localStorage.getItem('reasondx-user') || 'null');
+    if (!u || !u.id) { window.location.replace('auth/login.html'); }
+  } catch(e) { window.location.replace('auth/login.html'); }
+})();
+</script>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <div id="main-content" role="main"></div>
 

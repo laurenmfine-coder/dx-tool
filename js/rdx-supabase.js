@@ -184,28 +184,33 @@ async function startCaseAttempt(caseId, opts) {
 }
 
 async function completeCaseAttempt(attemptId, data) {
-  if (!supabase) return fallbackStore('case_complete', attemptId, data);
+  try {
+    if (!supabase) return fallbackStore('case_complete', attemptId, data);
 
-  var id = attemptId || sessionStorage.getItem('rdx-current-attempt');
-  if (!id) return { error: 'No active attempt' };
+    var id = attemptId || sessionStorage.getItem('rdx-current-attempt');
+    if (!id) return { error: 'No active attempt' };
 
-  var result = await supabase
-    .from('case_attempts')
-    .update({
-      completed_at: new Date().toISOString(),
-      dx_submitted: data.dxSubmitted || null,
-      dx_correct: data.dxCorrect || null,
-      time_seconds: data.timeSeconds || 0,
-      stages_completed: data.stagesCompleted || 0
-    })
-    .eq('id', id);
+    var result = await supabase
+      .from('case_attempts')
+      .update({
+        completed_at: new Date().toISOString(),
+        dx_submitted: data.dxSubmitted || null,
+        dx_correct: data.dxCorrect || null,
+        time_seconds: data.timeSeconds || 0,
+        stages_completed: data.stagesCompleted || 0
+      })
+      .eq('id', id);
 
-  // Auto-score milestones if case has milestone tags
-  if (data.dxCorrect !== false) {
-    autoScoreMilestones(id);
+    // Auto-score milestones if case has milestone tags
+    if (data.dxCorrect !== false) {
+      autoScoreMilestones(id);
+    }
+
+    return result;
+  } catch(e) {
+    console.warn('[RDX] completeCaseAttempt failed:', e.message);
+    return null;
   }
-
-  return result;
 }
 
 // ═══════════════════════════════════════
@@ -379,15 +384,20 @@ async function updateMilestone(milestone, level, evidenceCount) {
 }
 
 async function getMilestones(userId) {
-  if (!supabase) return [];
-  var uid = userId || (currentUser && currentUser.id);
-  if (!uid) return [];
+  try {
+    if (!supabase) return [];
+    var uid = userId || (currentUser && currentUser.id);
+    if (!uid) return [];
 
-  var result = await supabase
-    .from('milestone_scores')
-    .select('*')
-    .eq('user_id', uid);
-  return result.data || [];
+    var result = await supabase
+      .from('milestone_scores')
+      .select('*')
+      .eq('user_id', uid);
+    return result.data || [];
+  } catch(e) {
+    console.warn('[RDX] getMilestones failed:', e.message);
+    return [];
+  }
 }
 
 // ═══════════════════════════════════════

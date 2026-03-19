@@ -35,7 +35,7 @@
       di(R+'night-float.html','🌙','Night Float','Overnight cross-cover with I-PASS')+
       di(R+'simroomdx.html','🎤','Morning Rounds','Present to the AI attending')+
       hr()+sl('Clinical Skills')+
-      di(R+'crt-hub.html','🧩','Reasoning Trainers','Step-by-step CRTs')+
+      
       di(R+'procedure-lab.html','🔬','Procedure Lab','Skin testing, OFC, spirometry')+
       di(R+'counseling-scenarios.html','💬','Patient Counseling','Communication practice')
     )+
@@ -45,18 +45,17 @@
       di(R+'CoachDx/mentor-chat.html','💬','Mentor Chat','Ongoing coaching conversation')+
       di(R+'demo-coachdx.html','▶','Watch Demo','See CoachDx in action — no login')+
       hr()+sl('Specialty Coaching')+
-      di(R+'ai-trainer-anaphylaxis-food.html','🤖','A/I Reasoning Trainer','Anaphylaxis & food allergy')+
+      
     )+
     dd('🧬 MechanismDx',sec==='mechanismdx','#0E7490',
       sl('Explore')+
-      di(R+'pathway.html','🧬','Pathophysiology Hub','560 topics · 93 systems')+
+      di(R+'pathway.html','🧬','Pathophysiology Hub','670 topics · 93 systems')+
       di(R+'allergy-pathway.html','🌿','A/I Pathway','Allergy & Immunology curriculum')+
-      di(R+'study-mode.html','📖','Study Mode','Guided pathophysiology review')+
+      
       hr()+sl('Deep Dives')+
       di(R+'mechanism/anaphylaxis-module.html','⚡','Anaphylaxis','Full mechanism module')+
       di(R+'mechanism/asthma-module.html','💨','Asthma','Pathophysiology + clinical links')+
-      di(R+'tools/flashcard-studio.html','🗂️','Flashcard Studio','Spaced repetition review')
-    )+
+      )+
     '<div class="rdx-dd">'+
       '<button class="rdx-nav-top" aria-haspopup="true" style="font-size:12px">Tools <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button>'+
       '<div class="rdx-dd-panel"><div class="rdx-dd-panel-inner">'+
@@ -148,7 +147,7 @@
     rdxApplyExp();
 
     var ov=document.createElement('div');ov.id='rdx-about-overlay';
-    ov.innerHTML='<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">&times;</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>Three ways to build clinical reasoning</h3><div class="rdx-about-grid"><div class="rdx-about-stat" style="border-top:3px solid #C0392B"><div class="num" style="color:#C0392B">🩺</div><div class="lbl"><strong style="color:#C0392B;display:block">CaseDx</strong>Work clinical cases in the Virtual EMR</div></div><div class="rdx-about-stat" style="border-top:3px solid #6D28D9"><div class="num" style="color:#6D28D9">🧑‍⚕️</div><div class="lbl"><strong style="color:#6D28D9;display:block">CoachDx</strong>Socratic AI coaching on any topic</div></div><div class="rdx-about-stat" style="border-top:3px solid #0E7490"><div class="num" style="color:#0E7490">🧬</div><div class="lbl"><strong style="color:#0E7490;display:block">MechanismDx</strong>Pathophysiology explorer · 560 topics</div></div></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:12px;color:#94a3b8;text-align:center">&copy; 2025&ndash;2026 ReasonDx &middot; <a href="mailto:hello@reasondx.com" style="color:#2874a6">hello@reasondx.com</a></p></div></div>';
+    ov.innerHTML='<div id="rdx-about-modal"><div class="rdx-about-hdr"><button class="rdx-about-close" id="rdx-about-x">&times;</button><h2>ReasonDx</h2><p>Clinical Reasoning Education Platform</p></div><div class="rdx-about-body"><h3>Three ways to build clinical reasoning</h3><div class="rdx-about-grid"><div class="rdx-about-stat" style="border-top:3px solid #C0392B"><div class="num" style="color:#C0392B">🩺</div><div class="lbl"><strong style="color:#C0392B;display:block">CaseDx</strong>Work clinical cases in the Virtual EMR</div></div><div class="rdx-about-stat" style="border-top:3px solid #6D28D9"><div class="num" style="color:#6D28D9">🧑‍⚕️</div><div class="lbl"><strong style="color:#6D28D9;display:block">CoachDx</strong>Socratic AI coaching on any topic</div></div><div class="rdx-about-stat" style="border-top:3px solid #0E7490"><div class="num" style="color:#0E7490">🧬</div><div class="lbl"><strong style="color:#0E7490;display:block">MechanismDx</strong>Pathophysiology explorer · 670 topics</div></div></div><p style="margin-top:16px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:12px;color:#94a3b8;text-align:center">&copy; 2025&ndash;2026 ReasonDx &middot; <a href="mailto:hello@reasondx.com" style="color:#2874a6">hello@reasondx.com</a></p></div></div>';
     document.body.appendChild(ov);
     ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('open');});
     document.getElementById('rdx-about-x').addEventListener('click',function(){ov.classList.remove('open');});

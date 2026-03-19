@@ -58,7 +58,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": true,
           "phase": 1,
-          "teaching": "P2Y12 inhibitor for DAPT. Give before or at cath per institutional protocol.",
+          "teaching": "✅ Ticagrelor 180mg PO loading dose is preferred over clopidogrel for STEMI per 2022 ACC/AHA guidelines — faster onset, more consistent platelet inhibition, and mortality benefit (PLATO trial: 16% relative risk reduction). Give with aspirin 325mg as DAPT immediately on arrival. Contraindicated with prior intracranial hemorrhage or active bleeding. Follow with ticagrelor 90mg BID for at least 12 months.",
           "references": [
             {
               "source": "PLATO Trial \u2014 Ticagrelor vs Clopidogrel (PMC OA)",
@@ -1526,7 +1526,7 @@ window.CRT_DATA = {
                 "critical": false,
                 "correct": true,
                 "phase": 1,
-                "teaching": "Coordinates catheter-directed therapy, surgical embolectomy, ECMO decisions.",
+                "teaching": "✅ PE Response Team (PERT) consultation is standard of care for intermediate-high and high-risk PE. PERT coordinates pulmonology, hematology, interventional radiology, and cardiac surgery to determine the optimal reperfusion strategy: systemic thrombolysis vs catheter-directed therapy (CDT) vs surgical embolectomy. Activate early — before the patient deteriorates. Document RV/LV ratio on echo and troponin trend to frame the PERT discussion.",
                 "references": [
                         {
                                 "source": "Pulmonary Embolism \u2014 StatPearls",
@@ -1542,7 +1542,7 @@ window.CRT_DATA = {
                 "critical": true,
                 "correct": true,
                 "phase": 1,
-                "teaching": "Submassive can deteriorate to massive rapidly. Serial troponin and echo.",
+                "teaching": "✅ Continuous cardiac monitoring and ICU admission are mandatory for hemodynamically unstable or intermediate-high risk PE with RV dysfunction. Telemetry detects atrial arrhythmias and right heart strain patterns. ICU level care enables rapid vasopressor initiation if hypotension develops — PE can progress to obstructive shock within minutes. Establish two large-bore IVs, keep vasopressors at bedside, and repeat echocardiography every 4-6 hours to track RV recovery.",
                 "references": [
                         {
                                 "source": "Pulmonary Embolism \u2014 StatPearls",
@@ -6357,7 +6357,7 @@ window.CRT_DATA = {
                 "critical": false,
                 "correct": true,
                 "phase": 1,
-                "teaching": "Adjunct for bronchospasm component. Does NOT replace epinephrine.",
+                "teaching": "✅ Albuterol 2.5mg nebulized (or 4-8 puffs MDI with spacer) treats the beta-2 mediated bronchospasm component of anaphylaxis — but it is an adjunct, never a replacement for epinephrine. Use after epinephrine for persistent wheezing. Albuterol does not reverse cardiovascular collapse, angioedema, or urticaria. In epinephrine-refractory bronchospasm, consider IV magnesium sulfate 2g over 20 minutes.",
                 "references": [
                         {
                                 "source": "Anaphylaxis \u2014 StatPearls",
@@ -6394,7 +6394,7 @@ window.CRT_DATA = {
                 "critical": false,
                 "correct": true,
                 "phase": 2,
-                "teaching": "H2 blocker \u2014 some evidence for additive benefit with H1 blocker in anaphylaxis.",
+                "teaching": "✅ Famotidine 20mg IV (H2-receptor antagonist) provides dual histamine blockade alongside diphenhydramine (H1 blocker) — some evidence suggests combined H1+H2 blockade reduces urticaria and flushing more effectively than H1 alone. Give after epinephrine as an adjunct. H2 blockers do not treat airway obstruction, hypotension, or cardiovascular collapse. Never delay epinephrine to establish IV access for antihistamines.",
                 "references": [
                         {
                                 "source": "Anaphylaxis \u2014 StatPearls",
@@ -15952,7 +15952,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "Continuous or q20min for severe. SABA first-line.",
+          "teaching": "✅ Albuterol 2.5mg nebulized (or 4-8 puffs MDI with spacer) is the correct treatment for bronchospasm that persists after epinephrine. It is an adjunct — never a replacement for epinephrine. Albuterol treats the beta-2 mediated bronchospasm component but does not reverse cardiovascular collapse, angioedema, or urticaria. In epinephrine-refractory bronchospasm consider IV magnesium sulfate 2g over 20 minutes as additional bronchodilator.",
           "references": [
             {
               "source": "Asthma-StatPearls",
