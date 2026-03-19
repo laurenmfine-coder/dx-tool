@@ -56,6 +56,15 @@ function init() {
         }));
       } catch(e) {}
       document.dispatchEvent(new CustomEvent('rdx:auth', { detail: { user: session.user, event: event } }));
+
+      // Auto-track pending referral code from URL or localStorage
+      if (event === 'SIGNED_IN') {
+        try {
+          var pendingRef = localStorage.getItem('rdx-pending-ref') ||
+            new URLSearchParams(window.location.search).get('ref');
+          if (pendingRef) trackReferral(pendingRef);
+        } catch(e) {}
+      }
     } else {
       currentUser = null;
       currentProfile = null;
@@ -572,6 +581,149 @@ async function flushOfflineQueue() {
   } catch (e) { /* silent */ }
 }
 
+// ─── REFERRAL SYSTEM ─────────────────────────────────────────────────────────
+
+/**
+ * generateReferralCode — creates a unique REF-XX0000 style code for the
+ * current user and persists it to Supabase + localStorage fallback.
+ */
+async function generateReferralCode() {
+  var user = await getUser();
+  if (!user) return null;
+
+  var existing = localStorage.getItem('rdx-referral-code-' + user.id);
+  if (existing) return existing;
+
+  try {
+    var { data: rows } = await supabase
+      .from('referrals')
+      .select('code')
+      .eq('referrer_id', user.id)
+      .is('referred_user_id', null)
+      .limit(1);
+    if (rows && rows.length > 0) {
+      localStorage.setItem('rdx-referral-code-' + user.id, rows[0].code);
+      return rows[0].code;
+    }
+  } catch (e) {}
+
+  var letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+  var code = 'REF-' +
+    letters[Math.floor(Math.random() * letters.length)] +
+    letters[Math.floor(Math.random() * letters.length)] +
+    String(Math.floor(Math.random() * 9000) + 1000);
+
+  try {
+    await supabase.from('referrals').insert({
+      code: code,
+      referrer_id: user.id,
+      reward_tier: 'standard'
+    });
+  } catch (e) {}
+
+  localStorage.setItem('rdx-referral-code-' + user.id, code);
+  return code;
+}
+
+/**
+ * trackReferral — called during registration when a referral code is present
+ * in the URL (?ref=REF-XX0000) or localStorage ('rdx-pending-ref').
+ */
+async function trackReferral(code) {
+  if (!code) return null;
+  var user = await getUser();
+  if (!user) {
+    try { localStorage.setItem('rdx-pending-ref', code); } catch (e) {}
+    return null;
+  }
+  try { localStorage.removeItem('rdx-pending-ref'); } catch (e) {}
+
+  try {
+    var { data: rows, error } = await supabase
+      .from('referrals')
+      .select('*')
+      .eq('code', code)
+      .is('referred_user_id', null)
+      .limit(1);
+
+    if (error || !rows || rows.length === 0) return null;
+    var row = rows[0];
+    if (row.referrer_id === user.id) return null; // no self-referral
+
+    var { data: existing } = await supabase
+      .from('referrals')
+      .select('id')
+      .eq('referrer_id', row.referrer_id)
+      .not('referred_user_id', 'is', null);
+
+    var count = existing ? existing.length : 0;
+    var tier = count >= 10 ? 'gold' : count >= 5 ? 'silver' : count >= 1 ? 'bronze' : 'standard';
+
+    await supabase
+      .from('referrals')
+      .update({ referred_user_id: user.id, reward_tier: tier })
+      .eq('id', row.id);
+
+    await trackEvent('referral_completed', null, {
+      referrer_id: row.referrer_id,
+      referred_id: user.id,
+      code: code,
+      tier: tier
+    });
+
+    return { referrerId: row.referrer_id, code: code, tier: tier };
+  } catch (e) { return null; }
+}
+
+/**
+ * getReferralStats — returns the current user's referral summary:
+ * their code, total successful referrals, tier, and reward description.
+ */
+async function getReferralStats() {
+  var user = await getUser();
+  if (!user) return null;
+
+  var code = await generateReferralCode();
+  var rewards = {
+    none:   'Refer 1 person to unlock Bronze rewards',
+    bronze: '1 month Pro free — share with 5 for Silver',
+    silver: '3 months Pro free — share with 10 for Gold',
+    gold:   'Lifetime Pro discount — thank you!'
+  };
+
+  try {
+    var { data: referrals, error } = await supabase
+      .from('referrals')
+      .select('*')
+      .eq('referrer_id', user.id);
+
+    if (error) throw error;
+    var completed = (referrals || []).filter(function(r) { return r.referred_user_id; });
+    var count = completed.length;
+    var tier = count >= 10 ? 'gold' : count >= 5 ? 'silver' : count >= 1 ? 'bronze' : 'none';
+
+    return {
+      code:      code,
+      total:     count,
+      tier:      tier,
+      reward:    rewards[tier],
+      nextTier:  count < 1 ? 'bronze' : count < 5 ? 'silver' : count < 10 ? 'gold' : null,
+      nextAt:    count < 1 ? 1 : count < 5 ? 5 : count < 10 ? 10 : null,
+      referrals: completed
+    };
+  } catch (e) {
+    return {
+      code:      localStorage.getItem('rdx-referral-code-' + user.id) || code,
+      total:     0,
+      tier:      'none',
+      reward:    rewards.none,
+      nextTier:  'bronze',
+      nextAt:    1,
+      referrals: []
+    };
+  }
+}
+
 // ═══════════════════════════════════════
 // PUBLIC API
 // ═══════════════════════════════════════
@@ -633,6 +785,13 @@ window.RDX = {
     programCohort: getProgramCohortSummary,
     programMilestones: getProgramMilestoneSnapshot,
     programCategories: getProgramCategoryPerformance
+  },
+
+  // Referrals
+  referrals: {
+    track: trackReferral,
+    stats: getReferralStats,
+    generateCode: generateReferralCode
   },
 
   // Offline

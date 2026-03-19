@@ -193,6 +193,20 @@
         // Check if this is the final phase
         if (state.currentPhase >= tx.phases.length - 1) {
           state.completed = true;
+
+          // Emit RPFS fingerprint on case completion
+          if (window.RDX_RPFS && window.RDX_RPFS.computeCRTFingerprint) {
+            try {
+              var rpfsEvt = window.RDX_RPFS.computeCRTFingerprint(caseId, state, crt);
+              // Render post-case panel into CRT section if target exists
+              setTimeout(function () {
+                var target = document.getElementById('crt-section') ||
+                             document.querySelector('[data-tab="crt"]') ||
+                             document.querySelector('.crt-section-card');
+                if (target && rpfsEvt) window.RDX_RPFS.renderPostCasePanel(target, rpfsEvt);
+              }, 400);
+            } catch (e) {}
+          }
         }
 
         saveState();

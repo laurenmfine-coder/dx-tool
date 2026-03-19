@@ -1023,6 +1023,57 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             </div>
         </div>
 
+        <!-- ═══ REASONING PATHWAY FINGERPRINT ═══ -->
+        <h2 class="section-title" style="margin-top:32px">
+            <span class="icon" style="background:#EBF5FB">🧬</span>
+            Reasoning Pathway Fingerprint (RPFS)
+        </h2>
+        <div class="platform-grid" id="rpfs-panel">
+            <div class="platform-card">
+                <div class="platform-header">
+                    <div class="platform-info">
+                        <div class="platform-icon" style="background:linear-gradient(135deg,#2874A6,#5DADE2)">🧬</div>
+                        <div>
+                            <div class="platform-name">Reasoning Fingerprint</div>
+                            <div class="platform-desc">8-dimension cognitive profile across CRT cases and consult callbacks</div>
+                        </div>
+                    </div>
+                    <div id="rpfs-overall-badge" style="display:none;font-family:monospace;font-size:22px;font-weight:700;padding:8px 14px;border-radius:8px;background:#EBF5FB;color:#2874A6"></div>
+                </div>
+
+                <!-- Summary stats row -->
+                <div id="rpfs-stats" style="display:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px">
+                    <div style="text-align:center;padding:12px;background:#F9FAFB;border-radius:10px">
+                        <div style="font-size:22px;font-weight:700;color:#1E293B" id="rpfs-stat-sessions">—</div>
+                        <div style="font-size:11px;color:#64748B">Sessions</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#EBF5FB;border-radius:10px">
+                        <div style="font-size:22px;font-weight:700;color:#2874A6" id="rpfs-stat-overall">—</div>
+                        <div style="font-size:11px;color:#64748B">Avg Overall</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#E9F7EF;border-radius:10px">
+                        <div style="font-size:22px;font-weight:700;color:#27AE60" id="rpfs-stat-strongest">—</div>
+                        <div style="font-size:11px;color:#64748B">Top Dimension</div>
+                    </div>
+                    <div style="text-align:center;padding:12px;background:#FEF9E7;border-radius:10px">
+                        <div style="font-size:22px;font-weight:700;color:#F39C12" id="rpfs-stat-weakest">—</div>
+                        <div style="font-size:11px;color:#64748B">Focus Area</div>
+                    </div>
+                </div>
+
+                <!-- 8-dimension bars -->
+                <div id="rpfs-dims" style="margin-top:16px"></div>
+
+                <!-- Trend insight -->
+                <div id="rpfs-trend" style="margin-top:10px"></div>
+
+                <!-- Empty state -->
+                <div id="rpfs-empty" style="text-align:center;padding:20px;color:#94A3B8;font-size:13px">
+                    Complete CRT cases or Consult Callback sessions to build your reasoning fingerprint
+                </div>
+            </div>
+        </div>
+
     </main>
     
     <!-- Footer -->
@@ -1913,6 +1964,83 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch
     loadReferralData();
   }
 })();
+</script>
+<script src="js/rdx-rpfs.js"></script>
+<script>
+// ── RPFS Dashboard Population ──────────────────────────────────────────────
+(function () {
+    function color(s) {
+        return s >= 75 ? '#27AE60' : s >= 50 ? '#F39C12' : '#E74C3C';
+    }
+
+    function renderRPFSDashboard() {
+        if (!window.RDX_RPFS) return;
+        var summary = window.RDX_RPFS.getSummary();
+        var emptyEl  = document.getElementById('rpfs-empty');
+        var dimsEl   = document.getElementById('rpfs-dims');
+        var statsEl  = document.getElementById('rpfs-stats');
+        var trendEl  = document.getElementById('rpfs-trend');
+        var badgeEl  = document.getElementById('rpfs-overall-badge');
+
+        if (!summary) {
+            if (emptyEl) emptyEl.style.display = 'block';
+            return;
+        }
+
+        if (emptyEl)  emptyEl.style.display  = 'none';
+        if (statsEl)  statsEl.style.display   = 'grid';
+        if (badgeEl) { badgeEl.style.display  = 'block'; badgeEl.textContent = summary.overallAvg; badgeEl.style.color = color(summary.overallAvg); }
+
+        // Fill stat tiles
+        var dims = window.RDX_RPFS.DIMENSIONS.map(function (d) {
+            return { name: d, score: summary.dimensions[d] ? summary.dimensions[d].score : 0, trend: summary.dimensions[d] ? (summary.dimensions[d].trend || 0) : 0 };
+        });
+        var sorted = dims.slice().sort(function (a, b) { return b.score - a.score; });
+        var el;
+        el = document.getElementById('rpfs-stat-sessions'); if (el) el.textContent = summary.totalSessions;
+        el = document.getElementById('rpfs-stat-overall');  if (el) { el.textContent = summary.overallAvg; el.style.color = color(summary.overallAvg); }
+        el = document.getElementById('rpfs-stat-strongest'); if (el) { el.textContent = sorted[0].name.split(' ')[0]; el.title = sorted[0].name + ' (' + sorted[0].score + ')'; }
+        el = document.getElementById('rpfs-stat-weakest');  if (el) { el.textContent = sorted[sorted.length-1].name.split(' ')[0]; el.title = sorted[sorted.length-1].name + ' (' + sorted[sorted.length-1].score + ')'; }
+
+        // Dimension bars
+        if (dimsEl) {
+            dimsEl.innerHTML = dims.map(function (d) {
+                var trendIcon = d.trend > 2 ? ' <span style="color:#27AE60;font-size:10px">▲</span>' : d.trend < -2 ? ' <span style="color:#E74C3C;font-size:10px">▼</span>' : '';
+                return [
+                    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">',
+                    '<div style="font-size:11px;color:#555;width:140px;flex-shrink:0">' + d.name + trendIcon + '</div>',
+                    '<div style="flex:1;height:7px;background:#eee;border-radius:4px;overflow:hidden">',
+                    '<div style="width:' + d.score + '%;height:100%;border-radius:4px;background:' + color(d.score) + ';transition:width 1s ease"></div>',
+                    '</div>',
+                    '<div style="font-family:monospace;font-size:11px;font-weight:700;width:30px;text-align:right;color:' + color(d.score) + '">' + d.score + '</div>',
+                    '</div>'
+                ].join('');
+            }).join('');
+        }
+
+        // Trend insight block
+        if (trendEl && summary.totalSessions >= 6) {
+            var improving = dims.filter(function (d) { return d.trend > 2; }).map(function (d) { return d.name; });
+            var declining = dims.filter(function (d) { return d.trend < -2; }).map(function (d) { return d.name; });
+            var html = '';
+            if (improving.length) {
+                html += '<div style="padding:8px 12px;background:#E9F7EF;border-left:3px solid #27AE60;border-radius:0 4px 4px 0;font-size:12px;margin-bottom:6px"><strong>Improving:</strong> ' + improving.join(', ') + '</div>';
+            }
+            if (declining.length) {
+                html += '<div style="padding:8px 12px;background:#FDEDEC;border-left:3px solid #E74C3C;border-radius:0 4px 4px 0;font-size:12px"><strong>Needs attention:</strong> ' + declining.join(', ') + '</div>';
+            }
+            trendEl.innerHTML = html;
+        }
+    }
+
+    // Run on page load and whenever a new RPFS event fires
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderRPFSDashboard);
+    } else {
+        renderRPFSDashboard();
+    }
+    window.addEventListener('rdx-rpfs-update', renderRPFSDashboard);
+}());
 </script>
 </body>
 </html>
