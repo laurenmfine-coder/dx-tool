@@ -24760,7 +24760,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "IV acyclovir STAT. HOLD steroids. HSV in eczema = emergency. Mortality if untreated."
+      "IV acyclovir STAT. HOLD steroids. HSV in eczema = emergency. Mortality if untreated.",
+      "Stop all topical steroids on infected areas immediately — they suppress local immune surveillance and accelerate HSV spread. Restart only after viral clearance confirmed."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -24915,7 +24916,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "HSV-triggered EM Major. Treat HSV. Prophylactic antiviral prevents recurrence. NOT SJS/TEN."
+      "HSV-triggered EM Major. Treat HSV. Prophylactic antiviral prevents recurrence. NOT SJS/TEN.",
+      "Distinguish from SJS/TEN by target lesion morphology and HSV trigger history. EM Major spares large BSA, is self-limited, and recurs with each HSV episode — long-term valacyclovir suppression prevents recurrence."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -25070,7 +25072,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Exercise cofactor in OIT. No exercise 2h before/after dose. Adjust, dont discontinue OIT."
+      "Exercise cofactor in OIT. No exercise 2h before/after dose. Adjust, dont discontinue OIT.",
+      "Cofactors (exercise, illness, NSAIDs, alcohol, heat) lower the reaction threshold during OIT — identify and manage cofactors, do not discontinue OIT after a cofactor-driven reaction."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -25222,7 +25225,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "FPIES: T-cell mediated, NOT IgE. Ondansetron + IVF are treatment. EpiPen doesnt work. Mimics sepsis but isnt."
+      "FPIES: T-cell mediated, NOT IgE. Ondansetron + IVF are treatment. EpiPen doesnt work. Mimics sepsis but isnt.",
+      "A single IV ondansetron dose (0.15 mg/kg) stops vomiting in 85% of acute FPIES — it is now first-line pharmacotherapy. EpiPen does not help because FPIES is non-IgE-mediated."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -25377,7 +25381,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Chronic FPIES often misdiagnosed as GERD/reflux. Remove trigger protein. Resolution confirms diagnosis."
+      "Chronic FPIES often misdiagnosed as GERD/reflux. Remove trigger protein. Resolution confirms diagnosis.",
+      "Chronic FPIES is consistently misdiagnosed as GERD for months — the key distinguishing feature is that reflux medications have no effect and symptoms resolve completely on trigger elimination."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -25564,7 +25569,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "MCAS misdiagnosed as anxiety for 3 years. Tryptase + urine mediators confirm. H1+H2 blockade + trigger avoidance + epi-pen."
+      "MCAS misdiagnosed as anxiety for 3 years. Tryptase + urine mediators confirm. H1+H2 blockade + trigger avoidance + epi-pen.",
+      "MCAS diagnosis requires: 1) episodic symptoms consistent with mast cell mediator release, 2) elevated tryptase or urine metabolites during an episode, and 3) response to antihistamines — all three criteria must be met."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -25719,7 +25725,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Red Man Syndrome is rate-related histamine release, NOT true allergy. Slow infusion + premedicate. Do NOT label as allergy."
+      "Red Man Syndrome is rate-related histamine release, NOT true allergy. Slow infusion + premedicate. Do NOT label as allergy.",
+      "False allergy documentation causes patients to receive inferior antibiotics for the rest of their lives. Accurate charting of RMS as a 'rate-dependent infusion reaction' rather than 'allergy' is a patient safety imperative."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -25854,7 +25861,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Acute urticaria is usually post-viral and self-limited. H1 antihistamines. Allergy panels are NOT indicated and cause confusion."
+      "Acute urticaria is usually post-viral and self-limited. H1 antihistamines. Allergy panels are NOT indicated and cause confusion.",
+      "The clinical trigger for extensive allergy testing in acute urticaria is systemic anaphylaxis or recurrent episodes >6 weeks — isolated acute urticaria post-viral illness requires no workup beyond H1 antihistamines."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -26008,7 +26016,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CSU refractory to standard H1. Updose first, then omalizumab. Screen for autoimmune thyroiditis. Avoid chronic steroids."
+      "CSU refractory to standard H1. Updose first, then omalizumab. Screen for autoimmune thyroiditis. Avoid chronic steroids.",
+      "Autoimmune CSU (30% of cases) is driven by IgG anti-FcεRI autoantibodies — these patients respond poorly to antihistamines and require omalizumab earlier. Screening for thyroid autoimmunity identifies this subset."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -26163,7 +26172,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "UV: hives >24h, bruising, painful. Biopsy mandatory. Low complements = SLE workup. Antihistamines alone insufficient."
+      "UV: hives >24h, bruising, painful. Biopsy mandatory. Low complements = SLE workup. Antihistamines alone insufficient.",
+      "Hypocomplementemic urticarial vasculitis syndrome (HUVS) carries risk of obstructive pulmonary disease even without smoking — pulmonary function testing should be performed in all hypocomplementemic UV patients."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -26318,7 +26328,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CVID: recurrent sinopulmonary infections + low immunoglobulins + poor vaccine response. IVIG is lifesaving. Insurance advocacy essential."
+      "CVID: recurrent sinopulmonary infections + low immunoglobulins + poor vaccine response. IVIG is lifesaving. Insurance advocacy essential.",
+      "Every hospitalization for recurrent pneumonia that delays CVID diagnosis causes irreversible bronchiectasis. The diagnostic criteria are simple: low IgG+IgA/IgM, poor vaccine response, age >4 — screen early."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -26473,7 +26484,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "AERD: aspirin desensitization is definitive treatment. Reduces polyp recurrence, improves asthma + smell. Avoidance alone is suboptimal."
+      "AERD: aspirin desensitization is definitive treatment. Reduces polyp recurrence, improves asthma + smell. Avoidance alone is suboptimal.",
+      "Aspirin desensitization followed by daily aspirin 650 mg reduces nasal polyp recurrence by 40% and improves asthma control — it converts a pharmacological intolerance into long-term disease modification."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -26628,7 +26640,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "PCN skin testing safe in pregnancy. Enables optimal GBS prophylaxis. Clindamycin has 30-40% resistance."
+      "PCN skin testing safe in pregnancy. Enables optimal GBS prophylaxis. Clindamycin has 30-40% resistance.",
+      "Penicillin delabeling in pregnancy is a patient safety intervention — labeled patients receive inferior GBS prophylaxis (clindamycin 30-40% resistant) leading to neonatal GBS infection. Skin testing is safe in the 2nd trimester."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -26783,7 +26796,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Misattributed trigger. Detailed history + component testing to identify TRUE allergen. Avoid unnecessary dietary restriction."
+      "Misattributed trigger. Detailed history + component testing to identify TRUE allergen. Avoid unnecessary dietary restriction.",
+      "Component-resolved diagnostics with Ara h 2 predict severity — high Ara h 2 predicts systemic reactions; low Ara h 2 with positive Ara h 8 indicates cross-reactive pollen allergy unlikely to cause anaphylaxis."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -26938,7 +26952,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CMPA in breastfed infant: maternal dairy elimination, NOT weaning. Most outgrow by 12mo. Support breastfeeding."
+      "CMPA in breastfed infant: maternal dairy elimination, NOT weaning. Most outgrow by 12mo. Support breastfeeding.",
+      "Breastfed infants with CMPA benefit from continued breastfeeding with maternal dairy elimination — formula switching is second-line. Over 90% of IgE-mediated CMPA resolves by school age; supervised milk challenges confirm tolerance."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -27092,7 +27107,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "VKC with shield ulcer. Ophthalmology mandatory. Steroid-sparing (cyclosporine) for long-term. Monitor IOP."
+      "VKC with shield ulcer. Ophthalmology mandatory. Steroid-sparing (cyclosporine) for long-term. Monitor IOP.",
+      "Shield ulcers in VKC are a corneal emergency — mechanical disruption by giant papillae on the upper tarsal conjunctiva causes the ulcer. Treatment requires topical steroids, cyclosporine, and urgent ophthalmology for possible debridement."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -27246,7 +27262,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Occupational allergic rhinitis. SCIT is disease-modifying. Workplace controls. Workers comp. Exhaust treatment before career change."
+      "Occupational allergic rhinitis. SCIT is disease-modifying. Workplace controls. Workers comp. Exhaust treatment before career change.",
+      "Subcutaneous allergen immunotherapy (SCIT) is the only disease-modifying treatment for allergic rhinitis — it induces long-term tolerance, reduces medication use, and prevents new sensitizations, unlike pharmacotherapy which only suppresses symptoms."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -27433,7 +27450,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Severe AD with SDOH barriers. Emollients + topical steroids. Dupilumab for refractory. Address access, housing."
+      "Severe AD with SDOH barriers. Emollients + topical steroids. Dupilumab for refractory. Address access, housing.",
+      "Dupilumab (anti-IL-4/IL-13) is FDA-approved for moderate-severe AD in patients ≥6 months — it targets the Th2 inflammatory axis driving AD and dramatically reduces disease burden with an excellent safety profile."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -27604,7 +27622,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Occupational ACD from PPD. Patch test confirms. PPD-free alternatives exist. Accommodate before career change."
+      "Occupational ACD from PPD. Patch test confirms. PPD-free alternatives exist. Accommodate before career change.",
+      "PPD (p-phenylenediamine) cross-reacts with para-amino compounds including sulfonamides, thiazide diuretics, and PABA sunscreens — document the cross-reactants in the allergy chart alongside the PPD sensitization."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -27774,7 +27793,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "EoE: average 7-year diagnostic delay. EGD with biopsies. PPI trial or swallowed steroid. Elimination diet. Dilation for strictures."
+      "EoE: average 7-year diagnostic delay. EGD with biopsies. PPI trial or swallowed steroid. Elimination diet. Dilation for strictures.",
+      "Fibrostenotic EoE (strictures, rings, narrow-caliber esophagus) is the end result of untreated inflammation — early diagnosis and treatment prevents this irreversible complication. Esophageal dilation treats strictures but not inflammation."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -27929,7 +27949,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Pediatric EoE masquerading as picky eating. Children develop adaptive behaviors (slow eating, soft foods, excessive water). Validate, dont blame."
+      "Pediatric EoE masquerading as picky eating. Children develop adaptive behaviors (slow eating, soft foods, excessive water). Validate, dont blame.",
+      "Pediatric EoE presents as 'picky eating' because children adaptively modify their behavior (small bites, excessive liquids, prolonged meals, avoidance of meat/bread) — ask specifically about feeding behaviors, not just symptoms."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -28553,7 +28574,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Updose H1, then omalizumab. Screen thyroid. Avoid chronic steroids."
+      "Updose H1, then omalizumab. Screen thyroid. Avoid chronic steroids.",
+      "The EAACI stepwise approach: non-sedating H1 antihistamine → updose to 4x → add omalizumab → add cyclosporine. Never use systemic steroids as long-term therapy — they cause HPA suppression and do not induce remission."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -28715,7 +28737,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Patch test to identify allergen. Workplace accommodation."
+      "Patch test to identify allergen. Workplace accommodation.",
+      "TRUE-Test (standardized patch test series) identifies the specific allergen — patch testing guides both allergen avoidance and workplace accommodation, and is the only way to definitively confirm ACD diagnosis."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -28877,7 +28900,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CVID: IVIG is lifesaving."
+      "CVID: IVIG is lifesaving.",
+      "IVIG dosing target is trough IgG >500–800 mg/dL — trough levels below 500 are associated with breakthrough sinopulmonary infections. Dose and frequency are adjusted based on clinical response and trough levels."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -29054,7 +29078,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "EGD with biopsy. PPI trial or swallowed steroid."
+      "EGD with biopsy. PPI trial or swallowed steroid.",
+      "Proton pump inhibitors have independent anti-inflammatory activity in EoE beyond acid suppression — PPI-responsive EoE (histologic remission on PPI alone) occurs in 30–50% of cases and is now recognized as an EoE variant."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -29193,7 +29218,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Pediatric EoE. Validate child. Not behavioral."
+      "Pediatric EoE. Validate child. Not behavioral.",
+      "Elemental amino acid formula induces remission in >90% of pediatric EoE patients — it is the most effective dietary therapy, though compliance is difficult. Stepwise food reintroduction with endoscopic monitoring identifies trigger foods."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -29332,7 +29358,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Chronic FPIES. Eliminate trigger. Not reflux."
+      "Chronic FPIES. Eliminate trigger. Not reflux.",
+      "Most FPIES triggers are common weaning foods: cow's milk, soy, rice, oats — introduce one food at a time with 3-5 day intervals and supervised oral food challenges to confirm which foods are safe."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -29471,7 +29498,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CMPA: maternal diet modification, not weaning."
+      "CMPA: maternal diet modification, not weaning.",
+      "Extensively hydrolyzed formula (eHF) is first-line for CMPA in formula-fed infants — amino acid formula (AAF) is reserved for the 10-15% who fail eHF. Soy formula has 10-35% co-reactivity with cow's milk protein."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -29633,7 +29661,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "ASA desensitization is definitive AERD treatment."
+      "ASA desensitization is definitive AERD treatment.",
+      "NSAID-exacerbated respiratory disease (NERD/AERD) is caused by COX-1 inhibition shifting arachidonic acid to the 5-lipoxygenase pathway, overproducing leukotrienes — this is a pharmacological reaction, not IgE-mediated allergy."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -29811,7 +29840,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Peanut anaphylaxis. Epi first. Allergist for OIT."
+      "Peanut anaphylaxis. Epi first. Allergist for OIT.",
+      "OIT (oral immunotherapy) with peanut powder (Palforzia) is FDA-approved for peanut allergy ages 4-17 — it desensitizes 67% of patients and should be discussed at every allergist visit as a disease-modifying option."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -29966,7 +29996,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Delabeling saves lives. Reduces broad-spectrum use."
+      "Delabeling saves lives. Reduces broad-spectrum use.",
+      "Over 90% of patients labeled as penicillin-allergic are skin-test negative and tolerate penicillin — the label persists due to lack of evaluation, not true allergy. Delabeling is one of the highest-yield antibiotic stewardship interventions."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []
@@ -30121,7 +30152,8 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "UV: biopsy mandatory. SLE workup if hypocomplementemic."
+      "UV: biopsy mandatory. SLE workup if hypocomplementemic.",
+      "Normocomplementemic urticarial vasculitis is usually idiopathic and benign — hypocomplementemic UV suggests systemic disease (SLE, Sjögren's, serum sickness) and mandates full autoimmune and complement workup."
     ],
     "mustNotMiss": [],
     "commonPitfalls": []

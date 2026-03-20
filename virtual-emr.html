@@ -1444,7 +1444,7 @@ function getActiveNoteTemplate() {
 }
 
 function renderSettingSelector() {
-  // If setting already chosen (passed via URL from start.html), skip landing page
+  // If setting already chosen (passed via URL from casedx.html), skip landing page
   if (S.clinicalSetting && window.EMRLanding) {
     // Setting already known — go straight to case picker, skip marketing page
     setTimeout(function() { showCasePicker(); }, 0);
@@ -4998,8 +4998,8 @@ submitDoc = function(){
   try {
     if (window.EMRShell && (CASE_ID || S.clinicalSetting)) { EMRShell.inject(); }
     if (!CASE_ID && !S.clinicalSetting) {
-      // No setting selected — send to start.html to pick setting + mode
-      window.location.replace('start.html');
+      // No setting selected — send to casedx.html to pick a case
+      window.location.replace('casedx.html');
       return;
     }
     else if (!CASE_ID && S.clinicalSetting) { showCasePicker(); }
