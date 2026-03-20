@@ -1003,6 +1003,25 @@ window.CRT_DATA = {
               "detail": "Antibiotics-only has higher failure rate; surgery preferred for uncomplicated appendicitis"
             }
           ]
+        },
+        {
+          "id": "ct-delay-appy",
+          "name": "Delay surgical consult — get CT first to confirm diagnosis",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Surgical consultation should not be delayed pending CT in classic appendicitis presentation. The surgeon needs to evaluate the patient early — both to confirm the clinical diagnosis and to plan operative timing. CT is useful when diagnosis is uncertain, but in a classic presentation (RLQ pain, fever, Rovsing's sign, elevated WBC), early surgical involvement reduces time to OR. CT should not be a prerequisite for the surgical consult call.",
+          "references": [
+            {
+              "source": "Appendicitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
+              "detail": "Early surgical consultation; CT for diagnostic uncertainty, not routine delay"
+            },
+            {
+              "source": "WSES Appendicitis Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7556887/",
+              "detail": "Clinical diagnosis sufficient for surgical consultation; CT does not replace clinical assessment"
+            }
+          ]
         }
       ],
       "phases": [
@@ -1234,6 +1253,25 @@ window.CRT_DATA = {
               "source": "Abdominal Aortic Aneurysm — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK507728/",
               "detail": "Large-bore IV access (14-16G) for rapid volume infusion"
+            }
+          ]
+        },
+        {
+          "id": "ct-first-aaa",
+          "name": "Get CT angiogram to confirm rupture before OR",
+          "correct": false,
+          "phase": 1,
+          "teaching": "In hemodynamically unstable ruptured AAA, CT imaging before OR is contraindicated — the patient will die on the scanner. The clinical triad of hypotension + pulsatile abdominal mass + back/flank pain is sufficient for emergent OR activation. Bedside ultrasound can confirm aortic aneurysm presence if rapidly available. CT is only appropriate in the stable patient where the diagnosis is uncertain.",
+          "references": [
+            {
+              "source": "Abdominal Aortic Aneurysm — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441909/",
+              "detail": "Unstable ruptured AAA: emergent OR; CT only in stable patients with diagnostic uncertainty"
+            },
+            {
+              "source": "SVS AAA Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3784866/",
+              "detail": "Clinical diagnosis sufficient for OR activation in hemodynamically unstable patients"
             }
           ]
         }
@@ -1517,6 +1555,25 @@ window.CRT_DATA = {
               "source": "Pulmonary Embolism — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
               "detail": "Continuous monitoring + ICU for massive/submassive PE"
+            }
+          ]
+        },
+        {
+          "id": "delay-heparin-pe",
+          "name": "Delay anticoagulation — confirm with echo first",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Delaying anticoagulation to obtain echo confirmation in suspected PE is dangerous. Echo is useful for risk stratification but is not required to initiate anticoagulation. Once clinical probability is high (Wells score ≥5 or PERC positive), heparin should begin immediately — before CTPA results return. The risk of clot propagation during imaging delay outweighs the risk of a single therapeutic heparin dose.",
+          "references": [
+            {
+              "source": "Pulmonary Embolism — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+              "detail": "Anticoagulation initiated on clinical suspicion; not delayed for imaging confirmation"
+            },
+            {
+              "source": "ESC PE Guidelines 2019 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6977045/",
+              "detail": "Start anticoagulation when PE likely before diagnostic confirmation"
             }
           ]
         }
@@ -2625,7 +2682,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Routine seizure prophylaxis is NOT recommended in bacterial meningitis without active seizure activity. Prophylactic anticonvulsants do not reduce seizure risk and add toxicity. Treat seizures if they occur; do not preempt them with phenytoin."
+          "teaching": "Routine seizure prophylaxis is NOT recommended in bacterial meningitis. Seizures occur in 15–30% of cases but do not warrant prophylactic anticonvulsants — treat seizures if they occur. Prophylaxis adds toxicity without benefit and may mask neurological deterioration.",
+          "references": [
+            {
+              "source": "Bacterial Meningitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK519536/",
+              "detail": "Seizure prophylaxis not recommended; treat if seizures occur"
+            },
+            {
+              "source": "Meningitis Guidelines — IDSA 2004 (open access)",
+              "url": "https://academic.oup.com/cid/article/39/9/1267/323680",
+              "detail": "No role for prophylactic anticonvulsants in bacterial meningitis"
+            }
+          ]
         },
         {
           "id": "meningitis-v1-dist-2",
@@ -2634,7 +2703,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "CT head before LP is only required in specific high-risk features: immunocompromised, history of CNS disease, new-onset seizure, papilledema, focal neuro deficits, or altered consciousness. Ordering CT for all meningitis patients delays antibiotics and lumbar puncture without benefit in low-risk patients."
+          "teaching": "CT head before LP is only required in specific high-risk features: immunocompromised, known CNS disease, new-onset seizures, papilledema, focal neuro deficit, or altered consciousness. Routine CT before LP in low-risk patients dangerously delays antibiotics — never delay antibiotics for imaging.",
+          "references": [
+            {
+              "source": "Bacterial Meningitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK519536/",
+              "detail": "CT indications before LP: immunocompromise, focal deficit, papilledema, altered consciousness"
+            },
+            {
+              "source": "IDSA Meningitis Guidelines 2004",
+              "url": "https://academic.oup.com/cid/article/39/9/1267/323680",
+              "detail": "Antibiotics must not be delayed for CT in low-risk patients"
+            }
+          ]
         }
       ],
       "phases": [
@@ -3482,6 +3563,25 @@ window.CRT_DATA = {
               "detail": "Spinal precautions in blunt trauma"
             }
           ]
+        },
+        {
+          "id": "wait-cxr-ptx",
+          "name": "Confirm with STAT CXR before needle decompression",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Tension pneumothorax is a clinical diagnosis requiring immediate needle decompression — waiting for CXR confirmation is potentially fatal. The classic triad of respiratory distress, hypotension, and absent breath sounds with tracheal deviation demands immediate intervention. Sending a deteriorating patient to radiology delays life-saving decompression by minutes. Treat on clinical diagnosis; confirm CXR after.",
+          "references": [
+            {
+              "source": "Tension Pneumothorax — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK513347/",
+              "detail": "Clinical diagnosis; immediate needle decompression; CXR after treatment not before"
+            },
+            {
+              "source": "ATLS Trauma Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5905520/",
+              "detail": "Tension PTX is a clinical emergency — imaging must not delay decompression"
+            }
+          ]
         }
       ],
       "phases": [
@@ -3739,6 +3839,25 @@ window.CRT_DATA = {
               "source": "Warfarin — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK470313/",
               "detail": "Vitamin K + FFP/PCC for warfarin reversal"
+            }
+          ]
+        },
+        {
+          "id": "no-intubate-epidural",
+          "name": "Avoid intubation — GCS 14, patient still protecting airway",
+          "correct": false,
+          "phase": 1,
+          "teaching": "In epidural hematoma with declining GCS and imminent herniation, low threshold for early intubation is essential — do not wait for complete airway loss. Epidural hematomas expand rapidly due to arterial bleeding (middle meningeal artery). GCS can drop from 14 to 8 in minutes during the lucid interval. Early intubation with RSI allows controlled hyperventilation (pCO2 35) to temporize ICP while neurosurgery prepares for craniotomy.",
+          "references": [
+            {
+              "source": "Epidural Hematoma — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK518982/",
+              "detail": "Early intubation for declining GCS; arterial bleed expands rapidly — do not wait for airway loss"
+            },
+            {
+              "source": "Brain Trauma Foundation Guidelines",
+              "url": "https://braintrauma.org/guidelines/guidelines-for-the-management-of-severe-tbi-4th-ed",
+              "detail": "Early airway management critical in herniation risk; ICP temporization with controlled ventilation"
             }
           ]
         }
@@ -4014,6 +4133,25 @@ window.CRT_DATA = {
               "detail": "Target K >4.0 and Mg >2.0 to stabilize cardiac membrane"
             }
           ]
+        },
+        {
+          "id": "digoxin-vt",
+          "name": "Digoxin — rate control and positive inotropy",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Digoxin is dangerous in VT with structural heart disease — it increases ventricular automaticity and can precipitate or worsen ventricular arrhythmias. In the setting of acute VT with hemodynamic compromise, digoxin has no role. It is not an antiarrhythmic for VT and can lower the VF threshold. Amiodarone, lidocaine, synchronized cardioversion (stable VT), or defibrillation (unstable) are the appropriate interventions.",
+          "references": [
+            {
+              "source": "Ventricular Tachycardia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482420/",
+              "detail": "Digoxin contraindicated in VT — increases ventricular automaticity and VF risk"
+            },
+            {
+              "source": "ACLS VT/VF Guidelines — AHA PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6361515/",
+              "detail": "Amiodarone/lidocaine/cardioversion for VT; digoxin has no role"
+            }
+          ]
         }
       ],
       "phases": [
@@ -4275,7 +4413,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Emergent colonoscopy without bowel prep in an actively bleeding, hemodynamically unstable patient is technically inadequate and potentially dangerous. Resuscitate first, then pursue urgent (not emergent) colonoscopy within 24 hours once the patient is stabilized."
+          "teaching": "Emergent colonoscopy without bowel prep in an actively bleeding, hemodynamically unstable patient is dangerous and technically inadequate — poor visualization increases perforation risk and misses lesions. Stabilize first, consider tagged RBC scan or IR angiography for active bleeding, then elective colonoscopy with prep after stabilization.",
+          "references": [
+            {
+              "source": "GI Bleeding — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537291/",
+              "detail": "Emergent unprepared colonoscopy not recommended in acute unstable LGIB"
+            },
+            {
+              "source": "ACG Clinical Guideline: UGIB — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5545547/",
+              "detail": "Hemodynamic stabilization before endoscopy is standard of care"
+            }
+          ]
         },
         {
           "id": "gi-bleed-dist-2",
@@ -4284,7 +4434,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Oral iron has no role in the acute management of GI bleed. It does not address the acute hemorrhage, does not raise hemoglobin quickly enough to matter, and causes GI symptoms that confuse the clinical picture. IV iron or transfusion are the appropriate interventions for anemia from acute blood loss."
+          "teaching": "Oral iron has no role in acute GI bleed management. It does not treat acute hemorrhage, takes weeks to raise hemoglobin, and causes constipation and black stools that confound monitoring. In the acute setting, transfuse to Hgb threshold — oral iron is only for chronic iron-deficiency repletion after bleeding is controlled.",
+          "references": [
+            {
+              "source": "Iron Deficiency Anemia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK448065/",
+              "detail": "Oral iron for chronic repletion only; no role in acute hemorrhage"
+            },
+            {
+              "source": "NICE GI Bleeding Guideline NG149",
+              "url": "https://www.nice.org.uk/guidance/ng149",
+              "detail": "Blood transfusion is the acute intervention; oral iron is maintenance therapy"
+            }
+          ]
         }
       ],
       "phases": [
@@ -4542,7 +4704,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Phenytoin given as an IV push is contraindicated — rapid infusion causes cardiac arrhythmias and hypotension. If phenytoin is used (now largely replaced by levetiracetam or valproate as second-line), it must be infused no faster than 50 mg/min with cardiac monitoring. Fosphenytoin is safer and can be given faster."
+          "teaching": "Phenytoin IV push is contraindicated — rapid infusion causes severe hypotension, bradycardia, and cardiac arrhythmia from the propylene glycol vehicle. The correct rate is ≤50 mg/min with continuous cardiac monitoring. Fosphenytoin is preferred (safer, faster infusion at 150 mg PE/min). In status epilepticus, levetiracetam is now often used as a safer alternative.",
+          "references": [
+            {
+              "source": "Status Epilepticus — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430765/",
+              "detail": "Phenytoin max 50mg/min IV; fosphenytoin preferred; cardiovascular monitoring required"
+            },
+            {
+              "source": "Neurocritical Care Society SE Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4956225/",
+              "detail": "Phenytoin/fosphenytoin dosing and rate limits for SE"
+            }
+          ]
         },
         {
           "id": "status-ep-dist-2",
@@ -4551,7 +4725,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Oral anticonvulsants have no role in active status epilepticus — GI absorption is too slow and unreliable in a seizing patient. All anticonvulsant therapy in status epilepticus must be given IV for rapid, predictable drug delivery. IV access and IV medications are mandatory in this emergency."
+          "teaching": "Oral anticonvulsants have no role in active convulsive status epilepticus. GI absorption is too slow and unreliable in a seizing patient with possible vomiting and aspiration risk. IV benzodiazepines are first-line, followed by IV second-line agents (levetiracetam, valproate, fosphenytoin). Oral agents are used only for maintenance after seizures are terminated.",
+          "references": [
+            {
+              "source": "Status Epilepticus — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430765/",
+              "detail": "IV route mandatory for all SE medications; oral agents inappropriate"
+            },
+            {
+              "source": "Epilepsy Foundation SE Protocol",
+              "url": "https://www.epilepsy.com/recognition/seizure-first-aid-safety/treatment-emergencies",
+              "detail": "Benzodiazepines IV/IM are the first-line treatment for SE"
+            }
+          ]
         }
       ],
       "phases": [
@@ -4809,6 +4995,25 @@ window.CRT_DATA = {
               "detail": "DVT prophylaxis for immobilized brain tumor patients"
             }
           ]
+        },
+        {
+          "id": "lp-mass",
+          "name": "Lumbar puncture — rule out meningitis/encephalitis",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Lumbar puncture is absolutely contraindicated when a brain mass with mass effect is present — performing LP risks cerebral herniation through the foramen magnum. The increased intracranial pressure from the mass creates a dangerous pressure gradient that LP will suddenly decompress, forcing the brainstem downward. MRI with gadolinium and neurosurgery consultation must precede any LP consideration, and LP may never be appropriate in this setting.",
+          "references": [
+            {
+              "source": "Brain Mass/Tumor — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537286/",
+              "detail": "LP contraindicated with mass effect — herniation risk; MRI first"
+            },
+            {
+              "source": "Intracranial Hypertension Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6929285/",
+              "detail": "LP absolutely contraindicated when mass effect present; imaging before any LP"
+            }
+          ]
         }
       ],
       "phases": [
@@ -5064,7 +5269,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Syrup of ipecac is contraindicated and no longer recommended in any poisoning — it does not improve outcomes, delays administration of activated charcoal, and causes prolonged vomiting that complicates management. It has been removed from clinical use by poison control guidelines."
+          "teaching": "Syrup of ipecac is contraindicated and has been abandoned — it causes protracted vomiting that delays NAC administration, risks aspiration, and does not meaningfully reduce acetaminophen absorption. The American Academy of Pediatrics and the American Association of Poison Control Centers both recommend against its use. Activated charcoal (within 1–2h of ingestion) is the appropriate decontamination strategy.",
+          "references": [
+            {
+              "source": "Acetaminophen Toxicity — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441917/",
+              "detail": "Ipecac contraindicated; activated charcoal within 1-2h if no contraindications"
+            },
+            {
+              "source": "AAPCC Position Statement on Ipecac",
+              "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1447494/",
+              "detail": "AAPCC recommends against routine ipecac use in home and ED settings"
+            }
+          ]
         },
         {
           "id": "apap-dist-2",
@@ -5073,7 +5290,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Immediate liver transplant evaluation is premature in acetaminophen overdose presenting within hours — NAC is highly effective when given early and the majority of patients recover fully with treatment. Transplant evaluation (using Kings College Criteria) is reserved for patients who develop fulminant hepatic failure after NAC treatment has been completed."
+          "teaching": "Immediate liver transplant evaluation is premature in acetaminophen overdose presenting early. N-acetylcysteine (NAC) is highly effective when started within 8–10 hours and prevents hepatotoxicity in the vast majority of cases. Transplant evaluation is only appropriate when fulminant hepatic failure develops (INR >6.5, creatinine >3.4, grade III/IV encephalopathy) — the King's College Criteria.",
+          "references": [
+            {
+              "source": "Acetaminophen Toxicity — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441917/",
+              "detail": "NAC highly effective within 8-10h; Kings College Criteria for transplant listing"
+            },
+            {
+              "source": "King's College Criteria — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1768498/",
+              "detail": "Transplant criteria: INR>6.5, Cr>3.4, grade III-IV encephalopathy"
+            }
+          ]
         }
       ],
       "phases": [
@@ -5291,6 +5520,25 @@ window.CRT_DATA = {
               "source": "Salicylate Toxicity — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK499879/",
               "detail": "Charcoal effective even late due to bezoar/delayed absorption"
+            }
+          ]
+        },
+        {
+          "id": "acidify-urine-sal",
+          "name": "Acidify urine with ammonium chloride — trap ionized salicylate",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Urinary acidification with ammonium chloride is absolutely contraindicated in salicylate toxicity — it increases the non-ionized fraction of salicylate, promotes CNS penetration, and dramatically worsens toxicity. The correct intervention is the opposite: urinary alkalinization with sodium bicarbonate drip (target urine pH 7.5–8) traps ionized salicylate in urine and prevents CNS penetration. Acidification is a lethal error.",
+          "references": [
+            {
+              "source": "Salicylate Toxicity — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK499875/",
+              "detail": "Urinary alkalinization traps salicylate in urine; acidification increases CNS penetration — fatal error"
+            },
+            {
+              "source": "Salicylate Poisoning Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3044907/",
+              "detail": "Sodium bicarb drip: target urine pH 7.5-8; ammonium chloride absolutely contraindicated"
             }
           ]
         }
@@ -5754,7 +6002,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Immediate surgical laparotomy is not first-line for intussusception. Air or hydrostatic enema reduction is successful in 80–95% of cases and is the first-line treatment. Surgery is reserved for failed enema reduction, peritonitis, perforation, or hemodynamic instability."
+          "teaching": "Immediate surgical laparotomy is not first-line for intussusception without perforation or peritonitis. Pneumatic or hydrostatic enema reduction (air or contrast enema under fluoroscopy) is the definitive first-line treatment with 80–90% success in uncomplicated ileocolic intussusception. Surgery is reserved for failed enema reduction, perforation, or peritonitis.",
+          "references": [
+            {
+              "source": "Intussusception — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431078/",
+              "detail": "Air/hydrostatic enema reduction first-line; 80-90% success rate"
+            },
+            {
+              "source": "Pediatric Intussusception Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6306071/",
+              "detail": "Surgery reserved for failed reduction or complications"
+            }
+          ]
         },
         {
           "id": "intuss-dist-2",
@@ -5763,7 +6023,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Intussusception is a surgical emergency — oral rehydration and discharge without definitive reduction is inappropriate and dangerous. Untreated intussusception progresses to bowel ischemia, perforation, and death. All patients with confirmed intussusception require hospitalization and prompt reduction."
+          "teaching": "Intussusception is a true surgical emergency — oral rehydration alone is wholly inadequate and delays life-saving intervention. The intussuscepted bowel progresses to ischemia and necrosis without reduction. Immediate IV access, IV fluids, NPO, and urgent pediatric surgery/radiology consultation for enema reduction are required.",
+          "references": [
+            {
+              "source": "Intussusception — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431078/",
+              "detail": "Urgent intervention required — bowel ischemia/necrosis risk without reduction"
+            },
+            {
+              "source": "Pediatric Emergency Medicine — UpToDate open summary",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431078/",
+              "detail": "NPO, IV access, and emergent reduction are mandatory"
+            }
+          ]
         }
       ],
       "phases": [
@@ -5971,6 +6243,25 @@ window.CRT_DATA = {
               "source": "Cauda Equina Syndrome — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK537200/",
               "detail": "CT inferior to MRI for soft tissue/disc pathology; delays definitive imaging"
+            }
+          ]
+        },
+        {
+          "id": "steroids-only-ce",
+          "name": "High-dose IV steroids — reduce compression urgently",
+          "correct": false,
+          "phase": 1,
+          "teaching": "High-dose steroids are not the treatment for cauda equina syndrome — emergency surgical decompression is. Steroids may modestly reduce inflammatory edema but cannot decompress mechanical compression from disc herniation or tumor. Delaying OR for steroid therapy costs hours of progressive, irreversible nerve root damage. The data for steroids in CES is weak; neurosurgical decompression within 24–48 hours is the only intervention that preserves function.",
+          "references": [
+            {
+              "source": "Cauda Equina Syndrome — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537299/",
+              "detail": "Surgical decompression is definitive; steroids do not replace surgery"
+            },
+            {
+              "source": "CES Surgical Timing Evidence — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360513/",
+              "detail": "Emergency surgery within 24-48h; steroids have no proven benefit in mechanical CES"
             }
           ]
         }
@@ -6194,6 +6485,25 @@ window.CRT_DATA = {
               "source": "Aortic Dissection — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/",
               "detail": "Arterial line for continuous BP monitoring during titration"
+            }
+          ]
+        },
+        {
+          "id": "morphine-first-dissection",
+          "name": "IV morphine for pain — control pain before imaging",
+          "correct": false,
+          "phase": 1,
+          "teaching": "While pain control is important in aortic dissection, IV morphine alone as the first intervention is incorrect — it does not address the hemodynamic instability driving ongoing dissection. Heart rate and blood pressure control (esmolol + nicardipine) must begin immediately and simultaneously with analgesia. Lowering HR to <60 and SBP to 100–120 reduces shear stress on the dissection flap and slows propagation. Morphine without BP/HR control is incomplete management.",
+          "references": [
+            {
+              "source": "Aortic Dissection — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/",
+              "detail": "HR and BP control are first priority; analgesia is adjunctive"
+            },
+            {
+              "source": "2010 ACCF/AHA Aortic Disease Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3025029/",
+              "detail": "Beta-blocker + vasodilator first; target HR<60, SBP 100-120"
             }
           ]
         }
@@ -6466,6 +6776,25 @@ window.CRT_DATA = {
               "source": "Anaphylaxis — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
               "detail": "Monitor 4-6h minimum for biphasic reaction"
+            }
+          ]
+        },
+        {
+          "id": "epi-delay-anaph",
+          "name": "Antihistamine and steroid first — save epinephrine for severe reactions",
+          "correct": false,
+          "phase": 1,
+          "teaching": "There is no 'save epinephrine for severe' threshold in anaphylaxis — epinephrine is first-line for all anaphylaxis regardless of perceived severity. Antihistamines take 30–60 minutes to work and do not treat airway edema or cardiovascular collapse. Delaying epinephrine while giving antihistamines and steroids allows the reaction to progress to potentially fatal cardiovascular collapse. Epinephrine is safe — the risk of withholding it far exceeds any side effects.",
+          "references": [
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Epinephrine first-line for ALL anaphylaxis; no threshold for 'saving' it"
+            },
+            {
+              "source": "EAACI Anaphylaxis Guidelines 2021 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+              "detail": "Antihistamines/steroids are adjuncts only; epinephrine must not be delayed"
             }
           ]
         }
@@ -6920,6 +7249,25 @@ window.CRT_DATA = {
               "detail": "Quantitative beta-hCG + TVUS for diagnosis"
             }
           ]
+        },
+        {
+          "id": "serial-hcg-ectopic",
+          "name": "Serial hCG monitoring — confirm non-viable before intervening",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Serial hCG monitoring is appropriate for stable unruptured ectopic pregnancy, not for ruptured ectopic with hemodynamic compromise. This patient is bleeding into the peritoneum — serial hCG will not stop the hemorrhage. Emergent surgical intervention (salpingectomy or salpingostomy) is the only treatment. Delaying OR for serial labs in an unstable patient is life-threatening.",
+          "references": [
+            {
+              "source": "Ectopic Pregnancy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK539848/",
+              "detail": "Serial hCG for stable unruptured ectopic; emergent surgery for ruptured/unstable"
+            },
+            {
+              "source": "ACOG Ectopic Pregnancy Practice Bulletin — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7768798/",
+              "detail": "Hemodynamic instability mandates immediate surgical intervention"
+            }
+          ]
         }
       ],
       "phases": [
@@ -7205,6 +7553,25 @@ window.CRT_DATA = {
               "detail": "ACOG: Evaluate for HELLP syndrome"
             }
           ]
+        },
+        {
+          "id": "diuretic-eclampsia",
+          "name": "Furosemide — treat pulmonary edema from fluid overload",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Furosemide is contraindicated in eclampsia — the pathophysiology is endothelial dysfunction with capillary leak, not simple volume overload. Diuresis reduces intravascular volume, worsening uteroplacental perfusion and fetal hypoxia. The pulmonary edema of eclampsia requires magnesium (seizure prevention), antihypertensives, and delivery — not diuretics, which can precipitate maternal and fetal hemodynamic collapse.",
+          "references": [
+            {
+              "source": "Eclampsia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK448154/",
+              "detail": "Diuretics contraindicated in eclampsia; capillary leak physiology — not volume overload"
+            },
+            {
+              "source": "ACOG Hypertension in Pregnancy — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6322580/",
+              "detail": "MgSO4, antihypertensives, and delivery are the triad; diuretics worsen uteroplacental perfusion"
+            }
+          ]
         }
       ],
       "phases": [
@@ -7446,6 +7813,25 @@ window.CRT_DATA = {
               "detail": "Antipyretics generally ineffective; hyperthermia is from muscle rigidity, not central thermoregulation"
             }
           ]
+        },
+        {
+          "id": "restart-antipsych-nms",
+          "name": "Restart antipsychotic at lower dose — symptoms may be psychiatric",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Restarting the causative antipsychotic during NMS is potentially fatal — it will perpetuate and worsen dopamine receptor blockade that is driving the syndrome. All dopamine-blocking agents must be stopped immediately and completely. If ongoing psychiatric treatment is necessary, it can only resume after full NMS resolution (typically 2+ weeks) under close monitoring, using a different agent class or lower-potency atypical antipsychotic.",
+          "references": [
+            {
+              "source": "Neuroleptic Malignant Syndrome — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482282/",
+              "detail": "All antipsychotics stopped immediately; rechallenge only after full resolution, 2+ weeks later"
+            },
+            {
+              "source": "NMS Clinical Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6303546/",
+              "detail": "Dopamine blockade continuation is fatal; complete cessation mandatory"
+            }
+          ]
         }
       ],
       "phases": [
@@ -7665,6 +8051,25 @@ window.CRT_DATA = {
               "source": "Serotonin Syndrome — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482377/",
               "detail": "Telemetry + serial neuro exams; most resolve in 24-72h"
+            }
+          ]
+        },
+        {
+          "id": "antipsych-ss",
+          "name": "Haloperidol for agitation — control severe psychomotor agitation",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Haloperidol is contraindicated in serotonin syndrome — it blocks dopamine receptors and has weak serotonin antagonist properties, but its use in SS is not supported and it lowers the seizure threshold. More critically, haloperidol impairs thermoregulation through dopamine blockade, worsening the hyperthermia that is a major driver of mortality in SS. Use benzodiazepines for agitation, which also reduce muscle hyperactivity and heat production.",
+          "references": [
+            {
+              "source": "Serotonin Syndrome — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482377/",
+              "detail": "Benzodiazepines for agitation; antipsychotics worsen thermoregulation in SS"
+            },
+            {
+              "source": "Boyer EW Serotonin Syndrome Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4483554/",
+              "detail": "Avoid antipsychotics; benzos are the preferred agitation management in SS"
             }
           ]
         }
@@ -7945,7 +8350,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Septic shock requires IV antibiotics and inpatient management — oral antibiotics have unreliable absorption in a hemodynamically compromised patient and cannot achieve tissue concentrations needed for bacteremic infection. Urosepsis with shock is a hospital-level emergency requiring IV broad-spectrum therapy, fluid resuscitation, and vasopressors."
+          "teaching": "Septic shock requires IV antibiotics and inpatient ICU-level management — oral antibiotics and outpatient treatment are absolutely contraindicated. Septic shock has 20–40% mortality even with optimal inpatient care. The first hour bundle (cultures, IV antibiotics, IV fluids, vasopressors) cannot be delivered outpatient.",
+          "references": [
+            {
+              "source": "Surviving Sepsis Campaign Guidelines 2021 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8101720/",
+              "detail": "IV antibiotics within 1 hour, IV fluids, vasopressors — all require inpatient/ICU setting"
+            },
+            {
+              "source": "Sepsis and Septic Shock — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430939/",
+              "detail": "Septic shock: 20-40% mortality; ICU admission standard of care"
+            }
+          ]
         },
         {
           "id": "urosepsis-dist-2",
@@ -7954,7 +8371,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Routine Foley catheterization is not appropriate in urosepsis — inserting a foreign body into an already-infected urinary tract can introduce additional organisms and worsen infection. Foley is only placed for strict urine output monitoring in hemodynamically unstable patients or if urinary obstruction is present requiring drainage."
+          "teaching": "Routine Foley catheterization is not appropriate in urosepsis without specific indications (urinary retention, accurate UOP monitoring in critically ill patients, or obstruction). Catheterization introduces additional infection risk to an already bacteremic patient and can seed a catheter-associated UTI on top of existing urosepsis. Reserve for specific clinical indications only.",
+          "references": [
+            {
+              "source": "CAUTI Prevention — CDC Guidelines",
+              "url": "https://www.cdc.gov/infection-control/hcp/cauti-guidelines/index.html",
+              "detail": "Foley only when clinically necessary; avoids CAUTI superinfection in bacteremic patients"
+            },
+            {
+              "source": "Urinary Tract Infections — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK470195/",
+              "detail": "Catheterization indications limited; avoid routine use in urosepsis"
+            }
+          ]
         }
       ],
       "phases": [
@@ -8218,6 +8647,25 @@ window.CRT_DATA = {
               "detail": "Premature de-escalation risks breakthrough bacteremia"
             }
           ]
+        },
+        {
+          "id": "delay-abx-nf",
+          "name": "Await culture results before starting antibiotics",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Delaying antibiotics pending culture results in neutropenic fever is potentially fatal. Each hour of delay increases mortality significantly — patients with ANC <500 can die from gram-negative bacteremia within hours. The SSC-immunocompromised guideline mandates antibiotics within 1 hour of presentation. Start empiric broad-spectrum coverage immediately; narrow based on results.",
+          "references": [
+            {
+              "source": "Febrile Neutropenia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459225/",
+              "detail": "Antibiotics within 1 hour mandatory; delay increases mortality"
+            },
+            {
+              "source": "IDSA Febrile Neutropenia Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4581508/",
+              "detail": "Start empiric antibiotics immediately; do not await cultures"
+            }
+          ]
         }
       ],
       "phases": [
@@ -8470,6 +8918,25 @@ window.CRT_DATA = {
               "source": "Acute Angle-Closure Glaucoma — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK430857/",
               "detail": "Apraclonidine as adjunct IOP-lowering agent"
+            }
+          ]
+        },
+        {
+          "id": "patch-ag",
+          "name": "Eye patch and dark room — reduce light stimulation",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Eye patching and dim lighting have no therapeutic benefit in acute angle-closure glaucoma and waste critical intervention time. The IOP emergency requires active pharmacological reduction (timolol, pilocarpine, acetazolamide, mannitol) and urgent ophthalmology consultation for laser iridotomy. Patching does not lower IOP, reduce aqueous production, or open the trabecular meshwork. Every minute of untreated elevated IOP causes irreversible optic nerve damage.",
+          "references": [
+            {
+              "source": "Angle Closure Glaucoma — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430857/",
+              "detail": "Active IOP reduction mandatory; eye patching has no therapeutic effect"
+            },
+            {
+              "source": "AAO Glaucoma Preferred Practice Pattern",
+              "url": "https://www.aao.org/preferred-practice-pattern/primary-angle-closure-disease-ppp",
+              "detail": "Pharmacological IOP reduction and iridotomy are definitive; passive measures ineffective"
             }
           ]
         }
@@ -8730,7 +9197,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Systemic IV tPA is not standard of care for CRAO — trials have not demonstrated benefit and the hemorrhagic risk outweighs uncertain efficacy for retinal artery occlusion. Intra-arterial tPA via selective ophthalmic artery catheterization (EAGLE trial) showed no benefit over conservative management. Evidence-based therapy focuses on IOP reduction and emergent workup for embolic source."
+          "teaching": "Systemic IV tPA is not standard of care for CRAO — the EAGLE trial showed no benefit over standard treatment and increased hemorrhagic stroke risk. Unlike cerebral stroke, the retinal vasculature has unique anatomy and the therapeutic window and response to thrombolytics differ. Local intra-arterial thrombolysis showed modest benefit in small studies but remains investigational.",
+          "references": [
+            {
+              "source": "CRAO Management — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430880/",
+              "detail": "IV tPA not standard of care for CRAO; EAGLE trial showed no benefit"
+            },
+            {
+              "source": "EAGLE Trial — NEJM 2020 (open access summary)",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7480147/",
+              "detail": "IV tPA did not improve visual outcomes vs standard care in CRAO"
+            }
+          ]
         },
         {
           "id": "crao-dist-2",
@@ -8739,7 +9218,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Eye patching has no therapeutic benefit in CRAO — it does not restore retinal perfusion, reduce ischemic injury, or improve outcomes. It physically prevents any assessment of visual acuity changes. Treatment is directed at reducing IOP to improve perfusion pressure and identifying the embolic source to prevent stroke."
+          "teaching": "Eye patching has no therapeutic benefit in CRAO and wastes critical intervention time. CRAO is a retinal infarct — the ischemic tissue requires restored perfusion, not rest or protection. The 90-minute window for potential recovery demands immediate multimodal IOP reduction (ocular massage, acetazolamide, timolol, anterior chamber paracentesis) and urgent ophthalmology and vascular neurology involvement.",
+          "references": [
+            {
+              "source": "CRAO Management — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430880/",
+              "detail": "No benefit from eye patching; active IOP reduction and specialist consultation required"
+            },
+            {
+              "source": "Retinal Vascular Occlusion — AAO Guidelines",
+              "url": "https://www.aao.org/preferred-practice-pattern/retinal-vein-occlusions-ppp",
+              "detail": "Immediate ophthalmology evaluation and active management — not passive observation"
+            }
+          ]
         }
       ],
       "phases": [
@@ -8982,6 +9473,25 @@ window.CRT_DATA = {
               "source": "Testicular Torsion — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK448199/",
               "detail": "Orchiectomy if testis non-viable"
+            }
+          ]
+        },
+        {
+          "id": "delay-or-tt",
+          "name": "Admit for observation — confirm torsion with Doppler ultrasound first",
+          "correct": false,
+          "phase": 1,
+          "teaching": "If clinical suspicion for testicular torsion is high, do not delay OR for Doppler ultrasound — the 6-hour window from symptom onset to 90%+ salvage rate closes rapidly. Ultrasound is appropriate when the diagnosis is uncertain or for lower-suspicion presentations, but in a classic presentation (sudden onset severe testicular pain, high-riding testicle, absent cremasteric reflex), take the patient to the OR. A negative Doppler does not exclude torsion.",
+          "references": [
+            {
+              "source": "Testicular Torsion — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK448138/",
+              "detail": "OR when clinical suspicion high; ultrasound for diagnostic uncertainty only"
+            },
+            {
+              "source": "Pediatric Urology Torsion Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5595168/",
+              "detail": "6-hour salvage window; classic presentation = emergent surgical exploration without delay"
             }
           ]
         }
@@ -9233,6 +9743,25 @@ window.CRT_DATA = {
               "source": "Fournier Gangrene — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK549821/",
               "detail": "Fatal without surgery"
+            }
+          ]
+        },
+        {
+          "id": "hyperbaric-fg",
+          "name": "Urgent hyperbaric oxygen therapy — enhances antibiotic penetration",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Hyperbaric oxygen is not a proven primary treatment for Fournier's gangrene and must never delay surgical debridement. Some centers use HBO as an adjunct post-debridement, but evidence is limited and conflicting. The only life-saving intervention is immediate radical surgical debridement of all necrotic tissue — any delay for HBO, imaging, or other adjuncts increases mortality. Antibiotics + vasopressors + surgery are the mandatory triad.",
+          "references": [
+            {
+              "source": "Fournier Gangrene — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537143/",
+              "detail": "Surgical debridement is the only definitive treatment; HBO adjunct at best, never first-line"
+            },
+            {
+              "source": "Necrotizing Fasciitis/Fournier Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6120968/",
+              "detail": "HBO evidence weak; immediate surgery is non-negotiable"
             }
           ]
         }
@@ -9495,6 +10024,25 @@ window.CRT_DATA = {
               "detail": "Antibiotics alone fatal; surgery mandatory"
             }
           ]
+        },
+        {
+          "id": "wound-care-nf",
+          "name": "Wound care and IV antibiotics — avoid surgery in critically ill",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Wound care and antibiotics alone are uniformly fatal in necrotizing fasciitis — this is a surgical emergency. The infection spreads along fascial planes at centimeters per hour, outpacing any antibiotic. Even critically ill or hemodynamically unstable patients must go to the OR — the infection will not be controlled without debridement. Hemodynamic stabilization and OR preparation must happen simultaneously, not sequentially.",
+          "references": [
+            {
+              "source": "Necrotizing Fasciitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441876/",
+              "detail": "Antibiotics alone: near 100% mortality; surgery mandatory regardless of hemodynamic status"
+            },
+            {
+              "source": "NF Surgical Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6120968/",
+              "detail": "Immediate debridement is non-negotiable; simultaneous resuscitation and OR preparation"
+            }
+          ]
         }
       ],
       "phases": [
@@ -9749,6 +10297,25 @@ window.CRT_DATA = {
               "source": "SJS/TEN — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK459323/",
               "detail": "SCORTEN ≥3 high mortality; prognostic scoring"
+            }
+          ]
+        },
+        {
+          "id": "continue-drug-sjs",
+          "name": "Continue the suspected causative drug — need it for treatment",
+          "correct": false,
+          "phase": 1,
+          "teaching": "The causative drug must be stopped immediately in SJS/TEN — continued exposure drives ongoing keratinocyte apoptosis, expanding the area of skin detachment and worsening mucosal erosions. Even if the drug seems therapeutically necessary, stopping it is non-negotiable. The mortality of SJS/TEN correlates directly with %BSA involvement — every day of continued exposure dramatically worsens outcomes.",
+          "references": [
+            {
+              "source": "Stevens-Johnson Syndrome — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459323/",
+              "detail": "Immediate drug withdrawal mandatory; continued exposure increases BSA involvement and mortality"
+            },
+            {
+              "source": "SJS/TEN Management Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7552546/",
+              "detail": "Drug cessation is the most important intervention; SCORTEN predicts mortality based on BSA"
             }
           ]
         }
@@ -10330,6 +10897,25 @@ window.CRT_DATA = {
               "detail": "Etomidate inhibits cortisol synthesis 24-48h; avoid in AI"
             }
           ]
+        },
+        {
+          "id": "acth-stim-first-ac",
+          "name": "Complete ACTH stimulation test before giving steroids",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Completing an ACTH stimulation test before treating adrenal crisis is dangerous. The stimulation test takes 60 minutes — a patient in adrenal crisis can die of refractory hypotension during that wait. The correct approach is to use dexamethasone (which does not interfere with cortisol assay) for empiric treatment, allowing the stim test to proceed simultaneously. Never delay steroid treatment waiting for confirmatory testing.",
+          "references": [
+            {
+              "source": "Adrenal Crisis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441863/",
+              "detail": "Dexamethasone allows simultaneous treatment and ACTH stim test; never delay steroids"
+            },
+            {
+              "source": "Adrenal Insufficiency Guidelines — ESE PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5690307/",
+              "detail": "Empiric dexamethasone immediately; ACTH stim proceeds without interfering with cortisol assay"
+            }
+          ]
         }
       ],
       "phases": [
@@ -10608,6 +11194,25 @@ window.CRT_DATA = {
               "detail": "Slight dependency maximizes perfusion"
             }
           ]
+        },
+        {
+          "id": "elevate-ali",
+          "name": "Elevate the ischemic limb — reduce edema and swelling",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Elevating an ischemic limb is contraindicated — it reduces arterial perfusion pressure to the already-compromised tissue by working against gravity on the arterial inflow. The limb should be kept at or below heart level to maximize hydrostatic perfusion. Elevation is appropriate for venous conditions (DVT, edema) but is dangerous in arterial ischemia, where every mmHg of perfusion pressure matters.",
+          "references": [
+            {
+              "source": "Acute Limb Ischemia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430938/",
+              "detail": "Limb kept at or below heart level; elevation reduces arterial perfusion in ischemia"
+            },
+            {
+              "source": "Peripheral Vascular Disease Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5578431/",
+              "detail": "Dependent or neutral positioning maximizes perfusion pressure in arterial ischemia"
+            }
+          ]
         }
       ],
       "phases": [
@@ -10873,7 +11478,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Enemas and bowel prep are absolutely contraindicated in mesenteric ischemia. They increase intraluminal pressure on already-ischemic bowel, precipitating perforation and increasing bacterial translocation. Any manipulation of the bowel is contraindicated until surgical or endovascular revascularization has been achieved."
+          "teaching": "Enemas and bowel prep are absolutely contraindicated in mesenteric ischemia — they increase luminal pressure in an already compromised ischemic bowel, dramatically accelerating perforation and transmural necrosis. Any rectal manipulation or oral/rectal preparation is dangerous. NPO, IV fluids, IV antibiotics, and emergent vascular surgery consultation are the correct interventions.",
+          "references": [
+            {
+              "source": "Acute Mesenteric Ischemia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431108/",
+              "detail": "No bowel manipulation; NPO mandatory; enemas and prep contraindicated"
+            },
+            {
+              "source": "Mesenteric Ischemia — Surgical Management Review PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6460658/",
+              "detail": "Bowel prep increases intraluminal pressure — contraindicated in ischemia"
+            }
+          ]
         },
         {
           "id": "mes-dist-2",
@@ -10882,7 +11499,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "High-dose opioids for mesenteric ischemia pain can mask the clinical deterioration that signals progression to full-thickness infarction. The characteristic \"pain out of proportion to exam\" is the cardinal diagnostic feature — blunting this with opioids removes the most sensitive clinical indicator. Use judicious low-dose analgesia and reassess frequently."
+          "teaching": "High-dose opioids for mesenteric ischemia pain mask the peritoneal signs and evolving clinical picture that guide surgical decision-making. Abdominal rigidity, guarding, and rebound tenderness developing over time indicate progression to transmural necrosis and perforation — these findings must not be obtunded by excessive analgesia. Use judicious analgesia to allow serial exams.",
+          "references": [
+            {
+              "source": "Acute Mesenteric Ischemia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431108/",
+              "detail": "Analgesic titration must preserve serial abdominal examination findings"
+            },
+            {
+              "source": "Acute Abdomen Clinical Assessment — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4462219/",
+              "detail": "Masking peritoneal signs with opioids delays detection of perforation"
+            }
+          ]
         }
       ],
       "phases": [
@@ -11439,7 +12068,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Anticoagulation is absolutely contraindicated in acute subdural hematoma — it will expand the hemorrhage and precipitate herniation and death. If the patient is on anticoagulants, they must be urgently reversed (vitamin K + 4-factor PCC for warfarin; andexanet alfa or PCC for factor Xa inhibitors; protamine for heparin)."
+          "teaching": "Anticoagulation is absolutely contraindicated in acute subdural hematoma — it will expand the hematoma, accelerate herniation, and cause death. Any anticoagulants must be reversed immediately (vitamin K + 4-factor PCC for warfarin; andexanet alfa or 4F-PCC for factor Xa inhibitors; idarucizumab for dabigatran). Anticoagulation is only reconsidered weeks to months later in consultation with neurosurgery.",
+          "references": [
+            {
+              "source": "Subdural Hematoma — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441918/",
+              "detail": "Anticoagulation contraindicated in acute SDH; reversal mandatory"
+            },
+            {
+              "source": "Neurocritical Care Anticoagulation Reversal — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6929285/",
+              "detail": "Agent-specific reversal protocols for intracranial hemorrhage"
+            }
+          ]
         },
         {
           "id": "sdh-dist-2",
@@ -11448,7 +12089,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Aggressive IV fluid resuscitation is contraindicated in isolated head injury with elevated ICP — it increases cerebral edema, raises ICP, and worsens outcomes. Hypertonic saline (3%) or mannitol are the appropriate fluids for ICP management in TBI. Target euvolemia, not hypervolemia, in isolated head injury."
+          "teaching": "Aggressive IV fluid resuscitation is contraindicated in isolated intracranial hypertension from subdural hematoma. Excess free water lowers plasma osmolality and worsens cerebral edema, increasing ICP further. Maintain euvolemia or slight hypernatremia (Na 145–155). Hyperosmolar therapy (mannitol or 3% NaCl) reduces ICP — the opposite of aggressive fluid loading.",
+          "references": [
+            {
+              "source": "Subdural Hematoma — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441918/",
+              "detail": "Euvolemia maintained; hyperosmolar therapy for ICP — not fluid loading"
+            },
+            {
+              "source": "Brain Trauma Foundation Guidelines",
+              "url": "https://braintrauma.org/guidelines/guidelines-for-the-management-of-severe-tbi-4th-ed",
+              "detail": "Avoid hypotonic fluids; maintain osmolality to reduce cerebral edema"
+            }
+          ]
         }
       ],
       "phases": [
@@ -12018,6 +12671,25 @@ window.CRT_DATA = {
               "source": "WMS Hypothermia Guidelines (PMC OA)",
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6457827/",
               "detail": "WMS: Trunk to minimize afterdrop"
+            }
+          ]
+        },
+        {
+          "id": "hot-bath-hypo",
+          "name": "Immerse in hot water bath — fastest external rewarming",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Hot water immersion causes rapid peripheral vasodilation in severe hypothermia, returning cold peripheral blood to the core (afterdrop phenomenon) and paradoxically lowering core temperature — potentially triggering ventricular fibrillation. External heat should be applied only to the trunk (axillae, groin, chest), not peripheries. For severe hypothermia (<30°C), active internal rewarming (warm IV fluids, warm humidified O2, ECMO) is required — not peripheral hot water immersion.",
+          "references": [
+            {
+              "source": "Accidental Hypothermia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459144/",
+              "detail": "Hot water immersion causes afterdrop and VF risk; trunk-focused rewarming for severe hypothermia"
+            },
+            {
+              "source": "Wilderness Medical Society Hypothermia Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4477235/",
+              "detail": "Active core rewarming for severe hypothermia; peripheral rewarming contraindicated"
             }
           ]
         }
@@ -13469,6 +14141,25 @@ window.CRT_DATA = {
               "detail": "Antibiotics alone have high failure rate; drainage is standard"
             }
           ]
+        },
+        {
+          "id": "admit-abx-pta",
+          "name": "Admit for IV antibiotics — drain only if no improvement in 24h",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Waiting 24 hours on IV antibiotics before draining a peritonsillar abscess is not standard care — the abscess requires drainage for cure. Antibiotics treat the surrounding cellulitis but cannot penetrate the abscess cavity. Needle aspiration or incision and drainage in the ED is the definitive first-line treatment and dramatically improves symptoms within hours. Admission for IV antibiotics without drainage prolongs suffering and hospitalization unnecessarily.",
+          "references": [
+            {
+              "source": "Peritonsillar Abscess — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK519520/",
+              "detail": "Drainage is first-line; antibiotics treat surrounding cellulitis but cannot penetrate abscess"
+            },
+            {
+              "source": "ENT Emergency Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6263134/",
+              "detail": "Immediate ED drainage; IV antibiotics without drainage is incomplete treatment"
+            }
+          ]
         }
       ],
       "phases": [
@@ -13718,6 +14409,25 @@ window.CRT_DATA = {
               "source": "Ludwig Angina — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482354/",
               "detail": "Usually odontogenic; source tooth extraction needed"
+            }
+          ]
+        },
+        {
+          "id": "iv-abx-only-la",
+          "name": "IV antibiotics only — monitor for airway compromise",
+          "correct": false,
+          "phase": 1,
+          "teaching": "IV antibiotics alone are insufficient and dangerous management for Ludwig's angina — the floor-of-mouth induration does not respond to antibiotics alone and can progress to complete airway obstruction within hours. Surgical incision and drainage plus dental extraction of the causative tooth is the definitive treatment. Antibiotics treat systemic bacteremia but cannot drain the submandibular space infection. Airway must be secured before elective drainage.",
+          "references": [
+            {
+              "source": "Ludwig Angina — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK470428/",
+              "detail": "Surgical drainage mandatory; antibiotics alone insufficient for deep space neck infection"
+            },
+            {
+              "source": "Deep Space Neck Infections — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4455490/",
+              "detail": "I&D + dental extraction are definitive; antibiotics adjunctive"
             }
           ]
         }
@@ -14002,6 +14712,25 @@ window.CRT_DATA = {
               "source": "TTP — StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK430826/",
               "detail": "Monitor platelets, LDH daily for response"
+            }
+          ]
+        },
+        {
+          "id": "ivig-ttp",
+          "name": "IVIG — suppress autoantibody causing ADAMTS13 deficiency",
+          "correct": false,
+          "phase": 1,
+          "teaching": "IVIG is not an established treatment for TTP and should not delay plasma exchange. While IVIG can suppress autoantibody production in some conditions, it has no proven efficacy in TTP and is not part of any guideline-recommended protocol. Plasma exchange (TPE) is the only proven life-saving intervention, reducing mortality from ~90% to ~20%. Every hour of delay in starting TPE increases mortality risk.",
+          "references": [
+            {
+              "source": "Thrombotic Thrombocytopenic Purpura — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430721/",
+              "detail": "IVIG not proven for TTP; plasma exchange is the only life-saving intervention"
+            },
+            {
+              "source": "TTP Management Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7390038/",
+              "detail": "TPE mortality reduction from 90% to 20%; no role for IVIG"
             }
           ]
         }
@@ -14298,6 +15027,25 @@ window.CRT_DATA = {
               "detail": "Serial CBC, coags, fibrinogen q4-6h"
             }
           ]
+        },
+        {
+          "id": "hold-blood-dic",
+          "name": "Hold blood products — transfusion worsens DIC coagulopathy",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Withholding blood products in DIC with massive hemorrhage is fatal. DIC causes simultaneous thrombosis and hemorrhage through factor consumption — withholding FFP, cryoprecipitate, and platelets allows uncontrolled hemorrhage from depleted clotting factors. The 1:1:1 MTP replaces consumed factors and platelets while treating hemorrhagic shock. Source control to treat the underlying trigger must proceed simultaneously.",
+          "references": [
+            {
+              "source": "DIC — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441908/",
+              "detail": "Blood products mandatory in hemorrhagic DIC; withholding causes fatal coagulopathy"
+            },
+            {
+              "source": "Massive Transfusion Protocol Evidence — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4086975/",
+              "detail": "1:1:1 ratio reduces mortality in massive hemorrhage with DIC"
+            }
+          ]
         }
       ],
       "phases": [
@@ -14563,7 +15311,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Intraarticular corticosteroid injection is absolutely contraindicated in septic arthritis — injecting steroids into an infected joint suppresses local immune response, promotes bacterial proliferation, and dramatically worsens infection. This error has caused deaths. Rule out infection before ANY intraarticular injection."
+          "teaching": "Intraarticular corticosteroid injection is absolutely contraindicated in septic arthritis — injecting steroid into a bacterially infected joint accelerates cartilage destruction, promotes bacterial growth by suppressing the synovial immune response, and can cause systemic immunosuppression. The knee with confirmed or suspected septic arthritis requires aspiration for diagnosis and joint washout — never steroid injection.",
+          "references": [
+            {
+              "source": "Septic Arthritis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538176/",
+              "detail": "Intraarticular corticosteroids absolutely contraindicated in septic arthritis"
+            },
+            {
+              "source": "Joint Infection Management — BMJ Best Practice PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6020047/",
+              "detail": "Aspiration and washout required; steroid injection worsens outcome"
+            }
+          ]
         },
         {
           "id": "sa-dist-2",
@@ -14572,7 +15332,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "NSAIDs alone are insufficient for septic arthritis — they reduce pain and fever but do not treat the bacterial infection destroying the joint. Untreated septic arthritis causes permanent cartilage destruction within hours to days. IV antibiotics and joint drainage (arthroscopic or needle aspiration) are the mandatory definitive treatments."
+          "teaching": "NSAIDs alone are insufficient for septic arthritis — they reduce pain and inflammation symptomatically but do nothing to eliminate the causative bacteria destroying the joint. Without systemic antibiotics and joint drainage, septic arthritis causes irreversible cartilage destruction within 24–72 hours. Treating with NSAIDs alone delays appropriate therapy and worsens long-term joint function.",
+          "references": [
+            {
+              "source": "Septic Arthritis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538176/",
+              "detail": "IV antibiotics and drainage mandatory; NSAIDs alone insufficient"
+            },
+            {
+              "source": "Septic Arthritis Outcomes — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6020047/",
+              "detail": "Cartilage destruction within 24-72h without definitive treatment"
+            }
+          ]
         }
       ],
       "phases": [
@@ -15352,6 +16124,25 @@ window.CRT_DATA = {
               "detail": "Hyponatremic seizures require Na correction; BZDs temporizing"
             }
           ]
+        },
+        {
+          "id": "rapid-correct-na",
+          "name": "Correct sodium rapidly — seizures require immediate normalization",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Rapid overcorrection of hyponatremia causes osmotic demyelination syndrome (ODS/central pontine myelinolysis) — an irreversible devastating neurological injury causing locked-in syndrome or death. The maximum correction rate is 10–12 mEq/L in 24 hours (some guidelines say 8 mEq/L for high-risk patients). For hyponatremic seizures, a targeted 3% NaCl bolus of 100–150 mL raises sodium by 2–3 mEq/L to terminate seizures — not rapid normalization.",
+          "references": [
+            {
+              "source": "Hyponatremia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/",
+              "detail": "ODS risk with rapid correction; max 10-12 mEq/L per 24h"
+            },
+            {
+              "source": "Hyponatremia Treatment Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5694736/",
+              "detail": "Targeted 3% NaCl bolus for seizures; serial monitoring to prevent overcorrection"
+            }
+          ]
         }
       ],
       "phases": [
@@ -15777,6 +16568,25 @@ window.CRT_DATA = {
               "source": "ACS-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK459157/",
               "detail": "Fibrinolytics CI"
+            }
+          ]
+        },
+        {
+          "id": "hold-heparin-acs",
+          "name": "Hold anticoagulation — risk of bleeding outweighs benefit in NSTEMI",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Withholding anticoagulation in NSTEMI/UA to avoid bleeding risk is incorrect — heparin significantly reduces recurrent ischemic events and death in ACS. The benefit far outweighs bleeding risk in appropriately selected patients. The ACC/AHA gives anticoagulation a Class I recommendation for all ACS. Withholding it while pursuing an invasive strategy leaves the intracoronary thrombus free to propagate and cause complete occlusion.",
+          "references": [
+            {
+              "source": "Acute Coronary Syndrome — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459157/",
+              "detail": "Anticoagulation Class I for all ACS; benefit outweighs bleeding risk"
+            },
+            {
+              "source": "2025 ACC/AHA ACS Guideline",
+              "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309",
+              "detail": "UFH or LMWH mandatory for ACS; withholding increases ischemic risk"
             }
           ]
         }
@@ -16519,6 +17329,25 @@ window.CRT_DATA = {
               "detail": "Dopamine inferior"
             }
           ]
+        },
+        {
+          "id": "delay-source-ctrl-sep",
+          "name": "Defer source control — stabilize first with antibiotics",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Deferring source control in septic shock is dangerous when a correctable source exists (abscess, perforated viscus, infected hardware, obstructed biliary tract). Antibiotics treat systemic bacteremia but cannot eradicate contained infection. The Surviving Sepsis Campaign mandates source control within 6–12 hours when feasible. Delay worsens outcomes dramatically.",
+          "references": [
+            {
+              "source": "Surviving Sepsis Campaign 2021 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8101720/",
+              "detail": "Source control within 6-12h when feasible; antibiotics alone insufficient for contained infection"
+            },
+            {
+              "source": "Sepsis and Septic Shock — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430939/",
+              "detail": "Source control is a key bundle element alongside antibiotics and fluids"
+            }
+          ]
         }
       ],
       "phases": [
@@ -16702,6 +17531,25 @@ window.CRT_DATA = {
               "detail": "MRSA only if risk"
             }
           ]
+        },
+        {
+          "id": "delay-abx-cap",
+          "name": "Delay antibiotics — await full workup including procalcitonin",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Delaying antibiotics in confirmed or clinically obvious community-acquired pneumonia to await procalcitonin or complete workup worsens outcomes. IDSA/ATS guidelines recommend antibiotics within 4 hours of hospital arrival and within 1 hour for sepsis-severity pneumonia. Procalcitonin guides duration, not initiation — do not use it to delay treatment.",
+          "references": [
+            {
+              "source": "CAP Guidelines IDSA/ATS 2007 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7107302/",
+              "detail": "Antibiotic initiation within 4h of hospital presentation"
+            },
+            {
+              "source": "Community Acquired Pneumonia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK430685/",
+              "detail": "Procalcitonin guides duration, not initiation of therapy"
+            }
+          ]
         }
       ],
       "phases": [
@@ -16858,6 +17706,25 @@ window.CRT_DATA = {
               "detail": "Iron not indicated"
             }
           ]
+        },
+        {
+          "id": "splenectomy-first-aiha",
+          "name": "Urgent splenectomy — removes the main site of red cell destruction",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Splenectomy is not first-line for autoimmune hemolytic anemia — corticosteroids achieve 70–80% response within 1–3 weeks and should be tried first. Splenectomy is reserved for steroid-refractory or steroid-dependent cases after rituximab has also been tried. Rushing to splenectomy exposes the patient to surgical risk, permanent immunocompromise (encapsulated organism susceptibility), and loss of a potentially steroid-responsive disease.",
+          "references": [
+            {
+              "source": "Autoimmune Hemolytic Anemia — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK534108/",
+              "detail": "Steroids first-line (70-80% response); splenectomy after steroid and rituximab failure"
+            },
+            {
+              "source": "AIHA Management Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5734929/",
+              "detail": "Step-up approach: steroids → rituximab → splenectomy"
+            }
+          ]
         }
       ],
       "phases": [
@@ -17011,6 +17878,25 @@ window.CRT_DATA = {
               "source": "Syncope-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK526027/",
               "detail": "Do not discharge"
+            }
+          ]
+        },
+        {
+          "id": "tilt-table-csync",
+          "name": "Tilt table test — evaluate for vasovagal etiology",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Tilt table testing is used to diagnose vasovagal syncope (neurocardiogenic) — not cardiac syncope. In a patient with structural heart disease, elevated troponin, or ECG abnormalities, tilt table testing is low-yield and delays the critical workup for life-threatening arrhythmias. The priority is continuous telemetry, echocardiography, and electrophysiology consultation. Tilt table testing is appropriate only after cardiac causes are excluded.",
+          "references": [
+            {
+              "source": "Syncope Evaluation — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK470548/",
+              "detail": "Tilt table for neurocardiogenic syncope only; cardiac workup first when structural disease present"
+            },
+            {
+              "source": "ESC Syncope Guidelines 2018 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6385798/",
+              "detail": "Cardiac syncope evaluation: ECG, echo, telemetry — tilt table only after cardiac causes excluded"
             }
           ]
         }
@@ -17183,6 +18069,25 @@ window.CRT_DATA = {
               "detail": "Anticoag CI"
             }
           ]
+        },
+        {
+          "id": "delay-bc-abx-ie",
+          "name": "Start antibiotics immediately — don't wait for echo",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Echo should not delay antibiotics in infective endocarditis, but the ordering matters: blood cultures must be drawn before antibiotics. Echo is diagnostic/prognostic, not urgent enough to delay treatment. The correct sequence is: blood cultures first → antibiotics immediately → echo within 12–24 hours. Starting antibiotics before cultures eliminates the ability to identify the organism and guide therapy.",
+          "references": [
+            {
+              "source": "Infective Endocarditis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK557641/",
+              "detail": "Blood cultures before antibiotics; echo after; never delay antibiotics for echo"
+            },
+            {
+              "source": "ESC IE Guidelines 2023 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10733544/",
+              "detail": "Sequence: cultures → antibiotics → echo; antibiotics must not await imaging"
+            }
+          ]
         }
       ],
       "phases": [
@@ -17321,6 +18226,25 @@ window.CRT_DATA = {
               "source": "PE-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
               "detail": "Avoid fluids"
+            }
+          ]
+        },
+        {
+          "id": "beta-block-mpe",
+          "name": "Start beta-blocker — tachycardia worsening RV strain",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Beta-blockers are absolutely contraindicated in massive PE with RV failure. The tachycardia is a compensatory mechanism — the failing RV depends on elevated heart rate to maintain cardiac output in the face of obstruction. Blocking this compensation causes acute cardiovascular collapse. Vasopressors (norepinephrine) to support perfusion pressure and definitive reperfusion (thrombolytics or surgical embolectomy) are the appropriate interventions.",
+          "references": [
+            {
+              "source": "Massive PE Management — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+              "detail": "Beta-blockers contraindicated in RV failure from massive PE — compensatory tachycardia must be preserved"
+            },
+            {
+              "source": "ESC PE Guidelines 2019 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6977045/",
+              "detail": "Vasopressors for hemodynamic support; reperfusion for definitive treatment"
             }
           ]
         }
@@ -17487,6 +18411,25 @@ window.CRT_DATA = {
               "source": "Migraine-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK560787/",
               "detail": "Opioids not recommended"
+            }
+          ]
+        },
+        {
+          "id": "opioid-first-mig",
+          "name": "IV hydromorphone — fastest and most reliable migraine relief",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Opioids are not first-line for migraine and are inferior to dopamine antagonists (prochlorperazine, metoclopramide) in both efficacy and recurrence prevention. Multiple RCTs demonstrate dopamine antagonists provide faster, more complete, and more durable pain relief than opioids for acute migraine. Opioid use in migraine increases risk of medication-overuse headache, promotes ED return visits, and drives opioid dependence — all without addressing the underlying pathophysiology.",
+          "references": [
+            {
+              "source": "Migraine — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560787/",
+              "detail": "Dopamine antagonists superior to opioids; opioid use increases MOH risk and ED recidivism"
+            },
+            {
+              "source": "Acute Migraine Treatment Guidelines — AHS PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6110085/",
+              "detail": "Prochlorperazine/metoclopramide first-line; opioids inferior and promote chronification"
             }
           ]
         }
@@ -17857,6 +18800,25 @@ window.CRT_DATA = {
               "detail": "NSAIDs CI"
             }
           ]
+        },
+        {
+          "id": "conservative-ppu",
+          "name": "Conservative management — NG tube, NPO, antibiotics; avoid surgery",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Conservative non-operative management of perforated peptic ulcer (Taylor method — NG suction, antibiotics, IV fluids) may be considered only in highly selected hemodynamically stable patients with confirmed contained perforation on CT, typically in settings where surgery is unavailable. For the typical presentation with peritonitis, it has higher mortality than emergency surgery. Free perforation with peritonitis requires emergency operative repair — conservative management is not standard care.",
+          "references": [
+            {
+              "source": "Perforated Peptic Ulcer — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK534185/",
+              "detail": "Surgery standard of care for PPU with peritonitis; conservative management limited to selected stable patients"
+            },
+            {
+              "source": "WSES PPU Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5674840/",
+              "detail": "Emergency surgical repair for free perforation; non-operative management has higher mortality"
+            }
+          ]
         }
       ],
       "phases": [
@@ -18037,6 +18999,25 @@ window.CRT_DATA = {
               "detail": "Observation criteria"
             }
           ]
+        },
+        {
+          "id": "no-o2-ptx",
+          "name": "No supplemental O2 needed — SpO2 95% on room air",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Supplemental oxygen is indicated in all pneumothorax patients regardless of SpO2, not just hypoxic ones. High-flow O2 accelerates pleural nitrogen absorption up to 4-fold by creating a diffusion gradient that drives pleural air reabsorption. Even in a normoxic patient with small spontaneous pneumothorax managed conservatively, O2 therapy significantly speeds resolution and reduces the need for intervention.",
+          "references": [
+            {
+              "source": "Pneumothorax — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK441885/",
+              "detail": "O2 accelerates pleural air reabsorption 4x regardless of SpO2"
+            },
+            {
+              "source": "BTS Pleural Disease Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2569195/",
+              "detail": "High-flow O2 recommended for all pneumothorax to accelerate resolution"
+            }
+          ]
         }
       ],
       "phases": [
@@ -18200,6 +19181,25 @@ window.CRT_DATA = {
               "source": "PE-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
               "detail": "V/Q alternative only"
+            }
+          ]
+        },
+        {
+          "id": "tpa-all-pe",
+          "name": "Give systemic tPA — all PE with syncope is high-risk",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Syncope in PE indicates transient hemodynamic compromise but does not automatically classify it as massive PE requiring systemic thrombolysis. Risk stratification with troponin, BNP, and echocardiography determines management. Systemic tPA is reserved for massive PE (SBP <90 unresponsive to resuscitation or cardiac arrest) — not for submassive PE where the bleeding risk of thrombolysis outweighs benefit.",
+          "references": [
+            {
+              "source": "Pulmonary Embolism — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK560551/",
+              "detail": "Systemic tPA only for massive PE; risk stratify submassive PE before thrombolysis"
+            },
+            {
+              "source": "ESC PE Guidelines 2019 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6977045/",
+              "detail": "Syncope alone does not mandate thrombolysis; hemodynamic instability is the threshold"
             }
           ]
         }
@@ -18371,6 +19371,25 @@ window.CRT_DATA = {
               "source": "UTI-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK519032/",
               "detail": "Foley not routine"
+            }
+          ]
+        },
+        {
+          "id": "oral-abx-pyelo",
+          "name": "Start oral fluoroquinolone — adequate for pyelonephritis",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Oral antibiotics are appropriate for uncomplicated outpatient pyelonephritis, but not for urosepsis with systemic signs (fever >38.5, tachycardia, hypotension, altered mental status). Urosepsis requires IV antibiotics, IV fluids, and inpatient monitoring. The high fluoroquinolone resistance rates in E. coli (30–40% in many communities) also make empiric oral fluoroquinolones unreliable for serious infections.",
+          "references": [
+            {
+              "source": "Pyelonephritis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK519537/",
+              "detail": "IV antibiotics for urosepsis; oral only for uncomplicated outpatient pyelonephritis"
+            },
+            {
+              "source": "UTI/Pyelonephritis Guidelines — IDSA PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3258482/",
+              "detail": "Fluoroquinolone resistance rates limit empiric oral use in serious infections"
             }
           ]
         }
@@ -18563,6 +19582,25 @@ window.CRT_DATA = {
               "detail": "Aggressive IVF no benefit"
             }
           ]
+        },
+        {
+          "id": "morphine-only-rc",
+          "name": "IV morphine only — most effective for severe renal colic",
+          "correct": false,
+          "phase": 1,
+          "teaching": "NSAIDs are superior to opioids as first-line analgesia for renal colic in patients without contraindications. Multiple RCTs and meta-analyses demonstrate ketorolac provides faster and more complete pain relief with fewer side effects than morphine for ureteral colic. NSAIDs reduce ureteral smooth muscle spasm via prostaglandin inhibition — treating the cause of pain, not just the perception. Use opioids when NSAIDs are contraindicated or as rescue for breakthrough pain.",
+          "references": [
+            {
+              "source": "Nephrolithiasis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK442014/",
+              "detail": "NSAIDs superior to opioids for ureteral colic; ketorolac first-line if no contraindication"
+            },
+            {
+              "source": "Renal Colic Analgesia Meta-analysis — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6436170/",
+              "detail": "NSAIDs provide faster relief than opioids; reduce ureteral spasm mechanistically"
+            }
+          ]
         }
       ],
       "phases": [
@@ -18729,6 +19767,25 @@ window.CRT_DATA = {
               "source": "SLE-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK535405/",
               "detail": "NSAIDs caution renal"
+            }
+          ]
+        },
+        {
+          "id": "stop-hcq-sle",
+          "name": "Hold hydroxychloroquine during severe flare — immunosuppression risk",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Hydroxychloroquine must never be stopped during an SLE flare — discontinuing it removes a foundational disease-modifying agent and worsens outcomes. HCQ reduces flare frequency by 50%, lowers thrombosis risk, reduces organ damage, and improves survival. It takes months to wash out, so stopping during a flare eliminates long-established benefit while providing no acute advantage. This is one of the most common and harmful errors in SLE management.",
+          "references": [
+            {
+              "source": "Systemic Lupus Erythematosus — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK535405/",
+              "detail": "HCQ never stopped during flare — reduces flares 50%, lowers thrombosis and mortality"
+            },
+            {
+              "source": "ACR SLE Treatment Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7654604/",
+              "detail": "HCQ is foundational therapy; discontinuation during flare worsens outcomes"
             }
           ]
         }
@@ -19297,6 +20354,25 @@ window.CRT_DATA = {
               "source": "SJS/TEN-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK459323/",
               "detail": "No debridement"
+            }
+          ]
+        },
+        {
+          "id": "abx-sjsten",
+          "name": "Start broad-spectrum antibiotics — wound infection risk",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Prophylactic antibiotics are not indicated in SJS/TEN without confirmed infection. The denuded skin is a wound, not an infected wound, and prophylactic antibiotics drive resistant organisms and Clostridium difficile without reducing infectious complications in SJS/TEN. The current standard is vigilant wound monitoring and targeted antibiotics only for confirmed superinfection identified by clinical signs and wound cultures.",
+          "references": [
+            {
+              "source": "SJS/TEN Management — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459323/",
+              "detail": "Prophylactic antibiotics not recommended; treat confirmed superinfection only"
+            },
+            {
+              "source": "SJS/TEN Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7552546/",
+              "detail": "Antibiotic prophylaxis increases resistance; culture-directed therapy for confirmed infection"
             }
           ]
         }
@@ -19891,6 +20967,25 @@ window.CRT_DATA = {
               "detail": "IV push dangerous"
             }
           ]
+        },
+        {
+          "id": "delay-epi-sar",
+          "name": "Start with IV antihistamine — escalate to epinephrine only if worse",
+          "correct": false,
+          "phase": 1,
+          "teaching": "There is no stepwise escalation in anaphylaxis — epinephrine is always first-line, not a rescue medication. Antihistamines have no effect on cardiovascular collapse, laryngeal edema, or bronchospasm. Using antihistamines first and 'escalating' to epinephrine when the reaction worsens means delaying epinephrine until the patient is in extremis. The FDA black box warning on antihistamines for anaphylaxis specifically prohibits their use as a substitute for epinephrine.",
+          "references": [
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Epinephrine always first-line; no stepwise escalation from antihistamines"
+            },
+            {
+              "source": "EAACI Anaphylaxis Guidelines 2021 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+              "detail": "Antihistamines are adjuncts only; never substitutes for epinephrine"
+            }
+          ]
         }
       ],
       "phases": [
@@ -20284,6 +21379,25 @@ window.CRT_DATA = {
               "detail": "C1-INH not for allergic AE"
             }
           ]
+        },
+        {
+          "id": "ice-aa",
+          "name": "Apply ice packs to affected area — reduce swelling locally",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Ice packs have no therapeutic role in allergic angioedema and delay effective treatment. Angioedema from histamine involves deep dermal and submucosal vasodilation and capillary leak — local vasoconstriction from ice does not meaningfully address the systemic mediator release driving the reaction. Epinephrine (for airway involvement), antihistamines, and steroids are the evidence-based treatments.",
+          "references": [
+            {
+              "source": "Angioedema — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482200/",
+              "detail": "Ice packs have no role in allergic angioedema; systemic treatment required"
+            },
+            {
+              "source": "Allergic Angioedema Management — ACAAI",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482200/",
+              "detail": "Epinephrine/antihistamines/steroids are the treatments; local measures ineffective"
+            }
+          ]
         }
       ],
       "phases": [
@@ -20462,6 +21576,25 @@ window.CRT_DATA = {
               "detail": "Avoid chronic steroids"
             }
           ]
+        },
+        {
+          "id": "avoid-all-foods-ia",
+          "name": "Eliminate all common food allergens — may be food-triggered",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Broad food elimination without testing is not recommended for idiopathic angioedema. Less than 10% of chronic idiopathic angioedema cases have a food trigger, and those that do can be identified through targeted allergy testing. Eliminating all common allergens creates nutritional deficiencies, eating disorders, and social dysfunction without resolving the angioedema. The correct approach is systematic workup (C4, C1-INH, tryptase, drug review) before any elimination.",
+          "references": [
+            {
+              "source": "Chronic Urticaria/Angioedema — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538255/",
+              "detail": "Food triggers rare in chronic idiopathic angioedema; targeted testing preferred over blanket elimination"
+            },
+            {
+              "source": "EAACI Urticaria Guidelines 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9773302/",
+              "detail": "Systematic workup before elimination; broad food avoidance not evidence-based"
+            }
+          ]
         }
       ],
       "phases": [
@@ -20633,6 +21766,25 @@ window.CRT_DATA = {
               "source": "Eczema Herpeticum-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK541131/",
               "detail": "No increased steroids"
+            }
+          ]
+        },
+        {
+          "id": "isolate-eh",
+          "name": "Contact isolation only — HSV transmission risk to other patients",
+          "correct": false,
+          "phase": 1,
+          "teaching": "While standard contact precautions for HSV are appropriate, isolation alone without antiviral treatment is dangerous malpractice. Eczema herpeticum is an emergency requiring immediate IV acyclovir — HSV can disseminate to the brain, liver, and lungs in patients with impaired skin barrier. Focusing on infection control without treating the patient confuses hospital protocol with clinical management priorities.",
+          "references": [
+            {
+              "source": "Eczema Herpeticum — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK557655/",
+              "detail": "IV acyclovir is the treatment priority; isolation is adjunctive infection control"
+            },
+            {
+              "source": "Herpes Simplex — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482197/",
+              "detail": "Dissemination risk without antiviral treatment; acyclovir must not be delayed"
             }
           ]
         }
@@ -21010,6 +22162,25 @@ window.CRT_DATA = {
               "detail": "NSAIDs potential trigger"
             }
           ]
+        },
+        {
+          "id": "biopsy-delay-masto",
+          "name": "Avoid biopsy — risk of mast cell degranulation during procedure",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Skin and bone marrow biopsy are the diagnostic gold standards for mastocytosis and should not be deferred due to theoretical degranulation risk. The procedure-associated degranulation risk is manageable with premedication (H1+H2 antihistamines before the procedure) and having epinephrine available. Indefinitely avoiding biopsy means never confirming the diagnosis, staging the disease, or assessing KIT D816V mutation status that guides therapy with midostaurin.",
+          "references": [
+            {
+              "source": "Mastocytosis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537059/",
+              "detail": "Biopsy required for diagnosis; premedicate with antihistamines; degranulation risk manageable"
+            },
+            {
+              "source": "WHO Mastocytosis Diagnostic Criteria — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7383028/",
+              "detail": "Bone marrow biopsy mandatory for systemic mastocytosis staging"
+            }
+          ]
         }
       ],
       "phases": [
@@ -21190,6 +22361,25 @@ window.CRT_DATA = {
               "source": "Urticaria-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK538489/",
               "detail": "Workup not needed acutely"
+            }
+          ]
+        },
+        {
+          "id": "extensive-workup-au",
+          "name": "Extensive allergy workup — IgE panel, complement, ANA",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Extensive laboratory workup is not indicated for isolated acute urticaria lasting <6 weeks. A specific trigger is identified in fewer than 20% of cases even with extensive testing, and most acute urticaria is post-viral or idiopathic. EAACI and AAD guidelines recommend against routine panel testing for acute urticaria without clinical indicators. Antihistamines and reassurance are the appropriate management; targeted testing only if history suggests a specific cause.",
+          "references": [
+            {
+              "source": "Acute Urticaria — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538255/",
+              "detail": "Extensive workup not indicated for acute urticaria <6 weeks; antihistamines and reassurance"
+            },
+            {
+              "source": "EAACI Urticaria Guidelines 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9773302/",
+              "detail": "No routine panel testing for acute urticaria; targeted workup only when history indicates"
             }
           ]
         }
@@ -21533,6 +22723,25 @@ window.CRT_DATA = {
               "detail": "Allergist must reassess"
             }
           ]
+        },
+        {
+          "id": "restart-oit-immediately",
+          "name": "Resume OIT at same dose after symptoms resolve",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Resuming OIT at the same dose immediately after a reaction is dangerous — the patient has demonstrated reduced tolerance at that dose, and the same amount that just caused a reaction will likely cause another. After any systemic OIT reaction, the protocol requires dose reduction (typically to the last well-tolerated dose) and an allergist-guided modified escalation plan. The cofactor that triggered the reaction (exercise, illness, NSAIDs) must also be identified and addressed.",
+          "references": [
+            {
+              "source": "Food Allergy OIT — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482187/",
+              "detail": "Dose reduction required after OIT reaction; never resume at same dose"
+            },
+            {
+              "source": "FARE OIT Safety Guidelines",
+              "url": "https://www.foodallergy.org/living-food-allergies/food-allergy-essentials/treatment/oral-immunotherapy",
+              "detail": "Allergist-guided dose adjustment after any systemic OIT reaction"
+            }
+          ]
         }
       ],
       "phases": [
@@ -21723,7 +22932,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Antihistamine-only treatment of anaphylaxis is potentially fatal. H1 blockers address only the histaminergic urticaria and pruritus — they have no effect on the mast cell-mediated cardiovascular collapse, laryngeal edema, or bronchospasm that kill patients. Epinephrine is the only drug that reverses all components of anaphylaxis simultaneously."
+          "teaching": "Antihistamine-only treatment of anaphylaxis is potentially fatal. Antihistamines block histamine receptors but have no effect on the cardiovascular collapse, airway edema, or bronchospasm that kill patients — these require epinephrine. The FDA has issued black box warnings about using antihistamines as monotherapy for anaphylaxis. Epinephrine is the only first-line drug; antihistamines are adjunctive only.",
+          "references": [
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Epinephrine is the only first-line treatment; antihistamines are adjuncts only"
+            },
+            {
+              "source": "EAACI Anaphylaxis Guidelines 2021 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+              "detail": "Antihistamines do not treat cardiovascular or airway manifestations of anaphylaxis"
+            }
+          ]
         },
         {
           "id": "sting-dist-2",
@@ -21732,7 +22953,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Discharging after only 30 minutes is dangerously premature — biphasic anaphylaxis occurs in up to 20% of cases, typically 4–12 hours after apparent resolution. All systemic anaphylaxis patients require 4–6 hours minimum observation. Severe or refractory cases warrant 24-hour admission."
+          "teaching": "Discharging after only 30 minutes is dangerously premature — biphasic anaphylaxis (second wave without re-exposure) occurs in up to 20% of cases at 4–12 hours. Current guidelines recommend minimum 4–6 hour observation after epinephrine, extended to 12–24 hours for severe reactions, prior biphasic history, or incomplete symptom resolution. Premature discharge after a single epinephrine dose risks unwitnessed biphasic death.",
+          "references": [
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Minimum 4-6h observation; biphasic anaphylaxis occurs in up to 20%"
+            },
+            {
+              "source": "EAACI Anaphylaxis Guidelines 2021 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+              "detail": "Extended observation 12-24h for severe or biphasic-risk presentations"
+            }
+          ]
         }
       ],
       "phases": [
@@ -21899,6 +23132,25 @@ window.CRT_DATA = {
               "source": "VIT-StatPearls",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482154/",
               "detail": "Dont stop VIT permanently"
+            }
+          ]
+        },
+        {
+          "id": "switch-venom-vit",
+          "name": "Switch to a different venom — reaction means sensitized to this one",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Switching venom types based on a systemic reaction to VIT is incorrect — the reaction indicates the patient is sensitized to that specific venom and needs that specific venom for desensitization. Switching venoms leaves the patient unprotected against future stings from the insect that actually poses their risk. The correct response is dose adjustment and premedication modification with the same venom.",
+          "references": [
+            {
+              "source": "Venom Immunotherapy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537093/",
+              "detail": "Continue same venom with dose adjustment; switching venoms leaves patient unprotected"
+            },
+            {
+              "source": "Stinging Insect Hypersensitivity — ACAAI PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4405589/",
+              "detail": "VIT requires the specific sensitizing venom; dose modification not venom switching"
             }
           ]
         }
@@ -22252,6 +23504,25 @@ window.CRT_DATA = {
               "detail": "Ineffective"
             }
           ]
+        },
+        {
+          "id": "ffp-acq",
+          "name": "Fresh frozen plasma only — contains all complement proteins",
+          "correct": false,
+          "phase": 1,
+          "teaching": "FFP is a second-line option when C1-INH concentrate is unavailable, but it is inferior. FFP contains all complement proteins including kininogen and kallikrein — in acquired C1-INH deficiency, these additional proteins can actually worsen the attack by providing more substrate for bradykinin generation. C1-INH concentrate directly replaces the deficient enzyme without providing inflammatory substrates. Always use C1-INH concentrate as first-line when available.",
+          "references": [
+            {
+              "source": "Hereditary/Acquired Angioedema — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538258/",
+              "detail": "C1-INH concentrate preferred; FFP contains kininogens that can worsen attacks"
+            },
+            {
+              "source": "HAE/Acquired C1-INH Management — ACAAI PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5648717/",
+              "detail": "C1-INH concentrate first-line; FFP only when concentrate unavailable"
+            }
+          ]
         }
       ],
       "phases": [
@@ -22420,6 +23691,25 @@ window.CRT_DATA = {
               "detail": "IM not SubQ"
             }
           ]
+        },
+        {
+          "id": "observe-only-aa2",
+          "name": "Observation only — angioedema without urticaria may resolve spontaneously",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Observation without treatment for allergic angioedema is dangerous — angioedema can involve the larynx and cause complete airway obstruction within minutes. Even lip and tongue angioedema that appears mild can rapidly progress to laryngeal involvement. The patient must receive epinephrine (for airway involvement), antihistamines, and steroids, then observed for minimum 4–6 hours for biphasic reaction. Passive observation risks missing lethal progression.",
+          "references": [
+            {
+              "source": "Angioedema — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482200/",
+              "detail": "Active treatment required; laryngeal extension can occur rapidly even from apparently mild angioedema"
+            },
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Minimum 4-6h observation and active treatment; passive observation risks fatal progression"
+            }
+          ]
         }
       ],
       "phases": [
@@ -22549,6 +23839,25 @@ window.CRT_DATA = {
               "source": "CSU",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK555910/",
               "detail": "Avoid"
+            }
+          ]
+        },
+        {
+          "id": "epinephrine-only-ia2",
+          "name": "Epinephrine only — airway protection is the priority",
+          "correct": false,
+          "phase": 1,
+          "teaching": "While epinephrine is critical for airway-threatening angioedema, using it as the sole treatment without initiating the diagnostic workup misses the opportunity to identify and treat the underlying cause. Idiopathic angioedema requires systematic evaluation to exclude HAE (C4, C1-INH level/function), ACE inhibitor use, and mastocytosis — because if the cause is bradykinin-mediated (HAE), antihistamines and steroids will not prevent recurrence and C1-INH concentrate or icatibant is needed.",
+          "references": [
+            {
+              "source": "Angioedema — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482200/",
+              "detail": "Workup required to exclude bradykinin-mediated causes; treatment depends on mechanism"
+            },
+            {
+              "source": "EAACI Angioedema Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5648717/",
+              "detail": "Systematic evaluation distinguishes histamine vs bradykinin angioedema — guides definitive treatment"
             }
           ]
         }
@@ -22716,6 +24025,25 @@ window.CRT_DATA = {
               "detail": "Bad"
             }
           ]
+        },
+        {
+          "id": "epipen-only-v2",
+          "name": "Prescribe epinephrine auto-injector only — no VIT needed if carries epi",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Epinephrine auto-injectors alone are insufficient management after systemic sting anaphylaxis — venom immunotherapy is the standard of care. VIT reduces recurrence risk from ~60% to <5% over 3–5 years. Auto-injectors only treat reactions after they occur; VIT prevents them. All patients with systemic reactions (not just large local reactions) must be referred to an allergist for VIT evaluation regardless of whether they carry epinephrine.",
+          "references": [
+            {
+              "source": "Insect Sting Allergy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK507839/",
+              "detail": "VIT reduces recurrence from 60% to <5%; auto-injector alone is insufficient management"
+            },
+            {
+              "source": "Stinging Insect Hypersensitivity Guidelines — ACAAI PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4405589/",
+              "detail": "VIT referral mandatory for all systemic reactions"
+            }
+          ]
         }
       ],
       "phases": [
@@ -22872,6 +24200,25 @@ window.CRT_DATA = {
               "detail": "Dont"
             }
           ]
+        },
+        {
+          "id": "increase-dose-vit2",
+          "name": "Increase VIT dose at next visit — build tolerance faster",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Increasing the VIT dose after a systemic reaction is dangerous and opposite to correct management. The reaction demonstrates that the current dose exceeds the patient's tolerance threshold — increasing it risks a more severe, potentially fatal reaction at the next injection. The correct approach is dose reduction to the last well-tolerated level with a modified slow escalation schedule, ACE inhibitor discontinuation, and H1 antihistamine premedication.",
+          "references": [
+            {
+              "source": "Venom Immunotherapy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537093/",
+              "detail": "Dose reduction after VIT reaction; dose increase is dangerous and contraindicated"
+            },
+            {
+              "source": "Allergen Immunotherapy Practice Parameters — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4499037/",
+              "detail": "Modified escalation with lower doses after systemic reaction"
+            }
+          ]
         }
       ],
       "phases": [
@@ -23026,6 +24373,25 @@ window.CRT_DATA = {
               "detail": "Dont repeat"
             }
           ]
+        },
+        {
+          "id": "avoid-contrast-v2",
+          "name": "Permanent contrast allergy label — no future contrast studies",
+          "correct": false,
+          "phase": 1,
+          "teaching": "A breakthrough reaction despite standard premedication does not justify permanently labeling the patient as 'contrast allergic' and avoiding all future contrast studies. The reaction indicates the current premedication protocol was insufficient — an intensified IV methylprednisolone protocol, allergist consultation, and use of iso-osmolar contrast can allow future contrast studies when clinically necessary. Permanent avoidance may deprive the patient of critical diagnostic imaging.",
+          "references": [
+            {
+              "source": "Contrast Media Hypersensitivity — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK557657/",
+              "detail": "Breakthrough reaction requires intensified premedication and allergist input, not permanent avoidance"
+            },
+            {
+              "source": "ACR Contrast Manual — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9277445/",
+              "detail": "Allergist-guided protocols allow safe contrast administration after premedication failure"
+            }
+          ]
         }
       ],
       "phases": [
@@ -23168,6 +24534,25 @@ window.CRT_DATA = {
               "source": "Drug Allergy",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK532269/",
               "detail": "Dont"
+            }
+          ]
+        },
+        {
+          "id": "delay-amox-v3",
+          "name": "Defer amoxicillin — use azithromycin instead to be safe",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Reflexively substituting azithromycin for amoxicillin without formal evaluation is inappropriate and potentially harmful. Azithromycin has higher rates of macrolide-resistant S. pneumoniae and is less effective than amoxicillin for most respiratory infections. Formal penicillin allergy evaluation (structured history + skin test + challenge) has >95% NPV and safely clears most patients for beta-lactam use. Avoid-and-substitute perpetuates unnecessary antibiotic restrictions.",
+          "references": [
+            {
+              "source": "Penicillin Allergy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK554507/",
+              "detail": "Formal evaluation clears >90% of labeled patients; substitution with macrolides drives resistance"
+            },
+            {
+              "source": "Penicillin Allergy De-labeling — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7192088/",
+              "detail": "Azithromycin inferior to amoxicillin; structured evaluation enables safe beta-lactam use"
             }
           ]
         }
@@ -23313,6 +24698,25 @@ window.CRT_DATA = {
               "detail": "Steroids worsen"
             }
           ]
+        },
+        {
+          "id": "increase-tcs-eh2",
+          "name": "Increase topical steroid potency — worsening eczema flare",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Increasing topical corticosteroid potency in eczema herpeticum will dramatically worsen the HSV infection. Topical steroids suppress local immune surveillance, promote viral replication, and accelerate HSV dissemination across already-compromised eczematous skin. This is a life-threatening error — eczema herpeticum requires immediate IV acyclovir and complete cessation of topical steroids on infected areas, not escalation of immunosuppressive therapy.",
+          "references": [
+            {
+              "source": "Eczema Herpeticum — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK557655/",
+              "detail": "Topical steroids stopped on infected areas; increasing TCS potency worsens HSV"
+            },
+            {
+              "source": "Atopic Dermatitis Complications — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6829878/",
+              "detail": "Steroid cessation and IV acyclovir are mandatory; TCS escalation is contraindicated"
+            }
+          ]
         }
       ],
       "phases": [
@@ -23449,6 +24853,25 @@ window.CRT_DATA = {
               "detail": "Not drug-triggered"
             }
           ]
+        },
+        {
+          "id": "systemic-steroids-em2",
+          "name": "High-dose systemic steroids — reduce immune-mediated mucosal damage",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Systemic corticosteroids are controversial and generally not recommended for erythema multiforme major — they may prolong the disease course, increase infection risk in patients with mucosal erosions, and suppress the immune response needed to control the HSV trigger. The evidence base does not support steroid use in EM major, and international guidelines recommend against it. Antiviral therapy (acyclovir for HSV-triggered EM) and supportive mucosal care are the treatments of choice.",
+          "references": [
+            {
+              "source": "Erythema Multiforme — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK431080/",
+              "detail": "Systemic steroids not recommended in EM major; may prolong course and increase infection risk"
+            },
+            {
+              "source": "EM Management Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7768798/",
+              "detail": "Antivirals and supportive care are the evidence-based treatments; steroids controversial and generally avoided"
+            }
+          ]
         }
       ],
       "phases": [
@@ -23583,6 +25006,25 @@ window.CRT_DATA = {
               "source": "Food Allergy",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482187/",
               "detail": "Dont stop OIT"
+            }
+          ]
+        },
+        {
+          "id": "ban-swimming-oit2",
+          "name": "Permanent swimming ban — exercise always contraindicated with OIT",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Permanent activity restrictions are not required for OIT — the intervention is cofactor management. Swimming and other exercise are safe as long as they do not occur within 2 hours before or after each OIT dose. A permanent swimming ban is medically unnecessary, significantly impacts quality of life for an adolescent, and eliminates a healthy activity. Structured dose timing around exercise is the correct management.",
+          "references": [
+            {
+              "source": "Food Allergy OIT Safety — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482187/",
+              "detail": "Exercise cofactor: avoid 2h before/after dose; permanent restriction not required"
+            },
+            {
+              "source": "FARE OIT Safety Guidelines",
+              "url": "https://www.foodallergy.org/living-food-allergies/food-allergy-essentials/treatment/oral-immunotherapy",
+              "detail": "Dose timing around exercise is the management; permanent activity restriction disproportionate"
             }
           ]
         }
@@ -23873,6 +25315,25 @@ window.CRT_DATA = {
               "detail": "Not reflux"
             }
           ]
+        },
+        {
+          "id": "hydrolysate-all-fpies2",
+          "name": "Switch to elemental amino acid formula — safer than hydrolysate",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Amino acid formula is not first-line for all FPIES infants — extensively hydrolyzed formula (eHF) is appropriate for most cow's milk FPIES cases and is preferred as the first-line hypoallergenic formula due to lower cost and better palatability. Amino acid formula is reserved for the 10–15% who fail eHF. Starting with the most restrictive formula without trialing eHF first is unnecessary and imposes greater cost and feeding difficulty without additional clinical benefit.",
+          "references": [
+            {
+              "source": "FPIES — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538252/",
+              "detail": "eHF first-line for CMP FPIES; AAF reserved for eHF failures (10-15%)"
+            },
+            {
+              "source": "FPIES Management Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6153297/",
+              "detail": "Step-up approach: eHF first, AAF only if eHF fails"
+            }
+          ]
         }
       ],
       "phases": [
@@ -24041,6 +25502,25 @@ window.CRT_DATA = {
               "detail": "Not anxiety"
             }
           ]
+        },
+        {
+          "id": "steroids-mcas2",
+          "name": "High-dose prednisone — suppress mast cell activation",
+          "correct": false,
+          "phase": 1,
+          "teaching": "High-dose systemic steroids are not standard treatment for mastocytosis or MCAS — they provide temporary non-specific immunosuppression but do not address the underlying KIT D816V mutation or IgE-independent mast cell activation driving the syndrome. Long-term steroid use causes HPA suppression, osteoporosis, and metabolic complications. H1+H2 antihistamines plus mast cell stabilizers (cromolyn), trigger avoidance, and epinephrine for acute reactions are the evidence-based management.",
+          "references": [
+            {
+              "source": "Mastocytosis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537059/",
+              "detail": "Steroids not standard for mastocytosis; antihistamines and cromolyn are mainstays"
+            },
+            {
+              "source": "MCAS Management Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7383028/",
+              "detail": "H1/H2 antihistamines, cromolyn, and trigger avoidance; systemic steroids not indicated"
+            }
+          ]
         }
       ],
       "phases": [
@@ -24175,6 +25655,25 @@ window.CRT_DATA = {
               "source": "Vancomycin",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK560513/",
               "detail": "False label"
+            }
+          ]
+        },
+        {
+          "id": "vanco-allergy-rms2",
+          "name": "Document vancomycin allergy — avoid all future vancomycin use",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Red man syndrome is not an allergy and must not be documented as one. RMS is a rate-dependent pharmacological reaction from direct mast cell histamine release — not IgE-mediated, not immune-mediated, and not a contraindication to future vancomycin use. False allergy labeling leads to use of inferior or broader-spectrum antibiotics with worse outcomes and higher costs. Document RMS accurately in the chart and note that vancomycin can be safely used with extended infusion time.",
+          "references": [
+            {
+              "source": "Vancomycin Red Man Syndrome — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK557442/",
+              "detail": "RMS is not an allergy; document accurately; vancomycin can be used with slow infusion"
+            },
+            {
+              "source": "Drug Allergy Labeling Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7192088/",
+              "detail": "False allergy documentation drives inferior antibiotic use; RMS must not be labeled as allergy"
             }
           ]
         }
@@ -24448,6 +25947,25 @@ window.CRT_DATA = {
               "detail": "No chronic steroids"
             }
           ]
+        },
+        {
+          "id": "food-elimination-csu2",
+          "name": "6-food elimination diet — food triggers common in CSU",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Food triggers are rare in chronic spontaneous urticaria — identified in fewer than 10% of cases despite extensive testing. Empiric 6-food elimination diet without positive allergy testing is not recommended and causes nutritional deficiency, anxiety around eating, and social restriction without resolving the urticaria. EAACI guidelines specifically recommend against routine food allergy testing or elimination diets in CSU without a clear food-reaction history.",
+          "references": [
+            {
+              "source": "Chronic Urticaria — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538255/",
+              "detail": "Food triggers rare in CSU (<10%); elimination diets not recommended without specific history"
+            },
+            {
+              "source": "EAACI Urticaria Guidelines 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9773302/",
+              "detail": "No routine food allergy testing or elimination in CSU; targeted testing only with clear history"
+            }
+          ]
         }
       ],
       "phases": [
@@ -24581,6 +26099,25 @@ window.CRT_DATA = {
               "source": "UV",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482543/",
               "detail": "Insufficient"
+            }
+          ]
+        },
+        {
+          "id": "h1-only-uv2",
+          "name": "H1 antihistamines — sufficient for urticarial lesions",
+          "correct": false,
+          "phase": 1,
+          "teaching": "H1 antihistamines alone are insufficient for urticarial vasculitis — they reduce pruritus and some whealing but do not treat the leukocytoclastic vasculitis that defines the condition and drives systemic complications. Untreated UV can cause renal disease, serositis, arthritis, and obstructive pulmonary disease. Anti-inflammatory therapy (colchicine, dapsone, or hydroxychloroquine) targeting the neutrophilic vessel wall infiltration is required alongside antihistamines.",
+          "references": [
+            {
+              "source": "Urticarial Vasculitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482200/",
+              "detail": "Antihistamines insufficient for UV; anti-inflammatory therapy required to treat vasculitis"
+            },
+            {
+              "source": "Vasculitis Management Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5734929/",
+              "detail": "Colchicine/dapsone/HCQ needed; H1 alone does not address vessel wall inflammation"
             }
           ]
         }
@@ -24719,6 +26256,25 @@ window.CRT_DATA = {
               "detail": "Abx alone bad"
             }
           ]
+        },
+        {
+          "id": "scig-delay-cvid2",
+          "name": "Delay immunoglobulin replacement — confirm diagnosis fully first",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Delaying immunoglobulin replacement to 'fully confirm' the CVID diagnosis in a patient with recurrent sinopulmonary infections, panhypogammaglobulinemia, and poor vaccine response risks bronchiectasis progression, further hospitalizations, and potentially fatal infection. The diagnostic criteria are met — empiric IVIG/SCIG can begin while confirmatory testing (vaccine challenge, B-cell phenotyping) is completed. The harm of delay vastly outweighs any diagnostic benefit of waiting.",
+          "references": [
+            {
+              "source": "CVID — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537250/",
+              "detail": "Ig replacement should not be delayed when clinical and lab criteria are met"
+            },
+            {
+              "source": "Primary Immunodeficiency Treatment — ESID PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3309689/",
+              "detail": "Early Ig replacement prevents bronchiectasis and reduces infection burden"
+            }
+          ]
         }
       ],
       "phases": [
@@ -24853,6 +26409,25 @@ window.CRT_DATA = {
               "source": "AERD",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK534214/",
               "detail": "Desensitize instead"
+            }
+          ]
+        },
+        {
+          "id": "steroid-aerd2",
+          "name": "Systemic steroids — reduce airway inflammation acutely",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Systemic steroids may help with acute nasal polyp-related symptoms but do not address the fundamental COX-1/leukotriene imbalance driving AERD. Long-term systemic steroids cause HPA suppression, osteoporosis, and metabolic complications when used repeatedly for AERD flares. The disease-modifying treatment is aspirin desensitization followed by daily aspirin therapy — this directly suppresses leukotriene overproduction and prevents polyp regrowth.",
+          "references": [
+            {
+              "source": "NSAID Hypersensitivity/AERD — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK542243/",
+              "detail": "Systemic steroids symptomatic only; aspirin desensitization is disease-modifying"
+            },
+            {
+              "source": "AERD Management Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386649/",
+              "detail": "Daily aspirin post-desensitization reduces polyp recurrence and asthma severity; steroids are adjunctive"
             }
           ]
         }
@@ -24991,6 +26566,25 @@ window.CRT_DATA = {
               "detail": "Test first"
             }
           ]
+        },
+        {
+          "id": "cesarean-pcn2",
+          "name": "Perform cesarean section — avoid risk of intrapartum antibiotic reaction",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Recommending cesarean section to avoid intrapartum antibiotic administration is medically unjustifiable and causes serious harm. C-section carries substantially higher maternal morbidity and mortality than vaginal delivery. The correct approach is formal penicillin allergy evaluation during pregnancy (safe from 2nd trimester) or use of cefazolin (first-generation cephalosporin with <1% cross-reactivity with penicillin) for GBS prophylaxis. The allergy label, not the allergy itself, is the problem.",
+          "references": [
+            {
+              "source": "Penicillin Allergy in Pregnancy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK554507/",
+              "detail": "Cesarean section not indicated for antibiotic allergy; evaluation and cefazolin are appropriate solutions"
+            },
+            {
+              "source": "GBS Prophylaxis in PCN Allergy — ACOG PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6322580/",
+              "detail": "Skin testing safe in pregnancy; cefazolin for low-risk; C-section is not a management strategy for drug allergy"
+            }
+          ]
         }
       ],
       "phases": [
@@ -25125,6 +26719,25 @@ window.CRT_DATA = {
               "source": "Food Allergy",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482187/",
               "detail": "Dont over-restrict"
+            }
+          ]
+        },
+        {
+          "id": "baked-peanut-pa2",
+          "name": "Baked peanut challenge — heat denatures allergens, likely tolerant",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Unlike baked milk and baked egg, baked peanut does NOT denature the major peanut allergens — Ara h 1, 2, and 3 (the storage proteins causing most severe reactions) are heat-stable. Peanut-allergic patients who are Ara h 2 positive cannot safely undergo baked peanut challenges. Component-resolved diagnostics (Ara h 2) must be performed first to identify the allergen profile before any challenge. Assuming heat tolerance in peanut allergy parallels baked milk/egg tolerance is a dangerous misconception.",
+          "references": [
+            {
+              "source": "Peanut Allergy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482187/",
+              "detail": "Peanut storage proteins (Ara h 1,2,3) are heat-stable; baked peanut challenge not equivalent to baked milk/egg"
+            },
+            {
+              "source": "Component Diagnostics in Peanut Allergy — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6108989/",
+              "detail": "Ara h 2 positivity predicts severe reactions; CRD required before challenge decisions"
             }
           ]
         }
@@ -25263,6 +26876,25 @@ window.CRT_DATA = {
               "detail": "Dont stop BF"
             }
           ]
+        },
+        {
+          "id": "soy-formula-cmpa2",
+          "name": "Soy formula — suitable alternative for cow's milk allergy",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Soy formula is not recommended as first-line for cow's milk protein allergy — 10–35% of CMPA infants also react to soy protein (cross-reactivity through similar storage proteins). Extensively hydrolyzed formula (eHF) is the evidence-based first-line alternative. Soy formula is only appropriate for IgE-mediated CMP allergy after confirming soy tolerance, and it is contraindicated in non-IgE-mediated CMP conditions including FPIES and eosinophilic proctocolitis.",
+          "references": [
+            {
+              "source": "Cow's Milk Protein Allergy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537054/",
+              "detail": "10-35% CMPA infants react to soy; eHF is first-line alternative"
+            },
+            {
+              "source": "ESPGHAN CMPA Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4315808/",
+              "detail": "Soy not recommended for non-IgE CMPA or FPIES; eHF preferred"
+            }
+          ]
         }
       ],
       "phases": [
@@ -25399,6 +27031,25 @@ window.CRT_DATA = {
               "detail": "Steroid risk"
             }
           ]
+        },
+        {
+          "id": "contact-lens-acv2",
+          "name": "Resume contact lens use — reduces allergen exposure to cornea",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Contact lens use is contraindicated during acute severe allergic conjunctivitis — lenses concentrate allergens and inflammatory mediators on the ocular surface, worsen giant papillae formation, increase the risk of corneal shield ulcers in VKC, and can cause contact lens-associated keratitis superimposed on already-compromised corneal epithelium. Patients should remain in glasses until the acute episode fully resolves and be counseled on adequate lens hygiene.",
+          "references": [
+            {
+              "source": "Allergic Conjunctivitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK470518/",
+              "detail": "Contact lenses contraindicated in active allergic conjunctivitis — concentrate allergens on cornea"
+            },
+            {
+              "source": "VKC Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6829878/",
+              "detail": "Lens discontinuation required; shield ulcer risk worsened by contact lens use in VKC"
+            }
+          ]
         }
       ],
       "phases": [
@@ -25532,6 +27183,25 @@ window.CRT_DATA = {
               "source": "AR",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK538186/",
               "detail": "Treat first"
+            }
+          ]
+        },
+        {
+          "id": "oral-steroid-ar2",
+          "name": "Oral prednisone burst — achieve rapid symptom control",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Repeated oral steroid bursts for allergic rhinitis are not appropriate management — intranasal corticosteroids (INCS) provide superior local anti-inflammatory effect with minimal systemic absorption and are the guideline-recommended first-line treatment. Oral steroids cause HPA axis suppression, hyperglycemia, bone loss, and immunosuppression with each course. Escalating to omalizumab or allergen immunotherapy is the correct step-up for refractory occupational AR, not systemic steroids.",
+          "references": [
+            {
+              "source": "Allergic Rhinitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538331/",
+              "detail": "INCS is first-line; oral steroids inappropriate for routine AR management"
+            },
+            {
+              "source": "ARIA Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7010759/",
+              "detail": "Step-up to immunotherapy or biologics for refractory AR; systemic steroids not recommended"
             }
           ]
         }
@@ -25701,6 +27371,25 @@ window.CRT_DATA = {
               "detail": "Avoid oral steroids"
             }
           ]
+        },
+        {
+          "id": "tac-face-adv2",
+          "name": "High-potency topical steroid on face — most effective for facial AD",
+          "correct": false,
+          "phase": 1,
+          "teaching": "High-potency topical corticosteroids are contraindicated on the face in atopic dermatitis — the thin facial skin has dramatically higher steroid absorption and is highly susceptible to steroid atrophy, telangiectasias, perioral dermatitis, and steroid-induced rosacea. Facial AD should be treated with low-potency steroids (hydrocortisone 1%), calcineurin inhibitors (tacrolimus 0.03% for children, 0.1% for adults), or crisaborole — all of which are safe for face and body fold use.",
+          "references": [
+            {
+              "source": "Atopic Dermatitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538209/",
+              "detail": "High-potency TCS contraindicated on face; tacrolimus or hydrocortisone 1% for facial AD"
+            },
+            {
+              "source": "AD Treatment Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7566003/",
+              "detail": "Facial application requires low-potency TCS or calcineurin inhibitors to avoid atrophy"
+            }
+          ]
         }
       ],
       "phases": [
@@ -25851,6 +27540,25 @@ window.CRT_DATA = {
               "source": "ACD",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK532866/",
               "detail": "Accommodate first"
+            }
+          ]
+        },
+        {
+          "id": "latex-gloves-cdv2",
+          "name": "Switch to latex gloves — better barrier than nitrile",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Latex gloves are contraindicated for occupational ACD management — they can cause Type I IgE-mediated latex allergy (urticaria, anaphylaxis) as a new sensitization superimposed on the existing ACD. Nitrile gloves are the evidence-based gold standard for chemical barrier protection without latex allergy risk. All healthcare and occupational settings that perform patch testing must maintain latex-free environments; hairdressers with PPD sensitization should never be advised to use latex gloves.",
+          "references": [
+            {
+              "source": "Occupational Contact Dermatitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459230/",
+              "detail": "Nitrile gloves recommended; latex gloves risk new Type I latex sensitization"
+            },
+            {
+              "source": "Occupational Skin Disease Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7527222/",
+              "detail": "Latex avoided in ACD management to prevent dual sensitization"
             }
           ]
         }
@@ -26005,6 +27713,25 @@ window.CRT_DATA = {
               "detail": "Need biopsy"
             }
           ]
+        },
+        {
+          "id": "ppn-eoe2",
+          "name": "Total parenteral nutrition — bowel rest for esophageal healing",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Total parenteral nutrition has no role in EoE management — the esophageal eosinophilia is driven by food antigen exposure at the esophageal mucosa, not by luminal content per se. TPN bypasses the esophagus but is not the treatment for EoE and is not part of any guideline. The appropriate interventions are PPI trial, swallowed topical steroids, and elemental or elimination diets — none of which require IV nutrition.",
+          "references": [
+            {
+              "source": "Eosinophilic Esophagitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459609/",
+              "detail": "TPN has no role in EoE; PPI, swallowed steroids, and elimination diets are treatments"
+            },
+            {
+              "source": "ACG EoE Clinical Guideline 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9277445/",
+              "detail": "Elemental formula or elimination diet; TPN not indicated"
+            }
+          ]
         }
       ],
       "phases": [
@@ -26138,6 +27865,25 @@ window.CRT_DATA = {
               "source": "EoE",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK557672/",
               "detail": "Not behavioral"
+            }
+          ]
+        },
+        {
+          "id": "reflux-meds-eoep2",
+          "name": "Continue PPI and H2 blocker — likely GERD causing dysphagia",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Continuing reflux medications as the sole treatment in a child with documented EoE perpetuates the diagnostic delay that already caused 6 years of suffering in this case. While a PPI trial is both diagnostic and potentially therapeutic in EoE, it must be followed by repeat endoscopy to confirm response. Assuming GERD without histologic reassessment after a PPI trial misses persistent eosinophilic inflammation driving ongoing feeding aversion, FTT, and potential stricture formation.",
+          "references": [
+            {
+              "source": "Eosinophilic Esophagitis Pediatric — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459609/",
+              "detail": "Repeat endoscopy mandatory after PPI trial; continuing indefinitely without biopsy is insufficient"
+            },
+            {
+              "source": "Pediatric EoE Guidelines — NASPGHAN PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5645114/",
+              "detail": "Histologic confirmation required; PPI without repeat biopsy is incomplete management"
             }
           ]
         }
@@ -26274,6 +28020,25 @@ window.CRT_DATA = {
               "source": "Allergic Conjunctivitis",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK448088/",
               "detail": "Steroid risk"
+            }
+          ]
+        },
+        {
+          "id": "antibiotics-ac",
+          "name": "Topical antibiotic drops — bacterial co-infection common",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Topical antibiotics are not indicated for allergic conjunctivitis without confirmed bacterial infection. Allergic conjunctivitis is an IgE-mediated inflammatory reaction — antibiotics treat bacteria, not allergen-driven mast cell degranulation. Inappropriate antibiotic prescribing causes antibiotic resistance, ocular microbiome disruption, and side effects without treating the underlying allergy. Dual-action antihistamine/mast cell stabilizer drops are the appropriate first-line treatment.",
+          "references": [
+            {
+              "source": "Allergic Conjunctivitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK470518/",
+              "detail": "Antibiotics not indicated for allergic conjunctivitis; antihistamine/mast cell stabilizer drops first-line"
+            },
+            {
+              "source": "Ocular Allergy Management Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6829878/",
+              "detail": "Topical antibiotics inappropriate without bacterial infection confirmation"
             }
           ]
         }
@@ -26419,6 +28184,25 @@ window.CRT_DATA = {
               "detail": "Rebound congestion"
             }
           ]
+        },
+        {
+          "id": "antib-rhinitis",
+          "name": "Oral antibiotic — rule out sinusitis contributing to symptoms",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Empiric antibiotics for uncontrolled allergic rhinitis without clinical evidence of bacterial sinusitis are inappropriate and contribute to antibiotic resistance. Allergic rhinitis is driven by IgE-mediated inflammation, not bacteria. Bacterial sinusitis is distinguished by purulent nasal discharge, facial pressure/pain, anosmia, and fever — findings not present in routine allergic rhinitis. INCS is the cornerstone of treatment; antibiotics have no role in uncomplicated AR.",
+          "references": [
+            {
+              "source": "Allergic Rhinitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538331/",
+              "detail": "Antibiotics not indicated for allergic rhinitis; no bacterial component"
+            },
+            {
+              "source": "ARIA Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7010759/",
+              "detail": "INCS is first-line; antibiotics reserved for confirmed bacterial sinusitis with specific clinical criteria"
+            }
+          ]
         }
       ],
       "phases": [
@@ -26562,6 +28346,25 @@ window.CRT_DATA = {
               "detail": "Avoid oral steroids"
             }
           ]
+        },
+        {
+          "id": "wet-skin-ad",
+          "name": "Avoid bathing — water worsens skin barrier in AD",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Avoiding bathing is incorrect — daily lukewarm baths (10–15 minutes) hydrate the stratum corneum and remove crusting and allergens from the skin surface. The 'soak and smear' technique (bath immediately followed by thick emollient application within 3 minutes while skin is still moist) is the foundational skin care strategy in AD. Avoidance of bathing allows allergen accumulation, promotes S. aureus colonization, and worsens barrier dysfunction.",
+          "references": [
+            {
+              "source": "Atopic Dermatitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538209/",
+              "detail": "Daily baths with immediate emollient application (soak and smear) is foundational AD care"
+            },
+            {
+              "source": "AD Bathing Guidelines — AAD PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7566003/",
+              "detail": "Lukewarm baths hydrate skin; soak and smear technique reduces allergen burden and S. aureus colonization"
+            }
+          ]
         }
       ],
       "phases": [
@@ -26687,6 +28490,25 @@ window.CRT_DATA = {
               "source": "CSU",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK555910/",
               "detail": "No"
+            }
+          ]
+        },
+        {
+          "id": "low-hist-diet-csu",
+          "name": "Low-histamine diet — dietary histamine triggers CSU",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Low-histamine diets are not evidence-based for chronic spontaneous urticaria and are not recommended by EAACI or international guidelines. Dietary histamine has a minimal role in CSU pathophysiology, which is driven by autoimmune mast cell activation. The restrictive diet causes nutritional deficiency and disordered eating without meaningful symptom improvement. Updosed H1 antihistamines followed by omalizumab for refractory cases are the evidence-based treatment steps.",
+          "references": [
+            {
+              "source": "Chronic Urticaria — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538255/",
+              "detail": "Low-histamine diet not recommended for CSU; antihistamines and omalizumab are treatments"
+            },
+            {
+              "source": "EAACI Urticaria Guidelines 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9773302/",
+              "detail": "Dietary interventions not recommended for CSU without specific food trigger identification"
             }
           ]
         }
@@ -26816,7 +28638,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Allergic contact dermatitis is a T-cell mediated (Type IV) hypersensitivity reaction, not an infection. Oral antibiotics have no role unless secondary bacterial superinfection with S. aureus is confirmed. Unnecessary antibiotics increase resistance and provide no benefit for the underlying inflammatory dermatitis."
+          "teaching": "Allergic contact dermatitis is a T-cell mediated (Type IV) hypersensitivity reaction — antihistamines block histamine H1 receptors and have no effect on the delayed-type cellular immune response driving ACD. Patients frequently self-treat with diphenhydramine, which provides minimal itch relief at best and creates false reassurance while the allergic reaction progresses. Topical corticosteroids and allergen removal are the correct treatments.",
+          "references": [
+            {
+              "source": "Contact Dermatitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459230/",
+              "detail": "ACD is Type IV (T-cell) hypersensitivity; antihistamines ineffective"
+            },
+            {
+              "source": "Allergic Contact Dermatitis — ACAAI Review PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7527222/",
+              "detail": "Topical steroids and allergen avoidance are the therapeutic cornerstones; antihistamines adjunctive at best"
+            }
+          ]
         },
         {
           "id": "cd-dist-2",
@@ -26825,7 +28659,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Systemic immunosuppression with methotrexate is disproportionate for contact dermatitis and is not indicated. First-line management is allergen identification (patch testing), avoidance, and topical corticosteroids. Systemic immunosuppression is reserved for severe, refractory chronic cases unresponsive to all topical therapy — not acute or subacute ACD."
+          "teaching": "Systemic immunosuppression with methotrexate is disproportionately aggressive for occupational allergic contact dermatitis and should only be considered after allergen avoidance, topical steroids, patch testing, and workplace accommodation have all failed. Methotrexate carries hepatotoxicity, myelosuppression, pulmonary, and teratogenicity risks. The correct approach is allergen identification via patch testing and definitive source removal.",
+          "references": [
+            {
+              "source": "Contact Dermatitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459230/",
+              "detail": "Systemic immunosuppression is last resort; patch testing and avoidance first"
+            },
+            {
+              "source": "Occupational Contact Dermatitis Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7527222/",
+              "detail": "Step-up approach: avoidance → topicals → systemic agents only if refractory"
+            }
+          ]
         }
       ],
       "phases": [
@@ -26954,7 +28800,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Live attenuated vaccines are absolutely contraindicated in CVID — the profoundly impaired humoral immunity cannot control even the attenuated viral strains, causing disseminated vaccine-strain infection. This is a life-threatening error. Inactivated vaccines are safe (though often ineffective due to poor antibody response); live vaccines are permanently contraindicated."
+          "teaching": "Live attenuated vaccines are absolutely contraindicated in CVID. Patients lack the humoral immune response needed to control attenuated live pathogens, and vaccine-strain disease can cause severe or fatal infection. This includes MMR, varicella, live attenuated influenza, yellow fever, oral typhoid, and oral polio vaccine. Only inactivated vaccines are safe, though response is impaired — immunogenicity testing is used to monitor.",
+          "references": [
+            {
+              "source": "Common Variable Immunodeficiency — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537250/",
+              "detail": "Live vaccines absolutely contraindicated in CVID; inactivated vaccines only"
+            },
+            {
+              "source": "ESID/PAGID CVID Diagnostic Criteria — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3309689/",
+              "detail": "Vaccine management in primary immunodeficiency"
+            }
+          ]
         },
         {
           "id": "cvid-dist-2",
@@ -26963,7 +28821,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Routine antifungal prophylaxis is not indicated in CVID. The primary immune defect is humoral (B-cell/antibody), not cell-mediated — CVID patients are susceptible to encapsulated bacteria and enteroviruses, not fungal infections. Prophylactic antifungals address the wrong immunological gap and add unnecessary drug exposure."
+          "teaching": "Routine antifungal prophylaxis is not indicated in CVID. The primary immune defect in CVID is humoral (B-cell dysfunction, low immunoglobulins) — antifungal prophylaxis targets cell-mediated immunity gaps seen in T-cell deficiencies (HIV, SCID, post-transplant). CVID patients are susceptible to encapsulated bacteria and Giardia, not routinely to fungi. Prophylactic antibiotics for bacterial infections are used in selected patients, not antifungals.",
+          "references": [
+            {
+              "source": "Common Variable Immunodeficiency — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537250/",
+              "detail": "CVID: humoral defect — bacterial/Giardia susceptibility; antifungal prophylaxis not indicated"
+            },
+            {
+              "source": "Primary Immunodeficiency Prophylaxis Guidelines — ESID PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3309689/",
+              "detail": "Prophylaxis targets encapsulated bacteria; antifungals for cell-mediated defects only"
+            }
+          ]
         }
       ],
       "phases": [
@@ -27108,7 +28978,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "EoE is commonly misdiagnosed as esophageal candidiasis — both cause dysphagia and odynophagia. However, empiric antifungal therapy without endoscopic confirmation is inappropriate. Candida esophagitis has characteristic white plaques on endoscopy; EoE shows rings, furrows, exudates, and pallor. Biopsy is required to distinguish them."
+          "teaching": "EoE is commonly misdiagnosed as esophageal candidiasis — both cause dysphagia and white plaques/exudates on endoscopy. The key differentiator is mucosal biopsy: EoE shows eosinophilic infiltrate (≥15 eos/hpf), while candidiasis shows pseudohyphae on KOH prep. Empiric antifungals without biopsy perpetuate misdiagnosis and delay EoE treatment. Always biopsy before treating empirically.",
+          "references": [
+            {
+              "source": "Eosinophilic Esophagitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459609/",
+              "detail": "Biopsy required to distinguish EoE from candidal esophagitis"
+            },
+            {
+              "source": "ACG EoE Clinical Guideline 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9277445/",
+              "detail": "Histologic diagnosis mandatory; empiric antifungals inappropriate without biopsy confirmation"
+            }
+          ]
         },
         {
           "id": "eoe-dist-2",
@@ -27117,7 +28999,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Calcium channel blockers treat esophageal smooth muscle spasm disorders — they are not effective for EoE, which is driven by eosinophilic mucosal inflammation, not dysmotility. Treating EoE with motility agents addresses the wrong pathophysiology. PPI trial, topical steroids, and elimination diet target the actual eosinophilic inflammatory mechanism."
+          "teaching": "Calcium channel blockers treat esophageal smooth muscle spasm (achalasia, diffuse esophageal spasm) — not EoE. EoE is driven by eosinophilic inflammation, not smooth muscle dysmotility, and calcium channel blockers have no effect on the eosinophilic infiltrate causing strictures and dysphagia. Treatment is anti-inflammatory: PPI trial, swallowed topical steroids, or dietary elimination.",
+          "references": [
+            {
+              "source": "Eosinophilic Esophagitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459609/",
+              "detail": "EoE is inflammatory, not motility disorder; calcium channel blockers ineffective"
+            },
+            {
+              "source": "ACG EoE Clinical Guideline 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9277445/",
+              "detail": "PPI, swallowed steroids, and elimination diet are the evidence-based treatments"
+            }
+          ]
         }
       ],
       "phases": [
@@ -27235,6 +29129,25 @@ window.CRT_DATA = {
               "source": "EoE",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK557672/",
               "detail": "Not behavioral"
+            }
+          ]
+        },
+        {
+          "id": "ppi-only-eoep",
+          "name": "Continue PPI indefinitely — EoE is acid-driven like GERD",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Treating EoE with PPI alone indefinitely without reassessment conflates EoE with GERD. While PPIs have an independent anti-inflammatory effect in EoE (up to 40–50% histologic response), ongoing PPI therapy without repeat endoscopy leaves uncontrolled eosinophilic inflammation — causing progressive fibrostenotic remodeling, strictures, and food impaction. All EoE patients require endoscopic reassessment at 8–12 weeks to confirm response and guide ongoing management.",
+          "references": [
+            {
+              "source": "Eosinophilic Esophagitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459609/",
+              "detail": "Repeat endoscopy mandatory to confirm PPI response; indefinite PPI without reassessment inadequate"
+            },
+            {
+              "source": "ACG EoE Guideline 2022 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9277445/",
+              "detail": "Histologic reassessment guides treatment; PPI alone indefinitely leads to fibrostenotic complications"
             }
           ]
         }
@@ -27357,6 +29270,25 @@ window.CRT_DATA = {
               "detail": "Not reflux"
             }
           ]
+        },
+        {
+          "id": "introduce-solids-fpies",
+          "name": "Introduce all solids — only milk is the trigger",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Introducing all solid foods without guidance in FPIES is risky — 30–40% of infants with cow's milk FPIES are also sensitized to soy, rice, oats, or other proteins. New solid food introductions should be done one at a time under allergist guidance, with a waiting period of 3–5 days between new foods to identify reactions. A supervised oral food challenge is the gold standard for confirming which foods are safe to introduce.",
+          "references": [
+            {
+              "source": "FPIES — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK538252/",
+              "detail": "30-40% have multiple trigger foods; supervised introduction one food at a time under allergist guidance"
+            },
+            {
+              "source": "FPIES Management Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6153297/",
+              "detail": "OFC required for each new food introduction; multiple protein sensitization common"
+            }
+          ]
         }
       ],
       "phases": [
@@ -27475,6 +29407,25 @@ window.CRT_DATA = {
               "source": "CMPA",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK542243/",
               "detail": "Continue BF"
+            }
+          ]
+        },
+        {
+          "id": "cow-milk-challenge-cmpa",
+          "name": "Trial of regular cow's milk formula — confirm the allergy is real",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Re-challenging an infant with regular cow's milk formula to 'confirm' the allergy without an allergist-supervised oral food challenge risks another FPIES or allergic reaction in an infant who may already have significant GI compromise. The diagnosis is supported by clinical response to elimination — confirmation of tolerance should be done with a structured, supervised oral food challenge at the appropriate age (typically 12–18 months for CMPA, later for FPIES), not by informal home rechallenging.",
+          "references": [
+            {
+              "source": "CMPA — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK537054/",
+              "detail": "Supervised OFC required for tolerance reassessment; home rechallenge risks acute reaction"
+            },
+            {
+              "source": "ESPGHAN CMPA Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4315808/",
+              "detail": "Structured OFC at 9-12 months for IgE-mediated, 18-24 months for non-IgE; not informal home trial"
             }
           ]
         }
@@ -27605,7 +29556,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "COX-2 selective inhibitors (celecoxib) are generally SAFE in NSAID-hypersensitivity/AERD — reactions are triggered by COX-1 inhibition and the resulting leukotriene surge. COX-2 selective agents spare COX-1 and are typically well-tolerated. Avoiding celecoxib unnecessarily restricts a useful analgesic option for patients who need anti-inflammatory therapy."
+          "teaching": "COX-2 selective inhibitors (celecoxib) are generally SAFE in NSAID hypersensitivity/AERD — they selectively inhibit COX-2 without significantly affecting COX-1, so they do not shift arachidonic acid to the leukotriene pathway that triggers AERD reactions. Most AERD patients tolerate celecoxib. Confirm tolerance with a supervised graded challenge before regular use, but avoidance of all NSAIDs including COX-2 inhibitors is unnecessarily restrictive.",
+          "references": [
+            {
+              "source": "NSAID Hypersensitivity — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK542243/",
+              "detail": "COX-2 selective inhibitors generally tolerated in AERD — COX-1 sparing"
+            },
+            {
+              "source": "EAACI/GA2LEN NSAID Hypersensitivity Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386649/",
+              "detail": "Celecoxib can be used cautiously in NSAID hypersensitivity with supervised challenge"
+            }
+          ]
         },
         {
           "id": "nsaid-dist-2",
@@ -27614,7 +29577,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Skin testing for aspirin/NSAID hypersensitivity is not valid — the reaction mechanism is pharmacological (COX-1 inhibition causing leukotriene shift), not IgE-mediated. There is no IgE antibody to detect, making skin prick tests and specific IgE meaningless for NSAID hypersensitivity diagnosis. Diagnosis requires clinical history plus supervised oral aspirin challenge."
+          "teaching": "Skin testing for aspirin/NSAID hypersensitivity is not valid — NSAID reactions in AERD/Samter triad are pharmacological (COX-1 inhibition), not IgE-mediated. Skin prick testing and intradermal testing only detect IgE-mediated drug reactions. The diagnostic gold standard for NSAID hypersensitivity is a supervised graded oral aspirin challenge with spirometry monitoring, performed by an allergist.",
+          "references": [
+            {
+              "source": "NSAID Hypersensitivity — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK542243/",
+              "detail": "NSAID reactions are pharmacological (COX-1), not IgE — skin testing invalid"
+            },
+            {
+              "source": "EAACI/GA2LEN NSAID Hypersensitivity Guidelines — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386649/",
+              "detail": "Oral aspirin challenge with spirometry is the gold standard diagnostic test"
+            }
+          ]
         }
       ],
       "phases": [
@@ -27759,7 +29734,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Blanket tree nut avoidance in peanut allergy is not automatically required — peanuts are legumes, not tree nuts, and cross-reactivity is low (~25–40% for some tree nuts based on shared proteins). Allergy testing should determine which, if any, tree nuts are co-allergenic for this patient. Unnecessary avoidance restricts nutrition without evidence-based benefit."
+          "teaching": "Blanket tree nut avoidance in peanut allergy is not automatically required — peanuts are legumes, not tree nuts, and cross-reactivity is variable. Studies show only 25–40% of peanut-allergic patients are co-sensitized to tree nuts. Component testing (Ara h 9 for cross-reactive lipid transfer proteins) and formal evaluation determine whether specific tree nuts pose a risk. Unnecessary avoidance impairs nutrition and quality of life.",
+          "references": [
+            {
+              "source": "Food Allergy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482187/",
+              "detail": "Peanut is a legume; tree nut co-allergy variable (25-40%); evaluate individually"
+            },
+            {
+              "source": "FARE Peanut Allergy Resource",
+              "url": "https://www.foodallergy.org/living-food-allergies/food-allergy-essentials/common-allergens/peanut",
+              "detail": "Tree nut avoidance should be individualized, not automatic in peanut allergy"
+            }
+          ]
         },
         {
           "id": "peanut-dist-2",
@@ -27768,7 +29755,19 @@ window.CRT_DATA = {
           "correct": false,
           "critical": false,
           "phase": 0,
-          "teaching": "Discharging a peanut-allergic patient with antihistamines as the sole emergency treatment is dangerous and inadequate. Antihistamines cannot treat anaphylaxis — they address only histamine-mediated symptoms (urticaria, itch) but not cardiovascular collapse, laryngeal edema, or bronchospasm. Two epinephrine auto-injectors are mandatory at discharge for all patients with a history of anaphylaxis."
+          "teaching": "Discharging a peanut-allergic patient with antihistamines as sole treatment after anaphylaxis is dangerous and below the standard of care. All patients who have experienced anaphylaxis must be discharged with two epinephrine auto-injectors, a written anaphylaxis action plan, allergist follow-up within 1–4 weeks, and counseling on biphasic reaction risk. Antihistamines treat itch and hives — not anaphylaxis.",
+          "references": [
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Mandatory discharge: 2 epinephrine auto-injectors, action plan, allergist referral"
+            },
+            {
+              "source": "EAACI Anaphylaxis Guidelines 2021 — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+              "detail": "Antihistamines alone at discharge is inadequate — epinephrine Rx and action plan required"
+            }
+          ]
         }
       ],
       "phases": [
@@ -27905,6 +29904,25 @@ window.CRT_DATA = {
               "detail": "Dont avoid"
             }
           ]
+        },
+        {
+          "id": "ceph-avoid-pcn",
+          "name": "Avoid all cephalosporins — 10% cross-reactivity with penicillin",
+          "correct": false,
+          "phase": 1,
+          "teaching": "The 10% cross-reactivity figure between penicillin and cephalosporins is a myth based on outdated 1960s studies contaminated with penicillin impurities. Modern evidence shows true cross-reactivity is <1–2%, primarily occurring only between beta-lactams with identical or similar R1 side chains. Blanket cephalosporin avoidance in penicillin-labeled patients deprives them of first-line antibiotics for many serious infections without evidence-based justification.",
+          "references": [
+            {
+              "source": "Penicillin Allergy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK554507/",
+              "detail": "Cross-reactivity <1-2% with modern cephalosporins; 10% figure is a myth from contaminated early studies"
+            },
+            {
+              "source": "Beta-Lactam Cross-Reactivity Review — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7192088/",
+              "detail": "Side chain similarity determines cross-reactivity; blanket cephalosporin avoidance not evidence-based"
+            }
+          ]
         }
       ],
       "phases": [
@@ -28039,6 +30057,25 @@ window.CRT_DATA = {
               "source": "UV",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482543/",
               "detail": "Insufficient"
+            }
+          ]
+        },
+        {
+          "id": "antihistamine-all-uv",
+          "name": "High-dose H1 antihistamine — treats both urticaria and vasculitis",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Antihistamines treat the symptom of itching in urticarial vasculitis but do not treat the underlying leukocytoclastic vasculitis. Urticarial vasculitis is a systemic vasculitis — antihistamine monotherapy leaves the vessel wall inflammation untreated, risking progression to systemic complications including glomerulonephritis, serositis, and obstructive pulmonary disease, particularly in hypocomplementemic UV. Anti-inflammatory agents (colchicine, dapsone) are required.",
+          "references": [
+            {
+              "source": "Urticarial Vasculitis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482200/",
+              "detail": "Antihistamines treat pruritus only; anti-inflammatory therapy mandatory for vasculitis component"
+            },
+            {
+              "source": "Vasculitis Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5734929/",
+              "detail": "Colchicine/dapsone/HCQ required; antihistamine monotherapy inadequate for UV"
             }
           ]
         }
@@ -28353,6 +30390,25 @@ window.CRT_DATA = {
               "detail": "Stop"
             }
           ]
+        },
+        {
+          "id": "keep-latex-v3",
+          "name": "Complete the procedure — briefly continuing is acceptable",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Continuing ANY latex exposure during anaphylaxis is absolutely contraindicated — it provides ongoing allergen contact to activated mast cells and perpetuates histamine and cytokine release, directly counteracting epinephrine. All latex-containing materials must be removed from the patient immediately and simultaneously with epinephrine administration. There is no safe duration of 'brief' continued latex exposure during an active anaphylactic reaction.",
+          "references": [
+            {
+              "source": "Latex Allergy — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK531478/",
+              "detail": "Complete and immediate latex removal is mandatory; any ongoing exposure worsens anaphylaxis"
+            },
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Allergen removal is simultaneous with epinephrine; continued exposure negates treatment"
+            }
+          ]
         }
       ],
       "phases": [
@@ -28510,6 +30566,25 @@ window.CRT_DATA = {
               "detail": "Not sole tx"
             }
           ]
+        },
+        {
+          "id": "no-epi-school-v4",
+          "name": "Send to nurse's office — school nurse has epinephrine",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Sending an adolescent in anaphylaxis to the nurse's office delays epinephrine by critical minutes. Anaphylaxis can cause cardiac arrest within 5–30 minutes of symptom onset. If the student has a prescribed auto-injector, it must be administered immediately wherever the reaction occurs — by the student, a trained teacher, or any bystander. A 504 plan should ensure the student can self-carry and self-administer. Walking to the nurse wastes the therapeutic window.",
+          "references": [
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Immediate epinephrine where the reaction occurs; transport delays are dangerous"
+            },
+            {
+              "source": "FARE School Anaphylaxis Guidelines",
+              "url": "https://www.foodallergy.org/resources/managing-food-allergies-school",
+              "detail": "Self-carry and immediate administration policy; delay to nurse office risks fatal outcome"
+            }
+          ]
         }
       ],
       "phases": [
@@ -28656,6 +30731,25 @@ window.CRT_DATA = {
               "source": "Anaphylaxis",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
               "detail": "Wrong dose"
+            }
+          ]
+        },
+        {
+          "id": "wait-parent-v5",
+          "name": "Wait for parent consent before administering epinephrine",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Waiting for parental consent before administering epinephrine to a child in anaphylaxis is medically, ethically, and legally wrong. Anaphylaxis is a life-threatening emergency — the legal doctrine of implied consent applies when a minor is in immediate danger and parents cannot be reached in time. Every second of delay without epinephrine increases the risk of cardiac arrest. Administer epinephrine immediately, then notify parents.",
+          "references": [
+            {
+              "source": "Anaphylaxis — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK482124/",
+              "detail": "Implied consent applies in life-threatening emergency; administer epinephrine immediately"
+            },
+            {
+              "source": "Pediatric Emergency Consent — AAP PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6436170/",
+              "detail": "Implied consent doctrine permits treatment without parental consent in imminent life-threatening situations"
             }
           ]
         }
@@ -29231,6 +31325,25 @@ window.CRT_DATA = {
               "detail": "Sulfa dangerous"
             }
           ]
+        },
+        {
+          "id": "continue-lamotrigine-v2",
+          "name": "Continue lamotrigine at lower dose — seizure control is critical",
+          "correct": false,
+          "phase": 1,
+          "teaching": "Lamotrigine must be stopped immediately and permanently in SJS/TEN — there is no safe lower dose. Continued exposure drives ongoing keratinocyte apoptosis and worsens skin detachment. Alternative anticonvulsants (levetiracetam, valproate, topiramate) that do not cause SJS/TEN must be started urgently in consultation with neurology. Seizure control is important, but it cannot be prioritized over stopping the drug that is causing potentially fatal skin necrosis.",
+          "references": [
+            {
+              "source": "SJS/TEN — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459323/",
+              "detail": "Causative drug stopped immediately and permanently; no safe dose reduction"
+            },
+            {
+              "source": "SJS/TEN Drug Management — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7552546/",
+              "detail": "Alternative anticonvulsants required urgently; dose reduction is not an option"
+            }
+          ]
         }
       ],
       "phases": [
@@ -29402,6 +31515,25 @@ window.CRT_DATA = {
               "source": "SJS TEN",
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK459323/",
               "detail": "Never desensitize"
+            }
+          ]
+        },
+        {
+          "id": "tmp-smx-rechallenge-v2",
+          "name": "Rechallenge with TMP-SMX — needed for PCP prophylaxis in HIV",
+          "correct": false,
+          "phase": 1,
+          "teaching": "TMP-SMX rechallenge after SJS/TEN overlap is absolutely contraindicated — mortality from rechallenge approaches 10% from a more severe and rapidly progressive reaction. PCP prophylaxis in HIV can be achieved safely with dapsone (check G6PD first), atovaquone, or inhaled pentamidine — all of which are effective alternatives. The permanent contraindication to TMP-SMX must be documented prominently and alternatives arranged before discharge.",
+          "references": [
+            {
+              "source": "SJS/TEN — StatPearls",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK459323/",
+              "detail": "Rechallenge contraindicated — 10% mortality risk; permanent contraindication"
+            },
+            {
+              "source": "HIV PCP Prophylaxis Alternatives — PMC",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6085558/",
+              "detail": "Dapsone, atovaquone, inhaled pentamidine are safe alternatives; TMP-SMX never rechallenged after SJS/TEN"
             }
           ]
         }
