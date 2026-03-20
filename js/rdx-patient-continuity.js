@@ -1,5 +1,41 @@
 /*
- * rdx-patient-continuity.js — Patient Continuity & Cross-Setting Encounter System
+ * rdx-
+        {
+          sequence: 2,
+          caseId: 'pe-v2',
+          setting: 'Emergency Department',
+          date: '5 weeks post-DVT',
+          provider: 'Dr. K. Thompson, Emergency Medicine / PERT',
+          summary: 'Submassive PE with RV dysfunction. Root cause: apixaban underuse due to cost. PERT activated. UFH started. Catheter-directed thrombolysis performed. ICU admission. Survived. Social work enrolled patient in Medicaid; transitioned to warfarin.',
+          vitals: { BP: '94/58', HR: '122', SpO2: '89%' }
+        },
+        {
+          sequence: 3,
+          caseId: 'pe-v3',
+          setting: 'Hematology Clinic — 3 months post-PE',
+          date: '3 months post-PE',
+          provider: 'Dr. A. Goldstein, Hematology',
+          summary: 'Hypercoagulability workup: triple-positive antiphospholipid syndrome (LA+, aCL IgG+, aβ2GPI IgG+). Lifelong warfarin (INR 2–3) — DOACs contraindicated per TRAPS/RAPS trials. Rheumatology referral for possible SLE. Pregnancy planning counseled.',
+          vitals: { INR: '2.4', BP: '118/72' }
+        },
+        {
+          sequence: 2,
+          caseId: 'dka-v2',
+          setting: 'Pediatric ED → PICU',
+          date: '2 months after diagnosis',
+          provider: 'Dr. S. Rivera, Pediatric Critical Care',
+          summary: 'DKA complicated by cerebral edema during treatment — sudden GCS drop to 11, Cushing triad, papilledema. Mannitol given STAT. PICU admission. Survived without permanent neurological deficit. Hospitalized 5 days.',
+          vitals: { BP: '142/88', HR: '54', GCS: '11' }
+        },
+        {
+          sequence: 3,
+          caseId: 'dka-v3',
+          setting: 'Pediatric Endocrinology Clinic',
+          date: '4 months after diagnosis',
+          provider: 'Dr. B. Kowalski, Pediatric Endocrinology',
+          summary: 'Third DKA in 4 months. Root cause identified: CGM insurance denial and insulin rationing due to cost. HbA1c 12.4%. CGM appeal filed, patient assistance program enrolled, sick day rules education, social work referral. Insulin pump referral placed.',
+          vitals: { Glucose: '318', HbA1c: '12.4%' }
+        },patient-continuity.js — Patient Continuity & Cross-Setting Encounter System
  * ReasonDx · Lauren Fine, MD, FAAAAI
  *
  * Provides prior encounter history for patients who appear across multiple clinical settings.
@@ -119,10 +155,10 @@
       patientName: 'Gwendolyn Fischer',
       dob: '1949-02-28',
       mrn: '405629',
-      cases: ['stroke-v1', 'acute-ischemic-stroke-tpa', 'hypertensive-emergency'],
+      cases: ['stroke-v1', 'stroke-v2', 'stroke-v3', 'acute-ischemic-stroke-tpa', 'hypertensive-emergency'],
       encounters: [
         {
-          sequence: 1,
+          sequence: 0,
           caseId: 'hypertensive-emergency',
           setting: 'Emergency Department',
           date: '6 months ago',
@@ -136,6 +172,24 @@
             { name: 'BMP', val: 'Na 138, K 3.8, otherwise normal', flag: '' },
             { name: 'UA', val: '2+ protein', flag: 'H' }
           ]
+        },
+        {
+          sequence: 2,
+          caseId: 'stroke-v2',
+          setting: 'Neuro ICU',
+          date: 'Day 0 (6h post-tPA)',
+          provider: 'Dr. M. Okafor, Neurocritical Care',
+          summary: 'Hemorrhagic transformation (PH2) 6 hours post-tPA. NIHSS worsened from 14 to 22. CT head: parenchymal hematoma, 5mm midline shift. BP controlled with nicardipine. Intubated for airway protection. Neurosurgery evaluated — conservative management. ICU admission.',
+          vitals: { BP: '188/104', HR: '94', GCS: '10' }
+        },
+        {
+          sequence: 3,
+          caseId: 'stroke-v3',
+          setting: 'Acute Inpatient Neurology — Day 5',
+          date: 'Day 5',
+          provider: 'Dr. L. Weinstein, Neurology',
+          summary: 'Post-stroke complications: aspiration pneumonia (treated with ampicillin-sulbactam), new-onset paroxysmal AF (CHA₂DS₂-VASc 5). Anticoagulation deferred — 5 days post PH2 hemorrhagic conversion. Transferred to inpatient stroke rehab. PT/OT/SLP daily. Anticoagulation plan: reassess at 4 weeks.',
+          vitals: { BP: '144/88', HR: '82', Temp: '38.6°C' }
         },
         {
           sequence: 2,
@@ -163,7 +217,7 @@
       patientName: 'Devon Patterson',
       dob: '2008-07-19',
       mrn: '512384',
-      cases: ['dka-v1'],
+      cases: ['dka-v1', 'dka-v2', 'dka-v3'],
       encounters: [
         {
           sequence: 1,
@@ -191,7 +245,7 @@
       patientName: 'Rachel Owusu',
       dob: '1987-11-14',
       mrn: '623910',
-      cases: ['pe-v1', 'massive-pe-with-rv-failure', 'pulmonary-embolism-syncope'],
+      cases: ['pe-v1', 'pe-v2', 'pe-v3', 'massive-pe-with-rv-failure', 'pulmonary-embolism-syncope'],
       encounters: [
         {
           sequence: 1,
