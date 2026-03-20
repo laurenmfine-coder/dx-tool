@@ -1,637 +1,623 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- SEO + Social sharing -->
-  <meta name="description" content="ReasonDx — Clinical Reasoning Education Platform. AI Socratic coaching, virtual patient cases, and pathophysiology modules for medical students and residents.">
-  <meta property="og:title" content="ReasonDx — Clinical Reasoning Education">
-  <meta property="og:description" content="CoachDx, CaseDx, and MechanismDx — three integrated ways to build clinical reasoning. Built for medical students and residents.">
-  <link rel="canonical" href="https://reasondx.com/">
-  <meta property="og:url" content="https://reasondx.com">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://reasondx.com/icons/logo-transparent.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ReasonDx — Clinical Reasoning Education">
-  <meta name="twitter:description" content="AI coaching, virtual patient cases, and pathophysiology — built for medical students and residents.">
-  <meta name="robots" content="index, follow">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
 <meta charset="UTF-8">
+  <link rel="canonical" href="https://reasondx.com/mechanism/index.html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReasonDx — Clinical Reasoning Platform</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>MechanismDx — Pathophysiology Library | ReasonDx</title>
+<meta name="description" content="Visual pathophysiology modules across every organ system. Master the mechanism first, then apply it to cases.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#FAF9F7;
-  --cream:#F4F2EE;
-  --surface:#FFFFFF;
-  --text:#1C1C1A;
-  --dim:#706F6A;
-  --dim2:#B0AFA8;
-  --border:#E6E4DF;
-  --border-hi:#CCCAC3;
-  --blue:#2874A6;
-  --blue-dk:#1B4F72;
-  --blue-lt:rgba(40,116,166,.07);
-  --blue-mid:#5BA8D0;
-  --teal:#0D7A67;
-  --violet:#6B28A6;
-  --f-serif:'Playfair Display',Georgia,serif;
-  --f-sans:'DM Sans',-apple-system,sans-serif;
+:root {
+  --bg: #F0F3F7;
+  --surface: #FFFFFF;
+  --surface2: #F7F9FC;
+  --border: #E2E8F0;
+  --border-light: #F1F5F9;
+  --text: #1E293B;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --blue: #2874A6;
+  --blue-dk: #1B4F72;
+  --blue-lt: #EBF5FB;
+  --teal: #0D7A67;
+  --teal-lt: #E8F8F5;
+  --violet: #7C3AED;
+  --violet-lt: #F5F3FF;
+  --amber: #D97706;
+  --amber-lt: #FFFBEB;
+  --red: #DC2626;
+  --red-lt: #FEF2F2;
+  --green: #059669;
+  --green-lt: #ECFDF5;
+  --slate: #475569;
+  --radius: 10px;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--f-sans);font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
 
-/* ── NAV ── */
-.nav{position:sticky;top:0;z-index:90;background:rgba(250,249,247,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 48px;gap:32px}
-.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.nav-logo-mark{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--f-serif);font-size:14px;font-weight:500;flex-shrink:0}
-.nav-logo-text{font-family:var(--f-serif);font-size:19px;font-weight:400;color:var(--text);letter-spacing:-.1px}
-.nav-links{display:flex;align-items:center;gap:2px;flex:1}
-.nav-link{font-size:13px;font-weight:400;color:var(--dim);padding:8px 14px;border-radius:7px;transition:all .15s;white-space:nowrap}
-.nav-link:hover{color:var(--text);background:var(--cream)}
-.nav-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
-.nav-btn-ghost{font-family:var(--f-sans);font-size:13px;font-weight:500;color:var(--dim);padding:8px 16px;border-radius:7px;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap}
-.nav-btn-ghost:hover{border-color:var(--border-hi);color:var(--text)}
-.nav-btn-primary{font-family:var(--f-sans);font-size:13px;font-weight:600;color:#fff;padding:9px 20px;border-radius:7px;border:none;background:var(--blue);cursor:pointer;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-block}
-.nav-btn-primary:hover{background:var(--blue-dk)}
-/* Auth state */
-.nav-user-name{font-size:13px;font-weight:600;color:var(--text)}
-.nav-signout{font-family:var(--f-sans);font-size:12px;color:var(--dim2);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:5px;transition:all .15s}
-.nav-signout:hover{color:var(--dim)}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* ── TOP NAV ── */
+.topnav { background: rgba(255,255,255,.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); height: 56px; display: flex; align-items: center; padding: 0 28px; position: sticky; top: 0; z-index: 100; gap: 16px; }
+.topnav-logo { font-weight: 800; font-size: 15px; color: var(--blue-dk); letter-spacing: -.3px; }
+.topnav-sep { color: var(--text-muted); font-size: 14px; }
+.topnav-page { font-size: 13px; font-weight: 600; color: var(--violet); }
+.topnav-back { margin-left: auto; font-size: 12px; color: var(--text-secondary); font-weight: 500; padding: 5px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all .15s; }
+.topnav-back:hover { border-color: var(--blue); color: var(--blue); }
 
 /* ── HERO ── */
-.hero{padding:96px 48px 80px;text-align:center;position:relative;overflow:hidden;background:var(--bg)}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 60%,rgba(40,116,166,.05) 0%,transparent 70%);pointer-events:none}
+.hero {
+  background: linear-gradient(135deg, #1E1B4B 0%, #312E81 40%, #4C1D95 70%, #2D1B69 100%);
+  padding: 48px 28px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 400px at 80% 50%, rgba(124,58,237,.25), transparent),
+              radial-gradient(ellipse 400px 300px at 20% 80%, rgba(40,116,166,.2), transparent);
+  pointer-events: none;
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.5); margin-bottom: 12px; }
+.hero-title { font-size: clamp(26px, 4vw, 40px); font-weight: 800; color: #fff; letter-spacing: -.8px; line-height: 1.1; margin-bottom: 12px; }
+.hero-title span { color: #C4B5FD; }
+.hero-sub { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.75; max-width: 560px; margin-bottom: 24px; }
+.hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat-n { font-family: var(--mono); font-size: 24px; font-weight: 700; color: #C4B5FD; line-height: 1; }
+.hero-stat-l { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 3px; text-transform: uppercase; letter-spacing: .06em; }
 
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.15em;color:var(--blue);margin-bottom:32px}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:28px;height:1px;background:var(--blue);opacity:.4}
+/* ── SEARCH ── */
+.search-bar { max-width: 1100px; margin: 0 auto; padding: 20px 28px 0; }
+.search-wrap { position: relative; }
+.search-input { width: 100%; padding: 12px 16px 12px 44px; font-family: var(--sans); font-size: 14px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; outline: none; color: var(--text); transition: border-color .15s; }
+.search-input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(124,58,237,.1); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; pointer-events: none; }
+.search-clear { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; display: none; }
 
-.hero h1{font-family:var(--f-serif);font-size:clamp(44px,7vw,86px);font-weight:400;color:var(--text);line-height:1.06;letter-spacing:-1px;margin-bottom:24px;max-width:860px;margin-left:auto;margin-right:auto}
-.hero h1 em{font-style:italic;color:var(--blue)}
+/* ── FILTER PILLS ── */
+.filters { max-width: 1100px; margin: 0 auto; padding: 16px 28px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-pill { font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: all .15s; white-space: nowrap; }
+.filter-pill:hover { border-color: var(--violet); color: var(--violet); }
+.filter-pill.active { background: var(--violet); border-color: var(--violet); color: #fff; }
 
-.hero-tagline{font-size:clamp(15px,1.8vw,18px);font-weight:300;color:var(--dim);line-height:1.8;max-width:500px;margin:0 auto 52px}
+/* ── CONTENT ── */
+.content { max-width: 1100px; margin: 0 auto; padding: 28px 28px 80px; }
 
-/* CTAs */
-.cta-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:52px}
-.cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:15px;font-weight:600;font-family:var(--f-sans);padding:15px 34px;border-radius:8px;border:none;cursor:pointer;transition:all .2s}
-.cta-primary:hover{background:var(--blue-dk);transform:translateY(-1px);box-shadow:0 8px 28px rgba(40,116,166,.22)}
-.cta-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text);font-size:14px;font-weight:500;font-family:var(--f-sans);padding:14px 28px;border-radius:8px;border:1.5px solid var(--border-hi);cursor:pointer;transition:all .2s}
-.cta-secondary:hover{border-color:var(--blue);color:var(--blue)}
+/* ── SPECIALTY SECTION ── */
+.specialty-section { margin-bottom: 36px; }
+.specialty-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.specialty-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.specialty-name { font-size: 14px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .06em; }
+.specialty-count { font-size: 11px; color: var(--text-muted); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 2px 8px; font-family: var(--mono); }
+.specialty-line { flex: 1; height: 1px; background: var(--border); }
 
-/* Search */
-.search-container{max-width:560px;margin:0 auto;position:relative}
-.search-box{display:flex;background:var(--surface);border:1.5px solid var(--border-hi);border-radius:10px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:all .2s}
-.search-box:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
-.search-icon-wrap{display:flex;align-items:center;padding:0 16px;color:var(--dim2);font-size:15px;flex-shrink:0}
-.search-input{flex:1;background:transparent;border:none;outline:none;padding:15px 0;font-size:14px;font-family:var(--f-sans);color:var(--text)}
-.search-input::placeholder{color:var(--dim2)}
-.search-hint{font-size:11px;color:var(--dim2);margin-top:10px;letter-spacing:.02em}
+/* ── MODULE GRID ── */
+.module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
 
-/* Search dropdown */
-.search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;display:none;z-index:40;max-height:300px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.1)}
-.search-dropdown.open{display:block}
-.sr-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);transition:background .1s}
-.sr-item:last-child{border-bottom:none}
-.sr-item:hover{background:var(--cream)}
-.sr-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.sr-name{font-weight:600;font-size:13px}
-.sr-desc{font-size:11px;color:var(--dim)}
-.sr-cat{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-left:auto;white-space:nowrap}
+/* ── MODULE CARD ── */
+.module-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .18s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.module-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
+.module-card.available:hover { border-color: var(--violet); }
+.module-card.coming-soon { opacity: .55; cursor: default; }
+.module-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--border); }
 
-/* ── DIVIDER ── */
-.rule{height:1px;background:var(--border);max-width:1140px;margin:0 auto}
+.card-accent { height: 4px; flex-shrink: 0; }
+.card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+.card-icon { font-size: 26px; }
+.card-badge { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+.badge-live { background: var(--green-lt); color: var(--green); }
+.badge-soon { background: var(--border-light); color: var(--text-muted); border: 1px solid var(--border); }
+.badge-new { background: var(--amber-lt); color: var(--amber); }
 
-/* ── SECTION WRAPPER ── */
-.section{padding:80px 48px;max-width:1140px;margin:0 auto}
-.sec-eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--dim2);margin-bottom:14px}
-.sec-title{font-family:var(--f-serif);font-size:clamp(26px,3.5vw,40px);font-weight:400;color:var(--text);letter-spacing:-.4px;line-height:1.15;margin-bottom:10px}
-.sec-sub{font-size:14px;font-weight:300;color:var(--dim);line-height:1.75;max-width:500px}
+.card-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 6px; }
+.card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; flex: 1; }
+.card-tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 4px; }
+.card-tag { font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 4px; background: var(--violet-lt); color: var(--violet); }
+.card-tag.step2 { background: var(--amber-lt); color: #92400E; }
+.card-modules-count { font-size: 11px; color: var(--text-muted); font-family: var(--mono); margin-top: 8px; }
 
-/* ── THREE PILLAR CARDS ── */
-.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:52px;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;background:var(--border)}
+/* ── EMPTY STATE ── */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.empty-state h3 { font-size: 18px; color: var(--text-secondary); margin-bottom: 8px; }
 
-.p-card{background:var(--surface);padding:40px 36px;display:flex;flex-direction:column;position:relative;cursor:pointer;transition:background .18s}
-.p-card:hover{background:var(--cream)}
-.p-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
-.p-card[data-c=blue]::before{background:var(--blue)}
-.p-card[data-c=teal]::before{background:var(--teal)}
-.p-card[data-c=violet]::before{background:var(--violet)}
-.p-card:hover::before{opacity:1}
+/* ── PROGRESS BANNER ── */
+.progress-banner { background: linear-gradient(135deg, var(--violet-lt), rgba(124,58,237,.05)); border: 1.5px solid rgba(124,58,237,.2); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.progress-icon { font-size: 28px; flex-shrink: 0; }
+.progress-text h4 { font-size: 14px; font-weight: 700; color: var(--violet); margin-bottom: 2px; }
+.progress-text p { font-size: 12px; color: var(--text-secondary); }
 
-.p-icon{font-size:28px;margin-bottom:22px}
-.p-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
-.pt-blue{color:var(--blue)}
-.pt-teal{color:var(--teal)}
-.pt-violet{color:var(--violet)}
-.p-name{font-family:var(--f-serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:12px;letter-spacing:-.2px;line-height:1.2}
-.p-desc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7;margin-bottom:20px;flex:1}
-.p-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
-.p-list li{font-size:12px;color:var(--dim);display:flex;gap:8px;line-height:1.5}
-.p-list li::before{content:'—';color:var(--dim2);flex-shrink:0;margin-top:0}
-.p-cta{font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:gap .15s}
-.p-card:hover .p-cta{gap:10px}
-.p-cta-blue{color:var(--blue)}
-.p-cta-teal{color:var(--teal)}
-.p-cta-violet{color:var(--violet)}
-.p-stat{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-top:8px}
-
-/* ── BRIDGE STRIP ── */
-.bridge{background:var(--cream);border:1.5px solid var(--border);border-radius:14px;padding:36px 40px;display:flex;gap:24px;align-items:flex-start;margin-top:16px}
-.bridge-icon{font-size:22px;flex-shrink:0;margin-top:3px}
-.bridge-title{font-family:var(--f-serif);font-size:19px;font-weight:400;color:var(--text);margin-bottom:8px;letter-spacing:-.2px}
-.bridge-desc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7}
-.bridge-flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
-.bf-node{font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;border:1.5px solid}
-.bn-blue{border-color:rgba(40,116,166,.3);color:var(--blue);background:rgba(40,116,166,.05)}
-.bn-teal{border-color:rgba(13,122,103,.3);color:var(--teal);background:rgba(13,122,103,.05)}
-.bn-violet{border-color:rgba(107,40,166,.3);color:var(--violet);background:rgba(107,40,166,.05)}
-.bf-arrow{color:var(--dim2);font-size:13px}
-.bridge-fp{font-size:11px;color:var(--dim2);margin-top:12px;display:flex;align-items:center;gap:7px}
-.bridge-fp::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
-
-/* ── SUPPORT GRID ── */
-.support-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:48px}
-.s-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:24px 26px;display:flex;gap:16px;align-items:flex-start;text-decoration:none;color:var(--text);transition:all .18s;position:relative;overflow:hidden}
-.s-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;opacity:.7}
-.s-card[data-c=blue]::after{background:var(--blue)}
-.s-card[data-c=amber]::after{background:#C27D0E}
-.s-card[data-c=green]::after{background:#1A7A4A}
-.s-card[data-c=purple]::after{background:#6B28A6}
-.s-card:hover{border-color:var(--border-hi);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.06)}
-.s-icon{font-size:20px;flex-shrink:0;margin-top:2px}
-.s-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
-.s-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.6}
-.s-stat{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--dim2);margin-top:6px}
-
-/* ── HOW IT WORKS ── */
-.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:52px}
-.how-num{font-family:var(--f-serif);font-size:60px;font-weight:400;color:var(--blue);opacity:.12;line-height:1;margin-bottom:14px}
-.how-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px}
-.how-desc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.75}
-
-/* ── FOOTER ── */
-.footer-wrap{background:var(--cream);border-top:1px solid var(--border)}
-.footer{max-width:1140px;margin:0 auto;padding:56px 48px 40px}
-.footer-stats{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;padding-bottom:36px;border-bottom:1px solid var(--border)}
-.f-stat-num{font-family:var(--f-serif);font-size:36px;font-weight:400;color:var(--blue);line-height:1}
-.f-stat-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--dim2);margin-top:4px}
-.save-prompt{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--blue);background:rgba(40,116,166,.07);padding:11px 20px;border-radius:8px;text-decoration:none;margin-bottom:28px;transition:all .15s;border:1.5px solid rgba(40,116,166,.15)}
-.save-prompt:hover{background:rgba(40,116,166,.12)}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap}
-.footer-links a{font-size:12px;color:var(--dim2);transition:color .15s}
-.footer-links a:hover{color:var(--text)}
-.footer-copy{font-size:12px;color:var(--dim2)}
-
-/* ── MODAL ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(28,28,26,.45);backdrop-filter:blur(5px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;max-width:500px;width:100%;overflow:hidden;transform:translateY(10px);transition:transform .25s;box-shadow:0 20px 60px rgba(0,0,0,.12)}
-.modal-overlay.open .modal{transform:translateY(0)}
-.modal-hdr{padding:26px 28px 20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.m-title{font-family:var(--f-serif);font-size:20px;font-weight:400;color:var(--text);margin-bottom:3px;letter-spacing:-.2px}
-.m-sub{font-size:13px;font-weight:300;color:var(--dim)}
-.modal-x{background:transparent;border:1.5px solid var(--border);color:var(--dim);width:30px;height:30px;border-radius:7px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-family:var(--f-sans)}
-.modal-x:hover{border-color:var(--border-hi);color:var(--text)}
-.modal-body{padding:20px 28px 28px}
-.m-q{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.13em;color:var(--dim2);margin-bottom:14px}
-.lo-list{display:flex;flex-direction:column;gap:9px}
-.lo{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:10px;border:1.5px solid var(--border);cursor:pointer;transition:all .2s;background:transparent}
-.lo:hover{background:var(--cream);border-color:var(--border-hi);transform:translateX(3px)}
-.lo[data-p=coach]:hover{border-color:rgba(40,116,166,.3)}
-.lo[data-p=reason]:hover{border-color:rgba(13,122,103,.3)}
-.lo[data-p=mechanism]:hover{border-color:rgba(107,40,166,.3)}
-.lo-ic{width:38px;height:38px;border-radius:9px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.lo-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
-.lo-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.45}
-.lo-arr{margin-left:auto;color:var(--dim2);font-size:14px;flex-shrink:0}
-
-/* ── BRIDGE BANNER ── */
-.bb{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);z-index:150;background:var(--surface);border:1.5px solid var(--border-hi);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 40px rgba(0,0,0,.1);max-width:500px;width:calc(100vw - 48px);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
-.bb.visible{transform:translateX(-50%) translateY(0)}
-.bb-icon{font-size:18px;flex-shrink:0}
-.bb-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:1px}
-.bb-desc{font-size:11px;font-weight:300;color:var(--dim)}
-.bb-btns{display:flex;gap:8px;flex-shrink:0}
-.bb-go{font-family:var(--f-sans);font-size:12px;font-weight:600;padding:7px 14px;border-radius:7px;cursor:pointer;border:none;color:#fff;transition:all .15s;white-space:nowrap}
-.bb-no{font-family:var(--f-sans);font-size:12px;padding:7px 12px;border-radius:7px;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--dim);transition:all .15s}
-.bb-no:hover{border-color:var(--border-hi);color:var(--text)}
-
-/* ── SESSION BAR ── */
-.session-bar{display:none;background:var(--blue);color:#fff;padding:8px 48px;font-size:12px;font-family:var(--f-sans)}
-.session-bar.active{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.s-pill{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:2px 10px;border-radius:100px;background:rgba(255,255,255,.2)}
-.s-topic{font-weight:600}
-.s-resume{text-decoration:underline;cursor:pointer;opacity:.85;margin-left:4px}
-.s-resume:hover{opacity:1}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.hero-eyebrow{animation:fadeUp .5s ease both}
-.hero h1{animation:fadeUp .5s .1s ease both}
-.hero-tagline{animation:fadeUp .5s .2s ease both}
-.cta-group{animation:fadeUp .5s .3s ease both}
-.search-container{animation:fadeUp .5s .35s ease both}
-
-@media(max-width:960px){.pillar-grid{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr;gap:32px}}
-@media(max-width:720px){.nav{padding:0 20px}.hero{padding:64px 20px 56px}.section{padding:56px 20px}.support-grid{grid-template-columns:1fr}.bridge{flex-direction:column;padding:24px}.footer{padding:40px 20px 32px}.cta-group{flex-direction:column;align-items:center}.session-bar{padding:8px 20px}}
+@media (max-width: 680px) {
+  .hero { padding: 32px 20px 28px; }
+  .search-bar, .filters, .content { padding-left: 16px; padding-right: 16px; }
+  .module-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
 </style>
 </head>
 <body>
 
-<!-- SESSION BAR -->
-<div class="session-bar" id="sBar">
-  <span class="s-pill" id="sPill">CoachDx</span>
-  <span>Session in progress:</span>
-  <span class="s-topic" id="sTopic"></span>
-  <span class="s-resume" onclick="resumeSession()">↩ Resume →</span>
-</div>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-logo">
-    <div class="nav-logo-mark">Rx</div>
-    <span class="nav-logo-text">ReasonDx</span>
-  </div>
-  <div class="nav-links">
-    <a class="nav-link" href="CoachDx/index.html">CoachDx</a>
-    <a class="nav-link" href="casedx.html">Cases</a>
-    <a class="nav-link" href="analytics-dashboard.html">My Progress</a>
-  </div>
-  <div class="nav-right" id="navAuth">
-    <!-- Populated by dx-user-bar.js -->
-    <a class="nav-btn-primary" href="auth/login.html">Sign In</a>
-  </div>
+<nav class="topnav">
+  <span class="topnav-logo">ReasonDx</span>
+  <span class="topnav-sep">→</span>
+  <span class="topnav-page">🔬 MechanismDx</span>
+  <a class="topnav-back" href="../index.html">← Home</a>
 </nav>
 
 <!-- HERO -->
-<section>
-  <div style="max-width:1140px;margin:0 auto">
-    <div class="hero">
-      <div class="hero-eyebrow">Clinical Reasoning Platform</div>
-      <h1>Think like a clinician.<br><em>Reason like an expert.</em></h1>
-      <p class="hero-tagline">Three integrated modes — coaching, cases, and mechanisms. Move between them freely. The system tracks where you are and brings you back.</p>
-
-      <div class="cta-group">
-        <button class="cta-primary" onclick="openModal(null)">▶ Start a Session</button>
-        <a class="cta-secondary" href="casedx.html">Browse Cases &amp; Topics →</a>
-      </div>
-
-      <div class="search-container">
-        <div style="position:relative">
-          <div class="search-box">
-            <div class="search-icon-wrap">🔍</div>
-            <input class="search-input" id="search" type="text"
-              placeholder="Search a topic, case, or concept…"
-              autocomplete="off"
-              oninput="doSearch(this.value)"
-              onfocus="doSearch(this.value)"
-              onblur="setTimeout(()=>document.getElementById('srDrop').classList.remove('open'),200)"
-              onkeydown="if(event.key==='Enter'&&this.value.trim())openModal(this.value.trim())">
-          </div>
-          <div class="search-dropdown" id="srDrop"></div>
-        </div>
-        <div class="search-hint">Try: "anaphylaxis", "HAE", "drug allergy", "chest pain", "SBAR"</div>
-      </div>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Pathophysiology Library</div>
+    <h1 class="hero-title">MechanismDx<br><span>Understand before you memorize.</span></h1>
+    <p class="hero-sub">Visual pathophysiology modules across every organ system and specialty. Master the mechanism first — then clinical reasoning follows.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-n" id="statLive">6</div><div class="hero-stat-l">Live modules</div></div>
+      <div class="hero-stat"><div class="hero-stat-n" id="statSystems">12</div><div class="hero-stat-l">Organ systems</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">USMLE</div><div class="hero-stat-l">Step 2 CK aligned</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">Open</div><div class="hero-stat-l">Access only</div></div>
     </div>
-  </div>
-</section>
-
-<div class="rule"></div>
-
-<!-- THREE PILLARS -->
-<div class="section" id="core">
-  <div class="sec-eyebrow">Three Modes. One Learning Arc.</div>
-  <div class="sec-title">The Core of ReasonDx</div>
-  <p class="sec-sub">Each mode is complete on its own — and more powerful when connected. Jump between them freely.</p>
-
-  <div class="pillar-grid">
-    <!-- CoachDx -->
-    <div class="p-card" data-c="blue" onclick="openModal(null,'coach')">
-      <div class="p-icon">🧑‍⚕️</div>
-      <div class="p-tag pt-blue">AI Coaching</div>
-      <div class="p-name">CoachDx</div>
-      <p class="p-desc">Your AI attending. CoachDx doesn't give you answers — it asks the questions that force you to find them, adapting in real time to your reasoning gaps.</p>
-      <ul class="p-list">
-        <li>Socratic coaching on any topic or concept</li>
-        <li>Free-text case or question discussion</li>
-        <li>Knowledge gap targeting & follow-up</li>
-        <li>DDx challenge from any chief complaint</li>
-      </ul>
-      <div class="p-cta p-cta-blue">Start Coaching <span>→</span></div>
-      <div class="p-stat">200+ topics</div>
-    </div>
-
-    <!-- ReasonDx Cases -->
-    <div class="p-card" data-c="teal" onclick="openModal(null,'reason')">
-      <div class="p-icon">🩺</div>
-      <div class="p-tag pt-teal">Structured Cases</div>
-      <div class="p-name">ReasonDx Cases</div>
-      <p class="p-desc">Structured patient scenarios with branching reasoning pathways. Work history, exam, workup, and management — see where your thinking diverges from expert reasoning.</p>
-      <ul class="p-list">
-        <li>Branching case narratives with checkpoints</li>
-        <li>Full EMR-style simulation environment</li>
-        <li>Reasoning pathway fingerprint tracking</li>
-        <li>Post-case debrief & reflection</li>
-      </ul>
-      <div class="p-cta p-cta-teal">Open a Case <span>→</span></div>
-      <div class="p-stat">80+ cases</div>
-    </div>
-
-    <!-- MechanismDx -->
-    <div class="p-card" data-c="violet" onclick="openModal(null,'mechanism')">
-      <div class="p-icon">🔬</div>
-      <div class="p-tag pt-violet">Pathophysiology</div>
-      <div class="p-name">MechanismDx</div>
-      <p class="p-desc">Visual pathophysiology modules that connect basic science to bedside reasoning. When you understand the mechanism, the clinical picture stops being memorization.</p>
-      <ul class="p-list">
-        <li>Interactive mechanism cards with spaced rep</li>
-        <li>Embryology & development module suites</li>
-        <li>Guideline-anchored, open-access content</li>
-        <li>Return directly to your case or session</li>
-      </ul>
-      <div class="p-cta p-cta-violet">Explore Mechanisms <span>→</span></div>
-      <div class="p-stat">36 modules</div>
-    </div>
-  </div>
-
-  <!-- Bridge connector -->
-  <div class="bridge">
-    <div class="bridge-icon">🔁</div>
-    <div>
-      <div class="bridge-title">Move between modes without losing your place</div>
-      <p class="bridge-desc">Struggling with a mechanism mid-coaching session? Jump to MechanismDx — your question stays open. Hit a pathophys wall mid-case? Same thing. Every transition is logged as a gap and surfaced through spaced repetition.</p>
-      <div class="bridge-flow">
-        <span class="bf-node bn-blue">🧑‍⚕️ CoachDx</span>
-        <span class="bf-arrow">⇄</span>
-        <span class="bf-node bn-violet">🔬 MechanismDx</span>
-        <span class="bf-arrow">⇄</span>
-        <span class="bf-node bn-teal">🩺 Cases</span>
-      </div>
-      <div class="bridge-fp">Every gap and bridge is logged to your Reasoning Fingerprint for spaced repetition review</div>
+    <div style="margin-top:20px">
+      <a href="/pathway.html" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.35);border-radius:10px;color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;backdrop-filter:blur(4px)" onmouseover="this.style.background='rgba(255,255,255,.25)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">
+        🔬 Browse all 670 topics in Topic Explorer →
+      </a>
     </div>
   </div>
 </div>
 
-<div class="rule"></div>
-
-<!-- SUPPORTING COMPONENTS -->
-<div class="section">
-  <div class="sec-eyebrow">Also in ReasonDx</div>
-  <div class="sec-title">Supporting Components</div>
-  <p class="sec-sub">These power the cases and coaching — access them directly or reach them naturally through a session.</p>
-
-  <div class="support-grid">
-    <a class="s-card" data-c="blue" href="casedx.html">
-      <div class="s-icon">📚</div>
-      <div>
-        <div class="s-name">Case & Topic Library</div>
-        <p class="s-desc">Browse all 325+ cases by specialty and clinical setting. Pick a topic and launch into any of the three modes from one place.</p>
-        <div class="s-stat">325+ cases · 29 specialties · ED, Floor, Clinic, ICU</div>
-      </div>
-    </a>
-    <a class="s-card" data-c="amber" href="casedx.html">
-      <div class="s-icon">🧩</div>
-      <div>
-        <div class="s-name">Case Trainers & Scenarios</div>
-        <p class="s-desc">The structured reasoning scaffolds that power ReasonDx cases — SBAR handoffs, consultant callbacks, and diagnostic frameworks.</p>
-        <div class="s-stat">79 trainers · SBAR · Callbacks · Frameworks</div>
-      </div>
-    </a>
-    <a class="s-card" data-c="green" href="simroomdx.html">
-      <div class="s-icon">🎤</div>
-      <div>
-        <div class="s-name">Morning Rounds — SimRoomDx</div>
-        <p class="s-desc">Present your patient to the attending. AI characters ask questions and push back on your reasoning in real time.</p>
-        <div class="s-stat">23 scenarios · 6 AI characters</div>
-      </div>
-    </a>
-    <a class="s-card" data-c="purple" href="night-float.html">
-      <div class="s-icon">🌙</div>
-      <div>
-        <div class="s-name">Night Float</div>
-        <p class="s-desc">Cross-cover overnight call. Manage a patient list, respond to nurse pages, handle decompensations, and practice I-PASS handoff.</p>
-        <div class="s-stat">Randomized or topic-based lists</div>
-      </div>
-    </a>
+<!-- SEARCH -->
+<div class="search-bar">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search modules, mechanisms, conditions… (e.g. 'sepsis', 'DKA', 'heart failure')" oninput="filterModules()">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
   </div>
 </div>
 
-<div class="rule"></div>
-
-<!-- HOW IT WORKS -->
-<div class="section">
-  <div style="text-align:center">
-    <div class="sec-eyebrow">The Learning Arc</div>
-    <div class="sec-title" style="margin:0 auto">How a Session Works</div>
-    <p class="sec-sub" style="margin:10px auto 0;text-align:center">Start anywhere. The system meets you there.</p>
-  </div>
-  <div class="how-grid">
-    <div>
-      <div class="how-num">1</div>
-      <div class="how-title">Pick a topic or let the system choose</div>
-      <p class="how-desc">Search for a diagnosis, browse the Case Library, or ask CoachDx to target your weakest area. No rigid curriculum — you lead.</p>
-    </div>
-    <div>
-      <div class="how-num">2</div>
-      <div class="how-title">Work through it in one or all three modes</div>
-      <p class="how-desc">Coach → Case → Mechanism in any order. Hit a gap and the system surfaces a bridge. Your session context travels with you.</p>
-    </div>
-    <div>
-      <div class="how-num">3</div>
-      <div class="how-title">Your gaps become your next session</div>
-      <p class="how-desc">Every bridge taken, every hesitation logged — built into your Reasoning Fingerprint and returned through spaced repetition until mastered.</p>
-    </div>
-  </div>
+<!-- FILTER PILLS -->
+<div class="filters" id="filterPills">
+  <button class="filter-pill active" onclick="setFilter('all', this)">All systems</button>
+  <button class="filter-pill" onclick="setFilter('cardiology', this)">❤️ Cardiology</button>
+  <button class="filter-pill" onclick="setFilter('pulmonary', this)">🫁 Pulmonary</button>
+  <button class="filter-pill" onclick="setFilter('infectious', this)">🦠 Infectious</button>
+  <button class="filter-pill" onclick="setFilter('endocrine', this)">⚗️ Endocrine</button>
+  <button class="filter-pill" onclick="setFilter('neurology', this)">🧠 Neurology</button>
+  <button class="filter-pill" onclick="setFilter('renal', this)">🫘 Renal</button>
+  <button class="filter-pill" onclick="setFilter('hematology', this)">🩸 Hematology</button>
+  <button class="filter-pill" onclick="setFilter('gi', this)">🫄 GI</button>
+  <button class="filter-pill" onclick="setFilter('allergy', this)">🌿 Allergy/Immunology</button>
+  <button class="filter-pill" onclick="setFilter('emergency', this)">🚨 Emergency</button>
+  <button class="filter-pill" onclick="setFilter('psychiatry', this)">🧩 Psychiatry</button>
+  <button class="filter-pill" onclick="setFilter('rheumatology', this)">🦴 Rheumatology</button>
+  <button class="filter-pill" onclick="setFilter('ob', this)">🤰 Obstetrics</button>
 </div>
 
-<!-- FOOTER -->
-<div class="footer-wrap">
-  <div class="footer">
-    <div class="footer-stats">
-      <div><div class="f-stat-num">325+</div><div class="f-stat-label">Clinical Cases</div></div>
-      <div><div class="f-stat-num">36</div><div class="f-stat-label">Mechanism Modules</div></div>
-      <div><div class="f-stat-num">200+</div><div class="f-stat-label">Coaching Topics</div></div>
-      <div><div class="f-stat-num">29</div><div class="f-stat-label">Specialties</div></div>
-    </div>
-    <a class="save-prompt" href="auth/login.html">💾 Sign in to save your Reasoning Fingerprint</a>
-    <div class="footer-bottom">
-      <div class="footer-links">
-        <a href="auth/login.html">Sign In</a>
-        <a href="CoachDx/index.html">CoachDx</a>
-        <a href="CoachDx/index.html">CoachDx</a>
-        <a href="casedx.html">Cases</a>
-        <a href="analytics-dashboard.html">My Progress</a>
-      </div>
-      <div class="footer-copy">© 2025 ReasonDx · Clinical reasoning education · All content open-access</div>
-    </div>
-  </div>
-</div>
+<!-- CONTENT -->
+<div class="content" id="mainContent">
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modal" onclick="closeOut(event)">
-  <div class="modal">
-    <div class="modal-hdr">
-      <div>
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span id="mIcon" style="font-size:20px">▶</span>
-          <div class="m-title" id="mTitle">Start a Session</div>
-        </div>
-        <div class="m-sub" id="mSub">Choose how you want to work on this topic</div>
-      </div>
-      <button class="modal-x" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="m-q">How do you want to learn this?</div>
-      <div class="lo-list">
-        <div class="lo" data-p="coach" onclick="launch('coach')">
-          <div class="lo-ic">🧑‍⚕️</div>
-          <div>
-            <div class="lo-name">CoachDx — Socratic Coaching</div>
-            <div class="lo-desc">Your AI attending asks the questions. Best for applying knowledge and testing your reasoning.</div>
-          </div>
-          <div class="lo-arr">→</div>
-        </div>
-        <div class="lo" data-p="reason" onclick="launch('reason')">
-          <div class="lo-ic">🩺</div>
-          <div>
-            <div class="lo-name">ReasonDx — Work a Case</div>
-            <div class="lo-desc">Structured patient scenario with diagnostic checkpoints and expert pathway comparison.</div>
-          </div>
-          <div class="lo-arr">→</div>
-        </div>
-        <div class="lo" data-p="mechanism" onclick="launch('mechanism')">
-          <div class="lo-ic">🔬</div>
-          <div>
-            <div class="lo-name">MechanismDx — Learn the Science First</div>
-            <div class="lo-desc">Visual pathophysiology. Build the mechanistic foundation, then return to apply it.</div>
-          </div>
-          <div class="lo-arr">→</div>
-        </div>
-      </div>
+  <!-- PROGRESS NOTE -->
+  <div class="progress-banner">
+    <div class="progress-icon">🔬</div>
+    <div class="progress-text">
+      <h4>6 modules live · More being built</h4>
+      <p>Live modules open immediately. Modules marked "Coming soon" are in active development — check back each week.</p>
     </div>
   </div>
-</div>
 
-<!-- BRIDGE BANNER -->
-<div class="bb" id="bb">
-  <div class="bb-icon" id="bbIcon">🔬</div>
-  <div style="flex:1">
-    <div class="bb-title" id="bbTitle">Need to review the mechanism?</div>
-    <div class="bb-desc" id="bbDesc">Jump to MechanismDx — your session is saved here when you return.</div>
-  </div>
-  <div class="bb-btns">
-    <button class="bb-go" id="bbGo" onclick="doBridge()">Go →</button>
-    <button class="bb-no" onclick="dismissBridge()">Not now</button>
-  </div>
 </div>
-
-<!-- Supabase + user bar -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/rdx-supabase.js"></script>
-<script src="js/dx-user-bar.js"></script>
 
 <script>
-/* ── SEARCH ── */
-const IDX=[
-  {n:'Anaphylaxis',d:'IgE-mediated systemic reaction — coaching, cases, mechanisms',c:'A/I',col:'#DC2626',u:'CoachDx/mentor-chat.html?topic=anaphylaxis'},
-  {n:'Asthma',d:'Airway hyperresponsiveness, biologics, asthma-COPD overlap',c:'A/I',col:'#2874A6',u:'mechanism/asthma-module.html'},
-  {n:'Urticaria',d:'Chronic spontaneous, inducible, urticarial vasculitis',c:'A/I',col:'#2874A6',u:'mechanism/urticaria-module.html'},
-  {n:'Drug Allergy',d:'IgE vs non-IgE, penicillin, vancomycin RMS',c:'A/I',col:'#7C3AED',u:'mechanism/drug-allergy-module.html'},
-  {n:'Food Allergy',d:'IgE-mediated, FPIES, OIT reactions, alpha-gal',c:'A/I',col:'#7C3AED',u:'mechanism/food-allergy-module.html'},
-  {n:'Angioedema / HAE',d:'Hereditary angioedema, ACE-inhibitor, allergic',c:'A/I',col:'#7C3AED',u:'casedx.html'},
-  {n:'Contact Dermatitis',d:'Type IV delayed hypersensitivity, occupational',c:'A/I',col:'#059669',u:'mechanism/atopic-derm-module.html'},
-  {n:'Atopic Dermatitis',d:'Eczema, dupilumab, eczema herpeticum',c:'A/I',col:'#059669',u:'mechanism/atopic-derm-module.html'},
-  {n:'Allergic Rhinitis',d:'Seasonal, perennial, allergen immunotherapy',c:'A/I',col:'#2874A6',u:'mechanism/rhinitis-module.html'},
-  {n:'Mastocytosis / MCAS',d:'Mast cell disorders, clonal vs reactive',c:'A/I',col:'#D97706',u:'mechanism/mastocytosis-mcas-module.html'},
-  {n:'Eosinophilic Esophagitis',d:'EoE adult and pediatric, dupilumab',c:'A/I',col:'#EC4899',u:'casedx.html'},
-  {n:'CVID',d:'Common variable immunodeficiency, antibody deficiency',c:'Immunology',col:'#7C3AED',u:'casedx.html'},
-  {n:'SCID',d:'Severe combined immunodeficiency, ADA-SCID',c:'Immunology',col:'#7C3AED',u:'casedx.html'},
-  {n:'SJS / TEN',d:'Severe cutaneous drug reactions, DRESS syndrome',c:'A/I',col:'#DC2626',u:'casedx.html'},
-  {n:'Hypersensitivity Pneumonitis',d:'Bird fancier lung, organic antigen exposure',c:'A/I',col:'#2874A6',u:'mechanism/eosinophilia-hp-module.html'},
-  {n:'STEMI',d:'ST-elevation MI, door-to-balloon, cath lab',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'Pulmonary Embolism',d:'Submassive PE, PESI, thrombolytics',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'Stroke',d:'tPA window, NIHSS, LVO, thrombectomy',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'DKA',d:'Diabetic ketoacidosis, HHS, insulin management',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'Septic Shock',d:'Urosepsis, sepsis bundle, vasopressors',c:'Emergency',col:'#DC2626',u:'ed-3d.html'},
-  {n:'Case & Topic Library',d:'Browse all 325+ cases and modules by specialty',c:'Library',col:'#2874A6',u:'casedx.html'},
-  {n:'Case Trainers & Scenarios',d:'SBAR, callbacks, diagnostic frameworks',c:'Library',col:'#D97706',u:'casedx.html'},
-  {n:'CoachDx',d:'AI Socratic coaching and reasoning sessions',c:'Mode',col:'#2874A6',u:'CoachDx/index.html'},
-  {n:'MechanismDx',d:'Visual pathophysiology modules',c:'Mode',col:'#7C3AED',u:'mechanism/index.html'},
-  {n:'SBAR Handoff',d:'Structured communication, transition of care',c:'CRT',col:'#D97706',u:'casedx.html'},
-  {n:'Clinical Calculators',d:'GCS, Wells, CURB-65, CHADS-VASc',c:'Tool',col:'#6366F1',u:'tools/index.html'},
+// ── MODULE REGISTRY ──────────────────────────────────────────────────────────
+// Each module maps to its actual HTML file in the mechanism/ directory.
+// status: 'live' | 'soon'
+// accent: CSS color for the top card bar
+const MODULES = [
+
+  // ── INFECTIOUS / CRITICAL CARE ──
+  { id:'sepsis', specialty:'infectious', specialtyLabel:'Infectious Disease / Critical Care', specialtyIcon:'🦠', specialtyColor:'#059669',
+    icon:'⚠️', title:'Sepsis & Septic Shock', accent:'#059669',
+    desc:'Sepsis-3 definition, SOFA score, lactate kinetics, vasopressor pharmacology, hour-1 bundle, and source control.',
+    tags:['Sepsis-3','SOFA','Hour-1 Bundle','Vasopressors'], step2:true, modules:6, status:'live',
+    url:'sepsis-module.html' },
+
+  { id:'pneumonia', specialty:'pulmonary', specialtyLabel:'Pulmonary', specialtyIcon:'🫁', specialtyColor:'#2874A6',
+    icon:'🫁', title:'Pneumonia & Respiratory Infection', accent:'#2874A6',
+    desc:'CAP vs HAP vs aspiration, CURB-65, empiric antibiotic selection, and atypical pathogens.',
+    tags:['CAP','CURB-65','Atypical Pathogens'], step2:true, modules:4, status:'soon', url:null },
+
+  // ── CARDIOLOGY ──
+  { id:'heart-failure', specialty:'cardiology', specialtyLabel:'Cardiology', specialtyIcon:'❤️', specialtyColor:'#DC2626',
+    icon:'❤️', title:'Heart Failure — HFrEF & HFpEF', accent:'#DC2626',
+    desc:'Frank-Starling curve, neurohormonal activation, RAAS, cardiorenal syndrome, and guideline-directed medical therapy.',
+    tags:['HFrEF','HFpEF','GDMT','Frank-Starling'], step2:true, modules:5, status:'live',
+    url:'heart-failure-module.html' },
+
+  { id:'afib', specialty:'cardiology', specialtyLabel:'Cardiology', specialtyIcon:'❤️', specialtyColor:'#DC2626',
+    icon:'⚡', title:'Atrial Fibrillation — Mechanism to Management', accent:'#DC2626',
+    desc:'Pulmonary vein triggers, re-entry circuits, CHA₂DS₂-VASc, rate vs rhythm, cardioversion, and ablation. Attending conversation format.',
+    tags:['CHA₂DS₂-VASc','Rate vs Rhythm','EAST-AFNET 4','Ablation'], step2:true, modules:4, status:'coming-soon',
+    url:'afib-module.html' },
+
+  { id:'acs', specialty:'cardiology', specialtyLabel:'Cardiology', specialtyIcon:'❤️', specialtyColor:'#DC2626',
+    icon:'🫀', title:'Acute Coronary Syndromes — STEMI to NSTEMI', accent:'#DC2626',
+    desc:'Plaque rupture, thrombosis cascade, STEMI/ECG anatomy, troponin kinetics, antiplatelet pharmacology, and reperfusion injury. Attending conversation format.',
+    tags:['STEMI','Plaque Rupture','Troponin','Antiplatelet'], step2:true, modules:5, status:'coming-soon',
+    url:'acs-module.html' },
+
+  // ── PULMONARY ──
+  { id:'copd', specialty:'pulmonary', specialtyLabel:'Pulmonary', specialtyIcon:'🫁', specialtyColor:'#2874A6',
+    icon:'💨', title:'COPD — Pathophysiology & Exacerbation', accent:'#2874A6',
+    desc:'Emphysema vs chronic bronchitis, air trapping, Haldane effect, BiPAP physiology, and GOLD staging.',
+    tags:['GOLD Staging','Air Trapping','BiPAP','Haldane'], step2:true, modules:4, status:'live',
+    url:'copd-module.html' },
+
+  { id:'asthma', specialty:'pulmonary', specialtyLabel:'Pulmonary', specialtyIcon:'🫁', specialtyColor:'#2874A6',
+    icon:'🫁', title:'Pulmonary — PE, Asthma & ARDS', accent:'#0369A1',
+    desc:'PE hemodynamics (RV strain to thrombolysis decision), Type 2 asthma inflammation (alarmin cascade, biologic selection by biomarker), and ARDS (diffuse alveolar damage, baby lung concept, lung-protective ventilation, prone positioning). Attending conversation format.',
+    tags:['PE','Asthma Biologics','ARDS','Lung-Protective Ventilation'], step2:true, modules:3, status:'live',
+    url:'pulmonary-module.html' },
+
+  // ── ENDOCRINE ──
+  { id:'aki', specialty:'renal', specialtyLabel:'Renal', specialtyIcon:'🫘', specialtyColor:'#0D7A67',
+    icon:'🫘', title:'Acute Kidney Injury — Pre-Renal to Intrinsic', accent:'#0D7A67',
+    desc:'Tubular anatomy, pre-renal vs intrinsic vs post-renal, FENa, FeUrea, ATN progression, and contrast nephropathy.',
+    tags:['FENa','ATN','Pre-Renal','Contrast Nephropathy'], step2:true, modules:5, status:'live',
+    url:'aki-module.html' },
+
+  { id:'dka', specialty:'endocrine', specialtyLabel:'Endocrine', specialtyIcon:'⚗️', specialtyColor:'#D97706',
+    icon:'⚗️', title:'Endocrine Emergencies — DKA to Adrenal Crisis', accent:'#B45309',
+    desc:'DKA insulin-deficiency cascade and potassium trap, HHS vs DKA distinction, thyroid storm five-drug sequence (PTU vs methimazole), myxedema coma, and adrenal crisis with stress dosing. Attending conversation format.',
+    tags:['DKA','HHS','Thyroid Storm','Adrenal Crisis'], step2:true, modules:5, status:'live',
+    url:'endocrine-module.html' },
+
+  // ── NEUROLOGY ──
+  { id:'stroke', specialty:'neurology', specialtyLabel:'Neurology', specialtyIcon:'🧠', specialtyColor:'#7C3AED',
+    icon:'🧠', title:'Acute Ischemic Stroke — Pathophysiology to tPA', accent:'#7C3AED',
+    desc:'Ischemic penumbra, cerebral autoregulation, tPA mechanism, BP targets, and hemorrhagic transformation risk.',
+    tags:['Penumbra','Autoregulation','tPA','BP Management'], step2:true, modules:5, status:'live',
+    url:'stroke-module.html' },
+
+  { id:'seizure', specialty:'neurology', specialtyLabel:'Neurology', specialtyIcon:'🧠', specialtyColor:'#7C3AED',
+    icon:'⚡', title:'Seizures & Epilepsy — Mechanisms & Management', accent:'#7C3AED',
+    desc:'Focal vs generalized, Na⁺/K⁺ channel physiology, AED mechanisms, status epilepticus cascade, and EEG patterns.',
+    tags:['Na⁺/K⁺ Channels','AED Mechanisms','Status Epilepticus'], step2:true, modules:4, status:'soon', url:null },
+
+  { id:'cns-infections', specialty:'neurology', specialtyLabel:'Neurology', specialtyIcon:'🧠', specialtyColor:'#7C3AED',
+    icon:'🧠', title:'CNS Infections & GBS', accent:'#4338CA',
+    desc:'Bacterial meningitis pathophysiology, LP interpretation, empiric antibiotics, HSV encephalitis, and Guillain-Barré syndrome from molecular mimicry to the rule of 20s. Attending conversation format.',
+    tags:['Meningitis','HSV Encephalitis','GBS','Rule of 20s'], step2:true, modules:3, status:'coming-soon',
+    url:'cns-infections-gbs-module.html' },
+
+  // ── ALLERGY / IMMUNOLOGY ──
+  { id:'anaphylaxis', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#DC2626',
+    icon:'🚨', title:'Anaphylaxis — The IgE Spectrum', accent:'#DC2626',
+    desc:'FcεRI cross-linking, mast cell cascade, biphasic reactions, cofactors (FDEIA, NSAID, alcohol), and mastocytosis screening.',
+    tags:['IgE','Mast Cell','Biphasic','Epinephrine'], step2:false, modules:6, status:'live',
+    url:'anaphylaxis-module.html' },
+
+  { id:'urticaria', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#DC2626',
+    icon:'🌺', title:'Urticaria & Angioedema — IgE vs Bradykinin', accent:'#DC2626',
+    desc:'Mast cell degranulation, CSU pathophysiology, bradykinin vs histamine angioedema, HAE, and ACE inhibitor mechanism.',
+    tags:['CSU','HAE','Bradykinin','ACE Inhibitor'], step2:false, modules:4, status:'soon', url:null },
+
+  { id:'immunodeficiency', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#DC2626',
+    icon:'🛡️', title:'Primary Immunodeficiency — CVID to SCID', accent:'#DC2626',
+    desc:'B-cell vs T-cell vs combined deficiencies, agammaglobulinemia, SCID genetics, and diagnostic workup.',
+    tags:['CVID','SCID','Agammaglobulinemia','IgG Subclass'], step2:false, modules:4, status:'soon', url:null },
+
+  // ── HEMATOLOGY ──
+  { id:'coagulation', specialty:'hematology', specialtyLabel:'Hematology', specialtyIcon:'🩸', specialtyColor:'#B91C1C',
+    icon:'🩸', title:'Hematology — TTP/HUS, DIC & Anemia', accent:'#881337',
+    desc:'ADAMTS13 and TTP vs HUS differentiation, DIC consumption coagulopathy (fibrinogen key), anticoagulant mechanisms (UFH to DOACs, HIT, reversal agents), and MCV-based anemia framework with reticulocyte index. Attending conversation format.',
+    tags:['TTP','DIC','Anticoagulation','Anemia','ADAMTS13'], step2:true, modules:4, status:'live',
+    url:'hematology-module.html' },
+
+  // ── GI / HEPATOLOGY ──
+  { id:'liver', specialty:'gi', specialtyLabel:'GI / Hepatology', specialtyIcon:'🫄', specialtyColor:'#92400E',
+    icon:'🫄', title:'GI & Hepatology — Cirrhosis to Acute Liver Failure', accent:'#B45309',
+    desc:'Portal hypertension and the RAAS paradox, SBP and hepatorenal syndrome, upper GI bleeding (ulcers + varices), acetaminophen hepatotoxicity, and acute pancreatitis. Attending conversation format.',
+    tags:['Portal HTN','HRS','Variceal Bleed','NAPQI','Pancreatitis'], step2:true, modules:6, status:'live',
+    url:'gi-hepatology-module.html' },
+
+  // ── EMERGENCY / TOXICOLOGY ──
+  { id:'toxicology', specialty:'emergency', specialtyLabel:'Emergency / Toxicology', specialtyIcon:'🚨', specialtyColor:'#DC2626',
+    icon:'☠️', title:'Toxicology — TCA, Opioids, Organophosphates & Salicylates', accent:'#292524',
+    desc:'TCA sodium channel blockade and bicarb treatment, opioid toxidrome and naloxone titration, organophosphate cholinergic crisis (atropine endpoint, pralidoxime aging), and salicylate mixed acid-base with dialysis indications. Attending conversation format.',
+    tags:['TCA','Opioid Overdose','Organophosphate','Salicylate'], step2:true, modules:4, status:'live',
+    url:'toxicology-module.html' },
+
+  { id:'acid-base', specialty:'renal', specialtyLabel:'Renal', specialtyIcon:'🫘', specialtyColor:'#0D7A67',
+    icon:'⚖️', title:'Electrolytes & Acid-Base — Systematic Approach', accent:'#0369A1',
+    desc:'Hyperkalemia (membrane potential, EKG sequence, treatment hierarchy), hyponatremia (SIADH vs CSW algorithm), and 6-step acid-base with delta-delta. Attending conversation format.',
+    tags:['Hyperkalemia','SIADH','Anion Gap','Delta-Delta'], step2:true, modules:3, status:'coming-soon',
+    url:'electrolytes-acidbase-module.html' },
+
+  // ── OBSTETRICS ──
+  { id:'ob', specialty:'ob', specialtyLabel:'Obstetrics', specialtyIcon:'🤰', specialtyColor:'#BE185D',
+    icon:'🤰', title:'Obstetrics — Preeclampsia to Postpartum Hemorrhage', accent:'#9D174D',
+    desc:'Spiral artery remodeling and sFlt-1 in preeclampsia, HELLP syndrome, magnesium sulfate mechanism and toxicity, PPH uterotonic pharmacology (oxytocin to carboprost), eclampsia seizure mechanism, and delivery decision-making. Attending conversation format.',
+    tags:['Preeclampsia','HELLP','MgSO4','PPH','Uterotonics'], step2:true, modules:3, status:'live',
+    url:'ob-module.html' },
+
+
+  { id:'psychiatry', specialty:'psychiatry', specialtyLabel:'Psychiatry', specialtyIcon:'🧩', specialtyColor:'#7C3AED',
+    icon:'🧩', title:'Psychiatry — Neurotransmitters to Emergency Management', accent:'#7C3AED',
+    desc:'Alcohol withdrawal (GABA/NMDA), antipsychotic pharmacology and EPS, bipolar/mood disorders, serotonin syndrome vs NMS, and ICU delirium. Attending conversation format.',
+    tags:['Alcohol Withdrawal','Antipsychotics','Serotonin Syndrome','Delirium'], step2:true, modules:4, status:'live',
+    url:'psychiatry-module.html' },
+
+  // ── RHEUMATOLOGY ──
+  { id:'rheumatology', specialty:'rheumatology', specialtyLabel:'Rheumatology', specialtyIcon:'🦴', specialtyColor:'#0D7A67',
+    icon:'🦴', title:'Rheumatology — Autoimmunity & Crystal Arthropathy', accent:'#0D7A67',
+    desc:'RA immunopathology (Th17/TNF axis), SLE autoimmunity and complement consumption, crystal arthropathy (gout vs pseudogout), and biologic mechanisms. Attending conversation format.',
+    tags:['RA','SLE','Gout','Biologics'], step2:true, modules:3, status:'live',
+    url:'rheumatology-module.html' },
+
+  // ── ALLERGY / IMMUNOLOGY ──
+  { id:'ai-basic-science', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'⚗️', title:'A/I Basic Science — IgE, Sensitization & Type I–IV Reactions', accent:'#0D9488',
+    desc:'IgE sensitization, Gell-Coombs classification, mast cell and basophil biology, complement pathways, and innate immune mechanisms.',
+    tags:['IgE','Gell-Coombs','Mast Cells','Complement'], step2:true, modules:4, status:'live',
+    url:'ai-basic-science-module.html' },
+
+  { id:'ai-diagnostics', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🧪', title:'Allergy Diagnostics — Skin Testing, CRD & Oral Challenges', accent:'#0D9488',
+    desc:'Skin prick testing, intradermal testing, component-resolved diagnostics (CRD), specific IgE interpretation, and supervised oral food challenges.',
+    tags:['Skin Testing','CRD','Ara h 2','Oral Challenge'], step2:true, modules:3, status:'live',
+    url:'ai-diagnostic-methods-module.html' },
+
+  { id:'allergen-it', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'💉', title:'Allergen Immunotherapy — SCIT, SLIT & Venom IT', accent:'#0D9488',
+    desc:'SCIT and SLIT mechanisms, Treg induction, IgG4 blocking antibody, venom immunotherapy protocols, and OIT for food allergy.',
+    tags:['SCIT','SLIT','VIT','OIT'], step2:true, modules:4, status:'live',
+    url:'allergen-immunotherapy-module.html' },
+
+  { id:'asthma-mech', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🫁', title:'Asthma — Type 2 vs Non-Type 2, Phenotyping & Biologics', accent:'#0D9488',
+    desc:'Asthma mechanisms, Type 2 vs non-Type 2 phenotyping, biologic selection (dupilumab, mepolizumab, benralizumab, tezepelumab), and GINA steps.',
+    tags:['Type 2','Biologics','GINA','Tezepelumab'], step2:true, modules:4, status:'live',
+    url:'asthma-module.html' },
+
+  { id:'atopic-derm', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🧬', title:'Atopic Dermatitis — Barrier Dysfunction to Dupilumab', accent:'#0D9488',
+    desc:'Filaggrin barrier dysfunction, Th2/Th22 inflammation, TSLP/IL-33 axis, dupilumab and tralokinumab mechanisms, and step-up therapy.',
+    tags:['Filaggrin','Dupilumab','TSLP','Th2'], step2:true, modules:3, status:'live',
+    url:'atopic-derm-module.html' },
+
+  { id:'drug-allergy-mech', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'💊', title:'Drug Allergy & Hypersensitivity — De-labeling & SCARs', accent:'#0D9488',
+    desc:'Drug hypersensitivity mechanisms, penicillin de-labeling pathways, SCAR classification (DRESS/SJS/TEN), and HLA pharmacogenomics.',
+    tags:['De-labeling','DRESS','SJS/TEN','HLA-B*58:01'], step2:true, modules:4, status:'live',
+    url:'drug-allergy-module.html' },
+
+  { id:'eosinophilia', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🩸', title:'Eosinophilic Disorders & Hypersensitivity Pneumonitis', accent:'#0D9488',
+    desc:'Eosinophilia differential, HES classification, FIP1L1-PDGFRA mutation, imatinib, Löffler syndrome, and HP diagnostic criteria.',
+    tags:['HES','FIP1L1-PDGFRA','HP','Imatinib'], step2:true, modules:3, status:'live',
+    url:'eosinophilia-hp-module.html' },
+
+  { id:'food-allergy-mech', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🥜', title:'Food Allergy — IgE Mechanisms, FPIES & EoE', accent:'#0D9488',
+    desc:'IgE-mediated food allergy, FPIES, EoE pathophysiology, component-resolved diagnostics, OIT protocols, and natural history.',
+    tags:['FPIES','EoE','OIT','CRD'], step2:true, modules:4, status:'live',
+    url:'food-allergy-module.html' },
+
+  { id:'mastocytosis-mech', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🧫', title:'Mastocytosis & MCAS — KIT D816V to Midostaurin', accent:'#0D9488',
+    desc:'KIT D816V mutation, WHO mastocytosis classification, tryptase as biomarker, MCAS diagnostic criteria, and midostaurin mechanism.',
+    tags:['KIT D816V','Tryptase','MCAS','Midostaurin'], step2:true, modules:3, status:'live',
+    url:'mastocytosis-mcas-module.html' },
+
+  { id:'pid-mech', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🛡️', title:'Primary Immunodeficiency — XLA, CVID & SCID', accent:'#0D9488',
+    desc:'Primary immunodeficiency mechanisms — XLA vs CVID, SCID and TREC screening, DiGeorge syndrome, CGD, and immunoglobulin replacement.',
+    tags:['XLA','CVID','SCID','TREC'], step2:true, modules:4, status:'live',
+    url:'pid-module.html' },
+
+  { id:'rhinitis-mech', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'👃', title:'Rhinitis, CRSwNP & AERD — Biologics Decision Tree', accent:'#0D9488',
+    desc:'Allergic rhinitis, NARES, CRS with nasal polyps, AERD/Samter triad, dupilumab vs omalizumab decision framework, and INCS optimization.',
+    tags:['CRSwNP','AERD','Dupilumab','INCS'], step2:true, modules:3, status:'live',
+    url:'rhinitis-module.html' },
+
+  { id:'urticaria-mech', specialty:'allergy', specialtyLabel:'Allergy / Immunology', specialtyIcon:'🌿', specialtyColor:'#0D9488',
+    icon:'🔵', title:'Urticaria & Angioedema — CSU, HAE & Bradykinin Pathway', accent:'#0D9488',
+    desc:'CSU vs urticarial vasculitis, HAE type I/II, acquired C1-INH deficiency, bradykinin pathway, icatibant, and omalizumab for CSU.',
+    tags:['CSU','HAE','Icatibant','Omalizumab'], step2:true, modules:4, status:'live',
+    url:'urticaria-module.html' },
+
 ];
 
-function doSearch(val){
-  const el=document.getElementById('srDrop');
-  val=val.trim().toLowerCase();
-  if(!val||val.length<2){el.classList.remove('open');return;}
-  const hits=IDX.filter(x=>x.n.toLowerCase().includes(val)||x.d.toLowerCase().includes(val)||x.c.toLowerCase().includes(val)).slice(0,7);
-  if(!hits.length){el.classList.remove('open');return;}
-  el.innerHTML=hits.map(m=>`<a class="sr-item" href="${m.u}"><div class="sr-dot" style="background:${m.col}"></div><div><div class="sr-name">${hl(m.n,val)}</div><div class="sr-desc">${m.d}</div></div><div class="sr-cat">${m.c}</div></a>`).join('');
-  el.classList.add('open');
-}
-function hl(t,q){const i=t.toLowerCase().indexOf(q);if(i===-1)return t;return t.slice(0,i)+'<strong>'+t.slice(i,i+q.length)+'</strong>'+t.slice(i+q.length);}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('srDrop').classList.remove('open');closeModal();}});
+// ── STATE ────────────────────────────────────────────────────────────────────
+let activeFilter = 'all';
+let searchQuery = '';
 
-/* ── SESSION ── */
-let sess=null;
-function setSBar(topic,pillar){
-  const bar=document.getElementById('sBar');
-  document.getElementById('sPill').textContent={coach:'CoachDx',reason:'ReasonDx Cases',mechanism:'MechanismDx'}[pillar]||'Session';
-  document.getElementById('sTopic').textContent=topic;
-  bar.classList.add('active');
-}
-function resumeSession(){if(sess)window.location.href=sess.url||'#';}
-
-/* ── MODAL ── */
-let mTopic=null;
-function openModal(t,forcePillar){
-  mTopic=t;
-  document.getElementById('mTitle').textContent=t||'Start a Session';
-  document.getElementById('mIcon').textContent=t?'🩺':'▶';
-  document.getElementById('mSub').textContent=t?'Choose how you want to work on '+t:'Pick a mode to begin';
-  if(forcePillar){launch(forcePillar);return;}
-  document.getElementById('modal').classList.add('open');
-}
-function closeModal(){document.getElementById('modal').classList.remove('open');}
-function closeOut(e){if(e.target.id==='modal')closeModal();}
-
-function launch(pillar){
-  const topic=mTopic||'Clinical Reasoning';
-  closeModal();
-  sess={topic,pillar};
-  setSBar(topic,pillar);
-  sessionStorage.setItem('rdx_session',JSON.stringify(sess));
-  const urls={
-    coach:'CoachDx/mentor-chat.html?topic='+encodeURIComponent(topic),
-    reason:'casedx.html',
-    mechanism:'mechanism/index.html'
-  };
-  window.location.href=urls[pillar];
+// ── FILTER + SEARCH ───────────────────────────────────────────────────────────
+function setFilter(filter, btn) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  renderModules();
 }
 
-/* ── BRIDGE ── */
-function showBridge(target,topic){
-  const cfg={
-    mechanism:{icon:'🔬',title:'Need to review the mechanism behind '+topic+'?',desc:'Jump to MechanismDx — your session is saved here when you return.',bg:'#6B28A6'},
-    reason:{icon:'🩺',title:'Ready to apply '+topic+' to a patient case?',desc:'Launch a ReasonDx case to test your understanding.',bg:'#0D7A67'},
-    coach:{icon:'🧑‍⚕️',title:'Want coaching on '+topic+'?',desc:'Jump to CoachDx — your current session is saved.',bg:'#2874A6'}
-  };
-  const c=cfg[target]||cfg.mechanism;
-  document.getElementById('bbIcon').textContent=c.icon;
-  document.getElementById('bbTitle').textContent=c.title;
-  document.getElementById('bbDesc').textContent=c.desc;
-  document.getElementById('bbGo').style.background=c.bg;
-  document.getElementById('bb')._target=target;
-  document.getElementById('bb').classList.add('visible');
+function filterModules() {
+  searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+  document.getElementById('searchClear').style.display = searchQuery ? 'block' : 'none';
+  renderModules();
 }
-function doBridge(){const t=document.getElementById('bb')._target;dismissBridge();if(sess)launch(t);}
-function dismissBridge(){document.getElementById('bb').classList.remove('visible');}
 
-/* ── RESTORE SESSION ── */
-try{const s=sessionStorage.getItem('rdx_session');if(s){const p=JSON.parse(s);sess=p;setSBar(p.topic,p.pillar);}}catch(e){}
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  searchQuery = '';
+  document.getElementById('searchClear').style.display = 'none';
+  renderModules();
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function renderModules() {
+  const content = document.getElementById('mainContent');
+
+  // Filter modules
+  let filtered = MODULES.filter(m => {
+    const matchFilter = activeFilter === 'all' || m.specialty === activeFilter;
+    const matchSearch = !searchQuery ||
+      m.title.toLowerCase().includes(searchQuery) ||
+      m.desc.toLowerCase().includes(searchQuery) ||
+      m.tags.some(t => t.toLowerCase().includes(searchQuery)) ||
+      m.specialtyLabel.toLowerCase().includes(searchQuery);
+    return matchFilter && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        <h3>No modules found for "${searchQuery}"</h3>
+        <p>Try searching for a condition, mechanism, or organ system.</p>
+      </div>`;
+    return;
+  }
+
+  // Group by specialty
+  const bySpecialty = {};
+  filtered.forEach(m => {
+    if (!bySpecialty[m.specialtyLabel]) {
+      bySpecialty[m.specialtyLabel] = { icon: m.specialtyIcon, color: m.specialtyColor, items: [] };
+    }
+    bySpecialty[m.specialtyLabel].items.push(m);
+  });
+
+  // Build HTML
+  let html = `
+    <div class="progress-banner">
+      <div class="progress-icon">🔬</div>
+      <div class="progress-text">
+        <h4>${MODULES.filter(m=>m.status==='live').length} modules live · More being built every week</h4>
+        <p>Live modules open immediately. "Coming soon" modules are in active development.</p>
+      </div>
+    </div>`;
+
+  // Live modules first if showing all
+  if (activeFilter === 'all' && !searchQuery) {
+    const live = filtered.filter(m => m.status === 'live');
+    if (live.length) {
+      html += buildSection('🟢 Available Now', '#059669', '', live);
+    }
+    const soon = filtered.filter(m => m.status === 'soon');
+    if (soon.length) {
+      html += buildSection('🔜 Coming Soon', '#94A3B8', '', soon);
+    }
+  } else {
+    // By specialty
+    Object.entries(bySpecialty).forEach(([label, data]) => {
+      html += buildSection(label, data.color, data.icon, data.items);
+    });
+  }
+
+  content.innerHTML = html;
+
+  // Update stats
+  document.getElementById('statLive').textContent = MODULES.filter(m=>m.status==='live').length;
+  document.getElementById('statSystems').textContent = [...new Set(MODULES.map(m=>m.specialty))].length;
+}
+
+function buildSection(label, color, icon, items) {
+  const count = items.length;
+  return `
+    <div class="specialty-section">
+      <div class="specialty-header">
+        <div class="specialty-icon" style="background:${color}22">${icon || '📚'}</div>
+        <div class="specialty-name" style="color:${color}">${label}</div>
+        <div class="specialty-count">${count} module${count !== 1 ? 's' : ''}</div>
+        <div class="specialty-line"></div>
+      </div>
+      <div class="module-grid">
+        ${items.map(m => buildCard(m)).join('')}
+      </div>
+    </div>`;
+}
+
+function buildCard(m) {
+  const live = m.status === 'live';
+  const badgeHtml = live
+    ? `<span class="card-badge badge-live">✓ Live</span>`
+    : `<span class="card-badge badge-soon">Coming soon</span>`;
+
+  const tagsHtml = m.tags.map(t =>
+    `<span class="card-tag">${t}</span>`
+  ).join('') + (m.step2 ? `<span class="card-tag step2">Step 2 CK</span>` : '');
+
+  const clickAttr = live
+    ? `onclick="openModule('${m.url}', '${m.id}')" role="button" tabindex="0"`
+    : '';
+
+  return `
+    <div class="module-card ${live ? 'available' : 'coming-soon'}" ${clickAttr}>
+      <div class="card-accent" style="background:${m.accent}"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-icon">${m.icon}</span>
+          ${badgeHtml}
+        </div>
+        <div class="card-title">${m.title}</div>
+        <div class="card-desc">${m.desc}</div>
+        <div class="card-tags">${tagsHtml}</div>
+        <div class="card-modules-count">${m.modules} sub-module${m.modules !== 1 ? 's' : ''}</div>
+      </div>
+    </div>`;
+}
+
+function openModule(url, id) {
+  if (!url) return;
+  // Only forward navigation-safe params (ref/case/back for gap-mode return routing).
+  // Never forward topic or search params — they would auto-open a topic session
+  // inside the module, bypassing the module landing page entirely.
+  const params = new URLSearchParams(window.location.search);
+  const safe = new URLSearchParams();
+  ['ref', 'case', 'back'].forEach(k => { if (params.get(k)) safe.set(k, params.get(k)); });
+  const qs = safe.toString();
+  window.location.href = url + (qs ? '?' + qs : '');
+}
+
+// ── KEYBOARD SUPPORT ──────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Check for ?specialty= param (from start.html setting context)
+  const params = new URLSearchParams(window.location.search);
+  const specialty = params.get('specialty');
+  if (specialty) {
+    const pill = document.querySelector(`.filter-pill[onclick*="${specialty}"]`);
+    if (pill) setFilter(specialty, pill);
+    else renderModules();
+  } else {
+    renderModules();
+  }
+});
 </script>
+<script src="../js/nav-global.js"></script>
 </body>
 </html>

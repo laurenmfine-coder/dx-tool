@@ -16674,7 +16674,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "ivf-panc",
+          "id": "ivf-panc-acute-pa",
           "name": "Lactated Ringer 250-500mL/hr",
           "group": "Resuscitation",
           "critical": true,
@@ -16690,7 +16690,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "pain-panc",
+          "id": "pain-panc-acute-pa",
           "name": "Hydromorphone 0.5-1mg IV q3h PRN",
           "group": "Pain",
           "critical": true,
@@ -16706,7 +16706,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "npo-panc",
+          "id": "npo-panc-acute-pa",
           "name": "NPO initially then advance diet",
           "group": "Nutrition",
           "critical": false,
@@ -16738,7 +16738,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "abx-panc",
+          "id": "abx-panc-acute-pa",
           "name": "Imipenem 500mg IV q6h",
           "group": "Antibiotics",
           "critical": false,
@@ -16754,7 +16754,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ct-panc",
+          "id": "ct-panc-acute-pa",
           "name": "CT abdomen with contrast",
           "group": "Imaging",
           "critical": false,
@@ -17071,7 +17071,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "bipap-chf",
+          "id": "bipap-chf-chf-exac",
           "name": "BiPAP 10/5",
           "group": "Respiratory Support",
           "critical": true,
@@ -17119,7 +17119,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "digoxin-chf",
+          "id": "digoxin-chf-chf-exac",
           "name": "Digoxin 0.25mg IV",
           "group": "Inotrope",
           "critical": false,
@@ -18567,7 +18567,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "active-warm",
+          "id": "active-warm-myxedema",
           "name": "Active rewarming (forced warm air)",
           "group": "Supportive",
           "critical": false,
@@ -18921,7 +18921,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "chest-tube",
+          "id": "chest-tube-pneumoth",
           "name": "Chest tube (28-32Fr) or pigtail catheter",
           "group": "Definitive",
           "critical": true,
@@ -23249,7 +23249,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "icatibant",
+          "id": "icatibant-heredita",
           "name": "Icatibant 30mg SQ",
           "group": "Acute",
           "critical": true,
@@ -23281,7 +23281,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "c1inh",
+          "id": "c1inh-heredita",
           "name": "C1-INH level + function",
           "group": "Dx",
           "critical": false,
@@ -23490,7 +23490,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "benadryl",
+          "id": "benadryl-acquired",
           "name": "Diphenhydramine 50mg IV",
           "group": "Tx",
           "critical": false,
@@ -23597,7 +23597,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-allergic",
           "name": "Epi 0.3mg IM 1.5-inch needle",
           "group": "First-line",
           "critical": true,
@@ -23931,7 +23931,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-insect-s",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -23947,7 +23947,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-insect-s",
           "name": "NS 1L IV",
           "group": "Resuscitation",
           "critical": true,
@@ -23963,7 +23963,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "tryptase",
+          "id": "tryptase-insect-s",
           "name": "Serum tryptase",
           "group": "Dx",
           "critical": false,
@@ -24122,7 +24122,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-venom-im",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -24186,7 +24186,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "stop-vit",
+          "id": "stop-vit-venom-im",
           "name": "Discontinue VIT permanently",
           "group": "Follow-up",
           "critical": false,
@@ -24295,7 +24295,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-severe-a",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -24311,7 +24311,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "stop",
+          "id": "stop-severe-a",
           "name": "Stop contrast infusion",
           "group": "First-line",
           "critical": true,
@@ -24327,7 +24327,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-severe-a",
           "name": "NS 1L IV",
           "group": "Resuscitation",
           "critical": true,
@@ -24776,7 +24776,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "acyclovir",
+          "id": "acyclovir-erythema",
           "name": "Valacyclovir 1g PO BID",
           "group": "First-line",
           "critical": true,
@@ -24932,7 +24932,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-food-all",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -24964,7 +24964,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-food-all",
           "name": "NS 1L IV",
           "group": "Resuscitation",
           "critical": true,
@@ -24980,7 +24980,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "adjust",
+          "id": "adjust-food-all",
           "name": "OIT dose adjustment + cofactor avoidance plan",
           "group": "Follow-up",
           "critical": true,
@@ -24996,7 +24996,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "stop-oit",
+          "id": "stop-oit-food-all",
           "name": "Discontinue OIT permanently",
           "group": "Follow-up",
           "critical": false,
@@ -25088,7 +25088,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "ivf",
+          "id": "ivf-fpies-ac",
           "name": "NS 20mL/kg IV bolus",
           "group": "Resuscitation",
           "critical": true,
@@ -25152,7 +25152,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "epi-fpies",
+          "id": "epi-fpies-fpies-ac",
           "name": "Epinephrine 0.15mg IM",
           "group": "Tx",
           "critical": false,
@@ -25397,7 +25397,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "tryptase",
+          "id": "tryptase-mastocyt",
           "name": "Serum tryptase (baseline + during episode)",
           "group": "Dx",
           "critical": true,
@@ -25429,7 +25429,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "h1h2",
+          "id": "h1h2-mastocyt",
           "name": "Cetirizine + Famotidine",
           "group": "First-line",
           "critical": true,
@@ -25461,7 +25461,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "avoid-triggers",
+          "id": "avoid-triggers-mastocyt",
           "name": "Trigger avoidance education",
           "group": "Education",
           "critical": false,
@@ -25585,7 +25585,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "stop-infusion",
+          "id": "stop-infusion-drug-all",
           "name": "Slow or stop vancomycin infusion",
           "group": "First-line",
           "critical": true,
@@ -25649,7 +25649,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "label-allergy",
+          "id": "label-allergy-drug-all",
           "name": "Document vancomycin allergy",
           "group": "Follow-up",
           "critical": false,
@@ -25741,7 +25741,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "h1",
+          "id": "h1-acute-ur",
           "name": "Cetirizine 10mg BID",
           "group": "First-line",
           "critical": true,
@@ -25773,7 +25773,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "avoid-triggers",
+          "id": "avoid-triggers-acute-ur",
           "name": "Avoid exacerbating factors",
           "group": "Education",
           "critical": false,
@@ -25805,7 +25805,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "steroids",
+          "id": "steroids-acute-ur",
           "name": "Prednisone burst",
           "group": "Tx",
           "critical": false,
@@ -25893,7 +25893,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "omalizumab",
+          "id": "omalizumab-chronic-",
           "name": "Omalizumab 300mg SQ monthly",
           "group": "Second-line",
           "critical": true,
@@ -25941,7 +25941,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "chronic-steroids",
+          "id": "chronic-steroids-chronic-",
           "name": "Long-term prednisone",
           "group": "Tx",
           "critical": false,
@@ -26032,7 +26032,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "biopsy",
+          "id": "biopsy-urticari",
           "name": "Punch biopsy of lesion",
           "group": "Dx",
           "critical": true,
@@ -26500,7 +26500,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "hx",
+          "id": "hx-penicill",
           "name": "Detailed PCN allergy history",
           "group": "Dx",
           "critical": true,
@@ -26532,7 +26532,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "challenge",
+          "id": "challenge-penicill",
           "name": "Oral amoxicillin challenge if skin negative",
           "group": "Dx",
           "critical": false,
@@ -26548,7 +26548,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "delabel",
+          "id": "delabel-penicill",
           "name": "Remove PCN allergy if tolerated",
           "group": "Follow-up",
           "critical": true,
@@ -26656,7 +26656,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-peanut-a",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -26704,7 +26704,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "challenge",
+          "id": "challenge-peanut-a",
           "name": "Supervised oral food challenge",
           "group": "Dx",
           "critical": false,
@@ -26828,7 +26828,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "hydrolysate",
+          "id": "hydrolysate-milk-all",
           "name": "EHF or amino acid formula if needed",
           "group": "First-line",
           "critical": true,
@@ -26844,7 +26844,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "reassure",
+          "id": "reassure-milk-all",
           "name": "Reassurance: FPIES/proctocolitis usually outgrown by 1yo",
           "group": "Education",
           "critical": true,
@@ -27123,7 +27123,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "intranasal",
+          "id": "intranasal-allergic",
           "name": "Intranasal corticosteroid daily",
           "group": "First-line",
           "critical": true,
@@ -27294,7 +27294,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "topical-steroid",
+          "id": "topical-steroid-atopic-d",
           "name": "Medium-potency topical steroid BID x2wks",
           "group": "First-line",
           "critical": true,
@@ -27498,7 +27498,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "topical-steroid",
+          "id": "topical-steroid-contact-",
           "name": "Topical steroid for acute dermatitis",
           "group": "Treatment",
           "critical": true,
@@ -27809,7 +27809,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "egd",
+          "id": "egd-eoe-pedi",
           "name": "EGD with esophageal biopsies",
           "group": "Dx",
           "critical": true,
@@ -27825,7 +27825,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "swallowed-steroid",
+          "id": "swallowed-steroid-eoe-pedi",
           "name": "Swallowed budesonide slurry",
           "group": "First-line",
           "critical": true,
@@ -27965,7 +27965,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "topical-mast",
+          "id": "topical-mast-allergic",
           "name": "Olopatadine 0.7% daily",
           "group": "First-line",
           "critical": true,
@@ -28029,7 +28029,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "topical-steroid",
+          "id": "topical-steroid-allergic",
           "name": "Topical steroid without ophth",
           "group": "Tx",
           "critical": false,
@@ -28143,7 +28143,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "oral-h1",
+          "id": "oral-h1-allergic",
           "name": "2nd-gen oral antihistamine",
           "group": "Adjunctive",
           "critical": false,
@@ -28305,7 +28305,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "topical-steroid",
+          "id": "topical-steroid-atopic-d-1-atopic",
           "name": "Medium-potency topical steroid BID x2wk",
           "group": "First-line",
           "critical": true,
@@ -28321,7 +28321,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "bleach-bath",
+          "id": "bleach-bath-atopic-d",
           "name": "Dilute bleach baths 2x/wk",
           "group": "Adjunctive",
           "critical": false,
@@ -28337,7 +28337,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "dupilumab",
+          "id": "dupilumab-atopic-d",
           "name": "Dupilumab if refractory",
           "group": "Second-line",
           "critical": false,
@@ -28353,7 +28353,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "oral-steroid",
+          "id": "oral-steroid-atopic-d",
           "name": "Oral prednisone burst",
           "group": "Tx",
           "critical": false,
@@ -28451,7 +28451,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "h1",
+          "id": "h1-chronic-",
           "name": "Updosed cetirizine",
           "group": "First-line",
           "critical": true,
@@ -28467,7 +28467,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "omalizumab",
+          "id": "omalizumab-chronic--1-chroni",
           "name": "Omalizumab 300mg SQ",
           "group": "Second-line",
           "critical": true,
@@ -28499,7 +28499,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "steroids",
+          "id": "steroids-chronic-",
           "name": "Chronic prednisone",
           "group": "Tx",
           "critical": false,
@@ -28606,7 +28606,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "avoid",
+          "id": "avoid-contact-",
           "name": "Allergen avoidance",
           "group": "First-line",
           "critical": true,
@@ -28785,7 +28785,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivig",
+          "id": "ivig-cvid-pre",
           "name": "IVIG replacement",
           "group": "First-line",
           "critical": true,
@@ -28801,7 +28801,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "immunology",
+          "id": "immunology-cvid-pre",
           "name": "Immunology referral",
           "group": "Consult",
           "critical": true,
@@ -28916,7 +28916,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "egd",
+          "id": "egd-eoe-adul",
           "name": "EGD with biopsies",
           "group": "Dx",
           "critical": true,
@@ -28980,7 +28980,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "dilation",
+          "id": "dilation-eoe-adul",
           "name": "Esophageal dilation if stricture",
           "group": "Procedure",
           "critical": false,
@@ -29094,7 +29094,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "egd",
+          "id": "egd-eoe-pedi-1-eoe-pe",
           "name": "EGD with biopsies",
           "group": "Dx",
           "critical": true,
@@ -29110,7 +29110,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "swallowed",
+          "id": "swallowed-eoe-pedi",
           "name": "Swallowed budesonide",
           "group": "First-line",
           "critical": true,
@@ -29142,7 +29142,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "behavioral",
+          "id": "behavioral-eoe-pedi",
           "name": "Label as behavioral",
           "group": "Tx",
           "critical": false,
@@ -29234,7 +29234,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "eliminate",
+          "id": "eliminate-fpies-ch",
           "name": "Eliminate trigger protein",
           "group": "First-line",
           "critical": true,
@@ -29250,7 +29250,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "hydrolysate",
+          "id": "hydrolysate-fpies-ch",
           "name": "Extensively hydrolyzed formula",
           "group": "First-line",
           "critical": true,
@@ -29266,7 +29266,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "nutrition",
+          "id": "nutrition-fpies-ch",
           "name": "Nutrition monitoring",
           "group": "Supportive",
           "critical": true,
@@ -29374,7 +29374,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "eliminate",
+          "id": "eliminate-milk-all",
           "name": "Maternal dairy elimination if BF",
           "group": "First-line",
           "critical": true,
@@ -29406,7 +29406,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "reassure",
+          "id": "reassure-milk-all-1-milk-a",
           "name": "Reassurance: outgrown by 1yo",
           "group": "Education",
           "critical": true,
@@ -29422,7 +29422,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "stop-bf",
+          "id": "stop-bf-milk-all",
           "name": "Stop breastfeeding",
           "group": "Tx",
           "critical": false,
@@ -29514,7 +29514,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "confirm",
+          "id": "confirm-nsaid-hy",
           "name": "Confirm AERD triad",
           "group": "Dx",
           "critical": true,
@@ -29530,7 +29530,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ltra",
+          "id": "ltra-nsaid-hy",
           "name": "Montelukast",
           "group": "First-line",
           "critical": true,
@@ -29562,7 +29562,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "incs",
+          "id": "incs-nsaid-hy",
           "name": "Intranasal steroids",
           "group": "Adjunctive",
           "critical": false,
@@ -29677,7 +29677,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-peanut-a-1-peanut",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -29693,7 +29693,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-peanut-a",
           "name": "NS 1L IV",
           "group": "Resuscitation",
           "critical": true,
@@ -29709,7 +29709,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "h1h2",
+          "id": "h1h2-peanut-a",
           "name": "Diphenhydramine + Famotidine",
           "group": "Adjunctive",
           "critical": false,
@@ -29856,7 +29856,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "hx",
+          "id": "hx-penicill-1-penici",
           "name": "Detailed allergy history",
           "group": "Dx",
           "critical": true,
@@ -29872,7 +29872,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "skin",
+          "id": "skin-penicill",
           "name": "Penicillin skin testing",
           "group": "Dx",
           "critical": true,
@@ -29888,7 +29888,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "challenge",
+          "id": "challenge-penicill-1-penici",
           "name": "Oral amoxicillin challenge",
           "group": "Dx",
           "critical": false,
@@ -29904,7 +29904,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "delabel",
+          "id": "delabel-penicill-1-penici",
           "name": "Remove allergy from chart",
           "group": "Follow-up",
           "critical": true,
@@ -29920,7 +29920,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "avoid",
+          "id": "avoid-penicill",
           "name": "Avoid all beta-lactams forever",
           "group": "Follow-up",
           "critical": false,
@@ -30012,7 +30012,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "biopsy",
+          "id": "biopsy-urticari-1-urtica",
           "name": "Punch biopsy",
           "group": "Dx",
           "critical": true,
@@ -30028,7 +30028,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "complements",
+          "id": "complements-urticari",
           "name": "C3/C4/CH50",
           "group": "Dx",
           "critical": true,
@@ -30060,7 +30060,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "colchicine",
+          "id": "colchicine-urticari",
           "name": "Colchicine or dapsone",
           "group": "First-line",
           "critical": false,
@@ -30168,7 +30168,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-anaphyla",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -30216,7 +30216,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-anaphyla",
           "name": "NS 1-2L IV",
           "group": "Resuscitation",
           "critical": true,
@@ -30344,7 +30344,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-anaphyla-1-anaphy",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -30376,7 +30376,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-anaphyla-1-anaphy",
           "name": "NS 1L IV non-latex tubing",
           "group": "Resuscitation",
           "critical": true,
@@ -30392,7 +30392,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "occ",
+          "id": "occ-anaphyla",
           "name": "Occupational health referral",
           "group": "Follow-up",
           "critical": false,
@@ -30520,7 +30520,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-anaphyla-2-anaphy",
           "name": "Epi 0.3mg IM",
           "group": "First-line",
           "critical": true,
@@ -30536,7 +30536,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-anaphyla-2-anaphy",
           "name": "NS 1L IV",
           "group": "Resuscitation",
           "critical": true,
@@ -30687,7 +30687,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "epi",
+          "id": "epi-anaphyla-3-anaphy",
           "name": "Epi 0.15mg IM (pediatric <30kg)",
           "group": "First-line",
           "critical": true,
@@ -30703,7 +30703,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-anaphyla-3-anaphy",
           "name": "NS 20mL/kg IV",
           "group": "Resuscitation",
           "critical": true,
@@ -30898,7 +30898,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "icatibant",
+          "id": "icatibant-ace-angi",
           "name": "Icatibant 30mg SQ",
           "group": "Targeted",
           "critical": false,
@@ -30930,7 +30930,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "benadryl",
+          "id": "benadryl-ace-angi",
           "name": "Benadryl as primary",
           "group": "First-line",
           "critical": false,
@@ -31066,7 +31066,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "stop",
+          "id": "stop-dress-sy",
           "name": "Stop allopurinol IMMEDIATELY",
           "group": "First-line",
           "critical": true,
@@ -31082,7 +31082,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "steroids",
+          "id": "steroids-dress-sy",
           "name": "Methylprednisolone 1-2mg/kg/day",
           "group": "First-line",
           "critical": true,
@@ -31146,7 +31146,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "rechallenge",
+          "id": "rechallenge-dress-sy",
           "name": "Rechallenge allopurinol",
           "group": "Follow-up",
           "critical": false,
@@ -31162,7 +31162,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "abx",
+          "id": "abx-dress-sy",
           "name": "Empiric antibiotics",
           "group": "Tx",
           "critical": false,
@@ -31263,7 +31263,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "stop",
+          "id": "stop-sjs-ten-",
           "name": "Stop lamotrigine",
           "group": "First-line",
           "critical": true,
@@ -31295,7 +31295,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-sjs-ten-",
           "name": "Aggressive IVF",
           "group": "Resuscitation",
           "critical": true,
@@ -31455,7 +31455,7 @@ window.CRT_DATA = {
     "treatments": {
       "orders": [
         {
-          "id": "stop",
+          "id": "stop-sjsten-o",
           "name": "Stop TMP-SMX",
           "group": "First-line",
           "critical": true,
@@ -31471,7 +31471,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "burn",
+          "id": "burn-sjsten-o",
           "name": "Burn unit/ICU",
           "group": "Critical",
           "critical": true,
@@ -31487,7 +31487,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "ivf",
+          "id": "ivf-sjsten-o",
           "name": "Aggressive IVF",
           "group": "Resuscitation",
           "critical": true,
@@ -31503,7 +31503,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "eye",
+          "id": "eye-sjsten-o",
           "name": "Ophthalmology STAT",
           "group": "Consult",
           "critical": true,
@@ -31535,7 +31535,7 @@ window.CRT_DATA = {
           ]
         },
         {
-          "id": "desensitize",
+          "id": "desensitize-sjsten-o",
           "name": "Desensitize to TMP-SMX",
           "group": "Follow-up",
           "critical": false,
