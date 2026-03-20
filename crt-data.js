@@ -5938,7 +5938,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": true,
           "phase": 1,
-          "teaching": "NPO in case surgical intervention is needed. Also reduces aspiration risk during sedation for enema.",
+          "teaching": "NPO is mandatory once intussusception is suspected because definitive treatment — pneumatic or hydrostatic enema reduction — requires sedation, and any oral intake risks aspiration during the procedure. Additionally, if enema reduction fails or perforation is suspected, emergent surgery is required. NPO should be established immediately and IV access obtained while imaging is arranged.",
           "references": [
             {
               "source": "Intussusception — StatPearls",
@@ -7209,7 +7209,7 @@ window.CRT_DATA = {
           "group": "Treatment",
           "critical": false,
           "correct": false,
-          "teaching": "⚠️ Methotrexate is for UNRUPTURED ectopic only (stable, small, low beta-hCG). This patient has RUPTURED ectopic with hemodynamic instability — surgery is the only option.",
+          "teaching": "Methotrexate inhibits dihydrofolate reductase, halting trophoblast cell division in unruptured ectopic pregnancy — but it is absolutely contraindicated in RUPTURED ectopic with hemodynamic instability. This patient has peritoneal signs and hemodynamic compromise from active hemorrhage. Methotrexate takes days to work and cannot stop ongoing bleeding. Emergent surgical intervention (laparoscopic salpingectomy) is the only life-saving option here.",
           "references": [
             {
               "source": "Ectopic Pregnancy — StatPearls",
@@ -7424,7 +7424,7 @@ window.CRT_DATA = {
           "group": "Seizure Treatment",
           "critical": false,
           "correct": false,
-          "teaching": "⚠️ Phenytoin is INFERIOR to magnesium for eclamptic seizures. Eclampsia trial proved this definitively. Use magnesium.",
+          "teaching": "Phenytoin is inferior to magnesium sulfate for eclamptic seizure prevention and treatment — the Magpie Trial definitively demonstrated that MgSO4 reduces the risk of eclampsia by 58% compared to phenytoin, with lower maternal and neonatal mortality. Phenytoin acts via sodium channel blockade for cortical seizures; eclamptic seizures arise from cerebral vasospasm and endothelial dysfunction, which magnesium addresses directly through NMDA receptor antagonism and vasodilation.",
           "references": [
             {
               "source": "Eclampsia — StatPearls",
@@ -8024,7 +8024,7 @@ window.CRT_DATA = {
           "group": "Treatment",
           "critical": false,
           "correct": false,
-          "teaching": "⚠️ Dantrolene is for NMS, not serotonin syndrome. Key distinction: NMS has \"lead pipe\" rigidity; SS has clonus, hyperreflexia, and agitation. Different mechanism, different treatment.",
+          "teaching": "Dantrolene blocks ryanodine receptors in skeletal muscle to reduce calcium-mediated muscle rigidity — it is effective in malignant hyperthermia and NMS (where dopamine blockade causes rigidity via excess calcium release), but NOT in serotonin syndrome. SS hypertonicity arises from serotonin receptor overstimulation causing motor neuron hyperactivation, not direct muscle calcium dysregulation. Cyproheptadine (5-HT2A antagonist) plus benzodiazepines are the correct treatments for SS.",
           "references": [
             {
               "source": "Serotonin Syndrome — StatPearls",
@@ -9435,7 +9435,7 @@ window.CRT_DATA = {
           "group": "Critical",
           "critical": true,
           "phase": 1,
-          "teaching": "Antibiotics are for epididymitis, NOT torsion. Misdiagnosis as epididymitis delays life-saving surgery.",
+          "teaching": "Antibiotics treat epididymitis (bacterial infection) but have zero efficacy against testicular torsion (mechanical ischemia from spermatic cord twisting). Misdiagnosing torsion as epididymitis is one of the most common and devastating errors in emergency medicine — each hour of delay closes the 6-hour salvage window and increases risk of orchiectomy. The distinguishing features: sudden onset, absent cremasteric reflex, high-riding testicle, and blue dot sign all point to torsion.",
           "references": [
             {
               "source": "Testicular Torsion — StatPearls",
@@ -13266,7 +13266,7 @@ window.CRT_DATA = {
           "group": "Definitive",
           "critical": true,
           "phase": 1,
-          "teaching": "Same-admission CCY for mild gallstone pancreatitis. Delay for severe until resolved.",
+          "teaching": "Same-admission laparoscopic cholecystectomy is the standard of care for mild gallstone pancreatitis — it prevents recurrence (30–50% risk if discharged without surgery) and the index admission is the optimal opportunity. For severe pancreatitis (organ failure, necrosis), cholecystectomy is deferred until full recovery — typically 4–6 weeks — because operating on inflamed, friable tissue in a critically ill patient significantly increases morbidity. ERCP with sphincterotomy is preferred for retained CBD stones.",
           "references": [
             {
               "source": "Acute Pancreatitis — StatPearls",
@@ -14133,7 +14133,7 @@ window.CRT_DATA = {
           "group": "Critical",
           "critical": true,
           "phase": 1,
-          "teaching": "Antibiotics without drainage have high failure rate. Aspiration/I&D is standard of care.",
+          "teaching": "Peritonsillar abscess is a pus-filled collection that antibiotics cannot penetrate — the fibrous abscess capsule creates an avascular space where drug delivery is negligible. Aspiration or incision and drainage achieves immediate relief, allows culture of the causative organism, and reduces treatment failure from over 50% (antibiotics alone) to under 10%. Antibiotics are adjunctive to drainage, treating the surrounding cellulitis and preventing systemic spread.",
           "references": [
             {
               "source": "Peritonsillar Abscess — StatPearls",
@@ -16374,7 +16374,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": false,
           "phase": 1,
-          "teaching": "Meperidine NOT recommended-seizure risk. Morphine sphincter of Oddi spasm is a myth.",
+          "teaching": "Meperidine (pemeridine) is contraindicated due to accumulation of its neurotoxic metabolite normeperidine, which causes seizures — particularly dangerous in patients who may already have metabolic disturbances from biliary disease. The claim that morphine worsens biliary colic by causing sphincter of Oddi spasm is a persistent myth — multiple RCTs show no clinically meaningful difference in outcomes. Morphine or hydromorphone are appropriate analgesics for acute cholecystitis.",
           "references": [
             {
               "source": "Cholecystitis-StatPearls",
@@ -18744,7 +18744,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "EMERGENT surgery for definitive repair. Graham patch (omental patch) is standard.",
+          "teaching": "Emergency laparotomy or laparoscopy is the only definitive treatment for perforated peptic ulcer — Graham patch omental repair closes the perforation and controls peritoneal contamination. Even brief delays worsen outcomes dramatically: mortality increases approximately 1% per hour in the first 12 hours. The peritoneal cavity must be irrigated, the perforation repaired, and drains placed. H. pylori testing and PPI therapy are started postoperatively.",
           "references": [
             {
               "source": "Peptic Ulcer-StatPearls",
@@ -19175,7 +19175,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": false,
           "phase": 1,
-          "teaching": "V/Q scan is alternative if CTA contraindicated (contrast allergy, renal insufficiency). NOT first-line.",
+          "teaching": "V/Q scanning detects ventilation-perfusion mismatch from PE with sensitivity comparable to CTPA in the right clinical context, but requires normal baseline chest X-ray and carries the limitation of non-diagnostic (intermediate probability) results in 20–30% of cases. It is the preferred alternative when CTPA is contraindicated — contrast allergy, severe renal impairment (eGFR <30), or pregnancy (lower radiation dose to fetus). CTPA remains first-line for most patients.",
           "references": [
             {
               "source": "PE-StatPearls",
@@ -19574,7 +19574,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": false,
           "phase": 1,
-          "teaching": "Aggressive IVF does NOT speed stone passage and may worsen pain by increasing ureteral distension.",
+          "teaching": "Aggressive IV fluid boluses do not accelerate renal stone passage and may worsen pain by increasing ureteral hydrostatic pressure proximal to the obstructing stone. Maintain euvolemia to correct dehydration from vomiting and reduced intake, but do not exceed normal fluid requirements. The evidence-based intervention for facilitating stone passage is alpha-1 receptor blockade (tamsulosin 0.4 mg daily) for ureteral stones 5–10 mm, which relaxes ureteral smooth muscle and increases passage rates by 30–40%.",
           "references": [
             {
               "source": "Nephrolithiasis-StatPearls",
@@ -19944,7 +19944,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": false,
           "phase": 1,
-          "teaching": "CT head NOT indicated for straightforward vasovagal syncope with normal neuro exam. Syncope is NOT a seizure.",
+          "teaching": "CT head is not indicated for uncomplicated vasovagal syncope with a convincing history (prodrome of nausea/diaphoresis/lightheadedness before loss of consciousness, rapid recovery) and normal neurological examination. CT head evaluates for intracranial hemorrhage, mass, or structural cause — none of which cause vasovagal syncope. Overuse of CT in syncope contributes to radiation exposure, contrast reactions, incidental findings, and cost without improving outcomes.",
           "references": [
             {
               "source": "Syncope-StatPearls",
@@ -21894,7 +21894,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "Ondansetron is now evidence-based first-line for acute FPIES. Stops vomiting in 85% of cases within 15-30 minutes.",
+          "teaching": "Ondansetron 0.15 mg/kg IV (max 8 mg) is now the evidence-based first-line pharmacological treatment for acute FPIES, targeting the central serotonergic emetic pathway that drives the profuse, repetitive vomiting defining the syndrome. A single dose stops vomiting in approximately 85% of cases within 15–30 minutes, dramatically reducing dehydration severity and IV fluid requirements. It has replaced 'wait and rehydrate' as the immediate pharmacological intervention of choice.",
           "references": [
             {
               "source": "FPIES-StatPearls",
@@ -26558,7 +26558,7 @@ window.CRT_DATA = {
           "critical": false,
           "correct": false,
           "phase": 1,
-          "teaching": "Clindamycin resistance is 30-40%. Penicillin is first-line. Test and delabel before defaulting to suboptimal alternative.",
+          "teaching": "Clindamycin resistance among GBS (Group B Streptococcus) isolates reaches 30–40% in many regions, making it unreliable for empiric intrapartum prophylaxis in penicillin-labeled patients. Penicillin G remains the gold standard for GBS prophylaxis and is far superior to clindamycin in efficacy. The correct approach for a penicillin-labeled pregnant patient is formal allergy evaluation (skin testing is safe from the 2nd trimester), which clears >90% of labeled patients for penicillin use — enabling optimal GBS protection.",
           "references": [
             {
               "source": "Drug Allergy",

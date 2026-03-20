@@ -350,7 +350,7 @@
       patientName: 'Bernard Kowalski',
       dob: '1950-12-05',
       mrn: '1047839',
-      cases: ['pneumonia', 'community-acquired-pneumonia'],
+      cases: ['pneumonia'],
       encounters: [
         {
           sequence: 1,

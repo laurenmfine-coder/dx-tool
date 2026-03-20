@@ -267,32 +267,32 @@ const ROUTES = {
   ed: {
     coach:     'CoachDx/mentor-chat.html?setting=ed',
     cases:     'virtual-emr.html?setting=ed',
-    mechanism: 'mechanism/index.html'
+    mechanism: 'mechanism/anaphylaxis-module.html'
   },
   floor: {
     coach:     'CoachDx/mentor-chat.html?setting=inpatient',
-    cases:     'virtual-emr.html?setting=inpatient',
-    mechanism: 'mechanism/index.html'
+    cases:     'virtual-emr.html?setting=floor',
+    mechanism: 'mechanism/anaphylaxis-module.html'
   },
   clinic: {
     coach:     'CoachDx/mentor-chat.html?setting=clinic',
-    cases:     'clinic-board.html',
-    mechanism: 'mechanism/index.html'
+    cases:     'virtual-emr.html?setting=clinic',
+    mechanism: 'mechanism/anaphylaxis-module.html'
   },
   'night-float': {
     coach:     'CoachDx/mentor-chat.html?setting=inpatient',
-    cases:     'virtual-emr.html?setting=inpatient',
-    mechanism: 'mechanism/index.html'
+    cases:     'night-float.html',
+    mechanism: 'mechanism/anaphylaxis-module.html'
   },
   icu: {
     coach:     'CoachDx/mentor-chat.html?setting=icu',
     cases:     'virtual-emr.html?setting=icu',
-    mechanism: 'mechanism/index.html'
+    mechanism: 'mechanism/anaphylaxis-module.html'
   },
   any: {
     coach:     'CoachDx/mentor-chat.html',
-    cases:     'casedx.html',
-    mechanism: 'mechanism/index.html'
+    cases:     'virtual-emr.html',
+    mechanism: 'mechanism/anaphylaxis-module.html'
   }
 };
 
@@ -378,10 +378,8 @@ function go() {
   if (!url) return;
 
   // Append topic param if passed from index search
-  // Never forward topic to MechanismDx — it would auto-open a specific module,
-  // bypassing the index landing page entirely.
   const incomingTopic = new URLSearchParams(window.location.search).get('topic');
-  if (incomingTopic && pillar !== 'mechanism') {
+  if (incomingTopic) {
     url += (url.includes('?') ? '&' : '?') + 'topic=' + encodeURIComponent(incomingTopic);
   }
 

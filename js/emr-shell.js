@@ -267,7 +267,7 @@
           window.location.href = url;
           return;
         }
-        window.location.href = tool.url;
+        window.open(tool.url, '_blank');
       }
     }
   };

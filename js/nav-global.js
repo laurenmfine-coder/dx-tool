@@ -1,6 +1,8 @@
 // ReasonDx Global Navigation
 // Injects the top navigation bar into all pages
 (function() {
+  // Double-inject guard — if nav already exists, do not reinject
+  if (document.getElementById('rdx-global-nav')) return;
   const nav = document.createElement('div');
   nav.id = 'rdx-global-nav';
   nav.innerHTML = `
