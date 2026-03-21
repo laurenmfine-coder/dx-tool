@@ -49,8 +49,8 @@ function rdxEsc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace
   --sim-surface-2: #162844;
   --sim-border: #1e3a55;
   --sim-text: #e8f0f8;
-  --sim-text-muted: #94A3B8;
-  --sim-text-dim: #64748B;
+  --sim-text-muted: #b8d4ed;
+  --sim-text-dim: #93c5e8;
 }
 /* SimRoomDx always uses dark theme internally regardless of platform theme */
 
@@ -113,7 +113,7 @@ body {
 .char-chip.disabled { opacity: 0.35; pointer-events: none; }
 .char-chip.locked { opacity: 1; cursor: pointer; }
 .char-chip img { width: 28px; height: 28px; border-radius: 50%; }
-.char-chip .char-name { font-size: 11px; font-weight: 600; color: #CBD5E1; }
+.char-chip .char-name { font-size: 11px; font-weight: 600; color: #e2eef8; }
 .char-chip .char-role { font-size:11px; color: var(--sim-text-dim); }
 .char-chip.speaking { animation: pulse-glow 1.5s ease-in-out infinite; }
 @keyframes pulse-glow {
@@ -176,7 +176,7 @@ body {
 .addressing-bar { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
 .addr-btn {
   font-size: 11px; padding: 4px 10px; border-radius: 16px;
-  border: 1px solid #475569; background: transparent; color: var(--sim-text-muted);
+  border: 1px solid #2a5070; background: transparent; color: var(--sim-text-muted);
   cursor: pointer; font-family: var(--rdx-font); transition: all 0.2s;
 }
 .addr-btn.selected { background: var(--rdx-brand); color: white; border-color: var(--rdx-brand); }
@@ -189,7 +189,7 @@ body {
   outline: none; transition: border-color 0.2s;
 }
 .input-row textarea:focus { border-color: var(--rdx-brand); }
-.input-row textarea::placeholder { color: #475569; }
+.input-row textarea::placeholder { color: #7ab0d4; }
 .send-btn {
   width: 44px; height: 44px; border-radius: 12px; background: var(--rdx-brand);
   border: none; color: white; font-size: 18px; cursor: pointer; transition: all 0.2s; flex-shrink: 0;
@@ -260,7 +260,7 @@ body {
 }
 .start-btn:hover { background: var(--rdx-brand-dark); }
 .voice-toggle { display: flex; align-items: center; gap: 8px; padding: 10px; }
-.voice-toggle label { font-size: 13px; color: #CBD5E1; cursor: pointer; }
+.voice-toggle label { font-size: 13px; color: #e2eef8; cursor: pointer; }
 .pro-badge {
   display: inline-flex; align-items: center; gap: 3px;
   background: var(--rdx-brand); color: white; font-size:11px; font-weight: 700;
@@ -589,10 +589,10 @@ body {
 .avatar-char.pharmacist.speaking .sound-wave-bar { background:#EC4899; }
 .avatar-char.pharmacist.speaking .avatar-shadow { background:radial-gradient(ellipse,rgba(236,72,153,.35) 0%,transparent 70%); }
 
-.avatar-char.you.speaking img      { border-color:#94A3B8; box-shadow:0 0 24px rgba(148,163,184,.5); }
-.avatar-char.you.speaking .avatar-ring     { border-color:#94A3B8; border-top-color:transparent; }
+.avatar-char.you.speaking img      { border-color:#b8d4ed; box-shadow:0 0 24px rgba(148,163,184,.5); }
+.avatar-char.you.speaking .avatar-ring     { border-color:#b8d4ed; border-top-color:transparent; }
 .avatar-char.you.speaking .avatar-glow     { background:radial-gradient(circle,rgba(148,163,184,.2) 0%,transparent 60%); }
-.avatar-char.you.speaking .sound-wave-bar  { background:#94A3B8; }
+.avatar-char.you.speaking .sound-wave-bar  { background:#b8d4ed; }
 
 /* ═══════ EMOTION BADGES ═══════ */
 .emotion-badge {
@@ -714,7 +714,7 @@ body {
 .rdx-loading.hide{opacity:0;pointer-events:none}
 .rdx-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdxSpin .8s linear infinite}
 @keyframes rdxSpin{to{transform:rotate(360deg)}}
-.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#64748B;font-weight:500}
+.rdx-load-text{font-family:"DM Sans",sans-serif;font-size:14px;color:#93c5e8;font-weight:500}
 </style>
 <link rel="manifest" href="manifest.json">
 
@@ -750,7 +750,7 @@ body {
   <!-- CASE DETAILS (updates when case is selected) -->
   <div class="modal-section" id="caseDetails">
     <h3 id="caseDetailTitle">Anterior STEMI</h3>
-    <p id="caseDetailBrief" style="font-size:13px;color:#94A3B8;margin-bottom:8px;">58-year-old male, crushing chest pain, ST elevation V1-V4. Door-to-balloon clock is ticking.</p>
+    <p id="caseDetailBrief" style="font-size:13px;color:#b8d4ed;margin-bottom:8px;">58-year-old male, crushing chest pain, ST elevation V1-V4. Door-to-balloon clock is ticking.</p>
   </div>
 
   <div class="modal-section">
@@ -808,7 +808,7 @@ body {
   <!-- Upgrade banner for free users -->
   <div id="freeUpgradeBanner" style="display:none!important;">
     <div style="font-size:14px;font-weight:600;color:#D4E6F1;margin-bottom:4px;">🏥 Free tier: 1 demo case, patient + attending only</div>
-    <div style="font-size:12px;color:#94A3B8;margin-bottom:10px;">Upgrade to Pro for all cases, 6 characters, voice, multiplayer & more</div>
+    <div style="font-size:12px;color:#b8d4ed;margin-bottom:10px;">Upgrade to Pro for all cases, 6 characters, voice, multiplayer & more</div>
     
   </div>
 
@@ -1707,7 +1707,7 @@ function buildCaseGrid() {
     card.innerHTML = `
       <div class="case-emoji">${c.emoji}</div>
       <div class="case-info">
-        <div class="case-title">${c.title}${isLocked ? ' <span class="pro-badge"><svg viewBox="0 0 24 24" style="width:9px;height:9px;fill:white;vertical-align:middle;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="white" stroke-width="2"/></svg>PRO</span>' : ''}${isFreeCase && isFree ? ' <span class="case-free-badge">FREE DEMO</span>' : ''}</div>
+        <div class="case-title">${c.title}</div>
         <div class="case-brief">${c.brief}</div>
       </div>`;
 
@@ -2365,7 +2365,7 @@ function buildCharStrip() {
     const chip = document.createElement('div');
     chip.className = `char-chip ${isActive ? 'active' : isLocked ? 'locked' : 'disabled'}`;
     chip.id = `chip-${ch.id}`;
-    chip.innerHTML = `<img src="${ch.avatar}" alt="${ch.name}"><div><div class="char-name">${ch.icon} ${ch.name}${isLocked ? '<span class="pro-chip-badge">PRO</span>' : ''}</div><div class="char-role">${ch.role}</div></div>`;
+    chip.innerHTML = `<img src="${ch.avatar}" alt="${ch.name}"><div><div class="char-name">${ch.icon} ${ch.name}</div><div class="char-role">${ch.role}</div></div>`;
     if (isActive) chip.onclick = () => selectTarget(ch.id);
     strip.appendChild(chip);
   });
