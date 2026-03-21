@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Platform Overview</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<style>
+.hero{background:var(--rdx-ocean-deep);padding:56px 48px 48px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(40,116,166,.15) 0%,transparent 60%)}
+.hero-inner{max-width:1040px;margin:0 auto;position:relative;z-index:1}
+.hero-title{font-family:var(--rdx-font-serif);font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;margin-bottom:12px}
+.hero-title em{font-style:italic;color:var(--rdx-ocean-mid)}
+.hero-sub{color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.65;max-width:560px;margin-bottom:28px}
+.hero-wave{display:block;width:100%}
+.main{max-width:1040px;margin:0 auto;padding:40px 24px 72px}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:48px}
+.mod-card{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-md);overflow:hidden;transition:all .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.mod-card:hover{transform:translateY(-3px);box-shadow:var(--rdx-shadow-md);border-color:var(--rdx-ocean-light)}
+.mod-header{padding:18px 20px 14px;position:relative}
+.mod-icon{font-size:1.6rem;margin-bottom:8px}
+.mod-title{font-family:var(--rdx-font-serif);font-size:1.1rem;color:var(--rdx-text);margin-bottom:4px}
+.mod-desc{font-size:.8rem;color:var(--rdx-text-muted);line-height:1.5}
+.mod-footer{padding:10px 20px 14px;border-top:1px solid var(--rdx-border);display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.mod-stat{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--rdx-text-dim)}
+.mod-arrow{font-size:.8rem;color:var(--rdx-ocean);font-weight:700}
+.mod-card:hover .mod-arrow{transform:translateX(3px)}
+.mod-arrow{transition:transform .15s}
+.mod-new{position:absolute;top:14px;right:14px}
+.section-divider{display:flex;align-items:center;gap:16px;margin:40px 0 24px}
+.section-divider-line{flex:1;height:1px;background:var(--rdx-border)}
+.section-divider-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rdx-text-muted);white-space:nowrap}
+.ecosystem-chart{background:var(--rdx-surface);border-radius:var(--rdx-radius-lg);box-shadow:var(--rdx-shadow);padding:32px;margin-bottom:48px}
+.eco-title{font-family:var(--rdx-font-serif);font-size:1.3rem;margin-bottom:8px}
+.eco-sub{font-size:.85rem;color:var(--rdx-text-muted);margin-bottom:28px}
+.eco-flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center}
+.eco-node{background:var(--rdx-ocean-light);border:2px solid var(--rdx-ocean);border-radius:var(--rdx-radius-md);padding:14px 18px;text-align:center;min-width:130px}
+.eco-node.dark{background:var(--rdx-ocean-dark);border-color:var(--rdx-ocean-dark)}
+.eco-node.accent{background:var(--rdx-accent-light);border-color:var(--rdx-accent)}
+.eco-node-icon{font-size:1.3rem;margin-bottom:4px}
+.eco-node-name{font-size:.8rem;font-weight:700;color:var(--rdx-ocean-dark)}
+.eco-node.dark .eco-node-name{color:#fff}
+.eco-node.accent .eco-node-name{color:var(--rdx-accent-dark)}
+.eco-node-desc{font-size:.68rem;color:var(--rdx-text-muted)}
+.eco-node.dark .eco-node-desc{color:rgba(255,255,255,.6)}
+.eco-arrow{font-size:1.2rem;color:var(--rdx-text-dim);padding:0 8px;flex-shrink:0}
+.patent-strip{background:linear-gradient(135deg,var(--rdx-ocean-deep),var(--rdx-ocean-dark));border-radius:var(--rdx-radius-lg);padding:28px 32px;margin-bottom:48px}
+.patent-title{font-family:var(--rdx-font-serif);font-size:1.2rem;color:#fff;margin-bottom:6px}
+.patent-sub{font-size:.83rem;color:rgba(255,255,255,.6);margin-bottom:20px}
+.patent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.patent-item{background:rgba(255,255,255,.08);border:1px solid rgba(133,193,233,.2);border-radius:var(--rdx-radius);padding:12px 14px}
+.patent-name{font-size:.8rem;font-weight:700;color:var(--rdx-ocean-mid);margin-bottom:3px}
+.patent-abbr{font-size:.7rem;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="rdx-hero-tag" style="margin-bottom:16px">🏗️ Platform Architecture</div>
+    <h1 class="hero-title">ReasonDx is not a product.<br><em>It's an ecosystem.</em></h1>
+    <p class="hero-sub">300+ cases. 7 integrated modules. An institutional analytics suite. Patent-pending reasoning technology. Built by a board-certified physician for the next generation of clinicians.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="rdx-btn rdx-btn-accent" href="/casedx.html">Launch Platform →</a>
+      <a class="rdx-btn rdx-btn-ghost-white" href="/institutional.html">Institutional Access</a>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 48" preserveAspectRatio="none"><path d="M0,32 C360,56 1080,0 1440,28 L1440,48 L0,48 Z" fill="#f0f4f8"/></svg>
+</div>
+
+<div class="main">
+
+  <!-- ECOSYSTEM FLOW -->
+  <div class="ecosystem-chart">
+    <div class="eco-title">The Clinical Reasoning Ecosystem</div>
+    <div class="eco-sub">Every component reinforces the others — from mechanism understanding to diagnosis to analytics.</div>
+    <div class="eco-flow">
+      <div class="eco-node dark"><div class="eco-node-icon">🔬</div><div class="eco-node-name">MechanismDx</div><div class="eco-node-desc">Why does disease happen?</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node"><div class="eco-node-icon">🩺</div><div class="eco-node-name">CaseDx</div><div class="eco-node-desc">Apply it to patients</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node"><div class="eco-node-icon">🤖</div><div class="eco-node-name">CoachDx</div><div class="eco-node-desc">Deepen with coaching</div></div>
+      <div class="eco-arrow">→</div>
+      <div class="eco-node accent"><div class="eco-node-icon">📊</div><div class="eco-node-name">Analytics</div><div class="eco-node-desc">Measure growth</div></div>
+    </div>
+  </div>
+
+  <!-- CORE MODULES -->
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Core Learning Modules</div><div class="section-divider-line"></div></div>
+  <div class="module-grid">
+    <a class="mod-card" href="/casedx.html"><div class="mod-header"><div class="mod-icon">🩺</div><div class="mod-title">CaseDx — Case Library</div><div class="mod-desc">300+ interactive virtual patient cases across 20+ specialties. Branching decisions, real-time feedback, gamified XP system.</div></div><div class="mod-footer"><div class="mod-stat">300+ cases · 20+ specialties</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/CoachDx/index.html"><div class="mod-header"><div class="mod-icon">🤖</div><div class="mod-title">CoachDx — AI Coaching</div><div class="mod-desc">Socratic AI attending that pushes reasoning rather than giving answers. 105 topics, adapts to MS1 through resident.</div></div><div class="mod-footer"><div class="mod-stat">105 topics · 7 AI coaches</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/mechanism/index.html"><div class="mod-header"><div class="mod-icon">🔬</div><div class="mod-title">MechanismDx — Pathophysiology</div><div class="mod-desc">Deep mechanism modules with embryology expansion suites. 560 topics, 5-phase mastery. GI, Neuro, Respiratory, MSK, A/I.</div></div><div class="mod-footer"><div class="mod-stat">560 topics · 5-phase mastery</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/genetics/genetics-module.html" style="border-color:rgba(108,52,131,.3)"><div class="mod-header"><div class="mod-icon">🧬</div><div class="mod-new"><span class="rdx-badge rdx-badge-accent">New</span></div><div class="mod-title">Genetics & Genomics Module</div><div class="mod-desc">18 cases teaching primary care physicians to recognize rare genetic disease. 7 clinical tracks from chromosomal disorders to pharmacogenomics.</div></div><div class="mod-footer"><div class="mod-stat">18 cases · 7 tracks</div><div class="mod-arrow" style="color:#6c3483">→</div></div></a>
+    <a class="mod-card" href="/virtual-emr.html"><div class="mod-header"><div class="mod-icon">🏥</div><div class="mod-title">Virtual EMR — ED Board</div><div class="mod-desc">Full ED trackboard with real order sets, patient continuity chains (10 patients), STEMI v2/v3, Sepsis v2/v3, Stroke, DKA, PE series.</div></div><div class="mod-footer"><div class="mod-stat">Full EMR simulation · Order sets</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/pathway.html"><div class="mod-header"><div class="mod-icon">🗺️</div><div class="mod-title">Topic Explorer — Pathway</div><div class="mod-desc">560 pathophysiology topics with 5-phase mastery progression. Board-aligned, spaced repetition, evidence-based.</div></div><div class="mod-footer"><div class="mod-stat">560 topics · Board prep</div><div class="mod-arrow">→</div></div></a>
+  </div>
+
+  <!-- ANALYTICS & INSTITUTIONAL -->
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Analytics & Institutional Suite</div><div class="section-divider-line"></div></div>
+  <div class="module-grid">
+    <a class="mod-card" href="/analytics-dashboard.html"><div class="mod-header"><div class="mod-icon">📊</div><div class="mod-title">Analytics Dashboard</div><div class="mod-desc">Personal reasoning analytics — track patterns, identify gaps, compare to expert pathways. Reasoning Pathway Fingerprinting (RPFS).</div></div><div class="mod-footer"><div class="mod-stat">RPFS · Pattern analysis</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/faculty-dashboard.html"><div class="mod-header"><div class="mod-icon">🎓</div><div class="mod-title">Faculty Dashboard</div><div class="mod-desc">Cohort performance, individual student reasoning profiles, flagging system for at-risk students. ACGME milestone alignment.</div></div><div class="mod-footer"><div class="mod-stat">Faculty · Cohort analytics</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/cohort-analytics.html"><div class="mod-header"><div class="mod-icon">📈</div><div class="mod-title">Cohort Analytics</div><div class="mod-desc">Program-level outcomes reporting. Compare cohorts, track longitudinal development, export for accreditation reports.</div></div><div class="mod-footer"><div class="mod-stat">Program director · ACGME</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/milestone-tracker.html"><div class="mod-header"><div class="mod-icon">🎯</div><div class="mod-title">Milestone Tracker</div><div class="mod-desc">ACGME and LCME milestone mapping. Track competency development across clinical rotations and board prep.</div></div><div class="mod-footer"><div class="mod-stat">Milestone mapping · Competency</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/ilp.html"><div class="mod-header"><div class="mod-icon">🧭</div><div class="mod-title">Individual Learning Plan</div><div class="mod-desc">Personalized learning pathways based on performance data, specialty goals, and identified reasoning gaps.</div></div><div class="mod-footer"><div class="mod-stat">Adaptive · Personalized</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/institutional.html"><div class="mod-header"><div class="mod-icon">🏛️</div><div class="mod-title">Institutional Licensing</div><div class="mod-desc">Enterprise access for medical schools, residency programs, and health systems. Custom onboarding, SSO, admin controls.</div></div><div class="mod-footer"><div class="mod-stat">Enterprise · Custom pricing</div><div class="mod-arrow">→</div></div></a>
+  </div>
+
+  <!-- SPECIALTY TOOLS -->
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Specialty & Simulation Tools</div><div class="section-divider-line"></div></div>
+  <div class="module-grid">
+    <a class="mod-card" href="/ai-trainer-anaphylaxis-food.html"><div class="mod-header"><div class="mod-icon">⚡</div><div class="mod-title">AI Trainer — Anaphylaxis</div><div class="mod-desc">Expert-authored anaphylaxis and food allergy reasoning trainer. Built by a board-certified allergist/immunologist.</div></div><div class="mod-footer"><div class="mod-stat">A/I specialty · Expert-authored</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/allergy-pathway.html"><div class="mod-header"><div class="mod-icon">🌿</div><div class="mod-title">Allergy / Immunology Pathway</div><div class="mod-desc">Full A/I specialty pathway including HAE, primary immunodeficiencies, atopic disease, and drug hypersensitivity.</div></div><div class="mod-footer"><div class="mod-stat">A/I specialty · Full pathway</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/simroomdx.html"><div class="mod-header"><div class="mod-icon">🎮</div><div class="mod-title">SimRoomDx</div><div class="mod-desc">High-fidelity simulation scenarios with real-time branching, team roles, and debrief tools.</div></div><div class="mod-footer"><div class="mod-stat">Simulation · Team-based</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/procedure-lab.html"><div class="mod-header"><div class="mod-icon">🔧</div><div class="mod-title">Procedure Lab</div><div class="mod-desc">Step-by-step procedural guides with indication reasoning — not just how, but when and why.</div></div><div class="mod-footer"><div class="mod-stat">Procedures · Clinical reasoning</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/counseling-scenarios.html"><div class="mod-header"><div class="mod-icon">💬</div><div class="mod-title">Counseling Scenarios</div><div class="mod-desc">Communication skills training — delivering bad news, shared decision-making, patient education.</div></div><div class="mod-footer"><div class="mod-stat">Communication · OSCE prep</div><div class="mod-arrow">→</div></div></a>
+    <a class="mod-card" href="/ecg/ecg-quiz.html"><div class="mod-header"><div class="mod-icon">📡</div><div class="mod-title">ECG Quiz Module</div><div class="mod-desc">ECG interpretation with clinical context — not pattern matching in isolation, but reasoning to the rhythm.</div></div><div class="mod-footer"><div class="mod-stat">ECG · Clinical context</div><div class="mod-arrow">→</div></div></a>
+  </div>
+
+  <!-- PATENT INNOVATIONS -->
+  <div class="patent-strip">
+    <div class="patent-title">Patent-Pending Educational Technology Innovations</div>
+    <div class="patent-sub">Novel contributions to the science of clinical reasoning education</div>
+    <div class="patent-grid">
+      <div class="patent-item"><div class="patent-name">Reasoning Pathway Fingerprinting</div><div class="patent-abbr">RPFS</div></div>
+      <div class="patent-item"><div class="patent-name">Collaborative Reasoning Divergence Analysis</div><div class="patent-abbr">CRDA</div></div>
+      <div class="patent-item"><div class="patent-name">CaseFrame Architecture</div><div class="patent-abbr">CFA</div></div>
+      <div class="patent-item"><div class="patent-name">Adaptive Diagnostic Scaffolding</div><div class="patent-abbr">ADS</div></div>
+      <div class="patent-item"><div class="patent-name">SpacedRep Clinical Integration</div><div class="patent-abbr">SRCI</div></div>
+      <div class="patent-item"><div class="patent-name">PatentUI Interface System</div><div class="patent-abbr">PUI</div></div>
+    </div>
+  </div>
+
+</div>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>

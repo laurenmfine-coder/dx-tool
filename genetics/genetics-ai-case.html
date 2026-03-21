@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — HAE Clinical Reasoning Case</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<style>
+body{background:var(--rdx-bg)}
+.header{background:var(--rdx-ocean-deep);padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:var(--rdx-font-serif);color:#fff;font-size:1.25rem}.logo span{color:var(--rdx-ocean-mid)}
+.shell{max-width:960px;margin:0 auto;padding:28px 20px 60px}
+.case-intro{background:var(--rdx-surface);border-radius:var(--rdx-radius-md);box-shadow:var(--rdx-shadow);overflow:hidden;margin-bottom:22px}
+.case-intro-header{background:linear-gradient(135deg,#0e6655,#148f77);padding:20px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.case-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-bottom:8px}
+.case-title{font-family:var(--rdx-font-serif);color:#fff;font-size:1.5rem;line-height:1.25;margin-bottom:4px}
+.case-subtitle{color:rgba(255,255,255,.72);font-size:.85rem}
+.diff-badge{background:rgba(230,126,34,.25);border:1px solid rgba(230,126,34,.5);color:#f5cba7;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.patient-card{padding:20px 28px;border-bottom:1px solid #eef1f5}
+.patient-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.vignette{background:#fafbfc;border-left:3px solid var(--rdx-info);border-radius:0 8px 8px 0;padding:14px 18px;font-size:.92rem;line-height:1.7}
+.highlight{color:#0e6655;font-weight:600}.flag{color:var(--rdx-danger);font-weight:600}.pearl{color:var(--rdx-ocean);font-weight:600}
+.progress-bar-wrap{padding:14px 28px;background:#f8fafc;border-bottom:1px solid #eef1f5;display:flex;align-items:center;gap:14px}
+.progress-label{font-size:.75rem;font-weight:600;color:var(--rdx-text-muted);white-space:nowrap}
+.progress-track{flex:1;height:6px;background:#dce9f5;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--rdx-info),#52c7b5);transition:width .6s ease}
+.step-dots{display:flex;gap:6px}
+.step-dot{width:8px;height:8px;border-radius:50%;background:#dce9f5}
+.step-dot.done{background:var(--rdx-info)}.step-dot.active{background:var(--rdx-accent)}
+.question-card{background:var(--rdx-surface);border-radius:var(--rdx-radius-md);box-shadow:var(--rdx-shadow);padding:24px 28px;margin-bottom:16px}
+.question-stem{font-size:1.05rem;font-weight:500;line-height:1.55;margin-bottom:18px}
+.answer-grid{display:grid;gap:10px}
+.answer-btn{background:var(--rdx-surface-2);border:1.5px solid var(--rdx-border);border-radius:8px;padding:13px 18px;font-family:var(--rdx-font-sans);font-size:.9rem;color:var(--rdx-text);cursor:pointer;text-align:left;transition:all .18s;display:flex;align-items:flex-start;gap:12px;line-height:1.45}
+.answer-btn:hover:not(:disabled){border-color:var(--rdx-info);background:var(--rdx-info-bg);transform:translateX(3px)}
+.answer-btn.correct{background:var(--rdx-success-bg);border-color:var(--rdx-success);color:var(--rdx-success);font-weight:500}
+.answer-btn.wrong{background:var(--rdx-danger-bg);border-color:var(--rdx-danger);color:var(--rdx-danger);font-weight:500}
+.answer-btn.dimmed{opacity:.4;pointer-events:none}
+.choice-letter{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;min-width:22px;background:#fff;border:1.5px solid var(--rdx-border-hi);border-radius:50%;font-size:.72rem;font-weight:700;color:var(--rdx-text-muted);margin-top:1px;flex-shrink:0}
+.answer-btn.correct .choice-letter{background:var(--rdx-success);border-color:var(--rdx-success);color:#fff}
+.answer-btn.wrong .choice-letter{background:var(--rdx-danger);border-color:var(--rdx-danger);color:#fff}
+.feedback-box{border-radius:10px;padding:16px 20px;margin-top:14px;display:none;animation:fadeUp .3s ease}
+.feedback-box.show{display:block}
+.feedback-box.correct-fb{background:var(--rdx-success-bg);border:1px solid #a9dfbf}
+.feedback-box.wrong-fb{background:var(--rdx-danger-bg);border:1px solid #f1948a}
+.feedback-title{font-weight:700;font-size:.88rem;margin-bottom:6px}
+.feedback-box.correct-fb .feedback-title{color:var(--rdx-success)}
+.feedback-box.wrong-fb .feedback-title{color:var(--rdx-danger)}
+.feedback-text{font-size:.87rem;line-height:1.6}
+.pearls{margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,.07)}
+.pearls-label{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--rdx-info);margin-bottom:6px}
+.pearl-item{display:flex;gap:8px;font-size:.84rem;line-height:1.5;margin-bottom:4px}
+.pearl-item::before{content:"◆";color:var(--rdx-info);font-size:.6rem;margin-top:4px;flex-shrink:0}
+.next-btn{display:none;margin-top:14px;background:var(--rdx-info);color:#fff;border:none;border-radius:8px;padding:12px 28px;font-family:var(--rdx-font-sans);font-size:.9rem;font-weight:600;cursor:pointer;transition:background .18s}
+.next-btn:hover{background:#0e6655}
+.next-btn.show{display:inline-flex;align-items:center;gap:8px}
+.score-screen{display:none;background:var(--rdx-surface);border-radius:var(--rdx-radius-md);box-shadow:var(--rdx-shadow);padding:40px 32px;text-align:center;animation:fadeUp .5s ease}
+.score-screen.show{display:block}
+.score-ring{width:110px;height:110px;border-radius:50%;background:conic-gradient(var(--rdx-info) var(--pct),#dce9f5 0);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;position:relative}
+.score-ring::after{content:'';position:absolute;inset:12px;border-radius:50%;background:#fff}
+.score-number{font-family:var(--rdx-font-serif);font-size:1.6rem;color:#0e6655;position:relative;z-index:1}
+.score-title{font-family:var(--rdx-font-serif);font-size:1.6rem;margin-bottom:8px}
+.score-sub{color:var(--rdx-text-muted);font-size:.9rem;margin-bottom:24px;line-height:1.55}
+.score-stats{display:flex;justify-content:center;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.score-stat-val{font-family:var(--rdx-font-serif);font-size:1.4rem;color:#0e6655}
+.score-stat-label{font-size:.72rem;color:var(--rdx-text-muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.rdx-btn-teal{background:var(--rdx-info);color:#fff}
+.rdx-btn-teal:hover{background:#0e6655}
+.ai-badge{background:rgba(20,143,119,.12);border:1px solid rgba(20,143,119,.3);color:#0e6655;font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.05em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">Reason<span>Dx</span></div>
+  <div class="ai-badge">🌿 A/I Genetics Overlap</div>
+  <div class="rdx-xp-pill">+140 XP</div>
+</div>
+
+<div class="shell">
+  <div class="case-intro" id="caseIntro">
+    <div class="case-intro-header">
+      <div>
+        <div class="case-tag">🌿 Allergy/Immunology · Genetic Overlap</div>
+        <div class="case-title">The Swelling That Skips Generations</div>
+        <div class="case-subtitle">A 28-year-old woman with recurrent facial swelling — not allergic, not responding to antihistamines</div>
+      </div>
+      <div class="diff-badge">⚡ Intermediate</div>
+    </div>
+    <div class="patient-card">
+      <div class="rdx-label" style="margin-bottom:10px">Patient Snapshot</div>
+      <div class="patient-grid">
+        <div class="rdx-patient-stat"><div class="rdx-patient-stat-label">Patient</div><div class="rdx-patient-stat-value">Sofia M., 28F</div></div>
+        <div class="rdx-patient-stat"><div class="rdx-patient-stat-label">Setting</div><div class="rdx-patient-stat-value">Allergy Clinic</div></div>
+        <div class="rdx-patient-stat"><div class="rdx-patient-stat-label">Chief Complaint</div><div class="rdx-patient-stat-value">Recurrent swelling</div></div>
+        <div class="rdx-patient-stat"><div class="rdx-patient-stat-label">Frequency</div><div class="rdx-patient-stat-value">~2x/month</div></div>
+        <div class="rdx-patient-stat"><div class="rdx-patient-stat-label">Prior Dx</div><div class="rdx-patient-stat-value">Allergic angioedema</div></div>
+        <div class="rdx-patient-stat"><div class="rdx-patient-stat-label">Treatment tried</div><div class="rdx-patient-stat-value">Cetirizine — no effect</div></div>
+      </div>
+      <div class="vignette">
+        Sofia presents with a <span class="highlight">2-year history of recurrent swelling</span> affecting her face, lips, and hands. Episodes last <span class="highlight">2–4 days</span> and resolve spontaneously. She has been to the ED three times; twice she was given epinephrine with <span class="flag">no improvement</span>. She has no urticaria with episodes. Antihistamines have <span class="flag">not helped</span>. She is currently on an ACE inhibitor for hypertension, started 26 months ago. Her <span class="pearl">mother had similar episodes</span>; her <span class="pearl">maternal uncle died of laryngeal swelling</span> in his 40s. She has no identifiable triggers. Tryptase level drawn during an episode: <span class="highlight">normal</span>. C4 level: <span class="flag">low</span>.
+      </div>
+    </div>
+    <div class="progress-bar-wrap">
+      <span class="progress-label">Step 1 of 5</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+      <div class="step-dots">
+        <div class="step-dot active" id="dot0"></div>
+        <div class="step-dot" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+        <div class="step-dot" id="dot4"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="questionContainer"></div>
+
+  <div class="score-screen" id="scoreScreen">
+    <div class="score-ring" id="scoreRing"><div class="score-number" id="scoreNumber">—</div></div>
+    <div class="score-title" id="scoreTitle">Case Complete</div>
+    <div class="score-sub" id="scoreSub"></div>
+    <div class="score-stats">
+      <div class="score-stat"><div class="score-stat-val" id="statCorrect">—</div><div class="score-stat-label">Correct</div></div>
+      <div class="score-stat"><div class="score-stat-val" id="statXP">—</div><div class="score-stat-label">XP Earned</div></div>
+    </div>
+    <div class="cta-row">
+      <button class="rdx-btn rdx-btn-teal" onclick="restartCase()">Try Again</button>
+      <a class="rdx-btn rdx-btn-ghost" href="/genetics/genetics-module.html">Back to Module</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const questions=[
+  {stem:"Sofia has recurrent angioedema without urticaria, not responding to antihistamines or epinephrine, with a family history of similar episodes and a death from laryngeal swelling. What is the most important diagnostic consideration?",
+   choices:["Allergic (IgE-mediated) angioedema — requires further allergy workup","Hereditary Angioedema (HAE) — complement-mediated, genetic, life-threatening","ACE inhibitor-induced angioedema — medication side effect","Idiopathic histaminergic angioedema — no identifiable cause"],
+   correct:1,
+   feedback:{correct:"Exactly right. The triad of angioedema WITHOUT urticaria, NO response to antihistamines or epinephrine, and a FAMILY HISTORY of similar episodes (especially a death from laryngeal swelling) is the classic HAE fingerprint. The low C4 during episodes confirms complement consumption. ACE inhibitor-induced angioedema is in the differential and must be addressed, but the family history and low C4 point to HAE.",
+   wrong:"The absence of urticaria, failure to respond to antihistamines and epinephrine, and the family history — especially a maternal uncle who died of laryngeal swelling — is the HAE triad. Allergic angioedema almost always co-occurs with urticaria and responds to epinephrine. The low C4 level during an episode confirms complement pathway involvement."},
+   pearls:["HAE triad: angioedema WITHOUT urticaria + NO response to antihistamines/epinephrine + family history","Low C4 during and between episodes is the most sensitive screening test for HAE type I and II","Epinephrine does NOT work for HAE — using it delays appropriate treatment and creates false reassurance"]},
+  {stem:"You suspect HAE. To confirm the diagnosis and determine the type, which laboratory workup is most appropriate as a first step?",
+   choices:["Skin prick testing panel to common allergens","C4 level + C1-inhibitor level + C1-inhibitor functional assay","Tryptase level during next acute episode","Total IgE and specific IgE to foods"],
+   correct:1,
+   feedback:{correct:"Perfect. The HAE diagnostic workup is: C4 (screening — low in HAE I and II), C1-inhibitor antigenic level (low in HAE type I, normal in HAE type II), and C1-inhibitor functional assay (low in both type I and II). This trio distinguishes HAE type I (low level AND low function) from HAE type II (normal level, low function). HAE type III has normal complement studies — diagnosed clinically.",
+   wrong:"Allergy testing and IgE levels are not relevant here — HAE is not IgE-mediated. The correct workup is complement-based: C4 (almost always low in HAE I and II), C1-inhibitor antigen level, and C1-inhibitor functional assay. These three tests together determine the HAE type and guide treatment."},
+   pearls:["HAE type I: low C1-INH level AND low function (~85% of cases)","HAE type II: normal or elevated C1-INH level, LOW function (~15% of cases)","C4 is the best screening test — it is almost always low between episodes in HAE I and II, not just during attacks","Normal complement studies do not rule out HAE type III (estrogen-dependent, FXII mutation)"]},
+  {stem:"Results return: C4 low, C1-inhibitor level low, C1-inhibitor function 18% of normal (reference >68%). This confirms HAE type I. Sofia asks: 'My daughter is 6 years old. Does she have this?' What is the correct answer?",
+   choices:["No — HAE requires both parents to carry the mutation (autosomal recessive)","Yes, definitely — all children of HAE patients inherit the condition","There is a 50% chance — HAE type I is autosomal dominant; each child has a 50% risk","We can't know without testing — genetics are unpredictable"],
+   correct:2,
+   feedback:{correct:"Correct and critical. HAE type I and II are caused by mutations in the SERPING1 gene and follow autosomal dominant inheritance — each child of an affected parent has a 50% chance of inheriting the mutation. Importantly, spontaneous mutations occur in ~25% of cases, so a negative family history does not rule out HAE. Sofia's daughter should be tested, ideally before age 10 and certainly before starting any estrogen-containing medications.",
+   wrong:"HAE type I is autosomal dominant — one copy of the mutated SERPING1 gene is sufficient to cause disease. Each child of an affected parent has exactly a 50% chance of inheriting the condition. This is not recessive (both copies required) and it is not certain (50%, not 100%)."},
+   pearls:["HAE types I and II: autosomal dominant, SERPING1 gene — 50% risk per child","~25% of HAE cases are de novo mutations — family history may be absent","Children should be tested early — first attacks can occur in childhood and are often triggered by minor trauma or illness","Estrogen (OCP, pregnancy) dramatically worsens HAE — daughters must know before starting contraception"]},
+  {stem:"Sofia has an acute HAE attack in the ED — severe abdominal pain (a common HAE manifestation) and early facial swelling. What is the appropriate acute treatment?",
+   choices:["IM epinephrine 0.3mg + diphenhydramine 50mg IV","C1-esterase inhibitor concentrate (Berinert/Cinryze) OR icatibant (Firazyr) OR ecallantide (Kalbitor)","High-dose IV methylprednisolone + H1/H2 antihistamines","Fresh frozen plasma as first-line if specific therapies unavailable"],
+   correct:1,
+   feedback:{correct:"Excellent. Acute HAE treatment targets the bradykinin pathway — NOT histamine. The three FDA-approved options are: (1) C1-INH concentrate (Berinert, Cinryze, Ruconest) — replaces the deficient protein; (2) Icatibant (Firazyr) — bradykinin B2 receptor antagonist; (3) Ecallantide (Kalbitor) — plasma kallikrein inhibitor. Fresh frozen plasma contains C1-INH and can be used if specific agents are unavailable. Epinephrine and antihistamines have NO role in HAE.",
+   wrong:"HAE is mediated by bradykinin, not histamine. Epinephrine, antihistamines, and corticosteroids do not work — this is one of the most dangerous misconceptions in emergency medicine. The correct treatments are C1-INH concentrate, icatibant, or ecallantide. Without appropriate treatment, laryngeal HAE has a mortality rate of up to 30%."},
+   pearls:["HAE attacks are bradykinin-mediated — epinephrine/antihistamines/steroids have NO effect","Laryngeal HAE can be fatal — mortality up to 30% without specific treatment","All HAE patients should carry self-injectable icatibant (Firazyr) for emergencies — like an EpiPen but for bradykinin","Always address the ACE inhibitor — ACE-I block bradykinin degradation and can worsen HAE dramatically"]},
+  {stem:"Sofia's HAE is confirmed and treated. She is now considering long-term prophylaxis. She is also still on lisinopril for hypertension. As her allergist/immunologist coordinating care, what is the most important next step?",
+   choices:["Continue lisinopril — no interaction with HAE treatment","Switch lisinopril to an ARB (e.g. losartan) — ACE inhibitors are contraindicated in HAE","Add tranexamic acid empirically as prophylaxis without further workup","Refer to genetics only — your role as the allergist is complete"],
+   correct:1,
+   feedback:{correct:"Critical medication safety point. ACE inhibitors block the degradation of bradykinin by ACE — in HAE patients, this dramatically increases attack frequency and severity. Lisinopril started 26 months ago, which correlates with the onset of Sofia's episodes. Switching to an ARB is mandatory. This is also a teaching moment: ACE inhibitor-induced angioedema and HAE can co-exist, and starting an ACE-I can be what uncovers previously subclinical HAE.",
+   wrong:"This is a critical safety issue. ACE inhibitors inhibit the same enzyme (ACE/kininase II) that degrades bradykinin. In HAE, bradykinin is already overproduced — ACE-I dramatically worsens this. Sofia started lisinopril 26 months ago, which correlates exactly with her symptom onset. The ACE inhibitor may have triggered or unmasked her HAE. Switching to an ARB is the most urgent pharmacologic intervention."},
+   pearls:["ACE inhibitors are CONTRAINDICATED in HAE — they block bradykinin degradation and worsen attacks","Notice: Sofia's symptoms started 26 months ago, lisinopril started 26 months ago — correlation is causation until proven otherwise","ARBs are safe alternatives — they block the angiotensin receptor but do not affect bradykinin metabolism","Long-term prophylaxis options: lanadelumab (Takhzyro) SC monthly, C1-INH concentrate IV/SC, berotralstat (Orladeyo) oral"]}
+];
+
+let current=0,score=0,answered=[],startTimes=[],totalTime=0;
+
+function renderQuestion(idx){
+  const q=questions[idx];
+  const L=['A','B','C','D'];
+  document.getElementById('questionContainer').innerHTML=`
+    <div class="question-card" style="animation:fadeUp .35s ease">
+      <div class="rdx-label" style="margin-bottom:8px">Question ${idx+1} of ${questions.length}</div>
+      <div class="question-stem">${q.stem}</div>
+      <div class="answer-grid" id="ag${idx}">
+        ${q.choices.map((c,i)=>`<button class="answer-btn" id="a${idx}_${i}" onclick="selectAnswer(${idx},${i})"><span class="choice-letter">${L[i]}</span><span>${c}</span></button>`).join('')}
+      </div>
+      <div class="feedback-box" id="fb${idx}"><div class="feedback-title" id="fbt${idx}"></div><div class="feedback-text" id="fbtx${idx}"></div><div class="pearls" id="fbp${idx}"></div></div>
+      <button class="next-btn" id="nb${idx}" onclick="nextQuestion(${idx})">${idx<questions.length-1?'Next Step →':'See Results →'}</button>
+    </div>`;
+  startTimes[idx]=Date.now();
+}
+
+function selectAnswer(qIdx,aIdx){
+  if(answered[qIdx])return;
+  answered[qIdx]=true;
+  totalTime+=(Date.now()-startTimes[qIdx])/1000;
+  const q=questions[qIdx];
+  const ok=aIdx===q.correct;
+  if(ok)score++;
+  for(let i=0;i<q.choices.length;i++){
+    const b=document.getElementById(`a${qIdx}_${i}`);
+    b.disabled=true;
+    if(i===q.correct)b.classList.add('correct');
+    else if(i===aIdx&&!ok)b.classList.add('wrong');
+    else b.classList.add('dimmed');
+  }
+  const fb=document.getElementById(`fb${qIdx}`);
+  document.getElementById(`fbt${qIdx}`).textContent=ok?'✓ Correct Reasoning':'✗ Revisit This Pattern';
+  document.getElementById(`fbtx${qIdx}`).textContent=ok?q.feedback.correct:q.feedback.wrong;
+  if(q.pearls)document.getElementById(`fbp${qIdx}`).innerHTML=`<div class="pearls-label">Clinical Pearls</div>${q.pearls.map(p=>`<div class="pearl-item">${p}</div>`).join('')}`;
+  fb.classList.add('show',ok?'correct-fb':'wrong-fb');
+  document.getElementById(`nb${qIdx}`).classList.add('show');
+}
+
+function nextQuestion(from){
+  current++;
+  document.getElementById('progressFill').style.width=((current+1)/questions.length*100)+'%';
+  const d=document.getElementById(`dot${from}`);if(d){d.classList.remove('active');d.classList.add('done');}
+  const nd=document.getElementById(`dot${current}`);if(nd)nd.classList.add('active');
+  if(current<questions.length){renderQuestion(current);window.scrollTo({top:document.getElementById('questionContainer').offsetTop-80,behavior:'smooth'});}
+  else showScore();
+}
+
+function showScore(){
+  document.getElementById('questionContainer').innerHTML='';
+  document.getElementById('progressFill').style.width='100%';
+  const pct=Math.round(score/questions.length*100);
+  document.getElementById('scoreNumber').textContent=pct+'%';
+  document.getElementById('scoreRing').style.setProperty('--pct',pct*3.6+'deg');
+  const titles=['Keep Practicing','Building Foundation','Good Reasoning','Strong Clinical Thinking','HAE Expert'];
+  const subs=['Review the pearls and try again — HAE is a high-stakes diagnosis.','You caught some patterns. The ACE inhibitor connection and bradykinin pathway are key.','Solid reasoning. You understand the complement workup and treatment principles.','Excellent. You caught the ACE inhibitor correlation and the autosomal dominant inheritance risk.','Outstanding. You have the full HAE clinical picture — diagnosis, genetics, treatment, and drug safety.'];
+  document.getElementById('scoreTitle').textContent=titles[score]||titles[4];
+  document.getElementById('scoreSub').textContent=subs[score]||subs[4];
+  document.getElementById('statCorrect').textContent=score+'/'+questions.length;
+  document.getElementById('statXP').textContent='+'+(score*28);
+  document.getElementById('scoreScreen').classList.add('show');
+  window.scrollTo({top:document.getElementById('scoreScreen').offsetTop-80,behavior:'smooth'});
+}
+
+function restartCase(){
+  current=0;score=0;answered=[];totalTime=0;startTimes=[];
+  document.getElementById('scoreScreen').classList.remove('show');
+  document.getElementById('progressFill').style.width='20%';
+  for(let i=0;i<5;i++){const d=document.getElementById(`dot${i}`);if(d){d.classList.remove('done','active');if(i===0)d.classList.add('active');}}
+  renderQuestion(0);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderQuestion(0);
+</script>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>
