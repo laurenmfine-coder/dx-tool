@@ -811,6 +811,9 @@ window.RDX = {
     generateCode: generateReferralCode
   },
 
+  // Leaderboard
+  leaderboard: getLeaderboard,
+
   // Offline
   flushOffline: flushOfflineQueue
 };
