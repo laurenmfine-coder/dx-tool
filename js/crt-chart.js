@@ -87,6 +87,15 @@
       var tx = crt.treatments;
       var html = '';
 
+      // ── Order Mode Check ──────────────────────────────────────────────────
+      // If no mode has been chosen yet for this case session, show selector
+      var orderMode = window.RDXOrderMode ? window.RDXOrderMode.get() : null;
+      if (!orderMode) {
+        // Show mode selector before the order panel
+        window._pendingCaseId = caseId;
+        window._pendingCRT = crt;
+      }
+
       // Tip bar from MissionControl
       if (window.MissionControl && MissionControl.renderTipBar) {
         html += MissionControl.renderTipBar('crt');
@@ -389,6 +398,30 @@
   }
 
   function renderOrderPanel(tx, state, caseId) {
+    // ── Check order mode ──────────────────────────────────────────────────
+    var orderMode = window.RDXOrderMode ? window.RDXOrderMode.get() : null;
+
+    // If no mode selected, show mode selector
+    if (!orderMode) {
+      return '<div class="crt-order-section">' +
+        (window.RDXOrderMode ? window.RDXOrderMode.renderModeSelector(caseId, crt ? crt.diagnosis : '') : '') +
+        '</div>';
+    }
+
+    // If standard or advanced mode, render free-text interface
+    if (orderMode === 'standard' || orderMode === 'advanced') {
+      // Merge freeOrders into state for CRTChart compatibility
+      if (!state.freeOrders) state.freeOrders = [];
+      state.caseId = caseId;
+      return '<div class="crt-order-section">' +
+        '<div class="crt-order-header">' +
+        '<h4 style="margin:0;font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px">💊 Order Entry</h4>' +
+        '</div>' +
+        (window.RDXOrderMode ? window.RDXOrderMode.renderFreeTextInterface(tx, state, caseId) : '') +
+        '</div>';
+    }
+
+    // Guided mode — original curated checklist below
     var groups = {};
     tx.orders.forEach(function(o) {
       var g = o.group || 'Other';
@@ -398,7 +431,10 @@
 
     var html = '<div class="crt-order-section">';
     html += '<div class="crt-order-header">';
-    html += '<h4 style="margin:0;font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px">💊 Treatment Orders</h4>';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;width:100%">';
+    html += '<h4 style="margin:0;font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px">🌱 Guided Orders</h4>';
+    html += '<button onclick="RDXOrderMode.clear();if(window.render)render();" style="font-size:11px;color:#64748B;background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-weight:600">⚙ Change mode</button>';
+    html += '</div>';
     var correctCount = state.ordersPlaced.filter(function(id) {
       var o = tx.orders.find(function(x){return x.id===id});
       return o && o.correct;

@@ -34,7 +34,7 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
 .sim-card h3 { font-size: 18px; margin-bottom: 6px; }
 .sim-card p { font-size: 13px; opacity: 0.85; line-height: 1.4; margin-bottom: 10px; }
 .sim-card .tags { display: flex; gap: 5px; flex-wrap: wrap; }
-.sim-card .tag { padding: 2px 8px; border-radius: 8px; background: rgba(255,255,255,0.18); font-size: 10px; font-weight: 600; }
+.sim-card .tag { padding: 2px 8px; border-radius: 8px; background: rgba(255,255,255,0.18); font-size:11px; font-weight: 600; }
 .sim-card.alt { background: linear-gradient(135deg, #2D3748 0%, #4A5568 100%); }
 
 /* Search */
@@ -184,10 +184,10 @@ function buildFilters() {
   var cats = {};
   CASES.forEach(function(c) { cats[c.category] = (cats[c.category] || 0) + 1; });
   var row = document.getElementById('filterRow');
-  var html = '<button class="fbtn active" onclick="setSpecialty(\'all\', this)">All <span style="opacity:.6;font-size:10px">' + CASES.length + '</span></button>';
+  var html = '<button class="fbtn active" onclick="setSpecialty(\'all\', this)">All <span style="opacity:.6;font-size:11px">' + CASES.length + '</span></button>';
   Object.keys(cats).sort().forEach(function(cat) {
     var info = SPEC_ICONS[cat] || { icon: '', label: cat };
-    html += '<button class="fbtn" onclick="setSpecialty(\'' + cat + '\', this)">' + info.icon + ' ' + info.label + ' <span style="opacity:.6;font-size:10px">' + cats[cat] + '</span></button>';
+    html += '<button class="fbtn" onclick="setSpecialty(\'' + cat + '\', this)">' + info.icon + ' ' + info.label + ' <span style="opacity:.6;font-size:11px">' + cats[cat] + '</span></button>';
   });
   row.innerHTML = html;
 }

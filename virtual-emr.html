@@ -811,6 +811,210 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 .mic-btn{background:transparent;border:1.5px solid #CBD5E1;border-radius:50%;width:34px;height:34px;font-size:15px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;padding:0}
 .mic-btn:hover{background:#EBF5FB;border-color:#2874A6}
 @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}
+
+/* ── ORDER MODE SELECTOR ─────────────────────────────────── */
+.rdx-order-mode-card {
+  background: white;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 12px 0;
+}
+.rdx-order-mode-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #F1F5F9;
+}
+.rdx-order-mode-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rdx-mode-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1.5px solid #E2E8F0;
+  background: #FAFBFC;
+  cursor: pointer;
+  text-align: left;
+  transition: all .18s;
+  width: 100%;
+  font-family: inherit;
+}
+.rdx-mode-option:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.rdx-mode-guided:hover  { border-color: #059669; background: #F0FDF4; }
+.rdx-mode-standard:hover{ border-color: #2874A6; background: #EBF5FB; }
+.rdx-mode-advanced:hover{ border-color: #DC2626; background: #FEF2F2; }
+.rdx-mode-icon  { font-size: 26px; flex-shrink: 0; }
+.rdx-mode-body  { flex: 1; }
+.rdx-mode-name  { font-size: 15px; font-weight: 800; color: #0F172A; }
+.rdx-mode-tagline { font-size: 11px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: .06em; margin: 2px 0 6px; }
+.rdx-mode-desc  { font-size: 12px; color: #475569; line-height: 1.55; }
+.rdx-mode-tags  { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.rdx-mode-tag   { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: #F0FDF4; color: #059669; }
+.rdx-mode-tag-blue   { background: #EBF5FB; color: #2874A6; }
+.rdx-mode-tag-red    { background: #FEF2F2; color: #DC2626; }
+.rdx-mode-arrow { font-size: 18px; color: #CBD5E1; flex-shrink: 0; transition: transform .18s; }
+.rdx-mode-option:hover .rdx-mode-arrow { transform: translateX(4px); }
+.rdx-mode-arrow-blue { color: #2874A6; }
+.rdx-mode-arrow-red  { color: #DC2626; }
+
+/* ── FREE-TEXT ORDER INTERFACE ──────────────────────────── */
+.rdx-freeorder-wrap { padding: 4px 0; }
+.rdx-order-search-wrap { position: relative; margin-bottom: 10px; }
+.rdx-order-search-input {
+  width: 100%;
+  padding: 12px 14px 12px 40px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border .15s;
+  box-sizing: border-box;
+}
+.rdx-order-search-input:focus { border-color: #2874A6; box-shadow: 0 0 0 3px rgba(40,116,166,.1); }
+.rdx-order-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: white;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  z-index: 200;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.rdx-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #F8FAFC;
+  transition: background .1s;
+}
+.rdx-suggestion-item:hover { background: #EBF5FB; }
+.rdx-suggestion-item:last-child { border-bottom: none; }
+.rdx-sug-cat {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: #F1F5F9;
+  color: #475569;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.rdx-sug-cat-labs { background: #FEF3C7; color: #92400E; }
+.rdx-sug-cat-imaging { background: #E0E7FF; color: #3730A3; }
+.rdx-sug-cat-medications { background: #FCE7F3; color: #9D174D; }
+.rdx-sug-cat-consults { background: #D1FAE5; color: #065F46; }
+.rdx-sug-cat-procedures { background: #FEE2E2; color: #991B1B; }
+.rdx-sug-name { font-size: 13px; color: #0F172A; }
+.rdx-suggestion-custom {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #2874A6;
+  font-weight: 600;
+  cursor: pointer;
+  border-top: 1px solid #F1F5F9;
+}
+.rdx-suggestion-custom:hover { background: #EBF5FB; }
+.rdx-order-cats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.rdx-order-cat-btn {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 16px;
+  border: 1px solid #E2E8F0;
+  background: white;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: inherit;
+  color: #475569;
+}
+.rdx-order-cat-btn:hover { border-color: #2874A6; color: #2874A6; background: #EBF5FB; }
+.rdx-freeorder-panel {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  min-height: 80px;
+}
+.rdx-order-badge {
+  background: #2874A6;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 8px;
+}
+.rdx-freeorder-list { display: flex; flex-direction: column; gap: 6px; }
+.rdx-freeorder-item {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: all .15s;
+}
+.rdx-freeorder-item:hover { border-color: #CBD5E1; }
+
+/* ── RESULTS PANEL ─────────────────────────────────────── */
+.rdx-freeresults {
+  background: white;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+}
+.rdx-freeresults-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F1F5F9;
+}
+.rdx-score-circle {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+}
+.score-great { background: #D1FAE5; color: #065F46; }
+.score-ok    { background: #FEF3C7; color: #92400E; }
+.score-low   { background: #FEE2E2; color: #991B1B; }
+.rdx-freeresults-section { margin-bottom: 12px; }
+.rdx-freeresults-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 8px;
+}
+.rdx-label-correct { color: #065F46; }
+.rdx-label-missed  { color: #92400E; }
+.rdx-freeresult-item {
+  padding: 8px 12px;
+  border-radius: 7px;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.rdx-result-correct { background: #F0FDF4; border-left: 3px solid #10B981; }
+.rdx-result-missed  { background: #FFFBEB; border-left: 3px solid #F59E0B; }
+
 </style>
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="emr-supabase.js"></script>
@@ -819,7 +1023,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <script src="emr-caseframe.js"></script>
 <script src="emr-data/handoff-data.js"></script>
 <script src="emr-data/auto-handoff.js"></script>
-<script src="emr-data/case-specialty-map.js"></script>
+<!-- case-specialty-map loaded dynamically below -->
 <script src="emr-data/day-progression.js"></script>
 <script src="emr-data/day-evolution.js"></script>
 <script src="emr-data/coachdx-analytics.js"></script>
@@ -1954,6 +2158,64 @@ function renderHistory(){return'<div class="two-col">'+sectionCard("Family Histo
 // ═══════════════════════════════════════════════════════════════
 // DOCUMENTATION (FIXED submit button)
 // ═══════════════════════════════════════════════════════════════
+
+// ── PATIENT INTERVIEW TAB (standalone) ──────────────────────────────────
+function renderPatientInterview() {
+  var _ptName = (PATIENT && PATIENT.name) ? PATIENT.name.split(' ')[0] : 'the patient';
+  var cc = PATIENT ? (PATIENT.chiefComplaint || 'their concern') : 'their concern';
+  return sectionCard(
+    "Patient Interview — " + _ptName,
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;padding:10px 14px;background:var(--surface-alt);border-radius:8px;border-left:3px solid var(--primary)">'
+    + '<strong>How this works:</strong> Ask ' + esc(_ptName) + ' questions to take the history. Type in the box below — '
+    + esc(_ptName) + ' will respond as if in a real clinical encounter. When you're ready, switch to <strong>Documentation</strong> to write your H&amp;P.</div>'
+    + _buildInterviewUI(_ptName, cc)
+  );
+}
+
+function _buildInterviewUI(ptName, cc) {
+  // Reuse the existing interview chat UI
+  var _voiceBtn = '<button type="button" class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice input">🎙</button>';
+  return '<div id="interviewMessages" class="interview-messages" style="min-height:200px;max-height:400px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px"></div>'
+    + '<div style="display:flex;gap:8px;align-items:flex-end">'
+    + '<textarea id="patientChatInput" class="crt-patient-input" placeholder="Ask ' + esc(ptName) + ' — e.g. 'What brings you in today?' or 'Tell me about the chest pain…'" rows="2" style="flex:1;resize:vertical;min-height:48px;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:var(--font-body);outline:none" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendPatientMessage()}"></textarea>'
+    + _voiceBtn
+    + '<button type="button" class="btn-primary" onclick="sendPatientMessage()" style="padding:10px 18px;white-space:nowrap">Send →</button>'
+    + '</div>'
+    + '<div style="font-size:11px;color:var(--text-muted);margin-top:6px">Press Enter to send · Shift+Enter for new line · 🎙 for voice</div>';
+}
+
+// ── DOCUMENTATION TAB (note only, no interview chat) ─────────────────────
+function renderDocumentationOnly() {
+  var S = window.S || {};
+  var noteFields = S.noteFields || {};
+  var wc = Object.values(noteFields).reduce(function(a,v){ return a + (v ? v.split(/\s+/).filter(Boolean).length : 0); }, 0);
+  var ws = wc > 0 ? '<span style="font-size:11px;color:var(--text-muted)">' + wc + ' words</span>' : '';
+  var ns = TEMPLATE ? TEMPLATE.sections.map(function(sec){
+    return '<div class="note-section"><div class="note-section-label">' + esc(sec.label) + '</div>'
+      + '<textarea class="note-field" id="field-' + sec.id + '" placeholder="' + esc(sec.placeholder||'') + '" ' 
+      + 'oninput="saveField(\'' + sec.id + '\')" rows="4">' + esc(noteFields[sec.id]||'') + '</textarea></div>';
+  }).join('') : '<div class="empty-state">No template loaded</div>';
+
+  var submitted = S.submitted;
+  var sb = submitted
+    ? '<span style="color:var(--success);font-weight:600">✓ Submitted</span>'
+    : '<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">' + I.send + ' Submit Documentation</button>';
+
+  var _debrief = submitted ? '<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">✅ Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>' : '';
+
+  var tip = '<div style="background:#FFFBEB;border:1px solid #F59E0B;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400E;margin-bottom:12px">'
+    + '💡 <strong>Tip:</strong> Each section auto-saves as you type. Write as if this were a real patient encounter note.'
+    + '</div>';
+
+  return tip + sectionCard("Encounter Documentation — " + (S.encounterWeek||'Week 1'), I.fileText,
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
+    + '<div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>' + esc(PATIENT ? PATIENT.name : 'Patient') + '</strong>.</div>' + ws
+    + '</div><div class="note-template">' + ns + '</div>'
+    + '<div class="doc-footer"><span class="word-count" id="wordCount">' + (wc ? wc + ' words' : '') + '</span>' + sb + '</div>'
+  ) + _debrief;
+}
+
 function renderDocumentation(){
   // ── Interview / HPI entry callout (only show when note is empty) ─────────
   var _hasContent = Object.values(S.noteFields||{}).some(function(v){ return v && v.trim().length > 0; });
@@ -2210,12 +2472,12 @@ function render(){
     {id:"immunizations",label:"Immunizations",icon:I.syringe},
     {id:"history",label:"FH / SH",icon:I.home}
   );
-  if(role==="student"){tabs.push({id:"documentation",label:"Documentation",icon:I.fileText},{id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'},{id:"feedback",label:"Feedback",icon:I.star})}
+  if(role==="student"){tabs.push({id:"interview",label:"Patient Interview",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'},{id:"documentation",label:"Documentation",icon:I.fileText},{id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'},{id:"feedback",label:"Feedback",icon:I.star})}
   if(role==="faculty"||role==="admin"){tabs.push({id:"grading",label:"Grading",icon:I.check})}
   if(role==="admin"){tabs.push({id:"admin",label:"Admin Panel",icon:I.settings})}
 
   const sb=tabs.map(t=>{ var _badge=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):''; var _dim=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):''; var _b='<button type="button" '+(SIDEBAR_TOOLTIPS&&SIDEBAR_TOOLTIPS[t.id]?'data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'" ':'')+'class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+_dim+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge+'</button>'; return _b; }).join("")+(window.RDXGuide?RDXGuide.renderSidebarToggle():'');
-  const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,documentation:renderDocumentation,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx};
+  const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,interview:renderPatientInterview,documentation:renderDocumentationOnly,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx};
   // Wrap each render fn with error boundary
   if(window.RDXErrors){Object.keys(fn).forEach(function(k){fn[k]=RDXErrors.wrap(fn[k],{icon:'⚙️',desc:'This section couldn\'t load. Try switching tabs.',retry:'Try Again',retryFn:'render()'});});}
   const ct=(fn[S.activeTab]||renderDemographics)();
@@ -2619,7 +2881,7 @@ function sendPatientMessage(){
     };
 
     _recognition.onerror = function(e) {
-      if (e.error === 'not-allowed') alert('Microphone access denied. Allow microphone in browser settings and reload.');
+      if (e.error === 'not-allowed') showToast('🎙 Microphone access denied — allow microphone in your browser settings, then reload the page.');
       else if (e.error !== 'aborted' && e.error !== 'no-speech') console.warn('Voice error:', e.error);
       _stopVoice();
     };
@@ -2969,10 +3231,11 @@ function getWorkflowProgress() {
 // Upgraded workflow bar with renamed steps + progress badge
 function renderWorkflowBar(activeTab) {
   var steps = [
-    { id:'chart',    label:'Chart Review',       icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
-    { id:'history',  label:'History & HPI',       icon:'🗣️', tabs:['documentation'] },
+    { id:'chart',    label:'Chart Review',        icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
+    { id:'interview',label:'Patient Interview',   icon:'🗣️', tabs:['interview'] },
     { id:'reason',   label:'Orders & Reasoning',  icon:'⚡', tabs:['crt','orders','oral'] },
     { id:'coaching', label:'Talk to Attending',   icon:'🧠', tabs:['coach','autofeedback','feedback'] },
+    { id:'document', label:'Documentation',       icon:'📝', tabs:['documentation'] },
   ];
   var activeStep = 0;
   steps.forEach(function(s, i){ if(s.tabs.indexOf(activeTab)>=0) activeStep=i; });
@@ -5019,6 +5282,8 @@ submitDoc = function(){
 </script>
 <script src="js/mission-control.js"></script>
 <script src="emr-data/crt-data.js"></script>
+<script src="js/rdx-order-catalog.js"></script>
+<script src="js/rdx-order-mode.js"></script>
 <script src="js/crt-chart.js"></script>
 <script src="js/rdx-rpfs.js"></script>
 <script src="js/ddx-builder.js"></script>

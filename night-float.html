@@ -51,7 +51,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 .practice-card.selected{border-color:var(--accent);background:var(--accent-bg)}
 .practice-card .pc-icon{font-size:20px;margin-bottom:4px}
 .practice-card .pc-name{font-size:12px;font-weight:600;color:var(--text)}
-.practice-card .pc-desc{font-size:10px;color:var(--dim);margin-top:2px}
+.practice-card .pc-desc{font-size:11px;color:var(--dim);margin-top:2px}
 
 /* Patient count slider */
 .count-row{display:flex;align-items:center;gap:12px;margin-top:10px}
@@ -125,10 +125,10 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 .page-card:hover{border-color:rgba(255,255,255,.1)}
 .page-card.unread{border-left:3px solid var(--accent)}
 .page-card.urgent{border-left:3px solid #EF4444}
-.page-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)}
+.page-time{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim)}
 .page-from{font-weight:600;font-size:12px;color:var(--text);margin:3px 0}
 .page-msg{font-size:11px;color:var(--dim);line-height:1.5}
-.page-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;margin-left:6px}
+.page-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;margin-left:6px}
 
 /* Page response panel */
 #page-response{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
@@ -162,15 +162,15 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 #timeline-bar{position:relative;height:24px;background:#f8fafc;border-radius:12px;overflow:hidden}
 #timeline-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--accent),rgba(27,79,114,.3));border-radius:12px;transition:width .5s}
 .tl-marker{position:absolute;top:-2px;width:8px;height:28px;border-radius:4px;z-index:2}
-.tl-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-top:4px}
+.tl-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-top:4px}
 
 /* Task list */
 .task-item{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;margin-bottom:4px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--dim)}
 .task-item.done{opacity:.4;text-decoration:line-through}
-.task-check{width:18px;height:18px;border:2px solid rgba(255,255,255,.15);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
+.task-check{width:18px;height:18px;border:2px solid rgba(255,255,255,.15);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s}
 .task-check:hover{border-color:var(--accent)}
 .task-item.done .task-check{border-color:#34D399;background:rgba(52,211,153,.15);color:#34D399}
-.task-priority{font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;text-transform:uppercase}
+.task-priority{font-size:11px;font-weight:700;padding:2px 5px;border-radius:3px;text-transform:uppercase}
 .task-priority.high{background:rgba(239,68,68,.15);color:#EF4444}
 .task-priority.med{background:rgba(251,191,36,.15);color:#FBBF24}
 .task-priority.low{background:rgba(52,211,153,.15);color:#34D399}
@@ -195,7 +195,7 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-u
 .sum-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0}
 .sum-stat{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:14px}
 .sum-stat .ss-val{font-size:24px;font-weight:700;font-family:'JetBrains Mono',monospace}
-.sum-stat .ss-label{font-size:10px;color:var(--dim);margin-top:2px}
+.sum-stat .ss-label{font-size:11px;color:var(--dim);margin-top:2px}
 /* RDX Loading */
 .rdx-loading{position:fixed;inset:0;z-index:8000;background:#F8FAFC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .3s}
 .rdx-loading.hide{opacity:0;pointer-events:none}
@@ -1024,13 +1024,13 @@ function renderTasks() {
     if(a.done !== b.done) return a.done ? 1 : -1;
     return (priOrder[a.priority]||1) - (priOrder[b.priority]||1);
   });
-  let html = `<div style="padding:6px 8px;font-size:10px;color:var(--dim)">${taskList.filter(t=>!t.done).length} pending · ${taskList.filter(t=>t.done).length} done</div>`;
+  let html = `<div style="padding:6px 8px;font-size:11px;color:var(--dim)">${taskList.filter(t=>!t.done).length} pending · ${taskList.filter(t=>t.done).length} done</div>`;
   sorted.forEach(t => {
     html += `<div class="task-item${t.done?' done':''}" onclick="toggleTask(${t.id})">
       <div class="task-check">${t.done?'✓':''}</div>
       <div style="flex:1">
         <div>${t.text}</div>
-        <div style="font-size:10px;color:var(--dim);margin-top:2px">${t.room} · ${t.time}</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:2px">${t.room} · ${t.time}</div>
       </div>
       <span class="task-priority ${t.priority}">${t.priority}</span>
     </div>`;
@@ -1173,7 +1173,7 @@ function callSenior() {
   overlay.innerHTML = `<div style="max-width:450px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:20px">
     <div style="font-size:13px;color:var(--accent);font-weight:600;margin-bottom:10px">📞 Senior Resident</div>
     <div style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.75);font-style:italic">${advice}</div>
-    <div style="margin-top:14px;font-size:10px;color:var(--dim)">Lifelines used: ${lifelinesUsed}</div>
+    <div style="margin-top:14px;font-size:11px;color:var(--dim)">Lifelines used: ${lifelinesUsed}</div>
     <button type="button" onclick="this.closest('[data-senior-overlay]').remove()" style="margin-top:14px;padding:8px 18px;background:var(--accent);border:none;border-radius:8px;color:#fff;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-weight:600">Got it</button>
   </div>`;
   overlay.setAttribute('data-senior-overlay','1');
@@ -1208,7 +1208,7 @@ function showHandoffModal() {
           <div style="font-weight:600;color:var(--text);font-size:14px">${p.name}, ${p.age}${p.sex} — ${p.room}</div>
           <div style="font-size:11px;color:var(--dim);margin-top:2px">${p.dx} · Admit Day ${p.admitDay}${hasRef?' · <span style="color:var(--accent)">EMR Case</span>':''}</div>
         </div>
-        ${hasRef?'<button type="button" class="ipass-btn" onclick="toggleRef('+i+')" style="font-size:10px;padding:4px 10px" id="ref-btn-'+i+'">Show Reference</button>':''}
+        ${hasRef?'<button type="button" class="ipass-btn" onclick="toggleRef('+i+')" style="font-size:11px;padding:4px 10px" id="ref-btn-'+i+'">Show Reference</button>':''}
       </div>
       <div id="ref-panel-${i}" style="display:none;margin-bottom:12px;padding:10px 14px;background:rgba(27,79,114,.06);border:1px solid rgba(27,79,114,.15);border-radius:8px;font-size:11px;line-height:1.6">
         ${hasRef?`
@@ -1217,7 +1217,7 @@ function showHandoffModal() {
           <div><span style="color:var(--accent);font-weight:600">P:</span> <span style="color:var(--dim)">${esc(p.ipass.p)}</span></div>
           <div><span style="color:var(--accent);font-weight:600">A:</span> <span style="color:var(--dim)">${esc(p.ipass.a)}</span></div>
           <div><span style="color:var(--accent);font-weight:600">S:</span> <span style="color:var(--dim)">${esc(p.ipass.s)}</span></div>
-          <div style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.35)">Dx: ${esc(p._handoffRef.workingDx||'')} · Allergies: ${esc(p._handoffRef.allergies||'NKDA')} · Code: ${esc(p._handoffRef.codeStatus||'Full code')}</div>
+          <div style="margin-top:6px;font-size:11px;color:rgba(255,255,255,.35)">Dx: ${esc(p._handoffRef.workingDx||'')} · Allergies: ${esc(p._handoffRef.allergies||'NKDA')} · Code: ${esc(p._handoffRef.codeStatus||'Full code')}</div>
         `:''}
       </div>
       <div class="ho-label">I — Illness Severity</div>
@@ -1320,7 +1320,7 @@ function showSummary() {
       details += `<div style="font-size:11px;padding:3px 0;color:var(--dim)">• ${fb}</div>`;
     });
     if(shiftStats.handoffFeedback.length > 5) {
-      details += `<div style="font-size:10px;color:var(--dim)">...and ${shiftStats.handoffFeedback.length - 5} more items</div>`;
+      details += `<div style="font-size:11px;color:var(--dim)">...and ${shiftStats.handoffFeedback.length - 5} more items</div>`;
     }
   }
   details += '</div>';
@@ -1484,7 +1484,7 @@ function getVitalsHTML(p) {
   if(!v) return '';
   const trendIcon = p.vitalsTrend === 'worsening' ? '↓' : p.vitalsTrend === 'improving' ? '↑' : '→';
   const trendColor = p.vitalsTrend === 'worsening' ? '#EF4444' : p.vitalsTrend === 'improving' ? '#34D399' : 'var(--dim)';
-  return `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;padding:8px 0;border-top:1px solid var(--border);font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--dim)">
+  return `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;padding:8px 0;border-top:1px solid var(--border);font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--dim)">
     <span style="color:${v.hr>100?'#EF4444':v.hr<55?'#FBBF24':'rgba(255,255,255,.5)'}">HR ${v.hr}</span>
     <span>BP ${v.bp_s}/${v.bp_d}</span>
     <span>RR ${v.rr}</span>

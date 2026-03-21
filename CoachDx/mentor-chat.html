@@ -51,7 +51,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
 /* Topic groups */
 .picker-body{flex:1;overflow-y:auto;padding:16px 24px 24px}
 .topic-group{margin-bottom:24px}
-.group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.group-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .group-label::after{content:'';flex:1;height:1px;background:var(--border)}
 .topic-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);font-size:12px;font-weight:500;color:var(--text);cursor:pointer;transition:all .15s;margin:0 5px 6px 0}
 .topic-chip:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
@@ -263,35 +263,131 @@ function getSB() {
    TOPIC LIBRARY
 ═══════════════════════════════════════════════════════ */
 const TOPICS = [
-  // Allergy & Immunology — foundational
-  { id:'anaphylaxis',    name:'Anaphylaxis',               icon:'🚨', cat:'A/I Foundational', tags:['allergy','shock','epinephrine','ige'] },
-  { id:'urticaria',      name:'Urticaria & Angioedema',    icon:'🔴', cat:'A/I Foundational', tags:['hives','swelling','antihistamine'] },
-  { id:'asthma',         name:'Asthma',                    icon:'🌬️', cat:'A/I Foundational', tags:['wheeze','bronchospasm','inhaler','spirometry'] },
-  { id:'food-allergy',   name:'Food Allergy',              icon:'🥜', cat:'A/I Foundational', tags:['peanut','tree nut','ige','avoidance'] },
-  { id:'drug-allergy',   name:'Drug Allergy',              icon:'💊', cat:'A/I Foundational', tags:['penicillin','antibiotic','rash','allergy testing'] },
-  { id:'allergic-rhinitis', name:'Allergic Rhinitis',      icon:'👃', cat:'A/I Foundational', tags:['hay fever','nasal','immunotherapy','antihistamine'] },
-  { id:'contact-derm',   name:'Contact Dermatitis',        icon:'✋', cat:'A/I Foundational', tags:['patch test','nickel','poison ivy','type iv'] },
-  { id:'atopic-derm',    name:'Atopic Dermatitis',         icon:'🩹', cat:'A/I Foundational', tags:['eczema','dupilumab','skin barrier','itching'] },
-  // A/I — advanced
-  { id:'hae',            name:'Hereditary Angioedema',     icon:'💧', cat:'A/I Advanced', tags:['c1 inhibitor','bradykinin','icatibant','hae'] },
-  { id:'eoe',            name:'Eosinophilic Esophagitis',  icon:'🔵', cat:'A/I Advanced', tags:['dysphagia','eosinophils','elimination diet'] },
-  { id:'mastocytosis',   name:'Mastocytosis / MCAS',       icon:'🟠', cat:'A/I Advanced', tags:['mast cell','tryptase','urticaria pigmentosa'] },
-  { id:'cvid',           name:'CVID',                      icon:'🛡️', cat:'A/I Advanced', tags:['hypogammaglobulinemia','recurrent infections','ivig'] },
-  { id:'sjs-ten',        name:'SJS / TEN',                 icon:'🔥', cat:'A/I Advanced', tags:['stevens johnson','toxic epidermal','drug reaction','nikolsky'] },
-  { id:'fpies',          name:'FPIES',                     icon:'👶', cat:'A/I Advanced', tags:['food protein','vomiting','infant','non ige'] },
-  // Clinical reasoning
-  { id:'ddx-framework',  name:'Building a Differential',   icon:'🔍', cat:'Clinical Reasoning', tags:['differential','framework','illness script'] },
-  { id:'pretest-prob',   name:'Pre-test Probability',      icon:'📊', cat:'Clinical Reasoning', tags:['bayes','likelihood ratio','sensitivity','specificity'] },
-  { id:'cognitive-bias', name:'Cognitive Bias in Dx',      icon:'🧠', cat:'Clinical Reasoning', tags:['anchoring','availability','premature closure'] },
-  { id:'sbar',           name:'SBAR Communication',        icon:'📞', cat:'Clinical Reasoning', tags:['handoff','situation background','communication'] },
-  // Emergency
-  { id:'sepsis',         name:'Sepsis & Septic Shock',     icon:'⚠️', cat:'Emergency', tags:['sirs','lactate','bundle','vasopressors','maps'] },
-  { id:'pe',             name:'Pulmonary Embolism',        icon:'🫁', cat:'Emergency', tags:['wells','ctpa','dvt','anticoagulation','pesi'] },
-  { id:'dka',            name:'DKA',                       icon:'🩸', cat:'Emergency', tags:['insulin','anion gap','potassium','bicarbonate'] },
-  { id:'chest-pain-ddx', name:'Chest Pain Differential',  icon:'❤️', cat:'Emergency', tags:['acs','pe','dissection','pericarditis','risk stratify'] },
+  // ── Allergy & Immunology — Foundational ──
+  { id:'anaphylaxis',       name:'Anaphylaxis',                  icon:'🚨', cat:'A/I Foundational',    tags:['allergy','shock','epinephrine','ige','biphasic'] },
+  { id:'urticaria',         name:'Urticaria & Angioedema',       icon:'🔴', cat:'A/I Foundational',    tags:['hives','swelling','antihistamine','csu','omalizumab'] },
+  { id:'asthma',            name:'Asthma',                       icon:'🌬️', cat:'A/I Foundational',    tags:['wheeze','bronchospasm','inhaler','spirometry','biologics'] },
+  { id:'food-allergy',      name:'Food Allergy',                 icon:'🥜', cat:'A/I Foundational',    tags:['peanut','tree nut','ige','oit','avoidance'] },
+  { id:'drug-allergy',      name:'Drug Allergy',                 icon:'💊', cat:'A/I Foundational',    tags:['penicillin','antibiotic','delabeling','rash','allergy testing'] },
+  { id:'allergic-rhinitis', name:'Allergic Rhinitis',            icon:'👃', cat:'A/I Foundational',    tags:['hay fever','nasal','immunotherapy','antihistamine','incs'] },
+  { id:'contact-derm',      name:'Contact Dermatitis',           icon:'✋', cat:'A/I Foundational',    tags:['patch test','nickel','poison ivy','type iv','occupational'] },
+  { id:'atopic-derm',       name:'Atopic Dermatitis',            icon:'🩹', cat:'A/I Foundational',    tags:['eczema','dupilumab','skin barrier','itching','tralokinumab'] },
+  { id:'insect-sting',      name:'Insect Sting Allergy',         icon:'🐝', cat:'A/I Foundational',    tags:['venom','vit','anaphylaxis','epipen','epinephrine'] },
+  { id:'allergic-conjunctivitis', name:'Allergic Conjunctivitis', icon:'👁️', cat:'A/I Foundational', tags:['eye allergy','itching','vernal','giant papillae'] },
+  // ── Allergy & Immunology — Advanced ──
+  { id:'hae',               name:'Hereditary Angioedema',        icon:'💧', cat:'A/I Advanced',        tags:['c1 inhibitor','bradykinin','icatibant','berotralstat','hae'] },
+  { id:'eoe',               name:'Eosinophilic Esophagitis',     icon:'🔵', cat:'A/I Advanced',        tags:['dysphagia','eosinophils','elimination diet','ppi','dupilumab'] },
+  { id:'mastocytosis',      name:'Mastocytosis / MCAS',          icon:'🟠', cat:'A/I Advanced',        tags:['mast cell','tryptase','urticaria pigmentosa','kit','d816v'] },
+  { id:'cvid',              name:'CVID',                         icon:'🛡️', cat:'A/I Advanced',        tags:['hypogammaglobulinemia','recurrent infections','ivig','scig'] },
+  { id:'sjs-ten',           name:'SJS / TEN',                    icon:'🔥', cat:'A/I Advanced',        tags:['stevens johnson','toxic epidermal','drug reaction','nikolsky','scorten'] },
+  { id:'fpies',             name:'FPIES',                        icon:'👶', cat:'A/I Advanced',        tags:['food protein','vomiting','infant','non ige','ondansetron'] },
+  { id:'nsaid-hypersens',   name:'NSAID Hypersensitivity / AERD', icon:'💊', cat:'A/I Advanced',      tags:['aspirin','samter triad','cox1','desensitization','nasal polyps'] },
+  { id:'primary-immunodef', name:'Primary Immunodeficiency',     icon:'🧬', cat:'A/I Advanced',        tags:['scid','cgd','wiskott-aldrich','complement deficiency','pid'] },
+  { id:'eosinophilia',      name:'Eosinophilia & HES',           icon:'🔬', cat:'A/I Advanced',        tags:['hypereosinophilic','eosinophilic','mepolizumab','organ damage'] },
+  // ── Clinical Reasoning ──
+  { id:'ddx-framework',     name:'Building a Differential',      icon:'🔍', cat:'Clinical Reasoning',  tags:['differential','framework','illness script','pattern recognition'] },
+  { id:'pretest-prob',      name:'Pre-test Probability',         icon:'📊', cat:'Clinical Reasoning',  tags:['bayes','likelihood ratio','sensitivity','specificity','nnt'] },
+  { id:'cognitive-bias',    name:'Cognitive Bias in Dx',         icon:'🧠', cat:'Clinical Reasoning',  tags:['anchoring','availability','premature closure','framing'] },
+  { id:'sbar',              name:'SBAR Communication',           icon:'📞', cat:'Clinical Reasoning',  tags:['handoff','situation background','communication','signout'] },
+  { id:'illness-script',    name:'Illness Scripts',              icon:'📋', cat:'Clinical Reasoning',  tags:['epidemiology','pathophysiology','clinical findings','pattern'] },
+  { id:'uncertainty',       name:'Tolerating Diagnostic Uncertainty', icon:'⚖️', cat:'Clinical Reasoning', tags:['uncertainty','watchful waiting','test thresholds','shared decision'] },
+  { id:'test-interpret',    name:'Interpreting Lab & Imaging',   icon:'🔬', cat:'Clinical Reasoning',  tags:['false positive','false negative','ppv','npv','likelihood ratio'] },
+  // ── Cardiology ──
+  { id:'stemi',             name:'STEMI',                        icon:'❤️', cat:'Cardiology',           tags:['st elevation','pci','thrombolytics','door-to-balloon','cath'] },
+  { id:'nstemi',            name:'NSTEMI / ACS',                 icon:'💔', cat:'Cardiology',           tags:['troponin','timi','grace','dual antiplatelet','invasive strategy'] },
+  { id:'heart-failure',     name:'Heart Failure',                icon:'🫀', cat:'Cardiology',           tags:['hfref','hfpef','bnp','diuresis','gdmt','lvef'] },
+  { id:'afib',              name:'Atrial Fibrillation',          icon:'〰️', cat:'Cardiology',           tags:['rate control','rhythm control','anticoagulation','chads-vasc','cardioversion'] },
+  { id:'aortic-dissection', name:'Aortic Dissection',            icon:'🩸', cat:'Cardiology',           tags:['stanford type a','type b','bp control','ct angiography','surgery'] },
+  { id:'cardiac-syncope',   name:'Syncope',                      icon:'😵', cat:'Cardiology',           tags:['vasovagal','cardiac syncope','arrhythmia','tilt table','ekg'] },
+  { id:'vt',                name:'Ventricular Tachycardia',      icon:'⚡', cat:'Cardiology',           tags:['vt','vf','amiodarone','cardioversion','icd','structual heart disease'] },
+  { id:'pericarditis',      name:'Pericarditis & Tamponade',     icon:'🫀', cat:'Cardiology',           tags:['friction rub','colchicine','pericardial effusion','beck triad','echo'] },
+  // ── Pulmonology ──
+  { id:'copd',              name:'COPD',                         icon:'🌬️', cat:'Pulmonology',          tags:['emphysema','bronchitis','gold','spirometry','exacerbation','bipap'] },
+  { id:'pneumonia',         name:'Community-Acquired Pneumonia', icon:'🫁', cat:'Pulmonology',          tags:['curb-65','cap','empiric antibiotics','atypicals','s.pneumoniae'] },
+  { id:'pe-pulm',           name:'Pulmonary Embolism',           icon:'🔴', cat:'Pulmonology',          tags:['wells','pesi','ctpa','dvt','anticoagulation','thrombolytics'] },
+  { id:'pneumothorax',      name:'Pneumothorax',                 icon:'💨', cat:'Pulmonology',          tags:['tension ptx','needle decompression','chest tube','spontaneous'] },
+  { id:'pleural-effusion',  name:'Pleural Effusion',             icon:'💧', cat:'Pulmonology',          tags:['lights criteria','exudate','transudate','thoracentesis','parapneumonic'] },
+  { id:'ards',              name:'ARDS',                         icon:'😮‍💨', cat:'Pulmonology',         tags:['berlin criteria','lung protective','prone positioning','peep','driving pressure'] },
+  { id:'hypoxia',           name:'Hypoxia & Respiratory Failure', icon:'😮‍💨', cat:'Pulmonology',       tags:['v/q mismatch','shunt','hypoventilation','diffusion','aa gradient'] },
+  // ── Infectious Disease ──
+  { id:'sepsis-id',         name:'Sepsis & Septic Shock',        icon:'⚠️', cat:'Infectious Disease',  tags:['sirs','lactate','bundle','vasopressors','source control'] },
+  { id:'meningitis',        name:'Bacterial Meningitis',         icon:'🧠', cat:'Infectious Disease',  tags:['lp','ceftriaxone','dexamethasone','csf','kernig','brudzinski'] },
+  { id:'endocarditis',      name:'Infective Endocarditis',       icon:'🦠', cat:'Infectious Disease',  tags:['duke criteria','viridans','staph','echo','bacteremia','vegetation'] },
+  { id:'hiv',               name:'HIV / AIDS',                   icon:'🔴', cat:'Infectious Disease',  tags:['cd4','viral load','art','opportunistic infections','pcp','toxo'] },
+  { id:'uti-pyelo',         name:'UTI / Pyelonephritis',         icon:'💧', cat:'Infectious Disease',  tags:['e.coli','trimethoprim','nitrofurantoin','resistance','urosepsis'] },
+  { id:'pneumonia-id',      name:'Hospital-Acquired Pneumonia',  icon:'🏥', cat:'Infectious Disease',  tags:['hap','vap','pseudomonas','mrsa','intubation','ventilator'] },
+  { id:'cdiff',             name:'C. difficile Colitis',         icon:'🦠', cat:'Infectious Disease',  tags:['cdiff','vancomycin','fidaxomicin','fecal transplant','pseudomembranous'] },
+  { id:'lyme',              name:'Lyme Disease',                 icon:'🌿', cat:'Infectious Disease',  tags:['borrelia','doxycycline','erythema migrans','bells palsy','arthritis'] },
+  // ── Neurology ──
+  { id:'stroke-neuro',      name:'Ischemic Stroke',              icon:'🧠', cat:'Neurology',            tags:['tpa','nihss','lvo','thrombectomy','time window','penumbra'] },
+  { id:'seizure',           name:'Seizures & Epilepsy',          icon:'⚡', cat:'Neurology',            tags:['status epilepticus','benzodiazepines','levetiracetam','eeg','aura'] },
+  { id:'headache',          name:'Headache Syndromes',           icon:'🤕', cat:'Neurology',            tags:['migraine','cluster','sah','thunderclap','triptan','prophylaxis'] },
+  { id:'ms',                name:'Multiple Sclerosis',           icon:'🧩', cat:'Neurology',            tags:['demyelination','mri lesions','optic neuritis','dmt','relapse'] },
+  { id:'guillain-barre',    name:'Guillain-Barré Syndrome',      icon:'⬆️', cat:'Neurology',            tags:['ascending weakness','areflexia','ivig','plasmapheresis','csf albuminocytologic'] },
+  { id:'altered-ms',        name:'Altered Mental Status',        icon:'😵', cat:'Neurology',            tags:['aeiou-tips','encephalopathy','delirium','toxicology','metabolic'] },
+  { id:'parkinson',         name:'Parkinson's Disease',         icon:'🤝', cat:'Neurology',            tags:['bradykinesia','rigidity','tremor','levodopa','dopamine','nms'] },
+  // ── Gastroenterology ──
+  { id:'gi-bleed',          name:'GI Bleed',                     icon:'🩸', cat:'Gastroenterology',     tags:['ugib','lgib','glasgow-blatchford','endoscopy','ppi','variceal'] },
+  { id:'pancreatitis',      name:'Acute Pancreatitis',           icon:'🔶', cat:'Gastroenterology',     tags:['bisap','atlanta','ivf resuscitation','lipase','gallstone','alcohol'] },
+  { id:'liver-cirrhosis',   name:'Cirrhosis & Portal HTN',       icon:'🍺', cat:'Gastroenterology',     tags:['ascites','varices','sbe','hepatic encephalopathy','child-pugh','meld'] },
+  { id:'ibd',               name:'Inflammatory Bowel Disease',   icon:'🔥', cat:'Gastroenterology',     tags:['crohns','ulcerative colitis','biologics','steroids','colonoscopy'] },
+  { id:'hepatitis',         name:'Hepatitis',                    icon:'🫀', cat:'Gastroenterology',     tags:['hepatitis b','hepatitis c','acute liver failure','vaccination','antivirals'] },
+  { id:'appendicitis',      name:'Appendicitis',                 icon:'🔴', cat:'Gastroenterology',     tags:['alvarado','ct','laparoscopy','perforated','antibiotics first'] },
+  // ── Nephrology ──
+  { id:'aki',               name:'Acute Kidney Injury',          icon:'🫘', cat:'Nephrology',           tags:['prerenal','intrinsic','postrenal','creatinine','fractional excretion','muddy casts'] },
+  { id:'ckd',               name:'Chronic Kidney Disease',       icon:'⬇️', cat:'Nephrology',           tags:['gfr','proteinuria','ace inhibitor','hyperkalemia','anemia','dialysis'] },
+  { id:'hyponatremia',      name:'Hyponatremia',                 icon:'💧', cat:'Nephrology',           tags:['siadh','hypovolemic','hypervolemic','correction rate','ods','3% saline'] },
+  { id:'hyperkalemia',      name:'Hyperkalemia',                 icon:'⚡', cat:'Nephrology',           tags:['ekg changes','calcium gluconate','insulin glucose','kayexalate','dialysis'] },
+  { id:'acid-base',         name:'Acid-Base Disorders',          icon:'⚗️', cat:'Nephrology',           tags:['metabolic acidosis','anion gap','respiratory alkalosis','compensation','winter'] },
+  { id:'nephrotic',         name:'Nephrotic / Nephritic Syndrome', icon:'🫘', cat:'Nephrology',         tags:['proteinuria','hematuria','hypoalbuminemia','edema','glomerulonephritis'] },
+  // ── Endocrinology ──
+  { id:'dka-endo',          name:'DKA / HHS',                    icon:'🩸', cat:'Endocrinology',        tags:['insulin','anion gap','potassium','bicarbonate','hyperosmolar'] },
+  { id:'thyroid',           name:'Thyroid Disorders',            icon:'🦋', cat:'Endocrinology',        tags:['hypothyroid','hyperthyroid','graves','hashimoto','thyroid storm','myxedema'] },
+  { id:'adrenal',           name:'Adrenal Disorders',            icon:'🫀', cat:'Endocrinology',        tags:['addison','cushing','pheo','adrenal crisis','cortisol','aldosterone'] },
+  { id:'diabetes',          name:'Diabetes Management',          icon:'💉', cat:'Endocrinology',        tags:['t1dm','t2dm','a1c','insulin','sglt2','glp1','complications'] },
+  { id:'hypercalcemia',     name:'Hypercalcemia',                icon:'🦴', cat:'Endocrinology',        tags:['pth','malignancy','milk alkali','vitamin d','bisphosphonates','fluids'] },
+  // ── Hematology ──
+  { id:'anemia',            name:'Anemia',                       icon:'🩸', cat:'Hematology',           tags:['iron deficiency','b12','folate','hemolysis','reticulocyte','mchc'] },
+  { id:'anticoagulation',   name:'Anticoagulation & Clotting',   icon:'🩹', cat:'Hematology',           tags:['heparin','warfarin','doac','dvt','pe','reversal agents','inr'] },
+  { id:'ttp-hit',           name:'TTP / HIT',                    icon:'🩸', cat:'Hematology',           tags:['ttp','hit','thrombocytopenia','plasmapheresis','argatroban','adamts13'] },
+  { id:'sickle-cell',       name:'Sickle Cell Disease',          icon:'🔴', cat:'Hematology',           tags:['vaso-occlusive','hydroxyurea','acute chest','transfusion','pain crisis'] },
+  { id:'leukemia-lymphoma', name:'Leukemia & Lymphoma Overview', icon:'🔬', cat:'Hematology',           tags:['all','aml','cll','cml','reed sternberg','neutropenic fever'] },
+  // ── Emergency ──
+  { id:'sepsis-em',         name:'Sepsis & Septic Shock',        icon:'⚠️', cat:'Emergency',            tags:['sirs','lactate','bundle','vasopressors','source control','1hr bundle'] },
+  { id:'pe-em',             name:'Pulmonary Embolism',           icon:'🫁', cat:'Emergency',            tags:['wells','pesi','massive pe','thrombolytics','pert','rv failure'] },
+  { id:'dka-em',            name:'DKA',                          icon:'🩸', cat:'Emergency',            tags:['insulin drip','anion gap','potassium','cerebral edema','fluids'] },
+  { id:'chest-pain-ddx',    name:'Chest Pain Differential',      icon:'❤️', cat:'Emergency',            tags:['acs','pe','dissection','pericarditis','esophageal','risk stratify'] },
+  { id:'shock',             name:'Shock — Types & Management',   icon:'⚡', cat:'Emergency',            tags:['distributive','cardiogenic','obstructive','hypovolemic','vasopressors','map'] },
+  { id:'overdose',          name:'Toxicology / Overdose',        icon:'☠️', cat:'Emergency',            tags:['acetaminophen','nac','naloxone','flumazenil','tca','salicylate','antidotes'] },
+  { id:'trauma',            name:'Trauma & Massive Transfusion', icon:'🚑', cat:'Emergency',            tags:['primary survey','abcde','atls','massive transfusion','txa','damage control'] },
+  // ── Rheumatology ──
+  { id:'sle',               name:'Systemic Lupus Erythematosus', icon:'🦋', cat:'Rheumatology',         tags:['ana','anti-dsdna','smith','complement','nephritis','hydroxychloroquine'] },
+  { id:'ra',                name:'Rheumatoid Arthritis',         icon:'🤝', cat:'Rheumatology',         tags:['synovitis','dmard','methotrexate','biologics','anti-ccp','morning stiffness'] },
+  { id:'vasculitis',        name:'Vasculitis',                   icon:'🔴', cat:'Rheumatology',         tags:['anca','granulomatosis','giant cell','takayasu','kawasaki','anca-associated'] },
+  { id:'gout',              name:'Gout & Crystal Arthropathies', icon:'🦴', cat:'Rheumatology',         tags:['urate','colchicine','allopurinol','pseudogout','joint aspiration','cppd'] },
+  { id:'septic-arthritis',  name:'Septic Arthritis',             icon:'🦠', cat:'Rheumatology',         tags:['joint infection','arthrocentesis','staph','gonorrhea','antibiotics','washout'] },
+  // ── Psychiatry ──
+  { id:'depression',        name:'Depression',                   icon:'🌧️', cat:'Psychiatry',           tags:['phq9','ssri','snri','mdd','suicidality','psychotherapy','treatment resistant'] },
+  { id:'psychosis',         name:'Psychosis & Schizophrenia',    icon:'🔀', cat:'Psychiatry',           tags:['positive symptoms','negative symptoms','antipsychotics','nms','first episode'] },
+  { id:'bipolar',           name:'Bipolar Disorder',             icon:'⬆️⬇️', cat:'Psychiatry',         tags:['mania','hypomania','lithium','valproate','mood stabilizer','cycling'] },
+  { id:'delirium',          name:'Delirium',                     icon:'😵', cat:'Psychiatry',           tags:['acute confusion','cam','hyperactive','hypoactive','find-me','precipitants'] },
+  { id:'substance-use',     name:'Substance Use Disorders',      icon:'🔗', cat:'Psychiatry',           tags:['alcohol withdrawal','opioid','ciwa','mat','naltrexone','buprenorphine'] },
+  // ── Obstetrics & Gynecology ──
+  { id:'eclampsia',         name:'Pre-eclampsia & Eclampsia',    icon:'🤰', cat:'Ob/Gyn',               tags:['magnesium','hypertension','proteinuria','delivery','hellp','labetalol'] },
+  { id:'ectopic',           name:'Ectopic Pregnancy',            icon:'🔴', cat:'Ob/Gyn',               tags:['beta-hcg','methotrexate','ruptured ectopic','salpingectomy','transvaginal us'] },
+  { id:'postpartum',        name:'Postpartum Hemorrhage',        icon:'🩸', cat:'Ob/Gyn',               tags:['tone','4Ts','oxytocin','uterotonic','surgical management','transfusion'] },
+  // ── Pediatrics ──
+  { id:'fever-peds',        name:'Pediatric Fever',              icon:'🌡️', cat:'Pediatrics',           tags:['febrile infant','risk stratification','rsi','well appearing','urine culture'] },
+  { id:'bronchiolitis',     name:'Bronchiolitis',                icon:'🌬️', cat:'Pediatrics',           tags:['rsv','supportive care','high flow','steroids ineffective','nasopharyngeal'] },
+  { id:'intussusception',   name:'Intussusception',              icon:'🔄', cat:'Pediatrics',           tags:['air enema','currant jelly','ileocolic','surgical backup','ultrasound'] },
+  { id:'peds-dka',          name:'Pediatric DKA',                icon:'💧', cat:'Pediatrics',           tags:['cerebral edema','mannitol','insulin protocol','new onset t1dm','fluids'] },
+  // ── Geriatrics ──
+  { id:'falls',             name:'Falls & Frailty',              icon:'🧓', cat:'Geriatrics',           tags:['polypharmacy','beers criteria','orthostatic','physical therapy','assessment'] },
+  { id:'dementia',          name:'Dementia',                     icon:'🧠', cat:'Geriatrics',           tags:['alzheimers','lewy body','vascular dementia','cholinesterase','behavioral'] },
+  { id:'eol',               name:'Palliative & Goals of Care',   icon:'🕊️', cat:'Geriatrics',           tags:['prognosis','dnr','hospice','pain management','goals of care','family meeting'] },
 ];
 
-const FOUNDATIONAL = ['anaphylaxis','urticaria','asthma','food-allergy','drug-allergy','allergic-rhinitis','ddx-framework','cognitive-bias'];
+const FOUNDATIONAL = ['anaphylaxis','urticaria','asthma','food-allergy','drug-allergy','allergic-rhinitis','ddx-framework','cognitive-bias','stemi','sepsis-em','aki','dka-em','stroke-neuro','chest-pain-ddx'];
 
 /* ═══════════════════════════════════════════════════════
    STATE
@@ -361,7 +457,7 @@ function renderNoMatch(val) {
   return `
     <div class="no-match">
       <div class="no-match-title">No exact match for "${val}"</div>
-      <div class="no-match-desc">We don't have a structured module for that yet — but CoachDx can still coach you on it using Socratic questioning. Or browse related topics below.</div>
+      <div class="no-match-desc">CoachDx can coach you on any topic — just start. Or pick a related topic from the list below.</div>
       <div class="no-match-btns">
         <button class="nm-btn nm-btn-primary" onclick="startSession('${val}', false)">Coach me on "${val.length > 20 ? val.slice(0,20)+'…' : val}" →</button>
         <button class="nm-btn nm-btn-ghost" onclick="clearSearch()">Browse all topics</button>
@@ -492,13 +588,21 @@ async function startSession(topicName, isStructured, topicId) {
 function buildOpener(topic, structured) {
   if (structured) {
     const openers = [
-      `Let's work through ${topic}. Before we dive in — what do you already know about the underlying mechanism? Walk me through it.`,
-      `${topic}. Good choice. Let's start with the clinical picture: if a patient walks in with classic ${topic}, what's the first thing you're thinking about and why?`,
-      `Tell me what comes to mind when you hear "${topic}" — I want to understand your current mental model before we build on it.`,
+      `Let's work through ${topic}. I'll ask the questions — your job is to think out loud. To start: if a patient walks in with classic ${topic}, what's the first thing running through your mind?`,
+      `${topic}. Good. Tell me the underlying mechanism first — why does this condition happen the way it does? Don't look anything up. Just tell me what you've got.`,
+      `Tell me what comes to mind when you hear "${topic}." Don't filter — just say what you know. I'll figure out where to push you from there.`,
+      `${topic}. Before we get into management, let me ask you this: what are the two or three things that absolutely cannot be missed in a patient with this presentation, and why?`,
+      `Let's make this clinical. You're on shift and a patient comes in with ${topic}. You've got 60 seconds to give me your assessment. Go.`,
     ];
     return openers[Math.floor(Math.random() * openers.length)];
   }
-  return `You want to work on "${topic}" — I don't have a structured module for that yet, but that won't stop us. Tell me what's tripping you up about it, and I'll start asking the questions that'll get you there.`;
+  const unstructuredOpeners = [
+    `Let's work on ${topic}. I'll ask the questions — you think out loud. To start: what do you already know about this? Walk me through it in your own words.`,
+    `${topic} — good. Let's dig in. Before I start pushing you, tell me: what's your current understanding of the core mechanism or framework here?`,
+    `${topic}. I'll play the attending, you play the learner who just got pimped on this. Start by telling me what you know, and I'll take it from there.`,
+    `Good choice. Let's get into ${topic}. What's the first clinical question that comes to mind when you hear this topic — something you're not totally sure how to answer?`,
+  ];
+  return unstructuredOpeners[Math.floor(Math.random() * unstructuredOpeners.length)];
 }
 
 function endSession() {

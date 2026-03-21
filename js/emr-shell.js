@@ -30,19 +30,16 @@
   };
 
   var TOOLS = [
-    { id: 'patients', label: 'Patient List', icon: ICO.patients, section: 'clinical' },
-    { id: 'night-float', label: 'Night Float', icon: ICO.nightFloat, section: 'simulations', url: 'night-float.html' },
-    { id: 'simroomdx', label: 'SimRoomDx', icon: ICO.simRoom, section: 'simulations', url: 'simroomdx.html' },
-    { id: 'consult', label: 'Consult Callback', icon: ICO.consult, section: 'simulations', url: 'consult-callback.html' },
-    { id: 'crt', label: 'Clinical Reasoning', icon: ICO.crt, section: 'learning' },
-    { id: 'mechanism', label: 'MechanismDx', icon: ICO.mechanism, section: 'learning', url: 'mechanism/index.html' },
-    { id: 'ecg', label: 'ECG Trainer', icon: ICO.ecg, section: 'learning', url: 'ecg/index.html' },
-    { id: 'milestones', label: 'Milestones', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>', section: 'learning', url: 'milestone-tracker.html' },
-    { id: 'procedure-lab', label: 'Procedure Lab', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>', section: 'learning', url: 'procedure-lab.html' },
-    { id: 'counseling', label: 'Counseling', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>', section: 'learning', url: 'counseling-scenarios.html' }
+    { id: 'patients',   label: 'Cases',              icon: ICO.patients,   section: 'clinical' },
+    { id: 'crt',        label: 'Reasoning Trainer',  icon: ICO.crt,        section: 'learning' },
+    { id: 'mechanism',  label: 'MechanismDx',        icon: ICO.mechanism,  section: 'learning', url: 'mechanism/index.html' },
+    { id: 'ecg',        label: 'ECG Trainer',        icon: ICO.ecg,        section: 'learning', url: 'ecg/index.html' },
+    { id: 'milestones', label: 'Milestones',         icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>', section: 'learning', url: 'milestone-tracker.html' },
+    { id: 'consult',    label: 'Consult Call',       icon: ICO.consult,    section: 'simulations', url: 'consult-callback.html' },
+    { id: 'night-float',label: 'Night Float',        icon: ICO.nightFloat, section: 'simulations', url: 'night-float.html' },
   ];
 
-  var SECTIONS = { clinical: 'CLINICAL', simulations: 'SIMULATIONS', learning: 'LEARNING TOOLS' };
+  var SECTIONS = { clinical: 'CASES', learning: 'LEARNING', simulations: 'SIMULATIONS' };
 
   function _getSetting() {
     try {

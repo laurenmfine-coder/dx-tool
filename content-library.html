@@ -47,7 +47,7 @@ body{font-family:var(--rdx-font);background:var(--rdx-bg);color:var(--rdx-text);
 .mcq-stem{font-size:14px;line-height:1.7;margin:12px 0;color:var(--rdx-text)}
 .mcq-option{padding:8px 12px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-sm);margin-bottom:5px;font-size:13px;display:flex;align-items:flex-start;gap:10px}
 .mcq-option.correct{border-color:#16a34a;background:#f0fdf4}
-.mcq-option .letter{width:22px;height:22px;border-radius:50%;background:var(--rdx-bg);border:1.5px solid var(--rdx-border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;color:var(--rdx-text-muted)}
+.mcq-option .letter{width:22px;height:22px;border-radius:50%;background:var(--rdx-bg);border:1.5px solid var(--rdx-border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--rdx-text-muted)}
 .mcq-option.correct .letter{background:#16a34a;color:#fff;border-color:#16a34a}
 .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -246,9 +246,9 @@ function renderItemCard(item, isAdmin) {
   h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px">';
   h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
   h += '<span class="badge ' + (item._type==='mcq' ? 'badge-blue' : 'badge-amber') + '">' + (item._type==='mcq' ? '📝 MCQ' : '🏥 Case') + '</span>';
-  if (item.tags && item.tags.abai_domain) h += '<span class="badge badge-blue" style="font-size:10px">' + esc(item.tags.abai_domain) + '</span>';
-  if (item.tags && item.tags.blooms)      h += '<span class="badge badge-amber" style="font-size:10px">' + esc(item.tags.blooms) + '</span>';
-  if (item.meta && item.meta.specialty)   h += '<span class="badge badge-blue" style="font-size:10px">' + esc(item.meta.specialty) + '</span>';
+  if (item.tags && item.tags.abai_domain) h += '<span class="badge badge-blue" style="font-size:11px">' + esc(item.tags.abai_domain) + '</span>';
+  if (item.tags && item.tags.blooms)      h += '<span class="badge badge-amber" style="font-size:11px">' + esc(item.tags.blooms) + '</span>';
+  if (item.meta && item.meta.specialty)   h += '<span class="badge badge-blue" style="font-size:11px">' + esc(item.meta.specialty) + '</span>';
   if (item.submittedAt) h += '<span style="font-size:11px;color:var(--rdx-text-muted)">' + new Date(item.submittedAt).toLocaleDateString() + '</span>';
   h += '</div>';
   var stLabel = isApproved ? '✓ Approved' : isPending ? '⏳ Pending' : isRejected ? '✗ Rejected' : item.status;

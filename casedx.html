@@ -119,6 +119,32 @@ a{color:inherit;text-decoration:none}
 }
 @media(max-width:480px){.arc-grid{grid-template-columns:1fr}.mgrid{grid-template-columns:1fr 1fr}}
 .cc-start-btn{background:#2874A6;color:#fff;border:none;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;margin-left:auto}.cc-start-btn:hover{background:#1B5272}.cc-blurred{cursor:pointer}.cc-dx-hint{font-size:11px;color:#94a3b8;margin-bottom:2px}
+
+/* ── CLEAN REVEAL BOX ── */
+.cc-reveal-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+  background: #F8FAFC;
+  transition: all .15s;
+  user-select: none;
+  margin-bottom: 4px;
+}
+.cc-reveal-box:hover {
+  border-color: #2874A6;
+  color: #2874A6;
+  background: #EBF5FB;
+}
+.cc-reveal-icon { font-size: 13px; }
+.cc-reveal-label { font-size: 12px; font-weight: 600; }
+.cc-reveal-answer { font-size: 13px; font-weight: 700; color: #1B4F72; }
 </style>
 </head>
 <body>
@@ -154,6 +180,40 @@ a{color:inherit;text-decoration:none}
   <div class="resume-bar" id="resumeBar">
     <span>Resume: <strong id="resumeName">—</strong></span>
     <button class="resume-btn" id="resumeBtn">Resume →</button>
+  </div>
+</div>
+
+
+<!-- HOW IT WORKS EXPLAINER -->
+<div style="background:white;border-bottom:1px solid #E2E8F0;padding:0">
+  <div style="max-width:1100px;margin:0 auto;padding:12px 24px">
+    <details>
+      <summary style="font-size:13px;font-weight:700;color:#2874A6;list-style:none;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none">
+        <span>ℹ️</span> How ReasonDx Cases Work <span style="font-size:11px;font-weight:500;color:#64748B;margin-left:4px">(click to expand)</span>
+      </summary>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid #F1F5F9">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="font-size:18px;flex-shrink:0">1️⃣</div>
+          <div><div style="font-size:12px;font-weight:700;color:#0F172A;margin-bottom:2px">Pick a case</div>
+          <div style="font-size:12px;color:#64748B;line-height:1.5">Diagnoses are hidden. Tap to reveal first — or go in blind for a real challenge.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="font-size:18px;flex-shrink:0">2️⃣</div>
+          <div><div style="font-size:12px;font-weight:700;color:#0F172A;margin-bottom:2px">Work the Virtual EMR</div>
+          <div style="font-size:12px;color:#64748B;line-height:1.5">Review labs, imaging, vitals. Interview your patient. Build your differential.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="font-size:18px;flex-shrink:0">3️⃣</div>
+          <div><div style="font-size:12px;font-weight:700;color:#0F172A;margin-bottom:2px">Order &amp; Reason</div>
+          <div style="font-size:12px;color:#64748B;line-height:1.5">Place orders, defend your reasoning, and get instant evidence-based feedback on each decision.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="font-size:18px;flex-shrink:0">4️⃣</div>
+          <div><div style="font-size:12px;font-weight:700;color:#0F172A;margin-bottom:2px">Document &amp; Present</div>
+          <div style="font-size:12px;color:#64748B;line-height:1.5">Write your H&amp;P, then present to your AI attending for a Socratic debrief.</div></div>
+        </div>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -301,8 +361,11 @@ document.getElementById("todayIcon").textContent=td.icon;
 document.getElementById("todayTag").textContent=td.spec+" · Est. "+td.mins+" min";
 // Show presentation context but blur the actual diagnosis title
 document.getElementById("todayTitle").innerHTML =
-  '<span id="todayDxBlur" style="filter:blur(5px);cursor:pointer;user-select:none;transition:filter .25s;display:inline-block" '
-  + 'title="Click to reveal" onclick="this.style.filter=\'none\';this.style.cursor=\'default\';document.getElementById(\'todayRevealHint\').style.display=\'none\'">'+td.title+'</span>'
+  '<span id="todayDxReveal" class="cc-reveal-box" style="display:inline-flex;" '
+  + 'onclick="this.querySelector(\'.cc-reveal-answer\').style.display=\'inline\';this.querySelector(\'.cc-reveal-icon\').style.display=\'none\';this.querySelector(\'.cc-reveal-label\').style.display=\'none\';this.style.background=\'transparent\';this.style.border=\'none\';this.style.cursor=\'default\';this.onclick=null">'
+  + '<span class="cc-reveal-icon">👁</span><span class="cc-reveal-label">Reveal diagnosis</span>'
+  + '<span class="cc-reveal-answer" style="display:none;font-weight:700">'+esc(td.title)+'</span>'
+  + '</span>'
   + ' <span id="todayRevealHint" style="font-size:12px;opacity:.7;font-weight:400">👁 Reveal</span>';
 document.getElementById("todaySub").textContent=td.sub;
 document.getElementById("todayChips").innerHTML='<span class="tchip red">'+AL[td.acuity]+'</span><span class="tchip">Virtual EMR</span><span class="tchip">Note + SBAR</span>';
@@ -335,9 +398,10 @@ function render(){
       var ccLabel = g.presentation || 'Case';
       out += '<div class="ccard">'
         + '<div class="cc-spec">'+esc(ccLabel)+'</div>'
-        + '<div class="cc-title cc-blurred" id="cctit-'+cid+'" style="filter:blur(5px);user-select:none;cursor:pointer;transition:filter .2s" '
-        + 'title="Click to reveal diagnosis" onclick="event.stopPropagation();revealDx(this,\''+cid+'\')">'+esc(cdx)+'</div>'
-        + '<div class="cc-dx-hint" id="ccHint-'+cid+'" style="font-size:11px;color:#94a3b8;margin-bottom:4px">👁 Tap to reveal dx</div>'
+        + '<div id="cctit-'+cid+'" class="cc-reveal-box" onclick="event.stopPropagation();revealDx(this,\''+cid+'\')">'
+        + '<span class="cc-reveal-icon">👁</span><span class="cc-reveal-label">Tap to reveal dx</span>'
+        + '<div class="cc-reveal-answer" style="display:none">'+esc(cdx)+'</div>'
+        + '</div>'
         + '<div class="cc-foot">'
         + '<span class="adot a'+(c.acuity||3)+'"></span><span class="cc-alabel">'+AL[c.acuity||3]+'</span>'
         + '<button class="cc-start-btn" onclick="openCase(\''+cid+'\',\''+esc(cdx)+'\')">Start →</button>'
@@ -348,7 +412,7 @@ function render(){
   document.getElementById("casesWrap").innerHTML=out||'<div class="no-results"><span>🔍</span><p>No cases match your filters. <a href="#" onclick="resetF();return false" style="color:#2874A6">Reset filters</a></p></div>';
   document.getElementById("fstats").textContent=total+" case"+(total!==1?"s":"")+" shown";
 }
-function openCase(id,name){localStorage.setItem("rdx-last-case",JSON.stringify({id:id,title:name,ts:Date.now()}));window.location.href="virtual-emr.html?case="+id;}
+function openCase(id,name){localStorage.setItem("rdx-last-case",JSON.stringify({id:id,title:name,ts:Date.now()}));try{sessionStorage.removeItem('rdx-order-mode');}catch(e){}window.location.href="virtual-emr.html?case="+id;}
 function revealDx(el,cid){
   el.style.filter='none';el.style.cursor='default';
   var hint=document.getElementById('ccHint-'+cid);
