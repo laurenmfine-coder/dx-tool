@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CME: Lynch Syndrome — ReasonDx Genetics</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<link rel="stylesheet" href="/css/rdx-cme.css">
+<style>
+body{background:var(--rdx-bg)}
+.cme-shell{max-width:860px;margin:0 auto;padding:0 20px 72px}
+</style>
+</head>
+<body>
+<div id="cme-container" class="cme-shell"></div>
+<script src="/js/rdx-cme-engine.js"></script>
+<script>
+const MODULE = {
+  id: 'lynch-syndrome',
+  emoji: '🎗️',
+  title: 'Lynch Syndrome: Cancer Predisposition in Primary Care',
+  subtitle: 'Recognizing hereditary colorectal and endometrial cancer risk — and knowing what to do when you find it.',
+  credits: 1.0,
+  timeMinutes: 35,
+  audience: 'Primary Care, Internal Medicine, GI, OB-GYN',
+  color: { gradient: 'linear-gradient(135deg,#991b1b,#c0392b)' },
+
+  objectives: [
+    'Identify clinical and family history features that trigger suspicion for Lynch syndrome in a primary care setting.',
+    'Apply the Amsterdam II and revised Bethesda criteria to determine when genetic testing is indicated.',
+    'Interpret microsatellite instability (MSI) and immunohistochemistry (IHC) results in colorectal tumor specimens.',
+    'Counsel patients about Lynch syndrome inheritance patterns, cancer risks, and surveillance recommendations.',
+    'Coordinate appropriate referral, testing, and cascade screening for at-risk family members.'
+  ],
+
+  knowledgeCheck: [
+    {
+      stem: 'A 42-year-old woman is diagnosed with colorectal cancer. Her mother had endometrial cancer at 48 and her maternal uncle had colon cancer at 50. Which hereditary syndrome should be suspected first?',
+      choices: ['Familial adenomatous polyposis (FAP)', 'Lynch syndrome (HNPCC)', 'MUTYH-associated polyposis', 'Peutz-Jeghers syndrome'],
+      correct: 1,
+      explanation: 'Lynch syndrome is the most common hereditary colorectal cancer syndrome, accounting for ~3% of all CRC. The combination of CRC + endometrial cancer across generations at early ages is the classic Lynch pedigree.'
+    },
+    {
+      stem: 'Which mismatch repair (MMR) gene mutation is most commonly associated with Lynch syndrome?',
+      choices: ['BRCA1', 'MLH1', 'APC', 'TP53'],
+      correct: 1,
+      explanation: 'MLH1 mutations account for ~40% of Lynch syndrome cases, followed by MSH2 (~38%), MSH6 (~14%), and PMS2 (~5%). All encode mismatch repair proteins.'
+    },
+    {
+      stem: 'A colorectal tumor shows microsatellite instability-high (MSI-H) on testing. What does this finding indicate?',
+      choices: ['The tumor is definitely caused by Lynch syndrome and genetic counseling should be ordered', 'Deficient mismatch repair (dMMR) — warrants germline genetic testing to rule out Lynch syndrome', 'The patient has BRCA1/2 mutation and should have BRCA testing next', 'The tumor is low-risk and no further workup is needed'],
+      correct: 1,
+      explanation: 'MSI-H/dMMR indicates deficient mismatch repair. About 15% of sporadic CRC is MSI-H due to MLH1 promoter hypermethylation. The remainder may be Lynch syndrome — germline testing is indicated to differentiate.'
+    }
+  ],
+
+  mechanism: {
+    title: 'Mismatch Repair Deficiency and Lynch Syndrome',
+    overview: 'Lynch syndrome results from germline mutations in DNA mismatch repair (MMR) genes. Understanding the MMR pathway explains why these tumors develop, why they accumulate mutations rapidly, and why they respond differently to treatment.',
+    sections: [
+      {
+        heading: 'The Mismatch Repair System',
+        content: 'DNA replication introduces errors at a rate of approximately 1 per 10,000 nucleotides. The mismatch repair (MMR) system detects and corrects these errors, reducing the final error rate to less than 1 per billion. The key MMR proteins work as heterodimers: MutSα (MSH2-MSH6) recognizes single-base mismatches and small insertion/deletion loops; MutSβ (MSH2-MSH3) recognizes larger loops. Once recognized, MutLα (MLH1-PMS2) is recruited to coordinate excision and resynthesis.',
+        keyPoints: [
+          'Four key MMR genes: MLH1, MSH2, MSH6, PMS2 — all operate in protein pairs',
+          'MMR operates during and after DNA replication to correct polymerase errors',
+          'Microsatellites (short tandem repeats) are particularly vulnerable to slippage errors during replication'
+        ]
+      },
+      {
+        heading: 'Two-Hit Model in Lynch Syndrome',
+        content: 'Lynch syndrome follows the classic Knudson two-hit model. Individuals are born with one germline MMR gene mutation (first hit). When the second allele is lost through somatic mutation, LOH, or epigenetic silencing (second hit) in a colonic stem cell, MMR capacity is completely lost. Without MMR, replication errors accumulate rapidly in microsatellite sequences throughout the genome, producing microsatellite instability-high (MSI-H) tumors.',
+        keyPoints: [
+          'First hit: inherited germline MMR mutation (autosomal dominant)',
+          'Second hit: somatic inactivation of the remaining wild-type allele',
+          'Loss of MMR → accumulation of frameshift mutations → tumor suppressor inactivation → cancer'
+        ]
+      },
+      {
+        heading: 'Lifetime Cancer Risks in Lynch Syndrome',
+        content: 'Lynch syndrome dramatically elevates the lifetime risk of multiple cancers, particularly colorectal and endometrial. Risks vary by which MMR gene is mutated. MLH1 and MSH2 carry the highest risks; MSH6 and PMS2 are associated with lower penetrance.',
+        keyPoints: [
+          'Colorectal cancer: 52–82% lifetime risk (MLH1/MSH2); 10–22% (PMS2)',
+          'Endometrial cancer: 25–60% lifetime risk — often the sentinel cancer in women',
+          'Also elevated: ovarian, gastric, urinary tract, small bowel, sebaceous skin tumors (Muir-Torre)',
+          'Average CRC age at diagnosis in Lynch: 44–61 years (vs 69 in general population)'
+        ]
+      }
+    ],
+    pathway: [
+      'Germline MMR gene mutation inherited (autosomal dominant — 50% risk per child)',
+      'Somatic second-hit inactivates remaining MMR allele in colonic epithelium',
+      'MMR-deficient cell accumulates frameshift mutations at microsatellite sequences',
+      'Microsatellite instability-high (MSI-H) tumor develops with accelerated mutation rate',
+      'Tumor suppressors (TGF-β, PTEN, BAX) inactivated → malignant progression',
+      'Colorectal, endometrial, or other Lynch-spectrum cancer develops — often before age 50'
+    ]
+  },
+
+  patient: {
+    stats: [
+      { label: 'Patient', value: 'Marcus T., 38M' },
+      { label: 'Setting', value: 'Primary Care' },
+      { label: 'Presentation', value: 'Rectal bleeding' },
+      { label: 'Prior Dx', value: 'Hemorrhoids' },
+      { label: 'Prior colonoscopy', value: 'None' },
+      { label: 'Family Hx', value: 'See vignette' }
+    ],
+    vignette: `Marcus is a 38-year-old African American man presenting with a 3-month history of <span class="hl">intermittent rectal bleeding and change in bowel habits</span>. He was told at his last visit that he likely has hemorrhoids. He has no prior colonoscopy. Family history: <span class="flag">father — colorectal cancer at age 44, deceased</span>; <span class="flag">paternal aunt — endometrial cancer at age 50</span>; <span class="flag">paternal grandmother — ovarian cancer, age unknown</span>. He has one sibling, age 40, who has never been screened. He has no personal history of polyps. He takes no medications. BMI 24. On exam, no palpable abdominal masses. Digital rectal exam: trace blood, no mass felt.`
+  },
+
+  caseQuestions: [
+    {
+      stem: "Before ordering any testing, you review Marcus's family history. Applying the Amsterdam II criteria, does this family history meet criteria for Lynch syndrome?",
+      choices: [
+        'No — Amsterdam II requires 3 affected relatives; only 2 are documented here',
+        'Yes — 3 relatives with Lynch-spectrum cancers across 2 generations with at least one diagnosed before age 50',
+        'Cannot determine — need pathology confirmation of all family cancers first',
+        'No — Amsterdam II only applies to colorectal cancer, not endometrial or ovarian'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Correct. Amsterdam II criteria: ≥3 relatives with Lynch-spectrum cancers (CRC, endometrial, small bowel, ureter, renal pelvis); ≥2 successive generations affected; ≥1 diagnosed before age 50; FAP excluded. Marcus\'s pedigree: father (CRC, 44), aunt (endometrial, 50), grandmother (ovarian) — 3 Lynch-spectrum cancers, 2 generations, father diagnosed before 50. This meets Amsterdam II.',
+        wrong: 'Amsterdam II criteria: ≥3 relatives with Lynch-spectrum cancers; ≥2 successive generations; ≥1 before age 50; FAP excluded. Lynch-spectrum includes CRC, endometrial, ovarian, small bowel, and urinary tract cancers. Father (CRC, 44) + aunt (endometrial, 50) + grandmother (ovarian) = 3 Lynch-spectrum cancers across 2 generations with father diagnosed before 50. This meets criteria.'
+      },
+      pearls: [
+        'Amsterdam II criteria expand beyond CRC to include all Lynch-spectrum cancers',
+        'Revised Bethesda guidelines are broader — apply when Amsterdam II not met but clinical suspicion exists',
+        'Any CRC diagnosed before age 50 meets Bethesda criteria and should trigger MSI/IHC tumor testing',
+        'Family history is underascertained — ask specifically about endometrial, ovarian, urinary tract, and gastric cancers'
+      ]
+    },
+    {
+      stem: 'Marcus undergoes colonoscopy which reveals a sigmoid colon mass. Biopsy confirms adenocarcinoma. The pathologist sends tumor tissue for reflex Lynch syndrome testing. Which combination of tests should be ordered on the tumor specimen?',
+      choices: [
+        'KRAS and BRAF mutation testing — determines chemotherapy eligibility',
+        'Microsatellite instability (MSI) by PCR AND immunohistochemistry (IHC) for MLH1, MSH2, MSH6, PMS2',
+        'Germline MLH1 sequencing from peripheral blood — most direct test',
+        'aCGH chromosomal microarray — detects large MMR gene deletions'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Correct. Universal tumor testing with MSI and IHC on all CRC specimens is now recommended by ACMG, ACS, and NCCN. MSI detects microsatellite instability by comparing tumor vs normal tissue. IHC stains for all four MMR proteins — loss of specific protein staining directs germline testing to the corresponding gene. Together they have >99% sensitivity for Lynch syndrome.',
+        wrong: 'The gold standard is dual testing: MSI (detects microsatellite instability) + IHC for all four MMR proteins (MLH1, MSH2, MSH6, PMS2). IHC loss of a specific protein directs which germline gene to sequence. KRAS/BRAF testing determines sporadic vs Lynch MSI-H but is a secondary step. Germline testing comes after tumor testing establishes MMR deficiency.'
+      },
+      pearls: [
+        'Universal CRC tumor testing (MSI + IHC) is recommended regardless of age or family history — ~3% of CRC is Lynch',
+        'IHC protein loss pattern guides germline testing: MLH1 loss → check MLH1 methylation first to rule out sporadic; MSH2 or MSH6 loss → germline testing',
+        'MLH1-deficient tumors: first check BRAF V600E and MLH1 promoter methylation — if positive, likely sporadic (not Lynch)',
+        'Sensitivity: MSI alone ~93%, IHC alone ~91%, combined >99%'
+      ]
+    },
+    {
+      stem: 'IHC results return: absent MSH2 and MSH6 staining; MLH1 and PMS2 intact. MSI shows MSI-High. BRAF V600E: negative. MLH1 methylation: negative. What is the next step?',
+      choices: [
+        'Reassure Marcus — BRAF negative means this is not Lynch syndrome',
+        'Order germline sequencing of MSH2 and MSH6 genes — IHC pattern points directly to these genes',
+        'Order full germline panel of all 4 MMR genes simultaneously',
+        'Repeat the IHC on a new tumor block — technical error is likely'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Exactly right. Loss of MSH2 and MSH6 together on IHC almost always indicates a germline MSH2 mutation (MSH6 loses expression secondarily because it partners with MSH2). Germline sequencing should target MSH2 first, then MSH6. The negative BRAF and methylation results confirm this is not a sporadic MLH1-deficient tumor. The IHC result is directing you to the specific gene.',
+        wrong: 'The IHC pattern is the roadmap. Loss of MSH2+MSH6 (with intact MLH1+PMS2) points to MSH2 germline mutation — MSH6 loses expression secondarily because it dimerizes with MSH2. Germline MSH2 sequencing is the next step. BRAF/methylation testing is only relevant when MLH1 is absent (to rule out sporadic). Negative BRAF confirms this is not sporadic.'
+      },
+      pearls: [
+        'IHC loss patterns: MLH1+PMS2 absent → check MLH1 methylation/BRAF; MSH2+MSH6 absent → MSH2 germline; MSH6 alone absent → MSH6 germline; PMS2 alone absent → PMS2 germline',
+        'PMS2 and MSH6 mutations carry lower penetrance — adjust risk counseling accordingly',
+        'EPCAM deletions cause MSH2 silencing without MSH2 mutation — order EPCAM deletion testing if MSH2 sequencing negative',
+        'If MSH2 germline testing negative, proceed to MSH6 and EPCAM'
+      ]
+    },
+    {
+      stem: 'Germline testing confirms a pathogenic MSH2 variant. Marcus is now diagnosed with Lynch syndrome. His 40-year-old sibling has never been screened. What is the recommended approach for the sibling?',
+      choices: [
+        'Standard colonoscopy at age 45 per USPSTF guidelines — no special intervention needed yet',
+        'Offer cascade genetic testing for the MSH2 variant — if positive, begin intensive surveillance immediately',
+        'Start empiric intensive surveillance (colonoscopy every 1-2 years) without genetic testing',
+        'Refer sibling to oncology — only oncologists should manage Lynch syndrome carriers'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Cascade testing is the cornerstone of Lynch syndrome management. Once a pathogenic variant is identified in a proband, first-degree relatives have a 50% risk. Targeted single-site testing for the known variant is inexpensive (~$250-400) and definitive. If positive: intensive CRC surveillance (colonoscopy every 1-2 years starting at 25), endometrial/ovarian surveillance, and risk-reducing surgery discussions for women. If negative: return to standard population screening.',
+        wrong: 'Cascade testing — offering targeted testing for the known family variant to at-risk relatives — is the most cost-effective and medically appropriate approach. Standard age-based guidelines do not apply to Lynch carriers. First-degree relatives have 50% risk; the known MSH2 variant can be tested directly and cheaply. If positive, surveillance starts immediately. If negative, standard guidelines apply.'
+      },
+      pearls: [
+        'Cascade testing: first-degree relatives have 50% risk; targeted single-site variant testing is ~$250-400',
+        'Lynch surveillance for confirmed carriers: colonoscopy every 1-2 years starting at age 25 (or 5 years before youngest family diagnosis)',
+        'Female carriers: annual endometrial sampling + transvaginal ultrasound starting at 30-35; discuss risk-reducing hysterectomy after childbearing',
+        'Aspirin (600mg/day x 2+ years) reduces CRC risk in Lynch carriers — CAPP2 trial evidence'
+      ]
+    },
+    {
+      stem: "Marcus asks: 'My wife is pregnant. If I have this, what's the chance my baby has it?' What is the correct answer?",
+      choices: [
+        '25% — Lynch syndrome is autosomal recessive',
+        '50% — Lynch syndrome is autosomal dominant; each child has a 50% chance of inheriting the variant',
+        '100% — all children of Lynch syndrome patients will develop cancer',
+        'Near zero — Lynch syndrome is almost always de novo, not inherited from a parent'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Lynch syndrome is autosomal dominant. Each child of an affected parent has a 50% chance of inheriting the pathogenic MMR variant. Importantly, inheriting the variant does not mean certain cancer — it means significantly elevated lifetime risk that can be reduced through surveillance and risk-reducing interventions. The child should be offered testing in young adulthood (typically age 18-25) before surveillance would begin.',
+        wrong: 'Lynch syndrome is autosomal dominant — one copy of the pathogenic MMR variant is sufficient to cause predisposition. 50% of children will inherit the variant. Surveillance for Lynch carriers typically begins at age 25, so testing children before that age is generally deferred unless there is an unusual family history. Genetic counseling for the couple is recommended.'
+      },
+      pearls: [
+        'Lynch syndrome: autosomal dominant — 50% risk per child regardless of sex',
+        'Penetrance is not 100% — not all carriers develop cancer, especially with surveillance',
+        'Preimplantation genetic testing (PGT) is available for couples who want to avoid passing the variant to children',
+        'Testing minors: generally deferred until age 18-25 (when surveillance would begin), per ACMG guidelines'
+      ]
+    },
+    {
+      stem: 'Marcus has surgery for his colon cancer. Oncology notes his tumor is MSI-H/dMMR. Which treatment implication is most important to communicate?',
+      choices: [
+        'MSI-H tumors are resistant to 5-FU chemotherapy — adjuvant chemotherapy should be avoided for Stage II disease',
+        'MSI-H tumors are exquisitely sensitive to immune checkpoint inhibitors (pembrolizumab) — this should inform systemic therapy decisions',
+        'MSI-H status has no impact on treatment selection — it only affects prognosis',
+        'MSI-H tumors require more aggressive radiation therapy due to genomic instability'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'This is now landmark in oncology. MSI-H/dMMR tumors have high mutational burden and express many neoantigens — making them uniquely sensitive to immune checkpoint inhibitors. Pembrolizumab (anti-PD-1) is FDA-approved for MSI-H CRC. Additionally, Stage II MSI-H CRC does NOT benefit from 5-FU-based adjuvant chemotherapy and may be harmed by it — a critical treatment implication. This is one reason universal tumor testing matters.',
+        wrong: 'Two critical treatment implications: (1) MSI-H CRC does NOT benefit from 5-FU adjuvant chemotherapy for Stage II disease — this is an important exception to standard guidelines; (2) MSI-H/dMMR tumors are highly responsive to pembrolizumab (anti-PD-1 checkpoint inhibitor) — FDA approved for unresectable/metastatic MSI-H CRC. These treatment implications are why universal MSI testing on all CRC is now standard of care.'
+      },
+      pearls: [
+        'Stage II MSI-H CRC: adjuvant 5-FU does NOT improve survival and may worsen outcomes — key exception to standard guidelines',
+        'Pembrolizumab FDA-approved for MSI-H/dMMR CRC (unresectable/metastatic) — KEYNOTE-158 trial',
+        'MSI-H tumors have better prognosis overall — less likely to metastasize via lymphatics',
+        'This treatment implication alone justifies universal tumor MMR testing at diagnosis'
+      ]
+    },
+    {
+      stem: "Marcus's sister, age 35, tests positive for the MSH2 variant. She has no GI symptoms. She had her last colonoscopy 5 years ago (normal). What surveillance schedule does she now need?",
+      choices: [
+        'Standard colonoscopy every 10 years per current guidelines',
+        'Colonoscopy every 1-2 years starting now, plus annual endometrial sampling and gynecologic evaluation',
+        'Colonoscopy every 5 years — her recent normal colonoscopy provides reassurance',
+        'No colonoscopy needed — she should go straight to prophylactic colectomy'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Lynch syndrome surveillance is intensive compared to population guidelines. For MSH2 carriers: colonoscopy every 1-2 years (not 5-10); endometrial biopsy annually starting at 30-35; transvaginal ultrasound with CA-125 for ovarian surveillance. Risk-reducing hysterectomy and bilateral salpingo-oophorectomy should be discussed after childbearing is complete — it eliminates endometrial cancer risk and substantially reduces ovarian cancer risk.',
+        wrong: 'Standard colonoscopy intervals do not apply to Lynch syndrome carriers. MSH2 carriers need colonoscopy every 1-2 years due to accelerated adenoma-to-carcinoma sequence (2-3 years vs 10 years in the general population). Female carriers also need endometrial surveillance annually starting at 30-35, and gynecologic risk-reducing surgery discussion after completing childbearing.'
+      },
+      pearls: [
+        'Lynch adenoma-to-carcinoma sequence: ~2-3 years (vs ~10 years general population) — justifies 1-2 year colonoscopy interval',
+        'NCCN Lynch surveillance: colonoscopy q1-2y starting at 25; upper endoscopy q2-4y starting at 30-35 (MSH2)',
+        'Women with Lynch: annual endometrial sampling + TVUS starting 30-35; prophylactic hysterectomy/BSO after childbearing',
+        'Aspirin 600mg/day for ≥2 years reduces CRC incidence by ~50% in Lynch carriers (CAPP2 trial, 10-year follow-up)'
+      ]
+    },
+    {
+      stem: 'A primary care colleague asks: "Most of my Lynch patients don\'t need referral to genetics — I can manage this myself, right?" What is the most accurate response?',
+      choices: [
+        'Correct — Lynch syndrome management is straightforward and primary care can handle testing, surveillance, and counseling',
+        'Genetic counseling referral is essential — for variant interpretation, cascade testing coordination, psychological support, and surveillance planning',
+        'Incorrect — all Lynch syndrome care must be transferred to oncology permanently',
+        'Correct for surveillance, but genetics is needed only if the patient wants to have children'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Genetic counseling is not optional in Lynch syndrome. A certified genetic counselor provides: accurate variant interpretation (VUS management, variant reclassification updates), cascade testing coordination across the family, psychosocial support for a heritable cancer diagnosis, reproductive counseling including PGT options, and ongoing surveillance planning. Primary care coordinates care but should not attempt to manage Lynch syndrome in isolation — the complexity warrants a collaborative team approach.',
+        wrong: 'Genetic counseling referral is a standard of care recommendation for Lynch syndrome. The genetic counselor role is distinct: expert variant interpretation, family communication coordination, psychosocial support, reproductive options counseling, and surveillance protocol planning. Primary care remains the longitudinal care coordinator but should partner with genetics, gastroenterology, and gynecology.'
+      },
+      pearls: [
+        'Genetic counselors: certified professionals (MS, CGC credential) who specialize in heritable conditions — not the same as a genetics physician',
+        'Variants of uncertain significance (VUS) in MMR genes require counselor expertise — VUS reclassification occurs frequently',
+        'Cascade testing across large families requires systematic coordination — genetic counselors are trained for this',
+        'NCCN Guidelines: genetic counseling referral recommended for all patients meeting Lynch criteria'
+      ]
+    },
+    {
+      stem: 'What is the Muir-Torre variant of Lynch syndrome, and why should primary care recognize it?',
+      choices: [
+        'A form of Lynch syndrome with neurological features including brain tumors — requires MRI surveillance',
+        'Lynch syndrome with sebaceous skin tumors and keratoacanthomas — dermatologic findings may be the first sign',
+        'A Lynch syndrome variant with earlier onset CRC and higher penetrance — requires colonoscopy starting at age 20',
+        'Lynch syndrome with gastric predominance — upper endoscopy is the primary surveillance tool'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Muir-Torre syndrome is a phenotypic variant of Lynch syndrome caused most commonly by MSH2 mutations. It presents with sebaceous gland tumors (sebaceous adenoma, sebaceous carcinoma, keratoacanthoma) in addition to Lynch-spectrum visceral cancers. A primary care physician or dermatologist who sees a sebaceous carcinoma or multiple keratoacanthomas should suspect Muir-Torre and refer for Lynch evaluation. It\'s a rare but teachable dermatologic clue to an internal cancer syndrome.',
+        wrong: 'Muir-Torre syndrome = Lynch syndrome + sebaceous skin tumors. MSH2 mutations are most commonly responsible. Sebaceous adenomas, sebaceous carcinomas, and multiple keratoacanthomas in adults should trigger Lynch evaluation. This dermatologic clue can lead to early detection of Lynch-associated internal cancers. Primary care and dermatology should both recognize this association.'
+      },
+      pearls: [
+        'Muir-Torre = Lynch + sebaceous tumors (sebaceous adenoma, carcinoma, keratoacanthoma) — most common: MSH2',
+        'A single sebaceous carcinoma in an adult is a red flag — not just a skin problem',
+        'Turcot syndrome = Lynch + CNS tumors (usually glioblastoma with MLH1/MSH2) or FAP + medulloblastoma',
+        'These phenotypic variants highlight that Lynch syndrome is a systemic disorder, not just a colon disease'
+      ]
+    },
+    {
+      stem: 'A 55-year-old woman with a known MLH1 pathogenic variant presents to discuss risk-reducing surgery. She has completed childbearing. What is the most evidence-based recommendation?',
+      choices: [
+        'Risk-reducing surgery has no role in Lynch syndrome — surveillance is equivalent in efficacy',
+        'Risk-reducing hysterectomy and bilateral salpingo-oophorectomy substantially reduces endometrial and ovarian cancer risk and should be discussed',
+        'Only hysterectomy is recommended — oophorectomy is not beneficial in Lynch syndrome',
+        'Surgery should only be considered if endometrial biopsy shows atypia first'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Risk-reducing hysterectomy eliminates endometrial cancer risk (the most common Lynch-associated cancer in women) entirely. Bilateral salpingo-oophorectomy reduces ovarian cancer risk substantially. NCCN guidelines recommend discussing both procedures with female Lynch carriers after childbearing is complete. The decision is shared — some women prefer intensive surveillance; others prefer surgical risk reduction. Both are acceptable, and the conversation is the clinician\'s responsibility.',
+        wrong: 'Risk-reducing hysterectomy is the only way to completely eliminate endometrial cancer risk in Lynch syndrome carriers. BSO significantly reduces (but does not eliminate) ovarian cancer risk. NCCN recommends discussing both procedures with female Lynch carriers who have completed childbearing. Surveillance with annual endometrial sampling is an alternative for those who decline surgery — both approaches are valid, but the conversation must happen.'
+      },
+      pearls: [
+        'Risk-reducing hysterectomy: eliminates endometrial cancer risk completely — the single most effective intervention for female Lynch carriers',
+        'BSO reduces ovarian cancer risk by ~80% — consider timing relative to menopausal symptoms',
+        'Premenopausal BSO increases cardiovascular and osteoporosis risk — balance benefits and risks',
+        'NCCN: discuss risk-reducing surgery with all female Lynch carriers after childbearing complete — shared decision-making'
+      ]
+    }
+  ],
+
+  references: [
+    {
+      type: 'ACMG',
+      source: 'ACMG Guidelines',
+      title: 'Evaluation of Families With Hereditary Colorectal Cancer Predisposition: ACMG Practice Guideline',
+      doi: '10.1038/gim.2014.186'
+    },
+    {
+      type: 'GeneReviews',
+      source: 'GeneReviews — NCBI',
+      title: 'Lynch Syndrome — Adam MP et al. (Updated 2022)',
+      url: 'https://www.ncbi.nlm.nih.gov/books/NBK1211/'
+    },
+    {
+      type: 'OMIM',
+      source: 'OMIM',
+      title: 'Lynch Syndrome I — OMIM #120435; MSH2 — OMIM #609309; MLH1 — OMIM #120436',
+      url: 'https://omim.org/entry/120435'
+    },
+    {
+      type: 'Orphanet',
+      source: 'Orphanet',
+      title: 'Lynch Syndrome — ORPHA:144',
+      url: 'https://www.orpha.net/en/disease/detail/144'
+    },
+    {
+      type: 'journal',
+      source: 'Lancet Oncology',
+      title: 'Efficacy of aspirin in reducing colorectal cancer incidence in Lynch syndrome (CAPP2 randomised controlled trial)',
+      doi: '10.1016/S1470-2045(20)30366-4'
+    },
+    {
+      type: 'journal',
+      source: 'NEJM / KEYNOTE-158',
+      title: 'Pembrolizumab in Microsatellite-Instability-High Advanced Colorectal Cancer',
+      doi: '10.1056/NEJMoa1908597'
+    },
+    {
+      type: 'StatPearls',
+      source: 'StatPearls — NCBI',
+      title: 'Lynch Syndrome (Hereditary Nonpolyposis Colorectal Cancer) — StatPearls',
+      url: 'https://www.ncbi.nlm.nih.gov/books/NBK431070/'
+    },
+    {
+      type: 'journal',
+      source: 'JAMA',
+      title: 'Colorectal Cancer Risk in Lynch Syndrome After 1 Year of Annual Colonoscopic Surveillance — JAMA 2021',
+      doi: '10.1001/jama.2021.3380'
+    }
+  ]
+};
+
+initCME(MODULE);
+</script>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>

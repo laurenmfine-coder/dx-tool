@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CME: Pharmacogenomics — ReasonDx Genetics</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<link rel="stylesheet" href="/css/rdx-cme.css">
+<style>body{background:var(--rdx-bg)}.cme-shell{max-width:860px;margin:0 auto;padding:0 20px 72px}</style>
+</head>
+<body>
+<div id="cme-container" class="cme-shell"></div>
+<script src="/js/rdx-cme-engine.js"></script>
+<script>
+const MODULE = {
+  id: 'pharmacogenomics',
+  emoji: '💊',
+  title: 'Pharmacogenomics in Clinical Practice',
+  subtitle: 'Why the same drug at the same dose works brilliantly in one patient and kills another — and what you can do about it.',
+  credits: 1.0,
+  timeMinutes: 32,
+  audience: 'Primary Care, Internal Medicine, Cardiology, Psychiatry, Pain Management',
+  color: { gradient: 'linear-gradient(135deg,#065f46,#059669)' },
+
+  objectives: [
+    'Explain the pharmacogenomic basis of variable drug metabolism through CYP450 enzyme polymorphisms.',
+    'Identify clinical scenarios where pharmacogenomic testing would change drug selection or dosing.',
+    'Apply CPIC guidelines to adjust warfarin, clopidogrel, and codeine dosing based on genotype results.',
+    'Recognize the clinical phenotypes of poor, intermediate, normal, and ultrarapid metabolizers.',
+    'Counsel patients on actionable pharmacogenomic findings and their implications for current and future prescribing.'
+  ],
+
+  knowledgeCheck: [
+    {
+      stem: 'A patient on standard warfarin dosing has an INR of 9.2 after 2 weeks. She denies dietary changes or drug interactions. Which pharmacogenomic explanation is most likely?',
+      choices: ['CYP2D6 poor metabolizer — reduced codeine activation', 'CYP2C9 poor metabolizer — impaired warfarin S-enantiomer hydroxylation', 'VKORC1 AA genotype — decreased vitamin K epoxide reductase expression', 'Both B and C — combined CYP2C9 and VKORC1 variants together account for most warfarin sensitivity'],
+      correct: 3,
+      explanation: 'CYP2C9 metabolizes the pharmacologically active S-warfarin. Poor metabolizers accumulate higher levels. VKORC1 encodes the warfarin target enzyme — certain variants reduce expression, increasing sensitivity. Together, CYP2C9 and VKORC1 variants explain ~35–50% of warfarin dose variance.'
+    },
+    {
+      stem: 'A patient with CYP2D6 poor metabolizer status is prescribed codeine for pain. What is the primary concern?',
+      choices: ['Inadequate analgesia — codeine cannot be converted to active morphine', 'Opioid toxicity — codeine accumulates to toxic levels', 'No concern — CYP2D6 does not affect codeine metabolism', 'Serotonin syndrome — CYP2D6 affects serotonin reuptake inhibition'],
+      correct: 0,
+      explanation: 'Codeine is a prodrug requiring CYP2D6 conversion to morphine for analgesic effect. Poor metabolizers cannot make this conversion — codeine is essentially inactive for them. Conversely, ultrarapid metabolizers convert codeine too quickly, risking opioid toxicity (including fatal cases in children and breastfeeding mothers).'
+    },
+    {
+      stem: 'Which gene variant is most clinically actionable regarding clopidogrel (Plavix) use in cardiology?',
+      choices: ['CYP2C19 *2 or *3 (loss-of-function alleles) — impaired clopidogrel activation', 'CYP3A4 *1B — altered statin metabolism', 'SLCO1B1 variant — increased myopathy risk with statins', 'TPMT deficiency — risk of thiopurine toxicity'],
+      correct: 0,
+      explanation: 'CYP2C19 activates clopidogrel to its active thiol metabolite. Loss-of-function alleles (*2, *3) reduce platelet inhibition, increasing MACE risk after PCI. ~30% of patients carry at least one LOF allele. CPIC guidelines recommend alternative antiplatelet therapy (ticagrelor or prasugrel) for CYP2C19 poor/intermediate metabolizers post-ACS/PCI.'
+    }
+  ],
+
+  mechanism: {
+    title: 'The CYP450 System and Pharmacogenomic Variation',
+    overview: 'The cytochrome P450 (CYP) enzyme family metabolizes approximately 70–80% of commonly prescribed medications. Genetic variants in CYP genes create a spectrum of metabolizer phenotypes — from poor to ultrarapid — that can dramatically alter drug efficacy and toxicity.',
+    sections: [
+      {
+        heading: 'CYP450 Enzyme Families and Key Drugs',
+        content: 'The clinically most important CYP enzymes for pharmacogenomics are CYP2D6, CYP2C19, CYP2C9, and CYP3A4/5. Each enzyme is encoded by a gene with multiple variant alleles (starred alleles: *1, *2, *3, etc.). Some variants reduce enzyme activity; others increase it. Together these explain a large portion of inter-individual drug response variation.',
+        keyPoints: [
+          'CYP2D6: codeine, tamoxifen, many antidepressants and antipsychotics, beta-blockers',
+          'CYP2C19: clopidogrel, PPIs (omeprazole), SSRIs, voriconazole',
+          'CYP2C9: warfarin (S-enantiomer), NSAIDs, phenytoin, sulfonylureas',
+          'CYP3A4/5: statins, calcium channel blockers, tacrolimus, many opioids'
+        ]
+      },
+      {
+        heading: 'Metabolizer Phenotype Spectrum',
+        content: 'Each patient has two CYP alleles (one from each parent). The combination determines their metabolizer phenotype. This spectrum directly determines drug exposure (AUC) for substrates of that enzyme — poor metabolizers accumulate parent drug; ultrarapid metabolizers clear it rapidly.',
+        keyPoints: [
+          'Poor Metabolizer (PM): two loss-of-function alleles — high drug exposure, toxicity risk for parent drugs; no activation of prodrugs',
+          'Intermediate Metabolizer (IM): one functional + one reduced-function allele — mildly increased exposure',
+          'Normal/Extensive Metabolizer (NM/EM): standard activity — standard dosing applies',
+          'Ultrarapid Metabolizer (UM): gene duplication or gain-of-function — rapid clearance of parent drug; excessive prodrug activation'
+        ]
+      },
+      {
+        heading: 'The Warfarin Pharmacogenomics Model',
+        content: 'Warfarin is the canonical pharmacogenomic drug because three genes together explain most of its dose variability. CYP2C9 metabolizes S-warfarin (the active enantiomer) — poor metabolizers need lower doses. VKORC1 encodes vitamin K epoxide reductase (the warfarin target) — low-expression variants increase sensitivity. CYP4F2 affects vitamin K availability. Algorithms incorporating genotype + clinical factors can predict stable warfarin dose with >50% accuracy improvement over clinical factors alone.',
+        keyPoints: [
+          'CYP2C9 *1/*1 (normal): standard dosing; CYP2C9 *2/*2 or *3/*3: reduce dose 25–75%',
+          'VKORC1 -1639G>A: AA genotype requires ~40% less warfarin than GG genotype',
+          'FDA label updated to recommend CYP2C9/VKORC1 testing before initiation',
+          'EU Warfarin Pharmacogenetics Consortium algorithm available at warfarindosing.org'
+        ]
+      }
+    ],
+    pathway: [
+      'Patient prescribed drug → drug absorbed and enters systemic circulation',
+      'CYP450 enzyme (determined by patient\'s genotype) metabolizes the drug',
+      'Poor metabolizer: enzyme activity reduced → drug accumulates → toxicity OR prodrug inactive → no effect',
+      'Ultrarapid metabolizer: enzyme overactive → drug cleared rapidly → no effect OR prodrug over-activated → toxicity',
+      'Normal metabolizer: standard exposure → expected therapeutic response',
+      'Genotype-guided dosing adjusts dose or selects alternative drug to achieve target exposure'
+    ]
+  },
+
+  patient: {
+    stats: [
+      { label: 'Patient', value: 'Robert K., 61M' },
+      { label: 'Setting', value: 'Cardiology Clinic' },
+      { label: 'Recent Event', value: 'NSTEMI, PCI with DES' },
+      { label: 'Discharge Rx', value: 'Clopidogrel 75mg + ASA' },
+      { label: 'INR (on warfarin)', value: '9.2 at 2 weeks' },
+      { label: 'Ancestry', value: 'East Asian (Korean)' }
+    ],
+    vignette: `Robert is a 61-year-old Korean American man presenting for cardiology follow-up 3 weeks after <span class="hl">NSTEMI treated with PCI and drug-eluting stent</span> placement. He was discharged on <span class="hl">clopidogrel 75mg daily + aspirin 81mg</span> for dual antiplatelet therapy, plus warfarin for paroxysmal atrial fibrillation. At his 2-week visit, his INR is <span class="flag">9.2</span> despite no dietary changes, no new medications, and no herbal supplements. He also reports that the cardiologist at discharge mentioned something about "a blood test that tells how drugs work differently in different people" but he never had it done. His sister, also on clopidogrel after her own heart stent, had a stent thrombosis 6 months after her procedure despite reported compliance.`
+  },
+
+  caseQuestions: [
+    {
+      stem: "Robert's INR is 9.2 on a standard warfarin initiation dose. Before changing the dose, you want to understand the pharmacogenomic basis. Which genetic variants most likely explain his supratherapeutic INR?",
+      choices: [
+        'CYP1A2 rapid metabolizer — caffeine interaction elevates warfarin levels',
+        'CYP2C9 *3/*3 poor metabolizer AND VKORC1 AA genotype — combined variants cause extreme warfarin sensitivity',
+        'MDR1 (ABCB1) variant — reduced drug efflux increases warfarin absorption',
+        'Factor V Leiden — thrombophilia paradoxically increases anticoagulation response'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Correct — and critically, this is a genotype combination more common in East Asian populations. CYP2C9 *3 allele frequency is higher in Asians than Europeans. Combined with VKORC1 AA genotype (also more prevalent in Asians, associated with ~40% lower warfarin dose requirements), Robert\'s pharmacogenomic profile likely explains his INR of 9.2. CPIC guidelines specifically note that Asian patients often require substantially lower warfarin doses.',
+        wrong: 'The primary pharmacogenomic drivers of warfarin sensitivity are CYP2C9 (metabolizes active S-warfarin) and VKORC1 (encodes the warfarin target enzyme). CYP2C9 *3 poor metabolizers accumulate S-warfarin; VKORC1 AA genotype reduces enzyme expression increasing sensitivity. Both variants are more prevalent in East Asian populations — explaining why Asian patients typically require 30–50% lower warfarin doses than European patients.'
+      },
+      pearls: [
+        'VKORC1 -1639 AA genotype: ~3-fold more common in East Asians vs Europeans — explains lower average warfarin dose requirements in Asian patients',
+        'CYP2C9 *3 allele: more prevalent in South and East Asians — substantially impairs S-warfarin metabolism',
+        'Average stable warfarin dose: Europeans ~5mg/day; East Asians ~3mg/day — pharmacogenomics explains much of this difference',
+        'FDA black box: recommends lower initial doses for patients of Asian ancestry'
+      ]
+    },
+    {
+      stem: 'You send a CPIC pharmacogenomic panel. Results: CYP2C9 *1/*3 (intermediate metabolizer), VKORC1 -1639 G/A (heterozygous). What warfarin dose adjustment does this suggest?',
+      choices: [
+        'Increase the dose — intermediate metabolizer means faster clearance',
+        'Reduce estimated dose by approximately 25-30% from standard algorithm prediction',
+        'No adjustment needed — heterozygous variants rarely have clinical impact',
+        'Discontinue warfarin entirely — genotype predicts unacceptable bleeding risk'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'CPIC warfarin guidelines: CYP2C9 *1/*3 = intermediate metabolizer (reduce dose ~25% from CYP2C9 *1/*1 estimate). VKORC1 G/A heterozygous = intermediate sensitivity (dose between GG and AA). Combined, these variants suggest a dose approximately 25-35% lower than a standard CYP2C9 *1/*1 + VKORC1 GG patient. Use the validated dosing algorithm at warfarindosing.org incorporating both genotype and clinical factors for the most accurate estimate.',
+        wrong: 'CYP2C9 *1/*3 = intermediate metabolizer — impaired S-warfarin clearance means drug accumulates more than in normal metabolizers. Dose should be reduced, not maintained or increased. VKORC1 G/A heterozygous = intermediate VKORC1 expression. Both variants point toward lower dose requirements. CPIC recommends using the pharmacogenomic dosing algorithm for precise calculation.'
+      },
+      pearls: [
+        'CPIC warfarin algorithm: www.warfarindosing.org — incorporates CYP2C9, VKORC1, CYP4F2, clinical factors',
+        'CYP2C9 *1/*2: reduce dose ~15-20%; *1/*3: reduce ~25-30%; *2/*3 or *3/*3: reduce 40-75%',
+        'VKORC1 AA vs GG: ~40% lower dose required; GA intermediate',
+        'Even with genotyping, close INR monitoring during initiation remains essential'
+      ]
+    },
+    {
+      stem: "Robert's sister had stent thrombosis 6 months after her PCI while reportedly compliant with clopidogrel. Robert is on the same drug. What pharmacogenomic test and concern is most relevant here?",
+      choices: [
+        'CYP2D6 testing — rapid metabolizers eliminate clopidogrel too quickly',
+        'CYP2C19 loss-of-function variant testing — impaired clopidogrel activation leaves platelets uninhibited',
+        'P2Y12 receptor polymorphism — direct receptor resistance to clopidogrel',
+        'ABCB1 testing — drug efflux reduces clopidogrel intestinal absorption'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'This is the most clinically urgent pharmacogenomic issue in this case. Clopidogrel is a prodrug requiring CYP2C19 activation to its active thiol metabolite. CYP2C19 *2 and *3 (loss-of-function alleles) impair this activation — poor/intermediate metabolizers have reduced platelet inhibition, documented higher rates of stent thrombosis and MACE post-PCI. CYP2C19 *2 allele frequency is ~15% in Europeans but ~29-35% in East Asians — Robert\'s sister\'s stent thrombosis is highly suspicious for CYP2C19 poor metabolizer status.',
+        wrong: 'CYP2C19 activates clopidogrel. Loss-of-function alleles (*2, *3) are common — especially in East Asian populations where *2 allele frequency is ~29-35% (vs ~15% in Europeans). Poor/intermediate metabolizers have substantially reduced active drug levels and higher rates of stent thrombosis. The FDA added a black box warning in 2010. The sister\'s stent thrombosis while "compliant" is a red flag for CYP2C19 poor metabolizer status in the family.'
+      },
+      pearls: [
+        'CYP2C19 *2 allele frequency: ~15% Europeans, ~29-35% East Asians — higher risk population for clopidogrel failure',
+        'FDA black box (2010): "Poor metabolizers may not receive adequate treatment with clopidogrel" — test if available',
+        'CPIC recommendation: CYP2C19 poor/intermediate metabolizers post-ACS/PCI → use ticagrelor or prasugrel instead',
+        'Ticagrelor and prasugrel do NOT require CYP2C19 activation — directly active, unaffected by this variant'
+      ]
+    },
+    {
+      stem: "CYP2C19 testing returns: Robert is *2/*2 (poor metabolizer). He currently has a drug-eluting stent placed 3 weeks ago. What is the most evidence-based recommendation?",
+      choices: [
+        'Increase clopidogrel dose to 150mg daily — higher dose overcomes the metabolic deficiency',
+        'Switch to ticagrelor or prasugrel — these antiplatelet agents do not require CYP2C19 activation',
+        'Add a PPI (omeprazole) to the regimen — this enhances clopidogrel absorption',
+        'Continue clopidogrel — the evidence for genotype-guided therapy is insufficient to change treatment'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'CPIC Level A recommendation: for CYP2C19 poor metabolizers with ACS/PCI, prescribe ticagrelor or prasugrel as alternatives to clopidogrel. These drugs are directly active — no CYP2C19 activation required. Importantly, higher clopidogrel doses do NOT reliably overcome the pharmacogenomic deficiency. Note: omeprazole (also a CYP2C19 substrate) can further reduce clopidogrel activation — avoid in poor metabolizers; use pantoprazole instead if a PPI is needed.',
+        wrong: 'CPIC guidelines are clear: CYP2C19 poor metabolizers with ACS/PCI should receive ticagrelor or prasugrel — not higher-dose clopidogrel. Higher doses do not reliably compensate for absent CYP2C19 activity. Ticagrelor is directly active (not a prodrug); prasugrel uses CYP3A4/CYP2B6 (not CYP2C19) for partial activation. Both provide superior platelet inhibition in poor metabolizers compared to any clopidogrel dose.'
+      },
+      pearls: [
+        'CPIC Level A (highest evidence): CYP2C19 PM + ACS/PCI → ticagrelor or prasugrel (not clopidogrel at any dose)',
+        'Omeprazole + clopidogrel: double problem in CYP2C19 PMs — both compete for residual CYP2C19 activity; use pantoprazole',
+        'Prasugrel contraindicated: prior stroke/TIA, active pathological bleeding, age ≥75 or weight <60kg — check before prescribing',
+        'TRITON-TIMI 38 (prasugrel) and PLATO (ticagrelor) trials both showed superiority over clopidogrel in high-risk ACS'
+      ]
+    },
+    {
+      stem: 'Robert also takes metoprolol for rate control. His new cardiologist notes he gets "very bradycardic" on his usual dose. CYP2D6 testing shows he is a poor metabolizer. What does this mean for his metoprolol?',
+      choices: [
+        'Metoprolol is not metabolized by CYP2D6 — this is unrelated to his bradycardia',
+        'As a CYP2D6 PM, Robert accumulates metoprolol — dose reduction to 25-50% may be needed',
+        'CYP2D6 PM status means metoprolol is ineffective — switch to atenolol',
+        'CYP2D6 PM status increases the risk of metoprolol-induced QT prolongation'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Metoprolol is extensively metabolized by CYP2D6. Poor metabolizers have 3-5 fold higher metoprolol AUC compared to normal metabolizers at the same dose — resulting in excessive beta-blockade, bradycardia, hypotension, and fatigue. CPIC recommends 25-50% dose reduction for CYP2D6 poor metabolizers prescribed metoprolol (or propranolol, carvedilol). This is a commonly missed pharmacogenomic interaction in cardiology.',
+        wrong: 'Metoprolol is a major CYP2D6 substrate. Poor metabolizers have markedly elevated metoprolol exposure — the bradycardia Robert experiences is pharmacogenomically explained. CPIC recommends dose reduction for CYP2D6 PMs. Other beta-blockers less dependent on CYP2D6 (e.g., bisoprolol, atenolol — primarily renal excretion) may be preferable alternatives if dose reduction is insufficient.'
+      },
+      pearls: [
+        'CYP2D6 PM + metoprolol: 3-5x higher AUC → bradycardia, hypotension, fatigue at standard doses',
+        'CPIC: reduce metoprolol dose by 50% in CYP2D6 PMs; consider atenolol or bisoprolol (not CYP2D6 substrates)',
+        'CYP2D6 also metabolizes: tamoxifen (activation), many SSRIs/TCAs, propranolol, carvedilol, opioids',
+        '~7-10% of Europeans are CYP2D6 poor metabolizers (autosomal recessive, two LOF alleles)'
+      ]
+    },
+    {
+      stem: "Robert's daughter, age 28, is breastfeeding her newborn. She asks about using codeine for pain after a dental procedure. Her CYP2D6 genotype is unknown. What is the safest recommendation?",
+      choices: [
+        'Codeine is safe in breastfeeding — the dose that reaches the infant is too small to cause harm',
+        'Avoid codeine entirely in breastfeeding mothers — use ibuprofen or acetaminophen instead',
+        'Check her CYP2D6 genotype first — only prescribe codeine if she is a normal metabolizer',
+        'Codeine at half the usual dose is acceptable — reduces infant exposure while providing analgesia'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Codeine is absolutely contraindicated in breastfeeding. This is not theoretical — multiple infant deaths have been reported from maternal CYP2D6 ultrarapid metabolizer status. Mothers who are UMs convert codeine to morphine at excessive rates; morphine concentrates in breast milk; infants, who cannot metabolize morphine well, accumulate toxic levels. The FDA issued a black box warning in 2017: codeine and tramadol are contraindicated in breastfeeding. Use ibuprofen or acetaminophen for dental pain.',
+        wrong: 'Codeine is contraindicated in breastfeeding — FDA black box warning (2017). Infant deaths have occurred when breastfeeding mothers were CYP2D6 ultrarapid metabolizers. Even without genotyping, the risk is unacceptable because the prevalence of UM status is uncertain and infant CYP2D6 maturation is incomplete. Safe alternatives: ibuprofen or acetaminophen. This applies to tramadol as well (also CYP2D6-dependent).'
+      },
+      pearls: [
+        'FDA black box (2017): codeine and tramadol CONTRAINDICATED in breastfeeding mothers and in children under 12',
+        'CYP2D6 ultrarapid metabolizers: ~1-2% Europeans, ~3-4% East Africans — higher morphine production from codeine',
+        'Infant deaths reported from morphine toxicity in breastfed infants of UM mothers given codeine',
+        'Safe alternatives for dental pain in breastfeeding: ibuprofen 400-600mg TID, acetaminophen 650-1000mg Q6H'
+      ]
+    },
+    {
+      stem: 'A pharmacogenomic panel shows Robert also has SLCO1B1 c.521T>C (rs4149056) variant — heterozygous. He is being started on atorvastatin 80mg for his ACS. What is the clinical relevance?',
+      choices: [
+        'SLCO1B1 variant reduces statin efficacy — a higher dose is needed',
+        'SLCO1B1 variant impairs hepatic statin uptake — increased plasma statin levels → higher myopathy risk',
+        'SLCO1B1 variant accelerates statin metabolism — consider rosuvastatin instead',
+        'SLCO1B1 has no clinical significance for atorvastatin — only simvastatin is affected'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'SLCO1B1 encodes OATP1B1, a hepatic uptake transporter for statins. The c.521T>C variant (rs4149056) reduces transporter function, impairing hepatic statin uptake and increasing plasma statin concentrations — dramatically raising myopathy risk. This is most pronounced with simvastatin (CPIC Level A recommendation) but also relevant for atorvastatin and lovastatin. For the heterozygous genotype, CPIC recommends caution with high-dose simvastatin; atorvastatin and rosuvastatin are less affected and may be preferable.',
+        wrong: 'SLCO1B1 encodes the OATP1B1 hepatic uptake transporter. Loss-of-function variant (c.521T>C) reduces hepatic statin entry, increases plasma levels, and raises myopathy risk. CPIC Level A: SLCO1B1 poor function → avoid simvastatin ≥40mg; use rosuvastatin or pravastatin (less SLCO1B1-dependent) for high myopathy risk patients. Atorvastatin is intermediate risk. Importantly, this variant explains much of the statin myopathy seen in clinical practice.'
+      },
+      pearls: [
+        'SLCO1B1 c.521T>C: ~15% Europeans, ~2% East Asians are homozygous — heterozygous more common',
+        'CPIC Level A for simvastatin: poor SLCO1B1 function → prescribe ≤20mg or switch to rosuvastatin/pravastatin',
+        'Atorvastatin: moderate SLCO1B1 effect; rosuvastatin: lower SLCO1B1 dependence — often preferred in carriers',
+        'SEARCH Collaborative Group 2008 NEJM: SLCO1B1 rs4149056 associated with ~4.5x myopathy risk per copy'
+      ]
+    },
+    {
+      stem: 'Robert asks: "Should everyone get pharmacogenomic testing before starting medications?" What is the most balanced, evidence-based response in 2025?',
+      choices: [
+        'Yes — pre-emptive genotyping of all patients before any prescribing is the current standard of care',
+        'Targeted pre-emptive testing is supported for specific high-risk drug-gene pairs; population-wide testing is increasingly available and endorsed by some health systems',
+        'No — pharmacogenomic testing should only be ordered reactively, after an adverse drug reaction occurs',
+        'No — pharmacogenomic results are too complex to act on and should only be interpreted by clinical pharmacologists'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'The landscape has shifted substantially. Pre-emptive pharmacogenomic testing (testing before the drug is prescribed, storing results for future prescribing decisions) is now endorsed by CPIC, PharmGKB, and multiple health systems. The RIGHT-10K trial and Vanderbilt\'s PREDICT program showed clinical benefit and cost-effectiveness of pre-emptive panel testing. Major insurers are beginning to cover targeted panels. The 2025 reality: testing is appropriate when prescribing high-risk drug-gene pairs, and pre-emptive panel testing is increasingly standard at academic medical centers.',
+        wrong: 'Pre-emptive pharmacogenomic testing is now evidence-supported and increasingly available. CPIC provides actionable guidelines for >40 drug-gene pairs. Multiple health systems (Vanderbilt PREDICT, Mayo RIGHT program) have implemented pre-emptive genotyping with demonstrated clinical benefit. Testing before adverse events occur — rather than waiting for reactions — is the emerging standard for high-risk drug-gene combinations.'
+      },
+      pearls: [
+        'CPIC (cpicpgx.org): free, evidence-based guidelines for >40 actionable drug-gene pairs — the clinical reference',
+        'Pre-emptive panel testing: genotype stored, results available at future prescribing decisions — most cost-effective model',
+        'FDA Table of Pharmacogenomic Biomarkers: >200 drugs with PGx information in labeling',
+        'PharmGKB (pharmgkb.org): curated knowledge base for drug-gene relationships — free, open access'
+      ]
+    },
+    {
+      stem: 'What is the correct interpretation of a pharmacogenomic result showing CYP2D6 *1/*1xN (gene duplication)?',
+      choices: [
+        'Poor metabolizer — gene duplication reduces enzyme activity through gene silencing',
+        'Ultrarapid metabolizer — multiple gene copies produce excess CYP2D6 enzyme activity',
+        'Normal metabolizer — gene duplications cancel out and result in standard activity',
+        'Intermediate metabolizer — additional copies create interference with transcription'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Gene duplication (*1xN notation) means the patient has more than 2 copies of the CYP2D6 gene — producing excess enzyme activity. This is the ultrarapid metabolizer (UM) phenotype. Clinical implications: (1) prodrugs like codeine are converted too rapidly → excess active drug → toxicity; (2) parent drugs are cleared too quickly → subtherapeutic levels → treatment failure. UMs need higher doses of parent drugs or alternative medications for prodrug safety. CYP2D6 gene duplication is most common in North African and Middle Eastern populations (~5-10%).',
+        wrong: 'Gene duplication (*xN) = extra gene copies = excess enzyme = ultrarapid metabolizer. More enzyme means faster metabolism. For parent drugs (metoprolol, antidepressants): rapid clearance → subtherapeutic levels. For prodrugs (codeine, tamoxifen): rapid conversion → excess active drug → toxicity. This is the opposite of poor metabolizer. Gene duplications are most prevalent in North African populations.'
+      },
+      pearls: [
+        'CYP2D6 *xN notation: gene duplication/multiplication — always ultrarapid metabolizer regardless of base allele',
+        'UM prevalence: ~1-2% Europeans, ~5-10% North Africans, ~29% Ethiopians',
+        'Tamoxifen + CYP2D6 UM: excess conversion to endoxifen may paradoxically reduce efficacy (mechanism debated)',
+        'UMs on antidepressants: subtherapeutic levels common — misdiagnosed as treatment-resistant depression'
+      ]
+    },
+    {
+      stem: 'Final integration: Robert is now stabilized on ticagrelor (for his DES), reduced-dose warfarin (per CYP2C9/VKORC1 genotype), and reduced-dose metoprolol (per CYP2D6 genotype). His daughter avoids codeine while breastfeeding. What is the single most important thing to document in his chart?',
+      choices: [
+        'The specific drug doses chosen — so other providers know what he is currently taking',
+        'His pharmacogenomic results with specific actionable implications — so future prescribers across all settings can apply them',
+        'A note that he has "unusual drug reactions" — a general alert is sufficient',
+        'Referral to clinical pharmacology for all future prescribing decisions'
+      ],
+      correct: 1,
+      feedback: {
+        correct: 'Pharmacogenomic results are permanent — a patient\'s genotype does not change. The critical documentation task is recording the specific genotype results AND the clinical implications in a standardized, structured way that future prescribers can find and act on. This means: CYP2C19 *2/*2 PM → avoid clopidogrel; CYP2D6 PM → reduce metoprolol/avoid codeine; CYP2C9 *1/*3 IM → reduce warfarin. Many health systems now have PGx result flags that appear automatically at prescribing. If yours does not, a prominent problem list notation is the minimum.',
+        wrong: 'Pharmacogenomic results are lifelong and should be documented as permanent, structured clinical information. Unlike a drug reaction note, a specific genotype result tells future prescribers exactly what to avoid and what to adjust — forever. The ideal is integration into the EHR as clinical decision support that fires at relevant prescribing moments. At minimum, document: gene, alleles, phenotype, and actionable implications in a structured, searchable field.'
+      },
+      pearls: [
+        'Pharmacogenomic results are permanent — document once, applicable for life across all future prescribing',
+        'HL7 FHIR Genomics standard: enables structured PGx result transmission across health systems',
+        'EHR integration of PGx CDS: alerts fire at point of prescribing — Vanderbilt PREDICT, Mayo RIGHT models',
+        'Patients should carry their PGx results on a card or in a health app — especially for emergency situations'
+      ]
+    }
+  ],
+
+  references: [
+    {
+      type: 'CPIC',
+      source: 'CPIC Guidelines (cpicpgx.org)',
+      title: 'CPIC Guideline for CYP2C19 and Clopidogrel Therapy — Level A Evidence',
+      url: 'https://cpicpgx.org/guidelines/guideline-for-clopidogrel-and-cyp2c19/'
+    },
+    {
+      type: 'CPIC',
+      source: 'CPIC Guidelines (cpicpgx.org)',
+      title: 'CPIC Guideline for Warfarin Therapy and CYP2C9, VKORC1, CYP4F2, and CYP2C Haplotype',
+      url: 'https://cpicpgx.org/guidelines/guideline-for-warfarin-and-cyp2c9-and-vkorc1/'
+    },
+    {
+      type: 'ACMG',
+      source: 'ACMG',
+      title: 'ACMG Statement: Pharmacogenomic Clinical Decision Support: A Resource Guide for Clinicians',
+      doi: '10.1038/gim.2015.75'
+    },
+    {
+      type: 'journal',
+      source: 'NEJM',
+      title: 'Statin Myopathy and the SLCO1B1 Variant — SEARCH Collaborative Group',
+      doi: '10.1056/NEJMoa0801936'
+    },
+    {
+      type: 'journal',
+      source: 'NEJM / PLATO Trial',
+      title: 'Ticagrelor versus Clopidogrel in Patients with Acute Coronary Syndromes',
+      doi: '10.1056/NEJMoa0904327'
+    },
+    {
+      type: 'StatPearls',
+      source: 'StatPearls — NCBI',
+      title: 'Pharmacogenomics — StatPearls',
+      url: 'https://www.ncbi.nlm.nih.gov/books/NBK519965/'
+    },
+    {
+      type: 'ClinVar',
+      source: 'ClinVar — NCBI',
+      title: 'ClinVar: public archive of relationships between genomic variation and human health',
+      url: 'https://www.ncbi.nlm.nih.gov/clinvar/'
+    },
+    {
+      type: 'journal',
+      source: 'NEJM',
+      title: 'RIGHT-10K: Preemptive Pharmacogenomics Testing across 10 Drugs — Mayo Clinic RIGHT Program',
+      doi: '10.1056/NEJMoa2109022'
+    }
+  ]
+};
+
+initCME(MODULE);
+</script>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>
