@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vision — ReasonDx</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#070d14;color:#fff;font-family:var(--rdx-font-sans);overflow-x:hidden}
+
+/* ── SCROLL NARRATIVE ── */
+.narrative{max-width:820px;margin:0 auto;padding:0 32px 120px}
+
+/* ── BEAT SECTIONS ── */
+.beat{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0;position:relative;opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.beat.visible{opacity:1;transform:translateY(0)}
+.beat-number{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(133,193,233,.4);margin-bottom:20px}
+.beat-title{font-family:var(--rdx-font-serif);font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;margin-bottom:24px;letter-spacing:-.02em}
+.beat-body{font-size:clamp(.95rem,1.5vw,1.1rem);line-height:1.85;color:rgba(255,255,255,.6);max-width:620px;margin-bottom:32px}
+.beat-body strong{color:#fff;font-weight:600}
+.beat-body em{color:var(--rdx-ocean-mid);font-style:normal}
+
+/* ── DIVIDER ── */
+.beat-divider{width:40px;height:2px;background:rgba(133,193,233,.3);margin-bottom:28px}
+
+/* ── STAT CALLOUTS ── */
+.stat-row{display:flex;gap:32px;flex-wrap:wrap;margin:32px 0}
+.stat-item{}
+.stat-num{font-family:var(--rdx-font-serif);font-size:2.6rem;color:#fff;line-height:1;margin-bottom:4px}
+.stat-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35)}
+
+/* ── QUOTE ── */
+.pull-quote{border-left:2px solid rgba(133,193,233,.4);padding:18px 24px;margin:32px 0;font-size:1.05rem;font-style:italic;color:rgba(255,255,255,.7);line-height:1.7}
+.pull-quote cite{font-style:normal;font-size:.75rem;color:rgba(255,255,255,.3);display:block;margin-top:8px}
+
+/* ── FLOW DIAGRAM ── */
+.flow{display:flex;flex-direction:column;gap:0;margin:36px 0}
+.flow-step{display:flex;gap:20px;align-items:flex-start;position:relative}
+.flow-step::after{content:'';position:absolute;left:19px;top:44px;width:2px;height:calc(100% - 20px);background:linear-gradient(180deg,rgba(133,193,233,.3),rgba(133,193,233,.05))}
+.flow-step:last-child::after{display:none}
+.flow-node{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;border:1.5px solid;z-index:1;background:#070d14}
+.flow-content{padding:0 0 40px}
+.flow-title{font-size:.95rem;font-weight:700;margin-bottom:6px}
+.flow-desc{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6}
+.flow-gap{background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.3);border-radius:var(--rdx-radius);padding:12px 16px;margin-top:10px;font-size:.82rem;color:#f87171;line-height:1.5}
+.flow-gap::before{content:'⚠ Gap: ';font-weight:700}
+
+/* ── GENA INTEGRATION BOX ── */
+.gena-box{background:linear-gradient(135deg,rgba(40,116,166,.12),rgba(107,40,166,.08));border:1px solid rgba(133,193,233,.2);border-radius:var(--rdx-radius-lg);padding:28px 32px;margin:32px 0}
+.gena-box-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--rdx-ocean-mid);margin-bottom:12px}
+.gena-box-title{font-family:var(--rdx-font-serif);font-size:1.3rem;color:#fff;margin-bottom:10px}
+.gena-box-body{font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.7}
+.gena-data-row{display:flex;gap:24px;margin-top:20px;flex-wrap:wrap}
+.gena-datum{text-align:center}
+.gena-num{font-family:var(--rdx-font-serif);font-size:1.6rem;color:var(--rdx-ocean-mid);line-height:1;margin-bottom:3px}
+.gena-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.3)}
+
+/* ── TIER CARDS ── */
+.tier-stack{display:flex;flex-direction:column;gap:12px;margin:32px 0}
+.tier-card{border-radius:var(--rdx-radius-md);padding:22px 26px;border:1px solid;position:relative;overflow:hidden;cursor:pointer;transition:all .2s}
+.tier-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.tier-1{background:rgba(40,116,166,.08);border-color:rgba(40,116,166,.25)}
+.tier-1::before{background:var(--rdx-ocean)}
+.tier-2{background:rgba(107,40,166,.08);border-color:rgba(107,40,166,.25)}
+.tier-2::before{background:#6b28a6}
+.tier-3{background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.3)}
+.tier-3::before{background:#a855f7}
+.tier-tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.tier-1 .tier-tag{color:var(--rdx-ocean-mid)}
+.tier-2 .tier-tag{color:#a78bfa}
+.tier-3 .tier-tag{color:#c084fc}
+.tier-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px}
+.tier-desc{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:12px}
+.tier-example{font-size:.8rem;color:rgba(255,255,255,.35);font-style:italic;padding:8px 12px;background:rgba(255,255,255,.04);border-radius:6px;line-height:1.5}
+.tier-source{font-size:.72rem;font-weight:600;margin-top:8px}
+.tier-1 .tier-source{color:rgba(133,193,233,.5)}
+.tier-2 .tier-source{color:rgba(167,139,250,.5)}
+.tier-3 .tier-source{color:rgba(192,132,252,.5)}
+
+/* ── SHOAH CONNECTION ── */
+.shoah-connection{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--rdx-radius-lg);padding:28px 32px;margin:32px 0}
+.shoah-split{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
+.shoah-col{}
+.shoah-col-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.shoah-col:first-child .shoah-col-label{color:rgba(255,255,255,.4)}
+.shoah-col:last-child .shoah-col-label{color:var(--rdx-ocean-mid)}
+.shoah-item{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.5;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:8px}
+.shoah-item:last-child{border-bottom:none}
+.shoah-item::before{content:'→';color:rgba(255,255,255,.2);flex-shrink:0}
+.shoah-col:last-child .shoah-item::before{content:'→';color:var(--rdx-ocean-mid);opacity:.6}
+
+/* ── THE LOOP ── */
+.loop-diagram{margin:32px 0;position:relative}
+.loop-ring{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.loop-node{border-radius:var(--rdx-radius-md);padding:18px 20px;border:1px solid;text-align:center}
+.loop-node.gena{background:rgba(40,116,166,.1);border-color:rgba(40,116,166,.3)}
+.loop-node.reason{background:rgba(107,40,166,.1);border-color:rgba(107,40,166,.3)}
+.loop-node.legacy{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.3)}
+.loop-node.outcome{background:rgba(20,143,119,.1);border-color:rgba(20,143,119,.3)}
+.loop-node-icon{font-size:1.4rem;margin-bottom:8px}
+.loop-node-title{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:4px}
+.loop-node-desc{font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.45}
+.loop-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.loop-center-text{font-family:var(--rdx-font-serif);font-size:.9rem;color:rgba(255,255,255,.25);text-align:center;background:#070d14;padding:10px 16px;border-radius:30px;border:1px solid rgba(255,255,255,.08)}
+
+/* ── CLOSING ── */
+.closing{text-align:center;padding:80px 0 40px}
+.closing-title{font-family:var(--rdx-font-serif);font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;line-height:1.2;margin-bottom:20px}
+.closing-title em{font-style:italic;color:var(--rdx-ocean-mid)}
+.closing-body{font-size:1rem;color:rgba(255,255,255,.5);line-height:1.8;max-width:560px;margin:0 auto 36px}
+.closing-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-hint{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;pointer-events:none;transition:opacity .5s}
+.scroll-hint::after{content:'↓';animation:bob 1.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+/* ── PROGRESS LINE ── */
+.progress-line{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rdx-ocean),#6b28a6,#a855f7);width:0%;transition:width .1s;z-index:100}
+
+@media(max-width:600px){
+  .narrative{padding:0 20px 80px}
+  .beat{padding:60px 0}
+  .shoah-split,.loop-ring{grid-template-columns:1fr}
+  .stat-row{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="progressLine"></div>
+<div class="scroll-hint" id="scrollHint">Scroll to explore</div>
+
+<div class="narrative">
+
+  <!-- ══ BEAT 1: THE GAP ══ -->
+  <div class="beat" id="beat1">
+    <div class="beat-number">The Problem</div>
+    <div class="beat-divider"></div>
+    <h2 class="beat-title">The gap is not<br>in the technology.</h2>
+    <p class="beat-body">
+      GENA can identify a rare genetic disease in <strong>10 seconds</strong> from a DNA sample and symptom data.
+      It tests against <strong>7,300 diseases simultaneously</strong> — something that used to take a geneticist three days.
+      <br><br>
+      The technology works. The problem is upstream.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(133,193,233,.4);color:var(--rdx-ocean-mid)">👶</div>
+        <div class="flow-content">
+          <div class="flow-title">Child presents to primary care</div>
+          <div class="flow-desc">Hypotonia. Oculogyric crises. Excessive sweating. Normal MRI. Normal EEG.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(192,57,43,.4);color:#f87171">🩺</div>
+        <div class="flow-content">
+          <div class="flow-title">Primary care physician doesn't recognize the pattern</div>
+          <div class="flow-desc">Diagnoses "probable cerebral palsy." Closes the chart.</div>
+          <div class="flow-gap">The physician wasn't trained to recognize this constellation. It's not in the two chapters of genetics they received in medical school.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(192,57,43,.4);color:#f87171">⏳</div>
+        <div class="flow-content">
+          <div class="flow-title">The odyssey begins</div>
+          <div class="flow-desc">Family sees neurologist. Developmental pediatrician. Another neurologist. All inconclusive.</div>
+          <div class="flow-gap">No genetic test is ever ordered — because no one recognized it as a genetic condition.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(230,126,34,.4);color:var(--rdx-accent)">🧬</div>
+        <div class="flow-content">
+          <div class="flow-title">Finally reaches a geneticist — 4.7 years later</div>
+          <div class="flow-desc">AADC deficiency diagnosed. Gene therapy exists. But years of development have already passed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-item"><div class="stat-num">4.7</div><div class="stat-label">Average years in diagnostic odyssey</div></div>
+      <div class="stat-item"><div class="stat-num">1,600</div><div class="stat-label">Geneticists in the US</div></div>
+      <div class="stat-item"><div class="stat-num">1M+</div><div class="stat-label">Primary care physicians who see these patients first</div></div>
+    </div>
+  </div>
+
+  <!-- ══ BEAT 2: WHAT PETE BUILT ══ -->
+  <div class="beat" id="beat2">
+    <div class="beat-number">What GENA Solves</div>
+    <div class="beat-divider"></div>
+    <h2 class="beat-title">GENA solves<br>the <em>back end.</em></h2>
+    <p class="beat-body">
+      Once the right question is asked — once someone suspects a genetic condition and orders a test —
+      GENA is extraordinary. It maps DNA results against the entire landscape of known genetic disease
+      in seconds. It turns a 3-day analysis into a 10-second result.
+      <br><br>
+      But GENA can only work on the patients who reach it.
+      <strong>Right now, most of them never do.</strong>
+    </p>
+
+    <div class="gena-box">
+      <div class="gena-box-label">🧬 GENA Platform — SIVOTEC BioInformatics</div>
+      <div class="gena-box-title">The world's most powerful rare disease diagnostic engine</div>
+      <div class="gena-box-body">GENA analyzes DNA samples and clinical symptoms against databases from Johns Hopkins, the NIH, and the world's leading genetic research institutions. It identifies potential diagnoses in seconds — accelerating analysis by more than 95%. The platform is now rolling out a symptom-only version that doesn't require DNA results: a physician describes the clinical picture and GENA returns a ranked differential.</div>
+      <div class="gena-data-row">
+        <div class="gena-datum"><div class="gena-num">162,000</div><div class="gena-label">Cases analyzed</div></div>
+        <div class="gena-datum"><div class="gena-num">40</div><div class="gena-label">Countries</div></div>
+        <div class="gena-datum"><div class="gena-num">7,300+</div><div class="gena-label">Diseases tested simultaneously</div></div>
+        <div class="gena-datum"><div class="gena-num">&gt;95%</div><div class="gena-label">Faster analysis</div></div>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      "Genetics are the architecture of the body, yet it is a science that very few physicians know much about — it's typically about two chapters in the medical school biology course. We are using AI to bring the subject to the more than 1 million pediatricians, primary care physicians, and specialists in this country."
+      <cite>— Pete Martinez, Chairman & CEO, SIVOTEC BioInformatics</cite>
+    </div>
+  </div>
+
+  <!-- ══ BEAT 3: WHAT REASONDX BUILDS ══ -->
+  <div class="beat" id="beat3">
+    <div class="beat-number">What ReasonDx Builds</div>
+    <div class="beat-divider"></div>
+    <h2 class="beat-title">ReasonDx solves<br>the <em>front end.</em></h2>
+    <p class="beat-body">
+      Clinical reasoning education — built to teach primary care physicians, residents, and students
+      to <strong>recognize the pattern</strong> that triggers the genetic workup.
+      Not to replace the geneticist. Not to replace GENA.
+      <br><br>
+      To create the clinical suspicion that sends the patient to them.
+    </p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(40,116,166,.5);color:var(--rdx-ocean-mid)">🎓</div>
+        <div class="flow-content">
+          <div class="flow-title" style="color:var(--rdx-ocean-mid)">Physician trained on ReasonDx</div>
+          <div class="flow-desc">Has worked through cases of AADC deficiency, Angelman syndrome, HAE. Knows the constellations. Has the pattern in their mental file.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(40,116,166,.5);color:var(--rdx-ocean-mid)">👶</div>
+        <div class="flow-content">
+          <div class="flow-title" style="color:var(--rdx-ocean-mid)">Same child presents</div>
+          <div class="flow-desc">Hypotonia. Oculogyric crises. Excessive sweating. Normal MRI.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(20,143,119,.5);color:var(--rdx-info)">💡</div>
+        <div class="flow-content">
+          <div class="flow-title" style="color:var(--rdx-info)">Physician recognizes the pattern</div>
+          <div class="flow-desc">"This is a neurotransmitter disorder until proven otherwise. I need genetic testing."</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-node" style="border-color:rgba(20,143,119,.5);color:var(--rdx-info)">🧬</div>
+        <div class="flow-content">
+          <div class="flow-title" style="color:var(--rdx-info)">Test ordered. GENA analyzes. Diagnosis in days, not years.</div>
+          <div class="flow-desc">Child reaches gene therapy at an age where it changes everything.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="beat-body" style="margin-top:8px">
+      ReasonDx is the <strong>education infrastructure</strong> that makes GENA's technology accessible to the physicians who need it most — but were never taught to use it.
+    </p>
+  </div>
+
+  <!-- ══ BEAT 4: THE CEILING ══ -->
+  <div class="beat" id="beat4">
+    <div class="beat-number">The Ceiling</div>
+    <div class="beat-divider"></div>
+    <h2 class="beat-title">Textbook cases<br>have a <em>ceiling.</em></h2>
+    <p class="beat-body">
+      The foundation cases — the classic presentations, the textbook constellations — are essential.
+      You cannot recognize an atypical presentation if you've never seen the typical one.
+      <br><br>
+      But medicine's hardest problems don't present from the textbook.
+      The patient who had AADC but also had fevers that made the oculogyric crises
+      look like febrile seizures. The HAE patient who'd been on an ACE inhibitor for two years
+      and everyone assumed that was the cause. The Lynch syndrome family whose cancers spanned
+      four specialties and no one connected them.
+      <br><br>
+      <strong>These cases don't exist in any textbook. They exist only in the memory of the physicians who saw them.</strong>
+    </p>
+
+    <div class="tier-stack">
+      <div class="tier-card tier-1">
+        <div class="tier-tag">Tier 1 — Foundation</div>
+        <div class="tier-title">The textbook presentation</div>
+        <div class="tier-desc">Classic constellation. All the features present. Designed to build the pattern from scratch.</div>
+        <div class="tier-example">"A 4-month-old with hypotonia, oculogyric crises, excessive sweating, and normal MRI. What do you suspect?"</div>
+        <div class="tier-source">Source: Evidence-based literature, OMIM, GeneReviews</div>
+      </div>
+      <div class="tier-card tier-2">
+        <div class="tier-tag">Tier 2 — Advanced · From Physician Stories</div>
+        <div class="tier-title">The atypical presentation</div>
+        <div class="tier-desc">A real case, as it actually presented — with the misleading features, the red herrings, the two-year delay. Built from recorded physician testimony.</div>
+        <div class="tier-example">"She had AADC deficiency — but her oculogyric crises only happened during fevers. For 18 months, everyone treated it as febrile seizures. The EEG was mildly abnormal. Here's what finally made us look elsewhere."</div>
+        <div class="tier-source">Source: LegacyDx physician interview archive</div>
+      </div>
+      <div class="tier-card tier-3">
+        <div class="tier-tag">Tier 3 — Master · From GENA's Database</div>
+        <div class="tier-title">The case that stumped everyone</div>
+        <div class="tier-desc">Real phenotypic variation from 162,000 diagnosed cases across 40 countries. The cases where the pattern was buried. The presentations that only GENA had enough data to recognize.</div>
+        <div class="tier-example">"This patient's presentation matched 23 different diseases in our database. Here are the three features that separated the diagnosis. One of them isn't in any published case series."</div>
+        <div class="tier-source">Source: GENA case database · SIVOTEC BioInformatics</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BEAT 5: LEGACYDX ══ -->
+  <div class="beat" id="beat5">
+    <div class="beat-number">The Bridge</div>
+    <div class="beat-divider"></div>
+    <h2 class="beat-title">The wisdom that<br>isn't written down<br><em>deserves to survive.</em></h2>
+    <p class="beat-body">
+      In 2012, the USC Shoah Foundation began recording Holocaust survivors in such depth —
+      answering over 1,000 questions each — that people can have real conversations with them
+      long after they are gone. Not generated responses. <strong>Their actual words, preserved forever,
+      matched to your question in real time.</strong>
+      <br><br>
+      Medicine needs the same thing.
+    </p>
+
+    <div class="shoah-connection">
+      <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:16px">The Parallel</div>
+      <div class="shoah-split">
+        <div class="shoah-col">
+          <div class="shoah-col-label">Shoah Foundation preserved</div>
+          <div class="shoah-item">Survivor testimony — firsthand witness to history</div>
+          <div class="shoah-item">Stories that exist in no archive</div>
+          <div class="shoah-item">Pattern recognition built over a lifetime</div>
+          <div class="shoah-item">Wisdom that dies with its owner</div>
+          <div class="shoah-item">Preserved for future generations to learn from</div>
+        </div>
+        <div class="shoah-col">
+          <div class="shoah-col-label">LegacyDx preserves</div>
+          <div class="shoah-item">Physician testimony — firsthand witness to disease</div>
+          <div class="shoah-item">Cases that exist in no textbook</div>
+          <div class="shoah-item">Diagnostic intuition built over 30 years</div>
+          <div class="shoah-item">Clinical wisdom that retires with its owner</div>
+          <div class="shoah-item">Preserved for the next generation of diagnosticians</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="beat-body">
+      The physician interviews don't just create an archive.
+      They become the source material for <strong>Tier 2 cases</strong> —
+      real atypical presentations, built from real physician stories,
+      that challenge advanced learners in ways no textbook can.
+      <br><br>
+      The physician's recorded response <em>becomes the debrief.</em>
+      Not a feedback box. The actual physician, in their own words,
+      explaining what they were thinking when they saw this case.
+    </p>
+  </div>
+
+  <!-- ══ BEAT 6: THE LOOP ══ -->
+  <div class="beat" id="beat6">
+    <div class="beat-number">The Full Vision</div>
+    <div class="beat-divider"></div>
+    <h2 class="beat-title">A closed loop that<br><em>gets better forever.</em></h2>
+    <p class="beat-body">
+      When all three components connect, something remarkable happens.
+      The system doesn't just teach — it improves with every case diagnosed,
+      every physician recorded, every unusual presentation documented.
+    </p>
+
+    <div class="loop-diagram">
+      <div class="loop-ring">
+        <div class="loop-node gena">
+          <div class="loop-node-icon">🧬</div>
+          <div class="loop-node-title">GENA</div>
+          <div class="loop-node-desc">162,000 cases across 40 countries. Every unusual presentation. Every phenotypic variant. Every diagnostic delay — documented.</div>
+        </div>
+        <div class="loop-node reason">
+          <div class="loop-node-icon">🎓</div>
+          <div class="loop-node-title">ReasonDx</div>
+          <div class="loop-node-desc">The education layer. Tier 1 cases build foundations. Tier 2 cases from LegacyDx challenge advanced learners. Tier 3 cases from GENA's database create masters.</div>
+        </div>
+        <div class="loop-node legacy">
+          <div class="loop-node-icon">🎬</div>
+          <div class="loop-node-title">LegacyDx</div>
+          <div class="loop-node-desc">Physician interviews captured before they retire. Stories that aren't in any paper. Pattern recognition built over decades. The oral tradition — preserved.</div>
+        </div>
+        <div class="loop-node outcome">
+          <div class="loop-node-icon">👶</div>
+          <div class="loop-node-title">Earlier Diagnosis</div>
+          <div class="loop-node-desc">More physicians recognize more constellations. More patients reach GENA. The diagnostic odyssey shortens. Gene therapy reaches children who need it.</div>
+        </div>
+      </div>
+      <div class="loop-center">
+        <div class="loop-center-text">The loop<br>closes here</div>
+      </div>
+    </div>
+
+    <p class="beat-body" style="margin-top:8px">
+      GENA's unusual cases <strong>feed</strong> ReasonDx's hardest challenges.
+      ReasonDx trains physicians who <strong>order more tests</strong> and reach GENA earlier.
+      LegacyDx captures the wisdom that <strong>makes both better</strong> over time.
+      <br><br>
+      Each component makes the others more powerful.
+      The system compounds.
+    </p>
+  </div>
+
+  <!-- ══ CLOSING ══ -->
+  <div class="closing beat" id="beat7">
+    <div class="beat-divider" style="margin:0 auto 24px"></div>
+    <h2 class="closing-title">
+      This is not a product.<br>
+      This is not a feature.<br>
+      <em>This is infrastructure.</em>
+    </h2>
+    <p class="closing-body">
+      The infrastructure that closes the gap between a child with a rare disease and the technology
+      that can diagnose them. The infrastructure that preserves medical wisdom before it
+      retires. The infrastructure that makes GENA's 162,000 cases teach the next
+      generation of physicians.
+      <br><br>
+      It already exists. Parts of it are live today.
+      The question is who builds the rest of it.
+    </p>
+    <div class="closing-btns">
+      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="/genetics/genetics-aadc-case.html">▶ See It Working — AADC Case</a>
+      <a class="rdx-btn rdx-btn-ghost-white" href="/legacy-dx.html">LegacyDx Concept →</a>
+      <a class="rdx-btn rdx-btn-ghost-white" href="/platform-overview.html">Full Platform →</a>
+    </div>
+  </div>
+
+</div><!-- end narrative -->
+
+<script>
+// Scroll progress
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progressLine').style.width = pct + '%';
+  if (h.scrollTop > 200) document.getElementById('scrollHint').style.opacity = '0';
+});
+
+// Intersection observer for beat animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.beat').forEach(b => observer.observe(b));
+</script>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>
