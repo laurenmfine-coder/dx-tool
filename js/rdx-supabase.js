@@ -145,11 +145,13 @@ async function loadProfile(userId) {
 }
 
 async function updateProfile(updates) {
-  if (!supabase || !currentUser) return { error: 'Not authenticated' };
-  return await supabase
-    .from('profiles')
-    .update(updates)
-    .eq('id', currentUser.id);
+  try {
+    if (!supabase || !currentUser) return { error: 'Not authenticated' };
+    return await supabase
+      .from('profiles')
+      .update(updates)
+      .eq('id', currentUser.id);
+  } catch(e) { return { error: e.message }; }
 }
 
 function getProfile() {
@@ -738,6 +740,21 @@ window.RDXSupabaseInit = function() {
     if (window.RDX) window.RDX.ready = initialized;
   }
 };
+
+
+async function getLeaderboard(limit) {
+  try {
+    if (!supabase) return [];
+    limit = limit || 10;
+    var result = await supabase
+      .from('profiles')
+      .select('display_name, cases_completed, total_score, plan')
+      .order('cases_completed', { ascending: false })
+      .limit(limit);
+    if (result.error) return [];
+    return result.data || [];
+  } catch(e) { return []; }
+}
 
 window.RDX = {
   // State

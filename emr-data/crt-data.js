@@ -111,7 +111,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309",
               "detail": "Morphine associated with worse outcomes in ACS"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "metoprolol-stemi",
@@ -131,7 +132,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309",
               "detail": "IV BB not recommended acutely; oral within 24h if stable"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "cath-activate",
@@ -364,7 +366,8 @@ window.CRT_DATA = {
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4754994/",
               "detail": "Corticosteroids independent risk factor for recurrence"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "heparin-peri",
@@ -384,7 +387,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001185",
               "detail": "Heparin CI in acute pericarditis"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "omeprazole-peri",
@@ -694,7 +698,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309",
               "detail": "Morphine downgraded in ACS"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "nsaid-nstemi",
@@ -714,7 +719,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309",
               "detail": "Class III Harm: NSAIDs CI in ACS"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "cardiology-nstemi",
@@ -1002,7 +1008,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK493193/",
               "detail": "Antibiotics-only has higher failure rate; surgery preferred for uncomplicated appendicitis"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "ct-delay-appy",
@@ -1185,7 +1192,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK507728/",
               "detail": "Judicious crystalloid; aggressive fluid worsens coagulopathy and dilutional anemia"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "vascsurg-aaa",
@@ -1487,7 +1495,8 @@ window.CRT_DATA = {
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991038/",
               "detail": "Volume loading worsens RV failure in massive PE"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "norepi-pe",
@@ -1766,7 +1775,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
               "detail": "Mechanical ventilation only for refractory hypoxia/AMS"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "ns-chf",
@@ -1786,7 +1796,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
               "detail": "Fluid restriction, not administration, for congested HF"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "metoprolol-chf",
@@ -1806,7 +1817,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063",
               "detail": "BB should not be initiated during decompensation"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "digoxin-chf",
@@ -2082,7 +2094,8 @@ window.CRT_DATA = {
               "url": "https://goldcopd.org/2024-gold-report/",
               "detail": "Uncontrolled O2 worsens hypercapnia"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "levoflox-copd",
@@ -2102,7 +2115,8 @@ window.CRT_DATA = {
               "url": "https://goldcopd.org/2024-gold-report/",
               "detail": "Reserve respiratory FQ for treatment failure"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "vbg-copd",
@@ -2393,7 +2407,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK551520/",
               "detail": "Hypotension risk during loading; purple glove syndrome"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "tpa-sah",
@@ -2408,7 +2423,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK441958/",
               "detail": "Thrombolysis CONTRAINDICATED in hemorrhagic stroke/SAH"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "antiemetic-sah",
@@ -2870,7 +2886,8 @@ window.CRT_DATA = {
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2699725/",
               "detail": "ADA: Bolus insulin associated with complications without benefit"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "k-repletion-dka",
@@ -2911,7 +2928,8 @@ window.CRT_DATA = {
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2699725/",
               "detail": "ADA: NaHCO3 only if pH <6.9; no benefit at higher pH"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "phosphorus-dka",
@@ -3204,7 +3222,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211",
               "detail": "BP management per tPA eligibility"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "asa-stroke",
@@ -3245,7 +3264,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211",
               "detail": "Urgent anticoagulation not recommended for acute stroke"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "swallow-eval",
@@ -3478,7 +3498,8 @@ window.CRT_DATA = {
               "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/",
               "detail": "ATLS: Tension ptx is clinical diagnosis; imaging delays kill"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "intubation-ptx",
@@ -3819,7 +3840,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK518982/",
               "detail": "Small epidural may be observed if neuro intact; requires serial imaging"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "reverse-anticoag-ep",
@@ -4079,7 +4101,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916",
               "detail": "CCB contraindicated for wide-complex tachycardia"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "mag-vt",
@@ -4978,7 +5001,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK470246/",
               "detail": "Enzyme-inducing AEDs problematic with chemotherapy"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "dvt-ppx-mass",
@@ -5489,7 +5513,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK499879/",
               "detail": "CAUTION: Must match pre-intubation RR or acidosis worsens fatally"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "k-repletion-sal",
@@ -5736,7 +5761,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK430960/",
               "detail": "Throat exam with tongue depressor can precipitate laryngospasm"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "racemic-epi",
@@ -5751,7 +5777,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK430960/",
               "detail": "Racemic epi is for croup, NOT epiglottitis; may cause rebound"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "heliox-epig",
@@ -6244,7 +6271,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK537200/",
               "detail": "CT inferior to MRI for soft tissue/disc pathology; delays definitive imaging"
             }
-          ]
+          ],
+          "phase": 2
         },
         {
           "id": "steroids-only-ce",
@@ -6406,7 +6434,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/",
               "detail": "Vasodilator BEFORE BB causes reflex tachycardia — worsens shear stress"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "cta-dissection",
@@ -6666,7 +6695,8 @@ window.CRT_DATA = {
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7183076/",
               "detail": "IV epi for arrest/profound shock only; arrhythmia risk"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "ivf-anaph",
@@ -7002,7 +7032,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK538489/",
               "detail": "Steroids have limited evidence in bradykinin-mediated angioedema"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "benadryl-angio",
@@ -7017,7 +7048,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK538489/",
               "detail": "Antihistamines ineffective in bradykinin pathway"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "observe-angio",
@@ -7216,7 +7248,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK539860/",
               "detail": "MTX CONTRAINDICATED in ruptured ectopic; only for stable unruptured"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "ivf-ectopic",
@@ -7431,7 +7464,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK554392/",
               "detail": "Phenytoin inferior to MgSO4 for eclampsia"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "labetalol-eclampsia",
@@ -7812,7 +7846,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK482282/",
               "detail": "Antipyretics generally ineffective; hyperthermia is from muscle rigidity, not central thermoregulation"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "restart-antipsych-nms",
@@ -8036,7 +8071,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK535398/",
               "detail": "Targets peripheral muscle; SS is central"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "monitor-ss",
@@ -8646,7 +8682,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK541102/",
               "detail": "Premature de-escalation risks breakthrough bacteremia"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "delay-abx-nf",
@@ -13734,7 +13771,8 @@ window.CRT_DATA = {
               "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916",
               "detail": "Atropine unlikely to help in CHB"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "iso-chb",
@@ -13823,7 +13861,8 @@ window.CRT_DATA = {
               "url": "https://www.ncbi.nlm.nih.gov/books/NBK545199/",
               "detail": "CCB/BB/digoxin CI — worsen conduction block"
             }
-          ]
+          ],
+          "phase": 1
         },
         {
           "id": "check-k-chb",

@@ -151,7 +151,7 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
   .mx-system-icon{font-size:22px;margin-bottom:4px}
   .mx-system-name{font-size:12px}
   .mx-phases{flex-wrap:wrap}
-  .mx-phase{font-size:10px;padding:8px 6px}
+  .mx-phase{font-size:11px;padding:8px 6px}
   .mx-bubble{padding:12px 14px;font-size:13px}
   .mx-session-header{flex-direction:column;gap:8px;align-items:flex-start}
   .mx-topic-list{grid-template-columns:1fr}
@@ -159,6 +159,7 @@ body{font-family:var(--mx-font);background:var(--mx-bg);color:var(--mx-text);min
 </style>
 </head>
 <body>
+  <a href="/index.html" style="position:fixed;top:14px;left:20px;font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;z-index:100;background:rgba(255,255,255,.9);padding:4px 10px;border-radius:6px;border:1px solid #e2e8f0">← ReasonDx</a>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">MechanismDx requires JavaScript. Please enable JavaScript in your browser.</div></noscript>
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
@@ -1367,7 +1368,7 @@ function renderTopics() {
     var tierClass = tier === 'mastered' ? ' mastered' : (tier === 'proficient' ? ' proficient' : (tier !== 'untouched' ? ' in-progress' : ''));
     h += '<div class="mx-topic-card' + tierClass + '" onclick="MX.startSession(\'' + t.id + '\')">';
     h += '<div class="mx-topic-tier" style="color:' + tierDef.color + ';font-size:16px" title="' + tierDef.label + ': ' + tierDef.desc + '">' + tierDef.icon + '</div>';
-    h += '<div class="mx-topic-info"><div class="mx-topic-name">' + esc(t.name) + (t.badge ? ' <span style="background:#2874A6;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:5px">' + t.badge + '</span>' : '') + (t.refSheet ? ' <span style="background:#7C3AED;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:4px">📚 Curated</span>' : '') + '</div>';
+    h += '<div class="mx-topic-info"><div class="mx-topic-name">' + esc(t.name) + (t.badge ? ' <span style="background:#2874A6;color:#fff;font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:5px">' + t.badge + '</span>' : '') + (t.refSheet ? ' <span style="background:#7C3AED;color:#fff;font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;vertical-align:middle;margin-left:4px">📚 Curated</span>' : '') + '</div>';
     h += '<div class="mx-topic-meta">' + esc(t.sub) + '</div>';
     if (tier !== 'untouched') {
       h += '<div class="mx-topic-status" style="margin-top:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">';
