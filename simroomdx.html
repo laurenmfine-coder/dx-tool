@@ -111,7 +111,7 @@ body {
 }
 .char-chip.active { border-color: var(--rdx-brand); background: rgba(40,116,166,0.15); }
 .char-chip.disabled { opacity: 0.35; pointer-events: none; }
-.char-chip.locked { opacity: 0.45; cursor: not-allowed; position: relative; }
+.char-chip.locked { opacity: 1; cursor: pointer; }
 .char-chip img { width: 28px; height: 28px; border-radius: 50%; }
 .char-chip .char-name { font-size: 11px; font-weight: 600; color: #CBD5E1; }
 .char-chip .char-role { font-size:11px; color: var(--sim-text-dim); }
@@ -214,8 +214,8 @@ body {
 }
 .case-card:hover { border-color: var(--rdx-brand); background: rgba(40,116,166,0.08); }
 .case-card.selected { border-color: var(--rdx-brand); background: rgba(40,116,166,0.15); box-shadow: 0 0 0 2px rgba(40,116,166,0.2); }
-.case-card.locked { opacity: 0.5; cursor: not-allowed; }
-.case-card.locked:hover { border-color: var(--sim-border); background: var(--sim-surface); }
+.case-card.locked { opacity: 1; cursor: pointer; }
+
 .case-emoji { font-size: 28px; flex-shrink: 0; width: 40px; text-align: center; }
 .case-info { flex: 1; min-width: 0; }
 .case-title { font-size: 14px; font-weight: 600; color: var(--sim-text); }
@@ -244,8 +244,8 @@ body {
 .modal .subtitle { color: var(--sim-text-dim); font-size: 13px; margin-bottom: 20px; }
 .modal label { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; cursor: pointer; transition: background 0.2s; margin-bottom: 4px; }
 .modal label:hover { background: rgba(255,255,255,0.05); }
-.modal label.locked-char { opacity: 0.55; cursor: not-allowed; }
-.modal label.locked-char:hover { background: transparent; }
+.modal label.locked-char { opacity: 1; cursor: pointer; }
+
 .modal label img { width: 36px; height: 36px; border-radius: 50%; }
 .modal label .lbl-info { flex: 1; }
 .modal label .lbl-name { font-weight: 600; font-size: 14px; color: var(--sim-text); }
@@ -767,25 +767,25 @@ body {
       <div class="lbl-info"><div class="lbl-name">🩺 Dr. Chen (Attending)</div><div class="lbl-desc">Socratic coaching, probes your reasoning</div></div>
       <input type="checkbox" id="chkAttending" checked>
     </label>
-    <!-- Nurse: PRO ONLY -->
+    <!-- Nurse -->
     <label id="lblNurse">
       <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=NurseRamirez&backgroundColor=FEF9C3" alt="Nurse Ramirez" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">👩‍⚕️ Sarah Ramirez, RN (Nurse)</div><div class="lbl-desc">Vitals, meds given, nursing assessments</div></div>
       <input type="checkbox" id="chkNurse" checked>
     </label>
-    <!-- Family: PRO ONLY -->
+    <!-- Family -->
     <label id="lblFamily">
       <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=LindaJohnsonWife&backgroundColor=EDE9FE" alt="Linda Johnson, Patient's Wife" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">👨‍👩‍👦 Linda Johnson (Wife)</div><div class="lbl-desc">Collateral history, emotional, wants answers</div></div>
       <input type="checkbox" id="chkFamily">
     </label>
-    <!-- Consultant: PRO ONLY -->
+    <!-- Consultant -->
     <label id="lblConsultant">
       <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=DrPatelCards&backgroundColor=FFEDD5" alt="Dr. Patel, Cardiologist" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">👨‍⚕️ Dr. Patel (Cardiology Consult)</div><div class="lbl-desc">Expects SBAR format. Specialist expertise.</div></div>
       <input type="checkbox" id="chkConsultant">
     </label>
-    <!-- Pharmacist: PRO ONLY -->
+    <!-- Pharmacist -->
     <label id="lblPharmacist">
       <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=PharmDKim&backgroundColor=FCE7F3" alt="PharmD Kim, Pharmacist" loading="lazy">
       <div class="lbl-info"><div class="lbl-name">💊 Dr. Kim, PharmD (Pharmacist)</div><div class="lbl-desc">Drug dosing, interactions, formulary</div></div>
@@ -806,10 +806,10 @@ body {
   </div>
 
   <!-- Upgrade banner for free users -->
-  <div id="freeUpgradeBanner" style="display:none;background:linear-gradient(135deg,rgba(40,116,166,0.12),rgba(124,58,237,0.08));border:1px solid rgba(40,116,166,0.25);border-radius:12px;padding:14px 16px;margin-bottom:16px;text-align:center;">
+  <div id="freeUpgradeBanner" style="display:none!important;">
     <div style="font-size:14px;font-weight:600;color:#D4E6F1;margin-bottom:4px;">🏥 Free tier: 1 demo case, patient + attending only</div>
     <div style="font-size:12px;color:#94A3B8;margin-bottom:10px;">Upgrade to Pro for all cases, 6 characters, voice, multiplayer & more</div>
-    <a id="upgradeLink" href="auth/register.html" style="display:inline-block;padding:8px 24px;background:#2874A6;color:white;border-radius:20px;font-size:13px;font-weight:600;text-decoration:none;">Upgrade to Pro — $14.99/mo</a>
+    
   </div>
 
   <button type="button" class="start-btn" id="startBtn" onclick="startSimulation()">Enter Simulation Room →</button>
@@ -1508,7 +1508,7 @@ const CASE_LIBRARY = [
 // ═══════════════════════════════════════════════
 //  PLAN GATING — Apply tier restrictions on load
 // ═══════════════════════════════════════════════
-let simFeatures = { plan: 'free', maxCharacters: 2, allowedCharacters: ['patient','attending'], multiplayer: false, voice: false, freeCases: ['stemi-anterior'], allCases: false };
+let simFeatures = { plan: 'pro', maxCharacters: 99, allowedCharacters: ['patient','attending','nurse','family','consultant','pharmacist'], multiplayer: true, voice: true, freeCases: [], allCases: true };
 let selectedCaseId = 'stemi-anterior';
 let roundsMode = false;
 let overnightContext = null;
@@ -1656,13 +1656,13 @@ let roundsPatientHistory = ''; // Injected into all AI prompts in rounds mode
 (function applyTierGating() {
   // Use DxPlanGate if available (platform integration)
   if (typeof DxPlanGate !== 'undefined' && DxPlanGate.getSimRoomFeatures) {
-    simFeatures = DxPlanGate.getSimRoomFeatures();
+    // All features unlocked
   }
 
   // Build case grid
   buildCaseGrid();
 
-  if (simFeatures.plan === 'pro') return; // Pro: everything unlocked
+  return; // All features unlocked
 
   // Free tier: lock non-allowed characters
   const proChars = ['nurse', 'family', 'consultant', 'pharmacist'];
@@ -1670,7 +1670,7 @@ let roundsPatientHistory = ''; // Injected into all AI prompts in rounds mode
     const lbl = document.getElementById('lbl' + id.charAt(0).toUpperCase() + id.slice(1));
     const chk = document.getElementById('chk' + id.charAt(0).toUpperCase() + id.slice(1));
     const badge = document.getElementById('badge' + id.charAt(0).toUpperCase() + id.slice(1));
-    if (lbl) { lbl.classList.add('locked-char'); lbl.onclick = function(e) { e.preventDefault(); if (typeof DxPlanGate !== 'undefined') DxPlanGate.showUpgradeModal({ reason: 'Additional SimRoom characters (nurse, family, consultant, pharmacist) are available with Pro.', type: 'simRoomPro' }); }; }
+    // All characters unlocked
     if (chk) { chk.checked = false; chk.disabled = true; }
     if (badge) badge.style.display = 'inline-flex';
   });
@@ -1693,11 +1693,11 @@ let roundsPatientHistory = ''; // Injected into all AI prompts in rounds mode
 function buildCaseGrid() {
   const grid = document.getElementById('caseGrid');
   grid.innerHTML = '';
-  const isFree = simFeatures.plan !== 'pro';
+  const isFree = false; // All cases unlocked
 
   CASE_LIBRARY.forEach(c => {
     const isFreeCase = simFeatures.freeCases && simFeatures.freeCases.indexOf(c.id) !== -1;
-    const isLocked = isFree && !isFreeCase;
+    const isLocked = false;
     const isSelected = c.id === selectedCaseId;
 
     const card = document.createElement('div');
@@ -2361,7 +2361,7 @@ function buildCharStrip() {
   strip.innerHTML = '';
   Object.values(CHARACTERS).forEach(ch => {
     const isActive = activeChars.includes(ch.id);
-    const isLocked = !simFeatures.allowedCharacters.includes(ch.id) && simFeatures.plan !== 'pro';
+    const isLocked = false;
     const chip = document.createElement('div');
     chip.className = `char-chip ${isActive ? 'active' : isLocked ? 'locked' : 'disabled'}`;
     chip.id = `chip-${ch.id}`;
