@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Genetics Clinical Reasoning Demo</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #2874A6;
+    --ocean-dark: #1a5276;
+    --ocean-deep: #0d2b3e;
+    --ocean-light: #d6eaf8;
+    --ocean-mid: #85c1e9;
+    --accent: #e67e22;
+    --accent-soft: #fef0e0;
+    --correct: #1e8449;
+    --correct-bg: #d5f5e3;
+    --wrong: #c0392b;
+    --wrong-bg: #fadbd8;
+    --neutral: #f4f6f8;
+    --text: #1a2332;
+    --text-muted: #5d6d7e;
+    --white: #ffffff;
+    --card-shadow: 0 2px 16px rgba(40,116,166,0.10);
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ocean-deep);
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Serif Display', serif;
+    color: var(--white);
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+  }
+  .logo-dot { color: var(--ocean-mid); }
+  .header-badge {
+    background: rgba(133,193,233,0.18);
+    border: 1px solid rgba(133,193,233,0.35);
+    color: var(--ocean-mid);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .xp-pill {
+    background: linear-gradient(135deg, #e67e22, #f39c12);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── LAYOUT ── */
+  .shell {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  /* ── CASE INTRO CARD ── */
+  .case-intro {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .case-intro-header {
+    background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--ocean) 100%);
+    padding: 20px 28px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .case-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .case-title {
+    font-family: 'DM Serif Display', serif;
+    color: var(--white);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .case-subtitle {
+    color: rgba(255,255,255,0.72);
+    font-size: 0.85rem;
+    font-weight: 400;
+  }
+  .difficulty-badge {
+    background: rgba(230,126,34,0.25);
+    border: 1px solid rgba(230,126,34,0.5);
+    color: #f5cba7;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── PATIENT CARD ── */
+  .patient-card {
+    padding: 20px 28px;
+    border-bottom: 1px solid #eef1f5;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 10px;
+  }
+  .patient-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .patient-stat {
+    background: var(--neutral);
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .patient-stat-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .patient-stat-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .vignette {
+    background: #fafbfc;
+    border-left: 3px solid var(--ocean);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .highlight { color: var(--ocean-dark); font-weight: 600; }
+  .flag { color: var(--wrong); font-weight: 600; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap {
+    padding: 14px 28px;
+    background: #f8fafc;
+    border-bottom: 1px solid #eef1f5;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: #dce9f5;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--ocean), var(--ocean-mid));
+    transition: width 0.6s ease;
+  }
+  .step-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .step-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #dce9f5;
+  }
+  .step-dot.done { background: var(--ocean); }
+  .step-dot.active { background: var(--accent); }
+
+  /* ── QUESTION SECTION ── */
+  .question-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+  .question-stem {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.55;
+    margin-bottom: 18px;
+    color: var(--text);
+  }
+  .answer-grid {
+    display: grid;
+    gap: 10px;
+  }
+  .answer-btn {
+    background: var(--neutral);
+    border: 1.5px solid #dde4ec;
+    border-radius: 8px;
+    padding: 13px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.45;
+  }
+  .answer-btn:hover:not(:disabled) {
+    border-color: var(--ocean);
+    background: var(--ocean-light);
+    transform: translateX(3px);
+  }
+  .answer-btn.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+    font-weight: 500;
+  }
+  .answer-btn.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+    color: var(--wrong);
+    font-weight: 500;
+  }
+  .answer-btn.dimmed {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .answer-btn:disabled { cursor: default; }
+  .choice-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    min-width: 22px;
+    background: white;
+    border: 1.5px solid #c5cdd8;
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+  .answer-btn.correct .choice-letter {
+    background: var(--correct);
+    border-color: var(--correct);
+    color: white;
+  }
+  .answer-btn.wrong .choice-letter {
+    background: var(--wrong);
+    border-color: var(--wrong);
+    color: white;
+  }
+
+  /* ── FEEDBACK ── */
+  .feedback-box {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 14px;
+    display: none;
+    animation: fadeUp 0.3s ease;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.correct-fb {
+    background: var(--correct-bg);
+    border: 1px solid #a9dfbf;
+  }
+  .feedback-box.wrong-fb {
+    background: var(--wrong-bg);
+    border: 1px solid #f1948a;
+  }
+  .feedback-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+  }
+  .feedback-box.correct-fb .feedback-title { color: var(--correct); }
+  .feedback-box.wrong-fb .feedback-title { color: var(--wrong); }
+  .feedback-text {
+    font-size: 0.87rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .pearls {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.07);
+  }
+  .pearls-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 6px;
+  }
+  .pearl-item {
+    display: flex;
+    gap: 8px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .pearl-item::before {
+    content: "◆";
+    color: var(--ocean);
+    font-size: 0.6rem;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── NEXT BUTTON ── */
+  .next-btn {
+    display: none;
+    margin-top: 14px;
+    background: var(--ocean);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  .next-btn:hover { background: var(--ocean-dark); }
+  .next-btn.show { display: inline-flex; align-items: center; gap: 8px; }
+
+  /* ── GENETIC CLUES SIDEBAR ── */
+  .clues-rail {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .clues-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .clue-chip {
+    background: #f0f4f8;
+    border-radius: 7px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.3s ease;
+    opacity: 0.35;
+  }
+  .clue-chip.revealed {
+    opacity: 1;
+    background: var(--ocean-light);
+    color: var(--ocean-dark);
+  }
+  .clue-chip.red-flag {
+    opacity: 1;
+    background: #fadbd8;
+    color: var(--wrong);
+  }
+  .clue-icon { font-size: 1rem; }
+
+  /* ── REASONING PATHWAY ── */
+  .pathway {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .pathway-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 12px;
+  }
+  .pathway-step {
+    display: flex;
+    gap: 14px;
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+  }
+  .pathway-step.active { opacity: 1; }
+  .step-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-node {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid #dde4ec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: white;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+  .pathway-step.active .step-node {
+    background: var(--ocean);
+    border-color: var(--ocean);
+    color: white;
+  }
+  .pathway-step.done .step-node {
+    background: var(--correct);
+    border-color: var(--correct);
+    color: white;
+    opacity: 1;
+  }
+  .step-connector {
+    width: 2px;
+    flex: 1;
+    background: #dde4ec;
+    min-height: 20px;
+    margin: 2px 0;
+  }
+  .step-content {
+    padding: 3px 0 20px;
+  }
+  .step-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .step-desc {
+    font-size: 0.77rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── SCORE SCREEN ── */
+  .score-screen {
+    display: none;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 40px 32px;
+    text-align: center;
+    animation: fadeUp 0.5s ease;
+  }
+  .score-screen.show { display: block; }
+  .score-ring {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: conic-gradient(var(--ocean) var(--pct), #dce9f5 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+  }
+  .score-ring::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    background: white;
+  }
+  .score-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--ocean-dark);
+    position: relative;
+    z-index: 1;
+  }
+  .score-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .score-sub {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    line-height: 1.55;
+  }
+  .score-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .score-stat {
+    text-align: center;
+  }
+  .score-stat-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--ocean-dark);
+  }
+  .score-stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.18s;
+  }
+  .cta-primary {
+    background: var(--ocean);
+    color: white;
+  }
+  .cta-primary:hover { background: var(--ocean-dark); }
+  .cta-secondary {
+    background: var(--neutral);
+    color: var(--text);
+    border: 1.5px solid #dde4ec;
+  }
+  .cta-secondary:hover { background: var(--ocean-light); border-color: var(--ocean); }
+  .module-teaser {
+    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean-dark));
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 24px;
+    text-align: left;
+    color: white;
+  }
+  .module-teaser-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ocean-mid);
+    margin-bottom: 6px;
+  }
+  .module-teaser-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+  .module-teaser-text {
+    font-size: 0.83rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 14px;
+  }
+  .module-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .module-chip {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .shell { padding: 16px 12px 48px; }
+    .case-intro-header { flex-direction: column; gap: 10px; }
+    .clues-grid { grid-template-columns: 1fr; }
+    .patient-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">Reason<span class="logo-dot">Dx</span></div>
+  <div class="header-badge">Genetics Module — Demo</div>
+  <div class="header-meta">
+    <div class="xp-pill">+120 XP</div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- CASE INTRO -->
+  <div class="case-intro" id="caseIntro">
+    <div class="case-intro-header">
+      <div>
+        <div class="case-tag">🧬 Rare Disease · Primary Care Reasoning</div>
+        <div class="case-title">The Child Who Keeps Falling</div>
+        <div class="case-subtitle">A 4-year-old with hypotonia, delayed milestones, and a puzzling constellation of features</div>
+      </div>
+      <div class="difficulty-badge">⚡ Intermediate</div>
+    </div>
+
+    <div class="patient-card">
+      <div class="section-label">Patient Snapshot</div>
+      <div class="patient-grid">
+        <div class="patient-stat">
+          <div class="patient-stat-label">Patient</div>
+          <div class="patient-stat-value">Mateo R., 4 yr</div>
+        </div>
+        <div class="patient-stat">
+          <div class="patient-stat-label">Setting</div>
+          <div class="patient-stat-value">Primary Care</div>
+        </div>
+        <div class="patient-stat">
+          <div class="patient-stat-label">Chief Complaint</div>
+          <div class="patient-stat-value">Poor coordination</div>
+        </div>
+        <div class="patient-stat">
+          <div class="patient-stat-label">Prior Visits</div>
+          <div class="patient-stat-value">3 specialists</div>
+        </div>
+        <div class="patient-stat">
+          <div class="patient-stat-label">Dx to date</div>
+          <div class="patient-stat-value">None</div>
+        </div>
+        <div class="patient-stat">
+          <div class="patient-stat-label">Avg real-world Dx</div>
+          <div class="patient-stat-value">4.7 years</div>
+        </div>
+      </div>
+
+      <div class="vignette">
+        Mateo is a 4-year-old boy brought in by his parents for <span class="highlight">increasing clumsiness and frequent falls</span> over the past 18 months. He walked at 20 months and still has not learned to run. Parents note he tires easily and <span class="highlight">has difficulty climbing stairs</span>. He was in the NICU for 5 days after birth for low muscle tone. Development: first words at 24 months; currently 2–3 word phrases. He is <span class="highlight">described as a "happy child"</span> who rarely cries. Exam: low-set ears, <span class="flag">epicanthal folds</span>, <span class="flag">single palmar crease bilaterally</span>, mild hypotonia, and <span class="flag">decreased deep tendon reflexes</span>. Previous workup: normal brain MRI, normal metabolic panel. Parents have seen a neurologist ("inconclusive") and a developmental pediatrician ("global delay, etiology unclear").
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <span class="progress-label">Step 1 of 5</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+      <div class="step-dots">
+        <div class="step-dot active" id="dot0"></div>
+        <div class="step-dot" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+        <div class="step-dot" id="dot4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REASONING PATHWAY -->
+  <div class="pathway" id="pathwayCard">
+    <div class="section-label">Reasoning Pathway</div>
+    <div class="pathway-steps">
+      <div class="pathway-step active" id="pstep0">
+        <div class="step-line">
+          <div class="step-node" id="pnode0">1</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-name">Recognize the Pattern</div>
+          <div class="step-desc">Hypotonia + dysmorphic features + developmental delay = genetic until proven otherwise</div>
+        </div>
+      </div>
+      <div class="pathway-step" id="pstep1">
+        <div class="step-line">
+          <div class="step-node" id="pnode1">2</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-name">Refine the Differential</div>
+          <div class="step-desc">Use dysmorphology to narrow — which chromosomal or single-gene disorder fits?</div>
+        </div>
+      </div>
+      <div class="pathway-step" id="pstep2">
+        <div class="step-line">
+          <div class="step-node" id="pnode2">3</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-name">Order the Right Test</div>
+          <div class="step-desc">Choose the highest-yield genetic test — not all tests are equal for this presentation</div>
+        </div>
+      </div>
+      <div class="pathway-step" id="pstep3">
+        <div class="step-line">
+          <div class="step-node" id="pnode3">4</div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-name">Interpret the Result</div>
+          <div class="step-desc">What does a positive chromosome microarray tell you — and what comes next?</div>
+        </div>
+      </div>
+      <div class="pathway-step" id="pstep4">
+        <div class="step-line">
+          <div class="step-node" id="pnode4">5</div>
+        </div>
+        <div class="step-content">
+          <div class="step-name">Counsel and Coordinate</div>
+          <div class="step-desc">Primary care's role after the genetic diagnosis — family implications, referrals, long-term plan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENETIC CLUES RAIL -->
+  <div class="clues-rail" id="cluesCard">
+    <div class="section-label">Clinical Clues Tracker</div>
+    <div class="clues-grid">
+      <div class="clue-chip revealed" id="clue0"><span class="clue-icon">💤</span> Neonatal hypotonia</div>
+      <div class="clue-chip revealed" id="clue1"><span class="clue-icon">🧠</span> Global dev. delay</div>
+      <div class="clue-chip" id="clue2"><span class="clue-icon">😊</span> Unusually happy affect</div>
+      <div class="clue-chip" id="clue3"><span class="clue-icon">👁️</span> Epicanthal folds</div>
+      <div class="clue-chip" id="clue4"><span class="clue-icon">✋</span> Single palmar crease</div>
+      <div class="clue-chip" id="clue5"><span class="clue-icon">🦵</span> Decreased DTRs</div>
+      <div class="clue-chip" id="clue6"><span class="clue-icon">🔬</span> Normal brain MRI</div>
+      <div class="clue-chip" id="clue7"><span class="clue-icon">📊</span> Normal metabolic panel</div>
+    </div>
+  </div>
+
+  <!-- QUESTION CONTAINER -->
+  <div id="questionContainer"></div>
+
+  <!-- SCORE SCREEN -->
+  <div class="score-screen" id="scoreScreen">
+    <div class="score-ring" id="scoreRing">
+      <div class="score-number" id="scoreNumber">—</div>
+    </div>
+    <div class="score-title" id="scoreTitle">Case Complete</div>
+    <div class="score-sub" id="scoreSub"></div>
+    <div class="score-stats">
+      <div class="score-stat">
+        <div class="score-stat-val" id="statCorrect">—</div>
+        <div class="score-stat-label">Correct</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-stat-val" id="statXP">—</div>
+        <div class="score-stat-label">XP Earned</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-stat-val" id="statTime">—</div>
+        <div class="score-stat-label">Avg / Question</div>
+      </div>
+    </div>
+    <div class="cta-row">
+      <button class="cta-btn cta-primary" onclick="restartCase()">Try Again</button>
+      <button class="cta-btn cta-secondary" onclick="showModuleTeaser()">View Module Map</button>
+    </div>
+    <div class="module-teaser" id="moduleTeaser" style="display:none">
+      <div class="module-teaser-label">🧬 Genetics Module — ReasonDx</div>
+      <div class="module-teaser-title">This is one of 18 cases in the Genetics Reasoning Module</div>
+      <div class="module-teaser-text">
+        Built for primary care physicians, medical students, and residents who need to recognize when to think genetically — before ordering a single test. Each case develops a different pattern recognition skill: dysmorphology, metabolic disease, cancer predisposition syndromes, pharmacogenomics, and more.
+      </div>
+      <div class="module-list">
+        <div class="module-chip">Rare Pediatric Disease</div>
+        <div class="module-chip">Chromosomal Disorders</div>
+        <div class="module-chip">Single-Gene Disorders</div>
+        <div class="module-chip">Inborn Errors of Metabolism</div>
+        <div class="module-chip">Cancer Predisposition</div>
+        <div class="module-chip">Pharmacogenomics</div>
+        <div class="module-chip">Prenatal Genetics</div>
+        <div class="module-chip">Allergy/Immunology Overlap</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    stem: "You're a primary care physician seeing Mateo for the third time this year. Looking at the full picture — neonatal hypotonia, dysmorphic features, global developmental delay, and three negative specialist evaluations — what is your highest-priority next diagnostic consideration?",
+    choices: [
+      "Cerebral palsy from perinatal hypoxia",
+      "Chromosomal or single-gene genetic disorder",
+      "Autism spectrum disorder with hypotonia",
+      "Hypothyroidism with late presentation"
+    ],
+    correct: 1,
+    feedback: {
+      correct: "Exactly right. The triad of dysmorphic features + neonatal hypotonia + global developmental delay is the classic fingerprint pointing toward a genetic etiology. A normal brain MRI and normal metabolic panel have already narrowed this significantly — you're in genetic territory now.",
+      wrong: "The constellation of dysmorphic features (low-set ears, epicanthal folds, single palmar crease) combined with neonatal hypotonia and global developmental delay is the key pattern. These features together make a structural or acquired neurological cause unlikely — this presentation demands a genetic workup."
+    },
+    pearls: [
+      "Dysmorphic features + hypotonia + developmental delay = genetic etiology in >60% of cases",
+      "Normal brain MRI does not rule out a genetic cause — many chromosomal disorders have structurally normal brains",
+      "The \"diagnostic odyssey\" average for rare genetic diseases is 4–7 years — primary care recognition can dramatically shorten this"
+    ],
+    cluesReveal: [2, 3, 4],
+    pathwayAdvance: 1
+  },
+  {
+    stem: "You've correctly identified this as likely genetic. Now you need to refine your differential. Mateo's phenotype includes: happy, easy temperament, epicanthal folds, single palmar crease, hypotonia, and decreased DTRs. Which chromosomal condition best fits this gestalt — and which would you want to rule out first?",
+    choices: [
+      "Fragile X syndrome — X-linked, most common inherited intellectual disability",
+      "Trisomy 21 (Down syndrome) — though typically diagnosed at birth",
+      "Angelman syndrome — characterized by happy affect, severe delay, minimal speech",
+      "22q11.2 deletion (DiGeorge) — cardiac defects and immune dysfunction"
+    ],
+    correct: 2,
+    feedback: {
+      correct: "Outstanding pattern recognition. Angelman syndrome fits Mateo's phenotype closely: the characteristically happy, sociable affect with minimal crying, severe developmental delay, and hypotonia. The fact that he uses only 2–3 word phrases at age 4 with that unusually happy temperament is a classic Angelman signature that many clinicians miss.",
+      wrong: "Look again at the behavioral phenotype. The combination of unusually happy affect, minimal verbal output (2–3 words at age 4), and hypotonia is the hallmark triad of Angelman syndrome. Down syndrome is typically identified at birth. Fragile X presents with macroorchidism and autistic features. DiGeorge features cardiac and immune anomalies."
+    },
+    pearls: [
+      "Angelman syndrome: happy sociable demeanor + minimal speech + hypotonia + seizures = consider methylation study of chromosome 15",
+      "The 'happy puppet' phenotype (old term, no longer used) describes a presentation that primary care physicians can learn to recognize",
+      "Angelman is caused by loss of function of maternal UBE3A gene — testing requires specialized methylation analysis, not standard karyotype"
+    ],
+    cluesReveal: [5, 6],
+    pathwayAdvance: 2
+  },
+  {
+    stem: "You suspect Angelman syndrome. You know that standard karyotype (chromosome analysis) will likely be normal. What is the most appropriate first-line genetic test to order for this presentation?",
+    choices: [
+      "Standard G-banded karyotype",
+      "Chromosomal microarray (CMA) — SNP-based",
+      "Methylation-specific PCR for chromosome 15q11-13",
+      "Whole exome sequencing (WES)"
+    ],
+    correct: 1,
+    feedback: {
+      correct: "Correct. Chromosomal microarray (CMA) is the recommended first-tier genetic test for children with unexplained intellectual disability and dysmorphic features — it detects copy number variants (deletions/duplications) across the entire genome at a resolution far beyond standard karyotype. For Angelman specifically, CMA will detect the most common cause (maternal deletion of 15q11-13) in ~70% of cases.",
+      wrong: "Standard karyotype misses microdeletions — it would be normal in most Angelman cases. While methylation-specific PCR is very specific for Angelman once suspected, chromosomal microarray is the recommended first-line test for any child with unexplained intellectual disability and dysmorphic features because it casts the widest diagnostic net. Whole exome sequencing is a powerful second-tier test if CMA is non-diagnostic."
+    },
+    pearls: [
+      "American College of Medical Genetics (ACMG) recommends chromosomal microarray as first-line for unexplained DD/ID with dysmorphic features — it has a diagnostic yield of 15–20%",
+      "Standard karyotype detects only large chromosomal abnormalities (>5–10 Mb) — CMA detects deletions/duplications as small as 1 Kb",
+      "For Angelman specifically: if CMA is normal, proceed to methylation analysis; if methylation is normal, consider UBE3A sequencing"
+    ],
+    cluesReveal: [7],
+    pathwayAdvance: 3
+  },
+  {
+    stem: "CMA returns showing a 5.5 Mb deletion at chromosome 15q11.2-q13 of maternal origin — confirming Angelman syndrome. Mateo's parents ask you: 'Could our other children have this? What about future pregnancies?' What is the most accurate counseling?",
+    choices: [
+      "Recurrence risk is very low (<1%) — most deletions are de novo",
+      "Recurrence risk is 50% — autosomal dominant inheritance",
+      "Recurrence risk is 25% — autosomal recessive; both parents are carriers",
+      "Recurrence risk depends on whether the mother carries a chromosome 15 rearrangement — maternal testing is essential before counseling"
+    ],
+    correct: 3,
+    feedback: {
+      correct: "Critical and nuanced answer. Most Angelman syndrome deletions are de novo (recurrence risk <1%), BUT if the mother carries a balanced chromosomal rearrangement involving 15q, recurrence risk rises dramatically. You cannot accurately counsel this family without testing the mother's chromosomes first. This is exactly why genetic counseling referral is essential — the stakes of incorrect recurrence counseling are enormous.",
+      wrong: "The recurrence risk for Angelman syndrome cannot be given without first testing the mother. While most deletions are de novo (risk <1%), if the mother has a balanced rearrangement of chromosome 15, recurrence risk is much higher. Stating a low risk before maternal testing is an actionable error with serious family planning implications."
+    },
+    pearls: [
+      "De novo deletion = recurrence risk <1%; maternal rearrangement = recurrence risk up to 50% — maternal karyotype is mandatory",
+      "Imprinting disorders (Angelman, Prader-Willi) have unique inheritance patterns that differ from standard Mendelian genetics",
+      "Genetic counseling referral is essential after ANY chromosomal diagnosis — this is primary care's role: diagnose, refer, and coordinate"
+    ],
+    cluesReveal: [],
+    pathwayAdvance: 4
+  },
+  {
+    stem: "Mateo now has his diagnosis. You are the primary care physician coordinating his ongoing care. Which of the following represents the most appropriate immediate care coordination plan?",
+    choices: [
+      "Refer to genetics only — your role is complete once the diagnosis is made",
+      "Refer to genetics + neurology (seizure monitoring), coordinate PT/OT/speech therapy, counsel family, and remain the longitudinal care coordinator",
+      "Refer to a specialized Angelman syndrome center and transfer all care",
+      "Begin anti-epileptic prophylaxis empirically and schedule 6-month follow-up"
+    ],
+    correct: 1,
+    feedback: {
+      correct: "Exactly right — and this is the model Pete Martinez is trying to enable at scale. The primary care physician is not just the referring agent — they are the longitudinal integrator. Seizures develop in 80–90% of Angelman patients; PT/OT/speech therapy are foundational; AAC (augmentative communication) devices are critical for non-verbal patients. The PCP who understands the full picture coordinates this ecosystem rather than just passing the patient along.",
+      wrong: "The primary care physician's role does not end at diagnosis — it begins there. Angelman syndrome requires multidisciplinary care: genetics, neurology (seizures occur in 80–90%), PT/OT/speech therapy, behavioral support, and family counseling. The PCP is uniquely positioned to coordinate this and maintain the longitudinal relationship that fragmented specialist care cannot replace."
+    },
+    pearls: [
+      "Seizures in Angelman syndrome: 80–90% incidence; typically begin age 2–3; require neurology referral even pre-symptomatically",
+      "Augmentative and Alternative Communication (AAC) devices are the standard of care for non-verbal Angelman patients — early referral to speech-language pathology is critical",
+      "The diagnostic odyssey ends with a diagnosis — but the primary care physician's role as integrator and advocate has just begun"
+    ],
+    cluesReveal: [],
+    pathwayAdvance: 5
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = [];
+let startTimes = [];
+let totalTime = 0;
+
+function renderQuestion(idx) {
+  const q = questions[idx];
+  const letters = ['A','B','C','D'];
+  const container = document.getElementById('questionContainer');
+
+  const html = `
+    <div class="question-card" id="qCard${idx}" style="animation: fadeUp 0.35s ease">
+      <div class="section-label">Question ${idx+1} of ${questions.length}</div>
+      <div class="question-stem">${q.stem}</div>
+      <div class="answer-grid" id="answerGrid${idx}">
+        ${q.choices.map((c,i) => `
+          <button class="answer-btn" id="ans${idx}_${i}" onclick="selectAnswer(${idx},${i})">
+            <span class="choice-letter">${letters[i]}</span>
+            <span>${c}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="feedback-box" id="fb${idx}">
+        <div class="feedback-title" id="fbTitle${idx}"></div>
+        <div class="feedback-text" id="fbText${idx}"></div>
+        <div class="pearls" id="fbPearls${idx}"></div>
+      </div>
+      <button class="next-btn" id="nextBtn${idx}" onclick="nextQuestion(${idx})">
+        ${idx < questions.length - 1 ? 'Next Step →' : 'See Results →'}
+      </button>
+    </div>
+  `;
+  container.innerHTML = html;
+  startTimes[idx] = Date.now();
+}
+
+function selectAnswer(qIdx, aIdx) {
+  if (answered[qIdx]) return;
+  answered[qIdx] = true;
+
+  const elapsed = (Date.now() - startTimes[qIdx]) / 1000;
+  totalTime += elapsed;
+
+  const q = questions[qIdx];
+  const isCorrect = aIdx === q.correct;
+  if (isCorrect) score++;
+
+  // Style buttons
+  for (let i = 0; i < q.choices.length; i++) {
+    const btn = document.getElementById(`ans${qIdx}_${i}`);
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === aIdx && !isCorrect) btn.classList.add('wrong');
+    else btn.classList.add('dimmed');
+  }
+
+  // Feedback
+  const fb = document.getElementById(`fb${qIdx}`);
+  const fbTitle = document.getElementById(`fbTitle${qIdx}`);
+  const fbText = document.getElementById(`fbText${qIdx}`);
+  const fbPearls = document.getElementById(`fbPearls${qIdx}`);
+
+  fb.classList.add('show', isCorrect ? 'correct-fb' : 'wrong-fb');
+  fbTitle.textContent = isCorrect ? '✓ Correct Reasoning' : '✗ Revisit This Pattern';
+  fbText.textContent = isCorrect ? q.feedback.correct : q.feedback.wrong;
+
+  if (q.pearls && q.pearls.length) {
+    fbPearls.innerHTML = `
+      <div class="pearls-label">Clinical Pearls</div>
+      ${q.pearls.map(p => `<div class="pearl-item">${p}</div>`).join('')}
+    `;
+  }
+
+  // Reveal clues
+  q.cluesReveal.forEach(ci => {
+    const chip = document.getElementById(`clue${ci}`);
+    if (chip) {
+      setTimeout(() => chip.classList.add('revealed'), 400);
+    }
+  });
+
+  // Advance pathway
+  if (q.pathwayAdvance !== undefined) {
+    for (let s = 0; s < q.pathwayAdvance; s++) {
+      const step = document.getElementById(`pstep${s}`);
+      if (step) {
+        step.classList.remove('active');
+        step.classList.add('done');
+        const node = document.getElementById(`pnode${s}`);
+        if (node) node.textContent = '✓';
+      }
+    }
+    const nextStep = document.getElementById(`pstep${q.pathwayAdvance}`);
+    if (nextStep) nextStep.classList.add('active');
+  }
+
+  // Show next
+  const nextBtn = document.getElementById(`nextBtn${qIdx}`);
+  nextBtn.classList.add('show');
+}
+
+function nextQuestion(fromIdx) {
+  current++;
+  // Update progress
+  const pct = ((current + 1) / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  // Update dots
+  for (let i = 0; i <= fromIdx; i++) {
+    const d = document.getElementById(`dot${i}`);
+    if (d) { d.classList.remove('active'); d.classList.add('done'); }
+  }
+  const nextDot = document.getElementById(`dot${current}`);
+  if (nextDot) nextDot.classList.add('active');
+
+  if (current < questions.length) {
+    renderQuestion(current);
+    window.scrollTo({ top: document.getElementById('questionContainer').offsetTop - 80, behavior: 'smooth' });
+  } else {
+    showScore();
+  }
+}
+
+function showScore() {
+  document.getElementById('questionContainer').innerHTML = '';
+  document.getElementById('progressFill').style.width = '100%';
+  for (let i = 0; i < 5; i++) {
+    const d = document.getElementById(`dot${i}`);
+    if (d) { d.classList.remove('active'); d.classList.add('done'); }
+  }
+
+  const pct = Math.round((score / questions.length) * 100);
+  const xp = score * 24;
+  const avgTime = totalTime > 0 ? Math.round(totalTime / questions.length) : 0;
+
+  const titles = ['Keep Practicing', 'Good Foundation', 'Strong Reasoning', 'Excellent Work', 'Expert Diagnostician', 'Expert Diagnostician'];
+  const subs = [
+    'Genetics reasoning takes practice. Review the pearls and try again.',
+    'You caught some key patterns. Review the missed questions and look for the clinical fingerprints.',
+    'Solid clinical reasoning. You\'re developing the pattern recognition that shortens diagnostic odysseys.',
+    'Excellent. You\'re thinking like a genetic diagnostician — this is exactly the skill that changes outcomes.',
+    'Outstanding. You have the pattern recognition to identify rare genetic diseases in primary care — a skill most physicians never develop.'
+  ];
+
+  document.getElementById('scoreNumber').textContent = pct + '%';
+  document.getElementById('scoreRing').style.setProperty('--pct', pct * 3.6 + 'deg');
+  document.getElementById('scoreTitle').textContent = titles[score] || titles[4];
+  document.getElementById('scoreSub').textContent = subs[score] || subs[4];
+  document.getElementById('statCorrect').textContent = `${score}/${questions.length}`;
+  document.getElementById('statXP').textContent = `+${xp}`;
+  document.getElementById('statTime').textContent = `${avgTime}s`;
+
+  const ss = document.getElementById('scoreScreen');
+  ss.classList.add('show');
+  window.scrollTo({ top: ss.offsetTop - 80, behavior: 'smooth' });
+}
+
+function showModuleTeaser() {
+  const t = document.getElementById('moduleTeaser');
+  t.style.display = t.style.display === 'none' ? 'block' : 'none';
+}
+
+function restartCase() {
+  current = 0; score = 0; answered = []; totalTime = 0; startTimes = [];
+  document.getElementById('scoreScreen').classList.remove('show');
+  document.getElementById('progressFill').style.width = '20%';
+  for (let i = 0; i < 5; i++) {
+    const d = document.getElementById(`dot${i}`);
+    if (d) { d.classList.remove('done', 'active'); if (i===0) d.classList.add('active'); }
+  }
+  // Reset clues
+  [2,3,4,5,6,7].forEach(i => {
+    const c = document.getElementById(`clue${i}`);
+    if (c) c.classList.remove('revealed','red-flag');
+  });
+  // Reset pathway
+  for (let i = 0; i < 5; i++) {
+    const s = document.getElementById(`pstep${i}`);
+    if (s) { s.classList.remove('done','active'); if(i===0) s.classList.add('active'); }
+    const n = document.getElementById(`pnode${i}`);
+    if (n) n.textContent = i+1;
+  }
+  renderQuestion(0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Init
+renderQuestion(0);
+</script>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>

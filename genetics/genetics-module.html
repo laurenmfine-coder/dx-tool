@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Genetics & Genomics Module</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ocean:       #2874A6;
+  --ocean-dark:  #1a5276;
+  --ocean-deep:  #0d2b3e;
+  --ocean-light: #d6eaf8;
+  --ocean-mid:   #85c1e9;
+  --accent:      #e67e22;
+  --accent-light:#fef0e0;
+  --teal:        #148f77;
+  --teal-light:  #d1f2eb;
+  --purple:      #6c3483;
+  --purple-light:#e8daef;
+  --rose:        #c0392b;
+  --rose-light:  #fadbd8;
+  --gold:        #b7950b;
+  --gold-light:  #fef9e7;
+  --text:        #1a2332;
+  --text-muted:  #5d6d7e;
+  --border:      #dde4ec;
+  --bg:          #f0f4f8;
+  --white:       #ffffff;
+  --radius:      14px;
+  --shadow:      0 2px 20px rgba(40,116,166,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* NAV */
+.nav {
+  background: var(--ocean-deep);
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  color: var(--white);
+  font-size: 1.25rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo span { color: var(--ocean-mid); }
+.nav-crumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.8rem; color: rgba(255,255,255,0.5);
+}
+.nav-crumb .sep { opacity: 0.3; }
+.nav-crumb .active { color: var(--ocean-mid); font-weight: 600; }
+.nav-right {
+  display: flex; align-items: center; gap: 12px;
+}
+.nav-btn {
+  background: rgba(133,193,233,0.15);
+  border: 1px solid rgba(133,193,233,0.3);
+  color: rgba(255,255,255,0.85);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.nav-btn:hover { background: rgba(133,193,233,0.28); }
+.nav-btn.primary {
+  background: var(--ocean);
+  border-color: var(--ocean);
+  color: white;
+}
+.nav-btn.primary:hover { background: var(--ocean-dark); }
+
+/* HERO */
+.hero {
+  background: linear-gradient(145deg, var(--ocean-deep) 0%, var(--ocean-dark) 55%, #1f618d 100%);
+  padding: 52px 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(133,193,233,0.08) 0%, transparent 65%);
+}
+.hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(133,193,233,0.15);
+  border: 1px solid rgba(133,193,233,0.3);
+  color: var(--ocean-mid);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  max-width: 620px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--ocean-mid);
+}
+.hero-sub {
+  color: rgba(255,255,255,0.68);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 560px;
+  margin-bottom: 28px;
+}
+.hero-stats {
+  display: flex; gap: 32px; flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.hero-stat {
+  text-align: left;
+}
+.hero-stat-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.9rem;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.hero-stat-val span { color: var(--ocean-mid); font-size: 1.1rem; }
+.hero-stat-label {
+  font-size: 0.73rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.hero-cta-row {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 0;
+}
+.hero-btn {
+  padding: 12px 26px;
+  border-radius: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.18s;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.hero-btn-primary {
+  background: var(--accent);
+  color: white;
+}
+.hero-btn-primary:hover { background: #d35400; transform: translateY(-1px); }
+.hero-btn-ghost {
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.88);
+}
+.hero-btn-ghost:hover { background: rgba(255,255,255,0.17); }
+
+/* WAVE DIVIDER */
+.wave {
+  display: block;
+  width: 100%; margin-top: 36px;
+}
+
+/* MAIN */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 20px 72px;
+}
+
+/* SECTION HEADER */
+.sec-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 18px; flex-wrap: wrap; gap: 8px;
+}
+.sec-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem;
+  color: var(--text);
+}
+.sec-link {
+  font-size: 0.82rem;
+  color: var(--ocean);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 4px;
+}
+.sec-link:hover { color: var(--ocean-dark); }
+
+/* TRACK TABS */
+.track-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.track-tab {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--text-muted);
+  transition: all 0.18s;
+}
+.track-tab:hover { border-color: var(--ocean); color: var(--ocean); }
+.track-tab.active {
+  background: var(--ocean);
+  border-color: var(--ocean);
+  color: white;
+}
+
+/* CASE GRID */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.case-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1.5px solid transparent;
+}
+.case-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(40,116,166,0.15);
+  border-color: var(--ocean-light);
+}
+.case-card.locked { opacity: 0.72; cursor: default; }
+.case-card.locked:hover { transform: none; box-shadow: var(--shadow); border-color: transparent; }
+.case-card.completed .card-top { opacity: 0.85; }
+
+.card-top {
+  padding: 18px 18px 14px;
+  position: relative;
+}
+.card-category-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 20px;
+  margin-bottom: 10px;
+}
+.card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+.card-chief {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.card-bottom {
+  padding: 10px 18px 14px;
+  border-top: 1px solid #f0f3f7;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+}
+.card-meta {
+  display: flex; align-items: center; gap: 10px;
+}
+.card-diff {
+  font-size: 0.7rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px;
+  letter-spacing: 0.05em;
+}
+.diff-intro    { background: #d1f2eb; color: #0e6655; }
+.diff-inter    { background: #fef9e7; color: #9a7d0a; }
+.diff-advanced { background: #fadbd8; color: #922b21; }
+
+.card-steps {
+  font-size: 0.72rem; color: var(--text-muted); font-weight: 500;
+}
+.card-status {
+  font-size: 0.72rem; font-weight: 700;
+  display: flex; align-items: center; gap: 5px;
+}
+.status-complete { color: var(--teal); }
+.status-inprog   { color: var(--accent); }
+.status-locked   { color: var(--text-muted); }
+.status-new      { color: var(--ocean); }
+.card-lock-overlay {
+  position: absolute; top: 10px; right: 12px;
+  font-size: 0.85rem; opacity: 0.4;
+}
+.card-score-bar {
+  height: 3px; background: #eef1f5; margin: 0 18px 14px;
+  border-radius: 2px; overflow: hidden;
+}
+.card-score-fill {
+  height: 100%; background: var(--teal); border-radius: 2px;
+}
+
+/* FEATURED CASE */
+.featured-case {
+  background: linear-gradient(135deg, var(--ocean-dark), var(--ocean));
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  margin-bottom: 28px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-wrap: wrap;
+}
+.featured-case:hover { transform: translateY(-2px); }
+.featured-tag {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ocean-mid);
+  margin-bottom: 8px;
+}
+.featured-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem; color: white; margin-bottom: 6px;
+}
+.featured-sub {
+  font-size: 0.84rem; color: rgba(255,255,255,0.7); line-height: 1.5;
+  max-width: 480px;
+}
+.featured-btn {
+  background: white; color: var(--ocean-dark);
+  border: none; border-radius: 8px;
+  padding: 11px 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.18s;
+  flex-shrink: 0;
+}
+.featured-btn:hover { background: var(--ocean-light); }
+
+/* LEARNING PATH */
+.learning-path {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.lp-header {
+  background: linear-gradient(135deg, var(--ocean-deep), #0f3a55);
+  padding: 18px 24px;
+}
+.lp-header-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem; color: white;
+}
+.lp-header-sub {
+  font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 3px;
+}
+.lp-track {
+  padding: 8px 0;
+}
+.lp-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 24px;
+  border-bottom: 1px solid #f0f3f7;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.lp-item:last-child { border-bottom: none; }
+.lp-item:hover:not(.lp-locked) { background: #f8fafc; }
+.lp-item.lp-locked { opacity: 0.55; cursor: default; }
+.lp-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 700;
+  flex-shrink: 0;
+}
+.lp-num-done  { background: var(--teal); color: white; }
+.lp-num-active{ background: var(--ocean); color: white; }
+.lp-num-lock  { background: #eef1f5; color: var(--text-muted); }
+.lp-content { flex: 1; }
+.lp-name { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.lp-desc { font-size: 0.77rem; color: var(--text-muted); line-height: 1.4; }
+.lp-right {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.lp-xp {
+  font-size: 0.72rem; font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 2px 8px; border-radius: 10px;
+}
+.lp-cases {
+  font-size: 0.72rem; color: var(--text-muted); font-weight: 500;
+}
+
+/* PARTNERSHIP BANNER */
+.partnership-banner {
+  background: var(--ocean-deep);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  border: 1px solid rgba(133,193,233,0.2);
+}
+.pb-left {}
+.pb-eyebrow {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ocean-mid); margin-bottom: 6px;
+}
+.pb-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem; color: white; margin-bottom: 6px;
+}
+.pb-text {
+  font-size: 0.83rem; color: rgba(255,255,255,0.65); line-height: 1.55;
+  max-width: 520px;
+}
+.pb-btn {
+  background: var(--ocean-mid);
+  color: var(--ocean-deep);
+  border: none; border-radius: 8px;
+  padding: 10px 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.18s; flex-shrink: 0;
+}
+.pb-btn:hover { background: #aed6f1; }
+
+/* TOOLTIP */
+.tooltip-wrap { position: relative; display: inline-block; }
+.tooltip {
+  visibility: hidden; opacity: 0;
+  background: var(--ocean-deep); color: white;
+  font-size: 0.75rem; line-height: 1.4;
+  padding: 8px 12px; border-radius: 7px;
+  position: absolute; bottom: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%);
+  width: 200px; text-align: center;
+  transition: opacity 0.2s; pointer-events: none;
+  z-index: 50;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.tooltip-wrap:hover .tooltip { visibility: visible; opacity: 1; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.case-grid .case-card {
+  animation: fadeUp 0.4s ease both;
+}
+.case-grid .case-card:nth-child(2) { animation-delay: 0.05s; }
+.case-grid .case-card:nth-child(3) { animation-delay: 0.10s; }
+.case-grid .case-card:nth-child(4) { animation-delay: 0.15s; }
+.case-grid .case-card:nth-child(5) { animation-delay: 0.20s; }
+.case-grid .case-card:nth-child(6) { animation-delay: 0.25s; }
+
+@media (max-width: 600px) {
+  .nav-crumb { display: none; }
+  .hero { padding: 36px 20px 0; }
+  .hero-stats { gap: 20px; }
+  .main { padding: 24px 14px 60px; }
+  .featured-case { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Reason<span>Dx</span></div>
+  <div class="nav-crumb">
+    <span>Modules</span>
+    <span class="sep">›</span>
+    <span class="active">Genetics &amp; Genomics</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn">My Progress</button>
+    <button class="nav-btn primary">Start Case</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">🧬 Module · Genetics &amp; Genomics</div>
+    <h1 class="hero-title">Think Genetically.<br><em>Before</em> the Geneticist Does.</h1>
+    <p class="hero-sub">
+      Most physicians receive just two chapters of genetics in medical school. This module builds the pattern recognition skills to suspect, pursue, and coordinate rare genetic diagnoses — skills that shorten diagnostic odysseys measured in years.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val">18<span> cases</span></div>
+        <div class="hero-stat-label">Interactive Cases</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">7<span> tracks</span></div>
+        <div class="hero-stat-label">Clinical Domains</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">4.7<span> yrs</span></div>
+        <div class="hero-stat-label">Avg Diagnostic Odyssey</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">7,300<span>+</span></div>
+        <div class="hero-stat-label">Rare Genetic Diseases</div>
+      </div>
+    </div>
+    <div class="hero-cta-row">
+      <button class="hero-btn hero-btn-primary" onclick="scrollToCase()">▶ Start First Case</button>
+      <button class="hero-btn hero-btn-ghost">View Learning Path</button>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,32 C360,56 1080,0 1440,28 L1440,48 L0,48 Z" fill="#f0f4f8"/>
+  </svg>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- FEATURED CASE -->
+  <div class="featured-case" id="featuredAnchor" onclick="window.open('genetics-demo-case.html','_blank')">
+    <div>
+      <div class="featured-tag">⭐ Featured Case · Now Playing</div>
+      <div class="featured-title">The Child Who Keeps Falling</div>
+      <div class="featured-sub">A 4-year-old with hypotonia, delayed milestones, and a constellation that most primary care physicians miss — until it's been 4 years. Can you shorten the odyssey?</div>
+    </div>
+    <button class="featured-btn">Launch Case →</button>
+  </div>
+
+  <!-- TRACK TABS -->
+  <div class="sec-header">
+    <div class="sec-title">All Cases</div>
+    <a class="sec-link">Filter &amp; Sort ↓</a>
+  </div>
+  <div class="track-tabs">
+    <div class="track-tab active" onclick="filterTrack('all',this)">All Tracks</div>
+    <div class="track-tab" onclick="filterTrack('rare',this)">Rare Pediatric</div>
+    <div class="track-tab" onclick="filterTrack('primary',this)">Primary Care</div>
+    <div class="track-tab" onclick="filterTrack('ai',this)">Allergy / Immunology</div>
+    <div class="track-tab" onclick="filterTrack('cancer',this)">Cancer Genetics</div>
+    <div class="track-tab" onclick="filterTrack('pharma',this)">Pharmacogenomics</div>
+  </div>
+
+  <!-- CASE GRID -->
+  <div class="case-grid" id="caseGrid"></div>
+
+  <!-- LEARNING PATH -->
+  <div class="sec-header">
+    <div class="sec-title">Structured Learning Path</div>
+    <a class="sec-link">Customize →</a>
+  </div>
+  <div class="learning-path">
+    <div class="lp-header">
+      <div class="lp-header-title">Genetics Reasoning — Foundations to Advanced</div>
+      <div class="lp-header-sub">Complete in order for maximum pattern-building, or jump to any topic</div>
+    </div>
+    <div class="lp-track">
+      <div class="lp-item">
+        <div class="lp-num lp-num-done">✓</div>
+        <div class="lp-content">
+          <div class="lp-name">Unit 1 — Pattern Recognition: When to Think Genetically</div>
+          <div class="lp-desc">Dysmorphic features, family history red flags, and the phenotypic fingerprint approach</div>
+        </div>
+        <div class="lp-right">
+          <div class="lp-xp">+96 XP</div>
+          <div class="lp-cases">4 cases</div>
+        </div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-num lp-num-active">2</div>
+        <div class="lp-content">
+          <div class="lp-name">Unit 2 — Chromosomal Disorders &amp; Microarray Interpretation</div>
+          <div class="lp-desc">Trisomies, deletions, duplications — when to order CMA vs karyotype vs FISH</div>
+        </div>
+        <div class="lp-right">
+          <div class="lp-xp">+120 XP</div>
+          <div class="lp-cases">4 cases</div>
+        </div>
+      </div>
+      <div class="lp-item lp-locked">
+        <div class="lp-num lp-num-lock">🔒</div>
+        <div class="lp-content">
+          <div class="lp-name">Unit 3 — Single-Gene Disorders &amp; Mendelian Reasoning</div>
+          <div class="lp-desc">Autosomal dominant, recessive, X-linked — interpreting pedigrees and sequencing results</div>
+        </div>
+        <div class="lp-right">
+          <div class="lp-xp">+144 XP</div>
+          <div class="lp-cases">3 cases</div>
+        </div>
+      </div>
+      <div class="lp-item lp-locked">
+        <div class="lp-num lp-num-lock">🔒</div>
+        <div class="lp-content">
+          <div class="lp-name">Unit 4 — Allergy &amp; Immunology Genetic Overlap</div>
+          <div class="lp-desc">HAE, primary immunodeficiencies, atopic triad genetics, and mast cell disorders</div>
+        </div>
+        <div class="lp-right">
+          <div class="lp-xp">+120 XP</div>
+          <div class="lp-cases">3 cases</div>
+        </div>
+      </div>
+      <div class="lp-item lp-locked">
+        <div class="lp-num lp-num-lock">🔒</div>
+        <div class="lp-content">
+          <div class="lp-name">Unit 5 — Cancer Predisposition Syndromes</div>
+          <div class="lp-desc">BRCA, Lynch syndrome, Li-Fraumeni — when to refer, test, and counsel</div>
+        </div>
+        <div class="lp-right">
+          <div class="lp-xp">+120 XP</div>
+          <div class="lp-cases">2 cases</div>
+        </div>
+      </div>
+      <div class="lp-item lp-locked">
+        <div class="lp-num lp-num-lock">🔒</div>
+        <div class="lp-content">
+          <div class="lp-name">Unit 6 — Pharmacogenomics in Clinical Practice</div>
+          <div class="lp-desc">CYP450 variants, warfarin sensitivity, codeine toxicity, and actionable PGx</div>
+        </div>
+        <div class="lp-right">
+          <div class="lp-xp">+96 XP</div>
+          <div class="lp-cases">2 cases</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNERSHIP BANNER -->
+  <div class="partnership-banner">
+    <div class="pb-left">
+      <div class="pb-eyebrow">🧬 Powered by Clinical Intelligence</div>
+      <div class="pb-title">Building the Bridge Between Suspicion and Diagnosis</div>
+      <div class="pb-text">
+        ReasonDx trains clinicians to recognize the patterns that trigger genetic testing — the critical first mile that AI-powered genomic platforms need to fulfill their potential. 1 million primary care physicians. 7,300 rare diseases. The education gap is the bottleneck.
+      </div>
+    </div>
+    <button class="pb-btn">Learn About Partnerships</button>
+  </div>
+
+</div>
+
+<script>
+const cases = [
+  { id:1, title:"The Child Who Keeps Falling", chief:"Hypotonia, gait disturbance, global developmental delay, dysmorphic features", category:"Rare Pediatric", track:"rare", color:"#e8daef", textColor:"#6c3483", emoji:"🧬", diff:"inter", status:"active", score:0 },
+  { id:2, title:"Hives Every Time She Exercises", chief:"Episodic angioedema without urticaria, family history of sudden death", category:"Allergy / Immunology", track:"ai", color:"#d1f2eb", textColor:"#148f77", emoji:"🫧", diff:"intro", status:"new", score:0 },
+  { id:3, title:"Three Generations of Colon Cancer", chief:"Age 38 with colorectal cancer, strong family history across multiple generations", category:"Cancer Genetics", track:"cancer", color:"#fadbd8", textColor:"#c0392b", emoji:"🔬", diff:"inter", status:"locked", score:0 },
+  { id:4, title:"The Boy Who Never Got Better", chief:"Recurrent sinopulmonary infections since infancy, failure to thrive, absent tonsils", category:"Primary Care", track:"primary", color:"#d6eaf8", textColor:"#1a5276", emoji:"🛡️", diff:"intro", status:"locked", score:0 },
+  { id:5, title:"Warfarin Won't Work", chief:"INR consistently supratherapeutic on standard dosing, unusual sensitivity to anticoagulation", category:"Pharmacogenomics", track:"pharma", color:"#fef9e7", textColor:"#9a7d0a", emoji:"💊", diff:"advanced", status:"locked", score:0 },
+  { id:6, title:"The Tall Boy with a Heart Murmur", chief:"Marfanoid habitus, mitral valve prolapse, ectopia lentis discovered on routine sports physical", category:"Rare Pediatric", track:"rare", color:"#e8daef", textColor:"#6c3483", emoji:"❤️", diff:"inter", status:"locked", score:0 },
+  { id:7, title:"Her Allergies Aren't Allergies", chief:"Chronic urticaria unresponsive to antihistamines, recurrent abdominal pain, normal tryptase", category:"Allergy / Immunology", track:"ai", color:"#d1f2eb", textColor:"#148f77", emoji:"🧫", diff:"advanced", status:"locked", score:0 },
+  { id:8, title:"The Rash That Skips Generations", chief:"Blistering rash along Blaschko's lines in a newborn, mosaic pattern", category:"Rare Pediatric", track:"rare", color:"#e8daef", textColor:"#6c3483", emoji:"🧬", diff:"advanced", status:"locked", score:0 },
+  { id:9, title:"BRCA Positive, Now What?", chief:"Incidental BRCA2 variant on DTC genetic testing in a 34-year-old woman", category:"Cancer Genetics", track:"cancer", color:"#fadbd8", textColor:"#c0392b", emoji:"🎗️", diff:"intro", status:"locked", score:0 },
+];
+
+let activeTrack = 'all';
+
+function filterTrack(track, el) {
+  activeTrack = track;
+  document.querySelectorAll('.track-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('caseGrid');
+  const filtered = activeTrack === 'all' ? cases : cases.filter(c => c.track === activeTrack);
+  const diffLabel = { intro:'Introductory', inter:'Intermediate', advanced:'Advanced' };
+  const statusMap = {
+    active:    { label:'In Progress', cls:'status-inprog',   icon:'▶' },
+    new:       { label:'Start',        cls:'status-new',     icon:'✦' },
+    locked:    { label:'Locked',       cls:'status-locked',  icon:'🔒' },
+    completed: { label:'Completed',    cls:'status-complete',icon:'✓' },
+  };
+
+  grid.innerHTML = filtered.map((c,i) => {
+    const s = statusMap[c.status];
+    const isLocked = c.status === 'locked';
+    const scoreBar = c.score > 0 ? `<div class="card-score-bar"><div class="card-score-fill" style="width:${c.score}%"></div></div>` : '';
+    return `
+      <div class="case-card${isLocked?' locked':''}" style="animation-delay:${i*0.05}s" onclick="${isLocked?'':c.id===1?"window.open('genetics-demo-case.html','_blank')":"null"}">
+        <div class="card-top">
+          ${isLocked?'<div class="card-lock-overlay">🔒</div>':''}
+          <div class="card-category-pill" style="background:${c.color};color:${c.textColor}">${c.emoji} ${c.category}</div>
+          <div class="card-title">${c.title}</div>
+          <div class="card-chief">${c.chief}</div>
+        </div>
+        ${scoreBar}
+        <div class="card-bottom">
+          <div class="card-meta">
+            <span class="card-diff diff-${c.diff}">${diffLabel[c.diff]}</span>
+            <span class="card-steps">5 steps</span>
+          </div>
+          <div class="card-status ${s.cls}">${s.icon} ${s.label}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function scrollToCase() {
+  document.getElementById('featuredAnchor').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+renderGrid();
+</script>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>
