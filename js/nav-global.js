@@ -39,8 +39,22 @@
           </a>
           <div class="rdx-dropdown-divider"></div>
           <a class="rdx-dropdown-item" href="/genetics/genetics-demo-case.html">
-            <span class="rdx-dropdown-item-title">▶ Featured Case</span>
+            <span class="rdx-dropdown-item-title">▶ Angelman Syndrome Case</span>
             <span class="rdx-dropdown-item-sub">The Child Who Keeps Falling</span>
+          </a>
+          <a class="rdx-dropdown-item" href="/genetics/genetics-aadc-case.html">
+            <span class="rdx-dropdown-item-title">▶ AADC Deficiency Case</span>
+            <span class="rdx-dropdown-item-sub">The Baby Who Wouldn't Stop Rolling Her Eyes</span>
+          </a>
+          <div class="rdx-dropdown-divider"></div>
+          <a class="rdx-dropdown-item" href="/genetics/genetics-ai-case.html">
+            <span class="rdx-dropdown-item-title">▶ HAE / A&sol;I Genetics Case</span>
+            <span class="rdx-dropdown-item-sub">The Swelling That Skips Generations</span>
+          </a>
+          <div class="rdx-dropdown-divider"></div>
+          <a class="rdx-dropdown-item" href="/genetics/genetics-cme.html">
+            <span class="rdx-dropdown-item-title">🎓 CME Module</span>
+            <span class="rdx-dropdown-item-sub">6.0 credits · For practicing physicians</span>
           </a>
         </div>
       </div>

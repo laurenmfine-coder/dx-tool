@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Genetics CME for Practicing Physicians</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<style>
+body{background:var(--rdx-bg)}
+.hero{background:linear-gradient(145deg,var(--rdx-ocean-deep) 0%,#1a0a2e 60%,#2d1b5e 100%);padding:64px 48px 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(168,85,247,.12) 0%,transparent 60%);pointer-events:none}
+.hero-inner{max-width:1040px;margin:0 auto;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.35);color:#c084fc;font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:16px}
+.hero-title{font-family:var(--rdx-font-serif);font-size:clamp(1.8rem,3.5vw,2.6rem);color:#fff;line-height:1.15;margin-bottom:12px}
+.hero-title em{font-style:italic;color:#c084fc}
+.hero-sub{color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.65;max-width:560px;margin-bottom:28px}
+.hero-cme-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:36px}
+.cme-credit{background:rgba(168,85,247,.2);border:1.5px solid rgba(168,85,247,.4);border-radius:10px;padding:10px 18px;display:flex;align-items:center;gap:10px}
+.cme-credit-num{font-family:var(--rdx-font-serif);font-size:1.8rem;color:#c084fc;line-height:1}
+.cme-credit-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.6);line-height:1.3}
+.accred-badges{display:flex;gap:8px;flex-wrap:wrap}
+.accred-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);font-size:.72rem;font-weight:600;padding:5px 10px;border-radius:6px}
+.hero-wave{display:block;width:100%;margin-top:40px}
+.main{max-width:1040px;margin:0 auto;padding:40px 24px 72px}
+.module-path{display:grid;gap:12px;margin-bottom:40px}
+.path-item{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:18px 22px;display:flex;align-items:center;gap:18px;cursor:pointer;transition:all .2s;text-decoration:none;color:inherit}
+.path-item:hover{border-color:#6b28a6;box-shadow:var(--rdx-shadow);transform:translateX(4px)}
+.path-item.featured{border-color:rgba(107,40,166,.4);background:linear-gradient(135deg,rgba(107,40,166,.04),var(--rdx-surface))}
+.path-num{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--rdx-font-serif);font-size:1.1rem;font-weight:400;color:#fff;background:#6b28a6;flex-shrink:0}
+.path-num.done{background:var(--rdx-success)}
+.path-content{flex:1}
+.path-title{font-size:.95rem;font-weight:700;color:var(--rdx-text);margin-bottom:3px}
+.path-desc{font-size:.8rem;color:var(--rdx-text-muted);line-height:1.4}
+.path-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap}
+.path-time{font-size:.72rem;color:var(--rdx-text-muted);font-weight:500}
+.path-xp{font-size:.7rem;font-weight:700;background:var(--rdx-accent-light);color:var(--rdx-accent-dark);padding:2px 8px;border-radius:10px}
+.path-status-new{font-size:.68rem;font-weight:700;background:rgba(107,40,166,.12);color:#6b28a6;padding:2px 8px;border-radius:10px;border:1px solid rgba(107,40,166,.25)}
+.audience-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:24px 0 40px}
+.audience-card{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:18px;transition:all .18s}
+.audience-card:hover{border-color:var(--rdx-ocean-light);transform:translateY(-2px);box-shadow:var(--rdx-shadow)}
+.audience-icon{font-size:1.4rem;margin-bottom:8px}
+.audience-title{font-size:.9rem;font-weight:700;margin-bottom:4px}
+.audience-desc{font-size:.78rem;color:var(--rdx-text-muted);line-height:1.5}
+.gap-banner{background:linear-gradient(135deg,var(--rdx-ocean-deep),#1a0a2e);border-radius:var(--rdx-radius-lg);padding:32px;margin-bottom:40px}
+.gap-banner-title{font-family:var(--rdx-font-serif);font-size:1.3rem;color:#fff;margin-bottom:16px}
+.gap-stats{display:flex;gap:32px;flex-wrap:wrap}
+.gap-stat{}
+.gap-num{font-family:var(--rdx-font-serif);font-size:2rem;color:#c084fc;line-height:1;margin-bottom:3px}
+.gap-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.5)}
+.cta-block{background:linear-gradient(135deg,#1a0a2e,#3b1a6b);border-radius:var(--rdx-radius-lg);padding:40px;text-align:center}
+.cta-block h2{font-family:var(--rdx-font-serif);font-size:1.8rem;color:#fff;margin-bottom:10px}
+.cta-block p{font-size:.9rem;color:rgba(255,255,255,.65);margin-bottom:28px}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">🧬 CME · Genetics for Clinicians</div>
+    <h1 class="hero-title">Genetics in Clinical Practice:<br><em>Recognizing What You Weren't Taught</em></h1>
+    <p class="hero-sub">A CME module for primary care physicians, pediatricians, and specialists who encounter rare genetic disease — but weren't trained to recognize it. Case-based, evidence-based, and built for the clinician in front of the patient.</p>
+    <div class="hero-cme-bar">
+      <div class="cme-credit">
+        <div class="cme-credit-num">6.0</div>
+        <div class="cme-credit-label">AMA PRA Category 1<br>Credits™ (pending)</div>
+      </div>
+      <div class="accred-badges">
+        <div class="accred-badge">🏥 Primary Care</div>
+        <div class="accred-badge">👶 Pediatrics</div>
+        <div class="accred-badge">🩺 Internal Medicine</div>
+        <div class="accred-badge">🧬 Neurology</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="/genetics/genetics-demo-case.html">▶ Start First Case Free</a>
+      <a class="rdx-btn rdx-btn-ghost-white" href="/genetics/genetics-module.html">View Full Curriculum</a>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 48" preserveAspectRatio="none"><path d="M0,32 C360,56 1080,0 1440,28 L1440,48 L0,48 Z" fill="#f0f4f8"/></svg>
+</div>
+
+<div class="main">
+
+  <!-- THE GAP -->
+  <div class="gap-banner">
+    <div class="gap-banner-title">The gap this module closes</div>
+    <div class="gap-stats">
+      <div class="gap-stat"><div class="gap-num">4.7</div><div class="gap-label">Avg years in diagnostic odyssey</div></div>
+      <div class="gap-stat"><div class="gap-num">7,300+</div><div class="gap-label">Known rare genetic diseases</div></div>
+      <div class="gap-stat"><div class="gap-num">~1,600</div><div class="gap-label">Geneticists in the US</div></div>
+      <div class="gap-stat"><div class="gap-num">1M+</div><div class="gap-label">Primary care physicians who see these patients first</div></div>
+    </div>
+  </div>
+
+  <!-- MODULE PATH -->
+  <div class="rdx-label" style="margin-bottom:12px">CME Curriculum — 6 Cases · 6 Credits</div>
+
+  <div class="module-path">
+    <a class="path-item featured" href="/genetics/genetics-demo-case.html">
+      <div class="path-num">1</div>
+      <div class="path-content">
+        <div class="path-title">When to Think Genetically — The Dysmorphology Approach</div>
+        <div class="path-desc">Angelman syndrome · A 4-year-old with hypotonia, happy affect, and a 4-year diagnostic odyssey. Primary care pattern recognition.</div>
+      </div>
+      <div class="path-meta">
+        <span class="path-time">~25 min</span>
+        <span class="path-xp">+120 XP</span>
+        <span class="path-status-new">Start Here</span>
+      </div>
+    </a>
+
+    <a class="path-item featured" href="/genetics/genetics-aadc-case.html">
+      <div class="path-num">2</div>
+      <div class="path-content">
+        <div class="path-title">Neurotransmitter Disorders — The Baby Who Wouldn't Stop Rolling Her Eyes</div>
+        <div class="path-desc">AADC deficiency · Oculogyric crises, hypotonia, autonomic dysfunction, normal MRI. Gene therapy approved 2024.</div>
+      </div>
+      <div class="path-meta">
+        <span class="path-time">~28 min</span>
+        <span class="path-xp">+150 XP</span>
+        <span class="path-status-new">Available</span>
+      </div>
+    </a>
+
+    <a class="path-item featured" href="/genetics/genetics-ai-case.html">
+      <div class="path-num">3</div>
+      <div class="path-content">
+        <div class="path-title">Genetic Overlap in Allergy/Immunology — Angioedema That Isn't Allergic</div>
+        <div class="path-desc">Hereditary angioedema · Recurrent swelling without urticaria, ACE inhibitor connection, bradykinin pathway, autosomal dominant inheritance.</div>
+      </div>
+      <div class="path-meta">
+        <span class="path-time">~25 min</span>
+        <span class="path-xp">+140 XP</span>
+        <span class="path-status-new">Available</span>
+      </div>
+    </a>
+
+    <div class="path-item" style="opacity:.65">
+      <div class="path-num" style="background:#8b5cf6">4</div>
+      <div class="path-content">
+        <div class="path-title">Cancer Predisposition — The 38-Year-Old With Colorectal Cancer</div>
+        <div class="path-desc">Lynch syndrome · Three generations of colon cancer. When to suspect, how to test, what to do with a positive result.</div>
+      </div>
+      <div class="path-meta">
+        <span class="path-time">~22 min</span>
+        <span class="path-xp">+120 XP</span>
+        <span class="rdx-badge rdx-badge-ocean" style="font-size:.68rem">Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="path-item" style="opacity:.65">
+      <div class="path-num" style="background:#8b5cf6">5</div>
+      <div class="path-content">
+        <div class="path-title">Pharmacogenomics — Why Warfarin Won't Work</div>
+        <div class="path-desc">CYP2C9/VKORC1 variants · Unusual anticoagulant sensitivity, actionable pharmacogenomics in everyday practice.</div>
+      </div>
+      <div class="path-meta">
+        <span class="path-time">~20 min</span>
+        <span class="path-xp">+96 XP</span>
+        <span class="rdx-badge rdx-badge-ocean" style="font-size:.68rem">Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="path-item" style="opacity:.65">
+      <div class="path-num" style="background:#8b5cf6">6</div>
+      <div class="path-content">
+        <div class="path-title">Ordering and Coordinating Genetic Testing — The Primary Care Playbook</div>
+        <div class="path-desc">CMA vs karyotype vs WES vs targeted panels. When to order, how to interpret, when to refer, and how to counsel.</div>
+      </div>
+      <div class="path-meta">
+        <span class="path-time">~22 min</span>
+        <span class="path-xp">+120 XP</span>
+        <span class="rdx-badge rdx-badge-ocean" style="font-size:.68rem">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO IT'S FOR -->
+  <div class="rdx-label" style="margin-bottom:12px">Who This Module Is Built For</div>
+  <div class="audience-grid">
+    <div class="audience-card"><div class="audience-icon">🩺</div><div class="audience-title">Primary Care Physicians</div><div class="audience-desc">You see these patients first. This teaches you the patterns that end diagnostic odysseys before they begin.</div></div>
+    <div class="audience-card"><div class="audience-icon">👶</div><div class="audience-title">Pediatricians</div><div class="audience-desc">Most rare genetic diseases present in infancy and childhood. Hypotonia, dysmorphic features, developmental delay — knowing when to think genetically changes outcomes.</div></div>
+    <div class="audience-card"><div class="audience-icon">🧠</div><div class="audience-title">Neurologists</div><div class="audience-desc">Movement disorders, epilepsy, and neurodevelopmental conditions that don't respond to standard treatment — the genetic differential you need.</div></div>
+    <div class="audience-card"><div class="audience-icon">🌿</div><div class="audience-title">Allergists / Immunologists</div><div class="audience-desc">HAE, primary immunodeficiencies, atopic triad genetics — your specialty has more genetic disease overlap than most physicians realize.</div></div>
+  </div>
+
+  <div class="cta-block">
+    <h2>Start with Case 1 — free, no account needed</h2>
+    <p>See what clinical genetics education looks like when it's built for the clinician who needs it most.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="/genetics/genetics-demo-case.html">▶ Start Case 1 Free</a>
+      <a class="rdx-btn rdx-btn-ghost-white" href="/genetics/genetics-module.html">View All 18 Cases</a>
+    </div>
+  </div>
+
+</div>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>
