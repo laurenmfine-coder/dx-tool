@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LegacyDx — Preserving the Wisdom That Isn't Written Down</title>
+<link rel="stylesheet" href="/css/rdx-design-system.css">
+<style>
+body{background:var(--rdx-ocean-deep)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 48px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 30% 50%,rgba(133,193,233,.06) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 80% 20%,rgba(168,85,247,.05) 0%,transparent 50%)}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(133,193,233,.3),transparent)}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;width:100%}
+.hero-label{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--rdx-ocean-mid);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.hero-label::before{content:'';width:32px;height:1px;background:var(--rdx-ocean-mid);opacity:.6}
+.hero-title{font-family:var(--rdx-font-serif);font-size:clamp(2.8rem,6vw,5rem);color:#fff;line-height:1.06;letter-spacing:-.02em;margin-bottom:24px}
+.hero-title em{font-style:italic;color:var(--rdx-ocean-mid)}
+.hero-title .accent{color:#c084fc}
+.hero-quote{font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(255,255,255,.55);line-height:1.8;max-width:620px;margin-bottom:48px;font-style:italic;border-left:2px solid rgba(133,193,233,.3);padding-left:20px}
+.hero-quote cite{font-style:normal;font-size:.82rem;color:rgba(255,255,255,.35);display:block;margin-top:8px}
+.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:64px}
+.hero-stat-row{display:flex;gap:40px;flex-wrap:wrap}
+.hero-stat{}
+.hero-stat-num{font-family:var(--rdx-font-serif);font-size:2.2rem;color:#fff;line-height:1;margin-bottom:3px}
+.hero-stat-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35)}
+
+/* SECTION TRANSITION */
+.wave-down{display:block;width:100%}
+
+/* BODY */
+.body-section{background:var(--rdx-bg)}
+.container{max-width:960px;margin:0 auto;padding:64px 24px}
+
+/* THE PROBLEM */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.problem-card{background:var(--rdx-surface);border-radius:var(--rdx-radius-lg);padding:28px;border:1.5px solid var(--rdx-border)}
+.problem-card.lost{border-color:rgba(192,57,43,.2);background:rgba(192,57,43,.03)}
+.problem-card.preserved{border-color:rgba(40,116,166,.2);background:rgba(40,116,166,.03)}
+.problem-icon{font-size:1.8rem;margin-bottom:14px}
+.problem-title{font-family:var(--rdx-font-serif);font-size:1.2rem;margin-bottom:10px}
+.problem-card.lost .problem-title{color:var(--rdx-danger)}
+.problem-card.preserved .problem-title{color:var(--rdx-ocean-dark)}
+.problem-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.problem-list li{font-size:.88rem;color:var(--rdx-text-muted);line-height:1.5;display:flex;gap:8px}
+.problem-list li::before{content:'—';color:var(--rdx-text-dim);flex-shrink:0}
+
+/* INSPIRATION */
+.inspiration-band{background:linear-gradient(135deg,#1a0a2e,#0d2b3e);padding:56px 48px;position:relative;overflow:hidden}
+.inspiration-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(168,85,247,.08) 0%,transparent 60%)}
+.inspiration-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.inspiration-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;flex-wrap:wrap}
+.inspiration-text{}
+.inspiration-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c084fc;margin-bottom:12px}
+.inspiration-title{font-family:var(--rdx-font-serif);font-size:clamp(1.5rem,2.5vw,2rem);color:#fff;margin-bottom:16px;line-height:1.2}
+.inspiration-body{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.72;margin-bottom:20px}
+.inspiration-quote{background:rgba(255,255,255,.06);border-left:3px solid #c084fc;border-radius:0 var(--rdx-radius) var(--rdx-radius) 0;padding:16px 20px;font-style:italic;font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.65}
+.inspiration-quote cite{font-style:normal;font-size:.75rem;color:rgba(255,255,255,.4);display:block;margin-top:8px}
+.shoah-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--rdx-radius-lg);padding:24px}
+.shoah-title{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#c084fc;margin-bottom:12px}
+.shoah-fact{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
+.shoah-fact-num{font-family:var(--rdx-font-serif);font-size:1.4rem;color:#fff;line-height:1;flex-shrink:0;min-width:60px}
+.shoah-fact-text{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.5}
+.tech-note{background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.3);border-radius:var(--rdx-radius);padding:14px 16px;margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.6}
+.tech-note strong{color:#c084fc}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.how-card{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-lg);padding:24px;text-align:center;position:relative;overflow:hidden}
+.how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.how-card:nth-child(1)::before{background:var(--rdx-ocean)}
+.how-card:nth-child(2)::before{background:#6b28a6}
+.how-card:nth-child(3)::before{background:var(--rdx-accent)}
+.how-num{font-family:var(--rdx-font-serif);font-size:3rem;color:var(--rdx-ocean-light);line-height:1;margin-bottom:8px;opacity:.5}
+.how-icon{font-size:1.8rem;margin-bottom:12px}
+.how-title{font-size:.95rem;font-weight:700;color:var(--rdx-text);margin-bottom:8px}
+.how-body{font-size:.82rem;color:var(--rdx-text-muted);line-height:1.6}
+
+/* VOICES */
+.voices-section{background:var(--rdx-ocean-deep);padding:56px 48px}
+.voices-inner{max-width:960px;margin:0 auto}
+.voices-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:28px}
+.voice-card{background:rgba(255,255,255,.05);border:1px solid rgba(133,193,233,.15);border-radius:var(--rdx-radius-lg);padding:22px;cursor:pointer;transition:all .2s;position:relative}
+.voice-card:hover{background:rgba(255,255,255,.09);border-color:rgba(133,193,233,.3);transform:translateY(-2px)}
+.voice-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rdx-ocean-dark),var(--rdx-ocean));display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:14px;border:2px solid rgba(133,193,233,.3)}
+.voice-name{font-family:var(--rdx-font-serif);font-size:1.05rem;color:#fff;margin-bottom:3px}
+.voice-role{font-size:.75rem;color:var(--rdx-ocean-mid);font-weight:600;margin-bottom:10px}
+.voice-quote{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;font-style:italic}
+.voice-topics{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.voice-topic{font-size:.68rem;font-weight:600;background:rgba(133,193,233,.12);border:1px solid rgba(133,193,233,.2);color:var(--rdx-ocean-mid);padding:2px 8px;border-radius:10px}
+.voice-card.add-card{border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:200px}
+.add-icon{font-size:2rem;color:rgba(133,193,233,.3);margin-bottom:10px}
+.add-text{font-size:.85rem;color:rgba(255,255,255,.35);line-height:1.5}
+
+/* DEMO INTERFACE */
+.demo-section{background:var(--rdx-bg);padding:56px 48px}
+.demo-inner{max-width:800px;margin:0 auto}
+.demo-interface{background:var(--rdx-ocean-deep);border-radius:var(--rdx-radius-lg);overflow:hidden;border:1px solid rgba(133,193,233,.15);box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.demo-header{background:rgba(255,255,255,.05);border-bottom:1px solid rgba(133,193,233,.12);padding:16px 24px;display:flex;align-items:center;gap:14px}
+.demo-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rdx-ocean-dark),var(--rdx-ocean));display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.demo-name{font-family:var(--rdx-font-serif);color:#fff;font-size:1rem}
+.demo-status{font-size:.72rem;color:var(--rdx-ocean-mid);display:flex;align-items:center;gap:5px}
+.demo-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--rdx-ocean-mid)}
+.demo-chat{padding:24px;display:flex;flex-direction:column;gap:14px;min-height:320px}
+.demo-msg{display:flex;gap:10px;align-items:flex-start;animation:cmeSlideUp .4s ease both}
+.demo-msg.student{flex-direction:row-reverse}
+.demo-bubble{max-width:75%;padding:12px 16px;border-radius:14px;font-size:.88rem;line-height:1.6}
+.demo-msg.physician .demo-bubble{background:rgba(255,255,255,.08);border:1px solid rgba(133,193,233,.15);color:rgba(255,255,255,.85);border-bottom-left-radius:4px}
+.demo-msg.student .demo-bubble{background:var(--rdx-ocean);color:#fff;border-bottom-right-radius:4px}
+.demo-msg-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.demo-msg.physician .demo-msg-avatar{background:rgba(40,116,166,.3)}
+.demo-msg.student .demo-msg-avatar{background:rgba(255,255,255,.1)}
+.demo-input{padding:16px 20px;border-top:1px solid rgba(133,193,233,.1);display:flex;gap:10px}
+.demo-input input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(133,193,233,.2);border-radius:8px;padding:10px 14px;font-family:var(--rdx-font-sans);font-size:.85rem;color:#fff;outline:none}
+.demo-input input::placeholder{color:rgba(255,255,255,.25)}
+.demo-input input:focus{border-color:var(--rdx-ocean-mid)}
+.demo-send{background:var(--rdx-ocean);border:none;border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s;flex-shrink:0}
+.demo-send:hover{background:var(--rdx-ocean-dark)}
+.demo-disclaimer{font-size:.72rem;color:rgba(255,255,255,.25);text-align:center;padding:0 20px 16px;line-height:1.5}
+
+/* MISSION */
+.mission-band{background:linear-gradient(135deg,var(--rdx-ocean-deep),#1a0a2e);padding:64px 48px;text-align:center}
+.mission-inner{max-width:700px;margin:0 auto}
+.mission-title{font-family:var(--rdx-font-serif);font-size:clamp(1.8rem,3.5vw,2.6rem);color:#fff;margin-bottom:20px;line-height:1.15}
+.mission-title em{font-style:italic;color:var(--rdx-ocean-mid)}
+.mission-body{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:36px}
+.mission-pillars{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.mission-pillar{text-align:center}
+.pillar-icon{font-size:1.6rem;margin-bottom:6px}
+.pillar-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45)}
+
+@keyframes cmeSlideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){
+  .hero{padding:60px 20px}
+  .problem-grid,.inspiration-grid,.how-grid{grid-template-columns:1fr}
+  .inspiration-band,.voices-section,.demo-section,.mission-band{padding:40px 20px}
+  .container{padding:48px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">ReasonDx · LegacyDx Initiative</div>
+    <h1 class="hero-title">
+      The wisdom that<br>
+      <em>isn't written down</em><br>
+      <span class="accent">deserves to survive.</span>
+    </h1>
+    <div class="hero-quote">
+      "We survivors feel that when we are gone, our story is gone. I'm hoping that many, many years from now, people will still be able to speak with me. That I will be able to answer questions for them."
+      <cite>— Aaron Elster, Holocaust survivor, Dimensions in Testimony participant</cite>
+    </div>
+    <div class="hero-cta-row">
+      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="#how-it-works">See How It Works →</a>
+      <a class="rdx-btn rdx-btn-ghost-white rdx-btn-lg" href="#voices">Meet the Physicians</a>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num">10,000+</div>
+        <div class="hero-stat-label">Master Clinicians retiring annually in the US</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">0</div>
+        <div class="hero-stat-label">Systematic archives of their clinical wisdom</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">∞</div>
+        <div class="hero-stat-label">Years their knowledge could be preserved</div>
+      </div>
+    </div>
+  </div>
+  <svg class="wave-down" viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,28 C360,56 1080,0 1440,32 L1440,56 L0,56 Z" fill="#f0f4f8"/></svg>
+</div>
+
+<!-- THE PROBLEM -->
+<div class="body-section">
+  <div class="container">
+    <div class="rdx-label">The Problem</div>
+    <h2 class="rdx-display-sm" style="margin-top:8px;margin-bottom:8px">Medical knowledge has two forms. Only one survives.</h2>
+    <p class="rdx-body" style="color:var(--rdx-text-muted);max-width:580px">Every generation of physicians relearns the same hard lessons from scratch. The pattern recognition that takes 30 years to develop disappears when its owner retires.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card lost">
+        <div class="problem-icon">📖</div>
+        <div class="problem-title">What Gets Published</div>
+        <ul class="problem-list">
+          <li>Diagnostic criteria and evidence-based guidelines</li>
+          <li>Clinical trial outcomes and statistics</li>
+          <li>Pathophysiology and mechanism</li>
+          <li>Standard treatment algorithms</li>
+          <li>What to do when the textbook case presents</li>
+        </ul>
+      </div>
+      <div class="problem-card preserved">
+        <div class="problem-icon">🧠</div>
+        <div class="problem-title">What Gets Lost</div>
+        <ul class="problem-list">
+          <li>"When the family is too calm, that's when I get worried"</li>
+          <li>The 3am instinct that made them go back to check</li>
+          <li>What a diagnosis looks like before it looks like itself</li>
+          <li>Why this specific combination of findings is never in the textbook</li>
+          <li>What to do when the patient doesn't read the textbook</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSPIRATION -->
+<div class="inspiration-band">
+  <div class="inspiration-inner">
+    <div class="inspiration-grid">
+      <div class="inspiration-text">
+        <div class="inspiration-eyebrow">The Inspiration</div>
+        <h2 class="inspiration-title">USC Shoah Foundation proved it was possible.</h2>
+        <p class="inspiration-body">Since 2012, the USC Shoah Foundation's <em>Dimensions in Testimony</em> project has recorded Holocaust survivors in such depth — answering over 1,000 questions each — that people can have real conversations with them long after they are gone. Visitors at museums around the world ask questions and hear answers in the survivor's own voice and words, in real time.</p>
+        <div class="inspiration-quote">
+          "Dimensions in Testimony ensures that future generations will still be able to speak with and learn from survivors."
+          <cite>— USC Shoah Foundation</cite>
+        </div>
+      </div>
+      <div>
+        <div class="shoah-card">
+          <div class="shoah-title">Dimensions in Testimony — By the Numbers</div>
+          <div class="shoah-fact">
+            <div class="shoah-fact-num">50+</div>
+            <div class="shoah-fact-text">Interactive testimonies recorded in 7 languages across 4 continents</div>
+          </div>
+          <div class="shoah-fact">
+            <div class="shoah-fact-num">1,000</div>
+            <div class="shoah-fact-text">Questions asked and answered per survivor, recorded over 5 days</div>
+          </div>
+          <div class="shoah-fact">
+            <div class="shoah-fact-num">∞</div>
+            <div class="shoah-fact-text">Years the testimony remains interactive — filmed to be future-proofed as hologram technology develops</div>
+          </div>
+          <div class="tech-note">
+            <strong>Critical distinction:</strong> This technology does not use generative AI. It does not create, imagine, or fabricate responses. It matches questions to real, pre-recorded answers — unedited, in the person's own words. The physician's wisdom is preserved exactly as spoken. Nothing is invented.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="body-section" id="how-it-works">
+  <div class="container">
+    <div class="rdx-label">How LegacyDx Works</div>
+    <h2 class="rdx-display-sm" style="margin-top:8px;margin-bottom:8px">The same technology. Applied to medicine.</h2>
+    <p class="rdx-body" style="color:var(--rdx-text-muted);max-width:560px">A structured recording process. A searchable archive. An interactive conversation that survives the physician.</p>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-icon">🎬</div>
+        <div class="how-title">Record the Physician</div>
+        <div class="how-body">A structured 2-day interview captures the physician answering 500–800 prepared questions about diagnosis, clinical reasoning, cases they remember, mistakes they made, and the patterns that took years to see. Filmed on green screen for longevity.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-icon">🧬</div>
+        <div class="how-title">Build the Archive</div>
+        <div class="how-body">Natural language processing maps each question to the most relevant recorded response. The system learns — the more questions asked, the better the matching. No responses are generated. Everything is the physician's actual words.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-icon">💬</div>
+        <div class="how-title">Preserve the Conversation</div>
+        <div class="how-body">Students, residents, and physicians worldwide can ask the physician questions — about a diagnosis, a clinical scenario, a career decision — and hear their answer in their own voice. Today. In ten years. In fifty.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHYSICIAN VOICES -->
+<div class="voices-section" id="voices">
+  <div class="voices-inner">
+    <div class="rdx-label" style="color:var(--rdx-ocean-mid)">The Archive</div>
+    <h2 style="font-family:var(--rdx-font-serif);font-size:clamp(1.6rem,3vw,2.2rem);color:#fff;margin-top:8px;margin-bottom:6px">Physicians whose wisdom deserves to survive them</h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.5);max-width:520px;margin-bottom:28px">These are the kinds of clinicians LegacyDx was built to preserve — specialists whose pattern recognition exists nowhere else.</p>
+
+    <div class="voices-grid">
+      <div class="voice-card">
+        <div class="voice-avatar">🧬</div>
+        <div class="voice-name">Dr. Eleanor M.</div>
+        <div class="voice-role">Pediatric Geneticist · 34 years · Johns Hopkins</div>
+        <div class="voice-quote">"The first time I saw AADC deficiency, I called it a movement disorder. I've seen it 47 times since. Let me tell you what I look for now that I didn't know to look for then."</div>
+        <div class="voice-topics">
+          <span class="voice-topic">Rare Disease</span>
+          <span class="voice-topic">Oculogyric Crisis</span>
+          <span class="voice-topic">Diagnostic Delay</span>
+        </div>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-avatar">❤️</div>
+        <div class="voice-name">Dr. James W.</div>
+        <div class="voice-role">Interventional Cardiologist · 28 years · Mayo Clinic</div>
+        <div class="voice-quote">"I can tell within 90 seconds of meeting a chest pain patient whether they're going to the cath lab. I've never been able to explain how. Let me try."</div>
+        <div class="voice-topics">
+          <span class="voice-topic">ACS Pattern Recognition</span>
+          <span class="voice-topic">Clinical Gestalt</span>
+          <span class="voice-topic">Decision Making</span>
+        </div>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-avatar">🌿</div>
+        <div class="voice-name">Dr. Patricia R.</div>
+        <div class="voice-role">Allergist/Immunologist · 31 years · Private Practice</div>
+        <div class="voice-quote">"I've diagnosed 23 cases of hereditary angioedema in my career. Every single one was called something else first. The story is always the same — let me tell you what to listen for."</div>
+        <div class="voice-topics">
+          <span class="voice-topic">HAE</span>
+          <span class="voice-topic">Diagnostic Odyssey</span>
+          <span class="voice-topic">Bradykinin</span>
+        </div>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-avatar">🧠</div>
+        <div class="voice-name">Dr. Samuel K.</div>
+        <div class="voice-role">Pediatric Neurologist · 40 years · Columbia</div>
+        <div class="voice-quote">"I have seen things in 40 years that will never be in any paper because they only happened once and I was the only one in the room. That's not nothing. That's everything."</div>
+        <div class="voice-topics">
+          <span class="voice-topic">Rare Pediatric Neurology</span>
+          <span class="voice-topic">Clinical Wisdom</span>
+          <span class="voice-topic">Pattern Recognition</span>
+        </div>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-avatar">🔬</div>
+        <div class="voice-name">Dr. Maria C.</div>
+        <div class="voice-role">Medical Geneticist · 26 years · University of Miami</div>
+        <div class="voice-quote">"In genetics, we learn from each other's cases more than from any textbook. The knowledge lives in the oral tradition. When we stop talking to each other, the knowledge disappears."</div>
+        <div class="voice-topics">
+          <span class="voice-topic">Genetics Oral Tradition</span>
+          <span class="voice-topic">Rare Disease</span>
+          <span class="voice-topic">Clinical Teaching</span>
+        </div>
+      </div>
+
+      <div class="voice-card add-card">
+        <div class="add-icon">＋</div>
+        <div class="add-text">Know a master clinician whose wisdom should be preserved? Their knowledge belongs in this archive.</div>
+        <a class="rdx-btn rdx-btn-ghost" style="margin-top:16px;font-size:.8rem" href="mailto:lfine@nova.edu">Nominate a Physician</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO INTERFACE -->
+<div class="demo-section">
+  <div class="demo-inner">
+    <div style="text-align:center;margin-bottom:28px">
+      <div class="rdx-label" style="justify-content:center;display:flex">The Experience</div>
+      <h2 class="rdx-display-sm" style="margin-top:8px;margin-bottom:8px">What it feels like to ask a master clinician</h2>
+      <p class="rdx-body" style="color:var(--rdx-text-muted)">A conversation — not a search. Not a textbook. A real physician, answering in their own words.</p>
+    </div>
+
+    <div class="demo-interface">
+      <div class="demo-header">
+        <div class="demo-avatar">🧬</div>
+        <div>
+          <div class="demo-name">Dr. Eleanor M. — Pediatric Geneticist</div>
+          <div class="demo-status">Johns Hopkins · 34 years of rare disease experience</div>
+        </div>
+      </div>
+      <div class="demo-chat" id="demoChat">
+        <div class="demo-msg physician">
+          <div class="demo-msg-avatar">🧬</div>
+          <div class="demo-bubble">Hello. I've spent 34 years in pediatric genetics. Ask me anything — about a case, a diagnosis, a pattern, a mistake. I'll tell you what I've learned.</div>
+        </div>
+      </div>
+      <div class="demo-input">
+        <input type="text" id="demoInput" placeholder="Ask Dr. Eleanor anything about rare disease diagnosis..." onkeydown="if(event.key==='Enter')sendDemoMessage()">
+        <button class="demo-send" onclick="sendDemoMessage()">→</button>
+      </div>
+      <div class="demo-disclaimer">This is a concept demonstration. In the actual LegacyDx platform, all responses are the physician's own recorded words — never generated by AI.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<div class="mission-band">
+  <div class="mission-inner">
+    <h2 class="mission-title">
+      The Shoah Foundation preserves<br>
+      the voices that witnessed history.<br>
+      <em>LegacyDx preserves the voices<br>that witnessed disease.</em>
+    </h2>
+    <p class="mission-body">Medicine's oral tradition is disappearing. The attending who saw things no one else has seen, who developed patterns over decades that exist nowhere in writing — when they retire, that knowledge is gone. Every generation of students relearns the same hard lessons. LegacyDx is the archive that changes that.</p>
+
+    <div class="mission-pillars">
+      <div class="mission-pillar"><div class="pillar-icon">🎬</div><div class="pillar-label">Record</div></div>
+      <div class="mission-pillar"><div class="pillar-icon">🗄️</div><div class="pillar-label">Archive</div></div>
+      <div class="mission-pillar"><div class="pillar-icon">💬</div><div class="pillar-label">Converse</div></div>
+      <div class="mission-pillar"><div class="pillar-icon">∞</div><div class="pillar-label">Preserve</div></div>
+    </div>
+
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="mailto:lfine@nova.edu?subject=LegacyDx Partnership Inquiry">Partner With Us →</a>
+      <a class="rdx-btn rdx-btn-ghost-white" href="/platform-overview.html">Back to ReasonDx</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Demo conversation
+const responses = {
+  default: [
+    "In 34 years, the thing I've learned is that rare diseases are only rare until you've seen them. After your third case of AADC deficiency, you start seeing the pattern in cases you would have missed before.",
+    "The most dangerous words in medicine are 'probably' and 'likely.' I've seen too many families wait four years for a diagnosis that should have taken four weeks, because someone said 'probably cerebral palsy' and closed the chart.",
+    "I tell every fellow the same thing: when the MRI is normal and the child isn't, you haven't ruled anything out. You've ruled in a biochemical cause. That's where we start.",
+    "Pattern recognition in genetics is about knowing what constellations look like. One star means nothing. Three stars in the right arrangement — that's Orion. Learn the constellations.",
+  ],
+  aadc: "The first time I saw AADC deficiency, I called it a movement disorder with unknown etiology. The oculogyric crises — the eyes rolling up — I thought it might be atypical epilepsy. It was the autonomic features that finally made me think. The sweating. The nasal congestion. The ptosis. That constellation isn't epilepsy. That's neurotransmitter.",
+  hae: "HAE doesn't look like allergic angioedema and that's the whole problem. No hives. No response to epinephrine. The family history is there if you ask for it — but you have to ask specifically about swelling, not just allergy. I ask: has anyone in your family ever had unexplained swelling of the face, hands, or abdomen? That question changes everything.",
+  diagnosis: "The thing about rare disease diagnosis is that the rare disease isn't actually rare in the family you're sitting with. For that family, it's 100 percent. The statistical rarity doesn't matter to them. What matters is whether you knew to look.",
+  mistake: "My worst diagnostic miss was a child I followed for two years as 'hypotonic CP of unknown etiology.' Turns out she had a treatable metabolic condition. I missed it because her MRI was abnormal — not dramatically abnormal, but enough to anchor me to a structural diagnosis. I stopped thinking biochemically. I never make that mistake anymore.",
+  teaching: "I used to teach by telling students what the disease is. Now I teach by showing them what it feels like to not know what the disease is — and then discovering it. The uncertainty is the lesson. Comfort with uncertainty is what separates the diagnosticians from the order-placers.",
+};
+
+let msgCount = 0;
+function sendDemoMessage() {
+  const input = document.getElementById('demoInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  const chat = document.getElementById('demoChat');
+
+  // Student message
+  const studentMsg = document.createElement('div');
+  studentMsg.className = 'demo-msg student';
+  studentMsg.style.animationDelay = '0s';
+  studentMsg.innerHTML = `<div class="demo-msg-avatar">👨‍⚕️</div><div class="demo-bubble">${text}</div>`;
+  chat.appendChild(studentMsg);
+
+  // Physician response
+  setTimeout(() => {
+    const lower = text.toLowerCase();
+    let response;
+    if (lower.includes('aadc') || lower.includes('oculogyric') || lower.includes('eye')) response = responses.aadc;
+    else if (lower.includes('hae') || lower.includes('angioedema') || lower.includes('swelling')) response = responses.hae;
+    else if (lower.includes('diagnos') || lower.includes('miss') || lower.includes('rare')) response = responses.diagnosis;
+    else if (lower.includes('mistake') || lower.includes('wrong') || lower.includes('error')) response = responses.mistake;
+    else if (lower.includes('teach') || lower.includes('student') || lower.includes('learn')) response = responses.teaching;
+    else response = responses.default[msgCount % responses.default.length];
+    msgCount++;
+
+    const physMsg = document.createElement('div');
+    physMsg.className = 'demo-msg physician';
+    physMsg.style.animationDelay = '0s';
+    physMsg.innerHTML = `<div class="demo-msg-avatar">🧬</div><div class="demo-bubble">${response}</div>`;
+    chat.appendChild(physMsg);
+    chat.scrollTop = chat.scrollHeight;
+  }, 800);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+</script>
+<script src="/js/nav-global.js"></script>
+</body>
+</html>
