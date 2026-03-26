@@ -1,244 +1,218 @@
-/* emr-data/pneumothorax.js — Auto-generated EMR case data for Pneumothorax */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Reeves",
-  "patientHPI": "I was just sitting there when suddenly I got this really sharp pain in my chest and couldn't catch my breath - it came out of nowhere and scared the hell out of me.",
-    "dob": "05/01/1996",
-    "age": "30",
+    "dob": "09/14/2001",
+    "age": 23,
     "sex": "Male",
-    "pronouns": "he/him",
-    "mrn": "MRN-115368",
+    "mrn": "RDX-2025-58214",
+    "pronouns": "He/Him",
+    "insurance": "BlueCross BlueShield FL \u2014 PPO",
+    "pcp": "Dr. Samantha Greene, MD",
+    "pharmacy": "CVS Pharmacy \u2014 4890 S University Dr, Riverside, FL",
     "language": "English",
-    "race": "Hispanic/Latino",
-    "phone": "(704) 555-9920",
-    "email": "tyler.reeves@email.com",
-    "address": "6315 Dogwood Ln, Minneapolis, MN 55407",
-    "insurance": "Tricare Standard",
-    "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "race": "White",
+    "address": "3211 College Ave, Fort Lauderdale, FL 33314",
+    "phone": "(954) 555-2184",
+    "email": "t.reeves01@email.com",
     "emergencyContact": {
-      "name": "Ashley Reeves",
-      "phone": "(513) 555-9715",
-      "relationship": "Sibling"
-    },
-    "chiefComplaint": "Sudden sharp chest pain and difficulty breathing",
-    "diagnosis": "Pneumothorax"
+      "name": "Karen Reeves (Mother)",
+      "phone": "(954) 555-2190"
+    }
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Tall, thin body habitus",
+      "problem": "Marfanoid Habitus",
+      "icd": "Q87.40",
+      "onset": "2015",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Evaluated by genetics \u2014 no formal Marfan syndrome diagnosis; tall, thin body habitus with mild pectus excavatum"
     },
     {
-      "id": "prob-2",
-      "description": "Marfan features",
+      "problem": "Nicotine Vaping Use",
+      "icd": "F17.290",
+      "onset": "2019",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Daily vaping since age 18"
+    },
+    {
+      "problem": "Generalized Anxiety Disorder",
+      "icd": "F41.1",
+      "onset": "2020",
+      "status": "Active",
+      "notes": ""
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Sertraline 50mg daily",
+      "sig": "Take 1 tablet by mouth daily in the morning",
+      "prescriber": "Dr. Greene",
+      "start": "09/2020",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Albuterol 90mcg MDI PRN",
+      "sig": "Inhale 2 puffs by mouth as needed for shortness of breath",
+      "prescriber": "Dr. Greene",
+      "start": "03/2024",
+      "refills": 2,
+      "status": "PRN"
+    }
+  ],
   "allergies": [
     {
       "allergen": "NKDA",
-      "reaction": "",
+      "type": "None",
+      "reaction": "None",
       "severity": "",
-      "type": "Drug"
+      "verified": "Yes"
     }
   ],
   "vitals": [
     {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "128/78",
-      "hr": "108",
-      "rr": "26",
-      "temp": "36.8°C",
-      "spo2": "92%",
-      "pain": "8/10",
-      "bmi": "22",
-      "weight": "92 kg"
+      "date": "08/12/2024",
+      "bp": "118/72",
+      "hr": 68,
+      "rr": 14,
+      "temp": "98.4\u00b0F",
+      "spo2": "99%",
+      "wt": "154 lbs",
+      "ht": "6'3\"",
+      "bmi": 19.2,
+      "setting": "PCP Office"
+    },
+    {
+      "date": "02/20/2024",
+      "bp": "112/68",
+      "hr": 72,
+      "rr": 14,
+      "temp": "98.6\u00b0F",
+      "spo2": "99%",
+      "wt": "152 lbs",
+      "ht": "6'3\"",
+      "bmi": 19.0,
+      "setting": "PCP Office"
+    },
+    {
+      "date": "09/05/2023",
+      "bp": "110/66",
+      "hr": 66,
+      "rr": 12,
+      "temp": "98.2\u00b0F",
+      "spo2": "100%",
+      "wt": "150 lbs",
+      "ht": "6'3\"",
+      "bmi": 18.7,
+      "setting": "PCP Office"
     }
   ],
   "visits": [
     {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "Sudden sharp chest pain and difficulty breathing",
-      "hpi": "Tyler Reeves is a 30-year-old male presenting with sudden sharp chest pain and difficulty breathing. Past medical history includes Tall, thin body habitus, Marfan features. See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "Pneumothorax — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
+      "id": "V001",
+      "date": "08/12/2024",
+      "type": "Primary Care",
+      "provider": "Dr. Samantha Greene, MD",
+      "cc": "Anxiety follow-up, vaping cessation counseling",
+      "hpi": "Mr. Reeves presents for anxiety follow-up. Reports sertraline is helpful, sleeping better. Continues daily vaping (nicotine 5%). Interested in quitting but has not set a quit date. Occasional mild chest tightness attributed to anxiety. No dyspnea, palpitations, or syncope.",
+      "exam": "Tall, thin male in no distress. BMI 19.2. Mild pectus excavatum. Lungs: CTA bilaterally. CV: RRR, no murmurs. No Marfan stigmata beyond habitus (no lens subluxation, normal arm span).",
+      "assessment": "1. GAD \u2014 well controlled on sertraline\n2. Nicotine vaping use \u2014 ongoing\n3. Marfanoid habitus \u2014 stable, genetics cleared for Marfan syndrome",
+      "plan": "1. Continue sertraline 50mg daily\n2. Vaping cessation counseling \u2014 motivational interviewing, offered NRT\n3. Return in 6 months or PRN"
+    },
+    {
+      "id": "V002",
+      "date": "03/10/2024",
+      "type": "Urgent Care",
+      "provider": "Dr. Lisa Chen, MD",
+      "cc": "Chest tightness and mild dyspnea",
+      "hpi": "23-year-old male presents with 2 days of intermittent chest tightness, worse with deep breathing. No fever, cough, or trauma. Uses nicotine vape daily. History of anxiety. States episodes last 10-15 minutes and resolve with rest.",
+      "exam": "Appears anxious but in no respiratory distress. RR 16, SpO2 99%. Lungs: CTA bilaterally. CV: RRR, no murmurs. Chest wall non-tender.",
+      "assessment": "1. Chest tightness \u2014 likely anxiety-related vs. vaping-associated irritation",
+      "plan": "1. Reassurance and breathing exercises\n2. Albuterol MDI PRN prescribed as trial for possible bronchospasm\n3. Strongly advised to stop vaping\n4. Follow up with PCP if recurrent"
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
+      "date": "08/12/2024",
+      "time": "10:00 AM",
+      "orderedBy": "Dr. Greene",
+      "collected": "08/12/2024 10:15 AM",
+      "facility": "ReasonDx Medical Center Lab",
+      "accession": "LAB-2024-058214",
       "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-262317",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
+      "specimenType": "Serum/Plasma",
+      "fasting": "No",
       "groups": [
-        {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
-        },
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
+            {"test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": ""},
+            {"test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": ""},
+            {"test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": ""},
+            {"test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": ""},
+            {"test": "Potassium", "value": "4.1", "unit": "mEq/L", "range": "3.5-5.0", "flag": ""},
+            {"test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": ""},
+            {"test": "CO2", "value": "25", "unit": "mEq/L", "range": "21-31", "flag": ""},
+            {"test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": ""}
           ]
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "Chest X-Ray PA Upright",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-578752",
-      "clinical": "Sudden sharp chest pain and difficulty breathing",
-      "technique": "Standard protocol",
-      "findings": "Large right-sided pneumothorax with >40% lung collapse. No mediastinal shift. No pleural effusion.",
-      "impression": "Large right spontaneous pneumothorax. Chest tube recommended.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
+      "vaccine": "COVID-19 (Pfizer-BioNTech, Updated 2024-2025)",
+      "date": "10/01/2024",
+      "site": "Left deltoid IM",
+      "lot": "GW9283",
+      "mfr": "Pfizer"
     },
     {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
+      "vaccine": "Tdap (Boostrix)",
+      "date": "09/05/2023",
+      "site": "Right deltoid IM",
+      "lot": "AC22B401AB",
+      "mfr": "GSK"
     },
     {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/01/2024",
+      "site": "Right deltoid IM",
+      "lot": "FL8374",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "HPV (Gardasil 9, Dose 3 of 3)",
+      "date": "04/15/2018",
+      "site": "Left deltoid IM",
+      "lot": "G9V034",
+      "mfr": "Merck"
     }
   ],
   "familyHistory": [
-    "Non-contributory"
+    "Father: Marfan syndrome suspected but never diagnosed, tall (6'5\"), mild mitral valve prolapse, age 52, alive",
+    "Mother: Anxiety disorder, migraines, age 50, alive",
+    "Brother: Healthy, age 20",
+    "No family history of sudden cardiac death, aortic dissection, or DVT/PE"
   ],
   "socialHistory": [
-    [
-      "Tobacco",
-      "Vapes daily"
-    ],
-    [
-      "Marijuana",
-      "Occasional"
-    ],
-    [
-      "Occupation",
-      "College student"
-    ]
-  ]
+    ["Occupation", "College student (senior) at State University, studying exercise science"],
+    ["Marital", "Single, lives with roommate in off-campus apartment"],
+    ["Tobacco", "No cigarette smoking. Daily nicotine vaping (5% pods) since age 18. Approximately 1 pod per day."],
+    ["Alcohol", "Social \u2014 weekends, 4-6 drinks"],
+    ["Drugs", "Occasional marijuana (edibles, 1-2x/month)"],
+    ["Exercise", "Active \u2014 plays intramural basketball, lifts weights 3x/week"],
+    ["Housing", "Second-floor apartment, Fort Lauderdale"],
+    ["Safety", "Wears seatbelt. No firearms."],
+    ["Advance Directive", "None on file. Mother listed as emergency contact."]
+  ],
+  "meta": {
+    "caseId": "pneumothorax",
+    "diagnosis": "Primary Spontaneous Pneumothorax",
+    "acuity": 2,
+    "presentation": "Shortness of Breath",
+    "category": "pulmonary"
+  }
 };

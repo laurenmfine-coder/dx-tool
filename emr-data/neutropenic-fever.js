@@ -1,220 +1,203 @@
-/* emr-data/neutropenic-fever.js — Auto-generated EMR case data for Neutropenic Fever */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Linda Chen-Nakamura",
-  "patientHPI": "I've been getting chills and feeling feverish since yesterday, and I'm really worried because I just finished my cancer treatment ten days ago. The doctors told me to watch out for any signs of infection because my immune system would be weak, and I have this line in my arm for my treatments.",
-    "dob": "09/27/1970",
-    "age": "56",
+    "dob": "12/10/1961",
+    "age": 63,
     "sex": "Female",
-    "pronouns": "she/her",
-    "mrn": "MRN-221028",
+    "mrn": "RDX-2025-67412",
+    "pronouns": "She/Her",
+    "insurance": "BlueCross BlueShield PPO",
+    "pcp": "Dr. James Mitchell, MD",
+    "pharmacy": "CVS Pharmacy — 3000 N Federal Hwy, Boca Raton, FL",
     "language": "English",
-    "race": "White",
-    "phone": "(505) 555-3292",
-    "email": "linda.chen-nakamura@email.com",
-    "address": "8305 Daisy Ave, Detroit, MI 48202",
-    "insurance": "Humana Gold Plus",
-    "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "race": "Asian (Japanese-Chinese)",
+    "address": "2150 NW 5th Ave, Boca Raton, FL 33431",
+    "phone": "(561) 555-8214",
+    "email": "l.chennakamura@email.com",
     "emergencyContact": {
-      "name": "Alejandro Chen-Nakamura",
-      "phone": "(804) 555-2284",
-      "relationship": "Partner"
-    },
-    "chiefComplaint": "Fever and chills — currently on chemotherapy for AML",
-    "diagnosis": "Neutropenic Fever"
+      "name": "David Nakamura (Husband)",
+      "phone": "(561) 555-8230"
+    }
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "AML (induction chemotherapy completed 10 days ago)",
+      "problem": "Invasive Ductal Carcinoma — Left Breast, Stage IIA",
+      "icd": "C50.912",
+      "onset": "08/2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "pT2N1M0; ER+/PR+/HER2-; grade 2; left modified radical mastectomy 09/2024; 2/14 axillary nodes positive; currently receiving adjuvant chemotherapy — dose-dense AC (doxorubicin/cyclophosphamide) cycle 3 of 4 completed 12/2024"
     },
     {
-      "id": "prob-2",
-      "description": "Central line (PICC) in place",
+      "problem": "Hypertension",
+      "icd": "I10",
+      "onset": "2014",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "On lisinopril; controlled"
+    },
+    {
+      "problem": "Hypothyroidism",
+      "icd": "E03.9",
+      "onset": "2010",
+      "status": "Active",
+      "notes": "On levothyroxine"
+    },
+    {
+      "problem": "Osteopenia",
+      "icd": "M85.80",
+      "onset": "2020",
+      "status": "Active",
+      "notes": "DEXA T-score -1.8 hip; calcium/vitamin D supplementation"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Acyclovir",
-      "dose": "400mg",
-      "route": "PO",
-      "frequency": "BID (prophylaxis)",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Doxorubicin/Cyclophosphamide (AC) — adjuvant chemotherapy",
+      "sig": "IV chemotherapy every 2 weeks with G-CSF support (dose-dense regimen); oncology administered",
+      "prescriber": "Dr. Fernandez (Oncology)",
+      "start": "10/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Fluconazole",
-      "dose": "400mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Pegfilgrastim (Neulasta) 6mg SQ — day 2 post-chemo",
+      "sig": "Inject 6mg subcutaneously 24-72 hours after each chemotherapy cycle via on-body injector",
+      "prescriber": "Dr. Fernandez (Oncology)",
+      "start": "10/2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Ondansetron",
-      "dose": "8mg",
-      "route": "PO",
-      "frequency": "Q8H PRN",
-      "status": "Active",
-      "prescriber": "Dr. Raj Patel, MD"
+      "name": "Ondansetron 8mg Q8H PRN",
+      "sig": "Take 1 tablet by mouth every 8 hours as needed for nausea",
+      "prescriber": "Dr. Fernandez (Oncology)",
+      "start": "10/2024",
+      "refills": 2,
+      "status": "PRN"
+    },
+    {
+      "name": "Dexamethasone 4mg BID x 3 days post-chemo",
+      "sig": "Take 1 tablet by mouth twice daily for 3 days following each chemotherapy infusion",
+      "prescriber": "Dr. Fernandez (Oncology)",
+      "start": "10/2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Lisinopril 10mg daily",
+      "sig": "Take 1 tablet by mouth daily",
+      "prescriber": "Dr. Mitchell",
+      "start": "03/2015",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Levothyroxine 75mcg daily",
+      "sig": "Take 1 tablet by mouth daily on empty stomach 30-60 minutes before breakfast",
+      "prescriber": "Dr. Mitchell",
+      "start": "06/2011",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Calcium Carbonate 600mg with Vitamin D 400 IU BID",
+      "sig": "Take 1 tablet by mouth twice daily with meals",
+      "prescriber": "Dr. Mitchell",
+      "start": "01/2021",
+      "refills": 5,
+      "status": "Active"
     }
   ],
   "allergies": [
     {
-      "allergen": "NKDA",
-      "reaction": "",
-      "severity": "",
-      "type": "Drug"
+      "allergen": "Latex",
+      "type": "Environmental",
+      "reaction": "Contact dermatitis",
+      "severity": "Moderate",
+      "verified": "Yes"
     }
   ],
   "vitals": [
     {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "98/58",
-      "hr": "112",
-      "rr": "22",
-      "temp": "39.4°C",
-      "spo2": "96%",
-      "pain": "4/10",
-      "bmi": "29",
-      "weight": "95 kg"
+      "date": "12/16/2024",
+      "bp": "108/68",
+      "hr": 88,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "97%",
+      "wt": "138 lbs",
+      "ht": "5'3\"",
+      "bmi": 24.4,
+      "setting": "Oncology Clinic"
+    },
+    {
+      "date": "10/14/2024",
+      "bp": "122/76",
+      "hr": 74,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "99%",
+      "wt": "145 lbs",
+      "ht": "5'3\"",
+      "bmi": 25.7,
+      "setting": "PCP Office"
     }
   ],
   "visits": [
     {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "Fever and chills — currently on chemotherapy for AML",
-      "hpi": "Linda Chen-Nakamura is a 56-year-old female presenting with fever and chills — currently on chemotherapy for aml. Past medical history includes AML (induction chemotherapy completed 10 days ago), Central line (PICC) in place. See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "Neutropenic Fever — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
+      "id": "V001",
+      "date": "12/16/2024",
+      "type": "Oncology Clinic",
+      "provider": "Dr. Sofia Fernandez, MD (Oncology)",
+      "cc": "Post-cycle 3 AC follow-up; tolerability assessment",
+      "hpi": "63-year-old female status post left MRM for stage IIA IDC, on dose-dense AC cycle 3 of 4 (infusion 12/02/2024). Reports moderate fatigue persisting longer than prior cycles. Nausea managed with ondansetron — able to eat soft foods. Weight down 7 lbs since starting chemo. No oral mucositis currently. Hair loss complete. Pegfilgrastim delivered via on-body injector per protocol. Reports mild bone pain days 3-5 post-injection — managed with acetaminophen. No fever at home. No sore throat, cough, or urinary symptoms. Port site (right subclavian implanted port) clean and non-tender. Neutrophil nadir expected day 7-10 post-chemo.",
+      "exam": "General: Fatigued, alopecia. HEENT: Oral mucosa — mild erythema, no ulceration. Neck: No LAD. CV: RRR, mild tachycardia. Lungs: CTAB. Chest: Left mastectomy site well-healed. Port site: Right chest — non-tender, no erythema, dressing clean. Abdomen: Soft, NT. Skin: No rash, no petechiae.",
+      "assessment": "1. Breast cancer — on adjuvant AC cycle 3/4; tolerating with expected side effects\n2. Chemotherapy-related fatigue and weight loss — nutritional support discussed\n3. Neutropenic period anticipated day 7-10 post-chemo — counseled on neutropenic precautions",
+      "plan": "1. Cycle 4 AC scheduled 12/30/2024\n2. Pre-chemo labs: CBC with differential, CMP, LFTs — day of infusion\n3. Neutropenic precautions reviewed: hand hygiene, avoid crowds/sick contacts, food safety, thermometer at home\n4. IF TEMP ≥100.4°F (38.0°C): GO TO ED IMMEDIATELY — do not wait; call oncology from ED\n5. Nutritional supplements — Ensure/Boost recommended\n6. Post-AC: transition to paclitaxel weekly x 12 per protocol\n7. Follow-up: pre-chemo visit 12/28/2024"
+    },
+    {
+      "id": "V002",
+      "date": "10/14/2024",
+      "type": "Primary Care",
+      "provider": "Dr. James Mitchell, MD",
+      "cc": "Pre-chemotherapy clearance",
+      "hpi": "63-year-old female newly diagnosed with left breast cancer (IDC stage IIA) status post mastectomy. Starting adjuvant chemotherapy. Needs cardiac clearance for anthracycline. HTN controlled. Hypothyroid stable.",
+      "exam": "General: NAD, anxious. CV: RRR, no murmurs. Lungs: CTAB.",
+      "assessment": "1. Pre-chemo clearance\n2. HTN — controlled\n3. Hypothyroidism — stable",
+      "plan": "1. Echo ordered — baseline LVEF before anthracycline\n2. Labs: CBC, CMP, LFTs, TSH\n3. Cleared for chemotherapy pending normal echo\n4. RTC post-chemo course"
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
+      "date": "12/16/2024",
+      "time": "09:30",
+      "orderedBy": "Dr. Sofia Fernandez, MD (Oncology)",
+      "collected": "12/16/2024 09:00",
+      "facility": "ReasonDx Medical Center Lab",
+      "accession": "LAB-2024-121618",
       "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-962148",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
+      "specimenType": "Serum, Whole Blood (EDTA)",
+      "fasting": "No",
       "groups": [
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            {
-              "test": "WBC",
-              "value": "0.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "7.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "18",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            },
-            {
-              "test": "ANC",
-              "value": "80",
-              "unit": "cells/µL",
-              "range": ">1500",
-              "flag": "L"
-            }
+            { "test": "WBC", "value": "3.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "L" },
+            { "test": "ANC (Absolute Neutrophil Count)", "value": "1.8", "unit": "x10³/µL", "range": "1.5-8.0", "flag": "" },
+            { "test": "Hemoglobin", "value": "10.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
+            { "test": "Hematocrit", "value": "30.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
+            { "test": "Platelet Count", "value": "148", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
           ]
         },
         {
-          "name": "BASIC METABOLIC PANEL",
+          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
+            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
+            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
+            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
+            { "test": "ALT (SGPT)", "value": "32", "unit": "U/L", "range": "7-56", "flag": "" },
+            { "test": "AST (SGOT)", "value": "28", "unit": "U/L", "range": "10-40", "flag": "" },
+            { "test": "Albumin", "value": "3.4", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
           ]
         }
       ]
@@ -222,54 +205,81 @@ window.EMR_DATA = {
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "Chest X-Ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-797539",
-      "clinical": "Fever and chills — currently on chemotherapy for AML",
-      "technique": "Standard protocol",
-      "findings": "No focal consolidation. PICC line tip at cavoatrial junction.",
-      "impression": "No acute pulmonary infiltrate. PICC position satisfactory.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "10/18/2024",
+      "study": "TRANSTHORACIC ECHOCARDIOGRAM (TTE) — PRE-CHEMOTHERAPY BASELINE",
+      "accession": "IMG-2024-10181",
+      "status": "FINAL",
+      "orderedBy": "Dr. James Mitchell, MD",
+      "readBy": "Dr. Priya Shah, MD (Cardiology)",
+      "facility": "ReasonDx Medical Center Imaging",
+      "priority": "Urgent",
+      "clinical": "63F pre-anthracycline baseline cardiac function — IDC left breast, starting dose-dense AC.",
+      "technique": "Standard 2D, M-mode, and Doppler TTE.",
+      "findings": "Left ventricle: Normal size. LVEF 62% by biplane Simpson method. No RWMA. Normal diastolic function.\\n\\nRight ventricle: Normal size and function.\\n\\nValves: Trivial MR and TR. No AS.\\n\\nPericardium: Normal.",
+      "impression": "1. Normal baseline LV function. LVEF 62%.\\n2. Cleared for anthracycline-based chemotherapy.\\n3. Recommend repeat TTE after completion of anthracycline.",
+      "dictated": "10/18/2024 14:30",
+      "verified": "10/18/2024 16:00"
     }
   ],
   "immunizations": [
     {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
+      "vaccine": "Influenza (Quadrivalent)",
+      "date": "09/28/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL2024-248",
+      "mfr": "Sanofi Pasteur"
     },
     {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
+      "vaccine": "COVID-19 (Pfizer 2024-25)",
+      "date": "10/10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV2024-672",
+      "mfr": "Pfizer"
     },
     {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
+      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "date": "03/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV23-098",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "01/2022",
+      "site": "Left deltoid IM",
+      "lot": "SX22-028",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap (Boostrix)",
+      "date": "2018",
+      "site": "Left deltoid IM",
+      "lot": "—",
+      "mfr": "GSK"
     }
   ],
   "familyHistory": [
-    "Non-contributory"
+    "Mother: Breast cancer diagnosed at 58 (deceased at 72), ovarian cancer",
+    "Father: Lung cancer (smoker), deceased at 70",
+    "Sister: BRCA2 positive, prophylactic mastectomy, alive at 60",
+    "Daughter: Healthy, age 34; genetic counseling recommended"
   ],
   "socialHistory": [
-    [
-      "Chemotherapy",
-      "Completed 7+3 induction 10 days ago"
-    ],
-    [
-      "Tobacco",
-      "Never"
-    ]
-  ]
+    ["Occupation", "Retired pharmacist; currently focused on cancer treatment"],
+    ["Marital", "Married, lives with husband"],
+    ["Tobacco", "Never smoker"],
+    ["Alcohol", "Denies — stopped during chemotherapy"],
+    ["Drugs", "Denies"],
+    ["Exercise", "Walking 15 min daily when able; fatigue-limited during chemo"],
+    ["Housing", "Single-family home with husband"],
+    ["Safety", "Denies IPV; no firearms; fall risk low"],
+    ["Advance Directive", "Health care proxy: husband David Nakamura; Full code"]
+  ],
+  "meta": {
+    "caseId": "neutropenic-fever",
+    "diagnosis": "Febrile Neutropenia (Post-Chemotherapy, AC Regimen for Breast Cancer)",
+    "acuity": 2,
+    "presentation": "Fever/Sepsis",
+    "category": "oncologic"
+  }
 };

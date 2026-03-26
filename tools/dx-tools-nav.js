@@ -21,7 +21,7 @@
         { id: 'flashcard',  icon: '🎴', name: 'Flashcards',      href: 'flashcard-studio.html' },
         { id: 'sbar',       icon: '💬', name: 'SBAR Trainer',    href: 'sbar-trainer.html' },
         { id: 'ecg',        icon: '❤️', name: 'ECG Trainer',     href: 'ecg-integration.html' },
-        { id: 'emr',        icon: '🖥️', name: 'EMR Simulator',  href: 'emr-simulator.html' },
+        { id: 'emr',        icon: '🖥️', name: 'EMR Simulator',  href: 'virtual-emr.html' },
         { id: 'referral',   icon: '📄', name: 'Referral Letter', href: 'referral-letter-generator.html' },
         { id: 'bookmarks',  icon: '📌', name: 'Bookmarks',       href: 'bookmarks-notes.html' },
         { id: 'planner',    icon: '📅', name: 'Study Planner',   href: 'study-planner.html' },
