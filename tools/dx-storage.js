@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _ce=console.error;console.error=function(){};}
 /**
  * DxStorage — Persistence layer for ReasonDx tools
  * 

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _ce=console.error;console.error=function(){};}
 /* js/patient-list.js — Unified Patient List for ReasonDx Virtual EMR
  * Hospital-location filtering, comprehensive/filtered views, spoiler mode.
  */

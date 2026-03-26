@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _ce=console.error;console.error=function(){};}
 /* rdx-demo-data.js — Injects realistic demo data for faculty dashboard testing
  * Run from browser console: RDXDemoData.inject()
  * Or add ?demo=1 to faculty-dashboard.html URL for auto-inject

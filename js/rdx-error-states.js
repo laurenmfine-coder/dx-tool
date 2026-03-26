@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _ce=console.error;console.error=function(){};}
 /* rdx-error-states.js — Error boundaries, loading skeletons, and friendly
  * error messages throughout the ReasonDx Virtual EMR.
  * Wraps render functions so one broken module can't crash the whole app.
