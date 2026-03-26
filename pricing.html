@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plans & Pricing | ReasonDx</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: #f0f6fc; color: #1a1a2e; min-height: 100vh; }
+
+  .pricing-hero {
+    background: linear-gradient(135deg, #1A5276 0%, #2874A6 60%, #1abc9c 100%);
+    padding: 4rem 1.5rem 5rem;
+    text-align: center;
+    color: white;
+  }
+  .pricing-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; margin-bottom: 0.75rem; }
+  .pricing-hero p { font-size: 1.15rem; opacity: 0.9; max-width: 520px; margin: 0 auto 2rem; }
+
+  .toggle-wrap {
+    display: inline-flex;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 4px;
+    gap: 4px;
+  }
+  .toggle-btn {
+    padding: 8px 24px;
+    border-radius: 50px;
+    border: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+  }
+  .toggle-btn.active {
+    background: white;
+    color: #2874A6;
+  }
+  .save-badge {
+    display: inline-block;
+    background: #1abc9c;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .cards-section {
+    max-width: 1000px;
+    margin: -2.5rem auto 0;
+    padding: 0 1.5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .plan-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(40,116,166,0.10);
+    padding: 2rem;
+    position: relative;
+    border: 2px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .plan-card:hover { transform: translateY(-4px); box-shadow: 0 8px 36px rgba(40,116,166,0.16); }
+  .plan-card.featured { border-color: #2874A6; }
+  .plan-card.featured::before {
+    content: "Most Popular";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2874A6;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  .plan-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+  .plan-name { font-size: 1.3rem; font-weight: 700; color: #1A5276; margin-bottom: 0.25rem; }
+  .plan-tagline { font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; }
+
+  .plan-price { margin-bottom: 1.5rem; }
+  .price-amount { font-size: 2.8rem; font-weight: 800; color: #1A5276; line-height: 1; }
+  .price-period { font-size: 0.9rem; color: #888; margin-top: 4px; }
+  .price-annual-note { font-size: 0.8rem; color: #1abc9c; font-weight: 600; margin-top: 4px; }
+
+  .plan-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s;
+  }
+  .plan-btn-primary { background: #2874A6; color: white; }
+  .plan-btn-primary:hover { background: #1A5276; }
+  .plan-btn-secondary { background: #EBF5FB; color: #2874A6; border: 2px solid #2874A6; }
+  .plan-btn-secondary:hover { background: #D6EAF8; }
+  .plan-btn-outline { background: white; color: #555; border: 2px solid #ddd; }
+  .plan-btn-outline:hover { background: #f8f8f8; }
+
+  .plan-divider { border: none; border-top: 1px solid #f0f0f0; margin-bottom: 1.25rem; }
+
+  .feature-list { list-style: none; }
+  .feature-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: #444; margin-bottom: 0.7rem; line-height: 1.4; }
+  .feature-list .check { color: #2874A6; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .feature-list .lock { color: #bbb; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .feature-list .muted { color: #aaa; }
+
+  .faq-section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+  .faq-section h2 { font-size: 1.6rem; font-weight: 700; color: #1A5276; text-align: center; margin-bottom: 2rem; }
+  .faq-item { background: white; border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden; }
+  .faq-q {
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #1A5276;
+  }
+  .faq-q:hover { background: #f0f6fc; }
+  .faq-a { display: none; padding: 0 1.25rem 1rem; font-size: 0.9rem; color: #555; line-height: 1.6; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-chevron { transition: transform 0.2s; font-size: 0.75rem; }
+
+  /* Canceled / success banners */
+  .rdx-banner {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 1rem 1.5rem; display: flex; align-items: center; gap: 12px;
+    font-size: 0.9rem; font-weight: 500; z-index: 9999; max-width: 400px; width: 90%;
+  }
+  .rdx-banner.warn { border-left: 4px solid #f39c12; }
+  .rdx-banner.success { border-left: 4px solid #1abc9c; }
+  .rdx-banner-close { margin-left: auto; background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #aaa; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="pricing-hero">
+  <h1>Simple, Transparent Pricing</h1>
+  <p>Start free. Upgrade when you're ready. Cancel anytime.</p>
+  <div class="toggle-wrap">
+    <button class="toggle-btn active" id="btn-monthly" onclick="setbilling('monthly')">Monthly</button>
+    <button class="toggle-btn" id="btn-annual" onclick="setbilling('annual')">Annual <span class="save-badge">Save 45%</span></button>
+  </div>
+</div>
+
+<!-- Plan cards -->
+<div class="cards-section">
+
+  <!-- Free -->
+  <div class="plan-card">
+    <div class="plan-icon">🔓</div>
+    <div class="plan-name">Free</div>
+    <div class="plan-tagline">Get started with no commitment</div>
+    <div class="plan-price">
+      <div class="price-amount">$0</div>
+      <div class="price-period">forever</div>
+    </div>
+    <a href="auth/register.html" class="plan-btn plan-btn-outline">Get Started Free</a>
+    <hr class="plan-divider">
+    <ul class="feature-list">
+      <li><span class="check">✓</span> 10 interactive cases per month</li>
+      <li><span class="check">✓</span> Virtual EMR simulator</li>
+      <li><span class="check">✓</span> Topic library (read-only)</li>
+      <li><span class="check">✓</span> Basic performance dashboard</li>
+      <li><span class="lock">🔒</span> <span class="muted">Unlimited cases</span></li>
+      <li><span class="lock">🔒</span> <span class="muted">AI clinical coaching</span></li>
+      <li><span class="lock">🔒</span> <span class="muted">Spaced repetition engine</span></li>
+      <li><span class="lock">🔒</span> <span class="muted">Board prep mode</span></li>
+    </ul>
+  </div>
+
+  <!-- Pro -->
+  <div class="plan-card featured">
+    <div class="plan-icon">⚡</div>
+    <div class="plan-name">Pro</div>
+    <div class="plan-tagline">Everything you need to master clinical reasoning</div>
+    <div class="plan-price">
+      <div class="price-amount" id="pro-price">$14.99</div>
+      <div class="price-period" id="pro-period">per month</div>
+      <div class="price-annual-note" id="pro-annual-note" style="display:none;">$99/year — that's $8.25/mo</div>
+    </div>
+    <button class="plan-btn plan-btn-primary" onclick="startCheckout('pro')">Start Pro Free Trial</button>
+    <hr class="plan-divider">
+    <ul class="feature-list">
+      <li><span class="check">✓</span> <strong>Unlimited</strong> cases across all specialties</li>
+      <li><span class="check">✓</span> AI clinical reasoning coach (CoachDx)</li>
+      <li><span class="check">✓</span> Spaced repetition & adaptive review</li>
+      <li><span class="check">✓</span> Board prep — 600+ style questions</li>
+      <li><span class="check">✓</span> Full learning analytics & RPFS fingerprint</li>
+      <li><span class="check">✓</span> MechanismDx pathophysiology modules</li>
+      <li><span class="check">✓</span> ECG trainer & procedure lab</li>
+      <li><span class="check">✓</span> Priority support</li>
+    </ul>
+  </div>
+
+  <!-- Institutional -->
+  <div class="plan-card">
+    <div class="plan-icon">🏫</div>
+    <div class="plan-name">Institutional</div>
+    <div class="plan-tagline">For medical schools, residency programs & health systems</div>
+    <div class="plan-price">
+      <div class="price-amount">Custom</div>
+      <div class="price-period">contact for pricing</div>
+    </div>
+    <a href="mailto:lauren@reasondx.com?subject=Institutional Inquiry" class="plan-btn plan-btn-secondary">Contact Sales</a>
+    <hr class="plan-divider">
+    <ul class="feature-list">
+      <li><span class="check">✓</span> Everything in Pro</li>
+      <li><span class="check">✓</span> Faculty dashboard & cohort analytics</li>
+      <li><span class="check">✓</span> Custom case sets & curriculum integration</li>
+      <li><span class="check">✓</span> LMS / OSCE integration support</li>
+      <li><span class="check">✓</span> FERPA-compliant data reporting</li>
+      <li><span class="check">✓</span> Dedicated onboarding & training</li>
+      <li><span class="check">✓</span> Volume seat pricing</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is there a free trial for Pro? <span class="faq-chevron">▾</span></div>
+    <div class="faq-a">Yes — Pro includes a 7-day free trial. No charge until the trial ends, and you can cancel any time.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Can I switch between monthly and annual? <span class="faq-chevron">▾</span></div>
+    <div class="faq-a">Yes. You can upgrade to annual at any time from your account page. The unused portion of your monthly plan is prorated.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept? <span class="faq-chevron">▾</span></div>
+    <div class="faq-a">We accept all major credit and debit cards via Stripe. Institutional plans can also be invoiced.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Do you offer student or resident discounts? <span class="faq-chevron">▾</span></div>
+    <div class="faq-a">Yes — email us at <a href="mailto:lauren@reasondx.com">lauren@reasondx.com</a> with your student/resident verification and we'll set you up with a discount code.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">What happens to my data if I cancel? <span class="faq-chevron">▾</span></div>
+    <div class="faq-a">Your progress and case history are preserved. You'll revert to the Free plan limits but won't lose any data.</div>
+  </div>
+</div>
+
+<script src="auth/stripe-integration.js"></script>
+<script>
+  let billing = 'monthly';
+
+  function setbilling(mode) {
+    billing = mode;
+    document.getElementById('btn-monthly').classList.toggle('active', mode === 'monthly');
+    document.getElementById('btn-annual').classList.toggle('active', mode === 'annual');
+    if (mode === 'annual') {
+      document.getElementById('pro-price').textContent = '$8.25';
+      document.getElementById('pro-period').textContent = 'per month, billed $99/year';
+      document.getElementById('pro-annual-note').style.display = 'block';
+    } else {
+      document.getElementById('pro-price').textContent = '$14.99';
+      document.getElementById('pro-period').textContent = 'per month';
+      document.getElementById('pro-annual-note').style.display = 'none';
+    }
+  }
+
+  function startCheckout(plan) {
+    const key = plan === 'pro' ? (billing === 'annual' ? 'pro_annual' : 'pro_monthly') : null;
+    if (!key) return;
+    if (typeof window.startCheckout === 'function') {
+      window.startCheckout(key).catch(err => console.warn('Checkout error:', err));
+    } else {
+      // Fallback: redirect to auth with upgrade flag
+      sessionStorage.setItem('rdx-upgrade-intent', key);
+      window.location.href = '/auth/register.html?upgrade=1';
+    }
+  }
+
+  function toggleFaq(el) {
+    el.closest('.faq-item').classList.toggle('open');
+  }
+
+  // Handle cancel/success URL params
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('canceled')) {
+    const b = document.createElement('div');
+    b.className = 'rdx-banner warn';
+    b.innerHTML = '⚠️ Checkout canceled. No charges were made. <button class="rdx-banner-close" onclick="this.parentElement.remove()">×</button>';
+    document.body.appendChild(b);
+  }
+  if (params.get('success')) {
+    const b = document.createElement('div');
+    b.className = 'rdx-banner success';
+    b.innerHTML = '✅ Welcome to Pro! Your account has been upgraded. <button class="rdx-banner-close" onclick="this.parentElement.remove()">×</button>';
+    document.body.appendChild(b);
+  }
+</script>
+
+</body>
+</html>
