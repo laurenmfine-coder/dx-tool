@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | ReasonDx</title>
+  <link rel="stylesheet" href="/css/rdx-design-system.css">
+  <link rel="stylesheet" href="/mobile.css">
+  <link rel="icon" href="/favicon.svg">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f0f6fc;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    .rdx-404-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(40,116,166,0.12);
+      padding: 3rem 2.5rem;
+      max-width: 520px;
+      width: 100%;
+    }
+    .rdx-404-code {
+      font-size: 6rem;
+      font-weight: 800;
+      color: #2874A6;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -4px;
+    }
+    .rdx-404-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1A5276;
+      margin: 0.5rem 0;
+    }
+    .rdx-404-sub {
+      color: #666;
+      font-size: 1rem;
+      margin: 0.75rem 0 2rem;
+      line-height: 1.6;
+    }
+    .rdx-404-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .rdx-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .rdx-btn-primary {
+      background: #2874A6;
+      color: white;
+    }
+    .rdx-btn-primary:hover { background: #1A5276; }
+    .rdx-btn-secondary {
+      background: #EBF5FB;
+      color: #2874A6;
+    }
+    .rdx-btn-secondary:hover { background: #D6EAF8; }
+    .rdx-404-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2874A6;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="rdx-404-card">
+    <div class="rdx-404-logo">REASONDX</div>
+    <div class="rdx-404-code">404</div>
+    <h1 class="rdx-404-title">Page Not Found</h1>
+    <p class="rdx-404-sub">This page may have moved or no longer exists.<br>Let's get you back on track.</p>
+    <div class="rdx-404-links">
+      <a href="/" class="rdx-btn rdx-btn-primary">Back to Home</a>
+      <a href="/virtual-emr.html" class="rdx-btn rdx-btn-secondary">Open Virtual EMR</a>
+      <a href="/casedx.html" class="rdx-btn rdx-btn-secondary">Browse Cases</a>
+    </div>
+  </div>
+  <script>
+    // Log 404 for analytics if available
+    if (window.RdxAnalytics) {
+      RdxAnalytics.track('404', { url: window.location.href });
+    }
+  </script>
+</body>
+</html>
