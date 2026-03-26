@@ -325,7 +325,7 @@ const TOPICS = [
   { id:'ms',                name:'Multiple Sclerosis',           icon:'🧩', cat:'Neurology',            tags:['demyelination','mri lesions','optic neuritis','dmt','relapse'] },
   { id:'guillain-barre',    name:'Guillain-Barré Syndrome',      icon:'⬆️', cat:'Neurology',            tags:['ascending weakness','areflexia','ivig','plasmapheresis','csf albuminocytologic'] },
   { id:'altered-ms',        name:'Altered Mental Status',        icon:'😵', cat:'Neurology',            tags:['aeiou-tips','encephalopathy','delirium','toxicology','metabolic'] },
-  { id:'parkinson',         name:'Parkinson's Disease',         icon:'🤝', cat:'Neurology',            tags:['bradykinesia','rigidity','tremor','levodopa','dopamine','nms'] },
+  { id:'parkinson',         name:'Parkinson\'s Disease',         icon:'🤝', cat:'Neurology',            tags:['bradykinesia','rigidity','tremor','levodopa','dopamine','nms'] },
   // ── Gastroenterology ──
   { id:'gi-bleed',          name:'GI Bleed',                     icon:'🩸', cat:'Gastroenterology',     tags:['ugib','lgib','glasgow-blatchford','endoscopy','ppi','variceal'] },
   { id:'pancreatitis',      name:'Acute Pancreatitis',           icon:'🔶', cat:'Gastroenterology',     tags:['bisap','atlanta','ivf resuscitation','lipase','gallstone','alcohol'] },
@@ -416,7 +416,8 @@ window.addEventListener('load', async () => {
   if (currentUser) await loadFingerprintChips();
 
   // Check for topic in URL param
-  const param = new URLSearchParams(window.location.search).get('topic');
+  const _usp = new URLSearchParams(window.location.search);
+  const param = _usp.get('topic') || _usp.get('q');
   if (param) startSession(param, false);
 });
 

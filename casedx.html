@@ -416,9 +416,16 @@ function render(){
 function openCase(id,name){localStorage.setItem("rdx-last-case",JSON.stringify({id:id,title:name,ts:Date.now()}));try{sessionStorage.removeItem('rdx-order-mode');}catch(e){}window.location.href="virtual-emr.html?case="+id;}
 function revealDx(el,cid){
   el.style.filter='none';el.style.cursor='default';
+  el.style.background='transparent';el.style.border='none';
   var hint=document.getElementById('ccHint-'+cid);
   if(hint)hint.style.display='none';
   el.classList.remove('cc-blurred');
+  var icon=el.querySelector('.cc-reveal-icon');
+  var label=el.querySelector('.cc-reveal-label');
+  var answer=el.querySelector('.cc-reveal-answer');
+  if(icon)icon.style.display='none';
+  if(label)label.style.display='none';
+  if(answer)answer.style.display='block';
   el.onclick=null;
 }
 function resetF(){F={setting:"all",specialty:"all",acuity:"all"};document.querySelectorAll(".fc").forEach(function(b){b.classList.remove("on");});document.querySelectorAll(".fchips").forEach(function(c){var first=c.querySelector(".fc");if(first)first.classList.add("on");});document.getElementById("caseSearch").value="";render();}
