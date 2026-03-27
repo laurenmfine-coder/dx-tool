@@ -36772,5 +36772,516 @@ window.CRT_DATA = {
     "commonPitfalls": ["Not obtaining ECG + troponin for unexplained dyspnea in high-risk patient","Anchoring on 'no chest pain' as reassuring in diabetic/elderly","Delayed invasive strategy for high-risk NSTEMI (>24h worsens outcome)","Treating as COPD/pulmonary without ruling out cardiac cause"],
     "keyLearningPoints": ["Diabetics and elderly women have atypical MI presentations — dyspnea without chest pain is common","ALWAYS get ECG + troponin before attributing dyspnea to pulmonary/GI/psychiatric causes in high-risk patients","High-risk NSTEMI (GRACE >140): invasive strategy within 24h improves outcomes"]
   }
+,
+
+  "acute-necrotizing-gallstone-pancreatitis": {
+    "id": "acute-necrotizing-gallstone-pancreatitis",
+    "diagnosis": "Acute Necrotizing Pancreatitis — Gallstone",
+    "acuity": 1,
+    "presentation": "Severe Epigastric Pain / SIRS / Organ Failure",
+    "category": "gastrointestinal",
+    "chiefComplaint": "Severe Epigastric Pain / Nausea / Vomiting / Gallstones Known",
+    "treatments": {
+      "orders": [
+        {"id": "aggressive-ivf-np", "name": "Lactated Ringer (LR) 250-500 mL/h first 24h (early aggressive IVF)", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Aggressive early fluid resuscitation is the cornerstone of acute pancreatitis management. LR is preferred over NS (reduces systemic inflammation). WATERFALL trial: 1.5 mL/kg/h LR for first 24h. Goal: urine output >0.5 mL/kg/h, HR <120, MAP >65. Aggressive IVF in first 24-48h prevents pancreatic necrosis.",
+          "references": [
+            {"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "LR preferred over NS; aggressive IVF 250-500 mL/h first 24h; goal UO >0.5 mL/kg/h"},
+            {"source": "WATERFALL Trial NEJM 2022", "url": "https://www.nejm.org/doi/10.1056/NEJMoa2202606", "detail": "LR 1.5 mL/kg/h: reduces SIRS and organ failure vs NS"}]},
+        {"id": "ercp-bili-pancreatitis", "name": "ERCP within 24h if concurrent cholangitis (Charcot triad)", "group": "Intervention",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "ERCP is indicated within 24h ONLY if concurrent ascending cholangitis (fever + jaundice + RUQ pain + biliary obstruction). Routine ERCP for biliary pancreatitis without cholangitis does NOT improve outcomes. Wait for acute phase to settle, then cholecystectomy before discharge.",
+          "references": [{"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "ERCP within 24h for cholangitis; NOT routine for biliary pancreatitis without cholangitis"}]},
+        {"id": "npo-pancreatitis", "name": "NPO and bowel rest for pancreatitis", "group": "Nutrition",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "NPO/bowel rest is OUTDATED for pancreatitis. Early enteral nutrition (within 24-48h) via NG or NJ tube is superior to NPO — maintains gut mucosal integrity, reduces infectious complications, and improves mortality. Start oral feeding as soon as tolerated. TPN only if enteral nutrition fails.",
+          "references": [{"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "Early enteral nutrition preferred over NPO; reduces infectious complications and mortality"}]},
+        {"id": "antibiotics-np", "name": "Prophylactic antibiotics for necrotizing pancreatitis", "group": "Antibiotics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Prophylactic antibiotics are NOT indicated in necrotizing pancreatitis — multiple RCTs show no mortality benefit and increased risk of fungal infection and C. diff. Antibiotics only for documented infected necrosis (CT-guided aspiration confirms infection) or concurrent cholangitis.",
+          "references": [{"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "No prophylactic antibiotics in necrotizing pancreatitis; only for infected necrosis confirmed by aspiration"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "96/58", "HR": "128", "Temp": "38.8°C", "SpO2": "94%"},
+          "labHighlights": {"Lipase": "4,820", "CRP": "288", "Cr": "2.4", "WBC": "18,400"}},
+        {"id": "ivf-running", "label": "Aggressive IVF Running",
+          "vitals": {"BP": "108/68", "HR": "108"},
+          "labHighlights": {"UO": "0.6 mL/kg/hr", "CT": "Necrotizing pancreatitis confirmed, 40% necrosis"}},
+        {"id": "day3", "label": "Day 3 — SIRS Improving",
+          "vitals": {"BP": "116/72", "HR": "96", "Temp": "37.8°C"},
+          "labHighlights": {"CRP": "128 (trending down)", "Enteral nutrition": "NG tube started"}}
+      ]
+    },
+    "mustNotMiss": ["Infected pancreatic necrosis (fever 2+ weeks after pancreatitis — CT-guided FNA for diagnosis)","Walled-off necrosis at 4+ weeks — endoscopic drainage if symptomatic","Hemorrhagic pancreatitis (splenic artery pseudoaneurysm — urgent CT angio/embolization)","Abdominal compartment syndrome (intra-abdominal pressure >20 with organ failure)"],
+    "commonPitfalls": ["NS instead of LR (NS worsens systemic inflammation)","Prophylactic antibiotics (no benefit; increases C. diff and fungal infection)","NPO/bowel rest (outdated — early enteral nutrition is superior)","Routine ERCP without cholangitis (no indication)"],
+    "keyLearningPoints": ["LR (not NS) 250-500 mL/h first 24h; WATERFALL trial confirms LR superiority","No prophylactic antibiotics in necrotizing pancreatitis — only for confirmed infected necrosis","Early enteral nutrition (not NPO); ERCP only if concurrent cholangitis"]
+  },
+  "alcoholrelated-pancreatitis": {
+    "id": "alcoholrelated-pancreatitis",
+    "diagnosis": "Alcohol-Related Acute Pancreatitis — Recurrent",
+    "acuity": 2,
+    "presentation": "Epigastric Pain / Alcohol History / Elevated Lipase",
+    "category": "gastrointestinal",
+    "chiefComplaint": "Epigastric Pain / Heavy Drinker / Lipase 2,400",
+    "treatments": {
+      "orders": [
+        {"id": "ivf-lr-alcoholpanc", "name": "LR 250-500 mL/h aggressive hydration", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Same LR-based aggressive hydration as any acute pancreatitis. Alcohol-related pancreatitis: thiamine 100mg IV before glucose (concurrent AUD risk). Monitor for AWS (CIWA-Ar) — patients may be withdrawing simultaneously.",
+          "references": [{"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "LR aggressive hydration; add thiamine before glucose; monitor for concurrent AWS in AUD patients"}]},
+        {"id": "thiamine-alcoholpanc", "name": "Thiamine 100mg IV before any dextrose (concurrent AUD)", "group": "Vitamins",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "In alcohol-related pancreatitis, always give thiamine before dextrose or dextrose-containing fluids — risk of Wernicke encephalopathy in thiamine-depleted AUD patients. CIWA-Ar protocol for withdrawal monitoring.",
+          "references": [{"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "Thiamine before glucose in AUD; concurrent AWS risk; CIWA-Ar monitoring"}]},
+        {"id": "ranson-severity", "name": "Ranson criteria or BISAP score (severity stratification)", "group": "Risk Stratification",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Severity stratification guides management intensity. BISAP ≥3 or Ranson ≥3 = severe pancreatitis → ICU. CTSI on CT at 48-72h confirms necrosis. Mild (BISAP 0-2): ward, early feeding. Severe: ICU, ERCP if indicated, surgery team on standby.",
+          "references": [{"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "BISAP ≥3 or Ranson ≥3 = severe; CT at 48-72h for necrosis; guides ICU vs ward"}]},
+        {"id": "alcohol-counseling", "name": "Addiction medicine/alcohol cessation counseling (prevent recurrence)", "group": "Prevention",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Alcohol cessation is essential — recurrent pancreatitis leads to chronic pancreatitis, exocrine/endocrine insufficiency, and pancreatic cancer. Addiction medicine consultation and initiation of pharmacotherapy (naltrexone, acamprosate) during hospitalization improves long-term abstinence.",
+          "references": [{"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "Alcohol cessation prevents chronic pancreatitis; addiction consult during admission"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "108/72", "HR": "104", "Temp": "37.8°C"},
+          "labHighlights": {"Lipase": "2,400", "WBC": "14,200", "Cr": "1.6", "ALT": "42 (no biliary cause)"}},
+        {"id": "treated", "label": "LR + Thiamine Running",
+          "vitals": {"BP": "116/74", "HR": "96"},
+          "labHighlights": {"CIWA-Ar": "6 (monitoring)", "BISAP": "2 (moderate)", "UO": "0.8 mL/kg/hr"}},
+        {"id": "day2", "label": "Day 2 — Improving",
+          "vitals": {"BP": "118/76", "HR": "88", "Temp": "37.4°C"},
+          "labHighlights": {"Lipase": "840 (trending down)", "Oral diet": "Clear liquids tolerated"}}
+      ]
+    },
+    "mustNotMiss": ["Concurrent alcohol withdrawal (can mask or worsen pancreatitis symptoms — CIWA monitoring)","Biliary cause also present (check RUQ ultrasound — alcohol does not exclude gallstones)","Recurrent pancreatitis risk without alcohol cessation (chronic pancreatitis in 10-15%)","Hypertriglyceridemia as concurrent cause (check lipid panel)"],
+    "commonPitfalls": ["Dextrose/glucose before thiamine in AUD patient (Wernicke risk)","Missing concurrent AWS (CIWA-Ar monitoring throughout admission)","NS instead of LR (NS worsens inflammation)","No addiction medicine referral (misses opportunity for long-term outcome improvement)"],
+    "keyLearningPoints": ["Alcohol pancreatitis: same LR + early feeding; ALWAYS thiamine before glucose","Monitor for AWS concurrently with pancreatitis management — can develop simultaneously","Addiction medicine consultation prevents recurrent pancreatitis and chronic disease"]
+  },
+  "chronic-salicylate-toxicity": {
+    "id": "chronic-salicylate-toxicity",
+    "diagnosis": "Chronic Salicylate Toxicity — Occult in Elderly",
+    "acuity": 2,
+    "presentation": "AMS / Tinnitus / Metabolic Acidosis / Elderly",
+    "category": "toxicologic",
+    "chiefComplaint": "Confused Elderly Patient / Tinnitus / Tachypnea / On Daily Aspirin",
+    "treatments": {
+      "orders": [
+        {"id": "salicylate-level", "name": "Serum salicylate level + ABG + BMP (immediately)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Serum salicylate level: therapeutic 10-30 mg/dL; toxicity >40 mg/dL; severe toxicity >70 mg/dL. Chronic toxicity occurs at LOWER levels than acute toxicity (tissue penetration greater). ABG: mixed respiratory alkalosis + metabolic acidosis = classic salicylate pattern. Respiratory alkalosis precedes metabolic acidosis.",
+          "references": [{"source": "Salicylate Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507827/", "detail": "Chronic toxicity at lower levels; classic ABG: respiratory alkalosis + metabolic acidosis"}]},
+        {"id": "bicarb-urine-alk", "name": "NaHCO3 IV (urine alkalinization — trap salicylate in kidney)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Urine alkalinization with IV NaHCO3 traps salicylate in tubular lumen (ion trapping) — increases renal elimination dramatically. Target urine pH 7.5-8.0. Add D5W with KCl (prevent hypokalemia — K+ depletion impairs urine alkalinization). Continue until salicylate <30 mg/dL.",
+          "references": [{"source": "Salicylate Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507827/", "detail": "NaHCO3 IV for urine alkalinization (pH 7.5-8); ion trapping increases renal elimination; add KCl"}]},
+        {"id": "hemodialysis-salicylate", "name": "Emergent hemodialysis for severe toxicity", "group": "Definitive",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "HD indications: salicylate >80 mg/dL, AMS/cerebral edema, renal failure, pulmonary edema, severe metabolic acidosis (pH <7.1). HD removes salicylate 10x faster than urine alkalinization. Do not wait for deterioration — early HD for any of these criteria.",
+          "references": [{"source": "Salicylate Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507827/", "detail": "HD criteria: level >80, AMS, RF, pulmonary edema, pH <7.1; removes 10x faster than urine alkalinization"}]},
+        {"id": "hyperventilate-salicylate", "name": "Intubate and ventilate to correct alkalosis", "group": "Airway",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "DANGEROUS — patients spontaneously hyperventilate to maintain respiratory alkalosis which protects against CNS salicylate penetration. Intubation and standard ventilator settings cause CO2 to rise → loss of protective respiratory alkalosis → sudden CNS acidosis → seizures/death. If intubation required: set ventilator at same minute ventilation as spontaneous rate.",
+          "references": [{"source": "Salicylate Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507827/", "detail": "Do not suppress hyperventilation — it is protective; if intubated, match spontaneous minute ventilation"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/88", "HR": "112", "RR": "28 (tachypneic)", "Temp": "38.2°C"},
+          "labHighlights": {"Salicylate": "68 mg/dL (chronic)", "pH": "7.48 (respiratory alkalosis)", "HCO3": "18 (metabolic component)"}},
+        {"id": "treatment", "label": "Bicarb + Alkalinization",
+          "vitals": {"BP": "132/84", "HR": "104"},
+          "labHighlights": {"Urine pH": "7.6 (target achieved)", "Salicylate": "52 mg/dL (improving)"}},
+        {"id": "improved", "label": "Improving",
+          "vitals": {"BP": "128/80", "HR": "92"},
+          "labHighlights": {"Salicylate": "28 mg/dL", "AMS": "Resolving", "ABG": "pH 7.44 (normalizing)"}}
+      ]
+    },
+    "mustNotMiss": ["Chronic toxicity at lower levels than acute — elderly patients on aspirin can toxify at therapeutic doses","Suppressing hyperventilation (intubation at normal settings = death — CO2 rises, CNS salicylate penetrates)","Pulmonary edema (non-cardiogenic — HD often needed)","Cerebral edema (AMS + high salicylate + acidosis = HD emergently)"],
+    "commonPitfalls": ["Normalizing the tachypnea (it is protective respiratory compensation)","Not alkalinizing urine to pH 7.5-8 (KCl must be repleted simultaneously)","Delaying HD for AMS or pulmonary edema","Missing chronic toxicity in elderly (toxicity at much lower levels than acute ingestion"]
+    ,
+    "keyLearningPoints": ["Chronic salicylate toxicity: AMS + tinnitus + tachypnea + mixed alkalosis/acidosis in elderly on aspirin","NEVER suppress hyperventilation — it prevents CNS salicylate penetration","Urine alkalinization (pH 7.5-8) is treatment; HD for AMS/pulmonary edema/level >80"]
+  },
+  "guillain-barre": {
+    "id": "guillain-barre",
+    "diagnosis": "Guillain-Barré Syndrome — Classic AIDP",
+    "acuity": 2,
+    "presentation": "Ascending Weakness / Areflexia / Post-Infection",
+    "category": "other",
+    "chiefComplaint": "Progressive Leg Weakness / Areflexia / Preceded by GI Illness",
+    "treatments": {
+      "orders": [
+        {"id": "ivig-gbs", "name": "IVIG 0.4g/kg/day x5 days (or 2g/kg over 2 days)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "IVIG and PLEX are equally effective in GBS — choose based on availability and contraindications. IVIG: 0.4g/kg/day x5 days (total 2g/kg). Start within 4 weeks of onset (most benefit within 2 weeks). Do NOT combine IVIG + PLEX — no additive benefit. Choose one.",
+          "references": [{"source": "GBS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542285/", "detail": "IVIG and PLEX equally effective; start within 4 weeks; do NOT combine (no additive benefit)"}]},
+        {"id": "spirometry-gbs", "name": "Serial spirometry — FVC q4-6h (respiratory failure prediction)", "group": "Monitoring",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "FVC monitoring is the most important test in GBS — the '20/30/40 rule': intubate when FVC <20 mL/kg OR NIF <-30 cmH2O OR MIF <-40 cmH2O. Do not wait for SpO2 to fall — respiratory failure occurs late and is sudden. Autonomic instability monitoring (HR, BP variability).",
+          "references": [{"source": "GBS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542285/", "detail": "20/30/40 rule: FVC <20 mL/kg, NIF <-30, MIF <-40 = intubate before respiratory arrest"}]},
+        {"id": "steroids-gbs", "name": "Methylprednisolone for GBS (reduce inflammation)", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Steroids are NOT beneficial in GBS — multiple RCTs show no benefit and possible harm. Steroids WORSEN GBS outcomes compared to IVIG/PLEX alone. This is a common mistake — do not use steroids for GBS (unlike most autoimmune conditions).",
+          "references": [{"source": "GBS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542285/", "detail": "Steroids are HARMFUL in GBS — multiple RCTs show worse outcomes; do not use"}]},
+        {"id": "vte-prophylaxis-gbs", "name": "DVT prophylaxis — LMWH + compression stockings", "group": "Prevention",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "GBS patients are immobile and at high VTE risk. LMWH + graduated compression stockings from admission. Early physical therapy when safe. Bladder care (urinary retention common in autonomic involvement).",
+          "references": [{"source": "GBS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542285/", "detail": "DVT prophylaxis essential; monitor for autonomic dysfunction; bladder care"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/88", "HR": "96", "SpO2": "98% RA"},
+          "labHighlights": {"FVC": "2.8L (62% predicted)", "NIF": "-36 cmH2O", "CSF": "Albuminocytologic dissociation"}},
+        {"id": "ivig-started", "label": "IVIG Running",
+          "vitals": {"BP": "132/84", "HR": "92"},
+          "labHighlights": {"FVC": "2.4L (falling — monitor closely)", "Antiganglioside Ab": "Anti-GQ1b negative"}},
+        {"id": "day3", "label": "Day 3 — Plateau",
+          "vitals": {"BP": "128/80", "HR": "88"},
+          "labHighlights": {"FVC": "2.1L (20/30/40 approaching)", "Monitoring": "ICU transferred"}}
+      ]
+    },
+    "mustNotMiss": ["Respiratory failure (most fatal complication — 20/30/40 rule for proactive intubation)","Autonomic instability (labile BP, bradycardia/tachycardia — cardiac monitoring essential)","Miller-Fisher variant (ophthalmoplegia + ataxia + areflexia — anti-GQ1b antibody)","Pain management (GBS causes severe neuropathic pain — often undertreated)"],
+    "commonPitfalls": ["Steroids for GBS (multiple RCTs show harm — no benefit)","Waiting for SpO2 to fall before intubating (too late — proactive FVC monitoring)","Combining IVIG + PLEX (no benefit; choose one)","Not monitoring FVC frequently enough (q4-6h in first 48h)"],
+    "keyLearningPoints": ["GBS treatment: IVIG 2g/kg OR PLEX — equally effective; choose one","20/30/40 rule: FVC <20, NIF <-30, MIF <-40 = intubate proactively","Steroids are HARMFUL in GBS — do not use (opposite of most autoimmune conditions)"]
+  },
+  "febrile-neutropenia": {
+    "id": "febrile-neutropenia",
+    "diagnosis": "Febrile Neutropenia — Chemotherapy Induced",
+    "acuity": 2,
+    "presentation": "Fever / ANC <500 / Chemotherapy Patient",
+    "category": "other",
+    "chiefComplaint": "Breast Cancer Patient / Post-Chemo Day 10 / Fever 38.4°C / ANC 180",
+    "treatments": {
+      "orders": [
+        {"id": "blood-cultures-fn", "name": "Blood cultures x2 (peripheral + central) THEN antibiotics within 60 min", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Blood cultures before antibiotics — but DO NOT DELAY antibiotics more than 60 minutes. Time to first antibiotic is the most important outcome predictor. Draw 2 sets: peripheral AND through central line (if present). Also: UA + urine culture, CXR, relevant cultures from any symptoms.",
+          "references": [{"source": "Febrile Neutropenia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK293298/", "detail": "Cultures before antibiotics but <60 min to first dose; time to antibiotics = most important predictor"}]},
+        {"id": "pip-tazo-fn", "name": "Piperacillin-tazobactam 4.5g IV q6h (anti-pseudomonal coverage)", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "First-line empiric for febrile neutropenia: pip-tazo or cefepime (anti-pseudomonal beta-lactam). Pseudomonas bacteremia in neutropenic patients has 50-70% mortality — must cover. Add vancomycin if hemodynamically unstable, suspected catheter infection, skin/soft tissue infection, or MRSA risk factors. MASCC score guides low vs high risk.",
+          "references": [{"source": "Febrile Neutropenia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK293298/", "detail": "Pip-tazo or cefepime empirically; add vancomycin for hemodynamic instability or MRSA risk"}]},
+        {"id": "gcsf-fn", "name": "G-CSF (filgrastim) to accelerate neutrophil recovery", "group": "Treatment",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "G-CSF reduces neutropenia duration and hospitalisation. Consider for high-risk patients (expected prolonged neutropenia >10 days, high-risk malignancy). MASCC score ≥21 = low risk (may be able to manage outpatient with oral antibiotics).",
+          "references": [{"source": "Febrile Neutropenia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK293298/", "detail": "G-CSF for prolonged expected neutropenia; MASCC score guides outpatient vs inpatient management"}]},
+        {"id": "wait-culture-fn", "name": "Wait for culture results before starting antibiotics", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — delay in antibiotics in febrile neutropenia is associated with significantly increased mortality. Start empiric anti-pseudomonal antibiotics within 60 minutes of fever recognition. Cultures will direct therapy but cannot delay initial treatment.",
+          "references": [{"source": "Febrile Neutropenia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK293298/", "detail": "Never wait for cultures — start empiric antibiotics within 60 min; delay increases mortality significantly"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "108/72", "HR": "108", "Temp": "38.4°C", "SpO2": "97%"},
+          "labHighlights": {"ANC": "180 cells/mm³", "WBC": "0.8", "MASCC": "18 (high risk)"}},
+        {"id": "cultures-abx", "label": "Cultures + Antibiotics",
+          "vitals": {"BP": "112/74", "HR": "102"},
+          "labHighlights": {"CXR": "No infiltrate", "UA": "Negative", "Blood cx": "Pending"}},
+        {"id": "day3", "label": "Day 3 — ANC Recovering",
+          "vitals": {"BP": "118/78", "HR": "92", "Temp": "37.4°C"},
+          "labHighlights": {"ANC": "420 (recovering)", "Blood cx": "S. epidermidis (CONS) — 1/2 bottles", "Plan": "Continue abx 5-7d"}}
+      ]
+    },
+    "mustNotMiss": ["Pseudomonas bacteremia (50-70% mortality without coverage — anti-pseudomonal mandatory)","Fungal infection if prolonged neutropenia >7 days or not responding to antibiotics (add antifungal)","Typhlitis (neutropenic enterocolitis — RLQ pain + CT thickened cecum = bowel rest + antibiotics ± surgery)","Invasive aspergillosis if prolonged neutropenia >10 days + respiratory symptoms"],
+    "commonPitfalls": ["Delay in starting antibiotics (mortality increases >60 min from fever recognition)","Omitting anti-pseudomonal coverage (standard coverage without Pseudomonas activity is inadequate)","Not adding antifungal for prolonged neutropenia","Using vancomycin routinely without MRSA risk factors (unnecessary resistance pressure)"],
+    "keyLearningPoints": ["Febrile neutropenia: temp ≥38°C + ANC <500 (or <1000 expected to fall)","Empiric anti-pseudomonal antibiotics within 60 min — Pseudomonas bacteremia is rapidly fatal","MASCC score ≥21 = low-risk (may manage outpatient with oral antibiotics); <21 = hospitalize"]
+  },
+  "hypercalcemia": {
+    "id": "hypercalcemia",
+    "diagnosis": "Hypercalcemia of Malignancy — Severe",
+    "acuity": 2,
+    "presentation": "AMS / Constipation / Polyuria / Calcium 14.2",
+    "category": "other",
+    "chiefComplaint": "Confused / Constipated / Weak / Ca2+ 14.2 / Known Malignancy",
+    "treatments": {
+      "orders": [
+        {"id": "saline-hypercalcemia", "name": "Normal saline 200-300 mL/h IV (volume expansion — first-line)", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Aggressive IV saline is the immediate first step — expands volume, increases GFR, promotes calciuresis. Start 200-300 mL/h, adjust to UO 100-150 mL/h. Do NOT add furosemide routinely — only after adequate rehydration if volume overloaded. Furosemide before rehydration worsens dehydration and hypercalcemia.",
+          "references": [{"source": "Hypercalcemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430714/", "detail": "IV saline first; 200-300 mL/h; furosemide only after rehydration if volume overloaded"}]},
+        {"id": "zoledronate-hypercalcemia", "name": "Zoledronic acid 4mg IV over 15 min (bisphosphonate for malignancy)", "group": "Definitive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Bisphosphonates (zoledronate) are the definitive treatment for hypercalcemia of malignancy — inhibit osteoclast activity (PTHrP drives osteoclast bone resorption). Effect onset 2-4 days, duration 2-4 weeks. Denosumab for bisphosphonate-refractory cases. Calcitonin for faster onset (hours) while waiting for bisphosphonate.",
+          "references": [{"source": "Hypercalcemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430714/", "detail": "Zoledronate for malignancy HCM; onset 2-4 days; calcitonin for faster temporary effect"}]},
+        {"id": "calcitonin-hypercalcemia", "name": "Calcitonin 4 IU/kg SC q12h (rapid onset, tachyphylaxis after 24-48h)", "group": "Adjunct",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Calcitonin provides the fastest calcium reduction (within hours) while waiting for bisphosphonate to act (2-4 days). Tachyphylaxis develops in 24-48h — effect is temporary. Use as bridge to bisphosphonate, not monotherapy.",
+          "references": [{"source": "Hypercalcemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430714/", "detail": "Calcitonin: rapid onset (hours) but tachyphylaxis at 48h; bridge to bisphosphonate"}]},
+        {"id": "furosemide-first-hcm", "name": "Furosemide immediately for calcium diuresis", "group": "Diuretics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "OUTDATED AND HARMFUL if given before rehydration. Historical practice was 'saline diuresis' with furosemide — now abandoned. Furosemide before adequate volume replacement causes worsening prerenal azotemia and further calcium concentration. Furosemide only AFTER adequate rehydration if patient becomes volume overloaded.",
+          "references": [{"source": "Hypercalcemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430714/", "detail": "Furosemide before rehydration worsens dehydration; saline diuresis is outdated; hydrate first"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "88/56 (dehydrated)", "HR": "118", "SpO2": "97%"},
+          "labHighlights": {"Ca2+": "14.2 mg/dL", "PTHrP": "Elevated", "Cr": "2.8 (dehydration)", "Albumin": "3.2"}},
+        {"id": "saline-running", "label": "NS Running",
+          "vitals": {"BP": "106/70", "HR": "104"},
+          "labHighlights": {"UO": "140 mL/hr", "Ca2+": "13.4 (falling)", "Zoledronate": "Ordered"}},
+        {"id": "day3", "label": "Day 3 — Ca Falling",
+          "vitals": {"BP": "118/76", "HR": "88"},
+          "labHighlights": {"Ca2+": "10.8 (normalized)", "Cr": "1.4 (recovered)", "AMS": "Resolved"}}
+      ]
+    },
+    "mustNotMiss": ["Primary hyperparathyroidism vs malignancy vs granulomatous disease (PTH, PTHrP, 1,25-vitamin D)","Symptomatic hypercalcemia with cardiac arrhythmia (short QT on ECG — risk of VF)","Milk-alkali syndrome (from calcium antacids) in outpatient setting","Immobilization hypercalcemia (prolonged bed rest + Paget's or malignancy)"],
+    "commonPitfalls": ["Furosemide before rehydration (worsens hypercalcemia and AKI)","Not identifying and treating underlying cause (malignancy management is definitive)","Missing PTH-independent (malignancy, granuloma) vs PTH-dependent causes (hyperPTH)","Inadequate rehydration rate (200-300 mL/h needed, not TKO)"],
+    "keyLearningPoints": ["Hypercalcemia of malignancy mnemonic: 'Bones, Groans, Moans, Stones' (bone pain, GI, psych, kidney stones)","NS hydration first → zoledronate (2-4d onset) → calcitonin bridge for rapid effect","Never furosemide before rehydration — outdated practice that worsens outcomes"]
+  }
+,
+
+  "displaced-femoral-neck-fracture": {
+    "id": "displaced-femoral-neck-fracture",
+    "diagnosis": "Displaced Femoral Neck Fracture — Garden III/IV",
+    "acuity": 2,
+    "presentation": "Hip Pain / Unable to Bear Weight / Shortened Externally Rotated Leg",
+    "category": "musculoskeletal",
+    "chiefComplaint": "Elderly Patient / Fall / Right Hip Pain / Shortened Externally Rotated Leg",
+    "treatments": {
+      "orders": [
+        {"id": "hemiarthroplasty-fnf", "name": "Hemiarthroplasty (not ORIF) for displaced femoral neck fracture in elderly", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Displaced femoral neck fracture (Garden III/IV) in elderly: hemiarthroplasty is preferred over ORIF because of high AVN risk from disrupted blood supply (medial circumflex femoral artery). In young patients (<60yo): urgent ORIF within 6h (preserve native head). Total hip arthroplasty for active elderly with pre-existing arthritis.",
+          "references": [{"source": "Hip Fracture — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546594/", "detail": "Displaced FNF elderly: hemiarthroplasty; young patients: urgent ORIF within 6h (AVN prevention)"}]},
+        {"id": "surgery-timing-fnf", "name": "Surgery within 48h (optimize medical status in parallel)", "group": "Timing",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hip fracture surgery within 48h significantly reduces mortality, PE risk, delirium, and 30-day complications. 'Optimize then operate' — do not delay for optimization beyond 48h unless patient is truly medically unstable (active MI, decompensated HF, severe sepsis). Delay itself causes harm.",
+          "references": [{"source": "Hip Fracture — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546594/", "detail": "Surgery within 48h; delay increases mortality, PE, delirium; do not postpone for routine optimization"}]},
+        {"id": "pain-management-fnf", "name": "Fascia iliaca nerve block + multimodal analgesia", "group": "Analgesia",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Fascia iliaca compartment block provides excellent analgesia for hip fracture — reduces opioid requirement, delirium risk, and LOS. Perform in ED or preoperatively. Multimodal: acetaminophen + NSAID (if CKD allows) + nerve block + opioid PRN.",
+          "references": [{"source": "Hip Fracture — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546594/", "detail": "Fascia iliaca block: reduces opioids, delirium, LOS; multimodal analgesia essential"}]},
+        {"id": "traction-fnf", "name": "Buck skin traction for pain relief", "group": "Conservative",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Skin traction is OUTDATED for hip fractures — does not relieve pain effectively and causes skin breakdown. Modern management: adequate analgesia (nerve block), position of comfort, surgery within 48h.",
+          "references": [{"source": "Hip Fracture — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546594/", "detail": "Skin traction abandoned — no pain benefit, causes skin breakdown; nerve block + early surgery instead"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/86", "HR": "96", "Temp": "37.2°C"},
+          "labHighlights": {"XR": "Displaced FNF — Garden IV", "Hgb": "10.2", "Cr": "1.1"}},
+        {"id": "preop", "label": "Pre-Op Optimization",
+          "vitals": {"BP": "132/82", "HR": "88"},
+          "labHighlights": {"Fascia iliaca block": "Performed", "Cardiology": "Cleared for surgery", "INR": "1.0"}},
+        {"id": "post-op", "label": "Post-Hemiarthroplasty",
+          "vitals": {"BP": "128/80", "HR": "82"},
+          "labHighlights": {"Weight bearing": "As tolerated day 1", "PT/OT": "Started day 1", "VTE prophylaxis": "Enoxaparin"}}
+      ]
+    },
+    "mustNotMiss": ["AVN risk with delayed ORIF in young patients — urgent reduction within 6h","Intertrochanteric fracture (extracapsular — ORIF not arthroplasty; blood supply intact)","VTE prophylaxis (hip fracture = highest VTE risk; start LMWH 12h post-op)","Delirium prevention — mobilize day 1, avoid opioids, orientation, familiar environment"],
+    "commonPitfalls": ["ORIF for displaced FNF in elderly (high AVN rate — hemiarthroplasty preferred)","Delay >48h without urgent medical indication (delay itself increases mortality)","Skin traction (outdated, causes skin breakdown)","Not mobilizing day 1 post-op (prolonged bed rest dramatically worsens outcomes in elderly)"],
+    "keyLearningPoints": ["Displaced FNF elderly: hemiarthroplasty (not ORIF — AVN risk)","Surgery within 48h: reduces mortality, delirium, PE — do not delay for routine optimization","Fascia iliaca block + early mobilization (day 1) are as important as surgical technique"]
+  },
+  "infectious-mononucleosis-with-tonsillar-hypertrophy": {
+    "id": "infectious-mononucleosis-with-tonsillar-hypertrophy",
+    "diagnosis": "Infectious Mononucleosis with Severe Tonsillar Hypertrophy",
+    "acuity": 2,
+    "presentation": "Sore Throat / Lymphadenopathy / Splenomegaly / Exudative Tonsils",
+    "category": "infectious",
+    "chiefComplaint": "College Student / Severe Sore Throat / Lymphadenopathy / EBV Positive",
+    "treatments": {
+      "orders": [
+        {"id": "avoid-amoxicillin-mono", "name": "Do NOT give amoxicillin or ampicillin (maculopapular rash)", "group": "Medications",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Amoxicillin/ampicillin causes a diffuse maculopapular rash in 80-100% of mono patients — immune complex reaction, NOT true penicillin allergy. This is one of the most common ED mistakes. If bacterial superinfection (GAS) is suspected, use azithromycin or clindamycin instead.",
+          "references": [{"source": "Mononucleosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK562174/", "detail": "Amoxicillin/ampicillin causes rash in 80-100% of mono — immune complex, not true allergy; use azithromycin instead"}]},
+        {"id": "supportive-mono", "name": "Supportive care — hydration, analgesics, rest", "group": "Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "EBV mono is self-limiting — supportive care only. Adequate hydration (dysphagia may limit oral intake), acetaminophen or NSAIDs for fever/pain. Steroids only for airway compromise from tonsillar hypertrophy or severe cytopenias (thrombocytopenia <50,000 or hemolytic anemia).",
+          "references": [{"source": "Mononucleosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK562174/", "detail": "Self-limiting; supportive care; steroids only for airway compromise or severe cytopenias"}]},
+        {"id": "contact-sports-mono", "name": "Avoid contact sports for 3-4 weeks (splenomegaly)", "group": "Activity",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Splenomegaly occurs in up to 50% of mono cases — splenic rupture is the most feared complication. Avoid contact sports and abdominal trauma for 3-4 weeks minimum (or until splenomegaly resolves on imaging). Spontaneous rupture can occur even without trauma.",
+          "references": [{"source": "Mononucleosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK562174/", "detail": "No contact sports 3-4 weeks; splenic rupture risk even without trauma; 50% have splenomegaly"}]},
+        {"id": "steroids-mono-routine", "name": "Dexamethasone routinely for sore throat and fever", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Steroids are NOT indicated routinely for infectious mononucleosis — use only for airway compromise from massive tonsillar hypertrophy or severe hematologic complications. Routine steroids increase risk of secondary bacterial infection and worsen EBV viral load without clear benefit.",
+          "references": [{"source": "Mononucleosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK562174/", "detail": "Steroids only for airway compromise or severe cytopenias; not routine — increases infection risk"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "118/76", "HR": "96", "Temp": "38.8°C", "SpO2": "97%"},
+          "labHighlights": {"Monospot": "Positive", "WBC": "18,400 (lymphocytic)", "Lymphocytes": "Atypical 25%", "Spleen": "Enlarged (US)"}},
+        {"id": "treated", "label": "Supportive Care",
+          "vitals": {"BP": "116/74", "HR": "88", "Temp": "38.2°C"},
+          "labHighlights": {"Throat": "Massive exudative tonsils — but airway intact", "LFTs": "Mildly elevated (EBV hepatitis)"}},
+        {"id": "improving", "label": "Week 2 — Improving",
+          "vitals": {"BP": "114/72", "HR": "82", "Temp": "37.4°C"},
+          "labHighlights": {"Tonsils": "Less hypertrophic", "Activity": "Restricted until spleen resolves"}}
+      ]
+    },
+    "mustNotMiss": ["Splenic rupture (sudden severe LUQ pain + hemodynamic instability — surgical emergency)","Airway compromise from massive tonsils (dexamethasone 0.3mg/kg IV + ENT)","EBV hepatitis (elevated LFTs — monitor but usually self-limiting)","Secondary strep throat superinfection (GAS culture — treat with azithromycin, NOT amoxicillin)"],
+    "commonPitfalls": ["Amoxicillin/ampicillin (80-100% rash rate in mono — use azithromycin)","Routine steroids (not indicated; increases infection risk)","Allowing contact sports before splenomegaly resolves (splenic rupture)","Monospot false negative (up to 25% in first week — use EBV VCA IgM if high suspicion)"],
+    "keyLearningPoints": ["Never give amoxicillin/ampicillin in mono — 80-100% maculopapular rash","No contact sports 3-4 weeks — splenic rupture is the most dangerous complication","Steroids only for airway compromise or severe cytopenias, not routine sore throat"]
+  },
+  "complete-heart-block-v2": {
+    "id": "complete-heart-block-v2",
+    "diagnosis": "Complete Heart Block — Degenerative Conduction Disease",
+    "acuity": 2,
+    "presentation": "Syncope / Bradycardia / HR 36 / No STEMI",
+    "category": "cardiovascular",
+    "chiefComplaint": "Syncopal Episode / HR 36 / Complete Heart Block / Age 78",
+    "treatments": {
+      "orders": [
+        {"id": "atropine-chb2", "name": "Atropine 0.5-1mg IV (if hemodynamically compromised)", "group": "Rate Support",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Atropine for hemodynamically significant bradycardia. May be less effective for infranodal (His-Purkinje level) blocks — atropine works at AV node. If infranodal block: transcutaneous pacing (TCP) or dopamine/epinephrine drip as bridge to transvenous pacing (TVP).",
+          "references": [{"source": "Complete Heart Block — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507823/", "detail": "Atropine 0.5-1mg for symptomatic CHB; may be ineffective in infranodal block — TCP as backup"}]},
+        {"id": "tcp-chb2", "name": "Transcutaneous pacing (TCP) — bridge to permanent pacemaker", "group": "Pacing",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "TCP for hemodynamically unstable CHB — immediate bridge while preparing for transvenous (TVP) or permanent pacemaker. TCP is painful (muscle stimulation) — adequate sedation/analgesia essential. Confirm capture with palpable pulse, not just ECG spikes.",
+          "references": [{"source": "Complete Heart Block — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507823/", "detail": "TCP for unstable CHB; sedate for pain; confirm electrical AND mechanical capture"}]},
+        {"id": "permanent-pacemaker-chb2", "name": "Permanent pacemaker (PPM) — definitive treatment for degenerative CHB", "group": "Definitive",
+          "critical": true, "correct": true, "phase": 2,
+          "teaching": "Degenerative CHB (Lev-Lenègre disease) = permanent, irreversible conduction system fibrosis. Permanent pacemaker is the definitive treatment. AHA Class I indication. Key distinction from reversible causes (Lyme carditis, drug-induced, post-surgical) — those may not need PPM.",
+          "references": [{"source": "Complete Heart Block — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507823/", "detail": "PPM = Class I for degenerative CHB (Lev-Lenègre); distinguish reversible causes (Lyme, drugs, surgery)"}]},
+        {"id": "isoproterenol-chb", "name": "Isoproterenol drip for CHB rate support", "group": "Rate Support",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Isoproterenol is NOT recommended for CHB — it increases myocardial oxygen demand and can precipitate VT/VF, especially in ischemic CHB. Dopamine or epinephrine are safer alternatives if atropine/TCP fails. Isoproterenol is reserved for specific situations (torsades de pointes).",
+          "references": [{"source": "Complete Heart Block — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507823/", "detail": "Isoproterenol avoided in CHB — increases demand, VT/VF risk; use dopamine or epinephrine"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "82/52", "HR": "36 (CHB)", "SpO2": "94%"},
+          "labHighlights": {"ECG": "P waves 78/min, QRS 36/min — AV dissociation", "Troponin": "Negative", "TSH": "Normal"}},
+        {"id": "tcp-initiated", "label": "TCP Running",
+          "vitals": {"BP": "96/62", "HR": "60 (paced)"},
+          "labHighlights": {"Capture": "Confirmed — mechanical + electrical", "Lyme serology": "Negative", "Meds": "No AV-blocking agents"}},
+        {"id": "ppm-placed", "label": "Permanent Pacemaker",
+          "vitals": {"BP": "118/76", "HR": "70 (PPM)"},
+          "labHighlights": {"PPM": "Dual-chamber (DDD mode) placed", "Sensing/pacing": "Thresholds optimal"}}
+      ]
+    },
+    "mustNotMiss": ["Reversible causes before PPM: Lyme, drug-induced (digoxin, beta-blockers, CCBs), post-surgical, hypothyroidism","Inferior STEMI causing CHB (RCA territory — PCI may resolve block)","Isoproterenol is wrong for CHB rate support (VT/VF risk)","Confirm mechanical capture in TCP (palpable pulse — do not rely on ECG alone)"],
+    "commonPitfalls": ["Isoproterenol for CHB (wrong agent — VT/VF risk)","Not confirming mechanical capture in TCP (ECG capture ≠ hemodynamic capture)","Permanent pacemaker before ruling out reversible causes (Lyme, drugs)","Inadequate sedation for TCP (painful procedure)"],
+    "keyLearningPoints": ["CHB: P-waves and QRS dissociate completely — ventricular rate 20-40 bpm","Atropine may not work in infranodal block — TCP is reliable backup","Permanent pacemaker for degenerative CHB; always rule out reversible causes first"]
+  },
+  "gastroenteritis": {
+    "id": "gastroenteritis",
+    "diagnosis": "Acute Viral Gastroenteritis with Moderate Dehydration",
+    "acuity": 3,
+    "presentation": "Vomiting / Diarrhea / Dehydration",
+    "category": "infectious",
+    "chiefComplaint": "Vomiting x12 Hours / Diarrhea / Unable to Keep Fluids Down",
+    "treatments": {
+      "orders": [
+        {"id": "oral-rehydration-ge", "name": "Oral Rehydration Solution (ORS) — first-line for mild-moderate dehydration", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "ORS (WHO formula: glucose + Na + K + citrate) is as effective as IV fluids for mild-moderate dehydration in viral gastroenteritis — even with vomiting. Glucose-sodium co-transport bypasses vomiting. Sips of 5-10 mL every 5 minutes. IV fluids only for severe dehydration, altered consciousness, or failure of oral rehydration.",
+          "references": [{"source": "Gastroenteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK499995/", "detail": "ORS as effective as IV fluids for mild-moderate dehydration; glucose-Na cotransport bypasses vomiting"}]},
+        {"id": "ondansetron-ge", "name": "Ondansetron 4mg ODT (anti-emetic to facilitate ORS)", "group": "Anti-emetics",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Ondansetron reduces vomiting and facilitates oral rehydration, reducing IV fluid need and hospitalization rate. ODT (orally disintegrating tablet) is effective even with vomiting. Evidence strongest in pediatrics but benefits adults too.",
+          "references": [{"source": "Gastroenteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK499995/", "detail": "Ondansetron reduces vomiting, facilitates ORS, reduces IV fluid need and hospitalization"}]},
+        {"id": "antibiotics-viral-ge", "name": "Antibiotics for viral gastroenteritis", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "NOT indicated for viral gastroenteritis — antibiotics do not shorten duration and increase C. diff risk. Antibiotics only for: confirmed bacterial cause with systemic illness (Salmonella in immunocompromised, severe Campylobacter, Shigella). Most gastroenteritis is viral (norovirus most common).",
+          "references": [{"source": "Gastroenteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK499995/", "detail": "No antibiotics for viral GE; only for severe bacterial cases; norovirus most common cause"}]},
+        {"id": "stool-culture-ge", "name": "Routine stool culture for all gastroenteritis", "group": "Diagnostics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Routine stool cultures are NOT needed for typical viral gastroenteritis. Culture indicated for: bloody diarrhea, fever >38.5°C, immunocompromised patients, prolonged illness >7 days, outbreaks, food handler/healthcare worker. Norovirus: clinical diagnosis, no testing needed.",
+          "references": [{"source": "Gastroenteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK499995/", "detail": "No routine cultures for typical viral GE; culture for bloody diarrhea, fever, immunocompromised, outbreaks"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "108/72 (orthostatic)", "HR": "108", "Temp": "37.8°C"},
+          "labHighlights": {"Mucous membranes": "Dry", "Skin turgor": "Reduced", "Stool": "Watery, non-bloody"}},
+        {"id": "ors-ondansetron", "label": "ORS + Ondansetron",
+          "vitals": {"BP": "116/74", "HR": "98"},
+          "labHighlights": {"ORS": "400 mL tolerated over 2h", "Vomiting": "Reduced"}},
+        {"id": "rehydrated", "label": "Rehydrated",
+          "vitals": {"BP": "122/78", "HR": "88"},
+          "labHighlights": {"Urine": "Clear, adequate output", "Disposition": "Discharge with ORS instructions"}}
+      ]
+    },
+    "mustNotMiss": ["Bloody diarrhea + fever = bacterial (culture, consider antibiotics for Shigella/severe Campylobacter)","Hemolytic uremic syndrome (HUS) from E. coli O157:H7 — avoid antibiotics (worsen Shiga toxin release)","C. difficile if recent antibiotics/hospitalization — check CDT","Severe dehydration with AMS/hypotension — IV fluid resuscitation"],
+    "commonPitfalls": ["Antibiotics for viral gastroenteritis (increases C. diff risk, no benefit)","Routine stool cultures (not needed for typical presentation)","IV fluids when ORS would suffice (ORS equally effective for mild-moderate dehydration)","Loperamide in bloody diarrhea (contraindicated — may worsen HUS/toxic megacolon)"],
+    "keyLearningPoints": ["ORS is as effective as IV fluids for mild-moderate dehydration — prefer oral route","Ondansetron facilitates ORS and reduces hospitalization","No antibiotics for viral GE; antibiotics in EHEC worsens HUS (Shiga toxin release)"]
+  },
+  "long-qt-syndrome": {
+    "id": "long-qt-syndrome",
+    "diagnosis": "Long QT Syndrome — Torsades de Pointes",
+    "acuity": 1,
+    "presentation": "Polymorphic VT / QTc >600 / Drug-Induced",
+    "category": "cardiovascular",
+    "chiefComplaint": "Witnessed Polymorphic VT / QTc 640ms / On Multiple QT-Prolonging Drugs",
+    "treatments": {
+      "orders": [
+        {"id": "magnesium-tdp", "name": "Magnesium sulfate 2g IV over 2 min (immediate for torsades)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Magnesium sulfate 2g IV over 2 minutes is first-line for torsades de pointes — mechanism: blocks calcium entry, stabilizes membrane. Repeat if needed. Even if serum Mg is normal. For recurrent episodes: 1-2g/h infusion. Magnesium works regardless of serum level.",
+          "references": [{"source": "Long QT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK556000/", "detail": "Magnesium 2g IV over 2 min: first-line for torsades; works even if serum Mg normal; repeat PRN"}]},
+        {"id": "stop-qt-drugs", "name": "STOP all QT-prolonging medications immediately", "group": "Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Identify and remove all QT-prolonging drugs: antiarrhythmics (amiodarone, sotalol, quinidine), antipsychotics (haloperidol, ziprasidone), antibiotics (azithromycin, fluoroquinolones), antiemetics (ondansetron, domperidone), antifungals (fluconazole). Check CredibleMeds database. Correct electrolytes (K+ >4.0, Mg2+ >2.0).",
+          "references": [{"source": "Long QT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK556000/", "detail": "Stop all QT-prolonging drugs; check CredibleMeds; correct K+ >4.0, Mg >2.0"}]},
+        {"id": "isoproterenol-torsades", "name": "Isoproterenol 2-10 mcg/min (rate-increase to suppress torsades)", "group": "Rate Support",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Torsades is pause-dependent (occurs after bradycardia). Isoproterenol or overdrive pacing (TVP at 90-120 bpm) shortens QT by increasing heart rate. Isoproterenol is appropriate here (unlike CHB where it's avoided) — increases rate, shortens QT, suppresses torsades.",
+          "references": [{"source": "Long QT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK556000/", "detail": "Isoproterenol or overdrive pacing for recurrent torsades; increases rate, shortens QT, suppresses pause-dependent episodes"}]},
+        {"id": "amiodarone-torsades", "name": "Amiodarone for polymorphic VT", "group": "Antiarrhythmics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — amiodarone prolongs QT and will WORSEN torsades. Amiodarone is used for monomorphic VT. Polymorphic VT in the setting of long QT = torsades = magnesium + correct cause. Never give amiodarone for torsades.",
+          "references": [{"source": "Long QT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK556000/", "detail": "Amiodarone prolongs QT and worsens torsades — contraindicated; magnesium is correct treatment"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Torsades Episode", "auto": true,
+          "vitals": {"BP": "72/40", "HR": "variable (polymorphic VT)", "SpO2": "88%"},
+          "labHighlights": {"ECG": "Polymorphic VT, QTc 640ms", "K+": "2.8", "Mg2+": "1.4", "Drugs": "Haloperidol + azithromycin + fluconazole"}},
+        {"id": "magnesium-given", "label": "Magnesium + Drug Cessation",
+          "vitals": {"BP": "102/68", "HR": "82 (sinus)"},
+          "labHighlights": {"QTc": "580ms (reducing)", "K+": "3.8 (repleted)", "Mg2+": "2.2 (repleted)"}},
+        {"id": "monitoring", "label": "Telemetry Monitoring",
+          "vitals": {"BP": "118/76", "HR": "78 (sinus)"},
+          "labHighlights": {"QTc": "520ms (day 2)", "Torsades": "None", "Offending drugs": "Discontinued"}}
+      ]
+    },
+    "mustNotMiss": ["Hypokalemia + hypomagnesemia dramatically worsen QT — always correct (K+ >4.0, Mg >2.0)","Congenital LQTS (family history of syncope/SCD, young patient) — ICD evaluation","Amiodarone is contraindicated for torsades (worsens QT)","Drug interactions — azithromycin + antipsychotic is a common dangerous combination"],
+    "commonPitfalls": ["Amiodarone for polymorphic VT (worsens torsades)","Not checking and repleting K+ and Mg2+","Missing drug culprits — always check QT-prolonging drug list","Lidocaine instead of magnesium (ineffective for torsades)"],
+    "keyLearningPoints": ["Torsades = polymorphic VT + long QT: magnesium 2g IV immediately","Pause-dependent: isoproterenol or overdrive pacing if recurrent","Amiodarone is CONTRAINDICATED — it prolongs QT and worsens torsades"]
+  },
+  "ovarian-pathology": {
+    "id": "ovarian-pathology",
+    "diagnosis": "Ovarian Torsion — Right Adnexal",
+    "acuity": 2,
+    "presentation": "Acute Pelvic Pain / Nausea / Vomiting / Adnexal Mass",
+    "category": "gynecologic",
+    "chiefComplaint": "Sudden Severe Right Lower Quadrant Pain / Nausea / Vomiting / Transvaginal US: Enlarged Right Ovary",
+    "treatments": {
+      "orders": [
+        {"id": "surgery-torsion", "name": "Emergent operative laparoscopy — detorsion within hours", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Ovarian torsion is a surgical emergency — ovarian viability diminishes rapidly with ischemia time. Laparoscopic detorsion is preferred over oophorectomy: even blue-black ovaries may recover after detorsion (appearance does not predict viability). The ovary should be preserved if at all possible. Delayed surgery → necrosis → oophorectomy.",
+          "references": [{"source": "Ovarian Torsion — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560875/", "detail": "Emergent laparoscopy; detorsion preferred over oophorectomy even for discolored ovaries — appearance ≠ viability"}]},
+        {"id": "us-doppler-torsion", "name": "Transvaginal ultrasound with Doppler (confirm torsion)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Transvaginal US: enlarged ovary >5cm, peripheral follicles (string of pearls), absent or reduced blood flow on Doppler. Absent blood flow has high specificity but low sensitivity — NORMAL Doppler does NOT rule out torsion (blood flow may be intermittent). Clinical + US together guide decision.",
+          "references": [{"source": "Ovarian Torsion — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560875/", "detail": "TV US with Doppler; absent flow is specific but normal flow does NOT rule out torsion"}]},
+        {"id": "wait-tumor-markers", "name": "Wait for CA-125 result before operating", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — CA-125 results take hours and are non-specific (elevated in many benign conditions). Every hour of delay increases ischemia and risk of oophorectomy. Clinical diagnosis + US finding of enlarged ovary = operate. Never delay surgery for tumor markers in suspected torsion.",
+          "references": [{"source": "Ovarian Torsion — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560875/", "detail": "Never delay surgery for CA-125; it is non-specific and takes hours; clinical + US is sufficient"}]},
+        {"id": "antibiotics-torsion", "name": "IV antibiotics for pelvic pain before gynecology evaluation", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Antibiotics are for PID, not ovarian torsion. Treating torsion as PID delays surgical care. Always obtain gynecology consultation and imaging before presumptively treating pelvic pain as infectious.",
+          "references": [{"source": "Ovarian Torsion — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560875/", "detail": "Torsion is not PID; antibiotics delay surgical care; imaging + GYN consult first"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "118/76", "HR": "108", "Temp": "37.4°C"},
+          "labHighlights": {"Beta-hCG": "Negative", "US": "Right ovary 7cm, absent Doppler flow", "WBC": "11,400"}},
+        {"id": "or-prep", "label": "GYN Consulted / OR Prep",
+          "vitals": {"BP": "114/74", "HR": "104"},
+          "labHighlights": {"Diagnosis": "Ovarian torsion confirmed clinically + US", "OR": "Emergent laparoscopy activated"}},
+        {"id": "post-op", "label": "Post-Detorsion",
+          "vitals": {"BP": "116/76", "HR": "86"},
+          "labHighlights": {"Intraop": "Right ovary detorsed — blue but viable", "24h follow-up": "Ovarian color normalizing"}}
+      ]
+    },
+    "mustNotMiss": ["Normal Doppler does NOT rule out torsion — clinical suspicion + enlarged ovary = operate","Ectopic pregnancy must be excluded first (beta-hCG negative rules out ectopic)","Malignant ovarian mass as lead point — cystectomy/oophorectomy if malignancy suspected","Recurrent torsion risk — oophoropexy at time of detorsion"],
+    "commonPitfalls": ["Normal Doppler reassurance (does not rule out torsion)","Delay for CA-125 (irrelevant to acute management)","Oophorectomy without attempting detorsion (black ovary may be viable — always detorse first)","Treating as PID with antibiotics (delay in surgical care → oophorectomy)"],
+    "keyLearningPoints": ["Ovarian torsion: sudden pelvic pain + nausea + enlarged ovary on US = emergent laparoscopy","Normal Doppler does NOT rule out torsion — clinical suspicion is the key driver","Detorsion before oophorectomy even for discolored ovaries — appearance does not predict viability"]
+  }
 
 };
