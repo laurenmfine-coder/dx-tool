@@ -157,7 +157,7 @@
         var sidebarHints = [
           { icon: '\uD83D\uDCCB', label: 'Patient List', desc: 'Your cases' },
           { icon: '\uD83D\uDEA8', label: 'Simulations', desc: 'Night Float, SimRoomDx, Consult' },
-          { icon: '\uD83E\uDDE0', label: 'Learning', desc: 'CRT, Board Prep, ECG' }
+          { icon: '\uD83E\uDDE0', label: 'Learning', desc: 'CRT, CoachDx, ECG' }
         ];
         sidebarHints.forEach(function(h) {
           html += '<div style="display:flex;align-items:center;gap:8px;padding:4px 0">';

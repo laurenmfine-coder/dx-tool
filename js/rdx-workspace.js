@@ -239,7 +239,7 @@
   var wizState = { role:'', level:'', goal:'' };
   var ROLE_LABELS  = {student:'Medical Student',resident:'Resident',fellow:'Fellow / Advanced',educator:'Educator / Faculty'};
   var LEVEL_LABELS = {beginner:'New here (clean view)',intermediate:'Getting started',veteran:'Power user (all features)'};
-  var GOAL_LABELS  = {reasoning:'Work cases (ReasonDx)',coaching:'CoachDx coaching',pathophys:'MechanismDx deep dives',boardprep:'Board prep / MCQs'};
+  var GOAL_LABELS  = {reasoning:'Work cases (ReasonDx)',coaching:'CoachDx coaching',pathophys:'MechanismDx deep dives',boardprep:'Case review / Spaced Rep'};
 
   function buildWizardHTML() {
     return '<div class="wiz-card">' +
@@ -275,7 +275,7 @@
         '<button class="wiz-opt" data-goal="reasoning" onclick="rdxWizPick(this,\'goal\')"><span class="opt-icon">🔍</span><div><div class="opt-label">Work through clinical cases</div><div class="opt-desc">Diagnosis, differential, workup — ReasonDx</div></div></button>' +
         '<button class="wiz-opt" data-goal="coaching" onclick="rdxWizPick(this,\'goal\')"><span class="opt-icon">🧑‍🏫</span><div><div class="opt-label">Get coached on my reasoning</div><div class="opt-desc">Socratic feedback, gap analysis — CoachDx</div></div></button>' +
         '<button class="wiz-opt" data-goal="pathophys" onclick="rdxWizPick(this,\'goal\')"><span class="opt-icon">🧬</span><div><div class="opt-label">Understand mechanisms deeply</div><div class="opt-desc">Pathophysiology modules — MechanismDx</div></div></button>' +
-        '<button class="wiz-opt" data-goal="boardprep" onclick="rdxWizPick(this,\'goal\')"><span class="opt-icon">📚</span><div><div class="opt-label">Board prep / MCQ practice</div><div class="opt-desc">Spaced repetition, board hub, case review</div></div></button>' +
+        '<button class="wiz-opt" data-goal="boardprep" onclick="rdxWizPick(this,\'goal\')"><span class="opt-icon">📚</span><div><div class="opt-label">Case review / Spaced Rep</div><div class="opt-desc">Spaced repetition, CoachDx, clinical cases</div></div></button>' +
       '</div>' +
       '<div class="wiz-nav"><button class="wiz-back" onclick="rdxWizStep(1)">← Back</button><button class="wiz-next" id="wizNext2" onclick="rdxWizStep(3)" disabled>Next →</button></div>' +
       '</div>' +
@@ -360,7 +360,7 @@
   var GLOBAL_ROWS = [
     {pref:'showMechanismDx', label:'MechanismDx',        desc:'Pathophysiology tutor — 560 topics (nav + EMR)'},
     {pref:'showDashboard',   label:'Dashboard',           desc:'Learning analytics, progress homepage'},
-    {pref:'showStudyTools',  label:'Study Tools',         desc:'SpacedRep, Board Prep hub, flashcards'},
+    {pref:'showStudyTools',  label:'Study Tools',         desc:'SpacedRep, CoachDx, clinical cases'},
     {pref:'showSimulations', label:'Simulations',         desc:'ED 3D, Night Float, SimRoomDx environments'},
     {pref:'showFellowship',  label:'Fellowship Tools',    desc:'ACGME milestones, CCC, ILP, cohort analytics'},
     {pref:'showAnalytics',   label:'Analytics Dashboard', desc:'Detailed performance analytics and cohort data'},

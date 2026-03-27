@@ -138,7 +138,7 @@
         {
           icon: '\uD83D\uDCDA', title: 'Spaced Repetition',
           desc: 'Flashcards auto-generated from your cases. The Study Hub uses spaced repetition to lock in what you\u2019ve learned.',
-          tags: ['Auto-Generated', 'SM-2 Algorithm', 'Board Prep'],
+          tags: ['Auto-Generated', 'SM-2 Algorithm', 'Spaced Repetition'],
           color: '#1565C0'
         }
       ];
