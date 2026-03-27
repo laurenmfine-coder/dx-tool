@@ -33577,5 +33577,677 @@ window.CRT_DATA = {
     "commonPitfalls": ["Waiting to start second agent when A1c is 9.8% (needs combination from the start)","Ignoring SGLT2i and GLP-1 in T2DM with CKD/CVD (proven outcomes benefits — underused)","Targeting A1c <7% in elderly/frail (hypoglycemia risk exceeds microvascular benefit)","Not counseling about GI side effects of GLP-1 (nausea — titrate slowly to improve adherence)"],
     "keyLearningPoints": ["GLP-1 RA + SGLT2i is now the preferred combination for T2DM with obesity + CV/renal risk","SGLT2i: MACE reduction (EMPA-REG), HF reduction (EMPEROR), renal protection (CREDENCE)","A1c target is individualized — not uniform <7% for all patients"]
   }
+,
+
+  "spontaneous-bacterial-peritonitis": {
+    "id": "spontaneous-bacterial-peritonitis",
+    "diagnosis": "Spontaneous Bacterial Peritonitis — E. coli in Decompensated Cirrhosis",
+    "acuity": 2,
+    "presentation": "Fever / Abdominal Pain / Cirrhosis",
+    "category": "infectious",
+    "chiefComplaint": "Decompensated Cirrhosis / Fever / Abdominal Pain",
+    "treatments": {
+      "orders": [
+        {"id": "diagnostic-para", "name": "Diagnostic paracentesis — BEFORE antibiotics", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Diagnostic paracentesis is required to diagnose SBP. Send: cell count, differential, glucose, protein, culture (inoculate blood culture bottles at bedside). PMN ≥250 cells/mm³ = SBP regardless of culture result. Do NOT delay for coagulopathy — paracentesis is safe with INR <8.",
+          "references": [{"source": "SBP — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470237/", "detail": "PMN ≥250/mm³ = SBP; inoculate culture bottles at bedside; safe with INR <8"}]},
+        {"id": "ceftriaxone-sbp", "name": "Ceftriaxone 2g IV q24h x5 days", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Ceftriaxone is first-line for SBP — covers enteric gram-negatives (E. coli, Klebsiella) which cause 70% of cases. 5-day course adequate. Transition to oral norfloxacin for secondary prophylaxis after treatment.",
+          "references": [{"source": "SBP — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470237/", "detail": "Ceftriaxone 2g IV q24h x5d first-line for SBP"}]},
+        {"id": "albumin-sbp", "name": "Albumin 1.5g/kg IV day 1, then 1g/kg day 3", "group": "Adjunct",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "IV albumin with antibiotics for SBP prevents hepatorenal syndrome (HRS). NEJM 1999: albumin + cefotaxime reduced HRS from 33% to 10% and improved 3-month survival. Use for ALL SBP if creatinine >1.0, BUN >30, or bilirubin >4.",
+          "references": [
+            {"source": "SBP — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470237/", "detail": "Albumin with antibiotics prevents HRS in SBP"},
+            {"source": "Sort et al NEJM 1999", "url": "https://www.nejm.org/doi/10.1056/NEJM199904293401701", "detail": "Albumin reduced HRS from 33% to 10%; improved 3-month survival"}]},
+        {"id": "fluroquinolone-sbp", "name": "Ciprofloxacin PO for SBP (outpatient setting)", "group": "Antibiotics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "IV ceftriaxone preferred for hospitalized SBP — quinolone resistance rates in SBP are rising, especially in patients on norfloxacin prophylaxis. Reserve oral ciprofloxacin for uncomplicated outpatient-managed SBP only.",
+          "references": [{"source": "SBP — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470237/", "detail": "Quinolone resistance rising in SBP; IV ceftriaxone preferred inpatient"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "102/64", "HR": "108", "Temp": "38.3°C", "SpO2": "97%"},
+          "labHighlights": {"PMN": "485/mm³ (para)", "Cr": "1.8", "Bili": "6.2", "INR": "2.1"}},
+        {"id": "treated", "label": "Antibiotics + Albumin",
+          "vitals": {"BP": "110/70", "HR": "96"},
+          "labHighlights": {"PMN": "120/mm³ (day 3)", "Cr": "1.4 (stable)"}},
+        {"id": "resolved", "label": "Resolved",
+          "vitals": {"BP": "116/74", "HR": "84"},
+          "labHighlights": {"Cr": "1.2", "Culture": "E. coli (sensitive to ceftriaxone)"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Secondary bacterial peritonitis (perforated viscus — multiple organisms, very high PMN >10,000, surgery needed)",
+      "HRS Type 1 — give albumin with ALL SBP if Cr >1.0, BUN >30, or bili >4",
+      "Spontaneous fungal peritonitis in immunocompromised",
+      "Norfloxacin prophylaxis after first SBP episode"
+    ],
+    "commonPitfalls": [
+      "Not inoculating culture bottles at bedside (culture positivity drops from 80% to 50%)",
+      "Omitting albumin (dramatic reduction in HRS risk when given with antibiotics)",
+      "Using quinolones in patients already on norfloxacin prophylaxis",
+      "Not repeating paracentesis at 48h to confirm response (PMN should fall >25%)"
+    ],
+    "keyLearningPoints": [
+      "SBP diagnosis: PMN ≥250 cells/mm³ — treat empirically even before culture results",
+      "Albumin + antibiotics prevents HRS (NNT ~4 in high-risk patients)",
+      "After SBP: norfloxacin 400mg PO daily indefinitely for secondary prophylaxis"
+    ]
+  },
+  "adrenal-insufficiency": {
+    "id": "adrenal-insufficiency",
+    "diagnosis": "Acute Adrenal Crisis — Addisonian Crisis",
+    "acuity": 2,
+    "presentation": "Hypotension / Hyponatremia / Hyperkalemia",
+    "category": "endocrine",
+    "chiefComplaint": "Nausea / Hypotension / Known Addisons — Missed Doses",
+    "treatments": {
+      "orders": [
+        {"id": "hydrocortisone-crisis", "name": "Hydrocortisone 100mg IV bolus STAT, then 50mg IV q6-8h", "group": "Steroids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hydrocortisone 100mg IV immediately in adrenal crisis — do not wait for cortisol result or stimulation test if clinically suspected. Also has mineralocorticoid activity at high doses. Follow with stress dose (50mg q6-8h). Switch to maintenance once stable.",
+          "references": [{"source": "Adrenal Insufficiency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441832/", "detail": "Hydrocortisone 100mg IV immediately; don't wait for test results in crisis"}]},
+        {"id": "ivf-crisis", "name": "Normal saline 1L IV bolus, then 500mL/h until BP stable", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Volume depletion is universal in adrenal crisis — hypoaldosteronism causes salt wasting. Start NS immediately. Dextrose-containing fluids (D5NS) if hypoglycemia present. Hypotension will not fully correct without steroids.",
+          "references": [{"source": "Adrenal Insufficiency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441832/", "detail": "IV saline resuscitation; D5NS if hypoglycemia; hydrocortisone corrects underlying cause"}]},
+        {"id": "cortisol-acth", "name": "Random cortisol + ACTH level (draw BEFORE steroids if <5 min delay)", "group": "Diagnostics",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Ideal: draw cortisol and ACTH before giving steroids. But NEVER delay steroids more than 5 minutes waiting for lab draw. A random cortisol <18 mcg/dL in a critically ill patient supports AI. ACTH distinguishes primary (high ACTH) from secondary (low ACTH).",
+          "references": [{"source": "Adrenal Insufficiency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441832/", "detail": "Draw cortisol/ACTH before steroids if possible; never delay treatment >5 min"}]},
+        {"id": "dexamethasone-crisis", "name": "Dexamethasone 4mg IV instead (does not interfere with cortisol assay)", "group": "Steroids",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "If stimulation test planned and no delay acceptable: dexamethasone does NOT cross-react with cortisol assay — can give dex, perform stim test, then switch to hydrocortisone. In established crisis just use hydrocortisone.",
+          "references": [{"source": "Adrenal Insufficiency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441832/", "detail": "Dexamethasone alternative if stimulation test needed; does not affect cortisol assay"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "78/48", "HR": "122", "Temp": "37.2°C", "SpO2": "98%"},
+          "labHighlights": {"Na": "124", "K+": "6.2", "Glucose": "52", "Cortisol": "3.2 mcg/dL"}},
+        {"id": "steroids-ivf", "label": "Hydrocortisone + NS Running",
+          "vitals": {"BP": "96/62", "HR": "108"},
+          "labHighlights": {"Glucose": "88", "K+": "5.4 (improving)"}},
+        {"id": "stabilized", "label": "Stabilized",
+          "vitals": {"BP": "112/72", "HR": "88"},
+          "labHighlights": {"Na": "132", "K+": "4.8", "BP": "improving"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Precipitant identification — infection, surgery, trauma, missed doses (must treat precipitant)",
+      "Hypoglycemia — common in primary AI; give D50W if glucose <60",
+      "Mineralocorticoid replacement — add fludrocortisone 0.1mg daily once eating (primary AI)",
+      "Waterhouse-Friderichsen syndrome (bilateral adrenal hemorrhage — hemorrhagic adrenal crisis, meningococcemia)"
+    ],
+    "commonPitfalls": [
+      "Delaying steroids for stimulation test — test can wait; patient cannot",
+      "Treating hyperkalemia aggressively before steroids (K+ corrects with steroids + fluids)",
+      "Forgetting mineralocorticoid (fludrocortisone) in primary AI — Na/K imbalance recurs",
+      "Discharging without stress dose instructions (2-3x dose increase for illness/surgery)"
+    ],
+    "keyLearningPoints": [
+      "Adrenal crisis triad: hypotension + hyponatremia + hyperkalemia + hypoglycemia in known or unknown AI",
+      "Hydrocortisone 100mg IV immediately — never delay for labs in suspected crisis",
+      "Primary AI (Addisons): high ACTH, low cortisol, needs both gluco + mineralocorticoid"
+    ]
+  },
+  "hemorrhagic-stroke": {
+    "id": "hemorrhagic-stroke",
+    "diagnosis": "Hypertensive Intracerebral Hemorrhage",
+    "acuity": 1,
+    "presentation": "Sudden Headache / Focal Deficit / Hypertension",
+    "category": "neurologic",
+    "chiefComplaint": "Thunderclap Headache / Left Hemiplegia / BP 218/124",
+    "treatments": {
+      "orders": [
+        {"id": "bp-ich", "name": "Nicardipine IV — target SBP <140 within 1 hour", "group": "Blood Pressure",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "INTERACT2 and ATACH-2 trials: SBP <140 within 1 hour reduces hematoma expansion. This is the OPPOSITE of ischemic stroke. Nicardipine preferred — smooth, titratable. Labetalol or clevidipine alternatives.",
+          "references": [
+            {"source": "ICH — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470195/", "detail": "SBP <140 in ICH within 1h (INTERACT2, ATACH-2)"},
+            {"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "Class I: SBP 130-150 mmHg target in ICH; nicardipine preferred"}]},
+        {"id": "reverse-anticoag-ich", "name": "Reverse anticoagulation immediately (4F-PCC if on warfarin; idarucizumab if on dabigatran)", "group": "Reversal",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anticoagulation-related ICH: urgent reversal reduces hematoma expansion and mortality. Warfarin → 4-factor PCC (faster than FFP, no volume overload) + vitamin K. Dabigatran → idarucizumab. Rivaroxaban/apixaban → andexanet alfa or 4F-PCC.",
+          "references": [{"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "Urgent reversal in anticoagulant-associated ICH; 4F-PCC for warfarin"}]},
+        {"id": "neurosurgery-ich", "name": "Neurosurgery consult (hematoma location, volume, trajectory)", "group": "Consultation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Immediate neurosurgery consult for all ICH. Surgery indicated for: cerebellar hemorrhage ≥3cm (or deteriorating), superficial/lobar >30mL with worsening, obstructive hydrocephalus. Basal ganglia/thalamic: usually medical management. Deep → medical unless herniation.",
+          "references": [{"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "Neurosurgery for cerebellar ICH ≥3cm; hydrocephalus; lobar >30mL deteriorating"}]},
+        {"id": "tpa-ich", "name": "tPA for acute hemorrhagic stroke", "group": "Thrombolytics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "ABSOLUTE CONTRAINDICATION — tPA given for hemorrhagic stroke will dramatically expand the hematoma and is lethal. CT head FIRST before any thrombolytics. Hemorrhagic stroke requires BP reduction and anticoagulation reversal.",
+          "references": [{"source": "ICH — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470195/", "detail": "tPA absolutely contraindicated in hemorrhagic stroke — CT head first always"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "218/124", "HR": "88", "RR": "16", "SpO2": "96%"},
+          "labHighlights": {"CT Head": "4.2 cm right putaminal hemorrhage, 1cm midline shift", "INR": "1.1"}},
+        {"id": "bp-controlled", "label": "BP Controlled",
+          "vitals": {"BP": "142/88", "HR": "82"},
+          "labHighlights": {"CT repeat": "No expansion (4.2cm stable)", "SBP": "<140 achieved"}},
+        {"id": "icu", "label": "Neuro ICU",
+          "vitals": {"BP": "138/82", "HR": "78"},
+          "labHighlights": {"GCS": "11 (improved from 9)", "ICP": "Monitoring placed"}}
+      ]
+    },
+    "mustNotMiss": [
+      "tPA is absolutely contraindicated — CT head ALWAYS before any thrombolytics",
+      "Anticoagulation-related ICH — INR, anti-Xa, TT/ECT before reversal decision",
+      "Cerebellar ICH — compresses brainstem; surgery for ≥3cm or deteriorating",
+      "Herniation signs — blown pupil, Cushing triad → emergent ICP management"
+    ],
+    "commonPitfalls": [
+      "Permissive hypertension (wrong in ICH — SBP <140 is the target, opposite of ischemic stroke)",
+      "Using FFP instead of 4F-PCC for warfarin reversal (slower, volume overload risk)",
+      "Missing anticoagulation as contributing factor",
+      "Not repeating CT at 6h — hematoma expansion in 30% within first 3 hours"
+    ],
+    "keyLearningPoints": [
+      "ICH vs ischemic stroke: BP management flips. ICH → SBP <140. Ischemic → permissive unless tPA.",
+      "Hematoma expansion occurs in 30% within 3h — early BP control and reversal reduces this",
+      "4F-PCC faster and safer than FFP for warfarin-associated ICH"
+    ]
+  },
+  "acute-aortic-dissection": {
+    "id": "acute-aortic-dissection",
+    "diagnosis": "Type A Aortic Dissection — Ascending",
+    "acuity": 1,
+    "presentation": "Tearing Chest Pain / BP Differential",
+    "category": "cardiovascular",
+    "chiefComplaint": "Sudden Tearing Chest Pain Radiating to Back / BP 180/110",
+    "treatments": {
+      "orders": [
+        {"id": "beta-blocker-aod", "name": "Esmolol IV — target HR <60, SBP 100-120", "group": "Heart Rate + BP",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Reduce dp/dt (rate of pressure rise) — most important intervention. HR <60 first, THEN BP target. Beta-blockade reduces shear force on dissection. Esmolol preferred (short-acting, titratable). Add vasodilator (nicardipine) if BP still elevated after HR controlled.",
+          "references": [{"source": "Aortic Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/", "detail": "HR <60 first, then SBP 100-120; esmolol first-line to reduce dp/dt"}]},
+        {"id": "ct-angiogram-aod", "name": "CT angiography chest/abdomen/pelvis with contrast", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "CTA is gold standard for aortic dissection — sensitivity/specificity >98%. Identifies dissection type (A vs B), extent, branch vessel involvement, pericardial effusion. Must be done urgently but only after initial hemodynamic control.",
+          "references": [{"source": "Aortic Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/", "detail": "CTA chest/abdomen/pelvis — gold standard, sensitivity >98%"}]},
+        {"id": "surgery-type-a", "name": "Emergent cardiothoracic surgery consultation", "group": "Definitive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Type A dissection (ascending aorta) = surgical emergency. Without surgery: 1-2% mortality per hour. Emergent surgical repair is the only definitive treatment. Activate CT surgery immediately once suspected.",
+          "references": [{"source": "Aortic Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/", "detail": "Type A dissection: surgical emergency; 1-2% mortality per hour without surgery"}]},
+        {"id": "nitroprusside-first-aod", "name": "Nitroprusside IV as first-line BP agent", "group": "BP Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG ORDER — vasodilator alone increases HR and dp/dt, worsening dissection propagation. Must control HR with beta-blocker FIRST, then add vasodilator for residual BP elevation. Never give vasodilator before beta-blockade.",
+          "references": [{"source": "Aortic Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/", "detail": "Beta-blocker before vasodilator — vasodilator alone raises HR and dp/dt"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "182/112 (R)", "HR": "108", "BP_L": "148/92 (L)", "SpO2": "96%"},
+          "labHighlights": {"D-dimer": "3,200", "CXR": "Widened mediastinum", "Troponin": "0.2"}},
+        {"id": "hr-controlled", "label": "HR Controlled",
+          "vitals": {"BP": "124/78", "HR": "58"},
+          "labHighlights": {"CTA": "Type A — ascending + arch, no pericardial effusion"}},
+        {"id": "surgery", "label": "OR Activated",
+          "vitals": {"BP": "118/74", "HR": "56"},
+          "labHighlights": {"Surgery": "Activated — Bentall procedure planned"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Type A vs Type B: BOTH need HR/BP control; only Type A needs immediate surgery",
+      "Tamponade — pericardial effusion on echo; do NOT drain (decompression causes re-expansion hemorrhage)",
+      "Coronary involvement — RCA most commonly (inferior ST elevation on ECG — do NOT cath first, to OR)",
+      "Limb ischemia from branch vessel involvement — monitor bilateral pulses and pressures"
+    ],
+    "commonPitfalls": [
+      "Vasodilator before beta-blocker (raises HR and dp/dt — accelerates dissection)",
+      "Missing BP differential (must check both arms — arm-to-arm >20mmHg is diagnostic clue)",
+      "Sending to cath lab for 'STEMI' without CTA — Type A dissection can mimic inferior STEMI",
+      "Delaying surgery for Type A waiting for more imaging"
+    ],
+    "keyLearningPoints": [
+      "Aortic dissection treatment: HR <60 FIRST (esmolol), then BP 100-120 — reduce dp/dt",
+      "Type A = surgical emergency (1-2% mortality/hr). Type B = medical management initially.",
+      "Classic presentation: tearing/ripping pain, BP differential, widened mediastinum"
+    ]
+  },
+  "gout-flare": {
+    "id": "gout-flare",
+    "diagnosis": "Acute Gouty Arthritis — Podagra",
+    "acuity": 3,
+    "presentation": "Acute Monoarthritis / First MTP",
+    "category": "rheumatologic",
+    "chiefComplaint": "Severe Right Great Toe Pain / Swollen / Woke From Sleep",
+    "treatments": {
+      "orders": [
+        {"id": "nsaid-gout", "name": "Indomethacin 50mg PO TID x3 days (or naproxen 500mg BID)", "group": "Anti-inflammatory",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "NSAIDs are first-line for acute gout if no contraindications (CKD, GI ulcer, anticoagulation). Indomethacin or naproxen. Start within 12-24h for best effect. Full-dose x3-5 days, taper over 1-2 weeks if needed.",
+          "references": [{"source": "Gout — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546606/", "detail": "NSAIDs first-line for acute gout: indomethacin 50mg TID or naproxen 500mg BID"}]},
+        {"id": "colchicine-gout", "name": "Colchicine 1.2mg PO then 0.6mg 1h later", "group": "Anti-inflammatory",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Low-dose colchicine (AGREE trial): 1.2mg + 0.6mg 1h later = equally effective as high-dose with much less GI toxicity. First-line if NSAIDs contraindicated. Avoid in severe renal/hepatic disease.",
+          "references": [
+            {"source": "Gout — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546606/", "detail": "Low-dose colchicine (AGREE trial): 1.2mg + 0.6mg same efficacy as high-dose"},
+            {"source": "AGREE Trial", "url": "https://arthritis-research.biomedcentral.com/articles/10.1186/ar2653", "detail": "Low-dose = high-dose colchicine efficacy; markedly less GI side effects"}]},
+        {"id": "allopurinol-acute", "name": "Start allopurinol during acute flare", "group": "Urate Lowering",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Do NOT start urate-lowering therapy (ULT) during acute flare — mobilization of urate crystals can prolong the attack. Start allopurinol 2-4 weeks AFTER flare fully resolves. If already on ULT when flare occurs, continue (do not stop).",
+          "references": [{"source": "Gout — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546606/", "detail": "Do not start ULT during acute flare; begin 2-4 weeks post-resolution"}]},
+        {"id": "joint-aspiration-gout", "name": "Joint aspiration (to confirm and exclude septic arthritis)", "group": "Diagnostics",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Aspiration confirms gout (needle-shaped, negatively birefringent urate crystals on polarized microscopy) and excludes septic arthritis (Gram stain, WBC, culture). Joint fluid WBC >50,000 = septic arthritis until proven otherwise even in known gout patient.",
+          "references": [{"source": "Gout — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546606/", "detail": "Joint aspiration to confirm gout crystals and exclude septic arthritis"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/88", "HR": "88", "Temp": "37.6°C"},
+          "labHighlights": {"Uric acid": "9.4 mg/dL", "Cr": "1.6", "WBC": "10,800"}},
+        {"id": "anti-inflam", "label": "Anti-inflammatory Initiated",
+          "vitals": {"BP": "136/84", "HR": "84"},
+          "labHighlights": {"Joint fluid": "Birefringent crystals", "WBC fluid": "22,000 (gout)"}},
+        {"id": "resolving", "label": "Resolving",
+          "vitals": {"BP": "132/82", "HR": "82", "Temp": "37.2°C"},
+          "labHighlights": {"Pain": "4/10 (was 10/10)", "Plan": "ULT in 2-4 weeks"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Septic arthritis — always aspirate when monoarthritis + fever; WBC >50,000/mm³ suggests septic",
+      "Concurrent infection — gout and septic arthritis can coexist",
+      "CKD limiting NSAIDs and colchicine — steroids are the safe alternative",
+      "Hemarthrosis — trauma, anticoagulation, bleeding disorder"
+    ],
+    "commonPitfalls": [
+      "Starting allopurinol during acute flare (prolongs attack)",
+      "Not aspirating to exclude septic arthritis",
+      "High-dose colchicine (unnecessary GI toxicity; low-dose equally effective)",
+      "Stopping allopurinol when flare occurs on therapy (continue — stopping worsens course)"
+    ],
+    "keyLearningPoints": [
+      "Gout treatment ladder: NSAIDs → colchicine → steroids (based on contraindications)",
+      "Never start ULT during acute flare; start 2-4 weeks after resolution",
+      "Uric acid can be NORMAL during acute flare — do not use to diagnose acute attack"
+    ]
+  },
+  "malignant-hyperthermia": {
+    "id": "malignant-hyperthermia",
+    "diagnosis": "Malignant Hyperthermia — Triggered by Succinylcholine",
+    "acuity": 1,
+    "presentation": "Hyperthermia / Rigidity / Tachycardia / Intraop",
+    "category": "anesthetic",
+    "chiefComplaint": "OR — Temp 41.2°C / Masseter Rigidity / CO2 Rising",
+    "treatments": {
+      "orders": [
+        {"id": "dantrolene-mh", "name": "Dantrolene 2.5mg/kg IV bolus IMMEDIATELY — repeat q5 min to max 10mg/kg", "group": "Antidote",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Dantrolene is the ONLY specific treatment for MH — inhibits SR calcium release, stopping muscle hypermetabolism. 2.5mg/kg IV, repeat q5 min to effect (max 10mg/kg). Must mix in sterile water (mannitol vehicle). Stop all triggering agents simultaneously.",
+          "references": [
+            {"source": "Malignant Hyperthermia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430780/", "detail": "Dantrolene 2.5mg/kg IV immediately; repeat to max 10mg/kg; only specific treatment"},
+            {"source": "MHAUS Guidelines", "url": "https://www.mhaus.org/healthcare-professionals/managing-a-crisis/", "detail": "MHAUS protocol: dantrolene + stop triggers + active cooling"}]},
+        {"id": "stop-trigger-mh", "name": "STOP all volatile anesthetics + succinylcholine IMMEDIATELY", "group": "Emergency",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Remove all triggering agents immediately — volatile anesthetics (halothane, isoflurane, sevoflurane, desflurane) and succinylcholine. Switch to TIVA (total IV anesthesia). Hyperventilate with 100% O2 at high flow.",
+          "references": [{"source": "Malignant Hyperthermia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430780/", "detail": "Stop all volatile agents and succinylcholine; switch to TIVA; 100% O2 hyperventilation"}]},
+        {"id": "cooling-mh", "name": "Active cooling — ice packs, cold IV fluids, cooling blanket", "group": "Cooling",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Aggressive cooling: ice to groin/axillae, iced IV fluids, bladder irrigation with cold saline if available. Target temp <38.5°C. Stop cooling at 38°C to prevent overshoot hypothermia. Continue monitoring — MH can recur within 24h.",
+          "references": [{"source": "Malignant Hyperthermia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430780/", "detail": "Active cooling to <38.5°C; stop at 38°C; recurrence possible within 24h"}]},
+        {"id": "bicarb-mh", "name": "NaHCO3 1-2 mEq/kg IV (for metabolic acidosis)", "group": "Adjunct",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Profound metabolic acidosis from lactate + CO2 accumulation. Sodium bicarbonate for pH <7.2. Also treat hyperkalaemia (MH releases K+ from muscle) with calcium, bicarb, insulin/dextrose.",
+          "references": [{"source": "Malignant Hyperthermia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430780/", "detail": "Bicarb for acidosis; treat hyperkalemia (K+ released from muscle breakdown)"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Intraop Crisis", "auto": true,
+          "vitals": {"Temp": "41.2°C (rising)", "HR": "148", "SpO2": "94%", "EtCO2": "78 mmHg"},
+          "labHighlights": {"pH": "7.08", "Lactate": "8.4", "K+": "6.8", "CK": "pending"}},
+        {"id": "dantrolene-given", "label": "Dantrolene Running",
+          "vitals": {"Temp": "39.8°C (falling)", "HR": "118", "EtCO2": "52"},
+          "labHighlights": {"pH": "7.22", "Lactate": "5.2"}},
+        {"id": "stabilized", "label": "Stabilized",
+          "vitals": {"Temp": "38.2°C", "HR": "96", "EtCO2": "38"},
+          "labHighlights": {"CK": "12,400", "pH": "7.34", "K+": "5.2"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Genetic testing and family screening after MH episode — RYR1 and CACNA1S mutations",
+      "Rhabdomyolysis — CK monitoring for 24-48h; aggressive hydration",
+      "Recurrence within 24h — continue dantrolene 1mg/kg q6h x24h",
+      "MH hotline (MHAUS 1-800-644-9737) — call for real-time expert guidance"
+    ],
+    "commonPitfalls": [
+      "Not calling for dantrolene immediately (often stored in remote OR pharmacy — know your hospital protocol)",
+      "Underdosing dantrolene — keep repeating until symptoms resolve (up to 10mg/kg total)",
+      "Stopping cooling too late (overshoot hypothermia is common)",
+      "Missing hyperkalemia — can cause cardiac arrest during MH crisis"
+    ],
+    "keyLearningPoints": [
+      "MH classic triad: masseter rigidity + rising EtCO2 + hyperthermia after volatile anesthetic/sux",
+      "Dantrolene 2.5mg/kg IV: the only antidote — know where it's stored before any OR case",
+      "MH hotline (MHAUS): 24/7 expert guidance — call immediately in any suspected case"
+    ]
+  },
+  "hyperkalemia-with-concurrent-acs": {
+    "id": "hyperkalemia-with-concurrent-acs",
+    "diagnosis": "Severe Hyperkalemia K+ 7.8 with Concurrent NSTEMI",
+    "acuity": 1,
+    "presentation": "Weakness / ECG Changes / K+ 7.8",
+    "category": "cardiorenal",
+    "chiefComplaint": "Weakness / ECG Changes / K+ 7.8 / Troponin Positive",
+    "treatments": {
+      "orders": [
+        {"id": "calcium-hk", "name": "Calcium gluconate 1-2g IV (cardiac membrane stabilization)", "group": "Cardiac Stabilization",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Calcium gluconate: membrane stabilizer — does NOT lower K+. Acts within 1-3 minutes. Protects heart from arrhythmia while potassium-lowering agents work. Give FIRST when ECG shows peaked T waves, QRS widening, or sine wave. Repeat every 5 min if ECG not improving.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Calcium gluconate first: cardiac membrane stabilization within 1-3 min; does not lower K+"}]},
+        {"id": "insulin-dextrose-hk", "name": "Regular insulin 10u IV + D50W 50mL (shift K+ intracellularly)", "group": "Shift",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Insulin drives K+ into cells — onset 15-30 min, lowers K+ by 0.5-1.5 mEq/L. ALWAYS give with dextrose to prevent hypoglycemia (check glucose at 30 min, 1h, 2h). Also consider albuterol 10-20mg nebulized as adjunct.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Insulin 10u IV + D50W; onset 15-30min; lower K+ 0.5-1.5 mEq/L; always give dextrose"}]},
+        {"id": "dialysis-hk", "name": "Emergent dialysis consultation (definitive K+ removal)", "group": "Definitive",
+          "critical": true, "correct": true, "phase": 2,
+          "teaching": "Definitive potassium removal: dialysis (fastest, most reliable), kayexalate or patiromer (hours to days). Emergent HD for K+ >7 with ECG changes, AKI, or not responding to medical therapy. Concurrent ACS + severe hyperkalemia = emergent dialysis.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Emergent hemodialysis for K+ >7 with ECG changes or hemodynamic instability"}]},
+        {"id": "bicarb-hk", "name": "Sodium bicarbonate 50 mEq IV (metabolic acidosis only)", "group": "Shift",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Bicarb shifts K+ intracellularly — only effective if metabolic acidosis present (pH <7.35). Limited evidence for hyperkalemia alone without acidosis. Use as adjunct, not primary therapy.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Bicarb for hyperkalemia: only effective with concurrent metabolic acidosis"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "88/56", "HR": "38 (bradycardia)", "SpO2": "94%"},
+          "labHighlights": {"K+": "7.8", "Troponin": "2.4", "Cr": "5.8", "ECG": "Peaked T, wide QRS, PR prolonged"}},
+        {"id": "stabilized", "label": "Medically Stabilized",
+          "vitals": {"BP": "102/68", "HR": "58"},
+          "labHighlights": {"K+": "6.4", "ECG": "Peaked T persists, no VF", "Glucose": "142"}},
+        {"id": "dialysis", "label": "Dialysis Initiated",
+          "vitals": {"BP": "114/72", "HR": "72"},
+          "labHighlights": {"K+": "4.8 (post-HD session)", "ECG": "Normal sinus"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Sine wave on ECG = pre-VF — calcium immediately, then emergent dialysis",
+      "Concurrent ACS management — hold anticoagulation until K+ controlled if VF risk",
+      "Pseudohyperkalemia (hemolyzed sample, leukocytosis >100k) — repeat with fresh sample",
+      "Glucose monitoring after insulin (hypoglycemia occurs in 20% at 1-2h)"
+    ],
+    "commonPitfalls": [
+      "Not giving calcium first (most critical immediate intervention — protects heart)",
+      "Forgetting dextrose with insulin (iatrogenic hypoglycemia in 20%)",
+      "Using kayexalate as emergency therapy (acts in hours — not for acute management)",
+      "Missing dialysis need — medical therapy is temporizing, not definitive"
+    ],
+    "keyLearningPoints": [
+      "Hyperkalemia emergency sequence: Calcium (stabilize) → Insulin+dextrose (shift) → Dialysis (remove)",
+      "ECG progression: peaked T → PR prolonged → wide QRS → sine wave → VF",
+      "Calcium is membrane stabilizer only — does NOT lower K+; acts in 1-3 minutes"
+    ]
+  },
+  "deep-vein-thrombosis": {
+    "id": "deep-vein-thrombosis",
+    "diagnosis": "Proximal DVT — Left Femoral Vein",
+    "acuity": 3,
+    "presentation": "Leg Swelling / Pain / Unilateral Edema",
+    "category": "vascular",
+    "chiefComplaint": "Left Leg Swelling / Pain / Recent Long-Haul Flight",
+    "treatments": {
+      "orders": [
+        {"id": "anticoag-dvt", "name": "Anticoagulation — DOAC first-line (rivaroxaban or apixaban)", "group": "Anticoagulation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "DOACs are first-line for DVT/VTE (HOKUSAI, AMPLIFY, EINSTEIN trials). Rivaroxaban 15mg BID x21d → 20mg QD. Apixaban 10mg BID x7d → 5mg BID. Better than LMWH/warfarin: less bleeding, no monitoring, equally effective. Exception: malignancy-associated DVT → LMWH or edoxaban preferred.",
+          "references": [
+            {"source": "DVT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "DOACs first-line for DVT (EINSTEIN, AMPLIFY, HOKUSAI trials)"},
+            {"source": "2021 ASH VTE Guidelines", "url": "https://ashpublications.org/bloodadvances/article/5/7/1891/476069", "detail": "DOACs preferred over LMWH/VKA for DVT treatment"}]},
+        {"id": "wells-score", "name": "Wells score + D-dimer (if Wells low-intermediate)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Pre-test probability: Wells score ≤1 (low/intermediate) + D-dimer negative = DVT excluded without imaging. Wells ≥2 (high) → go directly to compression ultrasound. Wells score avoids unnecessary imaging in low-risk patients.",
+          "references": [{"source": "DVT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "Wells score: low (≤1) + negative D-dimer = DVT excluded; high (≥2) → ultrasound"}]},
+        {"id": "compression-us", "name": "Bilateral lower extremity venous compression ultrasound", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Duplex ultrasound: sensitivity 95%, specificity 99% for proximal DVT. Non-compressibility of vein = thrombosis. Bilateral study if bilateral symptoms or unprovoked DVT (contralateral subclinical DVT may be present).",
+          "references": [{"source": "DVT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "Duplex US: 95% sensitivity, 99% specificity for proximal DVT; non-compressibility = DVT"}]},
+        {"id": "ivc-filter", "name": "IVC filter placement", "group": "Intervention",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "IVC filter NOT indicated for acute DVT that can be anticoagulated. Filter indicated ONLY for: absolute contraindication to anticoagulation, recurrent PE despite adequate anticoagulation, or free-floating thrombus with high PE risk. Overused historically.",
+          "references": [{"source": "DVT — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "IVC filter only for absolute anticoagulation contraindication; do not use routinely for DVT"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "128/82", "HR": "88", "SpO2": "98% RA"},
+          "labHighlights": {"D-dimer": "2,800", "Wells score": "3 (high)", "CBC": "Normal"}},
+        {"id": "imaging", "label": "Imaging Confirmed",
+          "vitals": {"BP": "126/80", "HR": "86"},
+          "labHighlights": {"Ultrasound": "Left femoral DVT — non-compressible, 8cm segment"}},
+        {"id": "anticoag", "label": "Anticoagulated",
+          "vitals": {"BP": "124/78", "HR": "84"},
+          "labHighlights": {"Rivaroxaban": "15mg BID started", "Leg": "Swelling improving"}}
+      ]
+    },
+    "mustNotMiss": [
+      "PE symptoms (dyspnea, tachycardia, hypoxia) — up to 50% of proximal DVTs have concurrent subclinical PE",
+      "Malignancy-associated DVT — consider if unprovoked in high-risk age group",
+      "Phlegmasia cerulea dolens (severe iliofemoral DVT → compartment syndrome) — urgent catheter-directed thrombolysis",
+      "Heparin-induced thrombocytopenia (platelet drop >50% on heparin → stop heparin, start argatroban)"
+    ],
+    "commonPitfalls": [
+      "IVC filter instead of anticoagulation (only for true anticoagulation contraindication)",
+      "LMWH/warfarin instead of DOAC in non-cancer DVT (DOACs are now first-line)",
+      "Not screening for underlying malignancy in unprovoked DVT (age >40 → CT chest/abdomen/pelvis)",
+      "Distal DVT in outpatient setting (can treat with DOAC or serial US if high bleed risk)"
+    ],
+    "keyLearningPoints": [
+      "DOACs have replaced LMWH/warfarin as first-line for most DVT (non-malignancy)",
+      "Wells score + D-dimer can exclude DVT without imaging in low-probability patients",
+      "IVC filter: rarely indicated — only absolute anticoagulation contraindication or recurrent PE despite treatment"
+    ]
+  }
+,
+
+  "acute-compartment-syndrome": {
+    "id": "acute-compartment-syndrome",
+    "diagnosis": "Acute Compartment Syndrome — Anterior Compartment, Right Leg",
+    "acuity": 1,
+    "presentation": "Pain Out of Proportion / Tense Compartment",
+    "category": "orthopedic",
+    "chiefComplaint": "Severe Right Leg Pain After Tibial Fracture / Pain with Passive Stretch",
+    "treatments": {
+      "orders": [
+        {"id": "fasciotomy-acs", "name": "Emergent four-compartment fasciotomy — DO NOT DELAY", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Acute compartment syndrome is a surgical emergency. Fasciotomy within 6 hours prevents permanent muscle and nerve damage. Every hour of delay increases risk of Volkmann contracture, rhabdomyolysis, and limb loss. Do not wait for compartment pressure measurement if clinical diagnosis is clear.",
+          "references": [{"source": "Compartment Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448076/", "detail": "Fasciotomy within 6h; clinical diagnosis sufficient; pressure measurement adjunct only"}]},
+        {"id": "compartment-pressure", "name": "Compartment pressure measurement (if equivocal)", "group": "Diagnostics",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Absolute pressure ≥30 mmHg OR delta pressure (diastolic BP − compartment pressure) ≤30 mmHg = fasciotomy indicated. Delta pressure ≤30 mmHg is more sensitive than absolute pressure. Use Stryker device or arterial line setup.",
+          "references": [{"source": "Compartment Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448076/", "detail": "Fasciotomy if compartment pressure ≥30 or delta pressure ≤30 mmHg"}]},
+        {"id": "elevation-acs", "name": "Elevate limb above heart level", "group": "Conservative",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — elevation reduces arterial perfusion pressure in an already ischemic compartment. The affected limb should be kept at HEART LEVEL or slightly below, not elevated. Remove all circumferential dressings/casts.",
+          "references": [{"source": "Compartment Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448076/", "detail": "Do NOT elevate limb; keep at heart level; elevation worsens ischemia"}]},
+        {"id": "ck-urine-acs", "name": "CK + urine myoglobin (rhabdomyolysis screening)", "group": "Monitoring",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Post-fasciotomy: monitor CK for rhabdomyolysis. Aggressive IV hydration if myoglobinuria (dark tea-colored urine). Goal urine output 1-2 mL/kg/hr to prevent myoglobin-induced AKI.",
+          "references": [{"source": "Compartment Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448076/", "detail": "Post-fasciotomy: CK monitoring for rhabdomyolysis; hydration to prevent AKI"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "132/88", "HR": "108", "Temp": "37.2°C"},
+          "labHighlights": {"CK": "8,400 (rising)", "Compartment P": "44 mmHg (delta: 18)"}},
+        {"id": "surgery-prep", "label": "OR Prep",
+          "vitals": {"BP": "128/84", "HR": "96"},
+          "labHighlights": {"Delta pressure": "18 mmHg — fasciotomy indicated"}},
+        {"id": "post-fasciotomy", "label": "Post-Fasciotomy",
+          "vitals": {"BP": "126/82", "HR": "88"},
+          "labHighlights": {"CK": "22,000 (peak)", "UO": "1.8 mL/kg/hr", "Compartment P": "12 mmHg"}}
+      ]
+    },
+    "mustNotMiss": ["6-hour window — permanent nerve/muscle damage after 6h ischemia","Volar forearm after distal radius fracture — common missed location","Post-reperfusion compartment syndrome after revascularization","Rhabdomyolysis and AKI — monitor CK, myoglobin, urine output"],
+    "commonPitfalls": ["Elevating limb (reduces perfusion — keep at heart level)","Waiting for all 6 P's (pain, pressure, paresthesia, paralysis, pallor, pulselessness — diagnosis should be made before late signs)","Not removing circumferential dressings/casts immediately","Underestimating post-fasciotomy rhabdomyolysis management"],
+    "keyLearningPoints": ["6 P's: Pain (out of proportion), Pressure (tense), Paresthesia, Paralysis, Pallor, Pulselessness — last 3 are late signs","Delta pressure ≤30 mmHg = fasciotomy regardless of absolute value","Window: <6 hours for full recovery; >6 hours = irreversible damage"]
+  },
+  "acute-hemolytic-transfusion-reaction": {
+    "id": "acute-hemolytic-transfusion-reaction",
+    "diagnosis": "Acute Hemolytic Transfusion Reaction — ABO Incompatibility",
+    "acuity": 1,
+    "presentation": "Fever / Flank Pain / Red Urine During Transfusion",
+    "category": "hematologic",
+    "chiefComplaint": "Chills / Flank Pain / Hematuria During Blood Transfusion",
+    "treatments": {
+      "orders": [
+        {"id": "stop-transfusion", "name": "STOP transfusion IMMEDIATELY — keep IV access open with NS", "group": "Emergency",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Stop the transfusion immediately — every additional mL of incompatible blood increases hemolysis. Keep IV line open with NS (not blood or blood products). Notify blood bank and return the blood bag + tubing for analysis.",
+          "references": [{"source": "Transfusion Reactions — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482202/", "detail": "Stop transfusion immediately; keep IV open with NS; return bag to blood bank"}]},
+        {"id": "ivf-ahtr", "name": "Normal saline 1L bolus — maintain UO >1mL/kg/hr", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Aggressive IV saline to prevent renal tubular damage from free hemoglobin. Goal UO >1mL/kg/hr. Hemolysis → hemoglobinuria → proximal tubular obstruction → AKI. Insert Foley catheter to monitor output.",
+          "references": [{"source": "Transfusion Reactions — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482202/", "detail": "IVF to maintain UO >1mL/kg/hr; prevent hemoglobin-induced AKI"}]},
+        {"id": "bloodbank-notify", "name": "Notify blood bank + Transfusion Medicine", "group": "Workup",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Blood bank workup: direct antiglobulin test (DAT), repeat cross-match, plasma free hemoglobin, LDH, haptoglobin. Root cause analysis to prevent future errors — ABO incompatibility is almost always a clerical/labeling error.",
+          "references": [{"source": "Transfusion Reactions — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482202/", "detail": "Blood bank workup: DAT, cross-match, free Hgb, LDH, haptoglobin; root cause analysis"}]},
+        {"id": "continue-transfuse", "name": "Slow the transfusion and continue", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "ABSOLUTELY NOT — acute hemolytic reactions require STOPPING the transfusion immediately. Slowing the rate of an incompatible transfusion increases total hemolysis and worsens outcome.",
+          "references": [{"source": "Transfusion Reactions — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482202/", "detail": "Never slow and continue — stop immediately for suspected AHTR"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Reaction Detected", "auto": true,
+          "vitals": {"BP": "88/54 (dropping)", "HR": "128", "Temp": "39.4°C"},
+          "labHighlights": {"Hgb": "Dropping", "Plasma": "Pink (free Hgb)", "Urine": "Cola-colored"}},
+        {"id": "stopped-ivf", "label": "Transfusion Stopped / IVF Running",
+          "vitals": {"BP": "104/68", "HR": "112"},
+          "labHighlights": {"LDH": "2,840", "Haptoglobin": "<10 (consumed)", "DAT": "Positive"}},
+        {"id": "stable", "label": "Stabilized",
+          "vitals": {"BP": "118/74", "HR": "96"},
+          "labHighlights": {"UO": "1.4 mL/kg/hr", "Cr": "1.2 (stable)", "Hgb": "7.2"}}
+      ]
+    },
+    "mustNotMiss": ["DIC — AHTR activates complement and coagulation cascade; check PT/aPTT/fibrinogen","Renal failure — monitor Cr, BUN, urine output hourly","Identify root cause — almost always wrong blood/wrong patient clerical error"],
+    "commonPitfalls": ["Slowing instead of stopping transfusion","Not calling blood bank immediately (investigation must begin within 1 hour)","Confusing with febrile non-hemolytic reaction (fever alone without hemolysis — can continue slowly after evaluation)","Under-resuscitating — need aggressive IVF to protect kidneys"],
+    "keyLearningPoints": ["AHTR: most severe transfusion reaction; ABO incompatibility; almost always clerical error","Stop → IVF → blood bank → monitor for DIC and AKI","Febrile nonhemolytic reaction (FNHTR): fever only, no hemolysis — much more common, benign"]
+  },
+  "septic-arthritis": {
+    "id": "septic-arthritis",
+    "diagnosis": "Septic Arthritis — Native Knee Joint",
+    "acuity": 2,
+    "presentation": "Acute Monoarthritis / Hot Swollen Knee / Fever",
+    "category": "infectious",
+    "chiefComplaint": "Hot Swollen Knee / Fever / Cannot Bear Weight",
+    "treatments": {
+      "orders": [
+        {"id": "joint-aspiration-sa", "name": "Joint aspiration — STAT (before antibiotics)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Joint aspiration is both diagnostic AND therapeutic. Send: cell count/diff, Gram stain, culture, crystal analysis (to distinguish from crystal arthritis). Must be done BEFORE antibiotics — culture sensitivity drops 50% after even 1 dose. WBC >50,000/mm³ (PMN >90%) = septic arthritis until proven otherwise.",
+          "references": [{"source": "Septic Arthritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441914/", "detail": "Aspirate before antibiotics; WBC >50,000 PMN = septic arthritis; culture positive 60-80%"}]},
+        {"id": "nafcillin-sa", "name": "Vancomycin 25mg/kg IV + ceftriaxone 1g IV (empiric)", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Empiric coverage: vancomycin (MRSA/staph) + ceftriaxone (gram-negative coverage, also covers GC). In young sexually active: consider gonococcal arthritis → ceftriaxone monotherapy. De-escalate when cultures return.",
+          "references": [{"source": "Septic Arthritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441914/", "detail": "Vancomycin + ceftriaxone empiric; narrow based on culture; 2-4 week course"}]},
+        {"id": "surgical-washout-sa", "name": "Orthopedic surgery — joint washout/debridement", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Surgical irrigation and debridement is often required, especially for hip or shoulder septic arthritis where repeated aspiration is not feasible. Hip septic arthritis = surgical emergency (risk of avascular necrosis). Arthroscopic washout preferred for knee.",
+          "references": [{"source": "Septic Arthritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441914/", "detail": "Surgical washout for hip/shoulder; arthroscopic washout for knee if not improving with aspiration"}]},
+        {"id": "serial-aspiration-sa", "name": "Daily joint aspiration (if not surgically managed)", "group": "Monitoring",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "If surgical washout not immediately available: daily aspiration removes purulent material and monitors response. Stop daily aspiration when fluid clears. Most knees can be managed with aspiration + antibiotics.",
+          "references": [{"source": "Septic Arthritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441914/", "detail": "Daily aspiration until fluid clears if not surgically managed"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "112/72", "HR": "104", "Temp": "38.9°C"},
+          "labHighlights": {"WBC": "16,200", "ESR": "88", "Joint WBC": "98,000 (PMN 94%)"}},
+        {"id": "cultures-abx", "label": "Cultures Sent / Abx Started",
+          "vitals": {"BP": "116/74", "HR": "96", "Temp": "38.4°C"},
+          "labHighlights": {"Gram stain": "G+ cocci in clusters (MSSA)", "Culture": "Pending"}},
+        {"id": "improving", "label": "Day 3 — Improving",
+          "vitals": {"BP": "118/76", "HR": "86", "Temp": "37.6°C"},
+          "labHighlights": {"Culture": "MSSA sensitive", "Plan": "Nafcillin IV x4 weeks"}}
+      ]
+    },
+    "mustNotMiss": ["Hip septic arthritis — surgical emergency; AVN within hours without drainage","Crystal arthritis (gout/pseudogout) — coexists with septic arthritis; do not assume it is gout","Gonococcal arthritis in young adults — polyarthralgia/tenosynovitis → monoarthritis; skin lesions","Prosthetic joint infection — two-stage revision often required"],
+    "commonPitfalls": ["Antibiotics before aspiration (culture-negative result)","Treating as gout without aspiration (fatal assumption in hot monoarthritis with fever)","Under-treating duration (native joint needs 2-4 weeks IV)","Missing hip septic arthritis — immediate surgery if suspected"],
+    "keyLearningPoints": ["Hot monoarthritis + fever = septic arthritis until proven otherwise; ASPIRATE FIRST","Joint WBC >50,000 (PMN >90%) = treat as septic arthritis even if crystals present","Hip septic arthritis is an orthopedic emergency — AVN risk within hours"]
+  },
+  "epidural-abscess": {
+    "id": "epidural-abscess",
+    "diagnosis": "Spinal Epidural Abscess — MSSA Post-ESI",
+    "acuity": 1,
+    "presentation": "Back Pain / Fever / Neurological Deficits",
+    "category": "infectious",
+    "chiefComplaint": "Severe Back Pain / Fever / New Leg Weakness Post-ESI",
+    "treatments": {
+      "orders": [
+        {"id": "mri-spine-sea", "name": "Urgent MRI spine with gadolinium (whole spine)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "MRI with contrast is the gold standard for spinal epidural abscess — T1+gad shows rim-enhancing collection, T2 shows cord compression. Image the WHOLE spine (skip lesions in 14%). Do not delay for mild neurological symptoms — progression can be rapid.",
+          "references": [{"source": "Spinal Epidural Abscess — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441989/", "detail": "MRI whole spine with contrast: sensitivity 95%; image all levels (14% skip lesions)"}]},
+        {"id": "surgery-sea", "name": "Neurosurgery — emergent decompression and drainage", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Neurological deficits present = emergent surgical decompression. Timing critical: deficits present <24h have much better recovery than >24h. Medical management alone is reserved for poor surgical candidates without deficits (serial MRI + cultures).",
+          "references": [{"source": "Spinal Epidural Abscess — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441989/", "detail": "Emergent surgery for neurological deficits; <24h symptoms = much better outcome"}]},
+        {"id": "vancomycin-sea", "name": "Vancomycin 25mg/kg IV + ceftriaxone 2g IV (empiric)", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Staphylococcus aureus (MRSA + MSSA) causes 60-70% of spinal epidural abscesses. IVDU, diabetes, immunocompromise are risk factors. Start vancomycin + gram-negative coverage empirically. Culture-direct after surgical drainage.",
+          "references": [{"source": "Spinal Epidural Abscess — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441989/", "detail": "Vancomycin empiric first-line; S. aureus 60-70% of cases"}]},
+        {"id": "steroid-sea", "name": "Dexamethasone 10mg IV for cord compression", "group": "Adjunct",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Corticosteroids for cord compression — reduces vasogenic edema. Standard for cord compression from malignancy; also used in SEA with significant compression. Give before surgery. No definitive RCT data in SEA but widely practiced.",
+          "references": [{"source": "Spinal Epidural Abscess — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441989/", "detail": "Dexamethasone for cord compression; reduces edema; standard practice before surgical decompression"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/88", "HR": "108", "Temp": "39.1°C"},
+          "labHighlights": {"WBC": "18,400", "ESR": "122", "CRP": "184", "MRI": "Pending"}},
+        {"id": "mri-result", "label": "MRI Result",
+          "vitals": {"BP": "134/84", "HR": "102"},
+          "labHighlights": {"MRI": "T11-L2 epidural abscess, cord compression — canal 40% narrowed"}},
+        {"id": "post-surgery", "label": "Post-Decompression Day 2",
+          "vitals": {"BP": "128/82", "HR": "88", "Temp": "37.8°C"},
+          "labHighlights": {"Strength": "Improving (was 3/5, now 4/5)", "Culture": "MSSA sensitive"}}
+      ]
+    },
+    "mustNotMiss": ["Rapid neurological progression — deficits go from partial to complete within hours","Bacteremia — blood cultures BEFORE antibiotics; identify seeding source","Vertebral osteomyelitis — co-exists in 80% of SEA cases (MRI will show)","LP contraindicated if SEA suspected — can seed CSF or worsen herniation"],
+    "commonPitfalls": ["Missing SEA in IVDU/diabetic with back pain + fever (classic missed diagnosis)","LP before MRI (contraindicated if SEA present)","Medical management without surgery when neurological deficits present","Imaging only the symptomatic region (whole spine MRI required — skip lesions common)"],
+    "keyLearningPoints": ["SEA classic presentation: back pain + fever + neurological deficit — triad in only 10-15%","MRI whole spine before any LP; LP is contraindicated in SEA","Timing of surgery predicts outcome: deficits <24h → full recovery likely; >24h → permanent deficit risk"]
+  },
+  "hypoglycemia": {
+    "id": "hypoglycemia",
+    "diagnosis": "Severe Hypoglycemia — Insulin-Induced, CKD",
+    "acuity": 2,
+    "presentation": "AMS / Diaphoresis / Glucose 28",
+    "category": "endocrine",
+    "chiefComplaint": "Unresponsive / Diaphoretic / Glucose 28 mg/dL",
+    "treatments": {
+      "orders": [
+        {"id": "d50-hypo", "name": "D50W 25g (50mL) IV push — repeat if no response", "group": "Glucose",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "D50W 25g IV for unconscious severe hypoglycemia. Repeat if no improvement in 15 minutes. If no IV access: glucagon 1mg IM (slower, 15 min to peak). Oral glucose only if patient conscious and able to swallow safely.",
+          "references": [{"source": "Hypoglycemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534841/", "detail": "D50W 25g IV (50mL); repeat if no response; glucagon 1mg IM if no IV access"}]},
+        {"id": "d10-drip", "name": "D10W infusion after D50W (prevent recurrence)", "group": "Maintenance",
+          "critical": true, "correct": true, "phase": 2,
+          "teaching": "After correcting hypoglycemia, maintain D10W infusion — especially for sulfonylurea or insulin overdose where hypoglycemia can recur for hours to days. Target glucose 100-200. Recheck glucose every 30 min x2h after correction.",
+          "references": [{"source": "Hypoglycemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534841/", "detail": "D10W maintenance after correction; glucose monitoring q30min x2h; prolonged effect with sulfonylureas"}]},
+        {"id": "octreotide-sulfonylurea", "name": "Octreotide 50-100mcg SC (if sulfonylurea overdose)", "group": "Antidote",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Octreotide inhibits insulin secretion from pancreatic beta cells — prevents recurrent hypoglycemia after sulfonylurea overdose. Give q6-8h x 24h. Much more effective than dextrose alone for sulfonylurea-induced hypoglycemia.",
+          "references": [{"source": "Hypoglycemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534841/", "detail": "Octreotide 50-100mcg SC q6-8h for sulfonylurea hypoglycemia — prevents recurrence"}]},
+        {"id": "juice-unresponsive", "name": "Orange juice PO (unconscious patient)", "group": "Glucose",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "DANGEROUS — never give oral fluids to an unconscious patient (aspiration risk). Use IV D50W or IM glucagon for unconscious patients. Oral glucose only when patient is fully conscious and able to swallow.",
+          "references": [{"source": "Hypoglycemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534841/", "detail": "No oral glucose in unconscious patients — aspiration risk; use IV D50W or IM glucagon"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "108/68", "HR": "118 (diaphoresis)", "SpO2": "97%"},
+          "labHighlights": {"Glucose": "28 mg/dL", "Cr": "2.8 (CKD)", "Insulin": "Regular — on drip"}},
+        {"id": "d50-given", "label": "D50W Given",
+          "vitals": {"BP": "114/72", "HR": "98"},
+          "labHighlights": {"Glucose": "94 mg/dL (15 min)", "AMS": "Resolving"}},
+        {"id": "stable", "label": "Stable on D10W",
+          "vitals": {"BP": "118/74", "HR": "84"},
+          "labHighlights": {"Glucose": "148 mg/dL (stable)", "D10W": "Running at 125mL/h"}}
+      ]
+    },
+    "mustNotMiss": ["Sulfonylurea overdose — prolonged hypoglycemia lasting 24-48h; need octreotide","CKD reduces insulin clearance — aggressive glucose target causes prolonged hypoglycemia","Never normalize glucose too rapidly in prolonged hypoglycemia (risk of cerebral edema in children)","Identify and address root cause (insulin error, missed meal, renal worsening)"],
+    "commonPitfalls": ["Oral glucose in unconscious patient (aspiration risk — IV/IM only)","Not maintaining D10W drip after D50W correction (recurrence in 20-30 min)","Not using octreotide for sulfonylurea-induced hypoglycemia","Discharging too early after sulfonylurea hypoglycemia (24h observation minimum)"],
+    "keyLearningPoints": ["D50W 25g IV for unconscious; glucagon 1mg IM if no IV access; NEVER oral if unconscious","Sulfonylurea hypoglycemia: D50W + octreotide; admit 24h for monitoring","Octreotide prevents recurrent insulin secretion — key treatment for sulfonylurea overdose"]
+  }
 
 };
