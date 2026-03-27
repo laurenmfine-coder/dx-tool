@@ -34249,5 +34249,326 @@ window.CRT_DATA = {
     "commonPitfalls": ["Oral glucose in unconscious patient (aspiration risk — IV/IM only)","Not maintaining D10W drip after D50W correction (recurrence in 20-30 min)","Not using octreotide for sulfonylurea-induced hypoglycemia","Discharging too early after sulfonylurea hypoglycemia (24h observation minimum)"],
     "keyLearningPoints": ["D50W 25g IV for unconscious; glucagon 1mg IM if no IV access; NEVER oral if unconscious","Sulfonylurea hypoglycemia: D50W + octreotide; admit 24h for monitoring","Octreotide prevents recurrent insulin secretion — key treatment for sulfonylurea overdose"]
   }
+,
+  "upper-gi-bleed": {
+    "id": "upper-gi-bleed",
+    "diagnosis": "Upper GI Bleed — Peptic Ulcer / Hemodynamically Unstable",
+    "acuity": 1,
+    "presentation": "Hematemesis / Melena / BP 96/62",
+    "category": "gastrointestinal",
+    "chiefComplaint": "Hematemesis + Melena / BP 96/62 / HR 116 / NSAID + ETOH Use",
+    "treatments": {
+      "orders": [
+        {"id": "resus-ugib", "name": "Two large-bore IVs + 1L NS bolus + Type and Screen", "group": "Resuscitation", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hemodynamically unstable UGIB: establish vascular access immediately. 2 large-bore IVs (16G or larger). Crystalloid to stabilize while awaiting blood. Target MAP >65 or SBP >90. pRBC transfusion threshold: Hgb <7 (or <8 with ACS/active bleeding). Avoid over-resuscitation (raises portal pressure, increases rebleeding).",
+          "references": [{"source": "GI Bleed — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK544242/", "detail": "Large-bore IV access; restrict transfusion to Hgb <7 (TRIGGER trial)"}]},
+        {"id": "ppi-ugib", "name": "Pantoprazole 80mg IV bolus then 8mg/h infusion", "group": "PPI", "critical": true, "correct": true, "phase": 1,
+          "teaching": "High-dose IV PPI before endoscopy reduces rebleeding and the need for therapeutic endoscopy. Pantoprazole 80mg bolus then 8mg/h. After endoscopic hemostasis: continue 72h then switch to oral. Mechanism: acid suppression promotes clot stability.",
+          "references": [{"source": "GI Bleed — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK544242/", "detail": "IV PPI bolus 80mg then 8mg/h before EGD reduces rebleeding and need for endotherapy"}]},
+        {"id": "gbs-ugib", "name": "Glasgow-Blatchford Score (GBS ≥12 = urgent EGD)", "group": "Risk Stratification", "critical": true, "correct": true, "phase": 1,
+          "teaching": "GBS predicts need for intervention. Score ≥12 = high risk, urgent EGD within 12h. GBS 0 = very low risk, can consider outpatient management. Components: BUN, Hgb, SBP, HR, melena, syncope, hepatic disease, cardiac failure.",
+          "references": [{"source": "GI Bleed — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK544242/", "detail": "GBS ≥12 = urgent EGD within 12h; GBS 0 = may manage outpatient"}]},
+        {"id": "egd-ugib", "name": "Urgent EGD within 12h (hemostasis)", "group": "Endoscopy", "critical": true, "correct": true, "phase": 2,
+          "teaching": "EGD for diagnosis and hemostasis. Forrest classification guides treatment: Ia (active arterial spurting) and Ib (oozing) = endotherapy; IIa (visible vessel) = endotherapy; IIb (adherent clot) = usually treat; IIc (flat spot), III (clean base) = medical management. Dual endotherapy (injection + clip/thermal) preferred.",
+          "references": [{"source": "GI Bleed — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK544242/", "detail": "Forrest Ia/IIa = endotherapy mandatory; dual therapy reduces rebleeding vs monotherapy"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "96/62", "HR": "116", "RR": "20", "SpO2": "98%"}, "labHighlights": {"Hgb": "7.2", "BUN": "48", "BUN:Cr": "38 (upper GI)", "INR": "1.3", "GBS": "12 (high risk)"}},
+        {"id": "resuscitated", "label": "Resuscitated", "vitals": {"BP": "112/74", "HR": "98"}, "labHighlights": {"After 2u pRBC + IVF": "Hgb 9.1", "PPI infusion": "Running"}},
+        {"id": "post-egd", "label": "Post-EGD", "vitals": {"BP": "122/78", "HR": "88"}, "labHighlights": {"EGD": "Forrest IIa posterior duodenal ulcer", "Treatment": "Dual therapy — injection + clip", "H. pylori": "Positive (biopsy)"}}
+      ]
+    },
+    "mustNotMiss": ["Variceal bleeding (cirrhosis — somatostatin analog + antibiotics + banding, not just PPI)","Rebleeding signs: drop in Hgb >2, HR rise, BP drop after initial stabilization","H. pylori testing (70% of PUD) — treat if positive, reduces recurrence from 80% to 5%","Aspirin/NSAID hold vs restart (balance GI vs CV risk — add PPC if restarting)"],
+    "commonPitfalls": ["Over-transfusing (Hgb >8 increases portal pressure and rebleeding in varices)","Not checking BUN:Cr ratio (>25-30 suggests upper GI source — blood absorption elevates BUN)","Oral PPI instead of IV before endoscopy in high-risk GBS","Missing H. pylori on initial EGD biopsy (test every UGIB from PUD)"],
+    "keyLearningPoints": ["BUN:Cr ratio >25-30 = upper GI source (blood protein breakdown raises BUN)","GBS: 0 = outpatient; ≥1 = admit; ≥12 = urgent EGD within 12h","Forrest classification guides endotherapy: active spurting (Ia) and visible vessel (IIa) = mandatory treatment"]
+  },
+  "uremic-encephalopathy": {
+    "id": "uremic-encephalopathy",
+    "diagnosis": "Uremic Encephalopathy — ESRD Missed Dialysis",
+    "acuity": 1,
+    "presentation": "AMS / Asterixis / BUN >120 / K+ 6.8",
+    "category": "renal",
+    "chiefComplaint": "AMS and Asterixis / ESRD — Missed 4 Dialysis Sessions",
+    "treatments": {
+      "orders": [
+        {"id": "emergent-hd", "name": "Emergent hemodialysis", "group": "Dialysis", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Uremic encephalopathy + hyperkalemia + metabolic acidosis in ESRD = dialysis emergency. Do not wait to see if conservative measures work. Absolute dialysis indications (AEIOU): Acidosis refractory, Electrolyte (K+>6.5 with ECG changes), Intoxication (dialyzable), Overload (pulmonary edema refractory), Uremic complications (encephalopathy, pericarditis, bleeding).",
+          "references": [{"source": "AKI and Dialysis Indications — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519012/", "detail": "AEIOU: absolute dialysis indications; uremic encephalopathy + K+>6.5 = emergent HD"}]},
+        {"id": "calcium-gluc-ure", "name": "Calcium gluconate 1g IV (K+ 6.8 — membrane stabilization)", "group": "Hyperkalemia", "critical": true, "correct": true, "phase": 1,
+          "teaching": "K+ 6.8 with ECG changes (peaked T waves, PR prolongation): calcium gluconate 1g IV immediately to stabilize cardiac membrane. Does NOT lower K+. Follow with insulin + dextrose to shift K+ intracellularly while dialysis being arranged.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430997/", "detail": "Calcium gluconate for K+>6.5 with ECG changes; membrane stabilization within minutes"}]},
+        {"id": "ecg-ure", "name": "12-lead ECG (hyperkalemia ECG progression)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hyperkalemia ECG progression: peaked T waves (earliest) → PR prolongation → wide QRS → sine wave → PEA/VF. Treat based on K+ level AND ECG changes — treat if any ECG change even at lower K+ levels.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430997/", "detail": "Hyperkalemia ECG: peaked T → widened QRS → sine wave → VF; treat any ECG change"}]},
+        {"id": "bicarbonate-ure", "name": "Sodium bicarbonate (temporize metabolic acidosis)", "group": "Adjunct", "critical": false, "correct": true, "phase": 1,
+          "teaching": "Severe metabolic acidosis (pH <7.1): consider IV bicarbonate 1-2 mEq/kg while awaiting dialysis. Raises pH and promotes K+ intracellular shift. Temporary measure — dialysis is definitive. Avoid in fluid-overloaded patients (Na+ load).",
+          "references": [{"source": "AKI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519012/", "detail": "IV bicarbonate for pH <7.1 temporizing; dialysis is definitive treatment"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "184/108", "HR": "56 (wide QRS)", "RR": "24", "SpO2": "93%"}, "labHighlights": {"BUN": "124", "Cr": "12.8", "K+": "6.8", "pH": "7.14", "HCO3": "8"}},
+        {"id": "stabilized", "label": "Stabilized", "vitals": {"BP": "168/96", "HR": "72"}, "labHighlights": {"K+": "5.8 (after Ca + insulin/D50)", "ECG": "Improving", "HD": "Being arranged"}},
+        {"id": "post-dialysis", "label": "Post-Dialysis", "vitals": {"BP": "142/86", "HR": "78"}, "labHighlights": {"K+": "4.2", "BUN": "52", "pH": "7.38", "AMS": "Resolving"}}
+      ]
+    },
+    "mustNotMiss": ["Uremic pericarditis (friction rub + pericardial effusion — dialysis urgently, avoid anticoag)","Dialysis non-adherence root causes — transportation barriers, depression, financial, medication side effects","Dialysis access complications (infected fistula, clotted graft — need immediate evaluation)","Volume overload + pulmonary edema (supplemental O2 + urgent dialysis)"],
+    "commonPitfalls": ["Treating hyperkalemia temporizing measures without arranging emergent dialysis (buys time, not treatment)","Not getting ECG immediately in hyperkalemia (ECG changes define urgency)","Using kayexalate (SPS) in ESRD emergently — takes too long and does not work fast enough","Over-treating BP without dialysis (hypertension in ESRD often volume-mediated — dialysis is the treatment)"],
+    "keyLearningPoints": ["AEIOU dialysis indications: Acidosis, Electrolytes (K+), Intoxication, Overload, Uremia","Calcium gluconate: cardiac membrane stabilization in 1-2 min (does NOT lower K+)","Uremic encephalopathy: AMS + asterixis in ESRD = dialysis emergency"]
+  },
+  "viral-meningitis": {
+    "id": "viral-meningitis",
+    "diagnosis": "Viral (Enteroviral) Meningitis",
+    "acuity": 2,
+    "presentation": "Fever / Headache / Neck Stiffness / Normal Glucose",
+    "category": "infectious",
+    "chiefComplaint": "Severe Headache / Fever / Neck Stiffness — Outbreaks Season",
+    "treatments": {
+      "orders": [
+        {"id": "lp-vm", "name": "Lumbar puncture — CSF analysis + enteroviral PCR", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Viral meningitis CSF: lymphocytic pleocytosis (10-1000 cells), normal or mildly elevated protein, NORMAL glucose (vs bacterial: low glucose). Enteroviral PCR: sensitivity 86%, specificity 100%. Key differentiator: CSF glucose >45 AND WBC predominantly lymphocytes = viral until proven otherwise.",
+          "references": [{"source": "Viral Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430745/", "detail": "CSF: lymphocytic pleocytosis, normal glucose, mildly elevated protein; enteroviral PCR"}]},
+        {"id": "abx-empiric-vm", "name": "Empiric antibiotics + acyclovir until bacterial/HSV excluded", "group": "Empiric Treatment", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cannot distinguish viral from bacterial meningitis clinically — start empiric antibiotics (ceftriaxone + dexamethasone) AND acyclovir until CSF results available. Stop antibiotics and acyclovir when CSF confirms viral etiology. This is not over-treatment — it prevents undertreating bacterial or HSE.",
+          "references": [{"source": "Viral Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430745/", "detail": "Empiric abx + acyclovir until CSF confirms viral; cannot exclude bacterial/HSE clinically"}]},
+        {"id": "supportive-vm", "name": "Supportive care (analgesics, antiemetics, IV fluids)", "group": "Supportive", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Once viral meningitis confirmed: stop antibiotics and acyclovir. Treatment is supportive — analgesics (NSAIDs/acetaminophen), antiemetics, IV hydration. No specific antiviral for enterovirus. Most resolve within 7-10 days. Immunocompromised: consider IV IVIG or pleconaril (investigational).",
+          "references": [{"source": "Viral Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430745/", "detail": "Supportive care once viral confirmed; most resolve 7-10 days; no specific antiviral"}]},
+        {"id": "hiv-vm", "name": "HIV test (cryptococcal meningitis risk if immunocompromised)", "group": "Diagnostics", "critical": false, "correct": true, "phase": 1,
+          "teaching": "HIV status in all meningitis presentations. Cryptococcal meningitis: similar presentation to viral (lymphocytic pleocytosis), India ink positive, cryptococcal antigen (serum and CSF). Immunocompromised patients need broader empiric coverage including cryptococcal.",
+          "references": [{"source": "Viral Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430745/", "detail": "Check HIV; cryptococcal meningitis mimics viral in immunocompromised"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "128/82", "HR": "96", "Temp": "38.4°C", "SpO2": "98%"}, "labHighlights": {"WBC": "10,800", "CSF WBC": "320 (90% lymphs)", "CSF glucose": "52 (serum 92)", "CSF protein": "68"}},
+        {"id": "empiric", "label": "Empiric Treatment Running", "vitals": {"BP": "122/78", "HR": "88", "Temp": "38.0°C"}, "labHighlights": {"Enteroviral PCR": "Pending", "Bacterial cx": "Negative x24h"}},
+        {"id": "viral-confirmed", "label": "Viral Confirmed", "vitals": {"BP": "118/76", "HR": "82", "Temp": "37.6°C"}, "labHighlights": {"Enteroviral PCR": "Positive — Echovirus 9", "Abx stopped": "Supportive care only"}}
+      ]
+    },
+    "mustNotMiss": ["Bacterial meningitis — empiric treatment until CSF/culture confirms viral","HSV encephalitis — temporal lobe involvement, seizures, AMS = add acyclovir empirically","Cryptococcal meningitis in HIV/immunocompromised (India ink, CrAg)","Tuberculous meningitis (subacute course, basilar meningitis, low glucose, high protein)"],
+    "commonPitfalls": ["Not starting empiric antibiotics while awaiting CSF (cannot distinguish viral/bacterial clinically)","Stopping acyclovir before HSV PCR returns (HSV meningitis/encephalitis requires 14-21 day treatment)","Discharging too early (severe headache and photophobia — analgesics may need optimization)","Missing cryptococcal in undiagnosed HIV patient"],
+    "keyLearningPoints": ["Viral CSF: lymphocytes, normal glucose, mild protein elevation — NORMAL glucose is key differentiator from bacterial","Treat empirically until bacterial and HSV excluded — then stop all antibiotics for viral","Most enteroviral meningitis self-limited 7-10 days; no specific antiviral needed"]
+  },
+  "unstable-angina": {
+    "id": "unstable-angina",
+    "diagnosis": "Unstable Angina — NSTE-ACS (Troponin Negative)",
+    "acuity": 2,
+    "presentation": "Rest Pain / New ST Changes / Troponin Negative",
+    "category": "cardiovascular",
+    "chiefComplaint": "Chest Pain at Rest / ST Depression / Troponin Negative x2",
+    "treatments": {
+      "orders": [
+        {"id": "antiplatelet-ua", "name": "Aspirin 325mg PO + Ticagrelor 180mg PO loading dose", "group": "Antiplatelet", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Dual antiplatelet therapy (DAPT) for NSTE-ACS. Aspirin 325mg load then 81mg daily. P2Y12 inhibitor: ticagrelor 180mg load then 90mg BID (preferred over clopidogrel — PLATO trial: 16% RRR in MACE, less variability). Start before catheterization.",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "DAPT: aspirin + ticagrelor (PLATO: 16% RRR vs clopidogrel)"}]},
+        {"id": "anticoag-ua", "name": "Anticoagulation — heparin 60u/kg bolus + 12u/kg/hr", "group": "Anticoagulation", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anticoagulation in NSTE-ACS: UFH or enoxaparin. UFH if early invasive strategy planned (reversible before cath). Enoxaparin 1mg/kg SC q12h if non-invasive strategy. Reduces thrombus propagation at plaque site.",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "UFH preferred if invasive strategy planned; enoxaparin for conservative strategy"}]},
+        {"id": "timi-grace-ua", "name": "TIMI/GRACE score + early invasive strategy decision", "group": "Risk Stratification", "critical": true, "correct": true, "phase": 1,
+          "teaching": "TIMI score ≥3 or GRACE score >140: early invasive strategy (cath within 24h). Very high risk (refractory ischemia, hemodynamic instability, sustained VT): immediate invasive (<2h). Low TIMI/GRACE: consider conservative (optimal medical therapy + non-invasive testing).",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "TIMI ≥3 or GRACE >140 = early invasive within 24h"}]},
+        {"id": "beta-blocker-ua", "name": "Metoprolol 25-50mg PO (heart rate control, anti-ischemic)", "group": "Anti-ischemic", "critical": false, "correct": true, "phase": 1,
+          "teaching": "Beta-blockers reduce myocardial O2 demand (HR reduction = longer diastolic filling = more coronary perfusion). Start oral BB if no contraindications (HF decompensation, bradycardia, bronchospasm). Target HR 55-65.",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Oral beta-blocker for rate control and anti-ischemic benefit in NSTE-ACS"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "154/92", "HR": "96", "RR": "18", "SpO2": "97%"}, "labHighlights": {"Troponin x2": "Negative", "ECG": "ST depression V4-V6", "TIMI": "3"}},
+        {"id": "treatment", "label": "Anti-ischemic Therapy", "vitals": {"BP": "142/88", "HR": "82"}, "labHighlights": {"DAPT": "Started", "Heparin": "Running", "Cath plan": "Within 24h"}},
+        {"id": "post-cath", "label": "Post-Cath", "vitals": {"BP": "132/80", "HR": "68"}, "labHighlights": {"Angio": "70% LAD stenosis", "Treatment": "PCI with DES", "DAPT duration": "12 months"}}
+      ]
+    },
+    "mustNotMiss": ["Type 2 MI (demand ischemia — troponin may be mildly elevated; treat underlying cause)","Aortic dissection (ST changes + severe chest pain — CT before heparin if suspected)","Vasospastic angina (Prinzmetal — ST elevation that resolves; calcium channel blocker, not PCI)","DAPT duration post-PCI: at least 12 months for DES; discuss with cardiology before stopping"],
+    "commonPitfalls": ["Starting clopidogrel instead of ticagrelor (PLATO: ticagrelor superior — unless cost/compliance issues)","Not anticoagulating (heparin reduces ischemic events even without PCI)","Giving IV beta-blocker in decompensated HF (oral only; IV in compensated HF only)","Treating troponin-negative ACS conservatively when TIMI/GRACE indicates early invasive strategy"],
+    "keyLearningPoints": ["NSTE-ACS: DAPT (aspirin + ticagrelor) + anticoag + risk stratification → invasive if TIMI ≥3","Ticagrelor > clopidogrel: PLATO trial — 16% RRR, more consistent platelet inhibition","Early invasive (<24h) for TIMI ≥3; immediate (<2h) for hemodynamic instability or refractory ischemia"]
+  },
+  "toxic-ingestion": {
+    "id": "toxic-ingestion",
+    "diagnosis": "Acute Acetaminophen Overdose",
+    "acuity": 2,
+    "presentation": "Intentional Overdose / APAP Level Elevated",
+    "category": "toxicology",
+    "chiefComplaint": "Intentional Acetaminophen Ingestion 6 Hours Ago",
+    "treatments": {
+      "orders": [
+        {"id": "nac-apap", "name": "N-Acetylcysteine (NAC) IV — 150mg/kg over 1h, then 50mg/kg over 4h, then 100mg/kg over 16h", "group": "Antidote", "critical": true, "correct": true, "phase": 1,
+          "teaching": "NAC replenishes glutathione, preventing NAPQI-mediated hepatotoxicity. Liver transplant-level outcomes if started within 10h. Oral (72h protocol) or IV (21h protocol) equivalent. IV preferred if vomiting or encephalopathy. ALWAYS treat if Rumack-Matthew nomogram above treatment line.",
+          "references": [{"source": "Acetaminophen Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441917/", "detail": "NAC IV: nearly 100% hepatoprotective if <10h; start immediately, verify level, do not wait"}]},
+        {"id": "rumack-apap", "name": "Rumack-Matthew nomogram (4h post-ingestion level vs time)", "group": "Risk Stratification", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Plot APAP level against time post-ingestion on nomogram. Above treatment line (150 mcg/mL at 4h) = treat with NAC. Below = monitor. Key: level must be drawn AT LEAST 4h post-ingestion (peak absorption). Level at <4h may underestimate toxicity.",
+          "references": [{"source": "Acetaminophen Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441917/", "detail": "Rumack-Matthew nomogram: plot level vs time; treat if above treatment line (150mcg/mL at 4h)"}]},
+        {"id": "lft-apap", "name": "LFTs, INR, Cr, electrolytes — hepatic injury assessment", "group": "Monitoring", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Baseline LFTs (ALT, AST), INR, creatinine. Repeat at 24h. Peak liver injury: 48-72h post-ingestion. ALT >3000 = severe hepatotoxicity. King's College Criteria: pH <7.3 OR (PT >100 + Cr >3.4 + grade III-IV encephalopathy) = liver transplant evaluation.",
+          "references": [{"source": "Acetaminophen Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441917/", "detail": "King's College Criteria: pH <7.3 or PT>100 + Cr>3.4 + grade III-IV encephalopathy = transplant evaluation"}]},
+        {"id": "psych-apap", "name": "Psychiatry consultation — suicide risk assessment", "group": "Psychiatry", "critical": true, "correct": true, "phase": 1,
+          "teaching": "All intentional overdoses require psychiatric evaluation before medical clearance. Suicide risk assessment, safety planning, disposition (inpatient vs outpatient psychiatric). APAP overdose is #1 cause of acute liver failure in the US — often underestimated as a 'low-risk' suicide attempt.",
+          "references": [{"source": "Acetaminophen Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441917/", "detail": "Psychiatry consult for all intentional ingestions; APAP #1 cause ALF in US"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "6h Post-Ingestion", "auto": true, "vitals": {"BP": "118/74", "HR": "88", "Temp": "37.2°C", "SpO2": "99%"}, "labHighlights": {"APAP level (6h)": "240 mcg/mL (above nomogram line)", "ALT": "48 (normal — early)", "INR": "1.1"}},
+        {"id": "nac-running", "label": "NAC Running", "vitals": {"BP": "116/72", "HR": "84"}, "labHighlights": {"NAC": "Hour 1 of 21h protocol", "APAP level": "Declining — 98 at 12h"}},
+        {"id": "monitoring", "label": "24h Monitoring", "vitals": {"BP": "118/76", "HR": "82"}, "labHighlights": {"ALT (24h)": "420 (rising — expected)", "INR": "1.3", "Psych consult": "Completed"}}
+      ]
+    },
+    "mustNotMiss": ["Staggered overdose (ingestions over hours/days — nomogram less reliable; treat if any elevated level)","Co-ingestions (acetaminophen often taken with other substances — comprehensive tox screen)","ALF criteria (King's College — urgent liver transplant evaluation)","Fomepizole availability — acetaminophen overdose sometimes confused with toxic alcohol ingestion"],
+    "commonPitfalls": ["Waiting for level before starting NAC (start empirically if timing supports treatment line)","Checking level before 4h post-ingestion (peak absorption not complete — may underestimate)","Not obtaining psychiatric consult before medical clearance","Stopping NAC before full course if early LFTs are normal (hepatotoxicity peaks at 48-72h)"],
+    "keyLearningPoints": ["NAC within 10h = nearly 100% hepatoprotective; outcomes worsen significantly after 10h","Rumack-Matthew nomogram: level at ≥4h post-ingestion plotted vs time determines treatment","King's College Criteria: any one criterion = emergent liver transplant evaluation"]
+  },
+  "exertional-heat-stroke": {
+    "id": "exertional-heat-stroke",
+    "diagnosis": "Exertional Heat Stroke — Core Temp >41°C / AMS",
+    "acuity": 1,
+    "presentation": "AMS / Hyperthermia After Exercise",
+    "category": "emergency",
+    "chiefComplaint": "Collapsed at Marathon / Temp 41.8°C / Confused",
+    "treatments": {
+      "orders": [
+        {"id": "cool-ehs", "name": "Cold water immersion (target core temp <39°C within 30 min)", "group": "Cooling", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cold water immersion (CWI) is the most effective cooling method — faster than ice packs, evaporative cooling, or cooling blankets. Target: core temperature <39°C within 30 min. Remove from heat, remove clothing, immerse or apply ice water + fanning. Each minute above 41°C = progressive end-organ damage.",
+          "references": [{"source": "Heat Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430747/", "detail": "Cold water immersion most effective cooling; target core temp <39°C within 30 min"}]},
+        {"id": "cool-dont-antipyretic", "name": "Do NOT give antipyretics (acetaminophen/NSAIDs)", "group": "Avoid", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Antipyretics work by resetting the hypothalamic set point — in heat stroke, the problem is EXTERNAL heat overwhelming cooling mechanisms, not hypothalamic dysregulation. Acetaminophen does nothing in heat stroke and adds hepatotoxicity risk (rhabdomyolysis already stresses the liver). Physical cooling only.",
+          "references": [{"source": "Heat Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430747/", "detail": "Antipyretics ineffective in heat stroke — hypothalamic set point not elevated; use physical cooling only"}]},
+        {"id": "rhabdo-ehs", "name": "Aggressive IV hydration (rhabdomyolysis)", "group": "Fluids", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Rhabdomyolysis in exertional heat stroke: myoglobin in urine, elevated CK (often >10,000). Aggressive hydration: 1-1.5 L/hr NS to maintain UO >3 mL/kg/hr. Monitor for AKI (most common complication). Some use sodium bicarbonate to alkalinize urine and prevent myoglobin precipitation.",
+          "references": [{"source": "Rhabdomyolysis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448168/", "detail": "Aggressive IVF for rhabdo in heat stroke; UO target >3 mL/kg/hr; monitor AKI"}]},
+        {"id": "coags-ehs", "name": "PT/INR, PTT, fibrinogen, D-dimer (DIC screen)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 2,
+          "teaching": "DIC is a life-threatening complication of severe heat stroke — direct thermal damage to endothelium triggers coagulation cascade. Check coags early. DIC treatment: treat underlying condition (cooling) + FFP for active bleeding.",
+          "references": [{"source": "Heat Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430747/", "detail": "DIC in severe heat stroke — coags, fibrinogen; treat with cooling + FFP if bleeding"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "96/58", "HR": "132", "RR": "28", "Temp": "41.8°C", "SpO2": "96%"}, "labHighlights": {"CK": ">20,000", "Cr": "2.1", "UA": "Myoglobinuria", "GCS": "10"}},
+        {"id": "cooling", "label": "Cooling Initiated", "vitals": {"Temp": "40.2°C", "BP": "102/66", "HR": "118"}, "labHighlights": {"IVF": "1L/hr NS running", "UO": "Target >200 mL/hr"}},
+        {"id": "cooled", "label": "Core Temp <39°C", "vitals": {"Temp": "38.6°C", "BP": "114/72", "HR": "102"}, "labHighlights": {"CK": "18,400 (peaked)", "INR": "1.4", "Cr": "1.8"}}
+      ]
+    },
+    "mustNotMiss": ["Classic vs exertional heat stroke — classic: elderly/frail, hot environment, no sweating; exertional: young athlete, sweating present","Anticholinergic/sympathomimetic toxidrome mimics heat stroke (history + pupils + skin)","Sickle cell trait — markedly increased exertional heat stroke risk","Malignant hyperthermia or NMS (history of anesthesia/antipsychotics — different mechanism, dantrolene needed)"],
+    "commonPitfalls": ["Acetaminophen for fever (useless and hepatotoxic in heat stroke)","Inadequate cooling rate (cooling blankets much slower than CWI — use CWI whenever possible)","Stopping cooling at 39°C rather than monitoring for afterdrop or rebound hyperthermia","Missing rhabdomyolysis complications (AKI, compartment syndrome, hyperkalemia)"],
+    "keyLearningPoints": ["Heat stroke = core temp >40°C + AMS; exertional vs classic distinction guides management context","Cool first, diagnose later — every minute above 41°C = organ damage","Antipyretics are ineffective — hypothalamic set point is normal; physical cooling is the intervention"]
+  },
+  "tick-borne-illness": {
+    "id": "tick-borne-illness",
+    "diagnosis": "Ehrlichiosis (Human Monocytic Ehrlichiosis)",
+    "acuity": 2,
+    "presentation": "Fever / Headache / Thrombocytopenia / Tick Exposure",
+    "category": "infectious",
+    "chiefComplaint": "Fever + Headache / Plt 68,000 / WBC 2,400 — Camping Trip 2 Weeks Ago",
+    "treatments": {
+      "orders": [
+        {"id": "doxy-ehrlichia", "name": "Doxycycline 100mg IV/PO q12h — START EMPIRICALLY", "group": "Antibiotics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Doxycycline is first-line for ALL tick-borne rickettsial diseases (Ehrlichia, Rickettsia, Anaplasma). Start empirically based on clinical presentation — do not wait for serology (insensitive in first week). Delay is associated with significantly worse outcomes. Treat for 7-14 days (10-14 days for Ehrlichia).",
+          "references": [{"source": "Ehrlichiosis — CDC", "url": "https://www.cdc.gov/ehrlichiosis/symptoms/index.html", "detail": "Doxycycline first-line; treat empirically — serology insensitive in first week of illness"}]},
+        {"id": "cbc-ehrlichia", "name": "CBC (thrombocytopenia + leukopenia = characteristic)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Ehrlichiosis classic triad: fever + leukopenia + thrombocytopenia + elevated LFTs. Morulae (intracytoplasmic inclusion bodies) in monocytes on peripheral smear — pathognomonic but seen in only 20-30% of cases. PCR most sensitive in first week.",
+          "references": [{"source": "Ehrlichiosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560624/", "detail": "Characteristic: fever + leukopenia + thrombocytopenia + elevated LFTs; morulae on smear"}]},
+        {"id": "serology-ehrlichia", "name": "Ehrlichia serology (IFA) — but treat empirically while awaiting", "group": "Diagnostics", "critical": false, "correct": true, "phase": 1,
+          "teaching": "IFA serology: 4-fold rise in acute vs convalescent (2-4 weeks) = confirmation. Sensitivity in first week <50% — seronegative early disease is common. PCR of whole blood in first week: sensitivity ~60-85%. Treat empirically regardless of early serology.",
+          "references": [{"source": "Ehrlichiosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560624/", "detail": "IFA serology <50% sensitive in first week; PCR preferred early; treat empirically"}]},
+        {"id": "rmsf-cover", "name": "Consider Rocky Mountain Spotted Fever overlap (rash?)", "group": "Differential", "critical": true, "correct": true, "phase": 1,
+          "teaching": "RMSF (Rickettsia rickettsii) and Ehrlichiosis overlap in geography and presentation. RMSF: classic rash (petechial, starts wrists/ankles, spreads centrally), higher mortality (1-5%), same doxycycline treatment. Ask about rash — absence doesn't exclude RMSF. Doxycycline covers both.",
+          "references": [{"source": "RMSF — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430745/", "detail": "RMSF: petechial rash wrists to central; same empiric doxycycline treatment; mortality 1-5%"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "118/76", "HR": "102", "Temp": "39.2°C", "SpO2": "98%"}, "labHighlights": {"WBC": "2,400", "Plt": "68,000", "AST": "142", "ALT": "128"}},
+        {"id": "doxy-started", "label": "Doxycycline Started", "vitals": {"BP": "122/78", "HR": "94", "Temp": "38.4°C"}, "labHighlights": {"PCR": "Pending", "Peripheral smear": "Morulae in monocytes (20%)"}},
+        {"id": "improving", "label": "Improving on Day 2", "vitals": {"BP": "126/80", "HR": "82", "Temp": "37.6°C"}, "labHighlights": {"WBC": "4,800 (rising)", "Plt": "92,000 (rising)", "PCR": "Ehrlichia chaffeensis positive"}}
+      ]
+    },
+    "mustNotMiss": ["RMSF — same empiric doxycycline treatment; higher mortality; petechial rash is diagnostic clue","Anaplasmosis (Anaplasma phagocytophilum) — identical presentation to Ehrlichiosis; same treatment","Lyme disease (Borrelia — different tick, different treatment: amoxicillin or doxycycline for early disease)","Immunocompromised patients: more severe tick-borne disease, higher risk of mortality without treatment"],
+    "commonPitfalls": ["Waiting for serology before starting doxycycline (seronegative in first week — empiric treatment mandatory)","Not asking about tick exposure or travel to endemic areas (southeastern US, Midwest)","Avoiding doxycycline in children <8y (short course doxycycline is safe — benefit outweighs dental risk)","Stopping doxycycline if serology negative at one week (treat full course — convalescent confirmation takes 2-4 weeks)"],
+    "keyLearningPoints": ["Tick-borne rickettsial disease triad: fever + leukopenia + thrombocytopenia + elevated LFTs","Treat empirically with doxycycline — serology insensitive in first week; delay = worse outcomes","Doxycycline covers Ehrlichia, RMSF, and Anaplasma — use it for any suspected tick-borne rickettsial illness"]
+  },
+  "sepsis-with-rigidity": {
+    "id": "sepsis-with-rigidity",
+    "diagnosis": "Urosepsis with Parkinsonism Akinetic Crisis — NMS Mimic",
+    "acuity": 1,
+    "presentation": "Fever / Rigidity / Sepsis / Parkinson Disease",
+    "category": "infectious",
+    "chiefComplaint": "Parkinson Patient / Fever / Rigidity / AMS — Dopamine Agonist Stopped",
+    "treatments": {
+      "orders": [
+        {"id": "restart-dopamine", "name": "Restart dopamine agonist (or levodopa) immediately", "group": "Medications", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Parkinsonism-hyperpyrexia syndrome (PHS) / akinetic crisis: occurs when dopaminergic medications are abruptly stopped. Presents identical to NMS — fever, rigidity, AMS, autonomic instability. Treatment: restart dopaminergic medication and treat concurrent illness. Mortality ~4% if untreated.",
+          "references": [{"source": "Parkinsonism Hyperpyrexia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536995/", "detail": "Restart dopaminergic therapy immediately; PHS caused by dopamine withdrawal"}]},
+        {"id": "vs-nms", "name": "Distinguish NMS vs PHS (medication history is key)", "group": "Differential", "critical": true, "correct": true, "phase": 1,
+          "teaching": "NMS: antipsychotic STARTED or dose increased → fever, rigidity, AMS. PHS: dopaminergic drug STOPPED → fever, rigidity, AMS. Both treated differently: NMS = stop antipsychotic + bromocriptine/dantrolene. PHS = restart dopamine agonist. Getting the history RIGHT is the most important step.",
+          "references": [{"source": "Parkinsonism Hyperpyrexia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536995/", "detail": "PHS vs NMS: dopamine withdrawal vs antipsychotic initiation — medication history is key"}]},
+        {"id": "urosepsis-tx", "name": "Treat concurrent urosepsis — ceftriaxone + IVF + cultures", "group": "Antibiotics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Concurrent infection often precipitates PHS by causing medication absorption failure or increasing dopamine demand. Treat the infection aggressively. Urosepsis: ceftriaxone + fluids + cultures. Both PHS and sepsis require simultaneous treatment.",
+          "references": [{"source": "Surviving Sepsis Campaign 2021", "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines/Adult-Patients", "detail": "Treat concurrent infection precipitating PHS; sepsis bundle: cultures, abx, IVF"}]},
+        {"id": "dantrolene-phs", "name": "Dantrolene 1-2.5mg/kg IV (severe rigidity/hyperthermia)", "group": "Adjunct", "critical": false, "correct": true, "phase": 2,
+          "teaching": "Severe PHS with very high temperature or rigidity causing respiratory compromise: dantrolene (ryanodine receptor antagonist) reduces muscle rigidity and heat production. Also used in NMS. Hepatotoxic — use for severe cases only.",
+          "references": [{"source": "Parkinsonism Hyperpyrexia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536995/", "detail": "Dantrolene for severe PHS rigidity/hyperthermia; same agent as NMS treatment"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "168/102", "HR": "128", "Temp": "39.8°C", "SpO2": "94%"}, "labHighlights": {"WBC": "18,200", "CK": "2,840", "UA": "Positive (UTI)", "Meds": "Levodopa stopped 3 days ago (GI intolerance)"}},
+        {"id": "treated", "label": "Levodopa Restarted + Abx", "vitals": {"BP": "148/92", "HR": "108", "Temp": "38.6°C"}, "labHighlights": {"Rigidity": "Improving (4h)", "Blood cx": "Negative", "UA cx": "E. coli"}},
+        {"id": "improving", "label": "Improving", "vitals": {"BP": "132/82", "HR": "88", "Temp": "37.8°C"}, "labHighlights": {"Rigidity": "Resolved", "CK": "1,200 (trending down)", "Levodopa": "Resumed full dose"}}
+      ]
+    },
+    "mustNotMiss": ["NMS from an antipsychotic — review medication changes in detail (is this PHS or NMS?)","Rhabdomyolysis from rigidity (CK >5000 needs aggressive IVF and renal monitoring)","Aspiration pneumonia (dysphagia in Parkinson + AMS = high aspiration risk)","Antipsychotic use in Parkinson patients (all typical antipsychotics and most atypicals worsen PD)"],
+    "commonPitfalls": ["Treating as NMS and stopping all dopaminergic medications (worsens PHS dramatically)","Not restarting dopaminergic medications via NG tube if patient cannot swallow","Using typical antipsychotics for delirium in Parkinson patient (catastrophic dopamine blockade)","Delaying antibiotic treatment while sorting out the rigidity etiology (treat both simultaneously)"],
+    "keyLearningPoints": ["PHS vs NMS: dopamine STOPPED (PHS) vs antipsychotic STARTED (NMS) — medication history decides treatment","PHS treatment: restart dopamine agonist + treat precipitating illness concurrently","Never use typical antipsychotics or most atypicals in Parkinson disease — worsens rigidity dramatically"]
+  },
+  "occupational-asthma-isocyanate": {
+    "id": "occupational-asthma-isocyanate",
+    "diagnosis": "Occupational Asthma — Isocyanate (TDI) Sensitization",
+    "acuity": 2,
+    "presentation": "Work-Related Wheeze / Symptoms Worse at Work",
+    "category": "allergy_immunology",
+    "chiefComplaint": "Chest Tightness and Wheezing Worse at Work / Improves on Weekends",
+    "treatments": {
+      "orders": [
+        {"id": "spirometry-oa", "name": "Spirometry at work AND away from work (serial PEF monitoring)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Serial peak expiratory flow (PEF) monitoring: at work vs away. >20% variability work vs away = diagnostic of occupational asthma. Spirometry before and after work shift. If possible, methacholine challenge — sensitizer-induced OA is hyperresponsive. Serial PEF over 2 weeks (working and non-working days) is gold standard.",
+          "references": [{"source": "Occupational Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441993/", "detail": ">20% PEF variability work vs away = OA; serial PEF over 2 weeks is gold standard"}]},
+        {"id": "remove-exposure", "name": "Remove from isocyanate exposure — workplace modification", "group": "Management", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Permanent removal from isocyanate exposure is the only definitive treatment. Once sensitized, even low-level exposures trigger reactions — reducing exposure is not sufficient for sensitizer-induced OA. Unlike irritant-induced OA, sensitizer OA does not resolve with reduced (but continued) exposure. Occupational medicine referral.",
+          "references": [{"source": "Occupational Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441993/", "detail": "Permanent removal from sensitizer is required; reducing exposure insufficient for sensitizer-induced OA"}]},
+        {"id": "ics-oa", "name": "Inhaled corticosteroid + SABA (standard asthma pharmacotherapy)", "group": "Pharmacotherapy", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Standard asthma pharmacotherapy while arranging workplace accommodation. ICS reduces airway inflammation. Does not replace exposure removal — pharmacotherapy alone will not control sensitizer-induced OA if exposure continues. Treat per GINA stepwise guidelines.",
+          "references": [{"source": "Occupational Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441993/", "detail": "ICS + SABA for symptom control; does not replace exposure removal"}]},
+        {"id": "workers-comp-oa", "name": "Workers compensation / occupational medicine referral", "group": "Management", "critical": false, "correct": true, "phase": 2,
+          "teaching": "Occupational asthma has legal and compensation implications. Refer to occupational medicine for formal diagnosis, disability assessment, and workers' compensation documentation. Workplace assessment: identify specific exposures, ventilation, and feasibility of work modification vs job change.",
+          "references": [{"source": "Occupational Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441993/", "detail": "Occupational medicine referral for formal diagnosis and workers' compensation documentation"}]}
+      ],
+      "phases": [
+        {"id": "assessment", "label": "Initial Assessment", "auto": true, "vitals": {"BP": "124/78", "HR": "86", "RR": "18", "SpO2": "97%"}, "labHighlights": {"At-work PEF": "320 L/min", "Away PEF": "430 L/min", "Variability": "26% (diagnostic)", "IgE TDI-HSA": "Positive"}},
+        {"id": "diagnosed", "label": "OA Diagnosed", "vitals": {"BP": "122/76", "HR": "84"}, "labHighlights": {"Methacholine": "PC20 4 mg/mL (hyperresponsive)", "Spirometry": "Mild obstruction at work"}},
+        {"id": "removed", "label": "Removed from Exposure", "vitals": {"BP": "120/74", "HR": "82"}, "labHighlights": {"PEF": "420 L/min (normalizing)", "Symptoms": "Significantly improved 3 months"}}
+      ]
+    },
+    "mustNotMiss": ["Irreversible obstructive airway disease if exposure continues too long (window for recovery closes)","Late asthmatic reaction — symptoms may occur 4-8h after work exposure (not just immediate)","Reactive airways dysfunction syndrome (RADS) — single high-level irritant exposure causes persistent asthma","Other exposures in same workplace (latex, flour, lab animals — broad exposure assessment)"],
+    "commonPitfalls": ["Reducing rather than eliminating isocyanate exposure (sensitization means any level can trigger)","Treating as regular asthma without identifying occupational cause (condition will not improve)","Not performing serial PEF monitoring (most sensitive test for OA diagnosis)","Delaying diagnosis = prolonged exposure = permanent airway remodeling"],
+    "keyLearningPoints": ["Sensitizer-induced OA: permanent removal required — reducing exposure is insufficient","Serial PEF (work vs away) >20% variability = diagnostic; 2-week monitoring is gold standard","Isocyanates (TDI, MDI) are #1 cause of occupational asthma in industrialized countries"]
+  },
+  "inducible-urticaria": {
+    "id": "inducible-urticaria",
+    "diagnosis": "Cold Urticaria with Cold-Induced Anaphylaxis",
+    "acuity": 2,
+    "presentation": "Urticaria / Near-Syncope While Swimming",
+    "category": "allergy_immunology",
+    "chiefComplaint": "Generalized Hives / Hypotension / Near-Syncope — Ocean Swimming",
+    "treatments": {
+      "orders": [
+        {"id": "epi-cu", "name": "Epinephrine 0.3mg IM (for anaphylaxis — hypotension + urticaria)", "group": "Emergency", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cold urticaria with systemic reaction (hypotension, anaphylaxis) = epinephrine IM immediately. Cold urticaria becomes life-threatening when large surface area is exposed to cold (swimming, cold shower, cold air). Most dangerous when diving into cold water — whole-body cold exposure triggers massive mast cell degranulation.",
+          "references": [{"source": "Anaphylaxis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482506/", "detail": "Cold urticaria anaphylaxis: epinephrine IM; swimming = high-risk trigger for fatal anaphylaxis"}]},
+        {"id": "ice-cube-test", "name": "Ice cube test (diagnostic confirmation)", "group": "Diagnostics", "critical": false, "correct": true, "phase": 2,
+          "teaching": "Ice cube test: apply ice cube to forearm in plastic bag for 5 minutes, remove, observe for 15 min. Positive = wheal and flare where ice was applied (not under bag). Confirms cold urticaria diagnosis. Threshold testing: cold stimulation test determines the threshold temperature.",
+          "references": [{"source": "Cold Urticaria — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK558990/", "detail": "Ice cube test: positive = wheal after ice cube application; cold stimulation test for threshold"}]},
+        {"id": "antihistamine-cu", "name": "Non-sedating H1 antihistamine (cetirizine 10mg daily)", "group": "Prophylaxis", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Daily non-sedating antihistamine (cetirizine, loratadine, fexofenadine) reduces frequency and severity. Up-dosing to 2-4x standard dose may be needed. Omalizumab 300mg SC q4wk for antihistamine-refractory cold urticaria — highly effective.",
+          "references": [{"source": "Cold Urticaria — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK558990/", "detail": "H1 antihistamine daily; omalizumab for refractory cold urticaria (FDA approved)"}]},
+        {"id": "epi-auto-cu", "name": "Prescribe epinephrine autoinjector (x2) — lifestyle restriction counseling", "group": "Discharge Safety", "critical": true, "correct": true, "phase": 2,
+          "teaching": "All cold urticaria patients who have had systemic reactions MUST have epinephrine autoinjectors. Life-threatening triggers to avoid: swimming in cold water, diving, cold baths, cold beverages in large quantities, cold air exposure. Summer swimming in cold ocean water is particularly dangerous.",
+          "references": [{"source": "Cold Urticaria — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK558990/", "detail": "Epi autoinjector mandatory after systemic cold urticaria; swimming in cold water = highest risk activity"}]}
+      ],
+      "phases": [
+        {"id": "reaction", "label": "Acute Reaction", "auto": true, "vitals": {"BP": "84/52", "HR": "132", "SpO2": "94%"}, "labHighlights": {"Skin": "Generalized urticaria + angioedema", "Trigger": "Ocean swimming (68°F water)", "Tryptase (1h)": "22 ng/mL"}},
+        {"id": "stabilized", "label": "Post-Epinephrine", "vitals": {"BP": "108/72", "HR": "98", "SpO2": "98%"}, "labHighlights": {"Observation": "4h — biphasic monitoring", "Ice cube test": "Planned"}},
+        {"id": "discharge", "label": "Discharge Planning", "vitals": {"BP": "118/74", "HR": "82"}, "labHighlights": {"Ice cube test (3d later)": "Positive (+++ wheal)", "Rx": "Cetirizine 10mg + Epi-pen x2", "Plan": "Avoid cold water; allergy f/u"}}
+      ]
+    },
+    "mustNotMiss": ["Cold-dependent dermographism (stroking cold skin causes urticaria — different diagnosis)","Secondary cold urticaria (cryoglobulinemia, cold agglutinin disease, lupus — work up if atypical)","Cold air exposure triggers (not just water — cold food and drinks can cause oropharyngeal angioedema)","Aquagenic urticaria (water at any temperature causes urticaria — different diagnosis entirely)"],
+    "commonPitfalls": ["Discharging without epinephrine autoinjector after systemic cold urticaria reaction","Not counseling about cold water swimming risk (most fatal reactions occur during ocean/lake swimming)","Missing secondary cold urticaria (should screen for cryoglobulins, CBC, and autoimmune markers in atypical presentation)","Under-dosing antihistamines (may need 2-4x standard dose for adequate control)"],
+    "keyLearningPoints": ["Cold urticaria anaphylaxis during swimming = one of the most dangerous forms of anaphylaxis (sudden large cold exposure)","Ice cube test confirms diagnosis; cold stimulation test determines threshold temperature","Omalizumab 300mg SC q4wk for antihistamine-refractory cold urticaria — excellent response rate"]
+  }
 
 };
