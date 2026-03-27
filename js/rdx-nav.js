@@ -45,7 +45,8 @@
       di(R+'CoachDx/mentor-chat.html','💬','Mentor Chat','Ongoing coaching conversation')+
       di(R+'demo-coachdx.html','▶','Watch Demo','See CoachDx in action — no login')+
       hr()+sl('Specialty Coaching')+
-      
+      di(R+'allergy-pathway.html','🌿','A/I Coaching','Allergy & Immunology coaching')+
+      di(R+'crt-hub.html','🏥','Clinical Reasoning','CRT cases with AI feedback')
     )+
     dd('🧬 MechanismDx',sec==='mechanismdx','#0E7490',
       sl('Explore')+
@@ -54,7 +55,7 @@
       
       hr()+sl('Deep Dives')+
       di(R+'mechanism/anaphylaxis-module.html','⚡','Anaphylaxis','Full mechanism module')+
-      di(R+'mechanism/asthma-module.html','💨','Asthma','Pathophysiology + clinical links')+
+      di(R+'mechanism/asthma-module.html','💨','Asthma','Pathophysiology + clinical links')
       )+
     '<div class="rdx-dd">'+
       '<button class="rdx-nav-top" aria-haspopup="true" style="font-size:12px">Tools <svg width="10" height="6" viewBox="0 0 10 6" style="margin-left:3px;vertical-align:middle"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button>'+
