@@ -561,7 +561,30 @@ function showConcepts(chips) {
   var box = document.getElementById('concept-box');
   var container = document.getElementById('concept-chips');
   container.innerHTML = chips.map(function(c) {
-    return '<a class="concept-chip" href="pathway.html?topic=' + encodeURIComponent(c) + '">🧬 ' + c + '</a>';
+    // Concept name → pathway URL lookup
+    var CONCEPT_MAP = {
+      'Anaphylaxis':              'system=anaphylaxis-acute&topic=anaphylaxis',
+      'Biphasic Reactions':       'system=anaphylaxis-acute&topic=anaphylaxis-mechanism',
+      'Biphasic Anaphylaxis':     'system=anaphylaxis-acute&topic=anaphylaxis-mechanism',
+      'Mast Cell Mediators':      'system=mast-cell-biology&topic=mast-cell-mediators',
+      'Mast Cell Activation':     'system=mast-cell-biology&topic=mast-cell-activation',
+      'Epinephrine Auto-Injector':'system=anaphylaxis-acute&topic=epinephrine-pharm',
+      'Epinephrine Pharmacology': 'system=anaphylaxis-acute&topic=epinephrine-pharm',
+      'Discharge Planning':       'system=anaphylaxis-acute&topic=anaphylaxis',
+      'FDEIA':                    'system=anaphylaxis-acute&topic=exercise-anaphylaxis',
+      'Idiopathic Anaphylaxis':   'system=anaphylaxis-acute&topic=idiopathic-anaphylaxis',
+      'Drug Allergy':             'system=anaphylaxis-acute&topic=drug-allergy-mechanism',
+      'Food Allergy':             'system=food-allergy-sys&topic=food-allergy-mechanism',
+      'Penicillin De-labeling':   'system=anaphylaxis-acute&topic=penicillin-delabel',
+      'Urticaria':                'system=mast-cell-biology&topic=urticaria-mechanism',
+      'Angioedema':               'system=mast-cell-biology&topic=urticaria-mechanism',
+      'MCAS':                     'system=mast-cell-biology&topic=mcas',
+      'Mastocytosis':             'system=mast-cell-biology&topic=mastocytosis-mcas',
+      'Venom Allergy':            'system=anaphylaxis-acute&topic=stinging-insect',
+      'Alpha-gal Syndrome':       'system=food-allergy-sys&topic=food-ige',
+    };
+    var params = CONCEPT_MAP[c] || ('topic=' + encodeURIComponent(c));
+    return '<a class="concept-chip" href="pathway.html?' + params + '" target="_blank">🧬 ' + c + '</a>';
   }).join('');
   box.classList.add('show');
 }

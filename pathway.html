@@ -1759,6 +1759,66 @@ if (urlSystem && urlTopic) {
     if (vt) { state.activeSystem = urlSystem; MX.startSession(urlTopic); }
     else { state.activeSystem = urlSystem; state.view = 'topics'; render(); }
   } else { render(); }
+// Common topic aliases — short IDs to canonical system+topic
+var TOPIC_ALIASES = {
+  'anemia':        {system:'anemia-rbc',          topic:'anemia-rbc'},
+  'infection':     {system:'id-foundations',      topic:'fever-workup'},
+  'allergy':       {system:'anaphylaxis-acute',   topic:'anaphylaxis-mechanism'},
+  'coagulation':   {system:'coag-thrombosis',     topic:'coag-cascade'},
+  'glucose':       {system:'diabetes-metabolic',  topic:'dka-hhs'},
+  'sodium':        {system:'electrolytes-acidbase',topic:'hyponatremia'},
+  'aki':           {system:'aki-sys',             topic:'aki-prerenal'},
+  'ckd':           {system:'ckd-sys',             topic:'ckd-progression'},
+  'hepatitis':     {system:'hepatology',          topic:'hepatitis-viral'},
+  'jaundice':      {system:'hepatology',          topic:'hepatitis-viral'},
+  'acs':           {system:'acs-vascular',        topic:'stemi'},
+  'heart-failure': {system:'heart-failure-cmp',   topic:'hfref'},
+  'pe':            {system:'pulm-vascular',       topic:'pe-acute'},
+  'acid-base':     {system:'electrolytes-acidbase',topic:'abg-interpret'},
+  'electrolytes':  {system:'electrolytes-acidbase',topic:'electrolytes-acidbase'},
+  'potassium':     {system:'electrolytes-acidbase',topic:'potassium'},
+};
+} else if (urlTopic && !urlSystem) {
+  // Check alias table first
+  if (TOPIC_ALIASES[urlTopic]) {
+    var alias = TOPIC_ALIASES[urlTopic];
+    state.activeSystem = alias.system; MX.startSession(alias.topic);
+  } else {
+  // Name-only lookup — search all systems for matching topic ID or name or keywords
+  var topicNorm = urlTopic.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  var topicWords = urlTopic.toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>3;});
+  var found = null;
+  var bestScore = 0;
+  for (var si = 0; si < SYSTEMS.length; si++) {
+    var sys = SYSTEMS[si];
+    for (var ti = 0; ti < sys.topics.length; ti++) {
+      var t = sys.topics[ti];
+      var nameL = t.name.toLowerCase();
+      var nameNorm = nameL.replace(/[^a-z0-9]+/g,'-');
+      var subL = (t.sub||'').toLowerCase();
+      var score = 0;
+      // Exact ID or normalized name match — highest priority
+      if (t.id === urlTopic || t.id === topicNorm || nameNorm === topicNorm) { score = 100; }
+      // Substring containment
+      else if (nameL.indexOf(urlTopic.toLowerCase()) !== -1 ||
+               urlTopic.toLowerCase().indexOf(nameL) !== -1) { score = 80; }
+      // Keyword overlap in name
+      else {
+        var nameWords = nameL.split(/[^a-z0-9]+/);
+        var matches = topicWords.filter(function(w){ return nameWords.indexOf(w) !== -1; });
+        if (matches.length > 0) score = 50 + (matches.length * 10);
+        // Keyword in sub description
+        else {
+          var subMatches = topicWords.filter(function(w){ return subL.indexOf(w) !== -1; });
+          if (subMatches.length > 0) score = 20 + (subMatches.length * 5);
+        }
+      }
+      if (score > bestScore) { bestScore = score; found = { system: sys.id, topicId: t.id }; }
+    }
+  }
+  if (found && bestScore >= 20) { state.activeSystem = found.system; MX.startSession(found.topicId); }
+  else { render(); }
+  } // end alias else
 } else if (urlSystem) {
   var vs2 = SYSTEMS.find(function(s) { return s.id === urlSystem; });
   if (vs2) { state.activeSystem = urlSystem; state.view = 'topics'; }
