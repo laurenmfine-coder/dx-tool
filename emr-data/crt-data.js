@@ -33191,5 +33191,391 @@ window.CRT_DATA = {
       "BP must be ≤185/110 before tPA — treat and recheck before administering",
       "No aspirin within 24h of tPA; always check head imaging at 24h"
     ]
+  },
+  "acute-ischemic-stroke": {
+    "id": "acute-ischemic-stroke",
+    "diagnosis": "Acute Ischemic Stroke — Cardioembolic (AF)",
+    "acuity": 1,
+    "presentation": "Acute Aphasia / Right Hemiplegia",
+    "category": "neurologic",
+    "chiefComplaint": "Sudden Speech Loss / Right-Sided Weakness",
+    "treatments": {
+      "orders": [
+        {"id": "stroke-alert", "name": "Activate Stroke Alert — door-to-CT <25 min", "group": "Protocol", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Time is brain: 1.9 million neurons die per minute in untreated stroke. Door-to-needle time <60 min is the standard. Activate stroke team the moment patient arrives — do not wait for full neuro exam.",
+          "references": [{"source": "2019 AHA/ASA Stroke Guideline", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211", "detail": "Door-to-needle <60 min; 1.9 million neurons lost/minute in untreated stroke"}]},
+        {"id": "ct-no-contrast-ais", "name": "STAT non-contrast CT head + CTA head/neck", "group": "Imaging", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Non-contrast CT first to rule out hemorrhage (tPA contraindicated in hemorrhagic stroke). CTA detects LVO and guides thrombectomy decision. Both done simultaneously in modern stroke centers.",
+          "references": [{"source": "2019 AHA/ASA Stroke Guideline", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211", "detail": "NCCT to exclude hemorrhage before tPA; CTA for LVO detection"}]},
+        {"id": "tpa-ais", "name": "Alteplase 0.9mg/kg IV (max 90mg) within 4.5h", "group": "Thrombolytics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "IV tPA within 4.5h of onset if no contraindications. Dosing: 0.9mg/kg (max 90mg); 10% bolus over 1 min, rest over 60 min. NNT = 8 for favorable outcome. Do not delay for BP stabilization if <185/110.",
+          "references": [{"source": "Acute Ischemic Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK564367/", "detail": "Alteplase 0.9mg/kg IV within 4.5h; NNT 8 for favorable outcome"},
+            {"source": "2019 AHA/ASA Stroke Guideline", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211", "detail": "Class I: IV tPA within 4.5h for AIS"}]},
+        {"id": "anticoag-hold-ais", "name": "HOLD anticoagulation for 24h post-tPA", "group": "Medications", "critical": true, "correct": true, "phase": 2,
+          "teaching": "After tPA: hold anticoagulation and antiplatelet for 24h (bleeding risk). Start anticoagulation at 24h for AF-related cardioembolic stroke — reduces early recurrence. Repeat NCCT at 24h before anticoagulating.",
+          "references": [{"source": "Acute Ischemic Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK564367/", "detail": "Hold anticoag/antiplatelet 24h post-tPA; repeat NCCT before restarting"}]}
+      ],
+      "phases": [
+        {"id": "onset", "label": "Symptom Onset", "auto": true, "vitals": {"BP": "188/108", "HR": "112 AF", "RR": "16", "SpO2": "97%"}, "labHighlights": {"NIHSS": "14 (aphasia + right hemiplegia)", "Glucose": "142", "INR": "1.0"}},
+        {"id": "ct-done", "label": "CT Complete", "vitals": {"BP": "186/106", "HR": "108"}, "labHighlights": {"CT Head": "No hemorrhage", "CTA": "Left MCA M1 occlusion"}},
+        {"id": "tpa-running", "label": "tPA Running", "vitals": {"BP": "178/102", "HR": "104"}, "labHighlights": {"Time to needle": "48 min", "NIHSS": "12 (improving)"}}
+      ]
+    },
+    "mustNotMiss": ["Glucose check immediately — hypoglycemia mimics stroke and is easily reversed","Hemorrhagic stroke on CT — absolute tPA contraindication","LVO on CTA — needs thrombectomy regardless of tPA eligibility","BP >185/110 — lower to <185/110 before tPA (labetalol or nicardipine)"],
+    "commonPitfalls": ["Checking glucose AFTER initiating stroke workup — can miss hypoglycemia mimic","Dropping BP too aggressively before tPA (target <185/110, not lower)","Not checking CTA for LVO — missing thrombectomy opportunity","Anticoagulating within 24h of tPA (hemorrhagic transformation risk)"],
+    "keyLearningPoints": ["Door-to-needle <60 min; 1.9M neurons/minute die untreated — time is the intervention","Cardioembolic stroke (AF): start DOAC at 24-96h post-event depending on infarct size","LVO = thrombectomy within 24h even if tPA given or contraindicated — both are additive"]
+  },
+  "acute-ischemic-stroke-tpa": {
+    "id": "acute-ischemic-stroke-tpa",
+    "diagnosis": "LVO Stroke — tPA Bridge to Thrombectomy",
+    "acuity": 1,
+    "presentation": "NIHSS 18 / Left MCA LVO",
+    "category": "neurologic",
+    "chiefComplaint": "Sudden Global Aphasia / Right Hemiplegia / Gaze Deviation",
+    "treatments": {
+      "orders": [
+        {"id": "tpa-lvo", "name": "Alteplase 0.9mg/kg IV simultaneously with thrombectomy activation", "group": "Thrombolytics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Bridge tPA + mechanical thrombectomy for LVO: both should proceed simultaneously. tPA may partially lyse clot and improve thrombectomy success. DAWN/DEFUSE trials: thrombectomy up to 24h in selected patients with salvageable tissue on perfusion imaging.",
+          "references": [{"source": "Acute Ischemic Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK564367/", "detail": "tPA + thrombectomy for LVO — concurrent activation; DAWN/DEFUSE: up to 24h"}]},
+        {"id": "neuroIR-lvo", "name": "Activate Neurointerventional — Mechanical Thrombectomy", "group": "Definitive", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Mechanical thrombectomy for LVO: NNT = 2.6 for functional independence. Door-to-puncture <90 min target. Use stent retriever or aspiration. TICI 2b/3 recanalization = goal.",
+          "references": [{"source": "Acute Ischemic Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK564367/", "detail": "Thrombectomy NNT 2.6; TICI 2b/3 target; door-to-puncture <90 min"},
+            {"source": "2019 AHA/ASA Stroke Guideline", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211", "detail": "Class I: mechanical thrombectomy for LVO <6h (up to 24h with perfusion imaging)"}]},
+        {"id": "bp-post-lvo", "name": "BP <180/105 after successful recanalization", "group": "Blood Pressure", "critical": true, "correct": true, "phase": 2,
+          "teaching": "After successful recanalization: lower BP to <180/105 (prevent reperfusion hemorrhage). Before recanalization: permissive HTN <220/120 to maintain collateral flow. This rule FLIPS after recanalization.",
+          "references": [{"source": "2019 AHA/ASA Stroke Guideline", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211", "detail": "Post-recanalization: BP <180/105; pre-recanalization: permissive <220/120"}]}
+      ],
+      "phases": [
+        {"id": "arrival", "label": "ED Arrival", "auto": true, "vitals": {"BP": "196/112", "HR": "96 AF", "SpO2": "97%"}, "labHighlights": {"NIHSS": "18", "CT": "No hemorrhage", "CTA": "Left M1 occlusion — ASPECTS 8"}},
+        {"id": "tpa-started", "label": "tPA Running / IR Activated", "vitals": {"BP": "190/108"}, "labHighlights": {"Time to needle": "44 min", "Door-to-puncture": "Target 90 min"}},
+        {"id": "post-thrombectomy", "label": "Post-Thrombectomy", "vitals": {"BP": "162/94"}, "labHighlights": {"TICI": "2b recanalization", "NIHSS": "8 (improved)"}}
+      ]
+    },
+    "mustNotMiss": ["Large core infarct (ASPECTS <6) — higher hemorrhage risk with tPA; discuss risk/benefit","Tandem occlusion (cervical ICA + intracranial LVO) — may need cervical stenting","BP management flip after recanalization: permissive BEFORE → controlled AFTER","Malignant MCA syndrome risk — decompressive hemicraniectomy for large infarcts + edema"],
+    "commonPitfalls": ["Delaying thrombectomy to wait for tPA response (proceed simultaneously)","Not checking ASPECTS score — predicts futile recanalization if <6","Continuing permissive BP after successful recanalization (reperfusion hemorrhage risk)","Not screening for hidden AF post-stroke (Holter monitor; cardioembolic = highest recurrence risk)"],
+    "keyLearningPoints": ["LVO thrombectomy NNT = 2.6 — most effective acute stroke intervention","tPA + thrombectomy: concurrent, additive — never delay one for the other","DAWN/DEFUSE: up to 24h thrombectomy window with CT perfusion showing penumbra >core"]
+  },
+  "new-onset-atrial-fibrillation": {
+    "id": "new-onset-atrial-fibrillation",
+    "diagnosis": "New-Onset AF with RVR — Hemodynamically Stable",
+    "acuity": 2,
+    "presentation": "Palpitations / Irregular HR 146",
+    "category": "cardiovascular",
+    "chiefComplaint": "Palpitations / Irregular Pulse / HR 146",
+    "treatments": {
+      "orders": [
+        {"id": "rate-control-afib", "name": "Metoprolol 5mg IV x3 (rate control to HR <110)", "group": "Rate Control", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hemodynamically stable new AF with RVR: rate control first. IV metoprolol 5mg q5min x3 doses. Diltiazem 0.25mg/kg IV is alternative (better for COPD). Target HR <110 at rest. Do NOT use rate control if WPW — can precipitate VF.",
+          "references": [{"source": "Atrial Fibrillation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK526072/", "detail": "IV metoprolol or diltiazem for rate control in hemodynamically stable AF/RVR"}]},
+        {"id": "anticoag-afib", "name": "Anticoagulation — heparin or DOAC if AF >48h or unknown duration", "group": "Anticoagulation", "critical": true, "correct": true, "phase": 1,
+          "teaching": "If AF duration >48h or unknown: anticoagulate before cardioversion to prevent thromboembolic stroke. Thrombus can form in LAA within 48h. If <48h AND no structural disease: can cardiovert without anticoag, but still start DOAC after. CHA2DS2-VASc ≥2 in women, ≥1 in men = long-term anticoagulation.",
+          "references": [{"source": "Atrial Fibrillation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK526072/", "detail": "Anticoag before cardioversion if AF >48h; CHA2DS2-VASc guides long-term therapy"}]},
+        {"id": "cardiovert-unstable", "name": "Synchronized cardioversion 200J (if hemodynamically UNSTABLE)", "group": "Cardioversion", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hemodynamically UNSTABLE AF (hypotension, ACS, acute HF, syncope) = immediate synchronized cardioversion regardless of duration. Give sedation (propofol or etomidate). Do not delay to anticoagulate.",
+          "references": [{"source": "Atrial Fibrillation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK526072/", "detail": "Immediate synchronized cardioversion for hemodynamically unstable AF"}]},
+        {"id": "tsh-afib", "name": "TSH (thyroid screen in new AF)", "group": "Diagnostics", "critical": false, "correct": true, "phase": 1,
+          "teaching": "Always check TSH in new-onset AF — hyperthyroidism is a common reversible cause. Also check: electrolytes (K+, Mg2+), cardiac biomarkers (rule out ACS trigger), CXR (rule out PE, pneumonia), echocardiogram (structural disease).",
+          "references": [{"source": "Atrial Fibrillation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK526072/", "detail": "TSH in new AF; hyperthyroidism reversible cause; also electrolytes, echo"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "136/84", "HR": "146 irregular", "RR": "18", "SpO2": "97%"}, "labHighlights": {"ECG": "AF no P waves, irregular RR", "K+": "3.8", "Troponin": "Negative"}},
+        {"id": "rate-controlled", "label": "Rate Controlled", "vitals": {"BP": "132/80", "HR": "88 irregular"}, "labHighlights": {"TSH": "Pending", "Echo": "Ordered"}},
+        {"id": "stable", "label": "Stable on Floor", "vitals": {"BP": "128/78", "HR": "82"}, "labHighlights": {"Duration": "<48h confirmed", "CHA2DS2-VASc": "2 (anticoag indicated)"}}
+      ]
+    },
+    "mustNotMiss": ["WPW with AF — delta waves on baseline ECG; AV nodal blockers cause VF via accessory pathway","Hemodynamic instability — cardiovert immediately regardless of anticoag status","New ACS as trigger — troponin + ECG in all new AF","PE as trigger — consider CTPA if unexplained tachycardia/hypoxia"],
+    "commonPitfalls": ["Rate control with diltiazem/metoprolol in WPW + AF (precipitates VF via accessory pathway)","Not anticoagulating before cardioversion when duration >48h or unknown","Missing hyperthyroidism (skip TSH in new AF)","Rhythm control without adequate anticoagulation (stroke risk)"],
+    "keyLearningPoints": ["Rate control target <110 in hemodynamically stable AF; cardiovert if unstable","48-hour rule: cardiovert without anticoag only if AF <48h AND no structural disease","CHA2DS2-VASc: 0 in men (no anticoag), 1 in men/1 in women (consider), ≥2 (anticoag)"]
+  },
+  "hemorrhagic-stroke": {
+    "id": "hemorrhagic-stroke",
+    "diagnosis": "Hypertensive Intracerebral Hemorrhage",
+    "acuity": 1,
+    "presentation": "Sudden Headache / Vomiting / Hemiplegia",
+    "category": "neurologic",
+    "chiefComplaint": "Sudden Severe Headache / Left Hemiplegia",
+    "treatments": {
+      "orders": [
+        {"id": "bp-lower-ich", "name": "Nicardipine IV to SBP <140 within 1h (if SBP 150-220)", "group": "Blood Pressure", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Acute ICH with SBP 150-220: lower to <140 within 1h reduces hematoma expansion and is safe (INTERACT2, ATACH-2). Target SBP 130-140. Avoid drops <120. Use nicardipine or labetalol infusions for smooth control.",
+          "references": [{"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "SBP <140 within 1h for ICH 150-220 mmHg; reduces hematoma expansion (INTERACT2, ATACH-2)"}]},
+        {"id": "reversal-ich", "name": "Reverse anticoagulation immediately if on anticoag", "group": "Reversal", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anticoag-associated ICH: reverse immediately. Warfarin: 4-factor PCC (25-50 units/kg) + vitamin K 10mg IV. DOAC: andexanet alfa (factor Xa inhibitors) or idarucizumab (dabigatran). Do not wait for INR normalization to start PCC.",
+          "references": [{"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "4-factor PCC for warfarin reversal; andexanet alfa for apixaban/rivaroxaban"}]},
+        {"id": "ct-ich", "name": "Non-contrast CT Head + CT Angiography (spot sign)", "group": "Imaging", "critical": true, "correct": true, "phase": 1,
+          "teaching": "NCCT confirms ICH location and size. CTA 'spot sign' (contrast extravasation within hematoma) predicts expansion — 3x higher mortality. Volume calculation: ABC/2 method. Lobar ICH in elderly: consider amyloid angiopathy + MRI for microbleed pattern.",
+          "references": [{"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "CTA spot sign predicts hematoma expansion; ABC/2 for volume calculation"}]},
+        {"id": "neuro-ich", "name": "Neurosurgery consultation", "group": "Consultation", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Neurosurgery for all ICH. Surgical indications: cerebellar hemorrhage >3cm (posterior fossa decompression), hydrocephalus (EVD), or deteriorating patient. Deep basal ganglia ICH: surgical benefit unclear. EVD for IVH with hydrocephalus.",
+          "references": [{"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "Neurosurgery for all ICH; cerebellar >3cm = surgical decompression"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "206/118", "HR": "88", "RR": "18", "SpO2": "95%"}, "labHighlights": {"CT": "Left basal ganglia ICH 18mL", "INR": "1.1", "GCS": "12"}},
+        {"id": "bp-controlled", "label": "BP Controlled", "vitals": {"BP": "138/84", "HR": "84"}, "labHighlights": {"CTA": "No spot sign", "Neurosurg": "Consulted — monitoring"}},
+        {"id": "icu", "label": "ICU Monitoring", "vitals": {"BP": "132/80", "HR": "82"}, "labHighlights": {"CT 24h": "Stable hematoma size", "GCS": "13"}}
+      ]
+    },
+    "mustNotMiss": ["Anticoagulation reversal — check all meds; don't forget DOACs","Cerebellar ICH >3cm — neurosurgery emergency for posterior fossa decompression","IVH with hydrocephalus — EVD needed","Herniation signs (anisocoria, Cushing triad) — emergent neurosurgery"],
+    "commonPitfalls": ["Aggressive BP lowering below SBP 120 (worsens outcome — ischemia in perihematomal zone)","Not checking for underlying lesion (AVM, tumor) in atypical locations — MRI + MRA","Antiplatelet/anticoag restart timing — restart too early; general: 4-8 weeks for lobar","Missing amyloid angiopathy in elderly with lobar ICH (high recurrence risk — never restart anticoag)"],
+    "keyLearningPoints": ["ICH BP target SBP <140 within 1h — reduces expansion; do not go <120","Reversal hierarchy: warfarin → 4F-PCC + VitK; apixaban/rivaroxaban → andexanet alfa; dabigatran → idarucizumab","ICH score (0-6): GCS + volume + IVH + infratentorial + age — predicts 30-day mortality"]
+  },
+  "alcohol-withdrawal-seizures": {
+    "id": "alcohol-withdrawal-seizures",
+    "diagnosis": "Alcohol Withdrawal Seizure — High Risk for DTs",
+    "acuity": 1,
+    "presentation": "GTC Seizure 48h Post Last Drink",
+    "category": "toxicology",
+    "chiefComplaint": "First Seizure / Last Drink 2 Days Ago / Prior DTs History",
+    "treatments": {
+      "orders": [
+        {"id": "benzo-seizure-aws", "name": "Lorazepam 4mg IV (repeat q5-10min until seizure stops)", "group": "Benzodiazepines", "critical": true, "correct": true, "phase": 1,
+          "teaching": "AWS seizure: IV benzodiazepine first-line. Lorazepam 4mg IV, repeat every 5-10 min. GABA-A agonist — directly treats the underlying withdrawal physiology. Phenobarbital 10mg/kg IV if benzo-refractory (works at different GABA-A subunit).",
+          "references": [{"source": "Alcohol Withdrawal — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/", "detail": "Lorazepam IV first-line for AWS seizure; phenobarbital for benzo-refractory"}]},
+        {"id": "thiamine-seizure-aws", "name": "Thiamine 500mg IV (Wernicke prophylaxis)", "group": "Vitamins", "critical": true, "correct": true, "phase": 1,
+          "teaching": "High-dose thiamine (500mg IV TID x3 days) for suspected Wernicke's. Post-seizure confusion may reflect ictal state OR Wernicke. Do not underdose. Thiamine BEFORE any glucose.",
+          "references": [{"source": "Alcohol Withdrawal — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/", "detail": "Thiamine 500mg IV TID x3 days for Wernicke prevention in AUD with seizure"}]},
+        {"id": "icu-admit-aws", "name": "ICU admission (prior DTs + seizure = high DTs risk)", "group": "Disposition", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Prior DTs history + current seizure = ~35% risk of DTs this episode. ICU mandatory. DTs: autonomic hyperactivity + confusion + hallucinations, typically 48-96h post-cessation. Mortality 1-5% even with treatment.",
+          "references": [{"source": "Alcohol Withdrawal — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/", "detail": "Prior DTs + seizure = high DT risk; ICU admission mandatory"}]},
+        {"id": "phenyto-aws", "name": "Phenytoin loading for AWS seizure", "group": "Anticonvulsants", "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — phenytoin does NOT treat alcohol withdrawal seizures (different mechanism). It acts on sodium channels, not GABA. Studies show no benefit over placebo for AWS seizure prevention. Use benzodiazepines.",
+          "references": [{"source": "Alcohol Withdrawal — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/", "detail": "Phenytoin ineffective for AWS seizures — use benzodiazepines"}]}
+      ],
+      "phases": [
+        {"id": "seizure", "label": "Active Seizure", "auto": true, "vitals": {"BP": "168/108", "HR": "128", "Temp": "37.6°C", "SpO2": "94%"}, "labHighlights": {"Last drink": "48h ago", "Prior DTs": "Yes (x2)", "Glucose": "72", "Na": "136"}},
+        {"id": "post-ictal", "label": "Post-Ictal", "vitals": {"BP": "158/102", "HR": "116", "Temp": "37.8°C"}, "labHighlights": {"Thiamine given": "Before D5W", "CIWA-Ar": "18"}},
+        {"id": "icu", "label": "ICU — Monitoring for DTs", "vitals": {"BP": "148/96", "HR": "108"}, "labHighlights": {"CIWA-Ar q1h": "Protocol active", "Benzos given": "Lorazepam 12mg total"}}
+      ]
+    },
+    "mustNotMiss": ["Delirium tremens — peak 48-96h; prior DTs = 35% risk this episode","Wernicke encephalopathy — thiamine 500mg IV before any glucose","Head CT if first seizure or atypical — rule out intracranial pathology","Phenytoin is NOT effective for AWS seizure — benzodiazepines only"],
+    "commonPitfalls": ["Phenytoin loading (no benefit in AWS, may give false reassurance)","Under-dosing benzodiazepines (need adequate GABA-A activation — high doses expected)","Not admitting to ICU (prior DTs + seizure = high DTs risk)","Giving glucose before thiamine (Wernicke trigger)"],
+    "keyLearningPoints": ["AWS seizures: benzodiazepines — treat the withdrawal, not just the seizure with AEDs","Phenytoin = wrong drug for AWS (sodium channel mechanism, not GABA)","Prior DTs + current seizure = ICU mandatory; DTs mortality 1-5% even treated"]
+  },
+  "aki-differential": {
+    "id": "aki-differential",
+    "diagnosis": "AKI — Mixed Prerenal + NSAID-Induced Intrinsic",
+    "acuity": 2,
+    "presentation": "Oliguria / Cr 3.1 / NSAID Use",
+    "category": "renal",
+    "chiefComplaint": "Decreased Urine Output / Cr 3.1 from Baseline 1.0",
+    "treatments": {
+      "orders": [
+        {"id": "fena-aki", "name": "Fractional Excretion of Sodium (FENa) + urinalysis", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "FENa = (urine Na × plasma Cr) / (plasma Na × urine Cr) × 100. FENa <1% = prerenal (tubules intact, reabsorbing Na). FENa >2% = intrinsic (tubular damage, cannot reabsorb). Caveat: FENa <1% can occur in pigment nephropathy and early obstruction. FEUrea better if on diuretics.",
+          "references": [{"source": "AKI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519012/", "detail": "FENa <1% prerenal; >2% intrinsic; FEUrea if on diuretics"}]},
+        {"id": "hold-nsaid-aki", "name": "HOLD NSAIDs (and all nephrotoxins)", "group": "Medications", "critical": true, "correct": true, "phase": 1,
+          "teaching": "NSAIDs inhibit prostaglandin synthesis — in states of reduced renal perfusion, prostaglandins are vasodilatory and maintain GFR. NSAIDs remove this compensation → efferent arteriole constriction → drop in GFR. Hold NSAIDs, ACEi/ARBs, contrast, aminoglycosides.",
+          "references": [{"source": "AKI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519012/", "detail": "NSAIDs inhibit prostaglandin-mediated afferent vasodilation; hold all nephrotoxins in AKI"}]},
+        {"id": "volume-aki", "name": "Isotonic crystalloid resuscitation (if prerenal)", "group": "Fluids", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Prerenal AKI: isotonic fluid challenge (250-500 mL NS or LR). Avoid hypotonic fluids. Monitor UO response — should improve within 2-4h if truly prerenal. Balance against fluid overload risk.",
+          "references": [{"source": "AKI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519012/", "detail": "Isotonic crystalloid for prerenal AKI; monitor UO response at 2-4h"}]},
+        {"id": "renal-us-aki", "name": "Renal ultrasound (exclude obstruction)", "group": "Imaging", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Renal US in all unexplained AKI — rules out obstructive nephropathy (hydronephrosis). Obstruction is treatable and reverses with urologic intervention. Often painless. Do not miss postrenal AKI.",
+          "references": [{"source": "AKI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519012/", "detail": "Renal US in all AKI to exclude obstruction; hydronephrosis = postrenal cause"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "108/72", "HR": "104", "SpO2": "97%"}, "labHighlights": {"Cr": "3.1 (baseline 1.0)", "BUN": "48", "K+": "5.2", "UO": "250 mL/8h"}},
+        {"id": "workup", "label": "Workup", "vitals": {"BP": "114/76", "HR": "96"}, "labHighlights": {"FENa": "1.8% (mixed)", "UA": "Granular casts", "Renal US": "No hydronephrosis"}},
+        {"id": "treated", "label": "Responding to Fluids", "vitals": {"BP": "122/78", "HR": "88"}, "labHighlights": {"Cr": "2.2 (improving)", "UO": "1.2 mL/kg/hr"}}
+      ]
+    },
+    "mustNotMiss": ["Obstructive AKI — always get renal US (silent hydronephrosis)","Hyperkalemia (K+ >6.0 with ECG changes) — needs emergent treatment","Uremic emergencies (encephalopathy, pericarditis, bleeding) — dialysis threshold","Contrast-induced AKI — avoid contrast if Cr >1.5; pre-hydrate if unavoidable"],
+    "commonPitfalls": ["Attributing all AKI to prerenal without checking UA for casts (misses ATN/GN)","Not holding ACEi/ARBs in AKI (further reduces GFR by blocking efferent constriction)","Giving IV contrast before checking creatinine","Over-hydrating when AKI is intrinsic (causes fluid overload without benefit)"],
+    "keyLearningPoints": ["AKI categorization: Pre- (FENa <1%), Intrinsic (FENa >2%, casts on UA), Post- (hydronephrosis on US)","NSAIDs + ACEi + contrast = the 3 most common drug-induced AKI triggers to hold","Renal US in every unexplained AKI — obstruction is reversible and painless"]
+  },
+  "inpatient-diabetes-management": {
+    "id": "inpatient-diabetes-management",
+    "diagnosis": "Inpatient T2DM — Basal-Bolus Insulin Protocol",
+    "acuity": 2,
+    "presentation": "Hyperglycemia / Glucose 380 on Admission",
+    "category": "endocrine",
+    "chiefComplaint": "Admitted for Pneumonia / Glucose 380 on Labs",
+    "treatments": {
+      "orders": [
+        {"id": "basal-bolus-dm", "name": "Basal-Bolus Insulin (0.5u/kg/day) — NOT sliding scale only", "group": "Insulin", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Sliding scale insulin alone is reactive and inadequate for inpatient hyperglycemia. Basal-Bolus protocol: total 0.5 u/kg/day; 50% as basal (glargine once daily), 50% as bolus (lispro divided with meals). RABBIT 2 trial: BB reduces complications vs SSI alone. Target glucose 140-180 mg/dL inpatient.",
+          "references": [{"source": "Inpatient Diabetes — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482332/", "detail": "Basal-bolus protocol: 0.5u/kg/day; target 140-180; RABBIT 2 trial superiority over SSI"}]},
+        {"id": "glucose-target-dm", "name": "Target glucose 140-180 mg/dL (not <140)", "group": "Target", "critical": true, "correct": true, "phase": 1,
+          "teaching": "NICE-SUGAR trial: intensive glucose control (<110 mg/dL) INCREASED ICU mortality. Inpatient target 140-180 for most patients; 110-140 for critically ill on insulin drips. Hypoglycemia (<70) is more dangerous than mild hyperglycemia acutely.",
+          "references": [{"source": "NICE-SUGAR Trial NEJM 2009", "url": "https://www.nejm.org/doi/10.1056/NEJMoa0810625", "detail": "Intensive glucose control increased ICU mortality — target 140-180, not <110"}]},
+        {"id": "hold-metformin-dm", "name": "Hold metformin (admission + IV contrast risk)", "group": "Medications", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hold metformin on admission: lactic acidosis risk if IV contrast given, patient NPO, or renal function fluctuates. Restart when eating, creatinine stable, and no contrast planned within 48h.",
+          "references": [{"source": "Inpatient Diabetes — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482332/", "detail": "Hold metformin on admission; restart when stable — contrast and renal risk"}]},
+        {"id": "hypoglycemia-protocol", "name": "Hypoglycemia protocol: treat glucose <70 immediately", "group": "Safety", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Glucose <70: treat immediately — 15g rapid-acting carbs PO (if eating) or 25g D50 IV push. Recheck in 15 min. Reduce insulin dose by 10-20% after any hypoglycemic episode. Document and notify team.",
+          "references": [{"source": "Inpatient Diabetes — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482332/", "detail": "Glucose <70 = treat immediately; reduce insulin dose 10-20% after hypoglycemia"}]}
+      ],
+      "phases": [
+        {"id": "admission", "label": "Admission", "auto": true, "vitals": {"BP": "138/84", "HR": "94", "Temp": "38.4°C", "SpO2": "95%"}, "labHighlights": {"Glucose": "380", "HbA1c": "10.2%", "Cr": "1.1", "WBC": "14,200 (PNA)"}},
+        {"id": "insulin-started", "label": "Basal-Bolus Started", "vitals": {"BP": "134/82", "HR": "88"}, "labHighlights": {"Glucose (12h)": "248", "Insulin": "Glargine 25u QHS + Lispro 8u TID AC"}},
+        {"id": "controlled", "label": "Glucose Controlled", "vitals": {"BP": "128/78", "HR": "82"}, "labHighlights": {"Glucose avg": "162 mg/dL", "No hypoglycemia": "Protocol running"}}
+      ]
+    },
+    "mustNotMiss": ["Hypoglycemia (<70) — more dangerous acutely than mild hyperglycemia; always have protocol","Insulin ordering errors — wrong type, wrong dose, not held when NPO","DKA/HHS in T1DM misclassified as T2DM — check glucose + VBG in all hyperglycemic admissions","Steroid-induced hyperglycemia (NPH or bolus-heavy protocol; peaks 6-12h post-dose)"],
+    "commonPitfalls": ["Sliding scale insulin only (reactive, inadequate for inpatient)","Tight glucose control <140 (NICE-SUGAR: worse outcomes in ICU)","Not holding metformin on admission (lactic acidosis with contrast/renal instability)","Continuing home oral agents when patient is NPO or hemodynamically unstable"],
+    "keyLearningPoints": ["Inpatient target: glucose 140-180 (NICE-SUGAR; not <110 — increased mortality)","Basal-bolus: 0.5u/kg/day (0.3 if elderly/renal); 50% basal + 50% split with meals","Sliding scale alone is insufficient — proven by RABBIT 2 trial"]
+  },
+  "type-2-mi": {
+    "id": "type-2-mi",
+    "diagnosis": "Type 2 MI — Demand Ischemia (Severe Anemia + AF/RVR)",
+    "acuity": 2,
+    "presentation": "Chest Pain / Troponin Rise / AF with RVR + Hgb 5.8",
+    "category": "cardiovascular",
+    "chiefComplaint": "Chest Pain / Troponin 1.2 / AF HR 148 / Hgb 5.8",
+    "treatments": {
+      "orders": [
+        {"id": "cause-type2mi", "name": "Identify and treat the UNDERLYING CAUSE (not PCI)", "group": "Management", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Type 2 MI = myocardial oxygen DEMAND exceeds supply due to non-obstructive cause. Here: severe anemia (reduced O2 delivery) + AF/RVR (increased demand, reduced diastolic filling). Treatment = transfuse + rate control, NOT emergency catheterization. PCI in Type 2 MI has no benefit and exposes to contrast/procedural risk.",
+          "references": [{"source": "Type 2 MI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546622/", "detail": "Type 2 MI: treat underlying cause; PCI not indicated; demand-supply mismatch"}]},
+        {"id": "pRBC-t2mi", "name": "pRBC transfusion (Hgb <7 or <8 with ACS symptoms)", "group": "Transfusion", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Severe anemia with demand ischemia: transfuse to Hgb ≥8. Unlike stable patients (Hgb <7 threshold), active demand ischemia justifies transfusing to higher threshold. Each unit raises Hgb ~1 g/dL.",
+          "references": [{"source": "Type 2 MI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546622/", "detail": "Transfuse to Hgb ≥8 in active demand ischemia; liberal threshold in ACS setting"}]},
+        {"id": "rate-ctrl-t2mi", "name": "Rate control AF to HR <100 (metoprolol/diltiazem)", "group": "Rate Control", "critical": true, "correct": true, "phase": 1,
+          "teaching": "AF with RVR increases myocardial O2 demand and reduces diastolic filling time (coronary perfusion occurs in diastole). Rate control to <100 reduces demand component. If hemodynamically unstable: synchronized cardioversion.",
+          "references": [{"source": "Atrial Fibrillation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK526072/", "detail": "Rate control AF to <100 reduces demand ischemia; diltiazem/metoprolol IV"}]},
+        {"id": "cath-t2mi", "name": "Emergency coronary angiography", "group": "Procedural", "critical": false, "correct": false, "phase": 1,
+          "teaching": "NOT indicated for Type 2 MI if cause is identified (anemia + AF). Angiography adds risk (contrast AKI, arrhythmia, access complications) without benefit when obstructive CAD is not the mechanism. Treat the cause first — if troponin persists after correction, consider elective workup.",
+          "references": [{"source": "Type 2 MI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546622/", "detail": "PCI/angiography not beneficial in Type 2 MI with identified cause"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "102/68", "HR": "148 AF", "RR": "22", "SpO2": "94%"}, "labHighlights": {"Troponin": "1.2 (trending up)", "Hgb": "5.8", "ECG": "AF, ST depression V4-V6"}},
+        {"id": "treated", "label": "Treated", "vitals": {"BP": "114/74", "HR": "98 AF"}, "labHighlights": {"After 1u pRBC": "Hgb 7.1", "After rate ctrl": "HR 98"}},
+        {"id": "stabilized", "label": "Stabilized", "vitals": {"BP": "122/78", "HR": "88"}, "labHighlights": {"Troponin": "0.8 (trending down)", "Hgb": "8.2 (2u pRBC)"}}
+      ]
+    },
+    "mustNotMiss": ["Hemodynamic instability (SBP <90) — may need emergent cardioversion or inotropes","True Type 1 MI coexisting — if troponin continues rising after cause treated, consider angio","Underlying cause of anemia — GI bleed, hemolysis, bone marrow failure","PE (can cause demand ischemia and presents with similar troponin + tachycardia)"],
+    "commonPitfalls": ["Treating Type 2 as Type 1 MI (rushing to cath when cause is demand-supply mismatch)","Not aggressively treating the underlying cause (anemia, tachycardia)","Anticoagulation without recognizing bleeding as anemia source (worsens hemorrhage)","Missing AF as an independent treatable cause rather than just tachycardia"],
+    "keyLearningPoints": ["Type 1 MI = plaque rupture/thrombosis → PCI. Type 2 MI = demand/supply mismatch → treat cause","Type 2 triggers: anemia, tachycardia, sepsis, hypotension, hypertensive crisis, cocaine","Troponin should trend down after correcting cause in Type 2 — persistent rise = reconsider Type 1"]
+  },
+  "severe-asthma-biologics": {
+    "id": "severe-asthma-biologics",
+    "diagnosis": "Severe Eosinophilic Asthma — Step 5 Refractory",
+    "acuity": 2,
+    "presentation": "Frequent Exacerbations / OCS-Dependent",
+    "category": "allergy_immunology",
+    "chiefComplaint": "Asthma — 4 ED Visits This Year / On Prednisone 10mg Daily",
+    "treatments": {
+      "orders": [
+        {"id": "eos-workup", "name": "Blood eosinophil count + FeNO (type 2 inflammation marker)", "group": "Biomarkers", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Type 2 eosinophilic asthma: blood eos ≥300/µL or FeNO ≥25 ppb. These predict biologic response. IL-5 pathway: mepolizumab, benralizumab, reslizumab. IL-4/IL-13 pathway: dupilumab. IgE pathway: omalizumab. Biomarker guides biologic selection.",
+          "references": [{"source": "Severe Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542364/", "detail": "Blood eos ≥300 or FeNO ≥25 = type 2 inflammation; guides biologic selection"}]},
+        {"id": "mepolizumab-asthma", "name": "Mepolizumab 100mg SC q4wk (eos ≥300 + OCS-dependent)", "group": "Biologics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anti-IL-5 for eosinophilic asthma. MENSA trial: mepolizumab reduced exacerbations by 47%. SIRIUS trial: 50% reduction in OCS dose. Indicated when blood eos ≥150-300, Step 4-5 therapy, ≥2 exacerbations/year. Takes 3-6 months for full effect.",
+          "references": [{"source": "MENSA Trial NEJM 2014", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1403290", "detail": "Mepolizumab reduced exacerbations 47% in severe eosinophilic asthma"},
+            {"source": "SIRIUS Trial NEJM 2014", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1308659", "detail": "Mepolizumab reduced OCS dose 50% in eosinophilic asthma"}]},
+        {"id": "dupilumab-asthma", "name": "Dupilumab 200mg SC q2wk (eos ≥300 OR FeNO ≥25)", "group": "Biologics", "critical": false, "correct": true, "phase": 1,
+          "teaching": "Anti-IL-4Rα (blocks IL-4 and IL-13). QUEST trial: reduced exacerbations 47-70% in Type 2 asthma. Preferred when asthma + atopic dermatitis or CRS/NP coexist (addresses multiple Type 2 conditions simultaneously).",
+          "references": [{"source": "QUEST Trial NEJM 2018", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1804092", "detail": "Dupilumab reduced exacerbations 47-70% in Type 2 high asthma (QUEST trial)"}]},
+        {"id": "oral-steroid-taper", "name": "OCS taper after biologic initiation", "group": "Steroids", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Goal of biologics: OCS sparing. Taper prednisone by 10% every 4 weeks once biologic initiated. Monitor for adrenal insufficiency during taper (prolonged OCS use suppresses HPA axis).",
+          "references": [{"source": "Severe Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542364/", "detail": "OCS taper after biologic initiation; monitor for adrenal insufficiency"}]}
+      ],
+      "phases": [
+        {"id": "assessment", "label": "Assessment", "auto": true, "vitals": {"BP": "132/82", "HR": "88", "RR": "18", "SpO2": "97%"}, "labHighlights": {"Blood eos": "680/µL", "FeNO": "42 ppb", "IgE": "180 IU/mL", "FEV1": "58% predicted"}},
+        {"id": "biologic-chosen", "label": "Biologic Selected", "vitals": {"BP": "130/80", "HR": "86"}, "labHighlights": {"Decision": "Mepolizumab (eos 680, OCS-dependent)", "OCS taper": "Plan: 10% q4wk"}},
+        {"id": "3-month-f-u", "label": "3-Month Follow-up", "vitals": {"BP": "128/78", "HR": "84"}, "labHighlights": {"Exacerbations": "0 in 3 months", "Blood eos": "120/µL", "OCS": "5mg (taper ongoing)"}}
+      ]
+    },
+    "mustNotMiss": ["Vocal cord dysfunction (mimics asthma — inspiratory stridor, not expiratory; laryngoscopy)","Allergic bronchopulmonary aspergillosis (ABPA) — central bronchiectasis, very high IgE, Aspergillus precipitins","Non-eosinophilic severe asthma — neutrophilic or paucigranulocytic; different mechanism, no biologic benefit","Adrenal suppression from long-term OCS — slow taper, stress dose in illness"],
+    "commonPitfalls": ["Escalating OCS without trying biologics (OCS toxicity: osteoporosis, DM, cataracts, adrenal suppression)","Choosing biologic without checking biomarkers (eos count, FeNO, IgE guide selection)","Not addressing comorbidities (GERD, OSA, rhinitis, obesity all worsen asthma control)","Expecting immediate biologic response (takes 3-6 months for full effect)"],
+    "keyLearningPoints": ["Step 5 refractory asthma: check blood eos + FeNO to phenotype before biologic selection","Anti-IL-5 (mepolizumab/benralizumab): eos ≥300 phenotype; anti-IL-4Rα (dupilumab): eos or FeNO elevated","Biologic goal: eliminate OCS dependence (OCS toxicity > biologic side effect risk at 5+ years)"]
+  },
+  "pyelonephritis-sepsis": {
+    "id": "pyelonephritis-sepsis",
+    "diagnosis": "Urosepsis — E. coli Pyelonephritis with Sepsis",
+    "acuity": 1,
+    "presentation": "Fever / Flank Pain / BP 92/60",
+    "category": "infectious",
+    "chiefComplaint": "Right Flank Pain / Fever / BP 92/60 / Penicillin Allergy Stated",
+    "treatments": {
+      "orders": [
+        {"id": "cx-uro-sep", "name": "Blood cultures x2 + urine culture before antibiotics", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Culture before antibiotics. Urosepsis: urine Gram stain guides empiric therapy within 30 min. Blood cultures positive in ~30% of urosepsis. Culture allows de-escalation — most UTIs are susceptible to narrower agents once identified.",
+          "references": [{"source": "Surviving Sepsis Campaign 2021", "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines/Adult-Patients", "detail": "Cultures before antibiotics; do not delay antibiotics >45 min for culture collection"}]},
+        {"id": "ceftriaxone-uro", "name": "Ceftriaxone 1g IV q24h (PCN allergy: cross-reactivity <2%)", "group": "Antibiotics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Penicillin allergy ≠ cephalosporin allergy. Cross-reactivity between penicillins and cephalosporins is <2% (similar to general population background rate). Ceftriaxone is appropriate for stated penicillin allergy. Only true IgE-mediated penicillin anaphylaxis warrants avoiding all beta-lactams.",
+          "references": [{"source": "Urinary Tract Infection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470414/", "detail": "Cephalosporin-penicillin cross-reactivity <2%; ceftriaxone safe for most PCN allergies"}]},
+        {"id": "ivf-uro-sep", "name": "30mL/kg crystalloid IV within 3h", "group": "Resuscitation", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Sepsis bundle: 30mL/kg in first 3 hours. Urosepsis responds well to antibiotics + fluids. Reassess with dynamic markers — avoid over-resuscitation.",
+          "references": [{"source": "Surviving Sepsis Campaign 2021", "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines/Adult-Patients", "detail": "30mL/kg IVF within 3h; reassess at 1-2L for fluid responsiveness"}]},
+        {"id": "ct-uro-sep", "name": "CT Abdomen/Pelvis (obstructive uropathy / perinephric abscess)", "group": "Imaging", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Urosepsis not responding to antibiotics at 48-72h: get CT to rule out perinephric abscess (needs drainage) or obstructive uropathy (needs stent/nephrostomy). Obstruction + infection = urologic emergency — bacteria trapped behind obstruction.",
+          "references": [{"source": "Urinary Tract Infection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470414/", "detail": "CT for urosepsis not responding to abx: abscess or obstruction requiring drainage"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "92/60", "HR": "124", "RR": "22", "Temp": "39.4°C", "SpO2": "97%"}, "labHighlights": {"WBC": "21,800", "Lactate": "2.8", "UA": "Nitrite+, LE+, WBC casts"}},
+        {"id": "resuscitated", "label": "Resuscitated", "vitals": {"BP": "108/70", "HR": "106", "Temp": "38.6°C"}, "labHighlights": {"Lactate": "1.6", "Blood cx": "Pending (E. coli on Gram)"}},
+        {"id": "improving", "label": "Improving on Abx", "vitals": {"BP": "122/78", "HR": "92", "Temp": "37.8°C"}, "labHighlights": {"Cx": "E. coli — ceftriaxone sensitive", "Duration": "7 days IV then PO"}}
+      ]
+    },
+    "mustNotMiss": ["Perinephric abscess (fever >72h on appropriate antibiotics — needs CT + drainage)","Obstructive uropathy (stone + infection = urologic emergency — decompress urgently)","True beta-lactam anaphylaxis (distinct from 'penicillin allergy' label — get allergy history)","Emphysematous pyelonephritis (diabetic patient, gas in kidney — high mortality, often needs nephrectomy)"],
+    "commonPitfalls": ["Avoiding all beta-lactams for 'penicillin allergy' label (cross-reactivity <2% — over-restriction)","Not getting blood cultures (bacteremia in 30% of urosepsis — guides treatment duration)","Missing obstruction when not improving (CT mandatory if not defervescing at 48-72h)","Stopping antibiotics at 7 days without confirming cultures susceptibility"],
+    "keyLearningPoints": ["Penicillin allergy ≠ cephalosporin allergy (cross-reactivity <2%)","Urosepsis not improving at 48-72h = CT urgently (abscess or obstruction)","Obstruction + infection = urologic emergency — drain before or with antibiotics"]
+  },
+  "alpha-gal-syndrome": {
+    "id": "alpha-gal-syndrome",
+    "diagnosis": "Alpha-Gal Syndrome — Tick-Induced Red Meat Allergy",
+    "acuity": 2,
+    "presentation": "Delayed Anaphylaxis 3-6h After Red Meat",
+    "category": "allergy_immunology",
+    "chiefComplaint": "Hives and Anaphylaxis — Hours After Eating Steak",
+    "treatments": {
+      "orders": [
+        {"id": "epi-ags", "name": "Epinephrine 0.3mg IM (for anaphylaxis)", "group": "Emergency", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Alpha-gal anaphylaxis is IgE-mediated — treat identically to other anaphylaxis. Epinephrine IM (thigh) first-line. The delayed onset (3-6h post-ingestion vs immediate) is the hallmark — but treatment is the same once reaction occurs. Prescribe epi autoinjector on discharge.",
+          "references": [{"source": "Anaphylaxis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482506/", "detail": "Epinephrine IM first-line for alpha-gal anaphylaxis; delayed onset 3-6h is diagnostic clue"}]},
+        {"id": "ags-serum-tryptase", "name": "Serum tryptase (within 1-3h of reaction)", "group": "Diagnostics", "critical": false, "correct": true, "phase": 1,
+          "teaching": "Mast cell tryptase peaks 1-3h post-anaphylaxis, returns to baseline within 24h. Elevated baseline tryptase suggests mastocytosis (increases alpha-gal anaphylaxis severity). Confirm diagnosis with serum alpha-gal IgE.",
+          "references": [{"source": "Anaphylaxis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482506/", "detail": "Serum tryptase within 1-3h; elevated baseline suggests mastocytosis"}]},
+        {"id": "ags-diagnosis", "name": "Alpha-gal IgE (serum specific IgE to galactose-alpha-1,3-galactose)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Confirm alpha-gal syndrome with serum specific IgE to galactose-alpha-1,3-galactose (alpha-gal). Sensitivity ~95%. IgE sensitization is caused by Lone Star tick (Amblyomma americanum) bite — found in southeast US. Level often correlates with reaction severity.",
+          "references": [{"source": "Alpha-gal Syndrome — CDC", "url": "https://www.cdc.gov/ticks/alpha-gal/index.html", "detail": "Alpha-gal IgE confirms diagnosis; Lone Star tick sensitization; 3-6h delayed onset"}]},
+        {"id": "dietary-counseling-ags", "name": "Eliminate mammalian meat + mammalian byproducts", "group": "Management", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Management: strict avoidance of all mammalian meats (beef, pork, lamb, venison) AND mammalian-derived products (gelatin, certain medications, dairy in severe cases). Avoid cetuximab (contains alpha-gal — causes anaphylaxis in sensitized patients). IgE levels may fall over years without re-exposure (tick bites reactivate).",
+          "references": [{"source": "Alpha-gal Syndrome — CDC", "url": "https://www.cdc.gov/ticks/alpha-gal/index.html", "detail": "Avoid mammalian meat and byproducts; cetuximab contains alpha-gal — contraindicated"}]}
+      ],
+      "phases": [
+        {"id": "reaction", "label": "Anaphylaxis", "auto": true, "vitals": {"BP": "86/54", "HR": "128", "RR": "22", "SpO2": "95%"}, "labHighlights": {"Time from meal": "4.5 hours", "Food": "Steak dinner", "Skin": "Urticaria, angioedema"}},
+        {"id": "treated", "label": "Post-Epinephrine", "vitals": {"BP": "108/72", "HR": "98", "SpO2": "98%"}, "labHighlights": {"Tryptase (1h)": "28 ng/mL (elevated)", "Alpha-gal IgE": "Ordered"}},
+        {"id": "discharge-plan", "label": "Discharge Planning", "vitals": {"BP": "118/76", "HR": "84"}, "labHighlights": {"Alpha-gal IgE": "12.4 kUA/L (positive)", "Plan": "Epi-pen, dietary counseling, allergy follow-up"}}
+      ]
+    },
+    "mustNotMiss": ["Cetuximab (used in colorectal cancer) contains alpha-gal antigen — fatal first-dose anaphylaxis in sensitized patients","Mastocytosis as comorbidity (elevated baseline tryptase amplifies reaction severity)","Dairy reactions in severe sensitization (alpha-gal in cow's milk — less common but possible)","Tick bite prevention (re-exposure reactivates sensitization after it wanes)"],
+    "commonPitfalls": ["Missing alpha-gal because reaction is delayed 3-6h (not classic 'immediate' food allergy pattern)","Not asking about tick exposure history (often months before diagnosis)","Not warning about cetuximab risk (oncology patients in southeast US are high-risk)","Failing to prescribe epinephrine autoinjector on discharge after anaphylaxis"],
+    "keyLearningPoints": ["Alpha-gal: delayed anaphylaxis 3-6h after mammalian red meat, caused by Lone Star tick bite","Confirm with serum alpha-gal IgE; correlates with SOUTHERN US tick exposure geography","Cetuximab (colorectal cancer drug) contains alpha-gal — test before using in tick-endemic areas"]
+  },
+  "type2-diabetes-outpatient": {
+    "id": "type2-diabetes-outpatient",
+    "diagnosis": "T2DM — Suboptimal Control / Initiating Semaglutide",
+    "acuity": 3,
+    "presentation": "A1c 9.8% / Obesity / Wants to Avoid Insulin",
+    "category": "endocrine",
+    "chiefComplaint": "T2DM Follow-up / A1c 9.8% / BMI 36",
+    "treatments": {
+      "orders": [
+        {"id": "glp1-t2dm", "name": "Semaglutide 0.25mg SC weekly (titrate) + continue metformin", "group": "GLP-1 Agonist", "critical": true, "correct": true, "phase": 1,
+          "teaching": "GLP-1 receptor agonists for T2DM with A1c >9% AND obesity/CV risk: semaglutide (Ozempic) reduces A1c 1.5-2%, promotes 10-15% weight loss, and reduces MACE in established CVD (SUSTAIN-6, SELECT trial). Start at 0.25mg SC weekly, titrate q4wk. Continue metformin (complementary mechanism).",
+          "references": [{"source": "T2DM Management — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK513253/", "detail": "GLP-1 RA: A1c reduction 1.5-2%, weight loss 10-15%, MACE reduction in CVD (SUSTAIN-6)"},
+            {"source": "SELECT Trial NEJM 2023", "url": "https://www.nejm.org/doi/10.1056/NEJMoa2307563", "detail": "Semaglutide 2.4mg reduced MACE 20% in obesity with CVD"}]},
+        {"id": "sglt2-t2dm", "name": "Empagliflozin 10mg daily (if eGFR ≥30 + CVD/HF/CKD risk)", "group": "SGLT2i", "critical": false, "correct": true, "phase": 1,
+          "teaching": "SGLT2 inhibitors (empagliflozin, dapagliflozin) for T2DM with CV risk or CKD: proven MACE reduction (EMPA-REG), renal protection (CREDENCE), HF hospitalization reduction. Can add to GLP-1 — complementary mechanisms. Hold if eGFR <30.",
+          "references": [{"source": "EMPA-REG OUTCOME NEJM 2015", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1504720", "detail": "Empagliflozin reduced CV mortality 38% in T2DM with established CVD"}]},
+        {"id": "a1c-target-t2dm", "name": "A1c target 7-8% (individualize — not <7% for all)", "group": "Goals", "critical": true, "correct": true, "phase": 1,
+          "teaching": "ADA individualized targets: <7% for most; <8% for elderly, comorbid, or high hypoglycemia risk; <6.5% only in selected young/motivated with low hypoglycemia risk. Tight control reduces microvascular complications but increases hypoglycemia. ACCORD: intensive control increased mortality in high-CV-risk patients.",
+          "references": [{"source": "ADA Standards of Care 2024", "url": "https://diabetesjournals.org/care/issue/47/Supplement_1", "detail": "A1c target 7-8% for most T2DM; individualize; ACCORD: <6% harmful in high-CV-risk patients"}]},
+        {"id": "lifestyle-t2dm", "name": "Medical nutrition therapy + structured exercise", "group": "Lifestyle", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Lifestyle intervention remains cornerstone of T2DM management. 5-7% weight loss reduces A1c 0.5-1%. Mediterranean diet or low-carb (both evidence-based). 150 min/week moderate aerobic + resistance training x2/wk. Referral to diabetes education program.",
+          "references": [{"source": "ADA Standards of Care 2024", "url": "https://diabetesjournals.org/care/issue/47/Supplement_1", "detail": "MNT + 150 min/wk exercise; 5-7% weight loss reduces A1c ~0.5-1%"}]}
+      ],
+      "phases": [
+        {"id": "assessment", "label": "Clinic Visit", "auto": true, "vitals": {"BP": "142/88", "HR": "78", "Weight": "102 kg", "BMI": "36"}, "labHighlights": {"A1c": "9.8%", "eGFR": "72", "Urine ACR": "48 mg/g (microalbuminuria)", "LDL": "118"}},
+        {"id": "medications-started", "label": "New Medications", "vitals": {"BP": "138/84"}, "labHighlights": {"Semaglutide": "0.25mg SC wkly started", "Empagliflozin": "10mg daily added", "Metformin": "Continued 1000mg BID"}},
+        {"id": "3-month-f-u", "label": "3-Month Follow-up", "vitals": {"BP": "128/78", "Weight": "96 kg (-6kg)"}, "labHighlights": {"A1c": "8.1% (down 1.7)", "eGFR": "70", "Tolerating GLP-1": "Nausea improving"}}
+      ]
+    },
+    "mustNotMiss": ["Diabetic kidney disease progression (urine ACR annually; SGLT2i nephroprotective)","Hypoglycemia risk with sulfonylureas or insulin (not with GLP-1 or SGLT2i monotherapy)","GLP-1 side effects: nausea/vomiting (titrate slowly), pancreatitis risk (hold if severe abdominal pain)","Hypertension and dyslipidemia management alongside T2DM"],
+    "commonPitfalls": ["Waiting to start second agent when A1c is 9.8% (needs combination from the start)","Ignoring SGLT2i and GLP-1 in T2DM with CKD/CVD (proven outcomes benefits — underused)","Targeting A1c <7% in elderly/frail (hypoglycemia risk exceeds microvascular benefit)","Not counseling about GI side effects of GLP-1 (nausea — titrate slowly to improve adherence)"],
+    "keyLearningPoints": ["GLP-1 RA + SGLT2i is now the preferred combination for T2DM with obesity + CV/renal risk","SGLT2i: MACE reduction (EMPA-REG), HF reduction (EMPEROR), renal protection (CREDENCE)","A1c target is individualized — not uniform <7% for all patients"]
   }
+
 };
