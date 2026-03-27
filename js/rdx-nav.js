@@ -8,7 +8,7 @@
   window.R = R;
 
   var sec = 'home';
-  if (/casedx|case-browser|virtual-emr|ed-3d|ed-trackboard|night-float|admissions|simroomdx|hospital-3d|training|setting-selector|choose-mode|crt-hub|consult-callback|counseling-scenarios|procedure-lab|board-prep/i.test(path)) sec = 'casedx';
+  if (/casedx|case-browser|virtual-emr|ed-3d|ed-trackboard|night-float|admissions|simroomdx|hospital-3d|training|setting-selector|choose-mode|crt-hub|consult-callback|counseling-scenarios|procedure-lab/i.test(path)) sec = 'casedx';
   else if (/CoachDx|coachdx|mentor-chat|ai-trainer/i.test(path)) sec = 'coachdx';
   else if (/pathway|allergy-pathway|\/modules\/|\/topics\/|\/mechanism\/|study-mode/i.test(path)) sec = 'mechanismdx';
   else if (/dashboard|analytics|milestone|cohort|learning-analytics|ilp/i.test(path)) sec = 'analytics';

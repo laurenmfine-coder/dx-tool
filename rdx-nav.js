@@ -9,7 +9,7 @@
   if (/\/modules\/premed-|premed-hub/i.test(path)) sec = 'premed';
   else if (/\/modules\/raddx-|raddx-hub/i.test(path)) sec = 'raddx';
   else if (/\/modules\/|\/topics\/|\/mechanism\//i.test(path)) sec = 'learn';
-  else if (/\/cases\/|board-prep|training|adventure|\/CoachDx\//i.test(path)) sec = 'practice';
+  else if (/\/cases\/|training|adventure|\/CoachDx\//i.test(path)) sec = 'practice';
   else if (/hospital-3d|ed-3d|night-float|simroomdx|virtual-hospital/i.test(path)) sec = 'simulate';
   else if (/\/tools\/|\/ecg\//i.test(path)) sec = 'tools';
   var saved = localStorage.getItem('rdx-theme') || 'light';
@@ -30,13 +30,12 @@
       '<a href="'+R+'index.html" class="rdx-nav-top'+(sec==='home'?' active':'')+'">Home</a>'+
       dd('Learn', sec==='learn'||sec==='raddx'||sec==='premed',
         di(R+'case-browser.html','\uD83D\uDCDA','Case Library','320+ clinical topics')+
-                        di(R+'study-mode.html','\uD83D\uDCD6','Study Guides','Topic-based study')
+        di(R+'study-mode.html','\uD83D\uDCD6','Study Guides','Topic-based study')
       )+
       dd('Practice', sec==='practice',
         di(R+'case-browser.html','\uD83D\uDDFA\uFE0F','Case Library','320+ interactive scenarios')+
         di(R+'crt-hub.html','\uD83E\uDDE9','Clinical Reasoning Trainer','Step-by-step CRTs')+
-        di(R+'CoachDx/index.html','\uD83E\uDD16','CoachDx','AI clinical coaching')+
-        di(R+'board-prep.html','\uD83D\uDCDD','Board Prep','615 board-style questions')
+        di(R+'CoachDx/index.html','\uD83E\uDD16','CoachDx','AI clinical coaching')
       )+
       dd('Simulate', sec==='simulate',
         di(R+'hospital-3d.html','\uD83C\uDFE5','Virtual Hospital','3D walkthrough — all departments')+

@@ -92,6 +92,7 @@ a{color:inherit;text-decoration:none}button{font-family:var(--ft);cursor:pointer
 </style>
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
+<script src="js/rdx-rpfs.js"></script>
 </head>
 <body>
 <div id="rdx-loader" class="rdx-loading"><div class="rdx-spinner"></div><div class="rdx-load-text">Loading Analytics...</div></div>
@@ -132,7 +133,7 @@ var DEMO_DATA={
   summary:{
     casesCompleted:37, caseDelta:'+8',
     crtSessions:22, crtDelta:'+5',
-    boardQuestions:148, boardDelta:'+32',
+    consultCalls:24, consultDelta:'+8',
     avgAccuracy:74, accDelta:'+3%',
     hoursLogged:28.5, hoursDelta:'+6.2'
   },
@@ -198,6 +199,19 @@ async function loadMyAnalytics() {
       // Heatmap from live data
       var heatmap = await RDX.analytics.myWeeklyActivity(12);
       if (heatmap && heatmap.length > 0) DATA.heatmap = heatmap;
+      // Pull live RPFS data
+      if (window.RDX_RPFS && RDX_RPFS.getSummary) {
+        var rpfsLive = RDX_RPFS.getSummary();
+        if (rpfsLive && rpfsLive.dimensions) {
+          DATA.rpfs = rpfsLive.dimensions;
+          DATA.summary.crtSessions = rpfsLive.totalSessions || DATA.summary.crtSessions;
+        }
+      }
+      // Pull consult call count from RPFS events
+      if (window.RDX_RPFS && RDX_RPFS.getSummary) {
+        var consultSummary = RDX_RPFS.getSummary('Consult Callback');
+        if (consultSummary) DATA.summary.consultCalls = consultSummary.totalSessions;
+      }
       render();
     }
   } catch(e) { console.warn('[Analytics] Live load failed:', e); }
@@ -232,7 +246,7 @@ function rOverview(){
   h+='<div class="stat-row">';
   h+='<div class="stat-card"><div class="stat-num" style="color:var(--bl)">'+s.casesCompleted+'</div><div class="stat-label">Cases</div><div class="stat-delta up">'+s.caseDelta+' this period</div></div>';
   h+='<div class="stat-card"><div class="stat-num" style="color:var(--pp)">'+s.crtSessions+'</div><div class="stat-label">CRT Sessions</div><div class="stat-delta up">'+s.crtDelta+'</div></div>';
-  h+='<div class="stat-card"><div class="stat-num" style="color:var(--am)">'+s.boardQuestions+'</div><div class="stat-label">Board Qs</div><div class="stat-delta up">'+s.boardDelta+'</div></div>';
+  h+='<div class="stat-card"><div class="stat-num" style="color:var(--am)">'+s.consultCalls+'</div><div class="stat-label">Consult Calls</div><div class="stat-delta up">'+s.consultDelta+'</div></div>';
   h+='<div class="stat-card"><div class="stat-num" style="color:var(--gn)">'+s.avgAccuracy+'%</div><div class="stat-label">Avg Accuracy</div><div class="stat-delta up">'+s.accDelta+'</div></div>';
   h+='<div class="stat-card"><div class="stat-num" style="color:var(--tx)">'+s.hoursLogged+'</div><div class="stat-label">Hours</div><div class="stat-delta up">'+s.hoursDelta+'h</div></div>';
   h+='</div>';
@@ -395,25 +409,37 @@ function rRecs(){
   });
   h+='</div>';
 
-  // RPFS-based recommendations
+  // RPFS-based recommendations — use live data if available, else demo
+  var liveSummary = (window.RDX_RPFS && RDX_RPFS.getSummary) ? RDX_RPFS.getSummary() : null;
+  var rpfsSource = (liveSummary && liveSummary.dimensions) ? liveSummary.dimensions : DATA.rpfs;
   var rpfsWeak=[];
-  for(var dim in DATA.rpfs){if(DATA.rpfs[dim].score<65)rpfsWeak.push({dim:dim,score:DATA.rpfs[dim].score})}
+  for(var dim in rpfsSource){
+    var sc = rpfsSource[dim].score !== undefined ? rpfsSource[dim].score : rpfsSource[dim];
+    if(sc < 65) rpfsWeak.push({dim:dim, score:sc});
+  }
   rpfsWeak.sort(function(a,b){return a.score-b.score});
 
   if(rpfsWeak.length>0){
     h+='<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--am)">Reasoning Skills to Develop</h3>';
     var rpfsRecs={
-      'Bayesian Updating':'Practice with cases where pre-test probability matters. Focus on likelihood ratios in Board Prep. Complete CRT cases with evolving presentations.',
-      'Metacognition':'After each case, review your reasoning path in CoachDx. Identify where you anchored, premature closure, or availability bias occurred.',
-      'Diagnostic Verification':'Practice the "pause and verify" technique: before committing to a diagnosis, actively seek disconfirming evidence. Use CRT trainers with deliberate practice.',
-      'Hypothesis Generation':'Expand your differential early. Use MechanismDx to build stronger illness scripts for conditions you encounter less frequently.',
-      'Cognitive Flexibility':'Practice with cases that have unexpected pivots. Night Float simulator forces rapid reprioritization. Consult Callback challenges your assumptions.'
+      'Data Gathering':        {rec:'Focus on chart review before ordering. Try the sepsis and PE cases — both reward methodical data gathering over rapid pattern matching.',  link:'virtual-emr.html?case=sepsisseptic-shock', tool:'Virtual EMR'},
+      'Problem Representation':{rec:'Practice one-liner synthesis. After reading each chart, write a 1-sentence problem representation before looking at the diagnosis. CoachDx will push you on framing.', link:'CoachDx/index.html', tool:'CoachDx'},
+      'Hypothesis Generation': {rec:'Expand your DDx width early. Try MechanismDx, then apply it in cases like aortic dissection or PE — where narrow early anchoring is lethal.', link:'pathway.html', tool:'MechanismDx'},
+      'Diagnostic Verification':{rec:'Before submitting a diagnosis, list one disconfirming finding. Night Float cases reward this habit under time pressure.', link:'night-float.html', tool:'Night Float'},
+      'Bayesian Updating':     {rec:'Work through cases where your initial hypothesis is plausible but wrong. Consult Callback forces you to re-examine assumptions under specialist scrutiny.', link:'consult-callback.html', tool:'Consult Callback'},
+      'Cognitive Flexibility':  {rec:'Try patient continuity chains — following one patient through multiple encounters forces you to update your mental model as new data arrives.', link:'virtual-emr.html?setting=ed', tool:'Patient Continuity'},
+      'Illness Script Matching':{rec:'Spend 20 minutes in MechanismDx on a system you find challenging. Build the pathophysiology chain, then test it immediately with a case.', link:'pathway.html', tool:'MechanismDx'},
+      'Metacognition':         {rec:'After each case, ask: where did I anchor? Where did I seek disconfirming evidence? Naming the bias is the first step to correcting it.', link:'CoachDx/mentor-chat.html?q=Cognitive+bias+in+diagnosis', tool:'CoachDx'}
     };
     rpfsWeak.forEach(function(w){
-      var rec=rpfsRecs[w.dim]||'Continue practice across all reasoning tools to develop this dimension.';
-      h+='<div style="padding:12px;background:var(--amb);border:1px solid rgba(217,119,6,.2);border-radius:10px;margin-bottom:8px">';
-      h+='<div style="font-size:12px;font-weight:700;color:var(--am)">'+e(w.dim)+' — Score: '+w.score+'</div>';
-      h+='<div style="font-size:12px;color:var(--ts);margin-top:4px;line-height:1.6">'+e(rec)+'</div>';
+      var r=rpfsRecs[w.dim]||{rec:'Continue practice across all reasoning tools to develop this dimension.',link:'casedx.html',tool:'Case Library'};
+      h+='<div style="padding:14px;background:var(--amb);border:1px solid rgba(217,119,6,.25);border-radius:10px;margin-bottom:10px">';
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
+      h+='<span style="font-size:12px;font-weight:700;color:var(--am)">'+e(w.dim)+'</span>';
+      h+='<span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;background:rgba(217,119,6,.15);color:var(--am)">Score: '+w.score+'</span>';
+      h+='</div>';
+      h+='<div style="font-size:12px;color:var(--ts);line-height:1.6;margin-bottom:8px">'+e(r.rec)+'</div>';
+      h+='<a href="'+r.link+'" style="font-size:11px;font-weight:700;color:var(--am);text-decoration:none;border:1px solid rgba(217,119,6,.3);padding:4px 10px;border-radius:6px">→ Go to '+e(r.tool)+'</a>';
       h+='</div>';
     });
   }

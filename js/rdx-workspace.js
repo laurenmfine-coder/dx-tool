@@ -251,7 +251,7 @@
       '<div class="wiz-options">' +
         '<button class="wiz-opt" data-role="student" onclick="rdxWizPick(this,\'role\')"><span class="opt-icon">🎓</span><div><div class="opt-label">Medical Student</div><div class="opt-desc">MS1–MS4, building clinical foundations</div></div></button>' +
         '<button class="wiz-opt" data-role="resident" onclick="rdxWizPick(this,\'role\')"><span class="opt-icon">🩺</span><div><div class="opt-label">Resident</div><div class="opt-desc">PGY1–3, expanding clinical reasoning</div></div></button>' +
-        '<button class="wiz-opt" data-role="fellow" onclick="rdxWizPick(this,\'role\')"><span class="opt-icon">🔬</span><div><div class="opt-label">Fellow / Advanced Learner</div><div class="opt-desc">Subspecialty training, board prep</div></div></button>' +
+        '<button class="wiz-opt" data-role="fellow" onclick="rdxWizPick(this,\'role\')"><span class="opt-icon">🔬</span><div><div class="opt-label">Fellow / Advanced Learner</div><div class="opt-desc">Subspecialty training, advanced cases</div></div></button>' +
         '<button class="wiz-opt" data-role="educator" onclick="rdxWizPick(this,\'role\')"><span class="opt-icon">👨‍🏫</span><div><div class="opt-label">Educator / Faculty</div><div class="opt-desc">Teaching, case building, assessment</div></div></button>' +
       '</div>' +
       '<div class="wiz-nav"><button class="wiz-skip" onclick="rdxWizSkip()">Skip setup</button><button class="wiz-next" id="wizNext0" onclick="rdxWizStep(1)" disabled>Next →</button></div>' +

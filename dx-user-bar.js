@@ -39,7 +39,6 @@
     { label: '🏥 Hospital', href: 'hospital-3d.html' },
     { label: '📋 Cases', href: 'case-browser.html' },
     { label: '📊 Dashboard', href: 'analytics-dashboard.html' },
-    { label: '🧪 Board Prep', href: 'board-prep.html' }
   ];
 
   nav.forEach(function(item) {
