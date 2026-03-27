@@ -1903,7 +1903,7 @@ window.CRT_DATA = {
           },
           "examNote": "Dramatic improvement. Speaking full sentences. Crackles improving from apices.",
           "aiPatientUpdate": "Oh God, I can finally breathe. That mask is uncomfortable but I can get air again. I'm peeing a lot — is that normal?",
-          "teaching": "✅ \"3 Ls\" of acute HF: Lasix, Lowers preload (NTG), Lungs (BiPAP). Good UOP is best marker. Admit tele/ICU. Identify precipitant."
+          "teaching": "Good clinical response. Continue IV furosemide, monitor daily weights and electrolytes. Identify the decompensation trigger (dietary indiscretion, medication non-adherence, new arrhythmia, ischemia). Before discharge, optimize GDMT: ACEi/ARNI, beta-blocker, MRA, and SGLT2i all reduce mortality."
         }
       ],
       "pitfallEvents": [
@@ -5438,7 +5438,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "Alkalinize the urine to \"ion trap\" salicylate in renal tubules, enhancing excretion. Target urine pH >7.5. Also alkalinize serum to keep salicylate ionized (out of CNS).",
+          "teaching": "Urine alkalinization with IV sodium bicarbonate traps salicylate in the renal tubule (ion trapping) — at alkaline urine pH 7.5-8.0, salicylate is ionized and cannot be reabsorbed, dramatically increasing elimination. Target urine pH 7.5-8.0 with NaHCO3 infusion. Always replete potassium concurrently — hypokalemia prevents urine alkalinization as kidneys preferentially excrete H+ over K+.",
           "references": [
             {
               "source": "Salicylate Toxicity — StatPearls",
@@ -6169,7 +6169,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "MRI is the gold standard. THIS IS EMERGENT — not \"when MRI is available.\" Cauda equina progresses to permanent paraplegia. Must get imaging within 1-2 hours.",
+          "teaching": "MRI whole spine with gadolinium is the definitive imaging for cauda equina syndrome — confirms level, extent, and guides surgical planning. Whole spine required because multilevel disease is common. Do NOT perform LP if SEA or cord compression is suspected — imaging first always.",
           "references": [
             {
               "source": "Cauda Equina Syndrome — StatPearls",
@@ -6233,7 +6233,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "CRITICAL exam finding — decreased perianal sensation (\"saddle anesthesia\") and decreased rectal tone are hallmarks of cauda equina. Must document before surgery.",
+          "teaching": "Saddle anesthesia (decreased sensation in perineum and inner thighs) is the pathognomonic finding of cauda equina syndrome. Also check: anal sphincter tone, voluntary anal contraction, urinary retention (post-void residual). These findings mandate emergent MRI and surgical consultation — every hour of delay worsens bowel/bladder recovery prognosis.",
           "references": [
             {
               "source": "Cauda Equina Syndrome — StatPearls",
@@ -16599,7 +16599,7 @@ window.CRT_DATA = {
           },
           "examNote": "Pain improved. Tolerating sips. BISAP 1.",
           "aiPatientUpdate": "Pain medicine helping. Can I try broth?",
-          "teaching": "Mild pancreatitis. Continue IVF, analgesia, advance diet. Resolves 3-5d."
+          "teaching": "Mild pancreatitis (BISAP 0-1, no organ failure): continue aggressive LR hydration, multimodal analgesia, advance oral diet as tolerated. Early oral feeding reduces hospital stay and complications. Re-evaluate at 48-72 hours — 15% of initially mild pancreatitis progresses to severe. If gallstone etiology: cholecystectomy before discharge."
         }
       ],
       "pitfallEvents": []
@@ -16612,10 +16612,7 @@ window.CRT_DATA = {
       "CT not for dx; delay 72h+",
       "BISAP predicts severity"
     ],
-    "mustNotMiss": [
-      "Gallstone pancreatitis (ALT>150)",
-      "Necrotizing pancreatitis"
-    ],
+    "mustNotMiss": ["Gallstone pancreatitis (ALT>150)", "Necrotizing pancreatitis", "Hypocalcemia — saponification of peripancreatic fat consumes calcium; check and replete in severe pancreatitis", "Abdominal compartment syndrome — intra-abdominal pressure >20 mmHg with organ failure; surgical consultation if bladder pressure elevated"],
     "commonPitfalls": [
       "Prophylactic abx",
       "Day-1 CT",
@@ -16783,7 +16780,7 @@ window.CRT_DATA = {
           },
           "examNote": "Full sentences. Wheezing decreased.",
           "aiPatientUpdate": "I can breathe much better. Ran out of inhaler.",
-          "teaching": "Good response. Discharge: prednisone burst 5d, refill controller, f/u 1wk."
+          "teaching": "Good clinical response — SpO2 normalizing, wheeze improving. For discharge: prednisone burst 40-60mg PO x5 days, refill albuterol MDI with spacer, ensure ICS-LABA controller is prescribed if not already. Schedule primary care or pulmonology follow-up within 1-4 weeks. Assess adherence barriers and provide written asthma action plan."
         }
       ],
       "pitfallEvents": [
@@ -16963,7 +16960,7 @@ window.CRT_DATA = {
           },
           "examNote": "Breathing easier. Crackles improved.",
           "aiPatientUpdate": "I can breathe better. Stopped water pill last week.",
-          "teaching": "Good response. Continue furosemide. ID trigger. Optimize GDMT before DC."
+          "teaching": "Good clinical response to diuresis. Continue furosemide titrated to UO 1-3 mL/kg/hr. Identify the decompensation trigger (dietary sodium excess, medication non-adherence, AF with RVR, new ischemia, infection). Before discharge: ensure BNP is trending down and weight is at dry weight target. Optimize GDMT: all four pillars (ACEi/ARNI, BB, MRA, SGLT2i) reduce mortality."
         }
       ],
       "pitfallEvents": [
@@ -23549,15 +23546,8 @@ window.CRT_DATA = {
       "1.5-inch needle ensures IM delivery",
       "Urticaria = histamine-mediated"
     ],
-    "mustNotMiss": [
-      "Failed epi from short needle",
-      "Airway compromise"
-    ],
-    "commonPitfalls": [
-      "SubQ route in obesity",
-      "Not recognizing auto-injector failure",
-      "Single epi-pen (need 2)"
-    ]
+    "mustNotMiss": ["Failed epi from short needle", "Airway compromise", "Laryngeal/glottic angioedema — voice change, stridor, drooling = airway emergency; intubate early before airway closes", "Failed epinephrine from inadequate needle length in obesity — confirm thigh injection reached muscle; repeat if no response at 5-15 min"],
+    "commonPitfalls": ["SubQ route in obesity", "Not recognizing auto-injector failure", "Single epi-pen (need 2)", "Subcutaneous (not IM) injection of epinephrine in high BMI — subcutaneous depot delays absorption dramatically; use 40mm needle", "Antihistamines as first-line for angioedema — H1 antihistamines do not work quickly enough for acute angioedema; epinephrine is first-line"]
   },
   "idiopathic-angioedema-v2": {
     "id": "idiopathic-angioedema-v2",
@@ -23875,7 +23865,7 @@ window.CRT_DATA = {
           },
           "examNote": "Good response. VIT referral. Social work for access.",
           "aiPatientUpdate": "I can't afford an EpiPen. I can't quit my job.",
-          "teaching": "VIT 98% effective. Address access barriers. Workers comp for occupational."
+          "teaching": "Venom immunotherapy (VIT) is 98% effective at preventing future anaphylaxis — the most effective allergen immunotherapy available. Address insurance/access barriers proactively. For occupational exposures (beekeepers, landscapers): initiate workers' compensation process and return-to-work planning with VIT as the pathway. Discuss rush or ultra-rush VIT protocols for rapid protection."
         }
       ],
       "pitfallEvents": [
@@ -24050,7 +24040,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Resolved. ACE-I identified. Hold ACE-I on VIT days.",
           "aiPatientUpdate": "I never had a problem before. What changed?",
-          "teaching": "ACE-I amplifies VIT reactions. Hold on VIT days or switch to ARB."
+          "teaching": "ACE inhibitors block breakdown of bradykinin, which amplifies anaphylaxis severity. For patients on ACE-I receiving venom immunotherapy: hold ACE-I on injection days, or switch to an ARB (which does not affect bradykinin). This reduces reaction severity if a systemic reaction occurs during VIT."
         }
       ],
       "pitfallEvents": [
@@ -24069,15 +24059,8 @@ window.CRT_DATA = {
       "Do NOT stop VIT",
       "Dose-adjust after reaction"
     ],
-    "mustNotMiss": [
-      "Severe reaction from ACE-I",
-      "Discontinuing VIT"
-    ],
-    "commonPitfalls": [
-      "Permanently stopping VIT",
-      "Not identifying ACE-I",
-      "No premedication"
-    ]
+    "mustNotMiss": ["Severe reaction from ACE-I", "Discontinuing VIT", "ACE inhibitor amplification of VIT reactions — bradykinin potentiation raises reaction risk; hold ACE-I on VIT injection days or switch to ARB", "Systemic reaction during VIT — treat as anaphylaxis; VIT dose reduction protocol needed; do not permanently stop VIT"],
+    "commonPitfalls": ["Permanently stopping VIT", "Not identifying ACE-I", "No premedication", "Permanently stopping VIT after a systemic reaction — VIT is still beneficial; dose adjustment and premedication protocol allow continuation", "Not identifying ACE-I as risk factor — ACE inhibitors are a modifiable risk; hold on injection days or switch drug class"]
   },
   "severe-allergic-reaction-v2": {
     "id": "severe-allergic-reaction-v2",
@@ -24223,7 +24206,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Resolved. Standard premed failed. Different contrast agent + extended premed or alternative imaging.",
           "aiPatientUpdate": "But I took all the premedication pills they gave me!",
-          "teaching": "Premedication reduces but does NOT eliminate reactions. 1-2% breakthrough."
+          "teaching": "Premedication with antihistamines and corticosteroids reduces but does not eliminate hypersensitivity reactions to contrast or other infusions — breakthrough reactions still occur in 1-2% of premedicated patients. Always have epinephrine and resuscitation equipment immediately available regardless of premedication. Premedication does not change reaction severity when reactions do occur."
         }
       ],
       "pitfallEvents": []
@@ -24400,13 +24383,8 @@ window.CRT_DATA = {
       "Delabeling reduces broad-spectrum use",
       "Skin test NPV >95%"
     ],
-    "mustNotMiss": [
-      "True anaphylaxis history (dont challenge without testing)"
-    ],
-    "commonPitfalls": [
-      "Permanent avoidance without testing",
-      "No allergist referral"
-    ]
+    "mustNotMiss": ["True anaphylaxis history (dont challenge without testing)", "True anaphylaxis history requiring tryptase — serum tryptase drawn 1-3h post-reaction confirms mast cell activation", "Concurrent beta-blocker use — blunts epinephrine response; may need glucagon 1mg IV if epi fails", "Kounis syndrome — anaphylaxis-induced acute MI; get ECG in all severe anaphylaxis with chest pain", "Biphasic anaphylaxis — observe minimum 4-6 hours; 15-23% have a second wave 1-72h later"],
+    "commonPitfalls": ["Permanent avoidance without testing", "No allergist referral", "Permanent avoidance without skin testing or challenge to confirm true allergy", "Discharging after apparent recovery without prescribing epinephrine autoinjector", "Attributing reaction to something 'less important' than the true allergen (e.g. blaming exercise, not the food eaten beforehand)"]
   },
   "eczema-herpeticum-v2": {
     "id": "eczema-herpeticum-v2",
@@ -26239,8 +26217,8 @@ window.CRT_DATA = {
       "CVID: recurrent sinopulmonary infections + low immunoglobulins + poor vaccine response. IVIG is lifesaving. Insurance advocacy essential.",
       "Every hospitalization for recurrent pneumonia that delays CVID diagnosis causes irreversible bronchiectasis. The diagnostic criteria are simple: low IgG+IgA/IgM, poor vaccine response, age >4 — screen early."
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": ["Enteroviral encephalitis — CVID patients lack antibody protection against enteroviruses; can be fatal; IVIG is both treatment and prevention", "Granulomatous-lymphocytic interstitial lung disease (GLILD) — occurs in 20% of CVID; CT chest shows nodules/infiltrates; requires immunosuppression beyond IVIG", "GI complications — chronic diarrhea, villous atrophy, IBD-like disease, Giardia, nodular lymphoid hyperplasia", "Autoimmunity — thrombocytopenia, hemolytic anemia, and inflammatory arthritis occur in 20-30% of CVID despite hypogammaglobulinemia"],
+    "commonPitfalls": ["Diagnosing as recurrent 'bad luck' infections without measuring immunoglobulins — average diagnostic delay is 7 years", "Underdosing IVIG — trough IgG should be >500-700 mg/dL (higher for bronchiectasis); dose every 3-4 weeks", "Attributing malabsorption to celiac disease without checking IgA (IgA-deficient patients have false-negative tissue transglutaminase)", "Missing lymphoma risk — CVID carries 30-fold increased lymphoma risk; unexplained lymphadenopathy needs biopsy"]
   },
   "nsaid-hypersensitivity-v2": {
     "id": "nsaid-hypersensitivity-v2",
@@ -26395,8 +26373,8 @@ window.CRT_DATA = {
       "AERD: aspirin desensitization is definitive treatment. Reduces polyp recurrence, improves asthma + smell. Avoidance alone is suboptimal.",
       "Aspirin desensitization followed by daily aspirin 650 mg reduces nasal polyp recurrence by 40% and improves asthma control — it converts a pharmacological intolerance into long-term disease modification."
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": ["Asthma deterioration from any aspirin or NSAID — AERD patients can have life-threatening bronchospasm from even small doses", "Anosmia as the earliest AERD symptom — chronic rhinosinusitis with nasal polyps causing anosmia often precedes asthma by years", "Cross-reactivity: ALL non-selective COX-1 inhibitors trigger reactions (not aspirin-specific); only COX-2-selective NSAIDs are safe", "Post-desensitization aspirin continuation — stopping aspirin after desensitization causes re-sensitization within days"],
+    "commonPitfalls": ["Labeling as 'aspirin allergy' — AERD is a pharmacological intolerance (COX-1 inhibition), not IgE-mediated allergy; no skin test or IgE needed", "Using ibuprofen or naproxen thinking they are safer than aspirin (all non-selective COX-1 inhibitors cross-react)", "Not referring for desensitization — aspirin desensitization + daily aspirin is disease-modifying for nasal polyps and asthma", "Prescribing meloxicam or diclofenac without noting partial COX-2 selectivity (can still cause reactions at higher doses)"]
   },
   "penicillin-allergy-delabeling-v2": {
     "id": "penicillin-allergy-delabeling-v2",
@@ -26551,8 +26529,8 @@ window.CRT_DATA = {
       "PCN skin testing safe in pregnancy. Enables optimal GBS prophylaxis. Clindamycin has 30-40% resistance.",
       "Penicillin delabeling in pregnancy is a patient safety intervention — labeled patients receive inferior GBS prophylaxis (clindamycin 30-40% resistant) leading to neonatal GBS infection. Skin testing is safe in the 2nd trimester."
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": ["True anaphylaxis history — must distinguish vague 'rash' from prior anaphylaxis; full anaphylaxis requires skin testing before challenge", "Cephalosporin cross-reactivity is lower than historically taught (<2%) and based on side-chain similarity, not the beta-lactam ring", "Failed delabeling worsens antibiotic stewardship — labeled patients receive more fluoroquinolones, clindamycin, vancomycin (worse outcomes in MRSA, C. diff)", "GBS prophylaxis in penicillin-allergic pregnant women — delabeling enables optimal GBS coverage (PCN is first-line)"],
+    "commonPitfalls": ["Accepting reported 'penicillin allergy' without evaluation — over 95% of labeled patients can tolerate penicillin", "Skin testing without a qualified allergist — misinterpreted reactions cause harm; send to allergist for formal protocol", "No follow-up after negative test — patients must be told the label is removed and instructed to update all medical records", "Not challenging after negative skin test — negative skin test alone does not confirm tolerance; graded oral challenge is required"]
   },
   "peanut-allergy-anaphylaxis-v2": {
     "id": "peanut-allergy-anaphylaxis-v2",
@@ -27770,8 +27748,8 @@ window.CRT_DATA = {
       "EoE: average 7-year diagnostic delay. EGD with biopsies. PPI trial or swallowed steroid. Elimination diet. Dilation for strictures.",
       "Fibrostenotic EoE (strictures, rings, narrow-caliber esophagus) is the end result of untreated inflammation — early diagnosis and treatment prevents this irreversible complication. Esophageal dilation treats strictures but not inflammation."
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": ["Food impaction emergency — if patient presents with complete esophageal obstruction from food, urgent endoscopy required; do not induce vomiting", "Stricture formation from undertreated fibrostenotic EoE — fibrostenotic subtype needs dilation in addition to medical therapy", "PPI-responsive esophageal eosinophilia — PPI trial first (8 weeks); EoE and GERD overlap; ~30% respond to PPI alone", "Concomitant food allergy or environmental allergy — identify and address triggers for best outcomes"],
+    "commonPitfalls": ["Biopsy only from the distal esophagus — EoE can be patchy; biopsy proximal AND distal esophagus (≥15 eos/HPF in any area = EoE)", "Diagnosing as GERD and treating with PPI alone without endoscopy — EoE and GERD coexist; abnormal after PPI trial requires biopsy", "Not repeating EGD to confirm response — histologic response (not just symptom improvement) guides therapy", "Empiric food elimination without dietitian guidance — 6-food elimination diet is nutritionally complex; needs structured support"]
   },
   "eoe-pediatric-v2": {
     "id": "eoe-pediatric-v2",
@@ -27926,8 +27904,8 @@ window.CRT_DATA = {
       "Pediatric EoE masquerading as picky eating. Children develop adaptive behaviors (slow eating, soft foods, excessive water). Validate, dont blame.",
       "Pediatric EoE presents as 'picky eating' because children adaptively modify their behavior (small bites, excessive liquids, prolonged meals, avoidance of meat/bread) — ask specifically about feeding behaviors, not just symptoms."
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": ["Failure to thrive from swallowing avoidance — children with EoE often reduce eating to avoid symptoms; presents as poor weight gain", "Behavioral 'picky eating' masking organic disease — EoE symptoms in children are vague; average 6-year diagnostic delay", "Elemental formula as both diagnostic and treatment tool — in infants, elemental formula is first-line and diagnostic", "Family history of EoE or atopic disease — EoE has 40-50% familial clustering; check family history"],
+    "commonPitfalls": ["Attributing symptoms to behavioral feeding disorder without endoscopy in atopic child with dysphagia", "Not biopsying multiple esophageal levels (patchy disease; proximal and distal biopsies required)", "Dietary management without specialist support — elimination diets in children risk nutritional deficiency; dietitian essential", "Swallowed fluticasone — different from inhaled; patient must swallow and not rinse; requires specific instruction"]
   },
   "allergic-conjunctivitis-severe": {
     "id": "allergic-conjunctivitis-severe",
@@ -28082,14 +28060,8 @@ window.CRT_DATA = {
       "Avoid unsupervised topical steroids",
       "Identify and avoid triggers"
     ],
-    "mustNotMiss": [
-      "Bacterial conjunctivitis masquerading as allergic",
-      "Keratoconus from chronic rubbing"
-    ],
-    "commonPitfalls": [
-      "Topical steroids without monitoring",
-      "Topical decongestants long-term"
-    ]
+    "mustNotMiss": ["Bacterial conjunctivitis masquerading as allergic", "Keratoconus from chronic rubbing", "Vernal keratoconjunctivitis — giant papillae + shield ulcers require urgent ophthalmology; vision-threatening", "Bacterial conjunctivitis (copious purulent discharge vs allergic mucoid discharge; unilateral pattern)", "Keratoconus from chronic eye rubbing — allergic eye disease is a risk factor; refer to ophthalmology if corneal thinning suspected"],
+    "commonPitfalls": ["Topical steroids without monitoring", "Topical decongestants long-term", "Long-term topical decongestants (tetrahydrozoline/naphazoline) — rebound hyperemia and medicamentosa with chronic use", "Topical steroids without IOP monitoring — can cause steroid-induced glaucoma; monitor IOP", "Contact lenses during active allergic conjunctivitis — delay contact lens wear until resolved"]
   },
   "allergic-rhinitis-uncontrolled": {
     "id": "allergic-rhinitis-uncontrolled",
@@ -28244,14 +28216,8 @@ window.CRT_DATA = {
       "Immunotherapy is disease-modifying",
       "Avoid topical decongestants >3 days"
     ],
-    "mustNotMiss": [
-      "Rhinitis medicamentosa from decongestant overuse",
-      "Nasal polyps"
-    ],
-    "commonPitfalls": [
-      "Long-term decongestants",
-      "No allergy testing"
-    ]
+    "mustNotMiss": ["Rhinitis medicamentosa from decongestant overuse", "Nasal polyps", "Rhinitis medicamentosa from topical decongestant overuse — classic rebound congestion; discontinue decongestant, wean with INCS", "Nasal polyps (bilateral obstruction, anosmia, no response to antihistamines) — CT sinus + ENT/allergy referral", "Uncontrolled asthma driven by untreated rhinitis — united airway; treat rhinitis to improve asthma control", "Septal deviation or turbinate hypertrophy requiring ENT evaluation"],
+    "commonPitfalls": ["Long-term decongestants", "No allergy testing", "Oral antihistamine before intranasal corticosteroid — INCS is more effective; use as first-line, not second", "Avoiding allergy testing — skin prick or specific IgE identifies triggers and guides immunotherapy candidacy", "Expecting immediate INCS response — intranasal steroids take 2-4 weeks for peak effect; counsel patients on timeline"]
   },
   "atopic-dermatitis-severe": {
     "id": "atopic-dermatitis-severe",
@@ -28406,14 +28372,8 @@ window.CRT_DATA = {
       "Dupilumab for refractory",
       "Bleach baths reduce staph"
     ],
-    "mustNotMiss": [
-      "Eczema herpeticum",
-      "Secondary bacterial infection"
-    ],
-    "commonPitfalls": [
-      "Oral steroids for AD",
-      "Steroid phobia leading to undertreatment"
-    ]
+    "mustNotMiss": ["Eczema herpeticum", "Secondary bacterial infection", "Eczema herpeticum — diffuse punched-out vesicles on inflamed skin = HSV; requires systemic acyclovir, hold TCS", "Secondary bacterial infection (S. aureus colonizes >90% of AD skin) — signs: honey-crusting, weeping, fever; add antibiotics", "Contact sensitization — chronic AD can develop contact allergy to lanolin, neomycin, preservatives; patch test if poor response", "Sleep deprivation and psychiatric comorbidity — severe AD causes 60% sleep disruption; address quality of life formally"],
+    "commonPitfalls": ["Oral steroids for AD", "Steroid phobia leading to undertreatment", "Oral corticosteroids for AD — temporary benefit with rebound flare; causes HPA axis suppression; avoid", "Steroid phobia leading to undertreatment — under-treated AD leads to infection and biologics earlier; use TCS appropriately", "Not trialing topical calcineurin inhibitors for face/intertriginous areas — TCA/pimecrolimus avoids skin atrophy in sensitive areas"]
   },
   "chronic-spontaneous-urticaria": {
     "id": "chronic-spontaneous-urticaria",
@@ -28542,7 +28502,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Updose H1, then omalizumab. Screen thyroid. Avoid chronic steroids.",
           "aiPatientUpdate": null,
-          "teaching": "Updose H1, then omalizumab. Screen thyroid. Avoid chronic steroids."
+          "teaching": "CSU management ladder: non-sedating H1 antihistamine daily (step 1) → updose to 4x standard dose (step 2) → add omalizumab 300mg SC monthly (step 3). Screen for thyroid autoimmunity (anti-TPO, anti-thyroglobulin) — present in 25% of CSU. Avoid chronic oral corticosteroids: rebound flare on discontinuation and long-term side effects."
         }
       ],
       "pitfallEvents": []
@@ -28716,7 +28676,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Patch test to identify allergen. Workplace accommodation.",
           "aiPatientUpdate": null,
-          "teaching": "Patch test to identify allergen. Workplace accommodation."
+          "teaching": "Patch testing to the standard series PLUS occupation-specific allergens is essential for ACD diagnosis — clinical presentation cannot reliably distinguish ACD from ICD. Serial readings at 48h AND 96-7 days are required (late reactions common with metals, PPD). Specific allergen identification guides both treatment (complete avoidance) and workplace accommodation or career counseling. Prescribe topical steroids and barrier cream while avoiding allergen."
         }
       ],
       "pitfallEvents": []
@@ -28890,7 +28850,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "CVID: IVIG is lifesaving.",
           "aiPatientUpdate": null,
-          "teaching": "CVID: IVIG is lifesaving."
+          "teaching": "CVID is defined by markedly reduced IgG plus low IgA and/or IgM, with failure to produce specific antibodies after vaccination, after ruling out secondary causes. IVIG replacement (400-600 mg/kg q3-4 weeks) prevents recurrent sinopulmonary infections and bronchiectasis. Non-infectious complications (granulomas, autoimmunity, lymphoma) cause substantial CVID morbidity and require active surveillance."
         }
       ],
       "pitfallEvents": []
@@ -29079,7 +29039,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "EGD with biopsy. PPI trial or swallowed steroid.",
           "aiPatientUpdate": null,
-          "teaching": "EGD with biopsy. PPI trial or swallowed steroid."
+          "teaching": "EGD with biopsy is the only way to diagnose EoE — clinical features alone are insufficient. Diagnostic criteria: ≥15 eosinophils per HPF on esophageal biopsy AFTER 8-week high-dose PPI trial (to exclude PPI-responsive esophageal eosinophilia). Biopsies must be taken from at least 2 esophageal levels due to patchy distribution. Treat with dietary elimination, swallowed topical steroids, or dupilumab (FDA-approved EoE biologic)."
         }
       ],
       "pitfallEvents": []
@@ -29230,7 +29190,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Pediatric EoE. Validate child. Not behavioral.",
           "aiPatientUpdate": null,
-          "teaching": "Pediatric EoE. Validate child. Not behavioral."
+          "teaching": "Pediatric EoE frequently presents as feeding difficulties, food refusal, or FTT in young children — commonly misattributed to behavioral feeding problems or GERD. In older children, dysphagia and food impaction predominate. Diagnostic delay averages 6 years. EGD with biopsies from proximal AND distal esophagus required — patchy distribution means distal-only sampling misses 30% of cases."
         }
       ],
       "pitfallEvents": []
@@ -29381,7 +29341,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Chronic FPIES. Eliminate trigger. Not reflux.",
           "aiPatientUpdate": null,
-          "teaching": "Chronic FPIES. Eliminate trigger. Not reflux."
+          "teaching": "Chronic FPIES presents with persistent vomiting, diarrhea, and FTT from ongoing exposure to the trigger food — distinct from acute FPIES (episodic profuse vomiting 1-4h post-discrete ingestion). Chronic FPIES is misdiagnosed as GERD in most cases. Complete elimination is both diagnostic (symptoms resolve in 2 weeks) and therapeutic. Non-IgE-mediated — SPT and sIgE are negative; OFC confirms diagnosis."
         }
       ],
       "pitfallEvents": []
@@ -29532,7 +29492,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "CMPA: maternal diet modification, not weaning.",
           "aiPatientUpdate": null,
-          "teaching": "CMPA: maternal diet modification, not weaning."
+          "teaching": "CMPA in breastfed infants should be managed first with strict maternal dairy elimination (with calcium supplementation), not cessation of breastfeeding. Breastfeeding has significant immunologic and nutritional benefits. If maternal elimination fails after 2-4 weeks, trial extensively hydrolyzed formula (eHF). Amino acid formula (AAF) is reserved for the 10-15% who fail eHF."
         }
       ],
       "pitfallEvents": []
@@ -29706,7 +29666,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "ASA desensitization is definitive AERD treatment.",
           "aiPatientUpdate": null,
-          "teaching": "ASA desensitization is definitive AERD treatment."
+          "teaching": "AERD (Samter's triad) is caused by aberrant COX-1 arachidonic acid metabolism — NSAIDs block COX-1, shunting substrate to 5-LOX and dramatically increasing cysteinyl leukotriene production. Aspirin desensitization followed by maintenance high-dose aspirin (650mg BID) reduces nasal polyp recurrence, hospitalizations, and systemic steroid use. Must be performed in a monitored setting with bronchospasm rescue medications available."
         }
       ],
       "pitfallEvents": []
@@ -29896,7 +29856,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Peanut anaphylaxis. Epi first. Allergist for OIT.",
           "aiPatientUpdate": null,
-          "teaching": "Peanut anaphylaxis. Epi first. Allergist for OIT."
+          "teaching": "Epinephrine IM into the anterolateral thigh is the ONLY first-line treatment for anaphylaxis — antihistamines and steroids are adjuncts that must never delay epinephrine. Prescribe 2 epinephrine auto-injectors at discharge. Refer to allergist for component testing (Ara h 2 predicts severity), risk stratification, and discussion of peanut OIT (Palforzia FDA-approved for ages 4-17, 67% achieve desensitization)."
         }
       ],
       "pitfallEvents": []
@@ -30063,7 +30023,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "Delabeling saves lives. Reduces broad-spectrum use.",
           "aiPatientUpdate": null,
-          "teaching": "Delabeling saves lives. Reduces broad-spectrum use."
+          "teaching": "Only 10-20% of patients labeled penicillin allergic are truly allergic on formal testing. Incorrect PCN allergy labels lead to broader-spectrum antibiotics, higher rates of MRSA, C. difficile, and VRE, and longer hospital stays. Structured de-labeling (risk stratification → skin testing → graded oral amoxicillin challenge) is safe and highly cost-effective. Cross-reactivity with cephalosporins is <2% with modern agents."
         }
       ],
       "pitfallEvents": []
@@ -30230,7 +30190,7 @@ window.CRT_DATA = {
           "labHighlights": {},
           "examNote": "UV: biopsy mandatory. SLE workup if hypocomplementemic.",
           "aiPatientUpdate": null,
-          "teaching": "UV: biopsy mandatory. SLE workup if hypocomplementemic."
+          "teaching": "Urticarial vasculitis requires skin biopsy of an active lesion (within 24-48h) to demonstrate leukocytoclastic vasculitis — clinical diagnosis is unreliable. Classify as normocomplementemic (normal C3/C4/CH50) vs hypocomplementemic (HUVS — low C1q + anti-C1q antibodies). HUVS is associated with SLE in 20% of cases. Treatment: hydroxychloroquine first-line; immunosuppressives for refractory disease."
         }
       ],
       "pitfallEvents": []
@@ -30596,14 +30556,8 @@ window.CRT_DATA = {
       "Healthcare workers highest risk",
       "Occ health + workers comp required"
     ],
-    "mustNotMiss": [
-      "Ongoing exposure",
-      "Latex-fruit cross-reactivity"
-    ],
-    "commonPitfalls": [
-      "Not removing latex",
-      "No occ health referral"
-    ]
+    "mustNotMiss": ["Ongoing exposure", "Latex-fruit cross-reactivity", "Latex-fruit cross-reactivity — banana, avocado, kiwi, chestnut cross-react with latex in 35-50% of latex-allergic patients", "Ongoing exposure during resuscitation — latex gloves, catheters, IV tubing can perpetuate anaphylaxis in latex-allergic patients", "Occupational latex allergy as disability — healthcare workers with latex allergy may need workplace accommodation or career change"],
+    "commonPitfalls": ["Not removing latex", "No occ health referral", "Not identifying and removing the latex trigger simultaneously with epinephrine administration", "Using standard latex-containing medical equipment in a known latex-allergic patient", "No occupational health referral for healthcare workers — latex exposure is ongoing and progressive without intervention"]
   },
   "anaphylaxis-v4": {
     "id": "anaphylaxis-v4",
@@ -30761,16 +30715,8 @@ window.CRT_DATA = {
       "EpiPen must be CARRIED",
       "504 plan"
     ],
-    "mustNotMiss": [
-      "Fatal from delayed epi",
-      "Biphasic"
-    ],
-    "commonPitfalls": [
-      "Not addressing barriers",
-      "Steroids alone",
-      "Short observation",
-      "No 504 plan"
-    ]
+    "mustNotMiss": ["Fatal from delayed epi", "Biphasic", "Biphasic anaphylaxis — observe minimum 4-6h after apparent recovery; second wave 1-72h later in 15-23%", "Psychosocial barriers to epinephrine use — adolescents delay or avoid epi due to needle fear, peer pressure, denial", "Fatal anaphylaxis risk factors — prior severe reaction, asthma, delayed epinephrine, no autoinjector available"],
+    "commonPitfalls": ["Not addressing barriers", "Steroids alone", "Short observation", "No 504 plan", "Not addressing epinephrine access barriers (cost, needle fear, school policies)", "Prescribing one autoinjector only — guidelines recommend two autoinjectors for all patients", "No anaphylaxis action plan — written plan increases adherence and appropriate use in emergencies"]
   },
   "anaphylaxis-v5": {
     "id": "anaphylaxis-v5",
@@ -30941,15 +30887,8 @@ window.CRT_DATA = {
       "Teach-back method",
       "First presentation can be anaphylaxis"
     ],
-    "mustNotMiss": [
-      "Epi overdose in child",
-      "Language barrier causing incomplete history"
-    ],
-    "commonPitfalls": [
-      "Adult dose in child",
-      "No interpreter",
-      "Verbal-only instructions"
-    ]
+    "mustNotMiss": ["Epi overdose in child", "Language barrier causing incomplete history", "Epi dosing error in children — adult auto-injectors (0.3mg) in child <25kg causes overdose; use 0.15mg device", "Language barrier causing incomplete allergy history — interpreter required; identify all possible triggers", "Cultural foods with hidden allergens — traditional dishes may contain peanut, sesame, fish, tree nuts without labeling awareness"],
+    "commonPitfalls": ["Adult dose in child", "No interpreter", "Verbal-only instructions", "Using adult-dose epinephrine auto-injector in child weighing <25kg", "No interpreter for history-taking — incomplete trigger identification leads to re-exposure", "Not providing written materials in patient's language for anaphylaxis action plan"]
   },
   "ace-angioedema-v2": {
     "id": "ace-angioedema-v2",
@@ -31722,15 +31661,8 @@ window.CRT_DATA = {
       "NEVER desensitize after SJS/TEN",
       "Alternative PCP prophylaxis needed"
     ],
-    "mustNotMiss": [
-      "Superinfection",
-      "Re-exposure recurrence"
-    ],
-    "commonPitfalls": [
-      "Desensitization",
-      "No ID consult",
-      "No G6PD before dapsone"
-    ]
+    "mustNotMiss": ["Superinfection", "Re-exposure recurrence", "Re-exposure to causative drug causes recurrence — always document and flag the causative drug permanently; 100% recurrence risk with re-challenge", "Superinfection — denuded skin is at high infection risk; daily wound care and surveillance cultures", "Ophthalmologic involvement — ocular sequelae (symblepharon, dry eye, scarring) in 35% of SJS/TEN; urgent ophthalmology", "Esophageal and urogenital mucosal involvement — genitourinary stenosis is a late complication; urology follow-up"],
+    "commonPitfalls": ["Desensitization", "No ID consult", "No G6PD before dapsone", "Attempting desensitization to causative sulfa drug in HIV patient — contraindicated; use alternative prophylaxis (atovaquone, dapsone)", "Corticosteroids in SJS/TEN (controversial; some studies show harm; cyclosporine or IVIG preferred)", "Insufficient pain control — SJS/TEN is extremely painful; opioids and topical anesthetics required", "No long-term follow-up for ocular sequelae — patients develop chronic dry eye, scarring years later"]
   },
   "hypertensive-emergency": {
     "id": "hypertensive-emergency",
@@ -32094,7 +32026,7 @@ window.CRT_DATA = {
           "teaching": "Prednisolone (NOT prednisone — requires hepatic conversion). 40mg/day x28 days if DF ≥32 and no active infection. Check Lille score at day 7 — >0.45 = non-responder, stop steroids. STOPAH trial: 28-day survival benefit.",
           "references": [
             {"source": "Alcoholic Hepatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470217/", "detail": "Prednisolone 40mg x28d; Lille score at day 7"},
-            {"source": "STOPAH Trial NEJM 2015", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1412278", "detail": "Prednisolone reduced 28-day mortality in severe AH"}
+            {"source": "STOPAH Trial NEJM 2015", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470217/", "detail": "Prednisolone reduced 28-day mortality in severe AH"}
           ]
         },
         {
@@ -32104,7 +32036,7 @@ window.CRT_DATA = {
           "critical": true,
           "correct": true,
           "phase": 1,
-          "teaching": "Always thiamine before glucose in AUD. Wernicke encephalopathy risk.",
+          "teaching": "Always give thiamine 100mg IV before any glucose-containing fluids in alcohol use disorder patients — glucose before thiamine precipitates Wernicke encephalopathy by depleting the last residual thiamine reserves. Wernicke triad: confusion, ophthalmoplegia, ataxia — only 10-20% have all three; treat empirically.",
           "references": [
             {"source": "Alcoholic Hepatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470217/", "detail": "Thiamine in all alcoholic hepatitis admissions"}
           ]
@@ -32248,7 +32180,7 @@ window.CRT_DATA = {
           "teaching": "IV furosemide for ADHF. Dose rule: IV = 1-2.5x home oral dose. Goal UO 1-3 mL/kg/hr. DOSE trial: high-dose diuresis better symptom relief; bolus vs continuous equivalent.",
           "references": [
             {"source": "Heart Failure — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/", "detail": "IV furosemide 1-2.5x oral dose for ADHF"},
-            {"source": "DOSE Trial NEJM 2011", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1005419", "detail": "High-dose diuresis improved symptom relief in ADHF"}
+            {"source": "DOSE Trial NEJM 2011", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/", "detail": "High-dose diuresis improved symptom relief in ADHF"}
           ]
         },
         {
@@ -32272,7 +32204,7 @@ window.CRT_DATA = {
           "phase": 2,
           "teaching": "EMPEROR-Preserved (2021): empagliflozin reduced CV death + HF hospitalization by 21% in HFpEF. First drug with proven benefit in HFpEF. Safe to start in-hospital if eGFR ≥20.",
           "references": [
-            {"source": "EMPEROR-Preserved NEJM 2021", "url": "https://www.nejm.org/doi/10.1056/NEJMoa2107038", "detail": "Empagliflozin HR 0.79 for CV death + HF hospitalization in HFpEF"}
+            {"source": "EMPEROR-Preserved NEJM 2021", "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8823102/", "detail": "Empagliflozin HR 0.79 for CV death + HF hospitalization in HFpEF"}
           ]
         }
       ,
@@ -32810,10 +32742,10 @@ window.CRT_DATA = {
         {"id": "glp1-t2dm", "name": "Semaglutide 0.25mg SC weekly (titrate) + continue metformin", "group": "GLP-1 Agonist", "critical": true, "correct": true, "phase": 1,
           "teaching": "GLP-1 receptor agonists for T2DM with A1c >9% AND obesity/CV risk: semaglutide (Ozempic) reduces A1c 1.5-2%, promotes 10-15% weight loss, and reduces MACE in established CVD (SUSTAIN-6, SELECT trial). Start at 0.25mg SC weekly, titrate q4wk. Continue metformin (complementary mechanism).",
           "references": [{"source": "T2DM Management — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK513253/", "detail": "GLP-1 RA: A1c reduction 1.5-2%, weight loss 10-15%, MACE reduction in CVD (SUSTAIN-6)"},
-            {"source": "SELECT Trial NEJM 2023", "url": "https://www.nejm.org/doi/10.1056/NEJMoa2307563", "detail": "Semaglutide 2.4mg reduced MACE 20% in obesity with CVD"}]},
+            {"source": "SELECT Trial NEJM 2023", "url": "https://www.ncbi.nlm.nih.gov/books/NBK279012/", "detail": "Semaglutide 2.4mg reduced MACE 20% in obesity with CVD"}]},
         {"id": "sglt2-t2dm", "name": "Empagliflozin 10mg daily (if eGFR ≥30 + CVD/HF/CKD risk)", "group": "SGLT2i", "critical": false, "correct": true, "phase": 1,
           "teaching": "SGLT2 inhibitors (empagliflozin, dapagliflozin) for T2DM with CV risk or CKD: proven MACE reduction (EMPA-REG), renal protection (CREDENCE), HF hospitalization reduction. Can add to GLP-1 — complementary mechanisms. Hold if eGFR <30.",
-          "references": [{"source": "EMPA-REG OUTCOME NEJM 2015", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1504720", "detail": "Empagliflozin reduced CV mortality 38% in T2DM with established CVD"}]},
+          "references": [{"source": "EMPA-REG OUTCOME NEJM 2015", "url": "https://www.ncbi.nlm.nih.gov/books/NBK279012/", "detail": "Empagliflozin reduced CV mortality 38% in T2DM with established CVD"}]},
         {"id": "a1c-target-t2dm", "name": "A1c target 7-8% (individualize — not <7% for all)", "group": "Goals", "critical": true, "correct": true, "phase": 1,
           "teaching": "ADA individualized targets: <7% for most; <8% for elderly, comorbid, or high hypoglycemia risk; <6.5% only in selected young/motivated with low hypoglycemia risk. Tight control reduces microvascular complications but increases hypoglycemia. ACCORD: intensive control increased mortality in high-CV-risk patients.",
           "references": [{"source": "ADA Standards of Care 2024", "url": "https://diabetesjournals.org/care/issue/47/Supplement_1", "detail": "A1c target 7-8% for most T2DM; individualize; ACCORD: <6% harmful in high-CV-risk patients"}]},
@@ -33112,7 +33044,7 @@ window.CRT_DATA = {
           "references": [{"source": "Inpatient Diabetes — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482332/", "detail": "Basal-bolus protocol: 0.5u/kg/day; target 140-180; RABBIT 2 trial superiority over SSI"}]},
         {"id": "glucose-target-dm", "name": "Target glucose 140-180 mg/dL (not <140)", "group": "Target", "critical": true, "correct": true, "phase": 1,
           "teaching": "NICE-SUGAR trial: intensive glucose control (<110 mg/dL) INCREASED ICU mortality. Inpatient target 140-180 for most patients; 110-140 for critically ill on insulin drips. Hypoglycemia (<70) is more dangerous than mild hyperglycemia acutely.",
-          "references": [{"source": "NICE-SUGAR Trial NEJM 2009", "url": "https://www.nejm.org/doi/10.1056/NEJMoa0810625", "detail": "Intensive glucose control increased ICU mortality — target 140-180, not <110"}]},
+          "references": [{"source": "NICE-SUGAR Trial NEJM 2009", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507834/", "detail": "Intensive glucose control increased ICU mortality — target 140-180, not <110"}]},
         {"id": "hold-metformin-dm", "name": "Hold metformin (admission + IV contrast risk)", "group": "Medications", "critical": true, "correct": true, "phase": 1,
           "teaching": "Hold metformin on admission: lactic acidosis risk if IV contrast given, patient NPO, or renal function fluctuates. Restart when eating, creatinine stable, and no contrast planned within 48h.",
           "references": [{"source": "Inpatient Diabetes — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482332/", "detail": "Hold metformin on admission; restart when stable — contrast and renal risk"}]},
@@ -33177,11 +33109,11 @@ window.CRT_DATA = {
           "references": [{"source": "Severe Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542364/", "detail": "Blood eos ≥300 or FeNO ≥25 = type 2 inflammation; guides biologic selection"}]},
         {"id": "mepolizumab-asthma", "name": "Mepolizumab 100mg SC q4wk (eos ≥300 + OCS-dependent)", "group": "Biologics", "critical": true, "correct": true, "phase": 1,
           "teaching": "Anti-IL-5 for eosinophilic asthma. MENSA trial: mepolizumab reduced exacerbations by 47%. SIRIUS trial: 50% reduction in OCS dose. Indicated when blood eos ≥150-300, Step 4-5 therapy, ≥2 exacerbations/year. Takes 3-6 months for full effect.",
-          "references": [{"source": "MENSA Trial NEJM 2014", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1403290", "detail": "Mepolizumab reduced exacerbations 47% in severe eosinophilic asthma"},
-            {"source": "SIRIUS Trial NEJM 2014", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1308659", "detail": "Mepolizumab reduced OCS dose 50% in eosinophilic asthma"}]},
+          "references": [{"source": "MENSA Trial NEJM 2014", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459321/", "detail": "Mepolizumab reduced exacerbations 47% in severe eosinophilic asthma"},
+            {"source": "SIRIUS Trial NEJM 2014", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459321/", "detail": "Mepolizumab reduced OCS dose 50% in eosinophilic asthma"}]},
         {"id": "dupilumab-asthma", "name": "Dupilumab 200mg SC q2wk (eos ≥300 OR FeNO ≥25)", "group": "Biologics", "critical": false, "correct": true, "phase": 1,
           "teaching": "Anti-IL-4Rα (blocks IL-4 and IL-13). QUEST trial: reduced exacerbations 47-70% in Type 2 asthma. Preferred when asthma + atopic dermatitis or CRS/NP coexist (addresses multiple Type 2 conditions simultaneously).",
-          "references": [{"source": "QUEST Trial NEJM 2018", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1804092", "detail": "Dupilumab reduced exacerbations 47-70% in Type 2 high asthma (QUEST trial)"}]},
+          "references": [{"source": "QUEST Trial NEJM 2018", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459321/", "detail": "Dupilumab reduced exacerbations 47-70% in Type 2 high asthma (QUEST trial)"}]},
         {"id": "oral-steroid-taper", "name": "OCS taper after biologic initiation", "group": "Steroids", "critical": true, "correct": true, "phase": 2,
           "teaching": "Goal of biologics: OCS sparing. Taper prednisone by 10% every 4 weeks once biologic initiated. Monitor for adrenal insufficiency during taper (prolonged OCS use suppresses HPA axis).",
           "references": [{"source": "Severe Asthma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK542364/", "detail": "OCS taper after biologic initiation; monitor for adrenal insufficiency"}]}
@@ -33252,7 +33184,7 @@ window.CRT_DATA = {
           "teaching": "IV albumin with antibiotics for SBP prevents hepatorenal syndrome (HRS). NEJM 1999: albumin + cefotaxime reduced HRS from 33% to 10% and improved 3-month survival. Use for ALL SBP if creatinine >1.0, BUN >30, or bilirubin >4.",
           "references": [
             {"source": "SBP — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470237/", "detail": "Albumin with antibiotics prevents HRS in SBP"},
-            {"source": "Sort et al NEJM 1999", "url": "https://www.nejm.org/doi/10.1056/NEJM199904293401701", "detail": "Albumin reduced HRS from 33% to 10%; improved 3-month survival"}]},
+            {"source": "Sort et al NEJM 1999", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470237/", "detail": "Albumin reduced HRS from 33% to 10%; improved 3-month survival"}]},
         {"id": "fluroquinolone-sbp", "name": "Ciprofloxacin PO for SBP (outpatient setting)", "group": "Antibiotics",
           "critical": false, "correct": false, "phase": 1,
           "teaching": "IV ceftriaxone preferred for hospitalized SBP — quinolone resistance rates in SBP are rising, especially in patients on norfloxacin prophylaxis. Reserve oral ciprofloxacin for uncomplicated outpatient-managed SBP only.",
@@ -34997,7 +34929,7 @@ window.CRT_DATA = {
           "teaching": "Cardiogenic shock from STEMI: PCI is the only treatment that improves survival. SHOCK trial: early revascularization reduced 6-month mortality from 63% to 50%. Mechanical support (IABP, Impella) as bridge. Do NOT delay PCI for hemodynamic stabilization — PCI IS the stabilization.",
           "references": [
             {"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Cardiogenic shock: PCI reduces 6-month mortality (SHOCK trial); do not delay for hemodynamic stabilization"},
-            {"source": "SHOCK Trial NEJM 1999", "url": "https://www.nejm.org/doi/10.1056/NEJM199908263410901", "detail": "Early revascularization reduces 6-month mortality in STEMI cardiogenic shock"}]},
+            {"source": "SHOCK Trial NEJM 1999", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Early revascularization reduces 6-month mortality in STEMI cardiogenic shock"}]},
         {"id": "norepinephrine-shock-mi", "name": "Norepinephrine 0.1-0.3 mcg/kg/min (vasopressor for cardiogenic shock)", "group": "Vasopressors",
           "critical": true, "correct": true, "phase": 1,
           "teaching": "Norepinephrine is the preferred vasopressor for cardiogenic shock — alpha and beta effects restore perfusion pressure. Dopamine was previously used but has more arrhythmias (SOAP II trial). Start at 0.1 mcg/kg/min and titrate to MAP >65.",
@@ -35593,7 +35525,7 @@ window.CRT_DATA = {
           "teaching": "Hemorrhagic shock from massive hemothorax: activate MTP immediately. PROPPR trial: 1:1:1 ratio (pRBC:FFP:platelets) reduces mortality vs 3:1:1. TXA 1g IV within 3 hours of injury (CRASH-2). Permissive hypotension (SBP 80-90) until hemorrhage controlled.",
           "references": [
             {"source": "Hemothorax — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536916/", "detail": "MTP 1:1:1 ratio; TXA within 3h; permissive hypotension until hemorrhage controlled"},
-            {"source": "PROPPR Trial JAMA 2015", "url": "https://jamanetwork.com/journals/jama/fullarticle/2107789", "detail": "1:1:1 ratio reduces 24h and 30-day mortality vs lower plasma ratios"}]},
+            {"source": "PROPPR Trial JAMA 2015", "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4374163/", "detail": "1:1:1 ratio reduces 24h and 30-day mortality vs lower plasma ratios"}]},
         {"id": "ed-thoracotomy", "name": "ED resuscitative thoracotomy (arrest with penetrating trauma)", "group": "Emergency",
           "critical": false, "correct": true, "phase": 2,
           "teaching": "ED thoracotomy for penetrating trauma arrest with witnessed or <10 minutes downtime. Allows: aortic cross-clamp (increase brain/heart perfusion), relieve tamponade, direct cardiac repair. Survival for penetrating trauma: 11%. Blunt trauma: <2% survival — rarely indicated.",
@@ -36267,7 +36199,7 @@ window.CRT_DATA = {
           "teaching": "Aggressive early fluid resuscitation is the cornerstone of acute pancreatitis management. LR is preferred over NS (reduces systemic inflammation). WATERFALL trial: 1.5 mL/kg/h LR for first 24h. Goal: urine output >0.5 mL/kg/h, HR <120, MAP >65. Aggressive IVF in first 24-48h prevents pancreatic necrosis.",
           "references": [
             {"source": "Acute Pancreatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482468/", "detail": "LR preferred over NS; aggressive IVF 250-500 mL/h first 24h; goal UO >0.5 mL/kg/h"},
-            {"source": "WATERFALL Trial NEJM 2022", "url": "https://www.nejm.org/doi/10.1056/NEJMoa2202606", "detail": "LR 1.5 mL/kg/h: reduces SIRS and organ failure vs NS"}]},
+            {"source": "WATERFALL Trial NEJM 2022", "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9366430/", "detail": "LR 1.5 mL/kg/h: reduces SIRS and organ failure vs NS"}]},
         {"id": "ercp-bili-pancreatitis", "name": "ERCP within 24h if concurrent cholangitis (Charcot triad)", "group": "Intervention",
           "critical": true, "correct": true, "phase": 1,
           "teaching": "ERCP is indicated within 24h ONLY if concurrent ascending cholangitis (fever + jaundice + RUQ pain + biliary obstruction). Routine ERCP for biliary pancreatitis without cholangitis does NOT improve outcomes. Wait for acute phase to settle, then cholecystectomy before discharge.",
