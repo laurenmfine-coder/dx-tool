@@ -36220,5 +36220,301 @@ window.CRT_DATA = {
     "commonPitfalls": ["Escalating asthma medications when VCD is unresponsive to bronchodilators","Not performing laryngoscopy during episode (definitive diagnostic test)","Missing concurrent asthma (30% coexist)","Unnecessary ICU admissions for VCD episodes"],
     "keyLearningPoints": ["VCD: inspiratory stridor + normal SpO2 + normal PEF + no bronchodilator response","Spirometry: truncated INSPIRATORY loop (VCD) vs truncated EXPIRATORY loop (asthma)","Treatment: breathing techniques + speech therapy. Bronchodilators do not work."]
   }
+,
+
+  "cervical-artery-dissection": {
+    "id": "cervical-artery-dissection",
+    "diagnosis": "Internal Carotid Artery Dissection",
+    "acuity": 2,
+    "presentation": "Neck Pain / Horner Syndrome / Young Stroke",
+    "category": "neurologic",
+    "chiefComplaint": "Young Patient / Sudden Neck Pain / Ptosis / Facial Droop",
+    "treatments": {
+      "orders": [
+        {"id": "anticoag-cad", "name": "Anticoagulation — heparin bridge to warfarin or DOAC", "group": "Anticoagulation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cervical artery dissection (CAD) treatment: anticoagulation to prevent thrombus propagation and embolic stroke. Start UFH then transition to warfarin or DOAC x3-6 months. The arterial dissection itself forms a thrombus in the false lumen which can embolize. Antiplatelet therapy (aspirin) is an alternative per CADISS trial — no clear superiority of anticoagulation over antiplatelet.",
+          "references": [{"source": "Carotid Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430728/", "detail": "Anticoagulation or antiplatelet for CAD; CADISS trial: no superiority; prevent thromboembolism x3-6 months"}]},
+        {"id": "mri-mra-cad", "name": "MRI brain + MRA neck (crescent sign on T1 fat-sat)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "MRI: acute infarct on DWI. MRA or CT angiography neck: luminal stenosis, pseudoaneurysm, or occlusion. T1 fat-saturated MRI: crescent sign (mural hematoma in false lumen) — pathognomonic for dissection. CTA is faster; MRA is preferred if no time pressure.",
+          "references": [{"source": "Carotid Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430728/", "detail": "T1 fat-sat MRI: crescent sign (mural hematoma) = pathognomonic; CTA or MRA for lumen"}]},
+        {"id": "tpa-cad", "name": "tPA if dissection stroke within 4.5h and no contraindication", "group": "Thrombolytics",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "tPA is NOT contraindicated in dissection-related ischemic stroke — can be given within 4.5h window with same criteria as other stroke etiologies. Dissection is not a contraindication to thrombolytics. Thrombectomy for LVO is also appropriate.",
+          "references": [{"source": "Carotid Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430728/", "detail": "tPA not contraindicated in dissection stroke; same criteria as other ischemic stroke"}]},
+        {"id": "manipulation-cad", "name": "Cervical manipulation (chiropractic) for neck pain relief", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "ABSOLUTELY CONTRAINDICATED — chiropractic cervical manipulation is a known cause of vertebral and carotid artery dissection. Never perform cervical manipulation with dissection. The rotational stress can extend the dissection or cause new embolism.",
+          "references": [{"source": "Carotid Dissection — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430728/", "detail": "Cervical manipulation contraindicated — extends dissection or causes new embolism"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/92", "HR": "84"},
+          "labHighlights": {"Neuro": "Right ptosis, miosis (Horner), left hemiparesis", "History": "Yoga class head rotation 2 days ago", "CT head": "No hemorrhage"}},
+        {"id": "imaging", "label": "MRI/MRA",
+          "vitals": {"BP": "144/88", "HR": "80"},
+          "labHighlights": {"MRI DWI": "Right MCA territory ischemia", "T1 fat-sat": "Crescent sign right ICA", "MRA": "Right ICA 70% stenosis"}},
+        {"id": "anticoag", "label": "Anticoagulated",
+          "vitals": {"BP": "138/84", "HR": "78"},
+          "labHighlights": {"Heparin": "Therapeutic aPTT", "Plan": "DOAC x3-6 months"}}
+      ]
+    },
+    "mustNotMiss": ["Vertebral artery dissection (posterior circulation — PICA/AICA infarct)","Young stroke + neck pain after trauma/Valsalva/manipulation = dissection until proven otherwise","Horner syndrome ipsilateral to dissection (sympathetic chain runs along carotid)","Pulsatile tinnitus or bruit over dissected vessel"],
+    "commonPitfalls": ["Cervical manipulation for neck pain in young stroke patient (worsens dissection)","Missing dissection as stroke cause in young patients (most common etiology in <45yo)","Contraindication of tPA for dissection (it IS safe — same criteria apply)","Short anticoagulation course (need 3-6 months minimum)"],
+    "keyLearningPoints": ["Young patient + neck pain + Horner + stroke = cervical artery dissection","Crescent sign on T1 fat-sat MRI = pathognomonic mural hematoma","Anticoagulation or antiplatelet 3-6 months; cervical manipulation absolutely contraindicated"]
+  },
+  "gonococcal-arthritis": {
+    "id": "gonococcal-arthritis",
+    "diagnosis": "Disseminated Gonococcal Infection — Septic Arthritis",
+    "acuity": 2,
+    "presentation": "Migratory Polyarthritis / Skin Lesions / Tenosynovitis / Young Adult",
+    "category": "infectious",
+    "chiefComplaint": "25yo / Migratory Joint Pains / Skin Pustules / Right Wrist Tenosynovitis",
+    "treatments": {
+      "orders": [
+        {"id": "ceftriaxone-gdi", "name": "Ceftriaxone 1g IV q24h (empiric — before cultures return)", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "DGI is the most common cause of septic arthritis in sexually active adults <40yo. Ceftriaxone IV is first-line — N. gonorrhoeae produces beta-lactamase requiring cephalosporin (not penicillin alone). Test-of-cure at 3-5 days. Transition to oral cefixime after clinical improvement.",
+          "references": [{"source": "DGI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441928/", "detail": "Ceftriaxone 1g IV q24h; most common septic arthritis in <40yo sexually active adults"}]},
+        {"id": "cultures-gdi", "name": "Blood cx, joint fluid, cervical/urethral/rectal/pharyngeal swabs", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Yield: joint fluid culture positive in only 50% of DGI — cervical/urethral swabs much higher yield (>80%). Must culture all possible sites. Blood cultures positive in 30% of bacteremic phase. PCR/NAAT on joint fluid increases yield. Gram stain of pustular skin lesions also useful.",
+          "references": [{"source": "DGI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441928/", "detail": "Culture all sites: joint fluid (50%), cervical/urethral (>80%), blood (30%); NAAT increases yield"}]},
+        {"id": "partner-treatment", "name": "Partner notification and STI testing (HIV, syphilis, chlamydia)", "group": "Public Health",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "All sexual partners within 60 days must be evaluated and treated. Co-test for chlamydia (concurrent in 40%), syphilis, HIV. DGI is a reportable STI — notify public health. Doxycycline 100mg BID x7 days added for chlamydia coverage.",
+          "references": [{"source": "DGI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441928/", "detail": "Partner notification mandatory; co-test for chlamydia (40% concurrent); add doxycycline"}]},
+        {"id": "penicillin-gdi", "name": "Ampicillin for gonococcal arthritis", "group": "Antibiotics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "INSUFFICIENT — N. gonorrhoeae produces beta-lactamase (PPNG) making penicillin/ampicillin unreliable. Ceftriaxone is required. Also, fluoroquinolone resistance is now >30% in many areas — avoid quinolones empirically.",
+          "references": [{"source": "DGI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441928/", "detail": "Penicillin unreliable (beta-lactamase producing strains); fluoroquinolone resistance >30%; ceftriaxone required"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "118/76", "HR": "96", "Temp": "38.4°C"},
+          "labHighlights": {"Skin": "Pustular lesions wrists/hands", "Wrist": "Tenosynovitis", "WBC": "14,200"}},
+        {"id": "cultures-sent", "label": "Cultures Sent / Ceftriaxone",
+          "vitals": {"BP": "116/74", "HR": "88", "Temp": "37.8°C"},
+          "labHighlights": {"Cervical swab": "GC positive (NAAT)", "Joint fluid WBC": "18,000 (lower than septic arthritis)"}},
+        {"id": "improving", "label": "Day 3 — Improving",
+          "vitals": {"BP": "114/72", "HR": "84", "Temp": "37.2°C"},
+          "labHighlights": {"Pain": "Markedly improved", "Plan": "Oral cefixime + doxycycline for chlamydia"}}
+      ]
+    },
+    "mustNotMiss": ["Co-infection with chlamydia (40%) — always add doxycycline","HIV testing (DGI association with HIV infection)","Endocarditis rare but life-threatening complication of DGI","Fluoroquinolone resistance: avoid ciprofloxacin empirically (>30% resistance in US)"],
+    "commonPitfalls": ["Penicillin/ampicillin (beta-lactamase producing strains — inadequate)","Fluoroquinolones empirically (high resistance rates)","Not culturing all possible sites (joint fluid culture alone misses 50% of cases)","Skipping partner notification and co-infection testing"],
+    "keyLearningPoints": ["DGI classic triad: migratory polyarthritis/tenosynovitis + skin pustules + urogenital symptoms in <40yo","Ceftriaxone IV: first-line; penicillin/fluoroquinolones unreliable","Culture all sites; cervical/urethral NAAT highest yield (>80%)"]
+  },
+  "pseudogout": {
+    "id": "pseudogout",
+    "diagnosis": "Acute CPPD Crystal Arthropathy (Pseudogout)",
+    "acuity": 3,
+    "presentation": "Acute Monoarthritis / Knee / Elderly",
+    "category": "rheumatologic",
+    "chiefComplaint": "Acute Right Knee Swelling / Warm / Unable to Walk / Age 74",
+    "treatments": {
+      "orders": [
+        {"id": "aspiration-cppd", "name": "Joint aspiration (confirm CPPD crystals + exclude septic arthritis)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Joint aspiration is both diagnostic and therapeutic. Positively birefringent rhomboid crystals = CPPD (pseudogout). Strongly negative needle-shaped = gout (uric acid). WBC 2,000-100,000 (inflammatory). Crystal finding does NOT exclude septic arthritis — always send culture.",
+          "references": [{"source": "CPPD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430764/", "detail": "CPPD: rhomboid positively birefringent crystals; aspiration essential; never excludes septic arthritis"}]},
+        {"id": "nsaid-cppd", "name": "Indomethacin 50mg TID or naproxen 500mg BID (NSAIDs first-line)", "group": "Anti-inflammatory",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "NSAIDs are first-line for pseudogout. Colchicine 0.6mg BID is equally effective (may be preferred in CKD where NSAIDs are risky). Intra-articular steroid if one joint and NSAIDs/colchicine contraindicated. Duration: 7-14 days.",
+          "references": [{"source": "CPPD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430764/", "detail": "NSAIDs first-line; colchicine alternative (especially CKD); intra-articular steroid if systemic contraindicated"}]},
+        {"id": "xr-coppd", "name": "X-ray (chondrocalcinosis in cartilage)", "group": "Imaging",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Plain radiograph: linear calcification in articular cartilage (chondrocalcinosis) — knees, wrists, symphysis pubis. Supports CPPD diagnosis. Check calcium, phosphate, magnesium, PTH (secondary causes: hyperparathyroidism, hemochromatosis, hypomagnesemia).",
+          "references": [{"source": "CPPD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430764/", "detail": "Chondrocalcinosis on XR; check secondary causes: hyperparathyroidism, hemochromatosis, hypomagnesemia"}]},
+        {"id": "urate-lowering-cppd", "name": "Start allopurinol (elevated uric acid from CPPD crystals)", "group": "Urate Lowering",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — CPPD is calcium pyrophosphate deposition, not uric acid. Allopurinol has no role in pseudogout. There is no approved urate-lowering or crystal-lowering therapy for CPPD — management is anti-inflammatory treatment of acute attacks.",
+          "references": [{"source": "CPPD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430764/", "detail": "Allopurinol has no role in CPPD — different crystal (calcium pyrophosphate, not urate)"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/88", "HR": "84", "Temp": "37.6°C"},
+          "labHighlights": {"Joint WBC": "28,000 (inflammatory)", "Crystals": "Rhomboid, weakly positive birefringence", "XR": "Chondrocalcinosis"}},
+        {"id": "anti-inflam", "label": "Anti-inflammatory Started",
+          "vitals": {"BP": "144/86", "HR": "80"},
+          "labHighlights": {"Culture": "Negative", "PTH": "Elevated (check parathyroids)"}},
+        {"id": "resolving", "label": "Resolving",
+          "vitals": {"BP": "140/84", "HR": "78", "Temp": "37.1°C"},
+          "labHighlights": {"Swelling": "Significantly improved", "Uric acid": "Normal"}}
+      ]
+    },
+    "mustNotMiss": ["Septic arthritis (culture all joint aspirates — CPPD does not exclude infection)","Secondary causes: hyperparathyroidism (most common), hemochromatosis, hypomagnesemia, hemochromatosis","Crowned dens syndrome (CPPD deposits in cervical spine C2 — severe neck pain, fever, elevated CRP)","Milwaukee shoulder (destructive CPPD arthropathy)"],
+    "commonPitfalls": ["Allopurinol for pseudogout (wrong crystal type)","Not aspirating (cannot diagnose without synovial fluid analysis)","Missing secondary cause workup (hyperparathyroidism in 10-15%)","Treating as septic arthritis without aspiration to confirm"],
+    "keyLearningPoints": ["CPPD crystals: rhomboid + weakly positive birefringence (vs gout: needle + strongly negative)","No urate-lowering therapy for CPPD; NSAIDs or colchicine for acute attacks","Always check secondary causes: PTH, ferritin (hemochromatosis), magnesium"]
+  },
+  "acute-viral-hepatitis": {
+    "id": "acute-viral-hepatitis",
+    "diagnosis": "Acute Hepatitis A — Foodborne",
+    "acuity": 2,
+    "presentation": "Jaundice / Malaise / Elevated Transaminases",
+    "category": "gastrointestinal",
+    "chiefComplaint": "Jaundice / Dark Urine / Fatigue / RUQ Discomfort",
+    "treatments": {
+      "orders": [
+        {"id": "viral-hepatitis-panel", "name": "Viral hepatitis panel (HAV IgM, HBsAg, anti-HBc IgM, HCV Ab, HEV)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Acute hepatitis workup: HAV IgM (acute HAV), HBsAg + anti-HBc IgM (acute HBV), HCV Ab ± HCV RNA (acute HCV may be antibody-negative early). Also check HEV IgM in travellers. ALT>AST in viral hepatitis (vs alcoholic hepatitis where AST:ALT >2). Determine etiology before treatment.",
+          "references": [{"source": "Hepatitis A — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459290/", "detail": "HAV IgM confirms acute HAV; check full panel; ALT>AST in viral hepatitis"}]},
+        {"id": "supportive-hav", "name": "Supportive care — hydration, rest, avoid hepatotoxins", "group": "Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hepatitis A is self-limiting — no antiviral treatment. Supportive care: IV hydration if vomiting, rest, avoid alcohol and hepatotoxic drugs (APAP in high doses, statins, herbal supplements). Avoid alcohol for 6 months after recovery. Monitor LFTs, INR, and bilirubin weekly.",
+          "references": [{"source": "Hepatitis A — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459290/", "detail": "HAV: self-limiting; supportive care; avoid hepatotoxins; monitor LFTs weekly"}]},
+        {"id": "contact-tracing-hav", "name": "Report to public health + postexposure prophylaxis for contacts", "group": "Public Health",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "HAV is a notifiable disease. Close contacts should receive postexposure prophylaxis within 2 weeks: HAV vaccine (preferred, age <40) or immunoglobulin (IG, age >40 or immunocompromised). Foodborne outbreak: investigate common food source with public health.",
+          "references": [{"source": "Hepatitis A — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459290/", "detail": "Notifiable disease; PEP for contacts within 2 weeks: vaccine (<40yo) or IG (>40 or immunocompromised)"}]},
+        {"id": "antivirals-hav", "name": "Start antivirals (ribavirin, interferon) for hepatitis A", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "No antiviral treatment for hepatitis A — it is self-limiting. Antivirals are used for chronic HBV (entecavir, tenofovir) and HCV (sofosbuvir-based regimens). HAV is managed with supportive care only.",
+          "references": [{"source": "Hepatitis A — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459290/", "detail": "No antivirals for HAV; self-limiting; antivirals are for chronic HBV and HCV only"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "118/76", "HR": "78", "Temp": "37.6°C"},
+          "labHighlights": {"ALT": "2,840", "AST": "1,920 (ALT>AST)", "Bili": "8.2", "HAV IgM": "Positive"}},
+        {"id": "supportive", "label": "Supportive Care",
+          "vitals": {"BP": "116/74", "HR": "76"},
+          "labHighlights": {"INR": "1.2 (normal liver function)", "LFTs": "Trending down", "Hydration": "IVF for nausea"}},
+        {"id": "improving", "label": "Week 3 — Improving",
+          "vitals": {"BP": "118/76", "HR": "74"},
+          "labHighlights": {"ALT": "420 (improving)", "Jaundice": "Clearing", "Contacts": "PEP completed"}}
+      ]
+    },
+    "mustNotMiss": ["Acute liver failure (INR >1.5 + AMS = transplant evaluation)","HAV in pregnancy (premature delivery, maternal complications)","Acute HCV (window period — HCV Ab negative; check HCV RNA)","Cholestatic pattern (pruritus, elevated ALP > transaminases — different workup)"],
+    "commonPitfalls": ["Antivirals for HAV (no antiviral treatment available or needed)","Skipping contact notification (HAV is highly contagious; PEP within 2 weeks)","Missing acute HCV (early HCV may have negative antibody — check RNA if high suspicion)","Premature return to hepatotoxic medications (wait for LFTs to normalize)"],
+    "keyLearningPoints": ["HAV: self-limiting; supportive care only; no antivirals","ALT>AST in viral hepatitis (vs AST:ALT>2 in alcoholic hepatitis)","HAV is notifiable; PEP for contacts within 2 weeks (vaccine preferred <40yo)"]
+  },
+  "anxiety-panic-attack": {
+    "id": "anxiety-panic-attack",
+    "diagnosis": "Panic Attack with Hyperventilation — Diagnosis of Exclusion",
+    "acuity": 3,
+    "presentation": "Palpitations / Shortness of Breath / Tingling / Chest Tightness",
+    "category": "psychiatric",
+    "chiefComplaint": "Sudden Palpitations / Chest Tightness / Tingling Hands / First Episode",
+    "treatments": {
+      "orders": [
+        {"id": "rule-out-cardiac-panic", "name": "ECG + troponin + D-dimer (rule out organic cause first)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "PANIC ATTACK IS A DIAGNOSIS OF EXCLUSION. Must rule out: STEMI (ECG), PE (D-dimer ± CTPA if high pre-test probability), hyperthyroidism (TSH), arrhythmia (ECG), hypoglycemia (glucose), pheochromocytoma (history). First-episode chest pain + palpitations requires cardiac workup.",
+          "references": [{"source": "Panic Disorder — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430840/", "detail": "Panic attack = diagnosis of exclusion; ECG, troponin, and appropriate workup based on presentation"}]},
+        {"id": "reassurance-panic", "name": "Reassurance + breathing retraining (slow diaphragmatic breathing)", "group": "Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Once organic causes excluded: reassurance + breathing retraining. Hyperventilation (CO2 decrease) causes peripheral vasodilation + perioral tingling + carpal-pedal spasm. Slow breathing corrects respiratory alkalosis. Educate patient about panic attacks — understanding the physiology reduces fear.",
+          "references": [{"source": "Panic Disorder — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430840/", "detail": "Reassurance + slow breathing after organic causes excluded; hyperventilation causes alkalosis + tingling"}]},
+        {"id": "benzo-panic", "name": "Lorazepam 0.5-1mg PO (acute attack management)", "group": "Medications",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Lorazepam for acute severe panic attack. Long-term: SSRIs/SNRIs (first-line for panic disorder) + CBT. Benzodiazepines are for acute attacks only — long-term benzodiazepine use causes dependence and is not recommended for panic disorder.",
+          "references": [{"source": "Panic Disorder — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430840/", "detail": "Benzos for acute attack; SSRIs + CBT for long-term panic disorder; avoid chronic benzo use"}]},
+        {"id": "paper-bag-panic", "name": "Paper bag breathing for hyperventilation", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Paper bag breathing is OUTDATED and POTENTIALLY DANGEROUS — can cause hypoxia and CO2 retention. Modern management: controlled slow diaphragmatic breathing (5 seconds in, 5 seconds out). Educate patient on breathing technique, not paper bag.",
+          "references": [{"source": "Panic Disorder — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430840/", "detail": "Paper bag breathing dangerous — risk of hypoxia; use controlled diaphragmatic breathing instead"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/96 (anxious)", "HR": "128", "SpO2": "99% RA", "RR": "28 (hyperventilating)"},
+          "labHighlights": {"ECG": "Sinus tachycardia — no ischemia", "Troponin": "Negative", "D-dimer": "0.4 (low)", "Glucose": "Normal"}},
+        {"id": "reassured", "label": "Reassured / Breathing Techniques",
+          "vitals": {"BP": "132/82", "HR": "98", "SpO2": "99%"},
+          "labHighlights": {"Tingling": "Resolved with breathing", "ABG": "pH 7.48 (respiratory alkalosis)"}},
+        {"id": "discharged", "label": "Discharged",
+          "vitals": {"BP": "124/80", "HR": "84"},
+          "labHighlights": {"Dx": "Panic attack confirmed", "Plan": "PCP follow-up; consider SSRI + CBT"}}
+      ]
+    },
+    "mustNotMiss": ["PE (D-dimer + clinical probability — Wells score)","STEMI (ECG mandatory in chest pain + palpitations)","Hyperthyroidism (first episode + weight loss + heat intolerance — check TSH)","Pheochromocytoma (paroxysmal episodes + hypertension — check plasma metanephrines)"],
+    "commonPitfalls": ["Diagnosing panic attack without excluding organic cause (STEMI and PE can present identically)","Paper bag breathing (causes hypoxia — dangerous)","Long-term benzodiazepines for panic disorder (addiction risk; SSRIs + CBT preferred)","Discharging without follow-up (panic disorder has high recurrence; outpatient mental health important)"],
+    "keyLearningPoints": ["Panic attack = diagnosis of exclusion: ECG + troponin + appropriate workup first","Hyperventilation respiratory alkalosis causes tingling + carpopedal spasm","Long-term: SSRIs + CBT first-line; benzos for acute attacks only"]
+  },
+  "alcoholic-ketoacidosis": {
+    "id": "alcoholic-ketoacidosis",
+    "diagnosis": "Alcoholic Ketoacidosis (AKA)",
+    "acuity": 2,
+    "presentation": "Nausea / Vomiting / Anion Gap Acidosis / Alcohol Abuse",
+    "category": "other",
+    "chiefComplaint": "Heavy Drinker / Nausea Vomiting 2 Days / Stopped Drinking / AG 24",
+    "treatments": {
+      "orders": [
+        {"id": "thiamine-dextrose-aka", "name": "Thiamine 100mg IV THEN dextrose-containing IVF (D5NS)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "AKA is caused by starvation ketosis in the setting of alcohol abuse — glucose and food deprivation with alcohol-inhibited gluconeogenesis drives beta-hydroxybutyrate production. Treatment: dextrose-containing IVF (suppresses ketogenesis) + thiamine FIRST (before glucose — Wernicke risk). Correct electrolytes (K+, Mg2+, phosphate).",
+          "references": [{"source": "AKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441978/", "detail": "Thiamine before glucose; D5NS corrects AKA by suppressing ketogenesis; replete K+/Mg/phosphate"}]},
+        {"id": "distinguish-dka-aka", "name": "Check glucose to distinguish DKA from AKA", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "AKA vs DKA: AKA = normal or low glucose; DKA = high glucose (>250). Both have AG acidosis + ketonemia. AKA: lactate may also be elevated (dual AG). Alcohol causes NADH excess → beta-hydroxybutyrate (BHB) accumulation. Classic: serum ketones may be negative (BHB not detected by nitroprusside test) — check BHB directly.",
+          "references": [{"source": "AKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441978/", "detail": "AKA: normal/low glucose; AG acidosis; BHB elevated (nitroprusside test may be negative — check BHB directly)"}]},
+        {"id": "bicarbonate-aka", "name": "Sodium bicarbonate for AKA acidosis", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Bicarbonate is NOT indicated for AKA — the acidosis resolves rapidly with dextrose + thiamine (ketogenesis shuts off within 12-24h). Bicarbonate may worsen hypokalemia and does not address the underlying metabolic process.",
+          "references": [{"source": "AKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441978/", "detail": "Bicarbonate not indicated in AKA — ketosis resolves with dextrose; bicarb worsens hypokalemia"}]},
+        {"id": "insulin-aka", "name": "Insulin drip for AKA anion gap", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — insulin is for DKA (hyperglycemia + AG acidosis). AKA has NORMAL or LOW glucose — insulin would cause dangerous hypoglycemia. Dextrose infusion + thiamine is the correct treatment for AKA.",
+          "references": [{"source": "AKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441978/", "detail": "Insulin not for AKA (normal/low glucose) — causes hypoglycemia; dextrose is the treatment"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "102/68", "HR": "108", "Temp": "37.2°C"},
+          "labHighlights": {"Glucose": "62 mg/dL", "pH": "7.22", "AG": "24", "BHB": "8.4 mM", "Alcohol": "Undetectable"}},
+        {"id": "thiamine-d5ns", "label": "Thiamine + D5NS Running",
+          "vitals": {"BP": "112/72", "HR": "96"},
+          "labHighlights": {"Glucose": "108 mg/dL", "AG": "18 (improving)", "Nausea": "Improving"}},
+        {"id": "resolved", "label": "Resolved",
+          "vitals": {"BP": "118/74", "HR": "88"},
+          "labHighlights": {"AG": "12 (normalized)", "pH": "7.36", "K+": "3.8 (after repletion)"}}
+      ]
+    },
+    "mustNotMiss": ["Concurrent AWS (last drink 24-72h ago — CIWA score, benzo protocol)","Wernicke encephalopathy if confused — thiamine BEFORE glucose always","Pancreatitis (AKA + abdominal pain = lipase)","Concurrent DKA if diabetic patient (glucose will be elevated)"],
+    "commonPitfalls": ["Glucose before thiamine in suspected AKA (Wernicke risk)","Insulin for AKA (glucose normal/low — hypoglycemia)","Bicarbonate (unnecessary and harmful)","Missing AWS developing during AKA treatment (monitor CIWA)"],
+    "keyLearningPoints": ["AKA: normal/low glucose + AG acidosis + heavy drinker who stopped eating","Nitroprusside ketone test may be falsely negative (measures acetoacetate, not BHB) — check BHB directly","Treatment: thiamine FIRST, then D5NS + electrolyte repletion"]
+  },
+  "copd-exacerbation-niv": {
+    "id": "copd-exacerbation-niv",
+    "diagnosis": "Severe COPD Exacerbation — Hypercapnic Respiratory Failure",
+    "acuity": 2,
+    "presentation": "Hypercapnic Respiratory Failure / pH 7.28 / COPD",
+    "category": "other",
+    "chiefComplaint": "COPD Patient / Worsening Dyspnea / pCO2 72 / pH 7.28",
+    "treatments": {
+      "orders": [
+        {"id": "niv-copd-niv", "name": "BiPAP 10/5 cmH2O (IPAP/EPAP) — start immediately", "group": "Respiratory Support",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "NIV/BiPAP is first-line for COPD hypercapnic respiratory failure (pH <7.35, pCO2 >45). Reduces intubation rate by 50%, reduces mortality, reduces ICU LOS. Set IPAP 10-15 cmH2O, EPAP 4-5 cmH2O. Titrate IPAP up if pCO2 not improving. Reassess at 1-2 hours.",
+          "references": [{"source": "COPD Exacerbation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/", "detail": "BiPAP first-line for hypercapnic failure: reduces intubation 50%; IPAP 10-15, EPAP 4-5 cmH2O"}]},
+        {"id": "heliox-niv", "name": "Heliox (helium-oxygen mixture) adjunct", "group": "Respiratory Support",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Heliox (79% He: 21% O2 or 70:30) reduces airway resistance (lower density than nitrogen) — improves laminar flow in obstructed airways. Adjunct to NIV for severe COPD not responding. Useful in COPD and asthma with significant obstruction.",
+          "references": [{"source": "COPD Exacerbation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/", "detail": "Heliox adjunct: reduces airway resistance; consider for NIV-refractory COPD exacerbation"}]},
+        {"id": "o2-target-niv", "name": "Target SpO2 88-92% — NOT >95%", "group": "Oxygenation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Controlled oxygenation prevents CO2 narcosis in chronic hypercapnic COPD. High-flow O2 eliminates hypoxic drive → respiratory depression → worsening CO2 retention. Target 88-92%. Use Venturi mask for precise FiO2 delivery if not on BiPAP.",
+          "references": [{"source": "GOLD COPD 2024", "url": "https://goldcopd.org/2024-gold-report/", "detail": "Target SpO2 88-92%; high-flow O2 drives CO2 narcosis in chronic retainers"}]},
+        {"id": "intubation-niv-failure", "name": "Intubation criteria: BiPAP failure (pH <7.25 after 1-2h, GCS decline, secretions)", "group": "Escalation",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Intubate if BiPAP fails at 1-2h: pH still <7.25, GCS declining, inability to protect airway, hemodynamic instability, excessive secretions. Intubation in COPD is high-risk (difficult to wean — often prolonged ventilation). Maximize NIV trial before intubating.",
+          "references": [{"source": "COPD Exacerbation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/", "detail": "Intubate if BiPAP fails: pH <7.25 at 1-2h, AMS, inability to protect airway, hemodynamic instability"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/92", "HR": "108", "RR": "32", "SpO2": "86% RA"},
+          "labHighlights": {"ABG": "pH 7.28, pCO2 72, pO2 52 (RA)", "WBC": "12,400", "CXR": "Hyperinflation, no infiltrate"}},
+        {"id": "bipap-started", "label": "BiPAP Running",
+          "vitals": {"BP": "138/84", "HR": "98", "RR": "22", "SpO2": "91% (BiPAP)"},
+          "labHighlights": {"ABG 1h": "pH 7.32, pCO2 62 (improving)", "IPAP": "12 cmH2O"}},
+        {"id": "improved", "label": "4h — Significant Improvement",
+          "vitals": {"BP": "132/82", "HR": "92", "RR": "18", "SpO2": "92%"},
+          "labHighlights": {"ABG 4h": "pH 7.36, pCO2 52", "Steroids": "Running", "Broncho": "Improved"}}
+      ]
+    },
+    "mustNotMiss": ["BiPAP failure criteria — do not delay intubation if failing (pH <7.25 at 1-2h)","Pneumothorax in COPD (bullae rupture — sudden deterioration on BiPAP)","PE as exacerbation trigger (low threshold for CTPA in COPD + tachycardia)","CO2 narcosis from over-oxygenation (check VBG if SpO2 suddenly >96%)"],
+    "commonPitfalls": ["High-flow O2 targeting >95% (CO2 narcosis)","Starting BiPAP too late (pH <7.20 — often too late for NIV to work)","Not reassessing ABG at 1-2h (define failure criteria and act)","Premature extubation attempt after intubation (COPD patients are notoriously difficult to wean)"],
+    "keyLearningPoints": ["NIV/BiPAP for COPD hypercapnic failure: reduces intubation 50%, reduces mortality","Target SpO2 88-92% — high-flow O2 drives CO2 narcosis in chronic retainers","BiPAP failure = pH <7.25 at 1-2h, declining GCS, or hemodynamic instability → intubate"]
+  }
 
 };
