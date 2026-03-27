@@ -32242,5 +32242,259 @@ window.CRT_DATA = {
       "Unlike HFrEF, BB/ACEi/MRA have weak evidence in HFpEF — focus on comorbidities"
     ]
   }
+,
+  "dka-v2": {
+    "id": "dka-v2",
+    "diagnosis": "Euglycemic DKA — SGLT2 Inhibitor",
+    "acuity": 2,
+    "presentation": "Nausea / Vomiting / SGLT2i Use",
+    "category": "endocrine",
+    "chiefComplaint": "Nausea and Vomiting / Glucose Only 194",
+    "treatments": {
+      "orders": [
+        {"id": "vbg-eudka", "name": "VBG + anion gap (pH, HCO3, anion gap)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Euglycemic DKA: glucose <250 mg/dL but pH <7.3 and AG >12. Increasingly common with SGLT2 inhibitors. Never be reassured by near-normal glucose in a sick diabetic on SGLT2i — check VBG and anion gap.",
+          "references": [{"source": "DKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560723/", "detail": "Euglycemic DKA: glucose <250 but acidosis present; SGLT2i association"}]},
+        {"id": "hold-sglt2i", "name": "Hold SGLT2 inhibitor immediately", "group": "Medications", "critical": true, "correct": true, "phase": 1,
+          "teaching": "SGLT2 inhibitors promote ketogenesis independent of glucose. Hold in euglycemic DKA. Resume only after full resolution and patient eating.",
+          "references": [{"source": "FDA Safety SGLT2i", "url": "https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-fda-warns-diabeties-medicines-may-lead-rare-serious-condition", "detail": "Hold SGLT2i in DKA; euglycemic DKA risk"}]},
+        {"id": "d10w-eudka", "name": "D10W infusion (maintain glucose 150-200 while closing AG)", "group": "Fluids", "critical": true, "correct": true, "phase": 1,
+          "teaching": "In euglycemic DKA add dextrose early (D10 at 100-150 mL/h) while running insulin. Target glucose 150-200 — insulin closes the gap, not glucose.",
+          "references": [{"source": "DKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560723/", "detail": "D10W early in euglycemic DKA to allow insulin to close AG without hypoglycemia"}]},
+        {"id": "insulin-eudka", "name": "Regular insulin drip 0.1 units/kg/hr", "group": "Insulin", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Same protocol as standard DKA — suppress ketogenesis. Run alongside D10W to prevent hypoglycemia while closing the gap.",
+          "references": [{"source": "DKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560723/", "detail": "Standard insulin 0.1u/kg/hr; add dextrose in euglycemic DKA"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "108/72", "HR": "108", "RR": "22", "SpO2": "99%"}, "labHighlights": {"Glucose": "194", "pH": "7.18", "HCO3": "9", "AG": "22", "Beta-HB": "5.8"}},
+        {"id": "treated", "label": "Insulin + D10 Running", "vitals": {"BP": "116/74", "HR": "96"}, "labHighlights": {"Glucose": "178", "AG": "16", "pH": "7.28"}},
+        {"id": "resolved", "label": "Gap Closed", "vitals": {"BP": "122/76", "HR": "84"}, "labHighlights": {"pH": "7.36", "AG": "11", "HCO3": "20"}}
+      ]
+    },
+    "mustNotMiss": ["Near-normal glucose does NOT rule out DKA in SGLT2i patient","Hypokalemia — hold insulin if K+ <3.3","Infection trigger even in euglycemic DKA","Cerebral edema in young T1DM"],
+    "commonPitfalls": ["Dismissing DKA because glucose is 180-200 in SGLT2i patient","Not adding dextrose early (hypoglycemia while gap still open)","Restarting SGLT2i before full resolution","Missing precipitating cause"],
+    "keyLearningPoints": ["Euglycemic DKA: glucose <250 but true DKA — check VBG/AG in any sick diabetic on SGLT2i","DKA resolution: pH >7.3, HCO3 >18, AG normal — not just glucose","Hold SGLT2i; restart only when eating and DKA fully resolved"]
+  },
+  "dka-v3": {
+    "id": "dka-v3",
+    "diagnosis": "DKA with Hypokalemia — Insulin Safety Protocol",
+    "acuity": 1,
+    "presentation": "Polyuria / Vomiting / K+ 2.9",
+    "category": "endocrine",
+    "chiefComplaint": "DKA / K+ 2.9 on Initial Labs",
+    "treatments": {
+      "orders": [
+        {"id": "hold-insulin-k29", "name": "HOLD insulin until K+ ≥3.3 mEq/L", "group": "Safety", "critical": true, "correct": true, "phase": 1,
+          "teaching": "CRITICAL: Insulin drives K+ intracellularly. If K+ <3.3 before insulin, starting insulin can precipitate fatal hypokalemia and arrhythmia. Replete K+ aggressively first (20-40 mEq/h IV), then start insulin.",
+          "references": [{"source": "DKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560723/", "detail": "Hold insulin if K+ <3.3; replete first to prevent fatal arrhythmia"}]},
+        {"id": "k-replete-dka3", "name": "KCl 40 mEq IV over 2h then recheck", "group": "Electrolytes", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Aggressive K+ repletion before insulin. All DKA patients have total-body K+ depletion even when serum K+ appears normal. Target K+ 4.0-5.0 during treatment.",
+          "references": [{"source": "DKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560723/", "detail": "Add 20-40 mEq K+/h until K+ ≥3.3; then 20-30 mEq/L in each IVF bag"}]},
+        {"id": "ecg-dka3", "name": "12-lead ECG (hypokalemia screen)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hypokalemia ECG: flat/inverted T waves, prominent U waves, prolonged QU. Severe (<2.5) = VF risk. Get ECG immediately when K+ <3.3.",
+          "references": [{"source": "Hypokalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482465/", "detail": "U waves, flat T waves, prolonged QU interval in hypokalemia"}]},
+        {"id": "insulin-dka3", "name": "Regular insulin 0.1u/kg/hr (START after K+ ≥3.3)", "group": "Insulin", "critical": true, "correct": true, "phase": 2,
+          "teaching": "Start insulin once K+ ≥3.3. Add 20-30 mEq K+ to each subsequent IVF bag. Monitor electrolytes q2-4h.",
+          "references": [{"source": "DKA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560723/", "detail": "Start insulin at K+ ≥3.3; add K+ to all subsequent IVF"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "102/68", "HR": "116", "RR": "26 Kussmaul", "SpO2": "98%"}, "labHighlights": {"Glucose": "488", "K+": "2.9", "pH": "7.12", "AG": "26"}},
+        {"id": "k-repleted", "label": "K+ Repleted", "vitals": {"BP": "108/70", "HR": "106"}, "labHighlights": {"K+": "3.4", "ECG": "QU normal"}},
+        {"id": "insulin-running", "label": "Insulin Running", "vitals": {"BP": "114/72", "HR": "98"}, "labHighlights": {"Glucose": "312", "AG": "20", "K+": "3.8"}}
+      ]
+    },
+    "mustNotMiss": ["Insulin before K+ correction = fatal arrhythmia — the most dangerous DKA mistake","Phosphate depletion (respiratory muscle weakness if severe)","Infection trigger in all DKA","New-onset T1DM (first DKA)"],
+    "commonPitfalls": ["Starting insulin before K+ ≥3.3 (most dangerous DKA pitfall)","Insufficient K+ monitoring frequency (need q2-4h)","Stopping insulin when glucose normalizes instead of when gap closes","Bicarbonate therapy (paradoxical CNS acidosis risk)"],
+    "keyLearningPoints": ["K+ rule: <3.3 → hold insulin, replete; 3.3-5.0 → insulin + K+ repletion; >5.0 → insulin, hold K+","All DKA have total-body K+ depletion even with high serum K+","Insulin drops serum K+ 1-2 mEq/L in first 2 hours via intracellular shift"]
+  },
+  "stroke-v3": {
+    "id": "stroke-v3",
+    "diagnosis": "Posterior Circulation Stroke — HINTS Exam",
+    "acuity": 1,
+    "presentation": "Acute Vertigo / Diplopia / Ataxia",
+    "category": "neurologic",
+    "chiefComplaint": "Sudden Severe Vertigo / Bilateral Limb Weakness",
+    "treatments": {
+      "orders": [
+        {"id": "mri-dwi-post", "name": "MRI Brain with DWI (CT misses posterior fossa)", "group": "Imaging", "critical": true, "correct": true, "phase": 1,
+          "teaching": "CT misses up to 40% of posterior fossa strokes in first 24h. MRI DWI required for posterior circulation symptoms. Never dismiss as peripheral vertigo without MRI if any central features present.",
+          "references": [{"source": "Posterior Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470582/", "detail": "CT sensitivity only 40-60% for posterior fossa; MRI DWI required"}]},
+        {"id": "cta-basilar", "name": "CTA Head and Neck (basilar artery occlusion)", "group": "Imaging", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Basilar artery occlusion = locked-in syndrome or death without thrombectomy. CTA detects LVO. Window now up to 24h (BASICS trial). Most devastating posterior circulation emergency.",
+          "references": [{"source": "Posterior Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470582/", "detail": "CTA for basilar artery occlusion; thrombectomy up to 24h (BASICS, ATTENTION)"}]},
+        {"id": "tpa-post", "name": "tPA if within 4.5h and no contraindications", "group": "Thrombolytics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Same tPA criteria as anterior stroke. Do not withhold for 'mild' posterior symptoms — ataxia and diplopia can progress to locked-in within hours with BAO.",
+          "references": [{"source": "2019 AHA/ASA Stroke Guideline", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000211", "detail": "tPA same criteria for posterior circulation stroke"}]},
+        {"id": "meclizine-wrong", "name": "Meclizine for peripheral vertigo", "group": "Symptom Management", "critical": false, "correct": false, "phase": 1,
+          "teaching": "DANGEROUS — treating posterior stroke as peripheral vertigo delays time-critical care. HINTS exam: Head Impulse (normal = central), Nystagmus (direction-changing = central), Test of Skew (present = central). Normal head impulse + any central feature = stroke until proven otherwise.",
+          "references": [{"source": "Posterior Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470582/", "detail": "HINTS exam: sensitivity 100% for posterior stroke in acute vestibular syndrome"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "168/98", "HR": "84", "SpO2": "97%"}, "labHighlights": {"NIHSS": "6 (ataxia, diplopia)", "CT Head": "No hemorrhage (limited posterior fossa)"}},
+        {"id": "mri-result", "label": "MRI Result", "vitals": {"BP": "164/96"}, "labHighlights": {"MRI DWI": "Left PICA infarct", "CTA": "No basilar occlusion"}},
+        {"id": "treated", "label": "tPA Running", "vitals": {"BP": "158/92"}, "labHighlights": {"NIHSS": "4 (improving)"}}
+      ]
+    },
+    "mustNotMiss": ["Basilar artery occlusion — locked-in potential; emergent thrombectomy","Cerebellar stroke with edema — tonsillar herniation risk (neurosurgery)","Vertebral artery dissection — young patient, neck pain, Horner syndrome","Normal CT does NOT rule out posterior stroke"],
+    "commonPitfalls": ["Meclizine for 'vertigo' without MRI in new acute presentation","CT head misinterpreted as negative for stroke","Not checking for basilar occlusion on CTA","Withholding tPA for seemingly mild posterior symptoms"],
+    "keyLearningPoints": ["Posterior symptoms + CT normal ≠ no stroke — CT misses 40% of posterior fossa infarcts","HINTS outperforms early MRI for acute vestibular syndrome (sensitivity 100%)","Basilar artery occlusion thrombectomy window: 24h (BASICS, ATTENTION trials)"]
+  },
+  "pe-v2": {
+    "id": "pe-v2",
+    "diagnosis": "Submassive PE with RV Strain",
+    "acuity": 2,
+    "presentation": "Dyspnea / Tachycardia / Troponin Positive",
+    "category": "pulmonary",
+    "chiefComplaint": "Dyspnea / HR 118 / Troponin 0.42 / RV Dilation on Echo",
+    "treatments": {
+      "orders": [
+        {"id": "anticoag-pe2", "name": "Unfractionated heparin bolus + drip", "group": "Anticoagulation", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Start anticoagulation immediately once PE confirmed. UFH preferred for submassive PE — allows rapid reversal if thrombolytics needed. Therapeutic aPTT 60-100 seconds.",
+          "references": [{"source": "PE — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560698/", "detail": "Immediate anticoagulation; UFH if thrombolytics possible for submassive PE"}]},
+        {"id": "echo-pe2", "name": "Bedside echo (RV:LV ratio, McConnell sign)", "group": "Risk Stratification", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Submassive PE = hemodynamically stable + RV strain (RV:LV >0.9, McConnell sign, TR >2.7 m/s, BNP elevation). Echo determines escalation need.",
+          "references": [{"source": "PE — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560698/", "detail": "Echo RV:LV >0.9, McConnell sign for RV strain in submassive PE"}]},
+        {"id": "tpa-submassive2", "name": "Systemic tPA 100mg IV over 2h (if deteriorating)", "group": "Thrombolytics", "critical": false, "correct": true, "phase": 2,
+          "teaching": "Full-dose tPA for submassive PE that deteriorates hemodynamically. PEITHO: reduced decompensation but increased major bleeding. PERT team consultation recommended.",
+          "references": [{"source": "PEITHO Trial NEJM 2014", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1302097", "detail": "tPA reduces decompensation in submassive PE but increases major bleeding"}]},
+        {"id": "pert-pe2", "name": "PERT team consultation", "group": "Multidisciplinary", "critical": false, "correct": true, "phase": 2,
+          "teaching": "PERT (Pulmonary Embolism Response Team): multidisciplinary — pulm, cards, CT surgery, IR. Reduces mortality in submassive/massive PE. Activate early for any RV strain or clinical deterioration.",
+          "references": [{"source": "PE — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560698/", "detail": "PERT multidisciplinary team for submassive/massive PE management"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "108/72", "HR": "118", "RR": "24", "SpO2": "93% RA"}, "labHighlights": {"Troponin": "0.42", "BNP": "820", "D-dimer": ">4"}},
+        {"id": "anticoag", "label": "Anticoagulated", "vitals": {"BP": "112/74", "HR": "108", "SpO2": "95% 2L"}, "labHighlights": {"Echo": "RV:LV 1.1, McConnell +"}},
+        {"id": "pert", "label": "PERT Activated", "vitals": {"BP": "118/76", "HR": "102", "SpO2": "96% 2L"}, "labHighlights": {"Plan": "CDT if no improvement at 6h"}}
+      ]
+    },
+    "mustNotMiss": ["Massive PE (SBP <90) — immediate systemic thrombolytics or surgical embolectomy","Right heart thrombus — CT surgery consult","Paradoxical embolism via PFO (stroke + PE)","Volume overload worsens RV — avoid aggressive IVF"],
+    "commonPitfalls": ["LMWH instead of UFH if thrombolytics planned","Not activating PERT early for submassive PE","Over-aggressive fluid resuscitation (worsens RV afterload)","Delaying anticoagulation for borderline CTPA findings"],
+    "keyLearningPoints": ["Massive PE: SBP <90 → systemic tPA. Submassive: stable + RV strain → anticoag + monitor ± CDT","RV:LV >0.9 + McConnell sign on echo = RV strain; McConnell = PE-specific (free wall akinesis, apex spared)","PERT activation: any RV strain, elevated troponin, or clinical instability in PE"]
+  },
+  "pe-v3": {
+    "id": "pe-v3",
+    "diagnosis": "Massive PE — PEA Cardiac Arrest",
+    "acuity": 1,
+    "presentation": "PEA Arrest / Suspected Massive PE",
+    "category": "pulmonary",
+    "chiefComplaint": "PEA Cardiac Arrest / Suspected PE",
+    "treatments": {
+      "orders": [
+        {"id": "tpa-pea-pe", "name": "Alteplase 50mg IV push in PEA arrest", "group": "Thrombolytics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "PEA arrest + suspected PE: alteplase 50mg IV push. Continue CPR for 60-90 minutes after tPA — lysis takes time. AHA guidelines support this in undifferentiated PEA with high PE suspicion.",
+          "references": [{"source": "AHA 2023 Cardiac Arrest Guidelines", "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123", "detail": "Thrombolytics in PEA for suspected PE; continue CPR 60-90 min post-tPA"}]},
+        {"id": "echo-cpr", "name": "Bedside echo during CPR pulse check", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Echo during 10-second CPR pulse check: RV dilation + D-sign + empty LV = massive PE. Fastest confirmation. Do not stop CPR >10 seconds.",
+          "references": [{"source": "PE — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560698/", "detail": "Echo in PEA arrest: dilated RV + empty LV = massive PE; limit pause to <10s"}]},
+        {"id": "surgical-embolectomy-pe3", "name": "CT surgery — emergent surgical embolectomy", "group": "Definitive", "critical": false, "correct": true, "phase": 2,
+          "teaching": "If tPA contraindicated or fails: emergent surgical embolectomy or mechanical thrombectomy (FlowTriever). Requires immediate activation. Can be lifesaving.",
+          "references": [{"source": "PE — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK560698/", "detail": "Surgical embolectomy if tPA contraindicated or failed"}]}
+      ],
+      "phases": [
+        {"id": "arrest", "label": "PEA Arrest", "auto": true, "vitals": {"BP": "0 — CPR", "HR": "PEA", "ETCO2": "12 mmHg"}, "labHighlights": {"Echo": "Dilated RV, D-sign, empty LV"}},
+        {"id": "rosc", "label": "ROSC (60 min post-tPA)", "vitals": {"BP": "76/40", "HR": "128", "SpO2": "85%"}, "labHighlights": {"Troponin": "8.4", "Lactate": "12"}},
+        {"id": "icu", "label": "ICU Stabilized", "vitals": {"BP": "98/62 (epi)", "HR": "108", "SpO2": "92% 100% FiO2"}, "labHighlights": {"CTPA": "Bilateral saddle PE"}}
+      ]
+    },
+    "mustNotMiss": ["RV dilation on echo during CPR = treat as PE","Continue CPR full 60-90 min after tPA — do not stop early","ECMO consideration for refractory arrest if available","Post-ROSC CTPA to confirm and guide management"],
+    "commonPitfalls": ["Stopping CPR too soon after tPA (lysis takes 60-90 min)","Missing PE as PEA cause (most common missed diagnosis in undifferentiated PEA)","Not using echo during pulse checks to guide diagnosis","Forgetting tPA dosing difference: 50mg push in arrest vs 100mg infusion if not arrested"],
+    "keyLearningPoints": ["Undifferentiated PEA + no obvious cause = suspect PE; echo confirms","tPA 50mg IV push in PEA arrest — continue CPR 60-90 min after","H's and T's of PEA: Tension PTX, Tamponade, Thrombosis (PE/MI) are the treatable Ts"]
+  },
+  "encephalitis": {
+    "id": "encephalitis",
+    "diagnosis": "Herpes Simplex Encephalitis (HSE)",
+    "acuity": 1,
+    "presentation": "Fever / AMS / New Seizure",
+    "category": "infectious",
+    "chiefComplaint": "AMS / Fever / Seizure — Temporal Lobe",
+    "treatments": {
+      "orders": [
+        {"id": "acyclovir-hse2", "name": "Acyclovir 10mg/kg IV q8h — EMPIRICALLY, NOW", "group": "Antivirals", "critical": true, "correct": true, "phase": 1,
+          "teaching": "HSE mortality without treatment: 70%. With acyclovir: 20-30%. Must start empirically when HSE is clinically suspected — do NOT wait for LP results or PCR. Start now.",
+          "references": [{"source": "Herpes Encephalitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470234/", "detail": "Empiric acyclovir 10mg/kg IV q8h; 70% mortality untreated — NIAID trial 1986"}]},
+        {"id": "lp-hse2", "name": "Lumbar puncture (CSF HSV PCR, cell count, glucose, protein)", "group": "Diagnostics", "critical": true, "correct": true, "phase": 1,
+          "teaching": "CSF in HSE: lymphocytic pleocytosis, elevated protein, normal glucose, RBCs. HSV PCR sensitivity 95-98%. PCR may be negative in first 72h — do not stop acyclovir for early negative PCR.",
+          "references": [{"source": "Herpes Encephalitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470234/", "detail": "CSF HSV PCR: sensitivity 95-98%; negative in first 72h possible — do not stop acyclovir"}]},
+        {"id": "mri-hse2", "name": "MRI Brain FLAIR/T2 (temporal lobe signal)", "group": "Imaging", "critical": true, "correct": true, "phase": 1,
+          "teaching": "MRI FLAIR/T2: temporal lobe (medial, orbitofrontal, cingulate) hyperintensity is characteristic. CT is often negative early. MRI required.",
+          "references": [{"source": "Herpes Encephalitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470234/", "detail": "MRI FLAIR temporal lobe hyperintensity; CT negative early in HSE"}]},
+        {"id": "wait-lp-hse", "name": "Wait for LP results before starting acyclovir", "group": "Antivirals", "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — never delay acyclovir waiting for LP or PCR in suspected HSE. 70% mortality untreated. Treat empirically. De-escalate if PCR ultimately negative on repeat at day 3-7.",
+          "references": [{"source": "Herpes Encephalitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470234/", "detail": "Acyclovir empirically before LP results; treat first, de-escalate later"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "138/86", "HR": "104", "Temp": "38.8°C", "SpO2": "97%"}, "labHighlights": {"WBC": "12,800", "CT Head": "Normal"}},
+        {"id": "acyclovir-running", "label": "Acyclovir Running", "vitals": {"BP": "132/82", "HR": "96", "Temp": "38.2°C"}, "labHighlights": {"CSF WBC": "88 lymphocytes", "CSF protein": "82", "HSV PCR": "Pending"}},
+        {"id": "confirmed", "label": "Diagnosis Confirmed", "vitals": {"BP": "128/78", "HR": "88"}, "labHighlights": {"HSV PCR": "HSV-1 positive", "MRI": "Left temporal FLAIR"}}
+      ]
+    },
+    "mustNotMiss": ["HSE can present as psychiatric illness before AMS — new psychosis + fever = HSE until proven otherwise","Autoimmune encephalitis (NMDA-R) — young woman, psych symptoms, movement disorder, mild CSF pleocytosis","Bacterial meningitis — differentiate on LP","Seizures — aggressive anticonvulsant management needed in HSE"],
+    "commonPitfalls": ["Waiting for PCR before starting acyclovir (deadly delay — 70% mortality untreated)","Stopping acyclovir for negative PCR in first 72h (repeat LP at day 3-7)","CT head instead of MRI (CT often normal early)","Missing autoimmune encephalitis (needs immunotherapy, not antivirals)"],
+    "keyLearningPoints": ["Acyclovir empirically for fever + AMS + seizure — before LP results, before MRI","HSE mortality: 70% untreated → 20% treated. Every hour matters.","PCR negative in first 72h — clinical suspicion overrides early negative result"]
+  },
+  "pneumonia-on-copd": {
+    "id": "pneumonia-on-copd",
+    "diagnosis": "Pneumonia on COPD — AECOPD + PNA",
+    "acuity": 2,
+    "presentation": "Increased Dyspnea / Productive Cough",
+    "category": "pulmonary",
+    "chiefComplaint": "COPD Patient / Worsening Dyspnea / Infiltrate on CXR",
+    "treatments": {
+      "orders": [
+        {"id": "spo2-target-copd2", "name": "Target SpO2 88-92% — NOT >95%", "group": "Oxygenation", "critical": true, "correct": true, "phase": 1,
+          "teaching": "COPD patients with chronic CO2 retention rely on hypoxic drive. High-flow O2 targeting >95% eliminates this drive → CO2 narcosis → respiratory failure. Target 88-92% with Venturi mask or low-flow NC.",
+          "references": [{"source": "COPD Exacerbation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/", "detail": "Target SpO2 88-92% in COPD; high-flow O2 causes hypercapnia and CO2 narcosis"}]},
+        {"id": "broncho-copd", "name": "Ipratropium + albuterol nebulized q4-6h", "group": "Bronchodilators", "critical": true, "correct": true, "phase": 1,
+          "teaching": "SABD combination first-line for AECOPD. Ipratropium (anticholinergic) + albuterol (beta-2 agonist) — combination superior to either alone.",
+          "references": [{"source": "GOLD COPD 2024", "url": "https://goldcopd.org/2024-gold-report/", "detail": "SABD combination first-line for AECOPD"}]},
+        {"id": "steroids-copd2", "name": "Prednisone 40mg PO x5 days", "group": "Steroids", "critical": true, "correct": true, "phase": 1,
+          "teaching": "5-day course equal to 14-day (REDUCE trial). Oral preferred if patient can swallow. Reduces LOS and treatment failure.",
+          "references": [{"source": "REDUCE Trial JAMA 2013", "url": "https://jamanetwork.com/journals/jama/fullarticle/1682803", "detail": "5-day prednisone equivalent to 14-day in AECOPD (REDUCE trial)"}]},
+        {"id": "bipap-copd", "name": "BiPAP for hypercapnic failure (pH <7.35, pCO2 >45)", "group": "Respiratory Support", "critical": true, "correct": true, "phase": 2,
+          "teaching": "NIV/BiPAP is first-line for COPD hypercapnic respiratory failure — reduces intubation by 50% and mortality. Use if pH <7.35 with hypercapnia. Avoid intubation if possible — very hard to wean COPD off ventilator.",
+          "references": [{"source": "COPD Exacerbation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK559281/", "detail": "NIV reduces intubation 50% in COPD hypercapnic failure; use pH <7.35 as threshold"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "148/88", "HR": "108", "RR": "28", "Temp": "38.4°C", "SpO2": "88% RA"}, "labHighlights": {"pCO2": "58 (baseline 50)", "pH": "7.32", "WBC": "14,200"}},
+        {"id": "treated", "label": "Treated", "vitals": {"BP": "138/82", "HR": "96", "RR": "22", "SpO2": "91% 2L"}, "labHighlights": {"pCO2": "52", "pH": "7.36"}},
+        {"id": "improving", "label": "Improving", "vitals": {"BP": "132/78", "HR": "88", "RR": "18", "SpO2": "92% 1L"}, "labHighlights": {"pCO2": "48", "pH": "7.38"}}
+      ]
+    },
+    "mustNotMiss": ["CO2 narcosis from high-flow O2 — check VBG if SpO2 suddenly rises to 98-100%","Pneumothorax — COPD + acute dyspnea + absent breath sounds","PE in COPD — can mimic AECOPD; low threshold for CTPA","Eosinophilic exacerbation (eosinophil >300 = excellent steroid response)"],
+    "commonPitfalls": ["High-flow O2 target >95% → CO2 narcosis","Antibiotics for every AECOPD (only if purulent sputum or radiographic PNA)","Delaying NIV until intubation is unavoidable","IV methylprednisolone when PO prednisone is equivalent"],
+    "keyLearningPoints": ["Three keys in AECOPD: controlled O2 (88-92%), bronchodilators, prednisone 40mg x5 days","NIV for pH <7.35 + hypercapnia — reduces intubation 50%","REDUCE: 5-day steroid course = 14-day — no benefit to longer courses"]
+  },
+  "chf-exacerbation-v2": {
+    "id": "chf-exacerbation-v2",
+    "diagnosis": "ADHF HFrEF — Diuretic Resistance / Cardiorenal",
+    "acuity": 2,
+    "presentation": "Dyspnea / Oliguria / Diuretic Resistance",
+    "category": "cardiovascular",
+    "chiefComplaint": "Known HFrEF — Worsening Despite Home Furosemide / Cr Rising",
+    "treatments": {
+      "orders": [
+        {"id": "iv-furosemide-v2", "name": "IV furosemide (2.5x home oral dose) + metolazone 5mg PO", "group": "Diuresis", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Diuretic resistance: switch to IV (>80% bioavailability vs ~50% oral), then add metolazone 30 min before furosemide for sequential nephron blockade. Metolazone blocks Na+ proximally — synergistic with loop diuretics.",
+          "references": [{"source": "Heart Failure — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/", "detail": "Diuretic resistance: IV furosemide + sequential nephron blockade with metolazone"}]},
+        {"id": "cr-monitor-v2", "name": "Creatinine + electrolytes q12h", "group": "Monitoring", "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cardiorenal syndrome type 1: accept modest Cr rise (≤0.3 mg/dL) if decongesting — diuresis-induced Cr rise has BETTER prognosis than under-diuresis. Continue unless Cr rise >0.5 or oliguria worsens.",
+          "references": [{"source": "Heart Failure — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/", "detail": "Modest Cr rise during diuresis acceptable — under-diuresis is more harmful than decongestion"}]},
+        {"id": "sglt2-hf3", "name": "Empagliflozin 10mg daily (if eGFR ≥20)", "group": "GDMT", "critical": false, "correct": true, "phase": 2,
+          "teaching": "EMPEROR-Reduced (2020): empagliflozin reduced CV death + HF hospitalization (HR 0.75) in HFrEF. Class I recommendation. Safe to start in-hospital at stable phase.",
+          "references": [{"source": "EMPEROR-Reduced NEJM 2020", "url": "https://www.nejm.org/doi/10.1056/NEJMoa2022190", "detail": "Empagliflozin HR 0.75 in HFrEF (EMPEROR-Reduced)"}]},
+        {"id": "dobutamine-hf3", "name": "Dobutamine 2-5 mcg/kg/min (if low cardiac output)", "group": "Inotropes", "critical": false, "correct": true, "phase": 2,
+          "teaching": "Low-output state (cool extremities, elevated lactate, worsening Cr): inotropes improve perfusion and enable diuresis. Short-term bridge. Monitor for arrhythmia.",
+          "references": [{"source": "Heart Failure — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/", "detail": "Dobutamine for low-output HF: temporary hemodynamic support"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "98/68", "HR": "108", "RR": "24", "SpO2": "91% RA"}, "labHighlights": {"BNP": "2,840", "Cr": "2.1 (baseline 1.4)", "Na": "128", "UO": "200 mL/8h"}},
+        {"id": "diuresis", "label": "Diuresis Protocol", "vitals": {"BP": "102/70", "HR": "100", "SpO2": "94% 2L"}, "labHighlights": {"Cr": "2.4 (acceptable)", "UO": "1.8 mL/kg/hr"}},
+        {"id": "decongested", "label": "Decongested", "vitals": {"BP": "108/72", "HR": "88", "SpO2": "97% RA"}, "labHighlights": {"BNP": "980", "Cr": "1.8", "Weight": "-5.2 kg"}}
+      ]
+    },
+    "mustNotMiss": ["Cardiogenic shock — cool extremities + lactate + SBP <90 = inotropes/IABP needed","Hyponatremia in HF — free water restriction + vasopressin antagonist if severe","New ischemia as decompensation trigger (troponin + ECG)","Medication non-adherence and dietary indiscretion"],
+    "commonPitfalls": ["Stopping diuresis for Cr rise ≤0.3 (accept modest rise if decongesting)","Not switching to IV furosemide when oral not working","Discharging without optimizing GDMT (ARNI, SGLT2i, MRA)","Missing new ischemia as trigger for decompensation"],
+    "keyLearningPoints": ["Diuretic resistance: IV > oral; add metolazone for sequential nephron blockade","Acceptable Cr rise during diuresis: ≤0.3 mg/dL — under-diuresis is worse","GDMT four: ACEi/ARNI + BB + MRA + SGLT2i — all reduce mortality in HFrEF"]
+  }
 
 };
