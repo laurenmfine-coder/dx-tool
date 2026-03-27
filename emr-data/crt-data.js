@@ -36516,5 +36516,261 @@ window.CRT_DATA = {
     "commonPitfalls": ["High-flow O2 targeting >95% (CO2 narcosis)","Starting BiPAP too late (pH <7.20 — often too late for NIV to work)","Not reassessing ABG at 1-2h (define failure criteria and act)","Premature extubation attempt after intubation (COPD patients are notoriously difficult to wean)"],
     "keyLearningPoints": ["NIV/BiPAP for COPD hypercapnic failure: reduces intubation 50%, reduces mortality","Target SpO2 88-92% — high-flow O2 drives CO2 narcosis in chronic retainers","BiPAP failure = pH <7.25 at 1-2h, declining GCS, or hemodynamic instability → intubate"]
   }
+,
+
+  "psychogenic-polydipsia": {
+    "id": "psychogenic-polydipsia",
+    "diagnosis": "Psychogenic Polydipsia with Severe Hyponatremia",
+    "acuity": 1,
+    "presentation": "Seizure / Na 114 / Psychiatric Patient / Excessive Water Intake",
+    "category": "psychiatric",
+    "chiefComplaint": "Schizophrenic Patient / Seizure / Na 114 / Drinking Compulsively",
+    "treatments": {
+      "orders": [
+        {"id": "3-percent-pp", "name": "3% NaCl 100-150mL IV over 15-20 min (active seizure/severe symptoms)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Symptomatic hyponatremia (seizure, coma): 3% NaCl bolus to raise Na by 4-6 mEq/L rapidly until symptoms resolve. Then slow correction to <10-12 mEq/L total per 24h (ODS risk). Psychogenic polydipsia: the kidney can dilute maximally (urine dilute), unlike SIADH (concentrated urine).",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "3% NaCl bolus for seizure: raise Na 4-6 mEq/L; then <10-12 mEq/24h total correction"}]},
+        {"id": "fluid-restrict-pp", "name": "Fluid restriction <1L/day (prevents recurrence)", "group": "Management",
+          "critical": true, "correct": true, "phase": 2,
+          "teaching": "Psychogenic polydipsia: restrict fluid to <1L/day. The dilutional hyponatremia from massive water intake corrects with restriction alone (unlike SIADH where restriction is insufficient). Address underlying psychiatric disorder — optimize antipsychotics (some cause polydipsia).",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "Fluid restriction <1L/day for psychogenic polydipsia; address underlying psychiatric illness"}]},
+        {"id": "distinguish-siadh-pp", "name": "Urine osmolality to distinguish from SIADH", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Psychogenic polydipsia: urine Osm <100 mOsm/kg (maximally dilute — kidney trying to excrete excess water). SIADH: urine Osm >100 mOsm/kg (inappropriately concentrated). This single test differentiates the two most important diagnoses.",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "Psychogenic polydipsia: urine Osm <100 (dilute); SIADH: urine Osm >100 (concentrated)"}]},
+        {"id": "normal-saline-pp", "name": "Normal saline infusion to treat hyponatremia", "group": "Fluids",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Normal saline can WORSEN hyponatremia in psychogenic polydipsia if patient continues drinking. The kidney will dilute and excrete the sodium, retaining the water. 3% NaCl for active symptoms; fluid restriction for maintenance.",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "NS inadequate for active symptoms; risks worsening if patient continues drinking; use 3% NaCl then restrict"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Seizure / ED Presentation", "auto": true,
+          "vitals": {"BP": "112/68", "HR": "104"},
+          "labHighlights": {"Na": "114", "Serum Osm": "238", "Urine Osm": "48 mOsm/kg (maximally dilute)", "Urine Na": "8 mEq/L"}},
+        {"id": "3-percent-given", "label": "3% NaCl Bolus",
+          "vitals": {"BP": "118/72", "HR": "96"},
+          "labHighlights": {"Na": "119 (after 150mL 3% NaCl)", "Seizure": "Resolved"}},
+        {"id": "restricted", "label": "Fluid Restricted / Recovering",
+          "vitals": {"BP": "122/76", "HR": "88"},
+          "labHighlights": {"Na": "126 (24h later)", "Fluid intake": "<1L", "Psych": "Medication review"}}
+      ]
+    },
+    "mustNotMiss": ["ODS if Na corrected >10-12 mEq/24h — irreversible demyelination (especially dangerous in chronic hyponatremia)","Antipsychotic-induced polydipsia (especially clozapine) — medication adjustment","If over-corrected: D5W or DDAVP to re-lower Na (ODS prevention)","Check for concurrent electrolyte abnormalities (K+, Mg) from massive water intake"],
+    "commonPitfalls": ["Normal saline for active seizure (too slow; 3% NaCl needed)","Over-rapid correction (ODS — especially in schizophrenia patients with chronic hyponatremia)","Missing urine osmolality (key test to distinguish from SIADH)","Not addressing underlying psychiatric cause"],
+    "keyLearningPoints": ["Psychogenic polydipsia: urine Osm <100 (dilute) — distinguishes from SIADH (concentrated)","3% NaCl for active seizure; fluid restriction for maintenance; correction <10-12 mEq/24h","ODS risk: chronic hyponatremia corrects SLOWER than acute — err on the side of slower correction"]
+  },
+  "hypothyroidismrelated-hyponatremia": {
+    "id": "hypothyroidismrelated-hyponatremia",
+    "diagnosis": "Severe Hypothyroidism with Symptomatic Hyponatremia",
+    "acuity": 2,
+    "presentation": "Confusion / Cold Intolerance / TSH 68 / Na 122",
+    "category": "endocrine",
+    "chiefComplaint": "Confusion / Fatigue / Cold / TSH 68 / Na 122",
+    "treatments": {
+      "orders": [
+        {"id": "thyroid-replacement-hypo", "name": "Levothyroxine 1.6 mcg/kg/day PO (start low in elderly/cardiac)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hypothyroidism causes SIADH (low thyroid hormone impairs free water excretion). Treating the underlying cause (levothyroxine) corrects the hyponatremia. In elderly or cardiac patients: start low (25-50 mcg/day) and increase slowly — rapid thyroid replacement in severe hypothyroidism can precipitate angina or MI (increased cardiac demand).",
+          "references": [{"source": "Hypothyroidism — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519536/", "detail": "Levothyroxine corrects hypothyroidism-related SIADH; start low in elderly/cardiac (25-50 mcg)"}]},
+        {"id": "tsh-panel", "name": "TSH + free T4 + comprehensive metabolic panel", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "TSH is the most sensitive test for hypothyroidism. TSH >10 mIU/L + low free T4 = overt hypothyroidism. Check CMP for hyponatremia, hypoglycemia, elevated creatinine (hypothyroidism affects renal and hepatic function). Also check cortisol — secondary hypothyroidism from pituitary may have concurrent secondary adrenal insufficiency.",
+          "references": [{"source": "Hypothyroidism — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519536/", "detail": "TSH most sensitive; check cortisol if secondary hypothyroidism suspected (pituitary) — concurrent AI"}]},
+        {"id": "fluid-restrict-hypo", "name": "Fluid restriction for hypothyroid SIADH", "group": "Management",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "While starting levothyroxine: fluid restriction (800-1000 mL/day) can help correct the hyponatremia faster. The SIADH resolves as thyroid function improves over 2-4 weeks. 3% NaCl only if actively symptomatic.",
+          "references": [{"source": "Hypothyroidism — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519536/", "detail": "Fluid restriction while thyroid function restores; hyponatremia resolves over 2-4 weeks with treatment"}]},
+        {"id": "myxedema-coma-tx", "name": "Myxedema coma: IV T4 200-500mcg bolus + T3 + hydrocortisone", "group": "Emergency",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Myxedema coma (hypothermia + AMS + severe hypothyroidism): IV T4 200-500 mcg loading dose, then 50-100 mcg/day + IV T3 5-20 mcg. Add hydrocortisone 50-100mg q6-8h until adrenal insufficiency excluded. ICU care: warming, ventilation support.",
+          "references": [{"source": "Hypothyroidism — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK519536/", "detail": "Myxedema coma: IV T4 200-500mcg loading + IV T3 + IV hydrocortisone; ICU care"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "96/64 (orthostatic)", "HR": "48 (bradycardia)", "Temp": "35.8°C"},
+          "labHighlights": {"TSH": "68 mIU/L", "Free T4": "0.3 (very low)", "Na": "122", "Glucose": "62"}},
+        {"id": "levothyroxine", "label": "Levothyroxine Started",
+          "vitals": {"BP": "108/72", "HR": "58"},
+          "labHighlights": {"Na": "126 (improving with restriction)", "Cortisol": "Normal (no AI)"}},
+        {"id": "week2", "label": "2 Weeks — Recovery",
+          "vitals": {"BP": "118/76", "HR": "68"},
+          "labHighlights": {"TSH": "22 (normalizing)", "Na": "134 (normal)", "Symptoms": "Markedly improved"}}
+      ]
+    },
+    "mustNotMiss": ["Myxedema coma (hypothermia + AMS + severe hypothyroidism) — IV T4/T3 + ICU","Secondary hypothyroidism (pituitary) — check cortisol before levothyroxine (concurrent AI risk)","Cardiac complications of rapid replacement (angina, MI in elderly — start low)","Pericardial effusion (common in severe hypothyroidism — echo if hemodynamically significant)"],
+    "commonPitfalls": ["Rapid levothyroxine initiation in elderly (cardiac demand exceeds supply)","Not checking cortisol in secondary hypothyroidism (giving T4 before steroids in AI = Addisonian crisis)","Treating hyponatremia without treating the underlying hypothyroidism","Attributing all symptoms to 'depression' without TSH"],
+    "keyLearningPoints": ["Hypothyroidism causes SIADH — treat the thyroid, not just the sodium","Start levothyroxine low in elderly/cardiac (25-50 mcg); titrate monthly","Secondary hypothyroidism: check cortisol first — concurrent AI requires hydrocortisone before T4"]
+  },
+  "aortic-injury": {
+    "id": "aortic-injury",
+    "diagnosis": "Blunt Traumatic Aortic Injury — Grade III",
+    "acuity": 1,
+    "presentation": "Deceleration Trauma / Widened Mediastinum / Hypotension",
+    "category": "trauma",
+    "chiefComplaint": "High-Speed MVA / Widened Mediastinum on CXR / BP 88/52",
+    "treatments": {
+      "orders": [
+        {"id": "permissive-hypotension-aorta", "name": "Permissive hypotension (SBP 80-90) — prevent aortic re-rupture", "group": "Resuscitation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Blunt aortic injury: permissive hypotension (SBP 80-90 mmHg) until aortic repair — avoid aggressive fluid resuscitation that raises BP and risks rupture. This is called 'damage control resuscitation.' Rate control (HR <80) also reduces aortic wall stress.",
+          "references": [{"source": "Traumatic Aortic Injury — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482345/", "detail": "Permissive hypotension SBP 80-90 until aortic repair; HR control <80 reduces wall stress"}]},
+        {"id": "cta-chest-aorta", "name": "CTA chest (gold standard — replace CXR widened mediastinum suspicion)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "CTA chest is definitive for blunt aortic injury — sensitivity and specificity >99%. CXR widened mediastinum is a screening test (non-specific, also from venous hemorrhage). Most injuries occur at the aortic isthmus (just distal to left subclavian artery — ligamentum arteriosum tethers aorta).",
+          "references": [{"source": "Traumatic Aortic Injury — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482345/", "detail": "CTA chest: >99% sensitivity/specificity; injury at isthmus (ligamentum arteriosum) in 90%"}]},
+        {"id": "tevar-aorta", "name": "Thoracic Endovascular Aortic Repair (TEVAR) — procedure of choice", "group": "Definitive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "TEVAR has replaced open surgery as treatment of choice for blunt aortic injury — lower mortality and morbidity. Immediate repair for Grade III/IV (partial or complete transection). Grade I/II (intimal tear/intramural hematoma) may be managed with anti-impulse therapy (beta-blocker) and serial imaging.",
+          "references": [{"source": "Traumatic Aortic Injury — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482345/", "detail": "TEVAR first-line for Grade III/IV; Grade I/II: medical management + serial CTA"}]},
+        {"id": "aggressive-fluids-aorta", "name": "Aggressive 2L NS resuscitation to normal BP", "group": "Resuscitation",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "DANGEROUS — aggressive fluids raise BP and increase aortic wall stress, risking complete rupture and exsanguination. Permissive hypotension (SBP 80-90) until aortic repair is the correct strategy.",
+          "references": [{"source": "Traumatic Aortic Injury — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482345/", "detail": "Aggressive fluids contraindicated — raises BP, increases aortic wall stress, risks complete rupture"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "88/52", "HR": "128", "SpO2": "94%"},
+          "labHighlights": {"CXR": "Widened mediastinum", "FAST": "No pericardial effusion", "CTA": "Pending"}},
+        {"id": "cta-result", "label": "CTA Result",
+          "vitals": {"BP": "96/60 (permissive)", "HR": "98"},
+          "labHighlights": {"CTA": "Grade III pseudoaneurysm at aortic isthmus", "Labetalol": "HR 78, anti-impulse therapy"}},
+        {"id": "tevar", "label": "TEVAR Completed",
+          "vitals": {"BP": "108/72", "HR": "76"},
+          "labHighlights": {"TEVAR": "Successful — stent-graft deployed", "Distal pulse": "Preserved"}}
+      ]
+    },
+    "mustNotMiss": ["Spinal cord ischemia post-TEVAR (covers intercostal arteries — CSF drainage often required)","Concurrent injuries (80% of blunt aortic injuries have other major injuries)","Grade I/II: serial CTA + anti-impulse therapy — many heal without surgery","TEVAR is NOT definitive in pediatrics (aorta still growing) — open repair preferred"],
+    "commonPitfalls": ["Aggressive BP normalization (raises wall stress — permissive hypotension until repair)","Missing aortic injury on CXR alone (CXR widened mediastinum is non-specific)","Delaying TEVAR for Grade III/IV while managing other injuries","Not starting anti-impulse therapy (beta-blocker + vasodilator) while awaiting TEVAR"],
+    "keyLearningPoints": ["Blunt aortic injury: widened mediastinum on CXR → CTA chest (sensitivity >99%)","Permissive hypotension SBP 80-90 + HR control <80 until TEVAR","TEVAR has replaced open surgery; Grade I/II can be managed medically with serial imaging"]
+  },
+  "acute-anterior-uveitis": {
+    "id": "acute-anterior-uveitis",
+    "diagnosis": "Acute Anterior Uveitis — HLA-B27 Associated",
+    "acuity": 3,
+    "presentation": "Painful Red Eye / Photophobia / Blurred Vision",
+    "category": "ophthalmic",
+    "chiefComplaint": "Painful Left Red Eye / Photophobia / Blurred Vision / Known Ankylosing Spondylitis",
+    "treatments": {
+      "orders": [
+        {"id": "ophthalmology-uveitis", "name": "Ophthalmology consultation (slit lamp mandatory)", "group": "Consultation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anterior uveitis requires slit lamp examination by ophthalmology — the only way to diagnose cell/flare in the anterior chamber. 'Cell and flare' = white blood cells and protein in aqueous humor. Key findings: ciliary flush (perilimbal injection), photophobia (ciliary muscle spasm), miosis, posterior synechiae.",
+          "references": [{"source": "Uveitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK554397/", "detail": "Slit lamp essential: cell/flare, keratic precipitates, posterior synechiae; ophthalmology consult always"}]},
+        {"id": "topical-steroids-uveitis", "name": "Prednisolone acetate 1% eye drops q1h (acute anterior uveitis)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Topical corticosteroids are the mainstay of acute anterior uveitis — reduce intraocular inflammation. Prednisolone acetate 1% q1h initially, taper based on response. Add cyclopentolate (cycloplegic) to prevent posterior synechiae and reduce ciliary spasm pain.",
+          "references": [{"source": "Uveitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK554397/", "detail": "Prednisolone acetate 1% q1h; cyclopentolate for cycloplegia; prevent posterior synechiae"}]},
+        {"id": "workup-uveitis", "name": "Workup for underlying cause (HLA-B27, syphilis, TB, sarcoidosis)", "group": "Diagnostics",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Idiopathic uveitis in 50%. HLA-B27-associated (ankylosing spondylitis, reactive arthritis, IBD, psoriasis) most common identifiable cause. Screen: HLA-B27, CXR (sarcoid/TB), syphilis serology, ACE. Consider TB IGRA if systemic steroids planned.",
+          "references": [{"source": "Uveitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK554397/", "detail": "HLA-B27, CXR, syphilis serology, ACE in recurrent/bilateral uveitis; TB IGRA before systemic steroids"}]},
+        {"id": "artificial-tears-uveitis", "name": "Artificial tears and cold compress (anti-inflammatory therapy)", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Artificial tears and cold compresses are NOT treatment for anterior uveitis — they address dry eye and surface irritation, not intraocular inflammation. Anterior uveitis requires topical corticosteroids prescribed by ophthalmology.",
+          "references": [{"source": "Uveitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK554397/", "detail": "Artificial tears insufficient for anterior uveitis — topical corticosteroids required; see ophthalmology"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "128/82", "HR": "78"},
+          "labHighlights": {"Vision": "20/80 OS (was 20/20)", "Slit lamp": "2+ cell, 2+ flare, no hypopyon", "IOP": "18 mmHg"}},
+        {"id": "treatment-started", "label": "Topical Steroids + Cycloplegic",
+          "vitals": {"BP": "126/80", "HR": "76"},
+          "labHighlights": {"HLA-B27": "Positive", "Ankylosing spondylitis": "Known"}},
+        {"id": "week1", "label": "Week 1 Follow-up",
+          "vitals": {"BP": "124/78", "HR": "74"},
+          "labHighlights": {"Vision": "20/40 OS (improving)", "Cell/flare": "1+ (improving)", "IOP": "16 mmHg"}}
+      ]
+    },
+    "mustNotMiss": ["Posterior uveitis (vitritis, retinal lesions) — systemic evaluation for sarcoid, Behçet, toxoplasma","Hypopyon (pus in anterior chamber) = severe uveitis or bacterial endophthalmitis — emergency","Glaucoma complication (steroid-induced IOP rise — monitor IOP)","Masked angle-closure glaucoma — must check IOP before cycloplegics"],
+    "commonPitfalls": ["Artificial tears instead of topical steroids (wrong treatment)","Not referring to ophthalmology (slit lamp essential)","Not checking for underlying systemic disease (especially in recurrent/bilateral cases)","Not monitoring IOP (topical steroids raise IOP in steroid responders)"],
+    "keyLearningPoints": ["Anterior uveitis: painful red eye + photophobia + blurred vision + ciliary flush (not pinpoint pupil, not purulent)","Slit lamp by ophthalmology is the only definitive diagnostic test","HLA-B27 most common identifiable association; topical prednisolone + cycloplegic is treatment"]
+  },
+  "dic-from-traumasurgery-with-hemorrhagic": {
+    "id": "dic-from-traumasurgery-with-hemorrhagic",
+    "diagnosis": "Disseminated Intravascular Coagulation — Trauma Induced",
+    "acuity": 1,
+    "presentation": "Diffuse Bleeding / Prolonged PT/PTT / Low Fibrinogen / Trauma",
+    "category": "hematologic",
+    "chiefComplaint": "Post-Trauma / Bleeding from All Sites / PT >30 / Fibrinogen 68",
+    "treatments": {
+      "orders": [
+        {"id": "treat-cause-dic", "name": "Treat the underlying cause — the ONLY definitive treatment for DIC", "group": "Definitive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "DIC is a syndrome, not a primary disease. Treatment of the underlying trigger is the only way to halt DIC: control hemorrhage (surgery), treat sepsis (antibiotics), deliver placenta (obstetric DIC), treat malignancy. Replacement therapy is supportive while the trigger is being addressed.",
+          "references": [{"source": "DIC — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441834/", "detail": "DIC: treat the underlying cause; replacement therapy is bridge while trigger addressed"}]},
+        {"id": "ffp-cryo-dic", "name": "FFP (coagulation factors) + cryoprecipitate (fibrinogen) if bleeding", "group": "Replacement",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Bleeding DIC with fibrinogen <100 mg/dL: cryoprecipitate (10 units → raises fibrinogen ~60-70 mg/dL). FFP if PT/aPTT >1.5x normal with bleeding. Platelets if <50,000 with active hemorrhage. Do NOT give prophylactically to non-bleeding DIC (laboratory DIC) — worsens thrombosis.",
+          "references": [{"source": "DIC — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441834/", "detail": "Cryo for fibrinogen <100; FFP for PT/aPTT >1.5x; plt for <50,000; only if bleeding — not prophylactically"}]},
+        {"id": "heparin-dic", "name": "Heparin for DIC (to block thrombosis)", "group": "Anticoagulation",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Heparin is RARELY used in DIC and NEVER as routine therapy in bleeding DIC (will worsen hemorrhage). Limited evidence. May be considered in specific DIC scenarios with predominant thrombosis (thrombotic DIC) — e.g., malignancy-associated DIC, purpura fulminans. Avoid in trauma/surgical DIC.",
+          "references": [{"source": "DIC — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441834/", "detail": "Heparin NOT routine in DIC; contraindicated in bleeding DIC; only for thrombotic-predominant DIC"}]},
+        {"id": "mtp-dic", "name": "Massive transfusion protocol (1:1:1) for hemorrhagic DIC", "group": "Transfusion",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Trauma-induced hemorrhagic DIC: MTP (1:1:1 ratio pRBC:FFP:platelets) corrects DIC while controlling hemorrhage. TXA 1g IV within 3h (CRASH-2). Cryoprecipitate 10u if fibrinogen <150. This is the modern damage control resuscitation approach.",
+          "references": [
+            {"source": "DIC — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441834/", "detail": "MTP 1:1:1 + TXA for trauma DIC; cryoprecipitate if fibrinogen <150"},
+            {"source": "CRASH-2 Trial Lancet 2010", "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(10)60835-5/fulltext", "detail": "TXA within 3h of injury reduces mortality in traumatic hemorrhage"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "78/48", "HR": "138", "SpO2": "92%"},
+          "labHighlights": {"PT": ">30 sec", "aPTT": ">80 sec", "Fibrinogen": "68 mg/dL", "Plt": "44,000", "D-dimer": ">10"}},
+        {"id": "mtp-activated", "label": "MTP Activated",
+          "vitals": {"BP": "92/60", "HR": "118"},
+          "labHighlights": {"FFP": "4u given", "Cryo": "10u given", "TXA": "1g IV"}},
+        {"id": "improving", "label": "Hemorrhage Controlled / DIC Improving",
+          "vitals": {"BP": "108/72", "HR": "96"},
+          "labHighlights": {"Fibrinogen": "168 mg/dL", "PT": "18 sec (improving)", "Plt": "78,000"}}
+      ]
+    },
+    "mustNotMiss": ["ALWAYS treat the trigger — DIC is always secondary to another process","Purpura fulminans (severe DIC with skin necrosis — urgent PC replacement)","Obstetric DIC (abruptio placentae, amniotic fluid embolism — deliver urgently)","Thrombotic vs hemorrhagic DIC (predominant thrombosis: heparin may be appropriate)"],
+    "commonPitfalls": ["Heparin for bleeding DIC (worsens hemorrhage)","Prophylactic FFP/cryo in non-bleeding laboratory DIC (worsens thrombosis)","Not treating the underlying cause (DIC won't resolve without it)","TXA >3h post-injury (increases mortality in CRASH-2 — time window critical)"],
+    "keyLearningPoints": ["DIC: simultaneous thrombosis + hemorrhage — treat underlying cause + replace what's consumed","For bleeding: MTP 1:1:1 + TXA + cryoprecipitate; avoid heparin in hemorrhagic DIC","DIC labs: elevated PT/aPTT + low fibrinogen + elevated D-dimer + thrombocytopenia"]
+  },
+  "acute-mi-dyspnea": {
+    "id": "acute-mi-dyspnea",
+    "diagnosis": "Dyspnea-Predominant NSTEMI — Atypical Presentation",
+    "acuity": 2,
+    "presentation": "Dyspnea / No Chest Pain / Diabetic / Elderly Woman",
+    "category": "cardiovascular",
+    "chiefComplaint": "67yo Diabetic Woman / Dyspnea 3 Hours / No Chest Pain / Nausea",
+    "treatments": {
+      "orders": [
+        {"id": "ecg-troponin-atypical", "name": "ECG + serial troponin (rule out NSTEMI in atypical chest pain)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Atypical MI presentations: diabetics, elderly women, and immunocompromised patients frequently have dyspnea, fatigue, nausea, or jaw/arm pain WITHOUT classic chest pain. Women with MI 2x more likely to have atypical presentation. Serial troponin and ECG mandatory for ANY new unexplained dyspnea or atypical symptoms in high-risk patients.",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430757/", "detail": "Atypical MI: diabetics/elderly women — dyspnea without chest pain; serial troponin + ECG mandatory"}]},
+        {"id": "aspirin-nstemi-atypical", "name": "Aspirin 325mg PO stat + P2Y12 inhibitor", "group": "Antiplatelet",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Dual antiplatelet therapy immediately for NSTEMI. Aspirin 325mg loading dose + ticagrelor 180mg (preferred) or clopidogrel 600mg. Continue aspirin 81mg indefinitely. P2Y12 inhibitor for 12 months post-NSTEMI.",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430757/", "detail": "Aspirin 325mg + P2Y12 inhibitor immediately for NSTEMI; DAPT 12 months post-event"}]},
+        {"id": "early-invasive-nstemi", "name": "Early invasive strategy (cath within 24-48h) for high-risk NSTEMI", "group": "Strategy",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "High-risk NSTEMI (GRACE score >140, dynamic ECG changes, ongoing ischemia, HF, hemodynamic instability): early invasive strategy within 24h. Intermediate risk: within 24-48h. Low risk: consider conservative strategy with functional testing. This patient: elderly diabetic + elevated troponin = high risk.",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430757/", "detail": "High-risk NSTEMI: cath within 24h (GRACE >140, dynamic ECG, ongoing ischemia, HF)"}]},
+        {"id": "reassure-dyspnea", "name": "Diagnose as COPD exacerbation — treat with bronchodilators", "group": "Misdiagnosis",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "DANGEROUS ASSUMPTION — dyspnea in an elderly diabetic woman is cardiac until proven otherwise. Do NOT treat as respiratory/GI/psychiatric before ruling out ACS with ECG and troponin. Delay in NSTEMI diagnosis leads to larger infarcts and preventable death.",
+          "references": [{"source": "NSTEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430757/", "detail": "Never assume dyspnea in elderly/diabetic is non-cardiac before ECG + troponin — high miss rate for ACS"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/92", "HR": "96", "SpO2": "94% RA"},
+          "labHighlights": {"ECG": "ST depression V4-V6, T-wave inversions", "Troponin-0h": "0.12 (elevated)", "BNP": "420"}},
+        {"id": "confirmed", "label": "NSTEMI Confirmed",
+          "vitals": {"BP": "142/88", "HR": "92"},
+          "labHighlights": {"Troponin-3h": "0.88 (rising)", "GRACE score": "158 (high risk)", "DAPT": "Started"}},
+        {"id": "cath", "label": "Cath Day 1",
+          "vitals": {"BP": "136/84", "HR": "82"},
+          "labHighlights": {"Angiography": "80% LAD stenosis", "PCI": "Successful stent placed"}}
+      ]
+    },
+    "mustNotMiss": ["Silent MI in diabetics (neuropathy impairs chest pain perception — dyspnea most common complaint)","Women 2x more likely to present with atypical symptoms — do not anchor to 'less likely MI'","Type 2 MI (demand ischemia from tachycardia, anemia, sepsis) — treat underlying cause","Acute heart failure from MI (BNP elevation, pulmonary edema)"],
+    "commonPitfalls": ["Not obtaining ECG + troponin for unexplained dyspnea in high-risk patient","Anchoring on 'no chest pain' as reassuring in diabetic/elderly","Delayed invasive strategy for high-risk NSTEMI (>24h worsens outcome)","Treating as COPD/pulmonary without ruling out cardiac cause"],
+    "keyLearningPoints": ["Diabetics and elderly women have atypical MI presentations — dyspnea without chest pain is common","ALWAYS get ECG + troponin before attributing dyspnea to pulmonary/GI/psychiatric causes in high-risk patients","High-risk NSTEMI (GRACE >140): invasive strategy within 24h improves outcomes"]
+  }
 
 };
