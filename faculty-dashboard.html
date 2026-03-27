@@ -416,9 +416,9 @@ function loadFromLocal() {
     FAC.currentUser = { username: found.username, displayName: found.displayName, role: getEMRRole(found.username)||'faculty' };
     loadData();
   } else {
-    // Dev mode — create a demo faculty session
-    FAC.currentUser = { username: 'faculty@demo.com', displayName: 'Dr. Demo Faculty', role: 'faculty' };
-    loadData();
+    // No authenticated faculty user found — redirect to login
+    window.location.href = 'auth/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+    return;
   }
 }
 

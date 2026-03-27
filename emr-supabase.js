@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _cl=console.log;console.log=function(){};}
 /* emr-supabase.js — ReasonDx Cloud Sync (Real Implementation)
  * Syncs submissions, feedback, and annotations to Supabase
  * Tables required: emr_submissions, emr_feedback, emr_annotations, emr_session_data
