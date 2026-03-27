@@ -35454,5 +35454,219 @@ window.CRT_DATA = {
     "commonPitfalls": ["Radiation instead of surgery for CES (RT cannot decompress peripheral nerves acutely)","Not placing Foley immediately (bladder distension worsens nerve damage)","Delay waiting for oncology/radiation planning (surgery cannot wait)","Incomplete MRI (whole spine required — metastatic disease is multilevel)"],
     "keyLearningPoints": ["CES = saddle anesthesia + bowel/bladder dysfunction + bilateral LE weakness = surgical emergency","<24h surgical decompression: continence recovery likely. >48h complete deficit: low recovery","Distinguish cord (UMN, RT appropriate) from cauda equina (LMN, surgery required)"]
   }
+,
+
+  "acute-mi": {
+    "id": "acute-mi",
+    "diagnosis": "STEMI with Acute Pulmonary Edema — Killip IV",
+    "acuity": 1,
+    "presentation": "Chest Pain / Pulmonary Edema / Cardiogenic Shock",
+    "category": "cardiovascular",
+    "chiefComplaint": "Crushing Chest Pain / Severe Dyspnea / BP 86/54 / O2 82%",
+    "treatments": {
+      "orders": [
+        {"id": "primary-pci-shock", "name": "Primary PCI — emergent cath lab activation (door-to-balloon <90 min)", "group": "Reperfusion",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cardiogenic shock from STEMI: PCI is the only treatment that improves survival. SHOCK trial: early revascularization reduced 6-month mortality from 63% to 50%. Mechanical support (IABP, Impella) as bridge. Do NOT delay PCI for hemodynamic stabilization — PCI IS the stabilization.",
+          "references": [
+            {"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Cardiogenic shock: PCI reduces 6-month mortality (SHOCK trial); do not delay for hemodynamic stabilization"},
+            {"source": "SHOCK Trial NEJM 1999", "url": "https://www.nejm.org/doi/10.1056/NEJM199908263410901", "detail": "Early revascularization reduces 6-month mortality in STEMI cardiogenic shock"}]},
+        {"id": "norepinephrine-shock-mi", "name": "Norepinephrine 0.1-0.3 mcg/kg/min (vasopressor for cardiogenic shock)", "group": "Vasopressors",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Norepinephrine is the preferred vasopressor for cardiogenic shock — alpha and beta effects restore perfusion pressure. Dopamine was previously used but has more arrhythmias (SOAP II trial). Start at 0.1 mcg/kg/min and titrate to MAP >65.",
+          "references": [{"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Norepinephrine preferred vasopressor in cardiogenic shock; less arrhythmia than dopamine (SOAP II)"}]},
+        {"id": "biv-failure-mi", "name": "Biventricular failure assessment — echo to guide management", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Bedside echo immediately: EF, wall motion abnormalities, papillary muscle rupture, VSD, pericardial effusion. Mechanical complications of STEMI: papillary muscle rupture (new MR murmur), VSD (new harsh systolic murmur), free wall rupture (tamponade). Echo guides decision for IABP, Impella, or emergent surgery.",
+          "references": [{"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Bedside echo: identify mechanical complications; guide mechanical support decisions"}]},
+        {"id": "aggressive-diuresis-shock", "name": "Furosemide 80mg IV for pulmonary edema", "group": "Diuretics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "CAUTION — aggressive diuresis in cardiogenic shock risks worsening hypotension and hypoperfusion. Intubation with PEEP + vasopressors + urgent PCI is the management of cardiogenic shock pulmonary edema. Small doses of diuretics may be used carefully, but diuresis is NOT the priority.",
+          "references": [{"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Aggressive diuresis worsens hypotension in cardiogenic shock; intubation + vasopressors + PCI are priorities"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "86/54", "HR": "122", "SpO2": "82% NRB", "RR": "32"},
+          "labHighlights": {"ECG": "Anterior STEMI V1-V6", "Troponin": "2.8 (rising)", "Lactate": "4.2"}},
+        {"id": "intubated-pci", "label": "Intubated / Cath Lab",
+          "vitals": {"BP": "96/62 (norepinephrine)", "HR": "108"},
+          "labHighlights": {"Echo": "EF 20%, akinetic anterior wall", "Cath": "LAD 100% occlusion"}},
+        {"id": "post-pci", "label": "Post-PCI",
+          "vitals": {"BP": "106/72", "HR": "96"},
+          "labHighlights": {"LAD": "Opened (TIMI 3 flow)", "Impella": "Placed for support"}}
+      ]
+    },
+    "mustNotMiss": ["Mechanical complications: papillary muscle rupture (MR), VSD, free wall rupture — echo mandatory","Cardiogenic shock: aggressive diuresis worsens perfusion — vasopressors + PCI first","Right ventricular involvement (inferior STEMI) — NTG contraindicated; give IV fluids","Cardiorespiratory arrest in STEMI — do not stop resuscitation; direct to PCI post-ROSC"],
+    "commonPitfalls": ["Aggressive diuresis worsening hypoperfusion in cardiogenic shock","Dopamine instead of norepinephrine (more arrhythmias — SOAP II)","Delaying PCI for hemodynamic stabilization (PCI IS the stabilization)","Missing mechanical complications (new murmur in STEMI = echo immediately)"],
+    "keyLearningPoints": ["Cardiogenic shock: early PCI is the intervention (SHOCK trial: reduces mortality)","Norepinephrine preferred vasopressor over dopamine in cardiogenic shock","Mechanical STEMI complications: papillary rupture, VSD, free wall rupture — all need echo and surgical evaluation"]
+  },
+  "hcm": {
+    "id": "hcm",
+    "diagnosis": "Hypertrophic Cardiomyopathy with LVOT Obstruction",
+    "acuity": 2,
+    "presentation": "Syncope / Chest Pain / Dynamic Murmur / Young Athlete",
+    "category": "cardiovascular",
+    "chiefComplaint": "Syncope During Exercise / Harsh Systolic Murmur / 22yo Athlete",
+    "treatments": {
+      "orders": [
+        {"id": "echo-hcm", "name": "Transthoracic echo (LVOT gradient, septal thickness, SAM)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Echo is gold standard for HCM: septal wall ≥15mm (or ≥13mm with family history), LVOT gradient at rest >30mmHg (dynamic obstruction) or provoked >50mmHg. Systolic anterior motion (SAM) of mitral valve causes LVOT obstruction. Dynamic murmur: increases with Valsalva, decreases with squatting.",
+          "references": [{"source": "HCM — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470593/", "detail": "Echo: septal ≥15mm, LVOT gradient >30mmHg (resting obstruction); SAM of mitral valve"}]},
+        {"id": "beta-blocker-hcm", "name": "Metoprolol succinate 25-50mg PO daily (rate control, reduce obstruction)", "group": "Medications",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Beta-blockers are first-line for HCM with obstruction — reduce heart rate, increase diastolic filling time, reduce LVOT gradient (less dynamic obstruction). Disopyramide (negative inotrope) is second-line. Avoid vasodilators (NTG, ACE inhibitors) — worsen obstruction.",
+          "references": [{"source": "HCM — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470593/", "detail": "Beta-blockers first-line for HCM with obstruction; reduce LVOT gradient; avoid vasodilators"}]},
+        {"id": "icd-hcm", "name": "Electrophysiology consultation — ICD assessment (SCD risk)", "group": "Risk Stratification",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "HCM is the most common cause of SCD in young athletes. ICD indications: prior cardiac arrest, VT, family history of SCD, unexplained syncope, LVEF <50%, extreme hypertrophy ≥30mm, abnormal BP response to exercise. HCM Risk-SCD calculator estimates 5-year SCD risk.",
+          "references": [{"source": "HCM — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470593/", "detail": "ICD for HCM SCD risk factors; HCM = most common cause of SCD in young athletes"}]},
+        {"id": "nitro-hcm", "name": "Nitroglycerin for syncope in HCM", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "ABSOLUTELY CONTRAINDICATED — NTG reduces preload → reduces LV filling → worsens LVOT obstruction → can cause cardiovascular collapse in HCM. Avoid all vasodilators (NTG, beta-2 agonists, PDE5 inhibitors, ACE inhibitors).",
+          "references": [{"source": "HCM — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470593/", "detail": "Vasodilators (NTG, ACE-I) worsen LVOT obstruction in HCM — contraindicated"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "112/68", "HR": "96"},
+          "labHighlights": {"Murmur": "3/6 crescendo-decrescendo increases with Valsalva", "ECG": "LVH + deep septal Q waves"}},
+        {"id": "echo-result", "label": "Echo Result",
+          "vitals": {"BP": "116/72", "HR": "88"},
+          "labHighlights": {"Septum": "22mm", "LVOT gradient": "54 mmHg (provoked)", "SAM": "Positive"}},
+        {"id": "beta-blocker", "label": "Beta-Blocker Started",
+          "vitals": {"BP": "118/74", "HR": "68"},
+          "labHighlights": {"LVOT gradient": "28 mmHg (reduced)", "Plan": "ICD risk assessment + exercise restriction"}}
+      ]
+    },
+    "mustNotMiss": ["Activity restriction — high-intensity competitive sports contraindicated until SCD risk assessed","Genetic testing and family screening — autosomal dominant, 50% risk in first-degree relatives","NTG contraindicated — worsens obstruction","AF in HCM — high stroke risk; anticoagulate regardless of CHADS-VASC score"],
+    "commonPitfalls": ["NTG for chest pain (worsens obstruction — potentially fatal)","Not restricting sports activity before full HCM workup","Missing AF (common in HCM; needs anticoagulation even with low CHADS-VASC)","Diagnosing as 'athlete's heart' (athlete's heart: eccentric hypertrophy, no obstruction, regresses with detraining)"],
+    "keyLearningPoints": ["HCM murmur: INCREASES with Valsalva/standing (less preload); DECREASES with squatting (more preload)","Beta-blockers first-line; avoid ALL vasodilators (NTG, ACE-I, PDE5 inhibitors)","HCM = most common cause of SCD in young athletes; ICD if risk factors present"]
+  },
+  "cns-infection": {
+    "id": "cns-infection",
+    "diagnosis": "CNS Toxoplasmosis with Seizure — AIDS",
+    "acuity": 2,
+    "presentation": "Focal Deficit / Seizure / HIV / CD4 82",
+    "category": "infectious",
+    "chiefComplaint": "New Seizure / Right Hemiplegia / Known HIV / CD4 82",
+    "treatments": {
+      "orders": [
+        {"id": "empiric-toxo", "name": "Empiric pyrimethamine + sulfadiazine + leucovorin (toxoplasmosis treatment)", "group": "Antimicrobials",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "In AIDS with CD4 <100 + ring-enhancing lesion(s) + positive Toxoplasma IgG: treat empirically for CNS toxoplasmosis. Do not wait for brain biopsy. Pyrimethamine 200mg PO loading dose then 50mg/day + sulfadiazine 1000-1500mg q6h + leucovorin 10-25mg/day (prevents bone marrow suppression). Expect clinical/radiological improvement in 2 weeks. No improvement = biopsy for CNS lymphoma.",
+          "references": [{"source": "CNS Toxoplasmosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441970/", "detail": "Empiric toxo treatment if CD4 <100, ring-enhancing lesions, IgG positive; no response at 2 weeks = biopsy"}]},
+        {"id": "mri-brain-toxo", "name": "MRI brain with gadolinium (ring-enhancing lesions)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "MRI with contrast: toxoplasmosis = multiple ring-enhancing lesions, basal ganglia predominant, edema, +toxoplasma IgG. CNS lymphoma = single periventricular lesion, less edema. SPECT/PET can help distinguish (toxo = cold, lymphoma = hot). Empirical treatment vs biopsy based on clinical picture.",
+          "references": [{"source": "CNS Toxoplasmosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441970/", "detail": "MRI: multiple ring-enhancing lesions, basal ganglia, +toxo IgG = empiric treatment; single lesion = consider lymphoma"}]},
+        {"id": "steroids-toxo", "name": "Dexamethasone 10mg IV for cerebral edema", "group": "Steroids",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Steroids for significant cerebral edema or herniation risk in CNS toxoplasmosis. Caution: steroids also treat CNS lymphoma (obscures treatment response assessment). Use only for life-threatening edema.",
+          "references": [{"source": "CNS Toxoplasmosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441970/", "detail": "Steroids for herniation/severe edema only; may obscure toxo vs lymphoma response assessment"}]},
+        {"id": "art-initiation-toxo", "name": "Restart ART immediately (CD4 82)", "group": "ART",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "ART initiation in AIDS OI: defer ART for 2-6 weeks in CNS opportunistic infections (risk of immune reconstitution inflammatory syndrome — IRIS — which can worsen CNS inflammation). Start ART after 2 weeks of OI treatment and clinical stability.",
+          "references": [{"source": "CNS Toxoplasmosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441970/", "detail": "Defer ART 2-6 weeks in CNS OI: IRIS risk; start after clinical stability on OI treatment"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/86", "HR": "96", "Temp": "38.4°C"},
+          "labHighlights": {"CD4": "82", "Toxo IgG": "Positive", "MRI": "3 ring-enhancing lesions"}},
+        {"id": "treatment-started", "label": "Empiric Treatment",
+          "vitals": {"BP": "132/82", "HR": "90"},
+          "labHighlights": {"Anticonvulsant": "Levetiracetam started", "Treatment": "Pyrimethamine + sulfadiazine + leucovorin"}},
+        {"id": "2-weeks", "label": "2-Week Response Assessment",
+          "vitals": {"BP": "128/78", "HR": "84"},
+          "labHighlights": {"MRI": "Lesions reduced 40% (treatment response)", "Clinical": "Hemiplegia improving"}}
+      ]
+    },
+    "mustNotMiss": ["CNS lymphoma if no response at 2 weeks — biopsy immediately","IRIS after ART restart — can worsen CNS inflammation; defer ART 2-6 weeks","PML (progressive multifocal leukoencephalopathy) — JC virus, no ring enhancement, no treatment except ART","Cryptococcal meningitis — opening pressure on LP; fluconazole maintenance"],
+    "commonPitfalls": ["Starting ART immediately with CNS OI (IRIS risk)","Not giving leucovorin with pyrimethamine (bone marrow suppression)","Biopsy before 2-week empirical trial (most toxo responds; biopsy if no response)","Missing CNS lymphoma (single periventricular lesion, EBV in CSF, SPECT hot)"],
+    "keyLearningPoints": ["AIDS + CD4 <100 + ring-enhancing lesions + toxo IgG positive = treat empirically","No improvement in 2 weeks = CNS lymphoma until proven otherwise — biopsy","Defer ART 2-6 weeks in CNS OI: IRIS can be fatal in brain"]
+  },
+  "lyme-carditis": {
+    "id": "lyme-carditis",
+    "diagnosis": "Lyme Carditis with Complete Heart Block",
+    "acuity": 2,
+    "presentation": "Complete Heart Block / Young Patient / Endemic Area",
+    "category": "infectious",
+    "chiefComplaint": "Syncope / HR 36 / Complete Heart Block / Recently in Endemic Area",
+    "treatments": {
+      "orders": [
+        {"id": "doxycycline-lyme", "name": "Doxycycline 100mg PO BID x21 days (outpatient mild) or ceftriaxone 2g IV q24h (hospitalized)", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Lyme carditis: oral doxycycline for PR interval prolongation <300ms. IV ceftriaxone 2g q24h for complete heart block (PR interval >300ms or syncope/CHB). Most Lyme cardiac conduction abnormalities are temporary — resolve with antibiotics in 1-6 weeks. Do NOT commit to permanent pacemaker before full antibiotic course.",
+          "references": [{"source": "Lyme Carditis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/", "detail": "Ceftriaxone IV for CHB; doxycycline PO for mild; CHB usually resolves within 1-6 weeks"}]},
+        {"id": "lyme-serology", "name": "Lyme serology (ELISA + Western blot) + ECG monitoring", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Two-tier testing: ELISA (sensitive, not specific) → if positive/equivocal → Western blot (IgM for early, IgG for late Lyme). ECG monitoring essential — PR interval can fluctuate rapidly (1st → 2nd → 3rd degree AV block can occur within minutes). Continuous telemetry until resolving.",
+          "references": [{"source": "Lyme Carditis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/", "detail": "Two-tier Lyme serology (ELISA + Western blot); continuous telemetry for PR interval fluctuation"}]},
+        {"id": "temp-pacemaker-lyme", "name": "Temporary pacemaker for hemodynamically unstable CHB", "group": "Rate Support",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Temporary transcutaneous or transvenous pacing for hemodynamically unstable complete heart block in Lyme carditis. However, most Lyme CHB responds to antibiotics within days. Place temporary pacemaker as bridge — do NOT place permanent pacemaker before antibiotics have failed.",
+          "references": [{"source": "Lyme Carditis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/", "detail": "Temporary pacing for hemodynamic instability; avoid permanent pacemaker before antibiotic treatment"}]},
+        {"id": "permanent-pacemaker-lyme", "name": "Permanent pacemaker for complete heart block", "group": "Procedural",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Do NOT commit to permanent pacemaker in Lyme carditis before a full course of antibiotics. Lyme CHB is almost always reversible with treatment — permanent pacemaker is rarely needed. This is a key distinction from other causes of CHB.",
+          "references": [{"source": "Lyme Carditis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470443/", "detail": "Avoid permanent pacemaker before antibiotics — Lyme CHB is reversible in >95% with treatment"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "98/62", "HR": "36 (CHB)", "SpO2": "96%"},
+          "labHighlights": {"ECG": "Complete heart block (PR unmeasurable)", "Lyme ELISA": "Positive (pending WB)", "Recent hike": "Massachusetts 3 weeks ago"}},
+        {"id": "ceftriaxone-started", "label": "Ceftriaxone + Pacing",
+          "vitals": {"BP": "108/72", "HR": "58 (paced)"},
+          "labHighlights": {"WB": "IgM positive (Lyme confirmed)", "Telemetry": "Monitoring"}},
+        {"id": "day5", "label": "Day 5 — Block Improving",
+          "vitals": {"BP": "118/76", "HR": "72 (own rhythm)"},
+          "labHighlights": {"ECG": "2nd degree Mobitz I → improving", "Plan": "Complete IV ceftriaxone 21d"}}
+      ]
+    },
+    "mustNotMiss": ["Rapid PR interval fluctuation — can go from 1st to 3rd degree AV block in minutes (continuous telemetry essential)","Myopericarditis in Lyme (troponin elevation, chest pain — echo for pericardial effusion)","Other tick-borne co-infections (Anaplasmosis, Babesiosis, Ehrlichiosis in same area)","Permanent pacemaker before antibiotics = wrong decision in Lyme carditis"],
+    "commonPitfalls": ["Permanent pacemaker before antibiotic trial (Lyme CHB is almost always reversible)","Single Lyme serology without two-tier testing","Not monitoring continuously (PR interval fluctuates rapidly)","Missing rash (EM rash present in only 70-80% — absence does not rule out Lyme)"],
+    "keyLearningPoints": ["Lyme carditis: young + endemic area + CHB + 3-week onset = Lyme until proven otherwise","Ceftriaxone IV for CHB; temporary pacing if hemodynamically unstable","CHB in Lyme is reversible — do NOT implant permanent pacemaker before antibiotics"]
+  },
+  "rhabdomyolysisinduced-hyperkalemia": {
+    "id": "rhabdomyolysisinduced-hyperkalemia",
+    "diagnosis": "Exertional Rhabdomyolysis — CK 84,200 with Hyperkalemia",
+    "acuity": 2,
+    "presentation": "Dark Urine / Muscle Pain / CK 84,200",
+    "category": "renal",
+    "chiefComplaint": "Dark Cola-Colored Urine / Diffuse Muscle Pain / Post-Crush Exercise",
+    "treatments": {
+      "orders": [
+        {"id": "aggressive-ivf-rhabdo", "name": "Normal saline 1-1.5L/h IV — goal UO 200-300 mL/h", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Aggressive IV saline is the cornerstone of rhabdomyolysis treatment. Goal: UO 200-300 mL/h to flush myoglobin from tubules. Start at 1-1.5L/h. Myoglobin is directly nephrotoxic at acid pH — maintain urine pH >6.5 to prevent precipitation.",
+          "references": [{"source": "Rhabdomyolysis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448168/", "detail": "Aggressive IV NS 1-1.5L/h; goal UO 200-300 mL/h; prevents myoglobin tubular precipitation"}]},
+        {"id": "monitor-ck-bmp", "name": "CK + BMP + urine myoglobin q6-8h", "group": "Monitoring",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "CK trends guide therapy — discontinue aggressive IVF when CK peaks and begins declining (<1000 acceptable to slow fluids). Monitor K+ closely — muscle cell lysis releases intracellular K+ rapidly (hyperkalemia risk). Monitor Cr for AKI development.",
+          "references": [{"source": "Rhabdomyolysis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448168/", "detail": "CK + BMP q6-8h; K+ rises from muscle cell lysis; stop fluids when CK declining <1000"}]},
+        {"id": "bicarb-rhabdo", "name": "Sodium bicarbonate IV (alkalinize urine to pH >6.5)", "group": "Adjunct",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Urine alkalinization prevents myoglobin precipitation in tubules. Some centers add NaHCO3 to IV fluids to maintain urine pH >6.5. Not universally proven in RCTs but widely used. Avoid if hypocalcemia (bicarb worsens symptomatic hypocalcemia by binding ionized Ca2+).",
+          "references": [{"source": "Rhabdomyolysis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448168/", "detail": "Urine alkalinization (pH >6.5) to prevent myoglobin tubular precipitation; avoid if hypocalcemia"}]},
+        {"id": "calcium-rhabdo-hypoca", "name": "Calcium for symptomatic hypocalcemia only", "group": "Electrolytes",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Hypocalcemia is common in rhabdomyolysis (calcium deposits in necrotic muscle). Do NOT treat asymptomatic hypocalcemia — calcium mobilizes from muscle later in recovery. Treat only if symptomatic (tetany, severe EKG changes) to avoid hypercalcemia during recovery phase.",
+          "references": [{"source": "Rhabdomyolysis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK448168/", "detail": "Treat symptomatic hypocalcemia only; asymptomatic hypocalcemia will self-correct in recovery"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "108/72", "HR": "108", "SpO2": "98%"},
+          "labHighlights": {"CK": "84,200", "K+": "5.8", "Cr": "1.8", "Urine": "Dark brown — myoglobinuria"}},
+        {"id": "ivf-running", "label": "Aggressive IVF Running",
+          "vitals": {"BP": "116/74", "HR": "96"},
+          "labHighlights": {"UO": "280 mL/h", "CK": "112,000 (still rising)", "K+": "5.2"}},
+        {"id": "peak-declining", "label": "CK Peaking",
+          "vitals": {"BP": "118/76", "HR": "88"},
+          "labHighlights": {"CK": "96,000 (peak)", "Cr": "1.4 (improving)", "K+": "4.8", "Urine": "Clearing"}}
+      ]
+    },
+    "mustNotMiss": ["AKI — if oliguric despite aggressive IVF, may need dialysis","Compartment syndrome (CK peaks in first 24h, but compartment syndrome pain is ongoing — re-examine)","Hyperkalemia from K+ release — treat aggressively if ECG changes","Severe hypocalcemia during recovery phase (calcium mobilizes back — hypercalcemia possible)"],
+    "commonPitfalls": ["Inadequate fluid rate (UO <100 mL/h = AKI developing)","Treating asymptomatic hypocalcemia (worsens hypercalcemia during recovery)","Not monitoring K+ frequently (muscle lysis rapidly releases intracellular K+)","Stopping IVF too early (CK must be declining and <1000 before slowing)"],
+    "keyLearningPoints": ["Rhabdomyolysis: dark urine + myalgia + CK elevation → aggressive IVF to UO 200-300 mL/h","K+ rises from muscle cell lysis — ECG monitoring essential","Asymptomatic hypocalcemia: do NOT treat (will mobilize back from muscle)"]
+  }
 
 };
