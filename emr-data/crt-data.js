@@ -35200,5 +35200,259 @@ window.CRT_DATA = {
     "commonPitfalls": ["Platelet transfusion for thrombocytopenia in TMA (contraindicated)","Not sending ADAMTS13 urgently (treatment decision depends on it)","Delaying PLEX/eculizumab while waiting for ADAMTS13 result","Antibiotics for STEC-HUS (worsen outcomes by releasing more Shiga toxin)"],
     "keyLearningPoints": ["TMA triad: MAHA + thrombocytopenia + organ failure. Send ADAMTS13 immediately.","TTP (ADAMTS13 <10%): PLEX. aHUS (ADAMTS13 normal): eculizumab.","NEVER give platelets in TMA — fuels microvascular thrombosis. Fatal."]
   }
+,
+
+  "superior-vena-cava-syndrome": {
+    "id": "superior-vena-cava-syndrome",
+    "diagnosis": "Superior Vena Cava Syndrome — NSCLC",
+    "acuity": 2,
+    "presentation": "Facial Swelling / Arm Edema / Dyspnea / Plethora",
+    "category": "oncologic",
+    "chiefComplaint": "Progressive Facial Swelling / Neck Vein Distension / RUL Mass",
+    "treatments": {
+      "orders": [
+        {"id": "tissue-dx-svc", "name": "Tissue diagnosis BEFORE treatment (biopsy if possible)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Establish tissue diagnosis before starting steroids or radiation — treatment obscures pathology. Bronchoscopy, CT-guided biopsy, or mediastinoscopy. Exception: life-threatening SVC syndrome (stridor, AMS, severe hypoxia) = treat empirically, biopsy later. The underlying malignancy type determines definitive treatment.",
+          "references": [{"source": "SVC Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430927/", "detail": "Tissue diagnosis before treatment if possible; steroids/RT obscure pathology; biopsy first unless life-threatening"}]},
+        {"id": "dexamethasone-svc", "name": "Dexamethasone 10mg IV (reduce tumor edema)", "group": "Steroids",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Dexamethasone reduces peritumoral edema and venous obstruction symptoms. Use for symptomatic relief while definitive treatment (radiation, stenting, chemo) is arranged. Avoid in lymphoma if pre-treatment diagnosis not established — steroids are cytotoxic to lymphoma cells and will obscure histology.",
+          "references": [{"source": "SVC Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430927/", "detail": "Dexamethasone for symptomatic relief; caution in lymphoma (cytotoxic, obscures biopsy)"}]},
+        {"id": "svc-stent", "name": "Endovascular SVC stenting (rapid symptom relief)", "group": "Intervention",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "SVC stenting provides the fastest relief of obstruction (hours) — preferred for severe or life-threatening SVC syndrome. Allows time for definitive tissue diagnosis and treatment planning. Relief rate >90%.",
+          "references": [{"source": "SVC Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430927/", "detail": "SVC stenting: fastest relief (hours); >90% success; allows time for tissue diagnosis"}]},
+        {"id": "head-elevation-svc", "name": "Head elevation + diuretics (symptomatic support)", "group": "Supportive",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Elevate head of bed 45 degrees — reduces venous hydrostatic pressure from gravity. Loop diuretics reduce venous congestion. Avoid vascular access in upper extremities (impaired venous return) — use femoral access.",
+          "references": [{"source": "SVC Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430927/", "detail": "Head elevation 45°; diuretics; avoid upper extremity IV access in SVC syndrome"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/88", "HR": "96", "SpO2": "92% RA"},
+          "labHighlights": {"CT chest": "RUL mass 4.8cm compressing SVC", "Neck veins": "Grossly distended"}},
+        {"id": "stent-placed", "label": "SVC Stent Placed",
+          "vitals": {"BP": "132/84", "HR": "88", "SpO2": "96% RA"},
+          "labHighlights": {"Facial swelling": "Markedly improved within 6h", "Biopsy": "NSCLC confirmed"}},
+        {"id": "oncology", "label": "Oncology Plan",
+          "vitals": {"BP": "128/80", "HR": "84", "SpO2": "97% RA"},
+          "labHighlights": {"Path": "NSCLC squamous cell", "Plan": "Chemoradiation"}}
+      ]
+    },
+    "mustNotMiss": ["Life-threatening SVC syndrome: stridor, AMS, severe hypoxia = treat empirically (stent + dex)","Avoid steroids before biopsy in lymphoma (treatment obscures diagnosis)","Avoid upper extremity venous access (impaired drainage)","Thrombosis as cause of SVC (not always malignancy — CVC thrombosis treated with anticoagulation)"],
+    "commonPitfalls": ["Starting steroids/RT before tissue diagnosis (obscures pathology, especially lymphoma)","Not stenting when rapid relief needed (waiting for definitive oncology plan)","Upper extremity IV access in SVC syndrome","Missing SVCS from benign causes (fibrosing mediastinitis, CVC-associated thrombosis)"],
+    "keyLearningPoints": ["SVCS: facial plethora + arm edema + neck vein distension + dyspnea after RUL mass","Tissue diagnosis first if not life-threatening; stent for rapid relief","Lymphoma SVCS is chemo-sensitive — avoid steroids before biopsy (sterilizes tissue)"]
+  },
+  "spinal-metastasis": {
+    "id": "spinal-metastasis",
+    "diagnosis": "Malignant Spinal Cord Compression — Epidural Metastasis",
+    "acuity": 1,
+    "presentation": "Back Pain / Progressive Leg Weakness / Known Malignancy",
+    "category": "oncologic",
+    "chiefComplaint": "Known Breast Cancer / Back Pain 3 Weeks / New Leg Weakness Today",
+    "treatments": {
+      "orders": [
+        {"id": "dex-scc", "name": "Dexamethasone 10mg IV bolus IMMEDIATELY, then 4-6mg IV q6h", "group": "Steroids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "High-dose dexamethasone should be given IMMEDIATELY when malignant spinal cord compression (MSCC) is suspected — before MRI confirmation. Reduces vasogenic edema and can prevent irreversible paraplegia. Every hour without treatment risks permanent neurological deficit.",
+          "references": [{"source": "Spinal Cord Compression — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441981/", "detail": "Dexamethasone immediately on MSCC suspicion; reduces edema, prevents permanent deficits"}]},
+        {"id": "mri-whole-spine-scc", "name": "Emergent MRI whole spine with gadolinium", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Whole spine MRI essential — skip lesions in 30% of MSCC cases. Gadolinium shows epidural enhancement. Plain films miss early cord compression. CT only if MRI contraindicated. Must be done urgently — neurological status at time of treatment is the strongest predictor of outcome.",
+          "references": [{"source": "Spinal Cord Compression — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441981/", "detail": "Whole spine MRI urgently; skip lesions in 30%; neurological status at treatment predicts outcome"}]},
+        {"id": "rt-scc", "name": "Urgent radiation oncology consultation (RT within 24h)", "group": "Radiation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Radiation therapy is first-line for most MSCC — especially radiosensitive tumors (lymphoma, myeloma, breast, prostate). Start within 24 hours of diagnosis. Surgery (decompressive laminectomy) indicated for: spinal instability, radioresistant tumor (renal cell, melanoma), rapid neurological deterioration.",
+          "references": [{"source": "Spinal Cord Compression — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441981/", "detail": "RT within 24h for most MSCC; surgery for instability or radioresistant tumor"}]},
+        {"id": "analgesics-scc", "name": "Adequate analgesia (opioids if needed)", "group": "Supportive",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Adequate pain control is essential — back pain is the presenting symptom in >90% of MSCC. Multimodal analgesia including opioids as needed. Pain control should not delay imaging or treatment.",
+          "references": [{"source": "Spinal Cord Compression — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441981/", "detail": "Adequate analgesia; back pain in >90% of MSCC cases"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "128/82", "HR": "88"},
+          "labHighlights": {"Neuro": "Leg weakness 3/5 bilateral, T8 sensory level", "MRI": "Pending"}},
+        {"id": "mri-result", "label": "MRI Result",
+          "vitals": {"BP": "124/80", "HR": "84"},
+          "labHighlights": {"MRI": "T7-T8 epidural metastasis, 40% cord compression", "Dex": "Running"}},
+        {"id": "rt-started", "label": "RT Day 1",
+          "vitals": {"BP": "122/78", "HR": "82"},
+          "labHighlights": {"Neuro": "Leg strength 4/5 (improving)", "RT": "20Gy/5 fractions"}}
+      ]
+    },
+    "mustNotMiss": ["Ambulatory status at start of treatment = strongest predictor of outcome: ambulatory patients almost always remain ambulatory; paraplegic rarely recover","Cauda equina syndrome (saddle anesthesia + bowel/bladder dysfunction = EMERGENCY surgery)","Spinal instability (SINS score) — surgical stabilization before RT","Do not wait for symptoms to worsen — treat at first neurological sign"],
+    "commonPitfalls": ["Delaying dexamethasone for imaging confirmation (give immediately on clinical suspicion)","Not imaging the whole spine (skip lesions common — 30%)","Waiting too long before RT (every hour risks permanent paraplegia)","Missing cauda equina syndrome as surgical emergency vs cord compression (RT is treatment)"],
+    "keyLearningPoints": ["MSCC: back pain + neurological signs in cancer patient = emergency","Dexamethasone immediately; whole spine MRI; RT within 24h","Neurological status at start of treatment predicts outcome — act fast"]
+  },
+  "exertional-heat-stroke": {
+    "id": "exertional-heat-stroke",
+    "diagnosis": "Exertional Heat Stroke — Core Temp 41.8°C",
+    "acuity": 1,
+    "presentation": "Hyperthermia / AMS / Exertion",
+    "category": "environmental",
+    "chiefComplaint": "Collapsed After Marathon / Temp 41.8°C / Confused",
+    "treatments": {
+      "orders": [
+        {"id": "cold-water-immersion", "name": "Cold water immersion (1-15°C) — most effective cooling method", "group": "Cooling",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cold water immersion (CWI) is the most effective and fastest cooling method for exertional heat stroke — achieves target <38.5°C faster than all alternatives. At race events, 'cool first, transport second.' Immerse in cold water bath or continuous ice water dousing. Target <38.9°C within 30 min.",
+          "references": [{"source": "Heat Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430743/", "detail": "Cold water immersion: fastest cooling; 'cool first, transport second'; target <38.9°C in 30 min"}]},
+        {"id": "temp-monitor-hs", "name": "Rectal temperature monitoring (core temp, not oral/axillary)", "group": "Monitoring",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Rectal temperature is the gold standard for core temp in heat stroke. Oral and axillary readings are inaccurate. Stop cooling at 38.5°C to prevent overshoot hypothermia. Continuous rectal temp monitoring during cooling.",
+          "references": [{"source": "Heat Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430743/", "detail": "Rectal temperature gold standard; stop cooling at 38.5°C to prevent overshoot"}]},
+        {"id": "ivf-hs", "name": "IV fluids — NS for rhabdomyolysis (goal UO 1-2 mL/kg/hr)", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Aggressive IV hydration for rhabdomyolysis (heat stroke causes massive CK elevation). Goal: UO 1-2 mL/kg/hr. Check CK, BMP, LFTs — multi-organ failure is the hallmark of heat stroke. Also treat hypoglycemia, coagulopathy (DIC), and hyperkalemia.",
+          "references": [{"source": "Heat Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430743/", "detail": "IV fluids for rhabdomyolysis; UO 1-2 mL/kg/hr; monitor for DIC, AKI, liver failure"}]},
+        {"id": "antipyretics-hs", "name": "Acetaminophen or aspirin for fever control", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Antipyretics are INEFFECTIVE in heat stroke — body temperature elevation is from excessive heat gain/production, NOT from reset hypothalamic setpoint (no pyrogens). Only external cooling works. Acetaminophen also worsens hepatotoxicity in heat stroke (liver already failing).",
+          "references": [{"source": "Heat Stroke — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430743/", "detail": "Antipyretics ineffective in heat stroke (no pyrogen); APAP worsens liver toxicity; only cooling works"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"Temp": "41.8°C (rectal)", "HR": "138", "BP": "98/52", "SpO2": "95%"},
+          "labHighlights": {"CK": "18,400 (rising)", "Glucose": "48", "INR": "2.1 (DIC)"}},
+        {"id": "cooling", "label": "Cooling in Progress",
+          "vitals": {"Temp": "39.4°C (rectal)", "HR": "112", "BP": "108/68"},
+          "labHighlights": {"CK": "28,000", "UO": "1.8 mL/kg/hr"}},
+        {"id": "cooled", "label": "Target Reached",
+          "vitals": {"Temp": "38.3°C", "HR": "96", "BP": "118/74"},
+          "labHighlights": {"AMS": "Improving", "CK": "Peak — ICU monitoring"}}
+      ]
+    },
+    "mustNotMiss": ["Multi-organ failure: DIC, AKI, ARDS, hepatic failure — monitor all organs","Classic vs exertional heat stroke: classic = elderly/chronically ill, no sweating; exertional = young athletes, may be sweating","Seize prevention — benzodiazepines for heat-related seizures","Overshoot hypothermia (stop cooling at 38.5°C rectal)"],
+    "commonPitfalls": ["Antipyretics (ineffective; APAP hepatotoxic in already-failing liver)","Oral/axillary temp instead of rectal (underestimates severity)","Inadequate cooling speed (CWI always preferred over evaporative cooling)","Not stopping cooling at 38.5°C (overshoot into hypothermia)"],
+    "keyLearningPoints": ["Heat stroke: temp >40°C + CNS dysfunction. Classic vs exertional — same treatment","Cold water immersion: fastest cooling; 'cool first, transport second'","Antipyretics: INEFFECTIVE + hepatotoxic in heat stroke — external cooling only"]
+  },
+  "dementia-with-acute-delirium": {
+    "id": "dementia-with-acute-delirium",
+    "diagnosis": "Acute Delirium Superimposed on Dementia",
+    "acuity": 2,
+    "presentation": "Acute AMS / Confusion / Agitation / Elderly Patient",
+    "category": "neurological",
+    "chiefComplaint": "Sudden Confusion / Agitation / Baseline Dementia / Family Concerned",
+    "treatments": {
+      "orders": [
+        {"id": "workup-delirium", "name": "Delirium workup — BMP, CBC, UA, CXR, TSH, B12, medications review", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Delirium is ALWAYS a symptom of an underlying cause. Systematic search: infection (UTI, PNA), metabolic (hyponatremia, hyperglycemia, hypothyroidism, B12), medications (anticholinergics, benzodiazepines, opioids, steroids), pain, urinary retention, constipation, cardiac (MI, PE). Do not attribute delirium to 'baseline dementia' — new confusion = new cause.",
+          "references": [{"source": "Delirium — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441804/", "detail": "Delirium always has a cause; systematic workup: infection, metabolic, meds, pain, retention"}]},
+        {"id": "nonpharm-delirium", "name": "Non-pharmacological interventions first (orientation, reorientation, family)", "group": "Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Non-pharmacological interventions are first-line for delirium: frequent reorientation, familiar faces (family at bedside), daytime activity/mobilization, sleep hygiene (nighttime quiet, lights off), vision/hearing aids, avoid restraints. These are as effective as pharmacological agents for mild delirium.",
+          "references": [{"source": "Delirium — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441804/", "detail": "Non-pharmacological first: reorientation, mobilization, sleep hygiene, familiar faces"}]},
+        {"id": "antipsychotic-delirium", "name": "Haloperidol 0.5-1mg PO/IV (severe agitation, safety risk)", "group": "Pharmacologic",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Low-dose haloperidol for delirium with severe agitation that risks patient/staff safety. Use minimum effective dose. Avoid in Parkinson disease (dopaminergic loss), Lewy body dementia (severe antipsychotic sensitivity). Benzodiazepines are WORSE (paradoxical agitation, oversedation in elderly) — use only for alcohol withdrawal or seizure.",
+          "references": [{"source": "Delirium — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441804/", "detail": "Haloperidol 0.5-1mg for severe agitation; avoid in Parkinson/LBD; benzos worsen delirium"}]},
+        {"id": "restraints-delirium", "name": "Physical restraints for confused patient safety", "group": "Restraints",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Restraints WORSEN delirium — increase agitation, cause aspiration/pressure ulcers/falls, and prolong hospital stay. Avoid unless immediate safety risk. Structured sitter, family, or mitts are preferable alternatives.",
+          "references": [{"source": "Delirium — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441804/", "detail": "Restraints worsen delirium — increase agitation and complications; use only as last resort"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/88", "HR": "96", "Temp": "38.1°C", "SpO2": "96%"},
+          "labHighlights": {"CAM": "Positive", "UA": "Positive for infection", "Na": "128"}},
+        {"id": "workup-complete", "label": "Workup Complete",
+          "vitals": {"BP": "142/84", "HR": "88"},
+          "labHighlights": {"Dx": "UTI + hyponatremia", "Meds review": "Diphenhydramine (Benadryl) identified — stopped"}},
+        {"id": "improving", "label": "Day 3 — Improving",
+          "vitals": {"BP": "136/82", "HR": "84", "Temp": "37.2°C"},
+          "labHighlights": {"CAM": "Negative", "Na": "134 (improving)", "UA": "Clearing"}}
+      ]
+    },
+    "mustNotMiss": ["Lewy body dementia — extreme antipsychotic sensitivity (even low-dose haloperidol causes neuroleptic crisis)","Urinary retention and constipation as common reversible delirium causes","Medications as cause: anticholinergics, opioids, benzodiazepines, steroids, polypharmacy","Subsyndromal delirium (quiet withdrawal type) — more common in elderly, frequently missed"],
+    "commonPitfalls": ["Attributing new confusion to baseline dementia without workup","Benzodiazepines for delirium (worsen in most elderly — exception: alcohol withdrawal)","Restraints (worsen agitation and outcomes)","Haloperidol in Parkinson or Lewy body dementia (severe extrapyramidal reaction)"],
+    "keyLearningPoints": ["New confusion in elderly = delirium = find the cause. Never 'just their dementia.'","Non-pharm first: orientation, mobilization, sleep hygiene, remove deliriogenic meds","CAM criteria: acute onset + fluctuating + inattention + (altered consciousness or disorganized thinking)"]
+  },
+  "cerebral-salt-wasting": {
+    "id": "cerebral-salt-wasting",
+    "diagnosis": "Cerebral Salt Wasting — Post-SAH Hyponatremia",
+    "acuity": 2,
+    "presentation": "Hyponatremia / Post-SAH / Volume Depletion",
+    "category": "neurologic",
+    "chiefComplaint": "Post-SAH Day 10 / Na 118 / Decreased Urine Output with Concentrated Urine",
+    "treatments": {
+      "orders": [
+        {"id": "distinguish-siadh-csw", "name": "Volume status assessment (CSW vs SIADH — treatment is OPPOSITE)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "CRITICAL distinction: CSW (volume depleted, high urine Na) vs SIADH (euvolemic/hypervolemic, high urine Na). Clinical exam + urine sodium + urine output. CSW: low BP, orthostasis, poor skin turgor, weight loss. SIADH: normal/elevated BP, no orthostasis. Treatment is OPPOSITE: CSW = volume replacement; SIADH = fluid restriction. Wrong treatment for wrong diagnosis worsens outcome.",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "CSW vs SIADH: volume assessment critical; treatment is opposite; CSW = hypovolemic; SIADH = euvolemic"}]},
+        {"id": "ns-csw", "name": "Normal saline + fludrocortisone 0.1-0.2mg BID (volume + mineralocorticoid)", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "CSW treatment: aggressive IV saline + fludrocortisone (mineralocorticoid — promotes Na retention). Goal: correct volume depletion, raise serum Na at <10-12 mEq/L per 24h to prevent osmotic demyelination syndrome (ODS). Fludrocortisone reduces urinary Na wasting.",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "CSW: IV saline + fludrocortisone; correct Na <10-12 mEq/24h; ODS if corrected too fast"}]},
+        {"id": "fluid-restrict-csw", "name": "Fluid restriction 800mL/day", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG for CSW — fluid restriction is the treatment for SIADH. Fluid restriction in CSW worsens volume depletion and vasospasm in post-SAH patients (cerebral vasospasm already a risk). Giving IV saline is correct for CSW.",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "Fluid restriction = SIADH treatment; in CSW it worsens hypovolemia and SAH vasospasm risk"}]},
+        {"id": "hypertonic-saline-csw", "name": "3% NaCl for symptomatic severe hyponatremia (Na <120 with symptoms)", "group": "Treatment",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Symptomatic hyponatremia (seizures, AMS): 3% NaCl to raise Na by 1-2 mEq/L/hr until symptoms resolve, then slow to <10-12 mEq/L/day total correction. Maximum 24h correction: 10 mEq/L (chronic hyponatremia) to prevent ODS.",
+          "references": [{"source": "Hyponatremia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "3% NaCl for symptomatic hyponatremia; 1-2 mEq/L/hr until symptoms resolve; max 10-12 mEq/24h"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "98/62 (orthostatic)", "HR": "108"},
+          "labHighlights": {"Na": "118", "Urine Na": "88 mEq/L", "Urine Osm": "620", "Weight": "-3.2kg from admission"}},
+        {"id": "ivf-fludro", "label": "NS + Fludrocortisone",
+          "vitals": {"BP": "112/72", "HR": "96"},
+          "labHighlights": {"Na": "122 (day 1)", "UO": "Improving"}},
+        {"id": "correcting", "label": "Day 3 — Na Correcting",
+          "vitals": {"BP": "118/76", "HR": "88"},
+          "labHighlights": {"Na": "128 (+10 mEq over 24h — within limit)", "Vasospasm": "None"}}
+      ]
+    },
+    "mustNotMiss": ["Osmotic demyelination syndrome (ODS/CPM) — correct Na too fast = locked-in; max 10-12 mEq/24h","Vasospasm risk in SAH — hyponatremia from CSW worsens vasospasm (critical to treat)","If correcting too fast: intentional re-lowering with D5W or DDAVP","SIADH and CSW can coexist or evolve into each other in SAH — reassess daily"],
+    "commonPitfalls": ["Fluid restriction for post-SAH hyponatremia (SIADH treatment — worsens CSW)","Over-rapid Na correction (ODS — irreversible demyelination)","Not checking urine sodium and urine osmolality (essential to distinguish CSW vs SIADH)","Missing volume depletion signs (orthostasis, weight loss, concentrated urine)"],
+    "keyLearningPoints": ["CSW vs SIADH: both have high urine Na — VOLUME STATUS distinguishes them","CSW = hypovolemic (treat with fluids + fludrocortisone); SIADH = euvolemic (treat with restriction)","Na correction rate: max 10-12 mEq/24h — ODS is irreversible and catastrophic"]
+  },
+  "conus-medullaris-syndrome": {
+    "id": "conus-medullaris-syndrome",
+    "diagnosis": "Conus Medullaris Syndrome — Metastatic Epidural Compression",
+    "acuity": 1,
+    "presentation": "Saddle Anesthesia / Bowel-Bladder Dysfunction / Back Pain",
+    "category": "oncologic",
+    "chiefComplaint": "Known Prostate Ca / Saddle Anesthesia / Cannot Urinate / Back Pain",
+    "treatments": {
+      "orders": [
+        {"id": "surgery-cauda", "name": "EMERGENT neurosurgery — surgical decompression within hours", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Cauda equina syndrome (CES) is a surgical emergency — emergent surgical decompression within 24-48h (ideally <24h) prevents permanent bowel/bladder incontinence and lower extremity weakness. Outcomes directly correlate with time to surgery. Conus/cauda equina cannot wait for radiation planning.",
+          "references": [{"source": "Cauda Equina Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK537273/", "detail": "CES = surgical emergency; decompression within 24h; outcomes correlate directly with time to surgery"}]},
+        {"id": "dex-cauda", "name": "Dexamethasone 10mg IV immediately", "group": "Steroids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "High-dose dexamethasone immediately on CES diagnosis — reduces vasogenic edema around the compressed neural elements. Give before surgery or radiation. Every hour without treatment risks permanent bowel/bladder dysfunction.",
+          "references": [{"source": "Spinal Cord Compression — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441981/", "detail": "Dexamethasone immediately for CES; reduces edema; give before surgery"}]},
+        {"id": "mri-urgent-cauda", "name": "Urgent MRI whole spine (confirm and level)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Emergent MRI to confirm cauda equina/conus compression and identify level for surgical planning. Do not delay more than 30-60 minutes for imaging in complete CES. Whole spine required (multilevel disease in cancer patients).",
+          "references": [{"source": "Cauda Equina Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK537273/", "detail": "Urgent MRI whole spine; do not delay >1h for complete CES; confirms level for surgery"}]},
+        {"id": "rt-cauda", "name": "Radiation therapy for cauda equina (instead of surgery)", "group": "Radiation",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "RT alone is NOT appropriate for cauda equina syndrome — the cauda equina nerves are PERIPHERAL (not cord), and RT may cause further injury to already-compressed nerve roots. Surgery is required. RT may follow surgery for local tumor control.",
+          "references": [{"source": "Cauda Equina Syndrome — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK537273/", "detail": "RT alone insufficient for CES (peripheral nerve compression); surgical decompression required"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/88", "HR": "88"},
+          "labHighlights": {"Neuro": "Saddle anesthesia, urinary retention, 3/5 LE strength", "PSA": "42 (known prostate Ca)"}},
+        {"id": "mri-result", "label": "MRI Result",
+          "vitals": {"BP": "134/84", "HR": "84"},
+          "labHighlights": {"MRI": "L2-L3 epidural metastasis, severe CES compression"}},
+        {"id": "surgery", "label": "Post-Decompression Day 1",
+          "vitals": {"BP": "128/80", "HR": "80"},
+          "labHighlights": {"Strength": "4/5 lower extremities (improving)", "Bladder": "Voiding with assistance"}}
+      ]
+    },
+    "mustNotMiss": ["Time is function: every hour of complete CES without surgery = higher risk of permanent incontinence","Distinguish upper motor neuron (cord compression, hyperreflexia) from lower motor neuron (cauda equina, areflexia)","Urinary retention is often the presenting symptom — place Foley immediately","Bilateral sciatica + saddle anesthesia = CES until proven otherwise"],
+    "commonPitfalls": ["Radiation instead of surgery for CES (RT cannot decompress peripheral nerves acutely)","Not placing Foley immediately (bladder distension worsens nerve damage)","Delay waiting for oncology/radiation planning (surgery cannot wait)","Incomplete MRI (whole spine required — metastatic disease is multilevel)"],
+    "keyLearningPoints": ["CES = saddle anesthesia + bowel/bladder dysfunction + bilateral LE weakness = surgical emergency","<24h surgical decompression: continence recovery likely. >48h complete deficit: low recovery","Distinguish cord (UMN, RT appropriate) from cauda equina (LMN, surgery required)"]
+  }
 
 };
