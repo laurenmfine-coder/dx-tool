@@ -23187,21 +23187,21 @@ window.CRT_DATA = {
       ]
     },
     "keyLearningPoints": [
-      "HAE = C1-INH deficiency = excess bradykinin",
-      "C4 is best screening test",
-      "Antihistamines/steroids/epi DO NOT WORK",
-      "Estrogen OCPs major trigger",
-      "Angioedema WITHOUT urticaria = think HAE",
-      "Average diagnostic delay 8-12 years"
+      "HAE = bradykinin-mediated, NOT histamine-mediated — epinephrine and antihistamines are ineffective; use icatibant (bradykinin B2 antagonist) or C1-INH concentrate",
+      "HAE acute therapy: icatibant 30mg SC OR C1-INH concentrate (Berinert 20 IU/kg IV) OR ecallantide — all highly effective",
+      "Prophylaxis: lanadelumab (anti-PKK, SC q2-4w) is standard long-term prophylaxis; reduces attacks by 87%"
     ],
     "mustNotMiss": [
-      "Airway compromise",
-      "Abdominal attacks mimicking surgical abdomen"
+      "Laryngeal angioedema — upper airway involvement occurs in >50% of HAE patients lifetime; can be fatal without treatment",
+      "ACE inhibitors absolutely contraindicated in HAE — dramatically increase bradykinin levels and attack frequency",
+      "Estrogen-containing contraceptives worsen HAE type 1/2 — progesterone-only or non-hormonal contraception",
+      "HAE attacks can be triggered by dental procedures, surgery, trauma — prophylactic C1-INH concentrate (Berinert/Cinryze) before procedures"
     ],
     "commonPitfalls": [
-      "Treating with antihistamines",
-      "Not checking C4",
-      "Continuing estrogen OCPs"
+      "Epinephrine and antihistamines for HAE attacks (HAE is bradykinin-mediated, not histamine-mediated; these drugs are ineffective — use icatibant, C1-INH, or ecallantide)",
+      "Prescribing ACE inhibitors for hypertension in HAE patient (contraindicated — increases attack frequency dramatically)",
+      "Not prescribing on-demand therapy for all HAE patients to carry at all times (icatibant or C1-INH concentrate 2 vials)",
+      "Delay in recognizing prodromal erythema marginatum (non-pruritic 'wavy' rash — treat early before attack fully develops)"
     ]
   },
   "acquired-c1esterase-inhibitor-deficiency-v2": {
@@ -23360,19 +23360,21 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Late-onset + no family hx = acquired",
-      "Low C1q distinguishes from hereditary",
-      "MGUS/CLL most common cause",
-      "Same acute treatment as HAE"
+      "Acquired C1-INH deficiency: low C4 + low C1q + low C1-INH functional level; anti-C1-INH antibodies; look for B-cell lymphoma",
+      "Antihistamines and epinephrine are INEFFECTIVE for HAE/acquired C1-INH attacks — bradykinin-targeted therapy (icatibant, C1-INH concentrate, lanadelumab)",
+      "C1q low = acquired; C1q normal = hereditary HAE type 1/2 — this single test differentiates the two"
     ],
     "mustNotMiss": [
-      "Underlying lymphoma",
-      "Airway compromise"
+      "Underlying B-cell lymphoproliferative disorder — acquired C1-INH deficiency is a paraneoplastic phenomenon in 40% of cases; bone marrow biopsy indicated",
+      "Anti-C1-INH antibodies — present in ~90% of acquired C1-INH deficiency; different from hereditary HAE",
+      "ACE-I must be avoided — can trigger or worsen attacks; review all medications",
+      "C1q level is low in acquired C1-INH deficiency (unlike hereditary HAE where C1q is normal) — key diagnostic distinction"
     ],
     "commonPitfalls": [
-      "Treating as allergic",
-      "Not checking C1q",
-      "Not screening for malignancy"
+      "Missing the underlying malignancy (work-up must include CBC, SPEP, immunofixation, CT scan, bone marrow biopsy if indicated)",
+      "Using bradykinin-targeted therapies without confirming diagnosis (icatibant/C1-INH concentrate work for acquired form too)",
+      "Treating with antihistamines and epinephrine only (HAE/acquired C1-INH does NOT respond to antihistamines; bradykinin is the mediator not histamine)",
+      "Not checking C1q (low C1q = acquired; normal C1q = hereditary HAE — critical distinction)"
     ]
   },
   "allergic-angioedema-v2": {
@@ -23694,19 +23696,21 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Dx of exclusion",
-      "Must complete full workup first",
-      "High-dose H1 first-line",
-      "Avoid chronic steroids"
+      "Recurrent isolated angioedema: first rule out ACE-I (any RAAS medication), then check C4, C1-INH, tryptase, TSH",
+      "ACE-I angioedema: bradykinin mechanism, antihistamine-resistant; stop ACE-I, substitute ARB; icatibant for severe/airway episodes",
+      "Idiopathic histaminergic angioedema (responds to antihistamines) vs idiopathic bradykinin-mediated (does not) — key treatment distinction"
     ],
     "mustNotMiss": [
-      "Missed HAE",
-      "Airway compromise"
+      "ACE-inhibitor-induced angioedema — bradykinin-mediated; may occur months-years after starting ACE-I; does NOT respond to antihistamines",
+      "Mast cell activation syndrome (MCAS) presenting as recurrent angioedema — serum tryptase during attack, urine prostaglandins, histamine metabolites",
+      "Hereditary angioedema type 3 (FXII mutation, estrogen-sensitive) — normal C4 and C1-INH; diagnosis by genetic testing",
+      "Thyroid autoimmunity — anti-TPO antibodies associated with angioedema; check TSH"
     ],
     "commonPitfalls": [
-      "Incomplete workup",
-      "Chronic steroids",
-      "No travel plan"
+      "Not reviewing ACE-I use in every angioedema patient (most common cause of recurrent isolated angioedema; must be stopped and replaced)",
+      "Treating ACE-I angioedema with antihistamines (ineffective — bradykinin-mediated; switch to ARB or sacubitril/valsartan)",
+      "Incomplete workup (missing C4, C1-INH, tryptase, anti-TPO in recurrent angioedema)",
+      "Not recognizing RAAS-related angioedema: ARBs cause angioedema in 0.5-1.7% — less than ACE-I but still occurs"
     ]
   },
   "insect-sting-anaphylaxis-v2": {
@@ -23885,19 +23889,21 @@ window.CRT_DATA = {
       ]
     },
     "keyLearningPoints": [
-      "VIT reduces risk 60% to <5%",
-      "98% effective",
-      "Workers comp may cover",
-      "Baseline tryptase for mastocytosis screening"
+      "VIT for all patients with systemic reactions to Hymenoptera — 97% protection; standard 3-5 year course; lifelong if mastocytosis",
+      "Baseline tryptase in all VIT candidates — elevation suggests systemic mastocytosis (10-20% of sting anaphylaxis patients)",
+      "ACE inhibitors and beta-blockers: review and adjust before/during VIT; both worsen anaphylaxis severity and treatment response"
     ],
     "mustNotMiss": [
-      "Re-sting without VIT",
-      "Underlying mastocytosis"
+      "Venom immunotherapy (VIT) is the only disease-modifying therapy for Hymenoptera anaphylaxis — 97% protection rate; must refer all systemic reactors",
+      "ACE inhibitor and beta-blocker use increases anaphylaxis severity and reduces treatment response — review medications in all sting allergy patients",
+      "Mastocytosis screen — elevated baseline tryptase in sting anaphylaxis patients; KIT D816V mutation; systemic mastocytosis risk",
+      "Risk of fatal sting anaphylaxis without VIT — 60x higher risk of fatal reaction vs VIT-treated patients"
     ],
     "commonPitfalls": [
-      "Avoidance alone",
-      "No tryptase",
-      "No access plan"
+      "Prescribing only EpiPen without referring for VIT (EpiPen is emergency rescue, not prevention; VIT is the preventive standard of care)",
+      "Stopping VIT prematurely (standard course 3-5 years; lifelong VIT for mastocytosis or severe reactions)",
+      "Not checking baseline tryptase in all sting anaphylaxis patients (elevated tryptase = systemic mastocytosis screen)",
+      "Not addressing ACE-I or beta-blocker use (beta-blockers reduce epinephrine effectiveness; ACE-I amplifies bradykinin)"
     ]
   },
   "venom-immunotherapy-reaction-v2": {
@@ -24223,17 +24229,21 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Premed reduces but doesnt eliminate risk",
-      "1-2% breakthrough rate",
-      "Alternative imaging if possible"
+      "Anaphylaxis management: epinephrine IM → position → IV access → fluids → 4-6h observation → 2 EpiPens at discharge + allergy referral",
+      "Tryptase measurement: 2-4h post-anaphylaxis (peak window) + baseline at follow-up — identifies mastocytosis",
+      "Biphasic anaphylaxis: 1-20% of cases; occurs 4-12h after initial episode; reason for mandatory observation period"
     ],
     "mustNotMiss": [
-      "Repeat exposure with same protocol",
-      "Anaphylaxis in radiology suite"
+      "Biphasic anaphylaxis — second wave of anaphylaxis 4-12h after initial resolution; mandatory 4-6h observation minimum",
+      "Refractory anaphylaxis unresponsive to epinephrine — glucagon for beta-blocked patients; methylene blue for vasodilatory shock; ECMO as last resort",
+      "Mastocytosis underlying anaphylaxis — elevated tryptase 2-4h post-reaction; baseline tryptase at follow-up",
+      "Idiopathic anaphylaxis — no identifiable trigger in 30-40% of recurrent anaphylaxis; requires work-up and long-term prophylaxis"
     ],
     "commonPitfalls": [
-      "Same premed after failure",
-      "No allergy referral"
+      "Discharging after initial response without 4-6h observation (biphasic reactions peak at 4-8h — standard of care is observation)",
+      "Prescribing only one EpiPen (two required — biphasic risk, device failure, patient far from care)",
+      "No allergy referral at discharge (trigger identification, component testing, immunotherapy planning)",
+      "Not measuring tryptase 2-4h post-reaction (window for elevated tryptase; baseline needed at 24h+ for comparison)"
     ]
   },
   "severe-allergic-reaction-v3": {
@@ -24548,11 +24558,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "IV acyclovir STAT. HOLD steroids. HSV in eczema = emergency. Mortality if untreated.",
-      "Stop all topical steroids on infected areas immediately — they suppress local immune surveillance and accelerate HSV spread. Restart only after viral clearance confirmed."
+      "EH = HSV infection on damaged skin (atopic dermatitis) — clustered punched-out erosions/vesicles on eczematous areas",
+      "Hold topical corticosteroids during active EH; restart only after lesions fully crusted",
+      "IV acyclovir for severe/extensive/young; oral for mild/localized — always treat, never topical antiviral alone"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Disseminated infection — eczema herpeticum can spread to involve >9% BSA; ICU if systemic toxicity",
+      "Kaposi varicelliform eruption from VZV or other viruses — send PCR to confirm HSV",
+      "Ophthalmologic involvement — herpetic keratitis causes blindness; urgent ophthalmology if periocular lesions",
+      "Secondary bacterial superinfection (S. aureus, MRSA) — co-infection common; add antibiotics if pustular/crusted"
+    ],
+    "commonPitfalls": [
+      "Treating with topical steroids (worsens viral spread — hold TCS during active EH)",
+      "Missing EH in a child presenting as 'worsening eczema' — punched-out vesicles on eczematous skin = EH until proven otherwise",
+      "Outpatient management for young children or severe cases (IV acyclovir required if <2yo, extensive, or systemically unwell)",
+      "Not identifying the HSV source contact (parent/caregiver with cold sore)"
+    ]
   },
   "erythema-multiforme-major-v2": {
     "id": "erythema-multiforme-major-v2",
@@ -24704,11 +24725,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "HSV-triggered EM Major. Treat HSV. Prophylactic antiviral prevents recurrence. NOT SJS/TEN.",
-      "Distinguish from SJS/TEN by target lesion morphology and HSV trigger history. EM Major spares large BSA, is self-limited, and recurs with each HSV episode — long-term valacyclovir suppression prevents recurrence."
+      "EM major: target lesions + 1-2 mucosal surfaces + HSV or Mycoplasma trigger (NOT drug-induced — that's SJS)",
+      "Chronic suppressive acyclovir (400mg BID) prevents recurrent HSV-triggered EM — must continue 6-12 months minimum",
+      "EM vs SJS distinction: EM = concentric target lesions, peripheral distribution, post-infectious; SJS = macular purpuric lesions, truncal, drug-induced"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "HSV-triggered EM major vs SJS — EM major has target lesions, limited mucous membrane involvement, NOT drug-induced; SJS is drug-induced with extensive mucous membrane erosions",
+      "Ocular involvement — conjunctival erosions in EM major require ophthalmology; corneal scarring and symblepharon if untreated",
+      "Recurrent EM — >50% with HSV-triggered EM have recurrences; chronic suppressive acyclovir is indicated",
+      "Airway and esophageal mucosa involvement in severe cases — NPO, nutritional support, airway monitoring"
+    ],
+    "commonPitfalls": [
+      "Stopping acyclovir after acute episode (recurrent EM requires long-term suppressive therapy: acyclovir 400mg BID x6-12 months)",
+      "Misdiagnosis as SJS and stopping the 'causative drug' when EM is HSV-triggered (different etiology, different management)",
+      "Systemic steroids for EM (controversial — some evidence of harm; antivirals are the correct treatment for HSV-triggered EM)",
+      "Not referring to ophthalmology for any ocular involvement (corneal complications can cause vision loss)"
+    ]
   },
   "food-allergy-oit-reaction-v2": {
     "id": "food-allergy-oit-reaction-v2",
@@ -24860,11 +24892,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Exercise cofactor in OIT. No exercise 2h before/after dose. Adjust, dont discontinue OIT.",
-      "Cofactors (exercise, illness, NSAIDs, alcohol, heat) lower the reaction threshold during OIT — identify and manage cofactors, do not discontinue OIT after a cofactor-driven reaction."
+      "OIT desensitizes by gradually increasing allergen threshold — does not cure allergy; requires ongoing maintenance dosing",
+      "OIT cofactors that lower reaction threshold: exercise, hot food/shower, illness, NSAIDs, alcohol, menstruation — counsel at initiation",
+      "EoE develops in ~10% of peanut OIT patients — new GI symptoms during OIT mandate endoscopic evaluation"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Exercise-induced anaphylaxis during OIT — exertion within 2h of OIT dose can trigger severe reaction; avoid exercise post-dose",
+      "Eosinophilic esophagitis as OIT complication — dysphagia, food impaction after OIT initiation; endoscopy if symptoms develop",
+      "Hot food/illness cofactors — fever, acute illness lower the threshold for OIT reactions; hold dose during illness",
+      "OIT reactions are not predictive of natural history — a reaction during OIT does not mean OIT should be stopped; adjust protocol and continue"
+    ],
+    "commonPitfalls": [
+      "Dose escalation during or after illness (hold OIT dose when patient is ill, febrile, or had recent exercise)",
+      "Missing EoE development during OIT (10-15% develop eosinophilic esophagitis symptoms — requires GI evaluation and may need OIT pause)",
+      "Not training on epinephrine use — all OIT patients must have EpiPen and know when to use it (not just antihistamine)",
+      "Confusing sustained unresponsiveness with tolerance — desensitization requires ongoing exposure; 'cure' is not guaranteed"
+    ]
   },
   "fpies-acute-v2": {
     "id": "fpies-acute-v2",
@@ -25013,11 +25056,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "FPIES: T-cell mediated, NOT IgE. Ondansetron + IVF are treatment. EpiPen doesnt work. Mimics sepsis but isnt.",
-      "A single IV ondansetron dose (0.15 mg/kg) stops vomiting in 85% of acute FPIES — it is now first-line pharmacotherapy. EpiPen does not help because FPIES is non-IgE-mediated."
+      "FPIES: non-IgE-mediated GI food hypersensitivity — profuse vomiting 1-4h post-trigger, lethargy, pallor; may have bloody diarrhea (chronic form)",
+      "Treatment: ondansetron 0.15mg/kg IV/IM + IV fluids; epinephrine is NOT indicated (no IgE mechanism)",
+      "Diagnosis by history + OFC (oral food challenge) — most patients outgrow by school age; supervised reintroduction at 12-18mo intervals"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "FPIES can mimic sepsis, viral gastroenteritis, or intussusception — protracted vomiting 1-4h after trigger food ingestion",
+      "Epinephrine is NOT effective for FPIES (non-IgE mediated) — ondansetron IV is the treatment for acute episodes",
+      "Milk and soy are the most common FPIES triggers but solid food FPIES (rice, oats, fish) exists",
+      "FPIES can coexist with classic IgE-mediated food allergy — distinguish by timing (FPIES 1-4h delayed vs IgE within 30 min)"
+    ],
+    "commonPitfalls": [
+      "Epinephrine for FPIES vomiting (FPIES is not IgE-mediated; epi doesn't help; ondansetron IV is correct)",
+      "Skin prick testing to diagnose FPIES (SPT is usually negative in FPIES; OFC or detailed history required)",
+      "Extensive septic workup before considering FPIES (FPIES can perfectly mimic sepsis — history of trigger food ingestion is key)",
+      "Not counseling on natural resolution (most FPIES to milk/soy resolve by age 3-5)"
+    ]
   },
   "fpies-chronic-v2": {
     "id": "fpies-chronic-v2",
@@ -25169,11 +25223,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Chronic FPIES often misdiagnosed as GERD/reflux. Remove trigger protein. Resolution confirms diagnosis.",
-      "Chronic FPIES is consistently misdiagnosed as GERD for months — the key distinguishing feature is that reflux medications have no effect and symptoms resolve completely on trigger elimination."
+      "Chronic FPIES in infancy: eliminate trigger, switch to extensively hydrolyzed or amino acid formula — most improve within 1-2 weeks",
+      "Breastfeeding mother should eliminate trigger from her diet before stopping breastfeeding — 72h maternal elimination for diagnostic trial",
+      "Natural resolution: milk FPIES resolves in most children by 3-5 years; structured supervised reintroduction at 18-month intervals"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "FTT from prolonged undiagnosed chronic FPIES — average diagnostic delay is 6-10 months; aggressively pursue diagnosis in FTT infants",
+      "Maternal dietary allergen transmission through breast milk — breastfed infants can have FPIES from maternal food consumption",
+      "Misdiagnosis as pyloric stenosis — projectile vomiting in infants; ultrasound distinguishes but history of food introduction timing is key",
+      "Eosinophilic GI disease vs FPIES — pathologically different; EGD + biopsy needed if elimination doesn't fully resolve symptoms"
+    ],
+    "commonPitfalls": [
+      "Formula switching to 'comfort' or 'sensitive' formulas — these contain intact milk protein and don't help CMPA/FPIES; need extensively hydrolyzed or amino acid-based formula",
+      "Not trialing amino acid formula (AAF) — 10-15% of CMPA infants fail extensively hydrolyzed formula and need AAF",
+      "Delayed elimination — FTT resolves rapidly once trigger removed; delay causes nutritional harm",
+      "Not counseling on reintroduction schedule — parents must know timeline and how supervised OFC will be conducted"
+    ]
   },
   "mastocytosis-v2": {
     "id": "mastocytosis-v2",
@@ -25357,11 +25422,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "MCAS misdiagnosed as anxiety for 3 years. Tryptase + urine mediators confirm. H1+H2 blockade + trigger avoidance + epi-pen.",
-      "MCAS diagnosis requires: 1) episodic symptoms consistent with mast cell mediator release, 2) elevated tryptase or urine metabolites during an episode, and 3) response to antihistamines — all three criteria must be met."
+      "Serum tryptase >20 ng/mL = systemic mastocytosis until proven otherwise — requires bone marrow biopsy",
+      "KIT D816V mutation drives >90% of systemic mastocytosis — targeted therapy (midostaurin, avapritinib) for advanced disease",
+      "All systemic mastocytosis patients need: EpiPen prescription, mast cell trigger avoidance list, DEXA scan, annual CBC + tryptase"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Systemic mastocytosis vs cutaneous mastocytosis — systemic (bone marrow involvement) requires hematology; KIT D816V mutation testing",
+      "Anaphylaxis in mastocytosis — hymenoptera stings, contrast, medications, alcohol, exercise can trigger severe reactions",
+      "Osteoporosis from mast cell mediator release — baseline DEXA scan at diagnosis; bisphosphonates if needed",
+      "Hematologic malignancy transformation — aggressive systemic mastocytosis or MCL; CBC, serum tryptase annually"
+    ],
+    "commonPitfalls": [
+      "Dismissing mast cell activation as anxiety (mediator-release symptoms: flushing, tachycardia, GI — requires tryptase during episode)",
+      "Not measuring serum tryptase during symptomatic episodes (elevated baseline tryptase >20 ng/mL suggests systemic mastocytosis)",
+      "Prescribing codeine, morphine, NSAIDs, vancomycin — these are mast cell degranulators; avoid in mastocytosis",
+      "Not prescribing epinephrine auto-injector to all systemic mastocytosis patients (high anaphylaxis risk)"
+    ]
   },
   "drug-allergy-vancomycin-rms-v2": {
     "id": "drug-allergy-vancomycin-rms-v2",
@@ -25513,11 +25589,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Red Man Syndrome is rate-related histamine release, NOT true allergy. Slow infusion + premedicate. Do NOT label as allergy.",
-      "False allergy documentation causes patients to receive inferior antibiotics for the rest of their lives. Accurate charting of RMS as a 'rate-dependent infusion reaction' rather than 'allergy' is a patient safety imperative."
+      "RMS is a rate-dependent non-immune infusion reaction — slow infusion (60+ min) and premedicate with antihistamine; not a true allergy",
+      "True vancomycin IgE-mediated allergy is rare (<1%) — most 'reactions' are RMS; incorrect labeling restricts antibiotic access",
+      "Allergy label documentation matters: distinguish RMS, DRESS, and IgE-mediated allergy — each has different management implications"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Red Man Syndrome is NOT a true allergy — it is a mast cell degranulation reaction (non-IgE), not a hypersensitivity; vancomycin should not be labeled as 'allergic'",
+      "True vancomycin allergy (IgE-mediated) is rare — eosinophilia, delayed rash, anaphylaxis differ from RMS",
+      "DRESS (drug reaction with eosinophilia and systemic symptoms) — rare with vancomycin but life-threatening; fever + rash + eosinophilia + organ involvement",
+      "Teicoplanin cross-reactivity is rare — can often be used if true vancomycin allergy confirmed"
+    ],
+    "commonPitfalls": [
+      "Labeling RMS as 'vancomycin allergy' — RMS is managed by slowing infusion rate and premedication, not avoidance",
+      "Avoiding vancomycin in patients who only had RMS and need MRSA coverage (may be the only effective agent)",
+      "Not slowing infusion rate on re-administration (RMS prevented by infusing over 90-120 min instead of 60 min)",
+      "Missing concurrent beta-lactam allergy evaluation in patients presenting for drug allergy work-up"
+    ]
   },
   "acute-urticaria-v2": {
     "id": "acute-urticaria-v2",
@@ -25649,11 +25736,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Acute urticaria is usually post-viral and self-limited. H1 antihistamines. Allergy panels are NOT indicated and cause confusion.",
-      "The clinical trigger for extensive allergy testing in acute urticaria is systemic anaphylaxis or recurrent episodes >6 weeks — isolated acute urticaria post-viral illness requires no workup beyond H1 antihistamines."
+      "Acute urticaria (<6 weeks): most commonly viral infection or idiopathic — extensive testing rarely changes management",
+      "Individual wheals must resolve within 24 hours — persistent wheals indicate urticarial vasculitis requiring biopsy",
+      "All patients with acute urticaria need anaphylaxis action plan if they don't have clear trigger identified"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Anaphylaxis — acute urticaria + any systemic symptom (dyspnea, hypotension, vomiting) = anaphylaxis; epinephrine immediately",
+      "Serum sickness-like reaction (from infections or medications) — arthralgias + urticaria + fever 1-3 weeks post-trigger",
+      "Urticarial vasculitis mimicking acute urticaria — lesions >24h, painful not pruritic, leave purpura",
+      "Acute hereditary angioedema — urticaria is NOT present in HAE; presence of urticaria suggests allergic etiology rather than HAE"
+    ],
+    "commonPitfalls": [
+      "Extensive workup for first-episode acute urticaria without clinical indication (90% infectious/unknown; workup rarely reveals cause)",
+      "Not treating with regular antihistamines (PRN dosing is suboptimal; scheduled H1 blockade is more effective)",
+      "Missing medication trigger (new drug in past 6 weeks — ASA, NSAIDs, antibiotics, ACE inhibitors most common)",
+      "Diagnosing urticaria without considering if wheals resolve in <24h (>24h = vasculitis until proven otherwise)"
+    ]
   },
   "chronic-spontaneous-urticaria-v2": {
     "id": "chronic-spontaneous-urticaria-v2",
@@ -25804,11 +25902,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CSU refractory to standard H1. Updose first, then omalizumab. Screen for autoimmune thyroiditis. Avoid chronic steroids.",
-      "Autoimmune CSU (30% of cases) is driven by IgG anti-FcεRI autoantibodies — these patients respond poorly to antihistamines and require omalizumab earlier. Screening for thyroid autoimmunity identifies this subset."
+      "Autoimmune CSU (25-45% of cases) — anti-FcεRI or anti-IgE antibodies drive mast cell activation independent of allergen",
+      "Omalizumab works in both IgE-mediated and autoimmune CSU — mechanism not fully understood but reduces free IgE and receptor downregulation",
+      "ASST (autologous serum skin test) or BAT (basophil activation test) can identify autoimmune CSU subtype for treatment planning"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Autoimmune CSU (anti-FcεRI or anti-IgE antibodies) — refractory to antihistamines, requires immunotherapy",
+      "Thyroid peroxidase antibodies — positive in 25% of CSU; screen TSH to exclude thyroid dysfunction",
+      "Omalizumab non-responders — consider cyclosporine or referral for clinical trial if failing biologic",
+      "Angioedema complications — severe facial angioedema with airway risk requires emergency epinephrine protocol"
+    ],
+    "commonPitfalls": [
+      "Using first-generation (sedating) antihistamines as primary therapy — 2nd generation preferred (less sedation, more sustained H1 blockade)",
+      "Not attempting antihistamine dose up-titration (4x licensed dose) before escalating to omalizumab",
+      "Stopping omalizumab after 6 months without attempting taper (recurrence common; may need indefinite therapy in autoimmune CSU)",
+      "Ordering comprehensive food allergy testing in CSU (IgE sensitization rarely causative in CSU; triggers false beliefs about food avoidance)"
+    ]
   },
   "urticarial-vasculitis-v2": {
     "id": "urticarial-vasculitis-v2",
@@ -25960,11 +26069,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "UV: hives >24h, bruising, painful. Biopsy mandatory. Low complements = SLE workup. Antihistamines alone insufficient.",
-      "Hypocomplementemic urticarial vasculitis syndrome (HUVS) carries risk of obstructive pulmonary disease even without smoking — pulmonary function testing should be performed in all hypocomplementemic UV patients."
+      "UV workup: biopsy + ANA, anti-dsDNA, C3, C4, CH50, anti-C1q, ANCA, cryoglobulins, hepatitis C",
+      "HUVS (hypocomplementemic) = SLE work-up essential; normocomplementemic = lower systemic disease risk",
+      "Hydroxychloroquine is first-line systemic therapy; confirm eye exam baseline before initiating"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "SLE as underlying cause — 20% of HUVS has active SLE; nephritis can be silent initially",
+      "Cryoglobulinemia — can cause urticarial vasculitis; check cryoglobulins and hepatitis C",
+      "Serum sickness and drug-induced UV — medications (biologics, antibiotics, NSAIDs) can trigger UV; full medication history",
+      "ANCA-associated vasculitis — different treatment; check ANCA if systemic involvement present"
+    ],
+    "commonPitfalls": [
+      "Antihistamines alone for UV (inadequate; requires systemic therapy)",
+      "Not obtaining C3, C4, CH50, anti-C1q, ANA, anti-dsDNA (essential for classification and prognosis)",
+      "Missing hepatitis C as trigger (cryoglobulinemia-associated UV — treat HCV, UV resolves)",
+      "Skin biopsy timing error (biopsy active lesion <24-48h old for leukocytoclastic vasculitis finding)"
+    ]
   },
   "cvid-presentation-v2": {
     "id": "cvid-presentation-v2",
@@ -26584,11 +26704,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Misattributed trigger. Detailed history + component testing to identify TRUE allergen. Avoid unnecessary dietary restriction.",
-      "Component-resolved diagnostics with Ara h 2 predict severity — high Ara h 2 predicts systemic reactions; low Ara h 2 with positive Ara h 8 indicates cross-reactive pollen allergy unlikely to cause anaphylaxis."
+      "Ara h 2 component testing: strongest predictor of clinical reactivity — guides severity risk, OIT candidacy, and emergency planning",
+      "Palforzia (FDA-approved peanut OIT): 67% of treated patients tolerate 600mg peanut protein at 12 months vs 4% placebo",
+      "Food allergy action plan: 4 Ws — When to use epi (any systemic symptom after ingestion), Where to inject (thigh), What to do after (call 911, observe 4h), When to repeat (5-15 min if no improvement)"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Component testing with Ara h 2 predicts severity — Ara h 2 high = high risk for severe systemic reactions; guides OIT candidacy and school/travel planning",
+      "Hidden peanut exposures in ethnic cuisines (satay, mole sauce, African stews), shared equipment, 'may contain' labeling",
+      "Peanut OIT eligibility — discuss OIT at diagnosis; not all patients are candidates but increasing referral rates improve outcomes",
+      "Cofactor amplification — exercise, NSAIDs, alcohol, illness lower reaction threshold; eliciting dose may differ significantly"
+    ],
+    "commonPitfalls": [
+      "Not performing component testing (total peanut-sIgE is a poor predictor of severity; Ara h 2 is much more informative)",
+      "Prescribing only one EpiPen (two required — biphasic anaphylaxis and device failure both argue for two)",
+      "Over-restrictive food avoidance counseling (e.g., avoiding all tree nuts unnecessarily — peanut is a legume, tree nut allergy is separate)",
+      "Missing the OIT referral conversation (Palforzia approved since 2020; highly effective for age 4-17)"
+    ]
   },
   "milk-allergy-infant-v2": {
     "id": "milk-allergy-infant-v2",
@@ -26740,11 +26871,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CMPA in breastfed infant: maternal dairy elimination, NOT weaning. Most outgrow by 12mo. Support breastfeeding.",
-      "Breastfed infants with CMPA benefit from continued breastfeeding with maternal dairy elimination — formula switching is second-line. Over 90% of IgE-mediated CMPA resolves by school age; supervised milk challenges confirm tolerance."
+      "Breastfed infant with CMPA: maternal dairy elimination (with calcium supplementation) for 2-4 weeks — if no improvement, trial eHF",
+      "IgE-mediated CMPA: SPT/sIgE positive; strict avoidance + EpiPen if history of anaphylaxis; eHF or AAF for formula",
+      "Most CMPA resolves by age 3-5; early supervised reintroduction (milk ladder) accelerates tolerance development"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "IgE-mediated vs non-IgE-mediated CMPA — IgE (urticaria, anaphylaxis within 30 min); non-IgE (FPIES, proctocolitis, delayed eczema)",
+      "Maternal dairy in breast milk — symptoms in breastfed infants = maternal elimination trial before formula switch",
+      "Multiple food protein intolerance (MFPI) — some infants sensitize to multiple proteins on maternal diet; AAF may be needed",
+      "Proctocolitis from CMPA — bright red blood in stool of otherwise well infant; benign, resolves with maternal elimination"
+    ],
+    "commonPitfalls": [
+      "Recommending soy-based formula for IgE-mediated CMPA (cross-reactivity risk — use eHF or AAF)",
+      "Not trialing maternal elimination before stopping breastfeeding (breastfeeding has major benefits; stop only after failed elimination trial)",
+      "Over-restricting maternal diet without clear evidence of improvement (multiple simultaneous restrictions cause maternal nutritional deficiency)",
+      "Late reintroduction — waiting >18 months may miss the 'window' of natural resolution and increase risk of persistent sensitization"
+    ]
   },
   "allergic-conjunctivitis-severe-v2": {
     "id": "allergic-conjunctivitis-severe-v2",
@@ -26895,11 +27037,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "VKC with shield ulcer. Ophthalmology mandatory. Steroid-sparing (cyclosporine) for long-term. Monitor IOP.",
-      "Shield ulcers in VKC are a corneal emergency — mechanical disruption by giant papillae on the upper tarsal conjunctiva causes the ulcer. Treatment requires topical steroids, cyclosporine, and urgent ophthalmology for possible debridement."
+      "Allergic conjunctivitis spectrum: SAC/PAC (mild, IgE-mediated) → VKC (young males, geographic, corneal risk) → AKC (atopic adults, chronic)",
+      "VKC shield ulcer: giant papillae on upper tarsal plate + corneal involvement — urgent ophthalmology, topical cyclosporine",
+      "Topical antihistamine/mast cell stabilizers (olopatadine, ketotifen) are first-line; avoid prolonged steroids without IOP monitoring"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Vernal keratoconjunctivitis (VKC) can cause corneal ulceration and vision loss — shield ulcers require urgent ophthalmology",
+      "Giant papillary conjunctivitis from contact lens use — must discontinue lenses until resolved",
+      "Steroid-induced glaucoma — topical ocular steroids require IOP monitoring; use with ophthalmology co-management",
+      "Atopic keratoconjunctivitis (AKC) in adult atopic dermatitis — more severe, chronic, risk of cataracts and corneal scarring"
+    ],
+    "commonPitfalls": [
+      "Prolonged topical ocular steroids without IOP monitoring (steroid-responders develop glaucoma — avoid long-term steroids without ophthalmology)",
+      "Prescribing topical antihistamine/decongestant (naphazoline-pheniramine) long-term — rebound hyperemia and tachyphylaxis",
+      "Missing corneal involvement in severe cases (shield ulcer in VKC — needs ophthalmology and topical cyclosporine or tacrolimus)",
+      "Not addressing environmental allergen control alongside pharmacotherapy"
+    ]
   },
   "allergic-rhinitis-uncontrolled-v2": {
     "id": "allergic-rhinitis-uncontrolled-v2",
@@ -27050,11 +27203,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Occupational allergic rhinitis. SCIT is disease-modifying. Workplace controls. Workers comp. Exhaust treatment before career change.",
-      "Subcutaneous allergen immunotherapy (SCIT) is the only disease-modifying treatment for allergic rhinitis — it induces long-term tolerance, reduces medication use, and prevents new sensitizations, unlike pharmacotherapy which only suppresses symptoms."
+      "INCS (intranasal corticosteroid) is the most effective single agent for AR — superior to antihistamines for nasal congestion",
+      "Allergen immunotherapy (SCIT or SLIT) is the only disease-modifying treatment for AR — indicated for moderate-severe, poorly controlled, or those wanting to avoid lifelong medication",
+      "Sublingual immunotherapy (SLIT) tablets (grass, HDM, ragweed) are FDA-approved — option for patients unable to do SCIT"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Occupational allergen sensitization — workplace exposures (animals, latex, flour, chemicals) can cause work-related AR",
+      "Non-allergic rhinitis coexisting with AR — vasomotor, NARES (non-allergic with eosinophilia), and gustatory rhinitis may persist despite allergen control",
+      "Nasal polyps — bilateral polyps in AR patient suggests concurrent CRS with NP; CT sinus and ENT referral",
+      "Sleep-disordered breathing — uncontrolled AR worsens nasal obstruction, contributes to OSA"
+    ],
+    "commonPitfalls": [
+      "Not performing allergen immunotherapy when indicated (SCIT or SLIT is disease-modifying; antihistamines/ICS are symptomatic only)",
+      "Using intranasal decongestants >3-5 days (rhinitis medicamentosa — rebound congestion worse than original)",
+      "Stopping intranasal corticosteroid after 2 weeks because 'it's not working' (INS takes 2-4 weeks for full effect; continue for 4-6 weeks for fair trial)",
+      "Missing the occupational component in a patient whose symptoms worsen on workdays"
+    ]
   },
   "atopic-dermatitis-severe-v2": {
     "id": "atopic-dermatitis-severe-v2",
@@ -27238,11 +27402,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Severe AD with SDOH barriers. Emollients + topical steroids. Dupilumab for refractory. Address access, housing.",
-      "Dupilumab (anti-IL-4/IL-13) is FDA-approved for moderate-severe AD in patients ≥6 months — it targets the Th2 inflammatory axis driving AD and dramatically reduces disease burden with an excellent safety profile."
+      "AD treatment pyramid: moisturizers → TCS/TCI → dupilumab (anti-IL-4/IL-13) → JAK inhibitors (abrocitinib, upadacitinib for adults)",
+      "Dupilumab is transformative for moderate-severe AD — EASI-75 in 52% vs 7% placebo; safe long-term in children and adults",
+      "Bleach baths (0.005% sodium hypochlorite — 1 tsp/gallon) 2-3x/week reduce S. aureus colonization and flare frequency"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Eczema herpeticum — HSV superinfection on AD skin; punched-out vesicles, fever; hold TCS, start acyclovir IV",
+      "Staphylococcus aureus colonization — present in >90% of AD skin; drives flares; bleach baths and mupirocin for decolonization",
+      "Growth failure and micronutrient deficiency in severe pediatric AD — from sleep deprivation, malabsorption, restriction diets",
+      "Food allergy as trigger — more relevant in young children (milk, egg, peanut, wheat); patch testing + SPT + OFC in appropriate cases"
+    ],
+    "commonPitfalls": [
+      "Undertreating with topical steroids due to steroid phobia (corticophobia) — guide parents on appropriate potency and application",
+      "Not addressing sleep disruption (severely impacts family quality of life and child development — treat with sedating antihistamine short-term if needed)",
+      "Not proactively treating with bleach baths for recurrent bacterial superinfection",
+      "Missing dupilumab eligibility (FDA-approved ≥6 months for severe AD — highly effective, safe long-term)"
+    ]
   },
   "contact-dermatitis-occupational-v2": {
     "id": "contact-dermatitis-occupational-v2",
@@ -27410,11 +27585,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Occupational ACD from PPD. Patch test confirms. PPD-free alternatives exist. Accommodate before career change.",
-      "PPD (p-phenylenediamine) cross-reacts with para-amino compounds including sulfonamides, thiazide diuretics, and PABA sunscreens — document the cross-reactants in the allergy chart alongside the PPD sensitization."
+      "PPD allergy: occupational hazard for hairdressers, rubber workers, chemical manufacturing — requires complete elimination",
+      "Cross-reactivity PPD: para-amino compounds (sulfonamides, benzocaine, PABA, azo dyes) — comprehensive avoidance counseling required",
+      "Allergy passport documentation: written list of allergens and cross-reactors prevents inadvertent re-exposure"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "PPD (para-phenylenediamine) cross-reacts with sulfonamides, thiazide diuretics, PABA sunscreens — counsel on cross-reactive chemicals",
+      "Permanent hair dye exposure — hairdressers have highest PPD sensitization rates; career-ending if unable to avoid",
+      "Patch test accuracy requires reading at D2 AND D4-7 — PPD reactions may appear late",
+      "Systemic contact dermatitis — ingested allergens can trigger widespread dermatitis in sensitized patients"
+    ],
+    "commonPitfalls": [
+      "Henna tattoo history — 'black henna' contains high PPD; sensitization event for future occupational exposure",
+      "Not counseling about cross-reactive chemicals (azo dyes, rubber chemicals, medications with similar aromatic structures)",
+      "Patch testing during active flare (false positives from irritant effects; test when skin is clear)",
+      "Not providing written documentation of specific allergens for patient (Allergy Passport) and employer"
+    ]
   },
   "eoe-adult-v2": {
     "id": "eoe-adult-v2",
@@ -28362,11 +28548,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Updose H1, then omalizumab. Screen thyroid. Avoid chronic steroids.",
-      "The EAACI stepwise approach: non-sedating H1 antihistamine → updose to 4x → add omalizumab → add cyclosporine. Never use systemic steroids as long-term therapy — they cause HPA suppression and do not induce remission."
+      "CSU treatment ladder: 2nd-gen H1 antihistamine → up to 4x standard dose → omalizumab 300mg q4w → cyclosporine",
+      "Omalizumab (anti-IgE) is highly effective for antihistamine-refractory CSU — 70% complete response at 300mg q4w",
+      "CSU duration: 50% resolve within 1 year; 20% persist >5 years — long-term management plan needed"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Urticarial vasculitis — lesions lasting >24h, bruising on resolution, systemic symptoms; requires skin biopsy",
+      "Thyroid autoimmunity — anti-TPO antibodies positive in 25% of CSU; not causative but associated",
+      "Underlying infection trigger (H. pylori, hepatitis, dental abscess) — treatment can resolve CSU in subset",
+      "Angioedema without urticaria — if HAE or ACE-I induced, management is completely different"
+    ],
+    "commonPitfalls": [
+      "Stopping antihistamine after brief trial (CSU requires scheduled dosing, not PRN — regular H1-antihistamine for symptom control)",
+      "Not up-dosing antihistamines before escalating (standard dose → 4x standard dose before adding omalizumab per EAACI guidelines)",
+      "Ordering extensive autoimmune/cancer workup in uncomplicated CSU (low yield; only targeted testing based on history)",
+      "Missing the dietary trigger (pseudoallergen, salicylate, food additive) in chronic cases"
+    ]
   },
   "contact-dermatitis-occupational": {
     "id": "contact-dermatitis-occupational",
@@ -28525,11 +28722,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Patch test to identify allergen. Workplace accommodation.",
-      "TRUE-Test (standardized patch test series) identifies the specific allergen — patch testing guides both allergen avoidance and workplace accommodation, and is the only way to definitively confirm ACD diagnosis."
+      "ACD vs ICD: ACD = delayed hypersensitivity (Type IV), requires sensitization period, well-defined borders; ICD = direct irritant damage, no sensitization needed",
+      "Patch testing: standard series must be supplemented with occupation-specific allergens; read at 48h AND 96h (some allergens react late)",
+      "Most important intervention: complete avoidance of the causative allergen — 'use barrier cream' without allergen removal is insufficient"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Patch testing is essential for diagnosis — clinical presentation cannot distinguish ICD from ACD; patch testing identifies specific allergens",
+      "Chromate sensitivity in construction workers — cement contains hexavalent chromium; career-ending allergy without protection",
+      "Concurrent ICD and ACD — skin barrier disruption from ICD increases sensitization risk; both often coexist",
+      "Carba mix allergy — latex-free gloves containing carba mix cause occupational dermatitis in healthcare workers"
+    ],
+    "commonPitfalls": [
+      "Prescribing only topical steroids without identifying and eliminating the allergen (inadequate treatment — will recur)",
+      "Not performing patch testing (patch testing to standard series + occupation-specific series is diagnostic)",
+      "Failing to consider occupational exposure — hands-only distribution, weekend improvement, job-specific materials",
+      "Missing protein contact dermatitis (from food proteins — different from chemical ACD; IgE-mediated)"
+    ]
   },
   "cvid-presentation": {
     "id": "cvid-presentation",
@@ -28688,11 +28896,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CVID: IVIG is lifesaving.",
-      "IVIG dosing target is trough IgG >500–800 mg/dL — trough levels below 500 are associated with breakthrough sinopulmonary infections. Dose and frequency are adjusted based on clinical response and trough levels."
+      "CVID diagnosis: low IgG + low IgA and/or IgM + absent specific antibody responses + exclude secondary causes",
+      "IVIG replacement is lifesaving — target trough IgG >700-800 mg/dL; subcutaneous delivery (SCIG) improves quality of life",
+      "Non-infectious complications (granulomas, autoimmunity, lymphoma) cause substantial CVID morbidity — screen at diagnosis and annually"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Granulomatous disease in CVID — occurs in 20-30%; mimics sarcoidosis; affects lungs, liver, spleen, skin",
+      "Lymphoma risk — CVID carries 10-30x increased risk of B-cell lymphoma; surveillance required",
+      "Autoimmune complications — immune cytopenias (ITP, AIHA) in 20%; inflammatory bowel disease-like enteropathy",
+      "Bronchiectasis from recurrent sinopulmonary infections — CT chest baseline at diagnosis; spirometry annually"
+    ],
+    "commonPitfalls": [
+      "Diagnosing CVID without excluding secondary causes (medications, lymphoma, protein-losing conditions, infections like HIV)",
+      "Inadequate IVIG dosing — trough IgG level should be maintained >700-800 mg/dL (not just 'above normal')",
+      "Missing non-infectious complications (granulomas, autoimmunity, malignancy) which drive CVID morbidity as much as infections",
+      "Vaccinating with live vaccines (MMR, varicella, yellow fever) — absolutely contraindicated in CVID"
+    ]
   },
   "eoe-adult": {
     "id": "eoe-adult",
@@ -28866,11 +29085,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "EGD with biopsy. PPI trial or swallowed steroid.",
-      "Proton pump inhibitors have independent anti-inflammatory activity in EoE beyond acid suppression — PPI-responsive EoE (histologic remission on PPI alone) occurs in 30–50% of cases and is now recognized as an EoE variant."
+      "EoE diagnosis: ≥15 eos/HPF on esophageal biopsy AFTER PPI trial (or confirmed PPI-non-responsive) — biopsies from 2+ levels",
+      "Three treatment pillars: dietary elimination, swallowed topical steroids (fluticasone/budesonide), PPI — individualize based on phenotype and preference",
+      "Dupilumab (anti-IL-4/IL-13) is FDA-approved for EoE — first biologic therapy; highly effective for refractory or steroid-dependent EoE"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Eosinophilic esophagitis causes food impaction — acute food bolus obstruction is the most common reason patients first seek care",
+      "Barrett's esophagus/GERD overlap — EoE and GERD coexist; PPI-responsive eosinophilia must be distinguished (PPI trial first)",
+      "Esophageal perforation risk during dilation — warn patient and obtain informed consent; perforation rate ~0.5%",
+      "Systemic eosinophilic GI disease — if eosinophilia in stomach or colon, different diagnosis and management"
+    ],
+    "commonPitfalls": [
+      "Skipping PPI trial before diagnosing EoE (proton pump inhibitor-responsive esophageal eosinophilia — PPIREE — must be excluded)",
+      "Inadequate biopsy sampling — need ≥6 biopsies from 2+ esophageal levels; proximal + distal (EoE may be patchy)",
+      "Not addressing trigger identification — dietary elimination (6-food elimination or step-up) is disease-modifying; referral to allergist/dietitian essential",
+      "Missing symptoms in children (food refusal, FTT, vomiting) — pediatric EoE often presents atypically"
+    ]
   },
   "eoe-pediatric": {
     "id": "eoe-pediatric",
@@ -29006,11 +29236,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Pediatric EoE. Validate child. Not behavioral.",
-      "Elemental amino acid formula induces remission in >90% of pediatric EoE patients — it is the most effective dietary therapy, though compliance is difficult. Stepwise food reintroduction with endoscopic monitoring identifies trigger foods."
+      "Pediatric EoE symptoms: feeding difficulties, food refusal, vomiting, FTT (young children); dysphagia, food impaction (older children/adolescents)",
+      "Step-up dietary elimination: start with the most common triggers (milk, wheat) before 6-food elimination — 65% remission with milk + wheat alone",
+      "Multidisciplinary care (allergist + gastroenterology + dietitian) is the standard of care for pediatric EoE"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Food impaction — adolescents with EoE may not report dysphagia but present with acute food bolus obstruction",
+      "Growth failure and micronutrient deficiency — elimination diets must include dietitian supervision",
+      "Anxiety and food-related trauma — children with EoE often develop anticipatory anxiety around eating after impactions",
+      "Comorbid atopic disease — >75% of pediatric EoE have concurrent asthma, allergic rhinitis, or atopic dermatitis"
+    ],
+    "commonPitfalls": [
+      "Dismissing as GERD or functional disorder — EoE is a distinct entity; diagnosis requires biopsy",
+      "Empiric elimination without a plan — unsupervised elimination diets cause nutritional deficiencies; dietitian referral essential",
+      "Missing proximal esophageal biopsies — patchy distribution means distal-only sampling misses 30% of cases",
+      "Not considering dupilumab in adolescents (FDA-approved ≥12yo for EoE)"
+    ]
   },
   "fpies-chronic": {
     "id": "fpies-chronic",
@@ -29146,11 +29387,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Chronic FPIES. Eliminate trigger. Not reflux.",
-      "Most FPIES triggers are common weaning foods: cow's milk, soy, rice, oats — introduce one food at a time with 3-5 day intervals and supervised oral food challenges to confirm which foods are safe."
+      "Chronic FPIES: constant low-grade symptoms (vomiting, diarrhea, FTT) from ongoing exposure vs acute FPIES (episodic with discrete ingestion)",
+      "Complete elimination of trigger food is both diagnostic and therapeutic — improvement within 2 weeks confirms diagnosis",
+      "Supervised OFC for reintroduction at 12-18 month intervals; performed in monitored setting with IV access available"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Failure to thrive from chronic FPIES — ongoing low-grade exposure causes malnutrition; eliminate trigger food completely",
+      "Misdiagnosis as GERD, colic, or cow's milk intolerance — FPIES requires food elimination, not acid suppression",
+      "Multiple food FPIES — once FPIES confirmed to one food, higher risk for additional trigger foods",
+      "Transition to IgE-mediated allergy — small subset (~4%) of FPIES patients develop IgE sensitization; monitor with SPT"
+    ],
+    "commonPitfalls": [
+      "Acid suppression (PPI, H2 blocker) instead of food elimination (FPIES is not acid-related — PPIs are ineffective)",
+      "Incomplete elimination (hidden milk or soy in formula or maternal diet if breastfeeding)",
+      "Not recognizing chronic FPIES (lacks the dramatic acute vomiting of acute FPIES; chronic exposure causes FTT, poor weight gain)",
+      "Reintroducing trigger food without supervised OFC (FPIES reactions during challenge can be severe)"
+    ]
   },
   "milk-allergy-infant": {
     "id": "milk-allergy-infant",
@@ -29286,11 +29538,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "CMPA: maternal diet modification, not weaning.",
-      "Extensively hydrolyzed formula (eHF) is first-line for CMPA in formula-fed infants — amino acid formula (AAF) is reserved for the 10-15% who fail eHF. Soy formula has 10-35% co-reactivity with cow's milk protein."
+      "CMPA management algorithm: breastfed → maternal dairy elimination; formula-fed → eHF → AAF if eHF fails (10-15%)",
+      "Soy formula not recommended for IgE-mediated CMPA (30-50% cross-react); safe only for non-IgE reactions after 6 months",
+      "Natural resolution: >75% outgrow by age 3; supervised reintroduction via milk ladder at 12-18 month intervals"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "FPIES from CMPA — chronic exposure in infants causes FTT, poor weight gain, not just acute vomiting episodes",
+      "Breastfeeding mothers — maternal milk protein passes through breast milk; maternal elimination diet required if breastfeeding",
+      "Soy cross-reactivity — 30-50% of CMPA infants also react to soy; trial of soy-based formula often fails",
+      "Growth monitoring — all infants on elimination diet or AAF need close growth surveillance"
+    ],
+    "commonPitfalls": [
+      "Switching to 'comfort' or 'sensitive' milk formula — these contain intact cow's milk protein and do not help CMPA",
+      "Not trying extensively hydrolyzed formula (eHF) before amino acid formula (AAF is more expensive; eHF resolves 90% of cases)",
+      "Stopping breastfeeding without trying maternal elimination (maternal dairy elimination for 2-4 weeks is first step for breastfed infants)",
+      "Not scheduling supervised reintroduction at 12-18 months (most infants outgrow by age 3-5)"
+    ]
   },
   "nsaid-hypersensitivity": {
     "id": "nsaid-hypersensitivity",
@@ -29449,11 +29712,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "ASA desensitization is definitive AERD treatment.",
-      "NSAID-exacerbated respiratory disease (NERD/AERD) is caused by COX-1 inhibition shifting arachidonic acid to the 5-lipoxygenase pathway, overproducing leukotrienes — this is a pharmacological reaction, not IgE-mediated allergy."
+      "AERD (Samter's triad) = asthma + nasal polyps + NSAID sensitivity — COX-1 inhibition drives cysteinyl leukotriene release",
+      "Aspirin desensitization is disease-modifying in AERD — reduces polyp recurrence, hospitalizations, and systemic steroid use",
+      "SNIDR vs AERD: SNIDR = reaction to one NSAID class (often immunologic); AERD = reaction to all COX-1 inhibitors (pharmacologic)"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "AERD (Samter's triad) patients who take aspirin/NSAIDs can have life-threatening bronchospasm — identify before prescribing",
+      "COX-2 selective NSAIDs (celecoxib) are generally safe in AERD — provide alternative for pain management",
+      "Aspirin desensitization: must be done in monitored setting with bronchospasm rescue medications available",
+      "Single-NSAID hypersensitivity (SNIDR) — different mechanism from AERD; selective reactions to one NSAID class, other classes often safe"
+    ],
+    "commonPitfalls": [
+      "Labeling all NSAID reactions as 'NSAID allergy' — distinguish AERD (COX-1 mechanism, all NSAIDs) from single-NSAID reactions (immunologic, one drug)",
+      "Withholding all NSAIDs in SNIDR (single-NSAID reaction) — alternative NSAID classes usually safe",
+      "Not recommending COX-2 inhibitors as alternative in AERD patients who need anti-inflammatory therapy",
+      "Not referring for aspirin desensitization in AERD — desensitization + high-dose aspirin reduces nasal polyp recurrence and hospitalizations"
+    ]
   },
   "peanut-allergy-anaphylaxis": {
     "id": "peanut-allergy-anaphylaxis",
@@ -29628,11 +29902,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Peanut anaphylaxis. Epi first. Allergist for OIT.",
-      "OIT (oral immunotherapy) with peanut powder (Palforzia) is FDA-approved for peanut allergy ages 4-17 — it desensitizes 67% of patients and should be discussed at every allergist visit as a disease-modifying option."
+      "Epinephrine IM anterolateral thigh is the ONLY first-line treatment for anaphylaxis — antihistamines and steroids are adjuncts only and must never delay epinephrine",
+      "Biphasic anaphylaxis (4-12h recurrence) — mandatory 4-6h ED observation + epinephrine at discharge",
+      "Ara h 2 component testing: predicts severity better than peanut-specific IgE; guides OIT candidacy"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Biphasic anaphylaxis — occurs 4-12h after apparent resolution without re-exposure; observe 4-6h minimum",
+      "Epinephrine auto-injector — must be prescribed at discharge; 2 devices, both locations (home + school/work)",
+      "Cofactors that lower reaction threshold: exercise, NSAIDs, alcohol, illness — counsel on avoidance",
+      "Hidden peanut exposures: ethnic cuisines, shared equipment, unlabeled products, cross-contact"
+    ],
+    "commonPitfalls": [
+      "Using antihistamine or corticosteroid instead of — or before — epinephrine (these are adjuncts, never first-line)",
+      "Discharging without 4-6h observation (biphasic reaction risk — most occur at 4-8h)",
+      "Failing to prescribe 2 EpiPens (one may fail; second needed for biphasic)",
+      "Not referring to allergist for component testing (Ara h 2 positivity predicts severe reactions) and OIT discussion"
+    ]
   },
   "penicillin-allergy-delabeling": {
     "id": "penicillin-allergy-delabeling",
@@ -29784,11 +30069,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "Delabeling saves lives. Reduces broad-spectrum use.",
-      "Over 90% of patients labeled as penicillin-allergic are skin-test negative and tolerate penicillin — the label persists due to lack of evaluation, not true allergy. Delabeling is one of the highest-yield antibiotic stewardship interventions."
+      "PCN allergy de-labeling is safe, cost-effective, and reduces broader-spectrum antibiotic use — refer all labeled patients who can be tested",
+      "Risk stratification: low-risk (remote rash, unknown) → direct oral challenge. Higher risk (urticaria, unknown timing) → skin test + challenge.",
+      "Cross-reactivity PCN↔cephalosporin: <2%; PCN↔carbapenem: <1% — most patients with PCN allergy labels can receive beta-lactams"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Only 10-20% of patients labeled 'penicillin allergic' are truly allergic on formal testing — most can be safely de-labeled",
+      "Patients with PCN allergy label receive broader-spectrum antibiotics, have longer LOS, higher MRSA/C. diff rates",
+      "Cross-reactivity with cephalosporins: <2% with modern cephalosporins — avoid only if original reaction was severe IgE-mediated anaphylaxis",
+      "Amoxicillin oral challenge (without skin testing) is acceptable for low-risk patients per AAAAI/ACAAI guidelines"
+    ],
+    "commonPitfalls": [
+      "Avoiding ALL beta-lactams based on 'PCN allergy' label (most labeled patients can safely receive penicillins and cephalosporins after testing)",
+      "Not referring patients with PCN allergy label who need frequent antibiotics (surgical patients, recurrent infections) for de-labeling workup",
+      "Skin testing only (without graded oral challenge) — challenge is the definitive test",
+      "Assuming cross-reactivity between PCN and carbapenems is high (it is <1% — generally safe to use)"
+    ]
   },
   "urticarial-vasculitis": {
     "id": "urticarial-vasculitis",
@@ -29940,11 +30236,22 @@ window.CRT_DATA = {
       "pitfallEvents": []
     },
     "keyLearningPoints": [
-      "UV: biopsy mandatory. SLE workup if hypocomplementemic.",
-      "Normocomplementemic urticarial vasculitis is usually idiopathic and benign — hypocomplementemic UV suggests systemic disease (SLE, Sjögren's, serum sickness) and mandates full autoimmune and complement workup."
+      "Urticarial vasculitis diagnosis: wheals lasting >24h + burning > itching + residual purpura/bruising + biopsy showing leukocytoclastic vasculitis",
+      "HUVS (hypocomplementemic) vs normocomplementemic UV: HUVS has low C1q, C3, C4 + anti-C1q antibodies; higher SLE/systemic disease risk",
+      "Treatment: hydroxychloroquine first-line; dapsone, colchicine, or immunosuppressives for refractory; treat underlying SLE if present"
     ],
-    "mustNotMiss": [],
-    "commonPitfalls": []
+    "mustNotMiss": [
+      "Hypocomplementemic urticarial vasculitis syndrome (HUVS) — associated with SLE, serositis, renal disease; needs rheumatology",
+      "Anti-C1q antibodies — present in HUVS; marker for SLE overlap and worse prognosis",
+      "Systemic involvement: arthritis, glomerulonephritis, uveitis, angioedema — screen at diagnosis",
+      "Normocomplementemic UV — milder disease, less SLE association, better prognosis"
+    ],
+    "commonPitfalls": [
+      "Treating as ordinary urticaria with antihistamines (UV requires systemic immunosuppression — antihistamines are insufficient)",
+      "Not biopsying diagnostic lesions (clinical diagnosis is unreliable; biopsy required to confirm leukocytoclastic vasculitis)",
+      "Missing the SLE connection — ANA, anti-dsDNA, complement levels (C3, C4, CH50) mandatory in all UV",
+      "Delaying skin biopsy until lesion fades (biopsy within 24-48h of lesion onset for best yield)"
+    ]
   },
   "anaphylaxis-v2": {
     "id": "anaphylaxis-v2",
