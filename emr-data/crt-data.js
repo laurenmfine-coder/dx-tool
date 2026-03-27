@@ -35668,5 +35668,557 @@ window.CRT_DATA = {
     "commonPitfalls": ["Inadequate fluid rate (UO <100 mL/h = AKI developing)","Treating asymptomatic hypocalcemia (worsens hypercalcemia during recovery)","Not monitoring K+ frequently (muscle lysis rapidly releases intracellular K+)","Stopping IVF too early (CK must be declining and <1000 before slowing)"],
     "keyLearningPoints": ["Rhabdomyolysis: dark urine + myalgia + CK elevation → aggressive IVF to UO 200-300 mL/h","K+ rises from muscle cell lysis — ECG monitoring essential","Asymptomatic hypocalcemia: do NOT treat (will mobilize back from muscle)"]
   }
+,
+
+  "temporal-arteritis": {
+    "id": "temporal-arteritis",
+    "diagnosis": "Giant Cell Arteritis with Vision Loss Risk",
+    "acuity": 2,
+    "presentation": "New Headache / Jaw Claudication / Elevated ESR / Age >50",
+    "category": "ophthalmic",
+    "chiefComplaint": "Temporal Headache / Jaw Pain Chewing / ESR 112 / Age 72",
+    "treatments": {
+      "orders": [
+        {"id": "steroids-gca", "name": "Prednisone 60mg PO daily IMMEDIATELY — do NOT wait for biopsy", "group": "Steroids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Start high-dose prednisone immediately when GCA is suspected — do NOT delay for biopsy. Vision loss from GCA is irreversible and can occur within hours. Temporal artery biopsy remains positive for up to 2 weeks after steroids start. Treat first, biopsy within 2 weeks.",
+          "references": [{"source": "Giant Cell Arteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459286/", "detail": "Prednisone 60mg immediately; vision loss irreversible; biopsy positive up to 2 weeks after steroids"}]},
+        {"id": "temporal-biopsy", "name": "Temporal artery biopsy within 2 weeks (confirm diagnosis)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 2,
+          "teaching": "Biopsy confirms diagnosis and guides long-term steroid duration. Must be at least 2cm segment (skip lesions). False negative rate ~10%. Positive: granulomatous inflammation, giant cells, internal elastic lamina disruption. Bilateral biopsy if unilateral negative with high suspicion.",
+          "references": [{"source": "Giant Cell Arteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459286/", "detail": "TAB within 2 weeks; ≥2cm segment; 10% false negative; bilateral if high suspicion"}]},
+        {"id": "ophthalmology-gca", "name": "Emergent ophthalmology — vision loss evaluation", "group": "Consultation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Ophthalmology emergency if any visual symptoms (amaurosis fugax, diplopia, visual field loss). AION (anterior ischemic optic neuropathy) from GCA causes irreversible blindness — IV methylprednisolone 1g/day x3 days if visual symptoms to prevent contralateral eye involvement.",
+          "references": [{"source": "Giant Cell Arteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459286/", "detail": "Ophthalmology emergency for visual symptoms; IV methylprednisolone 1g/day x3d if vision loss"}]},
+        {"id": "wait-biopsy-gca", "name": "Delay steroids until after temporal artery biopsy", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — vision loss in GCA is irreversible and can occur within hours of presentation. Never delay steroids waiting for biopsy. Biopsy remains positive for 2 weeks after starting steroids — the diagnostic window is preserved.",
+          "references": [{"source": "Giant Cell Arteritis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459286/", "detail": "Never delay steroids for biopsy — vision loss irreversible; biopsy valid for 2 weeks on steroids"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/88", "HR": "78", "Temp": "37.8°C"},
+          "labHighlights": {"ESR": "112", "CRP": "68", "Platelets": "488,000", "Temporal artery": "Tender, non-pulsatile"}},
+        {"id": "steroids-started", "label": "Prednisone Started",
+          "vitals": {"BP": "144/86", "HR": "76"},
+          "labHighlights": {"Vision": "Intact bilaterally", "Ophtho": "Consulted", "Biopsy": "Scheduled within 1 week"}},
+        {"id": "biopsy-result", "label": "Biopsy Confirmed",
+          "vitals": {"BP": "138/82", "HR": "74"},
+          "labHighlights": {"Biopsy": "Granulomatous inflammation — GCA confirmed", "ESR": "38 (week 2)"}}
+      ]
+    },
+    "mustNotMiss": ["Amaurosis fugax = warning sign of impending permanent vision loss — IV steroids stat","Polymyalgia rheumatica coexists in 40-60% of GCA — hip/shoulder girdle aching","Large vessel vasculitis (aortitis) in GCA — aortic aneurysm risk lifelong","PCA involvement — posterior circulation stroke"],
+    "commonPitfalls": ["Waiting for biopsy before steroids (vision loss irreversible — treat immediately)","Biopsy segment too short (<2cm — skip lesions cause false negatives)","Stopping steroids too early (relapse common — taper very slowly over 1-2 years)","Missing PMR association"],
+    "keyLearningPoints": ["GCA: new headache + jaw claudication + ESR >50 + age >50 = treat immediately","Treat FIRST, biopsy within 2 weeks — biopsy stays positive on steroids","Visual symptoms = IV methylprednisolone 1g/day (higher dose to protect second eye)"]
+  },
+  "retinal-detachment": {
+    "id": "retinal-detachment",
+    "diagnosis": "Rhegmatogenous Retinal Detachment",
+    "acuity": 2,
+    "presentation": "Flashing Lights / Floaters / Curtain Over Vision",
+    "category": "ophthalmic",
+    "chiefComplaint": "Sudden Flashing Lights / Dark Curtain / Painless Vision Loss",
+    "treatments": {
+      "orders": [
+        {"id": "ophthalmology-rd", "name": "Emergent ophthalmology consultation — surgical repair within 24h", "group": "Consultation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Retinal detachment involving the macula requires surgical repair within 24 hours — every hour of macular detachment worsens final visual acuity. Non-macular detachment: repair within 24-72h. Surgical options: pneumatic retinopexy, scleral buckle, vitrectomy.",
+          "references": [{"source": "Retinal Detachment — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431089/", "detail": "Macular-involving RD: repair within 24h; every hour of macular involvement worsens outcome"}]},
+        {"id": "no-activity-rd", "name": "Restrict activity — avoid Valsalva, heavy lifting", "group": "Supportive",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Activity restriction until surgical repair — avoid Valsalva (coughing, straining), heavy lifting, contact sports. In superior detachments: face down or bed rest may slow progression. Inferior detachments: upright positioning.",
+          "references": [{"source": "Retinal Detachment — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431089/", "detail": "Activity restriction; positioning based on detachment location; avoid Valsalva"}]},
+        {"id": "dilated-exam", "name": "Dilated fundoscopic exam (confirm and map detachment)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Dilated fundoscopy by ophthalmologist: grey, billowing retinal surface, loss of RPE pattern. Slit lamp with indirect ophthalmoscope maps extent. If media cloudy: B-scan ultrasound (90% sensitivity). Never dilate if narrow-angle glaucoma suspected.",
+          "references": [{"source": "Retinal Detachment — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431089/", "detail": "Dilated fundoscopy by ophthalmologist; B-scan US if media opaque; map extent for surgical planning"}]},
+        {"id": "reassure-floaters-rd", "name": "Reassure patient — floaters and flashes are always benign", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — new floaters + flashes = posterior vitreous detachment (usually benign) vs retinal tear/detachment (emergency). Cannot distinguish without dilated exam. New onset flashes + curtain/shadow = treat as retinal detachment until ophthalmologist evaluates urgently.",
+          "references": [{"source": "Retinal Detachment — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431089/", "detail": "Flashes + floaters with curtain vision = emergent ophthalmology; cannot reassure without dilated exam"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "128/82", "HR": "76"},
+          "labHighlights": {"Vision": "20/40 OS (was 20/20)", "Curtain": "Superior to inferior left eye", "Onset": "6 hours ago"}},
+        {"id": "ophtho-exam", "label": "Ophthalmology Exam",
+          "vitals": {"BP": "126/80", "HR": "74"},
+          "labHighlights": {"Fundoscopy": "Rhegmatogenous RD — superior, macula-off", "Plan": "Emergent vitrectomy tonight"}},
+        {"id": "post-surgery", "label": "Post-Vitrectomy Day 1",
+          "vitals": {"BP": "124/78", "HR": "72"},
+          "labHighlights": {"Vision": "20/200 OS (macular edema)", "Reattachment": "Confirmed", "Prognosis": "Gradual improvement over 3-6 months"}}
+      ]
+    },
+    "mustNotMiss": ["Macula-off RD: every hour of delay worsens final VA — emergent repair","Bilateral RD risk (10-15%) — examine fellow eye","Giant retinal tear requires specific vitrectomy technique","Exudative RD from choroidal tumor — no surgery, treat underlying"],
+    "commonPitfalls": ["Reassuring 'benign floaters' without dilated exam (cannot differentiate PVD from RD without exam)","Delayed referral for 'new floaters' — any curtain/shadow vision change = same-day referral","Not examining fellow eye (bilateral risk)","Inferior RD less symptomatic — easily missed"],
+    "keyLearningPoints": ["Flashes + floaters + curtain/shadow = retinal detachment until ophthalmologist rules it out","Macula-off RD: repair within 24h — every hour of macular involvement worsens prognosis","Posterior vitreous detachment causes benign floaters but can tear the retina at points of adhesion"]
+  },
+  "acute-embolic-limb-ischemia": {
+    "id": "acute-embolic-limb-ischemia",
+    "diagnosis": "Acute Embolic Limb Ischemia — Left Femoral Artery",
+    "acuity": 1,
+    "presentation": "6 Ps — Sudden Leg Ischemia",
+    "category": "vascular",
+    "chiefComplaint": "Sudden Left Leg Pain / Cold / White / AF History",
+    "treatments": {
+      "orders": [
+        {"id": "heparin-ali", "name": "UFH 80u/kg bolus + 18u/kg/h (anticoagulate immediately)", "group": "Anticoagulation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anticoagulate immediately with UFH — prevents thrombus propagation and microvascular thrombosis distal to the embolus. Do NOT wait for vascular surgery evaluation to start heparin. Time from onset to revascularization determines limb viability ('golden period' <6 hours).",
+          "references": [{"source": "Acute Limb Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470199/", "detail": "UFH immediately; prevents propagation; <6h golden period for revascularization"}]},
+        {"id": "vascular-surgery-ali", "name": "Emergent vascular surgery — embolectomy or bypass", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Viable limb (Rutherford I/IIa): embolectomy via Fogarty catheter or bypass. Marginally threatened limb (IIb): immediate revascularization. Irreversibly ischemic (III — mottled, fixed staining, rigor) = amputation only — reperfusion of dead tissue causes fatal hyperkalemia/acidosis.",
+          "references": [{"source": "Acute Limb Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470199/", "detail": "Embolectomy for viable/threatened; amputation for irreversible; reperfusion of dead tissue = lethal"}]},
+        {"id": "cta-ali", "name": "CTA legs (if embolic vs thrombotic unclear)", "group": "Imaging",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "CTA distinguishes embolic (abrupt cutoff, minimal atherosclerosis, contralateral normal) from acute-on-chronic thrombotic (atherosclerotic vessels, collaterals). Affects surgical approach. Do NOT delay revascularization >30 min for imaging if limb clearly threatened.",
+          "references": [{"source": "Acute Limb Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470199/", "detail": "CTA distinguishes embolic vs thrombotic; do not delay >30 min for imaging if limb threatened"}]},
+        {"id": "warmth-test-ali", "name": "Wait and warm the limb — monitor for improvement", "group": "Conservative",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "DANGEROUS — acute limb ischemia is a surgical emergency. Every minute of delay increases irreversible ischemia. No warming or conservative management — anticoagulate and activate vascular surgery immediately.",
+          "references": [{"source": "Acute Limb Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470199/", "detail": "No conservative management for ALI — emergent revascularization required; warming wastes time"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/88", "HR": "108 (AF)", "SpO2": "97%"},
+          "labHighlights": {"Left leg": "Cold, pale, pulseless below femoral", "Motor": "Weak dorsiflexion", "Onset": "2 hours ago"}},
+        {"id": "heparin-or", "label": "Heparinized / OR Prep",
+          "vitals": {"BP": "132/84", "HR": "102"},
+          "labHighlights": {"Rutherford": "IIb — marginally threatened", "OR": "Embolectomy proceeding"}},
+        {"id": "post-embolectomy", "label": "Post-Embolectomy",
+          "vitals": {"BP": "128/80", "HR": "88"},
+          "labHighlights": {"Pulses": "Returning", "CK": "2,400 (reperfusion)", "Compartment P": "Monitoring"}}
+      ]
+    },
+    "mustNotMiss": ["Reperfusion injury — hyperkalemia, acidosis, myoglobinuria after embolectomy (treat aggressively)","Compartment syndrome after revascularization (prophylactic fasciotomy often indicated)","Irreversible ischemia (Rutherford III): reperfusion causes systemic toxicity — amputation only","Address embolic source (AF in 60%) — anticoagulate for secondary prevention"],
+    "commonPitfalls": ["Delaying heparin waiting for vascular surgery review","Not recognizing Rutherford III (fixed mottling, paralysis, rigor = do not revascularize — amputate)","Insufficient post-revascularization monitoring for compartment syndrome and hyperkalemia","Missing embolic source workup (AF, mural thrombus, endocarditis)"],
+    "keyLearningPoints": ["6 Ps: Pain, Pallor, Pulselessness, Paresthesia, Paralysis, Poikilothermia","<6h 'golden period': anticoagulate immediately + emergent vascular surgery","Rutherford III (mottled, paralyzed, rigor) = reperfusion is fatal — emergent amputation only"]
+  },
+  "aortic-aneurysm": {
+    "id": "aortic-aneurysm",
+    "diagnosis": "Ruptured AAA — Hemodynamically Unstable",
+    "acuity": 1,
+    "presentation": "Severe Back/Flank Pain / Hypotension / Pulsatile Mass",
+    "category": "cardiovascular",
+    "chiefComplaint": "Sudden Severe Back Pain / BP 72/40 / Pulsatile Abdominal Mass",
+    "treatments": {
+      "orders": [
+        {"id": "or-aaa", "name": "Emergent OR — vascular surgery activation IMMEDIATELY", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Ruptured AAA mortality: 50% before reaching hospital; 50-80% in-hospital without surgery. Hemodynamically unstable ruptured AAA = immediate OR. Do NOT delay for CT in unstable patients — bedside US confirms AAA. Patient must go directly to OR.",
+          "references": [{"source": "AAA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Ruptured AAA: immediate OR for hemodynamically unstable; bedside US + straight to OR"}]},
+        {"id": "permissive-hypotension-aaa", "name": "Permissive hypotension — target SBP 70-90 (not normal)", "group": "Resuscitation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Permissive hypotension for ruptured AAA until surgical control — aggressive fluid resuscitation raises BP, dislodges clot, and increases hemorrhage. Target SBP 70-90 mmHg until the aorta is clamped. This is the opposite of septic shock management.",
+          "references": [{"source": "AAA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Permissive hypotension SBP 70-90 until surgical clamp; aggressive fluids increase hemorrhage"}]},
+        {"id": "bedside-us-aaa", "name": "Bedside US (confirm AAA — skip CT if unstable)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Bedside US: confirms AAA (>3cm aorta) in 2 minutes. In unstable patients, US is sufficient to confirm and send to OR. CT only for stable patients to plan EVAR vs open repair. CT takes time and unstable patients die in CT scanners.",
+          "references": [{"source": "AAA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Bedside US confirms AAA in unstable patients; CT for stable only (EVAR planning)"}]},
+        {"id": "aggressive-fluids-aaa", "name": "2L NS bolus to restore normal BP", "group": "Resuscitation",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — aggressive IV fluids raise BP, dislodge the clot tamponading the retroperitoneum, and precipitate free rupture and exsanguination. Permissive hypotension (SBP 70-90) is the correct strategy until surgical aortic control.",
+          "references": [{"source": "AAA — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Aggressive fluids contraindicated in ruptured AAA — raises BP and dislodges tamponade clot"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "72/40", "HR": "138", "SpO2": "94%"},
+          "labHighlights": {"Bedside US": "Aorta 8cm — AAA confirmed", "Hgb": "8.2 (trending down)"}},
+        {"id": "or-prep", "label": "OR Prep — Permissive Hypotension",
+          "vitals": {"BP": "84/52", "HR": "124"},
+          "labHighlights": {"IVF": "Restricted", "SBP": "Target 70-90 until clamp"}},
+        {"id": "post-clamp", "label": "Aortic Clamp Placed",
+          "vitals": {"BP": "108/68 (post-clamp)", "HR": "108"},
+          "labHighlights": {"Blood products": "6u pRBC, 6u FFP, 6u plt", "Open repair": "Proceeding"}}
+      ]
+    },
+    "mustNotMiss": ["Unstable patient: bedside US → OR, NOT CT scanner (deaths occur in CT suite)","Misdiagnosis as renal colic (AAA classically misdiagnosed as left flank pain — beware in >60yo)","Permissive hypotension (SBP 70-90) until surgical clamp — not normal BP","Post-repair: bowel ischemia (IMA ligation), spinal ischemia (paraplegia), AKI"],
+    "commonPitfalls": ["CT scan in unstable patient (patient can die in scanner)","Aggressive resuscitation to normalize BP (worsens hemorrhage)","Misdiagnosing as renal colic in elderly with back/flank pain","Delayed activation of OR while 'monitoring' unstable patient"],
+    "keyLearningPoints": ["Ruptured AAA: classic triad — back pain + hypotension + pulsatile mass","Bedside US confirms in 2 min; OR immediately for unstable; CT only for stable (EVAR planning)","Permissive hypotension SBP 70-90 until aortic clamp — opposite of septic shock"]
+  },
+  "midgut-volvulus": {
+    "id": "midgut-volvulus",
+    "diagnosis": "Intestinal Malrotation with Midgut Volvulus",
+    "acuity": 1,
+    "presentation": "Bilious Vomiting / Infant / Acute Abdomen",
+    "category": "surgical",
+    "chiefComplaint": "3-Week-Old / Bilious Green Vomiting / Distended Abdomen",
+    "treatments": {
+      "orders": [
+        {"id": "emergent-surgery-mv", "name": "Emergent surgical Ladd procedure — DO NOT DELAY", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Midgut volvulus is a pediatric surgical emergency — the entire midgut twists on the SMA pedicle. Bowel infarction occurs within hours. The Ladd procedure: counter-clockwise detorsion, division of Ladd bands, appendectomy, widening of mesenteric base. Delay = dead bowel.",
+          "references": [{"source": "Intestinal Volvulus — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Midgut volvulus: surgical emergency; Ladd procedure immediately; delay = total bowel loss"}]},
+        {"id": "upper-gi-mv", "name": "Upper GI series (malrotation confirmation if stable)", "group": "Imaging",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Upper GI series: ligament of Treitz fails to cross midline (normally at left of L2). 'Corkscrew' duodenum = volvulus. ONLY for stable patients — if hemodynamically unstable with bilious vomiting, go directly to OR. Do not delay surgery for imaging in unstable patients.",
+          "references": [{"source": "Intestinal Volvulus — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Upper GI for stable; straight to OR if unstable; corkscrew sign or absent ligament of Treitz = volvulus"}]},
+        {"id": "ivf-resus-mv", "name": "Aggressive IV fluids + blood products (shock resuscitation)", "group": "Resuscitation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Simultaneous resuscitation while OR is activated. IVF bolus 20mL/kg NS for infants. Blood products if hemorrhagic/ischemic bowel. Correct acidosis. Do not delay surgery for complete resuscitation.",
+          "references": [{"source": "Intestinal Volvulus — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Resuscitation simultaneous with OR activation; IVF 20mL/kg bolus in infants"}]},
+        {"id": "barium-enema-mv", "name": "Barium enema to evaluate colon", "group": "Imaging",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — barium enema evaluates the colon, not the duodenum/small bowel. Malrotation/volvulus is a small bowel problem. Upper GI series is the correct imaging modality. Barium enema wastes critical time in a surgical emergency.",
+          "references": [{"source": "Intestinal Volvulus — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441982/", "detail": "Upper GI series, not barium enema; volvulus is a small bowel emergency"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "low for age", "HR": "188", "Temp": "37.2°C"},
+          "labHighlights": {"Vomitus": "Bilious green", "Abdomen": "Distended, tender, tympanic", "Lactate": "4.8"}},
+        {"id": "upper-gi", "label": "Upper GI (Stable)",
+          "vitals": {"HR": "168"},
+          "labHighlights": {"Upper GI": "Corkscrew duodenum — volvulus confirmed", "OR": "Activated"}},
+        {"id": "post-ladd", "label": "Post-Ladd Procedure",
+          "vitals": {"HR": "148", "BP": "improving"},
+          "labHighlights": {"Bowel": "Viable — detorsed", "Bands": "Divided", "Appendectomy": "Performed"}}
+      ]
+    },
+    "mustNotMiss": ["Bilious vomiting in any infant = malrotation/volvulus until proven otherwise","Ischemic bowel = short gut syndrome if delayed — life-altering complication","Malrotation without volvulus — elective Ladd procedure after diagnosis","Associated cardiac and abdominal anomalies (heterotaxy syndrome)"],
+    "commonPitfalls": ["Assuming bilious vomiting is normal in a newborn (bilious = surgical emergency)","Barium enema (wrong test — need upper GI series)","Delaying OR for complete imaging workup in unstable infant","Dismissing intermittent vomiting as feeding intolerance (intermittent volvulus)"],
+    "keyLearningPoints": ["Bilious vomiting in neonate = surgical emergency until proven otherwise","Malrotation: ligament of Treitz fails to cross midline on upper GI","Midgut volvulus: hours to bowel death; emergent Ladd procedure is definitive treatment"]
+  },
+  "pheochromocytoma": {
+    "id": "pheochromocytoma",
+    "diagnosis": "Pheochromocytoma — Hypertensive Crisis",
+    "acuity": 2,
+    "presentation": "Paroxysmal Hypertension / Headache / Diaphoresis / Palpitations",
+    "category": "endocrine",
+    "chiefComplaint": "Episodic Severe Headache / BP 228/134 / Diaphoresis / Palpitations",
+    "treatments": {
+      "orders": [
+        {"id": "phentolamine-pheo", "name": "Phentolamine 5mg IV (pure alpha-blocker for crisis)", "group": "BP Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Phentolamine is first-line for pheochromocytoma crisis — pure alpha-blocker, acts within minutes. Alternatively nicardipine IV or nitroprusside. AVOID beta-blockers until alpha-blockade established — beta-blockade alone leaves alpha effects unopposed causing severe paradoxical hypertension.",
+          "references": [{"source": "Pheochromocytoma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482400/", "detail": "Phentolamine 5mg IV for crisis; avoid beta-blockers before alpha-blockade (paradoxical HTN)"}]},
+        {"id": "plasma-metanephrines", "name": "Plasma free metanephrines (best screening test)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 2,
+          "teaching": "Plasma free metanephrines (sensitivity 97%, specificity 85%) — best initial biochemical test. 24h urine catecholamines/metanephrines also acceptable (slightly less sensitive). Once biochemical diagnosis confirmed: CT/MRI adrenals for localization.",
+          "references": [{"source": "Pheochromocytoma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482400/", "detail": "Plasma free metanephrines: sensitivity 97%; best initial test; confirm then image"}]},
+        {"id": "phenoxybenzamine-preop", "name": "Phenoxybenzamine PO (preoperative alpha-blockade — start 1-2 weeks before surgery)", "group": "Preoperative",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Preoperative alpha-blockade with phenoxybenzamine (or doxazosin) for 1-2 weeks before adrenalectomy. This prevents intraoperative hypertensive crisis. After adequate alpha-blockade: add low-dose beta-blocker. Never beta-blocker first.",
+          "references": [{"source": "Pheochromocytoma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482400/", "detail": "Phenoxybenzamine preop 1-2 weeks; add beta-blocker after alpha blockade established"}]},
+        {"id": "beta-blocker-first-pheo", "name": "Metoprolol first (tachycardia control)", "group": "BP Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "ABSOLUTELY CONTRAINDICATED FIRST — beta-blockers before alpha-blockade leave alpha-adrenergic receptors unopposed. Catecholamines then cause extreme vasoconstriction: paradoxical severe hypertension. Always alpha-block first, then add beta-blocker if needed for rate.",
+          "references": [{"source": "Pheochromocytoma — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK482400/", "detail": "Beta-blockers before alpha-blockade = paradoxical hypertension from unopposed alpha stimulation; NEVER do this"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Hypertensive Crisis", "auto": true,
+          "vitals": {"BP": "228/134", "HR": "138", "Temp": "37.8°C (diaphoretic)"},
+          "labHighlights": {"ECG": "Sinus tach, ST changes", "Glucose": "188", "Hgb": "16.2 (hemoconcentration)"}},
+        {"id": "alpha-blocked", "label": "Alpha-Blocked",
+          "vitals": {"BP": "152/92", "HR": "108"},
+          "labHighlights": {"Plasma metanephrines": "Markedly elevated", "CT adrenal": "Scheduled"}},
+        {"id": "diagnosed", "label": "Confirmed",
+          "vitals": {"BP": "138/86", "HR": "88"},
+          "labHighlights": {"CT": "4.2cm right adrenal mass", "Plan": "Phenoxybenzamine preop → adrenalectomy"}}
+      ]
+    },
+    "mustNotMiss": ["Rule of 10s: 10% bilateral, 10% extra-adrenal, 10% malignant, 10% pediatric","MEN2A/2B (medullary thyroid ca + pheochromocytoma + parathyroid/marfanoid) — screen family","Paraganglioma (extra-adrenal pheochromocytoma) — MIBG scan or DOTA-PET for localization","Perioperative crisis: anesthesiologist awareness critical"],
+    "commonPitfalls": ["Beta-blockers before alpha-blockade (paradoxical HTN — can be lethal)","Imaging before biochemical confirmation (incidentaloma vs pheo)","Insufficient preoperative alpha-blockade duration (minimum 1-2 weeks)","Missing genetic syndrome (hereditary in 30-40% — SDH, RET, NF1, VHL)"],
+    "keyLearningPoints": ["Pheo classic triad: episodic headache + diaphoresis + palpitations with severe HTN","Alpha-block FIRST, then beta-block — NEVER beta-blocker before alpha-blocker","Plasma free metanephrines: best biochemical screening test (sensitivity 97%)"]
+  },
+  "siadh": {
+    "id": "siadh",
+    "diagnosis": "SIADH — Drug-Induced, Severe Symptomatic",
+    "acuity": 2,
+    "presentation": "Confusion / Nausea / Na 116 / SSRIs",
+    "category": "endocrine",
+    "chiefComplaint": "Confusion / Na 116 / Recently Started Sertraline",
+    "treatments": {
+      "orders": [
+        {"id": "fluid-restrict-siadh", "name": "Fluid restriction 500-800 mL/day (cornerstone of SIADH)", "group": "Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Fluid restriction is the primary treatment for SIADH — by restricting free water intake below urine output, the excess water is eliminated and sodium rises. Goal: restrict to 500-800 mL/day. Correction rate: <10-12 mEq/L per 24h to prevent osmotic demyelination syndrome.",
+          "references": [{"source": "SIADH — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "Fluid restriction 500-800 mL/day; correction <10-12 mEq/L per 24h; ODS if over-corrected"}]},
+        {"id": "hypertonic-saline-siadh", "name": "3% NaCl — for symptomatic severe hyponatremia (seizure, AMS)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "3% NaCl for symptomatic hyponatremia (seizures, severe AMS, coma). Raise Na by 1-2 mEq/L per hour until symptoms resolve (usually after 4-6 mEq/L rise). Then switch to fluid restriction. Max total correction: 10 mEq/L in 24h, 18 mEq/L in 48h. If over-corrected: give free water or DDAVP to re-lower Na.",
+          "references": [{"source": "SIADH — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "3% NaCl for symptoms; 1-2 mEq/L/hr until symptoms resolve; max 10 mEq/24h"}]},
+        {"id": "remove-cause-siadh", "name": "Stop offending drug (sertraline) if drug-induced", "group": "Causative",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Drug-induced SIADH: stop offending agent — SSRIs, SNRIs, carbamazepine, oxcarbazepine, thiazides, NSAIDs, antipsychotics, chemotherapy. Hyponatremia usually resolves within days. Identify and treat all reversible causes before escalating to vaptans.",
+          "references": [{"source": "SIADH — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "Stop offending drug in drug-induced SIADH; hyponatremia resolves within days"}]},
+        {"id": "normal-saline-siadh", "name": "Normal saline 1L IV (treat hyponatremia)", "group": "Fluids",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Normal saline CAN WORSEN SIADH hyponatremia. In SIADH, the kidney excretes the sodium and retains the water from NS — net result: worsening hyponatremia ('desalination effect'). Only 3% NaCl (hypertonic) reliably raises sodium in SIADH. NS is the wrong treatment.",
+          "references": [{"source": "SIADH — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470386/", "detail": "Normal saline worsens SIADH — kidney retains water, excretes Na (desalination effect)"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "122/78", "HR": "88"},
+          "labHighlights": {"Na": "116", "Serum Osm": "242", "Urine Na": "68 mEq/L", "Urine Osm": "580"}},
+        {"id": "restricted", "label": "Fluid Restriction + Sertraline Stopped",
+          "vitals": {"BP": "124/80", "HR": "84"},
+          "labHighlights": {"Na": "119 (day 1)", "Fluid in": "600 mL", "AMS": "Improving"}},
+        {"id": "correcting", "label": "Day 3",
+          "vitals": {"BP": "126/80", "HR": "80"},
+          "labHighlights": {"Na": "127 (+11 mEq over 48h — within limit)", "Confusion": "Resolved"}}
+      ]
+    },
+    "mustNotMiss": ["ODS (osmotic demyelination syndrome) if Na corrected >10-12 mEq/24h — irreversible demyelination","Normal saline worsens SIADH — only fluid restriction or 3% NaCl","Underlying cause: pulmonary disease, CNS, malignancy (SCLC), drugs","Dilutional hyponatremia (psychogenic polydipsia) vs SIADH — differentiate with urine osmolality"],
+    "commonPitfalls": ["Normal saline for hyponatremia (worsens SIADH via desalination effect)","Over-rapid correction of chronic hyponatremia (ODS — irreversible)","Not stopping the offending drug","Vaptans as first-line (reserved for moderate SIADH refractory to fluid restriction)"],
+    "keyLearningPoints": ["SIADH: euvolemia + hyponatremia + concentrated urine (Uosm >100) + high urine Na","Normal saline worsens SIADH — use fluid restriction or 3% NaCl (hypertonic) only","Correction limit: <10-12 mEq/L per 24h to prevent ODS"]
+  },
+  "incarcerated-inguinal-hernia": {
+    "id": "incarcerated-inguinal-hernia",
+    "diagnosis": "Incarcerated Inguinal Hernia with Bowel Obstruction",
+    "acuity": 2,
+    "presentation": "Groin Lump / Non-Reducible / Vomiting / Obstruction",
+    "category": "surgical",
+    "chiefComplaint": "Painful Groin Lump / Cannot Reduce / Vomiting / Constipated",
+    "treatments": {
+      "orders": [
+        {"id": "manual-reduction-hernia", "name": "Manual reduction — Trendelenburg + sustained gentle pressure", "group": "Management",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Attempt manual reduction in incarcerated (not strangulated) hernia: Trendelenburg position + mild sedation/analgesia + sustained gentle pressure over 5-15 minutes. Success rate 70-80%. CONTRAINDICATED if strangulation signs: skin changes, fever, peritonitis, signs of ischemia.",
+          "references": [{"source": "Inguinal Hernia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK279468/", "detail": "Manual reduction for incarcerated hernia; contraindicated if strangulation signs (fever, skin changes, peritonitis)"}]},
+        {"id": "emergency-surgery-hernia", "name": "Emergent surgery for strangulated hernia (ischemic bowel)", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Strangulated hernia = surgical emergency: bowel ischemia will lead to perforation and peritonitis. Signs of strangulation: fever, severe tenderness, skin erythema/discoloration over hernia, peritoneal signs, failure to reduce, sepsis. Do not delay — bowel viability determines need for resection.",
+          "references": [{"source": "Inguinal Hernia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK279468/", "detail": "Strangulation signs = emergent surgery; bowel ischemia/necrosis if delayed"}]},
+        {"id": "ngt-hernia", "name": "Nasogastric tube (decompression for obstruction)", "group": "Supportive",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "NGT for symptomatic bowel obstruction — decompresses stomach, reduces vomiting. IVF for dehydration. Prepare for OR if reduction fails or strangulation suspected.",
+          "references": [{"source": "Inguinal Hernia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK279468/", "detail": "NGT decompression; IVF resuscitation; prepare OR if reduction fails"}]},
+        {"id": "forceful-reduction", "name": "Forceful aggressive reduction of painful hard hernia", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Forceful reduction of a strangulated hernia is dangerous — can reduce dead bowel into abdomen (reduction en masse) causing peritonitis without external hernia. Gentle sustained pressure only; stop if not reducing in 15 min and proceed to OR.",
+          "references": [{"source": "Inguinal Hernia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK279468/", "detail": "No forceful reduction — risk of reducing ischemic bowel en masse; go to OR if not reducing in 15 min"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "138/86", "HR": "104", "Temp": "37.6°C"},
+          "labHighlights": {"Hernia": "Right inguinal, tender, irreducible x6h", "Vomiting": "3 episodes", "WBC": "13,800"}},
+        {"id": "reduction-attempted", "label": "Manual Reduction Attempted",
+          "vitals": {"BP": "132/82", "HR": "96"},
+          "labHighlights": {"Reduction": "Failed after 15 min", "Hernia": "More tender, skin erythema developing"}},
+        {"id": "or", "label": "OR — Emergent Repair",
+          "vitals": {"BP": "126/80", "HR": "88"},
+          "labHighlights": {"Bowel": "Viable — 15cm segment — reduced", "Hernia": "Repaired with mesh"}}
+      ]
+    },
+    "mustNotMiss": ["Strangulation signs: skin changes + fever + peritonism = do NOT attempt reduction, straight to OR","Reduction en masse (reduced but still strangulated inside abdomen — peritonitis without external hernia)","Richter hernia (partial bowel wall — no complete obstruction but can strangulate)","Bilateral hernias (examine contralateral side)"],
+    "commonPitfalls": ["Prolonged reduction attempts in strangulated hernia (tissue viability worsening)","Missing skin changes signaling strangulation (discoloration over hernia)","Discharging after successful reduction without surgical follow-up (elective repair within days)","Not decompressing with NGT while awaiting surgery"],
+    "keyLearningPoints": ["Incarcerated hernia: attempt reduction if no strangulation signs; Trendelenburg + gentle pressure","Strangulated hernia: fever + skin changes + peritonism = OR immediately, no reduction attempt","After successful reduction: elective repair within 24-48h (high recurrence + re-incarceration risk)"]
+  }
+,
+
+  "flail-chest": {
+    "id": "flail-chest",
+    "diagnosis": "Flail Chest with Pulmonary Contusion",
+    "acuity": 1,
+    "presentation": "Paradoxical Chest Wall Motion / Hypoxia / Trauma",
+    "category": "trauma",
+    "chiefComplaint": "MVA / Paradoxical Chest Movement / SpO2 84% / Multiple Rib Fractures",
+    "treatments": {
+      "orders": [
+        {"id": "intubation-flail", "name": "Endotracheal intubation + mechanical ventilation (internal pneumatic splinting)", "group": "Airway",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Mechanical ventilation is definitive treatment for flail chest — positive pressure provides internal pneumatic splinting of the flailing segment. Indications: SpO2 <90% on high-flow O2, respiratory fatigue, pulmonary contusion >25%, shock, associated injuries. PEEP stabilizes alveoli in pulmonary contusion.",
+          "references": [{"source": "Flail Chest — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459217/", "detail": "Mechanical ventilation = internal pneumatic splinting; indications: SpO2 <90%, respiratory fatigue, severe contusion"}]},
+        {"id": "analgesia-flail", "name": "Thoracic epidural or multimodal analgesia (pain prevents splinting)", "group": "Analgesia",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Excellent analgesia is essential in flail chest — pain causes splinting → atelectasis → hypoxia → pneumonia. Thoracic epidural analgesia is gold standard. Alternatives: intercostal nerve blocks, paravertebral block, IV ketorolac + opioid. NSAIDs contraindicated if spleen/liver laceration.",
+          "references": [{"source": "Flail Chest — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459217/", "detail": "Thoracic epidural gold standard for flail chest analgesia; pain → splinting → atelectasis → pneumonia"}]},
+        {"id": "fluid-restrict-flail", "name": "Restrict IV fluids (pulmonary contusion worsened by over-resuscitation)", "group": "Fluids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Pulmonary contusion: restrict IV fluids — over-resuscitation worsens alveolar edema and hypoxia. Unlike hemorrhagic shock, aggressive fluids in isolated pulmonary contusion worsen oxygenation. Balance fluid resuscitation for hemodynamic stability vs lung protection.",
+          "references": [{"source": "Flail Chest — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459217/", "detail": "Restrict fluids in pulmonary contusion; over-resuscitation worsens alveolar edema and hypoxia"}]},
+        {"id": "chest-splinting-flail", "name": "Sandbag/tape splinting of flail segment", "group": "Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "External splinting is HARMFUL — it restricts movement of the entire chest wall, worsening tidal volume and causing atelectasis. The pathology is the paradoxical motion itself causing pain and disrupted mechanics; mechanical ventilation treats this internally.",
+          "references": [{"source": "Flail Chest — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459217/", "detail": "External splinting is harmful — restricts breathing, increases atelectasis and pneumonia risk"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "98/62", "HR": "128", "RR": "32 (labored)", "SpO2": "84% NRB"},
+          "labHighlights": {"CXR": "Multiple left rib fractures 4-9, contusion", "ABG": "pH 7.26, pCO2 58"}},
+        {"id": "intubated", "label": "Intubated",
+          "vitals": {"BP": "108/72", "HR": "112", "SpO2": "94% (FiO2 60%)"},
+          "labHighlights": {"PEEP": "8 cmH2O", "VT": "6 mL/kg IBW", "Epidural": "Placed"}},
+        {"id": "day3", "label": "Day 3 — Improving",
+          "vitals": {"BP": "118/76", "HR": "96", "SpO2": "97% (FiO2 40%)"},
+          "labHighlights": {"CXR": "Contusion improving", "Ventilator": "SIMV weaning"}}
+      ]
+    },
+    "mustNotMiss": ["Tension pneumothorax (immediate decompression if tracheal deviation + hypotension)","Hemothorax (massive — chest tube, may need VATS/thoracotomy)","Cardiac contusion (ECG changes, troponin elevation — monitor 24h)","Associated aortic injury (widened mediastinum on CXR — CT angiogram)"],
+    "commonPitfalls": ["External splinting (harmful — restricts ventilation)","Aggressive IV fluid resuscitation (worsens pulmonary contusion)","Under-treating pain (respiratory splinting → pneumonia)","Missing tension PTX in deteriorating trauma patient"],
+    "keyLearningPoints": ["Flail chest: ≥3 consecutive ribs fractured in ≥2 places = paradoxical motion","Mechanical ventilation = definitive treatment (internal splinting)","Pain management is as critical as ventilation — epidural analgesia reduces pneumonia risk"]
+  },
+  "massive-hemothorax": {
+    "id": "massive-hemothorax",
+    "diagnosis": "Massive Hemothorax — Penetrating Trauma",
+    "acuity": 1,
+    "presentation": "Hypotension / Absent Breath Sounds / Trauma",
+    "category": "trauma",
+    "chiefComplaint": "Stab Wound Left Chest / BP 72/48 / Absent Left Breath Sounds",
+    "treatments": {
+      "orders": [
+        {"id": "chest-tube-hemothorax", "name": "Large-bore (36-40 Fr) chest tube — immediate decompression", "group": "Procedural",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Large-bore chest tube (36-40 Fr) for hemothorax — smaller tubes will clot. Insert in 5th ICS mid-axillary line. Immediate drainage: if >1500mL on initial insertion OR >200mL/h x3h = operative hemorrhage control (VATS or thoracotomy).",
+          "references": [{"source": "Hemothorax — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536916/", "detail": "36-40 Fr chest tube; >1500mL initial OR >200mL/h x3h = emergent surgery (thoracotomy/VATS)"}]},
+        {"id": "blood-products-hemothorax", "name": "Massive transfusion protocol — 1:1:1 pRBC:FFP:platelets", "group": "Transfusion",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hemorrhagic shock from massive hemothorax: activate MTP immediately. PROPPR trial: 1:1:1 ratio (pRBC:FFP:platelets) reduces mortality vs 3:1:1. TXA 1g IV within 3 hours of injury (CRASH-2). Permissive hypotension (SBP 80-90) until hemorrhage controlled.",
+          "references": [
+            {"source": "Hemothorax — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536916/", "detail": "MTP 1:1:1 ratio; TXA within 3h; permissive hypotension until hemorrhage controlled"},
+            {"source": "PROPPR Trial JAMA 2015", "url": "https://jamanetwork.com/journals/jama/fullarticle/2107789", "detail": "1:1:1 ratio reduces 24h and 30-day mortality vs lower plasma ratios"}]},
+        {"id": "ed-thoracotomy", "name": "ED resuscitative thoracotomy (arrest with penetrating trauma)", "group": "Emergency",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "ED thoracotomy for penetrating trauma arrest with witnessed or <10 minutes downtime. Allows: aortic cross-clamp (increase brain/heart perfusion), relieve tamponade, direct cardiac repair. Survival for penetrating trauma: 11%. Blunt trauma: <2% survival — rarely indicated.",
+          "references": [{"source": "Hemothorax — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536916/", "detail": "EDT for penetrating arrest: 11% survival; blunt arrest: <2% — rarely indicated"}]},
+        {"id": "needle-decompression-hemothorax", "name": "Needle decompression 2nd ICS mid-clavicular (for hemothorax)", "group": "Procedural",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Needle decompression is for TENSION PNEUMOTHORAX — not hemothorax. A needle will not drain blood efficiently and will not relieve hemothorax. Large-bore chest tube is required for hemothorax.",
+          "references": [{"source": "Hemothorax — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK536916/", "detail": "Needle decompression is for tension PTX only; not effective for hemothorax — chest tube required"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "72/48", "HR": "142", "SpO2": "88% NRB"},
+          "labHighlights": {"CXR": "White-out left hemithorax", "FAST": "Left pleural fluid", "Hgb": "6.8 (dropping)"}},
+        {"id": "chest-tube", "label": "Chest Tube In",
+          "vitals": {"BP": "86/56", "HR": "132"},
+          "labHighlights": {"Drainage": "1,800mL immediate", "MTP": "Activated"}},
+        {"id": "or", "label": "OR Activated",
+          "vitals": {"BP": "96/62 (products running)", "HR": "118"},
+          "labHighlights": {"Blood": "Ongoing — >200mL/h", "OR": "Emergency thoracotomy"}}
+      ]
+    },
+    "mustNotMiss": ["Massive hemothorax (>1500mL or ongoing >200mL/h) = OR — do not keep draining through tube","Retained hemothorax (missed at 24-48h) — VATS evacuation to prevent empyema/fibrothorax","TXA within 3 hours of injury (CRASH-2 trial — reduces mortality)","Cardiac tamponade as concurrent finding (FAST exam)"],
+    "commonPitfalls": ["Small-bore chest tube for hemothorax (will clot — use 36-40 Fr)","Needle decompression for hemothorax (wrong procedure — only for tension PTX)","Delayed OR for ongoing hemorrhage (>200mL/h x3h = surgery)","Crystalloid resuscitation instead of MTP (dilutional coagulopathy)"],
+    "keyLearningPoints": ["Massive hemothorax: absent breath sounds + hypotension after chest trauma → large-bore chest tube","OR criteria: >1500mL initial drainage OR >200mL/h x3h","MTP 1:1:1 (pRBC:FFP:platelets) + TXA within 3h of injury"]
+  },
+  "acute-psychosis": {
+    "id": "acute-psychosis",
+    "diagnosis": "First-Episode Psychosis — Schizophrenia",
+    "acuity": 2,
+    "presentation": "Hallucinations / Delusions / Disorganized / Young Adult",
+    "category": "other",
+    "chiefComplaint": "24yo / Talking to People Not There / Paranoid / Refusing to Leave Room",
+    "treatments": {
+      "orders": [
+        {"id": "medical-workup-psychosis", "name": "Medical workup to exclude organic causes (BEFORE antipsychotics)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "First-episode psychosis always requires medical workup to exclude organic causes: glucose, BMP, CBC, TSH, B12, RPR, HIV, urine drug screen, urine pregnancy (females), CXR, head CT/MRI. Medical causes of psychosis: hypoglycemia, thyroid disease, autoimmune encephalitis (anti-NMDA-R), CNS mass, substance intoxication/withdrawal.",
+          "references": [{"source": "Psychosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546579/", "detail": "Medical workup mandatory in first-episode psychosis; exclude organic causes before primary diagnosis"}]},
+        {"id": "antipsychotic-fep", "name": "Olanzapine 5-10mg IM or risperidone 2mg PO (start low, go slow)", "group": "Antipsychotics",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "After medical causes excluded: low-dose second-generation antipsychotic (SGA). Start low — first-episode patients are antipsychotic-naive and sensitive to side effects. Olanzapine IM for acute agitation. Response takes 2-6 weeks. Avoid high doses initially.",
+          "references": [{"source": "Psychosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546579/", "detail": "SGA first-line for FEP; start low doses (antipsychotic-naive); response 2-6 weeks"}]},
+        {"id": "benzo-agitation-psychosis", "name": "Lorazepam 1-2mg IM for acute agitation", "group": "Sedation",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Benzodiazepines for acute agitation in psychosis — safe, effective, calms patient for evaluation and antipsychotic administration. Combination with antipsychotic reduces antipsychotic dose needed. Avoid in respiratory compromise.",
+          "references": [{"source": "Psychosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546579/", "detail": "Lorazepam 1-2mg IM for acute agitation; reduces antipsychotic dose needed"}]},
+        {"id": "haloperidol-fep-high", "name": "Haloperidol 10mg IM (high dose for first episode)", "group": "Antipsychotics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "High doses are not more effective in first-episode psychosis — and cause severe EPS (dystonia, akathisia, parkinsonism) in antipsychotic-naive patients. Start low: haloperidol 2-5mg or SGA 5mg. High doses cause distress and reduce treatment adherence.",
+          "references": [{"source": "Psychosis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK546579/", "detail": "High-dose haloperidol in FEP: severe EPS without added efficacy; start low doses always"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "128/82", "HR": "98", "Temp": "37.2°C"},
+          "labHighlights": {"UDS": "Negative", "Glucose": "Normal", "TSH": "Normal", "Head CT": "Normal"}},
+        {"id": "medical-cleared", "label": "Medically Cleared",
+          "vitals": {"BP": "124/80", "HR": "92"},
+          "labHighlights": {"Psych": "Consulting", "Agitation": "Controlled with lorazepam"}},
+        {"id": "antipsychotic-started", "label": "Antipsychotic Started",
+          "vitals": {"BP": "122/78", "HR": "86"},
+          "labHighlights": {"Olanzapine": "5mg PO", "Plan": "Inpatient psychiatric admission"}}
+      ]
+    },
+    "mustNotMiss": ["Anti-NMDA receptor encephalitis (young woman, psychiatric symptoms, movement disorder, CSF pleocytosis — needs NMDA-R antibody)","Drug-induced psychosis (cannabis-induced, stimulant psychosis)","Manic episode with psychotic features (bipolar 1 — needs mood stabilizer not just antipsychotic)","Medical cause in elderly: delirium, dementia, UTI, metabolic — age-appropriate workup"],
+    "commonPitfalls": ["High-dose antipsychotics in first-episode (severe EPS, poor adherence)","Skipping medical workup (missing organic cause)","Missing autoimmune encephalitis (anti-NMDA-R) as treatable cause","Not arranging follow-up and ongoing psychiatric care — critical for relapse prevention"],
+    "keyLearningPoints": ["First-episode psychosis: medical workup FIRST to exclude organic cause","SGAs preferred (less EPS); start low — antipsychotic-naive patients are sensitive","Anti-NMDA-R encephalitis: young woman + psychiatric onset + movement disorder = test serum/CSF antibodies"]
+  },
+  "staphylococcal-scalded-skin-syndrome": {
+    "id": "staphylococcal-scalded-skin-syndrome",
+    "diagnosis": "Staphylococcal Scalded Skin Syndrome (SSSS)",
+    "acuity": 2,
+    "presentation": "Diffuse Skin Sloughing / Child / Fever / Perioral Crusting",
+    "category": "dermatologic",
+    "chiefComplaint": "Infant / Diffuse Skin Peeling / Perioral Crusting / Fever",
+    "treatments": {
+      "orders": [
+        {"id": "nafcillin-ssss", "name": "Nafcillin 150mg/kg/day IV (or oxacillin) — MSSA coverage", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "SSSS is caused by exfoliative toxins A/B from S. aureus (usually MSSA). Treat with anti-staphylococcal penicillin: nafcillin or oxacillin. If MRSA suspected (NICU, recent hospitalizations): vancomycin. The skin sloughing is from the toxin, not direct infection — source is often a remote site (conjunctiva, umbilicus, nasopharynx).",
+          "references": [{"source": "SSSS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459282/", "detail": "Nafcillin/oxacillin for MSSA; vancomycin if MRSA suspected; toxin-mediated, source often remote"}]},
+        {"id": "wound-care-ssss", "name": "Gentle wound care — wet dressings, non-stick gauze, emollients", "group": "Wound Care",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "SSSS skin is fragile — gentle handling essential. Wet dressings or non-adherent gauze. Emollients to prevent desiccation. Minimize adhesives and tape. Temperature regulation (exposed skin loses heat rapidly). Treat as partial-thickness burn.",
+          "references": [{"source": "SSSS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459282/", "detail": "Gentle wound care; non-adherent dressings; treat like partial-thickness burn; minimize tape/adhesives"}]},
+        {"id": "distinguish-ten-ssss", "name": "Distinguish from TEN/SJS (different etiology and treatment)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "SSSS vs TEN/SJS: SSSS is toxin-mediated (S. aureus), affects children, cleavage plane in superficial epidermis, mucous membranes SPARED, Nikolsky positive. TEN is drug-induced, affects adults, full-thickness epidermal necrosis, mucous membranes INVOLVED. Biopsy confirms level of cleavage if uncertain.",
+          "references": [{"source": "SSSS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459282/", "detail": "SSSS vs TEN: SSSS = children, superficial cleavage, mucous membranes spared; TEN = adults, drug-induced, mucous membranes involved"}]},
+        {"id": "steroids-ssss", "name": "Corticosteroids to reduce inflammation", "group": "Treatment",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "CONTRAINDICATED — steroids increase the risk of secondary infection and bacterial dissemination in SSSS. The skin loss is toxin-mediated and resolves with antibiotics + supportive care. Do not use steroids.",
+          "references": [{"source": "SSSS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459282/", "detail": "Steroids contraindicated in SSSS — increase secondary infection risk; antibiotics + wound care only"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "low for age", "HR": "162", "Temp": "38.8°C"},
+          "labHighlights": {"Skin": "Perioral crusting, diffuse tenderness, Nikolsky positive", "WBC": "18,400", "Blood cx": "Pending"}},
+        {"id": "antibiotics-started", "label": "Antibiotics + Wound Care",
+          "vitals": {"HR": "148", "Temp": "38.2°C"},
+          "labHighlights": {"Source": "Conjunctival swab growing MSSA", "Skin": "Sloughing stabilized"}},
+        {"id": "day3", "label": "Day 3 — Re-epithelializing",
+          "vitals": {"HR": "132", "Temp": "37.4°C"},
+          "labHighlights": {"Skin": "Peeling complete, new skin forming", "Prognosis": "Excellent — full recovery expected"}}
+      ]
+    },
+    "mustNotMiss": ["TEN/SJS (drug-induced, mucous membrane involvement — very different management)","MRSA as causative organism in hospitalized/NICU patients","Fluid and electrolyte losses (exposed skin loses fluid — IVF replacement critical)","Source identification (remote focus: nasal culture, blood culture, umbilicus in neonates)"],
+    "commonPitfalls": ["Steroids (contraindicated — increase infection risk)","Confusing with TEN (different treatment: SSSS = antibiotics; TEN = stop offending drug, IVIg consideration)","Aggressive wound care (gentle handling only — fragile superficial cleavage)","Missing remote source of infection"],
+    "keyLearningPoints": ["SSSS: infant/child + perioral crusting + diffuse tender skin + Nikolsky positive + NO mucous membrane involvement","Toxin-mediated disease: antibiotics + gentle wound care; steroids contraindicated","Nikolsky sign: gentle lateral pressure causes skin to slide off (positive in both SSSS and TEN — biopsy distinguishes level of cleavage)"]
+  },
+  "vocal-cord-dysfunction": {
+    "id": "vocal-cord-dysfunction",
+    "diagnosis": "Vocal Cord Dysfunction (Paradoxical Vocal Fold Motion)",
+    "acuity": 3,
+    "presentation": "Episodic Stridor / Inspiratory Wheeze / Exercise-Triggered",
+    "category": "pulmonary",
+    "chiefComplaint": "Young Athlete / Episodic Stridor / Throat Tightness / Not Responding to Inhaler",
+    "treatments": {
+      "orders": [
+        {"id": "reassurance-vcd", "name": "Reassurance + speech therapy breathing techniques (definitive treatment)", "group": "Management",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "VCD is functional adduction of the vocal cords during inspiration. Treatment: reassurance that the attack will pass, diaphragmatic breathing techniques (panting, nasal breathing, 'sniff then blow'). Speech therapy is definitive. Acute attacks: heliox may help. NO bronchodilators — they do not work and may reinforce the functional pattern.",
+          "references": [{"source": "VCD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK538359/", "detail": "VCD treatment: reassurance + breathing techniques + speech therapy; bronchodilators ineffective"}]},
+        {"id": "spirometry-vcd", "name": "Spirometry with flow-volume loop (truncated inspiratory loop)", "group": "Diagnostics",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Spirometry: variable extrathoracic obstruction = flattened/truncated inspiratory loop on flow-volume curve (vs asthma = truncated expiratory loop). Gold standard: laryngoscopy during attack — paradoxical vocal cord adduction during inspiration. PEF preserved (unlike asthma).",
+          "references": [{"source": "VCD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK538359/", "detail": "Spirometry: truncated inspiratory loop (VCD) vs truncated expiratory loop (asthma); laryngoscopy confirms"}]},
+        {"id": "distinguish-asthma-vcd", "name": "Challenge test or laryngoscopy to distinguish from asthma", "group": "Diagnostics",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "VCD vs asthma: VCD is inspiratory stridor, peaks over larynx, responds to breathing exercises, no bronchodilator response. Methacholine challenge negative. Asthma: expiratory wheeze, peripheral, responds to bronchodilators. Can coexist — 30% of VCD patients have concurrent asthma.",
+          "references": [{"source": "VCD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK538359/", "detail": "VCD vs asthma: inspiratory vs expiratory, laryngeal vs peripheral, no bronchodilator response in VCD"}]},
+        {"id": "escalate-inhalers-vcd", "name": "Add inhaled steroids and LABA (not responding to albuterol)", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Escalating inhalers for VCD is the wrong approach — this is not asthma. Escalation reinforces the diagnosis of VCD as asthma and leads to over-treatment. The correct step is to establish VCD diagnosis (laryngoscopy) and refer to speech therapy.",
+          "references": [{"source": "VCD — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK538359/", "detail": "Inhaler escalation wrong in VCD; establish correct diagnosis; speech therapy is curative"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Episode / ED Presentation", "auto": true,
+          "vitals": {"BP": "128/82", "HR": "108", "SpO2": "98% RA"},
+          "labHighlights": {"Wheeze": "Inspiratory, loudest over larynx", "PEF": "Normal for height", "Albuterol": "No response"}},
+        {"id": "techniques-applied", "label": "Breathing Techniques",
+          "vitals": {"BP": "122/78", "HR": "96", "SpO2": "99%"},
+          "labHighlights": {"Stridor": "Resolving with breathing exercises", "Spirometry": "Truncated inspiratory loop"}},
+        {"id": "discharged", "label": "Discharged",
+          "vitals": {"BP": "120/76", "HR": "84"},
+          "labHighlights": {"Referral": "ENT + speech therapy", "Plan": "Exercise technique modification"}}
+      ]
+    },
+    "mustNotMiss": ["Anaphylaxis (angioedema, urticaria — check for triggers)","True asthma coexisting in 30% of VCD patients","Epiglottitis in febrile patient with stridor","Subglottic stenosis (prior intubation history — CT scan)"],
+    "commonPitfalls": ["Escalating asthma medications when VCD is unresponsive to bronchodilators","Not performing laryngoscopy during episode (definitive diagnostic test)","Missing concurrent asthma (30% coexist)","Unnecessary ICU admissions for VCD episodes"],
+    "keyLearningPoints": ["VCD: inspiratory stridor + normal SpO2 + normal PEF + no bronchodilator response","Spirometry: truncated INSPIRATORY loop (VCD) vs truncated EXPIRATORY loop (asthma)","Treatment: breathing techniques + speech therapy. Bronchodilators do not work."]
+  }
 
 };
