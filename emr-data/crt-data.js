@@ -32497,4 +32497,699 @@ window.CRT_DATA = {
     "keyLearningPoints": ["Diuretic resistance: IV > oral; add metolazone for sequential nephron blockade","Acceptable Cr rise during diuresis: ≤0.3 mg/dL — under-diuresis is worse","GDMT four: ACEi/ARNI + BB + MRA + SGLT2i — all reduce mortality in HFrEF"]
   }
 
+
+,
+  "stroke-v3": {
+    "id": "stroke-v3",
+    "diagnosis": "Hemorrhagic Stroke (Hypertensive ICH)",
+    "acuity": 1,
+    "presentation": "Sudden Headache / Focal Deficit",
+    "category": "neurologic",
+    "chiefComplaint": "Worst headache of life + left hemiplegia",
+    "treatments": {
+      "orders": [
+        {"id":"ct-ich","name":"Non-contrast CT Head STAT","group":"Imaging","critical":true,"correct":true,"phase":1,
+         "teaching":"Non-contrast CT is first-line for hemorrhagic stroke — detects blood immediately (hyperdense). MRI is more sensitive for ischemic stroke but slower. Time to CT matters — do NOT delay for labs or IV access.",
+         "references":[{"source":"ICH Guidelines — AHA/ASA 2022","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000407","detail":"Non-contrast CT first-line for ICH diagnosis"}]},
+        {"id":"bp-iv-ich","name":"Nicardipine IV — target SBP <140 within 1h","group":"Blood Pressure","critical":true,"correct":true,"phase":1,
+         "teaching":"ATACH-2/INTERACT-2: target SBP <140 mmHg within 1 hour reduces hematoma expansion. Use continuous IV nicardipine or labetalol. Avoid sodium nitroprusside (raises ICP via cerebral vasodilation).",
+         "references":[{"source":"ICH Guidelines — AHA/ASA 2022","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000407","detail":"SBP target <140 mmHg in first hour"}]},
+        {"id":"reversal-ich","name":"Anticoagulation reversal (if on anticoagulant)","group":"Reversal","critical":true,"correct":true,"phase":1,
+         "teaching":"Warfarin → 4-factor PCC + Vitamin K. Dabigatran → Idarucizumab. Apixaban/rivaroxaban → Andexanet alfa or 4F-PCC. Do NOT delay reversal for INR result if on known anticoagulant.",
+         "references":[{"source":"ICH Guidelines — AHA/ASA 2022","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000407","detail":"Rapid reversal of anticoagulation within minutes of diagnosis"}]},
+        {"id":"tpa-ich","name":"tPA administration","group":"Thrombolytics","critical":false,"correct":false,"phase":1,
+         "teaching":"ABSOLUTE CONTRAINDICATION. tPA in hemorrhagic stroke is lethal — causes massive expansion of the bleed. Always confirm ischemic vs hemorrhagic with CT before any thrombolytic.",
+         "references":[{"source":"ICH Guidelines — AHA/ASA 2022","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000407","detail":"tPA absolutely contraindicated in hemorrhagic stroke"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"218/124","HR":"88","RR":"16","Temp":"98.6°F","SpO2":"96%"},"labHighlights":{"INR":"2.8 (on warfarin)","Platelets":"210"}},
+        {"id":"imaging","label":"CT Completed","vitals":{"BP":"210/118","HR":"90"},"labHighlights":{"CT":"Right basal ganglia ICH ~18mL; no herniation"}},
+        {"id":"controlled","label":"BP + Reversal","vitals":{"BP":"138/82","HR":"84"},"labHighlights":{"INR":"1.2 post-PCC","BP":"Controlled"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Anticoagulant use (warfarin/DOAC) — reverse immediately",
+      "Herniation signs (unequal pupils, Cushing triad) — emergent neurosurgery",
+      "Coagulopathy (thrombocytopenia, liver disease, DIC)",
+      "SAH if headache onset is thunderclap (LP if CT negative)"
+    ],
+    "commonPitfalls": [
+      "Giving tPA without CT head first",
+      "Permissive hypertension (SBP >180) — accelerates hematoma expansion",
+      "Missing anticoagulation reversal window",
+      "Not involving neurosurgery early for cerebellar ICH >3cm"
+    ],
+    "keyLearningPoints": [
+      "CT head before ANY thrombolytics — always",
+      "Target SBP <140 within 1 hour reduces hematoma expansion (ATACH-2)",
+      "Anticoagulant reversal is time-sensitive — know your reversal agents"
+    ]
+  },
+  "acute-ischemic-stroke": {
+    "id": "acute-ischemic-stroke",
+    "diagnosis": "Acute Ischemic Stroke — Cardioembolic (AF)",
+    "acuity": 1,
+    "presentation": "Acute Focal Deficit",
+    "category": "neurologic",
+    "chiefComplaint": "Left-sided weakness / facial droop onset 45 min ago",
+    "treatments": {
+      "orders": [
+        {"id":"cta-stroke","name":"CT Head + CTA Head/Neck STAT","group":"Imaging","critical":true,"correct":true,"phase":1,
+         "teaching":"CTA identifies large vessel occlusion (LVO) — the key determinant for thrombectomy eligibility. Non-contrast CT rules out hemorrhage; CTA maps the clot location. Time is neurons: 1.9 million neurons die per minute in untreated LVO.",
+         "references":[{"source":"Acute Ischemic Stroke — AHA/ASA 2019","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000211","detail":"CTA for LVO detection; guides thrombectomy decision"}]},
+        {"id":"tpa-stroke","name":"Alteplase 0.9mg/kg IV (if within 4.5h, no contraindications)","group":"Thrombolytics","critical":true,"correct":true,"phase":1,
+         "teaching":"tPA within 4.5 hours of symptom onset improves functional outcomes (NNT ~10). Give 10% as bolus, rest over 60 min. Contraindications: hemorrhage on CT, BP>185/110 (treat first), INR>1.7, platelets<100k, recent major surgery.",
+         "references":[{"source":"Acute Ischemic Stroke — AHA/ASA 2019","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000211","detail":"Alteplase 0.9mg/kg IV within 4.5h; NNT ~10"}]},
+        {"id":"thrombectomy","name":"Neurology/Thrombectomy team activation for LVO","group":"Intervention","critical":true,"correct":true,"phase":1,
+         "teaching":"Mechanical thrombectomy for anterior LVO (ICA/MCA M1) up to 24h in selected patients (DAWN/DEFUSE-3). Superior to tPA alone for LVO. Do NOT delay thrombectomy waiting for tPA to complete.",
+         "references":[{"source":"Acute Ischemic Stroke — AHA/ASA 2019","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000211","detail":"Thrombectomy for LVO up to 24h with perfusion mismatch"}]},
+        {"id":"permissive-htn","name":"Hold antihypertensives (allow BP up to 220/120 if no tPA)","group":"Blood Pressure","critical":true,"correct":true,"phase":1,
+         "teaching":"Permissive hypertension in ischemic stroke maintains perfusion to ischemic penumbra. Only treat if BP >220/120 (no tPA) or >185/110 (tPA candidate). Use IV labetalol to bring to tPA threshold if needed.",
+         "references":[{"source":"Acute Ischemic Stroke — AHA/ASA 2019","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000211","detail":"Permissive hypertension; treat if >220/120 or >185/110 for tPA"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Arrival","auto":true,"vitals":{"BP":"172/98","HR":"110 (irregular)","RR":"16","SpO2":"97%","GCS":"14"},"labHighlights":{"NIHSS":"12","EKG":"Atrial fibrillation"}},
+        {"id":"imaging","label":"CT/CTA Done","vitals":{"BP":"174/96"},"labHighlights":{"CT":"No hemorrhage","CTA":"Left MCA M1 occlusion"}},
+        {"id":"treatment","label":"Treated","vitals":{"BP":"168/92"},"labHighlights":{"tPA":"Given at 55 min","Thrombectomy":"Activating"}}
+      ]
+    },
+    "mustNotMiss": [
+      "LVO on CTA — must activate thrombectomy team even if giving tPA",
+      "BP >185/110 before tPA — treat to threshold first, then give",
+      "Hypoglycemia mimicking stroke (check glucose immediately)",
+      "AF as source — start anticoagulation 2-14 days post-stroke"
+    ],
+    "commonPitfalls": [
+      "Treating hypertension aggressively in ischemic stroke (worsens penumbra ischemia)",
+      "Missing LVO on non-contrast CT (need CTA)",
+      "Delaying tPA for labs (only glucose is required before administration)",
+      "Not considering wake-up stroke for perfusion imaging"
+    ],
+    "keyLearningPoints": [
+      "tPA within 4.5h + thrombectomy for LVO are the two time-critical treatments",
+      "Permissive hypertension: allow up to 220/120 (no tPA) or 185/110 (tPA candidate)",
+      "CTA identifies LVO — the key thrombectomy decision point"
+    ]
+  },
+  "pe-v2": {
+    "id": "pe-v2",
+    "diagnosis": "Massive Pulmonary Embolism with RV Failure",
+    "acuity": 1,
+    "presentation": "Hemodynamic Instability / Shock",
+    "category": "pulmonary",
+    "chiefComplaint": "Sudden SOB + hypotension (BP 78/42)",
+    "treatments": {
+      "orders": [
+        {"id":"tpa-pe","name":"Systemic tPA (alteplase 100mg IV over 2h)","group":"Thrombolytics","critical":true,"correct":true,"phase":1,
+         "teaching":"Massive PE (hemodynamic instability) = systemic thrombolysis with alteplase 100mg over 2h. Reduces RV afterload within hours. Contraindications still apply (recent surgery, stroke, active bleeding) — but in cardiac arrest, benefit outweighs risk.",
+         "references":[{"source":"PE — AHA 2011 Massive PE Guidelines","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"Systemic tPA for massive PE with hemodynamic instability"}]},
+        {"id":"ct-pe","name":"CT Pulmonary Angiography — if hemodynamically able","group":"Imaging","critical":true,"correct":true,"phase":1,
+         "teaching":"CTPA is definitive for PE diagnosis and assesses clot burden. In unstable patients, bedside Echo (RV dilation, D-sign, McConnell sign) may be sufficient to trigger empiric thrombolysis if CTPA cannot be safely obtained.",
+         "references":[{"source":"PE — AHA 2011","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"Echo-guided empiric thrombolysis if too unstable for CTPA"}]},
+        {"id":"echo-pe","name":"Bedside Echo STAT (RV function assessment)","group":"Diagnostics","critical":true,"correct":true,"phase":1,
+         "teaching":"Echo in massive PE shows RV dilation (RV:LV ratio >0.9), D-sign (septal flattening), McConnell sign (RV free wall hypokinesis with apical sparing). This confirms RV failure and guides resuscitation.",
+         "references":[{"source":"PE — AHA 2011","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"Echo: RV:LV >0.9, D-sign, McConnell sign = massive PE"}]},
+        {"id":"heparin-pe","name":"Heparin 80u/kg bolus + infusion","group":"Anticoagulation","critical":true,"correct":true,"phase":1,
+         "teaching":"Start heparin concurrently with workup — don't wait for imaging if clinical suspicion is high. Prevents clot propagation. In massive PE, systemic thrombolysis replaces heparin temporarily; restart 1-2h after tPA completion.",
+         "references":[{"source":"PE — AHA 2011","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"Unfractionated heparin; restart 1-2h post-tPA"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Arrival","auto":true,"vitals":{"BP":"78/42","HR":"128","RR":"28","SpO2":"84%","GCS":"13"},"labHighlights":{"Troponin":"2.1 (elevated)","BNP":"1840","EKG":"S1Q3T3, sinus tachycardia"}},
+        {"id":"echo","label":"Echo Done","vitals":{"BP":"82/50","HR":"122"},"labHighlights":{"Echo":"RV:LV 1.4, D-sign present, EF 55%"}},
+        {"id":"treatment","label":"Thrombolysis Started","vitals":{"BP":"98/62","HR":"108"},"labHighlights":{"tPA":"Alteplase 100mg infusing","Response":"Improving"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Cardiac arrest from PE — CPR + empiric tPA (50mg bolus) without CTPA",
+      "Contraindications to tPA (recent stroke/surgery) — consider catheter-directed or surgical embolectomy",
+      "RV failure from fluid overload — fluids worsen D-sign; use pressors first",
+      "Saddle embolus — high clot burden, may need surgical embolectomy"
+    ],
+    "commonPitfalls": [
+      "Aggressive fluid resuscitation in RV failure (worsens septal shift, reduces LV output)",
+      "Delaying thrombolysis waiting for CTPA in hemodynamically unstable patient",
+      "Using LMWH instead of UFH in massive PE (can't reverse, can't adjust)",
+      "Stopping heparin during tPA without restarting (thrombosis risk)"
+    ],
+    "keyLearningPoints": [
+      "Massive PE = hemodynamic instability → systemic tPA is first-line (not heparin alone)",
+      "Echo bedside: RV dilation + D-sign sufficient to guide empiric thrombolysis",
+      "Fluids make RV failure WORSE — use vasopressors (norepinephrine) first"
+    ]
+  },
+  "dka-v2": {
+    "id": "dka-v2",
+    "diagnosis": "DKA — Atypical (LADA / Ketosis-Prone T2DM)",
+    "acuity": 2,
+    "presentation": "Nausea / Vomiting / Polyuria",
+    "category": "endocrine",
+    "chiefComplaint": "Nausea, vomiting, glucose 610 — no known diabetes",
+    "treatments": {
+      "orders": [
+        {"id":"ivf-dka2","name":"1L NS IV bolus then 250-500mL/h","group":"Fluids","critical":true,"correct":true,"phase":1,
+         "teaching":"Fluid resuscitation is the most important initial intervention in DKA — corrects hypovolemia, improves renal perfusion, and lowers glucose even before insulin. Start with 1L NS, then transition to 0.45% NS at 250-500mL/h once hemodynamics stable.",
+         "references":[{"source":"DKA Management — ADA 2022","url":"https://diabetesjournals.org/care/article/45/Supplement_1/S244/138916/","detail":"1L NS bolus; then 250-500mL/h maintenance"}]},
+        {"id":"k-check-dka2","name":"Check K+ BEFORE starting insulin","group":"Electrolytes","critical":true,"correct":true,"phase":1,
+         "teaching":"If K+ <3.5, hold insulin and replete potassium first — insulin drives K+ into cells and can cause fatal hypokalemia. DKA patients are always total body K+ depleted even if serum K+ is normal or high at presentation.",
+         "references":[{"source":"DKA Management — ADA 2022","url":"https://diabetesjournals.org/care/article/45/Supplement_1/S244/138916/","detail":"Hold insulin if K+ <3.5; always check K+ before starting"}]},
+        {"id":"insulin-dka2","name":"Regular insulin 0.1 u/kg/h infusion (after K+ ≥3.5)","group":"Insulin","critical":true,"correct":true,"phase":2,
+         "teaching":"Standard DKA insulin: 0.1 u/kg/h continuous infusion. Target glucose reduction 50-75 mg/dL/h. When glucose reaches 200-250, add D5W to prevent hypoglycemia — continue insulin until anion gap closes, not when glucose normalizes.",
+         "references":[{"source":"DKA Management — ADA 2022","url":"https://diabetesjournals.org/care/article/45/Supplement_1/S244/138916/","detail":"0.1 u/kg/h; add dextrose at glucose 200; continue until AG closes"}]},
+        {"id":"bicarb-dka2","name":"Sodium bicarbonate","group":"Alkali","critical":false,"correct":false,"phase":1,
+         "teaching":"NOT routinely recommended in DKA. Bicarb paradoxically worsens CNS acidosis by generating CO2 that crosses BBB. Only consider if pH <6.9 (extreme acidosis) or life-threatening hyperkalemia with EKG changes.",
+         "references":[{"source":"DKA Management — ADA 2022","url":"https://diabetesjournals.org/care/article/45/Supplement_1/S244/138916/","detail":"Bicarb only if pH <6.9; not routine"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"102/64","HR":"118","RR":"26 (Kussmaul)","SpO2":"99%","Temp":"98.2°F"},"labHighlights":{"Glucose":"610","pH":"7.12","Bicarb":"9","AG":"28","K+":"5.8 (falsely elevated)","Ketones":"Large"}},
+        {"id":"resuscitation","label":"After IVF + K+ replacement","vitals":{"BP":"118/74","HR":"104"},"labHighlights":{"K+":"3.6 (safe to start insulin)","Glucose":"490"}},
+        {"id":"improving","label":"Insulin + fluids 6h","vitals":{"BP":"124/78","HR":"88"},"labHighlights":{"Glucose":"210","AG":"16","pH":"7.28","K+":"3.2 (replete)"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Precipitating infection (pan-culture before antibiotics — fever may be absent in DKA)",
+      "Cerebral edema (headache/altered consciousness during treatment — give mannitol, call neuro)",
+      "Total body K+ depletion despite high serum K+ at presentation",
+      "Euglycemic DKA (SGLT2i, pregnancy) — glucose may be <200"
+    ],
+    "commonPitfalls": [
+      "Starting insulin before K+ is ≥3.5 (fatal hypokalemia)",
+      "Stopping insulin when glucose normalizes rather than when anion gap closes",
+      "Giving bicarb routinely (worsens CNS acidosis)",
+      "Missing SGLT2i-induced euglycemic DKA (glucose 180-250)"
+    ],
+    "keyLearningPoints": [
+      "Check K+ before insulin — hold if <3.5, replete to 3.5 first",
+      "End-point is anion gap closure, not glucose normalization",
+      "Add dextrose to fluids when glucose hits 200 to allow insulin to continue"
+    ]
+  },
+  "encephalitis": {
+    "id": "encephalitis",
+    "diagnosis": "Encephalitis (Herpes Simplex or Arboviral)",
+    "acuity": 1,
+    "presentation": "Fever / AMS / Seizure",
+    "category": "neurologic",
+    "chiefComplaint": "3-day fever, confusion, new seizure",
+    "treatments": {
+      "orders": [
+        {"id":"acyclovir-enceph","name":"Acyclovir 10mg/kg IV q8h — START IMMEDIATELY","group":"Antivirals","critical":true,"correct":true,"phase":1,
+         "teaching":"HSV encephalitis is the most treatable cause of viral encephalitis. Mortality without treatment approaches 70%; with IV acyclovir, it drops to 20%. Start empirically while awaiting CSF PCR — do NOT delay for results. Give before LP if LP will be delayed.",
+         "references":[{"source":"HSV Encephalitis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK557643/","detail":"Acyclovir 10mg/kg IV q8h; start empirically without waiting for PCR"}]},
+        {"id":"lp-enceph","name":"Lumbar puncture (CSF PCR HSV-1/2, arboviral panel, cell count)","group":"Diagnostics","critical":true,"correct":true,"phase":1,
+         "teaching":"CSF in HSV encephalitis: lymphocytic pleocytosis (10-500 cells), elevated protein, normal/low glucose, RBCs (hemorrhagic). HSV PCR is 98% sensitive. Obtain after MRI — temporal lobe T2 hyperintensity is highly specific for HSE.",
+         "references":[{"source":"HSV Encephalitis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK557643/","detail":"CSF PCR 98% sensitive; do MRI first if possible"}]},
+        {"id":"mri-enceph","name":"MRI Brain with FLAIR/DWI (temporal lobe)","group":"Imaging","critical":true,"correct":true,"phase":1,
+         "teaching":"MRI T2/FLAIR hyperintensity in medial temporal lobe ± insular cortex is pathognomonic for HSV encephalitis. CT may be normal. Order MRI and LP simultaneously — treat empirically while results pending.",
+         "references":[{"source":"HSV Encephalitis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK557643/","detail":"T2/FLAIR temporal lobe signal is pathognomonic for HSV encephalitis"}]},
+        {"id":"antibiotics-enceph","name":"Empiric antibiotics (ceftriaxone + vancomycin) for bacterial meningitis coverage","group":"Antibiotics","critical":true,"correct":true,"phase":1,
+         "teaching":"Until CSF confirms viral etiology, cover bacterial meningitis empirically. Ceftriaxone (2g IV q12h) + vancomycin covers pneumococcus, meningococcus, listeria. De-escalate once cultures/PCR return.",
+         "references":[{"source":"Bacterial Meningitis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK557643/","detail":"Cover bacterial causes empirically until PCR/culture results"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"134/78","HR":"102","RR":"18","Temp":"103.1°F","GCS":"12"},"labHighlights":{"WBC":"14.2","EEG":"Temporal slowing"}},
+        {"id":"lp","label":"Post-LP","vitals":{"BP":"128/74","HR":"98"},"labHighlights":{"CSF WBC":"148 (lymphocytes)","CSF Protein":"112","CSF Glucose":"54 (serum 98)","PCR":"Pending"}},
+        {"id":"treatment","label":"24h Treatment","vitals":{"BP":"122/72","HR":"90","Temp":"101.2°F"},"labHighlights":{"CSF PCR":"HSV-1 positive","MRI":"L temporal T2 hyperintensity"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Autoimmune encephalitis (anti-NMDA receptor) — especially in young women with behavioral changes",
+      "Bacterial meningitis — always cover empirically until CSF confirms viral",
+      "Status epilepticus — continuous EEG if altered consciousness persists",
+      "Herniation risk before LP (get CT if focal deficits, papilledema, or immunocompromised)"
+    ],
+    "commonPitfalls": [
+      "Delaying acyclovir while awaiting PCR results (treat empirically)",
+      "Not considering autoimmune encephalitis (especially if no fever or atypical course)",
+      "Forgetting LP in confused febrile patient (CSF is essential for diagnosis)",
+      "Stopping acyclovir on clinical improvement before 14-21 day course"
+    ],
+    "keyLearningPoints": [
+      "HSV encephalitis: start acyclovir empirically — do NOT wait for PCR",
+      "MRI FLAIR temporal lobe signal + CSF lymphocytosis = treat for HSV until proven otherwise",
+      "Always cover bacterial meningitis simultaneously until CSF differentiates"
+    ]
+  },
+  "brain-abscess": {
+    "id": "brain-abscess",
+    "diagnosis": "Brain Abscess — Bacterial",
+    "acuity": 1,
+    "presentation": "Headache / Fever / Focal Deficit",
+    "category": "neurologic",
+    "chiefComplaint": "Progressive headache + right arm weakness × 5 days",
+    "treatments": {
+      "orders": [
+        {"id":"mri-abscess","name":"MRI Brain with contrast (ring-enhancing lesion)","group":"Imaging","critical":true,"correct":true,"phase":1,
+         "teaching":"Brain abscess: MRI shows ring-enhancing lesion with central diffusion restriction (DWI bright = pus). Differentiates from primary brain tumor (no DWI restriction). CT with contrast is acceptable if MRI unavailable.",
+         "references":[{"source":"Brain Abscess — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK538529/","detail":"MRI DWI: central diffusion restriction distinguishes abscess from tumor"}]},
+        {"id":"abx-abscess","name":"Ceftriaxone 2g IV q12h + metronidazole 500mg IV q8h","group":"Antibiotics","critical":true,"correct":true,"phase":1,
+         "teaching":"Empiric coverage: ceftriaxone (aerobic gram-neg, streptococci) + metronidazole (anaerobes). Add vancomycin if post-neurosurgery, trauma, or health-care associated. Source determines organisms: dental/lung = streptococci/anaerobes; otogenic = gram-neg; immunocompromised = Toxoplasma/Nocardia.",
+         "references":[{"source":"Brain Abscess — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK538529/","detail":"Ceftriaxone + metronidazole; source-directed coverage"}]},
+        {"id":"neuro-abscess","name":"Neurosurgery consult (aspiration vs drainage)","group":"Consults","critical":true,"correct":true,"phase":1,
+         "teaching":"Surgical drainage indicated for: abscess >2.5cm, mass effect, herniation risk, or failure to improve on antibiotics. Stereotactic aspiration preferred — provides organism identification AND decompression. Small abscesses <2.5cm without mass effect may be managed medically.",
+         "references":[{"source":"Brain Abscess — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK538529/","detail":"Surgical drainage if >2.5cm, mass effect, or failing medical therapy"}]},
+        {"id":"steroids-abscess","name":"Dexamethasone 4mg IV q6h","group":"Steroids","critical":false,"correct":false,"phase":1,
+         "teaching":"Use CAUTIOUSLY — steroids reduce edema but may impair antibiotic penetration and immune clearance of abscess. Only use for severe mass effect/herniation. Avoid routine use. Do not start before antibiotics.",
+         "references":[{"source":"Brain Abscess — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK538529/","detail":"Steroids for severe edema only; impair abscess resolution"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"138/82","HR":"92","RR":"16","Temp":"101.8°F","GCS":"14"},"labHighlights":{"WBC":"16.4","CRP":"84","Blood cultures":"Drawn"}},
+        {"id":"imaging","label":"MRI Completed","vitals":{"BP":"134/80"},"labHighlights":{"MRI":"3.2cm ring-enhancing L frontal lesion, DWI bright center, 8mm midline shift"}},
+        {"id":"post-drainage","label":"Post-Aspiration","vitals":{"BP":"128/76","Temp":"100.2°F"},"labHighlights":{"Culture":"Streptococcus intermedius (dental source)","Abscess":"Decompressed"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Source of bacteremia (dental, lung, cardiac — endocarditis causes septic emboli)",
+      "Multiple abscesses = hematogenous seeding (endocarditis, lung AVM)",
+      "Toxoplasma in HIV/AIDS (ring-enhancing but responds to pyrimethamine/sulfadiazine trial)",
+      "Seizure prophylaxis (levetiracetam — cortical abscesses high seizure risk)"
+    ],
+    "commonPitfalls": [
+      "LP in brain abscess with mass effect (herniation risk — do CT/MRI first)",
+      "Routine steroids (impair abscess resolution — use only for life-threatening edema)",
+      "Missing endocarditis as source (always get Echo in bacteremic brain abscess)",
+      "Stopping antibiotics when patient improves (6-8 weeks total usually needed)"
+    ],
+    "keyLearningPoints": [
+      "DWI restriction on MRI distinguishes abscess (pus) from tumor/metastasis",
+      "Source-directed antibiotics: dental → Streptococcus; otogenic → gram-negatives",
+      "Always consider endocarditis as source — get Echo for bacteremic patients"
+    ]
+  },
+  "pneumonia-on-copd": {
+    "id": "pneumonia-on-copd",
+    "diagnosis": "CAP Complicated by COPD Exacerbation",
+    "acuity": 2,
+    "presentation": "SOB / Productive Cough / Fever",
+    "category": "pulmonary",
+    "chiefComplaint": "Worsening SOB + productive cough + fever in COPD patient",
+    "treatments": {
+      "orders": [
+        {"id":"cxr-copd-pna","name":"CXR + ABG","group":"Diagnostics","critical":true,"correct":true,"phase":1,
+         "teaching":"CXR confirms pneumonia infiltrate. ABG essential in COPD + acute illness — look for hypercapnia (CO2 retention). CO2 >50 + pH <7.35 = acute-on-chronic respiratory failure requiring NIV. Do NOT wait for ABG to start treatment.",
+         "references":[{"source":"CAP Guidelines — IDSA/ATS 2007","url":"https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-cap-in-adults/","detail":"ABG essential for CO2 monitoring in COPD; CXR confirms diagnosis"}]},
+        {"id":"o2-copd-pna","name":"Controlled O2 — titrate to SpO2 88-92%","group":"Oxygen","critical":true,"correct":true,"phase":1,
+         "teaching":"COPD patients: target SpO2 88-92%, NOT 96%+. CO2 retainers rely on hypoxic drive. Excessive O2 causes CO2 narcosis — hypercapnia, somnolence, respiratory arrest. This is a classic board question and real danger.",
+         "references":[{"source":"GOLD COPD 2023","url":"https://goldcopd.org/2023-gold-report/","detail":"Target SpO2 88-92% in COPD to avoid CO2 narcosis"}]},
+        {"id":"abx-copd-pna","name":"Levofloxacin 750mg IV/PO daily (or amox-clav + azithromycin)","group":"Antibiotics","critical":true,"correct":true,"phase":1,
+         "teaching":"CAP requiring hospitalization: respiratory fluoroquinolone (levofloxacin/moxifloxacin) OR beta-lactam + macrolide. In COPD, cover atypicals (Legionella, Mycoplasma) in addition to pneumococcus. Adjust for local resistance patterns and patient factors.",
+         "references":[{"source":"CAP Guidelines — IDSA/ATS 2007","url":"https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-cap-in-adults/","detail":"Respiratory FQ or beta-lactam + macrolide for hospitalized CAP"}]},
+        {"id":"niv-copd-pna","name":"NIV (BiPAP) for hypercapnic respiratory failure","group":"Ventilation","critical":true,"correct":true,"phase":2,
+         "teaching":"BiPAP in COPD + acute hypercapnic failure (pH 7.25-7.35, CO2 >50) reduces intubation risk by 50-65% (GOLD evidence A). Start early: IPAP 10-12, EPAP 4-5. Monitor ABG q1-2h. Escalate to intubation if deteriorating.",
+         "references":[{"source":"GOLD COPD 2023","url":"https://goldcopd.org/2023-gold-report/","detail":"NIV reduces intubation 50-65% in acute hypercapnic exacerbation; pH 7.25-7.35"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"138/84","HR":"102","RR":"24","Temp":"102.4°F","SpO2":"85% on RA"},"labHighlights":{"ABG":"pH 7.32, pCO2 58, pO2 48","WBC":"16.8","CXR":"RLL infiltrate"}},
+        {"id":"o2","label":"Controlled O2","vitals":{"SpO2":"90%","RR":"22"},"labHighlights":{"ABG":"pH 7.34, pCO2 55"}},
+        {"id":"niv","label":"BiPAP Started","vitals":{"SpO2":"93%","RR":"18","BP":"132/78"},"labHighlights":{"ABG":"pH 7.38, pCO2 50 (improving)"}}
+      ]
+    },
+    "mustNotMiss": [
+      "High-flow O2 causing CO2 narcosis — always use controlled O2 in COPD",
+      "pH <7.25 or pCO2 rising on NIV — needs intubation, not more NIV",
+      "Legionella + Pneumococcal urine antigen (changes antibiotic coverage)",
+      "Pulmonary embolism as co-precipitant (COPD has high PE risk with exacerbation)"
+    ],
+    "commonPitfalls": [
+      "Targeting SpO2 >95% in COPD (causes hypercapnic respiratory failure)",
+      "Skipping ABG (relying on SpO2 misses CO2 retention)",
+      "Delaying NIV until patient in extremis (start early at pH 7.25-7.35)",
+      "Using amoxicillin alone without atypical coverage"
+    ],
+    "keyLearningPoints": [
+      "COPD + hypoxia: target SpO2 88-92% — high O2 causes CO2 narcosis",
+      "ABG essential to detect hypercapnia — SpO2 probe cannot measure CO2",
+      "Early BiPAP in pH 7.25-7.35 reduces intubation by >50%"
+    ]
+  },
+  "chf-exacerbation-v2": {
+    "id": "chf-exacerbation-v2",
+    "diagnosis": "Decompensated CHF — Cardiogenic Shock",
+    "acuity": 1,
+    "presentation": "Hypotension + Pulmonary Edema",
+    "category": "cardiovascular",
+    "chiefComplaint": "Severe SOB + BP 80/50 — on furosemide at home",
+    "treatments": {
+      "orders": [
+        {"id":"echo-cs","name":"Bedside Echo (EF, filling pressures, pericardial effusion)","group":"Diagnostics","critical":true,"correct":true,"phase":1,
+         "teaching":"Echo differentiates cardiogenic shock from distributive (sepsis) or obstructive (tamponade, PE). Look for EF, LV dilation, wall motion abnormalities, IVC plethora (elevated RAP), pericardial effusion. This guides whether to give fluids or vasopressors.",
+         "references":[{"source":"Cardiogenic Shock — AHA 2017","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000525","detail":"Echo essential to confirm cardiogenic vs other shock types"}]},
+        {"id":"norepinephrine-cs","name":"Norepinephrine 0.1-0.3 mcg/kg/min (MAP target ≥65)","group":"Vasopressors","critical":true,"correct":true,"phase":1,
+         "teaching":"Norepinephrine is first-line vasopressor in cardiogenic shock — increases MAP without excessive tachycardia. Dopamine increases heart rate and arrhythmia risk (SOAP-II: worse outcomes vs NE). Avoid epinephrine (increases lactic acidosis).",
+         "references":[{"source":"Cardiogenic Shock — AHA 2017","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000525","detail":"Norepinephrine first-line; SOAP-II showed superiority over dopamine"}]},
+        {"id":"dobutamine-cs","name":"Dobutamine 2-5 mcg/kg/min (inotrope for low EF)","group":"Inotropes","critical":true,"correct":true,"phase":2,
+         "teaching":"Dobutamine improves cardiac output in low-EF cardiogenic shock (EF <30%). Use with norepinephrine — not as monotherapy. Titrate to cardiac index >2.2. Milrinone is alternative but longer half-life and harder to reverse.",
+         "references":[{"source":"Cardiogenic Shock — AHA 2017","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000525","detail":"Dobutamine + NE combination; CI target >2.2 L/min/m2"}]},
+        {"id":"fluids-cs","name":"1-2L IV fluid bolus","group":"Fluids","critical":false,"correct":false,"phase":1,
+         "teaching":"AVOID in cardiogenic shock with pulmonary edema — fluids worsen respiratory failure without improving cardiac output (preload-independent state). Only give small trial (250-500mL) if suspected concurrent hypovolemia (vomiting, no intake). Echo guides this decision.",
+         "references":[{"source":"Cardiogenic Shock — AHA 2017","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000525","detail":"Avoid fluids in cardiogenic shock with pulmonary edema"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"80/50","HR":"118","RR":"32","SpO2":"84%","Temp":"36.8°C"},"labHighlights":{"Lactate":"4.8","BNP":"4200","Troponin":"1.4","CXR":"Pulmonary edema, enlarged cardiac silhouette"}},
+        {"id":"echo","label":"Echo + Pressors","vitals":{"BP":"92/60","HR":"112","SpO2":"92% BiPAP"},"labHighlights":{"Echo":"EF 15%, dilated LV, no effusion","Pressors":"NE 0.2 mcg/kg/min"}},
+        {"id":"stabilized","label":"Stabilized","vitals":{"BP":"102/66","HR":"98","SpO2":"95%"},"labHighlights":{"Lactate":"2.1 (clearing)","CI":"2.0 with dobutamine"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Acute MI as trigger (EKG + troponin — PCI if STEMI or NSTEMI with CS)",
+      "Mechanical complications of MI (papillary muscle rupture, VSD) — new murmur",
+      "Cardiac tamponade (Echo: effusion + diastolic RV collapse + IVC plethora)",
+      "Right heart failure (give volume cautiously — RV preload dependent)"
+    ],
+    "commonPitfalls": [
+      "IV fluids in cardiogenic shock with pulmonary edema (worsens respiratory failure)",
+      "Dopamine over norepinephrine (SOAP-II: increased arrhythmias and mortality)",
+      "Missing acute MI as trigger (always check EKG and troponin immediately)",
+      "Delaying Echo (can't distinguish cardiogenic from other shock types without it)"
+    ],
+    "keyLearningPoints": [
+      "Echo first — distinguishes cardiogenic from distributive/obstructive shock",
+      "Norepinephrine is first-line over dopamine (SOAP-II evidence)",
+      "Fluids worsen cardiogenic shock — use vasopressors/inotropes instead"
+    ]
+  },
+  "pe-v3": {
+    "id": "pe-v3",
+    "diagnosis": "Submassive PE — Intermediate High-Risk",
+    "acuity": 2,
+    "presentation": "Pleuritic Chest Pain / Dyspnea",
+    "category": "pulmonary",
+    "chiefComplaint": "Acute dyspnea + right-sided pleuritic chest pain, SpO2 92%",
+    "treatments": {
+      "orders": [
+        {"id":"ctpa-sub","name":"CT Pulmonary Angiography","group":"Imaging","critical":true,"correct":true,"phase":1,
+         "teaching":"CTPA is the definitive test for PE. Also provides CT-PA score (clot burden), RV:LV ratio on CT (>0.9 = RV strain), and concurrent pathology. In submassive PE, RV:LV ratio and troponin/BNP guide risk stratification and treatment intensity.",
+         "references":[{"source":"PE — AHA 2011","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"CTPA with RV:LV ratio; risk stratifies intermediate PE"}]},
+        {"id":"heparin-sub","name":"Unfractionated heparin 80u/kg bolus + infusion","group":"Anticoagulation","critical":true,"correct":true,"phase":1,
+         "teaching":"Anticoagulation is the cornerstone of submassive PE management. UFH preferred over LMWH in intermediate-high risk — can be reversed rapidly if thrombolysis needed. Start immediately once PE confirmed (or high clinical suspicion).",
+         "references":[{"source":"PE — AHA 2011","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"UFH preferred in intermediate-high risk for rapid reversibility if lytics needed"}]},
+        {"id":"echo-sub","name":"Echocardiogram (RV function assessment)","group":"Diagnostics","critical":true,"correct":true,"phase":1,
+         "teaching":"Echo in submassive PE: RV:LV >0.9, tricuspid regurgitation, septal flattening predict decompensation. Troponin + BNP + Echo RV strain = intermediate-high risk → consider catheter-directed thrombolysis (CDT) vs systemic thrombolysis if deteriorating.",
+         "references":[{"source":"PE — AHA 2011","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"Echo RV dysfunction + troponin = intermediate-high risk; consider CDT"}]},
+        {"id":"lmwh-sub","name":"Enoxaparin 1mg/kg SC q12h (LMWH)","group":"Anticoagulation","critical":false,"correct":false,"phase":1,
+         "teaching":"LMWH works but is less ideal in intermediate-high risk PE — cannot be reversed if thrombolysis becomes necessary and renal dosing is complex. Use UFH instead for flexibility. LMWH is appropriate in low/intermediate-low risk PE.",
+         "references":[{"source":"PE — AHA 2011","url":"https://www.ahajournals.org/doi/10.1161/CIR.0b013e31822f9af2","detail":"UFH preferred over LMWH in high-risk/submassive PE for reversibility"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"108/68","HR":"114","RR":"22","SpO2":"92%","Temp":"98.8°F"},"labHighlights":{"Troponin":"0.48","BNP":"680","D-dimer":">10,000","EKG":"Sinus tach, S1Q3T3"}},
+        {"id":"diagnosed","label":"CTPA + Echo Done","vitals":{"BP":"106/66","HR":"110"},"labHighlights":{"CTPA":"Bilateral PE, RV:LV 1.1","Echo":"RV dilation, TR, septal flattening"}},
+        {"id":"anticoagulated","label":"Anticoagulated — Monitoring","vitals":{"BP":"112/72","HR":"98","SpO2":"95%"},"labHighlights":{"aPTT":"Therapeutic","Lactate":"1.2 (normal)"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Hemodynamic deterioration — reassess hourly; escalate to systemic tPA or CDT",
+      "DVT extension — lower extremity Doppler if leg swelling/pain",
+      "Submassive → massive transition (watch BP trend, RR, lactate)",
+      "Provoked vs unprovoked PE (determines anticoagulation duration)"
+    ],
+    "commonPitfalls": [
+      "Using LMWH in intermediate-high risk (can't reverse if thrombolysis needed)",
+      "Missing deterioration signals (hourly reassessment is critical)",
+      "Routine thrombolysis for submassive PE (increases major bleeding 3-fold without survival benefit unless deteriorating)",
+      "Short anticoagulation course in unprovoked PE (3 months → indefinite discussion)"
+    ],
+    "keyLearningPoints": [
+      "Submassive PE: UFH + close monitoring; escalate to CDT/systemic tPA only if deteriorating",
+      "RV:LV >0.9 + troponin = intermediate-high risk → higher monitoring intensity",
+      "Systemic thrombolysis in hemodynamically stable submassive PE increases bleeding without mortality benefit"
+    ]
+  },
+  "dka-v3": {
+    "id": "dka-v3",
+    "diagnosis": "DKA with Cerebral Edema (Pediatric / Young Adult)",
+    "acuity": 1,
+    "presentation": "Altered Consciousness During DKA Treatment",
+    "category": "endocrine",
+    "chiefComplaint": "DKA improving on insulin — now obtunded",
+    "treatments": {
+      "orders": [
+        {"id":"mannitol-ce","name":"Mannitol 0.5-1g/kg IV bolus STAT","group":"Cerebral Edema","critical":true,"correct":true,"phase":1,
+         "teaching":"Cerebral edema during DKA treatment: give mannitol 0.5-1g/kg IV immediately. This is the most feared complication — caused by overly rapid fluid administration and osmotic shifts. Hypertonic saline (3% NaCl 5-10mL/kg) is an alternative. Survival depends on recognition speed.",
+         "references":[{"source":"DKA Cerebral Edema — Pediatric AAP/ESPE 2018","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6260822/","detail":"Mannitol 0.5-1g/kg or 3% saline 5-10mL/kg immediately"}]},
+        {"id":"ct-ce","name":"CT Head after mannitol (not before treatment)","group":"Imaging","critical":true,"correct":true,"phase":2,
+         "teaching":"DO NOT delay mannitol to get CT — cerebral edema is a clinical diagnosis in DKA. Treat first, image second. CT shows effacement of ventricles and sulci, loss of grey-white differentiation in severe cases.",
+         "references":[{"source":"DKA Cerebral Edema — Pediatric AAP/ESPE 2018","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6260822/","detail":"Clinical diagnosis — treat before imaging; CT after mannitol"}]},
+        {"id":"slow-fluids-ce","name":"Reduce IV fluid rate by 50%","group":"Fluids","critical":true,"correct":true,"phase":1,
+         "teaching":"Over-rapid fluid resuscitation is a major risk factor for cerebral edema. Reduce fluid rate immediately. Target is slow, steady glucose decline (50-75mg/dL/h). Excess fluid causes osmotic shifts → cerebral edema.",
+         "references":[{"source":"DKA Cerebral Edema — Pediatric AAP/ESPE 2018","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6260822/","detail":"Slow fluids: excess fluid resuscitation is main risk factor"}]},
+        {"id":"bicarb-ce","name":"Sodium bicarbonate","group":"Alkali","critical":false,"correct":false,"phase":1,
+         "teaching":"CONTRAINDICATED in DKA cerebral edema — bicarb increases cerebral edema by generating paradoxical CNS acidosis and osmotic shifts. This is a key reason bicarb is not routinely used in DKA.",
+         "references":[{"source":"DKA Cerebral Edema — Pediatric AAP/ESPE 2018","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6260822/","detail":"Bicarb contraindicated — increases cerebral edema risk"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"DKA Improving","auto":true,"vitals":{"BP":"118/72","HR":"110","RR":"22","SpO2":"97%","GCS":"15"},"labHighlights":{"Glucose":"340 (down from 580)","AG":"22","pH":"7.20"}},
+        {"id":"edema","label":"Neurologic Deterioration","vitals":{"BP":"142/88","HR":"58 (bradycardia)","GCS":"8","Pupils":"Unequal"},"labHighlights":{"Glucose":"280","AG":"18","pH":"7.26","Warning":"Cushing triad (HTN + brady + irregular RR)"}},
+        {"id":"treatment","label":"Mannitol Given","vitals":{"BP":"124/78","HR":"82","GCS":"11"},"labHighlights":{"CT":"Effacement of sulci, early edema","Glucose":"Declining slowly"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Cushing triad (HTN + bradycardia + irregular respirations) = impending herniation",
+      "Anisocoria during DKA treatment — mannitol immediately, then CT",
+      "Over-rapid glucose/osmolality correction as precipitant",
+      "Intubation for GCS <8 (after mannitol, not instead of)"
+    ],
+    "commonPitfalls": [
+      "Getting CT before giving mannitol (delay = herniation)",
+      "Using bicarb (increases cerebral edema — absolute contraindication here)",
+      "Rapid fluid rates in pediatric DKA (>10mL/kg/h increases edema risk)",
+      "Missing subtle early signs (headache worsening, irritability, slowing HR)"
+    ],
+    "keyLearningPoints": [
+      "Cerebral edema in DKA: mannitol first, CT second — never delay treatment for imaging",
+      "Over-rapid fluids and bicarb are major risk factors — avoid both",
+      "Cushing triad = impending herniation → immediate mannitol + neurosurgery"
+    ]
+  },
+  "alcoholic-ketoacidosis": {
+    "id": "alcoholic-ketoacidosis",
+    "diagnosis": "Alcoholic Ketoacidosis (AKA)",
+    "acuity": 2,
+    "presentation": "Nausea / Vomiting / Abdominal Pain",
+    "category": "metabolic",
+    "chiefComplaint": "Binge drinking, 2 days of vomiting, glucose 68",
+    "treatments": {
+      "orders": [
+        {"id":"d5ns-aka","name":"D5 0.9% NS IV (dextrose + fluids)","group":"Fluids","critical":true,"correct":true,"phase":1,
+         "teaching":"AKA treatment: IV dextrose is the key — it suppresses glucagon, reverses the metabolic switch from fatty acid oxidation to glucose metabolism, and clears ketones. Use D5NS or D5 0.45%NS. Add thiamine BEFORE dextrose to prevent Wernicke's.",
+         "references":[{"source":"Alcoholic Ketoacidosis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430922/","detail":"D5W or D5NS: dextrose reverses metabolic switch; glucose often low-normal"}]},
+        {"id":"thiamine-aka","name":"Thiamine 100mg IV BEFORE dextrose","group":"Vitamins","critical":true,"correct":true,"phase":1,
+         "teaching":"Always give thiamine before dextrose in alcoholics — dextrose without thiamine can precipitate Wernicke's encephalopathy by consuming remaining thiamine stores. IV thiamine is cheap, immediate, and life-saving.",
+         "references":[{"source":"Alcoholic Ketoacidosis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430922/","detail":"Thiamine before dextrose — prevents Wernicke's encephalopathy"}]},
+        {"id":"antiemetics-aka","name":"Ondansetron + IV fluids for dehydration","group":"Supportive","critical":true,"correct":true,"phase":1,
+         "teaching":"Antiemetics break the vomiting cycle that perpetuates ketosis (starvation + dehydration). Correct electrolytes (K+, Mg2+, phosphate) — all depleted in alcoholism. Most patients respond to glucose + fluids within 4-8 hours.",
+         "references":[{"source":"Alcoholic Ketoacidosis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430922/","detail":"Antiemetics + electrolyte replacement; resolves in hours"}]},
+        {"id":"insulin-aka","name":"Regular insulin infusion","group":"Insulin","critical":false,"correct":false,"phase":1,
+         "teaching":"DO NOT use insulin in AKA — glucose is already low-normal or low. Insulin will cause hypoglycemia. AKA is cleared by dextrose, not insulin. The ketosis is alcohol-mediated, not insulin-deficient.",
+         "references":[{"source":"Alcoholic Ketoacidosis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430922/","detail":"Insulin contraindicated — glucose low-normal; treat with dextrose not insulin"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"102/64","HR":"114","RR":"22 (Kussmaul-like)","SpO2":"98%","Temp":"37.2°C"},"labHighlights":{"Glucose":"68","pH":"7.18","Bicarb":"10","AG":"22","Ketones":"Large","EtOH":"12 (declining)"}},
+        {"id":"treatment","label":"Dextrose + Thiamine","vitals":{"BP":"112/70","HR":"102","RR":"18"},"labHighlights":{"Glucose":"118","AG":"18 (improving)","pH":"7.26"}},
+        {"id":"resolved","label":"6h — Resolved","vitals":{"BP":"118/74","HR":"88"},"labHighlights":{"AG":"12 (closed)","pH":"7.36","Ketones":"Trace"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Wernicke's encephalopathy (confusion + ophthalmoplegia + ataxia) — give thiamine IM/IV",
+      "Pancreatitis as precipitant (lipase, abdominal US)",
+      "GI bleed (Mallory-Weiss, varices) — check stool guaiac, Hgb",
+      "Concurrent DKA in Type 1 diabetic who drinks heavily"
+    ],
+    "commonPitfalls": [
+      "Giving insulin (hypoglycemia — AKA cleared by dextrose, not insulin)",
+      "Dextrose before thiamine (precipitates Wernicke's in thiamine-depleted alcoholics)",
+      "Diagnosing DKA without checking alcohol history and glucose",
+      "Missing concurrent infection (aspiration PNA, UTI, spontaneous peritonitis)"
+    ],
+    "keyLearningPoints": [
+      "AKA: low-normal glucose + high AG + ketones in alcoholic = treat with D5 fluids + thiamine",
+      "Thiamine BEFORE dextrose — always — in any chronic alcoholic",
+      "Insulin will cause hypoglycemia in AKA — dextrose reverses the metabolic defect"
+    ]
+  },
+  "type2-diabetes-outpatient": {
+    "id": "type2-diabetes-outpatient",
+    "diagnosis": "T2DM — Outpatient Management Intensification",
+    "acuity": 3,
+    "presentation": "A1c 10.2% — medication adjustment",
+    "category": "endocrine",
+    "chiefComplaint": "Follow-up: A1c 10.2%, on metformin 1g BID only",
+    "treatments": {
+      "orders": [
+        {"id":"glp1-t2dm","name":"Add GLP-1 receptor agonist (semaglutide or liraglutide)","group":"Medications","critical":true,"correct":true,"phase":1,
+         "teaching":"GLP-1 RAs are second-line after metformin (or first-line if CVD/CKD). Semaglutide (SUSTAIN, PIONEER) reduces MACE by 26%, HbA1c by 1.5-2%, and weight by 10-15%. Preferred over sulfonylureas and DPP4i for A1c >9 with ASCVD or obesity.",
+         "references":[{"source":"ADA Standards of Care 2024","url":"https://diabetesjournals.org/care/article/47/Supplement_1/S158/153955/","detail":"GLP-1 RA second-line; cardiovascular and weight benefit"}]},
+        {"id":"sglt2-t2dm","name":"Add SGLT2 inhibitor (empagliflozin or dapagliflozin)","group":"Medications","critical":true,"correct":true,"phase":1,
+         "teaching":"SGLT2i preferred if HF or CKD present (EMPA-REG, CREDENCE, DAPA-CKD). Reduces A1c 0.5-1%, prevents CKD progression, reduces heart failure hospitalization. Also first-line add-on per ADA 2024 for T2DM + HF or T2DM + CKD regardless of A1c.",
+         "references":[{"source":"ADA Standards of Care 2024","url":"https://diabetesjournals.org/care/article/47/Supplement_1/S158/153955/","detail":"SGLT2i first-line addition if CKD or HF; cardiorenal protection"}]},
+        {"id":"referrals-t2dm","name":"Ophthalmology, Podiatry, Nephrology referrals","group":"Preventive","critical":true,"correct":true,"phase":1,
+         "teaching":"Annual dilated eye exam (retinopathy), podiatry foot care, and nephrology if eGFR <60 or uACR >300. Microalbuminuria = earliest sign of diabetic nephropathy — start ACEi/ARB. Statin if ASCVD risk >10% (most T2DM patients qualify).",
+         "references":[{"source":"ADA Standards of Care 2024","url":"https://diabetesjournals.org/care/article/47/Supplement_1/S158/153955/","detail":"Annual ophthalmology, podiatry; ACEi/ARB for microalbuminuria"}]},
+        {"id":"sulfonylurea-t2dm","name":"Add glipizide or glimepiride","group":"Medications","critical":false,"correct":false,"phase":1,
+         "teaching":"Sulfonylureas are effective but cause hypoglycemia and weight gain. Not preferred when GLP-1 RA or SGLT2i are available — those provide equivalent or better A1c reduction with cardiorenal benefits and no hypoglycemia.",
+         "references":[{"source":"ADA Standards of Care 2024","url":"https://diabetesjournals.org/care/article/47/Supplement_1/S158/153955/","detail":"SU: effective but hypoglycemia + weight gain; preferred agents now GLP1/SGLT2i"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Clinic Visit","auto":true,"vitals":{"BP":"144/88","HR":"72","BMI":"34.2"},"labHighlights":{"A1c":"10.2%","eGFR":"74","uACR":"42 mg/g (microalbuminuria)","LDL":"128","EKG":"Normal"}},
+        {"id":"plan","label":"Medication Plan Set","vitals":{"BP":"142/86"},"labHighlights":{"Plan":"Add semaglutide 0.25mg SC weekly + empagliflozin 10mg daily","Statin":"Atorvastatin 40mg started (ASCVD >10%)"}},
+        {"id":"followup","label":"3-month Follow-up","vitals":{"BP":"128/76","BMI":"32.8"},"labHighlights":{"A1c":"8.4% (down 1.8%)","Weight":"-6 lbs","eGFR":"76 (stable)"}}
+      ]
+    },
+    "mustNotMiss": [
+      "ASCVD history or HF — prioritize GLP-1 RA or SGLT2i regardless of A1c",
+      "CKD (eGFR <60 or ACR >300) — SGLT2i slows progression (CREDENCE/DAPA-CKD)",
+      "Hypoglycemia risk with insulin or sulfonylureas — educate on sick-day rules",
+      "Diabetic ketoacidosis with SGLT2i (euglycemic DKA — glucose may be normal)"
+    ],
+    "commonPitfalls": [
+      "Adding sulfonylurea over GLP-1/SGLT2i (older agents with worse profiles)",
+      "Not screening for microalbuminuria (earliest sign of nephropathy, misses ACEi indication)",
+      "Stopping SGLT2i for minor illness without guidance (sick-day rules needed)",
+      "Targeting A1c <7% in frail elderly (hypoglycemia risk > benefit)"
+    ],
+    "keyLearningPoints": [
+      "GLP-1 RA: weight + MACE benefit; SGLT2i: HF + CKD benefit — both now preferred over SU",
+      "ADA 2024: SGLT2i or GLP-1 RA first-line add-on if ASCVD, HF, or CKD",
+      "Always check uACR — microalbuminuria needs ACEi/ARB to slow nephropathy"
+    ]
+  },
+  "allergic-rhinitis-immunotherapy": {
+    "id": "allergic-rhinitis-immunotherapy",
+    "diagnosis": "Allergic Rhinitis — Allergen Immunotherapy (SCIT)",
+    "acuity": 3,
+    "presentation": "Systemic Reaction to Allergy Shot",
+    "category": "allergy",
+    "chiefComplaint": "Urticaria + bronchospasm 15 min after SCIT injection",
+    "treatments": {
+      "orders": [
+        {"id":"epi-scit","name":"Epinephrine 0.3mg IM (anterolateral thigh)","group":"Emergency","critical":true,"correct":true,"phase":1,
+         "teaching":"Systemic reaction to SCIT: epinephrine IM is FIRST-LINE regardless of severity. Do not use antihistamines as primary treatment — they do not stop anaphylaxis. Grade 2+ systemic reactions (urticaria + bronchospasm = grade 3) require epinephrine immediately.",
+         "references":[{"source":"SCIT Safety — AAAAI/ACAAI Practice Parameters","url":"https://www.jacionline.org/article/S0091-6749(22)00337-X/fulltext","detail":"Epinephrine IM for all grade 2+ systemic reactions to SCIT"}]},
+        {"id":"obs-scit","name":"Observe 30-60 min after injection (extend after reaction)","group":"Monitoring","critical":true,"correct":true,"phase":1,
+         "teaching":"Standard post-SCIT observation is 20-30 min for routine injections. After a systemic reaction, extend to 60+ min to catch biphasic anaphylaxis. All SCIT offices must have epinephrine, oxygen, and resuscitation equipment.",
+         "references":[{"source":"SCIT Safety — AAAAI/ACAAI Practice Parameters","url":"https://www.jacionline.org/article/S0091-6749(22)00337-X/fulltext","detail":"20-30 min standard obs; extend after systemic reaction"}]},
+        {"id":"dose-adjust-scit","name":"Dose reduction 50% at next visit + review vials","group":"Protocol","critical":true,"correct":true,"phase":2,
+         "teaching":"After systemic SCIT reaction: reduce next dose by 50%, check vial integrity and expiration, review patient symptoms (had patient been sick? missed dose? new allergen exposure?). Re-buildup may be needed. Consider premedication (antihistamine + montelukast) for future injections.",
+         "references":[{"source":"SCIT Safety — AAAAI/ACAAI Practice Parameters","url":"https://www.jacionline.org/article/S0091-6749(22)00337-X/fulltext","detail":"50% dose reduction after systemic reaction; review vials and patient factors"}]},
+        {"id":"antihistamine-first-scit","name":"Diphenhydramine alone for bronchospasm","group":"Antihistamines","critical":false,"correct":false,"phase":1,
+         "teaching":"Antihistamines DO NOT reverse bronchospasm or cardiovascular collapse in anaphylaxis. They are adjuncts, not primary treatment. Giving antihistamine instead of epinephrine delays life-saving treatment.",
+         "references":[{"source":"Anaphylaxis Guidelines — WAO 2020","url":"https://www.worldallergy.org/UserFiles/file/AnaphylaxisGuidelines.pdf","detail":"H1 antihistamines are adjuncts — do not use as first-line for systemic anaphylaxis"}]}
+      ],
+      "phases": [
+        {"id":"reaction","label":"Systemic Reaction","auto":true,"vitals":{"BP":"102/68","HR":"118","RR":"22","SpO2":"94%"},"labHighlights":{"Presentation":"Urticaria + audible wheeze 15 min post-injection","Grade":"3 systemic reaction (bronchospasm)"}},
+        {"id":"treated","label":"Post-Epinephrine","vitals":{"BP":"118/74","HR":"102","SpO2":"98%"},"labHighlights":{"Response":"Wheeze resolved","Urticaria":"Fading"}},
+        {"id":"obs","label":"Extended Observation","vitals":{"BP":"122/78","HR":"90","SpO2":"99%"},"labHighlights":{"60 min obs":"Completed","Plan":"Discharge with EpiPen; 50% dose reduction"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Biphasic anaphylaxis — observe minimum 60 min after grade 3+ reaction",
+      "Wrong vial administered (check both patient ID and vial label before injection)",
+      "Concurrent beta-blocker use (reduces epinephrine response — use glucagon if needed)",
+      "SCIT in active asthma exacerbation (contraindicated — defer injection)"
+    ],
+    "commonPitfalls": [
+      "Antihistamines as primary treatment for systemic SCIT reaction (delay of epinephrine)",
+      "Continuing same dose at next visit without reduction (60% recurrence risk)",
+      "Not having epinephrine in the office during SCIT administration",
+      "Discharging immediately after reaction without extended observation"
+    ],
+    "keyLearningPoints": [
+      "SCIT systemic reaction: epinephrine IM first — antihistamines are adjuncts only",
+      "Grade 3 = bronchospasm or GI symptoms; Grade 4 = cardiovascular collapse",
+      "After reaction: 50% dose reduction, extended obs, EpiPen prescribed, vials reviewed"
+    ]
+  },
+  "alpha-gal-syndrome": {
+    "id": "alpha-gal-syndrome",
+    "diagnosis": "Alpha-Gal Syndrome — Tick-Induced Mammalian Meat Allergy",
+    "acuity": 2,
+    "presentation": "Delayed Anaphylaxis — Hours After Eating Meat",
+    "category": "allergy",
+    "chiefComplaint": "Urticaria + anaphylaxis 3-4 hours after eating steak",
+    "treatments": {
+      "orders": [
+        {"id":"epi-ags","name":"Epinephrine 0.3mg IM (anaphylaxis treatment)","group":"Emergency","critical":true,"correct":true,"phase":1,
+         "teaching":"Alpha-gal syndrome presents as delayed anaphylaxis (3-6h after mammalian meat) — unlike most food allergies which are immediate (minutes). Treat anaphylaxis identically regardless of timing: epinephrine IM first. The delay is due to delayed absorption of alpha-gal oligosaccharide in fat.",
+         "references":[{"source":"Alpha-Gal Syndrome — Commins 2020","url":"https://www.jacionline.org/article/S0091-6749(19)32588-8/fulltext","detail":"Delayed anaphylaxis 3-6h post-meat; epinephrine IM first-line"}]},
+        {"id":"ags-testing","name":"Alpha-gal IgE specific testing (ImmunoCAP)","group":"Diagnostics","critical":true,"correct":true,"phase":2,
+         "teaching":"Confirm with serum alpha-gal IgE (ImmunoCAP). Positive if IgE >0.1 kU/L. Skin testing less reliable. Ask about: Lone Star tick exposure (southeast US), recent camping, gardening. Sensitization occurs months to years after tick bite.",
+         "references":[{"source":"Alpha-Gal Syndrome — Commins 2020","url":"https://www.jacionline.org/article/S0091-6749(19)32588-8/fulltext","detail":"Alpha-gal specific IgE (ImmunoCAP) >0.1 kU/L confirms diagnosis"}]},
+        {"id":"diet-ags","name":"Mammalian meat avoidance (beef, pork, lamb, venison)","group":"Counseling","critical":true,"correct":true,"phase":2,
+         "teaching":"Strict avoidance of mammalian meat (all red meat). Alpha-gal is also in dairy, gelatin (some medications, vaccines), cetuximab (oncology drug — anaphylaxis risk). EpiPen prescribed. Many patients tolerate small amounts of dairy. IgE may decline over years if re-exposure is avoided.",
+         "references":[{"source":"Alpha-Gal Syndrome — Commins 2020","url":"https://www.jacionline.org/article/S0091-6749(19)32588-8/fulltext","detail":"Strict red meat avoidance; also gelatin, dairy (variable); EpiPen essential"}]},
+        {"id":"benadryl-ags","name":"Diphenhydramine alone for anaphylaxis","group":"Antihistamines","critical":false,"correct":false,"phase":1,
+         "teaching":"Antihistamines are adjuncts — do not delay epinephrine in anaphylaxis. The delayed timing of alpha-gal reactions often leads patients to use antihistamines first and present late. Reinforce epinephrine use at first sign of systemic reaction.",
+         "references":[{"source":"Anaphylaxis Guidelines — WAO 2020","url":"https://www.worldallergy.org/UserFiles/file/AnaphylaxisGuidelines.pdf","detail":"Antihistamines adjunct only — epinephrine is the treatment for anaphylaxis"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"ED Presentation","auto":true,"vitals":{"BP":"96/58","HR":"122","RR":"20","SpO2":"95%"},"labHighlights":{"History":"Ate steak 4 hours ago","Tryptase":"Drawn (elevated)","Presentation":"Urticaria + hypotension + crampy abdominal pain"}},
+        {"id":"treated","label":"Post-Epinephrine","vitals":{"BP":"114/72","HR":"98","SpO2":"99%"},"labHighlights":{"Response":"Improvement in 15 min","IgE":"Alpha-gal testing ordered"}},
+        {"id":"plan","label":"Discharge Planning","vitals":{"BP":"122/78","HR":"84"},"labHighlights":{"EpiPen":"2 prescribed","Allergy referral":"Ordered","Diet":"Mammalian meat avoidance counseling"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Cetuximab hypersensitivity — alpha-gal IgE predicts severe first-dose anaphylaxis to cetuximab",
+      "Delayed presentation leading to antihistamine-only treatment (reinforces epi auto-injector use)",
+      "Dairy tolerance is variable — advise caution but not necessarily complete avoidance initially",
+      "Tick prevention counseling (re-sensitization prolongs/worsens IgE levels)"
+    ],
+    "commonPitfalls": [
+      "Missing the delayed timing clue (most food allergies are immediate — 3-6h gap is diagnostic)",
+      "Not testing for alpha-gal IgE (diagnosis often missed for years)",
+      "Dismissing as 'GI upset' — the delayed anaphylaxis pattern is pathognomonic",
+      "Not warning about gelatin in medications and vaccines (contains alpha-gal)"
+    ],
+    "keyLearningPoints": [
+      "Alpha-gal: delayed anaphylaxis 3-6h after red meat — caused by Lone Star tick sensitization",
+      "Diagnosis: serum alpha-gal specific IgE (ImmunoCAP) + clinical history",
+      "Critical drug interaction: cetuximab contains alpha-gal → anaphylaxis in sensitized patients"
+    ]
+  }
+
+
+,
+  "acute-ischemic-stroke-tpa": {
+    "id": "acute-ischemic-stroke-tpa",
+    "diagnosis": "Acute Ischemic Stroke — tPA Decision Case",
+    "acuity": 1,
+    "presentation": "Wake-Up Stroke / Unclear Onset",
+    "category": "neurologic",
+    "chiefComplaint": "Left face/arm weakness — woke up with symptoms, last known well 8h ago",
+    "treatments": {
+      "orders": [
+        {"id":"mri-dwi-tpa","name":"MRI DWI/FLAIR mismatch (perfusion imaging for late window)","group":"Imaging","critical":true,"correct":true,"phase":1,
+         "teaching":"Wake-up stroke with unknown onset: MRI DWI+FLAIR mismatch (WAKE-UP trial) identifies patients who may benefit from tPA up to 4.5h from symptom *discovery*. DWI positive (acute infarct) + FLAIR negative (no established infarct) = may give tPA. CT perfusion (DAWN/DEFUSE-3) also used for thrombectomy window extension.",
+         "references":[{"source":"WAKE-UP Trial — Thomalla 2018","url":"https://www.nejm.org/doi/10.1056/NEJMoa1804355","detail":"DWI+/FLAIR- mismatch guides tPA in wake-up stroke; OR 1.61 for favorable outcome"}]},
+        {"id":"tpa-window","name":"tPA 0.9mg/kg IV (if within 4.5h from last known well OR DWI/FLAIR mismatch)","group":"Thrombolytics","critical":true,"correct":true,"phase":1,
+         "teaching":"Standard window is 4.5h from last known well. For wake-up strokes, imaging selection (WAKE-UP, EXTEND) can extend eligibility. Always confirm: no hemorrhage on CT, BP <185/110, no exclusion criteria. Tenecteplase (0.25mg/kg IV bolus) is an emerging alternative — single bolus, fewer complications.",
+         "references":[{"source":"AHA/ASA Stroke Guidelines 2019","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000211","detail":"tPA 4.5h window; imaging-guided extension in selected wake-up strokes"}]},
+        {"id":"bp-tpa-stroke","name":"Treat BP >185/110 before tPA (labetalol IV)","group":"Blood Pressure","critical":true,"correct":true,"phase":1,
+         "teaching":"BP must be ≤185/110 before tPA administration. Give labetalol 10mg IV push (may repeat x2) or nicardipine infusion. After tPA, maintain BP <180/105 for 24h to reduce hemorrhagic transformation. Document BP ×2 measurements before tPA.",
+         "references":[{"source":"AHA/ASA Stroke Guidelines 2019","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000211","detail":"BP ≤185/110 required before tPA; maintain <180/105 for 24h post-tPA"}]},
+        {"id":"aspirin-tpa","name":"Aspirin 325mg immediately","group":"Antiplatelets","critical":false,"correct":false,"phase":1,
+         "teaching":"Do NOT give aspirin within 24h of tPA — increases hemorrhagic transformation. Aspirin is appropriate at 24h if head imaging shows no new hemorrhage. In non-tPA patients, give aspirin 325mg within 24-48h (loading dose).",
+         "references":[{"source":"AHA/ASA Stroke Guidelines 2019","url":"https://www.ahajournals.org/doi/10.1161/STR.0000000000000211","detail":"Aspirin contraindicated within 24h of tPA; start at 24h if no hemorrhage"}]}
+      ],
+      "phases": [
+        {"id":"presentation","label":"Presentation","auto":true,"vitals":{"BP":"192/106","HR":"82","RR":"16","SpO2":"97%","GCS":"14"},"labHighlights":{"NIHSS":"9","Last known well":"8 hours ago (woke up with deficits)","CT":"No hemorrhage"}},
+        {"id":"bp_treated","label":"BP Treated","vitals":{"BP":"178/98 → 162/88"},"labHighlights":{"Labetalol":"20mg IV given","MRI":"DWI+ (L MCA territory) / FLAIR- (no established infarct)"}},
+        {"id":"tpa_given","label":"tPA Infusing","vitals":{"BP":"158/86","HR":"80"},"labHighlights":{"tPA":"0.9mg/kg, 10% bolus given at 45 min","CTA":"L MCA M2 occlusion — thrombectomy team activated"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Hemorrhage on CT (absolute contraindication to tPA)",
+      "BP >185/110 before giving tPA (treat first, then administer)",
+      "LVO on CTA — activate thrombectomy team even if giving tPA",
+      "Anticoagulation (INR >1.7, therapeutic DOAC) — contraindication to tPA"
+    ],
+    "commonPitfalls": [
+      "Giving tPA before BP adequately controlled (target ≤185/110 before administration)",
+      "Aspirin within 24h of tPA (increases hemorrhagic transformation)",
+      "Not considering imaging-guided tPA in wake-up strokes (DWI/FLAIR mismatch)",
+      "Missing LVO on CTA — thrombectomy provides additional benefit beyond tPA"
+    ],
+    "keyLearningPoints": [
+      "Wake-up stroke: MRI DWI+/FLAIR- mismatch can guide tPA beyond standard 4.5h window",
+      "BP must be ≤185/110 before tPA — treat and recheck before administering",
+      "No aspirin within 24h of tPA; always check head imaging at 24h"
+    ]
+  }
 };
