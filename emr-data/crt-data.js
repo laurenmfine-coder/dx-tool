@@ -34570,5 +34570,635 @@ window.CRT_DATA = {
     "commonPitfalls": ["Discharging without epinephrine autoinjector after systemic cold urticaria reaction","Not counseling about cold water swimming risk (most fatal reactions occur during ocean/lake swimming)","Missing secondary cold urticaria (should screen for cryoglobulins, CBC, and autoimmune markers in atypical presentation)","Under-dosing antihistamines (may need 2-4x standard dose for adequate control)"],
     "keyLearningPoints": ["Cold urticaria anaphylaxis during swimming = one of the most dangerous forms of anaphylaxis (sudden large cold exposure)","Ice cube test confirms diagnosis; cold stimulation test determines threshold temperature","Omalizumab 300mg SC q4wk for antihistamine-refractory cold urticaria — excellent response rate"]
   }
+,
+
+  "anticholinergic-toxicity": {
+    "id": "anticholinergic-toxicity",
+    "diagnosis": "Anticholinergic Toxidrome — Diphenhydramine Overdose",
+    "acuity": 2,
+    "presentation": "Agitation / Dry Flushed Skin / Dilated Pupils / Tachycardia",
+    "category": "toxicologic",
+    "chiefComplaint": "Agitated / Confused / Dry Skin / Diphenhydramine Ingestion",
+    "treatments": {
+      "orders": [
+        {"id": "physostigmine-ach", "name": "Physostigmine 1-2mg IV slowly (if pure anticholinergic, QRS <100ms)", "group": "Antidote",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Physostigmine reverses central and peripheral anticholinergic effects by inhibiting acetylcholinesterase. Indicated for severe agitation, hyperthermia, or seizures from pure anticholinergic toxidrome. Contraindicated if QRS widening (TCA co-ingestion) — can cause bradycardia/asystole. Give slowly over 5 min with cardiac monitoring.",
+          "references": [{"source": "Anticholinergic Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507977/", "detail": "Physostigmine for severe anticholinergic toxidrome; contraindicated with QRS widening (TCA)"}]},
+        {"id": "benzo-ach", "name": "Lorazepam 2mg IV (agitation control — first-line)", "group": "Sedation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Benzodiazepines are first-line for agitation in anticholinergic toxidrome — safe, effective, reduce physostigmine need. Do NOT use haloperidol or other antipsychotics (lower seizure threshold, worsen QTc, may be anticholinergic themselves).",
+          "references": [{"source": "Anticholinergic Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507977/", "detail": "Benzodiazepines first-line for agitation; avoid antipsychotics (anticholinergic, QTc)"}]},
+        {"id": "cooling-ach", "name": "Active cooling — misting fans, ice packs (hyperthermia management)", "group": "Supportive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hyperthermia in anticholinergic toxidrome from anhidrosis (dry skin = cannot sweat). Aggressive cooling required — evaporative cooling most effective. Hyperthermia is a major predictor of poor outcome (rhabdomyolysis, seizures, death).",
+          "references": [{"source": "Anticholinergic Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507977/", "detail": "Anhidrosis causes hyperthermia; active cooling essential; hyperthermia drives poor outcomes"}]},
+        {"id": "haloperidol-ach", "name": "Haloperidol for agitation", "group": "Sedation",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "AVOID — haloperidol has anticholinergic properties, prolongs QTc, lowers seizure threshold. Worsens anticholinergic toxidrome. Use benzodiazepines.",
+          "references": [{"source": "Anticholinergic Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507977/", "detail": "Avoid haloperidol: anticholinergic, QTc prolongation, lowers seizure threshold"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/96", "HR": "132", "Temp": "39.8°C", "SpO2": "97%"},
+          "labHighlights": {"Pupils": "8mm, nonreactive", "Skin": "Dry, flushed", "QRS": "88ms (normal)"}},
+        {"id": "treated", "label": "Benzos + Cooling",
+          "vitals": {"BP": "136/88", "HR": "108", "Temp": "38.4°C"},
+          "labHighlights": {"Agitation": "Improving", "Urine": "Retained (Foley placed)"}},
+        {"id": "stable", "label": "Stabilized",
+          "vitals": {"BP": "126/82", "HR": "94", "Temp": "37.8°C"},
+          "labHighlights": {"CK": "2,400", "ECG": "QTc 440ms"}}
+      ]
+    },
+    "mustNotMiss": ["TCA co-ingestion (QRS widening, hypotension — treat with bicarb, not physostigmine)","Seizures — aggressive benzo treatment; hyperthermia worsens seizure threshold","Urinary retention (Foley catheter often needed)","Rhabdomyolysis from agitation + hyperthermia"],
+    "commonPitfalls": ["Haloperidol for agitation (anticholinergic, QTc, seizures)","Physostigmine when QRS widened (TCA co-ingestion = lethal bradycardia)","Underestimating hyperthermia severity","Not placing Foley (urinary retention almost universal)"],
+    "keyLearningPoints": ["Anticholinergic mnemonic: Hot as Hades, Dry as a Bone, Red as a Beet, Blind as a Bat, Mad as a Hatter, Full as a Flask","Benzos first for agitation; physostigmine only for pure severe toxidrome with normal QRS","Hypo-thermia + bradycardia = cholinergic toxidrome (opposite)"]
+  },
+  "hyperthermia-nms": {
+    "id": "hyperthermia-nms",
+    "diagnosis": "Neuroleptic Malignant Syndrome",
+    "acuity": 1,
+    "presentation": "Hyperthermia / Rigidity / AMS / Antipsychotic Use",
+    "category": "toxicologic",
+    "chiefComplaint": "Temp 41°C / Lead-Pipe Rigidity / Confusion After Haloperidol Increase",
+    "treatments": {
+      "orders": [
+        {"id": "stop-antipsychotic-nms", "name": "STOP antipsychotic immediately", "group": "Emergency",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "First step: discontinue the offending antipsychotic (or antiemetic — metoclopramide, promethazine can also cause NMS). NMS is a drug-induced syndrome from dopamine D2 receptor blockade. Must also stop any other dopamine blockers.",
+          "references": [{"source": "NMS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430828/", "detail": "Stop antipsychotic immediately; also stop antiemetics with D2-blocking activity"}]},
+        {"id": "cooling-nms", "name": "Aggressive cooling + IV fluids (rhabdomyolysis prevention)", "group": "Supportive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hyperthermia is the main driver of mortality in NMS. Aggressive cooling: evaporative cooling, ice packs, cold IV fluids. Target temp <38.5°C. Also: aggressive hydration for rhabdomyolysis (CK often >1000).",
+          "references": [{"source": "NMS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430828/", "detail": "Cooling first priority; hyperthermia causes rhabdomyolysis, AKI, seizures, death"}]},
+        {"id": "bromocriptine-nms", "name": "Bromocriptine 2.5mg PO/NG q8h (dopamine agonist)", "group": "Antidote",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Bromocriptine (dopamine agonist) directly counteracts D2 blockade — the mechanism of NMS. Reduces duration and severity. Can also use amantadine. Not yet proven to reduce mortality in RCTs but widely used.",
+          "references": [{"source": "NMS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430828/", "detail": "Bromocriptine 2.5mg q8h: dopamine agonist; reduces NMS duration"}]},
+        {"id": "dantrolene-nms", "name": "Dantrolene 1-2.5mg/kg IV (for severe rigidity)", "group": "Muscle Relaxant",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Dantrolene reduces muscle rigidity and hyperthermia in severe NMS (similar mechanism to malignant hyperthermia — SR calcium release). Use for severe cases or when other therapies are inadequate.",
+          "references": [{"source": "NMS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430828/", "detail": "Dantrolene 1-2.5mg/kg IV for severe NMS rigidity and hyperthermia"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "168/108", "HR": "128", "Temp": "41.2°C", "SpO2": "95%"},
+          "labHighlights": {"CK": "28,400", "WBC": "16,800", "Cr": "1.8", "Rigidity": "Lead-pipe"}},
+        {"id": "treated", "label": "Antipsychotic Stopped / Cooling",
+          "vitals": {"BP": "148/92", "HR": "112", "Temp": "39.4°C"},
+          "labHighlights": {"CK": "18,200", "UO": "1.6 mL/kg/hr"}},
+        {"id": "improving", "label": "Day 3 — Improving",
+          "vitals": {"BP": "136/86", "HR": "96", "Temp": "37.8°C"},
+          "labHighlights": {"CK": "4,200 (trending down)", "Rigidity": "Improving"}}
+      ]
+    },
+    "mustNotMiss": ["NMS vs serotonin syndrome (SS: hyperreflexia + clonus + rapid onset; NMS: lead-pipe rigidity + slower onset)","Rhabdomyolysis-induced AKI — aggressive hydration essential","Never restart same antipsychotic; use different class after full recovery","ICU for temp >41°C, respiratory compromise, or hemodynamic instability"],
+    "commonPitfalls": ["Continuing antipsychotic thinking it is not NMS (early cases look like agitated psychosis)","Missing antiemetic as cause (metoclopramide, promethazine are D2 blockers)","Confusing with serotonin syndrome (different mechanism, different treatment)","Insufficient cooling — hyperthermia drives all complications"],
+    "keyLearningPoints": ["NMS triad: fever + rigidity + AMS after dopamine blocker. Onset: days-weeks","NMS vs SS: NMS = lead-pipe rigidity, bradyreflexia, slow. SS = clonus, hyperreflexia, fast","Stop drug + cool aggressively + bromocriptine/amantadine + dantrolene for severe cases"]
+  },
+  "sympathomimetic-toxicity": {
+    "id": "sympathomimetic-toxicity",
+    "diagnosis": "Sympathomimetic Toxidrome — Cocaine/Stimulant",
+    "acuity": 2,
+    "presentation": "Agitation / Hyperthermia / Hypertension / Tachycardia",
+    "category": "toxicologic",
+    "chiefComplaint": "Agitated / BP 198/118 / Temp 40.2°C / Cocaine Use",
+    "treatments": {
+      "orders": [
+        {"id": "benzo-sympath", "name": "Diazepam 5-10mg IV (or lorazepam 2mg IV) — first-line", "group": "Sedation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Benzodiazepines treat EVERYTHING in sympathomimetic toxidrome simultaneously: agitation, hypertension, tachycardia, hyperthermia. First-line for cocaine/stimulant toxicity. Large doses may be needed — titrate to effect.",
+          "references": [{"source": "Cocaine Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430769/", "detail": "Benzodiazepines first-line: treat agitation, HTN, tachycardia, hyperthermia simultaneously"}]},
+        {"id": "beta-blocker-cocaine", "name": "Labetalol or metoprolol for cocaine hypertension", "group": "BP Management",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "AVOID beta-blockers for cocaine-associated hypertension — beta-blockade leaves alpha-adrenergic effects unopposed (paradoxical hypertension, coronary vasospasm). Benzodiazepines + phentolamine (pure alpha-blocker) are preferred. If beta-blocker must be used, labetalol (mixed alpha/beta) is safer than pure beta-blocker.",
+          "references": [{"source": "Cocaine Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430769/", "detail": "Avoid pure beta-blockers in cocaine toxicity — unopposed alpha causes paradoxical HTN"}]},
+        {"id": "cooling-sympath", "name": "Active cooling (hyperthermia is lethal)", "group": "Supportive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Hyperthermia from sympathomimetic stimulation + agitation is the leading cause of death. Aggressive cooling: evaporative cooling, ice bath. Temperature >41°C = ICU + consider rapid-sequence intubation if cooling failing.",
+          "references": [{"source": "Cocaine Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430769/", "detail": "Hyperthermia is the leading cause of death in stimulant toxidrome; aggressive cooling essential"}]},
+        {"id": "aspirin-cocaine-acs", "name": "Aspirin + NTG for cocaine-associated chest pain", "group": "Cardiac",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Cocaine-associated chest pain: aspirin + NTG (vasodilator) after benzos. Vasospasm is the main mechanism — NTG/calcium channel blockers are preferred over beta-blockers. Rule out STEMI with ECG + troponin.",
+          "references": [{"source": "Cocaine Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430769/", "detail": "Cocaine ACS: benzos + aspirin + NTG; CCB for vasospasm; avoid beta-blockers"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "198/118", "HR": "138", "Temp": "40.2°C", "SpO2": "97%"},
+          "labHighlights": {"Pupils": "8mm", "Skin": "Diaphoretic", "UDS": "Cocaine positive", "Troponin": "0.18"}},
+        {"id": "benzos-cooling", "label": "Benzos + Cooling",
+          "vitals": {"BP": "158/96", "HR": "108", "Temp": "38.8°C"},
+          "labHighlights": {"ECG": "No ST changes", "CK": "1,800"}},
+        {"id": "stable", "label": "Stabilized",
+          "vitals": {"BP": "138/86", "HR": "92", "Temp": "37.9°C"},
+          "labHighlights": {"Troponin": "0.22 (peaked)", "CK": "Peak 4,200"}}
+      ]
+    },
+    "mustNotMiss": ["STEMI from vasospasm (cocaine is #1 cause of MI in young adults — ECG + troponin)","Aortic dissection (cocaine causes acute HTN spike — check arms, CXR)","Stroke (hemorrhagic > ischemic in cocaine)","Hyperthermia >41°C = ICU emergency"],
+    "commonPitfalls": ["Beta-blockers for cocaine hypertension (unopposed alpha = worse)","Not using sufficient benzo doses (needs large doses for agitated patient)","Missing cocaine as STEMI cause in young patient","Undercooling — hyperthermia is the main killer"],
+    "keyLearningPoints": ["Sympathomimetic toxidrome: HTN + tachy + hyperthermia + diaphoresis + mydriasis","Benzos fix everything: agitation, HTN, tachycardia, hyperthermia","Avoid pure beta-blockers in cocaine toxicity — alpha-unopposed paradoxical HTN"]
+  },
+  "mixed-overdose": {
+    "id": "mixed-overdose",
+    "diagnosis": "Intentional Mixed Overdose — Acetaminophen + Diphenhydramine",
+    "acuity": 2,
+    "presentation": "AMS / Intentional OD / Multiple Agents",
+    "category": "toxicologic",
+    "chiefComplaint": "Found Unresponsive / Pill Bottles / Suicide Attempt",
+    "treatments": {
+      "orders": [
+        {"id": "acetaminophen-level", "name": "Acetaminophen level (4h post-ingestion for Rumack-Matthew nomogram)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Always check acetaminophen level in any intentional OD — APAP is tasteless and colorless, commonly co-ingested. Rumack-Matthew nomogram: if level at 4+ hours falls above treatment line, start NAC. N-acetylcysteine is extremely effective if started within 8-10 hours.",
+          "references": [{"source": "Acetaminophen Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK499165/", "detail": "Check APAP level in all intentional OD; Rumack-Matthew nomogram for treatment decision"}]},
+        {"id": "nac-apap", "name": "N-acetylcysteine (NAC) — 150mg/kg IV over 1h, then 50mg/kg over 4h, then 100mg/kg over 16h", "group": "Antidote",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "NAC replenishes glutathione — prevents NAPQI-mediated hepatotoxicity. Most effective within 8h of ingestion (97% prevention). Still beneficial up to 24h (70% effective). Should be started while awaiting level if high-risk ingestion or unknown time.",
+          "references": [{"source": "Acetaminophen Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK499165/", "detail": "NAC IV protocol: 150/50/100 mg/kg over 21h; start within 8h for maximum efficacy"}]},
+        {"id": "poison-control", "name": "Poison Control consultation (1-800-222-1222)", "group": "Consultation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Poison Control should be called for all complex overdoses — they provide real-time expert guidance on toxicology management, antidote dosing, and monitoring. Available 24/7 nationwide at 1-800-222-1222.",
+          "references": [{"source": "Poison Control — AAPCC", "url": "https://www.aapcc.org/", "detail": "Poison Control 1-800-222-1222: 24/7 toxicology expertise; call for all complex overdoses"}]},
+        {"id": "charcoal-late", "name": "Activated charcoal 8h after ingestion", "group": "Decontamination",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Activated charcoal is only effective within 1-2 hours of ingestion. After this window, APAP is absorbed — charcoal will not help and risks aspiration. Do not give charcoal to obtunded patients.",
+          "references": [{"source": "Acetaminophen Toxicity — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK499165/", "detail": "Activated charcoal only within 1-2h of ingestion; do not give to obtunded patients"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "112/72", "HR": "118", "Temp": "37.8°C", "SpO2": "96%"},
+          "labHighlights": {"APAP level": "312 mcg/mL at 4h (above treatment line)", "LFTs": "Normal initially", "Pupils": "6mm"}},
+        {"id": "nac-started", "label": "NAC Running",
+          "vitals": {"BP": "116/74", "HR": "104"},
+          "labHighlights": {"ALT": "42 (rising — check q8h)", "INR": "1.2"}},
+        {"id": "monitoring", "label": "24h Monitoring",
+          "vitals": {"BP": "118/76", "HR": "92"},
+          "labHighlights": {"ALT": "188 (peak rising)", "INR": "1.6", "NAC": "Completed — recheck levels"}}
+      ]
+    },
+    "mustNotMiss": ["APAP level in ALL intentional OD — co-ingestion is extremely common and asymptomatic early","Psychiatric evaluation before discharge — suicide risk assessment required","Acetaminophen in pregnancy — higher risk of fetal death; lower threshold for NAC","NAC anaphylactoid reaction (urticaria, bronchospasm) — slow infusion, give diphenhydramine"],
+    "commonPitfalls": ["Not checking APAP level in every OD (most common missed serious co-ingestion)","Starting NAC too late (every hour beyond 8h reduces efficacy significantly)","Discharging without psychiatric clearance","Giving activated charcoal hours after ingestion to obtunded patient"],
+    "keyLearningPoints": ["APAP is in the top 5 causes of acute liver failure — check level in EVERY intentional OD","Rumack-Matthew nomogram: level at 4h above treatment line = start NAC immediately","NAC: 97% effective if within 8h; still beneficial up to 24h — start early, continue even if labs normalize"]
+  },
+  "acute-sma-embolism": {
+    "id": "acute-sma-embolism",
+    "diagnosis": "Acute Mesenteric Ischemia — SMA Embolism",
+    "acuity": 1,
+    "presentation": "Sudden Periumbilical Pain / Pain Out of Proportion to Exam",
+    "category": "vascular",
+    "chiefComplaint": "Sudden Severe Periumbilical Pain / Atrial Fibrillation / Pain Out of Proportion",
+    "treatments": {
+      "orders": [
+        {"id": "cta-abdomen-ami", "name": "CTA abdomen/pelvis with IV contrast (mesenteric arteries)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "CTA is gold standard for acute mesenteric ischemia — sensitivity >90%. Shows embolus location, bowel wall enhancement, portal venous gas. Do not delay for lactate result — clinical suspicion + CTA drives management. Time to revascularization determines bowel viability.",
+          "references": [{"source": "Mesenteric Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431067/", "detail": "CTA gold standard: sensitivity >90%; shows embolus, bowel ischemia, portal gas"}]},
+        {"id": "surgery-ami", "name": "Vascular surgery + general surgery emergent consultation", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "SMA embolism requires emergent vascular surgery — embolectomy, bypass, or catheter-directed thrombolysis. Bowel viability determines need for bowel resection. Time from onset to reperfusion is the critical variable. 'Golden period' <6 hours.",
+          "references": [{"source": "Mesenteric Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431067/", "detail": "Emergent vascular surgery: embolectomy/bypass; <6h 'golden period' for bowel viability"}]},
+        {"id": "heparin-ami", "name": "Unfractionated heparin bolus + drip (prevent propagation)", "group": "Anticoagulation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anticoagulate immediately with UFH once diagnosis suspected — prevents thrombus propagation. Do not wait for surgery. NFH preferred over LMWH for rapid reversibility if surgery needed. Continue post-revascularization.",
+          "references": [{"source": "Mesenteric Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431067/", "detail": "UFH anticoagulation immediately to prevent thrombus propagation; continue perioperatively"}]},
+        {"id": "wait-lactate-ami", "name": "Wait for lactate result before imaging", "group": "Diagnostics",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG — lactate is LATE and INSENSITIVE in early mesenteric ischemia. Pain out of proportion + AF + CTA = act immediately. Every hour of delay increases bowel infarction risk. Go directly to CTA based on clinical suspicion.",
+          "references": [{"source": "Mesenteric Ischemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK431067/", "detail": "Lactate is late and insensitive early; clinical suspicion + CTA drives management"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "128/84", "HR": "108 (AF)", "Temp": "37.4°C"},
+          "labHighlights": {"Lactate": "1.8 (early — normal)", "WBC": "18,400", "CTA": "Pending"}},
+        {"id": "cta-result", "label": "CTA Result",
+          "vitals": {"BP": "122/80", "HR": "116"},
+          "labHighlights": {"CTA": "SMA embolus 2cm from origin; bowel wall enhancement preserved"}},
+        {"id": "or", "label": "OR Activated",
+          "vitals": {"BP": "108/72 (declining)", "HR": "128"},
+          "labHighlights": {"Lactate": "4.2 (rising)", "OR": "Embolectomy proceeding"}}
+      ]
+    },
+    "mustNotMiss": ["AF is source of 40-50% of SMA emboli — anticoagulate and address source","Lactate normal early — cannot rule out mesenteric ischemia with normal lactate","Peritoneal signs = transmural infarction = emergency laparotomy","NOMI (non-occlusive mesenteric ischemia) — different treatment (vasodilators, no surgery)"],
+    "commonPitfalls": ["Waiting for elevated lactate to confirm diagnosis (insensitive early — delayed diagnosis is fatal)","Not calling vascular surgery immediately on CTA result","Pain out of proportion to exam is the key early finding — trust it","Insufficient anticoagulation while awaiting surgery"],
+    "keyLearningPoints": ["Pain out of proportion to exam + AF = mesenteric ischemia until proven otherwise","Lactate rises LATE — CTA must happen with clinical suspicion alone","'Golden period': revascularization within 6h = bowel viable; every hour matters"]
+  },
+  "phlegmasia-cerulea-dolens": {
+    "id": "phlegmasia-cerulea-dolens",
+    "diagnosis": "Phlegmasia Cerulea Dolens — Massive Iliofemoral DVT",
+    "acuity": 1,
+    "presentation": "Massive Leg Swelling / Cyanosis / Severe Pain",
+    "category": "vascular",
+    "chiefComplaint": "Entire Left Leg Massively Swollen / Cyanotic / Cannot Move",
+    "treatments": {
+      "orders": [
+        {"id": "heparin-pcd", "name": "Unfractionated heparin 80u/kg bolus + 18u/kg/h infusion", "group": "Anticoagulation",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Anticoagulate immediately with UFH — prevents propagation and allows potential CDT. PCD is a limb-threatening DVT complication: massive iliofemoral thrombosis obstructs venous outflow → capillary hydrostatic pressure rises → compartment syndrome → gangrene. Mortality 20-40%.",
+          "references": [{"source": "DVT Phlegmasia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "UFH immediately for PCD; limb-threatening thrombosis requires urgent intervention"}]},
+        {"id": "cdt-pcd", "name": "Catheter-directed thrombolysis (CDT) or mechanical thrombectomy — URGENT", "group": "Intervention",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "PCD requires urgent thrombus removal — anticoagulation alone is insufficient for limb salvage. CDT with tPA infused directly into thrombus, or mechanical thrombectomy (FlowTriever/AngioJet). Surgical thrombectomy as alternative. Goal: restore venous outflow before gangrene.",
+          "references": [{"source": "DVT Phlegmasia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "CDT or mechanical thrombectomy for PCD — anticoagulation alone insufficient for limb salvage"}]},
+        {"id": "fasciotomy-pcd", "name": "Fasciotomy if compartment syndrome develops", "group": "Surgical",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "PCD can cause compartment syndrome from massive venous hypertension. Four-compartment fasciotomy if compartment pressures elevated or clinical signs present. Often required after successful thrombolysis as reperfusion injury.",
+          "references": [{"source": "DVT Phlegmasia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "Fasciotomy for compartment syndrome in PCD; common after reperfusion"}]},
+        {"id": "warfarin-only-pcd", "name": "Start warfarin and discharge with compression stockings", "group": "Anticoagulation",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Completely inadequate — PCD is not a routine DVT. It requires urgent thrombus removal to save the limb. Oral anticoagulation alone will not prevent gangrene once venous outflow is completely obstructed.",
+          "references": [{"source": "DVT Phlegmasia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK507708/", "detail": "PCD requires urgent thrombus removal — oral anticoagulation alone will not save the limb"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "98/62", "HR": "128", "SpO2": "96%"},
+          "labHighlights": {"Leg": "Entire left leg cyanotic + 4+ pitting edema", "Pulses": "Absent below knee", "D-dimer": ">10"}},
+        {"id": "anticoag-ir", "label": "Heparinized / IR Activated",
+          "vitals": {"BP": "108/70", "HR": "116"},
+          "labHighlights": {"US": "Complete iliofemoral thrombosis extending to IVC", "CDT": "Scheduled"}},
+        {"id": "post-cdt", "label": "Post-CDT Day 2",
+          "vitals": {"BP": "118/74", "HR": "96"},
+          "labHighlights": {"Leg": "Less cyanosis, pulses returning", "Compartment P": "28 mmHg — monitoring"}}
+      ]
+    },
+    "mustNotMiss": ["Arterial compromise from venous outflow obstruction — check Doppler bilateral","Septic thrombophlebitis as cause (IV drug use, indwelling catheter)","Malignancy underlying massive DVT — malignancy in 40% of PCD cases","Venous gangrene without treatment = limb loss in 50%"],
+    "commonPitfalls": ["Treating as routine DVT with anticoagulation alone (limb will be lost)","Not recognizing PCD vs routine DVT (key: entire limb, cyanosis, absent pulses)","Delaying IR/vascular surgery consultation","Missing compartment syndrome post-reperfusion"],
+    "keyLearningPoints": ["PCD = massive iliofemoral DVT with venous outflow obstruction → compartment syndrome → venous gangrene","Requires urgent CDT or mechanical thrombectomy — anticoagulation alone insufficient","Mortality 20-40%; limb loss 12-17% even with treatment — time is tissue"]
+  },
+  "lethal-catatonia": {
+    "id": "lethal-catatonia",
+    "diagnosis": "Lethal Catatonia with Autonomic Instability",
+    "acuity": 1,
+    "presentation": "Stupor / Rigidity / Hyperthermia / Autonomic Instability",
+    "category": "psychiatric",
+    "chiefComplaint": "Mute / Rigid / Temp 40.8°C / Labile BP After Antipsychotic Change",
+    "treatments": {
+      "orders": [
+        {"id": "lorazepam-cat", "name": "Lorazepam 2mg IV — catatonia challenge test and treatment", "group": "Benzodiazepines",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Lorazepam (IV or IM) is first-line for catatonia — GABAergic stimulation reverses catatonic withdrawal. Give 2mg IV and observe over 5-15 minutes for partial response (lorazepam challenge). Treatment response supports diagnosis and guides therapy. Continue q6-8h.",
+          "references": [{"source": "Catatonia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430744/", "detail": "Lorazepam 2mg IV: diagnostic challenge and treatment; first-line for all catatonia subtypes"}]},
+        {"id": "stop-antipsychotic-cat", "name": "STOP antipsychotic if NMS overlap suspected", "group": "Medications",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Lethal catatonia and NMS overlap — both involve rigidity, hyperthermia, autonomic instability. If antipsychotic recently started or increased, stop it immediately. Continuing antipsychotic in NMS-overlap is dangerous.",
+          "references": [{"source": "Catatonia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430744/", "detail": "Stop antipsychotics in malignant catatonia/NMS overlap; antipsychotics worsen outcome"}]},
+        {"id": "ect-cat", "name": "Emergent ECT consultation (malignant catatonia not responding to benzos)", "group": "ECT",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "ECT is the definitive treatment for malignant/lethal catatonia — particularly when lorazepam fails. Response rate >80%. Should be activated early for malignant catatonia with hyperthermia, autonomic instability, or deteriorating status. Life-saving intervention.",
+          "references": [{"source": "Catatonia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430744/", "detail": "ECT for malignant catatonia: >80% response rate; emergent ECT for failing benzos + hyperthermia"}]},
+        {"id": "antipsychotic-cat", "name": "Haloperidol for catatonic rigidity", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "WRONG and DANGEROUS — antipsychotics are contraindicated in catatonia. They worsen the condition, precipitate NMS, and can be lethal. Lorazepam is first-line. Antipsychotics may only be carefully reintroduced AFTER full catatonia resolution.",
+          "references": [{"source": "Catatonia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430744/", "detail": "Antipsychotics contraindicated in catatonia — precipitate NMS; worsen outcome"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "168/48 (labile)", "HR": "138", "Temp": "40.8°C"},
+          "labHighlights": {"CK": "8,200", "CMP": "Normal", "ECG": "Sinus tachy"}},
+        {"id": "lorazepam-given", "label": "Lorazepam Challenge",
+          "vitals": {"BP": "148/88", "HR": "118", "Temp": "39.6°C"},
+          "labHighlights": {"Response": "Partial — some eye contact, less rigidity"}},
+        {"id": "ect-consult", "label": "ECT Activated",
+          "vitals": {"BP": "136/82", "HR": "104", "Temp": "38.4°C"},
+          "labHighlights": {"After ECT x2": "Rigidity resolving, responsive"}}
+      ]
+    },
+    "mustNotMiss": ["NMS overlap — stop antipsychotics, treat with same principles","Medical causes of catatonia (encephalitis, autoimmune, metabolic — rule out before psychiatric attribution)","Aspiration pneumonia (immobile, unable to manage secretions)","Rhabdomyolysis from rigidity — CK monitoring"],
+    "commonPitfalls": ["Using antipsychotics for 'psychotic rigidity' (absolutely contraindicated — potentially fatal)","Delaying ECT consultation when benzos partially fail (ECT is life-saving)","Missing medical/autoimmune encephalitis as cause of catatonia","Lorazepam challenge: partial response supports catatonia diagnosis — do not stop at first dose"],
+    "keyLearningPoints": ["Catatonia: mutism + rigidity + posturing (waxy flexibility) + autonomic instability","Lorazepam first-line; ECT for benzo-refractory or malignant catatonia","NEVER give antipsychotics in catatonia — they precipitate NMS and worsen outcome"]
+  },
+  "severe-hyperkalemia-from-missed-dialysis": {
+    "id": "severe-hyperkalemia-from-missed-dialysis",
+    "diagnosis": "Severe Hyperkalemia K+ 7.8 from Missed Dialysis — ESRD",
+    "acuity": 1,
+    "presentation": "Weakness / ECG Changes / K+ 7.8 / ESRD",
+    "category": "renal",
+    "chiefComplaint": "ESRD / Missed 4 Dialysis Sessions / Profound Weakness / ECG Changes",
+    "treatments": {
+      "orders": [
+        {"id": "calcium-dialysis-k", "name": "Calcium gluconate 3g IV over 5-10 min (cardiac stabilization)", "group": "Cardiac Stabilization",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Calcium gluconate is the immediate life-saving intervention — membrane stabilizer, acts in 1-3 minutes. In ESRD with K+ 7.8 and ECG changes, give 3g (higher than standard) as cardiac arrest risk is imminent. Repeat every 5 min if QRS remains wide.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Calcium gluconate: cardiac membrane stabilization in 1-3 min; 3g for severe ESRD hyperkalemia"}]},
+        {"id": "hemodialysis-k", "name": "Emergent hemodialysis — most definitive K+ removal in ESRD", "group": "Definitive",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "ESRD patients cannot eliminate potassium — hemodialysis is the only definitive treatment. Activates immediately. Bridge with calcium + insulin/dextrose + bicarb while dialysis is being set up. Can remove 40-60 mEq K+ per HD session.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Hemodialysis: definitive K+ removal in ESRD; activate immediately while medical bridging continues"}]},
+        {"id": "insulin-dex-renal-k", "name": "Regular insulin 10u IV + D50W 50mL (shift while awaiting dialysis)", "group": "Shift",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Bridge therapy while HD set up: insulin shifts K+ into cells (onset 15-30 min, lowers K+ 0.5-1.5 mEq/L). Always give dextrose to prevent hypoglycemia — ESRD patients may have impaired glucose metabolism. Albuterol 10-20mg neb is additive.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Insulin+dextrose: bridge to dialysis; onset 15-30min; monitor glucose closely in ESRD"}]},
+        {"id": "kayexalate-emergency-k", "name": "Sodium polystyrene sulfonate (Kayexalate) stat", "group": "Removal",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Kayexalate acts over hours (not minutes) and is NOT appropriate for acute life-threatening hyperkalemia. Use only for chronic management. In acute K+ 7.8 with ECG changes, dialysis is the correct removal strategy.",
+          "references": [{"source": "Hyperkalemia — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470284/", "detail": "Kayexalate: hours to days for effect; not for acute life-threatening hyperkalemia"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "168/96", "HR": "48 (bradycardia)", "SpO2": "94%"},
+          "labHighlights": {"K+": "7.8", "ECG": "Peaked T, PR prolonged, wide QRS 142ms", "Cr": "9.4"}},
+        {"id": "bridging", "label": "Medical Bridging",
+          "vitals": {"BP": "156/88", "HR": "58"},
+          "labHighlights": {"K+": "6.8 (post-insulin)", "ECG": "QRS narrowing to 114ms"}},
+        {"id": "post-hd", "label": "Post-HD",
+          "vitals": {"BP": "138/82", "HR": "72"},
+          "labHighlights": {"K+": "3.8 (post-HD)", "ECG": "Normal sinus rhythm"}}
+      ]
+    },
+    "mustNotMiss": ["Sine wave = pre-VF arrest — calcium IV push immediately, emergent dialysis","AF or VT from hyperkalemia — treat underlying K+ not just arrhythmia","Calcium gluconate vs calcium chloride (chloride is 3x stronger — use for cardiac arrest)","Monitor glucose after insulin — ESRD patients prone to prolonged hypoglycemia"],
+    "commonPitfalls": ["Kayexalate for acute severe hyperkalemia (acts in hours — useless in emergency)","Not giving enough calcium (need repeated doses if QRS still wide)","Underestimating urgency — K+ 7.8 + ECG changes = cardiac arrest imminent","Waiting for renal team before starting bridging therapy"],
+    "keyLearningPoints": ["ESRD hyperkalemia emergency sequence: Calcium → Insulin+dextrose → Dialysis (the only definitive treatment)","ECG sine wave = immediate pre-VF: calcium IV push + emergent dialysis","Kayexalate has NO role in acute severe hyperkalemia — takes hours"]
+  },
+  "ureterolithiasis": {
+    "id": "ureterolithiasis",
+    "diagnosis": "Ureteral Stone with Obstruction — 7mm Right Ureter",
+    "acuity": 3,
+    "presentation": "Colicky Flank Pain / Hematuria / Right Ureter Stone",
+    "category": "renal",
+    "chiefComplaint": "Severe Right Flank Pain / Radiating to Groin / Hematuria",
+    "treatments": {
+      "orders": [
+        {"id": "pain-control-uro", "name": "Ketorolac 30mg IV + morphine 0.1mg/kg IV (multimodal analgesia)", "group": "Analgesia",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Optimal renal colic analgesia: NSAIDs are first-line (reduce ureteral spasm + PG-mediated edema). Ketorolac 30mg IV equivalent to opioid analgesia in RCTs. Combine with opioid for severe pain. Avoid NSAIDs if CKD or high ureteral stone (potential bilateral obstruction → AKI).",
+          "references": [{"source": "Nephrolithiasis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534785/", "detail": "NSAIDs first-line for renal colic; equally effective as opioids; reduces ureteral spasm"}]},
+        {"id": "ctu-stone", "name": "CT urogram (non-contrast) or CT KUB", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Non-contrast CT is gold standard for ureterolithiasis — sensitivity 97%, specificity 95%. Identifies stone size, location, and degree of hydronephrosis. Guides management: <5mm will likely pass; 5-10mm may need intervention; >10mm usually needs urologic procedure.",
+          "references": [{"source": "Nephrolithiasis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534785/", "detail": "Non-contrast CT: gold standard; sensitivity 97%; guides size-based management"}]},
+        {"id": "tamsulosin-stone", "name": "Tamsulosin 0.4mg PO daily (medical expulsive therapy)", "group": "MET",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Alpha-blockers (tamsulosin) relax ureteral smooth muscle — increase stone passage rate and reduce time to passage. Most benefit for distal ureteral stones 5-10mm. Meta-analyses: increases passage rate by 29%, reduces pain episodes.",
+          "references": [{"source": "Nephrolithiasis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534785/", "detail": "Tamsulosin 0.4mg daily: alpha-blocker MET; increases passage rate 29% for 5-10mm distal stones"}]},
+        {"id": "admit-fever-stone", "name": "Admit + emergent urology for infected obstructing stone", "group": "Urgent",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Infected obstructing ureteral stone = urologic emergency. Pyonephrosis (pus under pressure in a blocked kidney) can cause sepsis and renal loss within hours. Signs: fever + flank pain + leukocytosis + obstruction on imaging = emergent ureteral stenting or nephrostomy tube.",
+          "references": [{"source": "Nephrolithiasis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534785/", "detail": "Infected obstructing stone = urologic emergency; emergent decompression prevents sepsis and renal loss"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "148/92", "HR": "104", "Temp": "37.1°C"},
+          "labHighlights": {"UA": "50 RBCs, no WBCs, no bacteria", "Cr": "1.0", "CT KUB": "7mm right mid-ureter"}},
+        {"id": "pain-controlled", "label": "Pain Controlled",
+          "vitals": {"BP": "136/84", "HR": "88"},
+          "labHighlights": {"Pain": "4/10 (was 10/10)", "Hydronephrosis": "Mild right"}},
+        {"id": "discharge", "label": "Discharge Plan",
+          "vitals": {"BP": "128/80", "HR": "80"},
+          "labHighlights": {"Plan": "MET + urology follow-up 2 weeks", "Return if": "Fever, anuria, uncontrolled pain"}}
+      ]
+    },
+    "mustNotMiss": ["Infected obstructing stone (fever + flank pain + obstruction = surgical emergency)","Bilateral ureteral obstruction or solitary kidney obstruction (AKI)","Aortic aneurysm in older patients presenting as 'renal colic' (get CT to confirm)","Ectopic pregnancy in women of reproductive age with flank/pelvic pain"],
+    "commonPitfalls": ["Using only opioids (NSAIDs are first-line for renal colic — more effective, less sedation)","Missing infected obstructing stone (looks like simple colic but has fever and positive UA)","Not straining urine to catch stone for metabolic analysis","Discharging without return precautions for fever or anuria"],
+    "keyLearningPoints": ["<5mm: 80% pass spontaneously; 5-10mm: 50% pass with MET; >10mm: usually needs urology","NSAIDs > opioids for pain control in renal colic (reduce ureteral spasm)","Infected obstructing stone = emergency — pyonephrosis → sepsis within hours"]
+  }
+,
+
+  "necrotizing-fasciitis": {
+    "id": "necrotizing-fasciitis",
+    "diagnosis": "Necrotizing Fasciitis — Group A Streptococcus",
+    "acuity": 1,
+    "presentation": "Severe Pain / Rapidly Spreading Erythema / Systemic Toxicity",
+    "category": "infectious",
+    "chiefComplaint": "Left Leg Pain Out of Proportion / Crepitus / Fever / Disproportionate Pain",
+    "treatments": {
+      "orders": [
+        {"id": "surgery-nf", "name": "Emergent surgical debridement — DO NOT DELAY for imaging", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "NF is a surgical emergency — time to first debridement is the single most important determinant of survival. Every hour of delay increases mortality. Do not wait for CT or MRI if clinical diagnosis is clear. 'Finger test' at bedside can confirm: probe skin incision with finger, if fascial planes dissect without bleeding = NF confirmed, take to OR immediately.",
+          "references": [{"source": "Necrotizing Fasciitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430756/", "detail": "Immediate surgical debridement; time to OR is primary predictor of survival; no imaging delay if clinical diagnosis clear"}]},
+        {"id": "abx-nf", "name": "Vancomycin + pip-tazo + clindamycin (empiric broad coverage)", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Broad-spectrum: vancomycin (MRSA) + piperacillin-tazobactam (gram-negative + anaerobes) + clindamycin (protein synthesis inhibitor — reduces toxin production in Group A Strep/Clostridium). Clindamycin is critical for streptococcal NF — blocks M-protein and superantigen production even at sub-MIC concentrations.",
+          "references": [{"source": "Necrotizing Fasciitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430756/", "detail": "Add clindamycin for toxin suppression in GAS NF; broad-spectrum vanc + pip-tazo empirically"}]},
+        {"id": "ivig-nf", "name": "IVIG 1g/kg IV (Group A Strep streptococcal toxic shock)", "group": "Adjunct",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "IVIG neutralizes streptococcal superantigens in severe GAS NF with toxic shock syndrome. Consider for shock + NF from GAS. Reduces mortality in observational studies, though RCT evidence is limited.",
+          "references": [{"source": "Necrotizing Fasciitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430756/", "detail": "IVIG for GAS toxic shock syndrome with NF; neutralizes superantigens"}]},
+        {"id": "ct-delay-nf", "name": "CT scan before OR to confirm NF", "group": "Imaging",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Do NOT delay OR for CT when NF is clinically suspected. CT can confirm gas/fascial thickening but sensitivity is only 88% — a negative CT does NOT rule out NF. Time in CT scanner = time with spreading infection. Diagnosis is clinical; OR is the correct next step.",
+          "references": [{"source": "Necrotizing Fasciitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430756/", "detail": "CT sensitivity 88% — normal CT does not rule out NF; do not delay OR for imaging when diagnosis is clinical"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "88/52", "HR": "132", "Temp": "39.6°C", "SpO2": "94%"},
+          "labHighlights": {"WBC": "24,800", "CRP": "248", "Sodium": "122", "Crepitus": "Present L leg"}},
+        {"id": "abx-started", "label": "Abx Running / OR Activated",
+          "vitals": {"BP": "96/62", "HR": "124"},
+          "labHighlights": {"OR prep": "Underway", "Blood cx": "GAS pending"}},
+        {"id": "post-or", "label": "Post-Debridement",
+          "vitals": {"BP": "108/70", "HR": "108"},
+          "labHighlights": {"Wound": "Extensive necrosis L leg; fascial planes necrotic", "Return to OR": "Planned 24h"}}
+      ]
+    },
+    "mustNotMiss": ["Fournier gangrene (perineal NF) — mortality >30%; emergent urology + general surgery","Clostridial NF (gas gangrene) — gas in tissue, extremely rapid progression","Requires multiple return-to-OR debridements (not a single-operation disease)","Hyponatremia in NF (sodium <135 is independent predictor of NF — LRINEC score factor)"],
+    "commonPitfalls": ["Delaying OR for CT or MRI (lethal delay — clinical diagnosis = OR)","Not adding clindamycin (toxin suppression critical for GAS/clostridial NF)","Single debridement thinking — multiple returns to OR are standard","Missing Fournier gangrene (perineum/genitalia involvement — examine carefully)"],
+    "keyLearningPoints": ["NF: pain out of proportion + systemic toxicity + crepitus = surgical emergency","Time to first debridement is #1 predictor of mortality — don't delay for imaging","Clindamycin: protein synthesis inhibitor — reduces superantigen/toxin production even at sub-MIC"]
+  },
+  "gas-gangrene": {
+    "id": "gas-gangrene",
+    "diagnosis": "Gas Gangrene — Clostridial Myonecrosis",
+    "acuity": 1,
+    "presentation": "Excruciating Pain / Crepitus / Wound Trauma",
+    "category": "infectious",
+    "chiefComplaint": "Crush Injury 6h Ago / Excruciating Pain / Gas in Tissue on XR",
+    "treatments": {
+      "orders": [
+        {"id": "penicillin-gangrene", "name": "Penicillin G 4 million units IV q4h + clindamycin 900mg IV q8h", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Gas gangrene: Penicillin G is the mainstay for Clostridium perfringens. ADD clindamycin — inhibits toxin (theta-toxin, alpha-toxin) production even when bacteria are not actively dividing. Combination is superior to penicillin alone. Also cover with metronidazole for anaerobic synergy.",
+          "references": [{"source": "Gas Gangrene — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459219/", "detail": "Penicillin G + clindamycin (toxin suppression); add metronidazole for anaerobic coverage"}]},
+        {"id": "debridement-gangrene", "name": "Emergent wide surgical debridement ± amputation", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Wide surgical debridement is essential — remove all infected/necrotic tissue. Gas gangrene can spread 2cm/hour. Amputation is often necessary for limb-involving gas gangrene. Limb sacrifice to save life. Delay is death.",
+          "references": [{"source": "Gas Gangrene — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459219/", "detail": "Emergent debridement ± amputation; spreads 2cm/hr; limb sacrifice to save life"}]},
+        {"id": "hbo-gangrene", "name": "Hyperbaric oxygen (HBO) as adjunct if available", "group": "Adjunct",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "HBO inhibits Clostridium toxin production at high PaO2. Use as adjunct to surgery + antibiotics — never instead of. Transfer to HBO center only after initial surgical debridement. Reduces number of debridements and may reduce mortality.",
+          "references": [{"source": "Gas Gangrene — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459219/", "detail": "HBO adjunct: inhibits clostridial toxins; never delays surgery; may reduce debridement number"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "82/48", "HR": "142", "Temp": "39.2°C", "SpO2": "92%"},
+          "labHighlights": {"XR leg": "Gas in soft tissues", "WBC": "4,200 (paradoxically low)", "Wound": "Serosanguineous brown discharge"}},
+        {"id": "or-prep", "label": "OR Prep",
+          "vitals": {"BP": "92/60", "HR": "128"},
+          "labHighlights": {"Gram stain": "G+ rods (clostridial)", "OR": "Wide debridement proceeding"}},
+        {"id": "post-or", "label": "Post-Debridement ICU",
+          "vitals": {"BP": "104/68", "HR": "114"},
+          "labHighlights": {"Wound": "Demarcated below knee", "HBO": "Requested"}}
+      ]
+    },
+    "mustNotMiss": ["Leukopenia is common in gas gangrene (WBC often paradoxically low or normal)","Rapid spread: 2cm/hour — every minute without debridement is permanent tissue loss","HBO only after surgery — never delay OR for HBO transfer","Atraumatic clostridial myonecrosis in GI malignancy/immunocompromise"],
+    "commonPitfalls": ["Delaying OR for CT or other imaging","Single debridement (multiple returns to OR required)","Not adding clindamycin (toxin production continues during penicillin therapy)","HBO instead of surgery (adjunct only — never delays OR)"],
+    "keyLearningPoints": ["Gas gangrene: excruciating pain + gas in tissue + G+ rods = OR immediately","Spreads 2cm/hour: delay = amputation or death","Penicillin G + clindamycin + metronidazole; HBO as adjunct after surgery"]
+  },
+  "acute-mi-with-av-block": {
+    "id": "acute-mi-with-av-block",
+    "diagnosis": "Inferior STEMI with Complete Heart Block",
+    "acuity": 1,
+    "presentation": "Inferior ST Elevation / Bradycardia / AV Block",
+    "category": "cardiovascular",
+    "chiefComplaint": "Chest Pain / HR 38 / Complete Heart Block on ECG",
+    "treatments": {
+      "orders": [
+        {"id": "primary-pci-chb", "name": "Activate cath lab — primary PCI (door-to-balloon <90 min)", "group": "Reperfusion",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Primary PCI is the definitive treatment for the STEMI — opening the RCA (most common culprit in inferior STEMI + complete heart block) will restore AV node perfusion and often resolves the heart block. The AV block itself is usually temporary (AV node supplied by RCA in 90%). Primary PCI, not pacemaker, is the priority.",
+          "references": [{"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Primary PCI priority in STEMI + CHB; RCA reperfusion often resolves AV block"}]},
+        {"id": "atropine-chb", "name": "Atropine 0.5-1mg IV (for hemodynamically unstable bradycardia)", "group": "Rate Support",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Atropine for hemodynamically unstable bradycardia while PCI is being arranged. May be ineffective for infranodal (His-Purkinje) blocks. If atropine fails: transcutaneous pacing (TCP) as bridge to PCI. Avoid isoproterenol (increases ischemia demand).",
+          "references": [{"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Atropine 0.5-1mg IV for symptomatic bradycardia; TCP if atropine fails; PCI is definitive"}]},
+        {"id": "rca-vs-lad", "name": "Identify culprit artery: inferior STEMI leads (II, III, aVF)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Inferior STEMI (II, III, aVF elevation): culprit is RCA in 80%. RV MI in up to 50% of inferior STEMI (check RV leads V4R-V6R). CRITICAL: RV MI requires volume loading — nitroglycerin/diuretics are contraindicated (preload-dependent RV). Complete heart block indicates proximal RCA occlusion.",
+          "references": [{"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "Inferior STEMI + CHB = proximal RCA; check V4R for RV MI; NTG contraindicated in RV MI"}]},
+        {"id": "nitro-rvi", "name": "Nitroglycerin for inferior STEMI chest pain", "group": "Medications",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "CONTRAINDICATED if RV MI present — nitroglycerin causes venodilation → reduced RV preload → cardiovascular collapse. Always check V4R before NTG in inferior STEMI. Also avoid diuretics. Give IV fluids for RV MI.",
+          "references": [{"source": "STEMI — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK532281/", "detail": "NTG contraindicated in RV MI — reduces preload, causes cardiovascular collapse"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "88/52", "HR": "38", "SpO2": "94%"},
+          "labHighlights": {"ECG": "ST elevation II/III/aVF + CHB + V4R elevation", "Troponin": "0.8 (rising)"}},
+        {"id": "stabilized", "label": "Atropine / TCP Running",
+          "vitals": {"BP": "96/60", "HR": "60 (paced)"},
+          "labHighlights": {"IV fluid": "500mL NS given (RV MI)", "Cath lab": "Activated"}},
+        {"id": "post-pci", "label": "Post-PCI",
+          "vitals": {"BP": "118/74", "HR": "72 (normal sinus)"},
+          "labHighlights": {"ECG": "Normal sinus — CHB resolved", "RCA": "Opened with stent"}}
+      ]
+    },
+    "mustNotMiss": ["RV MI (V4R ST elevation) — NTG + diuretics contraindicated; give IV fluids","Complete heart block may resolve with PCI — do not commit to permanent pacemaker acutely","Right-sided leads (V4R-V6R) required in all inferior STEMI","Posterior MI (ST depression V1-V3 + tall R wave) — needs V7-V9 leads"],
+    "commonPitfalls": ["NTG for inferior STEMI before checking V4R (RV MI collapse)","Permanent pacemaker before PCI (CHB resolves in >90% after reperfusion)","Atropine alone without activating cath lab","Missing RV MI because right-sided leads not placed"],
+    "keyLearningPoints": ["Inferior STEMI + complete heart block = proximal RCA occlusion; PCI resolves both","RV MI: V4R elevation + hypotension + clear lungs — NTG/diuretics contraindicated, give fluids","Complete heart block from RCA STEMI resolves after reperfusion in >90% of cases"]
+  },
+  "crohn-flare": {
+    "id": "crohn-flare",
+    "diagnosis": "Severe Crohn Disease Flare — Ileocolonic",
+    "acuity": 2,
+    "presentation": "Abdominal Pain / Diarrhea / Weight Loss / Biologic Failure",
+    "category": "gastrointestinal",
+    "chiefComplaint": "Worsening Crohn / Diarrhea 10x Daily / Failed Infliximab",
+    "treatments": {
+      "orders": [
+        {"id": "iv-steroids-crohn", "name": "Methylprednisolone 40-60mg IV daily (induction)", "group": "Steroids",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "IV corticosteroids are first-line for severe Crohn flare (Harvey-Bradshaw index >13 or CDAI >450). Methylprednisolone 40mg IV daily induces remission in 80%. If no response in 5-7 days = refractory → cyclosporine or infliximab rescue or surgery.",
+          "references": [{"source": "Crohn Disease — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK436021/", "detail": "IV methylprednisolone 40mg/day for severe Crohn; 80% remission induction; rescue if no response in 5-7d"}]},
+        {"id": "rule-out-infection-crohn", "name": "Stool C. diff + cultures + CMV biopsy", "group": "Infection Workup",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Always rule out infection before escalating immunosuppression. C. difficile is a major trigger of IBD flares and can mimic severe disease. CMV colitis in immunocompromised IBD patients requires ganciclovir, not steroids. Stool cultures + C. diff before steroids is mandatory.",
+          "references": [{"source": "Crohn Disease — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK436021/", "detail": "C. diff and infection workup before steroids; CMV colitis may require ganciclovir"}]},
+        {"id": "infliximab-rescue", "name": "Infliximab 5mg/kg IV (if no response to steroids by day 5)", "group": "Biologic",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Rescue therapy for steroid-refractory severe Crohn: infliximab OR surgery. ACCENT I trial: infliximab induces remission in 58% of Crohn patients. Vedolizumab and ustekinumab are alternatives if anti-TNF antibodies present.",
+          "references": [{"source": "Crohn Disease — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK436021/", "detail": "Infliximab rescue for steroid-refractory Crohn; ACCENT I: 58% remission rate"}]},
+        {"id": "bowel-rest-crohn", "name": "NPO and bowel rest (hospitalized patients)", "group": "Nutrition",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "Bowel rest is NOT standard of care for Crohn disease flare. Enteral nutrition is preferred over TPN — preserves gut mucosal integrity and microbiome. Continue oral nutrition if tolerated or start enteral nutrition. Exclusive enteral nutrition is actually an induction therapy in pediatric Crohn.",
+          "references": [{"source": "Crohn Disease — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK436021/", "detail": "Enteral nutrition preferred over bowel rest; preserves mucosal integrity"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "108/68", "HR": "104", "Temp": "38.1°C"},
+          "labHighlights": {"WBC": "14,800", "CRP": "88", "Albumin": "2.4", "Stools": "10/day bloody"}},
+        {"id": "workup", "label": "Infection Ruled Out",
+          "vitals": {"BP": "112/72", "HR": "96"},
+          "labHighlights": {"C.diff": "Negative", "CMV biopsy": "Negative", "Steroids": "Started"}},
+        {"id": "day5", "label": "Day 5 — Steroid Response Assessment",
+          "vitals": {"BP": "116/74", "HR": "90", "Temp": "37.4°C"},
+          "labHighlights": {"Stools": "4/day (improved)", "CRP": "44 (trending down)", "Plan": "Continue steroids"}}
+      ]
+    },
+    "mustNotMiss": ["C. difficile as flare trigger — must rule out before escalating immunosuppression","Abscess (Crohn complications — CT abdomen to rule out before biologic)","Stricture/obstruction vs active inflammation (different management)","VTE prophylaxis — IBD patients have 3-4x higher VTE risk when hospitalized"],
+    "commonPitfalls": ["Escalating immunosuppression before ruling out infection","Bowel rest (ineffective; enteral nutrition preferred)","Not checking anti-infliximab antibodies before redosing in patients with prior exposure","Missing abscess (biologics contraindicated until drained)"],
+    "keyLearningPoints": ["Severe Crohn: IV steroids first; rule out infection first; assess at 5-7 days","Infliximab rescue for steroid failure; surgery for refractory or complicated disease","IBD + hospitalization = high VTE risk — prophylactic anticoagulation"]
+  },
+  "cholelithiasis-cholecystitis": {
+    "id": "cholelithiasis-cholecystitis",
+    "diagnosis": "Acute Calculous Cholecystitis with Choledocholithiasis",
+    "acuity": 2,
+    "presentation": "RUQ Pain / Fever / Jaundice",
+    "category": "gastrointestinal",
+    "chiefComplaint": "RUQ Pain / Fever 38.8°C / Jaundice / Murphy Sign Positive",
+    "treatments": {
+      "orders": [
+        {"id": "ultrasound-cc", "name": "RUQ ultrasound (gallstones, wall thickening, CBD dilation)", "group": "Imaging",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "RUQ ultrasound is first-line imaging for cholecystitis — sensitivity 88%, specificity 80% for acute cholecystitis (wall >4mm, pericholecystic fluid, sonographic Murphy sign). CBD >8mm = choledocholithiasis until proven otherwise. If US equivocal: HIDA scan (sensitivity 95%).",
+          "references": [{"source": "Cholecystitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459171/", "detail": "RUQ US first-line: wall >4mm, pericholecystic fluid, sonographic Murphy sign = cholecystitis"}]},
+        {"id": "ercp-choledocho", "name": "ERCP for choledocholithiasis (CBD dilation + hyperbilirubinemia)", "group": "Intervention",
+          "critical": false, "correct": true, "phase": 2,
+          "teaching": "Choledocholithiasis (CBD stone): ERCP + stone extraction before or with cholecystectomy. Indications: CBD >8mm, bilirubin >1.8, ascending cholangitis (Charcot triad). ERCP within 24h for cholangitis (urgent if Reynold pentad).",
+          "references": [{"source": "Cholecystitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459171/", "detail": "ERCP for choledocholithiasis before cholecystectomy; urgent within 24h for cholangitis"}]},
+        {"id": "antibiotics-cc", "name": "Piperacillin-tazobactam 3.375g IV q6h (for cholangitis or perforation risk)", "group": "Antibiotics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Antibiotics in acute cholecystitis: indicated for systemic infection signs (fever >38°C, elevated WBC). Covers enteric gram-negatives and anaerobes. Pip-tazo or ceftriaxone + metronidazole. For uncomplicated cholecystitis without fever: antibiotics controversial, surgery is treatment.",
+          "references": [{"source": "Cholecystitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459171/", "detail": "Antibiotics for cholecystitis with systemic signs; pip-tazo or CTX + metronidazole"}]},
+        {"id": "cholecystectomy-cc", "name": "Laparoscopic cholecystectomy within 72h", "group": "Surgical",
+          "critical": true, "correct": true, "phase": 2,
+          "teaching": "Early laparoscopic cholecystectomy (within 72h of symptom onset) is preferred over delayed — reduces total hospital stay, recurrence, and conversion to open. Tokyo Guidelines: Grade I/II cholecystitis → early cholecystectomy. Grade III (organ failure) → percutaneous drainage first.",
+          "references": [{"source": "Cholecystitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK459171/", "detail": "Early laparoscopic cholecystectomy <72h: reduces LOS and recurrence; Tokyo Guidelines"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "118/78", "HR": "104", "Temp": "38.8°C"},
+          "labHighlights": {"WBC": "16,200", "Bili (total)": "4.2", "Alk Phos": "388", "ALT": "128"}},
+        {"id": "imaging-result", "label": "US + Labs",
+          "vitals": {"BP": "116/76", "HR": "98"},
+          "labHighlights": {"US": "Wall 6mm, pericholecystic fluid, CBD 12mm", "Murphy": "Positive"}},
+        {"id": "ercp-planned", "label": "ERCP Planned",
+          "vitals": {"BP": "118/76", "HR": "92"},
+          "labHighlights": {"Plan": "ERCP + stone extraction → lap chole", "Antibiotics": "Running"}}
+      ]
+    },
+    "mustNotMiss": ["Ascending cholangitis — Charcot triad (fever + jaundice + RUQ pain); Reynold pentad adds AMS + hypotension = septic cholangitis = EMERGENT ERCP","Emphysematous cholecystitis (gas in wall — diabetics; emergent cholecystectomy)","Gallbladder perforation (peritonitis, mortality 20-30%)","Mirizzi syndrome (external compression of CBD by stone in cystic duct)"],
+    "commonPitfalls": ["Delaying cholecystectomy for 'interval' (increases recurrence before surgery)","Missing choledocholithiasis (CBD dilation + jaundice = ERCP before chole)","Not recognizing ascending cholangitis severity (Reynold pentad = emergent ERCP)","Antibiotics alone without surgery (inadequate for Grade I/II cholecystitis)"],
+    "keyLearningPoints": ["Charcot triad = ascending cholangitis; Reynold pentad (+ AMS + sepsis) = emergent ERCP","Early cholecystectomy (<72h) reduces LOS and recurrence vs delayed approach","CBD >8mm + jaundice = choledocholithiasis — ERCP before cholecystectomy"]
+  },
+  "atypical-hus": {
+    "id": "atypical-hus",
+    "diagnosis": "Atypical HUS — Complement-Mediated TMA",
+    "acuity": 1,
+    "presentation": "Microangiopathic Hemolytic Anemia / Thrombocytopenia / AKI",
+    "category": "hematologic",
+    "chiefComplaint": "AKI / Low Platelets / Hemolytic Anemia / No Diarrhea",
+    "treatments": {
+      "orders": [
+        {"id": "distinguish-ttp-hus", "name": "ADAMTS13 activity level (distinguish TTP from aHUS)", "group": "Diagnostics",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "TMA triad: microangiopathic hemolytic anemia + thrombocytopenia + organ dysfunction. Key distinction: TTP (ADAMTS13 <10% = severe deficiency → plasma exchange) vs aHUS (ADAMTS13 normal or mildly reduced → eculizumab). Send ADAMTS13 immediately — treatment differs completely.",
+          "references": [{"source": "Atypical HUS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430812/", "detail": "ADAMTS13 <10% = TTP; ADAMTS13 normal = aHUS; treatment differs fundamentally"}]},
+        {"id": "eculizumab-hus", "name": "Eculizumab 900mg IV (terminal complement inhibitor)", "group": "Treatment",
+          "critical": true, "correct": true, "phase": 1,
+          "teaching": "Eculizumab is first-line for aHUS — blocks C5 complement, halts TMA. Start empirically while awaiting ADAMTS13 if TTP less likely (less neurological involvement, prominent AKI, no predisposing trigger). Meningococcal vaccination required before treatment — emergent MCV4 if not immunized.",
+          "references": [{"source": "Atypical HUS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430812/", "detail": "Eculizumab first-line for aHUS; meningococcal vaccine before or with treatment; complement-mediated"}]},
+        {"id": "plex-hus", "name": "Plasma exchange (PLEX) while ADAMTS13 pending", "group": "Bridge Therapy",
+          "critical": false, "correct": true, "phase": 1,
+          "teaching": "Start PLEX empirically while awaiting ADAMTS13 if TTP cannot be excluded — plasma exchange is lifesaving for TTP and harmless in aHUS. If ADAMTS13 returns normal, stop PLEX and continue eculizumab.",
+          "references": [{"source": "TTP-HUS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430812/", "detail": "PLEX empirically if TTP cannot be excluded; safe in aHUS; awaiting ADAMTS13"}]},
+        {"id": "platelet-transfusion-ttp", "name": "Platelet transfusion for thrombocytopenia", "group": "Transfusion",
+          "critical": false, "correct": false, "phase": 1,
+          "teaching": "CONTRAINDICATED in TTP and TMA — platelet transfusion 'fuels the fire' by providing substrate for thrombus formation in small vessels. Can precipitate massive thrombosis and death. Only give platelets for life-threatening bleeding or emergency surgery.",
+          "references": [{"source": "TTP-HUS — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430812/", "detail": "Platelet transfusion contraindicated in TMA/TTP — worsens microvascular thrombosis"}]}
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true,
+          "vitals": {"BP": "168/108", "HR": "104", "SpO2": "97%"},
+          "labHighlights": {"Plt": "22,000", "Hgb": "7.2", "Cr": "5.8", "Schistocytes": "Present", "LDH": "2,840"}},
+        {"id": "workup", "label": "ADAMTS13 Sent / PLEX Started",
+          "vitals": {"BP": "158/98", "HR": "96"},
+          "labHighlights": {"ADAMTS13": "Pending", "PLEX": "Session 1 completed"}},
+        {"id": "eculizumab", "label": "Eculizumab Started",
+          "vitals": {"BP": "148/92", "HR": "92"},
+          "labHighlights": {"ADAMTS13": "68% (normal → aHUS confirmed)", "Plt": "54,000 (improving)"}}
+      ]
+    },
+    "mustNotMiss": ["TTP (ADAMTS13 <10%) — plasma exchange is lifesaving, delay kills","Shiga-toxin HUS (STEC-HUS from E. coli O157:H7 — diarrhea prodrome, children — do NOT use antibiotics)","Platelet transfusion contraindicated — worsens thrombosis","Meningococcal vaccination before eculizumab"],
+    "commonPitfalls": ["Platelet transfusion for thrombocytopenia in TMA (contraindicated)","Not sending ADAMTS13 urgently (treatment decision depends on it)","Delaying PLEX/eculizumab while waiting for ADAMTS13 result","Antibiotics for STEC-HUS (worsen outcomes by releasing more Shiga toxin)"],
+    "keyLearningPoints": ["TMA triad: MAHA + thrombocytopenia + organ failure. Send ADAMTS13 immediately.","TTP (ADAMTS13 <10%): PLEX. aHUS (ADAMTS13 normal): eculizumab.","NEVER give platelets in TMA — fuels microvascular thrombosis. Fatal."]
+  }
 
 };
