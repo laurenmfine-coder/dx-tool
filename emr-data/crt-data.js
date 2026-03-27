@@ -31675,5 +31675,572 @@ window.CRT_DATA = {
       "No ID consult",
       "No G6PD before dapsone"
     ]
+  },
+  "hypertensive-emergency": {
+    "id": "hypertensive-emergency",
+    "diagnosis": "Hypertensive Emergency with PRES",
+    "acuity": 1,
+    "presentation": "Severe Headache / AMS",
+    "category": "cardiovascular",
+    "chiefComplaint": "BP 226/138 / Severe Headache",
+    "treatments": {
+      "orders": [
+        {
+          "id": "nicardipine-htn",
+          "name": "Nicardipine 5mg/h IV (titrate, max 25% MAP reduction in 1h)",
+          "group": "Antihypertensive",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Goal: reduce MAP by no more than 25% in the first hour. Nicardipine is preferred for hypertensive encephalopathy and PRES — smooth, titratable. Avoid rapid drops which can cause ischemic stroke via loss of cerebral autoregulation.",
+          "references": [
+            {"source": "Hypertensive Emergency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK334119/", "detail": "Nicardipine IV; max 25% MAP reduction in first hour"}
+          ]
+        },
+        {
+          "id": "mri-brain-htn",
+          "name": "MRI Brain with FLAIR (PRES evaluation)",
+          "group": "Imaging",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "MRI with FLAIR detects PRES — T2/FLAIR hyperintensity in occipital/parietal regions. CT misses early PRES. Always get neuroimaging in hypertensive emergency with AMS or visual changes.",
+          "references": [
+            {"source": "Hypertensive Emergency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK334119/", "detail": "MRI FLAIR for PRES; CT often negative early"}
+          ]
+        },
+        {
+          "id": "fundoscopy-htn",
+          "name": "Fundoscopic exam (papilledema)",
+          "group": "Physical Exam",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Papilledema = hypertensive emergency regardless of BP level. Look for flame hemorrhages, AV nicking, disc blurring. Confirms end-organ eye damage — mandates IV therapy and ICU.",
+          "references": [
+            {"source": "Hypertensive Emergency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK334119/", "detail": "Fundoscopy essential; papilledema = emergency"}
+          ]
+        },
+        {
+          "id": "nitroprusside-htn",
+          "name": "Nitroprusside IV drip",
+          "group": "Antihypertensive",
+          "critical": false,
+          "correct": false,
+          "phase": 1,
+          "teaching": "AVOID in PRES/encephalopathy — increases ICP via cerebral vasodilation. Also cyanide toxicity with prolonged use. Use nicardipine or labetalol instead.",
+          "references": [
+            {"source": "Hypertensive Emergency — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK334119/", "detail": "Nitroprusside contraindicated in PRES — cerebral vasodilation raises ICP"}
+          ]
+        }
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "226/138", "HR": "98", "RR": "18", "Temp": "98.8°F", "SpO2": "96%"}, "labHighlights": {"Creatinine": "2.1 (baseline 1.0)", "UA": "2+ protein"}},
+        {"id": "controlled", "label": "BP Controlled", "vitals": {"BP": "162/94", "HR": "88", "SpO2": "98%"}, "labHighlights": {"MAP reduction": "~25% achieved"}},
+        {"id": "imaging", "label": "Imaging", "vitals": {"BP": "148/88", "HR": "80"}, "labHighlights": {"MRI FLAIR": "PRES confirmed"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Aortic dissection (arm BP differential, widened mediastinum on CXR)",
+      "Ischemic stroke (CT head first before aggressive BP lowering)",
+      "Cocaine/stimulant (ask about use; phentolamine if catecholamine-mediated)",
+      "PRES with seizure (seizure prophylaxis may be needed)"
+    ],
+    "commonPitfalls": [
+      "Dropping BP >25% in first hour — causes ischemic stroke via lost autoregulation",
+      "Sublingual nifedipine — uncontrolled rapid drop, now contraindicated",
+      "Missing papilledema (requires fundoscopy in every severe hypertension presentation)",
+      "Using nitroprusside in encephalopathy — raises ICP"
+    ],
+    "keyLearningPoints": [
+      "Hypertensive urgency (no end-organ damage) vs emergency (end-organ damage) — very different acuity",
+      "PRES is reversible with BP control — but permanent deficits if undertreated",
+      "25% MAP reduction rule: enough to treat, slow enough to preserve cerebral perfusion"
+    ]
+  },
+  "alcohol-withdrawal": {
+    "id": "alcohol-withdrawal",
+    "diagnosis": "Alcohol Withdrawal Syndrome (CIWA-Ar 22)",
+    "acuity": 2,
+    "presentation": "Tremor / Agitation",
+    "category": "toxicology",
+    "chiefComplaint": "Tremor and Agitation — Last Drink 36h Ago",
+    "treatments": {
+      "orders": [
+        {
+          "id": "thiamine-etoh",
+          "name": "Thiamine 100mg IV BEFORE any dextrose or glucose",
+          "group": "Vitamins",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Wernicke encephalopathy is precipitated by giving glucose to thiamine-depleted patients. Always give thiamine IV first. IV preferred in severe AWS — GI absorption unreliable. Give before starting banana bag.",
+          "references": [
+            {"source": "Alcohol Withdrawal — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/", "detail": "Thiamine before glucose; prevents Wernicke encephalopathy"}
+          ]
+        },
+        {
+          "id": "benzo-ciwa",
+          "name": "Lorazepam 2mg IV (CIWA-Ar symptom-triggered)",
+          "group": "Benzodiazepines",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Benzodiazepines are first-line for AWS. Symptom-triggered dosing (CIWA-Ar ≥8) reduces total benzo dose and ICU LOS vs fixed schedule. Lorazepam preferred in liver disease — no active metabolites unlike diazepam.",
+          "references": [
+            {"source": "Alcohol Withdrawal — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/", "detail": "CIWA-Ar symptom-triggered benzodiazepines; lorazepam in liver disease"}
+          ]
+        },
+        {
+          "id": "glucose-before-thiamine",
+          "name": "D5W IV before thiamine",
+          "group": "Fluids",
+          "critical": false,
+          "correct": false,
+          "phase": 1,
+          "teaching": "WRONG ORDER — glucose before thiamine precipitates Wernicke encephalopathy. Always give thiamine 100mg IV FIRST.",
+          "references": [
+            {"source": "Alcohol Withdrawal — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK441882/", "detail": "Thiamine must precede glucose in alcohol use disorder"}
+          ]
+        },
+        {
+          "id": "phenobarbital-aws",
+          "name": "Phenobarbital 10mg/kg IV (benzo-refractory)",
+          "group": "Adjunct",
+          "critical": false,
+          "correct": true,
+          "phase": 2,
+          "teaching": "For benzo-refractory AWS (CIWA >25 despite adequate benzos). Works on different GABA-A site — additive. Growing evidence for phenobarbital first-line in severe AWS. Monitor airway carefully.",
+          "references": [
+            {"source": "Phenobarbital AWS — NCBI", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5776808/", "detail": "Phenobarbital for benzo-refractory AWS"}
+          ]
+        }
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "158/96", "HR": "118", "Temp": "37.8°C", "SpO2": "98%"}, "labHighlights": {"CIWA-Ar": "22", "Mg2+": "1.4 mEq/L", "Glucose": "88"}},
+        {"id": "stabilized", "label": "Stabilized", "vitals": {"BP": "138/86", "HR": "92"}, "labHighlights": {"CIWA-Ar": "8"}},
+        {"id": "monitoring", "label": "Monitoring", "vitals": {"BP": "128/78", "HR": "84"}, "labHighlights": {"CIWA-Ar": "4"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Wernicke encephalopathy — thiamine before glucose, always, in every AUD admission",
+      "Delirium tremens — peak 48-96h after last drink; ICU if CIWA >20 or first seizure",
+      "Concurrent infection — aspiration PNA, SBP, meningitis",
+      "Hypomagnesemia — lowers seizure threshold; always replete"
+    ],
+    "commonPitfalls": [
+      "D5W before thiamine (Wernicke trigger)",
+      "Fixed-schedule benzos instead of CIWA-Ar triggered (over-sedation)",
+      "Missing Mg2+ deficiency",
+      "Discharging before 96h — DTs can develop late"
+    ],
+    "keyLearningPoints": [
+      "CIWA-Ar: 10-item scale; ≥8 = treat; ≥15 = consider ICU",
+      "Lorazepam preferred over diazepam in liver disease (no active metabolites)",
+      "Symptom-triggered dosing reduces total benzo exposure vs fixed schedule"
+    ]
+  },
+  "stroke-v2": {
+    "id": "stroke-v2",
+    "diagnosis": "Hemorrhagic Transformation Post-tPA (PH2)",
+    "acuity": 1,
+    "presentation": "Neurological Deterioration During tPA",
+    "category": "neurologic",
+    "chiefComplaint": "NIHSS Worsened 6h Post-tPA",
+    "treatments": {
+      "orders": [
+        {
+          "id": "stop-tpa",
+          "name": "STOP tPA infusion immediately",
+          "group": "Emergency",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Any neurological deterioration during tPA = stop immediately. Do not wait for imaging. This is the absolute first step.",
+          "references": [
+            {"source": "Hemorrhagic Transformation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470540/", "detail": "Stop tPA on any neurological deterioration"}
+          ]
+        },
+        {
+          "id": "ct-stat-stroke2",
+          "name": "STAT non-contrast CT Head",
+          "group": "Imaging",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "CT to confirm hemorrhagic transformation. PH2 = parenchymal hematoma >30% of infarct zone with mass effect. Mortality ~50%.",
+          "references": [
+            {"source": "Hemorrhagic Transformation — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470540/", "detail": "STAT CT for suspected hemorrhagic transformation"}
+          ]
+        },
+        {
+          "id": "cryoprecipitate-stroke2",
+          "name": "Cryoprecipitate 10 units IV (fibrinogen replacement)",
+          "group": "Reversal",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "tPA-associated ICH: cryoprecipitate replaces fibrinogen depleted by tPA. Goal fibrinogen >150 mg/dL. Consider TXA 1g IV. FFP is less effective for fibrinogen replacement.",
+          "references": [
+            {"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "Cryoprecipitate for tPA reversal; goal fibrinogen >150"}
+          ]
+        },
+        {
+          "id": "bp-lower-stroke2",
+          "name": "Nicardipine to SBP <140",
+          "group": "Blood Pressure",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "In hemorrhagic transformation: lower BP to <140/90. This is the OPPOSITE of ischemic stroke where BP is permissive. Hematoma expansion is the main early killer.",
+          "references": [
+            {"source": "AHA/ASA ICH Guideline 2022", "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000407", "detail": "SBP <140 in ICH reduces hematoma expansion (INTERACT2, ATACH-2)"}
+          ]
+        }
+      ],
+      "phases": [
+        {"id": "tpa-running", "label": "tPA Running", "auto": true, "vitals": {"BP": "178/100", "HR": "88", "NIHSS": "14"}, "labHighlights": {"tPA": "Running (30% infused)"}},
+        {"id": "deterioration", "label": "Deterioration", "vitals": {"BP": "198/112", "NIHSS": "22"}, "labHighlights": {"CT": "PH2 — 5mm midline shift"}},
+        {"id": "reversal", "label": "Reversal", "vitals": {"BP": "148/88"}, "labHighlights": {"Fibrinogen": "210 post-cryo"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Stop tPA FIRST — before imaging, before calling anyone else",
+      "Cryoprecipitate not FFP — cryo is the correct agent for fibrinogen",
+      "Neurosurgery consult immediately for PH2",
+      "BP management flips: now <140 target (not permissive)"
+    ],
+    "commonPitfalls": [
+      "Continuing tPA while waiting for CT",
+      "Using FFP instead of cryoprecipitate",
+      "Forgetting that BP target flips from ischemic to hemorrhagic management",
+      "Not involving neurosurgery early"
+    ],
+    "keyLearningPoints": [
+      "Symptomatic ICH post-tPA mortality ~50%; early recognition critical",
+      "tPA half-life 4-5 min — stop infusion, give cryoprecipitate immediately",
+      "PH2 = parenchymal hematoma >30% infarct area with mass effect"
+    ]
+  },
+  "bacterial-meningitis": {
+    "id": "bacterial-meningitis",
+    "diagnosis": "Bacterial Meningitis — N. meningitidis",
+    "acuity": 1,
+    "presentation": "Fever / Headache / Petechiae",
+    "category": "infectious",
+    "chiefComplaint": "Severe Headache / Stiff Neck / Petechial Rash",
+    "treatments": {
+      "orders": [
+        {
+          "id": "dexamethasone-mening",
+          "name": "Dexamethasone 0.15mg/kg IV BEFORE or WITH first antibiotics",
+          "group": "Anti-inflammatory",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Must be given before or simultaneously with antibiotics. Once bacteria lyse, cytokine storm peaks — dexamethasone blunts this. Reduces hearing loss and neurological complications. NEJM 2002: 10% reduction in unfavorable outcomes.",
+          "references": [
+            {"source": "Bacterial Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470571/", "detail": "Dexamethasone before/with antibiotics reduces morbidity"},
+            {"source": "de Gans NEJM 2002", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2043006/", "detail": "Dexamethasone before abx reduced unfavorable outcomes 10%"}
+          ]
+        },
+        {
+          "id": "ceftriaxone-mening",
+          "name": "Ceftriaxone 2g IV q12h",
+          "group": "Antibiotics",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "First-line empiric for community-acquired bacterial meningitis ≥2 months. Covers S. pneumoniae and N. meningitidis. Add ampicillin if age >50 or immunocompromised (Listeria coverage).",
+          "references": [
+            {"source": "Bacterial Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470571/", "detail": "Ceftriaxone 2g q12h empiric first-line"},
+            {"source": "IDSA Meningitis Guidelines", "url": "https://academic.oup.com/cid/article/39/9/1267/484737", "detail": "Ceftriaxone for community-acquired bacterial meningitis"}
+          ]
+        },
+        {
+          "id": "ct-before-lp-wrong",
+          "name": "CT Head before LP (delay antibiotics while waiting)",
+          "group": "Imaging",
+          "critical": false,
+          "correct": false,
+          "phase": 1,
+          "teaching": "Do NOT delay antibiotics for CT/LP. Neuroimaging before LP is only indicated for papilledema, focal deficits, or GCS <8. Time is brain — antibiotics first, then CT/LP.",
+          "references": [
+            {"source": "Bacterial Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470571/", "detail": "Antibiotics before LP if focal deficits or AMS; never delay for routine CT"}
+          ]
+        },
+        {
+          "id": "droplet-mening",
+          "name": "Droplet precautions for 24h after first effective antibiotics",
+          "group": "Infection Control",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "N. meningitidis = respiratory droplet transmission. 24h of droplet precautions. Contact tracing: close contacts need rifampin or ciprofloxacin prophylaxis within 7 days.",
+          "references": [
+            {"source": "Bacterial Meningitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470571/", "detail": "Droplet precautions; rifampin prophylaxis for close contacts"}
+          ]
+        }
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "96/58", "HR": "128", "RR": "22", "Temp": "39.8°C", "SpO2": "96%"}, "labHighlights": {"WBC": "18,400", "CSF WBC": "2,400 PMN", "CSF glucose": "28"}},
+        {"id": "abx-started", "label": "Antibiotics Running", "vitals": {"BP": "110/70", "HR": "108", "Temp": "38.6°C"}, "labHighlights": {"Gram stain": "G- diplococci", "LP": "Protein 180"}},
+        {"id": "icu", "label": "ICU Monitoring", "vitals": {"BP": "124/78", "HR": "96", "Temp": "37.8°C"}, "labHighlights": {"Culture": "N. meningitidis B"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Petechial/purpuric rash = meningococcemia — do not wait for LP, start antibiotics now",
+      "Waterhouse-Friderichsen syndrome (bilateral adrenal hemorrhage, septic shock)",
+      "Herpes encephalitis (add acyclovir empirically if lymphocytic pleocytosis)",
+      "Cryptococcal meningitis in immunocompromised (India ink, CrAg)"
+    ],
+    "commonPitfalls": [
+      "Waiting for CT before LP when no contraindications (deadly delay)",
+      "Giving dexamethasone AFTER first antibiotic dose (benefits lost)",
+      "Not initiating droplet precautions (HCW transmission risk)",
+      "Missing Listeria in age >50 (omitting ampicillin)"
+    ],
+    "keyLearningPoints": [
+      "Classic triad (fever + headache + stiff neck) present in only 44% — do not wait for it",
+      "CSF glucose <45 or CSF:serum glucose <0.6 = bacterial until proven otherwise",
+      "Time to antibiotics is the strongest modifiable predictor of outcome"
+    ]
+  },
+  "alcoholic-hepatitis": {
+    "id": "alcoholic-hepatitis",
+    "diagnosis": "Severe Alcoholic Hepatitis (Maddrey DF 44)",
+    "acuity": 2,
+    "presentation": "Jaundice / Fever / RUQ Pain",
+    "category": "gastrointestinal",
+    "chiefComplaint": "Jaundice 5 Days / Heavy Drinking History",
+    "treatments": {
+      "orders": [
+        {
+          "id": "maddrey-calc",
+          "name": "Calculate Maddrey Discriminant Function",
+          "group": "Risk Stratification",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Maddrey DF = 4.6 x (PT patient − PT control) + total bilirubin. DF ≥32 = severe; prednisolone indicated. DF <32 = supportive only. Always calculate before steroids.",
+          "references": [
+            {"source": "Alcoholic Hepatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470217/", "detail": "Maddrey DF ≥32 = severe AH; steroids indicated (STOPAH)"}
+          ]
+        },
+        {
+          "id": "prednisolone-ah",
+          "name": "Prednisolone 40mg PO daily x28 days (if DF ≥32, no infection)",
+          "group": "Steroids",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Prednisolone (NOT prednisone — requires hepatic conversion). 40mg/day x28 days if DF ≥32 and no active infection. Check Lille score at day 7 — >0.45 = non-responder, stop steroids. STOPAH trial: 28-day survival benefit.",
+          "references": [
+            {"source": "Alcoholic Hepatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470217/", "detail": "Prednisolone 40mg x28d; Lille score at day 7"},
+            {"source": "STOPAH Trial NEJM 2015", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1412278", "detail": "Prednisolone reduced 28-day mortality in severe AH"}
+          ]
+        },
+        {
+          "id": "thiamine-ah",
+          "name": "Thiamine 100mg IV daily x3 days",
+          "group": "Vitamins",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Always thiamine before glucose in AUD. Wernicke encephalopathy risk.",
+          "references": [
+            {"source": "Alcoholic Hepatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470217/", "detail": "Thiamine in all alcoholic hepatitis admissions"}
+          ]
+        },
+        {
+          "id": "lille-score-ah",
+          "name": "Lille score at day 7",
+          "group": "Monitoring",
+          "critical": true,
+          "correct": true,
+          "phase": 2,
+          "teaching": "Lille ≤0.45 = responder, continue 28 days. Lille >0.45 = stop steroids — no benefit and infection risk rises. 6-month survival: responders 72%, non-responders 25%.",
+          "references": [
+            {"source": "Alcoholic Hepatitis — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK470217/", "detail": "Lille score >0.45 at day 7 = stop prednisolone"}
+          ]
+        }
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "108/68", "HR": "102", "Temp": "38.1°C"}, "labHighlights": {"Bili": "14.2 mg/dL", "INR": "1.9", "AST:ALT": "3.2:1", "Albumin": "2.3"}},
+        {"id": "steroids-started", "label": "Prednisolone Day 1", "vitals": {"BP": "112/72", "HR": "96"}, "labHighlights": {"Infection screen": "Negative", "Maddrey DF": "44"}},
+        {"id": "day7", "label": "Day 7 Assessment", "vitals": {"BP": "118/74", "HR": "88"}, "labHighlights": {"Bili": "8.4 (down)", "Lille": "0.32 — responder"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Active infection before steroids — blood cx, CXR, UA, diagnostic paracentesis (SBP)",
+      "GI bleeding — cannot give steroids with active hemorrhage",
+      "Hepatorenal syndrome — steroids contraindicated",
+      "Suicidal ideation / AUD severity — addiction medicine consult"
+    ],
+    "commonPitfalls": [
+      "Prednisone instead of prednisolone (requires hepatic conversion — unreliable in liver failure)",
+      "Not checking Lille at day 7 (continuing ineffective steroids increases infection risk)",
+      "Protein restriction (outdated — 1.2-1.5g/kg/day is correct)",
+      "Missing SBP — all cirrhotics with ascites and fever need diagnostic paracentesis"
+    ],
+    "keyLearningPoints": [
+      "AST:ALT >2 (often >3) in alcoholic hepatitis vs viral hepatitis (<1)",
+      "Maddrey DF ≥32 = severe; prednisolone reduces 28-day mortality (STOPAH)",
+      "Lille responder = 72% 6-month survival; non-responder = 25%"
+    ]
+  },
+  "cap-with-sepsis": {
+    "id": "cap-with-sepsis",
+    "diagnosis": "Severe CAP with Sepsis — S. pneumoniae Bacteremia",
+    "acuity": 1,
+    "presentation": "Pneumonia / Sepsis",
+    "category": "pulmonary",
+    "chiefComplaint": "Worsening Pneumonia / BP 94/62 / O2 88%",
+    "treatments": {
+      "orders": [
+        {
+          "id": "ceftriaxone-cap",
+          "name": "Ceftriaxone 1g IV q24h + Azithromycin 500mg IV q24h",
+          "group": "Antibiotics",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "IDSA/ATS severe CAP: beta-lactam + macrolide combination. Atypical coverage (Legionella, Mycoplasma) is critical. Azithromycin monotherapy is insufficient for severe CAP.",
+          "references": [
+            {"source": "CAP — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430749/", "detail": "Beta-lactam + macrolide for severe CAP (IDSA/ATS 2019)"}
+          ]
+        },
+        {
+          "id": "ivf-cap",
+          "name": "30mL/kg crystalloid IV within 3 hours",
+          "group": "Resuscitation",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "Sepsis bundle. Reassess frequently — fluid overload worsens hypoxia in pneumonia. Use dynamic measures (pulse pressure variation, passive leg raise).",
+          "references": [
+            {"source": "Surviving Sepsis Campaign 2021", "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines/Adult-Patients", "detail": "30mL/kg crystalloid within 3h for sepsis"}
+          ]
+        },
+        {
+          "id": "curb65-cap",
+          "name": "CURB-65 score",
+          "group": "Risk Stratification",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "CURB-65: Confusion, Urea >7mmol, RR ≥30, BP <90/60, Age ≥65. 0-1 = outpatient; 2 = ward; 3-5 = ICU. Score 4 here = ICU warranted.",
+          "references": [
+            {"source": "CAP — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430749/", "detail": "CURB-65 ≥3 = ICU admission recommended"}
+          ]
+        },
+        {
+          "id": "azithromycin-alone-cap",
+          "name": "Azithromycin monotherapy",
+          "group": "Antibiotics",
+          "critical": false,
+          "correct": false,
+          "phase": 1,
+          "teaching": "Insufficient for severe CAP — must add beta-lactam. Macrolide alone cannot cover all pneumococcal strains. Always combine for CURB-65 ≥3.",
+          "references": [
+            {"source": "2019 IDSA/ATS CAP Guidelines", "url": "https://academic.oup.com/cid/article/71/7/e45/5492408", "detail": "Monotherapy inadequate for severe CAP"}
+          ]
+        }
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "94/62", "HR": "118", "RR": "28", "Temp": "39.2°C", "SpO2": "88% RA"}, "labHighlights": {"WBC": "22,100", "Lactate": "3.1", "Procalcitonin": "4.8"}},
+        {"id": "resuscitated", "label": "Resuscitated", "vitals": {"BP": "110/72", "HR": "104", "SpO2": "94% 4L"}, "labHighlights": {"Lactate": "1.8", "Blood cx": "S. pneumoniae"}},
+        {"id": "icu", "label": "ICU Improving", "vitals": {"BP": "126/78", "HR": "92", "SpO2": "96% 2L"}, "labHighlights": {"Procalcitonin": "2.1 (trending down)"}}
+      ]
+    },
+    "mustNotMiss": [
+      "Septic shock (BP <90 despite fluids — start vasopressors)",
+      "Legionella (hyponatremia, diarrhea, liver involvement — urinary antigen)",
+      "PCP in immunocompromised (bilateral interstitial, high LDH, HIV)",
+      "Empyema (persistent fever on abx + effusion — thoracentesis)"
+    ],
+    "commonPitfalls": [
+      "Azithromycin monotherapy for severe CAP",
+      "Delaying antibiotics for CT or cultures",
+      "Not reassessing volume after 30mL/kg (overload worsens hypoxia)",
+      "Missing ICU criteria (CURB-65 ≥3 or ATS minor criteria ≥3)"
+    ],
+    "keyLearningPoints": [
+      "Severe CAP = CURB-65 ≥3 or ATS criteria; always combine beta-lactam + macrolide",
+      "Combination therapy reduces mortality vs monotherapy in meta-analyses",
+      "Procalcitonin guides duration: stop at <0.25 or >80% drop from peak"
+    ]
+  },
+  "heart-failure-hfpef": {
+    "id": "heart-failure-hfpef",
+    "diagnosis": "Acute Decompensated HFpEF",
+    "acuity": 2,
+    "presentation": "Dyspnea / Orthopnea / Edema",
+    "category": "cardiovascular",
+    "chiefComplaint": "Worsening Dyspnea / 6 lb Weight Gain",
+    "treatments": {
+      "orders": [
+        {
+          "id": "diuresis-hfpef",
+          "name": "Furosemide IV (2.5x home oral dose or 80mg if naive)",
+          "group": "Diuresis",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "IV furosemide for ADHF. Dose rule: IV = 1-2.5x home oral dose. Goal UO 1-3 mL/kg/hr. DOSE trial: high-dose diuresis better symptom relief; bolus vs continuous equivalent.",
+          "references": [
+            {"source": "Heart Failure — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/", "detail": "IV furosemide 1-2.5x oral dose for ADHF"},
+            {"source": "DOSE Trial NEJM 2011", "url": "https://www.nejm.org/doi/10.1056/NEJMoa1005419", "detail": "High-dose diuresis improved symptom relief in ADHF"}
+          ]
+        },
+        {
+          "id": "echo-hfpef",
+          "name": "Transthoracic echocardiogram",
+          "group": "Diagnostics",
+          "critical": true,
+          "correct": true,
+          "phase": 1,
+          "teaching": "HFpEF diagnosis: EF ≥50% + HF symptoms + diastolic dysfunction (E/e' >14, LA dilation, pulmonary HTN). Echo also rules out new systolic dysfunction, effusion, valvular disease.",
+          "references": [
+            {"source": "Heart Failure — StatPearls", "url": "https://www.ncbi.nlm.nih.gov/books/NBK430975/", "detail": "Echo criteria for HFpEF: EF ≥50% + diastolic dysfunction"}
+          ]
+        },
+        {
+          "id": "sglt2-hfpef",
+          "name": "Empagliflozin 10mg daily (EMPEROR-Preserved)",
+          "group": "GDMT",
+          "critical": false,
+          "correct": true,
+          "phase": 2,
+          "teaching": "EMPEROR-Preserved (2021): empagliflozin reduced CV death + HF hospitalization by 21% in HFpEF. First drug with proven benefit in HFpEF. Safe to start in-hospital if eGFR ≥20.",
+          "references": [
+            {"source": "EMPEROR-Preserved NEJM 2021", "url": "https://www.nejm.org/doi/10.1056/NEJMoa2107038", "detail": "Empagliflozin HR 0.79 for CV death + HF hospitalization in HFpEF"}
+          ]
+        }
+      ],
+      "phases": [
+        {"id": "initial", "label": "Presentation", "auto": true, "vitals": {"BP": "158/96", "HR": "96 (AF)", "RR": "22", "SpO2": "90% RA"}, "labHighlights": {"BNP": "1,840", "Cr": "1.2", "Na": "132"}},
+        {"id": "diuresis", "label": "Diuresis", "vitals": {"BP": "142/88", "HR": "88", "SpO2": "95% 2L"}, "labHighlights": {"UO": "2.4 mL/kg/hr", "BNP": "1,200"}},
+        {"id": "optimized", "label": "Optimized", "vitals": {"BP": "128/78", "HR": "78", "SpO2": "97% RA"}, "labHighlights": {"BNP": "480", "Weight": "-4.8 kg", "EF": "58%"}}
+      ]
+    },
+    "mustNotMiss": [
+      "New valvular disease (new murmur = urgent echo)",
+      "Flash pulmonary edema in hypertensive emergency (treat BP + diuresis simultaneously)",
+      "AF with RVR as trigger (rate control if HR >110 before diuresis)",
+      "Hyponatremia during diuresis (check electrolytes q12-24h)"
+    ],
+    "commonPitfalls": [
+      "Under-diuresis (HFpEF patients are congested despite preserved EF)",
+      "Not starting SGLT2i (EMPEROR-Preserved now supports it — HFpEF benefit proven)",
+      "Missing the trigger (AF, HTN, salt indiscretion, medication non-adherence)",
+      "Premature discharge before adequate decongestion"
+    ],
+    "keyLearningPoints": [
+      "HFpEF = EF ≥50% + HF symptoms + diastolic dysfunction. Now 50% of all HF.",
+      "SGLT2i (empagliflozin) is the first drug with proven mortality/hospitalization benefit in HFpEF",
+      "Unlike HFrEF, BB/ACEi/MRA have weak evidence in HFpEF — focus on comorbidities"
+    ]
   }
+
 };
