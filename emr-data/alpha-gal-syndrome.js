@@ -17,7 +17,7 @@ window.EMR_DATA = {
       "pharmacy": "Walgreens — Glades Rd",
       "emergencyContact": {"name": "Janet Whitmore", "phone": "(615) 555-1272", "relationship": "Wife"},
       "chiefComplaint": "Generalized hives, vomiting, and throat tightness beginning 3–4 hours after eating steak dinner",
-      "diagnosis": "Alpha-gal syndrome — IgE-mediated allergy to galactose-alpha-1,3-galactose (mammalian red meat antigen)"
+      "diagnosis": "Alpha-gal syndrome — IgE-mediated allergy to galactose-alpha-1,3-galactose (mammalian red meat antigen)",
       "patientHPI": "About three hours after dinner last night, I started breaking out in hives all over my body and threw up, then my throat started feeling tight and scratchy. We had steak for dinner but I eat beef all the time without any problems.",
     },
     "allergies": [{"allergen": "NKDA (prior to this visit)", "reaction": "None previously identified", "severity": "N/A", "type": "N/A"}],

@@ -17,7 +17,7 @@ window.EMR_DATA = {
       "pharmacy": "Campus Pharmacy",
       "emergencyContact": {"name": "Ravi Nair (father)", "phone": "(503) 555-9318", "relationship": "Father"},
       "chiefComplaint": "Generalized hives, hypotension, and near-loss of consciousness while swimming in ocean",
-      "diagnosis": "Cold urticaria with cold-induced anaphylaxis"
+      "diagnosis": "Cold urticaria with cold-induced anaphylaxis",
       "patientHPI": "I was swimming in the ocean yesterday when I suddenly broke out in hives all over my body and felt like I was going to pass out. My skin was burning and itchy, and I could barely breathe - my friends had to help me get out of the water. I've never had anything like this happen before, even though I swim regularly.",
     },
     "allergies": [{"allergen": "NKDA", "reaction": "None known", "severity": "N/A", "type": "N/A"}],

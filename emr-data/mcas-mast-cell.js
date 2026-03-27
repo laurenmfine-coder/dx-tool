@@ -17,7 +17,7 @@ window.EMR_DATA = {
       "pharmacy": "Sedano's Pharmacy — Calle Ocho",
       "emergencyContact": {"name": "Carlos Reyes", "phone": "(803) 555-9561", "relationship": "Husband"},
       "chiefComplaint": "Recurrent episodes of flushing, hives, abdominal pain, and near-syncope — 5th episode in 8 months",
-      "diagnosis": "Mast cell activation syndrome (MCAS) — confirmed by elevated acute tryptase and symptom criteria"
+      "diagnosis": "Mast cell activation syndrome (MCAS) — confirmed by elevated acute tryptase and symptom criteria",
       "patientHPI": "I keep having these really scary episodes where my whole body gets hot and flushed, I break out in itchy bumps all over, my stomach cramps up terribly, and I feel like I'm going to pass out. This is the fifth time it's happened in eight months and I'm getting really worried because they seem to be getting worse.",
     },
     "allergies": [
