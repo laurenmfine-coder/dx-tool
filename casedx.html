@@ -218,6 +218,64 @@ a{color:inherit;text-decoration:none}
     </details>
   </div>
 </div>
+<!-- PATIENT JOURNEYS -->
+<div id="journeysSection" style="background:#F8FBFF;border-bottom:1px solid #E2E8F0;padding:16px 24px">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:16px">&#128279;</span>
+        <span style="font-size:13px;font-weight:700;color:#1A5276">Patient Journeys</span>
+        <span style="font-size:11px;color:#64748B;font-weight:500">Follow one patient across multiple encounters</span>
+      </div>
+      <button id="journeyToggle" style="font-size:11px;font-weight:600;color:#2874A6;background:none;border:none;cursor:pointer;padding:4px 8px">Hide &#9652;</button>
+    </div>
+    <div id="journeyCards" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin"></div>
+  </div>
+</div>
+<script>
+(function() {
+  document.getElementById('journeyToggle').onclick = function() {
+    var cards = document.getElementById('journeyCards');
+    var hidden = cards.style.display === 'none';
+    cards.style.display = hidden ? 'flex' : 'none';
+    this.innerHTML = hidden ? 'Hide &#9652;' : 'Show &#9662;';
+  };
+
+  var JOURNEYS = [
+    { name:'Marcus Delgado',   label:'DM2 &rarr; STEMI &rarr; HFrEF',               color:'#DC2626', first:'type2-diabetes-outpatient', cases:4 },
+    { name:'Brenda Petrov',    label:'UTI &rarr; Sepsis &rarr; MICU',                color:'#7C3AED', first:'pyelonephritis-urosepsis',  cases:4 },
+    { name:'Gwendolyn Fischer', label:'Stroke &rarr; ICH &rarr; HTN Crisis',          color:'#1D4ED8', first:'stroke-v1',                 cases:5 },
+    { name:'Devon Patterson',  label:'DKA &rarr; PICU &rarr; Endo Clinic',           color:'#D97706', first:'dka-v1',                    cases:3 },
+    { name:'Rachel Owusu',     label:'DVT &rarr; Massive PE &rarr; Hematology',      color:'#059669', first:'pe-v1',                     cases:5 },
+    { name:'Aaliyah Johnson',  label:'Food Allergy &rarr; Venom &rarr; VIT',         color:'#B45309', first:'allergic-rhinitis-immunotherapy', cases:3 },
+    { name:'Tariq Hassan',     label:'Missed Dx &rarr; Meningitis &rarr; Abscess',   color:'#6D28D9', first:'meningitis-v1',             cases:3 },
+    { name:'Shirley Achebe',   label:'HFpEF Decomp &rarr; GDMT Titration',          color:'#0E7490', first:'chf-exacerbation',          cases:3 },
+    { name:'Bernard Kowalski', label:'CAP &rarr; Sepsis &rarr; Recurrent Pneumonia', color:'#065F46', first:'pneumonia',                  cases:3 },
+    { name:'Colin Nakamura',   label:'AUD &rarr; Hepatitis &rarr; AKA',              color:'#92400E', first:'alcohol-withdrawal',         cases:3 },
+  ];
+
+  var container = document.getElementById('journeyCards');
+  if (!container) return;
+
+  JOURNEYS.forEach(function(j) {
+    var card = document.createElement('div');
+    card.style.cssText = 'flex-shrink:0;width:196px;background:white;border:1.5px solid #E2E8F0;border-radius:12px;padding:12px;cursor:pointer;transition:border-color .15s,box-shadow .15s';
+    card.innerHTML = '<div style="font-size:11px;font-weight:700;color:' + j.color + ';margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + j.name + '</div>'
+      + '<div style="font-size:11px;color:#374151;font-weight:600;line-height:1.4;margin-bottom:8px">' + j.label + '</div>'
+      + '<div style="display:flex;align-items:center;justify-content:space-between">'
+      + '<span style="font-size:10px;color:#9CA3AF">' + j.cases + ' encounters</span>'
+      + '<span style="font-size:10px;font-weight:700;color:' + j.color + '">Start &rarr;</span>'
+      + '</div>';
+    (function(first, color) {
+      card.onclick = function() { window.location.href = 'virtual-emr.html?case=' + first; };
+      card.onmouseover = function() { card.style.borderColor = color; card.style.boxShadow = '0 2px 12px rgba(0,0,0,.08)'; };
+      card.onmouseout  = function() { card.style.borderColor = '#E2E8F0'; card.style.boxShadow = 'none'; };
+    })(j.first, j.color);
+    container.appendChild(card);
+  });
+})();
+</script>
+
 
 <div class="filters-wrap">
   <div class="frow">

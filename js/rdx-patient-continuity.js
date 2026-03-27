@@ -268,26 +268,59 @@
     },
 
     // ── Chain 6: Anaphylaxis Arc ─────────────────────────────────────────
+    // ── Chain 6: Anaphylaxis Arc ─────────────────────────────────────────────
     {
       chainId: 'anaphylaxis-arc',
       patientName: 'Aaliyah Johnson',
       dob: '1995-03-22',
       mrn: '731485',
-      cases: ['allergic-rhinitis-immunotherapy'],
+      cases: ['allergic-rhinitis-immunotherapy', 'insect-sting-anaphylaxis', 'anaphylaxis-v2'],
       encounters: [
         {
           sequence: 1,
           caseId: 'allergic-rhinitis-immunotherapy',
           setting: 'Emergency Department',
-          date: '4 months ago',
+          date: '14 months ago',
           provider: 'Dr. K. Okafor, Emergency Medicine',
-          summary: 'Presented with acute onset urticaria, angioedema, and bronchospasm 20 minutes after eating at a restaurant (suspected tree nut exposure). BP 88/54 on arrival. Epinephrine 0.3mg IM administered — excellent response. IV diphenhydramine + methylprednisolone given. Observed ×6 hours — biphasic reaction did not occur. Discharged with EpiPen ×2 and referral to Allergy/Immunology.',
-          vitals: { BP: '88/54 → 118/76 (post-epi)', HR: '132 → 92', RR: '26 → 16', Temp: '98.6°F', Wt: '138 lbs' },
-          assessment: 'Grade III anaphylaxis — suspected tree nut (walnut/cashew). Hypotension, bronchospasm, urticaria.',
-          plan: 'Epinephrine 0.3mg IM ×1 (response excellent). IV diphenhydramine 50mg. Methylprednisolone 125mg IV. Discharged with 2× EpiPen auto-injectors. Strict avoidance of tree nuts and cross-contamination foods. Allergy/Immunology referral for SPT and OFC consideration.',
+          summary: 'Presented with acute onset urticaria, angioedema, and bronchospasm 20 minutes after eating at a restaurant (suspected tree nut exposure). BP 88/54 on arrival. Epinephrine 0.3mg IM administered — excellent response. IV diphenhydramine + methylprednisolone given. Observed ×6 hours — biphasic reaction did not occur. Discharged with EpiPen ×2 and referral to Allergy/Immunology. Allergy workup confirmed peanut and tree nut sensitization. Started SCIT for allergic rhinitis (grass, tree pollen) given comorbid rhinitis.',
+          vitals: { BP: '88/54 → 118/76 (post-epi)', HR: '132 → 92', RR: '26 → 16', Temp: '98.6°F' },
+          assessment: 'Grade III anaphylaxis — suspected tree nut (walnut/cashew). Hypotension, bronchospasm, urticaria. SCIT initiated for allergic rhinitis.',
+          plan: 'Epinephrine IM ×1. Diphenhydramine IV. Methylprednisolone IV. 2× EpiPen on discharge. Food allergy panel ordered. SCIT build-up started.',
           labs: [
             { name: 'Serum tryptase', val: '42.8 ng/mL (peak)', flag: 'H' },
-            { name: 'ABG', val: 'pH 7.38, pO2 92 on 2L NC', flag: '' }
+            { name: 'Peanut IgE', val: '18.4 kU/L', flag: 'H' },
+            { name: 'Walnut IgE', val: '12.1 kU/L', flag: 'H' }
+          ]
+        },
+        {
+          sequence: 2,
+          caseId: 'insect-sting-anaphylaxis',
+          setting: 'Emergency Department',
+          date: '3 weeks ago',
+          provider: 'Dr. R. Patel, Emergency Medicine',
+          summary: 'Stung by yellow jacket while gardening. Within 5 minutes: generalized urticaria, throat tightness, dizziness, BP 86/52. EpiPen used at scene — partial improvement. In ED: epinephrine 0.3mg IM ×2, diphenhydramine, methylprednisolone, 1L NS. Observed 6 hours — no biphasic reaction. Second anaphylaxis event in 14 months. Discharged with new EpiPen prescription and urgent allergy follow-up for venom immunotherapy evaluation.',
+          vitals: { BP: '86/52', HR: '134', RR: '24', SpO2: '93%' },
+          assessment: 'Grade III anaphylaxis to yellow jacket venom. Second systemic anaphylaxis. Prior SCIT for inhalant allergens — no venom coverage.',
+          plan: 'Epinephrine IM ×2. IV fluids. Antihistamine + steroid. 6-hr observation. EpiPen ×2 on discharge. Urgent allergy follow-up for VIT evaluation.',
+          labs: [
+            { name: 'Tryptase (acute)', val: '38.4 ng/mL', flag: 'H' },
+            { name: 'Tryptase (baseline, 24hr)', val: '6.2 ng/mL', flag: '' }
+          ]
+        },
+        {
+          sequence: 3,
+          caseId: 'anaphylaxis-v2',
+          setting: 'Allergy / Immunology Clinic — Follow-up',
+          date: '1 week ago',
+          provider: 'Dr. M. Singh, Allergy / Immunology',
+          summary: 'Urgent follow-up post-venom anaphylaxis. Baseline tryptase 6.2 ng/mL (normal — 20+2 rule not triggered). Venom skin testing positive for yellow jacket and mixed vespid. Venom immunotherapy (VIT) initiated — build-up phase begun. Two-anaphylaxis history now documented: food (peanut/tree nut) and venom. EpiPen technique re-educated. Discussed carrying ×2 auto-injectors at all times given pattern of severe reactions.',
+          vitals: { BP: '122/78', HR: '76', RR: '14', SpO2: '100%' },
+          assessment: 'Yellow jacket anaphylaxis — Grade III. VIT candidate, build-up started. Baseline tryptase normal. Dual allergen sensitization (food + venom).',
+          plan: 'VIT build-up q1 week ×8 weeks, then maintenance q4-6 weeks ×3-5 years. Continue food allergen avoidance + EpiPen ×2. Medical alert bracelet recommended.',
+          labs: [
+            { name: 'Yellow jacket IgE', val: '12.4 kU/L', flag: 'H' },
+            { name: 'Mixed vespid IgE', val: '8.7 kU/L', flag: 'H' },
+            { name: 'Baseline tryptase', val: '6.2 ng/mL', flag: '' }
           ]
         }
       ]
@@ -299,19 +332,52 @@
       patientName: 'Tariq Hassan',
       dob: '2003-06-08',
       mrn: '845203',
-      cases: ['meningitis-v1'],
+      cases: ['meningitis-v1', 'encephalitis', 'brain-abscess'],
       encounters: [
         {
           sequence: 1,
           caseId: 'meningitis-v1',
           setting: 'University Health Services',
-          date: '3 days ago',
+          date: '3 weeks ago',
           provider: 'NP D. Osei, University Health',
           summary: 'Seen for 6-hour history of headache and neck stiffness. Thought to be tension headache. Ibuprofen 600mg dispensed. Advised to rest and return if worsening. Meningism not recognized — Kernig/Brudzinski not tested. Patient lives in dormitory. No note of petechiae on skin check.',
-          vitals: { BP: '122/78', HR: '96', RR: '16', Temp: '38.4°C', Wt: '168 lbs' },
+          vitals: { BP: '122/78', HR: '96', RR: '16', Temp: '38.4°C' },
           assessment: 'Headache, presumed tension-type. Low-grade fever attributed to viral URI.',
           plan: 'Ibuprofen 600mg q6h PRN. Hydration. Return if symptoms worsen or fever spikes.',
           labs: []
+        },
+        {
+          sequence: 2,
+          caseId: 'encephalitis',
+          setting: 'Emergency Department — 8 hours later',
+          date: '3 weeks ago (same day)',
+          provider: 'Dr. J. Nguyen, Emergency Medicine',
+          summary: 'Returned to ED 8 hours later with fever 39.8°C, worsening headache, photophobia, and new petechial rash on trunk. Kernig and Brudzinski signs positive. CT head: no mass effect. LP performed immediately: WBC 2,400 (92% PMN), glucose 28, protein 180, Gram stain — Gram-negative diplococci. Ceftriaxone + dexamethasone started before LP result confirmed. Blood cultures drawn × 2. Meningococcal serogroup B confirmed. ICU admission. Droplet precautions ×24hr post-antibiotics. Close contacts given rifampin prophylaxis.',
+          vitals: { BP: '96/58', HR: '128', RR: '22', Temp: '39.8°C', SpO2: '96%' },
+          assessment: 'Bacterial meningitis — N. meningitidis serogroup B. Septic shock. Missed on initial visit 8 hours prior.',
+          plan: 'Ceftriaxone 2g IV q12h ×7d. Dexamethasone 0.15mg/kg q6h ×4d. Fluid resuscitation. ICU admission. Contact tracing initiated.',
+          labs: [
+            { name: 'WBC', val: '18,400/μL', flag: 'H' },
+            { name: 'Lactate', val: '4.2 mmol/L', flag: 'H' },
+            { name: 'CSF glucose', val: '28 mg/dL', flag: 'L' },
+            { name: 'CSF protein', val: '180 mg/dL', flag: 'H' }
+          ]
+        },
+        {
+          sequence: 3,
+          caseId: 'brain-abscess',
+          setting: 'Neurosurgery Consult — Hospital Day 18',
+          date: '3 days ago',
+          provider: 'Dr. K. Williams, Neurosurgery',
+          summary: 'Day 18 of hospitalization. Fever resolved by day 5, but new confusion and focal right temporal headache developed on day 14. Repeat MRI brain: new ring-enhancing lesion 1.8cm right temporal lobe with surrounding edema. Stereotactic aspiration performed: viridans streptococci on culture (hematogenous seeding during bacteremia). Penicillin G started. Dexamethasone continued for cerebral edema. Prior meningococcal bacteremia created seeding opportunity — uncommon but well-documented complication.',
+          vitals: { BP: '134/82', HR: '78', RR: '15', Temp: '37.8°C' },
+          assessment: 'Secondary brain abscess — viridans strep seeded hematogenously during meningococcal bacteremia. Size 1.8cm — aspiration appropriate.',
+          plan: 'Penicillin G 4M units IV q4h ×6 weeks. Serial MRI q2 weeks. Echo to exclude endocarditis. Neurosurgery follow-up.',
+          labs: [
+            { name: 'ESR', val: '62 mm/hr', flag: 'H' },
+            { name: 'CRP', val: '4.8 mg/dL', flag: 'H' },
+            { name: 'Abscess culture', val: 'Viridans strep', flag: 'H' }
+          ]
         }
       ]
     },
@@ -350,19 +416,56 @@
       patientName: 'Bernard Kowalski',
       dob: '1950-12-05',
       mrn: '1047839',
-      cases: ['pneumonia'],
+      cases: ['pneumonia', 'cap-with-sepsis', 'pneumonia-on-copd'],
       encounters: [
         {
           sequence: 1,
           caseId: 'pneumonia',
           setting: 'Outpatient Clinic',
-          date: '5 days ago',
+          date: '8 weeks ago',
           provider: 'Dr. W. Oduya, Internal Medicine',
-          summary: 'Seen for 3-day URI symptoms. Productive cough, low-grade fever. CXR not obtained. Prescribed azithromycin 250mg ×5 days for presumed atypical pneumonia. No CURB-65 score calculated. No SpO2 checked in office.',
-          vitals: { BP: '136/84', HR: '88', RR: '18', Temp: '38.2°C', Wt: '188 lbs' },
-          assessment: 'Upper respiratory infection vs early pneumonia. Empiric treatment given.',
-          plan: 'Azithromycin 250mg daily ×5 days. Rest, fluids. Return if worsening.',
-          labs: []
+          summary: 'Seen for 3-day URI symptoms. Productive cough, low-grade fever. CXR not obtained. Prescribed azithromycin 250mg ×5 days for presumed atypical pneumonia. No CURB-65 score calculated. No SpO2 checked in office. PFTs ordered given 45 pack-year smoking history — FEV1 54% (GOLD II COPD, newly diagnosed). Inhaler education provided. Pneumococcal vaccination not documented.',
+          vitals: { BP: '136/84', HR: '88', RR: '18', Temp: '38.2°C' },
+          assessment: 'Upper respiratory infection vs early pneumonia. Empiric treatment given. New COPD diagnosis (GOLD II) based on PFTs.',
+          plan: 'Azithromycin 250mg ×5d. Albuterol MDI PRN. PCV15 ordered (not yet given). COPD education. Smoking cessation counseling.',
+          labs: [
+            { name: 'FEV1', val: '54% predicted', flag: 'L' },
+            { name: 'FEV1/FVC', val: '0.61', flag: 'L' }
+          ]
+        },
+        {
+          sequence: 2,
+          caseId: 'cap-with-sepsis',
+          setting: 'Emergency Department — 3 days later',
+          date: '5 weeks ago',
+          provider: 'Dr. M. Okafor, Emergency Medicine',
+          summary: 'Day 3 of oral antibiotics — worsening. Bilateral crackles, WBC 22K, lactate 3.1, BP 94/62. CURB-65 score 4 — ICU admission. Streptococcus pneumoniae bacteremia on blood cultures. IV ceftriaxone + azithromycin. Vasopressors not required after 2L IVF. O2 peaked at 6L NC. Pneumococcal vaccination given on discharge. Diagnosed with COPD + pneumonia — triple-inhaler therapy initiated.',
+          vitals: { BP: '94/62', HR: '118', RR: '28', Temp: '39.2°C', SpO2: '88% RA' },
+          assessment: 'Severe CAP with sepsis — S. pneumoniae bacteremia. CURB-65 4. Underlying GOLD II COPD. Azithromycin monotherapy was insufficient.',
+          plan: 'IV ceftriaxone + azithromycin. 2L IVF. ICU admission. Blood cultures ×2. PCV15 given on discharge. Start fluticasone/umeclidinium/vilanterol. Smoking cessation: varenicline.',
+          labs: [
+            { name: 'WBC', val: '22,100/μL', flag: 'H' },
+            { name: 'Lactate', val: '3.1 mmol/L', flag: 'H' },
+            { name: 'Procalcitonin', val: '4.8 ng/mL', flag: 'H' },
+            { name: 'Blood cultures', val: 'S. pneumoniae', flag: 'H' }
+          ]
+        },
+        {
+          sequence: 3,
+          caseId: 'pneumonia-on-copd',
+          setting: 'Emergency Department — 4 weeks later',
+          date: '1 week ago',
+          provider: 'Dr. R. Singh, Emergency Medicine',
+          summary: 'Third pneumonia in 8 weeks. COPD exacerbation superimposed on LLL infiltrate. Despite triple inhaler therapy and smoking cessation, LFTs revealed IgG 580 (low normal). Prednisone 40mg ×5d, piperacillin-tazobactam IV (broader coverage given recurrent pneumonia). Pulmonology consulted. Immunodeficiency workup ordered — quantitative Ig, flow cytometry. Third pneumonia in 8 weeks raises concern for underlying immune defect or structural lung disease.',
+          vitals: { BP: '138/88', HR: '104', RR: '26', Temp: '38.6°C', SpO2: '86% RA' },
+          assessment: 'Pneumonia superimposed on GOLD II COPD — third episode in 8 weeks. Recurrent pattern warrants immunodeficiency and bronchiectasis workup.',
+          plan: 'IV pip-tazo. Prednisone 40mg ×5d. Continue triple inhaler. Quantitative Ig, HIV, flow cytometry. High-res CT chest to exclude bronchiectasis. Bronchoscopy if no improvement.',
+          labs: [
+            { name: 'WBC', val: '16,800/μL', flag: 'H' },
+            { name: 'IgG', val: '580 mg/dL', flag: 'L' },
+            { name: 'IgA', val: '88 mg/dL', flag: '' },
+            { name: 'IgM', val: '42 mg/dL', flag: 'L' }
+          ]
         }
       ]
     },
@@ -373,27 +476,63 @@
       patientName: 'Colin Nakamura',
       dob: '1970-08-17',
       mrn: '1139204',
-      cases: ['alcohol-withdrawal'],
+      cases: ['alcohol-withdrawal', 'alcoholic-hepatitis', 'alcoholic-ketoacidosis'],
       encounters: [
         {
           sequence: 1,
           caseId: 'alcohol-withdrawal',
           setting: 'Primary Care Clinic',
-          date: '2 weeks ago',
+          date: '5 weeks ago',
           provider: 'Dr. J. Walsh, Family Medicine',
-          summary: 'Annual physical. AUDIT-C score 10 — positive screen for severe AUD. Patient discloses daily fifth of vodka ×6 years. Discussed risks of abrupt cessation — seizure and DTs explained in detail. Patient declined inpatient detox referral. Agreed to gradual supervised taper with weekly check-ins. Thiamine 100mg daily prescribed. Naltrexone 50mg daily started. Next appointment scheduled in 1 week. Patient did not return for scheduled appointment.',
-          vitals: { BP: '148/94', HR: '94', RR: '16', Temp: '98.6°F', Wt: '174 lbs' },
-          assessment: 'Severe alcohol use disorder. High risk for withdrawal seizure/DTs given quantity and duration of use.',
-          plan: 'AUDIT-C 10 — counseling provided. Thiamine 100mg daily. Naltrexone 50mg daily. Referral to addiction medicine offered — declined. Weekly office visits for supervised taper monitoring. CAGE questionnaire documented.',
+          summary: 'Annual physical. AUDIT-C score 10 — positive screen for severe AUD. Patient discloses daily fifth of vodka ×6 years. Discussed risks of abrupt cessation — seizure and DTs explained. Patient declined inpatient detox. Agreed to gradual supervised taper with weekly check-ins. Thiamine 100mg daily prescribed. Naltrexone deferred (LFTs abnormal). Next appointment in 1 week. Patient did not return.',
+          vitals: { BP: '148/94', HR: '94', RR: '16', Temp: '98.6°F' },
+          assessment: 'Severe alcohol use disorder — high risk for withdrawal seizure/DTs. Declined inpatient detox. LFTs suggest underlying alcoholic hepatitis.',
+          plan: 'AUDIT-C 10. Thiamine 100mg daily. Folate. Counseling. Weekly office visits for taper monitoring. Naltrexone deferred — AST 78, ALT 44.',
           labs: [
-            { name: 'LFTs', val: 'AST 78, ALT 44, Alk Phos 112', flag: 'H' },
+            { name: 'AST', val: '78 IU/L', flag: 'H' },
+            { name: 'ALT', val: '44 IU/L', flag: 'H' },
             { name: 'GGT', val: '214 U/L', flag: 'H' },
-            { name: 'MCV', val: '102 fL (macrocytosis)', flag: 'H' },
-            { name: 'Platelets', val: '118 k/µL', flag: 'L' }
+            { name: 'MCV', val: '102 fL', flag: 'H' }
+          ]
+        },
+        {
+          sequence: 2,
+          caseId: 'alcoholic-hepatitis',
+          setting: 'Emergency Department — 2 weeks later',
+          date: '3 weeks ago',
+          provider: 'Dr. A. Torres, Emergency Medicine',
+          summary: 'Stopped drinking abruptly 3 days ago. Now jaundice ×2 days, RUQ pain, fever, confusion. CIWA-Ar 22 on arrival — lorazepam protocol initiated. Maddrey DF 44 (severe alcoholic hepatitis). No GI bleeding. Prednisolone 40mg ×28 days started. Thiamine 100mg IV ×3d before glucose. Lille score at day 7: 0.32 (responder — steroids continued). Hepatology consulted. Social work addiction referral placed.',
+          vitals: { BP: '108/68', HR: '112', RR: '18', Temp: '38.3°C' },
+          assessment: 'Severe alcoholic hepatitis (Maddrey DF 44) + concurrent alcohol withdrawal (CIWA 22). Steroid responder at day 7 (Lille 0.32).',
+          plan: 'Prednisolone 40mg ×28d. CIWA lorazepam protocol. Thiamine IV ×3d. High-protein nutrition. Infection monitoring. Abstinence counseling.',
+          labs: [
+            { name: 'Total bilirubin', val: '14.2 mg/dL', flag: 'H' },
+            { name: 'PT/INR', val: '1.9', flag: 'H' },
+            { name: 'Albumin', val: '2.3 g/dL', flag: 'L' },
+            { name: 'AST:ALT ratio', val: '3.2:1', flag: 'H' }
+          ]
+        },
+        {
+          sequence: 3,
+          caseId: 'alcoholic-ketoacidosis',
+          setting: 'Emergency Department — 2 weeks later',
+          date: '1 week ago',
+          provider: 'Dr. T. Okafor, Emergency Medicine',
+          summary: 'Relapsed 10 days after discharge from alcoholic hepatitis admission. Stopped drinking again 36hr ago. Now vomiting ×1 day, unable to eat. Anion gap 26, pH 7.21, bicarb 12, glucose 68, BOHB elevated. Ethanol level undetectable. Classic AKA — starvation + recent cessation. D5NS + thiamine before glucose. Gap closed in 12 hours. Third presentation in 5 weeks. Addiction psychiatry initiated MAT with acamprosate (naltrexone still contraindicated — hepatic disease). Residential treatment placement discussed.',
+          vitals: { BP: '96/62', HR: '122', RR: '26', Temp: '37.0°C' },
+          assessment: 'Alcoholic ketoacidosis — starvation + alcohol cessation. Underlying alcoholic liver disease. Third major presentation in 5 weeks — pattern of relapse requiring intensive intervention.',
+          plan: 'D5NS bolus. Thiamine 100mg IV before any glucose. Antiemetics. BMP q4h. Addiction medicine for MAT (acamprosate). Residential treatment application.',
+          labs: [
+            { name: 'pH', val: '7.21', flag: 'L' },
+            { name: 'Bicarb', val: '12 mEq/L', flag: 'L' },
+            { name: 'Anion gap', val: '26', flag: 'H' },
+            { name: 'Glucose', val: '68 mg/dL', flag: 'L' },
+            { name: 'BOHB', val: '8.4 mmol/L', flag: 'H' }
           ]
         }
       ]
     }
+
 
   ]; // end CHAINS
 
