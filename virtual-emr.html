@@ -1740,11 +1740,12 @@ function getSettingLabel() {
 // ─── PATIENT CONTINUITY BADGE + BUTTON INJECTION ───
 // Scans the rendered patient list for case IDs that belong to continuity chains
 // and injects a "Prior chart available" badge plus a "Continue this patient →" button.
-function _injectContinuityBadges() {
+function _injectContinuityBadges(attempt) {
   if (!window.PatientContinuity) return;
+  attempt = attempt || 1;
   // Patient cards rendered by patient-list.js use [data-case-id] attributes.
   // We also support <a href="?case=ID"> anchors as a fallback.
-  requestAnimationFrame(function() {
+  var doInject = function() {
     // Strategy 1: data-case-id attribute on any element
     var cards = document.querySelectorAll('[data-case-id]');
     cards.forEach(function(card) {
@@ -1773,7 +1774,14 @@ function _injectContinuityBadges() {
         _applyContBadge(el, caseId);
       }
     });
-  });
+  };
+  // Retry up to 3x if DOM not ready yet
+  var cards = document.querySelectorAll('[data-case-id], a[href*="?case="]');
+  if (cards.length > 0 || attempt >= 3) {
+    requestAnimationFrame(doInject);
+  } else {
+    setTimeout(function() { _injectContinuityBadges(attempt + 1); }, 250);
+  }
 }
 
 function _applyContBadge(container, caseId, anchorEl) {

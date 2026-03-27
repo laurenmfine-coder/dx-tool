@@ -606,12 +606,102 @@ function buildOpener(topic, structured) {
   return unstructuredOpeners[Math.floor(Math.random() * unstructuredOpeners.length)];
 }
 
+// Topic → recommended case mapping
+const TOPIC_CASE_MAP = {
+  'anaphylaxis':       {case:'anaphylaxis',              label:'Anaphylaxis — Aaliyah Johnson'},
+  'urticaria':         {case:'acute-urticaria',           label:'Acute Urticaria — ED'},
+  'asthma':            {case:'asthma-exacerbation',       label:'Asthma Exacerbation — ED'},
+  'food-allergy':      {case:'peanut-allergy-anaphylaxis',label:'Peanut Anaphylaxis — ED'},
+  'drug-allergy':      {case:'drug-allergy-vancomycin-rms',label:'Drug Allergy — Vancomycin RMS'},
+  'allergic-rhinitis': {case:'allergic-rhinitis-uncontrolled',label:'Allergic Rhinitis — Clinic'},
+  'atopic-derm':       {case:'atopic-dermatitis-severe',  label:'Severe Atopic Dermatitis'},
+  'contact-derm':      {case:'contact-dermatitis-occupational',label:'Occupational Contact Dermatitis'},
+  'insect-sting':      {case:'insect-sting-anaphylaxis',  label:'Insect Sting Anaphylaxis — ED'},
+  'mastocytosis':      {case:'mastocytosis',              label:'Mastocytosis — Clinic'},
+  'sjs-ten':           {case:'sjs-ten',                   label:'SJS/TEN — Dermatology'},
+  'hae':               {case:'hereditary-angioedema',     label:'Hereditary Angioedema — ED'},
+  'eoe':               {case:'eoe-adult',                 label:'EoE — Gastroenterology'},
+  'cvid':              {case:'cvid-presentation',         label:'CVID — Immunology Clinic'},
+  'fpies':             {case:'fpies-acute',               label:'FPIES — Pediatric ED'},
+  'nsaid-hypersens':   {case:'nsaid-hypersensitivity',    label:'NSAID Hypersensitivity'},
+  'stemi':             {case:'stemi-v1',                  label:'STEMI — Cath Lab'},
+  'nstemi':            {case:'nstemi-v1',                 label:'NSTEMI — ED'},
+  'heart-failure':     {case:'chf-exacerbation',          label:'CHF Exacerbation — ED'},
+  'afib':              {case:'atrial-fibrillation',       label:'A-Fib with RVR — ED'},
+  'sepsis-id':         {case:'sepsisseptic-shock',        label:'Septic Shock — MICU'},
+  'sepsis-em':         {case:'sepsisseptic-shock',        label:'Septic Shock — MICU'},
+  'pneumonia-id':      {case:'pneumonia',                 label:'CAP — Medicine Floor'},
+  'dka-em':            {case:'dka-v1',                    label:'DKA — ED'},
+  'stroke-em':         {case:'stroke-v1',                 label:'Ischemic Stroke — ED'},
+  'pe-em':             {case:'pe-v1',                     label:'Pulmonary Embolism — ED'},
+  'meningitis-id':     {case:'meningitis-v1',             label:'Bacterial Meningitis — ED'},
+  'alcohol-withdrawal':{case:'alcohol-withdrawal',        label:'Alcohol Withdrawal — ED'},
+  'cognitive-bias':    {case:'sepsisseptic-shock',        label:'Septic Shock — test your bias awareness'},
+  'ddx-framework':     {case:'acute-ischemic-stroke',     label:'Stroke — practice your DDx framework'},
+  'pretest-prob':      {case:'pe-v1',                     label:'PE — apply pre-test probability'},
+  'illness-script':    {case:'stemi-v1',                  label:'STEMI — match your illness script'},
+};
+
 function endSession() {
+  const savedTopic = currentTopic;
+  // Show debrief panel before resetting
+  if (savedTopic) {
+    showEndPanel(savedTopic);
+  } else {
+    resetToWelcome();
+  }
+}
+
+function showEndPanel(topic) {
+  document.getElementById('chatSession').style.display = 'none';
+  const welcome = document.getElementById('welcomeState');
+  welcome.style.display = 'flex';
+
+  const caseRec = TOPIC_CASE_MAP[topic.id];
+  const caseBtn = caseRec
+    ? `<a href="../virtual-emr.html?case=${caseRec.case}" style="display:block;background:var(--accent,#2874A6);color:#fff;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:700;font-size:13px;text-align:center">🏥 Try it now: ${caseRec.label} →</a>`
+    : `<a href="../casedx.html" style="display:block;background:var(--accent,#2874A6);color:#fff;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:700;font-size:13px;text-align:center">🏥 Browse cases →</a>`;
+
+  const mechMap = {
+    'anaphylaxis':'anaphylaxis-module','asthma':'asthma-module',
+    'urticaria':'urticaria-module','drug-allergy':'drug-allergy-module',
+    'food-allergy':'food-allergy-module','allergic-rhinitis':'rhinitis-module',
+    'atopic-derm':'atopic-derm-module','mastocytosis':'mastocytosis-mcas-module'
+  };
+  const mechMod = mechMap[topic.id];
+  const mechBtn = mechMod
+    ? `<a href="../mechanism/${mechMod}.html" style="display:block;background:transparent;border:1.5px solid var(--border,#dce3eb);border-radius:10px;padding:11px 16px;text-decoration:none;font-weight:600;font-size:13px;text-align:center;color:var(--text,#1e293b)">🔬 Review MechanismDx module</a>`
+    : '';
+
+  // Inject debrief panel above picker
+  const existing = document.getElementById('endPanel');
+  if (existing) existing.remove();
+
+  const panel = document.createElement('div');
+  panel.id = 'endPanel';
+  panel.style.cssText = 'background:linear-gradient(135deg,#f0f7ff,#fafbff);border:1.5px solid var(--border,#dce3eb);border-radius:14px;padding:20px;margin-bottom:20px;max-width:480px;width:100%';
+  panel.innerHTML = `
+    <div style="font-size:22px;margin-bottom:8px">✅</div>
+    <div style="font-weight:700;font-size:15px;margin-bottom:4px">${topic.name} — session complete</div>
+    <div style="font-size:12px;color:var(--dim,#64748b);margin-bottom:16px">Knowledge without application fades. Lock it in with a real case.</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      ${caseBtn}
+      ${mechBtn}
+      <button onclick="resetToWelcome()" style="background:transparent;border:none;color:var(--dim,#64748b);font-size:12px;cursor:pointer;padding:8px;text-decoration:underline">Choose a new topic instead</button>
+    </div>
+  `;
+
+  // Insert before the topic picker
+  const picker = document.getElementById('topicPicker') || welcome.querySelector('.topic-grid') || welcome.firstChild;
+  welcome.insertBefore(panel, welcome.firstChild);
+}
+
+function resetToWelcome() {
   currentTopic = null;
   messages = [];
-  document.getElementById('chatSession').style.display = 'none';
-  document.getElementById('welcomeState').style.display = 'flex';
   document.getElementById('messages').innerHTML = '';
+  const ep = document.getElementById('endPanel');
+  if (ep) ep.remove();
   const url = new URL(window.location);
   url.searchParams.delete('topic');
   window.history.replaceState({}, '', url);
@@ -778,7 +868,12 @@ function showBridgeOptions() {
 function showCaseOptions() {
   logEvent('coach_bridge_taken', { from:'coach', to:'case', topic: currentTopic?.name, session_id: sessionId });
   sessionStorage.setItem('rdx_coach_return', JSON.stringify({ topic: currentTopic?.name, url: window.location.href }));
-  window.location.href = `../case-browser.html?topic=${encodeURIComponent(currentTopic?.name || '')}`;
+  const caseRec = TOPIC_CASE_MAP[currentTopic?.id];
+  if (caseRec) {
+    window.location.href = `../virtual-emr.html?case=${caseRec.case}`;
+  } else {
+    window.location.href = `../casedx.html`;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════

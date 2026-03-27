@@ -249,7 +249,15 @@
       // Fallback re-render if global render() is not available
       var container = document.querySelector('[data-tab="crt"]') || document.getElementById('tab-crt');
       if (container) {
+        // Preserve RPFS panel if it exists before re-render
+        var existingPanel = document.getElementById('rdx-rpfs-panel');
+        var panelHtml = existingPanel ? existingPanel.outerHTML : '';
         container.innerHTML = CRTChart.renderTab();
+        // Re-inject RPFS panel after render
+        if (panelHtml) {
+          var target = container.querySelector('.section-card:last-child') || container;
+          target.insertAdjacentHTML('beforeend', panelHtml);
+        }
       }
     }
   };
@@ -267,13 +275,31 @@
   }
 
   function renderNoCRTMessage(caseId) {
-    return '<div class="section-card"><div style="text-align:center;padding:40px 20px;color:#64748b">' +
-      '<div style="font-size:36px;margin-bottom:12px">📋</div>' +
-      '<h3 style="font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:8px">DDx Builder</h3>' +
-      '<p style="font-size:13px;line-height:1.6;margin-bottom:16px">No interactive Clinical Reasoning Trainer available for this case yet.</p>' +
-      '<p style="font-size:12px;color:#94a3b8">Case ID: ' + esc(caseId) + '</p>' +
+    // Show RPFS summary if learner has prior session data
+    var rpfsSummary = '';
+    if (window.RDX_RPFS && RDX_RPFS.getSummary) {
+      var summary = RDX_RPFS.getSummary();
+      if (summary && summary.dimensions) {
+        var dims = Object.keys(summary.dimensions);
+        var weakest = dims.slice().sort(function(a,b){ return summary.dimensions[a].score - summary.dimensions[b].score; })[0];
+        var score = summary.dimensions[weakest] ? summary.dimensions[weakest].score : 0;
+        rpfsSummary = '<div style="margin:12px 0;padding:10px 14px;background:#FEF3C7;border-left:3px solid #D97706;border-radius:0 8px 8px 0;text-align:left">' +
+          '<div style="font-size:11px;font-weight:700;color:#92400E;margin-bottom:3px">Your current focus area</div>' +
+          '<div style="font-size:12px;color:#78350F">' + weakest + ' — score ' + score + '. Use this case to work on it.</div>' +
+          '</div>';
+      }
+    }
+    return '<div class="section-card"><div style="text-align:center;padding:32px 20px 20px;color:#64748b">' +
+      '<div style="font-size:36px;margin-bottom:10px">🩺</div>' +
+      '<h3 style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:6px">Clinical Reasoning Practice</h3>' +
+      '<p style="font-size:12px;line-height:1.6;margin-bottom:4px;color:#64748b">Full CRT data coming soon for this case.</p>' +
+      rpfsSummary +
+      '<div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center">' +
+      '<a href="consult-callback.html" style="font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;border:1px solid #2874A6;border-radius:6px;padding:5px 10px">📞 Call a specialist</a>' +
+      '<a href="CoachDx/index.html" style="font-size:12px;font-weight:600;color:#7C3AED;text-decoration:none;border:1px solid #7C3AED;border-radius:6px;padding:5px 10px">🤖 CoachDx</a>' +
+      '<a href="learning-analytics.html" style="font-size:12px;font-weight:600;color:#64748b;text-decoration:none;border:1px solid #CBD5E1;border-radius:6px;padding:5px 10px">📊 My Analytics</a>' +
       '</div>' +
-      // Fall back to DDx Builder if available
+      '</div>' +
       ((window.DdxBuilder && DdxBuilder.renderTab) ? DdxBuilder.renderTab() : '') +
       '</div>';
   }

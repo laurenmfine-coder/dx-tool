@@ -672,6 +672,42 @@ const HANDOFF_POOL = (function(){
 
 // ═══ SETUP STATE ═══
 let listMode = 'random';
+
+// ── Auto-configure from history + difficulty param ──────────────────────────
+(function initFromHistory() {
+  try {
+    // Apply difficulty from URL param (set by progression buttons)
+    var params = new URLSearchParams(window.location.search);
+    var diffParam = params.get('difficulty');
+    if(diffParam && window.RDX_DIFF_CONFIG && window.RDX_DIFF_CONFIG[diffParam]) {
+      var cfg = window.RDX_DIFF_CONFIG[diffParam];
+      var ptSlider = document.getElementById('pt-count');
+      var ptVal = document.getElementById('pt-count-val');
+      if(ptSlider && cfg.nightFloatPatients) {
+        ptSlider.value = Math.min(12, Math.max(4, cfg.nightFloatPatients));
+        if(ptVal) ptVal.textContent = ptSlider.value;
+      }
+    }
+    // Show streak banner if returning learner
+    var nfHist = JSON.parse(localStorage.getItem('rdx-nf-history') || '[]');
+    if(nfHist.length >= 1) {
+      var last = nfHist[nfHist.length - 1];
+      var streak = 0;
+      for(var i = nfHist.length - 1; i >= 0; i--) {
+        if(nfHist[i].grade === 'A' || nfHist[i].grade === 'B') streak++;
+        else break;
+      }
+      var banner = document.createElement('div');
+      banner.style.cssText = 'margin-bottom:12px;padding:8px 14px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);border-radius:8px;font-size:12px;color:#34D399;text-align:center';
+      var gradeColors = {A:'#34D399',B:'#60A5FA',C:'#FBBF24',D:'#EF4444'};
+      banner.innerHTML = '📋 Last shift: <strong style="color:' + (gradeColors[last.grade]||'#fff') + '">' + last.grade + ' (' + last.overallPct + '%)</strong>'
+        + (streak >= 2 ? ' &nbsp;·&nbsp; 🔥 ' + streak + '-shift streak' : '')
+        + ' &nbsp;·&nbsp; ' + nfHist.length + ' total shifts';
+      var setupEl = document.getElementById('setup');
+      if(setupEl) setupEl.insertBefore(banner, setupEl.querySelector('.setup-grid') || setupEl.firstChild);
+    }
+  } catch(e) {}
+})();
 let selectedTopics = new Set();
 let practiceMode = 'pages';
 let shiftPatients = [];
@@ -1349,6 +1385,42 @@ function showSummary() {
     });
     if(nfHist.length > 100) nfHist = nfHist.slice(-100);
     localStorage.setItem('rdx-nf-history', JSON.stringify(nfHist));
+
+    // ── Show streak + progression panel ───────────────────────────────────
+    var recent = nfHist.slice(-5);
+    var streak = 0;
+    for(var i = recent.length - 1; i >= 0; i--) {
+      if(recent[i].grade === 'A' || recent[i].grade === 'B') streak++;
+      else break;
+    }
+    var allGrades = nfHist.map(function(h){ return h.grade; });
+    var best = allGrades.includes('A') ? 'A' : allGrades.includes('B') ? 'B' : allGrades.includes('C') ? 'C' : 'D';
+
+    // Recommend next difficulty based on recent performance
+    var recentPcts = recent.map(function(h){ return h.overallPct; });
+    var avgRecent = recentPcts.length ? Math.round(recentPcts.reduce(function(a,b){return a+b;},0)/recentPcts.length) : pct;
+    var nextDiff = avgRecent >= 85 ? 'advanced' : avgRecent >= 70 ? 'standard' : 'guided';
+    var diffLabels = { guided: '🌱 Guided', standard: '🎯 Standard', advanced: '🔥 Advanced' };
+
+    var progressHtml = '<div style="margin-top:16px;padding:14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;text-align:left">';
+    progressHtml += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:10px">Your Progress</div>';
+    progressHtml += '<div style="display:flex;gap:16px;margin-bottom:10px">';
+    progressHtml += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:#FBBF24">' + nfHist.length + '</div><div style="font-size:10px;color:var(--dim)">Shifts done</div></div>';
+    progressHtml += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:#34D399">' + streak + '</div><div style="font-size:10px;color:var(--dim)">A/B streak</div></div>';
+    progressHtml += '<div style="text-align:center"><div style="font-size:22px;font-weight:700;color:#60A5FA">' + best + '</div><div style="font-size:10px;color:var(--dim)">Best grade</div></div>';
+    progressHtml += '</div>';
+    if(nfHist.length >= 2) {
+      progressHtml += '<div style="font-size:12px;color:var(--dim);margin-bottom:10px">Based on your last ' + recent.length + ' shifts (avg ' + avgRecent + '%), recommended next level: <strong style="color:#FBBF24">' + diffLabels[nextDiff] + '</strong></div>';
+      progressHtml += '<div style="display:flex;gap:8px">';
+      progressHtml += '<a href="night-float.html?difficulty=' + nextDiff + '" style="flex:1;text-align:center;padding:8px;background:var(--accent,#2874A6);color:#fff;border-radius:7px;text-decoration:none;font-size:12px;font-weight:700">Next Shift — ' + diffLabels[nextDiff] + ' →</a>';
+      progressHtml += '</div>';
+    } else {
+      progressHtml += '<div style="font-size:12px;color:var(--dim)">Complete more shifts to unlock adaptive difficulty.</div>';
+    }
+    progressHtml += '</div>';
+
+    var sumDetails = document.getElementById('sum-details');
+    if(sumDetails) sumDetails.insertAdjacentHTML('beforeend', progressHtml);
   } catch(e) {}
 }
 
