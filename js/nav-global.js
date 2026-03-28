@@ -1,4 +1,4 @@
-// ReasonDx Global Navigation — self-contained, no external CSS dependency
+// ReasonDx Global Navigation — self-contained, auth-aware
 (function() {
   if (document.getElementById('rdx-global-nav')) return;
 
@@ -16,7 +16,6 @@
     #rdx-global-nav .rdx-logo {
       font-size: 1.15rem; font-weight: 800; color: #fff;
       text-decoration: none; letter-spacing: 0.01em; flex-shrink: 0;
-      font-family: -apple-system, sans-serif;
     }
     #rdx-global-nav .rdx-logo span { color: #85c1e9; }
     #rdx-global-nav .rdx-nav-links {
@@ -43,8 +42,7 @@
     #rdx-global-nav .rdx-nav-dropdown-btn::after {
       content: ''; display: inline-block; width: 0; height: 0;
       border-left: 4px solid transparent; border-right: 4px solid transparent;
-      border-top: 4px solid currentColor; margin-left: 6px; vertical-align: middle;
-      opacity: 0.6;
+      border-top: 4px solid currentColor; margin-left: 6px; vertical-align: middle; opacity: 0.6;
     }
     #rdx-global-nav .rdx-dropdown-menu {
       display: none; position: absolute; top: calc(100% + 8px); right: 0;
@@ -61,7 +59,7 @@
     #rdx-global-nav .rdx-dropdown-item-title { font-size: 0.82rem; font-weight: 700; color: #1a2332; }
     #rdx-global-nav .rdx-dropdown-item-sub { font-size: 0.72rem; color: #5d6d7e; margin-top: 1px; }
     #rdx-global-nav .rdx-dropdown-divider { height: 1px; background: #dde4ec; margin: 4px 0; }
-    #rdx-global-nav .rdx-nav-actions { display: flex; gap: 8px; margin-left: 16px; flex-shrink: 0; }
+    #rdx-global-nav .rdx-nav-actions { display: flex; gap: 8px; margin-left: 16px; flex-shrink: 0; align-items: center; }
     #rdx-global-nav .rdx-nav-btn {
       font-size: 0.78rem; font-weight: 700; padding: 6px 14px;
       border-radius: 7px; text-decoration: none; white-space: nowrap;
@@ -71,14 +69,22 @@
       color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.1);
     }
     #rdx-global-nav .rdx-nav-btn-ghost:hover { background: rgba(255,255,255,0.18); color: #fff; }
-    #rdx-global-nav .rdx-nav-btn-primary {
-      color: #fff; background: #2874A6;
-    }
+    #rdx-global-nav .rdx-nav-btn-primary { color: #fff; background: #2874A6; }
     #rdx-global-nav .rdx-nav-btn-primary:hover { background: #1a5276; }
+    #rdx-global-nav .rdx-nav-btn-danger {
+      color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    #rdx-global-nav .rdx-nav-btn-danger:hover { background: rgba(220,38,38,0.3); color: #fff; border-color: rgba(220,38,38,0.4); }
+    #rdx-global-nav .rdx-user-email {
+      font-size: 0.72rem; color: rgba(255,255,255,0.45); white-space: nowrap;
+      max-width: 160px; overflow: hidden; text-overflow: ellipsis;
+    }
     body { padding-top: 52px; }
     @media (max-width: 768px) {
       #rdx-global-nav .rdx-nav-links { display: none; }
       #rdx-global-nav .rdx-nav-actions { margin-left: auto; }
+      #rdx-global-nav .rdx-user-email { display: none; }
     }
   `;
   document.head.appendChild(style);
@@ -88,59 +94,118 @@
 
   const nav = document.createElement('div');
   nav.id = 'rdx-global-nav';
-  nav.innerHTML = `
-    <a class="rdx-logo" href="/index.html">Reason<span>Dx</span></a>
-    <div class="rdx-nav-links">
-      <a class="rdx-nav-link ${isActive('casedx.html')}" href="/casedx.html">CaseDx</a>
-      <a class="rdx-nav-link ${isActive('CoachDx')}" href="/CoachDx/index.html">CoachDx</a>
-      <div class="rdx-nav-dropdown">
-        <button class="rdx-nav-dropdown-btn">MechanismDx</button>
-        <div class="rdx-dropdown-menu">
-          <a class="rdx-dropdown-item" href="/mechanism/index.html">
-            <span class="rdx-dropdown-item-title">🎓 Attending Modules</span>
-            <span class="rdx-dropdown-item-sub">28 curated topics · attending conversation</span>
-          </a>
-          <div class="rdx-dropdown-divider"></div>
-          <a class="rdx-dropdown-item" href="/pathway.html">
-            <span class="rdx-dropdown-item-title">🔬 Topic Explorer</span>
-            <span class="rdx-dropdown-item-sub">560 topics · 5-phase mastery</span>
-          </a>
+
+  function buildNav(userEmail) {
+    const authActions = userEmail
+      ? `<span class="rdx-user-email">${userEmail}</span>
+         <button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()">Sign Out</button>`
+      : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html">Sign In</a>
+         <a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/register.html">Sign Up</a>`;
+
+    nav.innerHTML = `
+      <a class="rdx-logo" href="/index.html">Reason<span>Dx</span></a>
+      <div class="rdx-nav-links">
+        <a class="rdx-nav-link ${isActive('casedx.html')}" href="/casedx.html">CaseDx</a>
+        <a class="rdx-nav-link ${isActive('CoachDx')}" href="/CoachDx/index.html">CoachDx</a>
+        <div class="rdx-nav-dropdown">
+          <button class="rdx-nav-dropdown-btn">MechanismDx</button>
+          <div class="rdx-dropdown-menu">
+            <a class="rdx-dropdown-item" href="/mechanism/index.html">
+              <span class="rdx-dropdown-item-title">🎓 Attending Modules</span>
+              <span class="rdx-dropdown-item-sub">28 curated topics · attending conversation</span>
+            </a>
+            <div class="rdx-dropdown-divider"></div>
+            <a class="rdx-dropdown-item" href="/pathway.html">
+              <span class="rdx-dropdown-item-title">🔬 Topic Explorer</span>
+              <span class="rdx-dropdown-item-sub">560 topics · 5-phase mastery</span>
+            </a>
+          </div>
+        </div>
+        <a class="rdx-nav-link ${isActive('virtual-emr.html')}" href="/virtual-emr.html">ED Board</a>
+        <div class="rdx-nav-dropdown">
+          <button class="rdx-nav-dropdown-btn">Genetics 🧬</button>
+          <div class="rdx-dropdown-menu">
+            <a class="rdx-dropdown-item" href="/genetics/genetics-module.html">
+              <span class="rdx-dropdown-item-title">🧬 Genetics Module</span>
+              <span class="rdx-dropdown-item-sub">18 cases · 7 clinical tracks</span>
+            </a>
+            <div class="rdx-dropdown-divider"></div>
+            <a class="rdx-dropdown-item" href="/genetics/genetics-demo-case.html">
+              <span class="rdx-dropdown-item-title">▶ Angelman Syndrome Case</span>
+              <span class="rdx-dropdown-item-sub">The Child Who Keeps Falling</span>
+            </a>
+            <a class="rdx-dropdown-item" href="/genetics/genetics-aadc-case.html">
+              <span class="rdx-dropdown-item-title">▶ AADC Deficiency Case</span>
+              <span class="rdx-dropdown-item-sub">The Baby Who Wouldn't Stop Rolling Her Eyes</span>
+            </a>
+            <div class="rdx-dropdown-divider"></div>
+            <a class="rdx-dropdown-item" href="/genetics/genetics-ai-case.html">
+              <span class="rdx-dropdown-item-title">▶ HAE / A&sol;I Genetics Case</span>
+              <span class="rdx-dropdown-item-sub">The Swelling That Skips Generations</span>
+            </a>
+            <div class="rdx-dropdown-divider"></div>
+            <a class="rdx-dropdown-item" href="/genetics/genetics-cme.html">
+              <span class="rdx-dropdown-item-title">🎓 CME Module</span>
+              <span class="rdx-dropdown-item-sub">6.0 credits · For practicing physicians</span>
+            </a>
+          </div>
         </div>
       </div>
-      <a class="rdx-nav-link ${isActive('virtual-emr.html')}" href="/virtual-emr.html">ED Board</a>
-      <div class="rdx-nav-dropdown">
-        <button class="rdx-nav-dropdown-btn">Genetics 🧬</button>
-        <div class="rdx-dropdown-menu">
-          <a class="rdx-dropdown-item" href="/genetics/genetics-module.html">
-            <span class="rdx-dropdown-item-title">🧬 Genetics Module</span>
-            <span class="rdx-dropdown-item-sub">18 cases · 7 clinical tracks</span>
-          </a>
-          <div class="rdx-dropdown-divider"></div>
-          <a class="rdx-dropdown-item" href="/genetics/genetics-demo-case.html">
-            <span class="rdx-dropdown-item-title">▶ Angelman Syndrome Case</span>
-            <span class="rdx-dropdown-item-sub">The Child Who Keeps Falling</span>
-          </a>
-          <a class="rdx-dropdown-item" href="/genetics/genetics-aadc-case.html">
-            <span class="rdx-dropdown-item-title">▶ AADC Deficiency Case</span>
-            <span class="rdx-dropdown-item-sub">The Baby Who Wouldn't Stop Rolling Her Eyes</span>
-          </a>
-          <div class="rdx-dropdown-divider"></div>
-          <a class="rdx-dropdown-item" href="/genetics/genetics-ai-case.html">
-            <span class="rdx-dropdown-item-title">▶ HAE / A&sol;I Genetics Case</span>
-            <span class="rdx-dropdown-item-sub">The Swelling That Skips Generations</span>
-          </a>
-          <div class="rdx-dropdown-divider"></div>
-          <a class="rdx-dropdown-item" href="/genetics/genetics-cme.html">
-            <span class="rdx-dropdown-item-title">🎓 CME Module</span>
-            <span class="rdx-dropdown-item-sub">6.0 credits · For practicing physicians</span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="rdx-nav-actions">
-      <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/analytics-dashboard.html">Dashboard</a>
-      <a class="rdx-nav-btn rdx-nav-btn-primary" href="/casedx.html">Start Case</a>
-    </div>
-  `;
+      <div class="rdx-nav-actions">${authActions}</div>
+    `;
+  }
+
+  // Sign out handler
+  window.rdxSignOut = async function() {
+    try {
+      if (window.RDX && window.RDX.signOut) {
+        await window.RDX.signOut();
+      } else if (window.supabase) {
+        const url = 'https://lpwbiqpojisqgezycupw.supabase.co';
+        const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+        const client = window.supabase.createClient(url, key);
+        await client.auth.signOut();
+      }
+    } catch(e) { console.warn('Sign out error:', e); }
+    window.location.href = '/auth/login.html';
+  };
+
+  // Build nav initially (no user)
+  buildNav(null);
   document.body.insertBefore(nav, document.body.firstChild);
+
+  // Update nav once auth state is known
+  function updateNavAuth() {
+    const tryUpdate = () => {
+      if (window.RDX && typeof window.RDX.getSession === 'function') {
+        window.RDX.getSession().then(session => {
+          const email = session?.user?.email || null;
+          buildNav(email);
+        }).catch(() => buildNav(null));
+      } else if (window.supabase) {
+        const url = 'https://lpwbiqpojisqgezycupw.supabase.co';
+        const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+        const client = window.supabase.createClient(url, key);
+        client.auth.getSession().then(({ data }) => {
+          const email = data?.session?.user?.email || null;
+          buildNav(email);
+        }).catch(() => buildNav(null));
+      }
+    };
+    // Try immediately, then retry after scripts load
+    tryUpdate();
+    setTimeout(tryUpdate, 800);
+  }
+
+  // Listen for auth events from rdx-supabase.js
+  document.addEventListener('rdx:auth', function(e) {
+    const email = e.detail?.user?.email || null;
+    buildNav(email);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateNavAuth);
+  } else {
+    updateNavAuth();
+  }
 })();
