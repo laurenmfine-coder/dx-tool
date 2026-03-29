@@ -208,4 +208,18 @@
   } else {
     updateNavAuth();
   }
+
+  // ── INJECT AGENT CORE + NAVIGATOR WIDGET ──
+  // Loads the intelligent navigation agent on every page
+  function injectAgentScripts() {
+    var scripts = ['/js/rdx-agent-core.js', '/js/rdx-navigator-widget.js'];
+    scripts.forEach(function(src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      document.head.appendChild(s);
+    });
+  }
+  // Small delay to avoid competing with page load
+  setTimeout(injectAgentScripts, 1500);
 })();

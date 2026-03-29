@@ -152,6 +152,85 @@ Dictated by: Dr. Amanda Chu, M.D. | Thoracic Radiology
       phase6: "After imaging: HP should rise to top if exposure known. If exposure missed: sarcoidosis or atypical infection likely top.",
       phase7: "Simplified report may trigger awareness of exposure categories even if missed in history."
     }
+  },
+
+  // ── UNIVERSAL SIGNAL SCHEMA ──
+  // Read by RdxAgent.SignalExtractor — defines WHAT to track for this case
+  signals: {
+    criticalHistory: [
+      "pets", "home environment", "hobbies", "occupational exposures",
+      "symptom location pattern", "recent home changes",
+      "smoking", "medications", "family history lung disease"
+    ],
+    criticalExam: [
+      "lung auscultation", "cardiac exam", "extremities clubbing", "JVD"
+    ],
+    criticalTests: [
+      "HRCT chest", "serum precipitins", "PFTs", "CBC", "ESR or CRP"
+    ],
+    cannotMiss: [
+      "SpO2 interpretation", "exposure history integration", "bilateral crackles significance"
+    ],
+    biasTraps: [
+      "radiology report anchoring",
+      "premature closure on asthma",
+      "framing by chief complaint (dyspnea = pulmonary only)",
+      "availability bias toward common diagnoses"
+    ],
+    patientCues: [
+      {
+        trigger: "better when I'm at work or out running errands",
+        followUp: "symptom location pattern",
+        turnWindow: 3,
+        significance: "Location-dependent symptoms suggest environmental trigger at home"
+      },
+      {
+        trigger: "flushed in the evenings",
+        followUp: "fever pattern",
+        turnWindow: 2,
+        significance: "Evening flushing may indicate antigenic exposure during daytime with delayed response"
+      }
+    ],
+    simulatedBiases: [
+      {
+        type: "framing",
+        description: "Chief complaint is 'progressive shortness of breath' — primes pulmonary-only thinking",
+        mechanism: "Student may not consider cardiac, hematologic, or environmental causes"
+      },
+      {
+        type: "attribution",
+        description: "42-year-old healthy woman with no PMH — may lead to anchoring on benign diagnoses",
+        mechanism: "Student may dismiss the severity because the patient 'looks healthy'"
+      },
+      {
+        type: "representativeness",
+        description: "HP is uncommon and not a textbook presentation most students have memorized",
+        mechanism: "Student expects common diseases to present commonly — may not consider HP even with exposure history"
+      }
+    ]
+  },
+
+  // ── KEYWORD MAP ──
+  // Maps signal names to regex-matchable keywords for the fast extraction layer
+  keywordMap: {
+    "pets": ["pet", "pets", "animal", "animals", "dog", "cat", "bird", "parrot", "cockatiel", "parakeet"],
+    "home environment": ["home", "house", "living", "room", "apartment", "where do you live"],
+    "hobbies": ["hobby", "hobbies", "free time", "leisure", "fun", "relax", "spare time", "activities"],
+    "occupational exposures": ["exposure", "exposed", "mold", "dust", "chemical", "fume", "inhale", "breathe in", "work environment"],
+    "symptom location pattern": ["better", "worse", "certain place", "location", "at home", "at work", "when you leave"],
+    "recent home changes": ["change", "new", "recent", "different", "renovation", "moved"],
+    "smoking": ["smoke", "smoking", "cigarette", "vape", "vaping", "tobacco"],
+    "medications": ["medication", "medicine", "pill", "prescription", "drug", "supplement"],
+    "family history lung disease": ["family", "relative", "parent", "lung disease", "asthma in family"],
+    "lung auscultation": ["listen", "auscultate", "lung exam", "breath sounds", "stethoscope"],
+    "cardiac exam": ["heart", "cardiac", "murmur", "gallop", "JVD"],
+    "extremities clubbing": ["clubbing", "fingers", "nails", "extremities"],
+    "JVD": ["JVD", "jugular", "neck veins"],
+    "HRCT chest": ["ct", "hrct", "chest ct", "cat scan", "imaging", "scan"],
+    "serum precipitins": ["precipitin", "avian antibod", "IgG to avian", "bird antibod"],
+    "PFTs": ["pft", "pulmonary function", "spirometry", "diffusion capacity", "DLCO"],
+    "CBC": ["cbc", "blood count", "white count", "hemoglobin"],
+    "ESR or CRP": ["esr", "sed rate", "crp", "inflammatory markers"]
   }
 };
 
