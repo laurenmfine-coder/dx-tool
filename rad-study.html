@@ -194,6 +194,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="js/rdx-agent-core.js"></script>
 <script src="js/rdx-agent-enhancements.js"></script>
 <script src="js/rdx-study-tools.js"></script>
+<script src="js/rdx-rag.js"></script>
+<script src="js/rdx-advanced.js"></script>
+<script src="js/rdx-rpfs-viz.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -771,6 +774,17 @@ If the student mentions something the patient might refuse or struggle with, int
 When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."`;
   }
 
+  // ── RAG: Inject verified guideline grounding ──
+  if (window.RdxRAG && caseData) {
+    var ragContext = window.RdxRAG.getPhaseGrounding(caseData, phase, state);
+    if (ragContext) {
+      sys += '\n' + ragContext;
+      if (window.RdxAdvanced && window.RdxAdvanced.ExplainableAgent) {
+        window.RdxAdvanced.ExplainableAgent.logRAGRetrieval(phase, ragContext.split('Source:').length - 1, 'phase-' + phase);
+      }
+    }
+  }
+
   return sys;
 }
 
@@ -1215,6 +1229,127 @@ async function exportStudyData() {
     }
     await _origExport();
   };
+})();
+</script>
+
+<!-- Advanced Prototypes Wiring -->
+<script>
+(function() {
+  if (!window.RdxAdvanced) return;
+  var A = window.RdxAdvanced;
+
+  // ── Wire EmotionalAI to chat input ──
+  function wireEmotionalAI() {
+    var input = document.getElementById('chatInput');
+    if (input && A.EmotionalAI) {
+      A.EmotionalAI.attachToInput(input);
+      console.log('EmotionalAI attached to chat input');
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireEmotionalAI);
+  } else {
+    wireEmotionalAI();
+  }
+
+  // ── Wire ExplainableAgent into startStudy ──
+  var _origStart2 = window.startStudy;
+  window.startStudy = function() {
+    _origStart2();
+    if (A.ExplainableAgent) A.ExplainableAgent.clear();
+    if (A.EmotionalAI) A.EmotionalAI.clear();
+    if (A.ReasoningTrace) A.ReasoningTrace.clear();
+    if (A.ExplainableAgent && window.state) {
+      A.ExplainableAgent.logDecision({
+        phase: 1, type: 'session_start',
+        action: 'Simulation started',
+        reasoning: 'Student: ' + window.state.studentName + ', Year: ' + window.state.trainingYear + ', Case: ' + window.state.caseId + ', Group: ' + window.state.groupCode,
+        inputs: { caseId: window.state.caseId, groupCode: window.state.groupCode }
+      });
+    }
+  };
+
+  // ── Wire ExplainableAgent + EmotionalAI into sendMessage ──
+  var _origSend2 = window.sendMessage;
+  window.sendMessage = async function() {
+    if (!window.state) return _origSend2();
+
+    var input = document.getElementById('chatInput');
+    var msg = input ? input.value.trim() : '';
+
+    // EmotionalAI: record message patterns
+    if (msg && A.EmotionalAI) {
+      var emotionRecord = A.EmotionalAI.onMessageSent(msg);
+      if (emotionRecord && emotionRecord.emotionalState) {
+        // Log emotional adaptations
+        var adaptations = A.EmotionalAI.getAdaptations();
+        adaptations.forEach(function(adapt) {
+          if (A.ExplainableAgent) {
+            A.ExplainableAgent.logDecision({
+              turn: window.state.turnCount, phase: window.state.currentPhase,
+              type: 'emotional_detection',
+              action: 'Detected ' + adapt.type + ' signal',
+              reasoning: adapt.suggestion,
+              inputs: { typingSpeed: emotionRecord.typingSpeed, deletionRatio: emotionRecord.deletionRatio, pauseCount: emotionRecord.pauseCount }
+            });
+          }
+        });
+      }
+    }
+
+    await _origSend2();
+  };
+
+  // ── Wire into exportStudyData for RPFS + explainable log ──
+  var _origExport2 = window.exportStudyData;
+  window.exportStudyData = async function() {
+    if (window.state && window.caseData) {
+      // Generate reasoning trace
+      if (A.ReasoningTrace) {
+        var graph = A.ReasoningTrace.extractFromState(window.state, window.caseData);
+        window.state.reasoningTrace = graph;
+
+        // Render RPFS visualization
+        var vizContainer = document.createElement('div');
+        vizContainer.id = 'rpfs-viz-' + Date.now();
+        vizContainer.className = 'chat-msg msg-system';
+        vizContainer.style.cssText = 'padding:8px;';
+        document.getElementById('chatMessages').appendChild(vizContainer);
+        if (window.RPFSViz) {
+          window.RPFSViz.render(vizContainer.id, graph, { width: 700, height: 380 });
+        }
+      }
+
+      // Attach explainable agent log
+      if (A.ExplainableAgent) {
+        window.state.agentDecisionLog = A.ExplainableAgent.getLog();
+        window.state.agentDecisionSummary = A.ExplainableAgent.getSummary();
+        console.log('Agent decisions logged:', A.ExplainableAgent.getSummary());
+      }
+
+      // Attach emotional AI data
+      if (A.EmotionalAI) {
+        window.state.emotionalAIHistory = A.EmotionalAI.getHistory();
+        var finalEmotion = A.EmotionalAI.getCurrentState();
+        if (finalEmotion) window.state.emotionalAIFinal = finalEmotion;
+      }
+    }
+
+    await _origExport2();
+  };
+
+  // ── Listen for phase transitions to log in ExplainableAgent ──
+  var _origEnterPhase = window.enterPhase;
+  if (_origEnterPhase) {
+    window.enterPhase = function(phase) {
+      var prevPhase = window.state ? window.state.currentPhase : null;
+      _origEnterPhase(phase);
+      if (A.ExplainableAgent && prevPhase !== null) {
+        A.ExplainableAgent.logPhaseTransition(prevPhase, phase, 'orchestrator_trigger', window.state ? window.state.turnCount : 0);
+      }
+    };
+  }
+
 })();
 </script>
 </body>
