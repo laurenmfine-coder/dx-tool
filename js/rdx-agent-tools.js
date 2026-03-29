@@ -130,7 +130,7 @@ const AgentTools = {
         training_year: state.trainingYear,
         rotations_completed: state.rotationsCompleted,
         has_pulm_course: state.hasPulmCourse,
-        case_id: 'DYS-001',
+        case_id: state.caseId || 'unknown',
         group_code: state.groupCode,
         first_report_type: state.firstReportType,
         second_report_type: state.secondReportType,

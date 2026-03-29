@@ -132,6 +132,18 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
       </select>
     </div>
     <div class="form-group" id="cogloadContainer"></div>
+    <div class="form-group">
+      <label>Assigned Case</label>
+      <select id="intakeCase">
+        <option value="DYS-001">DYS-001 — Dyspnea (Environmental)</option>
+        <option value="DYS-002">DYS-002 — Dyspnea (Substance Use)</option>
+        <option value="COUGH-001">COUGH-001 — Chronic Cough (Travel/Immigration)</option>
+        <option value="CHEST-001">CHEST-001 — Chest Pain (Stimulant Use)</option>
+        <option value="FEVER-001">FEVER-001 — Fever with Dyspnea (Immunosuppression)</option>
+        <option value="random">Random Assignment</option>
+      </select>
+      <div style="font-size:11px;color:#666;margin-top:4px;">Study coordinators: set via URL parameter <code>?case=DYS-002</code></div>
+    </div>
     <button class="intake-btn" onclick="startStudy()">Begin Simulation</button>
   </div>
 </div>
@@ -173,6 +185,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 <!-- ── CASE DATA ── -->
 <script src="emr-data/rad-study-dys001.js"></script>
+<script src="emr-data/rad-study-dys002.js"></script>
+<script src="emr-data/rad-study-cough001.js"></script>
+<script src="emr-data/rad-study-chest001.js"></script>
+<script src="emr-data/rad-study-fever001.js"></script>
 <script src="emr-data/guidelines-library.js"></script>
 <script src="js/rdx-agent-tools.js"></script>
 <script src="js/rdx-agent-core.js"></script>
@@ -203,6 +219,26 @@ const PHASE_LABELS = {
 let state = null;
 let caseData = null;
 
+// ── CASE REGISTRY ──
+const CASE_REGISTRY = {
+  'DYS-001':   function() { return window.CASE_DYS001; },
+  'DYS-002':   function() { return window.CASE_DYS002; },
+  'COUGH-001': function() { return window.CASE_COUGH001; },
+  'CHEST-001': function() { return window.CASE_CHEST001; },
+  'FEVER-001': function() { return window.CASE_FEVER001; }
+};
+const CASE_IDS = Object.keys(CASE_REGISTRY);
+
+// URL parameter override: ?case=DYS-002
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var urlCase = params.get('case');
+  if (urlCase && CASE_REGISTRY[urlCase.toUpperCase()]) {
+    var sel = document.getElementById('intakeCase');
+    if (sel) sel.value = urlCase.toUpperCase();
+  }
+})();
+
 // ── INITIALIZATION ──
 function startStudy() {
   const name = document.getElementById('intakeName').value.trim();
@@ -214,9 +250,19 @@ function startStudy() {
   // Random group assignment
   const groupCode = Math.random() < 0.5 ? 'A' : 'B';
 
-  caseData = CASE_DYS001;
+  // Load selected case
+  var selectedCase = document.getElementById('intakeCase').value;
+  if (selectedCase === 'random') {
+    selectedCase = CASE_IDS[Math.floor(Math.random() * CASE_IDS.length)];
+  }
+  var caseLoader = CASE_REGISTRY[selectedCase];
+  if (!caseLoader) { alert('Case not found: ' + selectedCase); return; }
+  caseData = caseLoader();
+  window.caseData = caseData; // expose for enhancements
+  if (!caseData) { alert('Case data failed to load for: ' + selectedCase); return; }
   state = {
     sessionId: 'RS-' + Date.now().toString(36) + '-' + Math.random().toString(36).substr(2,6),
+    caseId: caseData.caseId,
     studentName: name,
     trainingYear: year,
     rotationsCompleted: rotations,
@@ -364,27 +410,36 @@ async function sendMessage() {
 
 // ── SIGNAL EXTRACTION ──
 function extractSignals(msg) {
-  return {
-    mentionsPets: /\b(pet|pets|animal|animals|dog|cat|bird|parrot|cockatiel|parakeet)\b/i.test(msg),
-    mentionsHome: /\b(home|house|living|room|apartment|where.*(live|stay))\b/i.test(msg),
-    mentionsHobbies: /\b(hobb|free time|leisure|fun|relax|spare time|activities)\b/i.test(msg),
-    mentionsExposures: /\b(expos|mold|dust|chemical|fume|inhal|breath.*in)\b/i.test(msg),
-    mentionsSymptomLocation: /\b(better|worse).*(home|work|outside|certain|place|location)\b/i.test(msg),
-    mentionsRecentChanges: /\b(change|new|recent|different).*(home|house|environment)\b/i.test(msg),
+  var signals = {
+    // Structural signals (same for all cases)
     readyToMoveOn: /\b(ready|move on|let'?s go|that'?s all|done|good to go|i'?m good|no more|that covers|let'?s do)\b/i.test(msg),
     providingDifferential: /\b(differential|diagnosis|diagnos|my list|i'?d consider|i'?m thinking|priority|ranking)\b/i.test(msg),
-    orderingTests: /\b(order|cbc|cmp|ct |chest x|x-?ray|mri|esr|crp|bnp|d-dimer|abg|pft|precipitin|ige|imaging|scan)\b/i.test(msg),
+    orderingTests: /\b(order|cbc|cmp|ct |chest x|x-?ray|mri|esr|crp|bnp|d-dimer|abg|pft|precipitin|ige|imaging|scan|quantiferon|afb|sputum|uds|drug screen|troponin|hiv|cd4|ldh|beta.*glucan|procalcitonin|viral panel)\b/i.test(msg),
+    // Dynamic history signals from case keywordMap
+    historyMatches: {}
   };
+
+  // Check each critical history element against the case's keyword map
+  if (caseData && caseData.keywordMap) {
+    var critHist = (caseData.signals && caseData.signals.criticalHistory) || [];
+    critHist.forEach(function(element) {
+      var keywords = caseData.keywordMap[element] || [element];
+      signals.historyMatches[element] = keywords.some(function(kw) {
+        return new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(msg);
+      });
+    });
+  }
+
+  return signals;
 }
 
 function updateStateFromSignals(signals) {
-  if (state.currentPhase === PHASES.HISTORY_TAKING) {
-    if (signals.mentionsPets) state.historyFlags.askedAboutPets = true;
-    if (signals.mentionsHome) state.historyFlags.askedAboutHomeEnvironment = true;
-    if (signals.mentionsHobbies) state.historyFlags.askedAboutHobbies = true;
-    if (signals.mentionsExposures) state.historyFlags.askedAboutOccupationalExposures = true;
-    if (signals.mentionsSymptomLocation) state.historyFlags.askedAboutSymptomLocation = true;
-    if (signals.mentionsRecentChanges) state.historyFlags.askedAboutRecentChanges = true;
+  if (state.currentPhase === PHASES.HISTORY_TAKING && signals.historyMatches) {
+    Object.entries(signals.historyMatches).forEach(function(entry) {
+      if (entry[1]) { // matched
+        state.historyFlags[entry[0]] = true;
+      }
+    });
   }
 }
 
@@ -399,24 +454,27 @@ function checkPhaseTransition(signals) {
     return {
       shouldTransition: true,
       nextPhase: PHASES.HISTORY_TAKING,
-      inject: { type:'patel', content:"[As Dr. Patel]\n\nAlright, let's go see Ms. Reyes. She's in exam room 3.\n\nGo ahead and take your history." }
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nAlright, let's go see " + getPatientDisplayName() + ". " + (caseData.presentation.sex === 'Male' ? "He's" : "She's") + " in exam room 3.\n\nGo ahead and take your history." }
     };
   }
   if (phase === PHASES.HISTORY_TAKING && signals.readyToMoveOn) {
-    const askedEnv = state.historyFlags.askedAboutPets || state.historyFlags.askedAboutHomeEnvironment ||
-                     state.historyFlags.askedAboutHobbies || state.historyFlags.askedAboutOccupationalExposures;
-    if (!askedEnv && !state.historyFlags.genericPromptDelivered) {
+    const critHist = (caseData.signals && caseData.signals.criticalHistory) || [];
+    const askedAny = critHist.some(function(h) { return state.historyFlags[h]; });
+    if (!askedAny && !state.historyFlags.genericPromptDelivered) {
       state.historyFlags.genericPromptDelivered = true;
       return { inject: { type:'patel', content:"[As Dr. Patel]\n\nIs there anything else you'd like to ask the patient before we move on to the physical exam?" } };
     }
-    // Score environmental history
-    state.envHistoryScore = state.historyFlags.askedAboutPets || state.historyFlags.askedAboutHomeEnvironment ? (hasBirdMention() ? 2 : 1) : 0;
+    // Score: 0 = no critical history, 1 = some critical history, 2 = key exposure found
+    var critAskedCount = critHist.filter(function(h) { return state.historyFlags[h]; }).length;
+    state.envHistoryScore = critAskedCount === 0 ? 0 : (hasKeyExposure() ? 2 : 1);
     state.historyFlags.studentDeclinedAfterPrompt = state.historyFlags.genericPromptDelivered;
     document.getElementById('statEnvHist').textContent = state.envHistoryScore + '/2';
+    var patientName = caseData.presentation.patientName.split(' ');
+    var shortName = patientName.length > 1 ? (caseData.presentation.sex === 'Male' ? 'Mr. ' : 'Ms. ') + patientName[patientName.length - 1] : caseData.presentation.patientName;
     return {
       shouldTransition: true,
       nextPhase: PHASES.REVISED_DIFFERENTIAL,
-      inject: { type:'patel', content:"[As Dr. Patel]\n\nOkay. Based on everything Ms. Reyes told you, how has your differential changed? Walk me through your revised list and tell me what moved and why." }
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nOkay. Based on everything " + shortName + " told you, how has your differential changed? Walk me through your revised list and tell me what moved and why." }
     };
   }
   if (phase === PHASES.REVISED_DIFFERENTIAL && signals.readyToMoveOn) {
@@ -524,7 +582,7 @@ function enterPhase(phase) {
             if (state.priorHistory) {
               var nextCase = AgentTools.recommendNextCase(
                 { found: true, patterns: state.priorHistory },
-                ['DYS-001', 'DYS-002', 'CHEST-001', 'COUGH-001', 'RASH-001']
+                ['DYS-001', 'DYS-002', 'CHEST-001', 'COUGH-001', 'FEVER-001']
               );
               if (nextCase.caseId && nextCase.caseId !== caseData.caseId) {
                 addMessage('system', 'Recommended next case: ' + nextCase.caseId + ' (' + nextCase.reason + ')');
@@ -691,11 +749,30 @@ function checkForLeaks(response) {
 }
 
 // ── HELPERS ──
-function hasBirdMention() {
-  return state.turns.some(t => t.role === 'student' && /bird|cockatiel|parakeet|avian|aviary/i.test(t.content));
+function hasKeyExposure() {
+  // Check if the student found the case's key diagnostic element
+  // Uses the first 2 elements of criticalHistoryElements as "key"
+  var keyElements = (caseData.scoringCriteria.criticalHistoryElements || []).slice(0, 2);
+  return keyElements.some(function(elem) {
+    return state.turns.some(function(t) {
+      if (t.role !== 'student') return false;
+      var keywords = (caseData.keywordMap && caseData.keywordMap[elem]) || [elem];
+      return keywords.some(function(kw) {
+        return new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(t.content);
+      });
+    });
+  });
+}
+function getPatientDisplayName() {
+  if (!caseData) return 'the patient';
+  var parts = caseData.presentation.patientName.split(' ');
+  var last = parts[parts.length - 1];
+  return (caseData.presentation.sex === 'Male' ? 'Mr. ' : 'Ms. ') + last;
 }
 function isPatientResponse(text) {
-  return /\[As (Ms\.|Mrs\.) Reyes\]/i.test(text) || (state.currentPhase === PHASES.HISTORY_TAKING && !/\[As Dr\. Patel\]/i.test(text));
+  var pName = caseData ? caseData.presentation.patientName : 'Patient';
+  var namePattern = new RegExp('\\[As (' + pName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '|Ms\\.|Mr\\.|Mrs\\.).*?\\]', 'i');
+  return namePattern.test(text) || (state.currentPhase === PHASES.HISTORY_TAKING && !/\[As Dr\. Patel\]/i.test(text));
 }
 
 // ── UI ──
@@ -705,11 +782,12 @@ function addMessage(type, text) {
   const cssClass = type === 'student' ? 'msg-student' : type === 'patient' ? 'msg-patient' : type === 'report' ? 'msg-report' : type === 'system' ? 'msg-system' : 'msg-patel';
   div.className = 'chat-msg ' + cssClass;
   // Strip role tags for cleaner display
-  let clean = text.replace(/\[As (Dr\. Patel|Ms\. Reyes|Mrs\. Reyes)\]\s*/gi, '');
+  let clean = text.replace(/\[As [^\]]+\]\s*/gi, '');
+  var patientLabel = caseData ? getPatientDisplayName() : 'Patient';
   if (type === 'patel') {
     div.innerHTML = '<div class="msg-label">Dr. Patel</div>' + escHtml(clean);
   } else if (type === 'patient') {
-    div.innerHTML = '<div class="msg-label">Ms. Reyes</div>' + escHtml(clean);
+    div.innerHTML = '<div class="msg-label">' + patientLabel + '</div>' + escHtml(clean);
   } else if (type === 'report') {
     div.textContent = text;
   } else {
@@ -806,7 +884,7 @@ async function exportStudyData() {
     training_year: state.trainingYear,
     rotations_completed: state.rotationsCompleted,
     has_pulm_course: state.hasPulmCourse,
-    case_id: 'DYS-001',
+    case_id: caseData.caseId,
     group_code: state.groupCode,
     first_report_type: state.firstReportType,
     second_report_type: state.secondReportType,
