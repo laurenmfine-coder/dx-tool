@@ -271,6 +271,10 @@ async function sendMessage() {
   const transition = checkPhaseTransition(signals);
 
   if (transition && transition.inject) {
+    // Enter new phase first if this is a transition
+    if (transition.shouldTransition) {
+      enterPhase(transition.nextPhase);
+    }
     // Orchestrator injects content directly (no Claude call)
     const injected = transition.inject;
     addMessage(injected.type || 'patel', injected.content);
@@ -369,7 +373,11 @@ function checkPhaseTransition(signals) {
     return { shouldTransition: true, nextPhase: PHASES.JUSTIFICATION };
   }
   if (phase === PHASES.JUSTIFICATION && signals.readyToMoveOn) {
-    return { shouldTransition: true, nextPhase: PHASES.HISTORY_TAKING };
+    return {
+      shouldTransition: true,
+      nextPhase: PHASES.HISTORY_TAKING,
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nAlright, let's go see Ms. Reyes. She's in exam room 3.\n\nGo ahead and take your history." }
+    };
   }
   if (phase === PHASES.HISTORY_TAKING && signals.readyToMoveOn) {
     const askedEnv = state.historyFlags.askedAboutPets || state.historyFlags.askedAboutHomeEnvironment ||
@@ -382,20 +390,40 @@ function checkPhaseTransition(signals) {
     state.envHistoryScore = state.historyFlags.askedAboutPets || state.historyFlags.askedAboutHomeEnvironment ? (hasBirdMention() ? 2 : 1) : 0;
     state.historyFlags.studentDeclinedAfterPrompt = state.historyFlags.genericPromptDelivered;
     document.getElementById('statEnvHist').textContent = state.envHistoryScore + '/2';
-    return { shouldTransition: true, nextPhase: PHASES.REVISED_DIFFERENTIAL };
+    return {
+      shouldTransition: true,
+      nextPhase: PHASES.REVISED_DIFFERENTIAL,
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nOkay. Based on everything Ms. Reyes told you, how has your differential changed? Walk me through your revised list and tell me what moved and why." }
+    };
   }
   if (phase === PHASES.REVISED_DIFFERENTIAL && signals.readyToMoveOn) {
-    return { shouldTransition: true, nextPhase: PHASES.PHYSICAL_EXAM };
+    return {
+      shouldTransition: true,
+      nextPhase: PHASES.PHYSICAL_EXAM,
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nOkay. What physical exam would you like to perform? Tell me what you're looking for and what you expect to find." }
+    };
   }
   if (phase === PHASES.PHYSICAL_EXAM && signals.readyToMoveOn) {
-    return { shouldTransition: true, nextPhase: PHASES.LABS_IMAGING };
+    return {
+      shouldTransition: true,
+      nextPhase: PHASES.LABS_IMAGING,
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nAlright. What workup would you like to order?" }
+    };
   }
   if (phase === PHASES.LABS_IMAGING && state.firstReportDelivered && signals.readyToMoveOn) {
     // Student has discussed the first report — move to Phase 7 for comparison
-    return { shouldTransition: true, nextPhase: PHASES.REPORT_COMPARISON };
+    return {
+      shouldTransition: true,
+      nextPhase: PHASES.REPORT_COMPARISON
+      // No inject here — deliverSecondReport() is called by enterPhase
+    };
   }
   if (phase === PHASES.REPORT_COMPARISON && signals.readyToMoveOn) {
-    return { shouldTransition: true, nextPhase: PHASES.REFLECTION };
+    return {
+      shouldTransition: true,
+      nextPhase: PHASES.REFLECTION,
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's wrap up. I have a few reflection questions for you.\n\nFirst — what was the single most important piece of information in reaching your final differential, and at what point did you get it?\n\nSecond — looking back, is there anything you wish you had asked earlier?\n\nThird — how much weight should a radiology report carry in your diagnostic reasoning when the radiologist doesn't have access to the full clinical history?\n\nFourth — do you think the language and format of a radiology report affects how you interpret the findings?" }
+    };
   }
   if (phase === PHASES.REFLECTION) {
     // Complete after student has given at least one substantive response to reflection questions
@@ -474,14 +502,20 @@ ABSOLUTE RULES (apply to every response):
 - NEVER teach. If the student says "I don't know," say "That's okay, work with what you know."
 - NEVER use evaluative praise (excellent, great, good thinking, beautiful, spot on). Use ONLY: "Okay," "Tell me more," "Walk me through that," "What else?"
 - NEVER use emoji, bullet points, headers, or formatted lists. Speak conversationally.
-- Respond in 1-3 short paragraphs. Keep it natural.`;
+- Respond in 1-3 short paragraphs. Keep it natural.
+- NEVER use brackets to describe what would happen, e.g. [The simulation would...]. NEVER break the fourth wall. You are IN the simulation, not describing it.`;
 
   if (phase === PHASES.INITIAL_DIFFERENTIAL || phase === PHASES.JUSTIFICATION) {
     sys += `\n\nYou are Dr. Patel, a neutral attending physician. The student just provided their differential or justification. Ask them to walk through their reasoning for diagnoses THEY listed. Do NOT introduce new diagnoses. If they haven't mentioned the SpO2, you may ask: "Is there anything in the vitals that stands out?" When discussion feels adequate, say: "Okay. Let's go see the patient."`;
   }
   else if (phase === PHASES.HISTORY_TAKING) {
-    sys += `\n\nYou are now playing TWO roles:\nROLE 1 — Dr. Patel (attending): Stay SILENT while the student interviews. Do not interject.\nROLE 2 — ${caseData.presentation.patientName} (patient): Answer ONLY what is specifically asked. Do not volunteer information not requested.\n\nPATIENT DETAILS:\n`;
-    // Only inject patient script during history phase
+    sys += `\n\nThe student is now in the exam room with the patient. You play ${caseData.presentation.patientName} — respond in character as the patient to every question the student asks.
+
+NEVER describe what "would" happen. NEVER use brackets like [The simulation would...]. NEVER break character. You ARE the patient right now. If the student greets you, greet them back warmly as the patient.
+
+Dr. Patel stays SILENT during the interview. Do not interject as the attending.
+
+PATIENT DETAILS:\n`;
     const ps = caseData.patientScript;
     sys += `Identity: ${ps.identity}\nHPI: ${ps.hpiOnset} ${ps.hpiProgression} ${ps.hpiCough} ${ps.hpiAssociatedSymptoms}\n`;
     sys += `Location pattern (only if asked): ${ps.hpiLocationPattern}\n`;
@@ -499,10 +533,33 @@ ABSOLUTE RULES (apply to every response):
     sys += `\n\nYou are Dr. Patel. Ask the student how their differential has changed based on the history. Listen and ask them to elaborate on changes THEY describe. Do NOT suggest diagnoses or hint that something is missing.`;
   }
   else if (phase === PHASES.PHYSICAL_EXAM) {
-    sys += `\n\nYou are Dr. Patel. Ask what physical exam the student wants to perform. After they describe their plan, provide these findings:\n${JSON.stringify(caseData.physicalExam)}\nThen ask: "Based on these findings, how does your thinking change?" Do NOT interpret findings for them.`;
+    const pe = caseData.physicalExam;
+    sys += `\n\nYou are Dr. Patel. The student is telling you what physical exam they want to perform. After they describe their plan, provide these findings in natural language:
+
+General: ${pe.general}
+HEENT: ${pe.heent}
+Cardiovascular: ${pe.cardiovascular}
+Respiratory: ${pe.respiratory}
+Abdomen: ${pe.abdomen}
+Extremities: ${pe.extremities}
+Skin: ${pe.skin}
+
+After providing findings, ask: "Based on these findings, how does your thinking change?" Do NOT interpret findings for them.`;
   }
   else if (phase === PHASES.LABS_IMAGING) {
-    sys += `\n\nYou are Dr. Patel. Ask what workup the student wants to order. Provide results ONLY for tests they order. Available results:\n${JSON.stringify(caseData.labResults)}\nAfter delivering results, ask: "Walk me through how you're interpreting the findings. What does your differential look like now?" If the student interprets imaging WITHOUT referencing history, you may ask ONE question: "How does the history factor into your reading of this image?"`;
+    const labs = caseData.labResults;
+    let labText = Object.entries(labs).map(([k,v]) => `${k}: ${v}`).join('\n');
+    sys += `\n\nYou are Dr. Patel. The student is ordering workup. Provide results ONLY for tests they specifically order. Do NOT volunteer results for tests they did not ask for.
+
+Available results (only provide when ordered):
+${labText}
+
+If the student orders chest imaging (CT, HRCT, chest X-ray), say: "The imaging is back." Then provide the image link: ${caseData.radiologyReports.imageUrl}
+The radiology report will be delivered separately by the system — do NOT generate a radiology report yourself.
+
+After delivering results, ask: "Walk me through how you're interpreting the findings. What does your differential look like now?"
+
+If the student interprets imaging WITHOUT referencing clinical history at all, you may ask ONE question: "How does the history factor into your reading of this image?"`;
   }
   else if (phase === PHASES.REPORT_COMPARISON) {
     sys += `\n\nYou are Dr. Patel. The student has just seen the second version of the radiology report. Ask: "Did seeing the report in this different format change how you understood the findings? Did it affect your differential? Which version did you find more helpful, and why?" Do not comment on correctness.`;
