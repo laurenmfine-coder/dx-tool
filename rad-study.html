@@ -1023,6 +1023,63 @@ async function exportStudyData() {
     } else {
       console.log('Study data saved to Supabase successfully.');
       addMessage('system', 'Your session data has been saved.');
+
+      // ── PLATFORM EVENTS — feed the unified student model ──
+      if (window.RdxPlatform) {
+        var P = window.RdxPlatform;
+        var email = P.getUserEmail() || state.studentName;
+        var opts = { studentEmail: email, caseId: state.caseId, sessionId: state.sessionId };
+
+        // Case completed event
+        P.EventBus.emit('case_completed', 'rad_study', {
+          envHistoryScore: state.envHistoryScore,
+          totalTurns: state.turnCount,
+          groupCode: state.groupCode,
+          cognitiveLoadLevel: state.cognitiveLoadLevel
+        }, Object.assign({}, opts, {
+          skillImpacts: {
+            history_taking: state.envHistoryScore === 2 ? 0.03 : state.envHistoryScore === 1 ? 0.01 : -0.02,
+            data_integration: (state.detectedBiases || []).some(function(b) { return b.type === 'report_anchoring'; }) ? -0.02 : 0.02
+          }
+        }));
+
+        // Gap events
+        (state.identifiedGaps || []).forEach(function(gap) {
+          P.EventBus.emit('gap_identified', 'rad_study', {
+            gapId: gap.id || gap.title,
+            category: gap.category,
+            severity: gap.severity,
+            gapType: gap.gapType
+          }, opts);
+        });
+
+        // Bias events
+        (state.detectedBiases || []).forEach(function(bias) {
+          P.EventBus.emit('bias_detected', 'rad_study', {
+            biasType: bias.type,
+            severity: bias.severity,
+            evidence: bias.evidence
+          }, opts);
+        });
+
+        // Patient continuity
+        var patientId = state.caseId.toLowerCase() + '-patient';
+        P.ContinuityTracker.recordEncounter(email, patientId, caseData.presentation.patientName, {
+          module: 'rad_study',
+          caseId: state.caseId,
+          sessionId: state.sessionId,
+          date: new Date().toISOString(),
+          diagnosis: state.envHistoryScore >= 1 ? caseData.targetDiagnosis : 'Undetermined',
+          outcome: 'Env history score: ' + state.envHistoryScore + '/2'
+        });
+
+        // Confidence events
+        (state._confidenceLog || []).forEach(function(c) {
+          P.EventBus.emit('confidence_recorded', 'rad_study', {
+            phase: c.phase, confidence: c.confidence, correctDxPresent: c.correctDxPresent
+          }, opts);
+        });
+      }
     }
 
     // Also save individual turns for granular analysis
