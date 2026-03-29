@@ -7,6 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/css/rdx-design-system.css?v=2">
 <link rel="stylesheet" href="css/rdx-theme.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--primary:#2874A6;--primary-dark:#1B4F72;--primary-light:#EBF5FB;--teal:#0D7A67;--teal-light:#E8F8F5;--success:#27AE60;--warning:#F39C12;--danger:#E74C3C;--text:#1a1a2e;--text-muted:#4B5563;--bg:#F0F4F8;--card:#fff;--border:#DCE3EB;--font:'DM Sans',-apple-system,sans-serif;--mono:'IBM Plex Mono',monospace;--radius:8px;--shadow-sm:0 1px 3px rgba(0,0,0,.06);--shadow-md:0 4px 12px rgba(0,0,0,.08)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -178,6 +179,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 // ═══════════════════════════════════════════════════════════════
 
 const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 const PHASES = {
   INITIAL_DIFFERENTIAL:1, JUSTIFICATION:2, HISTORY_TAKING:3,
@@ -666,18 +670,68 @@ function saveState() {
   try { localStorage.setItem('radStudy_' + state.sessionId, JSON.stringify(state)); } catch(e) {}
 }
 
-function exportStudyData() {
+async function exportStudyData() {
   const data = {
-    sessionId: state.sessionId, studentName: state.studentName, trainingYear: state.trainingYear,
-    rotationsCompleted: state.rotationsCompleted, hasPulmCourse: state.hasPulmCourse,
-    groupCode: state.groupCode, firstReportType: state.firstReportType,
-    envHistoryScore: state.envHistoryScore, historyFlags: state.historyFlags,
-    phaseTiming: state.phaseTiming, totalTurns: state.turnCount,
-    leakDetails: state.leakDetails, transcript: state.turns
+    session_id: state.sessionId,
+    student_name: state.studentName,
+    student_email: '',
+    training_year: state.trainingYear,
+    rotations_completed: state.rotationsCompleted,
+    has_pulm_course: state.hasPulmCourse,
+    case_id: 'DYS-001',
+    group_code: state.groupCode,
+    first_report_type: state.firstReportType,
+    second_report_type: state.secondReportType,
+    env_history_score: state.envHistoryScore,
+    history_flags: state.historyFlags,
+    differentials: state.differentials,
+    diff_changes_report1: state.diffChangesAfterReport1 || [],
+    diff_changes_report2: state.diffChangesAfterReport2 || [],
+    report_comparison_response: state.reportComparisonResponse || '',
+    reflection_responses: state.reflectionResponses || {},
+    phase_timing: state.phaseTiming,
+    total_turns: state.turnCount,
+    leak_detected: state.leakDetails.length > 0,
+    leak_details: state.leakDetails,
+    transcript: state.turns,
+    started_at: state.phaseHistory[0]?.enteredAt || new Date().toISOString(),
+    completed_at: new Date().toISOString(),
+    status: 'complete'
   };
+
+  // Console export (always)
   console.log('=== STUDY DATA EXPORT ===');
   console.log(JSON.stringify(data, null, 2));
-  // In production: POST to ReasonDx backend / Supabase
+
+  // Supabase export
+  if (!sb) { console.warn('Supabase not initialized — data saved to console only.'); return; }
+  try {
+    const { error } = await sb.from('rad_study_sessions').upsert(data, { onConflict: 'session_id' });
+    if (error) {
+      console.error('Supabase save error:', error.message);
+      addMessage('system', 'Data saved locally. (Database sync pending.)');
+    } else {
+      console.log('Study data saved to Supabase successfully.');
+      addMessage('system', 'Your session data has been saved.');
+    }
+
+    // Also save individual turns for granular analysis
+    const turnRows = state.turns.map(t => ({
+      session_id: state.sessionId,
+      turn_number: t.turnNumber,
+      role: t.role === 'student' ? 'student' : 'assistant',
+      phase: t.phase,
+      content: t.content,
+      timestamp: t.timestamp
+    }));
+    if (turnRows.length > 0) {
+      const { error: turnError } = await sb.from('rad_study_turns').insert(turnRows);
+      if (turnError) console.error('Turn save error:', turnError.message);
+      else console.log(turnRows.length + ' turns saved to Supabase.');
+    }
+  } catch(e) {
+    console.error('Supabase export failed:', e);
+  }
 }
 </script>
 </body>
