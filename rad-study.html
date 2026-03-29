@@ -373,21 +373,148 @@ async function sendMessage() {
     return;
   }
 
-  // Build prompt and call Claude
+  // Build prompt and call Claude via multi-agent router
   showTyping();
-  const systemPrompt = buildSystemPrompt();
-  const recentMessages = state.conversationMessages.slice(-20);
+
+  // ── MULTI-AGENT ROUTER ──
+  // Determines which agent responds and uses agent-specific context
+  var activeAgent = 'attending';
+  var agentModel = 'claude-sonnet-4-20250514';
+  var agentMaxTokens = 1024;
+  var agentMessages = state.conversationMessages.slice(-20);
+  var systemPrompt = buildSystemPrompt();
+
+  if (window.RdxAdvanced && window.RdxAdvanced.MultiAgentDefs) {
+    var MA = window.RdxAdvanced.MultiAgentDefs;
+
+    if (state.currentPhase === PHASES.HISTORY_TAKING) {
+      // Patient agent: separate conversation history, lay language, emotional state
+      activeAgent = 'patient';
+      agentModel = MA.agents.patient.model;
+      agentMaxTokens = MA.agents.patient.maxTokens;
+
+      // Build patient-only conversation (filter out attending messages)
+      if (!state._patientMessages) state._patientMessages = [];
+      state._patientMessages.push({ role: 'user', content: msg });
+      agentMessages = state._patientMessages.slice(-16);
+
+      // Build patient-specific system prompt with emotion state
+      var emotionMods = null;
+      if (window.RdxAgentEnhanced && window.RdxAgentEnhanced.PatientEmotionModel) {
+        emotionMods = window.RdxAgentEnhanced.PatientEmotionModel.getBehaviorModifiers();
+      }
+      systemPrompt = MA.agents.patient.systemPromptTemplate(caseData, emotionMods);
+
+      // Inject full patient script
+      var ps = caseData.patientScript;
+      systemPrompt += '\n\nPATIENT DETAILS:\n';
+      systemPrompt += 'Identity: ' + ps.identity + '\n';
+      systemPrompt += 'HPI: ' + ps.hpiOnset + ' ' + ps.hpiProgression + ' ' + ps.hpiCough + ' ' + ps.hpiAssociatedSymptoms + '\n';
+      systemPrompt += 'Location pattern (only if asked): ' + (ps.hpiLocationPattern || '') + '\n';
+      systemPrompt += 'PMH: ' + ps.pmh + '\nMedications: ' + ps.medications + '\nAllergies: ' + ps.allergies + '\n';
+      systemPrompt += 'Family History: ' + ps.familyHistory + '\n';
+      systemPrompt += 'Social: ' + ps.socialSmokingAlcohol + ' ' + (ps.socialOccupation || '') + ' ' + (ps.socialTravel || '') + '\n';
+
+      // Case-specific critical history (only revealed if asked)
+      var critFields = ['substanceVaping', 'substanceCocaine', 'substanceDrugs', 'substanceGeneral', 'substanceIVDrugs',
+                        'socialImmigration', 'socialLiving', 'socialContacts', 'socialSexual', 'socialSexualGeneral',
+                        'environmentalBirds', 'environmentalHome', 'environmentalHobbies', 'environmentalMoldDust', 'environmentalRecentChanges',
+                        'tbScreening', 'oralFindings'];
+      critFields.forEach(function(field) {
+        if (ps[field]) systemPrompt += '\n' + ps[field];
+      });
+
+      systemPrompt += '\n\nROS: ' + ps.ros;
+      systemPrompt += '\n\nCRITICAL: Only reveal sensitive/critical history when the student asks about that exact topic. Do NOT volunteer.';
+
+    } else if (state.currentPhase === PHASES.MANAGEMENT && caseData.patientPushback) {
+      // During management, check if the student's message triggers patient pushback
+      var pushbackTriggered = null;
+      caseData.patientPushback.forEach(function(pb) {
+        if (new RegExp(pb.trigger, 'i').test(msg) && !state._pushbacksDelivered) {
+          pushbackTriggered = pb;
+        }
+      });
+
+      if (pushbackTriggered) {
+        // Switch to patient agent for pushback moment
+        activeAgent = 'patient_pushback';
+        if (!state._pushbacksDelivered) state._pushbacksDelivered = {};
+        state._pushbacksDelivered[pushbackTriggered.trigger] = true;
+
+        // After the Claude call, we'll inject the pushback directly
+        // (handled below in response processing)
+      }
+    }
+
+    // Log the agent selection
+    if (window.RdxAdvanced.ExplainableAgent) {
+      window.RdxAdvanced.ExplainableAgent.logDecision({
+        turn: state.turnCount, phase: state.currentPhase, type: 'agent_selection',
+        action: 'Selected ' + activeAgent + ' agent',
+        reasoning: 'Phase ' + state.currentPhase + ', context determines active agent',
+        inputs: { phase: state.currentPhase, agentModel: agentModel }
+      });
+    }
+  }
 
   try {
+    // Handle patient pushback without Claude call
+    if (activeAgent === 'patient_pushback') {
+      removeTyping();
+      var pb = caseData.patientPushback.find(function(p) { return new RegExp(p.trigger, 'i').test(msg); });
+      if (pb) {
+        addMessage('patient', pb.patientResponse);
+        state.conversationMessages.push({ role: 'assistant', content: pb.patientResponse });
+        state.turns.push({ role: 'assistant', content: pb.patientResponse, timestamp: new Date().toISOString(), phase: state.currentPhase, turnNumber: ++state.turnCount, agentSource: 'patient_pushback' });
+        // Log pushback
+        if (window.RdxAdvanced && window.RdxAdvanced.ExplainableAgent) {
+          window.RdxAdvanced.ExplainableAgent.logDecision({
+            turn: state.turnCount, phase: state.currentPhase, type: 'patient_pushback',
+            action: 'Patient pushback delivered: ' + pb.trigger,
+            reasoning: pb.teachingPoint,
+            inputs: { trigger: pb.trigger },
+            outputs: { response: pb.patientResponse.substring(0, 80) + '...' }
+          });
+        }
+        // After pushback, Dr. Patel follows up
+        setTimeout(async function() {
+          showTyping();
+          var followUpPrompt = buildSystemPrompt();
+          followUpPrompt += '\n\nThe patient just pushed back on the student\'s management plan. The patient said: "' + pb.patientResponse + '"\n\nAsk the student how they would handle this concern. Do NOT solve it for them.';
+          var followResp = await fetch(WORKER_URL, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ studyMode: true, studySystem: followUpPrompt, studyModel: 'claude-sonnet-4-20250514', messages: state.conversationMessages.slice(-10), max_tokens: 500 })
+          });
+          var followData = await followResp.json();
+          var followReply = (followData.content && followData.content[0] && followData.content[0].text) || '';
+          removeTyping();
+          if (followReply) {
+            addMessage('patel', followReply);
+            state.conversationMessages.push({ role: 'assistant', content: followReply });
+            state.turns.push({ role: 'assistant', content: followReply, timestamp: new Date().toISOString(), phase: state.currentPhase, turnNumber: ++state.turnCount, agentSource: 'attending' });
+          }
+        }, 1500);
+
+        input.disabled = false;
+        document.getElementById('sendBtn').disabled = false;
+        input.focus();
+        saveState();
+        updateSidePanel();
+        return;
+      }
+    }
+
+    // Standard multi-agent Claude call
     const resp = await fetch(WORKER_URL, {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
         studyMode: true,
         studySystem: systemPrompt,
-        studyModel: 'claude-sonnet-4-20250514',
-        messages: recentMessages,
-        max_tokens: 1024
+        studyModel: agentModel,
+        messages: agentMessages,
+        max_tokens: agentMaxTokens
       })
     });
     const data = await resp.json();
@@ -396,14 +523,23 @@ async function sendMessage() {
     // Leak check
     checkForLeaks(reply);
 
-    // If we need to deliver a report after Claude's response
     removeTyping();
 
-    // Determine message type
-    const msgType = state.currentPhase === PHASES.HISTORY_TAKING && isPatientResponse(reply) ? 'patient' : 'patel';
+    // Determine message type based on active agent
+    const msgType = activeAgent === 'patient' ? 'patient' : 'patel';
     addMessage(msgType, reply);
     state.conversationMessages.push({ role:'assistant', content: reply });
-    state.turns.push({ role:'assistant', content:reply, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount });
+    state.turns.push({ role:'assistant', content:reply, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount, agentSource: activeAgent });
+
+    // Store patient response in patient conversation history
+    if (activeAgent === 'patient' && state._patientMessages) {
+      state._patientMessages.push({ role: 'assistant', content: reply });
+
+      // Register patient cues for the signal extractor
+      if (window.RdxAgent && window.RdxAgent.SignalExtractor) {
+        window.RdxAgent.SignalExtractor.registerCueDelivery(reply, state.turnCount);
+      }
+    }
 
     // Post-response: deliver report if phase just changed to LABS_IMAGING and report not yet delivered
     if (state.currentPhase === PHASES.LABS_IMAGING && !state.firstReportDelivered && hasOrderedImaging(state.turns)) {
