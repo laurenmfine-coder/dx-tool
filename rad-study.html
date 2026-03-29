@@ -390,18 +390,19 @@ function checkPhaseTransition(signals) {
   if (phase === PHASES.PHYSICAL_EXAM && signals.readyToMoveOn) {
     return { shouldTransition: true, nextPhase: PHASES.LABS_IMAGING };
   }
-  if (phase === PHASES.LABS_IMAGING && state.firstReportDelivered && state.secondReportDelivered) {
-    // Already delivered both reports — move to reflection after student responds
-    if (signals.readyToMoveOn) return { shouldTransition: true, nextPhase: PHASES.REFLECTION };
-  }
-  if (phase === PHASES.LABS_IMAGING && state.firstReportDelivered && !state.secondReportDelivered && signals.readyToMoveOn) {
+  if (phase === PHASES.LABS_IMAGING && state.firstReportDelivered && signals.readyToMoveOn) {
+    // Student has discussed the first report — move to Phase 7 for comparison
     return { shouldTransition: true, nextPhase: PHASES.REPORT_COMPARISON };
   }
   if (phase === PHASES.REPORT_COMPARISON && signals.readyToMoveOn) {
     return { shouldTransition: true, nextPhase: PHASES.REFLECTION };
   }
-  if (phase === PHASES.REFLECTION && signals.readyToMoveOn) {
-    return { shouldTransition: true, nextPhase: PHASES.COMPLETE };
+  if (phase === PHASES.REFLECTION) {
+    // Complete after student has given at least one substantive response to reflection questions
+    const reflectionTurns = state.turns.filter(t => t.role === 'student' && t.phase === PHASES.REFLECTION);
+    if (reflectionTurns.length >= 1 && (signals.readyToMoveOn || reflectionTurns.length >= 2)) {
+      return { shouldTransition: true, nextPhase: PHASES.COMPLETE };
+    }
   }
   return null;
 }
@@ -417,6 +418,10 @@ function enterPhase(phase) {
   state.phaseHistory.push({ phase, enteredAt:now, exitedAt:null });
 
   if (phase === PHASES.HISTORY_TAKING) document.getElementById('historyCard').style.display = 'block';
+  if (phase === PHASES.REPORT_COMPARISON) {
+    // Auto-deliver the second report when entering Phase 7
+    setTimeout(function() { deliverSecondReport(); }, 500);
+  }
   if (phase === PHASES.COMPLETE) {
     document.getElementById('chatInput').disabled = true;
     document.getElementById('sendBtn').disabled = true;
@@ -539,11 +544,24 @@ function addMessage(type, text) {
   const div = document.createElement('div');
   const cssClass = type === 'student' ? 'msg-student' : type === 'patient' ? 'msg-patient' : type === 'report' ? 'msg-report' : type === 'system' ? 'msg-system' : 'msg-patel';
   div.className = 'chat-msg ' + cssClass;
-  if (type === 'patel') div.innerHTML = '<div class="msg-label">Dr. Patel</div>' + esc(text);
-  else if (type === 'patient') div.innerHTML = '<div class="msg-label">Ms. Reyes</div>' + esc(text);
-  else div.textContent = text;
+  // Strip role tags for cleaner display
+  let clean = text.replace(/\[As (Dr\. Patel|Ms\. Reyes|Mrs\. Reyes)\]\s*/gi, '');
+  if (type === 'patel') {
+    div.innerHTML = '<div class="msg-label">Dr. Patel</div>' + escHtml(clean);
+  } else if (type === 'patient') {
+    div.innerHTML = '<div class="msg-label">Ms. Reyes</div>' + escHtml(clean);
+  } else if (type === 'report') {
+    div.textContent = text;
+  } else {
+    div.innerHTML = escHtml(text);
+  }
   el.appendChild(div);
   el.scrollTop = el.scrollHeight;
+}
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML.replace(/\n/g, '<br>');
 }
 function showTyping() {
   const el = document.getElementById('chatMessages');
@@ -558,7 +576,6 @@ function removeTyping() {
   const t = document.getElementById('typingIndicator');
   if (t) t.remove();
 }
-function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
 function updatePhaseUI() {
   document.getElementById('phaseLabel').textContent = 'Phase ' + state.currentPhase + ' of 8';
