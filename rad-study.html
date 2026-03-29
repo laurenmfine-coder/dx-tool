@@ -172,6 +172,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 <!-- ── CASE DATA ── -->
 <script src="emr-data/rad-study-dys001.js"></script>
+<script src="emr-data/guidelines-library.js"></script>
+<script src="js/rdx-agent-tools.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -242,6 +244,19 @@ function startStudy() {
   document.getElementById('sendBtn').disabled = false;
   document.getElementById('statGroup').textContent = groupCode;
   updatePhaseUI();
+
+  // ── AGENT TOOL: Check student prior performance ──
+  if (sb && AgentTools) {
+    AgentTools.getStudentHistory(sb, name, year).then(function(history) {
+      if (history.found) {
+        state.priorHistory = history.patterns;
+        console.log('Prior student history found:', history.patterns);
+        if (history.patterns.isRepeatStudent) {
+          addMessage('system', 'Welcome back! This is session ' + (history.patterns.totalCompleted + 1) + ' for you.');
+        }
+      }
+    }).catch(function(e) { console.log('Prior history lookup skipped:', e.message); });
+  }
 
   // Deliver Phase 1 opening
   const p = caseData.presentation;
@@ -459,6 +474,62 @@ function enterPhase(phase) {
     document.getElementById('sendBtn').disabled = true;
     addMessage('system', 'Simulation complete. Thank you for participating. Your responses have been recorded.');
     exportStudyData();
+
+    // ── AGENT TOOLS: Post-simulation processing ──
+    if (AgentTools) {
+      // 1. Gap Analysis
+      var gaps = AgentTools.analyzeGaps(state, caseData);
+      state.identifiedGaps = gaps;
+      console.log('Gaps identified:', gaps.length, gaps.map(function(g) { return g.id; }));
+
+      // 2. Guidelines Lookup
+      var guidelineResults = AgentTools.lookupGuidelines(caseData.caseId, caseData.targetDiagnosis);
+      state.relevantGuidelines = guidelineResults;
+      if (guidelineResults.found) {
+        console.log('Relevant guidelines found:', guidelineResults.guidelines.length);
+      }
+
+      // 3. SpacedRep Card Generation
+      var cards = AgentTools.generateSpacedRepCards(gaps, state.sessionId, caseData.caseId);
+      if (cards.length > 0) {
+        try { localStorage.setItem('radStudy_cards_' + state.sessionId, JSON.stringify(cards)); } catch(e) {}
+        console.log('SpacedRep cards generated:', cards.length);
+      }
+
+      // 4. Generate AI-powered teaching debrief (after a short pause for the completion message)
+      if (gaps.length > 0) {
+        setTimeout(function() {
+          addMessage('system', 'Generating your personalized teaching debrief...');
+          AgentTools.generateDebrief(WORKER_URL, gaps, state, caseData).then(function(debrief) {
+            addMessage('patel', '[Teaching Debrief — Post-Simulation]\n\n' + debrief);
+
+            // Show guidelines if available
+            if (guidelineResults.found) {
+              var guidelineText = 'Recommended reading for this case:\n\n' + guidelineResults.guidelines.slice(0, 3).map(function(g) {
+                return '\u2022 ' + g.title + ' (' + g.journal + ', ' + g.year + ')' + (g.url ? '\n  ' + g.url : '');
+              }).join('\n\n');
+              addMessage('system', guidelineText);
+            }
+
+            // Show SpacedRep cards
+            if (cards.length > 0) {
+              addMessage('system', cards.length + ' review card' + (cards.length > 1 ? 's' : '') + ' generated based on your identified gaps. These will appear in your Study Hub for spaced repetition review.');
+            }
+
+            // Case recommendation
+            if (state.priorHistory) {
+              var nextCase = AgentTools.recommendNextCase(
+                { found: true, patterns: state.priorHistory },
+                ['DYS-001', 'DYS-002', 'CHEST-001', 'COUGH-001', 'RASH-001']
+              );
+              if (nextCase.caseId && nextCase.caseId !== caseData.caseId) {
+                addMessage('system', 'Recommended next case: ' + nextCase.caseId + ' (' + nextCase.reason + ')');
+              }
+            }
+          });
+        }, 1500);
+      }
+    }
   }
   updatePhaseUI();
 }
@@ -668,6 +739,12 @@ function updateSidePanel() {
 
 function saveState() {
   try { localStorage.setItem('radStudy_' + state.sessionId, JSON.stringify(state)); } catch(e) {}
+  // Auto-save to Supabase every 5 turns
+  if (sb && AgentTools && state.turnCount > 0 && state.turnCount % 5 === 0) {
+    AgentTools.autoSave(sb, state).then(function(ok) {
+      if (ok) console.log('Auto-saved to Supabase (turn ' + state.turnCount + ')');
+    });
+  }
 }
 
 async function exportStudyData() {
