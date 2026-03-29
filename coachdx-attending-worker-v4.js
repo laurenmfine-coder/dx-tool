@@ -128,13 +128,19 @@ export default {
         handoffData = null,
         learnerNotes = null,
         patientMode = false,
-        patientContext = null
+        patientContext = null,
+        studyMode = false,
+        studySystem = null,
+        studyModel = null
       } = body;
 
       // ── BUILD DYNAMIC SYSTEM PROMPT ──
-      const systemPrompt = patientMode
-        ? buildPatientSystemPrompt(patientContext)
-        : buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes, body.difficulty || 'standard');
+      // studyMode: orchestrator passes its own system prompt + model (for radiology study)
+      const systemPrompt = studyMode && studySystem
+        ? studySystem
+        : patientMode
+          ? buildPatientSystemPrompt(patientContext)
+          : buildSystemPrompt(setting, specialty, caseContext, caseId, handoffData, learnerNotes, body.difficulty || 'standard');
 
       // ── CALL ANTHROPIC API ──
       // For patient mode: if messages already start with an assistant turn (the seeded opener
@@ -157,7 +163,7 @@ export default {
           "anthropic-version": "2023-06-01",
         },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
+          model: (studyMode && studyModel) ? studyModel : "claude-sonnet-4-20250514",
           max_tokens: 1024,
           system: systemPrompt,
           messages: finalMessages,
