@@ -131,6 +131,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
         <option value="no">No</option>
       </select>
     </div>
+    <div class="form-group" id="cogloadContainer"></div>
     <button class="intake-btn" onclick="startStudy()">Begin Simulation</button>
   </div>
 </div>
@@ -174,6 +175,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="emr-data/rad-study-dys001.js"></script>
 <script src="emr-data/guidelines-library.js"></script>
 <script src="js/rdx-agent-tools.js"></script>
+<script src="js/rdx-agent-core.js"></script>
+<script src="js/rdx-agent-enhancements.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -810,6 +813,122 @@ async function exportStudyData() {
     console.error('Supabase export failed:', e);
   }
 }
+</script>
+
+<!-- Agent Enhancements Wiring -->
+<script>
+(function() {
+  if (!window.RdxAgentEnhanced) return;
+  var E = window.RdxAgentEnhanced;
+
+  // Render cognitive load selector in intake form
+  var cogContainer = document.getElementById('cogloadContainer');
+  if (cogContainer && E.CognitiveLoadManager) {
+    cogContainer.innerHTML = '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px;">Interruption Level (optional)</label>' +
+      '<div style="font-size:11px;color:#666;margin-bottom:6px;">Simulates multitasking. Choose based on your comfort level.</div>' +
+      '<select id="intakeCogLoad" style="width:100%;padding:10px 12px;border:1px solid #DCE3EB;border-radius:8px;font-family:inherit;font-size:14px;">' +
+      '<option value="off">Off</option><option value="gentle">Gentle</option>' +
+      '<option value="moderate">Moderate</option><option value="realistic">Realistic</option>' +
+      '<option value="intense">Intense</option></select>';
+  }
+
+  // Hook startStudy to initialize enhancements
+  var _origStart = window.startStudy;
+  window.startStudy = function() {
+    _origStart();
+    if (!window.state) return;
+    var cogSel = document.getElementById('intakeCogLoad');
+    E.CognitiveLoadManager.init(cogSel ? cogSel.value : 'off', window.state.trainingYear);
+    window.state.cognitiveLoadLevel = E.CognitiveLoadManager.getCurrentLevel();
+    E.PatientEmotionModel.init(6);
+    window.state._metacogPrompts = [];
+    window.state._confidenceLog = [];
+    window.state._nearMisses = [];
+    window.state._lastDifferentialCount = 0;
+  };
+
+  // Hook sendMessage for real-time enhancements
+  var _origSend = window.sendMessage;
+  window.sendMessage = async function() {
+    if (!window.state) return _origSend();
+    var input = document.getElementById('chatInput');
+    var msg = input ? input.value.trim() : '';
+    if (!msg) return;
+    var pk = 'phase' + window.state.currentPhase;
+    window.state._lastDifferentialCount = (window.state.differentials[pk] || []).length;
+
+    // Patient emotion (Phase 3)
+    if (window.state.currentPhase === 3) E.PatientEmotionModel.update(msg);
+
+    // Near-miss detection
+    if (window.caseData && window.caseData.nearMisses) {
+      E.NearMissDetector.detect(msg, window.caseData.nearMisses).forEach(function(nm) {
+        if (!window.state._nearMisses.some(function(n) { return n.id === nm.id; })) {
+          window.state._nearMisses.push(nm);
+        }
+      });
+    }
+
+    await _origSend();
+
+    // Metacognition (50% chance to avoid over-prompting)
+    if (window.state.currentPhase < 8 && Math.random() < 0.4) {
+      var mc = E.Metacognition.shouldPrompt(msg, window.state, window.state.currentPhase);
+      if (mc) {
+        window.state._metacogPrompts.push(mc.tracking);
+        setTimeout(function() {
+          addMessage('patel', '[As Dr. Patel]\n\n' + mc.prompt);
+          window.state.conversationMessages.push({ role:'assistant', content: mc.prompt });
+        }, 1500);
+      }
+    }
+
+    // Cognitive load interruptions (Phase 3+)
+    if (window.state.currentPhase >= 3) {
+      var interrupt = E.CognitiveLoadManager.shouldInterrupt(window.state.turnCount, window.state.currentPhase, window.state);
+      if (interrupt) {
+        setTimeout(function() {
+          addMessage('system', '\uD83D\uDCDF ' + interrupt.speaker + ': ' + interrupt.text);
+        }, 2000 + Math.random() * 2000);
+      }
+    }
+  };
+
+  // Global confidence recording
+  window.recordConfidence = function(level, phase) {
+    if (!window.state) return;
+    var pk = 'phase' + phase;
+    var dx = (window.state.differentials[pk] || []).map(function(d) { return d.diagnosis.toLowerCase(); });
+    var correct = window.caseData && window.caseData.scoringCriteria.highScoreDiagnoses.some(function(h) {
+      return dx.some(function(d) { return d.includes(h.toLowerCase()); });
+    });
+    E.UncertaintyCalibration.record(window.state, phase, level, correct);
+    var btns = document.querySelectorAll('.confidence-prompt');
+    if (btns.length) btns[btns.length-1].innerHTML = '<div style="font-size:12px;color:#059669;font-weight:600;">\u2713 Confidence: ' + level + '/10</div>';
+  };
+
+  // Hook export to include enhancement data
+  var _origExport = window.exportStudyData;
+  window.exportStudyData = async function() {
+    if (window.state) {
+      window.state.metacogPrompts = window.state._metacogPrompts || [];
+      window.state.confidenceLog = window.state._confidenceLog || [];
+      window.state.nearMisses = window.state._nearMisses || [];
+      window.state.cognitiveLoadLog = E.CognitiveLoadManager.getLog();
+      window.state.patientEmotionFinal = E.PatientEmotionModel.getState();
+      window.state.uncertaintyCalibration = E.UncertaintyCalibration.analyze(window.state);
+      if (window.RdxAgent && window.RdxAgent.BiasFramework) {
+        window.state.detectedBiases = window.RdxAgent.BiasFramework.detectBiases(window.state, window.caseData);
+      }
+      // Peer comparison
+      if (sb) {
+        var comp = await E.CollaborativeReasoning.compareToAggregates(sb, window.state, window.caseData.caseId);
+        if (comp && comp.insights) comp.insights.forEach(function(i) { addMessage('system', i); });
+      }
+    }
+    await _origExport();
+  };
+})();
 </script>
 </body>
 </html>

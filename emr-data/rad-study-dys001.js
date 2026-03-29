@@ -231,7 +231,35 @@ Dictated by: Dr. Amanda Chu, M.D. | Thoracic Radiology
     "PFTs": ["pft", "pulmonary function", "spirometry", "diffusion capacity", "DLCO"],
     "CBC": ["cbc", "blood count", "white count", "hemoglobin"],
     "ESR or CRP": ["esr", "sed rate", "crp", "inflammatory markers"]
-  }
+  },
+
+  // ── NEAR-MISS PATTERNS ──
+  nearMisses: [
+    {
+      id: "ALLERGEN_NOT_BIRDS",
+      category: "History — Near Miss",
+      triggers: ["allerg", "dust", "mold", "chemical"],
+      whatStudentDid: "Asked about allergens or environmental irritants but not specifically about pets or animals",
+      whatWasMissed: "Bird exposure — the specific antigen source. Asking about 'mold' or 'dust' gets a negative answer. The student was thinking environmentally but not broadly enough.",
+      teachingPoint: "When screening for environmental triggers, ask about ALL living things in the home — not just chemicals and irritants. Pets, especially birds, are a common and underrecognized cause of hypersensitivity pneumonitis."
+    },
+    {
+      id: "ILD_NO_EXPOSURE",
+      category: "Clinical Reasoning — Near Miss",
+      triggers: ["interstitial", "ild", "pulmonary fibrosis", "ground.glass"],
+      whatStudentDid: "Recognized the ILD pattern from imaging but did not connect it to exposure history",
+      whatWasMissed: "The critical step of correlating the imaging pattern with a specific environmental exposure. Naming ILD as a category without exploring causation leaves the differential incomplete.",
+      teachingPoint: "When you identify an ILD pattern, your next question should always be: what is the cause? The major ILD categories — exposure-related, autoimmune, idiopathic, smoking-related — each have different histories to pursue."
+    },
+    {
+      id: "TEMPORAL_MISSED",
+      category: "History — Near Miss",
+      triggers: ["when did", "how long", "timeline", "started", "gradual"],
+      whatStudentDid: "Asked about symptom onset and progression but did not correlate timing with any environmental change",
+      whatWasMissed: "The temporal relationship between getting new birds (~8 weeks ago) and symptom onset (~6 weeks ago). Establishing temporal correlations between environmental changes and symptom onset is a fundamental epidemiologic reasoning skill.",
+      teachingPoint: "When symptoms have a clear onset, always ask: what changed around that time? New medications, new exposures, new environment, travel, illness in contacts. The temporal correlation is often the strongest diagnostic clue."
+    }
+  ]
 };
 
 if (typeof module !== 'undefined') module.exports = { CASE_DYS001 };
