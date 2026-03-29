@@ -177,6 +177,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="js/rdx-agent-tools.js"></script>
 <script src="js/rdx-agent-core.js"></script>
 <script src="js/rdx-agent-enhancements.js"></script>
+<script src="js/rdx-study-tools.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -529,6 +530,30 @@ function enterPhase(phase) {
                 addMessage('system', 'Recommended next case: ' + nextCase.caseId + ' (' + nextCase.reason + ')');
               }
             }
+
+            // ── STUDY TOOLS: Generate study package for NotebookLM ──
+            if (window.RdxStudyTools) {
+              var ST = window.RdxStudyTools;
+              var receipt = ST.PerformanceReceipt.generate(state, caseData);
+              var studyPrompts = ST.StudyPrompts.generate(gaps, caseData, guidelineResults);
+              var guidelineCompilation = ST.GuidelineCompiler.compile(caseData.caseId, caseData.targetDiagnosis, guidelineResults);
+              var studyPackage = ST.NotebookLMBridge.generatePackage(receipt, studyPrompts, guidelineCompilation, caseData);
+
+              // Store for download
+              state._studyPackage = studyPackage;
+              state._receipt = receipt;
+
+              // Add download button to chat
+              var btnDiv = document.createElement('div');
+              btnDiv.className = 'chat-msg msg-system';
+              btnDiv.innerHTML = '<div style="background:#E8F8F5;border-radius:10px;padding:16px;margin:4px 0;">' +
+                '<div style="font-weight:700;color:#0D7A67;margin-bottom:8px;">\uD83D\uDCDA Study Package Ready</div>' +
+                '<div style="font-size:13px;color:#333;margin-bottom:12px;">Your performance receipt, study questions, and guideline references have been compiled. Upload this to Google NotebookLM to study the topics you need to review.</div>' +
+                '<button onclick="downloadStudyPackage()" style="padding:10px 20px;background:#0D7A67;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;margin-right:8px;">Download Study Package</button>' +
+                '<button onclick="copyReceipt()" style="padding:10px 20px;background:#fff;color:#0D7A67;border:2px solid #0D7A67;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;">Copy Performance Receipt</button>' +
+                '</div>';
+              document.getElementById('chatMessages').appendChild(btnDiv);
+            }
           });
         }, 1500);
       }
@@ -748,6 +773,29 @@ function saveState() {
       if (ok) console.log('Auto-saved to Supabase (turn ' + state.turnCount + ')');
     });
   }
+}
+
+// ── STUDY PACKAGE DOWNLOAD ──
+function downloadStudyPackage() {
+  if (!state._studyPackage || !window.RdxStudyTools) return;
+  window.RdxStudyTools.NotebookLMBridge.download(state._studyPackage, state.studentName, caseData.caseId);
+}
+
+function copyReceipt() {
+  if (!state._receipt || !window.RdxStudyTools) return;
+  var text = window.RdxStudyTools.PerformanceReceipt.toText(state._receipt);
+  navigator.clipboard.writeText(text).then(function() {
+    addMessage('system', 'Performance receipt copied to clipboard.');
+  }).catch(function() {
+    // Fallback: create textarea and copy
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    addMessage('system', 'Performance receipt copied to clipboard.');
+  });
 }
 
 async function exportStudyData() {
