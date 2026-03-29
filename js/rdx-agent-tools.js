@@ -48,6 +48,7 @@ const AgentTools = {
             year: g.year,
             url: g.url,
             openAccess: g.oa,
+            license: g.license || 'verify',
             validates: g.validates || [],
             category: category
           });

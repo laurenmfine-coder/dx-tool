@@ -393,6 +393,7 @@
           doi: g.doi || null,
           url: g.url,
           openAccess: g.openAccess,
+          license: g.license || 'verify',
           category: g.category,
           keyPoints: g.validates || [],
           // These are the specific validated content points from the
@@ -428,6 +429,7 @@
         if (g.doi) lines.push('DOI: ' + g.doi);
         if (g.url) lines.push('URL: ' + g.url);
         lines.push('Open Access: ' + (g.openAccess ? 'Yes' : 'Check publisher'));
+        lines.push('License: ' + (g.license || 'verify'));
         lines.push('');
         if (g.keyPoints.length > 0) {
           lines.push('Key validated content to review:');
