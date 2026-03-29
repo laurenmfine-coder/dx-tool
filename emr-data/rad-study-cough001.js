@@ -133,6 +133,19 @@ const CASE_COUGH001 = {
     "HIV test": ["hiv", "aids", "human immunodeficiency"]
   },
 
+  management: {
+    criticalActions: ["Airborne isolation precautions immediately", "Sputum AFB x3 (induced if necessary)", "Notify infection control", "Start 4-drug RIFE therapy after specimens collected", "HIV test", "Contact investigation referral to public health", "Hepatitis B check before starting rifampin"],
+    dangerousActions: ["Standard antibiotics without TB coverage", "No airborne precautions in a patient with cavitary disease and hemoptysis", "Discharge before isolation and culture results", "Starting treatment without collecting sputum specimens first"],
+    dispositionCorrect: "Admit to airborne isolation room. Do not discharge until sputum AFB smear-negative on treatment or public health approves outpatient DOT.",
+    patientEducation: ["Explain TB diagnosis and treatment duration (6-9 months)", "Directly Observed Therapy", "Contact tracing — roommates need screening", "Medication adherence critical to prevent resistance"]
+  },
+  patientPushback: [{ trigger: "isolat|separate room|quarantine|alone", patientResponse: "You want me to stay in a room by myself? For how long? I can't miss work — I'm a rideshare driver, I need the income. Who's going to pay my rent?", teachingPoint: "Isolation creates real financial hardship. Address social determinants: social work referral, disability paperwork, public health support for housing. Patient compliance depends on addressing these barriers.", evaluationCriteria: "Acknowledged financial concern? Offered social work? Addressed return-to-work timeline?" },
+  { trigger: "roommate|contact|screening|notify", patientResponse: "My roommates are going to be so angry. They'll blame me. Can we not tell them?", teachingPoint: "Legal obligation: TB is reportable. Public health will conduct contact investigation. Reassure patient that this is standard, confidential, and protects his roommates. He is not at fault.", evaluationCriteria: "Explained legal obligation? Addressed shame/stigma? Reassured about confidentiality?" }],
+  radiologistReread: [{ requiredHistory: ["immigration history", "detention history"], response: "With the history of immigration from Nigeria and time in a detention facility, this cavitary lesion with tree-in-bud pattern is highly suspicious for active pulmonary tuberculosis with endobronchial dissemination. I would prioritize TB over fungal infection or malignancy. Airborne precautions should be in place." },
+  { requiredHistory: ["sick contacts"], response: "If there was a close contact with prolonged cough, this raises the pre-test probability for TB significantly. The imaging pattern — upper lobe cavity with bilateral tree-in-bud — is classic for post-primary TB." }],
+  caseDepth: { v2: { title: "COUGH-001 v2: Day 5 — Culture Results", scenario: "Sputum GeneXpert positive for MTB, rifampin sensitive. AFB smear 3+. Student must manage ongoing isolation, medication monitoring, and contact investigation.", testsFocus: "Drug regimen management, hepatotoxicity monitoring, DOT setup" }, v3: { title: "COUGH-001 v3: 2-Month Follow-Up", scenario: "On RIFE x2 months. Sputum now AFB-negative. Liver enzymes stable. Student must plan continuation phase and assess treatment response.", testsFocus: "Step-down to continuation phase, repeat imaging, return to work plan" } },
+  returnVisit: { recommendedInterval: "1 week", preStudyTopics: ["TB pathophysiology and transmission", "Immigration-related health screening", "Airborne precautions"], postStudyCase: "FEVER-001", measurementFocus: "Does student ask about immigration and social determinants in next case?" },
+
   nearMisses: [
     {
       id: "CANCER_NOT_TB",

@@ -124,6 +124,18 @@ const CASE_CHEST001 = {
     "CT coronary angiography": ["cta", "coronary ct", "ct angio", "heart ct"]
   },
 
+  management: {
+    criticalActions: ["Benzodiazepines (first-line for cocaine vasospasm)", "Nitroglycerin for ongoing chest pain", "Aspirin", "Serial troponins", "Cardiology consult", "Substance use counseling referral", "Avoid beta-blockers (can worsen vasospasm via unopposed alpha)"],
+    dangerousActions: ["Beta-blockers (metoprolol, atenolol) — CONTRAINDICATED in cocaine-induced vasospasm, can cause unopposed alpha-stimulation and worsen coronary spasm and hypertension", "Discharge without addressing cocaine use", "Standard STEMI pathway (cath lab activation) without considering vasospasm etiology — PCI approach differs"],
+    dispositionCorrect: "Admit to telemetry/CCU. Cardiology consult. If troponin rising and ST changes persist despite benzodiazepines and nitrates, consider cath.",
+    patientEducation: ["Explain that cocaine caused the heart event", "Any future cocaine use could cause another or fatal event", "Substance use treatment referral", "Cardiac follow-up"]
+  },
+  patientPushback: [{ trigger: "cocaine.*stop|quit.*coke|never.*again|substance.*counsel", patientResponse: "I only do it once in a while at parties. It's not like I'm addicted. This was just bad luck, right?", teachingPoint: "Motivational interviewing: the patient minimizes use and externalizes causation. Explain the dose-response isn't linear — vasospasm can happen with any use. Avoid judgment while being direct about the risk.", evaluationCriteria: "Non-judgmental? Addressed minimization? Explained that even occasional use carries cardiac risk?" },
+  { trigger: "tell.*family|contact.*someone|who.*know", patientResponse: "Please don't tell my mom about the cocaine. She doesn't know I use. She'll lose it.", teachingPoint: "Confidentiality: student should reassure that medical information is confidential. However, if the patient asks for help connecting with family, facilitate. This is a teachable moment about patient autonomy and disclosure.", evaluationCriteria: "Reassured about confidentiality? Respected autonomy?" }],
+  radiologistReread: [{ requiredHistory: ["cocaine use"], response: "With the history of recent cocaine use, the focal LAD stenosis without atherosclerotic plaque is most consistent with coronary vasospasm. This is a well-described complication of cocaine. Standard PCI may not be indicated — medical management with benzodiazepines and nitrates is first-line. Importantly, beta-blockers are contraindicated." }],
+  caseDepth: { v2: { title: "CHEST-001 v2: 6 Hours — Troponin Peak", scenario: "Troponin peaked at 8.4. ST changes resolved after benzodiazepines and nitrates. Echo shows anterior wall hypokinesis. Student must manage post-MI care in a cocaine user.", testsFocus: "Post-MI management without beta-blockers, substance use counseling, follow-up plan" }, v3: { title: "CHEST-001 v3: Outpatient Follow-Up", scenario: "2 weeks later. Marcus reports he hasn't used cocaine since. Echo shows improved wall motion. Student must address secondary prevention in a young patient.", testsFocus: "Secondary prevention, ongoing cessation, cardiac rehab referral" } },
+  returnVisit: { recommendedInterval: "1 week", preStudyTopics: ["Cocaine cardiovascular effects", "Beta-blocker contraindication in stimulant use", "Vasospasm vs atherosclerotic ACS"], postStudyCase: "DYS-002", measurementFocus: "Does student ask about stimulant use in next substance-related case?" },
+
   nearMisses: [
     {
       id: "WEED_NOT_COCAINE",

@@ -208,12 +208,12 @@ const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE
 const PHASES = {
   INITIAL_DIFFERENTIAL:1, JUSTIFICATION:2, HISTORY_TAKING:3,
   REVISED_DIFFERENTIAL:4, PHYSICAL_EXAM:5, LABS_IMAGING:6,
-  REPORT_COMPARISON:7, REFLECTION:8, COMPLETE:9
+  REPORT_COMPARISON:7, REFLECTION:8, MANAGEMENT:9, COMPLETE:10
 };
 const PHASE_LABELS = {
   1:"Initial Differential", 2:"Differential Justification", 3:"History-Taking",
   4:"Revised Differential", 5:"Physical Examination", 6:"Labs & Imaging",
-  7:"Report Comparison", 8:"Closing Reflection", 9:"Complete"
+  7:"Report Comparison", 8:"Closing Reflection", 9:"Management Plan", 10:"Complete"
 };
 
 let state = null;
@@ -357,6 +357,17 @@ async function sendMessage() {
 
   if (transition && transition.shouldTransition) {
     enterPhase(transition.nextPhase);
+  }
+
+  // Check for radiologist re-read request
+  var reread = handleRadiologistReread(msg);
+  if (reread) {
+    addMessage(reread.type, reread.content);
+    state.conversationMessages.push({ role:'assistant', content: reread.content });
+    state.turns.push({ role:'assistant', content:reread.content, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount });
+    input.disabled = false;
+    document.getElementById('sendBtn').disabled = false;
+    return;
   }
 
   // Build prompt and call Claude
@@ -510,6 +521,16 @@ function checkPhaseTransition(signals) {
     // Complete after student has given at least one substantive response to reflection questions
     const reflectionTurns = state.turns.filter(t => t.role === 'student' && t.phase === PHASES.REFLECTION);
     if (reflectionTurns.length >= 1 && (signals.readyToMoveOn || reflectionTurns.length >= 2)) {
+      return {
+        shouldTransition: true,
+        nextPhase: PHASES.MANAGEMENT,
+        inject: { type:'patel', content:"[As Dr. Patel]\n\nGood. Now let's talk management. Based on your current working diagnosis, what is your plan? Walk me through: immediate interventions, workup to confirm, disposition, and follow-up. Also consider — are there any safety concerns or orders that cannot wait?" }
+      };
+    }
+  }
+  if (phase === PHASES.MANAGEMENT) {
+    const mgmtTurns = state.turns.filter(t => t.role === 'student' && t.phase === PHASES.MANAGEMENT);
+    if (mgmtTurns.length >= 1 && (signals.readyToMoveOn || mgmtTurns.length >= 3)) {
       return { shouldTransition: true, nextPhase: PHASES.COMPLETE };
     }
   }
@@ -726,21 +747,104 @@ If the student interprets imaging WITHOUT referencing clinical history at all, y
     sys += `\n\nYou are Dr. Patel. The student has just seen the second version of the radiology report. Ask: "Did seeing the report in this different format change how you understood the findings? Did it affect your differential? Which version did you find more helpful, and why?" Do not comment on correctness.`;
   }
   else if (phase === PHASES.REFLECTION) {
-    sys += `\n\nYou are Dr. Patel. Ask these reflection questions:\n1. What was the single most important piece of information in reaching your final differential, and at what point did you get it?\n2. Looking back, is there anything you wish you had asked earlier?\n3. How much weight should a radiology report carry when the radiologist doesn't have the full clinical history?\n4. Do you think the language and format of a radiology report affects how you interpret the findings?\n\nAfter the student responds, say: "Thanks for your work today. This case is now complete." Do NOT reveal the diagnosis or provide feedback.`;
+    sys += `\n\nYou are Dr. Patel. The student is reflecting on the case. Listen to their reflections and ask follow-up questions about their reasoning process. Do not reveal the diagnosis or correct them — this is self-assessment. When they seem done, say: "Good reflections. Now let's talk about what you would actually DO for this patient."`;
+  }
+  else if (phase === PHASES.MANAGEMENT) {
+    sys += `\n\nYou are Dr. Patel. The student is proposing a management plan. Evaluate their plan for:
+1. SAFETY — Are there any dangerous omissions or contraindicated orders? Flag these immediately.
+2. APPROPRIATENESS — Does the plan match their stated diagnosis?
+3. COMPLETENESS — Immediate interventions, confirmatory workup, disposition, follow-up?
+
+CASE-SPECIFIC SAFETY CONCERNS:\n`;
+    // Inject case-specific management data if available
+    if (caseData.management) {
+      if (caseData.management.dangerousActions) {
+        sys += `DANGEROUS ACTIONS (flag immediately if student proposes these):\n` + caseData.management.dangerousActions.map(function(d) { return '- ' + d; }).join('\n') + '\n';
+      }
+      if (caseData.management.criticalActions) {
+        sys += `CRITICAL ACTIONS (must be included in plan):\n` + caseData.management.criticalActions.map(function(c) { return '- ' + c; }).join('\n') + '\n';
+      }
+    }
+    sys += `\nIf the student proposes something dangerous, push back firmly: "I'd stop you there — tell me why that might be a problem with this patient."
+If the student's plan is reasonable, ask about one gap they haven't addressed.
+If the student mentions something the patient might refuse or struggle with, introduce the patient pushback: "Actually, ${caseData.presentation.patientName} has some concerns about that plan. How would you handle that?"
+When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."`;
   }
 
   return sys;
 }
 
-// ── LEAK DETECTION ──
+// ── RADIOLOGIST RE-READ ──
+// Students can request re-read with clinical context during Phase 6
+function handleRadiologistReread(studentMessage) {
+  if (state.currentPhase !== PHASES.LABS_IMAGING && state.currentPhase !== PHASES.REPORT_COMPARISON) return null;
+  if (state._rereadRequested) return null;
+  var msg = studentMessage.toLowerCase();
+  if (!/\b(re-?read|radiolog|call.*rad|ask.*rad|additional.*read|clinical.*context.*rad|correlat.*rad)\b/i.test(msg)) return null;
+
+  state._rereadRequested = true;
+
+  // Check what history the student has obtained
+  var critHist = (caseData.signals && caseData.signals.criticalHistory) || [];
+  var obtainedHistory = critHist.filter(function(h) { return state.historyFlags[h]; });
+
+  if (obtainedHistory.length === 0) {
+    return {
+      type: 'system',
+      content: 'Radiology: "We received your request for clinical correlation. However, you haven\'t provided additional clinical history beyond what was in the original order. Our impression remains unchanged. If you have specific exposure or risk factor information, please include it and we can re-evaluate."'
+    };
+  }
+
+  // Build a re-read that integrates the history the student actually obtained
+  var historyContext = obtainedHistory.join(', ');
+  var rereadPrompt = 'Radiology called back. Dr. Chu says: "Thank you for the additional history regarding ' + historyContext + '. ';
+
+  // Case-specific re-read responses
+  if (caseData.radiologistReread) {
+    var matchedReread = null;
+    caseData.radiologistReread.forEach(function(rr) {
+      var matches = rr.requiredHistory.some(function(rh) { return state.historyFlags[rh]; });
+      if (matches && (!matchedReread || rr.requiredHistory.length > matchedReread.requiredHistory.length)) {
+        matchedReread = rr;
+      }
+    });
+    if (matchedReread) {
+      rereadPrompt += matchedReread.response + '"';
+    } else {
+      rereadPrompt += 'The additional history is noted. Our differential remains broadly similar, but we have updated the clinical indication in the report."';
+    }
+  } else {
+    rereadPrompt += 'This clinical context is helpful. We will add a note to the report."';
+  }
+
+  return { type: 'system', content: rereadPrompt };
+}
+
+// ── LEAK DETECTION (universal) ──
 function checkForLeaks(response) {
-  if (state.currentPhase > PHASES.PHYSICAL_EXAM) return; // reports legitimately contain these terms
-  const patterns = [
-    { p:/hypersensitivity pneumonitis|HP\b/i, s:'HIGH', d:'Named target diagnosis' },
-    { p:/\b(bird|feather|avian|cockatiel|parakeet|aviary)\b/i, s:'HIGH', d:'Named case-specific exposure' },
-    { p:/interstitial lung|ILD/i, s:'HIGH', d:'Introduced ILD category' },
-    { p:/\b(excellent|beautiful|great|spot on|nicely done|good thinking)\b/i, s:'MEDIUM', d:'Evaluative praise' },
-  ];
+  if (state.currentPhase > PHASES.PHYSICAL_EXAM) return;
+  var patterns = [];
+
+  // Case-specific leak patterns from scoring criteria
+  if (caseData.scoringCriteria) {
+    (caseData.scoringCriteria.highScoreDiagnoses || []).forEach(function(dx) {
+      patterns.push({ p: new RegExp('\\b' + dx.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i'), s: 'HIGH', d: 'Named target diagnosis: ' + dx });
+    });
+  }
+  // Case-specific exposure keywords (first 3 from critical history)
+  if (caseData.signals && caseData.signals.criticalHistory) {
+    caseData.signals.criticalHistory.slice(0, 3).forEach(function(h) {
+      var keywords = (caseData.keywordMap && caseData.keywordMap[h]) || [];
+      keywords.slice(0, 2).forEach(function(kw) {
+        if (kw.length > 3) {
+          patterns.push({ p: new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i'), s: 'HIGH', d: 'Named case-specific element: ' + kw });
+        }
+      });
+    });
+  }
+  // Universal leak patterns
+  patterns.push({ p: /\b(excellent|beautiful|great|spot on|nicely done|good thinking)\b/i, s: 'MEDIUM', d: 'Evaluative praise' });
+
   for (const lp of patterns) {
     if (lp.p.test(response)) {
       state.leakDetails.push({ phase:state.currentPhase, turn:state.turnCount, severity:lp.s, description:lp.d, timestamp:new Date().toISOString() });

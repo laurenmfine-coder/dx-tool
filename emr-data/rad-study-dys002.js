@@ -131,6 +131,17 @@ const CASE_DYS002 = {
     "BAL": ["bal", "bronchoscopy", "bronchoalveolar", "lavage"]
   },
 
+  management: {
+    criticalActions: ["Discontinue THC vaping immediately", "Supportive care — oxygen, IV fluids", "Systemic corticosteroids (methylprednisolone)", "Pulmonology consult", "Report to state health department"],
+    dangerousActions: ["Empiric antibiotics alone without considering EVALI", "Discharge with SpO2 89%", "Inhaled steroids only (need systemic)"],
+    dispositionCorrect: "Admit for hypoxemia. ICU if worsening.",
+    patientEducation: ["Link between unregulated THC cartridges and lung injury", "Vaping cessation", "Regulated vs unregulated products"]
+  },
+  patientPushback: [{ trigger: "stop.*vap|quit.*vap|cessation", patientResponse: "But I only vape to help with my anxiety. Can't I just switch to a different brand?", teachingPoint: "Address anxiety as the underlying need. Offer alternatives: regulated products, non-inhalational forms, anxiety treatment referral.", evaluationCriteria: "Acknowledged anxiety? Offered alternatives?" }],
+  radiologistReread: [{ requiredHistory: ["vaping", "THC cartridges"], response: "With THC vaping from unregulated cartridges, this pattern is highly consistent with EVALI. The bilateral GGO with subpleural sparing and negative infectious workup support this. I would move EVALI to the top." }],
+  caseDepth: { v2: { title: "DYS-002 v2: ICU Day 2", scenario: "On high-flow, SpO2 92%. Steroids started 24h ago. BAL shows lipid-laden macrophages.", testsFocus: "ICU escalation, BiPAP vs intubation" }, v3: { title: "DYS-002 v3: Discharge", scenario: "Improved day 5, SpO2 97% RA. Plan cessation and follow-up.", testsFocus: "Cessation counseling, mental health referral" } },
+  returnVisit: { recommendedInterval: "1 week", preStudyTopics: ["EVALI pathophysiology", "Substance use history"], postStudyCase: "CHEST-001", measurementFocus: "Does student probe delivery method next time?" },
+
   nearMisses: [
     {
       id: "WEED_NOT_VAPE",

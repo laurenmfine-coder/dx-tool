@@ -234,6 +234,80 @@ Dictated by: Dr. Amanda Chu, M.D. | Thoracic Radiology
   },
 
   // ── NEAR-MISS PATTERNS ──
+  // ── MANAGEMENT PHASE DATA ──
+  management: {
+    criticalActions: [
+      "Remove from antigen exposure (bird avoidance)",
+      "Systemic corticosteroids if moderate-severe",
+      "Pulmonology referral",
+      "PFTs for baseline assessment",
+      "Follow-up imaging in 4-6 weeks"
+    ],
+    dangerousActions: [
+      "Empiric antibiotics without considering non-infectious etiology",
+      "Discharge without addressing antigen avoidance",
+      "Bronchodilators alone (treats symptoms, misses cause)"
+    ],
+    dispositionCorrect: "Discharge with close outpatient pulmonology follow-up if stable on room air; admit if hypoxemic or worsening",
+    patientEducation: ["Explain that the birds are the likely cause", "Discuss need for environmental remediation", "Explain that symptoms should improve with avoidance", "Warn about re-exposure risk"]
+  },
+
+  // ── PATIENT PUSHBACK ──
+  patientPushback: [
+    {
+      trigger: "remove.*bird|get rid.*bird|give away.*bird|no more bird",
+      patientResponse: "Those cockatiels were my mother's. She passed last year and they're all I have left of her. I can't just get rid of them. Isn't there another way?",
+      teachingPoint: "Shared decision-making: the medically ideal plan (remove the antigen) may conflict with the patient's values and emotional needs. Explore alternatives: HEPA filters, keeping birds in a separate space, having someone else clean the cages, wearing a mask. The plan must be one the patient will actually follow.",
+      evaluationCriteria: "Did the student acknowledge the emotional significance? Did they explore alternatives? Did they negotiate a plan the patient can accept?"
+    },
+    {
+      trigger: "steroids|prednisone|prednisolone|corticosteroid",
+      patientResponse: "My friend took steroids and gained a ton of weight and couldn't sleep. I really don't want to take those. How long would I have to be on them?",
+      teachingPoint: "Addressing medication concerns: patients need to understand the risk-benefit ratio in their specific situation. Explain that short-course steroids have fewer side effects than chronic use, that the alternative is progressive lung damage, and that you'll taper as quickly as safely possible.",
+      evaluationCriteria: "Did the student address the concern directly? Did they explain the risk of NOT treating? Did they discuss the taper plan?"
+    }
+  ],
+
+  // ── RADIOLOGIST RE-READ ──
+  radiologistReread: [
+    {
+      requiredHistory: ["pets"],
+      response: "With the history of bird exposure, the imaging pattern of centrilobular ground-glass nodularity with mosaic attenuation is most consistent with hypersensitivity pneumonitis. I would move this to the top of the differential and lower my suspicion for sarcoidosis. Serum precipitins to avian antigens would be confirmatory."
+    },
+    {
+      requiredHistory: ["home environment"],
+      response: "Thank you for the additional environmental history. If there are specific inhalational exposures at home, this pattern would be consistent with hypersensitivity pneumonitis. Can you clarify what specific exposures are present? That would help me narrow the differential."
+    },
+    {
+      requiredHistory: ["smoking"],
+      response: "The patient is a non-smoker, which makes RB-ILD much less likely. This helps narrow the differential. The pattern still favors HP or sarcoidosis — exposure history would help differentiate."
+    }
+  ],
+
+  // ── CASE DEPTH CHAINS ──
+  caseDepth: {
+    v2: {
+      title: "DYS-001 v2: Treatment Failure at 48 Hours",
+      scenario: "Ms. Reyes was started on empiric antibiotics 48 hours ago. She is not improving — SpO2 is now 91%, cough is worse, and she is febrile to 101.2. The precipitins came back positive for avian antigens. The student must now reassess.",
+      newData: { precipitins: "Positive for pigeon and cockatiel antigens (IgG)", repeatSpO2: "91% on room air", temperature: "101.2°F" },
+      testsFocus: "Treatment reassessment, antigen avoidance counseling, steroid initiation"
+    },
+    v3: {
+      title: "DYS-001 v3: 6-Week Outpatient Follow-Up",
+      scenario: "Ms. Reyes removed the birds 6 weeks ago and completed a steroid taper. She reports significant improvement but still has mild exertional dyspnea. PFTs show mild restrictive pattern with reduced DLCO. Follow-up HRCT shows improvement but residual ground-glass.",
+      newData: { pft: "FVC 78% predicted, FEV1 80%, DLCO 65% predicted", symptoms: "Mild exertional dyspnea, no cough, no fever", birds: "Rehomed 6 weeks ago" },
+      testsFocus: "Longitudinal monitoring, residual disease assessment, return-to-exposure prevention counseling"
+    }
+  },
+
+  // ── RETURN VISIT PROTOCOL ──
+  returnVisit: {
+    recommendedInterval: "1 week",
+    preStudyTopics: ["Hypersensitivity pneumonitis pathophysiology", "Environmental history systematic approach", "ILD differential diagnosis"],
+    postStudyCase: "DYS-002",
+    measurementFocus: "Does the student ask about environmental exposures earlier and more systematically in the next case?"
+  },
+
   nearMisses: [
     {
       id: "ALLERGEN_NOT_BIRDS",
