@@ -35,19 +35,57 @@
   }
 
   function generateAge(caseId, crt) {
-    // Try to extract age from patient summary or chief complaint
     if (crt.patientSummary && crt.patientSummary.age) return crt.patientSummary.age;
-    // Deterministic fallback
+
+    // Extract from any text field
+    var allText = JSON.stringify(crt).substring(0, 5000);
+    var ageMatch = allText.match(/(\d{1,2})-year-old|(\d{1,2})yo|age[: ]+(\d{1,3})/i);
+    if (ageMatch) {
+      var found = parseInt(ageMatch[1] || ageMatch[2] || ageMatch[3]);
+      if (found > 0 && found < 120) return found;
+    }
+
+    // Clinically appropriate age by diagnosis/category
+    var dx = (crt.diagnosis || '').toLowerCase();
+    var cat = (crt.category || '').toLowerCase();
     var h = hashCode(caseId);
-    return 25 + (h % 55); // 25-79
+
+    // Pediatric
+    if (/pediatric|croup|intussusception|kawasaki|pyloric|febrile seizure|bronchiolitis/.test(dx)) return 2 + (h % 8);
+    if (/fpies|neonatal/.test(dx)) return 1;
+    // Young adults
+    if (/dka.*type.?1|anorexia|testicular torsion/.test(dx)) return 18 + (h % 12);
+    if (/evali|vaping|overdose.*intentional/.test(dx)) return 20 + (h % 15);
+    // Middle-aged
+    if (/stemi|nstemi|acs|mi\b|coronary|aortic dissection/.test(dx)) return 52 + (h % 18);
+    if (/stroke|cva|afib|atrial fibrillation/.test(dx)) return 58 + (h % 20);
+    if (/chf|heart failure/.test(dx)) return 55 + (h % 20);
+    if (/copd/.test(dx)) return 58 + (h % 15);
+    // General ED
+    if (/meningitis/.test(dx)) return 22 + (h % 20);
+    if (/pe\b|pulmonary embolism/.test(dx)) return 32 + (h % 25);
+    if (/appendicitis/.test(dx)) return 18 + (h % 30);
+    if (/sepsis/.test(dx)) return 55 + (h % 25);
+    // Allergy
+    if (/anaphylaxis|allergy|allergic/.test(dx) || cat === 'allergy') return 25 + (h % 35);
+    // Default: 30-70
+    return 30 + (h % 40);
   }
 
   function guessSex(crt) {
-    // Look for gender clues in the case data
-    var text = JSON.stringify(crt).toLowerCase();
-    if (/\bpregnant\b|\bovarian\b|\buterine\b|\bher\b.*history/i.test(text)) return 'Female';
-    if (/\bprostat\b|\btesticular\b|\bhis\b.*history/i.test(text)) return 'Male';
-    // Default based on case hash
+    // Extract from text
+    var allText = JSON.stringify(crt).substring(0, 3000).toLowerCase();
+    if (/\bpregnant\b|\bovarian\b|\buterine\b|\bvaginal\b|\bgynec\b|\bbreastfeed\b|\bperipartum\b/.test(allText)) return 'Female';
+    if (/\bprostat\b|\btesticular\b|\bpenile\b|\bepididym\b/.test(allText)) return 'Male';
+
+    // Clinically weighted by diagnosis
+    var dx = (crt.diagnosis || '').toLowerCase();
+    if (/stemi|nstemi|mi\b|coronary|aortic dissection|aaa/.test(dx)) return 'Male'; // 2:1 male predominance
+    if (/pe\b|pulmonary embolism|lupus|sle/.test(dx)) return 'Female'; // female predominance
+    if (/testicular/.test(dx)) return 'Male';
+    if (/ovarian|ectopic|eclamp/.test(dx)) return 'Female';
+
+    // Deterministic from hash — roughly 50/50
     return hashCode(crt.id || '') % 2 === 0 ? 'Female' : 'Male';
   }
 
