@@ -521,23 +521,23 @@ async function sendMessage() {
     // Build patient-only conversation
     if (!state._patientMessages) state._patientMessages = [];
     state._patientMessages.push({ role: 'user', content: msg });
-    agentMessages = state._patientMessages.slice(-16);
+    agentMessages = state._patientMessages.slice(-30);
 
     // Build patient system prompt from case data
     var ps = caseData.patientScript;
     var patName = caseData.presentation.patientName;
-    systemPrompt = 'You are ' + patName + ', a patient in a medical encounter. Stay fully in character.\n\n';
-    systemPrompt += 'The student interviewing you is named ' + state.studentName + '. They are a medical student working with Dr. Patel.\n\n';
-    systemPrompt += 'RULES:\n';
-    systemPrompt += '- Answer ONLY what is asked. Do not volunteer information.\n';
-    systemPrompt += '- Use plain lay language. No medical terms.\n';
-    systemPrompt += '- Never break character.\n';
-    systemPrompt += '- Never ask the student questions back.\n';
-    systemPrompt += '- Keep responses to 1-2 sentences.\n';
-    systemPrompt += '- NEVER use narrative descriptions of actions. NO "She nods." NO "He looks away." NO "Maria adjusts." NO stage directions of any kind. You are SPEAKING, not narrating. Just say your words.\n';
-    systemPrompt += '- NEVER use third person to refer to yourself. You are "I" not "she" or "he."\n';
-    systemPrompt += '- NEVER end your response with "What would you like to do?" or any prompt to the student. Just answer and stop.\n';
-    systemPrompt += '- If the student uses medical jargon you would not understand, respond naturally: "I\'m not sure what that means" or "Can you explain that in simpler terms?" This is how real patients respond to jargon.\n';
+    systemPrompt = 'MEDICAL EDUCATION SIMULATION — You play ' + patName + '.\n\n';
+    systemPrompt += 'YOU ARE ' + patName + ', age ' + caseData.presentation.age + '. YOUR AGE IS ' + caseData.presentation.age + '. Never state a different age.\n\n';
+    systemPrompt += 'The student interviewing you is ' + state.studentName + ', a medical student on Dr. Patel\'s team.\n\n';
+    systemPrompt += 'ABSOLUTE RULES — VIOLATION OF ANY RULE IS A CRITICAL FAILURE:\n';
+    systemPrompt += '1. ONLY speak as yourself in first person. Say "I" not "she" or "he."\n';
+    systemPrompt += '2. ZERO narrative. ZERO stage directions. NEVER write: "Maria nods" or "She looks" or "He pauses" or any third-person action. You are SPEAKING. Just say your words and STOP.\n';
+    systemPrompt += '3. NEVER end with a question to the student like "What would you like to do?" or "What do you think?" Just answer and stop.\n';
+    systemPrompt += '4. 1-3 sentences maximum. Short, natural responses.\n';
+    systemPrompt += '5. Plain language only. If the student uses a medical term, say "I don\'t know what that means" or "Can you put that in simpler terms?"\n';
+    systemPrompt += '6. Answer ONLY what is asked. Do NOT volunteer information.\n';
+    systemPrompt += '7. If the student already told you something (like what they think is going on), do NOT keep asking. Acknowledge it and respond to their question.\n';
+    systemPrompt += '8. Remember the full conversation. Do not repeat questions the student already answered.\n';
 
     // Emotional state modifiers
     if (window.RdxAgentEnhanced && window.RdxAgentEnhanced.PatientEmotionModel) {
@@ -665,13 +665,15 @@ async function sendMessage() {
 
     removeTyping();
 
-    // Determine message type based on active agent AND content analysis
-    var msgType = activeAgent === 'patient' ? 'patient' : 'patel';
-    // Content-based override: if the response is clearly from the patient character
-    // (uses patient name, speaks in quotes, describes patient actions), label it correctly
-    if (msgType === 'patel' && caseData) {
+    // Determine message type: phase-based (definitive) + content-based (backup)
+    var msgType = 'patel';
+    if (activeAgent === 'patient' || state.currentPhase === PHASES.HISTORY_TAKING) {
+      msgType = 'patient';
+    } else if (caseData) {
+      // Content-based backup: detect if Claude responded as patient despite being in wrong phase
       var firstName = caseData.presentation.patientName.split(' ')[0];
-      var isPatientContent = new RegExp('(' + firstName + '\\s+(nods|shakes|looks|smiles|pauses|sighs|coughs|shifts|adjusts|says|responds|replies|answers)|^"[^"]+"|^\'[^\']+\'|I\\s+(don\'t|haven\'t|didn\'t|can\'t|feel|have|am|was|got|just|think|started|noticed))', 'i').test(reply);
+      var patternStr = '(' + firstName + '\\s+(nods|shakes|looks|smiles|pauses|sighs|coughs|shifts|adjusts|says|thinks|trails|responds|replies|answers|frowns|widens)|^"[^"]+"|I\\s+(don\'t|haven\'t|didn\'t|can\'t|feel|have been|am |was |got |just |think|started|noticed|had ))'
+      var isPatientContent = new RegExp(patternStr, 'im').test(reply);
       if (isPatientContent) msgType = 'patient';
     }
     addMessage(msgType, reply);
@@ -851,7 +853,26 @@ function enterPhase(phase) {
   state.currentPhase = phase;
   state.phaseHistory.push({ phase, enteredAt:now, exitedAt:null });
 
-  if (phase === PHASES.HISTORY_TAKING) document.getElementById('historyCard').style.display = 'block';
+  if (phase === PHASES.HISTORY_TAKING) {
+    document.getElementById('historyCard').style.display = 'block';
+  }
+  if (phase === PHASES.PHYSICAL_EXAM) {
+    // Auto-deliver PE findings on phase entry
+    setTimeout(function() {
+      var pe = caseData.physicalExam;
+      var peText = "Here are the physical examination findings:\n\n" +
+        "General: " + pe.general + "\n" +
+        "HEENT: " + pe.heent + "\n" +
+        "Cardiovascular: " + pe.cardiovascular + "\n" +
+        "Respiratory: " + pe.respiratory + "\n" +
+        "Abdomen: " + pe.abdomen + "\n" +
+        "Extremities: " + pe.extremities + "\n" +
+        "Skin: " + pe.skin;
+      addMessage('patel', '[As Dr. Patel]\n\n' + peText + '\n\nBased on these findings, how does your thinking change?');
+      state.conversationMessages.push({ role: 'assistant', content: peText });
+      state.turns.push({ role: 'assistant', content: peText, timestamp: new Date().toISOString(), phase: state.currentPhase, turnNumber: ++state.turnCount });
+    }, 500);
+  }
   if (phase === PHASES.REPORT_COMPARISON) {
     // Auto-deliver the second report when entering Phase 7
     setTimeout(function() { deliverSecondReport(); }, 500);
@@ -1019,18 +1040,7 @@ PATIENT DETAILS:\n`;
     sys += `\n\nYou are Dr. Patel. Ask the student how their differential has changed based on the history. Listen and ask them to elaborate on changes THEY describe. Do NOT suggest diagnoses or hint that something is missing.`;
   }
   else if (phase === PHASES.PHYSICAL_EXAM) {
-    const pe = caseData.physicalExam;
-    sys += `\n\nYou are Dr. Patel. The student is telling you what physical exam they want to perform. After they describe their plan, provide these findings in natural language:
-
-General: ${pe.general}
-HEENT: ${pe.heent}
-Cardiovascular: ${pe.cardiovascular}
-Respiratory: ${pe.respiratory}
-Abdomen: ${pe.abdomen}
-Extremities: ${pe.extremities}
-Skin: ${pe.skin}
-
-After providing findings, ask: "Based on these findings, how does your thinking change?" Do NOT interpret findings for them.`;
+    sys += `\n\nYou are Dr. Patel. The physical exam findings have ALREADY been delivered to the student by the system. Do NOT repeat them or list them again. The student is now interpreting the findings. Ask them what the findings tell them and how their differential has changed. If they seem unsure, ask: "Which findings are most concerning to you?" When discussion feels adequate, ask what workup they would like to order.`;
   }
   else if (phase === PHASES.LABS_IMAGING) {
     const labs = caseData.labResults;
