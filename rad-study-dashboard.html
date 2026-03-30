@@ -86,6 +86,7 @@ tr.clickable{cursor:pointer}
     <div class="stat-card"><div class="label">Avg Readability</div><div class="value" id="statReadability">--</div><div class="sub">To patient (grade)</div></div>
     <div class="stat-card"><div class="label">Avg PE Coverage</div><div class="value" id="statPE">--</div><div class="sub">Critical systems</div></div>
     <div class="stat-card"><div class="label">Avg Confidence</div><div class="value" id="statConfidence">--</div><div class="sub">Implicit (-1 to +1)</div></div>
+    <div class="stat-card"><div class="label">Reasoning Tools</div><div class="value" id="statReasoning">--</div><div class="sub">ACH / Triangulation / AAR</div></div>
     <div class="stat-card"><div class="label">Leaks Detected</div><div class="value" id="statLeaks">--</div></div>
   </div>
 
@@ -251,6 +252,10 @@ function renderStats() {
     var avgConf = confSessions.reduce((sum, s) => sum + s.passive_data.implicitConfidence.avgScore, 0) / confSessions.length;
     document.getElementById('statConfidence').textContent = avgConf.toFixed(2);
   }
+
+  // Reasoning tools usage
+  var rtSessions = sessions.filter(s => s.reasoning_tools);
+  document.getElementById('statReasoning').textContent = rtSessions.length + '/' + sessions.length;
 }
 
 async function loadAggregates() {
@@ -367,7 +372,11 @@ function exportCSV() {
     'empathy_moments','empathy_density',
     'cue_utilization_rate','cues_missed',
     'jargon_count','plain_language_count','gap_acknowledgments','followup_commitments',
-    'ddx_initial_count','ddx_revised_count','ddx_diagnoses_added','ddx_diagnoses_removed'
+    'ddx_initial_count','ddx_revised_count','ddx_diagnoses_added','ddx_diagnoses_removed',
+    'ach_bias_count','ach_top_diagnosis','fmea_top_rpn','fmea_must_not_miss_count',
+    'triangulation_sources_at_commit','triangulation_premature_closure',
+    'devils_advocate_quality','aar_reflective_depth','aar_word_count',
+    'postgame_divergence_count','case_pairing_recommended'
   ];
   const rows = sessions.map(s => {
     const f = s.history_flags || {};
@@ -381,6 +390,12 @@ function exportCSV() {
     const hl = s.health_literacy || {};
     const dc = s.ddx_comparison || {};
     const diffs = s.differentials || {};
+    const rt = s.reasoning_tools || {};
+    const achA = rt.achAnalysis || {};
+    const fmeaA = rt.fmeaAnalysis || {};
+    const tri = rt.triangulationCommitments || [];
+    const da = (rt.devilsAdvocate || [])[0] || {};
+    const aar = rt.aar || {};
     return [
       s.session_id, s.student_name, s.training_year, s.case_id, s.case_source||'native',
       s.group_code, s.first_report_type,
@@ -395,7 +410,12 @@ function exportCSV() {
       cu.utilizationRate||'', (cu.missedCues||[]).map(c=>c.text||'').join(';'),
       hl.jargonCount||0, hl.plainLanguageCount||0, hl.gapAcknowledgments||0, hl.followUpCommitments||0,
       (diffs.initial||[]).length, (diffs.revised||[]).length,
-      (dc.added||[]).length, (dc.removed||[]).length
+      (dc.added||[]).length, (dc.removed||[]).length,
+      (achA.biases||[]).length, rt.ach && rt.ach.ranked ? (rt.ach.ranked[0]||{}).name||'' : '',
+      rt.fmea && rt.fmea[0] ? rt.fmea[0].rpn||'' : '', (fmeaA.mustNotMiss||[]).length,
+      tri[0] ? tri[0].sourceCount||'' : '', tri.some(function(c){return c.prematureClosure;})||false,
+      da.quality||'', aar.quality ? aar.quality.reflectiveDepth||'' : '', aar.quality ? aar.quality.totalWords||0 : 0,
+      rt.postGame ? (rt.postGame.divergences||[]).length : '', rt.casePairing ? rt.casePairing.recommendedCase||'' : ''
     ].map(v => typeof v === 'string' ? '"' + v.replace(/"/g,'""') + '"' : v);
   });
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');

@@ -8,6 +8,7 @@ ALTER TABLE rad_study_sessions ADD COLUMN IF NOT EXISTS passive_data JSONB DEFAU
 ALTER TABLE rad_study_sessions ADD COLUMN IF NOT EXISTS pe_exam_summary JSONB DEFAULT NULL;
 ALTER TABLE rad_study_sessions ADD COLUMN IF NOT EXISTS health_literacy JSONB DEFAULT NULL;
 ALTER TABLE rad_study_sessions ADD COLUMN IF NOT EXISTS ddx_comparison JSONB DEFAULT NULL;
+ALTER TABLE rad_study_sessions ADD COLUMN IF NOT EXISTS reasoning_tools JSONB DEFAULT NULL;
 
 -- Relax group_code constraint for non-study cases (CRT adapter cases don't have study groups)
 ALTER TABLE rad_study_sessions DROP CONSTRAINT IF EXISTS rad_study_sessions_group_code_check;
