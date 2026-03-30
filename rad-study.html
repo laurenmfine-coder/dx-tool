@@ -539,6 +539,21 @@ async function sendMessage() {
     return;
   }
 
+  // ── PE EXAM REQUEST MATCHING ──
+  // When in PE phase, intercept exam requests and deliver findings
+  var peResult = matchAndDeliverPE(msg);
+  if (peResult) {
+    addMessage('patel', peResult.content);
+    state.conversationMessages.push({ role:'assistant', content: peResult.content });
+    state.turns.push({ role:'assistant', content:peResult.content, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount, peSystemsDelivered: peResult.matchedSystems });
+    input.disabled = false;
+    document.getElementById('sendBtn').disabled = false;
+    input.focus();
+    saveState();
+    updateSidePanel();
+    return;
+  }
+
   // Build prompt and call Claude via multi-agent router
   showTyping();
 
@@ -986,20 +1001,22 @@ function enterPhase(phase) {
     if (ddxPanel) ddxPanel.style.display = 'none';
   }
   if (phase === PHASES.PHYSICAL_EXAM) {
-    // Auto-deliver PE findings on phase entry
+    // Don't auto-deliver — Dr. Patel asks what the student wants to examine
+    state._peRequested = {};  // track which systems were requested
+    state._peDelivered = {};  // track which systems were delivered
     setTimeout(function() {
-      var pe = caseData.physicalExam;
-      var peText = "Here are the physical examination findings:\n\n" +
-        "General: " + pe.general + "\n" +
-        "HEENT: " + pe.heent + "\n" +
-        "Cardiovascular: " + pe.cardiovascular + "\n" +
-        "Respiratory: " + pe.respiratory + "\n" +
-        "Abdomen: " + pe.abdomen + "\n" +
-        "Extremities: " + pe.extremities + "\n" +
-        "Skin: " + pe.skin;
-      addMessage('patel', '[As Dr. Patel]\n\n' + peText + '\n\nBased on these findings, how does your thinking change?');
-      state.conversationMessages.push({ role: 'assistant', content: peText });
-      state.turns.push({ role: 'assistant', content: peText, timestamp: new Date().toISOString(), phase: state.currentPhase, turnNumber: ++state.turnCount });
+      var year = state.trainingYear || 'M3';
+      var prompt = "[As Dr. Patel]\n\n";
+      if (year === 'M1' || year === 'M2') {
+        prompt += "Now let's do the physical exam. Tell me which systems you want to examine and what you're looking for in each one. Think about what findings would support or refute your differential.";
+      } else if (year === 'M3' || year === 'M4') {
+        prompt += "Go ahead with your physical exam. What are you examining and what do you expect to find?";
+      } else {
+        prompt += "What's your focused exam?";
+      }
+      addMessage('patel', prompt);
+      state.conversationMessages.push({ role: 'assistant', content: prompt });
+      state.turns.push({ role: 'assistant', content: prompt, timestamp: new Date().toISOString(), phase: state.currentPhase, turnNumber: ++state.turnCount });
     }, 500);
   }
   if (phase === PHASES.REPORT_COMPARISON) {
@@ -1227,7 +1244,19 @@ PATIENT DETAILS:\n`;
     sys += `\n\nYou are Dr. Patel. Ask the student how their differential has changed based on the history. Listen and ask them to elaborate on changes THEY describe. Do NOT suggest diagnoses or hint that something is missing.`;
   }
   else if (phase === PHASES.PHYSICAL_EXAM) {
-    sys += `\n\nYou are Dr. Patel. The physical exam findings have ALREADY been delivered to the student by the system. Do NOT repeat them or list them again. The student is now interpreting the findings. Ask them what the findings tell them and how their differential has changed. If they seem unsure, ask: "Which findings are most concerning to you?" When discussion feels adequate, ask what workup they would like to order.`;
+    var peExamined = Object.keys(state._peDelivered || {});
+    var peExaminedStr = peExamined.length > 0 ? peExamined.join(', ') : 'none yet';
+    sys += `\n\nYou are Dr. Patel. The student is performing their physical exam. Physical findings are delivered by the system when the student specifies which body systems to examine. You do NOT deliver findings — the system does that.
+
+Systems examined so far: ${peExaminedStr}
+
+Your role:
+- If the student has just received PE findings: ask them to interpret. "What do those findings tell you?" or "How does that change your thinking?"
+- If the student is discussing what to examine: let them explain their reasoning. Ask: "What are you looking for?" or "What would that finding tell you?"
+- If the student seems done examining: ask "Is there anything else you want to check before we move on to the workup?"
+- Do NOT suggest specific exams to perform — the student should decide based on their differential.
+- Do NOT repeat or summarize PE findings that were already delivered.
+- When the student is ready to move on, ask what workup they would like to order.`;
   }
   else if (phase === PHASES.LABS_IMAGING) {
     const labs = caseData.labResults;
@@ -1427,6 +1456,109 @@ function stripEmotes(text) {
 
   return result;
 }
+// ── PE EXAM MATCHING ──
+// Detects which body systems the student requests and delivers findings
+function matchAndDeliverPE(msg) {
+  if (state.currentPhase !== PHASES.PHYSICAL_EXAM) return null;
+  if (!caseData || !caseData.physicalExam) return null;
+
+  var pe = caseData.physicalExam;
+  var examMap = {
+    general: { keywords: /\b(general|overall|appearance|vital|look at|inspect)\b/i, label: 'General', finding: pe.general },
+    heent: { keywords: /\b(heent|head|eyes|ears|nose|throat|neck|jvp|jvd|jugular|thyroid|lymph|oral|mouth|conjunctiv|fundoscop)\b/i, label: 'HEENT/Neck', finding: pe.heent },
+    cardiovascular: { keywords: /\b(cardio|heart|cardiac|auscultat.*heart|listen.*heart|pmi|point of max|murmur|s3|s4|gallop|carotid|jugular venous|jvp|palpate.*chest|precord)\b/i, label: 'Cardiovascular', finding: pe.cardiovascular },
+    respiratory: { keywords: /\b(lung|pulmonary|respiratory|breath sounds|auscultat.*lung|listen.*lung|crackle|wheez|rhonchi|percuss.*chest|chest wall|fremitus|egophony|pectoriloquy)\b/i, label: 'Respiratory', finding: pe.respiratory },
+    abdomen: { keywords: /\b(abdom|belly|liver|hepat|spleen|bowel|periton|ascit|tender.*abdom|palpat.*abdom|hepatojugular|hepatomegaly)\b/i, label: 'Abdomen', finding: pe.abdomen },
+    extremities: { keywords: /\b(extrem|legs?|feet|ankle|edema|swelling|peripheral|pulse.*pedal|pulse.*tibial|pulse.*dorsalis|pitting|calf|lower extrem|upper extrem|clubbing|cyanosis)\b/i, label: 'Extremities', finding: pe.extremities },
+    skin: { keywords: /\b(skin|rash|lesion|color|cyanosis|jaundice|pallor|diaphor|petechiae|xanthoma|xanthelasma|corneal arcus|nail|clubbing)\b/i, label: 'Skin/Integument', finding: pe.skin },
+    neuro: { keywords: /\b(neuro|mental status|cranial nerve|motor|sensory|reflex|cerebell|gait|babinski|strength|coordination)\b/i, label: 'Neurologic', finding: pe.neuro || 'Alert and oriented x4. Cranial nerves II-XII intact. Motor strength 5/5 all extremities. Sensation intact. Reflexes 2+ symmetric.' }
+  };
+
+  var matchedSystems = [];
+  var newFindings = [];
+
+  Object.entries(examMap).forEach(function(entry) {
+    var system = entry[0];
+    var data = entry[1];
+    if (data.keywords.test(msg)) {
+      if (!state._peDelivered[system]) {
+        state._peDelivered[system] = true;
+        state._peRequested[system] = true;
+        newFindings.push(data.label + ': ' + data.finding);
+      }
+      matchedSystems.push(system);
+    }
+  });
+
+  // Check for broad requests ("full physical", "head to toe", "complete exam")
+  if (/\b(full physical|complete.*exam|head to toe|comprehensive|full exam|everything)\b/i.test(msg)) {
+    Object.entries(examMap).forEach(function(entry) {
+      var system = entry[0];
+      var data = entry[1];
+      if (!state._peDelivered[system]) {
+        state._peDelivered[system] = true;
+        state._peRequested[system] = true;
+        newFindings.push(data.label + ': ' + data.finding);
+      }
+    });
+  }
+
+  if (newFindings.length === 0) return null;
+
+  // Build the findings message
+  var findingsText = 'You perform the examination.\n\n' + newFindings.join('\n\n');
+
+  // Count what's been examined vs what's available
+  var totalSystems = Object.keys(examMap).length;
+  var examinedCount = Object.keys(state._peDelivered).length;
+
+  if (examinedCount < totalSystems - 1) {
+    findingsText += '\n\nIs there anything else you would like to examine?';
+  } else {
+    findingsText += '\n\nBased on all your findings, how does your thinking change?';
+  }
+
+  return {
+    type: 'patel',
+    content: '[As Dr. Patel]\n\n' + findingsText,
+    matchedSystems: matchedSystems,
+    examinedCount: examinedCount,
+    totalSystems: totalSystems
+  };
+}
+
+// Get PE summary for scoring — what was examined, what was missed
+function getPESummary() {
+  if (!caseData || !caseData.physicalExam) return null;
+  var pe = caseData.physicalExam;
+  var allSystems = ['general', 'heent', 'cardiovascular', 'respiratory', 'abdomen', 'extremities', 'skin', 'neuro'];
+  var examined = Object.keys(state._peDelivered || {});
+  var missed = allSystems.filter(function(s) { return examined.indexOf(s) === -1; });
+
+  // Determine critical exams for this case
+  var criticalExams = [];
+  if (caseData.scoringCriteria && caseData.scoringCriteria.criticalPEFindings) {
+    criticalExams = caseData.scoringCriteria.criticalPEFindings;
+  } else {
+    // Infer from case category
+    var target = (caseData.targetDiagnosis || '').toLowerCase();
+    if (/heart|cardiac|chf|mi|myocard/i.test(target)) criticalExams = ['cardiovascular', 'respiratory', 'extremities'];
+    else if (/pulmon|pneum|tb|lung|asthma|copd/i.test(target)) criticalExams = ['respiratory', 'cardiovascular'];
+    else if (/hiv|pcp|fever/i.test(target)) criticalExams = ['heent', 'respiratory', 'skin'];
+    else criticalExams = ['cardiovascular', 'respiratory'];
+  }
+
+  var criticalMissed = criticalExams.filter(function(s) { return examined.indexOf(s) === -1; });
+
+  return {
+    examined: examined,
+    missed: missed,
+    criticalMissed: criticalMissed,
+    thoroughnessScore: Math.round(examined.length / allSystems.length * 100),
+    criticalCoverage: criticalExams.length > 0 ? Math.round((criticalExams.length - criticalMissed.length) / criticalExams.length * 100) : 100
+  };
+}
+
 // ── VOICE INPUT (Web Speech API) ──
 var _recognition = null;
 var _isListening = false;
@@ -2017,6 +2149,15 @@ async function exportStudyData() {
       if (window.RdxReadability) {
         var readSummary = window.RdxReadability.getSessionSummary();
         window.state.readabilitySummary = readSummary;
+
+        // Attach PE exam summary
+        if (window.getPESummary) {
+          var peSummary = getPESummary();
+          window.state.peExamSummary = peSummary;
+          if (peSummary && peSummary.criticalMissed.length > 0) {
+            console.log('PE critical systems missed:', peSummary.criticalMissed.join(', '));
+          }
+        }
 
         // Also analyze the radiology reports for comparison
         if (window.caseData && window.caseData.radiologyReports) {
