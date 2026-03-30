@@ -7,7 +7,7 @@
 <link rel="icon" href="favicon-32x32.png">
 <meta name="description" content="Browse all ReasonDx content in one place. 366 clinical simulations, 361 virtual EMR cases, 105 coaching topics, and 33 pathophysiology modules.">
 <script src="js/nav-global.js"></script>
-<script src="emr-data/crt-data.js"></script>
+<script src="emr-data/crt-index.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 :root{--bg:#F8FAFC;--surface:#fff;--border:#E2E8F0;--text:#1E293B;--ts:#64748B;--tm:#94A3B8;
@@ -108,11 +108,11 @@ var SIM_FEATURED = [
   {id:'CHEST-001',title:'Chest pain',sub:'Acute onset substernal chest pain in a young adult',cat:'cardiovascular',acuity:1,featured:true},
   {id:'FEVER-001',title:'Fever, dyspnea',sub:'Progressive fever and SOB with oral findings',cat:'infectious',acuity:2,featured:true}
 ];
-if (window.CRT_DATA) {
-  Object.entries(CRT_DATA).forEach(function(e) {
+if (window.CRT_INDEX) {
+  Object.entries(CRT_INDEX).forEach(function(e) {
     var id=e[0],c=e[1];
-    SIM_DATA.push({id:id,title:(c.chiefComplaint||c.presentation||'').split('/')[0].trim(),
-      search:(c.chiefComplaint||c.presentation||'').toLowerCase(),cat:normCat(c.category),acuity:c.acuity||3});
+    SIM_DATA.push({id:id,title:(c.chiefComplaint||'').split('/')[0].trim(),
+      search:(c.chiefComplaint||'').toLowerCase(),cat:normCat(c.category),acuity:c.acuity||3});
   });
 }
 

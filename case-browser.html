@@ -7,7 +7,7 @@
 <link rel="icon" href="favicon-32x32.png">
 <meta name="description" content="Browse 366 clinical simulation cases by chief complaint and specialty. No diagnosis spoilers — find what your patient presents with, figure out the rest.">
 <script src="js/nav-global.js"></script>
-<script src="emr-data/crt-data.js"></script>
+<script src="emr-data/crt-index.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&display=swap');
   :root {
@@ -125,14 +125,13 @@ function normCat(c) {
 }
 
 function init() {
-  if (window.CRT_DATA) {
-    Object.entries(window.CRT_DATA).forEach(function(e) {
+  if (window.CRT_INDEX) {
+    Object.entries(window.CRT_INDEX).forEach(function(e) {
       var id=e[0],c=e[1];
-      // Chief complaint only — truncate at first "/" to strip lab spoilers
-      var cc = (c.chiefComplaint||c.presentation||'').split('/')[0].trim();
+      var cc = (c.chiefComplaint||'').split('/')[0].trim();
       ALL.push({
         id:id, cc:cc,
-        searchText:(c.chiefComplaint||c.presentation||'').toLowerCase(),
+        searchText:(c.chiefComplaint||'').toLowerCase(),
         cat:normCat(c.category), acuity:c.acuity||3, featured:false
       });
     });

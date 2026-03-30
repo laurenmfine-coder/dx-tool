@@ -298,17 +298,17 @@ body{background:var(--rdx-ocean-deep)}
   </div>
 </div>
 
-<script src="emr-data/crt-data.js"></script>
+<script src="emr-data/crt-index.js"></script>
 <script>
 // Dynamic search across all 361+ CRT cases — shows ONLY chief complaint, never diagnosis
 var _searchIndex = [];
-if (window.CRT_DATA) {
-  Object.entries(window.CRT_DATA).forEach(function(e) {
+if (window.CRT_INDEX) {
+  Object.entries(window.CRT_INDEX).forEach(function(e) {
     var id = e[0], c = e[1];
     _searchIndex.push({
       id: id,
-      cc: (c.chiefComplaint || c.presentation || '').split('/')[0].trim(), // show only first phrase, hide lab spoilers
-      searchText: (c.chiefComplaint || c.presentation || '').toLowerCase(), // search full text
+      cc: (c.chiefComplaint || '').split('/')[0].trim(), // show only first phrase, hide lab spoilers
+      searchText: (c.chiefComplaint || '').toLowerCase(), // search full text
       cat: (c.category || 'other').replace(/_/g,' '),
       acuity: c.acuity || 3,
       href: '/simulation-engine.html?case=' + encodeURIComponent(id)
@@ -392,9 +392,9 @@ document.addEventListener('click',function(e){if(!e.target.closest('.search-wrap
     }
 
     // Otherwise recommend a case from a different specialty
-    if (!recommended && window.CRT_DATA) {
+    if (!recommended && window.CRT_INDEX) {
       var lastCat = (lastCase.diagnosis || '').toLowerCase().includes('heart') ? 'cardiovascular' : '';
-      var candidates = Object.entries(window.CRT_DATA).filter(function(e) {
+      var candidates = Object.entries(window.CRT_INDEX).filter(function(e) {
         return completedIds.indexOf(e[0]) === -1 && e[1].acuity <= 2;
       });
       if (candidates.length > 0) {
