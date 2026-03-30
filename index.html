@@ -110,18 +110,6 @@ body{background:var(--rdx-ocean-deep)}
 .footer-bottom-links{display:flex;gap:16px}
 .footer-bottom-links a{font-size:.75rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .15s}
 .footer-bottom-links a:hover{color:rgba(255,255,255,.6)}
-.modal-overlay{display:none}
-/* Inline start chooser — matches hero dark theme */
-.start-chooser{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s ease,margin .3s ease;opacity:0;margin-top:0}
-.start-chooser.open{max-height:420px;opacity:1;margin-top:28px}
-.start-chooser-inner{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:560px;margin:0 auto}
-.start-card{display:flex;align-items:center;gap:14px;padding:16px 20px;border:1.5px solid rgba(133,193,233,.2);border-radius:14px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);cursor:pointer;transition:all .2s;text-decoration:none;color:#fff}
-.start-card:hover{background:rgba(133,193,233,.15);border-color:rgba(133,193,233,.4);transform:translateY(-2px)}
-.start-card-icon{font-size:1.4rem;width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.start-card-name{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:2px}
-.start-card-desc{font-size:.72rem;color:rgba(255,255,255,.6);line-height:1.4}
-.start-card-new{font-size:.6rem;font-weight:800;background:#2874A6;color:#fff;padding:2px 6px;border-radius:4px;letter-spacing:.5px;margin-left:6px;vertical-align:middle}
-@media(max-width:640px){.start-chooser-inner{grid-template-columns:1fr}}
 @media(max-width:768px){.hero{padding:48px 20px 0;min-height:auto}.section{padding:48px 20px}.pillar-grid{grid-template-columns:1fr}.genetics-band{padding:40px 20px}.stats-strip{padding:28px 20px}.footer{padding:36px 20px 28px}}
 </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -136,7 +124,7 @@ body{background:var(--rdx-ocean-deep)}
     <h1>Think Better.<br>Diagnose <em>Smarter.</em></h1>
     <p class="hero-tagline">AI-powered clinical reasoning training for medical students and residents. Build the diagnostic mind that textbooks can't teach.</p>
     <div class="cta-group">
-      <button class="rdx-btn rdx-btn-accent rdx-btn-lg" onclick="var c=document.getElementById('startChooser');c.classList.toggle('open');this.textContent=c.classList.contains('open')?'Choose below \u2193':'Start Learning Free \u2192'">Start Learning Free →</button>
+      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="/browse.html">Start Learning Free →</a>
       <a class="rdx-btn rdx-btn-ghost-white rdx-btn-lg" href="/how-it-works.html">How It Works</a>
     </div>
     <div class="search-wrap">
@@ -148,39 +136,6 @@ body{background:var(--rdx-ocean-deep)}
       <p class="search-hint">Try: "chest pain" · "shortness of breath" · "abdominal pain" · "altered mental status"</p>
     </div>
 
-    <!-- Inline start chooser — dark theme, matches hero -->
-    <div class="start-chooser" id="startChooser">
-      <div class="start-chooser-inner">
-        <a class="start-card" href="/browse.html">
-          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-          <div>
-            <div class="start-card-name">Simulate <span class="start-card-new">NEW</span></div>
-            <div class="start-card-desc">366 full clinical simulations with voice input and AI attending</div>
-          </div>
-        </a>
-        <a class="start-card" href="/casedx.html">
-          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <div>
-            <div class="start-card-name">CaseDx</div>
-            <div class="start-card-desc">Interactive virtual patients with immediate feedback</div>
-          </div>
-        </a>
-        <a class="start-card" href="/CoachDx/index.html">
-          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <div>
-            <div class="start-card-name">CoachDx</div>
-            <div class="start-card-desc">AI Socratic coaching that adapts to your reasoning</div>
-          </div>
-        </a>
-        <a class="start-card" href="/mechanism/index.html">
-          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.36-5.36l-4.24 4.24m0-4.24l4.24 4.24M6.64 6.64l4.24 4.24m0-4.24l-4.24 4.24"/></svg></div>
-          <div>
-            <div class="start-card-name">MechanismDx</div>
-            <div class="start-card-desc">Deep pathophysiology with attending conversation</div>
-          </div>
-        </a>
-      </div>
-    </div>
   </div>
   <svg class="hero-wave" viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,28 C240,56 480,0 720,28 C960,56 1200,8 1440,32 L1440,56 L0,56 Z" fill="#f0f4f8"/>
