@@ -516,7 +516,16 @@ async function sendMessage() {
     var patName = caseData.presentation.patientName;
     systemPrompt = 'You are ' + patName + ', a patient in a medical encounter. Stay fully in character.\n\n';
     systemPrompt += 'The student interviewing you is named ' + state.studentName + '. They are a medical student working with Dr. Patel.\n\n';
-    systemPrompt += 'RULES:\n- Answer ONLY what is asked. Do not volunteer information.\n- Use plain lay language. No medical terms.\n- Never break character.\n- Never ask the student questions back.\n- Keep responses to 1-2 sentences.\n';
+    systemPrompt += 'RULES:\n';
+    systemPrompt += '- Answer ONLY what is asked. Do not volunteer information.\n';
+    systemPrompt += '- Use plain lay language. No medical terms.\n';
+    systemPrompt += '- Never break character.\n';
+    systemPrompt += '- Never ask the student questions back.\n';
+    systemPrompt += '- Keep responses to 1-2 sentences.\n';
+    systemPrompt += '- NEVER use narrative descriptions of actions. NO "She nods." NO "He looks away." NO "Maria adjusts." NO stage directions of any kind. You are SPEAKING, not narrating. Just say your words.\n';
+    systemPrompt += '- NEVER use third person to refer to yourself. You are "I" not "she" or "he."\n';
+    systemPrompt += '- NEVER end your response with "What would you like to do?" or any prompt to the student. Just answer and stop.\n';
+    systemPrompt += '- If the student uses medical jargon you would not understand, respond naturally: "I\'m not sure what that means" or "Can you explain that in simpler terms?" This is how real patients respond to jargon.\n';
 
     // Emotional state modifiers
     if (window.RdxAgentEnhanced && window.RdxAgentEnhanced.PatientEmotionModel) {
@@ -644,15 +653,27 @@ async function sendMessage() {
 
     removeTyping();
 
-    // Determine message type based on active agent
-    const msgType = activeAgent === 'patient' ? 'patient' : 'patel';
+    // Determine message type based on active agent AND content analysis
+    var msgType = activeAgent === 'patient' ? 'patient' : 'patel';
+    // Content-based override: if the response is clearly from the patient character
+    // (uses patient name, speaks in quotes, describes patient actions), label it correctly
+    if (msgType === 'patel' && caseData) {
+      var firstName = caseData.presentation.patientName.split(' ')[0];
+      var isPatientContent = new RegExp('(' + firstName + '\\s+(nods|shakes|looks|smiles|pauses|sighs|coughs|shifts|adjusts|says|responds|replies|answers)|^"[^"]+"|^\'[^\']+\'|I\\s+(don\'t|haven\'t|didn\'t|can\'t|feel|have|am|was|got|just|think|started|noticed))', 'i').test(reply);
+      if (isPatientContent) msgType = 'patient';
+    }
     addMessage(msgType, reply);
     state.conversationMessages.push({ role:'assistant', content: reply });
     state.turns.push({ role:'assistant', content:reply, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount, agentSource: activeAgent });
 
     // Store patient response in patient conversation history
-    if (activeAgent === 'patient' && state._patientMessages) {
+    if ((activeAgent === 'patient' || msgType === 'patient') && state._patientMessages) {
       state._patientMessages.push({ role: 'assistant', content: reply });
+
+      // Track patient confusion (indicates student used jargon)
+      if (/not sure what.*mean|don't understand|can you explain|what does that mean|what's that|in english/i.test(reply)) {
+        if (state._healthLiteracy) state._healthLiteracy.patientConfusionCount++;
+      }
 
       // Register patient cues for the signal extractor
       if (window.RdxAgent && window.RdxAgent.SignalExtractor) {
@@ -681,9 +702,16 @@ async function sendMessage() {
 function extractSignals(msg) {
   var signals = {
     // Structural signals (same for all cases)
-    readyToMoveOn: /\b(ready|move on|let'?s go|that'?s all|done|good to go|i'?m good|no more|that covers|let'?s do)\b/i.test(msg),
-    providingDifferential: /\b(differential|diagnosis|diagnos|my list|i'?d consider|i'?m thinking|priority|ranking)\b/i.test(msg),
+    readyToMoveOn: /\b(ready|move on|let'?s go|that'?s all|done|good to go|i'?m good|no more|that covers|let'?s do|let'?s move|let'?s proceed|next step|move forward|shall we|can we move|i think that'?s|anything else\?|that'?s it)\b/i.test(msg),
+    providingDifferential: /\b(differential|diagnosis|diagnos|my list|i'?d consider|i'?m thinking|priority|ranking|could be|might be|suspect|likely|top of my list|working diagnosis|possibilities include)\b/i.test(msg),
     orderingTests: /\b(order|cbc|cmp|ct |chest x|x-?ray|mri|esr|crp|bnp|d-dimer|abg|pft|precipitin|ige|imaging|scan|quantiferon|afb|sputum|uds|drug screen|troponin|hiv|cd4|ldh|beta.*glucan|procalcitonin|viral panel)\b/i.test(msg),
+    wantsPhysicalExam: /\b(physical exam|examine|auscultate|listen|palpate|percuss|inspect|vitals|lung exam|heart exam|skin exam|check.*heart|check.*lungs|look at)\b/i.test(msg),
+    wantsToSeePatient: /\b(see the patient|talk to|interview|meet|history|ask.*patient|go see|let'?s see)\b/i.test(msg),
+    proposingManagement: /\b(start|prescribe|give|administer|order.*treatment|discharge|admit|refer|manage|treatment plan|my plan)\b/i.test(msg),
+    // Health literacy signals (for scoring communication quality)
+    usesJargon: /\b(bilateral|centrilobular|ground.glass|consolidat|differential|etiology|pathophysiology|auscultation|tachycard|bradycard|dyspnea|hypox|cyanosis|bilateral|interstitial|parenchymal|effusion)\b/i.test(msg),
+    usesPlainLanguage: /\b(the test shows|what this means|in simple terms|basically|what we found|here'?s what|let me explain|that means)\b/i.test(msg),
+    checksUnderstanding: /\b(does that make sense|do you understand|any questions|want me to explain|is that clear|follow me)\b/i.test(msg),
     // Dynamic history signals from case keywordMap
     historyMatches: {}
   };
@@ -710,6 +738,12 @@ function updateStateFromSignals(signals) {
       }
     });
   }
+
+  // Track health literacy communication quality
+  if (!state._healthLiteracy) state._healthLiteracy = { jargonCount: 0, plainLanguageCount: 0, understandingChecks: 0, patientConfusionCount: 0 };
+  if (signals.usesJargon) state._healthLiteracy.jargonCount++;
+  if (signals.usesPlainLanguage) state._healthLiteracy.plainLanguageCount++;
+  if (signals.checksUnderstanding) state._healthLiteracy.understandingChecks++;
 }
 
 // ── PHASE TRANSITIONS ──
@@ -719,14 +753,14 @@ function checkPhaseTransition(signals) {
   if (phase === PHASES.INITIAL_DIFFERENTIAL && signals.providingDifferential) {
     return { shouldTransition: true, nextPhase: PHASES.JUSTIFICATION };
   }
-  if (phase === PHASES.JUSTIFICATION && signals.readyToMoveOn) {
+  if (phase === PHASES.JUSTIFICATION && (signals.readyToMoveOn || signals.wantsToSeePatient)) {
     return {
       shouldTransition: true,
       nextPhase: PHASES.HISTORY_TAKING,
       inject: { type:'patel', content:"[As Dr. Patel]\n\nAlright, let's go see " + getPatientDisplayName() + ". " + (caseData.presentation.sex === 'Male' ? "He's" : "She's") + " in exam room 3.\n\n" + getPatientDisplayName() + ", this is " + state.studentName + ", a medical student on our team. " + state.studentName + " is going to talk with you and ask some questions. " + state.studentName + ", go ahead and take your history." }
     };
   }
-  if (phase === PHASES.HISTORY_TAKING && signals.readyToMoveOn) {
+  if (phase === PHASES.HISTORY_TAKING && (signals.readyToMoveOn || signals.wantsPhysicalExam)) {
     const critHist = (caseData.signals && caseData.signals.criticalHistory) || [];
     const askedAny = critHist.some(function(h) { return state.historyFlags[h]; });
     if (!askedAny && !state.historyFlags.genericPromptDelivered) {
