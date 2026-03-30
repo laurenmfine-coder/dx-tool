@@ -4920,7 +4920,56 @@ function renderTeaching(p) {
       '<button type="button" onclick="window.open(\'/night-float.html\',\'_blank\')">Open Night Float Simulator →</button></div>';
   }
 
+  // Deep-Dive Simulation banner — always shown after disposition
+  var simCaseId = getSimCaseId(p);
+  html += '<div class="admit-bridge-banner" style="background:linear-gradient(135deg,#1a3a4a,#2874A6);margin-top:12px">' +
+    '<h4>🧠 Go Deeper — Full AI Simulation</h4>' +
+    '<p>Run a 10-phase AI-driven simulation of this case with live patient interview, physical exam, and reasoning debrief.</p>' +
+    '<button type="button" onclick="launchSimulation(\'' + simCaseId + '\')">Launch Simulation' + (simCaseId ? ' — ' + p.variant.diagnosis.split('(')[0].trim() : '') + ' →</button></div>';
+
   return html;
+}
+
+// Map ED board template → closest simulation case ID
+function getSimCaseId(p) {
+  var diagnosis = (p.variant.diagnosis || '').toLowerCase();
+  var templateId = p.template.id || '';
+  var map = {
+    'stemi': 'stemi-v1', 'st-elevation': 'stemi-v1', 'ventricular tachycardia': 'vtach-v1',
+    'heart failure': 'chf-v1', 'chf': 'chf-v1', 'atrial fibrillation': 'afib-v1',
+    'pericarditis': 'pericarditis-v1', 'aortic dissection': 'aortic-dissection-v1',
+    'pulmonary embolism': 'pe-v1', 'massive pe': 'pe-v2', 'submassive pe': 'pe-v3',
+    'pneumonia': 'pneumonia-v1', 'copd': 'copd-v1', 'asthma': 'asthma-v1',
+    'pneumothorax': 'tension-ptx',
+    'stroke': 'stroke-v1', 'ischemic stroke': 'stroke-v1', 'hemorrhagic stroke': 'stroke-v3',
+    'seizure': 'seizure-v1', 'meningitis': 'bacterial-meningitis-v1',
+    'dka': 'dka-v1', 'diabetic ketoacidosis': 'dka-v1', 'hypoglycemia': 'hypoglycemia-v1',
+    'thyroid storm': 'thyroid-storm-v1', 'adrenal': 'adrenal-crisis-v1',
+    'sepsis': 'sepsis-v1', 'septic shock': 'sepsis-v2',
+    'appendicitis': 'appendicitis-v1', 'bowel obstruction': 'sbo-v1',
+    'gi bleed': 'upper-gi-bleed-v1', 'gastrointestinal': 'upper-gi-bleed-v1',
+    'ectopic': 'ectopic-pregnancy-v1', 'anaphylaxis': 'anaphylaxis-v1',
+    'acetaminophen': 'acetaminophen-overdose-v1', 'opioid': 'opioid-overdose-v1',
+    'cauda equina': 'cauda-equina-v1', 'hip fracture': 'hip-fracture-v1'
+  };
+  // Try diagnosis match first
+  for (var key in map) {
+    if (diagnosis.indexOf(key) !== -1) return map[key];
+  }
+  // Fallback by template category
+  var categoryMap = {
+    'chest-pain': 'stemi-v1', 'shortness-of-breath': 'pe-v1',
+    'altered-mental-status': 'stroke-v1', 'fever-sepsis': 'sepsis-v1',
+    'abdominal-pain': 'appendicitis-v1', 'endocrine-emergency': 'dka-v1',
+    'toxicologic-emergency': 'acetaminophen-overdose-v1',
+    'allergic-reaction': 'anaphylaxis-v1', 'headache': 'bacterial-meningitis-v1'
+  };
+  return categoryMap[templateId] || 'stemi-v1';
+}
+
+function launchSimulation(caseId) {
+  var url = '/simulation-engine.html?case=' + encodeURIComponent(caseId);
+  window.open(url, '_blank');
 }
 
 // DISPOSITION

@@ -327,6 +327,7 @@ const CASE_REGISTRY = {
 const CASE_IDS = Object.keys(CASE_REGISTRY);
 
 // URL parameter: depth override (?depth=v2)
+// URL parameter: case pre-selection (?case=stemi-v1) — used by ED board continuity
 (function() {
   var params = new URLSearchParams(window.location.search);
   var urlDepth = params.get('depth');
@@ -337,6 +338,37 @@ const CASE_IDS = Object.keys(CASE_REGISTRY);
       if (opt) { opt.disabled = false; depthSel.value = urlDepth; }
     }
   }
+
+  // Auto-select case from ?case= param (e.g. launched from ED board)
+  var urlCase = params.get('case');
+  if (urlCase) {
+    setTimeout(function() {
+      var caseInput = document.getElementById('intakeCase');
+      var caseSearch = document.getElementById('intakeCaseSearch');
+      var caseSelected = document.getElementById('intakeCaseSelected');
+      if (!caseInput) return;
+      // Try to find the label from _intakeCases
+      var found = (_intakeCases || []).find(function(c) { return c.id === urlCase; });
+      var label = found ? found.label : urlCase;
+      caseInput.value = urlCase;
+      if (caseSearch) caseSearch.value = label;
+      if (caseSelected) {
+        caseSelected.style.display = 'flex';
+        caseSelected.innerHTML = '✓ ' + label + '<span style="margin-left:auto;font-size:11px;opacity:.7">via ED Board</span>';
+      }
+      if (typeof updateDepthOptions === 'function') updateDepthOptions();
+      // Show a subtle banner so the student knows where they came from
+      var overlay = document.getElementById('intakeOverlay');
+      if (overlay) {
+        var banner = document.createElement('div');
+        banner.style.cssText = 'background:#EBF5FB;border:1px solid #AED6F1;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#1B4F72;display:flex;align-items:center;gap:8px';
+        banner.innerHTML = '🏥 <strong>Continuing from ED Board</strong> — case pre-loaded. Fill in your details and start.';
+        var firstChild = overlay.querySelector('.intake-card') || overlay.firstElementChild;
+        if (firstChild) firstChild.insertBefore(banner, firstChild.firstChild);
+      }
+    }, 300);
+  }
+
   setTimeout(function() { if (typeof updateDepthOptions === 'function') updateDepthOptions(); }, 500);
 })();
 
