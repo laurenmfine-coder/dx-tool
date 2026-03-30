@@ -18,9 +18,10 @@
 
   // ── PATIENT NAME GENERATOR ──
   // Deterministic from case ID so the same case always gets the same patient
-  var FIRST_NAMES_F = ['Sarah','Maria','Lisa','Jennifer','Amanda','Emily','Rachel','Angela','Patricia','Nicole','Katherine','Carmen','Aisha','Priya','Linda','Michelle','Christina','Sophia','Diana','Natasha'];
-  var FIRST_NAMES_M = ['James','Robert','Michael','David','Carlos','William','Thomas','Anthony','Daniel','Mark','Kevin','Joseph','Andre','Raj','Brian','Christopher','Jason','Steven','Patrick','Omar'];
-  var LAST_NAMES = ['Johnson','Chen','Garcia','Williams','Patel','Kim','Martinez','Robinson','Lee','Walker','Brown','Davis','Wilson','Moore','Taylor','Anderson','Thompson','Nguyen','Jackson','White'];
+  // 50×50 = 2500 combinations — eliminates collisions across 361 cases
+  var FIRST_NAMES_F = ['Sarah','Maria','Lisa','Jennifer','Amanda','Emily','Rachel','Angela','Patricia','Nicole','Katherine','Carmen','Aisha','Priya','Linda','Michelle','Christina','Sophia','Diana','Natasha','Gloria','Vanessa','Heather','Monica','Rosa','Tamara','Denise','Sylvia','Jasmine','Crystal','Yolanda','Lillian','Tanya','Gabriela','Fatima','Elena','Valentina','Cynthia','Adriana','Mariana','Helen','Grace','Nadia','Brenda','Claudia','Ingrid','Amara','Zara','Keiko','Simone'];
+  var FIRST_NAMES_M = ['James','Robert','Michael','David','Carlos','William','Thomas','Anthony','Daniel','Mark','Kevin','Joseph','Andre','Raj','Brian','Christopher','Jason','Steven','Patrick','Omar','Gregory','Vincent','Marcus','Eduardo','Frank','Raymond','Derek','Samuel','Curtis','Ivan','Alejandro','Darren','Malcolm','Felix','Hassan','Yusuf','Dmitri','Kofi','Tariq','Bennett','Wesley','Elliott','Terrence','Franklin','Hector','Gilbert','Roland','Desmond','Nikolai','Cedric'];
+  var LAST_NAMES = ['Johnson','Chen','Garcia','Williams','Patel','Kim','Martinez','Robinson','Lee','Walker','Brown','Davis','Wilson','Moore','Taylor','Anderson','Thompson','Nguyen','Jackson','White','Richardson','Stewart','Rivera','Torres','Murphy','Nakamura','Okafor','Vasquez','Singh','Petrov','Hoffman','Morales','Foster','Barnes','Reed','Goldman','Fitzgerald','Alvarez','Burke','Sato','Ellis','Reyes','Chambers','Adeyemi','Volkov','Herrera','Duval','Khatri','Mbeki','Lindqvist'];
 
   function hashCode(s) {
     var h = 0;
@@ -28,10 +29,28 @@
     return Math.abs(h);
   }
 
+  // Use different hash bits for first vs last name to avoid correlation
+  // Incorporate a running index to break ties between similar case IDs
+  var _nameIndex = 0;
+  var _assignedNames = {};
   function generatePatientName(caseId, sex) {
-    var h = hashCode(caseId);
+    // Check cache first (deterministic per case)
+    if (_assignedNames[caseId]) return _assignedNames[caseId];
+    
+    var h1 = hashCode(caseId);
+    var h2 = hashCode(caseId + '_ln');
     var firstNames = sex === 'Male' ? FIRST_NAMES_M : FIRST_NAMES_F;
-    return firstNames[h % firstNames.length] + ' ' + LAST_NAMES[(h >> 4) % LAST_NAMES.length];
+    var attempts = 0;
+    var name;
+    do {
+      var fi = (h1 + attempts * 7) % firstNames.length;
+      var li = (h2 + attempts * 13) % LAST_NAMES.length;
+      name = firstNames[fi] + ' ' + LAST_NAMES[li];
+      attempts++;
+    } while (attempts < 100 && Object.values(_assignedNames).indexOf(name) !== -1);
+    
+    _assignedNames[caseId] = name;
+    return name;
   }
 
   function generateAge(caseId, crt) {
@@ -57,13 +76,13 @@
     if (/dka.*type.?1|anorexia|testicular torsion/.test(dx)) return 18 + (h % 12);
     if (/evali|vaping|overdose.*intentional/.test(dx)) return 20 + (h % 15);
     // Middle-aged
-    if (/stemi|nstemi|acs|mi\b|coronary|aortic dissection/.test(dx)) return 52 + (h % 18);
+    if (/stemi|nstemi|acs|\bmi\b|coronary|aortic dissection/.test(dx)) return 52 + (h % 18);
     if (/stroke|cva|afib|atrial fibrillation/.test(dx)) return 58 + (h % 20);
     if (/chf|heart failure/.test(dx)) return 55 + (h % 20);
     if (/copd/.test(dx)) return 58 + (h % 15);
     // General ED
     if (/meningitis/.test(dx)) return 22 + (h % 20);
-    if (/pe\b|pulmonary embolism/.test(dx)) return 32 + (h % 25);
+    if (/\bpe\b|pulmonary embolism/.test(dx)) return 32 + (h % 25);
     if (/appendicitis/.test(dx)) return 18 + (h % 30);
     if (/sepsis/.test(dx)) return 55 + (h % 25);
     // Allergy
@@ -80,8 +99,8 @@
 
     // Clinically weighted by diagnosis
     var dx = (crt.diagnosis || '').toLowerCase();
-    if (/stemi|nstemi|mi\b|coronary|aortic dissection|aaa/.test(dx)) return 'Male'; // 2:1 male predominance
-    if (/pe\b|pulmonary embolism|lupus|sle/.test(dx)) return 'Female'; // female predominance
+    if (/stemi|nstemi|\bmi\b|coronary|aortic dissection|aaa/.test(dx)) return 'Male'; // 2:1 male predominance
+    if (/\bpe\b|pulmonary embolism|lupus|sle/.test(dx)) return 'Female'; // female predominance
     if (/testicular/.test(dx)) return 'Male';
     if (/ovarian|ectopic|eclamp/.test(dx)) return 'Female';
 
@@ -126,11 +145,11 @@
       pe.neuro = 'Left-sided facial droop. Left arm drift. Dysarthric speech. Right gaze preference. Strength 3/5 left upper and lower extremities, 5/5 right side.';
       pe.general = 'Alert but confused. Having difficulty speaking clearly.';
     }
-    else if (/mi\b|stemi|nstemi|acs/i.test(diagnosis)) {
+    else if (/\bmi\b|stemi|nstemi|acs/i.test(diagnosis)) {
       pe.general = 'Anxious, diaphoretic. Clutching chest.';
       pe.cardiovascular = 'Tachycardic, regular rhythm. S4 gallop present. No murmurs. No JVD.';
     }
-    else if (/pe\b|pulmonary embolism/i.test(diagnosis)) {
+    else if (/\bpe\b|pulmonary embolism/i.test(diagnosis)) {
       pe.general = 'Anxious, tachypneic. Mild distress.';
       pe.respiratory = 'Clear to auscultation bilaterally. Tachypneic. No wheezes or crackles.';
       pe.extremities = 'Left calf swollen and tender to palpation with a positive Homan sign. Right leg normal.';
@@ -151,6 +170,44 @@
     else if (/sepsis/i.test(diagnosis)) {
       pe.general = 'Ill-appearing, febrile, tachycardic, tachypneic. Altered mental status.';
       pe.skin = 'Warm and flushed. Delayed capillary refill > 3 seconds. Mottling of the extremities.';
+    }
+    else if (/pneumothorax|ptx/i.test(diagnosis)) {
+      pe.respiratory = 'Absent breath sounds on the affected side. Hyperresonance to percussion. Tracheal deviation toward the contralateral side.';
+      pe.cardiovascular = 'Tachycardic. Jugular venous distension present. Hypotension.';
+      pe.general = 'Acute respiratory distress. Diaphoretic.';
+    }
+    else if (/aortic dissection/i.test(diagnosis)) {
+      pe.cardiovascular = 'Blood pressure differential > 20 mmHg between arms. New diastolic murmur of aortic regurgitation. Tachycardic.';
+      pe.general = 'Severe distress. Diaphoretic. Tearing pain radiating to back.';
+      pe.extremities = 'Diminished left radial pulse compared to right. No edema.';
+    }
+    else if (/tamponade|pericardial effusion/i.test(diagnosis)) {
+      pe.cardiovascular = 'Muffled heart sounds. Jugular venous distension. Pulsus paradoxus > 10 mmHg. Tachycardic.';
+      pe.general = 'Appears uncomfortable, dyspneic. Hypotensive.';
+    }
+    else if (/gi.*bleed|upper.*gi|lower.*gi|melena|hematochezia/i.test(diagnosis)) {
+      pe.abdomen = 'Soft, mildly tender. Hyperactive bowel sounds. No peritoneal signs.';
+      pe.skin = 'Pale. Cool extremities. Delayed capillary refill.';
+      pe.general = 'Pale, diaphoretic. Orthostatic. Tachycardic.';
+    }
+    else if (/overdose|ingestion|toxicol|poisoning/i.test(diagnosis)) {
+      pe.general = 'Somnolent but arousable. Slurred speech.';
+      pe.neuro = 'Pupils ' + (/opioid|heroin|fentanyl/i.test(diagnosis) ? 'pinpoint, 1mm bilateral.' : 'dilated, 6mm bilateral, reactive.') + ' GCS 12 (E3V4M5). No focal deficits.';
+    }
+    else if (/thyroid storm|thyrotoxicosis/i.test(diagnosis)) {
+      pe.general = 'Agitated, tremulous, diaphoretic. Hyperthermia.';
+      pe.cardiovascular = 'Tachycardic to 140s. Irregularly irregular rhythm (new atrial fibrillation). Wide pulse pressure.';
+      pe.neuro = 'Hyperreflexia. Fine resting tremor. Lid lag present.';
+    }
+    else if (/pancreatitis/i.test(diagnosis)) {
+      pe.abdomen = 'Epigastric tenderness with guarding. Diminished bowel sounds. No rebound. Voluntary guarding.';
+      pe.general = 'Uncomfortable, lying still. Diaphoretic. Nauseous.';
+    }
+    else if (/anaphylaxis/i.test(diagnosis)) {
+      pe.general = 'Acute distress. Flushed. Speaking in short phrases.';
+      pe.skin = 'Diffuse urticaria. Angioedema of lips and periorbital region. Warm, erythematous.';
+      pe.respiratory = 'Inspiratory stridor. Diffuse expiratory wheezes. Tachypneic.';
+      pe.cardiovascular = 'Tachycardic. Hypotensive. Weak peripheral pulses.';
     }
 
     // Add vital sign abnormalities to general

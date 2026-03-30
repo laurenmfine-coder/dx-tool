@@ -108,49 +108,9 @@
         <a class="rdx-nav-link ${isActive('browse.html')}" href="/browse.html" style="font-weight:700">Browse</a>
         <a class="rdx-nav-link ${isActive('casedx.html')}" href="/casedx.html">CaseDx</a>
         <a class="rdx-nav-link ${isActive('CoachDx')}" href="/CoachDx/index.html">CoachDx</a>
-        <div class="rdx-nav-dropdown">
-          <button class="rdx-nav-dropdown-btn">MechanismDx</button>
-          <div class="rdx-dropdown-menu">
-            <a class="rdx-dropdown-item" href="/mechanism/index.html">
-              <span class="rdx-dropdown-item-title">🎓 Attending Modules</span>
-              <span class="rdx-dropdown-item-sub">28 curated topics · attending conversation</span>
-            </a>
-            <div class="rdx-dropdown-divider"></div>
-            <a class="rdx-dropdown-item" href="/pathway.html">
-              <span class="rdx-dropdown-item-title">🔬 Topic Explorer</span>
-              <span class="rdx-dropdown-item-sub">560 topics · 5-phase mastery</span>
-            </a>
-          </div>
-        </div>
+        <a class="rdx-nav-link ${isActive('mechanism')}" href="/mechanism/index.html">MechanismDx</a>
         <a class="rdx-nav-link ${isActive('virtual-emr.html')}" href="/virtual-emr.html">ED Board</a>
-        <div class="rdx-nav-dropdown">
-          <button class="rdx-nav-dropdown-btn">Genetics 🧬</button>
-          <div class="rdx-dropdown-menu">
-            <a class="rdx-dropdown-item" href="/genetics/genetics-module.html">
-              <span class="rdx-dropdown-item-title">🧬 Genetics Module</span>
-              <span class="rdx-dropdown-item-sub">18 cases · 7 clinical tracks</span>
-            </a>
-            <div class="rdx-dropdown-divider"></div>
-            <a class="rdx-dropdown-item" href="/genetics/genetics-demo-case.html">
-              <span class="rdx-dropdown-item-title">▶ Angelman Syndrome Case</span>
-              <span class="rdx-dropdown-item-sub">The Child Who Keeps Falling</span>
-            </a>
-            <a class="rdx-dropdown-item" href="/genetics/genetics-aadc-case.html">
-              <span class="rdx-dropdown-item-title">▶ AADC Deficiency Case</span>
-              <span class="rdx-dropdown-item-sub">The Baby Who Wouldn't Stop Rolling Her Eyes</span>
-            </a>
-            <div class="rdx-dropdown-divider"></div>
-            <a class="rdx-dropdown-item" href="/genetics/genetics-ai-case.html">
-              <span class="rdx-dropdown-item-title">▶ HAE / A&sol;I Genetics Case</span>
-              <span class="rdx-dropdown-item-sub">The Swelling That Skips Generations</span>
-            </a>
-            <div class="rdx-dropdown-divider"></div>
-            <a class="rdx-dropdown-item" href="/genetics/genetics-cme.html">
-              <span class="rdx-dropdown-item-title">🎓 CME Module</span>
-              <span class="rdx-dropdown-item-sub">6.0 credits · For practicing physicians</span>
-            </a>
-          </div>
-        </div>
+        <a class="rdx-nav-link ${isActive('genetics')}" href="/genetics/genetics-module.html">Genetics</a>
       </div>
       <div class="rdx-nav-actions">${authActions}</div>
     `;
