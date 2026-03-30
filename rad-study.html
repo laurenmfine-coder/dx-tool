@@ -985,6 +985,63 @@ function enterPhase(phase) {
     document.getElementById('chatInput').disabled = true;
     document.getElementById('sendBtn').disabled = true;
     addMessage('system', 'Simulation complete. Thank you for participating. Your responses have been recorded.');
+
+    // ── COMMUNICATION QUALITY REPORT ──
+    if (window.RdxReadability) {
+      var rs = window.RdxReadability.getSessionSummary();
+      if (rs) {
+        var hl = state._healthLiteracy || {};
+        var commHtml = '<div style="background:linear-gradient(135deg,#F0F7FC,#E8F4FD);border:1px solid rgba(40,116,166,.2);border-radius:12px;padding:16px;margin:4px 0">';
+        commHtml += '<div style="font-size:14px;font-weight:700;color:#1B4F72;margin-bottom:10px">Communication Quality Report</div>';
+
+        // Readability scores
+        commHtml += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">';
+        commHtml += '<div style="background:#fff;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:#2874A6">' + (rs.avgGradeAll || '—') + '</div><div style="font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:.5px">Overall Grade Level</div></div>';
+        commHtml += '<div style="background:#fff;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:' + (rs.avgGradePatient && rs.avgGradePatient <= 8 ? '#059669' : '#DC2626') + '">' + (rs.avgGradePatient || '—') + '</div><div style="font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:.5px">To Patient</div></div>';
+        commHtml += '<div style="background:#fff;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:#6366F1">' + (rs.avgGradeAttending || '—') + '</div><div style="font-size:10px;color:#64748B;text-transform:uppercase;letter-spacing:.5px">To Attending</div></div>';
+        commHtml += '</div>';
+
+        // Key metrics
+        commHtml += '<div style="font-size:12px;color:#334155;line-height:1.8">';
+        if (rs.adjustsLanguageForPatient === true) {
+          commHtml += '<div>\u2705 <strong>Adjusts language for patient</strong> — spoke at grade ' + rs.avgGradePatient + ' to patient vs grade ' + rs.avgGradeAttending + ' to attending</div>';
+        } else if (rs.adjustsLanguageForPatient === false) {
+          commHtml += '<div>\u26A0\uFE0F <strong>Same complexity to patient and attending</strong> — consider simplifying language when speaking with patients</div>';
+        }
+        if (rs.patientAppropriateRate !== null) {
+          commHtml += '<div>' + (rs.patientAppropriateRate >= 80 ? '\u2705' : '\u26A0\uFE0F') + ' <strong>Patient-appropriate rate:</strong> ' + rs.patientAppropriateRate + '% of messages to patient were at \u22648th grade level (CDC recommended)</div>';
+        }
+        if (hl.plainLanguageCount > 0) {
+          commHtml += '<div>\u2705 <strong>Used plain language explanations:</strong> ' + hl.plainLanguageCount + ' time' + (hl.plainLanguageCount > 1 ? 's' : '') + '</div>';
+        }
+        if (hl.checksUnderstanding > 0) {
+          commHtml += '<div>\u2705 <strong>Checked patient understanding:</strong> ' + hl.understandingChecks + ' time' + (hl.understandingChecks > 1 ? 's' : '') + '</div>';
+        }
+        if (hl.gapAcknowledgments > 0) {
+          commHtml += '<div>\u2B50 <strong>Acknowledged knowledge gap honestly:</strong> ' + hl.gapAcknowledgments + ' time' + (hl.gapAcknowledgments > 1 ? 's' : '') + '</div>';
+        }
+        if (hl.followUpCommitments > 0) {
+          commHtml += '<div>\u2B50 <strong>Committed to follow up:</strong> ' + hl.followUpCommitments + ' time' + (hl.followUpCommitments > 1 ? 's' : '') + '</div>';
+        }
+        if (hl.jargonCount > 2) {
+          commHtml += '<div>\u26A0\uFE0F <strong>Medical jargon used:</strong> ' + hl.jargonCount + ' instances — patients may struggle with technical terms</div>';
+        }
+        if (hl.patientConfusionCount > 0) {
+          commHtml += '<div>\u274C <strong>Patient expressed confusion:</strong> ' + hl.patientConfusionCount + ' time' + (hl.patientConfusionCount > 1 ? 's' : '') + ' — patient couldn\'t understand your language</div>';
+        }
+        commHtml += '</div>';
+
+        // Readability indices detail
+        commHtml += '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(40,116,166,.15);font-size:11px;color:#94A3B8">Indices: Flesch-Kincaid, SMOG, Automated Readability Index. CDC recommends patient materials at 6th\u20138th grade level. Trend: ' + (rs.trend || 'n/a') + '</div>';
+        commHtml += '</div>';
+
+        addMessage('system', commHtml);
+        // Flag that this was HTML so addMessage renders it
+        var lastMsg = document.getElementById('chatMessages').lastElementChild;
+        if (lastMsg) lastMsg.innerHTML = commHtml;
+      }
+    }
+
     exportStudyData();
 
     // ── AGENT TOOLS: Post-simulation processing ──
