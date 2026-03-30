@@ -644,8 +644,19 @@ const TOPIC_CASE_MAP = {
 
 function endSession() {
   const savedTopic = currentTopic;
-  // Show debrief panel before resetting
+
+  // Log structured session end with all data streams
   if (savedTopic) {
+    var endData = {
+      session_id: sessionId,
+      topic: savedTopic.name,
+      topic_id: savedTopic.id,
+      turns: messages.filter(m => m.role === 'user').length,
+      total_messages: messages.length
+    };
+    if (window.RdxReadability) endData.readability = window.RdxReadability.getSessionSummary();
+    if (window.RdxPassive) endData.passive = window.RdxPassive.getFullSummary();
+    logEvent('coach_session_end', endData);
     showEndPanel(savedTopic);
   } else {
     resetToWelcome();
@@ -659,8 +670,8 @@ function showEndPanel(topic) {
 
   const caseRec = TOPIC_CASE_MAP[topic.id];
   const caseBtn = caseRec
-    ? `<a href="../virtual-emr.html?case=${caseRec.case}" style="display:block;background:var(--accent,#2874A6);color:#fff;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:700;font-size:13px;text-align:center">🏥 Try it now: ${caseRec.label} →</a>`
-    : `<a href="../casedx.html" style="display:block;background:var(--accent,#2874A6);color:#fff;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:700;font-size:13px;text-align:center">🏥 Browse cases →</a>`;
+    ? `<a href="../simulation-engine.html?case=${caseRec.case}" style="display:block;background:var(--accent,#2874A6);color:#fff;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:700;font-size:13px;text-align:center">Try it in a simulation: ${caseRec.label} →</a>`
+    : `<a href="../case-browser.html" style="display:block;background:var(--accent,#2874A6);color:#fff;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:700;font-size:13px;text-align:center">Browse simulations →</a>`;
 
   const mechMap = {
     'anaphylaxis':'anaphylaxis-module','asthma':'asthma-module',
@@ -670,8 +681,41 @@ function showEndPanel(topic) {
   };
   const mechMod = mechMap[topic.id];
   const mechBtn = mechMod
-    ? `<a href="../mechanism/${mechMod}.html" style="display:block;background:transparent;border:1.5px solid var(--border,#dce3eb);border-radius:10px;padding:11px 16px;text-decoration:none;font-weight:600;font-size:13px;text-align:center;color:var(--text,#1e293b)">🔬 Review MechanismDx module</a>`
+    ? `<a href="../mechanism/${mechMod}.html" style="display:block;background:transparent;border:1.5px solid var(--border,#dce3eb);border-radius:10px;padding:11px 16px;text-decoration:none;font-weight:600;font-size:13px;text-align:center;color:var(--text,#1e293b)">Review pathophysiology in MechanismDx</a>`
     : '';
+
+  // Build session summary from passive data
+  var summaryHtml = '';
+  var turnCount = messages.filter(m => m.role === 'user').length;
+  summaryHtml += '<div style="font-size:12px;color:var(--dim,#64748b);line-height:1.8;margin-bottom:12px">';
+  summaryHtml += turnCount + ' exchanges';
+  if (window.RdxReadability) {
+    var rs = window.RdxReadability.getSessionSummary();
+    if (rs && rs.avgGradeAll) summaryHtml += ' · Avg readability: grade ' + rs.avgGradeAll;
+  }
+  if (window.RdxPassive) {
+    var pd = window.RdxPassive.getFullSummary();
+    if (pd.implicitConfidence && pd.implicitConfidence.avgScore !== undefined) {
+      summaryHtml += ' · Confidence: ' + (pd.implicitConfidence.avgScore > 0.15 ? 'high' : pd.implicitConfidence.avgScore < -0.15 ? 'uncertain' : 'moderate');
+    }
+    if (pd.questionTypes && pd.questionTypes.total > 0) {
+      summaryHtml += ' · ' + pd.questionTypes.openRate + '% open questions';
+    }
+    if (pd.empathyAndRapport && pd.empathyAndRapport.totalEmpathyMoments > 0) {
+      summaryHtml += ' · ' + pd.empathyAndRapport.totalEmpathyMoments + ' empathy moments';
+    }
+  }
+  summaryHtml += '</div>';
+
+  // Emit platform event
+  if (window.RdxPlatform) {
+    var eventData = { topic: topic.name, topicId: topic.id, turns: turnCount, sessionId: sessionId };
+    if (window.RdxReadability) eventData.readability = window.RdxReadability.getSessionSummary();
+    if (window.RdxPassive) eventData.passive = window.RdxPassive.getFullSummary();
+    window.RdxPlatform.EventBus.emit('coaching_session_complete', 'coachdx', eventData, {
+      skillImpacts: { clinical_reasoning: 0.01 * turnCount }
+    });
+  }
 
   // Inject debrief panel above picker
   const existing = document.getElementById('endPanel');
@@ -681,9 +725,9 @@ function showEndPanel(topic) {
   panel.id = 'endPanel';
   panel.style.cssText = 'background:linear-gradient(135deg,#f0f7ff,#fafbff);border:1.5px solid var(--border,#dce3eb);border-radius:14px;padding:20px;margin-bottom:20px;max-width:480px;width:100%';
   panel.innerHTML = `
-    <div style="font-size:22px;margin-bottom:8px">✅</div>
     <div style="font-weight:700;font-size:15px;margin-bottom:4px">${topic.name} — session complete</div>
-    <div style="font-size:12px;color:var(--dim,#64748b);margin-bottom:16px">Knowledge without application fades. Lock it in with a real case.</div>
+    ${summaryHtml}
+    <div style="font-size:12px;color:var(--dim,#64748b);margin-bottom:14px">Apply what you practiced with a full patient simulation.</div>
     <div style="display:flex;flex-direction:column;gap:8px">
       ${caseBtn}
       ${mechBtn}
