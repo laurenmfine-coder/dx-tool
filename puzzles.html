@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Daily Puzzle</title>
+<meta name="description" content="30-second clinical reasoning puzzles. One finding, one question, one decision. Build your diagnostic pattern library through daily practice.">
+<link rel="icon" href="favicon-32x32.png">
+<script src="js/nav-global.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{--bg:#F8FAFC;--surface:#fff;--border:#E2E8F0;--text:#1E293B;--ts:#64748B;--blue:#2874A6;--blue-l:#EBF5FB}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);padding-top:52px;min-height:100vh;display:flex;flex-direction:column}
+.puzzle-wrap{max-width:640px;margin:0 auto;padding:40px 24px;flex:1;width:100%}
+.puzzle-header{text-align:center;margin-bottom:32px}
+.puzzle-header h1{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+.puzzle-header p{font-size:.88rem;color:var(--ts);margin-top:4px}
+.puzzle-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:28px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.puzzle-type{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);margin-bottom:12px}
+.puzzle-scenario{font-size:.92rem;line-height:1.7;color:var(--text);margin-bottom:20px}
+.puzzle-prompt{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.4}
+.puzzle-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:.88rem;font-family:inherit;resize:vertical;min-height:80px;outline:none;transition:border .15s}
+.puzzle-input:focus{border-color:var(--blue)}
+.puzzle-actions{display:flex;gap:10px;margin-top:14px}
+.puzzle-btn{padding:10px 20px;border:none;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+.puzzle-btn-primary{background:var(--blue);color:#fff}
+.puzzle-btn-primary:hover{background:#1B4F72}
+.puzzle-btn-secondary{background:var(--blue-l);color:var(--blue);border:1.5px solid rgba(40,116,166,.2)}
+.puzzle-feedback{margin-top:20px;padding:16px;border-radius:10px;font-size:.88rem;line-height:1.6;display:none}
+.puzzle-feedback.show{display:block}
+.puzzle-feedback.correct{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46}
+.puzzle-feedback.teaching{background:var(--blue-l);border:1px solid rgba(40,116,166,.2);color:#1B4F72}
+.puzzle-streak{text-align:center;margin-top:24px;font-size:.82rem;color:var(--ts)}
+.puzzle-streak strong{color:var(--blue)}
+.puzzle-nav{display:flex;justify-content:center;gap:12px;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="puzzle-wrap">
+  <div class="puzzle-header">
+    <h1>Daily Reasoning Puzzle</h1>
+    <p>30 seconds. One decision. Build your pattern library.</p>
+  </div>
+  <div class="puzzle-card" id="puzzleCard">
+    <div class="puzzle-type" id="puzzleType">Loading...</div>
+    <div class="puzzle-scenario" id="puzzleScenario"></div>
+    <div class="puzzle-prompt" id="puzzlePrompt"></div>
+    <textarea class="puzzle-input" id="puzzleAnswer" placeholder="Your reasoning..."></textarea>
+    <div class="puzzle-actions">
+      <button class="puzzle-btn puzzle-btn-primary" onclick="submitPuzzle()">Submit</button>
+      <button class="puzzle-btn puzzle-btn-secondary" onclick="skipPuzzle()">Skip</button>
+    </div>
+    <div class="puzzle-feedback" id="puzzleFeedback"></div>
+  </div>
+  <div class="puzzle-streak" id="puzzleStreak"></div>
+  <div class="puzzle-nav">
+    <a href="browse.html" style="font-size:.82rem;color:var(--ts);text-decoration:none">&larr; Back to Browse</a>
+  </div>
+</div>
+
+<script>
+var PUZZLES = [
+  {type:'Lab Shift',scenario:'52-year-old male with substernal chest pressure for 2 hours. Your differential: ACS, PE, aortic dissection, pericarditis.',prompt:'Troponin comes back 0.04 ng/mL (normal <0.04). D-dimer is 2,400. What changes in your differential and why?',teaching:'Borderline troponin + markedly elevated D-dimer shifts the probability toward PE over ACS. ACS typically has higher troponin at 2 hours. D-dimer >2000 has high specificity for PE. Aortic dissection can also elevate D-dimer — consider CT angiography.'},
+  {type:'Physical Exam Finding',scenario:'68-year-old female with progressive dyspnea over 3 weeks. On exam: JVD, bilateral crackles to mid-lung, S3 gallop, 2+ pitting edema.',prompt:'You find a new harsh systolic murmur loudest at the apex radiating to the axilla. Does this change your working diagnosis of CHF exacerbation? Why or why not?',teaching:'New mitral regurgitation in the setting of CHF changes management significantly. Acute MR can be the CAUSE of the decompensation (papillary muscle rupture, endocarditis, chordal rupture) rather than a consequence. This patient needs an urgent echo to evaluate valve function. The CHF treatment is the same, but the underlying cause matters for definitive management.'},
+  {type:'Missing Evidence',scenario:'24-year-old female with sudden-onset pleuritic chest pain, tachycardia, and SpO2 91%. Colleague says: "This is definitely a PE."',prompt:'What single finding, if present, would make you disagree?',teaching:'Fever. PE rarely causes fever >38.5°C. If this patient is febrile, pneumonia or empyema becomes much more likely than PE. Other disconfirming findings: productive purulent sputum (pneumonia), unilateral leg swelling absent (reduces PE probability), pleuritic pain that worsens with inspiration AND position (more consistent with pleurisy/pericarditis).'},
+  {type:'Time Pressure',scenario:'You are the overnight resident. 78-year-old male found unresponsive. Nurse reports sudden onset 10 minutes ago. GCS 7 (E1V2M4). Right pupil 6mm fixed, left 3mm reactive.',prompt:'You have 60 seconds before the attending arrives. What do you do RIGHT NOW and why?',teaching:'This is a neurosurgical emergency — herniation syndrome (blown pupil = uncal herniation). Immediate actions: (1) Protect airway — RSI with etomidate/succinylcholine, avoid ketamine. (2) Head of bed 30°. (3) Mannitol 1g/kg or hypertonic saline 23.4% 30mL IV push. (4) Call neurosurgery STAT for emergent decompression. (5) STAT CT head — but do NOT delay treatment for imaging. Every minute of herniation causes irreversible damage.'},
+  {type:'Distinguishing Case',scenario:'Two patients in your ED both present with "worst headache of my life." Patient A: sudden onset while lifting weights, neck stiffness, vomiting. Patient B: gradual onset over 6 hours, photophobia, history of migraines.',prompt:'Same chief complaint, very different cases. What is the key distinguishing feature and what diagnosis do you pursue for each?',teaching:'Thunderclap onset (peak in seconds) is the critical distinguishing feature. Patient A: SAH until proven otherwise — CT head → LP if CT negative. The Valsalva trigger (weightlifting) and meningismus support this. Patient B: while "worst headache" is concerning, gradual onset + migraine history makes a severe migraine more likely. Still screen for red flags (new neurological deficits, fever, papilledema) but the pre-test probability for SAH is much lower.'},
+  {type:'Source Check',scenario:'35-year-old male with 3 days of right lower quadrant pain, low-grade fever, anorexia. WBC 14,000. You think appendicitis.',prompt:'You are about to call surgery. You have evidence from history and labs. What is your third source, and what specific finding would confirm or refute your diagnosis?',teaching:'Physical exam is your third source — specifically: McBurney point tenderness, rebound tenderness, Rovsing sign, psoas sign, obturator sign. If the exam shows diffuse tenderness without localization, or if the pain is actually in the RUQ (cholecystitis) or suprapubic (UTI), your diagnosis changes. Never commit to a surgical consult on history + labs alone. The three-source rule: history tells you the story, labs quantify it, exam localizes it.'},
+  {type:'Risk Priority',scenario:'Your differential for a 45-year-old with acute chest pain includes: GERD (prob: 40%), PE (prob: 15%), ACS (prob: 20%), musculoskeletal (prob: 20%), aortic dissection (prob: 5%).',prompt:'Rank these by which you should work up FIRST, not by probability. Explain your reasoning.',teaching:'The FMEA framework: Probability × Severity × Detectability. Aortic dissection (5% probability) should be worked up before GERD (40% probability) because: (1) Severity if missed = death within hours. (2) Detectability = hard to catch later (no biomarker, requires CT-A). Similarly, ACS and PE rank above GERD despite lower probability because missing them is catastrophic. The clinical rule: "rule out the worst, then work down." Never let a common diagnosis blind you to a lethal one.'},
+  {type:'Anchoring Check',scenario:'72-year-old with known COPD presents with dyspnea. You started bronchodilators. Nurse mentions BNP is 1,200.',prompt:'You are anchored on COPD exacerbation. The BNP result just arrived. Walk through your reasoning: should you change your management?',teaching:'BNP >400 strongly suggests heart failure as a contributor. But here is the nuance: COPD and CHF frequently coexist, and COPD exacerbation can mildly elevate BNP (usually <500). BNP >1000 in the context of dyspnea has >90% PPV for heart failure. You should add diuresis to bronchodilators, get an echo, and reassess. The anchoring trap: you saw "COPD + dyspnea" and stopped thinking. The BNP is the evidence that breaks the anchor.'}
+];
+
+var currentIndex = 0;
+var streak = parseInt(localStorage.getItem('rdx_puzzle_streak') || '0');
+var lastDate = localStorage.getItem('rdx_puzzle_date') || '';
+var today = new Date().toISOString().slice(0, 10);
+
+// Reset streak if missed a day
+if (lastDate && lastDate !== today) {
+  var lastD = new Date(lastDate);
+  var todayD = new Date(today);
+  var diff = (todayD - lastD) / 86400000;
+  if (diff > 1) streak = 0;
+}
+
+// Pick today's puzzle deterministically
+currentIndex = Math.abs(hashStr(today)) % PUZZLES.length;
+
+function hashStr(s) {
+  var h = 0;
+  for (var i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return h;
+}
+
+function renderPuzzle() {
+  var p = PUZZLES[currentIndex];
+  document.getElementById('puzzleType').textContent = p.type;
+  document.getElementById('puzzleScenario').textContent = p.scenario;
+  document.getElementById('puzzlePrompt').textContent = p.prompt;
+  document.getElementById('puzzleAnswer').value = '';
+  document.getElementById('puzzleAnswer').disabled = false;
+  document.getElementById('puzzleFeedback').className = 'puzzle-feedback';
+  document.getElementById('puzzleFeedback').style.display = 'none';
+  updateStreak();
+}
+
+function submitPuzzle() {
+  var answer = document.getElementById('puzzleAnswer').value.trim();
+  if (!answer) return;
+
+  var p = PUZZLES[currentIndex];
+  var fb = document.getElementById('puzzleFeedback');
+  fb.className = 'puzzle-feedback show teaching';
+  fb.innerHTML = '<div style="font-weight:700;margin-bottom:6px">Expert Analysis</div>' + p.teaching;
+  fb.style.display = 'block';
+
+  document.getElementById('puzzleAnswer').disabled = true;
+
+  // Update streak
+  streak++;
+  localStorage.setItem('rdx_puzzle_streak', streak);
+  localStorage.setItem('rdx_puzzle_date', today);
+  updateStreak();
+
+  // Log
+  try {
+    var history = JSON.parse(localStorage.getItem('rdx_puzzle_history') || '[]');
+    history.push({ date: today, type: p.type, answered: true, words: answer.split(/\s+/).length });
+    if (history.length > 90) history = history.slice(-90);
+    localStorage.setItem('rdx_puzzle_history', JSON.stringify(history));
+  } catch(e) {}
+}
+
+function skipPuzzle() {
+  currentIndex = (currentIndex + 1) % PUZZLES.length;
+  renderPuzzle();
+}
+
+function updateStreak() {
+  document.getElementById('puzzleStreak').innerHTML = streak > 0
+    ? 'Current streak: <strong>' + streak + ' day' + (streak !== 1 ? 's' : '') + '</strong>'
+    : 'Start your streak today';
+}
+
+renderPuzzle();
+</script>
+</body>
+</html>

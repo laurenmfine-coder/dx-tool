@@ -2383,5 +2383,197 @@ async function exportStudyData() {
 
 })();
 </script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     REASONING TOOLS INTEGRATION
+     Wires ACH, FMEA, Source Triangulation, Devil's Advocate, AAR,
+     Post-Game Analysis, Case Pairing into the simulation lifecycle.
+═══════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  if (!window.RdxReasoning) return;
+  var R = window.RdxReasoning;
+
+  // ── Track evidence for Source Triangulation ──
+  var _origSend3 = window.sendMessage;
+  if (_origSend3) {
+    window.sendMessage = async function() {
+      var phase = window.state ? window.state.currentPhase : 0;
+      var input = document.getElementById('chatInput');
+      var text = input ? input.value : '';
+
+      // Categorize evidence by phase
+      if (phase === 3 && text.length > 10) R.Triangulation.addEvidence('history', text.substring(0, 100));
+      if (phase === 5 && text.length > 10) R.Triangulation.addEvidence('exam', text.substring(0, 100));
+      if (phase === 6 && text.length > 10) R.Triangulation.addEvidence('diagnostics', text.substring(0, 100));
+
+      return _origSend3.apply(this, arguments);
+    };
+  }
+
+  // ── Hook phase transitions for reasoning tool triggers ──
+  var _origEnterPhase3 = window.enterPhase;
+  if (_origEnterPhase3) {
+    window.enterPhase = function(phase) {
+      _origEnterPhase3(phase);
+      var PHASES = window.PHASES || {};
+
+      // When entering the revised DDx phase, create ACH matrix from current DDx
+      if (phase === 4 && window.state && window.state.differentials) {
+        var initial = window.state.differentials.initial || [];
+        if (initial.length >= 2) {
+          var dxNames = initial.map(function(d) { return d.diagnosis || d; }).slice(0, 5);
+          var evidence = [];
+          // Gather key evidence from state
+          if (window.state.turns) {
+            window.state.turns.forEach(function(t) {
+              if (t.role === 'assistant' && t.phase <= 3 && t.content && t.content.length > 20) {
+                var snippet = t.content.substring(0, 80).replace(/<[^>]*>/g, '');
+                if (snippet.length > 15) evidence.push(snippet);
+              }
+            });
+          }
+          if (evidence.length >= 2 && dxNames.length >= 2) {
+            R.ACH.create(dxNames, evidence.slice(0, 8));
+          }
+        }
+      }
+
+      // At completion: build debrief panel
+      if (phase === PHASES.COMPLETE || phase === 10) {
+        setTimeout(function() { renderReasoningDebrief(); }, 1500);
+      }
+    };
+  }
+
+  // ── DEBRIEF PANEL — renders after simulation completion ──
+  function renderReasoningDebrief() {
+    var chatEl = document.getElementById('chatMessages');
+    if (!chatEl) return;
+    var state = window.state;
+    var caseData = window.caseData;
+    if (!state || !caseData) return;
+
+    var html = '<div style="background:linear-gradient(135deg,#F8FAFC,#F0F4F8);border:1.5px solid #E2E8F0;border-radius:14px;padding:20px;margin:12px 0">';
+    html += '<div style="font-size:15px;font-weight:700;color:#1B4F72;margin-bottom:14px">Clinical Reasoning Debrief</div>';
+
+    // ── Source Triangulation Status ──
+    html += '<div style="margin-bottom:16px">';
+    html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Evidence Triangulation</div>';
+    html += R.Triangulation.renderStatusHTML();
+    html += '</div>';
+
+    // ── Post-Game Analysis ──
+    var postGame = R.PostGame.generate(state, caseData);
+    if (postGame) {
+      state._postGame = postGame;
+      html += '<div style="margin-bottom:16px">';
+      html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Expert Pathway Comparison</div>';
+      html += R.PostGame.renderHTML(postGame);
+      html += '</div>';
+    }
+
+    // ── ACH Matrix (if populated) ──
+    var achMatrix = R.ACH.getMatrix();
+    if (achMatrix && achMatrix.evidence.length > 0) {
+      var achAnalysis = R.ACH.analyze();
+      html += '<div style="margin-bottom:16px">';
+      html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Analysis of Competing Hypotheses</div>';
+      html += R.ACH.renderHTML();
+      if (achAnalysis && achAnalysis.biases.length > 0) {
+        html += '<div style="margin-top:8px">';
+        achAnalysis.biases.forEach(function(b) {
+          html += '<div style="font-size:11px;color:#D97706;padding:4px 8px;background:#FFF7ED;border-radius:6px;margin-bottom:4px">' + b.message + '</div>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+
+    // ── Case Pairing Recommendation ──
+    if (window.CRT_INDEX || window.CRT_DATA) {
+      var index = window.CRT_INDEX || {};
+      if (!window.CRT_INDEX && window.CRT_DATA) {
+        Object.entries(window.CRT_DATA).forEach(function(e) {
+          index[e[0]] = { chiefComplaint: e[1].chiefComplaint || e[1].presentation, category: e[1].category };
+        });
+      }
+      var pair = R.CasePairing.findPair(caseData.caseId, index);
+      if (pair) {
+        state._casePairing = pair;
+        html += '<div style="margin-bottom:16px">';
+        html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Distinguishing Cases — Try Next</div>';
+        html += '<a href="simulation-engine.html?case=' + encodeURIComponent(pair.recommendedCase) + '" style="display:block;padding:12px 16px;background:#2874A6;color:#fff;border-radius:10px;text-decoration:none;font-size:13px;font-weight:600">';
+        html += pair.reason;
+        html += '</a>';
+        html += '</div>';
+      }
+    }
+
+    // ── After-Action Review ──
+    var initialDx = (state.differentials && state.differentials.initial && state.differentials.initial[0]) ? state.differentials.initial[0].diagnosis : 'unknown';
+    R.AAR.start(caseData.caseId, initialDx, caseData.targetDiagnosis);
+    var questions = R.AAR.getQuestions();
+
+    html += '<div style="margin-bottom:8px">';
+    html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">After-Action Review</div>';
+    questions.forEach(function(q, i) {
+      html += '<div style="margin-bottom:10px">';
+      html += '<div style="font-size:13px;font-weight:700;color:#1E293B;margin-bottom:4px">' + (i + 1) + '. ' + q.label + '</div>';
+      html += '<div style="font-size:11px;color:#64748B;margin-bottom:4px">' + q.prompt + '</div>';
+      html += '<textarea id="aar-' + q.id + '" rows="3" style="width:100%;padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:12px;font-family:inherit;resize:vertical;box-sizing:border-box" placeholder="Your reflection..."></textarea>';
+      html += '</div>';
+    });
+    html += '<button onclick="submitAAR()" style="background:#2874A6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Submit Reflection</button>';
+    html += '</div>';
+
+    html += '</div>';
+
+    // Inject into chat
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    chatEl.appendChild(div);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  // ── AAR Submission Handler ──
+  window.submitAAR = function() {
+    var questions = R.AAR.getQuestions();
+    questions.forEach(function(q) {
+      var el = document.getElementById('aar-' + q.id);
+      if (el && el.value.trim()) {
+        R.AAR.respond(q.id, el.value.trim());
+        el.disabled = true;
+        el.style.background = '#F1F5F9';
+      }
+    });
+    var quality = R.AAR.evaluate();
+    if (quality) {
+      var btn = document.querySelector('[onclick="submitAAR()"]');
+      if (btn) {
+        btn.textContent = 'Reflection saved (' + quality.reflectiveDepth + ' depth, ' + quality.totalWords + ' words)';
+        btn.disabled = true;
+        btn.style.background = '#059669';
+      }
+    }
+    // Save to state for Supabase export
+    if (window.state) {
+      window.state._reasoningTools = R.getSummary();
+    }
+  };
+
+  // ── Hook export to include reasoning tool data ──
+  var _origExportRT = window.exportStudyData;
+  if (_origExportRT) {
+    window.exportStudyData = async function() {
+      if (window.state) {
+        window.state._reasoningTools = R.getSummary();
+      }
+      return _origExportRT.apply(this, arguments);
+    };
+  }
+
+})();
+</script>
 </body>
 </html>
