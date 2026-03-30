@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Browse</title>
+<link rel="icon" href="favicon-32x32.png">
+<script src="js/nav-global.js"></script>
+<script src="emr-data/crt-data.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{--bg:#F8FAFC;--surface:#fff;--border:#E2E8F0;--text:#1E293B;--ts:#64748B;--tm:#94A3B8;
+--blue:#2874A6;--blue-l:#EBF5FB;--blue-d:#1B4F72;--purple:#7C3AED;--purple-l:#F5F3FF;
+--green:#059669;--green-l:#ECFDF5;--orange:#EA580C;--orange-l:#FFF7ED;
+--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06);--shadow-lg:0 10px 25px rgba(0,0,0,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);padding-top:52px}
+
+.hero{background:linear-gradient(135deg,#0d2b3e,#1B4F72 50%,#2874A6);padding:36px 24px 28px;text-align:center;position:relative}
+.hero h1{font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:-.02em}
+.hero p{font-size:.88rem;color:rgba(255,255,255,.6);margin-top:4px}
+
+/* Mode toggle */
+.modes{display:flex;justify-content:center;gap:4px;margin-top:18px;background:rgba(0,0,0,.2);border-radius:10px;padding:4px;max-width:520px;margin-left:auto;margin-right:auto}
+.mode-btn{flex:1;padding:10px 16px;border:none;border-radius:8px;background:transparent;color:rgba(255,255,255,.65);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.mode-btn:hover{color:#fff}
+.mode-btn.on{background:rgba(255,255,255,.15);color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.mode-sub{font-size:.62rem;display:block;opacity:.6;margin-top:1px;font-weight:400}
+
+.container{max-width:1200px;margin:0 auto;padding:20px}
+
+/* Shared filter bar */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;box-shadow:var(--shadow)}
+.search{flex:1;min-width:200px;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit;outline:none;transition:border .15s}
+.search:focus{border-color:var(--blue)}
+.fbtn{padding:6px 12px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);font-size:.76rem;font-weight:600;color:var(--ts);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.fbtn:hover{border-color:var(--blue);color:var(--blue)}
+.fbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
+#filterBtns{display:contents}
+
+.count{font-size:.78rem;color:var(--tm);margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:11px}
+.empty{text-align:center;padding:48px;color:var(--tm);font-size:.88rem}
+
+/* Universal card */
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 18px;cursor:pointer;transition:all .18s;position:relative}
+.card:hover{border-color:var(--blue);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.card-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.card-badge{min-width:36px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0}
+.badge-sim{background:var(--blue-l);color:var(--blue-d)}
+.badge-prac{background:var(--green-l);color:var(--green)}
+.badge-coach{background:var(--purple-l);color:var(--purple)}
+.badge-learn{background:var(--orange-l);color:var(--orange)}
+.card-title{font-size:.92rem;font-weight:700;color:var(--text);line-height:1.3}
+.card-sub{font-size:.76rem;color:var(--ts);margin-top:2px;line-height:1.4}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:.62rem;font-weight:600;padding:2px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.3px;background:#F1F5F9;color:var(--tm)}
+.tag-cat{background:var(--blue-l);color:var(--blue-d)}
+.tag-featured{background:var(--purple-l);color:var(--purple)}
+
+@media(max-width:640px){.grid{grid-template-columns:1fr}.filters{flex-direction:column}.search{min-width:auto}.modes{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Browse ReasonDx</h1>
+  <p>One search. Four ways to learn.</p>
+  <div class="modes">
+    <button class="mode-btn on" data-mode="simulate" onclick="setMode('simulate')">Simulate<span class="mode-sub">366 patient encounters</span></button>
+    <button class="mode-btn" data-mode="practice" onclick="setMode('practice')">Practice<span class="mode-sub">361 Virtual EMR cases</span></button>
+    <button class="mode-btn" data-mode="coach" onclick="setMode('coach')">Coach<span class="mode-sub">105 Socratic topics</span></button>
+    <button class="mode-btn" data-mode="learn" onclick="setMode('learn')">Learn<span class="mode-sub">33 pathophysiology modules</span></button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="filters">
+    <input type="text" class="search" id="searchInput" placeholder="Search..." oninput="render()">
+    <button class="fbtn on" data-cat="all" onclick="setCat('all')">All</button>
+    <span id="filterBtns"></span>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">No results match your search.</div>
+</div>
+
+<script>
+var MODE = 'simulate', CAT = 'all';
+
+// ══════════════════════════════════════════
+// DATA: Build all content indexes
+// ══════════════════════════════════════════
+
+function normCat(c) {
+  c=(c||'other').toLowerCase().replace(/_/g,' ');
+  var m={cardiology:'cardiovascular',cardiac:'cardiovascular',cardiorenal:'cardiovascular',neurology:'neurologic',neurological:'neurologic',toxicology:'toxicologic',hematology:'hematologic','allergy immunology':'allergy',immunologic:'allergy',gi:'gastrointestinal',surgery:'surgical',surgical:'surgical',respiratory:'pulmonary',ophthalmologic:'ophthalmic',vascular:'cardiovascular'};
+  return m[c]||c;
+}
+
+// SIMULATE: chief complaint cards → simulation-engine
+var SIM_DATA = [];
+var SIM_FEATURED = [
+  {id:'DYS-001',title:'Progressive dyspnea',sub:'6-week worsening SOB with dry cough',cat:'pulmonary',acuity:2,featured:true},
+  {id:'DYS-002',title:'Dyspnea, cough, fever',sub:'10-day progressive respiratory symptoms',cat:'pulmonary',acuity:2,featured:true},
+  {id:'COUGH-001',title:'Productive cough, hemoptysis',sub:'3-month cough with blood-streaked sputum',cat:'pulmonary',acuity:2,featured:true},
+  {id:'CHEST-001',title:'Chest pain',sub:'Acute onset substernal chest pain in a young adult',cat:'cardiovascular',acuity:1,featured:true},
+  {id:'FEVER-001',title:'Fever, dyspnea',sub:'Progressive fever and SOB with oral findings',cat:'infectious',acuity:2,featured:true}
+];
+if (window.CRT_DATA) {
+  Object.entries(CRT_DATA).forEach(function(e) {
+    var id=e[0],c=e[1];
+    SIM_DATA.push({id:id,title:(c.chiefComplaint||c.presentation||'').split('/')[0].trim(),
+      search:(c.chiefComplaint||c.presentation||'').toLowerCase(),cat:normCat(c.category),acuity:c.acuity||3});
+  });
+}
+
+// PRACTICE: same cases → virtual-emr
+var PRAC_DATA = SIM_DATA.map(function(c){return{id:c.id,title:c.title,search:c.search,cat:c.cat,acuity:c.acuity};});
+
+// COACH: 105 topics → CoachDx/mentor-chat
+var COACH_DATA = [
+  {id:'anaphylaxis',title:'Anaphylaxis',cat:'allergy',tags:'allergy,shock,epinephrine,ige,biphasic'},
+  {id:'urticaria',title:'Urticaria & Angioedema',cat:'allergy',tags:'hives,swelling,antihistamine,csu,omalizumab'},
+  {id:'asthma',title:'Asthma',cat:'allergy',tags:'wheeze,bronchospasm,inhaler,spirometry,biologics'},
+  {id:'food-allergy',title:'Food Allergy',cat:'allergy',tags:'peanut,tree nut,ige,oit,avoidance'},
+  {id:'drug-allergy',title:'Drug Allergy',cat:'allergy',tags:'penicillin,antibiotic,delabeling,rash'},
+  {id:'allergic-rhinitis',title:'Allergic Rhinitis',cat:'allergy',tags:'hay fever,nasal,immunotherapy'},
+  {id:'contact-derm',title:'Contact Dermatitis',cat:'allergy',tags:'patch test,nickel,poison ivy,type iv'},
+  {id:'atopic-derm',title:'Atopic Dermatitis',cat:'allergy',tags:'eczema,dupilumab,skin barrier'},
+  {id:'insect-sting',title:'Insect Sting Allergy',cat:'allergy',tags:'venom,vit,epipen'},
+  {id:'allergic-conjunctivitis',title:'Allergic Conjunctivitis',cat:'allergy',tags:'eye allergy,itching,vernal'},
+  {id:'hae',title:'Hereditary Angioedema',cat:'allergy',tags:'c1 inhibitor,bradykinin,icatibant'},
+  {id:'eoe',title:'Eosinophilic Esophagitis',cat:'allergy',tags:'dysphagia,eosinophils,elimination diet'},
+  {id:'mastocytosis',title:'Mastocytosis / MCAS',cat:'allergy',tags:'mast cell,tryptase'},
+  {id:'cvid',title:'CVID',cat:'allergy',tags:'hypogammaglobulinemia,ivig,scig'},
+  {id:'sjs-ten',title:'SJS / TEN',cat:'allergy',tags:'stevens johnson,toxic epidermal'},
+  {id:'fpies',title:'FPIES',cat:'allergy',tags:'food protein,vomiting,infant'},
+  {id:'nsaid-hypersens',title:'NSAID Hypersensitivity / AERD',cat:'allergy',tags:'aspirin,samter triad,desensitization'},
+  {id:'primary-immunodef',title:'Primary Immunodeficiency',cat:'allergy',tags:'scid,cgd,wiskott-aldrich'},
+  {id:'eosinophilia',title:'Eosinophilia & HES',cat:'allergy',tags:'hypereosinophilic,mepolizumab'},
+  {id:'ddx-framework',title:'Building a Differential',cat:'reasoning',tags:'differential,framework,illness script'},
+  {id:'pretest-prob',title:'Pre-test Probability',cat:'reasoning',tags:'bayes,likelihood ratio,sensitivity'},
+  {id:'cognitive-bias',title:'Cognitive Bias in Dx',cat:'reasoning',tags:'anchoring,availability,premature closure'},
+  {id:'sbar',title:'SBAR Communication',cat:'reasoning',tags:'handoff,situation background'},
+  {id:'illness-script',title:'Illness Scripts',cat:'reasoning',tags:'epidemiology,clinical findings,pattern'},
+  {id:'uncertainty',title:'Tolerating Diagnostic Uncertainty',cat:'reasoning',tags:'watchful waiting,test thresholds'},
+  {id:'test-interpret',title:'Interpreting Lab & Imaging',cat:'reasoning',tags:'false positive,ppv,npv'},
+  {id:'stemi',title:'STEMI',cat:'cardiovascular',tags:'st elevation,pci,thrombolytics'},
+  {id:'nstemi',title:'NSTEMI / ACS',cat:'cardiovascular',tags:'troponin,timi,grace'},
+  {id:'heart-failure',title:'Heart Failure',cat:'cardiovascular',tags:'hfref,hfpef,bnp,gdmt'},
+  {id:'afib',title:'Atrial Fibrillation',cat:'cardiovascular',tags:'rate control,rhythm control,anticoagulation'},
+  {id:'aortic-dissection',title:'Aortic Dissection',cat:'cardiovascular',tags:'stanford,bp control,ct angiography'},
+  {id:'cardiac-syncope',title:'Syncope',cat:'cardiovascular',tags:'vasovagal,arrhythmia,tilt table'},
+  {id:'vt',title:'Ventricular Tachycardia',cat:'cardiovascular',tags:'vt,vf,amiodarone,icd'},
+  {id:'pericarditis',title:'Pericarditis & Tamponade',cat:'cardiovascular',tags:'friction rub,colchicine,beck triad'},
+  {id:'copd',title:'COPD',cat:'pulmonary',tags:'emphysema,bronchitis,gold,spirometry'},
+  {id:'pneumonia',title:'Community-Acquired Pneumonia',cat:'pulmonary',tags:'curb-65,cap,antibiotics'},
+  {id:'pe-pulm',title:'Pulmonary Embolism',cat:'pulmonary',tags:'wells,pesi,ctpa,anticoagulation'},
+  {id:'pneumothorax',title:'Pneumothorax',cat:'pulmonary',tags:'tension ptx,needle decompression,chest tube'},
+  {id:'pleural-effusion',title:'Pleural Effusion',cat:'pulmonary',tags:'lights criteria,thoracentesis'},
+  {id:'ards',title:'ARDS',cat:'pulmonary',tags:'berlin criteria,prone positioning,peep'},
+  {id:'hypoxia',title:'Hypoxia & Respiratory Failure',cat:'pulmonary',tags:'v/q mismatch,shunt,aa gradient'},
+  {id:'sepsis-id',title:'Sepsis & Septic Shock',cat:'infectious',tags:'sirs,lactate,vasopressors'},
+  {id:'meningitis',title:'Bacterial Meningitis',cat:'infectious',tags:'lp,ceftriaxone,csf'},
+  {id:'endocarditis',title:'Infective Endocarditis',cat:'infectious',tags:'duke criteria,vegetation'},
+  {id:'hiv',title:'HIV / AIDS',cat:'infectious',tags:'cd4,viral load,art,opportunistic'},
+  {id:'uti-pyelo',title:'UTI / Pyelonephritis',cat:'infectious',tags:'e.coli,trimethoprim'},
+  {id:'pneumonia-id',title:'Hospital-Acquired Pneumonia',cat:'infectious',tags:'hap,vap,pseudomonas'},
+  {id:'cdiff',title:'C. difficile Colitis',cat:'infectious',tags:'vancomycin,fidaxomicin'},
+  {id:'lyme',title:'Lyme Disease',cat:'infectious',tags:'borrelia,doxycycline,erythema migrans'},
+  {id:'stroke-neuro',title:'Ischemic Stroke',cat:'neurologic',tags:'tpa,nihss,thrombectomy'},
+  {id:'seizure',title:'Seizures & Epilepsy',cat:'neurologic',tags:'status epilepticus,benzodiazepines'},
+  {id:'headache',title:'Headache Syndromes',cat:'neurologic',tags:'migraine,cluster,sah,thunderclap'},
+  {id:'ms',title:'Multiple Sclerosis',cat:'neurologic',tags:'demyelination,optic neuritis'},
+  {id:'guillain-barre',title:'Guillain-Barré Syndrome',cat:'neurologic',tags:'ascending weakness,ivig'},
+  {id:'altered-ms',title:'Altered Mental Status',cat:'neurologic',tags:'encephalopathy,delirium'},
+  {id:'parkinson',title:"Parkinson's Disease",cat:'neurologic',tags:'bradykinesia,rigidity,levodopa'},
+  {id:'gi-bleed',title:'GI Bleed',cat:'gastrointestinal',tags:'ugib,lgib,endoscopy'},
+  {id:'pancreatitis',title:'Acute Pancreatitis',cat:'gastrointestinal',tags:'lipase,gallstone'},
+  {id:'liver-cirrhosis',title:'Cirrhosis & Portal HTN',cat:'gastrointestinal',tags:'ascites,varices,meld'},
+  {id:'ibd',title:'Inflammatory Bowel Disease',cat:'gastrointestinal',tags:'crohns,ulcerative colitis'},
+  {id:'hepatitis',title:'Hepatitis',cat:'gastrointestinal',tags:'hepatitis b,hepatitis c'},
+  {id:'appendicitis',title:'Appendicitis',cat:'gastrointestinal',tags:'alvarado,ct,laparoscopy'},
+  {id:'aki',title:'Acute Kidney Injury',cat:'renal',tags:'prerenal,intrinsic,postrenal'},
+  {id:'ckd',title:'Chronic Kidney Disease',cat:'renal',tags:'gfr,proteinuria,dialysis'},
+  {id:'hyponatremia',title:'Hyponatremia',cat:'renal',tags:'siadh,correction rate'},
+  {id:'hyperkalemia',title:'Hyperkalemia',cat:'renal',tags:'ekg changes,calcium gluconate'},
+  {id:'acid-base',title:'Acid-Base Disorders',cat:'renal',tags:'metabolic acidosis,anion gap'},
+  {id:'nephrotic',title:'Nephrotic / Nephritic Syndrome',cat:'renal',tags:'proteinuria,glomerulonephritis'},
+  {id:'dka-endo',title:'DKA / HHS',cat:'endocrine',tags:'insulin,anion gap,potassium'},
+  {id:'thyroid',title:'Thyroid Disorders',cat:'endocrine',tags:'graves,hashimoto,thyroid storm'},
+  {id:'adrenal',title:'Adrenal Disorders',cat:'endocrine',tags:'addison,cushing,adrenal crisis'},
+  {id:'diabetes',title:'Diabetes Management',cat:'endocrine',tags:'a1c,insulin,sglt2,glp1'},
+  {id:'hypercalcemia',title:'Hypercalcemia',cat:'endocrine',tags:'pth,malignancy,bisphosphonates'},
+  {id:'anemia',title:'Anemia',cat:'hematologic',tags:'iron deficiency,b12,hemolysis'},
+  {id:'anticoagulation',title:'Anticoagulation & Clotting',cat:'hematologic',tags:'heparin,warfarin,doac'},
+  {id:'ttp-hit',title:'TTP / HIT',cat:'hematologic',tags:'thrombocytopenia,plasmapheresis'},
+  {id:'sickle-cell',title:'Sickle Cell Disease',cat:'hematologic',tags:'vaso-occlusive,acute chest'},
+  {id:'leukemia-lymphoma',title:'Leukemia & Lymphoma',cat:'hematologic',tags:'all,aml,neutropenic fever'},
+  {id:'sepsis-em',title:'Sepsis (EM)',cat:'emergency',tags:'1hr bundle,lactate,vasopressors'},
+  {id:'pe-em',title:'Pulmonary Embolism (EM)',cat:'emergency',tags:'massive pe,thrombolytics,pert'},
+  {id:'dka-em',title:'DKA (EM)',cat:'emergency',tags:'insulin drip,cerebral edema'},
+  {id:'chest-pain-ddx',title:'Chest Pain Differential',cat:'emergency',tags:'acs,pe,dissection'},
+  {id:'shock',title:'Shock — Types & Management',cat:'emergency',tags:'distributive,cardiogenic'},
+  {id:'overdose',title:'Toxicology / Overdose',cat:'emergency',tags:'acetaminophen,nac,naloxone'},
+  {id:'trauma',title:'Trauma & Massive Transfusion',cat:'emergency',tags:'primary survey,atls,txa'},
+  {id:'sle',title:'Systemic Lupus Erythematosus',cat:'rheumatologic',tags:'ana,anti-dsdna,nephritis'},
+  {id:'ra',title:'Rheumatoid Arthritis',cat:'rheumatologic',tags:'dmard,methotrexate,anti-ccp'},
+  {id:'vasculitis',title:'Vasculitis',cat:'rheumatologic',tags:'anca,giant cell,kawasaki'},
+  {id:'gout',title:'Gout & Crystal Arthropathies',cat:'rheumatologic',tags:'urate,colchicine,allopurinol'},
+  {id:'septic-arthritis',title:'Septic Arthritis',cat:'rheumatologic',tags:'arthrocentesis,staph'},
+  {id:'depression',title:'Depression',cat:'psychiatric',tags:'phq9,ssri,psychotherapy'},
+  {id:'psychosis',title:'Psychosis & Schizophrenia',cat:'psychiatric',tags:'antipsychotics,nms'},
+  {id:'bipolar',title:'Bipolar Disorder',cat:'psychiatric',tags:'lithium,mood stabilizer'},
+  {id:'delirium',title:'Delirium',cat:'psychiatric',tags:'cam,hyperactive,hypoactive'},
+  {id:'substance-use',title:'Substance Use Disorders',cat:'psychiatric',tags:'alcohol withdrawal,mat'},
+  {id:'eclampsia',title:'Pre-eclampsia & Eclampsia',cat:'obstetric',tags:'magnesium,hellp'},
+  {id:'ectopic',title:'Ectopic Pregnancy',cat:'obstetric',tags:'beta-hcg,methotrexate'},
+  {id:'postpartum',title:'Postpartum Hemorrhage',cat:'obstetric',tags:'oxytocin,4Ts'},
+  {id:'fever-peds',title:'Pediatric Fever',cat:'pediatric',tags:'febrile infant,risk stratification'},
+  {id:'bronchiolitis',title:'Bronchiolitis',cat:'pediatric',tags:'rsv,supportive care,high flow'},
+  {id:'intussusception',title:'Intussusception',cat:'pediatric',tags:'air enema,currant jelly'},
+  {id:'peds-dka',title:'Pediatric DKA',cat:'pediatric',tags:'cerebral edema,new onset t1dm'},
+  {id:'falls',title:'Falls & Frailty',cat:'geriatric',tags:'polypharmacy,beers criteria'},
+  {id:'dementia',title:'Dementia',cat:'geriatric',tags:'alzheimers,lewy body'},
+  {id:'eol',title:'Palliative & Goals of Care',cat:'geriatric',tags:'hospice,goals of care'}
+];
+
+// LEARN: 33 MechanismDx modules
+var LEARN_DATA = [
+  {id:'acs-module',title:'Acute Coronary Syndromes',cat:'cardiovascular'},
+  {id:'afib-module',title:'Atrial Fibrillation',cat:'cardiovascular'},
+  {id:'heart-failure-module',title:'Heart Failure',cat:'cardiovascular'},
+  {id:'anaphylaxis-module',title:'Anaphylaxis',cat:'allergy'},
+  {id:'asthma-module',title:'Asthma',cat:'allergy'},
+  {id:'atopic-derm-module',title:'Atopic Dermatitis',cat:'allergy'},
+  {id:'drug-allergy-module',title:'Drug Allergy & Hypersensitivity',cat:'allergy'},
+  {id:'food-allergy-module',title:'Food Allergy',cat:'allergy'},
+  {id:'allergen-immunotherapy-module',title:'Allergen Immunotherapy',cat:'allergy'},
+  {id:'rhinitis-module',title:'Rhinitis & CRSwNP',cat:'allergy'},
+  {id:'mastocytosis-mcas-module',title:'Mastocytosis & MCAS',cat:'allergy'},
+  {id:'eosinophilia-hp-module',title:'Eosinophilic Disorders & HP',cat:'allergy'},
+  {id:'pid-module',title:'Primary Immunodeficiency',cat:'allergy'},
+  {id:'urticaria-module',title:'Urticaria & Angioedema',cat:'allergy'},
+  {id:'ai-basic-science-module',title:'A/I Basic Science',cat:'allergy'},
+  {id:'ai-diagnostic-methods-module',title:'A/I Diagnostic Methods',cat:'allergy'},
+  {id:'copd-module',title:'COPD',cat:'pulmonary'},
+  {id:'pulmonary-module',title:'Pulmonary Medicine',cat:'pulmonary'},
+  {id:'pneumonia-module',title:'Pneumonia',cat:'infectious'},
+  {id:'sepsis-module',title:'Sepsis',cat:'infectious'},
+  {id:'cns-infections-gbs-module',title:'CNS Infections & GBS',cat:'neurologic'},
+  {id:'stroke-module',title:'Stroke',cat:'neurologic'},
+  {id:'seizures-epilepsy-module',title:'Seizures & Epilepsy',cat:'neurologic'},
+  {id:'aki-module',title:'Acute Kidney Injury',cat:'renal'},
+  {id:'electrolytes-acidbase-module',title:'Electrolytes & Acid-Base',cat:'renal'},
+  {id:'endocrine-module',title:'Endocrine',cat:'endocrine'},
+  {id:'gi-hepatology-module',title:'GI & Hepatology',cat:'gastrointestinal'},
+  {id:'hematology-module',title:'Hematology',cat:'hematologic'},
+  {id:'toxicology-module',title:'Toxicology',cat:'toxicologic'},
+  {id:'rheumatology-module',title:'Rheumatology',cat:'rheumatologic'},
+  {id:'psychiatry-module',title:'Psychiatry',cat:'psychiatric'},
+  {id:'ob-module',title:'Obstetrics',cat:'obstetric'},
+  {id:'clinic-ambulatory-module',title:'Clinic & Ambulatory',cat:'general'}
+];
+
+// ══════════════════════════════════════════
+// RENDERING
+// ══════════════════════════════════════════
+
+var CAT_SETS = {
+  simulate: ['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],
+  practice: ['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],
+  coach: ['allergy','cardiovascular','pulmonary','infectious','neurologic','gastrointestinal','renal','endocrine','hematologic','emergency','reasoning','rheumatologic','psychiatric'],
+  learn: ['allergy','cardiovascular','pulmonary','infectious','neurologic','renal','endocrine','gastrointestinal','hematologic','rheumatologic','psychiatric']
+};
+var CAT_LABELS = {cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infectious:'ID',gastrointestinal:'GI',allergy:'Allergy',endocrine:'Endo',toxicologic:'Tox',reasoning:'Reasoning',renal:'Renal',hematologic:'Heme',emergency:'EM',rheumatologic:'Rheum',psychiatric:'Psych',obstetric:'OB',pediatric:'Peds',geriatric:'Geri',general:'General'};
+
+var PLACEHOLDERS = {
+  simulate:'Search by chief complaint...',
+  practice:'Search by chief complaint...',
+  coach:'Search topics — asthma, DDx, sepsis...',
+  learn:'Search pathophysiology modules...'
+};
+
+function setMode(m) {
+  MODE = m; CAT = 'all';
+  document.querySelectorAll('.mode-btn').forEach(function(b){b.classList.toggle('on',b.dataset.mode===m);});
+  document.getElementById('searchInput').placeholder = PLACEHOLDERS[m];
+  document.getElementById('searchInput').value = '';
+  // Rebuild filter buttons
+  var cats = CAT_SETS[m] || [];
+  var btns = document.getElementById('filterBtns');
+  btns.innerHTML = cats.map(function(c){
+    return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';
+  }).join('');
+  // Reset all button
+  document.querySelector('.fbtn[data-cat="all"]').classList.add('on');
+  render();
+}
+
+function setCat(c) {
+  CAT = c;
+  document.querySelectorAll('.fbtn').forEach(function(b){b.classList.toggle('on',b.dataset.cat===c);});
+  render();
+}
+
+function getData() {
+  if (MODE === 'simulate') return SIM_FEATURED.concat(SIM_DATA);
+  if (MODE === 'practice') return PRAC_DATA;
+  if (MODE === 'coach') return COACH_DATA;
+  if (MODE === 'learn') return LEARN_DATA;
+  return [];
+}
+
+function render() {
+  var q = (document.getElementById('searchInput').value||'').toLowerCase().trim();
+  var data = getData();
+  var filtered = data.filter(function(c) {
+    if (CAT !== 'all' && c.cat !== CAT) return false;
+    if (q) {
+      var searchable = (c.title + ' ' + (c.sub||'') + ' ' + c.cat + ' ' + (c.tags||'') + ' ' + (c.search||'')).toLowerCase();
+      return searchable.includes(q);
+    }
+    return true;
+  });
+
+  // Sort
+  if (MODE === 'simulate' || MODE === 'practice') {
+    filtered.sort(function(a,b) {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return (a.acuity||3) !== (b.acuity||3) ? (a.acuity||3) - (b.acuity||3) : a.title.localeCompare(b.title);
+    });
+  } else {
+    filtered.sort(function(a,b){ return a.title.localeCompare(b.title); });
+  }
+
+  document.getElementById('count').textContent = filtered.length + ' ' + (MODE === 'coach' ? 'topics' : MODE === 'learn' ? 'modules' : 'cases');
+  var grid = document.getElementById('grid');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    document.getElementById('empty').style.display = 'block';
+    return;
+  }
+  document.getElementById('empty').style.display = 'none';
+
+  grid.innerHTML = filtered.map(function(c) {
+    var badgeClass = MODE === 'simulate' ? 'badge-sim' : MODE === 'practice' ? 'badge-prac' : MODE === 'coach' ? 'badge-coach' : 'badge-learn';
+    var badgeText = MODE === 'simulate' ? 'ESI '+(c.acuity||3) : MODE === 'practice' ? 'EMR' : MODE === 'coach' ? 'Coach' : 'Learn';
+    var catLabel = (c.cat||'').charAt(0).toUpperCase() + (c.cat||'').slice(1);
+
+    var h = '<div class="card" onclick="launch(\''+esc(c.id)+'\')">';
+    h += '<div class="card-top">';
+    h += '<div class="card-badge '+badgeClass+'">'+badgeText+'</div>';
+    h += '<div><div class="card-title">'+esc(c.title)+'</div>';
+    if (c.sub) h += '<div class="card-sub">'+esc(c.sub)+'</div>';
+    h += '</div></div>';
+    h += '<div class="card-tags">';
+    h += '<span class="tag tag-cat">'+esc(catLabel)+'</span>';
+    if (c.featured) h += '<span class="tag tag-featured">Featured</span>';
+    h += '</div></div>';
+    return h;
+  }).join('');
+}
+
+function launch(id) {
+  if (MODE === 'simulate') window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(id);
+  else if (MODE === 'practice') window.location.href = 'virtual-emr.html?case=' + encodeURIComponent(id);
+  else if (MODE === 'coach') {
+    // CoachDx uses topic name, not ID
+    var topic = COACH_DATA.find(function(t) { return t.id === id; });
+    var name = topic ? topic.title : id;
+    window.location.href = 'CoachDx/mentor-chat.html?topic=' + encodeURIComponent(name);
+  }
+  else if (MODE === 'learn') window.location.href = 'mechanism/' + id + '.html';
+}
+
+function esc(s) { if(!s)return''; var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+// Init
+setMode('simulate');
+</script>
+</body>
+</html>
