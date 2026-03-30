@@ -212,6 +212,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="js/rdx-advanced.js"></script>
 <script src="js/rdx-rpfs-viz.js"></script>
 <script src="emr-data/dx-database.js"></script>
+<script src="emr-data/crt-data.js"></script>
+<script src="js/rdx-case-adapter.js"></script>
 <script src="js/rdx-ddx-chooser.js"></script>
 <script src="js/rdx-readability.js"></script>
 <script src="js/rdx-passive.js"></script>
@@ -250,13 +252,25 @@ const CASE_REGISTRY = {
 };
 const CASE_IDS = Object.keys(CASE_REGISTRY);
 
-// URL parameter override: ?case=DYS-002&depth=v2
+// URL parameter override: ?case=DYS-002&depth=v2 (also works with CRT IDs like ?case=chf-v1)
 (function() {
   var params = new URLSearchParams(window.location.search);
   var urlCase = params.get('case');
-  if (urlCase && CASE_REGISTRY[urlCase.toUpperCase()]) {
+  if (urlCase) {
     var sel = document.getElementById('intakeCase');
-    if (sel) sel.value = urlCase.toUpperCase();
+    if (sel) {
+      // Check if it's a native case
+      if (CASE_REGISTRY[urlCase.toUpperCase()]) {
+        sel.value = urlCase.toUpperCase();
+      } else {
+        // It might be a CRT case — add it as an option
+        var opt = document.createElement('option');
+        opt.value = urlCase;
+        opt.textContent = urlCase + ' (CRT)';
+        sel.appendChild(opt);
+        sel.value = urlCase;
+      }
+    }
   }
   var urlDepth = params.get('depth');
   if (urlDepth && ['v1','v2','v3'].indexOf(urlDepth) !== -1) {
@@ -352,10 +366,14 @@ function startStudy() {
     selectedCase = CASE_IDS[Math.floor(Math.random() * CASE_IDS.length)];
   }
   var caseLoader = CASE_REGISTRY[selectedCase];
-  if (!caseLoader) { alert('Case not found: ' + selectedCase); return; }
-  caseData = caseLoader();
+  if (caseLoader) {
+    caseData = caseLoader();
+  } else if (window.CaseAdapter) {
+    // Try CRT adapter for any of the 361 CRT cases
+    caseData = CaseAdapter.fromCRT(selectedCase);
+  }
   window.caseData = caseData; // expose for enhancements
-  if (!caseData) { alert('Case data failed to load for: ' + selectedCase); return; }
+  if (!caseData) { alert('Case not found: ' + selectedCase); return; }
 
   // ── CASE DEPTH VERSION ──
   var depthSelect = document.getElementById('intakeDepth');
@@ -380,8 +398,8 @@ function startStudy() {
     conversationMessages: [], // for Claude API (role/content pairs)
     firstReportType: groupCode === 'A' ? 'standard' : 'simplified',
     secondReportType: groupCode === 'A' ? 'simplified' : 'standard',
-    firstReportDelivered: false,
-    secondReportDelivered: false,
+    firstReportDelivered: !caseData.radiologyReports, // true if no reports to deliver
+    secondReportDelivered: !caseData.radiologyReports,
     historyFlags: {
       askedAboutPets:false, askedAboutHomeEnvironment:false,
       askedAboutHobbies:false, askedAboutOccupationalExposures:false,
@@ -948,7 +966,15 @@ function checkPhaseTransition(signals) {
     };
   }
   if (phase === PHASES.LABS_IMAGING && state.firstReportDelivered && signals.readyToMoveOn) {
-    // Student has discussed the first report — move to Phase 7 for comparison
+    if (!caseData.radiologyReports) {
+      // No radiology reports — skip directly to reflection
+      return {
+        shouldTransition: true,
+        nextPhase: PHASES.REFLECTION,
+        inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's wrap up. I have a few reflection questions for you.\n\nFirst \u2014 what was the single most important piece of information in reaching your diagnosis, and at what point did you get it?\n\nSecond \u2014 looking back, is there anything you wish you had asked earlier or done differently?\n\nThird \u2014 what other diagnoses were you considering, and what helped you narrow your differential?" }
+      };
+    }
+    // Has radiology reports — move to comparison phase
     return {
       shouldTransition: true,
       nextPhase: PHASES.REPORT_COMPARISON
@@ -959,7 +985,7 @@ function checkPhaseTransition(signals) {
     return {
       shouldTransition: true,
       nextPhase: PHASES.REFLECTION,
-      inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's wrap up. I have a few reflection questions for you.\n\nFirst — what was the single most important piece of information in reaching your final differential, and at what point did you get it?\n\nSecond — looking back, is there anything you wish you had asked earlier?\n\nThird — how much weight should a radiology report carry in your diagnostic reasoning when the radiologist doesn't have access to the full clinical history?\n\nFourth — do you think the language and format of a radiology report affects how you interpret the findings?" }
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's wrap up. I have a few reflection questions for you.\n\nFirst \u2014 what was the single most important piece of information in reaching your final differential, and at what point did you get it?\n\nSecond \u2014 looking back, is there anything you wish you had asked earlier?\n\nThird \u2014 how much weight should a radiology report carry in your diagnostic reasoning when the radiologist doesn't have access to the full clinical history?\n\nFourth \u2014 do you think the language and format of a radiology report affects how you interpret the findings?" }
     };
   }
   if (phase === PHASES.REFLECTION) {
@@ -1187,6 +1213,12 @@ function enterPhase(phase) {
 
 // ── REPORT DELIVERY ──
 function deliverFirstReport() {
+  if (!caseData.radiologyReports) {
+    // No radiology reports — skip directly to management
+    state.firstReportDelivered = true;
+    state.secondReportDelivered = true;
+    return;
+  }
   const reportType = state.firstReportType;
   const report = caseData.radiologyReports[reportType];
   const imageUrl = caseData.radiologyReports.imageUrl;
@@ -1201,6 +1233,10 @@ function deliverFirstReport() {
 }
 
 function deliverSecondReport() {
+  if (!caseData.radiologyReports) {
+    state.secondReportDelivered = true;
+    return;
+  }
   const reportType = state.secondReportType;
   const report = caseData.radiologyReports[reportType];
   const intro = reportType === 'simplified'
@@ -1244,17 +1280,41 @@ Dr. Patel stays SILENT during the interview. Do not interject as the attending.
 
 PATIENT DETAILS:\n`;
     const ps = caseData.patientScript;
-    sys += `Identity: ${ps.identity}\nHPI: ${ps.hpiOnset} ${ps.hpiProgression} ${ps.hpiCough} ${ps.hpiAssociatedSymptoms}\n`;
-    sys += `Location pattern (only if asked): ${ps.hpiLocationPattern}\n`;
-    sys += `PMH: ${ps.pmh}\nMedications: ${ps.medications}\nAllergies: ${ps.allergies}\nFamily History: ${ps.familyHistory}\n`;
-    sys += `Social: ${ps.socialSmokingAlcohol} ${ps.socialOccupation} ${ps.socialTravel}\n`;
-    sys += `Environmental/Birds (ONLY if pets/animals/hobbies/home specifically asked): ${ps.environmentalBirds}\n`;
-    sys += `Home general (if asked about home but NOT pets): ${ps.environmentalHome}\n`;
-    sys += `Hobbies (if asked): ${ps.environmentalHobbies}\n`;
-    sys += `Mold/dust (if asked): ${ps.environmentalMoldDust}\n`;
-    sys += `Recent changes (if asked): ${ps.environmentalRecentChanges}\n`;
-    sys += `ROS: ${ps.ros}\n`;
-    sys += `\nCRITICAL: Only reveal bird/pet information if the student specifically asks about pets, animals, or what you do at home/for hobbies. Do NOT volunteer this.`;
+
+    if (caseData.source === 'crt_adapter' && ps._crtContext) {
+      // CRT-adapted case: Claude generates patient responses from case context
+      var ctx = ps._crtContext;
+      sys += `Identity: ${ps.identity}
+This patient presents with: ${ctx.chiefComplaint || ctx.presentation}
+The actual diagnosis is: ${ctx.diagnosis} (DO NOT reveal this — the student must figure it out)
+Acuity level: ${ctx.acuity} (1=critical, 5=routine)
+
+The patient might describe their symptoms in phrases like: ${(ctx.chiefComplaintPhrasings || []).join('; ')}
+Past medical history: ${(ctx.pmh || []).join('. ')}
+
+YOU ARE THIS PATIENT. Generate realistic, conversational responses based on what a real patient with ${ctx.diagnosis} would experience. Answer questions naturally — you are not a medical professional, you describe symptoms in lay terms. Be consistent with the diagnosis but NEVER use medical terminology unless the student teaches it to you.
+
+Key clinical features the student should discover through history (do NOT volunteer these — only reveal when asked):
+${(ctx.keyLearningPoints || []).join('\n')}
+
+Must-not-miss considerations (these are things the student should rule out — respond truthfully if asked about related symptoms):
+${(ctx.mustNotMiss || []).join('\n')}
+
+If the student asks about something not covered above, respond as a realistic patient would — it's okay to say "I don't think so" or "Not that I can remember" for things that aren't part of this presentation.`;
+    } else {
+      // Native rad-study case: use pre-scripted patient segments
+      sys += `Identity: ${ps.identity}\nHPI: ${ps.hpiOnset} ${ps.hpiProgression} ${ps.hpiCough} ${ps.hpiAssociatedSymptoms}\n`;
+      sys += `Location pattern (only if asked): ${ps.hpiLocationPattern}\n`;
+      sys += `PMH: ${ps.pmh}\nMedications: ${ps.medications}\nAllergies: ${ps.allergies}\nFamily History: ${ps.familyHistory}\n`;
+      sys += `Social: ${ps.socialSmokingAlcohol} ${ps.socialOccupation} ${ps.socialTravel}\n`;
+      if (ps.environmentalBirds) sys += `Environmental/Birds (ONLY if pets/animals/hobbies/home specifically asked): ${ps.environmentalBirds}\n`;
+      if (ps.environmentalHome) sys += `Home general (if asked about home but NOT pets): ${ps.environmentalHome}\n`;
+      if (ps.environmentalHobbies) sys += `Hobbies (if asked): ${ps.environmentalHobbies}\n`;
+      if (ps.environmentalMoldDust) sys += `Mold/dust (if asked): ${ps.environmentalMoldDust}\n`;
+      if (ps.environmentalRecentChanges) sys += `Recent changes (if asked): ${ps.environmentalRecentChanges}\n`;
+      sys += `ROS: ${ps.ros}\n`;
+      sys += `\nCRITICAL: Only reveal sensitive/critical history when the student asks about that exact topic. Do NOT volunteer.`;
+    }
   }
   else if (phase === PHASES.REVISED_DIFFERENTIAL) {
     sys += `\n\nYou are Dr. Patel. Ask the student how their differential has changed based on the history. Listen and ask them to elaborate on changes THEY describe. Do NOT suggest diagnoses or hint that something is missing.`;
@@ -1275,19 +1335,32 @@ Your role:
 - When the student is ready to move on, ask what workup they would like to order.`;
   }
   else if (phase === PHASES.LABS_IMAGING) {
-    const labs = caseData.labResults;
+    const labs = caseData.labResults || {};
     let labText = Object.entries(labs).map(([k,v]) => `${k}: ${v}`).join('\n');
-    sys += `\n\nYou are Dr. Patel. The student is ordering workup. Provide results ONLY for tests they specifically order. Do NOT volunteer results for tests they did not ask for.
+
+    if (caseData.source === 'crt_adapter') {
+      // CRT case: Claude generates realistic lab results based on diagnosis
+      var ctx = caseData.patientScript._crtContext || {};
+      sys += `\n\nYou are Dr. Patel. The student is ordering workup. The actual diagnosis is: ${ctx.diagnosis}.
+
+When the student orders a test, provide REALISTIC results consistent with ${ctx.diagnosis}. Use specific numbers, ranges, and units. Only provide results for tests the student specifically orders — do NOT volunteer other results.
+
+For example: if the student orders a CBC, give a full CBC with realistic values. If they order a troponin for an MI case, give an elevated troponin. If they order a test that would be normal in this condition, give a normal result.
+
+${labText ? 'Some pre-defined results:\n' + labText + '\n' : ''}
+After delivering results, ask: "Walk me through how you're interpreting those findings."`;
+    } else {
+      // Native case: use pre-defined results
+      sys += `\n\nYou are Dr. Patel. The student is ordering workup. Provide results ONLY for tests they specifically order. Do NOT volunteer results for tests they did not ask for.
 
 Available results (only provide when ordered):
 ${labText}
 
-If the student orders chest imaging (CT, HRCT, chest X-ray), say: "The imaging is back." Then provide the image link: ${caseData.radiologyReports.imageUrl}
-The radiology report will be delivered separately by the system — do NOT generate a radiology report yourself.
+${caseData.radiologyReports ? `If the student orders chest imaging (CT, HRCT, chest X-ray), say: "The imaging is back." Then provide the image link: ${caseData.radiologyReports.imageUrl || ''}
+The radiology report will be delivered separately by the system — do NOT generate a radiology report yourself.` : ''}
 
-After delivering results, ask: "Walk me through how you're interpreting the findings. What does your differential look like now?"
-
-If the student interprets imaging WITHOUT referencing clinical history at all, you may ask ONE question: "How does the history factor into your reading of this image?"`;
+After delivering results, ask: "Walk me through how you're interpreting the findings. What does your differential look like now?"`;
+    }
   }
   else if (phase === PHASES.REPORT_COMPARISON) {
     sys += `\n\nYou are Dr. Patel. The student has just seen the second version of the radiology report. Ask: "Did seeing the report in this different format change how you understood the findings? Did it affect your differential? Which version did you find more helpful, and why?" Do not comment on correctness.`;
