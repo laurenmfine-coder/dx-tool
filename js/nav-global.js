@@ -100,8 +100,10 @@
       <a class="rdx-logo" href="/index.html">Reason<span>Dx</span></a>
       <div class="rdx-nav-links">
         <a class="rdx-nav-link ${isActive('browse.html')}" href="/browse.html" style="font-weight:700">Browse</a>
+        <a class="rdx-nav-link ${isActive('casedx.html')}" href="/casedx.html">CaseDx</a>
+        <a class="rdx-nav-link ${isActive('CoachDx')}" href="/CoachDx/index.html">CoachDx</a>
+        <a class="rdx-nav-link ${isActive('mechanism')}" href="/mechanism/index.html">MechanismDx</a>
         <a class="rdx-nav-link ${isActive('virtual-emr')}" href="/virtual-emr.html">ED Board</a>
-        <a class="rdx-nav-link ${isActive('genetics')}" href="/genetics/genetics-module.html">Genetics</a>
       </div>
       <button class="rdx-hamburger" onclick="document.getElementById('rdx-mobile-drawer').classList.toggle('open');this.querySelector('.ham-open').style.display=document.getElementById('rdx-mobile-drawer').classList.contains('open')?'none':'block';this.querySelector('.ham-close').style.display=document.getElementById('rdx-mobile-drawer').classList.contains('open')?'block':'none'" aria-label="Menu">
         <svg class="ham-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -119,13 +121,11 @@
     }
     drawer.innerHTML = `
       <a class="${isActive('browse.html') ? 'active' : ''}" href="/browse.html">Browse All</a>
-      <a class="${isActive('virtual-emr') ? 'active' : ''}" href="/virtual-emr.html">ED Board</a>
-      <a class="${isActive('genetics') ? 'active' : ''}" href="/genetics/genetics-module.html">Genetics</a>
       <div class="rdx-drawer-divider"></div>
-      <a href="/browse.html?mode=simulate">Simulate</a>
-      <a href="/browse.html?mode=practice">Practice</a>
-      <a href="/browse.html?mode=coach">Coach</a>
-      <a href="/browse.html?mode=learn">Learn</a>
+      <a class="${isActive('casedx') ? 'active' : ''}" href="/casedx.html">CaseDx</a>
+      <a class="${isActive('CoachDx') ? 'active' : ''}" href="/CoachDx/index.html">CoachDx</a>
+      <a class="${isActive('mechanism') ? 'active' : ''}" href="/mechanism/index.html">MechanismDx</a>
+      <a class="${isActive('virtual-emr') ? 'active' : ''}" href="/virtual-emr.html">ED Board</a>
       <div class="rdx-drawer-divider"></div>
       <div class="rdx-drawer-actions">
         ${userEmail

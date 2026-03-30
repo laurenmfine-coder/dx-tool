@@ -71,7 +71,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
     <button class="mode-btn on" data-mode="simulate" onclick="setMode('simulate')">Simulate<span class="mode-sub">366 patient encounters</span></button>
     <button class="mode-btn" data-mode="practice" onclick="setMode('practice')">Practice<span class="mode-sub">361 Virtual EMR cases</span></button>
     <button class="mode-btn" data-mode="coach" onclick="setMode('coach')">Coach<span class="mode-sub">105 Socratic topics</span></button>
-    <button class="mode-btn" data-mode="learn" onclick="setMode('learn')">Learn<span class="mode-sub">33 pathophysiology modules</span></button>
+    <button class="mode-btn" data-mode="learn" onclick="setMode('learn')">Learn<span class="mode-sub">38 pathophysiology modules</span></button>
   </div>
 </div>
 
@@ -262,7 +262,13 @@ var LEARN_DATA = [
   {id:'rheumatology-module',title:'Rheumatology',cat:'rheumatologic'},
   {id:'psychiatry-module',title:'Psychiatry',cat:'psychiatric'},
   {id:'ob-module',title:'Obstetrics',cat:'obstetric'},
-  {id:'clinic-ambulatory-module',title:'Clinic & Ambulatory',cat:'general'}
+  {id:'clinic-ambulatory-module',title:'Clinic & Ambulatory',cat:'general'},
+  // Genetics — integrated from standalone module
+  {id:'genetics-demo-case',title:'Angelman Syndrome — Diagnostic Odyssey',cat:'genetics',sub:'The child who keeps falling. Rare genetic case.'},
+  {id:'genetics-aadc-case',title:'AADC Deficiency — Rare Disease',cat:'genetics',sub:'The baby who wouldn\'t stop rolling her eyes.'},
+  {id:'genetics-ai-case',title:'HAE & Genetics in Allergy',cat:'genetics',sub:'The swelling that skips generations.'},
+  {id:'cme-lynch-syndrome',title:'Lynch Syndrome — CME Module',cat:'genetics',sub:'Hereditary cancer risk. 6.0 CME credits.'},
+  {id:'cme-pharmacogenomics',title:'Pharmacogenomics — CME Module',cat:'genetics',sub:'Drug-gene interactions. 6.0 CME credits.'}
 ];
 
 // ══════════════════════════════════════════
@@ -273,9 +279,9 @@ var CAT_SETS = {
   simulate: ['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],
   practice: ['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],
   coach: ['allergy','cardiovascular','pulmonary','infectious','neurologic','gastrointestinal','renal','endocrine','hematologic','emergency','reasoning','rheumatologic','psychiatric'],
-  learn: ['allergy','cardiovascular','pulmonary','infectious','neurologic','renal','endocrine','gastrointestinal','hematologic','rheumatologic','psychiatric']
+  learn: ['allergy','cardiovascular','pulmonary','infectious','neurologic','renal','endocrine','gastrointestinal','hematologic','rheumatologic','psychiatric','genetics']
 };
-var CAT_LABELS = {cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infectious:'ID',gastrointestinal:'GI',allergy:'Allergy',endocrine:'Endo',toxicologic:'Tox',reasoning:'Reasoning',renal:'Renal',hematologic:'Heme',emergency:'EM',rheumatologic:'Rheum',psychiatric:'Psych',obstetric:'OB',pediatric:'Peds',geriatric:'Geri',general:'General'};
+var CAT_LABELS = {cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infectious:'ID',gastrointestinal:'GI',allergy:'Allergy',endocrine:'Endo',toxicologic:'Tox',reasoning:'Reasoning',renal:'Renal',hematologic:'Heme',emergency:'EM',rheumatologic:'Rheum',psychiatric:'Psych',obstetric:'OB',pediatric:'Peds',geriatric:'Geri',general:'General',genetics:'Genetics'};
 
 var PLACEHOLDERS = {
   simulate:'Search by chief complaint...',
@@ -375,7 +381,14 @@ function launch(id) {
     var name = topic ? topic.title : id;
     window.location.href = 'CoachDx/mentor-chat.html?topic=' + encodeURIComponent(name);
   }
-  else if (MODE === 'learn') window.location.href = 'mechanism/' + id + '.html';
+  else if (MODE === 'learn') {
+    // Genetics cases have custom pages in genetics/ folder
+    if (id.startsWith('genetics-') || id.startsWith('cme-')) {
+      window.location.href = 'genetics/' + id + '.html';
+    } else {
+      window.location.href = 'mechanism/' + id + '.html';
+    }
+  }
 }
 
 function esc(s) { if(!s)return''; var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
