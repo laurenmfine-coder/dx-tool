@@ -1975,6 +1975,13 @@ async function exportStudyData() {
     leak_detected: state.leakDetails.length > 0,
     leak_details: state.leakDetails,
     transcript: state.turns,
+    // New data streams
+    readability_summary: state.readabilitySummary || null,
+    passive_data: state.passiveData || null,
+    pe_exam_summary: state.peExamSummary || null,
+    health_literacy: state._healthLiteracy || null,
+    ddx_comparison: state._ddxComparison || null,
+    case_source: caseData.source || 'native',
     started_at: state.phaseHistory[0]?.enteredAt || new Date().toISOString(),
     completed_at: new Date().toISOString(),
     status: 'complete'

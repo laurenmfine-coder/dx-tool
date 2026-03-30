@@ -70,10 +70,10 @@ tr.clickable{cursor:pointer}
 <div class="topbar">
   <div class="topbar-left">
     <div class="topbar-logo">Reason<span>Dx</span></div>
-    <div class="topbar-badge">Study Dashboard</div>
+    <div class="topbar-badge">Researcher Dashboard</div>
   </div>
   <div class="topbar-left">
-    <a href="start.html" style="color:rgba(255,255,255,.8);font-size:13px;text-decoration:none">← Back to ReasonDx</a>
+    <a href="index.html" style="color:rgba(255,255,255,.8);font-size:13px;text-decoration:none">← Back to ReasonDx</a>
   </div>
 </div>
 
@@ -83,7 +83,9 @@ tr.clickable{cursor:pointer}
     <div class="stat-card"><div class="label">Group A</div><div class="value" id="statGroupA">--</div><div class="sub">Standard first</div></div>
     <div class="stat-card"><div class="label">Group B</div><div class="value" id="statGroupB">--</div><div class="sub">Simplified first</div></div>
     <div class="stat-card"><div class="label">Env Hx Missed</div><div class="value" id="statMissedEnv">--</div><div class="sub">Score = 0</div></div>
-    <div class="stat-card"><div class="label">Env Hx Obtained</div><div class="value" id="statGotEnv">--</div><div class="sub">Score ≥ 1</div></div>
+    <div class="stat-card"><div class="label">Avg Readability</div><div class="value" id="statReadability">--</div><div class="sub">To patient (grade)</div></div>
+    <div class="stat-card"><div class="label">Avg PE Coverage</div><div class="value" id="statPE">--</div><div class="sub">Critical systems</div></div>
+    <div class="stat-card"><div class="label">Avg Confidence</div><div class="value" id="statConfidence">--</div><div class="sub">Implicit (-1 to +1)</div></div>
     <div class="stat-card"><div class="label">Leaks Detected</div><div class="value" id="statLeaks">--</div></div>
   </div>
 
@@ -102,8 +104,10 @@ tr.clickable{cursor:pointer}
             <th>Case</th>
             <th>Group</th>
             <th>Env Score</th>
+            <th>Readability</th>
+            <th>PE Coverage</th>
+            <th>Confidence</th>
             <th>Turns</th>
-            <th>Duration</th>
             <th>Leaks</th>
             <th>Date</th>
             <th></th>
@@ -126,11 +130,11 @@ tr.clickable{cursor:pointer}
             <th>Year</th>
             <th>N</th>
             <th>Mean Env Score</th>
-            <th>Missed Env Hx</th>
-            <th>Got Env Hx</th>
+            <th>Mean Readability</th>
+            <th>Mean PE Cov</th>
+            <th>Mean Confidence</th>
             <th>Mean Turns</th>
-            <th>Mean Duration</th>
-            <th>Sessions w/ Leaks</th>
+            <th>Leaks</th>
           </tr>
         </thead>
         <tbody id="aggregateTable">
@@ -178,23 +182,39 @@ async function loadSessions() {
 function renderSessions() {
   const tbody = document.getElementById('sessionTable');
   if (sessions.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="10" class="loading">No sessions yet. Students access simulations at <a href="case-browser.html">case-browser.html</a> or <a href="simulation-engine.html">simulation-engine.html</a></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="12" class="loading">No sessions yet. Students access simulations at <a href="case-browser.html">case-browser.html</a> or <a href="simulation-engine.html">simulation-engine.html</a></td></tr>';
     return;
   }
   tbody.innerHTML = sessions.map(s => {
-    const dur = s.phase_timing ? Object.values(s.phase_timing).reduce((sum,p) => sum + (p.durationMs||0), 0) / 60000 : 0;
     const envBadge = s.env_history_score === 0 ? 'badge-env0' : s.env_history_score === 1 ? 'badge-env1' : 'badge-env2';
     const leakBadge = s.leak_detected ? 'badge-leak' : 'badge-clean';
     const leakCount = Array.isArray(s.leak_details) ? s.leak_details.length : 0;
     const date = new Date(s.started_at).toLocaleDateString();
+
+    // Readability
+    const rs = s.readability_summary;
+    const readGrade = rs && rs.avgGradePatient ? rs.avgGradePatient.toFixed(1) : '--';
+    const readColor = rs && rs.avgGradePatient <= 8 ? 'color:#059669' : rs && rs.avgGradePatient ? 'color:#DC2626' : '';
+
+    // PE Coverage
+    const pe = s.pe_exam_summary;
+    const peCoverage = pe ? pe.criticalCoverage + '%' : '--';
+    const peColor = pe && pe.criticalCoverage >= 80 ? 'color:#059669' : pe ? 'color:#DC2626' : '';
+
+    // Implicit Confidence
+    const pd = s.passive_data;
+    const conf = pd && pd.implicitConfidence ? pd.implicitConfidence.avgScore.toFixed(2) : '--';
+
     return `<tr class="clickable" onclick="showTranscript('${s.session_id}')">
       <td><strong>${esc(s.student_name)}</strong></td>
       <td>${esc(s.training_year)}</td>
       <td>${esc(s.case_id)}</td>
-      <td><span class="badge badge-${s.group_code.toLowerCase()}">${s.group_code}</span></td>
+      <td>${s.group_code ? '<span class="badge badge-' + s.group_code.toLowerCase() + '">' + s.group_code + '</span>' : '--'}</td>
       <td><span class="badge ${envBadge}">${s.env_history_score !== null ? s.env_history_score + '/2' : '--'}</span></td>
+      <td style="${readColor};font-weight:600">${readGrade}</td>
+      <td style="${peColor};font-weight:600">${peCoverage}</td>
+      <td>${conf}</td>
       <td>${s.total_turns || 0}</td>
-      <td>${dur > 0 ? dur.toFixed(1) + 'm' : '--'}</td>
       <td><span class="badge ${leakBadge}">${leakCount > 0 ? leakCount + ' leaks' : 'Clean'}</span></td>
       <td>${date}</td>
       <td style="font-size:11px;color:var(--teal)">View →</td>
@@ -207,22 +227,45 @@ function renderStats() {
   document.getElementById('statGroupA').textContent = sessions.filter(s => s.group_code === 'A').length;
   document.getElementById('statGroupB').textContent = sessions.filter(s => s.group_code === 'B').length;
   document.getElementById('statMissedEnv').textContent = sessions.filter(s => s.env_history_score === 0).length;
-  document.getElementById('statGotEnv').textContent = sessions.filter(s => s.env_history_score >= 1).length;
   document.getElementById('statLeaks').textContent = sessions.filter(s => s.leak_detected).length;
+
+  // Readability average
+  var readSessions = sessions.filter(s => s.readability_summary && s.readability_summary.avgGradePatient);
+  if (readSessions.length > 0) {
+    var avgRead = readSessions.reduce((sum, s) => sum + s.readability_summary.avgGradePatient, 0) / readSessions.length;
+    document.getElementById('statReadability').textContent = avgRead.toFixed(1);
+    document.getElementById('statReadability').style.color = avgRead <= 8 ? '#059669' : '#DC2626';
+  }
+
+  // PE coverage average
+  var peSessions = sessions.filter(s => s.pe_exam_summary && s.pe_exam_summary.criticalCoverage !== undefined);
+  if (peSessions.length > 0) {
+    var avgPE = peSessions.reduce((sum, s) => sum + s.pe_exam_summary.criticalCoverage, 0) / peSessions.length;
+    document.getElementById('statPE').textContent = avgPE.toFixed(0) + '%';
+    document.getElementById('statPE').style.color = avgPE >= 80 ? '#059669' : '#DC2626';
+  }
+
+  // Implicit confidence average
+  var confSessions = sessions.filter(s => s.passive_data && s.passive_data.implicitConfidence && s.passive_data.implicitConfidence.avgScore !== undefined);
+  if (confSessions.length > 0) {
+    var avgConf = confSessions.reduce((sum, s) => sum + s.passive_data.implicitConfidence.avgScore, 0) / confSessions.length;
+    document.getElementById('statConfidence').textContent = avgConf.toFixed(2);
+  }
 }
 
 async function loadAggregates() {
-  // Manual aggregation from loaded sessions (avoid needing the view)
   const groups = {};
   sessions.forEach(s => {
-    const key = s.group_code + '|' + s.training_year;
-    if (!groups[key]) groups[key] = { group: s.group_code, year: s.training_year, n:0, envSum:0, missed:0, got:0, turnSum:0, leaks:0 };
+    const key = (s.group_code||'N/A') + '|' + s.training_year;
+    if (!groups[key]) groups[key] = { group: s.group_code||'N/A', year: s.training_year, n:0, envSum:0, turnSum:0, leaks:0, readSum:0, readN:0, peSum:0, peN:0, confSum:0, confN:0 };
     const g = groups[key];
     g.n++;
     g.envSum += (s.env_history_score || 0);
-    if (s.env_history_score === 0) g.missed++; else g.got++;
     g.turnSum += (s.total_turns || 0);
     if (s.leak_detected) g.leaks++;
+    if (s.readability_summary && s.readability_summary.avgGradePatient) { g.readSum += s.readability_summary.avgGradePatient; g.readN++; }
+    if (s.pe_exam_summary && s.pe_exam_summary.criticalCoverage !== undefined) { g.peSum += s.pe_exam_summary.criticalCoverage; g.peN++; }
+    if (s.passive_data && s.passive_data.implicitConfidence && s.passive_data.implicitConfidence.avgScore !== undefined) { g.confSum += s.passive_data.implicitConfidence.avgScore; g.confN++; }
   });
   const tbody = document.getElementById('aggregateTable');
   const rows = Object.values(groups);
@@ -231,14 +274,14 @@ async function loadAggregates() {
     return;
   }
   tbody.innerHTML = rows.map(g => `<tr>
-    <td><span class="badge badge-${g.group.toLowerCase()}">${g.group}</span></td>
+    <td>${g.group ? '<span class="badge badge-' + g.group.toLowerCase() + '">' + g.group + '</span>' : '--'}</td>
     <td>${esc(g.year)}</td>
     <td><strong>${g.n}</strong></td>
     <td>${(g.envSum / g.n).toFixed(1)}</td>
-    <td>${g.missed}</td>
-    <td>${g.got}</td>
+    <td>${g.readN > 0 ? (g.readSum / g.readN).toFixed(1) : '--'}</td>
+    <td>${g.peN > 0 ? (g.peSum / g.peN).toFixed(0) + '%' : '--'}</td>
+    <td>${g.confN > 0 ? (g.confSum / g.confN).toFixed(2) : '--'}</td>
     <td>${(g.turnSum / g.n).toFixed(0)}</td>
-    <td>--</td>
     <td>${g.leaks}</td>
   </tr>`).join('');
 }
@@ -247,16 +290,59 @@ async function showTranscript(sessionId) {
   const s = sessions.find(x => x.session_id === sessionId);
   if (!s) return;
   document.getElementById('modalTitle').textContent = s.student_name + ' — ' + s.case_id;
-  document.getElementById('modalMeta').innerHTML = `Group ${s.group_code} (${s.first_report_type} first) | ${s.training_year} | Env Score: ${s.env_history_score}/2 | ${s.total_turns} turns` +
-    (s.leak_detected ? ` | <span style="color:var(--danger)">${Array.isArray(s.leak_details) ? s.leak_details.length : 0} leaks</span>` : ' | No leaks');
+
+  // Build rich metadata bar
+  var meta = `Group ${s.group_code || 'N/A'} | ${s.training_year} | ${s.total_turns} turns`;
+  if (s.env_history_score !== null) meta += ` | Env: ${s.env_history_score}/2`;
+  if (s.leak_detected) meta += ` | <span style="color:var(--danger)">${Array.isArray(s.leak_details) ? s.leak_details.length : 0} leaks</span>`;
+  else meta += ' | No leaks';
+
+  // Readability
+  var rs = s.readability_summary;
+  if (rs && rs.avgGradePatient) {
+    var readColor = rs.avgGradePatient <= 8 ? '#059669' : '#DC2626';
+    meta += ` | <span style="color:${readColor}">Read: ${rs.avgGradePatient.toFixed(1)}</span>`;
+    if (rs.adjustsLanguageForPatient) meta += ' (adjusts)';
+  }
+
+  // PE
+  var pe = s.pe_exam_summary;
+  if (pe) {
+    meta += ` | PE: ${pe.thoroughnessScore}% thorough`;
+    if (pe.criticalMissed && pe.criticalMissed.length > 0) {
+      meta += ` <span style="color:var(--danger)">(missed: ${pe.criticalMissed.join(', ')})</span>`;
+    }
+  }
+
+  // Passive
+  var pd = s.passive_data;
+  if (pd) {
+    if (pd.implicitConfidence) meta += ` | Conf: ${pd.implicitConfidence.avgScore.toFixed(2)} (${pd.implicitConfidence.trend})`;
+    if (pd.questionTypes) meta += ` | Qs: ${pd.questionTypes.openRate}% open ${pd.questionTypes.expertPattern ? '(expert)' : ''}`;
+    if (pd.empathyAndRapport) meta += ` | Empathy: ${pd.empathyAndRapport.totalEmpathyMoments}`;
+    if (pd.cueUtilization) meta += ` | Cues: ${pd.cueUtilization.utilizationRate}%`;
+  }
+
+  // Health literacy
+  var hl = s.health_literacy;
+  if (hl) {
+    if (hl.gapAcknowledgments > 0) meta += ` | Gaps acknowledged: ${hl.gapAcknowledgments}`;
+    if (hl.jargonCount > 2) meta += ` | <span style="color:var(--danger)">Jargon: ${hl.jargonCount}</span>`;
+  }
+
+  document.getElementById('modalMeta').innerHTML = meta;
 
   const transcript = Array.isArray(s.transcript) ? s.transcript : [];
   const el = document.getElementById('modalTranscript');
   el.innerHTML = transcript.map(t => {
     const cls = t.role === 'student' ? 'student' : 'assistant';
-    const phaseLabel = {1:'P1: Differential',2:'P2: Justification',3:'P3: History',4:'P4: Revised DDx',5:'P5: PE',6:'P6: Labs/Imaging',7:'P7: Report Compare',8:'P8: Reflection'}[t.phase] || 'P' + t.phase;
+    const phaseLabel = {1:'P1: Differential',2:'P2: Justification',3:'P3: History',4:'P4: Revised DDx',5:'P5: PE',6:'P6: Labs/Imaging',7:'P7: Report Compare',8:'P8: Reflection',9:'P9: Management',10:'P10: Complete'}[t.phase] || 'P' + t.phase;
+    var turnMeta = (t.role === 'student' ? 'Student' : t.agentSource === 'patient' ? 'Patient' : 'Dr. Patel') + ' · ' + phaseLabel + ' · Turn ' + (t.turnNumber || '');
+    // Add per-turn readability and confidence if available
+    if (t.readability && t.role === 'student') turnMeta += ' · Grade ' + t.readability.grade;
+    if (t.implicitConfidence !== undefined && t.role === 'student') turnMeta += ' · Conf ' + t.implicitConfidence.toFixed(2);
     return `<div class="transcript-msg ${cls}">
-      <div class="transcript-meta">${t.role === 'student' ? 'Student' : 'Dr. Patel / Ms. Reyes'} · ${phaseLabel} · Turn ${t.turnNumber || ''}</div>
+      <div class="transcript-meta">${turnMeta}</div>
       ${esc(t.content)}
     </div>`;
   }).join('');
@@ -270,20 +356,53 @@ function closeTranscript() {
 
 function exportCSV() {
   if (sessions.length === 0) { alert('No data to export'); return; }
-  const headers = ['session_id','student_name','training_year','case_id','group_code','first_report_type','env_history_score','total_turns','leak_detected','started_at','asked_pets','asked_home','asked_hobbies','generic_prompt','declined_after'];
+  const headers = [
+    'session_id','student_name','training_year','case_id','case_source','group_code','first_report_type',
+    'env_history_score','total_turns','leak_detected','started_at','completed_at',
+    'asked_pets','asked_home','asked_hobbies','generic_prompt','declined_after',
+    'readability_overall','readability_to_patient','readability_to_attending','readability_adjusts',
+    'pe_thoroughness','pe_critical_coverage','pe_critical_missed',
+    'confidence_avg','confidence_trend',
+    'question_open_rate','question_closed_rate','question_expert_pattern',
+    'empathy_moments','empathy_density',
+    'cue_utilization_rate','cues_missed',
+    'jargon_count','plain_language_count','gap_acknowledgments','followup_commitments',
+    'ddx_initial_count','ddx_revised_count','ddx_diagnoses_added','ddx_diagnoses_removed'
+  ];
   const rows = sessions.map(s => {
     const f = s.history_flags || {};
-    return [s.session_id, s.student_name, s.training_year, s.case_id, s.group_code, s.first_report_type,
-      s.env_history_score, s.total_turns, s.leak_detected, s.started_at,
+    const rs = s.readability_summary || {};
+    const pe = s.pe_exam_summary || {};
+    const pd = s.passive_data || {};
+    const ic = pd.implicitConfidence || {};
+    const qt = pd.questionTypes || {};
+    const em = pd.empathyAndRapport || {};
+    const cu = pd.cueUtilization || {};
+    const hl = s.health_literacy || {};
+    const dc = s.ddx_comparison || {};
+    const diffs = s.differentials || {};
+    return [
+      s.session_id, s.student_name, s.training_year, s.case_id, s.case_source||'native',
+      s.group_code, s.first_report_type,
+      s.env_history_score, s.total_turns, s.leak_detected, s.started_at, s.completed_at,
       f.askedAboutPets||false, f.askedAboutHomeEnvironment||false, f.askedAboutHobbies||false,
-      f.genericPromptDelivered||false, f.studentDeclinedAfterPrompt||false
+      f.genericPromptDelivered||false, f.studentDeclinedAfterPrompt||false,
+      rs.avgGradeAll||'', rs.avgGradePatient||'', rs.avgGradeAttending||'', rs.adjustsLanguageForPatient||'',
+      pe.thoroughnessScore||'', pe.criticalCoverage||'', (pe.criticalMissed||[]).join(';'),
+      ic.avgScore||'', ic.trend||'',
+      qt.openRate||'', qt.closedRate||'', qt.expertPattern||'',
+      em.totalEmpathyMoments||0, em.empathyDensity||'',
+      cu.utilizationRate||'', (cu.missedCues||[]).map(c=>c.text||'').join(';'),
+      hl.jargonCount||0, hl.plainLanguageCount||0, hl.gapAcknowledgments||0, hl.followUpCommitments||0,
+      (diffs.initial||[]).length, (diffs.revised||[]).length,
+      (dc.added||[]).length, (dc.removed||[]).length
     ].map(v => typeof v === 'string' ? '"' + v.replace(/"/g,'""') + '"' : v);
   });
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
   const blob = new Blob([csv], { type:'text/csv' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'rad_study_export_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.download = 'reasondx_study_export_' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
 }
 
