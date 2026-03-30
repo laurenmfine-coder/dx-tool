@@ -464,6 +464,33 @@ async function sendMessage() {
     };
   }
 
+  // ── TRANSITION CONFIRMATION FLAG ──
+  // If the orchestrator injected a transition message last turn,
+  // the student's response (even "ok") confirms the transition
+  if (state._pendingTransition) {
+    var pending = state._pendingTransition;
+    state._pendingTransition = null;
+    enterPhase(pending.nextPhase);
+    if (pending.inject) {
+      addMessage(pending.inject.type || 'patel', pending.inject.content);
+      state.conversationMessages.push({ role:'assistant', content: pending.inject.content });
+      state.turns.push({ role:'assistant', content:pending.inject.content, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount });
+    }
+    // Don't return — let the message also be processed normally
+  }
+
+  // ── PHASE TIMEOUT GUARDRAIL ──
+  // If more than 20 turns in one phase, auto-advance
+  var turnsInPhase = state.turns.filter(function(t) { return t.phase === state.currentPhase; }).length;
+  if (turnsInPhase > 20 && state.currentPhase < PHASES.COMPLETE) {
+    var nextPhase = state.currentPhase + 1;
+    if (nextPhase <= PHASES.COMPLETE) {
+      addMessage('patel', '[As Dr. Patel]\n\nI think we have enough to work with here. Let\u2019s move on to the next step.');
+      state.conversationMessages.push({ role:'assistant', content:'I think we have enough to work with here. Let\u2019s move on.' });
+      enterPhase(nextPhase);
+    }
+  }
+
   // Extract signals
   const signals = extractSignals(msg);
   updateStateFromSignals(signals);
@@ -568,6 +595,16 @@ async function sendMessage() {
 
     systemPrompt += '\n\nROS: ' + (ps.ros || '');
     systemPrompt += '\n\nCRITICAL: Only reveal sensitive/critical history when the student asks about that exact topic. Do NOT volunteer.';
+
+    // ── TRAINING-LEVEL ADAPTIVE BEHAVIOR ──
+    var year = state.trainingYear || 'M3';
+    if (year === 'M1' || year === 'M2') {
+      systemPrompt += '\n\nBEHAVIOR TIER (pre-clinical): Be cooperative and patient. Answer questions directly. Do NOT ask about your diagnosis or treatment plan. Do NOT ask what the student thinks is wrong. You may express mild concern ("I\'m a little worried") but do not push for answers. Let the student lead entirely.';
+    } else if (year === 'M3' || year === 'M4') {
+      systemPrompt += '\n\nBEHAVIOR TIER (clinical student): You may occasionally ask a question about what\'s happening ("Is this serious?" or "What are you looking for?") but accept redirection if the student says they need to finish the exam first. Express moderate emotional responses. You may mention 1-2 concerns about work or family.';
+    } else {
+      systemPrompt += '\n\nBEHAVIOR TIER (advanced): Be fully realistic. Ask about your diagnosis before the workup is complete. Express strong emotions. Have logistical concerns (work, family, finances). If the student explains something, engage with it — ask follow-up questions. If the student already told you what they think, do NOT ask again. Be assertive but not combative.';
+    }
   }
 
   if (window.RdxAdvanced && window.RdxAdvanced.MultiAgentDefs) {
@@ -676,9 +713,41 @@ async function sendMessage() {
       var isPatientContent = new RegExp(patternStr, 'im').test(reply);
       if (isPatientContent) msgType = 'patient';
     }
-    addMessage(msgType, reply);
-    state.conversationMessages.push({ role:'assistant', content: reply });
-    state.turns.push({ role:'assistant', content:reply, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount, agentSource: activeAgent });
+    // Post-process: strip emotes/narrative from patient messages
+    var cleanReply = reply;
+    if (msgType === 'patient') {
+      cleanReply = stripEmotes(reply);
+    }
+
+    // ── RESPONSE-SIDE TRANSITION DETECTION ──
+    // If Claude (as Dr. Patel) says "let's go see the patient" or similar,
+    // set a pending transition so the student's next message auto-advances.
+    if (msgType === 'patel' && !state._pendingTransition) {
+      if (state.currentPhase === PHASES.INITIAL_DIFFERENTIAL || state.currentPhase === PHASES.JUSTIFICATION) {
+        if (/let'?s (go )?see (the patient|Ms\.|Mr\.)|let'?s go to (the|exam)|let me take you to/i.test(reply)) {
+          state._pendingTransition = { nextPhase: PHASES.HISTORY_TAKING };
+        }
+      }
+      if (state.currentPhase === PHASES.HISTORY_TAKING) {
+        if (/move on to.*(physical|exam)|let'?s (do|start|perform).*(physical|exam)|ready for the (physical|exam)/i.test(reply)) {
+          state._pendingTransition = { nextPhase: PHASES.REVISED_DIFFERENTIAL };
+        }
+      }
+      if (state.currentPhase === PHASES.REVISED_DIFFERENTIAL) {
+        if (/let'?s (do|start|perform).*(physical|exam)|what.*exam.*would you|proceed.*exam/i.test(reply)) {
+          state._pendingTransition = { nextPhase: PHASES.PHYSICAL_EXAM };
+        }
+      }
+      if (state.currentPhase === PHASES.PHYSICAL_EXAM) {
+        if (/what (workup|tests|labs|imaging).*order|what.*would you.*order|ready.*order/i.test(reply)) {
+          state._pendingTransition = { nextPhase: PHASES.LABS_IMAGING };
+        }
+      }
+    }
+
+    addMessage(msgType, cleanReply);
+    state.conversationMessages.push({ role:'assistant', content: cleanReply });
+    state.turns.push({ role:'assistant', content:cleanReply, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount, agentSource: activeAgent });
 
     // Store patient response in patient conversation history
     if ((activeAgent === 'patient' || msgType === 'patient') && state._patientMessages) {
@@ -726,6 +795,8 @@ function extractSignals(msg) {
     usesJargon: /\b(bilateral|centrilobular|ground.glass|consolidat|differential|etiology|pathophysiology|auscultation|tachycard|bradycard|dyspnea|hypox|cyanosis|bilateral|interstitial|parenchymal|effusion)\b/i.test(msg),
     usesPlainLanguage: /\b(the test shows|what this means|in simple terms|basically|what we found|here'?s what|let me explain|that means)\b/i.test(msg),
     checksUnderstanding: /\b(does that make sense|do you understand|any questions|want me to explain|is that clear|follow me)\b/i.test(msg),
+    acknowledgesGap: /\b(i don'?t know|i'?m not sure|i would need to (look|learn|find|research|check)|honestly don'?t know|i'?ll (look|find|come back|check|research).*that|need to learn more|i'?ll get back to you)\b/i.test(msg),
+    commitsToFollowUp: /\b(i'?ll (come back|follow up|check on|let you know|find out)|come back.*share|get back to you|follow up with|keep you updated)\b/i.test(msg),
     // Dynamic history signals from case keywordMap
     historyMatches: {}
   };
@@ -754,10 +825,12 @@ function updateStateFromSignals(signals) {
   }
 
   // Track health literacy communication quality
-  if (!state._healthLiteracy) state._healthLiteracy = { jargonCount: 0, plainLanguageCount: 0, understandingChecks: 0, patientConfusionCount: 0 };
+  if (!state._healthLiteracy) state._healthLiteracy = { jargonCount: 0, plainLanguageCount: 0, understandingChecks: 0, patientConfusionCount: 0, gapAcknowledgments: 0, followUpCommitments: 0 };
   if (signals.usesJargon) state._healthLiteracy.jargonCount++;
   if (signals.usesPlainLanguage) state._healthLiteracy.plainLanguageCount++;
   if (signals.checksUnderstanding) state._healthLiteracy.understandingChecks++;
+  if (signals.acknowledgesGap) state._healthLiteracy.gapAcknowledgments++;
+  if (signals.commitsToFollowUp) state._healthLiteracy.followUpCommitments++;
 }
 
 // ── PHASE TRANSITIONS ──
@@ -1010,7 +1083,8 @@ ABSOLUTE RULES (apply to every response):
 - NEVER use evaluative praise (excellent, great, good thinking, beautiful, spot on). Use ONLY: "Okay," "Tell me more," "Walk me through that," "What else?"
 - NEVER use emoji, bullet points, headers, or formatted lists. Speak conversationally.
 - Respond in 1-3 short paragraphs. Keep it natural.
-- NEVER use brackets to describe what would happen, e.g. [The simulation would...]. NEVER break the fourth wall. You are IN the simulation, not describing it.`;
+- NEVER use brackets to describe what would happen, e.g. [The simulation would...]. NEVER break the fourth wall. You are IN the simulation, not describing it.
+- NEVER reference the simulation, the format, the exercise, or that this is a training scenario. You are in a REAL clinical encounter. If you cannot fulfill a request, redirect naturally as a real attending would.`;
 
   if (phase === PHASES.INITIAL_DIFFERENTIAL || phase === PHASES.JUSTIFICATION) {
     sys += `\n\nYou are Dr. Patel, a neutral attending physician. The student just provided their differential or justification. Ask them to walk through their reasoning for diagnoses THEY listed. Do NOT introduce new diagnoses. If they haven't mentioned the SpO2, you may ask: "Is there anything in the vitals that stands out?" When discussion feels adequate, say: "Okay. Let's go see the patient."`;
@@ -1197,6 +1271,48 @@ function getPatientDisplayName() {
   var parts = caseData.presentation.patientName.split(' ');
   var last = parts[parts.length - 1];
   return (caseData.presentation.sex === 'Male' ? 'Mr. ' : 'Ms. ') + last;
+}
+
+// Post-processing: strip narrative emotes from patient messages
+function stripEmotes(text) {
+  if (!text) return text;
+  var firstName = caseData ? caseData.presentation.patientName.split(' ')[0] : 'Patient';
+
+  // Strip lines that are pure stage directions (Name + action verb, She/He + action verb)
+  var lines = text.split('\n');
+  var cleaned = lines.map(function(line) {
+    var trimmed = line.trim();
+    if (!trimmed) return '';
+
+    // Remove pure emote sentences from within the line
+    var sentences = trimmed.split(/(?<=[.!?])\s+/);
+    var kept = sentences.filter(function(s) {
+      s = s.trim();
+      if (!s) return false;
+      // Pattern: Name or She/He + action verb (pure narrative)
+      var emotePattern = new RegExp('^(' + firstName + '|She|He|Maria|Her eyes|His eyes|Her expression|His expression)\\s+(nods|shakes|looks|smiles|pauses|sighs|coughs|shifts|adjusts|tilts|extends|rubs|trails|frowns|widens|watches|notices|thinks|seems|glances|reaches|picks|gives|demonstrates|touches|turns|leans|sits|stands|places|gazes)', 'i');
+      if (emotePattern.test(s)) return false;
+      // Pattern: "As if on cue..." or "She seems to be..."
+      if (/^(As if|She seems|He seems|She appears|He appears|Looking |She looks |He looks |She is |He is )/i.test(s)) return false;
+      // Pattern: ends with prompt "What would you like to..."
+      if (/what would you like to (ask|do|say|know|examine|explore)/i.test(s)) return false;
+      if (/what (else )?would you like/i.test(s)) return false;
+      if (/what are your thoughts/i.test(s)) return false;
+      return true;
+    });
+
+    return kept.join(' ');
+  }).filter(function(line) { return line.trim().length > 0; });
+
+  var result = cleaned.join('\n\n');
+
+  // Strip leftover quotation marks if content was entirely in quotes
+  result = result.replace(/^["']+\s*/, '').replace(/\s*["']+$/, '');
+
+  // If everything was stripped, return a minimal acknowledgment
+  if (result.trim().length < 5) return text; // fallback to original if over-stripped
+
+  return result;
 }
 function isPatientResponse(text) {
   var pName = caseData ? caseData.presentation.patientName : 'Patient';
