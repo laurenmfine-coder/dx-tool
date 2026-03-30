@@ -110,23 +110,18 @@ body{background:var(--rdx-ocean-deep)}
 .footer-bottom-links{display:flex;gap:16px}
 .footer-bottom-links a{font-size:.75rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .15s}
 .footer-bottom-links a:hover{color:rgba(255,255,255,.6)}
-.modal-overlay{position:fixed;inset:0;background:rgba(13,43,62,.75);backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-lg);max-width:480px;width:100%;overflow:hidden;transform:translateY(12px);transition:transform .25s;box-shadow:var(--rdx-shadow-lg)}
-.modal-overlay.open .modal{transform:translateY(0)}
-.modal-hdr{padding:24px 26px 18px;border-bottom:1px solid var(--rdx-border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.m-title{font-family:var(--rdx-font-serif);font-size:1.2rem;color:var(--rdx-text);margin-bottom:2px}
-.m-sub{font-size:.8rem;color:var(--rdx-text-muted)}
-.modal-x{background:transparent;border:1.5px solid var(--rdx-border);color:var(--rdx-text-muted);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-family:var(--rdx-font-sans)}
-.modal-x:hover{border-color:var(--rdx-border-hi);color:var(--rdx-text)}
-.modal-body{padding:18px 26px 26px}
-.m-q{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:var(--rdx-text-muted);margin-bottom:12px}
-.m-options{display:flex;flex-direction:column;gap:8px}
-.m-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius);cursor:pointer;transition:all .15s;text-decoration:none;color:var(--rdx-text)}
-.m-option:hover{border-color:var(--rdx-ocean);background:var(--rdx-ocean-ghost)}
-.m-opt-icon{font-size:1.1rem;flex-shrink:0}
-.m-opt-name{font-size:.88rem;font-weight:700;margin-bottom:1px}
-.m-opt-desc{font-size:.75rem;color:var(--rdx-text-muted)}
+.modal-overlay{display:none}
+/* Inline start chooser — matches hero dark theme */
+.start-chooser{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s ease,margin .3s ease;opacity:0;margin-top:0}
+.start-chooser.open{max-height:420px;opacity:1;margin-top:28px}
+.start-chooser-inner{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:560px;margin:0 auto}
+.start-card{display:flex;align-items:center;gap:14px;padding:16px 20px;border:1.5px solid rgba(133,193,233,.2);border-radius:14px;background:rgba(255,255,255,.06);backdrop-filter:blur(8px);cursor:pointer;transition:all .2s;text-decoration:none;color:#fff}
+.start-card:hover{background:rgba(133,193,233,.15);border-color:rgba(133,193,233,.4);transform:translateY(-2px)}
+.start-card-icon{font-size:1.4rem;width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.start-card-name{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:2px}
+.start-card-desc{font-size:.72rem;color:rgba(255,255,255,.6);line-height:1.4}
+.start-card-new{font-size:.6rem;font-weight:800;background:#2874A6;color:#fff;padding:2px 6px;border-radius:4px;letter-spacing:.5px;margin-left:6px;vertical-align:middle}
+@media(max-width:640px){.start-chooser-inner{grid-template-columns:1fr}}
 @media(max-width:768px){.hero{padding:48px 20px 0;min-height:auto}.section{padding:48px 20px}.pillar-grid{grid-template-columns:1fr}.genetics-band{padding:40px 20px}.stats-strip{padding:28px 20px}.footer{padding:36px 20px 28px}}
 </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -141,7 +136,7 @@ body{background:var(--rdx-ocean-deep)}
     <h1>Think Better.<br>Diagnose <em>Smarter.</em></h1>
     <p class="hero-tagline">AI-powered clinical reasoning training for medical students and residents. Build the diagnostic mind that textbooks can't teach.</p>
     <div class="cta-group">
-      <button class="rdx-btn rdx-btn-accent rdx-btn-lg" onclick="document.getElementById('startModal').classList.add('open')">Start Learning Free →</button>
+      <button class="rdx-btn rdx-btn-accent rdx-btn-lg" onclick="var c=document.getElementById('startChooser');c.classList.toggle('open');this.textContent=c.classList.contains('open')?'Choose below \u2193':'Start Learning Free \u2192'">Start Learning Free →</button>
       <a class="rdx-btn rdx-btn-ghost-white rdx-btn-lg" href="/how-it-works.html">How It Works</a>
     </div>
     <div class="search-wrap">
@@ -151,6 +146,40 @@ body{background:var(--rdx-ocean-deep)}
       </div>
       <div class="search-dropdown" id="searchDropdown"></div>
       <p class="search-hint">Try: "chest pain" · "angioedema" · "DKA" · "rare pediatric"</p>
+    </div>
+
+    <!-- Inline start chooser — dark theme, matches hero -->
+    <div class="start-chooser" id="startChooser">
+      <div class="start-chooser-inner">
+        <a class="start-card" href="/case-browser.html">
+          <div class="start-card-icon">🎯</div>
+          <div>
+            <div class="start-card-name">Simulate <span class="start-card-new">NEW</span></div>
+            <div class="start-card-desc">366 full clinical simulations with voice input and AI attending</div>
+          </div>
+        </a>
+        <a class="start-card" href="/casedx.html">
+          <div class="start-card-icon">🩺</div>
+          <div>
+            <div class="start-card-name">CaseDx</div>
+            <div class="start-card-desc">Interactive virtual patients with immediate feedback</div>
+          </div>
+        </a>
+        <a class="start-card" href="/CoachDx/index.html">
+          <div class="start-card-icon">🤖</div>
+          <div>
+            <div class="start-card-name">CoachDx</div>
+            <div class="start-card-desc">AI Socratic coaching that adapts to your reasoning</div>
+          </div>
+        </a>
+        <a class="start-card" href="/mechanism/index.html">
+          <div class="start-card-icon">🔬</div>
+          <div>
+            <div class="start-card-name">MechanismDx</div>
+            <div class="start-card-desc">Deep pathophysiology with attending conversation</div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
   <svg class="hero-wave" viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -259,24 +288,6 @@ body{background:var(--rdx-ocean-deep)}
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 ReasonDx · Lauren Fine, MD, FAAAAI</div>
       <div class="footer-bottom-links"><a href="/auth/terms.html">Terms</a><a href="/auth/privacy.html">Privacy</a><a href="mailto:reasondxeducation@gmail.com">Contact</a></div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="startModal" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal">
-    <div class="modal-hdr">
-      <div><div class="m-title">Where do you want to start?</div><div class="m-sub">Choose based on how you learn best</div></div>
-      <button class="modal-x" onclick="document.getElementById('startModal').classList.remove('open')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="m-q">Pick your learning style</div>
-      <div class="m-options">
-        <a class="m-option" href="/case-browser.html"><div class="m-opt-icon">🎯</div><div><div class="m-opt-name">Simulate</div><div class="m-opt-desc">366 full clinical simulations · voice input · AI attending</div></div></a>
-        <a class="m-option" href="/casedx.html"><div class="m-opt-icon">🩺</div><div><div class="m-opt-name">CaseDx</div><div class="m-opt-desc">Interactive virtual patients · immediate feedback</div></div></a>
-        <a class="m-option" href="/CoachDx/index.html"><div class="m-opt-icon">🤖</div><div><div class="m-opt-name">CoachDx</div><div class="m-opt-desc">AI Socratic coaching · adapts to your reasoning</div></div></a>
-        <a class="m-option" href="/mechanism/index.html"><div class="m-opt-icon">🔬</div><div><div class="m-opt-name">MechanismDx</div><div class="m-opt-desc">Deep pathophysiology · attending conversation</div></div></a>
-      </div>
     </div>
   </div>
 </div>
