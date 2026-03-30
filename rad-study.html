@@ -495,72 +495,74 @@ async function sendMessage() {
 
   // ── MULTI-AGENT ROUTER ──
   // Determines which agent responds and uses agent-specific context
-  var activeAgent = 'attending';
+  var activeAgent = state.currentPhase === PHASES.HISTORY_TAKING ? 'patient' : 'attending';
   var agentModel = 'claude-sonnet-4-20250514';
-  var agentMaxTokens = 1024;
+  var agentMaxTokens = activeAgent === 'patient' ? 300 : 1024;
   var agentMessages = state.conversationMessages.slice(-20);
   var systemPrompt = buildSystemPrompt();
 
-  if (window.RdxAdvanced && window.RdxAdvanced.MultiAgentDefs) {
-    var MA = window.RdxAdvanced.MultiAgentDefs;
+  // Phase 3: Always use patient agent (with or without RdxAdvanced)
+  if (state.currentPhase === PHASES.HISTORY_TAKING) {
+    activeAgent = 'patient';
+    agentMaxTokens = 300;
 
-    if (state.currentPhase === PHASES.HISTORY_TAKING) {
-      // Patient agent: separate conversation history, lay language, emotional state
-      activeAgent = 'patient';
-      agentModel = MA.agents.patient.model;
-      agentMaxTokens = MA.agents.patient.maxTokens;
+    // Build patient-only conversation
+    if (!state._patientMessages) state._patientMessages = [];
+    state._patientMessages.push({ role: 'user', content: msg });
+    agentMessages = state._patientMessages.slice(-16);
 
-      // Build patient-only conversation (filter out attending messages)
-      if (!state._patientMessages) state._patientMessages = [];
-      state._patientMessages.push({ role: 'user', content: msg });
-      agentMessages = state._patientMessages.slice(-16);
+    // Build patient system prompt from case data
+    var ps = caseData.patientScript;
+    var patName = caseData.presentation.patientName;
+    systemPrompt = 'You are ' + patName + ', a patient in a medical encounter. Stay fully in character.\n\n';
+    systemPrompt += 'The student interviewing you is named ' + state.studentName + '. They are a medical student working with Dr. Patel.\n\n';
+    systemPrompt += 'RULES:\n- Answer ONLY what is asked. Do not volunteer information.\n- Use plain lay language. No medical terms.\n- Never break character.\n- Never ask the student questions back.\n- Keep responses to 1-2 sentences.\n';
 
-      // Build patient-specific system prompt with emotion state
-      var emotionMods = null;
-      if (window.RdxAgentEnhanced && window.RdxAgentEnhanced.PatientEmotionModel) {
-        emotionMods = window.RdxAgentEnhanced.PatientEmotionModel.getBehaviorModifiers();
+    // Emotional state modifiers
+    if (window.RdxAgentEnhanced && window.RdxAgentEnhanced.PatientEmotionModel) {
+      var emotionMods = window.RdxAgentEnhanced.PatientEmotionModel.getBehaviorModifiers();
+      if (emotionMods && emotionMods.modifiers && emotionMods.modifiers.length > 0) {
+        systemPrompt += '\nCURRENT EMOTIONAL STATE:\n';
+        emotionMods.modifiers.forEach(function(m) { systemPrompt += '- ' + m + '\n'; });
       }
-      systemPrompt = MA.agents.patient.systemPromptTemplate(caseData, emotionMods);
+    }
 
-      // Inject full patient script
-      var ps = caseData.patientScript;
-      systemPrompt += '\n\nPATIENT DETAILS:\n';
-      systemPrompt += 'Identity: ' + ps.identity + '\n';
-      systemPrompt += 'HPI: ' + ps.hpiOnset + ' ' + ps.hpiProgression + ' ' + ps.hpiCough + ' ' + ps.hpiAssociatedSymptoms + '\n';
-      systemPrompt += 'Location pattern (only if asked): ' + (ps.hpiLocationPattern || '') + '\n';
-      systemPrompt += 'PMH: ' + ps.pmh + '\nMedications: ' + ps.medications + '\nAllergies: ' + ps.allergies + '\n';
-      systemPrompt += 'Family History: ' + ps.familyHistory + '\n';
-      systemPrompt += 'Social: ' + ps.socialSmokingAlcohol + ' ' + (ps.socialOccupation || '') + ' ' + (ps.socialTravel || '') + '\n';
+    // Inject full patient script
+    systemPrompt += '\nPATIENT DETAILS:\n';
+    systemPrompt += 'Identity: ' + ps.identity + '\n';
+    systemPrompt += 'HPI: ' + ps.hpiOnset + ' ' + ps.hpiProgression + ' ' + (ps.hpiCough || '') + ' ' + ps.hpiAssociatedSymptoms + '\n';
+    systemPrompt += 'Location pattern (only if asked): ' + (ps.hpiLocationPattern || '') + '\n';
+    systemPrompt += 'PMH: ' + ps.pmh + '\nMedications: ' + ps.medications + '\nAllergies: ' + ps.allergies + '\n';
+    systemPrompt += 'Family History: ' + ps.familyHistory + '\n';
+    systemPrompt += 'Social: ' + ps.socialSmokingAlcohol + ' ' + (ps.socialOccupation || '') + ' ' + (ps.socialTravel || '') + '\n';
 
-      // Case-specific critical history (only revealed if asked)
-      var critFields = ['substanceVaping', 'substanceCocaine', 'substanceDrugs', 'substanceGeneral', 'substanceIVDrugs',
-                        'socialImmigration', 'socialLiving', 'socialContacts', 'socialSexual', 'socialSexualGeneral',
-                        'environmentalBirds', 'environmentalHome', 'environmentalHobbies', 'environmentalMoldDust', 'environmentalRecentChanges',
-                        'tbScreening', 'oralFindings'];
-      critFields.forEach(function(field) {
-        if (ps[field]) systemPrompt += '\n' + ps[field];
-      });
+    // Case-specific critical history (only revealed if asked)
+    var critFields = ['substanceVaping', 'substanceCocaine', 'substanceDrugs', 'substanceGeneral', 'substanceIVDrugs',
+                      'socialImmigration', 'socialLiving', 'socialContacts', 'socialSexual', 'socialSexualGeneral',
+                      'environmentalBirds', 'environmentalHome', 'environmentalHobbies', 'environmentalMoldDust', 'environmentalRecentChanges',
+                      'tbScreening', 'oralFindings'];
+    critFields.forEach(function(field) {
+      if (ps[field]) systemPrompt += '\n' + ps[field];
+    });
 
-      systemPrompt += '\n\nROS: ' + ps.ros;
-      systemPrompt += '\n\nCRITICAL: Only reveal sensitive/critical history when the student asks about that exact topic. Do NOT volunteer.';
+    systemPrompt += '\n\nROS: ' + (ps.ros || '');
+    systemPrompt += '\n\nCRITICAL: Only reveal sensitive/critical history when the student asks about that exact topic. Do NOT volunteer.';
+  }
 
-    } else if (state.currentPhase === PHASES.MANAGEMENT && caseData.patientPushback) {
-      // During management, check if the student's message triggers patient pushback
+  if (window.RdxAdvanced && window.RdxAdvanced.MultiAgentDefs) {
+    // Management phase: check for patient pushback triggers
+    if (state.currentPhase === PHASES.MANAGEMENT && caseData.patientPushback) {
       var pushbackTriggered = null;
       caseData.patientPushback.forEach(function(pb) {
-        if (new RegExp(pb.trigger, 'i').test(msg) && !state._pushbacksDelivered) {
+        if (new RegExp(pb.trigger, 'i').test(msg) && (!state._pushbacksDelivered || !state._pushbacksDelivered[pb.trigger])) {
           pushbackTriggered = pb;
         }
       });
 
       if (pushbackTriggered) {
-        // Switch to patient agent for pushback moment
         activeAgent = 'patient_pushback';
         if (!state._pushbacksDelivered) state._pushbacksDelivered = {};
         state._pushbacksDelivered[pushbackTriggered.trigger] = true;
-
-        // After the Claude call, we'll inject the pushback directly
-        // (handled below in response processing)
       }
     }
 
@@ -721,7 +723,7 @@ function checkPhaseTransition(signals) {
     return {
       shouldTransition: true,
       nextPhase: PHASES.HISTORY_TAKING,
-      inject: { type:'patel', content:"[As Dr. Patel]\n\nAlright, let's go see " + getPatientDisplayName() + ". " + (caseData.presentation.sex === 'Male' ? "He's" : "She's") + " in exam room 3.\n\nGo ahead and take your history." }
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nAlright, let's go see " + getPatientDisplayName() + ". " + (caseData.presentation.sex === 'Male' ? "He's" : "She's") + " in exam room 3.\n\n" + getPatientDisplayName() + ", this is " + state.studentName + ", a medical student on our team. " + state.studentName + " is going to talk with you and ask some questions. " + state.studentName + ", go ahead and take your history." }
     };
   }
   if (phase === PHASES.HISTORY_TAKING && signals.readyToMoveOn) {
